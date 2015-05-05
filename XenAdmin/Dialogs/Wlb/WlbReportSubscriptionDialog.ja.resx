@@ -144,16 +144,16 @@
   <data name="subNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>subNameTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;subNameTextBox.Name" xml:space="preserve">
     <value>subNameTextBox</value>
   </data>
-  <data name=">>subNameTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;subNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>subNameTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;subNameTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionName</value>
   </data>
-  <data name=">>subNameTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;subNameTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelSubscriptionName.AutoSize" type="System.Boolean, mscorlib">
@@ -180,16 +180,16 @@
   <data name="labelSubscriptionName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelSubscriptionName.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscriptionName.Name" xml:space="preserve">
     <value>labelSubscriptionName</value>
   </data>
-  <data name=">>labelSubscriptionName.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscriptionName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelSubscriptionName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscriptionName.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionName</value>
   </data>
-  <data name=">>labelSubscriptionName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscriptionName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -216,16 +216,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>サブスクリプションの名前を入力し、データ範囲および配信方法を指定します。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionName</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelSubNameAsterisk.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -255,16 +255,16 @@
   <data name="labelSubNameAsterisk.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelSubNameAsterisk.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelSubNameAsterisk.Name" xml:space="preserve">
     <value>labelSubNameAsterisk</value>
   </data>
-  <data name=">>labelSubNameAsterisk.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelSubNameAsterisk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelSubNameAsterisk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelSubNameAsterisk.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionName</value>
   </data>
-  <data name=">>labelSubNameAsterisk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelSubNameAsterisk.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanelSubscriptionName.Font" type="System.Drawing.Font, System.Drawing">
@@ -282,16 +282,16 @@
   <data name="tableLayoutPanelSubscriptionName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionName.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.Name" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionName</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionName.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSubscriptionName.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="labelDataRange.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelDataRange.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelDataRange.Name" xml:space="preserve">
     <value>labelDataRange</value>
   </data>
-  <data name=">>labelDataRange.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelDataRange.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelDataRange.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelDataRange.Parent" xml:space="preserve">
     <value>tableLayoutPanelRpParams</value>
   </data>
-  <data name=">>labelDataRange.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelDataRange.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelEmailTo.AutoSize" type="System.Boolean, mscorlib">
@@ -360,16 +360,16 @@
   <data name="labelEmailTo.Text" xml:space="preserve">
     <value>宛先(&amp;T):</value>
   </data>
-  <data name=">>labelEmailTo.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailTo.Name" xml:space="preserve">
     <value>labelEmailTo</value>
   </data>
-  <data name=">>labelEmailTo.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailTo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailTo.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailTo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailTo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="emailToTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -387,16 +387,16 @@
   <data name="emailToTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>emailToTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;emailToTextBox.Name" xml:space="preserve">
     <value>emailToTextBox</value>
   </data>
-  <data name=">>emailToTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailToTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>emailToTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailToTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>emailToTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailToTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelEmailCc.AutoSize" type="System.Boolean, mscorlib">
@@ -426,16 +426,16 @@
   <data name="labelEmailCc.Text" xml:space="preserve">
     <value>CC(&amp;C):</value>
   </data>
-  <data name=">>labelEmailCc.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailCc.Name" xml:space="preserve">
     <value>labelEmailCc</value>
   </data>
-  <data name=">>labelEmailCc.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailCc.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailCc.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailCc.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailCc.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailCc.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="emailCcTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -453,16 +453,16 @@
   <data name="emailCcTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>emailCcTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;emailCcTextBox.Name" xml:space="preserve">
     <value>emailCcTextBox</value>
   </data>
-  <data name=">>emailCcTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailCcTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>emailCcTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailCcTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>emailCcTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailCcTextBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelEmailBcc.AutoSize" type="System.Boolean, mscorlib">
@@ -492,16 +492,16 @@
   <data name="labelEmailBcc.Text" xml:space="preserve">
     <value>BCC(&amp;B):</value>
   </data>
-  <data name=">>labelEmailBcc.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailBcc.Name" xml:space="preserve">
     <value>labelEmailBcc</value>
   </data>
-  <data name=">>labelEmailBcc.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailBcc.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailBcc.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailBcc.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailBcc.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailBcc.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="emailBccTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -519,16 +519,16 @@
   <data name="emailBccTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>emailBccTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;emailBccTextBox.Name" xml:space="preserve">
     <value>emailBccTextBox</value>
   </data>
-  <data name=">>emailBccTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailBccTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>emailBccTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailBccTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>emailBccTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailBccTextBox.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelEmailAddressFormat.AutoSize" type="System.Boolean, mscorlib">
@@ -561,16 +561,16 @@
   <data name="labelToAsterisk.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelToAsterisk.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelToAsterisk.Name" xml:space="preserve">
     <value>labelToAsterisk</value>
   </data>
-  <data name=">>labelToAsterisk.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelToAsterisk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelToAsterisk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelToAsterisk.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelToAsterisk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelToAsterisk.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelEmailReplyTo.AutoSize" type="System.Boolean, mscorlib">
@@ -600,16 +600,16 @@
   <data name="labelEmailReplyTo.Text" xml:space="preserve">
     <value>返信先(&amp;P):</value>
   </data>
-  <data name=">>labelEmailReplyTo.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailReplyTo.Name" xml:space="preserve">
     <value>labelEmailReplyTo</value>
   </data>
-  <data name=">>labelEmailReplyTo.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailReplyTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailReplyTo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailReplyTo.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailReplyTo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailReplyTo.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="emailReplyTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -627,16 +627,16 @@
   <data name="emailReplyTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>emailReplyTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;emailReplyTextBox.Name" xml:space="preserve">
     <value>emailReplyTextBox</value>
   </data>
-  <data name=">>emailReplyTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailReplyTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>emailReplyTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailReplyTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>emailReplyTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailReplyTextBox.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="labelReplyToAsterisk.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -663,16 +663,16 @@
   <data name="labelReplyToAsterisk.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelReplyToAsterisk.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelReplyToAsterisk.Name" xml:space="preserve">
     <value>labelReplyToAsterisk</value>
   </data>
-  <data name=">>labelReplyToAsterisk.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelReplyToAsterisk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelReplyToAsterisk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelReplyToAsterisk.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelReplyToAsterisk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelReplyToAsterisk.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="labelEmailSubject.AutoSize" type="System.Boolean, mscorlib">
@@ -702,16 +702,16 @@
   <data name="labelEmailSubject.Text" xml:space="preserve">
     <value>件名(&amp;S):</value>
   </data>
-  <data name=">>labelEmailSubject.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailSubject.Name" xml:space="preserve">
     <value>labelEmailSubject</value>
   </data>
-  <data name=">>labelEmailSubject.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailSubject.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailSubject.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailSubject.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailSubject.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailSubject.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="emailSubjectTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -729,16 +729,16 @@
   <data name="emailSubjectTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name=">>emailSubjectTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;emailSubjectTextBox.Name" xml:space="preserve">
     <value>emailSubjectTextBox</value>
   </data>
-  <data name=">>emailSubjectTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailSubjectTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>emailSubjectTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailSubjectTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>emailSubjectTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailSubjectTextBox.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="labelReportRenderFormat.AutoSize" type="System.Boolean, mscorlib">
@@ -768,16 +768,16 @@
   <data name="labelReportRenderFormat.Text" xml:space="preserve">
     <value>形式(&amp;F):</value>
   </data>
-  <data name=">>labelReportRenderFormat.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelReportRenderFormat.Name" xml:space="preserve">
     <value>labelReportRenderFormat</value>
   </data>
-  <data name=">>labelReportRenderFormat.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelReportRenderFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelReportRenderFormat.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelReportRenderFormat.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelReportRenderFormat.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelReportRenderFormat.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="rpRenderComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -801,16 +801,16 @@
   <data name="rpRenderComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name=">>rpRenderComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;rpRenderComboBox.Name" xml:space="preserve">
     <value>rpRenderComboBox</value>
   </data>
-  <data name=">>rpRenderComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;rpRenderComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>rpRenderComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rpRenderComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>rpRenderComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rpRenderComboBox.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="labelEmailComment.AutoSize" type="System.Boolean, mscorlib">
@@ -840,16 +840,16 @@
   <data name="labelEmailComment.Text" xml:space="preserve">
     <value>コメント(&amp;M):</value>
   </data>
-  <data name=">>labelEmailComment.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailComment.Name" xml:space="preserve">
     <value>labelEmailComment</value>
   </data>
-  <data name=">>labelEmailComment.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailComment.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailComment.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailComment.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailComment.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailComment.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="emailCommentRichTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -870,16 +870,16 @@
   <data name="emailCommentRichTextBox.Text" xml:space="preserve">
     <value/>
   </data>
-  <data name=">>emailCommentRichTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;emailCommentRichTextBox.Name" xml:space="preserve">
     <value>emailCommentRichTextBox</value>
   </data>
-  <data name=">>emailCommentRichTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailCommentRichTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>emailCommentRichTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailCommentRichTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>emailCommentRichTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailCommentRichTextBox.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="tableLayoutPanelDeliveryOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -900,16 +900,16 @@
   <data name="tableLayoutPanelDeliveryOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelDeliveryOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.Name" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>tableLayoutPanelDeliveryOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelDeliveryOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.Parent" xml:space="preserve">
     <value>groupDeliveryOptions</value>
   </data>
-  <data name=">>tableLayoutPanelDeliveryOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelDeliveryOptions.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -939,16 +939,16 @@
   <data name="labelEmailAddressFormat.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelEmailAddressFormat.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailAddressFormat.Name" xml:space="preserve">
     <value>labelEmailAddressFormat</value>
   </data>
-  <data name=">>labelEmailAddressFormat.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailAddressFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEmailAddressFormat.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailAddressFormat.Parent" xml:space="preserve">
     <value>tableLayoutPanelDeliveryOptions</value>
   </data>
-  <data name=">>labelEmailAddressFormat.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEmailAddressFormat.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="saveButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -969,16 +969,16 @@
   <data name="saveButton.Text" xml:space="preserve">
     <value>保存(&amp;S)</value>
   </data>
-  <data name=">>saveButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.Name" xml:space="preserve">
     <value>saveButton</value>
   </data>
-  <data name=">>saveButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>saveButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>saveButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -999,16 +999,16 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>cancelButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name=">>cancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>cancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>cancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="groupReportParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1041,16 +1041,16 @@
   <data name="rpParamComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>rpParamComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;rpParamComboBox.Name" xml:space="preserve">
     <value>rpParamComboBox</value>
   </data>
-  <data name=">>rpParamComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;rpParamComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>rpParamComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rpParamComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelRpParams</value>
   </data>
-  <data name=">>rpParamComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rpParamComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelRpParams.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1071,16 +1071,16 @@
   <data name="tableLayoutPanelRpParams.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelRpParams.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelRpParams.Name" xml:space="preserve">
     <value>tableLayoutPanelRpParams</value>
   </data>
-  <data name=">>tableLayoutPanelRpParams.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelRpParams.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelRpParams.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelRpParams.Parent" xml:space="preserve">
     <value>groupReportParameters</value>
   </data>
-  <data name=">>tableLayoutPanelRpParams.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelRpParams.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelRpParams.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -1104,16 +1104,16 @@
   <data name="groupReportParameters.Text" xml:space="preserve">
     <value>レポートのパラメーター</value>
   </data>
-  <data name=">>groupReportParameters.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupReportParameters.Name" xml:space="preserve">
     <value>groupReportParameters</value>
   </data>
-  <data name=">>groupReportParameters.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupReportParameters.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>groupReportParameters.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupReportParameters.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>groupReportParameters.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupReportParameters.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="dateTimePickerSchedStart.CustomFormat" xml:space="preserve">
@@ -1137,16 +1137,16 @@
   <data name="dateTimePickerSchedStart.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>dateTimePickerSchedStart.Name" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedStart.Name" xml:space="preserve">
     <value>dateTimePickerSchedStart</value>
   </data>
-  <data name=">>dateTimePickerSchedStart.Type" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedStart.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dateTimePickerSchedStart.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedStart.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>dateTimePickerSchedStart.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedStart.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelEnd.AutoSize" type="System.Boolean, mscorlib">
@@ -1173,16 +1173,16 @@
   <data name="labelEnd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelEnd.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelEnd.Name" xml:space="preserve">
     <value>labelEnd</value>
   </data>
-  <data name=">>labelEnd.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelEnd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelEnd.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelEnd.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>labelEnd.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelEnd.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelStarting.AutoSize" type="System.Boolean, mscorlib">
@@ -1209,16 +1209,16 @@
   <data name="labelStarting.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelStarting.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStarting.Name" xml:space="preserve">
     <value>labelStarting</value>
   </data>
-  <data name=">>labelStarting.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStarting.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelStarting.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStarting.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>labelStarting.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStarting.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="groupDeliveryOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1242,16 +1242,16 @@
   <data name="groupDeliveryOptions.Text" xml:space="preserve">
     <value>配信オプション</value>
   </data>
-  <data name=">>groupDeliveryOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupDeliveryOptions.Name" xml:space="preserve">
     <value>groupDeliveryOptions</value>
   </data>
-  <data name=">>groupDeliveryOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupDeliveryOptions.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>groupDeliveryOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupDeliveryOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>groupDeliveryOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupDeliveryOptions.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="groupScheduleOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1275,16 +1275,16 @@
   <data name="dateTimePickerSubscriptionRunTime.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>dateTimePickerSubscriptionRunTime.Name" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.Name" xml:space="preserve">
     <value>dateTimePickerSubscriptionRunTime</value>
   </data>
-  <data name=">>dateTimePickerSubscriptionRunTime.Type" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dateTimePickerSubscriptionRunTime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>dateTimePickerSubscriptionRunTime.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelRunAt.AutoSize" type="System.Boolean, mscorlib">
@@ -1314,16 +1314,16 @@
   <data name="labelRunAt.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelRunAt.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelRunAt.Name" xml:space="preserve">
     <value>labelRunAt</value>
   </data>
-  <data name=">>labelRunAt.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelRunAt.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelRunAt.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelRunAt.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>labelRunAt.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelRunAt.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="schedDeliverComboBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1341,16 +1341,16 @@
   <data name="schedDeliverComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>schedDeliverComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;schedDeliverComboBox.Name" xml:space="preserve">
     <value>schedDeliverComboBox</value>
   </data>
-  <data name=">>schedDeliverComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;schedDeliverComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>schedDeliverComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;schedDeliverComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>schedDeliverComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;schedDeliverComboBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelDeliverOn.AutoSize" type="System.Boolean, mscorlib">
@@ -1380,16 +1380,16 @@
   <data name="labelDeliverOn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelDeliverOn.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelDeliverOn.Name" xml:space="preserve">
     <value>labelDeliverOn</value>
   </data>
-  <data name=">>labelDeliverOn.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelDeliverOn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelDeliverOn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelDeliverOn.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>labelDeliverOn.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelDeliverOn.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="dateTimePickerSchedEnd.CustomFormat" xml:space="preserve">
@@ -1413,16 +1413,16 @@
   <data name="dateTimePickerSchedEnd.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>dateTimePickerSchedEnd.Name" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedEnd.Name" xml:space="preserve">
     <value>dateTimePickerSchedEnd</value>
   </data>
-  <data name=">>dateTimePickerSchedEnd.Type" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedEnd.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dateTimePickerSchedEnd.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedEnd.Parent" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>dateTimePickerSchedEnd.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dateTimePickerSchedEnd.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanelSchOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1443,16 +1443,16 @@
   <data name="tableLayoutPanelSchOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelSchOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.Name" xml:space="preserve">
     <value>tableLayoutPanelSchOptions</value>
   </data>
-  <data name=">>tableLayoutPanelSchOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelSchOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.Parent" xml:space="preserve">
     <value>groupScheduleOptions</value>
   </data>
-  <data name=">>tableLayoutPanelSchOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSchOptions.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -1476,16 +1476,16 @@
   <data name="groupScheduleOptions.Text" xml:space="preserve">
     <value>スケジュール オプション</value>
   </data>
-  <data name=">>groupScheduleOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupScheduleOptions.Name" xml:space="preserve">
     <value>groupScheduleOptions</value>
   </data>
-  <data name=">>groupScheduleOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupScheduleOptions.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>groupScheduleOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupScheduleOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>groupScheduleOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupScheduleOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1503,10 +1503,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>レポートのサブスクリプション - </value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WlbReportSubscriptionDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

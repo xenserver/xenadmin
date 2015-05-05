@@ -134,16 +134,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.AutoSize" type="System.Boolean, mscorlib">
@@ -171,16 +171,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>发现一个或多个 VM 与要关闭的 vApp 中的 VM 共享相同的 SR。</value>
   </data>
-  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_buttonYes.Font" type="System.Drawing.Font, System.Drawing">
@@ -201,16 +201,16 @@
   <data name="m_buttonYes.Text" xml:space="preserve">
     <value>是</value>
   </data>
-  <data name=">>m_buttonYes.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonYes.Name" xml:space="preserve">
     <value>m_buttonYes</value>
   </data>
-  <data name=">>m_buttonYes.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonYes.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_buttonYes.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonYes.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_buttonYes.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonYes.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_buttonNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -231,16 +231,16 @@
   <data name="m_buttonNo.Text" xml:space="preserve">
     <value>否</value>
   </data>
-  <data name=">>m_buttonNo.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonNo.Name" xml:space="preserve">
     <value>m_buttonNo</value>
   </data>
-  <data name=">>m_buttonNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_buttonNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonNo.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_buttonNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonNo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="autoHeightLabel2.AutoSize" type="System.Boolean, mscorlib">
@@ -270,16 +270,16 @@
   <data name="autoHeightLabel2.Text" xml:space="preserve">
     <value>是否同时关闭这些命运共享的 VM?</value>
   </data>
-  <data name=">>autoHeightLabel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel2.Name" xml:space="preserve">
     <value>autoHeightLabel2</value>
   </data>
-  <data name=">>autoHeightLabel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>autoHeightLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>autoHeightLabel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="m_listBoxVMs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="m_listBoxVMs.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>m_listBoxVMs.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_listBoxVMs.Name" xml:space="preserve">
     <value>m_listBoxVMs</value>
   </data>
-  <data name=">>m_listBoxVMs.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_listBoxVMs.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_listBoxVMs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_listBoxVMs.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_listBoxVMs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_listBoxVMs.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -330,16 +330,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -363,10 +363,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>关闭 vApp</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FateSharingVMsDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

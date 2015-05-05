@@ -138,16 +138,16 @@
   <data name="labelBlurb.Text" xml:space="preserve">
     <value>各リソース使用の重要度を設定します。これにより、そのサーバーのリソースに余裕があるかどうか、および VM をほかのサーバーに移動すべきかどうかが判断されます。  </value>
   </data>
-  <data name=">>labelBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name=">>labelBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="decentGroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -156,28 +156,28 @@
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name=">>labelMoreImportant.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.Name" xml:space="preserve">
     <value>labelMoreImportant</value>
   </data>
-  <data name=">>labelMoreImportant.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelMoreImportant.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelMoreImportant.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>labelLessImportant.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.Name" xml:space="preserve">
     <value>labelLessImportant</value>
   </data>
-  <data name=">>labelLessImportant.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelLessImportant.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelLessImportant.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -189,16 +189,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label11.AutoSize" type="System.Boolean, mscorlib">
@@ -222,19 +222,19 @@
   <data name="label11.Text" xml:space="preserve">
     <value>ディスク書き込み(&amp;W)</value>
   </data>
-  <data name=">>label11.Name" xml:space="preserve">
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
   </data>
   <data name="label11.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>label11.Type" xml:space="preserve">
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label11.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>label11.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
@@ -258,19 +258,19 @@
   <data name="label10.Text" xml:space="preserve">
     <value>ディスク読み取り(&amp;D)</value>
   </data>
-  <data name=">>label10.Name" xml:space="preserve">
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
   <data name="label10.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>label10.Type" xml:space="preserve">
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label10.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>label10.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
@@ -294,16 +294,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>ネットワーク書き込み(&amp;E)</value>
   </data>
-  <data name=">>label3.Name" xml:space="preserve">
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name=">>label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>ネットワーク読み取り(&amp;N)</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -360,16 +360,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>空きメモリ(&amp;M)</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelCPU.AutoSize" type="System.Boolean, mscorlib">
@@ -393,16 +393,16 @@
   <data name="labelCPU.Text" xml:space="preserve">
     <value>CPU 使用率(&amp;C)</value>
   </data>
-  <data name=">>labelCPU.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelCPU.Name" xml:space="preserve">
     <value>labelCPU</value>
   </data>
-  <data name=">>labelCPU.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCPU.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelCPU.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCPU.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>labelCPU.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCPU.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="trackbarDiskWritePriority.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -420,16 +420,16 @@
   <data name="trackbarDiskWritePriority.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name=">>trackbarDiskWritePriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskWritePriority.Name" xml:space="preserve">
     <value>trackbarDiskWritePriority</value>
   </data>
-  <data name=">>trackbarDiskWritePriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskWritePriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>trackbarDiskWritePriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskWritePriority.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>trackbarDiskWritePriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskWritePriority.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="trackbarDiskReadPriority.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -447,16 +447,16 @@
   <data name="trackbarDiskReadPriority.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name=">>trackbarDiskReadPriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskReadPriority.Name" xml:space="preserve">
     <value>trackbarDiskReadPriority</value>
   </data>
-  <data name=">>trackbarDiskReadPriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskReadPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>trackbarDiskReadPriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskReadPriority.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>trackbarDiskReadPriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackbarDiskReadPriority.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="trackbarNetWritePriority.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -474,16 +474,16 @@
   <data name="trackbarNetWritePriority.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>trackbarNetWritePriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetWritePriority.Name" xml:space="preserve">
     <value>trackbarNetWritePriority</value>
   </data>
-  <data name=">>trackbarNetWritePriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetWritePriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>trackbarNetWritePriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetWritePriority.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>trackbarNetWritePriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetWritePriority.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="trackbarNetReadPriority.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -501,16 +501,16 @@
   <data name="trackbarNetReadPriority.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>trackbarNetReadPriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetReadPriority.Name" xml:space="preserve">
     <value>trackbarNetReadPriority</value>
   </data>
-  <data name=">>trackbarNetReadPriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetReadPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>trackbarNetReadPriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetReadPriority.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>trackbarNetReadPriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackbarNetReadPriority.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="trackbarMemoryPriority.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -528,16 +528,16 @@
   <data name="trackbarMemoryPriority.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>trackbarMemoryPriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;trackbarMemoryPriority.Name" xml:space="preserve">
     <value>trackbarMemoryPriority</value>
   </data>
-  <data name=">>trackbarMemoryPriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;trackbarMemoryPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>trackbarMemoryPriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackbarMemoryPriority.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>trackbarMemoryPriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackbarMemoryPriority.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="trackbarCPUPriority.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -555,16 +555,16 @@
   <data name="trackbarCPUPriority.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>trackbarCPUPriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;trackbarCPUPriority.Name" xml:space="preserve">
     <value>trackbarCPUPriority</value>
   </data>
-  <data name=">>trackbarCPUPriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;trackbarCPUPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>trackbarCPUPriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackbarCPUPriority.Parent" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>trackbarCPUPriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackbarCPUPriority.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="decentGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -579,16 +579,16 @@
   <data name="decentGroupBox1.Text" xml:space="preserve">
     <value>測定基準の重要度</value>
   </data>
-  <data name=">>decentGroupBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
     <value>decentGroupBox1</value>
   </data>
-  <data name=">>decentGroupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;decentGroupBox1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>decentGroupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;decentGroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>decentGroupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;decentGroupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelMoreImportant.AutoSize" type="System.Boolean, mscorlib">
@@ -615,16 +615,16 @@
   <data name="labelMoreImportant.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
-  <data name=">>labelMoreImportant.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.Name" xml:space="preserve">
     <value>labelMoreImportant</value>
   </data>
-  <data name=">>labelMoreImportant.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelMoreImportant.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelMoreImportant.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelMoreImportant.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelLessImportant.AutoSize" type="System.Boolean, mscorlib">
@@ -648,16 +648,16 @@
   <data name="labelLessImportant.Text" xml:space="preserve">
     <value>重要度: 低</value>
   </data>
-  <data name=">>labelLessImportant.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.Name" xml:space="preserve">
     <value>labelLessImportant</value>
   </data>
-  <data name=">>labelLessImportant.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelLessImportant.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelLessImportant.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelLessImportant.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -669,10 +669,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>587, 315</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WlbMetricWeightingPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

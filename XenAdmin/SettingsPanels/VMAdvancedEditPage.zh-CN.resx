@@ -138,16 +138,16 @@
   <data name="GeneralOptimizationRadioButton.Text" xml:space="preserve">
     <value>针对一般用途进行优化(&amp;G)</value>
   </data>
-  <data name=">>GeneralOptimizationRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;GeneralOptimizationRadioButton.Name" xml:space="preserve">
     <value>GeneralOptimizationRadioButton</value>
   </data>
-  <data name=">>GeneralOptimizationRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;GeneralOptimizationRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GeneralOptimizationRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GeneralOptimizationRadioButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>GeneralOptimizationRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GeneralOptimizationRadioButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="CPSOptimizationRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -168,16 +168,16 @@
   <data name="CPSOptimizationRadioButton.Text" xml:space="preserve">
     <value>针对 Citrix XenApp 进行优化(&amp;X)</value>
   </data>
-  <data name=">>CPSOptimizationRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;CPSOptimizationRadioButton.Name" xml:space="preserve">
     <value>CPSOptimizationRadioButton</value>
   </data>
-  <data name=">>CPSOptimizationRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;CPSOptimizationRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>CPSOptimizationRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CPSOptimizationRadioButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>CPSOptimizationRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CPSOptimizationRadioButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ManualOptimizationRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -198,16 +198,16 @@
   <data name="ManualOptimizationRadioButton.Text" xml:space="preserve">
     <value>手动优化(仅限高级用途)(&amp;A)</value>
   </data>
-  <data name=">>ManualOptimizationRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationRadioButton.Name" xml:space="preserve">
     <value>ManualOptimizationRadioButton</value>
   </data>
-  <data name=">>ManualOptimizationRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ManualOptimizationRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationRadioButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ManualOptimizationRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationRadioButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="iconWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -222,16 +222,16 @@
   <data name="iconWarning.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>iconWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;iconWarning.Name" xml:space="preserve">
     <value>iconWarning</value>
   </data>
-  <data name=">>iconWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;iconWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>iconWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;iconWarning.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>iconWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;iconWarning.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -252,40 +252,40 @@
   <data name="labelWarning.Text" xml:space="preserve">
     <value>VM 挂起时无法调整这些设置</value>
   </data>
-  <data name=">>labelWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
   </data>
-  <data name=">>labelWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.Name" xml:space="preserve">
     <value>ShadowMultiplierTextBox</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.Parent" xml:space="preserve">
     <value>ManualOptimizationGroupBox</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>labelShadowMultiplier.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.Name" xml:space="preserve">
     <value>labelShadowMultiplier</value>
   </data>
-  <data name=">>labelShadowMultiplier.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelShadowMultiplier.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.Parent" xml:space="preserve">
     <value>ManualOptimizationGroupBox</value>
   </data>
-  <data name=">>labelShadowMultiplier.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ManualOptimizationGroupBox.Enabled" type="System.Boolean, mscorlib">
@@ -300,16 +300,16 @@
   <data name="ManualOptimizationGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>ManualOptimizationGroupBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationGroupBox.Name" xml:space="preserve">
     <value>ManualOptimizationGroupBox</value>
   </data>
-  <data name=">>ManualOptimizationGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ManualOptimizationGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationGroupBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ManualOptimizationGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ManualOptimizationGroupBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ShadowMultiplierTextBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -324,16 +324,16 @@
   <data name="ShadowMultiplierTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.Name" xml:space="preserve">
     <value>ShadowMultiplierTextBox</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.Parent" xml:space="preserve">
     <value>ManualOptimizationGroupBox</value>
   </data>
-  <data name=">>ShadowMultiplierTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ShadowMultiplierTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelShadowMultiplier.AutoSize" type="System.Boolean, mscorlib">
@@ -354,16 +354,16 @@
   <data name="labelShadowMultiplier.Text" xml:space="preserve">
     <value>重影内存系数(&amp;M):</value>
   </data>
-  <data name=">>labelShadowMultiplier.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.Name" xml:space="preserve">
     <value>labelShadowMultiplier</value>
   </data>
-  <data name=">>labelShadowMultiplier.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelShadowMultiplier.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.Parent" xml:space="preserve">
     <value>ManualOptimizationGroupBox</value>
   </data>
-  <data name=">>labelShadowMultiplier.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelShadowMultiplier.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -393,16 +393,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>您可以对此 VM 进行优化，以提高在不同环境中的性能。要实现一般用途或者要提高 Citrix XenApp 性能，请使用预设选项进行配置。或者，高级用户可以选择手动设置来实现自定义优化。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -417,16 +417,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -441,10 +441,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>653, 423</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VMAdvancedEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

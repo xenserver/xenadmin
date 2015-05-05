@@ -141,16 +141,16 @@
   <data name="srListBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>srListBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;srListBox.Name" xml:space="preserve">
     <value>srListBox</value>
   </data>
-  <data name=">>srListBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;srListBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.CustomTreeView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>srListBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;srListBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>srListBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;srListBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SrHint.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -177,16 +177,16 @@
   <data name="SrHint.Text" xml:space="preserve">
     <value>为导入的虚拟机选择存储库。</value>
   </data>
-  <data name=">>SrHint.Name" xml:space="preserve">
+  <data name="&gt;&gt;SrHint.Name" xml:space="preserve">
     <value>SrHint</value>
   </data>
-  <data name=">>SrHint.Type" xml:space="preserve">
+  <data name="&gt;&gt;SrHint.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>SrHint.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SrHint.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>SrHint.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SrHint.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -207,16 +207,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -234,10 +234,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>405, 283</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SrPicker</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

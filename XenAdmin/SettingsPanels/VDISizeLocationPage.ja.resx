@@ -147,16 +147,16 @@
   <data name="SizeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>SizeLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;SizeLabel.Name" xml:space="preserve">
     <value>SizeLabel</value>
   </data>
-  <data name=">>SizeLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;SizeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>SizeLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SizeLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>SizeLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SizeLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="locationLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -183,16 +183,16 @@
   <data name="locationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name=">>locationLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;locationLabel.Name" xml:space="preserve">
     <value>locationLabel</value>
   </data>
-  <data name=">>locationLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;locationLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>locationLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;locationLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>locationLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;locationLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="sizeNUD.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="sizeNUD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name=">>sizeNUD.Name" xml:space="preserve">
+  <data name="&gt;&gt;sizeNUD.Name" xml:space="preserve">
     <value>sizeNUD</value>
   </data>
-  <data name=">>sizeNUD.Type" xml:space="preserve">
+  <data name="&gt;&gt;sizeNUD.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>sizeNUD.Parent" xml:space="preserve">
+  <data name="&gt;&gt;sizeNUD.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>sizeNUD.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sizeNUD.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="sizeValue.AutoSize" type="System.Boolean, mscorlib">
@@ -249,16 +249,16 @@
   <data name="sizeValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>sizeValue.Name" xml:space="preserve">
+  <data name="&gt;&gt;sizeValue.Name" xml:space="preserve">
     <value>sizeValue</value>
   </data>
-  <data name=">>sizeValue.Type" xml:space="preserve">
+  <data name="&gt;&gt;sizeValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>sizeValue.Parent" xml:space="preserve">
+  <data name="&gt;&gt;sizeValue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>sizeValue.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sizeValue.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -291,16 +291,16 @@
   <data name="sizeValueROLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>sizeValueROLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;sizeValueROLabel.Name" xml:space="preserve">
     <value>sizeValueROLabel</value>
   </data>
-  <data name=">>sizeValueROLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;sizeValueROLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>sizeValueROLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;sizeValueROLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>sizeValueROLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sizeValueROLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelLocationValueRO.AutoSize" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="labelLocationValueRO.Text" xml:space="preserve">
     <value>SR 名</value>
   </data>
-  <data name=">>labelLocationValueRO.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelLocationValueRO.Name" xml:space="preserve">
     <value>labelLocationValueRO</value>
   </data>
-  <data name=">>labelLocationValueRO.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelLocationValueRO.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelLocationValueRO.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelLocationValueRO.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelLocationValueRO.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelLocationValueRO.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="pictureBoxError.Font" type="System.Drawing.Font, System.Drawing">
@@ -363,16 +363,16 @@
   <data name="pictureBoxError.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>pictureBoxError.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.Name" xml:space="preserve">
     <value>pictureBoxError</value>
   </data>
-  <data name=">>pictureBoxError.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxError.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>pictureBoxError.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelError.AutoSize" type="System.Boolean, mscorlib">
@@ -402,16 +402,16 @@
   <data name="labelError.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelError.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Name" xml:space="preserve">
     <value>labelError</value>
   </data>
-  <data name=">>labelError.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelError.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelError.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -429,16 +429,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -468,16 +468,16 @@
   <data name="labelShutDownWarning.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelShutDownWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelShutDownWarning.Name" xml:space="preserve">
     <value>labelShutDownWarning</value>
   </data>
-  <data name=">>labelShutDownWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelShutDownWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelShutDownWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelShutDownWarning.Parent" xml:space="preserve">
     <value>panelShutDownHint</value>
   </data>
-  <data name=">>labelShutDownWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelShutDownWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -501,16 +501,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>panelShutDownHint</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelShutDownHint.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -531,16 +531,16 @@
   <data name="panelShutDownHint.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>panelShutDownHint.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelShutDownHint.Name" xml:space="preserve">
     <value>panelShutDownHint</value>
   </data>
-  <data name=">>panelShutDownHint.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelShutDownHint.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelShutDownHint.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelShutDownHint.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelShutDownHint.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelShutDownHint.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -567,16 +567,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>VM で追加のディスク容量が必要な場合は、ここでディスク サイズを変更できます。ディスク サイズを小さくすることはできません。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
@@ -600,16 +600,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -627,10 +627,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 372</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VDISizeLocationPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -135,16 +135,16 @@
   <data name="m_srPicker.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>m_srPicker.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_srPicker.Name" xml:space="preserve">
     <value>m_srPicker</value>
   </data>
-  <data name=">>m_srPicker.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_srPicker.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.ImportVMWizard_Pages.SrPicker, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>m_srPicker.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_srPicker.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>m_srPicker.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_srPicker.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -156,10 +156,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>572, 332</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>StoragePickerPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

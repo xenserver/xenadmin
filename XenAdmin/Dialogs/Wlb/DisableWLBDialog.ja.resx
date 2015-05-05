@@ -185,16 +185,16 @@
   <data name="QuestionPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>QuestionPictureBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;QuestionPictureBox.Name" xml:space="preserve">
     <value>QuestionPictureBox</value>
   </data>
-  <data name=">>QuestionPictureBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;QuestionPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>QuestionPictureBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;QuestionPictureBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>QuestionPictureBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;QuestionPictureBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="NoButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -212,16 +212,16 @@
   <data name="NoButton.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>NoButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;NoButton.Name" xml:space="preserve">
     <value>NoButton</value>
   </data>
-  <data name=">>NoButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;NoButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NoButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;NoButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>NoButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NoButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="DeconfigureButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -242,16 +242,16 @@
   <data name="DeconfigureButton.Text" xml:space="preserve">
     <value>切断(&amp;D)</value>
   </data>
-  <data name=">>DeconfigureButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;DeconfigureButton.Name" xml:space="preserve">
     <value>DeconfigureButton</value>
   </data>
-  <data name=">>DeconfigureButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;DeconfigureButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DeconfigureButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DeconfigureButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DeconfigureButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DeconfigureButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelMessage.Font" type="System.Drawing.Font, System.Drawing">
@@ -273,16 +273,16 @@
 
 </value>
   </data>
-  <data name=">>labelMessage.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelMessage.Name" xml:space="preserve">
     <value>labelMessage</value>
   </data>
-  <data name=">>labelMessage.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelMessage.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelMessage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelMessage.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelMessage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelMessage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -300,10 +300,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>ワークロード バランス サーバーの切断</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DisableWLBDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

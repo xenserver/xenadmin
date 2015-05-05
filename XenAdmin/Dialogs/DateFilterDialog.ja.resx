@@ -149,16 +149,16 @@
   <data name="ComboStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>ComboStartDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;ComboStartDate.Name" xml:space="preserve">
     <value>ComboStartDate</value>
   </data>
-  <data name=">>ComboStartDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;ComboStartDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ComboStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ComboStartDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ComboStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ComboStartDate.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="LabelEndDate.AutoSize" type="System.Boolean, mscorlib">
@@ -183,16 +183,16 @@
   <data name="LabelEndDate.Text" xml:space="preserve">
     <value>終了日(&amp;E):</value>
   </data>
-  <data name=">>LabelEndDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;LabelEndDate.Name" xml:space="preserve">
     <value>LabelEndDate</value>
   </data>
-  <data name=">>LabelEndDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;LabelEndDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>LabelEndDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;LabelEndDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>LabelEndDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;LabelEndDate.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="DatePickerEndTime.Enabled" type="System.Boolean, mscorlib">
@@ -210,16 +210,16 @@
   <data name="DatePickerEndTime.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>DatePickerEndTime.Name" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndTime.Name" xml:space="preserve">
     <value>DatePickerEndTime</value>
   </data>
-  <data name=">>DatePickerEndTime.Type" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DatePickerEndTime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndTime.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DatePickerEndTime.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndTime.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="DatePickerStartDate.Enabled" type="System.Boolean, mscorlib">
@@ -237,16 +237,16 @@
   <data name="DatePickerStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>DatePickerStartDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartDate.Name" xml:space="preserve">
     <value>DatePickerStartDate</value>
   </data>
-  <data name=">>DatePickerStartDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DatePickerStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DatePickerStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartDate.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="LabelStartDate.AutoSize" type="System.Boolean, mscorlib">
@@ -270,16 +270,16 @@
   <data name="LabelStartDate.Text" xml:space="preserve">
     <value>開始日(&amp;S):</value>
   </data>
-  <data name=">>LabelStartDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;LabelStartDate.Name" xml:space="preserve">
     <value>LabelStartDate</value>
   </data>
-  <data name=">>LabelStartDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;LabelStartDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>LabelStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;LabelStartDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>LabelStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;LabelStartDate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="DatePickerStartTime.Enabled" type="System.Boolean, mscorlib">
@@ -297,16 +297,16 @@
   <data name="DatePickerStartTime.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>DatePickerStartTime.Name" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartTime.Name" xml:space="preserve">
     <value>DatePickerStartTime</value>
   </data>
-  <data name=">>DatePickerStartTime.Type" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DatePickerStartTime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartTime.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DatePickerStartTime.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerStartTime.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="DatePickerEndDate.Enabled" type="System.Boolean, mscorlib">
@@ -324,16 +324,16 @@
   <data name="DatePickerEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>DatePickerEndDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndDate.Name" xml:space="preserve">
     <value>DatePickerEndDate</value>
   </data>
-  <data name=">>DatePickerEndDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DatePickerEndDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DatePickerEndDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DatePickerEndDate.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="ComboEndDate.Font" type="System.Drawing.Font, System.Drawing">
@@ -366,16 +366,16 @@
   <data name="ComboEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>ComboEndDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;ComboEndDate.Name" xml:space="preserve">
     <value>ComboEndDate</value>
   </data>
-  <data name=">>ComboEndDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;ComboEndDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ComboEndDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ComboEndDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ComboEndDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ComboEndDate.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -402,16 +402,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>表示する期間を設定します。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
@@ -429,16 +429,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -462,16 +462,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonApplyFilter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -492,16 +492,16 @@
   <data name="buttonApplyFilter.Text" xml:space="preserve">
     <value>フィルタの適用(&amp;A)</value>
   </data>
-  <data name=">>buttonApplyFilter.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonApplyFilter.Name" xml:space="preserve">
     <value>buttonApplyFilter</value>
   </data>
-  <data name=">>buttonApplyFilter.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonApplyFilter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonApplyFilter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonApplyFilter.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>buttonApplyFilter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonApplyFilter.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -537,16 +537,16 @@
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanelWarning</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -570,16 +570,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanelWarning</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelWarning.Font" type="System.Drawing.Font, System.Drawing">
@@ -600,16 +600,16 @@
   <data name="tableLayoutPanelWarning.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.Name" xml:space="preserve">
     <value>tableLayoutPanelWarning</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -630,10 +630,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>日付によるフィルタの設定</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DateFilterDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

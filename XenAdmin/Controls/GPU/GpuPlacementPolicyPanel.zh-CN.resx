@@ -156,16 +156,16 @@
   <data name="placementPolicyLabel.Text" xml:space="preserve">
     <value>placementPolicyLabel</value>
   </data>
-  <data name=">>placementPolicyLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;placementPolicyLabel.Name" xml:space="preserve">
     <value>placementPolicyLabel</value>
   </data>
-  <data name=">>placementPolicyLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;placementPolicyLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>placementPolicyLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;placementPolicyLabel.Parent" xml:space="preserve">
     <value>containerPanel</value>
   </data>
-  <data name=">>placementPolicyLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;placementPolicyLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="editPlacementPolicyButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -189,16 +189,16 @@
   <data name="editPlacementPolicyButton.Text" xml:space="preserve">
     <value>编辑(&amp;E)...</value>
   </data>
-  <data name=">>editPlacementPolicyButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;editPlacementPolicyButton.Name" xml:space="preserve">
     <value>editPlacementPolicyButton</value>
   </data>
-  <data name=">>editPlacementPolicyButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;editPlacementPolicyButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>editPlacementPolicyButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;editPlacementPolicyButton.Parent" xml:space="preserve">
     <value>containerPanel</value>
   </data>
-  <data name=">>editPlacementPolicyButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;editPlacementPolicyButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="containerPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -213,16 +213,16 @@
   <data name="containerPanel.WrapContents" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>containerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;containerPanel.Name" xml:space="preserve">
     <value>containerPanel</value>
   </data>
-  <data name=">>containerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;containerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>containerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;containerPanel.Parent" xml:space="preserve">
     <value>panelWithBorder</value>
   </data>
-  <data name=">>containerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;containerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelWithBorder.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -240,16 +240,16 @@
   <data name="panelWithBorder.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>panelWithBorder.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelWithBorder.Name" xml:space="preserve">
     <value>panelWithBorder</value>
   </data>
-  <data name=">>panelWithBorder.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelWithBorder.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelWithBorder, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>panelWithBorder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelWithBorder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelWithBorder.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelWithBorder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -267,10 +267,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>464, 35</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GpuPlacementPolicyPanel</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

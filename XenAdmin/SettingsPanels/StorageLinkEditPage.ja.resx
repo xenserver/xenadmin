@@ -138,16 +138,16 @@
   <data name="labelPassword.Text" xml:space="preserve">
     <value>パスワード(&amp;P):</value>
   </data>
-  <data name=">>labelPassword.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelPassword.Name" xml:space="preserve">
     <value>labelPassword</value>
   </data>
-  <data name=">>labelPassword.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelPassword.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelPassword.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelPassword.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelPassword.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="textBoxPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -165,16 +165,16 @@
   <data name="textBoxPassword.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>textBoxPassword.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPassword.Name" xml:space="preserve">
     <value>textBoxPassword</value>
   </data>
-  <data name=">>textBoxPassword.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxPassword.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPassword.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>textBoxPassword.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPassword.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="textBoxUsername.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="textBoxUsername.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>textBoxUsername.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxUsername.Name" xml:space="preserve">
     <value>textBoxUsername</value>
   </data>
-  <data name=">>textBoxUsername.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxUsername.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxUsername.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>textBoxUsername.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxUsername.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelUsername.AutoSize" type="System.Boolean, mscorlib">
@@ -222,16 +222,16 @@
   <data name="labelUsername.Text" xml:space="preserve">
     <value>ユーザー名(&amp;U):</value>
   </data>
-  <data name=">>labelUsername.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelUsername.Name" xml:space="preserve">
     <value>labelUsername</value>
   </data>
-  <data name=">>labelUsername.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelUsername.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelUsername.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelUsername.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelUsername.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelHostAddress.AutoSize" type="System.Boolean, mscorlib">
@@ -252,16 +252,16 @@
   <data name="labelHostAddress.Text" xml:space="preserve">
     <value>StorageLink サーバー アドレス(&amp;S):</value>
   </data>
-  <data name=">>labelHostAddress.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelHostAddress.Name" xml:space="preserve">
     <value>labelHostAddress</value>
   </data>
-  <data name=">>labelHostAddress.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelHostAddress.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelHostAddress.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelHostAddress.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelHostAddress.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelHostAddress.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="textBoxHostAddress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -279,16 +279,16 @@
   <data name="textBoxHostAddress.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>textBoxHostAddress.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxHostAddress.Name" xml:space="preserve">
     <value>textBoxHostAddress</value>
   </data>
-  <data name=">>textBoxHostAddress.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxHostAddress.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxHostAddress.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxHostAddress.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>textBoxHostAddress.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxHostAddress.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="testConnectionButton.AutoSize" type="System.Boolean, mscorlib">
@@ -318,16 +318,16 @@
   <data name="testConnectionButton.Text" xml:space="preserve">
     <value>接続のテスト(&amp;T)</value>
   </data>
-  <data name=">>testConnectionButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;testConnectionButton.Name" xml:space="preserve">
     <value>testConnectionButton</value>
   </data>
-  <data name=">>testConnectionButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;testConnectionButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>testConnectionButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;testConnectionButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>testConnectionButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;testConnectionButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="passFailLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -348,16 +348,16 @@
   <data name="passFailLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>passFailLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;passFailLabel.Name" xml:space="preserve">
     <value>passFailLabel</value>
   </data>
-  <data name=">>passFailLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;passFailLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>passFailLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;passFailLabel.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>passFailLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;passFailLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -366,16 +366,16 @@
   <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name=">>passFailPictureBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.Name" xml:space="preserve">
     <value>passFailPictureBox</value>
   </data>
-  <data name=">>passFailPictureBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>passFailPictureBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>passFailPictureBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -390,16 +390,16 @@
   <data name="flowLayoutPanel1.WrapContents" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="passFailPictureBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -417,16 +417,16 @@
   <data name="passFailPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>103</value>
   </data>
-  <data name=">>passFailPictureBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.Name" xml:space="preserve">
     <value>passFailPictureBox</value>
   </data>
-  <data name=">>passFailPictureBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>passFailPictureBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>passFailPictureBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;passFailPictureBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -450,16 +450,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>StorageLink サーバーの資格情報を入力します。XenCenter からの接続を確認するには、[接続のテスト] をクリックします。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -477,16 +477,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -507,16 +507,16 @@
   <data name="allServersCheckBox.Text" xml:space="preserve">
     <value>すべてのプールとスタンドアロン サーバーでこの StorageLink サーバーの資格情報を使用する</value>
   </data>
-  <data name=">>allServersCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;allServersCheckBox.Name" xml:space="preserve">
     <value>allServersCheckBox</value>
   </data>
-  <data name=">>allServersCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;allServersCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>allServersCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;allServersCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>allServersCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;allServersCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -531,10 +531,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>536, 402</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>StorageLinkEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

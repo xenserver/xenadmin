@@ -153,16 +153,16 @@
   <data name="treeViewReportList.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name=">>treeViewReportList.Name" xml:space="preserve">
+  <data name="&gt;&gt;treeViewReportList.Name" xml:space="preserve">
     <value>treeViewReportList</value>
   </data>
-  <data name=">>treeViewReportList.Type" xml:space="preserve">
+  <data name="&gt;&gt;treeViewReportList.Type" xml:space="preserve">
     <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>treeViewReportList.Parent" xml:space="preserve">
+  <data name="&gt;&gt;treeViewReportList.Parent" xml:space="preserve">
     <value>splitContainerLeftPane.Panel1</value>
   </data>
-  <data name=">>treeViewReportList.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;treeViewReportList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblReports.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="lblReports.Text" xml:space="preserve">
     <value>报告</value>
   </data>
-  <data name=">>lblReports.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblReports.Name" xml:space="preserve">
     <value>lblReports</value>
   </data>
-  <data name=">>lblReports.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblReports.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblReports.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblReports.Parent" xml:space="preserve">
     <value>splitContainerLeftPane.Panel1</value>
   </data>
-  <data name=">>lblReports.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblReports.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainerLeftPane.Panel1.Font" type="System.Drawing.Font, System.Drawing">
@@ -213,16 +213,16 @@
   <data name="splitContainerLeftPane.Panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 0, 0</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel1.Name" xml:space="preserve">
     <value>splitContainerLeftPane.Panel1</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel1.Parent" xml:space="preserve">
     <value>splitContainerLeftPane</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="treeViewSubscriptionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="treeViewSubscriptionList.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name=">>treeViewSubscriptionList.Name" xml:space="preserve">
+  <data name="&gt;&gt;treeViewSubscriptionList.Name" xml:space="preserve">
     <value>treeViewSubscriptionList</value>
   </data>
-  <data name=">>treeViewSubscriptionList.Type" xml:space="preserve">
+  <data name="&gt;&gt;treeViewSubscriptionList.Type" xml:space="preserve">
     <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>treeViewSubscriptionList.Parent" xml:space="preserve">
+  <data name="&gt;&gt;treeViewSubscriptionList.Parent" xml:space="preserve">
     <value>splitContainerLeftPane.Panel2</value>
   </data>
-  <data name=">>treeViewSubscriptionList.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;treeViewSubscriptionList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblSubscriptions.AutoSize" type="System.Boolean, mscorlib">
@@ -285,16 +285,16 @@
   <data name="lblSubscriptions.Text" xml:space="preserve">
     <value>订阅</value>
   </data>
-  <data name=">>lblSubscriptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblSubscriptions.Name" xml:space="preserve">
     <value>lblSubscriptions</value>
   </data>
-  <data name=">>lblSubscriptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSubscriptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblSubscriptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblSubscriptions.Parent" xml:space="preserve">
     <value>splitContainerLeftPane.Panel2</value>
   </data>
-  <data name=">>lblSubscriptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSubscriptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainerLeftPane.Panel2.Font" type="System.Drawing.Font, System.Drawing">
@@ -303,16 +303,16 @@
   <data name="splitContainerLeftPane.Panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 0, 1</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel2.Name" xml:space="preserve">
     <value>splitContainerLeftPane.Panel2</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel2.Parent" xml:space="preserve">
     <value>splitContainerLeftPane</value>
   </data>
-  <data name=">>splitContainerLeftPane.Panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainerLeftPane.Size" type="System.Drawing.Size, System.Drawing">
@@ -327,16 +327,16 @@
   <data name="splitContainerLeftPane.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>splitContainerLeftPane.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Name" xml:space="preserve">
     <value>splitContainerLeftPane</value>
   </data>
-  <data name=">>splitContainerLeftPane.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainerLeftPane.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>splitContainerLeftPane.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainerLeftPane.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="splitContainer1.Panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 48</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="wlbReportView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -384,16 +384,16 @@
   <data name="wlbReportView1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>wlbReportView1.Name" xml:space="preserve">
+  <data name="&gt;&gt;wlbReportView1.Name" xml:space="preserve">
     <value>wlbReportView1</value>
   </data>
-  <data name=">>wlbReportView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;wlbReportView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Wlb.WlbReportView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>wlbReportView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;wlbReportView1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>wlbReportView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;wlbReportView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="subscriptionView1.AutoSize" type="System.Boolean, mscorlib">
@@ -420,31 +420,31 @@
   <data name="subscriptionView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>subscriptionView1.Name" xml:space="preserve">
+  <data name="&gt;&gt;subscriptionView1.Name" xml:space="preserve">
     <value>subscriptionView1</value>
   </data>
-  <data name=">>subscriptionView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;subscriptionView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Wlb.WlbReportSubscriptionView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>subscriptionView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;subscriptionView1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>subscriptionView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;subscriptionView1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer1.Panel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
@@ -459,16 +459,16 @@
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>splitContainer1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>splitContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="contextMenuReports.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -483,10 +483,10 @@
   <data name="contextMenuReports.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 26</value>
   </data>
-  <data name=">>contextMenuReports.Name" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuReports.Name" xml:space="preserve">
     <value>contextMenuReports</value>
   </data>
-  <data name=">>contextMenuReports.Type" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuReports.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -528,16 +528,16 @@
   <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>deprecationBanner.Name" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
     <value>deprecationBanner</value>
   </data>
-  <data name=">>deprecationBanner.Type" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>deprecationBanner.Parent" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>deprecationBanner.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -561,16 +561,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -600,16 +600,16 @@
   <data name="$this.Text" xml:space="preserve">
     <value>工作负载报告</value>
   </data>
-  <data name=">>runReportToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;runReportToolStripMenuItem.Name" xml:space="preserve">
     <value>runReportToolStripMenuItem</value>
   </data>
-  <data name=">>runReportToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;runReportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WorkloadReports</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>快照类型:</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="radioButtonDiskOnly.AutoSize" type="System.Boolean, mscorlib">
@@ -168,16 +168,16 @@
   <data name="radioButtonDiskOnly.Text" xml:space="preserve">
     <value>仅磁盘快照(&amp;D)</value>
   </data>
-  <data name=">>radioButtonDiskOnly.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskOnly.Name" xml:space="preserve">
     <value>radioButtonDiskOnly</value>
   </data>
-  <data name=">>radioButtonDiskOnly.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonDiskOnly.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskOnly.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>radioButtonDiskOnly.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskOnly.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="radioButtonDiskAndMemory.AutoSize" type="System.Boolean, mscorlib">
@@ -198,16 +198,16 @@
   <data name="radioButtonDiskAndMemory.Text" xml:space="preserve">
     <value>磁盘和内存快照(&amp;M)</value>
   </data>
-  <data name=">>radioButtonDiskAndMemory.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskAndMemory.Name" xml:space="preserve">
     <value>radioButtonDiskAndMemory</value>
   </data>
-  <data name=">>radioButtonDiskAndMemory.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskAndMemory.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonDiskAndMemory.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskAndMemory.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>radioButtonDiskAndMemory.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonDiskAndMemory.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>将保存 VM 的磁盘(存储)和元数据。此类型的快照具有崩溃状态一致性，可以对所有 VM 类型(包括 Linux VM)执行。</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -249,28 +249,28 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>pictureBoxWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.Name" xml:space="preserve">
     <value>pictureBoxWarning</value>
   </data>
-  <data name=">>pictureBoxWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>pictureBoxWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>labelWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
   </data>
-  <data name=">>labelWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -288,16 +288,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>除 VM 的磁盘和元数据外，此类型的快照还将存储 VM 的内存状态(RAM)。请注意，此类型的快照可能会非常大，因此应确保为所有计划快照提供足够的磁盘空间。</value>
   </data>
-  <data name=">>label3.Name" xml:space="preserve">
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name=">>label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="checkpointInfoPictureBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -348,16 +348,16 @@
   <data name="checkpointInfoPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>checkpointInfoPictureBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkpointInfoPictureBox.Name" xml:space="preserve">
     <value>checkpointInfoPictureBox</value>
   </data>
-  <data name=">>checkpointInfoPictureBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkpointInfoPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkpointInfoPictureBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkpointInfoPictureBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>checkpointInfoPictureBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkpointInfoPictureBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -372,16 +372,16 @@
   <data name="pictureBoxWarning.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBoxWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.Name" xml:space="preserve">
     <value>pictureBoxWarning</value>
   </data>
-  <data name=">>pictureBoxWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>pictureBoxWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -406,16 +406,16 @@
 2. VM 上已安装 XenServer Tools。
 3. VM 没有为其分配的专用 GPU。</value>
   </data>
-  <data name=">>labelWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
   </data>
-  <data name=">>labelWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -427,16 +427,16 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>509, 379</value>
   </data>
-  <data name=">>toolTip.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>
   </data>
-  <data name=">>toolTip.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NewPolicySnapshotTypePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

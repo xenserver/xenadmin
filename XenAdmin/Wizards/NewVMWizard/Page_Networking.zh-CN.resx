@@ -135,16 +135,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>所选虚拟机模板提供了下列虚拟网络接口。可以在此处配置或删除默认的虚拟网络接口，以及根据需要添加更多虚拟网络接口。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="AddButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -162,16 +162,16 @@
   <data name="AddButton.Text" xml:space="preserve">
     <value>添加(&amp;A)...</value>
   </data>
-  <data name=">>AddButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.Name" xml:space="preserve">
     <value>AddButton</value>
   </data>
-  <data name=">>AddButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.Parent" xml:space="preserve">
     <value>toolTipContainerAddButton</value>
   </data>
-  <data name=">>AddButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="PropertiesButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -189,16 +189,16 @@
   <data name="PropertiesButton.Text" xml:space="preserve">
     <value>属性(&amp;R)</value>
   </data>
-  <data name=">>PropertiesButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;PropertiesButton.Name" xml:space="preserve">
     <value>PropertiesButton</value>
   </data>
-  <data name=">>PropertiesButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;PropertiesButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>PropertiesButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PropertiesButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>PropertiesButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PropertiesButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="DeleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -216,16 +216,16 @@
   <data name="DeleteButton.Text" xml:space="preserve">
     <value>删除(&amp;D)</value>
   </data>
-  <data name=">>DeleteButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;DeleteButton.Name" xml:space="preserve">
     <value>DeleteButton</value>
   </data>
-  <data name=">>DeleteButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;DeleteButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DeleteButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DeleteButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DeleteButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DeleteButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="BoxTitle.Location" type="System.Drawing.Point, System.Drawing">
@@ -243,16 +243,16 @@
   <data name="BoxTitle.Text" xml:space="preserve">
     <value>{newVM} 上的虚拟网络接口:</value>
   </data>
-  <data name=">>BoxTitle.Name" xml:space="preserve">
+  <data name="&gt;&gt;BoxTitle.Name" xml:space="preserve">
     <value>BoxTitle</value>
   </data>
-  <data name=">>BoxTitle.Type" xml:space="preserve">
+  <data name="&gt;&gt;BoxTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>BoxTitle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;BoxTitle.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>BoxTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;BoxTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="NetworksGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -291,16 +291,16 @@
   <data name="NetworksGridView.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>NetworksGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;NetworksGridView.Name" xml:space="preserve">
     <value>NetworksGridView</value>
   </data>
-  <data name=">>NetworksGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;NetworksGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>NetworksGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;NetworksGridView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>NetworksGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NetworksGridView.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelDefaultTemplateInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="labelDefaultTemplateInfo.Text" xml:space="preserve">
     <value>如果使用默认模板，则在 VM 创建过程中可以配置多达 4 个虚拟网络接口。要配置 4 个以上的虚拟网络接口，请创建一个自定义模板，或者在创建新 VM 后从“网络”选项卡添加额外的虚拟网络接口。</value>
   </data>
-  <data name=">>labelDefaultTemplateInfo.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelDefaultTemplateInfo.Name" xml:space="preserve">
     <value>labelDefaultTemplateInfo</value>
   </data>
-  <data name=">>labelDefaultTemplateInfo.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelDefaultTemplateInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelDefaultTemplateInfo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelDefaultTemplateInfo.Parent" xml:space="preserve">
     <value>panelDefaultTemplateInfo</value>
   </data>
-  <data name=">>labelDefaultTemplateInfo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelDefaultTemplateInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -345,16 +345,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>panelDefaultTemplateInfo</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelDefaultTemplateInfo.Location" type="System.Drawing.Point, System.Drawing">
@@ -369,16 +369,16 @@
   <data name="panelDefaultTemplateInfo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>panelDefaultTemplateInfo.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelDefaultTemplateInfo.Name" xml:space="preserve">
     <value>panelDefaultTemplateInfo</value>
   </data>
-  <data name=">>panelDefaultTemplateInfo.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelDefaultTemplateInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelDefaultTemplateInfo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelDefaultTemplateInfo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelDefaultTemplateInfo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelDefaultTemplateInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerAddButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -393,16 +393,16 @@
   <data name="toolTipContainerAddButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>toolTipContainerAddButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerAddButton.Name" xml:space="preserve">
     <value>toolTipContainerAddButton</value>
   </data>
-  <data name=">>toolTipContainerAddButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerAddButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolTipContainerAddButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerAddButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>toolTipContainerAddButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerAddButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -414,28 +414,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>568, 325</value>
   </data>
-  <data name=">>ImageColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;ImageColumn.Name" xml:space="preserve">
     <value>ImageColumn</value>
   </data>
-  <data name=">>ImageColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;ImageColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>MacColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;MacColumn.Name" xml:space="preserve">
     <value>MacColumn</value>
   </data>
-  <data name=">>MacColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;MacColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NetworkColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;NetworkColumn.Name" xml:space="preserve">
     <value>NetworkColumn</value>
   </data>
-  <data name=">>NetworkColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;NetworkColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Page_Networking</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name=">>cancelButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name=">>cancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>cancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>cancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>确定</value>
   </data>
-  <data name=">>okButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name=">>okButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>okButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>okButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -219,16 +219,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="saveAndRestoreOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="saveAndRestoreOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>saveAndRestoreOptionsPage1.Name" xml:space="preserve">
+  <data name="&gt;&gt;saveAndRestoreOptionsPage1.Name" xml:space="preserve">
     <value>saveAndRestoreOptionsPage1</value>
   </data>
-  <data name=">>saveAndRestoreOptionsPage1.Type" xml:space="preserve">
+  <data name="&gt;&gt;saveAndRestoreOptionsPage1.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>saveAndRestoreOptionsPage1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;saveAndRestoreOptionsPage1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>saveAndRestoreOptionsPage1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;saveAndRestoreOptionsPage1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -312,10 +312,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>保存并还原连接状态</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SaveAndRestoreDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

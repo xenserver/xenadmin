@@ -144,16 +144,16 @@
   <data name="lblName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>lblName.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblName.Name" xml:space="preserve">
     <value>lblName</value>
   </data>
-  <data name=">>lblName.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>lblName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblDescription.AutoSize" type="System.Boolean, mscorlib">
@@ -180,16 +180,16 @@
   <data name="lblDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>lblDescription.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblDescription.Name" xml:space="preserve">
     <value>lblDescription</value>
   </data>
-  <data name=">>lblDescription.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblDescription.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>lblDescription.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblDescription.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblIQN.AutoSize" type="System.Boolean, mscorlib">
@@ -219,16 +219,16 @@
   <data name="lblIQN.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>lblIQN.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblIQN.Name" xml:space="preserve">
     <value>lblIQN</value>
   </data>
-  <data name=">>lblIQN.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblIQN.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblIQN.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblIQN.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>lblIQN.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblIQN.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="labelIqnHint.AutoSize" type="System.Boolean, mscorlib">
@@ -255,16 +255,16 @@
   <data name="labelIqnHint.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelIqnHint.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelIqnHint.Name" xml:space="preserve">
     <value>labelIqnHint</value>
   </data>
-  <data name=">>labelIqnHint.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelIqnHint.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelIqnHint.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelIqnHint.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelIqnHint.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelIqnHint.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="labelTags.AutoSize" type="System.Boolean, mscorlib">
@@ -291,16 +291,16 @@
   <data name="labelTags.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Name" xml:space="preserve">
     <value>labelTags</value>
   </data>
-  <data name=">>labelTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelTags.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelTags.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="lblFolder.AutoSize" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="lblFolder.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>lblFolder.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.Name" xml:space="preserve">
     <value>lblFolder</value>
   </data>
-  <data name=">>lblFolder.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblFolder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>lblFolder.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="txtName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -357,16 +357,16 @@
   <data name="txtName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>txtName.Name" xml:space="preserve">
+  <data name="&gt;&gt;txtName.Name" xml:space="preserve">
     <value>txtName</value>
   </data>
-  <data name=">>txtName.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>txtName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>txtName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="txtDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -390,16 +390,16 @@
   <data name="txtDescription.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>txtDescription.Name" xml:space="preserve">
+  <data name="&gt;&gt;txtDescription.Name" xml:space="preserve">
     <value>txtDescription</value>
   </data>
-  <data name=">>txtDescription.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>txtDescription.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>txtDescription.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtDescription.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="txtIQN.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -423,16 +423,16 @@
   <data name="txtIQN.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>txtIQN.Name" xml:space="preserve">
+  <data name="&gt;&gt;txtIQN.Name" xml:space="preserve">
     <value>txtIQN</value>
   </data>
-  <data name=">>txtIQN.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtIQN.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>txtIQN.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtIQN.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>txtIQN.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtIQN.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -462,16 +462,16 @@
   <data name="labelTitle.Text" xml:space="preserve">
     <value>XenCenter 提供了多种标记和组织资源的方法。通过文件夹和标记等功能，可以在所连服务器之间对资源进行快速分组和管理。</value>
   </data>
-  <data name=">>labelTitle.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
   </data>
-  <data name=">>labelTitle.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>labelTitle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblDescrReadOnly.AutoSize" type="System.Boolean, mscorlib">
@@ -495,16 +495,16 @@
   <data name="lblDescrReadOnly.Text" xml:space="preserve">
     <value>说明(&amp;D):</value>
   </data>
-  <data name=">>lblDescrReadOnly.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblDescrReadOnly.Name" xml:space="preserve">
     <value>lblDescrReadOnly</value>
   </data>
-  <data name=">>lblDescrReadOnly.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblDescrReadOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblDescrReadOnly.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblDescrReadOnly.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>lblDescrReadOnly.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblDescrReadOnly.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="txtDescrReadOnly.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -525,16 +525,16 @@
   <data name="txtDescrReadOnly.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>txtDescrReadOnly.Name" xml:space="preserve">
+  <data name="&gt;&gt;txtDescrReadOnly.Name" xml:space="preserve">
     <value>txtDescrReadOnly</value>
   </data>
-  <data name=">>txtDescrReadOnly.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtDescrReadOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>txtDescrReadOnly.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtDescrReadOnly.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>txtDescrReadOnly.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtDescrReadOnly.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="folderPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -552,16 +552,16 @@
   <data name="folderPanel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>folderPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;folderPanel.Name" xml:space="preserve">
     <value>folderPanel</value>
   </data>
-  <data name=">>folderPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;folderPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>folderPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;folderPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>folderPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;folderPanel.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="tagsPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -579,16 +579,16 @@
   <data name="tagsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name=">>tagsPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;tagsPanel.Name" xml:space="preserve">
     <value>tagsPanel</value>
   </data>
-  <data name=">>tagsPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;tagsPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>tagsPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tagsPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tagsPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tagsPanel.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -606,16 +606,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -636,10 +636,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 318</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

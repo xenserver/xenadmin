@@ -138,16 +138,16 @@
   <data name="linkLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name=">>linkLabel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>
   </data>
-  <data name=">>linkLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>linkLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>linkLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -162,16 +162,16 @@
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name=">>progressBar1.Name" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
   </data>
-  <data name=">>progressBar1.Type" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>progressBar1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>progressBar1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelTitle.Location" type="System.Drawing.Point, System.Drawing">
@@ -186,16 +186,16 @@
   <data name="labelTitle.Text" xml:space="preserve">
     <value>正在进行池滚动升级。升级过程可能需要一些时间。</value>
   </data>
-  <data name=">>labelTitle.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
   </data>
-  <data name=">>labelTitle.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelTitle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="dataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name=">>dataGridView1.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name=">>dataGridView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>dataGridView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelOverallProgress.AutoSize" type="System.Boolean, mscorlib">
@@ -270,16 +270,16 @@
   <data name="labelOverallProgress.Text" xml:space="preserve">
     <value>已完成 1 项，共 20 项</value>
   </data>
-  <data name=">>labelOverallProgress.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelOverallProgress.Name" xml:space="preserve">
     <value>labelOverallProgress</value>
   </data>
-  <data name=">>labelOverallProgress.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelOverallProgress.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelOverallProgress.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelOverallProgress.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelOverallProgress.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelOverallProgress.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -291,28 +291,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>525, 419</value>
   </data>
-  <data name=">>ColumnHost.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnHost.Name" xml:space="preserve">
     <value>ColumnHost</value>
   </data>
-  <data name=">>ColumnHost.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnHost.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnIcon.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnIcon.Name" xml:space="preserve">
     <value>ColumnIcon</value>
   </data>
-  <data name=">>ColumnIcon.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnIcon.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
     <value>ColumnStatus</value>
   </data>
-  <data name=">>ColumnStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>RollingUpgradeUpgradePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

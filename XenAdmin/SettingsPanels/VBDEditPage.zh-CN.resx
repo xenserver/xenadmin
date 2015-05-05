@@ -144,16 +144,16 @@
   <data name="modeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>modeLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;modeLabel.Name" xml:space="preserve">
     <value>modeLabel</value>
   </data>
-  <data name=">>modeLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;modeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>modeLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;modeLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>modeLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;modeLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="deviceLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -180,16 +180,16 @@
   <data name="deviceLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name=">>deviceLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;deviceLabel.Name" xml:space="preserve">
     <value>deviceLabel</value>
   </data>
-  <data name=">>deviceLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;deviceLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>deviceLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;deviceLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>deviceLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;deviceLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="devicePositionComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="devicePositionComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>devicePositionComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;devicePositionComboBox.Name" xml:space="preserve">
     <value>devicePositionComboBox</value>
   </data>
-  <data name=">>devicePositionComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;devicePositionComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>devicePositionComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;devicePositionComboBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>devicePositionComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;devicePositionComboBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -237,16 +237,16 @@
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelDevicePositionMsg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -273,16 +273,16 @@
   <data name="labelDevicePositionMsg.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelDevicePositionMsg.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelDevicePositionMsg.Name" xml:space="preserve">
     <value>labelDevicePositionMsg</value>
   </data>
-  <data name=">>labelDevicePositionMsg.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelDevicePositionMsg.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelDevicePositionMsg.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelDevicePositionMsg.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelDevicePositionMsg.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelDevicePositionMsg.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -315,16 +315,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>通过这些控件，可以控制对该磁盘的读写权限、指定磁盘所在位置以及根据负载调整磁盘的可用性。</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -369,16 +369,16 @@
   <data name="modeComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>modeComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;modeComboBox.Name" xml:space="preserve">
     <value>modeComboBox</value>
   </data>
-  <data name=">>modeComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;modeComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>modeComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;modeComboBox.Parent" xml:space="preserve">
     <value>toolTipContainer1</value>
   </data>
-  <data name=">>modeComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;modeComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainer1.Location" type="System.Drawing.Point, System.Drawing">
@@ -390,16 +390,16 @@
   <data name="toolTipContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>toolTipContainer1.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Name" xml:space="preserve">
     <value>toolTipContainer1</value>
   </data>
-  <data name=">>toolTipContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolTipContainer1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>toolTipContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="PriorityToolTipContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -417,16 +417,16 @@
   <data name="diskAccessPriorityTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>diskAccessPriorityTrackBar.Name" xml:space="preserve">
+  <data name="&gt;&gt;diskAccessPriorityTrackBar.Name" xml:space="preserve">
     <value>diskAccessPriorityTrackBar</value>
   </data>
-  <data name=">>diskAccessPriorityTrackBar.Type" xml:space="preserve">
+  <data name="&gt;&gt;diskAccessPriorityTrackBar.Type" xml:space="preserve">
     <value>XenAdmin.Controls.TransparentTrackBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>diskAccessPriorityTrackBar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;diskAccessPriorityTrackBar.Parent" xml:space="preserve">
     <value>DiskPriorityPanel</value>
   </data>
-  <data name=">>diskAccessPriorityTrackBar.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;diskAccessPriorityTrackBar.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblHighest.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -453,16 +453,16 @@
   <data name="lblHighest.Text" xml:space="preserve">
     <value>最高</value>
   </data>
-  <data name=">>lblHighest.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblHighest.Name" xml:space="preserve">
     <value>lblHighest</value>
   </data>
-  <data name=">>lblHighest.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblHighest.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblHighest.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblHighest.Parent" xml:space="preserve">
     <value>DiskPriorityPanel</value>
   </data>
-  <data name=">>lblHighest.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblHighest.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblLowest.AutoSize" type="System.Boolean, mscorlib">
@@ -486,16 +486,16 @@
   <data name="lblLowest.Text" xml:space="preserve">
     <value>最低</value>
   </data>
-  <data name=">>lblLowest.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblLowest.Name" xml:space="preserve">
     <value>lblLowest</value>
   </data>
-  <data name=">>lblLowest.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLowest.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblLowest.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLowest.Parent" xml:space="preserve">
     <value>DiskPriorityPanel</value>
   </data>
-  <data name=">>lblLowest.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblLowest.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="DiskPriorityPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -510,16 +510,16 @@
   <data name="DiskPriorityPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>DiskPriorityPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;DiskPriorityPanel.Name" xml:space="preserve">
     <value>DiskPriorityPanel</value>
   </data>
-  <data name=">>DiskPriorityPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;DiskPriorityPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DiskPriorityPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DiskPriorityPanel.Parent" xml:space="preserve">
     <value>PriorityToolTipContainer</value>
   </data>
-  <data name=">>DiskPriorityPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DiskPriorityPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="PriorityToolTipContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -531,16 +531,16 @@
   <data name="PriorityToolTipContainer.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name=">>PriorityToolTipContainer.Name" xml:space="preserve">
+  <data name="&gt;&gt;PriorityToolTipContainer.Name" xml:space="preserve">
     <value>PriorityToolTipContainer</value>
   </data>
-  <data name=">>PriorityToolTipContainer.Type" xml:space="preserve">
+  <data name="&gt;&gt;PriorityToolTipContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>PriorityToolTipContainer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PriorityToolTipContainer.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>PriorityToolTipContainer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PriorityToolTipContainer.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -555,10 +555,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 230</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VBDEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

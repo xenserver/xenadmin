@@ -147,16 +147,16 @@
   <data name="pictureBoxWizard.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBoxWizard.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.Name" xml:space="preserve">
     <value>pictureBoxWizard</value>
   </data>
-  <data name=">>pictureBoxWizard.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxWizard.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name=">>pictureBoxWizard.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelWizard.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -183,16 +183,16 @@
   <data name="labelWizard.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelWizard.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelWizard.Name" xml:space="preserve">
     <value>labelWizard</value>
   </data>
-  <data name=">>labelWizard.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelWizard.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWizard.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name=">>labelWizard.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWizard.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="XSHelpButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="XSHelpButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>XSHelpButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.Name" xml:space="preserve">
     <value>XSHelpButton</value>
   </data>
-  <data name=">>XSHelpButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.HelpButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>XSHelpButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name=">>XSHelpButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="panelTop.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panelTop.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelTop.Name" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name=">>panelTop.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelTop.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelTop.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelTop.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>panelTop.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelTop.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelTop.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -273,16 +273,16 @@
   <data name="wizardProgress.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>wizardProgress.Name" xml:space="preserve">
+  <data name="&gt;&gt;wizardProgress.Name" xml:space="preserve">
     <value>wizardProgress</value>
   </data>
-  <data name=">>wizardProgress.Type" xml:space="preserve">
+  <data name="&gt;&gt;wizardProgress.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.WizardProgress, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>wizardProgress.Parent" xml:space="preserve">
+  <data name="&gt;&gt;wizardProgress.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>wizardProgress.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;wizardProgress.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
@@ -306,16 +306,16 @@
   <data name="xenTabControlBody.Text" xml:space="preserve">
     <value>xenTabControlBody</value>
   </data>
-  <data name=">>xenTabControlBody.Name" xml:space="preserve">
+  <data name="&gt;&gt;xenTabControlBody.Name" xml:space="preserve">
     <value>xenTabControlBody</value>
   </data>
-  <data name=">>xenTabControlBody.Type" xml:space="preserve">
+  <data name="&gt;&gt;xenTabControlBody.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>xenTabControlBody.Parent" xml:space="preserve">
+  <data name="&gt;&gt;xenTabControlBody.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>xenTabControlBody.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;xenTabControlBody.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="deprecationBanner.AutoScroll" type="System.Boolean, mscorlib">
@@ -345,16 +345,16 @@
   <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>deprecationBanner.Name" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
     <value>deprecationBanner</value>
   </data>
-  <data name=">>deprecationBanner.Type" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>deprecationBanner.Parent" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>deprecationBanner.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -372,16 +372,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -405,16 +405,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -450,16 +450,16 @@
   <data name="buttonPrevious.Text" xml:space="preserve">
     <value>&lt; 上一步(&amp;P)</value>
   </data>
-  <data name=">>buttonPrevious.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonPrevious.Name" xml:space="preserve">
     <value>buttonPrevious</value>
   </data>
-  <data name=">>buttonPrevious.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonPrevious.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonPrevious.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonPrevious.Parent" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
   </data>
-  <data name=">>buttonPrevious.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonPrevious.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -486,16 +486,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanelNavigation.AutoSize" type="System.Boolean, mscorlib">
@@ -531,16 +531,16 @@
   <data name="buttonNext.Text" xml:space="preserve">
     <value>下一步(&amp;N) &gt;</value>
   </data>
-  <data name=">>buttonNext.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonNext.Name" xml:space="preserve">
     <value>buttonNext</value>
   </data>
-  <data name=">>buttonNext.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonNext.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonNext.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonNext.Parent" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
   </data>
-  <data name=">>buttonNext.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonNext.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelNavigation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -564,16 +564,16 @@
   <data name="tableLayoutPanelNavigation.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>tableLayoutPanelNavigation.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNavigation.Name" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
   </data>
-  <data name=">>tableLayoutPanelNavigation.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNavigation.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelNavigation.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNavigation.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanelNavigation.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNavigation.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelNavigation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -606,10 +606,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>XenWizardBase</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>XenWizardBase</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

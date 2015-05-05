@@ -121,31 +121,31 @@
   <data name="pictureBoxWizard.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name=">>pictureBoxWizard.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.Name" xml:space="preserve">
     <value>pictureBoxWizard</value>
   </data>
-  <data name=">>pictureBoxWizard.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxWizard.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name=">>pictureBoxWizard.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWizard.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="XSHelpButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name=">>XSHelpButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.Name" xml:space="preserve">
     <value>XSHelpButton</value>
   </data>
-  <data name=">>XSHelpButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.HelpButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>XSHelpButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name=">>XSHelpButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;XSHelpButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -160,10 +160,10 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NewSRWizard</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.XenWizardBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

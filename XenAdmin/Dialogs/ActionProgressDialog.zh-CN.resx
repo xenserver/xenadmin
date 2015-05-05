@@ -147,16 +147,16 @@
   <data name="labelStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
     <value>labelStatus</value>
   </data>
-  <data name=">>labelStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="progressBar1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -177,16 +177,16 @@
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>progressBar1.Name" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
   </data>
-  <data name=">>progressBar1.Type" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>progressBar1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>progressBar1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -222,16 +222,16 @@
   <data name="icon.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>icon.Name" xml:space="preserve">
+  <data name="&gt;&gt;icon.Name" xml:space="preserve">
     <value>icon</value>
   </data>
-  <data name=">>icon.Type" xml:space="preserve">
+  <data name="&gt;&gt;icon.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>icon.Parent" xml:space="preserve">
+  <data name="&gt;&gt;icon.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>icon.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;icon.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -261,16 +261,16 @@
   <data name="buttonClose.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>buttonClose.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
     <value>buttonClose</value>
   </data>
-  <data name=">>buttonClose.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonClose.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>buttonClose.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
@@ -297,16 +297,16 @@
   <data name="buttonCancel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelBottom.AutoSize" type="System.Boolean, mscorlib">
@@ -336,16 +336,16 @@
   <data name="labelBottom.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelBottom.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelBottom.Name" xml:space="preserve">
     <value>labelBottom</value>
   </data>
-  <data name=">>labelBottom.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBottom.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelBottom.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBottom.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelBottom.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBottom.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelException.AutoSize" type="System.Boolean, mscorlib">
@@ -375,16 +375,16 @@
   <data name="labelException.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelException.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelException.Name" xml:space="preserve">
     <value>labelException</value>
   </data>
-  <data name=">>labelException.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelException.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelException.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelException.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelException.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelException.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelSubActionStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -411,16 +411,16 @@
   <data name="labelSubActionStatus.Text" xml:space="preserve">
     <value>子操作进度</value>
   </data>
-  <data name=">>labelSubActionStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelSubActionStatus.Name" xml:space="preserve">
     <value>labelSubActionStatus</value>
   </data>
-  <data name=">>labelSubActionStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelSubActionStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelSubActionStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelSubActionStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelSubActionStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelSubActionStatus.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelTop.AutoSize" type="System.Boolean, mscorlib">
@@ -453,16 +453,16 @@
   <data name="labelTop.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelTop.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
     <value>labelTop</value>
   </data>
-  <data name=">>labelTop.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTop.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelTop.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTop.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelTop.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTop.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -483,16 +483,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -525,10 +525,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>XenCenter</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ActionProgressDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

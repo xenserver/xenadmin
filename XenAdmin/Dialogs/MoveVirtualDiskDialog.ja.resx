@@ -135,10 +135,10 @@
   <data name="toolTipContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>toolTipContainer1.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Name" xml:space="preserve">
     <value>toolTipContainer1</value>
   </data>
-  <data name=">>toolTipContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -162,10 +162,10 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -198,10 +198,10 @@
   <data name="label1.Text" xml:space="preserve">
     <value>この VM の移動先ストレージ リポジトリを選択します。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolTipContainer2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -228,16 +228,16 @@
   <data name="buttonMove.Text" xml:space="preserve">
     <value>移動(&amp;M)</value>
   </data>
-  <data name=">>buttonMove.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonMove.Name" xml:space="preserve">
     <value>buttonMove</value>
   </data>
-  <data name=">>buttonMove.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonMove.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonMove.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonMove.Parent" xml:space="preserve">
     <value>toolTipContainer2</value>
   </data>
-  <data name=">>buttonMove.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonMove.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainer2.Font" type="System.Drawing.Font, System.Drawing">
@@ -252,16 +252,16 @@
   <data name="toolTipContainer2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>toolTipContainer2.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer2.Name" xml:space="preserve">
     <value>toolTipContainer2</value>
   </data>
-  <data name=">>toolTipContainer2.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolTipContainer2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>toolTipContainer2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="srPicker1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -282,16 +282,16 @@
   <data name="srPicker1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>srPicker1.Name" xml:space="preserve">
+  <data name="&gt;&gt;srPicker1.Name" xml:space="preserve">
     <value>srPicker1</value>
   </data>
-  <data name=">>srPicker1.Type" xml:space="preserve">
+  <data name="&gt;&gt;srPicker1.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.ImportVMWizard_Pages.SrPicker, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>srPicker1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;srPicker1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>srPicker1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;srPicker1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -327,16 +327,16 @@
   <data name="labelBlurb.Text" xml:space="preserve">
     <value>この仮想マシンの移動先ストレージ リポジトリを選択します。</value>
   </data>
-  <data name=">>labelBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name=">>labelBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Font" type="System.Drawing.Font, System.Drawing">
@@ -354,16 +354,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -390,16 +390,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -417,10 +417,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>仮想ディスクの移動</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MoveVirtualDiskDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

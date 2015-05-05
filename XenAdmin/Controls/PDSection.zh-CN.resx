@@ -144,16 +144,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>标题</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>groupBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name=">>groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>groupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="chevron.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -198,16 +198,16 @@
   <data name="chevron.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>chevron.Name" xml:space="preserve">
+  <data name="&gt;&gt;chevron.Name" xml:space="preserve">
     <value>chevron</value>
   </data>
-  <data name=">>chevron.Type" xml:space="preserve">
+  <data name="&gt;&gt;chevron.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>chevron.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chevron.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>chevron.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chevron.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -249,10 +249,10 @@
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name=">>contextMenuStrip1.Name" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
   </data>
-  <data name=">>contextMenuStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dataGridViewEx1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -285,16 +285,16 @@
   <data name="dataGridViewEx1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>dataGridViewEx1.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewEx1.Name" xml:space="preserve">
     <value>dataGridViewEx1</value>
   </data>
-  <data name=">>dataGridViewEx1.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewEx1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>dataGridViewEx1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewEx1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>dataGridViewEx1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewEx1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -306,28 +306,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 150</value>
   </data>
-  <data name=">>copyToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
     <value>copyToolStripMenuItem</value>
   </data>
-  <data name=">>copyToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>KeyColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;KeyColumn.Name" xml:space="preserve">
     <value>KeyColumn</value>
   </data>
-  <data name=">>KeyColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;KeyColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ValueColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;ValueColumn.Name" xml:space="preserve">
     <value>ValueColumn</value>
   </data>
-  <data name=">>ValueColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;ValueColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PDSection</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

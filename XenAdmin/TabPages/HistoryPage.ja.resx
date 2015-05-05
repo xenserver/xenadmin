@@ -204,16 +204,16 @@
   <data name="toolStripTop.Text" xml:space="preserve">
     <value>toolStrip1</value>
   </data>
-  <data name=">>toolStripTop.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripTop.Name" xml:space="preserve">
     <value>toolStripTop</value>
   </data>
-  <data name=">>toolStripTop.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripTop.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripTop.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolStripTop.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>toolStripTop.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolStripTop.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -334,16 +334,16 @@
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>dataGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Name" xml:space="preserve">
     <value>dataGridView</value>
   </data>
-  <data name=">>dataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>dataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>dataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -361,16 +361,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -403,16 +403,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -433,88 +433,88 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>786, 487</value>
   </data>
-  <data name=">>toolStripDdbFilterStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripDdbFilterStatus.Name" xml:space="preserve">
     <value>toolStripDdbFilterStatus</value>
   </data>
-  <data name=">>toolStripDdbFilterStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripDdbFilterStatus.Type" xml:space="preserve">
     <value>XenAdmin.Controls.FilterStatusToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripDdbFilterLocation.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripDdbFilterLocation.Name" xml:space="preserve">
     <value>toolStripDdbFilterLocation</value>
   </data>
-  <data name=">>toolStripDdbFilterLocation.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripDdbFilterLocation.Type" xml:space="preserve">
     <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripDdbFilterDates.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripDdbFilterDates.Name" xml:space="preserve">
     <value>toolStripDdbFilterDates</value>
   </data>
-  <data name=">>toolStripDdbFilterDates.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripDdbFilterDates.Type" xml:space="preserve">
     <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSplitButtonDismiss.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSplitButtonDismiss.Name" xml:space="preserve">
     <value>toolStripSplitButtonDismiss</value>
   </data>
-  <data name=">>toolStripSplitButtonDismiss.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSplitButtonDismiss.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tsmiDismissAll.Name" xml:space="preserve">
+  <data name="&gt;&gt;tsmiDismissAll.Name" xml:space="preserve">
     <value>tsmiDismissAll</value>
   </data>
-  <data name=">>tsmiDismissAll.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsmiDismissAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tsmiDismissSelected.Name" xml:space="preserve">
+  <data name="&gt;&gt;tsmiDismissSelected.Name" xml:space="preserve">
     <value>tsmiDismissSelected</value>
   </data>
-  <data name=">>tsmiDismissSelected.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsmiDismissSelected.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
     <value>toolStripLabelFiltersOnOff</value>
   </data>
-  <data name=">>toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnExpander.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnExpander.Name" xml:space="preserve">
     <value>columnExpander</value>
   </data>
-  <data name=">>columnExpander.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnExpander.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnStatus.Name" xml:space="preserve">
     <value>columnStatus</value>
   </data>
-  <data name=">>columnStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnMessage.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnMessage.Name" xml:space="preserve">
     <value>columnMessage</value>
   </data>
-  <data name=">>columnMessage.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnMessage.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnLocation.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnLocation.Name" xml:space="preserve">
     <value>columnLocation</value>
   </data>
-  <data name=">>columnLocation.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnLocation.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnDate.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnDate.Name" xml:space="preserve">
     <value>columnDate</value>
   </data>
-  <data name=">>columnDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnActions.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnActions.Name" xml:space="preserve">
     <value>columnActions</value>
   </data>
-  <data name=">>columnActions.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnActions.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HistoryPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

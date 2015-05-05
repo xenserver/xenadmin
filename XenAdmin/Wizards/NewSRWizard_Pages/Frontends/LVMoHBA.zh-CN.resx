@@ -144,16 +144,16 @@
   <data name="labelCreate.Text" xml:space="preserve">
     <value>选择要在其上创建新 SR 的 LUN(&amp;L):</value>
   </data>
-  <data name=">>labelCreate.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelCreate.Name" xml:space="preserve">
     <value>labelCreate</value>
   </data>
-  <data name=">>labelCreate.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCreate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelCreate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCreate.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelCreate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCreate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="colCheck.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -213,16 +213,16 @@
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>dataGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Name" xml:space="preserve">
     <value>dataGridView</value>
   </data>
-  <data name=">>dataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>dataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>dataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonSelectAll.Location" type="System.Drawing.Point, System.Drawing">
@@ -237,16 +237,16 @@
   <data name="buttonSelectAll.Text" xml:space="preserve">
     <value>全选(&amp;S)</value>
   </data>
-  <data name=">>buttonSelectAll.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonSelectAll.Name" xml:space="preserve">
     <value>buttonSelectAll</value>
   </data>
-  <data name=">>buttonSelectAll.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSelectAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonSelectAll.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonSelectAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>buttonSelectAll.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonSelectAll.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="buttonClearAll.Location" type="System.Drawing.Point, System.Drawing">
@@ -261,16 +261,16 @@
   <data name="buttonClearAll.Text" xml:space="preserve">
     <value>全部清除(&amp;C)</value>
   </data>
-  <data name=">>buttonClearAll.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonClearAll.Name" xml:space="preserve">
     <value>buttonClearAll</value>
   </data>
-  <data name=">>buttonClearAll.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonClearAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonClearAll.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonClearAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>buttonClearAll.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonClearAll.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -288,16 +288,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -318,16 +318,16 @@
   <data name="labelReattach.Text" xml:space="preserve">
     <value>选择要重新连接的 LUN(&amp;L):</value>
   </data>
-  <data name=">>labelReattach.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelReattach.Name" xml:space="preserve">
     <value>labelReattach</value>
   </data>
-  <data name=">>labelReattach.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelReattach.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelReattach.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelReattach.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelReattach.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelReattach.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -339,40 +339,40 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>560, 424</value>
   </data>
-  <data name=">>colCheck.Name" xml:space="preserve">
+  <data name="&gt;&gt;colCheck.Name" xml:space="preserve">
     <value>colCheck</value>
   </data>
-  <data name=">>colCheck.Type" xml:space="preserve">
+  <data name="&gt;&gt;colCheck.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colSize.Name" xml:space="preserve">
+  <data name="&gt;&gt;colSize.Name" xml:space="preserve">
     <value>colSize</value>
   </data>
-  <data name=">>colSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;colSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colSerial.Name" xml:space="preserve">
+  <data name="&gt;&gt;colSerial.Name" xml:space="preserve">
     <value>colSerial</value>
   </data>
-  <data name=">>colSerial.Type" xml:space="preserve">
+  <data name="&gt;&gt;colSerial.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colId.Name" xml:space="preserve">
+  <data name="&gt;&gt;colId.Name" xml:space="preserve">
     <value>colId</value>
   </data>
-  <data name=">>colId.Type" xml:space="preserve">
+  <data name="&gt;&gt;colId.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colDetails.Name" xml:space="preserve">
+  <data name="&gt;&gt;colDetails.Name" xml:space="preserve">
     <value>colDetails</value>
   </data>
-  <data name=">>colDetails.Type" xml:space="preserve">
+  <data name="&gt;&gt;colDetails.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LVMoHBA</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="hostMemoryControls.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>hostMemoryControls.Name" xml:space="preserve">
+  <data name="&gt;&gt;hostMemoryControls.Name" xml:space="preserve">
     <value>hostMemoryControls</value>
   </data>
-  <data name=">>hostMemoryControls.Type" xml:space="preserve">
+  <data name="&gt;&gt;hostMemoryControls.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.HostMemoryControls, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>hostMemoryControls.Parent" xml:space="preserve">
+  <data name="&gt;&gt;hostMemoryControls.Parent" xml:space="preserve">
     <value>panel</value>
   </data>
-  <data name=">>hostMemoryControls.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;hostMemoryControls.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="memoryRowLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="memoryRowLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>memoryRowLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.Name" xml:space="preserve">
     <value>memoryRowLabel</value>
   </data>
-  <data name=">>memoryRowLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemoryRowLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>memoryRowLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.Parent" xml:space="preserve">
     <value>panel</value>
   </data>
-  <data name=">>memoryRowLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel.Location" type="System.Drawing.Point, System.Drawing">
@@ -192,16 +192,16 @@
   <data name="panel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>panel.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel.Name" xml:space="preserve">
     <value>panel</value>
   </data>
-  <data name=">>panel.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelWithBorder, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>panel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -216,10 +216,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>788, 118</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HostMemoryRow</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

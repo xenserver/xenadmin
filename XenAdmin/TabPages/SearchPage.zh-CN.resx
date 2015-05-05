@@ -141,16 +141,16 @@
   <data name="buttonNewSearch.Text" xml:space="preserve">
     <value>新建搜索(&amp;N)</value>
   </data>
-  <data name=">>buttonNewSearch.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonNewSearch.Name" xml:space="preserve">
     <value>buttonNewSearch</value>
   </data>
-  <data name=">>buttonNewSearch.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonNewSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonNewSearch.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonNewSearch.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>buttonNewSearch.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonNewSearch.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonEditSearch.Location" type="System.Drawing.Point, System.Drawing">
@@ -168,16 +168,16 @@
   <data name="buttonEditSearch.Text" xml:space="preserve">
     <value>编辑搜索(&amp;E)</value>
   </data>
-  <data name=">>buttonEditSearch.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonEditSearch.Name" xml:space="preserve">
     <value>buttonEditSearch</value>
   </data>
-  <data name=">>buttonEditSearch.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonEditSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonEditSearch.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonEditSearch.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>buttonEditSearch.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonEditSearch.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="contextMenuStripSearches.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -186,10 +186,10 @@
   <data name="contextMenuStripSearches.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name=">>contextMenuStripSearches.Name" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStripSearches.Name" xml:space="preserve">
     <value>contextMenuStripSearches</value>
   </data>
-  <data name=">>contextMenuStripSearches.Type" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStripSearches.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ddButtonSavedSearches.Location" type="System.Drawing.Point, System.Drawing">
@@ -213,16 +213,16 @@
   <data name="ddButtonSavedSearches.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name=">>ddButtonSavedSearches.Name" xml:space="preserve">
+  <data name="&gt;&gt;ddButtonSavedSearches.Name" xml:space="preserve">
     <value>ddButtonSavedSearches</value>
   </data>
-  <data name=">>ddButtonSavedSearches.Type" xml:space="preserve">
+  <data name="&gt;&gt;ddButtonSavedSearches.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ddButtonSavedSearches.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ddButtonSavedSearches.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>ddButtonSavedSearches.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ddButtonSavedSearches.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
@@ -240,16 +240,16 @@
   <data name="buttonExport.Text" xml:space="preserve">
     <value>导出(&amp;X)...</value>
   </data>
-  <data name=">>buttonExport.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonExport.Name" xml:space="preserve">
     <value>buttonExport</value>
   </data>
-  <data name=">>buttonExport.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonExport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonExport.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonExport.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>buttonExport.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonExport.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="buttonImport.Location" type="System.Drawing.Point, System.Drawing">
@@ -267,16 +267,16 @@
   <data name="buttonImport.Text" xml:space="preserve">
     <value>导入(&amp;I)...</value>
   </data>
-  <data name=">>buttonImport.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonImport.Name" xml:space="preserve">
     <value>buttonImport</value>
   </data>
-  <data name=">>buttonImport.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonImport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonImport.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonImport.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>buttonImport.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonImport.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name=">>panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="OutputPanel.AutoSize" type="System.Boolean, mscorlib">
@@ -324,16 +324,16 @@
   <data name="OutputPanel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>OutputPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;OutputPanel.Name" xml:space="preserve">
     <value>OutputPanel</value>
   </data>
-  <data name=">>OutputPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;OutputPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.SearchOutput, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>OutputPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;OutputPanel.Parent" xml:space="preserve">
     <value>panel4</value>
   </data>
-  <data name=">>OutputPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;OutputPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -351,16 +351,16 @@
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panel4.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel4.Name" xml:space="preserve">
     <value>panel4</value>
   </data>
-  <data name=">>panel4.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel4.Parent" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name=">>panel4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="Searcher.AutoScroll" type="System.Boolean, mscorlib">
@@ -384,16 +384,16 @@
   <data name="Searcher.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>Searcher.Name" xml:space="preserve">
+  <data name="&gt;&gt;Searcher.Name" xml:space="preserve">
     <value>Searcher</value>
   </data>
-  <data name=">>Searcher.Type" xml:space="preserve">
+  <data name="&gt;&gt;Searcher.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.Searcher, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>Searcher.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Searcher.Parent" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name=">>Searcher.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Searcher.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -414,16 +414,16 @@
   <data name="tableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>tableLayoutPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel.Name" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name=">>tableLayoutPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>tableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -435,16 +435,16 @@
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>648, 481</value>
   </data>
-  <data name=">>pageContainerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>pageContainerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -459,10 +459,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>648, 518</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SearchPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

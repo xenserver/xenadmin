@@ -141,16 +141,16 @@
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>651, 509</value>
   </data>
-  <data name=">>ContentPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name=">>ContentPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;ContentPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ContentPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ContentPanel.Parent" xml:space="preserve">
     <value>blueBorder</value>
   </data>
-  <data name=">>ContentPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ContentPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="verticalTabs.Font" type="System.Drawing.Font, System.Drawing">
@@ -159,16 +159,16 @@
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 511</value>
   </data>
-  <data name=">>verticalTabs.Name" xml:space="preserve">
+  <data name="&gt;&gt;verticalTabs.Name" xml:space="preserve">
     <value>verticalTabs</value>
   </data>
-  <data name=">>verticalTabs.Type" xml:space="preserve">
+  <data name="&gt;&gt;verticalTabs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.VerticalTabs, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>verticalTabs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;verticalTabs.Parent" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
-  <data name=">>verticalTabs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;verticalTabs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -177,16 +177,16 @@
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>780, 529</value>
   </data>
-  <data name=">>cancelButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name=">>cancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>cancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>cancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -198,16 +198,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name=">>okButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name=">>okButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>okButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>okButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="splitContainer.Font" type="System.Drawing.Font, System.Drawing">
@@ -216,31 +216,31 @@
   <data name="splitContainer.Panel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name=">>splitContainer.Panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
-  <data name=">>splitContainer.Panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer.Panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
     <value>splitContainer</value>
   </data>
-  <data name=">>splitContainer.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="splitContainer.Panel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name=">>splitContainer.Panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
     <value>splitContainer.Panel2</value>
   </data>
-  <data name=">>splitContainer.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer.Panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
     <value>splitContainer</value>
   </data>
-  <data name=">>splitContainer.Panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
@@ -249,16 +249,16 @@
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>206</value>
   </data>
-  <data name=">>splitContainer.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
   </data>
-  <data name=">>splitContainer.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>splitContainer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -276,10 +276,10 @@
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 600</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PropertiesDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.VerticallyTabbedDialog, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -144,16 +144,16 @@
   <data name="GroupsLabel.Text" xml:space="preserve">
     <value>分组方式</value>
   </data>
-  <data name=">>GroupsLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;GroupsLabel.Name" xml:space="preserve">
     <value>GroupsLabel</value>
   </data>
-  <data name=">>GroupsLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;GroupsLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GroupsLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GroupsLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>GroupsLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GroupsLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="FiltersLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -180,16 +180,16 @@
   <data name="FiltersLabel.Text" xml:space="preserve">
     <value>过滤器</value>
   </data>
-  <data name=">>FiltersLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;FiltersLabel.Name" xml:space="preserve">
     <value>FiltersLabel</value>
   </data>
-  <data name=">>FiltersLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;FiltersLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>FiltersLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;FiltersLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>FiltersLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;FiltersLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="SearchLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -216,16 +216,16 @@
   <data name="SearchLabel.Text" xml:space="preserve">
     <value>搜索内容</value>
   </data>
-  <data name=">>SearchLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;SearchLabel.Name" xml:space="preserve">
     <value>SearchLabel</value>
   </data>
-  <data name=">>SearchLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;SearchLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>SearchLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SearchLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>SearchLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SearchLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="buttonSave.Text" xml:space="preserve">
     <value>保存(&amp;E)...</value>
   </data>
-  <data name=">>buttonSave.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
     <value>buttonSave</value>
   </data>
-  <data name=">>buttonSave.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSave.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonSave.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>buttonSave.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -279,16 +279,16 @@
   <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>buttonClose.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
     <value>buttonClose</value>
   </data>
-  <data name=">>buttonClose.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonClose.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>buttonClose.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="searchFor.AutoSize" type="System.Boolean, mscorlib">
@@ -309,16 +309,16 @@
   <data name="searchFor.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>searchFor.Name" xml:space="preserve">
+  <data name="&gt;&gt;searchFor.Name" xml:space="preserve">
     <value>searchFor</value>
   </data>
-  <data name=">>searchFor.Type" xml:space="preserve">
+  <data name="&gt;&gt;searchFor.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.SearchFor, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>searchFor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;searchFor.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>searchFor.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;searchFor.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="QueryElement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="QueryElement.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>QueryElement.Name" xml:space="preserve">
+  <data name="&gt;&gt;QueryElement.Name" xml:space="preserve">
     <value>QueryElement</value>
   </data>
-  <data name=">>QueryElement.Type" xml:space="preserve">
+  <data name="&gt;&gt;QueryElement.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.QueryElement, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>QueryElement.Parent" xml:space="preserve">
+  <data name="&gt;&gt;QueryElement.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>QueryElement.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;QueryElement.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="GroupingControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -363,16 +363,16 @@
   <data name="GroupingControl.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>GroupingControl.Name" xml:space="preserve">
+  <data name="&gt;&gt;GroupingControl.Name" xml:space="preserve">
     <value>GroupingControl</value>
   </data>
-  <data name=">>GroupingControl.Type" xml:space="preserve">
+  <data name="&gt;&gt;GroupingControl.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.GroupingControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>GroupingControl.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GroupingControl.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>GroupingControl.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GroupingControl.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -390,10 +390,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>484, 187</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Searcher</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -156,16 +156,16 @@
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>pictureBox2.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
     <value>pictureBox2</value>
   </data>
-  <data name=">>pictureBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
     <value>GraphTypeGroupBox</value>
   </data>
-  <data name=">>pictureBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -186,16 +186,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>GraphTypeGroupBox</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="GraphAreasRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -219,16 +219,16 @@
   <data name="GraphAreasRadioButton.Text" xml:space="preserve">
     <value>面积图(&amp;A)</value>
   </data>
-  <data name=">>GraphAreasRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;GraphAreasRadioButton.Name" xml:space="preserve">
     <value>GraphAreasRadioButton</value>
   </data>
-  <data name=">>GraphAreasRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;GraphAreasRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GraphAreasRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GraphAreasRadioButton.Parent" xml:space="preserve">
     <value>GraphTypeGroupBox</value>
   </data>
-  <data name=">>GraphAreasRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GraphAreasRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="GraphLinesRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -252,16 +252,16 @@
   <data name="GraphLinesRadioButton.Text" xml:space="preserve">
     <value>线图(&amp;L)</value>
   </data>
-  <data name=">>GraphLinesRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;GraphLinesRadioButton.Name" xml:space="preserve">
     <value>GraphLinesRadioButton</value>
   </data>
-  <data name=">>GraphLinesRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;GraphLinesRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GraphLinesRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GraphLinesRadioButton.Parent" xml:space="preserve">
     <value>GraphTypeGroupBox</value>
   </data>
-  <data name=">>GraphLinesRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GraphLinesRadioButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="GraphTypeGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -285,16 +285,16 @@
   <data name="GraphTypeGroupBox.Text" xml:space="preserve">
     <value>图表类型</value>
   </data>
-  <data name=">>GraphTypeGroupBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;GraphTypeGroupBox.Name" xml:space="preserve">
     <value>GraphTypeGroupBox</value>
   </data>
-  <data name=">>GraphTypeGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;GraphTypeGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>GraphTypeGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GraphTypeGroupBox.Parent" xml:space="preserve">
     <value>GraphsTableLayoutPanel</value>
   </data>
-  <data name=">>GraphTypeGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GraphTypeGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
@@ -321,16 +321,16 @@
   <data name="label5.Text" xml:space="preserve">
     <value>可以在此处配置 XenCenter“性能”选项卡上所显示的性能图表的外观。</value>
   </data>
-  <data name=">>label5.Name" xml:space="preserve">
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
-  <data name=">>label5.Type" xml:space="preserve">
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>GraphsTableLayoutPanel</value>
   </data>
-  <data name=">>label5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="GraphsTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -351,16 +351,16 @@
   <data name="GraphsTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>GraphsTableLayoutPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;GraphsTableLayoutPanel.Name" xml:space="preserve">
     <value>GraphsTableLayoutPanel</value>
   </data>
-  <data name=">>GraphsTableLayoutPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;GraphsTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GraphsTableLayoutPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GraphsTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>GraphsTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GraphsTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="GraphsTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -375,10 +375,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>629, 411</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GraphsOptionsPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

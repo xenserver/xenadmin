@@ -138,16 +138,16 @@
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
     <value>允许 XenCenter 在应用更新后立即执行更新后任务(&amp;A)。</value>
   </data>
-  <data name=">>AutomaticRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
   </data>
-  <data name=">>AutomaticRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;AutomaticRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AutomaticRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AutomaticRadioButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>AutomaticRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AutomaticRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ManualRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -177,16 +177,16 @@
   <data name="ManualRadioButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
-  <data name=">>ManualRadioButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;ManualRadioButton.Name" xml:space="preserve">
     <value>ManualRadioButton</value>
   </data>
-  <data name=">>ManualRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;ManualRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ManualRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ManualRadioButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>ManualRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ManualRadioButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -207,16 +207,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>要执行的任务:</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="textBoxLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -234,16 +234,16 @@
   <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>textBoxLog.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.Name" xml:space="preserve">
     <value>textBoxLog</value>
   </data>
-  <data name=">>textBoxLog.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxLog.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>textBoxLog.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -264,16 +264,16 @@
   <data name="button1.Text" xml:space="preserve">
     <value>将任务保存到文件(&amp;S)...</value>
   </data>
-  <data name=">>button1.Name" xml:space="preserve">
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
-  <data name=">>button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -300,16 +300,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>安装更新后，需要先执行若干项更新后任务(例如重新启动服务器)，更新后的服务器才能重新完全起作用。这些任务可以自动执行，您也可以选择亲自执行。</value>
   </data>
-  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -333,16 +333,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>您要执行哪项操作?</value>
   </data>
-  <data name=">>label3.Name" xml:space="preserve">
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name=">>label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -360,16 +360,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -384,10 +384,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>563, 347</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_ModePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -128,16 +128,16 @@
   <data name="nudFlexvols.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>nudFlexvols.Name" xml:space="preserve">
+  <data name="&gt;&gt;nudFlexvols.Name" xml:space="preserve">
     <value>nudFlexvols</value>
   </data>
-  <data name=">>nudFlexvols.Type" xml:space="preserve">
+  <data name="&gt;&gt;nudFlexvols.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>nudFlexvols.Parent" xml:space="preserve">
+  <data name="&gt;&gt;nudFlexvols.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>nudFlexvols.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;nudFlexvols.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelFlexvols.AutoSize" type="System.Boolean, mscorlib">
@@ -155,16 +155,16 @@
   <data name="labelFlexvols.Text" xml:space="preserve">
     <value>使用する FlexVol の数(&amp;V):</value>
   </data>
-  <data name=">>labelFlexvols.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelFlexvols.Name" xml:space="preserve">
     <value>labelFlexvols</value>
   </data>
-  <data name=">>labelFlexvols.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelFlexvols.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelFlexvols.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelFlexvols.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelFlexvols.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelFlexvols.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -192,16 +192,16 @@
   <data name="checkBoxDedup.Text" xml:space="preserve">
     <value>ONTAP 重複排除を有効にする(&amp;D)</value>
   </data>
-  <data name=">>checkBoxDedup.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDedup.Name" xml:space="preserve">
     <value>checkBoxDedup</value>
   </data>
-  <data name=">>checkBoxDedup.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDedup.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxDedup.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDedup.Parent" xml:space="preserve">
     <value>toolTipContainerDedup</value>
   </data>
-  <data name=">>checkBoxDedup.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDedup.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerDedup.Location" type="System.Drawing.Point, System.Drawing">
@@ -213,16 +213,16 @@
   <data name="toolTipContainerDedup.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>toolTipContainerDedup.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerDedup.Name" xml:space="preserve">
     <value>toolTipContainerDedup</value>
   </data>
-  <data name=">>toolTipContainerDedup.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerDedup.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolTipContainerDedup.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerDedup.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>toolTipContainerDedup.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainerDedup.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="checkBoxThin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="checkBoxThin.Text" xml:space="preserve">
     <value>NetApp シン プロビジョニングを使用する(&amp;T)</value>
   </data>
-  <data name=">>checkBoxThin.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxThin.Name" xml:space="preserve">
     <value>checkBoxThin</value>
   </data>
-  <data name=">>checkBoxThin.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxThin.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxThin.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxThin.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>checkBoxThin.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxThin.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="checkBoxHttps.AutoSize" type="System.Boolean, mscorlib">
@@ -270,16 +270,16 @@
   <data name="checkBoxHttps.Text" xml:space="preserve">
     <value>HTTPS を使用する(&amp;S)</value>
   </data>
-  <data name=">>checkBoxHttps.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxHttps.Name" xml:space="preserve">
     <value>checkBoxHttps</value>
   </data>
-  <data name=">>checkBoxHttps.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxHttps.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxHttps.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxHttps.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>checkBoxHttps.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxHttps.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelPort.AutoSize" type="System.Boolean, mscorlib">
@@ -297,16 +297,16 @@
   <data name="labelPort.Text" xml:space="preserve">
     <value>ポート(&amp;O):</value>
   </data>
-  <data name=">>labelPort.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelPort.Name" xml:space="preserve">
     <value>labelPort</value>
   </data>
-  <data name=">>labelPort.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelPort.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelPort.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelPort.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelPort.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="helplinkFlexvols.AutoSize" type="System.Boolean, mscorlib">
@@ -324,16 +324,16 @@
   <data name="helplinkFlexvols.Text" xml:space="preserve">
     <value>選択方法</value>
   </data>
-  <data name=">>helplinkFlexvols.Name" xml:space="preserve">
+  <data name="&gt;&gt;helplinkFlexvols.Name" xml:space="preserve">
     <value>helplinkFlexvols</value>
   </data>
-  <data name=">>helplinkFlexvols.Type" xml:space="preserve">
+  <data name="&gt;&gt;helplinkFlexvols.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>helplinkFlexvols.Parent" xml:space="preserve">
+  <data name="&gt;&gt;helplinkFlexvols.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>helplinkFlexvols.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;helplinkFlexvols.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="textBoxPort.Location" type="System.Drawing.Point, System.Drawing">
@@ -348,16 +348,16 @@
   <data name="textBoxPort.Text" xml:space="preserve">
     <value>80</value>
   </data>
-  <data name=">>textBoxPort.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPort.Name" xml:space="preserve">
     <value>textBoxPort</value>
   </data>
-  <data name=">>textBoxPort.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxPort.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPort.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>textBoxPort.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxPort.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="dataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>dataGridView1.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name=">>dataGridView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dataGridView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="listBoxSRs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -432,16 +432,16 @@
   <data name="listBoxSRs.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>listBoxSRs.Name" xml:space="preserve">
+  <data name="&gt;&gt;listBoxSRs.Name" xml:space="preserve">
     <value>listBoxSRs</value>
   </data>
-  <data name=">>listBoxSRs.Type" xml:space="preserve">
+  <data name="&gt;&gt;listBoxSRs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SRListBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>listBoxSRs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listBoxSRs.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>listBoxSRs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listBoxSRs.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="radioButtonNew.AutoSize" type="System.Boolean, mscorlib">
@@ -462,16 +462,16 @@
   <data name="radioButtonNew.Text" xml:space="preserve">
     <value>指定したアグリゲートに SR を作成する(&amp;C):</value>
   </data>
-  <data name=">>radioButtonNew.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNew.Name" xml:space="preserve">
     <value>radioButtonNew</value>
   </data>
-  <data name=">>radioButtonNew.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNew.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonNew.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNew.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>radioButtonNew.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNew.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="radioButtonReattach.AutoSize" type="System.Boolean, mscorlib">
@@ -492,16 +492,16 @@
   <data name="radioButtonReattach.Text" xml:space="preserve">
     <value>ファイラ上の既存の SR を再接続する(&amp;R):</value>
   </data>
-  <data name=">>radioButtonReattach.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonReattach.Name" xml:space="preserve">
     <value>radioButtonReattach</value>
   </data>
-  <data name=">>radioButtonReattach.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonReattach.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonReattach.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonReattach.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>radioButtonReattach.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonReattach.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -516,16 +516,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -546,16 +546,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -567,40 +567,40 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>531, 408</value>
   </data>
-  <data name=">>colAggregate.Name" xml:space="preserve">
+  <data name="&gt;&gt;colAggregate.Name" xml:space="preserve">
     <value>colAggregate</value>
   </data>
-  <data name=">>colAggregate.Type" xml:space="preserve">
+  <data name="&gt;&gt;colAggregate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colSize.Name" xml:space="preserve">
+  <data name="&gt;&gt;colSize.Name" xml:space="preserve">
     <value>colSize</value>
   </data>
-  <data name=">>colSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;colSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colDisks.Name" xml:space="preserve">
+  <data name="&gt;&gt;colDisks.Name" xml:space="preserve">
     <value>colDisks</value>
   </data>
-  <data name=">>colDisks.Type" xml:space="preserve">
+  <data name="&gt;&gt;colDisks.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colRaidType.Name" xml:space="preserve">
+  <data name="&gt;&gt;colRaidType.Name" xml:space="preserve">
     <value>colRaidType</value>
   </data>
-  <data name=">>colRaidType.Type" xml:space="preserve">
+  <data name="&gt;&gt;colRaidType.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>colAsis.Name" xml:space="preserve">
+  <data name="&gt;&gt;colAsis.Name" xml:space="preserve">
     <value>colAsis</value>
   </data>
-  <data name=">>colAsis.Type" xml:space="preserve">
+  <data name="&gt;&gt;colAsis.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NetApp</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

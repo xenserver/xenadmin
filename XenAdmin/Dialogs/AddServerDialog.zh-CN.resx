@@ -141,16 +141,16 @@
   <data name="AddButton.Text" xml:space="preserve">
     <value>添加(&amp;A)</value>
   </data>
-  <data name=">>AddButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.Name" xml:space="preserve">
     <value>AddButton</value>
   </data>
-  <data name=">>AddButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>AddButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AddButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="CancelButton2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="CancelButton2.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name=">>CancelButton2.Name" xml:space="preserve">
+  <data name="&gt;&gt;CancelButton2.Name" xml:space="preserve">
     <value>CancelButton2</value>
   </data>
-  <data name=">>CancelButton2.Type" xml:space="preserve">
+  <data name="&gt;&gt;CancelButton2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>CancelButton2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CancelButton2.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>CancelButton2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CancelButton2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ServerNameLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -213,16 +213,16 @@
   <data name="ServerNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>ServerNameLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameLabel.Name" xml:space="preserve">
     <value>ServerNameLabel</value>
   </data>
-  <data name=">>ServerNameLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ServerNameLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
   </data>
-  <data name=">>ServerNameLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="UsernameLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -252,16 +252,16 @@
   <data name="UsernameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>UsernameLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;UsernameLabel.Name" xml:space="preserve">
     <value>UsernameLabel</value>
   </data>
-  <data name=">>UsernameLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;UsernameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>UsernameLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;UsernameLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>UsernameLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;UsernameLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="PasswordLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -291,16 +291,16 @@
   <data name="PasswordLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>PasswordLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;PasswordLabel.Name" xml:space="preserve">
     <value>PasswordLabel</value>
   </data>
-  <data name=">>PasswordLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;PasswordLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>PasswordLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PasswordLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>PasswordLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PasswordLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="UsernameTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="UsernameTextBox.Text" xml:space="preserve">
     <value>root</value>
   </data>
-  <data name=">>UsernameTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;UsernameTextBox.Name" xml:space="preserve">
     <value>UsernameTextBox</value>
   </data>
-  <data name=">>UsernameTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;UsernameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>UsernameTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;UsernameTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>UsernameTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;UsernameTextBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="PasswordTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -348,16 +348,16 @@
   <data name="PasswordTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>PasswordTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;PasswordTextBox.Name" xml:space="preserve">
     <value>PasswordTextBox</value>
   </data>
-  <data name=">>PasswordTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;PasswordTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>PasswordTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PasswordTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>PasswordTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PasswordTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ServerNameComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -414,16 +414,16 @@
   <data name="labelError.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelError.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Name" xml:space="preserve">
     <value>labelError</value>
   </data>
-  <data name=">>labelError.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelError.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>labelError.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="pictureBoxError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -447,16 +447,16 @@
   <data name="pictureBoxError.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>pictureBoxError.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.Name" xml:space="preserve">
     <value>pictureBoxError</value>
   </data>
-  <data name=">>pictureBoxError.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxError.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>pictureBoxError.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxError.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanelCreds.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -480,16 +480,16 @@
   <data name="tableLayoutPanelCreds.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelCreds.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelCreds.Name" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
   </data>
-  <data name=">>tableLayoutPanelCreds.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelCreds.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelCreds.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelCreds.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name=">>tableLayoutPanelCreds.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelCreds.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelCreds.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -516,16 +516,16 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>用户登录凭据</value>
   </data>
-  <data name=">>groupBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name=">>groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
   </data>
-  <data name=">>groupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelInstructions.AutoSize" type="System.Boolean, mscorlib">
@@ -558,16 +558,16 @@
   <data name="labelInstructions.Text" xml:space="preserve">
     <value>输入要添加的服务器的主机名或 IP 地址，以及用于该服务器的用户登录凭据。</value>
   </data>
-  <data name=">>labelInstructions.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelInstructions.Name" xml:space="preserve">
     <value>labelInstructions</value>
   </data>
-  <data name=">>labelInstructions.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelInstructions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelInstructions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelInstructions.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
   </data>
-  <data name=">>labelInstructions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelInstructions.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -591,16 +591,16 @@
   <data name="comboBoxClouds.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>comboBoxClouds.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxClouds.Name" xml:space="preserve">
     <value>comboBoxClouds</value>
   </data>
-  <data name=">>comboBoxClouds.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxClouds.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>comboBoxClouds.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxClouds.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>comboBoxClouds.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxClouds.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -627,16 +627,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanelType.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -660,16 +660,16 @@
   <data name="tableLayoutPanelType.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name=">>tableLayoutPanelType.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelType.Name" xml:space="preserve">
     <value>tableLayoutPanelType</value>
   </data>
-  <data name=">>tableLayoutPanelType.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelType.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelType.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanelType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelType.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelType.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -690,16 +690,16 @@
   <data name="ServerNameComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>ServerNameComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameComboBox.Name" xml:space="preserve">
     <value>ServerNameComboBox</value>
   </data>
-  <data name=">>ServerNameComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ServerNameComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
   </data>
-  <data name=">>ServerNameComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ServerNameComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
@@ -717,10 +717,10 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -756,10 +756,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>添加新服务器</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AddServerDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

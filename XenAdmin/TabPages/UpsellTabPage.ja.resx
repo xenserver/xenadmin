@@ -148,31 +148,31 @@
   <data name="upsellPage1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>upsellPage1.Name" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.Name" xml:space="preserve">
     <value>upsellPage1</value>
   </data>
-  <data name=">>upsellPage1.Type" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.UpsellPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>upsellPage1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>upsellPage1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>510, 60</value>
   </data>
-  <data name=">>pageContainerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>pageContainerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -203,10 +203,10 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>TitleLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name=">>TitleLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -218,10 +218,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>510, 97</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UpsellTabPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

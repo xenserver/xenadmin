@@ -150,16 +150,16 @@
   <data name="txtPort.Text" xml:space="preserve">
     <value>27000</value>
   </data>
-  <data name=">>txtPort.Name" xml:space="preserve">
+  <data name="&gt;&gt;txtPort.Name" xml:space="preserve">
     <value>txtPort</value>
   </data>
-  <data name=">>txtPort.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>txtPort.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtPort.Parent" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>txtPort.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtPort.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblPort.AutoSize" type="System.Boolean, mscorlib">
@@ -189,16 +189,16 @@
   <data name="lblPort.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>lblPort.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblPort.Name" xml:space="preserve">
     <value>lblPort</value>
   </data>
-  <data name=">>lblPort.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblPort.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblPort.Parent" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>lblPort.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblPort.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblHost.AutoSize" type="System.Boolean, mscorlib">
@@ -228,16 +228,16 @@
   <data name="lblHost.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>lblHost.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblHost.Name" xml:space="preserve">
     <value>lblHost</value>
   </data>
-  <data name=">>lblHost.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblHost.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblHost.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblHost.Parent" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>lblHost.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblHost.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="txtHost.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -258,16 +258,16 @@
   <data name="txtHost.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>txtHost.Name" xml:space="preserve">
+  <data name="&gt;&gt;txtHost.Name" xml:space="preserve">
     <value>txtHost</value>
   </data>
-  <data name=">>txtHost.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtHost.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>txtHost.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtHost.Parent" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>txtHost.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtHost.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="flow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>btnCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
   </data>
-  <data name=">>btnCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>btnCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>flow</value>
   </data>
-  <data name=">>btnCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -333,16 +333,16 @@
   <data name="btnOK.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name=">>btnOK.Name" xml:space="preserve">
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
   </data>
-  <data name=">>btnOK.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>btnOK.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>flow</value>
   </data>
-  <data name=">>btnOK.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flow.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
@@ -360,16 +360,16 @@
   <data name="flow.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>flow.Name" xml:space="preserve">
+  <data name="&gt;&gt;flow.Name" xml:space="preserve">
     <value>flow</value>
   </data>
-  <data name=">>flow.Type" xml:space="preserve">
+  <data name="&gt;&gt;flow.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flow.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flow.Parent" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>flow.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flow.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="lblMain.AutoSize" type="System.Boolean, mscorlib">
@@ -399,16 +399,16 @@
   <data name="lblMain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>lblMain.Name" xml:space="preserve">
+  <data name="&gt;&gt;lblMain.Name" xml:space="preserve">
     <value>lblMain</value>
   </data>
-  <data name=">>lblMain.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lblMain.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblMain.Parent" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>lblMain.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblMain.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="table.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -429,16 +429,16 @@
   <data name="table.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name=">>table.Name" xml:space="preserve">
+  <data name="&gt;&gt;table.Name" xml:space="preserve">
     <value>table</value>
   </data>
-  <data name=">>table.Type" xml:space="preserve">
+  <data name="&gt;&gt;table.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>table.Parent" xml:space="preserve">
+  <data name="&gt;&gt;table.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>table.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;table.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="table.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -471,10 +471,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>ライセンス サーバーの設定</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SetStorageLinkLicenseServerDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

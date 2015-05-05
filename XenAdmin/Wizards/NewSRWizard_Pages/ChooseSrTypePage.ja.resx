@@ -141,16 +141,16 @@
   <data name="radioButtonNfs.Text" xml:space="preserve">
     <value>NFS VHD(&amp;V)</value>
   </data>
-  <data name=">>radioButtonNfs.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfs.Name" xml:space="preserve">
     <value>radioButtonNfs</value>
   </data>
-  <data name=">>radioButtonNfs.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfs.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonNfs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfs.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>radioButtonNfs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfs.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="radioButtonIscsi.AutoSize" type="System.Boolean, mscorlib">
@@ -174,16 +174,16 @@
   <data name="radioButtonIscsi.Text" xml:space="preserve">
     <value>ソフトウェア iSCSI(&amp;S)</value>
   </data>
-  <data name=">>radioButtonIscsi.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonIscsi.Name" xml:space="preserve">
     <value>radioButtonIscsi</value>
   </data>
-  <data name=">>radioButtonIscsi.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonIscsi.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonIscsi.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonIscsi.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>radioButtonIscsi.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonIscsi.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="radioButtonNfsIso.AutoSize" type="System.Boolean, mscorlib">
@@ -207,16 +207,16 @@
   <data name="radioButtonNfsIso.Text" xml:space="preserve">
     <value>NFS ISO(&amp;I)</value>
   </data>
-  <data name=">>radioButtonNfsIso.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfsIso.Name" xml:space="preserve">
     <value>radioButtonNfsIso</value>
   </data>
-  <data name=">>radioButtonNfsIso.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfsIso.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonNfsIso.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfsIso.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>radioButtonNfsIso.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNfsIso.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="radioButtonCifsIso.AutoSize" type="System.Boolean, mscorlib">
@@ -240,16 +240,16 @@
   <data name="radioButtonCifsIso.Text" xml:space="preserve">
     <value>Windows ファイル共有 (CIFS)(&amp;C)</value>
   </data>
-  <data name=">>radioButtonCifsIso.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCifsIso.Name" xml:space="preserve">
     <value>radioButtonCifsIso</value>
   </data>
-  <data name=">>radioButtonCifsIso.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCifsIso.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonCifsIso.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCifsIso.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>radioButtonCifsIso.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCifsIso.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="radioButtonFibreChannel.AutoSize" type="System.Boolean, mscorlib">
@@ -273,16 +273,16 @@
   <data name="radioButtonFibreChannel.Text" xml:space="preserve">
     <value>ハードウェア HBA(&amp;H)</value>
   </data>
-  <data name=">>radioButtonFibreChannel.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonFibreChannel.Name" xml:space="preserve">
     <value>radioButtonFibreChannel</value>
   </data>
-  <data name=">>radioButtonFibreChannel.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonFibreChannel.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonFibreChannel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonFibreChannel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>radioButtonFibreChannel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonFibreChannel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="radioButtonCslg.AutoSize" type="System.Boolean, mscorlib">
@@ -306,16 +306,16 @@
   <data name="radioButtonCslg.Text" xml:space="preserve">
     <value>StorageLink テクノロジ(&amp;T)</value>
   </data>
-  <data name=">>radioButtonCslg.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCslg.Name" xml:space="preserve">
     <value>radioButtonCslg</value>
   </data>
-  <data name=">>radioButtonCslg.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCslg.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonCslg.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCslg.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>radioButtonCslg.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonCslg.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelISOlibrary.AutoSize" type="System.Boolean, mscorlib">
@@ -342,16 +342,16 @@
   <data name="labelISOlibrary.Text" xml:space="preserve">
     <value>ISO ライブラリ</value>
   </data>
-  <data name=">>labelISOlibrary.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelISOlibrary.Name" xml:space="preserve">
     <value>labelISOlibrary</value>
   </data>
-  <data name=">>labelISOlibrary.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelISOlibrary.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelISOlibrary.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelISOlibrary.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelISOlibrary.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelISOlibrary.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelVirtualDiskStorage.AutoSize" type="System.Boolean, mscorlib">
@@ -378,16 +378,16 @@
   <data name="labelVirtualDiskStorage.Text" xml:space="preserve">
     <value>仮想ディスク ストレージ</value>
   </data>
-  <data name=">>labelVirtualDiskStorage.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelVirtualDiskStorage.Name" xml:space="preserve">
     <value>labelVirtualDiskStorage</value>
   </data>
-  <data name=">>labelVirtualDiskStorage.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelVirtualDiskStorage.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelVirtualDiskStorage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelVirtualDiskStorage.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelVirtualDiskStorage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelVirtualDiskStorage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="upsellPage1.AutoSize" type="System.Boolean, mscorlib">
@@ -425,16 +425,16 @@
   <data name="upsellPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>upsellPage1.Name" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.Name" xml:space="preserve">
     <value>upsellPage1</value>
   </data>
-  <data name=">>upsellPage1.Type" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.UpsellPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>upsellPage1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>upsellPage1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;upsellPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -452,16 +452,16 @@
   <data name="verticalDividerLine.Text" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>verticalDividerLine.Name" xml:space="preserve">
+  <data name="&gt;&gt;verticalDividerLine.Name" xml:space="preserve">
     <value>verticalDividerLine</value>
   </data>
-  <data name=">>verticalDividerLine.Type" xml:space="preserve">
+  <data name="&gt;&gt;verticalDividerLine.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>verticalDividerLine.Parent" xml:space="preserve">
+  <data name="&gt;&gt;verticalDividerLine.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>verticalDividerLine.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;verticalDividerLine.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -473,55 +473,55 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>SRBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.Name" xml:space="preserve">
     <value>SRBlurb</value>
   </data>
-  <data name=">>SRBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>SRBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>SRBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name=">>deprecationBanner.Name" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
     <value>deprecationBanner</value>
   </data>
-  <data name=">>deprecationBanner.Type" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>deprecationBanner.Parent" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>deprecationBanner.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.Name" xml:space="preserve">
     <value>selectedStoreTypeLabel</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -539,16 +539,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -569,16 +569,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -605,16 +605,16 @@
   <data name="SRBlurb.Text" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name=">>SRBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.Name" xml:space="preserve">
     <value>SRBlurb</value>
   </data>
-  <data name=">>SRBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>SRBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>SRBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SRBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="deprecationBanner.AutoScroll" type="System.Boolean, mscorlib">
@@ -644,16 +644,16 @@
   <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>deprecationBanner.Name" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
     <value>deprecationBanner</value>
   </data>
-  <data name=">>deprecationBanner.Type" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>deprecationBanner.Parent" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>deprecationBanner.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="selectedStoreTypeLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -677,16 +677,16 @@
   <data name="selectedStoreTypeLabel.Text" xml:space="preserve">
     <value>selectedStoreTypeLabel</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.Name" xml:space="preserve">
     <value>selectedStoreTypeLabel</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>selectedStoreTypeLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;selectedStoreTypeLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -698,10 +698,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>540, 336</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ChooseSrTypePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

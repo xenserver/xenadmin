@@ -138,16 +138,16 @@
   <data name="checkBoxUseDifferentUsername.Text" xml:space="preserve">
     <value>使用其他用户名(&amp;D)</value>
   </data>
-  <data name=">>checkBoxUseDifferentUsername.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxUseDifferentUsername.Name" xml:space="preserve">
     <value>checkBoxUseDifferentUsername</value>
   </data>
-  <data name=">>checkBoxUseDifferentUsername.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxUseDifferentUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxUseDifferentUsername.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxUseDifferentUsername.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>checkBoxUseDifferentUsername.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxUseDifferentUsername.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="groupBoxLogin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="labelCifsPassword.Text" xml:space="preserve">
     <value>密码(&amp;W):</value>
   </data>
-  <data name=">>labelCifsPassword.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsPassword.Name" xml:space="preserve">
     <value>labelCifsPassword</value>
   </data>
-  <data name=">>labelCifsPassword.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelCifsPassword.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsPassword.Parent" xml:space="preserve">
     <value>groupBoxLogin</value>
   </data>
-  <data name=">>labelCifsPassword.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsPassword.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelCifsUsername.AutoSize" type="System.Boolean, mscorlib">
@@ -201,16 +201,16 @@
   <data name="labelCifsUsername.Text" xml:space="preserve">
     <value>用户名(&amp;U):</value>
   </data>
-  <data name=">>labelCifsUsername.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsUsername.Name" xml:space="preserve">
     <value>labelCifsUsername</value>
   </data>
-  <data name=">>labelCifsUsername.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelCifsUsername.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsUsername.Parent" xml:space="preserve">
     <value>groupBoxLogin</value>
   </data>
-  <data name=">>labelCifsUsername.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsUsername.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="textBoxCifsPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="textBoxCifsPassword.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>textBoxCifsPassword.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsPassword.Name" xml:space="preserve">
     <value>textBoxCifsPassword</value>
   </data>
-  <data name=">>textBoxCifsPassword.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxCifsPassword.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsPassword.Parent" xml:space="preserve">
     <value>groupBoxLogin</value>
   </data>
-  <data name=">>textBoxCifsPassword.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsPassword.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="textBoxCifsUsername.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="textBoxCifsUsername.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>textBoxCifsUsername.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsUsername.Name" xml:space="preserve">
     <value>textBoxCifsUsername</value>
   </data>
-  <data name=">>textBoxCifsUsername.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxCifsUsername.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsUsername.Parent" xml:space="preserve">
     <value>groupBoxLogin</value>
   </data>
-  <data name=">>textBoxCifsUsername.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxCifsUsername.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="groupBoxLogin.Enabled" type="System.Boolean, mscorlib">
@@ -273,16 +273,16 @@
   <data name="groupBoxLogin.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>groupBoxLogin.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxLogin.Name" xml:space="preserve">
     <value>groupBoxLogin</value>
   </data>
-  <data name=">>groupBoxLogin.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxLogin.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>groupBoxLogin.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxLogin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>groupBoxLogin.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxLogin.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
@@ -309,16 +309,16 @@
   <data name="label22.Text" xml:space="preserve">
     <value>示例: \\server\sharename</value>
   </data>
-  <data name=">>label22.Name" xml:space="preserve">
+  <data name="&gt;&gt;label22.Name" xml:space="preserve">
     <value>label22</value>
   </data>
-  <data name=">>label22.Type" xml:space="preserve">
+  <data name="&gt;&gt;label22.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label22.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label22.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelCifsShareName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -348,16 +348,16 @@
   <data name="labelCifsShareName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelCifsShareName.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsShareName.Name" xml:space="preserve">
     <value>labelCifsShareName</value>
   </data>
-  <data name=">>labelCifsShareName.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsShareName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelCifsShareName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsShareName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelCifsShareName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCifsShareName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -381,16 +381,16 @@
   <data name="comboBoxCifsSharename.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>comboBoxCifsSharename.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCifsSharename.Name" xml:space="preserve">
     <value>comboBoxCifsSharename</value>
   </data>
-  <data name=">>comboBoxCifsSharename.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCifsSharename.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>comboBoxCifsSharename.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCifsSharename.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>comboBoxCifsSharename.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCifsSharename.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -411,16 +411,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -444,16 +444,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>提供 SR 所在共享的名称。可以通过设置服务器选项来指定备用凭据(可选)。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -471,10 +471,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 362</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CIFS_ISO</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

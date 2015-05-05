@@ -168,10 +168,10 @@
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name=">>contextMenuStrip.Name" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
   </data>
-  <data name=">>contextMenuStrip.Type" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="listViewSrs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -189,16 +189,16 @@
   <data name="listViewSrs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>listViewSrs.Name" xml:space="preserve">
+  <data name="&gt;&gt;listViewSrs.Name" xml:space="preserve">
     <value>listViewSrs</value>
   </data>
-  <data name=">>listViewSrs.Type" xml:space="preserve">
+  <data name="&gt;&gt;listViewSrs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ListViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>listViewSrs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listViewSrs.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>listViewSrs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listViewSrs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="newSRButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -216,16 +216,16 @@
   <data name="newSRButton.Text" xml:space="preserve">
     <value>新建 SR(&amp;N)...</value>
   </data>
-  <data name=">>newSRButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;newSRButton.Name" xml:space="preserve">
     <value>newSRButton</value>
   </data>
-  <data name=">>newSRButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;newSRButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>newSRButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;newSRButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>newSRButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;newSRButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="trimButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="trimButton.Text" xml:space="preserve">
     <value>回收释放的空间(&amp;C)</value>
   </data>
-  <data name=">>trimButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;trimButton.Name" xml:space="preserve">
     <value>trimButton</value>
   </data>
-  <data name=">>trimButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;trimButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>trimButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trimButton.Parent" xml:space="preserve">
     <value>trimButtonContainer</value>
   </data>
-  <data name=">>trimButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trimButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="trimButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -270,16 +270,16 @@
   <data name="trimButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>trimButtonContainer.Name" xml:space="preserve">
+  <data name="&gt;&gt;trimButtonContainer.Name" xml:space="preserve">
     <value>trimButtonContainer</value>
   </data>
-  <data name=">>trimButtonContainer.Type" xml:space="preserve">
+  <data name="&gt;&gt;trimButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>trimButtonContainer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trimButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>trimButtonContainer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trimButtonContainer.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -297,16 +297,16 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>groupBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name=">>groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>groupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonProperties.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -327,16 +327,16 @@
   <data name="buttonProperties.Text" xml:space="preserve">
     <value>属性(&amp;R)</value>
   </data>
-  <data name=">>buttonProperties.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.Name" xml:space="preserve">
     <value>buttonProperties</value>
   </data>
-  <data name=">>buttonProperties.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonProperties.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>buttonProperties.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -357,16 +357,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -381,16 +381,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelNetworkheadings.AutoSize" type="System.Boolean, mscorlib">
@@ -420,16 +420,16 @@
   <data name="labelNetworkheadings.Text" xml:space="preserve">
     <value>存储</value>
   </data>
-  <data name=">>labelNetworkheadings.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelNetworkheadings.Name" xml:space="preserve">
     <value>labelNetworkheadings</value>
   </data>
-  <data name=">>labelNetworkheadings.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelNetworkheadings.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelNetworkheadings.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelNetworkheadings.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>labelNetworkheadings.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelNetworkheadings.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -441,16 +441,16 @@
   <data name="pageContainerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pageContainerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>pageContainerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="TitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -480,10 +480,10 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>TitleLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name=">>TitleLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -498,52 +498,52 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 422</value>
   </data>
-  <data name=">>columnHeader1.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
   </data>
-  <data name=">>columnHeader1.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader2.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
   </data>
-  <data name=">>columnHeader2.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader3.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
-  <data name=">>columnHeader3.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader4.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
     <value>columnHeader4</value>
   </data>
-  <data name=">>columnHeader4.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader5.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
     <value>columnHeader5</value>
   </data>
-  <data name=">>columnHeader5.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader6.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader6.Name" xml:space="preserve">
     <value>columnHeader6</value>
   </data>
-  <data name=">>columnHeader6.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader7.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader7.Name" xml:space="preserve">
     <value>columnHeader7</value>
   </data>
-  <data name=">>columnHeader7.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PhysicalStoragePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

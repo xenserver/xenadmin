@@ -135,16 +135,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>サーバーにアップロードされているアップデートの一覧から、インストールするアップデートを選択します。新しいアップデートをアップロードするには [追加] をクリックします。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="BrowseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -162,16 +162,16 @@
   <data name="BrowseButton.Text" xml:space="preserve">
     <value>追加(&amp;A)...</value>
   </data>
-  <data name=">>BrowseButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;BrowseButton.Name" xml:space="preserve">
     <value>BrowseButton</value>
   </data>
-  <data name=">>BrowseButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;BrowseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>BrowseButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;BrowseButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>BrowseButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;BrowseButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="dataGridViewPatches.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -234,16 +234,16 @@
   <data name="dataGridViewPatches.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>dataGridViewPatches.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewPatches.Name" xml:space="preserve">
     <value>dataGridViewPatches</value>
   </data>
-  <data name=">>dataGridViewPatches.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewPatches.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>dataGridViewPatches.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewPatches.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>dataGridViewPatches.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewPatches.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -255,34 +255,34 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>531, 386</value>
   </data>
-  <data name=">>ColumnArrow.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnArrow.Name" xml:space="preserve">
     <value>ColumnArrow</value>
   </data>
-  <data name=">>ColumnArrow.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnArrow.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnUpdate.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnUpdate.Name" xml:space="preserve">
     <value>ColumnUpdate</value>
   </data>
-  <data name=">>ColumnUpdate.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnUpdate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnDescription.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
     <value>ColumnDescription</value>
   </data>
-  <data name=">>ColumnDescription.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
     <value>ColumnStatus</value>
   </data>
-  <data name=">>ColumnStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_SelectPatchPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

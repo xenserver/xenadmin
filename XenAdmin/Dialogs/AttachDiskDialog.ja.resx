@@ -141,16 +141,16 @@
   <data name="DiskListTreeView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>DiskListTreeView.Name" xml:space="preserve">
+  <data name="&gt;&gt;DiskListTreeView.Name" xml:space="preserve">
     <value>DiskListTreeView</value>
   </data>
-  <data name=">>DiskListTreeView.Type" xml:space="preserve">
+  <data name="&gt;&gt;DiskListTreeView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.CustomTreeView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>DiskListTreeView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DiskListTreeView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>DiskListTreeView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DiskListTreeView.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ReadOnlyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="ReadOnlyCheckBox.Text" xml:space="preserve">
     <value>読み取り専用として接続(&amp;R)</value>
   </data>
-  <data name=">>ReadOnlyCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ReadOnlyCheckBox.Name" xml:space="preserve">
     <value>ReadOnlyCheckBox</value>
   </data>
-  <data name=">>ReadOnlyCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ReadOnlyCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ReadOnlyCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ReadOnlyCheckBox.Parent" xml:space="preserve">
     <value>readonlyCheckboxToolTipContainer</value>
   </data>
-  <data name=">>ReadOnlyCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ReadOnlyCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="OkBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="OkBtn.Text" xml:space="preserve">
     <value>接続(&amp;A)</value>
   </data>
-  <data name=">>OkBtn.Name" xml:space="preserve">
+  <data name="&gt;&gt;OkBtn.Name" xml:space="preserve">
     <value>OkBtn</value>
   </data>
-  <data name=">>OkBtn.Type" xml:space="preserve">
+  <data name="&gt;&gt;OkBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>OkBtn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;OkBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>OkBtn.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;OkBtn.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="CancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -234,16 +234,16 @@
   <data name="CancelBtn.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>CancelBtn.Name" xml:space="preserve">
+  <data name="&gt;&gt;CancelBtn.Name" xml:space="preserve">
     <value>CancelBtn</value>
   </data>
-  <data name=">>CancelBtn.Type" xml:space="preserve">
+  <data name="&gt;&gt;CancelBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>CancelBtn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CancelBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>CancelBtn.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -267,16 +267,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>下の一覧から、追加するディスクを選択してください。</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="readonlyCheckboxToolTipContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="readonlyCheckboxToolTipContainer.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>readonlyCheckboxToolTipContainer.Name" xml:space="preserve">
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.Name" xml:space="preserve">
     <value>readonlyCheckboxToolTipContainer</value>
   </data>
-  <data name=">>readonlyCheckboxToolTipContainer.Type" xml:space="preserve">
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>readonlyCheckboxToolTipContainer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>readonlyCheckboxToolTipContainer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -330,10 +330,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>ディスクの接続</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AttachDiskDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

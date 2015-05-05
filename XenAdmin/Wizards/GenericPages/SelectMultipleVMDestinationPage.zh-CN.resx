@@ -147,16 +147,16 @@
   <data name="m_labelIntro.Text" xml:space="preserve">
     <value>Placeholder text</value>
   </data>
-  <data name=">>m_labelIntro.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
   </data>
-  <data name=">>m_labelIntro.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>m_labelIntro.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_labelIntro.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
@@ -186,16 +186,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>将 VM 导入(&amp;I):</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_comboBoxConnection.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -210,16 +210,16 @@
   <data name="m_comboBoxConnection.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>m_comboBoxConnection.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxConnection.Name" xml:space="preserve">
     <value>m_comboBoxConnection</value>
   </data>
-  <data name=">>m_comboBoxConnection.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxConnection.Type" xml:space="preserve">
     <value>XenAdmin.Controls.EnableableComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>m_comboBoxConnection.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxConnection.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>m_comboBoxConnection.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxConnection.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -237,16 +237,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -273,16 +273,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>将导入的 VM 分配给主服务器(&amp;A):</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="m_colVmName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -312,16 +312,16 @@
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>m_dataGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.Name" xml:space="preserve">
     <value>m_dataGridView</value>
   </data>
-  <data name=">>m_dataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_dataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_dataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanelWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -345,16 +345,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanelWarning</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -372,16 +372,16 @@
   <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>labelWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
   </data>
-  <data name=">>labelWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanelWarning</value>
   </data>
-  <data name=">>labelWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="tableLayoutPanelWarning.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.Name" xml:space="preserve">
     <value>tableLayoutPanelWarning</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanelWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelWarning.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanelWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -432,16 +432,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -456,22 +456,22 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>618, 346</value>
   </data>
-  <data name=">>m_colVmName.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_colVmName.Name" xml:space="preserve">
     <value>m_colVmName</value>
   </data>
-  <data name=">>m_colVmName.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_colVmName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_colTarget.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_colTarget.Name" xml:space="preserve">
     <value>m_colTarget</value>
   </data>
-  <data name=">>m_colTarget.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_colTarget.Type" xml:space="preserve">
     <value>XenAdmin.Controls.EnableableComboBoxColumn, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SelectMultipleVMDestinationPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -141,16 +141,16 @@
   <data name="GraphNameLabel.Text" xml:space="preserve">
     <value>名前(&amp;N):</value>
   </data>
-  <data name=">>GraphNameLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameLabel.Name" xml:space="preserve">
     <value>GraphNameLabel</value>
   </data>
-  <data name=">>GraphNameLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GraphNameLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>GraphNameLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="SaveButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="SaveButton.Text" xml:space="preserve">
     <value>保存(&amp;S)</value>
   </data>
-  <data name=">>SaveButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.Name" xml:space="preserve">
     <value>SaveButton</value>
   </data>
-  <data name=">>SaveButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>SaveButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>SaveButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="CloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -207,16 +207,16 @@
   <data name="CloseButton.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name=">>CloseButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
     <value>CloseButton</value>
   </data>
-  <data name=">>CloseButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>CloseButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>CloseButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="GraphNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -234,16 +234,16 @@
   <data name="GraphNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>GraphNameTextBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameTextBox.Name" xml:space="preserve">
     <value>GraphNameTextBox</value>
   </data>
-  <data name=">>GraphNameTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>GraphNameTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>GraphNameTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GraphNameTextBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -309,16 +309,16 @@
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>dataGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Name" xml:space="preserve">
     <value>dataGridView</value>
   </data>
-  <data name=">>dataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>dataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.Font" type="System.Drawing.Font, System.Drawing">
@@ -333,16 +333,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
@@ -390,16 +390,16 @@
   <data name="ClearAllButton.Text" xml:space="preserve">
     <value>すべてクリア(&amp;A)</value>
   </data>
-  <data name=">>ClearAllButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;ClearAllButton.Name" xml:space="preserve">
     <value>ClearAllButton</value>
   </data>
-  <data name=">>ClearAllButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;ClearAllButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ClearAllButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ClearAllButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ClearAllButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ClearAllButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -414,10 +414,10 @@
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 26</value>
   </data>
-  <data name=">>contextMenuStrip.Name" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
   </data>
-  <data name=">>contextMenuStrip.Type" xml:space="preserve">
+  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -866,58 +866,58 @@
   <data name="$this.Text" xml:space="preserve">
     <value>グラフの詳細</value>
   </data>
-  <data name=">>ColumnDisplayOnGraph.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnDisplayOnGraph.Name" xml:space="preserve">
     <value>ColumnDisplayOnGraph</value>
   </data>
-  <data name=">>ColumnDisplayOnGraph.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnDisplayOnGraph.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnName.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>
   </data>
-  <data name=">>ColumnName.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnType.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnType.Name" xml:space="preserve">
     <value>ColumnType</value>
   </data>
-  <data name=">>ColumnType.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnType.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnColour.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnColour.Name" xml:space="preserve">
     <value>ColumnColour</value>
   </data>
-  <data name=">>ColumnColour.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnColour.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn1</value>
   </data>
-  <data name=">>dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn2</value>
   </data>
-  <data name=">>dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn3</value>
   </data>
-  <data name=">>dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>clearAllToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;clearAllToolStripMenuItem.Name" xml:space="preserve">
     <value>clearAllToolStripMenuItem</value>
   </data>
-  <data name=">>clearAllToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;clearAllToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GraphDetailsDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
