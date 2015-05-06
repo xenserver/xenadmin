@@ -69,6 +69,7 @@ namespace XenAdmin.ConsoleView
         private int ConnectionRetries = 0;
 
         private volatile bool useVNC = true;
+        private volatile bool autoSwitchRDPLater = false;
 
         private bool autoCaptureKeyboardAndMouse = true;
         internal bool showConnectionBar = true;
@@ -588,6 +589,29 @@ namespace XenAdmin.ConsoleView
         void ConnectionSuccess(object sender, EventArgs e)
         {
             ConnectionRetries = 0;
+            if (AutoSwitchRDPLater)
+            {
+                if (OnDetectRDP != null)
+                    Program.Invoke(this, OnDetectRDP);
+                AutoSwitchRDPLater = false;
+            }
+            if (Helpers.CreamOrGreater(Source.Connection) && parentVNCTabView.IsRDPControlEnabled())
+                parentVNCTabView.EnableToggleVNCButton();
+        }
+
+        internal bool AutoSwitchRDPLater
+        {
+            get
+            {
+                return autoSwitchRDPLater;
+            }
+            set
+            {
+                if (value != autoSwitchRDPLater)
+                {
+                    autoSwitchRDPLater = value;
+                }
+            }
         }
 
         internal bool UseVNC
@@ -701,11 +725,12 @@ namespace XenAdmin.ConsoleView
         private void startPolling()
         {
             //Disable the button first, but only if in text/default console (to allow user to return to the text console - ref. CA-70314)
-            if (Helpers.CreamOrGreater(Source.Connection) && parentVNCTabView.IsRDPControlEnabled())
+            if (InDefaultConsole())
             {
-                parentVNCTabView.EnableToggleVNCButton();
+                parentVNCTabView.DisableToggleVNCButton();
             }
-            else 
+
+            if (!Helpers.CreamOrGreater(Source.Connection) || !parentVNCTabView.IsRDPControlEnabled())
             {
                 if (InDefaultConsole())
                 {
