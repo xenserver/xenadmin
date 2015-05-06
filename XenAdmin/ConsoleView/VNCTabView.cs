@@ -199,10 +199,10 @@ namespace XenAdmin.ConsoleView
 
             toggleConsoleButton.EnabledChanged += toggleConsoleButton_EnabledChanged;
 
-            //If RDP enabled and AutoSwitchToRDP selected, switch RDP connection when open the tab.
+            //If RDP enabled and AutoSwitchToRDP selected, switch RDP connection will be done when VNC already get the correct screen resolution.
             //This change is only for Cream, because RDP port scan was removed in Cream.
             if ( Helpers.CreamOrGreater(source.Connection) && Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled )
-                switchOnTabOpened = true;
+                vncScreen.AutoSwitchRDPLater = true;
         }
 
         //CA-75479 - add to aid debugging
