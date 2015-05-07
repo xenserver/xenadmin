@@ -43,6 +43,7 @@ using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 
 namespace XenAdmin.ConsoleView
 {
@@ -1604,6 +1605,13 @@ namespace XenAdmin.ConsoleView
                 }
             }
 
+            //find first IPv4 address and return it - we would use it if there is one
+            IPAddress addr;
+            foreach (string addrString in ipAddresses)
+                if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    return addrString;
+
+            //return the first address (this will not be IPv4)
             return ipAddresses.FirstOrDefault() ?? string.Empty;
         }
         
