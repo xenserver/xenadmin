@@ -1518,8 +1518,17 @@ namespace XenAdmin.ConsoleView
             if (CanLaunchSSHConsole)
             {
                 var puttyPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
-                var startInfo = new ProcessStartInfo(puttyPath, GetIPAddressForSSH());
-                Process.Start(startInfo);
+
+                try
+                {
+                    var startInfo = new ProcessStartInfo(puttyPath, GetIPAddressForSSH());
+                    Process.Start(startInfo);
+                }
+                catch
+                {
+                    var message = Messages.ERROR_PUTTY_LAUNCHING;
+                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message, Messages.XENCENTER)).ShowDialog(Parent);
+                }
             }
         }
 
@@ -1533,7 +1542,7 @@ namespace XenAdmin.ConsoleView
             get
             {
                 //Not enabled for Windows VMs
-                if (!source.is_control_domain && source.power_state != vm_power_state.Halted && source.power_state != vm_power_state.Paused && source.power_state != vm_power_state.Suspended)
+                if (!source.is_control_domain && source.power_state == vm_power_state.Running)
                 {
                     if (guestMetrics != null && guestMetrics.os_version != null && guestMetrics.os_version.ContainsKey("name"))
                     {
@@ -1543,7 +1552,7 @@ namespace XenAdmin.ConsoleView
                         
                         string osString = guestMetrics.os_version["name"];
                         if (osString != null && osString.Contains("Microsoft"))
-                                return false;
+                            return false;
                     }
                 }
 
@@ -1578,11 +1587,11 @@ namespace XenAdmin.ConsoleView
 
                 foreach (var vif in vifs)
                 {
+                    if (!vif.currently_attached)
+                        continue;
+                    
                     var network = vif.Connection.Resolve(vif.network);
                     if (network != null && network.IsGuestInstallerNetwork)
-                        continue;
-
-                    if (!vif.currently_attached)
                         continue;
 
                     ipAddresses.AddRange(vif.IPAddresses);
