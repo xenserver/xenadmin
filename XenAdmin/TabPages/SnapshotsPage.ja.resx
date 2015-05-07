@@ -135,7 +135,7 @@
     <value>30, 44</value>
   </data>
   <data name="linkLabelVMPPInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 17</value>
+    <value>79, 13</value>
   </data>
   <data name="linkLabelVMPPInfo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
