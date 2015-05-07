@@ -142,7 +142,7 @@
     <value>2</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>This VM can be specifically configured (enlightened), so it can be accessed by XenServer to monitor and control Docker containers. Choose if this feature should be enabled on this VM. </value>
+    <value>XenServer がコンテナを監視および制御できるようにこの仮想マシンを構成できます。この仮想マシンでこの機能を有効にする必要があるかどうかを選択してください。 </value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -175,7 +175,7 @@
     <value>3</value>
   </data>
   <data name="enlightenCheckBox.Text" xml:space="preserve">
-    <value>&amp;Enable enlightenment for this VM</value>
+    <value>この仮想マシンのコンテナ管理を有効にする(&amp;E)</value>
   </data>
   <data name="&gt;&gt;enlightenCheckBox.Name" xml:space="preserve">
     <value>enlightenCheckBox</value>
