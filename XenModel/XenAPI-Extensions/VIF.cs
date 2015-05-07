@@ -42,32 +42,13 @@ namespace XenAPI
         public const string RATE_LIMIT_QOS_VALUE = "ratelimit";
         public const string KBPS_QOS_PARAMS_KEY = "kbps";
 
-        public string IPAddress()
+        public string IPAddressesAsString()
         {
-            VM vm = Connection.Resolve(this.VM);
-            if (vm != null && !vm.is_a_template)
-            {
-                VM_guest_metrics vmGuestMetrics = Connection.Resolve(vm.guest_metrics);
-
-                if (vmGuestMetrics != null)
-                {
-                    // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
-                    // [["0/ip", <IPv4 address>], ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
-                    List<string> addresses = (from network in vmGuestMetrics.networks
-                                              where network.Key.StartsWith(String.Format("{0}/ip", this.device))
-                                              orderby network.Key
-                                              select network.Value).ToList();
-
-                    if (addresses.Count > 0)
-                        return String.Join(", ", addresses.ToArray());
-                }
-                return Messages.IP_ADDRESS_UNKNOWN;
-            }
-            else
-            {
-                return Messages.IP_ADDRESS_UNKNOWN;
-            }
-
+            var addresses = IPAddresses;
+            if (addresses.Count > 0)
+                return String.Join(", ", addresses.ToArray());
+                
+            return Messages.IP_ADDRESS_UNKNOWN;
         }
 
         public List<string> IPAddresses
@@ -81,6 +62,9 @@ namespace XenAPI
 
                     if (vmGuestMetrics != null)
                     {
+                        // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
+                        // [["0/ip", <IPv4 address>], ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
+
                         return
                             (from network in vmGuestMetrics.networks
                              where network.Key.StartsWith(string.Format("{0}/ip", this.device))
