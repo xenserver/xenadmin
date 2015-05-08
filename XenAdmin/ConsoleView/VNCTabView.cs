@@ -1524,8 +1524,10 @@ namespace XenAdmin.ConsoleView
                     var startInfo = new ProcessStartInfo(puttyPath, GetIPAddressForSSH());
                     Process.Start(startInfo);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log.Error(Messages.XENCENTER, ex);
+
                     var message = Messages.ERROR_PUTTY_LAUNCHING;
                     new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message, Messages.XENCENTER)).ShowDialog(Parent);
                 }
