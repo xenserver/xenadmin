@@ -64,6 +64,7 @@
                             <File Id="XenCenterMainEXE" Source="..\XenAdmin\bin\Release\XenCenterMain.exe" />
                             <File Id="XeEXE" Source="..\xe\bin\Release\xe.exe" />
                             <File Id="xva_verifyEXE" Source="..\xva_verify\bin\Release\xva_verify.exe" />
+							<File Id="PuTTYEXE" Source="..\XenAdmin\bin\Release\putty.exe" />
                             <!-- config -->
                             <File Id="XenCenterMainCONFIG" Source="..\XenAdmin\bin\Release\XenCenterMain.exe.config" />
                             <!-- DLLs -->
