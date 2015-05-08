@@ -92,7 +92,7 @@ DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
 SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
 DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
 MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx40_Full_setup
-PUTTY_DIR = ${REPO}/putty
+PUTTY_DIR=${REPO}/putty
 
 wget ${WGET_OPT} ${WEB_DOTNET}/manifest -O ${SCRATCH_DIR}/dotnet-packages-manifest
 mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll -P ${XMLRPC_DIR}
