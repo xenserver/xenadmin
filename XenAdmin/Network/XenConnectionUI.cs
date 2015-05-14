@@ -120,9 +120,9 @@ namespace XenAdmin.Network
                 if (f.ErrorDescription[0] == Failure.HOST_IS_SLAVE)
                 {
                     string oldHost = connection.Name;
-                    ((XenConnection)connection).Hostname = f.ErrorDescription[1];
+                    string poolMasterName = f.ErrorDescription[1];
 
-                    string pool_name = XenConnection.ConnectedElsewhere(((XenConnection)connection).Hostname);
+                    string pool_name = XenConnection.ConnectedElsewhere(poolMasterName);
                     if (pool_name != null)
                     {
                         if (!Program.RunInAutomatedTestMode)
@@ -152,11 +152,12 @@ namespace XenAdmin.Network
                             new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(
                                     SystemIcons.Warning,
-                                    String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, ((XenConnection)connection).Hostname),
+                                    String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
                                     Messages.CONNECT_TO_SERVER),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo).ShowDialog(owner))
                         {
+                            ((XenConnection) connection).Hostname = poolMasterName;
                             BeginConnect(connection, true, owner, false);
                         }
                     }
