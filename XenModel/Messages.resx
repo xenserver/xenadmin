@@ -2244,6 +2244,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
 
 {1}</value>
   </data>
+  <data name="CDDRIVE_MAX_ALLOWED_VBDS" xml:space="preserve">
+    <value>The DVD drive cannot be created, because you have reached the maximum number of virtual disks allowed for this virtual machine.</value>
+  </data>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>DVD drive on {0}</value>
   </data>

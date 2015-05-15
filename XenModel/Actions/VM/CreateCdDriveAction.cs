@@ -64,7 +64,17 @@ namespace XenAdmin.Actions
                 Description = Messages.NEW_DVD_DRIVE_CREATING;
                 // could not find a cd, try and make one
 
+                if (VM.VBDs.Count >= VM.MaxVBDsAllowed)
+                {
+                    throw new Exception(Messages.CDDRIVE_MAX_ALLOWED_VBDS);
+                }
+
                 List<String> allowedDevices = new List<String>(XenAPI.VM.get_allowed_VBD_devices(Session, VM.opaque_ref));
+
+                if (allowedDevices == null || allowedDevices.Count == 0)
+                {
+                    throw new Exception(Messages.CDDRIVE_MAX_ALLOWED_VBDS);
+                }
 
                 XenAPI.VBD cdDrive = new XenAPI.VBD();
                 cdDrive.VM = new XenAPI.XenRef<XenAPI.VM>(VM.opaque_ref);
