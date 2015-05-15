@@ -47,10 +47,18 @@ namespace XenAdmin.ConsoleView
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VNCTabView));
             this.buttonPanel = new System.Windows.Forms.Panel();
+            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.HostLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonSSH = new System.Windows.Forms.Button();
+            this.toggleConsoleButton = new System.Windows.Forms.Button();
+            this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sendCAD = new System.Windows.Forms.Button();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new XenAdmin.Controls.DecentGroupBox();
             this.scaleCheckBox = new System.Windows.Forms.CheckBox();
             this.fullscreenButton = new System.Windows.Forms.Button();
             this.dockButton = new System.Windows.Forms.Button();
@@ -59,20 +67,13 @@ namespace XenAdmin.ConsoleView
             this.panel2 = new System.Windows.Forms.Panel();
             this.powerStateLabel = new System.Windows.Forms.Label();
             this.dedicatedGpuWarning = new System.Windows.Forms.Label();
-            this.groupBox1 = new XenAdmin.Controls.DecentGroupBox();
-            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.toggleConsoleButton = new System.Windows.Forms.Button();
-            this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.HostLabel = new System.Windows.Forms.Label();
             this.buttonPanel.SuspendLayout();
-            this.bottomPanel.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.gradientPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.bottomPanel.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPanel
@@ -81,10 +82,67 @@ namespace XenAdmin.ConsoleView
             resources.ApplyResources(this.buttonPanel, "buttonPanel");
             this.buttonPanel.Name = "buttonPanel";
             // 
+            // gradientPanel1
+            // 
+            resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
+            this.gradientPanel1.Controls.Add(this.tableLayoutPanel2);
+            this.gradientPanel1.Name = "gradientPanel1";
+            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
+            // 
+            // HostLabel
+            // 
+            this.HostLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.HostLabel, "HostLabel");
+            this.HostLabel.ForeColor = System.Drawing.Color.White;
+            this.HostLabel.Name = "HostLabel";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.HostLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonSSH, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.toggleConsoleButton, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.multipleDvdIsoList1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 1, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // buttonSSH
+            // 
+            resources.ApplyResources(this.buttonSSH, "buttonSSH");
+            this.buttonSSH.Name = "buttonSSH";
+            this.tip.SetToolTip(this.buttonSSH, resources.GetString("buttonSSH.ToolTip"));
+            this.buttonSSH.UseVisualStyleBackColor = true;
+            this.buttonSSH.Click += new System.EventHandler(this.buttonSSH_Click);
+            // 
+            // toggleConsoleButton
+            // 
+            resources.ApplyResources(this.toggleConsoleButton, "toggleConsoleButton");
+            this.toggleConsoleButton.Name = "toggleConsoleButton";
+            this.tip.SetToolTip(this.toggleConsoleButton, resources.GetString("toggleConsoleButton.ToolTip"));
+            this.toggleConsoleButton.UseVisualStyleBackColor = true;
+            this.toggleConsoleButton.Click += new System.EventHandler(this.toggleConsoleButton_Click);
+            // 
+            // multipleDvdIsoList1
+            // 
+            resources.ApplyResources(this.multipleDvdIsoList1, "multipleDvdIsoList1");
+            this.multipleDvdIsoList1.Name = "multipleDvdIsoList1";
+            this.multipleDvdIsoList1.VM = null;
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._001_LifeCycle_h32bit_24;
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.LifeCycleButton_MouseClick);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
             // sendCAD
             // 
             resources.ApplyResources(this.sendCAD, "sendCAD");
-            this.sendCAD.MinimumSize = new System.Drawing.Size(123, 30);
             this.sendCAD.Name = "sendCAD";
             this.sendCAD.UseVisualStyleBackColor = true;
             this.sendCAD.Click += new System.EventHandler(this.sendCAD_Click);
@@ -108,8 +166,13 @@ namespace XenAdmin.ConsoleView
             this.tableLayoutPanel1.Controls.Add(this.scaleCheckBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.fullscreenButton, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.dockButton, 3, 0);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(320, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // groupBox1
+            // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
             // 
             // scaleCheckBox
             // 
@@ -121,7 +184,6 @@ namespace XenAdmin.ConsoleView
             // fullscreenButton
             // 
             resources.ApplyResources(this.fullscreenButton, "fullscreenButton");
-            this.fullscreenButton.MinimumSize = new System.Drawing.Size(114, 30);
             this.fullscreenButton.Name = "fullscreenButton";
             this.fullscreenButton.UseVisualStyleBackColor = true;
             this.fullscreenButton.Click += new System.EventHandler(this.fullscreenButton_Click);
@@ -130,7 +192,6 @@ namespace XenAdmin.ConsoleView
             // 
             resources.ApplyResources(this.dockButton, "dockButton");
             this.dockButton.Image = global::XenAdmin.Properties.Resources.detach_24;
-            this.dockButton.MinimumSize = new System.Drawing.Size(85, 30);
             this.dockButton.Name = "dockButton";
             this.dockButton.UseVisualStyleBackColor = true;
             this.dockButton.Click += new System.EventHandler(this.dockButton_Click);
@@ -143,8 +204,8 @@ namespace XenAdmin.ConsoleView
             // 
             this.LifeCycleMenuStrip.Name = "LifeCycleMenuStrip";
             resources.ApplyResources(this.LifeCycleMenuStrip, "LifeCycleMenuStrip");
-            this.LifeCycleMenuStrip.Opened += new System.EventHandler(this.LifeCycleMenuStrip_Opened);
             this.LifeCycleMenuStrip.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.LifeCycleMenuStrip_Closing);
+            this.LifeCycleMenuStrip.Opened += new System.EventHandler(this.LifeCycleMenuStrip_Opened);
             // 
             // panel2
             // 
@@ -170,62 +231,6 @@ namespace XenAdmin.ConsoleView
             this.dedicatedGpuWarning.ForeColor = System.Drawing.SystemColors.ControlText;
             this.dedicatedGpuWarning.Name = "dedicatedGpuWarning";
             // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
-            // gradientPanel1
-            // 
-            resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
-            this.gradientPanel1.Controls.Add(this.HostLabel);
-            this.gradientPanel1.Controls.Add(this.tableLayoutPanel2);
-            this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.toggleConsoleButton, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.multipleDvdIsoList1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel2.MinimumSize = new System.Drawing.Size(405, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // toggleConsoleButton
-            // 
-            resources.ApplyResources(this.toggleConsoleButton, "toggleConsoleButton");
-            this.toggleConsoleButton.Name = "toggleConsoleButton";
-            this.tip.SetToolTip(this.toggleConsoleButton, resources.GetString("toggleConsoleButton.ToolTip"));
-            this.toggleConsoleButton.UseVisualStyleBackColor = true;
-            this.toggleConsoleButton.Click += new System.EventHandler(this.toggleConsoleButton_Click);
-            // 
-            // multipleDvdIsoList1
-            // 
-            resources.ApplyResources(this.multipleDvdIsoList1, "multipleDvdIsoList1");
-            this.multipleDvdIsoList1.Name = "multipleDvdIsoList1";
-            this.multipleDvdIsoList1.VM = null;
-            // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._001_LifeCycle_h32bit_24;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
-            this.pictureBox1.Click += new System.EventHandler(this.LifeCycleButton_MouseClick);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
-            // 
-            // HostLabel
-            // 
-            this.HostLabel.AutoEllipsis = true;
-            resources.ApplyResources(this.HostLabel, "HostLabel");
-            this.HostLabel.ForeColor = System.Drawing.Color.White;
-            this.HostLabel.Name = "HostLabel";
-            // 
             // VNCTabView
             // 
             resources.ApplyResources(this, "$this");
@@ -237,13 +242,14 @@ namespace XenAdmin.ConsoleView
             this.Controls.Add(this.panel2);
             this.Name = "VNCTabView";
             this.buttonPanel.ResumeLayout(false);
+            this.gradientPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.bottomPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.gradientPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -271,5 +277,6 @@ namespace XenAdmin.ConsoleView
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;
         private System.Windows.Forms.Label powerStateLabel;
         private System.Windows.Forms.Label dedicatedGpuWarning;
+        public System.Windows.Forms.Button buttonSSH;
     }
 }

@@ -4664,6 +4664,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>Error preparing host</value>
   </data>
+  <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
+    <value>XenCenter has encountered a problem launching PuTTY.</value>
+  </data>
   <data name="ERROR_UNKNOWN" xml:space="preserve">
     <value>An unknown error occurred.</value>
   </data>

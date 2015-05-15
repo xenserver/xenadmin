@@ -858,7 +858,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 MacCell.Value = Helpers.GetMacString(Vif.MAC);
                 LimitCell.Value = Vif.qos_algorithm_type != ""? Vif.LimitString:"";
                 NetworkCell.Value = Vif.NetworkName();
-                IpCell.Value = Vif.IPAddress();
+                IpCell.Value = Vif.IPAddressesAsString();
                 AttachedCell.Value = Vif.currently_attached ? Messages.YES : Messages.NO;
             }
 

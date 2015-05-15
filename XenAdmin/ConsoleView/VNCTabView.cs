@@ -42,6 +42,8 @@ using XenAPI;
 using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net;
 
 namespace XenAdmin.ConsoleView
 {
@@ -197,6 +199,8 @@ namespace XenAdmin.ConsoleView
             UpdateParentMinimumSize();
 
             UpdateButtons();
+
+            UpdateOpenSSHConsoleButtonState();
 
             toggleConsoleButton.EnabledChanged += toggleConsoleButton_EnabledChanged;
 
@@ -506,6 +510,12 @@ namespace XenAdmin.ConsoleView
                     guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
 
                 EnableRDPIfCapable();
+
+                UpdateOpenSSHConsoleButtonState(); //guest_metrics change when there is an IP address change on a VIF
+            }
+            else if (e.PropertyName == "VIFs" || e.PropertyName == "PIFs")
+            {
+                UpdateOpenSSHConsoleButtonState();
             }
 
             if (source.is_control_domain && e.PropertyName == "name_label")
@@ -632,6 +642,8 @@ namespace XenAdmin.ConsoleView
                         break;
                 }
             }
+
+            UpdateOpenSSHConsoleButtonState();
         }
 
         /// <summary>
@@ -1510,5 +1522,121 @@ namespace XenAdmin.ConsoleView
         {
             get { return vncScreen.UseVNC; }
         }
+        
+        #region SSH Console methods
+
+        private void buttonSSH_Click(object sender, EventArgs e)
+        {
+            if (CanLaunchSSHConsole)
+            {
+                var puttyPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
+
+                try
+                {
+                    var startInfo = new ProcessStartInfo(puttyPath, GetIPAddressForSSH());
+                    Process.Start(startInfo);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Error starting PuTTY.", ex);
+
+                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+                }
+            }
+        }
+
+        private void UpdateOpenSSHConsoleButtonState()
+        {
+            buttonSSH.Visible = CanLaunchSSHConsole;
+        }
+
+        public bool CanLaunchSSHConsole
+        { 
+            get
+            {
+                //Not enabled for Windows VMs
+                if (!source.is_control_domain && source.power_state == vm_power_state.Running)
+                {
+                    if (guestMetrics != null && guestMetrics.os_version != null && guestMetrics.os_version.ContainsKey("name"))
+                    {
+                        string osDistro = guestMetrics.os_version["distro"];
+                        if (osDistro != null && osDistro.ToLower().Trim() == "windows")
+                            return false;  
+                        
+                        string osString = guestMetrics.os_version["name"];
+                        if (osString != null && osString.Contains("Microsoft"))
+                            return false;
+                    }
+                }
+
+                if (source.is_control_domain)
+                {
+                    Host host = source.Connection.Resolve<Host>(source.resident_on);
+                    if (host == null)
+                        return false;
+
+                    Host_metrics hostMetrics = source.Connection.Resolve<Host_metrics>(host.metrics);
+                    if (hostMetrics == null)
+                        return false;
+
+                    if (!hostMetrics.live)
+                        return false;
+                }
+
+                return
+                    source.power_state == vm_power_state.Running &&
+                    !string.IsNullOrEmpty(GetIPAddressForSSH());
+            }
+        }
+
+        private string GetIPAddressForSSH()
+        {
+            List<string> ipAddresses = new List<string>();
+
+            if (!source.is_control_domain) //vm
+            {
+                List<VIF> vifs = source.Connection.ResolveAll(source.VIFs);
+                vifs.Sort();
+
+                foreach (var vif in vifs)
+                {
+                    if (!vif.currently_attached)
+                        continue;
+                    
+                    var network = vif.Connection.Resolve(vif.network);
+                    if (network != null && network.IsGuestInstallerNetwork)
+                        continue;
+
+                    ipAddresses.AddRange(vif.IPAddresses);
+                }
+            }
+            else //control domain
+            {
+                List<PIF> pifList = new List<PIF>(source.Connection.Cache.PIFs);
+                pifList.Sort();  // This sort ensures that the primary PIF comes before other management PIFs
+
+                foreach (PIF pif in pifList)
+                {
+                    if (pif.host.opaque_ref != source.resident_on.opaque_ref || !pif.currently_attached)
+                        continue;
+
+                    if (pif.IsManagementInterface(false))
+                    {
+                        ipAddresses.Add(pif.IP);
+                    }
+                }
+            }
+
+            //find first IPv4 address and return it - we would use it if there is one
+            IPAddress addr;
+            foreach (string addrString in ipAddresses)
+                if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    return addrString;
+
+            //return the first address (this will not be IPv4)
+            return ipAddresses.FirstOrDefault() ?? string.Empty;
+        }
+        
+        #endregion SSH Console methods
     }
 }
