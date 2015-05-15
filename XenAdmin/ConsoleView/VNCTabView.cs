@@ -1247,7 +1247,9 @@ namespace XenAdmin.ConsoleView
             }
 
             scaleCheckBox.Visible = !rdp || vncScreen.UseVNC;
-            sendCAD.Enabled = !rdp || vncScreen.UseVNC;
+
+            sendCAD.Enabled = source != null && !source.is_control_domain && source.power_state == vm_power_state.Running && (!rdp || vncScreen.UseVNC);
+            
             FocusVNC();
             ignoreScaleChange = true;
             if (!Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC)
@@ -1329,7 +1331,7 @@ namespace XenAdmin.ConsoleView
         {
             //No need to reenable toggleConsoleButton, polling will do it.
             multipleDvdIsoList1.Enabled = true;
-            sendCAD.Enabled = true;
+            sendCAD.Enabled = source != null && !source.is_control_domain && source.power_state == vm_power_state.Running;
         }
 
         internal void RdpDisconnectedHandler(object sender, EventArgs e)
