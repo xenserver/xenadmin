@@ -277,7 +277,7 @@ namespace XenAdmin.Dialogs
                     subActions.Add(new SrRepairAction(sr.Connection, sr, false));
                 }
 
-                _repairAction = new MultipleAction(null, string.Empty, string.Empty, string.Empty, subActions);
+                _repairAction = new MultipleAction(null, string.Empty, string.Empty, string.Empty, subActions, true);
             }
             
             _repairAction.Changed += action_Changed;
