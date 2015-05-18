@@ -201,6 +201,12 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Dialogs\CallHome\CallHomeSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CallHome\CallHomeSettingsDialog.designer.cs">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ExportVMDialog.cs">
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
@@ -1340,6 +1346,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.ja.resx">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.resx">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.zh-CN.resx">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>

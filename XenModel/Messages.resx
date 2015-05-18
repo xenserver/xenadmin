@@ -123,6 +123,12 @@
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Activating Multiple Virtual Disks</value>
   </data>
+  <data name="ACTION_CALLHOME_AUTHENTICATION" xml:space="preserve">
+    <value>Authentication with Citrix upload server</value>
+  </data>
+  <data name="ACTION_CALLHOME_AUTHENTICATION_PROGRESS" xml:space="preserve">
+    <value>Authenticating with Citrix upload server</value>
+  </data>
   <data name="ACTION_CHANGED_DISK_SIZE_FOR" xml:space="preserve">
     <value>Disk size changed for '{0}'.</value>
   </data>
@@ -606,6 +612,9 @@
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>Save alerts</value>
   </data>
+  <data name="ACTION_SAVE_CALLHOME_SETTINGS" xml:space="preserve">
+    <value>Save Health Check settings</value>
+  </data>
   <data name="ACTION_SAVE_CHANGES_IN_PROGRESS" xml:space="preserve">
     <value>Saving settings...</value>
   </data>
@@ -629,6 +638,9 @@
   </data>
   <data name="ACTION_SAVING_ALERTS_FOR" xml:space="preserve">
     <value>Saving alerts for '{0}'...</value>
+  </data>
+  <data name="ACTION_SAVING_CALLHOME_SETTINGS" xml:space="preserve">
+    <value>Saving Health Check settings for '{0}'...</value>
   </data>
   <data name="ACTION_SAVING_CUSTOM_FIELDS_FOR" xml:space="preserve">
     <value>Saving Custom Fields for '{0}'...</value>
@@ -2087,6 +2099,33 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="CACHE_NOT_YET_POPULATED" xml:space="preserve">
     <value>Cache not yet populated</value>
+  </data>
+  <data name="CALLHOME_AUTHENTICATION_RUBRIC_EXISTING_TOKEN" xml:space="preserve">
+    <value>Authentication with Citrix upload server is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
+  </data>
+  <data name="CALLHOME_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
+    <value>Authentication with Citrix upload server is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server.</value>
+  </data>
+  <data name="CALLHOME_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
+    <value>OK, Enable Health Check</value>
+  </data>
+  <data name="CALLHOME_ENROLLMENT_TITLE" xml:space="preserve">
+    <value>Health Check Enrollment - {0}</value>
+  </data>
+  <data name="CALLHOME_SCHEDULE_DESCRIPTION" xml:space="preserve">
+    <value>Upload a Health Check report every {0} weeks on {1} starting at {2}</value>
+  </data>
+  <data name="CALLHOME_STATUS_ISSUES_FOUND" xml:space="preserve">
+    <value>Issues found</value>
+  </data>
+  <data name="CALLHOME_STATUS_NOT_AVAILABLE_YET" xml:space="preserve">
+    <value>Analysis not yet available</value>
+  </data>
+  <data name="CALLHOME_STATUS_NOT_ENROLLED" xml:space="preserve">
+    <value>Health Check not enabled</value>
+  </data>
+  <data name="CALLHOME_STATUS_NO_ISSUES_FOUND" xml:space="preserve">
+    <value>No issues found</value>
   </data>
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
