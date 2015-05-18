@@ -83,10 +83,8 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SelectedItem selection)
         {
-            bool isPoolOrStandalone = selection.XenObject is Pool 
-                || (selection.XenObject is Host && Helpers.GetPool(selection.Connection) == null);
-
-            if (selection.Connection != null && selection.Connection.IsConnected && isPoolOrStandalone)
+            if (selection.Connection != null && selection.Connection.IsConnected &&
+                (selection.PoolAncestor != null || selection.HostAncestor != null))
                 return !Helpers.FeatureForbidden(selection.Connection, Host.RestrictExportResourceData);
             return false;
         }
