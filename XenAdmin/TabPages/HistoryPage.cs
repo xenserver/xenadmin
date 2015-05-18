@@ -98,7 +98,6 @@ namespace XenAdmin.TabPages
                 {
                     case CollectionChangeAction.Add:
                         var actions = new List<ActionBase>(ConnectionsManager.History);
-                        actions.RemoveAll(FilterAction);
                         SortActions(actions);
                         var index = actions.IndexOf(action);
                         if (index > -1)
@@ -124,8 +123,25 @@ namespace XenAdmin.TabPages
             Program.Invoke(Program.MainWindow, () =>
                 {
                     var row = FindRowFromAction(sender);
+
                     if (row != null)
-                        row.RefreshSelf();
+                    {
+                        //the row is already in the grid, refresh and show or hide it
+                        if (!FilterAction(sender))
+                        {
+                            row.RefreshSelf();
+                            row.Visible = true;
+                        }
+                        else
+                        {
+                            row.Visible = false;
+                        }
+                    }
+                    else if (!FilterAction(sender))
+                    {
+                        //adding the row to the grid, because it has not been there and now it should be visible based on active filters
+                        CreateActionRow(sender);
+                    }
 
                     UpdateButtons();
                 });
@@ -158,20 +174,17 @@ namespace XenAdmin.TabPages
                 dataGridView.SuspendLayout();
                 dataGridView.Rows.Clear();
 
-                var actions = new List<ActionBase>(ConnectionsManager.History);
-                actions.RemoveAll(FilterAction);
+                //creating a sorted list of actions that should currently be visible
+                var actions = ConnectionsManager.History.Where(a => !FilterAction(a)).ToList();
                 SortActions(actions);
-                
-                var rows = new List<DataGridViewActionRow>();
-                foreach (ActionBase action in actions)
-                {
-                    var row = CreateActionRow(action);
-                    rows.Add(row);
-                }
+
+                //adding a row to the grid for each action
+                var rows = actions.Select(a => CreateActionRow(a)).ToList();
                 dataGridView.Rows.AddRange(rows.ToArray());
 
-                foreach(var actionRow in rows)
-                    RegisterActionEvents(actionRow.Action);
+                //registering to action events of all the actions
+                foreach (var action in ConnectionsManager.History)
+                    RegisterActionEvents(action);
 
                 SetFilterLabel();
             }
@@ -200,6 +213,11 @@ namespace XenAdmin.TabPages
             }
         }
 
+        /// <summary>
+        /// Returns true when the action needs to be filtered out
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
         private bool FilterAction(ActionBase action)
         {
             bool hide = false;
@@ -225,6 +243,7 @@ namespace XenAdmin.TabPages
         private DataGridViewActionRow CreateActionRow(ActionBase action)
         {
             var row = new DataGridViewActionRow(action);
+            row.Visible = !FilterAction(action);
             row.DismissalRequested += row_DismissalRequested;
             row.GoToXenObjectRequested += row_GoToXenObjectRequested;
             return row;
@@ -240,11 +259,12 @@ namespace XenAdmin.TabPages
 
         private void RemoveActionRow(ActionBase action)
         {
+            action.Changed -= action_Changed;
+            action.Completed -= action_Changed;
+
             var row = FindRowFromAction(action);
             if (row != null)
             {
-                action.Changed -= action_Changed;
-                action.Completed -= action_Changed;
                 dataGridView.Rows.Remove(row);
             }
         }
@@ -387,7 +407,7 @@ namespace XenAdmin.TabPages
             }
 
             var actions = result == DialogResult.No
-                              ? (from DataGridViewActionRow row in dataGridView.Rows where row.Action != null && row.Action.IsCompleted select row.Action)
+                              ? (from DataGridViewActionRow row in dataGridView.Rows where row.Action != null && row.Action.IsCompleted && row.Visible select row.Action)
                               : ConnectionsManager.History.Where(action => action != null && action.IsCompleted);
 
             ConnectionsManager.History.RemoveAll(actions.Contains);
@@ -405,7 +425,7 @@ namespace XenAdmin.TabPages
                     return;
             }
 
-            var actions = from DataGridViewActionRow row in dataGridView.SelectedRows where row != null && row.Action != null && row.Action.IsCompleted select row.Action;
+            var actions = from DataGridViewActionRow row in dataGridView.SelectedRows where row != null && row.Action != null && row.Action.IsCompleted && row.Visible select row.Action;
 
             ConnectionsManager.History.RemoveAll(actions.Contains);
         }
