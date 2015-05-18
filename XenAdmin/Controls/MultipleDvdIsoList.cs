@@ -232,17 +232,6 @@ namespace XenAdmin.Controls
             {
                 CreateCdDriveAction createDriveAction = new CreateCdDriveAction(VM, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
                 new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(this);
-                if (createDriveAction.Succeeded)
-                {
-                    if (!Program.RunInAutomatedTestMode)
-                    {
-                        new ThreeButtonDialog(
-                           new ThreeButtonDialog.Details(
-                               SystemIcons.Information,
-                               Messages.NEW_DVD_DRIVE_REBOOT,
-                               Messages.NEW_DVD_DRIVE_CREATED)).ShowDialog(Program.MainWindow);
-                    }
-                }
             }
         }
 
