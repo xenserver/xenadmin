@@ -654,8 +654,8 @@ namespace XenAdmin.TabPages
                 List<VDI> vdis =
                         sr.Connection.ResolveAll(sr.VDIs).Where(
                             vdi =>
-                            vdi.Show(Properties.Settings.Default.ShowHiddenVMs &&
-                                     !vdi.IsAnIntermediateStorageMotionSnapshot))
+                            vdi.Show(Properties.Settings.Default.ShowHiddenVMs) &&
+                            !vdi.IsAnIntermediateStorageMotionSnapshot)
                             .ToList();
 
                 bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
