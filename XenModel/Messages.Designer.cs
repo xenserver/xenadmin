@@ -6199,6 +6199,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The DVD drive cannot be created, because you have reached the maximum number of virtual disks allowed for this virtual machine..
+        /// </summary>
+        public static string CDDRIVE_MAX_ALLOWED_VBDS {
+            get {
+                return ResourceManager.GetString("CDDRIVE_MAX_ALLOWED_VBDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change....
         /// </summary>
         public static string CHANGE {
