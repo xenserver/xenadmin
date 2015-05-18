@@ -684,36 +684,6 @@
   <data name="&gt;&gt;TabPageAD.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TabPageDockerDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPageDockerDetails.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="TabPageDockerDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 592</value>
-  </data>
-  <data name="TabPageDockerDetails.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TabPageDockerDetails.Text" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
-    <value>TabPageDockerDetails</value>
-  </data>
-  <data name="&gt;&gt;TabPageDockerDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPageDockerDetails.Parent" xml:space="preserve">
-    <value>TheTabControl</value>
-  </data>
-  <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
   <data name="TabPageGPU.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -767,8 +737,6 @@
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
     <value>18</value>
-  <data name="TabPageDockerProcess.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -800,6 +768,35 @@
   <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPageDockerDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageDockerDetails.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="TabPageDockerDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageDockerDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPageDockerDetails.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
+    <value>TabPageDockerDetails</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
+    <value>20</value>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>
@@ -1576,7 +1573,7 @@
     <value>Magenta</value>
   </data>
   <data name="stopContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 17</value>
+    <value>57, 28</value>
   </data>
   <data name="stopContainerToolStripButton.Text" xml:space="preserve">
     <value>Stop</value>
@@ -1889,6 +1886,9 @@
   </data>
   <data name="vMProtectionAndRecoveryToolStripMenuItem.Text" xml:space="preserve">
     <value>VM &amp;Protection Policies...</value>
+  </data>
+  <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
   </data>
   <data name="wlbReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
@@ -2468,6 +2468,12 @@
   <data name="bugToolToolStripMenuItem.Text" xml:space="preserve">
     <value>Server &amp;Status Report...</value>
   </data>
+  <data name="healthCheckToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 22</value>
+  </data>
+  <data name="healthCheckToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Health Check...</value>
+  </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 6</value>
   </data>
@@ -2529,7 +2535,7 @@
     <value>False</value>
   </data>
   <data name="helpTopicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="helpTopicsToolStripMenuItem.Text" xml:space="preserve">
     <value>Help &amp;Contents</value>
@@ -2538,46 +2544,46 @@
     <value>F1</value>
   </data>
   <data name="helpContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="helpContextMenuItem.Text" xml:space="preserve">
     <value>Conte&amp;xt Help</value>
   </data>
   <data name="toolStripMenuItem15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 6</value>
+    <value>192, 6</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
     <value>View XenCenter &amp;Log Files</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 6</value>
+    <value>192, 6</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
     <value>XenServer on the &amp;Web</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Text" xml:space="preserve">
     <value>XenCenter &amp;Plugins online</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 6</value>
+    <value>192, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About XenCenter</value>
@@ -3054,6 +3060,12 @@
     <value>vMProtectionAndRecoveryToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportResourceReportPoolToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;wlbReportsToolStripMenuItem.Name" xml:space="preserve">
@@ -3752,6 +3764,12 @@
   <data name="&gt;&gt;xenSourceOnTheWebToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;xenCenterPluginsOnlineToolStripMenuItem.Name" xml:space="preserve">
+    <value>xenCenterPluginsOnlineToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;xenCenterPluginsOnlineToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
   </data>
@@ -3768,12 +3786,6 @@
     <value>aboutXenSourceAdminToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;aboutXenSourceAdminToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;xenCenterPluginsOnlineToolStripMenuItem.Name" xml:space="preserve">
-    <value>xenCenterPluginsOnlineToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;xenCenterPluginsOnlineToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;securityGroupsToolStripMenuItem.Name" xml:space="preserve">
@@ -3794,19 +3806,16 @@
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Name" xml:space="preserve">
+    <value>healthCheckToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportResourceReportPoolToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
