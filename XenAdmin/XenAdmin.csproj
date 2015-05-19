@@ -108,6 +108,7 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
@@ -201,6 +202,18 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Dialogs\CallHome\CallHomeOverviewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CallHome\CallHomeOverviewDialog.Designer.cs">
+      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CallHome\CallHomeSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CallHome\CallHomeSettingsDialog.designer.cs">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ExportVMDialog.cs">
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
@@ -1340,6 +1353,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.ja.resx">
+      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.resx">
+      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.zh-CN.resx">
+      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.ja.resx">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.resx">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.zh-CN.resx">
+      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>

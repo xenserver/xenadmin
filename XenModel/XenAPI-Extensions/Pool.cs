@@ -389,7 +389,7 @@ namespace XenAPI
         {
             get { return Connection.Cache.Hosts.Sum(h => h.CpuSockets); }
         }
-        
+
         public bool HasGpu
         {
             get { return Connection.Cache.PGPUs.Length > 0; }
@@ -400,6 +400,16 @@ namespace XenAPI
             get { return HasGpu && Connection.Cache.PGPUs.Any(pGpu => pGpu.HasVGpu); }
         }
 
+        #region CallHome settings
+        public CallHomeSettings CallHomeSettings
+        {
+            get 
+            {
+               return new CallHomeSettings(gui_config);
+            }
+        }
+        #endregion
+
         #region IEquatable<Pool> Members
 
         /// <summary>
@@ -409,6 +419,108 @@ namespace XenAPI
         public bool Equals(Pool other)
         {
             return base.Equals(other);
+        }
+
+        #endregion
+    }
+    
+
+    public enum CallHomeStatus
+    {
+        Disabled, Enabled, Undefined
+    }
+
+    public struct CallHomeSettings
+    {
+        public CallHomeStatus Status;
+        public int IntervalInDays, TimeOfDay, RetryInterval;
+        public DayOfWeek DayOfWeek;
+        public string AuthenticationToken;
+
+        public const int DefaultRetryInterval = 7;
+
+        public const string STATUS = "CallHome.Enrollment";
+        public const string INTERVAL_IN_DAYS = "CallHome.Schedule.IntervalInDays";
+        public const string DAY_OF_WEEK = "CallHome.Schedule.DayOfWeek";
+        public const string TIME_OF_DAY = "CallHome.Schedule.TimeOfDay";
+        public const string RETRY_INTERVAL = "CallHome.Schedule.RetryInterval";
+        public const string AUTHENTICATION_TOKEN = "CallHome.AuthenticationToken";
+
+        public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval, string authenticationToken)
+        {
+            Status = status;
+            IntervalInDays = intervalInDays;
+            DayOfWeek = dayOfWeek;
+            TimeOfDay = timeOfDay;
+            RetryInterval = retryInterval;
+            AuthenticationToken = authenticationToken;
+        }
+
+        public CallHomeSettings(Dictionary<string, string> config)
+        {
+            Status = config == null || !config.ContainsKey(STATUS)
+                           ? CallHomeStatus.Undefined
+                           : (BoolKey(config, STATUS) ? CallHomeStatus.Enabled : CallHomeStatus.Disabled);
+            IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, 14);
+            if (!Enum.TryParse(Get(config, DAY_OF_WEEK), out DayOfWeek))
+                DayOfWeek = (DayOfWeek) GetDefaultDay();
+            TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
+            RetryInterval = IntKey(config, RETRY_INTERVAL, 7);
+            AuthenticationToken = Get(config, AUTHENTICATION_TOKEN);
+        }
+
+        public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
+        {
+            var newConfig = baseDictionary == null ? new Dictionary<string, string>() : new Dictionary<string, string>(baseDictionary);
+            newConfig[STATUS] = Status == CallHomeStatus.Enabled ? "true" : "false";
+            newConfig[INTERVAL_IN_DAYS] = IntervalInDays.ToString();
+            var day = (int) DayOfWeek;
+            newConfig[DAY_OF_WEEK] = day.ToString();
+            newConfig[TIME_OF_DAY] = TimeOfDay.ToString();
+            newConfig[RETRY_INTERVAL] = RetryInterval.ToString();
+            newConfig[AUTHENTICATION_TOKEN] = AuthenticationToken;
+            return newConfig;
+        }
+
+        public int IntervalInWeeks { get { return IntervalInDays / 7; } }
+
+        public string StatusDescription
+        {
+            get
+            {
+                return Status == CallHomeStatus.Enabled
+                           ? Messages.CALLHOME_STATUS_NOT_AVAILABLE_YET
+                           : Messages.CALLHOME_STATUS_NOT_ENROLLED;
+            }
+        }
+
+        #region Helper functions
+        private static T Get<T>(Dictionary<string, T> d, string k) where T : class
+        {
+            return d != null && d.ContainsKey(k) ? d[k] : null;
+        }
+
+        private static bool BoolKey(Dictionary<string, string> d, string k)
+        {
+            string v = Get(d, k);
+            return v == null ? false : v == "true";
+        }
+
+        private static int IntKey(Dictionary<string, string> d, string k, int def)
+        {
+            int result;
+            string s = Get(d, k);
+            return s != null && int.TryParse(s, out result) ? result : def;
+        }
+
+        private static int GetDefaultDay()
+        {
+            return new Random().Next(1, 7);
+        }
+
+        private static int GetDefaultTime()
+        {
+            return new Random().Next(1, 5);
         }
 
         #endregion
