@@ -520,7 +520,7 @@ namespace XenAPI
 
         private static int GetDefaultTime()
         {
-            return new Random().Next(0, 23);
+            return new Random().Next(1, 5);
         }
 
         #endregion
