@@ -562,9 +562,9 @@ namespace XenAdmin.XenSearch
 
         internal static QueryScope GetOverviewScopeExcludingGivenTypes(ObjectTypes excludedTypes)
         {
-            ObjectTypes types = DefaultObjectTypes();
-            
-            return new QueryScope(types & ~excludedTypes);
+            QueryScope overviewScope = GetOverviewScope();
+
+            return new QueryScope(overviewScope.ObjectTypes & ~excludedTypes);
         }
 
         public static QueryFilter FullQueryFor(String p)
