@@ -532,7 +532,7 @@ namespace XenAdmin.Dialogs
                                                           NEWDISKWIZARD_MESSAGE,
                                                       Messages.
                                                           NEWDISKWIZARD_MESSAGE_TITLE))
-                        .Show(Program.MainWindow);
+                        .ShowDialog(Program.MainWindow);
                 }
             });
         }
@@ -549,7 +549,7 @@ namespace XenAdmin.Dialogs
                                                           NEW_DVD_DRIVE_REBOOT,
                                                       Messages.
                                                           NEW_DVD_DRIVE_CREATED))
-                        .Show(Program.MainWindow);
+                        .ShowDialog(Program.MainWindow);
                 }
             });
         }
