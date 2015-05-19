@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
                 return false;
             if(vdi.Connection.ResolveAll(vdi.VBDs).Count < 1)
                 return false;
-            if(vdi.GetVMs().Any(vm=>!vm.IsRunning))
+            if(vdi.GetVMs().Any(vm=>!vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return false;
             SR sr = GetSR(vdi);
             if (sr == null || sr.HBALunPerVDI)
@@ -133,11 +133,11 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_HA_VD;
             if (vdi.IsMetadataForDR)
                 return Messages.CANNOT_MOVE_DR_VD;
+            if (vdi.GetVMs().Any(vm => !vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
+                return Messages.CANNOT_MIGRATE_VDI_NON_RUNNING_VM;
             SR sr = GetSR(vdi);
             if (sr == null)
                 return base.GetCantExecuteReasonCore(item);
-            if (sr.IsLocalSR) //Is it currently hosted on a local SR
-                return Messages.LOCAL_TO_LOCAL_MOVE;
             if (sr.HBALunPerVDI)
                 return Messages.UNSUPPORTED_SR_TYPE;
 
