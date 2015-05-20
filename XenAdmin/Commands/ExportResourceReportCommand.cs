@@ -63,29 +63,17 @@ namespace XenAdmin.Commands
         
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1)
+            if (selection.FirstAsXenObject != null)
             {
-                if (CanExecute(selection[0]))
-                {
-                    Execute(selection[0].Connection);
-                }
+                Execute(selection.FirstAsXenObject.Connection);
             }
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1)
-            {
-                return CanExecute(selection[0]);
-            }
-            return false;
-        }
-
-        private static bool CanExecute(SelectedItem selection)
-        {
-            if (selection.Connection != null && selection.Connection.IsConnected &&
-                (selection.PoolAncestor != null || selection.HostAncestor != null))
-                return !Helpers.FeatureForbidden(selection.Connection, Host.RestrictExportResourceData);
+            if (selection.FirstAsXenObject != null && selection.FirstAsXenObject.Connection != null && selection.FirstAsXenObject.Connection.IsConnected &&
+                (selection.PoolAncestor != null || selection.HostAncestor != null)) // this check ensures there's no cross-pool 
+                return !Helpers.FeatureForbidden(selection.FirstAsXenObject.Connection, Host.RestrictExportResourceData);
             return false;
         }
 
