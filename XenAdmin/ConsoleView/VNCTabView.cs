@@ -198,7 +198,7 @@ namespace XenAdmin.ConsoleView
 
             UpdateParentMinimumSize();
 
-            UpdateButtons();
+            UpdateTooltipOfToogleButton();
 
             UpdateOpenSSHConsoleButtonState();
 
@@ -1252,12 +1252,8 @@ namespace XenAdmin.ConsoleView
                 toggleConsoleButton.Text = vncScreen.UseVNC ? (CanEnableRDPOnCreamOrGreater(source.Connection) ? enableRDP : UseRDP) : UseStandardDesktop;
             else
                 toggleConsoleButton.Text = vncScreen.UseSource ? UseXVNC : UseVNC;
-            
-            if (Helpers.CreamOrGreater(source.Connection))
-            {
-                if (RDPEnabled || RDPControlEnabled)
-                    tip.SetToolTip(this.toggleConsoleButton, null);
-            }
+
+            UpdateTooltipOfToogleButton();
 
             scaleCheckBox.Visible = !rdp || vncScreen.UseVNC;
             sendCAD.Enabled = !rdp || vncScreen.UseVNC;
@@ -1271,6 +1267,14 @@ namespace XenAdmin.ConsoleView
             scaleCheckBox_CheckedChanged(null, null);  // make sure scale setting is now correct: CA-84324
         }
 
+        private void UpdateTooltipOfToogleButton()
+        {
+            if (Helpers.CreamOrGreater(source.Connection))
+            {
+                if (RDPEnabled || RDPControlEnabled)
+                    tip.SetToolTip(this.toggleConsoleButton, null);
+            }
+        }
 
         private void TryToConnectRDP(object x)
         {
