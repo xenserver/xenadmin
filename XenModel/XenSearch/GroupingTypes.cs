@@ -190,10 +190,10 @@ namespace XenAdmin.XenSearch
     /// <typeparam name="T">The expected type of the property to group by</typeparam>
     public class PropertyGrouping<T> : Grouping
     {
-        private readonly Dictionary<T, String> i18ns;
-        private readonly String i18n;
-        private readonly ImageDelegate<T> images;
-        private readonly PropertyAccessor propertyAccessor;
+        protected readonly Dictionary<T, String> i18ns;
+        protected readonly String i18n;
+        protected readonly ImageDelegate<T> images;
+        protected readonly PropertyAccessor propertyAccessor;
         public readonly PropertyNames property;
 
         public PropertyGrouping(PropertyNames property, Grouping subgrouping)
@@ -303,6 +303,34 @@ namespace XenAdmin.XenSearch
         public override int GetHashCode()
         {
             return (int)property;
+        }
+    }
+
+    // Special-case Boolean groups in order to make the group name more readable: CA-165366
+    public class BoolGrouping : PropertyGrouping<bool>
+    {
+        protected readonly string i18nfalse;
+
+        public BoolGrouping(PropertyNames property, Grouping subgrouping)
+            : base(property, subgrouping)
+        {
+            this.i18nfalse = PropertyAccessors.PropertyNames_i18n_false[property];
+        }
+
+        public BoolGrouping(XmlNode node)
+            : base(node)
+        {
+            this.i18nfalse = PropertyAccessors.PropertyNames_i18n_false[property];
+        }
+
+        public string GroupingName(object group)
+        {
+            return (!(group is bool) /* shouldn't happen */ || (bool)group) ? i18n : i18nfalse;
+        }
+
+        public override string GetGroupName(object group)
+        {
+            return string.Empty;
         }
     }
 

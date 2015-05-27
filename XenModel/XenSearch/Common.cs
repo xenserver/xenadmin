@@ -216,6 +216,7 @@ namespace XenAdmin.XenSearch
         public static readonly Dictionary<String, SR.SRTypes> SRType_i18n = new Dictionary<string, SR.SRTypes>();
 
         public static readonly Dictionary<PropertyNames, String> PropertyNames_i18n = new Dictionary<PropertyNames, string>();
+        public static readonly Dictionary<PropertyNames, String> PropertyNames_i18n_false = new Dictionary<PropertyNames, string>();
 
         public static readonly Dictionary<vm_power_state, Icons> VM_power_state_images = new Dictionary<vm_power_state, Icons>();
         public static readonly Dictionary<ObjectTypes, Icons> ObjectTypes_images = new Dictionary<ObjectTypes, Icons>();
@@ -283,6 +284,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.vm] = Messages.VM;
             PropertyNames_i18n[PropertyNames.dockervm] = "Docker VM";
             PropertyNames_i18n[PropertyNames.read_caching_enabled] = Messages.VM_READ_CACHING_ENABLED_SEARCH;
+            PropertyNames_i18n_false[PropertyNames.read_caching_enabled] = Messages.VM_READ_CACHING_DISABLED_SEARCH;
             PropertyNames_i18n[PropertyNames.memory] = Messages.MEMORY;
             PropertyNames_i18n[PropertyNames.sr_type] = Messages.STORAGE_TYPE;
             PropertyNames_i18n[PropertyNames.folder] = Messages.PARENT_FOLDER;
