@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
             else
             {
                 MainWindowCommandInterface.ShowPerConnectionWizard(con,
-                    new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Move));
+                    new CrossPoolMigrateWizard(con, selection, preSelectedHost, GetWizardMode(selection)));
             }
 
         }
@@ -76,6 +76,14 @@ namespace XenAdmin.Commands
                 return false;
 
             return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
+        }
+
+        public static WizardMode GetWizardMode(SelectedItemCollection selection)
+        {
+            return selection != null && selection.Count > 0 && selection[0].XenObject is VM
+                       && (selection[0].XenObject as VM).power_state == vm_power_state.Suspended
+                           ? WizardMode.Migrate
+                           : WizardMode.Move;
         }
     }
 }

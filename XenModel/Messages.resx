@@ -6915,6 +6915,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_LOG_REMOVECONNECTION" xml:space="preserve">
     <value>Removed connection to {0}</value>
   </data>
+  <data name="MAINWINDOW_MIGRATEVM" xml:space="preserve">
+    <value>&amp;Migrate VM...</value>
+  </data>
   <data name="MAINWINDOW_MIGRATE_TO_SERVER" xml:space="preserve">
     <value>M&amp;igrate to Server</value>
   </data>
