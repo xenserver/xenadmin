@@ -19890,6 +19890,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Migrate VM....
+        /// </summary>
+        public static string MAINWINDOW_MIGRATEVM {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_MIGRATEVM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Move VM....
         /// </summary>
         public static string MAINWINDOW_MOVEVM {

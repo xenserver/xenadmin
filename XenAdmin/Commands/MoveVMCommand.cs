@@ -32,6 +32,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using XenAdmin.Wizards.CrossPoolMigrateWizard;
 using XenAPI;
 using XenAdmin.Dialogs;
 using System.Collections.ObjectModel;
@@ -41,7 +42,7 @@ using XenAdmin.Dialogs.VMDialogs;
 namespace XenAdmin.Commands
 {
     /// <summary>
-    /// Launches the Copy-VM dialog for the selected VM.
+    /// Launches the Move-VM dialog for the selected VM.
     /// </summary>
     internal class MoveVMCommand : Command
     {
@@ -87,7 +88,9 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Messages.MAINWINDOW_MOVEVM;
+                return CrossPoolMoveVMCommand.GetWizardMode(GetSelection()) == WizardMode.Migrate
+                           ? Messages.MAINWINDOW_MIGRATEVM
+                           : Messages.MAINWINDOW_MOVEVM;
             }
         }
     }
