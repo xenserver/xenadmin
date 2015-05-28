@@ -34338,6 +34338,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not using read caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_SEARCH {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This VM is using read caching.
         /// </summary>
         public static string VM_READ_CACHING_ENABLED {

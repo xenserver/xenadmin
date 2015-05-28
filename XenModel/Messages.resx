@@ -11889,6 +11889,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
     <value>Read caching has been disabled on the Storage Repository used by this VM</value>
   </data>
+  <data name="VM_READ_CACHING_DISABLED_SEARCH" xml:space="preserve">
+    <value>Not using read caching</value>
+  </data>
   <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
     <value>This VM is using read caching</value>
   </data>

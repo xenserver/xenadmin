@@ -78,7 +78,7 @@ namespace XenAdmin.Controls.XenSearch
             potentialGroups.Add(srGroup);
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<VDI>(ObjectTypes.VM, PropertyNames.disks, srGroup));
             potentialGroups.Add(new PropertyGroupingType<VM.HA_Restart_Priority>(ObjectTypes.VM, PropertyNames.ha_restart_priority));
-            potentialGroups.Add(new PropertyGroupingType<bool>(ObjectTypes.VM, PropertyNames.read_caching_enabled));
+            potentialGroups.Add(new BoolGroupingType(ObjectTypes.VM, PropertyNames.read_caching_enabled));
 			potentialGroups.Add(applianceGroup);
             potentialGroups.Add(new PropertyGroupingType<String>(ObjectTypes.AllExcFolders, PropertyNames.tags));
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<VM>(
@@ -771,6 +771,28 @@ namespace XenAdmin.Controls.XenSearch
             public override bool ForGrouping(Grouping grouping)
             {
                 PropertyGrouping<T> propertyGrouping = grouping as PropertyGrouping<T>;
+
+                if (propertyGrouping == null)
+                    return false;
+
+                return propertyGrouping.property == property;
+            }
+        }
+
+        public class BoolGroupingType : PropertyGroupingType<bool>
+        {
+            public BoolGroupingType(ObjectTypes appliesTo, PropertyNames property)
+                : base(appliesTo, property)
+            { }
+
+            public override Grouping GetGroup(Grouping subgrouping)
+            {
+                return new BoolGrouping(property, subgrouping);
+            }
+
+            public override bool ForGrouping(Grouping grouping)
+            {
+                BoolGrouping propertyGrouping = grouping as BoolGrouping;
 
                 if (propertyGrouping == null)
                     return false;
