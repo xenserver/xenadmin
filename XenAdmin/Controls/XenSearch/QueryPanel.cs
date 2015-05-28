@@ -606,7 +606,7 @@ namespace XenAdmin.Controls.XenSearch
 
         private static GridVerticalArrayItem NewDoubleRowItem(Grouping grouping, object group)
         {
-            string line1 = (grouping is BoolGrouping ? (grouping as BoolGrouping).GroupingName(group) : grouping.GroupingName);    // exception for Boolean groups: CA-165366
+            string line1 = (grouping is BoolGrouping ? (grouping as BoolGrouping).GroupingName2(group) : grouping.GroupingName);    // exception for Boolean groups: CA-165366
             object line2 = (group is DateTime ? group : grouping.GetGroupName(group));    // exception for DateTime: CA-46983
             List<GridStringItem> items = new List<GridStringItem>();
             if (line1 != null)

@@ -323,7 +323,7 @@ namespace XenAdmin.XenSearch
             this.i18nfalse = PropertyAccessors.PropertyNames_i18n_false[property];
         }
 
-        public string GroupingName(object group)
+        public string GroupingName2(object group)
         {
             return (!(group is bool) /* shouldn't happen */ || (bool)group) ? i18n : i18nfalse;
         }
