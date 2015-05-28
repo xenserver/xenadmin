@@ -35,6 +35,7 @@ WixInstaller/*/*.wixpdb
 WixInstaller/XenCenter.l10n.*
 WixInstaller/PrintEula.dll
 WixInstaller/XenCenter.l10n.wxs
+putty/putty.exe
 XenOvfApi/External Tools/bootablereference.vhd.bz2
 sign.bat
 XenServer-SDK.zip
