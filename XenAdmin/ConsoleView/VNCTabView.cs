@@ -198,7 +198,7 @@ namespace XenAdmin.ConsoleView
 
             UpdateParentMinimumSize();
 
-            UpdateButtons();
+            UpdateTooltipOfToogleButton();
 
             UpdateOpenSSHConsoleButtonState();
 
@@ -1252,17 +1252,11 @@ namespace XenAdmin.ConsoleView
                 toggleConsoleButton.Text = vncScreen.UseVNC ? (CanEnableRDPOnCreamOrGreater(source.Connection) ? enableRDP : UseRDP) : UseStandardDesktop;
             else
                 toggleConsoleButton.Text = vncScreen.UseSource ? UseXVNC : UseVNC;
-            
-            if (Helpers.CreamOrGreater(source.Connection))
-            {
-                if (RDPEnabled || RDPControlEnabled)
-                    tip.SetToolTip(this.toggleConsoleButton, null);
-            }
+
+            UpdateTooltipOfToogleButton();
 
             scaleCheckBox.Visible = !rdp || vncScreen.UseVNC;
-
-            sendCAD.Enabled = source != null && !source.is_control_domain && source.power_state == vm_power_state.Running && (!rdp || vncScreen.UseVNC);
-            
+            sendCAD.Enabled = !rdp || vncScreen.UseVNC;
             FocusVNC();
             ignoreScaleChange = true;
             if (!Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC)
@@ -1273,6 +1267,14 @@ namespace XenAdmin.ConsoleView
             scaleCheckBox_CheckedChanged(null, null);  // make sure scale setting is now correct: CA-84324
         }
 
+        private void UpdateTooltipOfToogleButton()
+        {
+            if (Helpers.CreamOrGreater(source.Connection))
+            {
+                if (RDPEnabled || RDPControlEnabled)
+                    tip.SetToolTip(this.toggleConsoleButton, null);
+            }
+        }
 
         private void TryToConnectRDP(object x)
         {
@@ -1353,7 +1355,7 @@ namespace XenAdmin.ConsoleView
         {
             //No need to reenable toggleConsoleButton, polling will do it.
             multipleDvdIsoList1.Enabled = true;
-            sendCAD.Enabled = source != null && !source.is_control_domain && source.power_state == vm_power_state.Running;
+            sendCAD.Enabled = true;
         }
 
         internal void RdpDisconnectedHandler(object sender, EventArgs e)
