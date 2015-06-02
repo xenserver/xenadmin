@@ -270,6 +270,50 @@ namespace XenAdmin.Core
             }
         }
 
+        /// <summary>
+        /// Reads a key from XENCENTER_LOCAL_KEYS\k.
+        /// </summary>
+        private static string ReadKey(string k)
+        {
+            try
+            {
+                RegistryKey masterKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(XENCENTER_LOCAL_KEYS);
+                if (masterKey == null)
+                    return null;
+
+                try
+                {
+                    var v = masterKey.GetValue(k);
+                    return (v != null) ? v.ToString() : null;
+                }
+                finally
+                {
+                    masterKey.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                log.DebugFormat(@"Failed to read {0}\{1} from registry; assuming NULL.", XENCENTER_LOCAL_KEYS, k);
+                log.Debug(e, e);
+                return null;
+            }
+        }
+
+        public static string CallHomeIdentityTokenDomainName
+        {
+            get { return ReadKey(CALL_HOME_IDENTITY_TOKEN_DOMAIN_NAME); }
+        }
+
+        public static string CallHomeUploadTokenDomainName
+        {
+            get { return ReadKey(CALL_HOME_UPLOAD_TOKEN_DOMAIN_NAME); }
+        }
+
+        public static string CallHomeUploadGrantTokenDomainName
+        {
+            get { return ReadKey(CALL_HOME_UPLOAD_GRANT_TOKEN_DOMAIN_NAME); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -285,6 +329,9 @@ namespace XenAdmin.Core
         private const string PSExecutionPolicyName = "ExecutionPolicy";
         private const string PowerShellKey = @"Software\Microsoft\PowerShell\1";
         private const string PowerShellStamp = "Install";
+        private const string CALL_HOME_IDENTITY_TOKEN_DOMAIN_NAME = "CallHomeIdentityTokenDomainName";
+        private const string CALL_HOME_UPLOAD_TOKEN_DOMAIN_NAME = "CallHomeUploadTokenDomainName";
+        private const string CALL_HOME_UPLOAD_GRANT_TOKEN_DOMAIN_NAME = "CallHomeUploadGrantTokenDomainName";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

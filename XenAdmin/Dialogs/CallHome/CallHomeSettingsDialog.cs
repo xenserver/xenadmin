@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -48,15 +47,11 @@ namespace XenAdmin.Dialogs.CallHome
         private bool authenticated;
         private string authenticationToken;
 
-        public CallHomeSettingsDialog(Pool pool): this(pool, null)
+        public CallHomeSettingsDialog(Pool pool)
         {
-        }
-
-        public CallHomeSettingsDialog(Pool pool, string authenticationToken)
-        {    
             this.pool = pool;
             callHomeSettings = pool.CallHomeSettings;
-            this.authenticationToken = callHomeSettings.AuthenticationToken ?? authenticationToken;
+            authenticationToken = callHomeSettings.GetExistingUploadToken(pool.Connection);
             InitializeComponent();
             PopulateControls();
             InitializeControls();
@@ -131,6 +126,8 @@ namespace XenAdmin.Dialogs.CallHome
                 return true;
             if (timeOfDayComboBox.SelectedIndex != callHomeSettings.TimeOfDay)
                 return true;
+            if (authenticationToken != callHomeSettings.GetUploadToken(pool.Connection))
+                return true;
             return false;
         }
 
@@ -155,7 +152,9 @@ namespace XenAdmin.Dialogs.CallHome
             HideAuthenticationStatusControls();
 
             spinnerIcon.StartSpinning();
-            var action = new CallHomeAuthenticationAction(pool, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(), false);
+
+            var action = new CallHomeAuthenticationAction(pool, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
+                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName, false);
             action.Completed += CallHomeAuthenticationAction_Completed;
             authenticateButton.Enabled = false;
             action.RunAsync();
@@ -199,10 +198,9 @@ namespace XenAdmin.Dialogs.CallHome
                     (int) (frequencyNumericBox.Value * 7),
                     (DayOfWeek) dayOfWeekComboBox.SelectedValue, 
                     (int) timeOfDayComboBox.SelectedValue,
-                    CallHomeSettings.DefaultRetryInterval,
-                    authenticationToken);
+                    CallHomeSettings.DefaultRetryInterval);
 
-                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, false).RunAsync();
+                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, false).RunAsync();
             }
             DialogResult = DialogResult.OK;
             Close();
