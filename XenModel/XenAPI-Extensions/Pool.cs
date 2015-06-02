@@ -35,6 +35,7 @@ using System.Linq;
 using System.Net;
 using XenAdmin;
 using XenAdmin.Core;
+using XenAdmin.Network;
 
 namespace XenAPI
 {
@@ -430,12 +431,12 @@ namespace XenAPI
         Disabled, Enabled, Undefined
     }
 
-    public struct CallHomeSettings
+    public class CallHomeSettings
     {
         public CallHomeStatus Status;
         public int IntervalInDays, TimeOfDay, RetryInterval;
         public DayOfWeek DayOfWeek;
-        public string AuthenticationToken;
+        public string UploadTokenSecretUuid;
 
         public const int DefaultRetryInterval = 7;
 
@@ -444,16 +445,15 @@ namespace XenAPI
         public const string DAY_OF_WEEK = "CallHome.Schedule.DayOfWeek";
         public const string TIME_OF_DAY = "CallHome.Schedule.TimeOfDay";
         public const string RETRY_INTERVAL = "CallHome.Schedule.RetryInterval";
-        public const string AUTHENTICATION_TOKEN = "CallHome.AuthenticationToken";
+        public const string UPLOAD_TOKEN_SECRET = "CallHome.UploadToken.Secret";
 
-        public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval, string authenticationToken)
+        public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
             Status = status;
             IntervalInDays = intervalInDays;
             DayOfWeek = dayOfWeek;
             TimeOfDay = timeOfDay;
             RetryInterval = retryInterval;
-            AuthenticationToken = authenticationToken;
         }
 
         public CallHomeSettings(Dictionary<string, string> config)
@@ -466,7 +466,7 @@ namespace XenAPI
                 DayOfWeek = (DayOfWeek) GetDefaultDay();
             TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
             RetryInterval = IntKey(config, RETRY_INTERVAL, 7);
-            AuthenticationToken = Get(config, AUTHENTICATION_TOKEN);
+            UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
         }
 
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
@@ -478,7 +478,7 @@ namespace XenAPI
             newConfig[DAY_OF_WEEK] = day.ToString();
             newConfig[TIME_OF_DAY] = TimeOfDay.ToString();
             newConfig[RETRY_INTERVAL] = RetryInterval.ToString();
-            newConfig[AUTHENTICATION_TOKEN] = AuthenticationToken;
+            newConfig[UPLOAD_TOKEN_SECRET] = UploadTokenSecretUuid;
             return newConfig;
         }
 
@@ -522,7 +522,51 @@ namespace XenAPI
         {
             return new Random().Next(1, 5);
         }
-
         #endregion
+
+        public string GetUploadToken(IXenConnection connection)
+        {
+            if (string.IsNullOrEmpty(UploadTokenSecretUuid))
+                return null;
+            try
+            {
+                string opaqueref = Secret.get_by_uuid(connection.Session, UploadTokenSecretUuid);
+                return Secret.get_value(connection.Session, opaqueref);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public string GetExistingUploadToken(IXenConnection connection)
+        {
+            if (connection == null)
+                return null;
+
+            string token = GetUploadToken(connection);
+
+            if (string.IsNullOrEmpty(token))
+                token = GetUploadTokenFromOtherConnections(connection);
+
+            return token;
+        }
+
+        private static string GetUploadTokenFromOtherConnections(IXenConnection currentConnection)
+        {
+            foreach (var connection in ConnectionsManager.XenConnectionsCopy)
+            {
+                if (connection == currentConnection || !connection.IsConnected)
+                    continue;
+                var poolOfOne = Helpers.GetPoolOfOne(connection);
+                if (poolOfOne != null)
+                {
+                    var token = poolOfOne.CallHomeSettings.GetUploadToken(connection);
+                    if (!string.IsNullOrEmpty(token))
+                        return token;
+                }
+            }
+            return null;
+        }
     }
 }
