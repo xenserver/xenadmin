@@ -54,14 +54,12 @@ namespace XenAdmin.Actions
                 string uploadToken = GetUploadToken(uploadGrantToken);
 
                 SetUploadTokenSecret(Connection, newConfig, uploadToken);
+                Pool.set_gui_config(Connection.Session, pool.opaque_ref, newConfig);
             }
             catch (Exception e)
             {
+                log.Error("Exception trying to authenticate", e);
                 Exception = e;
-            }
-            finally
-            {
-                Pool.set_gui_config(Connection.Session, pool.opaque_ref, newConfig);
             }
         }
 

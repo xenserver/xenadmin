@@ -433,6 +433,8 @@ namespace XenAPI
 
     public class CallHomeSettings
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public CallHomeStatus Status;
         public int IntervalInDays, TimeOfDay, RetryInterval;
         public DayOfWeek DayOfWeek;
@@ -526,15 +528,16 @@ namespace XenAPI
 
         public string GetUploadToken(IXenConnection connection)
         {
-            if (string.IsNullOrEmpty(UploadTokenSecretUuid))
+            if (connection == null || string.IsNullOrEmpty(UploadTokenSecretUuid))
                 return null;
             try
             {
                 string opaqueref = Secret.get_by_uuid(connection.Session, UploadTokenSecretUuid);
                 return Secret.get_value(connection.Session, opaqueref);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                log.Error("Exception getting the upload token from the xapi secret", e);
                 return null;
             }
         }
