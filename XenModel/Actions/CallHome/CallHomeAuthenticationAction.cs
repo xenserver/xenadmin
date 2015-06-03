@@ -140,12 +140,12 @@ namespace XenAdmin.Actions
                 result = streamReader.ReadToEnd();
             }
             TemplateResponse response = new JavaScriptSerializer().Deserialize<TemplateResponse>(result);
-            return response.token;
+            return response.Token;
         }
 
         class TemplateResponse
         {
-            public String token;
+            public string Token { get; set; }
         }
     }
 }
