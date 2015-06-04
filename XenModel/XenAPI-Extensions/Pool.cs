@@ -444,10 +444,15 @@ namespace XenAPI
 
         public const string STATUS = "CallHome.Enrollment";
         public const string INTERVAL_IN_DAYS = "CallHome.Schedule.IntervalInDays";
+        public const int intervalInDaysDefault = 14;
         public const string DAY_OF_WEEK = "CallHome.Schedule.DayOfWeek";
         public const string TIME_OF_DAY = "CallHome.Schedule.TimeOfDay";
         public const string RETRY_INTERVAL = "CallHome.Schedule.RetryInterval";
-        public const string UPLOAD_TOKEN_SECRET = "CallHome.UploadToken.Secret";
+        public const int RetryIntervalDefault = 7;
+        public const string UPLOAD_TOKEN_SECRET = "CallHome.UploadToken.Secret"; 
+        public const string UPLOAD_LOCK = "CallHome.UploadLock";
+        public const string LAST_SUCCESSFUL_UPLOAD = "CallHome.LastSuccessfulUpload";
+        public const string LAST_FAILED_UPLOAD = "CallHome.LastFailedUpload";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
@@ -463,11 +468,11 @@ namespace XenAPI
             Status = config == null || !config.ContainsKey(STATUS)
                            ? CallHomeStatus.Undefined
                            : (BoolKey(config, STATUS) ? CallHomeStatus.Enabled : CallHomeStatus.Disabled);
-            IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, 14);
+            IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, intervalInDaysDefault);
             if (!Enum.TryParse(Get(config, DAY_OF_WEEK), out DayOfWeek))
                 DayOfWeek = (DayOfWeek) GetDefaultDay();
             TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
-            RetryInterval = IntKey(config, RETRY_INTERVAL, 7);
+            RetryInterval = IntKey(config, RETRY_INTERVAL, RetryIntervalDefault);
             UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
         }
 
@@ -520,7 +525,7 @@ namespace XenAPI
             return new Random().Next(1, 7);
         }
 
-        private static int GetDefaultTime()
+        public static int GetDefaultTime()
         {
             return new Random().Next(1, 5);
         }
