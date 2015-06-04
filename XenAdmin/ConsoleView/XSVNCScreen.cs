@@ -601,17 +601,8 @@ namespace XenAdmin.ConsoleView
 
         internal bool AutoSwitchRDPLater
         {
-            get
-            {
-                return autoSwitchRDPLater;
-            }
-            set
-            {
-                if (value != autoSwitchRDPLater)
-                {
-                    autoSwitchRDPLater = value;
-                }
-            }
+            get;
+            set; 
         }
 
         internal bool UseVNC
