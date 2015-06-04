@@ -31,6 +31,8 @@
 
 using System;
 using System.ServiceProcess;
+using System.Reflection;
+using System.IO;
 
 namespace XenServerHealthCheck
 {
@@ -41,6 +43,7 @@ namespace XenServerHealthCheck
         /// </summary>
         static void Main()
         {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 

@@ -62,7 +62,7 @@ namespace XenServerHealthCheck
                     }
                     catch (Exception exn)
                     {
-                        log.Error(exn, exn);
+                        log.Error("Decrypt server information failed", exn);
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace XenServerHealthCheck
             }
             catch (Exception exp)
             {
-                log.Error(exp, exp);
+                log.Error("Get server list from XenCenter failed", exp);
             }
 
             return encServerList;
