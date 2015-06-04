@@ -56,6 +56,7 @@ namespace XenServerHealthCheck
         protected override void OnStart(string[] args)
         {
             // Set up a timer to trigger the uploading service.
+            log.Info("XenServer Health Check Service starting...");
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = 30 * 60000; // 30 minitues
             timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
@@ -64,15 +65,18 @@ namespace XenServerHealthCheck
 
         protected override void OnStop()
         {
+            log.Info("XenServer Health Check Service stopping...");
         }
 
         
 
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
+            log.Info("XenServer Health Check Service start to refresh uploading tasks");
             List<IXenConnection> Connections = ServerListHelper.GetServerList();
             foreach (IXenConnection connection in Connections)
             {
+                log.InfoFormat("Check server {0} with user {1}", connection.Hostname, connection.Username);
                 Session _session = new Session(connection.Hostname, 80);
                 _session.APIVersion = API_Version.LATEST;
                 try
