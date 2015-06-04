@@ -69,7 +69,6 @@ namespace XenAdmin.ConsoleView
         private int ConnectionRetries = 0;
 
         private volatile bool useVNC = true;
-        private volatile bool autoSwitchRDPLater = false;
 
         private bool autoCaptureKeyboardAndMouse = true;
         internal bool showConnectionBar = true;
