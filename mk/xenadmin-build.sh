@@ -181,7 +181,7 @@ version_brand_csharp()
 version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp"
 subst_globals ${REPO}/XenAdmin/Branding.cs
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify VNCControl"
+version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify VNCControl XenServerHealthCheck"
 
 #build
 
@@ -201,6 +201,7 @@ cd ${REPO}/xva_verify && run_msbuild
 cd ${REPO}/splash     && run_vcbuild "Splash.vcproj"
 cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
 cd ${REPO}/VNCControl && run_msbuild
+cd ${REPO}/XenServerHealthCheck && run_msbuild
 
 #sign (splash has already been signed through a post-build event)
 for file in XenCenter.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
@@ -220,6 +221,8 @@ for file in VNCControl.dll XenCenterLib.dll XenCenterVNC.dll XenServer.dll
 do
   cd ${REPO}/VNCControl/bin/Release && ${REPO}/sign.bat ${file}
 done 
+
+cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/sign.bat XenServerHealthCheck.exe
 
 #prepare wix
 
@@ -384,6 +387,7 @@ cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006}.xsupdat
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/VNCControl/bin/Release/VNCControl.pdb \
+   ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb
    ${OUTPUT_DIR}
 
 #create english iso files
