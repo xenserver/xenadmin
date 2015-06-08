@@ -419,6 +419,8 @@ done
 
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
+echo "@xc_product_version=${XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/manifest
+echo "@build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/manifest
 echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
