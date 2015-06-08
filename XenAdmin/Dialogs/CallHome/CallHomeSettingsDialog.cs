@@ -111,7 +111,8 @@ namespace XenAdmin.Dialogs.CallHome
             timeOfDayComboBox.SelectedValue = callHomeSettings.TimeOfDay;
             existingAuthenticationRadioButton.Enabled = existingAuthenticationRadioButton.Checked = !authenticationRequired;
             newAuthenticationRadioButton.Checked = authenticationRequired;
-            authenticateButton.Enabled = false;
+            callHomeAuthenticationPanel1.Enabled = newAuthenticationRadioButton.Checked;
+            callHomeAuthenticationPanel1.Pool = pool;
         }
 
         private bool ChangesMade()
@@ -133,60 +134,10 @@ namespace XenAdmin.Dialogs.CallHome
 
         private void UpdateButtons()
         {
-            okButton.Enabled = !enrollmentCheckBox.Checked || !authenticationRequired || authenticated;
+            okButton.Enabled = !enrollmentCheckBox.Checked || authenticated;
             okButton.Text = callHomeSettings.Status == CallHomeStatus.Enabled || !enrollmentCheckBox.Checked
                 ? Messages.OK
                 : Messages.CALLHOME_ENROLLMENT_CONFIRMATION_BUTTON_LABEL;
-        }
-
-        private void credentials_TextChanged(object sender, EventArgs e)
-        {
-            authenticateButton.Enabled = !string.IsNullOrEmpty(usernameTextBox.Text.Trim()) &&
-                                         !string.IsNullOrEmpty(passwordTextBox.Text.Trim());
-            newAuthenticationRadioButton.Checked = !string.IsNullOrEmpty(usernameTextBox.Text) ||
-                                                   !string.IsNullOrEmpty(passwordTextBox.Text);
-        }
-
-        private void authenticateButton_Click(object sender, EventArgs e)
-        {
-            HideAuthenticationStatusControls();
-
-            spinnerIcon.StartSpinning();
-
-            var action = new CallHomeAuthenticationAction(pool, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
-                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName, false);
-            action.Completed += CallHomeAuthenticationAction_Completed;
-            authenticateButton.Enabled = false;
-            action.RunAsync();
-        }
-
-        private void CallHomeAuthenticationAction_Completed(ActionBase action)
-        {
-            Program.Invoke(this, delegate
-                                     {
-                                         if (action.Succeeded)
-                                         {
-                                             spinnerIcon.DisplaySucceededImage();
-                                             authenticated = true;
-                                         }
-                                         else
-                                         {
-                                             spinnerIcon.Visible = false;
-                                             statusPictureBox.Visible = statusLabel.Visible = true;
-
-                                             statusLabel.Text = action.Exception != null
-                                                                    ? action.Exception.Message
-                                                                    : Messages.ERROR_UNKNOWN;
-                                         }
-                                         authenticateButton.Enabled = true;
-                                         UpdateButtons();
-                                     });
-
-        }
-
-        private void HideAuthenticationStatusControls()
-        {
-            statusPictureBox.Visible = statusLabel.Visible = false;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -214,6 +165,26 @@ namespace XenAdmin.Dialogs.CallHome
 
         private void enrollmentCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            UpdateButtons();
+        }
+
+        private void callHomeAuthenticationPanel1_AuthenticationChanged(object sender, EventArgs e)
+        {
+            Program.Invoke(this, delegate
+            {
+                if (callHomeAuthenticationPanel1.Authenticated)
+                {
+                    authenticated = true;
+                    authenticationToken = pool.CallHomeSettings.GetExistingUploadToken(pool.Connection);
+                }
+                UpdateButtons();
+            });
+        }
+
+        private void newAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            callHomeAuthenticationPanel1.Enabled = newAuthenticationRadioButton.Checked;
+            authenticated = existingAuthenticationRadioButton.Checked || callHomeAuthenticationPanel1.Authenticated;
             UpdateButtons();
         }
     }

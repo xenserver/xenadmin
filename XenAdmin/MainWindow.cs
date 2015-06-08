@@ -125,12 +125,15 @@ namespace XenAdmin
         private readonly LicenseManagerLauncher licenseManagerLauncher;
         private readonly LicenseTimer licenseTimer;
 
+        public readonly HealthCheckOverviewLauncher HealthCheckOverviewLauncher;
+
         private Dictionary<ToolStripMenuItem, int> pluginMenuItemStartIndexes = new Dictionary<ToolStripMenuItem, int>();
 
         public MainWindow(ArgType argType, string[] args)
         {
             Program.MainWindow = this;
             licenseManagerLauncher = new LicenseManagerLauncher(Program.MainWindow);
+            HealthCheckOverviewLauncher = new HealthCheckOverviewLauncher(Program.MainWindow);
             InvokeHelper.Initialize(this);
 
             InitializeComponent();
@@ -850,9 +853,17 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
+            ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
+
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
             RequestRefreshTreeView();
+        }
+
+        private void CheckHealthCheckEnrollment(object connection)
+        {
+            if (HealthCheckOverviewLauncher != null)
+                HealthCheckOverviewLauncher.CheckHealthCheckEnrollment((IXenConnection) connection);
         }
 
         /// <summary>

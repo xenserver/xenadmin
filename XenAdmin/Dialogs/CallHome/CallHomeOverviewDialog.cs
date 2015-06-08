@@ -32,7 +32,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.VMProtectionRecovery;
 using XenAdmin.Network;
@@ -61,13 +64,20 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
             }
 
+            Program.Invoke(this, () => RefreshGrid((List<DataGridViewRow>)e.Result));
+        }
+
+        private void RefreshGrid(List<DataGridViewRow> rows)
+        {
+            Program.AssertOnEventThread();
+
             var selectedPool = currentSelected;
             poolsDataGridView.SuspendLayout();
             try
             {
                 poolsDataGridView.Rows.Clear();
 
-                foreach (var row in (List<DataGridViewRow>)e.Result)
+                foreach (var row in rows)
                 {
                     if (poolsDataGridView.ColumnCount > 0)
                     {
@@ -164,8 +174,7 @@ namespace XenAdmin.Dialogs.CallHome
                     currentSelected = null;
             }
 
-            tableLayoutPanel2.Visible = (currentSelected != null);
-            //tableLayoutPanel1.ColumnStyles[1].Width = currentSelected == null ? 0 : 200;
+            poolDetailsPanel.Visible = (currentSelected != null);
         }
 
         private void RefreshDetailsPanel()
@@ -229,7 +238,50 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            Program.MainWindow.ShowPerConnectionWizard(poolRow.Pool.Connection, new CallHomeSettingsDialog(poolRow.Pool));
+            new CallHomeSettingsDialog(poolRow.Pool).ShowDialog(this);
+        }
+
+        public DialogResult ShowDialog(IWin32Window parent, List<IXenObject> selectedItems)
+        {
+            SelectPool(selectedItems);
+            return ShowDialog(parent);
+        }
+
+        public void RefreshView(List<IXenObject> selectedItems)
+        {
+            SelectPool(selectedItems);
+            LoadPools();
+        }
+
+        private void SelectPool(List<IXenObject> selectedItems)
+        {
+            IXenObject xo = selectedItems.Count > 0 ? selectedItems.FirstOrDefault() : null;
+            if (xo is Pool)
+                currentSelected = xo as Pool;
+        }
+
+        private void enrollNowLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
+                return;
+
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            var callHomeSettings = poolRow.Pool.CallHomeSettings;
+            if (callHomeSettings.Status != CallHomeStatus.Enabled)
+            {
+                // try to enroll into call home with the default settings, if authentication is not required
+                var token = callHomeSettings.GetExistingUploadToken(poolRow.Pool.Connection);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    callHomeSettings.Status = CallHomeStatus.Enabled;
+                    new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, false).RunAsync();
+                    return;
+                }
+                new CallHomeEnrollNowDialog(poolRow.Pool).ShowDialog(this);
+                return;
+            }
+
+            new CallHomeSettingsDialog(poolRow.Pool).ShowDialog(this);
         }
     }
 }
