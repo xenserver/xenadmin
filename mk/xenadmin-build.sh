@@ -431,6 +431,10 @@ else
     echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-successful-build
 fi
 
+# Write out version information
+echo "xc_product_version=${XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
+echo "build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/xcversion
+
 echo "Build phase succeeded at "
 date
 
