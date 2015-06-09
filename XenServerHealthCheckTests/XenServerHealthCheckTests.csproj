@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>CALL_HOME_DEV;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -30,7 +30,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>CALL_HOME_DEV;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -53,6 +53,10 @@
     <Compile Include="RequestUploadTaskTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XenAdminTests\XenAdminTests.csproj">
+      <Project>{21B9482C-D255-40D5-ABA7-C8F00F99547C}</Project>
+      <Name>XenAdminTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XenAdmin\XenAdmin.csproj">
       <Project>{70BDA4BC-F062-4302-8ACD-A15D8BF31D65}</Project>
       <Name>XenAdmin</Name>

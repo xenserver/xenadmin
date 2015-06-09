@@ -182,8 +182,6 @@ namespace XenServerHealthCheck
             newUploadLock += "|" + currentTime.ToString();
             config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
             Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
-
-            //Sleep for SleepForLockConfirm then check if the lock been set successful.
             System.Threading.Thread.Sleep(SleepForLockConfirm);
             config = Pool.get_gui_config(_session, connection.Cache.Pools[0].opaque_ref);
             

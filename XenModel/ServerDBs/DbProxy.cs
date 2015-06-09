@@ -348,6 +348,10 @@ namespace XenAdmin.ServerDBs
                 case "get_allowed_operations":
                     return new Response<string[]>(new string[0]);
 
+                case "get_gui_config":
+                    string uuid1 = (string)args[1];
+                    return new Response<object>(get_gui_config(pmi.TypeName, uuid1, true));
+
             }
 
             return new Response<String>(true, new String[] { Failure.INTERNAL_ERROR });
@@ -506,6 +510,20 @@ namespace XenAdmin.ServerDBs
             }
 
             return result;
+        }
+
+        public Object get_gui_config(String clazz, String opaqueRef, bool makeResponse)
+        {
+            Db.Table table = db.Tables[clazz];
+
+            if (!table.Rows.ContainsKey(opaqueRef))
+            {
+                if (makeResponse)
+                    return new object();
+
+                throw new Exception(Failure.OBJECT_NO_LONGER_EXISTS);
+            }
+            return table.Rows[opaqueRef].Props["gui_config"].XapiObjectValue;
         }
 
         private void edit_record(EditTypes editType, string clazz, string opaqueRef, string field, params object[] args)
