@@ -1177,6 +1177,8 @@ namespace XenAdmin.TabPages
 
                 s.AddEntry(FriendlyName("VM.OSName"), vm.GetOSName());
 
+                s.AddEntry(FriendlyName("VM.OperatingMode"), vm.IsHVM ? Messages.VM_OPERATING_MODE_HVM : Messages.VM_OPERATING_MODE_PV);
+
                 if (!vm.DefaultTemplate && Helpers.MidnightRideOrGreater(vm.Connection))
                 {
                     s.AddEntry(Messages.BIOS_STRINGS_COPIED, vm.BiosStringsCopied ? Messages.YES : Messages.NO);

@@ -2377,7 +2377,6 @@ Do you want to assign it to the policy '{2}' instead?</value>
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
     <value>Checking safe to upgrade status</value>
-    <comment> </comment>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>Checking server side status</value>
@@ -11866,6 +11865,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_NOT_SUSPENDED" xml:space="preserve">
     <value>This VM is not suspended.</value>
+  </data>
+  <data name="VM_OPERATING_MODE_HVM" xml:space="preserve">
+    <value>Fully virtualized (HVM)</value>
+  </data>
+  <data name="VM_OPERATING_MODE_PV" xml:space="preserve">
+    <value>Paravirtualized (PV)</value>
   </data>
   <data name="VM_PAUSED" xml:space="preserve">
     <value>This VM is paused.</value>
