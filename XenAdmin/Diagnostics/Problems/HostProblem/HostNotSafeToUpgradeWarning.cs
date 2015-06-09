@@ -37,13 +37,18 @@ using System.Drawing;
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
+    public enum HostNotSafeToUpgradeReason { NotEnoughSpace, Default }
+
     public class HostNotSafeToUpgradeWarning : Warning
     {
         private readonly Host host;
-        public HostNotSafeToUpgradeWarning(Check check, Host host)
+        private HostNotSafeToUpgradeReason reason;
+
+        public HostNotSafeToUpgradeWarning(Check check, Host host, HostNotSafeToUpgradeReason reason)
             : base(check)
         {
             this.host = host;
+            this.reason = reason;
         }
 
         protected override Actions.AsyncAction CreateAction(out bool cancelled)
@@ -51,7 +56,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             Program.Invoke(Program.MainWindow, delegate()
             {
                 new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NOT_SAFE_TO_UPGRADE_WARNING_LONG))
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message))
                     .ShowDialog();
             });
 
@@ -75,9 +80,37 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return String.Format(Messages.NOT_SAFE_TO_UPGRADE_WARNING_SHORT, host.name_label); }
+            get { return String.Format(ShortMessage, host.name_label); }
         }
 
+        private string Message 
+        {
+            get
+            {
+                switch (reason)
+                {
+                    case HostNotSafeToUpgradeReason.NotEnoughSpace :
+                        return Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG;
+                    
+                    default:
+                        return Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG;
+                }
+            }
+        }
 
+        private string ShortMessage
+        {
+            get
+            {
+                switch (reason)
+                {
+                    case HostNotSafeToUpgradeReason.NotEnoughSpace:
+                        return Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT;
+
+                    default:
+                        return Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT;
+                }
+            }
+        }
     }
 }

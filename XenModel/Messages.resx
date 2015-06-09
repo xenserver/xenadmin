@@ -8517,15 +8517,25 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>Not in any folder</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_WARNING_LONG" xml:space="preserve">
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>VMs on local disk will prevent disk repartitioning.
 
 New disk partitioning scheme is available in XenServer 7 that includes larger dom0 and backup partitions, dedicated partitions for logging, swap and UEFI.
 
 To benefit from repartitioning on upgrade to XenServer 7, VMs must be moved from local storage first.</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_WARNING_SHORT" xml:space="preserve">
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: VMs on local disk will prevent disk repartitioning.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
+    <value>The disk size of the local storage prevents repartitioning.
+
+New disk partitioning scheme is available in XenServer 7 that includes larger dom0 and backup partitions, dedicated partitions for logging, swap and UEFI.
+
+On continuing with the upgrade to XenServer 7, current partitioning scheme will be preserved.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT" xml:space="preserve">
+    <value>{0}: The disk size of the local storage prevents repartitioning.</value>
   </data>
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>not trusted</value>

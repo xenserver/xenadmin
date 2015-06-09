@@ -24524,18 +24524,40 @@ namespace XenAdmin {
         ///
         ///To benefit from repartitioning on upgrade to XenServer 7, VMs must be moved from local storage first..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_WARNING_LONG {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_WARNING_LONG", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0}: VMs on local disk will prevent disk repartitioning..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_WARNING_SHORT {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_WARNING_SHORT", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
+        ///
+        ///New disk partitioning scheme is available in XenServer 7 that includes larger dom0 and backup partitions, dedicated partitions for logging, swap and UEFI.
+        ///
+        ///On continuing with the upgrade to XenServer 7, current partitioning scheme will be preserved..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: The disk size of the local storage prevents repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT", resourceCulture);
             }
         }
         

@@ -54,9 +54,16 @@ namespace XenAdmin.Diagnostics.Checks
                 var config = new Dictionary<string, string>();
                 var result = XenAPI.Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "testSafe2Upgrade", config);
 
-                if (result.ToLowerInvariant() != "true")
+                switch (result.ToLowerInvariant())
                 {
-                    return new HostNotSafeToUpgradeWarning(this, Host);
+                    case "true":
+                        return null;
+
+                    case "not_enough_space":
+                        return new HostNotSafeToUpgradeWarning(this, Host, HostNotSafeToUpgradeReason.NotEnoughSpace);
+
+                    default:
+                        return new HostNotSafeToUpgradeWarning(this, Host, HostNotSafeToUpgradeReason.Default);
                 }
             }
             catch (Failure failure)
