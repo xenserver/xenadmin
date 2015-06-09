@@ -387,7 +387,7 @@ cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006}.xsupdat
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/VNCControl/bin/Release/VNCControl.pdb \
-   ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb
+   ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
 #create english iso files
