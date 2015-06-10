@@ -103,18 +103,14 @@ namespace XenServerHealthCheck
                 try
                 {
                     _session.login_with_password(connection.Username, connection.Password);
-
-                    if (_session != null)
+                    connection.LoadCache(_session);
+                    if (RequestUploadTask.Request(connection, _session))
                     {
-                        connection.LoadCache(_session);
-                        if (RequestUploadTask.Request(connection, _session))
-                        {
-                            //Create thread to do log uploading
-                            log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
-                        }
-                        _session.logout();
-                        _session = null;
+                        //Create thread to do log uploading
+                        log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
                     }
+                    _session.logout();
+                    _session = null;
                 }
                 catch (Exception exn)
                 {

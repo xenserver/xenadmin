@@ -30,9 +30,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -63,9 +60,8 @@ namespace XenServerHealthCheck
         private static double DueAfterHour = 24;
         private static bool CanLock(string UploadLock)
         {
-            bool canLock = true;
             if (UploadLock.Length == 0)
-                return canLock;
+                return true;
 
             List<string> currentLock = new List<string>(UploadLock.Split('|'));
             DateTime currentTime = DateTime.UtcNow;
@@ -74,41 +70,39 @@ namespace XenServerHealthCheck
             if (currentLock[0] == System.Configuration.ConfigurationManager.AppSettings["UUID"])
             {
                 if ((DateTime.Compare(lockTime.AddHours(DueAfterHour), currentTime) <= 0))
-                    return canLock;
+                    return true;
             }
             else if ((DateTime.Compare(lockTime.AddHours(DueAfterHour), currentTime) <= 0))
-                return canLock;
-            canLock = false;
-            return canLock;
+                return true;
+            return false;
         }
 
         private static int SleepForLockConfirm = 10 * 1000; // 10 seconds
         public static bool Request(IXenConnection connection, Session _session)
         {
-            bool needUpload = false;
             bool needRetry = false;
             Dictionary<string, string> config = Pool.get_gui_config(_session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
-                return needUpload;
+                return false;
             }
             //Check if there already some service doing the uploading already
             if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK)) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
-                return needUpload;
+                return false;
             }
 
             //No Lock has been set before, Check upload is due
-            int IntervalInDays = IntKey(config, CallHomeSettings.INTERVAL_IN_DAYS, CallHomeSettings.intervalInDaysDefault);
-            DateTime LastSuccessfulUpload = DateTime.UtcNow;
+            int intervalInDays = IntKey(config, CallHomeSettings.INTERVAL_IN_DAYS, CallHomeSettings.intervalInDaysDefault);
+            DateTime lastSuccessfulUpload = DateTime.UtcNow;
             bool haveSuccessfulUpload = false;
             if (config.ContainsKey(CallHomeSettings.LAST_SUCCESSFUL_UPLOAD))
             {
                 try
                 {
-                    LastSuccessfulUpload = DateTime.Parse(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
+                    lastSuccessfulUpload = DateTime.Parse(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
                     haveSuccessfulUpload = true;
                 }
                 catch (Exception exn)
@@ -119,10 +113,10 @@ namespace XenServerHealthCheck
 
             if (haveSuccessfulUpload)
             {//If last successful update not due. return
-                if (DateTime.Compare(DateTime.UtcNow, LastSuccessfulUpload.AddDays(IntervalInDays)) < 0)
+                if (DateTime.Compare(DateTime.UtcNow, lastSuccessfulUpload.AddDays(intervalInDays)) < 0)
                 {
-                    log.InfoFormat("Will not report for XenServer {0} that was not due {1} days", connection.Hostname, IntervalInDays);
-                    return needUpload;
+                    log.InfoFormat("Will not report for XenServer {0} that was not due {1} days", connection.Hostname, intervalInDays);
+                    return false;
                 }
             }
 
@@ -134,8 +128,8 @@ namespace XenServerHealthCheck
 
                     if (haveSuccessfulUpload)
                     {
-                        if (DateTime.Compare(LastSuccessfulUpload, LastFailedUpload) > 0)
-                            return needUpload; //A retry is not needed
+                        if (DateTime.Compare(lastSuccessfulUpload, LastFailedUpload) > 0)
+                            return false; //A retry is not needed
                     }
 
                     int retryInterval = IntKey(config, CallHomeSettings.RETRY_INTERVAL, CallHomeSettings.RetryIntervalDefault);
@@ -145,7 +139,7 @@ namespace XenServerHealthCheck
                         needRetry = true;
                     }
                     else
-                        return needUpload;
+                        return false;
                 }
                 catch (Exception exn)
                 {
@@ -158,23 +152,23 @@ namespace XenServerHealthCheck
             if (!needRetry)
             {//Check if uploading schedule meet only for new upload
                 
-                DayOfWeek DayOfWeek;
-                if (!Enum.TryParse(Get(config, CallHomeSettings.DAY_OF_WEEK), out DayOfWeek))
+                DayOfWeek dayOfWeek;
+                if (!Enum.TryParse(Get(config, CallHomeSettings.DAY_OF_WEEK), out dayOfWeek))
                 {
                     log.Error("DAY_OF_WEEK not existed");
-                    return needUpload;
+                    return false;
                 }
                 if (!config.ContainsKey(CallHomeSettings.TIME_OF_DAY))
                 {
                     log.Error("TIME_OF_DAY not existed");
-                    return needUpload;
+                    return false;
                 }
 
                 int TimeOfDay = IntKey(config, CallHomeSettings.TIME_OF_DAY, CallHomeSettings.GetDefaultTime());
-                if (currentTime.DayOfWeek != DayOfWeek && currentTime.Hour != TimeOfDay)
+                if (currentTime.DayOfWeek != dayOfWeek && currentTime.Hour != TimeOfDay)
                 {
                     log.InfoFormat("Will not report for XenServer {0} for incorrect schedule", connection.Hostname);
-                    return needUpload;
+                    return false;
                 }
             }
 
@@ -184,9 +178,8 @@ namespace XenServerHealthCheck
             Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
             System.Threading.Thread.Sleep(SleepForLockConfirm);
             config = Pool.get_gui_config(_session, connection.Cache.Pools[0].opaque_ref);
-            
-            needUpload = config[CallHomeSettings.UPLOAD_LOCK] == newUploadLock;
-            return needUpload;
+
+            return config[CallHomeSettings.UPLOAD_LOCK] == newUploadLock;
         }
     }
 }
