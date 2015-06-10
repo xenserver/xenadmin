@@ -53,10 +53,30 @@ namespace XenServerHealthCheck
             }
         }
 
+        static void AddServiceIdentifier()
+        {
+            try
+            {
+                var configFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings["UUID"] == null)
+                {
+                    settings.Add("UUID", System.Guid.NewGuid().ToString());
+                    configFile.Save(System.Configuration.ConfigurationSaveMode.Modified);
+                    System.Configuration.ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+                }
+            }
+            catch (System.Configuration.ConfigurationErrorsException)
+            {
+                log.Error("Error writing app settings");
+            }
+        }
+
         protected override void OnStart(string[] args)
         {
             // Set up a timer to trigger the uploading service.
-            log.Info("XenServer Health Check Service starting...");
+            AddServiceIdentifier();
+            log.InfoFormat("XenServer Health Check Service {0} starting...", System.Configuration.ConfigurationManager.AppSettings["UUID"]);
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = 30 * 60000; // 30 minitues
             timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
@@ -68,11 +88,12 @@ namespace XenServerHealthCheck
             log.Info("XenServer Health Check Service stopping...");
         }
 
-        
-
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
             log.Info("XenServer Health Check Service start to refresh uploading tasks");
+            
+            //We need to check if CIS can be accessed in current enviroment
+            
             List<IXenConnection> Connections = ServerListHelper.GetServerList();
             foreach (IXenConnection connection in Connections)
             {
@@ -82,16 +103,19 @@ namespace XenServerHealthCheck
                 try
                 {
                     _session.login_with_password(connection.Username, connection.Password);
-                    
-                    if (_session != null)
+                    connection.LoadCache(_session);
+                    if (RequestUploadTask.Request(connection, _session))
                     {
-                        connection.LoadCache(_session);
-                        Dictionary<string, string> gui_config = Helpers.GetGuiConfig(connection.Cache.Pools[0]);
-                        _session.logout();
+                        //Create thread to do log uploading
+                        log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
                     }
+                    _session.logout();
+                    _session = null;
                 }
                 catch (Exception exn)
                 {
+                    if (_session != null)
+                        _session.logout();
                     log.Error(exn, exn);
                 }
             }

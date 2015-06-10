@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFUValidator", "CFUValidato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenServerHealthCheck", "XenServerHealthCheck\XenServerHealthCheck.csproj", "{DEB3208D-1153-407C-8C99-0D8899BE25A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenServerHealthCheckTests", "XenServerHealthCheckTests\XenServerHealthCheckTests.csproj", "{23A30214-8F15-4C9D-A354-3E822A175B71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,16 @@ Global
 		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Win32.ActiveCfg = Release|x86
 		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|x86.Build.0 = Release|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Debug|Win32.ActiveCfg = Debug|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Debug|x86.Build.0 = Debug|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Release|Any CPU.ActiveCfg = Release|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Release|Mixed Platforms.Build.0 = Release|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Release|Win32.ActiveCfg = Release|x86
+		{23A30214-8F15-4C9D-A354-3E822A175B71}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
