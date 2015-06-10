@@ -1766,4 +1766,7 @@
   <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
     <value>Disk {0} IO Write Throughput</value>
   </data>
+  <data name="Label-VM.OperatingMode" xml:space="preserve">
+    <value>Operating mode</value>
+  </data>
 </root>
