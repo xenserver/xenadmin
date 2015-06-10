@@ -83,7 +83,7 @@ namespace XenAdmin.Dialogs
 
         public HealthCheckOverviewLauncher(IWin32Window parent)
         {
-            parent = parent;
+            this.parent = parent;
             healthCheckOverviewVisible = false;
         }
 

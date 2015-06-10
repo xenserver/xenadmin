@@ -30,10 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -43,7 +41,6 @@ namespace XenAdmin.Dialogs.CallHome
     {
         private readonly Pool pool;
         private bool authenticated;
-        private string authenticationToken;
 
         public CallHomeEnrollNowDialog(Pool pool)
         {
