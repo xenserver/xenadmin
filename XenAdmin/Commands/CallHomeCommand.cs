@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.CallHome;
 
 namespace XenAdmin.Commands
@@ -20,7 +21,8 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            MainWindowCommandInterface.ShowForm(typeof(CallHomeOverviewDialog));
+            if (Program.MainWindow.HealthCheckOverviewLauncher != null)
+                Program.MainWindow.HealthCheckOverviewLauncher.LaunchIfRequired(false, selection);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

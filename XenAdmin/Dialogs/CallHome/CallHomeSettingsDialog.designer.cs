@@ -32,11 +32,6 @@ namespace XenAdmin.Dialogs.CallHome
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.usernameLabel = new System.Windows.Forms.Label();
             this.authenticationRubricLabel = new System.Windows.Forms.Label();
             this.authenticationLabel = new System.Windows.Forms.Label();
             this.timeOfDayComboBox = new System.Windows.Forms.ComboBox();
@@ -55,18 +50,11 @@ namespace XenAdmin.Dialogs.CallHome
             this.dayOfWeekComboBox = new System.Windows.Forms.ComboBox();
             this.existingAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
             this.newAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
-            this.authenticationStatusTable = new System.Windows.Forms.TableLayoutPanel();
-            this.spinnerIcon = new XenAdmin.Controls.SpinnerIcon();
-            this.authenticateButton = new System.Windows.Forms.Button();
-            this.statusPictureBox = new System.Windows.Forms.PictureBox();
-            this.statusLabel = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.callHomeAuthenticationPanel1 = new XenAdmin.Controls.CallHomeAuthenticationPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).BeginInit();
-            this.authenticationStatusTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statusPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // okButton
@@ -87,11 +75,6 @@ namespace XenAdmin.Dialogs.CallHome
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 2, 15);
-            this.tableLayoutPanel1.Controls.Add(this.passwordTextBox, 3, 14);
-            this.tableLayoutPanel1.Controls.Add(this.usernameTextBox, 3, 13);
-            this.tableLayoutPanel1.Controls.Add(this.passwordLabel, 2, 14);
-            this.tableLayoutPanel1.Controls.Add(this.usernameLabel, 2, 13);
             this.tableLayoutPanel1.Controls.Add(this.authenticationRubricLabel, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.authenticationLabel, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.timeOfDayComboBox, 3, 8);
@@ -108,39 +91,8 @@ namespace XenAdmin.Dialogs.CallHome
             this.tableLayoutPanel1.Controls.Add(this.dayOfWeekComboBox, 3, 7);
             this.tableLayoutPanel1.Controls.Add(this.existingAuthenticationRadioButton, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.newAuthenticationRadioButton, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.authenticationStatusTable, 2, 16);
+            this.tableLayoutPanel1.Controls.Add(this.callHomeAuthenticationPanel1, 2, 17);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // flowLayoutPanel3
-            // 
-            resources.ApplyResources(this.flowLayoutPanel3, "flowLayoutPanel3");
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel3, 3);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            // 
-            // passwordTextBox
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.passwordTextBox, 2);
-            resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.UseSystemPasswordChar = true;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.credentials_TextChanged);
-            // 
-            // usernameTextBox
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.usernameTextBox, 2);
-            resources.ApplyResources(this.usernameTextBox, "usernameTextBox");
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.TextChanged += new System.EventHandler(this.credentials_TextChanged);
-            // 
-            // passwordLabel
-            // 
-            resources.ApplyResources(this.passwordLabel, "passwordLabel");
-            this.passwordLabel.Name = "passwordLabel";
-            // 
-            // usernameLabel
-            // 
-            resources.ApplyResources(this.usernameLabel, "usernameLabel");
-            this.usernameLabel.Name = "usernameLabel";
             // 
             // authenticationRubricLabel
             // 
@@ -275,52 +227,25 @@ namespace XenAdmin.Dialogs.CallHome
             this.newAuthenticationRadioButton.Name = "newAuthenticationRadioButton";
             this.newAuthenticationRadioButton.TabStop = true;
             this.newAuthenticationRadioButton.UseVisualStyleBackColor = true;
+            this.newAuthenticationRadioButton.CheckedChanged += new System.EventHandler(this.newAuthenticationRadioButton_CheckedChanged);
             // 
-            // authenticationStatusTable
+            // callHomeAuthenticationPanel1
             // 
-            resources.ApplyResources(this.authenticationStatusTable, "authenticationStatusTable");
-            this.tableLayoutPanel1.SetColumnSpan(this.authenticationStatusTable, 3);
-            this.authenticationStatusTable.Controls.Add(this.spinnerIcon, 0, 0);
-            this.authenticationStatusTable.Controls.Add(this.authenticateButton, 0, 0);
-            this.authenticationStatusTable.Controls.Add(this.statusPictureBox, 2, 0);
-            this.authenticationStatusTable.Controls.Add(this.statusLabel, 3, 0);
-            this.authenticationStatusTable.Name = "authenticationStatusTable";
+            resources.ApplyResources(this.callHomeAuthenticationPanel1, "callHomeAuthenticationPanel1");
+            this.callHomeAuthenticationPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.SetColumnSpan(this.callHomeAuthenticationPanel1, 3);
+            this.callHomeAuthenticationPanel1.Name = "callHomeAuthenticationPanel1";
+            this.callHomeAuthenticationPanel1.Pool = null;
+            this.callHomeAuthenticationPanel1.AuthenticationChanged += new System.EventHandler(this.callHomeAuthenticationPanel1_AuthenticationChanged);
             // 
-            // spinnerIcon
-            // 
-            resources.ApplyResources(this.spinnerIcon, "spinnerIcon");
-            this.spinnerIcon.Name = "spinnerIcon";
-            this.spinnerIcon.SucceededImage = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
-            this.spinnerIcon.TabStop = false;
-            // 
-            // authenticateButton
-            // 
-            resources.ApplyResources(this.authenticateButton, "authenticateButton");
-            this.authenticateButton.Name = "authenticateButton";
-            this.authenticateButton.UseVisualStyleBackColor = true;
-            this.authenticateButton.Click += new System.EventHandler(this.authenticateButton_Click);
-            // 
-            // statusPictureBox
-            // 
-            resources.ApplyResources(this.statusPictureBox, "statusPictureBox");
-            this.statusPictureBox.Image = global::XenAdmin.Properties.Resources._000_error_h32bit_16;
-            this.statusPictureBox.Name = "statusPictureBox";
-            this.statusPictureBox.TabStop = false;
-            // 
-            // statusLabel
-            // 
-            resources.ApplyResources(this.statusLabel, "statusLabel");
-            this.statusLabel.ForeColor = System.Drawing.Color.Red;
-            this.statusLabel.Name = "statusLabel";
-            // 
-            // CallHomeEnrollmentDialog
+            // CallHomeSettingsDialog
             // 
             this.AcceptButton = this.okButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "CallHomeEnrollmentDialog";
+            this.Name = "CallHomeSettingsDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -328,10 +253,6 @@ namespace XenAdmin.Dialogs.CallHome
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).EndInit();
-            this.authenticationStatusTable.ResumeLayout(false);
-            this.authenticationStatusTable.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statusPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,17 +279,8 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.Label dayOfweekLabel;
         private System.Windows.Forms.ComboBox dayOfWeekComboBox;
         private System.Windows.Forms.Label authenticationRubricLabel;
-        private System.Windows.Forms.Label passwordLabel;
-        private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.RadioButton existingAuthenticationRadioButton;
         private System.Windows.Forms.RadioButton newAuthenticationRadioButton;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.TextBox usernameTextBox;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Button authenticateButton;
-        private System.Windows.Forms.TableLayoutPanel authenticationStatusTable;
-        private System.Windows.Forms.PictureBox statusPictureBox;
-        private Controls.Common.AutoHeightLabel statusLabel;
-        private Controls.SpinnerIcon spinnerIcon;
+        private Controls.CallHomeAuthenticationPanel callHomeAuthenticationPanel1;
     }
 }

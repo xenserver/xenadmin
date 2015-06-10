@@ -31,15 +31,13 @@ namespace XenAdmin.Dialogs.CallHome
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallHomeOverviewDialog));
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.rubricLabel = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.poolsDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.PoolNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.poolNameLabel = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
             this.scheduleLabel = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -54,38 +52,42 @@ namespace XenAdmin.Dialogs.CallHome
             this.previousUploadDateLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.notEnrolledPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.enrollNowLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.policyStatementLabel = new System.Windows.Forms.Label();
+            this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.rubricLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.poolsDataGridView)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.poolDetailsPanel.SuspendLayout();
             this.healthCheckStatusPanel.SuspendLayout();
             this.previousUploadPanel.SuspendLayout();
             this.notEnrolledPanel.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // splitContainer1
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // tableLayoutPanel1
+            // splitContainer1.Panel1
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.poolsDataGridView, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 2);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.splitContainer1.Panel1.Controls.Add(this.poolsDataGridView);
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             // 
-            // rubricLabel
+            // splitContainer1.Panel2
             // 
-            resources.ApplyResources(this.rubricLabel, "rubricLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.rubricLabel, 2);
-            this.rubricLabel.Name = "rubricLabel";
+            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
             // poolsDataGridView
             // 
@@ -118,9 +120,10 @@ namespace XenAdmin.Dialogs.CallHome
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.Window;
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.poolNameLabel, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.poolDetailsPanel, 0, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // poolNameLabel
@@ -129,13 +132,13 @@ namespace XenAdmin.Dialogs.CallHome
             resources.ApplyResources(this.poolNameLabel, "poolNameLabel");
             this.poolNameLabel.Name = "poolNameLabel";
             // 
-            // tableLayoutPanel3
+            // poolDetailsPanel
             // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel3, 2);
-            this.tableLayoutPanel3.Controls.Add(this.healthCheckStatusPanel, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.notEnrolledPanel, 0, 1);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            resources.ApplyResources(this.poolDetailsPanel, "poolDetailsPanel");
+            this.tableLayoutPanel2.SetColumnSpan(this.poolDetailsPanel, 2);
+            this.poolDetailsPanel.Controls.Add(this.healthCheckStatusPanel, 0, 0);
+            this.poolDetailsPanel.Controls.Add(this.notEnrolledPanel, 0, 1);
+            this.poolDetailsPanel.Name = "poolDetailsPanel";
             // 
             // healthCheckStatusPanel
             // 
@@ -229,22 +232,61 @@ namespace XenAdmin.Dialogs.CallHome
             // notEnrolledPanel
             // 
             resources.ApplyResources(this.notEnrolledPanel, "notEnrolledPanel");
-            this.tableLayoutPanel3.SetColumnSpan(this.notEnrolledPanel, 2);
-            this.notEnrolledPanel.Controls.Add(this.linkLabel3, 0, 1);
+            this.poolDetailsPanel.SetColumnSpan(this.notEnrolledPanel, 2);
+            this.notEnrolledPanel.Controls.Add(this.enrollNowLinkLabel, 0, 1);
             this.notEnrolledPanel.Controls.Add(this.label6, 0, 0);
             this.notEnrolledPanel.Name = "notEnrolledPanel";
             // 
-            // linkLabel3
+            // enrollNowLinkLabel
             // 
-            resources.ApplyResources(this.linkLabel3, "linkLabel3");
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            resources.ApplyResources(this.enrollNowLinkLabel, "enrollNowLinkLabel");
+            this.enrollNowLinkLabel.Name = "enrollNowLinkLabel";
+            this.enrollNowLinkLabel.TabStop = true;
+            this.enrollNowLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.enrollNowLinkLabel_LinkClicked);
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
+            // 
+            // buttonCancel
+            // 
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // flowLayoutPanel2
+            // 
+            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+            this.flowLayoutPanel2.Controls.Add(this.policyStatementLabel);
+            this.flowLayoutPanel2.Controls.Add(this.PolicyStatementLinkLabel);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            // 
+            // policyStatementLabel
+            // 
+            resources.ApplyResources(this.policyStatementLabel, "policyStatementLabel");
+            this.policyStatementLabel.Name = "policyStatementLabel";
+            // 
+            // PolicyStatementLinkLabel
+            // 
+            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
+            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
+            this.PolicyStatementLinkLabel.TabStop = true;
+            // 
+            // rubricLabel
+            // 
+            resources.ApplyResources(this.rubricLabel, "rubricLabel");
+            this.rubricLabel.Name = "rubricLabel";
             // 
             // CallHomeOverviewDialog
             // 
@@ -257,19 +299,25 @@ namespace XenAdmin.Dialogs.CallHome
             this.Name = "CallHomeOverviewDialog";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CallHomeOverviewDialog_FormClosed);
             this.Load += new System.EventHandler(this.CallHomeOverview_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.poolsDataGridView)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
+            this.poolDetailsPanel.ResumeLayout(false);
+            this.poolDetailsPanel.PerformLayout();
             this.healthCheckStatusPanel.ResumeLayout(false);
             this.healthCheckStatusPanel.PerformLayout();
             this.previousUploadPanel.ResumeLayout(false);
             this.previousUploadPanel.PerformLayout();
             this.notEnrolledPanel.ResumeLayout(false);
             this.notEnrolledPanel.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -298,9 +346,13 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label scheduleLabel;
         private System.Windows.Forms.TableLayoutPanel notEnrolledPanel;
-        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.LinkLabel enrollNowLinkLabel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel poolDetailsPanel;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label policyStatementLabel;
+        private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
     }
 }
 
