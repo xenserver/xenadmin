@@ -98,24 +98,24 @@ namespace XenServerHealthCheck
             foreach (IXenConnection connection in Connections)
             {
                 log.InfoFormat("Check server {0} with user {1}", connection.Hostname, connection.Username);
-                Session _session = new Session(connection.Hostname, 80);
-                _session.APIVersion = API_Version.LATEST;
+                Session session = new Session(connection.Hostname, 80);
+                session.APIVersion = API_Version.LATEST;
                 try
                 {
-                    _session.login_with_password(connection.Username, connection.Password);
-                    connection.LoadCache(_session);
-                    if (RequestUploadTask.Request(connection, _session))
+                    session.login_with_password(connection.Username, connection.Password);
+                    connection.LoadCache(session);
+                    if (RequestUploadTask.Request(connection, session) || RequestUploadTask.OnDemandRequest(connection, session))
                     {
                         //Create thread to do log uploading
                         log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
                     }
-                    _session.logout();
-                    _session = null;
+                    session.logout();
+                    session = null;
                 }
                 catch (Exception exn)
                 {
-                    if (_session != null)
-                        _session.logout();
+                    if (session != null)
+                        session.logout();
                     log.Error(exn, exn);
                 }
             }

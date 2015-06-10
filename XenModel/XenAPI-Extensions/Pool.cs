@@ -453,6 +453,7 @@ namespace XenAPI
         public const string UPLOAD_LOCK = "CallHome.UploadLock";
         public const string LAST_SUCCESSFUL_UPLOAD = "CallHome.LastSuccessfulUpload";
         public const string LAST_FAILED_UPLOAD = "CallHome.LastFailedUpload";
+        public const string NEW_UPLOAD_REQUEST = "CallHome.NewUploadRequest";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
