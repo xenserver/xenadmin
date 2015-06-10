@@ -195,9 +195,6 @@
   <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="buttonSSH.ToolTip" xml:space="preserve">
-    <value>Remote access is not enabled on this guest</value>
-  </data>
   <data name="&gt;&gt;buttonSSH.Name" xml:space="preserve">
     <value>buttonSSH</value>
   </data>

@@ -110,7 +110,6 @@ namespace XenAdmin.ConsoleView
             // 
             resources.ApplyResources(this.buttonSSH, "buttonSSH");
             this.buttonSSH.Name = "buttonSSH";
-            this.tip.SetToolTip(this.buttonSSH, resources.GetString("buttonSSH.ToolTip"));
             this.buttonSSH.UseVisualStyleBackColor = true;
             this.buttonSSH.Click += new System.EventHandler(this.buttonSSH_Click);
             // 
