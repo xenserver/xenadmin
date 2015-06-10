@@ -1838,6 +1838,18 @@ namespace XenAPI
                 return false;
             }
         }
+
+        /// <summary>
+        /// Returns true if this VM is Windows.
+        /// </summary>
+        public bool IsWindows
+        {
+            get
+            {
+                return 
+                    this.IsHVM && BoolKey(this.platform, "viridian");
+            }
+        }
     }
 
     public struct VMStartupOptions
