@@ -1531,7 +1531,7 @@ namespace XenAdmin.ConsoleView
 
         private void buttonSSH_Click(object sender, EventArgs e)
         {
-            if (CanLaunchSSHConsole)
+            if (CanStartSSHConsole)
             {
                 var puttyPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
 
@@ -1551,27 +1551,25 @@ namespace XenAdmin.ConsoleView
 
         private void UpdateOpenSSHConsoleButtonState()
         {
-            buttonSSH.Visible = CanLaunchSSHConsole;
+            buttonSSH.Visible = IsSSHConsoleButtonShown;
+            buttonPanel.Enabled = CanStartSSHConsole;
         }
 
-        public bool CanLaunchSSHConsole
+        private bool IsSSHConsoleButtonShown
+        {
+            get
+            {
+                return
+                    IsSSHConsoleSupported && source.power_state != vm_power_state.Halted;
+            }
+        }
+
+        private bool IsSSHConsoleSupported
         { 
             get
             {
-                //Not enabled for Windows VMs
-                if (!source.is_control_domain && source.power_state == vm_power_state.Running)
-                {
-                    if (guestMetrics != null && guestMetrics.os_version != null && guestMetrics.os_version.ContainsKey("name"))
-                    {
-                        string osDistro = guestMetrics.os_version["distro"];
-                        if (osDistro != null && osDistro.ToLower().Trim() == "windows")
-                            return false;  
-                        
-                        string osString = guestMetrics.os_version["name"];
-                        if (osString != null && osString.Contains("Microsoft"))
-                            return false;
-                    }
-                }
+                if (source.IsWindows)
+                    return false;
 
                 if (source.is_control_domain)
                 {
@@ -1587,9 +1585,18 @@ namespace XenAdmin.ConsoleView
                         return false;
                 }
 
-                return
-                    source.power_state == vm_power_state.Running &&
-                    !string.IsNullOrEmpty(GetIPAddressForSSH());
+                return true;
+            }
+        }
+
+        private bool CanStartSSHConsole
+        {
+            get
+            {
+               return
+                   IsSSHConsoleSupported &&
+                   source.power_state == vm_power_state.Running &&
+                   !string.IsNullOrEmpty(GetIPAddressForSSH());
             }
         }
 
