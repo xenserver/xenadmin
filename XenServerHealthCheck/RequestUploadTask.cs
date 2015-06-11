@@ -78,10 +78,22 @@ namespace XenServerHealthCheck
         }
 
         private static int SleepForLockConfirm = 10 * 1000; // 10 seconds
-        public static bool Request(IXenConnection connection, Session _session)
+        private static bool getLock(IXenConnection connection, Session session)
+        {
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            string newUploadLock = System.Configuration.ConfigurationManager.AppSettings["UUID"];
+            newUploadLock += "|" + DateTime.UtcNow.ToString();
+            config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
+            Pool.set_gui_config(session, connection.Cache.Pools[0].opaque_ref, config);
+            System.Threading.Thread.Sleep(SleepForLockConfirm);
+            config = Pool.get_gui_config(session, connection.Cache.Pools[0].opaque_ref);
+            return config[CallHomeSettings.UPLOAD_LOCK] == newUploadLock;
+        }
+
+        public static bool Request(IXenConnection connection, Session session)
         {
             bool needRetry = false;
-            Dictionary<string, string> config = Pool.get_gui_config(_session, connection.Cache.Pools[0].opaque_ref);
+            Dictionary<string, string> config = Pool.get_gui_config(session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
@@ -172,14 +184,41 @@ namespace XenServerHealthCheck
                 }
             }
 
-            string newUploadLock = System.Configuration.ConfigurationManager.AppSettings["UUID"];
-            newUploadLock += "|" + currentTime.ToString();
-            config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
-            Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
-            System.Threading.Thread.Sleep(SleepForLockConfirm);
-            config = Pool.get_gui_config(_session, connection.Cache.Pools[0].opaque_ref);
+            return getLock(connection, session);
+        }
 
-            return config[CallHomeSettings.UPLOAD_LOCK] == newUploadLock;
+        private static int DemandTimeOutMinutes = 30;
+        public static bool OnDemandRequest(IXenConnection connection, Session session)
+        {
+            Dictionary<string, string> config = Pool.get_gui_config(session, connection.Cache.Pools[0].opaque_ref);
+            if (BoolKey(config, CallHomeSettings.STATUS) == false)
+            {
+                log.InfoFormat("Will not report on demand for XenServer {0} that was not Enroll", connection.Hostname);
+                return false;
+            }
+
+            //Check if there already some service doing the uploading already
+            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK)) == false)
+            {
+                log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
+                return false;
+            }
+
+            if (config.ContainsKey(CallHomeSettings.NEW_UPLOAD_REQUEST))
+            {
+                DateTime newUploadRequestDueTime = DateTime.Parse(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST)).AddMinutes(DemandTimeOutMinutes);
+                if (DateTime.Compare(newUploadRequestDueTime, DateTime.UtcNow) >= 0)
+                {
+                    return getLock(connection, session);
+                }
+                else
+                {
+                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand due", connection.Hostname);
+                    return false;
+                }
+            }
+            else
+                return false;
         }
     }
 }

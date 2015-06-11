@@ -127,5 +127,47 @@ namespace XenServerHealthCheckTests
             catch (Exception)
             {}
         }
+
+        public void checkDemandLock()
+        {
+            DatabaseManager.CreateNewConnection(dbName);
+            IXenConnection connection = DatabaseManager.ConnectionFor(dbName);
+            Session _session = DatabaseManager.ConnectionFor(dbName).Session;
+            DatabaseManager.ConnectionFor(dbName).LoadCache(_session);
+            try
+            {
+                Dictionary<string, string> config = cleanStack();
+                connection.LoadCache(_session);
+                //1 Uploading is inprocess by current service, demand will be ignore
+                config = cleanStack();
+                config[CallHomeSettings.UPLOAD_LOCK] = UUID + "|" + DateTime.UtcNow.ToString();
+                config[CallHomeSettings.NEW_UPLOAD_REQUEST] = DateTime.UtcNow.ToString();
+                Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsFalse(RequestUploadTask.OnDemandRequest(connection, _session));
+
+                //2 Uploading is inprocess by other service, demand will be ignore
+                config = cleanStack();
+                config[CallHomeSettings.UPLOAD_LOCK] = "test2-test2" + "|" + DateTime.UtcNow.ToString();
+                config[CallHomeSettings.NEW_UPLOAD_REQUEST] = DateTime.UtcNow.ToString();
+                Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsFalse(RequestUploadTask.OnDemandRequest(connection, _session));
+
+                //3 Uploading is not due and demand due,  demand will be ignore
+                config = cleanStack();
+                config[CallHomeSettings.UPLOAD_LOCK] = "test2-test2" + "|" + DateTime.UtcNow.Subtract(TimeSpan.FromDays(14)).ToString();
+                config[CallHomeSettings.NEW_UPLOAD_REQUEST] = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(31)).ToString();
+                Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsFalse(RequestUploadTask.OnDemandRequest(connection, _session));
+
+                //4 Uploading is due and demand not due, lock will be set
+                config = cleanStack();
+                config[CallHomeSettings.UPLOAD_LOCK] = "test2-test2" + "|" + DateTime.UtcNow.Subtract(TimeSpan.FromDays(14)).ToString();
+                config[CallHomeSettings.NEW_UPLOAD_REQUEST] = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(28)).ToString();
+                Pool.set_gui_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsTrue(RequestUploadTask.OnDemandRequest(connection, _session));
+            }
+            catch (Exception)
+            { }
+        }
     }
 }

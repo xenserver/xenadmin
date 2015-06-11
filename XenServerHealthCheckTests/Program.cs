@@ -7,6 +7,7 @@ namespace XenServerHealthCheckTests
         {
             RequestUploadTaskTests requestUploadTaskTests = new RequestUploadTaskTests();
             requestUploadTaskTests.checkUploadLock();
+            requestUploadTaskTests.checkDemandLock();
         }
     }
 }
