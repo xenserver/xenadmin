@@ -462,6 +462,7 @@ namespace XenAPI
         public const string NEW_UPLOAD_REQUEST = "NewUploadRequest";
         public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
+        public const string UPLOAD_UUID = "UploadUuid";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
