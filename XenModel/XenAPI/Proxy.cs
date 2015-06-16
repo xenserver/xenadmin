@@ -524,6 +524,10 @@ namespace XenAPI
         Response<Object>
         pool_get_gui_config(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_health_check_config")]
+        Response<Object>
+        pool_get_health_check_config(string session, string _pool);
+
         [XmlRpcMethod("pool.get_wlb_url")]
         Response<string>
         pool_get_wlb_url(string session, string _pool);
@@ -619,6 +623,18 @@ namespace XenAPI
         [XmlRpcMethod("pool.remove_from_gui_config")]
         Response<string>
         pool_remove_from_gui_config(string session, string _pool, string _key);
+
+        [XmlRpcMethod("pool.set_health_check_config")]
+        Response<string>
+        pool_set_health_check_config(string session, string _pool, Object _health_check_config);
+
+        [XmlRpcMethod("pool.add_to_health_check_config")]
+        Response<string>
+        pool_add_to_health_check_config(string session, string _pool, string _key, string _value);
+
+        [XmlRpcMethod("pool.remove_from_health_check_config")]
+        Response<string>
+        pool_remove_from_health_check_config(string session, string _pool, string _key);
 
         [XmlRpcMethod("pool.set_wlb_enabled")]
         Response<string>
@@ -6683,6 +6699,7 @@ namespace XenAPI
         public Object blobs;
         public string [] tags;
         public Object gui_config;
+        public Object health_check_config;
         public string wlb_url;
         public string wlb_username;
         public bool wlb_enabled;

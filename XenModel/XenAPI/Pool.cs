@@ -66,6 +66,7 @@ namespace XenAPI
             Dictionary<string, XenRef<Blob>> blobs,
             string[] tags,
             Dictionary<string, string> gui_config,
+            Dictionary<string, string> health_check_config,
             string wlb_url,
             string wlb_username,
             bool wlb_enabled,
@@ -94,6 +95,7 @@ namespace XenAPI
             this.blobs = blobs;
             this.tags = tags;
             this.gui_config = gui_config;
+            this.health_check_config = health_check_config;
             this.wlb_url = wlb_url;
             this.wlb_username = wlb_username;
             this.wlb_enabled = wlb_enabled;
@@ -134,6 +136,7 @@ namespace XenAPI
             blobs = update.blobs;
             tags = update.tags;
             gui_config = update.gui_config;
+            health_check_config = update.health_check_config;
             wlb_url = update.wlb_url;
             wlb_username = update.wlb_username;
             wlb_enabled = update.wlb_enabled;
@@ -165,6 +168,7 @@ namespace XenAPI
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
             tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
             gui_config = proxy.gui_config == null ? null : Maps.convert_from_proxy_string_string(proxy.gui_config);
+            health_check_config = proxy.health_check_config == null ? null : Maps.convert_from_proxy_string_string(proxy.health_check_config);
             wlb_url = proxy.wlb_url == null ? null : (string)proxy.wlb_url;
             wlb_username = proxy.wlb_username == null ? null : (string)proxy.wlb_username;
             wlb_enabled = (bool)proxy.wlb_enabled;
@@ -197,6 +201,7 @@ namespace XenAPI
             result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
             result_.tags = tags;
             result_.gui_config = Maps.convert_to_proxy_string_string(gui_config);
+            result_.health_check_config = Maps.convert_to_proxy_string_string(health_check_config);
             result_.wlb_url = (wlb_url != null) ? wlb_url : "";
             result_.wlb_username = (wlb_username != null) ? wlb_username : "";
             result_.wlb_enabled = wlb_enabled;
@@ -233,6 +238,7 @@ namespace XenAPI
             blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             tags = Marshalling.ParseStringArray(table, "tags");
             gui_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "gui_config"));
+            health_check_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "health_check_config"));
             wlb_url = Marshalling.ParseString(table, "wlb_url");
             wlb_username = Marshalling.ParseString(table, "wlb_username");
             wlb_enabled = Marshalling.ParseBool(table, "wlb_enabled");
@@ -269,6 +275,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._blobs, other._blobs) &&
                 Helper.AreEqual2(this._tags, other._tags) &&
                 Helper.AreEqual2(this._gui_config, other._gui_config) &&
+                Helper.AreEqual2(this._health_check_config, other._health_check_config) &&
                 Helper.AreEqual2(this._wlb_url, other._wlb_url) &&
                 Helper.AreEqual2(this._wlb_username, other._wlb_username) &&
                 Helper.AreEqual2(this._wlb_enabled, other._wlb_enabled) &&
@@ -324,6 +331,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_gui_config, server._gui_config))
                 {
                     Pool.set_gui_config(session, opaqueRef, _gui_config);
+                }
+                if (!Helper.AreEqual2(_health_check_config, server._health_check_config))
+                {
+                    Pool.set_health_check_config(session, opaqueRef, _health_check_config);
                 }
                 if (!Helper.AreEqual2(_wlb_enabled, server._wlb_enabled))
                 {
@@ -555,6 +566,17 @@ namespace XenAPI
         public static Dictionary<string, string> get_gui_config(Session session, string _pool)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.pool_get_gui_config(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Get the health_check_config field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static Dictionary<string, string> get_health_check_config(Session session, string _pool)
+        {
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_health_check_config(session.uuid, (_pool != null) ? _pool : "").parse());
         }
 
         /// <summary>
@@ -836,6 +858,43 @@ namespace XenAPI
         public static void remove_from_gui_config(Session session, string _pool, string _key)
         {
             session.proxy.pool_remove_from_gui_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
+        }
+
+        /// <summary>
+        /// Set the health_check_config field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_health_check_config">New value to set</param>
+        public static void set_health_check_config(Session session, string _pool, Dictionary<string, string> _health_check_config)
+        {
+            session.proxy.pool_set_health_check_config(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_health_check_config)).parse();
+        }
+
+        /// <summary>
+        /// Add the given key-value pair to the health_check_config field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
+        public static void add_to_health_check_config(Session session, string _pool, string _key, string _value)
+        {
+            session.proxy.pool_add_to_health_check_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+        }
+
+        /// <summary>
+        /// Remove the given key and its corresponding value from the health_check_config field of the given pool.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_key">Key to remove</param>
+        public static void remove_from_health_check_config(Session session, string _pool, string _key)
+        {
+            session.proxy.pool_remove_from_health_check_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
         }
 
         /// <summary>
@@ -2094,6 +2153,25 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _gui_config;
+
+        /// <summary>
+        /// Configuration for the automatic health check feature
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual Dictionary<string, string> health_check_config
+        {
+            get { return _health_check_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _health_check_config))
+                {
+                    _health_check_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("health_check_config");
+                }
+            }
+        }
+        private Dictionary<string, string> _health_check_config;
 
         /// <summary>
         /// Url for the configured workload balancing host
