@@ -39,6 +39,7 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
 using System.Drawing;
+using System.Globalization;
 
 
 namespace XenAdmin.Dialogs
@@ -192,6 +193,23 @@ namespace XenAdmin.Dialogs
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateErrorsAndButtons();
+
+            var thinProvisioningEnabled = false;
+            if (SrListBox.SR != null)
+            {
+                thinProvisioningEnabled = SrListBox.SR.sm_config.Keys.Contains("allocation") && SrListBox.SR.sm_config["allocation"] == "dynamic";
+
+            }
+
+            initialAllocationNumericUpDown.Enabled =
+            labelInitialAllocation.Enabled =
+            allocationQuantumNumericUpDown.Enabled =
+            labelAllocationQuantum.Enabled = thinProvisioningEnabled;
+
+            if (thinProvisioningEnabled)
+                DefaultToSRsConfig();
+
+
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -291,12 +309,48 @@ namespace XenAdmin.Dialogs
             return false;
         }
 
+        public Dictionary<string, string> SMConfig
+        {
+            get
+            {
+                var smconfig = new Dictionary<string, string>();
+
+                if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
+                {
+                    smconfig["allocation"] = "dynamic";
+                    smconfig["allocation-quantum"] = allocationQuantumNumericUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                    smconfig["initial-allocation"] = initialAllocationNumericUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                }
+
+                return smconfig;
+            }
+        }
+
+        void DefaultToSRsConfig()
+        {
+            var smConfig = SrListBox.SR.sm_config;
+            decimal temp = 0;
+
+            if (smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
+            {
+                if (smConfig.ContainsKey("initial-allocation") && decimal.TryParse(smConfig["initial-allocation"], out temp))
+                    initialAllocationNumericUpDown.Value = temp;
+
+                if (smConfig.ContainsKey("allocation-quantum") && decimal.TryParse(smConfig["allocation-quantum"], out temp))
+                    allocationQuantumNumericUpDown.Value = temp;
+            }
+        }
+
         public VDI NewDisk()
         {
             VDI vdi = new VDI();
             vdi.Connection = connection;
             vdi.read_only = DiskTemplate != null ? DiskTemplate.read_only : false;
             vdi.SR = new XenAPI.XenRef<XenAPI.SR>(SrListBox.SR);
+
+            if (SMConfig != null && SMConfig.Count > 0)
+                vdi.sm_config = SMConfig;
+
             vdi.virtual_size = Convert.ToInt64(DiskSizeNumericUpDown.Value * GetUnits());
             vdi.name_label = NameTextBox.Text;
             vdi.name_description = DescriptionTextBox.Text;

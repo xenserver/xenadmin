@@ -10677,6 +10677,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="STORAGE_PRIORITY" xml:space="preserve">
     <value>Priority</value>
   </data>
+  <data name="STORAGE_PROVISIONING_METHOD_TITLE" xml:space="preserve">
+    <value>Choose storage provisioning method</value>
+  </data>
   <data name="STORAGE_READ_ONLY" xml:space="preserve">
     <value>Read Only</value>
   </data>
