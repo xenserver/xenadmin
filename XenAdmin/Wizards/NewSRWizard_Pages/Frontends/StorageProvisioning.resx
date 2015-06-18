@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="initialAllocationNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 108</value>
+    <value>174, 108</value>
   </data>
   <data name="initialAllocationNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -157,13 +157,13 @@
     <value>33, 111</value>
   </data>
   <data name="labelInitialAllocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 13</value>
+    <value>135, 13</value>
   </data>
   <data name="labelInitialAllocation.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelInitialAllocation.Text" xml:space="preserve">
-    <value>Default virtual disk initial allocation:</value>
+    <value>Virtual disk initial allocation:</value>
   </data>
   <data name="&gt;&gt;labelInitialAllocation.Name" xml:space="preserve">
     <value>labelInitialAllocation</value>
@@ -232,13 +232,13 @@
     <value>3, 62</value>
   </data>
   <data name="radioButtonThickProvisioning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 17</value>
+    <value>376, 17</value>
   </data>
   <data name="radioButtonThickProvisioning.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="radioButtonThickProvisioning.Text" xml:space="preserve">
-    <value>Thick provisioning</value>
+    <value>Thick provisioning: reserve the full size of the virtual disk when it is created</value>
   </data>
   <data name="&gt;&gt;radioButtonThickProvisioning.Name" xml:space="preserve">
     <value>radioButtonThickProvisioning</value>
@@ -265,13 +265,13 @@
     <value>33, 137</value>
   </data>
   <data name="labelAllocationQuantum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 13</value>
+    <value>120, 13</value>
   </data>
   <data name="labelAllocationQuantum.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="labelAllocationQuantum.Text" xml:space="preserve">
-    <value>Default subsequent allocations:</value>
+    <value>Subsequent allocations:</value>
   </data>
   <data name="&gt;&gt;labelAllocationQuantum.Name" xml:space="preserve">
     <value>labelAllocationQuantum</value>
@@ -289,7 +289,7 @@
     <value>Left</value>
   </data>
   <data name="allocationQuantumNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 134</value>
+    <value>174, 134</value>
   </data>
   <data name="allocationQuantumNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -322,16 +322,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelPercent1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 111</value>
+    <value>230, 111</value>
   </data>
   <data name="labelPercent1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 13</value>
+    <value>119, 13</value>
   </data>
   <data name="labelPercent1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="labelPercent1.Text" xml:space="preserve">
-    <value>%</value>
+    <value>% of the virtual disk size</value>
   </data>
   <data name="&gt;&gt;labelPercent1.Name" xml:space="preserve">
     <value>labelPercent1</value>
@@ -355,16 +355,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelPercent2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 137</value>
+    <value>230, 137</value>
   </data>
   <data name="labelPercent2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 13</value>
+    <value>119, 13</value>
   </data>
   <data name="labelPercent2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="labelPercent2.Text" xml:space="preserve">
-    <value>%</value>
+    <value>% of the virtual disk size</value>
   </data>
   <data name="&gt;&gt;labelPercent2.Name" xml:space="preserve">
     <value>labelPercent2</value>
@@ -406,7 +406,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="initialAllocationNumericUpDown" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonThickProvisioning" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelInitialAllocation" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonThinProvisioning" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelAllocationQuantum" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="allocationQuantumNumericUpDown" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPercent1" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelPercent2" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,30,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="initialAllocationNumericUpDown" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonThickProvisioning" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelInitialAllocation" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonThinProvisioning" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelAllocationQuantum" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="allocationQuantumNumericUpDown" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPercent1" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelPercent2" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,30,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="radioButtonThinProvisioning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -415,13 +415,13 @@
     <value>3, 85</value>
   </data>
   <data name="radioButtonThinProvisioning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 17</value>
+    <value>388, 17</value>
   </data>
   <data name="radioButtonThinProvisioning.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="radioButtonThinProvisioning.Text" xml:space="preserve">
-    <value>&amp;Thin provisioning</value>
+    <value>&amp;Thin provisioning: reserve a small space initially and allocate more as required</value>
   </data>
   <data name="&gt;&gt;radioButtonThinProvisioning.Name" xml:space="preserve">
     <value>radioButtonThinProvisioning</value>

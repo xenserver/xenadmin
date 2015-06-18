@@ -174,10 +174,11 @@ namespace XenAdmin.Dialogs
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.comboBoxUnits);
             this.panel2.Controls.Add(this.labelError);
             this.panel2.Controls.Add(this.pictureBoxError);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // comboBoxUnits
@@ -229,6 +230,7 @@ namespace XenAdmin.Dialogs
             0,
             0,
             0});
+            this.initialAllocationNumericUpDown.ValueChanged += new System.EventHandler(this.initialAllocationNumericUpDown_ValueChanged);
             // 
             // allocationQuantumNumericUpDown
             // 

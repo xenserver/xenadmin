@@ -51,6 +51,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         #region Accessors
 
 
+
         public Dictionary<string, string> SMConfig
         {
             get
@@ -60,8 +61,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (radioButtonThinProvisioning.Checked)
                 {
                     smconfig["allocation"] = "dynamic";
-                    smconfig["allocation-quantum"] = allocationQuantumNumericUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial-allocation"] = initialAllocationNumericUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                    smconfig["allocation_quantum"] = (allocationQuantumNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
+                    smconfig["initial_allocation"] = (initialAllocationNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
                 }
 
                 return smconfig;
@@ -84,7 +85,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string PageTitle { get { return Messages.STORAGE_PROVISIONING_METHOD_TITLE; } }
 
-        public override string Text { get { return Messages.SETTINGS; } }
+        public override string Text { get { return Messages.STORAGE_PROVISIONING_SETTINGS; } }
 
         public override string HelpID { get { return "helpid "; } }
 
@@ -101,16 +102,50 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         }
 
-        public void DisableAllControls()
+        public void DisableControls()
         {
             foreach (Control c in Controls)
                 c.Enabled = false;
+        }
+
+        public void ResetControls()
+        {
+            foreach (Control c in Controls)
+                c.Enabled = true;
+
+            UpdateControls();
+        }
+
+        public void SetControlsUsingExistingSMConfig(Dictionary<string, string> smConfig)
+        {
+            decimal temp = 0;
+
+            if (smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
+            {
+                radioButtonThickProvisioning.Checked = false;
+                radioButtonThinProvisioning.Checked = true;
+
+                if (smConfig.ContainsKey("initial_allocation") && decimal.TryParse(smConfig["initial_allocation"], out temp))
+                    initialAllocationNumericUpDown.Value = temp * 100;
+
+                if (smConfig.ContainsKey("allocation_quantum") && decimal.TryParse(smConfig["allocation_quantum"], out temp))
+                    allocationQuantumNumericUpDown.Value = temp * 100;
+            }
+            else
+            {
+                radioButtonThickProvisioning.Checked = true;
+                radioButtonThinProvisioning.Checked = false;
+                initialAllocationNumericUpDown.ResetText();
+                allocationQuantumNumericUpDown.ResetText();
+            }
         }
 
         private void UpdateControls()
         {
             labelAllocationQuantum.Enabled =
             labelInitialAllocation.Enabled =
+            labelPercent1.Enabled =
+            labelPercent2.Enabled =
             allocationQuantumNumericUpDown.Enabled =
             initialAllocationNumericUpDown.Enabled = radioButtonThinProvisioning.Checked;
         }

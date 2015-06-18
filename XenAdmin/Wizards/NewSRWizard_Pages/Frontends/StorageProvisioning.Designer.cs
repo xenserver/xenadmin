@@ -63,7 +63,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // radioButtonThinProvisioning
             // 
             resources.ApplyResources(this.radioButtonThinProvisioning, "radioButtonThinProvisioning");
-            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonThinProvisioning, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonThinProvisioning, 4);
             this.radioButtonThinProvisioning.Name = "radioButtonThinProvisioning";
             this.radioButtonThinProvisioning.UseVisualStyleBackColor = true;
             this.radioButtonThinProvisioning.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -72,7 +72,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.radioButtonThickProvisioning, "radioButtonThickProvisioning");
             this.radioButtonThickProvisioning.Checked = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonThickProvisioning, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonThickProvisioning, 4);
             this.radioButtonThickProvisioning.Name = "radioButtonThickProvisioning";
             this.radioButtonThickProvisioning.TabStop = true;
             this.radioButtonThickProvisioning.UseVisualStyleBackColor = true;

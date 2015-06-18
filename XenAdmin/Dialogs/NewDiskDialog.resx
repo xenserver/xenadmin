@@ -122,7 +122,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="DiskSizeNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 147</value>
+    <value>174, 147</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DiskSizeNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -175,7 +175,7 @@
     <value>0, 0, 3, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 29</value>
+    <value>171, 29</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -217,7 +217,7 @@
     <value>0, 3, 0, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 32</value>
+    <value>171, 32</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -244,13 +244,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="NameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 42</value>
+    <value>174, 42</value>
   </data>
   <data name="NameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 70, 6</value>
   </data>
   <data name="NameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 23</value>
+    <value>413, 23</value>
   </data>
   <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -274,7 +274,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="DescriptionTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 71</value>
+    <value>174, 71</value>
   </data>
   <data name="DescriptionTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 70, 18</value>
@@ -283,7 +283,7 @@
     <value>True</value>
   </data>
   <data name="DescriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 58</value>
+    <value>413, 58</value>
   </data>
   <data name="DescriptionTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -316,7 +316,7 @@
     <value>0, 0, 3, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 76</value>
+    <value>171, 76</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -346,7 +346,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 3</value>
+    <value>399, 3</value>
   </data>
   <data name="CloseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -376,7 +376,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="OkButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 3</value>
+    <value>318, 3</value>
   </data>
   <data name="OkButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -409,10 +409,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 341</value>
+    <value>177, 341</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 29</value>
+    <value>477, 29</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -445,7 +445,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 92</value>
+    <value>174, 92</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -464,6 +464,9 @@
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="panel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="comboBoxUnits.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -565,13 +568,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 147</value>
+    <value>282, 147</value>
   </data>
   <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 23</value>
+    <value>356, 26</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -643,13 +646,13 @@
     <value>3, 307</value>
   </data>
   <data name="labelAllocationQuantum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 15</value>
+    <value>168, 15</value>
   </data>
   <data name="labelAllocationQuantum.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="labelAllocationQuantum.Text" xml:space="preserve">
-    <value>Default subsequent allocations:</value>
+    <value>Virtual subsequent allocations:</value>
   </data>
   <data name="&gt;&gt;labelAllocationQuantum.Name" xml:space="preserve">
     <value>labelAllocationQuantum</value>
@@ -679,13 +682,13 @@
     <value>3, 278</value>
   </data>
   <data name="labelInitialAllocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 15</value>
+    <value>155, 15</value>
   </data>
   <data name="labelInitialAllocation.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="labelInitialAllocation.Text" xml:space="preserve">
-    <value>Default virtual disk initial allocation:</value>
+    <value>Virtual disk initial allocation:</value>
   </data>
   <data name="&gt;&gt;labelInitialAllocation.Name" xml:space="preserve">
     <value>labelInitialAllocation</value>
@@ -706,7 +709,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="initialAllocationNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 274</value>
+    <value>174, 274</value>
   </data>
   <data name="initialAllocationNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 3</value>
@@ -739,7 +742,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="allocationQuantumNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 303</value>
+    <value>174, 303</value>
   </data>
   <data name="allocationQuantumNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 3</value>
@@ -775,7 +778,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 278</value>
+    <value>285, 278</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 15</value>
@@ -808,7 +811,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 307</value>
+    <value>285, 307</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 15</value>
@@ -862,7 +865,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NameTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="DescriptionTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="SrListBox" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskSizeNumericUpDown" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="9" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelAllocationQuantum" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialAllocation" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="initialAllocationNumericUpDown" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="allocationQuantumNumericUpDown" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,33.33333,Percent,66.66666" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NameTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="DescriptionTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="SrListBox" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskSizeNumericUpDown" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="9" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="4" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelAllocationQuantum" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialAllocation" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="initialAllocationNumericUpDown" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="allocationQuantumNumericUpDown" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,33.33333,Percent,66.66666" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="SrListBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -871,13 +874,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="SrListBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 179</value>
+    <value>174, 179</value>
   </data>
   <data name="SrListBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 70, 6</value>
   </data>
   <data name="SrListBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 86</value>
+    <value>413, 86</value>
   </data>
   <data name="SrListBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

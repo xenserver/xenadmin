@@ -257,12 +257,23 @@ namespace XenAdmin.Wizards
                     return xenTabPageCslg.PerformStorageSystemScan();
                 }
             }
-            
-            if (senderPage == xenTabPageLvmoHba)
-            {
-                return CanShowLVMoHBASummaryPage();
-            }
 
+            if (m_srWizardType is SrWizardType_LvmoHba)
+            {
+                if (!Helpers.DundeeOrGreater(xenConnection)
+                    || senderPage == xenTabPageStorageProvisioningMethod
+                    || senderPage == xenTabPageLvmoHba && !xenTabPageLvmoHba.SrDescriptors.Any(srDescriptor => string.IsNullOrEmpty(srDescriptor.UUID)))
+                {
+                    if (xenTabPageStorageProvisioningMethod.SMConfig.Count > 0)
+                    {
+                        xenTabPageLvmoHba.SrDescriptors
+                            .Where(desc => string.IsNullOrEmpty(desc.UUID)).ToList()
+                            .ForEach(desc => desc.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig);
+                    }
+
+                    return CanShowLVMoHBASummaryPage();
+                }
+            }
             return base.RunNextPagePrecheck(senderPage);
         }
      
@@ -288,7 +299,7 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_LvmoHba)
                 {
                     AddPage(xenTabPageLvmoHba);
-                    
+
                     if (Helpers.DundeeOrGreater(xenConnection))
                         AddPage(xenTabPageStorageProvisioningMethod);
                     
@@ -371,7 +382,14 @@ namespace XenAdmin.Wizards
                 SetCustomDescription(m_srWizardType, xenTabPageLvmoIscsi.SrDescription);
 
                 if (m_srWizardType.UUID != null) //already existing SR
-                    xenTabPageStorageProvisioningMethod.DisableAllControls();
+                {
+                    xenTabPageStorageProvisioningMethod.SetControlsUsingExistingSMConfig(m_srWizardType.SMConfig);
+                    xenTabPageStorageProvisioningMethod.DisableControls();
+                }
+                else
+                {
+                    xenTabPageStorageProvisioningMethod.ResetControls();
+                }
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
@@ -485,6 +503,15 @@ namespace XenAdmin.Wizards
                 foreach (var entry in xentabPageEqualLogic.DeviceConfigParts)
                     m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
                 SetCustomDescription(m_srWizardType, xentabPageEqualLogic.SrDescription);
+            }
+            else if (senderPagetype == typeof(LVMoHBA))
+            {
+                bool creatingNew = m_srWizardType.SrDescriptors.Any(srDescriptor => string.IsNullOrEmpty(srDescriptor.UUID));
+                if (!creatingNew)
+                {
+                    DisablePage(xenTabPageStorageProvisioningMethod, true);
+                    xenTabPageStorageProvisioningMethod.ResetControls();
+                }
             }
             else if (senderPagetype == typeof(StorageProvisioning))
             {

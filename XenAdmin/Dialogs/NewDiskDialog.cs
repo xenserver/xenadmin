@@ -194,22 +194,27 @@ namespace XenAdmin.Dialogs
         {
             updateErrorsAndButtons();
 
-            var thinProvisioningEnabled = false;
-            if (SrListBox.SR != null)
-            {
-                thinProvisioningEnabled = SrListBox.SR.sm_config.Keys.Contains("allocation") && SrListBox.SR.sm_config["allocation"] == "dynamic";
-
-            }
 
             initialAllocationNumericUpDown.Enabled =
             labelInitialAllocation.Enabled =
             allocationQuantumNumericUpDown.Enabled =
-            labelAllocationQuantum.Enabled = thinProvisioningEnabled;
+            labelAllocationQuantum.Enabled = IsSelectedSRThinProvisioned;
 
-            if (thinProvisioningEnabled)
+            if (IsSelectedSRThinProvisioned)
                 DefaultToSRsConfig();
 
 
+        }
+
+        private bool IsSelectedSRThinProvisioned
+        {
+            get
+            {
+                if (SrListBox.SR == null)
+                    return false;
+
+                return SrListBox.SR.sm_config.Keys.Contains("allocation") && SrListBox.SR.sm_config["allocation"] == "dynamic";
+            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -318,8 +323,8 @@ namespace XenAdmin.Dialogs
                 if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
                 {
                     smconfig["allocation"] = "dynamic";
-                    smconfig["allocation-quantum"] = allocationQuantumNumericUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial-allocation"] = initialAllocationNumericUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                    smconfig["allocation_quantum"] = (allocationQuantumNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
+                    smconfig["initial_allocation"] = (initialAllocationNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
                 }
 
                 return smconfig;
@@ -333,11 +338,11 @@ namespace XenAdmin.Dialogs
 
             if (smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
             {
-                if (smConfig.ContainsKey("initial-allocation") && decimal.TryParse(smConfig["initial-allocation"], out temp))
-                    initialAllocationNumericUpDown.Value = temp;
+                if (smConfig.ContainsKey("initial_allocation") && decimal.TryParse(smConfig["initial_allocation"], out temp))
+                    initialAllocationNumericUpDown.Value = temp * 100;
 
-                if (smConfig.ContainsKey("allocation-quantum") && decimal.TryParse(smConfig["allocation-quantum"], out temp))
-                    allocationQuantumNumericUpDown.Value = temp;
+                if (smConfig.ContainsKey("allocation_quantum") && decimal.TryParse(smConfig["allocation_quantum"], out temp))
+                    allocationQuantumNumericUpDown.Value = temp * 100;
             }
         }
 
@@ -404,6 +409,9 @@ namespace XenAdmin.Dialogs
         private void updateErrorsAndButtons()
         {
             // Ordering is important here, we want to show the most relevant message
+
+            if (comboBoxUnits.SelectedItem == null)
+                return;
 
             if (!SrListBox.ValidSelectionExists)
             {
@@ -518,6 +526,12 @@ namespace XenAdmin.Dialogs
             UpdateDiskSize();
         }
 
+
+        private void initialAllocationNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateDiskSize();
+        }
+
         private void UpdateDiskSize()
         {
             // Don't use DiskSizeNumericUpDown.Value here, as it will fire the NumericUpDown built-in validation. Use Text property instead. (CA-46028)
@@ -526,7 +540,17 @@ namespace XenAdmin.Dialogs
             {
                 try
                 {
-                    SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
+                    if (!IsSelectedSRThinProvisioned)
+                    {
+                        SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
+                    }
+                    else
+                    {
+                        //Only the initial allocation is considered for thin provisioning.
+                        var initialSizeRatio = initialAllocationNumericUpDown.Value / 100;
+
+                        SrListBox.DiskSize = (long)(Math.Round(newValue * initialSizeRatio * GetUnits()));
+                    }
                 }
                 catch (OverflowException)
                 {
@@ -607,5 +631,6 @@ namespace XenAdmin.Dialogs
                 }
             });
         }
+
     }
 }
