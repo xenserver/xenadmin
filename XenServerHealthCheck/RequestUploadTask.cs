@@ -84,16 +84,16 @@ namespace XenServerHealthCheck
             string newUploadLock = System.Configuration.ConfigurationManager.AppSettings["UUID"];
             newUploadLock += "|" + DateTime.UtcNow.ToString();
             config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
-            Pool.set_gui_config(session, connection.Cache.Pools[0].opaque_ref, config);
+            Pool.set_health_check_config(session, connection.Cache.Pools[0].opaque_ref, config);
             System.Threading.Thread.Sleep(SleepForLockConfirm);
-            config = Pool.get_gui_config(session, connection.Cache.Pools[0].opaque_ref);
+            config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             return config[CallHomeSettings.UPLOAD_LOCK] == newUploadLock;
         }
 
         public static bool Request(IXenConnection connection, Session session)
         {
             bool needRetry = false;
-            Dictionary<string, string> config = Pool.get_gui_config(session, connection.Cache.Pools[0].opaque_ref);
+            Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
@@ -190,7 +190,7 @@ namespace XenServerHealthCheck
         private static int DemandTimeOutMinutes = 30;
         public static bool OnDemandRequest(IXenConnection connection, Session session)
         {
-            Dictionary<string, string> config = Pool.get_gui_config(session, connection.Cache.Pools[0].opaque_ref);
+            Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
                 log.InfoFormat("Will not report on demand for XenServer {0} that was not Enroll", connection.Hostname);

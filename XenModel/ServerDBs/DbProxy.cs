@@ -348,9 +348,9 @@ namespace XenAdmin.ServerDBs
                 case "get_allowed_operations":
                     return new Response<string[]>(new string[0]);
 
-                case "get_gui_config":
+                case "get_health_check_config":
                     string uuid1 = (string)args[1];
-                    return new Response<object>(get_gui_config(pmi.TypeName, uuid1, true));
+                    return new Response<object>(get_health_check_config(pmi.TypeName, uuid1, true));
 
             }
 
@@ -512,7 +512,7 @@ namespace XenAdmin.ServerDBs
             return result;
         }
 
-        public Object get_gui_config(String clazz, String opaqueRef, bool makeResponse)
+        public Object get_health_check_config(String clazz, String opaqueRef, bool makeResponse)
         {
             Db.Table table = db.Tables[clazz];
 
@@ -523,7 +523,7 @@ namespace XenAdmin.ServerDBs
 
                 throw new Exception(Failure.OBJECT_NO_LONGER_EXISTS);
             }
-            return table.Rows[opaqueRef].Props["gui_config"].XapiObjectValue;
+            return table.Rows[opaqueRef].Props["health_check_config"].XapiObjectValue;
         }
 
         private void edit_record(EditTypes editType, string clazz, string opaqueRef, string field, params object[] args)
