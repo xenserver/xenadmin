@@ -38,6 +38,7 @@ and also some libraries which we do not store in the source tree:
  *  ICSharpCode.SharpZipLib.dll
  *  Ionic.Zip.dll
  *  log4net.dll
+
 You can find the source code of these libraries (along with some patches) in dotnet-packages repository.
  
 You also need NUnit libraries
