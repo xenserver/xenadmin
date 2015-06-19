@@ -28,10 +28,11 @@ file for more information.
 How to build XenCenter
 ----------------------
 
-To build XenCenter, you not only need 
+To build XenCenter, you need 
  *  the source from xenadmin repository
+ *  Visual Studio 2010
  
-but also some libraries which we do not store in the source tree:
+and also some libraries which we do not store in the source tree:
  *  CookComputing.XmlRpcV2.dll
  *  DiscUtils.dll
  *  ICSharpCode.SharpZipLib.dll
