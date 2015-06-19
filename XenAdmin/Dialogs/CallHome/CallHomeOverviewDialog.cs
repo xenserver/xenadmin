@@ -191,6 +191,7 @@ namespace XenAdmin.Dialogs.CallHome
 
             healthCheckStatusPanel.Visible = poolRow.Pool.CallHomeSettings.Status == CallHomeStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.CallHomeSettings.Status != CallHomeStatus.Enabled;
+            uploadRequestLinkLabel.Enabled = poolRow.Pool.CallHomeSettings.CanRequestNewUpload;
         }
 
         public string GetScheduleDescription(CallHomeSettings callHomeSettings)
@@ -282,6 +283,20 @@ namespace XenAdmin.Dialogs.CallHome
             }
 
             new CallHomeSettingsDialog(poolRow.Pool).ShowDialog(this);
+        }
+
+        private void uploadRequestLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
+                return;
+
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            var callHomeSettings = poolRow.Pool.CallHomeSettings;
+            if (callHomeSettings.CanRequestNewUpload)
+            {
+                callHomeSettings.NewUploadRequest = Util.ToUnixTime(DateTime.UtcNow).ToString();
+                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, false).RunAsync();
+            }
         }
     }
 }

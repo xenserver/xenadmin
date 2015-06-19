@@ -439,8 +439,10 @@ namespace XenAPI
         public int IntervalInDays, TimeOfDay, RetryInterval;
         public DayOfWeek DayOfWeek;
         public string UploadTokenSecretUuid;
-
-        public const int DefaultRetryInterval = 7;
+        public string NewUploadRequest;
+        
+        public const int DefaultRetryInterval = 7; // in days
+        public const int UploadRequestValidityInterval = 30; // in minutes
 
         public const string STATUS = "CallHome.Enrollment";
         public const string INTERVAL_IN_DAYS = "CallHome.Schedule.IntervalInDays";
@@ -475,6 +477,7 @@ namespace XenAPI
             TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
             RetryInterval = IntKey(config, RETRY_INTERVAL, RetryIntervalDefault);
             UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
+            NewUploadRequest = Get(config, NEW_UPLOAD_REQUEST);
         }
 
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
@@ -487,6 +490,7 @@ namespace XenAPI
             newConfig[TIME_OF_DAY] = TimeOfDay.ToString();
             newConfig[RETRY_INTERVAL] = RetryInterval.ToString();
             newConfig[UPLOAD_TOKEN_SECRET] = UploadTokenSecretUuid;
+            newConfig[NEW_UPLOAD_REQUEST] = NewUploadRequest;
             return newConfig;
         }
 
@@ -499,6 +503,22 @@ namespace XenAPI
                 return Status == CallHomeStatus.Enabled
                            ? Messages.CALLHOME_STATUS_NOT_AVAILABLE_YET
                            : Messages.CALLHOME_STATUS_NOT_ENROLLED;
+            }
+        }
+
+        public bool CanRequestNewUpload
+        {
+            get
+            {
+                if (Status != CallHomeStatus.Enabled)
+                    return false;
+                double uploadRequest;
+                if (double.TryParse(NewUploadRequest, out uploadRequest))
+                {
+                    var uploadRequestExpiryTime = Util.FromUnixTime(uploadRequest).AddMinutes(UploadRequestValidityInterval);
+                    return DateTime.Compare(uploadRequestExpiryTime, DateTime.UtcNow) < 0;
+                }
+                return true;
             }
         }
 

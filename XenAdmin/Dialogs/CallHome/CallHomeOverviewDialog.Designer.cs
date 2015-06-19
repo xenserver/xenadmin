@@ -60,6 +60,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
+            this.uploadRequestLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -143,6 +144,7 @@ namespace XenAdmin.Dialogs.CallHome
             // healthCheckStatusPanel
             // 
             resources.ApplyResources(this.healthCheckStatusPanel, "healthCheckStatusPanel");
+            this.healthCheckStatusPanel.Controls.Add(this.uploadRequestLinkLabel, 0, 8);
             this.healthCheckStatusPanel.Controls.Add(this.scheduleLabel, 0, 6);
             this.healthCheckStatusPanel.Controls.Add(this.linkLabel2, 0, 7);
             this.healthCheckStatusPanel.Controls.Add(this.issuesLabel, 0, 2);
@@ -288,6 +290,14 @@ namespace XenAdmin.Dialogs.CallHome
             resources.ApplyResources(this.rubricLabel, "rubricLabel");
             this.rubricLabel.Name = "rubricLabel";
             // 
+            // uploadRequestLinkLabel
+            // 
+            resources.ApplyResources(this.uploadRequestLinkLabel, "uploadRequestLinkLabel");
+            this.healthCheckStatusPanel.SetColumnSpan(this.uploadRequestLinkLabel, 2);
+            this.uploadRequestLinkLabel.Name = "uploadRequestLinkLabel";
+            this.uploadRequestLinkLabel.TabStop = true;
+            this.uploadRequestLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.uploadRequestLinkLabel_LinkClicked);
+            // 
             // CallHomeOverviewDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -353,6 +363,7 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label policyStatementLabel;
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
+        private System.Windows.Forms.LinkLabel uploadRequestLinkLabel;
     }
 }
 
