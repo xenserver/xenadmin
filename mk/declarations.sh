@@ -133,7 +133,8 @@ REPO=${XENADMIN_DIR}
 REF_REPO=${ROOT}/xenadmin-ref.hg
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
-TEST_DIR=/cygdrive/c/cygwin/tmp
+TEST_DIR=${ROOT}/tmp
+mkdir -p ${TEST_DIR}
 BUILD_ARCHIVE=${ROOT}/../builds/${get_BUILD_ID}/archive
 SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/windowsbuilds/WindowsBuilds/$get_JOB_NAME/$BUILD_NUMBER/
 #XENCENTER_LOGDIR="/cygdrive/c/Users/Administrator/AppData/Roaming/Citrix/XenCenter/logs"
