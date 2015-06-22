@@ -40,13 +40,17 @@
 
 for DEP in nunit-console zip unzip mkisofs wget curl hg git patch
 do
-which $DEP >>/dev/null || echo "ERROR: $DEP was not found, install it or add it to the PATH." && FATAL=1
+  which $DEP >>/dev/null
+  if [ $? -ne 0 ]; then
+    echo "ERROR: $DEP was not found, install it or add it to the PATH."
+    FATAL=1
+  fi
 done
 if [ -z ${FATAL+x} ]; then
-echo ""
+  echo ""
 else
-echo "FATAL: One or more build tools were not found."
-exit 1
+  echo "FATAL: One or more build tools were not found."
+  exit 1
 fi
 
 
