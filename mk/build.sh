@@ -40,7 +40,7 @@
 
 for DEP in nunit-console zip unzip mkisofs wget curl hg git patch
 do
-which -s $DEP || echo "ERROR: $DEP was not found, install it or add it to the PATH." && FATAL=1
+which $DEP >>/dev/null || echo "ERROR: $DEP was not found, install it or add it to the PATH." && FATAL=1
 done
 if [ -z ${FATAL+x} ]; then
 echo ""
