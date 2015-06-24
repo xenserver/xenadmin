@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = new []{"Cowley", "MNR", "Boston", "SanibelToClearwater"};
+            string[] expectedNames = new []{"Cowley", "MNR", "Boston", "SanibelToClearwater", "Creedence"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -83,6 +83,10 @@ namespace XenAdminTests.UnitTests.Diagnostics
             Assert.AreEqual("b412a910-0453-42ed-bae0-982cc48b00d6", 
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).UUID,
                             "SanibelToClearwater UUID lookup from enum");
+
+            Assert.AreEqual("0c8accf4-060f-47fb-85a1-3470f815fd88",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).UUID,
+                            "Creedence UUID lookup from enum");
         }
 
         [Test]
@@ -103,12 +107,16 @@ namespace XenAdminTests.UnitTests.Diagnostics
             Assert.AreEqual("XS62E006.xsupdate",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).Filename,
                             "SanibelToClearwater Filename lookup from enum");
+
+            Assert.AreEqual("XS65ESP1006.xsupdate",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).Filename,
+                            "Creedence Filename lookup from enum");
         }
 
         [Test]
-        [TestCase("1.9.0", Description = "Creedence")]
+        [TestCase("2.0.0", Description = "Dundee")]
         [TestCase("9999.9999.9999", Description = "Future")]
-        public void TestPlatformVersionNumbersCreedenceOrGreaterGiveNulls(string platformVersion)
+        public void TestPlatformVersionNumbersDundeeOrGreaterGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.PlatformVersion).Returns(platformVersion);
@@ -128,7 +136,8 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("1.9.0", Description = "Creedence", Result = false)]
+        [TestCase("2.0.0", Description = "Dundee", Result = false)]
+        [TestCase("1.9.0", Description = "Creedence", Result = true)]
         [TestCase("1.8.0", Description = "Clearwater", Result = true)]
         [TestCase("1.6.10", Description = "Tampa", Result = true)]
         [TestCase("9999.9999.9999", Description = "Future", Result = false)]
