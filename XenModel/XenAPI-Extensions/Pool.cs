@@ -406,7 +406,7 @@ namespace XenAPI
         {
             get 
             {
-               return new CallHomeSettings(gui_config);
+               return new CallHomeSettings(health_check_config);
             }
         }
         #endregion
@@ -442,18 +442,18 @@ namespace XenAPI
 
         public const int DefaultRetryInterval = 7;
 
-        public const string STATUS = "CallHome.Enrollment";
-        public const string INTERVAL_IN_DAYS = "CallHome.Schedule.IntervalInDays";
+        public const string STATUS = "Enrollment";
+        public const string INTERVAL_IN_DAYS = "Schedule.IntervalInDays";
         public const int intervalInDaysDefault = 14;
-        public const string DAY_OF_WEEK = "CallHome.Schedule.DayOfWeek";
-        public const string TIME_OF_DAY = "CallHome.Schedule.TimeOfDay";
-        public const string RETRY_INTERVAL = "CallHome.Schedule.RetryInterval";
+        public const string DAY_OF_WEEK = "Schedule.DayOfWeek";
+        public const string TIME_OF_DAY = "Schedule.TimeOfDay";
+        public const string RETRY_INTERVAL = "Schedule.RetryInterval";
         public const int RetryIntervalDefault = 7;
-        public const string UPLOAD_TOKEN_SECRET = "CallHome.UploadToken.Secret"; 
-        public const string UPLOAD_LOCK = "CallHome.UploadLock";
-        public const string LAST_SUCCESSFUL_UPLOAD = "CallHome.LastSuccessfulUpload";
-        public const string LAST_FAILED_UPLOAD = "CallHome.LastFailedUpload";
-        public const string NEW_UPLOAD_REQUEST = "CallHome.NewUploadRequest";
+        public const string UPLOAD_TOKEN_SECRET = "UploadToken.Secret"; 
+        public const string UPLOAD_LOCK = "UploadLock";
+        public const string LAST_SUCCESSFUL_UPLOAD = "LastSuccessfulUpload";
+        public const string LAST_FAILED_UPLOAD = "LastFailedUpload";
+        public const string NEW_UPLOAD_REQUEST = "NewUploadRequest";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {

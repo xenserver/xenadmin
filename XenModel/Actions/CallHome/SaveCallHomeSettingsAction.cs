@@ -19,10 +19,10 @@ namespace XenAdmin.Actions
         
         protected override void Run()
         {
-            Dictionary<string, string> newConfig = callHomeSettings.ToDictionary(pool.gui_config);
+            Dictionary<string, string> newConfig = callHomeSettings.ToDictionary(pool.health_check_config);
             if (!string.IsNullOrEmpty(authenticationToken))
                 CallHomeAuthenticationAction.SetUploadTokenSecret(Connection, newConfig, authenticationToken);
-            Pool.set_gui_config(Connection.Session, pool.opaque_ref, newConfig);
+            Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
         }
     }
 }
