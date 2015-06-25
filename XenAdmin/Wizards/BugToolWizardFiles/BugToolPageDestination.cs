@@ -38,9 +38,11 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Core;
+using Registry = XenAdmin.Core.Registry;
 
 
 namespace XenAdmin.Wizards.BugToolWizardFiles
@@ -48,6 +50,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
     public partial class BugToolPageDestination : XenTabPage
     {
         private bool m_buttonNextEnabled;
+        
+       private const int TokenExpiration = 86400; // 24 hours
 
         public BugToolPageDestination()
         {
@@ -82,13 +86,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-            PerformCheck(CheckPathValid);
+            EnableDisableAuthenticationControls();
+            PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
-                cancel = !PerformCheck(CheckPathValid);
+                cancel = !PerformCheck(CheckPathValid, CheckCredentialsEntered, CheckUploadAuthentication);
 
             base.PageLeave(direction, ref cancel);
         }
@@ -105,6 +110,16 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return string.Format(@"{0}\{1}", folder, name);
             }
         }
+
+        public bool Upload
+        {
+            get
+            {
+                return checkBox1.Enabled;
+            }
+        }
+
+        public string UploadToken { get; private set; }
 
         private bool PerformCheck(params CheckDelegate[] checks)
         {
@@ -144,25 +159,89 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return true;
         }
 
+        private bool CheckCredentialsEntered(out string error)
+        {
+            error = string.Empty;
+
+            if (!checkBox1.Checked)
+                return true;
+
+            if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+                return false;
+
+            return true;
+        }
+
+        private bool CheckUploadAuthentication(out string error)
+        {
+            error = string.Empty;
+
+            if (!checkBox1.Checked)
+                return true;
+            
+            if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+                return false;
+
+            var action = new CallHomeAuthenticationAction(null, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
+                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName,
+                false, TokenExpiration, false);
+
+            try
+            {
+                action.RunExternal(null);
+            }
+            catch
+            {
+            }
+            if (!action.Succeeded)
+            {
+                error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
+                UploadToken = null;
+                return false;
+            }
+            
+            UploadToken = action.UploadToken;  // curent upload token
+            return true;
+        }
+
+        private void EnableDisableAuthenticationControls()
+        {
+            if (!Visible)
+                return;
+
+            groupBox1.Enabled = checkBox1.Checked;
+        }
+
         #region Control event handlers
 
         private void m_textBoxName_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid);
+            PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 
         private void m_textBoxLocation_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid);
+            PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog dlog = new FolderBrowserDialog { SelectedPath = m_textBoxLocation.Text })
+            using (FolderBrowserDialog dlog = new FolderBrowserDialog {SelectedPath = m_textBoxLocation.Text})
             {
                 if (dlog.ShowDialog() == DialogResult.OK)
                     m_textBoxLocation.Text = dlog.SelectedPath;
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableDisableAuthenticationControls();
+            PerformCheck(CheckPathValid, CheckCredentialsEntered);
+        }
+
+        private void credentials_TextChanged(object sender, EventArgs e)
+        {
+            PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 
         #endregion
