@@ -2335,6 +2335,9 @@
     <None Include="XS62E006.xsupdate">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="XS65ESP1006.xsupdate">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />

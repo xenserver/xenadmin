@@ -43,7 +43,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
             MNR,
             Cowley,
             Boston,
-            SanibelToClearwater
+            SanibelToClearwater,
+            Creedence
         }
 
         private readonly Hotfix mnrHotfix = new SingleHotfix
@@ -81,8 +82,16 @@ namespace XenAdmin.Diagnostics.Hotfixing
                                                              UUID = "b412a910-0453-42ed-bae0-982cc48b00d6"
                                                          };
 
+        private readonly Hotfix creedenceHotfix = new SingleHotfix
+                                                         {
+                                                             Filename = "XS65ESP1006.xsupdate",
+                                                             UUID = "0c8accf4-060f-47fb-85a1-3470f815fd88"
+                                                         };
+
         public Hotfix Hotfix(Host host)
         {
+            if (Helpers.CreedenceOrGreater(host) && !Helpers.DundeeOrGreater(host))
+                return Hotfix(HotfixableServerVersion.Creedence);
             if (Helpers.SanibelOrGreater(host) && !Helpers.CreedenceOrGreater(host))
                 return Hotfix(HotfixableServerVersion.SanibelToClearwater);
             if (Helpers.BostonOrGreater(host) && !Helpers.SanibelOrGreater(host))
@@ -97,6 +106,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(HotfixableServerVersion version)
         {
+            if (version == HotfixableServerVersion.Creedence)
+                return creedenceHotfix; 
             if (version == HotfixableServerVersion.SanibelToClearwater)
                 return sanibelToClearwaterHotfix;
             if (version == HotfixableServerVersion.Boston)

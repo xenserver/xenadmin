@@ -238,13 +238,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             }
 
-            //SafeToUpgradeCheck
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SAFE_TO_UPGRADE, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
- 
-            foreach (Host host in SelectedServers)
+            //SafeToUpgradeCheck - in automatic mode only
+            if (!ManualUpgrade)
             {
-                checkGroup.Add(new SafeToUpgradeCheck(host));
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SAFE_TO_UPGRADE, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+ 
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new SafeToUpgradeCheck(host));
+                }
             }
 
             return checks;
