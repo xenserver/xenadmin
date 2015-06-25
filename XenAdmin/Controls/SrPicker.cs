@@ -210,18 +210,14 @@ namespace XenAdmin.Controls
 
         /// <summary>
         /// Returns how much disk space is required to create the disk on an SR
-        /// This depends on whether the SR is thin provisioned and what the initial allocation rate is
+        /// This depends on whether the SR is thin provisioned and on what the initial allocation rate is
         /// </summary>
         /// <param name="sr"></param>
         /// <returns></returns>
         private long GetRequiredDiskSizeForSR(SR sr)
         {
-            if (sr != null && sr.sm_config != null
-                && sr.sm_config.ContainsKey("allocation") && sr.sm_config["allocation"] == "dynamic")
-            {
+            if (sr != null && sr.IsThinProvisioned)
                 return (long)(InitialAllocationRate * DiskSize);
-                
-            }
 
             return DiskSize;
         }

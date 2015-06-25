@@ -215,7 +215,7 @@ namespace XenAdmin.Dialogs
                 if (srToCheck == null)
                     return false;
 
-                return srToCheck.sm_config.Keys.Contains("allocation") && srToCheck.sm_config["allocation"] == "dynamic";
+                return srToCheck.IsThinProvisioned;
             }
         }
 
@@ -340,11 +340,11 @@ namespace XenAdmin.Dialogs
             if (srToCheck == null)
                 return;
 
-            var smConfig = srToCheck.sm_config;
-            decimal temp = 0;
-
-            if (smConfig != null && smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
+            if (srToCheck.IsThinProvisioned)
             {
+                var smConfig = srToCheck.sm_config;
+                decimal temp = 0;
+
                 if (smConfig.ContainsKey("initial_allocation") && decimal.TryParse(smConfig["initial_allocation"], out temp))
                     initialAllocationNumericUpDown.Value = temp * 100;
 
