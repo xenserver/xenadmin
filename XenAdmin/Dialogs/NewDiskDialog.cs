@@ -210,10 +210,12 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                if (SrListBox.SR == null)
+                var srToCheck = SrListBox.SR ?? SrListBox.DisabledSelectedSR;
+
+                if (srToCheck == null)
                     return false;
 
-                return SrListBox.SR.sm_config.Keys.Contains("allocation") && SrListBox.SR.sm_config["allocation"] == "dynamic";
+                return srToCheck.sm_config.Keys.Contains("allocation") && srToCheck.sm_config["allocation"] == "dynamic";
             }
         }
 
@@ -333,10 +335,15 @@ namespace XenAdmin.Dialogs
 
         void DefaultToSRsConfig()
         {
-            var smConfig = SrListBox.SR.sm_config;
+            var srToCheck = SrListBox.SR ?? SrListBox.DisabledSelectedSR;
+
+            if (srToCheck == null)
+                return;
+
+            var smConfig = srToCheck.sm_config;
             decimal temp = 0;
 
-            if (smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
+            if (smConfig != null && smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
             {
                 if (smConfig.ContainsKey("initial_allocation") && decimal.TryParse(smConfig["initial_allocation"], out temp))
                     initialAllocationNumericUpDown.Value = temp * 100;
@@ -540,16 +547,11 @@ namespace XenAdmin.Dialogs
             {
                 try
                 {
-                    if (!IsSelectedSRThinProvisioned)
-                    {
-                        SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
-                    }
-                    else
-                    {
-                        //Only the initial allocation is considered for thin provisioning.
-                        var initialSizeRatio = initialAllocationNumericUpDown.Value / 100;
+                    SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
 
-                        SrListBox.DiskSize = (long)(Math.Round(newValue * initialSizeRatio * GetUnits()));
+                    if (IsSelectedSRThinProvisioned)
+                    {
+                        SrListBox.InitialAllocationRate = initialAllocationNumericUpDown.Value / 100; 
                     }
                 }
                 catch (OverflowException)
