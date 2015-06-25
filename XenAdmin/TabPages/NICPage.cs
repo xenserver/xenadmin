@@ -166,13 +166,16 @@ namespace XenAdmin.TabPages
                             p.Selected = true;
                     }
 
-                    //CA-47050: the ColumnBusPath should be autosized to Fill, but should not become smaller than a minimum
-                    //width, which is chosen to be the column's contents (including header) width. To find what this is
-                    //set temporarily the column's autosize mode to AllCells.
-                    ColumnBusPath.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    int storedWidth = ColumnBusPath.Width;
-                    ColumnBusPath.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    ColumnBusPath.MinimumWidth = storedWidth;
+                    //show the FCoE column for Dundee or higher hosts only
+                    ColumnFCoECapable.Visible = Helpers.DundeeOrGreater(host);
+
+                    //CA-47050: the Device column should be autosized to Fill, but should not become smaller than a minimum
+                    //width, which here is chosen to be the column header width. To find what this width is 
+                    //set temporarily the column's autosize mode to ColumnHeader.
+                    ColumnDeviceName.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                    int storedWidth = ColumnDeviceName.Width;
+                    ColumnDeviceName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    ColumnDeviceName.MinimumWidth = storedWidth;
 
                     if (dataGridView1.SortedColumn != null)
                         dataGridView1.Sort(dataGridView1.SortedColumn, dataGridView1.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
@@ -201,7 +204,7 @@ namespace XenAdmin.TabPages
                     device = PIFMetrics.device_name;
                     busPath = PIFMetrics.pci_bus_path;
                 }
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     Cells.Add(new DataGridViewTextBoxCell());
                     updateCell(i);
@@ -236,6 +239,9 @@ namespace XenAdmin.TabPages
                         break;
                     case 7:
                         Cells[7].Value = busPath;
+                        break;
+                    case 8:
+                        Cells[8].Value = pif.FCoECapable ? Messages.YES : Messages.NO;
                         break;
                 }
             }

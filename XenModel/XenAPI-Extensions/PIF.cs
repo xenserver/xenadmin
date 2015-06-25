@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin;
 using XenAdmin.Core;
 
@@ -452,6 +453,11 @@ namespace XenAPI
                         return Messages.PIF_UNKNOWN;
                 }
             }
+        }
+
+        public bool FCoECapable
+        {
+            get { return capabilities.Any(capability => capability == "fcoe"); }
         }
     }
 }
