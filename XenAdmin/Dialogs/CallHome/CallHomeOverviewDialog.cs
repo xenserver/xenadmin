@@ -111,7 +111,7 @@ namespace XenAdmin.Dialogs.CallHome
             var list = new List<DataGridViewRow>();
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                if (!xenConnection.IsConnected) 
+                if (!xenConnection.IsConnected || Helpers.FeatureForbidden(xenConnection, Host.RestrictHealthCheck)) 
                     continue;
                 var pool = Helpers.GetPoolOfOne(xenConnection);
                 if (pool != null)

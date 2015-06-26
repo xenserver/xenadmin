@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using XenAdmin.Dialogs;
-using XenAdmin.Dialogs.CallHome;
+using XenAdmin.Core;
+using XenAPI;
 
 namespace XenAdmin.Commands
 {
@@ -27,7 +27,8 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected);
+            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected 
+                && !Helpers.FeatureForbidden(xenConnection, Host.RestrictHealthCheck));
         }
     }
 }

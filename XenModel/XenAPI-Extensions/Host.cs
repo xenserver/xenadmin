@@ -474,6 +474,16 @@ namespace XenAPI
             return h._RestrictReadCaching;
         }
 
+        private bool _RestrictHealthCheck
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_health_check"); }
+        }
+
+        public static bool RestrictHealthCheck(Host h)
+        {
+            return h._RestrictHealthCheck;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
