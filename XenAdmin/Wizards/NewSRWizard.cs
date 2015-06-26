@@ -260,10 +260,15 @@ namespace XenAdmin.Wizards
 
             if (m_srWizardType is SrWizardType_LvmoHba)
             {
-                if (!Helpers.DundeeOrGreater(xenConnection)
-                    || senderPage == xenTabPageStorageProvisioningMethod
-                    || senderPage == xenTabPageLvmoHba && !xenTabPageLvmoHba.SrDescriptors.Any(srDescriptor => string.IsNullOrEmpty(srDescriptor.UUID)))
+                if (!Helpers.DundeeOrGreater(xenConnection) && senderPage == xenTabPageLvmoHba)
                 {
+                    return CanShowLVMoHBASummaryPage();
+                }
+                else if (senderPage == xenTabPageStorageProvisioningMethod
+                            //if there is no sr to be created (all will be reattached)
+                            || senderPage == xenTabPageLvmoHba && xenTabPageLvmoHba.SrDescriptors.All(srDescriptor => !string.IsNullOrEmpty(srDescriptor.UUID)))
+                {
+                    //setting SM Config to the SRs being created (UUID == empty)
                     if (xenTabPageStorageProvisioningMethod.SMConfig.Count > 0)
                     {
                         xenTabPageLvmoHba.SrDescriptors

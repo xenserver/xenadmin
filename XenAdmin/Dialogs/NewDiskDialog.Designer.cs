@@ -231,6 +231,7 @@ namespace XenAdmin.Dialogs
             0,
             0});
             this.initialAllocationNumericUpDown.ValueChanged += new System.EventHandler(this.initialAllocationNumericUpDown_ValueChanged);
+            this.initialAllocationNumericUpDown.Enter += new System.EventHandler(this.initialAllocationNumericUpDown_Enter);
             // 
             // allocationQuantumNumericUpDown
             // 

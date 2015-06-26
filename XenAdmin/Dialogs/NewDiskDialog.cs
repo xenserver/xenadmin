@@ -194,16 +194,15 @@ namespace XenAdmin.Dialogs
         {
             updateErrorsAndButtons();
 
-
             initialAllocationNumericUpDown.Enabled =
             labelInitialAllocation.Enabled =
             allocationQuantumNumericUpDown.Enabled =
             labelAllocationQuantum.Enabled = IsSelectedSRThinProvisioned;
 
-            if (IsSelectedSRThinProvisioned)
+            if (IsSelectedSRThinProvisioned && !userEntered)
+            {                
                 DefaultToSRsConfig();
-
-
+            }
         }
 
         private bool IsSelectedSRThinProvisioned
@@ -533,10 +532,21 @@ namespace XenAdmin.Dialogs
             UpdateDiskSize();
         }
 
-
+        bool userChangedInitialAllocationValue = false;
+        bool userEntered = false;
+        
         private void initialAllocationNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            UpdateDiskSize();
+            if (userEntered)
+                userChangedInitialAllocationValue = true;
+
+            if (userChangedInitialAllocationValue)
+                UpdateDiskSize();
+        }
+
+        private void initialAllocationNumericUpDown_Enter(object sender, EventArgs e)
+        {
+            userEntered = true;
         }
 
         private void UpdateDiskSize()
@@ -549,9 +559,9 @@ namespace XenAdmin.Dialogs
                 {
                     SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
 
-                    if (IsSelectedSRThinProvisioned)
+                    if (IsSelectedSRThinProvisioned && userChangedInitialAllocationValue)
                     {
-                        SrListBox.InitialAllocationRate = initialAllocationNumericUpDown.Value / 100; 
+                        SrListBox.OverridenInitialAllocationRate = initialAllocationNumericUpDown.Value / 100;
                     }
                 }
                 catch (OverflowException)
@@ -633,6 +643,5 @@ namespace XenAdmin.Dialogs
                 }
             });
         }
-
     }
 }
