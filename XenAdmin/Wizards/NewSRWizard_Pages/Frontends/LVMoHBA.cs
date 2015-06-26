@@ -56,6 +56,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             InitializeComponent();
         }
 
+        public virtual SR.SRTypes SrType { get { return SR.SRTypes.lvmohba; } }
+
         #region XenTabPage overrides
 
         public override string PageTitle { get { return Messages.NEWSR_SELECT_LUN; } }
@@ -85,7 +87,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 var descr = new LvmOhbaSrDescriptor(device, Connection);
 
-                var action = new SrProbeAction(Connection, master, SR.SRTypes.lvmohba, descr.DeviceConfig);
+                var action = new SrProbeAction(Connection, master, SrType, descr.DeviceConfig);
                 new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog(this);
 
                 if (!action.Succeeded)
@@ -308,7 +310,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 buttonClearAll.Enabled = _selectedDevices.Count > 0;
         }
 
-        public static bool FiberChannelScan(IWin32Window owner, IXenConnection connection, out List<FibreChannelDevice> devices)
+        public bool FiberChannelScan(IWin32Window owner, IXenConnection connection, out List<FibreChannelDevice> devices)
         {
             devices = new List<FibreChannelDevice>();
 
@@ -316,7 +318,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return false;
 
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master);
+            FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
             ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
             dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 

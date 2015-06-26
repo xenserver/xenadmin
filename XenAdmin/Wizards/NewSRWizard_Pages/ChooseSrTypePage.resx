@@ -154,7 +154,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="radioButtonIscsi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -190,7 +190,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonIscsi.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="radioButtonNfsIso.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -202,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfsIso.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 222</value>
+    <value>6, 247</value>
   </data>
   <data name="radioButtonNfsIso.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 3, 3, 3</value>
@@ -226,7 +226,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsIso.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="radioButtonCifsIso.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +238,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonCifsIso.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 197</value>
+    <value>6, 222</value>
   </data>
   <data name="radioButtonCifsIso.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 3, 3, 3</value>
@@ -262,7 +262,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="radioButtonFibreChannel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +298,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonFibreChannel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="radioButtonCslg.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -310,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonCslg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 131</value>
+    <value>6, 156</value>
   </data>
   <data name="radioButtonCslg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 3, 3, 3</value>
@@ -334,7 +334,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCslg.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="labelISOlibrary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelISOlibrary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 169</value>
+    <value>3, 194</value>
   </data>
   <data name="labelISOlibrary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 10</value>
@@ -370,7 +370,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelISOlibrary.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="labelVirtualDiskStorage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -406,7 +406,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelVirtualDiskStorage.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="upsellPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -599,6 +599,42 @@
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="radioButtonFcoe.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonFcoe.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="radioButtonFcoe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButtonFcoe.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 131</value>
+  </data>
+  <data name="radioButtonFcoe.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
+  <data name="radioButtonFcoe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 19</value>
+  </data>
+  <data name="radioButtonFcoe.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="radioButtonFcoe.Text" xml:space="preserve">
+    <value>&amp;FCoE</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.Name" xml:space="preserve">
+    <value>radioButtonFcoe</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="radioButtonCifs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -633,13 +669,13 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCifs.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 302</value>
@@ -660,7 +696,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonCifs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCslg" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelISOlibrary" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifsIso" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsIso" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,6,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonFcoe" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCslg" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelISOlibrary" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifsIso" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsIso" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Absolute,6,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

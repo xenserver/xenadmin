@@ -68,6 +68,7 @@ namespace XenAdmin.Actions
                         XenAPI.SR.getFriendlyTypeName(srType), dconf["target"]);
                     break;
                 case XenAPI.SR.SRTypes.lvmohba:
+                case XenAPI.SR.SRTypes.lvmofcoe:
                     String device = dconf.ContainsKey(DEVICE) ?
                         dconf[DEVICE] : dconf[SCSIid];
                     Description = string.Format(Messages.ACTION_SR_SCANNING,

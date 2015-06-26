@@ -362,4 +362,20 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override bool ShowReattachWarning { get { return true; } }
         public override bool AllowToCreateNewSr { get; set; }
     }
+
+    public class SrWizardType_Fcoe : SrWizardType
+    {
+        public override bool IsEnhancedSR { get { return false; } }
+        public override string FrontendBlurb { get { return Messages.NEWSR_LVMOHBA_BLURB; } }
+        public override SR.SRTypes Type { get { return SR.SRTypes.lvmofcoe; } }
+        public override string ContentType { get { return ""; } }
+        public override bool ShowIntroducePrompt { get { return false; } }
+        public override bool ShowReattachWarning { get { return true; } }
+        public override bool AllowToCreateNewSr { get; set; }
+
+        public override void ResetSrName(IXenConnection connection)
+        {
+            SrName = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, connection);
+        }
+    }
 }

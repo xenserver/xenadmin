@@ -44,14 +44,20 @@ namespace XenAdmin.Actions
             Host = master;
         }
 
-  
+        private SR.SRTypes srType = SR.SRTypes.lvmohba;
+
+        public FibreChannelProbeAction(Host master, SR.SRTypes srType)
+            : this(master)
+        {
+            this.srType = srType;
+        }
 
         protected override void Run()
         {
             this.Description = Messages.PROBING_HBA;
             try
             {
-                Result = XenAPI.SR.probe(Session, Host.opaque_ref, new Dictionary<string, string>(), XenAPI.SR.SRTypes.lvmohba.ToString(), new Dictionary<string, string>());
+                Result = XenAPI.SR.probe(Session, Host.opaque_ref, new Dictionary<string, string>(), srType.ToString(), new Dictionary<string, string>());
             }
             catch (XenAPI.Failure f)
             {
