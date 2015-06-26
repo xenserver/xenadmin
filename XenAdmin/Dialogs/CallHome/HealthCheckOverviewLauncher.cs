@@ -162,6 +162,9 @@ namespace XenAdmin.Dialogs
         /// <param name="connection">The connection to check enrollment on</param>
         internal bool CheckHealthCheckEnrollment(IXenConnection connection)
         {
+            if (Helpers.FeatureForbidden(connection, Host.RestrictHealthCheck))
+                return false;
+
             Pool pool = Helpers.GetPoolOfOne(connection);
             if (pool == null)
                 return false;
