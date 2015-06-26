@@ -32,9 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceProcess;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
+using System.Threading;
 
 namespace XenServerHealthCheck
 {
@@ -53,38 +53,40 @@ namespace XenServerHealthCheck
             }
         }
 
-        static void AddServiceIdentifier()
+        private static void initConfig()
         {
-            try
+            if (Properties.Settings.Default.UUID.Length == 0)
             {
-                var configFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None);
-                var settings = configFile.AppSettings.Settings;
-                if (settings["UUID"] == null)
-                {
-                    settings.Add("UUID", System.Guid.NewGuid().ToString());
-                    configFile.Save(System.Configuration.ConfigurationSaveMode.Modified);
-                    System.Configuration.ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-                }
+                Properties.Settings.Default.UUID = System.Guid.NewGuid().ToString();
+                Properties.Settings.Default.Save();
             }
-            catch (System.Configuration.ConfigurationErrorsException)
-            {
-                log.Error("Error writing app settings");
-            }
+            log.InfoFormat("XenServer Health Check Service {0} starting...", Properties.Settings.Default.UUID);
         }
 
         protected override void OnStart(string[] args)
         {
             // Set up a timer to trigger the uploading service.
-            AddServiceIdentifier();
-            log.InfoFormat("XenServer Health Check Service {0} starting...", System.Configuration.ConfigurationManager.AppSettings["UUID"]);
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 30 * 60000; // 30 minitues
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
-            timer.Start();
+            try
+            {
+                initConfig();
+                CredentialReceiver.instance.Init();
+                ServerListHelper.instance.Init();
+
+                System.Timers.Timer timer = new System.Timers.Timer();
+                timer.Interval = 30 * 60000; // 30 minitues
+                timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
+                timer.Start();
+            }
+            catch (Exception exp)
+            {
+                EventLog.WriteEntry(exp.Message);
+                Stop();
+            }
         }
 
         protected override void OnStop()
         {
+            CredentialReceiver.instance.UnInit();
             log.Info("XenServer Health Check Service stopping...");
         }
 
@@ -94,7 +96,7 @@ namespace XenServerHealthCheck
             
             //We need to check if CIS can be accessed in current enviroment
             
-            List<IXenConnection> Connections = ServerListHelper.GetServerList();
+            List<IXenConnection> Connections = ServerListHelper.instance.GetServerList();
             foreach (IXenConnection connection in Connections)
             {
                 log.InfoFormat("Check server {0} with user {1}", connection.Hostname, connection.Username);

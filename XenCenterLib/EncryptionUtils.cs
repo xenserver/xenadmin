@@ -65,22 +65,28 @@ namespace XenAdmin.Core
         public static string Protect(string data)
         {
             byte[] dataBytes = Encoding.Unicode.GetBytes(data);
-#if CALL_HOME_DEV
-            byte[] protectedBytes = ProtectedData.Protect(dataBytes, GetSalt(), DataProtectionScope.LocalMachine);
-#else
             byte[] protectedBytes = ProtectedData.Protect(dataBytes, GetSalt(), DataProtectionScope.CurrentUser);
-#endif
             return Convert.ToBase64String(protectedBytes);
         }
 
         public static string Unprotect(string protectedstring)
         {
             byte[] protectedBytes = Convert.FromBase64String(protectedstring);
-#if CALL_HOME_DEV
-            byte[] dataBytes = ProtectedData.Unprotect(protectedBytes, GetSalt(), DataProtectionScope.LocalMachine);
-#else
             byte[] dataBytes = ProtectedData.Unprotect(protectedBytes, GetSalt(), DataProtectionScope.CurrentUser);
-#endif
+            return Encoding.Unicode.GetString(dataBytes);
+        }
+
+        public static string ProtectForLocalMachine(string data)
+        {
+            byte[] dataBytes = Encoding.Unicode.GetBytes(data);
+            byte[] protectedBytes = ProtectedData.Protect(dataBytes, GetSalt(), DataProtectionScope.LocalMachine);
+            return Convert.ToBase64String(protectedBytes);
+        }
+
+        public static string UnprotectForLocalMachine(string protectedstring)
+        {
+            byte[] protectedBytes = Convert.FromBase64String(protectedstring);
+            byte[] dataBytes = ProtectedData.Unprotect(protectedBytes, GetSalt(), DataProtectionScope.LocalMachine);
             return Encoding.Unicode.GetString(dataBytes);
         }
 
