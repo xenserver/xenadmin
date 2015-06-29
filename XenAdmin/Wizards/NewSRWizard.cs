@@ -228,7 +228,9 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
                 names.Add(name);
-                name = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, names);
+                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_LvmoHba 
+                                                        ? Messages.NEWSR_HBA_DEFAULT_NAME
+                                                        : Messages.NEWSR_FCOE_DEFAULT_NAME, names);
             }
 
             xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Clear();
@@ -550,7 +552,7 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
                 base.FinishWizard();
                 return;
@@ -628,7 +630,7 @@ namespace XenAdmin.Wizards
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
             ActionProgressDialog dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true};
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
                 ActionProgressDialog closureDialog = dialog;
                 // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
@@ -641,7 +643,7 @@ namespace XenAdmin.Wizards
             }
             dialog.ShowDialog(this);
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
                 foreach (var asyncAction in actionList)
                 {

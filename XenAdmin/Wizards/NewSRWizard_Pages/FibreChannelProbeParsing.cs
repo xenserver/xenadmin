@@ -63,6 +63,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             string name_label = "";
             string name_description = "";
             bool pool_metadata_detected = false;
+            string eth = "";
 
             foreach (XmlNode node in device.ChildNodes)
             {
@@ -90,10 +91,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     name_description = node.InnerText.Trim();
                 if (node.Name.ToLowerInvariant() == "pool_metadata_detected")
                     pool_metadata_detected = bool.Parse(node.InnerText.Trim());
+                if (node.Name.ToLowerInvariant() == "eth")
+                    eth = node.InnerText.Trim();
             }
 
             devices.Add(new FibreChannelDevice(serial, path, vendor, size, 
-                scsiid, adapter, channel, id, lun, name_label, name_description, pool_metadata_detected));
+                scsiid, adapter, channel, id, lun, name_label, name_description, pool_metadata_detected, eth));
         }
 
         /// <summary>

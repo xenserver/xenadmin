@@ -386,7 +386,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     public class SrWizardType_Fcoe : SrWizardType
     {
         public override bool IsEnhancedSR { get { return false; } }
-        public override string FrontendBlurb { get { return Messages.NEWSR_LVMOHBA_BLURB; } }
+        public override string FrontendBlurb { get { return Messages.NEWSR_LVMOFCOE_BLURB; } }
         public override SR.SRTypes Type { get { return SR.SRTypes.lvmofcoe; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
@@ -395,7 +395,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override void ResetSrName(IXenConnection connection)
         {
-            SrName = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, connection);
+            SrName = SrWizardHelpers.DefaultSRName(Messages.NEWSR_FCOE_DEFAULT_NAME, connection);
         }
     }
 }

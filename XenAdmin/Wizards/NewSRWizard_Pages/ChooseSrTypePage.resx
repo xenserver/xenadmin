@@ -211,7 +211,7 @@
     <value>67, 19</value>
   </data>
   <data name="radioButtonNfsIso.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="radioButtonNfsIso.Text" xml:space="preserve">
     <value>NFS &amp;ISO</value>
@@ -247,7 +247,7 @@
     <value>172, 19</value>
   </data>
   <data name="radioButtonCifsIso.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="radioButtonCifsIso.Text" xml:space="preserve">
     <value>Windows File Sharing (&amp;CIFS)</value>
@@ -319,7 +319,7 @@
     <value>150, 19</value>
   </data>
   <data name="radioButtonCslg.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="radioButtonCslg.Text" xml:space="preserve">
     <value>S&amp;torageLink technology</value>
@@ -615,13 +615,13 @@
     <value>6, 3, 3, 3</value>
   </data>
   <data name="radioButtonFcoe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 19</value>
+    <value>101, 19</value>
   </data>
   <data name="radioButtonFcoe.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>15</value>
   </data>
   <data name="radioButtonFcoe.Text" xml:space="preserve">
-    <value>&amp;FCoE</value>
+    <value>Software FCo&amp;E</value>
   </data>
   <data name="&gt;&gt;radioButtonFcoe.Name" xml:space="preserve">
     <value>radioButtonFcoe</value>
