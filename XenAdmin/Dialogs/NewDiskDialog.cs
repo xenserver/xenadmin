@@ -39,6 +39,7 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
 using System.Drawing;
+using System.Globalization;
 
 
 namespace XenAdmin.Dialogs
@@ -192,6 +193,29 @@ namespace XenAdmin.Dialogs
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateErrorsAndButtons();
+
+            initialAllocationNumericUpDown.Enabled =
+            labelInitialAllocation.Enabled =
+            allocationQuantumNumericUpDown.Enabled =
+            labelAllocationQuantum.Enabled = IsSelectedSRThinProvisioned;
+
+            if (IsSelectedSRThinProvisioned && !userChangedInitialAllocationValue)
+            {                
+                DefaultToSRsConfig();
+            }
+        }
+
+        private bool IsSelectedSRThinProvisioned
+        {
+            get
+            {
+                var srToCheck = SrListBox.SR ?? SrListBox.DisabledSelectedSR;
+
+                if (srToCheck == null)
+                    return false;
+
+                return srToCheck.IsThinProvisioned;
+            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -291,12 +315,53 @@ namespace XenAdmin.Dialogs
             return false;
         }
 
+        public Dictionary<string, string> SMConfig
+        {
+            get
+            {
+                var smconfig = new Dictionary<string, string>();
+
+                if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
+                {
+                    smconfig["allocation"] = "dynamic";
+                    smconfig["allocation_quantum"] = (allocationQuantumNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
+                    smconfig["initial_allocation"] = (initialAllocationNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
+                }
+
+                return smconfig;
+            }
+        }
+
+        void DefaultToSRsConfig()
+        {
+            var srToCheck = SrListBox.SR ?? SrListBox.DisabledSelectedSR;
+
+            if (srToCheck == null)
+                return;
+
+            if (srToCheck.IsThinProvisioned)
+            {
+                var smConfig = srToCheck.sm_config;
+                decimal temp = 0;
+
+                if (smConfig.ContainsKey("initial_allocation") && decimal.TryParse(smConfig["initial_allocation"], out temp))
+                    initialAllocationNumericUpDown.Value = temp * 100;
+
+                if (smConfig.ContainsKey("allocation_quantum") && decimal.TryParse(smConfig["allocation_quantum"], out temp))
+                    allocationQuantumNumericUpDown.Value = temp * 100;
+            }
+        }
+
         public VDI NewDisk()
         {
             VDI vdi = new VDI();
             vdi.Connection = connection;
             vdi.read_only = DiskTemplate != null ? DiskTemplate.read_only : false;
             vdi.SR = new XenAPI.XenRef<XenAPI.SR>(SrListBox.SR);
+
+            if (SMConfig != null && SMConfig.Count > 0)
+                vdi.sm_config = SMConfig;
+
             vdi.virtual_size = Convert.ToInt64(DiskSizeNumericUpDown.Value * GetUnits());
             vdi.name_label = NameTextBox.Text;
             vdi.name_description = DescriptionTextBox.Text;
@@ -350,6 +415,9 @@ namespace XenAdmin.Dialogs
         private void updateErrorsAndButtons()
         {
             // Ordering is important here, we want to show the most relevant message
+
+            if (comboBoxUnits.SelectedItem == null)
+                return;
 
             if (!SrListBox.ValidSelectionExists)
             {
@@ -464,6 +532,23 @@ namespace XenAdmin.Dialogs
             UpdateDiskSize();
         }
 
+        bool userChangedInitialAllocationValue = false;
+        bool userEntered = false;
+        
+        private void initialAllocationNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (userEntered)
+                userChangedInitialAllocationValue = true;
+
+            if (userChangedInitialAllocationValue)
+                UpdateDiskSize();
+        }
+
+        private void initialAllocationNumericUpDown_Enter(object sender, EventArgs e)
+        {
+            userEntered = true;
+        }
+
         private void UpdateDiskSize()
         {
             // Don't use DiskSizeNumericUpDown.Value here, as it will fire the NumericUpDown built-in validation. Use Text property instead. (CA-46028)
@@ -473,6 +558,11 @@ namespace XenAdmin.Dialogs
                 try
                 {
                     SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
+
+                    if (IsSelectedSRThinProvisioned && userChangedInitialAllocationValue)
+                    {
+                        SrListBox.OverridenInitialAllocationRate = initialAllocationNumericUpDown.Value / 100;
+                    }
                 }
                 catch (OverflowException)
                 {
@@ -552,6 +642,11 @@ namespace XenAdmin.Dialogs
                         .ShowDialog(Program.MainWindow);
                 }
             });
+        }
+
+        private void initialAllocationNumericUpDown_Leave(object sender, EventArgs e)
+        {
+            userEntered = false;
         }
     }
 }

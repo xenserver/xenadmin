@@ -43,9 +43,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public SrDescriptor()
         {
             DeviceConfig = new Dictionary<string, string>();
+            SMConfig = new Dictionary<string, string>();
         }
 
         public Dictionary<string, string> DeviceConfig { get; set; }
+        public Dictionary<string, string> SMConfig { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public string UUID { get; set; }
@@ -127,6 +129,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 if (SrDescriptors.Count == 0)
                     SrDescriptors.Add(new SrDescriptor());
                 SrDescriptors[0].DeviceConfig = value;
+            }
+        }
+        public Dictionary<String, String> SMConfig
+        {
+            get { return SrDescriptors.Count > 0 ? SrDescriptors[0].SMConfig : null; }
+            set
+            {
+                if (SrDescriptors.Count == 0)
+                    SrDescriptors.Add(new SrDescriptor());
+                SrDescriptors[0].SMConfig = value;
             }
         }
         public string Description

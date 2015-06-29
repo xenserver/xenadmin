@@ -450,6 +450,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             Disk.name_label = vdi.name_label;
             Disk.read_only = vdi.read_only;
             Disk.name_description = vdi.name_description;
+            Disk.sm_config = vdi.sm_config;
             Device.mode = vbd.mode;
 
             CanDelete = Disk.type == vdi_type.user && isNew;

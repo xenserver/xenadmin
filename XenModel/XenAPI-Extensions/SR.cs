@@ -1122,6 +1122,14 @@ namespace XenAPI
             }
         }
 
+        public bool IsThinProvisioned
+        {
+            get
+            {
+                return this.sm_config != null && this.sm_config.ContainsKey("allocation") && this.sm_config["allocation"] == "dynamic";
+            }
+        }
+
         #region IEquatable<SR> Members
 
         /// <summary>

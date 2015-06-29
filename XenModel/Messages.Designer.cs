@@ -30435,6 +30435,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose storage provisioning method.
+        /// </summary>
+        public static string STORAGE_PROVISIONING_METHOD_TITLE {
+            get {
+                return ResourceManager.GetString("STORAGE_PROVISIONING_METHOD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage Provisioning Settings.
+        /// </summary>
+        public static string STORAGE_PROVISIONING_SETTINGS {
+            get {
+                return ResourceManager.GetString("STORAGE_PROVISIONING_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read Only.
         /// </summary>
         public static string STORAGE_READ_ONLY {

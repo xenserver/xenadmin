@@ -53,6 +53,7 @@ namespace XenAdmin.Actions
         private readonly string _srContentType;
         private readonly bool _srIsShared;
         private readonly Dictionary<string, string> _dconf;
+        private readonly Dictionary<string, string> _smconf;
         private StorageLinkConnection _SLConnection;
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace XenAdmin.Actions
 
         public SrCreateAction(IXenConnection connection, Host host, string srName,
             string srDescription, SR.SRTypes srType, string srContentType, bool srIsShared,
-            Dictionary<string, string> dconf, List<StorageLinkConnection> copyStorageLinkConnections)
+            Dictionary<string, string> dconf, Dictionary<string, string> smconf, List<StorageLinkConnection> copyStorageLinkConnections)
             : base(connection, string.Format(Messages.ACTION_SR_CREATING_TITLE,
             XenAPI.SR.getFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
         {
@@ -78,6 +79,7 @@ namespace XenAdmin.Actions
             _srContentType = srContentType;
             _srIsShared = srIsShared;
             _dconf = dconf;
+            _smconf = smconf;
             if (_srType == SR.SRTypes.cslg && !Helpers.BostonOrGreater(connection))
                 _SLConnection = copyStorageLinkConnections.Find(s => s.Host == _dconf["target"]);
 
@@ -155,7 +157,9 @@ namespace XenAdmin.Actions
                 sr = XenAPI.SR.create(Session, Host.opaque_ref, _dconf, 0,
                                                   _srName, _srDescription, _srType.ToString().ToLowerInvariant(),
                                                   _srContentType,
-                                                  _srIsShared, new Dictionary<string, string>());
+                                                  _srIsShared, 
+                                                  _smconf ?? new Dictionary<string, string>());
+
                 Result = sr;
             }
             catch
