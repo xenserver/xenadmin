@@ -199,7 +199,7 @@ namespace XenAdmin.Dialogs
             allocationQuantumNumericUpDown.Enabled =
             labelAllocationQuantum.Enabled = IsSelectedSRThinProvisioned;
 
-            if (IsSelectedSRThinProvisioned && !userEntered)
+            if (IsSelectedSRThinProvisioned && !userChangedInitialAllocationValue)
             {                
                 DefaultToSRsConfig();
             }
@@ -642,6 +642,11 @@ namespace XenAdmin.Dialogs
                         .ShowDialog(Program.MainWindow);
                 }
             });
+        }
+
+        private void initialAllocationNumericUpDown_Leave(object sender, EventArgs e)
+        {
+            userEntered = false;
         }
     }
 }
