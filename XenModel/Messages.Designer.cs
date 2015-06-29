@@ -22965,6 +22965,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hardware FCoE SR [{0} - {1}].
+        /// </summary>
+        public static string NEWSR_LVMOFCOE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOFCOE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XenServer hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
         ///
         ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the XenServer host.

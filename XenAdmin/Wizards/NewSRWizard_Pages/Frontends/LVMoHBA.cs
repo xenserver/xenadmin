@@ -85,7 +85,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             foreach (var device in _selectedDevices)
             {
-                var descr = new LvmOhbaSrDescriptor(device, Connection);
+                LvmOhbaSrDescriptor descr;
+
+                if (this is LVMoFCoE)
+                    descr = new LvmOhbaSrDescriptor(device, Connection);
+                else
+                    descr = new FcoeSrDescriptor(device);
 
                 var action = new SrProbeAction(Connection, master, SrType, descr.DeviceConfig);
                 new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog(this);

@@ -75,6 +75,26 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
         }
 
+        public LvmOhbaSrDescriptor(FibreChannelDevice device)
+        {
+            Device = device;
+
+            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
+        }
+
+        public FibreChannelDevice Device { get; private set; }
+    }
+
+    public class FcoeSrDescriptor : LvmOhbaSrDescriptor
+    {
+        public FcoeSrDescriptor(FibreChannelDevice device) : base(device)
+        {
+            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
+            DeviceConfig[SrProbeAction.PATH] = device.Path;
+
+            Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
+        }
+
         public FibreChannelDevice Device { get; private set; }
     }
 

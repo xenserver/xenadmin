@@ -7846,6 +7846,9 @@ Do you wish to format the disk?</value>
   <data name="NEWSR_LUN_IN_USE_ON_SERVER" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on server {1}.</value>
   </data>
+  <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
+    <value>Hardware FCoE SR [{0} - {1}]</value>
+  </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
     <value>XenServer hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
 
