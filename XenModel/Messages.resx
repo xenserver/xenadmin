@@ -7850,11 +7850,11 @@ Do you wish to format the disk?</value>
     <value>This LUN is already in use as SR {0} on server {1}.</value>
   </data>
   <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
-    <value>XenServer hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
+    <value>XenServer hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
 
-All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the XenServer host.
+All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
 
-Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
+Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
   </data>
   <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
     <value>Software FCoE SR [{0} - {1}]</value>
