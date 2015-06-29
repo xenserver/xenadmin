@@ -56,6 +56,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             InitializeComponent();
         }
 
+        public virtual SR.SRTypes SrType { get { return SR.SRTypes.lvmohba; } }
+
+        public virtual bool ShowNicColumn { get { return false; } }
+
+        public virtual LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
+        {
+            return new LvmOhbaSrDescriptor(device, Connection);
+        }
+        
         #region XenTabPage overrides
 
         public override string PageTitle { get { return Messages.NEWSR_SELECT_LUN; } }
@@ -83,9 +92,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             foreach (var device in _selectedDevices)
             {
-                var descr = new LvmOhbaSrDescriptor(device, Connection);
+                LvmOhbaSrDescriptor descr = CreateSrDescriptor(device);
 
-                var action = new SrProbeAction(Connection, master, SR.SRTypes.lvmohba, descr.DeviceConfig);
+                var action = new SrProbeAction(Connection, master, SrType, descr.DeviceConfig);
                 new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog(this);
 
                 if (!action.Succeeded)
@@ -188,6 +197,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override void PopulatePage()
         {
+            colNic.Visible = ShowNicColumn; 
             dataGridView.Rows.Clear();
 
             var vendorGroups = from device in FCDevices
@@ -208,7 +218,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                             SelectionForeColor = dataGridView.DefaultCellStyle.ForeColor
                         };
 
-                var deviceRows = from device in vGroup.Devices select new FCDeviceRow(device);
+                var deviceRows = from device in vGroup.Devices select new FCDeviceRow(device, ShowNicColumn);
                 dataGridView.Rows.AddRange(deviceRows.ToArray());
             }
         }
@@ -308,7 +318,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 buttonClearAll.Enabled = _selectedDevices.Count > 0;
         }
 
-        public static bool FiberChannelScan(IWin32Window owner, IXenConnection connection, out List<FibreChannelDevice> devices)
+        public bool FiberChannelScan(IWin32Window owner, IXenConnection connection, out List<FibreChannelDevice> devices)
         {
             devices = new List<FibreChannelDevice>();
 
@@ -316,7 +326,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return false;
 
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master);
+            FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
             ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
             dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 
@@ -382,7 +392,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             public FibreChannelDevice Device { get; private set; }
 
-            public FCDeviceRow(FibreChannelDevice device)
+            public FCDeviceRow(FibreChannelDevice device, bool showNicColumn)
             {
                 Device = device;
 
@@ -394,6 +404,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     new DataGridViewTextBoxCell { Value = device.Serial },
                     new DataGridViewTextBoxCell { Value = id },
                     new DataGridViewTextBoxCell { Value = details });
+
+                if (showNicColumn)
+                    Cells.Add(new DataGridViewTextBoxCell {Value = device.eth});
             }
         }
 

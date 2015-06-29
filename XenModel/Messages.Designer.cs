@@ -22882,6 +22882,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Software FCoE virtual disk storage.
+        /// </summary>
+        public static string NEWSR_FCOE_DEFAULT_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_FCOE_DEFAULT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hardware HBA virtual disk storage.
         /// </summary>
         public static string NEWSR_HBA_DEFAULT_NAME {
@@ -22961,6 +22970,28 @@ namespace XenAdmin {
         public static string NEWSR_LUN_IN_USE_ON_SERVER {
             get {
                 return ResourceManager.GetString("NEWSR_LUN_IN_USE_ON_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenServer hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
+        ///
+        ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
+        ///
+        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string NEWSR_LVMOFCOE_BLURB {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOFCOE_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software FCoE SR [{0} - {1}].
+        /// </summary>
+        public static string NEWSR_LVMOFCOE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOFCOE_DESCRIPTION", resourceCulture);
             }
         }
         

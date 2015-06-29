@@ -60,6 +60,7 @@ namespace XenAdmin.Wizards
         private readonly EqualLogic xentabPageEqualLogic;
         private readonly LVMoISCSI xenTabPageLvmoIscsi;
         private readonly LVMoHBA xenTabPageLvmoHba;
+        private readonly LVMoFCoE xenTabPageLvmoFcoe;
         private readonly LVMoHBASummary xenTabPageLvmoHbaSummary;
         private readonly CslgSettings xenTabPageCslgSettings;
         private readonly CslgLocation xenTabPageCslgLocation;
@@ -113,6 +114,7 @@ namespace XenAdmin.Wizards
             xentabPageEqualLogic = new EqualLogic();
             xenTabPageLvmoIscsi = new LVMoISCSI();
             xenTabPageLvmoHba = new LVMoHBA();
+            xenTabPageLvmoFcoe = new LVMoFCoE();
             xenTabPageLvmoHbaSummary = new LVMoHBASummary();
             xenTabPageCslgSettings = new CslgSettings();
             xenTabPageCslgLocation = new CslgLocation();
@@ -202,15 +204,15 @@ namespace XenAdmin.Wizards
             xenTabPageRbacWarning.AddPermissionChecks(xenConnection, check);
         }
 
-        private bool SetFCDevicesOnLVMoHBAPage()
+        private bool SetFCDevicesOnLVMoHBAPage(LVMoHBA page)
         {
             List<FibreChannelDevice> devices;
-            var success = LVMoHBA.FiberChannelScan(this, xenConnection, out devices);
-            xenTabPageLvmoHba.FCDevices = devices;
+            var success = page.FiberChannelScan(this, xenConnection, out devices);
+            page.FCDevices = devices;
             return success;
         }
 
-        private bool CanShowLVMoHBASummaryPage()
+        private bool CanShowLVMoHBASummaryPage(List<LvmOhbaSrDescriptor> SrDescriptors)
         {
             string description = m_srWizardType.Description;
             string name = m_srWizardType.SrName;
@@ -218,7 +220,7 @@ namespace XenAdmin.Wizards
             List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name).ToList();
 
             m_srWizardType.SrDescriptors.Clear();
-            foreach (var lvmOhbaSrDescriptor in xenTabPageLvmoHba.SrDescriptors)
+            foreach (var lvmOhbaSrDescriptor in SrDescriptors)
             {
                 lvmOhbaSrDescriptor.Name = name;
                 if (!string.IsNullOrEmpty(description))
@@ -226,7 +228,9 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
                 names.Add(name);
-                name = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, names);
+                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_LvmoHba 
+                                                        ? Messages.NEWSR_HBA_DEFAULT_NAME
+                                                        : Messages.NEWSR_FCOE_DEFAULT_NAME, names);
             }
 
             xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Clear();
@@ -247,9 +251,14 @@ namespace XenAdmin.Wizards
 
             if (runPrechecks)
             {
+
+                if (m_srWizardType is SrWizardType_Fcoe)
+                {
+                    return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoFcoe);
+                }
                 if (m_srWizardType is SrWizardType_LvmoHba)
                 {
-                    return SetFCDevicesOnLVMoHBAPage();
+                    return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoHba);
                 }
                 if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                 {
@@ -257,12 +266,17 @@ namespace XenAdmin.Wizards
                     return xenTabPageCslg.PerformStorageSystemScan();
                 }
             }
+			
+			if (senderPage == xenTabPageLvmoFcoe)
+            {
+                return CanShowLVMoHBASummaryPage(xenTabPageLvmoFcoe.SrDescriptors);
+            }
 
             if (m_srWizardType is SrWizardType_LvmoHba)
             {
                 if (!Helpers.DundeeOrGreater(xenConnection) && senderPage == xenTabPageLvmoHba)
                 {
-                    return CanShowLVMoHBASummaryPage();
+                    return CanShowLVMoHBASummaryPage(xenTabPageLvmoHba.SrDescriptors);
                 }
                 else if (senderPage == xenTabPageStorageProvisioningMethod
                             //if there is no sr to be created (all will be reattached)
@@ -275,8 +289,7 @@ namespace XenAdmin.Wizards
                             .Where(desc => string.IsNullOrEmpty(desc.UUID)).ToList()
                             .ForEach(desc => desc.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig);
                     }
-
-                    return CanShowLVMoHBASummaryPage();
+                    return CanShowLVMoHBASummaryPage(xenTabPageLvmoHba.SrDescriptors);
                 }
             }
             return base.RunNextPagePrecheck(senderPage);
@@ -308,6 +321,11 @@ namespace XenAdmin.Wizards
                     if (Helpers.DundeeOrGreater(xenConnection))
                         AddPage(xenTabPageStorageProvisioningMethod);
                     
+                    AddPage(xenTabPageLvmoHbaSummary);
+                }
+                else if (m_srWizardType is SrWizardType_Fcoe)
+                {
+                    AddPage(xenTabPageLvmoFcoe);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Cslg)
@@ -368,6 +386,8 @@ namespace XenAdmin.Wizards
                     xenTabPageNfsIso.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_Cifs)
                     xenTabPageCifs.SrWizardType = m_srWizardType;
+                else if (m_srWizardType is SrWizardType_Fcoe)
+                    xenTabPageLvmoFcoe.SrWizardType = m_srWizardType;
                 #endregion
             }
             else if (senderPagetype == typeof(CIFS_ISO))
@@ -532,7 +552,7 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
                 base.FinishWizard();
                 return;
@@ -610,7 +630,7 @@ namespace XenAdmin.Wizards
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
             ActionProgressDialog dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true};
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
                 ActionProgressDialog closureDialog = dialog;
                 // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
@@ -623,7 +643,7 @@ namespace XenAdmin.Wizards
             }
             dialog.ShowDialog(this);
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
                 foreach (var asyncAction in actionList)
                 {

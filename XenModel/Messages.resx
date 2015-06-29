@@ -7817,6 +7817,9 @@ When you configure a CIFS storage repository, you simply provide the hostname or
   <data name="NEWSR_EQUAL_LOGIC_FILER_PAGE_TITLE" xml:space="preserve">
     <value>Enter the Dell EqualLogic filer details</value>
   </data>
+  <data name="NEWSR_FCOE_DEFAULT_NAME" xml:space="preserve">
+    <value>Software FCoE virtual disk storage</value>
+  </data>
   <data name="NEWSR_HBA_DEFAULT_NAME" xml:space="preserve">
     <value>Hardware HBA virtual disk storage</value>
   </data>
@@ -7845,6 +7848,16 @@ Do you wish to format the disk?</value>
   </data>
   <data name="NEWSR_LUN_IN_USE_ON_SERVER" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on server {1}.</value>
+  </data>
+  <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
+    <value>XenServer hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
+
+All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
+
+Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
+  </data>
+  <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
+    <value>Software FCoE SR [{0} - {1}]</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
     <value>XenServer hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).

@@ -626,6 +626,12 @@
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.Designer.cs">
       <DependentUpon>CSLG.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.Designer.cs">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewVMWizard\Page_CloudConfigParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
