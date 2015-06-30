@@ -95,6 +95,9 @@ namespace XenAdmin.Actions
         
         public static void SetTokenSecret(IXenConnection connection, Dictionary<string, string> config, string tokenKey, string tokenValue)
         {
+            if (string.IsNullOrEmpty(tokenKey))
+                return;
+
             if (tokenValue == null)
             {
                 config.Remove(tokenKey);
