@@ -9,32 +9,47 @@ using System.Web.Script.Serialization;
 
 namespace XenAdmin.Actions
 {
-    public class CallHomeAuthenticationAction : PureAsyncAction
+    public class CallHomeAuthenticationAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
         private readonly Pool pool;
         private readonly string username;
-        private string password;
-        private readonly string identityTokenUrl = "/auth/api/create_identity/";
-        private readonly string uploadGrantTokenUrl = "/feeds/api/create_grant/";
-        private readonly string uploadTokenUrl = "/feeds/api/create_upload/";
+        private readonly string password;
+
+        private readonly bool saveTokenAsSecret;
+        private readonly long tokenExpiration;
+
+        private string uploadToken;
+
+        private const string identityTokenUrl = "/auth/api/create_identity/";
+        private const string uploadGrantTokenUrl = "/feeds/api/create_grant/";
+        private const string uploadTokenUrl = "/feeds/api/create_upload/";
+
         private readonly string identityTokenDomainName = "http://cis-daily.citrite.net";
         private readonly string uploadGrantTokenDomainName = "https://rttf-staging.citrix.com";
         private readonly string uploadTokenDomainName = "https://rttf-staging.citrix.com";
+
         private const string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
 
-        public CallHomeAuthenticationAction(Pool pool, string username, string password, bool suppressHistory)
-            : base(pool.Connection, Messages.ACTION_CALLHOME_AUTHENTICATION, Messages.ACTION_CALLHOME_AUTHENTICATION_PROGRESS, suppressHistory)
+        public CallHomeAuthenticationAction(Pool pool, string username, string password, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
+            : base(pool != null ? pool.Connection : null, Messages.ACTION_CALLHOME_AUTHENTICATION, Messages.ACTION_CALLHOME_AUTHENTICATION_PROGRESS, suppressHistory)
         {
             this.pool = pool;
             this.username = username;
             this.password = password;
+            this.saveTokenAsSecret = saveTokenAsSecret;
+            this.tokenExpiration = tokenExpiration;
+            #region RBAC Dependencies
+            if (saveTokenAsSecret)
+                ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
+            #endregion
+            
         }
 
-        public CallHomeAuthenticationAction(Pool pool, string username, string password, 
-            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, bool suppressHistory)
-            : this(pool, username, password, suppressHistory)
+        public CallHomeAuthenticationAction(Pool pool, string username, string password,
+            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
+            : this(pool, username, password, saveTokenAsSecret, tokenExpiration, suppressHistory)
         {
             if (!string.IsNullOrEmpty(identityTokenDomainName))
                 this.identityTokenDomainName = identityTokenDomainName;
@@ -46,15 +61,20 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Dictionary<string, string> newConfig = pool.gui_config;
+            System.Diagnostics.Trace.Assert(pool != null || !saveTokenAsSecret, "Pool is null! Cannot save token as secret");
             try
             {
                 string identityToken = GetIdentityToken();
                 string uploadGrantToken = GetUploadGrantToken(identityToken);
-                string uploadToken = GetUploadToken(uploadGrantToken);
+                uploadToken = GetUploadToken(uploadGrantToken);
 
-                SetUploadTokenSecret(Connection, newConfig, uploadToken);
-                Pool.set_gui_config(Connection.Session, pool.opaque_ref, newConfig);
+                if (saveTokenAsSecret && pool != null)
+                {
+                    log.Info("Saving upload token as xapi secret");
+                    Dictionary<string, string> newConfig = pool.health_check_config;
+                    SetTokenSecret(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
+                    Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
+                }
             }
             catch (Exception e)
             {
@@ -63,31 +83,41 @@ namespace XenAdmin.Actions
             }
         }
 
+        public string UploadToken
+        {
+            get { return uploadToken; }
+        }
+
         public static void SetUploadTokenSecret(IXenConnection connection, Dictionary<string, string> config, string uploadToken)
         {
-            if (uploadToken == null)
+            SetTokenSecret(connection, config, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
+        }
+        
+        public static void SetTokenSecret(IXenConnection connection, Dictionary<string, string> config, string tokenKey, string tokenValue)
+        {
+            if (tokenValue == null)
             {
-                config.Remove(CallHomeSettings.UPLOAD_TOKEN_SECRET);
+                config.Remove(tokenKey);
             }
-            else if (config.ContainsKey(CallHomeSettings.UPLOAD_TOKEN_SECRET))
+            else if (config.ContainsKey(tokenKey))
             {
                 try
                 {
-                    string secretRef = Secret.get_by_uuid(connection.Session, config[CallHomeSettings.UPLOAD_TOKEN_SECRET]);
-                    Secret.set_value(connection.Session, secretRef, uploadToken);
+                    string secretRef = Secret.get_by_uuid(connection.Session, config[tokenKey]);
+                    Secret.set_value(connection.Session, secretRef, tokenValue);
                 }
                 catch (Failure)
                 {
-                    config[CallHomeSettings.UPLOAD_TOKEN_SECRET] = Secret.CreateSecret(connection.Session, uploadToken);
+                    config[tokenKey] = Secret.CreateSecret(connection.Session, tokenValue);
                 }
                 catch (WebException)
                 {
-                    config[CallHomeSettings.UPLOAD_TOKEN_SECRET] = Secret.CreateSecret(connection.Session, uploadToken);
+                    config[tokenKey] = Secret.CreateSecret(connection.Session, tokenValue);
                 }
             }
             else
             {
-                config[CallHomeSettings.UPLOAD_TOKEN_SECRET] = Secret.CreateSecret(connection.Session, uploadToken);
+                config[tokenKey] = Secret.CreateSecret(connection.Session, tokenValue);
             }
         }
 
@@ -106,7 +136,8 @@ namespace XenAdmin.Actions
         {
             var json = new JavaScriptSerializer().Serialize(new
             {
-                identity_token = identityToken
+                identity_token = identityToken,
+                expiration = tokenExpiration
             });
             var urlString = string.Format("{0}{1}", uploadGrantTokenDomainName, uploadGrantTokenUrl);
             return GetToken(urlString, json);
@@ -117,7 +148,8 @@ namespace XenAdmin.Actions
             var json = new JavaScriptSerializer().Serialize(new
             {
                 grant_token = grantToken,
-                product_key = productKey
+                product_key = productKey,
+                expiration = tokenExpiration
             });
             var urlString = string.Format("{0}{1}", uploadTokenDomainName, uploadTokenUrl);
             return GetToken(urlString, json);

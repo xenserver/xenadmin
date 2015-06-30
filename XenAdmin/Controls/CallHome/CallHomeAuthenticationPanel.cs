@@ -76,7 +76,8 @@ namespace XenAdmin.Controls
             spinnerIcon.StartSpinning();
 
             var action = new CallHomeAuthenticationAction(Pool, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
-                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName, false);
+                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName,
+                true, 0, false);
             action.Completed += CallHomeAuthenticationAction_Completed;
             authenticateButton.Enabled = false;
             action.RunAsync();
