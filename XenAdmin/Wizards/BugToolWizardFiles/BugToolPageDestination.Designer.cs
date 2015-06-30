@@ -30,30 +30,30 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BugToolPageDestination));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.authenticationGroupBox = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.m_textBoxName = new System.Windows.Forms.TextBox();
             this.labelFileLocation = new System.Windows.Forms.Label();
             this.m_textBoxLocation = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.uploadCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.authenticationGroupBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.authenticationGroupBox, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxName, 1, 1);
@@ -61,22 +61,16 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxLocation, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.uploadCheckBox, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // label2
+            // authenticationGroupBox
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.tableLayoutPanel1.SetColumnSpan(this.label2, 3);
-            this.label2.Name = "label2";
-            // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 3);
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            resources.ApplyResources(this.authenticationGroupBox, "authenticationGroupBox");
+            this.tableLayoutPanel1.SetColumnSpan(this.authenticationGroupBox, 3);
+            this.authenticationGroupBox.Controls.Add(this.tableLayoutPanel2);
+            this.authenticationGroupBox.Name = "authenticationGroupBox";
+            this.authenticationGroupBox.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
@@ -117,6 +111,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.TextChanged += new System.EventHandler(this.credentials_TextChanged);
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.tableLayoutPanel1.SetColumnSpan(this.label2, 3);
+            this.label2.Name = "label2";
+            // 
             // labelName
             // 
             resources.ApplyResources(this.labelName, "labelName");
@@ -152,13 +152,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 3);
             this.m_ctrlError.Name = "m_ctrlError";
             // 
-            // checkBox1
+            // uploadCheckBox
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBox1, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            resources.ApplyResources(this.uploadCheckBox, "uploadCheckBox");
+            this.tableLayoutPanel1.SetColumnSpan(this.uploadCheckBox, 3);
+            this.uploadCheckBox.Name = "uploadCheckBox";
+            this.uploadCheckBox.UseVisualStyleBackColor = true;
+            this.uploadCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // BugToolPageDestination
             // 
@@ -168,8 +168,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this, "$this");
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.authenticationGroupBox.ResumeLayout(false);
+            this.authenticationGroupBox.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -183,8 +183,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.TextBox m_textBoxName;
         private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox uploadCheckBox;
+        private System.Windows.Forms.GroupBox authenticationGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;

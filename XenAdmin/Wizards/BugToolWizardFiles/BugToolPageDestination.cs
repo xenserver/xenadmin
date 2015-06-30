@@ -115,7 +115,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             get
             {
-                return checkBox1.Enabled;
+                return uploadCheckBox.Enabled;
             }
         }
 
@@ -163,7 +163,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             error = string.Empty;
 
-            if (!checkBox1.Checked)
+            if (!uploadCheckBox.Checked)
                 return true;
 
             if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
@@ -176,7 +176,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             error = string.Empty;
 
-            if (!checkBox1.Checked)
+            if (!uploadCheckBox.Checked)
                 return true;
             
             if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
@@ -192,16 +192,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
             catch
             {
-            }
-            if (!action.Succeeded)
-            {
                 error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
                 UploadToken = null;
                 return false;
             }
-            
+           
             UploadToken = action.UploadToken;  // curent upload token
-            return true;
+            return !string.IsNullOrEmpty(UploadToken);
         }
 
         private void EnableDisableAuthenticationControls()
@@ -209,7 +206,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (!Visible)
                 return;
 
-            groupBox1.Enabled = checkBox1.Checked;
+            authenticationGroupBox.Enabled = uploadCheckBox.Checked;
         }
 
         #region Control event handlers
