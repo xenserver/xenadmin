@@ -94,8 +94,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
             Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
         }
-
-        public FibreChannelDevice Device { get; private set; }
     }
 
     public abstract class SrWizardType
