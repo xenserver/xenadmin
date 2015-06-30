@@ -191,6 +191,7 @@ namespace XenAdmin.Dialogs.CallHome
 
             healthCheckStatusPanel.Visible = poolRow.Pool.CallHomeSettings.Status == CallHomeStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.CallHomeSettings.Status != CallHomeStatus.Enabled;
+            UpdateUploadRequestDescription(poolRow.Pool.CallHomeSettings);
         }
 
         public string GetScheduleDescription(CallHomeSettings callHomeSettings)
@@ -201,6 +202,22 @@ namespace XenAdmin.Dialogs.CallHome
                     ? string.Format(Messages.CALLHOME_SCHEDULE_DESCRIPTION, callHomeSettings.IntervalInWeeks,
                                     callHomeSettings.DayOfWeek, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true))
                     : string.Empty;
+            }
+        }
+
+        public void UpdateUploadRequestDescription(CallHomeSettings callHomeSettings)
+        {
+            {
+                double uploadRequest;
+                if (!callHomeSettings.CanRequestNewUpload && double.TryParse(callHomeSettings.NewUploadRequest, out uploadRequest))
+                {
+                    uploadRequestLinkLabel.Text = string.Format(Messages.HEALTHCHECK_ON_DEMAND_REQUESTED_AT,
+                                         HelpersGUI.DateTimeToString(Util.FromUnixTime(uploadRequest), Messages.DATEFORMAT_HM, true));
+                    uploadRequestLinkLabel.LinkArea = new LinkArea(0, 0);
+                    return;
+                }
+                uploadRequestLinkLabel.Text = Messages.HEALTHCHECK_ON_DEMAND_REQUEST;
+                uploadRequestLinkLabel.LinkArea = new LinkArea(0, uploadRequestLinkLabel.Text.Length);
             }
         }
 
@@ -282,6 +299,20 @@ namespace XenAdmin.Dialogs.CallHome
             }
 
             new CallHomeSettingsDialog(poolRow.Pool).ShowDialog(this);
+        }
+
+        private void uploadRequestLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
+                return;
+
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            var callHomeSettings = poolRow.Pool.CallHomeSettings;
+            if (callHomeSettings.CanRequestNewUpload)
+            {
+                callHomeSettings.NewUploadRequest = Util.ToUnixTime(DateTime.UtcNow).ToString();
+                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, false).RunAsync();
+            }
         }
     }
 }

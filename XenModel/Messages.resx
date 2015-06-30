@@ -5698,6 +5698,12 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review configuration and activate HA</value>
   </data>
+  <data name="HEALTHCHECK_ON_DEMAND_REQUEST" xml:space="preserve">
+    <value>Request an upload now</value>
+  </data>
+  <data name="HEALTHCHECK_ON_DEMAND_REQUESTED_AT" xml:space="preserve">
+    <value>Upload requested at {0}</value>
+  </data>
   <data name="HEARTBEATING_STATUS" xml:space="preserve">
     <value>Heartbeating status</value>
   </data>
