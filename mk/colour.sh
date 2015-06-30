@@ -39,7 +39,7 @@ ROOTURL=https://xenbuilder.uk.xensource.com
 DEFAULT_OUTPUT=Red
 
 #Get the cookie
-curl -q -s -k $ROOTURL/plainlogin -o /dev/null -c /tmp/cookie$$
+curl -n -q -s -k $ROOTURL/plainlogin -o /dev/null -c /tmp/cookie$$
 
 #If this fails then declare the trunk red as there is a problem with the server
 #otherwise try to work out the actual color of the trunk
@@ -47,7 +47,7 @@ if [ $? -ne 0 ]; then
 	echo $DEFAULT_OUTPUT
 	exit 1
 else
-	curl -q -s -k $ROOTURL/ -o - -b /tmp/cookie$$ | sed -ne 's/.*Trunk is.*\(Green\|Red\|Orange\).*/\1/Ip'
+	curl -n -q -s -k $ROOTURL/ -o - -b /tmp/cookie$$ | sed -ne 's/.*Trunk is.*\(Green\|Red\|Orange\).*/\1/Ip'
 	rm /tmp/cookie$$
 fi
 

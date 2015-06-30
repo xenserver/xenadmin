@@ -45,17 +45,17 @@ else
 fi
 
 url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
-if curl -s --head --fail "${url}"; then
+if curl -n -s --head --fail "${url}"; then
   echo "URL exists: ${url}"
 else
   echo "URL does not exist: ${url}"
   exit 1
 fi
 
-NEXT_BN=$(curl "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
+NEXT_BN=$(curl -n "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
 
 echo NEXT_BN=${NEXT_BN}
 
-curl --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
+curl -n --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
 
 set +u
