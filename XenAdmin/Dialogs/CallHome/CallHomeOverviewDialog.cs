@@ -191,7 +191,7 @@ namespace XenAdmin.Dialogs.CallHome
 
             healthCheckStatusPanel.Visible = poolRow.Pool.CallHomeSettings.Status == CallHomeStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.CallHomeSettings.Status != CallHomeStatus.Enabled;
-            uploadRequestLinkLabel.Enabled = poolRow.Pool.CallHomeSettings.CanRequestNewUpload;
+            UpdateUploadRequestDescription(poolRow.Pool.CallHomeSettings);
         }
 
         public string GetScheduleDescription(CallHomeSettings callHomeSettings)
@@ -202,6 +202,22 @@ namespace XenAdmin.Dialogs.CallHome
                     ? string.Format(Messages.CALLHOME_SCHEDULE_DESCRIPTION, callHomeSettings.IntervalInWeeks,
                                     callHomeSettings.DayOfWeek, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true))
                     : string.Empty;
+            }
+        }
+
+        public void UpdateUploadRequestDescription(CallHomeSettings callHomeSettings)
+        {
+            {
+                double uploadRequest;
+                if (!callHomeSettings.CanRequestNewUpload && double.TryParse(callHomeSettings.NewUploadRequest, out uploadRequest))
+                {
+                    uploadRequestLinkLabel.Text = string.Format(Messages.HEALTHCHECK_ON_DEMAND_REQUESTED_AT,
+                                         HelpersGUI.DateTimeToString(Util.FromUnixTime(uploadRequest), Messages.DATEFORMAT_HM, true));
+                    uploadRequestLinkLabel.LinkArea = new LinkArea(0, 0);
+                    return;
+                }
+                uploadRequestLinkLabel.Text = Messages.HEALTHCHECK_ON_DEMAND_REQUEST;
+                uploadRequestLinkLabel.LinkArea = new LinkArea(0, uploadRequestLinkLabel.Text.Length);
             }
         }
 
