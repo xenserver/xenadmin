@@ -37,6 +37,7 @@ using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin;
+using System.Globalization;
 
 namespace XenServerHealthCheck
 {
@@ -85,7 +86,7 @@ namespace XenServerHealthCheck
 
         public XenServerHealthCheckBugTool()
         {
-                string name = string.Format("{0}{1}.zip", Messages.BUGTOOL_FILE_PREFIX, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd-HH-mm-ss", false));
+                string name = string.Format("{0}{1}.zip", Messages.BUGTOOL_FILE_PREFIX, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss", CultureInfo.InvariantCulture));
 
                 string folder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 if (Directory.Exists(folder))
