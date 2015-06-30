@@ -1845,6 +1845,15 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.zh-CN.resx">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.ja.resx">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.resx">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.zh-CN.resx">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.ja.resx">
       <DependentUpon>StorageProvisioning.cs</DependentUpon>
     </EmbeddedResource>
