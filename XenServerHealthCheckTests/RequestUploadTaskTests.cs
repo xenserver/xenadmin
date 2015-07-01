@@ -48,7 +48,7 @@ namespace XenServerHealthCheckTests
 
                 int conSize = ServerListHelper.instance.GetServerList().Count;
 
-                NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { connection.Hostname, connection.Username, connection.Password }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);

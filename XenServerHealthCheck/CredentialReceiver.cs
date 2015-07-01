@@ -32,17 +32,16 @@ using System;
 using System.Text;
 using System.Security.Principal;
 using System.IO.Pipes;
+using XenAPI;
 
 namespace XenServerHealthCheck
 {
-    
+
     public class CredentialReceiver
     {
         private CredentialReceiver() { }
         public static readonly CredentialReceiver instance = new CredentialReceiver();
 
-        public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
-        public const string BYE_MESSAGE = "BYEBYE";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private NamedPipeServerStream pipeServer;
         private static readonly Object pipeServerLock = new Object();
@@ -70,7 +69,7 @@ namespace XenServerHealthCheck
                 System.Security.AccessControl.AccessControlType.Allow);
                 var sec = new PipeSecurity();
                 sec.AddAccessRule(rule);
-                pipeServer = new NamedPipeServerStream(HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
+                pipeServer = new NamedPipeServerStream(CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
                 pipeServer.BeginWaitForConnection(new AsyncCallback(WaitForConnectionCallBack), pipeServer);
             }
         }
@@ -87,7 +86,7 @@ namespace XenServerHealthCheck
             System.Security.AccessControl.AccessControlType.Allow);
             var sec = new PipeSecurity();
             sec.AddAccessRule(rule);
-            pipeServer = new NamedPipeServerStream(HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
+            pipeServer = new NamedPipeServerStream(CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
             pipeServer.BeginWaitForConnection(new AsyncCallback(WaitForConnectionCallBack), pipeServer);
         }
 
@@ -113,20 +112,20 @@ namespace XenServerHealthCheck
                                 mb.Append(Encoding.UTF8.GetString(msgBuff, 0, byteCount));
                             } while (!(pipeServer.IsMessageComplete));
                             string credential = mb.ToString();
-                            if (credential == BYE_MESSAGE)
+                            if (credential == CallHomeSettings.HEALTH_CHECK_PIPE_END_MESSAGE)
                                 break;
                             ServerListHelper.instance.UpdateServerCredential(credential);
                         }
-                        catch(Exception exp)
+                        catch (Exception exp)
                         {
                             log.ErrorFormat("Receive credential with error {0}", exp.Message);
                             break;
                         }
-                    }while (pipeServer.IsConnected);
+                    } while (pipeServer.IsConnected);
                     reInitPipe();
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 log.Error(exp.Message);
             }

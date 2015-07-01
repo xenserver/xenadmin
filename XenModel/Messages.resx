@@ -879,6 +879,9 @@
   <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
     <value>Restart toolstack on '{0}'</value>
   </data>
+  <data name="ACTION_TRANSFER_CALLHOME_SETTINGS" xml:space="preserve">
+     <value>Transfer Health Check settings</value>
+  </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU passthrough on '{0}'</value>
   </data>

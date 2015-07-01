@@ -854,6 +854,7 @@ namespace XenAdmin
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
             ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
+            ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
 
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
@@ -864,6 +865,17 @@ namespace XenAdmin
         {
             if (HealthCheckOverviewLauncher != null)
                 HealthCheckOverviewLauncher.CheckHealthCheckEnrollment((IXenConnection) connection);
+        }
+
+        private void InformHealthCheckEnrollment(object connection)
+        {
+            Pool pool = Helpers.GetPoolOfOne((IXenConnection)connection);
+            if (pool == null)
+                return;
+            var newCallHomeSettings = pool.CallHomeSettings;
+            new TransferCallHomeSettingsAction(pool, newCallHomeSettings,
+                newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET),
+                newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), false).RunAsync();
         }
 
         /// <summary>

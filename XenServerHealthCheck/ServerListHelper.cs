@@ -145,7 +145,7 @@ namespace XenServerHealthCheck
                         if (connection.Hostname == decryptCredentialComps[0])
                         {
                             serverList.Remove(connection);
-                            log.InfoFormat("Rmove credential, current credential size is {0}", serverList.Count);
+                            log.InfoFormat("Remove credential, current credential size is {0}", serverList.Count);
                             break;
                         }
                     }

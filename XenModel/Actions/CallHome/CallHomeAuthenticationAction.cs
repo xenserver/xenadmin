@@ -72,7 +72,9 @@ namespace XenAdmin.Actions
                 {
                     log.Info("Saving upload token as xapi secret");
                     Dictionary<string, string> newConfig = pool.health_check_config;
-                    SetTokenSecret(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
+                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
+                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
+                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
                     Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
                 }
             }
@@ -88,39 +90,39 @@ namespace XenAdmin.Actions
             get { return uploadToken; }
         }
 
-        public static void SetUploadTokenSecret(IXenConnection connection, Dictionary<string, string> config, string uploadToken)
+        public static void SetSecretInfo(IXenConnection connection, Dictionary<string, string> config, string infoKey, string infoValue)
         {
-            SetTokenSecret(connection, config, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
+            SetInfoSecret(connection, config, infoKey, infoValue);
         }
-        
-        public static void SetTokenSecret(IXenConnection connection, Dictionary<string, string> config, string tokenKey, string tokenValue)
+
+        public static void SetInfoSecret(IXenConnection connection, Dictionary<string, string> config, string infoKey, string infoValue)
         {
-            if (string.IsNullOrEmpty(tokenKey))
+            if (string.IsNullOrEmpty(infoKey))
                 return;
 
-            if (tokenValue == null)
+            if (infoValue == null)
             {
-                config.Remove(tokenKey);
+                config.Remove(infoKey);
             }
-            else if (config.ContainsKey(tokenKey))
+            else if (config.ContainsKey(infoKey))
             {
                 try
                 {
-                    string secretRef = Secret.get_by_uuid(connection.Session, config[tokenKey]);
-                    Secret.set_value(connection.Session, secretRef, tokenValue);
+                    string secretRef = Secret.get_by_uuid(connection.Session, config[infoKey]);
+                    Secret.set_value(connection.Session, secretRef, infoValue);
                 }
                 catch (Failure)
                 {
-                    config[tokenKey] = Secret.CreateSecret(connection.Session, tokenValue);
+                    config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
                 }
                 catch (WebException)
                 {
-                    config[tokenKey] = Secret.CreateSecret(connection.Session, tokenValue);
+                    config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
                 }
             }
             else
             {
-                config[tokenKey] = Secret.CreateSecret(connection.Session, tokenValue);
+                config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
             }
         }
 

@@ -46,12 +46,16 @@ namespace XenAdmin.Dialogs.CallHome
         private bool authenticationRequired;
         private bool authenticated;
         private string authenticationToken;
+        private string usetName;
+        private string password;
 
         public CallHomeSettingsDialog(Pool pool)
         {
             this.pool = pool;
             callHomeSettings = pool.CallHomeSettings;
-            authenticationToken = callHomeSettings.GetExistingUploadToken(pool.Connection);
+            authenticationToken = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+            usetName = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+            password = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
             PopulateControls();
             InitializeControls();
@@ -127,7 +131,11 @@ namespace XenAdmin.Dialogs.CallHome
                 return true;
             if (timeOfDayComboBox.SelectedIndex != callHomeSettings.TimeOfDay)
                 return true;
-            if (authenticationToken != callHomeSettings.GetUploadToken(pool.Connection))
+            if (authenticationToken != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET))
+                return true;
+            if (usetName != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET))
+                return true;
+            if (password != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET))
                 return true;
             return false;
         }
@@ -151,7 +159,8 @@ namespace XenAdmin.Dialogs.CallHome
                     (int) timeOfDayComboBox.SelectedValue,
                     CallHomeSettings.DefaultRetryInterval);
 
-                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, false).RunAsync();
+                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, usetName, password, false).RunAsync();
+                new TransferCallHomeSettingsAction(pool, newCallHomeSettings, usetName, password, false).RunAsync();
             }
             DialogResult = DialogResult.OK;
             Close();
@@ -175,7 +184,7 @@ namespace XenAdmin.Dialogs.CallHome
                 if (callHomeAuthenticationPanel1.Authenticated)
                 {
                     authenticated = true;
-                    authenticationToken = pool.CallHomeSettings.GetExistingUploadToken(pool.Connection);
+                    authenticationToken = pool.CallHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
                 }
                 UpdateButtons();
             });

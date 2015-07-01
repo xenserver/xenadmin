@@ -28,7 +28,7 @@ namespace XenServerHealthCheckTests
             try
             {
                 //1. Empty credential 
-                NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
@@ -37,7 +37,7 @@ namespace XenServerHealthCheckTests
                 Assert.IsTrue(con.Count == conSize);
 
                 //2. Send credential and check result
-                pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
@@ -47,7 +47,7 @@ namespace XenServerHealthCheckTests
                 Assert.IsTrue(con.Count == conSize + 1);
 
                 //3. Send credential twice and check result
-                pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
@@ -57,7 +57,7 @@ namespace XenServerHealthCheckTests
                 Assert.IsTrue(con.Count == conSize + 1);
 
                 //4. remove credential and check result
-                pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
@@ -67,7 +67,7 @@ namespace XenServerHealthCheckTests
                 Assert.IsTrue(con.Count == conSize);
 
                 //5. add long credential size
-                pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 HostName = "Host01234546789012345467890123454678901234546789012345467890123454678901234546789012345467890123454678901234546789";
                 UserName = "User01234546789012345467890123454678901234546789012345467890123454678901234546789012345467890123454678901234546789";
@@ -80,7 +80,7 @@ namespace XenServerHealthCheckTests
                 Assert.IsTrue(con.Count == conSize + 1);
 
                 //6. remove long credential size
-                pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
@@ -91,7 +91,7 @@ namespace XenServerHealthCheckTests
 
 
                 //6. semd 2 credential
-                pipeClient = new NamedPipeClientStream(".", CredentialReceiver.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
                 HostName = "host1";
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));

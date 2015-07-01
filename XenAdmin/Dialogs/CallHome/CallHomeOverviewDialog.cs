@@ -287,11 +287,14 @@ namespace XenAdmin.Dialogs.CallHome
             if (callHomeSettings.Status != CallHomeStatus.Enabled)
             {
                 // try to enroll into call home with the default settings, if authentication is not required
-                var token = callHomeSettings.GetExistingUploadToken(poolRow.Pool.Connection);
-                if (!string.IsNullOrEmpty(token))
+                var token = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+                var user = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+                var password = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+                if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password))
                 {
                     callHomeSettings.Status = CallHomeStatus.Enabled;
-                    new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, false).RunAsync();
+                    new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
+                    new TransferCallHomeSettingsAction(poolRow.Pool, callHomeSettings, user, password, false).RunAsync();
                     return;
                 }
                 new CallHomeEnrollNowDialog(poolRow.Pool).ShowDialog(this);
@@ -311,7 +314,7 @@ namespace XenAdmin.Dialogs.CallHome
             if (callHomeSettings.CanRequestNewUpload)
             {
                 callHomeSettings.NewUploadRequest = Util.ToUnixTime(DateTime.UtcNow).ToString();
-                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, false).RunAsync();
+                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
             }
         }
     }
