@@ -456,6 +456,7 @@ namespace XenAPI
         public const string LAST_SUCCESSFUL_UPLOAD = "LastSuccessfulUpload";
         public const string LAST_FAILED_UPLOAD = "LastFailedUpload";
         public const string NEW_UPLOAD_REQUEST = "NewUploadRequest";
+        public const string UPLOAD_UUID = "UploadUuid";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {

@@ -106,8 +106,16 @@ namespace XenServerHealthCheck
                     connection.LoadCache(session);
                     if (RequestUploadTask.Request(connection, session) || RequestUploadTask.OnDemandRequest(connection, session))
                     {
-                        //Create thread to do log uploading
-                        log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
+                        // Create a task to collect server status report and upload to CIS server
+                        log.InfoFormat("Start to upload server status report for XenServer {0}", connection.Hostname);
+
+                        XenServerHealthCheckBundleUpload upload = new XenServerHealthCheckBundleUpload(connection);
+                        Action uploadAction = delegate()
+                        {
+                            upload.runUpload();
+                        };
+                        System.Threading.Tasks.Task task = new System.Threading.Tasks.Task(uploadAction);
+                        task.Start();
                     }
                     session.logout();
                     session = null;
