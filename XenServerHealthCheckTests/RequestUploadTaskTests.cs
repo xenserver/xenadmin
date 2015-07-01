@@ -9,6 +9,8 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XenAdminTests;
+using System.IO.Pipes;
+using System.IO;
 
 namespace XenServerHealthCheckTests
 {
@@ -29,6 +31,44 @@ namespace XenServerHealthCheckTests
             config[CallHomeSettings.LAST_SUCCESSFUL_UPLOAD] = "";
             config[CallHomeSettings.LAST_FAILED_UPLOAD] = "";
             return config;
+        }
+        private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
+        public void CheckUnenrolledHostShouldRemoved()
+        {
+            try
+            {
+                CredentialReceiver.instance.Init();
+                ServerListHelper.instance.Init();
+                DatabaseManager.CreateNewConnection(dbName);
+                IXenConnection connection = DatabaseManager.ConnectionFor(dbName);
+                Session _session = DatabaseManager.ConnectionFor(dbName).Session;
+                DatabaseManager.ConnectionFor(dbName).LoadCache(_session);
+                Dictionary<string, string> config = cleanStack();
+                connection.LoadCache(_session);
+
+                int conSize = ServerListHelper.instance.GetServerList().Count;
+
+                NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient.Connect();
+                string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { connection.Hostname, connection.Username, connection.Password }));
+                pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
+                pipeClient.Close();
+                System.Threading.Thread.Sleep(1000);
+                List<ServerInfo> con = ServerListHelper.instance.GetServerList();
+                Assert.IsTrue(con.Count == conSize + 1);
+
+
+                //1. If XenServer has not enroll, lock will not been set.
+                config = cleanStack();
+                config[CallHomeSettings.STATUS] = "false";
+                Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsFalse(RequestUploadTask.Request(connection, _session));
+                con = ServerListHelper.instance.GetServerList();
+                Assert.IsTrue(con.Count == conSize);
+                CredentialReceiver.instance.UnInit();
+            }
+            catch (Exception)
+            { }
         }
 
         public void checkUploadLock()

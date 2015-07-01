@@ -440,6 +440,8 @@ namespace XenAPI
         public DayOfWeek DayOfWeek;
         public string UploadTokenSecretUuid;
         public string NewUploadRequest;
+        public string UserNameSecretUuid;
+        public string PasswordSecretUuid;
         
         public const int DefaultRetryInterval = 7; // in days
         public const int UploadRequestValidityInterval = 30; // in minutes
@@ -451,11 +453,16 @@ namespace XenAPI
         public const string TIME_OF_DAY = "Schedule.TimeOfDay";
         public const string RETRY_INTERVAL = "Schedule.RetryInterval";
         public const int RetryIntervalDefault = 7;
-        public const string UPLOAD_TOKEN_SECRET = "UploadToken.Secret"; 
+        public const string UPLOAD_TOKEN_SECRET = "UploadToken.Secret";
+        public const string UPLOAD_CREDENTIAL_USER_SECRET = "User.Secret";
+        public const string UPLOAD_CREDENTIAL_PASSWORD_SECRET = "Password.Secret";
         public const string UPLOAD_LOCK = "UploadLock";
         public const string LAST_SUCCESSFUL_UPLOAD = "LastSuccessfulUpload";
         public const string LAST_FAILED_UPLOAD = "LastFailedUpload";
         public const string NEW_UPLOAD_REQUEST = "NewUploadRequest";
+        public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
+        public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
+        public const string UPLOAD_UUID = "UploadUuid";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
@@ -478,6 +485,8 @@ namespace XenAPI
             RetryInterval = IntKey(config, RETRY_INTERVAL, RetryIntervalDefault);
             UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
             NewUploadRequest = Get(config, NEW_UPLOAD_REQUEST);
+            UserNameSecretUuid = Get(config, UPLOAD_CREDENTIAL_USER_SECRET);
+            PasswordSecretUuid = Get(config, UPLOAD_CREDENTIAL_PASSWORD_SECRET);
         }
 
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
@@ -552,13 +561,30 @@ namespace XenAPI
         }
         #endregion
 
-        public string GetUploadToken(IXenConnection connection)
+        public string GetSecretyInfo(IXenConnection connection, string secretType)
         {
-            if (connection == null || string.IsNullOrEmpty(UploadTokenSecretUuid))
+            string UUID = string.Empty;
+            switch (secretType)
+            {
+                case CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET:
+                    UUID = UserNameSecretUuid;
+                    break;
+                case CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET:
+                    UUID = PasswordSecretUuid;
+                    break;
+                case CallHomeSettings.UPLOAD_TOKEN_SECRET:
+                    UUID = UploadTokenSecretUuid;
+                    break;
+                default:
+                    log.ErrorFormat("Error getting the {0} from the xapi secret", secretType);
+                    break;
+            }
+
+            if (connection == null || string.IsNullOrEmpty(UUID))
                 return null;
             try
             {
-                string opaqueref = Secret.get_by_uuid(connection.Session, UploadTokenSecretUuid);
+                string opaqueref = Secret.get_by_uuid(connection.Session, UUID);
                 return Secret.get_value(connection.Session, opaqueref);
             }
             catch (Exception e)
@@ -568,20 +594,20 @@ namespace XenAPI
             }
         }
 
-        public string GetExistingUploadToken(IXenConnection connection)
+        public string GetExistingSecretyInfo(IXenConnection connection, string secretType)
         {
             if (connection == null)
                 return null;
 
-            string token = GetUploadToken(connection);
+            string token = GetSecretyInfo(connection, secretType);
 
             if (string.IsNullOrEmpty(token))
-                token = GetUploadTokenFromOtherConnections(connection);
+                token = GetSecretyInfoFromOtherConnections(connection, secretType);
 
             return token;
         }
 
-        private static string GetUploadTokenFromOtherConnections(IXenConnection currentConnection)
+        private static string GetSecretyInfoFromOtherConnections(IXenConnection currentConnection, string secretType)
         {
             foreach (var connection in ConnectionsManager.XenConnectionsCopy)
             {
@@ -590,7 +616,7 @@ namespace XenAPI
                 var poolOfOne = Helpers.GetPoolOfOne(connection);
                 if (poolOfOne != null)
                 {
-                    var token = poolOfOne.CallHomeSettings.GetUploadToken(connection);
+                    var token = poolOfOne.CallHomeSettings.GetSecretyInfo(connection, secretType);
                     if (!string.IsNullOrEmpty(token))
                         return token;
                 }

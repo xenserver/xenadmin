@@ -31,205 +31,158 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Configuration;
-using System.IO;
-using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin;
+using System.Threading.Tasks;
 
 namespace XenServerHealthCheck
 {
-    class ServerListHelper
+    public class ServerInfo
     {
+        public string HostName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public Task task { get; set; }
+    }
+
+    public class ServerListHelper
+    {
+        private ServerListHelper() { }
+        public static readonly ServerListHelper instance = new ServerListHelper();
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private List<ServerInfo> serverList;
 
-        public static List<IXenConnection> GetServerList()
+        private static readonly Object serverListLock = new Object();
+        public List<ServerInfo> GetServerList()
         {
-            List<FileInfo> XCConfiglist = FindAllConfig();
-            List<string> ServerList = new List<string>();
-
-            foreach (FileInfo configFile in XCConfiglist)
+            List<ServerInfo> currentList;
+            lock (serverListLock)
             {
-                List<string> encServerList = GetServerListString(configFile);
+                currentList = new List<ServerInfo>(serverList);
+            }
+            return currentList;
+        }
+
+        public void Init()
+        {
+            lock (serverListLock)
+            {
+                serverList = new List<ServerInfo>();
+                string[] encServerList = Properties.Settings.Default.ServerList ?? new string[0];
                 foreach (string encServer in encServerList)
                 {
-                    try
-                    {
-                        string decryptedInfo = EncryptionUtils.Unprotect(encServer);
-                        ServerList.Add(decryptedInfo);
-                    }
-                    catch (Exception exn)
-                    {
-                        log.Error("Decrypt server information failed", exn);
-                    }
+                    string decryptCredential = EncryptionUtils.Unprotect(encServer);
+                    string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
+                    ServerInfo connection = new ServerInfo();
+                    connection.HostName = decryptCredentialComps[0];
+                    connection.UserName = decryptCredentialComps[1];
+                    connection.Password = decryptCredentialComps[2];
+                    connection.task = null;
+                    serverList.Add(connection);
                 }
             }
-            return ConstructConnection(ServerList);
-        }
-
-        private static string ProfileListKey = @"SOFTWARE\\Microsoft\Windows NT\\CurrentVersion\\ProfileList\\";
-        private static string ShellFolderKey = @"\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\";
-        private static string UserShellFolderKey = @"\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\";
-        
-        private static List<string> GetAllPossiblePath()
-        {
-            List<string> PathList = new List<string>();
-            
-            Microsoft.Win32.RegistryKey ProfileList = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(ProfileListKey);
-            if (ProfileList == null)
-                return PathList;
-
-            foreach (string ProfileKey in ProfileList.GetSubKeyNames())
-            {
-                Microsoft.Win32.RegistryKey profileKey = ProfileList.OpenSubKey(ProfileKey);
-                if (profileKey == null)
-                    continue;
-
-                string profile = profileKey.GetValue("ProfileImagePath").ToString();
-                profileKey.Close();
-
-                Microsoft.Win32.RegistryKey shellfolder = Microsoft.Win32.Registry.Users.OpenSubKey(ProfileKey + ShellFolderKey);
-                if (shellfolder == null)
-                    continue;
-
-                var AppData = shellfolder.GetValue("AppData");
-                shellfolder.Close();
-                if (AppData == null)
-                {
-                    shellfolder = Microsoft.Win32.Registry.Users.OpenSubKey(ProfileKey + UserShellFolderKey);
-                    if (profileKey == null)
-                        continue;
-                    AppData = shellfolder.GetValue("AppData");
-                    shellfolder.Close();
-                }
-
-                if (AppData == null)
-                    continue;
-
-                PathList.Add(AppData.ToString().Replace("%USERPROFILE%", profile));
-            }
-            ProfileList.Close();
-
-            PathList = PathList.Distinct().ToList();
-            return PathList;
-        }
-        
-        private static string XenCenterDomainName = "XenCenterMain.exe";
-        private static List<FileInfo> FindAllConfig()
-        {
-            List<string> PathList = GetAllPossiblePath();
-            List<FileInfo> fileList = new List<FileInfo>();
-
-            foreach (var path in PathList)
-            {
-                DirectoryInfo currentConfigFolder = new DirectoryInfo(path);
-                foreach (DirectoryInfo subDir in currentConfigFolder.GetDirectories("*" + XenCenterDomainName + "*", SearchOption.AllDirectories))
-                    foreach (FileInfo file in subDir.GetFiles("user.config", SearchOption.AllDirectories))
-                        fileList.Add(file);
-            }
-
-            return fileList;
-        }
-
-        private static List<string> GetServerListString(FileInfo fileInfo)
-        {
-            List<string> encServerList = new List<string>();
-            StreamReader reader = new StreamReader(new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.Read));
-            XmlDocument ConfigXML = new XmlDocument();
-            string ConfigContent = reader.ReadToEnd();
-            reader.Close();
-            ConfigXML.LoadXml(ConfigContent);
-
-            try
-            {
-                foreach (XmlNode setting in ConfigXML.GetElementsByTagName("setting"))
-                {
-                    if (setting.Attributes["name"].Value == "ServerList")
-                    {
-                        XmlDocument serilizedData = new XmlDocument();
-                        serilizedData.LoadXml(setting.InnerXml);
-                        foreach (XmlNode ServerInfo in serilizedData.GetElementsByTagName("string"))
-                        {
-                            encServerList.Add(ServerInfo.InnerText);
-                        }
-                    }
-                }
-            }
-            catch (Exception exp)
-            {
-                log.Error("Get server list from XenCenter failed", exp);
-            }
-
-            return encServerList;
         }
 
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
-        private const string VNC_INDICATOR = "$VNC$";
-        private static List<IXenConnection> ConstructConnection(List<string> ServerList)
+        private string ProtectCredential(ServerInfo connection)
         {
-            List<IXenConnection> Connections = new List<IXenConnection>();
-            foreach (string entry in ServerList)
+            string Host = connection.HostName ?? string.Empty;
+            string username = connection.UserName ?? string.Empty;
+            string passwordSecret = connection.Password ?? string.Empty;
+
+            return EncryptionUtils.Protect(String.Join(SEPARATOR.ToString(), new[] { Host, username, passwordSecret }));
+        }
+
+        public void removeServerCredential(string HostName)
+        {
+            lock (serverListLock)
             {
-                string[] entryComps = entry.Split(SEPARATOR);
-                if (entryComps.Length < 3 || entryComps.Length > 7)
+                foreach (ServerInfo con in serverList)
                 {
-                    return Connections;
+                    if (HostName == con.HostName)
+                    {
+                        serverList.Remove(con);
+                        updateServerList();
+                        return;
+                    }
                 }
             }
+        }
 
-            foreach (string entry in ServerList)
+        private void updateServerList()
+        {
+            List<string> encList = new List<string>();
+            foreach (ServerInfo connection in serverList)
             {
-                // $VNC$, VM UUID, unused, password
-                // username, hostname, port, password
-                // username, hostname, port, password, connected
-                // username, hostname, port, password, connected, friendly name
-                // username, hostname, port, password, connected, friendly name, pool members
-                // If the user cancels the restore dialog, we use the ServerAddressList instead:
-                // hostname, port, friendly name
+                encList.Add(ProtectCredential(connection));
+            }
+            Properties.Settings.Default.ServerList = encList.ToArray();
+            Properties.Settings.Default.Save();
+        }
 
-                string[] entryComps = entry.Split(SEPARATOR);
-
-                int port;
-                if (!int.TryParse(entryComps[2], out port))
+        public bool UpdateServerInfo(ServerInfo server)
+        {
+            lock (serverListLock)
+            {
+                foreach (ServerInfo con in serverList)
                 {
-                    port = ConnectionsManager.DEFAULT_XEN_PORT;
-                }
-
-                if (entryComps[0] == VNC_INDICATOR)
-                {
-                    continue;
-                }
-                else if (entryComps.Length > 3)
-                {
-                    bool newItem = true;
-                    if (!int.TryParse(entryComps[1], out port))
+                    if (server.HostName == con.HostName)
                     {
-                        port = ConnectionsManager.DEFAULT_XEN_PORT;
+                        serverList.Remove(con);
+                        serverList.Add(server);
+                        updateServerList();
+                        return true;
                     }
+                }
+                return false;
+            }
+        }
 
-                    IXenConnection connection = new XenConnection();
-                    connection.Username = entryComps[0];
-                    connection.Hostname = entryComps[1];
-                    connection.Port = port;
-                    connection.Password = entryComps[3];
-                    connection.FriendlyName = entryComps[2];
-                    
-                    foreach (var con in Connections)
+        public void UpdateServerCredential(string credential)
+        {
+            log.Info("Receive credential update message");
+
+            string decryptCredential = EncryptionUtils.UnprotectForLocalMachine(credential);
+            string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
+
+            lock (serverListLock)
+            {
+                if (decryptCredentialComps.Length == 3)
+                {//Add credential
+                    Task originalTask = null;
+                    foreach (ServerInfo connection in serverList)
                     {
-                        if (con.Hostname == connection.Hostname && connection.Username == con.Username)
+                        if (connection.HostName == decryptCredentialComps[0])
                         {
-                            newItem = false;
+                            originalTask = connection.task;
+                            serverList.Remove(connection);
+                            log.Info("Refresh credential");
                             break;
                         }
-
                     }
-                    if(newItem)
-                        Connections.Add(connection);
+                    ServerInfo newConnection = new ServerInfo();
+                    newConnection.HostName = decryptCredentialComps[0];
+                    newConnection.UserName = decryptCredentialComps[1];
+                    newConnection.Password = decryptCredentialComps[2];
+                    newConnection.task = originalTask;
+                    serverList.Add(newConnection);
+                    log.InfoFormat("Add credential, current credential size is {0}", serverList.Count);
                 }
+                else if (decryptCredentialComps.Length == 1)
+                {//remove credential
+                    foreach (ServerInfo connection in serverList)
+                    {
+                        if (connection.HostName == decryptCredentialComps[0])
+                        {
+                            serverList.Remove(connection);
+                            log.InfoFormat("Remove credential, current credential size is {0}", serverList.Count);
+                            break;
+                        }
+                    }
+                }
+
+                updateServerList();
             }
-            return Connections;
         }
     }
 }

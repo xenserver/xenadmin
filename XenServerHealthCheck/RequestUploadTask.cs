@@ -67,7 +67,7 @@ namespace XenServerHealthCheck
             DateTime currentTime = DateTime.UtcNow;
             DateTime lockTime = DateTime.Parse(currentLock[1]);
 
-            if (currentLock[0] == System.Configuration.ConfigurationManager.AppSettings["UUID"])
+            if (currentLock[0] == Properties.Settings.Default.UUID)
             {
                 if ((DateTime.Compare(lockTime.AddHours(DueAfterHour), currentTime) <= 0))
                     return true;
@@ -81,7 +81,7 @@ namespace XenServerHealthCheck
         private static bool getLock(IXenConnection connection, Session session)
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            string newUploadLock = System.Configuration.ConfigurationManager.AppSettings["UUID"];
+            string newUploadLock = Properties.Settings.Default.UUID;
             newUploadLock += "|" + DateTime.UtcNow.ToString();
             config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
             Pool.set_health_check_config(session, connection.Cache.Pools[0].opaque_ref, config);
@@ -96,6 +96,7 @@ namespace XenServerHealthCheck
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
+                ServerListHelper.instance.removeServerCredential(connection.Hostname);
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
                 return false;
             }
