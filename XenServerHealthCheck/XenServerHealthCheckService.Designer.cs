@@ -36,7 +36,6 @@
             this.CanPauseAndContinue = true;
             this.CanShutdown = true;
             this.ServiceName = "XenServer Health Check";
-
         }
 
         #endregion

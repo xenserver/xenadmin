@@ -33,7 +33,7 @@ namespace XenServerHealthCheckTests
                 string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
                 pipeClient.Close();
-                List<IXenConnection> con = ServerListHelper.instance.GetServerList();
+                List<ServerInfo> con = ServerListHelper.instance.GetServerList();
                 Assert.IsTrue(con.Count == conSize);
 
                 //2. Send credential and check result

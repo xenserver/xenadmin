@@ -33,23 +33,32 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Threading.Tasks;
 
 namespace XenServerHealthCheck
 {
+    public class ServerInfo
+    {
+        public string HostName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public Task task { get; set; }
+    }
+
     public class ServerListHelper
     {
         private ServerListHelper() { }
         public static readonly ServerListHelper instance = new ServerListHelper();
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private List<IXenConnection> serverList;
+        private List<ServerInfo> serverList;
 
         private static readonly Object serverListLock = new Object();
-        public List<IXenConnection> GetServerList()
+        public List<ServerInfo> GetServerList()
         {
-            List<IXenConnection> currentList;
+            List<ServerInfo> currentList;
             lock (serverListLock)
             {
-                currentList = new List<IXenConnection>(serverList);
+                currentList = new List<ServerInfo>(serverList);
             }
             return currentList;
         }
@@ -58,56 +67,75 @@ namespace XenServerHealthCheck
         {
             lock (serverListLock)
             {
-                serverList = new List<IXenConnection>();
+                serverList = new List<ServerInfo>();
                 string[] encServerList = Properties.Settings.Default.ServerList ?? new string[0];
                 foreach (string encServer in encServerList)
                 {
                     string decryptCredential = EncryptionUtils.Unprotect(encServer);
                     string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
-                    IXenConnection connection = new XenConnection();
-                    connection.Hostname = decryptCredentialComps[0];
-                    connection.Username = decryptCredentialComps[1];
+                    ServerInfo connection = new ServerInfo();
+                    connection.HostName = decryptCredentialComps[0];
+                    connection.UserName = decryptCredentialComps[1];
                     connection.Password = decryptCredentialComps[2];
+                    connection.task = null;
                     serverList.Add(connection);
                 }
             }
         }
 
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
-        private string ProtectCredential(IXenConnection connection)
+        private string ProtectCredential(ServerInfo connection)
         {
-            string Host = connection.Hostname ?? string.Empty;
-            string username = connection.Username ?? string.Empty;
+            string Host = connection.HostName ?? string.Empty;
+            string username = connection.UserName ?? string.Empty;
             string passwordSecret = connection.Password ?? string.Empty;
 
             return EncryptionUtils.Protect(String.Join(SEPARATOR.ToString(), new[] { Host, username, passwordSecret }));
         }
 
-        public void removeServerCredential(IXenConnection connection)
+        public void removeServerCredential(string HostName)
         {
             lock (serverListLock)
             {
-                foreach (IXenConnection con in serverList)
+                foreach (ServerInfo con in serverList)
                 {
-                    if (connection.Hostname == con.Hostname)
+                    if (HostName == con.HostName)
                     {
                         serverList.Remove(con);
-                        break;
+                        updateServerList();
+                        return;
                     }
                 }
-                updateServerList();
             }
         }
 
         private void updateServerList()
         {
             List<string> encList = new List<string>();
-            foreach (IXenConnection connection in serverList)
+            foreach (ServerInfo connection in serverList)
             {
                 encList.Add(ProtectCredential(connection));
             }
             Properties.Settings.Default.ServerList = encList.ToArray();
             Properties.Settings.Default.Save();
+        }
+
+        public bool UpdateServerInfo(ServerInfo server)
+        {
+            lock (serverListLock)
+            {
+                foreach (ServerInfo con in serverList)
+                {
+                    if (server.HostName == con.HostName)
+                    {
+                        serverList.Remove(con);
+                        serverList.Add(server);
+                        updateServerList();
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         public void UpdateServerCredential(string credential)
@@ -121,28 +149,30 @@ namespace XenServerHealthCheck
             {
                 if (decryptCredentialComps.Length == 3)
                 {//Add credential
-                    foreach (IXenConnection connection in serverList)
+                    Task originalTask = null;
+                    foreach (ServerInfo connection in serverList)
                     {
-                        if (connection.Hostname == decryptCredentialComps[0])
+                        if (connection.HostName == decryptCredentialComps[0])
                         {
+                            originalTask = connection.task;
                             serverList.Remove(connection);
                             log.Info("Refresh credential");
                             break;
                         }
                     }
-                    IXenConnection newConnection = new XenConnection();
-                    newConnection.Hostname = decryptCredentialComps[0];
-                    newConnection.Username = decryptCredentialComps[1];
+                    ServerInfo newConnection = new ServerInfo();
+                    newConnection.HostName = decryptCredentialComps[0];
+                    newConnection.UserName = decryptCredentialComps[1];
                     newConnection.Password = decryptCredentialComps[2];
+                    newConnection.task = originalTask;
                     serverList.Add(newConnection);
-
                     log.InfoFormat("Add credential, current credential size is {0}", serverList.Count);
                 }
                 else if (decryptCredentialComps.Length == 1)
                 {//remove credential
-                    foreach (IXenConnection connection in serverList)
+                    foreach (ServerInfo connection in serverList)
                     {
-                        if (connection.Hostname == decryptCredentialComps[0])
+                        if (connection.HostName == decryptCredentialComps[0])
                         {
                             serverList.Remove(connection);
                             log.InfoFormat("Remove credential, current credential size is {0}", serverList.Count);

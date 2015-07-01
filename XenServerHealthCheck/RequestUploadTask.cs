@@ -96,7 +96,7 @@ namespace XenServerHealthCheck
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
-                ServerListHelper.instance.removeServerCredential(connection);
+                ServerListHelper.instance.removeServerCredential(connection.Hostname);
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
                 return false;
             }

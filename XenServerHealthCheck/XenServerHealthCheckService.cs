@@ -35,6 +35,7 @@ using System.ServiceProcess;
 using XenAdmin.Network;
 using XenAPI;
 using System.Threading;
+using XenAdmin;
 
 namespace XenServerHealthCheck
 {
@@ -51,6 +52,8 @@ namespace XenServerHealthCheck
                 System.Diagnostics.EventLog.CreateEventSource(
                     "XenServerHealthCheck", "XenServerHealthCheckLog");
             }
+
+            XenAdminConfigManager.Provider = new WinformsXenAdminConfigProvider();
         }
 
         private static void initConfig()
@@ -86,8 +89,21 @@ namespace XenServerHealthCheck
 
         protected override void OnStop()
         {
-            CredentialReceiver.instance.UnInit();
             log.Info("XenServer Health Check Service stopping...");
+            CredentialReceiver.instance.UnInit();
+            bool canStop;
+            do
+            {
+                canStop = true;
+                List<ServerInfo> servers = ServerListHelper.instance.GetServerList();
+                foreach (ServerInfo server in servers)
+                {
+                    if (server.task != null && (!server.task.IsCompleted || !server.task.IsCanceled || !server.task.IsFaulted))
+                        canStop = false;
+                }
+                if(canStop == false)
+                    Thread.Sleep(1000);
+            } while (canStop != true);
         }
 
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
@@ -95,21 +111,30 @@ namespace XenServerHealthCheck
             log.Info("XenServer Health Check Service start to refresh uploading tasks");
             
             //We need to check if CIS can be accessed in current enviroment
-            
-            List<IXenConnection> Connections = ServerListHelper.instance.GetServerList();
-            foreach (IXenConnection connection in Connections)
+
+            List<ServerInfo> servers = ServerListHelper.instance.GetServerList();
+            foreach (ServerInfo server in servers)
             {
-                log.InfoFormat("Check server {0} with user {1}", connection.Hostname, connection.Username);
-                Session session = new Session(connection.Hostname, 80);
+                if(server.task != null)
+                {
+                    continue;
+                }
+
+                XenConnection connectionInfo = new XenConnection();
+                connectionInfo.Hostname = server.HostName;
+                connectionInfo.Username = server.UserName;
+                connectionInfo.Password = server.Password;
+                log.InfoFormat("Check server {0} with user {1}", connectionInfo.Hostname, connectionInfo.Username);
+                Session session = new Session(server.HostName, 80);
                 session.APIVersion = API_Version.LATEST;
                 try
                 {
-                    session.login_with_password(connection.Username, connection.Password);
-                    connection.LoadCache(session);
-                    if (RequestUploadTask.Request(connection, session) || RequestUploadTask.OnDemandRequest(connection, session))
+                    session.login_with_password(server.UserName, server.Password);
+                    connectionInfo.LoadCache(session);
+                    if (RequestUploadTask.Request(connectionInfo, session) || RequestUploadTask.OnDemandRequest(connectionInfo, session))
                     {
                         //Create thread to do log uploading
-                        log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
+                        log.InfoFormat("Will upload report for XenServer {0}", connectionInfo.Hostname);
                     }
                     session.logout();
                     session = null;

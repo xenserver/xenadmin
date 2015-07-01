@@ -54,7 +54,7 @@ namespace XenServerHealthCheckTests
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
                 pipeClient.Close();
                 System.Threading.Thread.Sleep(1000);
-                List<IXenConnection> con = ServerListHelper.instance.GetServerList();
+                List<ServerInfo> con = ServerListHelper.instance.GetServerList();
                 Assert.IsTrue(con.Count == conSize + 1);
 
 

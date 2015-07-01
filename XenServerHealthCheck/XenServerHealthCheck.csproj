@@ -89,6 +89,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XenAdmin\XenAdmin.csproj">
+      <Project>{70BDA4BC-F062-4302-8ACD-A15D8BF31D65}</Project>
+      <Name>XenAdmin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XenCenterLib\XenCenterLib.csproj">
       <Project>{9861DFA1-B41F-432D-A43F-226257DEBBB9}</Project>
       <Name>XenCenterLib</Name>
