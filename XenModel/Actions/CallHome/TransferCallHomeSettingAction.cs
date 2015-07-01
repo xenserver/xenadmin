@@ -35,20 +35,25 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             int retryCount = 120;
             do
             {
                 try
                 {
-                    pipeClient.Connect();
+                    pipeClient.Connect(0);
                 }
-                catch
+                catch (System.TimeoutException exp)
+                {
+                    throw exp;
+                }
+                catch 
                 {
                     System.Threading.Thread.Sleep(1000);
+                    pipeClient = null;
+                    pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 }
-            } while (!pipeClient.IsConnected && retryCount-- == 0);
+            } while (!pipeClient.IsConnected && retryCount-- != 0);
 
             foreach (Host host in pool.Connection.Cache.Hosts)
             {

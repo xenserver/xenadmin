@@ -82,7 +82,7 @@ namespace XenServerHealthCheck
             }
             catch (Exception exp)
             {
-                EventLog.WriteEntry(exp.Message);
+                EventLog.WriteEntry(exp.Message, System.Diagnostics.EventLogEntryType.FailureAudit);
                 Stop();
             }
         }
