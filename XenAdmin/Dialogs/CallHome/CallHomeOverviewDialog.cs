@@ -294,7 +294,7 @@ namespace XenAdmin.Dialogs.CallHome
                 {
                     callHomeSettings.Status = CallHomeStatus.Enabled;
                     new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
-                    new TransferCallHomeSettingsAction(poolRow.Pool, callHomeSettings, user, password, false).RunAsync();
+                    new TransferCallHomeSettingsAction(poolRow.Pool, callHomeSettings, user, password, true).RunAsync();
                     return;
                 }
                 new CallHomeEnrollNowDialog(poolRow.Pool).ShowDialog(this);
@@ -313,7 +313,7 @@ namespace XenAdmin.Dialogs.CallHome
             var callHomeSettings = poolRow.Pool.CallHomeSettings;
             if (callHomeSettings.CanRequestNewUpload)
             {
-                callHomeSettings.NewUploadRequest = Util.ToUnixTime(DateTime.UtcNow).ToString();
+                callHomeSettings.NewUploadRequest = DateTime.UtcNow.ToString();
                 new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
             }
         }

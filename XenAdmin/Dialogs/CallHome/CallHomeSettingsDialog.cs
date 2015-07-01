@@ -54,8 +54,8 @@ namespace XenAdmin.Dialogs.CallHome
             this.pool = pool;
             callHomeSettings = pool.CallHomeSettings;
             authenticationToken = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
-            usetName = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-            password = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+            usetName = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+            password = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
             PopulateControls();
             InitializeControls();
@@ -160,7 +160,7 @@ namespace XenAdmin.Dialogs.CallHome
                     CallHomeSettings.DefaultRetryInterval);
 
                 new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, usetName, password, false).RunAsync();
-                new TransferCallHomeSettingsAction(pool, newCallHomeSettings, usetName, password, false).RunAsync();
+                new TransferCallHomeSettingsAction(pool, newCallHomeSettings, usetName, password, true).RunAsync();
             }
             DialogResult = DialogResult.OK;
             Close();

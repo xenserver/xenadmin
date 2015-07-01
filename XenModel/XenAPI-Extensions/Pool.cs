@@ -566,10 +566,10 @@ namespace XenAPI
             switch (secretType)
             {
                 case CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET:
-                    UUID = PasswordSecretUuid;
+                    UUID = UserNameSecretUuid;
                     break;
                 case CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET:
-                    UUID = UserNameSecretUuid;
+                    UUID = PasswordSecretUuid;
                     break;
                 case CallHomeSettings.UPLOAD_TOKEN_SECRET:
                     UUID = UploadTokenSecretUuid;

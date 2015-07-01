@@ -75,7 +75,7 @@ namespace XenAdmin.Dialogs.CallHome
             var user = newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
             var password = newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             new SaveCallHomeSettingsAction(pool, newCallHomeSettings, token, user, password, false).RunAsync();
-            new TransferCallHomeSettingsAction(pool, newCallHomeSettings, user, password, false).RunAsync();
+            new TransferCallHomeSettingsAction(pool, newCallHomeSettings, user, password, true).RunAsync();
             DialogResult = DialogResult.OK;
             Close();
         }

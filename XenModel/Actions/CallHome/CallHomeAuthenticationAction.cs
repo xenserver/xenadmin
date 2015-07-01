@@ -27,10 +27,13 @@ namespace XenAdmin.Actions
         private const string uploadTokenUrl = "/feeds/api/create_upload/";
 
         private readonly string identityTokenDomainName = "http://cis-daily.citrite.net";
-        private readonly string uploadGrantTokenDomainName = "https://rttf-staging.citrix.com";
-        private readonly string uploadTokenDomainName = "https://rttf-staging.citrix.com";
+        private readonly string uploadGrantTokenDomainName = "http://cis-daily.citrite.com";
+        private readonly string uploadTokenDomainName = "http://cis-daily.citrite.com";
 
         private const string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
+
+        private readonly string XenServerUsername;
+        private readonly string XenServerPassword;
 
         public CallHomeAuthenticationAction(Pool pool, string username, string password, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
             : base(pool != null ? pool.Connection : null, Messages.ACTION_CALLHOME_AUTHENTICATION, Messages.ACTION_CALLHOME_AUTHENTICATION_PROGRESS, suppressHistory)
@@ -40,6 +43,8 @@ namespace XenAdmin.Actions
             this.password = password;
             this.saveTokenAsSecret = saveTokenAsSecret;
             this.tokenExpiration = tokenExpiration;
+            XenServerUsername = "root";
+            XenServerPassword = "xenroot";
             #region RBAC Dependencies
             if (saveTokenAsSecret)
                 ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
@@ -73,8 +78,8 @@ namespace XenAdmin.Actions
                     log.Info("Saving upload token as xapi secret");
                     Dictionary<string, string> newConfig = pool.health_check_config;
                     SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
-                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
-                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
+                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, XenServerUsername);
+                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, XenServerPassword);
                     Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
                 }
             }
@@ -91,11 +96,6 @@ namespace XenAdmin.Actions
         }
 
         public static void SetSecretInfo(IXenConnection connection, Dictionary<string, string> config, string infoKey, string infoValue)
-        {
-            SetInfoSecret(connection, config, infoKey, infoValue);
-        }
-
-        public static void SetInfoSecret(IXenConnection connection, Dictionary<string, string> config, string infoKey, string infoValue)
         {
             if (string.IsNullOrEmpty(infoKey))
                 return;
