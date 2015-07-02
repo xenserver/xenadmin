@@ -158,7 +158,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -213,6 +237,8 @@
+@@ -247,6 +271,8 @@
          <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -167,7 +167,7 @@
              <ComponentRef Id="ReportViewer" />
              <ComponentRef Id="TestResources" />
              <ComponentRef Id="SchemasFilesComponent" />
-@@ -227,7 +253,7 @@
+@@ -262,7 +288,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK40FULL" />
