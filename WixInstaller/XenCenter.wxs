@@ -194,6 +194,7 @@
                             </Component>
                         </Directory>
                     </Directory>
+					<!-- removed temporarily
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
 							<Component Id="XenServerHealthCheck" Guid="{9D686BFC-B4FD-435F-AC74-0ACE29425095}">
 								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
@@ -227,6 +228,7 @@
 								/>
 							</Component>
 						</Directory>
+						-->
 				</Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder">
@@ -253,7 +255,9 @@
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="TestResources" />
             <ComponentRef Id="SchemasFilesComponent" />
-			<ComponentRef Id="XenServerHealthCheck" />
+			<!-- removed temporarily 
+			<ComponentRef Id="XenServerHealthCheck" /> 
+			-->
             <ComponentRef Id="ExternalToolsComponent" />
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
