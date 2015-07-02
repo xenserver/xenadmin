@@ -90,19 +90,33 @@ namespace XenServerHealthCheckTests
                 Assert.IsTrue(con.Count == conSize);
 
 
-                //6. semd 2 credential
+                //7. semd 2 credential
                 pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 pipeClient.Connect();
-                HostName = "host1";
+                HostName = "host3";
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
-                HostName = "host2";
+                HostName = "host4";
                 credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
                 pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
                 pipeClient.Close();
                 System.Threading.Thread.Sleep(1000);
                 con = ServerListHelper.instance.GetServerList();
                 Assert.IsTrue(con.Count == conSize + 2);
+
+                //8. remove 2 credential
+                pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                pipeClient.Connect();
+                HostName = "host3";
+                credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
+                pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
+                HostName = "host4";
+                credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
+                pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
+                pipeClient.Close();
+                System.Threading.Thread.Sleep(1000);
+                con = ServerListHelper.instance.GetServerList();
+                Assert.IsTrue(con.Count == conSize);
             }
             catch (Exception)
             { }

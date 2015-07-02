@@ -58,7 +58,7 @@ namespace XenServerHealthCheck
         }
 
         private static double DueAfterHour = 24;
-        private static bool CanLock(string UploadLock)
+        private static bool CanLock(string UploadLock, bool onDemand)
         {
             if (UploadLock.Length == 0)
                 return true;
@@ -67,6 +67,9 @@ namespace XenServerHealthCheck
             DateTime currentTime = DateTime.UtcNow;
             DateTime lockTime = DateTime.Parse(currentLock[1]);
 
+            if (currentLock[0] == Properties.Settings.Default.UUID && onDemand)
+                return true;
+            
             if (currentLock[0] == Properties.Settings.Default.UUID)
             {
                 if ((DateTime.Compare(lockTime.AddHours(DueAfterHour), currentTime) <= 0))
@@ -80,7 +83,7 @@ namespace XenServerHealthCheck
         private static int SleepForLockConfirm = 10 * 1000; // 10 seconds
         private static bool getLock(IXenConnection connection, Session session)
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
+            Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             string newUploadLock = Properties.Settings.Default.UUID;
             newUploadLock += "|" + DateTime.UtcNow.ToString();
             config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
@@ -101,7 +104,7 @@ namespace XenServerHealthCheck
                 return false;
             }
             //Check if there already some service doing the uploading already
-            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK)) == false)
+            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK), false) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
                 return false;
@@ -199,7 +202,7 @@ namespace XenServerHealthCheck
             }
 
             //Check if there already some service doing the uploading already
-            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK)) == false)
+            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK), true) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
                 return false;
@@ -207,7 +210,8 @@ namespace XenServerHealthCheck
 
             if (config.ContainsKey(CallHomeSettings.NEW_UPLOAD_REQUEST))
             {
-                DateTime newUploadRequestDueTime = DateTime.Parse(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST)).AddMinutes(DemandTimeOutMinutes);
+                System.Globalization.CultureInfo enUs = new System.Globalization.CultureInfo("en-us");
+                DateTime newUploadRequestDueTime = DateTime.Parse(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST), enUs).AddMinutes(DemandTimeOutMinutes);
                 if (DateTime.Compare(newUploadRequestDueTime, DateTime.UtcNow) >= 0)
                 {
                     return getLock(connection, session);

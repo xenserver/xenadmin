@@ -59,7 +59,6 @@ namespace XenServerHealthCheck
             string uploadToken = "";
             Session session = new Session(connection.Hostname, 80);
             session.APIVersion = API_Version.LATEST;
-
             try
             {
                 session.login_with_password(connection.Username, connection.Password);
@@ -67,7 +66,16 @@ namespace XenServerHealthCheck
                 var pool = Helpers.GetPoolOfOne(connection);
                 if (pool != null)
                 {
-                    uploadToken = pool.CallHomeSettings.GetSecretyInfo(connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+                    try
+                    {
+                        string opaqueref = Secret.get_by_uuid(session, pool.CallHomeSettings.UploadTokenSecretUuid);
+                        uploadToken = Secret.get_value(session, opaqueref);
+                    }
+                    catch (Exception e)
+                    {
+                        log.Error("Exception getting the upload token from the xapi secret", e);
+                        uploadToken = null;
+                    }
                 }
 
                 if (string.IsNullOrEmpty(uploadToken))
