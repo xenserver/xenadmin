@@ -313,8 +313,7 @@ namespace XenAdmin.Dialogs.CallHome
             var callHomeSettings = poolRow.Pool.CallHomeSettings;
             if (callHomeSettings.CanRequestNewUpload)
             {
-                System.Globalization.CultureInfo enUs = new System.Globalization.CultureInfo("en-us");
-                callHomeSettings.NewUploadRequest = DateTime.UtcNow.ToString(enUs);
+                callHomeSettings.NewUploadRequest = CallHomeSettings.DateTimeToString(DateTime.UtcNow);
                 new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
             }
         }

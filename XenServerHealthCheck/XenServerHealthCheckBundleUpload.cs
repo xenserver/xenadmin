@@ -191,7 +191,7 @@ namespace XenServerHealthCheck
 
             // Round-trip format time
             DateTime rtime = DateTime.SpecifyKind(time, DateTimeKind.Utc);
-            string stime = rtime.ToString("o");
+            string stime = CallHomeSettings.DateTimeToString(rtime);
 
             // record upload_uuid,
             // release the lock,

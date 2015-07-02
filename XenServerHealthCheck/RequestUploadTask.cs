@@ -85,7 +85,7 @@ namespace XenServerHealthCheck
         {
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             string newUploadLock = Properties.Settings.Default.UUID;
-            newUploadLock += "|" + DateTime.UtcNow.ToString();
+            newUploadLock += "|" + CallHomeSettings.DateTimeToString(DateTime.UtcNow);
             config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
             Pool.set_health_check_config(session, connection.Cache.Pools[0].opaque_ref, config);
             System.Threading.Thread.Sleep(SleepForLockConfirm);
@@ -118,7 +118,8 @@ namespace XenServerHealthCheck
             {
                 try
                 {
-                    lastSuccessfulUpload = DateTime.Parse(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
+
+                    lastSuccessfulUpload = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
                     haveSuccessfulUpload = true;
                 }
                 catch (Exception exn)
@@ -140,7 +141,7 @@ namespace XenServerHealthCheck
             {
                 try
                 {
-                    DateTime LastFailedUpload = DateTime.Parse(Get(config, CallHomeSettings.LAST_FAILED_UPLOAD));
+                    DateTime LastFailedUpload = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.LAST_FAILED_UPLOAD));
 
                     if (haveSuccessfulUpload)
                     {
@@ -210,8 +211,8 @@ namespace XenServerHealthCheck
 
             if (config.ContainsKey(CallHomeSettings.NEW_UPLOAD_REQUEST))
             {
-                System.Globalization.CultureInfo enUs = new System.Globalization.CultureInfo("en-us");
-                DateTime newUploadRequestDueTime = DateTime.Parse(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST), enUs).AddMinutes(DemandTimeOutMinutes);
+                
+                DateTime newUploadRequestDueTime = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST)).AddMinutes(DemandTimeOutMinutes);;
                 if (DateTime.Compare(newUploadRequestDueTime, DateTime.UtcNow) >= 0)
                 {
                     return getLock(connection, session);
