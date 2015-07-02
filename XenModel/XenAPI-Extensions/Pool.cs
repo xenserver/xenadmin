@@ -36,6 +36,7 @@ using System.Net;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Globalization;
 
 namespace XenAPI
 {
@@ -559,6 +560,21 @@ namespace XenAPI
         {
             return new Random().Next(1, 5);
         }
+
+        public static string DateTimeToString(DateTime dateTime)
+        {
+            // Round-trip format time
+            DateTime rtime = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+            return rtime.ToString("o");
+        }
+
+        public static DateTime StringToDateTime(string dateTimeString)
+        {
+            // Round-trip format time
+            DateTime dateTime = DateTime.ParseExact(dateTimeString, "o", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+            return dateTime;
+        }
+
         #endregion
 
         public string GetSecretyInfo(IXenConnection connection, string secretType)

@@ -42,6 +42,7 @@ namespace XenServerHealthCheck
     public partial class XenServerHealthCheckService : ServiceBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private CancellationTokenSource cts = new CancellationTokenSource();
 
         public XenServerHealthCheckService()
         {
@@ -91,6 +92,7 @@ namespace XenServerHealthCheck
         {
             log.Info("XenServer Health Check Service stopping...");
             CredentialReceiver.instance.UnInit();
+            cts.Cancel();
             bool canStop;
             do
             {
@@ -115,7 +117,7 @@ namespace XenServerHealthCheck
             List<ServerInfo> servers = ServerListHelper.instance.GetServerList();
             foreach (ServerInfo server in servers)
             {
-                if(server.task != null)
+                if (server.task != null && (!server.task.IsCompleted || !server.task.IsCanceled || !server.task.IsFaulted))
                 {
                     continue;
                 }
@@ -139,10 +141,13 @@ namespace XenServerHealthCheck
                         XenServerHealthCheckBundleUpload upload = new XenServerHealthCheckBundleUpload(connectionInfo);
                         Action uploadAction = delegate()
                         {
-                            upload.runUpload();
+                            upload.runUpload(cts.Token);
                         };
                         System.Threading.Tasks.Task task = new System.Threading.Tasks.Task(uploadAction);
                         task.Start();
+
+                        server.task = task;
+                        ServerListHelper.instance.UpdateServerInfo(server);
                     }
                     session.logout();
                     session = null;

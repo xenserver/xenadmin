@@ -45,15 +45,20 @@ namespace XenServerHealthCheck
         public XenServerHealthCheckBundleUpload(IXenConnection _connection)
         {
             connection = _connection;
+            server.HostName = connection.Hostname;
+            server.UserName = connection.Username;
+            server.Password = connection.Password;
         }
 
         private IXenConnection connection;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const int TIMEOUT = 24 * 60 * 60 * 1000;
+        public const int INTERVAL = 10 * 1000;
         public const int VERBOSITY_LEVEL = 2;
+        private ServerInfo server = new ServerInfo();
 
-        public void runUpload()
+        public void runUpload(System.Threading.CancellationToken serviceStop)
         {
             DateTime startTime = DateTime.UtcNow;
             string uploadToken = "";
@@ -67,7 +72,16 @@ namespace XenServerHealthCheck
                 var pool = Helpers.GetPoolOfOne(connection);
                 if (pool != null)
                 {
-                    uploadToken = pool.CallHomeSettings.GetSecretyInfo(connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+                    try
+                    {
+                        string opaqueref = Secret.get_by_uuid(session, pool.CallHomeSettings.UploadTokenSecretUuid);
+                        uploadToken = Secret.get_value(session, opaqueref);
+                    }
+                    catch (Exception e)
+                    {
+                        log.Error("Exception getting the upload token from the xapi secret", e);
+                        uploadToken = null;
+                    }
                 }
 
                 if (string.IsNullOrEmpty(uploadToken))
@@ -77,6 +91,8 @@ namespace XenServerHealthCheck
                     session = null;
                     log.ErrorFormat("The upload token is not retrieved for {0}", connection.Hostname);
                     updateCallHomeSettings(false, startTime);
+                    server.task = null;
+                    ServerListHelper.instance.UpdateServerInfo(server);
                     return;
                 }
 
@@ -88,6 +104,8 @@ namespace XenServerHealthCheck
                 session = null;
                 log.Error(e, e);
                 updateCallHomeSettings(false, startTime);
+                server.task = null;
+                ServerListHelper.instance.UpdateServerInfo(server);
                 return;
             }
 
@@ -107,24 +125,51 @@ namespace XenServerHealthCheck
                 };
                 System.Threading.Tasks.Task<string> task = new System.Threading.Tasks.Task<string>(upload);
                 task.Start();
-                if (!task.Wait(TIMEOUT))
+
+                // Check if the task runs to completion before timeout.
+                for (int i = 0; i < TIMEOUT; i += INTERVAL)
                 {
-                    cts.Cancel();
-                    updateCallHomeSettings(false, startTime);
-                    task.Wait();
-                    return;
+                    // If the task finishes, set CallHomeSettings accordingly.
+                    if (task.IsCompleted || task.IsCanceled || task.IsFaulted)
+                    {
+                        if (task.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)
+                        {
+                            string upload_uuid = task.Result;
+                            if (!string.IsNullOrEmpty(upload_uuid))
+                                updateCallHomeSettings(true, startTime, upload_uuid);
+                            else
+                                updateCallHomeSettings(false, startTime);
+                        }
+                        else
+                            updateCallHomeSettings(false, startTime);
+
+                        server.task = null;
+                        ServerListHelper.instance.UpdateServerInfo(server);
+                        return;
+                    }
+
+                    // If the main thread (XenServerHealthCheckService) stops,
+                    // set the cancel token to notify the working task to return.
+                    if (serviceStop.IsCancellationRequested)
+                    {
+                        cts.Cancel();
+                        updateCallHomeSettings(false, startTime);
+                        task.Wait();
+                        server.task = null;
+                        ServerListHelper.instance.UpdateServerInfo(server);
+                        return;
+                    }
+
+                    System.Threading.Thread.Sleep(INTERVAL);
                 }
 
-                if (task.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)
-                {
-                    string upload_uuid = task.Result;
-                    if(!string.IsNullOrEmpty(upload_uuid))
-                        updateCallHomeSettings(true, startTime, upload_uuid);
-                    else
-                        updateCallHomeSettings(false, startTime);
-                }
-                else
-                    updateCallHomeSettings(false, startTime);
+                // The task has run for 24h, cancel the task and mark it as a failure upload.
+                cts.Cancel();
+                updateCallHomeSettings(false, startTime);
+                task.Wait();
+                server.task = null;
+                ServerListHelper.instance.UpdateServerInfo(server);
+                return;
             }
             catch (Exception e)
             {
@@ -132,7 +177,8 @@ namespace XenServerHealthCheck
                     session.logout();
                 session = null;
                 log.Error(e, e);
-                updateCallHomeSettings(false, startTime);
+                server.task = null;
+                ServerListHelper.instance.UpdateServerInfo(server);
             }
 
         }
@@ -145,7 +191,7 @@ namespace XenServerHealthCheck
 
             // Round-trip format time
             DateTime rtime = DateTime.SpecifyKind(time, DateTimeKind.Utc);
-            string stime = rtime.ToString("o");
+            string stime = CallHomeSettings.DateTimeToString(rtime);
 
             // record upload_uuid,
             // release the lock,

@@ -313,7 +313,7 @@ namespace XenAdmin.Dialogs.CallHome
             var callHomeSettings = poolRow.Pool.CallHomeSettings;
             if (callHomeSettings.CanRequestNewUpload)
             {
-                callHomeSettings.NewUploadRequest = DateTime.UtcNow.ToString();
+                callHomeSettings.NewUploadRequest = CallHomeSettings.DateTimeToString(DateTime.UtcNow);
                 new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
             }
         }

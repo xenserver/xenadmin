@@ -51,8 +51,11 @@ namespace XenServerHealthCheck
         {
             lock (pipeServerLock)
             {
-                pipeServer.Close();
-                pipeServer = null;
+                if (pipeServer != null)
+                {
+                    pipeServer.Close();
+                    pipeServer = null;
+                }
             }
         }
 
