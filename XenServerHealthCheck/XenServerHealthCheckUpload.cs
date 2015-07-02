@@ -195,8 +195,11 @@ namespace XenServerHealthCheck
                         }
 
                         // Fail to upload the chunk for 3 times so fail the bundle upload.
-                        log.ErrorFormat("Fail to upload the chunk");
-                        return "";
+                        if (i == 2)
+                        {
+                            log.ErrorFormat("Fail to upload the chunk");
+                            return "";
+                        }
                     }
                 }
                 catch (Exception e)
