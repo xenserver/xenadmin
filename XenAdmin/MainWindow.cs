@@ -875,7 +875,7 @@ namespace XenAdmin
             var newCallHomeSettings = pool.CallHomeSettings;
             new TransferCallHomeSettingsAction(pool, newCallHomeSettings,
                 newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET),
-                newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), false).RunAsync();
+                newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
         /// <summary>
