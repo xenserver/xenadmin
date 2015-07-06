@@ -39,13 +39,14 @@ namespace XenAdmin.Dialogs.CallHome
             this.poolNameLabel = new System.Windows.Forms.Label();
             this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.uploadRequestLinkLabel = new System.Windows.Forms.LinkLabel();
             this.scheduleLabel = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.issuesLabel = new System.Windows.Forms.Label();
             this.lastUploadDateLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lastUploadLabel = new System.Windows.Forms.Label();
             this.ReportAnalysisLinkLabel = new System.Windows.Forms.LinkLabel();
             this.previousUploadPanel = new System.Windows.Forms.TableLayoutPanel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -60,7 +61,6 @@ namespace XenAdmin.Dialogs.CallHome
             this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
-            this.uploadRequestLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -151,10 +151,18 @@ namespace XenAdmin.Dialogs.CallHome
             this.healthCheckStatusPanel.Controls.Add(this.lastUploadDateLabel, 1, 1);
             this.healthCheckStatusPanel.Controls.Add(this.label4, 0, 5);
             this.healthCheckStatusPanel.Controls.Add(this.label1, 0, 0);
-            this.healthCheckStatusPanel.Controls.Add(this.label2, 0, 1);
+            this.healthCheckStatusPanel.Controls.Add(this.lastUploadLabel, 0, 1);
             this.healthCheckStatusPanel.Controls.Add(this.ReportAnalysisLinkLabel, 0, 3);
             this.healthCheckStatusPanel.Controls.Add(this.previousUploadPanel, 0, 4);
             this.healthCheckStatusPanel.Name = "healthCheckStatusPanel";
+            // 
+            // uploadRequestLinkLabel
+            // 
+            resources.ApplyResources(this.uploadRequestLinkLabel, "uploadRequestLinkLabel");
+            this.healthCheckStatusPanel.SetColumnSpan(this.uploadRequestLinkLabel, 2);
+            this.uploadRequestLinkLabel.Name = "uploadRequestLinkLabel";
+            this.uploadRequestLinkLabel.TabStop = true;
+            this.uploadRequestLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.uploadRequestLinkLabel_LinkClicked);
             // 
             // scheduleLabel
             // 
@@ -193,10 +201,10 @@ namespace XenAdmin.Dialogs.CallHome
             this.healthCheckStatusPanel.SetColumnSpan(this.label1, 2);
             this.label1.Name = "label1";
             // 
-            // label2
+            // lastUploadLabel
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lastUploadLabel, "lastUploadLabel");
+            this.lastUploadLabel.Name = "lastUploadLabel";
             // 
             // ReportAnalysisLinkLabel
             // 
@@ -290,14 +298,6 @@ namespace XenAdmin.Dialogs.CallHome
             resources.ApplyResources(this.rubricLabel, "rubricLabel");
             this.rubricLabel.Name = "rubricLabel";
             // 
-            // uploadRequestLinkLabel
-            // 
-            resources.ApplyResources(this.uploadRequestLinkLabel, "uploadRequestLinkLabel");
-            this.healthCheckStatusPanel.SetColumnSpan(this.uploadRequestLinkLabel, 2);
-            this.uploadRequestLinkLabel.Name = "uploadRequestLinkLabel";
-            this.uploadRequestLinkLabel.TabStop = true;
-            this.uploadRequestLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.uploadRequestLinkLabel_LinkClicked);
-            // 
             // CallHomeOverviewDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -346,7 +346,7 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.Label issuesLabel;
         private System.Windows.Forms.Label lastUploadDateLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lastUploadLabel;
         private System.Windows.Forms.LinkLabel ReportAnalysisLinkLabel;
         private System.Windows.Forms.TableLayoutPanel previousUploadPanel;
         private System.Windows.Forms.Label label3;

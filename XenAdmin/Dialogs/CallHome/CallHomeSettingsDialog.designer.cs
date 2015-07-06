@@ -29,160 +29,91 @@ namespace XenAdmin.Dialogs.CallHome
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallHomeSettingsDialog));
-            this.okButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.authenticationRubricLabel = new System.Windows.Forms.Label();
-            this.authenticationLabel = new System.Windows.Forms.Label();
-            this.timeOfDayComboBox = new System.Windows.Forms.ComboBox();
-            this.timeOfDayLabel = new System.Windows.Forms.Label();
-            this.dayOfweekLabel = new System.Windows.Forms.Label();
-            this.weeksLabel = new System.Windows.Forms.Label();
+            this.decentGroupBox2 = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.frequencyLabel = new System.Windows.Forms.Label();
+            this.frequencyNumericBox = new System.Windows.Forms.NumericUpDown();
+            this.weeksLabel = new System.Windows.Forms.Label();
+            this.dayOfweekLabel = new System.Windows.Forms.Label();
+            this.timeOfDayLabel = new System.Windows.Forms.Label();
+            this.timeOfDayComboBox = new System.Windows.Forms.ComboBox();
+            this.dayOfWeekComboBox = new System.Windows.Forms.ComboBox();
+            this.decentGroupBox1 = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
+            this.authenticationRubricLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxMyCitrixPassword = new System.Windows.Forms.TextBox();
+            this.textBoxMyCitrixUsername = new System.Windows.Forms.TextBox();
+            this.existingAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
+            this.newAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.scheduleLabel = new System.Windows.Forms.Label();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.enrollmentCheckBox = new System.Windows.Forms.CheckBox();
-            this.frequencyNumericBox = new System.Windows.Forms.NumericUpDown();
-            this.dayOfWeekComboBox = new System.Windows.Forms.ComboBox();
-            this.existingAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
-            this.newAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
-            this.callHomeAuthenticationPanel1 = new XenAdmin.Controls.CallHomeAuthenticationPanel();
+            this.decentGroupBoxXSCredentials = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textboxXSPassword = new System.Windows.Forms.TextBox();
+            this.textboxXSUserName = new System.Windows.Forms.TextBox();
+            this.currentXsCredentialsRadioButton = new System.Windows.Forms.RadioButton();
+            this.newXsCredentialsRadioButton = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
+            this.decentGroupBox2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).BeginInit();
+            this.decentGroupBox1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).BeginInit();
+            this.decentGroupBoxXSCredentials.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // okButton
-            // 
-            resources.ApplyResources(this.okButton, "okButton");
-            this.okButton.Name = "okButton";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // cancelButton
-            // 
-            resources.ApplyResources(this.cancelButton, "cancelButton");
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.authenticationRubricLabel, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.authenticationLabel, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.timeOfDayComboBox, 3, 8);
-            this.tableLayoutPanel1.Controls.Add(this.timeOfDayLabel, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.dayOfweekLabel, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.weeksLabel, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.frequencyLabel, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox1, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.scheduleLabel, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 18);
-            this.tableLayoutPanel1.Controls.Add(this.enrollmentCheckBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.frequencyNumericBox, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.dayOfWeekComboBox, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.existingAuthenticationRadioButton, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.newAuthenticationRadioButton, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.callHomeAuthenticationPanel1, 2, 17);
+            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.enrollmentCheckBox, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBoxXSCredentials, 0, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // authenticationRubricLabel
+            // decentGroupBox2
             // 
-            resources.ApplyResources(this.authenticationRubricLabel, "authenticationRubricLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.authenticationRubricLabel, 4);
-            this.authenticationRubricLabel.Name = "authenticationRubricLabel";
+            resources.ApplyResources(this.decentGroupBox2, "decentGroupBox2");
+            this.decentGroupBox2.Controls.Add(this.tableLayoutPanel4);
+            this.decentGroupBox2.Name = "decentGroupBox2";
+            this.decentGroupBox2.TabStop = false;
             // 
-            // authenticationLabel
+            // tableLayoutPanel4
             // 
-            resources.ApplyResources(this.authenticationLabel, "authenticationLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.authenticationLabel, 5);
-            this.authenticationLabel.Name = "authenticationLabel";
-            // 
-            // timeOfDayComboBox
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.timeOfDayComboBox, 2);
-            this.timeOfDayComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.timeOfDayComboBox, "timeOfDayComboBox");
-            this.timeOfDayComboBox.FormattingEnabled = true;
-            this.timeOfDayComboBox.Name = "timeOfDayComboBox";
-            // 
-            // timeOfDayLabel
-            // 
-            resources.ApplyResources(this.timeOfDayLabel, "timeOfDayLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.timeOfDayLabel, 2);
-            this.timeOfDayLabel.Name = "timeOfDayLabel";
-            // 
-            // dayOfweekLabel
-            // 
-            resources.ApplyResources(this.dayOfweekLabel, "dayOfweekLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.dayOfweekLabel, 2);
-            this.dayOfweekLabel.Name = "dayOfweekLabel";
-            // 
-            // weeksLabel
-            // 
-            resources.ApplyResources(this.weeksLabel, "weeksLabel");
-            this.weeksLabel.Name = "weeksLabel";
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.frequencyLabel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.frequencyNumericBox, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.weeksLabel, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.dayOfweekLabel, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.timeOfDayLabel, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.timeOfDayComboBox, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.dayOfWeekComboBox, 1, 2);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
             // frequencyLabel
             // 
             resources.ApplyResources(this.frequencyLabel, "frequencyLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.frequencyLabel, 2);
             this.frequencyLabel.Name = "frequencyLabel";
-            // 
-            // flowLayoutPanel2
-            // 
-            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel2, 5);
-            this.flowLayoutPanel2.Controls.Add(this.policyStatementLabel);
-            this.flowLayoutPanel2.Controls.Add(this.PolicyStatementLinkLabel);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            // 
-            // policyStatementLabel
-            // 
-            resources.ApplyResources(this.policyStatementLabel, "policyStatementLabel");
-            this.policyStatementLabel.Name = "policyStatementLabel";
-            // 
-            // PolicyStatementLinkLabel
-            // 
-            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
-            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
-            this.PolicyStatementLinkLabel.TabStop = true;
-            // 
-            // scheduleLabel
-            // 
-            resources.ApplyResources(this.scheduleLabel, "scheduleLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.scheduleLabel, 5);
-            this.scheduleLabel.Name = "scheduleLabel";
-            // 
-            // rubricLabel
-            // 
-            resources.ApplyResources(this.rubricLabel, "rubricLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.rubricLabel, 5);
-            this.rubricLabel.Name = "rubricLabel";
-            // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 5);
-            this.flowLayoutPanel1.Controls.Add(this.cancelButton);
-            this.flowLayoutPanel1.Controls.Add(this.okButton);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
-            // enrollmentCheckBox
-            // 
-            resources.ApplyResources(this.enrollmentCheckBox, "enrollmentCheckBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.enrollmentCheckBox, 5);
-            this.enrollmentCheckBox.Name = "enrollmentCheckBox";
-            this.enrollmentCheckBox.UseVisualStyleBackColor = true;
-            this.enrollmentCheckBox.CheckedChanged += new System.EventHandler(this.enrollmentCheckBox_CheckedChanged);
             // 
             // frequencyNumericBox
             // 
@@ -204,18 +135,95 @@ namespace XenAdmin.Dialogs.CallHome
             0,
             0});
             // 
+            // weeksLabel
+            // 
+            resources.ApplyResources(this.weeksLabel, "weeksLabel");
+            this.weeksLabel.Name = "weeksLabel";
+            // 
+            // dayOfweekLabel
+            // 
+            resources.ApplyResources(this.dayOfweekLabel, "dayOfweekLabel");
+            this.dayOfweekLabel.Name = "dayOfweekLabel";
+            // 
+            // timeOfDayLabel
+            // 
+            resources.ApplyResources(this.timeOfDayLabel, "timeOfDayLabel");
+            this.timeOfDayLabel.Name = "timeOfDayLabel";
+            // 
+            // timeOfDayComboBox
+            // 
+            this.tableLayoutPanel4.SetColumnSpan(this.timeOfDayComboBox, 2);
+            this.timeOfDayComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.timeOfDayComboBox, "timeOfDayComboBox");
+            this.timeOfDayComboBox.FormattingEnabled = true;
+            this.timeOfDayComboBox.Name = "timeOfDayComboBox";
+            // 
             // dayOfWeekComboBox
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.dayOfWeekComboBox, 2);
+            this.tableLayoutPanel4.SetColumnSpan(this.dayOfWeekComboBox, 2);
             this.dayOfWeekComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.dayOfWeekComboBox, "dayOfWeekComboBox");
             this.dayOfWeekComboBox.FormattingEnabled = true;
             this.dayOfWeekComboBox.Name = "dayOfWeekComboBox";
             // 
+            // decentGroupBox1
+            // 
+            resources.ApplyResources(this.decentGroupBox1, "decentGroupBox1");
+            this.decentGroupBox1.Controls.Add(this.tableLayoutPanel2);
+            this.decentGroupBox1.Name = "decentGroupBox1";
+            this.decentGroupBox1.TabStop = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.authenticationRubricLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixPassword, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixUsername, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.existingAuthenticationRadioButton, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.newAuthenticationRadioButton, 0, 2);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // m_ctrlError
+            // 
+            resources.ApplyResources(this.m_ctrlError, "m_ctrlError");
+            this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 3);
+            this.m_ctrlError.Name = "m_ctrlError";
+            // 
+            // authenticationRubricLabel
+            // 
+            resources.ApplyResources(this.authenticationRubricLabel, "authenticationRubricLabel");
+            this.tableLayoutPanel2.SetColumnSpan(this.authenticationRubricLabel, 4);
+            this.authenticationRubricLabel.Name = "authenticationRubricLabel";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // textBoxMyCitrixPassword
+            // 
+            resources.ApplyResources(this.textBoxMyCitrixPassword, "textBoxMyCitrixPassword");
+            this.textBoxMyCitrixPassword.Name = "textBoxMyCitrixPassword";
+            this.textBoxMyCitrixPassword.UseSystemPasswordChar = true;
+            this.textBoxMyCitrixPassword.TextChanged += new System.EventHandler(this.credentials_TextChanged);
+            // 
+            // textBoxMyCitrixUsername
+            // 
+            resources.ApplyResources(this.textBoxMyCitrixUsername, "textBoxMyCitrixUsername");
+            this.textBoxMyCitrixUsername.Name = "textBoxMyCitrixUsername";
+            this.textBoxMyCitrixUsername.TextChanged += new System.EventHandler(this.credentials_TextChanged);
+            // 
             // existingAuthenticationRadioButton
             // 
             resources.ApplyResources(this.existingAuthenticationRadioButton, "existingAuthenticationRadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.existingAuthenticationRadioButton, 4);
+            this.tableLayoutPanel2.SetColumnSpan(this.existingAuthenticationRadioButton, 2);
             this.existingAuthenticationRadioButton.Name = "existingAuthenticationRadioButton";
             this.existingAuthenticationRadioButton.TabStop = true;
             this.existingAuthenticationRadioButton.UseVisualStyleBackColor = true;
@@ -223,20 +231,128 @@ namespace XenAdmin.Dialogs.CallHome
             // newAuthenticationRadioButton
             // 
             resources.ApplyResources(this.newAuthenticationRadioButton, "newAuthenticationRadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.newAuthenticationRadioButton, 4);
+            this.tableLayoutPanel2.SetColumnSpan(this.newAuthenticationRadioButton, 2);
             this.newAuthenticationRadioButton.Name = "newAuthenticationRadioButton";
             this.newAuthenticationRadioButton.TabStop = true;
             this.newAuthenticationRadioButton.UseVisualStyleBackColor = true;
             this.newAuthenticationRadioButton.CheckedChanged += new System.EventHandler(this.newAuthenticationRadioButton_CheckedChanged);
             // 
-            // callHomeAuthenticationPanel1
+            // flowLayoutPanel2
             // 
-            resources.ApplyResources(this.callHomeAuthenticationPanel1, "callHomeAuthenticationPanel1");
-            this.callHomeAuthenticationPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.callHomeAuthenticationPanel1, 3);
-            this.callHomeAuthenticationPanel1.Name = "callHomeAuthenticationPanel1";
-            this.callHomeAuthenticationPanel1.Pool = null;
-            this.callHomeAuthenticationPanel1.AuthenticationChanged += new System.EventHandler(this.callHomeAuthenticationPanel1_AuthenticationChanged);
+            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+            this.flowLayoutPanel2.Controls.Add(this.policyStatementLabel);
+            this.flowLayoutPanel2.Controls.Add(this.PolicyStatementLinkLabel);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            // 
+            // policyStatementLabel
+            // 
+            resources.ApplyResources(this.policyStatementLabel, "policyStatementLabel");
+            this.policyStatementLabel.Name = "policyStatementLabel";
+            // 
+            // PolicyStatementLinkLabel
+            // 
+            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
+            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
+            this.PolicyStatementLinkLabel.TabStop = true;
+            // 
+            // rubricLabel
+            // 
+            resources.ApplyResources(this.rubricLabel, "rubricLabel");
+            this.rubricLabel.Name = "rubricLabel";
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Controls.Add(this.cancelButton);
+            this.flowLayoutPanel1.Controls.Add(this.okButton);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // cancelButton
+            // 
+            resources.ApplyResources(this.cancelButton, "cancelButton");
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // okButton
+            // 
+            resources.ApplyResources(this.okButton, "okButton");
+            this.okButton.Name = "okButton";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // enrollmentCheckBox
+            // 
+            resources.ApplyResources(this.enrollmentCheckBox, "enrollmentCheckBox");
+            this.enrollmentCheckBox.Name = "enrollmentCheckBox";
+            this.enrollmentCheckBox.UseVisualStyleBackColor = true;
+            this.enrollmentCheckBox.CheckedChanged += new System.EventHandler(this.enrollmentCheckBox_CheckedChanged);
+            // 
+            // decentGroupBoxXSCredentials
+            // 
+            resources.ApplyResources(this.decentGroupBoxXSCredentials, "decentGroupBoxXSCredentials");
+            this.decentGroupBoxXSCredentials.Controls.Add(this.tableLayoutPanel3);
+            this.decentGroupBoxXSCredentials.Name = "decentGroupBoxXSCredentials";
+            this.decentGroupBoxXSCredentials.TabStop = false;
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label4, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.label5, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textboxXSPassword, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textboxXSUserName, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.currentXsCredentialsRadioButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.newXsCredentialsRadioButton, 0, 2);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.tableLayoutPanel3.SetColumnSpan(this.label3, 4);
+            this.label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // textboxXSPassword
+            // 
+            resources.ApplyResources(this.textboxXSPassword, "textboxXSPassword");
+            this.textboxXSPassword.Name = "textboxXSPassword";
+            this.textboxXSPassword.UseSystemPasswordChar = true;
+            this.textboxXSPassword.TextChanged += new System.EventHandler(this.credentials_TextChanged);
+            // 
+            // textboxXSUserName
+            // 
+            resources.ApplyResources(this.textboxXSUserName, "textboxXSUserName");
+            this.textboxXSUserName.Name = "textboxXSUserName";
+            this.textboxXSUserName.TextChanged += new System.EventHandler(this.credentials_TextChanged);
+            // 
+            // currentXsCredentialsRadioButton
+            // 
+            resources.ApplyResources(this.currentXsCredentialsRadioButton, "currentXsCredentialsRadioButton");
+            this.currentXsCredentialsRadioButton.Checked = true;
+            this.tableLayoutPanel3.SetColumnSpan(this.currentXsCredentialsRadioButton, 2);
+            this.currentXsCredentialsRadioButton.Name = "currentXsCredentialsRadioButton";
+            this.currentXsCredentialsRadioButton.TabStop = true;
+            this.currentXsCredentialsRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // newXsCredentialsRadioButton
+            // 
+            resources.ApplyResources(this.newXsCredentialsRadioButton, "newXsCredentialsRadioButton");
+            this.tableLayoutPanel3.SetColumnSpan(this.newXsCredentialsRadioButton, 2);
+            this.newXsCredentialsRadioButton.Name = "newXsCredentialsRadioButton";
+            this.newXsCredentialsRadioButton.UseVisualStyleBackColor = true;
+            this.newXsCredentialsRadioButton.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // CallHomeSettingsDialog
             // 
@@ -248,11 +364,23 @@ namespace XenAdmin.Dialogs.CallHome
             this.Name = "CallHomeSettingsDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.decentGroupBox2.ResumeLayout(false);
+            this.decentGroupBox2.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).EndInit();
+            this.decentGroupBox1.ResumeLayout(false);
+            this.decentGroupBox1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).EndInit();
+            this.decentGroupBoxXSCredentials.ResumeLayout(false);
+            this.decentGroupBoxXSCredentials.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,27 +388,42 @@ namespace XenAdmin.Dialogs.CallHome
 
         #endregion
 
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label rubricLabel;
-        private System.Windows.Forms.Label scheduleLabel;
-        private System.Windows.Forms.CheckBox enrollmentCheckBox;
+        private Controls.DecentGroupBox decentGroupBox2;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label frequencyLabel;
+        private System.Windows.Forms.NumericUpDown frequencyNumericBox;
+        private System.Windows.Forms.Label weeksLabel;
+        private System.Windows.Forms.Label dayOfweekLabel;
+        private System.Windows.Forms.Label timeOfDayLabel;
+        private System.Windows.Forms.ComboBox timeOfDayComboBox;
+        private System.Windows.Forms.ComboBox dayOfWeekComboBox;
+        private Controls.DecentGroupBox decentGroupBox1;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label authenticationRubricLabel;
+        protected System.Windows.Forms.Label label1;
+        protected System.Windows.Forms.Label label2;
+        protected System.Windows.Forms.TextBox textBoxMyCitrixPassword;
+        protected System.Windows.Forms.TextBox textBoxMyCitrixUsername;
+        private System.Windows.Forms.RadioButton existingAuthenticationRadioButton;
+        private System.Windows.Forms.RadioButton newAuthenticationRadioButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label policyStatementLabel;
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
-        private System.Windows.Forms.Label frequencyLabel;
-        private System.Windows.Forms.Label weeksLabel;
-        private System.Windows.Forms.NumericUpDown frequencyNumericBox;
-        private System.Windows.Forms.Label authenticationLabel;
-        private System.Windows.Forms.ComboBox timeOfDayComboBox;
-        private System.Windows.Forms.Label timeOfDayLabel;
-        private System.Windows.Forms.Label dayOfweekLabel;
-        private System.Windows.Forms.ComboBox dayOfWeekComboBox;
-        private System.Windows.Forms.Label authenticationRubricLabel;
-        private System.Windows.Forms.RadioButton existingAuthenticationRadioButton;
-        private System.Windows.Forms.RadioButton newAuthenticationRadioButton;
-        private Controls.CallHomeAuthenticationPanel callHomeAuthenticationPanel1;
+        private System.Windows.Forms.Label rubricLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.CheckBox enrollmentCheckBox;
+        private Controls.DecentGroupBox decentGroupBoxXSCredentials;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label3;
+        protected System.Windows.Forms.Label label4;
+        protected System.Windows.Forms.Label label5;
+        protected System.Windows.Forms.TextBox textboxXSPassword;
+        protected System.Windows.Forms.TextBox textboxXSUserName;
+        private System.Windows.Forms.RadioButton currentXsCredentialsRadioButton;
+        private System.Windows.Forms.RadioButton newXsCredentialsRadioButton;
+        private Controls.Common.PasswordFailure m_ctrlError;
     }
 }

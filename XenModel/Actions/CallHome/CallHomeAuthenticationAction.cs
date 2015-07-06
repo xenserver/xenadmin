@@ -102,7 +102,11 @@ namespace XenAdmin.Actions
 
             if (infoValue == null)
             {
-                config.Remove(infoKey);
+                if (config.ContainsKey(infoKey))
+                {
+                    TryToDestroySecret(connection, config[infoKey]);
+                    config.Remove(infoKey);
+                }
             }
             else if (config.ContainsKey(infoKey))
             {
@@ -123,6 +127,20 @@ namespace XenAdmin.Actions
             else
             {
                 config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
+            }
+        }
+        
+        private static void TryToDestroySecret(IXenConnection connection, string secret_uuid)
+        {
+            try
+            {
+                var secret = Secret.get_by_uuid(connection.Session, secret_uuid);
+                Secret.destroy(connection.Session, secret.opaque_ref);
+                log.DebugFormat("Successfully destroyed secret {0}", secret_uuid);
+            }
+            catch (Exception exn)
+            {
+                log.Error(string.Format("Failed to destroy secret {0}", secret_uuid), exn);
             }
         }
 

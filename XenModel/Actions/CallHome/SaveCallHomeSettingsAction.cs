@@ -17,8 +17,8 @@ namespace XenAdmin.Actions
             this.pool = pool;
             this.callHomeSettings = callHomeSettings;
             this.authenticationToken = authenticationToken;
-            this.username = userName;
-            this.password = passWord;
+            this.username = callHomeSettings.Status == CallHomeStatus.Enabled ? userName : null;
+            this.password = callHomeSettings.Status == CallHomeStatus.Enabled ? passWord : null;
         }
         
         protected override void Run()
@@ -26,11 +26,8 @@ namespace XenAdmin.Actions
             Dictionary<string, string> newConfig = callHomeSettings.ToDictionary(pool.health_check_config);
             if (!string.IsNullOrEmpty(authenticationToken))
                 CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, authenticationToken);
-            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
-            {
-                CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
-                CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
-            }
+            CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
+            CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
             Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
         }
     }

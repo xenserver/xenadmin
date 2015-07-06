@@ -188,6 +188,8 @@ namespace XenAdmin.Dialogs.CallHome
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             poolNameLabel.Text = poolRow.Pool.Name.Ellipsise(120);
             scheduleLabel.Text = GetScheduleDescription(poolRow.Pool.CallHomeSettings);
+            lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(poolRow.Pool.CallHomeSettings.LastSuccessfulUpload);
+            lastUploadDateLabel.Text = GetLastUploadDescription(poolRow.Pool.CallHomeSettings);
 
             healthCheckStatusPanel.Visible = poolRow.Pool.CallHomeSettings.Status == CallHomeStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.CallHomeSettings.Status != CallHomeStatus.Enabled;
@@ -208,16 +210,35 @@ namespace XenAdmin.Dialogs.CallHome
         public void UpdateUploadRequestDescription(CallHomeSettings callHomeSettings)
         {
             {
-                double uploadRequest;
-                if (!callHomeSettings.CanRequestNewUpload && double.TryParse(callHomeSettings.NewUploadRequest, out uploadRequest))
+                if (!callHomeSettings.CanRequestNewUpload)
                 {
-                    uploadRequestLinkLabel.Text = string.Format(Messages.HEALTHCHECK_ON_DEMAND_REQUESTED_AT,
-                                         HelpersGUI.DateTimeToString(Util.FromUnixTime(uploadRequest), Messages.DATEFORMAT_HM, true));
+                        uploadRequestLinkLabel.Text = string.Format(Messages.HEALTHCHECK_ON_DEMAND_REQUESTED_AT,
+                                                                    HelpersGUI.DateTimeToString(callHomeSettings.NewUploadRequestTime.ToLocalTime(), 
+                                                                        Messages.DATEFORMAT_HM, true));
                     uploadRequestLinkLabel.LinkArea = new LinkArea(0, 0);
                     return;
                 }
                 uploadRequestLinkLabel.Text = Messages.HEALTHCHECK_ON_DEMAND_REQUEST;
                 uploadRequestLinkLabel.LinkArea = new LinkArea(0, uploadRequestLinkLabel.Text.Length);
+            }
+        }
+
+        public string GetLastUploadDescription(CallHomeSettings callHomeSettings)
+        {
+            {
+                if (!string.IsNullOrEmpty(callHomeSettings.LastSuccessfulUpload))
+                {
+                    try
+                    {
+                        DateTime lastSuccessfulUpload = CallHomeSettings.StringToDateTime(callHomeSettings.LastSuccessfulUpload);
+                        return HelpersGUI.DateTimeToString(lastSuccessfulUpload.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
+                    }
+                    catch (Exception exn)
+                    {
+                        log.Error("Exception while parsing LAST_SUCCESSFUL_UPLOAD", exn);
+                    }
+                }
+                return string.Empty;
             }
         }
 
@@ -255,7 +276,7 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            new CallHomeSettingsDialog(poolRow.Pool).ShowDialog(this);
+            new CallHomeSettingsDialog(poolRow.Pool, false).ShowDialog(this);
         }
 
         public DialogResult ShowDialog(IWin32Window parent, List<IXenObject> selectedItems)
@@ -283,25 +304,7 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            var callHomeSettings = poolRow.Pool.CallHomeSettings;
-            if (callHomeSettings.Status != CallHomeStatus.Enabled)
-            {
-                // try to enroll into call home with the default settings, if authentication is not required
-                var token = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
-                var user = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-                var password = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
-                if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password))
-                {
-                    callHomeSettings.Status = CallHomeStatus.Enabled;
-                    new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
-                    new TransferCallHomeSettingsAction(poolRow.Pool, callHomeSettings, user, password, true).RunAsync();
-                    return;
-                }
-                new CallHomeEnrollNowDialog(poolRow.Pool).ShowDialog(this);
-                return;
-            }
-
-            new CallHomeSettingsDialog(poolRow.Pool).ShowDialog(this);
+            new CallHomeSettingsDialog(poolRow.Pool, true).ShowDialog(this);
         }
 
         private void uploadRequestLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -314,7 +317,10 @@ namespace XenAdmin.Dialogs.CallHome
             if (callHomeSettings.CanRequestNewUpload)
             {
                 callHomeSettings.NewUploadRequest = CallHomeSettings.DateTimeToString(DateTime.UtcNow);
-                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
+                var token = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+                var user = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+                var password = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
             }
         }
     }
