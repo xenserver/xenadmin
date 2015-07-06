@@ -202,6 +202,16 @@ namespace XenServerHealthCheck
             {
                 config[CallHomeSettings.LAST_SUCCESSFUL_UPLOAD] = stime;
                 config[CallHomeSettings.UPLOAD_UUID] = uploadUuid;
+                // reset the NEW_UPLOAD_REQUEST field, if the current successful upload was started after the request
+                try
+                {
+                    DateTime newUploadRequestTime = CallHomeSettings.StringToDateTime(config[CallHomeSettings.NEW_UPLOAD_REQUEST]);
+                    if (rtime > newUploadRequestTime)
+                        config[CallHomeSettings.NEW_UPLOAD_REQUEST] = "";
+                }
+                catch (Exception exn)
+                {
+                }
             }
             else
                 config[CallHomeSettings.LAST_FAILED_UPLOAD] = stime;

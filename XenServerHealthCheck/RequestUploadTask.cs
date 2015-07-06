@@ -60,7 +60,7 @@ namespace XenServerHealthCheck
         private static double DueAfterHour = 24;
         private static bool CanLock(string UploadLock, bool onDemand)
         {
-            if (UploadLock.Length == 0)
+            if (string.IsNullOrEmpty(UploadLock))
                 return true;
 
             List<string> currentLock = new List<string>(UploadLock.Split('|'));
@@ -209,17 +209,29 @@ namespace XenServerHealthCheck
                 return false;
             }
 
-            if (config.ContainsKey(CallHomeSettings.NEW_UPLOAD_REQUEST))
+            var newUploadRequest = Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST);
+            if (!string.IsNullOrEmpty(newUploadRequest))
             {
-                
-                DateTime newUploadRequestDueTime = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST)).AddMinutes(DemandTimeOutMinutes);;
-                if (DateTime.Compare(newUploadRequestDueTime, DateTime.UtcNow) >= 0)
+                DateTime newUploadRequestTime;
+                try
                 {
+                    newUploadRequestTime = CallHomeSettings.StringToDateTime(newUploadRequest);
+                }
+                catch (Exception exn)
+                {
+                    log.Error("Exception while parsing NEW_UPLOAD_REQUEST", exn);
+                    return false;
+                }
+                DateTime newUploadRequestDueTime = newUploadRequestTime.AddMinutes(DemandTimeOutMinutes);
+                if (DateTime.Compare(newUploadRequestDueTime,  DateTime.UtcNow) >= 1)
+                {
+                    log.InfoFormat("Will report on demand for XenServer {0} since the demand was requested on {1} (UTC time)", connection.Hostname, newUploadRequestTime);
                     return getLock(connection, session);
                 }
                 else
                 {
-                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand due", connection.Hostname);
+                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand requested on {1} (UTC time) expired after {2} minutes", 
+                        connection.Hostname, newUploadRequestTime, DemandTimeOutMinutes);
                     return false;
                 }
             }
