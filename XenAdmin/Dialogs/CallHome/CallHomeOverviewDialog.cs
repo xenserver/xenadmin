@@ -228,14 +228,10 @@ namespace XenAdmin.Dialogs.CallHome
             {
                 if (!string.IsNullOrEmpty(callHomeSettings.LastSuccessfulUpload))
                 {
-                    try
+                    DateTime lastSuccessfulUpload;
+                    if (CallHomeSettings.TryParseStringToDateTime(callHomeSettings.LastSuccessfulUpload, out lastSuccessfulUpload))
                     {
-                        DateTime lastSuccessfulUpload = CallHomeSettings.StringToDateTime(callHomeSettings.LastSuccessfulUpload);
                         return HelpersGUI.DateTimeToString(lastSuccessfulUpload.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-                    }
-                    catch (Exception exn)
-                    {
-                        log.Error("Exception while parsing LAST_SUCCESSFUL_UPLOAD", exn);
                     }
                 }
                 return string.Empty;

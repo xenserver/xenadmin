@@ -591,6 +591,12 @@ namespace XenAPI
             return dateTime;
         }
 
+        public static bool TryParseStringToDateTime(string dateTimeString, out DateTime dateTime)
+        {
+            // Round-trip format time
+            return DateTime.TryParseExact(dateTimeString, "o", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dateTime);
+        }
+
         #endregion
 
         public string GetSecretyInfo(IXenConnection connection, string secretType)
