@@ -46,16 +46,18 @@ namespace XenAdmin.Dialogs.CallHome
         private bool authenticationRequired;
         private bool authenticated;
         private string authenticationToken;
-        private string usetName;
-        private string password;
+        private string xsUserName;
+        private string xsPassword;
 
-        public CallHomeSettingsDialog(Pool pool)
+        public CallHomeSettingsDialog(Pool pool, bool enrollNow)
         {
             this.pool = pool;
             callHomeSettings = pool.CallHomeSettings;
+            if (enrollNow)
+                callHomeSettings.Status = CallHomeStatus.Enabled;
             authenticationToken = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
-            usetName = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-            password = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+            xsUserName = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+            xsPassword = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
             PopulateControls();
             InitializeControls();
@@ -113,10 +115,15 @@ namespace XenAdmin.Dialogs.CallHome
             frequencyNumericBox.Value = callHomeSettings.IntervalInWeeks;
             dayOfWeekComboBox.SelectedValue = (int)callHomeSettings.DayOfWeek;
             timeOfDayComboBox.SelectedValue = callHomeSettings.TimeOfDay;
+            
             existingAuthenticationRadioButton.Enabled = existingAuthenticationRadioButton.Checked = !authenticationRequired;
             newAuthenticationRadioButton.Checked = authenticationRequired;
-            callHomeAuthenticationPanel1.Enabled = newAuthenticationRadioButton.Checked;
-            callHomeAuthenticationPanel1.Pool = pool;
+            SetMyCitrixCredentials(existingAuthenticationRadioButton.Checked);
+
+            bool useCurrentXsCredentials = string.IsNullOrEmpty(xsUserName) || xsUserName == pool.Connection.Username;
+            newXsCredentialsRadioButton.Checked = !useCurrentXsCredentials;
+            currentXsCredentialsRadioButton.Checked = useCurrentXsCredentials;
+            SetXSCredentials(currentXsCredentialsRadioButton.Checked);
         }
 
         private bool ChangesMade()
@@ -133,35 +140,41 @@ namespace XenAdmin.Dialogs.CallHome
                 return true;
             if (authenticationToken != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET))
                 return true;
-            if (usetName != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET))
+            if (textboxXSUserName.Text != xsUserName)
                 return true;
-            if (password != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET))
+            if (textboxXSPassword.Text != xsPassword)
                 return true;
             return false;
         }
 
         private void UpdateButtons()
         {
-            okButton.Enabled = !enrollmentCheckBox.Checked || authenticated;
-            okButton.Text = callHomeSettings.Status == CallHomeStatus.Enabled || !enrollmentCheckBox.Checked
-                ? Messages.OK
-                : Messages.CALLHOME_ENROLLMENT_CONFIRMATION_BUTTON_LABEL;
+            okButton.Enabled = m_ctrlError.PerformCheck(CheckCredentialsEntered);
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            okButton.Enabled = false;
+            if (enrollmentCheckBox.Checked && newAuthenticationRadioButton.Checked 
+                && !m_ctrlError.PerformCheck(CheckUploadAuthentication))
+            {
+                okButton.Enabled = true;
+                return;
+            }
+
             if (ChangesMade())
             {
                 var newCallHomeSettings = new CallHomeSettings(
-                    enrollmentCheckBox.Checked ? CallHomeStatus.Enabled : CallHomeStatus.Disabled, 
-                    (int) (frequencyNumericBox.Value * 7),
-                    (DayOfWeek) dayOfWeekComboBox.SelectedValue, 
-                    (int) timeOfDayComboBox.SelectedValue,
+                    enrollmentCheckBox.Checked ? CallHomeStatus.Enabled : CallHomeStatus.Disabled,
+                    (int)(frequencyNumericBox.Value * 7),
+                    (DayOfWeek)dayOfWeekComboBox.SelectedValue,
+                    (int)timeOfDayComboBox.SelectedValue,
                     CallHomeSettings.DefaultRetryInterval);
 
-                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, usetName, password, false).RunAsync();
-                new TransferCallHomeSettingsAction(pool, newCallHomeSettings, usetName, password, true).RunAsync();
+                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
+                new TransferCallHomeSettingsAction(pool, newCallHomeSettings, textboxXSUserName.Text, textboxXSPassword.Text, true).RunAsync();
             }
+            okButton.Enabled = true;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -177,23 +190,105 @@ namespace XenAdmin.Dialogs.CallHome
             UpdateButtons();
         }
 
-        private void callHomeAuthenticationPanel1_AuthenticationChanged(object sender, EventArgs e)
-        {
-            Program.Invoke(this, delegate
-            {
-                if (callHomeAuthenticationPanel1.Authenticated)
-                {
-                    authenticated = true;
-                    authenticationToken = pool.CallHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
-                }
-                UpdateButtons();
-            });
-        }
-
         private void newAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            callHomeAuthenticationPanel1.Enabled = newAuthenticationRadioButton.Checked;
-            authenticated = existingAuthenticationRadioButton.Checked || callHomeAuthenticationPanel1.Authenticated;
+            SetMyCitrixCredentials(existingAuthenticationRadioButton.Checked);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            SetXSCredentials(currentXsCredentialsRadioButton.Checked);
+        }
+
+        private void SetXSCredentials(bool useCurrent)
+        {
+            if (useCurrent)
+            {
+                textboxXSUserName.Text = pool.Connection.Username;
+                textboxXSPassword.Text = pool.Connection.Password;
+                textboxXSUserName.Enabled = false;
+                textboxXSPassword.Enabled = false;
+            }
+            else
+            {
+                textboxXSUserName.Text = xsUserName;
+                textboxXSPassword.Text = xsPassword;
+                textboxXSUserName.Enabled = true;
+                textboxXSPassword.Enabled = true;
+            }
+        }
+
+        private void SetMyCitrixCredentials(bool useExisting)
+        {
+            if (useExisting)
+            {
+                //textBoxMyCitrixUsername.Text = String.Empty;
+                //textBoxMyCitrixPassword.Text = String.Empty;
+                textBoxMyCitrixUsername.Enabled = false;
+                textBoxMyCitrixPassword.Enabled = false;
+            }
+            else
+            {
+                //textBoxMyCitrixUsername.Text = String.Empty;
+                //textBoxMyCitrixPassword.Text = String.Empty;
+                textBoxMyCitrixUsername.Enabled = true;
+                textBoxMyCitrixPassword.Enabled = true;
+            }
+        }
+        
+        private bool CheckCredentialsEntered()
+        {
+            if (!enrollmentCheckBox.Checked || !newAuthenticationRadioButton.Checked)
+                return true;
+
+            if (newAuthenticationRadioButton.Checked && 
+                (string.IsNullOrEmpty(textBoxMyCitrixUsername.Text) || string.IsNullOrEmpty(textBoxMyCitrixPassword.Text)))
+                return false;
+
+            if (newXsCredentialsRadioButton.Checked &&
+                (string.IsNullOrEmpty(textboxXSUserName.Text) || string.IsNullOrEmpty(textboxXSPassword.Text)))
+                return false;
+
+            return true;
+        }
+
+        private bool CheckCredentialsEntered(out string error)
+        {
+            error = string.Empty;
+            return CheckCredentialsEntered();
+        }
+
+        private bool CheckUploadAuthentication(out string error)
+        {
+            error = string.Empty;
+
+            if (!CheckCredentialsEntered())
+                return false;
+
+            var action = new CallHomeAuthenticationAction(pool, textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
+                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName,
+                true, 0, false);
+
+            try
+            {
+                action.RunExternal(null);
+            }
+            catch
+            {
+                error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
+                authenticationToken = null;
+                authenticated = false;
+                return authenticated;
+            }
+
+            authenticationToken = action.UploadToken;  // curent upload token
+            authenticated = !string.IsNullOrEmpty(authenticationToken);
+            authenticationToken = pool.CallHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+            return authenticated;
+        }
+
+        private void credentials_TextChanged(object sender, EventArgs e)
+        {
             UpdateButtons();
         }
     }

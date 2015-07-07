@@ -443,6 +443,7 @@ namespace XenAPI
         public string NewUploadRequest;
         public string UserNameSecretUuid;
         public string PasswordSecretUuid;
+        public string LastSuccessfulUpload;
         
         public const int DefaultRetryInterval = 7; // in days
         public const int UploadRequestValidityInterval = 30; // in minutes
@@ -488,6 +489,7 @@ namespace XenAPI
             NewUploadRequest = Get(config, NEW_UPLOAD_REQUEST);
             UserNameSecretUuid = Get(config, UPLOAD_CREDENTIAL_USER_SECRET);
             PasswordSecretUuid = Get(config, UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+            LastSuccessfulUpload = Get(config, LAST_SUCCESSFUL_UPLOAD);
         }
 
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
@@ -522,13 +524,27 @@ namespace XenAPI
             {
                 if (Status != CallHomeStatus.Enabled)
                     return false;
-                double uploadRequest;
-                if (double.TryParse(NewUploadRequest, out uploadRequest))
+                var uploadRequestExpiryTime = NewUploadRequestTime.AddMinutes(UploadRequestValidityInterval);
+                return DateTime.Compare(uploadRequestExpiryTime, DateTime.UtcNow) < 0;
+            }
+        }
+
+        public DateTime NewUploadRequestTime
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(NewUploadRequest))
                 {
-                    var uploadRequestExpiryTime = Util.FromUnixTime(uploadRequest).AddMinutes(UploadRequestValidityInterval);
-                    return DateTime.Compare(uploadRequestExpiryTime, DateTime.UtcNow) < 0;
+                    try
+                    {
+                        return StringToDateTime(NewUploadRequest);
+                    }
+                    catch (Exception exn)
+                    {
+                        log.Error("Exception while parsing NewUploadRequest", exn);
+                    }
                 }
-                return true;
+                return DateTime.MinValue;
             }
         }
 
@@ -573,6 +589,12 @@ namespace XenAPI
             // Round-trip format time
             DateTime dateTime = DateTime.ParseExact(dateTimeString, "o", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
             return dateTime;
+        }
+
+        public static bool TryParseStringToDateTime(string dateTimeString, out DateTime dateTime)
+        {
+            // Round-trip format time
+            return DateTime.TryParseExact(dateTimeString, "o", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dateTime);
         }
 
         #endregion
