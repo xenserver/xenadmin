@@ -225,17 +225,15 @@ namespace XenAdmin.Dialogs.CallHome
 
         public string GetLastUploadDescription(CallHomeSettings callHomeSettings)
         {
+            if (!string.IsNullOrEmpty(callHomeSettings.LastSuccessfulUpload))
             {
-                if (!string.IsNullOrEmpty(callHomeSettings.LastSuccessfulUpload))
+                DateTime lastSuccessfulUpload;
+                if (CallHomeSettings.TryParseStringToDateTime(callHomeSettings.LastSuccessfulUpload, out lastSuccessfulUpload))
                 {
-                    DateTime lastSuccessfulUpload;
-                    if (CallHomeSettings.TryParseStringToDateTime(callHomeSettings.LastSuccessfulUpload, out lastSuccessfulUpload))
-                    {
-                        return HelpersGUI.DateTimeToString(lastSuccessfulUpload.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-                    }
+                    return HelpersGUI.DateTimeToString(lastSuccessfulUpload.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
                 }
-                return string.Empty;
             }
+            return string.Empty;
         }
 
         private void CallHomeOverview_Load(object sender, EventArgs e)
