@@ -880,7 +880,7 @@
     <value>Restart toolstack on '{0}'</value>
   </data>
   <data name="ACTION_TRANSFER_CALLHOME_SETTINGS" xml:space="preserve">
-     <value>Transfer Health Check settings</value>
+    <value>Transfer Health Check settings</value>
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU passthrough on '{0}'</value>
@@ -11334,6 +11334,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>Rebooting {0} ... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
+    <value>Removing update {0} from {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>

@@ -37,6 +37,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.label3 = new System.Windows.Forms.Label();
+            this.removeUpdateFileCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,8 +84,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.Controls.Add(this.AutomaticRadioButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.ManualRadioButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxLog, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.removeUpdateFileCheckBox, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxLog, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // autoHeightLabel1
@@ -96,6 +98,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            // 
+            // removeUpdateFileCheckBox
+            // 
+            resources.ApplyResources(this.removeUpdateFileCheckBox, "removeUpdateFileCheckBox");
+            this.removeUpdateFileCheckBox.Checked = true;
+            this.removeUpdateFileCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.removeUpdateFileCheckBox.Name = "removeUpdateFileCheckBox";
+            this.removeUpdateFileCheckBox.UseVisualStyleBackColor = true;
             // 
             // PatchingWizard_ModePage
             // 
@@ -119,5 +129,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox removeUpdateFileCheckBox;
     }
 }

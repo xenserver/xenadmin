@@ -67,6 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Pool_patch Patch { private get; set; }
         public string ManualTextInstructions { private get; set; }
         public bool IsAutomaticMode { private get; set; }
+        public bool RemoveUpdateFile { private get; set; }
         public string SelectedNewPatch { private get; set; }
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
         public Dictionary<Host, VDI> SuppPackVdis { private get; set; }
@@ -177,6 +178,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 planActions.AddRange(CompileActionList(server, poolPatch));
                         }
                     }
+                }
+                if (RemoveUpdateFile)
+                {
+                    planActions.Add(new RemoveUpdateFile(pool, poolPatch));
                 }
             }
             planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));

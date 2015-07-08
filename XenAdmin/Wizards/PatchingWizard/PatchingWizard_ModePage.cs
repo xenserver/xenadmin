@@ -139,6 +139,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public bool RemoveUpdateFile
+        {
+            get
+            {
+                return removeUpdateFileCheckBox.Checked;
+            }
+        }
+
         public List<Host> SelectedServers { private get; set; }
         public Pool_patch Patch { private get; set; }
         public UpdateType SelectedUpdateType { private get; set; }
