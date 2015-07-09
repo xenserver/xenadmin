@@ -110,15 +110,32 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsoem"))
-                    SelectedUpdateType = UpdateType.NewOem;
-                else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsupdate"))
-                    SelectedUpdateType = UpdateType.NewRetail;
-                else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".iso"))
-                    SelectedUpdateType = UpdateType.NewSuppPack;
+                if (downloadUpdateRadioButton.Checked)
+                {
+                    if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsoem"))
+                        SelectedUpdateType = UpdateType.NewOem;
+                    else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsupdate"))
+                        SelectedUpdateType = UpdateType.NewRetail;
+                    else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".iso"))
+                        SelectedUpdateType = UpdateType.NewSuppPack;
+                    else
+                        SelectedUpdateType = UpdateType.Existing;
+                }
                 else
-                    SelectedUpdateType = UpdateType.Existing;
-
+                {
+                    var fileName = fileNameTextBox.Text;
+                    if (isValidFile())
+                    {
+                        if (fileName.EndsWith(".xsoem"))
+                            SelectedUpdateType = UpdateType.NewOem;
+                        else if (fileName.EndsWith(".xsupdate"))
+                            SelectedUpdateType = UpdateType.NewRetail;
+                        else if (fileName.EndsWith(".iso"))
+                            SelectedUpdateType = UpdateType.NewSuppPack;
+                        else
+                            SelectedUpdateType = UpdateType.Existing;
+                    }
+                }
                 SelectedExistingPatch = SelectedUpdateType == UpdateType.Existing
                                              ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).Patch
                                              : null;
@@ -169,14 +186,31 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnableNext()
         {
-            if (dataGridViewPatches.SelectedRows.Count == 1)
+            if (downloadUpdateRadioButton.Checked)
             {
-                DataGridViewExRow row = (DataGridViewExRow)dataGridViewPatches.SelectedRows[0];
-                if (row.Enabled)
+                if (dataGridViewPatches.SelectedRows.Count == 1)
+                {
+                    DataGridViewExRow row = (DataGridViewExRow)dataGridViewPatches.SelectedRows[0];
+                    if (row.Enabled)
+                        return true;
+                }
+            }
+            else if (selectFromDiskRadioButton.Checked)
+            {
+                if (isValidFile())
+                {
                     return true;
+                }
             }
             return false;
         }
+
+        private bool isValidFile()
+        {
+            var fileName = fileNameTextBox.Text;
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(".xsoem") || fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"));
+        }
+
 
         private void UpdateEnablement()
         {
@@ -189,6 +223,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // to that of the file selected. This means a handle to the directory persists, making
             // it undeletable until the program exits, or the working dir moves on. So, save and
             // restore the working dir...
+            selectFromDiskRadioButton.Checked = true;
             String oldDir = "";
             try
             {
@@ -204,7 +239,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
                 {
-                    AddFile(dlg.FileName);
+                    fileNameTextBox.Text = dlg.FileName;
                 }
                 OnPageUpdated();
             }
@@ -241,9 +276,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get
             {
-                return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem || SelectedUpdateType == UpdateType.NewSuppPack
-                           ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).PathPatch
-                           : null;
+                if (downloadUpdateRadioButton.Checked)
+                {
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem || SelectedUpdateType == UpdateType.NewSuppPack
+                               ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).PathPatch
+                               : null;
+                }
+                else if (selectFromDiskRadioButton.Checked)
+                {
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem || SelectedUpdateType == UpdateType.NewSuppPack
+                              ? fileNameTextBox.Text
+                               : null;
+                }
+                else return null;
             }
         }
 
@@ -428,6 +473,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
         }
+
+        private void dataGridViewPatches_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            downloadUpdateRadioButton.Checked = true;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
+
     }
 
     public enum UpdateType { NewRetail, NewOem, Existing, NewSuppPack}
