@@ -44,13 +44,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.BrowseButton = new System.Windows.Forms.Button();
             this.selectFromDiskRadioButton = new System.Windows.Forms.RadioButton();
             this.dataGridViewPatches = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.button2 = new System.Windows.Forms.Button();
+            this.downloadUpdateRadioButton = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.ColumnArrow = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
-            this.downloadUpdateRadioButton = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.webPageColumn = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatches)).BeginInit();
             this.SuspendLayout();
@@ -112,7 +113,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnArrow,
             this.ColumnUpdate,
             this.ColumnDescription,
-            this.ColumnStatus});
+            this.ColumnStatus,
+            this.webPageColumn});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewPatches, 3);
             this.dataGridViewPatches.Name = "dataGridViewPatches";
             this.dataGridViewPatches.ReadOnly = true;
@@ -130,6 +132,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.dataGridViewPatches.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPatches_CellContentClick);
             this.dataGridViewPatches.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPatches_CellMouseClick);
             this.dataGridViewPatches.SelectionChanged += new System.EventHandler(this.dataGridViewPatches_SelectionChanged);
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // downloadUpdateRadioButton
+            // 
+            resources.ApplyResources(this.downloadUpdateRadioButton, "downloadUpdateRadioButton");
+            this.downloadUpdateRadioButton.Checked = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.downloadUpdateRadioButton, 3);
+            this.downloadUpdateRadioButton.Name = "downloadUpdateRadioButton";
+            this.downloadUpdateRadioButton.TabStop = true;
+            this.downloadUpdateRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.tableLayoutPanel1.SetColumnSpan(this.label3, 3);
+            this.label3.Name = "label3";
             // 
             // ColumnArrow
             // 
@@ -178,26 +201,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnStatus.Name = "ColumnStatus";
             this.ColumnStatus.ReadOnly = true;
             // 
-            // button2
+            // webPageColumn
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // downloadUpdateRadioButton
-            // 
-            resources.ApplyResources(this.downloadUpdateRadioButton, "downloadUpdateRadioButton");
-            this.downloadUpdateRadioButton.Checked = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.downloadUpdateRadioButton, 3);
-            this.downloadUpdateRadioButton.Name = "downloadUpdateRadioButton";
-            this.downloadUpdateRadioButton.TabStop = true;
-            this.downloadUpdateRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.tableLayoutPanel1.SetColumnSpan(this.label3, 3);
-            this.label3.Name = "label3";
+            this.webPageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.webPageColumn, "webPageColumn");
+            this.webPageColumn.Name = "webPageColumn";
+            this.webPageColumn.ReadOnly = true;
             // 
             // PatchingWizard_SelectPatchPage
             // 
@@ -228,5 +237,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
+        private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
     }
 }

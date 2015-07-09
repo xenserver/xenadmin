@@ -880,7 +880,7 @@
     <value>Restart toolstack on '{0}'</value>
   </data>
   <data name="ACTION_TRANSFER_CALLHOME_SETTINGS" xml:space="preserve">
-     <value>Transfer Health Check settings</value>
+    <value>Transfer Health Check settings</value>
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU passthrough on '{0}'</value>
@@ -8934,6 +8934,9 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHING_WIZARD_SOLVING_PROBLEMS" xml:space="preserve">
     <value>Solving problems</value>
+  </data>
+  <data name="PATCHING_WIZARD_WEBPAGE_CELL" xml:space="preserve">
+    <value>Go to web page</value>
   </data>
   <data name="PATCH_APPLIED" xml:space="preserve">
     <value>Update '{0}' Applied to Server '{1}'</value>

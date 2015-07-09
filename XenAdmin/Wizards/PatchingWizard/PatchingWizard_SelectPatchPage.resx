@@ -274,13 +274,13 @@
     <value>True</value>
   </metadata>
   <data name="ColumnArrow.HeaderText" xml:space="preserve">
-    <value />
+    <value>ColumnArrow</value>
   </data>
   <data name="ColumnArrow.MinimumWidth" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
   <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>75</value>
   </data>
   <metadata name="ColumnUpdate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -314,6 +314,18 @@
   </data>
   <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
     <value>70</value>
+  </data>
+  <metadata name="webPageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="webPageColumn.HeaderText" xml:space="preserve">
+    <value>Web Page</value>
+  </data>
+  <data name="webPageColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="webPageColumn.Width" type="System.Int32, mscorlib">
+    <value>120</value>
   </data>
   <data name="dataGridViewPatches.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 52</value>
@@ -499,6 +511,12 @@
   </data>
   <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;webPageColumn.Name" xml:space="preserve">
+    <value>webPageColumn</value>
+  </data>
+  <data name="&gt;&gt;webPageColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_SelectPatchPage</value>

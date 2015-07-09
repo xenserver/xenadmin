@@ -323,6 +323,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             private DataGridViewTextBoxCell _nameCell;
             private DataGridViewTextBoxCell _descriptionCell;
             private DataGridViewTextBoxCell _statusCell;
+            private DataGridViewLinkCell _webPageCell;
 
 
             public PatchGridViewRow(Pool_patch patch)
@@ -356,11 +357,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _nameCell = new DataGridViewTextBoxCell();
                 _descriptionCell = new DataGridViewTextBoxCell();
                 _statusCell = new DataGridViewTextBoxCell();
+                _webPageCell = new DataGridViewLinkCell();
 
                 Cells.Add(_imageCell);
                 Cells.Add(_nameCell);
                 Cells.Add(_descriptionCell);
                 Cells.Add(_statusCell);
+                Cells.Add(_webPageCell);
                 this.UpdateDetails();
             }
 
@@ -373,6 +376,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             public void UpdateDetails()
             {
                 _imageCell.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
+                _webPageCell.Value = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
+
                 if (_isFile)
                 {
                     _nameCell.Value = System.IO.Path.GetFileName(_patchPath);
