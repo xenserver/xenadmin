@@ -4773,7 +4773,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM is incompatible with the Virtual Hardware Platform version of this host..
+        ///   Looks up a localized string similar to The VM&apos;s Virtual Hardware Platform version is incompatible with this host..
         /// </summary>
         public static string VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION {
             get {

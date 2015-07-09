@@ -1701,7 +1701,7 @@ Authorized Roles: {1}</value>
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
-    <value>The VM is incompatible with the Virtual Hardware Platform version of this host.</value>
+    <value>The VM's Virtual Hardware Platform version is incompatible with this host.</value>
   </data>
   <data name="VM_HVM_REQUIRED" xml:space="preserve">
     <value>HVM is required for this operation</value>
