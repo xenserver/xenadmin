@@ -4132,6 +4132,10 @@ namespace XenAPI
         Response<Object>
         pif_get_properties(string session, string _pif);
 
+        [XmlRpcMethod("PIF.get_capabilities")]
+        Response<string []>
+        pif_get_capabilities(string session, string _pif);
+
         [XmlRpcMethod("PIF.set_other_config")]
         Response<string>
         pif_set_other_config(string session, string _pif, Object _other_config);
@@ -7079,6 +7083,7 @@ namespace XenAPI
         public string primary_address_type;
         public bool managed;
         public Object properties;
+        public string [] capabilities;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

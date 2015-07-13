@@ -38,17 +38,24 @@
 # or from a build automation system.
 
 
-for DEP in nunit-console zip unzip mkisofs wget curl hg git patch
+FATAL=""
+for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch
 do
-which -s $DEP || echo "ERROR: $DEP was not found, install it or add it to the PATH." && FATAL=1
+  which $DEP >>/dev/null
+  if [ $? -ne 0 ]; then
+    FATAL="$DEP $FATAL"
+  fi
 done
 if [ -z ${FATAL+x} ]; then
-echo ""
+  echo ""
 else
-echo "FATAL: One or more build tools were not found."
-exit 1
+  echo "FATAL: One or more build tools were not found in PATH: $FATAL"
+  exit 1
 fi
 
+
+DEBUG=1
+>>>>>>> 86c755cba53892eb374300a3e6587ded342cf13d
 if [ -n "${DEBUG+xxx}" ];
 then
   echo "DEBUG mode activated (verbose)"

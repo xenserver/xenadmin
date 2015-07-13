@@ -51,6 +51,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public readonly String name_label;
         public readonly String name_description;
         public readonly bool pool_metadata_detected;
+        public readonly String eth;
 
         public FibreChannelDevice(String serial, String path,
             String vendor, long size, String SCSIid, String adapter,
@@ -73,7 +74,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public FibreChannelDevice(String serial, String path,
             String vendor, long size, String SCSIid, String adapter,
             String channel, String id, String lun,
-            String name_label, String name_description, bool pool_metadata_detected)
+            String name_label, String name_description, bool pool_metadata_detected,
+            String eth)
         {
             this.Serial = serial;
             this.Path = path;
@@ -87,6 +89,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             this.name_label = name_label;
             this.name_description = name_description;
             this.pool_metadata_detected = pool_metadata_detected;
+            this.eth = eth;
         }
 
         public int CompareTo(FibreChannelDevice other)

@@ -77,7 +77,8 @@ namespace XenAPI
             string ipv6_gateway,
             primary_address_type primary_address_type,
             bool managed,
-            Dictionary<string, string> properties)
+            Dictionary<string, string> properties,
+            string[] capabilities)
         {
             this.uuid = uuid;
             this.device = device;
@@ -109,6 +110,7 @@ namespace XenAPI
             this.primary_address_type = primary_address_type;
             this.managed = managed;
             this.properties = properties;
+            this.capabilities = capabilities;
         }
 
         /// <summary>
@@ -152,6 +154,7 @@ namespace XenAPI
             primary_address_type = update.primary_address_type;
             managed = update.managed;
             properties = update.properties;
+            capabilities = update.capabilities;
         }
 
         internal void UpdateFromProxy(Proxy_PIF proxy)
@@ -186,6 +189,7 @@ namespace XenAPI
             primary_address_type = proxy.primary_address_type == null ? (primary_address_type) 0 : (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), (string)proxy.primary_address_type);
             managed = (bool)proxy.managed;
             properties = proxy.properties == null ? null : Maps.convert_from_proxy_string_string(proxy.properties);
+            capabilities = proxy.capabilities == null ? new string[] {} : (string [])proxy.capabilities;
         }
 
         public Proxy_PIF ToProxy()
@@ -221,6 +225,7 @@ namespace XenAPI
             result_.primary_address_type = primary_address_type_helper.ToString(primary_address_type);
             result_.managed = managed;
             result_.properties = Maps.convert_to_proxy_string_string(properties);
+            result_.capabilities = capabilities;
             return result_;
         }
 
@@ -260,6 +265,7 @@ namespace XenAPI
             primary_address_type = (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), Marshalling.ParseString(table, "primary_address_type"));
             managed = Marshalling.ParseBool(table, "managed");
             properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
+            capabilities = Marshalling.ParseStringArray(table, "capabilities");
         }
 
         public bool DeepEquals(PIF other)
@@ -298,7 +304,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._ipv6_gateway, other._ipv6_gateway) &&
                 Helper.AreEqual2(this._primary_address_type, other._primary_address_type) &&
                 Helper.AreEqual2(this._managed, other._managed) &&
-                Helper.AreEqual2(this._properties, other._properties);
+                Helper.AreEqual2(this._properties, other._properties) &&
+                Helper.AreEqual2(this._capabilities, other._capabilities);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PIF server)
@@ -672,6 +679,17 @@ namespace XenAPI
         public static Dictionary<string, string> get_properties(Session session, string _pif)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.pif_get_properties(session.uuid, (_pif != null) ? _pif : "").parse());
+        }
+
+        /// <summary>
+        /// Get the capabilities field of the given PIF.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif">The opaque_ref of the given pif</param>
+        public static string[] get_capabilities(Session session, string _pif)
+        {
+            return (string [])session.proxy.pif_get_capabilities(session.uuid, (_pif != null) ? _pif : "").parse();
         }
 
         /// <summary>
@@ -1876,5 +1894,24 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _properties;
+
+        /// <summary>
+        /// Additional capabilities on the interface.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual string[] capabilities
+        {
+            get { return _capabilities; }
+            set
+            {
+                if (!Helper.AreEqual(value, _capabilities))
+                {
+                    _capabilities = value;
+                    Changed = true;
+                    NotifyPropertyChanged("capabilities");
+                }
+            }
+        }
+        private string[] _capabilities;
     }
 }

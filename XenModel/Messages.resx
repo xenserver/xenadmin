@@ -879,6 +879,9 @@
   <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
     <value>Restart toolstack on '{0}'</value>
   </data>
+  <data name="ACTION_TRANSFER_CALLHOME_SETTINGS" xml:space="preserve">
+    <value>Transfer Health Check settings</value>
+  </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU passthrough on '{0}'</value>
   </data>
@@ -5698,6 +5701,12 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review configuration and activate HA</value>
   </data>
+  <data name="HEALTHCHECK_ON_DEMAND_REQUEST" xml:space="preserve">
+    <value>Request an upload now</value>
+  </data>
+  <data name="HEALTHCHECK_ON_DEMAND_REQUESTED_AT" xml:space="preserve">
+    <value>Upload requested at {0}</value>
+  </data>
   <data name="HEARTBEATING_STATUS" xml:space="preserve">
     <value>Heartbeating status</value>
   </data>
@@ -7817,6 +7826,9 @@ When you configure a CIFS storage repository, you simply provide the hostname or
   <data name="NEWSR_EQUAL_LOGIC_FILER_PAGE_TITLE" xml:space="preserve">
     <value>Enter the Dell EqualLogic filer details</value>
   </data>
+  <data name="NEWSR_FCOE_DEFAULT_NAME" xml:space="preserve">
+    <value>Software FCoE virtual disk storage</value>
+  </data>
   <data name="NEWSR_HBA_DEFAULT_NAME" xml:space="preserve">
     <value>Hardware HBA virtual disk storage</value>
   </data>
@@ -7845,6 +7857,16 @@ Do you wish to format the disk?</value>
   </data>
   <data name="NEWSR_LUN_IN_USE_ON_SERVER" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on server {1}.</value>
+  </data>
+  <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
+    <value>XenServer hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
+
+All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
+
+Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
+  </data>
+  <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
+    <value>Software FCoE SR [{0} - {1}]</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
     <value>XenServer hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
@@ -10677,6 +10699,12 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="STORAGE_PRIORITY" xml:space="preserve">
     <value>Priority</value>
   </data>
+  <data name="STORAGE_PROVISIONING_METHOD_TITLE" xml:space="preserve">
+    <value>Choose storage provisioning method</value>
+  </data>
+  <data name="STORAGE_PROVISIONING_SETTINGS" xml:space="preserve">
+    <value>Storage Provisioning Settings</value>
+  </data>
   <data name="STORAGE_READ_ONLY" xml:space="preserve">
     <value>Read Only</value>
   </data>
@@ -11306,6 +11334,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>Rebooting {0} ... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
+    <value>Removing update {0} from {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>

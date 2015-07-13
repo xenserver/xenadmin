@@ -45,6 +45,7 @@
             this.selectedStoreTypeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.radioButtonCifs = new System.Windows.Forms.RadioButton();
+            this.radioButtonFcoe = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -158,15 +159,16 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonFcoe, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonCifs, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonCslg, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCslg, 0, 6);
             this.tableLayoutPanel3.Controls.Add(this.labelVirtualDiskStorage, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonNfs, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonFibreChannel, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonIscsi, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 7);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 0, 8);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 0, 9);
+            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 0, 9);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 0, 10);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // radioButtonCifs
@@ -177,6 +179,15 @@
             this.radioButtonCifs.Name = "radioButtonCifs";
             this.radioButtonCifs.UseVisualStyleBackColor = false;
             this.radioButtonCifs.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+            // 
+            // radioButtonFcoe
+            // 
+            resources.ApplyResources(this.radioButtonFcoe, "radioButtonFcoe");
+            this.radioButtonFcoe.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonFcoe.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.radioButtonFcoe.Name = "radioButtonFcoe";
+            this.radioButtonFcoe.UseVisualStyleBackColor = false;
+            this.radioButtonFcoe.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // ChooseSrTypePage
             // 
@@ -211,5 +222,6 @@
         private System.Windows.Forms.Label selectedStoreTypeLabel;
         private System.Windows.Forms.RadioButton radioButtonCifs;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.RadioButton radioButtonFcoe;
     }
 }

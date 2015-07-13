@@ -55,7 +55,7 @@ namespace XenAPI
             lvmohba, egenera, egeneracd, dummy, unknown, equal, cslg, shm,
             iscsi,
             ebs, rawhba,
-            cifs
+            cifs, lvmofcoe
         }
 
         public const string Content_Type_ISO = "iso";
@@ -267,7 +267,8 @@ namespace XenAPI
                     || type == SRTypes.netapp
                     || type == SRTypes.lvmohba
                     || type == SRTypes.cslg
-                    || type == SRTypes.cifs;
+                    || type == SRTypes.cifs
+                    || type == SRTypes.lvmofcoe;
             }
         }
 
@@ -1119,6 +1120,14 @@ namespace XenAPI
 
                 SM sm = SM.GetByType(Connection, type);
                 return sm != null && sm.features != null && sm.features.ContainsKey("SR_TRIM");
+            }
+        }
+
+        public bool IsThinProvisioned
+        {
+            get
+            {
+                return this.sm_config != null && this.sm_config.ContainsKey("allocation") && this.sm_config["allocation"] == "dynamic";
             }
         }
 

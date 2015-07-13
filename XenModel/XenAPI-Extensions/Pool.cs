@@ -36,6 +36,7 @@ using System.Net;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Globalization;
 
 namespace XenAPI
 {
@@ -406,7 +407,7 @@ namespace XenAPI
         {
             get 
             {
-               return new CallHomeSettings(gui_config);
+               return new CallHomeSettings(health_check_config);
             }
         }
         #endregion
@@ -439,21 +440,31 @@ namespace XenAPI
         public int IntervalInDays, TimeOfDay, RetryInterval;
         public DayOfWeek DayOfWeek;
         public string UploadTokenSecretUuid;
+        public string NewUploadRequest;
+        public string UserNameSecretUuid;
+        public string PasswordSecretUuid;
+        public string LastSuccessfulUpload;
+        
+        public const int DefaultRetryInterval = 7; // in days
+        public const int UploadRequestValidityInterval = 30; // in minutes
 
-        public const int DefaultRetryInterval = 7;
-
-        public const string STATUS = "CallHome.Enrollment";
-        public const string INTERVAL_IN_DAYS = "CallHome.Schedule.IntervalInDays";
+        public const string STATUS = "Enrollment";
+        public const string INTERVAL_IN_DAYS = "Schedule.IntervalInDays";
         public const int intervalInDaysDefault = 14;
-        public const string DAY_OF_WEEK = "CallHome.Schedule.DayOfWeek";
-        public const string TIME_OF_DAY = "CallHome.Schedule.TimeOfDay";
-        public const string RETRY_INTERVAL = "CallHome.Schedule.RetryInterval";
+        public const string DAY_OF_WEEK = "Schedule.DayOfWeek";
+        public const string TIME_OF_DAY = "Schedule.TimeOfDay";
+        public const string RETRY_INTERVAL = "Schedule.RetryInterval";
         public const int RetryIntervalDefault = 7;
-        public const string UPLOAD_TOKEN_SECRET = "CallHome.UploadToken.Secret"; 
-        public const string UPLOAD_LOCK = "CallHome.UploadLock";
-        public const string LAST_SUCCESSFUL_UPLOAD = "CallHome.LastSuccessfulUpload";
-        public const string LAST_FAILED_UPLOAD = "CallHome.LastFailedUpload";
-        public const string NEW_UPLOAD_REQUEST = "CallHome.NewUploadRequest";
+        public const string UPLOAD_TOKEN_SECRET = "UploadToken.Secret";
+        public const string UPLOAD_CREDENTIAL_USER_SECRET = "User.Secret";
+        public const string UPLOAD_CREDENTIAL_PASSWORD_SECRET = "Password.Secret";
+        public const string UPLOAD_LOCK = "UploadLock";
+        public const string LAST_SUCCESSFUL_UPLOAD = "LastSuccessfulUpload";
+        public const string LAST_FAILED_UPLOAD = "LastFailedUpload";
+        public const string NEW_UPLOAD_REQUEST = "NewUploadRequest";
+        public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
+        public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
+        public const string UPLOAD_UUID = "UploadUuid";
 
         public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
@@ -475,6 +486,10 @@ namespace XenAPI
             TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
             RetryInterval = IntKey(config, RETRY_INTERVAL, RetryIntervalDefault);
             UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
+            NewUploadRequest = Get(config, NEW_UPLOAD_REQUEST);
+            UserNameSecretUuid = Get(config, UPLOAD_CREDENTIAL_USER_SECRET);
+            PasswordSecretUuid = Get(config, UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+            LastSuccessfulUpload = Get(config, LAST_SUCCESSFUL_UPLOAD);
         }
 
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
@@ -487,6 +502,7 @@ namespace XenAPI
             newConfig[TIME_OF_DAY] = TimeOfDay.ToString();
             newConfig[RETRY_INTERVAL] = RetryInterval.ToString();
             newConfig[UPLOAD_TOKEN_SECRET] = UploadTokenSecretUuid;
+            newConfig[NEW_UPLOAD_REQUEST] = NewUploadRequest;
             return newConfig;
         }
 
@@ -499,6 +515,36 @@ namespace XenAPI
                 return Status == CallHomeStatus.Enabled
                            ? Messages.CALLHOME_STATUS_NOT_AVAILABLE_YET
                            : Messages.CALLHOME_STATUS_NOT_ENROLLED;
+            }
+        }
+
+        public bool CanRequestNewUpload
+        {
+            get
+            {
+                if (Status != CallHomeStatus.Enabled)
+                    return false;
+                var uploadRequestExpiryTime = NewUploadRequestTime.AddMinutes(UploadRequestValidityInterval);
+                return DateTime.Compare(uploadRequestExpiryTime, DateTime.UtcNow) < 0;
+            }
+        }
+
+        public DateTime NewUploadRequestTime
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(NewUploadRequest))
+                {
+                    try
+                    {
+                        return StringToDateTime(NewUploadRequest);
+                    }
+                    catch (Exception exn)
+                    {
+                        log.Error("Exception while parsing NewUploadRequest", exn);
+                    }
+                }
+                return DateTime.MinValue;
             }
         }
 
@@ -530,15 +576,53 @@ namespace XenAPI
         {
             return new Random().Next(1, 5);
         }
+
+        public static string DateTimeToString(DateTime dateTime)
+        {
+            // Round-trip format time
+            DateTime rtime = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+            return rtime.ToString("o");
+        }
+
+        public static DateTime StringToDateTime(string dateTimeString)
+        {
+            // Round-trip format time
+            DateTime dateTime = DateTime.ParseExact(dateTimeString, "o", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+            return dateTime;
+        }
+
+        public static bool TryParseStringToDateTime(string dateTimeString, out DateTime dateTime)
+        {
+            // Round-trip format time
+            return DateTime.TryParseExact(dateTimeString, "o", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dateTime);
+        }
+
         #endregion
 
-        public string GetUploadToken(IXenConnection connection)
+        public string GetSecretyInfo(IXenConnection connection, string secretType)
         {
-            if (connection == null || string.IsNullOrEmpty(UploadTokenSecretUuid))
+            string UUID = string.Empty;
+            switch (secretType)
+            {
+                case CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET:
+                    UUID = UserNameSecretUuid;
+                    break;
+                case CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET:
+                    UUID = PasswordSecretUuid;
+                    break;
+                case CallHomeSettings.UPLOAD_TOKEN_SECRET:
+                    UUID = UploadTokenSecretUuid;
+                    break;
+                default:
+                    log.ErrorFormat("Error getting the {0} from the xapi secret", secretType);
+                    break;
+            }
+
+            if (connection == null || string.IsNullOrEmpty(UUID))
                 return null;
             try
             {
-                string opaqueref = Secret.get_by_uuid(connection.Session, UploadTokenSecretUuid);
+                string opaqueref = Secret.get_by_uuid(connection.Session, UUID);
                 return Secret.get_value(connection.Session, opaqueref);
             }
             catch (Exception e)
@@ -548,20 +632,20 @@ namespace XenAPI
             }
         }
 
-        public string GetExistingUploadToken(IXenConnection connection)
+        public string GetExistingSecretyInfo(IXenConnection connection, string secretType)
         {
             if (connection == null)
                 return null;
 
-            string token = GetUploadToken(connection);
+            string token = GetSecretyInfo(connection, secretType);
 
             if (string.IsNullOrEmpty(token))
-                token = GetUploadTokenFromOtherConnections(connection);
+                token = GetSecretyInfoFromOtherConnections(connection, secretType);
 
             return token;
         }
 
-        private static string GetUploadTokenFromOtherConnections(IXenConnection currentConnection)
+        private static string GetSecretyInfoFromOtherConnections(IXenConnection currentConnection, string secretType)
         {
             foreach (var connection in ConnectionsManager.XenConnectionsCopy)
             {
@@ -570,7 +654,7 @@ namespace XenAPI
                 var poolOfOne = Helpers.GetPoolOfOne(connection);
                 if (poolOfOne != null)
                 {
-                    var token = poolOfOne.CallHomeSettings.GetUploadToken(connection);
+                    var token = poolOfOne.CallHomeSettings.GetSecretyInfo(connection, secretType);
                     if (!string.IsNullOrEmpty(token))
                         return token;
                 }

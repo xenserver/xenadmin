@@ -32,15 +32,17 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceProcess;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
+using System.Threading;
+using XenAdmin;
 
 namespace XenServerHealthCheck
 {
     public partial class XenServerHealthCheckService : ServiceBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private CancellationTokenSource cts = new CancellationTokenSource();
 
         public XenServerHealthCheckService()
         {
@@ -51,41 +53,59 @@ namespace XenServerHealthCheck
                 System.Diagnostics.EventLog.CreateEventSource(
                     "XenServerHealthCheck", "XenServerHealthCheckLog");
             }
+
+            XenAdminConfigManager.Provider = new WinformsXenAdminConfigProvider();
         }
 
-        static void AddServiceIdentifier()
+        private static void initConfig()
         {
-            try
+            if (Properties.Settings.Default.UUID.Length == 0)
             {
-                var configFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None);
-                var settings = configFile.AppSettings.Settings;
-                if (settings["UUID"] == null)
-                {
-                    settings.Add("UUID", System.Guid.NewGuid().ToString());
-                    configFile.Save(System.Configuration.ConfigurationSaveMode.Modified);
-                    System.Configuration.ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-                }
+                Properties.Settings.Default.UUID = System.Guid.NewGuid().ToString();
+                Properties.Settings.Default.Save();
             }
-            catch (System.Configuration.ConfigurationErrorsException)
-            {
-                log.Error("Error writing app settings");
-            }
+            log.InfoFormat("XenServer Health Check Service {0} starting...", Properties.Settings.Default.UUID);
         }
 
         protected override void OnStart(string[] args)
         {
             // Set up a timer to trigger the uploading service.
-            AddServiceIdentifier();
-            log.InfoFormat("XenServer Health Check Service {0} starting...", System.Configuration.ConfigurationManager.AppSettings["UUID"]);
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 30 * 60000; // 30 minitues
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
-            timer.Start();
+            try
+            {
+                initConfig();
+                CredentialReceiver.instance.Init();
+                ServerListHelper.instance.Init();
+
+                System.Timers.Timer timer = new System.Timers.Timer();
+                timer.Interval = 30 * 60000; // 30 minitues
+                timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
+                timer.Start();
+            }
+            catch (Exception exp)
+            {
+                EventLog.WriteEntry(exp.Message, System.Diagnostics.EventLogEntryType.FailureAudit);
+                Stop();
+            }
         }
 
         protected override void OnStop()
         {
             log.Info("XenServer Health Check Service stopping...");
+            CredentialReceiver.instance.UnInit();
+            cts.Cancel();
+            bool canStop;
+            do
+            {
+                canStop = true;
+                List<ServerInfo> servers = ServerListHelper.instance.GetServerList();
+                foreach (ServerInfo server in servers)
+                {
+                    if (server.task != null && (!server.task.IsCompleted || !server.task.IsCanceled || !server.task.IsFaulted))
+                        canStop = false;
+                }
+                if(canStop == false)
+                    Thread.Sleep(1000);
+            } while (canStop != true);
         }
 
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
@@ -93,21 +113,41 @@ namespace XenServerHealthCheck
             log.Info("XenServer Health Check Service start to refresh uploading tasks");
             
             //We need to check if CIS can be accessed in current enviroment
-            
-            List<IXenConnection> Connections = ServerListHelper.GetServerList();
-            foreach (IXenConnection connection in Connections)
+
+            List<ServerInfo> servers = ServerListHelper.instance.GetServerList();
+            foreach (ServerInfo server in servers)
             {
-                log.InfoFormat("Check server {0} with user {1}", connection.Hostname, connection.Username);
-                Session session = new Session(connection.Hostname, 80);
+                if (server.task != null && (!server.task.IsCompleted || !server.task.IsCanceled || !server.task.IsFaulted))
+                {
+                    continue;
+                }
+
+                XenConnection connectionInfo = new XenConnection();
+                connectionInfo.Hostname = server.HostName;
+                connectionInfo.Username = server.UserName;
+                connectionInfo.Password = server.Password;
+                log.InfoFormat("Check server {0} with user {1}", connectionInfo.Hostname, connectionInfo.Username);
+                Session session = new Session(server.HostName, 80);
                 session.APIVersion = API_Version.LATEST;
                 try
                 {
-                    session.login_with_password(connection.Username, connection.Password);
-                    connection.LoadCache(session);
-                    if (RequestUploadTask.Request(connection, session) || RequestUploadTask.OnDemandRequest(connection, session))
+                    session.login_with_password(server.UserName, server.Password);
+                    connectionInfo.LoadCache(session);
+                    if (RequestUploadTask.Request(connectionInfo, session) || RequestUploadTask.OnDemandRequest(connectionInfo, session))
                     {
-                        //Create thread to do log uploading
-                        log.InfoFormat("Will upload report for XenServer {0}", connection.Hostname);
+                        // Create a task to collect server status report and upload to CIS server
+                        log.InfoFormat("Start to upload server status report for XenServer {0}", connectionInfo.Hostname);
+
+                        XenServerHealthCheckBundleUpload upload = new XenServerHealthCheckBundleUpload(connectionInfo);
+                        Action uploadAction = delegate()
+                        {
+                            upload.runUpload(cts.Token);
+                        };
+                        System.Threading.Tasks.Task task = new System.Threading.Tasks.Task(uploadAction);
+                        task.Start();
+
+                        server.task = task;
+                        ServerListHelper.instance.UpdateServerInfo(server);
                     }
                     session.logout();
                     session = null;

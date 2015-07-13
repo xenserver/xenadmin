@@ -614,11 +614,23 @@
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.Designer.cs">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.Designer.cs">
+      <DependentUpon>StorageProvisioning.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.Designer.cs">
       <DependentUpon>CSLG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.Designer.cs">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewVMWizard\Page_CloudConfigParameters.cs">
       <SubType>UserControl</SubType>
@@ -819,6 +831,7 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.Designer.cs">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
@@ -1833,6 +1846,25 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.zh-CN.resx">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.ja.resx">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.resx">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.zh-CN.resx">
+      <DependentUpon>LVMoFCoE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.ja.resx">
+      <DependentUpon>StorageProvisioning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.resx">
+      <DependentUpon>StorageProvisioning.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.zh-CN.resx">
+      <DependentUpon>StorageProvisioning.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.ja.resx">
       <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
     </EmbeddedResource>
@@ -2333,6 +2365,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="XS62E006.xsupdate">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="XS65ESP1006.xsupdate">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

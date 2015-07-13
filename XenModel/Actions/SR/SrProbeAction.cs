@@ -45,6 +45,8 @@ namespace XenAdmin.Actions
         private readonly Dictionary<String, String> dconf;
         public const String DEVICE = "device";
         public const String SCSIid = "SCSIid";
+        public const String PATH = "path";
+
         private readonly Dictionary<String, String> smconf;
         /// <summary>
         /// Won't appear in the program history (SuppressHistory == true).
@@ -68,6 +70,7 @@ namespace XenAdmin.Actions
                         XenAPI.SR.getFriendlyTypeName(srType), dconf["target"]);
                     break;
                 case XenAPI.SR.SRTypes.lvmohba:
+                case XenAPI.SR.SRTypes.lvmofcoe:
                     String device = dconf.ContainsKey(DEVICE) ?
                         dconf[DEVICE] : dconf[SCSIid];
                     Description = string.Format(Messages.ACTION_SR_SCANNING,

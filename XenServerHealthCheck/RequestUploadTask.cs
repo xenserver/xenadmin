@@ -58,16 +58,19 @@ namespace XenServerHealthCheck
         }
 
         private static double DueAfterHour = 24;
-        private static bool CanLock(string UploadLock)
+        private static bool CanLock(string UploadLock, bool onDemand)
         {
-            if (UploadLock.Length == 0)
+            if (string.IsNullOrEmpty(UploadLock))
                 return true;
 
             List<string> currentLock = new List<string>(UploadLock.Split('|'));
             DateTime currentTime = DateTime.UtcNow;
             DateTime lockTime = DateTime.Parse(currentLock[1]);
 
-            if (currentLock[0] == System.Configuration.ConfigurationManager.AppSettings["UUID"])
+            if (currentLock[0] == Properties.Settings.Default.UUID && onDemand)
+                return true;
+            
+            if (currentLock[0] == Properties.Settings.Default.UUID)
             {
                 if ((DateTime.Compare(lockTime.AddHours(DueAfterHour), currentTime) <= 0))
                     return true;
@@ -80,9 +83,9 @@ namespace XenServerHealthCheck
         private static int SleepForLockConfirm = 10 * 1000; // 10 seconds
         private static bool getLock(IXenConnection connection, Session session)
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
-            string newUploadLock = System.Configuration.ConfigurationManager.AppSettings["UUID"];
-            newUploadLock += "|" + DateTime.UtcNow.ToString();
+            Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
+            string newUploadLock = Properties.Settings.Default.UUID;
+            newUploadLock += "|" + CallHomeSettings.DateTimeToString(DateTime.UtcNow);
             config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
             Pool.set_health_check_config(session, connection.Cache.Pools[0].opaque_ref, config);
             System.Threading.Thread.Sleep(SleepForLockConfirm);
@@ -96,11 +99,12 @@ namespace XenServerHealthCheck
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             if (BoolKey(config, CallHomeSettings.STATUS) == false)
             {
+                ServerListHelper.instance.removeServerCredential(connection.Hostname);
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
                 return false;
             }
             //Check if there already some service doing the uploading already
-            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK)) == false)
+            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK), false) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
                 return false;
@@ -114,7 +118,8 @@ namespace XenServerHealthCheck
             {
                 try
                 {
-                    lastSuccessfulUpload = DateTime.Parse(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
+
+                    lastSuccessfulUpload = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
                     haveSuccessfulUpload = true;
                 }
                 catch (Exception exn)
@@ -136,7 +141,7 @@ namespace XenServerHealthCheck
             {
                 try
                 {
-                    DateTime LastFailedUpload = DateTime.Parse(Get(config, CallHomeSettings.LAST_FAILED_UPLOAD));
+                    DateTime LastFailedUpload = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.LAST_FAILED_UPLOAD));
 
                     if (haveSuccessfulUpload)
                     {
@@ -198,22 +203,35 @@ namespace XenServerHealthCheck
             }
 
             //Check if there already some service doing the uploading already
-            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK)) == false)
+            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK), true) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
                 return false;
             }
 
-            if (config.ContainsKey(CallHomeSettings.NEW_UPLOAD_REQUEST))
+            var newUploadRequest = Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST);
+            if (!string.IsNullOrEmpty(newUploadRequest))
             {
-                DateTime newUploadRequestDueTime = DateTime.Parse(Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST)).AddMinutes(DemandTimeOutMinutes);
-                if (DateTime.Compare(newUploadRequestDueTime, DateTime.UtcNow) >= 0)
+                DateTime newUploadRequestTime;
+                try
                 {
+                    newUploadRequestTime = CallHomeSettings.StringToDateTime(newUploadRequest);
+                }
+                catch (Exception exn)
+                {
+                    log.Error("Exception while parsing NEW_UPLOAD_REQUEST", exn);
+                    return false;
+                }
+                DateTime newUploadRequestDueTime = newUploadRequestTime.AddMinutes(DemandTimeOutMinutes);
+                if (DateTime.Compare(newUploadRequestDueTime,  DateTime.UtcNow) >= 1)
+                {
+                    log.InfoFormat("Will report on demand for XenServer {0} since the demand was requested on {1} (UTC time)", connection.Hostname, newUploadRequestTime);
                     return getLock(connection, session);
                 }
                 else
                 {
-                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand due", connection.Hostname);
+                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand requested on {1} (UTC time) expired after {2} minutes", 
+                        connection.Hostname, newUploadRequestTime, DemandTimeOutMinutes);
                     return false;
                 }
             }

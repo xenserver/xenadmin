@@ -31,15 +31,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LVMoHBA));
             this.labelReattach = new System.Windows.Forms.Label();
             this.dataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelCreate = new System.Windows.Forms.Label();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.buttonClearAll = new System.Windows.Forms.Button();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelCreate = new System.Windows.Forms.Label();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.buttonClearAll = new System.Windows.Forms.Button();
+            this.colNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,43 +61,14 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.colSize,
             this.colSerial,
             this.colId,
-            this.colDetails});
+            this.colDetails,
+            this.colNic});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView, 2);
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.MultiSelect = true;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
-            // 
-            // colCheck
-            // 
-            this.colCheck.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.colCheck, "colCheck");
-            this.colCheck.Name = "colCheck";
-            // 
-            // colSize
-            // 
-            resources.ApplyResources(this.colSize, "colSize");
-            this.colSize.Name = "colSize";
-            this.colSize.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colSerial
-            // 
-            resources.ApplyResources(this.colSerial, "colSerial");
-            this.colSerial.Name = "colSerial";
-            this.colSerial.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colId
-            // 
-            resources.ApplyResources(this.colId, "colId");
-            this.colId.Name = "colId";
-            this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colDetails
-            // 
-            resources.ApplyResources(this.colDetails, "colDetails");
-            this.colDetails.Name = "colDetails";
-            this.colDetails.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // tableLayoutPanel1
             // 
@@ -128,6 +100,42 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.buttonClearAll.UseVisualStyleBackColor = true;
             this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
+            // colCheck
+            // 
+            this.colCheck.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.colCheck, "colCheck");
+            this.colCheck.Name = "colCheck";
+            // 
+            // colSize
+            // 
+            resources.ApplyResources(this.colSize, "colSize");
+            this.colSize.Name = "colSize";
+            this.colSize.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colSerial
+            // 
+            resources.ApplyResources(this.colSerial, "colSerial");
+            this.colSerial.Name = "colSerial";
+            this.colSerial.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colId
+            // 
+            resources.ApplyResources(this.colId, "colId");
+            this.colId.Name = "colId";
+            this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colDetails
+            // 
+            resources.ApplyResources(this.colDetails, "colDetails");
+            this.colDetails.Name = "colDetails";
+            this.colDetails.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colNic
+            // 
+            resources.ApplyResources(this.colNic, "colNic");
+            this.colNic.Name = "colNic";
+            this.colNic.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // LVMoHBA
             // 
             resources.ApplyResources(this, "$this");
@@ -155,5 +163,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDetails;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNic;
     }
 }

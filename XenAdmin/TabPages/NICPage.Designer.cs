@@ -46,6 +46,7 @@ namespace XenAdmin.TabPages
             this.TitleLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ColumnNIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnMAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnLinkStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +55,7 @@ namespace XenAdmin.TabPages
             this.ColumnVendorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDeviceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnBusPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ColumnFCoECapable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -137,7 +138,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.MaximumSize = new System.Drawing.Size(900, 400);
             this.panel1.Name = "panel1";
             // 
             // dataGridView1
@@ -157,15 +157,21 @@ namespace XenAdmin.TabPages
             this.ColumnDuplex,
             this.ColumnVendorName,
             this.ColumnDeviceName,
-            this.ColumnBusPath});
+            this.ColumnBusPath,
+            this.ColumnFCoECapable});
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.datagridview_SelectedIndexChanged);
+            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // ColumnNIC
             // 
@@ -205,21 +211,23 @@ namespace XenAdmin.TabPages
             // 
             // ColumnDeviceName
             // 
+            this.ColumnDeviceName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.ColumnDeviceName, "ColumnDeviceName");
             this.ColumnDeviceName.Name = "ColumnDeviceName";
             this.ColumnDeviceName.ReadOnly = true;
+            this.ColumnDeviceName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ColumnBusPath
             // 
-            this.ColumnBusPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.ColumnBusPath, "ColumnBusPath");
             this.ColumnBusPath.Name = "ColumnBusPath";
             this.ColumnBusPath.ReadOnly = true;
             // 
-            // contextMenuStrip1
+            // ColumnFCoECapable
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            resources.ApplyResources(this.ColumnFCoECapable, "ColumnFCoECapable");
+            this.ColumnFCoECapable.Name = "ColumnFCoECapable";
+            this.ColumnFCoECapable.ReadOnly = true;
             // 
             // NICPage
             // 
@@ -235,6 +243,7 @@ namespace XenAdmin.TabPages
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -262,5 +271,6 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVendorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDeviceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnBusPath;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFCoECapable;
     }
 }

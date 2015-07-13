@@ -48,7 +48,7 @@ cd ${TEST_DIR} && tar xzf XenAdminTests.tgz && chmod -R 777 Release
 
 
 set +e
-"nunit-console.exe" /process=separate /noshadow /labels /err="$(cygpath -d ${TEST_DIR})\error.nunit.log" /timeout=40000 /output="$(cygpath -d ${TEST_DIR})\output.nunit.log" /xml="$(cygpath -d ${TEST_DIR})\XenAdminTests.xml" "$(cygpath -d ${TEST_DIR})\Release\XenAdminTests.dll" "/framework=net-4.0" &
+nunit-console /nologo /nodots /process=separate /noshadow /labels /err="$(cygpath -d ${TEST_DIR})\error.nunit.log" /timeout=40000 /output="$(cygpath -d ${TEST_DIR})\output.nunit.log" /xml="$(cygpath -d ${TEST_DIR})\XenAdminTests.xml" "$(cygpath -d ${TEST_DIR})\Release\XenAdminTests.dll" "/framework=net-4.0" &
 
 pid=$!
 (sleep 3000 ; kill $pid 2>/dev/null ) &

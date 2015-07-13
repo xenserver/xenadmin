@@ -43,9 +43,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public SrDescriptor()
         {
             DeviceConfig = new Dictionary<string, string>();
+            SMConfig = new Dictionary<string, string>();
         }
 
         public Dictionary<string, string> DeviceConfig { get; set; }
+        public Dictionary<string, string> SMConfig { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public string UUID { get; set; }
@@ -73,7 +75,25 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
         }
 
+        public LvmOhbaSrDescriptor(FibreChannelDevice device)
+        {
+            Device = device;
+
+            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
+        }
+
         public FibreChannelDevice Device { get; private set; }
+    }
+
+    public class FcoeSrDescriptor : LvmOhbaSrDescriptor
+    {
+        public FcoeSrDescriptor(FibreChannelDevice device) : base(device)
+        {
+            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
+            DeviceConfig[SrProbeAction.PATH] = device.Path;
+
+            Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
+        }
     }
 
     public abstract class SrWizardType
@@ -127,6 +147,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 if (SrDescriptors.Count == 0)
                     SrDescriptors.Add(new SrDescriptor());
                 SrDescriptors[0].DeviceConfig = value;
+            }
+        }
+        public Dictionary<String, String> SMConfig
+        {
+            get { return SrDescriptors.Count > 0 ? SrDescriptors[0].SMConfig : null; }
+            set
+            {
+                if (SrDescriptors.Count == 0)
+                    SrDescriptors.Add(new SrDescriptor());
+                SrDescriptors[0].SMConfig = value;
             }
         }
         public string Description
@@ -349,5 +379,21 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override bool ShowIntroducePrompt { get { return true; } }
         public override bool ShowReattachWarning { get { return true; } }
         public override bool AllowToCreateNewSr { get; set; }
+    }
+
+    public class SrWizardType_Fcoe : SrWizardType
+    {
+        public override bool IsEnhancedSR { get { return false; } }
+        public override string FrontendBlurb { get { return Messages.NEWSR_LVMOFCOE_BLURB; } }
+        public override SR.SRTypes Type { get { return SR.SRTypes.lvmofcoe; } }
+        public override string ContentType { get { return ""; } }
+        public override bool ShowIntroducePrompt { get { return false; } }
+        public override bool ShowReattachWarning { get { return true; } }
+        public override bool AllowToCreateNewSr { get; set; }
+
+        public override void ResetSrName(IXenConnection connection)
+        {
+            SrName = SrWizardHelpers.DefaultSRName(Messages.NEWSR_FCOE_DEFAULT_NAME, connection);
+        }
     }
 }

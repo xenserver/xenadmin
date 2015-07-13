@@ -160,6 +160,11 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 if (settype.Contains("iops"))
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
+                else if (settype.Contains("io_throughput"))
+                {
+                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
+                    dataSet.MultiplyingFactor = (int)Util.BINARY_MEGA; //xapi units are in mebibytes/sec
+                }
                 else if (settype.EndsWith("iowait"))
                 {
                     dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);

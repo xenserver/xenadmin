@@ -2608,6 +2608,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FCoE.
+        /// </summary>
+        public static string Label_SR_SRTypes_lvmofcoe {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-lvmofcoe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hardware HBA.
         /// </summary>
         public static string Label_SR_SRTypes_lvmohba {

@@ -54,6 +54,7 @@ namespace XenAdmin.Controls
         public event EventHandler ItemSelectionNull;
         public event EventHandler ItemSelectionNotNull;
         public long DiskSize = 0;
+        public decimal? OverridenInitialAllocationRate = null;
 
         public SrPicker(IXenConnection connection, SRPickerType usage) : this(connection)
         {
@@ -191,6 +192,14 @@ namespace XenAdmin.Controls
             }
         }
 
+        public SR DisabledSelectedSR
+        {
+            get 
+            {
+                return srListBox.SelectedItem is SrPickerItem && !(srListBox.SelectedItem as SrPickerItem).Enabled ? (srListBox.SelectedItem as SrPickerItem).TheSR : null;
+            }
+        }
+
         public SR DefaultSR = null;
 
 		public void SetAffinity(Host host)
@@ -198,6 +207,36 @@ namespace XenAdmin.Controls
 			affinity = host;
 			refresh();
 		}
+
+        /// <summary>
+        /// Returns how much disk space is required to create the disk on an SR
+        /// This depends on whether the SR is thin provisioned and on what the initial allocation rate is
+        /// </summary>
+        /// <param name="sr"></param>
+        /// <returns></returns>
+        private long GetRequiredDiskSizeForSR(SR sr)
+        {
+            decimal allocationRate = 1;
+
+            if (sr != null && sr.IsThinProvisioned)
+            {
+                if (OverridenInitialAllocationRate.HasValue)
+                {
+                    allocationRate = OverridenInitialAllocationRate.Value;
+                }
+                else
+                {
+                    decimal temp = 0;
+
+                    if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation") && decimal.TryParse(sr.sm_config["initial_allocation"], out temp))
+                    {
+                        allocationRate = temp;
+                    }
+                }
+            }
+
+            return (long)(allocationRate * DiskSize);
+        }
 
         private readonly SrPickerItemFactory itemFactory = new SrPickerItemFactory();
 
@@ -210,12 +249,11 @@ namespace XenAdmin.Controls
             srListBox.BeginUpdate();
             try
             {
-
                 srListBox.ClearAllNodes();
 
                 foreach (SR sr in connection.Cache.SRs)
                 {
-                    SrPickerItem item = itemFactory.PickerItem(sr, usage, affinity, DiskSize, existingVDIs);
+                    SrPickerItem item = itemFactory.PickerItem(sr, usage, affinity, GetRequiredDiskSizeForSR(sr), existingVDIs);
                     if (item.Show)
                         srListBox.AddNode(item);
                     foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))

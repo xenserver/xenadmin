@@ -118,7 +118,7 @@ get_BUILD_URL=${BUILD_URL}
 if [ -z "${WORKSPACE+xxx}" ]
 then 
     DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-    WORKSPACE=${DIR}
+    WORKSPACE="${DIR}"
     echo "Warning: WORKSPACE env var not set, we will use ${WORKSPACE}"
 fi
 

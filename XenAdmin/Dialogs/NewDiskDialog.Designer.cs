@@ -47,11 +47,20 @@ namespace XenAdmin.Dialogs
             this.labelError = new System.Windows.Forms.Label();
             this.pictureBoxError = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.labelAllocationQuantum = new System.Windows.Forms.Label();
+            this.labelInitialAllocation = new System.Windows.Forms.Label();
+            this.initialAllocationNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.allocationQuantumNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.queuedBackgroundWorker1 = new XenCenterLib.QueuedBackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.DiskSizeNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.initialAllocationNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.allocationQuantumNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // DiskSizeNumericUpDown
@@ -101,8 +110,8 @@ namespace XenAdmin.Dialogs
             // 
             // NameTextBox
             // 
-            resources.ApplyResources(this.NameTextBox, "NameTextBox");
             this.tableLayoutPanel1.SetColumnSpan(this.NameTextBox, 3);
+            resources.ApplyResources(this.NameTextBox, "NameTextBox");
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
@@ -113,8 +122,8 @@ namespace XenAdmin.Dialogs
             // 
             // DescriptionTextBox
             // 
-            resources.ApplyResources(this.DescriptionTextBox, "DescriptionTextBox");
             this.tableLayoutPanel1.SetColumnSpan(this.DescriptionTextBox, 3);
+            resources.ApplyResources(this.DescriptionTextBox, "DescriptionTextBox");
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
@@ -138,18 +147,24 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.SrListBox, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.DiskSizeNumericUpDown, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelAllocationQuantum, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelInitialAllocation, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.initialAllocationNumericUpDown, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.allocationQuantumNumericUpDown, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 3);
             this.panel1.Controls.Add(this.CloseButton);
             this.panel1.Controls.Add(this.OkButton);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // label4
@@ -159,10 +174,11 @@ namespace XenAdmin.Dialogs
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.comboBoxUnits);
             this.panel2.Controls.Add(this.labelError);
             this.panel2.Controls.Add(this.pictureBoxError);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // comboBoxUnits
@@ -191,9 +207,53 @@ namespace XenAdmin.Dialogs
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
-            this.tableLayoutPanel1.SetColumnSpan(this.label6, 3);
-            this.label6.MaximumSize = new System.Drawing.Size(560, 329);
+            this.tableLayoutPanel1.SetColumnSpan(this.label6, 4);
             this.label6.Name = "label6";
+            // 
+            // labelAllocationQuantum
+            // 
+            resources.ApplyResources(this.labelAllocationQuantum, "labelAllocationQuantum");
+            this.labelAllocationQuantum.Name = "labelAllocationQuantum";
+            // 
+            // labelInitialAllocation
+            // 
+            resources.ApplyResources(this.labelInitialAllocation, "labelInitialAllocation");
+            this.labelInitialAllocation.Name = "labelInitialAllocation";
+            // 
+            // initialAllocationNumericUpDown
+            // 
+            resources.ApplyResources(this.initialAllocationNumericUpDown, "initialAllocationNumericUpDown");
+            this.initialAllocationNumericUpDown.DecimalPlaces = 1;
+            this.initialAllocationNumericUpDown.Name = "initialAllocationNumericUpDown";
+            this.initialAllocationNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.initialAllocationNumericUpDown.ValueChanged += new System.EventHandler(this.initialAllocationNumericUpDown_ValueChanged);
+            this.initialAllocationNumericUpDown.Enter += new System.EventHandler(this.initialAllocationNumericUpDown_Enter);
+            this.initialAllocationNumericUpDown.Leave += new System.EventHandler(this.initialAllocationNumericUpDown_Leave);
+            // 
+            // allocationQuantumNumericUpDown
+            // 
+            resources.ApplyResources(this.allocationQuantumNumericUpDown, "allocationQuantumNumericUpDown");
+            this.allocationQuantumNumericUpDown.DecimalPlaces = 1;
+            this.allocationQuantumNumericUpDown.Name = "allocationQuantumNumericUpDown";
+            this.allocationQuantumNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
             // 
             // NewDiskDialog
             // 
@@ -211,6 +271,8 @@ namespace XenAdmin.Dialogs
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.initialAllocationNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.allocationQuantumNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,6 +298,13 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxUnits;
+        private XenCenterLib.QueuedBackgroundWorker queuedBackgroundWorker1;
+        private System.Windows.Forms.Label labelAllocationQuantum;
+        private System.Windows.Forms.Label labelInitialAllocation;
+        private System.Windows.Forms.NumericUpDown initialAllocationNumericUpDown;
+        private System.Windows.Forms.NumericUpDown allocationQuantumNumericUpDown;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
 
     }
 }
