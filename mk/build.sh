@@ -37,7 +37,18 @@
 # way that it will continue to work even if it's executed manually by a developer
 # or from a build automation system.
 
-DEBUG=1
+
+for DEP in nunit-console zip unzip mkisofs wget curl hg git patch
+do
+which -s $DEP || echo "ERROR: $DEP was not found, install it or add it to the PATH." && FATAL=1
+done
+if [ -z ${FATAL+x} ]; then
+echo ""
+else
+echo "FATAL: One or more build tools were not found."
+exit 1
+fi
+
 if [ -n "${DEBUG+xxx}" ];
 then
   echo "DEBUG mode activated (verbose)"

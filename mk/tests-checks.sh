@@ -46,8 +46,9 @@ ps -W -s | grep nunit  | cut -b-10 | xargs kill -f || true
 cp ${OUTPUT_DIR}/XenAdminTests.tgz ${TEST_DIR}
 cd ${TEST_DIR} && tar xzf XenAdminTests.tgz && chmod -R 777 Release
 
+
 set +e
-"/cygdrive/c/Program Files/NUnit 2.5.10/bin/net-2.0/nunit-console.exe" /process=separate /noshadow /labels /err="C:\cygwin\tmp\error.nunit.log" /timeout=40000 /output="C:\cygwin\tmp\output.nunit.log" /xml="C:\cygwin\tmp\XenAdminTests.xml" "C:\cygwin\tmp\Release\XenAdminTests.dll" "/framework=net-4.0" &
+"nunit-console.exe" /process=separate /noshadow /labels /err="$(cygpath -d ${TEST_DIR})\error.nunit.log" /timeout=40000 /output="$(cygpath -d ${TEST_DIR})\output.nunit.log" /xml="$(cygpath -d ${TEST_DIR})\XenAdminTests.xml" "$(cygpath -d ${TEST_DIR})\Release\XenAdminTests.dll" "/framework=net-4.0" &
 
 pid=$!
 (sleep 3000 ; kill $pid 2>/dev/null ) &
