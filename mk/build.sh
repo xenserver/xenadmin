@@ -84,7 +84,7 @@ fi
 
 production_jenkins_build()
 {
-    source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
+    #source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
     source ${XENADMIN_DIR}/devtools/check-roaming.sh
     source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
