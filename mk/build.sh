@@ -41,21 +41,17 @@
 FATAL=""
 for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch
 do
-  which $DEP >>/dev/null
+  which $DEP >/dev/null 2>&1
   if [ $? -ne 0 ]; then
     FATAL="$DEP $FATAL"
   fi
 done
-if [ -z ${FATAL+x} ]; then
-  echo ""
-else
+if [ -n "${FATAL}" ]; then
   echo "FATAL: One or more build tools were not found in PATH: $FATAL"
   exit 1
 fi
 
 
-DEBUG=1
->>>>>>> 86c755cba53892eb374300a3e6587ded342cf13d
 if [ -n "${DEBUG+xxx}" ];
 then
   echo "DEBUG mode activated (verbose)"
