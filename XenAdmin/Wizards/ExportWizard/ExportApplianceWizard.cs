@@ -116,7 +116,7 @@ namespace XenAdmin.Wizards.ExportWizard
 										   m_pageTvmIp.NetworkUuid.Key,
 										   m_pageTvmIp.IsTvmIpStatic,
 										   m_pageTvmIp.TvmIpAddress,
-										   m_pageTvmIp.TvmIpAddress,
+										   m_pageTvmIp.TvmSubnetMask,
 										   m_pageTvmIp.TvmGateway,
                                            m_pageFinish.VerifyExport)).RunAsync();
 			}
