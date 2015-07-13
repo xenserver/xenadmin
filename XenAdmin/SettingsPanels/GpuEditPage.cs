@@ -255,7 +255,7 @@ namespace XenAdmin.SettingsPanels
 
                     var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
 
-                    if (allTypes.Count > 1)
+                    if (gpu_group.HasVGpu)
                     {
                         allTypes.Sort((t1, t2) =>
                                           {
