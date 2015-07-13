@@ -93,7 +93,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
             radioButtonCifs.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictCifs);
 
-            radioButtonFcoe.Visible = false; // Helpers.DundeeOrGreater(Connection);
+            radioButtonFcoe.Visible = Helpers.DundeeOrGreater(Connection);
 
             foreach (var radioButton in RadioButtons)
             {

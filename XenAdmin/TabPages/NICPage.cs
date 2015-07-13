@@ -167,7 +167,7 @@ namespace XenAdmin.TabPages
                     }
 
                     //show the FCoE column for Dundee or higher hosts only
-                    ColumnFCoECapable.Visible = false; // Helpers.DundeeOrGreater(host);
+                    ColumnFCoECapable.Visible = Helpers.DundeeOrGreater(host);
 
                     //CA-47050: the Device column should be autosized to Fill, but should not become smaller than a minimum
                     //width, which here is chosen to be the column header width. To find what this width is 
