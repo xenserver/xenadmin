@@ -62,7 +62,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="XenServerHealthCheckConfigProvider.cs" />
-    <Compile Include="XenServerHealthCheckUpload.cs" />
     <Compile Include="XenServerHealthCheckBugTool.cs" />
     <Compile Include="XenServerHealthCheckBundleUpload.cs" />
     <Compile Include="ProjectInstaller.cs">
