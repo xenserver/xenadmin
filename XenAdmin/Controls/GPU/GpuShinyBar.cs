@@ -62,7 +62,16 @@ namespace XenAdmin.Controls.GPU
             foreach (VGPU vgpu in vGPUs)
                 vms[vgpu] = vgpu.Connection.Resolve(vgpu.VM);
 
-            maxCapacity = !Helpers.FeatureForbidden(pGPU, Host.RestrictVgpu) && pGPU.HasVGpu ? 8 : 1;
+            maxCapacity = 1;
+            if (!Helpers.FeatureForbidden(pGPU, Host.RestrictVgpu) && pGPU.HasVGpu && pGPU.supported_VGPU_max_capacities != null)
+            {
+                foreach (var n in pGPU.supported_VGPU_max_capacities.Values)
+                {
+                    if (n > maxCapacity)
+                        maxCapacity = n;
+                }
+            }
+
             capacity = vGPUs.Count > 0 && pGPU.supported_VGPU_max_capacities.ContainsKey(vGPUs[0].type)
                 ? pGPU.supported_VGPU_max_capacities[vGPUs[0].type] : maxCapacity;
         }
