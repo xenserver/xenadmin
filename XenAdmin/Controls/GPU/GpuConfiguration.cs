@@ -95,7 +95,7 @@ namespace XenAdmin.Controls.GPU
                                                    let supportedVGpuType = pGpu.Connection.Resolve(supportedVGpuTypeRef)
                                                    let enabled = pGpu.enabled_VGPU_types.Contains(supportedVGpuTypeRef)
                                                    let isInUse = pGpuList.Any(p => p.Connection.ResolveAll(p.resident_VGPUs).Any(v => v.type.opaque_ref == supportedVGpuTypeRef.opaque_ref))
-                                                   orderby supportedVGpuType.Capacity ascending 
+                                                   orderby supportedVGpuType descending 
                                                    
                                                    select new VGpuDetailWithCheckBoxRow(supportedVGpuTypeRef, supportedVGpuType, enabled, isInUse)
                                                    )

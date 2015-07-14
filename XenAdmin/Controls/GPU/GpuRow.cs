@@ -235,7 +235,7 @@ namespace XenAdmin.Controls.GPU
                     allowedTypesGrid.Rows.AddRange((from vGpuTypeRef in pGpu.supported_VGPU_types
                                                     let vGpuType = pGpu.Connection.Resolve(vGpuTypeRef)
                                                     let enabledType = pGpu.enabled_VGPU_types.Contains(vGpuTypeRef)
-                                                    orderby vGpuType.Capacity ascending
+                                                    orderby vGpuType descending
                                                     select new VGpuTypeRow(vGpuType, enabledType)).ToArray());
                 }
                 allowedTypesGrid.Height = allowedTypesGrid.Rows[0].Height * (allowedTypesGrid.RowCount);

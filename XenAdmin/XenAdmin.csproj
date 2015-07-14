@@ -4579,6 +4579,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\GPU\GpuRow.resx">
       <DependentUpon>GpuRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\GPU\GpuRow.zh-CN.resx">
       <DependentUpon>GpuRow.cs</DependentUpon>
