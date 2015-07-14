@@ -122,57 +122,63 @@
     <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="RestoreDismUpdatesButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="RestoreDismUpdatesButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 296</value>
+  <data name="RestoreDismUpdatesButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 318</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="RestoreDismUpdatesButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 23</value>
   </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="RestoreDismUpdatesButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
+  <data name="RestoreDismUpdatesButton.Text" xml:space="preserve">
     <value>Restore &amp;Dismissed Updates</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
+  <data name="&gt;&gt;RestoreDismUpdatesButton.Name" xml:space="preserve">
+    <value>RestoreDismUpdatesButton</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;RestoreDismUpdatesButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;RestoreDismUpdatesButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;RestoreDismUpdatesButton.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 345</value>
+    <value>10, 380</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 3, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+    <value>69, 28</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>&amp;Filename:</value>
+  </data>
+  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -187,13 +193,13 @@
     <value>1</value>
   </data>
   <data name="fileNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 348</value>
+    <value>85, 383</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 20</value>
+    <value>415, 20</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -210,11 +216,14 @@
   <data name="&gt;&gt;fileNameTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="BrowseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="BrowseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="BrowseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 348</value>
+    <value>506, 383</value>
   </data>
   <data name="BrowseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 22</value>
@@ -244,13 +253,16 @@
     <value>NoControl</value>
   </data>
   <data name="selectFromDiskRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 325</value>
+    <value>3, 360</value>
+  </data>
+  <data name="selectFromDiskRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 16, 3, 3</value>
   </data>
   <data name="selectFromDiskRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 17</value>
   </data>
   <data name="selectFromDiskRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="selectFromDiskRadioButton.Text" xml:space="preserve">
     <value>&amp;Select update or supplemental pack from disk</value>
@@ -269,18 +281,6 @@
   </data>
   <data name="dataGridViewPatches.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnArrow.HeaderText" xml:space="preserve">
-    <value>ColumnArrow</value>
-  </data>
-  <data name="ColumnArrow.MinimumWidth" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
-    <value>75</value>
   </data>
   <metadata name="ColumnUpdate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -303,16 +303,16 @@
   <data name="ColumnDescription.MinimumWidth" type="System.Int32, mscorlib">
     <value>90</value>
   </data>
-  <metadata name="ColumnStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
+  <data name="ColumnDate.HeaderText" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
-  <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
+  <data name="ColumnDate.Width" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
   <metadata name="webPageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -324,17 +324,14 @@
   <data name="webPageColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
-  <data name="webPageColumn.Width" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
   <data name="dataGridViewPatches.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
+    <value>3, 65</value>
   </data>
   <data name="dataGridViewPatches.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="dataGridViewPatches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 238</value>
+    <value>589, 247</value>
   </data>
   <data name="dataGridViewPatches.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -351,34 +348,34 @@
   <data name="&gt;&gt;dataGridViewPatches.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="button2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="RefreshListButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
-  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="RefreshListButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 296</value>
+  <data name="RefreshListButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 318</value>
   </data>
-  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="RefreshListButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 23</value>
   </data>
-  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+  <data name="RefreshListButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="button2.Text" xml:space="preserve">
+  <data name="RefreshListButton.Text" xml:space="preserve">
     <value>&amp;Refresh List</value>
   </data>
-  <data name="&gt;&gt;button2.Name" xml:space="preserve">
-    <value>button2</value>
+  <data name="&gt;&gt;RefreshListButton.Name" xml:space="preserve">
+    <value>RefreshListButton</value>
   </data>
-  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+  <data name="&gt;&gt;RefreshListButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;RefreshListButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;RefreshListButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="downloadUpdateRadioButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -391,7 +388,13 @@
     <value>NoControl</value>
   </data>
   <data name="downloadUpdateRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 29</value>
+    <value>3, 42</value>
+  </data>
+  <data name="downloadUpdateRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 16, 3, 3</value>
+  </data>
+  <data name="downloadUpdateRadioButton.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="downloadUpdateRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 17</value>
@@ -400,8 +403,7 @@
     <value>1</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>Download update from &amp;Citrix
-</value>
+    <value>Download update from &amp;Citrix</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>
@@ -431,7 +433,7 @@
     <value>589, 26</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Select an update that you wish to download from Citrix, or an update or supplemental pack that you have already downloaded to your local disk.
@@ -459,7 +461,7 @@
     <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 373</value>
+    <value>595, 408</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -477,7 +479,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="button1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="fileNameTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="BrowseButton" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="selectFromDiskRadioButton" Row="2" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="dataGridViewPatches" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="button2" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="downloadUpdateRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,77,Percent,100,Absolute,92" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,37,Percent,100,AutoSize,36,AutoSize,100,AutoSize,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="RestoreDismUpdatesButton" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="fileNameTextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="BrowseButton" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="selectFromDiskRadioButton" Row="4" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="dataGridViewPatches" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="RefreshListButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="downloadUpdateRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,82,Percent,100,Absolute,92" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -486,13 +488,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 373</value>
-  </data>
-  <data name="&gt;&gt;ColumnArrow.Name" xml:space="preserve">
-    <value>ColumnArrow</value>
-  </data>
-  <data name="&gt;&gt;ColumnArrow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>595, 408</value>
   </data>
   <data name="&gt;&gt;ColumnUpdate.Name" xml:space="preserve">
     <value>ColumnUpdate</value>
@@ -506,10 +502,10 @@
   <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
-    <value>ColumnStatus</value>
+  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
+    <value>ColumnDate</value>
   </data>
-  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;webPageColumn.Name" xml:space="preserve">

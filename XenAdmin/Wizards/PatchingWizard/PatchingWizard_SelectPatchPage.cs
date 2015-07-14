@@ -43,15 +43,32 @@ using System.ComponentModel;
 using System.IO;
 using XenAdmin.Dialogs;
 using System.Drawing;
+using XenAdmin.Alerts;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_SelectPatchPage : XenTabPage
     {
+        private bool CheckForUpdatesInProgress;
+        public Alert SelectedUpdateAlert;
+        
         public PatchingWizard_SelectPatchPage()
         {
             InitializeComponent();
+            PopulatePatchesBox();
+            dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
+        }
+
+        private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
+        {
+            Program.Invoke(Program.MainWindow, delegate
+            {
+                PopulatePatchesBox();               
+                RefreshListButton.Enabled = true;
+                CheckForUpdatesInProgress = false;
+                OnPageUpdated();
+            });
         }
 
         public override string Text
@@ -76,34 +93,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         public override void PageLoaded(PageLoadedDirection direction)
-        {
+        {           
             base.PageLoaded(direction);
-            if (direction == PageLoadedDirection.Back)
+            RefreshListButton.Enabled = true;
+            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+         
+            if (direction == PageLoadedDirection.Forward)
             {
-                if (dataGridViewPatches.SelectedRows.Count == 0)
-                    return;
-                
-                // refresh selected row if the update type is Existing (i.e. the update has been uploaded)
-                int selectedIndex = dataGridViewPatches.SelectedRows[0].Index;
-                string updateName = dataGridViewPatches.Rows[selectedIndex].Cells[ColumnUpdate.Index].Value.ToString();
-                
-                if (SelectedUpdateType == UpdateType.Existing && (updateName.EndsWith(".xsoem") || updateName.EndsWith(".xsupdate")))
-                {
-                    // remove selected row and add a new one
-                    dataGridViewPatches.Rows.RemoveAt(selectedIndex);
-                    var row = new PatchGridViewRow(SelectedExistingPatch);
-                    if (!dataGridViewPatches.Rows.Contains(row))
-                    {
-                        dataGridViewPatches.Rows.Add(row);
-                        row.UpdateDetails();
-                    }
-                    row.Selected = true;
-                }
-                return;
+                PopulatePatchesBox();
+                UpdateEnablement();
             }
-
-            PopulatePatchesBox();
-            UpdateEnablement();
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
@@ -112,14 +111,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (downloadUpdateRadioButton.Checked)
                 {
-                    if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsoem"))
+                    if (dataGridViewPatches.SelectedRows.Count > 0 && ((PatchGridViewRow)(dataGridViewPatches.SelectedRows[0])).UpdateAlert.WebPageLabel.EndsWith(".xsoem"))
+                    {
                         SelectedUpdateType = UpdateType.NewOem;
-                    else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsupdate"))
-                        SelectedUpdateType = UpdateType.NewRetail;
-                    else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".iso"))
-                        SelectedUpdateType = UpdateType.NewSuppPack;
+                    }
                     else
-                        SelectedUpdateType = UpdateType.Existing;
+                    {
+                        SelectedUpdateType = UpdateType.NewRetail;
+                    }                   
                 }
                 else
                 {
@@ -136,8 +135,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                             SelectedUpdateType = UpdateType.Existing;
                     }
                 }
-                SelectedExistingPatch = SelectedUpdateType == UpdateType.Existing
-                                             ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).Patch
+                SelectedUpdateAlert = downloadUpdateRadioButton.Checked
+                                             ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
                                              : null;
 
                 if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
@@ -152,6 +151,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch));
                 }
             }
+            Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
             base.PageLeave(direction, ref cancel);
         }
 
@@ -166,26 +166,40 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void PopulatePatchesBox()
         {
             dataGridViewPatches.Rows.Clear();
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
+            var updates = new List<Alert>(Updates.UpdateAlerts);
+            if (dataGridViewPatches.SortedColumn != null)
             {
-                foreach (Pool_patch patch in xenConnection.Cache.Pool_patches)
-                {
-                    if (patch.size > 0)
-                    {
-                        PatchGridViewRow row = new PatchGridViewRow(patch);
-                        if (!dataGridViewPatches.Rows.Contains(row))
-                        {
-                            dataGridViewPatches.Rows.Add(row);
-                            row.UpdateDetails();
-                        }
-                    }
-                }
+                if (dataGridViewPatches.SortedColumn.Index == ColumnUpdate.Index)
+                    updates.Sort(Alert.CompareOnTitle);
+                else if (dataGridViewPatches.SortedColumn.Index == ColumnDate.Index)
+                    updates.Sort(Alert.CompareOnDate);
+                else if (dataGridViewPatches.SortedColumn.Index == ColumnDescription.Index)
+                    updates.Sort(Alert.CompareOnAppliesTo);
+
+                if (dataGridViewPatches.SortOrder == SortOrder.Descending)
+                    updates.Reverse();
             }
-            dataGridViewPatches.Sort(ColumnUpdate, ListSortDirection.Ascending);
+           foreach (Alert alert in updates)
+           {   
+               PatchGridViewRow row = new PatchGridViewRow(alert);
+               if (!dataGridViewPatches.Rows.Contains(row))
+               {
+                   dataGridViewPatches.Rows.Add(row);
+               }                
+            }
+        }
+        
+        public override void PageCancelled()
+        {
+            Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
         }
 
         public override bool EnableNext()
         {
+            if (CheckForUpdatesInProgress)
+            {
+                return false;
+            }
             if (downloadUpdateRadioButton.Checked)
             {
                 if (dataGridViewPatches.SelectedRows.Count == 1)
@@ -214,6 +228,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateEnablement()
         {
+            dataGridViewPatches.HideSelection = !downloadUpdateRadioButton.Checked;
             OnPageUpdated();
         }
 
@@ -239,7 +254,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
                 {
-                    fileNameTextBox.Text = dlg.FileName;
+                    AddFile(dlg.FileName);
                 }
                 OnPageUpdated();
             }
@@ -253,14 +268,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (fileName.EndsWith(".xsoem") || fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"))
             {
-                PatchGridViewRow row = new PatchGridViewRow(fileName);
-                int index = dataGridViewPatches.Rows.IndexOf(row);
-                if (index < 0)
-                {
-                    dataGridViewPatches.Rows.Insert(0, row);
-                    index = 0;
-                }
-                dataGridViewPatches.Rows[index].Selected = true;
+                fileNameTextBox.Text = fileName;
+                selectFromDiskRadioButton.Checked = true;
             }
             else
             {
@@ -292,6 +301,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        private void dataGridViewPatches_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateEnablement();
+        }
+
+        private void fileNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            selectFromDiskRadioButton.Checked = true;
+            UpdateEnablement();
+        }
+
         private void dataGridViewPatches_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
@@ -305,14 +325,69 @@ namespace XenAdmin.Wizards.PatchingWizard
             UpdateEnablement();
         }
 
-        private void dataGridViewPatches_SelectionChanged(object sender, EventArgs e)
+        private void RefreshListButton_Click(object sender, EventArgs e)
         {
+            CheckForUpdatesInProgress = true;
+            RefreshListButton.Enabled = false;
+            Updates.CheckForUpdates(true);
+            PopulatePatchesBox();
+        }
+
+        private void selectFromDiskRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateEnablement();
+        }
+
+        private void dataGridViewPatches_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+
+            Alert alert1 = ((PatchGridViewRow)dataGridViewPatches.Rows[e.RowIndex1]).UpdateAlert;
+            Alert alert2 = ((PatchGridViewRow)dataGridViewPatches.Rows[e.RowIndex2]).UpdateAlert;
+
+            if (e.Column.Index == ColumnDate.Index)
+            {
+                int sortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
+                e.SortResult = (dataGridViewPatches.SortOrder == SortOrder.Descending) ? sortResult *= -1 : sortResult;
+                e.Handled = true;
+            }
+        }
+
+        private void dataGridViewPatches_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridViewPatches.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
+                PopulatePatchesBox();
+        }
+
+        private void fileNameTextBox_Enter(object sender, EventArgs e)
+        {
+            selectFromDiskRadioButton.Checked = true;
+            UpdateEnablement();
+        }
+
+        private void dataGridViewPatches_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {   // The click is on a column header
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+            PatchGridViewRow row = dataGridViewPatches.Rows[e.RowIndex] as PatchGridViewRow;
+            if (row != null && e.ColumnIndex == 3)
+            {
+                row.UpdateAlert.FixLinkAction();
+                return;
+            }
+        }
+
+        private void dataGridViewPatches_Enter(object sender, EventArgs e)
+        {
+            downloadUpdateRadioButton.Checked = true;
             UpdateEnablement();
         }
 
         private class PatchGridViewRow : DataGridViewExRow, IEquatable<PatchGridViewRow>
         {
             private readonly Pool_patch _patch;
+            private readonly Alert _alert;
 
             private bool expanded = false;
 
@@ -322,16 +397,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             private DataGridViewImageCell _imageCell;
             private DataGridViewTextBoxCell _nameCell;
             private DataGridViewTextBoxCell _descriptionCell;
+            private DataGridViewTextBoxCell _dateCell;
             private DataGridViewTextBoxCell _statusCell;
             private DataGridViewLinkCell _webPageCell;
 
+            public PatchGridViewRow(Alert alert)
+            {   
+                _alert = alert;
+                _nameCell = new DataGridViewTextBoxCell();
+                _descriptionCell = new DataGridViewTextBoxCell();
+                _dateCell = new DataGridViewTextBoxCell();
+                _webPageCell = new DataGridViewLinkCell();
 
-            public PatchGridViewRow(Pool_patch patch)
-            {
-                if (patch == null)
-                    throw new ArgumentNullException();
-                _patch = patch;
-                SetupCells();
+                Cells.Add(_nameCell);
+                Cells.Add(_descriptionCell);
+                Cells.Add(_dateCell);
+                Cells.Add(_webPageCell);
+
+                _nameCell.Value = String.Format(alert.Name);
+                _descriptionCell.Value = String.Format(alert.Description);
+                _dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
+                _webPageCell.Value = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
             }
 
             public PatchGridViewRow(string patchPath)
@@ -341,9 +427,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 SetupCells();
             }
 
-            public Pool_patch Patch
-            {
-                get { return _patch; }
+            public Alert UpdateAlert
+            { 
+                get { return _alert; }
             }
 
             public string PathPatch
@@ -393,73 +479,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                                              : _patchPath;
 
                     UpdateFileDetails(description, fileInfo.Exists ? Messages.NOT_UPLOADED : Messages.PATCH_NOT_FOUND);
-                }
-                else
-                {
-
-                    //It works across connections
-
-                    _nameCell.Value = Helpers.GetName(Patch);
-                    StringBuilder appliedOn = new StringBuilder(Messages.APPLIED_ON);
-                    List<Host> hostsAppliedTo = new List<Host>();
-                    foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
-                    {
-                        Pool_patch poolPatch = xenConnection.Cache.Find_By_Uuid<Pool_patch>(Patch.uuid);
-                        if (poolPatch != null)
-                        {
-                            hostsAppliedTo.AddRange(poolPatch.HostsAppliedTo());
-                        }
-                    }
-                    if (hostsAppliedTo.Count > 0)
-                        appliedOn.Append(Helpers.GetListOfNames(hostsAppliedTo));
-                    else
-                    {
-                        appliedOn.Append(Messages.NONE);
-                    }
-                    _descriptionCell.Value = expanded ? String.Format("{0}\n{1}", _patch.Description, appliedOn.ToString())
-                                                        : _patch.Description;
-                    int totalNumberHostsRunning = 0;
-
-                    foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
-                    {
-                        foreach (Host host in xenConnection.Cache.Hosts)
-                        {
-                            totalNumberHostsRunning++;
-                        }
-                    }
-
-                    if (hostsAppliedTo.Count == 0)
-                        _statusCell.Value = Messages.NOT_APPLIED;
-                    else if (hostsAppliedTo.Count == totalNumberHostsRunning)
-                    {
-                        _statusCell.Value = Messages.FULLY_APPLIED;
-                        this.Enabled = false;
-                    }
-                    else
-                    {
-                        List<Host> appliedTo = Patch.HostsAppliedTo();
-                        if (appliedTo.Count > 0 && appliedTo[0].isOEM)
-                        {
-                            _statusCell.Value = Messages.FULLY_APPLIED;
-                            this.Enabled = false;
-                        }
-                        else
-                            _statusCell.Value = Messages.PARTIALLY_APPLIED;
-                    }
-                }
-
+                }         
             }
 
             public void toggleExpandedState()
             {
                 expanded = !expanded;
-                UpdateDetails();
             }
 
 
             public bool Equals(PatchGridViewRow other)
             {
-                if (other.Patch != null && this.Patch != null && this.Patch.uuid == other.Patch.uuid)
+                if (other.UpdateAlert != null && this.UpdateAlert != null && this.UpdateAlert.uuid == other.UpdateAlert.uuid)
                     return true;
                 if (other.PathPatch != null && this.PathPatch != null && this.PathPatch == other.PathPatch)
                     return true;
@@ -477,19 +508,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return this.Equals((PatchGridViewRow)obj);
                 return false;
             }
-        }
-
-        private void dataGridViewPatches_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            downloadUpdateRadioButton.Checked = true;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            OnPageUpdated();
-        }
-
-    }
+        }       
+    }        
 
     public enum UpdateType { NewRetail, NewOem, Existing, NewSuppPack}
 }
