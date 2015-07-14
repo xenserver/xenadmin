@@ -125,7 +125,7 @@ namespace XenAdmin.Controls
             VgpuTypes = vgpuType == null ? null : new[] {vgpuType};
             if (vgpuType != null)
             {
-                IsVgpuSubitem = gpuGroup.supported_VGPU_types.Count > 1;
+                IsVgpuSubitem = gpuGroup.HasVGpu;
                 IsFractionalVgpu = !vgpuType.IsPassthrough;
                 if (disabledVGpuTypes != null && disabledVGpuTypes.Select(t => t.opaque_ref).Contains(vgpuType.opaque_ref))
                     IsNotEnabledVgpu = true;

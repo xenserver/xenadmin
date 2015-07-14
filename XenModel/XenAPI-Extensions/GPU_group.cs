@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Linq;
 using XenAdmin;
 
 namespace XenAPI
@@ -53,6 +54,15 @@ namespace XenAPI
                 ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, Name)
                 : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, Name, PGPUs.Count);
         }
+
+        public bool HasVGpu
+        {
+            get
+            {
+                return Connection.ResolveAll(PGPUs).Any(pgpu => pgpu.HasVGpu);
+            }
+        }
+
 
         #region IEquatable<GPU_group> Members
 

@@ -137,8 +137,8 @@ TEST_DIR=${ROOT}/tmp
 mkdir -p ${TEST_DIR}
 BUILD_ARCHIVE=${ROOT}/../builds/${get_BUILD_ID}/archive
 SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/windowsbuilds/WindowsBuilds/$get_JOB_NAME/$BUILD_NUMBER/
-#XENCENTER_LOGDIR="/cygdrive/c/Users/Administrator/AppData/Roaming/Citrix/XenCenter/logs"
-XENCENTER_LOGDIR="/cygdrive/c/Citrix/XenCenter/logs"
+XENCENTER_LOGDIR="${ROOT}/log"
+mkdir -p ${XENCENTER_LOGDIR}
 
 # WEB_LIB is where the libraries stored in /usr/groups/linux/distfiles are exposed
 #WEB_LATEST_BUILD is where the current build will retrieve some of its dependendencies,
@@ -156,7 +156,7 @@ WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
 WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
 
 #this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET="http://localhost:8080/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+WEB_DOTNET="http://tocco.do.citrite.net:8080/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
 
 # used to copy results out of the secure build enclave
 BUILD_TOOLS_REPO=git://admin/git/closed/windows/buildtools.git
@@ -164,5 +164,5 @@ BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
 STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 #check there are xenserver builds on this branch before proceeding
-wget -N -q --spider ${WEB_XE_PHASE_1}/globals || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
+wget -T 10 -N -q --spider ${WEB_XE_PHASE_1}/globals || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 

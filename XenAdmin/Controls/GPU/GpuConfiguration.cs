@@ -144,15 +144,10 @@ namespace XenAdmin.Controls.GPU
 
         private void SetWindowTitle()
         {
-            var match = Regex.Match(PGpuList[0].Name, @"\[(.*?)\]", RegexOptions.CultureInvariant);
-            if (match.Success)
-            {
-                var name = match.Groups[1].Value;
-                
-                Text = PGpuList.Count == 1
-                    ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, name)
-                    : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, name, PGpuList.Count);
-            }
+            var name = PGpuList[0].Name;
+            Text = PGpuList.Count == 1
+                ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, name)
+                : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, name, PGpuList.Count);
 
             rubricLabel.Text = PGpuList.Count == 1
                                    ? Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE

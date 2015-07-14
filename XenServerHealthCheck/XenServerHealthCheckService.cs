@@ -59,11 +59,12 @@ namespace XenServerHealthCheck
 
         private static void initConfig()
         {
-            if (Properties.Settings.Default.UUID.Length == 0)
+            if (string.IsNullOrEmpty(Properties.Settings.Default.UUID))
             {
                 Properties.Settings.Default.UUID = System.Guid.NewGuid().ToString();
                 Properties.Settings.Default.Save();
             }
+
             log.InfoFormat("XenServer Health Check Service {0} starting...", Properties.Settings.Default.UUID);
         }
 
@@ -77,7 +78,10 @@ namespace XenServerHealthCheck
                 ServerListHelper.instance.Init();
 
                 System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Interval = 30 * 60000; // 30 minitues
+                if (Properties.Settings.Default.UploadTimeIntervalInMinutes != 0)
+                    timer.Interval = Properties.Settings.Default.UploadTimeIntervalInMinutes * 60000;
+                else
+                    timer.Interval = 30 * 60000; // 30 minitues
                 timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
                 timer.Start();
             }

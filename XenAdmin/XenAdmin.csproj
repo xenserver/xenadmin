@@ -831,6 +831,7 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.Designer.cs">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>

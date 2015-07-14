@@ -38,23 +38,20 @@
 # or from a build automation system.
 
 
-for DEP in nunit-console zip unzip mkisofs wget curl hg git patch
+FATAL=""
+for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch
 do
-  which $DEP >>/dev/null
+  which $DEP >/dev/null 2>&1
   if [ $? -ne 0 ]; then
-    echo "ERROR: $DEP was not found, install it or add it to the PATH."
-    FATAL=1
+    FATAL="$DEP $FATAL"
   fi
 done
-if [ -z ${FATAL+x} ]; then
-  echo ""
-else
-  echo "FATAL: One or more build tools were not found."
+if [ -n "${FATAL}" ]; then
+  echo "FATAL: One or more build tools were not found in PATH: $FATAL"
   exit 1
 fi
 
 
-DEBUG=1
 if [ -n "${DEBUG+xxx}" ];
 then
   echo "DEBUG mode activated (verbose)"
@@ -87,7 +84,7 @@ fi
 
 production_jenkins_build()
 {
-    source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
+    #source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
     source ${XENADMIN_DIR}/devtools/check-roaming.sh
     source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh

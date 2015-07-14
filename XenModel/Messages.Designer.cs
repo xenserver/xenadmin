@@ -32815,6 +32815,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removing update {0} from {1}... .
+        /// </summary>
+        public static string UPDATES_WIZARD_REMOVING_UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click here to repair.
         /// </summary>
         public static string UPDATES_WIZARD_REPAIR_SR {

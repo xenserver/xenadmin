@@ -43,7 +43,7 @@ namespace XenServerHealthCheck
     public class XenServerHealthCheckUpload
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public const string UPLOAD_URL = "https://rttf-staging.citrix.com/feeds/api/";
+        public string UPLOAD_URL = "https://rttf-staging.citrix.com/feeds/api/";
         public const int CHUNK_SIZE = 1 * 1024 * 1024;
         private JavaScriptSerializer serializer;
         private int verbosityLevel;
@@ -56,6 +56,10 @@ namespace XenServerHealthCheck
             verbosityLevel = verbosity;
             serializer = new JavaScriptSerializer();
             serializer.MaxJsonLength = int.MaxValue;
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.UUID))
+            {
+                UPLOAD_URL = Properties.Settings.Default.UPLOAD_URL;
+            }
         }
 
         // Request an upload and fetch the uploading id from CIS.

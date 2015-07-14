@@ -476,7 +476,7 @@ namespace XenAPI
 
         private bool _RestrictHealthCheck
         {
-            get { return true; /* BoolKeyPreferTrue(license_params, "restrict_health_check"); */}
+            get { return BoolKeyPreferTrue(license_params, "restrict_health_check"); }
         }
 
         public static bool RestrictHealthCheck(Host h)

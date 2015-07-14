@@ -160,6 +160,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 PatchingWizard_PatchingPage.ManualTextInstructions = PatchingWizard_ModePage.ManualTextInstructions;
                 PatchingWizard_PatchingPage.IsAutomaticMode = PatchingWizard_ModePage.IsAutomaticMode;
+                PatchingWizard_PatchingPage.RemoveUpdateFile = PatchingWizard_ModePage.RemoveUpdateFile;
             }
             else if (prevPageType == typeof(PatchingWizard_PrecheckPage))
             {
