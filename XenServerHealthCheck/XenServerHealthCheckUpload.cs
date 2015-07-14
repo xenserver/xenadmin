@@ -50,15 +50,15 @@ namespace XenServerHealthCheck
 
         private string uploadToken;
 
-        public XenServerHealthCheckUpload(string token, int verbosity)
+        public XenServerHealthCheckUpload(string token, int verbosity, string uploadUrl)
         {
             uploadToken = token;
             verbosityLevel = verbosity;
             serializer = new JavaScriptSerializer();
             serializer.MaxJsonLength = int.MaxValue;
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.UUID))
+            if (!string.IsNullOrEmpty(uploadUrl))
             {
-                UPLOAD_URL = Properties.Settings.Default.UPLOAD_URL;
+                UPLOAD_URL = uploadUrl;
             }
         }
 
@@ -80,7 +80,7 @@ namespace XenServerHealthCheck
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
                 // Add the log verbosity level in json cotent.
-                string verbosity = "{\"verbosity\":\"2\"}";
+                string verbosity = "{\"verbosity\":\""+ verbosityLevel + "\"}";
                 streamWriter.Write(verbosity);
             }
 
