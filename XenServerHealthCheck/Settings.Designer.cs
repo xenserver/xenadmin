@@ -55,5 +55,37 @@ namespace XenServerHealthCheck.Properties {
                 this["UUID"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string UPLOAD_URL
+        {
+            get
+            {
+                return ((string)(this["UPLOAD_URL"]));
+            }
+            set
+            {
+                this["UPLOAD_URL"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public int UploadTimeIntervalInMinutes
+        {
+            get
+            {
+                return ((int)(this["UploadTimeIntervalInMinutes"]));
+            }
+            set
+            {
+                this["UploadTimeIntervalInMinutes"] = value;
+            }
+        }
     }
 }
