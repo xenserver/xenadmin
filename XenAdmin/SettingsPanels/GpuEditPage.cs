@@ -257,13 +257,8 @@ namespace XenAdmin.SettingsPanels
 
                     if (gpu_group.HasVGpu)
                     {
-                        allTypes.Sort((t1, t2) =>
-                                          {
-                                              int result = t1.Capacity.CompareTo(t2.Capacity);
-                                              if (result != 0)
-                                                  return result;
-                                              return t1.Name.CompareTo(t2.Name);
-                                          });
+                        allTypes.Sort();
+                        allTypes.Reverse();
                         comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
                     }
 

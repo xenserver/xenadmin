@@ -82,6 +82,28 @@ namespace XenAPI
         }
 
         #endregion
+
+        // CA-166091: Default sort order for VGPU types is:
+        // * Pass-through is "biggest"
+        // * Then others in capacity order, lowest capacity is biggest
+        // * In case of ties, highest resolution is biggest
+        public override int CompareTo(VGPU_type other)
+        {
+            if (this.IsPassthrough != other.IsPassthrough)
+                return this.IsPassthrough ? 1 : -1;
+
+            long thisCapacity = this.Capacity;
+            long otherCapacity = other.Capacity;
+            if (thisCapacity != otherCapacity)
+                return (int)(otherCapacity - thisCapacity);
+
+            long thisResolution = this.max_resolution_x * this.max_resolution_y;
+            long otherResolution = other.max_resolution_x * other.max_resolution_y;
+            if (thisResolution != otherResolution)
+                return (int)(thisResolution - otherResolution);
+
+            return base.CompareTo(other);
+        }
     
         /// <summary>
         /// vGPUs per GPU
