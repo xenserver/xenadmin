@@ -104,12 +104,12 @@ namespace XenServerHealthCheck
                 List<ServerInfo> servers = ServerListHelper.instance.GetServerList();
                 foreach (ServerInfo server in servers)
                 {
-                    if (server.task != null && (!server.task.IsCompleted || !server.task.IsCanceled || !server.task.IsFaulted))
+                    if (server.task != null && !(server.task.IsCompleted || server.task.IsCanceled || server.task.IsFaulted))
                         canStop = false;
                 }
                 if(canStop == false)
                     Thread.Sleep(1000);
-            } while (canStop != true);
+            } while (canStop == false);
         }
 
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)

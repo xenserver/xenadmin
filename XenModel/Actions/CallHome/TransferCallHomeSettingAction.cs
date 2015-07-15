@@ -36,6 +36,7 @@ using System;
 using System.IO.Pipes;
 using System.IO;
 using System.Text;
+using System.ServiceProcess;
 
 namespace XenAdmin.Actions
 {
@@ -64,8 +65,14 @@ namespace XenAdmin.Actions
                 return EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { Host, username, passwordSecret }));
         }
 
+        private const string CALLHOMESERVICENAME = "XenHealthSvc";
+
         protected override void Run()
         {
+            ServiceController sc = new ServiceController(CALLHOMESERVICENAME);
+            if (sc.Status != ServiceControllerStatus.Running)
+                return;
+
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             int retryCount = 120;
             do
