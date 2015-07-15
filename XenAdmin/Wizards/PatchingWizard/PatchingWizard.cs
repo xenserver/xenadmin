@@ -36,6 +36,7 @@ using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using XenAPI;
 using System.Linq;
+using System.IO;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -96,6 +97,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var updateType = PatchingWizard_SelectPatchPage.SelectedUpdateType;
                 var newPatch = PatchingWizard_SelectPatchPage.SelectedNewPatch;
                 var existPatch = PatchingWizard_SelectPatchPage.SelectedExistingPatch;
+                var alertPatch = PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
 
                 DisablePage(PatchingWizard_PrecheckPage, updateType == UpdateType.NewOem);
                 DisablePage(PatchingWizard_UploadPage, updateType == UpdateType.NewOem);
@@ -106,6 +108,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
                 PatchingWizard_UploadPage.SelectedNewPatch = newPatch;
+                PatchingWizard_UploadPage.SelectedUpdateAlert = alertPatch; 
 
                 PatchingWizard_ModePage.Patch = existPatch;
 
@@ -275,6 +278,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (PatchingWizard_UploadPage.AllCreatedSuppPackVdis != null)
                 RemoveTemporaryVdis();
+
+            if (PatchingWizard_SelectPatchPage.SelectedUpdateAlert != null)
+            {
+                File.Delete(PatchingWizard_UploadPage.SelectedNewPatch);
+            }
 
             base.FinishWizard();
         }

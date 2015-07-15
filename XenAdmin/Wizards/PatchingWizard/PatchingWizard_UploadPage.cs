@@ -7,6 +7,9 @@ using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
+using XenAdmin.Alerts;
+using System;
+using System.IO;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -29,8 +32,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<Host> SelectedMasters { private get; set; }
         public List<Host> SelectedServers { private get; set; }
         public UpdateType SelectedUpdateType { private get; set; }
-        public string SelectedNewPatch { private get; set; }
+        public string SelectedNewPatch { get; set; }
         public Pool_patch SelectedExistingPatch { private get; set; }
+        public Alert SelectedUpdateAlert { private get; set; }
 
         public readonly List<Pool_patch> NewUploadedPatches = new List<Pool_patch>();
         private Pool_patch _patch = null;
@@ -57,9 +61,29 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (direction == PageLoadedDirection.Forward)
             {
+                if (SelectedUpdateAlert != null && String.IsNullOrEmpty(SelectedNewPatch))
+                {
+                    DownloadFile();
+                }
                 PrepareUploadActions();
                 TryUploading();
             }
+        }
+
+        private void DownloadFile()
+        {            
+            string patchUri = ((XenServerPatchAlert)SelectedUpdateAlert).Patch.PatchUrl;
+            if (string.IsNullOrEmpty(patchUri))
+                return;
+
+            Uri address = new Uri(patchUri);
+            string tempFile = Path.GetTempFileName();
+
+            var action = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Description, address, tempFile);
+            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Continuous, false) { ShowCancel = true };
+
+            dialog.ShowDialog();
+            SelectedNewPatch = action.PatchPath;
         }
 
         public override void PageCancelled()
