@@ -2365,6 +2365,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload server status report to Citrix Insight Services.
+        /// </summary>
+        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
+            get {
+                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to upload the status report..
+        /// </summary>
+        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading report to Citrix Insight Services.
+        /// </summary>
+        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
+            get {
+                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual disk created.
         /// </summary>
         public static string ACTION_VDI_CREATED {

@@ -188,6 +188,7 @@ namespace XenServerHealthCheck
                     {
                         if (cancel.IsCancellationRequested)
                         {
+                            log.Info("Upload cancelled");
                             return "";
                         }
 
