@@ -42,6 +42,7 @@ using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using Registry = XenAdmin.Core.Registry;
 
 
@@ -187,11 +188,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 Registry.CallHomeUploadTokenDomainName, Registry.CallHomeProductKey, 
                 false, TokenExpiration, false);
 
-            try
-            {
-                action.RunExternal(null);
-            }
-            catch
+            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(Parent);
+
+            if (!action.Succeeded)
             {
                 error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
                 UploadToken = null;
