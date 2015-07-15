@@ -250,6 +250,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 
+            if (PatchingWizard_SelectPatchPage.SelectedUpdateAlert != null && PatchingWizard_UploadPage.SelectedNewPatch != null)
+            {
+                File.Delete(PatchingWizard_UploadPage.SelectedNewPatch);
+            }
+
             base.OnCancel();
         }
 

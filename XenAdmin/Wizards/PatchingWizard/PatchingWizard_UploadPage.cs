@@ -16,6 +16,8 @@ namespace XenAdmin.Wizards.PatchingWizard
     public partial class PatchingWizard_UploadPage : XenTabPage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private DownloadAndUnzipXenServerPatchAction downloadAction = null;
+        private const int EllipsiseValueDownDescription = 50;
 
         public PatchingWizard_UploadPage()
         {
@@ -51,7 +53,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-
+            
             canUpload = true;
             canDownload = true;
             UpdateButtons();
@@ -59,14 +61,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (SelectedUpdateType == UpdateType.Existing)
                 _patch = SelectedExistingPatch;
 
-            if (direction == PageLoadedDirection.Forward)
+            if (direction == PageLoadedDirection.Forward)           
             {
+                flickerFreeListBox1.Items.Clear();
                 if (SelectedUpdateAlert != null && String.IsNullOrEmpty(SelectedNewPatch))
                 {
                     DownloadFile();
                 }
-                PrepareUploadActions();
-                TryUploading();
+                else
+                {
+                    PrepareUploadActions();
+                    TryUploading();
+                }
             }
         }
 
@@ -79,11 +85,22 @@ namespace XenAdmin.Wizards.PatchingWizard
             Uri address = new Uri(patchUri);
             string tempFile = Path.GetTempFileName();
 
-            var action = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Description, address, tempFile);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Continuous, false) { ShowCancel = true };
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile);          
 
-            dialog.ShowDialog();
-            SelectedNewPatch = action.PatchPath;
+            if (downloadAction != null)
+            {
+                downloadAction.Changed += singleAction_Changed;
+                downloadAction.Completed += singleAction_Completed;
+            }
+
+            downloadAction.RunAsync();
+
+            flickerFreeListBox1.Items.Clear();
+            flickerFreeListBox1.Items.Add(downloadAction);
+            flickerFreeListBox1.Refresh();
+            OnPageUpdated();
+
+            UpdateActionProgress(downloadAction);
         }
 
         public override void PageCancelled()
@@ -92,16 +109,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 CancelAction(action);
             }
+            if (downloadAction != null)
+            {
+                CancelAction(downloadAction);
+            }
         }
 
         public override bool EnableNext()
         {
-            return uploadActions.Values.All(action => action == null || action.Succeeded);
+            return uploadActions.Values.All(action => action == null || action.Succeeded) && (downloadAction == null || downloadAction.Succeeded);
         }
 
         public override bool EnablePrevious()
         {
-            return !canUpload || uploadActions.Values.All(action => action == null || action.IsCompleted);
+            return !canUpload || uploadActions.Values.All(action => action == null || action.IsCompleted) && (downloadAction == null || downloadAction.IsCompleted) ;
         }
 
         private Dictionary<Host, AsyncAction> uploadActions = new Dictionary<Host, AsyncAction>();
@@ -154,7 +175,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 uploadActions.Add(selectedServer, action);
             }
 
-            flickerFreeListBox1.Items.Clear();
             foreach (KeyValuePair<Host, AsyncAction> uploadAction in uploadActions)
             {
                 flickerFreeListBox1.Items.Add(uploadAction);
@@ -344,6 +364,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
                         AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
                     }
+                    if (action is DownloadAndUnzipXenServerPatchAction)
+                    {
+                        SelectedNewPatch = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
+                        PrepareUploadActions();
+                        TryUploading();
+                    }
                 }
             });
         }
@@ -367,7 +393,18 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         private void flickerFreeListBox1_DrawItem(object sender, DrawItemEventArgs e)
-        {
+        {            
+            if(e.Index >= 0 && (flickerFreeListBox1.Items[e.Index] is DownloadAndUnzipXenServerPatchAction)) 
+            {
+                DownloadAndUnzipXenServerPatchAction downAction = (DownloadAndUnzipXenServerPatchAction)flickerFreeListBox1.Items[e.Index];
+                drawActionText(Properties.Resources._000_Patch_h32bit_16, 
+                               downAction.Title, 
+                               GetActionDescription(downAction).Ellipsise(EllipsiseValueDownDescription), 
+                               GetTextColor(downAction), 
+                               e);
+                return;
+            }
+
             if (e.Index < 0 || !(flickerFreeListBox1.Items[e.Index] is KeyValuePair<Host, AsyncAction>))
                 return;
             var hostAndAction = (KeyValuePair<Host, AsyncAction>)flickerFreeListBox1.Items[e.Index];
@@ -382,12 +419,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             var poolOrHost = Helpers.GetPool(host.Connection) ?? (IXenObject)host;
 
             string text = action == null ? Messages.UPLOAD_PATCH_ALREADY_UPLOADED : GetActionDescription(action);
-            int width = Drawing.MeasureText(text, flickerFreeListBox1.Font).Width;
-            Color textColor = GetTextColor(action);
+            drawActionText(Images.GetImage16For(poolOrHost),poolOrHost.Name, text, GetTextColor(action), e);
+        }
 
-            e.Graphics.DrawImage(Images.GetImage16For(poolOrHost), e.Bounds.Left, e.Bounds.Top);
-            Drawing.DrawText(e.Graphics, poolOrHost.Name, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
-            Drawing.DrawText(e.Graphics, text, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), textColor, flickerFreeListBox1.BackColor);
+        private void drawActionText(Image icon, string actionTitle, string actionDescription, Color textColor,DrawItemEventArgs e)
+        {
+            int width = Drawing.MeasureText(actionDescription, flickerFreeListBox1.Font).Width;
+            e.Graphics.DrawImage(icon, e.Bounds.Left, e.Bounds.Top);
+            Drawing.DrawText(e.Graphics, actionTitle, flickerFreeListBox1.Font,
+                             new Rectangle(e.Bounds.Left + icon.Width, e.Bounds.Top, e.Bounds.Right - (width + icon.Width), e.Bounds.Height),
+                             flickerFreeListBox1.ForeColor,
+                             TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
+            Drawing.DrawText(e.Graphics, actionDescription, flickerFreeListBox1.Font,
+                             new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height),
+                             textColor, flickerFreeListBox1.BackColor);
         }
 
         private Color GetTextColor(AsyncAction action)
