@@ -183,7 +183,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return false;
 
             var action = new CallHomeAuthenticationAction(null, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
-                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName,
+                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, 
+                Registry.CallHomeUploadTokenDomainName, Registry.CallHomeProductKey, 
                 false, TokenExpiration, false);
 
             try

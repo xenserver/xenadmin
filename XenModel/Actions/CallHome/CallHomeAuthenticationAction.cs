@@ -61,7 +61,7 @@ namespace XenAdmin.Actions
         private readonly string uploadGrantTokenDomainName = "http://cis-daily.citrite.com";
         private readonly string uploadTokenDomainName = "http://cis-daily.citrite.com";
 
-        private const string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
+        private readonly string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
 
         private readonly string XenServerUsername;
         private readonly string XenServerPassword;
@@ -84,7 +84,7 @@ namespace XenAdmin.Actions
         }
 
         public CallHomeAuthenticationAction(Pool pool, string username, string password,
-            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
+            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, string productKey, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
             : this(pool, username, password, saveTokenAsSecret, tokenExpiration, suppressHistory)
         {
             if (!string.IsNullOrEmpty(identityTokenDomainName))
@@ -93,6 +93,8 @@ namespace XenAdmin.Actions
                 this.uploadGrantTokenDomainName = uploadGrantTokenDomainName;
             if (!string.IsNullOrEmpty(identityTokenDomainName))
                 this.uploadTokenDomainName = uploadTokenDomainName;
+            if (!string.IsNullOrEmpty(productKey))
+                this.productKey = productKey;
         }
 
         protected override void Run()
