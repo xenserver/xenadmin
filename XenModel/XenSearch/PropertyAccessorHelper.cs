@@ -103,7 +103,7 @@ namespace XenAdmin.XenSearch
             double free = MetricUpdater.GetValue(vm, "memory_internal_free");
             double total = MetricUpdater.GetValue(vm, "memory");
 
-            if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
+            if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free) || total < (free * Util.BINARY_KILO))
                 return Messages.HYPHEN;
 
             return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeStringWithoutUnits((total - (free * Util.BINARY_KILO))), Util.MemorySizeString(total));
