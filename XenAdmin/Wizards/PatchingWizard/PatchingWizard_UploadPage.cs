@@ -45,6 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _patch; }
         }
 
+        public List<string> AllDownloadedPatches = new List<string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
 
@@ -367,6 +368,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
                         SelectedNewPatch = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
+                        AllDownloadedPatches.Add(SelectedNewPatch);
                         PrepareUploadActions();
                         TryUploading();
                     }
