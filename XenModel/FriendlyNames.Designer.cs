@@ -2869,7 +2869,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operating mode.
+        ///   Looks up a localized string similar to Virtualization mode.
         /// </summary>
         public static string Label_VM_OperatingMode {
             get {

@@ -1767,7 +1767,7 @@
     <value>Disk {0} IO Write Throughput</value>
   </data>
   <data name="Label-VM.OperatingMode" xml:space="preserve">
-    <value>Operating mode</value>
+    <value>Virtualization mode</value>
   </data>
   <data name="Label-SR.SRTypes-lvmofcoe" xml:space="preserve">
     <value>FCoE</value>
