@@ -11911,10 +11911,10 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>This VM is not suspended.</value>
   </data>
   <data name="VM_OPERATING_MODE_HVM" xml:space="preserve">
-    <value>Fully virtualized (HVM)</value>
+    <value>Hardware-assisted Virtualization (HVM)</value>
   </data>
   <data name="VM_OPERATING_MODE_PV" xml:space="preserve">
-    <value>Paravirtualized (PV)</value>
+    <value>Paravirtualization (PV)</value>
   </data>
   <data name="VM_PAUSED" xml:space="preserve">
     <value>This VM is paused.</value>
