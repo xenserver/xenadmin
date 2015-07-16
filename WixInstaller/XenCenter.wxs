@@ -194,7 +194,6 @@
                             </Component>
                         </Directory>
                     </Directory>
-					<!-- removed temporarily
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
 							<Component Id="XenServerHealthCheck" Guid="{9D686BFC-B4FD-435F-AC74-0ACE29425095}">
 								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
@@ -228,7 +227,6 @@
 								/>
 							</Component>
 						</Directory>
-						-->
 				</Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder">
@@ -249,20 +247,23 @@
                 <RegistryValue Root="HKCU" Key="Software\Citrix\XenCenter" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
-        <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
+	
+        <Feature Id="MainProgram" Title="Citrix XenCenter" Description="Citrix XenCenter" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="TestResources" />
             <ComponentRef Id="SchemasFilesComponent" />
-			<!-- removed temporarily 
-			<ComponentRef Id="XenServerHealthCheck" /> 
-			-->
             <ComponentRef Id="ExternalToolsComponent" />
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
         </Feature>
-        <UIRef Id="My_WixUI_InstallDir" />
+		
+        <Feature Id="HealthCheckService" Title="Citrix XenServer Health Check Service" Description="Citrix XenServer Health Check Service" Display="expand" Level="2" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="source" Absent="allow" >
+             <ComponentRef Id="XenServerHealthCheck" /> 
+        </Feature>
+		
+        <UIRef Id="WixUI_FeatureTree" />
         <UIRef Id="WixUI_ErrorProgressText" />
         <Property Id="Install_All" Value="0" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />

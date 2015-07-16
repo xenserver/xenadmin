@@ -801,3 +801,93 @@ diff -ru wixlib/WixUI_zh-CN.wxl wixlib/WixUI_zh-CN.wxl
 +    <String Id="InstallDirDlgUsersAllRadioButton" Overridable="yes">所有用户(&amp;A)</String>
 +    <String Id="InstallDirDlgUsersOneRadioButton" Overridable="yes">只有我(&amp;J)</String>
  </WixLocalization>
+diff -ru wixlib/WixUI_FeatureTree.wxs wixlib/WixUI_FeatureTree.wxs
+--- wixlib/WixUI_FeatureTree.wxs	Tue Feb 21 12:03:46 2012
++++ wixlib/WixUI_FeatureTree.wxs	Thu Jul 16 11:36:58 2015
+@@ -36,6 +36,9 @@
+             <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+             <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+             <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
++            <TextStyle Id="WixUI_Font_Normal_OnImage" FaceName="Tahoma" Size="8" Red="0" Green="0" Blue="0" />
++            <TextStyle Id="WixUI_Font_Bigger_OnImage" FaceName="Tahoma" Size="12" Red="0" Green="0" Blue="0" />
++            <TextStyle Id="WixUI_Font_Title_OnImage" FaceName="Tahoma" Size="9" Bold="yes" Red="0" Green="0" Blue="0" />
+ 
+             <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+             <Property Id="WixUI_Mode" Value="FeatureTree" />
+@@ -51,14 +54,11 @@
+ 
+             <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+ 
+-            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg">NOT Installed</Publish>
++            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg">NOT Installed</Publish>
+             <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">Installed AND PATCH</Publish>
+ 
+-            <Publish Dialog="LicenseAgreementDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+-            <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg">LicenseAccepted = "1"</Publish>
+-
+             <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="1">Installed</Publish>
+-            <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg" Order="2">NOT Installed</Publish>
++            <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">NOT Installed</Publish>
+             <Publish Dialog="CustomizeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+ 
+             <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg" Order="1">NOT Installed OR WixUI_InstallMode = "Change"</Publish>
+diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
+--- wixlib/CustomizeDlg.wxs	Tue Feb 21 12:03:46 2012
++++ wixlib/CustomizeDlg.wxs	Tue Jul 14 15:54:33 2015
+@@ -1,4 +1,4 @@
+-<?xml version="1.0" encoding="UTF-8"?>
++<?xml version="1.0" encoding="utf-8"?>
+ <!--
+     Copyright (c) Microsoft Corporation.  All rights reserved.
+     
+@@ -14,8 +14,8 @@
+     <Fragment>
+         <UI>
+             <Dialog Id="CustomizeDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
+-                <Control Id="Tree" Type="SelectionTree" X="25" Y="85" Width="175" Height="115" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
+-                <Control Id="Browse" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
++                <Control Id="Tree" Type="SelectionTree" X="20" Y="75" Width="200" Height="58" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
++                <Control Id="Browse" Type="PushButton" X="294" Y="142" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
+                     <Publish Event="SelectionBrowse" Value="BrowseDlg">1</Publish>
+                     <Condition Action="hide">Installed</Condition>
+                     <Condition Action="disable">Installed</Condition>
+@@ -36,26 +36,33 @@
+                     <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                 </Control>
+                 <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.CustomizeDlgBannerBitmap)" />
+-                <Control Id="Text" Type="Text" X="25" Y="55" Width="320" Height="20" Text="!(loc.CustomizeDlgText)" />
++                <Control Id="Text" Type="Text" X="20" Y="55" Width="320" Height="20" Text="!(loc.CustomizeDlgText)" />
+                 <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+                 <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+                 <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgDescription)" />
+                 <Control Id="Title" Type="Text" X="15" Y="6" Width="210" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgTitle)" />
+-                <Control Id="Box" Type="GroupBox" X="210" Y="81" Width="150" Height="118" />
+-                <Control Id="ItemDescription" Type="Text" X="215" Y="90" Width="131" Height="50" Text="!(loc.CustomizeDlgItemDescription)">
++                <Control Id="Box" Type="GroupBox" X="222" Y="70" Width="138" Height="64" />
++                <Control Id="ItemDescription" Type="Text" X="228" Y="82" Width="128" Height="20" Text="!(loc.CustomizeDlgItemDescription)">
+                     <Subscribe Event="SelectionDescription" Attribute="Text" />
+                 </Control>
+-                <Control Id="ItemSize" Type="Text" X="215" Y="140" Width="131" Height="50" Text="!(loc.CustomizeDlgItemSize)">
++                <Control Id="ItemSize" Type="Text" X="228" Y="105" Width="128" Height="26" Text="!(loc.CustomizeDlgItemSize)">
+                     <Subscribe Event="SelectionSize" Attribute="Text" />
+                 </Control>
+-                <Control Id="Location" Type="Text" X="90" Y="210" Width="200" Height="20" Text="!(loc.CustomizeDlgLocation)">
++                <Control Id="Location" Type="Text" X="90" Y="146" Width="200" Height="20" Text="!(loc.CustomizeDlgLocation)">
+                     <Subscribe Event="SelectionPath" Attribute="Text" />
+                     <Subscribe Event="SelectionPathOn" Attribute="Visible" />
+                     <Condition Action="hide">Installed</Condition>
+                 </Control>
+-                <Control Id="LocationLabel" Type="Text" X="25" Y="210" Width="65" Height="10" Text="!(loc.CustomizeDlgLocationLabel)">
++                <Control Id="LocationLabel" Type="Text" X="20" Y="146" Width="65" Height="10" Text="!(loc.CustomizeDlgLocationLabel)">
+                     <Subscribe Event="SelectionPathOn" Attribute="Visible" />
+                     <Condition Action="hide">Installed</Condition>
++                </Control>
++                <Control Id="UsersLabel" Type="Text" X="20" Y="169" Width="290" Height="15" Text="!(loc.InstallDirDlgUsersLabel)" />
++                <Control Id="UsersRadioButtonGroupControl" Type="RadioButtonGroup" X="15" Y="184" Width="290" Height="37" Property="Install_All">
++                    <RadioButtonGroup Property="Install_All">
++                        <RadioButton Value="1" X="20" Y="0" Width="260" Height="20" Text="!(loc.InstallDirDlgUsersAllRadioButton)" />
++                        <RadioButton Value="0" X="20" Y="20" Width="260" Height="20" Text="!(loc.InstallDirDlgUsersOneRadioButton)" />
++                    </RadioButtonGroup>
+                 </Control>
+             </Dialog>
+         </UI>
