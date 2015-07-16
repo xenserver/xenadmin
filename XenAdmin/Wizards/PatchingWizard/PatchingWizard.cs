@@ -250,6 +250,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 
+            RemoveDownloadedPatches();
+
             base.OnCancel();
         }
 
@@ -263,6 +265,14 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             List<AsyncAction> subActions = GetRemoveVdiActions();
             RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+        }
+
+        private void RemoveDownloadedPatches()
+        {
+            foreach (string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches)
+            {
+                File.Delete(downloadedPatch);
+            }
         }
 
         protected override void FinishWizard()
@@ -279,10 +289,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (PatchingWizard_UploadPage.AllCreatedSuppPackVdis != null)
                 RemoveTemporaryVdis();
 
-            if (PatchingWizard_SelectPatchPage.SelectedUpdateAlert != null)
-            {
-                File.Delete(PatchingWizard_UploadPage.SelectedNewPatch);
-            }
+            RemoveDownloadedPatches();
 
             base.FinishWizard();
         }
