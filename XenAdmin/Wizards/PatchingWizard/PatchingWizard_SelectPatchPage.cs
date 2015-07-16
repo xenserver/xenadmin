@@ -386,7 +386,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private class PatchGridViewRow : DataGridViewExRow, IEquatable<PatchGridViewRow>
         {
-            private readonly Pool_patch _patch;
             private readonly Alert _alert;
 
             private bool expanded = false;
