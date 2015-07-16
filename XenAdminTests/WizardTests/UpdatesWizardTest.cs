@@ -63,11 +63,23 @@ namespace XenAdminTests.WizardTests.updatesState_xml
             {
                 DataGridView dataGrid = TestUtils.GetDataGridView(wizard, "PatchingWizard_SelectPatchPage.dataGridViewPatches");
                 MW(dataGrid.Select);
-                MW(() => dataGrid.Rows[dataGrid.Rows.Count - 1].Selected = true);
+                if (dataGrid.Rows.Count > 0) 
+                    MW(() => dataGrid.Rows[dataGrid.Rows.Count - 1].Selected = true);
+                else
+                {
+                    MW(TestUtils.GetRadioButton(wizard, "PatchingWizard_SelectPatchPage.selectFromDiskRadioButton").Select);
+                    MW(() => TestUtils.GetTextBox(wizard, "PatchingWizard_SelectPatchPage.fileNameTextBox").Text = 
+                        TestResource("succeed.xsupdate"));
+                }
             }
             else if (pageName == "Select Servers")
             {
                 MW(TestUtils.GetButton(wizard, "PatchingWizard_SelectServers.buttonSelectAll").PerformClick);
+            }
+            else if (pageName == "Upload")
+            {
+                while (!btnNext.Enabled)
+                    Thread.Sleep(1000);
             }
             else if (pageName == "Prechecks")
             {
