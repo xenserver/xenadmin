@@ -65,7 +65,7 @@ namespace XenAdmin.Actions
                 return EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { Host, username, passwordSecret }));
         }
 
-        private const string CALLHOMESERVICENAME = "XenHealthSvc";
+        private const string CALLHOMESERVICENAME = "XenServerHealthCheck";
 
         protected override void Run()
         {
