@@ -54,7 +54,7 @@ namespace XenServerHealthCheck
                     "XenServerHealthCheck", "XenServerHealthCheckLog");
             }
 
-            XenAdminConfigManager.Provider = new WinformsXenAdminConfigProvider();
+            XenAdminConfigManager.Provider = new XenServerHealthCheckConfigProvider();
         }
 
         private static void initConfig()

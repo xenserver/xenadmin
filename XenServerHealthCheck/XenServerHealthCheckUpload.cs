@@ -173,11 +173,11 @@ namespace XenServerHealthCheck
 
             // Start to upload zip file.
             log.InfoFormat("Upload ID: {0}", uploadUuid);
-            StringBuilder url = new StringBuilder(UPLOAD_URL + "upload_raw_chunk/?id=" + uploadUuid);
 
             long offset = 0;
             while (offset < size)
             {
+                StringBuilder url = new StringBuilder(UPLOAD_URL + "upload_raw_chunk/?id=" + uploadUuid);
                 url.Append(String.Format("&offset={0}", offset));
                 long remainingSize = size - offset;
                 long thisChunkSize = (remainingSize > CHUNK_SIZE) ? CHUNK_SIZE : remainingSize;
