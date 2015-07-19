@@ -34,7 +34,7 @@ set -eu
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-WGET_OPT="-q -N"
+WGET_OPT="-q -N --timestamp"
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -118,8 +118,9 @@ wget ${WGET_OPT} ${WEB_XE_PHASE_1}/manifest -O ${SCRATCH_DIR}/xe-phase-1-manifes
 wget ${WGET_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
-mkdir_clean ${REPO}/NUnit && wget ${WEB_LIB}/{nunit.framework.dll,Moq_dotnet4.dll} -P ${REPO}/NUnit
-mv ${REPO}/NUnit/Moq_dotnet4.dll ${REPO}/NUnit/Moq.dll
+mkdir_clean ${REPO}/NUnit
+wget ${WGET_OPT} ${WEB_LIB}/nunit.framework.dll -P ${REPO}/NUnit
+wget ${WGET_OPT} ${WEB_LIB}/Moq_dotnet4.dll --output-document ${REPO}/NUnit/Moq.dll
 wget ${WGET_OPT} ${WEB_LIB}/{wix3.5.2519.0-sources.zip,wix3.5.2519.0-binaries.zip} -P ${SCRATCH_DIR}
 
 #set version numbers and brand info
@@ -187,7 +188,7 @@ version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvf
 
 run_msbuild()
 {
-  /cygdrive/c/WINDOWS/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe /p:Configuration=Release /p:TargetFrameworkVersion=v4.0
+  MSBuild.exe /nologo /verbosity:quiet /p:Configuration=Release /p:TargetFrameworkVersion=v4.0
 }
 
 run_vcbuild()
