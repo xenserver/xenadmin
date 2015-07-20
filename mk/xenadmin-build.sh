@@ -188,19 +188,14 @@ version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvf
 
 run_msbuild()
 {
-  MSBuild.exe /nologo /verbosity:quiet /p:Configuration=Release /p:TargetFrameworkVersion=v4.0
+  MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.0 /p:VisualStudioVersion=12.0
 }
 
-run_vcbuild()
-{
-  "/cygdrive/c/Program Files/Microsoft Visual Studio 9.0/VC/VCPackages/VCBuild.exe" $1 "Release|Win32"
-}
-
+cd ${REPO}/splash     && run_msbuild "Splash.vcxproj"
+cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
 cd ${REPO}/XenAdmin   && run_msbuild
 cd ${REPO}/Xe         && run_msbuild
 cd ${REPO}/xva_verify && run_msbuild
-cd ${REPO}/splash     && run_vcbuild "Splash.vcproj"
-cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
 cd ${REPO}/VNCControl && run_msbuild
 cd ${REPO}/XenServerHealthCheck && run_msbuild
 
