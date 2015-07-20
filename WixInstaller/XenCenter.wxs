@@ -259,7 +259,7 @@
             <ComponentRef Id="ApplicationShortcut" />
         </Feature>
 		
-        <Feature Id="HealthCheckService" Title="Citrix XenServer Health Check Service" Description="Citrix XenServer Health Check Service" Display="expand" Level="2" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="source" Absent="allow" >
+        <Feature Id="HealthCheckService" Title="Citrix XenServer Health Check Service" Description="Citrix XenServer Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
              <ComponentRef Id="XenServerHealthCheck" /> 
         </Feature>
 		
