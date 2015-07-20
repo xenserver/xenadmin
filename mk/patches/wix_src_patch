@@ -831,6 +831,22 @@ diff -ru wixlib/WixUI_FeatureTree.wxs wixlib/WixUI_FeatureTree.wxs
              <Publish Dialog="CustomizeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
  
              <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg" Order="1">NOT Installed OR WixUI_InstallMode = "Change"</Publish>
+@@ -67,10 +67,14 @@
+ 
+             <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+ 
+-            <Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog" Value="CustomizeDlg">1</Publish>
++            <Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog" Value="CustomizeStdDlg">1</Publish>
+             <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+             <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+             <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
++			
++			<Publish Dialog="CustomizeStdDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
++			<Publish Dialog="CustomizeStdDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
++			
+         </UI>
+ 
+         <UIRef Id="WixUI_Common" />
 diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
 --- wixlib/CustomizeDlg.wxs	Tue Feb 21 12:03:46 2012
 +++ wixlib/CustomizeDlg.wxs	Tue Jul 14 15:54:33 2015
@@ -891,3 +907,15 @@ diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
                  </Control>
              </Dialog>
          </UI>
+diff -ru wixlib/CustomizeStdDlg.wxs wixlib/CustomizeStdDlg.wxs
+--- wixlib/CustomizeStdDlg.wxs	Tue Feb 21 12:03:46 2012
++++ wixlib/CustomizeStdDlg.wxs	Tue Jul 20 20:54:33 2015
+@@ -13,7 +13,7 @@
+ <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+     <Fragment>
+         <UI>
+-            <Dialog Id="CustomizeDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
++            <Dialog Id="CustomizeStdDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
+                 <Control Id="Tree" Type="SelectionTree" X="25" Y="85" Width="175" Height="115" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
+                 <Control Id="Browse" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
+                     <Publish Event="SelectionBrowse" Value="BrowseDlg">1</Publish>
