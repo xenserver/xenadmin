@@ -390,45 +390,31 @@ namespace XenAdmin.TabPages
             if (string.IsNullOrEmpty(patchUri))
                 return;
 
-            Uri address = new Uri(patchUri);
-            string tempFile = Path.GetTempFileName();
-
-            var action = new DownloadAndUnzipXenServerPatchAction(patchAlert.Description, address, tempFile);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Continuous, false) { ShowCancel = true };
-
-            action.Completed += s =>
+            Program.Invoke(Program.MainWindow, () =>
             {
-                if (action.Succeeded)
-                {
-                    Program.Invoke(Program.MainWindow, () =>
-                    {
-                        var wizard = new PatchingWizard();
-                        wizard.Show();
-                        wizard.NextStep();
-                        wizard.AddFile(action.PatchPath);
-                        wizard.NextStep();
+                var wizard = new PatchingWizard();
+                wizard.Show();
+                wizard.NextStep();
+                wizard.AddAlert(patchAlert);
+                wizard.NextStep();
 
-                        var hosts = patchAlert.DistinctHosts;
-                        if (hosts.Count > 0)
-                        {
-                            wizard.SelectServers(hosts);
-                        }
-                        else
-                        {
-                            string disconnectedServerNames =
-                                clickedRow.Cells[ColumnLocation.Index].Value.ToString();
-
-                            new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                              string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
-                                                                            disconnectedServerNames),
-                                                              Messages.UPDATES_WIZARD)).ShowDialog(this);
-                        }
-                    });
+                var hosts = patchAlert.DistinctHosts;
+                if (hosts.Count > 0)
+                {                          
+                    wizard.SelectServers(hosts);
                 }
-            };
+                else
+                {
+                    string disconnectedServerNames =
+                           clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
-            dialog.Show(this);
+                    new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                                      string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
+                                                                   disconnectedServerNames),
+                                                      Messages.UPDATES_WIZARD)).ShowDialog(this);
+                 }
+            });
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)

@@ -25769,6 +25769,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update not applicable.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Servers.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TEXT {

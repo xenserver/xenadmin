@@ -40,6 +40,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenAPI;
+using XenAdmin.Alerts;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -54,6 +55,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private const int UNCHECKED = 0;
         private const int CHECKED = 1;
         private const int INDETERMINATE = 2;
+
+        public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
 
         public PatchingWizard_SelectServers()
         {
@@ -113,7 +116,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, hasPool));
                         EnabledRow(host, SelectedUpdateType, index);
-                    }
+                    }                  
                 }
 
                 // restore server selection
@@ -125,11 +128,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                 throw;//better throw an exception rather than closing the wizard suddenly and silently
             }
         }
-
+        
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
-
+            List<Host> selectedHosts = null;
+            if (SelectedUpdateAlert != null)
+            {
+                selectedHosts = SelectedUpdateAlert.DistinctHosts;
+            }
             if(type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;
@@ -142,19 +149,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.NewOem:
                     if (!host.isOEM)
                         row.Enabled = false;
+                    disableNotApplicableHosts(row, selectedHosts, host);
                     break;
                 case UpdateType.NewRetail:
-                    if (host.isOEM)
-                        row.Enabled = false;
-                    break;
                 case UpdateType.Existing:
                     if (host.isOEM)
                         row.Enabled = false;
-                    if (Patch.IsAppliedTo(host,ConnectionsManager.XenConnectionsCopy))
-                    {
-                        row.Enabled = false;
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
-                    }
+                    disableNotApplicableHosts(row, selectedHosts, host);
                     break;
                 case UpdateType.NewSuppPack:
                     if (!host.CanInstallSuppPack)
@@ -164,6 +165,36 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                     break;
             }
+        }
+
+        private void disableNotApplicableHosts(PatchingHostsDataGridViewRow row, List<Host> selectedHosts, Host host) 
+        {
+            if (selectedHosts != null && !selectedHosts.Contains(host))
+            {
+                if (SelectedUpdateAlert != null && isPatchApplied(SelectedUpdateAlert.Name, host))
+                {
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                }
+                else
+                {
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                }
+
+                row.Enabled = false;
+            }
+        }
+
+        private bool isPatchApplied(string name, Host host) 
+        {
+            List<Pool_patch> hostPatches = host.AppliedPatches();
+            foreach (Pool_patch patch in hostPatches)
+            {
+                if (patch.Name.Equals(name))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)

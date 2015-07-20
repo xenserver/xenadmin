@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     public partial class PatchingWizard_SelectPatchPage : XenTabPage
     {
         private bool CheckForUpdatesInProgress;
-        public Alert SelectedUpdateAlert;
+        public XenServerPatchAlert SelectedUpdateAlert;
         
         public PatchingWizard_SelectPatchPage()
         {
@@ -69,6 +69,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                 CheckForUpdatesInProgress = false;
                 OnPageUpdated();
             });
+        }
+
+        public void SelectDownloadAlert(XenServerPatchAlert alert)
+        {
+            downloadUpdateRadioButton.Checked = true;
+            foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
+            {
+                if(row.UpdateAlert.Equals(alert))
+                {
+                    row.Selected = true;
+                }
+            }
         }
 
         public override string Text
@@ -136,7 +148,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
                 SelectedUpdateAlert = downloadUpdateRadioButton.Checked
-                                             ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                                             ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
                                              : null;
 
                 if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
@@ -180,12 +192,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                     updates.Reverse();
             }
            foreach (Alert alert in updates)
-           {   
-               PatchGridViewRow row = new PatchGridViewRow(alert);
-               if (!dataGridViewPatches.Rows.Contains(row))
+           {
+               if (alert is XenServerPatchAlert)
                {
-                   dataGridViewPatches.Rows.Add(row);
-               }                
+                   PatchGridViewRow row = new PatchGridViewRow(alert);
+                   if (!dataGridViewPatches.Rows.Contains(row))
+                   {
+                       dataGridViewPatches.Rows.Add(row);
+                   }
+               }
             }
         }
         
@@ -201,12 +216,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
             if (downloadUpdateRadioButton.Checked)
-            {
+            {                
                 if (dataGridViewPatches.SelectedRows.Count == 1)
                 {
                     DataGridViewExRow row = (DataGridViewExRow)dataGridViewPatches.SelectedRows[0];
                     if (row.Enabled)
+                    {
                         return true;
+                    }
                 }
             }
             else if (selectFromDiskRadioButton.Checked)

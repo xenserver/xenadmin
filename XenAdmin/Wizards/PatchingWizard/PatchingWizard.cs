@@ -37,6 +37,7 @@ using XenAdmin.Dialogs;
 using XenAPI;
 using System.Linq;
 using System.IO;
+using XenAdmin.Alerts;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -77,6 +78,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             AddPage(PatchingWizard_PatchingPage);
         }
 
+        public void AddAlert(XenServerPatchAlert alert)
+        {
+            PatchingWizard_SelectPatchPage.SelectDownloadAlert(alert);
+            PatchingWizard_SelectPatchPage.SelectedUpdateAlert = alert;
+            PatchingWizard_SelectServers.SelectedUpdateAlert = alert;
+            PatchingWizard_UploadPage.SelectedUpdateAlert = alert;
+        }
+
         public void AddFile(string path)
         {
             PatchingWizard_SelectPatchPage.AddFile(path);
@@ -104,6 +113,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
+                PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
@@ -111,6 +121,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedUpdateAlert = alertPatch; 
 
                 PatchingWizard_ModePage.Patch = existPatch;
+                PatchingWizard_ModePage.SelectedUpdateAlert = alertPatch;
 
                 PatchingWizard_PrecheckPage.Patch = existPatch;
                 PatchingWizard_PatchingPage.Patch = existPatch;
@@ -269,7 +280,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RemoveDownloadedPatches()
         {
-            foreach (string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches)
+            foreach(string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches.Values)
             {
                 File.Delete(downloadedPatch);
             }
