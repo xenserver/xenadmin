@@ -1266,7 +1266,10 @@ namespace XenAdmin.TabPages
                 s.AddEntry(Messages.TYPE, sr.FriendlyTypeName);
 
                 if (sr.content_type != SR.Content_Type_ISO && sr.GetSRType(false) != SR.SRTypes.udev)
+                {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
+                    s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING);
+                }
 
                 if (sr.GetScsiID() != null)
                     s.AddEntry(FriendlyName("SR.scsiid"), sr.GetScsiID() ?? Messages.UNKNOWN);
