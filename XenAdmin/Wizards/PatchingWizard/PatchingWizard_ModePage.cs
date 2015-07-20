@@ -40,11 +40,14 @@ using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
+using XenAdmin.Alerts;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_ModePage : XenTabPage
     {
+        public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
+
         public PatchingWizard_ModePage()
         {
             InitializeComponent();
@@ -107,6 +110,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     AutomaticRadioButton.Checked = true;
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
                     break;
+            }
+
+            if (SelectedUpdateAlert == null)
+            {
+                removeUpdateFileCheckBox.Checked = false;
+                removeUpdateFileCheckBox.Enabled = false;
             }
         }
 
