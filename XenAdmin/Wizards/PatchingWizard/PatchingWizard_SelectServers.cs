@@ -58,6 +58,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
 
+        public XenServerPatchAlert FileFromDiskAlert { private get; set; }
+
         public PatchingWizard_SelectServers()
         {
             InitializeComponent();
@@ -137,6 +139,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 selectedHosts = SelectedUpdateAlert.DistinctHosts;
             }
+            else if(FileFromDiskAlert != null) 
+            {
+                selectedHosts = FileFromDiskAlert.DistinctHosts;
+            }
             if(type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;
@@ -171,16 +177,28 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (selectedHosts != null && !selectedHosts.Contains(host))
             {
-                if (SelectedUpdateAlert != null && isPatchApplied(SelectedUpdateAlert.Name, host))
+                string alertName = null;
+                if (SelectedUpdateAlert != null)
                 {
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                    alertName = SelectedUpdateAlert.Name;
                 }
-                else
+                else if (FileFromDiskAlert != null)
                 {
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                    alertName = FileFromDiskAlert.Name;
                 }
 
-                row.Enabled = false;
+                if (alertName != null)
+                {
+                    if (isPatchApplied(alertName, host))
+                    {
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                    }
+                    else
+                    {
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                    }
+                    row.Enabled = false;
+                }
             }
         }
 

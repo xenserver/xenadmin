@@ -107,6 +107,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var newPatch = PatchingWizard_SelectPatchPage.SelectedNewPatch;
                 var existPatch = PatchingWizard_SelectPatchPage.SelectedExistingPatch;
                 var alertPatch = PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
+                var fileFromDiskAlertPatch = PatchingWizard_SelectPatchPage.FileFromDiskAlert;
 
                 DisablePage(PatchingWizard_PrecheckPage, updateType == UpdateType.NewOem);
                 DisablePage(PatchingWizard_UploadPage, updateType == UpdateType.NewOem);
@@ -114,6 +115,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
+                PatchingWizard_SelectServers.FileFromDiskAlert = fileFromDiskAlertPatch;
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;

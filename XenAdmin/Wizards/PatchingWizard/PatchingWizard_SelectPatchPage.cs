@@ -52,6 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         private bool CheckForUpdatesInProgress;
         public XenServerPatchAlert SelectedUpdateAlert;
+        public XenServerPatchAlert FileFromDiskAlert;
         
         public PatchingWizard_SelectPatchPage()
         {
@@ -121,6 +122,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Forward)
             {
+                var fileName = fileNameTextBox.Text;
                 if (downloadUpdateRadioButton.Checked)
                 {
                     if (dataGridViewPatches.SelectedRows.Count > 0 && ((PatchGridViewRow)(dataGridViewPatches.SelectedRows[0])).UpdateAlert.WebPageLabel.EndsWith(".xsoem"))
@@ -133,8 +135,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }                   
                 }
                 else
-                {
-                    var fileName = fileNameTextBox.Text;
+                {                    
                     if (isValidFile())
                     {
                         if (fileName.EndsWith(".xsoem"))
@@ -150,6 +151,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 SelectedUpdateAlert = downloadUpdateRadioButton.Checked
                                              ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
                                              : null;
+                FileFromDiskAlert = selectFromDiskRadioButton.Checked
+                                             ? GetAlertFromFileName(fileName)
+                                             : null;
+
 
                 if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
                 {
@@ -165,6 +170,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
             base.PageLeave(direction, ref cancel);
+        }
+
+        private XenServerPatchAlert GetAlertFromFileName(string fileName)
+        {
+            foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
+            {
+                if (row.UpdateAlert.Name == Path.GetFileNameWithoutExtension(fileName))
+                {
+                    return (XenServerPatchAlert)row.UpdateAlert;
+                }
+            }
+            return null;
         }
 
         private void PageLeaveCancelled(string message)
