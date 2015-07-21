@@ -377,7 +377,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
                         SelectedNewPatch = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
-                        AllDownloadedPatches.Add((SelectedUpdateAlert as XenServerPatchAlert).Patch.Uuid, SelectedNewPatch);
+                        if (SelectedUpdateAlert is XenServerPatchAlert && (SelectedUpdateAlert as XenServerPatchAlert).Patch != null)
+                        {
+                            AllDownloadedPatches.Add((SelectedUpdateAlert as XenServerPatchAlert).Patch.Uuid, SelectedNewPatch);
+                        }
                         _patch = null;
                         PrepareUploadActions();
                         TryUploading();
