@@ -199,7 +199,6 @@ $MSBUILD xe/Xe.csproj
 $MSBUILD VNCControl/VNCControl.sln
 SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
 $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
-exit
 #cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
 
 #sign (splash has already been signed through a post-build event)
@@ -380,6 +379,8 @@ cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
+# next line fixes the weird build with msbuild
+cp -f "${REPO}/XenAdmin/bin/Release/splash.pdb" "${REPO}/XenAdmin/bin/Release/XenCenter.pdb"
 cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006}.xsupdate \
    ${REPO}/XenAdmin/bin/Release/{XS60E001-src-pkgs,XS62E006-src-pkgs}.tar.gz \
    ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,XenCenter.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
