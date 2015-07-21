@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _patch; }
         }
 
-        public List<string> AllDownloadedPatches = new List<string>();
+        public Dictionary<string, string> AllDownloadedPatches = new Dictionary<string, string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
 
@@ -65,12 +65,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (direction == PageLoadedDirection.Forward)           
             {
                 flickerFreeListBox1.Items.Clear();
-                if (SelectedUpdateAlert != null && String.IsNullOrEmpty(SelectedNewPatch))
+                var selectedPatch = SelectedUpdateAlert != null ? ((XenServerPatchAlert)SelectedUpdateAlert).Patch : null;
+                if (selectedPatch != null && String.IsNullOrEmpty(SelectedNewPatch) &&
+                    (!AllDownloadedPatches.Any(kvp => kvp.Key == selectedPatch.Uuid)
+                        || String.IsNullOrEmpty(AllDownloadedPatches[selectedPatch.Uuid]) 
+                        || !File.Exists(AllDownloadedPatches[selectedPatch.Uuid])))
                 {
                     DownloadFile();
                 }
                 else
                 {
+                    if (selectedPatch != null && AllDownloadedPatches.ContainsKey(selectedPatch.Uuid))
+                        SelectedNewPatch = AllDownloadedPatches[selectedPatch.Uuid];
                     PrepareUploadActions();
                     TryUploading();
                 }
@@ -150,10 +156,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 switch (SelectedUpdateType)
                 {
                     case UpdateType.NewRetail:
-                        action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatch, true);
+                        if (_patch == null || !PatchExistsOnPool(_patch, selectedServer))
+                        {
+                            action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatch, true);
+                        }
                         break;
                     case UpdateType.Existing:
-                        if (!PatchExistsOnPool(SelectedExistingPatch, selectedServer))
+                        if (!PatchExistsOnPool(_patch, selectedServer))
                         {
                             //Download patch from server Upload in the selected server
                             action = new CopyPatchFromHostToOther(SelectedExistingPatch.Connection, selectedServer,
@@ -368,7 +377,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
                         SelectedNewPatch = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
-                        AllDownloadedPatches.Add(SelectedNewPatch);
+                        if (SelectedUpdateAlert is XenServerPatchAlert && (SelectedUpdateAlert as XenServerPatchAlert).Patch != null)
+                        {
+                            AllDownloadedPatches.Add((SelectedUpdateAlert as XenServerPatchAlert).Patch.Uuid, SelectedNewPatch);
+                        }
+                        _patch = null;
                         PrepareUploadActions();
                         TryUploading();
                     }
