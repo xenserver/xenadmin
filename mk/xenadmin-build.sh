@@ -191,8 +191,13 @@ run_msbuild()
   MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.0 /p:VisualStudioVersion=12.0
 }
 
-cd ${REPO} && run_msbuild XenAdmin.sln
+cd ${REPO}/splash     && run_msbuild "Splash.vcxproj"
 cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
+cd ${REPO}/XenAdmin   && run_msbuild
+cd ${REPO}/Xe         && run_msbuild
+cd ${REPO}/xva_verify && run_msbuild
+cd ${REPO}/VNCControl && run_msbuild
+cd ${REPO}/XenServerHealthCheck && run_msbuild
 
 #sign (splash has already been signed through a post-build event)
 for file in XenCenter.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
