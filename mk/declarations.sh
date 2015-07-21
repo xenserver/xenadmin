@@ -90,6 +90,11 @@ then
     fi
 
 	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
+	if [[ $XS_BRANCH == *"/"* ]]
+        then
+            XS_BRANCH="trunk"
+            echo "Failed to detect XS_BRANCH we will fallback to `trunk`."
+        fi
 else
 	if [ -z "${MERCURIAL_REVISION+xxx}" ]
 	then 
