@@ -177,19 +177,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (selectedHosts != null && !selectedHosts.Contains(host))
             {
-                string alertName = null;
+                string alertUuid = null;
                 if (SelectedUpdateAlert != null)
                 {
-                    alertName = SelectedUpdateAlert.Name;
+                    alertUuid = SelectedUpdateAlert.uuid;
                 }
                 else if (FileFromDiskAlert != null)
                 {
-                    alertName = FileFromDiskAlert.Name;
+                    alertUuid = FileFromDiskAlert.uuid;
                 }
 
-                if (alertName != null)
+                if (alertUuid != null)
                 {
-                    if (isPatchApplied(alertName, host))
+                    if (isPatchApplied(alertUuid, host))
                     {
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
                     }
@@ -202,12 +202,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private bool isPatchApplied(string name, Host host) 
+        private bool isPatchApplied(string uuid, Host host) 
         {
             List<Pool_patch> hostPatches = host.AppliedPatches();
             foreach (Pool_patch patch in hostPatches)
             {
-                if (patch.Name.Equals(name))
+                if (patch.uuid.Equals(uuid))
                 {
                     return true;
                 }
