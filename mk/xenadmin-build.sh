@@ -34,7 +34,9 @@ set -eu
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-WGET_OPT="-q -N --timestamp"
+#if [ -z "$DEBUG" ]
+#WGET_OPT="-q -N --timestamp"
+WGET_OPT="-N --timestamp"
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -59,7 +61,7 @@ fi
 CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
 
 #bring in version and branding info from latest xe-phase-1
-wget ${WGET_OPT} ${WEB_XE_PHASE_1}/globals -P ${SCRATCH_DIR}
+wget ${WGET_OPT} -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/globals"
 BRAND_CONSOLE=$(cat ${SCRATCH_DIR}/globals | grep -w BRAND_CONSOLE | sed -e 's/BRAND_CONSOLE=//g' -e 's/"//g')
 COMPANY_NAME_LEGAL=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_LEGAL | sed -e 's/COMPANY_NAME_LEGAL=//g' -e 's/"//g')
 COMPANY_NAME_SHORT=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_SHORT | sed -e 's/COMPANY_NAME_SHORT=//g' -e 's/"//g')
@@ -94,34 +96,36 @@ DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
 MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx40_Full_setup
 PUTTY_DIR=${REPO}/putty
 
-wget ${WGET_OPT} ${WEB_DOTNET}/manifest -O ${SCRATCH_DIR}/dotnet-packages-manifest
-mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll -P ${XMLRPC_DIR}
-mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/log4net.dll -P ${LOG4NET_DIR}
-mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/ICSharpCode.SharpZipLib.dll -P ${SHARPZIPLIB_DIR}
-mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/Ionic.Zip.dll -P ${DOTNETZIP_DIR}
-mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/DiscUtils.dll -P ${DISCUTILS_DIR}
-mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/dotNetFx40_Full_setup.exe -P ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
-mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} ${WEB_DOTNET}/putty.exe -P ${PUTTY_DIR}
+set -ex
+wget ${WGET_OPT} -O "${SCRATCH_DIR}/dotnet-packages-manifest" "${WEB_DOTNET}/manifest"
+mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll
+mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/log4net.dll
+mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/ICSharpCode.SharpZipLib.dll
+mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/Ionic.Zip.dll
+mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/DiscUtils.dll
+mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} -P "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "${WEB_DOTNET}/dotNetFx40_Full_setup.exe"
+mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/putty.exe"
 
+echo bbb
 #temporarily disabling signing
-#wget ${WGET_OPT} ${WEB_DOTNET}/sign.bat -P ${REPO} && chmod a+x ${REPO}/sign.bat
+#wget ${WGET_OPT} -P "${REPO}" "${WEB_DOTNET}/sign.bat" && chmod a+x ${REPO}/sign.bat
 echo @echo signing disabled > ${REPO}/sign.bat && chmod a+x ${REPO}/sign.bat
 
 #bring in stuff from xencenter-ovf latest xe-phase-1
-wget ${WGET_OPT} ${WEB_XE_PHASE_1}/XenCenterOVF.zip -P ${SCRATCH_DIR}
+wget ${WGET_OPT} -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/XenCenterOVF.zip"
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 
 #bring manifest from latest xe-phase-1
-wget ${WGET_OPT} ${WEB_XE_PHASE_1}/manifest -O ${SCRATCH_DIR}/xe-phase-1-manifest
+wget ${WGET_OPT} -O ${SCRATCH_DIR}/xe-phase-1-manifest "${WEB_XE_PHASE_1}/manifest"
 
 #bring XenServer.NET from latest xe-phase-2
-wget ${WGET_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
+wget ${WGET_OPT} -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit
-wget ${WGET_OPT} ${WEB_LIB}/nunit.framework.dll -P ${REPO}/NUnit
-wget ${WGET_OPT} ${WEB_LIB}/Moq_dotnet4.dll --output-document ${REPO}/NUnit/Moq.dll
-wget ${WGET_OPT} ${WEB_LIB}/{wix3.5.2519.0-sources.zip,wix3.5.2519.0-binaries.zip} -P ${SCRATCH_DIR}
+wget ${WGET_OPT} -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
+wget ${WGET_OPT} -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
+wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix3.5.2519.0-sources.zip,wix3.5.2519.0-binaries.zip}
 
 #set version numbers and brand info
 
@@ -186,13 +190,17 @@ version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvf
 
 #build
 
-run_msbuild()
-{
-  MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.0 /p:VisualStudioVersion=12.0
-}
+MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.0 /p:VisualStudioVersion=12.0"
 
-cd ${REPO} && run_msbuild XenAdmin.sln
-cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
+
+cd ${REPO}
+$MSBUILD XenAdmin.sln
+$MSBUILD xe/Xe.csproj
+$MSBUILD VNCControl/VNCControl.sln
+SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
+$MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
+exit
+#cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
 
 #sign (splash has already been signed through a post-build event)
 for file in XenCenter.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
@@ -346,14 +354,14 @@ mv -f ${WIX}/vnccontrol.wxs.tmp ${WIX}/vnccontrol.wxs
 compile_installer "VNCControl" "en-us" && sign_msi "VNCControl"
 
 #build the tests
-cd ${REPO}/XenAdminTests && run_msbuild
+cd ${REPO}/XenAdminTests && $MSBUILD
 #this script is used by XenRT
 cp ${REPO}/mk/xenadmintests.sh ${REPO}/XenAdminTests/bin/Release/
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
 
 #build the CFUValidator
-cd ${REPO}/CFUValidator && run_msbuild
+cd ${REPO}/CFUValidator && $MSBUILD
 cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 
 #include resources script and collect the resources for translations
@@ -409,7 +417,7 @@ rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
 #bring in the pdbs from dotnet-packages latest build
 for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
 do
-  wget ${WGET_OPT} ${WEB_DOTNET}/${pdb} -P ${OUTPUT_DIR}
+  wget ${WGET_OPT} -P "${OUTPUT_DIR}" "${WEB_DOTNET}/${pdb}"
 done
 
 #create manifest
