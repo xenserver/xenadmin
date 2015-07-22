@@ -54,7 +54,7 @@ fi
 
 if [ -n "${DEBUG+xxx}" ];
 then
-  echo "DEBUG mode activated (verbose)"
+  echo "INFO:	DEBUG mode activated (verbose)"
   set -x
 fi
 
@@ -111,7 +111,7 @@ private_jenkins_build()
 if [ -z "${PRIVATE_BUILD_MODE+xxx}" ]; then
     production_jenkins_build
 else
-    echo "Running private Jenkins build"
+    echo "INFO:	Running private Jenkins build"
     private_jenkins_build
 fi
 unset PRIVATE_BUILD_MODE

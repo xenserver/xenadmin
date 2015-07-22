@@ -348,6 +348,7 @@ mv -f ${WIX}/vnccontrol.wxs.tmp ${WIX}/vnccontrol.wxs
 compile_installer "VNCControl" "en-us" && sign_msi "VNCControl"
 
 #build the tests
+echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && $MSBUILD
 #this script is used by XenRT
 cp ${REPO}/mk/xenadmintests.sh ${REPO}/XenAdminTests/bin/Release/
@@ -385,7 +386,7 @@ cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-#create english iso files
+echo "INFO:	Create English iso files"
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
 install -m 755 ${EN_CD_DIR}/XenCenterSetup.exe ${ISO_DIR}/XenCenterSetup.exe
@@ -393,7 +394,7 @@ cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${ISO_DIR}/XenCenter.ico
 mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.iso" "${ISO_DIR}"
 
-#create l10n iso file
+echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
@@ -434,7 +435,7 @@ fi
 echo "xc_product_version=${XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
 echo "build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/xcversion
 
-echo "Build phase succeeded at "
+echo "INFO:	Build phase succeeded at "
 date
 
 set +u
