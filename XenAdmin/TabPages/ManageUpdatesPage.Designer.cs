@@ -59,6 +59,7 @@
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -109,7 +110,8 @@
             this.toolStripButtonRefresh,
             this.toolStripSeparator1,
             this.toolStripButtonExportAll,
-            this.toolStripLabelFiltersOnOff});
+            this.toolStripLabelFiltersOnOff,
+            this.toolStripButtonRestoreDismissed});
             this.toolStrip1.Name = "toolStrip1";
             // 
             // toolStripDropDownButtonServerFilter
@@ -252,6 +254,14 @@
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // toolStripButtonRestoreDismissed
+            // 
+            this.toolStripButtonRestoreDismissed.AutoToolTip = false;
+            this.toolStripButtonRestoreDismissed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripButtonRestoreDismissed, "toolStripButtonRestoreDismissed");
+            this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
+            this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
+            // 
             // ManageUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
@@ -300,5 +310,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
     }
 }
