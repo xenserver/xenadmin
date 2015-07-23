@@ -39,7 +39,7 @@
 
 
 FATAL=""
-for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch
+for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe signtool.exe
 do
   which $DEP >/dev/null 2>&1
   if [ $? -ne 0 ]; then
