@@ -47,7 +47,7 @@ namespace XenAdmin.Alerts
 
         public bool CanIgnore
         {
-            get { return connections.Count == 0 && hosts.Count == 0; }
+            get { return (connections.Count == 0 && hosts.Count == 0) || IsDismissed(); }
         }
 
         public List<Host> DistinctHosts

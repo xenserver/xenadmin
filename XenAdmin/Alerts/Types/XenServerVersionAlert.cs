@@ -35,6 +35,7 @@ using System.Text;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Actions;
+using XenAPI;
 
 
 namespace XenAdmin.Alerts
@@ -93,6 +94,32 @@ namespace XenAdmin.Alerts
             {
                 return "XenServerUpdateAlert";
             }
+        }
+
+        public override bool IsDismissed()
+        {
+            foreach (var connection in connections)
+                if (IsDismissed(connection))
+                    return true;
+
+            return false;
+        }
+
+        private bool IsDismissed(IXenConnection connection)
+        {
+            Pool pool = Helpers.GetPoolOfOne(connection);
+            if (pool == null)
+                return false;
+
+            Dictionary<string, string> other_config = pool.other_config;
+
+            if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
+            {
+                List<string> current = new List<string>(other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
+                if (current.Contains(Version.VersionAndOEM))
+                    return true;
+            }
+            return false;
         }
 
         public override void Dismiss()

@@ -46,6 +46,8 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard;
 using Timer = System.Windows.Forms.Timer;
+using XenAdmin.Network;
+using XenAPI;
 
 
 namespace XenAdmin.TabPages
@@ -200,8 +202,8 @@ namespace XenAdmin.TabPages
                     dataGridViewUpdates.Rows.Clear();
                 }
 
-                var updates = new List<Alert>(Updates.UpdateAlerts);
-                
+                var updates = new List<Alert>(Updates.UpdateAlerts);           
+
                 if (updates.Count == 0)
                 {
                     panelProgress.Visible = true;
@@ -257,10 +259,11 @@ namespace XenAdmin.TabPages
             if (serverUpdate != null)
                 hosts = serverUpdate.DistinctHosts.Select(h => h.uuid).ToList();
 
-            bool hide = false;
+            bool hide = false; 
+
             Program.Invoke(Program.MainWindow, () =>
                                  hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
-                                        || toolStripDropDownButtonServerFilter.HideByLocation(hosts));
+                                        || toolStripDropDownButtonServerFilter.HideByLocation(hosts) || alert.IsDismissed());
             return hide;
         }
 
@@ -326,6 +329,13 @@ namespace XenAdmin.TabPages
 
             var patchAlert = alert as XenServerPatchAlert;
 
+            if (Alert.AllowedToDismiss(alert))
+            {
+                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+                dismiss.Click += ToolStripMenuItemDismiss_Click;
+                items.Add(dismiss);
+            }
+
             if (patchAlert != null && patchAlert.CanApply && !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl))
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
@@ -350,7 +360,77 @@ namespace XenAdmin.TabPages
             return items;
         }
 
+      
+        #region Update dismissal
+ 
+      private void DismissUpdates(IEnumerable<Alert> alerts)
+        {
+            var groups = from Alert alert in alerts
+                         where alert != null && !alert.Dismissing
+                         group alert by alert.Connection
+                             into g
+                             select new { Connection = g.Key, Alerts = g };
+
+            foreach (var g in groups)
+            {
+                if (Alert.AllowedToDismiss(g.Connection))
+                {
+                    foreach (Alert alert in g.Alerts)
+                    {
+                        alert.Dismissing = true;
+                    }
+                    DeleteAllAlertsAction action = new DeleteAllAlertsAction(g.Connection, g.Alerts);
+                    action.RunAsync();
+                    action.Completed += DeleteAllAllertAction_Completed;
+                }
+            }
+        }
+
+        private void DeleteAllAllertAction_Completed(ActionBase sender)
+        {
+            foreach (var alert in Updates.UpdateAlerts)
+            {
+                if (alert.IsDismissed())
+                    Updates.RemoveUpdate(alert);
+            }
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                Rebuild();
+            });
+        }
+
+        #endregion
+
+
         #region Actions DropDown event handlers
+
+      private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
+      {
+          if (dataGridViewUpdates.SelectedRows.Count != 1)
+              log.DebugFormat("Only 1 update can be dismissed at a time (Attempted to dismiss {0}). Dismissing the clicked item.", dataGridViewUpdates.SelectedRows.Count);
+
+          DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+          if (clickedRow == null)
+          {
+              log.Debug("Attempted to dismiss update with no update selected.");
+              return;
+          }
+
+          Alert alert = (Alert)clickedRow.Tag;
+          if (alert == null)
+              return;
+
+          using (var dlog = new ThreeButtonDialog(
+                  new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_CONFIRM, Messages.XENCENTER),
+                  ThreeButtonDialog.ButtonYes,
+                  ThreeButtonDialog.ButtonNo))
+          {
+              if (dlog.ShowDialog(this) != DialogResult.Yes)
+                  return;
+          }
+
+          DismissUpdates(new List<Alert> { (Alert)clickedRow.Tag });
+      }
 
         private DataGridViewRow FindAlertRow(ToolStripMenuItem toolStripMenuItem)
         {

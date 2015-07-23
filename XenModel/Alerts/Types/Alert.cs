@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 using XenAdmin.Network;
 using XenAPI;
@@ -209,6 +210,11 @@ namespace XenAdmin.Alerts
             Dismiss();
         }
 
+        public virtual bool IsDismissed()
+        {
+            return false;
+        }
+
         public virtual string Name { get { return null; } }
 
         public virtual string WebPageLabel { get { return null; } }
@@ -319,8 +325,55 @@ namespace XenAdmin.Alerts
                 sortResult = string.Compare(alert1.uuid, alert2.uuid);
             return sortResult;
         }
-    }
 
+
+        #region Update dismissal
+
+        public static bool AllowedToDismiss(Alert alert)
+        {
+            return AllowedToDismiss(new[] { alert });
+        }
+
+        public static bool AllowedToDismiss(IEnumerable<Alert> alerts)
+        {
+            var alertConnections = (from Alert alert in alerts
+                                    where alert != null && !alert.Dismissing
+                                    let con = alert.Connection
+                                    select con).Distinct();
+
+            if (alertConnections.Count() == 0)
+                return false;
+
+            return alertConnections.Any(AllowedToDismiss);
+        }
+
+        /// <summary>
+        /// Checks the user has sufficient RBAC privileges to clear updates on a given connection
+        /// </summary>
+        public static bool AllowedToDismiss(IXenConnection c)
+        {
+            // check if local alert
+            if (c == null)
+                return true;
+
+            // have we disconnected? Alert will disappear soon, but for now block dismissal.
+            if (c.Session == null)
+                return false;
+
+            if (c.Session.IsLocalSuperuser || !Helpers.MidnightRideOrGreater(c))
+                return true;
+
+            List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Message.destroy", c);
+            foreach (Role possibleRole in rolesAbleToCompleteAction)
+            {
+                if (c.Session.Roles.Contains(possibleRole))
+                    return true;
+            }
+            return false;
+        }
+
+        #endregion
+    }
     public enum AlertPriority
     {
         /// <summary>

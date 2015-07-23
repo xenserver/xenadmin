@@ -11405,6 +11405,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
+  <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
+    <value>Are you sure you want to dismiss this update?</value>
+  </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?</value>
   </data>

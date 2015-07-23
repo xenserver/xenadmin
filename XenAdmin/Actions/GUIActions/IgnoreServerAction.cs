@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private XenServerVersion Version;
 
-        private const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
+        public const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
 
         public IgnoreServerAction(IXenConnection connection, XenServerVersion version)
             : base(connection, "ignore_patch", "ignore_patch", true)

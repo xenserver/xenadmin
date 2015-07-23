@@ -79,7 +79,7 @@ namespace XenAdmin.Core
             }
         }
 
-        private static void RemoveUpdate(Alert update)
+        public static void RemoveUpdate(Alert update)
         {
             try
             {
@@ -163,7 +163,7 @@ namespace XenAdmin.Core
                 }
 
                 var xenCenterAlert = NewXenCenterUpdateAlert(XenCenterVersions, Program.Version);
-                if (xenCenterAlert != null)
+                if (xenCenterAlert != null && !xenCenterAlert.IsDismissed())
                     updateAlerts.Add(xenCenterAlert);
 
                 var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersions);
