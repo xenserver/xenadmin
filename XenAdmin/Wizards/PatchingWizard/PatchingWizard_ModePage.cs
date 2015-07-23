@@ -112,10 +112,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     break;
             }
 
-            if (SelectedUpdateAlert == null)
+            if (SelectedUpdateType == UpdateType.NewSuppPack)
             {
-                removeUpdateFileCheckBox.Checked = false;
-                removeUpdateFileCheckBox.Enabled = false;
+                removeUpdateFileCheckBox.Visible = false;
             }
         }
 
