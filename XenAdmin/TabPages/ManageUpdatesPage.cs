@@ -202,9 +202,7 @@ namespace XenAdmin.TabPages
                     dataGridViewUpdates.Rows.Clear();
                 }
 
-                var updates = new ChangeableList<Alert>();
-                updates.AddRange(Updates.UpdateAlerts);
-                updates.RemoveAll(FilterAlert);
+                var updates = new List<Alert>(Updates.UpdateAlerts);           
 
                 if (updates.Count == 0)
                 {
@@ -214,6 +212,7 @@ namespace XenAdmin.TabPages
                     return;
                 }
 
+                updates.RemoveAll(FilterAlert);
                 panelProgress.Visible = false;
 
                 if (dataGridViewUpdates.SortedColumn != null)
@@ -260,13 +259,11 @@ namespace XenAdmin.TabPages
             if (serverUpdate != null)
                 hosts = serverUpdate.DistinctHosts.Select(h => h.uuid).ToList();
 
-            bool hide = false;
-            bool isDismissed = false;
-            isDismissed = alert.IsDismissed();
+            bool hide = false; 
 
             Program.Invoke(Program.MainWindow, () =>
                                  hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
-                                        || toolStripDropDownButtonServerFilter.HideByLocation(hosts) || isDismissed);
+                                        || toolStripDropDownButtonServerFilter.HideByLocation(hosts) || alert.IsDismissed());
             return hide;
         }
 

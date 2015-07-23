@@ -168,8 +168,6 @@ namespace XenAdmin.Alerts
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            //other_config.Remove(IgnorePatchAction.IgnorePatchKey)
-
             if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
             {
                 List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));

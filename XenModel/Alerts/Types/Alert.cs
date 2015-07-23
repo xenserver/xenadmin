@@ -38,7 +38,6 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
 
-
 namespace XenAdmin.Alerts
 {
     public abstract class Alert : IEquatable<Alert>
