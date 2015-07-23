@@ -142,12 +142,6 @@
     <Compile Include="Controls\Ballooning\MemoryRowLabel.Designer.cs">
       <DependentUpon>MemoryRowLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CallHome\CallHomeAuthenticationPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CallHome\CallHomeAuthenticationPanel.Designer.cs">
-      <DependentUpon>CallHomeAuthenticationPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ChevronButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,12 +204,6 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
-    <Compile Include="Dialogs\CallHome\CallHomeEnrollNowDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\CallHome\CallHomeEnrollNowDialog.designer.cs">
-      <DependentUpon>CallHomeEnrollNowDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\CallHome\CallHomeOverviewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1381,25 +1369,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\CallHome\CallHomeAuthenticationPanel.ja.resx">
-      <DependentUpon>CallHomeAuthenticationPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CallHome\CallHomeAuthenticationPanel.resx">
-      <DependentUpon>CallHomeAuthenticationPanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CallHome\CallHomeAuthenticationPanel.zh-CN.resx">
-      <DependentUpon>CallHomeAuthenticationPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeEnrollNowDialog.ja.resx">
-      <DependentUpon>CallHomeEnrollNowDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeEnrollNowDialog.resx">
-      <DependentUpon>CallHomeEnrollNowDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeEnrollNowDialog.zh-CN.resx">
-      <DependentUpon>CallHomeEnrollNowDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.ja.resx">
       <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
     </EmbeddedResource>

@@ -267,7 +267,7 @@ namespace XenAdmin.Dialogs.CallHome
 
             var action = new CallHomeAuthenticationAction(pool, textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
                 Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName,
-                true, 0, false);
+                Registry.CallHomeProductKey, true, 0, false);
 
             try
             {

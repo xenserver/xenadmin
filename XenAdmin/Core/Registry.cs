@@ -314,6 +314,16 @@ namespace XenAdmin.Core
             get { return ReadKey(CALL_HOME_UPLOAD_GRANT_TOKEN_DOMAIN_NAME); }
         }
 
+        public static string CallHomeUploadDomainName
+        {
+            get { return ReadKey(CALL_HOME_UPLOAD_DOMAIN_NAME); }
+        }
+
+        public static string CallHomeProductKey
+        {
+            get { return ReadKey(CALL_HOME_PRODUCT_KEY); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -332,6 +342,8 @@ namespace XenAdmin.Core
         private const string CALL_HOME_IDENTITY_TOKEN_DOMAIN_NAME = "CallHomeIdentityTokenDomainName";
         private const string CALL_HOME_UPLOAD_TOKEN_DOMAIN_NAME = "CallHomeUploadTokenDomainName";
         private const string CALL_HOME_UPLOAD_GRANT_TOKEN_DOMAIN_NAME = "CallHomeUploadGrantTokenDomainName";
+        private const string CALL_HOME_UPLOAD_DOMAIN_NAME = "CallHomeUploadDomainName";
+        private const string CALL_HOME_PRODUCT_KEY = "CallHomeProductKey";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

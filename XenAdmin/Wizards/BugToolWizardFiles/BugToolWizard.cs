@@ -39,6 +39,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Wizards.BugToolWizardFiles;
 using XenAdmin.Dialogs;
@@ -125,6 +126,16 @@ namespace XenAdmin.Wizards
                 // Close. We can't recover from a partially-completed ZipStatusReportAction.
                 base.FinishWizard();
                 return;
+            }
+
+            // upload the report files
+            if (bugToolPageDestination1.Upload)
+            {
+                var uploadAction = new Actions.UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,
+                                                                       bugToolPageDestination1.UploadToken,
+                                                                       Registry.CallHomeUploadDomainName, false);
+                dialog = new ActionProgressDialog(uploadAction, ProgressBarStyle.Blocks) {ShowCancel = true};
+                dialog.ShowDialog();
             }
 
             // Save away the output path for next time
