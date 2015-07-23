@@ -73,6 +73,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             resources.ApplyResources(this.RestoreDismUpdatesButton, "RestoreDismUpdatesButton");
             this.RestoreDismUpdatesButton.Name = "RestoreDismUpdatesButton";
             this.RestoreDismUpdatesButton.UseVisualStyleBackColor = true;
+            this.RestoreDismUpdatesButton.Click += new System.EventHandler(this.RestoreDismUpdatesButton_Click);
             // 
             // label2
             // 
