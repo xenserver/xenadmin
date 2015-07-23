@@ -151,6 +151,34 @@ namespace XenAdmin.Alerts
             get { return string.Format(Messages.NEW_UPDATE_AVAILABLE, Patch.Name); }
         }
 
+        public override bool IsDismissed()
+        {
+            foreach (var connection in connections)
+                if (IsDismissed(connection))
+                    return true;
+
+            return false;
+        }
+
+        private bool IsDismissed(IXenConnection connection)
+        {
+            XenAPI.Pool pool = Helpers.GetPoolOfOne(connection);
+            if (pool == null)
+                return false;
+
+            Dictionary<string, string> other_config = pool.other_config;
+
+            //other_config.Remove(IgnorePatchAction.IgnorePatchKey)
+
+            if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
+            {
+                List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
+                if (current.Contains(Patch.Uuid))
+                    return true;
+            }
+            return false;
+        }
+
         public override void Dismiss()
         {
             base.Dismiss();

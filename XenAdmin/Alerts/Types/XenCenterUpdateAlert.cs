@@ -104,7 +104,19 @@ namespace XenAdmin.Alerts
         public override void Dismiss()
         {
             Properties.Settings.Default.LatestXenCenterSeen = NewVersion.VersionAndLang;
+            Settings.TrySaveSettings();
             base.Dismiss();
+        }
+
+        public override bool IsDismissed()
+        {
+            return Properties.Settings.Default.LatestXenCenterSeen == NewVersion.VersionAndLang;
+        }
+
+        public void Restore()
+        {
+            Properties.Settings.Default.LatestXenCenterSeen = "";
+            Settings.TrySaveSettings();
         }
 
         public override bool Equals(Alert other)

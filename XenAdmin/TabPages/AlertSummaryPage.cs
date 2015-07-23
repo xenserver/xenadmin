@@ -580,7 +580,7 @@ namespace XenAdmin.TabPages
         {
             toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
 
-            tsmiDismissAll.Enabled = AllowedToDismiss(Alert.Alerts);
+            tsmiDismissAll.Enabled = Alert.AllowedToDismiss(Alert.Alerts);
             tsmiDismissAll.AutoToolTip = !tsmiDismissAll.Enabled;
             tsmiDismissAll.ToolTipText = tsmiDismissAll.Enabled
                                                           ? string.Empty
@@ -591,7 +591,7 @@ namespace XenAdmin.TabPages
             var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows
                                  select row.Tag as Alert;
 
-            tsmiDismissSelected.Enabled = AllowedToDismiss(selectedAlerts);
+            tsmiDismissSelected.Enabled = Alert.AllowedToDismiss(selectedAlerts);
             tsmiDismissSelected.AutoToolTip = !tsmiDismissSelected.Enabled;
             tsmiDismissSelected.ToolTipText = tsmiDismissSelected.Enabled
                                                   ? string.Empty
@@ -615,49 +615,6 @@ namespace XenAdmin.TabPages
 
         #region Alert dismissal
 
-        private bool AllowedToDismiss(Alert alert)
-        {
-            return AllowedToDismiss(new[] { alert });
-        }
-
-        private bool AllowedToDismiss(IEnumerable<Alert> alerts)
-        {
-            var alertConnections = (from Alert alert in alerts
-                                    where alert != null && !alert.Dismissing
-                                    let con = alert.Connection
-                                    select con).Distinct();
-
-            if (alertConnections.Count() == 0)
-                return false;
-
-            return alertConnections.Any(AllowedToDismiss);
-        }
-
-        /// <summary>
-        /// Checks the user has sufficient RBAC privileges to clear alerts on a given connection
-        /// </summary>
-        private bool AllowedToDismiss(IXenConnection c)
-        {
-            // check if local alert
-            if (c == null)
-                return true;
-
-            // have we disconnected? Alert will disappear soon, but for now block dismissal.
-            if (c.Session == null)
-                return false;
-
-            if (c.Session.IsLocalSuperuser || !Helpers.MidnightRideOrGreater(c))
-                return true;
-
-            List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Message.destroy", c);
-            foreach (Role possibleRole in rolesAbleToCompleteAction)
-            {
-                if (c.Session.Roles.Contains(possibleRole))
-                    return true;
-            }
-            return false;
-        }
-
         private void DismissAlerts(IEnumerable<Alert> alerts)
         {
             var groups = from Alert alert in alerts
@@ -668,7 +625,7 @@ namespace XenAdmin.TabPages
 
             foreach (var g in groups)
             {
-                if (AllowedToDismiss(g.Connection))
+                if (Alert.AllowedToDismiss(g.Connection))
                 {
                     foreach (var alert in g.Alerts)
                         alert.Dismissing = true;
@@ -684,7 +641,7 @@ namespace XenAdmin.TabPages
         {
             var items = new List<ToolStripItem>();
 
-            if (AllowedToDismiss(alert))
+            if (Alert.AllowedToDismiss(alert))
             {
                 var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
                 dismiss.Click += ToolStripMenuItemDismiss_Click;
