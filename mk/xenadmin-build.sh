@@ -225,9 +225,10 @@ cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/sign.bat XenServerHealthC
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
-CANDLE=${WIX_BIN}/candle.exe
-LIT=${WIX_BIN}/lit.exe
-LIGHT=${WIX_BIN}/light.exe
+# ${WIX_BIN}/
+CANDLE="candle.exe -nologo"
+LIT="lit.exe -nologo"
+LIGHT="light.exe -nologo"
 
 mkdir_clean ${WIX_SRC}
 ${UNZIP} ${SCRATCH_DIR}/wix3.5.2519.0-sources.zip -d ${SCRATCH_DIR}/wixsrc
@@ -273,9 +274,9 @@ compile_installer()
   
   if [ "${name}" = "VNCControl" ]
   then
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   else
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   fi
 }
 
@@ -326,13 +327,13 @@ cd ${WIX} && chmod a+rw XenCenter.l10n.msi && ${REPO}/sign.bat XenCenter.l10n.ms
 
 #create bundle exe installers - msi installers embedded
 DOTNETINST=${REPO}/dotNetInstaller
-DOTNETINST_BIN='/cygdrive/c/Program Files/dotNetInstaller/Bin'
 cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/dotNetFx40_Full_setup.exe ${DOTNETINST}
 cp ${WIX}/outXenCenter/XenCenter.msi ${DOTNETINST}
 cp ${WIX}/XenCenter.l10n.msi ${DOTNETINST}
-cp "${DOTNETINST_BIN}"/* ${DOTNETINST}
-cd ${DOTNETINST} && "${DOTNETINST}/InstallerLinker.exe" "/Output:XenCenterSetup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
-cd ${DOTNETINST} && "${DOTNETINST}/InstallerLinker.exe" "/Output:XenCenterSetup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
+
+cp "$(which dotNetInstaller.exe)" ${DOTNETINST}
+cd ${DOTNETINST} && InstallerLinker.exe "/Output:XenCenterSetup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
+cd ${DOTNETINST} && InstallerLinker.exe "/Output:XenCenterSetup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
 
 sign_files()
 {
