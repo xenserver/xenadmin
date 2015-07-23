@@ -748,5 +748,11 @@ namespace XenAdmin.TabPages
                        Messages.XENCENTER)).ShowDialog(this);
             }
         }
+
+        private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)
+        {
+
+            Updates.RestoreDismissedUpdates();
+        }        
     }
 }

@@ -392,5 +392,31 @@ namespace XenAdmin.Core
             else if (!alert.CanIgnore)
                 AddUpate(alert);
         }
+
+        public static void RestoreDismissedUpdates()
+        {
+            foreach (IXenConnection _connection in ConnectionsManager.XenConnectionsCopy)
+            {
+                XenAPI.Pool pool = Helpers.GetPoolOfOne(_connection);
+                if (pool == null)
+                    continue;
+
+                Dictionary<string, string> other_config = pool.other_config;
+
+                if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
+                {
+                    other_config.Remove(IgnorePatchAction.IgnorePatchKey);
+                }
+                if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
+                {
+                    other_config.Remove(IgnorePatchAction.IgnorePatchKey);
+                }
+            }
+
+            Properties.Settings.Default.LatestXenCenterSeen = "";
+            Settings.TrySaveSettings();
+
+            Updates.CheckForUpdates(true);
+        }
     }
 }
