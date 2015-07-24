@@ -30,6 +30,7 @@ namespace XenAdmin.Dialogs.CallHome
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallHomeOverviewDialog));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.poolsDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
@@ -61,6 +62,8 @@ namespace XenAdmin.Dialogs.CallHome
             this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
+            this.showAgainCheckBox = new System.Windows.Forms.CheckBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -271,8 +274,8 @@ namespace XenAdmin.Dialogs.CallHome
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // flowLayoutPanel2
@@ -298,12 +301,21 @@ namespace XenAdmin.Dialogs.CallHome
             resources.ApplyResources(this.rubricLabel, "rubricLabel");
             this.rubricLabel.Name = "rubricLabel";
             // 
+            // showAgainCheckBox
+            // 
+            resources.ApplyResources(this.showAgainCheckBox, "showAgainCheckBox");
+            this.showAgainCheckBox.Name = "showAgainCheckBox";
+            this.toolTip.SetToolTip(this.showAgainCheckBox, resources.GetString("showAgainCheckBox.ToolTip"));
+            this.showAgainCheckBox.UseVisualStyleBackColor = true;
+            this.showAgainCheckBox.CheckedChanged += new System.EventHandler(this.showAgainCheckBox_CheckedChanged);
+            // 
             // CallHomeOverviewDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.showAgainCheckBox);
             this.Controls.Add(this.buttonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "CallHomeOverviewDialog";
@@ -329,6 +341,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -364,6 +377,8 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.Label policyStatementLabel;
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
         private System.Windows.Forms.LinkLabel uploadRequestLinkLabel;
+        private System.Windows.Forms.CheckBox showAgainCheckBox;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

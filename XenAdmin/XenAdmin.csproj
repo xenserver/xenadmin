@@ -2348,6 +2348,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

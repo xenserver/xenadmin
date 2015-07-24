@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -243,6 +242,7 @@ namespace XenAdmin.Dialogs.CallHome
             {
                 xenConnection.Cache.RegisterBatchCollectionChanged<Pool>(Pool_BatchCollectionChanged);
             }
+            showAgainCheckBox.Checked = Properties.Settings.Default.ShowHealthCheckEnrollmentReminder;
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -315,6 +315,15 @@ namespace XenAdmin.Dialogs.CallHome
                 var user = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
                 var password = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
                 new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
+            }
+        }
+
+        private void showAgainCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder != showAgainCheckBox.Checked)
+            {
+                Properties.Settings.Default.ShowHealthCheckEnrollmentReminder = showAgainCheckBox.Checked;
+                Settings.TrySaveSettings();
             }
         }
     }
