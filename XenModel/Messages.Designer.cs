@@ -7131,6 +7131,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to disable Health Check on the selected pool?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_HEALTH_CHECK_POOL {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_HEALTH_CHECK_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to disable Health Check on the selected server?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_HEALTH_CHECK_SERVER {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_HEALTH_CHECK_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The export file may be larger than your filesystem limit.
         ///
         ///Estimated file size: {0}

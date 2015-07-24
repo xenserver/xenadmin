@@ -249,6 +249,42 @@
   <data name="healthCheckStatusPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="disableLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="disableLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="disableLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="disableLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 218</value>
+  </data>
+  <data name="disableLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="disableLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 14</value>
+  </data>
+  <data name="disableLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="disableLinkLabel.Text" xml:space="preserve">
+    <value>Disable Health Check</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.Name" xml:space="preserve">
+    <value>disableLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.Parent" xml:space="preserve">
+    <value>healthCheckStatusPanel</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="uploadRequestLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -283,7 +319,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;uploadRequestLinkLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="scheduleLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,43 +358,43 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;scheduleLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="linkLabel2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="editLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="linkLabel2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="editLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="linkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="editLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="linkLabel2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="editLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 177</value>
   </data>
-  <data name="linkLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="editLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="linkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="editLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 15</value>
   </data>
-  <data name="linkLabel2.TabIndex" type="System.Int32, mscorlib">
+  <data name="editLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="linkLabel2.Text" xml:space="preserve">
+  <data name="editLinkLabel.Text" xml:space="preserve">
     <value>Edit Health Check settings</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.Name" xml:space="preserve">
-    <value>linkLabel2</value>
+  <data name="&gt;&gt;editLinkLabel.Name" xml:space="preserve">
+    <value>editLinkLabel</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;editLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;editLinkLabel.Parent" xml:space="preserve">
     <value>healthCheckStatusPanel</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;editLinkLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="issuesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,7 +433,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;issuesLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lastUploadDateLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -433,7 +469,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;lastUploadDateLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -469,7 +505,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -502,7 +538,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lastUploadLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -538,7 +574,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;lastUploadLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ReportAnalysisLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -574,7 +610,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;ReportAnalysisLinkLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="previousUploadPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -585,40 +621,40 @@
   <data name="previousUploadPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="viewReportLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="linkLabel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="viewReportLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="linkLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="viewReportLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="viewReportLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="linkLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="viewReportLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="viewReportLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 15</value>
   </data>
-  <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="viewReportLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="linkLabel1.Text" xml:space="preserve">
+  <data name="viewReportLinkLabel.Text" xml:space="preserve">
     <value>View previous report analysis</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
-    <value>linkLabel1</value>
+  <data name="&gt;&gt;viewReportLinkLabel.Name" xml:space="preserve">
+    <value>viewReportLinkLabel</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;viewReportLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;viewReportLinkLabel.Parent" xml:space="preserve">
     <value>previousUploadPanel</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;viewReportLinkLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="previousUploadDateLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -721,10 +757,10 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;previousUploadPanel.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="previousUploadPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabel1" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadDateLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,52,Percent,48" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="viewReportLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadDateLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,52,Percent,48" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="healthCheckStatusPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -736,7 +772,7 @@
     <value>3, 3</value>
   </data>
   <data name="healthCheckStatusPanel.RowCount" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="healthCheckStatusPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 235</value>
@@ -757,7 +793,7 @@
     <value>0</value>
   </data>
   <data name="healthCheckStatusPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="uploadRequestLinkLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="scheduleLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="linkLabel2" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="issuesLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ReportAnalysisLinkLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,AutoSize,20,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="disableLinkLabel" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="uploadRequestLinkLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="scheduleLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="editLinkLabel" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="issuesLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ReportAnalysisLinkLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,AutoSize,20,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="notEnrolledPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
