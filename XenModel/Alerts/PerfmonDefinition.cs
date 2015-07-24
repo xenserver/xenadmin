@@ -63,6 +63,7 @@ namespace XenAdmin.Alerts
         public const string ALARM_TYPE_FILESYSTEM = "fs_usage";
         public const string ALARM_TYPE_MEMORY_FREE = "memory_free_kib";
         public const string ALARM_TYPE_MEMORY_DOM0_USAGE = "mem_usage";
+        public const string ALARM_TYPE_LOG_FILESYSTEM = "log_fs_usage";
         /// <summary>
         /// This is the name that will be stored in the SR's other-config:perfmon key
         /// </summary>
