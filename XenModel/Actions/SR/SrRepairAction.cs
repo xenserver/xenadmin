@@ -74,7 +74,18 @@ namespace XenAdmin.Actions
             log.Debug("Running SR repair");
             log.DebugFormat("SR='{0}'", SR.Name);
 
-            foreach (Host host in Connection.Cache.Hosts)
+            //CA-176935, CA-173497 - we need to run Plug for the master first - creating a new list of hosts where the master is always first
+            var allHosts = new List<Host>();
+            
+            var master = Helpers.GetMaster(Connection);
+            if (master != null)
+                allHosts.Add(master);
+            
+            foreach (var host in Connection.Cache.Hosts)
+                if (!allHosts.Contains(host))
+                    allHosts.Add(host);
+
+            foreach (Host host in allHosts)
             {
                 Host stoHost = SR.GetStorageHost();
                 if (SR.shared
