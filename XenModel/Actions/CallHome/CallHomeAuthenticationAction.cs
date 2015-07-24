@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using Microsoft.Win32;
+using System.Runtime.Serialization;
 using XenAdmin.Network;
 using XenAPI;
 using System.Web.Script.Serialization;
@@ -63,9 +63,6 @@ namespace XenAdmin.Actions
 
         private const string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
 
-        private readonly string XenServerUsername;
-        private readonly string XenServerPassword;
-
         public CallHomeAuthenticationAction(Pool pool, string username, string password, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
             : base(pool != null ? pool.Connection : null, Messages.ACTION_CALLHOME_AUTHENTICATION, Messages.ACTION_CALLHOME_AUTHENTICATION_PROGRESS, suppressHistory)
         {
@@ -74,8 +71,6 @@ namespace XenAdmin.Actions
             this.password = password;
             this.saveTokenAsSecret = saveTokenAsSecret;
             this.tokenExpiration = tokenExpiration;
-            XenServerUsername = "root";
-            XenServerPassword = "xenroot";
             #region RBAC Dependencies
             if (saveTokenAsSecret)
                 ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
@@ -109,15 +104,16 @@ namespace XenAdmin.Actions
                     log.Info("Saving upload token as xapi secret");
                     Dictionary<string, string> newConfig = pool.health_check_config;
                     SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, uploadToken);
-                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, XenServerUsername);
-                    SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, XenServerPassword);
                     Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
                 }
             }
+            catch (HealthCheckAuthenticationException)
+            {
+                throw;
+            }
             catch (Exception e)
             {
-                log.Error("Exception trying to authenticate", e);
-                Exception = e;
+                throw new HealthCheckAuthenticationException(e);
             }
         }
 
@@ -183,7 +179,22 @@ namespace XenAdmin.Actions
                 password
             });
             var urlString = string.Format("{0}{1}", identityTokenDomainName, identityTokenUrl);
-            return GetToken(urlString, json);
+            try
+            {
+                return GetToken(urlString, json);
+            }
+            catch (WebException e)
+            {
+                log.InfoFormat("WebException while getting identity token. Exception Message: " + e.Message);
+                if (e.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse) e.Response).StatusCode == HttpStatusCode.Forbidden)
+                    throw new HealthCheckAuthenticationException(Messages.HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS, e);
+                throw;
+            }
+            catch (Exception e) 
+            {
+                log.InfoFormat("Exception while getting identity token. Exception Message: " + e.Message);
+                throw;
+            }
         }
         
         private string GetUploadGrantToken(string identityToken)
@@ -194,7 +205,16 @@ namespace XenAdmin.Actions
                 expiration = tokenExpiration
             });
             var urlString = string.Format("{0}{1}", uploadGrantTokenDomainName, uploadGrantTokenUrl);
-            return GetToken(urlString, json);
+
+            try
+            {
+                return GetToken(urlString, json);
+            }
+            catch (Exception e)
+            {
+                log.InfoFormat("Exception while getting upload grant token. Exception Message: " + e.Message);
+                throw;
+            }
         }
 
         private string GetUploadToken(string grantToken)
@@ -206,7 +226,15 @@ namespace XenAdmin.Actions
                 expiration = tokenExpiration
             });
             var urlString = string.Format("{0}{1}", uploadTokenDomainName, uploadTokenUrl);
-            return GetToken(urlString, json);
+            try
+            {
+                return GetToken(urlString, json);
+            }
+            catch (Exception e)
+            {
+                log.InfoFormat("Exception while getting upload token. Exception Message: " + e.Message);
+                throw;
+            }
         }
 
         private string GetToken(string urlString, string jsonParameters)
@@ -232,6 +260,20 @@ namespace XenAdmin.Actions
         class TemplateResponse
         {
             public string Token { get; set; }
+        }
+
+        [Serializable]
+        public class HealthCheckAuthenticationException : Exception
+        {
+            public HealthCheckAuthenticationException() : base() { }
+
+            public HealthCheckAuthenticationException(string message) : base(message) { }
+
+            public HealthCheckAuthenticationException(string message, Exception exception) : base(message, exception) { }
+
+            public HealthCheckAuthenticationException(Exception exception) : base(Messages.HEALTH_CHECK_AUTHENTICATION_FAILED, exception) { }
+
+            public HealthCheckAuthenticationException(SerializationInfo serialinfo, StreamingContext context) : base(serialinfo, context) { }
         }
     }
 }
