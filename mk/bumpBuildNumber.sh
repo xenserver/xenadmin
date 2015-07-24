@@ -29,7 +29,7 @@
 # SUCH DAMAGE.
 
 set -eu
-
+echo "INFO: bump build number"
 if [ $get_JOB_NAME = "devbuild" ] ; then
     echo Warning: devbuild detected so we will skip the build number increment. All dev builds will have build number 0.
     exit 0
@@ -45,17 +45,17 @@ else
 fi
 
 url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
-if curl -n -s --head --fail "${url}"; then
-  echo "URL exists: ${url}"
+if curl -n -s --fail "${url}" -o out.tmp ; then
+  echo "INFO:	URL exists: ${url}"
 else
-  echo "URL does not exist: ${url}"
+  echo "ERROR:	URL does not exist: ${url}"
   exit 1
 fi
 
-NEXT_BN=$(curl -n "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
+NEXT_BN=$(curl -s -n "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
 
-echo NEXT_BN=${NEXT_BN}
+echo "INFO:	NEXT_BN=${NEXT_BN}"
 
-curl -n --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
+curl -s -n --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
 
 set +u

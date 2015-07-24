@@ -32,6 +32,7 @@
 
 set -eu
 
+echo "INFO:	check roaming"
 dir=$(readlink -f $(dirname "$0"))
 src=$(readlink -f "$dir/../XenAdmin")
 

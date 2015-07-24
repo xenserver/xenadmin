@@ -52,7 +52,7 @@ if [ -n "${FATAL}" ]; then
 fi
 
 
-if [ -n "${DEBUG+xxx}" ];
+if [ -v DEBUG ];
 then
   echo "INFO:	DEBUG mode activated (verbose)"
   set -x
@@ -84,11 +84,11 @@ fi
 
 production_jenkins_build()
 {
-    #source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
-    #source ${XENADMIN_DIR}/devtools/check-roaming.sh
-    #source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
-    #source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
-    #source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
+    source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
+    source ${XENADMIN_DIR}/devtools/check-roaming.sh
+    source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
+    source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
+    source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
     source ${XENADMIN_DIR}/mk/tests-checks.sh
     source ${XENADMIN_DIR}/mk/archive-push.sh
