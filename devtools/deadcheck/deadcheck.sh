@@ -32,6 +32,8 @@
 
 set -eu
 
+echo "INFO:	deadcheck"
+
 dir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 src="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../../XenAdmin" && pwd )"
 if [ ! -d "${src}" ]; then
