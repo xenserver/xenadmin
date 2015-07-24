@@ -37,6 +37,7 @@ using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.Network.StorageLink;
+using XenAdminTests.XenModelTests;
 using XenAPI;
 
 namespace XenAdminTests
@@ -158,7 +159,8 @@ namespace XenAdminTests
 
                 foreach (VM vm in connection.Cache.VMs)
                 {
-                    if (vm.is_a_template && !vm.is_a_snapshot &&
+                    if (vm.is_a_template && !vm.is_a_snapshot && 
+                        vm.Show(XenAdminConfigManager.Provider.ShowHiddenVMs) &&
                         vm.DefaultTemplate && (cond == null || cond(vm)))
                         return vm;
                 }
