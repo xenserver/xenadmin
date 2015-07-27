@@ -186,23 +186,14 @@ version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvf
 
 #build
 
-run_msbuild()
-{
-  MSBuild.exe /nologo /verbosity:quiet /p:Configuration=Release /p:TargetFrameworkVersion=v4.0
-}
+MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.0"
 
-run_vcbuild()
-{
-  "/cygdrive/c/Program Files/Microsoft Visual Studio 9.0/VC/VCPackages/VCBuild.exe" $1 "Release|Win32"
-}
-
-cd ${REPO}/XenAdmin   && run_msbuild
-cd ${REPO}/Xe         && run_msbuild
-cd ${REPO}/xva_verify && run_msbuild
-cd ${REPO}/splash     && run_vcbuild "Splash.vcproj"
-cp ${REPO}/splash/XenAdmin/bin/Release/XenCenter.* ${REPO}/XenAdmin/bin/Release/
-cd ${REPO}/VNCControl && run_msbuild
-cd ${REPO}/XenServerHealthCheck && run_msbuild
+cd ${REPO}
+$MSBUILD XenAdmin.sln
+$MSBUILD xe/Xe.csproj
+$MSBUILD VNCControl/VNCControl.sln
+SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
+$MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
 
 #sign (splash has already been signed through a post-build event)
 for file in XenCenter.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
@@ -230,9 +221,10 @@ cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/sign.bat XenServerHealthC
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
-CANDLE=${WIX_BIN}/candle.exe
-LIT=${WIX_BIN}/lit.exe
-LIGHT=${WIX_BIN}/light.exe
+# ${WIX_BIN}/
+CANDLE="candle.exe -nologo"
+LIT="lit.exe -nologo"
+LIGHT="light.exe -nologo"
 
 mkdir_clean ${WIX_SRC}
 ${UNZIP} ${SCRATCH_DIR}/wix3.5.2519.0-sources.zip -d ${SCRATCH_DIR}/wixsrc
@@ -279,9 +271,9 @@ compile_installer()
   
   if [ "${name}" = "VNCControl" ]
   then
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   else
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   fi
 }
 
@@ -332,13 +324,13 @@ cd ${WIX} && chmod a+rw XenCenter.l10n.msi && ${REPO}/sign.bat XenCenter.l10n.ms
 
 #create bundle exe installers - msi installers embedded
 DOTNETINST=${REPO}/dotNetInstaller
-DOTNETINST_BIN='/cygdrive/c/Program Files/dotNetInstaller/Bin'
 cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/dotNetFx40_Full_setup.exe ${DOTNETINST}
 cp ${WIX}/outXenCenter/XenCenter.msi ${DOTNETINST}
 cp ${WIX}/XenCenter.l10n.msi ${DOTNETINST}
-cp "${DOTNETINST_BIN}"/* ${DOTNETINST}
-cd ${DOTNETINST} && "${DOTNETINST}/InstallerLinker.exe" "/Output:XenCenterSetup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
-cd ${DOTNETINST} && "${DOTNETINST}/InstallerLinker.exe" "/Output:XenCenterSetup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
+
+cp "$(which dotNetInstaller.exe)" ${DOTNETINST}
+cd ${DOTNETINST} && InstallerLinker.exe "/Output:XenCenterSetup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
+cd ${DOTNETINST} && InstallerLinker.exe "/Output:XenCenterSetup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
 
 sign_files()
 {
@@ -357,14 +349,15 @@ mv -f ${WIX}/vnccontrol.wxs.tmp ${WIX}/vnccontrol.wxs
 compile_installer "VNCControl" "en-us" && sign_msi "VNCControl"
 
 #build the tests
-cd ${REPO}/XenAdminTests && run_msbuild
+echo "INFO: Build the tests..."
+cd ${REPO}/XenAdminTests && $MSBUILD
 #this script is used by XenRT
 cp ${REPO}/mk/xenadmintests.sh ${REPO}/XenAdminTests/bin/Release/
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
 
 #build the CFUValidator
-cd ${REPO}/CFUValidator && run_msbuild
+cd ${REPO}/CFUValidator && $MSBUILD
 cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 
 #include resources script and collect the resources for translations
@@ -392,7 +385,7 @@ cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-#create english iso files
+echo "INFO:	Create English iso files"
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
 install -m 755 ${EN_CD_DIR}/XenCenterSetup.exe ${ISO_DIR}/XenCenterSetup.exe
@@ -400,7 +393,7 @@ cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${ISO_DIR}/XenCenter.ico
 mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.iso" "${ISO_DIR}"
 
-#create l10n iso file
+echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
@@ -441,7 +434,7 @@ fi
 echo "xc_product_version=${XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
 echo "build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/xcversion
 
-echo "Build phase succeeded at "
+echo "INFO:	Build phase succeeded at "
 date
 
 set +u

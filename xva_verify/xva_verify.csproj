@@ -12,7 +12,7 @@
     <AssemblyName>xva_verify</AssemblyName>
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
     <StartupObject>MainClass</StartupObject>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
     <ManifestCertificateThumbprint>4C1DD393E361B8BBCFA1E1D09539C446F88C0A11</ManifestCertificateThumbprint>
     <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timestamp.dll</ManifestTimestampUrl>
     <FileUpgradeFlags>
@@ -72,6 +72,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">"C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe" -manifest "$(ProjectDir)$(ProjectName).manifest" -outputresource:"$(TargetDir)..\..\bin\Release\$(TargetFileName)";#1</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">mt.exe -nologo -manifest "$(ProjectDir)$(ProjectName).manifest" -outputresource:"$(TargetDir)..\..\bin\Release\$(TargetFileName)";#1</PostBuildEvent>
   </PropertyGroup>
 </Project>

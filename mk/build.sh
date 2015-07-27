@@ -39,7 +39,7 @@
 
 
 FATAL=""
-for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch
+for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe signtool.exe candle.exe light.exe
 do
   which $DEP >/dev/null 2>&1
   if [ $? -ne 0 ]; then
@@ -52,9 +52,9 @@ if [ -n "${FATAL}" ]; then
 fi
 
 
-if [ -n "${DEBUG+xxx}" ];
+if [ -v DEBUG ];
 then
-  echo "DEBUG mode activated (verbose)"
+  echo "INFO:	DEBUG mode activated (verbose)"
   set -x
 fi
 
@@ -84,7 +84,7 @@ fi
 
 production_jenkins_build()
 {
-    #source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
+    source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
     source ${XENADMIN_DIR}/devtools/check-roaming.sh
     source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
@@ -111,7 +111,7 @@ private_jenkins_build()
 if [ -z "${PRIVATE_BUILD_MODE+xxx}" ]; then
     production_jenkins_build
 else
-    echo "Running private Jenkins build"
+    echo "INFO:	Running private Jenkins build"
     private_jenkins_build
 fi
 unset PRIVATE_BUILD_MODE

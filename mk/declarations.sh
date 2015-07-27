@@ -40,7 +40,7 @@
 
 if [ -n "${DEBUG+xxx}" ]; 
 then 
-	set -x
+  set -x
 fi
 
 # that's the code to get the branch name of the repository
@@ -58,25 +58,25 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 if [ -z "${JOB_NAME+xxx}" ]
 then 
     JOB_NAME="devbuild"
-    echo "Warning: JOB_NAME env var not set, we will use ${JOB_NAME}"
+    echo "WARN:	JOB_NAME env var not set, we will use ${JOB_NAME}"
 fi
 
 if [ -z "${BUILD_NUMBER+xxx}" ]
 then 
     BUILD_NUMBER="0"
-    echo "Warning: BUILD_NUMBER env var not set, we will use ${BUILD_NUMBER}"
+    echo "WARN:	BUILD_NUMBER env var not set, we will use ${BUILD_NUMBER}"
 fi
 
 if [ -z "${BUILD_ID+xxx}" ]
 then 
     BUILD_ID=$(date +"%Y-%m-%d_%H-%M-%S")
-    echo "Warning: BUILD_ID env var not set, we will use ${BUILD_ID}"
+    echo "WARN:	BUILD_ID env var not set, we will use ${BUILD_ID}"
 fi
 
 if [ -z "${BUILD_URL+xxx}" ]
 then 
     BUILD_URL="n/a"
-    echo "Warning: BUILD_URL env var not set, we will use 'n/a'"
+    echo "WARN:	BUILD_URL env var not set, we will use 'n/a'"
 fi
 
 if [ -d "$DIR/../.git" ]
@@ -84,17 +84,22 @@ then
     if [ -z "${GIT_COMMIT-}" ]
     then
         get_REVISION="none"
-	    echo "Warning: GIT_COMMIT env var not set, we will use 'none'"
+	    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
     else
    	    get_REVISION="${GIT_COMMIT}"
     fi
 
 	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
+	if [[ $XS_BRANCH == *"/"* ]]
+        then
+            XS_BRANCH="trunk"
+            echo "WARN:	Failed to detect XS_BRANCH we will fallback to ${XS_BRANCH}"
+        fi
 else
 	if [ -z "${MERCURIAL_REVISION+xxx}" ]
 	then 
 	    MERCURIAL_REVISION="none"
-	    echo "Warning: MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
+	    echo "WARN:	MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
 	fi
 	get_REVISION=${MERCURIAL_REVISION}
 	XS_BRANCH=`cd $DIR;hg showconfig paths.default|sed -e 's@.*carbon/\(.*\)/xenadmin.hg.*@\1@'`
@@ -102,10 +107,10 @@ fi
 
 if [ -z "${XS_BRANCH+xxx}" ]
 then
-    echo Failed to detect the branch, stopping here because this would break things much later.
+    echo "ERROR:	Failed to detect the branch, stopping here because this would break things much later."
     exit 1
 else
-    echo Running on branch: $XS_BRANCH
+    echo "INFO:	Running on branch: $XS_BRANCH"
 fi
 
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
@@ -119,7 +124,7 @@ if [ -z "${WORKSPACE+xxx}" ]
 then 
     DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
     WORKSPACE="${DIR}"
-    echo "Warning: WORKSPACE env var not set, we will use ${WORKSPACE}"
+    echo "WARN:	WORKSPACE env var not set, we will use ${WORKSPACE}"
 fi
 
 if which cygpath >/dev/null; then
@@ -128,7 +133,7 @@ else
     ROOT=${WORKSPACE}
 fi
 
-echo "Workspace located in: $ROOT"
+echo "INFO:	Workspace located in: $ROOT"
 REPO=${XENADMIN_DIR}
 REF_REPO=${ROOT}/xenadmin-ref.hg
 SCRATCH_DIR=${ROOT}/scratch
