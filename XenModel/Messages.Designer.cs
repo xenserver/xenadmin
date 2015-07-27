@@ -4262,6 +4262,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File System on Logs Partition Full.
+        /// </summary>
+        public static string ALERT_ALARM_LOG_FILESYSTEM {
+            get {
+                return ResourceManager.GetString("ALERT_ALARM_LOG_FILESYSTEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The disk usage for the Logs Partition on {0} has reached {1}. Logging will be critically affected if this disk becomes full. Old log files should be removed..
+        /// </summary>
+        public static string ALERT_ALARM_LOG_FILESYSTEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ALERT_ALARM_LOG_FILESYSTEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memory Usage Alarm.
         /// </summary>
         public static string ALERT_ALARM_MEMORY {

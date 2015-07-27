@@ -1573,6 +1573,12 @@ This alarm is set to be triggered when the ratio of the memory demand to the phy
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
     <value>Disk usage for the Control Domain on {0} has reached {1}. XenServer's performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed.</value>
   </data>
+  <data name="ALERT_ALARM_LOG_FILESYSTEM" xml:space="preserve">
+    <value>File System on Logs Partition Full</value>
+  </data>
+  <data name="ALERT_ALARM_LOG_FILESYSTEM_DESCRIPTION" xml:space="preserve">
+    <value>The disk usage for the Logs Partition on {0} has reached {1}. Logging will be critically affected if this disk becomes full. Old log files should be removed.</value>
+  </data>
   <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
     <value>Memory Usage Alarm</value>
   </data>
