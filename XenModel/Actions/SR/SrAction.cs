@@ -32,6 +32,7 @@
 using System;
 using XenAdmin.Core;
 using XenAPI;
+using System.Collections.Generic;
 
 
 namespace XenAdmin.Actions
@@ -168,7 +169,37 @@ namespace XenAdmin.Actions
             if (SR.PBDs.Count < 1)
                 return;
 
-            foreach (XenRef<PBD> pbd in SR.PBDs)
+            //CA-176935, CA-173497 - we need to run Unplug for the master last - creating a new list of hosts where the master is always the last
+            var allPBDRefsToNonMaster = new List<XenRef<PBD>>();
+            var allPBDRefsToMaster = new List<XenRef<PBD>>();
+
+            var master = Helpers.GetMaster(Connection);
+
+            foreach (var pbdRef in SR.PBDs)
+            {
+                var pbd = Connection.Resolve(pbdRef);
+                if (pbd != null)
+                {
+                    if (pbd.host != null)
+                    {
+                        var host = Connection.Resolve(pbd.host);
+                        if (master != null && host != null && host.uuid == master.uuid)
+                        {
+                            allPBDRefsToMaster.Add(pbdRef);
+                        }
+                        else
+                        {
+                            allPBDRefsToNonMaster.Add(pbdRef);
+                        }
+                    }
+                }
+            }
+
+            var allPBDRefs = new List<XenRef<PBD>>();
+            allPBDRefs.AddRange(allPBDRefsToNonMaster);
+            allPBDRefs.AddRange(allPBDRefsToMaster);
+
+            foreach (XenRef<PBD> pbd in allPBDRefs)
             {
                 RelatedTask = PBD.async_unplug(Session, pbd.opaque_ref);
                 PollToCompletion(PercentComplete, PercentComplete + inc);
