@@ -49,6 +49,9 @@ namespace XenAdminTests.UnitTests.AlertTests
         private Mock<Host> hostA;
         private Mock<Host> hostB;
 
+        protected Cache cacheA;
+        protected Cache cacheB;
+
         [Test]
         public void TestAlertWithConnectionAndHosts()
         {
@@ -178,9 +181,13 @@ namespace XenAdminTests.UnitTests.AlertTests
         {
             connA = new Mock<IXenConnection>(MockBehavior.Strict);
             connA.Setup(n => n.Name).Returns("ConnAName");
+            cacheA = new Cache();
+            connA.Setup(x => x.Cache).Returns(cacheA);
 
             connB = new Mock<IXenConnection>(MockBehavior.Strict);
             connB.Setup(n => n.Name).Returns("ConnBName");
+            cacheB = new Cache();
+            connB.Setup(x => x.Cache).Returns(cacheB);
 
             hostA = new Mock<Host>(MockBehavior.Strict);
             hostA.Setup(n => n.Name).Returns("HostAName");
@@ -194,6 +201,8 @@ namespace XenAdminTests.UnitTests.AlertTests
         [TearDown]
         public void TestTearDown()
         {
+            cacheA = null;
+            cacheB = null;
             connA = null;
             connB = null;
             hostA = null;
