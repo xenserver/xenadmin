@@ -541,6 +541,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return this.Equals((PatchGridViewRow)obj);
                 return false;
             }
+        }
+
+        private void RestoreDismUpdatesButton_Click(object sender, EventArgs e)
+        {
+            Updates.RestoreDismissedUpdates();
         }       
     }        
 
