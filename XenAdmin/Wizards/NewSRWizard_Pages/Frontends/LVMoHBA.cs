@@ -225,7 +225,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string NextText(bool isLastPage)
         {
-            return Messages.NEWSR_LVMOHBA_NEXT_TEXT;
+            // for Dundee or greater connections, we have "Storage provisioning settings" page after this page, so the Next button should say "Next", not "Create"
+            return Helpers.DundeeOrGreater(Connection) ?  Messages.WIZARD_BUTTON_NEXT : Messages.NEWSR_LVMOHBA_NEXT_TEXT;
         }
 
         #endregion
