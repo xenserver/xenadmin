@@ -463,10 +463,6 @@ namespace XenAdmin
                 {
                     return Icons.HostEvacuate;
                 }
-                else if (!XenAPI.Host.IsFullyPatched(host,ConnectionsManager.XenConnectionsCopy))
-                {
-                    return Icons.HostUnpatched;
-                }
                 else if (Helpers.IsOlderThanMaster(host))
                 {
                     return Icons.HostOlderThanMaster;
