@@ -2600,6 +2600,12 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Yes, Destroy</value>
   </data>
+  <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
+    <value>Are you sure you want to disable Health Check on the selected pool?</value>
+  </data>
+  <data name="CONFIRM_DISABLE_HEALTH_CHECK_SERVER" xml:space="preserve">
+    <value>Are you sure you want to disable Health Check on the selected server?</value>
+  </data>
   <data name="CONFIRM_EXPORT_FAT" xml:space="preserve">
     <value>The export file may be larger than your filesystem limit.
 

@@ -853,7 +853,8 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
+            if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
+                ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
             ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
 
             Updates.CheckServerPatches();

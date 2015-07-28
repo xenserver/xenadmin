@@ -487,7 +487,7 @@
     <value>24</value>
   </data>
   <data name="authenticationRubricLabel.Text" xml:space="preserve">
-    <value>Authentication with Citrix upload server is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="authenticationRubricLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -751,7 +751,7 @@
     <value>4</value>
   </data>
   <data name="decentGroupBox1.Text" xml:space="preserve">
-    <value>Authentication with Citrix upload server</value>
+    <value>Authentication with Citrix Insight Services</value>
   </data>
   <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
     <value>decentGroupBox1</value>

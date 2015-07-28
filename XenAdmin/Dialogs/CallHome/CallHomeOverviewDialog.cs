@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -243,6 +242,7 @@ namespace XenAdmin.Dialogs.CallHome
             {
                 xenConnection.Cache.RegisterBatchCollectionChanged<Pool>(Pool_BatchCollectionChanged);
             }
+            showAgainCheckBox.Checked = Properties.Settings.Default.ShowHealthCheckEnrollmentReminder;
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -264,7 +264,7 @@ namespace XenAdmin.Dialogs.CallHome
             Close();
         }
         
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void editlinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
                 return;
@@ -315,6 +315,41 @@ namespace XenAdmin.Dialogs.CallHome
                 var user = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
                 var password = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
                 new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
+            }
+        }
+
+        private void showAgainCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder != showAgainCheckBox.Checked)
+            {
+                Properties.Settings.Default.ShowHealthCheckEnrollmentReminder = showAgainCheckBox.Checked;
+                Settings.TrySaveSettings();
+            }
+        }
+
+        private void disableLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
+                return;
+
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            if (poolRow.Pool == null)
+                return;
+            var callHomeSettings = poolRow.Pool.CallHomeSettings;
+            if (callHomeSettings.Status == CallHomeStatus.Enabled)
+            {
+                string msg = Helpers.GetPool(poolRow.Pool.Connection) == null 
+                    ? Messages.CONFIRM_DISABLE_HEALTH_CHECK_SERVER 
+                    : Messages.CONFIRM_DISABLE_HEALTH_CHECK_POOL;
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(null, msg, Messages.XENCENTER), 
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+                {
+                    if (dlg.ShowDialog(this) != DialogResult.Yes)
+                        return;
+                }
+                callHomeSettings.Status = CallHomeStatus.Disabled;
+                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
+                
             }
         }
     }

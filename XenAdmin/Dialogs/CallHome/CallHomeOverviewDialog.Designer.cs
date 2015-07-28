@@ -39,9 +39,10 @@ namespace XenAdmin.Dialogs.CallHome
             this.poolNameLabel = new System.Windows.Forms.Label();
             this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.disableLinkLabel = new System.Windows.Forms.LinkLabel();
             this.uploadRequestLinkLabel = new System.Windows.Forms.LinkLabel();
             this.scheduleLabel = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.editLinkLabel = new System.Windows.Forms.LinkLabel();
             this.issuesLabel = new System.Windows.Forms.Label();
             this.lastUploadDateLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,7 +50,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.lastUploadLabel = new System.Windows.Forms.Label();
             this.ReportAnalysisLinkLabel = new System.Windows.Forms.LinkLabel();
             this.previousUploadPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.viewReportLinkLabel = new System.Windows.Forms.LinkLabel();
             this.previousUploadDateLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.notEnrolledPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -61,6 +62,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
+            this.showAgainCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,9 +146,10 @@ namespace XenAdmin.Dialogs.CallHome
             // healthCheckStatusPanel
             // 
             resources.ApplyResources(this.healthCheckStatusPanel, "healthCheckStatusPanel");
+            this.healthCheckStatusPanel.Controls.Add(this.disableLinkLabel, 0, 9);
             this.healthCheckStatusPanel.Controls.Add(this.uploadRequestLinkLabel, 0, 8);
             this.healthCheckStatusPanel.Controls.Add(this.scheduleLabel, 0, 6);
-            this.healthCheckStatusPanel.Controls.Add(this.linkLabel2, 0, 7);
+            this.healthCheckStatusPanel.Controls.Add(this.editLinkLabel, 0, 7);
             this.healthCheckStatusPanel.Controls.Add(this.issuesLabel, 0, 2);
             this.healthCheckStatusPanel.Controls.Add(this.lastUploadDateLabel, 1, 1);
             this.healthCheckStatusPanel.Controls.Add(this.label4, 0, 5);
@@ -155,6 +158,14 @@ namespace XenAdmin.Dialogs.CallHome
             this.healthCheckStatusPanel.Controls.Add(this.ReportAnalysisLinkLabel, 0, 3);
             this.healthCheckStatusPanel.Controls.Add(this.previousUploadPanel, 0, 4);
             this.healthCheckStatusPanel.Name = "healthCheckStatusPanel";
+            // 
+            // disableLinkLabel
+            // 
+            resources.ApplyResources(this.disableLinkLabel, "disableLinkLabel");
+            this.healthCheckStatusPanel.SetColumnSpan(this.disableLinkLabel, 2);
+            this.disableLinkLabel.Name = "disableLinkLabel";
+            this.disableLinkLabel.TabStop = true;
+            this.disableLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.disableLinkLabel_LinkClicked);
             // 
             // uploadRequestLinkLabel
             // 
@@ -170,13 +181,13 @@ namespace XenAdmin.Dialogs.CallHome
             this.healthCheckStatusPanel.SetColumnSpan(this.scheduleLabel, 2);
             this.scheduleLabel.Name = "scheduleLabel";
             // 
-            // linkLabel2
+            // editLinkLabel
             // 
-            resources.ApplyResources(this.linkLabel2, "linkLabel2");
-            this.healthCheckStatusPanel.SetColumnSpan(this.linkLabel2, 2);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            resources.ApplyResources(this.editLinkLabel, "editLinkLabel");
+            this.healthCheckStatusPanel.SetColumnSpan(this.editLinkLabel, 2);
+            this.editLinkLabel.Name = "editLinkLabel";
+            this.editLinkLabel.TabStop = true;
+            this.editLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.editlinkLabel_LinkClicked);
             // 
             // issuesLabel
             // 
@@ -217,17 +228,17 @@ namespace XenAdmin.Dialogs.CallHome
             // 
             resources.ApplyResources(this.previousUploadPanel, "previousUploadPanel");
             this.healthCheckStatusPanel.SetColumnSpan(this.previousUploadPanel, 2);
-            this.previousUploadPanel.Controls.Add(this.linkLabel1, 0, 1);
+            this.previousUploadPanel.Controls.Add(this.viewReportLinkLabel, 0, 1);
             this.previousUploadPanel.Controls.Add(this.previousUploadDateLabel, 1, 0);
             this.previousUploadPanel.Controls.Add(this.label3, 0, 0);
             this.previousUploadPanel.Name = "previousUploadPanel";
             // 
-            // linkLabel1
+            // viewReportLinkLabel
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.previousUploadPanel.SetColumnSpan(this.linkLabel1, 2);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
+            resources.ApplyResources(this.viewReportLinkLabel, "viewReportLinkLabel");
+            this.previousUploadPanel.SetColumnSpan(this.viewReportLinkLabel, 2);
+            this.viewReportLinkLabel.Name = "viewReportLinkLabel";
+            this.viewReportLinkLabel.TabStop = true;
             // 
             // previousUploadDateLabel
             // 
@@ -271,8 +282,8 @@ namespace XenAdmin.Dialogs.CallHome
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // flowLayoutPanel2
@@ -298,12 +309,20 @@ namespace XenAdmin.Dialogs.CallHome
             resources.ApplyResources(this.rubricLabel, "rubricLabel");
             this.rubricLabel.Name = "rubricLabel";
             // 
+            // showAgainCheckBox
+            // 
+            resources.ApplyResources(this.showAgainCheckBox, "showAgainCheckBox");
+            this.showAgainCheckBox.Name = "showAgainCheckBox";
+            this.showAgainCheckBox.UseVisualStyleBackColor = true;
+            this.showAgainCheckBox.CheckedChanged += new System.EventHandler(this.showAgainCheckBox_CheckedChanged);
+            // 
             // CallHomeOverviewDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.showAgainCheckBox);
             this.Controls.Add(this.buttonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "CallHomeOverviewDialog";
@@ -329,6 +348,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -350,9 +370,9 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.LinkLabel ReportAnalysisLinkLabel;
         private System.Windows.Forms.TableLayoutPanel previousUploadPanel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel viewReportLinkLabel;
         private System.Windows.Forms.Label previousUploadDateLabel;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel editLinkLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label scheduleLabel;
         private System.Windows.Forms.TableLayoutPanel notEnrolledPanel;
@@ -364,6 +384,8 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.Label policyStatementLabel;
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
         private System.Windows.Forms.LinkLabel uploadRequestLinkLabel;
+        private System.Windows.Forms.CheckBox showAgainCheckBox;
+        private System.Windows.Forms.LinkLabel disableLinkLabel;
     }
 }
 
