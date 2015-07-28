@@ -79,7 +79,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix upload server.
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services.
         /// </summary>
         public static string ACTION_CALLHOME_AUTHENTICATION {
             get {
@@ -88,7 +88,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authenticating with Citrix upload server.
+        ///   Looks up a localized string similar to Authenticating with Citrix Insight Services.
         /// </summary>
         public static string ACTION_CALLHOME_AUTHENTICATION_PROGRESS {
             get {
@@ -5824,7 +5824,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix upload server is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
         /// </summary>
         public static string CALLHOME_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
             get {
@@ -5833,7 +5833,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix upload server is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server..
         /// </summary>
         public static string CALLHOME_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
@@ -16340,6 +16340,24 @@ namespace XenAdmin {
         public static string HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER {
             get {
                 return ResourceManager.GetString("HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services failed. See the application log files for more information..
+        /// </summary>
+        public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid username or password. Please try again..
+        /// </summary>
+        public static string HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS", resourceCulture);
             }
         }
         
