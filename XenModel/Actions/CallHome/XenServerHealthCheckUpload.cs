@@ -66,7 +66,9 @@ namespace XenServerHealthCheck
         public string InitiateUpload(long size)
         {
             // Request a new bundle upload to CIS server.
-            Uri uri = new Uri(UPLOAD_URL + "bundle/?size=" + size.ToString());
+            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString();
+            log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", FULL_URL);
+            Uri uri = new Uri(FULL_URL);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             if (uploadToken != null)
             {
@@ -116,6 +118,7 @@ namespace XenServerHealthCheck
         // Upload a chunk.
         public bool UploadChunk(string address, string filePath, long offset, long thisChunkSize, string uploadToken)
         {
+            log.InfoFormat("UploadChunk, UPLOAD_URL: {0}", address);
             Uri uri = new Uri(address);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(uri);
             req.Method = "POST";
@@ -160,6 +163,7 @@ namespace XenServerHealthCheck
         // Upload the zip file.
         public string UploadZip(string fileName, System.Threading.CancellationToken cancel)
         {
+            log.InfoFormat("Start to upload bundle {0}", fileName);
             FileInfo fileInfo = new FileInfo(fileName);
             long size = fileInfo.Length;
 
@@ -172,7 +176,7 @@ namespace XenServerHealthCheck
             }
 
             // Start to upload zip file.
-            log.InfoFormat("Upload ID: {0}", uploadUuid);
+            log.InfoFormat("Upload server returns Upload ID: {0}", uploadUuid);
 
             long offset = 0;
             while (offset < size)
