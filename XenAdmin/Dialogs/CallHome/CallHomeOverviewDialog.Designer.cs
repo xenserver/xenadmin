@@ -30,7 +30,6 @@ namespace XenAdmin.Dialogs.CallHome
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallHomeOverviewDialog));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.poolsDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
@@ -64,7 +63,6 @@ namespace XenAdmin.Dialogs.CallHome
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.showAgainCheckBox = new System.Windows.Forms.CheckBox();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -315,7 +313,6 @@ namespace XenAdmin.Dialogs.CallHome
             // 
             resources.ApplyResources(this.showAgainCheckBox, "showAgainCheckBox");
             this.showAgainCheckBox.Name = "showAgainCheckBox";
-            this.toolTip.SetToolTip(this.showAgainCheckBox, resources.GetString("showAgainCheckBox.ToolTip"));
             this.showAgainCheckBox.UseVisualStyleBackColor = true;
             this.showAgainCheckBox.CheckedChanged += new System.EventHandler(this.showAgainCheckBox_CheckedChanged);
             // 
@@ -388,7 +385,6 @@ namespace XenAdmin.Dialogs.CallHome
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
         private System.Windows.Forms.LinkLabel uploadRequestLinkLabel;
         private System.Windows.Forms.CheckBox showAgainCheckBox;
-        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.LinkLabel disableLinkLabel;
     }
 }

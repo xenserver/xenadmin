@@ -259,13 +259,13 @@
     <value>NoControl</value>
   </data>
   <data name="disableLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 218</value>
+    <value>3, 219</value>
   </data>
   <data name="disableLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="disableLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 14</value>
+    <value>119, 15</value>
   </data>
   <data name="disableLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -301,7 +301,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="uploadRequestLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 14</value>
+    <value>131, 15</value>
   </data>
   <data name="uploadRequestLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -775,7 +775,7 @@
     <value>10</value>
   </data>
   <data name="healthCheckStatusPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 235</value>
+    <value>256, 237</value>
   </data>
   <data name="healthCheckStatusPanel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -793,7 +793,7 @@
     <value>0</value>
   </data>
   <data name="healthCheckStatusPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="disableLinkLabel" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="uploadRequestLinkLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="scheduleLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="editLinkLabel" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="issuesLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ReportAnalysisLinkLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,AutoSize,20,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="disableLinkLabel" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="uploadRequestLinkLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="scheduleLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="editLinkLabel" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="issuesLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ReportAnalysisLinkLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,AutoSize,20,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="notEnrolledPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -886,13 +886,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="notEnrolledPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 244</value>
+    <value>3, 246</value>
   </data>
   <data name="notEnrolledPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="notEnrolledPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 50</value>
+    <value>256, 48</value>
   </data>
   <data name="notEnrolledPanel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1249,19 +1249,13 @@
     <value>9, 410</value>
   </data>
   <data name="showAgainCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>433, 19</value>
+    <value>469, 19</value>
   </data>
   <data name="showAgainCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="showAgainCheckBox.Text" xml:space="preserve">
-    <value>&amp;Show this when connecting to servers that are not enrolled into Health Check</value>
-  </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="showAgainCheckBox.ToolTip" xml:space="preserve">
-    <value>Show this dialog when connecting to servers that are not enrolled into Health Check</value>
+    <value>&amp;Show this dialog when connecting to servers that are not enrolled into Health Check</value>
   </data>
   <data name="&gt;&gt;showAgainCheckBox.Name" xml:space="preserve">
     <value>showAgainCheckBox</value>
@@ -1729,12 +1723,6 @@
   </data>
   <data name="&gt;&gt;StatusColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
-    <value>toolTip</value>
-  </data>
-  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CallHomeOverviewDialog</value>
