@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="initialAllocationNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="initialAllocationNumericUpDown.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -160,10 +160,10 @@
     <value>135, 13</value>
   </data>
   <data name="labelInitialAllocation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="labelInitialAllocation.Text" xml:space="preserve">
-    <value>Virtual disk initial allocation:</value>
+    <value>Virtual disk &amp;initial allocation:</value>
   </data>
   <data name="&gt;&gt;labelInitialAllocation.Name" xml:space="preserve">
     <value>labelInitialAllocation</value>
@@ -208,7 +208,7 @@
     <value>7</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Choose whether to use the traditional (thick) provisioning method of disk space allocation, or to enable thin provisioning for optimal utilization of available storage.</value>
+    <value>Choose whether to use the traditional (full) provisioning method of disk space allocation, or to enable thin provisioning for optimal utilization of available storage.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -232,13 +232,13 @@
     <value>3, 62</value>
   </data>
   <data name="radioButtonThickProvisioning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 17</value>
+    <value>365, 17</value>
   </data>
   <data name="radioButtonThickProvisioning.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="radioButtonThickProvisioning.Text" xml:space="preserve">
-    <value>Thick provisioning: reserve the full size of the virtual disk when it is created</value>
+    <value>&amp;Full provisioning: reserve the full size of the virtual disk when it is created</value>
   </data>
   <data name="&gt;&gt;radioButtonThickProvisioning.Name" xml:space="preserve">
     <value>radioButtonThickProvisioning</value>
@@ -265,13 +265,13 @@
     <value>33, 137</value>
   </data>
   <data name="labelAllocationQuantum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 13</value>
+    <value>118, 13</value>
   </data>
   <data name="labelAllocationQuantum.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="labelAllocationQuantum.Text" xml:space="preserve">
-    <value>Subsequent allocations:</value>
+    <value>In&amp;cremental allocations:</value>
   </data>
   <data name="&gt;&gt;labelAllocationQuantum.Name" xml:space="preserve">
     <value>labelAllocationQuantum</value>
@@ -295,7 +295,7 @@
     <value>50, 20</value>
   </data>
   <data name="allocationQuantumNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="allocationQuantumNumericUpDown.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -361,7 +361,7 @@
     <value>119, 13</value>
   </data>
   <data name="labelPercent2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="labelPercent2.Text" xml:space="preserve">
     <value>% of the virtual disk size</value>
