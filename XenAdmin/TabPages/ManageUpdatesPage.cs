@@ -104,7 +104,7 @@ namespace XenAdmin.TabPages
                     StoreSelectedUpdates();
                     dataGridViewUpdates.Rows.Clear();
                     spinningTimer.Start();
-                    panelProgress.Visible = true;
+                    tableLayoutPanel3.Visible = true;
                     labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
                 });
         }
@@ -122,8 +122,8 @@ namespace XenAdmin.TabPages
                         int alertCount = Updates.UpdateAlertsCount;
 
                         if (alertCount > 0)
-                        {
-                            panelProgress.Visible = false;
+                        {                            
+                            tableLayoutPanel3.Visible = false;
                         }
                         else
                         {
@@ -213,7 +213,7 @@ namespace XenAdmin.TabPages
 
                 if (updates.Count == 0)
                 {
-                    panelProgress.Visible = true;
+                    tableLayoutPanel3.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
 
                     if (SomeOrAllUpdatesAllowed())
@@ -241,7 +241,7 @@ namespace XenAdmin.TabPages
                 }
 
                 updates.RemoveAll(FilterAlert);
-                panelProgress.Visible = false;
+                tableLayoutPanel3.Visible = false;
 
                 if (dataGridViewUpdates.SortedColumn != null)
                 {
