@@ -3727,6 +3727,9 @@ This will also delete its subfolders.</value>
   <data name="DISABLED" xml:space="preserve">
     <value>Disabled</value>
   </data>
+  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
+    <value>No updates found because automatic checking for updates is disabled.</value>
+  </data>
   <data name="DISABLED_VMPP" xml:space="preserve">
     <value>VM protection policy '{0}' disabled.</value>
   </data>

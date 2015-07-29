@@ -63,6 +63,7 @@ namespace XenAdmin.TabPages
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
         private int checksQueue;
+        private bool PageWasRefreshed;
 
         public ManageUpdatesPage()
         {
@@ -75,6 +76,7 @@ namespace XenAdmin.TabPages
             Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+            PageWasRefreshed = false;
         }
 
         public void RefreshUpdateList()
@@ -119,7 +121,9 @@ namespace XenAdmin.TabPages
                         int alertCount = Updates.UpdateAlertsCount;
 
                         if (alertCount > 0)
+                        {
                             panelProgress.Visible = false;
+                        }
                         else
                         {
                             pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
@@ -191,6 +195,8 @@ namespace XenAdmin.TabPages
                 return;
 
             SetFilterLabel();
+
+            this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 51);
             
             try
             {
@@ -208,8 +214,28 @@ namespace XenAdmin.TabPages
                 {
                     panelProgress.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
-                    labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+
+                    if (SomeOrAllUpdatesAllowed())
+                    {
+                        labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
+                        checkForUpdatesNowButton.Visible = true;
+                    }
+                    else
+                    {
+                        labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+                    }
                     return;
+                }
+
+                checkForUpdatesNowButton.Visible = false;
+                if (SomeButNotAllUpdatesAllowed())
+                {
+                    this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
+                    MakeWarningVisible();
+                }
+                else
+                {
+                    MakeWarningInvisible();
                 }
 
                 updates.RemoveAll(FilterAlert);
@@ -246,6 +272,55 @@ namespace XenAdmin.TabPages
                 dataGridViewUpdates.ResumeLayout();
                 UpdateButtonEnablement();
             }
+        }
+
+        /// <summary>
+        /// Makes the warning that appears above the grid saying: "Automatic checking for updates 
+        /// is disabled for some types of updates" visible.
+        /// </summary>
+        private void MakeWarningVisible()
+        {
+            pictureBox1.Visible = true;
+            AutoCheckForUpdatesDisabledLabel.Visible = true;
+            checkForUpdatesNowButton2.Visible = true;
+        }
+
+        /// <summary>
+        /// Makes the warning that appears above the grid saying: "Automatic checking for updates 
+        /// is disabled for some types of updates" invisible.
+        /// </summary>
+        private void MakeWarningInvisible()
+        {
+            pictureBox1.Visible = false;
+            AutoCheckForUpdatesDisabledLabel.Visible = false;
+            checkForUpdatesNowButton2.Visible = false;
+        }
+
+        /// <summary>
+        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some, but not all types of updates.
+        /// </summary>
+        /// <returns></returns>
+        private bool SomeButNotAllUpdatesAllowed()
+        {
+            return (!Properties.Settings.Default.AllowPatchesUpdates ||
+                    !Properties.Settings.Default.AllowXenCenterUpdates ||
+                    !Properties.Settings.Default.AllowXenServerUpdates) &&
+                    (Properties.Settings.Default.AllowPatchesUpdates ||
+                    Properties.Settings.Default.AllowXenCenterUpdates ||
+                    Properties.Settings.Default.AllowXenServerUpdates) &&
+                    !PageWasRefreshed;
+        }
+
+        /// <summary>
+        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some or all types of updates.
+        /// </summary>
+        /// <returns></returns>
+        private bool SomeOrAllUpdatesAllowed()
+        {
+            return !((Properties.Settings.Default.AllowPatchesUpdates &&
+                   Properties.Settings.Default.AllowXenCenterUpdates &&
+                   Properties.Settings.Default.AllowXenServerUpdates) ||
+                   PageWasRefreshed);
         }
 
         /// <summary>
@@ -658,6 +733,8 @@ namespace XenAdmin.TabPages
         
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
+            PageWasRefreshed = true;
+            checkForUpdatesNowButton.Visible = false;
             Updates.CheckForUpdates(true);
         }
 
@@ -749,10 +826,27 @@ namespace XenAdmin.TabPages
             }
         }
 
+        
+        private void checkForUpdatesNowButton_Click(object sender, EventArgs e)
+        {
+            checkForUpdatesNowButton.Visible = false;
+            Updates.CheckForUpdates(true);
+            PageWasRefreshed = true;
+        }
+
         private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)
         {
-
+            PageWasRefreshed = true;
+            checkForUpdatesNowButton.Visible = false;
             Updates.RestoreDismissedUpdates();
         }        
+        private void checkForUpdatesNowButton2_Click(object sender, EventArgs e)
+        {
+            Updates.CheckForUpdates(true);
+            pictureBox1.Visible = false;
+            AutoCheckForUpdatesDisabledLabel.Visible = false;
+            checkForUpdatesNowButton2.Visible = false;
+            PageWasRefreshed = true;
+        }
     }
 }

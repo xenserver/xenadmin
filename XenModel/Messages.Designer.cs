@@ -10545,6 +10545,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No updates found because automatic cheking for updates is disabled..
+        /// </summary>
+        public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
+            get {
+                return ResourceManager.GetString("DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM protection policy &apos;{0}&apos; disabled..
         /// </summary>
         public static string DISABLED_VMPP {
