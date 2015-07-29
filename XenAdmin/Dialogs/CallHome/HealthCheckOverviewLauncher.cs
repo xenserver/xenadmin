@@ -35,7 +35,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Commands;
 using XenAdmin.Core;
-using XenAdmin.Dialogs.CallHome;
+using XenAdmin.Dialogs.HealthCheck;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -45,7 +45,7 @@ namespace XenAdmin.Dialogs
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private bool healthCheckOverviewVisible;
-        private CallHomeOverviewDialog healthCheckOverviewDialog;
+        private HealthCheckOverviewDialog healthCheckOverviewDialog;
         private readonly IWin32Window parent;
         private DateTime LastCloseTime { get; set; }
         private readonly object healthCheckLock = new object();
@@ -94,7 +94,7 @@ namespace XenAdmin.Dialogs
 
         private void LoadHealthCheckOverviewDialog()
         {
-            healthCheckOverviewDialog = new CallHomeOverviewDialog();
+            healthCheckOverviewDialog = new HealthCheckOverviewDialog();
         }
 
         public void LaunchIfRequired(bool nag, SelectedItemCollection selectedObjects)
@@ -169,7 +169,7 @@ namespace XenAdmin.Dialogs
             if (pool == null)
                 return false;
 
-            if (pool.CallHomeSettings.Status == CallHomeStatus.Undefined)
+            if (pool.HealthCheckSettings.Status == HealthCheckStatus.Undefined)
             {
                 Program.Invoke(Program.MainWindow, () => ShowHealthCheckOverview(pool));
                 return true;

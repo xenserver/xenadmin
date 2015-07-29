@@ -402,12 +402,12 @@ namespace XenAPI
             get { return HasGpu && Connection.Cache.PGPUs.Any(pGpu => pGpu.HasVGpu); }
         }
 
-        #region CallHome settings
-        public CallHomeSettings CallHomeSettings
+        #region Health Check settings
+        public HealthCheckSettings HealthCheckSettings
         {
             get 
             {
-               return new CallHomeSettings(health_check_config);
+               return new HealthCheckSettings(health_check_config);
             }
         }
         #endregion
@@ -425,18 +425,18 @@ namespace XenAPI
 
         #endregion
     }
-    
 
-    public enum CallHomeStatus
+
+    public enum HealthCheckStatus
     {
         Disabled, Enabled, Undefined
     }
 
-    public class CallHomeSettings
+    public class HealthCheckSettings
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CallHomeStatus Status;
+        public HealthCheckStatus Status;
         public int IntervalInDays, TimeOfDay, RetryInterval;
         public DayOfWeek DayOfWeek;
         public string UploadTokenSecretUuid;
@@ -466,7 +466,7 @@ namespace XenAPI
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
         public const string UPLOAD_UUID = "UploadUuid";
 
-        public CallHomeSettings(CallHomeStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
+        public HealthCheckSettings(HealthCheckStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
             Status = status;
             IntervalInDays = intervalInDays;
@@ -475,11 +475,11 @@ namespace XenAPI
             RetryInterval = retryInterval;
         }
 
-        public CallHomeSettings(Dictionary<string, string> config)
+        public HealthCheckSettings(Dictionary<string, string> config)
         {
             Status = config == null || !config.ContainsKey(STATUS)
-                           ? CallHomeStatus.Undefined
-                           : (BoolKey(config, STATUS) ? CallHomeStatus.Enabled : CallHomeStatus.Disabled);
+                           ? HealthCheckStatus.Undefined
+                           : (BoolKey(config, STATUS) ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled);
             IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, intervalInDaysDefault);
             if (!Enum.TryParse(Get(config, DAY_OF_WEEK), out DayOfWeek))
                 DayOfWeek = (DayOfWeek) GetDefaultDay();
@@ -495,7 +495,7 @@ namespace XenAPI
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
         {
             var newConfig = baseDictionary == null ? new Dictionary<string, string>() : new Dictionary<string, string>(baseDictionary);
-            newConfig[STATUS] = Status == CallHomeStatus.Enabled ? "true" : "false";
+            newConfig[STATUS] = Status == HealthCheckStatus.Enabled ? "true" : "false";
             newConfig[INTERVAL_IN_DAYS] = IntervalInDays.ToString();
             var day = (int) DayOfWeek;
             newConfig[DAY_OF_WEEK] = day.ToString();
@@ -512,9 +512,9 @@ namespace XenAPI
         {
             get
             {
-                return Status == CallHomeStatus.Enabled
-                           ? Messages.CALLHOME_STATUS_NOT_AVAILABLE_YET
-                           : Messages.CALLHOME_STATUS_NOT_ENROLLED;
+                return Status == HealthCheckStatus.Enabled
+                           ? Messages.HEALTHCHECK_STATUS_NOT_AVAILABLE_YET
+                           : Messages.HEALTHCHECK_STATUS_NOT_ENROLLED;
             }
         }
 
@@ -522,7 +522,7 @@ namespace XenAPI
         {
             get
             {
-                if (Status != CallHomeStatus.Enabled)
+                if (Status != HealthCheckStatus.Enabled)
                     return false;
                 var uploadRequestExpiryTime = NewUploadRequestTime.AddMinutes(UploadRequestValidityInterval);
                 return DateTime.Compare(uploadRequestExpiryTime, DateTime.UtcNow) < 0;
@@ -604,13 +604,13 @@ namespace XenAPI
             string UUID = string.Empty;
             switch (secretType)
             {
-                case CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET:
+                case HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET:
                     UUID = UserNameSecretUuid;
                     break;
-                case CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET:
+                case HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET:
                     UUID = PasswordSecretUuid;
                     break;
-                case CallHomeSettings.UPLOAD_TOKEN_SECRET:
+                case HealthCheckSettings.UPLOAD_TOKEN_SECRET:
                     UUID = UploadTokenSecretUuid;
                     break;
                 default:
@@ -654,7 +654,7 @@ namespace XenAPI
                 var poolOfOne = Helpers.GetPoolOfOne(connection);
                 if (poolOfOne != null)
                 {
-                    var token = poolOfOne.CallHomeSettings.GetSecretyInfo(connection, secretType);
+                    var token = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, secretType);
                     if (!string.IsNullOrEmpty(token))
                         return token;
                 }

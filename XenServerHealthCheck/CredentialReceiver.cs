@@ -72,7 +72,7 @@ namespace XenServerHealthCheck
                 System.Security.AccessControl.AccessControlType.Allow);
                 var sec = new PipeSecurity();
                 sec.AddAccessRule(rule);
-                pipeServer = new NamedPipeServerStream(CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
+                pipeServer = new NamedPipeServerStream(HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
                 pipeServer.BeginWaitForConnection(new AsyncCallback(WaitForConnectionCallBack), pipeServer);
             }
         }
@@ -89,7 +89,7 @@ namespace XenServerHealthCheck
             System.Security.AccessControl.AccessControlType.Allow);
             var sec = new PipeSecurity();
             sec.AddAccessRule(rule);
-            pipeServer = new NamedPipeServerStream(CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
+            pipeServer = new NamedPipeServerStream(HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous, 0, 0, sec);
             pipeServer.BeginWaitForConnection(new AsyncCallback(WaitForConnectionCallBack), pipeServer);
         }
 
@@ -115,7 +115,7 @@ namespace XenServerHealthCheck
                                 mb.Append(Encoding.UTF8.GetString(msgBuff, 0, byteCount));
                             } while (!(pipeServer.IsMessageComplete));
                             string credential = mb.ToString();
-                            if (credential == CallHomeSettings.HEALTH_CHECK_PIPE_END_MESSAGE)
+                            if (credential == HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE)
                                 break;
                             ServerListHelper.instance.UpdateServerCredential(credential);
                         }

@@ -40,18 +40,18 @@ using System.ServiceProcess;
 
 namespace XenAdmin.Actions
 {
-    public class TransferCallHomeSettingsAction : PureAsyncAction
+    public class TransferHealthCheckSettingsAction : PureAsyncAction
     {
         private readonly Pool pool;
-        CallHomeSettings callHomeSettings;
+        HealthCheckSettings healthCheckSettings;
         string username;
         string password;
 
-        public TransferCallHomeSettingsAction(Pool pool, CallHomeSettings callHomeSettings, string username, string password, bool suppressHistory)
-            : base(pool.Connection, Messages.ACTION_TRANSFER_CALLHOME_SETTINGS, string.Format(Messages.ACTION_TRANSFER_CALLHOME_SETTINGS, pool.Name), suppressHistory)
+        public TransferHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string username, string password, bool suppressHistory)
+            : base(pool.Connection, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, pool.Name), suppressHistory)
         {
             this.pool = pool;
-            this.callHomeSettings = callHomeSettings;
+            this.healthCheckSettings = healthCheckSettings;
             this.username = username;
             this.password = password;
         }
@@ -65,15 +65,15 @@ namespace XenAdmin.Actions
                 return EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { Host, username, passwordSecret }));
         }
 
-        private const string CALLHOMESERVICENAME = "XenServerHealthCheck";
+        private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
 
         protected override void Run()
         {
-            ServiceController sc = new ServiceController(CALLHOMESERVICENAME);
+            ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
             if (sc.Status != ServiceControllerStatus.Running)
                 return;
 
-            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             int retryCount = 120;
             do
             {
@@ -89,7 +89,7 @@ namespace XenAdmin.Actions
                 {
                     System.Threading.Thread.Sleep(1000);
                     pipeClient = null;
-                    pipeClient = new NamedPipeClientStream(".", CallHomeSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+                    pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 }
             } while (!pipeClient.IsConnected && retryCount-- != 0);
 
@@ -98,7 +98,7 @@ namespace XenAdmin.Actions
                 if (host.IsMaster())
                 {
                     string credential;
-                    if (callHomeSettings.Status == CallHomeStatus.Enabled)
+                    if (healthCheckSettings.Status == HealthCheckStatus.Enabled)
                         credential = ProtectCredential(host.address, username, password);
                     else
                         credential = ProtectCredential(host.address, string.Empty, string.Empty);
@@ -107,7 +107,7 @@ namespace XenAdmin.Actions
                 }
             }
 
-            pipeClient.Write(Encoding.UTF8.GetBytes(CallHomeSettings.HEALTH_CHECK_PIPE_END_MESSAGE), 0, CallHomeSettings.HEALTH_CHECK_PIPE_END_MESSAGE.Length);
+            pipeClient.Write(Encoding.UTF8.GetBytes(HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE), 0, HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE.Length);
             pipeClient.Close();
         }
     }

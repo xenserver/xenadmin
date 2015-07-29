@@ -1,8 +1,8 @@
 ﻿using XenAdmin.Commands;
 
-namespace XenAdmin.Dialogs.CallHome
+namespace XenAdmin.Dialogs.HealthCheck
 {
-    partial class CallHomeOverviewDialog
+    partial class HealthCheckOverviewDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace XenAdmin.Dialogs.CallHome
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallHomeOverviewDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HealthCheckOverviewDialog));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.poolsDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.PoolNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -316,7 +316,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.showAgainCheckBox.UseVisualStyleBackColor = true;
             this.showAgainCheckBox.CheckedChanged += new System.EventHandler(this.showAgainCheckBox_CheckedChanged);
             // 
-            // CallHomeOverviewDialog
+            // HealthCheckOverviewDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -325,9 +325,9 @@ namespace XenAdmin.Dialogs.CallHome
             this.Controls.Add(this.showAgainCheckBox);
             this.Controls.Add(this.buttonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.Name = "CallHomeOverviewDialog";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CallHomeOverviewDialog_FormClosed);
-            this.Load += new System.EventHandler(this.CallHomeOverview_Load);
+            this.Name = "HealthCheckOverviewDialog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HealthCheckOOverviewDialog_FormClosed);
+            this.Load += new System.EventHandler(this.HealthCheckOverviewDialog_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

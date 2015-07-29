@@ -1,6 +1,6 @@
-namespace XenAdmin.Dialogs.CallHome
+namespace XenAdmin.Dialogs.HealthCheck
 {
-    partial class CallHomeSettingsDialog
+    partial class HealthCheckSettingsDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace XenAdmin.Dialogs.CallHome
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallHomeSettingsDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HealthCheckSettingsDialog));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.decentGroupBox2 = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -41,7 +41,6 @@ namespace XenAdmin.Dialogs.CallHome
             this.dayOfWeekComboBox = new System.Windows.Forms.ComboBox();
             this.decentGroupBox1 = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
             this.authenticationRubricLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,6 +52,7 @@ namespace XenAdmin.Dialogs.CallHome
             this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
+            this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
@@ -185,12 +185,6 @@ namespace XenAdmin.Dialogs.CallHome
             this.tableLayoutPanel2.Controls.Add(this.newAuthenticationRadioButton, 0, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // m_ctrlError
-            // 
-            resources.ApplyResources(this.m_ctrlError, "m_ctrlError");
-            this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 3);
-            this.m_ctrlError.Name = "m_ctrlError";
-            // 
             // authenticationRubricLabel
             // 
             resources.ApplyResources(this.authenticationRubricLabel, "authenticationRubricLabel");
@@ -259,6 +253,12 @@ namespace XenAdmin.Dialogs.CallHome
             // 
             resources.ApplyResources(this.rubricLabel, "rubricLabel");
             this.rubricLabel.Name = "rubricLabel";
+            // 
+            // m_ctrlError
+            // 
+            resources.ApplyResources(this.m_ctrlError, "m_ctrlError");
+            this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 3);
+            this.m_ctrlError.Name = "m_ctrlError";
             // 
             // flowLayoutPanel1
             // 
@@ -354,14 +354,14 @@ namespace XenAdmin.Dialogs.CallHome
             this.newXsCredentialsRadioButton.UseVisualStyleBackColor = true;
             this.newXsCredentialsRadioButton.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
-            // CallHomeSettingsDialog
+            // HealthCheckSettingsDialog
             // 
             this.AcceptButton = this.okButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "CallHomeSettingsDialog";
+            this.Name = "HealthCheckSettingsDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.decentGroupBox2.ResumeLayout(false);

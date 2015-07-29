@@ -37,27 +37,27 @@ using XenAdmin.Core;
 using XenAPI;
 
 
-namespace XenAdmin.Dialogs.CallHome
+namespace XenAdmin.Dialogs.HealthCheck
 {
-    public partial class CallHomeSettingsDialog : XenDialogBase
+    public partial class HealthCheckSettingsDialog : XenDialogBase
     {
         private readonly Pool pool;
-        private CallHomeSettings callHomeSettings;
+        private HealthCheckSettings healthCheckSettings;
         private bool authenticationRequired;
         private bool authenticated;
         private string authenticationToken;
         private string xsUserName;
         private string xsPassword;
 
-        public CallHomeSettingsDialog(Pool pool, bool enrollNow)
+        public HealthCheckSettingsDialog(Pool pool, bool enrollNow)
         {
             this.pool = pool;
-            callHomeSettings = pool.CallHomeSettings;
+            healthCheckSettings = pool.HealthCheckSettings;
             if (enrollNow)
-                callHomeSettings.Status = CallHomeStatus.Enabled;
-            authenticationToken = callHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
-            xsUserName = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-            xsPassword = callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+                healthCheckSettings.Status = HealthCheckStatus.Enabled;
+            authenticationToken = healthCheckSettings.GetExistingSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
+            xsUserName = healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+            xsPassword = healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
             PopulateControls();
             InitializeControls();
@@ -105,16 +105,16 @@ namespace XenAdmin.Dialogs.CallHome
             authenticationRequired = string.IsNullOrEmpty(authenticationToken);
             authenticated = !authenticationRequired;
 
-            Text = String.Format(Messages.CALLHOME_ENROLLMENT_TITLE, pool.Name);
+            Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name);
             
-            authenticationRubricLabel.Text = authenticationRequired 
-                ? Messages.CALLHOME_AUTHENTICATION_RUBRIC_NO_TOKEN 
-                : Messages.CALLHOME_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
+            authenticationRubricLabel.Text = authenticationRequired
+                ? Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN
+                : Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
 
-            enrollmentCheckBox.Checked = callHomeSettings.Status != CallHomeStatus.Disabled;
-            frequencyNumericBox.Value = callHomeSettings.IntervalInWeeks;
-            dayOfWeekComboBox.SelectedValue = (int)callHomeSettings.DayOfWeek;
-            timeOfDayComboBox.SelectedValue = callHomeSettings.TimeOfDay;
+            enrollmentCheckBox.Checked = healthCheckSettings.Status != HealthCheckStatus.Disabled;
+            frequencyNumericBox.Value = healthCheckSettings.IntervalInWeeks;
+            dayOfWeekComboBox.SelectedValue = (int)healthCheckSettings.DayOfWeek;
+            timeOfDayComboBox.SelectedValue = healthCheckSettings.TimeOfDay;
             
             existingAuthenticationRadioButton.Enabled = existingAuthenticationRadioButton.Checked = !authenticationRequired;
             newAuthenticationRadioButton.Checked = authenticationRequired;
@@ -128,17 +128,17 @@ namespace XenAdmin.Dialogs.CallHome
 
         private bool ChangesMade()
         {
-            if (enrollmentCheckBox.Checked && callHomeSettings.Status != CallHomeStatus.Enabled)
+            if (enrollmentCheckBox.Checked && healthCheckSettings.Status != HealthCheckStatus.Enabled)
                 return true;
-            if (!enrollmentCheckBox.Checked && callHomeSettings.Status != CallHomeStatus.Disabled)
+            if (!enrollmentCheckBox.Checked && healthCheckSettings.Status != HealthCheckStatus.Disabled)
                 return true;
-            if (frequencyNumericBox.Value != callHomeSettings.IntervalInWeeks)
+            if (frequencyNumericBox.Value != healthCheckSettings.IntervalInWeeks)
                 return true;
-            if (dayOfWeekComboBox.SelectedIndex != (int)callHomeSettings.DayOfWeek)
+            if (dayOfWeekComboBox.SelectedIndex != (int)healthCheckSettings.DayOfWeek)
                 return true;
-            if (timeOfDayComboBox.SelectedIndex != callHomeSettings.TimeOfDay)
+            if (timeOfDayComboBox.SelectedIndex != healthCheckSettings.TimeOfDay)
                 return true;
-            if (authenticationToken != callHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET))
+            if (authenticationToken != healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET))
                 return true;
             if (textboxXSUserName.Text != xsUserName)
                 return true;
@@ -164,15 +164,15 @@ namespace XenAdmin.Dialogs.CallHome
 
             if (ChangesMade())
             {
-                var newCallHomeSettings = new CallHomeSettings(
-                    enrollmentCheckBox.Checked ? CallHomeStatus.Enabled : CallHomeStatus.Disabled,
+                var newHealthCheckSettings = new HealthCheckSettings(
+                    enrollmentCheckBox.Checked ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled,
                     (int)(frequencyNumericBox.Value * 7),
                     (DayOfWeek)dayOfWeekComboBox.SelectedValue,
                     (int)timeOfDayComboBox.SelectedValue,
-                    CallHomeSettings.DefaultRetryInterval);
+                    HealthCheckSettings.DefaultRetryInterval);
 
-                new SaveCallHomeSettingsAction(pool, newCallHomeSettings, authenticationToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
-                new TransferCallHomeSettingsAction(pool, newCallHomeSettings, textboxXSUserName.Text, textboxXSPassword.Text, true).RunAsync();
+                new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
+                new TransferHealthCheckSettingsAction(pool, newHealthCheckSettings, textboxXSUserName.Text, textboxXSPassword.Text, true).RunAsync();
             }
             okButton.Enabled = true;
             DialogResult = DialogResult.OK;
@@ -265,9 +265,9 @@ namespace XenAdmin.Dialogs.CallHome
             if (!CheckCredentialsEntered())
                 return false;
 
-            var action = new CallHomeAuthenticationAction(pool, textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
-                Registry.CallHomeIdentityTokenDomainName, Registry.CallHomeUploadGrantTokenDomainName, Registry.CallHomeUploadTokenDomainName,
-                Registry.CallHomeProductKey, true, 0, false);
+            var action = new HealthCheckAuthenticationAction(pool, textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
+                Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName, Registry.HealthCheckUploadTokenDomainName,
+                Registry.HealthCheckProductKey, true, 0, false);
 
             try
             {
@@ -283,7 +283,7 @@ namespace XenAdmin.Dialogs.CallHome
 
             authenticationToken = action.UploadToken;  // curent upload token
             authenticated = !string.IsNullOrEmpty(authenticationToken);
-            authenticationToken = pool.CallHomeSettings.GetExistingSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
+            authenticationToken = pool.HealthCheckSettings.GetExistingSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
             return authenticated;
         }
 

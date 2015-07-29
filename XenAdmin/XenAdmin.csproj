@@ -1371,21 +1371,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.ja.resx">
       <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.resx">
       <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.zh-CN.resx">
       <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.ja.resx">
       <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.resx">
       <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.zh-CN.resx">
       <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>

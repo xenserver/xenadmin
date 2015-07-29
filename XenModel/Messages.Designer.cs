@@ -79,24 +79,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services.
-        /// </summary>
-        public static string ACTION_CALLHOME_AUTHENTICATION {
-            get {
-                return ResourceManager.GetString("ACTION_CALLHOME_AUTHENTICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authenticating with Citrix Insight Services.
-        /// </summary>
-        public static string ACTION_CALLHOME_AUTHENTICATION_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_CALLHOME_AUTHENTICATION_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Change disk size.
         /// </summary>
         public static string ACTION_CHANGE_DISK_SIZE {
@@ -1096,6 +1078,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services.
+        /// </summary>
+        public static string ACTION_HEALTHCHECK_AUTHENTICATION {
+            get {
+                return ResourceManager.GetString("ACTION_HEALTHCHECK_AUTHENTICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticating with Citrix Insight Services.
+        /// </summary>
+        public static string ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS {
+            get {
+                return ResourceManager.GetString("ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server &apos;{0}&apos; rebooted.
         /// </summary>
         public static string ACTION_HOST_REBOOTED {
@@ -1546,15 +1546,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Health Check settings.
-        /// </summary>
-        public static string ACTION_SAVE_CALLHOME_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_SAVE_CALLHOME_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Saving settings....
         /// </summary>
         public static string ACTION_SAVE_CHANGES_IN_PROGRESS {
@@ -1609,6 +1600,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Health Check settings.
+        /// </summary>
+        public static string ACTION_SAVE_HEALTHCHECK_SETTINGS {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_HEALTHCHECK_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save settings for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_SAVE_SETTINGS {
@@ -1623,15 +1623,6 @@ namespace XenAdmin {
         public static string ACTION_SAVING_ALERTS_FOR {
             get {
                 return ResourceManager.GetString("ACTION_SAVING_ALERTS_FOR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving Health Check settings for &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_SAVING_CALLHOME_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_SAVING_CALLHOME_SETTINGS", resourceCulture);
             }
         }
         
@@ -1659,6 +1650,15 @@ namespace XenAdmin {
         public static string ACTION_SAVING_FOLDER_TAGS_FOR {
             get {
                 return ResourceManager.GetString("ACTION_SAVING_FOLDER_TAGS_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving Health Check settings for &apos;{0}&apos;....
+        /// </summary>
+        public static string ACTION_SAVING_HEALTHCHECK_SETTINGS {
+            get {
+                return ResourceManager.GetString("ACTION_SAVING_HEALTHCHECK_SETTINGS", resourceCulture);
             }
         }
         
@@ -2349,9 +2349,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Transfer Health Check settings.
         /// </summary>
-        public static string ACTION_TRANSFER_CALLHOME_SETTINGS {
+        public static string ACTION_TRANSFER_HEALTHCHECK_SETTINGS {
             get {
-                return ResourceManager.GetString("ACTION_TRANSFER_CALLHOME_SETTINGS", resourceCulture);
+                return ResourceManager.GetString("ACTION_TRANSFER_HEALTHCHECK_SETTINGS", resourceCulture);
             }
         }
         
@@ -5820,87 +5820,6 @@ namespace XenAdmin {
         public static string CACHE_NOT_YET_POPULATED {
             get {
                 return ResourceManager.GetString("CACHE_NOT_YET_POPULATED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
-        /// </summary>
-        public static string CALLHOME_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
-            get {
-                return ResourceManager.GetString("CALLHOME_AUTHENTICATION_RUBRIC_EXISTING_TOKEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server..
-        /// </summary>
-        public static string CALLHOME_AUTHENTICATION_RUBRIC_NO_TOKEN {
-            get {
-                return ResourceManager.GetString("CALLHOME_AUTHENTICATION_RUBRIC_NO_TOKEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK, Enable Health Check.
-        /// </summary>
-        public static string CALLHOME_ENROLLMENT_CONFIRMATION_BUTTON_LABEL {
-            get {
-                return ResourceManager.GetString("CALLHOME_ENROLLMENT_CONFIRMATION_BUTTON_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Health Check Enrollment - {0}.
-        /// </summary>
-        public static string CALLHOME_ENROLLMENT_TITLE {
-            get {
-                return ResourceManager.GetString("CALLHOME_ENROLLMENT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload a Health Check report every {0} weeks on {1} starting at {2}.
-        /// </summary>
-        public static string CALLHOME_SCHEDULE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("CALLHOME_SCHEDULE_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Issues found.
-        /// </summary>
-        public static string CALLHOME_STATUS_ISSUES_FOUND {
-            get {
-                return ResourceManager.GetString("CALLHOME_STATUS_ISSUES_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No issues found.
-        /// </summary>
-        public static string CALLHOME_STATUS_NO_ISSUES_FOUND {
-            get {
-                return ResourceManager.GetString("CALLHOME_STATUS_NO_ISSUES_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Analysis not yet available.
-        /// </summary>
-        public static string CALLHOME_STATUS_NOT_AVAILABLE_YET {
-            get {
-                return ResourceManager.GetString("CALLHOME_STATUS_NOT_AVAILABLE_YET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Health Check not enabled.
-        /// </summary>
-        public static string CALLHOME_STATUS_NOT_ENROLLED {
-            get {
-                return ResourceManager.GetString("CALLHOME_STATUS_NOT_ENROLLED", resourceCulture);
             }
         }
         
@@ -16362,6 +16281,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
+        /// </summary>
+        public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server..
+        /// </summary>
+        public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK, Enable Health Check.
+        /// </summary>
+        public static string HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health Check Enrollment - {0}.
+        /// </summary>
+        public static string HEALTHCHECK_ENROLLMENT_TITLE {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_ENROLLMENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request an upload now.
         /// </summary>
         public static string HEALTHCHECK_ON_DEMAND_REQUEST {
@@ -16376,6 +16331,51 @@ namespace XenAdmin {
         public static string HEALTHCHECK_ON_DEMAND_REQUESTED_AT {
             get {
                 return ResourceManager.GetString("HEALTHCHECK_ON_DEMAND_REQUESTED_AT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload a Health Check report every {0} weeks on {1} starting at {2}.
+        /// </summary>
+        public static string HEALTHCHECK_SCHEDULE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_SCHEDULE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issues found.
+        /// </summary>
+        public static string HEALTHCHECK_STATUS_ISSUES_FOUND {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_STATUS_ISSUES_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No issues found.
+        /// </summary>
+        public static string HEALTHCHECK_STATUS_NO_ISSUES_FOUND {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_STATUS_NO_ISSUES_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis not yet available.
+        /// </summary>
+        public static string HEALTHCHECK_STATUS_NOT_AVAILABLE_YET {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_STATUS_NOT_AVAILABLE_YET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health Check not enabled.
+        /// </summary>
+        public static string HEALTHCHECK_STATUS_NOT_ENROLLED {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_STATUS_NOT_ENROLLED", resourceCulture);
             }
         }
         

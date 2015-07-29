@@ -85,41 +85,41 @@ namespace XenServerHealthCheck
         {
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
             string newUploadLock = Properties.Settings.Default.UUID;
-            newUploadLock += "|" + CallHomeSettings.DateTimeToString(DateTime.UtcNow);
-            config[CallHomeSettings.UPLOAD_LOCK] = newUploadLock;
+            newUploadLock += "|" + HealthCheckSettings.DateTimeToString(DateTime.UtcNow);
+            config[HealthCheckSettings.UPLOAD_LOCK] = newUploadLock;
             Pool.set_health_check_config(session, connection.Cache.Pools[0].opaque_ref, config);
             System.Threading.Thread.Sleep(SleepForLockConfirm);
             config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
-            return config[CallHomeSettings.UPLOAD_LOCK] == newUploadLock;
+            return config[HealthCheckSettings.UPLOAD_LOCK] == newUploadLock;
         }
 
         public static bool Request(IXenConnection connection, Session session)
         {
             bool needRetry = false;
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
-            if (BoolKey(config, CallHomeSettings.STATUS) == false)
+            if (BoolKey(config, HealthCheckSettings.STATUS) == false)
             {
                 ServerListHelper.instance.removeServerCredential(connection.Hostname);
                 log.InfoFormat("Will not report for XenServer {0} that was not Enroll", connection.Hostname);
                 return false;
             }
             //Check if there already some service doing the uploading already
-            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK), false) == false)
+            if (CanLock(Get(config, HealthCheckSettings.UPLOAD_LOCK), false) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
                 return false;
             }
 
             //No Lock has been set before, Check upload is due
-            int intervalInDays = IntKey(config, CallHomeSettings.INTERVAL_IN_DAYS, CallHomeSettings.intervalInDaysDefault);
+            int intervalInDays = IntKey(config, HealthCheckSettings.INTERVAL_IN_DAYS, HealthCheckSettings.intervalInDaysDefault);
             DateTime lastSuccessfulUpload = DateTime.UtcNow;
             bool haveSuccessfulUpload = false;
-            if (config.ContainsKey(CallHomeSettings.LAST_SUCCESSFUL_UPLOAD))
+            if (config.ContainsKey(HealthCheckSettings.LAST_SUCCESSFUL_UPLOAD))
             {
                 try
                 {
 
-                    lastSuccessfulUpload = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.LAST_SUCCESSFUL_UPLOAD));
+                    lastSuccessfulUpload = HealthCheckSettings.StringToDateTime(Get(config, HealthCheckSettings.LAST_SUCCESSFUL_UPLOAD));
                     haveSuccessfulUpload = true;
                 }
                 catch (Exception exn)
@@ -137,11 +137,11 @@ namespace XenServerHealthCheck
                 }
             }
 
-            if (config.ContainsKey(CallHomeSettings.LAST_FAILED_UPLOAD))
+            if (config.ContainsKey(HealthCheckSettings.LAST_FAILED_UPLOAD))
             {
                 try
                 {
-                    DateTime LastFailedUpload = CallHomeSettings.StringToDateTime(Get(config, CallHomeSettings.LAST_FAILED_UPLOAD));
+                    DateTime LastFailedUpload = HealthCheckSettings.StringToDateTime(Get(config, HealthCheckSettings.LAST_FAILED_UPLOAD));
 
                     if (haveSuccessfulUpload)
                     {
@@ -149,7 +149,7 @@ namespace XenServerHealthCheck
                             return false; //A retry is not needed
                     }
 
-                    int retryInterval = IntKey(config, CallHomeSettings.RETRY_INTERVAL, CallHomeSettings.RetryIntervalDefault);
+                    int retryInterval = IntKey(config, HealthCheckSettings.RETRY_INTERVAL, HealthCheckSettings.RetryIntervalDefault);
                     if (DateTime.Compare(LastFailedUpload.AddDays(retryInterval), DateTime.UtcNow) <= 0)
                     {
                         log.InfoFormat("Retry since retryInterval{0} - {1} > {2} meeted", LastFailedUpload, DateTime.UtcNow, retryInterval);
@@ -170,18 +170,18 @@ namespace XenServerHealthCheck
             {//Check if uploading schedule meet only for new upload
                 
                 DayOfWeek dayOfWeek;
-                if (!Enum.TryParse(Get(config, CallHomeSettings.DAY_OF_WEEK), out dayOfWeek))
+                if (!Enum.TryParse(Get(config, HealthCheckSettings.DAY_OF_WEEK), out dayOfWeek))
                 {
                     log.Error("DAY_OF_WEEK not existed");
                     return false;
                 }
-                if (!config.ContainsKey(CallHomeSettings.TIME_OF_DAY))
+                if (!config.ContainsKey(HealthCheckSettings.TIME_OF_DAY))
                 {
                     log.Error("TIME_OF_DAY not existed");
                     return false;
                 }
 
-                int TimeOfDay = IntKey(config, CallHomeSettings.TIME_OF_DAY, CallHomeSettings.GetDefaultTime());
+                int TimeOfDay = IntKey(config, HealthCheckSettings.TIME_OF_DAY, HealthCheckSettings.GetDefaultTime());
                 if (currentTime.DayOfWeek != dayOfWeek && currentTime.Hour != TimeOfDay)
                 {
                     log.InfoFormat("Will not report for XenServer {0} for incorrect schedule", connection.Hostname);
@@ -196,26 +196,26 @@ namespace XenServerHealthCheck
         public static bool OnDemandRequest(IXenConnection connection, Session session)
         {
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
-            if (BoolKey(config, CallHomeSettings.STATUS) == false)
+            if (BoolKey(config, HealthCheckSettings.STATUS) == false)
             {
                 log.InfoFormat("Will not report on demand for XenServer {0} that was not Enroll", connection.Hostname);
                 return false;
             }
 
             //Check if there already some service doing the uploading already
-            if (CanLock(Get(config, CallHomeSettings.UPLOAD_LOCK), true) == false)
+            if (CanLock(Get(config, HealthCheckSettings.UPLOAD_LOCK), true) == false)
             {
                 log.InfoFormat("Will not report for XenServer {0} that already locked", connection.Hostname);
                 return false;
             }
 
-            var newUploadRequest = Get(config, CallHomeSettings.NEW_UPLOAD_REQUEST);
+            var newUploadRequest = Get(config, HealthCheckSettings.NEW_UPLOAD_REQUEST);
             if (!string.IsNullOrEmpty(newUploadRequest))
             {
                 DateTime newUploadRequestTime;
                 try
                 {
-                    newUploadRequestTime = CallHomeSettings.StringToDateTime(newUploadRequest);
+                    newUploadRequestTime = HealthCheckSettings.StringToDateTime(newUploadRequest);
                 }
                 catch (Exception exn)
                 {
