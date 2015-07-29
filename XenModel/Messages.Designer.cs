@@ -10545,7 +10545,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No updates found because automatic cheking for updates is disabled..
+        ///   Looks up a localized string similar to No updates found because automatic checking for updates is disabled..
         /// </summary>
         public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
             get {
@@ -32099,11 +32099,44 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you wish to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.
+        ///
+        ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
+        /// </summary>
+        public static string UPDATE_DISMISS_ALL_CONTINUE {
+            get {
+                return ResourceManager.GetString("UPDATE_DISMISS_ALL_CONTINUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation will remove permanently all updates from every connected server. Do you wish to continue?
+        ///
+        ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
+        /// </summary>
+        public static string UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE {
+            get {
+                return ResourceManager.GetString("UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to dismiss this update?.
         /// </summary>
         public static string UPDATE_DISMISS_CONFIRM {
             get {
                 return ResourceManager.GetString("UPDATE_DISMISS_CONFIRM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation will remove the selected updates from the servers permanently. Do you wish to continue?
+        ///
+        ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
+        /// </summary>
+        public static string UPDATE_DISMISS_SELECTED_CONFIRM {
+            get {
+                return ResourceManager.GetString("UPDATE_DISMISS_SELECTED_CONFIRM", resourceCulture);
             }
         }
         

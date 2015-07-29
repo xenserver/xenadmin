@@ -505,7 +505,7 @@ namespace XenAdmin.TabPages
             if (!FilterIsOn)
             {
                 using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE),
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
                     ThreeButtonDialog.ButtonCancel))
                 {
@@ -515,7 +515,7 @@ namespace XenAdmin.TabPages
             else
             {
                 using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_CONTINUE),
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_CONTINUE),
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                     ThreeButtonDialog.ButtonCancel))
@@ -543,7 +543,7 @@ namespace XenAdmin.TabPages
         private void dismissSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
             {
