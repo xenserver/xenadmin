@@ -204,20 +204,16 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
-    <Compile Include="Dialogs\CallHome\CallHomeOverviewDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\CallHome\CallHomeOverviewDialog.Designer.cs">
-      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\CallHome\CallHomeSettingsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\CallHome\CallHomeSettingsDialog.designer.cs">
-      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\CallHome\HealthCheckOverviewLauncher.cs" />
+    <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewLauncher.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
+    </Compile>
+    <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.cs" />
+    <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.Designer.cs">
+      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.cs" />
+    <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.designer.cs">
+      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
       <SubType>Form</SubType>
@@ -1369,28 +1365,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.ja.resx">
-      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.resx">
-      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeOverviewDialog.zh-CN.resx">
-      <DependentUpon>CallHomeOverviewDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.ja.resx">
-      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.resx">
-      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CallHome\CallHomeSettingsDialog.zh-CN.resx">
-      <DependentUpon>CallHomeSettingsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>
@@ -1510,6 +1484,24 @@
     <EmbeddedResource Include="Dialogs\AdPasswordPrompt.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.ja.resx">
+      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.resx">
+      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.zh-CN.resx">
+      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.ja.resx">
+      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.resx">
+      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.zh-CN.resx">
+      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ReconnectAsDialog.resx">
       <SubType>Designer</SubType>
