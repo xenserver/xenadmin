@@ -42,12 +42,12 @@
             this.informationLabelIcon = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkForUpdatesNowButton2 = new System.Windows.Forms.Button();
             this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkForUpdatesNowButton = new System.Windows.Forms.Button();
+            this.checkForUpdatesNowButton2 = new System.Windows.Forms.LinkLabel();
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
@@ -106,17 +106,10 @@
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel2.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.checkForUpdatesNowButton2, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.checkForUpdatesNowButton2, 2, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // checkForUpdatesNowButton2
-            // 
-            resources.ApplyResources(this.checkForUpdatesNowButton2, "checkForUpdatesNowButton2");
-            this.checkForUpdatesNowButton2.Name = "checkForUpdatesNowButton2";
-            this.checkForUpdatesNowButton2.UseVisualStyleBackColor = true;
-            this.checkForUpdatesNowButton2.Click += new System.EventHandler(this.checkForUpdatesNowButton2_Click);
             // 
             // AutoCheckForUpdatesDisabledLabel
             // 
@@ -126,7 +119,6 @@
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._075_WarningRound_h32bit_16;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
@@ -148,6 +140,14 @@
             this.checkForUpdatesNowButton.Name = "checkForUpdatesNowButton";
             this.checkForUpdatesNowButton.UseVisualStyleBackColor = true;
             this.checkForUpdatesNowButton.Click += new System.EventHandler(this.checkForUpdatesNowButton_Click);
+            // 
+            // checkForUpdatesNowButton2
+            // 
+            resources.ApplyResources(this.checkForUpdatesNowButton2, "checkForUpdatesNowButton2");
+            this.checkForUpdatesNowButton2.LinkColor = System.Drawing.Color.Black;
+            this.checkForUpdatesNowButton2.Name = "checkForUpdatesNowButton2";
+            this.checkForUpdatesNowButton2.TabStop = true;
+            this.checkForUpdatesNowButton2.Click += new System.EventHandler(this.checkForUpdatesNowButton2_Click);
             // 
             // toolStrip1
             // 
@@ -404,11 +404,11 @@
         private Controls.FlickerFreePanel flickerFreePanel1;
         private System.Windows.Forms.Label AutoCheckForUpdatesDisabledLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button checkForUpdatesNowButton2;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
+        private System.Windows.Forms.LinkLabel checkForUpdatesNowButton2;
     }
 }

@@ -76,6 +76,7 @@ namespace XenAdmin.TabPages
             Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+            pictureBox1.Image = SystemIcons.Information.ToBitmap();
             PageWasRefreshed = false;
         }
 
