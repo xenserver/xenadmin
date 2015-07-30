@@ -101,8 +101,10 @@ namespace XenAdmin.TabPages
                         return;
 
                     toolStripButtonRefresh.Enabled = false;
+                    toolStripButtonRestoreDismissed.Enabled = false;
                     StoreSelectedUpdates();
                     dataGridViewUpdates.Rows.Clear();
+                    dataGridViewUpdates.Refresh();
                     spinningTimer.Start();
                     tableLayoutPanel3.Visible = true;
                     labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
@@ -115,6 +117,7 @@ namespace XenAdmin.TabPages
                 {
                     checksQueue--;
                     toolStripButtonRefresh.Enabled = true;
+                    toolStripButtonRestoreDismissed.Enabled = true;
                     spinningTimer.Stop();
 
                     if (succeeded)
@@ -220,6 +223,7 @@ namespace XenAdmin.TabPages
                     {
                         labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
                         checkForUpdatesNowButton.Visible = true;
+                        MakeWarningInvisible();
                     }
                     else
                     {

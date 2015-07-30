@@ -468,8 +468,10 @@ namespace XenAdmin.Core
                 }
                 if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
                 {
-                    other_config.Remove(IgnorePatchAction.IgnorePatchKey);
+                    other_config.Remove(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY);
                 }
+
+                XenAPI.Pool.set_other_config(_connection.Session, pool.opaque_ref, other_config);
             }
 
             Properties.Settings.Default.LatestXenCenterSeen = "";

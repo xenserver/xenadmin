@@ -60,10 +60,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
-            this.labelProgress = new System.Windows.Forms.Label();
             this.checkForUpdatesNowButton = new System.Windows.Forms.Button();
-            this.flickerFreePanel1 = new XenAdmin.Controls.FlickerFreePanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelProgress = new System.Windows.Forms.Label();
+            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +76,7 @@
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
             this.SuspendLayout();
@@ -241,21 +242,9 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.pictureBoxProgress, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.labelProgress, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // pictureBoxProgress
-            // 
-            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
-            this.pictureBoxProgress.Name = "pictureBoxProgress";
-            this.pictureBoxProgress.TabStop = false;
-            // 
-            // labelProgress
-            // 
-            resources.ApplyResources(this.labelProgress, "labelProgress");
-            this.labelProgress.Name = "labelProgress";
             // 
             // checkForUpdatesNowButton
             // 
@@ -264,13 +253,24 @@
             this.checkForUpdatesNowButton.UseVisualStyleBackColor = true;
             this.checkForUpdatesNowButton.Click += new System.EventHandler(this.checkForUpdatesNowButton_Click);
             // 
-            // flickerFreePanel1
+            // tableLayoutPanel4
             // 
-            resources.ApplyResources(this.flickerFreePanel1, "flickerFreePanel1");
-            this.flickerFreePanel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.flickerFreePanel1.BorderColor = System.Drawing.Color.Black;
-            this.flickerFreePanel1.BorderWidth = 1;
-            this.flickerFreePanel1.Name = "flickerFreePanel1";
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.labelProgress, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.pictureBoxProgress, 0, 0);
+            this.tableLayoutPanel4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // labelProgress
+            // 
+            resources.ApplyResources(this.labelProgress, "labelProgress");
+            this.labelProgress.Name = "labelProgress";
+            // 
+            // pictureBoxProgress
+            // 
+            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
+            this.pictureBoxProgress.Name = "pictureBoxProgress";
+            this.pictureBoxProgress.TabStop = false;
             // 
             // dataGridViewUpdates
             // 
@@ -352,7 +352,6 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.flickerFreePanel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.dataGridViewUpdates);
             this.Name = "ManageUpdatesPage";
@@ -366,6 +365,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).EndInit();
             this.ResumeLayout(false);
@@ -396,7 +397,6 @@
         private System.Windows.Forms.ToolStripMenuItem dismissAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dismissSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
-        private Controls.FlickerFreePanel flickerFreePanel1;
         private System.Windows.Forms.Label AutoCheckForUpdatesDisabledLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
@@ -407,5 +407,6 @@
         private System.Windows.Forms.LinkLabel checkForUpdatesNowButton2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button checkForUpdatesNowButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }
