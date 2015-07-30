@@ -210,6 +210,7 @@ namespace XenAdmin.TabPages
                 {
                     StoreSelectedUpdates();
                     dataGridViewUpdates.Rows.Clear();
+                    dataGridViewUpdates.Refresh();
                 }
 
                 var updates = new List<Alert>(Updates.UpdateAlerts);           

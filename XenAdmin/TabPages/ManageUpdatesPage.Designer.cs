@@ -42,6 +42,16 @@
             this.informationLabelIcon = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.checkForUpdatesNowButton2 = new System.Windows.Forms.LinkLabel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkForUpdatesNowButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelProgress = new System.Windows.Forms.Label();
+            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
@@ -54,16 +64,6 @@
             this.dismissAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dismissSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
-            this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.checkForUpdatesNowButton2 = new System.Windows.Forms.LinkLabel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkForUpdatesNowButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelProgress = new System.Windows.Forms.Label();
-            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,11 +73,11 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +111,71 @@
             this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.checkForUpdatesNowButton2, 2, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // AutoCheckForUpdatesDisabledLabel
+            // 
+            resources.ApplyResources(this.AutoCheckForUpdatesDisabledLabel, "AutoCheckForUpdatesDisabledLabel");
+            this.AutoCheckForUpdatesDisabledLabel.Name = "AutoCheckForUpdatesDisabledLabel";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // checkForUpdatesNowButton2
+            // 
+            resources.ApplyResources(this.checkForUpdatesNowButton2, "checkForUpdatesNowButton2");
+            this.checkForUpdatesNowButton2.LinkColor = System.Drawing.Color.Black;
+            this.checkForUpdatesNowButton2.Name = "checkForUpdatesNowButton2";
+            this.checkForUpdatesNowButton2.TabStop = true;
+            this.checkForUpdatesNowButton2.Click += new System.EventHandler(this.checkForUpdatesNowButton2_Click);
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // checkForUpdatesNowButton
+            // 
+            resources.ApplyResources(this.checkForUpdatesNowButton, "checkForUpdatesNowButton");
+            this.checkForUpdatesNowButton.Name = "checkForUpdatesNowButton";
+            this.checkForUpdatesNowButton.UseVisualStyleBackColor = true;
+            this.checkForUpdatesNowButton.Click += new System.EventHandler(this.checkForUpdatesNowButton_Click);
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.labelProgress, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.pictureBoxProgress, 0, 0);
+            this.tableLayoutPanel4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // labelProgress
+            // 
+            resources.ApplyResources(this.labelProgress, "labelProgress");
+            this.labelProgress.Name = "labelProgress";
+            // 
+            // pictureBoxProgress
+            // 
+            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
+            this.pictureBoxProgress.Name = "pictureBoxProgress";
+            this.pictureBoxProgress.TabStop = false;
             // 
             // toolStrip1
             // 
@@ -208,70 +273,6 @@
             this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
             this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
             // 
-            // AutoCheckForUpdatesDisabledLabel
-            // 
-            resources.ApplyResources(this.AutoCheckForUpdatesDisabledLabel, "AutoCheckForUpdatesDisabledLabel");
-            this.AutoCheckForUpdatesDisabledLabel.Name = "AutoCheckForUpdatesDisabledLabel";
-            // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
-            // checkForUpdatesNowButton2
-            // 
-            resources.ApplyResources(this.checkForUpdatesNowButton2, "checkForUpdatesNowButton2");
-            this.checkForUpdatesNowButton2.LinkColor = System.Drawing.Color.Black;
-            this.checkForUpdatesNowButton2.Name = "checkForUpdatesNowButton2";
-            this.checkForUpdatesNowButton2.TabStop = true;
-            this.checkForUpdatesNowButton2.Click += new System.EventHandler(this.checkForUpdatesNowButton2_Click);
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // checkForUpdatesNowButton
-            // 
-            resources.ApplyResources(this.checkForUpdatesNowButton, "checkForUpdatesNowButton");
-            this.checkForUpdatesNowButton.Name = "checkForUpdatesNowButton";
-            this.checkForUpdatesNowButton.UseVisualStyleBackColor = true;
-            this.checkForUpdatesNowButton.Click += new System.EventHandler(this.checkForUpdatesNowButton_Click);
-            // 
-            // tableLayoutPanel4
-            // 
-            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.labelProgress, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.pictureBoxProgress, 0, 0);
-            this.tableLayoutPanel4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
-            // labelProgress
-            // 
-            resources.ApplyResources(this.labelProgress, "labelProgress");
-            this.labelProgress.Name = "labelProgress";
-            // 
-            // pictureBoxProgress
-            // 
-            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
-            this.pictureBoxProgress.Name = "pictureBoxProgress";
-            this.pictureBoxProgress.TabStop = false;
-            // 
             // dataGridViewUpdates
             // 
             resources.ApplyResources(this.dataGridViewUpdates, "dataGridViewUpdates");
@@ -360,14 +361,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

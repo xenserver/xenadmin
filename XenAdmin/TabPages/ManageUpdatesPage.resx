@@ -125,6 +125,9 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="informationLabelIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="informationLabelIcon.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -133,7 +136,7 @@
     <value>NoControl</value>
   </data>
   <data name="informationLabelIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 10</value>
   </data>
   <data name="informationLabelIcon.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 23</value>
@@ -166,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="informationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 11</value>
+    <value>28, 10</value>
   </data>
   <data name="informationLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -193,13 +196,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 429</value>
+    <value>13, 430</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 37</value>
+    <value>772, 36</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -217,7 +220,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="informationLabelIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,37" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="informationLabelIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,36" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -406,7 +409,7 @@
     <value>NoControl</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 33</value>
+    <value>28, 32</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 15</value>
@@ -445,10 +448,13 @@
     <value>3, 30</value>
   </data>
   <data name="pictureBox1.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>19, 21</value>
+    <value>19, 19</value>
+  </data>
+  <data name="pictureBox1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>19, 19</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 21</value>
+    <value>19, 19</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -481,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkForUpdatesNowButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>429, 33</value>
+    <value>429, 32</value>
   </data>
   <data name="checkForUpdatesNowButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 15</value>
@@ -529,7 +535,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 54</value>
+    <value>776, 52</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -861,7 +867,7 @@
     <value>0, 12, 0, 12</value>
   </data>
   <data name="dataGridViewUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>773, 352</value>
+    <value>773, 357</value>
   </data>
   <data name="dataGridViewUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
