@@ -316,6 +316,7 @@ namespace XenAdmin
 
             ServicePointManager.DefaultConnectionLimit = 20;
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             XenAPI.Session.UserAgent = string.Format("XenCenter/{0}", ClientVersion());
             ReconfigureConnectionSettings();
 
