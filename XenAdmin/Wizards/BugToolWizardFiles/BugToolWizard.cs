@@ -133,7 +133,7 @@ namespace XenAdmin.Wizards
             {
                 var uploadAction = new Actions.UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,
                                                                        bugToolPageDestination1.UploadToken,
-                                                                       Registry.CallHomeUploadDomainName, false);
+                                                                       Registry.HealthCheckUploadDomainName, false);
                 dialog = new ActionProgressDialog(uploadAction, ProgressBarStyle.Blocks) {ShowCancel = true};
                 dialog.ShowDialog();
             }

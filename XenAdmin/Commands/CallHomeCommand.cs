@@ -4,17 +4,17 @@ using XenAPI;
 
 namespace XenAdmin.Commands
 {
-    internal class CallHomeCommand : Command
+    internal class HealthCheckCommand : Command
     {
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
         /// </summary>
-        public CallHomeCommand()
+        public HealthCheckCommand()
         {
         }
 
-        public CallHomeCommand(IMainWindow mainWindow)
+        public HealthCheckCommand(IMainWindow mainWindow)
             : base(mainWindow)
         {
         }

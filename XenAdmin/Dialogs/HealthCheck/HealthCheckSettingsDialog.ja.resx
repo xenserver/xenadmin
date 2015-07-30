@@ -1686,7 +1686,7 @@
     <value>Health Check Enrollment</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CallHomeEnrollmentDialog</value>
+    <value>HealthCheckEnrollmentDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

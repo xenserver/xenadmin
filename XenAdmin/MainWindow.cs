@@ -873,10 +873,10 @@ namespace XenAdmin
             Pool pool = Helpers.GetPoolOfOne((IXenConnection)connection);
             if (pool == null)
                 return;
-            var newCallHomeSettings = pool.CallHomeSettings;
-            new TransferCallHomeSettingsAction(pool, newCallHomeSettings,
-                newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET),
-                newCallHomeSettings.GetSecretyInfo(pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
+            var newHealthCheckSSettings = pool.HealthCheckSettings;
+            new TransferHealthCheckSettingsAction(pool, newHealthCheckSSettings,
+                newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
+                newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
         /// <summary>

@@ -57,11 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\Action.cs" />
-    <Compile Include="Actions\CallHome\CallHomeAuthenticationAction.cs" />
-    <Compile Include="Actions\CallHome\SaveCallHomeSettingsAction.cs" />
-    <Compile Include="Actions\CallHome\TransferCallHomeSettingAction.cs" />
-    <Compile Include="Actions\CallHome\UploadServerStatusReportAction.cs" />
-    <Compile Include="Actions\CallHome\XenServerHealthCheckUpload.cs" />
+    <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
+    <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
+    <Compile Include="Actions\HealthCheck\TransferHealthCheckSettingAction.cs" />
+    <Compile Include="Actions\HealthCheck\UploadServerStatusReportAction.cs" />
+    <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
     <Compile Include="Actions\DockerContainer\ExecuteContainerPluginAction.cs" />

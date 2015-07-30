@@ -42,13 +42,13 @@ using XenAPI;
 using XenCenterLib;
 
 
-namespace XenAdmin.Dialogs.CallHome
+namespace XenAdmin.Dialogs.HealthCheck
 {
-    public partial class CallHomeOverviewDialog : XenDialogBase
+    public partial class HealthCheckOverviewDialog : XenDialogBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CallHomeOverviewDialog()
+        public HealthCheckOverviewDialog()
         {
             InitializeComponent();
         }
@@ -152,8 +152,8 @@ namespace XenAdmin.Dialogs.CallHome
             {
                 _nameCell.Value = Pool.Name;
                 _nameCell.Image = null;
-                _statusCell.Value = Pool.CallHomeSettings.StatusDescription;
-                _statusCell.Image = Pool.CallHomeSettings.Status != CallHomeStatus.Enabled
+                _statusCell.Value = Pool.HealthCheckSettings.StatusDescription;
+                _statusCell.Image = Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled
                     ? Properties.Resources._000_error_h32bit_16
                     : Properties.Resources._000_Alert2_h32bit_16;
             }
@@ -186,33 +186,33 @@ namespace XenAdmin.Dialogs.CallHome
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             poolNameLabel.Text = poolRow.Pool.Name.Ellipsise(120);
-            scheduleLabel.Text = GetScheduleDescription(poolRow.Pool.CallHomeSettings);
-            lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(poolRow.Pool.CallHomeSettings.LastSuccessfulUpload);
-            lastUploadDateLabel.Text = GetLastUploadDescription(poolRow.Pool.CallHomeSettings);
+            scheduleLabel.Text = GetScheduleDescription(poolRow.Pool.HealthCheckSettings);
+            lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(poolRow.Pool.HealthCheckSettings.LastSuccessfulUpload);
+            lastUploadDateLabel.Text = GetLastUploadDescription(poolRow.Pool.HealthCheckSettings);
 
-            healthCheckStatusPanel.Visible = poolRow.Pool.CallHomeSettings.Status == CallHomeStatus.Enabled;
-            notEnrolledPanel.Visible = poolRow.Pool.CallHomeSettings.Status != CallHomeStatus.Enabled;
-            UpdateUploadRequestDescription(poolRow.Pool.CallHomeSettings);
+            healthCheckStatusPanel.Visible = poolRow.Pool.HealthCheckSettings.Status == HealthCheckStatus.Enabled;
+            notEnrolledPanel.Visible = poolRow.Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled;
+            UpdateUploadRequestDescription(poolRow.Pool.HealthCheckSettings);
         }
 
-        public string GetScheduleDescription(CallHomeSettings callHomeSettings)
+        public string GetScheduleDescription(HealthCheckSettings healthCheckSettings)
         {
             {
-                var time = new DateTime(1900, 1, 1, callHomeSettings.TimeOfDay, 0, 0);
-                return callHomeSettings.Status == CallHomeStatus.Enabled
-                    ? string.Format(Messages.CALLHOME_SCHEDULE_DESCRIPTION, callHomeSettings.IntervalInWeeks,
-                                    callHomeSettings.DayOfWeek, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true))
+                var time = new DateTime(1900, 1, 1, healthCheckSettings.TimeOfDay, 0, 0);
+                return healthCheckSettings.Status == HealthCheckStatus.Enabled
+                    ? string.Format(Messages.HEALTHCHECK_SCHEDULE_DESCRIPTION, healthCheckSettings.IntervalInWeeks,
+                                    healthCheckSettings.DayOfWeek, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true))
                     : string.Empty;
             }
         }
 
-        public void UpdateUploadRequestDescription(CallHomeSettings callHomeSettings)
+        public void UpdateUploadRequestDescription(HealthCheckSettings healthCheckSettings)
         {
             {
-                if (!callHomeSettings.CanRequestNewUpload)
+                if (!healthCheckSettings.CanRequestNewUpload)
                 {
                         uploadRequestLinkLabel.Text = string.Format(Messages.HEALTHCHECK_ON_DEMAND_REQUESTED_AT,
-                                                                    HelpersGUI.DateTimeToString(callHomeSettings.NewUploadRequestTime.ToLocalTime(), 
+                                                                    HelpersGUI.DateTimeToString(healthCheckSettings.NewUploadRequestTime.ToLocalTime(), 
                                                                         Messages.DATEFORMAT_HM, true));
                     uploadRequestLinkLabel.LinkArea = new LinkArea(0, 0);
                     return;
@@ -222,12 +222,12 @@ namespace XenAdmin.Dialogs.CallHome
             }
         }
 
-        public string GetLastUploadDescription(CallHomeSettings callHomeSettings)
+        public string GetLastUploadDescription(HealthCheckSettings healthCheckSettings)
         {
-            if (!string.IsNullOrEmpty(callHomeSettings.LastSuccessfulUpload))
+            if (!string.IsNullOrEmpty(healthCheckSettings.LastSuccessfulUpload))
             {
                 DateTime lastSuccessfulUpload;
-                if (CallHomeSettings.TryParseStringToDateTime(callHomeSettings.LastSuccessfulUpload, out lastSuccessfulUpload))
+                if (HealthCheckSettings.TryParseStringToDateTime(healthCheckSettings.LastSuccessfulUpload, out lastSuccessfulUpload))
                 {
                     return HelpersGUI.DateTimeToString(lastSuccessfulUpload.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
                 }
@@ -235,7 +235,7 @@ namespace XenAdmin.Dialogs.CallHome
             return string.Empty;
         }
 
-        private void CallHomeOverview_Load(object sender, EventArgs e)
+        private void HealthCheckOverviewDialog_Load(object sender, EventArgs e)
         {
             LoadPools();
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
@@ -251,7 +251,7 @@ namespace XenAdmin.Dialogs.CallHome
             RefreshDetailsPanel();
         }
 
-        private void CallHomeOverviewDialog_FormClosed(object sender, FormClosedEventArgs e)
+        private void HealthCheckOOverviewDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
@@ -270,7 +270,7 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            new CallHomeSettingsDialog(poolRow.Pool, false).ShowDialog(this);
+            new HealthCheckSettingsDialog(poolRow.Pool, false).ShowDialog(this);
         }
 
         public DialogResult ShowDialog(IWin32Window parent, List<IXenObject> selectedItems)
@@ -298,7 +298,7 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            new CallHomeSettingsDialog(poolRow.Pool, true).ShowDialog(this);
+            new HealthCheckSettingsDialog(poolRow.Pool, true).ShowDialog(this);
         }
 
         private void uploadRequestLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -307,14 +307,14 @@ namespace XenAdmin.Dialogs.CallHome
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            var callHomeSettings = poolRow.Pool.CallHomeSettings;
-            if (callHomeSettings.CanRequestNewUpload)
+            var healthCheckSettings = poolRow.Pool.HealthCheckSettings;
+            if (healthCheckSettings.CanRequestNewUpload)
             {
-                callHomeSettings.NewUploadRequest = CallHomeSettings.DateTimeToString(DateTime.UtcNow);
-                var token = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_TOKEN_SECRET);
-                var user = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-                var password = callHomeSettings.GetSecretyInfo(poolRow.Pool.Connection, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
-                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, token, user, password, false).RunAsync();
+                healthCheckSettings.NewUploadRequest = HealthCheckSettings.DateTimeToString(DateTime.UtcNow);
+                var token = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
+                var user = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+                var password = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, token, user, password, false).RunAsync();
             }
         }
 
@@ -335,8 +335,8 @@ namespace XenAdmin.Dialogs.CallHome
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             if (poolRow.Pool == null)
                 return;
-            var callHomeSettings = poolRow.Pool.CallHomeSettings;
-            if (callHomeSettings.Status == CallHomeStatus.Enabled)
+            var healthCheckSettings = poolRow.Pool.HealthCheckSettings;
+            if (healthCheckSettings.Status == HealthCheckStatus.Enabled)
             {
                 string msg = Helpers.GetPool(poolRow.Pool.Connection) == null 
                     ? Messages.CONFIRM_DISABLE_HEALTH_CHECK_SERVER 
@@ -347,8 +347,8 @@ namespace XenAdmin.Dialogs.CallHome
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
                         return;
                 }
-                callHomeSettings.Status = CallHomeStatus.Disabled;
-                new SaveCallHomeSettingsAction(poolRow.Pool, callHomeSettings, null, null, null, false).RunAsync();
+                healthCheckSettings.Status = HealthCheckStatus.Disabled;
+                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, null, null, null, false).RunAsync();
                 
             }
         }

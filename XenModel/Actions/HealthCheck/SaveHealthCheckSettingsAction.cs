@@ -34,31 +34,31 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SaveCallHomeSettingsAction : PureAsyncAction
+    public class SaveHealthCheckSettingsAction : PureAsyncAction
     {
         private readonly Pool pool;
-        CallHomeSettings callHomeSettings;
+        HealthCheckSettings healthCheckSettings;
         private string authenticationToken;
         private string username;
         private string password;
 
-        public SaveCallHomeSettingsAction(Pool pool, CallHomeSettings callHomeSettings, string authenticationToken, string userName, string passWord, bool suppressHistory)
-            : base(pool.Connection, Messages.ACTION_SAVE_CALLHOME_SETTINGS, string.Format(Messages.ACTION_SAVING_CALLHOME_SETTINGS, pool.Name), suppressHistory)
+        public SaveHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string authenticationToken, string userName, string passWord, bool suppressHistory)
+            : base(pool.Connection, Messages.ACTION_SAVE_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_SAVING_HEALTHCHECK_SETTINGS, pool.Name), suppressHistory)
         {
             this.pool = pool;
-            this.callHomeSettings = callHomeSettings;
+            this.healthCheckSettings = healthCheckSettings;
             this.authenticationToken = authenticationToken;
-            this.username = callHomeSettings.Status == CallHomeStatus.Enabled ? userName : null;
-            this.password = callHomeSettings.Status == CallHomeStatus.Enabled ? passWord : null;
+            this.username = healthCheckSettings.Status == HealthCheckStatus.Enabled ? userName : null;
+            this.password = healthCheckSettings.Status == HealthCheckStatus.Enabled ? passWord : null;
         }
         
         protected override void Run()
         {
-            Dictionary<string, string> newConfig = callHomeSettings.ToDictionary(pool.health_check_config);
+            Dictionary<string, string> newConfig = healthCheckSettings.ToDictionary(pool.health_check_config);
             if (!string.IsNullOrEmpty(authenticationToken))
-                CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_TOKEN_SECRET, authenticationToken);
-            CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
-            CallHomeAuthenticationAction.SetSecretInfo(Connection, newConfig, CallHomeSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
+                HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_TOKEN_SECRET, authenticationToken);
+            HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
+            HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
             Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
         }
     }

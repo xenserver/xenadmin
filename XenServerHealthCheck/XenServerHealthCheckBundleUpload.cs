@@ -74,7 +74,7 @@ namespace XenServerHealthCheck
                 {
                     try
                     {
-                        string opaqueref = Secret.get_by_uuid(session, pool.CallHomeSettings.UploadTokenSecretUuid);
+                        string opaqueref = Secret.get_by_uuid(session, pool.HealthCheckSettings.UploadTokenSecretUuid);
                         uploadToken = Secret.get_value(session, opaqueref);
                     }
                     catch (Exception e)
@@ -90,7 +90,7 @@ namespace XenServerHealthCheck
                         session.logout();
                     session = null;
                     log.ErrorFormat("The upload token is not retrieved for {0}", connection.Hostname);
-                    updateCallHomeSettings(false, startTime);
+                    updateHealthCheckSettings(false, startTime);
                     server.task = null;
                     ServerListHelper.instance.UpdateServerInfo(server);
                     return;
@@ -103,7 +103,7 @@ namespace XenServerHealthCheck
                     session.logout();
                 session = null;
                 log.Error(e, e);
-                updateCallHomeSettings(false, startTime);
+                updateHealthCheckSettings(false, startTime);
                 server.task = null;
                 ServerListHelper.instance.UpdateServerInfo(server);
                 return;
@@ -129,19 +129,19 @@ namespace XenServerHealthCheck
                 // Check if the task runs to completion before timeout.
                 for (int i = 0; i < TIMEOUT; i += INTERVAL)
                 {
-                    // If the task finishes, set CallHomeSettings accordingly.
+                    // If the task finishes, set HealthCheckSettings accordingly.
                     if (task.IsCompleted || task.IsCanceled || task.IsFaulted)
                     {
                         if (task.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)
                         {
                             string upload_uuid = task.Result;
                             if (!string.IsNullOrEmpty(upload_uuid))
-                                updateCallHomeSettings(true, startTime, upload_uuid);
+                                updateHealthCheckSettings(true, startTime, upload_uuid);
                             else
-                                updateCallHomeSettings(false, startTime);
+                                updateHealthCheckSettings(false, startTime);
                         }
                         else
-                            updateCallHomeSettings(false, startTime);
+                            updateHealthCheckSettings(false, startTime);
 
                         server.task = null;
                         ServerListHelper.instance.UpdateServerInfo(server);
@@ -153,7 +153,7 @@ namespace XenServerHealthCheck
                     if (serviceStop.IsCancellationRequested)
                     {
                         cts.Cancel();
-                        updateCallHomeSettings(false, startTime);
+                        updateHealthCheckSettings(false, startTime);
                         task.Wait();
                         server.task = null;
                         ServerListHelper.instance.UpdateServerInfo(server);
@@ -165,7 +165,7 @@ namespace XenServerHealthCheck
 
                 // The task has run for 24h, cancel the task and mark it as a failure upload.
                 cts.Cancel();
-                updateCallHomeSettings(false, startTime);
+                updateHealthCheckSettings(false, startTime);
                 task.Wait();
                 server.task = null;
                 ServerListHelper.instance.UpdateServerInfo(server);
@@ -183,7 +183,7 @@ namespace XenServerHealthCheck
 
         }
 
-        public void updateCallHomeSettings(bool success, DateTime time, string uploadUuid = "")
+        public void updateHealthCheckSettings(bool success, DateTime time, string uploadUuid = "")
         {
             Session session = new Session(connection.Hostname, 80);
             session.login_with_password(connection.Username, connection.Password);
@@ -191,27 +191,27 @@ namespace XenServerHealthCheck
 
             // Round-trip format time
             DateTime rtime = DateTime.SpecifyKind(time, DateTimeKind.Utc);
-            string stime = CallHomeSettings.DateTimeToString(rtime);
+            string stime = HealthCheckSettings.DateTimeToString(rtime);
 
             // record upload_uuid,
             // release the lock,
             // set the time of LAST_SUCCESSFUL_UPLOAD or LAST_FAILED_UPLOAD
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
-            config[CallHomeSettings.UPLOAD_LOCK] = "";
+            config[HealthCheckSettings.UPLOAD_LOCK] = "";
             if (success)
             {
-                config[CallHomeSettings.LAST_SUCCESSFUL_UPLOAD] = stime;
-                config[CallHomeSettings.UPLOAD_UUID] = uploadUuid;
+                config[HealthCheckSettings.LAST_SUCCESSFUL_UPLOAD] = stime;
+                config[HealthCheckSettings.UPLOAD_UUID] = uploadUuid;
                 // reset the NEW_UPLOAD_REQUEST field, if the current successful upload was started after the request
                 DateTime newUploadRequestTime;
-                if (CallHomeSettings.TryParseStringToDateTime(config[CallHomeSettings.NEW_UPLOAD_REQUEST], out newUploadRequestTime))
+                if (HealthCheckSettings.TryParseStringToDateTime(config[HealthCheckSettings.NEW_UPLOAD_REQUEST], out newUploadRequestTime))
                 {
                     if (rtime > newUploadRequestTime)
-                        config[CallHomeSettings.NEW_UPLOAD_REQUEST] = "";
+                        config[HealthCheckSettings.NEW_UPLOAD_REQUEST] = "";
                 }
             }
             else
-                config[CallHomeSettings.LAST_FAILED_UPLOAD] = stime;
+                config[HealthCheckSettings.LAST_FAILED_UPLOAD] = stime;
             Pool.set_health_check_config(session, connection.Cache.Pools[0].opaque_ref, config);
 
             if (session != null)
@@ -246,7 +246,21 @@ namespace XenServerHealthCheck
             // Upload the zip file to CIS uploading server.
             XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, VERBOSITY_LEVEL,
                                                                                Properties.Settings.Default.UPLOAD_URL);
-            string upload_uuid = upload.UploadZip(bundleToUpload, cancel);
+
+            string upload_uuid = "";
+            try
+            {
+                upload_uuid = upload.UploadZip(bundleToUpload, cancel);
+            }
+            catch (Exception e)
+            {
+                if (session != null)
+                    session.logout();
+                session = null;
+                log.Error(e, e);
+                return "";
+            }
+
             if (File.Exists(bundleToUpload))
                 File.Delete(bundleToUpload);
 

@@ -299,29 +299,29 @@ namespace XenAdmin.Core
             }
         }
 
-        public static string CallHomeIdentityTokenDomainName
+        public static string HealthCheckIdentityTokenDomainName
         {
-            get { return ReadKey(CALL_HOME_IDENTITY_TOKEN_DOMAIN_NAME); }
+            get { return ReadKey(HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME); }
         }
 
-        public static string CallHomeUploadTokenDomainName
+        public static string HealthCheckUploadTokenDomainName
         {
-            get { return ReadKey(CALL_HOME_UPLOAD_TOKEN_DOMAIN_NAME); }
+            get { return ReadKey(HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME); }
         }
 
-        public static string CallHomeUploadGrantTokenDomainName
+        public static string HealthCheckUploadGrantTokenDomainName
         {
-            get { return ReadKey(CALL_HOME_UPLOAD_GRANT_TOKEN_DOMAIN_NAME); }
+            get { return ReadKey(HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME); }
         }
 
-        public static string CallHomeUploadDomainName
+        public static string HealthCheckUploadDomainName
         {
-            get { return ReadKey(CALL_HOME_UPLOAD_DOMAIN_NAME); }
+            get { return ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME); }
         }
 
-        public static string CallHomeProductKey
+        public static string HealthCheckProductKey
         {
-            get { return ReadKey(CALL_HOME_PRODUCT_KEY); }
+            get { return ReadKey(HEALTH_CHECK_PRODUCT_KEY); }
         }
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
@@ -339,11 +339,11 @@ namespace XenAdmin.Core
         private const string PSExecutionPolicyName = "ExecutionPolicy";
         private const string PowerShellKey = @"Software\Microsoft\PowerShell\1";
         private const string PowerShellStamp = "Install";
-        private const string CALL_HOME_IDENTITY_TOKEN_DOMAIN_NAME = "CallHomeIdentityTokenDomainName";
-        private const string CALL_HOME_UPLOAD_TOKEN_DOMAIN_NAME = "CallHomeUploadTokenDomainName";
-        private const string CALL_HOME_UPLOAD_GRANT_TOKEN_DOMAIN_NAME = "CallHomeUploadGrantTokenDomainName";
-        private const string CALL_HOME_UPLOAD_DOMAIN_NAME = "CallHomeUploadDomainName";
-        private const string CALL_HOME_PRODUCT_KEY = "CallHomeProductKey";
+        private const string HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME = "HealthCheckIdentityTokenDomainName";
+        private const string HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME = "HealthCheckUploadTokenDomainName";
+        private const string HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME = "HealthCheckUploadGrantTokenDomainName";
+        private const string HEALTH_CHECK_UPLOAD_DOMAIN_NAME = "HealthCheckUploadDomainName";
+        private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

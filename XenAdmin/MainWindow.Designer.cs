@@ -1850,7 +1850,7 @@ namespace XenAdmin
             // 
             // healthCheckToolStripMenuItem1
             // 
-            this.healthCheckToolStripMenuItem1.Command = new XenAdmin.Commands.CallHomeCommand();
+            this.healthCheckToolStripMenuItem1.Command = new XenAdmin.Commands.HealthCheckCommand();
             this.healthCheckToolStripMenuItem1.Name = "healthCheckToolStripMenuItem1";
             resources.ApplyResources(this.healthCheckToolStripMenuItem1, "healthCheckToolStripMenuItem1");
             // 
