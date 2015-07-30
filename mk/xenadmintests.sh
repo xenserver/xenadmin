@@ -55,7 +55,7 @@ ${MYSCP} ./output/xenadmin/XenAdminTests.tgz Administrator@$ADDR:/tmp/
 ${MYTESTSSH} 'cd /tmp && tar xzf /tmp/XenAdminTests.tgz && chmod -R 777 /tmp/Release'
 
 set +e
-$VIADAEMON $ADDR 'nunit-console.exe /process=separate /noshadow /err="C:\cygwin\tmp\error.nunit.log" /timeout=40000 /output="C:\cygwin\tmp\output.nunit.log" /xml="C:\cygwin\tmp\XenAdminTests.xml" "C:\cygwin\tmp\Release\XenAdminTests.dll" "/framework=net-4.0"' &
+$VIADAEMON $ADDR 'nunit-console.exe /process=separate /noshadow /err="C:\cygwin\tmp\error.nunit.log" /timeout=40000 /output="C:\cygwin\tmp\output.nunit.log" /xml="C:\cygwin\tmp\XenAdminTests.xml" "C:\cygwin\tmp\Release\XenAdminTests.dll" "/framework=net-4.5"' &
 pid=$!
 (sleep $TIMEOUT ; kill $pid 2>/dev/null ) &
 sleeperpid=$!
