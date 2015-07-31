@@ -102,9 +102,11 @@ namespace XenAdmin.TabPages
 
                     toolStripButtonRefresh.Enabled = false;
                     toolStripButtonRestoreDismissed.Enabled = false;
+
                     StoreSelectedUpdates();
                     dataGridViewUpdates.Rows.Clear();
                     dataGridViewUpdates.Refresh();
+
                     spinningTimer.Start();
                     tableLayoutPanel3.Visible = true;
                     labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
@@ -220,7 +222,7 @@ namespace XenAdmin.TabPages
                     tableLayoutPanel3.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
 
-                    if (SomeOrAllUpdatesAllowed())
+                    if (SomeOrAllUpdatesDisabled())
                     {
                         labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
                         checkForUpdatesNowButton.Visible = true;
@@ -235,7 +237,7 @@ namespace XenAdmin.TabPages
 
                 checkForUpdatesNowButton.Visible = false;
 
-                if (SomeButNotAllUpdatesAllowed())
+                if (SomeButNotAllUpdatesDisabled())
                 {
                     this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
                     MakeWarningVisible();
@@ -307,7 +309,7 @@ namespace XenAdmin.TabPages
         /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some, but not all types of updates.
         /// </summary>
         /// <returns></returns>
-        private bool SomeButNotAllUpdatesAllowed()
+        private bool SomeButNotAllUpdatesDisabled()
         {
             return (!Properties.Settings.Default.AllowPatchesUpdates ||
                     !Properties.Settings.Default.AllowXenCenterUpdates ||
@@ -322,7 +324,7 @@ namespace XenAdmin.TabPages
         /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some or all types of updates.
         /// </summary>
         /// <returns></returns>
-        private bool SomeOrAllUpdatesAllowed()
+        private bool SomeOrAllUpdatesDisabled()
         {
             return !((Properties.Settings.Default.AllowPatchesUpdates &&
                    Properties.Settings.Default.AllowXenCenterUpdates &&
