@@ -63,6 +63,7 @@ namespace XenAdmin.TabPages
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
         private int checksQueue;
+        private bool PageWasRefreshed;
 
         public ManageUpdatesPage()
         {
@@ -75,6 +76,8 @@ namespace XenAdmin.TabPages
             Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+            pictureBox1.Image = SystemIcons.Information.ToBitmap();
+            PageWasRefreshed = false;
         }
 
         public void RefreshUpdateList()
@@ -98,10 +101,14 @@ namespace XenAdmin.TabPages
                         return;
 
                     toolStripButtonRefresh.Enabled = false;
+                    toolStripButtonRestoreDismissed.Enabled = false;
+
                     StoreSelectedUpdates();
                     dataGridViewUpdates.Rows.Clear();
+                    dataGridViewUpdates.Refresh();
+
                     spinningTimer.Start();
-                    panelProgress.Visible = true;
+                    tableLayoutPanel3.Visible = true;
                     labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
                 });
         }
@@ -112,6 +119,7 @@ namespace XenAdmin.TabPages
                 {
                     checksQueue--;
                     toolStripButtonRefresh.Enabled = true;
+                    toolStripButtonRestoreDismissed.Enabled = true;
                     spinningTimer.Stop();
 
                     if (succeeded)
@@ -119,7 +127,9 @@ namespace XenAdmin.TabPages
                         int alertCount = Updates.UpdateAlertsCount;
 
                         if (alertCount > 0)
-                            panelProgress.Visible = false;
+                        {                            
+                            tableLayoutPanel3.Visible = false;
+                        }
                         else
                         {
                             pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
@@ -191,6 +201,8 @@ namespace XenAdmin.TabPages
                 return;
 
             SetFilterLabel();
+
+            this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 51);
             
             try
             {
@@ -200,20 +212,43 @@ namespace XenAdmin.TabPages
                 {
                     StoreSelectedUpdates();
                     dataGridViewUpdates.Rows.Clear();
+                    dataGridViewUpdates.Refresh();
                 }
 
                 var updates = new List<Alert>(Updates.UpdateAlerts);           
 
                 if (updates.Count == 0)
                 {
-                    panelProgress.Visible = true;
+                    tableLayoutPanel3.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
-                    labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+
+                    if (SomeOrAllUpdatesDisabled())
+                    {
+                        labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
+                        checkForUpdatesNowButton.Visible = true;
+                        MakeWarningInvisible();
+                    }
+                    else
+                    {
+                        labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+                    }
                     return;
                 }
 
+                checkForUpdatesNowButton.Visible = false;
+
+                if (SomeButNotAllUpdatesDisabled())
+                {
+                    this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
+                    MakeWarningVisible();
+                }
+                else
+                {
+                    MakeWarningInvisible();
+                }
+
                 updates.RemoveAll(FilterAlert);
-                panelProgress.Visible = false;
+                tableLayoutPanel3.Visible = false;
 
                 if (dataGridViewUpdates.SortedColumn != null)
                 {
@@ -246,6 +281,55 @@ namespace XenAdmin.TabPages
                 dataGridViewUpdates.ResumeLayout();
                 UpdateButtonEnablement();
             }
+        }
+
+        /// <summary>
+        /// Makes the warning that appears above the grid saying: "Automatic checking for updates 
+        /// is disabled for some types of updates" visible.
+        /// </summary>
+        private void MakeWarningVisible()
+        {
+            pictureBox1.Visible = true;
+            AutoCheckForUpdatesDisabledLabel.Visible = true;
+            checkForUpdatesNowButton2.Visible = true;
+        }
+
+        /// <summary>
+        /// Makes the warning that appears above the grid saying: "Automatic checking for updates 
+        /// is disabled for some types of updates" invisible.
+        /// </summary>
+        private void MakeWarningInvisible()
+        {
+            pictureBox1.Visible = false;
+            AutoCheckForUpdatesDisabledLabel.Visible = false;
+            checkForUpdatesNowButton2.Visible = false;
+        }
+
+        /// <summary>
+        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some, but not all types of updates.
+        /// </summary>
+        /// <returns></returns>
+        private bool SomeButNotAllUpdatesDisabled()
+        {
+            return (!Properties.Settings.Default.AllowPatchesUpdates ||
+                    !Properties.Settings.Default.AllowXenCenterUpdates ||
+                    !Properties.Settings.Default.AllowXenServerUpdates) &&
+                    (Properties.Settings.Default.AllowPatchesUpdates ||
+                    Properties.Settings.Default.AllowXenCenterUpdates ||
+                    Properties.Settings.Default.AllowXenServerUpdates) &&
+                    !PageWasRefreshed;
+        }
+
+        /// <summary>
+        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some or all types of updates.
+        /// </summary>
+        /// <returns></returns>
+        private bool SomeOrAllUpdatesDisabled()
+        {
+            return !((Properties.Settings.Default.AllowPatchesUpdates &&
+                   Properties.Settings.Default.AllowXenCenterUpdates &&
+                   Properties.Settings.Default.AllowXenServerUpdates) ||
+                   PageWasRefreshed);
         }
 
         /// <summary>
@@ -368,8 +452,8 @@ namespace XenAdmin.TabPages
             var groups = from Alert alert in alerts
                          where alert != null && !alert.Dismissing
                          group alert by alert.Connection
-                             into g
-                             select new { Connection = g.Key, Alerts = g };
+                         into g
+                         select new { Connection = g.Key, Alerts = g };
 
             foreach (var g in groups)
             {
@@ -379,23 +463,25 @@ namespace XenAdmin.TabPages
                     {
                         alert.Dismissing = true;
                     }
+                    toolStripButtonRestoreDismissed.Enabled = false;
                     DeleteAllAlertsAction action = new DeleteAllAlertsAction(g.Connection, g.Alerts);
                     action.RunAsync();
-                    action.Completed += DeleteAllAllertAction_Completed;
+                    action.Completed += DeleteAllAllertAction_Completed;                    
                 }
             }
         }
 
+        /// <summary>
+        /// After the Delete action is completed the page is refreshed and the restore dismissed 
+        /// button is enabled again.
+        /// </summary>
+        /// <param name="sender"></param>
         private void DeleteAllAllertAction_Completed(ActionBase sender)
         {
-            foreach (var alert in Updates.UpdateAlerts)
-            {
-                if (alert.IsDismissed())
-                    Updates.RemoveUpdate(alert);
-            }
             Program.Invoke(Program.MainWindow, () =>
-            {
+            {                
                 Rebuild();
+                toolStripButtonRestoreDismissed.Enabled = true;
             });
         }
 
@@ -404,33 +490,108 @@ namespace XenAdmin.TabPages
 
         #region Actions DropDown event handlers
 
-      private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
-      {
-          if (dataGridViewUpdates.SelectedRows.Count != 1)
-              log.DebugFormat("Only 1 update can be dismissed at a time (Attempted to dismiss {0}). Dismissing the clicked item.", dataGridViewUpdates.SelectedRows.Count);
 
-          DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
-          if (clickedRow == null)
-          {
-              log.Debug("Attempted to dismiss update with no update selected.");
-              return;
-          }
 
-          Alert alert = (Alert)clickedRow.Tag;
-          if (alert == null)
-              return;
+        private void toolStripSplitButtonDismiss_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            toolStripSplitButtonDismiss.DefaultItem = e.ClickedItem;
+            toolStripSplitButtonDismiss.Text = toolStripSplitButtonDismiss.DefaultItem.Text;
+        }
 
-          using (var dlog = new ThreeButtonDialog(
-                  new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_CONFIRM, Messages.XENCENTER),
-                  ThreeButtonDialog.ButtonYes,
-                  ThreeButtonDialog.ButtonNo))
-          {
-              if (dlog.ShowDialog(this) != DialogResult.Yes)
-                  return;
-          }
+        /// <summary>
+        /// If the answer of the user to the dialog is YES, then make a list with all the updates and call 
+        /// DismissUpdates on that list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dismissAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-          DismissUpdates(new List<Alert> { (Alert)clickedRow.Tag });
-      }
+            DialogResult result;
+
+            if (!FilterIsOn)
+            {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE),
+                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    result = dlog.ShowDialog(this);
+                }
+            }
+            else
+            {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_CONTINUE),
+                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
+                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    result = dlog.ShowDialog(this);
+                }
+            }
+
+            if (result == DialogResult.Cancel)
+                return;
+
+            var alerts = result == DialogResult.No
+                         ? from DataGridViewRow row in dataGridViewUpdates.Rows select row.Tag as Alert
+                         : Updates.UpdateAlerts;
+
+            DismissUpdates(alerts);
+        }
+
+        /// <summary>
+        /// If the answer of the user to the dialog is YES, then make a list of all the selected rows
+        /// and call DismissUpdates on that list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dismissSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonYes,
+                    ThreeButtonDialog.ButtonNo))
+            {
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
+
+            if (dataGridViewUpdates.SelectedRows.Count > 0)
+            {
+                var selectedAlerts = from DataGridViewRow row in dataGridViewUpdates.SelectedRows select row.Tag as Alert;
+                DismissUpdates(selectedAlerts);
+            }
+        }
+
+        private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewUpdates.SelectedRows.Count != 1)
+                log.DebugFormat("Only 1 update can be dismissed at a time (Attempted to dismiss {0}). Dismissing the clicked item.", dataGridViewUpdates.SelectedRows.Count);
+
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+            {
+                log.Debug("Attempted to dismiss update with no update selected.");
+                return;
+            }
+
+            Alert alert = (Alert)clickedRow.Tag;
+            if (alert == null)
+                return;
+
+            using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_CONFIRM, Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonYes,
+                    ThreeButtonDialog.ButtonNo))
+            {
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
+
+            DismissUpdates(new List<Alert> { (Alert)clickedRow.Tag });
+        }
 
         private DataGridViewRow FindAlertRow(ToolStripMenuItem toolStripMenuItem)
         {
@@ -658,6 +819,8 @@ namespace XenAdmin.TabPages
         
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
+            PageWasRefreshed = true;
+            checkForUpdatesNowButton.Visible = false;
             Updates.CheckForUpdates(true);
         }
 
@@ -748,11 +911,25 @@ namespace XenAdmin.TabPages
                        Messages.XENCENTER)).ShowDialog(this);
             }
         }
+        
+        private void checkForUpdatesNowButton_Click(object sender, EventArgs e)
+        {
+            checkForUpdatesNowButton.Visible = false;
+            Updates.CheckForUpdates(true);
+            PageWasRefreshed = true;
+        }
 
         private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)
         {
-
+            PageWasRefreshed = true;
+            checkForUpdatesNowButton.Visible = false;
             Updates.RestoreDismissedUpdates();
         }        
+        private void checkForUpdatesNowButton2_Click(object sender, EventArgs e)
+        {            
+            MakeWarningInvisible();
+            PageWasRefreshed = true;
+            Updates.CheckForUpdates(true);
+        }
     }
 }

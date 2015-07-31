@@ -122,13 +122,6 @@ namespace XenAdmin.Alerts
             return false;
         }
 
-        public override void Dismiss()
-        {
-            foreach (IXenConnection connection in connections)
-                new IgnoreServerAction(connection, Version).RunAsync();
-            base.Dismiss();
-        }
-
         public override bool Equals(Alert other)
         {
             if (other is XenServerVersionAlert)

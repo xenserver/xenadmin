@@ -78,10 +78,12 @@ namespace XenAdmin.Actions
             int max = Alerts.Count();
             Exception e = null;
             LogDescriptionChanges = false;
+            List<Alert> toBeDismissed = new List<Alert>();
 
             try
             {
-                foreach (Alert a in Alerts)
+                var myList = new List<Alert>(Alerts);
+                foreach (Alert a in myList)
                 {
                     PercentComplete = (i * 100) / max;
                     i++;
@@ -92,7 +94,18 @@ namespace XenAdmin.Actions
                         {
                             try
                             {
-                                a1.DismissSingle(Session);
+                                if (a1 is XenServerPatchAlert || a1 is XenServerVersionAlert)
+                                {
+                                    toBeDismissed.Add(a1);
+                                }
+                                else if(a1 is XenCenterUpdateAlert)
+                                {
+                                    a1.Dismiss();
+                                }
+                                else
+                                {
+                                    a1.DismissSingle(Session);
+                                }
                             }
                             catch (Failure exn)
                             {
@@ -104,6 +117,8 @@ namespace XenAdmin.Actions
                             }
                         });
                 }
+
+                Updates.DismissUpdates(toBeDismissed);
             }
             finally
             {

@@ -108,7 +108,6 @@ namespace XenAdmin.Core
             {
                 handler(this, e);
             }
-
         }
     }
 }

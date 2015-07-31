@@ -102,10 +102,10 @@ namespace XenAdmin.Alerts
         }
 
         public override void Dismiss()
-        {
+        {            
             Properties.Settings.Default.LatestXenCenterSeen = NewVersion.VersionAndLang;
             Settings.TrySaveSettings();
-            base.Dismiss();
+            Updates.RemoveUpdate(this);
         }
 
         public override bool IsDismissed()

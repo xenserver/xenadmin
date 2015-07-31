@@ -42,6 +42,16 @@
             this.informationLabelIcon = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.checkForUpdatesNowButton2 = new System.Windows.Forms.LinkLabel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkForUpdatesNowButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelProgress = new System.Windows.Forms.Label();
+            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
@@ -50,22 +60,24 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
-            this.panelProgress = new XenAdmin.Controls.FlickerFreePanel();
-            this.labelProgress = new System.Windows.Forms.Label();
-            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
+            this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
+            this.dismissAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dismissSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.panelProgress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,15 +105,84 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel2.Controls.Add(this.toolStrip1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.checkForUpdatesNowButton2, 2, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // AutoCheckForUpdatesDisabledLabel
+            // 
+            resources.ApplyResources(this.AutoCheckForUpdatesDisabledLabel, "AutoCheckForUpdatesDisabledLabel");
+            this.AutoCheckForUpdatesDisabledLabel.Name = "AutoCheckForUpdatesDisabledLabel";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // checkForUpdatesNowButton2
+            // 
+            resources.ApplyResources(this.checkForUpdatesNowButton2, "checkForUpdatesNowButton2");
+            this.checkForUpdatesNowButton2.LinkColor = System.Drawing.Color.Black;
+            this.checkForUpdatesNowButton2.Name = "checkForUpdatesNowButton2";
+            this.checkForUpdatesNowButton2.TabStop = true;
+            this.checkForUpdatesNowButton2.Click += new System.EventHandler(this.checkForUpdatesNowButton2_Click);
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // checkForUpdatesNowButton
+            // 
+            resources.ApplyResources(this.checkForUpdatesNowButton, "checkForUpdatesNowButton");
+            this.checkForUpdatesNowButton.Name = "checkForUpdatesNowButton";
+            this.checkForUpdatesNowButton.UseVisualStyleBackColor = true;
+            this.checkForUpdatesNowButton.Click += new System.EventHandler(this.checkForUpdatesNowButton_Click);
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.labelProgress, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.pictureBoxProgress, 0, 0);
+            this.tableLayoutPanel4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // labelProgress
+            // 
+            resources.ApplyResources(this.labelProgress, "labelProgress");
+            this.labelProgress.Name = "labelProgress";
+            // 
+            // pictureBoxProgress
+            // 
+            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
+            this.pictureBoxProgress.Name = "pictureBoxProgress";
+            this.pictureBoxProgress.TabStop = false;
             // 
             // toolStrip1
             // 
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip1.ClickThrough = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.toolStrip1, 3);
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButtonServerFilter,
@@ -111,6 +192,7 @@
             this.toolStripSeparator1,
             this.toolStripButtonExportAll,
             this.toolStripLabelFiltersOnOff,
+            this.toolStripSplitButtonDismiss,
             this.toolStripButtonRestoreDismissed});
             this.toolStrip1.Name = "toolStrip1";
             // 
@@ -160,26 +242,36 @@
             resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
             this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
             // 
-            // panelProgress
+            // toolStripSplitButtonDismiss
             // 
-            resources.ApplyResources(this.panelProgress, "panelProgress");
-            this.panelProgress.BackColor = System.Drawing.SystemColors.Window;
-            this.panelProgress.BorderColor = System.Drawing.Color.Black;
-            this.panelProgress.BorderWidth = 1;
-            this.panelProgress.Controls.Add(this.labelProgress);
-            this.panelProgress.Controls.Add(this.pictureBoxProgress);
-            this.panelProgress.Name = "panelProgress";
+            this.toolStripSplitButtonDismiss.AutoToolTip = false;
+            this.toolStripSplitButtonDismiss.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButtonDismiss.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dismissAllToolStripMenuItem,
+            this.dismissSelectedToolStripMenuItem});
+            resources.ApplyResources(this.toolStripSplitButtonDismiss, "toolStripSplitButtonDismiss");
+            this.toolStripSplitButtonDismiss.Name = "toolStripSplitButtonDismiss";
+            this.toolStripSplitButtonDismiss.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButtonDismiss_DropDownItemClicked);
             // 
-            // labelProgress
+            // dismissAllToolStripMenuItem
             // 
-            resources.ApplyResources(this.labelProgress, "labelProgress");
-            this.labelProgress.Name = "labelProgress";
+            this.dismissAllToolStripMenuItem.Name = "dismissAllToolStripMenuItem";
+            resources.ApplyResources(this.dismissAllToolStripMenuItem, "dismissAllToolStripMenuItem");
+            this.dismissAllToolStripMenuItem.Click += new System.EventHandler(this.dismissAllToolStripMenuItem_Click);
             // 
-            // pictureBoxProgress
+            // dismissSelectedToolStripMenuItem
             // 
-            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
-            this.pictureBoxProgress.Name = "pictureBoxProgress";
-            this.pictureBoxProgress.TabStop = false;
+            this.dismissSelectedToolStripMenuItem.Name = "dismissSelectedToolStripMenuItem";
+            resources.ApplyResources(this.dismissSelectedToolStripMenuItem, "dismissSelectedToolStripMenuItem");
+            this.dismissSelectedToolStripMenuItem.Click += new System.EventHandler(this.dismissSelectedToolStripMenuItem_Click);
+            // 
+            // toolStripButtonRestoreDismissed
+            // 
+            this.toolStripButtonRestoreDismissed.AutoToolTip = false;
+            this.toolStripButtonRestoreDismissed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripButtonRestoreDismissed, "toolStripButtonRestoreDismissed");
+            this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
+            this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
             // 
             // dataGridViewUpdates
             // 
@@ -254,21 +346,13 @@
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // toolStripButtonRestoreDismissed
-            // 
-            this.toolStripButtonRestoreDismissed.AutoToolTip = false;
-            this.toolStripButtonRestoreDismissed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripButtonRestoreDismissed, "toolStripButtonRestoreDismissed");
-            this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
-            this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
-            // 
             // ManageUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.panelProgress);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.dataGridViewUpdates);
             this.Name = "ManageUpdatesPage";
@@ -276,11 +360,15 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panelProgress.ResumeLayout(false);
-            this.panelProgress.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -290,26 +378,36 @@
         #endregion
 
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewUpdates;
-        private XenAdmin.Controls.FlickerFreePanel panelProgress;
         private System.Windows.Forms.PictureBox pictureBoxProgress;
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox informationLabelIcon;
         private System.Windows.Forms.LinkLabel informationLabel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private XenAdmin.Controls.ToolStripEx toolStrip1;
-        private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDropDownButtonServerFilter;
-        private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDropDownButtonDateFilter;
+        private System.Windows.Forms.Button button2;
+        private Controls.ToolStripEx toolStrip1;
+        private Controls.FilterLocationToolStripDropDownButton toolStripDropDownButtonServerFilter;
+        private Controls.FilterDatesToolStripDropDownButton toolStripDropDownButtonDateFilter;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
         private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
+        private System.Windows.Forms.ToolStripMenuItem dismissAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dismissSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
+        private System.Windows.Forms.Label AutoCheckForUpdatesDisabledLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
-        private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
+        private System.Windows.Forms.LinkLabel checkForUpdatesNowButton2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button checkForUpdatesNowButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }

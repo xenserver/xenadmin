@@ -71,7 +71,9 @@ namespace XenAdmin.Core
             try
             {
                 lock (updateAlertsLock)
+                {
                     updateAlerts.Add(update);
+                }
             }
             catch (Exception e)
             {
@@ -89,6 +91,63 @@ namespace XenAdmin.Core
             catch (Exception e)
             {
                 log.Error("Failed to remove update", e);
+            }
+        }
+
+        /// <summary>
+        /// Dismisses the updates in the given list i.e. they are added in the 
+        /// other_config list of each pool and removed from the Updates.UpdateAlerts list.
+        /// </summary>
+        /// <param name="toBeDismissed"></param>
+        public static void DismissUpdates(List<Alert> toBeDismissed)
+        {
+            foreach(IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+            {
+                XenAPI.Pool pool = Helpers.GetPoolOfOne(connection);
+                if (pool == null)
+                    continue;
+
+                Dictionary<string, string> other_config = pool.other_config;
+
+                foreach (Alert alert in toBeDismissed)
+                {
+                  
+                    if (alert is XenServerPatchAlert)
+                    {
+
+                        if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
+                        {
+                            List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
+                            if (current.Contains(((XenServerPatchAlert)alert).Patch.Uuid))
+                                continue;
+                            current.Add(((XenServerPatchAlert)alert).Patch.Uuid);
+                            other_config[IgnorePatchAction.IgnorePatchKey] = string.Join(",", current.ToArray());
+                        }
+                        else
+                        {
+                            other_config.Add(IgnorePatchAction.IgnorePatchKey, ((XenServerPatchAlert)alert).Patch.Uuid);
+                        }
+                    }
+                    if (alert is XenServerVersionAlert)
+                    {
+
+                        if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
+                        {
+                            List<string> current = new List<string>(other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
+                            if (current.Contains(((XenServerVersionAlert)alert).Version.VersionAndOEM))
+                                continue;
+                            current.Add(((XenServerVersionAlert)alert).Version.VersionAndOEM);
+                            other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
+                        }
+                        else
+                        {
+                            other_config.Add(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY, ((XenServerVersionAlert)alert).Version.VersionAndOEM);
+                        }                       
+                    }
+                    Updates.RemoveUpdate(alert);
+                }
+
+                XenAPI.Pool.set_other_config(connection.Session, pool.opaque_ref, other_config);
             }
         }
 
@@ -411,6 +470,8 @@ namespace XenAdmin.Core
                 {
                     other_config.Remove(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY);
                 }
+
+                XenAPI.Pool.set_other_config(_connection.Session, pool.opaque_ref, other_config);
             }
 
             Properties.Settings.Default.LatestXenCenterSeen = "";

@@ -177,13 +177,6 @@ namespace XenAdmin.Alerts
             return false;
         }
 
-        public override void Dismiss()
-        {
-            base.Dismiss();
-            foreach (IXenConnection connection in connections)
-                new IgnorePatchAction(connection, Patch).RunAsync();
-        }
-
         public override bool Equals(Alert other)
         {
             if (other is XenServerPatchAlert)
