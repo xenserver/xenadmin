@@ -37,6 +37,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Properties;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -76,6 +77,8 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public void Save()
         {
+            bool refreshUpdatesTab = AtLeastOneOptionHasBenChecked();
+
             // XenCenter updates
             if (AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates)
                 Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
@@ -85,6 +88,22 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.AllowPatchesUpdates = AllowXenServerPatchesCheckBox.Checked;
             if (AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates)
                 Properties.Settings.Default.AllowXenServerUpdates = AllowXenServerUpdatesCheckBox.Checked;
+
+            if(refreshUpdatesTab)
+            {
+                Updates.CheckForUpdates(false);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if at least one other box has been checked in Updates Options. Otherwise returns false.
+        /// </summary>
+        /// <returns></returns>
+        private bool AtLeastOneOptionHasBenChecked()
+        {
+            return (AllowXenCenterUpdatesCheckBox.Checked && !Properties.Settings.Default.AllowXenCenterUpdates) ||
+                   (AllowXenServerPatchesCheckBox.Checked && !Properties.Settings.Default.AllowPatchesUpdates) ||
+                   (AllowXenServerUpdatesCheckBox.Checked && !Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         #endregion
