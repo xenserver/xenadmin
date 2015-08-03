@@ -52,6 +52,7 @@ namespace XenAdmin.Core
         private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
         private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
+        private static List<XenServerVersion> XenServerVersionsCopy = new List<XenServerVersion>();
 
         private static readonly object updateAlertsLock = new object();
         private static readonly ChangeableList<Alert> updateAlerts = new ChangeableList<Alert>();
@@ -217,6 +218,9 @@ namespace XenAdmin.Core
                     var vers = action.XenServerVersions.Where(v => !XenServerVersions.Contains(v));
                     XenServerVersions.AddRange(vers);
 
+                    var versCopy = action.XenServerVersionCopy.Where(v => !XenServerVersions.Contains(v));
+                    XenServerVersionsCopy.AddRange(versCopy);
+
                     var patches = action.XenServerPatches.Where(p => !XenServerPatches.Contains(p));
                     XenServerPatches.AddRange(patches);
                 }
@@ -229,7 +233,7 @@ namespace XenAdmin.Core
                 if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
                     updateAlerts.Add(xenServerUpdateAlert);
 
-                var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
+                var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersionsCopy, XenServerPatches);
                 if (xenServerPatchAlerts != null)
                     updateAlerts.AddRange(xenServerPatchAlerts.Where(alert => !alert.CanIgnore));
             }
@@ -432,7 +436,7 @@ namespace XenAdmin.Core
 
         public static void CheckServerPatches()
         {
-            var alerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
+            var alerts = NewXenServerPatchAlerts(XenServerVersionsCopy, XenServerPatches);
             if (alerts == null)
                 return;
 

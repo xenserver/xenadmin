@@ -56,6 +56,7 @@ namespace XenAdmin.Actions
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
         public List<XenServerVersion> XenServerVersions { get; private set; }
         public List<XenServerPatch> XenServerPatches { get; private set; }
+        public List<XenServerVersion> XenServerVersionCopy { get; private set; }
         private readonly bool _checkForXenCenter;
         private readonly bool _checkForServerVersion;
         private readonly bool _checkForPatches;
@@ -66,6 +67,7 @@ namespace XenAdmin.Actions
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
+            XenServerVersionCopy = new List<XenServerVersion>();
 
             _checkForXenCenter = checkForXenCenter;
             _checkForServerVersion = checkForServerVersion;
@@ -197,7 +199,7 @@ namespace XenAdmin.Actions
 
         private void GetXenServerVersions(XmlDocument xdoc)
         {
-            if (!_checkForServerVersion)
+            if (!_checkForServerVersion && !_checkForPatches)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenServerVersionsNode))
@@ -239,8 +241,14 @@ namespace XenAdmin.Actions
                         patches.Add(patch);
                     }
 
-                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, timestamp,
+                    XenServerVersionCopy.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, timestamp,
                                                                buildNumber));
+
+                    if (_checkForServerVersion)
+                    {
+                        XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, timestamp,
+                                                                   buildNumber));
+                    }
                 }
             }
         }
