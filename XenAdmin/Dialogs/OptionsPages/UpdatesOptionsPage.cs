@@ -77,7 +77,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public void Save()
         {
-            bool refreshUpdatesTab = AtLeastOneOptionHasBenChecked();
+            bool refreshUpdatesTab = IsCheckForUpdatesRequired();
 
             // XenCenter updates
             if (AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates)
@@ -99,7 +99,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         /// Returns true if at least one other box has been checked in Updates Options. Otherwise returns false.
         /// </summary>
         /// <returns></returns>
-        private bool AtLeastOneOptionHasBenChecked()
+        private bool IsCheckForUpdatesRequired()
         {
             return (AllowXenCenterUpdatesCheckBox.Checked && !Properties.Settings.Default.AllowXenCenterUpdates) ||
                    (AllowXenServerPatchesCheckBox.Checked && !Properties.Settings.Default.AllowPatchesUpdates) ||
