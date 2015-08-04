@@ -49,10 +49,10 @@ namespace XenAdmin.Core
         public static event Action CheckForUpdatesStarted;
 
         private static readonly object downloadedUpdatesLock = new object();
-        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
+        private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
         private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
-        private static List<XenServerVersion> XenServerVersionsCopy = new List<XenServerVersion>();
+        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly object updateAlertsLock = new object();
         private static readonly ChangeableList<Alert> updateAlerts = new ChangeableList<Alert>();
@@ -215,11 +215,11 @@ namespace XenAdmin.Core
                     var xcvs = action.XenCenterVersions.Where(v => !XenCenterVersions.Contains(v));
                     XenCenterVersions.AddRange(xcvs);
 
+                    var versForAutoCheck = action.XenServerVersionsForAutoCheck.Where(v => !XenServerVersionsForAutoCheck.Contains(v));
+                    XenServerVersionsForAutoCheck.AddRange(versForAutoCheck);
+
                     var vers = action.XenServerVersions.Where(v => !XenServerVersions.Contains(v));
                     XenServerVersions.AddRange(vers);
-
-                    var versCopy = action.XenServerVersionCopy.Where(v => !XenServerVersions.Contains(v));
-                    XenServerVersionsCopy.AddRange(versCopy);
 
                     var patches = action.XenServerPatches.Where(p => !XenServerPatches.Contains(p));
                     XenServerPatches.AddRange(patches);
@@ -229,11 +229,11 @@ namespace XenAdmin.Core
                 if (xenCenterAlert != null && !xenCenterAlert.IsDismissed())
                     updateAlerts.Add(xenCenterAlert);
 
-                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersions);
+                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
                 if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
                     updateAlerts.Add(xenServerUpdateAlert);
 
-                var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersionsCopy, XenServerPatches);
+                var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
                 if (xenServerPatchAlerts != null)
                     updateAlerts.AddRange(xenServerPatchAlerts.Where(alert => !alert.CanIgnore));
             }
@@ -427,7 +427,7 @@ namespace XenAdmin.Core
 
         public static void CheckServerVersion()
         {
-            var alert = NewXenServerVersionAlert(XenServerVersions);
+            var alert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
             if (alert == null)
                 return;
 
@@ -436,7 +436,7 @@ namespace XenAdmin.Core
 
         public static void CheckServerPatches()
         {
-            var alerts = NewXenServerPatchAlerts(XenServerVersionsCopy, XenServerPatches);
+            var alerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
             if (alerts == null)
                 return;
 
