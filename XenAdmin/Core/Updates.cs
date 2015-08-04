@@ -72,7 +72,10 @@ namespace XenAdmin.Core
             {
                 lock (updateAlertsLock)
                 {
-                    updateAlerts.Add(update);
+                    if(!updateAlerts.Contains(update))
+                    {
+                        updateAlerts.Add(update);
+                    }
                 }
             }
             catch (Exception e)
@@ -86,7 +89,12 @@ namespace XenAdmin.Core
             try
             {
                 lock (updateAlertsLock)
-                    updateAlerts.Remove(update);
+                {
+                    if(updateAlerts.Contains(update))
+                    {
+                        updateAlerts.Remove(update);
+                    }
+                }
             }
             catch (Exception e)
             {
