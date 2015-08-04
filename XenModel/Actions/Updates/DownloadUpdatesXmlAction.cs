@@ -56,6 +56,19 @@ namespace XenAdmin.Actions
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
         public List<XenServerVersion> XenServerVersions { get; private set; }
         public List<XenServerPatch> XenServerPatches { get; private set; }
+
+        public List<XenServerVersion> XenServerVersionsForAutoCheck
+        {
+            get
+            {
+                if(_checkForServerVersion)
+                {
+                    return XenServerVersions;
+                }
+                return new List<XenServerVersion>();
+            }
+        }
+
         private readonly bool _checkForXenCenter;
         private readonly bool _checkForServerVersion;
         private readonly bool _checkForPatches;
@@ -197,7 +210,7 @@ namespace XenAdmin.Actions
 
         private void GetXenServerVersions(XmlDocument xdoc)
         {
-            if (!_checkForServerVersion)
+            if (!_checkForServerVersion && !_checkForPatches)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenServerVersionsNode))

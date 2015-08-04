@@ -49,9 +49,10 @@ namespace XenAdmin.Core
         public static event Action CheckForUpdatesStarted;
 
         private static readonly object downloadedUpdatesLock = new object();
-        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
+        private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
         private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
+        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly object updateAlertsLock = new object();
         private static readonly ChangeableList<Alert> updateAlerts = new ChangeableList<Alert>();
@@ -222,6 +223,9 @@ namespace XenAdmin.Core
                     var xcvs = action.XenCenterVersions.Where(v => !XenCenterVersions.Contains(v));
                     XenCenterVersions.AddRange(xcvs);
 
+                    var versForAutoCheck = action.XenServerVersionsForAutoCheck.Where(v => !XenServerVersionsForAutoCheck.Contains(v));
+                    XenServerVersionsForAutoCheck.AddRange(versForAutoCheck);
+
                     var vers = action.XenServerVersions.Where(v => !XenServerVersions.Contains(v));
                     XenServerVersions.AddRange(vers);
 
@@ -233,7 +237,7 @@ namespace XenAdmin.Core
                 if (xenCenterAlert != null && !xenCenterAlert.IsDismissed())
                     updateAlerts.Add(xenCenterAlert);
 
-                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersions);
+                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
                 if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
                     updateAlerts.Add(xenServerUpdateAlert);
 
@@ -431,7 +435,7 @@ namespace XenAdmin.Core
 
         public static void CheckServerVersion()
         {
-            var alert = NewXenServerVersionAlert(XenServerVersions);
+            var alert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
             if (alert == null)
                 return;
 
