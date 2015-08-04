@@ -180,6 +180,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         VMOperationCommand.StartDiagnosisForm,
                                         gpuCapability ? pageVgpu.GpuGroup : null,
                                         gpuCapability ? pageVgpu.VgpuType : null,
+                                        pageVgpu.HasChanged,
                                         page_5_CpuMem.SelectedCoresPerSocket,
                                         page_CloudConfigParameters.ConfigDriveTemplateText);
 
