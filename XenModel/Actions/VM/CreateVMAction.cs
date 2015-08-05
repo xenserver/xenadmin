@@ -117,7 +117,7 @@ namespace XenAdmin.Actions.VMActions
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
             Action<VMStartAbstractAction, Failure> startDiagnosisForm,
-            GPU_group gpuGroup, VGPU_type vgpuType, long coresPerSocket, string cloudConfigDriveTemplateText)
+            GPU_group gpuGroup, VGPU_type vgpuType, bool modifyVgpuSettings, long coresPerSocket, string cloudConfigDriveTemplateText)
             : base(connection, string.Format(Messages.CREATE_VM, name),
             string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
         {
@@ -149,8 +149,7 @@ namespace XenAdmin.Actions.VMActions
             if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
                 AppliesTo.Add(HomeServer != null ? HomeServer.opaque_ref : pool_of_one.opaque_ref);
 
-            assignOrRemoveVgpu = (GpuGroup != null && VgpuType != null)
-                             || Helpers.GpuCapability(Connection);
+            assignOrRemoveVgpu = GpuGroup != null && VgpuType != null || modifyVgpuSettings && Helpers.GpuCapability(Connection);
 
             #region RBAC Dependencies
 
