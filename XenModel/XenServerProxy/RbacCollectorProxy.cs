@@ -59,15 +59,21 @@ namespace XenAdmin.Core
                     return null;
             ProxyMethodInfo pmi = SimpleProxyMethodParser.ParseTypeAndNameOnly(proxyMethodName);
             string method = pmi.TypeName + "." + pmi.MethodName;
+            
             if (proxyMethodName == "task_get_record")
             {
                 Proxy_Task task = new Proxy_Task() { progress = 100, status=XenAPI.task_status_type.success.ToString(),result = ""};
                 return new Response<Proxy_Task>(task);
             }
+            
+            if (proxyMethodName == "host_call_plugin" && args != null && args.Length > 2 && args[2] == "trim")
+                return new Response<string>("True");;
+
             if (pmi.MethodName == "add_to_other_config" || pmi.MethodName == "remove_from_other_config")  // these calls are special because they can have per-key permissions
                 rbacMethods.Add(method, (string)args[2]);
             else
                 rbacMethods.Add(method);
+            
             return ResponseByType(returnType);
         }
 
