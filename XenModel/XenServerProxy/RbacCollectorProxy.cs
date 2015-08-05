@@ -66,7 +66,7 @@ namespace XenAdmin.Core
                 return new Response<Proxy_Task>(task);
             }
             
-            if (proxyMethodName == "host_call_plugin" && args != null && args.Length > 2 && args[2] == "trim")
+            if (proxyMethodName == "host_call_plugin" && args != null && args.Length > 2 && "trim".Equals(args[2]))
                 return new Response<string>("True");;
 
             if (pmi.MethodName == "add_to_other_config" || pmi.MethodName == "remove_from_other_config")  // these calls are special because they can have per-key permissions
