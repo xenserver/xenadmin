@@ -121,7 +121,7 @@ wget ${WGET_OPT} -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} 
 mkdir_clean ${REPO}/NUnit
 wget ${WGET_OPT} -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
 wget ${WGET_OPT} -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
-wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix3.5.2519.0-sources.zip,wix3.5.2519.0-binaries.zip}
+wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
 
 #set version numbers and brand info
 
