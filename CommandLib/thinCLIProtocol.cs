@@ -132,8 +132,8 @@ namespace CommandLib
                 );
         	    try
         	    {
-            	    sslStream.AuthenticateAsClient("");
-        	    }
+                    sslStream.AuthenticateAsClient("", null, SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, true);
+                }
         	    catch (AuthenticationException e){
         		    if (tCLIprotocol.conf.debug) throw e;
         		    tCLIprotocol.dGlobalError("Authentication failed - closing the connection.");
