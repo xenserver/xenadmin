@@ -227,13 +227,13 @@ LIT="lit.exe -nologo"
 LIGHT="light.exe -nologo"
 
 mkdir_clean ${WIX_SRC}
-${UNZIP} ${SCRATCH_DIR}/wix3.5.2519.0-sources.zip -d ${SCRATCH_DIR}/wixsrc
+${UNZIP} ${SCRATCH_DIR}/wix39-sources-debug.zip -d ${SCRATCH_DIR}/wixsrc
 cp ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeDlg.wxs ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeStdDlg.wxs
 cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${REPO}/mk/patches/wix_src_patch
 cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
 
 mkdir_clean ${WIX_BIN}
-${UNZIP} ${SCRATCH_DIR}/wix3.5.2519.0-binaries.zip -d ${WIX_BIN}
+${UNZIP} ${SCRATCH_DIR}/wix39-binaries.zip -d ${WIX_BIN}
 cp ${WIX_BIN}/PrintEula.dll ${REPO}/WixInstaller
 
 #compile_wix
