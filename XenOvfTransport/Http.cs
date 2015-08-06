@@ -37,6 +37,7 @@ using System.Threading;
 using System.IO;
 using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -490,7 +491,7 @@ namespace XenOvfTransport
                 SslStream sslStream = new SslStream(stream, false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
                 try
                 {
-                    sslStream.AuthenticateAsClient("");
+                    sslStream.AuthenticateAsClient("", null, SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, true);
                 }
                 catch
                 {
