@@ -91,7 +91,7 @@ LOG4NET_DIR=${REPO}/log4net/build/bin/net/2.0/release
 DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
 SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
 DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
-MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx40_Full_setup
+MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx452_web_setup
 PUTTY_DIR=${REPO}/putty
 
 wget ${WGET_OPT} -O "${SCRATCH_DIR}/dotnet-packages-manifest" "${WEB_DOTNET}/manifest"
@@ -324,7 +324,7 @@ cd ${WIX} && chmod a+rw XenCenter.l10n.msi && ${REPO}/sign.bat XenCenter.l10n.ms
 
 #create bundle exe installers - msi installers embedded
 DOTNETINST=${REPO}/dotNetInstaller
-cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/dotNetFx40_Full_setup.exe ${DOTNETINST}
+cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
 cp ${WIX}/outXenCenter/XenCenter.msi ${DOTNETINST}
 cp ${WIX}/XenCenter.l10n.msi ${DOTNETINST}
 
