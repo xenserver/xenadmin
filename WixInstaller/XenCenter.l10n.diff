@@ -170,9 +170,9 @@
 @@ -262,7 +288,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-         <PropertyRef Id="NETFRAMEWORK40FULL" />
--        <Condition Message=".NET Framework 4 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK40FULL]]></Condition>
-+        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK40FULL]]></Condition>
+         <PropertyRef Id="NETFRAMEWORK45" />
+-        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
++        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
          <Property Id="PERMACHINEINSTALL">
              <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\XenCenter" Name="InstallDir" />
          </Property>
