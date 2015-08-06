@@ -60,6 +60,23 @@ namespace XenAdmin
         /// </summary>
         public const UInt16 DEFAULT_ISCSI_PORT = 3260;
 
+        public static string MemorySizeStringForSearchTab(double bytes)
+        {
+            if (bytes >= 1 * BINARY_GIGA)
+            {
+                return string.Format(Messages.VAL_GB, Math.Round(bytes / BINARY_GIGA, 1));
+            }
+            else if (bytes >= 1 * BINARY_MEGA)
+            {
+                return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
+            }
+            else if (bytes >= 1 * BINARY_KILO)
+            {
+                return string.Format(Messages.VAL_KB, Math.Round(bytes / BINARY_KILO));
+            }
+            return string.Format(Messages.VAL_BYTE, bytes);
+        }
+
         public static string MemorySizeString(double bytes)
         {
             return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
