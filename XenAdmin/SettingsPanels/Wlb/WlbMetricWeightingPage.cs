@@ -81,10 +81,6 @@ namespace XenAdmin.SettingsPanels
             trackbarNetWritePriority.Value = GetSafeTrackbarValue(trackbarNetWritePriority, _poolConfiguration.VmNetworkWriteWeightHigh / TRACKBAR_INTERVAL);
             trackbarDiskReadPriority.Value = GetSafeTrackbarValue(trackbarDiskReadPriority, _poolConfiguration.VmDiskReadWeightHigh / TRACKBAR_INTERVAL);
             trackbarDiskWritePriority.Value = GetSafeTrackbarValue(trackbarDiskWritePriority, _poolConfiguration.VmDiskWriteWeightHigh / TRACKBAR_INTERVAL);
-            //CA-134554 - Hide Disk Read/Write until the backend server side is ready
-            trackbarDiskReadPriority.Visible = false;
-            trackbarDiskWritePriority.Visible = false;
-
             _loading = false; ;
         }
 
