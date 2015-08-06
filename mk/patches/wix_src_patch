@@ -62,14 +62,6 @@ diff -ru wixlib/Common.wxs wixlib/Common.wxs
          <WixVariable Id="WixUICostingPopupOptOut" Value="1" Overridable="yes" />
  
          <UI Id="WixUI_Common">
-@@ -87,6 +87,6 @@
-     </Fragment>
- 
-     <Fragment>
--        <Binary Id="WixUIWixca" SourceFile="$(var.printeulaDll)" />
-+        <Binary Id="WixUIWixca" SourceFile="printeula.dll" />
-     </Fragment>
- </Wix>
 diff -ru wixlib/InstallDirDlg.wxs wixlib/InstallDirDlg.wxs
 --- wixlib/InstallDirDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
 +++ wixlib/InstallDirDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
@@ -332,7 +324,7 @@ diff -ru wixlib/WixUI_en-us.wxl wixlib/WixUI_en-us.wxl
      <String Id="FilesInUse_Title" Overridable="yes"><!-- _locID_text="FilesInUse_Title" _locComment="FilesInUse_Title" -->[ProductName] Setup</String>
      <String Id="FilesInUseExit" Overridable="yes"><!-- _locID_text="FilesInUseExit" _locComment="FilesInUseExit" -->E&amp;xit</String>
      <String Id="FilesInUseBannerBitmap" Overridable="yes"><!-- _locID_text="FilesInUseBannerBitmap" _locComment="FilesInUseBannerBitmap" -->WixUI_Bmp_Banner</String>
--    <String Id="FilesInUseText" Overridable="yes"><!-- _locID_text="FilesInUseText" _locComment="FilesInUseText" -->The following applications are using files that need to be updated by this setup. Close these applications and then click &amp;Retry to continue the installation or Exit to exit it.</String>
+-    <String Id="FilesInUseText" Overridable="yes"><!-- _locID_text="FilesInUseText" _locComment="FilesInUseText" -->The following applications are using files that need to be updated by this setup. Close these applications and then click &amp;Retry to continue setup or Exit to exit it.</String>
 -    <String Id="FilesInUseDescription" Overridable="yes"><!-- _locID_text="FilesInUseDescription" _locComment="FilesInUseDescription" -->Some files that need to be updated are currently in use.</String>
 -    <String Id="FilesInUseTitle" Overridable="yes"><!-- _locID_text="FilesInUseTitle" _locComment="FilesInUseTitle" -->{\WixUI_Font_Title}Files in Use</String>
 +    <String Id="FilesInUseText" Overridable="yes"><!-- _locID_text="FilesInUseText" _locComment="FilesInUseText" -->The following applications are using files that need to be updated by this setup. Close these applications and then click Retry to continue the installation or Exit to exit it.</String>
