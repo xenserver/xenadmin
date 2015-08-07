@@ -63,6 +63,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Registry.cs" />
     <Compile Include="XenServerHealthCheckConfigProvider.cs" />
     <Compile Include="XenServerHealthCheckBugTool.cs" />
     <Compile Include="XenServerHealthCheckBundleUpload.cs" />

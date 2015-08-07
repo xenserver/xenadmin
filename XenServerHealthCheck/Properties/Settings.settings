@@ -1,15 +1,9 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="XenServerHealthCheck" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="XenServerHealthCheck.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="UUID" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="UPLOAD_URL" Roaming="true" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="UploadTimeIntervalInMinutes" Roaming="true" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="HttpTimeout" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">40000</Value>
