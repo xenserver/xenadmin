@@ -76,12 +76,9 @@ namespace XenServerHealthCheck
                 initConfig();
                 CredentialReceiver.instance.Init();
                 ServerListHelper.instance.Init();
-
                 System.Timers.Timer timer = new System.Timers.Timer();
-                if (Properties.Settings.Default.UploadTimeIntervalInMinutes != 0)
-                    timer.Interval = Properties.Settings.Default.UploadTimeIntervalInMinutes * 60000;
-                else
-                    timer.Interval = 30 * 60000; // 30 minitues
+                timer.Interval = Registry.HealthCheckTimeInterval * 60000;
+                log.InfoFormat("XenServer Health Check Service will be scheduled every {0} seconds", timer.Interval);
                 timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
                 timer.Start();
             }
