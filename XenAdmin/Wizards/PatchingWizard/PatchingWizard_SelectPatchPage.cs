@@ -61,6 +61,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
         }
 
+
+        private void CheckForUpdates_CheckForUpdatesStarted()
+        {
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                RestoreDismUpdatesButton.Enabled = false;
+                RefreshListButton.Enabled = false;
+            });
+        }
+
+
         private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
         {
             Program.Invoke(Program.MainWindow, delegate
@@ -69,6 +80,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RefreshListButton.Enabled = true;
                 CheckForUpdatesInProgress = false;
                 OnPageUpdated();
+                RestoreDismUpdatesButton.Enabled = true;
             });
         }
 
@@ -109,6 +121,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {           
             base.PageLoaded(direction);
             RefreshListButton.Enabled = true;
+            Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
          
             if (direction == PageLoadedDirection.Forward)
@@ -362,7 +375,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RefreshListButton_Click(object sender, EventArgs e)
         {
             CheckForUpdatesInProgress = true;
-            RefreshListButton.Enabled = false;
             Updates.CheckForUpdates(true);
             PopulatePatchesBox();
         }

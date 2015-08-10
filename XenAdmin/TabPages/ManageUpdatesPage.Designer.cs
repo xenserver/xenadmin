@@ -195,6 +195,7 @@
             this.toolStripSplitButtonDismiss,
             this.toolStripButtonRestoreDismissed});
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.TabStop = true;
             // 
             // toolStripDropDownButtonServerFilter
             // 
@@ -306,7 +307,7 @@
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
             this.ColumnExpand.Name = "ColumnExpand";
             this.ColumnExpand.ReadOnly = true;
-            this.ColumnExpand.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnExpand.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ColumnMessage
             // 
@@ -343,7 +344,7 @@
             resources.ApplyResources(this.ColumnWebPage, "ColumnWebPage");
             this.ColumnWebPage.Name = "ColumnWebPage";
             this.ColumnWebPage.ReadOnly = true;
-            this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ManageUpdatesPage
@@ -400,14 +401,14 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
         private System.Windows.Forms.Label AutoCheckForUpdatesDisabledLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel checkForUpdatesNowButton2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button checkForUpdatesNowButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
-        private System.Windows.Forms.LinkLabel checkForUpdatesNowButton2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button checkForUpdatesNowButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }
