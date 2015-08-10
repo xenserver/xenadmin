@@ -78,7 +78,7 @@ namespace XenServerHealthCheck
                 ServerListHelper.instance.Init();
                 System.Timers.Timer timer = new System.Timers.Timer();
                 timer.Interval = Registry.HealthCheckTimeInterval * 60000;
-                log.InfoFormat("XenServer Health Check Service will be scheduled every {0} seconds", timer.Interval);
+                log.InfoFormat("XenServer Health Check Service will be scheduled every {0} milliseconds", timer.Interval);
                 timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
                 timer.Start();
             }
