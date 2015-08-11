@@ -75,7 +75,10 @@ namespace XenAPI
             XenRef<VDI> redo_log_vdi,
             string vswitch_controller,
             Dictionary<string, string> restrictions,
-            List<XenRef<VDI>> metadata_VDIs)
+            List<XenRef<VDI>> metadata_VDIs,
+            string ha_cluster_stack,
+            List<pool_allowed_operations> allowed_operations,
+            Dictionary<string, pool_allowed_operations> current_operations)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -105,6 +108,9 @@ namespace XenAPI
             this.vswitch_controller = vswitch_controller;
             this.restrictions = restrictions;
             this.metadata_VDIs = metadata_VDIs;
+            this.ha_cluster_stack = ha_cluster_stack;
+            this.allowed_operations = allowed_operations;
+            this.current_operations = current_operations;
         }
 
         /// <summary>
@@ -146,6 +152,9 @@ namespace XenAPI
             vswitch_controller = update.vswitch_controller;
             restrictions = update.restrictions;
             metadata_VDIs = update.metadata_VDIs;
+            ha_cluster_stack = update.ha_cluster_stack;
+            allowed_operations = update.allowed_operations;
+            current_operations = update.current_operations;
         }
 
         internal void UpdateFromProxy(Proxy_Pool proxy)
@@ -178,6 +187,9 @@ namespace XenAPI
             vswitch_controller = proxy.vswitch_controller == null ? null : (string)proxy.vswitch_controller;
             restrictions = proxy.restrictions == null ? null : Maps.convert_from_proxy_string_string(proxy.restrictions);
             metadata_VDIs = proxy.metadata_VDIs == null ? null : XenRef<VDI>.Create(proxy.metadata_VDIs);
+            ha_cluster_stack = proxy.ha_cluster_stack == null ? null : (string)proxy.ha_cluster_stack;
+            allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<pool_allowed_operations>(proxy.allowed_operations);
+            current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_pool_allowed_operations(proxy.current_operations);
         }
 
         public Proxy_Pool ToProxy()
@@ -211,6 +223,9 @@ namespace XenAPI
             result_.vswitch_controller = (vswitch_controller != null) ? vswitch_controller : "";
             result_.restrictions = Maps.convert_to_proxy_string_string(restrictions);
             result_.metadata_VDIs = (metadata_VDIs != null) ? Helper.RefListToStringArray(metadata_VDIs) : new string[] {};
+            result_.ha_cluster_stack = (ha_cluster_stack != null) ? ha_cluster_stack : "";
+            result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
+            result_.current_operations = Maps.convert_to_proxy_string_pool_allowed_operations(current_operations);
             return result_;
         }
 
@@ -248,14 +263,20 @@ namespace XenAPI
             vswitch_controller = Marshalling.ParseString(table, "vswitch_controller");
             restrictions = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "restrictions"));
             metadata_VDIs = Marshalling.ParseSetRef<VDI>(table, "metadata_VDIs");
+            ha_cluster_stack = Marshalling.ParseString(table, "ha_cluster_stack");
+            allowed_operations = Helper.StringArrayToEnumList<pool_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            current_operations = Maps.convert_from_proxy_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
         }
 
-        public bool DeepEquals(Pool other)
+        public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
+
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+                return false;
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._name_label, other._name_label) &&
@@ -284,7 +305,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._redo_log_vdi, other._redo_log_vdi) &&
                 Helper.AreEqual2(this._vswitch_controller, other._vswitch_controller) &&
                 Helper.AreEqual2(this._restrictions, other._restrictions) &&
-                Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs);
+                Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs) &&
+                Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
+                Helper.AreEqual2(this._allowed_operations, other._allowed_operations);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -676,6 +699,39 @@ namespace XenAPI
         public static List<XenRef<VDI>> get_metadata_VDIs(Session session, string _pool)
         {
             return XenRef<VDI>.Create(session.proxy.pool_get_metadata_vdis(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Get the ha_cluster_stack field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static string get_ha_cluster_stack(Session session, string _pool)
+        {
+            return (string)session.proxy.pool_get_ha_cluster_stack(session.uuid, (_pool != null) ? _pool : "").parse();
+        }
+
+        /// <summary>
+        /// Get the allowed_operations field of the given pool.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static List<pool_allowed_operations> get_allowed_operations(Session session, string _pool)
+        {
+            return Helper.StringArrayToEnumList<pool_allowed_operations>(session.proxy.pool_get_allowed_operations(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Get the current_operations field of the given pool.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static Dictionary<string, pool_allowed_operations> get_current_operations(Session session, string _pool)
+        {
+            return Maps.convert_from_proxy_string_pool_allowed_operations(session.proxy.pool_get_current_operations(session.uuid, (_pool != null) ? _pool : "").parse());
         }
 
         /// <summary>
@@ -1093,7 +1149,7 @@ namespace XenAPI
         /// First published in XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating.</param>
+        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
         /// <param name="_configuration">Detailed HA configuration to apply</param>
         public static void enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration)
         {
@@ -1105,11 +1161,37 @@ namespace XenAPI
         /// First published in XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating.</param>
+        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
         /// <param name="_configuration">Detailed HA configuration to apply</param>
         public static XenRef<Task> async_enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration)).parse());
+        }
+
+        /// <summary>
+        /// Turn on High Availability mode
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
+        /// <param name="_configuration">Detailed HA configuration to apply</param>
+        /// <param name="_cluster_stack">HA cluster manager stack First published in XenServer Dundee.</param>
+        public static void enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration, string _cluster_stack)
+        {
+            session.proxy.pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration), (_cluster_stack != null) ? _cluster_stack : "").parse();
+        }
+
+        /// <summary>
+        /// Turn on High Availability mode
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
+        /// <param name="_configuration">Detailed HA configuration to apply</param>
+        /// <param name="_cluster_stack">HA cluster manager stack First published in XenServer Dundee.</param>
+        public static XenRef<Task> async_enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration, string _cluster_stack)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration), (_cluster_stack != null) ? _cluster_stack : "").parse());
         }
 
         /// <summary>
@@ -1801,6 +1883,50 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static void enable_ssl_legacy(Session session, string _pool)
+        {
+            session.proxy.pool_enable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse();
+        }
+
+        /// <summary>
+        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Task> async_enable_ssl_legacy(Session session, string _pool)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_enable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static void disable_ssl_legacy(Session session, string _pool)
+        {
+            session.proxy.pool_disable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse();
+        }
+
+        /// <summary>
+        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Task> async_disable_ssl_legacy(Session session, string _pool)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_disable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
         /// Return a list of all the pools known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -2343,5 +2469,60 @@ namespace XenAPI
             }
         }
         private List<XenRef<VDI>> _metadata_VDIs;
+
+        /// <summary>
+        /// The ha cluster manager stack
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual string ha_cluster_stack
+        {
+            get { return _ha_cluster_stack; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ha_cluster_stack))
+                {
+                    _ha_cluster_stack = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ha_cluster_stack");
+                }
+            }
+        }
+        private string _ha_cluster_stack;
+
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<pool_allowed_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
+        private List<pool_allowed_operations> _allowed_operations;
+
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, pool_allowed_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
+        private Dictionary<string, pool_allowed_operations> _current_operations;
     }
 }

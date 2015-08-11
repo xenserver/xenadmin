@@ -95,6 +95,7 @@ namespace XenAPI
             Dictionary<string, string> chipset_info,
             List<XenRef<PCI>> PCIs,
             List<XenRef<PGPU>> PGPUs,
+            bool ssl_legacy,
             Dictionary<string, string> guest_VCPUs_params,
             host_display display,
             long[] virtual_hardware_platform_versions)
@@ -146,6 +147,7 @@ namespace XenAPI
             this.chipset_info = chipset_info;
             this.PCIs = PCIs;
             this.PGPUs = PGPUs;
+            this.ssl_legacy = ssl_legacy;
             this.guest_VCPUs_params = guest_VCPUs_params;
             this.display = display;
             this.virtual_hardware_platform_versions = virtual_hardware_platform_versions;
@@ -209,6 +211,7 @@ namespace XenAPI
             chipset_info = update.chipset_info;
             PCIs = update.PCIs;
             PGPUs = update.PGPUs;
+            ssl_legacy = update.ssl_legacy;
             guest_VCPUs_params = update.guest_VCPUs_params;
             display = update.display;
             virtual_hardware_platform_versions = update.virtual_hardware_platform_versions;
@@ -263,6 +266,7 @@ namespace XenAPI
             chipset_info = proxy.chipset_info == null ? null : Maps.convert_from_proxy_string_string(proxy.chipset_info);
             PCIs = proxy.PCIs == null ? null : XenRef<PCI>.Create(proxy.PCIs);
             PGPUs = proxy.PGPUs == null ? null : XenRef<PGPU>.Create(proxy.PGPUs);
+            ssl_legacy = (bool)proxy.ssl_legacy;
             guest_VCPUs_params = proxy.guest_VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_VCPUs_params);
             display = proxy.display == null ? (host_display) 0 : (host_display)Helper.EnumParseDefault(typeof(host_display), (string)proxy.display);
             virtual_hardware_platform_versions = proxy.virtual_hardware_platform_versions == null ? null : Helper.StringArrayToLongArray(proxy.virtual_hardware_platform_versions);
@@ -318,6 +322,7 @@ namespace XenAPI
             result_.chipset_info = Maps.convert_to_proxy_string_string(chipset_info);
             result_.PCIs = (PCIs != null) ? Helper.RefListToStringArray(PCIs) : new string[] {};
             result_.PGPUs = (PGPUs != null) ? Helper.RefListToStringArray(PGPUs) : new string[] {};
+            result_.ssl_legacy = ssl_legacy;
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
             result_.display = host_display_helper.ToString(display);
             result_.virtual_hardware_platform_versions = (virtual_hardware_platform_versions != null) ? Helper.LongArrayToStringArray(virtual_hardware_platform_versions) : new string[] {};
@@ -377,6 +382,7 @@ namespace XenAPI
             chipset_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "chipset_info"));
             PCIs = Marshalling.ParseSetRef<PCI>(table, "PCIs");
             PGPUs = Marshalling.ParseSetRef<PGPU>(table, "PGPUs");
+            ssl_legacy = Marshalling.ParseBool(table, "ssl_legacy");
             guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
             display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
             virtual_hardware_platform_versions = Marshalling.ParseLongArray(table, "virtual_hardware_platform_versions");
@@ -438,6 +444,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._chipset_info, other._chipset_info) &&
                 Helper.AreEqual2(this._PCIs, other._PCIs) &&
                 Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
+                Helper.AreEqual2(this._ssl_legacy, other._ssl_legacy) &&
                 Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
                 Helper.AreEqual2(this._display, other._display) &&
                 Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions);
@@ -1052,6 +1059,17 @@ namespace XenAPI
         public static List<XenRef<PGPU>> get_PGPUs(Session session, string _host)
         {
             return XenRef<PGPU>.Create(session.proxy.host_get_pgpus(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the ssl_legacy field of the given host.
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static bool get_ssl_legacy(Session session, string _host)
+        {
+            return (bool)session.proxy.host_get_ssl_legacy(session.uuid, (_host != null) ? _host : "").parse();
         }
 
         /// <summary>
@@ -2377,6 +2395,30 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Enable/disable SSLv3 for interoperability with older versions of XenServer
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">True to allow SSLv3 and ciphersuites as used in old XenServer versions</param>
+        public static void set_ssl_legacy(Session session, string _host, bool _value)
+        {
+            session.proxy.host_set_ssl_legacy(session.uuid, (_host != null) ? _host : "", _value).parse();
+        }
+
+        /// <summary>
+        /// Enable/disable SSLv3 for interoperability with older versions of XenServer
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">True to allow SSLv3 and ciphersuites as used in old XenServer versions</param>
+        public static XenRef<Task> async_set_ssl_legacy(Session session, string _host, bool _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_set_ssl_legacy(session.uuid, (_host != null) ? _host : "", _value).parse());
+        }
+
+        /// <summary>
         /// Return a list of all the hosts known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3258,6 +3300,25 @@ namespace XenAPI
             }
         }
         private List<XenRef<PGPU>> _PGPUs;
+
+        /// <summary>
+        /// Allow SSLv3 protocol and ciphersuites as used by older XenServers
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool ssl_legacy
+        {
+            get { return _ssl_legacy; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ssl_legacy))
+                {
+                    _ssl_legacy = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ssl_legacy");
+                }
+            }
+        }
+        private bool _ssl_legacy;
 
         /// <summary>
         /// VCPUs params to apply to all resident guests
