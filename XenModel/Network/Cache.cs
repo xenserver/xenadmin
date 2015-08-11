@@ -394,7 +394,7 @@ namespace XenAdmin.Network
             {
                 Pool newPool = (Pool)obj.value;
                 Pool oldPool = Resolve(new XenRef<Pool>(obj.xenref));
-                return oldPool != null && newPool.DeepEquals(oldPool);
+                return oldPool != null && newPool.DeepEquals(oldPool, true);
             }
             else if (obj.type == typeof(SR))
             {

@@ -147,6 +147,11 @@
     <Compile Include="CustomFields\CustomFieldsManager.cs" />
     <Compile Include="DockerContainer.cs" />
     <Compile Include="Folders.cs" />
+    <Compile Include="FriendlyNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FriendlyNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\LiveMigrateOptionsVmMapping.cs" />
     <Compile Include="Mappings\VmMapping.cs" />
@@ -308,11 +313,6 @@
     <Compile Include="Network\CancelledException.cs" />
     <Compile Include="Network\DisconnectionException.cs" />
     <Compile Include="Folder.cs" />
-    <Compile Include="FriendlyNames.Designer.cs">
-      <DependentUpon>FriendlyNames.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Network\NetworkingHelper.cs" />
     <Compile Include="Network\TaskPoller.cs" />
     <Compile Include="WLB\WlbConfigurationBase.cs" />
@@ -337,9 +337,11 @@
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
     <Compile Include="XenAPI\pgpu_dom0_access.cs" />
+    <Compile Include="XenAPI\pool_allowed_operations.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />
+    <Compile Include="XenAPI\vgpu_type_implementation.cs" />
     <Compile Include="XenAPI\vif_locking_mode.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />
