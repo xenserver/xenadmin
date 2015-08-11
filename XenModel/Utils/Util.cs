@@ -60,7 +60,7 @@ namespace XenAdmin
         /// </summary>
         public const UInt16 DEFAULT_ISCSI_PORT = 3260;
 
-        public static string MemorySizeStringForSearchTab(double bytes)
+        public static string MemorySizeString(double bytes)
         {
             if (bytes >= 1 * BINARY_GIGA)
             {
@@ -74,15 +74,83 @@ namespace XenAdmin
             {
                 return string.Format(Messages.VAL_KB, Math.Round(bytes / BINARY_KILO));
             }
-            return string.Format(Messages.VAL_BYTE, bytes);
+            
+            if(bytes == 0)
+            {
+                return bytes.ToString();
+            }
+            else
+            {
+                return string.Format(Messages.VAL_B, bytes);
+            }
         }
 
-        public static string MemorySizeString(double bytes)
+        public static string MemorySizeStringVMMemoryNoEdit(double bytes)
+        {
+            if (bytes >= 1 * BINARY_GIGA)
+            {
+                string format = Messages.VAL_GB_ONE_DECIMAL;
+                int dp = 1;
+                double valGB = bytes / BINARY_GIGA;
+                if (valGB > 100)
+                {
+                    dp = 0;
+                    format = Messages.VAL_GB;
+                }
+                return string.Format(format, Math.Round(valGB, dp, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                return MemorySizeString(bytes);
+            }
+        }
+
+        public static string MemorySizeStringWithoutUnits(double bytes)
+        {
+            if (bytes >= 1 * BINARY_GIGA)
+            {
+                return Math.Round(bytes / BINARY_GIGA, 1).ToString();
+            }
+            else if (bytes >= 1 * BINARY_MEGA)
+            {
+                return Math.Round(bytes / BINARY_MEGA).ToString();
+            }
+            else if (bytes >= 1 * BINARY_KILO)
+            {
+                return Math.Round(bytes / BINARY_KILO).ToString();
+            }
+            else
+            {
+                return bytes.ToString();
+            }
+        }
+
+        public static long MemorySizeLong(long bytes)
+        {
+            if (bytes >= 1 * BINARY_GIGA)
+            {
+                return (long) Math.Round((long)(bytes) / (double) (BINARY_GIGA), 1);
+            }
+            else if (bytes >= 1 * BINARY_MEGA)
+            {
+                return (long)Math.Round((long)(bytes) / (double)(BINARY_MEGA));
+            }
+            else if (bytes >= 1 * BINARY_KILO)
+            {
+                return (long)Math.Round((long)(bytes) / (double)(BINARY_KILO));
+            }
+            else
+            {
+                return bytes;
+            }        
+        }
+
+        public static string MemorySizeStringMB(double bytes)
         {
             return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
         }
 
-        public static string MemorySizeStringWithoutUnits(double bytes)
+        public static string MemorySizeStringMBWithoutUnits(double bytes)
         {
             return Math.Round(bytes / BINARY_MEGA).ToString();
         }
@@ -246,12 +314,17 @@ namespace XenAdmin
             return t.ToString("0");
         }
 
-        public static long ToMB(long bytes)
+        public static decimal ToMB(long bytes)
         {
             return ToMB(bytes, RoundingBehaviour.Nearest);
         }
 
-        public static long ToMB(long bytes, RoundingBehaviour rounding)
+        public static decimal ToGB(long bytes, int dp)
+        {
+            return Math.Round((decimal)bytes / BINARY_GIGA, dp);            
+        }
+
+        public static decimal ToMB(long bytes, RoundingBehaviour rounding)
         {
             switch (rounding)
             {

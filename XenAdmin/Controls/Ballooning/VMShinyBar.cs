@@ -85,13 +85,13 @@ namespace XenAdmin.Controls.Ballooning
         public void SetRanges(long dynamic_min_lowlimit, long dynamic_min_highlimit, long dynamic_max_lowlimit, long dynamic_max_highlimit)
         {
             // Round to nearest MB inwards to agree with MemorySpinner and avoid bugs like CA-34996.
-            long lowMB, highMB;
+            decimal lowMB, highMB;
             MemorySpinner.CalcMBRanges(dynamic_min_lowlimit, dynamic_min_highlimit, out lowMB, out highMB);
-            this.dynamic_min_lowlimit = lowMB * Util.BINARY_MEGA;
-            this.dynamic_min_highlimit = highMB * Util.BINARY_MEGA;
+            this.dynamic_min_lowlimit = (long)lowMB * Util.BINARY_MEGA;
+            this.dynamic_min_highlimit = (long)highMB * Util.BINARY_MEGA;
             MemorySpinner.CalcMBRanges(dynamic_max_lowlimit, dynamic_max_highlimit, out lowMB, out highMB);
-            this.dynamic_max_lowlimit = lowMB * Util.BINARY_MEGA;
-            this.dynamic_max_highlimit = highMB * Util.BINARY_MEGA;
+            this.dynamic_max_lowlimit = (long)lowMB * Util.BINARY_MEGA;
+            this.dynamic_max_highlimit = (long)highMB * Util.BINARY_MEGA;
         }
 
         private long SliderMinLimit
@@ -192,7 +192,7 @@ namespace XenAdmin.Controls.Ballooning
             if (left_width > barArea.Width)  // Happens if the user is reducing static_max to below current memory usage.
                 left_width = barArea.Width;  // I wanted to add a right-arrow to the bytesString in that case too, but the glyph isn't present in the font: and too much work to add an image.
             Rectangle rect = new Rectangle(barArea.Left, barArea.Top, left_width, barArea.Height);
-            string bytesString = Util.SuperiorSizeString(memoryUsed, 0);
+            string bytesString = Util.MemorySizeString(memoryUsed);
             string toolTip = string.Format(multiple ? Messages.CURRENT_MEMORY_USAGE_MULTIPLE : Messages.CURRENT_MEMORY_USAGE, bytesString);
             DrawToTarget(g, barArea, rect, BallooningColors.VMShinyBar_Used, bytesString, BallooningColors.VMShinyBar_Text, HorizontalAlignment.Right, toolTip);
 

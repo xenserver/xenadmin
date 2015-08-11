@@ -126,7 +126,7 @@ namespace XenAdminTests.UnitTests.MiscTests
             foreach (var pair in memoryMBpairs)
             {
                 string expected = string.Format("{0} {1}", pair.Value[0], pair.Value[1]);
-                Assert.AreEqual(expected, Util.MemorySizeString(pair.Key));
+                Assert.AreEqual(expected, Util.MemorySizeStringMB(pair.Key));
             }
         }
 
@@ -134,7 +134,7 @@ namespace XenAdminTests.UnitTests.MiscTests
         public void TestMemorySizeStringWithoutUnits()
         {
             foreach (var pair in memoryMBpairs)
-                Assert.AreEqual(pair.Value[0], Util.MemorySizeStringWithoutUnits(pair.Key));
+                Assert.AreEqual(pair.Value[0], Util.MemorySizeStringMBWithoutUnits(pair.Key));
         }
 
         [Test]

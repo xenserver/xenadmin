@@ -243,14 +243,32 @@ namespace XenAdmin.Controls.Ballooning
                     // Label
                     if (withLabel)
                     {
-                        label = string.Format(Messages.VAL_MB, x / Util.BINARY_MEGA);
+                        label = Util.MemorySizeString(x);
                         Size size = Drawing.MeasureText(g, label, Program.DefaultFont);
                         Rectangle rect = new Rectangle(new Point(pos - size.Width/2, text_top), size);
-                        Drawing.DrawText(g, label, Program.DefaultFont, rect, BallooningColors.Grid, Color.Transparent);
+
+                        if (LabelCanBeShown(max, label, x))
+                        {
+                            Drawing.DrawText(g, label, Program.DefaultFont, rect, BallooningColors.Grid, Color.Transparent);
+                        }
                     }
                     withLabel = !withLabel;
                 }
             }
+        }
+
+        /// <summary>
+        /// There are 2 cases:
+        /// 1. If the maximum is smaller or equal to 1 GB, then show all the labels.
+        /// 2. If the maximum is greater than 1 GB, then show only the labels that are a multiple of half a GB.
+        /// </summary>
+        /// <param name="max"></param>
+        /// <param name="label"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private static bool LabelCanBeShown(long max, string label, long x)
+        {
+            return max <= Util.BINARY_GIGA  || (x % (0.5 * Util.BINARY_GIGA)) == 0;
         }
 
         protected virtual Rectangle barRect

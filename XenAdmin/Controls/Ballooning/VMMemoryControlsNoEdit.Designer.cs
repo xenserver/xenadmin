@@ -51,7 +51,6 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.iconBoxDynMin, "iconBoxDynMin");
             this.iconBoxDynMin.BackColor = System.Drawing.Color.Transparent;
             this.iconBoxDynMin.Image = global::XenAdmin.Properties.Resources.memory_dynmin_slider_noedit_small;
-            this.iconBoxDynMin.InitialImage = null;
             this.iconBoxDynMin.Name = "iconBoxDynMin";
             this.iconBoxDynMin.TabStop = false;
             // 
@@ -60,7 +59,6 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.iconBoxDynMax, "iconBoxDynMax");
             this.iconBoxDynMax.BackColor = System.Drawing.Color.Transparent;
             this.iconBoxDynMax.Image = global::XenAdmin.Properties.Resources.memory_dynmax_slider_noedit_small;
-            this.iconBoxDynMax.InitialImage = null;
             this.iconBoxDynMax.Name = "iconBoxDynMax";
             this.iconBoxDynMax.TabStop = false;
             // 
@@ -148,7 +146,6 @@ namespace XenAdmin.Controls.Ballooning
             this.Controls.Add(this.iconBoxDynMax);
             this.Controls.Add(this.iconBoxDynMin);
             this.Controls.Add(this.vmShinyBar);
-            this.MinimumSize = new System.Drawing.Size(700, 90);
             this.Name = "VMMemoryControlsNoEdit";
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMax)).EndInit();

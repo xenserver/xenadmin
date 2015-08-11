@@ -549,16 +549,16 @@ namespace XenAdmin
             log.InfoFormat("GDI handles open: {0}", Win32.GetGuiResourcesGDICount(p.Handle));
             log.InfoFormat("Thread count: {0}", p.Threads.Count);
 
-            log.InfoFormat("Virtual memory size: {0}", Util.MemorySizeString(p.VirtualMemorySize64));
-            log.InfoFormat("Working set: {0}", Util.MemorySizeString(p.WorkingSet64));
-            log.InfoFormat("Private memory size: {0}", Util.MemorySizeString(p.PrivateMemorySize64));
-            log.InfoFormat("Nonpaged system memory size: {0}", Util.MemorySizeString(p.NonpagedSystemMemorySize64));
-            log.InfoFormat("Paged memory size: {0}", Util.MemorySizeString(p.PagedMemorySize64));
-            log.InfoFormat("Paged system memory size: {0}", Util.MemorySizeString(p.PagedSystemMemorySize64));
+            log.InfoFormat("Virtual memory size: {0}", Util.MemorySizeStringMB(p.VirtualMemorySize64));
+            log.InfoFormat("Working set: {0}", Util.MemorySizeStringMB(p.WorkingSet64));
+            log.InfoFormat("Private memory size: {0}", Util.MemorySizeStringMB(p.PrivateMemorySize64));
+            log.InfoFormat("Nonpaged system memory size: {0}", Util.MemorySizeStringMB(p.NonpagedSystemMemorySize64));
+            log.InfoFormat("Paged memory size: {0}", Util.MemorySizeStringMB(p.PagedMemorySize64));
+            log.InfoFormat("Paged system memory size: {0}", Util.MemorySizeStringMB(p.PagedSystemMemorySize64));
 
-            log.InfoFormat("Peak paged memory size: {0}", Util.MemorySizeString(p.PeakPagedMemorySize64));
-            log.InfoFormat("Peak virtual memory size: {0}", Util.MemorySizeString(p.PeakVirtualMemorySize64));
-            log.InfoFormat("Peak working set: {0}", Util.MemorySizeString(p.PeakWorkingSet64));
+            log.InfoFormat("Peak paged memory size: {0}", Util.MemorySizeStringMB(p.PeakPagedMemorySize64));
+            log.InfoFormat("Peak virtual memory size: {0}", Util.MemorySizeStringMB(p.PeakVirtualMemorySize64));
+            log.InfoFormat("Peak working set: {0}", Util.MemorySizeStringMB(p.PeakWorkingSet64));
 
             log.InfoFormat("Process priority class: {0}", p.PriorityClass.ToString());
             log.InfoFormat("Privileged processor time: {0}", p.PrivilegedProcessorTime.ToString());

@@ -90,7 +90,7 @@ namespace XenAdmin.XenSearch
             if (total == 0)
                 return Messages.HYPHEN;
 
-            return Util.MemorySizeString(total);
+            return Util.MemorySizeStringMB(total);
         }
 
         public static string vmMemoryUsageString(VM vm)
@@ -106,7 +106,7 @@ namespace XenAdmin.XenSearch
             if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free) || total < (free * Util.BINARY_KILO))
                 return Messages.HYPHEN;
 
-            return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeStringForSearchTab((total - (free * Util.BINARY_KILO))), Util.MemorySizeStringForSearchTab(total));
+            return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeString((total - (free * Util.BINARY_KILO))), Util.MemorySizeString(total));
         }
 
         public static string vmMemoryUsagePercentageStringByMetric(VM vm, MetricUpdater MetricUpdater)
@@ -117,7 +117,7 @@ namespace XenAdmin.XenSearch
             if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
                 return Messages.HYPHEN;
 
-            return String.Format(Messages.QUERY_MEMORY_PERCENT, ((total - (free * Util.BINARY_KILO))/total * 100.0).ToString("0."), Util.MemorySizeString(total));
+            return String.Format(Messages.QUERY_MEMORY_PERCENT, ((total - (free * Util.BINARY_KILO))/total * 100.0).ToString("0."), Util.MemorySizeStringMB(total));
         }
 
         public static int vmMemoryUsageRank(VM vm)
@@ -229,7 +229,7 @@ namespace XenAdmin.XenSearch
             if (total == 0 || Double.IsNaN(total)|| Double.IsNaN(free))
                 return Messages.HYPHEN;
 
-            return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeStringForSearchTab((total - free) * Util.BINARY_KILO), Util.MemorySizeStringForSearchTab(total * Util.BINARY_KILO));
+            return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeString((total - free) * Util.BINARY_KILO), Util.MemorySizeString(total * Util.BINARY_KILO));
         }
 
         public static string hostMemoryUsagePercentageStringByMetric(Host host, MetricUpdater MetricUpdater)
@@ -240,7 +240,7 @@ namespace XenAdmin.XenSearch
             if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
                 return Messages.HYPHEN;
 
-            return String.Format(Messages.QUERY_MEMORY_PERCENT, ((total - free) / total * 100.0).ToString("0."), Util.MemorySizeString(total * Util.BINARY_KILO));
+            return String.Format(Messages.QUERY_MEMORY_PERCENT, ((total - free) / total * 100.0).ToString("0."), Util.MemorySizeStringMB(total * Util.BINARY_KILO));
         }
 
         public static string hostMemoryUsageString(Host host)
@@ -332,7 +332,7 @@ namespace XenAdmin.XenSearch
             if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
                 return Messages.HYPHEN;
             else
-                return String.Format(Messages.QUERY_MEMORY_USAGE, (used / (free + used) * 100).ToString("0.") + "%", Util.MemorySizeString(free + used));
+                return String.Format(Messages.QUERY_MEMORY_USAGE, (used / (free + used) * 100).ToString("0.") + "%", Util.MemorySizeStringMB(free + used));
 
         }
 

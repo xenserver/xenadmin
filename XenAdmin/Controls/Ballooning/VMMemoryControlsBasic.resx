@@ -112,25 +112,25 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="spinnerPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="memorySpinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="memorySpinnerDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="memorySpinnerDynMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 25</value>
+    <value>257, 31</value>
   </data>
   <data name="memorySpinnerDynMin.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -148,13 +148,13 @@
     <value>0</value>
   </data>
   <data name="memorySpinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+    <value>0, 31</value>
   </data>
   <data name="memorySpinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="memorySpinnerDynMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 25</value>
+    <value>257, 31</value>
   </data>
   <data name="memorySpinnerDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -172,7 +172,7 @@
     <value>1</value>
   </data>
   <data name="spinnerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 117</value>
+    <value>143, 114</value>
   </data>
   <data name="spinnerPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -181,7 +181,7 @@
     <value>2</value>
   </data>
   <data name="spinnerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 50</value>
+    <value>320, 61</value>
   </data>
   <data name="spinnerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -190,7 +190,7 @@
     <value>spinnerPanel</value>
   </data>
   <data name="&gt;&gt;spinnerPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;spinnerPanel.Parent" xml:space="preserve">
     <value>groupBoxOn</value>
@@ -199,19 +199,22 @@
     <value>1</value>
   </data>
   <data name="spinnerPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerDynMin" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerDynMax" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerDynMin" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerDynMax" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="vmShinyBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="vmShinyBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 22</value>
+    <value>3, 16</value>
   </data>
   <data name="vmShinyBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="vmShinyBar.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="vmShinyBar.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 90</value>
+  </data>
+  <data name="vmShinyBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 90</value>
   </data>
   <data name="vmShinyBar.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -237,6 +240,9 @@
   <data name="radioOff.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
   </data>
+  <data name="radioOff.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 25</value>
+  </data>
   <data name="radioOff.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 25</value>
   </data>
@@ -250,37 +256,13 @@
     <value>radioOff</value>
   </data>
   <data name="&gt;&gt;radioOff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioOff.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioOff.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="memorySpinnerFixed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 0</value>
-  </data>
-  <data name="memorySpinnerFixed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="memorySpinnerFixed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 25</value>
-  </data>
-  <data name="memorySpinnerFixed.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;memorySpinnerFixed.Name" xml:space="preserve">
-    <value>memorySpinnerFixed</value>
-  </data>
-  <data name="&gt;&gt;memorySpinnerFixed.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;memorySpinnerFixed.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;memorySpinnerFixed.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="radioOn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -304,19 +286,19 @@
     <value>radioOn</value>
   </data>
   <data name="&gt;&gt;radioOn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioOn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioOn.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="groupBoxOn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 48</value>
+    <value>3, 48</value>
   </data>
   <data name="groupBoxOn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 175</value>
+    <value>550, 178</value>
   </data>
   <data name="groupBoxOn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -325,13 +307,19 @@
     <value>groupBoxOn</value>
   </data>
   <data name="&gt;&gt;groupBoxOn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBoxOn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxOn.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="iconDMCUnavailable.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="iconDMCUnavailable.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="iconDMCUnavailable.Location" type="System.Drawing.Point, System.Drawing">
     <value>22, 229</value>
@@ -346,19 +334,19 @@
     <value>iconDMCUnavailable</value>
   </data>
   <data name="&gt;&gt;iconDMCUnavailable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;iconDMCUnavailable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;iconDMCUnavailable.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="labelDMCUnavailable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelDMCUnavailable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 231</value>
+    <value>44, 229</value>
   </data>
   <data name="labelDMCUnavailable.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 13</value>
@@ -373,19 +361,19 @@
     <value>labelDMCUnavailable</value>
   </data>
   <data name="&gt;&gt;labelDMCUnavailable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDMCUnavailable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelDMCUnavailable.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="linkInstallTools.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="linkInstallTools.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 248</value>
+    <value>44, 247</value>
   </data>
   <data name="linkInstallTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 13</value>
@@ -400,15 +388,39 @@
     <value>linkInstallTools</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="memorySpinnerFixed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 0</value>
+  </data>
+  <data name="memorySpinnerFixed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="memorySpinnerFixed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 28</value>
+  </data>
+  <data name="memorySpinnerFixed.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;memorySpinnerFixed.Name" xml:space="preserve">
+    <value>memorySpinnerFixed</value>
+  </data>
+  <data name="&gt;&gt;memorySpinnerFixed.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;memorySpinnerFixed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;memorySpinnerFixed.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -418,7 +430,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>552, 271</value>
+    <value>577, 341</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VMMemoryControlsBasic</value>
