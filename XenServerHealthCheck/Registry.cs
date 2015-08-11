@@ -41,18 +41,18 @@ namespace XenServerHealthCheck
         /// <summary>
         /// Reads a key from XENCENTER_LOCAL_KEYS\k.
         /// </summary>
-        private static string ReadKey(string k, string def)
+        private static string ReadKey(string k)
         {
             try
             {
                 RegistryKey masterKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(HEALTH_CHECK_LOCAL_KEYS);
                 if (masterKey == null)
-                    return def;
+                    return null;
 
                 try
                 {
                     var v = masterKey.GetValue(k);
-                    return (v != null) ? v.ToString() : def;
+                    return (v != null) ? v.ToString() : null;
                 }
                 finally
                 {
@@ -61,9 +61,9 @@ namespace XenServerHealthCheck
             }
             catch (Exception e)
             {
-                log.DebugFormat(@"Failed to read {0}\{1} from registry; assuming NULL.", HEALTH_CHECK_LOCAL_KEYS, k);
+                log.DebugFormat(@"Failed to read {0}\{1} from registry", HEALTH_CHECK_LOCAL_KEYS, k);
                 log.Debug(e, e);
-                return def;
+                return null;
             }
         }
 
@@ -72,19 +72,19 @@ namespace XenServerHealthCheck
         /// </summary>
         /// <returns>False if the value is "false" (case insensitive), true if the key is present but not
         /// "false", def otherwise.</returns>
-        private static Int32 ReadLong(string k, Int32 def)
+        private static Int32 ReadLong(string k)
         {
             try
             {
                 RegistryKey masterKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(HEALTH_CHECK_LOCAL_KEYS);
                 if (masterKey == null)
-                    return def;
+                    return 0;
 
                 try
                 {
                     object v = masterKey.GetValue(k);
                     if (v == null)
-                        return def;
+                        return 0;
                     else
                         return Convert.ToInt32(v);
                 }
@@ -95,20 +95,32 @@ namespace XenServerHealthCheck
             }
             catch (Exception e)
             {
-                log.DebugFormat(@"Failed to read {0}\{1} from registry; assuming {1} is {2}.", HEALTH_CHECK_LOCAL_KEYS, k, def);
+                log.DebugFormat(@"Failed to read {0}\{1} from registry}.", HEALTH_CHECK_LOCAL_KEYS, k);
                 log.Debug(e, e);
-                return def;
+                return 0;
             }
         }
 
         public static string HealthCheckUploadDomainName
         {
-            get { return ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME, "https://rttf-staging.citrix.com/feeds/api/"); }
+            get 
+            { 
+                string domain_name = ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME);
+                if (string.IsNullOrEmpty(domain_name))
+                    return "https://rttf-staging.citrix.com/feeds/api/";
+                return domain_name;
+            }
         }
 
         public static Int32 HealthCheckTimeInterval
         {
-            get { return ReadLong(HEALTH_CHECK_TIME_INTERVAL, 30); }
+            get 
+            {
+                Int32 interval = ReadLong(HEALTH_CHECK_TIME_INTERVAL);
+                if(interval == 0)
+                    interval = 30;
+                return interval;
+            }
         }
 
         private const string HEALTH_CHECK_LOCAL_KEYS = @"SOFTWARE\Citrix\XenHealthCheck";
