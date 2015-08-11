@@ -192,7 +192,7 @@ namespace XenAdmin.Controls.Ballooning
             if (left_width > barArea.Width)  // Happens if the user is reducing static_max to below current memory usage.
                 left_width = barArea.Width;  // I wanted to add a right-arrow to the bytesString in that case too, but the glyph isn't present in the font: and too much work to add an image.
             Rectangle rect = new Rectangle(barArea.Left, barArea.Top, left_width, barArea.Height);
-            string bytesString = Util.MemorySizeString(memoryUsed);
+            string bytesString = Util.MemorySizeStringSuitableUnits(memoryUsed);
             string toolTip = string.Format(multiple ? Messages.CURRENT_MEMORY_USAGE_MULTIPLE : Messages.CURRENT_MEMORY_USAGE, bytesString);
             DrawToTarget(g, barArea, rect, BallooningColors.VMShinyBar_Used, bytesString, BallooningColors.VMShinyBar_Text, HorizontalAlignment.Right, toolTip);
 

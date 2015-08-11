@@ -60,7 +60,7 @@ namespace XenAdmin
         /// </summary>
         public const UInt16 DEFAULT_ISCSI_PORT = 3260;
 
-        public static string MemorySizeString(double bytes)
+        public static string MemorySizeStringSuitableUnits(double bytes)
         {
             if (bytes >= 1 * BINARY_GIGA)
             {
@@ -101,58 +101,13 @@ namespace XenAdmin
             }
             else
             {
-                return MemorySizeString(bytes);
+                return MemorySizeStringSuitableUnits(bytes);
             }
-        }
-
-        public static string MemorySizeStringWithoutUnits(double bytes)
-        {
-            if (bytes >= 1 * BINARY_GIGA)
-            {
-                return Math.Round(bytes / BINARY_GIGA, 1).ToString();
-            }
-            else if (bytes >= 1 * BINARY_MEGA)
-            {
-                return Math.Round(bytes / BINARY_MEGA).ToString();
-            }
-            else if (bytes >= 1 * BINARY_KILO)
-            {
-                return Math.Round(bytes / BINARY_KILO).ToString();
-            }
-            else
-            {
-                return bytes.ToString();
-            }
-        }
-
-        public static long MemorySizeLong(long bytes)
-        {
-            if (bytes >= 1 * BINARY_GIGA)
-            {
-                return (long) Math.Round((long)(bytes) / (double) (BINARY_GIGA), 1);
-            }
-            else if (bytes >= 1 * BINARY_MEGA)
-            {
-                return (long)Math.Round((long)(bytes) / (double)(BINARY_MEGA));
-            }
-            else if (bytes >= 1 * BINARY_KILO)
-            {
-                return (long)Math.Round((long)(bytes) / (double)(BINARY_KILO));
-            }
-            else
-            {
-                return bytes;
-            }        
         }
 
         public static string MemorySizeStringMB(double bytes)
         {
             return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
-        }
-
-        public static string MemorySizeStringMBWithoutUnits(double bytes)
-        {
-            return Math.Round(bytes / BINARY_MEGA).ToString();
         }
 
         public static string DataRateString(double bytesPerSec)

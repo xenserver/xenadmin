@@ -243,7 +243,7 @@ namespace XenAdmin.Controls.Ballooning
                     // Label
                     if (withLabel)
                     {
-                        label = Util.MemorySizeString(x);
+                        label = Util.MemorySizeStringSuitableUnits(x);
                         Size size = Drawing.MeasureText(g, label, Program.DefaultFont);
                         Rectangle rect = new Rectangle(new Point(pos - size.Width/2, text_top), size);
 

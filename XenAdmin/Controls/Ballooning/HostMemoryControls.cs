@@ -90,10 +90,10 @@ namespace XenAdmin.Controls.Ballooning
             hostShinyBar.Initialize(host, xen_memory);
 
             // Set the text values
-            valueTotal.Text = Util.MemorySizeString(total);
-            valueUsed.Text = Util.MemorySizeString(used);
-            valueAvail.Text = Util.MemorySizeString(avail);
-            valueTotDynMax.Text = Util.MemorySizeString(tot_dyn_max);
+            valueTotal.Text = Util.MemorySizeStringSuitableUnits(total);
+            valueUsed.Text = Util.MemorySizeStringSuitableUnits(used);
+            valueAvail.Text = Util.MemorySizeStringSuitableUnits(avail);
+            valueTotDynMax.Text = Util.MemorySizeStringSuitableUnits(tot_dyn_max);
             labelOvercommit.Text = string.Format(Messages.OVERCOMMIT, overcommit);
         }
 

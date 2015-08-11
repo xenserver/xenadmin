@@ -115,7 +115,7 @@ namespace XenAdmin.Controls.Ballooning
             Rectangle rect = new Rectangle((int)left, barArea.Top,
                 (int)(left + width) - (int)left,  // this is not necessarily the same as (int)width, which can leave a 1 pixel gap
                 barArea.Height);
-            string bytesString = Util.MemorySizeString(mem);
+            string bytesString = Util.MemorySizeStringSuitableUnits(mem);
             string caption = name + "\n" + bytesString;
             string toolTip = name + "\n" + string.Format(Messages.CURRENT_MEMORY_USAGE, bytesString);
             if (vm != null && vm.has_ballooning)
