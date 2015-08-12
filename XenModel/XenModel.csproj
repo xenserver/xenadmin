@@ -330,6 +330,11 @@
     <Compile Include="XenAPI\allocation_algorithm.cs" />
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
+    <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FriendlyErrorNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="XenAPI\GPU_group.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
@@ -436,11 +441,6 @@
     <Compile Include="XenAPI\Event.cs" />
     <Compile Include="XenAPI\EventHelpers.cs" />
     <Compile Include="XenAPI\Failure.cs" />
-    <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
-      <DependentUpon>FriendlyErrorNames.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="XenAPI\Helper.cs" />
     <Compile Include="XenAPI\Host.cs" />
     <Compile Include="XenAPI\host_allowed_operations.cs" />
