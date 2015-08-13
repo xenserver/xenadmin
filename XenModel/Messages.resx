@@ -11829,6 +11829,33 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VIRTUALIZATION_OUT_OF_DATE" xml:space="preserve">
     <value>Tools out of date (version {0} installed)</value>
   </data>
+  <data name="VIRTUALIZATION_STATE_VM_INSTALL_IO_DRIVERS_AND_MANAGEMENT_AGENT" xml:space="preserve">
+    <value>Install I/O drivers and Management Agent</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT" xml:space="preserve">
+    <value>Install Management Agent</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED" xml:space="preserve">
+    <value>I/O not optimized.</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_OPTIMIZED" xml:space="preserve">
+    <value>I/O optimized.</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
+    <value>Management Agent installed.</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED" xml:space="preserve">
+    <value>Management Agent not installed.</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
+    <value>Receiving Updates via Windows Update.</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_UPGRADE_VM" xml:space="preserve">
+    <value>Upgrade VM to receive updates via Windows Update</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_UPGRADING_VM" xml:space="preserve">
+    <value>Upgrading VM to receive updates via Windows Update...</value>
+  </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
     <value>Unknown (please wait)</value>
   </data>

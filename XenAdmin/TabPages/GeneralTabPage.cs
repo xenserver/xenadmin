@@ -44,6 +44,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.SettingsPanels;
 using XenAdmin.Network;
 using XenAdmin.Commands;
+using System.Text;
 
 
 namespace XenAdmin.TabPages
@@ -1216,33 +1217,7 @@ namespace XenAdmin.TabPages
 
                 if (!vm.is_a_template)
                 {
-                    if (vm.power_state == vm_power_state.Running)
-                    {
-                        if (vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED
-                            || vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE)
-                        {
-                            if (InstallToolsCommand.CanExecute(vm))
-                            {
-                                var installtools = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS_DOTS);
-                                installtools.Click += delegate
-                                    {
-                                        new InstallToolsCommand(Program.MainWindow, vm).Execute();
-                                    };
-                                s.AddEntryLink(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString,
-                                    new[] { installtools },
-                                    new InstallToolsCommand(Program.MainWindow, vm));
-                            }
-                            else
-                            {
-                                s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString, Color.Red);
-                            }
-
-                        }
-                        else
-                        {
-                            s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
-                        }
-                    }
+                    GenerateVirtualisationStatusForGeneralBox(s, vm);
 
                     if (vm.RunningTime != null)
                         s.AddEntry(FriendlyName("VM.uptime"), vm.RunningTime.ToString());
@@ -1357,6 +1332,133 @@ namespace XenAdmin.TabPages
             }
 
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
+        }
+
+        private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)
+        {
+            if (vm != null && vm.Connection != null && vm.power_state == vm_power_state.Running)
+            {
+                //For Dundee or higher Windows VMs
+                if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows)
+                {
+                    var gm = vm.Connection.Resolve(vm.guest_metrics);
+
+                    bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
+                    bool isReceivingUpdates = vm.auto_update_drivers;
+                    
+                    bool isXenPrepInProgress = false; //TODO later when XenPrep functions will be added
+                    bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO: remove &&false when XenPrep functions have been added
+
+                    bool isManagementAgentInstalled = vm.HasRDP; //HasRDP is the way to detect .Net/Management Agent
+
+                    bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized && !isManagementAgentInstalled;
+                    bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && !canInstallIoDriversAndManagementAgent && !isManagementAgentInstalled;
+                    //canInstallIoDriversOnly is missing - management agent communicates with XS using the I/O drivers
+
+                    if (vm.virtualisation_status == VM.VirtualisationStatus.UNKNOWN)
+                    {
+                        s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
+                    }
+                    else
+                    {
+                        var sb = new StringBuilder();
+
+                        //Row 1 : I/O Drivers
+                        if (isIoOptimized)
+                        {
+                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED);
+                        }
+                        else
+                        {
+                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED);
+                        }
+
+                        sb.Append(Environment.NewLine);
+
+                        //Row 2: Management Agent
+                        if (isManagementAgentInstalled)
+                        {
+                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED);
+                        }
+                        else
+                        {
+                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED);
+                        }
+
+                        //Row 3 : Auto update
+                        if (isReceivingUpdates)
+                        {
+                            sb.Append(Environment.NewLine);
+                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES);
+                        }
+                        else if (isXenPrepInProgress)
+                        {
+                            sb.Append(Environment.NewLine);
+                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_UPGRADING_VM);
+                        }
+
+                        // displaying Row1 - Row3
+                        s.AddEntry(FriendlyName("VM.VirtualizationState"), sb.ToString());
+
+                        //Row 4: Enable Auto Update link
+                        if (canTurnOnAutoUpdates)
+                        {
+                            //implement launching XenPrep here
+                        }
+
+                        //Row 4: Install Tools
+                        string installMessage = string.Empty;
+                        if (canInstallIoDriversAndManagementAgent)
+                        {
+                            installMessage = Messages.VIRTUALIZATION_STATE_VM_INSTALL_IO_DRIVERS_AND_MANAGEMENT_AGENT;
+                        }
+                        else if (canInstallManagementAgentOnly)
+                        {
+                            installMessage = Messages.VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT;
+                        }
+
+                        if (!string.IsNullOrEmpty(installMessage))
+                        {
+                            var installtools = new ToolStripMenuItem();
+                            installtools.Click += delegate
+                            {
+                                new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                            };
+                            s.AddEntryLink(string.Empty, installMessage,
+                                new[] { installtools },
+                                new InstallToolsCommand(Program.MainWindow, vm));
+                        }
+                    }
+                }
+                //for everything else (the old way for pre-Dundee hosts)
+                else 
+                {
+                    if (vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED
+                        || vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE)
+                    {
+                        if (InstallToolsCommand.CanExecute(vm))
+                        {
+                            var installtools = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS_DOTS);
+                            installtools.Click += delegate
+                            {
+                                new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                            };
+                            s.AddEntryLink(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString,
+                                new[] { installtools },
+                                new InstallToolsCommand(Program.MainWindow, vm));
+                        }
+                        else
+                        {
+                            s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString, Color.Red);
+                        }
+
+                    }
+                    else
+                    {
+                        s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
+                    }
+                }
+            }
         }
 
         private void generateDockerContainerGeneralBox()
