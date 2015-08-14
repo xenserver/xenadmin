@@ -1351,8 +1351,8 @@ namespace XenAdmin.TabPages
 
                     bool isManagementAgentInstalled = vm.HasRDP; //HasRDP is the way to detect .Net/Management Agent
 
-                    bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized && !isManagementAgentInstalled;
-                    bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && !canInstallIoDriversAndManagementAgent && !isManagementAgentInstalled;
+                    bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized;
+                    bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
                     //canInstallIoDriversOnly is missing - management agent communicates with XS using the I/O drivers
 
                     if (vm.virtualisation_status == VM.VirtualisationStatus.UNKNOWN)

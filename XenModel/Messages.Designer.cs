@@ -34212,7 +34212,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I/O not optimized..
+        ///   Looks up a localized string similar to I/O not optimized.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED {
             get {
@@ -34221,7 +34221,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I/O optimized..
+        ///   Looks up a localized string similar to I/O optimized.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_IO_OPTIMIZED {
             get {
@@ -34230,7 +34230,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Management Agent installed..
+        ///   Looks up a localized string similar to Management Agent installed.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED {
             get {
@@ -34239,7 +34239,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Management Agent not installed..
+        ///   Looks up a localized string similar to Management Agent not installed.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED {
             get {
@@ -34248,7 +34248,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receiving Updates via Windows Update..
+        ///   Looks up a localized string similar to Receiving Updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES {
             get {

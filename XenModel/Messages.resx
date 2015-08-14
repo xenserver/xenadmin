@@ -11836,19 +11836,19 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Install Management Agent</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED" xml:space="preserve">
-    <value>I/O not optimized.</value>
+    <value>I/O not optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_IO_OPTIMIZED" xml:space="preserve">
-    <value>I/O optimized.</value>
+    <value>I/O optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
-    <value>Management Agent installed.</value>
+    <value>Management Agent installed</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED" xml:space="preserve">
-    <value>Management Agent not installed.</value>
+    <value>Management Agent not installed</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Receiving Updates via Windows Update.</value>
+    <value>Receiving Updates via Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_UPGRADE_VM" xml:space="preserve">
     <value>Upgrade VM to receive updates via Windows Update</value>
