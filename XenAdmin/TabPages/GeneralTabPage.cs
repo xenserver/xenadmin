@@ -1345,9 +1345,9 @@ namespace XenAdmin.TabPages
 
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
                     bool isReceivingUpdates = vm.auto_update_drivers;
-                    
-                    bool isXenPrepInProgress = false; //TODO later when XenPrep functions will be added
-                    bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO: remove &&false when XenPrep functions have been added
+
+                    bool isXenPrepInProgress = false; //TODO in CP-13247  when XenPrep functions will be added
+                    bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO in CP-13247: remove &&false when XenPrep functions have been added
 
                     bool isManagementAgentInstalled = vm.HasRDP; //HasRDP is the way to detect .Net/Management Agent
 
@@ -1403,7 +1403,7 @@ namespace XenAdmin.TabPages
                         //Row 4: Enable Auto Update link
                         if (canTurnOnAutoUpdates)
                         {
-                            //implement launching XenPrep here
+                            //implement launching XenPrep here (CP-13247)
                         }
 
                         //Row 4: Install Tools
@@ -1430,7 +1430,7 @@ namespace XenAdmin.TabPages
                         }
                     }
                 }
-                //for everything else (the old way for pre-Dundee hosts)
+                //for everything else (All VMs on pre-Dundee hosts & All non-Windows VMs on any host)
                 else 
                 {
                     if (vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED
