@@ -59,7 +59,8 @@ namespace XenAPI
             List<XenRef<PGPU>> enabled_on_PGPUs,
             List<XenRef<VGPU>> VGPUs,
             List<XenRef<GPU_group>> supported_on_GPU_groups,
-            List<XenRef<GPU_group>> enabled_on_GPU_groups)
+            List<XenRef<GPU_group>> enabled_on_GPU_groups,
+            vgpu_type_implementation implementation)
         {
             this.uuid = uuid;
             this.vendor_name = vendor_name;
@@ -73,6 +74,7 @@ namespace XenAPI
             this.VGPUs = VGPUs;
             this.supported_on_GPU_groups = supported_on_GPU_groups;
             this.enabled_on_GPU_groups = enabled_on_GPU_groups;
+            this.implementation = implementation;
         }
 
         /// <summary>
@@ -98,6 +100,7 @@ namespace XenAPI
             VGPUs = update.VGPUs;
             supported_on_GPU_groups = update.supported_on_GPU_groups;
             enabled_on_GPU_groups = update.enabled_on_GPU_groups;
+            implementation = update.implementation;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU_type proxy)
@@ -114,6 +117,7 @@ namespace XenAPI
             VGPUs = proxy.VGPUs == null ? null : XenRef<VGPU>.Create(proxy.VGPUs);
             supported_on_GPU_groups = proxy.supported_on_GPU_groups == null ? null : XenRef<GPU_group>.Create(proxy.supported_on_GPU_groups);
             enabled_on_GPU_groups = proxy.enabled_on_GPU_groups == null ? null : XenRef<GPU_group>.Create(proxy.enabled_on_GPU_groups);
+            implementation = proxy.implementation == null ? (vgpu_type_implementation) 0 : (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), (string)proxy.implementation);
         }
 
         public Proxy_VGPU_type ToProxy()
@@ -131,6 +135,7 @@ namespace XenAPI
             result_.VGPUs = (VGPUs != null) ? Helper.RefListToStringArray(VGPUs) : new string[] {};
             result_.supported_on_GPU_groups = (supported_on_GPU_groups != null) ? Helper.RefListToStringArray(supported_on_GPU_groups) : new string[] {};
             result_.enabled_on_GPU_groups = (enabled_on_GPU_groups != null) ? Helper.RefListToStringArray(enabled_on_GPU_groups) : new string[] {};
+            result_.implementation = vgpu_type_implementation_helper.ToString(implementation);
             return result_;
         }
 
@@ -152,6 +157,7 @@ namespace XenAPI
             VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
             supported_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "supported_on_GPU_groups");
             enabled_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "enabled_on_GPU_groups");
+            implementation = (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), Marshalling.ParseString(table, "implementation"));
         }
 
         public bool DeepEquals(VGPU_type other)
@@ -172,7 +178,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._enabled_on_PGPUs, other._enabled_on_PGPUs) &&
                 Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
                 Helper.AreEqual2(this._supported_on_GPU_groups, other._supported_on_GPU_groups) &&
-                Helper.AreEqual2(this._enabled_on_GPU_groups, other._enabled_on_GPU_groups);
+                Helper.AreEqual2(this._enabled_on_GPU_groups, other._enabled_on_GPU_groups) &&
+                Helper.AreEqual2(this._implementation, other._implementation);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU_type server)
@@ -339,6 +346,17 @@ namespace XenAPI
         public static List<XenRef<GPU_group>> get_enabled_on_GPU_groups(Session session, string _vgpu_type)
         {
             return XenRef<GPU_group>.Create(session.proxy.vgpu_type_get_enabled_on_gpu_groups(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
+        /// <summary>
+        /// Get the implementation field of the given VGPU_type.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
+        public static vgpu_type_implementation get_implementation(Session session, string _vgpu_type)
+        {
+            return (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), (string)session.proxy.vgpu_type_get_implementation(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
         /// <summary>
@@ -580,5 +598,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<GPU_group>> _enabled_on_GPU_groups;
+
+        /// <summary>
+        /// The internal implementation of this VGPU type
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual vgpu_type_implementation implementation
+        {
+            get { return _implementation; }
+            set
+            {
+                if (!Helper.AreEqual(value, _implementation))
+                {
+                    _implementation = value;
+                    Changed = true;
+                    NotifyPropertyChanged("implementation");
+                }
+            }
+        }
+        private vgpu_type_implementation _implementation;
     }
 }
