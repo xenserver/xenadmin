@@ -112,26 +112,26 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelRubric.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="labelRubric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelRubric.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 3</value>
   </data>
   <data name="labelRubric.Size" type="System.Drawing.Size, System.Drawing">
     <value>623, 38</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelRubric.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -142,7 +142,7 @@
     <value>labelRubric</value>
   </data>
   <data name="&gt;&gt;labelRubric.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelRubric.Parent" xml:space="preserve">
     <value>$this</value>
@@ -156,11 +156,17 @@
   <data name="warningsTable.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="imgRDP.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgRDP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="imgRDP.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgRDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 29</value>
   </data>
   <data name="imgRDP.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -175,7 +181,7 @@
     <value>imgRDP</value>
   </data>
   <data name="&gt;&gt;imgRDP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgRDP.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -193,10 +199,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelRDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
+    <value>25, 29</value>
   </data>
   <data name="labelRDP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelRDP.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>586, 999</value>
   </data>
   <data name="labelRDP.Size" type="System.Drawing.Size, System.Drawing">
     <value>584, 39</value>
@@ -214,7 +223,7 @@
     <value>labelRDP</value>
   </data>
   <data name="&gt;&gt;labelRDP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelRDP.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -225,8 +234,11 @@
   <data name="imgNeedDriver.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="imgNeedDriver.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgNeedDriver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 81</value>
   </data>
   <data name="imgNeedDriver.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 19</value>
@@ -238,7 +250,7 @@
     <value>imgNeedDriver</value>
   </data>
   <data name="&gt;&gt;imgNeedDriver.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgNeedDriver.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -256,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelNeedDriver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 55</value>
+    <value>25, 81</value>
   </data>
   <data name="labelNeedDriver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -274,7 +286,7 @@
     <value>labelNeedDriver</value>
   </data>
   <data name="&gt;&gt;labelNeedDriver.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelNeedDriver.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -282,11 +294,17 @@
   <data name="&gt;&gt;labelNeedDriver.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="imgNeedGpu.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="imgNeedGpu.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 81</value>
+    <value>3, 107</value>
   </data>
   <data name="imgNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -301,7 +319,7 @@
     <value>imgNeedGpu</value>
   </data>
   <data name="&gt;&gt;imgNeedGpu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgNeedGpu.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -319,7 +337,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 81</value>
+    <value>25, 107</value>
   </data>
   <data name="labelNeedGpu.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -340,7 +358,7 @@
     <value>labelNeedGpu</value>
   </data>
   <data name="&gt;&gt;labelNeedGpu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelNeedGpu.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -348,11 +366,17 @@
   <data name="&gt;&gt;labelNeedGpu.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="imgStopVM.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="imgStopVM.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgStopVM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 107</value>
+    <value>3, 133</value>
   </data>
   <data name="imgStopVM.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -367,7 +391,7 @@
     <value>imgStopVM</value>
   </data>
   <data name="&gt;&gt;imgStopVM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgStopVM.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -385,10 +409,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelStopVM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 107</value>
+    <value>25, 133</value>
   </data>
   <data name="labelStopVM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelStopVM.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>584, 999</value>
   </data>
   <data name="labelStopVM.Size" type="System.Drawing.Size, System.Drawing">
     <value>584, 13</value>
@@ -406,7 +433,7 @@
     <value>labelStopVM</value>
   </data>
   <data name="&gt;&gt;labelStopVM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStopVM.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -414,11 +441,17 @@
   <data name="&gt;&gt;labelStopVM.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="imgHA.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgHA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="imgHA.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="imgHA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 133</value>
+    <value>3, 159</value>
   </data>
   <data name="imgHA.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -433,7 +466,7 @@
     <value>imgHA</value>
   </data>
   <data name="&gt;&gt;imgHA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgHA.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -451,10 +484,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelHA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 133</value>
+    <value>25, 159</value>
   </data>
   <data name="labelHA.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelHA.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>584, 999</value>
   </data>
   <data name="labelHA.Size" type="System.Drawing.Size, System.Drawing">
     <value>584, 13</value>
@@ -472,7 +508,7 @@
     <value>labelHA</value>
   </data>
   <data name="&gt;&gt;labelHA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelHA.Parent" xml:space="preserve">
     <value>warningsTable</value>
@@ -480,14 +516,74 @@
   <data name="&gt;&gt;labelHA.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="imgExperimental.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="imgExperimental.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="imgExperimental.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="imgExperimental.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;imgExperimental.Name" xml:space="preserve">
+    <value>imgExperimental</value>
+  </data>
+  <data name="&gt;&gt;imgExperimental.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imgExperimental.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;imgExperimental.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="labelExperimental.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelExperimental.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelExperimental.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 3</value>
+  </data>
+  <data name="labelExperimental.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelExperimental.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 13</value>
+  </data>
+  <data name="labelExperimental.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="labelExperimental.Text" xml:space="preserve">
+    <value>This type of vGPU is in Tech Preview, and is currently not suitable for production use.</value>
+  </data>
+  <data name="labelExperimental.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelExperimental.Name" xml:space="preserve">
+    <value>labelExperimental</value>
+  </data>
+  <data name="&gt;&gt;labelExperimental.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelExperimental.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;labelExperimental.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 95</value>
   </data>
   <data name="warningsTable.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="warningsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 175</value>
+    <value>612, 212</value>
   </data>
   <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -496,7 +592,7 @@
     <value>warningsTable</value>
   </data>
   <data name="&gt;&gt;warningsTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;warningsTable.Parent" xml:space="preserve">
     <value>$this</value>
@@ -505,13 +601,64 @@
     <value>2</value>
   </data>
   <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgRDP" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRDP" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedDriver" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedDriver" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedGpu" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedGpu" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgStopVM" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStopVM" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgHA" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHA" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgRDP" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRDP" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedDriver" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedDriver" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedGpu" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedGpu" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgStopVM" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStopVM" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgHA" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHA" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgExperimental" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelExperimental" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelGpuType.Name" xml:space="preserve">
+    <value>labelGpuType</value>
+  </data>
+  <data name="&gt;&gt;labelGpuType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGpuType.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelGpuType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.Name" xml:space="preserve">
+    <value>comboBoxGpus</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.VgpuComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 44</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 27</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelGpuType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxGpus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="labelGpuType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -541,7 +688,7 @@
     <value>labelGpuType</value>
   </data>
   <data name="&gt;&gt;labelGpuType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelGpuType.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -576,34 +723,7 @@
   <data name="&gt;&gt;comboBoxGpus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 44</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>521, 27</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelGpuType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxGpus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
