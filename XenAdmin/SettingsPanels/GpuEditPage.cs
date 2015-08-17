@@ -288,6 +288,9 @@ namespace XenAdmin.SettingsPanels
             if (!gpusAvailable)
                 return;
 
+            imgExperimental.Visible = labelExperimental.Visible =
+                VgpuType != null && VgpuType.experimental;
+
             if (vm.power_state != vm_power_state.Halted)
             {
                 imgRDP.Visible = labelRDP.Visible =

@@ -6696,6 +6696,14 @@ namespace XenAPI
         Response<string>
         vgpu_type_get_implementation(string session, string _vgpu_type);
 
+        [XmlRpcMethod("VGPU_type.get_identifier")]
+        Response<string>
+        vgpu_type_get_identifier(string session, string _vgpu_type);
+
+        [XmlRpcMethod("VGPU_type.get_experimental")]
+        Response<bool>
+        vgpu_type_get_experimental(string session, string _vgpu_type);
+
         [XmlRpcMethod("VGPU_type.get_all")]
         Response<string []>
         vgpu_type_get_all(string session);
@@ -7513,6 +7521,8 @@ namespace XenAPI
         public string [] supported_on_GPU_groups;
         public string [] enabled_on_GPU_groups;
         public string implementation;
+        public string identifier;
+        public bool experimental;
     }
 
 }
