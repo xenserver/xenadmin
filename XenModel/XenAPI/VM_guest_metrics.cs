@@ -52,6 +52,8 @@ namespace XenAPI
             Dictionary<string, string> os_version,
             Dictionary<string, string> PV_drivers_version,
             bool PV_drivers_up_to_date,
+            bool network_paths_optimized,
+            bool storage_paths_optimized,
             Dictionary<string, string> memory,
             Dictionary<string, string> disks,
             Dictionary<string, string> networks,
@@ -64,6 +66,8 @@ namespace XenAPI
             this.os_version = os_version;
             this.PV_drivers_version = PV_drivers_version;
             this.PV_drivers_up_to_date = PV_drivers_up_to_date;
+            this.network_paths_optimized = network_paths_optimized;
+            this.storage_paths_optimized = storage_paths_optimized;
             this.memory = memory;
             this.disks = disks;
             this.networks = networks;
@@ -88,6 +92,8 @@ namespace XenAPI
             os_version = update.os_version;
             PV_drivers_version = update.PV_drivers_version;
             PV_drivers_up_to_date = update.PV_drivers_up_to_date;
+            network_paths_optimized = update.network_paths_optimized;
+            storage_paths_optimized = update.storage_paths_optimized;
             memory = update.memory;
             disks = update.disks;
             networks = update.networks;
@@ -103,6 +109,8 @@ namespace XenAPI
             os_version = proxy.os_version == null ? null : Maps.convert_from_proxy_string_string(proxy.os_version);
             PV_drivers_version = proxy.PV_drivers_version == null ? null : Maps.convert_from_proxy_string_string(proxy.PV_drivers_version);
             PV_drivers_up_to_date = (bool)proxy.PV_drivers_up_to_date;
+            network_paths_optimized = (bool)proxy.network_paths_optimized;
+            storage_paths_optimized = (bool)proxy.storage_paths_optimized;
             memory = proxy.memory == null ? null : Maps.convert_from_proxy_string_string(proxy.memory);
             disks = proxy.disks == null ? null : Maps.convert_from_proxy_string_string(proxy.disks);
             networks = proxy.networks == null ? null : Maps.convert_from_proxy_string_string(proxy.networks);
@@ -119,6 +127,8 @@ namespace XenAPI
             result_.os_version = Maps.convert_to_proxy_string_string(os_version);
             result_.PV_drivers_version = Maps.convert_to_proxy_string_string(PV_drivers_version);
             result_.PV_drivers_up_to_date = PV_drivers_up_to_date;
+            result_.network_paths_optimized = network_paths_optimized;
+            result_.storage_paths_optimized = storage_paths_optimized;
             result_.memory = Maps.convert_to_proxy_string_string(memory);
             result_.disks = Maps.convert_to_proxy_string_string(disks);
             result_.networks = Maps.convert_to_proxy_string_string(networks);
@@ -139,6 +149,8 @@ namespace XenAPI
             os_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "os_version"));
             PV_drivers_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "PV_drivers_version"));
             PV_drivers_up_to_date = Marshalling.ParseBool(table, "PV_drivers_up_to_date");
+            network_paths_optimized = Marshalling.ParseBool(table, "network_paths_optimized");
+            storage_paths_optimized = Marshalling.ParseBool(table, "storage_paths_optimized");
             memory = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "memory"));
             disks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "disks"));
             networks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "networks"));
@@ -159,6 +171,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._os_version, other._os_version) &&
                 Helper.AreEqual2(this._PV_drivers_version, other._PV_drivers_version) &&
                 Helper.AreEqual2(this._PV_drivers_up_to_date, other._PV_drivers_up_to_date) &&
+                Helper.AreEqual2(this._network_paths_optimized, other._network_paths_optimized) &&
+                Helper.AreEqual2(this._storage_paths_optimized, other._storage_paths_optimized) &&
                 Helper.AreEqual2(this._memory, other._memory) &&
                 Helper.AreEqual2(this._disks, other._disks) &&
                 Helper.AreEqual2(this._networks, other._networks) &&
@@ -249,6 +263,28 @@ namespace XenAPI
         public static bool get_PV_drivers_up_to_date(Session session, string _vm_guest_metrics)
         {
             return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+        }
+
+        /// <summary>
+        /// Get the network_paths_optimized field of the given VM_guest_metrics.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        public static bool get_network_paths_optimized(Session session, string _vm_guest_metrics)
+        {
+            return (bool)session.proxy.vm_guest_metrics_get_network_paths_optimized(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+        }
+
+        /// <summary>
+        /// Get the storage_paths_optimized field of the given VM_guest_metrics.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        public static bool get_storage_paths_optimized(Session session, string _vm_guest_metrics)
+        {
+            return (bool)session.proxy.vm_guest_metrics_get_storage_paths_optimized(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
         }
 
         /// <summary>
@@ -440,7 +476,7 @@ namespace XenAPI
         private Dictionary<string, string> _PV_drivers_version;
 
         /// <summary>
-        /// true if the PV drivers appear to be up to date
+        /// Logical AND of network_paths_optimized and storage_paths_optimized
         /// </summary>
         public virtual bool PV_drivers_up_to_date
         {
@@ -456,6 +492,44 @@ namespace XenAPI
             }
         }
         private bool _PV_drivers_up_to_date;
+
+        /// <summary>
+        /// True if the network paths are optimized with PV driver
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool network_paths_optimized
+        {
+            get { return _network_paths_optimized; }
+            set
+            {
+                if (!Helper.AreEqual(value, _network_paths_optimized))
+                {
+                    _network_paths_optimized = value;
+                    Changed = true;
+                    NotifyPropertyChanged("network_paths_optimized");
+                }
+            }
+        }
+        private bool _network_paths_optimized;
+
+        /// <summary>
+        /// True if the storage paths are optimized with PV driver
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool storage_paths_optimized
+        {
+            get { return _storage_paths_optimized; }
+            set
+            {
+                if (!Helper.AreEqual(value, _storage_paths_optimized))
+                {
+                    _storage_paths_optimized = value;
+                    Changed = true;
+                    NotifyPropertyChanged("storage_paths_optimized");
+                }
+            }
+        }
+        private bool _storage_paths_optimized;
 
         /// <summary>
         /// This field exists but has no data. Use the memory and memory_internal_free RRD data-sources instead.

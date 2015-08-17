@@ -58,8 +58,8 @@ namespace XenAdmin.Actions
         private const string uploadTokenUrl = "/feeds/api/create_upload/";
 
         private readonly string identityTokenDomainName = "http://cis-daily.citrite.net";
-        private readonly string uploadGrantTokenDomainName = "http://cis-daily.citrite.com";
-        private readonly string uploadTokenDomainName = "http://cis-daily.citrite.com";
+        private readonly string uploadGrantTokenDomainName = "https://rttf-daily.citrite.net";
+        private readonly string uploadTokenDomainName = "https://rttf-daily.citrite.net";
 
         private readonly string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
 
@@ -203,9 +203,16 @@ namespace XenAdmin.Actions
         {
             var json = new JavaScriptSerializer().Serialize(new
             {
-                identity_token = identityToken,
-                expiration = tokenExpiration
+                identity_token = identityToken
             });
+            if (tokenExpiration != 0)
+            {
+                json = new JavaScriptSerializer().Serialize(new
+                {
+                    identity_token = identityToken,
+                    expiration = tokenExpiration
+                });
+            }
             var urlString = string.Format("{0}{1}", uploadGrantTokenDomainName, uploadGrantTokenUrl);
 
             try

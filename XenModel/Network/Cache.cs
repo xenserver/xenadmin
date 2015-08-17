@@ -394,7 +394,7 @@ namespace XenAdmin.Network
             {
                 Pool newPool = (Pool)obj.value;
                 Pool oldPool = Resolve(new XenRef<Pool>(obj.xenref));
-                return oldPool != null && newPool.DeepEquals(oldPool);
+                return oldPool != null && newPool.DeepEquals(oldPool, false); //We do want to see changes in the Pool.current_operations.
             }
             else if (obj.type == typeof(SR))
             {

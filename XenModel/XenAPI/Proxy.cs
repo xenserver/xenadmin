@@ -564,6 +564,18 @@ namespace XenAPI
         Response<string []>
         pool_get_metadata_vdis(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_ha_cluster_stack")]
+        Response<string>
+        pool_get_ha_cluster_stack(string session, string _pool);
+
+        [XmlRpcMethod("pool.get_allowed_operations")]
+        Response<string []>
+        pool_get_allowed_operations(string session, string _pool);
+
+        [XmlRpcMethod("pool.get_current_operations")]
+        Response<Object>
+        pool_get_current_operations(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -707,6 +719,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.enable_ha")]
         Response<string>
         async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration);
+
+        [XmlRpcMethod("pool.enable_ha")]
+        Response<string>
+        pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
+
+        [XmlRpcMethod("Async.pool.enable_ha")]
+        Response<string>
+        async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
 
         [XmlRpcMethod("pool.disable_ha")]
         Response<string>
@@ -951,6 +971,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.apply_edition")]
         Response<string>
         async_pool_apply_edition(string session, string _pool, string _edition);
+
+        [XmlRpcMethod("pool.enable_ssl_legacy")]
+        Response<string>
+        pool_enable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("Async.pool.enable_ssl_legacy")]
+        Response<string>
+        async_pool_enable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("pool.disable_ssl_legacy")]
+        Response<string>
+        pool_disable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("Async.pool.disable_ssl_legacy")]
+        Response<string>
+        async_pool_disable_ssl_legacy(string session, string _pool);
 
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
@@ -1415,6 +1451,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.get_hardware_platform_version")]
         Response<string>
         vm_get_hardware_platform_version(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_auto_update_drivers")]
+        Response<bool>
+        vm_get_auto_update_drivers(string session, string _vm);
 
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
@@ -2092,6 +2132,30 @@ namespace XenAPI
         Response<string>
         async_vm_call_plugin(string session, string _vm, string _plugin, string _fn, Object _args);
 
+        [XmlRpcMethod("VM.set_auto_update_drivers")]
+        Response<string>
+        vm_set_auto_update_drivers(string session, string _vm, bool _value);
+
+        [XmlRpcMethod("Async.VM.set_auto_update_drivers")]
+        Response<string>
+        async_vm_set_auto_update_drivers(string session, string _vm, bool _value);
+
+        [XmlRpcMethod("VM.assert_can_set_auto_update_drivers")]
+        Response<string>
+        vm_assert_can_set_auto_update_drivers(string session, string _vm, bool _value);
+
+        [XmlRpcMethod("Async.VM.assert_can_set_auto_update_drivers")]
+        Response<string>
+        async_vm_assert_can_set_auto_update_drivers(string session, string _vm, bool _value);
+
+        [XmlRpcMethod("VM.import")]
+        Response<string []>
+        vm_import(string session, string _url, string _sr, bool _full_restore, bool _force);
+
+        [XmlRpcMethod("Async.VM.import")]
+        Response<string>
+        async_vm_import(string session, string _url, string _sr, bool _full_restore, bool _force);
+
         [XmlRpcMethod("VM.get_all")]
         Response<string []>
         vm_get_all(string session);
@@ -2199,6 +2263,14 @@ namespace XenAPI
         [XmlRpcMethod("VM_guest_metrics.get_PV_drivers_up_to_date")]
         Response<bool>
         vm_guest_metrics_get_pv_drivers_up_to_date(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_network_paths_optimized")]
+        Response<bool>
+        vm_guest_metrics_get_network_paths_optimized(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_storage_paths_optimized")]
+        Response<bool>
+        vm_guest_metrics_get_storage_paths_optimized(string session, string _vm_guest_metrics);
 
         [XmlRpcMethod("VM_guest_metrics.get_memory")]
         Response<Object>
@@ -2832,6 +2904,10 @@ namespace XenAPI
         Response<string []>
         host_get_pgpus(string session, string _host);
 
+        [XmlRpcMethod("host.get_ssl_legacy")]
+        Response<bool>
+        host_get_ssl_legacy(string session, string _host);
+
         [XmlRpcMethod("host.get_guest_VCPUs_params")]
         Response<Object>
         host_get_guest_vcpus_params(string session, string _host);
@@ -3287,6 +3363,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.disable_display")]
         Response<string>
         async_host_disable_display(string session, string _host);
+
+        [XmlRpcMethod("host.set_ssl_legacy")]
+        Response<string>
+        host_set_ssl_legacy(string session, string _host, bool _value);
+
+        [XmlRpcMethod("Async.host.set_ssl_legacy")]
+        Response<string>
+        async_host_set_ssl_legacy(string session, string _host, bool _value);
 
         [XmlRpcMethod("host.get_all")]
         Response<string []>
@@ -6608,6 +6692,10 @@ namespace XenAPI
         Response<string []>
         vgpu_type_get_enabled_on_gpu_groups(string session, string _vgpu_type);
 
+        [XmlRpcMethod("VGPU_type.get_implementation")]
+        Response<string>
+        vgpu_type_get_implementation(string session, string _vgpu_type);
+
         [XmlRpcMethod("VGPU_type.get_all")]
         Response<string []>
         vgpu_type_get_all(string session);
@@ -6713,6 +6801,9 @@ namespace XenAPI
         public string vswitch_controller;
         public Object restrictions;
         public string [] metadata_VDIs;
+        public string ha_cluster_stack;
+        public string [] allowed_operations;
+        public Object current_operations;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -6808,6 +6899,7 @@ namespace XenAPI
         public string version;
         public string generation_id;
         public string hardware_platform_version;
+        public bool auto_update_drivers;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -6834,6 +6926,8 @@ namespace XenAPI
         public Object os_version;
         public Object PV_drivers_version;
         public bool PV_drivers_up_to_date;
+        public bool network_paths_optimized;
+        public bool storage_paths_optimized;
         public Object memory;
         public Object disks;
         public Object networks;
@@ -6936,6 +7030,7 @@ namespace XenAPI
         public Object chipset_info;
         public string [] PCIs;
         public string [] PGPUs;
+        public bool ssl_legacy;
         public Object guest_VCPUs_params;
         public string display;
         public string [] virtual_hardware_platform_versions;
@@ -7417,6 +7512,7 @@ namespace XenAPI
         public string [] VGPUs;
         public string [] supported_on_GPU_groups;
         public string [] enabled_on_GPU_groups;
+        public string implementation;
     }
 
 }

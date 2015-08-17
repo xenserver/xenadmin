@@ -226,6 +226,53 @@ namespace XenAPI
             return result;
         }
 
+        internal static Dictionary<string, pool_allowed_operations>
+        convert_from_proxy_string_pool_allowed_operations(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<string, pool_allowed_operations> result = new Dictionary<string, pool_allowed_operations>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key;
+                        pool_allowed_operations v = table[key] == null ? (pool_allowed_operations) 0 : (pool_allowed_operations)Helper.EnumParseDefault(typeof(pool_allowed_operations), (string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_string_pool_allowed_operations(Dictionary<string, pool_allowed_operations> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = (key != null) ? key : "";
+                        string v = pool_allowed_operations_helper.ToString(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
         internal static Dictionary<string, storage_operations>
         convert_from_proxy_string_storage_operations(Object o)
         {

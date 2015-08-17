@@ -175,7 +175,7 @@
     <value>98, 15</value>
   </data>
   <data name="informationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="informationLabel.Text" xml:space="preserve">
     <value>informationLabel</value>
@@ -493,7 +493,7 @@
     <value>132, 15</value>
   </data>
   <data name="checkForUpdatesNowButton2.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="checkForUpdatesNowButton2.Text" xml:space="preserve">
     <value>&amp;Check for Updates Now</value>
@@ -870,7 +870,7 @@
     <value>773, 357</value>
   </data>
   <data name="dataGridViewUpdates.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;dataGridViewUpdates.Name" xml:space="preserve">
     <value>dataGridViewUpdates</value>

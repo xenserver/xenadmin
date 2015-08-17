@@ -123,7 +123,8 @@ namespace XenAPI
             XenRef<SR> suspend_SR,
             long version,
             string generation_id,
-            long hardware_platform_version)
+            long hardware_platform_version,
+            bool auto_update_drivers)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -201,6 +202,7 @@ namespace XenAPI
             this.version = version;
             this.generation_id = generation_id;
             this.hardware_platform_version = hardware_platform_version;
+            this.auto_update_drivers = auto_update_drivers;
         }
 
         /// <summary>
@@ -290,6 +292,7 @@ namespace XenAPI
             version = update.version;
             generation_id = update.generation_id;
             hardware_platform_version = update.hardware_platform_version;
+            auto_update_drivers = update.auto_update_drivers;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -370,6 +373,7 @@ namespace XenAPI
             version = proxy.version == null ? 0 : long.Parse((string)proxy.version);
             generation_id = proxy.generation_id == null ? null : (string)proxy.generation_id;
             hardware_platform_version = proxy.hardware_platform_version == null ? 0 : long.Parse((string)proxy.hardware_platform_version);
+            auto_update_drivers = (bool)proxy.auto_update_drivers;
         }
 
         public Proxy_VM ToProxy()
@@ -451,6 +455,7 @@ namespace XenAPI
             result_.version = version.ToString();
             result_.generation_id = (generation_id != null) ? generation_id : "";
             result_.hardware_platform_version = hardware_platform_version.ToString();
+            result_.auto_update_drivers = auto_update_drivers;
             return result_;
         }
 
@@ -536,6 +541,7 @@ namespace XenAPI
             version = Marshalling.ParseLong(table, "version");
             generation_id = Marshalling.ParseString(table, "generation_id");
             hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
+            auto_update_drivers = Marshalling.ParseBool(table, "auto_update_drivers");
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -622,7 +628,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._suspend_SR, other._suspend_SR) &&
                 Helper.AreEqual2(this._version, other._version) &&
                 Helper.AreEqual2(this._generation_id, other._generation_id) &&
-                Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version);
+                Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
+                Helper.AreEqual2(this._auto_update_drivers, other._auto_update_drivers);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1712,6 +1719,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the auto_update_drivers field of the given VM.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_auto_update_drivers(Session session, string _vm)
+        {
+            return (bool)session.proxy.vm_get_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
         /// Set the name/label field of the given VM.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -2670,7 +2688,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Migrate a VM to another Host. This can only be called when the specified VM is in the Running state.
+        /// Migrate a VM to another Host.
         /// First published in XenServer 4.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2683,7 +2701,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Migrate a VM to another Host. This can only be called when the specified VM is in the Running state.
+        /// Migrate a VM to another Host.
         /// First published in XenServer 4.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -3134,9 +3152,9 @@ namespace XenAPI
         /// <param name="_vdi_map">Map of source VDI to destination SR</param>
         /// <param name="_vif_map">Map of source VIF to destination network</param>
         /// <param name="_options">Other parameters</param>
-        public static void migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
+        public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
-            session.proxy.vm_migrate_send(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
+            return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -3765,6 +3783,82 @@ namespace XenAPI
         public static XenRef<Task> async_call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_call_plugin(session.uuid, (_vm != null) ? _vm : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse());
+        }
+
+        /// <summary>
+        /// Enable or disable PV auto update on Windows vm
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
+        public static void set_auto_update_drivers(Session session, string _vm, bool _value)
+        {
+            session.proxy.vm_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+        }
+
+        /// <summary>
+        /// Enable or disable PV auto update on Windows vm
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
+        public static XenRef<Task> async_set_auto_update_drivers(Session session, string _vm, bool _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse());
+        }
+
+        /// <summary>
+        /// Check if PV auto update can be set on Windows vm
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
+        public static void assert_can_set_auto_update_drivers(Session session, string _vm, bool _value)
+        {
+            session.proxy.vm_assert_can_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+        }
+
+        /// <summary>
+        /// Check if PV auto update can be set on Windows vm
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
+        public static XenRef<Task> async_assert_can_set_auto_update_drivers(Session session, string _vm, bool _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse());
+        }
+
+        /// <summary>
+        /// Import an XVA from a URI
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_url">The URL of the XVA file</param>
+        /// <param name="_sr">The destination SR for the disks</param>
+        /// <param name="_full_restore">Perform a full restore</param>
+        /// <param name="_force">Force the import</param>
+        public static List<XenRef<VM>> import(Session session, string _url, string _sr, bool _full_restore, bool _force)
+        {
+            return XenRef<VM>.Create(session.proxy.vm_import(session.uuid, (_url != null) ? _url : "", (_sr != null) ? _sr : "", _full_restore, _force).parse());
+        }
+
+        /// <summary>
+        /// Import an XVA from a URI
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_url">The URL of the XVA file</param>
+        /// <param name="_sr">The destination SR for the disks</param>
+        /// <param name="_full_restore">Perform a full restore</param>
+        /// <param name="_force">Force the import</param>
+        public static XenRef<Task> async_import(Session session, string _url, string _sr, bool _full_restore, bool _force)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_import(session.uuid, (_url != null) ? _url : "", (_sr != null) ? _sr : "", _full_restore, _force).parse());
         }
 
         /// <summary>
@@ -5183,5 +5277,24 @@ namespace XenAPI
             }
         }
         private long _hardware_platform_version;
+
+        /// <summary>
+        /// True if the Windows Update feature is enabled on the VM; false otherwise
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool auto_update_drivers
+        {
+            get { return _auto_update_drivers; }
+            set
+            {
+                if (!Helper.AreEqual(value, _auto_update_drivers))
+                {
+                    _auto_update_drivers = value;
+                    Changed = true;
+                    NotifyPropertyChanged("auto_update_drivers");
+                }
+            }
+        }
+        private bool _auto_update_drivers;
     }
 }
