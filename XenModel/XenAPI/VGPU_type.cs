@@ -60,7 +60,9 @@ namespace XenAPI
             List<XenRef<VGPU>> VGPUs,
             List<XenRef<GPU_group>> supported_on_GPU_groups,
             List<XenRef<GPU_group>> enabled_on_GPU_groups,
-            vgpu_type_implementation implementation)
+            vgpu_type_implementation implementation,
+            string identifier,
+            bool experimental)
         {
             this.uuid = uuid;
             this.vendor_name = vendor_name;
@@ -75,6 +77,8 @@ namespace XenAPI
             this.supported_on_GPU_groups = supported_on_GPU_groups;
             this.enabled_on_GPU_groups = enabled_on_GPU_groups;
             this.implementation = implementation;
+            this.identifier = identifier;
+            this.experimental = experimental;
         }
 
         /// <summary>
@@ -101,6 +105,8 @@ namespace XenAPI
             supported_on_GPU_groups = update.supported_on_GPU_groups;
             enabled_on_GPU_groups = update.enabled_on_GPU_groups;
             implementation = update.implementation;
+            identifier = update.identifier;
+            experimental = update.experimental;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU_type proxy)
@@ -118,6 +124,8 @@ namespace XenAPI
             supported_on_GPU_groups = proxy.supported_on_GPU_groups == null ? null : XenRef<GPU_group>.Create(proxy.supported_on_GPU_groups);
             enabled_on_GPU_groups = proxy.enabled_on_GPU_groups == null ? null : XenRef<GPU_group>.Create(proxy.enabled_on_GPU_groups);
             implementation = proxy.implementation == null ? (vgpu_type_implementation) 0 : (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), (string)proxy.implementation);
+            identifier = proxy.identifier == null ? null : (string)proxy.identifier;
+            experimental = (bool)proxy.experimental;
         }
 
         public Proxy_VGPU_type ToProxy()
@@ -136,6 +144,8 @@ namespace XenAPI
             result_.supported_on_GPU_groups = (supported_on_GPU_groups != null) ? Helper.RefListToStringArray(supported_on_GPU_groups) : new string[] {};
             result_.enabled_on_GPU_groups = (enabled_on_GPU_groups != null) ? Helper.RefListToStringArray(enabled_on_GPU_groups) : new string[] {};
             result_.implementation = vgpu_type_implementation_helper.ToString(implementation);
+            result_.identifier = (identifier != null) ? identifier : "";
+            result_.experimental = experimental;
             return result_;
         }
 
@@ -158,6 +168,8 @@ namespace XenAPI
             supported_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "supported_on_GPU_groups");
             enabled_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "enabled_on_GPU_groups");
             implementation = (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), Marshalling.ParseString(table, "implementation"));
+            identifier = Marshalling.ParseString(table, "identifier");
+            experimental = Marshalling.ParseBool(table, "experimental");
         }
 
         public bool DeepEquals(VGPU_type other)
@@ -179,7 +191,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
                 Helper.AreEqual2(this._supported_on_GPU_groups, other._supported_on_GPU_groups) &&
                 Helper.AreEqual2(this._enabled_on_GPU_groups, other._enabled_on_GPU_groups) &&
-                Helper.AreEqual2(this._implementation, other._implementation);
+                Helper.AreEqual2(this._implementation, other._implementation) &&
+                Helper.AreEqual2(this._identifier, other._identifier) &&
+                Helper.AreEqual2(this._experimental, other._experimental);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU_type server)
@@ -360,6 +374,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the identifier field of the given VGPU_type.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
+        public static string get_identifier(Session session, string _vgpu_type)
+        {
+            return (string)session.proxy.vgpu_type_get_identifier(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse();
+        }
+
+        /// <summary>
+        /// Get the experimental field of the given VGPU_type.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
+        public static bool get_experimental(Session session, string _vgpu_type)
+        {
+            return (bool)session.proxy.vgpu_type_get_experimental(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse();
+        }
+
+        /// <summary>
         /// Return a list of all the VGPU_types known to the system.
         /// First published in XenServer 6.2 SP1 Tech-Preview.
         /// </summary>
@@ -470,7 +506,7 @@ namespace XenAPI
         private long _max_heads;
 
         /// <summary>
-        /// Maximum resultion (width) supported by the VGPU type
+        /// Maximum resolution (width) supported by the VGPU type
         /// First published in XenServer 6.2 SP1.
         /// </summary>
         public virtual long max_resolution_x
@@ -489,7 +525,7 @@ namespace XenAPI
         private long _max_resolution_x;
 
         /// <summary>
-        /// Maximum resoltion (height) supported by the VGPU type
+        /// Maximum resolution (height) supported by the VGPU type
         /// First published in XenServer 6.2 SP1.
         /// </summary>
         public virtual long max_resolution_y
@@ -617,5 +653,43 @@ namespace XenAPI
             }
         }
         private vgpu_type_implementation _implementation;
+
+        /// <summary>
+        /// Key used to identify VGPU types and avoid creating duplicates - this field is used internally and not intended for interpretation by API clients
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual string identifier
+        {
+            get { return _identifier; }
+            set
+            {
+                if (!Helper.AreEqual(value, _identifier))
+                {
+                    _identifier = value;
+                    Changed = true;
+                    NotifyPropertyChanged("identifier");
+                }
+            }
+        }
+        private string _identifier;
+
+        /// <summary>
+        /// Indicates whether VGPUs of this type should be considered experimental
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool experimental
+        {
+            get { return _experimental; }
+            set
+            {
+                if (!Helper.AreEqual(value, _experimental))
+                {
+                    _experimental = value;
+                    Changed = true;
+                    NotifyPropertyChanged("experimental");
+                }
+            }
+        }
+        private bool _experimental;
     }
 }
