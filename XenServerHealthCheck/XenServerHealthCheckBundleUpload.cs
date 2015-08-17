@@ -246,7 +246,7 @@ namespace XenServerHealthCheck
             // Upload the zip file to CIS uploading server.
             string upload_url = Registry.HealthCheckUploadDomainName;
             log.InfoFormat("Upload report to {0}", upload_url);
-            XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, VERBOSITY_LEVEL, upload_url);
+            XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, VERBOSITY_LEVEL, upload_url, connection);
 
             string upload_uuid = "";
             try
