@@ -49,7 +49,8 @@ namespace XenAdmin.Dialogs
             _VM = vm;
             diskRadioButton.Enabled = _VM.allowed_operations.Contains(vm_operations.snapshot);
             pictureBoxSnapshotsInfo.Visible = !diskRadioButton.Enabled;
-            quiesceCheckBox.Enabled = _VM.allowed_operations.Contains(vm_operations.snapshot_with_quiesce);
+            quiesceCheckBox.Enabled = _VM.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) 
+                && !Helpers.FeatureForbidden(_VM, Host.RestrictVss);
             pictureBoxQuiesceInfo.Visible = !quiesceCheckBox.Enabled;
             memoryRadioButton.Enabled = _VM.allowed_operations.Contains(vm_operations.checkpoint)
                 && !Helpers.FeatureForbidden(_VM, Host.RestrictCheckpoint);
@@ -146,6 +147,8 @@ namespace XenAdmin.Dialogs
             string tt;
             if (!Helpers.MidnightRideOrGreater(_VM.Connection))
                 tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL, Messages.QUIESCED_SNAPSHOTS);
+            else if (Helpers.FeatureForbidden(_VM, Host.RestrictVss))
+                tt = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_QUIESCE_MODE_POWER_STATE.Replace("\\n", "\n");
             else if (_VM.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)

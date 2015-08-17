@@ -484,6 +484,19 @@ namespace XenAPI
             return h._RestrictHealthCheck;
         }
 
+        /// <summary>
+        /// Vss feature is restricted only if the "restrict_vss" key exists and it is true
+        /// </summary>
+        private bool _RestrictVss
+        {
+            get { return BoolKey(license_params, "restrict_vss"); }
+        }
+
+        public static bool RestrictVss(Host h)
+        {
+            return h._RestrictVss;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
