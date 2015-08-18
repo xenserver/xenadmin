@@ -176,6 +176,14 @@ namespace XenAPI
         Response<string>
         session_slave_local_login_with_password(string _uname, string _pwd);
 
+        [XmlRpcMethod("session.create_from_db_file")]
+        Response<string>
+        session_create_from_db_file(string session, string _filename);
+
+        [XmlRpcMethod("Async.session.create_from_db_file")]
+        Response<string>
+        async_session_create_from_db_file(string session, string _filename);
+
         [XmlRpcMethod("session.local_logout")]
         Response<string>
         session_local_logout(string session);
@@ -719,14 +727,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.enable_ha")]
         Response<string>
         async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration);
-
-        [XmlRpcMethod("pool.enable_ha")]
-        Response<string>
-        pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
-
-        [XmlRpcMethod("Async.pool.enable_ha")]
-        Response<string>
-        async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
 
         [XmlRpcMethod("pool.disable_ha")]
         Response<string>
@@ -2155,6 +2155,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.import")]
         Response<string>
         async_vm_import(string session, string _url, string _sr, bool _full_restore, bool _force);
+
+        [XmlRpcMethod("VM.xenprep_start")]
+        Response<string>
+        vm_xenprep_start(string session, string _vm);
+
+        [XmlRpcMethod("Async.VM.xenprep_start")]
+        Response<string>
+        async_vm_xenprep_start(string session, string _vm);
 
         [XmlRpcMethod("VM.get_all")]
         Response<string []>
