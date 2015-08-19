@@ -402,6 +402,14 @@ namespace XenAPI
             get { return HasGpu && Connection.Cache.PGPUs.Any(pGpu => pGpu.HasVGpu); }
         }
 
+        /// <summary>
+        /// ssl_legacy is true if any host in the pool is in legacy mode
+        /// </summary>
+        public bool ssl_legacy
+        {
+            get { return Connection.Cache.Hosts.Any(h => h.ssl_legacy);  }
+        }
+
         #region Health Check settings
         public HealthCheckSettings HealthCheckSettings
         {

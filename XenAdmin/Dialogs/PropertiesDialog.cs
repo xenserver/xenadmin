@@ -80,6 +80,7 @@ namespace XenAdmin.Dialogs
         private PoolGpuEditPage PoolGpuEditPage;
         private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         private Page_CloudConfigParameters CloudConfigParametersPage;
+        private SecurityEditPage SecurityEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -213,6 +214,9 @@ namespace XenAdmin.Dialogs
                 {
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
+
+                if (is_pool_or_standalone && Helpers.DundeeOrGreater(xenObject.Connection))
+                    ShowTab(SecurityEditPage = new SecurityEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());

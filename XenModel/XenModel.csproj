@@ -96,6 +96,7 @@
     <Compile Include="Actions\Pool\CreatePoolAction.cs" />
     <Compile Include="Actions\Pool\PoolAction.cs" />
     <Compile Include="Actions\Pool\SetGpuPlacementPolicyAction.cs" />
+    <Compile Include="Actions\Pool\SetSslLegacyAction.cs" />
     <Compile Include="Actions\Pool_Patch\CheckDiskSpaceForPatchUploadAction.cs" />
     <Compile Include="Actions\Pool_Patch\CleanupDiskSpaceAction.cs" />
     <Compile Include="Actions\Pool_Patch\GetDiskSpaceRequirementsAction.cs" />
