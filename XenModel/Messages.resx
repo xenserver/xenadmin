@@ -1152,6 +1152,9 @@
   <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
     <value>Downloading WLB report {0}</value>
   </data>
+  <data name="ACTION_XENPREP_STARTED" xml:space="preserve">
+    <value>Started the upgrade process</value>
+  </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>A&amp;ctivate</value>
   </data>
@@ -7044,6 +7047,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_RESUME_ON_HOST" xml:space="preserve">
     <value>Resume on Ser&amp;ver</value>
   </data>
+  <data name="MAINWINDOW_RUN_XENPREP" xml:space="preserve">
+    <value>Upgrade VM</value>
+  </data>
   <data name="MAINWINDOW_SAVE_AND_RESTORE" xml:space="preserve">
     <value>Sa&amp;ve and Restore...</value>
   </data>
@@ -8321,8 +8327,15 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>You must shutdown and then restart the VM to finish the installation of the new DVD drive.
 Once the VM has restarted click the Install XenServer Tools menu item once again.</value>
   </data>
+  <data name="NEW_DVD_DRIVE_REBOOT_XENPREP" xml:space="preserve">
+    <value>You must shutdown and then restart the VM to finish the installation of the new DVD drive.
+Once the VM has restarted click the 'Upgrade VM to receive updates via Windows Update' link once again.</value>
+  </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
     <value>The VM you wish to install XenServer Tools onto has no DVD drive, would you like to create one?</value>
+  </data>
+  <data name="NEW_DVD_DRIVE_REQUIRED_XENPREP" xml:space="preserve">
+    <value>The VM you wish to upgrade has no DVD drive, would you like to create one?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
@@ -9911,6 +9924,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>Taking snapshots</value>
+  </data>
+  <data name="RUNXENPREP_TITLE" xml:space="preserve">
+    <value>Upgrading VM</value>
   </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>Running policy '{0}'</value>

@@ -1334,6 +1334,8 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
         }
 
+        
+
         private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)
         {
             if (vm != null && vm.Connection != null && vm.power_state == vm_power_state.Running)
@@ -1346,8 +1348,8 @@ namespace XenAdmin.TabPages
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
                     bool isReceivingUpdates = vm.auto_update_drivers;
 
-                    bool isXenPrepInProgress = false; //TODO in CP-13247  when XenPrep functions will be added
-                    bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO in CP-13247: remove &&false when XenPrep functions have been added
+                    bool isXenPrepInProgress = vm.IsXenPrepInProgress;
+                    bool canTurnOnAutoUpdates = !isReceivingUpdates && !isXenPrepInProgress;
 
                     bool isManagementAgentInstalled = vm.HasRDP; //HasRDP is the way to detect .Net/Management Agent
 
@@ -1404,6 +1406,14 @@ namespace XenAdmin.TabPages
                         if (canTurnOnAutoUpdates)
                         {
                             //implement launching XenPrep here (CP-13247)
+                            var runXenPrep = new ToolStripMenuItem();
+                            runXenPrep.Click += delegate
+                            {
+                                new RunXenPrepCommand(Program.MainWindow, vm).Execute();
+                            };
+                            s.AddEntryLink(string.Empty, Messages.VIRTUALIZATION_STATE_VM_UPGRADE_VM,
+                                new[] { runXenPrep },
+                                new RunXenPrepCommand(Program.MainWindow, vm));
                         }
 
                         //Row 4: Install Tools

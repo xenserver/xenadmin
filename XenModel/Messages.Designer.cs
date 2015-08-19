@@ -3166,6 +3166,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Started the upgrade process.
+        /// </summary>
+        public static string ACTION_XENPREP_STARTED {
+            get {
+                return ResourceManager.GetString("ACTION_XENPREP_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A&amp;ctivate.
         /// </summary>
         public static string ACTIVATE {
@@ -20268,6 +20277,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrade VM.
+        /// </summary>
+        public static string MAINWINDOW_RUN_XENPREP {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_RUN_XENPREP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sa&amp;ve and Restore....
         /// </summary>
         public static string MAINWINDOW_SAVE_AND_RESTORE {
@@ -22262,11 +22280,30 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must shutdown and then restart the VM to finish the installation of the new DVD drive.
+        ///Once the VM has restarted click the &apos;Upgrade VM to receive updates via Windows Update&apos; link once again..
+        /// </summary>
+        public static string NEW_DVD_DRIVE_REBOOT_XENPREP {
+            get {
+                return ResourceManager.GetString("NEW_DVD_DRIVE_REBOOT_XENPREP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM you wish to install XenServer Tools onto has no DVD drive, would you like to create one?.
         /// </summary>
         public static string NEW_DVD_DRIVE_REQUIRED {
             get {
                 return ResourceManager.GetString("NEW_DVD_DRIVE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM you wish to upgrade has no DVD drive, would you like to create one?.
+        /// </summary>
+        public static string NEW_DVD_DRIVE_REQUIRED_XENPREP {
+            get {
+                return ResourceManager.GetString("NEW_DVD_DRIVE_REQUIRED_XENPREP", resourceCulture);
             }
         }
         
@@ -28535,6 +28572,15 @@ namespace XenAdmin {
         public static string RUNNING_SNAPSHOTS {
             get {
                 return ResourceManager.GetString("RUNNING_SNAPSHOTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrading VM.
+        /// </summary>
+        public static string RUNXENPREP_TITLE {
+            get {
+                return ResourceManager.GetString("RUNXENPREP_TITLE", resourceCulture);
             }
         }
         

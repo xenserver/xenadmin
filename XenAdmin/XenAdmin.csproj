@@ -114,6 +114,7 @@
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
+    <Compile Include="Commands\RunXenPrepCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
     <Compile Include="Commands\PauseDockerContainerCommand.cs" />
@@ -256,6 +257,12 @@
     </Compile>
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WarningDialogs\RunXenPrepWarningDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WarningDialogs\RunXenPrepWarningDialog.Designer.cs">
+      <DependentUpon>RunXenPrepWarningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1580,6 +1587,16 @@
     <EmbeddedResource Include="Dialogs\VMDialogs\SelectVMsToSuspendDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectVMsToSuspendDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WarningDialogs\RunXenPrepWarningDialog.ja.resx">
+      <DependentUpon>RunXenPrepWarningDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WarningDialogs\RunXenPrepWarningDialog.resx">
+      <DependentUpon>RunXenPrepWarningDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WarningDialogs\RunXenPrepWarningDialog.zh-CN.resx">
+      <DependentUpon>RunXenPrepWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbEditScheduledTask.resx">
       <SubType>Designer</SubType>
