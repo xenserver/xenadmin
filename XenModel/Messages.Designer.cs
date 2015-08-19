@@ -22281,7 +22281,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to You must shutdown and then restart the VM to finish the installation of the new DVD drive.
-        ///Once the VM has restarted click the &apos;Upgrade VM to receive updates via Windows Update&apos; link once again..
+        ///Once the VM has restarted click the &apos;Upgrade VM to make it able to receive updates via Windows Update&apos; link once again..
         /// </summary>
         public static string NEW_DVD_DRIVE_REBOOT_XENPREP {
             get {
@@ -34294,7 +34294,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receiving Updates via Windows Update.
+        ///   Looks up a localized string similar to Able to receive updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES {
             get {
@@ -34303,7 +34303,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade VM to receive updates via Windows Update.
+        ///   Looks up a localized string similar to Upgrade VM to make it able to receive updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_UPGRADE_VM {
             get {
@@ -34312,7 +34312,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrading VM to receive updates via Windows Update....
+        ///   Looks up a localized string similar to Upgrading VM to make it able to receive updates via Windows Update....
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_UPGRADING_VM {
             get {

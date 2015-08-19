@@ -8329,7 +8329,7 @@ Once the VM has restarted click the Install XenServer Tools menu item once again
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_XENPREP" xml:space="preserve">
     <value>You must shutdown and then restart the VM to finish the installation of the new DVD drive.
-Once the VM has restarted click the 'Upgrade VM to receive updates via Windows Update' link once again.</value>
+Once the VM has restarted click the 'Upgrade VM to make it able to receive updates via Windows Update' link once again.</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
     <value>The VM you wish to install XenServer Tools onto has no DVD drive, would you like to create one?</value>
@@ -11864,13 +11864,13 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Management Agent not installed</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Receiving Updates via Windows Update</value>
+    <value>Able to receive updates via Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_UPGRADE_VM" xml:space="preserve">
-    <value>Upgrade VM to receive updates via Windows Update</value>
+    <value>Upgrade VM to make it able to receive updates via Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_UPGRADING_VM" xml:space="preserve">
-    <value>Upgrading VM to receive updates via Windows Update...</value>
+    <value>Upgrading VM to make it able to receive updates via Windows Update...</value>
   </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
     <value>Unknown (please wait)</value>
