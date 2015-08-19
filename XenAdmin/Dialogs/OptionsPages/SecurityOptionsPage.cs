@@ -98,7 +98,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public Image Image
         {
-            get { return Resources._005_SSLRelayConfig_h32bit_16; }
+            get { return Resources.padlock; }
         }
 
         #endregion

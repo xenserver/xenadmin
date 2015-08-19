@@ -80,6 +80,7 @@ namespace XenAdmin.Dialogs
         private PoolGpuEditPage PoolGpuEditPage;
         private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         private Page_CloudConfigParameters CloudConfigParametersPage;
+        private SecurityEditPage SecurityEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -213,6 +214,9 @@ namespace XenAdmin.Dialogs
                 {
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
+
+                if (is_pool_or_standalone && Helpers.DundeeOrGreater(xenObject.Connection))
+                    ShowTab(SecurityEditPage = new SecurityEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
@@ -416,6 +420,7 @@ namespace XenAdmin.Dialogs
         private List<AsyncAction> SaveSettings()
         {
             List<AsyncAction> actions = new List<AsyncAction>();
+            AsyncAction finalAction = null;
 
             foreach (IEditPage editPage in verticalTabs.Items)
             {
@@ -426,9 +431,14 @@ namespace XenAdmin.Dialogs
                 if (action == null)
                     continue;
 
-                actions.Add(action);
+                if (action is SetSslLegacyAction)
+                    finalAction = action;  // annoying special case: SetSslLegacyAction must be last because it will disrupt the connection and we may lose later actions
+                else
+                    actions.Add(action);
             }
 
+            if (finalAction != null)
+                actions.Add(finalAction);
             return actions;
         }
 

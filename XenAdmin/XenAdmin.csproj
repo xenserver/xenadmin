@@ -262,6 +262,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\SecurityEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
+      <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\VMEnlightenmentEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1671,6 +1677,9 @@
     <EmbeddedResource Include="SettingsPanels\EditNetworkPage.resx">
       <DependentUpon>EditNetworkPage.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SecurityEditPage.resx">
+      <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\StorageLinkEditPage.resx">
       <SubType>Designer</SubType>
@@ -4180,6 +4189,7 @@
     <None Include="Images\pool_up_32.png" />
     <None Include="Images\objects_16_textured.png" />
     <None Include="Images\PausedDC_16.png" />
+    <None Include="Images\padlock.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
@@ -5571,7 +5581,9 @@
     <EmbeddedResource Include="Properties\Resources.ja.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\BootOptionsEditPage.zh-CN.resx">
       <DependentUpon>BootOptionsEditPage.cs</DependentUpon>
     </EmbeddedResource>

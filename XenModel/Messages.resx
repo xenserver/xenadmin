@@ -10011,6 +10011,15 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SECURITY" xml:space="preserve">
     <value>Security</value>
   </data>
+  <data name="SECURITYEDITPAGE_RUBRIC_HOST" xml:space="preserve">
+    <value>Select the security protocols that can be used for communicating with this server.</value>
+  </data>
+  <data name="SECURITYEDITPAGE_SUBTEXT_SSL" xml:space="preserve">
+    <value>SSL &amp; TLS</value>
+  </data>
+  <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
+    <value>TLS 1.2 only</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>Security Checks</value>
   </data>
@@ -10109,6 +10118,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SETTING_SECURITY_SETTINGS" xml:space="preserve">
+    <value>Setting security settings</value>
   </data>
   <data name="SETTING_VM_PROPERTIES" xml:space="preserve">
     <value>Setting VM properties</value>
