@@ -31,11 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Web.Script.Serialization;
+using XenAdmin;
+using XenAdmin.Network;
 
 
 namespace XenServerHealthCheck
@@ -49,8 +50,9 @@ namespace XenServerHealthCheck
         private int verbosityLevel;
 
         private string uploadToken;
+        private IWebProxy proxy;
 
-        public XenServerHealthCheckUpload(string token, int verbosity, string uploadUrl)
+        public XenServerHealthCheckUpload(string token, int verbosity, string uploadUrl, IXenConnection connection)
         {
             uploadToken = token;
             verbosityLevel = verbosity;
@@ -60,6 +62,7 @@ namespace XenServerHealthCheck
             {
                 UPLOAD_URL = uploadUrl;
             }
+            proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection);
         }
 
         // Request an upload and fetch the uploading id from CIS.
@@ -78,6 +81,7 @@ namespace XenServerHealthCheck
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ServicePoint.Expect100Continue = false;
+            request.Proxy = proxy;
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
@@ -124,6 +128,7 @@ namespace XenServerHealthCheck
             req.Method = "POST";
             req.ContentType = "application/octet-stream";
             req.Headers.Add("Authorization", "BT " + uploadToken);
+            req.Proxy = proxy;
 
             using (Stream destination = req.GetRequestStream())
             {
