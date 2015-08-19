@@ -11848,7 +11848,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Management Agent not installed</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Receiving Updates via Windows Update</value>
+    <value>Able to receive Updates via Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_UPGRADE_VM" xml:space="preserve">
     <value>Upgrade VM to receive updates via Windows Update</value>
