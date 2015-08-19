@@ -348,9 +348,6 @@
   <data name="authenticationGroupBox.Text" xml:space="preserve">
     <value>Authentication with Citrix Insight Services</value>
   </data>
-  <data name="authenticationGroupBox.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;authenticationGroupBox.Name" xml:space="preserve">
     <value>authenticationGroupBox</value>
   </data>
@@ -611,9 +608,6 @@
   </data>
   <data name="uploadCheckBox.Text" xml:space="preserve">
     <value>&amp;Upload the status report to the Citrix Insight Services</value>
-  </data>
-  <data name="uploadCheckBox.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;uploadCheckBox.Name" xml:space="preserve">
     <value>uploadCheckBox</value>
