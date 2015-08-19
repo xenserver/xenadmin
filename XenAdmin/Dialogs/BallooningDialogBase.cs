@@ -62,7 +62,7 @@ namespace XenAdmin.Dialogs
             vmList = new List<VM>(1);
             vmList.Add(vm);
 
-            origStaticMax = vm.memory_static_max;
+            origStaticMax = (long)vm.memory_static_max;
 
             this.advanced = advanced;
         }
@@ -82,9 +82,9 @@ namespace XenAdmin.Dialogs
         {
             memoryControls.UnfocusSpinners();
             if (ConfirmAndChange(this, vmList,
-                vmList[0].has_ballooning ? memoryControls.dynamic_min : memoryControls.static_max,  // dynamic_min and _max should stay equal to static_max for VMs without ballooning
-                vmList[0].has_ballooning ? memoryControls.dynamic_max : memoryControls.static_max,
-                memoryControls.static_max, origStaticMax, advanced))
+                vmList[0].has_ballooning ? (long)memoryControls.dynamic_min : (long)memoryControls.static_max,  // dynamic_min and _max should stay equal to static_max for VMs without ballooning
+                vmList[0].has_ballooning ? (long)memoryControls.dynamic_max : (long)memoryControls.static_max,
+                (long)memoryControls.static_max, origStaticMax, advanced))
             {
                 Close();
             }
@@ -134,7 +134,7 @@ namespace XenAdmin.Dialogs
                 ChangeMemorySettingsAction action = new ChangeMemorySettingsAction(
                     vm,
                     string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name),
-                    vm.memory_static_min, dynamic_min, dynamic_max, static_max,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm, suppressHistory);
+                    (long)vm.memory_static_min, dynamic_min, dynamic_max, static_max,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm, suppressHistory);
                 actions.Add(action);
             }
 

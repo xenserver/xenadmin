@@ -210,7 +210,7 @@ namespace XenAdmin.Controls.Ballooning
             return path;
         }
 
-        protected static void DrawGrid(Graphics g, Rectangle barArea, double bytesPerPixel, long max)
+        protected static void DrawGrid(Graphics g, Rectangle barArea, double bytesPerPixel, double max)
         {
             const int min_gap = 40;  // min gap between consecutive labels (which are on alternate ticks)
             const int line_height = 12;
@@ -220,7 +220,7 @@ namespace XenAdmin.Controls.Ballooning
             int text_bottom = line_top - 2;
 
             // Find the size of the longest label
-            string label = string.Format(Messages.VAL_MB, max / Util.BINARY_MEGA);
+            string label = string.Format(Messages.VAL_MB, Util.ToMB(max, RoundingBehaviour.Nearest));
             Size labelSize = Drawing.MeasureText(g, label, Program.DefaultFont, TextFormatFlags.NoPadding);
             int longest = labelSize.Width;
             int text_top = text_bottom - labelSize.Height;
@@ -243,11 +243,11 @@ namespace XenAdmin.Controls.Ballooning
                     // Label
                     if (withLabel)
                     {
-                        label = Util.MemorySizeStringSuitableUnits(x);
+                        label = Util.MemorySizeStringSuitableUnits(x, false);
                         Size size = Drawing.MeasureText(g, label, Program.DefaultFont);
                         Rectangle rect = new Rectangle(new Point(pos - size.Width/2, text_top), size);
 
-                        if (LabelCanBeShown(max, label, x))
+                        if (LabelShouldBeShown(max, label, x))
                         {
                             Drawing.DrawText(g, label, Program.DefaultFont, rect, BallooningColors.Grid, Color.Transparent);
                         }
@@ -266,7 +266,7 @@ namespace XenAdmin.Controls.Ballooning
         /// <param name="label"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        private static bool LabelCanBeShown(long max, string label, long x)
+        private static bool LabelShouldBeShown(double max, string label, long x)
         {
             return max <= Util.BINARY_GIGA  || (x % (0.5 * Util.BINARY_GIGA)) == 0;
         }

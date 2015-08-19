@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards
                 NextStep();
             }
 
-            origStaticMax = vms[0].memory_static_max;
+            origStaticMax = (long)vms[0].memory_static_max;
             has_ballooning = vms[0].has_ballooning;
         }
 
@@ -89,10 +89,10 @@ namespace XenAdmin.Wizards
         {
             xenTabPageSettings.UnfocusSpinners();
             bool canCloseWizard = BallooningDialogBase.ConfirmAndChange(this, xenTabPageVMs.CheckedVMs,
-                                                         has_ballooning ? xenTabPageSettings.dynamic_min : xenTabPageSettings.static_max,
+                                                         has_ballooning ? (long)xenTabPageSettings.dynamic_min : (long)xenTabPageSettings.static_max,
                                                          // dynamic_min and _max should stay equal to static_max for VMs without ballooning
-                                                         has_ballooning ? xenTabPageSettings.dynamic_max : xenTabPageSettings.static_max,
-                                                         xenTabPageSettings.static_max, origStaticMax, xenTabPageSettings.AdvancedMode);
+                                                         has_ballooning ? (long)xenTabPageSettings.dynamic_max : (long)xenTabPageSettings.static_max,
+                                                         (long)xenTabPageSettings.static_max, origStaticMax, xenTabPageSettings.AdvancedMode);
             if (canCloseWizard)
                 base.FinishWizard();
             else

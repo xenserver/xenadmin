@@ -181,7 +181,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;NameLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="iconBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 4</value>
@@ -208,40 +208,43 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;iconBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="Units.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="SpinnerUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="Units.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="SpinnerUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="Units.Items" xml:space="preserve">
-    <value>GB</value>
+  <data name="SpinnerUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Units.Items1" xml:space="preserve">
-    <value>MB</value>
+  <data name="SpinnerUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 9</value>
   </data>
-  <data name="Units.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 5</value>
+  <data name="SpinnerUnits.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 14</value>
   </data>
-  <data name="Units.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+  <data name="SpinnerUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 14</value>
   </data>
-  <data name="Units.TabIndex" type="System.Int32, mscorlib">
+  <data name="SpinnerUnits.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;Units.Name" xml:space="preserve">
-    <value>Units</value>
+  <data name="SpinnerUnits.Text" xml:space="preserve">
+    <value>GB</value>
   </data>
-  <data name="&gt;&gt;Units.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SpinnerUnits.Name" xml:space="preserve">
+    <value>SpinnerUnits</value>
   </data>
-  <data name="&gt;&gt;Units.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SpinnerUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SpinnerUnits.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Units.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;SpinnerUnits.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

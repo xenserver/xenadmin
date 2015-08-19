@@ -92,19 +92,19 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (memoryMode == 1)
             {
-                spinnerDynMin.Initialize(Messages.MEMORY_COLON, null, Template.memory_static_max);
+                spinnerDynMin.Initialize(Messages.MEMORY_COLON, null, Template.memory_static_max, Template.memory_static_max);
                 spinnerDynMax.Visible = spinnerStatMax.Visible = false;
             }
             else
             {
                 spinnerDynMax.Visible = true;
-                spinnerDynMin.Initialize(Messages.DYNAMIC_MIN_COLON, null, Template.memory_dynamic_min);
+                spinnerDynMin.Initialize(Messages.DYNAMIC_MIN_COLON, null, Template.memory_dynamic_min, Template.memory_static_max);
                 FreeSpinnerLimits();  // same as CA-33831
-                spinnerDynMax.Initialize(Messages.DYNAMIC_MAX_COLON, null, Template.memory_dynamic_max);
+                spinnerDynMax.Initialize(Messages.DYNAMIC_MAX_COLON, null, Template.memory_dynamic_max, Template.memory_static_max);
                 if (memoryMode == 3)
                 {
                     FreeSpinnerLimits();
-                    spinnerStatMax.Initialize(Messages.STATIC_MAX_COLON, null, Template.memory_static_max);
+                    spinnerStatMax.Initialize(Messages.STATIC_MAX_COLON, null, Template.memory_static_max, Template.memory_static_max);
                 }
                 else
                     spinnerStatMax.Visible = false;
@@ -128,7 +128,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                long msm = Template.memory_static_max;
+                long msm = (long)Template.memory_static_max;
                 long mma = Template.MaxMemAllowed;
                 return (msm > mma ? msm : mma);
             }
@@ -145,7 +145,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void SetSpinnerLimits()
         {
             long maxMemAllowed = MaxMemAllowed;
-            long min = Template.memory_static_min;
+            double min = Template.memory_static_min;
             if (memoryMode == 1)
             {
                 spinnerDynMin.SetRange(min, maxMemAllowed);
@@ -154,7 +154,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             long min2 = (long)((double)SelectedMemoryStaticMax * memoryRatio);
             if (min < min2)
                 min = min2;
-            long max = SelectedMemoryDynamicMax;
+            double max = SelectedMemoryDynamicMax;
             if (max < min)
                 max = min;
             spinnerDynMin.SetRange(min, max);
@@ -170,7 +170,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             spinnerStatMax.Enabled = false;
         }
 
-        public long SelectedMemoryDynamicMin
+        public double SelectedMemoryDynamicMin
         {
             get
             {
@@ -178,7 +178,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        public long SelectedMemoryDynamicMax
+        public double SelectedMemoryDynamicMax
         {
             get
             {
@@ -186,7 +186,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        public long SelectedMemoryStaticMax
+        public double SelectedMemoryStaticMax
         {
             get
             {

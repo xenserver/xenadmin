@@ -32,8 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -42,99 +42,117 @@ namespace XenAdmin.Controls.Ballooning
     public partial class MemorySpinner : UserControl
     {
         public event EventHandler SpinnerValueChanged;
-        private decimal spinnerValue;
+        private double valueMB;
         private string previousUnitsValue;
+        private bool canModifyValueMB = false;
 
         public MemorySpinner()
         {
             InitializeComponent();
-            Units.SelectedItem = "GB";
-            previousUnitsValue = Units.SelectedItem.ToString();
+            previousUnitsValue = "GB";
         }
 
-        public void Initialize(string name, Image icon, long amount)
-        {
-            Initialize(name, icon, amount, RoundingBehaviour.Nearest);
+        public void Initialize(string name, Image icon, double amount, double static_max)
+        {   
+            if(static_max <= Util.BINARY_GIGA)
+            {
+                Units = "MB";              
+            }
+            else
+            {
+                Units = "GB";
+            }
+            previousUnitsValue = Units;
+            Initialize(name, icon, amount, RoundingBehaviour.None);
         }
 
-        public void Initialize(string name, Image icon, long amount, RoundingBehaviour rounding)
-        {
+        public void Initialize(string name, Image icon, double amount, RoundingBehaviour rounding)
+        {           
             NameLabel.Text = name;
             if (icon != null && iconBox.Image == null)  // without this line, setting iconBox.Image causes another repaint, hence an infinite loop
                 iconBox.Image = icon;
-            SpinnerValue = Util.ToMB(amount, rounding);
-            SpinnerValueDisplay = amount;
+            ValueMB = Util.ToMB(amount, rounding);
+            setSpinnerValueDisplay(amount);
+            canModifyValueMB = true;
+        }
+
+        public string Units
+        {
+            get
+            {
+                return SpinnerUnits.Text;
+            }
+            set
+            {
+                SpinnerUnits.Text = value;
+            }
         }
 
         [Browsable(false)]
-        public long Value
+        public double Value
         {
             get
             {
-                return (long)SpinnerValue * Util.BINARY_MEGA;
+                return ValueMB * Util.BINARY_MEGA;
             }
         }
 
-        decimal SpinnerValue
+        double ValueMB
         {
             get
             {
-                return spinnerValue;
+                return valueMB;
             }
 
             set
             {
-                spinnerValue = value;
+                valueMB = value;
             }
         }
 
-
-        private decimal SpinnerValueDisplay
+        private void setSpinnerValueDisplay(double value)
         {
-            get
+            if (Units == "GB")
             {
-                return Spinner.Value;
+                Spinner.Value = (decimal)Util.ToGB(value, 1, RoundingBehaviour.None);
             }
-
-            set
+            else
             {
-                SpinnerValue = Util.ToMB((long)value, RoundingBehaviour.Nearest);
-                if(Units.SelectedItem.ToString() == "GB")
-                {
-                    Spinner.Value = Util.ToGB((long)value, 1);
-                }
-                else
-                {
-                    Spinner.Value = Util.ToMB((long)value, RoundingBehaviour.Nearest);
-                }
+                Spinner.Value = (long)Util.ToMB(value, RoundingBehaviour.None);
             }
         }
 
-        public static void CalcMBRanges(long minBytes, long maxBytes, out decimal minMB, out decimal maxMB)
+        public static void CalcMBRanges(double minBytes, double maxBytes, out double minMB, out double maxMB)
         {
             // Round ranges inwards to avoid bugs like CA-34487 and CA-34996
             minMB = Util.ToMB(minBytes, RoundingBehaviour.Up);
             maxMB = Util.ToMB(maxBytes, RoundingBehaviour.Down);
             if (minMB > maxMB)  // just in case...
             {
-                minMB = Util.ToMB(minBytes);
-                maxMB = Util.ToMB(maxBytes);
+                minMB = Util.ToMB(minBytes, RoundingBehaviour.None);
+                maxMB = Util.ToMB(maxBytes, RoundingBehaviour.None);
             }
         }
 
-        public static void CalcGBRanges(long minBytes, long maxBytes, out decimal minGB, out decimal maxGB)
+        public static void CalcGBRanges(double minBytes, double maxBytes, out double minGB, out double maxGB)
         {
-            minGB = Util.ToGB(minBytes, 1);
-            maxGB = Util.ToGB(maxBytes, 1);
+            // Round ranges inwards to avoid bugs like CA-34487 and CA-34996
+            minGB = Util.ToGB(minBytes, 1, RoundingBehaviour.Up);
+            maxGB = Util.ToGB(maxBytes, 1, RoundingBehaviour.Down);
+            if (minGB > maxGB)  // just in case...
+            {
+                minGB = Util.ToGB(minBytes, 1, RoundingBehaviour.None);
+                maxGB = Util.ToGB(maxBytes, 1, RoundingBehaviour.None);
+            }
         }
 
-        public void SetRange(long min, long max)
+        public void SetRange(double min, double max)
         {
             if (min > max)
                 return;  // Can happen when we are adjusting several simultaneously: can cause a stack overflow
-            
-            decimal spinnerMin, spinnerMax;
-            if (Units.SelectedItem.ToString() == "MB")
+
+            double spinnerMin, spinnerMax;
+            if (Units == "MB")
             {                
                 CalcMBRanges(min, max, out spinnerMin, out spinnerMax);
             }
@@ -142,35 +160,54 @@ namespace XenAdmin.Controls.Ballooning
             {
                 CalcGBRanges(min, max, out spinnerMin, out spinnerMax);               
             }
-            Spinner.Minimum = spinnerMin;
-            Spinner.Maximum = spinnerMax;
+            Spinner.Minimum = (decimal)spinnerMin;
+            Spinner.Maximum = (decimal)spinnerMax;
         }
 
         [Browsable(false)]
-        public int Increment
+        public double Increment
         {
+            get
+            {
+               return (double)Spinner.Increment;
+            }
             set
             {
-                if (Units.SelectedItem.ToString() == "MB")
+                if (Units == "MB")
                 {
-                    Spinner.Increment = value;
+                    Spinner.Increment = (decimal)value / Util.BINARY_MEGA;                    
                 }
                 else
                 {
-                    Spinner.Increment = 1;
+                    // When the units are GB, we simply want the numbers to increase by 1 if the spinner value is greater than 10 GB
+                    // and by 0.1 if smaller than 10 GB, this being the reason we ignore the given value.
+                    if (valueMB * Util.BINARY_MEGA < 10 * Util.BINARY_GIGA)
+                    {
+                        Spinner.Increment = 0.1M;
+                    }
+                    else
+                    {
+                        Spinner.Increment = 1; 
+                    }
                 }
             }
         }
 
         private void Spinner_ValueChanged(object sender, EventArgs e)
         {
-            if (Units.SelectedItem.ToString() == "GB")
+            // We do not want to modify the ValueMB if the user does not modify anything in the Spinner.Value. 
+            // When the Memory Settings dialog si opened and intiliazed and when the user changes the units, we do not 
+            // want any changes to be applied to ValueMB.
+            if (!canModifyValueMB)
+              return;
+
+            if (Units == "GB")
             {
-                SpinnerValue = Spinner.Value * Util.BINARY_KILO;
+                ValueMB = (double)Spinner.Value * Util.BINARY_KILO;
             }
             else
             {
-                SpinnerValue = Spinner.Value;
+                ValueMB = (double)Spinner.Value;
             }
 
             if (SpinnerValueChanged != null)
@@ -183,30 +220,21 @@ namespace XenAdmin.Controls.Ballooning
                 ((Control)sender).Text = ((NumericUpDown)sender).Value.ToString();
         }
 
-        private void Units_SelectedIndexChanged(object sender, EventArgs e)
+        private void SpinnerUnits_TextChanged(object sender, EventArgs e)
         {
-            // Check if the user chose a different unit. If the chosen unit is not different form the previous, then nothing changes.
-            if (Units.SelectedItem.ToString() != previousUnitsValue)
+            if (Units == previousUnitsValue)
+                return;
+
+            if (Units == "GB")
             {
-                decimal min = Spinner.Minimum;
-                decimal max = Spinner.Maximum;
-                decimal val = Spinner.Value;
-                if (Units.SelectedItem.ToString() == "GB")
-                {
-                    // In this situation we are changing from MB to GB. In order for the new value to be between the spinner's minimum
-                    // and maximum, we need to set the minimum. The minimum's value will be now in GB, instead of MB.
-                    Spinner.Minimum = min / Util.BINARY_KILO;
-                    SpinnerValueDisplay = val * Util.BINARY_MEGA;
-                }
-                else
-                {
-                    // In this situation we are changing from GB to MB. In order for the new value to be between the spinner's minimum 
-                    // and maximum, we need to set the maximum. The maximum's value will be now in MB, instead of GB.
-                    Spinner.Maximum = max * Util.BINARY_KILO;                    
-                    SpinnerValueDisplay = val * Util.BINARY_GIGA;
-                }
-                previousUnitsValue = Units.SelectedItem.ToString();
+                SetRange((double)Spinner.Minimum * Util.BINARY_MEGA, (double)Spinner.Maximum * Util.BINARY_MEGA);
+                Spinner.DecimalPlaces = 1;
             }
-        }
+            else
+            {
+                SetRange((double)Spinner.Minimum * Util.BINARY_GIGA, (double)Spinner.Maximum * Util.BINARY_GIGA);
+                Spinner.DecimalPlaces = 0;
+            }
+        }      
     }
 }

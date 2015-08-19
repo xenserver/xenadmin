@@ -53,26 +53,34 @@ namespace XenAdmin.Controls.Ballooning
 
         // Variables passed in
         private long memoryUsed;
-        private long static_min, static_max, dynamic_min, dynamic_max, dynamic_min_orig, dynamic_max_orig;
-        public long dynamic_min_lowlimit, dynamic_min_highlimit, dynamic_max_lowlimit, dynamic_max_highlimit;
+        private double static_min, static_max, dynamic_min, dynamic_max, dynamic_min_orig, dynamic_max_orig;
+        public double dynamic_min_lowlimit, dynamic_min_highlimit, dynamic_max_lowlimit, dynamic_max_highlimit;
         private bool has_ballooning;
         private bool allowEdit;
         private bool multiple;
 
-        // The increment in which the user can move the draggers, in MB
-        long increment;
-        public long Increment
+        // The increment in which the user can move the draggers, in bytes
+        double incrementMin;
+        double incrementMax;
+
+        public double IncrementMin
         {
-            get { return increment; }
-            set { increment = value; }
+            get { return incrementMin; }
+            set { incrementMin = value; }
         }
 
-        public long Dynamic_min
+        public double IncrementMax
+        {
+            get { return incrementMax; }
+            set { incrementMax = value; }
+        }
+
+        public double Dynamic_min
         {
             get { return dynamic_min; }
         }
 
-        public long Dynamic_max
+        public double Dynamic_max
         {
             get { return dynamic_max; }
         }
@@ -82,19 +90,33 @@ namespace XenAdmin.Controls.Ballooning
             get { return Dynamic_min == Dynamic_max;  }
         }
 
-        public void SetRanges(long dynamic_min_lowlimit, long dynamic_min_highlimit, long dynamic_max_lowlimit, long dynamic_max_highlimit)
+        public void SetRanges(double dynamic_min_lowlimit, double dynamic_min_highlimit, double dynamic_max_lowlimit, double dynamic_max_highlimit, string units)
         {
-            // Round to nearest MB inwards to agree with MemorySpinner and avoid bugs like CA-34996.
-            decimal lowMB, highMB;
-            MemorySpinner.CalcMBRanges(dynamic_min_lowlimit, dynamic_min_highlimit, out lowMB, out highMB);
-            this.dynamic_min_lowlimit = (long)lowMB * Util.BINARY_MEGA;
-            this.dynamic_min_highlimit = (long)highMB * Util.BINARY_MEGA;
-            MemorySpinner.CalcMBRanges(dynamic_max_lowlimit, dynamic_max_highlimit, out lowMB, out highMB);
-            this.dynamic_max_lowlimit = (long)lowMB * Util.BINARY_MEGA;
-            this.dynamic_max_highlimit = (long)highMB * Util.BINARY_MEGA;
+            if(units == "MB")
+            {
+                // Round to nearest MB inwards to agree with MemorySpinner and avoid bugs like CA-34996.
+                double lowMB, highMB;
+                MemorySpinner.CalcMBRanges(dynamic_min_lowlimit, dynamic_min_highlimit, out lowMB, out highMB);
+                this.dynamic_min_lowlimit = lowMB * Util.BINARY_MEGA;
+                this.dynamic_min_highlimit = highMB * Util.BINARY_MEGA;
+                MemorySpinner.CalcMBRanges(dynamic_max_lowlimit, dynamic_max_highlimit, out lowMB, out highMB);
+                this.dynamic_max_lowlimit = lowMB * Util.BINARY_MEGA;
+                this.dynamic_max_highlimit = highMB * Util.BINARY_MEGA;
+            }
+            else
+            {
+                // Round to nearest GB inwards to agree with MemorySpinner and avoid bugs like CA-34996.
+                double lowGB, highGB;
+                MemorySpinner.CalcGBRanges(dynamic_min_lowlimit, dynamic_min_highlimit, out lowGB, out highGB);
+                this.dynamic_min_lowlimit = lowGB * Util.BINARY_GIGA;
+                this.dynamic_min_highlimit = highGB * Util.BINARY_GIGA;
+                MemorySpinner.CalcGBRanges(dynamic_max_lowlimit, dynamic_max_highlimit, out lowGB, out highGB);                
+                this.dynamic_max_lowlimit = lowGB * Util.BINARY_GIGA;
+                this.dynamic_max_highlimit = highGB * Util.BINARY_GIGA;
+            }          
         }
 
-        private long SliderMinLimit
+        private double SliderMinLimit
         {
             get
             {
@@ -103,7 +125,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        private long SliderMaxLimit
+        private double SliderMaxLimit
         {
             get
             {
@@ -133,7 +155,7 @@ namespace XenAdmin.Controls.Ballooning
             this.allowEdit = allowEdit;
         }
 
-        public void ChangeSettings(long static_min, long dynamic_min, long dynamic_max, long static_max)
+        public void ChangeSettings(double static_min, double dynamic_min, double dynamic_max, double static_max)
         {
             this.static_min = static_min;
 
@@ -150,7 +172,7 @@ namespace XenAdmin.Controls.Ballooning
                 this.dynamic_max = dynamic_max_orig = dynamic_max;
         }
 
-        private void SetMemory(Slider slider, long bytes)
+        private void SetMemory(Slider slider, double bytes)
         {
             bool dragged = false;
             if (slider == Slider.MIN && dynamic_min != bytes)
@@ -192,7 +214,7 @@ namespace XenAdmin.Controls.Ballooning
             if (left_width > barArea.Width)  // Happens if the user is reducing static_max to below current memory usage.
                 left_width = barArea.Width;  // I wanted to add a right-arrow to the bytesString in that case too, but the glyph isn't present in the font: and too much work to add an image.
             Rectangle rect = new Rectangle(barArea.Left, barArea.Top, left_width, barArea.Height);
-            string bytesString = Util.MemorySizeStringSuitableUnits(memoryUsed);
+            string bytesString = Util.MemorySizeStringSuitableUnits(memoryUsed, false);
             string toolTip = string.Format(multiple ? Messages.CURRENT_MEMORY_USAGE_MULTIPLE : Messages.CURRENT_MEMORY_USAGE, bytesString);
             DrawToTarget(g, barArea, rect, BallooningColors.VMShinyBar_Used, bytesString, BallooningColors.VMShinyBar_Text, HorizontalAlignment.Right, toolTip);
 
@@ -215,26 +237,36 @@ namespace XenAdmin.Controls.Ballooning
                 mouseLocation = e.Location;
                 if (activeSlider != Slider.NONE)
                 {
-                    long min = SliderMinLimit;
-                    long max = SliderMaxLimit;
-                    long orig = (activeSlider == Slider.MIN ? dynamic_min_orig : dynamic_max_orig);
-                    long posBytes = (long)((mouseLocation.X - barRect.Left) * BytesPerPixel);
+                    double min = SliderMinLimit;
+                    double max = SliderMaxLimit;
+                    double orig = (activeSlider == Slider.MIN ? dynamic_min_orig : dynamic_max_orig);
+                    double posBytes =(mouseLocation.X - barRect.Left) * BytesPerPixel;
                     if (posBytes <= min)
                         posBytes = min;
                     else if (posBytes >= max)
                         posBytes = max;
                     else
                     {
-                        long incrBytes = Increment * Util.BINARY_MEGA;
+                        double incrBytes;
+                        if(activeSlider == Slider.MIN)
+                        {
+                            incrBytes = IncrementMin;
+                        }
+                        else
+                        {
+                            incrBytes = IncrementMax;
+                        }
 
                         // round to nearest incrBytes
-                        long roundedBytes = (posBytes + incrBytes / 2) / incrBytes * incrBytes;
+                        // We need to do a rounding because the result should always have only 1 dp. If it does not have
+                        // 1 dp it is not because of the formula, but because of the way the computer does the calculation.
+                        double roundedBytes = Math.Round((int)((posBytes + incrBytes / 2) / incrBytes) * incrBytes, 1);
 
                         // We also allow the original value, even if it's not a multiple of
                         // incrBytes. That's so that we don't jump as soon as we click it
                         // (also so that we can get back to the original value if we want to).
-                        long distRound = (posBytes - roundedBytes > 0 ? posBytes - roundedBytes : roundedBytes - posBytes);
-                        long distOrig = (posBytes - orig > 0 ? posBytes - orig : orig - posBytes);
+                        double distRound = (posBytes - roundedBytes > 0 ? posBytes - roundedBytes : roundedBytes - posBytes);
+                        double distOrig = (posBytes - orig > 0 ? posBytes - orig : orig - posBytes);
                         if (distRound >= distOrig)
                             roundedBytes = orig;
 
@@ -303,8 +335,8 @@ namespace XenAdmin.Controls.Ballooning
 
             Rectangle barArea = barRect;
             const int Height = 10;
-            int min = barArea.Left + (int)((double)SliderMinLimit / BytesPerPixel);
-            int max = barArea.Left + (int)((double)SliderMaxLimit / BytesPerPixel);
+            int min = barArea.Left + (int)(SliderMinLimit / BytesPerPixel);
+            int max = barArea.Left + (int)(SliderMaxLimit / BytesPerPixel);
 
             using (Brush brush = new SolidBrush(BallooningColors.SliderLimits))
             {
@@ -312,7 +344,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        private void DrawSliders(Graphics g, long min, long max)
+        private void DrawSliders(Graphics g, double min, double max)
         {
             Rectangle barArea = barRect;
             Image min_image, max_image;
@@ -328,8 +360,8 @@ namespace XenAdmin.Controls.Ballooning
             }
 
             // Calculate where to draw the sliders
-            Point min_pt = new Point(barArea.Left + (int)((double)min / BytesPerPixel) - min_image.Width + (allowEdit ? 0 : 1), barArea.Bottom);
-            Point max_pt = new Point(barArea.Left + (int)((double)max / BytesPerPixel) - (allowEdit ? 0 : 1), barArea.Bottom);
+            Point min_pt = new Point(barArea.Left + (int)(min / BytesPerPixel) - min_image.Width + (allowEdit ? 0 : 1), barArea.Bottom);
+            Point max_pt = new Point(barArea.Left + (int)(max / BytesPerPixel) - (allowEdit ? 0 : 1), barArea.Bottom);
             min_slider_rect = new Rectangle(min_pt, min_image.Size);
             max_slider_rect = new Rectangle(max_pt, max_image.Size);
 

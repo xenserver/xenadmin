@@ -54,14 +54,25 @@ namespace XenAdmin.Controls.Ballooning
             // 
             // memorySpinnerDynMin
             // 
+            this.memorySpinnerDynMin.Increment = 1D;
             resources.ApplyResources(this.memorySpinnerDynMin, "memorySpinnerDynMin");
             this.memorySpinnerDynMin.Name = "memorySpinnerDynMin";
+            this.memorySpinnerDynMin.Units = "GB";
             this.memorySpinnerDynMin.SpinnerValueChanged += new System.EventHandler(this.DynamicSpinners_ValueChanged);
+            // 
+            // memorySpinnerDynMax
+            // 
+            this.memorySpinnerDynMax.Increment = 1D;
+            resources.ApplyResources(this.memorySpinnerDynMax, "memorySpinnerDynMax");
+            this.memorySpinnerDynMax.Name = "memorySpinnerDynMax";
+            this.memorySpinnerDynMax.Units = "GB";
+            this.memorySpinnerDynMax.SpinnerValueChanged += new System.EventHandler(this.DynamicSpinners_ValueChanged);
             // 
             // vmShinyBar
             // 
             resources.ApplyResources(this.vmShinyBar, "vmShinyBar");
-            this.vmShinyBar.Increment = ((long)(128));
+            this.vmShinyBar.IncrementMax = 0D;
+            this.vmShinyBar.IncrementMin = 0D;
             this.vmShinyBar.Name = "vmShinyBar";
             this.vmShinyBar.SliderDragged += new System.EventHandler(this.vmShinyBar_SliderDragged);
             // 
@@ -109,14 +120,11 @@ namespace XenAdmin.Controls.Ballooning
             // 
             // memorySpinnerFixed
             // 
+            this.memorySpinnerFixed.Increment = 1D;
             resources.ApplyResources(this.memorySpinnerFixed, "memorySpinnerFixed");
             this.memorySpinnerFixed.Name = "memorySpinnerFixed";
-            // 
-            // memorySpinnerDynMax
-            // 
-            resources.ApplyResources(this.memorySpinnerDynMax, "memorySpinnerDynMax");
-            this.memorySpinnerDynMax.Name = "memorySpinnerDynMax";
-            this.memorySpinnerDynMax.SpinnerValueChanged += new System.EventHandler(this.DynamicSpinners_ValueChanged);
+            this.memorySpinnerFixed.Units = "GB";
+            this.memorySpinnerFixed.SpinnerValueChanged += new System.EventHandler(this.FixedSpinner_ValueChanged);
             // 
             // VMMemoryControlsBasic
             // 

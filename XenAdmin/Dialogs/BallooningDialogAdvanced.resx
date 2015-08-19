@@ -157,7 +157,7 @@
     <value>6, 6, 6, 6</value>
   </data>
   <data name="memoryControlsAdvanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 86</value>
+    <value>267, 86</value>
   </data>
   <data name="memoryControlsAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -181,7 +181,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 187</value>
+    <value>135, 187</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -211,7 +211,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 187</value>
+    <value>216, 187</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -244,7 +244,7 @@
     <value>12, 51</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 115</value>
+    <value>279, 115</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -268,7 +268,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>298, 222</value>
+    <value>303, 222</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>

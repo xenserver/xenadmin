@@ -291,7 +291,7 @@ namespace XenAdmin.Actions.VMActions
             if (Helpers.MidnightRideOrGreater(VM.Connection))
             {
                 if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
-                    XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, MemoryStaticMax, MemoryDynamicMin, MemoryDynamicMax);
+                    XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, (long)Template.memory_static_min, MemoryStaticMax, MemoryDynamicMin, MemoryDynamicMax);
             }
             else
             {

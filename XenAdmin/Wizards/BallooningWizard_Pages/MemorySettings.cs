@@ -90,17 +90,17 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
             memoryControls.Visible = true;
         }
 
-        public long static_max
+        public double static_max
         {
             get { return memoryControls.static_max; }
         }
 
-        public long dynamic_min
+        public double dynamic_min
         {
             get { return memoryControls.dynamic_min; }
         }
 
-        public long dynamic_max
+        public double dynamic_max
         {
             get { return memoryControls.dynamic_max; }
         }

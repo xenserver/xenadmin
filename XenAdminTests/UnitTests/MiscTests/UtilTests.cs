@@ -131,13 +131,6 @@ namespace XenAdminTests.UnitTests.MiscTests
         }
 
         [Test]
-        public void TestMemorySizeStringWithoutUnits()
-        {
-            foreach (var pair in memoryMBpairs)
-                Assert.AreEqual(pair.Value[0], Util.MemorySizeStringMBWithoutUnits(pair.Key));
-        }
-
-        [Test]
         public void TestMemorySizeStringVariousUnits()
         {
             foreach (var pair in memoryVariousPairs)

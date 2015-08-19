@@ -32,7 +32,7 @@ namespace XenAdmin.Controls.Ballooning
             this.Spinner = new System.Windows.Forms.NumericUpDown();
             this.NameLabel = new System.Windows.Forms.Label();
             this.iconBox = new System.Windows.Forms.PictureBox();
-            this.Units = new System.Windows.Forms.ComboBox();
+            this.SpinnerUnits = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Spinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).BeginInit();
             this.SuspendLayout();
@@ -61,25 +61,20 @@ namespace XenAdmin.Controls.Ballooning
             this.iconBox.Name = "iconBox";
             this.iconBox.TabStop = false;
             // 
-            // Units
+            // SpinnerUnits
             // 
-            resources.ApplyResources(this.Units, "Units");
-            this.Units.DisplayMember = "GB";
-            this.Units.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Units.FormattingEnabled = true;
-            this.Units.Items.AddRange(new object[] {
-            resources.GetString("Units.Items"),
-            resources.GetString("Units.Items1")});
-            this.Units.Name = "Units";
-            this.Units.SelectedIndexChanged += new System.EventHandler(this.Units_SelectedIndexChanged);
+            resources.ApplyResources(this.SpinnerUnits, "SpinnerUnits");
+            this.SpinnerUnits.BackColor = System.Drawing.SystemColors.Control;
+            this.SpinnerUnits.Name = "SpinnerUnits";
+            this.SpinnerUnits.TextChanged += new System.EventHandler(this.SpinnerUnits_TextChanged);
             // 
             // MemorySpinner
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.SpinnerUnits);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.iconBox);
-            this.Controls.Add(this.Units);
             this.Controls.Add(this.Spinner);
             this.DoubleBuffered = true;
             this.Name = "MemorySpinner";
@@ -95,6 +90,6 @@ namespace XenAdmin.Controls.Ballooning
         private System.Windows.Forms.NumericUpDown Spinner;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.PictureBox iconBox;
-        private System.Windows.Forms.ComboBox Units;
+        private System.Windows.Forms.Label SpinnerUnits;
     }
 }

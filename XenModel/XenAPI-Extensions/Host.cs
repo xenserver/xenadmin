@@ -1113,7 +1113,7 @@ namespace XenAPI
                 foreach (VM vm in Connection.ResolveAll(resident_VMs))
                 {
                     if (!vm.is_control_domain)
-                        ans += vm.has_ballooning ? vm.memory_dynamic_min : vm.memory_static_max;
+                        ans += vm.has_ballooning ? (long) vm.memory_dynamic_min : (long) vm.memory_static_max;
                 }
                 return ans;
            }
@@ -1131,7 +1131,7 @@ namespace XenAPI
                 foreach (VM vm in Connection.ResolveAll(resident_VMs))
                 {
                     if (!vm.is_control_domain)
-                        ans += vm.has_ballooning ? vm.memory_dynamic_max : vm.memory_static_max;
+                        ans += vm.has_ballooning ? (long)vm.memory_dynamic_max : (long)vm.memory_static_max;
                 }
                 return ans;
             }

@@ -60,8 +60,8 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        private long _static_min;
-        protected long static_min
+        private double _static_min;
+        protected double static_min
         {
             get
             {
@@ -78,19 +78,19 @@ namespace XenAdmin.Controls.Ballooning
         // base class of a control, otherwise the control can't be edited in the Designer.
 
         [Browsable(false)]
-        public virtual long dynamic_min
+        public virtual double dynamic_min
         {
             get { return 0; }
         }
 
         [Browsable(false)]
-        public virtual long dynamic_max
+        public virtual double dynamic_max
         {
             get { return 0; }
         }
 
         [Browsable(false)]
-        public virtual long static_max
+        public virtual double static_max
         {
             get { return 0; }
         }
@@ -114,7 +114,7 @@ namespace XenAdmin.Controls.Ballooning
             return ans;
         }
 
-        protected long maxDynMin = -1;  // signal value for no constraint
+        protected double maxDynMin = -1;  // signal value for no constraint
         protected void CalcMaxDynMin()
         {
             maxDynMin = -1;
@@ -128,7 +128,7 @@ namespace XenAdmin.Controls.Ballooning
                     Host_metrics host_metrics = host.Connection.Resolve(host.metrics);
                     if (host_metrics != null)
                     {
-                        long sum_dyn_min = host.memory_overhead;
+                        double sum_dyn_min = host.memory_overhead;
 
                         foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
                         {
@@ -156,11 +156,11 @@ namespace XenAdmin.Controls.Ballooning
 
         // Maximum for dynamic_min spinner: if we have set a maxDynMin, use it,
         // except constrained by static_min and dynamic_max.
-        protected long DynMinSpinnerMax
+        protected double DynMinSpinnerMax
         {
             get
             {
-                long maxDM = dynamic_max;
+                double maxDM = dynamic_max;
                 if (maxDynMin >= 0 && maxDynMin < maxDM)
                 {
                     maxDM = maxDynMin;
@@ -175,11 +175,11 @@ namespace XenAdmin.Controls.Ballooning
         }
 
         // Minimum for dynamic_min spinner: constrained by both static_min, and a proportion of static_max
-        protected long DynMinSpinnerMin
+        protected double DynMinSpinnerMin
         {
             get
             {
-                long minDM = static_min;
+                double minDM = static_min;
                 long limit = (long)((double)static_max * GetMemoryRatio());
                 if (limit > minDM)
                     minDM = limit;
@@ -191,12 +191,12 @@ namespace XenAdmin.Controls.Ballooning
 
         // Static_max also has a corresponding limit: it can't go to more than 1/frac of maxDynMin,
         // or there is no legal value of dynamic_min.
-        protected long StatMaxSpinnerMax
+        protected double StatMaxSpinnerMax
         {
             get
             {
                 double frac = GetMemoryRatio();
-                long maxSM = maxDynMin >= 0 && MemorySpinnerMax * frac > maxDynMin
+                double maxSM = maxDynMin >= 0 && (double)MemorySpinnerMax * frac > (long)maxDynMin
                                  ? (long)((double)maxDynMin / frac)
                                  : MemorySpinnerMax;
                 if (maxSM < static_max)
@@ -205,22 +205,29 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        protected long MemorySpinnerMax
+        protected double MemorySpinnerMax
         {
             get
             {
-                long server = vm0.memory_static_max;
+                double server = vm0.memory_static_max;
                 return (server > maxMemAllowed ? server : maxMemAllowed);
             }
         }
 
-        protected int CalcIncrement()
+        protected double CalcIncrement(string units)
         {
-            // Calculate a suitable increment for dynamic_min and dynamic_max, if static_max small
-            int i;
-            for (i = 1; i < static_max / Util.BINARY_MEGA / 8 && i < 128; i *= 2)
-                ;
-            return i;
+            if (units == "MB")
+            {
+                // Calculate a suitable increment for dynamic_min and dynamic_max, if static_max small
+                int i;
+                for (i = 1; i < static_max / Util.BINARY_MEGA / 8 && i < 128; i *= 2)
+                    ;
+                return i * Util.BINARY_MEGA;
+            }
+            else
+            {
+               return (0.1 * Util.BINARY_GIGA);                
+            }
         }
 
         protected double GetMemoryRatio()

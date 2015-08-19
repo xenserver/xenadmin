@@ -167,9 +167,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_3_InstallationMedia.SelectedUrl,
                                         m_affinity,
                                         page_5_CpuMem.SelectedVcpus,
-                                        page_5_CpuMem.SelectedMemoryDynamicMin,
-                                        page_5_CpuMem.SelectedMemoryDynamicMax,
-                                        page_5_CpuMem.SelectedMemoryStaticMax,
+                                        (long)page_5_CpuMem.SelectedMemoryDynamicMin,
+                                        (long)page_5_CpuMem.SelectedMemoryDynamicMax,
+                                        (long)page_5_CpuMem.SelectedMemoryStaticMax,
                                         page_6b_LunPerVdi.MapLunsToVdisRequired
                                             ? page_6b_LunPerVdi.MappedDisks
                                             : page_6_Storage.SelectedDisks,
