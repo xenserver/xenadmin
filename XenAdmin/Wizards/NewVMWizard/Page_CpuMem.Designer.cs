@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             // label5
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.label5, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
@@ -90,6 +90,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.SetColumnSpan(this.spinnerDynMin, 2);
             resources.ApplyResources(this.spinnerDynMin, "spinnerDynMin");
             this.spinnerDynMin.Name = "spinnerDynMin";
+            this.spinnerDynMin.Units = "GB";
             this.spinnerDynMin.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
             // spinnerDynMax
@@ -97,6 +98,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.SetColumnSpan(this.spinnerDynMax, 2);
             resources.ApplyResources(this.spinnerDynMax, "spinnerDynMax");
             this.spinnerDynMax.Name = "spinnerDynMax";
+            this.spinnerDynMax.Units = "GB";
             this.spinnerDynMax.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
             // spinnerStatMax
@@ -104,6 +106,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.SetColumnSpan(this.spinnerStatMax, 2);
             resources.ApplyResources(this.spinnerStatMax, "spinnerStatMax");
             this.spinnerStatMax.Name = "spinnerStatMax";
+            this.spinnerStatMax.Units = "GB";
             this.spinnerStatMax.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
             // tableLayoutPanel1
@@ -111,13 +114,13 @@ namespace XenAdmin.Wizards.NewVMWizard
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelVCPUs, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.VcpuSpinner, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelInvalidVCPUWarning

@@ -92,19 +92,19 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (memoryMode == 1)
             {
-                spinnerDynMin.Initialize(Messages.MEMORY_COLON, null, Template.memory_static_max);
+                spinnerDynMin.Initialize(Messages.MEMORY_COLON, null, Template.memory_static_max, Template.memory_static_max);
                 spinnerDynMax.Visible = spinnerStatMax.Visible = false;
             }
             else
             {
                 spinnerDynMax.Visible = true;
-                spinnerDynMin.Initialize(Messages.DYNAMIC_MIN_COLON, null, Template.memory_dynamic_min);
+                spinnerDynMin.Initialize(Messages.DYNAMIC_MIN_COLON, null, Template.memory_dynamic_min, Template.memory_static_max);
                 FreeSpinnerLimits();  // same as CA-33831
-                spinnerDynMax.Initialize(Messages.DYNAMIC_MAX_COLON, null, Template.memory_dynamic_max);
+                spinnerDynMax.Initialize(Messages.DYNAMIC_MAX_COLON, null, Template.memory_dynamic_max, Template.memory_static_max);
                 if (memoryMode == 3)
                 {
                     FreeSpinnerLimits();
-                    spinnerStatMax.Initialize(Messages.STATIC_MAX_COLON, null, Template.memory_static_max);
+                    spinnerStatMax.Initialize(Messages.STATIC_MAX_COLON, null, Template.memory_static_max, Template.memory_static_max);
                 }
                 else
                     spinnerStatMax.Visible = false;
@@ -145,16 +145,16 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void SetSpinnerLimits()
         {
             long maxMemAllowed = MaxMemAllowed;
-            long min = Template.memory_static_min;
+            double min = Template.memory_static_min;
             if (memoryMode == 1)
             {
                 spinnerDynMin.SetRange(min, maxMemAllowed);
                 return;
             }
-            long min2 = (long)((double)SelectedMemoryStaticMax * memoryRatio);
+            long min2 = (long)(SelectedMemoryStaticMax * memoryRatio);
             if (min < min2)
                 min = min2;
-            long max = SelectedMemoryDynamicMax;
+            double max = SelectedMemoryDynamicMax;
             if (max < min)
                 max = min;
             spinnerDynMin.SetRange(min, max);
@@ -170,7 +170,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             spinnerStatMax.Enabled = false;
         }
 
-        public long SelectedMemoryDynamicMin
+        public double SelectedMemoryDynamicMin
         {
             get
             {
@@ -178,7 +178,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        public long SelectedMemoryDynamicMax
+        public double SelectedMemoryDynamicMax
         {
             get
             {
@@ -186,7 +186,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        public long SelectedMemoryStaticMax
+        public double SelectedMemoryStaticMax
         {
             get
             {
@@ -221,13 +221,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS, SelectedVcpus.ToString()));
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY, comboBoxTopology.Text));
                 if (memoryMode == 1)
-                    sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeString(SelectedMemoryStaticMax)));
+                    sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeStringMB(SelectedMemoryStaticMax)));
                 else
                 {
-                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MIN, Util.MemorySizeString(SelectedMemoryDynamicMin)));
-                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MAX, Util.MemorySizeString(SelectedMemoryDynamicMax)));
+                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MIN, Util.MemorySizeStringMB(SelectedMemoryDynamicMin)));
+                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MAX, Util.MemorySizeStringMB(SelectedMemoryDynamicMax)));
                     if (memoryMode == 3)
-                        sum.Add(new KeyValuePair<string, string>(Messages.STATIC_MAX, Util.MemorySizeString(SelectedMemoryStaticMax)));
+                        sum.Add(new KeyValuePair<string, string>(Messages.STATIC_MAX, Util.MemorySizeStringMB(SelectedMemoryStaticMax)));
                 }
                 return sum;
             }
@@ -288,12 +288,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (max_mem_total_host != null && SelectedMemoryDynamicMin > max_mem_total)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host), Util.MemorySizeString(max_mem_total));
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host), Util.MemorySizeStringMB(max_mem_total));
             }
             else if (max_mem_free_host != null && SelectedMemoryDynamicMin > max_mem_free)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host), Util.MemorySizeString(max_mem_free));
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host), Util.MemorySizeStringMB(max_mem_free));
             }
             else if (max_vcpus_host != null && SelectedVcpus > max_vcpus)
             {

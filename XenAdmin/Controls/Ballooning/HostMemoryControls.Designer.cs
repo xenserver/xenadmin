@@ -134,7 +134,6 @@ namespace XenAdmin.Controls.Ballooning
             this.Controls.Add(this.labelTotal);
             this.Controls.Add(this.hostShinyBar);
             this.DoubleBuffered = true;
-            this.MinimumSize = new System.Drawing.Size(700, 90);
             this.Name = "HostMemoryControls";
             this.ResumeLayout(false);
 
