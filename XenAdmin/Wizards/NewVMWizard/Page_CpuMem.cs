@@ -128,7 +128,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                long msm = (long)Template.memory_static_max;
+                long msm = Template.memory_static_max;
                 long mma = Template.MaxMemAllowed;
                 return (msm > mma ? msm : mma);
             }
@@ -151,7 +151,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 spinnerDynMin.SetRange(min, maxMemAllowed);
                 return;
             }
-            long min2 = (long)((double)SelectedMemoryStaticMax * memoryRatio);
+            long min2 = (long)(SelectedMemoryStaticMax * memoryRatio);
             if (min < min2)
                 min = min2;
             double max = SelectedMemoryDynamicMax;

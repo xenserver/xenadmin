@@ -119,27 +119,7 @@ namespace XenAdmin
             string unit;
             string value = ByteSizeString(bytes, 1, false, out unit);
             return string.Format(Messages.VAL_FORMAT, value, unit);
-        }
-
-        public static string SuperiorSizeString(double bytes, int dp)
-        {
-            if (bytes >= 10 * BINARY_GIGA)
-            {
-                return string.Format(Messages.VAL_GB, Math.Round(bytes / BINARY_GIGA, dp));
-            }
-            else if (bytes >= 10 * BINARY_MEGA)
-            {
-                return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA, dp));
-            }
-            else if (bytes >= 10 * BINARY_KILO)
-            {
-                return string.Format(Messages.VAL_KB, Math.Round(bytes / BINARY_KILO, dp));
-            }
-            else
-            {
-                return string.Format(Messages.VAL_B, bytes);
-            }
-        }
+        }       
 	
 		public static string DiskSizeString(long bytes)
         {
@@ -285,12 +265,25 @@ namespace XenAdmin
                 case RoundingBehaviour.None:
                     return bytes / BINARY_MEGA;
                 case RoundingBehaviour.Down:
-                    return  Math.Floor(bytes / BINARY_MEGA);
+                    return Math.Floor(bytes / BINARY_MEGA);
                 case RoundingBehaviour.Up:
                     return Math.Ceiling(bytes / BINARY_MEGA);
                 default:  // case RoundingBehaviour.Nearest:
                     return Math.Round(bytes / BINARY_MEGA, MidpointRounding.AwayFromZero);
             }
+        }
+
+        public static double CorrectRoundingErrors(double amount)
+        {
+            // Special case to cope with choosing an amount that's a multiple of 0.1G but not 0.5G --
+            // sending it to the server as the nearest byte and getting it back later --
+            // and finding it's fractionally changed, messing up our spinner permitted ranges.
+            double amountRounded = ToGB(amount, 1, RoundingBehaviour.Nearest) * BINARY_GIGA;
+            double roundingDiff = amountRounded - amount;
+            if (roundingDiff > -1.0 && roundingDiff < 1.0)  // within 1 byte: although I think it will always be positive in the case we want to correct
+                return amountRounded;
+            else
+                return amount;
         }
 
         public static double ToUnixTime(DateTime time)

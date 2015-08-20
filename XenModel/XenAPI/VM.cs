@@ -740,19 +740,19 @@ namespace XenAPI
                 }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
-                    VM.set_memory_static_max(session, opaqueRef, (long)_memory_static_max);
+                    VM.set_memory_static_max(session, opaqueRef, _memory_static_max);
                 }
                 if (!Helper.AreEqual2(_memory_dynamic_max, server._memory_dynamic_max))
                 {
-                    VM.set_memory_dynamic_max(session, opaqueRef, (long)_memory_dynamic_max);
+                    VM.set_memory_dynamic_max(session, opaqueRef, _memory_dynamic_max);
                 }
                 if (!Helper.AreEqual2(_memory_dynamic_min, server._memory_dynamic_min))
                 {
-                    VM.set_memory_dynamic_min(session, opaqueRef, (long) memory_dynamic_min);
+                    VM.set_memory_dynamic_min(session, opaqueRef, memory_dynamic_min);
                 }
                 if (!Helper.AreEqual2(_memory_static_min, server._memory_static_min))
                 {
-                    VM.set_memory_static_min(session, opaqueRef, (long)_memory_static_min);
+                    VM.set_memory_static_min(session, opaqueRef, _memory_static_min);
                 }
                 if (!Helper.AreEqual2(_VCPUs_max, server._VCPUs_max))
                 {
@@ -4024,7 +4024,7 @@ namespace XenAPI
         /// <summary>
         /// Statically-set (i.e. absolute) maximum (bytes). The value of this field at VM start time acts as a hard limit of the amount of memory a guest can use. New values only take effect on reboot.
         /// </summary>
-        public virtual double memory_static_max
+        public virtual long memory_static_max
         {
             get { return _memory_static_max; }
             set
@@ -4037,12 +4037,12 @@ namespace XenAPI
                 }
             }
         }
-        private double _memory_static_max;
+        private long _memory_static_max;
 
         /// <summary>
         /// Dynamic maximum (bytes)
         /// </summary>
-        public virtual double memory_dynamic_max
+        public virtual long memory_dynamic_max
         {
             get { return _memory_dynamic_max; }
             set
@@ -4055,12 +4055,12 @@ namespace XenAPI
                 }
             }
         }
-        private double _memory_dynamic_max;
+        private long _memory_dynamic_max;
 
         /// <summary>
         /// Dynamic minimum (bytes)
         /// </summary>
-        public virtual double memory_dynamic_min
+        public virtual long memory_dynamic_min
         {
             get { return _memory_dynamic_min; }
             set
@@ -4073,12 +4073,12 @@ namespace XenAPI
                 }
             }
         }
-        private double _memory_dynamic_min;
+        private long _memory_dynamic_min;
 
         /// <summary>
         /// Statically-set (i.e. absolute) mininum (bytes). The value of this field indicates the least amount of memory this VM can boot with without crashing.
         /// </summary>
-        public virtual double memory_static_min
+        public virtual long memory_static_min
         {
             get { return _memory_static_min; }
             set
@@ -4091,7 +4091,7 @@ namespace XenAPI
                 }
             }
         }
-        private double _memory_static_min;
+        private long _memory_static_min;
 
         /// <summary>
         /// configuration parameters for the selected VCPU policy

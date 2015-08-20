@@ -44,38 +44,43 @@ namespace XenAdmin.Controls.Ballooning
         public event EventHandler SpinnerValueChanged;
         private double valueMB;
         private string previousUnitsValue;
-        private bool canModifyValueMB = false;
+        private bool initializing= true;
 
         public MemorySpinner()
         {
             InitializeComponent();
-            previousUnitsValue = "GB";
+            previousUnitsValue = Messages.VAL_GIGB;
         }
 
         public void Initialize(string name, Image icon, double amount, double static_max)
-        {   
+        {
+            amount = Util.CorrectRoundingErrors(amount);
+
             if(static_max <= Util.BINARY_GIGA)
             {
-                Units = "MB";              
+                Units = Messages.VAL_MEGB;              
             }
             else
             {
-                Units = "GB";
+                Units = Messages.VAL_GIGB;
             }
+            ChangeSpinnerSettings();
             previousUnitsValue = Units;
             Initialize(name, icon, amount, RoundingBehaviour.None);
         }
 
         public void Initialize(string name, Image icon, double amount, RoundingBehaviour rounding)
-        {           
+        {
             NameLabel.Text = name;
             if (icon != null && iconBox.Image == null)  // without this line, setting iconBox.Image causes another repaint, hence an infinite loop
                 iconBox.Image = icon;
             ValueMB = Util.ToMB(amount, rounding);
             setSpinnerValueDisplay(amount);
-            canModifyValueMB = true;
+            initializing = false;
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public string Units
         {
             get
@@ -114,11 +119,11 @@ namespace XenAdmin.Controls.Ballooning
         {
             if (Units == "GB")
             {
-                Spinner.Value = (decimal)Util.ToGB(value, 1, RoundingBehaviour.None);
+                Spinner.Value = (decimal)Util.ToGB(value, 1, RoundingBehaviour.Nearest);
             }
             else
             {
-                Spinner.Value = (long)Util.ToMB(value, RoundingBehaviour.None);
+                Spinner.Value = (long)Util.ToMB(value, RoundingBehaviour.Nearest);
             }
         }
 
@@ -196,9 +201,9 @@ namespace XenAdmin.Controls.Ballooning
         private void Spinner_ValueChanged(object sender, EventArgs e)
         {
             // We do not want to modify the ValueMB if the user does not modify anything in the Spinner.Value. 
-            // When the Memory Settings dialog si opened and intiliazed and when the user changes the units, we do not 
-            // want any changes to be applied to ValueMB.
-            if (!canModifyValueMB)
+            // When the Memory Settings dialog is intiliazing and the units change because the new value is > 1 GB,
+            // we do not want any changes to be applied to ValueMB.
+            if (initializing)
               return;
 
             if (Units == "GB")
@@ -220,7 +225,7 @@ namespace XenAdmin.Controls.Ballooning
                 ((Control)sender).Text = ((NumericUpDown)sender).Value.ToString();
         }
 
-        private void SpinnerUnits_TextChanged(object sender, EventArgs e)
+        private void ChangeSpinnerSettings()
         {
             if (Units == previousUnitsValue)
                 return;

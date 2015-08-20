@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards
                 NextStep();
             }
 
-            origStaticMax = (long)vms[0].memory_static_max;
+            origStaticMax = vms[0].memory_static_max;
             has_ballooning = vms[0].has_ballooning;
         }
 

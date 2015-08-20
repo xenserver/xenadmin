@@ -60,19 +60,12 @@ namespace XenAdmin.Controls.Ballooning
         private bool multiple;
 
         // The increment in which the user can move the draggers, in bytes
-        double incrementMin;
-        double incrementMax;
+        double increment;
 
-        public double IncrementMin
+        public double Increment
         {
-            get { return incrementMin; }
-            set { incrementMin = value; }
-        }
-
-        public double IncrementMax
-        {
-            get { return incrementMax; }
-            set { incrementMax = value; }
+            get { return increment; }
+            set { increment = value; }
         }
 
         public double Dynamic_min
@@ -149,8 +142,8 @@ namespace XenAdmin.Controls.Ballooning
             this.memoryUsed = memoryUsed;
             this.static_min = vm.memory_static_min;
             this.static_max = vm.memory_static_max;
-            this.dynamic_min = dynamic_min_orig = vm.memory_dynamic_min;
-            this.dynamic_max = dynamic_max_orig = vm.memory_dynamic_max;
+            this.dynamic_min = dynamic_min_orig = Util.CorrectRoundingErrors(vm.memory_dynamic_min);
+            this.dynamic_max = dynamic_max_orig = Util.CorrectRoundingErrors(vm.memory_dynamic_max);
             this.has_ballooning = vm.has_ballooning;
             this.allowEdit = allowEdit;
         }
@@ -240,22 +233,14 @@ namespace XenAdmin.Controls.Ballooning
                     double min = SliderMinLimit;
                     double max = SliderMaxLimit;
                     double orig = (activeSlider == Slider.MIN ? dynamic_min_orig : dynamic_max_orig);
-                    double posBytes =(mouseLocation.X - barRect.Left) * BytesPerPixel;
+                    double posBytes = (mouseLocation.X - barRect.Left) * BytesPerPixel;
                     if (posBytes <= min)
                         posBytes = min;
                     else if (posBytes >= max)
                         posBytes = max;
                     else
                     {
-                        double incrBytes;
-                        if(activeSlider == Slider.MIN)
-                        {
-                            incrBytes = IncrementMin;
-                        }
-                        else
-                        {
-                            incrBytes = IncrementMax;
-                        }
+                        double incrBytes = Increment;
 
                         // round to nearest incrBytes
                         // We need to do a rounding because the result should always have only 1 dp. If it does not have

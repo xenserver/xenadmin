@@ -98,8 +98,7 @@ namespace XenAdmin.Controls.Ballooning
 
         private void SetIncrements()
         {
-            memorySpinnerDynMin.Increment = CalcIncrement(memorySpinnerDynMin.Units);
-            memorySpinnerDynMax.Increment = memorySpinnerStatMax.Increment = CalcIncrement(memorySpinnerDynMax.Units);
+             memorySpinnerDynMin.Increment =  memorySpinnerDynMax.Increment = memorySpinnerStatMax.Increment = CalcIncrement(memorySpinnerDynMax.Units);
         }
 
         private void Spinners_ValueChanged(object sender, EventArgs e)

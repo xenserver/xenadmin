@@ -180,7 +180,7 @@ namespace XenAdmin.Controls.Ballooning
             get
             {
                 double minDM = static_min;
-                long limit = (long)((double)static_max * GetMemoryRatio());
+                long limit = (long)(static_max * GetMemoryRatio());
                 if (limit > minDM)
                     minDM = limit;
                 if (minDM > dynamic_min)
@@ -196,8 +196,8 @@ namespace XenAdmin.Controls.Ballooning
             get
             {
                 double frac = GetMemoryRatio();
-                double maxSM = maxDynMin >= 0 && (double)MemorySpinnerMax * frac > (long)maxDynMin
-                                 ? (long)((double)maxDynMin / frac)
+                double maxSM = maxDynMin >= 0 && MemorySpinnerMax * frac > (long)maxDynMin
+                                 ? maxDynMin / frac
                                  : MemorySpinnerMax;
                 if (maxSM < static_max)
                     maxSM = static_max;

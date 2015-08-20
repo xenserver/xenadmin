@@ -66,7 +66,6 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.SpinnerUnits, "SpinnerUnits");
             this.SpinnerUnits.BackColor = System.Drawing.SystemColors.Control;
             this.SpinnerUnits.Name = "SpinnerUnits";
-            this.SpinnerUnits.TextChanged += new System.EventHandler(this.SpinnerUnits_TextChanged);
             // 
             // MemorySpinner
             // 
