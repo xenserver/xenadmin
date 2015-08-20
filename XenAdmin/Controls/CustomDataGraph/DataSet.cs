@@ -206,7 +206,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     dataSet.Name = Helpers.GetFriendlyDataSourceName("memory_internal_used", dataSet.XenObject);
                     VM vm = (VM)xo;
                     VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                    long max = metrics != null ? metrics.memory_actual : vm.memory_dynamic_max;
+                    long max = metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max;
                     dataSet.CustomYRange = new DataRange(max, 0, max / 10d, Unit.Bytes, RangeScaleMode.Delegate)
                     {
                         UpdateMax = dataSet.GetMemoryMax,
@@ -396,7 +396,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 VM vm = (VM)xmo;
                 VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                return ((metrics != null ? metrics.memory_actual : vm.memory_dynamic_max) / 10d);
+                return ((metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max) / 10d);
             }
             return 10;
         }

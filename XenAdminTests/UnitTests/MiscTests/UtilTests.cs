@@ -33,6 +33,7 @@ using NUnit.Framework;
 using XenAdmin;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace XenAdminTests.UnitTests.MiscTests
 {
@@ -121,20 +122,30 @@ namespace XenAdminTests.UnitTests.MiscTests
         #endregion
 
         [Test]
-        public void TestMemorySizeString()
+        public void TestMemorySizeStringMB()
         {
             foreach (var pair in memoryMBpairs)
             {
                 string expected = string.Format("{0} {1}", pair.Value[0], pair.Value[1]);
-                Assert.AreEqual(expected, Util.MemorySizeString(pair.Key));
+                Assert.AreEqual(expected, Util.MemorySizeStringMB(pair.Key));
             }
         }
 
         [Test]
-        public void TestMemorySizeStringWithoutUnits()
-        {
-            foreach (var pair in memoryMBpairs)
-                Assert.AreEqual(pair.Value[0], Util.MemorySizeStringWithoutUnits(pair.Key));
+        public void TestMemorySizeStringSuitableUnits()
+        {            
+            var pairs = new Dictionary<string[], string>
+            {
+                { new [] {"1072693248", "false"}, "1023 MB"},
+                { new [] {"1073741824", "false"}, "1 GB"},
+                { new [] {"1073741824", "true"}, "1.0 GB"},
+                { new [] {"1825361100.8", "false"}, "1.7 GB"},                
+                { new [] {"1825361100.8", "true"}, "1.7 GB"},
+                { new [] {"536870912", "true"}, "512 MB"},
+                { new [] {"537290342.4", "true"}, "512 MB"}
+            };
+            foreach(var pair in pairs)
+                Assert.AreEqual(pair.Value, Util.MemorySizeStringSuitableUnits(Convert.ToDouble(pair.Key[0]),Convert.ToBoolean(pair.Key[1])));
         }
 
         [Test]
@@ -187,28 +198,6 @@ namespace XenAdminTests.UnitTests.MiscTests
         public void TestDiskSizeStringUlong()
         {
             Assert.AreEqual("17179869184 GB", Util.DiskSizeString(ulong.MaxValue));
-        }
-
-        [Test]
-        public void TestSuperiorSizeString()
-        {
-             var pairs = new Dictionary<double[], string>
-                {
-                    { new [] {           0, 1d }, "0 B" },
-                    { new [] {        1000, 2d }, "1000 B" },
-                    { new [] {        1024, 3d }, "1024 B" },
-                    { new [] {      100000, 2d }, "97.66 kB" },
-                    { new [] {     1000000, 1d }, "976.6 kB" },
-                    { new [] {     1048576, 3d }, "1024 kB" }, //1024*1024
-                    { new [] {     2100000, 3d }, "2050.781 kB" },
-                    { new [] {     2900000, 2d }, "2832.03 kB" },
-                    { new [] {  1073741824, 3d }, "1024 MB" }, //1024*1024*1024
-                    { new [] {  2100000000, 3d }, "2002.716 MB" },
-                    { new [] { 21000000000, 3d }, "19.558 GB" }
-                };
-
-            foreach (var pair in pairs)
-                Assert.AreEqual(pair.Value, Util.SuperiorSizeString(pair.Key[0], (int)pair.Key[1]));
         }
 
         [Test]
