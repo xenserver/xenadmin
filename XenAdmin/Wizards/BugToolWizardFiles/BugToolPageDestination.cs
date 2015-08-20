@@ -116,7 +116,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             get
             {
-                return uploadCheckBox.Enabled;
+                return uploadCheckBox.Checked;
             }
         }
 
