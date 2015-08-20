@@ -67,7 +67,7 @@ namespace XenAdmin.SettingsPanels
                 if (MROrGreater && HasMemoryChanged)
                 {
                     long mem = Convert.ToInt64(this.nudMemory.Value * Util.BINARY_MEGA);
-                    memoryAction = BallooningDialogBase.ConfirmAndReturnAction(Program.MainWindow, vm, mem, mem, mem, vm.memory_static_max, false);
+                    memoryAction = BallooningDialogBase.ConfirmAndReturnAction(Program.MainWindow, vm, mem, mem, mem, (long)vm.memory_static_max, false);
                     if (memoryAction == null)
                         return false;
                 }
@@ -106,7 +106,7 @@ namespace XenAdmin.SettingsPanels
 
         void nudMemory_LostFocus(object sender, EventArgs e)
         {
-            ValidateNud(nudMemory, vm.memory_static_max / Util.BINARY_MEGA);
+            ValidateNud(nudMemory, (decimal)vm.memory_static_max / Util.BINARY_MEGA);
         }
 
         private void ValidateNud(NumericUpDown nud, Decimal defaultValue)

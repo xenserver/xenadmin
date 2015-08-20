@@ -29,27 +29,18 @@ namespace XenAdmin.Controls.Ballooning
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MemorySpinner));
-            this.MB = new System.Windows.Forms.Label();
             this.Spinner = new System.Windows.Forms.NumericUpDown();
             this.NameLabel = new System.Windows.Forms.Label();
             this.iconBox = new System.Windows.Forms.PictureBox();
+            this.SpinnerUnits = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Spinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // MB
-            // 
-            resources.ApplyResources(this.MB, "MB");
-            this.MB.Name = "MB";
-            // 
             // Spinner
             // 
             resources.ApplyResources(this.Spinner, "Spinner");
-            this.Spinner.Increment = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
+            this.Spinner.DecimalPlaces = 1;
             this.Spinner.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -70,27 +61,34 @@ namespace XenAdmin.Controls.Ballooning
             this.iconBox.Name = "iconBox";
             this.iconBox.TabStop = false;
             // 
+            // SpinnerUnits
+            // 
+            resources.ApplyResources(this.SpinnerUnits, "SpinnerUnits");
+            this.SpinnerUnits.BackColor = System.Drawing.SystemColors.Control;
+            this.SpinnerUnits.Name = "SpinnerUnits";
+            // 
             // MemorySpinner
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.MB);
-            this.Controls.Add(this.Spinner);
+            this.Controls.Add(this.SpinnerUnits);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.iconBox);
+            this.Controls.Add(this.Spinner);
             this.DoubleBuffered = true;
             this.Name = "MemorySpinner";
             ((System.ComponentModel.ISupportInitialize)(this.Spinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label MB;
         private System.Windows.Forms.NumericUpDown Spinner;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.PictureBox iconBox;
+        private System.Windows.Forms.Label SpinnerUnits;
     }
 }

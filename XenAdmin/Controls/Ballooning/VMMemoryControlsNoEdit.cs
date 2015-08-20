@@ -84,16 +84,16 @@ namespace XenAdmin.Controls.Ballooning
             bool ballooning = vm0.has_ballooning;
             if (ballooning)
             {
-                valueDynMin.Text = Util.ToMB(vm0.memory_dynamic_min).ToString();
-                valueDynMax.Text = Util.ToMB(vm0.memory_dynamic_max).ToString();
+                valueDynMin.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_min, true);
+                valueDynMax.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_max, true);
                 if (vm0.memory_dynamic_max == vm0.memory_static_max)
                     labelStatMax.Visible = valueStatMax.Visible = unitsStatMax.Visible = false;
                 else
-                    valueStatMax.Text = Util.ToMB(vm0.memory_static_max).ToString();
+                    valueStatMax.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_static_max, true);
             }
             else
             {
-                valueDynMin.Text = Util.ToMB(vm0.memory_static_max).ToString();
+                valueDynMin.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_static_max, true);
                 iconBoxDynMin.Visible = false;
                 labelDynMin.Text = Messages.MEMORY;
 

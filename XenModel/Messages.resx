@@ -11694,6 +11694,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VAL_GB" xml:space="preserve">
     <value>{0} GB</value>
   </data>
+  <data name="VAL_GB_ONE_DECIMAL" xml:space="preserve">
+    <value>{0:F1} GB</value>
+  </data>
   <data name="VAL_GIGB" xml:space="preserve">
     <value>GB</value>
   </data>

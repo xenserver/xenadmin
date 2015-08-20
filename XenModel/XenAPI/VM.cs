@@ -755,7 +755,7 @@ namespace XenAPI
                 }
                 if (!Helper.AreEqual2(_memory_dynamic_min, server._memory_dynamic_min))
                 {
-                    VM.set_memory_dynamic_min(session, opaqueRef, _memory_dynamic_min);
+                    VM.set_memory_dynamic_min(session, opaqueRef, memory_dynamic_min);
                 }
                 if (!Helper.AreEqual2(_memory_static_min, server._memory_static_min))
                 {
