@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
         private readonly string bundleToUpload;
 
         private const string UPLOAD_URL = "/feeds/api/";
-        private readonly string UPLOAD_DOMAIN_NAME = "http://cis-daily.citrite.com";
+        private readonly string UPLOAD_DOMAIN_NAME = "https://rttf.citrix.com";
 
         private CancellationTokenSource cts;
 
