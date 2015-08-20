@@ -16299,7 +16299,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
