@@ -1775,4 +1775,7 @@
   <data name="Label-SR.provisioning" xml:space="preserve">
     <value>Provisioning</value>
   </data>
+  <data name="Label-SR.disk-space-allocations" xml:space="preserve">
+    <value>Disk space allocations</value>
+  </data>
 </root>

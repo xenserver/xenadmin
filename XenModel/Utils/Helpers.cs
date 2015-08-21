@@ -759,6 +759,13 @@ namespace XenAdmin.Core
                 string.Format(Messages.GENERAL_CPU_SPEED, cpu.speed));
         }
 
+        public static string GetAllocationProperties(string initial_allocation, string quantum_allocation)
+        {
+            return string.Format(Messages.SR_DISK_SPACE_ALLOCATION,
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(initial_allocation) * Util.BINARY_MEGA, true),
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(quantum_allocation) * Util.BINARY_MEGA, true));
+        }
+
         public static string GetHostRestrictions(Host host)
         {
             string output = "";

@@ -30052,6 +30052,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initial allocation: {0}
+        ///
+        ///Incremental allocation: {1}.
+        /// </summary>
+        public static string SR_DISK_SPACE_ALLOCATION {
+            get {
+                return ResourceManager.GetString("SR_DISK_SPACE_ALLOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This SR does not need to be upgraded..
         /// </summary>
         public static string SR_DOES_NOT_NEED_UPGRADE {
@@ -33744,7 +33755,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0:0} GB.
+        ///   Looks up a localized string similar to {0:F1} GB.
         /// </summary>
         public static string VAL_GB_ONE_DECIMAL {
             get {
