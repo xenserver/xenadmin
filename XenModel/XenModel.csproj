@@ -153,6 +153,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FriendlyNames.resx</DependentUpon>
     </Compile>
+    <Compile Include="HealthCheckSettings.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\LiveMigrateOptionsVmMapping.cs" />
     <Compile Include="Mappings\VmMapping.cs" />

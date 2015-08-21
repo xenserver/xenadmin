@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.VMProtectionRecovery;
+using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAPI;
 using XenCenterLib;

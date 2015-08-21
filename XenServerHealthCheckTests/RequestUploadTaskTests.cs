@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XenAdminTests;
 using System.IO.Pipes;
 using System.IO;
+using XenAdmin.Model;
 
 namespace XenServerHealthCheckTests
 {

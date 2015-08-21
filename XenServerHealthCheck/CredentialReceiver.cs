@@ -33,6 +33,7 @@ using System.Text;
 using System.Security.Principal;
 using System.IO.Pipes;
 using XenAPI;
+using XenAdmin.Model;
 
 namespace XenServerHealthCheck
 {

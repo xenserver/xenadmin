@@ -37,6 +37,7 @@ using System.Runtime.Serialization;
 using XenAdmin.Network;
 using XenAPI;
 using System.Web.Script.Serialization;
+using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {

@@ -37,6 +37,7 @@ using System.IO.Pipes;
 using System.IO;
 using System.Text;
 using System.ServiceProcess;
+using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {

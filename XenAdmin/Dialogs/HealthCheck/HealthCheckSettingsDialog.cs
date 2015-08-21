@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Model;
 using XenAPI;
 
 
