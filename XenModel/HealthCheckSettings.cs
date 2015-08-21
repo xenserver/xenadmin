@@ -56,16 +56,15 @@ namespace XenAdmin.Model
         public string PasswordSecretUuid;
         public string LastSuccessfulUpload;
         
-        public const int DefaultRetryInterval = 7; // in days
-        public const int UploadRequestValidityInterval = 30; // in minutes
+        public const int DEFAULT_INTERVAL_IN_DAYS = 14;
+        public const int DEFAULT_RETRY_INTERVAL = 7; // in days
+        public const int UPLOAD_REQUEST_VALIDITY_INTERVAL = 30; // in minutes
 
         public const string STATUS = "Enrollment";
         public const string INTERVAL_IN_DAYS = "Schedule.IntervalInDays";
-        public const int intervalInDaysDefault = 14;
         public const string DAY_OF_WEEK = "Schedule.DayOfWeek";
         public const string TIME_OF_DAY = "Schedule.TimeOfDay";
         public const string RETRY_INTERVAL = "Schedule.RetryInterval";
-        public const int RetryIntervalDefault = 7;
         public const string UPLOAD_TOKEN_SECRET = "UploadToken.Secret";
         public const string UPLOAD_CREDENTIAL_USER_SECRET = "User.Secret";
         public const string UPLOAD_CREDENTIAL_PASSWORD_SECRET = "Password.Secret";
@@ -77,13 +76,13 @@ namespace XenAdmin.Model
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
         public const string UPLOAD_UUID = "UploadUuid";
 
-        public HealthCheckSettings(HealthCheckStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
+        public HealthCheckSettings(HealthCheckStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay)
         {
             Status = status;
             IntervalInDays = intervalInDays;
             DayOfWeek = dayOfWeek;
             TimeOfDay = timeOfDay;
-            RetryInterval = retryInterval;
+            RetryInterval = DEFAULT_RETRY_INTERVAL;
         }
 
         public HealthCheckSettings(Dictionary<string, string> config)
@@ -91,11 +90,11 @@ namespace XenAdmin.Model
             Status = config == null || !config.ContainsKey(STATUS)
                            ? HealthCheckStatus.Undefined
                            : (BoolKey(config, STATUS) ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled);
-            IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, intervalInDaysDefault);
+            IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, DEFAULT_INTERVAL_IN_DAYS);
             if (!Enum.TryParse(Get(config, DAY_OF_WEEK), out DayOfWeek))
                 DayOfWeek = (DayOfWeek) GetDefaultDay();
             TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
-            RetryInterval = IntKey(config, RETRY_INTERVAL, RetryIntervalDefault);
+            RetryInterval = IntKey(config, RETRY_INTERVAL, DEFAULT_RETRY_INTERVAL);
             UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
             NewUploadRequest = Get(config, NEW_UPLOAD_REQUEST);
             UserNameSecretUuid = Get(config, UPLOAD_CREDENTIAL_USER_SECRET);
@@ -135,7 +134,7 @@ namespace XenAdmin.Model
             {
                 if (Status != HealthCheckStatus.Enabled)
                     return false;
-                var uploadRequestExpiryTime = NewUploadRequestTime.AddMinutes(UploadRequestValidityInterval);
+                var uploadRequestExpiryTime = NewUploadRequestTime.AddMinutes(UPLOAD_REQUEST_VALIDITY_INTERVAL);
                 return DateTime.Compare(uploadRequestExpiryTime, DateTime.UtcNow) < 0;
             }
         }

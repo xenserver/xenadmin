@@ -27,7 +27,7 @@ namespace XenServerHealthCheckTests
             Dictionary<string, string> config = new Dictionary<string, string>();
             config[HealthCheckSettings.STATUS] = "true";
             config[HealthCheckSettings.UPLOAD_LOCK] = "";
-            config[HealthCheckSettings.INTERVAL_IN_DAYS] = HealthCheckSettings.intervalInDaysDefault.ToString();
+            config[HealthCheckSettings.INTERVAL_IN_DAYS] = HealthCheckSettings.DEFAULT_INTERVAL_IN_DAYS.ToString();
             config[HealthCheckSettings.DAY_OF_WEEK] = "0";
             config[HealthCheckSettings.LAST_SUCCESSFUL_UPLOAD] = "";
             config[HealthCheckSettings.LAST_FAILED_UPLOAD] = "";

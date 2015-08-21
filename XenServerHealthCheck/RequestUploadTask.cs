@@ -112,7 +112,7 @@ namespace XenServerHealthCheck
             }
 
             //No Lock has been set before, Check upload is due
-            int intervalInDays = IntKey(config, HealthCheckSettings.INTERVAL_IN_DAYS, HealthCheckSettings.intervalInDaysDefault);
+            int intervalInDays = IntKey(config, HealthCheckSettings.INTERVAL_IN_DAYS, HealthCheckSettings.DEFAULT_INTERVAL_IN_DAYS);
             DateTime lastSuccessfulUpload = DateTime.UtcNow;
             bool haveSuccessfulUpload = false;
             if (config.ContainsKey(HealthCheckSettings.LAST_SUCCESSFUL_UPLOAD))
@@ -150,7 +150,7 @@ namespace XenServerHealthCheck
                             return false; //A retry is not needed
                     }
 
-                    int retryInterval = IntKey(config, HealthCheckSettings.RETRY_INTERVAL, HealthCheckSettings.RetryIntervalDefault);
+                    int retryInterval = IntKey(config, HealthCheckSettings.RETRY_INTERVAL, HealthCheckSettings.DEFAULT_RETRY_INTERVAL);
                     if (DateTime.Compare(LastFailedUpload.AddDays(retryInterval), DateTime.UtcNow) <= 0)
                     {
                         log.InfoFormat("Retry since retryInterval{0} - {1} > {2} meeted", LastFailedUpload, DateTime.UtcNow, retryInterval);
@@ -193,7 +193,6 @@ namespace XenServerHealthCheck
             return getLock(connection, session);
         }
 
-        private static int DemandTimeOutMinutes = 30;
         public static bool OnDemandRequest(IXenConnection connection, Session session)
         {
             Dictionary<string, string> config = Pool.get_health_check_config(session, connection.Cache.Pools[0].opaque_ref);
@@ -223,7 +222,7 @@ namespace XenServerHealthCheck
                     log.Error("Exception while parsing NEW_UPLOAD_REQUEST", exn);
                     return false;
                 }
-                DateTime newUploadRequestDueTime = newUploadRequestTime.AddMinutes(DemandTimeOutMinutes);
+                DateTime newUploadRequestDueTime = newUploadRequestTime.AddMinutes(HealthCheckSettings.UPLOAD_REQUEST_VALIDITY_INTERVAL);
                 if (DateTime.Compare(newUploadRequestDueTime,  DateTime.UtcNow) >= 1)
                 {
                     log.InfoFormat("Will report on demand for XenServer {0} since the demand was requested on {1} (UTC time)", connection.Hostname, newUploadRequestTime);
@@ -231,8 +230,8 @@ namespace XenServerHealthCheck
                 }
                 else
                 {
-                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand requested on {1} (UTC time) expired after {2} minutes", 
-                        connection.Hostname, newUploadRequestTime, DemandTimeOutMinutes);
+                    log.InfoFormat("Will not report on demand for XenServer {0} since the demand requested on {1} (UTC time) expired after {2} minutes",
+                        connection.Hostname, newUploadRequestTime, HealthCheckSettings.UPLOAD_REQUEST_VALIDITY_INTERVAL);
                     return false;
                 }
             }

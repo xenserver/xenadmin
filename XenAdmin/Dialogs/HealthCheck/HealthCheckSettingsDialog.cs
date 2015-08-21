@@ -169,8 +169,7 @@ namespace XenAdmin.Dialogs.HealthCheck
                     enrollmentCheckBox.Checked ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled,
                     (int)(frequencyNumericBox.Value * 7),
                     (DayOfWeek)dayOfWeekComboBox.SelectedValue,
-                    (int)timeOfDayComboBox.SelectedValue,
-                    HealthCheckSettings.DefaultRetryInterval);
+                    (int)timeOfDayComboBox.SelectedValue);
 
                 new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
                 new TransferHealthCheckSettingsAction(pool, newHealthCheckSettings, textboxXSUserName.Text, textboxXSPassword.Text, true).RunAsync();
