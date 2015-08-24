@@ -473,6 +473,7 @@ namespace XenAPI
         public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
         public const string UPLOAD_UUID = "UploadUuid";
+        public const string PROXY_SETTINGS = "ProxySettings";
 
         public HealthCheckSettings(HealthCheckStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay, int retryInterval)
         {
