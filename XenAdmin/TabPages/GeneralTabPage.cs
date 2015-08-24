@@ -1344,7 +1344,7 @@ namespace XenAdmin.TabPages
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
-                    bool isReceivingUpdates = false && vm.auto_update_drivers; //disabling it temporarily
+                    bool isReceivingUpdates = false;// && vm.auto_update_drivers; //disabling it temporarily
 
                     bool isXenPrepInProgress = false; //TODO in CP-13247  when XenPrep functions will be added
                     bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO in CP-13247: remove &&false when XenPrep functions have been added
