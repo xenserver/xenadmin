@@ -5024,6 +5024,30 @@ namespace XenAPI
         Response<Object>
         sr_get_all_records(string session);
 
+        [XmlRpcMethod("LVHD.get_record")]
+        Response<Proxy_LVHD>
+        lvhd_get_record(string session, string _lvhd);
+
+        [XmlRpcMethod("LVHD.get_by_uuid")]
+        Response<string>
+        lvhd_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("LVHD.get_uuid")]
+        Response<string>
+        lvhd_get_uuid(string session, string _lvhd);
+
+        [XmlRpcMethod("LVHD.enable_thin_provisioning")]
+        Response<string>
+        lvhd_enable_thin_provisioning(string session, string _sr, string _initial_allocation, string _allocation_quantum);
+
+        [XmlRpcMethod("Async.LVHD.enable_thin_provisioning")]
+        Response<string>
+        async_lvhd_enable_thin_provisioning(string session, string _sr, string _initial_allocation, string _allocation_quantum);
+
+        [XmlRpcMethod("LVHD.get_all_records")]
+        Response<Object>
+        lvhd_get_all_records(string session);
+
         [XmlRpcMethod("VDI.get_record")]
         Response<Proxy_VDI>
         vdi_get_record(string session, string _vdi);
@@ -7270,6 +7294,12 @@ namespace XenAPI
         public Object blobs;
         public bool local_cache_enabled;
         public string introduced_by;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_LVHD
+    {
+        public string uuid;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
