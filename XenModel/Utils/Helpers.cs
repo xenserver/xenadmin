@@ -588,7 +588,7 @@ namespace XenAdmin.Core
         {
             decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR , XLVHD_MIN_ALLOCATION_QUANTUM);
             decimal max = SRSize /  XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR;
-            decimal defaultValue = SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR;
+            decimal defaultValue = Math.Max(SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR, min);
 
             return new AllocationBounds(min, max, defaultValue);
         }
