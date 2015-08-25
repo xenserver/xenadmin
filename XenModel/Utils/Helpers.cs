@@ -49,10 +49,14 @@ namespace XenAdmin.Core
     public static class Helpers
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
+        private const long XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR = 50000;
+        private const long XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR = 10000;
+        private const long XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR = 4000; 
+        private const long XLVHD_MIN_ALLOCATION_QUANTUM = 16777216; // 16 MB
 
         public const int DEFAULT_NAME_TRIM_LENGTH = 50;
-
-
+        
         public const string GuiTempObjectPrefix = "__gui__";
 
         public const int CUSTOM_BUILD_NUMBER = 6666;
@@ -547,6 +551,77 @@ namespace XenAdmin.Core
             return (p != null && !String.IsNullOrEmpty(p.wlb_url));
         }
 
+        #region AllocationBoundsStructAndMethods
+        public struct AllocationBounds
+        {
+            public decimal min;
+            public decimal max;
+            public decimal defaultValue;
+
+            public AllocationBounds(decimal min, decimal max, decimal defaultValue)
+            {
+                this.min = min;
+                this.max = max;
+                this.defaultValue = defaultValue;
+            }
+
+            public string SuitableUnits()
+            {
+                if (defaultValue >= Util.BINARY_GIGA)
+                {
+                    defaultValue /= Util.BINARY_GIGA;
+                    min /= Util.BINARY_GIGA;
+                    max /= Util.BINARY_GIGA;
+                    return Messages.VAL_GIGB;
+                }
+                else
+                {
+                    defaultValue /= Util.BINARY_MEGA;
+                    min /= Util.BINARY_MEGA;
+                    max /= Util.BINARY_MEGA;
+                    return Messages.VAL_MEGB;
+                }
+            }
+        }
+
+        public static AllocationBounds SRIncrementalAllocationBounds(long SRSize)
+        {
+            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR , XLVHD_MIN_ALLOCATION_QUANTUM);
+            decimal max = SRSize /  XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR;
+            decimal defaultValue = Math.Max(SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR, min);
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        public static AllocationBounds VDIIncrementalAllocationBounds(long SRSize, long SRIncrAllocation)
+        {
+            decimal min = SRIncrAllocation;
+            decimal max = SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR;
+            decimal defaultValue = SRIncrAllocation;
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        public static AllocationBounds SRInitialAllocation(long SRSize)
+        {
+            decimal min = 0;
+            decimal max = SRSize;
+            decimal defaultValue = 0;
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        public static AllocationBounds VDIInitialAllocation(long VDISize, long SRInitialAllocation)
+        {
+            decimal min = 0;
+            decimal max = VDISize;
+            decimal defaultValue = Math.Min(SRInitialAllocation, max);
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        #endregion
+
         /// <summary>
         /// Determines whether two lists contain the same elements (but not necessarily in the same order).
         /// Compares list elements using reference equality.
@@ -757,6 +832,13 @@ namespace XenAdmin.Core
                 string.Format(Messages.GENERAL_CPU_VENDOR, cpu.vendor),
                 string.Format(Messages.GENERAL_CPU_MODEL, cpu.modelname),
                 string.Format(Messages.GENERAL_CPU_SPEED, cpu.speed));
+        }
+
+        public static string GetAllocationProperties(string initial_allocation, string quantum_allocation)
+        {
+            return string.Format(Messages.SR_DISK_SPACE_ALLOCATION,
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(initial_allocation) * Util.BINARY_MEGA, true),
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(quantum_allocation) * Util.BINARY_MEGA, true));
         }
 
         public static string GetHostRestrictions(Host host)
