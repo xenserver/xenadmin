@@ -1131,6 +1131,22 @@ namespace XenAPI
             }
         }
 
+        /// <summary>
+        /// Returns the minimum allowed initial allocation in bytes for an SR.
+        /// </summary>
+        public static long MinimumInitialAllocation(Session session, string _sr)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Returns the minimum allocation quantum in bytes for an SR.
+        /// </summary>
+        public static long MinimumAllocationQuantum(Session session, string _sr)
+        {
+            return 0;
+        }
+
         #region IEquatable<SR> Members
 
         /// <summary>
