@@ -554,9 +554,9 @@ namespace XenAdmin.Core
         #region AllocationBoundsStructAndMethods
         public struct AllocationBounds
         {
-            public decimal min;
-            public decimal max;
-            public decimal defaultValue;
+            private readonly decimal min;
+            private readonly decimal max;
+            private readonly decimal defaultValue;
 
             public AllocationBounds(decimal min, decimal max, decimal defaultValue)
             {
@@ -565,22 +565,47 @@ namespace XenAdmin.Core
                 this.defaultValue = defaultValue;
             }
 
-            public string SuitableUnits()
+            public decimal Min
+            {
+                get
+                {
+                    return GetValueInUnits(min);
+                }
+            }
+
+            public decimal Max
+            {
+                get
+                {
+                    return GetValueInUnits(max);
+                }
+            }
+
+            public decimal DefaultValue
+            {
+                get
+                {
+                    return GetValueInUnits(defaultValue);
+                }
+            }
+
+            public string Unit
+            {
+                get
+                {
+                    if (defaultValue >= Util.BINARY_GIGA)
+                        return Messages.VAL_GIGB;
+                    else
+                        return Messages.VAL_MEGB;
+                }
+            }
+
+            private decimal GetValueInUnits(decimal val)
             {
                 if (defaultValue >= Util.BINARY_GIGA)
-                {
-                    defaultValue /= Util.BINARY_GIGA;
-                    min /= Util.BINARY_GIGA;
-                    max /= Util.BINARY_GIGA;
-                    return Messages.VAL_GIGB;
-                }
+                    return val / Util.BINARY_GIGA;
                 else
-                {
-                    defaultValue /= Util.BINARY_MEGA;
-                    min /= Util.BINARY_MEGA;
-                    max /= Util.BINARY_MEGA;
-                    return Messages.VAL_MEGB;
-                }
+                    return val / Util.BINARY_MEGA;
             }
         }
 
