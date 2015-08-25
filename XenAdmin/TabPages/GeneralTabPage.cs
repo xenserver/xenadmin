@@ -1244,7 +1244,7 @@ namespace XenAdmin.TabPages
                 {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
                     s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING);
-                    if(sr.IsThinProvisioned)
+                    if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
                     {
                         s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
                                    Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
