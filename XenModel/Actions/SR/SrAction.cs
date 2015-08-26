@@ -37,13 +37,14 @@ using System.Collections.Generic;
 
 namespace XenAdmin.Actions
 {
-    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UpgradeLVM, UnplugAndDestroyPBDs };
+    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UpgradeLVM, UnplugAndDestroyPBDs, ConvertToThin };
 
     public class SrAction : PureAsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly SrActionKind kind;
+        private readonly Dictionary<string, string> parameters;
 
         public SrAction(SrActionKind kind, SR sr)
             : base(sr.Connection, GetTitle(kind, sr))
@@ -56,6 +57,12 @@ namespace XenAdmin.Actions
             Host host = sr.GetStorageHost();
             if (host != null)
                 Host = host;
+        }
+
+        public SrAction(SrActionKind kind, SR sr, Dictionary<string, string> parameters)
+            : this(kind, sr)
+        {
+            this.parameters = parameters;
         }
 
         private static String GetTitle(SrActionKind kind, SR sr)
@@ -82,6 +89,10 @@ namespace XenAdmin.Actions
                 case SrActionKind.UpgradeLVM:
                     return String.Format(Messages.ACTION_SR_UPGRADE,
                         sr.Name, Helpers.GetName(sr.Connection));
+
+                case SrActionKind.ConvertToThin:
+                    return String.Format(Messages.ACTION_SR_UPGRADE_TO_THIN,
+                        sr.NameWithLocation);
             }
 
             return "";
@@ -160,6 +171,23 @@ namespace XenAdmin.Actions
                     UnplugPBDs(ref inc);
                     DestroyPBDs(ref inc);
                     Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost);
+                    break;
+
+                case SrActionKind.ConvertToThin:
+                    Description = string.Format(Messages.ACTION_SR_UPGRADING_TO_THIN, SR.NameWithLocation);
+
+                    long initial_allocation = 0;
+                    long allocation_quantum = 0;
+
+                    if (parameters.ContainsKey("initial_allocation"))
+                        long.TryParse(parameters["initial_allocation"], out initial_allocation);
+
+                    if (parameters.ContainsKey("allocation_quantum"))
+                        long.TryParse(parameters["allocation_quantum"], out allocation_quantum);
+
+                    LVHD.enable_thin_provisioning(Session, SR.uuid, initial_allocation, allocation_quantum);
+
+                    Description = string.Format(Messages.ACTION_SR_UPGRADED_TO_THIN, SR.NameWithLocation);
                     break;
             }
         }

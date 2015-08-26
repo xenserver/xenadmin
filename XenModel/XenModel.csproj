@@ -339,6 +339,9 @@
     <Compile Include="XenAPI\GPU_group.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
+    <Compile Include="XenAPI\LVHD.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
