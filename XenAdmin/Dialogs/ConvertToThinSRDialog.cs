@@ -95,7 +95,7 @@ namespace XenAdmin.Dialogs
 
                 if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
                 {
-                    smconfig["allocation"] = "dynamic";
+                    smconfig["allocation"] = "xlvhd";
                     smconfig["allocation_quantum"] = (allocationQuantumNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
                     smconfig["initial_allocation"] = (initialAllocationNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
                 }
