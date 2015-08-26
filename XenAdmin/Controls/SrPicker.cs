@@ -54,7 +54,7 @@ namespace XenAdmin.Controls
         public event EventHandler ItemSelectionNull;
         public event EventHandler ItemSelectionNotNull;
         public long DiskSize = 0;
-        public decimal? OverridenInitialAllocationRate = null;
+        public long? OverridenInitialAllocationRate = null;
 
         public SrPicker(IXenConnection connection, SRPickerType usage) : this(connection)
         {
@@ -216,7 +216,7 @@ namespace XenAdmin.Controls
         /// <returns></returns>
         private long GetRequiredDiskSizeForSR(SR sr)
         {
-            decimal allocationRate = 1;
+            long allocationRate = DiskSize;
 
             if (sr != null && sr.IsThinProvisioned)
             {
@@ -226,16 +226,16 @@ namespace XenAdmin.Controls
                 }
                 else
                 {
-                    decimal temp = 0;
+                    long temp = 0;
 
-                    if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation") && decimal.TryParse(sr.sm_config["initial_allocation"], out temp))
+                    if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation") && long.TryParse(sr.sm_config["initial_allocation"], out temp))
                     {
                         allocationRate = temp;
                     }
                 }
             }
 
-            return (long)(allocationRate * DiskSize);
+            return Math.Min(allocationRate, DiskSize);
         }
 
         private readonly SrPickerItemFactory itemFactory = new SrPickerItemFactory();

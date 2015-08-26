@@ -570,60 +570,6 @@
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sizeValue" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="locationLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SizeLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sizeNUD" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="sizeValueROLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelLocationValueRO" Row="1" RowSpan="1" Column="1" ColumnSpan="5" /&gt;&lt;Control Name="pictureBoxError" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelError" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="initial_allocation_label" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="incremental_allocation_label" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="initial_alloc_value" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="incr_alloc_value" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,30,Absolute,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="&gt;&gt;labelShutDownWarning.Name" xml:space="preserve">
-    <value>labelShutDownWarning</value>
-  </data>
-  <data name="&gt;&gt;labelShutDownWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelShutDownWarning.Parent" xml:space="preserve">
-    <value>panelShutDownHint</value>
-  </data>
-  <data name="&gt;&gt;labelShutDownWarning.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>panelShutDownHint</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelShutDownHint.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panelShutDownHint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 35</value>
-  </data>
-  <data name="panelShutDownHint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="panelShutDownHint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>558, 39</value>
-  </data>
-  <data name="panelShutDownHint.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="panelShutDownHint.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;panelShutDownHint.Name" xml:space="preserve">
-    <value>panelShutDownHint</value>
-  </data>
-  <data name="&gt;&gt;panelShutDownHint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelShutDownHint.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelShutDownHint.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="labelShutDownWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -694,6 +640,36 @@
     <value>panelShutDownHint</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelShutDownHint.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelShutDownHint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 35</value>
+  </data>
+  <data name="panelShutDownHint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="panelShutDownHint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 39</value>
+  </data>
+  <data name="panelShutDownHint.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="panelShutDownHint.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;panelShutDownHint.Name" xml:space="preserve">
+    <value>panelShutDownHint</value>
+  </data>
+  <data name="&gt;&gt;panelShutDownHint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelShutDownHint.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelShutDownHint.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">

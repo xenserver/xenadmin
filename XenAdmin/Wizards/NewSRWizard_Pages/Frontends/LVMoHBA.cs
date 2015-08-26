@@ -385,6 +385,23 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public List<LvmOhbaSrDescriptor> SrDescriptors { get; private set; }
 
+        /// <summary>
+        /// min size
+        /// </summary>
+        public long Size
+        {
+            get
+            {
+                long size = long.MaxValue;
+                foreach (var srDescriptor in SrDescriptors)
+                {
+                    if (srDescriptor.Device.Size < size)
+                        size = srDescriptor.Device.Size;
+                }
+                return size;
+            }
+        }
+
         #endregion
         
         #region Nested classes

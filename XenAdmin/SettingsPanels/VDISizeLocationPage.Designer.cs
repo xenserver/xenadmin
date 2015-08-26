@@ -38,15 +38,15 @@ namespace XenAdmin.SettingsPanels
             this.labelLocationValueRO = new System.Windows.Forms.Label();
             this.pictureBoxError = new System.Windows.Forms.PictureBox();
             this.labelError = new System.Windows.Forms.Label();
+            this.initial_allocation_label = new System.Windows.Forms.Label();
+            this.incremental_allocation_label = new System.Windows.Forms.Label();
+            this.initial_alloc_value = new System.Windows.Forms.Label();
+            this.incr_alloc_value = new System.Windows.Forms.Label();
             this.panelShutDownHint = new System.Windows.Forms.Panel();
             this.labelShutDownWarning = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.initial_allocation_label = new System.Windows.Forms.Label();
-            this.incremental_allocation_label = new System.Windows.Forms.Label();
-            this.initial_alloc_value = new System.Windows.Forms.Label();
-            this.incr_alloc_value = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sizeNUD)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).BeginInit();
@@ -128,6 +128,26 @@ namespace XenAdmin.SettingsPanels
             this.labelError.ForeColor = System.Drawing.Color.Red;
             this.labelError.Name = "labelError";
             // 
+            // initial_allocation_label
+            // 
+            resources.ApplyResources(this.initial_allocation_label, "initial_allocation_label");
+            this.initial_allocation_label.Name = "initial_allocation_label";
+            // 
+            // incremental_allocation_label
+            // 
+            resources.ApplyResources(this.incremental_allocation_label, "incremental_allocation_label");
+            this.incremental_allocation_label.Name = "incremental_allocation_label";
+            // 
+            // initial_alloc_value
+            // 
+            resources.ApplyResources(this.initial_alloc_value, "initial_alloc_value");
+            this.initial_alloc_value.Name = "initial_alloc_value";
+            // 
+            // incr_alloc_value
+            // 
+            resources.ApplyResources(this.incr_alloc_value, "incr_alloc_value");
+            this.incr_alloc_value.Name = "incr_alloc_value";
+            // 
             // panelShutDownHint
             // 
             this.panelShutDownHint.Controls.Add(this.labelShutDownWarning);
@@ -157,26 +177,6 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // initial_allocation_label
-            // 
-            resources.ApplyResources(this.initial_allocation_label, "initial_allocation_label");
-            this.initial_allocation_label.Name = "initial_allocation_label";
-            // 
-            // incremental_allocation_label
-            // 
-            resources.ApplyResources(this.incremental_allocation_label, "incremental_allocation_label");
-            this.incremental_allocation_label.Name = "incremental_allocation_label";
-            // 
-            // initial_alloc_value
-            // 
-            resources.ApplyResources(this.initial_alloc_value, "initial_alloc_value");
-            this.initial_alloc_value.Name = "initial_alloc_value";
-            // 
-            // incr_alloc_value
-            // 
-            resources.ApplyResources(this.incr_alloc_value, "incr_alloc_value");
-            this.incr_alloc_value.Name = "incr_alloc_value";
             // 
             // VDISizeLocationPage
             // 
