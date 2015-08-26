@@ -16326,7 +16326,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
@@ -30088,6 +30088,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initial allocation: {0}
+        ///
+        ///Incremental allocation: {1}.
+        /// </summary>
+        public static string SR_DISK_SPACE_ALLOCATION {
+            get {
+                return ResourceManager.GetString("SR_DISK_SPACE_ALLOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This SR does not need to be upgraded..
         /// </summary>
         public static string SR_DOES_NOT_NEED_UPGRADE {
@@ -33776,6 +33787,15 @@ namespace XenAdmin {
         public static string VAL_GB {
             get {
                 return ResourceManager.GetString("VAL_GB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0:F1} GB.
+        /// </summary>
+        public static string VAL_GB_ONE_DECIMAL {
+            get {
+                return ResourceManager.GetString("VAL_GB_ONE_DECIMAL", resourceCulture);
             }
         }
         

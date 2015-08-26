@@ -63,15 +63,16 @@ namespace XenAdmin.Controls.Ballooning
             // Spinners
             FreeSpinnerRanges();
             static_min = vm0.memory_static_min;
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, null, vm0.memory_dynamic_min);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, null, vm0.memory_dynamic_max);
-            memorySpinnerStatMax.Initialize(Messages.STATIC_MAX_AMP, null, vm0.memory_static_max);
+
+            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, null, vm0.memory_dynamic_min, vm0.memory_static_max);
+            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, null, vm0.memory_dynamic_max, vm0.memory_static_max);
+            memorySpinnerStatMax.Initialize(Messages.STATIC_MAX_AMP, null, vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
             firstPaint = false;
         }
 
-        public override long dynamic_min
+        public override double dynamic_min
         {
             get
             {
@@ -79,7 +80,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        public override long dynamic_max
+        public override double dynamic_max
         {
             get
             {
@@ -87,7 +88,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        public override long static_max
+        public override double static_max
         {
             get
             {
@@ -97,7 +98,7 @@ namespace XenAdmin.Controls.Ballooning
 
         private void SetIncrements()
         {
-            memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = CalcIncrement();
+             memorySpinnerDynMin.Increment =  memorySpinnerDynMax.Increment = memorySpinnerStatMax.Increment = CalcIncrement(memorySpinnerDynMax.Units);
         }
 
         private void Spinners_ValueChanged(object sender, EventArgs e)

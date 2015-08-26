@@ -37,6 +37,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Properties;
+using XenAdmin.Actions;
 using XenAPI;
 using System.Text.RegularExpressions;
 
@@ -182,6 +183,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
 
             Program.ReconfigureConnectionSettings();
+            new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                                            Properties.Settings.Default.ProxyAddress,
+                                            Properties.Settings.Default.ProxyPort,
+                                            Properties.Settings.Default.ConnectionTimeout,
+                                            Properties.Settings.Default.BypassProxyForLocal,
+                                            true).RunAsync();
         }
 
         private void SetSpecifiedProxySettings()

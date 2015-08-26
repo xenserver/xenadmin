@@ -57,11 +57,11 @@ namespace XenAdmin.Actions
         private const string uploadGrantTokenUrl = "/feeds/api/create_grant/";
         private const string uploadTokenUrl = "/feeds/api/create_upload/";
 
-        private readonly string identityTokenDomainName = "http://cis-daily.citrite.net";
-        private readonly string uploadGrantTokenDomainName = "https://rttf-daily.citrite.net";
-        private readonly string uploadTokenDomainName = "https://rttf-daily.citrite.net";
+        private readonly string identityTokenDomainName = "https://cis.citrix.com";
+        private readonly string uploadGrantTokenDomainName = "https://rttf.citrix.com";
+        private readonly string uploadTokenDomainName = "https://rttf.citrix.com";
 
-        private readonly string productKey = "eb1b224c461038baf1f08dfba6b8d4b4413f96c7";
+        private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
         public HealthCheckAuthenticationAction(Pool pool, string username, string password, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
             : base(pool != null ? pool.Connection : null, Messages.ACTION_HEALTHCHECK_AUTHENTICATION, Messages.ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS, suppressHistory)

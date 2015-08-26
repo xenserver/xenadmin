@@ -1250,6 +1250,12 @@ namespace XenAdmin.TabPages
                         menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem> () { new SelectedItem(xenObject)} ), true) };
                     }
                     s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING, menuItems);
+
+                    if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
+                    {
+                        s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
+                                   Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
+                    }
                 }
 
                 if (sr.GetScsiID() != null)
@@ -1350,7 +1356,7 @@ namespace XenAdmin.TabPages
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
-                    bool isReceivingUpdates = vm.auto_update_drivers;
+                    bool isReceivingUpdates = false;// && vm.auto_update_drivers; //disabling it temporarily
 
                     bool isXenPrepInProgress = false; //TODO in CP-13247  when XenPrep functions will be added
                     bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO in CP-13247: remove &&false when XenPrep functions have been added

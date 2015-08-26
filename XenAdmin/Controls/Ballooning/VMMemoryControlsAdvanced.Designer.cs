@@ -31,8 +31,8 @@ namespace XenAdmin.Controls.Ballooning
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VMMemoryControlsAdvanced));
             this.spinnerPanel = new System.Windows.Forms.TableLayoutPanel();
             this.memorySpinnerDynMin = new XenAdmin.Controls.Ballooning.MemorySpinner();
-            this.memorySpinnerStatMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.memorySpinnerDynMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
+            this.memorySpinnerStatMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.spinnerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,8 +40,8 @@ namespace XenAdmin.Controls.Ballooning
             // 
             resources.ApplyResources(this.spinnerPanel, "spinnerPanel");
             this.spinnerPanel.Controls.Add(this.memorySpinnerDynMin, 0, 0);
-            this.spinnerPanel.Controls.Add(this.memorySpinnerStatMax, 0, 2);
             this.spinnerPanel.Controls.Add(this.memorySpinnerDynMax, 0, 1);
+            this.spinnerPanel.Controls.Add(this.memorySpinnerStatMax, 0, 2);
             this.spinnerPanel.Name = "spinnerPanel";
             // 
             // memorySpinnerDynMin
@@ -50,17 +50,17 @@ namespace XenAdmin.Controls.Ballooning
             this.memorySpinnerDynMin.Name = "memorySpinnerDynMin";
             this.memorySpinnerDynMin.SpinnerValueChanged += new System.EventHandler(this.Spinners_ValueChanged);
             // 
-            // memorySpinnerStatMax
-            // 
-            resources.ApplyResources(this.memorySpinnerStatMax, "memorySpinnerStatMax");
-            this.memorySpinnerStatMax.Name = "memorySpinnerStatMax";
-            this.memorySpinnerStatMax.SpinnerValueChanged += new System.EventHandler(this.Spinners_ValueChanged);
-            // 
             // memorySpinnerDynMax
             // 
             resources.ApplyResources(this.memorySpinnerDynMax, "memorySpinnerDynMax");
             this.memorySpinnerDynMax.Name = "memorySpinnerDynMax";
             this.memorySpinnerDynMax.SpinnerValueChanged += new System.EventHandler(this.Spinners_ValueChanged);
+            // 
+            // memorySpinnerStatMax
+            // 
+            resources.ApplyResources(this.memorySpinnerStatMax, "memorySpinnerStatMax");
+            this.memorySpinnerStatMax.Name = "memorySpinnerStatMax";
+            this.memorySpinnerStatMax.SpinnerValueChanged += new System.EventHandler(this.Spinners_ValueChanged);
             // 
             // VMMemoryControlsAdvanced
             // 
@@ -69,6 +69,7 @@ namespace XenAdmin.Controls.Ballooning
             this.Controls.Add(this.spinnerPanel);
             this.Name = "VMMemoryControlsAdvanced";
             this.spinnerPanel.ResumeLayout(false);
+            this.spinnerPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }

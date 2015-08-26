@@ -44,7 +44,7 @@ namespace XenServerHealthCheck
     public class XenServerHealthCheckUpload
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public string UPLOAD_URL = "https://rttf-staging.citrix.com/feeds/api/";
+        public string UPLOAD_URL = "https://rttf.citrix.com/feeds/api/";
         public const int CHUNK_SIZE = 1 * 1024 * 1024;
         private JavaScriptSerializer serializer;
         private int verbosityLevel;

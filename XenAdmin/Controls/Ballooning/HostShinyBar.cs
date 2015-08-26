@@ -115,20 +115,20 @@ namespace XenAdmin.Controls.Ballooning
             Rectangle rect = new Rectangle((int)left, barArea.Top,
                 (int)(left + width) - (int)left,  // this is not necessarily the same as (int)width, which can leave a 1 pixel gap
                 barArea.Height);
-            string bytesString = Util.SuperiorSizeString(mem, 0);
+            string bytesString = Util.MemorySizeStringSuitableUnits(mem, false);
             string caption = name + "\n" + bytesString;
-            string toolTip = name + "\n" + string.Format(Messages.CURRENT_MEMORY_USAGE, bytesString);
+            string toolTip = name + "\n" + string.Format(Messages.CURRENT_MEMORY_USAGE, Util.MemorySizeStringSuitableUnits(mem, true));
             if (vm != null && vm.has_ballooning)
             {
                 if (vm.memory_dynamic_max == vm.memory_static_max)
                     toolTip += string.Format("\n{0}: {1}\n{2}: {3}",
-                                             Messages.DYNAMIC_MIN, Util.SuperiorSizeString(vm.memory_dynamic_min, 0),
-                                             Messages.DYNAMIC_MAX, Util.SuperiorSizeString(vm.memory_dynamic_max, 0));
+                                             Messages.DYNAMIC_MIN, Util.MemorySizeStringSuitableUnits(vm.memory_dynamic_min, true),
+                                             Messages.DYNAMIC_MAX, Util.MemorySizeStringSuitableUnits(vm.memory_dynamic_max, true));
                 else
                     toolTip += string.Format("\n{0}: {1}\n{2}: {3}\n{4}: {5}",
-                                             Messages.DYNAMIC_MIN, Util.SuperiorSizeString(vm.memory_dynamic_min, 0),
-                                             Messages.DYNAMIC_MAX, Util.SuperiorSizeString(vm.memory_dynamic_max, 0),
-                                             Messages.STATIC_MAX, Util.SuperiorSizeString(vm.memory_static_max, 0));
+                                             Messages.DYNAMIC_MIN, Util.MemorySizeStringSuitableUnits(vm.memory_dynamic_min, true),
+                                             Messages.DYNAMIC_MAX, Util.MemorySizeStringSuitableUnits(vm.memory_dynamic_max, true),
+                                             Messages.STATIC_MAX, Util.MemorySizeStringSuitableUnits(vm.memory_static_max, true));
             }
             DrawToTarget(g, barArea, rect, color, caption, BallooningColors.HostShinyBar_Text, HorizontalAlignment.Center, toolTip);
             left += width;
