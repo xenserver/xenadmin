@@ -404,17 +404,7 @@ namespace XenAdmin.Dialogs
 
             initialAllocationNumericUpDown.Minimum = allocBounds.MinInUnits;
             initialAllocationNumericUpDown.Maximum = allocBounds.MaxInUnits;
-
-            decimal initialAllocValue = allocBounds.DefaultValueInUnits;
-            if (initialAllocValue < initialAllocationNumericUpDown.Minimum)
-            {
-                initialAllocValue = initialAllocationNumericUpDown.Minimum;
-            }
-            if (initialAllocValue > initialAllocationNumericUpDown.Maximum)
-            {
-                initialAllocValue = initialAllocationNumericUpDown.Maximum;
-            }
-            initialAllocationNumericUpDown.Value = initialAllocValue;
+            initialAllocationNumericUpDown.Value = allocBounds.DefaultValueInUnits;
 
             SetNumUpDownIncrementAndDecimals(initialAllocationNumericUpDown, allocBounds.Unit);
         }
@@ -434,18 +424,7 @@ namespace XenAdmin.Dialogs
 
             allocationQuantumNumericUpDown.Minimum = allocBounds.MinInUnits;
             allocationQuantumNumericUpDown.Maximum = allocBounds.MaxInUnits;
-
-            decimal incrementalAllocValue = allocBounds.DefaultValueInUnits;
-            if (incrementalAllocValue < allocationQuantumNumericUpDown.Minimum)
-            {
-                incrementalAllocValue = allocationQuantumNumericUpDown.Minimum;
-            }
-            if (incrementalAllocValue > allocationQuantumNumericUpDown.Maximum)
-            {
-                incrementalAllocValue = allocationQuantumNumericUpDown.Maximum;
-            }
-
-            allocationQuantumNumericUpDown.Value = incrementalAllocValue;
+            allocationQuantumNumericUpDown.Value = allocBounds.DefaultValueInUnits;
 
             SetNumUpDownIncrementAndDecimals(allocationQuantumNumericUpDown, allocBounds.Unit);
         }        
@@ -773,11 +752,19 @@ namespace XenAdmin.Dialogs
             {
                 upDown.Maximum *= Util.BINARY_KILO;
                 upDown.Value *= Util.BINARY_KILO;
+                if(!userChangedInitialAllocationValue)
+                {
+                    upDown.Minimum *= Util.BINARY_KILO;
+                }
             }
             else
             {
                 upDown.Minimum /= Util.BINARY_KILO;
                 upDown.Value /= Util.BINARY_KILO;
+                if (!userChangedInitialAllocationValue)
+                {
+                    upDown.Maximum /= Util.BINARY_KILO;
+                }
             }
 
             SetNumUpDownIncrementAndDecimals(upDown, newUnits);
