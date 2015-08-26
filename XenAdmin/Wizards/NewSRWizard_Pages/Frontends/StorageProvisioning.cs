@@ -54,8 +54,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public StorageProvisioning()
         {
             InitializeComponent();
-            previousUnitsValueIncrAlloc = Messages.VAL_MEGB;
-            previousUnitsValueInitAlloc = Messages.VAL_MEGB;
+            incremental_allocation_units.SelectedItem = previousUnitsValueIncrAlloc = Messages.VAL_MEGB;
+            initial_allocation_units.SelectedItem = previousUnitsValueInitAlloc = Messages.VAL_MEGB;
         }
 
         #region Accessors
@@ -72,18 +72,18 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 {
                     smconfig["allocation"] = "xlvhd";
                     smconfig["allocation_quantum"] = (incremental_allocation_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA)
-                                                                                                                   : (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA))
-                                                                                                                   .ToString(CultureInfo.InvariantCulture);
+                                                                                                                                : (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA))
+                                                                                                                                .ToString(CultureInfo.InvariantCulture);
                     smconfig["initial_allocation"] = (initial_allocation_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(initialAllocationNumericUpDown.Value * Util.BINARY_MEGA)
-                                                                                                               : (long)(initialAllocationNumericUpDown.Value * Util.BINARY_GIGA))
-                                                                                                               .ToString(CultureInfo.InvariantCulture); 
+                                                                                                                            : (long)(initialAllocationNumericUpDown.Value * Util.BINARY_GIGA))
+                                                                                                                            .ToString(CultureInfo.InvariantCulture); 
                 }
 
                 return smconfig;
             }
         }
 
-        public new long Size { get; set; }
+        public long SRSize { get; set; }
 
         #endregion
 
@@ -120,69 +120,24 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 upDown.DecimalPlaces = DecimalPlacesMB;
                 upDown.Increment = IncrementMB;
             }
-        }
-
-        /// <summary>
-        /// All the values received by this function are in bytes.
-        /// </summary>
-        /// <param name="valueBytes"></param>
-        /// <param name="minBytes"></param>
-        /// <param name="maxBytes"></param>
-        /// <returns></returns>
-        private string ConvertToCorrectUnitsAndCheckIfInBounds(ref decimal valueBytes, ref decimal minBytes, ref decimal maxBytes)
-        {
-            if (valueBytes < minBytes)
-            {
-                valueBytes = minBytes;
-            }
-            if (valueBytes > maxBytes)
-            {
-                valueBytes = maxBytes;
-            }
-
-            if (valueBytes > Util.BINARY_GIGA)
-            {
-                valueBytes /= Util.BINARY_GIGA;
-                minBytes /= Util.BINARY_GIGA;
-                maxBytes /= Util.BINARY_GIGA;
-                return Messages.VAL_GIGB;
-            }
-            else
-            {
-                valueBytes /= Util.BINARY_MEGA;
-                minBytes /= Util.BINARY_MEGA;
-                maxBytes /= Util.BINARY_MEGA;
-                return Messages.VAL_MEGB;
-            }
-        }
+        }    
 
 
         // The value parameter is -1 if we do not use an existing SM Config. Otherwise  
         // it is the value of the initial_allocation in the SM config. The value received is in bytes.
         private void SetUpInitAllocationNumericUpDown(decimal value)
         {
-            Helpers.AllocationBounds allocBounds = Helpers.SRInitialAllocationBounds(Size);
-            string units;
+            Helpers.AllocationBounds allocBounds = Helpers.SRInitialAllocationBounds(SRSize);
 
-            if(value == -1)
+            if(value != -1)
             {
-                initialAllocationNumericUpDown.Minimum = allocBounds.MinInUnits;
-                initialAllocationNumericUpDown.Maximum = allocBounds.MaxInUnits;
-                initialAllocationNumericUpDown.Value = allocBounds.DefaultValueInUnits;
-                units = allocBounds.Unit;
+                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, value);                
             }
-            else
-            {
-                decimal min = allocBounds.Min;
-                decimal max = allocBounds.Max;
-                units = ConvertToCorrectUnitsAndCheckIfInBounds(ref value, ref min, ref max);
-                initialAllocationNumericUpDown.Minimum = min;
-                initialAllocationNumericUpDown.Maximum = max;
-                initialAllocationNumericUpDown.Value = value;
-                
-            }
-
-            initial_allocation_units.SelectedItem = previousUnitsValueInitAlloc = units;
+            initialAllocationNumericUpDown.Minimum = allocBounds.MinInUnits;
+            initialAllocationNumericUpDown.Maximum = allocBounds.MaxInUnits;
+            initialAllocationNumericUpDown.Value = allocBounds.DefaultValueInUnits;
+            
+            initial_allocation_units.SelectedItem = previousUnitsValueInitAlloc = allocBounds.Unit;
             SetNumUpDownIncrementAndDecimals(initialAllocationNumericUpDown, allocBounds.Unit);
         }
 
@@ -190,27 +145,17 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         // it is the value of the allocation_quantum in the SM config. 
         private void SetUpIncrAllocationNumericUpDown(decimal value)
         {
-            Helpers.AllocationBounds allocBounds = Helpers.SRIncrementalAllocationBounds(Size);
-            string units;
-            if (value == -1)
+            Helpers.AllocationBounds allocBounds = Helpers.SRIncrementalAllocationBounds(SRSize);
+            if (value != -1)
             {
-                allocationQuantumNumericUpDown.Minimum = allocBounds.MinInUnits;
-                allocationQuantumNumericUpDown.Maximum = allocBounds.MaxInUnits;
-                allocationQuantumNumericUpDown.Value = allocBounds.DefaultValueInUnits;
-                units = allocBounds.Unit;                
+                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, value);                        
             }
-            else
-            {
-                decimal min = allocBounds.Min;
-                decimal max = allocBounds.Max;
-                units = ConvertToCorrectUnitsAndCheckIfInBounds(ref value, ref min, ref max);
-                allocationQuantumNumericUpDown.Minimum = min;
-                allocationQuantumNumericUpDown.Maximum = max;
-                allocationQuantumNumericUpDown.Value = value;
-            }
+            allocationQuantumNumericUpDown.Minimum = allocBounds.MinInUnits;
+            allocationQuantumNumericUpDown.Maximum = allocBounds.MaxInUnits;
+            allocationQuantumNumericUpDown.Value = allocBounds.DefaultValueInUnits;             
 
-            incremental_allocation_units.SelectedItem = previousUnitsValueInitAlloc = units;
-            SetNumUpDownIncrementAndDecimals(allocationQuantumNumericUpDown, units);
+            incremental_allocation_units.SelectedItem = previousUnitsValueInitAlloc = allocBounds.Unit;
+            SetNumUpDownIncrementAndDecimals(allocationQuantumNumericUpDown, allocBounds.Unit);
         }
 
         public override string PageTitle { get { return Messages.STORAGE_PROVISIONING_METHOD_TITLE; } }
@@ -307,7 +252,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             decimal min = upDown.Minimum;
             decimal max = upDown.Maximum;
-            if (newUnits == "MB")
+            if (newUnits == Messages.VAL_MEGB)
             {                
                 upDown.Maximum *= Util.BINARY_KILO;
                 upDown.Value *= Util.BINARY_KILO;

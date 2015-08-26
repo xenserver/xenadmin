@@ -835,7 +835,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public string UUID { get { return _srToIntroduce == null ? null : _srToIntroduce.UUID; } }
 
-        public long Size
+        public long SRSize
         {
             get
             {

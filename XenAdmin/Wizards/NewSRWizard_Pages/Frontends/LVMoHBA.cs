@@ -388,7 +388,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         /// <summary>
         /// min size
         /// </summary>
-        public long Size
+        public long SRSize
         {
             get
             {
