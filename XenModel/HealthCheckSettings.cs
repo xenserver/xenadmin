@@ -43,6 +43,11 @@ namespace XenAdmin.Model
         Disabled, Enabled, Undefined
     }
 
+    public enum DiagnosticAlertSeverity
+    {
+        Info, Warning, Error
+    }
+
     public class HealthCheckSettings
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -55,6 +60,12 @@ namespace XenAdmin.Model
         public string UserNameSecretUuid;
         public string PasswordSecretUuid;
         public string LastSuccessfulUpload;
+        public string DiagnosticTokenSecretUuid;
+        public string UploadUuid;
+        public DiagnosticAlertSeverity ReportAnalysisSeverity;
+        public int ReportAnalysisIssuesDetected;
+        public string ReportAnalysisUploadUuid;
+        public string ReportAnalysisUploadTime;
         
         public const int DEFAULT_INTERVAL_IN_DAYS = 14;
         public const int DEFAULT_RETRY_INTERVAL = 7; // in days
@@ -75,15 +86,13 @@ namespace XenAdmin.Model
         public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
         public const string UPLOAD_UUID = "UploadUuid";
+        public const string DIAGNOSTIC_TOKEN_SECRET = "DiagnosticToken.Secret";
+        public const string REPORT_ANALYSIS_SEVERITY = "ReportAnalysis.Severity";
+        public const string REPORT_ANALYSIS_ISSUES_DETECTED = "ReportAnalysis.IssuesDetected";
+        public const string REPORT_ANALYSIS_UPLOAD_UUID = "ReportAnalysis.UploadUuid";
+        public const string REPORT_ANALYSIS_UPLOAD_TIME = "ReportAnalysis.UploadTime";
 
-        public HealthCheckSettings(HealthCheckStatus status, int intervalInDays, DayOfWeek dayOfWeek, int timeOfDay)
-        {
-            Status = status;
-            IntervalInDays = intervalInDays;
-            DayOfWeek = dayOfWeek;
-            TimeOfDay = timeOfDay;
-            RetryInterval = DEFAULT_RETRY_INTERVAL;
-        }
+        private const string REPORT_LINK_PATH = "AutoSupport/analysis/upload_overview";
 
         public HealthCheckSettings(Dictionary<string, string> config)
         {
@@ -96,10 +105,16 @@ namespace XenAdmin.Model
             TimeOfDay = IntKey(config, TIME_OF_DAY, GetDefaultTime());
             RetryInterval = IntKey(config, RETRY_INTERVAL, DEFAULT_RETRY_INTERVAL);
             UploadTokenSecretUuid = Get(config, UPLOAD_TOKEN_SECRET);
+            DiagnosticTokenSecretUuid = Get(config, DIAGNOSTIC_TOKEN_SECRET);
             NewUploadRequest = Get(config, NEW_UPLOAD_REQUEST);
             UserNameSecretUuid = Get(config, UPLOAD_CREDENTIAL_USER_SECRET);
             PasswordSecretUuid = Get(config, UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             LastSuccessfulUpload = Get(config, LAST_SUCCESSFUL_UPLOAD);
+            UploadUuid = Get(config, UPLOAD_UUID);
+            ReportAnalysisSeverity = StringToDiagnosticAlertSeverity(Get(config, REPORT_ANALYSIS_SEVERITY));
+            ReportAnalysisIssuesDetected = IntKey(config, REPORT_ANALYSIS_ISSUES_DETECTED, 0);
+            ReportAnalysisUploadUuid = Get(config, REPORT_ANALYSIS_UPLOAD_UUID);
+            ReportAnalysisUploadTime = Get(config, REPORT_ANALYSIS_UPLOAD_TIME);
         }
 
         public Dictionary<string, string> ToDictionary(Dictionary<string, string> baseDictionary)
@@ -112,6 +127,7 @@ namespace XenAdmin.Model
             newConfig[TIME_OF_DAY] = TimeOfDay.ToString();
             newConfig[RETRY_INTERVAL] = RetryInterval.ToString();
             newConfig[UPLOAD_TOKEN_SECRET] = UploadTokenSecretUuid;
+            newConfig[DIAGNOSTIC_TOKEN_SECRET] = DiagnosticTokenSecretUuid;
             newConfig[NEW_UPLOAD_REQUEST] = NewUploadRequest;
             return newConfig;
         }
@@ -123,7 +139,7 @@ namespace XenAdmin.Model
             get
             {
                 return Status == HealthCheckStatus.Enabled
-                           ? Messages.HEALTHCHECK_STATUS_NOT_AVAILABLE_YET
+                           ? ReportAnalysisStatus
                            : Messages.HEALTHCHECK_STATUS_NOT_ENROLLED;
             }
         }
@@ -155,6 +171,50 @@ namespace XenAdmin.Model
                     }
                 }
                 return DateTime.MinValue;
+            }
+        }
+
+        public string ReportAnalysisStatus
+        {
+            get
+            {
+                if (HasAnalysisResult)
+                {
+                    switch (ReportAnalysisIssuesDetected)
+                    {
+                        case 0:
+                            return Messages.HEALTHCHECK_STATUS_NO_ISSUES_FOUND; 
+                        case 1:
+                            return Messages.HEALTHCHECK_STATUS_ONE_ISSUE_FOUND; 
+                        default:
+                            return String.Format(Messages.HEALTHCHECK_STATUS_ISSUES_FOUND, ReportAnalysisIssuesDetected); 
+                    }
+                }
+                return HasUpload ? Messages.HEALTHCHECK_STATUS_NOT_AVAILABLE_YET : Messages.HEALTHCHECK_STATUS_NO_UPLOAD_YET;
+            }
+        }
+
+        public string GetReportAnalysisLink(string domainName)
+        {
+            return String.Format("{0}/{1}/{2}", domainName, REPORT_LINK_PATH, ReportAnalysisUploadUuid);
+        }
+
+        public bool HasUpload
+        {
+            get { return !string.IsNullOrEmpty(UploadUuid); }
+        }
+
+        public bool HasAnalysisResult
+        {
+            get { return HasUpload && ReportAnalysisUploadUuid == UploadUuid; }
+        }
+
+        public bool HasOldAnalysisResult
+        {
+            get
+            {
+                return !HasAnalysisResult && !string.IsNullOrEmpty(ReportAnalysisUploadUuid) &&
+                       !string.IsNullOrEmpty(ReportAnalysisUploadTime);
             }
         }
 
@@ -223,6 +283,9 @@ namespace XenAdmin.Model
                 case HealthCheckSettings.UPLOAD_TOKEN_SECRET:
                     UUID = UploadTokenSecretUuid;
                     break;
+                case HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET:
+                    UUID = DiagnosticTokenSecretUuid;
+                    break;
                 default:
                     log.ErrorFormat("Error getting the {0} from the xapi secret", secretType);
                     break;
@@ -242,21 +305,26 @@ namespace XenAdmin.Model
             }
         }
 
-        public string GetExistingSecretyInfo(IXenConnection connection, string secretType)
+        public bool TryGetExistingTokens(IXenConnection connection, out string uploadToken, out string diagnosticToken)
         {
+            uploadToken = null;
+            diagnosticToken = null;
             if (connection == null)
-                return null;
+                return false;
 
-            string token = GetSecretyInfo(connection, secretType);
+            uploadToken = GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
+            diagnosticToken = GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
 
-            if (string.IsNullOrEmpty(token))
-                token = GetSecretyInfoFromOtherConnections(connection, secretType);
+            if (!String.IsNullOrEmpty(uploadToken) && !String.IsNullOrEmpty(diagnosticToken))
+                return true;
 
-            return token;
+            return TryGetExistingTokensFromOtherConnections(connection, out uploadToken, out diagnosticToken);
         }
 
-        private static string GetSecretyInfoFromOtherConnections(IXenConnection currentConnection, string secretType)
+        private static bool TryGetExistingTokensFromOtherConnections(IXenConnection currentConnection, out string uploadToken, out string diagnosticToken)
         {
+            uploadToken = null;
+            diagnosticToken = null; 
             foreach (var connection in ConnectionsManager.XenConnectionsCopy)
             {
                 if (connection == currentConnection || !connection.IsConnected)
@@ -264,12 +332,39 @@ namespace XenAdmin.Model
                 var poolOfOne = Helpers.GetPoolOfOne(connection);
                 if (poolOfOne != null)
                 {
-                    var token = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, secretType);
-                    if (!string.IsNullOrEmpty(token))
-                        return token;
+                    uploadToken = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
+                    diagnosticToken = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
+                    if (!String.IsNullOrEmpty(uploadToken) && !String.IsNullOrEmpty(diagnosticToken))
+                        return true;
                 }
             }
-            return null;
+            return false;
+        }
+
+        internal static DiagnosticAlertSeverity StringToDiagnosticAlertSeverity(string severity)
+        {
+            switch (severity)
+            {
+                case "Eror":
+                    return DiagnosticAlertSeverity.Error;
+                case "Warning":
+                    return DiagnosticAlertSeverity.Warning;
+                default:
+                    return DiagnosticAlertSeverity.Info;
+            }
+        }
+
+        internal static string DiagnosticAlertSeverityToString(DiagnosticAlertSeverity severity)
+        {
+            switch (severity)
+            {
+                case DiagnosticAlertSeverity.Error:
+                    return "Error";
+                case DiagnosticAlertSeverity.Warning:
+                    return "Warning";
+                default:
+                    return "Info";
+            }
         }
     }
 }

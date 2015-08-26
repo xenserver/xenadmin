@@ -319,6 +319,11 @@ namespace XenAdmin.Core
             get { return ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME); }
         }
 
+        public static string HealthCheckDiagnosticDomainName
+        {
+            get { return ReadKey(HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME); }
+        }
+
         public static string HealthCheckProductKey
         {
             get { return ReadKey(HEALTH_CHECK_PRODUCT_KEY); }
@@ -343,6 +348,7 @@ namespace XenAdmin.Core
         private const string HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME = "HealthCheckUploadTokenDomainName";
         private const string HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME = "HealthCheckUploadGrantTokenDomainName";
         private const string HEALTH_CHECK_UPLOAD_DOMAIN_NAME = "HealthCheckUploadDomainName";
+        private const string HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME = "HealthCheckDiagnosticDomainName";
         private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
     }
 

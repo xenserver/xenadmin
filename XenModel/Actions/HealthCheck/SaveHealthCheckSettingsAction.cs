@@ -40,15 +40,17 @@ namespace XenAdmin.Actions
         private readonly Pool pool;
         HealthCheckSettings healthCheckSettings;
         private string authenticationToken;
+        private string diagnosticToken;
         private string username;
         private string password;
 
-        public SaveHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string authenticationToken, string userName, string passWord, bool suppressHistory)
+        public SaveHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string authenticationToken, string diagnosticToken, string userName, string passWord, bool suppressHistory)
             : base(pool.Connection, Messages.ACTION_SAVE_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_SAVING_HEALTHCHECK_SETTINGS, pool.Name), suppressHistory)
         {
             this.pool = pool;
             this.healthCheckSettings = healthCheckSettings;
             this.authenticationToken = authenticationToken;
+            this.diagnosticToken = diagnosticToken;
             this.username = healthCheckSettings.Status == HealthCheckStatus.Enabled ? userName : null;
             this.password = healthCheckSettings.Status == HealthCheckStatus.Enabled ? passWord : null;
         }
@@ -58,6 +60,8 @@ namespace XenAdmin.Actions
             Dictionary<string, string> newConfig = healthCheckSettings.ToDictionary(pool.health_check_config);
             if (!string.IsNullOrEmpty(authenticationToken))
                 HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_TOKEN_SECRET, authenticationToken);
+            if (!string.IsNullOrEmpty(diagnosticToken))
+            HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET, diagnosticToken);
             HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET, username);
             HealthCheckAuthenticationAction.SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET, password);
             Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);

@@ -197,6 +197,7 @@
     <Compile Include="Controls\UpsellPage.designer.cs">
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />

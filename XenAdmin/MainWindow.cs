@@ -126,6 +126,7 @@ namespace XenAdmin
         private readonly LicenseTimer licenseTimer;
 
         public readonly HealthCheckOverviewLauncher HealthCheckOverviewLauncher;
+        private readonly System.Windows.Forms.Timer healthCheckResultTimer = new System.Windows.Forms.Timer();
 
         private Dictionary<ToolStripMenuItem, int> pluginMenuItemStartIndexes = new Dictionary<ToolStripMenuItem, int>();
 
@@ -549,12 +550,26 @@ namespace XenAdmin
                 CheckForUpdatesTimer.Start();
                 Updates.CheckForUpdates(false);
             }
+
+            if (!Program.RunInAutomatedTestMode)
+            {
+                // start healthCheckResult thread
+                healthCheckResultTimer.Interval = 1000 * 60 * 60; // 1 hour
+                healthCheckResultTimer.Tick += HealthCheckResultTimer_Tick;
+                healthCheckResultTimer.Start();
+            }
+
             ProcessCommand(CommandLineArgType, CommandLineParam);
         }
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
             Updates.CheckForUpdates(false);
+        }
+
+        private void HealthCheckResultTimer_Tick(object sender, EventArgs e)
+        {
+            HealthCheck.CheckForAnalysisResults();
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)
@@ -855,8 +870,9 @@ namespace XenAdmin
 
             if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
                 ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
+            ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
             ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
-
+            
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
             RequestRefreshTreeView();
