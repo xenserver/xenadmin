@@ -402,6 +402,7 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(LVMoISCSI))
             {
+                xenTabPageStorageProvisioningMethod.Size = xenTabPageLvmoIscsi.Size;
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageLvmoIscsi.SrDescription);
@@ -531,6 +532,7 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(LVMoHBA))
             {
+                xenTabPageStorageProvisioningMethod.Size = xenTabPageLvmoHba.Size;
                 bool creatingNew = m_srWizardType.SrDescriptors.Any(srDescriptor => string.IsNullOrEmpty(srDescriptor.UUID));
                 if (!creatingNew)
                 {

@@ -102,8 +102,8 @@ namespace XenAdmin.SettingsPanels
             
             if(sr.IsThinProvisioned && vdi.sm_config.ContainsKey("initial_allocation") && vdi.sm_config.ContainsKey("allocation_quantum"))
             {
-                initial_alloc_value.Text = Util.MemorySizeStringSuitableUnits(Convert.ToDouble(vdi.sm_config["initial_allocation"]) * Util.BINARY_MEGA, true);
-                incr_alloc_value.Text = Util.MemorySizeStringSuitableUnits(Convert.ToDouble(vdi.sm_config["allocation_quantum"]) * Util.BINARY_MEGA, true);
+                initial_alloc_value.Text = Util.MemorySizeStringSuitableUnits(Convert.ToDouble(vdi.sm_config["initial_allocation"]), true);
+                incr_alloc_value.Text = Util.MemorySizeStringSuitableUnits(Convert.ToDouble(vdi.sm_config["allocation_quantum"]), true);
             }
 
             if (vdi.allowed_operations.Contains(vdi_operations.resize) ||

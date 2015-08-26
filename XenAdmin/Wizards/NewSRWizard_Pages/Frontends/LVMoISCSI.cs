@@ -834,6 +834,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public SrWizardType SrWizardType { private get; set; }
 
         public string UUID { get { return _srToIntroduce == null ? null : _srToIntroduce.UUID; } }
+
+        public long Size
+        {
+            get
+            {
+                ISCSIInfo info = LunMap[getIscsiLUN()];
+                return info.Size;
+            }
+        }
         
         public Dictionary<String, String> DeviceConfig
         {
