@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Threading.Tasks;
+using XenAPI;
 
 namespace XenServerHealthCheck
 {
@@ -42,7 +43,7 @@ namespace XenServerHealthCheck
         public string HostName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public Task task { get; set; }
+        public System.Threading.Tasks.Task task { get; set; }
     }
 
     public class ServerListHelper
@@ -149,7 +150,7 @@ namespace XenServerHealthCheck
             {
                 if (decryptCredentialComps.Length == 3)
                 {//Add credential
-                    Task originalTask = null;
+                    System.Threading.Tasks.Task originalTask = null;
                     foreach (ServerInfo connection in serverList)
                     {
                         if (connection.HostName == decryptCredentialComps[0])
@@ -182,6 +183,41 @@ namespace XenServerHealthCheck
                 }
 
                 updateServerList();
+            }
+        }
+
+        public void UpdateProxy(string proxy)
+        {
+            log.Info("Receive proxy update message");
+
+            try
+            {
+                string[] proxySettings = proxy.Split(SEPARATOR);
+                HTTPHelper.ProxyStyle proxyStyle = (HTTPHelper.ProxyStyle)Int32.Parse(proxySettings[1]);
+
+                switch (proxyStyle)
+                {
+                    case HTTPHelper.ProxyStyle.SpecifiedProxy:
+                        Properties.Settings.Default.ProxySetting = (Int32)proxyStyle;
+                        Properties.Settings.Default.ProxyAddress = proxySettings[2];
+                        Properties.Settings.Default.ProxyPort = Int32.Parse(proxySettings[3]);
+                        Properties.Settings.Default.ConnectionTimeout = Int32.Parse(proxySettings[4]);
+                        Properties.Settings.Default.BypassProxyForLocal = bool.Parse(proxySettings[5]);
+                        return;
+
+                    case HTTPHelper.ProxyStyle.SystemProxy:
+                        Properties.Settings.Default.ProxySetting = (Int32)proxyStyle;
+                        return;
+
+                    default:
+                        Properties.Settings.Default.ProxySetting = (Int32)proxyStyle;
+                        return;
+                }
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Error parsing 'ProxySetting' from XenCenter", e);
             }
         }
     }
