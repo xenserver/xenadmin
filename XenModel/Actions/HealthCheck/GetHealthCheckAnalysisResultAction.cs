@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Web.Script.Serialization;
 using XenAdmin.Model;
 using XenAPI;
@@ -46,9 +45,7 @@ namespace XenAdmin.Actions
 
         private const string DIAG_RESULT_URL = "/diag_sdk/diag_results/";
         private readonly string diagnosticDomainName = "https://cis.citrix.com";
-
-        private CancellationTokenSource cts;
-
+       
         public GetHealthCheckAnalysisResultAction(Pool pool, bool suppressHistory)
             : base(pool.Connection, Messages.ACTION_GET_HEALTH_CHECK_RESULT, Messages.ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS, suppressHistory)
         {
