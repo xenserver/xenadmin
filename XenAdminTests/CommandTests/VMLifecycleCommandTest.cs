@@ -58,7 +58,6 @@ namespace XenAdminTests.CommandTests
     }
 
     [TestFixture, Category(TestCategories.UICategoryA)]
-    [Ignore]
     public class VMLifecycleCommandTestMidnightRide : MainWindowLauncher_TestFixture
     {
         private VMLifecycleCommandTest tester = new VMLifecycleCommandTest();
@@ -74,6 +73,7 @@ namespace XenAdminTests.CommandTests
         }
 
         [Test]
+        [Ignore]
         public void TestMultipleSelect()
         {
             tester.TestMultipleSelect();
