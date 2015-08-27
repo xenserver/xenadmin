@@ -653,15 +653,6 @@ namespace XenAdmin.TabPages
             {
                 s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
             }
-            if (!Host.IsFullyPatched(host, ConnectionsManager.XenConnectionsCopy))
-            {
-                CommandToolStripMenuItem applypatch =
-                           new CommandToolStripMenuItem(
-                               new InstallNewUpdateCommand(Program.MainWindow), true);
-
-                var menuItems = new[] { applypatch };
-                s.AddEntry(FriendlyName("Pool_patch.not_applied"), hostUnappliedPatches(host), menuItems, Color.Red);
-            }
 
             // add supplemental packs
             var suppPacks = hostInstalledSuppPacks(host);
