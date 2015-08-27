@@ -1161,6 +1161,9 @@
   <data name="policyStatementLabel.Text" xml:space="preserve">
     <value>See what sort of data is collected:</value>
   </data>
+  <data name="policyStatementLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;policyStatementLabel.Name" xml:space="preserve">
     <value>policyStatementLabel</value>
   </data>
@@ -1186,13 +1189,13 @@
     <value>185, 0</value>
   </data>
   <data name="PolicyStatementLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 15</value>
+    <value>102, 15</value>
   </data>
   <data name="PolicyStatementLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="PolicyStatementLinkLabel.Text" xml:space="preserve">
-    <value>Policy Statement</value>
+    <value>Privacy Statement</value>
   </data>
   <data name="&gt;&gt;PolicyStatementLinkLabel.Name" xml:space="preserve">
     <value>PolicyStatementLinkLabel</value>
