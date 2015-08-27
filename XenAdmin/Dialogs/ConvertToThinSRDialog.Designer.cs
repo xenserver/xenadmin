@@ -38,18 +38,11 @@ namespace XenAdmin.Dialogs
             this.OkButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.labelAllocationQuantum = new System.Windows.Forms.Label();
-            this.labelInitialAllocation = new System.Windows.Forms.Label();
-            this.initialAllocationNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.allocationQuantumNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.queuedBackgroundWorker1 = new XenCenterLib.QueuedBackgroundWorker();
+            this.thinProvisioningParameters1 = new XenAdmin.Controls.ThinProvisioningParametersControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.initialAllocationNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.allocationQuantumNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // GbLabel
@@ -65,12 +58,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelAllocationQuantum, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.labelInitialAllocation, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.initialAllocationNumericUpDown, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.allocationQuantumNumericUpDown, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.thinProvisioningParameters1, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelWarning
@@ -122,52 +110,11 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.SetColumnSpan(this.label6, 5);
             this.label6.Name = "label6";
             // 
-            // labelAllocationQuantum
+            // thinProvisioningParameters1
             // 
-            resources.ApplyResources(this.labelAllocationQuantum, "labelAllocationQuantum");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelAllocationQuantum, 2);
-            this.labelAllocationQuantum.Name = "labelAllocationQuantum";
-            // 
-            // labelInitialAllocation
-            // 
-            resources.ApplyResources(this.labelInitialAllocation, "labelInitialAllocation");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelInitialAllocation, 2);
-            this.labelInitialAllocation.Name = "labelInitialAllocation";
-            // 
-            // initialAllocationNumericUpDown
-            // 
-            resources.ApplyResources(this.initialAllocationNumericUpDown, "initialAllocationNumericUpDown");
-            this.initialAllocationNumericUpDown.DecimalPlaces = 1;
-            this.initialAllocationNumericUpDown.Name = "initialAllocationNumericUpDown";
-            this.initialAllocationNumericUpDown.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.initialAllocationNumericUpDown.ValueChanged += new System.EventHandler(this.initialAllocationNumericUpDown_ValueChanged);
-            this.initialAllocationNumericUpDown.Enter += new System.EventHandler(this.initialAllocationNumericUpDown_Enter);
-            this.initialAllocationNumericUpDown.Leave += new System.EventHandler(this.initialAllocationNumericUpDown_Leave);
-            // 
-            // allocationQuantumNumericUpDown
-            // 
-            resources.ApplyResources(this.allocationQuantumNumericUpDown, "allocationQuantumNumericUpDown");
-            this.allocationQuantumNumericUpDown.DecimalPlaces = 1;
-            this.allocationQuantumNumericUpDown.Name = "allocationQuantumNumericUpDown";
-            this.allocationQuantumNumericUpDown.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.thinProvisioningParameters1, "thinProvisioningParameters1");
+            this.tableLayoutPanel1.SetColumnSpan(this.thinProvisioningParameters1, 5);
+            this.thinProvisioningParameters1.Name = "thinProvisioningParameters1";
             // 
             // ConvertToThinSRDialog
             // 
@@ -181,8 +128,6 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.initialAllocationNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.allocationQuantumNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,17 +140,12 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private XenCenterLib.QueuedBackgroundWorker queuedBackgroundWorker1;
-        private System.Windows.Forms.Label labelAllocationQuantum;
-        private System.Windows.Forms.Label labelInitialAllocation;
-        private System.Windows.Forms.NumericUpDown initialAllocationNumericUpDown;
-        private System.Windows.Forms.NumericUpDown allocationQuantumNumericUpDown;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelWarning;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.FlowLayoutPanel panel1;
         public System.Windows.Forms.Button CloseButton;
         public System.Windows.Forms.Button OkButton;
+        private Controls.ThinProvisioningParametersControl thinProvisioningParameters1;
 
     }
 }

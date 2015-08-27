@@ -59,6 +59,7 @@ namespace XenAdmin.Dialogs
          
    			this.connection = connection;
             TheSR = sr;
+            thinProvisioningParameters1.SR = TheSR;
 
             this.Text = string.Format(Messages.ACTION_SR_UPGRADE_TO_THIN, TheSR.Name);
         }
@@ -66,17 +67,6 @@ namespace XenAdmin.Dialogs
         private void InitDialog(IXenConnection connection)
         {
             this.Owner = Program.MainWindow;
-        }
-
-        private void LoadValues()
-        {
-            SetupDropDowns();
-            OkButton.Text = Messages.OK;
-        }
-
-        private void SetupDropDowns()
-        {
-            //todo set the defaults (this will have to be done after the API has been changed to use bytes instead of %
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -91,27 +81,8 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                var smconfig = new Dictionary<string, string>();
-
-                if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
-                {
-                    smconfig["allocation"] = "xlvhd";
-                    smconfig["allocation_quantum"] = (allocationQuantumNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial_allocation"] = (initialAllocationNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
-                }
-
-                return smconfig;
+                return thinProvisioningParameters1.SMConfig;
             }
-        }
-  
-        private void updateErrorsAndButtons()
-        {
-            if (this.TheSR == null)
-                return;
-
-            //todo gabor: check thin prov related values?
-
-            OkButton.Enabled = true;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -119,36 +90,13 @@ namespace XenAdmin.Dialogs
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        bool userChangedInitialAllocationValue = false;
-        bool userEntered = false;
         
-        private void initialAllocationNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            if (userEntered)
-                userChangedInitialAllocationValue = true;
-
-            //if (userChangedInitialAllocationValue)
-            //    UpdateDiskSize();
-        }
-
-        private void initialAllocationNumericUpDown_Enter(object sender, EventArgs e)
-        {
-            userEntered = true;
-        }
-
         internal override string HelpName
         {
             get
             {
                 return "ConvertToThinSRDialog";
             }
-        }
-
-
-        private void initialAllocationNumericUpDown_Leave(object sender, EventArgs e)
-        {
-            userEntered = false;
         }
     }
 }

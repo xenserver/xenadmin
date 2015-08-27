@@ -167,6 +167,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomGridView\GridTreeExpanderItem.cs" />
+    <Compile Include="Controls\ThinProvisioningParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ThinProvisioningParametersControl.Designer.cs">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NonReopeningContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1384,6 +1390,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>
