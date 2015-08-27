@@ -106,6 +106,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
+        /// </summary>
+        public static string HEALTH_CHECK_PRIVACY_STATEMENT_URL {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_PRIVACY_STATEMENT_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.citrix.com/xenserver.
         /// </summary>
         public static string HOMEPAGE {
