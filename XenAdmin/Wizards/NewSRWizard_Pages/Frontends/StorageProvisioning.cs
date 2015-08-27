@@ -38,14 +38,24 @@ using XenAdmin.Actions;
 using XenAdmin.Help;
 using System.Linq;
 using System.Globalization;
+using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {
     public partial class StorageProvisioning : XenTabPage
     {
+        private string previousUnitsValueInitAlloc;
+        private string previousUnitsValueIncrAlloc;
+        private const int DecimalPlacesMB = 0;
+        private const int DecimalPlacesGB = 3;
+        private const int IncrementMB = 256;
+        private const int IncrementGB = 1;
+
         public StorageProvisioning()
         {
             InitializeComponent();
+            incremental_allocation_units.SelectedItem = previousUnitsValueIncrAlloc = Messages.VAL_MEGB;
+            initial_allocation_units.SelectedItem = previousUnitsValueInitAlloc = Messages.VAL_MEGB;
         }
 
         #region Accessors
@@ -60,15 +70,20 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 if (radioButtonThinProvisioning.Checked)
                 {
-                    smconfig["allocation"] = "dynamic";
-                    smconfig["allocation_quantum"] = (allocationQuantumNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial_allocation"] = (initialAllocationNumericUpDown.Value / 100).ToString(CultureInfo.InvariantCulture);
+                    smconfig["allocation"] = "xlvhd";
+                    smconfig["allocation_quantum"] = (incremental_allocation_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA)
+                                                                                                                                : (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA))
+                                                                                                                                .ToString(CultureInfo.InvariantCulture);
+                    smconfig["initial_allocation"] = (initial_allocation_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(initialAllocationNumericUpDown.Value * Util.BINARY_MEGA)
+                                                                                                                            : (long)(initialAllocationNumericUpDown.Value * Util.BINARY_GIGA))
+                                                                                                                            .ToString(CultureInfo.InvariantCulture); 
                 }
 
                 return smconfig;
             }
         }
 
+        public long SRSize { get; set; }
 
         #endregion
 
@@ -78,9 +93,69 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override void PopulatePage()
         {
+            InitializeNumericUpDowns();
+
             UpdateControls();
 
             OnPageUpdated();
+        }
+
+        private void InitializeNumericUpDowns()
+        {
+            // Because we do not initialize the NumericUpDown with values from an existing sm_config
+            // the value passed to the setup functions is -1. 
+            SetUpInitAllocationNumericUpDown(-1);
+            SetUpIncrAllocationNumericUpDown(-1);
+        }
+
+        private void SetNumUpDownIncrementAndDecimals(NumericUpDown upDown, string units)
+        {
+            if (units == Messages.VAL_GIGB)
+            {
+                upDown.DecimalPlaces = DecimalPlacesGB;
+                upDown.Increment = IncrementGB;
+            }
+            else
+            {
+                upDown.DecimalPlaces = DecimalPlacesMB;
+                upDown.Increment = IncrementMB;
+            }
+        }    
+
+
+        // The value parameter is -1 if we do not use an existing SM Config. Otherwise  
+        // it is the value of the initial_allocation in the SM config. The value received is in bytes.
+        private void SetUpInitAllocationNumericUpDown(decimal value)
+        {
+            Helpers.AllocationBounds allocBounds = Helpers.SRInitialAllocationBounds(SRSize);
+
+            if(value != -1)
+            {
+                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, value);                
+            }
+            initialAllocationNumericUpDown.Minimum = allocBounds.MinInUnits;
+            initialAllocationNumericUpDown.Maximum = allocBounds.MaxInUnits;
+            initialAllocationNumericUpDown.Value = allocBounds.DefaultValueInUnits;
+            
+            initial_allocation_units.SelectedItem = previousUnitsValueInitAlloc = allocBounds.Unit;
+            SetNumUpDownIncrementAndDecimals(initialAllocationNumericUpDown, allocBounds.Unit);
+        }
+
+        // The value parameter is -1 if we do not use an existing SM Config. Otherwise  
+        // it is the value of the allocation_quantum in the SM config. 
+        private void SetUpIncrAllocationNumericUpDown(decimal value)
+        {
+            Helpers.AllocationBounds allocBounds = Helpers.SRIncrementalAllocationBounds(SRSize);
+            if (value != -1)
+            {
+                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, value);                        
+            }
+            allocationQuantumNumericUpDown.Minimum = allocBounds.MinInUnits;
+            allocationQuantumNumericUpDown.Maximum = allocBounds.MaxInUnits;
+            allocationQuantumNumericUpDown.Value = allocBounds.DefaultValueInUnits;             
+
+            incremental_allocation_units.SelectedItem = previousUnitsValueInitAlloc = allocBounds.Unit;
+            SetNumUpDownIncrementAndDecimals(allocationQuantumNumericUpDown, allocBounds.Unit);
         }
 
         public override string PageTitle { get { return Messages.STORAGE_PROVISIONING_METHOD_TITLE; } }
@@ -118,18 +193,22 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public void SetControlsUsingExistingSMConfig(Dictionary<string, string> smConfig)
         {
-            decimal temp = 0;
+            long temp = 0;
 
-            if (smConfig.ContainsKey("allocation") && smConfig["allocation"] == "dynamic")
+            if (smConfig.ContainsKey("allocation") && smConfig["allocation"] == "xlvhd")
             {
                 radioButtonThickProvisioning.Checked = false;
                 radioButtonThinProvisioning.Checked = true;
 
-                if (smConfig.ContainsKey("initial_allocation") && decimal.TryParse(smConfig["initial_allocation"], out temp))
-                    initialAllocationNumericUpDown.Value = temp * 100;
+                if (smConfig.ContainsKey("initial_allocation") && long.TryParse(smConfig["initial_allocation"], out temp))
+                {
+                    SetUpInitAllocationNumericUpDown(temp);
+                }
 
-                if (smConfig.ContainsKey("allocation_quantum") && decimal.TryParse(smConfig["allocation_quantum"], out temp))
-                    allocationQuantumNumericUpDown.Value = temp * 100;
+                if (smConfig.ContainsKey("allocation_quantum") && long.TryParse(smConfig["allocation_quantum"], out temp))
+                {
+                    SetUpIncrAllocationNumericUpDown(temp);
+                }
             }
             else
             {
@@ -144,10 +223,51 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             labelAllocationQuantum.Enabled =
             labelInitialAllocation.Enabled =
-            labelPercent1.Enabled =
-            labelPercent2.Enabled =
             allocationQuantumNumericUpDown.Enabled =
+            initial_allocation_units.Enabled =
+            incremental_allocation_units.Enabled =
             initialAllocationNumericUpDown.Enabled = radioButtonThinProvisioning.Checked;
+        }
+
+        private void initial_allocation_units_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateValuesWhenUnitsChanged(initialAllocationNumericUpDown, 
+                                         previousUnitsValueInitAlloc, 
+                                         initial_allocation_units.SelectedItem.ToString());
+            previousUnitsValueInitAlloc = initial_allocation_units.SelectedItem.ToString();
+        }
+
+        private void incremental_allocation_units_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateValuesWhenUnitsChanged(allocationQuantumNumericUpDown,
+                                         previousUnitsValueIncrAlloc,
+                                         incremental_allocation_units.SelectedItem.ToString());
+            previousUnitsValueIncrAlloc = incremental_allocation_units.SelectedItem.ToString(); 
+        }
+
+        public static void UpdateValuesWhenUnitsChanged(NumericUpDown upDown, string previousUnits, string newUnits)
+        {
+            if (previousUnits == newUnits)
+                return;
+
+            decimal min = upDown.Minimum;
+            decimal max = upDown.Maximum;
+            if (newUnits == Messages.VAL_MEGB)
+            {                
+                upDown.Maximum *= Util.BINARY_KILO;
+                upDown.Value *= Util.BINARY_KILO;
+                upDown.Minimum *= Util.BINARY_KILO;
+                upDown.DecimalPlaces = DecimalPlacesMB;
+                upDown.Increment = IncrementMB;
+            }
+            else
+            {
+                upDown.Minimum /= Util.BINARY_KILO;
+                upDown.Value /= Util.BINARY_KILO;
+                upDown.Maximum /= Util.BINARY_KILO;
+                upDown.DecimalPlaces = DecimalPlacesGB;
+                upDown.Increment = IncrementGB;
+            }
         }
     }
 }

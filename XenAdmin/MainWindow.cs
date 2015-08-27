@@ -496,6 +496,12 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
+                new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                                Properties.Settings.Default.ProxyAddress,
+                                Properties.Settings.Default.ProxyPort,
+                                Properties.Settings.Default.ConnectionTimeout,
+                                Properties.Settings.Default.BypassProxyForLocal,
+                                true).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
             {

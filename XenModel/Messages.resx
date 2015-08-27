@@ -10480,6 +10480,11 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR_DETACHED" xml:space="preserve">
     <value>The SR is currently detached.</value>
   </data>
+  <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
+    <value>Initial allocation: {0}
+
+Incremental allocation: {1}</value>
+  </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>This SR does not need to be upgraded.</value>
   </data>

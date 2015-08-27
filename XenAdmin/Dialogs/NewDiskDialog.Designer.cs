@@ -51,8 +51,8 @@ namespace XenAdmin.Dialogs
             this.labelInitialAllocation = new System.Windows.Forms.Label();
             this.initialAllocationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.allocationQuantumNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.init_alloc_units = new System.Windows.Forms.ComboBox();
+            this.incr_alloc_units = new System.Windows.Forms.ComboBox();
             this.queuedBackgroundWorker1 = new XenCenterLib.QueuedBackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.DiskSizeNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -155,8 +155,8 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.labelInitialAllocation, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.initialAllocationNumericUpDown, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.allocationQuantumNumericUpDown, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.init_alloc_units, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.incr_alloc_units, 2, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // panel1
@@ -200,7 +200,6 @@ namespace XenAdmin.Dialogs
             // pictureBoxError
             // 
             resources.ApplyResources(this.pictureBoxError, "pictureBoxError");
-            this.pictureBoxError.Image = global::XenAdmin.Properties.Resources._000_error_h32bit_16;
             this.pictureBoxError.Name = "pictureBoxError";
             this.pictureBoxError.TabStop = false;
             // 
@@ -245,15 +244,27 @@ namespace XenAdmin.Dialogs
             0,
             0});
             // 
-            // label5
+            // init_alloc_units
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            this.init_alloc_units.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.init_alloc_units, "init_alloc_units");
+            this.init_alloc_units.FormattingEnabled = true;
+            this.init_alloc_units.Items.AddRange(new object[] {
+            resources.GetString("init_alloc_units.Items"),
+            resources.GetString("init_alloc_units.Items1")});
+            this.init_alloc_units.Name = "init_alloc_units";
+            this.init_alloc_units.SelectedIndexChanged += new System.EventHandler(this.init_alloc_units_SelectedIndexChanged);
             // 
-            // label7
+            // incr_alloc_units
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            this.incr_alloc_units.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.incr_alloc_units, "incr_alloc_units");
+            this.incr_alloc_units.FormattingEnabled = true;
+            this.incr_alloc_units.Items.AddRange(new object[] {
+            resources.GetString("incr_alloc_units.Items"),
+            resources.GetString("incr_alloc_units.Items1")});
+            this.incr_alloc_units.Name = "incr_alloc_units";
+            this.incr_alloc_units.SelectedIndexChanged += new System.EventHandler(this.incr_alloc_units_SelectedIndexChanged);
             // 
             // NewDiskDialog
             // 
@@ -303,8 +314,8 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label labelInitialAllocation;
         private System.Windows.Forms.NumericUpDown initialAllocationNumericUpDown;
         private System.Windows.Forms.NumericUpDown allocationQuantumNumericUpDown;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox init_alloc_units;
+        private System.Windows.Forms.ComboBox incr_alloc_units;
 
     }
 }
