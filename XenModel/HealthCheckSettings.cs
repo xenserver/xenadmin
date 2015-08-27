@@ -93,6 +93,8 @@ namespace XenAdmin.Model
         public const string REPORT_ANALYSIS_UPLOAD_UUID = "ReportAnalysis.UploadUuid";
         public const string REPORT_ANALYSIS_UPLOAD_TIME = "ReportAnalysis.UploadTime";
 
+
+        private const string REPORT_LINK_DOMAIN_NAME = " https://cis.citrix.com";
         private const string REPORT_LINK_PATH = "AutoSupport/analysis/upload_overview";
 
         public HealthCheckSettings(Dictionary<string, string> config)
@@ -197,7 +199,7 @@ namespace XenAdmin.Model
 
         public string GetReportAnalysisLink(string domainName)
         {
-            return String.Format("{0}/{1}/{2}", domainName, REPORT_LINK_PATH, ReportAnalysisUploadUuid);
+            return string.Format("{0}/{1}/{2}", string.IsNullOrEmpty(domainName) ? REPORT_LINK_DOMAIN_NAME : domainName, REPORT_LINK_PATH, ReportAnalysisUploadUuid);
         }
 
         public bool HasUpload
