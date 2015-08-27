@@ -250,8 +250,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (previousUnits == newUnits)
                 return;
 
-            decimal min = upDown.Minimum;
-            decimal max = upDown.Maximum;
             if (newUnits == Messages.VAL_MEGB)
             {                
                 upDown.Maximum *= Util.BINARY_KILO;
@@ -267,7 +265,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 upDown.Maximum /= Util.BINARY_KILO;
                 upDown.DecimalPlaces = DecimalPlacesGB;
                 upDown.Increment = IncrementGB;
-            }
+            }            
         }
     }
 }

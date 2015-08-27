@@ -138,8 +138,6 @@ namespace XenAdmin.Dialogs
             LoadValues();
         }
 
-
-
         private void LoadValues()
         {
             if (DiskTemplate == null)
@@ -152,7 +150,7 @@ namespace XenAdmin.Dialogs
             // select the appropriate unit, based on size (CA-45905)
             currentSelectedUnits = DiskTemplate.virtual_size >= Util.BINARY_GIGA ? DiskSizeUnits.GB : DiskSizeUnits.MB;
             SelectedUnits = currentSelectedUnits;
-            SetupDiskSizeNumericUpDown();
+            SetNumUpDownIncrementAndDecimals(DiskSizeNumericUpDown, SelectedUnits.ToString());
             decimal newValue = (decimal)Math.Round((double)DiskTemplate.virtual_size / GetUnits(), DiskSizeNumericUpDown.DecimalPlaces);
             DiskSizeNumericUpDown.Value = newValue >= DiskSizeNumericUpDown.Minimum && newValue <= DiskSizeNumericUpDown.Maximum ?
                 newValue : DiskSizeNumericUpDown.Maximum;
@@ -169,13 +167,7 @@ namespace XenAdmin.Dialogs
         private const int DecimalPlacesMB = 0;
         private const int IncrementGB = 1;
         private const int IncrementMB = 256;
-
-        private void SetupDiskSizeNumericUpDown()
-        {
-            DiskSizeNumericUpDown.DecimalPlaces = SelectedUnits == DiskSizeUnits.GB ? DecimalPlacesGB : DecimalPlacesMB;
-            DiskSizeNumericUpDown.Increment = SelectedUnits == DiskSizeUnits.GB ? IncrementGB : IncrementMB;
-        }
-
+        
         private string GetDefaultVDIName()
         {
             List<string> usedNames = new List<string>();
@@ -334,13 +326,12 @@ namespace XenAdmin.Dialogs
                 {
                     smconfig["allocation"] = "xlvhd";
 
-                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == "MB" ? (long)allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                       : (long)allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA)
-                                                                                                       .ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == "MB" ? (long)initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                       : (long)initialAllocationNumericUpDown.Value * Util.BINARY_GIGA)
-                                                                                                       .ToString(CultureInfo.InvariantCulture); 
-
+                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA
+                                                                                                                    : (long)allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA)
+                                                                                                                    .ToString(CultureInfo.InvariantCulture);
+                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
+                                                                                                                    : (long)initialAllocationNumericUpDown.Value * Util.BINARY_GIGA)
+                                                                                                                    .ToString(CultureInfo.InvariantCulture);
                 }
 
                 return smconfig;
@@ -374,7 +365,7 @@ namespace XenAdmin.Dialogs
 
         private void SetNumUpDownIncrementAndDecimals(NumericUpDown upDown, string units)
         {
-            if (units == "GB")
+            if (units == Messages.VAL_GIGB)
             {
                 upDown.DecimalPlaces = DecimalPlacesGB;
                 upDown.Increment = IncrementGB;
@@ -395,9 +386,10 @@ namespace XenAdmin.Dialogs
 
             if (boundsOnly)
             {
-                long userValInBytes = (long)(init_alloc_units.SelectedItem.ToString() == "GB" ? initialAllocationNumericUpDown.Value * Util.BINARY_GIGA 
-                                                                                  : initialAllocationNumericUpDown.Value * Util.BINARY_MEGA);
-                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, userValInBytes, init_alloc_units.SelectedItem.ToString());
+                long userValInBytes = (long)(init_alloc_units.SelectedItem.ToString() == Messages.VAL_GIGB ? initialAllocationNumericUpDown.Value * Util.BINARY_GIGA 
+                                                                                                           : initialAllocationNumericUpDown.Value * Util.BINARY_MEGA);
+                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, 
+                                                           userValInBytes, init_alloc_units.SelectedItem.ToString());
             }
 
             init_alloc_units.SelectedItem = previousUnitsValueInitAlloc = allocBounds.Unit;
@@ -415,9 +407,10 @@ namespace XenAdmin.Dialogs
 
             if (boundsOnly)
             {
-                long userValInBytes = (long)(incr_alloc_units.SelectedItem.ToString() == "GB" ? allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA
-                                                                                              : allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA);
-                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, userValInBytes, incr_alloc_units.SelectedItem.ToString());
+                long userValInBytes = (long)(incr_alloc_units.SelectedItem.ToString() == Messages.VAL_GIGB ? allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA
+                                                                                                           : allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA);
+                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, userValInBytes, 
+                                                           incr_alloc_units.SelectedItem.ToString());
             }
 
             incr_alloc_units.SelectedItem = previousUnitsValueIncrAlloc = allocBounds.Unit;
@@ -578,8 +571,6 @@ namespace XenAdmin.Dialogs
             Close();
         }
 
-
-
         private bool dontCreateVDI;
         public bool DontCreateVDI
         {
@@ -638,8 +629,8 @@ namespace XenAdmin.Dialogs
 
                     if (IsSelectedSRThinProvisioned && userChangedInitialAllocationValue)
                     {
-                        SrListBox.OverridenInitialAllocationRate = (long)(init_alloc_units.SelectedItem.ToString() == "MB" ? initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                                           : initialAllocationNumericUpDown.Value * Util.BINARY_GIGA); 
+                        SrListBox.OverridenInitialAllocationRate = (long)(init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
+                                                                                                                                        : initialAllocationNumericUpDown.Value * Util.BINARY_GIGA); 
                     }
                 }
                 catch (OverflowException)
@@ -746,9 +737,7 @@ namespace XenAdmin.Dialogs
             if (previousUnits == newUnits)
                 return;
 
-            decimal min = upDown.Minimum;
-            decimal max = upDown.Maximum;
-            if (newUnits == "MB")
+            if (newUnits == Messages.VAL_MEGB)
             {
                 upDown.Maximum *= Util.BINARY_KILO;
                 upDown.Value *= Util.BINARY_KILO;

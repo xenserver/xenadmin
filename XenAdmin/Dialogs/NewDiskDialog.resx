@@ -484,7 +484,7 @@
     <value>49, 23</value>
   </data>
   <data name="comboBoxUnits.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;comboBoxUnits.Name" xml:space="preserve">
     <value>comboBoxUnits</value>
@@ -663,7 +663,7 @@
     <value>133, 15</value>
   </data>
   <data name="labelAllocationQuantum.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="labelAllocationQuantum.Text" xml:space="preserve">
     <value>In&amp;cremental allocations:</value>
@@ -765,7 +765,7 @@
     <value>105, 23</value>
   </data>
   <data name="allocationQuantumNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="allocationQuantumNumericUpDown.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -798,7 +798,7 @@
     <value>49, 23</value>
   </data>
   <data name="init_alloc_units.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;init_alloc_units.Name" xml:space="preserve">
     <value>init_alloc_units</value>
@@ -828,7 +828,7 @@
     <value>49, 23</value>
   </data>
   <data name="incr_alloc_units.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;incr_alloc_units.Name" xml:space="preserve">
     <value>incr_alloc_units</value>
@@ -885,7 +885,7 @@
     <value>405, 100</value>
   </data>
   <data name="SrListBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;SrListBox.Name" xml:space="preserve">
     <value>SrListBox</value>
