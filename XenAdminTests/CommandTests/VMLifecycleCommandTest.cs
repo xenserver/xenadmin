@@ -58,6 +58,7 @@ namespace XenAdminTests.CommandTests
     }
 
     [TestFixture, Category(TestCategories.UICategoryA)]
+    [Ignore]
     public class VMLifecycleCommandTestMidnightRide : MainWindowLauncher_TestFixture
     {
         private VMLifecycleCommandTest tester = new VMLifecycleCommandTest();
