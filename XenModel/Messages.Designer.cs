@@ -20340,7 +20340,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Convert SR....
+        ///   Looks up a localized string similar to &amp;Convert SR....
         /// </summary>
         public static string MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU {
             get {

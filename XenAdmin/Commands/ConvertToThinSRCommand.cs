@@ -70,11 +70,13 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             SR = GetFirstThickSRFromSelection(selection);
-            
-            var dialog = new ConvertToThinSRDialog(this.SR.Connection, SR);
-            dialog.Show();
-        }
 
+            if (SR != null)
+            {
+                var dialog = new ConvertToThinSRDialog(this.SR.Connection, SR);
+                dialog.Show();
+            }
+        }
         protected override bool ConfirmationRequired
         {
             get
@@ -87,7 +89,7 @@ namespace XenAdmin.Commands
         {
             var sr = GetFirstThickSRFromSelection(selection);
 
-            return sr != null && sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi");
+            return sr != null ;
         }
 
         private SR GetFirstThickSRFromSelection(SelectedItemCollection selection)
@@ -96,7 +98,7 @@ namespace XenAdmin.Commands
             {
                 var sr = item.XenObject as SR;
 
-                if (sr != null && !sr.IsThinProvisioned)
+                if (sr != null && sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
                     return sr;
             }
 

@@ -45,9 +45,6 @@ using System.Globalization;
 
 namespace XenAdmin.Controls
 {
-    /// <summary>
-    /// Picker for LunPerVDI SRs
-    /// </summary>
     public partial class ThinProvisioningParametersControl : UserControl
     {
         private SR sr = null;

@@ -179,11 +179,14 @@ namespace XenAdmin.Actions
                     long initial_allocation = 0;
                     long allocation_quantum = 0;
 
-                    if (parameters.ContainsKey("initial_allocation"))
-                        long.TryParse(parameters["initial_allocation"], out initial_allocation);
+                    if (parameters != null)
+                    {
+                        if (parameters.ContainsKey("initial_allocation"))
+                            long.TryParse(parameters["initial_allocation"], out initial_allocation);
 
-                    if (parameters.ContainsKey("allocation_quantum"))
-                        long.TryParse(parameters["allocation_quantum"], out allocation_quantum);
+                        if (parameters.ContainsKey("allocation_quantum"))
+                            long.TryParse(parameters["allocation_quantum"], out allocation_quantum);
+                    }
 
                     LVHD.enable_thin_provisioning(Session, SR.uuid, initial_allocation, allocation_quantum);
 

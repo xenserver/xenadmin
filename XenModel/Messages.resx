@@ -7069,7 +7069,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>S&amp;hut Down</value>
   </data>
   <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
-    <value>Convert SR...</value>
+    <value>&amp;Convert SR...</value>
   </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>&amp;Start</value>
