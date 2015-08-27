@@ -543,8 +543,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new ShutDownHostCommand(mainWindow, selection));
                 items.AddIfEnabled(new RestartToolstackCommand(mainWindow, selection));
                 items.AddSeparator();
-
-                items.AddIf(new InstallNewUpdateCommand(mainWindow), delegate { return !Host.IsFullyPatched(host, ConnectionsManager.XenConnectionsCopy); });
+                                
                 items.AddIfEnabled(new RemoveHostCrashDumpsCommand(mainWindow, selection));
 
                 if (host != Helpers.GetMaster(host.Connection) )
@@ -599,7 +598,6 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new PowerOnHostCommand(mainWindow, selection));
                 items.AddIfEnabled(new RestartToolstackCommand(mainWindow, selection));
                 items.AddSeparator();
-                items.AddIf(new InstallNewUpdateCommand(mainWindow), () => !Host.IsFullyPatched(host, ConnectionsManager.XenConnectionsCopy));
                 items.AddIfEnabled(new RemoveHostCrashDumpsCommand(mainWindow, selection));
                 items.AddSeparator();
 
