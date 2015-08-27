@@ -32,11 +32,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.VMProtectionRecovery;
+using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAPI;
 using XenCenterLib;
@@ -51,6 +53,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         public HealthCheckOverviewDialog()
         {
             InitializeComponent();
+            Core.HealthCheck.CheckForAnalysisResultsCompleted += HealthCheck_CheckForUpdatesCompleted;
         }
 
         private Pool currentSelected = null;
@@ -153,9 +156,24 @@ namespace XenAdmin.Dialogs.HealthCheck
                 _nameCell.Value = Pool.Name;
                 _nameCell.Image = null;
                 _statusCell.Value = Pool.HealthCheckSettings.StatusDescription;
-                _statusCell.Image = Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled
-                    ? Properties.Resources._000_error_h32bit_16
-                    : Properties.Resources._000_Alert2_h32bit_16;
+                _statusCell.Image = Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled || !Pool.HealthCheckSettings.HasAnalysisResult
+                    ? null
+                    : GetSeverityImage(Pool.HealthCheckSettings);
+            }
+
+            private Image GetSeverityImage(HealthCheckSettings healthCheckSettings)
+            {
+                if (healthCheckSettings.ReportAnalysisIssuesDetected == 0)
+                    return Properties.Resources._000_Tick_h32bit_16;
+                switch (healthCheckSettings.ReportAnalysisSeverity)
+                {
+                    case DiagnosticAlertSeverity.Error:
+                        return Properties.Resources._000_error_h32bit_16;
+                    case DiagnosticAlertSeverity.Warning:
+                        return Properties.Resources._000_Alert2_h32bit_16;
+                    default:
+                        return Properties.Resources._000_Info3_h32bit_16;
+                }
             }
         }
         #endregion
@@ -193,6 +211,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             healthCheckStatusPanel.Visible = poolRow.Pool.HealthCheckSettings.Status == HealthCheckStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled;
             UpdateUploadRequestDescription(poolRow.Pool.HealthCheckSettings);
+
+            UpdateAnalysisResult(poolRow.Pool.HealthCheckSettings);
         }
 
         public string GetScheduleDescription(HealthCheckSettings healthCheckSettings)
@@ -233,6 +253,50 @@ namespace XenAdmin.Dialogs.HealthCheck
                 }
             }
             return string.Empty;
+        }
+
+        public void UpdateAnalysisResult(HealthCheckSettings healthCheckSettings)
+        {
+            issuesLabel.Text = healthCheckSettings.StatusDescription;
+            ReportAnalysisLinkLabel.Visible = healthCheckSettings.HasAnalysisResult;
+
+            if (healthCheckSettings.HasAnalysisResult)
+                switch (healthCheckSettings.ReportAnalysisSeverity)
+                {
+                    case DiagnosticAlertSeverity.Error:
+                        issuesLabel.ForeColor = Color.Red;
+                        break;
+                    case DiagnosticAlertSeverity.Warning:
+                        issuesLabel.ForeColor = Color.OrangeRed;
+                        break;
+                    default:
+                        issuesLabel.ForeColor = 
+                            healthCheckSettings.ReportAnalysisIssuesDetected > 0 ? SystemColors.ControlText : Color.Green;
+                        break;
+                }
+            else
+            {
+                issuesLabel.ForeColor = SystemColors.ControlText;
+            }
+
+            refreshLinkLabel.Visible = healthCheckSettings.HasUpload && !healthCheckSettings.HasAnalysisResult;
+
+            if (healthCheckSettings.HasOldAnalysisResult)
+            {
+                previousUploadPanel.Visible = healthCheckSettings.HasOldAnalysisResult;
+
+                DateTime previousUpload;
+                if (HealthCheckSettings.TryParseStringToDateTime(healthCheckSettings.ReportAnalysisUploadTime,
+                    out previousUpload))
+                {
+                    previousUploadDateLabel.Text = HelpersGUI.DateTimeToString(previousUpload.ToLocalTime(),
+                        Messages.DATEFORMAT_DMY_HM, true);
+                }
+            }
+            else
+            {
+                previousUploadPanel.Visible = false;
+            }
         }
 
         private void HealthCheckOverviewDialog_Load(object sender, EventArgs e)
@@ -312,9 +376,10 @@ namespace XenAdmin.Dialogs.HealthCheck
             {
                 healthCheckSettings.NewUploadRequest = HealthCheckSettings.DateTimeToString(DateTime.UtcNow);
                 var token = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
+                var diagnosticToken = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
                 var user = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
                 var password = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
-                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, token, user, password, false).RunAsync();
+                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, token, diagnosticToken, user, password, false).RunAsync();
             }
         }
 
@@ -348,9 +413,49 @@ namespace XenAdmin.Dialogs.HealthCheck
                         return;
                 }
                 healthCheckSettings.Status = HealthCheckStatus.Disabled;
-                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, null, null, null, false).RunAsync();
+                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, null, null, null, null, false).RunAsync();
                 
             }
+        }
+
+        private void ReportAnalysisLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
+                return;
+
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            if (poolRow.Pool == null)
+                return;
+            var url = poolRow.Pool.HealthCheckSettings.GetReportAnalysisLink(Registry.HealthCheckDiagnosticDomainName);
+            if (!string.IsNullOrEmpty(url))
+                Program.OpenURL(url);
+        }
+
+        private void viewReportLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (poolsDataGridView.SelectedRows.Count != 1 || !(poolsDataGridView.SelectedRows[0] is PoolRow))
+                return;
+
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            if (poolRow.Pool == null)
+                return;
+            var url = poolRow.Pool.HealthCheckSettings.GetReportAnalysisLink(Registry.HealthCheckDiagnosticDomainName);
+            if (!string.IsNullOrEmpty(url))
+                Program.OpenURL(url);
+        }
+
+        private void refreshLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            if (poolRow.Pool == null)
+                return;
+            
+            Core.HealthCheck.CheckForAnalysisResults(poolRow.Pool.Connection);
+        }
+
+        private void HealthCheck_CheckForUpdatesCompleted(bool succeeded)
+        {
+            Program.Invoke(Program.MainWindow, LoadPools);
         }
     }
 }

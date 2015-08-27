@@ -37,6 +37,7 @@ using System.Runtime.Serialization;
 using XenAdmin.Network;
 using XenAPI;
 using System.Web.Script.Serialization;
+using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {
@@ -56,10 +57,12 @@ namespace XenAdmin.Actions
         private const string identityTokenUrl = "/auth/api/create_identity/";
         private const string uploadGrantTokenUrl = "/feeds/api/create_grant/";
         private const string uploadTokenUrl = "/feeds/api/create_upload/";
+        private const string diagnosticTokenUrl = "/diag_sdk/token_grant/";
 
         private readonly string identityTokenDomainName = "https://cis.citrix.com";
         private readonly string uploadGrantTokenDomainName = "https://rttf.citrix.com";
         private readonly string uploadTokenDomainName = "https://rttf.citrix.com";
+        private readonly string diagnosticTokenDomainName = " https://cis.citrix.com";
 
         private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
@@ -79,15 +82,18 @@ namespace XenAdmin.Actions
         }
 
         public HealthCheckAuthenticationAction(Pool pool, string username, string password,
-            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, string productKey, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
+            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, string diagnosticTokenDomainName, 
+            string productKey, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
             : this(pool, username, password, saveTokenAsSecret, tokenExpiration, suppressHistory)
         {
             if (!string.IsNullOrEmpty(identityTokenDomainName))
                 this.identityTokenDomainName = identityTokenDomainName;
-            if (!string.IsNullOrEmpty(identityTokenDomainName))
+            if (!string.IsNullOrEmpty(uploadGrantTokenDomainName))
                 this.uploadGrantTokenDomainName = uploadGrantTokenDomainName;
-            if (!string.IsNullOrEmpty(identityTokenDomainName))
+            if (!string.IsNullOrEmpty(uploadTokenDomainName))
                 this.uploadTokenDomainName = uploadTokenDomainName;
+            if (!string.IsNullOrEmpty(diagnosticTokenDomainName))
+                this.diagnosticTokenDomainName = diagnosticTokenDomainName;
             if (!string.IsNullOrEmpty(productKey))
                 this.productKey = productKey;
         }
@@ -100,12 +106,14 @@ namespace XenAdmin.Actions
                 string identityToken = GetIdentityToken();
                 string uploadGrantToken = GetUploadGrantToken(identityToken);
                 uploadToken = GetUploadToken(uploadGrantToken);
+                string diagnosticToken = GetDiagnosticToken(identityToken);
 
                 if (saveTokenAsSecret && pool != null)
                 {
                     log.Info("Saving upload token as xapi secret");
                     Dictionary<string, string> newConfig = pool.health_check_config;
-                    SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_TOKEN_SECRET, uploadToken);
+                    SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_TOKEN_SECRET, uploadToken); log.Info("Saving upload token as xapi secret");
+                    SetSecretInfo(Connection, newConfig, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET, diagnosticToken);
                     Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
                 }
             }
@@ -183,18 +191,18 @@ namespace XenAdmin.Actions
             var urlString = string.Format("{0}{1}", identityTokenDomainName, identityTokenUrl);
             try
             {
-                return GetToken(urlString, json);
+                return GetToken(urlString, json, null);
             }
             catch (WebException e)
             {
-                log.InfoFormat("WebException while getting identity token. Exception Message: " + e.Message);
+                log.InfoFormat("WebException while getting identity token from {0}. Exception Message: {1} ", identityTokenDomainName, e.Message);
                 if (e.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse) e.Response).StatusCode == HttpStatusCode.Forbidden)
                     throw new HealthCheckAuthenticationException(Messages.HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS, e);
                 throw;
             }
             catch (Exception e) 
             {
-                log.InfoFormat("Exception while getting identity token. Exception Message: " + e.Message);
+                log.InfoFormat("Exception while getting identity token from {0}. Exception Message: {1} ", identityTokenDomainName, e.Message);
                 throw;
             }
         }
@@ -217,11 +225,11 @@ namespace XenAdmin.Actions
 
             try
             {
-                return GetToken(urlString, json);
+                return GetToken(urlString, json, null);
             }
             catch (Exception e)
             {
-                log.InfoFormat("Exception while getting upload grant token. Exception Message: " + e.Message);
+                log.InfoFormat("Exception while getting upload grant token from {0}. Exception Message: {1} ", uploadGrantTokenDomainName, e.Message);
                 throw;
             }
         }
@@ -237,18 +245,42 @@ namespace XenAdmin.Actions
             var urlString = string.Format("{0}{1}", uploadTokenDomainName, uploadTokenUrl);
             try
             {
-                return GetToken(urlString, json);
+                return GetToken(urlString, json, null);
             }
             catch (Exception e)
             {
-                log.InfoFormat("Exception while getting upload token. Exception Message: " + e.Message);
+                log.InfoFormat("Exception while getting upload token from {0}. Exception Message: {1} ", uploadTokenDomainName, e.Message);
                 throw;
             }
         }
 
-        private string GetToken(string urlString, string jsonParameters)
+        private string GetDiagnosticToken(string identityToken)
+        {
+            var json = new JavaScriptSerializer().Serialize(new
+            {
+                agent = "XenServer",
+                max_age = 10000000
+            });
+            var urlString = string.Format("{0}{1}", diagnosticTokenDomainName, diagnosticTokenUrl);
+
+            try
+            {
+                return GetToken(urlString, json, "BT " + identityToken);
+            }
+            catch (Exception e)
+            {
+                log.InfoFormat("Exception while getting diagnostic token from {0}. Exception Message: {1} ", diagnosticTokenDomainName, e.Message);
+                throw;
+            }
+        }
+
+        private string GetToken(string urlString, string jsonParameters, string authorizationHeader)
         {
             var httpWebRequest = (HttpWebRequest) WebRequest.Create(urlString);
+            if (authorizationHeader != null)
+            {
+                httpWebRequest.Headers.Add("Authorization", authorizationHeader);
+            }
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 

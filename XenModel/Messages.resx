@@ -432,6 +432,15 @@
   <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE" xml:space="preserve">
     <value>Get space requirements</value>
   </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT" xml:space="preserve">
+    <value>Get Health Check analysis result from Citrix Insight Services</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT_FAILED" xml:space="preserve">
+    <value>Failed to get the analysis result</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS" xml:space="preserve">
+    <value>Getting the analysis result</value>
+  </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>Action completed. {0} VDIs found.</value>
   </data>
@@ -5729,7 +5738,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Upload a Health Check report every {0} weeks on {1} starting at {2}</value>
   </data>
   <data name="HEALTHCHECK_STATUS_ISSUES_FOUND" xml:space="preserve">
-    <value>Issues found</value>
+    <value>{0} issues detected</value>
   </data>
   <data name="HEALTHCHECK_STATUS_NOT_AVAILABLE_YET" xml:space="preserve">
     <value>Analysis not yet available</value>
@@ -5738,7 +5747,13 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Health Check not enabled</value>
   </data>
   <data name="HEALTHCHECK_STATUS_NO_ISSUES_FOUND" xml:space="preserve">
-    <value>No issues found</value>
+    <value>No issues detected</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_NO_UPLOAD_YET" xml:space="preserve">
+    <value>No report uploaded yet</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
+    <value>1 issue detected</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>Authentication with Citrix Insight Services failed. See the application log files for more information.</value>

@@ -33,6 +33,7 @@ using System;
 using System.IO.Pipes;
 using System.ServiceProcess;
 using System.Text;
+using XenAdmin.Model;
 using XenAPI;
 
 namespace XenAdmin.Actions
