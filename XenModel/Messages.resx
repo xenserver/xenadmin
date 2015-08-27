@@ -783,8 +783,17 @@
   <data name="ACTION_SR_UPGRADED" xml:space="preserve">
     <value>Upgraded SR</value>
   </data>
+  <data name="ACTION_SR_UPGRADED_TO_THIN" xml:space="preserve">
+    <value>Upgraded SR '{0}' to use thin provisioning</value>
+  </data>
+  <data name="ACTION_SR_UPGRADE_TO_THIN" xml:space="preserve">
+    <value>Upgrade SR '{0}' to use thin provisioning</value>
+  </data>
   <data name="ACTION_SR_UPGRADING" xml:space="preserve">
     <value>Upgrading SR</value>
+  </data>
+  <data name="ACTION_SR_UPGRADING_TO_THIN" xml:space="preserve">
+    <value>Upgrading SR '{0}' to use thin provisioning</value>
   </data>
   <data name="ACTION_START_CONTAINER_DESCRIPTION" xml:space="preserve">
     <value>Starting</value>
@@ -7058,6 +7067,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>S&amp;hut Down</value>
+  </data>
+  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
+    <value>&amp;Convert SR...</value>
   </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>&amp;Start</value>

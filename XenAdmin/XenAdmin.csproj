@@ -114,6 +114,7 @@
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
+    <Compile Include="Commands\ConvertToThinSRCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
     <Compile Include="Commands\PauseDockerContainerCommand.cs" />
@@ -166,6 +167,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomGridView\GridTreeExpanderItem.cs" />
+    <Compile Include="Controls\ThinProvisioningParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ThinProvisioningParametersControl.Designer.cs">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NonReopeningContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -220,6 +227,12 @@
     </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.designer.cs">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ConvertToThinSRDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConvertToThinSRDialog.Designer.cs">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
       <SubType>Form</SubType>
@@ -1377,6 +1390,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>
@@ -1514,6 +1536,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.zh-CN.resx">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.ja.resx">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.resx">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.zh-CN.resx">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ReconnectAsDialog.resx">
       <SubType>Designer</SubType>
