@@ -364,7 +364,7 @@
     <value>46, 23</value>
   </data>
   <data name="initial_allocation_units.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;initial_allocation_units.Name" xml:space="preserve">
     <value>initial_allocation_units</value>
@@ -394,7 +394,7 @@
     <value>46, 23</value>
   </data>
   <data name="incremental_allocation_units.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;incremental_allocation_units.Name" xml:space="preserve">
     <value>incremental_allocation_units</value>
