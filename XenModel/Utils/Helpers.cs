@@ -52,7 +52,7 @@ namespace XenAdmin.Core
         
         private const long XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR = 50000;
         private const long XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR = 10000;
-        private const long XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR = 4000; 
+        private const long XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR = 4000;
         private const long XLVHD_MIN_ALLOCATION_QUANTUM = 16777216; // 16 MB
 
         public const int DEFAULT_NAME_TRIM_LENGTH = 50;
@@ -563,6 +563,14 @@ namespace XenAdmin.Core
             {
                 this.min = min;
                 this.max = max;
+                if (defaultValue < min)
+                {
+                    defaultValue = min;
+                }
+                else if (defaultValue > max)
+                {
+                    defaultValue = max;
+                }
                 this.defaultValue = defaultValue;
                 if (defaultValue >= Util.BINARY_GIGA)
                     unit =  Messages.VAL_GIGB;
@@ -571,10 +579,8 @@ namespace XenAdmin.Core
             }
 
             public AllocationBounds(decimal min, decimal max, decimal defaultValue, string unit)
+                : this(min, max, defaultValue)
             {
-                this.min = min;
-                this.max = max;
-                this.defaultValue = defaultValue;
                 this.unit = unit;
             }
 

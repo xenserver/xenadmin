@@ -728,7 +728,7 @@ namespace XenAdmin.Dialogs
         // therefore they use the same converting function.
         private void incr_alloc_units_SelectedIndexChanged(object sender, EventArgs e)
         {
-            StorageProvisioning.UpdateValuesWhenUnitsChanged(allocationQuantumNumericUpDown, previousUnitsValueIncrAlloc, incr_alloc_units.SelectedItem.ToString());
+            UpdateValuesWhenUnitsChanged(allocationQuantumNumericUpDown, previousUnitsValueIncrAlloc, incr_alloc_units.SelectedItem.ToString());
             previousUnitsValueIncrAlloc = incr_alloc_units.SelectedItem.ToString();
         }
 

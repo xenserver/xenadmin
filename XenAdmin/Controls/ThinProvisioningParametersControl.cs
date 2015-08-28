@@ -72,14 +72,18 @@ namespace XenAdmin.Controls
             }
         }
 
-        private long SRSize
+        public long SRSize
         {
-            get
+            private get
             {
                 if (sr != null)
                     return sr.physical_size;
 
                 return 0;
+            }
+            set
+            {
+                SR = new SR() { physical_size = value };
             }
         }
 
@@ -172,6 +176,15 @@ namespace XenAdmin.Controls
                 if (smConfig.ContainsKey("allocation_quantum") && long.TryParse(smConfig["allocation_quantum"], out temp))
                     SetUpIncrAllocationNumericUpDown(temp);
             }
+        }
+
+        public void ResetControlValues()
+        {
+            initialAllocationNumericUpDown.ResetText();
+            allocationQuantumNumericUpDown.ResetText();
+
+            initial_allocation_units.SelectedItem = Messages.VAL_MEGB;
+            incremental_allocation_units.SelectedItem = Messages.VAL_MEGB;
         }
 
         private void initial_allocation_units_SelectedIndexChanged(object sender, EventArgs e)
