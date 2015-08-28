@@ -341,6 +341,11 @@ namespace XenAdminTests.TabsAndMenus
             return sr.HasPBDs && !SR.IsDefaultSr(sr) && sr.SupportsVdiCreate() && (sr.shared || sr.Connection.Cache.HostCount <= 1) && !HelpersGUI.GetActionInProgress(sr);
         }
 
+        protected static bool CanConvertSR(SR sr)
+        {
+            return sr != null && Helpers.DundeeOrGreater(sr.Connection) && sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi");
+        }
+
         /// <summary>
         /// Adds the "Expand All" and "Collapse Children" expected items to the specified list for the specified node.
         /// </summary>

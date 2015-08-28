@@ -653,15 +653,6 @@ namespace XenAdmin.TabPages
             {
                 s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
             }
-            if (!Host.IsFullyPatched(host, ConnectionsManager.XenConnectionsCopy))
-            {
-                CommandToolStripMenuItem applypatch =
-                           new CommandToolStripMenuItem(
-                               new InstallNewUpdateCommand(Program.MainWindow), true);
-
-                var menuItems = new[] { applypatch };
-                s.AddEntry(FriendlyName("Pool_patch.not_applied"), hostUnappliedPatches(host), menuItems, Color.Red);
-            }
 
             // add supplemental packs
             var suppPacks = hostInstalledSuppPacks(host);
@@ -1243,7 +1234,19 @@ namespace XenAdmin.TabPages
                 if (sr.content_type != SR.Content_Type_ISO && sr.GetSRType(false) != SR.SRTypes.udev)
                 {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
-                    s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING);
+
+                    IEnumerable<CommandToolStripMenuItem> menuItems = null;
+                    if (sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
+                    {
+                        menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem> () { new SelectedItem(xenObject)} ), true) };
+                    }
+                    s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING, menuItems);
+
+                    if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
+                    {
+                        s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
+                                   Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
+                    }
                 }
 
                 if (sr.GetScsiID() != null)
@@ -1346,7 +1349,7 @@ namespace XenAdmin.TabPages
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
-                    bool isReceivingUpdates = vm.auto_update_drivers;
+                    bool isReceivingUpdates = false;// && vm.auto_update_drivers; //disabling it temporarily
 
                     bool isXenPrepInProgress = vm.IsXenPrepInProgress;
                     bool canTurnOnAutoUpdates = !isReceivingUpdates && !isXenPrepInProgress;

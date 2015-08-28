@@ -107,7 +107,7 @@ namespace XenServerHealthCheck
             { 
                 string domain_name = ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME);
                 if (string.IsNullOrEmpty(domain_name))
-                    return "https://rttf-staging.citrix.com/feeds/api/";
+                    return "https://rttf.citrix.com/feeds/api/";
                 return domain_name;
             }
         }

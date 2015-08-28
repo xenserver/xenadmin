@@ -2482,6 +2482,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk space allocations.
+        /// </summary>
+        public static string Label_SR_disk_space_allocations {
+            get {
+                return ResourceManager.GetString("Label-SR.disk-space-allocations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provisioning.
         /// </summary>
         public static string Label_SR_provisioning {

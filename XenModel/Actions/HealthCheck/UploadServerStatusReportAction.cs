@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
         private readonly string bundleToUpload;
 
         private const string UPLOAD_URL = "/feeds/api/";
-        private readonly string UPLOAD_DOMAIN_NAME = "http://cis-daily.citrite.com";
+        private readonly string UPLOAD_DOMAIN_NAME = "https://rttf.citrix.com";
 
         private CancellationTokenSource cts;
 
@@ -101,7 +101,7 @@ namespace XenAdmin.Actions
 
             // Upload the zip file to CIS uploading server.
             var uploadUrl = string.Format("{0}{1}", UPLOAD_DOMAIN_NAME, UPLOAD_URL);
-            XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, 9, uploadUrl);
+            XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, 9, uploadUrl, null);
             string uploadUuid = upload.UploadZip(bundleToUpload, cts.Token);
 
             // Return the uuid of upload.

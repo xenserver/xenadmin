@@ -1586,6 +1586,9 @@ Authorized Roles: {1}</value>
   <data name="VBD_TRAY_LOCKED" xml:space="preserve">
     <value>This VM has locked the DVD drive tray, so the disk cannot be ejected</value>
   </data>
+  <data name="VBD_XENPREP_CD_IN_USE" xml:space="preserve">
+    <value>Cannot eject the disk, because this VM is being upgraded to receive updates via Windows Update. The upgrade can only be cancelled using the command line.</value>
+  </data>
   <data name="VCPUS_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum number of virtual CPUs allowed for this virtual machine.</value>
   </data>

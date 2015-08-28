@@ -39,12 +39,14 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.poolNameLabel = new System.Windows.Forms.Label();
             this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.lastUploadDateLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.issuesLabel = new System.Windows.Forms.Label();
+            this.refreshLinkLabel = new System.Windows.Forms.LinkLabel();
             this.disableLinkLabel = new System.Windows.Forms.LinkLabel();
             this.uploadRequestLinkLabel = new System.Windows.Forms.LinkLabel();
             this.scheduleLabel = new System.Windows.Forms.Label();
             this.editLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.issuesLabel = new System.Windows.Forms.Label();
-            this.lastUploadDateLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lastUploadLabel = new System.Windows.Forms.Label();
@@ -71,6 +73,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.tableLayoutPanel2.SuspendLayout();
             this.poolDetailsPanel.SuspendLayout();
             this.healthCheckStatusPanel.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.previousUploadPanel.SuspendLayout();
             this.notEnrolledPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -146,18 +149,43 @@ namespace XenAdmin.Dialogs.HealthCheck
             // healthCheckStatusPanel
             // 
             resources.ApplyResources(this.healthCheckStatusPanel, "healthCheckStatusPanel");
-            this.healthCheckStatusPanel.Controls.Add(this.disableLinkLabel, 0, 9);
-            this.healthCheckStatusPanel.Controls.Add(this.uploadRequestLinkLabel, 0, 8);
-            this.healthCheckStatusPanel.Controls.Add(this.scheduleLabel, 0, 6);
-            this.healthCheckStatusPanel.Controls.Add(this.editLinkLabel, 0, 7);
-            this.healthCheckStatusPanel.Controls.Add(this.issuesLabel, 0, 2);
             this.healthCheckStatusPanel.Controls.Add(this.lastUploadDateLabel, 1, 1);
-            this.healthCheckStatusPanel.Controls.Add(this.label4, 0, 5);
+            this.healthCheckStatusPanel.Controls.Add(this.flowLayoutPanel1, 0, 3);
+            this.healthCheckStatusPanel.Controls.Add(this.disableLinkLabel, 0, 9);
+            this.healthCheckStatusPanel.Controls.Add(this.uploadRequestLinkLabel, 0, 10);
+            this.healthCheckStatusPanel.Controls.Add(this.scheduleLabel, 0, 7);
+            this.healthCheckStatusPanel.Controls.Add(this.editLinkLabel, 0, 8);
+            this.healthCheckStatusPanel.Controls.Add(this.label4, 0, 6);
             this.healthCheckStatusPanel.Controls.Add(this.label1, 0, 0);
             this.healthCheckStatusPanel.Controls.Add(this.lastUploadLabel, 0, 1);
-            this.healthCheckStatusPanel.Controls.Add(this.ReportAnalysisLinkLabel, 0, 3);
-            this.healthCheckStatusPanel.Controls.Add(this.previousUploadPanel, 0, 4);
+            this.healthCheckStatusPanel.Controls.Add(this.ReportAnalysisLinkLabel, 0, 4);
+            this.healthCheckStatusPanel.Controls.Add(this.previousUploadPanel, 0, 5);
             this.healthCheckStatusPanel.Name = "healthCheckStatusPanel";
+            // 
+            // lastUploadDateLabel
+            // 
+            resources.ApplyResources(this.lastUploadDateLabel, "lastUploadDateLabel");
+            this.lastUploadDateLabel.Name = "lastUploadDateLabel";
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.healthCheckStatusPanel.SetColumnSpan(this.flowLayoutPanel1, 2);
+            this.flowLayoutPanel1.Controls.Add(this.issuesLabel);
+            this.flowLayoutPanel1.Controls.Add(this.refreshLinkLabel);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // issuesLabel
+            // 
+            resources.ApplyResources(this.issuesLabel, "issuesLabel");
+            this.issuesLabel.Name = "issuesLabel";
+            // 
+            // refreshLinkLabel
+            // 
+            resources.ApplyResources(this.refreshLinkLabel, "refreshLinkLabel");
+            this.refreshLinkLabel.Name = "refreshLinkLabel";
+            this.refreshLinkLabel.TabStop = true;
+            this.refreshLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.refreshLinkLabel_LinkClicked);
             // 
             // disableLinkLabel
             // 
@@ -189,17 +217,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.editLinkLabel.TabStop = true;
             this.editLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.editlinkLabel_LinkClicked);
             // 
-            // issuesLabel
-            // 
-            resources.ApplyResources(this.issuesLabel, "issuesLabel");
-            this.healthCheckStatusPanel.SetColumnSpan(this.issuesLabel, 2);
-            this.issuesLabel.Name = "issuesLabel";
-            // 
-            // lastUploadDateLabel
-            // 
-            resources.ApplyResources(this.lastUploadDateLabel, "lastUploadDateLabel");
-            this.lastUploadDateLabel.Name = "lastUploadDateLabel";
-            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -223,6 +240,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.healthCheckStatusPanel.SetColumnSpan(this.ReportAnalysisLinkLabel, 2);
             this.ReportAnalysisLinkLabel.Name = "ReportAnalysisLinkLabel";
             this.ReportAnalysisLinkLabel.TabStop = true;
+            this.ReportAnalysisLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ReportAnalysisLinkLabel_LinkClicked);
             // 
             // previousUploadPanel
             // 
@@ -239,6 +257,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.previousUploadPanel.SetColumnSpan(this.viewReportLinkLabel, 2);
             this.viewReportLinkLabel.Name = "viewReportLinkLabel";
             this.viewReportLinkLabel.TabStop = true;
+            this.viewReportLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.viewReportLinkLabel_LinkClicked);
             // 
             // previousUploadDateLabel
             // 
@@ -303,6 +322,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
             this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
             this.PolicyStatementLinkLabel.TabStop = true;
+            this.PolicyStatementLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PolicyStatementLinkLabel_LinkClicked);
             // 
             // rubricLabel
             // 
@@ -339,6 +359,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.poolDetailsPanel.PerformLayout();
             this.healthCheckStatusPanel.ResumeLayout(false);
             this.healthCheckStatusPanel.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.previousUploadPanel.ResumeLayout(false);
             this.previousUploadPanel.PerformLayout();
             this.notEnrolledPanel.ResumeLayout(false);
@@ -364,13 +386,11 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusColumn;
         private System.Windows.Forms.TableLayoutPanel healthCheckStatusPanel;
         private System.Windows.Forms.Label issuesLabel;
-        private System.Windows.Forms.Label lastUploadDateLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lastUploadLabel;
         private System.Windows.Forms.LinkLabel ReportAnalysisLinkLabel;
         private System.Windows.Forms.TableLayoutPanel previousUploadPanel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel viewReportLinkLabel;
         private System.Windows.Forms.Label previousUploadDateLabel;
         private System.Windows.Forms.LinkLabel editLinkLabel;
         private System.Windows.Forms.Label label4;
@@ -386,6 +406,10 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.LinkLabel uploadRequestLinkLabel;
         private System.Windows.Forms.CheckBox showAgainCheckBox;
         private System.Windows.Forms.LinkLabel disableLinkLabel;
+        private System.Windows.Forms.LinkLabel viewReportLinkLabel;
+        private System.Windows.Forms.LinkLabel refreshLinkLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label lastUploadDateLabel;
     }
 }
 

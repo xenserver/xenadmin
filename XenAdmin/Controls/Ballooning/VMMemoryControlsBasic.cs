@@ -149,15 +149,15 @@ namespace XenAdmin.Controls.Ballooning
             // Spinners
             FreeSpinnerRanges();
             static_min = vm0.memory_static_min;
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, ballooning ? XenAdmin.Properties.Resources.memory_dynmin_slider_small : null, vm0.memory_dynamic_min);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, ballooning ? XenAdmin.Properties.Resources.memory_dynmax_slider_small : null, vm0.memory_dynamic_max);
-            memorySpinnerFixed.Initialize("", null, vm0.memory_static_max);
+            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, ballooning ? XenAdmin.Properties.Resources.memory_dynmin_slider_small : null, vm0.memory_dynamic_min, vm0.memory_static_max);
+            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, ballooning ? XenAdmin.Properties.Resources.memory_dynmax_slider_small : null, vm0.memory_dynamic_max, vm0.memory_static_max);
+            memorySpinnerFixed.Initialize("", null, vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
             firstPaint = false;
         }
 
-        public override long dynamic_min
+        public override double dynamic_min
         {
             get
             {
@@ -166,7 +166,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        public override long dynamic_max
+        public override double dynamic_max
         {
             get
             {
@@ -175,7 +175,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        public override long static_max
+        public override double static_max
         {
             get
             {
@@ -185,7 +185,7 @@ namespace XenAdmin.Controls.Ballooning
 
         private void SetIncrements()
         {
-            vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = CalcIncrement();
+            vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = memorySpinnerFixed.Increment = CalcIncrement(memorySpinnerDynMax.Units);
         }
 
         private void DynamicSpinners_ValueChanged(object sender, EventArgs e)
@@ -200,8 +200,8 @@ namespace XenAdmin.Controls.Ballooning
                 long min = (long)((double)static_max * GetMemoryRatio());
                 if (memorySpinnerDynMin.Value < min)
                     memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, XenAdmin.Properties.Resources.memory_dynmin_slider_small, min, RoundingBehaviour.Up);
-                SetIncrements();
             }
+            SetIncrements();
             SetSpinnerRanges();
             vmShinyBar.ChangeSettings(static_min, dynamic_min, dynamic_max, static_max);
             vmShinyBar.Refresh();
@@ -212,26 +212,27 @@ namespace XenAdmin.Controls.Ballooning
             if (firstPaint)  // still initialising
                 return;
             radioOff.Checked = true;
+            SetIncrements();
         }
 
         private void SetSpinnerRanges()
         {
             // Set the limit for the fixed spinner
-            long maxFixed = ((maxDynMin >= 0 && maxDynMin <= MemorySpinnerMax) ? maxDynMin : MemorySpinnerMax);
+            double maxFixed = ((maxDynMin >= 0 && maxDynMin <= MemorySpinnerMax) ? maxDynMin : MemorySpinnerMax);
             memorySpinnerFixed.SetRange(vm0.memory_static_min >= Util.BINARY_MEGA ? vm0.memory_static_min : Util.BINARY_MEGA, maxFixed);
 
             if (!ballooning)
                 return;
 
             // Calculate limits for the dynamic spinners
-            long maxDM = DynMinSpinnerMax;
-            long minDM = DynMinSpinnerMin;
-            long maxSM = StatMaxSpinnerMax;
+            double maxDM = DynMinSpinnerMax;
+            double minDM = DynMinSpinnerMin;
+            double maxSM = StatMaxSpinnerMax;
 
             // Set the limits
             memorySpinnerDynMin.SetRange(minDM, maxDM);
             memorySpinnerDynMax.SetRange(dynamic_min >= Util.BINARY_MEGA ? dynamic_min : Util.BINARY_MEGA, maxSM);
-            vmShinyBar.SetRanges(minDM, maxDM, dynamic_min, maxSM);
+            vmShinyBar.SetRanges(minDM, maxDM, dynamic_min, maxSM, memorySpinnerDynMax.Units);
         }
 
         private void FreeSpinnerRanges()
@@ -243,8 +244,8 @@ namespace XenAdmin.Controls.Ballooning
 
         private void vmShinyBar_SliderDragged(object sender, EventArgs e)
         {
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, XenAdmin.Properties.Resources.memory_dynmin_slider_small, vmShinyBar.Dynamic_min);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, XenAdmin.Properties.Resources.memory_dynmax_slider_small, vmShinyBar.Dynamic_max);
+            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, XenAdmin.Properties.Resources.memory_dynmin_slider_small, vmShinyBar.Dynamic_min, RoundingBehaviour.None);
+            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, XenAdmin.Properties.Resources.memory_dynmax_slider_small, vmShinyBar.Dynamic_max, RoundingBehaviour.None);
             memorySpinnerDynMin.Refresh();
             memorySpinnerDynMax.Refresh();
         }

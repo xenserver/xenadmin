@@ -33,6 +33,7 @@ using System.Text;
 using System.Security.Principal;
 using System.IO.Pipes;
 using XenAPI;
+using XenAdmin.Model;
 
 namespace XenServerHealthCheck
 {
@@ -114,10 +115,17 @@ namespace XenServerHealthCheck
                                 byteCount = pipeServer.Read(msgBuff, 0, pipeBufferSize);
                                 mb.Append(Encoding.UTF8.GetString(msgBuff, 0, byteCount));
                             } while (!(pipeServer.IsMessageComplete));
-                            string credential = mb.ToString();
-                            if (credential == HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE)
+                            string message = mb.ToString();
+                            if (message == HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE)
                                 break;
-                            ServerListHelper.instance.UpdateServerCredential(credential);
+                            if (message.StartsWith(HealthCheckSettings.PROXY_SETTINGS))
+                            {
+                                ServerListHelper.instance.UpdateProxy(message);
+                            }
+                            else
+                            {
+                                ServerListHelper.instance.UpdateServerCredential(message);
+                            }
                         }
                         catch (Exception exp)
                         {

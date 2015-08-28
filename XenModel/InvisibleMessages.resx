@@ -132,6 +132,9 @@
   <data name="COMMUNITY_URL" xml:space="preserve">
     <value>http://xenserver.org/</value>
   </data>
+  <data name="HEALTH_CHECK_PRIVACY_STATEMENT_URL" xml:space="preserve">
+    <value>https://cis.citrix.com/legal/</value>
+  </data>
   <data name="HOMEPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserver</value>
   </data>

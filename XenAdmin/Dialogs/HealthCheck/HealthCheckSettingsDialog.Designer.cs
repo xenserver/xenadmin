@@ -248,6 +248,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
             this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
             this.PolicyStatementLinkLabel.TabStop = true;
+            this.PolicyStatementLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PolicyStatementLinkLabel_LinkClicked);
             // 
             // rubricLabel
             // 

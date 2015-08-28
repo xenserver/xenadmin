@@ -432,6 +432,15 @@
   <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE" xml:space="preserve">
     <value>Get space requirements</value>
   </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT" xml:space="preserve">
+    <value>Get Health Check analysis result from Citrix Insight Services</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT_FAILED" xml:space="preserve">
+    <value>Failed to get the analysis result</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS" xml:space="preserve">
+    <value>Getting the analysis result</value>
+  </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>Action completed. {0} VDIs found.</value>
   </data>
@@ -783,8 +792,17 @@
   <data name="ACTION_SR_UPGRADED" xml:space="preserve">
     <value>Upgraded SR</value>
   </data>
+  <data name="ACTION_SR_UPGRADED_TO_THIN" xml:space="preserve">
+    <value>Upgraded SR '{0}' to use thin provisioning</value>
+  </data>
+  <data name="ACTION_SR_UPGRADE_TO_THIN" xml:space="preserve">
+    <value>Upgrade SR '{0}' to use thin provisioning</value>
+  </data>
   <data name="ACTION_SR_UPGRADING" xml:space="preserve">
     <value>Upgrading SR</value>
+  </data>
+  <data name="ACTION_SR_UPGRADING_TO_THIN" xml:space="preserve">
+    <value>Upgrading SR '{0}' to use thin provisioning</value>
   </data>
   <data name="ACTION_START_CONTAINER_DESCRIPTION" xml:space="preserve">
     <value>Starting</value>
@@ -5711,7 +5729,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>OK, Enable Health Check</value>
@@ -5729,7 +5747,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Upload a Health Check report every {0} weeks on {1} starting at {2}</value>
   </data>
   <data name="HEALTHCHECK_STATUS_ISSUES_FOUND" xml:space="preserve">
-    <value>Issues found</value>
+    <value>{0} issues detected</value>
   </data>
   <data name="HEALTHCHECK_STATUS_NOT_AVAILABLE_YET" xml:space="preserve">
     <value>Analysis not yet available</value>
@@ -5738,7 +5756,13 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Health Check not enabled</value>
   </data>
   <data name="HEALTHCHECK_STATUS_NO_ISSUES_FOUND" xml:space="preserve">
-    <value>No issues found</value>
+    <value>No issues detected</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_NO_UPLOAD_YET" xml:space="preserve">
+    <value>No report uploaded yet</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
+    <value>1 issue detected</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>Authentication with Citrix Insight Services failed. See the application log files for more information.</value>
@@ -7067,6 +7091,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>S&amp;hut Down</value>
+  </data>
+  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
+    <value>&amp;Convert SR...</value>
   </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>&amp;Start</value>
@@ -10030,6 +10057,15 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SECURITY" xml:space="preserve">
     <value>Security</value>
   </data>
+  <data name="SECURITYEDITPAGE_RUBRIC_HOST" xml:space="preserve">
+    <value>Select the security protocols that can be used for communicating with this server.</value>
+  </data>
+  <data name="SECURITYEDITPAGE_SUBTEXT_SSL" xml:space="preserve">
+    <value>SSL &amp; TLS</value>
+  </data>
+  <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
+    <value>TLS 1.2 only</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>Security Checks</value>
   </data>
@@ -10128,6 +10164,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SETTING_SECURITY_SETTINGS" xml:space="preserve">
+    <value>Setting security settings</value>
   </data>
   <data name="SETTING_VM_PROPERTIES" xml:space="preserve">
     <value>Setting VM properties</value>
@@ -10471,6 +10510,11 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR_DETACHED" xml:space="preserve">
     <value>The SR is currently detached.</value>
+  </data>
+  <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
+    <value>Initial allocation: {0}
+
+Incremental allocation: {1}</value>
   </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>This SR does not need to be upgraded.</value>
@@ -11700,6 +11744,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VAL_GB" xml:space="preserve">
     <value>{0} GB</value>
+  </data>
+  <data name="VAL_GB_ONE_DECIMAL" xml:space="preserve">
+    <value>{0:F1} GB</value>
   </data>
   <data name="VAL_GIGB" xml:space="preserve">
     <value>GB</value>

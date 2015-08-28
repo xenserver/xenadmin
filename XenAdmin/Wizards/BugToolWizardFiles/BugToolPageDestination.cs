@@ -116,7 +116,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             get
             {
-                return uploadCheckBox.Enabled;
+                return uploadCheckBox.Checked;
             }
         }
 
@@ -184,8 +184,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return false;
 
             var action = new HealthCheckAuthenticationAction(null, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
-                Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName, 
-                Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckProductKey, 
+                Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName,
+                Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
                 false, TokenExpiration, false);
 
             new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(Parent);

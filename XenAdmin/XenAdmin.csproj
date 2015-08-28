@@ -115,6 +115,7 @@
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\RunXenPrepCommand.cs" />
+    <Compile Include="Commands\ConvertToThinSRCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
     <Compile Include="Commands\PauseDockerContainerCommand.cs" />
@@ -167,6 +168,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomGridView\GridTreeExpanderItem.cs" />
+    <Compile Include="Controls\ThinProvisioningParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ThinProvisioningParametersControl.Designer.cs">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NonReopeningContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -198,6 +205,7 @@
     <Compile Include="Controls\UpsellPage.designer.cs">
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
@@ -221,6 +229,12 @@
     </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.designer.cs">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ConvertToThinSRDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConvertToThinSRDialog.Designer.cs">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
       <SubType>Form</SubType>
@@ -268,6 +282,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\SecurityEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
+      <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\VMEnlightenmentEditPage.cs">
       <SubType>UserControl</SubType>
@@ -1378,6 +1398,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
+      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>
@@ -1515,6 +1544,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.zh-CN.resx">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.ja.resx">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.resx">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.zh-CN.resx">
+      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ReconnectAsDialog.resx">
       <SubType>Designer</SubType>
@@ -1688,6 +1727,15 @@
     <EmbeddedResource Include="SettingsPanels\EditNetworkPage.resx">
       <DependentUpon>EditNetworkPage.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SecurityEditPage.ja.resx">
+      <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SecurityEditPage.resx">
+      <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
+      <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\StorageLinkEditPage.resx">
       <SubType>Designer</SubType>
@@ -4197,6 +4245,7 @@
     <None Include="Images\pool_up_32.png" />
     <None Include="Images\objects_16_textured.png" />
     <None Include="Images\PausedDC_16.png" />
+    <None Include="Images\padlock.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
@@ -5588,7 +5637,9 @@
     <EmbeddedResource Include="Properties\Resources.ja.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\BootOptionsEditPage.zh-CN.resx">
       <DependentUpon>BootOptionsEditPage.cs</DependentUpon>
     </EmbeddedResource>

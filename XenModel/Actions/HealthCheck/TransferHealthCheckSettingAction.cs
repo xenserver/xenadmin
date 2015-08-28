@@ -37,6 +37,7 @@ using System.IO.Pipes;
 using System.IO;
 using System.Text;
 using System.ServiceProcess;
+using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {
@@ -102,7 +103,7 @@ namespace XenAdmin.Actions
                         credential = ProtectCredential(host.address, username, password);
                     else
                         credential = ProtectCredential(host.address, string.Empty, string.Empty);
-                    pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
+                    pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, (Encoding.UTF8.GetBytes(credential)).Length);
                     break;
                 }
             }

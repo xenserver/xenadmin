@@ -310,10 +310,10 @@
     <value>Date</value>
   </data>
   <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
-    <value>70</value>
+    <value>80</value>
   </data>
   <data name="ColumnDate.Width" type="System.Int32, mscorlib">
-    <value>70</value>
+    <value>80</value>
   </data>
   <metadata name="webPageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -322,7 +322,10 @@
     <value>Web Page</value>
   </data>
   <data name="webPageColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>120</value>
+    <value>110</value>
+  </data>
+  <data name="webPageColumn.Width" type="System.Int32, mscorlib">
+    <value>110</value>
   </data>
   <data name="dataGridViewPatches.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 65</value>

@@ -36,6 +36,7 @@ using System.Windows.Forms;
 using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.HealthCheck;
+using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAPI;
 

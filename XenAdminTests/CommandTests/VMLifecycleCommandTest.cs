@@ -73,6 +73,7 @@ namespace XenAdminTests.CommandTests
         }
 
         [Test]
+        [Ignore]
         public void TestMultipleSelect()
         {
             tester.TestMultipleSelect();

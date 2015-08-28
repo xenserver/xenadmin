@@ -4422,6 +4422,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot eject the disk, because this VM is being upgraded to receive updates via Windows Update. The upgrade can only be cancelled using the command line..
+        /// </summary>
+        public static string VBD_XENPREP_CD_IN_USE {
+            get {
+                return ResourceManager.GetString("VBD_XENPREP_CD_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have reached the maximum number of virtual disks allowed for this virtual machine..
         /// </summary>
         public static string VBDS_MAX_ALLOWED {

@@ -49,10 +49,14 @@ namespace XenAdmin.Core
     public static class Helpers
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
+        private const long XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR = 50000;
+        private const long XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR = 10000;
+        private const long XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR = 4000; 
+        private const long XLVHD_MIN_ALLOCATION_QUANTUM = 16777216; // 16 MB
 
         public const int DEFAULT_NAME_TRIM_LENGTH = 50;
-
-
+        
         public const string GuiTempObjectPrefix = "__gui__";
 
         public const int CUSTOM_BUILD_NUMBER = 6666;
@@ -547,6 +551,131 @@ namespace XenAdmin.Core
             return (p != null && !String.IsNullOrEmpty(p.wlb_url));
         }
 
+        #region AllocationBoundsStructAndMethods
+        public struct AllocationBounds
+        {
+            private readonly decimal min;
+            private readonly decimal max;
+            private readonly decimal defaultValue;
+            private readonly string unit;
+
+            public AllocationBounds(decimal min, decimal max, decimal defaultValue)
+            {
+                this.min = min;
+                this.max = max;
+                this.defaultValue = defaultValue;
+                if (defaultValue >= Util.BINARY_GIGA)
+                    unit =  Messages.VAL_GIGB;
+                else
+                    unit = Messages.VAL_MEGB;
+            }
+
+            public AllocationBounds(decimal min, decimal max, decimal defaultValue, string unit)
+            {
+                this.min = min;
+                this.max = max;
+                this.defaultValue = defaultValue;
+                this.unit = unit;
+            }
+
+            public decimal Min
+            {
+                get
+                {
+                    return min;
+                }
+            }
+
+            public decimal Max
+            {
+                get
+                {
+                    return max;
+                }
+            }
+
+            /// <summary>
+            /// Returns the minimum in the appropriate units
+            /// </summary>
+            public decimal MinInUnits
+            {
+                get
+                {
+                    return GetValueInUnits(min);
+                }
+            }
+
+            public decimal MaxInUnits
+            {
+                get
+                {
+                    return GetValueInUnits(max);
+                }
+            }
+
+            public decimal DefaultValueInUnits
+            {
+                get
+                {
+                    return GetValueInUnits(defaultValue);
+                }
+            }
+
+            public string Unit
+            {
+                get
+                {
+                   return unit;
+                }
+            }
+
+            private decimal GetValueInUnits(decimal val)
+            {
+                if (unit == Messages.VAL_GIGB)
+                    return val / Util.BINARY_GIGA;
+                else
+                    return val / Util.BINARY_MEGA;
+            }
+        }
+
+        public static AllocationBounds SRIncrementalAllocationBounds(long SRSize)
+        {
+            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR , XLVHD_MIN_ALLOCATION_QUANTUM);
+            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
+            decimal defaultValue = Math.Max(SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR, min);
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        public static AllocationBounds VDIIncrementalAllocationBounds(long SRSize, long SRIncrAllocation)
+        {
+            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
+            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, SRIncrAllocation);
+            decimal defaultValue = SRIncrAllocation;
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        public static AllocationBounds SRInitialAllocationBounds(long SRSize)
+        {
+            decimal min = 0;
+            decimal max = SRSize;
+            decimal defaultValue = 0;
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        public static AllocationBounds VDIInitialAllocationBounds(long VDISize, long SRInitialAllocation)
+        {
+            decimal min = 0;
+            decimal max = VDISize;
+            decimal defaultValue = Math.Min(SRInitialAllocation, max);
+
+            return new AllocationBounds(min, max, defaultValue);
+        }
+
+        #endregion
+
         /// <summary>
         /// Determines whether two lists contain the same elements (but not necessarily in the same order).
         /// Compares list elements using reference equality.
@@ -757,6 +886,13 @@ namespace XenAdmin.Core
                 string.Format(Messages.GENERAL_CPU_VENDOR, cpu.vendor),
                 string.Format(Messages.GENERAL_CPU_MODEL, cpu.modelname),
                 string.Format(Messages.GENERAL_CPU_SPEED, cpu.speed));
+        }
+
+        public static string GetAllocationProperties(string initial_allocation, string quantum_allocation)
+        {
+            return string.Format(Messages.SR_DISK_SPACE_ALLOCATION,
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(initial_allocation), true),
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(quantum_allocation), true));
         }
 
         public static string GetHostRestrictions(Host host)

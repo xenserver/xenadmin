@@ -1673,16 +1673,6 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _005_SSLRelayConfig_h32bit_16 {
-            get {
-                object obj = ResourceManager.GetObject("_005_SSLRelayConfig_h32bit_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _015_Download_h32bit_32 {
             get {
                 object obj = ResourceManager.GetObject("_015_Download_h32bit_32", resourceCulture);
@@ -2646,6 +2636,16 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap org_view_24 {
             get {
                 object obj = ResourceManager.GetObject("org_view_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap padlock {
+            get {
+                object obj = ResourceManager.GetObject("padlock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

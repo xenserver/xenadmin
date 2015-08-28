@@ -189,9 +189,9 @@ namespace XenAdmin.Alerts
                     case AlarmType.Memory:
                         return string.Format(Messages.ALERT_ALARM_MEMORY_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
-                                             Util.MemorySizeString(CurrentValue * Util.BINARY_KILO),//xapi unit is in kib
+                                             Util.MemorySizeStringMB(CurrentValue * Util.BINARY_KILO),//xapi unit is in kib
                                              Util.TimeString(TriggerPeriod),
-                                             Util.MemorySizeString(TriggerLevel * Util.BINARY_KILO));
+                                             Util.MemorySizeStringMB(TriggerLevel * Util.BINARY_KILO));
                     case AlarmType.Dom0MemoryDemand:
                         return string.Format(Messages.ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),

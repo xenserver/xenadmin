@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Model;
 using XenAPI;
 
 
@@ -46,6 +47,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         private bool authenticationRequired;
         private bool authenticated;
         private string authenticationToken;
+        private string diagnosticToken;
         private string xsUserName;
         private string xsPassword;
 
@@ -55,7 +57,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             healthCheckSettings = pool.HealthCheckSettings;
             if (enrollNow)
                 healthCheckSettings.Status = HealthCheckStatus.Enabled;
-            authenticationToken = healthCheckSettings.GetExistingSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
+            authenticated = healthCheckSettings.TryGetExistingTokens(pool.Connection, out authenticationToken, out diagnosticToken);
+            authenticationRequired = !authenticated;
             xsUserName = healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
             xsPassword = healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
@@ -102,9 +105,6 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void InitializeControls()
         {
-            authenticationRequired = string.IsNullOrEmpty(authenticationToken);
-            authenticated = !authenticationRequired;
-
             Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name);
             
             authenticationRubricLabel.Text = authenticationRequired
@@ -164,14 +164,15 @@ namespace XenAdmin.Dialogs.HealthCheck
 
             if (ChangesMade())
             {
-                var newHealthCheckSettings = new HealthCheckSettings(
-                    enrollmentCheckBox.Checked ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled,
-                    (int)(frequencyNumericBox.Value * 7),
-                    (DayOfWeek)dayOfWeekComboBox.SelectedValue,
-                    (int)timeOfDayComboBox.SelectedValue,
-                    HealthCheckSettings.DefaultRetryInterval);
+                var newHealthCheckSettings = new HealthCheckSettings(pool.health_check_config);
 
-                new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
+                newHealthCheckSettings.Status = enrollmentCheckBox.Checked ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled;
+                newHealthCheckSettings.IntervalInDays = (int)(frequencyNumericBox.Value * 7);
+                newHealthCheckSettings.DayOfWeek = (DayOfWeek)dayOfWeekComboBox.SelectedValue;
+                newHealthCheckSettings.TimeOfDay = (int)timeOfDayComboBox.SelectedValue;
+                newHealthCheckSettings. RetryInterval = HealthCheckSettings.DEFAULT_RETRY_INTERVAL;
+                
+                new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, diagnosticToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
                 new TransferHealthCheckSettingsAction(pool, newHealthCheckSettings, textboxXSUserName.Text, textboxXSPassword.Text, true).RunAsync();
             }
             okButton.Enabled = true;
@@ -267,7 +268,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
             var action = new HealthCheckAuthenticationAction(pool, textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
                 Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName, Registry.HealthCheckUploadTokenDomainName,
-                Registry.HealthCheckProductKey, true, 0, false);
+                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, true, 0, false);
 
             try
             {
@@ -282,14 +283,18 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
 
             authenticationToken = action.UploadToken;  // curent upload token
-            authenticated = !string.IsNullOrEmpty(authenticationToken);
-            authenticationToken = pool.HealthCheckSettings.GetExistingSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
+            authenticated = pool.HealthCheckSettings.TryGetExistingTokens(pool.Connection, out authenticationToken, out diagnosticToken);
             return authenticated;
         }
 
         private void credentials_TextChanged(object sender, EventArgs e)
         {
             UpdateButtons();
+        }
+
+        private void PolicyStatementLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Program.OpenURL(InvisibleMessages.HEALTH_CHECK_PRIVACY_STATEMENT_URL);
         }
     }
 }

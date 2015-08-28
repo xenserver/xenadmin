@@ -210,7 +210,7 @@ namespace XenAdmin.Controls.GPU
             else
                 maxDisplaysColumn.Value = string.Empty;
 
-            videoRamColumn.Value = VGpuType.framebuffer_size != 0 ? Util.SuperiorSizeString(VGpuType.framebuffer_size, 0) : string.Empty;
+            videoRamColumn.Value = VGpuType.framebuffer_size != 0 ? Util.MemorySizeStringMB(VGpuType.framebuffer_size) : string.Empty;
         }
 
         private void SetupCheckBoxCell()

@@ -39,7 +39,7 @@ namespace XenAdmin
 {
     public enum RoundingBehaviour
     {
-        Up, Down, Nearest
+        Up, Down, Nearest, None
     }
 
     /// <summary>
@@ -60,14 +60,46 @@ namespace XenAdmin
         /// </summary>
         public const UInt16 DEFAULT_ISCSI_PORT = 3260;
 
-        public static string MemorySizeString(double bytes)
+        public static string MemorySizeStringSuitableUnits(double bytes, bool showPoint0Decimal)
         {
-            return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
+            if (bytes >= 1 * BINARY_GIGA)
+            {
+                string format = Messages.VAL_GB_ONE_DECIMAL;
+                int dp = 1;
+                double valGB = bytes / BINARY_GIGA;
+                if (valGB > 100)
+                {
+                    dp = 0;
+                    format = Messages.VAL_GB;
+                }
+                if(!showPoint0Decimal)
+                {
+                    format = Messages.VAL_GB;
+                }
+                return string.Format(format, Math.Round(valGB, dp, MidpointRounding.AwayFromZero));       
+            }
+            else if (bytes >= 1 * BINARY_MEGA)
+            {
+                return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
+            }
+            else if (bytes >= 1 * BINARY_KILO)
+            {
+                return string.Format(Messages.VAL_KB, Math.Round(bytes / BINARY_KILO));
+            }
+            
+            if(bytes == 0)
+            {
+                return bytes.ToString();
+            }
+            else
+            {
+                return string.Format(Messages.VAL_B, bytes);
+            }
         }
 
-        public static string MemorySizeStringWithoutUnits(double bytes)
+        public static string MemorySizeStringMB(double bytes)
         {
-            return Math.Round(bytes / BINARY_MEGA).ToString();
+            return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
         }
 
         public static string DataRateString(double bytesPerSec)
@@ -87,27 +119,7 @@ namespace XenAdmin
             string unit;
             string value = ByteSizeString(bytes, 1, false, out unit);
             return string.Format(Messages.VAL_FORMAT, value, unit);
-        }
-
-        public static string SuperiorSizeString(double bytes, int dp)
-        {
-            if (bytes >= 10 * BINARY_GIGA)
-            {
-                return string.Format(Messages.VAL_GB, Math.Round(bytes / BINARY_GIGA, dp));
-            }
-            else if (bytes >= 10 * BINARY_MEGA)
-            {
-                return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA, dp));
-            }
-            else if (bytes >= 10 * BINARY_KILO)
-            {
-                return string.Format(Messages.VAL_KB, Math.Round(bytes / BINARY_KILO, dp));
-            }
-            else
-            {
-                return string.Format(Messages.VAL_B, bytes);
-            }
-        }
+        }       
 	
 		public static string DiskSizeString(long bytes)
         {
@@ -229,22 +241,49 @@ namespace XenAdmin
             return t.ToString("0");
         }
 
-        public static long ToMB(long bytes)
+        public static double ToGB(double bytes, int dp, RoundingBehaviour rounding)
         {
-            return ToMB(bytes, RoundingBehaviour.Nearest);
+            double value = (double)bytes / BINARY_GIGA;
+            int decimalsAdjustment = (int)Math.Pow(10, dp);
+            switch (rounding)
+            {
+                case RoundingBehaviour.None:
+                    return value;
+                case RoundingBehaviour.Down:
+                    return (Math.Floor(value * decimalsAdjustment) / decimalsAdjustment);                     
+                case RoundingBehaviour.Up:
+                   return (Math.Ceiling(value * decimalsAdjustment) / decimalsAdjustment);
+                default:  // case RoundingBehaviour.Nearest:
+                    return (Math.Round(value, 1, MidpointRounding.AwayFromZero));
+            }          
         }
 
-        public static long ToMB(long bytes, RoundingBehaviour rounding)
+        public static double ToMB(double bytes, RoundingBehaviour rounding)
         {
             switch (rounding)
             {
+                case RoundingBehaviour.None:
+                    return bytes / BINARY_MEGA;
                 case RoundingBehaviour.Down:
-                    return (long)Math.Floor(bytes / (double)BINARY_MEGA);
+                    return Math.Floor(bytes / BINARY_MEGA);
                 case RoundingBehaviour.Up:
-                    return (long)Math.Ceiling(bytes / (double)BINARY_MEGA);
+                    return Math.Ceiling(bytes / BINARY_MEGA);
                 default:  // case RoundingBehaviour.Nearest:
-                    return (long)Math.Round(bytes / (double)BINARY_MEGA, MidpointRounding.AwayFromZero);
+                    return Math.Round(bytes / BINARY_MEGA, MidpointRounding.AwayFromZero);
             }
+        }
+
+        public static double CorrectRoundingErrors(double amount)
+        {
+            // Special case to cope with choosing an amount that's a multiple of 0.1G but not 0.5G --
+            // sending it to the server as the nearest byte and getting it back later --
+            // and finding it's fractionally changed, messing up our spinner permitted ranges.
+            double amountRounded = ToGB(amount, 1, RoundingBehaviour.Nearest) * BINARY_GIGA;
+            double roundingDiff = amountRounded - amount;
+            if (roundingDiff > -1.0 && roundingDiff < 1.0)  // within 1 byte: although I think it will always be positive in the case we want to correct
+                return amountRounded;
+            else
+                return amount;
         }
 
         public static double ToUnixTime(DateTime time)
