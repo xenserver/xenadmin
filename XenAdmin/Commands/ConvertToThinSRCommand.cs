@@ -98,7 +98,7 @@ namespace XenAdmin.Commands
             {
                 var sr = item.XenObject as SR;
 
-                if (sr != null && sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
+                if (sr != null && Helpers.DundeeOrGreater(sr.Connection) && sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
                     return sr;
             }
 
