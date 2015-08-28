@@ -3166,6 +3166,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preparing to start the upgrade process.
+        /// </summary>
+        public static string ACTION_XENPREP_PREPARING {
+            get {
+                return ResourceManager.GetString("ACTION_XENPREP_PREPARING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Started the upgrade process.
         /// </summary>
         public static string ACTION_XENPREP_STARTED {
@@ -8327,6 +8336,15 @@ namespace XenAdmin {
         public static string COULD_NOT_WRITE_FILE {
             get {
                 return ResourceManager.GetString("COULD_NOT_WRITE_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
+        /// </summary>
+        public static string COULDNOTFIND_CD_ON_VM {
+            get {
+                return ResourceManager.GetString("COULDNOTFIND_CD_ON_VM", resourceCulture);
             }
         }
         
@@ -18215,15 +18233,6 @@ namespace XenAdmin {
         public static string INSTALL_XS_TOOLS {
             get {
                 return ResourceManager.GetString("INSTALL_XS_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
-        /// </summary>
-        public static string INSTALLTOOLS_COULDNOTFIND_CD {
-            get {
-                return ResourceManager.GetString("INSTALLTOOLS_COULDNOTFIND_CD", resourceCulture);
             }
         }
         

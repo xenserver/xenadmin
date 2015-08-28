@@ -102,7 +102,7 @@ namespace XenAdmin.Actions
             XenAPI.VBD cdrom = VM.FindVMCDROM();
             if (cdrom == null)
             {
-                Description = Messages.INSTALLTOOLS_COULDNOTFIND_CD;
+                Description = Messages.COULDNOTFIND_CD_ON_VM;
                 return;
             }
 

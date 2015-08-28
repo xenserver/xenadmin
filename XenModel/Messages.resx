@@ -1152,6 +1152,9 @@
   <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
     <value>Downloading WLB report {0}</value>
   </data>
+  <data name="ACTION_XENPREP_PREPARING" xml:space="preserve">
+    <value>Preparing to start the upgrade process</value>
+  </data>
   <data name="ACTION_XENPREP_STARTED" xml:space="preserve">
     <value>Started the upgrade process</value>
   </data>
@@ -2992,6 +2995,9 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   </data>
   <data name="COPY_VM_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
     <value>Copy VM to {0}</value>
+  </data>
+  <data name="COULDNOTFIND_CD_ON_VM" xml:space="preserve">
+    <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
     <value>Could not open URL '{0}'</value>
@@ -6319,9 +6325,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="INITIALIZING_WLB_ON" xml:space="preserve">
     <value>Connecting pool {0} to Workload Balancing server.</value>
-  </data>
-  <data name="INSTALLTOOLS_COULDNOTFIND_CD" xml:space="preserve">
-    <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
     <value>Could not find the XenServer Tools install disc.</value>

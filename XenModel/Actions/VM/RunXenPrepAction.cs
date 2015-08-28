@@ -50,6 +50,21 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            Description = Messages.ACTION_XENPREP_PREPARING;
+
+            // Check that the VM has a cd-rom...
+            XenAPI.VBD cdrom = VM.FindVMCDROM();
+            if (cdrom == null)
+            {
+                Description = Messages.COULDNOTFIND_CD_ON_VM;
+                return;
+            }
+
+            // Eject anything that's currently in the cd-rom...
+            if (!cdrom.empty)
+            {
+                XenAPI.VBD.eject(Session, cdrom.opaque_ref);
+            }
 
             VM.xenprep_start(Session, VM.opaque_ref);
 
