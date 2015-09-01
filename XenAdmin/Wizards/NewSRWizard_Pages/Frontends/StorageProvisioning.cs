@@ -214,8 +214,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 radioButtonThickProvisioning.Checked = true;
                 radioButtonThinProvisioning.Checked = false;
-                initialAllocationNumericUpDown.ResetText();
-                allocationQuantumNumericUpDown.ResetText();
             }
         }
 
