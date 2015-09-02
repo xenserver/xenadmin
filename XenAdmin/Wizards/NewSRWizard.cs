@@ -403,11 +403,9 @@ namespace XenAdmin.Wizards
             else if (senderPagetype == typeof(LVMoISCSI))
             {
                 xenTabPageStorageProvisioningMethod.SRSize = xenTabPageLvmoIscsi.SRSize;
-                m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
-                m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageLvmoIscsi.SrDescription);
 
-                if (m_srWizardType.UUID != null) //already existing SR
+                if (xenTabPageLvmoIscsi.UUID != null) //already existing SR
                 {
                     xenTabPageStorageProvisioningMethod.SetControlsUsingExistingSMConfig(m_srWizardType.SMConfig);
                     xenTabPageStorageProvisioningMethod.DisableControls();
@@ -543,6 +541,9 @@ namespace XenAdmin.Wizards
             else if (senderPagetype == typeof(StorageProvisioning))
             {
                 m_srWizardType.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig;
+                m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
+                m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
+
             }
         }
 

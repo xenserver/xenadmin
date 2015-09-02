@@ -137,7 +137,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 radioButtonThickProvisioning.Checked = true;
                 radioButtonThinProvisioning.Checked = false;
-                thinProvisioningAllocationsControl.ResetControlValues();
             }
         }
 
