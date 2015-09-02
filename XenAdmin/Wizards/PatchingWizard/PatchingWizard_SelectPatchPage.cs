@@ -216,7 +216,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else if (dataGridViewPatches.SortedColumn.Index == ColumnDate.Index)
                     updates.Sort(Alert.CompareOnDate);
                 else if (dataGridViewPatches.SortedColumn.Index == ColumnDescription.Index)
-                    updates.Sort(Alert.CompareOnAppliesTo);
+                    updates.Sort(Alert.CompareOnDescription);
 
                 if (dataGridViewPatches.SortOrder == SortOrder.Descending)
                     updates.Reverse();
