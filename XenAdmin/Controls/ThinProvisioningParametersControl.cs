@@ -178,15 +178,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        public void ResetControlValues()
-        {
-            initialAllocationNumericUpDown.ResetText();
-            allocationQuantumNumericUpDown.ResetText();
-
-            initial_allocation_units.SelectedItem = Messages.VAL_MEGB;
-            incremental_allocation_units.SelectedItem = Messages.VAL_MEGB;
-        }
-
         private void initial_allocation_units_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateValuesWhenUnitsChanged(initialAllocationNumericUpDown,
