@@ -66,6 +66,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             Program.Invoke(Program.MainWindow, () =>
             {
+                dataGridViewPatches.Focus();
                 RestoreDismUpdatesButton.Enabled = false;
                 RefreshListButton.Enabled = false;
             });
