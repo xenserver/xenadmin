@@ -44,21 +44,17 @@ namespace XenAdmin.Core
         public static event Action<bool> CheckForAnalysisResultsCompleted;
 
         /// <summary>
-        /// Checks the analysis results for all connections
+        /// Checks the analysis results for all connections.
+        /// Will only perform the check for the connection that have sufficient rights; will not show the action progress.
         /// </summary>
         public static void CheckForAnalysisResults()
         {
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                Pool pool = Helpers.GetPoolOfOne(xenConnection);
-                if (pool == null || Helpers.FeatureForbidden(xenConnection, Host.RestrictHealthCheck))
-                    continue;
-
-                var healthCheckSettings = pool.HealthCheckSettings;
-                
-                if (healthCheckSettings.Status == HealthCheckStatus.Enabled && !healthCheckSettings.HasAnalysisResult)
-                    actions.Add(new GetHealthCheckAnalysisResultAction(pool, Registry.HealthCheckDiagnosticDomainName, true));
+                var action = GetAction(xenConnection, true);
+                if (action != null)
+                    actions.Add(action);
             }
 
             if (actions.Count == 1)
@@ -75,22 +71,49 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Checks the analysis results for the specified connections
+        /// Checks the analysis results for the specified connections. 
+        /// Will only perform the check if the connection has sufficient rights; will not show the action progress.
         /// </summary>
         public static void CheckForAnalysisResults(object connection)
         {
-            Pool pool = Helpers.GetPoolOfOne((IXenConnection)connection);
-            if (pool == null || Helpers.FeatureForbidden((IXenConnection)connection, Host.RestrictHealthCheck))
-                return;
+            CheckForAnalysisResults(connection, true);
+        }
+        
+        /// <summary>
+        /// Checks the analysis results for the specified connections.
+        /// Will only perform the check if the connection has sufficient rights; If suppressHistory is false, it will show the action progress.
+        /// </summary>
+        public static void CheckForAnalysisResults(object connection, bool suppressHistory)
+        {
+            var action = GetAction((IXenConnection)connection, suppressHistory);
+            if (action != null)
+            {
+                action.Completed += actionCompleted;
+                action.RunAsync();
+            }
+        }
+
+        private static AsyncAction GetAction(IXenConnection connection, bool suppressHistory)
+        {
+            Pool pool = Helpers.GetPoolOfOne(connection);
+            if (pool == null || Helpers.FeatureForbidden(connection, Host.RestrictHealthCheck))
+                return null;
 
             var healthCheckSettings = pool.HealthCheckSettings;
 
             if (healthCheckSettings.Status == HealthCheckStatus.Enabled && !healthCheckSettings.HasAnalysisResult)
             {
-                var action = new GetHealthCheckAnalysisResultAction(pool, Registry.HealthCheckDiagnosticDomainName, true);
-                action.Completed += actionCompleted;
-                action.RunAsync();
+                var action = new GetHealthCheckAnalysisResultAction(pool, Registry.HealthCheckDiagnosticDomainName, suppressHistory);
+
+                if (PassedRbacChecks(pool.Connection))
+                    return action;
             }
+            return null;
+        }
+
+        public static bool PassedRbacChecks(IXenConnection connection)
+        {
+            return Role.CanPerform(new RbacMethodList("pool.set_health_check_config"), connection);
         }
 
         private static void actionCompleted(ActionBase sender)

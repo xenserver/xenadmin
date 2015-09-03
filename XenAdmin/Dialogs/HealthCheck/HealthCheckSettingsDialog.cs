@@ -266,9 +266,9 @@ namespace XenAdmin.Dialogs.HealthCheck
             if (!CheckCredentialsEntered())
                 return false;
 
-            var action = new HealthCheckAuthenticationAction(pool, textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
+            var action = new HealthCheckAuthenticationAction(textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
                 Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName, Registry.HealthCheckUploadTokenDomainName,
-                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, true, 0, false);
+                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 0, false);
 
             try
             {
@@ -283,7 +283,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
 
             authenticationToken = action.UploadToken;  // curent upload token
-            authenticated = pool.HealthCheckSettings.TryGetExistingTokens(pool.Connection, out authenticationToken, out diagnosticToken);
+            diagnosticToken = action.DiagnosticToken;  // curent diagnostic token
+            authenticated = !String.IsNullOrEmpty(authenticationToken) && !String.IsNullOrEmpty(diagnosticToken);
             return authenticated;
         }
 

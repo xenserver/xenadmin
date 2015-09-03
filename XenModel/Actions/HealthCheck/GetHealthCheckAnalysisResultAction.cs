@@ -49,7 +49,11 @@ namespace XenAdmin.Actions
         public GetHealthCheckAnalysisResultAction(Pool pool, bool suppressHistory)
             : base(pool.Connection, Messages.ACTION_GET_HEALTH_CHECK_RESULT, Messages.ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS, suppressHistory)
         {
-            
+            #region RBAC Dependencies
+            ApiMethodsToRoleCheck.Add("secret.get_by_uuid");
+            ApiMethodsToRoleCheck.Add("secret.get_value");
+            ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
+            #endregion
         }
 
         public GetHealthCheckAnalysisResultAction(Pool pool, string diagnosticDomainName, bool suppressHistory)
@@ -63,7 +67,7 @@ namespace XenAdmin.Actions
         {
             try
             {
-                var diagnosticToken = Pool.HealthCheckSettings.GetSecretyInfo(Pool.Connection, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
+                var diagnosticToken = Pool.HealthCheckSettings.GetSecretyInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
                 if (string.IsNullOrEmpty(diagnosticToken))
                 {
                     log.InfoFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name);
