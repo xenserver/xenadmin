@@ -72,14 +72,18 @@ namespace XenAdmin.Controls
             }
         }
 
-        private long SRSize
+        public long SRSize
         {
-            get
+            private get
             {
                 if (sr != null)
                     return sr.physical_size;
 
                 return 0;
+            }
+            set
+            {
+                SR = new SR() { physical_size = value };
             }
         }
 

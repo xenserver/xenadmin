@@ -156,10 +156,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
             // Will return false on cancel
             cancel = !ExamineIscsiProbeResults(IscsiProbeAction);
+            iscsiProbeError = cancel;
             
             base.PageLeave(direction, ref cancel);
         }
 
+        bool iscsiProbeError = false;
         public override bool EnableNext()
         {
             UInt16 i;
@@ -169,7 +171,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 && portValid
                 && !(IscsiUseChapCheckBox.Checked && String.IsNullOrEmpty(IScsiChapUserTextBox.Text))
                 && comboBoxIscsiLuns.SelectedItem != null && comboBoxIscsiLuns.SelectedItem as string != Messages.SELECT_TARGET_LUN
-                && !IsLunInUse();
+                && !iscsiProbeError && !IsLunInUse();
         }
 
         public override bool EnablePrevious()
@@ -284,6 +286,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private void comboBoxIscsiLuns_SelectedIndexChanged(object sender, EventArgs e)
         {
+            iscsiProbeError = false;
             if (comboBoxIscsiLuns.SelectedItem as string != Messages.SELECT_TARGET_LUN)
             {
                 spinnerIconAtTargetLun.DisplaySucceededImage();

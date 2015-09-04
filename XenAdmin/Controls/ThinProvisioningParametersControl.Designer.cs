@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThinProvisioningParametersControl));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.incremental_allocation_units = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.initial_allocation_label = new System.Windows.Forms.Label();
             this.initialAllocationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.initial_allocation_units = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.incremental_allocation_label = new System.Windows.Forms.Label();
             this.allocationQuantumNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.initialAllocationNumericUpDown)).BeginInit();
@@ -45,10 +45,10 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.incremental_allocation_units, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.initial_allocation_label, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.initialAllocationNumericUpDown, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.initial_allocation_units, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.incremental_allocation_label, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.allocationQuantumNumericUpDown, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -63,10 +63,10 @@
             this.incremental_allocation_units.Name = "incremental_allocation_units";
             this.incremental_allocation_units.SelectedIndexChanged += new System.EventHandler(this.incremental_allocation_units_SelectedIndexChanged);
             // 
-            // label1
+            // initial_allocation_label
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.initial_allocation_label, "initial_allocation_label");
+            this.initial_allocation_label.Name = "initial_allocation_label";
             // 
             // initialAllocationNumericUpDown
             // 
@@ -90,10 +90,10 @@
             this.initial_allocation_units.Name = "initial_allocation_units";
             this.initial_allocation_units.SelectedIndexChanged += new System.EventHandler(this.initial_allocation_units_SelectedIndexChanged);
             // 
-            // label2
+            // incremental_allocation_label
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.incremental_allocation_label, "incremental_allocation_label");
+            this.incremental_allocation_label.Name = "incremental_allocation_label";
             // 
             // allocationQuantumNumericUpDown
             // 
@@ -124,10 +124,10 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label initial_allocation_label;
         private System.Windows.Forms.NumericUpDown initialAllocationNumericUpDown;
         private System.Windows.Forms.ComboBox initial_allocation_units;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label incremental_allocation_label;
         private System.Windows.Forms.NumericUpDown allocationQuantumNumericUpDown;
         private System.Windows.Forms.ComboBox incremental_allocation_units;
     }
