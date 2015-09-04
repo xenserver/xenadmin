@@ -269,13 +269,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void OnCancel()
         {
+            base.OnCancel();
+
             List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions, GetRemoveVdiActions);
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 
             RemoveDownloadedPatches();
-
-            base.OnCancel();
         }
 
         private void RemoveUnwantedPatches(List<Pool_patch> patchesToRemove)
@@ -292,10 +292,20 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RemoveDownloadedPatches()
         {
-            foreach(string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches.Values)
+            foreach (string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches.Values)
             {
-                File.Delete(downloadedPatch);
-            }
+                try
+                {
+                    if (File.Exists(downloadedPatch))
+                    {
+                        File.Delete(downloadedPatch);
+                    }
+                }
+                catch
+                {  
+                    log.DebugFormat("Could not remove downloaded patch {0} ", downloadedPatch);
+                }
+            }           
         }
 
         protected override void FinishWizard()
