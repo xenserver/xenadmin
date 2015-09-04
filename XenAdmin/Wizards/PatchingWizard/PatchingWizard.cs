@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
-                PatchingWizard_UploadPage.SelectedNewPatch = newPatch;
+                PatchingWizard_UploadPage.SelectedNewPatchPath = newPatch;
                 PatchingWizard_UploadPage.SelectedUpdateAlert = alertPatch; 
 
                 PatchingWizard_ModePage.Patch = existPatch;
@@ -140,7 +140,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
                 
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
-                //PatchingWizard_PrecheckPage.NewUploadedPatches = PatchingWizard_SelectServers.NewUploadedPatches;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
@@ -214,11 +213,22 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (patchesToRemove == null)
                 return null;
 
-            var list = (from patch in patchesToRemove
-                        where patch.Connection != null && patch.Connection.IsConnected
-                        select new RemovePatchAction(patch));
-
-            return list.OfType<AsyncAction>().ToList();
+            List<AsyncAction> list = new List<AsyncAction>();
+            foreach (Pool_patch patch in patchesToRemove)
+            {
+                if (patch.Connection != null && patch.Connection.IsConnected)
+                {
+                    if (patch.HostsAppliedTo().Count == 0)
+                    {
+                        list.Add(new RemovePatchAction(patch));
+                    }
+                    else
+                    {
+                        list.Add(new DelegatedAsyncAction(patch.Connection, Messages.REMOVE_PATCH, "", "", session => Pool_patch.async_pool_clean(session, patch.opaque_ref)));
+                    }
+                }
+            }     
+            return list;
         }
 
         private List<AsyncAction> GetRemovePatchActions()
