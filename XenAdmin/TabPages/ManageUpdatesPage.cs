@@ -359,7 +359,7 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtonEnablement()
         {
-            toolStripButtonExportAll.Enabled = Updates.UpdateAlertsCount > 0;
+            toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;            
         }
 
         private void ShowInformationHelper(string reason)
