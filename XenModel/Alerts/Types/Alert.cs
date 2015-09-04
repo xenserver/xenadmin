@@ -308,6 +308,16 @@ namespace XenAdmin.Alerts
             return sortResult;
         }
 
+        public static int CompareOnDescription(Alert alert1, Alert alert2)
+        {
+            int sortResult = string.Compare(alert1.Description, alert2.Description);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.Name, alert2.Name);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.uuid, alert2.uuid);
+            return sortResult;
+        }
+
         public static int CompareOnName(Alert alert1, Alert alert2)
         {
             int sortResult = string.Compare(alert1.Name, alert2.Name);
