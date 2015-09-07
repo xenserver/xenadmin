@@ -233,7 +233,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemovePatchActions()
         {
-            return GetRemovePatchActions(PatchingWizard_UploadPage.NewUploadedPatches);
+            return GetRemovePatchActions(PatchingWizard_UploadPage.NewUploadedPatches.Keys.ToList());
         }
 
         private List<AsyncAction> GetRemoveVdiActions(List<VDI> vdisToRemove)
@@ -313,7 +313,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (PatchingWizard_UploadPage.NewUploadedPatches != null)
             {
                 List<Pool_patch> patchesToRemove =
-                    PatchingWizard_UploadPage.NewUploadedPatches.Where(
+                    PatchingWizard_UploadPage.NewUploadedPatches.Keys.ToList().Where(
                         patch => patch.uuid != PatchingWizard_UploadPage.Patch.uuid).ToList();
 
                 RemoveUnwantedPatches(patchesToRemove);

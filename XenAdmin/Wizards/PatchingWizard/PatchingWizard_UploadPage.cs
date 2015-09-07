@@ -38,7 +38,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Pool_patch SelectedExistingPatch { private get; set; }
         public Alert SelectedUpdateAlert { private get; set; }
 
-        public readonly List<Pool_patch> NewUploadedPatches = new List<Pool_patch>();
+        public readonly Dictionary<Pool_patch, string> NewUploadedPatches = new Dictionary<Pool_patch, string>();
         private Dictionary<string, List<Host>> uploadedUpdates = new Dictionary<string, List<Host>>();
         private Pool_patch _patch = null;
         public Pool_patch Patch
@@ -159,7 +159,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case UpdateType.NewRetail:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
-                            action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatchPath, true);
+                            bool deleteFileOnCancel = AllDownloadedPatches.ContainsValue(SelectedNewPatchPath);
+                            action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatchPath, true, deleteFileOnCancel);
                             AddToUploadedUpdates(SelectedNewPatchPath, selectedServer);
                         }
                         break;
@@ -188,6 +189,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     action.Changed += singleAction_Changed;
                     action.Completed += singleAction_Completed;
+                }
+                else
+                {
+                    _patch = GetPatchFromPatchPath();
                 }
                 uploadActions.Add(selectedServer, action);
             }
@@ -285,6 +290,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                 };
                 multipleAction.RunAsync();
             }
+        }
+
+        private Pool_patch GetPatchFromPatchPath()
+        {
+            foreach (var kvp in NewUploadedPatches)
+            {
+                if (kvp.Value == SelectedNewPatchPath)
+                {
+                    return kvp.Key;
+                }
+            }
+            return null;
         }
 
         private void StartUploading()
@@ -391,8 +408,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is CopyPatchFromHostToOther && action.Host != null)
                         _patch = action.Host.Connection.Cache.Resolve((action as CopyPatchFromHostToOther).NewPatchRef);
 
-                    if (_patch != null && !NewUploadedPatches.Contains(_patch))
-                        NewUploadedPatches.Add(_patch);
+                    if (_patch != null && !NewUploadedPatches.ContainsKey(_patch))
+                        NewUploadedPatches.Add(_patch, SelectedNewPatchPath);
 
                     if (action is UploadSupplementalPackAction)
                     {
