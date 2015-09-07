@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
         private readonly string identityTokenDomainName = "https://cis.citrix.com";
         private readonly string uploadGrantTokenDomainName = "https://rttf.citrix.com";
         private readonly string uploadTokenDomainName = "https://rttf.citrix.com";
-        private readonly string diagnosticTokenDomainName = " https://cis.citrix.com";
+        private readonly string diagnosticTokenDomainName = " https://taas.citrix.com";
 
         private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
