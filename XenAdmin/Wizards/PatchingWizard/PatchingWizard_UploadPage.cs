@@ -26,7 +26,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string Text { get { return Messages.PATCHINGWIZARD_UPLOADPAGE_TEXT; } }
 
-        public override string PageTitle { get { return Messages.PATCHINGWIZARD_UPLOADPAGE_TITLE; } }
+        private string pageTitle = Messages.PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD; 
+        public override string PageTitle { get { return pageTitle; } }
 
         public override string HelpID { get { return "UploadPatch"; } }
 
@@ -40,7 +41,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public readonly Dictionary<Pool_patch, string> NewUploadedPatches = new Dictionary<Pool_patch, string>();
         private Dictionary<string, List<Host>> uploadedUpdates = new Dictionary<string, List<Host>>();
-        private Pool_patch _patch = null;
+        private Pool_patch _patch;
         public Pool_patch Patch
         {
             get { return _patch; }
@@ -73,9 +74,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                         || !File.Exists(AllDownloadedPatches[selectedPatch.Uuid])))
                 {
                     DownloadFile();
+                    label2.Text = Messages.PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD;
+                    pageTitle = Messages.PATCHINGWIZARD_UPLOADPAGE_TITLE_DOWNLOAD_AND_UPLOAD; 
                 }
                 else
                 {
+                    label2.Text = Messages.PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD;
+                    pageTitle = Messages.PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD; 
                     if (selectedPatch != null && AllDownloadedPatches.ContainsKey(selectedPatch.Uuid))
                         SelectedNewPatchPath = AllDownloadedPatches[selectedPatch.Uuid];
                     PrepareUploadActions();
