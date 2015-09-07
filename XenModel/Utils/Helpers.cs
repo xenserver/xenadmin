@@ -49,11 +49,11 @@ namespace XenAdmin.Core
     public static class Helpers
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
-        private const long XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR = 50000;
+
         private const long XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR = 10000;
-        private const long XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR = 4000;
-        private const long XLVHD_MIN_ALLOCATION_QUANTUM = 16777216; // 16 MB
+        public const long XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR = 50000;
+        public const long XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR = 4000;
+        public const long XLVHD_MIN_ALLOCATION_QUANTUM = 16777216; // 16 MB
 
         public const int DEFAULT_NAME_TRIM_LENGTH = 50;
         

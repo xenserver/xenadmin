@@ -10518,6 +10518,12 @@ Incremental allocation: {1}</value>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} required when only {1} available</value>
   </data>
+  <data name="SR_QUANTUM_ALLOCATION_LIMITS_INFO" xml:space="preserve">
+    <value>The Incremental allocation limits are as follows: 
+
+The lower limit: SR size / {0} (no lower than {1})
+The upper limit: SR size / {2}</value>
+  </data>
   <data name="SR_REFRESH_ACTION_DESC" xml:space="preserve">
     <value>Scanning SR</value>
   </data>
