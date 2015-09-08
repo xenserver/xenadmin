@@ -228,7 +228,7 @@ namespace XenAdmin.Actions
                     result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session, retailPatchPath,
                         h.address, (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, session.uuid);
                 }
-                catch(CancelledException e)
+                catch(CancelledException)
                 {
                      if(deleteFileOnCancel && File.Exists(retailPatchPath))
                      {
