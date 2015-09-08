@@ -1552,7 +1552,7 @@ namespace XenAdmin.ConsoleView
         private void UpdateOpenSSHConsoleButtonState()
         {
             buttonSSH.Visible = IsSSHConsoleButtonShown;
-            buttonPanel.Enabled = CanStartSSHConsole;
+            buttonSSH.Enabled = CanStartSSHConsole;
         }
 
         private bool IsSSHConsoleButtonShown
