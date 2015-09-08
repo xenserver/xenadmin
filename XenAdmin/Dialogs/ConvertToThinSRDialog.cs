@@ -61,7 +61,7 @@ namespace XenAdmin.Dialogs
             TheSR = sr;
             thinProvisioningParameters1.SR = TheSR;
 
-            this.Text = string.Format(Messages.ACTION_SR_UPGRADE_TO_THIN, TheSR.Name);
+            this.Text = string.Format(Messages.ACTION_SR_CONVERT_TO_THIN, TheSR.Name);
         }
 
         private void InitDialog(IXenConnection connection)

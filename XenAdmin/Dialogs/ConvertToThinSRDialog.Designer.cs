@@ -38,8 +38,8 @@ namespace XenAdmin.Dialogs
             this.OkButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.queuedBackgroundWorker1 = new XenCenterLib.QueuedBackgroundWorker();
             this.thinProvisioningParameters1 = new XenAdmin.Controls.ThinProvisioningParametersControl();
+            this.queuedBackgroundWorker1 = new XenCenterLib.QueuedBackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -70,7 +70,7 @@ namespace XenAdmin.Dialogs
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 

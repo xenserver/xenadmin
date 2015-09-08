@@ -87,11 +87,11 @@ namespace XenAdmin.Actions
                         sr.Name, Helpers.GetName(sr.Connection));
 
                 case SrActionKind.UpgradeLVM:
-                    return String.Format(Messages.ACTION_SR_UPGRADE,
+                    return String.Format(Messages.ACTION_SR_CONVERT,
                         sr.Name, Helpers.GetName(sr.Connection));
 
                 case SrActionKind.ConvertToThin:
-                    return String.Format(Messages.ACTION_SR_UPGRADE_TO_THIN,
+                    return String.Format(Messages.ACTION_SR_CONVERT_TO_THIN,
                         sr.NameWithLocation);
             }
 
@@ -159,12 +159,12 @@ namespace XenAdmin.Actions
                     break;
 
                 case SrActionKind.UpgradeLVM:
-                    Description = Messages.ACTION_SR_UPGRADING;
+                    Description = Messages.ACTION_SR_CONVERTING;
 
                     XenAPI.SR.remove_from_sm_config(Session, SR.opaque_ref, XenAPI.SR.USE_VHD);
                     XenAPI.SR.add_to_sm_config(Session, SR.opaque_ref, XenAPI.SR.USE_VHD, "true");
 
-                    Description = Messages.ACTION_SR_UPGRADED;
+                    Description = Messages.ACTION_SR_CONVERTED;
                     break;
 
                 case SrActionKind.UnplugAndDestroyPBDs:
@@ -174,7 +174,7 @@ namespace XenAdmin.Actions
                     break;
 
                 case SrActionKind.ConvertToThin:
-                    Description = string.Format(Messages.ACTION_SR_UPGRADING_TO_THIN, SR.NameWithLocation);
+                    Description = string.Format(Messages.ACTION_SR_CONVERTING_TO_THIN, SR.NameWithLocation);
 
                     long initial_allocation = 0;
                     long allocation_quantum = 0;
@@ -190,7 +190,7 @@ namespace XenAdmin.Actions
 
                     LVHD.enable_thin_provisioning(Session, SR.uuid, initial_allocation, allocation_quantum);
 
-                    Description = string.Format(Messages.ACTION_SR_UPGRADED_TO_THIN, SR.NameWithLocation);
+                    Description = string.Format(Messages.ACTION_SR_CONVERTED_TO_THIN, SR.NameWithLocation);
                     break;
             }
         }

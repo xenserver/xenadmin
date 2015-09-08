@@ -1771,6 +1771,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Convert SR &apos;{0}&apos; on &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_SR_CONVERT {
+            get {
+                return ResourceManager.GetString("ACTION_SR_CONVERT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert SR &apos;{0}&apos; to thin provisioning.
+        /// </summary>
+        public static string ACTION_SR_CONVERT_TO_THIN {
+            get {
+                return ResourceManager.GetString("ACTION_SR_CONVERT_TO_THIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converted SR.
+        /// </summary>
+        public static string ACTION_SR_CONVERTED {
+            get {
+                return ResourceManager.GetString("ACTION_SR_CONVERTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converted SR &apos;{0}&apos; to thin provisioning.
+        /// </summary>
+        public static string ACTION_SR_CONVERTED_TO_THIN {
+            get {
+                return ResourceManager.GetString("ACTION_SR_CONVERTED_TO_THIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converting SR.
+        /// </summary>
+        public static string ACTION_SR_CONVERTING {
+            get {
+                return ResourceManager.GetString("ACTION_SR_CONVERTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converting SR &apos;{0}&apos; to thin provisioning.
+        /// </summary>
+        public static string ACTION_SR_CONVERTING_TO_THIN {
+            get {
+                return ResourceManager.GetString("ACTION_SR_CONVERTING_TO_THIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created SR.
         /// </summary>
         public static string ACTION_SR_CREATE_SUCCESSFUL {
@@ -2001,60 +2055,6 @@ namespace XenAdmin {
         public static string ACTION_SR_TRIM_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_SR_TRIM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade SR &apos;{0}&apos; on &apos;{1}&apos;.
-        /// </summary>
-        public static string ACTION_SR_UPGRADE {
-            get {
-                return ResourceManager.GetString("ACTION_SR_UPGRADE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade SR &apos;{0}&apos; to use thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_UPGRADE_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_UPGRADE_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgraded SR.
-        /// </summary>
-        public static string ACTION_SR_UPGRADED {
-            get {
-                return ResourceManager.GetString("ACTION_SR_UPGRADED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgraded SR &apos;{0}&apos; to use thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_UPGRADED_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_UPGRADED_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrading SR.
-        /// </summary>
-        public static string ACTION_SR_UPGRADING {
-            get {
-                return ResourceManager.GetString("ACTION_SR_UPGRADING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrading SR &apos;{0}&apos; to use thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_UPGRADING_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_UPGRADING_TO_THIN", resourceCulture);
             }
         }
         
