@@ -61,6 +61,10 @@ namespace XenAdmin.Controls
             InitializeComponent();
             incremental_allocation_units.SelectedItem = previousUnitsValueIncrAlloc = Messages.VAL_MEGB;
             initial_allocation_units.SelectedItem = previousUnitsValueInitAlloc = Messages.VAL_MEGB;
+            SR_incremental_allocation_limits_info_label.Text = string.Format(Messages.SR_QUANTUM_ALLOCATION_LIMITS_INFO, 
+                                                                 Helpers.XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR,
+                                                                 Util.MemorySizeStringSuitableUnits(Helpers.XLVHD_MIN_ALLOCATION_QUANTUM, false),
+                                                                 Helpers.XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR);
         }
 
         public SR SR

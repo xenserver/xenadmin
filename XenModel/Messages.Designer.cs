@@ -30236,6 +30236,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Incremental allocation limits are as follows: 
+        ///The lower limit: SR size / {0} (no lower than {1})
+        ///The upper limit: SR size / {2}.
+        /// </summary>
+        public static string SR_QUANTUM_ALLOCATION_LIMITS_INFO {
+            get {
+                return ResourceManager.GetString("SR_QUANTUM_ALLOCATION_LIMITS_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning SR.
         /// </summary>
         public static string SR_REFRESH_ACTION_DESC {
