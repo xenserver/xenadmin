@@ -629,8 +629,6 @@ namespace XenAdmin.TabPages
             }
 
             var poolNotAppPatches = poolNotAppliedPatches();
-            if (!string.IsNullOrEmpty(poolNotAppPatches))
-                s.AddEntry(FriendlyName("Pool_patch.not_applied"), poolNotAppPatches, menuItems, Color.Red);
         }
 
         private void generateHostPatchesBox()

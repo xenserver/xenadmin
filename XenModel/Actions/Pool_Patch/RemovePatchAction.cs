@@ -48,7 +48,7 @@ namespace XenAdmin.Actions
         private readonly Pool_patch patch;
 
         /// <summary>
-        /// This constructor is used to upload a single 'normal' patch
+        /// This constructor is used to remove a single 'normal' patch
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="path"></param>

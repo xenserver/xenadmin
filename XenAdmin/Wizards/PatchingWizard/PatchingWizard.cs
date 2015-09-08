@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
-                PatchingWizard_UploadPage.SelectedNewPatch = newPatch;
+                PatchingWizard_UploadPage.SelectedNewPatchPath = newPatch;
                 PatchingWizard_UploadPage.SelectedUpdateAlert = alertPatch; 
 
                 PatchingWizard_ModePage.Patch = existPatch;
@@ -140,7 +140,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
                 
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
-                //PatchingWizard_PrecheckPage.NewUploadedPatches = PatchingWizard_SelectServers.NewUploadedPatches;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
@@ -214,16 +213,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (patchesToRemove == null)
                 return null;
 
-            var list = (from patch in patchesToRemove
-                        where patch.Connection != null && patch.Connection.IsConnected
-                        select new RemovePatchAction(patch));
-
-            return list.OfType<AsyncAction>().ToList();
+            List<AsyncAction> list = new List<AsyncAction>();
+            foreach (Pool_patch patch in patchesToRemove)
+            {
+                if (patch.Connection != null && patch.Connection.IsConnected)
+                {
+                    if (patch.HostsAppliedTo().Count == 0)
+                    {
+                        list.Add(new RemovePatchAction(patch));
+                    }
+                    else
+                    {
+                        list.Add(new DelegatedAsyncAction(patch.Connection, Messages.REMOVE_PATCH, "", "", session => Pool_patch.async_pool_clean(session, patch.opaque_ref)));
+                    }
+                }
+            }     
+            return list;
         }
 
         private List<AsyncAction> GetRemovePatchActions()
         {
-            return GetRemovePatchActions(PatchingWizard_UploadPage.NewUploadedPatches);
+            return GetRemovePatchActions(PatchingWizard_UploadPage.NewUploadedPatches.Keys.ToList());
         }
 
         private List<AsyncAction> GetRemoveVdiActions(List<VDI> vdisToRemove)
@@ -259,13 +269,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void OnCancel()
         {
+            base.OnCancel();
+
             List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions, GetRemoveVdiActions);
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 
             RemoveDownloadedPatches();
-
-            base.OnCancel();
         }
 
         private void RemoveUnwantedPatches(List<Pool_patch> patchesToRemove)
@@ -282,10 +292,20 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RemoveDownloadedPatches()
         {
-            foreach(string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches.Values)
+            foreach (string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches.Values)
             {
-                File.Delete(downloadedPatch);
-            }
+                try
+                {
+                    if (File.Exists(downloadedPatch))
+                    {
+                        File.Delete(downloadedPatch);
+                    }
+                }
+                catch
+                {  
+                    log.DebugFormat("Could not remove downloaded patch {0} ", downloadedPatch);
+                }
+            }           
         }
 
         protected override void FinishWizard()
@@ -293,7 +313,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (PatchingWizard_UploadPage.NewUploadedPatches != null)
             {
                 List<Pool_patch> patchesToRemove =
-                    PatchingWizard_UploadPage.NewUploadedPatches.Where(
+                    PatchingWizard_UploadPage.NewUploadedPatches.Keys.ToList().Where(
                         patch => patch.uuid != PatchingWizard_UploadPage.Patch.uuid).ToList();
 
                 RemoveUnwantedPatches(patchesToRemove);

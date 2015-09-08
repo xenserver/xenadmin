@@ -50,6 +50,7 @@ namespace XenAdmin.Actions
 
         private readonly IList<Host> retailHosts;
         private readonly string retailPatchPath;
+        private readonly bool deleteFileOnCancel;
 
         /// <summary>
         /// This constructor is used to upload a single 'normal' patch
@@ -57,13 +58,14 @@ namespace XenAdmin.Actions
         /// <param name="connection"></param>
         /// <param name="path"></param>
         public UploadPatchAction(IXenConnection connection, string path)
-            : this(connection, path, false)
+            : this(connection, path, false, false)
         {}
 
-        public UploadPatchAction(IXenConnection connection, string path, bool suppressHistory)
+        public UploadPatchAction(IXenConnection connection, string path, bool suppressHistory, bool deleteFileOnCancel)
             : base(connection, null, Messages.UPLOADING_PATCH, suppressHistory)
         {
             Host master = Helpers.GetMaster(connection);
+            this.deleteFileOnCancel = deleteFileOnCancel;
             if (master == null)
                 throw new NullReferenceException();
 
@@ -226,6 +228,15 @@ namespace XenAdmin.Actions
                     result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session, retailPatchPath,
                         h.address, (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, session.uuid);
                 }
+                catch(CancelledException e)
+                {
+                     if(deleteFileOnCancel && File.Exists(retailPatchPath))
+                     {
+                        File.Delete(retailPatchPath);
+                     }
+                     throw;
+                }
+
                 finally
                 {
                     Task.destroy(session, RelatedTask);
