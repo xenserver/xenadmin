@@ -520,13 +520,13 @@
     <value>3, 10, 3, 3</value>
   </data>
   <data name="uploadRequestLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 15</value>
+    <value>187, 15</value>
   </data>
   <data name="uploadRequestLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="uploadRequestLinkLabel.Text" xml:space="preserve">
-    <value>Request an upload now</value>
+    <value>Request an additional upload now</value>
   </data>
   <data name="&gt;&gt;uploadRequestLinkLabel.Name" xml:space="preserve">
     <value>uploadRequestLinkLabel</value>
