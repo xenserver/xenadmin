@@ -42,7 +42,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.fileNameTextBox = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.selectFromDiskRadioButton = new System.Windows.Forms.RadioButton();
-            this.RefreshListButton = new System.Windows.Forms.Button();
             this.downloadUpdateRadioButton = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridViewPatches = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
@@ -50,6 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webPageColumn = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.RefreshListButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatches)).BeginInit();
             this.SuspendLayout();
@@ -62,10 +62,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.Controls.Add(this.fileNameTextBox, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.selectFromDiskRadioButton, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewPatches, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.downloadUpdateRadioButton, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewPatches, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // RestoreDismUpdatesButton
@@ -101,13 +101,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.selectFromDiskRadioButton.Name = "selectFromDiskRadioButton";
             this.selectFromDiskRadioButton.UseVisualStyleBackColor = true;
             this.selectFromDiskRadioButton.CheckedChanged += new System.EventHandler(this.selectFromDiskRadioButton_CheckedChanged);
-            // 
-            // RefreshListButton
-            // 
-            resources.ApplyResources(this.RefreshListButton, "RefreshListButton");
-            this.RefreshListButton.Name = "RefreshListButton";
-            this.RefreshListButton.UseVisualStyleBackColor = true;
-            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
             // 
             // downloadUpdateRadioButton
             // 
@@ -199,6 +192,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.webPageColumn.Name = "webPageColumn";
             this.webPageColumn.ReadOnly = true;
             this.webPageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // RefreshListButton
+            // 
+            resources.ApplyResources(this.RefreshListButton, "RefreshListButton");
+            this.RefreshListButton.Name = "RefreshListButton";
+            this.RefreshListButton.UseVisualStyleBackColor = true;
+            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
             // 
             // PatchingWizard_SelectPatchPage
             // 
