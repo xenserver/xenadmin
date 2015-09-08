@@ -30208,7 +30208,6 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to The Incremental allocation limits are as follows: 
-        ///
         ///The lower limit: SR size / {0} (no lower than {1})
         ///The upper limit: SR size / {2}.
         /// </summary>
