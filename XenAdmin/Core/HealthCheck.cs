@@ -103,10 +103,8 @@ namespace XenAdmin.Core
 
             if (healthCheckSettings.Status == HealthCheckStatus.Enabled && !healthCheckSettings.HasAnalysisResult)
             {
-                var action = new GetHealthCheckAnalysisResultAction(pool, Registry.HealthCheckDiagnosticDomainName, suppressHistory);
-
                 if (PassedRbacChecks(pool.Connection))
-                    return action;
+                    return new GetHealthCheckAnalysisResultAction(pool, Registry.HealthCheckDiagnosticDomainName, suppressHistory);
             }
             return null;
         }
