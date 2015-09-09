@@ -60,6 +60,7 @@ namespace XenAdmin.Model
         public string UserNameSecretUuid;
         public string PasswordSecretUuid;
         public string LastSuccessfulUpload;
+        public string LastFailedUpload;
         public string DiagnosticTokenSecretUuid;
         public string UploadUuid;
         public DiagnosticAlertSeverity ReportAnalysisSeverity;
@@ -113,6 +114,7 @@ namespace XenAdmin.Model
             UserNameSecretUuid = Get(config, UPLOAD_CREDENTIAL_USER_SECRET);
             PasswordSecretUuid = Get(config, UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             LastSuccessfulUpload = Get(config, LAST_SUCCESSFUL_UPLOAD);
+            LastFailedUpload = Get(config, LAST_FAILED_UPLOAD);
             UploadUuid = Get(config, UPLOAD_UUID);
             ReportAnalysisSeverity = StringToDiagnosticAlertSeverity(Get(config, REPORT_ANALYSIS_SEVERITY));
             ReportAnalysisIssuesDetected = IntKey(config, REPORT_ANALYSIS_ISSUES_DETECTED, 0);
@@ -218,6 +220,28 @@ namespace XenAdmin.Model
             {
                 return !HasAnalysisResult && !string.IsNullOrEmpty(ReportAnalysisUploadUuid) &&
                        !string.IsNullOrEmpty(ReportAnalysisUploadTime);
+            }
+        }
+
+        public DateTime LastFailedUploadTime
+        {
+            get
+            {
+                DateTime lastFailedUploadTime;
+                return !string.IsNullOrEmpty(LastFailedUpload) && TryParseStringToDateTime(LastFailedUpload, out lastFailedUploadTime)
+                    ? lastFailedUploadTime
+                    : DateTime.MinValue;
+            }
+        }
+
+        public DateTime LastSuccessfulUploadTime
+        {
+            get
+            {
+                DateTime lastSuccessfulUploadTime;
+                return !string.IsNullOrEmpty(LastSuccessfulUpload) && TryParseStringToDateTime(LastSuccessfulUpload, out lastSuccessfulUploadTime)
+                    ? lastSuccessfulUploadTime
+                    : DateTime.MinValue;
             }
         }
 

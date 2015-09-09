@@ -203,11 +203,21 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
+            var healthcheckSettings = poolRow.Pool.HealthCheckSettings;
             poolNameLabel.Text = poolRow.Pool.Name.Ellipsise(120);
-            scheduleLabel.Text = GetScheduleDescription(poolRow.Pool.HealthCheckSettings);
-            lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(poolRow.Pool.HealthCheckSettings.LastSuccessfulUpload);
-            lastUploadDateLabel.Text = GetLastUploadDescription(poolRow.Pool.HealthCheckSettings);
-            
+            scheduleLabel.Text = GetScheduleDescription(healthcheckSettings);
+            lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(healthcheckSettings.LastSuccessfulUpload);
+            lastUploadDateLabel.Text = GetLastUploadDescription(healthcheckSettings);
+
+            // show the "Last failed upload" if we have a failed upload AND 
+            // there is no successful upload or the failed upload happened after a successful upload
+            var lastFailedUploadTime = healthcheckSettings.LastFailedUploadTime;
+            bool showFailedUpload = lastFailedUploadTime > DateTime.MinValue 
+                && (string.IsNullOrEmpty(healthcheckSettings.LastSuccessfulUpload) || lastFailedUploadTime > healthcheckSettings.LastSuccessfulUploadTime);
+            failedUploadLabel.Visible = failedUploadDateLabel.Visible = showFailedUpload;
+            if (showFailedUpload)
+                failedUploadDateLabel.Text = HelpersGUI.DateTimeToString(lastFailedUploadTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
+
             UpdateButtonsVisibility(poolRow.Pool);
 
             healthCheckStatusPanel.Visible = poolRow.Pool.HealthCheckSettings.Status == HealthCheckStatus.Enabled;

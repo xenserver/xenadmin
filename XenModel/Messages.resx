@@ -5729,10 +5729,10 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Health Check Enrollment - {0}</value>
   </data>
   <data name="HEALTHCHECK_ON_DEMAND_REQUEST" xml:space="preserve">
-    <value>Request an upload now</value>
+    <value>Request an additional upload now</value>
   </data>
   <data name="HEALTHCHECK_ON_DEMAND_REQUESTED_AT" xml:space="preserve">
-    <value>Upload requested at {0}</value>
+    <value>Additional upload requested at {0}</value>
   </data>
   <data name="HEALTHCHECK_SCHEDULE_DESCRIPTION" xml:space="preserve">
     <value>Upload a Health Check report every {0} weeks on {1} starting at {2}</value>

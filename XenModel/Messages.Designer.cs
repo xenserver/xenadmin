@@ -16380,7 +16380,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request an upload now.
+        ///   Looks up a localized string similar to Request an additional upload now.
         /// </summary>
         public static string HEALTHCHECK_ON_DEMAND_REQUEST {
             get {
@@ -16389,7 +16389,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload requested at {0}.
+        ///   Looks up a localized string similar to Additional upload requested at {0}.
         /// </summary>
         public static string HEALTHCHECK_ON_DEMAND_REQUESTED_AT {
             get {
