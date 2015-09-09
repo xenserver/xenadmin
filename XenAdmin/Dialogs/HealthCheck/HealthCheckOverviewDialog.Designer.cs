@@ -39,6 +39,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.poolNameLabel = new System.Windows.Forms.Label();
             this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.failedUploadDateLabel = new System.Windows.Forms.Label();
+            this.failedUploadLabel = new System.Windows.Forms.Label();
             this.lastUploadDateLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.issuesLabel = new System.Windows.Forms.Label();
@@ -149,18 +151,30 @@ namespace XenAdmin.Dialogs.HealthCheck
             // healthCheckStatusPanel
             // 
             resources.ApplyResources(this.healthCheckStatusPanel, "healthCheckStatusPanel");
+            this.healthCheckStatusPanel.Controls.Add(this.failedUploadDateLabel, 1, 5);
+            this.healthCheckStatusPanel.Controls.Add(this.failedUploadLabel, 0, 5);
             this.healthCheckStatusPanel.Controls.Add(this.lastUploadDateLabel, 1, 1);
             this.healthCheckStatusPanel.Controls.Add(this.flowLayoutPanel1, 0, 3);
-            this.healthCheckStatusPanel.Controls.Add(this.disableLinkLabel, 0, 9);
-            this.healthCheckStatusPanel.Controls.Add(this.uploadRequestLinkLabel, 0, 10);
-            this.healthCheckStatusPanel.Controls.Add(this.scheduleLabel, 0, 7);
-            this.healthCheckStatusPanel.Controls.Add(this.editLinkLabel, 0, 8);
-            this.healthCheckStatusPanel.Controls.Add(this.label4, 0, 6);
+            this.healthCheckStatusPanel.Controls.Add(this.disableLinkLabel, 0, 10);
+            this.healthCheckStatusPanel.Controls.Add(this.uploadRequestLinkLabel, 0, 11);
+            this.healthCheckStatusPanel.Controls.Add(this.scheduleLabel, 0, 8);
+            this.healthCheckStatusPanel.Controls.Add(this.editLinkLabel, 0, 9);
+            this.healthCheckStatusPanel.Controls.Add(this.label4, 0, 7);
             this.healthCheckStatusPanel.Controls.Add(this.label1, 0, 0);
             this.healthCheckStatusPanel.Controls.Add(this.lastUploadLabel, 0, 1);
             this.healthCheckStatusPanel.Controls.Add(this.ReportAnalysisLinkLabel, 0, 4);
-            this.healthCheckStatusPanel.Controls.Add(this.previousUploadPanel, 0, 5);
+            this.healthCheckStatusPanel.Controls.Add(this.previousUploadPanel, 0, 6);
             this.healthCheckStatusPanel.Name = "healthCheckStatusPanel";
+            // 
+            // failedUploadDateLabel
+            // 
+            resources.ApplyResources(this.failedUploadDateLabel, "failedUploadDateLabel");
+            this.failedUploadDateLabel.Name = "failedUploadDateLabel";
+            // 
+            // failedUploadLabel
+            // 
+            resources.ApplyResources(this.failedUploadLabel, "failedUploadLabel");
+            this.failedUploadLabel.Name = "failedUploadLabel";
             // 
             // lastUploadDateLabel
             // 
@@ -410,6 +424,8 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.LinkLabel refreshLinkLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label lastUploadDateLabel;
+        private System.Windows.Forms.Label failedUploadDateLabel;
+        private System.Windows.Forms.Label failedUploadLabel;
     }
 }
 
