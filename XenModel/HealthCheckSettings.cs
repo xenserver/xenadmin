@@ -272,7 +272,7 @@ namespace XenAdmin.Model
 
         #endregion
 
-        public string GetSecretyInfo(IXenConnection connection, string secretType)
+        public string GetSecretyInfo(Session session, string secretType)
         {
             string UUID = string.Empty;
             switch (secretType)
@@ -294,18 +294,25 @@ namespace XenAdmin.Model
                     break;
             }
 
-            if (connection == null || string.IsNullOrEmpty(UUID))
+            if (session == null || string.IsNullOrEmpty(UUID))
                 return null;
             try
             {
-                string opaqueref = Secret.get_by_uuid(connection.Session, UUID);
-                return Secret.get_value(connection.Session, opaqueref);
+                string opaqueref = Secret.get_by_uuid(session, UUID);
+                return Secret.get_value(session, opaqueref);
             }
             catch (Exception e)
             {
                 log.Error("Exception getting the upload token from the xapi secret", e);
                 return null;
             }
+        }
+
+        public string GetSecretyInfo(IXenConnection connection, string secretType)
+        {
+            if (connection == null)
+                return null;
+            return GetSecretyInfo(connection.Session, secretType);
         }
 
         public bool TryGetExistingTokens(IXenConnection connection, out string uploadToken, out string diagnosticToken)

@@ -207,6 +207,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             scheduleLabel.Text = GetScheduleDescription(poolRow.Pool.HealthCheckSettings);
             lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(poolRow.Pool.HealthCheckSettings.LastSuccessfulUpload);
             lastUploadDateLabel.Text = GetLastUploadDescription(poolRow.Pool.HealthCheckSettings);
+            
+            UpdateButtonsVisibility(poolRow.Pool);
 
             healthCheckStatusPanel.Visible = poolRow.Pool.HealthCheckSettings.Status == HealthCheckStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled;
@@ -297,6 +299,16 @@ namespace XenAdmin.Dialogs.HealthCheck
             {
                 previousUploadPanel.Visible = false;
             }
+        }
+
+        public void UpdateButtonsVisibility(Pool pool)
+        {
+            refreshLinkLabel.Visible =
+                editLinkLabel.Visible =
+                disableLinkLabel.Visible =
+                uploadRequestLinkLabel.Visible =
+                enrollNowLinkLabel.Visible = Core.HealthCheck.PassedRbacChecks(pool.Connection);
+
         }
 
         private void HealthCheckOverviewDialog_Load(object sender, EventArgs e)
@@ -450,7 +462,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             if (poolRow.Pool == null)
                 return;
             
-            Core.HealthCheck.CheckForAnalysisResults(poolRow.Pool.Connection);
+            Core.HealthCheck.CheckForAnalysisResults(poolRow.Pool.Connection, false);
         }
 
         private void HealthCheck_CheckForUpdatesCompleted(bool succeeded)

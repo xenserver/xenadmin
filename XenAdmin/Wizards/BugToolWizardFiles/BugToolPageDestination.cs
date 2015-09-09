@@ -183,10 +183,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
                 return false;
 
-            var action = new HealthCheckAuthenticationAction(null, usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
+            var action = new HealthCheckAuthenticationAction(usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
                 Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName,
                 Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
-                false, TokenExpiration, false);
+                TokenExpiration, false);
 
             new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(Parent);
 
