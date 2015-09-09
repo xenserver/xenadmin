@@ -94,8 +94,8 @@ namespace XenAdmin.XenSearch
             {
                 VM.VirtualisationStatus status = vm.virtualisation_status;
                 if (vm.power_state != vm_power_state.Running ||
-                    status == VM.VirtualisationStatus.OPTIMIZED ||
-                    status == VM.VirtualisationStatus.UNKNOWN)
+                    vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED) ||
+                    status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     return false;
 
                 if (property == PropertyNames.memoryValue)

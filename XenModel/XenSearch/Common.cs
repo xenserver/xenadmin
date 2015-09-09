@@ -112,7 +112,7 @@ namespace XenAdmin.XenSearch
         [HelpString("The VM power state, e.g. Halted, Running")]
         power_state,
         [HelpString("The state of the pure virtualization drivers installed on a VM")]
-        virtualisation_status,
+        virtualisation_status_for_search,
         [HelpString("Date and time that the VM was started")]
         start_time,
         [HelpString("The HA restart priority of the VM")]
@@ -234,7 +234,7 @@ namespace XenAdmin.XenSearch
             VirtualisationStatus_i18n[Messages.PV_DRIVERS_NOT_INSTALLED] = VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
             VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
             VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
-
+            
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
             ObjectTypes_i18n[Messages.XENSERVER_TEMPLATES] = ObjectTypes.DefaultTemplate;
             ObjectTypes_i18n[Messages.CUSTOM_TEMPLATES] = ObjectTypes.UserTemplate;
@@ -273,7 +273,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.storage] = Messages.SR;
             PropertyNames_i18n[PropertyNames.disks] = Messages.VIRTUAL_DISK;
             PropertyNames_i18n[PropertyNames.type] = Messages.TYPE;
-            PropertyNames_i18n[PropertyNames.virtualisation_status] = Messages.TOOLS_STATUS;
+            PropertyNames_i18n[PropertyNames.virtualisation_status_for_search] = Messages.TOOLS_STATUS;
             PropertyNames_i18n[PropertyNames.ha_restart_priority] = Messages.HA_RESTART_PRIORITY;
 			PropertyNames_i18n[PropertyNames.appliance] = Messages.VM_APPLIANCE;
             PropertyNames_i18n[PropertyNames.tags] = Messages.TAGS;
@@ -327,7 +327,7 @@ namespace XenAdmin.XenSearch
             property_types.Add(PropertyNames.host, typeof(Host));
             property_types.Add(PropertyNames.os_name, typeof(string));
             property_types.Add(PropertyNames.power_state, typeof(vm_power_state));
-            property_types.Add(PropertyNames.virtualisation_status, typeof(VM.VirtualisationStatus));
+            property_types.Add(PropertyNames.virtualisation_status_for_search, typeof(VM.VirtualisationStatus));
             property_types.Add(PropertyNames.type, typeof(ObjectTypes));
             property_types.Add(PropertyNames.networks, typeof(XenAPI.Network));
             property_types.Add(PropertyNames.storage, typeof(SR));
@@ -416,11 +416,11 @@ namespace XenAdmin.XenSearch
                                             return vm.power_state;
                                         });
                 };
-            properties[PropertyNames.virtualisation_status] = delegate(IXenObject o)
+            properties[PropertyNames.virtualisation_status_for_search] = delegate(IXenObject o)
                 {
                     return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
                                         {
-                                            return vm.GetVirtualisationStatus;
+                                            return vm.virtualisation_status_for_search;
                                         });
                 };
             properties[PropertyNames.start_time] = delegate(IXenObject o)
@@ -646,7 +646,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageString(vm);
@@ -680,7 +680,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageRank(vm);
@@ -714,7 +714,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageValue(vm);
@@ -748,7 +748,7 @@ namespace XenAdmin.XenSearch
                     vm.power_state != vm_power_state.Running)
                     return null;
 
-                if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+                if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                     return null;
 
                 return PropertyAccessorHelper.vmNetworkUsageString(vm);
@@ -775,7 +775,7 @@ namespace XenAdmin.XenSearch
             if (vm.power_state != vm_power_state.Running)
                 return null;
 
-            if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                 return null;
 
             return PropertyAccessorHelper.vmDiskUsageString(vm);
@@ -1295,7 +1295,7 @@ namespace XenAdmin.XenSearch
                 case PropertyNames.type:
                     return ObjectTypes_i18n;
 
-                case PropertyNames.virtualisation_status:
+                case PropertyNames.virtualisation_status_for_search:
                     return VirtualisationStatus_i18n;
 
                 case PropertyNames.power_state:
@@ -1367,23 +1367,19 @@ namespace XenAdmin.XenSearch
                             return Icons.XenCenter;
                         };
 
-                case PropertyNames.virtualisation_status:
+                case PropertyNames.virtualisation_status_for_search:
                     return (ImageDelegate<VM.VirtualisationStatus>)delegate(VM.VirtualisationStatus status)
                         {
-                            switch (status)
-                            {
-                                case VM.VirtualisationStatus.OPTIMIZED:
-                                    return Icons.ToolInstalled;
+                            if (status == VM.VirtualisationStatus.OPTIMIZED)
+                                return Icons.ToolInstalled;
 
-                                case VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                                    return Icons.ToolsNotInstalled;
+                            if (status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED || status != VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                                return Icons.ToolsNotInstalled;
 
-                                case VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
-                                    return Icons.ToolsOutOfDate;
-
-                                default:
-                                    return Icons.ToolsNotInstalled;
-                            }
+                            if (status == VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE)
+                                return Icons.ToolsOutOfDate;
+                            
+                            return Icons.ToolsNotInstalled;
                         };
 
                 case PropertyNames.sr_type:

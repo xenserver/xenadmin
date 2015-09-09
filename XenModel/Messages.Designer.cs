@@ -5968,7 +5968,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install XenServer Tools on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install XenServer Tools or the I/O drivers on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS {
             get {
@@ -6058,7 +6058,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install XenServer Tools on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install XenServer Tools or the I/O drivers on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS {
             get {
@@ -10824,7 +10824,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are not installed on this VM..
+        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools or I/O drivers and Management Agent are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NOTOOLS {
             get {
@@ -10869,7 +10869,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are out of date on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools or I/O drivers and Management Agent are out of date on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_OLDTOOLS_PLURAL {
             get {
@@ -18147,7 +18147,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk and memory snapshots need XenServer Tools to be installed.
+        ///   Looks up a localized string similar to Disk and memory snapshots need XenServer Tools or I/O drivers to be installed.
         /// </summary>
         public static string INFO_DISKMEMORY_MODE_NO_TOOLS {
             get {
@@ -18174,7 +18174,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quiesced snapshots need XenServer Tools to be installed.
+        ///   Looks up a localized string similar to Quiesced snapshots need XenServer Tools or I/O drivers and Management Agent to be installed.
         /// </summary>
         public static string INFO_QUIESCE_MODE_NO_TOOLS {
             get {
@@ -31995,7 +31995,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools must be installed to edit a network on a running VM.
+        ///   Looks up a localized string similar to XenServer Tools or the I/O drivers must be installed to edit a network on a running VM.
         /// </summary>
         public static string TOOLTIP_EDIT_NETWORK_TOOLS {
             get {
@@ -32040,7 +32040,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools must be installed to remove a network on a running VM.
+        ///   Looks up a localized string similar to XenServer Tools or the I/O drivers must be installed to remove a network on a running VM.
         /// </summary>
         public static string TOOLTIP_REMOVE_NETWORK_TOOLS {
             get {
@@ -34709,6 +34709,15 @@ namespace XenAdmin {
         public static string VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE {
             get {
                 return ResourceManager.GetString("VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/O drivers not installed..
+        /// </summary>
+        public static string VM_MISSING_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("VM_MISSING_IO_DRIVERS", resourceCulture);
             }
         }
         

@@ -439,7 +439,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 }
                 else
                 {
-                    if (vm.power_state == vm_power_state.Running && vm.GetVirtualisationStatus != XenAPI.VM.VirtualisationStatus.OPTIMIZED)
+                    if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                     {
                         RemoveButtonContainer.SetToolTip(Messages.TOOLTIP_REMOVE_NETWORK_TOOLS);
                         EditButtonContainer.SetToolTip(Messages.TOOLTIP_EDIT_NETWORK_TOOLS);

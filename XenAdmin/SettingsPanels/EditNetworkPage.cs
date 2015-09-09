@@ -380,7 +380,7 @@ namespace XenAdmin.SettingsPanels
             foreach (VIF v in network.Connection.ResolveAll<VIF>(network.VIFs))
             {
                 VM vm = network.Connection.Resolve<VM>(v.VM);
-                if (vm.power_state != vm_power_state.Running || vm.GetVirtualisationStatus == VM.VirtualisationStatus.OPTIMIZED)
+                if (vm.power_state != vm_power_state.Running || vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                     continue;
 
                 runningVMsWithoutTools = true;

@@ -188,7 +188,7 @@ namespace XenAdminTests.CommandTests
                           {
                               var curRow = row;//closure
                               VM vm = curSelection.AsXenObjects<VM>().Find(v => v.Name == curRow.Cells[1].Value.ToString());
-                              Assert.IsFalse(vm.virtualisation_status == VM.VirtualisationStatus.OPTIMIZED, "PV drivers installed on " + vm + " but it couldn't suspend.");
+                              Assert.IsFalse(vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED), "PV drivers installed on " + vm + " but it couldn't suspend.");
                           }
                           TestUtils.GetButton(dialog, "btnClose").PerformClick();
                       });

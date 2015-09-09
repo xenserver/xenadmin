@@ -2167,7 +2167,8 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>It is not possible to activate this virtual disk on VM '{0}' as the VM is not running.</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install XenServer Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
+    <value>You must install XenServer Tools or the I/O drivers on VM '{0}' before you can activate this virtual disk for the VM.</value>
+    <comment>Tools or I/O</comment>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(The network's MTU cannot be changed as it is in use as the management interface '{0}')</value>
@@ -2197,7 +2198,8 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>This virtual disk is in use and cannot be deactivated.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install XenServer Tools on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
+    <value>You must install XenServer Tools or the I/O drivers on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
+    <comment>Tools or I/O</comment>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>It is not possible to deactivate this virtual disk on VM '{0}' as the VM is not running.</value>
@@ -3839,7 +3841,7 @@ This will also delete its subfolders.</value>
     <value>Only dismiss &amp;visible</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools are not installed on this VM.</value>
+    <value>A memory range cannot be set because XenServer Tools or I/O drivers and Management Agent are not installed on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
     <value>A memory range cannot be set because XenServer Tools are not installed on these VMs.</value>
@@ -3854,7 +3856,7 @@ This will also delete its subfolders.</value>
     <value>A memory range cannot be set because XenServer Tools are out of date on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools are out of date on these VMs.</value>
+    <value>A memory range cannot be set because XenServer Tools or I/O drivers and Management Agent are out of date on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>A memory range cannot be set for this template.</value>
@@ -6315,7 +6317,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Disk and memory snapshots are not currently available for this VM</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Disk and memory snapshots need XenServer Tools to be installed</value>
+    <value>Disk and memory snapshots need XenServer Tools or I/O drivers to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_POWER_STATE" xml:space="preserve">
     <value>Disk and memory snapshots need the VM to be running</value>
@@ -6327,7 +6329,8 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Quiesced snapshots need the VSS service to be enabled on the VM</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Quiesced snapshots need XenServer Tools to be installed</value>
+    <value>Quiesced snapshots need XenServer Tools or I/O drivers and Management Agent to be installed</value>
+    <comment>needs both I/O drivers and Management Agent</comment>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>Quiesced snapshots need the VM to be running</value>
@@ -11083,7 +11086,8 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>Disks cannot be removed from running VMs without XenServer Tools installed</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>XenServer Tools must be installed to edit a network on a running VM</value>
+    <value>XenServer Tools or the I/O drivers must be installed to edit a network on a running VM</value>
+    <comment>Tools or I/O drivers</comment>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>Default templates support a maximum of {0} networks at VM creation</value>
@@ -11098,7 +11102,8 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>Networks cannot be removed from suspended VMs</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>XenServer Tools must be installed to remove a network on a running VM</value>
+    <value>XenServer Tools or the I/O drivers must be installed to remove a network on a running VM</value>
+    <comment>Tools or I/O drivers</comment>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>This network cannot be removed because it is a physical device</value>
@@ -12029,6 +12034,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE" xml:space="preserve">
     <value>VM General Changes</value>
+  </data>
+  <data name="VM_MISSING_IO_DRIVERS" xml:space="preserve">
+    <value>I/O drivers not installed.</value>
   </data>
   <data name="VM_NETWORK_TAB_ACTIVATE_BUTTON_LABEL" xml:space="preserve">
     <value>A&amp;ctivate</value>

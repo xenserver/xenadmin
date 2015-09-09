@@ -1356,7 +1356,7 @@ namespace XenAdmin.TabPages
                     bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
                     //canInstallIoDriversOnly is missing - management agent communicates with XS using the I/O drivers
 
-                    if (vm.virtualisation_status == VM.VirtualisationStatus.UNKNOWN)
+                    if (vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))
                     {
                         s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
                     }
@@ -1434,8 +1434,8 @@ namespace XenAdmin.TabPages
                 //for everything else (All VMs on pre-Dundee hosts & All non-Windows VMs on any host)
                 else 
                 {
-                    if (vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED
-                        || vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE)
+                    if (vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED)
+                        || vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                     {
                         if (InstallToolsCommand.CanExecute(vm))
                         {

@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
                 return false;
             if (vdi.type == vdi_type.system && vbd.IsOwner)
                 return false;
-            if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 return false;
             if (!vbd.currently_attached)
                 return false;
@@ -124,7 +124,7 @@ namespace XenAdmin.Commands
             if (vdi.type == vdi_type.system && vbd.IsOwner)
                 return Messages.TOOLTIP_DEACTIVATE_SYSVDI;
 
-            if (vm.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 return string.Format(
                     Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS,
                     Helpers.GetName(vm).Ellipsise(50));

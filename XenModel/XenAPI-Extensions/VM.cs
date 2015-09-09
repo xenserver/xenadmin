@@ -683,13 +683,43 @@ namespace XenAPI
         private Timer VirtualizationTimer = null;
 
         [Flags]
-        public enum VirtualisationStatus { UNKNOWN = 0, OPTIMIZED = 1, PV_DRIVERS_NOT_INSTALLED = 2, PV_DRIVERS_OUT_OF_DATE = 4 };
+        public enum VirtualisationStatus
+        {
+            UNKNOWN                     = 1,
+            OPTIMIZED                   = 1 << 1, 
+            PV_DRIVERS_NOT_INSTALLED    = 1 << 2,
+            PV_DRIVERS_OUT_OF_DATE      = 1 << 3,
+            IO_DRIVERS_INSTALLED        = 1 << 4,
+            MANAGEMENT_INSTALLED        = 1 << 5,
+        };
 
         public VirtualisationStatus virtualisation_status
         {
             get
             {
                 return GetVirtualisationStatus;
+            }
+        }
+
+        public VirtualisationStatus virtualisation_status_for_search
+        {
+            get
+            {
+                var status = virtualisation_status;
+
+                if (status.HasFlag(VirtualisationStatus.UNKNOWN))
+                    return VirtualisationStatus.UNKNOWN;
+
+                if (status.HasFlag(VirtualisationStatus.OPTIMIZED))
+                    return VirtualisationStatus.OPTIMIZED;
+
+                if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED))
+                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
+
+                if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+
+                return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
             }
         }
 
@@ -710,14 +740,12 @@ namespace XenAPI
         {
             VirtualisationStatus status = GetVirtualisationStatus;
 
-            switch (status)
-            {
-                case VirtualisationStatus.OPTIMIZED:
-                case VirtualisationStatus.UNKNOWN:
+            if (virtualisation_status.HasFlag(VirtualisationStatus.OPTIMIZED) || virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
 
-                case VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
+            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            {
                     VM_guest_metrics guestMetrics = Connection.Resolve(guest_metrics);
                     if (guestMetrics != null
                         && guestMetrics.PV_drivers_version.ContainsKey("major")
@@ -729,10 +757,12 @@ namespace XenAPI
                     }
                     else
                         return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
-
-                default:  // VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                    return Messages.PV_DRIVERS_NOT_INSTALLED;
             }
+
+            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+                return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
+
+            return IsNewVM ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
         }
 
         public VirtualisationStatus GetVirtualisationStatus
@@ -756,9 +786,13 @@ namespace XenAPI
                     if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed)
                     {
                         if (vm_guest_metrics.PV_drivers_up_to_date)
-                            return VirtualisationStatus.OPTIMIZED;
+                        {
+                            return VirtualisationStatus.OPTIMIZED | VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
+                        }
                         else
-                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+                        {
+                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE | GetNewVirtualisationFlags();
+                        }
                     }
 
                     return VirtualisationStatus.UNKNOWN;
@@ -766,19 +800,54 @@ namespace XenAPI
 
                 if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed)
                 {
-                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
+                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED | GetNewVirtualisationFlags();
                 }
                 else if (!vm_guest_metrics.PV_drivers_up_to_date)
                 {
-                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE | GetNewVirtualisationFlags();
                 }
                 else
                 {
-                    return VirtualisationStatus.OPTIMIZED;
+                    if (!IsNewVM)
+                        return VirtualisationStatus.OPTIMIZED;
+                    else
+                        return GetNewVirtualisationFlags();
                 }
 
             }
         }
+
+        private VirtualisationStatus GetNewVirtualisationFlags()
+        {
+            var flags = new VirtualisationStatus();
+            if (IsNewVM)
+            {   
+                flags |= HasRDP ? VirtualisationStatus.MANAGEMENT_INSTALLED : 0;
+
+                var vm_guest_metrics = Connection.Resolve(guest_metrics);
+                if (vm_guest_metrics != null && vm_guest_metrics.storage_paths_optimized && vm_guest_metrics.network_paths_optimized)
+                    flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
+            }
+
+            if (flags.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && flags.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+                flags |= VirtualisationStatus.OPTIMIZED;
+
+            return flags;
+        }
+
+        /// <summary>
+        /// Is this a Windows VM on Dundee or higher host?
+        /// We need to know this, because for those VMs virtualization status is defined differently.
+        /// This does not mean new(ly created) VM
+        /// </summary>
+        private bool IsNewVM
+        {
+            get
+            {
+                return IsWindows && XenAdmin.Core.Helpers.DundeeOrGreater(Connection);
+            }
+        }
+
 
         /// <summary>
         /// Does this VM support ballooning? I.e., are tools installed, on a ballonable OS?
@@ -1461,17 +1530,20 @@ namespace XenAPI
         {
             get
             {
-                switch (virtualisation_status)
-                {
-                    case VM.VirtualisationStatus.OPTIMIZED:
-                        return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
-                    case VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
+                if (virtualisation_status.HasFlag(VirtualisationStatus.OPTIMIZED))
+                    return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
+                    
+                if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                         return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
-                    case VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
+                    
+                if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED))
                         return Messages.PV_DRIVERS_NOT_INSTALLED;
-                    default:
-                        return Messages.VIRTUALIZATION_UNKNOWN;
-                }
+                
+                if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
+                
+                return Messages.VIRTUALIZATION_UNKNOWN;
+                
             }
         }
 

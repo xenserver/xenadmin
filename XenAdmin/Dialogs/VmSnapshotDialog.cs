@@ -151,7 +151,7 @@ namespace XenAdmin.Dialogs
                 tt = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_QUIESCE_MODE_POWER_STATE.Replace("\\n", "\n");
-            else if (_VM.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+            else if (!_VM.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                 tt = Messages.INFO_QUIESCE_MODE_NO_TOOLS.Replace("\\n", "\n");
             else
                 tt = Messages.INFO_QUIESCE_MODE.Replace("\\n","\n");  // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
@@ -184,7 +184,7 @@ namespace XenAdmin.Dialogs
                 tt = Messages.INFO_DISKMEMORY_MODE_POWER_STATE.Replace("\\n", "\n");
             else if (_VM.HasVGPUs)
                 tt = Messages.INFO_DISKMEMORY_MODE_GPU.Replace("\\n", "\n");
-            else if (_VM.virtualisation_status != VM.VirtualisationStatus.OPTIMIZED)
+            else if (!_VM.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
                 tt = Messages.INFO_DISKMEMORY_MODE_NO_TOOLS.Replace("\\n", "\n");
             else
                 tt = Messages.INFO_DISKMEMORY_MODE_MISC.Replace("\\n", "\n");
