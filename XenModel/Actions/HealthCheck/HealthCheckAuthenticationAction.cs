@@ -30,14 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
-using XenAdmin.Network;
 using XenAPI;
 using System.Web.Script.Serialization;
-using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {
@@ -45,14 +42,13 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        private readonly Pool pool;
         private readonly string username;
         private readonly string password;
 
-        private readonly bool saveTokenAsSecret;
         private readonly long tokenExpiration;
 
         private string uploadToken;
+        private string diagnosticToken;
 
         private const string identityTokenUrl = "/auth/api/create_identity/";
         private const string uploadGrantTokenUrl = "/feeds/api/create_grant/";
@@ -66,25 +62,19 @@ namespace XenAdmin.Actions
 
         private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
-        public HealthCheckAuthenticationAction(Pool pool, string username, string password, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
-            : base(pool != null ? pool.Connection : null, Messages.ACTION_HEALTHCHECK_AUTHENTICATION, Messages.ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS, suppressHistory)
+        public HealthCheckAuthenticationAction(string username, string password, long tokenExpiration, bool suppressHistory)
+            : base(null, Messages.ACTION_HEALTHCHECK_AUTHENTICATION, Messages.ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS, suppressHistory)
         {
-            this.pool = pool;
             this.username = username;
             this.password = password;
-            this.saveTokenAsSecret = saveTokenAsSecret;
             this.tokenExpiration = tokenExpiration;
-            #region RBAC Dependencies
-            if (saveTokenAsSecret)
-                ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
-            #endregion
             
         }
 
-        public HealthCheckAuthenticationAction(Pool pool, string username, string password,
+        public HealthCheckAuthenticationAction(string username, string password,
             string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, string diagnosticTokenDomainName, 
-            string productKey, bool saveTokenAsSecret, long tokenExpiration, bool suppressHistory)
-            : this(pool, username, password, saveTokenAsSecret, tokenExpiration, suppressHistory)
+            string productKey, long tokenExpiration, bool suppressHistory)
+            : this(username, password, tokenExpiration, suppressHistory)
         {
             if (!string.IsNullOrEmpty(identityTokenDomainName))
                 this.identityTokenDomainName = identityTokenDomainName;
@@ -100,22 +90,12 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            System.Diagnostics.Trace.Assert(pool != null || !saveTokenAsSecret, "Pool is null! Cannot save token as secret");
             try
             {
                 string identityToken = GetIdentityToken();
                 string uploadGrantToken = GetUploadGrantToken(identityToken);
                 uploadToken = GetUploadToken(uploadGrantToken);
-                string diagnosticToken = GetDiagnosticToken(identityToken);
-
-                if (saveTokenAsSecret && pool != null)
-                {
-                    log.Info("Saving upload token as xapi secret");
-                    Dictionary<string, string> newConfig = pool.health_check_config;
-                    SetSecretInfo(Connection, newConfig, HealthCheckSettings.UPLOAD_TOKEN_SECRET, uploadToken); log.Info("Saving upload token as xapi secret");
-                    SetSecretInfo(Connection, newConfig, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET, diagnosticToken);
-                    Pool.set_health_check_config(Connection.Session, pool.opaque_ref, newConfig);
-                }
+                diagnosticToken = GetDiagnosticToken(identityToken);
             }
             catch (HealthCheckAuthenticationException)
             {
@@ -132,53 +112,9 @@ namespace XenAdmin.Actions
             get { return uploadToken; }
         }
 
-        public static void SetSecretInfo(IXenConnection connection, Dictionary<string, string> config, string infoKey, string infoValue)
+        public string DiagnosticToken
         {
-            if (string.IsNullOrEmpty(infoKey))
-                return;
-
-            if (infoValue == null)
-            {
-                if (config.ContainsKey(infoKey))
-                {
-                    TryToDestroySecret(connection, config[infoKey]);
-                    config.Remove(infoKey);
-                }
-            }
-            else if (config.ContainsKey(infoKey))
-            {
-                try
-                {
-                    string secretRef = Secret.get_by_uuid(connection.Session, config[infoKey]);
-                    Secret.set_value(connection.Session, secretRef, infoValue);
-                }
-                catch (Failure)
-                {
-                    config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
-                }
-                catch (WebException)
-                {
-                    config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
-                }
-            }
-            else
-            {
-                config[infoKey] = Secret.CreateSecret(connection.Session, infoValue);
-            }
-        }
-        
-        private static void TryToDestroySecret(IXenConnection connection, string secret_uuid)
-        {
-            try
-            {
-                var secret = Secret.get_by_uuid(connection.Session, secret_uuid);
-                Secret.destroy(connection.Session, secret.opaque_ref);
-                log.DebugFormat("Successfully destroyed secret {0}", secret_uuid);
-            }
-            catch (Exception exn)
-            {
-                log.Error(string.Format("Failed to destroy secret {0}", secret_uuid), exn);
-            }
+            get { return diagnosticToken; }
         }
 
         private string GetIdentityToken()

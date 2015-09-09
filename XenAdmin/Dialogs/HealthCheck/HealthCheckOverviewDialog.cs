@@ -217,7 +217,9 @@ namespace XenAdmin.Dialogs.HealthCheck
             failedUploadLabel.Visible = failedUploadDateLabel.Visible = showFailedUpload;
             if (showFailedUpload)
                 failedUploadDateLabel.Text = HelpersGUI.DateTimeToString(lastFailedUploadTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-            
+
+            UpdateButtonsVisibility(poolRow.Pool);
+
             healthCheckStatusPanel.Visible = poolRow.Pool.HealthCheckSettings.Status == HealthCheckStatus.Enabled;
             notEnrolledPanel.Visible = poolRow.Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled;
             UpdateUploadRequestDescription(poolRow.Pool.HealthCheckSettings);
@@ -307,6 +309,16 @@ namespace XenAdmin.Dialogs.HealthCheck
             {
                 previousUploadPanel.Visible = false;
             }
+        }
+
+        public void UpdateButtonsVisibility(Pool pool)
+        {
+            refreshLinkLabel.Visible =
+                editLinkLabel.Visible =
+                disableLinkLabel.Visible =
+                uploadRequestLinkLabel.Visible =
+                enrollNowLinkLabel.Visible = Core.HealthCheck.PassedRbacChecks(pool.Connection);
+
         }
 
         private void HealthCheckOverviewDialog_Load(object sender, EventArgs e)
@@ -460,7 +472,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             if (poolRow.Pool == null)
                 return;
             
-            Core.HealthCheck.CheckForAnalysisResults(poolRow.Pool.Connection);
+            Core.HealthCheck.CheckForAnalysisResults(poolRow.Pool.Connection, false);
         }
 
         private void HealthCheck_CheckForUpdatesCompleted(bool succeeded)
