@@ -164,6 +164,27 @@ namespace XenServerHealthCheckTests
                 config[HealthCheckSettings.LAST_FAILED_UPLOAD] = "asd";
                 Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
                 Assert.IsFalse (RequestUploadTask.Request(connection, _session));
+
+                //13. For schedule not meet the day
+                config = cleanStack();
+                config[HealthCheckSettings.DAY_OF_WEEK] = (DateTime.UtcNow.DayOfWeek +1).ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.UtcNow.Hour.ToString();
+                Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsFalse (RequestUploadTask.Request(connection, _session));
+
+                //14. For schedule not meet the hour
+                config = cleanStack();
+                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.UtcNow.DayOfWeek.ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = (DateTime.UtcNow.Hour + 1).ToString();
+                Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsFalse(RequestUploadTask.Request(connection, _session));
+
+                //15. For schedule all meet
+                config = cleanStack();
+                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.UtcNow.DayOfWeek.ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = (DateTime.UtcNow.Hour).ToString();
+                Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
+                Assert.IsTrue(RequestUploadTask.Request(connection, _session));
             }
             catch (Exception)
             {}

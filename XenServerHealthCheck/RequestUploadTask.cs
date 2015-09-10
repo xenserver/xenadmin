@@ -183,13 +183,13 @@ namespace XenServerHealthCheck
                 }
 
                 int TimeOfDay = IntKey(config, HealthCheckSettings.TIME_OF_DAY, HealthCheckSettings.GetDefaultTime());
-                if (currentTime.DayOfWeek != dayOfWeek && currentTime.Hour != TimeOfDay)
+                if (currentTime.DayOfWeek != dayOfWeek || currentTime.Hour != TimeOfDay)
                 {
                     log.InfoFormat("Will not report for XenServer {0} for incorrect schedule", connection.Hostname);
                     return false;
                 }
+                log.InfoFormat("Upload schedule for {0} is {1}:{2}, meet current time {3}", connection.Hostname, dayOfWeek, TimeOfDay, currentTime.ToString());
             }
-
             return getLock(connection, session);
         }
 
