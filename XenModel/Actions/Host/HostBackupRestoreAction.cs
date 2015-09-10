@@ -76,7 +76,7 @@ namespace XenAdmin.Actions
                 switch (type)
                 {
                     case HostBackupRestoreType.backup:
-                        this.Description = String.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name, Util.MemorySizeStringMB(0));
+                        this.Description = String.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name, Util.MemorySizeStringSuitableUnits(0, false));
 
                         LogDescriptionChanges = false;
                         try
@@ -111,7 +111,7 @@ namespace XenAdmin.Actions
 
         private void DataReceived(long bytes)
         {
-            this.Description = String.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name, Util.MemorySizeStringMB(bytes));
+            this.Description = String.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name, Util.MemorySizeStringSuitableUnits(bytes, false));
         }
 
         public override void RecomputeCanCancel()

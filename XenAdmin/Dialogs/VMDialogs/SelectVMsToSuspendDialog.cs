@@ -90,7 +90,7 @@ namespace XenAdmin.Dialogs.VMDialogs
                 PoolMemoryFree += host.memory_free_calc;
             }
 
-            return Util.MemorySizeStringMB(PoolMemoryFree);
+            return Util.MemorySizeStringSuitableUnits(PoolMemoryFree, true);
         }
 
         private void UpdateRequiredMemory()
@@ -104,7 +104,7 @@ namespace XenAdmin.Dialogs.VMDialogs
                 required += (long)row.Vm.memory_dynamic_max;
             }
             RequiredLabel.ForeColor = required > PoolMemoryFree ? Color.Red : ForeColor;
-            RequiredLabel.Text = Util.MemorySizeStringMB(required);
+            RequiredLabel.Text = Util.MemorySizeStringSuitableUnits(required, true);
 
             OKButton.Enabled = required == 0 ? true : required < PoolMemoryFree;
         }
@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             ImageCell.Value = Images.GetImage16For(Images.GetIconFor(Vm));
             NameCell.Value = Vm.Name;
-            MemoryCell.Value = Util.MemorySizeStringMB(Vm.memory_dynamic_max);
+            MemoryCell.Value = Util.MemorySizeStringSuitableUnits(Vm.memory_dynamic_max, true);
             ActionCell.ValueType = typeof(ActionCellItem);
             ActionCell.ValueMember = "ActionCell";
             ActionCell.DisplayMember = "Text";

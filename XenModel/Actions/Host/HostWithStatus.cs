@@ -86,7 +86,7 @@ namespace XenAdmin.Actions
                     case HostStatus.compiling:
                         return Messages.BUGTOOL_HOST_STATUS_COMPILING;
                     case HostStatus.downloading:
-                        return string.Format(Messages.BUGTOOL_HOST_STATUS_DOWNLOADING, Util.MemorySizeStringMB(DataTransferred));
+                        return string.Format(Messages.BUGTOOL_HOST_STATUS_DOWNLOADING, Util.MemorySizeStringSuitableUnits(DataTransferred, false));
                     default:
                         return Messages.BUGTOOL_HOST_STATUS_PENDING;
                 }

@@ -1222,8 +1222,8 @@ namespace XenAPI
                 long ServerMBTotal = m.memory_total;
 
                 return string.Format(Messages.GENERAL_MEMORY_SERVER_FREE,
-                    Util.MemorySizeStringMB(ServerMBAvail),
-                    Util.MemorySizeStringMB(ServerMBTotal));
+                    Util.MemorySizeStringSuitableUnits(ServerMBAvail, true),
+                    Util.MemorySizeStringSuitableUnits(ServerMBTotal, true));
             }
         }
 
@@ -1237,7 +1237,7 @@ namespace XenAPI
                 if (Connection.Resolve(metrics) == null)
                     return Messages.GENERAL_UNKNOWN;
 
-                return Util.MemorySizeStringMB(xen_memory_calc);
+                return Util.MemorySizeStringSuitableUnits(xen_memory_calc, true);
             }
         }
 
@@ -1266,7 +1266,7 @@ namespace XenAPI
                             continue;
 
                         string message = string.Format(Messages.GENERAL_MEMORY_VM_USED, vm.Name,
-                                Util.MemorySizeStringMB(VMMetrics.memory_actual));
+                                Util.MemorySizeStringSuitableUnits(VMMetrics.memory_actual, true));
 
                         lines.Add(message);
                     }
