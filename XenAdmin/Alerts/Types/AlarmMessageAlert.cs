@@ -127,6 +127,9 @@ namespace XenAdmin.Alerts
                 case PerfmonDefinition.ALARM_TYPE_LOG_FILESYSTEM:
                     AlarmType = AlarmType.LogFileSystem;
                     break;
+                case PerfmonDefinition.ALARM_TYPE_SR_PHYSICAL_UTILISATION:
+                    AlarmType = AlarmType.SrPhysicalUtilisation;
+                    break;
                 default:
                     {
                         var match = PerfmonDefinition.SrRegex.Match(variableName);
@@ -208,6 +211,11 @@ namespace XenAdmin.Alerts
                         return string.Format(Messages.ALERT_ALARM_LOG_FILESYSTEM_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
                                              Util.PercentageString(CurrentValue));
+                    case AlarmType.SrPhysicalUtilisation:
+                        return string.Format(Messages.ALERT_ALARM_SR_PHYSICAL_UTILISATION_DESCRIPTION,
+                                             Helpers.GetNameAndObject(XenObject),
+                                             Util.PercentageString(CurrentValue),
+                                             Util.PercentageString(TriggerLevel));
                     default:
                         return base.Description;
                 }
@@ -236,6 +244,8 @@ namespace XenAdmin.Alerts
                         return Messages.ALERT_ALARM_DOM0_MEMORY;
                     case AlarmType.LogFileSystem:
                         return Messages.ALERT_ALARM_LOG_FILESYSTEM;
+                    case AlarmType.SrPhysicalUtilisation:
+                        return Messages.ALERT_ALARM_SR_PHYSICAL_UTILISATION;
                     default:
                         return base.Title;
                 }
@@ -310,5 +320,5 @@ namespace XenAdmin.Alerts
         }
     }
 
-    public enum AlarmType { None, Cpu, Net, Disk, FileSystem, Memory, Storage, Dom0MemoryDemand, LogFileSystem }
+    public enum AlarmType { None, Cpu, Net, Disk, FileSystem, Memory, Storage, Dom0MemoryDemand, LogFileSystem, SrPhysicalUtilisation }
 }
