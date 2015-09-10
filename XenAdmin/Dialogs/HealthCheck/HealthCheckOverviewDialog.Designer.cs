@@ -62,8 +62,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.label6 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.policyStatementLabel = new System.Windows.Forms.Label();
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.showAgainCheckBox = new System.Windows.Forms.CheckBox();
@@ -79,7 +77,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.previousUploadPanel.SuspendLayout();
             this.notEnrolledPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -314,22 +311,10 @@ namespace XenAdmin.Dialogs.HealthCheck
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.PolicyStatementLinkLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // flowLayoutPanel2
-            // 
-            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
-            this.flowLayoutPanel2.Controls.Add(this.policyStatementLabel);
-            this.flowLayoutPanel2.Controls.Add(this.PolicyStatementLinkLabel);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            // 
-            // policyStatementLabel
-            // 
-            resources.ApplyResources(this.policyStatementLabel, "policyStatementLabel");
-            this.policyStatementLabel.Name = "policyStatementLabel";
             // 
             // PolicyStatementLinkLabel
             // 
@@ -381,8 +366,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.notEnrolledPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,8 +397,6 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel poolDetailsPanel;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label policyStatementLabel;
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
         private System.Windows.Forms.LinkLabel uploadRequestLinkLabel;
         private System.Windows.Forms.CheckBox showAgainCheckBox;

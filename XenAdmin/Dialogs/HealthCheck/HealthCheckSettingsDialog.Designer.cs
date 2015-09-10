@@ -29,7 +29,13 @@ namespace XenAdmin.Dialogs.HealthCheck
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HealthCheckSettingsDialog));
+            this.okButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.rubricLabel = new System.Windows.Forms.Label();
+            this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.enrollmentCheckBox = new System.Windows.Forms.CheckBox();
             this.decentGroupBox2 = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.frequencyLabel = new System.Windows.Forms.Label();
@@ -48,15 +54,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.textBoxMyCitrixUsername = new System.Windows.Forms.TextBox();
             this.existingAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
             this.newAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.policyStatementLabel = new System.Windows.Forms.Label();
-            this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.rubricLabel = new System.Windows.Forms.Label();
             this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
-            this.enrollmentCheckBox = new System.Windows.Forms.CheckBox();
             this.decentGroupBoxXSCredentials = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,29 +65,69 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.currentXsCredentialsRadioButton = new System.Windows.Forms.RadioButton();
             this.newXsCredentialsRadioButton = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.decentGroupBox2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).BeginInit();
             this.decentGroupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.decentGroupBoxXSCredentials.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // okButton
+            // 
+            resources.ApplyResources(this.okButton, "okButton");
+            this.okButton.Name = "okButton";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // cancelButton
+            // 
+            resources.ApplyResources(this.cancelButton, "cancelButton");
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.decentGroupBox2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.decentGroupBox1, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.PolicyStatementLinkLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.enrollmentCheckBox, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.decentGroupBoxXSCredentials, 0, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // rubricLabel
+            // 
+            resources.ApplyResources(this.rubricLabel, "rubricLabel");
+            this.rubricLabel.Name = "rubricLabel";
+            // 
+            // PolicyStatementLinkLabel
+            // 
+            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
+            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
+            this.PolicyStatementLinkLabel.TabStop = true;
+            this.PolicyStatementLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PolicyStatementLinkLabel_LinkClicked);
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Controls.Add(this.cancelButton);
+            this.flowLayoutPanel1.Controls.Add(this.okButton);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // enrollmentCheckBox
+            // 
+            resources.ApplyResources(this.enrollmentCheckBox, "enrollmentCheckBox");
+            this.enrollmentCheckBox.Name = "enrollmentCheckBox";
+            this.enrollmentCheckBox.UseVisualStyleBackColor = true;
+            this.enrollmentCheckBox.CheckedChanged += new System.EventHandler(this.enrollmentCheckBox_CheckedChanged);
             // 
             // decentGroupBox2
             // 
@@ -231,64 +269,11 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.newAuthenticationRadioButton.UseVisualStyleBackColor = true;
             this.newAuthenticationRadioButton.CheckedChanged += new System.EventHandler(this.newAuthenticationRadioButton_CheckedChanged);
             // 
-            // flowLayoutPanel2
-            // 
-            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
-            this.flowLayoutPanel2.Controls.Add(this.policyStatementLabel);
-            this.flowLayoutPanel2.Controls.Add(this.PolicyStatementLinkLabel);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            // 
-            // policyStatementLabel
-            // 
-            resources.ApplyResources(this.policyStatementLabel, "policyStatementLabel");
-            this.policyStatementLabel.Name = "policyStatementLabel";
-            // 
-            // PolicyStatementLinkLabel
-            // 
-            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
-            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
-            this.PolicyStatementLinkLabel.TabStop = true;
-            this.PolicyStatementLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PolicyStatementLinkLabel_LinkClicked);
-            // 
-            // rubricLabel
-            // 
-            resources.ApplyResources(this.rubricLabel, "rubricLabel");
-            this.rubricLabel.Name = "rubricLabel";
-            // 
             // m_ctrlError
             // 
             resources.ApplyResources(this.m_ctrlError, "m_ctrlError");
             this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 3);
             this.m_ctrlError.Name = "m_ctrlError";
-            // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.Controls.Add(this.cancelButton);
-            this.flowLayoutPanel1.Controls.Add(this.okButton);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
-            // cancelButton
-            // 
-            resources.ApplyResources(this.cancelButton, "cancelButton");
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // okButton
-            // 
-            resources.ApplyResources(this.okButton, "okButton");
-            this.okButton.Name = "okButton";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // enrollmentCheckBox
-            // 
-            resources.ApplyResources(this.enrollmentCheckBox, "enrollmentCheckBox");
-            this.enrollmentCheckBox.Name = "enrollmentCheckBox";
-            this.enrollmentCheckBox.UseVisualStyleBackColor = true;
-            this.enrollmentCheckBox.CheckedChanged += new System.EventHandler(this.enrollmentCheckBox_CheckedChanged);
             // 
             // decentGroupBoxXSCredentials
             // 
@@ -365,6 +350,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.Name = "HealthCheckSettingsDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.decentGroupBox2.ResumeLayout(false);
             this.decentGroupBox2.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -374,10 +361,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.decentGroupBox1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.decentGroupBoxXSCredentials.ResumeLayout(false);
             this.decentGroupBoxXSCredentials.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -408,8 +391,6 @@ namespace XenAdmin.Dialogs.HealthCheck
         protected System.Windows.Forms.TextBox textBoxMyCitrixUsername;
         private System.Windows.Forms.RadioButton existingAuthenticationRadioButton;
         private System.Windows.Forms.RadioButton newAuthenticationRadioButton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label policyStatementLabel;
         private System.Windows.Forms.LinkLabel PolicyStatementLinkLabel;
         private System.Windows.Forms.Label rubricLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

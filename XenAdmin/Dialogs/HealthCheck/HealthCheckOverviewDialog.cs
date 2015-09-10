@@ -482,7 +482,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void PolicyStatementLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Program.OpenURL(InvisibleMessages.HEALTH_CHECK_PRIVACY_STATEMENT_URL);
+            new HealthCheckPolicyStatementDialog().ShowDialog(this);
         }
     }
 }
