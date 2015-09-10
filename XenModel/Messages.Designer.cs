@@ -34389,6 +34389,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I/O drivers and Management Agent installed.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/O drivers and Management Agent not installed.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_NOT_INSTALLED {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_NOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I/O not optimized.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED {

@@ -11903,6 +11903,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT" xml:space="preserve">
     <value>Install Management Agent</value>
   </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
+    <value>I/O drivers and Management Agent installed</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_NOT_INSTALLED" xml:space="preserve">
+    <value>I/O drivers and Management Agent not installed</value>
+  </data>
   <data name="VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED" xml:space="preserve">
     <value>I/O not optimized</value>
   </data>

@@ -666,6 +666,7 @@ namespace XenAPI
                 startuptime = value;
                 // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
                 NotifyPropertyChanged("virtualisation_status");
+                NotifyPropertyChanged("virtualisation_status_for_search");
                 if (VirtualizationTimer != null)
                     VirtualizationTimer.Stop();
                 // 2 minutes before we give up plus some breathing space
@@ -678,6 +679,7 @@ namespace XenAPI
         void VirtualizationTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             NotifyPropertyChanged("virtualisation_status");
+            NotifyPropertyChanged("virtualisation_status_for_search");
         }
 
         private Timer VirtualizationTimer = null;
@@ -740,7 +742,8 @@ namespace XenAPI
         {
             VirtualisationStatus status = GetVirtualisationStatus;
 
-            if (virtualisation_status.HasFlag(VirtualisationStatus.OPTIMIZED) || virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+            if (virtualisation_status.HasFlag(VirtualisationStatus.OPTIMIZED) 
+                || virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
 
@@ -759,10 +762,11 @@ namespace XenAPI
                         return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
             }
 
-            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) 
+                && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
                 return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
 
-            return IsNewVM ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
+            return IsNewVM ? Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
         }
 
         public VirtualisationStatus GetVirtualisationStatus
@@ -1531,19 +1535,24 @@ namespace XenAPI
             get
             {
                 if (virtualisation_status.HasFlag(VirtualisationStatus.OPTIMIZED))
-                    return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
-                    
+                {
+                    if (!IsNewVM)
+                        return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
+                    else
+                        return Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
+                }
+
                 if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                         return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
                     
                 if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED))
                         return Messages.PV_DRIVERS_NOT_INSTALLED;
                 
-                if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+                if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) 
+                    && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
                     return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
                 
                 return Messages.VIRTUALIZATION_UNKNOWN;
-                
             }
         }
 
