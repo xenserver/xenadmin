@@ -377,28 +377,15 @@ namespace XenAdmin.Model
 
         internal static DiagnosticAlertSeverity StringToDiagnosticAlertSeverity(string severity)
         {
-            switch (severity)
-            {
-                case "Error":
-                    return DiagnosticAlertSeverity.Error;
-                case "Warning":
-                    return DiagnosticAlertSeverity.Warning;
-                default:
-                    return DiagnosticAlertSeverity.Info;
-            }
+            DiagnosticAlertSeverity result;
+            if (Enum.TryParse(severity, out result))
+                return result;
+            return DiagnosticAlertSeverity.Info;
         }
 
         internal static string DiagnosticAlertSeverityToString(DiagnosticAlertSeverity severity)
         {
-            switch (severity)
-            {
-                case DiagnosticAlertSeverity.Error:
-                    return "Error";
-                case DiagnosticAlertSeverity.Warning:
-                    return "Warning";
-                default:
-                    return "Info";
-            }
+            return severity.ToString();
         }
     }
 }
