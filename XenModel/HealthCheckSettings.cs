@@ -379,7 +379,7 @@ namespace XenAdmin.Model
         {
             switch (severity)
             {
-                case "Eror":
+                case "Error":
                     return DiagnosticAlertSeverity.Error;
                 case "Warning":
                     return DiagnosticAlertSeverity.Warning;
