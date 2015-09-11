@@ -195,7 +195,7 @@ namespace XenAdmin.Actions
             var json = new JavaScriptSerializer().Serialize(new
             {
                 agent = "XenServer",
-                max_age = 10000000
+                max_age = 31536000  // one year
             });
             var urlString = string.Format("{0}{1}", diagnosticTokenDomainName, diagnosticTokenUrl);
 

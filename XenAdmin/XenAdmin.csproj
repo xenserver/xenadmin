@@ -223,6 +223,12 @@
     <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.Designer.cs">
       <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.Designer.cs">
+      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1528,6 +1534,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.zh-CN.resx">
       <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.ja.resx">
+      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.resx">
+      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.zh-CN.resx">
+      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.ja.resx">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>

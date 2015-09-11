@@ -126,7 +126,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 59</value>
+    <value>3, 55</value>
   </data>
   <data name="PoolNameColumn.HeaderText" xml:space="preserve">
     <value>Pool</value>
@@ -154,7 +154,7 @@
     <value>0, 0</value>
   </data>
   <data name="poolsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 352</value>
+    <value>495, 356</value>
   </data>
   <data name="poolsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -211,7 +211,7 @@
     <value>0, 2, 0, 4</value>
   </data>
   <data name="poolNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 21</value>
+    <value>280, 21</value>
   </data>
   <data name="poolNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -559,7 +559,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="scheduleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 15</value>
+    <value>268, 15</value>
   </data>
   <data name="scheduleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -886,7 +886,7 @@
     <value>2</value>
   </data>
   <data name="previousUploadPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 42</value>
+    <value>274, 42</value>
   </data>
   <data name="previousUploadPanel.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -922,7 +922,7 @@
     <value>12</value>
   </data>
   <data name="healthCheckStatusPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 307</value>
+    <value>274, 307</value>
   </data>
   <data name="healthCheckStatusPanel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1006,7 +1006,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 15</value>
+    <value>268, 15</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1039,7 +1039,7 @@
     <value>2</value>
   </data>
   <data name="notEnrolledPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 42</value>
+    <value>274, 42</value>
   </data>
   <data name="notEnrolledPanel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1072,7 +1072,7 @@
     <value>2</value>
   </data>
   <data name="poolDetailsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 322</value>
+    <value>280, 326</value>
   </data>
   <data name="poolDetailsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1105,7 +1105,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 352</value>
+    <value>288, 356</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1144,10 +1144,10 @@
     <value>220</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>794, 352</value>
+    <value>787, 356</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>500</value>
+    <value>495</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1174,7 +1174,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>734, 432</value>
+    <value>727, 432</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1203,51 +1203,6 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="flowLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="policyStatementLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="policyStatementLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="policyStatementLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="policyStatementLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="policyStatementLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 3</value>
-  </data>
-  <data name="policyStatementLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 15</value>
-  </data>
-  <data name="policyStatementLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="policyStatementLabel.Text" xml:space="preserve">
-    <value>See what sort of data is collected:</value>
-  </data>
-  <data name="policyStatementLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.Name" xml:space="preserve">
-    <value>policyStatementLabel</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.Parent" xml:space="preserve">
-    <value>flowLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="PolicyStatementLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1258,7 +1213,10 @@
     <value>NoControl</value>
   </data>
   <data name="PolicyStatementLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 0</value>
+    <value>0, 34</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 3</value>
   </data>
   <data name="PolicyStatementLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 15</value>
@@ -1276,39 +1234,9 @@
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PolicyStatementLinkLabel.Parent" xml:space="preserve">
-    <value>flowLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;PolicyStatementLinkLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="flowLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="flowLayoutPanel2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 34</value>
-  </data>
-  <data name="flowLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 4</value>
-  </data>
-  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 18</value>
-  </data>
-  <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
-    <value>flowLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PolicyStatementLinkLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="rubricLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1333,7 +1261,7 @@
     <value>0, 0, 0, 4</value>
   </data>
   <data name="rubricLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 34</value>
+    <value>790, 34</value>
   </data>
   <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1366,7 +1294,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 414</value>
+    <value>793, 414</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1384,7 +1312,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="splitContainer1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="rubricLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="PolicyStatementLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="splitContainer1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="rubricLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,20,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="showAgainCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1426,7 +1354,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>826, 467</value>
+    <value>819, 467</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
