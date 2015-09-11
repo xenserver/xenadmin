@@ -221,13 +221,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS, SelectedVcpus.ToString()));
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY, comboBoxTopology.Text));
                 if (memoryMode == 1)
-                    sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeStringMB(SelectedMemoryStaticMax)));
+                    sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeStringSuitableUnits(SelectedMemoryStaticMax, false)));
                 else
                 {
-                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MIN, Util.MemorySizeStringMB(SelectedMemoryDynamicMin)));
-                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MAX, Util.MemorySizeStringMB(SelectedMemoryDynamicMax)));
+                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MIN, Util.MemorySizeStringSuitableUnits(SelectedMemoryDynamicMin, false)));
+                    sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MAX, Util.MemorySizeStringSuitableUnits(SelectedMemoryDynamicMax, false)));
                     if (memoryMode == 3)
-                        sum.Add(new KeyValuePair<string, string>(Messages.STATIC_MAX, Util.MemorySizeStringMB(SelectedMemoryStaticMax)));
+                        sum.Add(new KeyValuePair<string, string>(Messages.STATIC_MAX, Util.MemorySizeStringSuitableUnits(SelectedMemoryStaticMax, false)));
                 }
                 return sum;
             }
@@ -288,12 +288,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (max_mem_total_host != null && SelectedMemoryDynamicMin > max_mem_total)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host), Util.MemorySizeStringMB(max_mem_total));
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host), Util.MemorySizeStringSuitableUnits(max_mem_total, false));
             }
             else if (max_mem_free_host != null && SelectedMemoryDynamicMin > max_mem_free)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host), Util.MemorySizeStringMB(max_mem_free));
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host), Util.MemorySizeStringSuitableUnits(max_mem_free, false));
             }
             else if (max_vcpus_host != null && SelectedVcpus > max_vcpus)
             {

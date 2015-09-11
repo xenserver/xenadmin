@@ -95,12 +95,7 @@ namespace XenAdmin
             {
                 return string.Format(Messages.VAL_B, bytes);
             }
-        }
-
-        public static string MemorySizeStringMB(double bytes)
-        {
-            return string.Format(Messages.VAL_MB, Math.Round(bytes / BINARY_MEGA));
-        }
+        }      
 
         public static string DataRateString(double bytesPerSec)
         {

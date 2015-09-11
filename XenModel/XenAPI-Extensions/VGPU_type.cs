@@ -55,7 +55,6 @@ namespace XenAPI
                 if (IsPassthrough)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
-                var videoRam = framebuffer_size != 0 ? Util.MemorySizeStringMB(framebuffer_size): string.Empty;
                 return string.Format(Messages.VGPU_DESCRIPTION, model_name, Capacity, MaxResolution, max_heads);
             }
 

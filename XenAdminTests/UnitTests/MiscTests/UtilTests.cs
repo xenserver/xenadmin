@@ -122,16 +122,6 @@ namespace XenAdminTests.UnitTests.MiscTests
         #endregion
 
         [Test]
-        public void TestMemorySizeStringMB()
-        {
-            foreach (var pair in memoryMBpairs)
-            {
-                string expected = string.Format("{0} {1}", pair.Value[0], pair.Value[1]);
-                Assert.AreEqual(expected, Util.MemorySizeStringMB(pair.Key));
-            }
-        }
-
-        [Test]
         public void TestMemorySizeStringSuitableUnits()
         {            
             var pairs = new Dictionary<string[], string>

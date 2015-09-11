@@ -332,7 +332,7 @@ namespace XenAdmin.XenSearch
             if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
                 return Messages.HYPHEN;
             else
-                return String.Format(Messages.QUERY_MEMORY_USAGE, (used / (free + used) * 100).ToString("0.") + "%", Util.MemorySizeStringMB(free + used));
+                return String.Format(Messages.QUERY_MEMORY_USAGE, (used / (free + used) * 100).ToString("0.") + "%", Util.MemorySizeStringSuitableUnits(free + used, false));
 
         }
 

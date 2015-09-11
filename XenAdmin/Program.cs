@@ -549,16 +549,16 @@ namespace XenAdmin
             log.InfoFormat("GDI handles open: {0}", Win32.GetGuiResourcesGDICount(p.Handle));
             log.InfoFormat("Thread count: {0}", p.Threads.Count);
 
-            log.InfoFormat("Virtual memory size: {0}", Util.MemorySizeStringMB(p.VirtualMemorySize64));
-            log.InfoFormat("Working set: {0}", Util.MemorySizeStringMB(p.WorkingSet64));
-            log.InfoFormat("Private memory size: {0}", Util.MemorySizeStringMB(p.PrivateMemorySize64));
-            log.InfoFormat("Nonpaged system memory size: {0}", Util.MemorySizeStringMB(p.NonpagedSystemMemorySize64));
-            log.InfoFormat("Paged memory size: {0}", Util.MemorySizeStringMB(p.PagedMemorySize64));
-            log.InfoFormat("Paged system memory size: {0}", Util.MemorySizeStringMB(p.PagedSystemMemorySize64));
+            log.InfoFormat("Virtual memory size: {0} B({1})", p.VirtualMemorySize64, Util.MemorySizeStringSuitableUnits(p.VirtualMemorySize64, false));
+            log.InfoFormat("Working set: {0} B({1})", p.WorkingSet64, Util.MemorySizeStringSuitableUnits(p.WorkingSet64, false));
+            log.InfoFormat("Private memory size: {0} B({1})",p.PrivateMemorySize64, Util.MemorySizeStringSuitableUnits(p.PrivateMemorySize64, false));
+            log.InfoFormat("Nonpaged system memory size: {0} B({1})", p.NonpagedSystemMemorySize64, Util.MemorySizeStringSuitableUnits(p.NonpagedSystemMemorySize64, false));
+            log.InfoFormat("Paged memory size: {0} B({1})", p.PagedMemorySize64, Util.MemorySizeStringSuitableUnits(p.PagedMemorySize64, false));
+            log.InfoFormat("Paged system memory size: {0} B({1})", p.PagedSystemMemorySize64, Util.MemorySizeStringSuitableUnits(p.PagedSystemMemorySize64, false));
 
-            log.InfoFormat("Peak paged memory size: {0}", Util.MemorySizeStringMB(p.PeakPagedMemorySize64));
-            log.InfoFormat("Peak virtual memory size: {0}", Util.MemorySizeStringMB(p.PeakVirtualMemorySize64));
-            log.InfoFormat("Peak working set: {0}", Util.MemorySizeStringMB(p.PeakWorkingSet64));
+            log.InfoFormat("Peak paged memory size: {0} B({1})", p.PeakPagedMemorySize64, Util.MemorySizeStringSuitableUnits(p.PeakPagedMemorySize64, false));
+            log.InfoFormat("Peak virtual memory size: {0} B({1})", p.PeakVirtualMemorySize64, Util.MemorySizeStringSuitableUnits(p.PeakVirtualMemorySize64, false));
+            log.InfoFormat("Peak working set: {0} B({1})", p.PeakWorkingSet64, Util.MemorySizeStringSuitableUnits(p.PeakWorkingSet64, false));
 
             log.InfoFormat("Process priority class: {0}", p.PriorityClass.ToString());
             log.InfoFormat("Privileged processor time: {0}", p.PrivilegedProcessorTime.ToString());
