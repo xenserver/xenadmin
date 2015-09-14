@@ -105,8 +105,8 @@ namespace XenServerHealthCheckTests
                 //4. For lock due or not set by others and schedule meet, lock should be set.
                 config = cleanStack();
                 config[HealthCheckSettings.UPLOAD_LOCK] = UUID + "|" + HealthCheckSettings.DateTimeToString(DateTime.UtcNow.Subtract(TimeSpan.FromDays(14)));
-                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.UtcNow.DayOfWeek.ToString();
-                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.UtcNow.Hour.ToString();
+                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.Now.DayOfWeek.ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.Now.Hour.ToString();
                 Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
                 Assert.IsTrue(RequestUploadTask.Request(connection, _session));
 
@@ -119,8 +119,8 @@ namespace XenServerHealthCheckTests
                 //6. For Lock set by other service but already due, the lock can be set by current service
                 config = cleanStack();
                 config[HealthCheckSettings.UPLOAD_LOCK] = "test2-test2" + "|" + HealthCheckSettings.DateTimeToString(DateTime.UtcNow.Subtract(TimeSpan.FromDays(14)));
-                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.UtcNow.DayOfWeek.ToString();
-                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.UtcNow.Hour.ToString();
+                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.Now.DayOfWeek.ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.Now.Hour.ToString();
                 Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
                 Assert.IsTrue(RequestUploadTask.Request(connection, _session));
 
@@ -167,22 +167,22 @@ namespace XenServerHealthCheckTests
 
                 //13. For schedule not meet the day
                 config = cleanStack();
-                config[HealthCheckSettings.DAY_OF_WEEK] = (DateTime.UtcNow.DayOfWeek +1).ToString();
-                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.UtcNow.Hour.ToString();
+                config[HealthCheckSettings.DAY_OF_WEEK] = (DateTime.Now.DayOfWeek +1).ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = DateTime.Now.Hour.ToString();
                 Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
                 Assert.IsFalse (RequestUploadTask.Request(connection, _session));
 
                 //14. For schedule not meet the hour
                 config = cleanStack();
-                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.UtcNow.DayOfWeek.ToString();
-                config[HealthCheckSettings.TIME_OF_DAY] = (DateTime.UtcNow.Hour + 1).ToString();
+                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.Now.DayOfWeek.ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = (DateTime.Now.Hour + 1).ToString();
                 Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
                 Assert.IsFalse(RequestUploadTask.Request(connection, _session));
 
                 //15. For schedule all meet
                 config = cleanStack();
-                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.UtcNow.DayOfWeek.ToString();
-                config[HealthCheckSettings.TIME_OF_DAY] = (DateTime.UtcNow.Hour).ToString();
+                config[HealthCheckSettings.DAY_OF_WEEK] = DateTime.Now.DayOfWeek.ToString();
+                config[HealthCheckSettings.TIME_OF_DAY] = (DateTime.Now.Hour).ToString();
                 Pool.set_health_check_config(_session, connection.Cache.Pools[0].opaque_ref, config);
                 Assert.IsTrue(RequestUploadTask.Request(connection, _session));
             }
