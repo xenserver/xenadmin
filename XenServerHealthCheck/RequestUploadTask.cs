@@ -166,7 +166,7 @@ namespace XenServerHealthCheck
 
             }
 
-            DateTime currentTime = DateTime.UtcNow;
+            DateTime currentTime = DateTime.Now;
             if (!needRetry)
             {//Check if uploading schedule meet only for new upload
                 
