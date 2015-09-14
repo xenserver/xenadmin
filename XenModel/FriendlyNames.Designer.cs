@@ -1717,6 +1717,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I/O errors.
+        /// </summary>
+        public static string Label_performance_io_errors {
+            get {
+                return ResourceManager.GetString("Label-performance.io_errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loopback Receive.
         /// </summary>
         public static string Label_performance_lo_rx {
@@ -1902,6 +1911,24 @@ namespace XenAdmin {
         public static string Label_performance_pif_aggr_tx {
             get {
                 return ResourceManager.GetString("Label-performance.pif_aggr_tx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pool_session_count.
+        /// </summary>
+        public static string Label_performance_pool_session_count {
+            get {
+                return ResourceManager.GetString("Label-performance.pool_session_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pool_task_count.
+        /// </summary>
+        public static string Label_performance_pool_task_count {
+            get {
+                return ResourceManager.GetString("Label-performance.pool_task_count", resourceCulture);
             }
         }
         
@@ -2127,6 +2154,15 @@ namespace XenAdmin {
         public static string Label_performance_tap_tx_errors {
             get {
                 return ResourceManager.GetString("Label-performance.tap_tx_errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tapdisks in low memory mode.
+        /// </summary>
+        public static string Label_performance_Tapdisks_in_low_memory_mode {
+            get {
+                return ResourceManager.GetString("Label-performance.Tapdisks_in_low_memory_mode", resourceCulture);
             }
         }
         
@@ -2361,6 +2397,15 @@ namespace XenAdmin {
         public static string Label_performance_xapi_memory_usage_kib {
             get {
                 return ResourceManager.GetString("Label-performance.xapi_memory_usage_kib", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xapi_open_fds.
+        /// </summary>
+        public static string Label_performance_xapi_open_fds {
+            get {
+                return ResourceManager.GetString("Label-performance.xapi_open_fds", resourceCulture);
             }
         }
         

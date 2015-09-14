@@ -126,7 +126,10 @@ namespace XenAdmin.Controls.CustomDataGraph
         public static DataSet Create(string uuid, IXenObject xo, bool show, string settype)
         {
             var dataSet = new DataSet(uuid, xo, show, settype);
-
+            if(settype == "xapi_open_fds" || settype == "pool_task_count" || settype == "pool_session_count")
+            {
+                dataSet.NeverShow = true;
+            }
             if (settype.StartsWith("latency") || settype.EndsWith("latency"))
             {
                 if (settype.StartsWith("latency"))
