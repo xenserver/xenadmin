@@ -70,7 +70,7 @@ namespace XenAdmin.Controls.XenSearch
             potentialGroups.Add(hostGroup);
             potentialGroups.Add(new PropertyGroupingType<String>(ObjectTypes.VM, PropertyNames.os_name));
             potentialGroups.Add(new PropertyGroupingType<vm_power_state>(ObjectTypes.VM, PropertyNames.power_state));
-            potentialGroups.Add(new PropertyGroupingType<VM.VirtualisationStatus>(ObjectTypes.VM, PropertyNames.virtualisation_status_for_search));
+            potentialGroups.Add(new PropertyGroupingType<VM.VirtualisationStatus>(ObjectTypes.VM, PropertyNames.virtualisation_status));
             potentialGroups.Add(new PropertyGroupingType<ObjectTypes>(ObjectTypes.AllExcFolders, PropertyNames.type));
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<XenAPI.Network>(ObjectTypes.VM, PropertyNames.networks, poolGroup));
             XenModelObjectPropertyGroupingType<SR> srGroup =

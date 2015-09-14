@@ -433,16 +433,16 @@ namespace XenAdmin.Controls.NetworkingTab
                 if (vm.power_state == vm_power_state.Suspended)
                 {
                     RemoveButtonContainer.SetToolTip(Messages.TOOLTIP_REMOVE_NETWORK_SUSPENDED);
-                    EditButtonContainer.SetToolTip(Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
+                    EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
                     toolTipContainerActivateToggle.SetToolTip(vif.currently_attached 
                         ? Messages.TOOLTIP_DEACTIVATE_VIF_SUSPENDED : Messages.TOOLTIP_ACTIVATE_VIF_SUSPENDED);
                 }
                 else
                 {
-                    if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
+                    if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                     {
-                        RemoveButtonContainer.SetToolTip(Messages.TOOLTIP_REMOVE_NETWORK_TOOLS);
-                        EditButtonContainer.SetToolTip(Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
+                        RemoveButtonContainer.SetToolTip(vm.HasNewVirtualisationStates ? Messages.TOOLTIP_REMOVE_NETWORK_IO_DRIVERS : Messages.TOOLTIP_REMOVE_NETWORK_TOOLS);
+                        EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
                         toolTipContainerActivateToggle.SetToolTip(vif.currently_attached
                             ? Messages.TOOLTIP_DEACTIVATE_VIF_TOOLS : Messages.TOOLTIP_ACTIVATE_VIF_TOOLS);
                     }

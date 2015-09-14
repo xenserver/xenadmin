@@ -94,7 +94,7 @@ namespace XenAdmin.XenSearch
             {
                 VM.VirtualisationStatus status = vm.virtualisation_status;
                 if (vm.power_state != vm_power_state.Running ||
-                    vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED) ||
+                    status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED) ||
                     status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     return false;
 

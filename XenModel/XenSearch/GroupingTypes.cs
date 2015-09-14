@@ -277,7 +277,7 @@ namespace XenAdmin.XenSearch
 
         public override String GetGroupName(Object group)
         {
-            if (!(group is T) || i18ns == null)
+            if (!(group is T) || i18ns == null || !i18ns.ContainsKey((T)group))
                 return base.GetGroupName(group);
 
             return i18ns[(T)group];

@@ -74,7 +74,7 @@ namespace XenAdmin.Controls.XenSearch
             queryTypes.Add(new IPAddressQueryType(3, ObjectTypes.VM | ObjectTypes.Server | ObjectTypes.LocalSR | ObjectTypes.RemoteSR, PropertyNames.ip_address));
             queryTypes.Add(new DatePropertyQueryType(3, ObjectTypes.VM, PropertyNames.start_time));
             queryTypes.Add(new EnumPropertyQueryType<vm_power_state>(3, ObjectTypes.VM, PropertyNames.power_state));
-            queryTypes.Add(new EnumPropertyQueryType<VM.VirtualisationStatus>(3, ObjectTypes.VM, PropertyNames.virtualisation_status_for_search));
+            queryTypes.Add(new EnumPropertyQueryType<VM.VirtualisationStatus>(3, ObjectTypes.VM, PropertyNames.virtualisation_status));
             queryTypes.Add(new ValuePropertyQueryType(3, ObjectTypes.VM, PropertyNames.os_name));
             queryTypes.Add(new EnumPropertyQueryType<VM.HA_Restart_Priority>(3, ObjectTypes.VM, PropertyNames.ha_restart_priority));
             queryTypes.Add(new BooleanQueryType(3, ObjectTypes.VM, PropertyNames.read_caching_enabled));

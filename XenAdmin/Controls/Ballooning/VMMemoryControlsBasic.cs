@@ -100,21 +100,15 @@ namespace XenAdmin.Controls.Ballooning
                     }
                     if (identical)
                     {
-                        switch (vm0.GetVirtualisationStatus)
-                        {
-                            case VM.VirtualisationStatus.OPTIMIZED:
-                                labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL;
-                                break;
-                            case VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                                labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL;
-                                break;
-                            case VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
-                                labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_OLDTOOLS_PLURAL;
-                                break;
-                            default:  // VM.VirtualisationStatus.UNKNOWN
-                                labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
-                                break;
-                        }
+                        var status = vm0.GetVirtualisationStatus;
+                        if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL;
+                        else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED))
+                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL;
+                        else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                            labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL : Messages.DMC_UNAVAILABLE_OLDTOOLS_PLURAL;
+                        else
+                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
                     }
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
@@ -127,21 +121,17 @@ namespace XenAdmin.Controls.Ballooning
                 }
                 else
                 {
-                    switch (vm0.GetVirtualisationStatus)
-                    {
-                        case VM.VirtualisationStatus.OPTIMIZED:
+                    var status = vm0.GetVirtualisationStatus;
+
+                    if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED;
-                            break;
-                        case VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTOOLS;
-                            break;
-                        case VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
+                    else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED))
+                        labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT : Messages.DMC_UNAVAILABLE_NOTOOLS;
+                    else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_OLDTOOLS;
-                            break;
-                        default:  // VM.VirtualisationStatus.UNKNOWN
-                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VM;
-                            break;
-                    }
+                    else
+                        labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VM;
+                    
                     linkInstallTools.Visible = InstallToolsCommand.CanExecute(vm0);
                 }
             }

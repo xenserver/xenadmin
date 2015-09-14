@@ -126,7 +126,7 @@ namespace XenAdmin.Commands
 
             if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 return string.Format(
-                    Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS,
+                    vm.HasNewVirtualisationStates ? Messages.CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS : Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS,
                     Helpers.GetName(vm).Ellipsise(50));
 
             if (!vbd.currently_attached)

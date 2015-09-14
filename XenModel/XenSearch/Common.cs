@@ -112,7 +112,7 @@ namespace XenAdmin.XenSearch
         [HelpString("The VM power state, e.g. Halted, Running")]
         power_state,
         [HelpString("The state of the pure virtualization drivers installed on a VM")]
-        virtualisation_status_for_search,
+        virtualisation_status,
         [HelpString("Date and time that the VM was started")]
         start_time,
         [HelpString("The HA restart priority of the VM")]
@@ -230,10 +230,14 @@ namespace XenAdmin.XenSearch
             foreach (SR.SRTypes type in Enum.GetValues(typeof(SR.SRTypes)))
                 SRType_i18n[SR.getFriendlyTypeName(type)] = type;
 
-            VirtualisationStatus_i18n[Messages.OPTIMIZED] = VM.VirtualisationStatus.OPTIMIZED;
+            //VirtualisationStatus_i18n[Messages.OPTIMIZED] = VM.VirtualisationStatus.OPTIMIZED;
             VirtualisationStatus_i18n[Messages.PV_DRIVERS_NOT_INSTALLED] = VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
             VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
             VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED] = VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
+
             
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
             ObjectTypes_i18n[Messages.XENSERVER_TEMPLATES] = ObjectTypes.DefaultTemplate;
@@ -273,7 +277,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.storage] = Messages.SR;
             PropertyNames_i18n[PropertyNames.disks] = Messages.VIRTUAL_DISK;
             PropertyNames_i18n[PropertyNames.type] = Messages.TYPE;
-            PropertyNames_i18n[PropertyNames.virtualisation_status_for_search] = Messages.TOOLS_STATUS;
+            PropertyNames_i18n[PropertyNames.virtualisation_status] = Messages.TOOLS_STATUS;
             PropertyNames_i18n[PropertyNames.ha_restart_priority] = Messages.HA_RESTART_PRIORITY;
 			PropertyNames_i18n[PropertyNames.appliance] = Messages.VM_APPLIANCE;
             PropertyNames_i18n[PropertyNames.tags] = Messages.TAGS;
@@ -327,7 +331,7 @@ namespace XenAdmin.XenSearch
             property_types.Add(PropertyNames.host, typeof(Host));
             property_types.Add(PropertyNames.os_name, typeof(string));
             property_types.Add(PropertyNames.power_state, typeof(vm_power_state));
-            property_types.Add(PropertyNames.virtualisation_status_for_search, typeof(VM.VirtualisationStatus));
+            property_types.Add(PropertyNames.virtualisation_status, typeof(VM.VirtualisationStatus));
             property_types.Add(PropertyNames.type, typeof(ObjectTypes));
             property_types.Add(PropertyNames.networks, typeof(XenAPI.Network));
             property_types.Add(PropertyNames.storage, typeof(SR));
@@ -416,11 +420,11 @@ namespace XenAdmin.XenSearch
                                             return vm.power_state;
                                         });
                 };
-            properties[PropertyNames.virtualisation_status_for_search] = delegate(IXenObject o)
+            properties[PropertyNames.virtualisation_status] = delegate(IXenObject o)
                 {
                     return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
                                         {
-                                            return vm.virtualisation_status_for_search;
+                                            return vm.GetVirtualisationStatus;
                                         });
                 };
             properties[PropertyNames.start_time] = delegate(IXenObject o)
@@ -646,7 +650,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageString(vm);
@@ -680,7 +684,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageRank(vm);
@@ -714,7 +718,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageValue(vm);
@@ -748,7 +752,7 @@ namespace XenAdmin.XenSearch
                     vm.power_state != vm_power_state.Running)
                     return null;
 
-                if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
+                if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                     return null;
 
                 return PropertyAccessorHelper.vmNetworkUsageString(vm);
@@ -775,7 +779,7 @@ namespace XenAdmin.XenSearch
             if (vm.power_state != vm_power_state.Running)
                 return null;
 
-            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.OPTIMIZED))
+            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                 return null;
 
             return PropertyAccessorHelper.vmDiskUsageString(vm);
@@ -1295,7 +1299,7 @@ namespace XenAdmin.XenSearch
                 case PropertyNames.type:
                     return ObjectTypes_i18n;
 
-                case PropertyNames.virtualisation_status_for_search:
+                case PropertyNames.virtualisation_status:
                     return VirtualisationStatus_i18n;
 
                 case PropertyNames.power_state:
@@ -1367,16 +1371,16 @@ namespace XenAdmin.XenSearch
                             return Icons.XenCenter;
                         };
 
-                case PropertyNames.virtualisation_status_for_search:
+                case PropertyNames.virtualisation_status:
                     return (ImageDelegate<VM.VirtualisationStatus>)delegate(VM.VirtualisationStatus status)
                         {
-                            if (status == VM.VirtualisationStatus.OPTIMIZED)
+                            if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                                 return Icons.ToolInstalled;
 
-                            if (status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED || status != VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                            if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED) || !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                                 return Icons.ToolsNotInstalled;
 
-                            if (status == VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE)
+                            if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                                 return Icons.ToolsOutOfDate;
                             
                             return Icons.ToolsNotInstalled;
