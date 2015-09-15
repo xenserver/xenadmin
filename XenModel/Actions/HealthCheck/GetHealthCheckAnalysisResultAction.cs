@@ -83,7 +83,7 @@ namespace XenAdmin.Actions
                 var analysisResult = GetAnalysisResult(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
                 log.Info("Saving analysis result");
                 Dictionary<string, string> newConfig = Pool.health_check_config;
-                newConfig[HealthCheckSettings.REPORT_ANALYSIS_SEVERITY] = HealthCheckSettings.DiagnosticAlertSeverityToString(GetMaxSeverity(analysisResult));
+                newConfig[HealthCheckSettings.REPORT_ANALYSIS_SEVERITY] = GetMaxSeverity(analysisResult).ToString();
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_ISSUES_DETECTED] = analysisResult.Count.ToString();
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_UUID] = Pool.HealthCheckSettings.UploadUuid;
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_TIME] = Pool.HealthCheckSettings.LastSuccessfulUpload;

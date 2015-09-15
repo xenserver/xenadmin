@@ -382,10 +382,5 @@ namespace XenAdmin.Model
                 return result;
             return DiagnosticAlertSeverity.Info;
         }
-
-        internal static string DiagnosticAlertSeverityToString(DiagnosticAlertSeverity severity)
-        {
-            return severity.ToString();
-        }
     }
 }
