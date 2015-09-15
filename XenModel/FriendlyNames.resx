@@ -1778,4 +1778,19 @@
   <data name="Label-SR.disk-space-allocations" xml:space="preserve">
     <value>Disk space allocations</value>
   </data>
+  <data name="Label-performance.pool_session_count" xml:space="preserve">
+    <value>pool_session_count</value>
+  </data>
+  <data name="Label-performance.pool_task_count" xml:space="preserve">
+    <value>pool_task_count</value>
+  </data>
+  <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
+    <value>Tapdisks in low memory mode</value>
+  </data>
+  <data name="Label-performance.xapi_open_fds" xml:space="preserve">
+    <value>xapi_open_fds</value>
+  </data>
+  <data name="Label-performance.io_errors" xml:space="preserve">
+    <value>I/O errors</value>
+  </data>
 </root>
