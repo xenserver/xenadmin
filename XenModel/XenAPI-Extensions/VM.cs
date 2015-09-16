@@ -746,15 +746,6 @@ namespace XenAPI
             {
                 Debug.Assert(!HasNewVirtualisationStates);
 
-                if (Connection == null)
-                    return VirtualisationStatus.UNKNOWN;
-
-                VM_metrics vm_metrics = Connection.Resolve(metrics);
-                if (vm_metrics == null || power_state != vm_power_state.Running)
-                {
-                    return VirtualisationStatus.UNKNOWN;
-                }
-
                 VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
 
                 if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
@@ -791,15 +782,6 @@ namespace XenAPI
             get
             {
                 Debug.Assert(HasNewVirtualisationStates);
-
-                if (Connection == null)
-                    return VirtualisationStatus.UNKNOWN;
-
-                VM_metrics vm_metrics = Connection.Resolve(metrics);
-                if (vm_metrics == null || power_state != vm_power_state.Running)
-                {
-                    return VirtualisationStatus.UNKNOWN;
-                }
 
                 var flags = HasRDP ? VirtualisationStatus.MANAGEMENT_INSTALLED : 0;
 
@@ -842,6 +824,15 @@ namespace XenAPI
         {
             get
             {
+                if (Connection == null)
+                    return VirtualisationStatus.UNKNOWN;
+
+                VM_metrics vm_metrics = Connection.Resolve(metrics);
+                if (vm_metrics == null || power_state != vm_power_state.Running)
+                {
+                    return VirtualisationStatus.UNKNOWN;
+                }
+
                 return HasNewVirtualisationStates ? GetVirtualisationStatusNewVM : GetVirtualisationStatusOldVM;
             }
         }
