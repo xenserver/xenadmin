@@ -685,12 +685,11 @@ namespace XenAPI
         [Flags]
         public enum VirtualisationStatus
         {
+            PV_DRIVERS_NOT_INSTALLED    = 0,
             UNKNOWN                     = 1,
-            //OPTIMIZED                   = 1 << 1, //removed OPTIMIZED, using (IO_DRIVERS_INSTALLED | MANAGEMENT_INSTALLED) instead
-            PV_DRIVERS_NOT_INSTALLED    = 1 << 2,
-            PV_DRIVERS_OUT_OF_DATE      = 1 << 3,
-            IO_DRIVERS_INSTALLED        = 1 << 4,
-            MANAGEMENT_INSTALLED        = 1 << 5,
+            PV_DRIVERS_OUT_OF_DATE      = 2,
+            IO_DRIVERS_INSTALLED        = 4,
+            MANAGEMENT_INSTALLED        = 8,
         };
 
         public VirtualisationStatus virtualisation_status
@@ -738,17 +737,15 @@ namespace XenAPI
                         return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
             }
 
-            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) 
-                && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
-                return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
-
             return HasNewVirtualisationStates ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
         }
 
-        public VirtualisationStatus GetVirtualisationStatus
+        private VirtualisationStatus GetVirtualisationStatusOldVM
         {
             get
             {
+                Debug.Assert(!HasNewVirtualisationStates);
+
                 if (Connection == null)
                     return VirtualisationStatus.UNKNOWN;
 
@@ -766,13 +763,9 @@ namespace XenAPI
                     if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed)
                     {
                         if (vm_guest_metrics.PV_drivers_up_to_date)
-                        {
-                            return HasNewVirtualisationStates ? GetNewVirtualisationFlags() : VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                        }
+                            return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
                         else
-                        {
-                            return HasNewVirtualisationStates ? GetNewVirtualisationFlags() : VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                        }
+                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
                     }
 
                     return VirtualisationStatus.UNKNOWN;
@@ -780,35 +773,77 @@ namespace XenAPI
 
                 if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed)
                 {
-                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED | GetNewVirtualisationFlags();
+                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
                 }
                 else if (!vm_guest_metrics.PV_drivers_up_to_date)
                 {
-                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE | GetNewVirtualisationFlags();
+                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
                 }
                 else
                 {
-                    if (!HasNewVirtualisationStates)
-                        return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                    else
-                        return GetNewVirtualisationFlags();
+                    return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
                 }
             }
         }
 
-        private VirtualisationStatus GetNewVirtualisationFlags()
+        private VirtualisationStatus GetVirtualisationStatusNewVM
         {
-            var flags = new VirtualisationStatus(); 
-            if (HasNewVirtualisationStates)
-            {   
-                flags |= HasRDP ? VirtualisationStatus.MANAGEMENT_INSTALLED : 0;
+            get
+            {
+                Debug.Assert(HasNewVirtualisationStates);
+
+                if (Connection == null)
+                    return VirtualisationStatus.UNKNOWN;
+
+                VM_metrics vm_metrics = Connection.Resolve(metrics);
+                if (vm_metrics == null || power_state != vm_power_state.Running)
+                {
+                    return VirtualisationStatus.UNKNOWN;
+                }
+
+                var flags = HasRDP ? VirtualisationStatus.MANAGEMENT_INSTALLED : 0;
 
                 var vm_guest_metrics = Connection.Resolve(guest_metrics);
                 if (vm_guest_metrics != null && vm_guest_metrics.storage_paths_optimized && vm_guest_metrics.network_paths_optimized)
                     flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
-            }
 
-            return flags;
+                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
+                {
+                    if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                        return flags;
+
+                    return VirtualisationStatus.UNKNOWN;
+                }
+
+                return flags;
+            }
+        }
+
+        /// <summary>
+        /// Virtualization Status of the VM
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Following states are expected:
+        /// 
+        /// For Non-Windows VMs and for Windows VMs pre-Dundee:
+        ///   0 = Not installed
+        ///   1 = Unknown
+        ///   2 = Out of date
+        ///  12 = Tools installed (Optimized)
+        ///  
+        /// For Windows VMs on Dundee or higher:
+        ///    0 = Not installed
+        ///    1 = Unknown
+        ///    4 = I/O Optimized
+        ///   12 = I/O and Management installed
+        /// </remarks>
+        public VirtualisationStatus GetVirtualisationStatus
+        {
+            get
+            {
+                return HasNewVirtualisationStates ? GetVirtualisationStatusNewVM : GetVirtualisationStatusOldVM;
+            }
         }
 
         /// <summary>

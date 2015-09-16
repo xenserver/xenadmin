@@ -184,7 +184,7 @@ namespace XenAdmin.Dialogs
                 tt = Messages.INFO_DISKMEMORY_MODE_POWER_STATE.Replace("\\n", "\n");
             else if (_VM.HasVGPUs)
                 tt = Messages.INFO_DISKMEMORY_MODE_GPU.Replace("\\n", "\n");
-            else if (!_VM.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+            else if (!_VM.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 tt = (_VM.HasNewVirtualisationStates ? Messages.INFO_DISKMEMORY_MODE_NO_IO_DRIVERS : Messages.INFO_DISKMEMORY_MODE_NO_TOOLS).Replace("\\n", "\n");
             else
                 tt = Messages.INFO_DISKMEMORY_MODE_MISC.Replace("\\n", "\n");
