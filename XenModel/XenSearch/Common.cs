@@ -650,7 +650,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageString(vm);
@@ -684,7 +684,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageRank(vm);
@@ -718,7 +718,7 @@ namespace XenAdmin.XenSearch
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageValue(vm);
@@ -752,7 +752,7 @@ namespace XenAdmin.XenSearch
                     vm.power_state != vm_power_state.Running)
                     return null;
 
-                if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                     return null;
 
                 return PropertyAccessorHelper.vmNetworkUsageString(vm);
@@ -779,7 +779,7 @@ namespace XenAdmin.XenSearch
             if (vm.power_state != vm_power_state.Running)
                 return null;
 
-            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 return null;
 
             return PropertyAccessorHelper.vmDiskUsageString(vm);

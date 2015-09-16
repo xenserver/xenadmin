@@ -36,6 +36,7 @@ using XenAdmin.Model;
 using XenAPI;
 using System.Xml;
 using XenAdmin.Core;
+using System.Diagnostics;
 
 
 namespace XenAdmin.XenSearch
@@ -277,6 +278,8 @@ namespace XenAdmin.XenSearch
 
         public override String GetGroupName(Object group)
         {
+            Debug.Assert(i18ns == null || i18ns.ContainsKey((T)group)); //if i18ns is specified, it should contain an item for the group
+
             if (!(group is T) || i18ns == null || !i18ns.ContainsKey((T)group))
                 return base.GetGroupName(group);
 
