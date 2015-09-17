@@ -495,7 +495,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&New VM wizard...", true, false  ),
 	                    new ExpectedTextMenuItem("&Quick Create", false, false  )}  ),
 	            new ExpectedSeparator(),
-	            //new ExpectedTextMenuItem("&Export to File...", true, false  ),
+	            new ExpectedTextMenuItem("&Export to File...", true, false  ),
 	            new ExpectedTextMenuItem("&Copy...", true, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Delete Template...", false, false  ),
