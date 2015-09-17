@@ -10505,7 +10505,6 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
     <value>Initial allocation: {0}
-
 Incremental allocation: {1}</value>
   </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">

@@ -95,7 +95,27 @@ namespace XenAdmin
             {
                 return string.Format(Messages.VAL_B, bytes);
             }
-        }      
+        }
+
+        /// <summary>
+        /// Returns the string in suitable units and when the number of bytes is 0 the units are the ones given in formatStringWhenZero.
+        /// E.g. : if bytes = 0, showPoint0Decimal = false, formatStringWhenZero = Messages.VAL_MB, then the function will return "0 MB".
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="showPoint0Decimal"></param>
+        /// <param name="formatStringWhenZero"></param>
+        /// <returns></returns>
+        public static string MemorySizeStringSuitableUnits(double bytes, bool showPoint0Decimal, string formatStringWhenZero)
+        {
+            if(bytes == 0)
+            {
+                return string.Format(formatStringWhenZero, bytes);
+            }
+            else
+            {
+                return MemorySizeStringSuitableUnits(bytes, showPoint0Decimal);
+            }
+        }
 
         public static string DataRateString(double bytesPerSec)
         {

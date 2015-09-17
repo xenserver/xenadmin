@@ -30163,7 +30163,6 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Initial allocation: {0}
-        ///
         ///Incremental allocation: {1}.
         /// </summary>
         public static string SR_DISK_SPACE_ALLOCATION {
