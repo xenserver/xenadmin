@@ -1234,10 +1234,10 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
 
                     IEnumerable<CommandToolStripMenuItem> menuItems = null;
-                    if (sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
+                    /*if (sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
                     {
                         menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem> () { new SelectedItem(xenObject)} ), true) };
-                    }
+                    }*/
                     s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING, menuItems);
 
                     if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
