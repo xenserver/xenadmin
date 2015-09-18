@@ -30246,6 +30246,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk size ({0}) exceeds SR size ({1}).
+        /// </summary>
+        public static string SR_PICKER_DISK_TOO_BIG {
+            get {
+                return ResourceManager.GetString("SR_PICKER_DISK_TOO_BIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} required when only {1} available.
         /// </summary>
         public static string SR_PICKER_INSUFFICIENT_SPACE {

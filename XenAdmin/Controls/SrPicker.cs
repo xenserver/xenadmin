@@ -218,6 +218,9 @@ namespace XenAdmin.Controls
         {
             long allocationRate = DiskSize;
 
+            if (DiskSize > sr.physical_size)
+                return DiskSize;
+
             if (sr != null && sr.IsThinProvisioned)
             {
                 if (OverridenInitialAllocationRate.HasValue)
@@ -296,7 +299,23 @@ namespace XenAdmin.Controls
                     onItemSelect();
                 }
             }
+        }
 
+        public void UpdateDiskSize()
+        {
+            Program.AssertOnEventThread();
+            try
+            {
+                foreach (SrPickerItem node in srListBox.Items)
+                {
+                    node.UpdateDiskSize(GetRequiredDiskSizeForSR(node.TheSR));
+                }
+            }
+            finally
+            {
+                srListBox.Refresh();
+                onItemSelect();
+            }
         }
 
         private void Server_PropertyChanged(object sender, PropertyChangedEventArgs e)

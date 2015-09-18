@@ -648,7 +648,11 @@ namespace XenAdmin.Dialogs
                     //CA-71312
                    SrListBox.DiskSize = newValue < 0 ? long.MinValue : long.MaxValue;
                 }
-                SrListBox.refresh();
+                SrListBox.UpdateDiskSize();
+                if (IsSelectedSRThinProvisioned)
+                {
+                    DefaultToSRsConfig(userChangedInitialAllocationValue);
+                }
             }
             RefreshMinSize();
             updateErrorsAndButtons();

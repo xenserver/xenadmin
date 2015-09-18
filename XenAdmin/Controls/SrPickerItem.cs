@@ -281,6 +281,12 @@ namespace XenAdmin.Controls
             Image = Images.GetImage16For(TheSR);
         }
 
+        public void UpdateDiskSize(long diskSize)
+        {
+            DiskSize = diskSize;
+            Update();
+        }
+
         public void Update()
         {
             Text = TheSR.Name;
@@ -339,6 +345,9 @@ namespace XenAdmin.Controls
                     return Messages.SR_IS_BROKEN;
                 if (TheSR.IsFull)
                     return Messages.SRPICKER_SR_FULL;
+                if (DiskSize > TheSR.physical_size)
+                    return string.Format(Messages.SR_PICKER_DISK_TOO_BIG, Util.DiskSizeString(DiskSize, 2),
+                                         Util.DiskSizeString(TheSR.physical_size, 2));
                 if (DiskSize > (TheSR.FreeSpace))
                     return string.Format(Messages.SR_PICKER_INSUFFICIENT_SPACE, Util.DiskSizeString(DiskSize, 2),
                                          Util.DiskSizeString(TheSR.FreeSpace, 2));
