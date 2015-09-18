@@ -347,7 +347,17 @@ namespace XenAdmin.Dialogs
 
             if (srToCheck.IsThinProvisioned)
             {
-                var smConfig = srToCheck.sm_config;
+                var smConfig = new Dictionary<string, string>(srToCheck.sm_config);
+
+                // if the DiskTemplate contains initial_allocation and allocation_quantum settings, then use these values
+                if (DiskTemplate != null && DiskTemplate.sm_config != null)
+                {
+                    if (DiskTemplate.sm_config.ContainsKey("initial_allocation"))
+                        smConfig["initial_allocation"] = DiskTemplate.sm_config["initial_allocation"];
+                    if (DiskTemplate.sm_config.ContainsKey("allocation_quantum"))
+                        smConfig["allocation_quantum"] = DiskTemplate.sm_config["allocation_quantum"];
+                }
+
                 long temp = 0;
                   
                 if (smConfig.ContainsKey("initial_allocation") && long.TryParse(smConfig["initial_allocation"], out temp))

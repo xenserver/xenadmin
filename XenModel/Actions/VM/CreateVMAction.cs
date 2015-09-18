@@ -373,29 +373,9 @@ namespace XenAdmin.Actions.VMActions
             if (xml == null)
                 return;
 
-            List<DiskDescription> disksToProvision = Disks.Where(d => d != null && d.Type == DiskDescription.DiskType.New).ToList();
-            
-            foreach (XmlNode diskNode in xml.ChildNodes)
-            {
-                foreach (DiskDescription disk in disksToProvision)
-                {
-                    if (disk.Device.userdevice == diskNode.Attributes["device"].Value)
-                    {
-                        // write details for this disk
-                        diskNode.Attributes["size"].Value = disk.Disk.virtual_size.ToString();
-                        diskNode.Attributes["sr"].Value = XenAPI.SR.get_uuid(Session, disk.Disk.SR.opaque_ref);
-                        diskNode.Attributes["bootable"].Value = disk.Device.userdevice == "0" && InsMethod != InstallMethod.CD ? "true" : "false";
-                    }
-                }
-            }
-
-            // set the new vm's provision xml
+            // set the new vm's provision xml: remove "disks" entry, as we are going to explicitly create all the disks
             Dictionary<string, string> other_config = VM.other_config;
-            if (Disks.Count > 0 && Disks[0] != null && Disks[0].Type == DiskDescription.DiskType.New)
-                other_config["disks"] = xml.OuterXml;
-            else
-                other_config.Remove("disks");
-            
+            other_config.Remove("disks");
             XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
         }
 
@@ -577,7 +557,7 @@ namespace XenAdmin.Actions.VMActions
             else
             {
                 vdi = CreateVdi(disk, progress, progress + 0.75 * step);
-                bootable = IsDeviceAtPositionZero(disk);
+                bootable = IsDeviceAtPositionZero(disk) && InsMethod != InstallMethod.CD;
             }
 
             AddVMHint(vdi);
@@ -602,6 +582,7 @@ namespace XenAdmin.Actions.VMActions
             vdi.SR = disk.Disk.SR;
             vdi.type = disk.Disk.type;
             vdi.virtual_size = disk.Disk.virtual_size;
+            vdi.sm_config = disk.Disk.sm_config;
 
             RelatedTask = XenAPI.VDI.async_create(Session, vdi);
             PollToCompletion(progress1, progress2);
