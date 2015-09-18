@@ -192,12 +192,12 @@ namespace XenAdmin.Dialogs
         {
             updateErrorsAndButtons();
 
-            initialAllocationNumericUpDown.Enabled =
-            labelInitialAllocation.Enabled =
-            allocationQuantumNumericUpDown.Enabled =
-            init_alloc_units.Enabled =
-            incr_alloc_units.Enabled =
-            labelAllocationQuantum.Enabled = IsSelectedSRThinProvisioned;
+            initialAllocationNumericUpDown.Visible =
+            labelInitialAllocation.Visible =
+            allocationQuantumNumericUpDown.Visible =
+            init_alloc_units.Visible =
+            incr_alloc_units.Visible =
+            labelAllocationQuantum.Visible = IsSelectedSRThinProvisioned;
 
             if (IsSelectedSRThinProvisioned)
             {
