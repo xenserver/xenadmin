@@ -897,8 +897,8 @@ namespace XenAdmin.Core
         public static string GetAllocationProperties(string initial_allocation, string quantum_allocation)
         {
             return string.Format(Messages.SR_DISK_SPACE_ALLOCATION,
-                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(initial_allocation), true),
-                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(quantum_allocation), true));
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(initial_allocation), true, Messages.VAL_MB),
+                   Util.MemorySizeStringSuitableUnits(Convert.ToDouble(quantum_allocation), true, Messages.VAL_MB));
         }
 
         public static string GetHostRestrictions(Host host)
