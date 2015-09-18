@@ -302,7 +302,7 @@ namespace XenAdminTests.TabsAndMenus
         protected static bool HasTools(VM vm)
         {
             return !vm.is_a_template && vm.IsRunning&&
-                !vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED) &&
+                vm.virtualisation_status != 0 &&
                 !vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE);
         }
 

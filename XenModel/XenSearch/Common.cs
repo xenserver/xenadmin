@@ -230,8 +230,7 @@ namespace XenAdmin.XenSearch
             foreach (SR.SRTypes type in Enum.GetValues(typeof(SR.SRTypes)))
                 SRType_i18n[SR.getFriendlyTypeName(type)] = type;
 
-            //VirtualisationStatus_i18n[Messages.OPTIMIZED] = VM.VirtualisationStatus.OPTIMIZED;
-            VirtualisationStatus_i18n[Messages.PV_DRIVERS_NOT_INSTALLED] = VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
+            VirtualisationStatus_i18n[Messages.PV_DRIVERS_NOT_INSTALLED] = 0;
             VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
             VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
             VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;
@@ -1377,12 +1376,9 @@ namespace XenAdmin.XenSearch
                             if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                                 return Icons.ToolInstalled;
 
-                            if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED) || !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                                return Icons.ToolsNotInstalled;
-
                             if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                                 return Icons.ToolsOutOfDate;
-                            
+
                             return Icons.ToolsNotInstalled;
                         };
 

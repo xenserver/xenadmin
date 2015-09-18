@@ -10842,7 +10842,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers and Management Agent are not installed on this VM..
+        ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NO_IO_NO_MGMNT {
             get {
@@ -10851,7 +10851,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers and Management Agent are not installed on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers are not installed on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL {
             get {
@@ -10905,7 +10905,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools or I/O drivers and Management Agent are out of date on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are out of date on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_OLDTOOLS_PLURAL {
             get {

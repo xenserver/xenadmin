@@ -205,19 +205,8 @@ namespace XenAdmin.Commands
             {
                 return Messages.VM_ALREADY_SUSPENDED;
             }
-            else if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED) || vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
-            {
-                return FriendlyErrorNames.VM_MISSING_PV_DRIVERS;
-            }
-            if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-            {
-                return FriendlyErrorNames.VM_OLD_PV_DRIVERS;
-            }
 
-            if (!vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                return Messages.VM_MISSING_IO_DRIVERS;
-
-            return base.GetCantExecuteReasonCore(item);
+            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
         }
 
 

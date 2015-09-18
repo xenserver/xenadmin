@@ -3857,16 +3857,16 @@ This will also delete its subfolders.</value>
     <value>A memory range cannot be set because the operating systems on these VMs do not support it.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NO_IO_NO_MGMNT" xml:space="preserve">
-    <value>A memory range cannot be set because I/O drivers and Management Agent are not installed on this VM.</value>
+    <value>A memory range cannot be set because I/O drivers are not installed on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because I/O drivers and Management Agent are not installed on these VMs.</value>
+    <value>A memory range cannot be set because I/O drivers are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
     <value>A memory range cannot be set because XenServer Tools are out of date on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools or I/O drivers and Management Agent are out of date on these VMs.</value>
+    <value>A memory range cannot be set because XenServer Tools are out of date on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>A memory range cannot be set for this template.</value>

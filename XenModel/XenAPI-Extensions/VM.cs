@@ -685,7 +685,6 @@ namespace XenAPI
         [Flags]
         public enum VirtualisationStatus
         {
-            PV_DRIVERS_NOT_INSTALLED    = 0,
             UNKNOWN                     = 1,
             PV_DRIVERS_OUT_OF_DATE      = 2,
             IO_DRIVERS_INSTALLED        = 4,
@@ -717,7 +716,7 @@ namespace XenAPI
         {
             VirtualisationStatus status = GetVirtualisationStatus;
 
-            if (virtualisation_status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED) 
+            if (virtualisation_status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
                 || virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
@@ -764,7 +763,7 @@ namespace XenAPI
 
                 if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed)
                 {
-                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
+                    return 0;
                 }
                 else if (!vm_guest_metrics.PV_drivers_up_to_date)
                 {
@@ -1543,7 +1542,7 @@ namespace XenAPI
                 if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                         return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
                     
-                if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED))
+                if (virtualisation_status == 0)
                         return Messages.PV_DRIVERS_NOT_INSTALLED;
                 
                 if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) 
