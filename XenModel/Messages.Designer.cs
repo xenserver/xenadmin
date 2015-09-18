@@ -30356,6 +30356,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thinly provisioned ({0}% committed).
+        /// </summary>
+        public static string SR_THIN_PROVISIONING_COMMITTED {
+            get {
+                return ResourceManager.GetString("SR_THIN_PROVISIONING_COMMITTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot reclaim freed space, because the SR is detached..
         /// </summary>
         public static string SR_TRIM_NO_STORAGE_HOST_ERROR {

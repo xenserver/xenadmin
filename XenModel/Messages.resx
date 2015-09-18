@@ -10571,6 +10571,9 @@ The upper limit: SR size / {2}</value>
   <data name="SR_THIN_PROVISIONING" xml:space="preserve">
     <value>Thinly provisioned</value>
   </data>
+  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
+    <value>Thinly provisioned ({0}% committed)</value>
+  </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
     <value>Cannot reclaim freed space, because the SR is detached.</value>
   </data>

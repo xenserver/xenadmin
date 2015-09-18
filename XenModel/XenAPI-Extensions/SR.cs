@@ -1131,6 +1131,14 @@ namespace XenAPI
             }
         }
 
+        public long PercentageCommitted
+        {
+            get
+            {
+                return (long)Math.Round(virtual_allocation / (double)physical_size * 100.0);
+            }
+        }
+
         #region IEquatable<SR> Members
 
         /// <summary>
