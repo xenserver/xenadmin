@@ -24154,6 +24154,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SR &apos;{0}&apos; is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially)..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure storage for the new VM.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_TITLE {

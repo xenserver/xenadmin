@@ -125,7 +125,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public override bool EnableNext()
         {
-            return (DisklessVMRadioButton.Checked || (DisksGridView.Rows.Count > 0 && AllDisksHaveSRs())) && !CheckForOverCommit();
+            return (DisklessVMRadioButton.Checked || (DisksGridView.Rows.Count > 0 && AllDisksHaveSRs())) && CheckForOverCommit() != DiskOverCommit.Error;
         }
 
         private bool AllDisksHaveSRs()
@@ -216,9 +216,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        private bool CheckForOverCommit()
+        private DiskOverCommit CheckForOverCommit()
         {
-            Dictionary<SR, long> srSpace = new Dictionary<SR, long>();
+            Dictionary<string, long> srSpace = new Dictionary<string, long>(); 
+            Dictionary<string, long> srInitialSpace = new Dictionary<string, long>();
+
             foreach (DiskGridRowItem item in DisksGridView.Rows)
             {
                 item.OverCommit = DiskOverCommit.None; // reset all errors
@@ -231,12 +233,18 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if(sr.HBALunPerVDI) //No over commit in this case
                     continue;
 
-                if (srSpace.ContainsKey(sr))
-                    srSpace[sr] += item.Disk.virtual_size;
+                if (srSpace.ContainsKey(sr.opaque_ref))
+                    srSpace[sr.opaque_ref] += item.Disk.virtual_size;
                 else
-                    srSpace[sr] = item.Disk.virtual_size;
+                    srSpace[sr.opaque_ref] = item.Disk.virtual_size;
+
+                var diskInitialSize = sr.IsThinProvisioned ? item.Disk.InitialAllocation : item.Disk.virtual_size;
+                if (srInitialSpace.ContainsKey(sr.opaque_ref))
+                    srInitialSpace[sr.opaque_ref] += diskInitialSize;
+                else
+                    srInitialSpace[sr.opaque_ref] = diskInitialSize;
             }
-            bool overcommitedDisk = false;
+            DiskOverCommit overcommitedDisk = DiskOverCommit.None;
             foreach (DiskGridRowItem item in DisksGridView.Rows)
             {
                 SR sr = Connection.Resolve(item.Disk.SR);
@@ -247,25 +255,26 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (sr.HBALunPerVDI) //No over commit in this case
                     continue;
 
-                if (item.Disk.SR.opaque_ref == sr.opaque_ref && sr.FreeSpace < srSpace[sr])
+                if (item.Disk.SR.opaque_ref != sr.opaque_ref)
+                    continue;
+
+                if (sr.FreeSpace < srInitialSpace[sr.opaque_ref])
+                    overcommitedDisk = item.OverCommit = DiskOverCommit.Error;
+                else if (sr.IsThinProvisioned && sr.FreeSpace < srSpace[sr.opaque_ref])
+                    overcommitedDisk = item.OverCommit = DiskOverCommit.Warning;
+
+                if (overcommitedDisk != DiskOverCommit.None)
                 {
-                    //if (sr.Server.Provisioning == SrProvisioning.Thin)
-                    //{
-                    item.OverCommit = DiskOverCommit.Warning;
-                    item.ImageToolTip = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT,
-                                                     Helpers.GetName(sr),
-                                                     Util.DiskSizeString(sr.FreeSpace),
-                                                     Util.DiskSizeString(srSpace[sr]));
-                    //}
-                    //else
-                    //{
-                    //    item.OverCommit = DiskOverCommit.Error;
-                    //    item.ToolTipText = string.Format("There is not enough free space on SR '{0}' to create the new VM. There is {1} of free space and the VM requires {2}.",
-                    //                                     Helpers.GetName(sr),
-                    //                                     Util.DiskSizeString(sr.Server.FreeSpace),
-                    //                                     Util.DiskSizeString(srSpace[sr]));
-                    //}
-                    overcommitedDisk = true;
+                    item.ImageToolTip = sr.IsThinProvisioned ? 
+                        string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN,
+                                                Helpers.GetName(sr),
+                                                Util.DiskSizeString(sr.FreeSpace),
+                                                Util.DiskSizeString(srSpace[sr.opaque_ref]), 
+                                                Util.DiskSizeString(srInitialSpace[sr.opaque_ref])) :
+                        string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT, 
+                                                Helpers.GetName(sr), 
+                                                Util.DiskSizeString(sr.FreeSpace), 
+                                                Util.DiskSizeString(srInitialSpace[sr.opaque_ref]));
                 }
                 item.UpdateDetails();
             }
