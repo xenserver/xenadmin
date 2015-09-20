@@ -198,6 +198,237 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="physicalUtilisationMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="physicalUtilisationMinutesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="physicalUtilisationMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>372, 50</value>
+  </data>
+  <data name="physicalUtilisationMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="physicalUtilisationMinutesLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="physicalUtilisationMinutesLabel.Text" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationMinutesLabel.Name" xml:space="preserve">
+    <value>physicalUtilisationMinutesLabel</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationMinutesLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationMinutesLabel.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationMinutesLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudPhysicalUtilisationDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 48</value>
+  </data>
+  <data name="nudPhysicalUtilisationDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="nudPhysicalUtilisationDurationThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="nudPhysicalUtilisationDurationThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisationDurationThreshold.Name" xml:space="preserve">
+    <value>nudPhysicalUtilisationDurationThreshold</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisationDurationThreshold.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisationDurationThreshold.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisationDurationThreshold.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="physicalUtilisationPercentLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="physicalUtilisationPercentLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="physicalUtilisationPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>372, 24</value>
+  </data>
+  <data name="physicalUtilisationPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>15, 13</value>
+  </data>
+  <data name="physicalUtilisationPercentLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="physicalUtilisationPercentLabel.Text" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationPercentLabel.Name" xml:space="preserve">
+    <value>physicalUtilisationPercentLabel</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationPercentLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationPercentLabel.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationPercentLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudPhysicalUtilisation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 22</value>
+  </data>
+  <data name="nudPhysicalUtilisation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="nudPhysicalUtilisation.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisation.Name" xml:space="preserve">
+    <value>nudPhysicalUtilisation</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisation.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisation.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;nudPhysicalUtilisation.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 0</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 17</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.Text" xml:space="preserve">
+    <value>Generate storage repository &amp;disk space alerts</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationAlertCheckBox.Name" xml:space="preserve">
+    <value>physicalUtilisationAlertCheckBox</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationAlertCheckBox.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertCheckBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationAlertCheckBox.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationAlertCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 50</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.Text" xml:space="preserve">
+    <value>For longer &amp;than:</value>
+  </data>
+  <data name="physicalUtilisationDurationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationDurationLabel.Name" xml:space="preserve">
+    <value>physicalUtilisationDurationLabel</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationDurationLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationDurationLabel.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationDurationLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="physicalUtilisationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="physicalUtilisationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="physicalUtilisationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
+  </data>
+  <data name="physicalUtilisationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 13</value>
+  </data>
+  <data name="physicalUtilisationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="physicalUtilisationLabel.Text" xml:space="preserve">
+    <value>When SR physical utilisation &amp;exceeds:</value>
+  </data>
+  <data name="physicalUtilisationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationLabel.Name" xml:space="preserve">
+    <value>physicalUtilisationLabel</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationLabel.Parent" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;physicalUtilisationLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="PhysicalUtilisationGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 507</value>
+  </data>
+  <data name="PhysicalUtilisationGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="PhysicalUtilisationGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>445, 78</value>
+  </data>
+  <data name="PhysicalUtilisationGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="PhysicalUtilisationGroupBox.Text" xml:space="preserve">
+    <value>                              </value>
+  </data>
+  <data name="&gt;&gt;PhysicalUtilisationGroupBox.Name" xml:space="preserve">
+    <value>PhysicalUtilisationGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PhysicalUtilisationGroupBox.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;PhysicalUtilisationGroupBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;PhysicalUtilisationGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="nudDom0MemUsage.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 22</value>
   </data>
@@ -427,7 +658,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Dom0MemoryUsageGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="memoryMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -658,7 +889,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;MemoryGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="srMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -889,7 +1120,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;SrGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="DiskMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1120,7 +1351,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;DiskGroupBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="NetPercentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1348,7 +1579,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;NetGroupBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="cpuPercentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1579,7 +1810,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;CpuGroupBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 83</value>
@@ -1588,10 +1819,10 @@
     <value>3, 10, 3, 3</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 504</value>
+    <value>451, 588</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1609,7 +1840,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Dom0MemoryUsageGroupBox" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemoryGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SrGroupBox" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NetGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CpuGroupBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="PhysicalUtilisationGroupBox" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Dom0MemoryUsageGroupBox" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemoryGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SrGroupBox" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NetGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CpuGroupBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1624,7 +1855,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 53</value>
+    <value>454, 53</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1678,7 +1909,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>488, 608</value>
+    <value>420, 538</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PerfmonAlertEditPage</value>

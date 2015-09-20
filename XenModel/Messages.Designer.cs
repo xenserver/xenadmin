@@ -4586,6 +4586,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When SR physical utilisation exceeds {0} for {1} min(s).
+        /// </summary>
+        public static string ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT {
+            get {
+                return ResourceManager.GetString("ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When storage throughput exceeds {0} for {1} min(s).
         /// </summary>
         public static string ALERT_SR_SUB_TEXT {

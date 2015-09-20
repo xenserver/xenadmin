@@ -120,6 +120,11 @@ namespace XenAdmin.Alerts
             get { return name.Equals(ALARM_TYPE_SR); }
         }
 
+        public bool IsSrPhysicalUtilisation
+        {
+            get { return name.Equals(ALARM_TYPE_SR_PHYSICAL_UTILISATION); }
+        }
+
         public decimal AlarmTriggerLevel
         {
             get { return alarmTriggerLevel; }

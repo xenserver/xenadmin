@@ -34,6 +34,14 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.nudAlertInterval = new XenAdmin.SettingsPanels.AlertNumericUpDown();
+            this.PhysicalUtilisationGroupBox = new XenAdmin.Controls.DecentGroupBox();
+            this.physicalUtilisationMinutesLabel = new System.Windows.Forms.Label();
+            this.nudPhysicalUtilisationDurationThreshold = new XenAdmin.SettingsPanels.AlertNumericUpDown();
+            this.physicalUtilisationPercentLabel = new System.Windows.Forms.Label();
+            this.nudPhysicalUtilisation = new XenAdmin.SettingsPanels.AlertNumericUpDown();
+            this.physicalUtilisationAlertCheckBox = new XenAdmin.SettingsPanels.AlertCheckBox();
+            this.physicalUtilisationDurationLabel = new System.Windows.Forms.Label();
+            this.physicalUtilisationLabel = new System.Windows.Forms.Label();
             this.Dom0MemoryUsageGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.nudDom0MemUsage = new XenAdmin.SettingsPanels.AlertNumericUpDown();
             this.Dom0MemoryDurationThresholdLabel = new System.Windows.Forms.Label();
@@ -84,6 +92,9 @@ namespace XenAdmin.SettingsPanels
             this.CPUDurationThresholdLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).BeginInit();
+            this.PhysicalUtilisationGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisationDurationThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisation)).BeginInit();
             this.Dom0MemoryUsageGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDom0MemUsage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDom0MemoryDurationThreshold)).BeginInit();
@@ -117,6 +128,7 @@ namespace XenAdmin.SettingsPanels
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.PhysicalUtilisationGroupBox, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.Dom0MemoryUsageGroupBox, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.MemoryGroupBox, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.SrGroupBox, 0, 4);
@@ -154,6 +166,86 @@ namespace XenAdmin.SettingsPanels
             0,
             0,
             0});
+            // 
+            // PhysicalUtilisationGroupBox
+            // 
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationMinutesLabel);
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.nudPhysicalUtilisationDurationThreshold);
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationPercentLabel);
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.nudPhysicalUtilisation);
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationAlertCheckBox);
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationDurationLabel);
+            this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationLabel);
+            resources.ApplyResources(this.PhysicalUtilisationGroupBox, "PhysicalUtilisationGroupBox");
+            this.PhysicalUtilisationGroupBox.Name = "PhysicalUtilisationGroupBox";
+            this.PhysicalUtilisationGroupBox.TabStop = false;
+            // 
+            // physicalUtilisationMinutesLabel
+            // 
+            resources.ApplyResources(this.physicalUtilisationMinutesLabel, "physicalUtilisationMinutesLabel");
+            this.physicalUtilisationMinutesLabel.Name = "physicalUtilisationMinutesLabel";
+            // 
+            // nudPhysicalUtilisationDurationThreshold
+            // 
+            resources.ApplyResources(this.nudPhysicalUtilisationDurationThreshold, "nudPhysicalUtilisationDurationThreshold");
+            this.nudPhysicalUtilisationDurationThreshold.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudPhysicalUtilisationDurationThreshold.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPhysicalUtilisationDurationThreshold.Name = "nudPhysicalUtilisationDurationThreshold";
+            this.nudPhysicalUtilisationDurationThreshold.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // physicalUtilisationPercentLabel
+            // 
+            resources.ApplyResources(this.physicalUtilisationPercentLabel, "physicalUtilisationPercentLabel");
+            this.physicalUtilisationPercentLabel.Name = "physicalUtilisationPercentLabel";
+            // 
+            // nudPhysicalUtilisation
+            // 
+            this.nudPhysicalUtilisation.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.nudPhysicalUtilisation, "nudPhysicalUtilisation");
+            this.nudPhysicalUtilisation.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPhysicalUtilisation.Name = "nudPhysicalUtilisation";
+            this.nudPhysicalUtilisation.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            // 
+            // physicalUtilisationAlertCheckBox
+            // 
+            resources.ApplyResources(this.physicalUtilisationAlertCheckBox, "physicalUtilisationAlertCheckBox");
+            this.physicalUtilisationAlertCheckBox.BackColor = System.Drawing.Color.White;
+            this.physicalUtilisationAlertCheckBox.Name = "physicalUtilisationAlertCheckBox";
+            this.physicalUtilisationAlertCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // physicalUtilisationDurationLabel
+            // 
+            resources.ApplyResources(this.physicalUtilisationDurationLabel, "physicalUtilisationDurationLabel");
+            this.physicalUtilisationDurationLabel.Name = "physicalUtilisationDurationLabel";
+            // 
+            // physicalUtilisationLabel
+            // 
+            resources.ApplyResources(this.physicalUtilisationLabel, "physicalUtilisationLabel");
+            this.physicalUtilisationLabel.Name = "physicalUtilisationLabel";
             // 
             // Dom0MemoryUsageGroupBox
             // 
@@ -662,6 +754,10 @@ namespace XenAdmin.SettingsPanels
             this.Name = "PerfmonAlertEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).EndInit();
+            this.PhysicalUtilisationGroupBox.ResumeLayout(false);
+            this.PhysicalUtilisationGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisationDurationThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisation)).EndInit();
             this.Dom0MemoryUsageGroupBox.ResumeLayout(false);
             this.Dom0MemoryUsageGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDom0MemUsage)).EndInit();
@@ -746,5 +842,13 @@ namespace XenAdmin.SettingsPanels
         private AlertCheckBox Dom0MemoryAlertCheckBox;
         private System.Windows.Forms.Label dom0MemoryMinutesLabel;
         private System.Windows.Forms.Label dom0MemoryPercentLabel;
+        private Controls.DecentGroupBox PhysicalUtilisationGroupBox;
+        private System.Windows.Forms.Label physicalUtilisationMinutesLabel;
+        private AlertNumericUpDown nudPhysicalUtilisationDurationThreshold;
+        private System.Windows.Forms.Label physicalUtilisationPercentLabel;
+        private AlertNumericUpDown nudPhysicalUtilisation;
+        private AlertCheckBox physicalUtilisationAlertCheckBox;
+        private System.Windows.Forms.Label physicalUtilisationDurationLabel;
+        private System.Windows.Forms.Label physicalUtilisationLabel;
     }
 }

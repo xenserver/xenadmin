@@ -1687,6 +1687,9 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Go to Web Page</value>
   </data>
+  <data name="ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT" xml:space="preserve">
+    <value>When SR physical utilisation exceeds {0} for {1} min(s)</value>
+  </data>
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>When storage throughput exceeds {0} for {1} min(s)</value>
   </data>
