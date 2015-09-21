@@ -933,22 +933,22 @@ Authorized Roles: {1}</value>
     <value>VDI resize failed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_111" xml:space="preserve">
-    <value>CIFS mount error</value>
+    <value>SMB mount error</value>
   </data>
   <data name="SR_BACKEND_FAILURE_112" xml:space="preserve">
-    <value>CIFS unmount error</value>
+    <value>SMB unmount error</value>
   </data>
   <data name="SR_BACKEND_FAILURE_113" xml:space="preserve">
-    <value>CIFS mount point already attached</value>
+    <value>SMB mount point already attached</value>
   </data>
   <data name="SR_BACKEND_FAILURE_114" xml:space="preserve">
-    <value>Failed to remove CIFS mount point</value>
+    <value>Failed to remove SMB mount point</value>
   </data>
   <data name="SR_BACKEND_FAILURE_115" xml:space="preserve">
     <value>Not all required parameters specified.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_116" xml:space="preserve">
-    <value>Failed to create CIFS SR.</value>
+    <value>Failed to create SMB SR.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
     <value>Netapp Target parameter missing in Dconf string</value>
@@ -1122,7 +1122,7 @@ Authorized Roles: {1}</value>
     <value>Could not locate the ISO sharename on the target, or the access permissions may be incorrect.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
-    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for CIFS targets</value>
+    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for SMB targets</value>
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>Invalid local path</value>
@@ -1269,7 +1269,7 @@ Authorized Roles: {1}</value>
     <value>The tapdisk is already running</value>
   </data>
   <data name="SR_BACKEND_FAILURE_446" xml:space="preserve">
-    <value>XenServer does not support extended characters in CIFS paths, usernames, and passwords.</value>
+    <value>XenServer does not support extended characters in SMB paths, usernames, and passwords.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_447" xml:space="preserve">
     <value>Illegal XML character.</value>
@@ -1293,7 +1293,7 @@ Authorized Roles: {1}</value>
     <value>tapdisk experienced an error</value>
   </data>
   <data name="SR_BACKEND_FAILURE_454" xml:space="preserve">
-    <value>CIFS SR is not licensed on this host</value>
+    <value>SMB SR is not licensed on this host</value>
   </data>
   <data name="SR_BACKEND_FAILURE_455" xml:space="preserve">
     <value>VG Registration failure</value>

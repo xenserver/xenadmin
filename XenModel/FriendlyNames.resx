@@ -337,7 +337,7 @@
     <value>Partially applied</value>
   </data>
   <data name="Label-SR.SRTypes-cifs" xml:space="preserve">
-    <value>CIFS</value>
+    <value>SMB/CIFS</value>
   </data>
   <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
     <value>StorageLink</value>

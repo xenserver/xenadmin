@@ -22906,7 +22906,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CIFS ISO Library [{0}].
+        ///   Looks up a localized string similar to SMB ISO Library [{0}].
         /// </summary>
         public static string NEWSR_CIF_DESCRIPTION {
             get {
@@ -22915,7 +22915,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CIFS SR [{0}].
+        ///   Looks up a localized string similar to SMB SR [{0}].
         /// </summary>
         public static string NEWSR_CIFS_ACTION {
             get {
@@ -22924,11 +22924,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CIFS servers are a common form of Windows shared filesystem infrastructure, and can be used as a storage repository substrate for virtual disks.
+        ///   Looks up a localized string similar to SMB servers are a common form of Windows shared filesystem infrastructure, and can be used as a storage repository substrate for virtual disks.
         ///
-        ///As CIFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using XenMotion.
+        ///As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using XenMotion.
         ///
-        ///When you configure a CIFS storage repository, you simply provide the hostname or IP address of the CIFS server, the username, the password and the path to a directory that will be u [rest of string was truncated]&quot;;.
+        ///When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the username, the password and the path to a directory that will be used  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_CIFS_BLURB {
             get {
@@ -22937,7 +22937,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select this option if you have a library of VM installation ISO images available as a Windows (CIFS) share that you wish to attach to your host or pool..
+        ///   Looks up a localized string similar to Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you wish to attach to your host or pool..
         /// </summary>
         public static string NEWSR_CIFS_ISO_BLURB {
             get {
@@ -23461,7 +23461,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a path for your CIFS storage.
+        ///   Looks up a localized string similar to Enter a path for your SMB storage.
         /// </summary>
         public static string NEWSR_PATH_CIFS {
             get {
@@ -23488,7 +23488,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a path for your CIFS storage.
+        ///   Looks up a localized string similar to Enter a path for your SMB ISO storage.
         /// </summary>
         public static string NEWSR_PATH_ISO_CIFS {
             get {
@@ -30427,7 +30427,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CIFS ISO library.
+        ///   Looks up a localized string similar to SMB ISO library.
         /// </summary>
         public static string SRWIZARD_CIFS_LIBRARY {
             get {
@@ -30436,7 +30436,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CIFS virtual storage.
+        ///   Looks up a localized string similar to SMB virtual storage.
         /// </summary>
         public static string SRWIZARD_CIFS_STORAGE {
             get {

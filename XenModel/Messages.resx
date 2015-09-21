@@ -7824,20 +7824,20 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>NFS SR [{0}]</value>
   </data>
   <data name="NEWSR_CIFS_ACTION" xml:space="preserve">
-    <value>CIFS SR [{0}]</value>
+    <value>SMB SR [{0}]</value>
   </data>
   <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
-    <value>CIFS servers are a common form of Windows shared filesystem infrastructure, and can be used as a storage repository substrate for virtual disks.
+    <value>SMB servers are a common form of Windows shared filesystem infrastructure, and can be used as a storage repository substrate for virtual disks.
 
-As CIFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using XenMotion.
+As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using XenMotion.
 
-When you configure a CIFS storage repository, you simply provide the hostname or IP address of the CIFS server, the username, the password and the path to a directory that will be used to contain the storage repository. The CIFS server must be configured to export the specified path to all servers in the pool.</value>
+When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the username, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
-    <value>Select this option if you have a library of VM installation ISO images available as a Windows (CIFS) share that you wish to attach to your host or pool.</value>
+    <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you wish to attach to your host or pool.</value>
   </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
-    <value>CIFS ISO Library [{0}]</value>
+    <value>SMB ISO Library [{0}]</value>
   </data>
   <data name="NEWSR_CSLG_ADAPTER_PAGE_TITLE" xml:space="preserve">
     <value>Select the storage system adapter</value>
@@ -8025,7 +8025,7 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
     <value>&lt;No SRs were found&gt;</value>
   </data>
   <data name="NEWSR_PATH_CIFS" xml:space="preserve">
-    <value>Enter a path for your CIFS storage</value>
+    <value>Enter a path for your SMB storage</value>
   </data>
   <data name="NEWSR_PATH_ISCSI" xml:space="preserve">
     <value>Enter a path for your iSCSI storage</value>
@@ -8034,7 +8034,7 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
     <value>Enter a path for your NFS ISO storage</value>
   </data>
   <data name="NEWSR_PATH_ISO_CIFS" xml:space="preserve">
-    <value>Enter a path for your CIFS storage</value>
+    <value>Enter a path for your SMB ISO storage</value>
   </data>
   <data name="NEWSR_PATH_NFS" xml:space="preserve">
     <value>Enter a path for your NFS storage</value>
@@ -10472,10 +10472,10 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>SRs forgotten</value>
   </data>
   <data name="SRWIZARD_CIFS_LIBRARY" xml:space="preserve">
-    <value>CIFS ISO library</value>
+    <value>SMB ISO library</value>
   </data>
   <data name="SRWIZARD_CIFS_STORAGE" xml:space="preserve">
-    <value>CIFS virtual storage</value>
+    <value>SMB virtual storage</value>
   </data>
   <data name="SRWIZARD_ISCSI_STORAGE" xml:space="preserve">
     <value>iSCSI virtual disk storage</value>
