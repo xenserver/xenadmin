@@ -244,13 +244,13 @@
     <value>6, 3, 3, 3</value>
   </data>
   <data name="radioButtonCifsIso.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 19</value>
+    <value>201, 19</value>
   </data>
   <data name="radioButtonCifsIso.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
   <data name="radioButtonCifsIso.Text" xml:space="preserve">
-    <value>Windows File Sharing (&amp;CIFS)</value>
+    <value>&amp;Windows File Sharing (SMB/CIFS)</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.Name" xml:space="preserve">
     <value>radioButtonCifsIso</value>
@@ -438,7 +438,7 @@
     <value>3, 51</value>
   </data>
   <data name="upsellPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 67</value>
+    <value>312, 67</value>
   </data>
   <data name="upsellPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -474,7 +474,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="SRBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 176</value>
+    <value>312, 176</value>
   </data>
   <data name="SRBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -513,7 +513,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="deprecationBanner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 38</value>
+    <value>308, 38</value>
   </data>
   <data name="deprecationBanner.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -570,13 +570,13 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 3</value>
+    <value>219, 3</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 330</value>
+    <value>318, 330</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -651,13 +651,13 @@
     <value>6, 3, 3, 3</value>
   </data>
   <data name="radioButtonCifs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 19</value>
+    <value>77, 19</value>
   </data>
   <data name="radioButtonCifs.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="radioButtonCifs.Text" xml:space="preserve">
-    <value>&amp;CIFS</value>
+    <value>S&amp;MB/CIFS</value>
   </data>
   <data name="&gt;&gt;radioButtonCifs.Name" xml:space="preserve">
     <value>radioButtonCifs</value>
@@ -678,7 +678,7 @@
     <value>11</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 302</value>
+    <value>210, 302</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
