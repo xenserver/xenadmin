@@ -13582,6 +13582,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Install Management Agent.
+        /// </summary>
+        public static string EVACUATE_HOST_INSTALL_MGMNT_PROMPT {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_INSTALL_MGMNT_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Install XenServer Tools.
         /// </summary>
         public static string EVACUATE_HOST_INSTALL_TOOLS_PROMPT {

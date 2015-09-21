@@ -539,47 +539,19 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = String.Format(Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = String.Format(vm.HasNewVirtualisationStates ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
                         // if the state is not unknown we have metrics and can show a detailed message.
                         // Otherwise go with the server and just say they aren't installed
                         error = !vm.GetVirtualisationStatus.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN)
-                            ? GetVirtualisationWarningMessages(vm)
+                            ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
                 }
 
                 Update();
-            }
-
-            public string GetVirtualisationWarningMessages(VM vm)
-            {
-                VM.VirtualisationStatus status = vm.GetVirtualisationStatus;
-
-                if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
-                    || vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
-                    return "";
-
-                if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                {
-                    VM_guest_metrics guestMetrics = vm.Connection.Resolve(vm.guest_metrics);
-                    if (guestMetrics != null
-                        && guestMetrics.PV_drivers_version.ContainsKey("major")
-                        && guestMetrics.PV_drivers_version.ContainsKey("minor"))
-                    {
-                        return String.Format(Messages.PV_DRIVERS_OUT_OF_DATE, String.Format("{0}.{1}",
-                            guestMetrics.PV_drivers_version["major"],
-                            guestMetrics.PV_drivers_version["minor"]));
-                    }
-                    else
-                        return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
-                }
-
-                return vm.HasNewVirtualisationStates 
-                    ? Messages.VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT //We display "Install Management Agent" even though I/O drivers are missing in this case
-                    : Messages.PV_DRIVERS_NOT_INSTALLED;
             }
 
             public AsyncAction Solve()

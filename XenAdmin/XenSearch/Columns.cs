@@ -102,7 +102,7 @@ namespace XenAdmin.XenSearch
                 {
                     if (InstallToolsCommand.CanExecute(vm))
                     {
-                        item = new GridStringItem(GetVMToolsInstallMessage(vm),
+                        item = new GridStringItem(vm.GetVirtualisationWarningMessages(),
                                                   HorizontalAlignment.Center,
                                                   VerticalAlignment.Middle,
                                                   false,
@@ -116,7 +116,7 @@ namespace XenAdmin.XenSearch
                     }
                     else
                     {
-                        item = new GridStringItem(GetVMToolsInstallMessage(vm),
+                        item = new GridStringItem(vm.GetVirtualisationWarningMessages(),
                                                   HorizontalAlignment.Center,
                                                   VerticalAlignment.Middle,
                                                   false,

@@ -44,10 +44,10 @@ namespace XenAdmin.Dialogs
             this.labelMasterBlurb = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.lableWLBEnabled = new System.Windows.Forms.Label();
             this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnVm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lableWLBEnabled = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
@@ -164,11 +164,6 @@ namespace XenAdmin.Dialogs
             this.dataGridViewVms.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewVms_CellMouseClick);
             this.dataGridViewVms.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewVms_CellMouseMove);
             // 
-            // lableWLBEnabled
-            // 
-            resources.ApplyResources(this.lableWLBEnabled, "lableWLBEnabled");
-            this.lableWLBEnabled.Name = "lableWLBEnabled";
-            // 
             // columnImage
             // 
             this.columnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -195,6 +190,11 @@ namespace XenAdmin.Dialogs
             this.columnAction.FillWeight = 40F;
             resources.ApplyResources(this.columnAction, "columnAction");
             this.columnAction.Name = "columnAction";
+            // 
+            // lableWLBEnabled
+            // 
+            resources.ApplyResources(this.lableWLBEnabled, "lableWLBEnabled");
+            this.lableWLBEnabled.Name = "lableWLBEnabled";
             // 
             // EvacuateHostDialog
             // 

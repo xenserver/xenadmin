@@ -4766,6 +4766,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0} Eject the CD</value>
   </data>
+  <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
+    <value>{0} Install Management Agent</value>
+  </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
     <value>{0} Install XenServer Tools</value>
   </data>
