@@ -50,7 +50,7 @@ namespace XenAdmin.Controls.Ballooning
         {
             InitializeComponent();
         }
-
+        
         protected override void OnPaint(PaintEventArgs e)
         {
             if (vms == null || vms.Count == 0)
@@ -101,7 +101,7 @@ namespace XenAdmin.Controls.Ballooning
                     if (identical)
                     {
                         var status = vm0.GetVirtualisationStatus;
-                        if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                        if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL;
                         else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL : Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL;
@@ -123,7 +123,7 @@ namespace XenAdmin.Controls.Ballooning
                 {
                     var status = vm0.GetVirtualisationStatus;
 
-                    if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED;
                     else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT : Messages.DMC_UNAVAILABLE_NOTOOLS;

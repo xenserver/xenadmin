@@ -5968,7 +5968,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install the I/O drivers on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install I/O drivers on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS {
             get {
@@ -6067,7 +6067,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install the I/O drivers on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install I/O drivers on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS {
             get {
@@ -18219,11 +18219,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quiesced snapshots need I/O drivers and Management Agent to be installed.
+        ///   Looks up a localized string similar to Quiesced snapshots need Management Agent to be installed.
         /// </summary>
-        public static string INFO_QUIESCE_MODE_NO_IO_MGMNT {
+        public static string INFO_QUIESCE_MODE_NO_MGMNT {
             get {
-                return ResourceManager.GetString("INFO_QUIESCE_MODE_NO_IO_MGMNT", resourceCulture);
+                return ResourceManager.GetString("INFO_QUIESCE_MODE_NO_MGMNT", resourceCulture);
             }
         }
         

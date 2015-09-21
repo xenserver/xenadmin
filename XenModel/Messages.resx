@@ -2167,7 +2167,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>It is not possible to activate this virtual disk on VM '{0}' as the VM is not running.</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS" xml:space="preserve">
-    <value>You must install the I/O drivers on VM '{0}' before you can activate this virtual disk for the VM.</value>
+    <value>You must install I/O drivers on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
     <value>You must install XenServer Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
@@ -2200,7 +2200,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>This virtual disk is in use and cannot be deactivated.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS" xml:space="preserve">
-    <value>You must install the I/O drivers on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
+    <value>You must install I/O drivers on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
     <value>You must install XenServer Tools on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
@@ -6341,8 +6341,8 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INFO_QUIESCE_MODE" xml:space="preserve">
     <value>Quiesced snapshots need the VSS service to be enabled on the VM</value>
   </data>
-  <data name="INFO_QUIESCE_MODE_NO_IO_MGMNT" xml:space="preserve">
-    <value>Quiesced snapshots need I/O drivers and Management Agent to be installed</value>
+  <data name="INFO_QUIESCE_MODE_NO_MGMNT" xml:space="preserve">
+    <value>Quiesced snapshots need Management Agent to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
     <value>Quiesced snapshots need XenServer Tools to be installed</value>
