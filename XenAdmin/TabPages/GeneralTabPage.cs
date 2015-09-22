@@ -1420,7 +1420,7 @@ namespace XenAdmin.TabPages
 
                         if (!string.IsNullOrEmpty(installMessage))
                         {
-                            var installtools = new ToolStripMenuItem();
+                            var installtools = new ToolStripMenuItem(installMessage);
                             installtools.Click += delegate
                             {
                                 new InstallToolsCommand(Program.MainWindow, vm).Execute();
