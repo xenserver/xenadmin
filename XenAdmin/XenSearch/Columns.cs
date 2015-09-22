@@ -161,33 +161,6 @@ namespace XenAdmin.XenSearch
 
             return false;
         }
-
-        public string GetVMToolsInstallMessage(VM vm)
-        {
-            VM.VirtualisationStatus status = vm.GetVirtualisationStatus;
-
-            if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
-                || vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
-                // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
-                return "";
-
-            if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-            {
-                VM_guest_metrics guestMetrics = vm.Connection.Resolve(vm.guest_metrics);
-                if (guestMetrics != null
-                    && guestMetrics.PV_drivers_version.ContainsKey("major")
-                    && guestMetrics.PV_drivers_version.ContainsKey("minor"))
-                {
-                    return String.Format(Messages.PV_DRIVERS_OUT_OF_DATE, String.Format("{0}.{1}",
-                        guestMetrics.PV_drivers_version["major"],
-                        guestMetrics.PV_drivers_version["minor"]));
-                }
-                else
-                    return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
-            }
-
-            return vm.HasNewVirtualisationStates ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
-        }
     }
 
     public class NameColumn : Column
