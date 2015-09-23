@@ -204,6 +204,8 @@ namespace XenAdmin.Dialogs.HealthCheck
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             SetXSCredentials(currentXsCredentialsRadioButton.Checked);
+            testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
+                !string.IsNullOrEmpty(textboxXSUserName.Text) && !string.IsNullOrEmpty(textboxXSPassword.Text);
         }
 
         private void SetXSCredentials(bool useCurrent)
@@ -353,11 +355,13 @@ namespace XenAdmin.Dialogs.HealthCheck
                         ShowTestCredentialsStatus(Resources._000_Tick_h32bit_16, null);
                     else
                         ShowTestCredentialsStatus(Resources._000_error_h32bit_16, action.Exception != null ? action.Exception.Message : Messages.HEALTH_CHECK_USER_NOT_AUTHORIZED);
+                    textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked;
                 });
             };
 
             log.Debug("Testing logging in with the new credentials");
             ShowTestCredentialsStatus(Resources.ajax_loader, null);
+            textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = false;
             action.RunAsync();
         }
 
@@ -382,11 +386,11 @@ namespace XenAdmin.Dialogs.HealthCheck
             {
                 if (authorizedRoles.Contains(r))
                 {
-                    log.DebugFormat("Subject '{0}' is authorized to complete the action", ud.UserDisplayName ?? ud.UserName ?? ud.UserSid);
+                    log.DebugFormat("Subject '{0}' is authorized to complete the action", ud.UserName ?? ud.UserSid);
                     return true;
                 }
             }
-            log.DebugFormat("Subject '{0}' is not authorized to complete the action", ud.UserDisplayName ?? ud.UserName ?? ud.UserSid);
+            log.DebugFormat("Subject '{0}' is not authorized to complete the action", ud.UserName ?? ud.UserSid);
             return false;
         }
     }
