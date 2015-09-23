@@ -82,9 +82,9 @@ namespace XenAdmin.Dialogs
             // 
             // SrListBox
             // 
+            resources.ApplyResources(this.SrListBox, "SrListBox");
             this.tableLayoutPanel1.SetColumnSpan(this.SrListBox, 3);
             this.SrListBox.Connection = null;
-            resources.ApplyResources(this.SrListBox, "SrListBox");
             this.SrListBox.Name = "SrListBox";
             // 
             // GbLabel

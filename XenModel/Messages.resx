@@ -8273,6 +8273,9 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
     <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2}.</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN" xml:space="preserve">
+    <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially).</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
   </data>
@@ -10553,6 +10556,9 @@ Incremental allocation: {1}</value>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs with no home server cannot be on local storage</value>
   </data>
+  <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
+    <value>Disk size ({0}) exceeds SR size ({1})</value>
+  </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} required when only {1} available</value>
   </data>
@@ -10587,6 +10593,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="SR_THIN_PROVISIONING" xml:space="preserve">
     <value>Thinly provisioned</value>
+  </data>
+  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
+    <value>Thinly provisioned ({0}% committed)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
     <value>Cannot reclaim freed space, because the SR is detached.</value>

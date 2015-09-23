@@ -192,12 +192,12 @@ namespace XenAdmin.Dialogs
         {
             updateErrorsAndButtons();
 
-            initialAllocationNumericUpDown.Enabled =
-            labelInitialAllocation.Enabled =
-            allocationQuantumNumericUpDown.Enabled =
-            init_alloc_units.Enabled =
-            incr_alloc_units.Enabled =
-            labelAllocationQuantum.Enabled = IsSelectedSRThinProvisioned;
+            initialAllocationNumericUpDown.Visible =
+            labelInitialAllocation.Visible =
+            allocationQuantumNumericUpDown.Visible =
+            init_alloc_units.Visible =
+            incr_alloc_units.Visible =
+            labelAllocationQuantum.Visible = IsSelectedSRThinProvisioned;
 
             if (IsSelectedSRThinProvisioned)
             {
@@ -322,15 +322,15 @@ namespace XenAdmin.Dialogs
             {
                 var smconfig = new Dictionary<string, string>();
 
-                if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
+                if (SrListBox.SR.IsThinProvisioned)
                 {
                     smconfig["allocation"] = "xlvhd";
 
-                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                                    : (long)allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA)
+                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA)
+                                                                                                                    : (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA))
                                                                                                                     .ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                                    : (long)initialAllocationNumericUpDown.Value * Util.BINARY_GIGA)
+                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(initialAllocationNumericUpDown.Value * Util.BINARY_MEGA)
+                                                                                                                    : (long)(initialAllocationNumericUpDown.Value * Util.BINARY_GIGA))
                                                                                                                     .ToString(CultureInfo.InvariantCulture);
                 }
 
@@ -347,7 +347,17 @@ namespace XenAdmin.Dialogs
 
             if (srToCheck.IsThinProvisioned)
             {
-                var smConfig = srToCheck.sm_config;
+                var smConfig = new Dictionary<string, string>(srToCheck.sm_config);
+
+                // if the DiskTemplate contains initial_allocation and allocation_quantum settings, then use these values
+                if (DiskTemplate != null && DiskTemplate.sm_config != null)
+                {
+                    if (DiskTemplate.sm_config.ContainsKey("initial_allocation"))
+                        smConfig["initial_allocation"] = DiskTemplate.sm_config["initial_allocation"];
+                    if (DiskTemplate.sm_config.ContainsKey("allocation_quantum"))
+                        smConfig["allocation_quantum"] = DiskTemplate.sm_config["allocation_quantum"];
+                }
+
                 long temp = 0;
                   
                 if (smConfig.ContainsKey("initial_allocation") && long.TryParse(smConfig["initial_allocation"], out temp))
@@ -638,7 +648,11 @@ namespace XenAdmin.Dialogs
                     //CA-71312
                    SrListBox.DiskSize = newValue < 0 ? long.MinValue : long.MaxValue;
                 }
-                SrListBox.refresh();
+                SrListBox.UpdateDiskSize();
+                if (IsSelectedSRThinProvisioned)
+                {
+                    DefaultToSRsConfig(userChangedInitialAllocationValue);
+                }
             }
             RefreshMinSize();
             updateErrorsAndButtons();

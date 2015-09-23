@@ -24217,6 +24217,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SR &apos;{0}&apos; is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially)..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure storage for the new VM.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_TITLE {
@@ -30308,6 +30317,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk size ({0}) exceeds SR size ({1}).
+        /// </summary>
+        public static string SR_PICKER_DISK_TOO_BIG {
+            get {
+                return ResourceManager.GetString("SR_PICKER_DISK_TOO_BIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} required when only {1} available.
         /// </summary>
         public static string SR_PICKER_INSUFFICIENT_SPACE {
@@ -30405,6 +30423,15 @@ namespace XenAdmin {
         public static string SR_THIN_PROVISIONING {
             get {
                 return ResourceManager.GetString("SR_THIN_PROVISIONING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thinly provisioned ({0}% committed).
+        /// </summary>
+        public static string SR_THIN_PROVISIONING_COMMITTED {
+            get {
+                return ResourceManager.GetString("SR_THIN_PROVISIONING_COMMITTED", resourceCulture);
             }
         }
         

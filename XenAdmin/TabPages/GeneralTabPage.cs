@@ -1238,7 +1238,9 @@ namespace XenAdmin.TabPages
                     {
                         menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem> () { new SelectedItem(xenObject)} ), true) };
                     }*/
-                    s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned ? Messages.SR_THIN_PROVISIONING : Messages.SR_THICK_PROVISIONING, menuItems);
+                    s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned 
+                        ? string.Format(Messages.SR_THIN_PROVISIONING_COMMITTED, sr.PercentageCommitted) 
+                        : Messages.SR_THICK_PROVISIONING, menuItems);
 
                     if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
                     {
