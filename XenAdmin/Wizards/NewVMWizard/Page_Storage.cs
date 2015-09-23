@@ -218,8 +218,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private DiskOverCommit CheckForOverCommit()
         {
-            Dictionary<string, long> srSpace = new Dictionary<string, long>(); 
-            Dictionary<string, long> srInitialSpace = new Dictionary<string, long>();
+            Dictionary<string, long> totalDiskSize = new Dictionary<string, long>(); // total size of the new disks on each SR (calculated using vdi.virtual_size)
+            Dictionary<string, long> totalDiskInitialAllocation = new Dictionary<string, long>(); // total initial allocation of the new disks on each SR (calculated using vdi.InitialAllocation)
 
             foreach (DiskGridRowItem item in DisksGridView.Rows)
             {
@@ -233,16 +233,15 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if(sr.HBALunPerVDI) //No over commit in this case
                     continue;
 
-                if (srSpace.ContainsKey(sr.opaque_ref))
-                    srSpace[sr.opaque_ref] += item.Disk.virtual_size;
+                if (totalDiskSize.ContainsKey(sr.opaque_ref))
+                    totalDiskSize[sr.opaque_ref] += item.Disk.virtual_size;
                 else
-                    srSpace[sr.opaque_ref] = item.Disk.virtual_size;
+                    totalDiskSize[sr.opaque_ref] = item.Disk.virtual_size;
 
-                var diskInitialSize = sr.IsThinProvisioned ? item.Disk.InitialAllocation : item.Disk.virtual_size;
-                if (srInitialSpace.ContainsKey(sr.opaque_ref))
-                    srInitialSpace[sr.opaque_ref] += diskInitialSize;
+                if (totalDiskInitialAllocation.ContainsKey(sr.opaque_ref))
+                    totalDiskInitialAllocation[sr.opaque_ref] += item.Disk.InitialAllocation;
                 else
-                    srInitialSpace[sr.opaque_ref] = diskInitialSize;
+                    totalDiskInitialAllocation[sr.opaque_ref] = item.Disk.InitialAllocation;
             }
             DiskOverCommit overcommitedDisk = DiskOverCommit.None;
             foreach (DiskGridRowItem item in DisksGridView.Rows)
@@ -258,9 +257,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (item.Disk.SR.opaque_ref != sr.opaque_ref)
                     continue;
 
-                if (sr.FreeSpace < srInitialSpace[sr.opaque_ref])
+                if (sr.FreeSpace < totalDiskInitialAllocation[sr.opaque_ref])
                     overcommitedDisk = item.OverCommit = DiskOverCommit.Error;
-                else if (sr.IsThinProvisioned && sr.FreeSpace < srSpace[sr.opaque_ref])
+                else if (sr.FreeSpace < totalDiskSize[sr.opaque_ref])
                     overcommitedDisk = item.OverCommit = DiskOverCommit.Warning;
 
                 if (overcommitedDisk != DiskOverCommit.None)
@@ -269,12 +268,12 @@ namespace XenAdmin.Wizards.NewVMWizard
                         string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN,
                                                 Helpers.GetName(sr),
                                                 Util.DiskSizeString(sr.FreeSpace),
-                                                Util.DiskSizeString(srSpace[sr.opaque_ref]), 
-                                                Util.DiskSizeString(srInitialSpace[sr.opaque_ref])) :
+                                                Util.DiskSizeString(totalDiskSize[sr.opaque_ref]), 
+                                                Util.DiskSizeString(totalDiskInitialAllocation[sr.opaque_ref])) :
                         string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT, 
                                                 Helpers.GetName(sr), 
-                                                Util.DiskSizeString(sr.FreeSpace), 
-                                                Util.DiskSizeString(srInitialSpace[sr.opaque_ref]));
+                                                Util.DiskSizeString(sr.FreeSpace),
+                                                Util.DiskSizeString(totalDiskSize[sr.opaque_ref]));
                 }
                 item.UpdateDetails();
             }

@@ -322,15 +322,15 @@ namespace XenAdmin.Dialogs
             {
                 var smconfig = new Dictionary<string, string>();
 
-                if (allocationQuantumNumericUpDown.Enabled && initialAllocationNumericUpDown.Enabled)
+                if (SrListBox.SR.IsThinProvisioned)
                 {
                     smconfig["allocation"] = "xlvhd";
 
-                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                                    : (long)allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA)
+                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA)
+                                                                                                                    : (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA))
                                                                                                                     .ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                                    : (long)initialAllocationNumericUpDown.Value * Util.BINARY_GIGA)
+                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(initialAllocationNumericUpDown.Value * Util.BINARY_MEGA)
+                                                                                                                    : (long)(initialAllocationNumericUpDown.Value * Util.BINARY_GIGA))
                                                                                                                     .ToString(CultureInfo.InvariantCulture);
                 }
 
