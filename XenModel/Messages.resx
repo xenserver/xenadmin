@@ -1615,7 +1615,7 @@ This alarm is set to be triggered when network usage is more than {3}.</value>
     <value>SR Disk Space Alarm</value>
   </data>
   <data name="ALERT_ALARM_SR_PHYSICAL_UTILISATION_DESCRIPTION" xml:space="preserve">
-    <value>The physical utilisation on {0} is about {1} of its capacity. 
+    <value>The physical utilization on {0} is about {1} of its capacity. 
 This alarm is set to be triggered when the physical utilisation of the SR goes above {2}.</value>
   </data>
   <data name="ALERT_ALARM_STORAGE" xml:space="preserve">
@@ -1686,6 +1686,9 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Go to Web Page</value>
+  </data>
+  <data name="ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT" xml:space="preserve">
+    <value>When SR physical utilization exceeds {0} for {1} min(s)</value>
   </data>
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>When storage throughput exceeds {0} for {1} min(s)</value>

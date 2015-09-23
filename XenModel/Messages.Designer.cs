@@ -4381,7 +4381,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The physical utilisation on {0} is about {1} of its capacity. 
+        ///   Looks up a localized string similar to The physical utilization on {0} is about {1} of its capacity. 
         ///This alarm is set to be triggered when the physical utilisation of the SR goes above {2}..
         /// </summary>
         public static string ALERT_ALARM_SR_PHYSICAL_UTILISATION_DESCRIPTION {
@@ -4582,6 +4582,15 @@ namespace XenAdmin {
         public static string ALERT_NEW_VERSION_DOWNLOAD {
             get {
                 return ResourceManager.GetString("ALERT_NEW_VERSION_DOWNLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When SR physical utilization exceeds {0} for {1} min(s).
+        /// </summary>
+        public static string ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT {
+            get {
+                return ResourceManager.GetString("ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT", resourceCulture);
             }
         }
         
