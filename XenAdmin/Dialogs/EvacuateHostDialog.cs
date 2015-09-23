@@ -539,13 +539,13 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = String.Format(Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = String.Format(vm.HasNewVirtualisationStates ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
                         // if the state is not unknown we have metrics and can show a detailed message.
                         // Otherwise go with the server and just say they aren't installed
-                        error = vm.GetVirtualisationStatus != VM.VirtualisationStatus.UNKNOWN
+                        error = !vm.GetVirtualisationStatus.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;

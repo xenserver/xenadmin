@@ -5987,6 +5987,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must install I/O drivers on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
+        /// </summary>
+        public static string CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must install XenServer Tools on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS {
@@ -6073,6 +6082,15 @@ namespace XenAdmin {
         public static string CANNOT_DEACTIVATE_VDI_IN_USE {
             get {
                 return ResourceManager.GetString("CANNOT_DEACTIVATE_VDI_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must install I/O drivers on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
+        /// </summary>
+        public static string CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS", resourceCulture);
             }
         }
         
@@ -10843,6 +10861,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers are not installed on this VM..
+        /// </summary>
+        public static string DMC_UNAVAILABLE_NO_IO_NO_MGMNT {
+            get {
+                return ResourceManager.GetString("DMC_UNAVAILABLE_NO_IO_NO_MGMNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers are not installed on these VMs..
+        /// </summary>
+        public static string DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL {
+            get {
+                return ResourceManager.GetString("DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NOTOOLS {
@@ -13561,6 +13597,15 @@ namespace XenAdmin {
         public static string EVACUATE_HOST_EJECT_CD_PROMPT {
             get {
                 return ResourceManager.GetString("EVACUATE_HOST_EJECT_CD_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Install Management Agent.
+        /// </summary>
+        public static string EVACUATE_HOST_INSTALL_MGMNT_PROMPT {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_INSTALL_MGMNT_PROMPT", resourceCulture);
             }
         }
         
@@ -18166,6 +18211,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk and memory snapshots need I/O drivers to be installed.
+        /// </summary>
+        public static string INFO_DISKMEMORY_MODE_NO_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("INFO_DISKMEMORY_MODE_NO_IO_DRIVERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk and memory snapshots need XenServer Tools to be installed.
         /// </summary>
         public static string INFO_DISKMEMORY_MODE_NO_TOOLS {
@@ -18189,6 +18243,15 @@ namespace XenAdmin {
         public static string INFO_QUIESCE_MODE {
             get {
                 return ResourceManager.GetString("INFO_QUIESCE_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quiesced snapshots need Management Agent to be installed.
+        /// </summary>
+        public static string INFO_QUIESCE_MODE_NO_MGMNT {
+            get {
+                return ResourceManager.GetString("INFO_QUIESCE_MODE_NO_MGMNT", resourceCulture);
             }
         }
         
@@ -32013,6 +32076,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I/O drivers must be installed to edit a network on a running VM.
+        /// </summary>
+        public static string TOOLTIP_EDIT_NETWORK_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("TOOLTIP_EDIT_NETWORK_IO_DRIVERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XenServer Tools must be installed to edit a network on a running VM.
         /// </summary>
         public static string TOOLTIP_EDIT_NETWORK_TOOLS {
@@ -32045,6 +32117,15 @@ namespace XenAdmin {
         public static string TOOLTIP_NICS_PER_BOND_LIMIT {
             get {
                 return ResourceManager.GetString("TOOLTIP_NICS_PER_BOND_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/O drivers must be installed to remove a network on a running VM.
+        /// </summary>
+        public static string TOOLTIP_REMOVE_NETWORK_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("TOOLTIP_REMOVE_NETWORK_IO_DRIVERS", resourceCulture);
             }
         }
         
@@ -34407,6 +34488,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I/O drivers and Management Agent installed.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I/O not optimized.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED {
@@ -34727,6 +34817,15 @@ namespace XenAdmin {
         public static string VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE {
             get {
                 return ResourceManager.GetString("VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/O drivers not installed..
+        /// </summary>
+        public static string VM_MISSING_IO_DRIVERS {
+            get {
+                return ResourceManager.GetString("VM_MISSING_IO_DRIVERS", resourceCulture);
             }
         }
         

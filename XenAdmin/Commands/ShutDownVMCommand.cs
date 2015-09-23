@@ -168,17 +168,8 @@ namespace XenAdmin.Commands
                 case vm_power_state.unknown:
                     return base.GetCantExecuteReasonCore(item);
             }
-            
-            if (vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED || vm.virtualisation_status == VM.VirtualisationStatus.UNKNOWN)
-            {
-                return FriendlyErrorNames.VM_MISSING_PV_DRIVERS;
-            }
-            
-            if (vm.virtualisation_status == VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE)
-            {
-                return FriendlyErrorNames.VM_OLD_PV_DRIVERS;
-            }
-            return base.GetCantExecuteReasonCore(item);
+
+            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
         }
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<SelectedItem, string> cantExecuteReasons)

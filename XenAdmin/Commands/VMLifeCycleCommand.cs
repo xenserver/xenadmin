@@ -162,5 +162,29 @@ namespace XenAdmin.Commands
 
             return atLeastOneCanExecute;
         }
+
+        protected string GetCantExecuteNoToolsOrDriversReasonCore(SelectedItem item)
+        {
+            VM vm = item.XenObject as VM;
+            if (vm == null)
+                return null;
+
+            //trying to guess the reason
+            if (vm.HasNewVirtualisationStates)
+            {
+                if (!vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)) //note: this will also be true when the enum is in Unknown state
+                    return Messages.VM_MISSING_IO_DRIVERS;
+            }
+            else
+            {
+                if (vm.virtualisation_status == 0 || vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+                    return FriendlyErrorNames.VM_MISSING_PV_DRIVERS;
+
+                if (vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                    return FriendlyErrorNames.VM_OLD_PV_DRIVERS;
+            }
+
+            return null;
+        }
     }
 }

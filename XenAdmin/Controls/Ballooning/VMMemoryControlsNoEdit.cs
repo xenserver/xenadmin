@@ -75,7 +75,7 @@ namespace XenAdmin.Controls.Ballooning
             // So "good" VMs are ones which are halted, or running with known virtualisation status.
             editButton.Visible =
                 (null == vms.Find(vm => !(vm.power_state == vm_power_state.Halted ||
-                    vm.power_state == vm_power_state.Running && vm.virtualisation_status != VM.VirtualisationStatus.UNKNOWN)));
+                    vm.power_state == vm_power_state.Running && !vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))));
 
             // Shiny bar
             vmShinyBar.Initialize(vm0, vms.Count > 1, CalcMemoryUsed(), false);

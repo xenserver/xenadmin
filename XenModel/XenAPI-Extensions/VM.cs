@@ -683,7 +683,13 @@ namespace XenAPI
         private Timer VirtualizationTimer = null;
 
         [Flags]
-        public enum VirtualisationStatus { UNKNOWN = 0, OPTIMIZED = 1, PV_DRIVERS_NOT_INSTALLED = 2, PV_DRIVERS_OUT_OF_DATE = 4 };
+        public enum VirtualisationStatus
+        {
+            UNKNOWN                     = 1,
+            PV_DRIVERS_OUT_OF_DATE      = 2,
+            IO_DRIVERS_INSTALLED        = 4,
+            MANAGEMENT_INSTALLED        = 8,
+        };
 
         public VirtualisationStatus virtualisation_status
         {
@@ -710,14 +716,13 @@ namespace XenAPI
         {
             VirtualisationStatus status = GetVirtualisationStatus;
 
-            switch (status)
-            {
-                case VirtualisationStatus.OPTIMIZED:
-                case VirtualisationStatus.UNKNOWN:
+            if (virtualisation_status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
+                || virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
 
-                case VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
+            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            {
                     VM_guest_metrics guestMetrics = Connection.Resolve(guest_metrics);
                     if (guestMetrics != null
                         && guestMetrics.PV_drivers_version.ContainsKey("major")
@@ -729,12 +734,91 @@ namespace XenAPI
                     }
                     else
                         return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
+            }
 
-                default:  // VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                    return Messages.PV_DRIVERS_NOT_INSTALLED;
+            return HasNewVirtualisationStates ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
+        }
+
+        private VirtualisationStatus GetVirtualisationStatusOldVM
+        {
+            get
+            {
+                Debug.Assert(!HasNewVirtualisationStates);
+
+                VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
+
+                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
+                {
+                    // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
+                    if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed)
+                    {
+                        if (vm_guest_metrics.PV_drivers_up_to_date)
+                            return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
+                        else
+                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+                    }
+
+                    return VirtualisationStatus.UNKNOWN;
+                }
+
+                if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed)
+                {
+                    return 0;
+                }
+                else if (!vm_guest_metrics.PV_drivers_up_to_date)
+                {
+                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+                }
+                else
+                {
+                    return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
+                }
             }
         }
 
+        private VirtualisationStatus GetVirtualisationStatusNewVM
+        {
+            get
+            {
+                Debug.Assert(HasNewVirtualisationStates);
+
+                var flags = HasRDP ? VirtualisationStatus.MANAGEMENT_INSTALLED : 0;
+
+                var vm_guest_metrics = Connection.Resolve(guest_metrics);
+                if (vm_guest_metrics != null && vm_guest_metrics.storage_paths_optimized && vm_guest_metrics.network_paths_optimized)
+                    flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
+
+                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
+                {
+                    if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                        return flags;
+
+                    return VirtualisationStatus.UNKNOWN;
+                }
+
+                return flags;
+            }
+        }
+
+        /// <summary>
+        /// Virtualization Status of the VM
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Following states are expected:
+        /// 
+        /// For Non-Windows VMs and for Windows VMs pre-Dundee:
+        ///   0 = Not installed
+        ///   1 = Unknown
+        ///   2 = Out of date
+        ///  12 = Tools installed (Optimized)
+        ///  
+        /// For Windows VMs on Dundee or higher:
+        ///    0 = Not installed
+        ///    1 = Unknown
+        ///    4 = I/O Optimized
+        ///   12 = I/O and Management installed
+        /// </remarks>
         public VirtualisationStatus GetVirtualisationStatus
         {
             get
@@ -748,37 +832,23 @@ namespace XenAPI
                     return VirtualisationStatus.UNKNOWN;
                 }
 
-                VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
-
-                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
-                {
-                    // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
-                    if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed)
-                    {
-                        if (vm_guest_metrics.PV_drivers_up_to_date)
-                            return VirtualisationStatus.OPTIMIZED;
-                        else
-                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                    }
-
-                    return VirtualisationStatus.UNKNOWN;
-                }
-
-                if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed)
-                {
-                    return VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED;
-                }
-                else if (!vm_guest_metrics.PV_drivers_up_to_date)
-                {
-                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                }
-                else
-                {
-                    return VirtualisationStatus.OPTIMIZED;
-                }
-
+                return HasNewVirtualisationStates ? GetVirtualisationStatusNewVM : GetVirtualisationStatusOldVM;
             }
         }
+
+        /// <summary>
+        /// Is this a Windows VM on Dundee or higher host?
+        /// We need to know this, because for those VMs virtualization status is defined differently.
+        /// This does not mean new(ly created) VM
+        /// </summary>
+        public bool HasNewVirtualisationStates
+        {
+            get
+            {
+                return IsWindows && XenAdmin.Core.Helpers.DundeeOrGreater(Connection);
+            }
+        }
+
 
         /// <summary>
         /// Does this VM support ballooning? I.e., are tools installed, on a ballonable OS?
@@ -1461,17 +1531,25 @@ namespace XenAPI
         {
             get
             {
-                switch (virtualisation_status)
+                if (virtualisation_status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
                 {
-                    case VM.VirtualisationStatus.OPTIMIZED:
+                    if (!HasNewVirtualisationStates)
                         return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
-                    case VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
-                        return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
-                    case VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                        return Messages.PV_DRIVERS_NOT_INSTALLED;
-                    default:
-                        return Messages.VIRTUALIZATION_UNKNOWN;
+                    else
+                        return Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
                 }
+
+                if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                        return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
+                    
+                if (virtualisation_status == 0)
+                        return Messages.PV_DRIVERS_NOT_INSTALLED;
+                
+                if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) 
+                    && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
+                
+                return Messages.VIRTUALIZATION_UNKNOWN;
             }
         }
 
