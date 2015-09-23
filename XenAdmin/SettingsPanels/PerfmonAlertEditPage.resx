@@ -385,7 +385,7 @@
     <value>1</value>
   </data>
   <data name="physicalUtilisationLabel.Text" xml:space="preserve">
-    <value>When SR physical utilisation &amp;exceeds:</value>
+    <value>When SR physical utilization &amp;exceeds:</value>
   </data>
   <data name="physicalUtilisationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
