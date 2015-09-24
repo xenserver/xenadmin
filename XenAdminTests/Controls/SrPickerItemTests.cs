@@ -69,13 +69,21 @@ namespace XenAdminTests.Controls
         {
             get
             {
-                yield return new TestData //iscsi shared -> local slave with restricted space
+                yield return new TestData //iscsi shared -> local slave with restricted free space
+                {
+                    Affinity = GetAffinity(slaveHost),
+                    Sr = GetLocalSr(slaveHost),
+                    VdisToMove = GetVDIsOn(largeISCSI).Where(v => !v.name_label.Contains("OnMaster")).ToArray(),
+                    DiskSize = 240518168576,
+                    ExpectedFailureDescription = "224 GB required when only 220.28 GB available"
+                };
+                yield return new TestData //iscsi shared -> local slave with restricted SR size
                 {
                     Affinity = GetAffinity(slaveHost),
                     Sr = GetLocalSr(slaveHost),
                     VdisToMove = GetVDIsOn(largeISCSI).Where(v => !v.name_label.Contains("OnMaster")).ToArray(),
                     DiskSize = 8000000000000,
-                    ExpectedFailureDescription = "7450.58 GB required when only 220.28 GB available"
+                    ExpectedFailureDescription = "Disk size (7450.58 GB) exceeds SR size (224.8 GB)"
                 };
                 yield return new TestData //Local master to slave local
                 {
@@ -109,13 +117,21 @@ namespace XenAdminTests.Controls
                     DiskSize = 1024 * 1024,
                     ExpectedFailureDescription = Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
                 };
-                yield return new TestData //Local master to shared restricted space
+                yield return new TestData //Local master to shared restricted free space
+                {
+                    Affinity = GetAffinity(slaveHost),
+                    Sr = GetSr(smallISCSI),
+                    VdisToMove = GetVDIsFromLocal(masterHost),
+                    DiskSize = 1010 * 1024 * 1024,
+                    ExpectedFailureDescription = "1010 MB required when only 1008 MB available"
+                };
+                yield return new TestData //Local master to shared restricted total space
                 {
                     Affinity = GetAffinity(slaveHost),
                     Sr = GetSr(smallISCSI),
                     VdisToMove = GetVDIsFromLocal(masterHost),
                     DiskSize = 2024 * 1024* 1024,
-                    ExpectedFailureDescription = "1.98 GB required when only 1008 MB available"
+                    ExpectedFailureDescription = "Disk size (1.98 GB) exceeds SR size (1012 MB)"
                 };
                 yield return new TestData //Move the vdis to the same place
                 {
@@ -233,13 +249,21 @@ namespace XenAdminTests.Controls
                     DiskSize = 1024 * 1024,
                     ExpectedFailureDescription = Messages.CURRENT_LOCATION
                 };
-                yield return new TestData //Local master to shared restricted space
+                yield return new TestData //Local master to shared restricted free space
+                {
+                    Affinity = GetAffinity(slaveHost),
+                    Sr = GetSr(smallISCSI),
+                    VdisToMove = GetVDIsFromLocal(masterHost),
+                    DiskSize = 1010 * 1024 * 1024,
+                    ExpectedFailureDescription = "1010 MB required when only 1008 MB available"
+                };
+                yield return new TestData //Local master to shared restricted total space
                 {
                     Affinity = GetAffinity(slaveHost),
                     Sr = GetSr(smallISCSI),
                     VdisToMove = GetVDIsFromLocal(masterHost),
                     DiskSize = 2024 * 1024 * 1024,
-                    ExpectedFailureDescription = "1.98 GB required when only 1008 MB available"
+                    ExpectedFailureDescription = "Disk size (1.98 GB) exceeds SR size (1012 MB)"
                 };
             }
         }
