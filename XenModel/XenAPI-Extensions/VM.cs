@@ -59,7 +59,7 @@ namespace XenAPI
         private const int DEFAULT_NUM_VCPUS_ALLOWED = 16;
         private const int DEFAULT_NUM_VIFS_ALLOWED = 7;
         private const int DEFAULT_NUM_VBDS_ALLOWED = 16;
-        public const long DEFAULT_MEM_ALLOWED = 128 * Util.BINARY_GIGA;
+        public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         private SnapshotsView _snapshotView = SnapshotsView.None;
 
