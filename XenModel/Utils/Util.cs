@@ -49,11 +49,13 @@ namespace XenAdmin
     {
         public const long BINARY_KILO = 1024;
         public const long BINARY_MEGA = BINARY_KILO * BINARY_KILO;
-        public const long BINARY_GIGA = BINARY_KILO * BINARY_KILO * BINARY_KILO;
+        public const long BINARY_GIGA = BINARY_KILO * BINARY_MEGA;
+        public const long BINARY_TERA = BINARY_KILO * BINARY_GIGA;
 
         public const long DEC_KILO = 1000;
         public const long DEC_MEGA = DEC_KILO * DEC_KILO;
-        public const long DEC_GIGA = DEC_KILO * DEC_KILO * DEC_KILO;
+        public const long DEC_GIGA = DEC_KILO * DEC_MEGA;
+        public const long DEC_TERA = DEC_KILO * DEC_GIGA;
 
         /// <summary>
         /// The default iSCSI filer port.
