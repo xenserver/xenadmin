@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vdi_type
     {
-        system, user, ephemeral, suspend, crashdump, ha_statefile, metadata, redo_log, unknown
+        system, user, ephemeral, suspend, crashdump, ha_statefile, metadata, redo_log, rrd, unknown
     }
 
     public static class vdi_type_helper
@@ -62,6 +62,8 @@ namespace XenAPI
                     return "metadata";
                 case vdi_type.redo_log:
                     return "redo_log";
+                case vdi_type.rrd:
+                    return "rrd";
                 default:
                     return "unknown";
             }

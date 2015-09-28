@@ -1169,32 +1169,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Turn on High Availability mode
-        /// First published in XenServer 4.1.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
-        /// <param name="_configuration">Detailed HA configuration to apply</param>
-        /// <param name="_cluster_stack">HA cluster manager stack First published in XenServer Dundee.</param>
-        public static void enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration, string _cluster_stack)
-        {
-            session.proxy.pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration), (_cluster_stack != null) ? _cluster_stack : "").parse();
-        }
-
-        /// <summary>
-        /// Turn on High Availability mode
-        /// First published in XenServer 4.1.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
-        /// <param name="_configuration">Detailed HA configuration to apply</param>
-        /// <param name="_cluster_stack">HA cluster manager stack First published in XenServer Dundee.</param>
-        public static XenRef<Task> async_enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration, string _cluster_stack)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration), (_cluster_stack != null) ? _cluster_stack : "").parse());
-        }
-
-        /// <summary>
         /// Turn off High Availability mode
         /// First published in XenServer 4.1.
         /// </summary>
@@ -2471,7 +2445,7 @@ namespace XenAPI
         private List<XenRef<VDI>> _metadata_VDIs;
 
         /// <summary>
-        /// The ha cluster manager stack
+        /// The HA cluster stack that is currently in use. Only valid when HA is enabled.
         /// First published in XenServer Dundee.
         /// </summary>
         public virtual string ha_cluster_stack

@@ -1928,6 +1928,17 @@ namespace XenAPI
                     this.IsHVM && BoolKey(this.platform, "viridian");
             }
         }
+
+        /// <summary>
+        /// This property is true if XenPrep has been started (xenprep_start called)
+        /// </summary>
+        public bool IsXenPrepInProgress
+        {
+            get
+            {
+                return this.other_config != null && this.other_config.ContainsKey("xenprep_progress");
+            }
+        }
     }
 
     public struct VMStartupOptions

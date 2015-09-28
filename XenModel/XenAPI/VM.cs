@@ -3862,6 +3862,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Start the 'xenprep' process on the VM; the process will remove any tools and drivers for XenServer and then set auto update drivers true.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static void xenprep_start(Session session, string _vm)
+        {
+            session.proxy.vm_xenprep_start(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
+        /// Start the 'xenprep' process on the VM; the process will remove any tools and drivers for XenServer and then set auto update drivers true.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Task> async_xenprep_start(Session session, string _vm)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_xenprep_start(session.uuid, (_vm != null) ? _vm : "").parse());
+        }
+
+        /// <summary>
         /// Return a list of all the VMs known to the system.
         /// First published in XenServer 4.0.
         /// </summary>

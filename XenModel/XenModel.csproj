@@ -134,6 +134,7 @@
     <Compile Include="Actions\VM\ExportVmAction.cs" />
     <Compile Include="Actions\VM\GpuAssignAction.cs" />
     <Compile Include="Actions\VM\ImportVmAction.cs" />
+    <Compile Include="Actions\VM\RunXenPrepAction.cs" />
     <Compile Include="Actions\VM\ResumeAndStartVMsAction.cs" />
     <Compile Include="Actions\VM\SetVMStartupOptionsAction.cs" />
     <Compile Include="Actions\DR\StartVMsAndAppliancesAction.cs" />

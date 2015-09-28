@@ -3220,6 +3220,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preparing to start the upgrade process.
+        /// </summary>
+        public static string ACTION_XENPREP_PREPARING {
+            get {
+                return ResourceManager.GetString("ACTION_XENPREP_PREPARING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started the upgrade process.
+        /// </summary>
+        public static string ACTION_XENPREP_STARTED {
+            get {
+                return ResourceManager.GetString("ACTION_XENPREP_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A&amp;ctivate.
         /// </summary>
         public static string ACTIVATE {
@@ -8418,6 +8436,15 @@ namespace XenAdmin {
         public static string COULD_NOT_WRITE_FILE {
             get {
                 return ResourceManager.GetString("COULD_NOT_WRITE_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
+        /// </summary>
+        public static string COULDNOTFIND_CD_ON_VM {
+            get {
+                return ResourceManager.GetString("COULDNOTFIND_CD_ON_VM", resourceCulture);
             }
         }
         
@@ -18373,15 +18400,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
-        /// </summary>
-        public static string INSTALLTOOLS_COULDNOTFIND_CD {
-            get {
-                return ResourceManager.GetString("INSTALLTOOLS_COULDNOTFIND_CD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not find the XenServer Tools install disc..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_WIN {
@@ -20431,6 +20449,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrade VM.
+        /// </summary>
+        public static string MAINWINDOW_RUN_XENPREP {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_RUN_XENPREP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sa&amp;ve and Restore....
         /// </summary>
         public static string MAINWINDOW_SAVE_AND_RESTORE {
@@ -22434,11 +22461,30 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must shutdown and then restart the VM to finish the installation of the new DVD drive.
+        ///Once the VM has restarted click the &apos;Upgrade VM to make it able to receive updates via Windows Update&apos; link once again..
+        /// </summary>
+        public static string NEW_DVD_DRIVE_REBOOT_XENPREP {
+            get {
+                return ResourceManager.GetString("NEW_DVD_DRIVE_REBOOT_XENPREP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM you wish to install XenServer Tools onto has no DVD drive, would you like to create one?.
         /// </summary>
         public static string NEW_DVD_DRIVE_REQUIRED {
             get {
                 return ResourceManager.GetString("NEW_DVD_DRIVE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM you wish to upgrade has no DVD drive, would you like to create one?.
+        /// </summary>
+        public static string NEW_DVD_DRIVE_REQUIRED_XENPREP {
+            get {
+                return ResourceManager.GetString("NEW_DVD_DRIVE_REQUIRED_XENPREP", resourceCulture);
             }
         }
         
@@ -28749,6 +28795,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrading VM.
+        /// </summary>
+        public static string RUNXENPREP_TITLE {
+            get {
+                return ResourceManager.GetString("RUNXENPREP_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         public static string SATURDAY_LONG {
@@ -34569,7 +34624,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receiving Updates via Windows Update.
+        ///   Looks up a localized string similar to Able to receive updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES {
             get {
@@ -34578,7 +34633,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade VM to receive updates via Windows Update.
+        ///   Looks up a localized string similar to Upgrade VM to make it able to receive updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_UPGRADE_VM {
             get {
@@ -34587,7 +34642,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrading VM to receive updates via Windows Update....
+        ///   Looks up a localized string similar to Upgrading VM to make it able to receive updates via Windows Update....
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_UPGRADING_VM {
             get {
