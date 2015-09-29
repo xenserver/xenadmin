@@ -34560,6 +34560,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I/O optimized only.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Management Agent installed.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED {
@@ -34574,6 +34583,24 @@ namespace XenAdmin {
         public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED {
             get {
                 return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not optimized.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fully optimized.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_OPTIMIZED {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_OPTIMIZED", resourceCulture);
             }
         }
         

@@ -230,12 +230,11 @@ namespace XenAdmin.XenSearch
             foreach (SR.SRTypes type in Enum.GetValues(typeof(SR.SRTypes)))
                 SRType_i18n[SR.getFriendlyTypeName(type)] = type;
 
-            VirtualisationStatus_i18n[Messages.PV_DRIVERS_NOT_INSTALLED] = 0;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED] = 0;
             VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
             VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED] = VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
 
             
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
@@ -423,7 +422,10 @@ namespace XenAdmin.XenSearch
                 {
                     return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
                                         {
-                                            return vm.GetVirtualisationStatus;
+                                            var status = vm.GetVirtualisationStatus;
+                                            if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                                                return null;
+                                            return status;
                                         });
                 };
             properties[PropertyNames.start_time] = delegate(IXenObject o)
