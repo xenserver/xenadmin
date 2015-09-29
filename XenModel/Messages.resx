@@ -5786,6 +5786,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
     <value>Invalid username or password. Please try again.</value>
   </data>
+  <data name="HEALTH_CHECK_USER_NOT_AUTHORIZED" xml:space="preserve">
+    <value>This user is not authorized to perform Health Check operations.</value>
+  </data>
   <data name="HEARTBEATING_STATUS" xml:space="preserve">
     <value>Heartbeating status</value>
   </data>

@@ -31,10 +31,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Model;
+using XenAdmin.Properties;
 using XenAPI;
 
 
@@ -42,6 +44,8 @@ namespace XenAdmin.Dialogs.HealthCheck
 {
     public partial class HealthCheckSettingsDialog : XenDialogBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly Pool pool;
         private HealthCheckSettings healthCheckSettings;
         private bool authenticationRequired;
@@ -54,6 +58,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         public HealthCheckSettingsDialog(Pool pool, bool enrollNow)
         {
             this.pool = pool;
+            this.connection = pool.Connection;
             healthCheckSettings = pool.HealthCheckSettings;
             if (enrollNow)
                 healthCheckSettings.Status = HealthCheckStatus.Enabled;
@@ -199,6 +204,8 @@ namespace XenAdmin.Dialogs.HealthCheck
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             SetXSCredentials(currentXsCredentialsRadioButton.Checked);
+            testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
+                !string.IsNullOrEmpty(textboxXSUserName.Text) && !string.IsNullOrEmpty(textboxXSPassword.Text);
         }
 
         private void SetXSCredentials(bool useCurrent)
@@ -293,9 +300,98 @@ namespace XenAdmin.Dialogs.HealthCheck
             UpdateButtons();
         }
 
+        private void xsCredentials_TextChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+            testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
+                !string.IsNullOrEmpty(textboxXSUserName.Text) && !string.IsNullOrEmpty(textboxXSPassword.Text);
+            HideTestCredentialsStatus();
+        }
+
         private void PolicyStatementLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new HealthCheckPolicyStatementDialog().ShowDialog(this);
+        }
+
+        private void testCredentialsButton_Click(object sender, EventArgs e)
+        {
+            CheckXenServerCredentials();
+        }
+
+        private void CheckXenServerCredentials()
+        {
+            if (!CheckCredentialsEntered())
+                return;
+
+            bool passedRbacChecks = false;
+            DelegatedAsyncAction action = new DelegatedAsyncAction(connection,
+                Messages.CREDENTIALS_CHECKING, "", "", 
+                delegate
+                {
+                    Session elevatedSession = null;
+                    try
+                    {
+                        elevatedSession = connection.ElevatedSession(textboxXSUserName.Text.Trim(), textboxXSPassword.Text);
+                        if (elevatedSession != null && (elevatedSession.IsLocalSuperuser || SessionAuthorized(elevatedSession, Role.ValidRoleList("pool.set_health_check_config", connection))))
+                            passedRbacChecks = true;
+                    }
+                    finally
+                    {
+                        if (elevatedSession != null)
+                        {
+                            elevatedSession.Connection.Logout(elevatedSession);
+                            elevatedSession = null;
+                        }
+                    }
+                },
+                true);
+
+            action.Completed += delegate
+            {
+                log.DebugFormat("Logging with the new credentials returned: {0} ", passedRbacChecks);
+                Program.Invoke(Program.MainWindow, () =>
+                {
+                    if (passedRbacChecks)
+                        ShowTestCredentialsStatus(Resources._000_Tick_h32bit_16, null);
+                    else
+                        ShowTestCredentialsStatus(Resources._000_error_h32bit_16, action.Exception != null ? action.Exception.Message : Messages.HEALTH_CHECK_USER_NOT_AUTHORIZED);
+                    textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked;
+                });
+            };
+
+            log.Debug("Testing logging in with the new credentials");
+            ShowTestCredentialsStatus(Resources.ajax_loader, null);
+            textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = false;
+            action.RunAsync();
+        }
+
+        private void ShowTestCredentialsStatus(Image image, string errorMessage)
+        {
+            testCredentialsStatusImage.Visible = true;
+            testCredentialsStatusImage.Image = image;
+            errorLabel.Text = errorMessage;
+            errorLabel.Visible = !string.IsNullOrEmpty(errorMessage);
+        }
+
+        private void HideTestCredentialsStatus()
+        {
+            testCredentialsStatusImage.Visible = false;
+            errorLabel.Visible = false;
+        }
+
+        private bool SessionAuthorized(Session s, List<Role> authorizedRoles)
+        {
+            UserDetails ud = s.CurrentUserDetails;
+            foreach (Role r in s.Roles)
+            {
+                if (authorizedRoles.Contains(r))
+                {
+                    log.DebugFormat("Subject '{0}' is authorized to complete the action", ud.UserName ?? ud.UserSid);
+                    return true;
+                }
+            }
+            log.DebugFormat("Subject '{0}' is not authorized to complete the action", ud.UserName ?? ud.UserSid);
+            return false;
         }
     }
 }

@@ -16417,6 +16417,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This user is not authorized to perform Health Check operations..
+        /// </summary>
+        public static string HEALTH_CHECK_USER_NOT_AUTHORIZED {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_USER_NOT_AUTHORIZED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
