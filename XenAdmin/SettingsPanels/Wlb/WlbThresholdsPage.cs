@@ -86,13 +86,7 @@ namespace XenAdmin.SettingsPanels
             labelDiskWriteUnits.Text = string.Format(labelDiskWriteUnits.Text, updownDiskWriteCriticalPoint.Minimum, updownDiskWriteCriticalPoint.Maximum);
             labelNetworkReadUnits.Text = string.Format(labelNetworkReadUnits.Text, updownNetworkReadCriticalPoint.Minimum, updownNetworkReadCriticalPoint.Maximum);
             labelNetworkWriteUnits.Text = string.Format(labelNetworkWriteUnits.Text, updownNetworkWriteCriticalPoint.Minimum, updownNetworkWriteCriticalPoint.Maximum);
-
-            //CA-134554 - Hide Disk Read/Write until the backend server side is ready
-            updownDiskReadCriticalPoint.Visible = false;
-            updownDiskWriteCriticalPoint.Visible = false;
-            labelDiskReadUnits.Visible = false;
-            labelDiskWriteUnits.Visible = false;
-
+            
             _loading = false; ;
         }
 
