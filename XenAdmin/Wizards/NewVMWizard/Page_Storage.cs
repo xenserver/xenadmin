@@ -259,10 +259,10 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 if (sr.FreeSpace < totalDiskInitialAllocation[sr.opaque_ref])
                     overcommitedDisk = item.OverCommit = DiskOverCommit.Error;
-                else if (sr.FreeSpace < totalDiskSize[sr.opaque_ref])
-                    overcommitedDisk = item.OverCommit = DiskOverCommit.Warning;
+                else 
+                    item.OverCommit = DiskOverCommit.None;
 
-                if (overcommitedDisk != DiskOverCommit.None)
+                if (item.OverCommit != DiskOverCommit.None)
                 {
                     item.ImageToolTip = sr.IsThinProvisioned ? 
                         string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN,
