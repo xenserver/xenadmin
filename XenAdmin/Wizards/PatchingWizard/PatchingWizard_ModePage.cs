@@ -112,8 +112,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     break;
             }
 
-            if (SelectedUpdateType == UpdateType.NewSuppPack)
+            if (SelectedUpdateType == UpdateType.NewSuppPack || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
             {
+                removeUpdateFileCheckBox.Checked = false;
                 removeUpdateFileCheckBox.Visible = false;
             }
         }
