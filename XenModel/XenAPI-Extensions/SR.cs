@@ -1135,7 +1135,7 @@ namespace XenAPI
         {
             get
             {
-                return (long)Math.Round(virtual_allocation / (double)physical_size * 100.0);
+                return (long)Math.Round(Math.Abs(virtual_allocation) / (double)physical_size * 100.0);
             }
         }
 
