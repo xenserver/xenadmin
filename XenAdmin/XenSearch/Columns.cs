@@ -82,6 +82,14 @@ namespace XenAdmin.XenSearch
             return new GridStringItem(line, HorizontalAlignment.Center, VerticalAlignment.Middle, false, false, QueryPanel.TextBrush, Program.DefaultFont);
         }
 
+        /// <remarks>
+        /// For Non-Windows VMs and for Windows VMs pre-Dundee:
+        ///   - Memory, Disk and Network values are not available if XenServer Tools are not installed
+        ///  
+        /// For Windows VMs on Dundee or higher:
+        ///  - Memory value is not available if the Management agent is not installed;
+        ///  - Disk and Network vlaues are not available if I/O drivers are not installed
+        /// </remarks>
         protected bool CheckVMTools(IXenObject o, out GridItemBase item)
         {
             item = null;
@@ -94,15 +102,35 @@ namespace XenAdmin.XenSearch
             {
                 VM.VirtualisationStatus status = vm.virtualisation_status;
                 if (vm.power_state != vm_power_state.Running ||
-                    status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED ) ||
+                    status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED) ||
                     status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     return false;
 
-                if (property == PropertyNames.memoryValue)
+                if (property == PropertyNames.memoryValue && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    return false;
+
+                if ((property == PropertyNames.diskText || property == PropertyNames.networkText) && status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                    return false;
+
+                string warningMessage;
+                int colSpan;                
+
+                if (property == PropertyNames.memoryValue && !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                 {
+                    if (vm.HasNewVirtualisationStates)
+                    {
+                        warningMessage = Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
+                        colSpan = 1;
+                    }
+                    else
+                    {
+                        warningMessage = vm.GetVirtualisationWarningMessages();
+                        colSpan = 3;
+                    }
+
                     if (InstallToolsCommand.CanExecute(vm))
                     {
-                        item = new GridStringItem(vm.GetVirtualisationWarningMessages(),
+                        item = new GridStringItem(warningMessage,
                                                   HorizontalAlignment.Center,
                                                   VerticalAlignment.Middle,
                                                   false,
@@ -111,19 +139,51 @@ namespace XenAdmin.XenSearch
                                                   Program.DefaultFontUnderline,
                                                   QueryPanel.LinkBrush,
                                                   Program.DefaultFontUnderline,
-                                                  3,
+                                                  colSpan,
                                                   (sender, args) => new InstallToolsCommand(Program.MainWindow, vm).Execute(), null);
                     }
                     else
                     {
-                        item = new GridStringItem(vm.GetVirtualisationWarningMessages(),
+                        item = new GridStringItem(warningMessage,
                                                   HorizontalAlignment.Center,
                                                   VerticalAlignment.Middle,
                                                   false,
                                                   false,
                                                   QueryPanel.TextBrush,
                                                   Program.DefaultFont,
-                                                  3);
+                                                  colSpan);
+                    }
+                }
+
+                if (property == PropertyNames.diskText && vm.HasNewVirtualisationStates && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                {
+                    warningMessage = Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED;
+                    colSpan = 2;
+
+                    if (InstallToolsCommand.CanExecute(vm))
+                    {
+                        item = new GridStringItem(warningMessage, 
+                                                  HorizontalAlignment.Center,
+                                                  VerticalAlignment.Middle,
+                                                  false,
+                                                  false,
+                                                  QueryPanel.LinkBrush,
+                                                  Program.DefaultFontUnderline,
+                                                  QueryPanel.LinkBrush,
+                                                  Program.DefaultFontUnderline,
+                                                  colSpan,
+                                                  (sender, args) => new InstallToolsCommand(Program.MainWindow, vm).Execute(), null);
+                    }
+                    else
+                    {
+                        item = new GridStringItem(warningMessage,
+                                                  HorizontalAlignment.Center,
+                                                  VerticalAlignment.Middle,
+                                                  false,
+                                                  false,
+                                                  QueryPanel.TextBrush,
+                                                  Program.DefaultFont,
+                                                  colSpan);
                     }
                 }
                 return true;
