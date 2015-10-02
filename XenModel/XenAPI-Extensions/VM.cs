@@ -1928,6 +1928,34 @@ namespace XenAPI
                     this.IsHVM && BoolKey(this.platform, "viridian");
             }
         }
+
+        //TODO these are not needed after XAPI functions have been implemented, delete them
+        private GuestToClientMessage gtc_stub_value = GuestToClientMessage.EMPTY;
+        private ClientToGuestMessage ctg_stub_value = ClientToGuestMessage.EMPTY;
+
+        public enum GuestToClientMessage { UNKNOWN, EMPTY, STARTED, RUNNING, DONE, ERROR }
+        public enum ClientToGuestMessage { UNKNOWN, EMPTY, UPGRADABLE, INITIALIZING, UPGRADING, GOTOCONSOLE, UPDATEABLE }
+
+        public GuestToClientMessage GuestToClientValue
+        {
+            get
+            {
+                return gtc_stub_value;
+            }
+        }
+
+        public ClientToGuestMessage ClientToGuestValue
+        {
+            get
+            {
+                return ctg_stub_value;
+            }
+            set
+            {
+                ctg_stub_value = value;
+                NotifyPropertyChanged("ClientToGuestValue");
+            }
+        }
     }
 
     public struct VMStartupOptions

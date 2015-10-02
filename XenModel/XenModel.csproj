@@ -62,7 +62,7 @@
     <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
     <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
     <Compile Include="Actions\HealthCheck\TransferHealthCheckSettingAction.cs" />
-	<Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
+    <Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
     <Compile Include="Actions\HealthCheck\GetHealthCheckAnalysisResultAction.cs" />
     <Compile Include="Actions\HealthCheck\UploadServerStatusReportAction.cs" />
     <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
@@ -134,6 +134,7 @@
     <Compile Include="Actions\VM\ExportVmAction.cs" />
     <Compile Include="Actions\VM\GpuAssignAction.cs" />
     <Compile Include="Actions\VM\ImportVmAction.cs" />
+    <Compile Include="Actions\VM\UpgradeVmInsertIsoAction.cs" />
     <Compile Include="Actions\VM\ResumeAndStartVMsAction.cs" />
     <Compile Include="Actions\VM\SetVMStartupOptionsAction.cs" />
     <Compile Include="Actions\DR\StartVMsAndAppliancesAction.cs" />

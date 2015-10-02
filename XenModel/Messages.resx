@@ -11573,6 +11573,36 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATING_PROPERTIES" xml:space="preserve">
     <value>Updating...</value>
   </data>
+  <data name="UPGRADEVM_CONFIRM_UPGRADE_MESSAGE" xml:space="preserve">
+    <value>VMs may restart several times while the upgrade is in progress. Do you wish to begin the upgrade process?</value>
+  </data>
+  <data name="UPGRADEVM_CONFIRM_UPGRADE_MESSAGE_CAPTION" xml:space="preserve">
+    <value>Confirm upgrade</value>
+  </data>
+  <data name="UPGRADEVM_COULDNOTFIND_CD" xml:space="preserve">
+    <value>Could not find a DVD drive on the selected VM.</value>
+  </data>
+  <data name="UPGRADEVM_COULDNOTFIND_ISO" xml:space="preserve">
+    <value>Could not find the Management Agent install disc.</value>
+  </data>
+  <data name="UPGRADEVM_ISO_DONE" xml:space="preserve">
+    <value>Upgrade VM: Initializing, trying to autorun</value>
+  </data>
+  <data name="UPGRADEVM_ISO_STARTING" xml:space="preserve">
+    <value>Upgrade VM: Initializing</value>
+  </data>
+  <data name="UPGRADEVM_MULTIACTION_END" xml:space="preserve">
+    <value>Upgrade VMs: Initialized.</value>
+  </data>
+  <data name="UPGRADEVM_MULTIACTION_START" xml:space="preserve">
+    <value>Upgrade VMs: Initializing...</value>
+  </data>
+  <data name="UPGRADEVM_MULTIACTION_TITLE" xml:space="preserve">
+    <value>Upgrade VMs: Initializing</value>
+  </data>
+  <data name="UPGRADEVM_TITLE" xml:space="preserve">
+    <value>Upgrade VM {0}</value>
+  </data>
   <data name="UPGRADEWIZARD_PATCHING_TEXT" xml:space="preserve">
     <value>Apply Upgrade</value>
   </data>
@@ -11648,6 +11678,42 @@ Do you want to continue?</value>
   </data>
   <data name="UPGRADE_SR_WARNING" xml:space="preserve">
     <value>This SR needs upgrading</value>
+  </data>
+  <data name="UPGRADE_VMS_ACTIONS_ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="UPGRADE_VMS_ACTIONS_GO_TO_CONSOLE" xml:space="preserve">
+    <value>Go to Console...</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_INITIALIZING" xml:space="preserve">
+    <value>Initializing</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_INSTALL_MANAGEMENT_AGENT" xml:space="preserve">
+    <value>Management Agent not installed</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_UNKNOWN" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_UPDATEABLE" xml:space="preserve">
+    <value>Updateable</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_UPGRADABLE" xml:space="preserve">
+    <value>Upgradable</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_UPGRADED" xml:space="preserve">
+    <value>Upgraded</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_UPGRADING" xml:space="preserve">
+    <value>Upgrading</value>
+  </data>
+  <data name="UPGRADE_VMS_STATE_UPGRADING_GO_TO_CONSOLE" xml:space="preserve">
+    <value>Upgrading</value>
+  </data>
+  <data name="UPGRADE_VMS_TITLE" xml:space="preserve">
+    <value>Upgrade VMs in {0}</value>
   </data>
   <data name="UPGRADING" xml:space="preserve">
     <value>Upgrading</value>
