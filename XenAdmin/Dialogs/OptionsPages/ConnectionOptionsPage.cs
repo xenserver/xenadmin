@@ -49,7 +49,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         private const string ConnectionTabSettingsHeader = "Connection Tab Settings -";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private OptionsDialog optionsDialog;
-        private Regex r = new Regex("[a-zA-Z0-9.]+");
 
         public ConnectionOptionsPage()
         {
@@ -133,10 +132,10 @@ namespace XenAdmin.Dialogs.OptionsPages
                     return;
                 }
 
-                if (r.Match(ProxyAddressTextBox.Text).Length != ProxyAddressTextBox.Text.Length || ProxyAddressTextBox.Text == "")
-                    optionsDialog.okButton.Enabled = false;
-                else
-                    optionsDialog.okButton.Enabled = true;
+                var uriHostNameType = Uri.CheckHostName(ProxyAddressTextBox.Text);
+
+                optionsDialog.okButton.Enabled =  uriHostNameType != UriHostNameType.Unknown && uriHostNameType != UriHostNameType.IPv6;
+                return;
             }
             catch
             {
