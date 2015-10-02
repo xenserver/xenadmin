@@ -421,7 +421,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             Disk.virtual_size = long.Parse(diskNode.Attributes["size"].Value);
             SR sruuid = connection.Cache.Find_By_Uuid<SR>(diskNode.Attributes["sr"].Value);
-            SR sr = GetBeskDiskStorage(Connection, Disk.virtual_size, affinity, sruuid == null ? null : sruuid);
+            SR sr = GetBeskDiskStorage(Connection, Disk, affinity, sruuid == null ? null : sruuid);
             Disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
             Disk.type = (vdi_type)Enum.Parse(typeof(vdi_type), diskNode.Attributes["type"].Value);
             Device.userdevice = diskNode.Attributes["device"].Value;
@@ -447,7 +447,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             Connection = connection;
 
             Disk.virtual_size = vdi.virtual_size;
-            SR sr = GetBeskDiskStorage(Connection, Disk.virtual_size, affinity, Connection.Resolve(vdi.SR));
+            SR sr = GetBeskDiskStorage(Connection, vdi, affinity, Connection.Resolve(vdi.SR));
             Disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
             Disk.type = vdi.type;
             Device.userdevice = vbd.userdevice;
@@ -519,16 +519,16 @@ namespace XenAdmin.Wizards.NewVMWizard
         /// <summary>
         /// returns null if nothing suitable
         /// </summary>
-        private static SR GetBeskDiskStorage(IXenConnection connection, long diskSize, Host affinity, SR suggestion)
+        private static SR GetBeskDiskStorage(IXenConnection connection, VDI disk, Host affinity, SR suggestedSR)
         {
             // try suggestion
-            if (suggestion != null && suggestion.FreeSpace > diskSize && suggestion.CanBeSeenFrom(affinity))
-                return suggestion;
+            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(suggestedSR, disk))
+                return suggestedSR;
 
             // try default sr
-            SR def_sr = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
-            if (def_sr != null && def_sr.FreeSpace > diskSize && def_sr.CanBeSeenFrom(affinity))
-                return def_sr;
+            SR defaultSR = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
+            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(defaultSR, disk))
+                return defaultSR;
 
             // pick an sr
             foreach (SR sr in connection.Cache.SRs)
@@ -536,12 +536,36 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (!sr.CanCreateVmOn())
                     continue;
 
-                if (sr.FreeSpace > diskSize && sr.CanBeSeenFrom(affinity))
+                if (sr.IsThinProvisioned && sr.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(sr, disk))
                     return sr;
             }
 
             // there is nothing
             return null;
+        }
+
+        private static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI disk)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+
+            long initialAllocationVdi = -1;
+            if (disk.sm_config != null && disk.sm_config.ContainsKey("initial_allocation"))
+                long.TryParse(disk.sm_config["initial_allocation"], out initialAllocationVdi);
+
+            long initialAllocationSr = -1;
+            if (sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config != null)
+                long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
+            
+            return (initialAllocationSr > -1 || initialAllocationVdi > -1) ? Math.Max(initialAllocationSr, initialAllocationVdi) : disk.virtual_size;
+        }
+
+        private static bool IsSufficientFreeSpaceAvailableOnSrForVdi(SR sr, VDI disk)
+        {
+            if (sr == null)
+                return false;
+
+            return sr.FreeSpace > GetRequiredSpaceToCreateVdiOnSr(sr, disk);
         }
     }
 
