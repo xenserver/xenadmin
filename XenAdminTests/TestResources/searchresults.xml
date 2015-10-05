@@ -33,7 +33,7 @@
     </Object>
   </search>
   <search uuid="dead-beef-1234-vmswotools">
-    <Object ToString="XenServer Tools not installed">
+    <Object ToString="Not optimized">
       <IXenObject opaqueref="OpaqueRef:9425b6eb-75eb-0ad0-18f8-58539857cbea" />
       <IXenObject opaqueref="OpaqueRef:b9b3043c-357c-6cdb-39d0-0f432eaa9f2b" />
       <IXenObject opaqueref="OpaqueRef:2d076598-f6bc-025d-f2d6-c6717cf79b0a" />
