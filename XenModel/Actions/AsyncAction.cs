@@ -113,7 +113,7 @@ namespace XenAdmin.Actions
         /// using the basic credentials of the IXenConnection. Important - will throw exceptions similar to connection.NewSession
         /// </summary>
         /// <returns></returns>
-        public Session NewSession()
+        public override Session NewSession()
         {
             if (Connection == null)
                 return null;
@@ -387,99 +387,6 @@ namespace XenAdmin.Actions
         protected void BestEffort(ref Exception caught, Action func)
         {
             BestEffort(ref caught, Connection != null && Connection.ExpectDisruption, func);
-        }
-
-        /// <summary>
-        /// Overload for use by actions, using any sudo credentials on the retry.
-        /// Try and run the delegate.
-        /// If it fails with a web exception or invalid session, try again.
-        /// Only retry 60 times. 
-        /// </summary>
-        /// <param name="session"></param>
-        /// <param name="f"></param>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public object DoWithSessionRetry(ref Session session, Delegate f, params object[] p)
-        {
-            int retries = 60;
-
-            while (true)
-            {
-                try
-                {
-                    object[] ps = new object[p.Length + 1];
-
-                    ps[0] = session;
-
-                    for (int i = 0; i < p.Length; i++)
-                    {
-                        ps[i + 1] = p[i];
-                    }
-
-                    try
-                    {
-                        return f.DynamicInvoke(ps);
-                    }
-                    catch (TargetInvocationException exn)
-                    {
-                        throw exn.InnerException;
-                    }
-                }
-                catch (XmlRpcNullParameterException xmlExcept)
-                {
-                    log.ErrorFormat("XmlRpcNullParameterException in DoWithSessionRetry, retry {0}", retries);
-                    log.Error(xmlExcept, xmlExcept);
-                    throw new Exception(Messages.INVALID_SESSION);
-                }
-                catch (WebException we)
-                {
-                    log.ErrorFormat("WebException in DoWithSessionRetry, retry {0}", retries);
-                    log.Error(we, we);
-
-                    if (retries <= 0)
-                        throw;
-                }
-                catch (Failure failure)
-                {
-                    log.ErrorFormat("Failure in DoWithSessionRetry, retry {0}", retries);
-                    log.Error(failure, failure);
-
-                    if (retries <= 0)
-                        throw;
-
-                    if (failure.ErrorDescription.Count < 1 || failure.ErrorDescription[0] != XenAPI.Failure.SESSION_INVALID)
-                        throw;
-                }
-
-                Session newSession;
-
-                try
-                {
-                    // try to create a new TCP stream to use, as the other one has failed us
-                    newSession = NewSession();
-                    session = newSession;
-                }
-                catch (DisconnectionException e)
-                {
-                    if (!Connection.ExpectDisruption)
-                    {
-                        //this was not expected, throw the d/c exception
-                        throw e;
-                    }
-                    // We are expecting disruption on this connection. We need to wait for the hearbeat to recover.
-                    // Though after 60 retries we will give up in the previous try catch block
-                }
-                catch
-                {
-                    // do nothing
-                }
-
-
-
-                retries--;
-
-                Thread.Sleep(Connection.ExpectDisruption ? 500 : 100);
-            }
         }
 
         protected void AddCommonAPIMethodsToRoleCheck()

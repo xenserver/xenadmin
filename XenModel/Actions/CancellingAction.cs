@@ -33,6 +33,10 @@ using System;
 using System.Threading;
 using XenAdmin.Network;
 using XenAPI;
+using System.Collections.Generic;
+using System.Net;
+using CookComputing.XmlRpc;
+using System.Reflection;
 
 namespace XenAdmin.Actions
 {
@@ -92,6 +96,11 @@ namespace XenAdmin.Actions
             set { _session = value; }
         }
 
+        
+        private delegate void SetXenCenterUUIDDelegate(Session session, string _task, string uuid);
+        private delegate void SetAppliesToDelegate(Session session, string _task, List<string> applies_to);
+        private delegate void SetMeddlingActionTitleDelegate(Session session, string task, string title);
+
         /// <summary>
         /// The XenAPI.Task object (if any) that corresponds to this action.
         /// </summary>
@@ -104,9 +113,9 @@ namespace XenAdmin.Actions
                 _relatedTask = value;
                 if (_relatedTask != null && _session != null)
                 {
-                    Task.SetXenCenterUUID(_session, _relatedTask.opaque_ref, XenAdminConfigManager.Provider.XenCenterUUID);
-                    Task.SetAppliesTo(_session, _relatedTask.opaque_ref, AppliesTo);
-                    Task.SetMeddlingActionTitle(_session, _relatedTask.opaque_ref, Title);
+                    DoWithSessionRetry(ref _session, (SetXenCenterUUIDDelegate)Task.SetXenCenterUUID, _relatedTask.opaque_ref, XenAdminConfigManager.Provider.XenCenterUUID);
+                    DoWithSessionRetry(ref _session, (SetAppliesToDelegate)Task.SetAppliesTo, _relatedTask.opaque_ref, AppliesTo);
+                    DoWithSessionRetry(ref _session, (SetMeddlingActionTitleDelegate)Task.SetMeddlingActionTitle, _relatedTask.opaque_ref, Title);
                     RecomputeCanCancel();
                 }
             }
@@ -364,5 +373,104 @@ namespace XenAdmin.Actions
         /// </summary>
         protected virtual void Clean() { }
 
+        public virtual Session NewSession()
+        {
+            if (Connection == null)
+                return null;
+            return Connection.DuplicateSession();
+        }
+
+        /// <summary>
+        /// Overload for use by actions, using elevated credentials on the retry, if implemented in NewSession().
+        /// Try and run the delegate.
+        /// If it fails with a web exception or invalid session, try again.
+        /// Only retry 60 times. 
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="f"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public object DoWithSessionRetry(ref Session session, Delegate f, params object[] p)
+        {
+            int retries = 60;
+
+            while (true)
+            {
+                try
+                {
+                    object[] ps = new object[p.Length + 1];
+
+                    ps[0] = session;
+
+                    for (int i = 0; i < p.Length; i++)
+                    {
+                        ps[i + 1] = p[i];
+                    }
+
+                    try
+                    {
+                        return f.DynamicInvoke(ps);
+                    }
+                    catch (TargetInvocationException exn)
+                    {
+                        throw exn.InnerException;
+                    }
+                }
+                catch (XmlRpcNullParameterException xmlExcept)
+                {
+                    log.ErrorFormat("XmlRpcNullParameterException in DoWithSessionRetry, retry {0}", retries);
+                    log.Error(xmlExcept, xmlExcept);
+                    throw new Exception(Messages.INVALID_SESSION);
+                }
+                catch (WebException we)
+                {
+                    log.ErrorFormat("WebException in DoWithSessionRetry, retry {0}", retries);
+                    log.Error(we, we);
+
+                    if (retries <= 0)
+                        throw;
+                }
+                catch (Failure failure)
+                {
+                    log.ErrorFormat("Failure in DoWithSessionRetry, retry {0}", retries);
+                    log.Error(failure, failure);
+
+                    if (retries <= 0)
+                        throw;
+
+                    if (failure.ErrorDescription.Count < 1 || failure.ErrorDescription[0] != XenAPI.Failure.SESSION_INVALID)
+                        throw;
+                }
+
+                Session newSession;
+
+                try
+                {
+                    // try to create a new TCP stream to use, as the other one has failed us
+                    newSession = NewSession();
+                    session = newSession;
+                }
+                catch (DisconnectionException e)
+                {
+                    if (!Connection.ExpectDisruption)
+                    {
+                        //this was not expected, throw the d/c exception
+                        throw e;
+                    }
+                    // We are expecting disruption on this connection. We need to wait for the hearbeat to recover.
+                    // Though after 60 retries we will give up in the previous try catch block
+                }
+                catch
+                {
+                    // do nothing
+                }
+
+
+
+                retries--;
+
+                Thread.Sleep(Connection.ExpectDisruption ? 500 : 100);
+            }
+        }
     }
 }
