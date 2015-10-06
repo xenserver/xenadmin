@@ -2127,6 +2127,9 @@ namespace XenAdmin.Core
            if (vdi == null)
                throw new ArgumentNullException("vdi");
 
+           if (!sr.IsThinProvisioned)
+               return vdi.virtual_size;
+
            long initialAllocationVdi = -1;
            if (vdi.sm_config != null && vdi.sm_config.ContainsKey("initial_allocation"))
                long.TryParse(vdi.sm_config["initial_allocation"], out initialAllocationVdi);
