@@ -238,10 +238,11 @@ namespace XenAdmin.Wizards.NewVMWizard
                 else
                     totalDiskSize[sr.opaque_ref] = item.Disk.virtual_size;
 
+                var initialSpace = Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, item.Disk);
                 if (totalDiskInitialAllocation.ContainsKey(sr.opaque_ref))
-                    totalDiskInitialAllocation[sr.opaque_ref] += item.Disk.InitialAllocation;
+                    totalDiskInitialAllocation[sr.opaque_ref] +=  initialSpace;
                 else
-                    totalDiskInitialAllocation[sr.opaque_ref] = item.Disk.InitialAllocation;
+                    totalDiskInitialAllocation[sr.opaque_ref] = initialSpace;
             }
             DiskOverCommit overcommitedDisk = DiskOverCommit.None;
             foreach (DiskGridRowItem item in DisksGridView.Rows)
@@ -517,7 +518,9 @@ namespace XenAdmin.Wizards.NewVMWizard
         }
 
         /// <summary>
-        /// returns null if nothing suitable
+        /// Tries to find the best SR for the given VDI considering the suggestedSR which has priority over other SRs in this check.
+        /// SuggestedSR, default SR, other SRs are checked.
+        /// Returns first suitable SR or NULL.
         /// </summary>
         private static SR GetBeskDiskStorage(IXenConnection connection, VDI disk, Host affinity, SR suggestedSR)
         {
@@ -536,36 +539,21 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (!sr.CanCreateVmOn())
                     continue;
 
-                if (sr.IsThinProvisioned && sr.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(sr, disk))
+                if (sr.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(sr, disk))
                     return sr;
             }
 
-            // there is nothing
-            return null;
+            // there has been no suitable SR found
+            return null; 
         }
 
-        private static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI disk)
-        {
-            if (sr == null)
-                throw new ArgumentNullException("sr");
 
-            long initialAllocationVdi = -1;
-            if (disk.sm_config != null && disk.sm_config.ContainsKey("initial_allocation"))
-                long.TryParse(disk.sm_config["initial_allocation"], out initialAllocationVdi);
-
-            long initialAllocationSr = -1;
-            if (sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config != null)
-                long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
-            
-            return (initialAllocationSr > -1 || initialAllocationVdi > -1) ? Math.Max(initialAllocationSr, initialAllocationVdi) : disk.virtual_size;
-        }
-
+        /// <summary>
+        /// Checks whether there is enough space available on the SR to accommodate a VDI.
+        /// </summary>
         private static bool IsSufficientFreeSpaceAvailableOnSrForVdi(SR sr, VDI disk)
         {
-            if (sr == null)
-                return false;
-
-            return sr.FreeSpace > GetRequiredSpaceToCreateVdiOnSr(sr, disk);
+            return sr != null && !sr.IsFull && sr.FreeSpace > Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk);
         }
     }
 

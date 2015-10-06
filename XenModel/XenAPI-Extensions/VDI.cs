@@ -361,18 +361,6 @@ namespace XenAPI
             NO_RO_IMAGE,  // no part of the VDI is read-only => nothing to cache
             SR_OVERRIDE,  // the feature has been explicitly disabled for the VDI's SR
         }
-        
-        public long InitialAllocation
-        {
-            get
-            {
-                long initialAllocation;
-                if (sm_config != null && sm_config.ContainsKey("initial_allocation") && long.TryParse(sm_config["initial_allocation"], out initialAllocation))
-                {
-                    return initialAllocation;
-                }
-                return virtual_size;
-            }
-        }
+
     }
 }
