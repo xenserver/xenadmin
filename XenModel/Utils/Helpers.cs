@@ -2135,7 +2135,7 @@ namespace XenAdmin.Core
                long.TryParse(vdi.sm_config["initial_allocation"], out initialAllocationVdi);
 
            long initialAllocationSr = -1;
-           if (sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config != null)
+           if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation"))
                long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
 
            if (initialAllocationVdi > -1)
