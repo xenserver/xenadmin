@@ -2113,5 +2113,38 @@ namespace XenAdmin.Core
            var master = GetMaster(connection);
            return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
+
+       /// <summary>
+       /// This method returns the disk space required (bytes) on the provided SR for the provided VDI.
+       /// This method also considers thin provisioning. For thin provisioned SRs the provided sm_config in the VDI will be considered first, or it will use the values from the SR's sm_config in case the VDI does not have these set. For fully provisioned SRs the sm_config in the VDI will be ignored.
+       /// </summary>
+       /// <returns>Disk size required in bytes.</returns>
+       public static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI vdi)
+       {
+           if (sr == null)
+               throw new ArgumentNullException("sr");
+
+           if (vdi == null)
+               throw new ArgumentNullException("vdi");
+
+           if (!sr.IsThinProvisioned)
+               return vdi.virtual_size;
+
+           long initialAllocationVdi = -1;
+           if (vdi.sm_config != null && vdi.sm_config.ContainsKey("initial_allocation"))
+               long.TryParse(vdi.sm_config["initial_allocation"], out initialAllocationVdi);
+
+           long initialAllocationSr = -1;
+           if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation"))
+               long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
+
+           if (initialAllocationVdi > -1)
+               return initialAllocationVdi;
+
+           if (initialAllocationSr > -1)
+               return initialAllocationSr;
+
+           return vdi.virtual_size;
+       }
     }
 }

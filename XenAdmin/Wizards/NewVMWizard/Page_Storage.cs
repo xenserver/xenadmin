@@ -238,10 +238,11 @@ namespace XenAdmin.Wizards.NewVMWizard
                 else
                     totalDiskSize[sr.opaque_ref] = item.Disk.virtual_size;
 
+                var initialSpace = Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, item.Disk);
                 if (totalDiskInitialAllocation.ContainsKey(sr.opaque_ref))
-                    totalDiskInitialAllocation[sr.opaque_ref] += item.Disk.InitialAllocation;
+                    totalDiskInitialAllocation[sr.opaque_ref] +=  initialSpace;
                 else
-                    totalDiskInitialAllocation[sr.opaque_ref] = item.Disk.InitialAllocation;
+                    totalDiskInitialAllocation[sr.opaque_ref] = initialSpace;
             }
             DiskOverCommit overcommitedDisk = DiskOverCommit.None;
             foreach (DiskGridRowItem item in DisksGridView.Rows)
@@ -421,7 +422,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             Disk.virtual_size = long.Parse(diskNode.Attributes["size"].Value);
             SR sruuid = connection.Cache.Find_By_Uuid<SR>(diskNode.Attributes["sr"].Value);
-            SR sr = GetBeskDiskStorage(Connection, Disk.virtual_size, affinity, sruuid == null ? null : sruuid);
+            SR sr = GetBeskDiskStorage(Connection, Disk, affinity, sruuid == null ? null : sruuid);
             Disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
             Disk.type = (vdi_type)Enum.Parse(typeof(vdi_type), diskNode.Attributes["type"].Value);
             Device.userdevice = diskNode.Attributes["device"].Value;
@@ -447,7 +448,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             Connection = connection;
 
             Disk.virtual_size = vdi.virtual_size;
-            SR sr = GetBeskDiskStorage(Connection, Disk.virtual_size, affinity, Connection.Resolve(vdi.SR));
+            SR sr = GetBeskDiskStorage(Connection, vdi, affinity, Connection.Resolve(vdi.SR));
             Disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
             Disk.type = vdi.type;
             Device.userdevice = vbd.userdevice;
@@ -517,18 +518,20 @@ namespace XenAdmin.Wizards.NewVMWizard
         }
 
         /// <summary>
-        /// returns null if nothing suitable
+        /// Tries to find the best SR for the given VDI considering the suggestedSR which has priority over other SRs in this check.
+        /// SuggestedSR, default SR, other SRs are checked.
+        /// Returns first suitable SR or NULL.
         /// </summary>
-        private static SR GetBeskDiskStorage(IXenConnection connection, long diskSize, Host affinity, SR suggestion)
+        private static SR GetBeskDiskStorage(IXenConnection connection, VDI disk, Host affinity, SR suggestedSR)
         {
             // try suggestion
-            if (suggestion != null && suggestion.FreeSpace > diskSize && suggestion.CanBeSeenFrom(affinity))
-                return suggestion;
+            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(suggestedSR, disk))
+                return suggestedSR;
 
             // try default sr
-            SR def_sr = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
-            if (def_sr != null && def_sr.FreeSpace > diskSize && def_sr.CanBeSeenFrom(affinity))
-                return def_sr;
+            SR defaultSR = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
+            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(defaultSR, disk))
+                return defaultSR;
 
             // pick an sr
             foreach (SR sr in connection.Cache.SRs)
@@ -536,12 +539,21 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (!sr.CanCreateVmOn())
                     continue;
 
-                if (sr.FreeSpace > diskSize && sr.CanBeSeenFrom(affinity))
+                if (sr.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(sr, disk))
                     return sr;
             }
 
-            // there is nothing
-            return null;
+            // there has been no suitable SR found
+            return null; 
+        }
+
+
+        /// <summary>
+        /// Checks whether there is enough space available on the SR to accommodate a VDI.
+        /// </summary>
+        private static bool IsSufficientFreeSpaceAvailableOnSrForVdi(SR sr, VDI disk)
+        {
+            return sr != null && !sr.IsFull && sr.FreeSpace > Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk);
         }
     }
 
