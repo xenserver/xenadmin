@@ -266,7 +266,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.description] = Messages.DESCRIPTION;
             PropertyNames_i18n[PropertyNames.host] = Messages.SERVER;
             PropertyNames_i18n[PropertyNames.label] = Messages.NAME;
-            PropertyNames_i18n[PropertyNames.uuid] = Messages.UUID_SEARCH;
+            PropertyNames_i18n[PropertyNames.uuid] = Messages.UUID;
             PropertyNames_i18n[PropertyNames.networks] = Messages.NETWORK;
             PropertyNames_i18n[PropertyNames.os_name] = Messages.OPERATING_SYSTEM;
             PropertyNames_i18n[PropertyNames.pool] = Messages.POOL;

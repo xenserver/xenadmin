@@ -64,6 +64,7 @@ namespace XenAdmin.Controls.XenSearch
 			queryTypes.Add(new UuidQueryType(1, ObjectTypes.AllIncFolders & ~ObjectTypes.VDI | ObjectTypes.Appliance));  // but only actually shown for parent/child queries (see WantQueryType()). Too slow for VDIs and not very useful.
 			queryTypes.Add(new StringPropertyQueryType(1, ObjectTypes.AllIncFolders | ObjectTypes.Appliance, PropertyNames.label));
 			queryTypes.Add(new StringPropertyQueryType(1, ObjectTypes.AllExcFolders | ObjectTypes.Appliance, PropertyNames.description));
+            queryTypes.Add(new UuidStringQueryType(1, ObjectTypes.AllExcFolders));
             queryTypes.Add(new TagQueryType(1, ObjectTypes.AllExcFolders));
 
             // Replaced by new ParentChildQueryTypes below
@@ -1158,10 +1159,12 @@ namespace XenAdmin.Controls.XenSearch
             }
         }
 
+        // The object "Is" query, selected from a list of objects.
+        // Internally implemented using UUIDs.
         internal class UuidQueryType : PropertyQueryType<String>
         {
             internal UuidQueryType(int group, ObjectTypes appliesTo)
-                : base(group, appliesTo, PropertyNames.uuid)
+                : base(group, appliesTo, PropertyNames.uuid, Messages.UUID_SEARCH)
             {
             }
 
@@ -1182,6 +1185,24 @@ namespace XenAdmin.Controls.XenSearch
                     {
                         return ((string)propertyAccessor(entry) == stringQuery.query);
                     });
+            }
+        }
+
+        // Search for UUID as a string
+        internal class UuidStringQueryType: StringPropertyQueryType
+        {
+            internal UuidStringQueryType(int group, ObjectTypes appliesTo)
+                : base(group, appliesTo, PropertyNames.uuid)
+            { }
+
+            public override object[] MatchTypeComboButtonEntries
+            {
+                get {
+                    return new ExtraComboEntry[] { 
+                        new ExtraComboEntry(StringPropertyQuery.PropertyQueryType.startswith),
+                        new ExtraComboEntry(StringPropertyQuery.PropertyQueryType.exactmatch)
+                    };
+                }
             }
         }
 
