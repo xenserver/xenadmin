@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HealthCheckTests\CredentialTests.cs" />
+    <Compile Include="HealthCheckTests\RequestUploadTaskTests.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
     <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />
@@ -506,7 +508,12 @@
       <Project>{2D78AC6C-B867-484A-A447-3C6FC8B8EAF7}</Project>
       <Name>XenOvfApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XenServerHealthCheck\XenServerHealthCheck.csproj">
+      <Project>{deb3208d-1153-407c-8c99-0d8899be25a5}</Project>
+      <Name>XenServerHealthCheck</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
