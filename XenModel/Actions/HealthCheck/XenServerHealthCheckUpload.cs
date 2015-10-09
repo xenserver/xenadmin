@@ -66,10 +66,10 @@ namespace XenServerHealthCheck
         }
 
         // Request an upload and fetch the uploading id from CIS.
-        public string InitiateUpload(long size)
+        public string InitiateUpload(string fileName, long size)
         {
             // Request a new bundle upload to CIS server.
-            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString();
+            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName;
             log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", FULL_URL);
             Uri uri = new Uri(FULL_URL);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
@@ -173,7 +173,7 @@ namespace XenServerHealthCheck
             long size = fileInfo.Length;
 
             // Fetch the upload UUID from CIS server.
-            string uploadUuid = InitiateUpload(size);
+            string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size);
             if (string.IsNullOrEmpty(uploadUuid))
             {
                 log.ErrorFormat("Cannot fetch the upload UUID from CIS server");
