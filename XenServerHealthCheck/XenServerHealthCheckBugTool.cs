@@ -37,7 +37,9 @@ using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin;
+using System.Linq;
 using System.Globalization;
+using System.Xml;
 
 namespace XenServerHealthCheck
 {
@@ -45,41 +47,24 @@ namespace XenServerHealthCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        // The logs which are needed by Health Check.
-        private static readonly List<string> bugtoolParam =
-            new List<string> 
+        private static readonly List<string> reportExcluded =
+            new List<string>
             {
-                "xen-info:2",
-                "filesystem_summarise:2",
-                "xha-liveset:2",
-                "high-availability:2",
-                "firstboot:2",
-                "xenserver-databases:2",
-                "multipath:2",
-                "disk-info:2",
-                "xenserver-logs:2",
-                "xenserver-install:2",
-                "process-list:2",
-                "xapi:2",
-                "host-crashdump-logs:2",
-                "xapi-subprocess:2",
-                "pam:2",
-                "tapdisk-logs:2",
-                "kernel-info:2",
-                "xenserver-config:2",
-                "xenserver-domains:2",
-                "device-model:2",
-                "hardware-info:2",
-                "xenopsd:2",
-                "loopback-devices:2",
-                "system-services:2",
-                "system-logs:2",
-                "network-status:2",
-                "CVSM:2",
-                "xcp-rrdd-plugins:2",
-                "yum:2",
-                "network-config:2",
-                "boot-loader:2"
+                "blobs",
+                "vncterm",
+                "xapi-debug"
+            };
+
+        private static readonly Dictionary<string, int> reportWithVerbosity =
+            new Dictionary<string, int>
+            {
+                {"host-crashdump-logs", 2},
+                {"system-logs", 2},
+                {"tapdisk-logs", 2},
+                {"xapi", 2},
+                {"xcp-rrdd-plugins", 2},
+                {"xenserver-install", 2},
+                {"xenserver-logs", 2}
             };
 
         public readonly string outputFile;
@@ -103,6 +88,65 @@ namespace XenServerHealthCheck
         {
             if (connection == null || session == null)
                 return;
+
+            // Fetch the common capabilities of all hosts.
+            Dictionary<Host, List<string>> hostCapabilities = new Dictionary<Host, List<string>>();
+            foreach (Host host in connection.Cache.Hosts)
+            {
+                GetSystemStatusCapabilities action = new GetSystemStatusCapabilities(host);
+                action.RunExternal(session);
+                if (!action.Succeeded)
+                    return;
+
+                List<string> keys = new List<string>();
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(action.Result);
+                foreach (XmlNode node in doc.GetElementsByTagName("capability"))
+                {
+                    foreach (XmlAttribute a in node.Attributes)
+                    {
+                        if (a.Name == "key")
+                            keys.Add(a.Value);
+                    }
+                }
+                hostCapabilities[host] = keys;
+            }
+
+            List<string> combination = null;
+            foreach (List<string> capabilities in hostCapabilities.Values)
+            {
+                if (capabilities == null)
+                    continue;
+
+                if (combination == null)
+                {
+                    combination = capabilities;
+                    continue;
+                }
+
+                combination = Helpers.ListsCommonItems<string>(combination, capabilities);
+            }
+
+            if (combination == null || combination.Count <= 0)
+               return;
+
+            // The list of the reports which are required in Health Check Report.
+            List<string> reportIncluded = combination.Except(reportExcluded).ToList();
+
+            // Verbosity works for xen-bugtool since Dundee.
+            if (Helpers.DundeeOrGreater(connection))
+            {
+                List<string> verbReport = new List<string>(reportWithVerbosity.Keys);
+                int idx = -1;
+                for (int x = 0; x < verbReport.Count; x++)
+                {
+                    idx = reportIncluded.IndexOf(verbReport[x]);
+                    if (idx >= 0)
+                    {
+                        reportIncluded[idx] = reportIncluded[idx] + ":" + reportWithVerbosity[verbReport[x]].ToString();
+                    }
+                }
+            }
 
             // Ensure downloaded filenames are unique even for hosts with the same hostname: append a counter to the timestring
             string filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
@@ -134,7 +178,7 @@ namespace XenServerHealthCheck
                 }
 
                 HostWithStatus hostWithStatus = new HostWithStatus(host, 0);
-                SingleHostStatusAction statAction = new SingleHostStatusAction(hostWithStatus, bugtoolParam, filepath, timestring + "-" + ++i);
+                SingleHostStatusAction statAction = new SingleHostStatusAction(hostWithStatus, reportIncluded, filepath, timestring + "-" + ++i);
                 statAction.RunExternal(session);
             }
 
