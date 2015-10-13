@@ -1233,20 +1233,24 @@ namespace XenAdmin.TabPages
                 {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
 
-                    IEnumerable<CommandToolStripMenuItem> menuItems = null;
-                    if (sr.Provisioning == SrProvisioning.Thick && (sr.type == "lvmohba" || sr.type == "lvmoiscsi"))
+                    if (sr.type == "lvmohba" || sr.type == "lvmoiscsi")
                     {
-                        menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem> () { new SelectedItem(xenObject)} ), true) };
-                    }
-                    s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned 
-                        ? string.Format(Messages.SR_THIN_PROVISIONING_COMMITTED, sr.PercentageCommitted) 
-                        : Messages.SR_THICK_PROVISIONING, menuItems);
-
-                    if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
-                    {
-                        s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
-                                   Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
-                    }
+                        // add entries related to thin lvhd SRs
+                        IEnumerable<CommandToolStripMenuItem> menuItems = null;
+                        if (!sr.IsThinProvisioned)
+                        {
+                            menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem>() { new SelectedItem(xenObject) }), true) };
+                        }
+                        s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned 
+                            ? string.Format(Messages.SR_THIN_PROVISIONING_COMMITTED, sr.PercentageCommitted) 
+                            : Messages.SR_THICK_PROVISIONING, menuItems);
+                        
+                        if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
+                        {
+                            s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
+                                       Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
+                        }
+                    }                    
                 }
 
                 if (sr.GetScsiID() != null)
