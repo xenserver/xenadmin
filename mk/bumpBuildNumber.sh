@@ -41,7 +41,7 @@ if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     JENKINS_SERVER=http://tizon-1.xs.cbg.ccsi.eng.citrite.net:8080
 else
-    JENKINS_SERVER=http://tocco.uk.xensource.com:8080
+    JENKINS_SERVER=http://tocco.do.citrite.net:8080
 fi
 
 url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
