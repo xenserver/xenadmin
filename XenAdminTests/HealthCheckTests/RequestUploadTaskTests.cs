@@ -99,7 +99,7 @@ namespace XenAdminTests.HealthCheckTests
             CredentialReceiver.instance.UnInit();
         }
 
-        [Test]
+        [Test, Timeout( 100 * 1000 )]
         public void checkUploadLock()
         {
             DatabaseManager.CreateNewConnection(dbName);
