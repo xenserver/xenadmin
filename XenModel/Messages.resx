@@ -11679,6 +11679,9 @@ Do you want to continue?</value>
   <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="UPLOAD_PATCH_UPLOADED" xml:space="preserve">
+    <value>Uploaded</value>
+  </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your XenServer license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
 
