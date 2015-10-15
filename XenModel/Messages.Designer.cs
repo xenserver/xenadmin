@@ -33717,6 +33717,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uploaded.
+        /// </summary>
+        public static string UPLOAD_PATCH_UPLOADED {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uploading Update....
         /// </summary>
         public static string UPLOADING_PATCH {
