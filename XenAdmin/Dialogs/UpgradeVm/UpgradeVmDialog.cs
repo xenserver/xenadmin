@@ -58,6 +58,7 @@ namespace XenAdmin.Dialogs
         private readonly IMainWindow mainWindow = null;
         private readonly IXenConnection xenConnection = null;
 
+        private bool firstRun = true;
 
         public UpgradeVmDialog(SelectedItemCollection selection, IMainWindow mainWindow)
         {
@@ -77,7 +78,7 @@ namespace XenAdmin.Dialogs
 
         private class VmRow : DataGridViewRow
         {
-            private DataGridViewCheckBoxCell checkboxCell = new DataGridViewCheckBoxCell() { TrueValue = true, FalseValue = false };
+            private DataGridViewCheckBoxCell checkboxCell = new DataGridViewCheckBoxCell() { TrueValue = true, FalseValue = false, Value = false };
             private DataGridViewTextAndImageCell nameCell = new DataGridViewTextAndImageCell();
             private DataGridViewTextAndImageCell statusCell = new DataGridViewTextAndImageCell();
             private DataGridViewLinkCell actionCell = new DataGridViewLinkCell();
@@ -143,7 +144,6 @@ namespace XenAdmin.Dialogs
             {
                 Program.Invoke(Program.MainWindow, delegate()
                 {
-                    this.Checked = CanBeUpgraded();
                     this.Selectable = CanBeUpgraded();
 
                     nameCell.Value = VM.Name;
@@ -283,16 +283,25 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            Program.Invoke(this, () => RefreshGrid((List<DataGridViewRow>)e.Result));
+            Program.Invoke(this, () => RefreshGrid((List<VmRow>)e.Result));
         }
 
-        private void RefreshGrid(List<DataGridViewRow> rows)
+        private void RefreshGrid(List<VmRow> rows)
         {
             Program.AssertOnEventThread();
 
             vmsDataGridView.SuspendLayout();
             try
             {
+                List<VM> checkedVMs = new List<VM>();
+
+                foreach (var row in vmsDataGridView.Rows)
+                {
+                    var vmrow = row as VmRow;
+                    if (vmrow != null && vmrow.Checked)
+                        checkedVMs.Add(vmrow.VM);
+                }
+
                 vmsDataGridView.Rows.Clear();
 
                 foreach (var row in rows)
@@ -300,6 +309,9 @@ namespace XenAdmin.Dialogs
                     if (vmsDataGridView.ColumnCount > 0)
                     {
                         vmsDataGridView.Rows.Add(row);
+
+                        if (checkedVMs.Contains(row.VM) || firstRun)
+                            row.Checked = true;
                     }
                 }
 
@@ -309,13 +321,14 @@ namespace XenAdmin.Dialogs
             }
             finally
             {
+                firstRun = false;
                 vmsDataGridView.ResumeLayout();
             }
         }
 
         object worker_DoWork(object sender, object argument)
         {
-            var list = new List<DataGridViewRow>();
+            var list = new List<VmRow>();
 
             if (xenConnection == null || !xenConnection.IsConnected || !Helpers.DundeeOrGreater(xenConnection))
                 return list;
@@ -356,6 +369,13 @@ namespace XenAdmin.Dialogs
         private void UpgradeVmDialog_Load(object sender, EventArgs e)
         {
             LoadVms();
+
+            foreach (var row in vmsDataGridView.Rows)
+            {
+                var vmRow = row as VmRow;
+                if (vmRow != null)
+                    vmRow.Checked = true;
+            }
 
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
