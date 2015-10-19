@@ -110,6 +110,7 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\UpgradeVmLaunchUICommand.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
@@ -270,6 +271,12 @@
     </Compile>
     <Compile Include="Dialogs\ScreenShotDialog.Designer.cs">
       <DependentUpon>ScreenShotDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UpgradeVm\UpgradeVmDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UpgradeVm\UpgradeVmDialog.Designer.cs">
+      <DependentUpon>UpgradeVmDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\UpsellDialog.cs">
       <SubType>Form</SubType>
@@ -1566,6 +1573,15 @@
     <EmbeddedResource Include="Dialogs\ReconnectAsDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UpgradeVm\UpgradeVmDialog.ja.resx">
+      <DependentUpon>UpgradeVmDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UpgradeVm\UpgradeVmDialog.resx">
+      <DependentUpon>UpgradeVmDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UpgradeVm\UpgradeVmDialog.zh-CN.resx">
+      <DependentUpon>UpgradeVmDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\MoveVMDialog.resx">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
