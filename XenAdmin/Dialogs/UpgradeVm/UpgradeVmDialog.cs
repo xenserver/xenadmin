@@ -62,15 +62,16 @@ namespace XenAdmin.Dialogs
         public UpgradeVmDialog(SelectedItemCollection selection, IMainWindow mainWindow)
         {
             this.selection = selection;
-
-            var pools = selection.AsXenObjects<Pool>();
-            if (pools.Count > 0)
-            {
-                var pool = pools[0];
-                xenConnection = pool.Connection;
-            }
-
             this.mainWindow = mainWindow;
+
+            IXenConnection connection = null;
+
+            if (selection != null && selection.Count == 1 && selection[0].XenObject is Pool || selection[0].XenObject is Host)
+                    connection = selection[0].XenObject.Connection;
+
+            if (connection != null && connection.IsConnected && Helpers.DundeeOrGreater(connection))
+                xenConnection = connection;
+
             InitializeComponent();
         }
 
@@ -203,16 +204,16 @@ namespace XenAdmin.Dialogs
 
         private enum VmUpgradeState 
         {
-            UNKNOWN = 0,
-            ERROR = 1,
-            UPGRADABLE = 2,
-            INSTALL_MANAGEMENT_AGENT = 3,
-            UPGRADING = 4,
-            UPGRADING_GO_TO_CONSOLE = 5,
-            UPGRADED = 6,
-            INITIALIZING = 7,
-            NOT_SHOWN = 8,
-            UPDATEABLE = 9,
+            UNKNOWN,
+            ERROR,
+            UPGRADABLE,
+            INSTALL_MANAGEMENT_AGENT,
+            UPGRADING,
+            UPGRADING_GO_TO_CONSOLE,
+            UPGRADED,
+            INITIALIZING,
+            NOT_SHOWN,
+            UPDATEABLE,
         }
 
         private static class VMStateHelper
@@ -255,17 +256,14 @@ namespace XenAdmin.Dialogs
 
         private void ShowVmConsole(VM vm)
         {
-            mainWindow.Invoke(delegate
+            if (mainWindow.SelectObjectInTree(vm))
             {
-                if (mainWindow.SelectObjectInTree(vm))
-                {
-                    mainWindow.SwitchToTab(MainWindow.Tab.Console);
-                }
-                else
-                {
-                    log.Error("Could not find VM in the TreeView.");
-                }
-            });
+                mainWindow.SwitchToTab(MainWindow.Tab.Console);
+            }
+            else
+            {
+                log.Error("Could not find VM in the TreeView.");
+            }
 
             var mw = mainWindow.Form as MainWindow;
             var vncView = mw.ConsolePanel.activeVNCView;
@@ -335,7 +333,7 @@ namespace XenAdmin.Dialogs
             return list;
         }
 
-        void VM_BatchCollectionChanged(object sender, EventArgs e)
+        void VM_CollectionChanged(object sender, EventArgs e)
         {
             LoadVms();
         }
@@ -361,7 +359,7 @@ namespace XenAdmin.Dialogs
 
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                xenConnection.Cache.RegisterBatchCollectionChanged<VM>(VM_BatchCollectionChanged);
+                xenConnection.Cache.RegisterCollectionChanged<VM>(VM_CollectionChanged);
             }
         }
 
@@ -379,7 +377,7 @@ namespace XenAdmin.Dialogs
         {
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                xenConnection.Cache.DeregisterBatchCollectionChanged<VM>(VM_BatchCollectionChanged);
+                xenConnection.Cache.DeregisterCollectionChanged<VM>(VM_CollectionChanged);
             }
         }
 

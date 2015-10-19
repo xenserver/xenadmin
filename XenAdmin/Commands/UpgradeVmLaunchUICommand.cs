@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Commands
@@ -29,10 +30,15 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            var s = selection.AsXenObjects<Pool>();
+            IXenConnection connection = null;
 
-            return
-                s.Count > 0 && s[0] as Pool != null && s[0].Connection != null && s[0].Connection.IsConnected && Helpers.DundeeOrGreater(s[0].Connection);
+            if (selection != null && selection.Count == 1)
+            {
+                if (selection[0].XenObject is Pool || selection[0].XenObject is Host) 
+                    connection = selection[0].XenObject.Connection;
+            }
+
+            return connection != null && connection.IsConnected && Helpers.DundeeOrGreater(connection);
         }
     }
 }
