@@ -370,13 +370,6 @@ namespace XenAdmin.Dialogs
         {
             LoadVms();
 
-            foreach (var row in vmsDataGridView.Rows)
-            {
-                var vmRow = row as VmRow;
-                if (vmRow != null)
-                    vmRow.Checked = true;
-            }
-
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
                 xenConnection.Cache.RegisterCollectionChanged<VM>(VM_CollectionChanged);
