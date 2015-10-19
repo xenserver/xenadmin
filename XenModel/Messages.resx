@@ -3854,6 +3854,12 @@ This will also delete its subfolders.</value>
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
     <value>Only dismiss &amp;visible</value>
   </data>
+  <data name="DISPLAY" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="DISPLAY_DETAILS" xml:space="preserve">
+    <value>Display options</value>
+  </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>A memory range cannot be set because XenServer Tools are not installed on this VM.</value>
   </data>
@@ -5371,9 +5377,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_UNAVAILABLE" xml:space="preserve">
     <value>Not available</value>
   </data>
-  <data name="GRAPHS" xml:space="preserve">
-    <value>Graphs</value>
-  </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
     <value>It is not possible to add new performance graphs on VM '{0}' as the VM is not running.</value>
   </data>
@@ -5391,9 +5394,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="GRAPHS_DEFAULT_NAME_NETWORK" xml:space="preserve">
     <value>Network Performance</value>
-  </data>
-  <data name="GRAPHS_DESC" xml:space="preserve">
-    <value>Graph appearance</value>
   </data>
   <data name="GRAPHS_DETAILS_TITLE" xml:space="preserve">
     <value>'{0}' Details</value>
@@ -8781,6 +8781,12 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="OPTIMIZED" xml:space="preserve">
     <value>Optimized</value>
+  </data>
+  <data name="OPTIONS_SEARCH" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="OPTIONS_SEARCH_DESC" xml:space="preserve">
+    <value>Search settings</value>
   </data>
   <data name="OUT_OF_DATE" xml:space="preserve">
     <value>Out of date</value>
