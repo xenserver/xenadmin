@@ -219,6 +219,7 @@ namespace XenAPI
         {
             try
             {
+                remove_from_other_config(session, _task, "applies_to"); 
                 add_to_other_config(session, _task, "applies_to", string.Join(",", applies_to.ToArray()));
             }
             catch (XenAPI.Failure f)
@@ -259,6 +260,7 @@ namespace XenAPI
 
             try
             {
+                remove_from_other_config(session, task, XenCenterMeddlingActionTitleKey); 
                 add_to_other_config(session, task, XenCenterMeddlingActionTitleKey, title);
             }
             catch (Failure f)
@@ -284,6 +286,7 @@ namespace XenAPI
         {
             try
             {
+                remove_from_other_config(session, _task, "XenCenterUUID");
                 add_to_other_config(session, _task, "XenCenterUUID", uuid);
             }
             catch (XenAPI.Failure f)
