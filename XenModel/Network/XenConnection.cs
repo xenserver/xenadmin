@@ -1278,9 +1278,17 @@ namespace XenAdmin.Network
                             XenObjectDownloader.GetEvents(eventNextSession, eventQueue, task.GetCancelled, legacyEventSystem, ref token);
                             eventsExceptionLogged = false;
                         }
-                        catch (WebException exn)
+                        catch (Exception exn)
                         {
-                            if (ExpectDisruption && (exn.Status == WebExceptionStatus.KeepAliveFailure || exn.Status == WebExceptionStatus.ConnectFailure))
+                            if (!ExpectDisruption)
+                                throw;
+
+                            log.DebugFormat("Exception (disruption is expected) in XenObjectDownloader.GetEvents: {0}", exn.GetType().Name);
+
+                            // ignoring some exceptions when disruption is expected
+                            if (exn is XmlRpcIllFormedXmlException || 
+                                exn is System.IO.IOException || 
+                                (exn is WebException && ((exn as WebException).Status == WebExceptionStatus.KeepAliveFailure || (exn as WebException).Status == WebExceptionStatus.ConnectFailure)))
                             {
                                 if (!eventsExceptionLogged)
                                 {
