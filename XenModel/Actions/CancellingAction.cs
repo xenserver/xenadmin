@@ -422,6 +422,14 @@ namespace XenAdmin.Actions
                     log.Error(xmlExcept, xmlExcept);
                     throw new Exception(Messages.INVALID_SESSION);
                 }
+                catch (XmlRpcIllFormedXmlException xmlRpcIllFormedXmlException)
+                {
+                    log.ErrorFormat("XmlRpcIllFormedXmlException in DoWithSessionRetry, retry {0}", retries);
+                    log.Error(xmlRpcIllFormedXmlException, xmlRpcIllFormedXmlException);
+
+                    if (!Connection.ExpectDisruption || retries <= 0)
+                        throw;
+                }
                 catch (WebException we)
                 {
                     log.ErrorFormat("WebException in DoWithSessionRetry, retry {0}", retries);
