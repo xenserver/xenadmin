@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2013-07-02 12:29:32.138358700 +0100
-+++ XenCenter.l10n.wxs	2013-07-02 12:31:36.023746000 +0100
+--- XenCenter.wxs	Fri Oct  9 13:15:27 2015
++++ XenCenter.l10n.wxs	Fri Oct  9 13:15:56 2015
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -39,7 +39,7 @@
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
-@@ -88,64 +88,64 @@
+@@ -93,64 +93,64 @@
                              <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
                              <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
                              <File Id="XsupdateIcon" Source="..\XenAdmin\Images\file_updates.ico" />
@@ -127,16 +127,10 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -164,6 +164,30 @@
-                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
-                                 <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
-                                 <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
-+                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.ja.chm" />
-+                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />
-+                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.zh-CN.chm" />
-+                                <File Id="WLBScCHM" Source="..\XenAdmin\bin\Release\Help\WLB.zh-CN.chm" />
-+                            </Component>
-+                        </Directory>
+@@ -165,6 +165,26 @@
+                                 <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
+                             </Component>
+                         </Directory>
 +                        <Directory Id="ja" Name="ja">
 +                            <Component Id="JaResources" Guid="D3ADD803-AF0B-4787-AC29-C6387FFF403B">
 +                                <File Id="JaResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
@@ -155,19 +149,21 @@
 +                                <File Id="ScMicRepVwrPrcObjResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
 +                                <File Id="ScXOResourcesDLL" Source="..\XenOvfApi\bin\Release\zh-CN\XenOvf.resources.dll" />
 +                                <File Id="ScXOTResourcesDLL" Source="..\XenOvfTransport\bin\Release\zh-CN\XenOvfTransport.resources.dll" />
-                             </Component>
-                         </Directory>
++                            </Component>
++                        </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -247,6 +271,8 @@
-         <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
+                             <Component Id="ExternalToolsComponent" Guid="D5FC0252-C97B-46e7-9633-A6B68EDB6654">
+                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
+@@ -245,6 +265,8 @@
+ 	
+         <Feature Id="MainProgram" Title="Citrix XenCenter" Description="Citrix XenCenter" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
-             <ComponentRef Id="HelpFiles" />
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
              <ComponentRef Id="ReportViewer" />
              <ComponentRef Id="TestResources" />
              <ComponentRef Id="SchemasFilesComponent" />
-@@ -262,7 +288,7 @@
+@@ -264,7 +286,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />

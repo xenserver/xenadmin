@@ -165,12 +165,6 @@
                                 <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
                             </Component>
                         </Directory>
-                        <Directory Id="Help" Name="Help">
-                            <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
-                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
-                            </Component>
-                        </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                             <Component Id="ExternalToolsComponent" Guid="D5FC0252-C97B-46e7-9633-A6B68EDB6654">
                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
@@ -251,7 +245,6 @@
 	
         <Feature Id="MainProgram" Title="Citrix XenCenter" Description="Citrix XenCenter" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
-            <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="TestResources" />
             <ComponentRef Id="SchemasFilesComponent" />
