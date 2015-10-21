@@ -57,7 +57,6 @@ namespace XenAdminTests.CommandTests
         private EditTagsCommandTest tester = new EditTagsCommandTest();
 
         [Test]
-        [Ignore]
         public void TestMultipleSelectAddTag()
         {
             tester.TestMultipleSelectAddTag();
