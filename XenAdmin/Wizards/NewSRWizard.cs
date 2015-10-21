@@ -397,6 +397,7 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(CifsFrontend))
             {
+                m_srWizardType.UUID = xenTabPageCifs.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageCifs.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageCifs.SrDescription);
             }
