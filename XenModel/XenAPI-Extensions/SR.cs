@@ -959,17 +959,6 @@ namespace XenAPI
             }
         }
 
-        public SrProvisioning Provisioning
-        {
-            get
-            {
-                string allocation = Get(sm_config, "allocation");
-                return string.IsNullOrEmpty(allocation) || allocation == "thick"
-                           ? SrProvisioning.Thick
-                           : SrProvisioning.Thin;
-            }
-        }
-
         public Icons GetIcon
         {
             get
@@ -1151,11 +1140,5 @@ namespace XenAPI
         }
 
         #endregion
-    }
-
-    public enum SrProvisioning
-    {
-        Thick,
-        Thin
     }
 }
