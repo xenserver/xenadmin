@@ -81,6 +81,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                 if (planAction is UpgradeHostPlanAction)
                                 {
                                     Host hostAfterReboot = host.Connection.Resolve(new XenRef<Host>(host.opaque_ref));
+                                    if (hostAfterReboot == null)
+                                    {
+                                        log.InfoFormat("Host '{0}' cannot be resolved. Try to resolve it again with timeout", host.Name);
+                                        hostAfterReboot = (planAction as UpgradeHostPlanAction).Host;
+                                    }
                                     if (hostAfterReboot != null && Helpers.SameServerVersion(hostAfterReboot, hostVersion))
                                     {
                                         log.ErrorFormat("Host '{0}' rebooted with the same version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
