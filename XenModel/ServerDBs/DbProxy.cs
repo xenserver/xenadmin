@@ -277,8 +277,14 @@ namespace XenAdmin.ServerDBs
                     }
 
                 case "remove_from_other_config":
-                    RemoveFromDictionary(pmi.TypeName, (string)args[1], "other_config", args[2]);
-                    return new Response<string>("");
+                    {
+                        string uuid = (string)args[1];
+                        if (!uuid.StartsWith("task"))  // ignore other_config for tasks (used to keep track of meddling actions)
+                        {
+                            RemoveFromDictionary(pmi.TypeName, (string)args[1], "other_config", args[2]);
+                        }
+                        return new Response<string>("");
+                    }
 
                 case "add_to_gui_config":
                     AddToDictionary(pmi.TypeName, (string)args[1], "gui_config", args[2], args[3]);
