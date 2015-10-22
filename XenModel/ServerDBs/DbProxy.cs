@@ -52,6 +52,7 @@ namespace XenAdmin.ServerDBs
 
         public readonly Db db;
         public readonly List<Proxy_Event> eventsList = new List<Proxy_Event>();
+        public readonly object eventsListLock = new object();
         private readonly string url;
         public readonly IXenConnection connection;
         public volatile bool MarkToDisconnect;
@@ -276,8 +277,14 @@ namespace XenAdmin.ServerDBs
                     }
 
                 case "remove_from_other_config":
-                    RemoveFromDictionary(pmi.TypeName, (string)args[1], "other_config", args[2]);
-                    return new Response<string>("");
+                    {
+                        string uuid = (string)args[1];
+                        if (!uuid.StartsWith("task"))  // ignore other_config for tasks (used to keep track of meddling actions)
+                        {
+                            RemoveFromDictionary(pmi.TypeName, (string)args[1], "other_config", args[2]);
+                        }
+                        return new Response<string>("");
+                    }
 
                 case "add_to_gui_config":
                     AddToDictionary(pmi.TypeName, (string)args[1], "gui_config", args[2], args[3]);
@@ -429,8 +436,11 @@ namespace XenAdmin.ServerDBs
             object proxy = get_record(typeName, opaqueRef, false);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
-            eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "mod", proxyT, proxy));
-        }
+            lock (eventsListLock)
+            {
+                eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "mod", proxyT, proxy));
+            }
+        } 
 
         private void EditObject(string typeName, string opaqueRef, string field, object new_value)
         {
@@ -624,7 +634,10 @@ namespace XenAdmin.ServerDBs
             object proxy = get_record(typeName, opaqueRef, false);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
-            eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "add", proxyT, proxy));
+            lock (eventsListLock)
+            {
+                eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "add", proxyT, proxy));
+            }
         }
 
         public void SendDestroyObject(string typeName, string opaqueRef)
@@ -633,7 +646,10 @@ namespace XenAdmin.ServerDBs
             Type proxyT = TypeCache.GetProxyType(typeName);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
-            eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "del", proxyT, Activator.CreateInstance(proxyT)));
+            lock (eventsListLock)
+            {
+                eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "del", proxyT, Activator.CreateInstance(proxyT)));
+            }
         }
 
         public void SendModObject(string typeName, string opaqueRef)
@@ -643,7 +659,10 @@ namespace XenAdmin.ServerDBs
             object proxy = get_record(typeName, opaqueRef, false);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
-            eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "mod", proxyT, proxy));
+            lock (eventsListLock)
+            {
+                eventsList.Add(MakeProxyEvent(typeName, opaqueRef, "mod", proxyT, proxy));
+            }
         }
 
         /// <summary>

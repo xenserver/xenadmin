@@ -59,12 +59,19 @@ namespace XenAdmin.ServerDBs.FakeAPI
 
             for (int iter = 0; iter < 600; ++iter)
             {
-                proxy.eventsList.AddRange(_highLoadEventGenerator.GetHighLoadEvents());
-
-                if (proxy.eventsList.Count > 0)
+                List<Proxy_Event> eventsAlias = null;
+                lock (proxy.eventsListLock)
                 {
-                    List<Proxy_Event> eventsAlias = new List<Proxy_Event>(proxy.eventsList);
-                    proxy.eventsList.Clear();
+                    proxy.eventsList.AddRange(_highLoadEventGenerator.GetHighLoadEvents());
+
+                    if (proxy.eventsList.Count > 0)
+                    {
+                        eventsAlias = new List<Proxy_Event>(proxy.eventsList);
+                        proxy.eventsList.Clear();
+                    }
+                }
+                if (eventsAlias != null && eventsAlias.Count > 0)
+                {
                     Proxy_Event[] eventarr = eventsAlias.ToArray();
                     return new Response<Proxy_Event[]>(eventarr);
                 }
@@ -100,16 +107,23 @@ namespace XenAdmin.ServerDBs.FakeAPI
 
             for (int iter = 0; iter < iterations; ++iter)
             {
-                proxy.eventsList.AddRange(_token == ""
-                                              ? _highLoadEventGenerator.GetAddEvents(_classes)
-                                              : _highLoadEventGenerator.GetHighLoadEvents(_classes, "mod"));
-
-                if (proxy.eventsList.Count > 0)
+                List<Proxy_Event> eventsAlias = null;
+                lock (proxy.eventsListLock)
                 {
-                    List<Proxy_Event> eventsAlias = new List<Proxy_Event>(proxy.eventsList);
-                    proxy.eventsList.Clear();
+                    proxy.eventsList.AddRange(_token == ""
+                                                  ? _highLoadEventGenerator.GetAddEvents(_classes)
+                                                  : _highLoadEventGenerator.GetHighLoadEvents(_classes, "mod"));
+
+                    if (proxy.eventsList.Count > 0)
+                    {
+                        eventsAlias = new List<Proxy_Event>(proxy.eventsList);
+                        proxy.eventsList.Clear();
+                    }
+                }
+                if (eventsAlias != null && eventsAlias.Count > 0)
+                {
                     Proxy_Event[] eventarr = eventsAlias.ToArray();
-                    var eventStruct = new Events {events = eventarr, valid_ref_counts = new object(), token = "1,1.0"};
+                    var eventStruct = new Events { events = eventarr, valid_ref_counts = new object(), token = "1,1.0" };
                     return new Response<Events>(eventStruct);
                 }
 
