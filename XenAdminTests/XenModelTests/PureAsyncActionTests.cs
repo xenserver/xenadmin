@@ -72,6 +72,10 @@ namespace XenAdminTests.XenModelTests
                 x =>
                 x.task_add_to_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                                            It.IsAny<string>())).Returns(new Response<string>(string.Empty));
+            mockProxy.Setup(
+                x =>
+                x.task_remove_from_other_config(It.IsAny<string>(), It.IsAny<string>(),
+                                           It.IsAny<string>())).Returns(new Response<string>(string.Empty));
             mockProxy.Setup(x => x.task_get_record(It.IsAny<string>(), It.IsAny<string>())).Returns(
                 new Response<Proxy_Task>(new Proxy_Task()
                                              {
