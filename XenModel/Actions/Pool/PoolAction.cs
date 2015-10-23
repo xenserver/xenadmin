@@ -86,6 +86,10 @@ namespace XenAdmin.Actions
             // Mask the CPUs, and reboot the hosts (simultaneously, as they must all be on separate connections)
             foreach (Host host in hostsToCpuMask)
             {
+                // No CPU masking is needed for Dundee or greater hosts 
+                if (Helpers.DundeeOrGreater(host))
+                    continue;
+
                 Host.set_cpu_features(host.Connection.Session, host.opaque_ref, poolMaster.cpu_info["features"]);
                 RebootHostAction action = new RebootHostAction(host, acceptNTolChanges);
                 rebootActions.Add(action);
