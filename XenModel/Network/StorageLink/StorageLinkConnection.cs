@@ -219,31 +219,6 @@ namespace XenAdmin.Network.StorageLink
             }
         }
 
-        public StorageLinkJobInfo AddStorageSystem(StorageLinkAdapter adapter, int port, string address, string username, string password, string ns)
-        {
-            Util.ThrowIfParameterNull(adapter, "adapter");
-
-            managementCredentials cred = new managementCredentials();
-            cred.storageAdapterId = adapter.opaque_ref;
-            cred.portNumber = port;
-            cred.ipAddress = address;
-            cred.username = username;
-            cred.password = password;
-            cred.ns = ns;
-
-            managementCredentials credInfo = new managementCredentials();
-
-            try
-            {
-                jobInfo jobInfo = _service.addStorageManagementCredentials(cred, (int)StorageLinkEnums.FlagsType.ASYNC, out credInfo);
-                return GetJobInfo(jobInfo.jobId);
-            }
-            catch (SoapException e)
-            {
-                throw ConvertSoapException(e);
-            }
-        }
-
         public void CancelJob(string jobId)
         {
             try
@@ -256,31 +231,6 @@ namespace XenAdmin.Network.StorageLink
             catch (WebException)
             {
             }
-        }
-
-        public StorageLinkJobInfo GetJobInfo(string jobId)
-        {
-            jobInfo jobInfo = _service.getJobInfo(jobId, string.Empty, 0);
-            string errorText = null;
-
-            if (jobInfo.errInfo != null)
-            {
-                var sb = new StringBuilder();
-
-                if (jobInfo.errInfo.errorMessage != null)
-                {
-                    sb.AppendLine("Message: " + jobInfo.errInfo.errorMessage.defaultMessage);
-                }
-                sb.AppendLine("File:    " + jobInfo.errInfo.errorFile);
-                sb.AppendLine("Line:    " + jobInfo.errInfo.errorLine);
-                sb.AppendLine("Func:    " + jobInfo.errInfo.errorFunction);
-
-                log.Error("CSLG Exception " + sb.ToString());
-
-                errorText = jobInfo.errInfo.errorMessage.defaultMessage;
-            }
-
-            return new StorageLinkJobInfo(this, jobId, (int)jobInfo.progress, jobInfo.name.defaultMessage, jobInfo.description.defaultMessage, jobInfo.completedDateStamp, (StorageLinkEnums.JobState)jobInfo.jobStatus, errorText);
         }
 
         private static Exception ConvertSoapException(SoapException e)
@@ -304,88 +254,6 @@ namespace XenAdmin.Network.StorageLink
                 return new Failure(text);
             }
             return e;
-        }
-
-        public void SetLicenseServer(string address, int port)
-        {
-            Util.ThrowIfStringParameterNullOrEmpty(address, "address");
-
-            try
-            {
-                _service.setLicenseServerInfo(address, port);
-            }
-            catch (SoapException e)
-            {
-                throw ConvertSoapException(e);
-            }
-        }
-
-        public void GetLicenseServer(out string address, out int port)
-        {
-            licenseServerInfo info = _service.getLicenseServerInfo();
-
-            address = info.server;
-            port = (int)info.port;
-        }
-
-        public List<StorageLinkRepository> FullSRRescan()
-        {
-            try
-            {
-                var repositories = new List<StorageLinkRepository>();
-
-                storageRepositoryInfo[] srs;
-                _service.enumStorageRepositories(string.Empty, string.Empty, (int)StorageLinkEnums.FlagsType.REFRESH_CACHE, out srs);
-
-                foreach (storageRepositoryInfo sr in srs)
-                {
-                    if (sr.storageSystemInfo != null && sr.storagePoolInfo != null && !string.IsNullOrEmpty(sr.storageSystemInfo.objectId) && !string.IsNullOrEmpty(sr.storagePoolInfo.objectId))
-                    {
-                        repositories.Add(new StorageLinkRepository(this,
-                            sr.objectId,
-                            sr.friendlyName,
-                            Cache.Server,
-                            sr.storageSystemId,
-                            sr.storagePoolId,
-                            (StorageLinkEnums.RaidType)sr.raidType,
-                            (StorageLinkEnums.ProvisioningType)sr.provisioningType,
-                            (StorageLinkEnums.ProvisioningOptions)sr.useDeduplication,
-                            sr.hostGroupUuid));
-                    }
-                }
-
-                return repositories;
-
-            }
-            catch (SoapException e)
-            {
-                throw ConvertSoapException(e);
-            }
-        }
-
-        public StorageLinkJobInfo RemoveStorageSystem(StorageLinkSystem system)
-        {
-            Util.ThrowIfParameterNull(system, "system");
-
-            try
-            {
-                foreach (managementCredentials creds in _service.enumStorageManagementCredentials())
-                {
-                    foreach (string ssid in creds.ssidList)
-                    {
-                        if (ssid == system.opaque_ref)
-                        {
-                            jobInfo jobInfo = _service.removeStorageManagementCredentials(string.Empty, creds.uuid, (int)StorageLinkEnums.FlagsType.ASYNC);
-                            return GetJobInfo(jobInfo.jobId);
-                        }
-                    }
-                }
-            }
-            catch (SoapException e)
-            {
-                throw ConvertSoapException(e);
-            }
-            return null;
         }
 
         private void AddHost(string address, string username, string password)

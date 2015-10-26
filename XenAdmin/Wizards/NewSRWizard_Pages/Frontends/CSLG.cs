@@ -277,9 +277,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override void PopulatePage()
         {
-            linkLabelGotoStorageLinkProperties.Visible = _storageLinkObject == null;
-            labelStorageLinkPropertiesLinkBlurb.Visible = linkLabelGotoStorageLinkProperties.Visible;
-
             labelAdapter.Visible = true;
             labelSystem.Visible = flowLayoutPanel1.Visible = false;
             labelStorageSystem.Text = Messages.CSLG_STORAGEADAPTER;
@@ -424,51 +421,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 }
             }
         }
-
-        private void linkLabelGotoStorageLinkProperties_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            IXenObject o = Helpers.GetPool(Connection);
-
-            if (o == null)
-            {
-                var hosts = Connection.Cache.Hosts;
-                if (hosts.Length > 0)
-                {
-                    o = hosts[0];
-                }
-            }
-
-            if (o != null)
-            {
-                var dialog = new PropertiesDialog(o);
-                dialog.Load += (s, ee) => dialog.SelectStorageLinkPage();
-
-                dialog.FormClosing += (s, ee) =>
-                {
-                    if (dialog.DialogResult == DialogResult.Yes && ee.Action != null)
-                    {
-                        ee.StartAction = false;
-                        ee.Action.Completed += ss =>
-                        {
-                            if (ee.Action.Succeeded)
-                            {
-                                Program.Invoke(Program.MainWindow, () =>
-                                {
-                                    int comboBoxItemCount = comboBoxStorageSystem.Items.Count;
-                                    PerformStorageSystemScan();
-                                    comboBoxStorageSystem.DroppedDown = comboBoxStorageSystem.Items.Count > comboBoxItemCount;
-                                });
-                            }
-                        };
-
-                        new ActionProgressDialog(ee.Action, ProgressBarStyle.Marquee).ShowDialog(this);
-                    }
-                };
-
-                dialog.Show(this);
-            }
-        }
-
         #endregion
     }
 }

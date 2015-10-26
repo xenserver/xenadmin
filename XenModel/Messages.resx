@@ -1367,24 +1367,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="ADD_SL_VOLUME" xml:space="preserve">
     <value>Import &amp;StorageLink Volume...</value>
   </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION" xml:space="preserve">
-    <value>StorageLink Storage System '{0}' added successfully</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION" xml:space="preserve">
-    <value>Adding StorageLink Storage System '{0}'</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_ACTION_TITLE" xml:space="preserve">
-    <value>Add StorageLink Storage System '{0}'</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_CIMOM_IP_ADDRESS_LABEL" xml:space="preserve">
-    <value>CIMOM IP address:</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_IP_ADDRESS_LABEL" xml:space="preserve">
-    <value>Hostname/IP address:</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_MENU" xml:space="preserve">
-    <value>&amp;Add Storage System...</value>
-  </data>
   <data name="ADD_TAG" xml:space="preserve">
     <value>Add tag '{0}'</value>
   </data>
@@ -2392,21 +2374,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>Change Server Password...</value>
   </data>
-  <data name="CHANGE_SL_PASSWORD" xml:space="preserve">
-    <value>&amp;Change Server Password...</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_ACTION_DES_FINISH" xml:space="preserve">
-    <value>Changed StorageLink Server Password</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_ACTION_DES_START" xml:space="preserve">
-    <value>Changing StorageLink Server Password</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_ACTION_TITLE" xml:space="preserve">
-    <value>Change StorageLink Server Password</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_DIALOG_TEXT" xml:space="preserve">
-    <value>Change the server password for {0}</value>
-  </data>
   <data name="CHANGE_VMS_APPLIANCE" xml:space="preserve">
     <value>Assign VM to vApp</value>
   </data>
@@ -3360,18 +3327,6 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CSLG_DIRECT_CONNECTION" xml:space="preserve">
     <value>Direct Connection</value>
-  </data>
-  <data name="CSLG_EDIT_CONNECTION_FAILED" xml:space="preserve">
-    <value>Connection Failed</value>
-  </data>
-  <data name="CSLG_EDIT_CONNECTION_PASSED" xml:space="preserve">
-    <value>Connection Successful</value>
-  </data>
-  <data name="CSLG_EDIT_DETAILS_ENTERED" xml:space="preserve">
-    <value>Details entered</value>
-  </data>
-  <data name="CSLG_EDIT_NO_DETAILS_ENTERED" xml:space="preserve">
-    <value>No details entered</value>
   </data>
   <data name="CSLG_NETAPP_DIRECT" xml:space="preserve">
     <value>NetApp</value>
@@ -6906,18 +6861,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_YES_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Yes, Remove</value>
   </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TEXT" xml:space="preserve">
-    <value>Do you want to remove the selected StorageLink storage systems? The following SRs are using them:</value>
-  </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TITLE" xml:space="preserve">
-    <value>Remove StorageLink Storage Systems</value>
-  </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TEXT" xml:space="preserve">
-    <value>Do you want to remove StorageLink storage system '{0}'? The following SRs are using it:</value>
-  </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TITLE" xml:space="preserve">
-    <value>Remove StorageLink Storage System</value>
-  </data>
   <data name="MAINWINDOW_CONNECTHOST" xml:space="preserve">
     <value>&amp;Connect</value>
   </data>
@@ -7139,9 +7082,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_SET_AS_DEFAULT_SR" xml:space="preserve">
     <value>Set as Defaul&amp;t</value>
-  </data>
-  <data name="MAINWINDOW_SET_STORAGELINK_LICENSE_SERVER" xml:space="preserve">
-    <value>Set License Server...</value>
   </data>
   <data name="MAINWINDOW_SHARE_SR" xml:space="preserve">
     <value>&amp;Share</value>
@@ -9665,18 +9605,6 @@ Disconnect from this server, or reconnect as a more privileged user.</value>
 
 To log out of this server and log in again using a different user account, enter the account credentials below and click OK.</value>
   </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS" xml:space="preserve">
-    <value>Re&amp;fresh Storage Systems</value>
-  </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS_ACTION_END" xml:space="preserve">
-    <value>Refresh Complete</value>
-  </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS_ACTION_START" xml:space="preserve">
-    <value>Refreshing Storage Systems</value>
-  </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS_ACTION_TITLE" xml:space="preserve">
-    <value>Refresh Storage Systems on {0}</value>
-  </data>
   <data name="REGION_LABLE" xml:space="preserve">
     <value>&amp;Region:</value>
   </data>
@@ -9757,24 +9685,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REMOVE_STORAGELINK_VOLUME_MESSAGEBOX_TITLE" xml:space="preserve">
     <value>Remove StorageLink Volume</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEMS_ACTION_END_DESCRIPTION" xml:space="preserve">
-    <value>StorageLink Storage Systems removed successfully</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEMS_ACTION_START_DESCRIPTION" xml:space="preserve">
-    <value>Removing StorageLink Storage Systems</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEMS_ACTION_TITLE" xml:space="preserve">
-    <value>Remove StorageLink Storage Systems</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION" xml:space="preserve">
-    <value>StorageLink Storage System '{0}' removed successfully</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION" xml:space="preserve">
-    <value>Removing StorageLink Storage System '{0}'</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEM_ACTION_TITLE" xml:space="preserve">
-    <value>Remove StorageLink Storage System '{0}'</value>
   </data>
   <data name="REMOVE_STORAGE_SYSTEM" xml:space="preserve">
     <value>R&amp;emove Storage System</value>
@@ -10283,12 +10193,6 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SET_STORAGELINK_CREDS_TO_POOL_ACTION_TITLE" xml:space="preserve">
     <value>Set StorageLink Credentials to '{0}'</value>
   </data>
-  <data name="SET_STORAGELINK_LICENSE_SERVER_ACTION_START" xml:space="preserve">
-    <value>Setting license server for '{0}'</value>
-  </data>
-  <data name="SET_STORAGELINK_LICENSE_SERVER_ACTION_TITLE" xml:space="preserve">
-    <value>Set license server for '{0}'</value>
-  </data>
   <data name="SEVERITY" xml:space="preserve">
     <value>Severity</value>
   </data>
@@ -10767,12 +10671,6 @@ The upper limit: SR size / {2}</value>
   <data name="STORAGELINKVOLUMES" xml:space="preserve">
     <value>StorageLink Storage Volumes</value>
   </data>
-  <data name="STORAGELINK_GATEWAY" xml:space="preserve">
-    <value>StorageLink Gateway</value>
-  </data>
-  <data name="STORAGELINK_IN_USE" xml:space="preserve">
-    <value>Using storage system</value>
-  </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{0} free of {1}</value>
   </data>
@@ -10796,9 +10694,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STORAGELINK_PROVISIONINGTYPE_THIN" xml:space="preserve">
     <value>Thin</value>
-  </data>
-  <data name="STORAGELINK_SCANNING_FOR_SRS" xml:space="preserve">
-    <value>Scanning for SRs on '{0}'</value>
   </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>There is a StorageLink Gateway SR that needs to be reattached.</value>

@@ -4028,60 +4028,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage System &apos;{0}&apos; added successfully.
-        /// </summary>
-        public static string ADD_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ADD_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Adding StorageLink Storage System &apos;{0}&apos;.
-        /// </summary>
-        public static string ADD_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ADD_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add StorageLink Storage System &apos;{0}&apos;.
-        /// </summary>
-        public static string ADD_STORAGE_LINK_SYSTEM_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("ADD_STORAGE_LINK_SYSTEM_ACTION_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CIMOM IP address:.
-        /// </summary>
-        public static string ADD_STORAGE_LINK_SYSTEM_CIMOM_IP_ADDRESS_LABEL {
-            get {
-                return ResourceManager.GetString("ADD_STORAGE_LINK_SYSTEM_CIMOM_IP_ADDRESS_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hostname/IP address:.
-        /// </summary>
-        public static string ADD_STORAGE_LINK_SYSTEM_IP_ADDRESS_LABEL {
-            get {
-                return ResourceManager.GetString("ADD_STORAGE_LINK_SYSTEM_IP_ADDRESS_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Add Storage System....
-        /// </summary>
-        public static string ADD_STORAGE_LINK_SYSTEM_MENU {
-            get {
-                return ResourceManager.GetString("ADD_STORAGE_LINK_SYSTEM_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add tag &apos;{0}&apos;.
         /// </summary>
         public static string ADD_TAG {
@@ -6523,51 +6469,6 @@ namespace XenAdmin {
         public static string CHANGE_SERVER_PASSWORD {
             get {
                 return ResourceManager.GetString("CHANGE_SERVER_PASSWORD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Change Server Password....
-        /// </summary>
-        public static string CHANGE_SL_PASSWORD {
-            get {
-                return ResourceManager.GetString("CHANGE_SL_PASSWORD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Changed StorageLink Server Password.
-        /// </summary>
-        public static string CHANGE_SL_SERVER_PASSWORD_ACTION_DES_FINISH {
-            get {
-                return ResourceManager.GetString("CHANGE_SL_SERVER_PASSWORD_ACTION_DES_FINISH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Changing StorageLink Server Password.
-        /// </summary>
-        public static string CHANGE_SL_SERVER_PASSWORD_ACTION_DES_START {
-            get {
-                return ResourceManager.GetString("CHANGE_SL_SERVER_PASSWORD_ACTION_DES_START", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Change StorageLink Server Password.
-        /// </summary>
-        public static string CHANGE_SL_SERVER_PASSWORD_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("CHANGE_SL_SERVER_PASSWORD_ACTION_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Change the server password for {0}.
-        /// </summary>
-        public static string CHANGE_SL_SERVER_PASSWORD_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("CHANGE_SL_SERVER_PASSWORD_DIALOG_TEXT", resourceCulture);
             }
         }
         
@@ -9341,42 +9242,6 @@ namespace XenAdmin {
         public static string CSLG_DIRECT_CONNECTION {
             get {
                 return ResourceManager.GetString("CSLG_DIRECT_CONNECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection Failed.
-        /// </summary>
-        public static string CSLG_EDIT_CONNECTION_FAILED {
-            get {
-                return ResourceManager.GetString("CSLG_EDIT_CONNECTION_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection Successful.
-        /// </summary>
-        public static string CSLG_EDIT_CONNECTION_PASSED {
-            get {
-                return ResourceManager.GetString("CSLG_EDIT_CONNECTION_PASSED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Details entered.
-        /// </summary>
-        public static string CSLG_EDIT_DETAILS_ENTERED {
-            get {
-                return ResourceManager.GetString("CSLG_EDIT_DETAILS_ENTERED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No details entered.
-        /// </summary>
-        public static string CSLG_EDIT_NO_DETAILS_ENTERED {
-            get {
-                return ResourceManager.GetString("CSLG_EDIT_NO_DETAILS_ENTERED", resourceCulture);
             }
         }
         
@@ -19812,42 +19677,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to remove StorageLink storage system &apos;{0}&apos;? The following SRs are using it:.
-        /// </summary>
-        public static string MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TEXT {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove StorageLink Storage System.
-        /// </summary>
-        public static string MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TITLE {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you want to remove the selected StorageLink storage systems? The following SRs are using them:.
-        /// </summary>
-        public static string MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TEXT {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove StorageLink Storage Systems.
-        /// </summary>
-        public static string MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TITLE {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to C&amp;onnect All.
         /// </summary>
         public static string MAINWINDOW_CONNECT_ALL_HOSTS {
@@ -20510,15 +20339,6 @@ namespace XenAdmin {
         public static string MAINWINDOW_SET_AS_DEFAULT_SR {
             get {
                 return ResourceManager.GetString("MAINWINDOW_SET_AS_DEFAULT_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set License Server....
-        /// </summary>
-        public static string MAINWINDOW_SET_STORAGELINK_LICENSE_SERVER {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_SET_STORAGELINK_LICENSE_SERVER", resourceCulture);
             }
         }
         
@@ -27749,42 +27569,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Re&amp;fresh Storage Systems.
-        /// </summary>
-        public static string REFRESH_STORAGELINK_SYSTEMS {
-            get {
-                return ResourceManager.GetString("REFRESH_STORAGELINK_SYSTEMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh Complete.
-        /// </summary>
-        public static string REFRESH_STORAGELINK_SYSTEMS_ACTION_END {
-            get {
-                return ResourceManager.GetString("REFRESH_STORAGELINK_SYSTEMS_ACTION_END", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refreshing Storage Systems.
-        /// </summary>
-        public static string REFRESH_STORAGELINK_SYSTEMS_ACTION_START {
-            get {
-                return ResourceManager.GetString("REFRESH_STORAGELINK_SYSTEMS_ACTION_START", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh Storage Systems on {0}.
-        /// </summary>
-        public static string REFRESH_STORAGELINK_SYSTEMS_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("REFRESH_STORAGELINK_SYSTEMS_ACTION_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Region:.
         /// </summary>
         public static string REGION_LABLE {
@@ -27928,60 +27712,6 @@ namespace XenAdmin {
         public static string REMOVE_SNAPSHOTS_TEXT {
             get {
                 return ResourceManager.GetString("REMOVE_SNAPSHOTS_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage System &apos;{0}&apos; removed successfully.
-        /// </summary>
-        public static string REMOVE_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("REMOVE_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removing StorageLink Storage System &apos;{0}&apos;.
-        /// </summary>
-        public static string REMOVE_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("REMOVE_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove StorageLink Storage System &apos;{0}&apos;.
-        /// </summary>
-        public static string REMOVE_STORAGE_LINK_SYSTEM_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("REMOVE_STORAGE_LINK_SYSTEM_ACTION_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Systems removed successfully.
-        /// </summary>
-        public static string REMOVE_STORAGE_LINK_SYSTEMS_ACTION_END_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("REMOVE_STORAGE_LINK_SYSTEMS_ACTION_END_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removing StorageLink Storage Systems.
-        /// </summary>
-        public static string REMOVE_STORAGE_LINK_SYSTEMS_ACTION_START_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("REMOVE_STORAGE_LINK_SYSTEMS_ACTION_START_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove StorageLink Storage Systems.
-        /// </summary>
-        public static string REMOVE_STORAGE_LINK_SYSTEMS_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("REMOVE_STORAGE_LINK_SYSTEMS_ACTION_TITLE", resourceCulture);
             }
         }
         
@@ -29525,24 +29255,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setting license server for &apos;{0}&apos;.
-        /// </summary>
-        public static string SET_STORAGELINK_LICENSE_SERVER_ACTION_START {
-            get {
-                return ResourceManager.GetString("SET_STORAGELINK_LICENSE_SERVER_ACTION_START", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set license server for &apos;{0}&apos;.
-        /// </summary>
-        public static string SET_STORAGELINK_LICENSE_SERVER_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("SET_STORAGELINK_LICENSE_SERVER_ACTION_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Setting security settings.
         /// </summary>
         public static string SETTING_SECURITY_SETTINGS {
@@ -31068,24 +30780,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StorageLink Gateway.
-        /// </summary>
-        public static string STORAGELINK_GATEWAY {
-            get {
-                return ResourceManager.GetString("STORAGELINK_GATEWAY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Using storage system.
-        /// </summary>
-        public static string STORAGELINK_IN_USE {
-            get {
-                return ResourceManager.GetString("STORAGELINK_IN_USE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} free of {1}.
         /// </summary>
         public static string STORAGELINK_POOL_DISK_SPACE {
@@ -31154,15 +30848,6 @@ namespace XenAdmin {
         public static string STORAGELINK_PROVISIONINGTYPE_THIN {
             get {
                 return ResourceManager.GetString("STORAGELINK_PROVISIONINGTYPE_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scanning for SRs on &apos;{0}&apos;.
-        /// </summary>
-        public static string STORAGELINK_SCANNING_FOR_SRS {
-            get {
-                return ResourceManager.GetString("STORAGELINK_SCANNING_FOR_SRS", resourceCulture);
             }
         }
         

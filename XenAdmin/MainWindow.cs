@@ -1612,7 +1612,6 @@ namespace XenAdmin
             startOnHostToolStripMenuItem.Available = startOnHostToolStripMenuItem.Enabled;
             resumeOnToolStripMenuItem.Available = resumeOnToolStripMenuItem.Enabled;
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
-            storageLinkToolStripMenuItem.Available = true;// storageLinkToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;

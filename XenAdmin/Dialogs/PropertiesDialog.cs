@@ -67,7 +67,6 @@ namespace XenAdmin.Dialogs
         private PerfmonAlertOptionsPage PerfmonAlertOptionsEditPage;
         private HostPowerONEditPage HostPowerONEditPage;
         private PoolPowerONEditPage PoolPowerONEditPage;
-        private StorageLinkEditPage StorageLinkPage;
         private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
         private NewPolicySnapshotTypePage newPolicySnapshotTypePage1;
         private NewPolicyArchivePage newPolicyArchivePage1;
@@ -521,11 +520,6 @@ namespace XenAdmin.Dialogs
         public void SelectPoolGpuEditPage()
         {
             SelectPage(PoolGpuEditPage);
-        }
-
-        public void SelectStorageLinkPage()
-        {
-            SelectPage(StorageLinkPage);
         }
 
         public void SelectPerfmonAlertEditPage()

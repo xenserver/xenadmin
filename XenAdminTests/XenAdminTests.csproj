@@ -281,7 +281,6 @@
     <Compile Include="Diagnostics\DiagnosticsTests.cs" />
     <Compile Include="DialogTests\BostonDialogTest.cs" />
     <Compile Include="DialogTests\CertificateDialogTests.cs" />
-    <Compile Include="DialogTests\ChangeStorageLinkPasswordDialogTests.cs" />
     <Compile Include="DialogTests\DecompressApplianceDialogTests.cs" />
     <Compile Include="DialogTests\DownloadApplianceDialogTests.cs" />
     <Compile Include="DialogTests\IscsiDeviceConfigDialogTests.cs" />
@@ -297,8 +296,6 @@
     <Compile Include="I18nResourceFilesTests.cs" />
     <Compile Include="LicensingTests\LicenceTimerTests.cs" />
     <Compile Include="MainWindowLauncher.cs" />
-    <Compile Include="MainWindowWrapper\AddStorageLinkSystemDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\ChangeStorageLinkPasswordDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\CommandErrorDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\DRConfigureDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\DRFailoverWizardWrapper.cs" />
@@ -307,8 +304,6 @@
     <Compile Include="MainWindowWrapper\NewTagDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\OptionsDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\RoleElevationDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\StorageLinkEditPageWrapper.cs" />
-    <Compile Include="MainWindowWrapper\StorageLinkMenuWrapper.cs" />
     <Compile Include="MainWindowWrapper\TestUtils.cs" />
     <Compile Include="MiscTests\BasicXMLResolverTests.cs" />
     <Compile Include="MiscTests\ContextMenuBuilderTests.cs" />

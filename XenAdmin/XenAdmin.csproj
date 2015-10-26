@@ -1766,10 +1766,6 @@
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\StorageLinkEditPage.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>StorageLinkEditPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2900,16 +2896,11 @@
     <Compile Include="Commands\AddHostToPoolCommand.cs">
     </Compile>
     <Compile Include="Commands\CancelHostConnectionCommand.cs" />
-    <Compile Include="Commands\AddStorageLinkSystemCommand.cs" />
-    <Compile Include="Commands\ChangeStorageLinkPasswordCommand.cs" />
     <Compile Include="Commands\Controls\MultipleWarningDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Commands\Controls\MultipleWarningDialog.Designer.cs">
       <DependentUpon>MultipleWarningDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Commands\Controls\StorageLinkToolStripMenuItem.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\CreateVIFCommand.cs" />
     <Compile Include="Commands\DeactivateVBDCommand.cs" />
@@ -2918,12 +2909,9 @@
     <Compile Include="Commands\DetachVirtualDiskCommand.cs" />
     <Compile Include="Commands\ImportStorageLinkVolumeCommand.cs" />
     <Compile Include="Commands\MoveVirtualDiskCommand.cs" />
-    <Compile Include="Commands\RefreshStorageLinkConnectionCommand.cs" />
     <Compile Include="Commands\RemoveStorageLinkVolumeCommand.cs" />
     <Compile Include="Commands\RescanPIFsCommand.cs" />
-    <Compile Include="Commands\SetStorageLinkLicenseServerCommand.cs" />
     <Compile Include="Commands\SRCommand.cs" />
-    <Compile Include="Commands\RemoveStorageLinkSystemCommand.cs" />
     <Compile Include="Commands\RollingUpgradeCommand.cs" />
     <Compile Include="Controls\Common\AutoHeightLabel.cs">
       <SubType>Component</SubType>
@@ -2974,19 +2962,7 @@
       <DependentUpon>WlbReportView.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\HelpersGUI.cs" />
-    <Compile Include="Dialogs\AddStorageLinkSystemDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\AddStorageLinkSystemDialog.designer.cs">
-      <DependentUpon>AddStorageLinkSystemDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Diagnostics\Problems\VMProblem\AutoStartEnabled.cs" />
-    <Compile Include="Dialogs\ChangeStorageLinkPasswordDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ChangeStorageLinkPasswordDialog.Designer.cs">
-      <DependentUpon>ChangeStorageLinkPasswordDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\CommandErrorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3848,12 +3824,6 @@
     </Compile>
     <Compile Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.Designer.cs">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SettingsPanels\StorageLinkEditPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SettingsPanels\StorageLinkEditPage.Designer.cs">
-      <DependentUpon>StorageLinkEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\Wlb\WlbHostExclusionPage.cs">
       <SubType>UserControl</SubType>
@@ -4930,15 +4900,6 @@
     <EmbeddedResource Include="Dialogs\AddServerDialog.zh-CN.resx">
       <DependentUpon>AddServerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AddStorageLinkSystemDialog.ja.resx">
-      <DependentUpon>AddStorageLinkSystemDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AddStorageLinkSystemDialog.resx">
-      <DependentUpon>AddStorageLinkSystemDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AddStorageLinkSystemDialog.zh-CN.resx">
-      <DependentUpon>AddStorageLinkSystemDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AdPasswordPrompt.ja.resx">
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
@@ -4992,15 +4953,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ChangeServerPasswordDialog.zh-CN.resx">
       <DependentUpon>ChangeServerPasswordDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ChangeStorageLinkPasswordDialog.ja.resx">
-      <DependentUpon>ChangeStorageLinkPasswordDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ChangeStorageLinkPasswordDialog.resx">
-      <DependentUpon>ChangeStorageLinkPasswordDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ChangeStorageLinkPasswordDialog.zh-CN.resx">
-      <DependentUpon>ChangeStorageLinkPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.ja.resx">
       <DependentUpon>CommandErrorDialog.cs</DependentUpon>
@@ -5725,12 +5677,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PoolGpuEditPage.zh-CN.resx">
       <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\StorageLinkEditPage.ja.resx">
-      <DependentUpon>StorageLinkEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\StorageLinkEditPage.zh-CN.resx">
-      <DependentUpon>StorageLinkEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VBDEditPage.ja.resx">
       <DependentUpon>VBDEditPage.cs</DependentUpon>
