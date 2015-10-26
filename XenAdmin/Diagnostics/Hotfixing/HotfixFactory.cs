@@ -94,12 +94,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 return Hotfix(HotfixableServerVersion.Creedence);
             if (Helpers.SanibelOrGreater(host) && !Helpers.CreedenceOrGreater(host))
                 return Hotfix(HotfixableServerVersion.SanibelToClearwater);
-            if (Helpers.BostonOrGreater(host) && !Helpers.SanibelOrGreater(host))
+            if (!Helpers.SanibelOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Boston);
-            if (Helpers.CowleyOrGreater(host) && !Helpers.BostonOrGreater(host))
-                return Hotfix(HotfixableServerVersion.Cowley);
-            if (Helpers.MidnightRideOrGreater(host) && !Helpers.CowleyOrGreater(host))
-                return Hotfix(HotfixableServerVersion.MNR);
 
             return null;
         }

@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
             if (pool == null)
                 return;
 
-            if (Helpers.FeatureForbidden(pool, Host.RestrictHAFloodgate))
+            if (Helpers.FeatureForbidden(pool, Host.RestrictHA))
             {
                 // Show upsell dialog
                 UpsellDialog dlg = new UpsellDialog(Messages.UPSELL_BLURB_HA, InvisibleMessages.UPSELL_LEARNMOREURL_HA);
@@ -113,7 +113,7 @@ namespace XenAdmin.Commands
                 {
                     Host master = Helpers.GetMaster(poolAncestor.Connection);
 
-                    if (master == null || master.RestrictHAOrlando || HelpersGUI.FindActiveHaAction(poolAncestor.Connection) != null || poolAncestor.Locked)
+                    if (master == null || HelpersGUI.FindActiveHaAction(poolAncestor.Connection) != null || poolAncestor.Locked)
                     {
                         return false;
                     }
@@ -135,7 +135,7 @@ namespace XenAdmin.Commands
             {
                 Host master = Helpers.GetMaster(poolAncestor.Connection);
 
-                if (master == null || master.RestrictHAOrlando)
+                if (master == null)
                 {
                     return Messages.FIELD_DISABLED;
                 }

@@ -5188,13 +5188,13 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>カスタム フィールドあり</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TEXT" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT" xml:space="preserve">
     <value>高可用性プラン</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>このプールの VM の再起動優先度、再起動順序、および起動間隔の設定</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
     <value>このプールの VM の再起動優先度の設定</value>
   </data>
   <data name="HAWIZ_SUMMARY" xml:space="preserve">

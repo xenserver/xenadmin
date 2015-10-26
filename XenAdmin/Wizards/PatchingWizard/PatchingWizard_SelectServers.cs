@@ -236,7 +236,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     //Do RBAC check
                     foreach (Host master in masters)
                     {
-                        if(Helpers.MidnightRideOrGreater(master.Connection)&&!(Role.CanPerform(new RbacMethodList("pool_patch.apply"),master.Connection)))
+                        if (!(Role.CanPerform(new RbacMethodList("pool_patch.apply"), master.Connection)))
                         {
                             string nameLabel = master.Name;
                             Pool pool = Helpers.GetPoolOfOne(master.Connection);

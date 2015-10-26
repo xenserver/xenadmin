@@ -561,17 +561,8 @@ namespace XenAdmin.TabPages
                     case 0:
                         return VDI.Name;
                     case 1:
-                        if (Helpers.BostonOrGreater(VDI.Connection))
-                        {
-                            string name;
-                            if (VDI.sm_config.TryGetValue("displayname", out name))
-                            {
-                                return name;
-                            }
-                            return string.Empty;
-                        }
-                        StorageLinkVolume volume = showStorageLink ? VDI.StorageLinkVolume(Program.StorageLinkConnections.GetCopy()) : null;
-                        return volume == null ? string.Empty : volume.Name;
+                        string name;
+                        return VDI.sm_config.TryGetValue("displayname", out name) ? name : "";
                     case 2:
                         return VDI.Description;
                     case 3:

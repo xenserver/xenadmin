@@ -99,28 +99,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             get
             {
                 var dconf = new Dictionary<string, string>();
-
-                if (Helpers.BostonOrGreater(Connection))
-                {
-                    var adapter = comboBoxStorageSystem.SelectedItem as StorageLinkAdapterBoston;
-                    if (adapter != null)
-                        dconf[ADAPTER_ID] = adapter.Id;
-                }
-                else
-                {
-                    var system = comboBoxStorageSystem.SelectedItem as CslgSystemStorage;
-                    if (system != null)
-                        dconf[STORAGE_SYSTEM_ID] = system.StorageSystemId;
-
-                    StorageLinkCredentials credentials = GetStorageLinkCredentials(Connection);
-                    if (credentials != null)
-                    {
-                        dconf["target"] = credentials.Host;
-                        dconf["username"] = credentials.Username;
-                        dconf["password"] = credentials.Password;
-                    }
-                }
-
+                var adapter = comboBoxStorageSystem.SelectedItem as StorageLinkAdapterBoston;
+                if (adapter != null)
+                    dconf[ADAPTER_ID] = adapter.Id;
                 return dconf;
             }
         }
@@ -140,7 +121,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             var credsList = new List<StorageLinkCredentials>();
 
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected && Helpers.MidnightRideOrGreater(c) && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices)))
+            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices)))
             {
                 var p = Helpers.GetPoolOfOne(c);
                 credsList.Add(p.GetStorageLinkCredentials());
@@ -148,53 +129,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
             credsList.RemoveAll(cc => cc == null || !cc.IsValid);
             return credsList;
-        }
-
-        private StorageLinkCredentials GetStorageLinkCredentials(IXenConnection connection)
-        {
-            if (Helpers.BostonOrGreater(connection))
-                return null;
-
-            if (_storageLinkObject != null)
-            {
-                return GetAllValidStorageLinkCreds().Find(c =>
-                    c.Host == _storageLinkObject.StorageLinkConnection.Host &&
-                    c.Username == _storageLinkObject.StorageLinkConnection.Username &&
-                    c.Password == _storageLinkObject.StorageLinkConnection.Password);
-            }
-            else
-            {
-                // just do a check that local creds have been correctly moved the server pool object.
-                Settings.CslgCredentials localCreds = Settings.GetCslgCredentials(connection);
-                Debug.Assert(localCreds == null || string.IsNullOrEmpty(localCreds.Host));
-
-                Pool pool = Helpers.GetPoolOfOne(connection);
-
-                if (pool != null)
-                {
-                    StorageLinkCredentials creds = pool.GetStorageLinkCredentials();
-
-                    if (creds != null && creds.IsValid)
-                    {
-                        return creds;
-                    }
-                    else
-                    {
-                        // if there aren't any creds then try importing from another pool. The user will probably only
-                        // have one set of CSLG creds and they just haven't set the creds to this pool yet. Do it for them.
-
-                        var credsList = GetAllValidStorageLinkCreds();
-
-                        if (credsList.Count > 0 && !Helpers.BostonOrGreater(Connection))
-                        {
-                            var action = new SetCslgCredentialsToPoolAction(pool.Connection, credsList[0].Host, credsList[0].Username, credsList[0].Password);
-                            new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog(this);
-                            return pool.GetStorageLinkCredentials();
-                        }
-                    }
-                }
-                return null;
-            }
         }
 
         public void SetStorageLinkObject(IStorageLinkObject storageLinkObject)
@@ -209,74 +143,37 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public bool PerformStorageSystemScan()
         {
             var items = new List<object>();
-            StorageLinkCredentials credentials = null;
-            SrCslgStorageSystemScanAction scanAction = null;
 
-            if (_storageLinkObject != null || (Connection.IsConnected && !Helpers.FeatureForbidden(Connection, Host.RestrictStorageChoices) && Helpers.MidnightRideOrGreater(Connection)))
+            if (_storageLinkObject != null || (Connection.IsConnected && !Helpers.FeatureForbidden(Connection, Host.RestrictStorageChoices)))
             {
                 if (_srToReattach == null || _srToReattach.type == "cslg")
                 {
-                    credentials = GetStorageLinkCredentials(Connection);
-
-                    if (credentials != null && credentials.IsValid)
+                    var action = new SrCslgAdaptersScanAction(Connection);
+                    var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
+                    // never show the error message if it fails.
+                    action.Completed += s =>
                     {
-                        scanAction = new SrCslgStorageSystemScanAction(Program.MainWindow, Connection,
-                                                                       Program.StorageLinkConnections.GetCopy(),
-                                                                       credentials.Host, credentials.Username,
-                                                                       credentials.PasswordSecret);
-                    }
-                    else if (Helpers.BostonOrGreater(Connection))
-                    {
-
-                        var action = new SrCslgAdaptersScanAction(Connection);
-                        var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-                        // never show the error message if it fails.
-                        action.Completed += s =>
+                        if (!action.Succeeded)
                         {
-                            if (!action.Succeeded)
-                            {
-                                Program.Invoke(dialog, dialog.Close);
-                            }
-                        };
-
-                        dialog.ShowDialog(this);
-                        if (action.Succeeded)
-                        {
-                            var adapters = action.GetAdapters();
-                            items.AddRange(Util.PopulateList<object>(adapters));
-                            items.Sort((x, y) => x.ToString().CompareTo(y.ToString()));
+                            Program.Invoke(dialog, dialog.Close);
                         }
-                        else
-                            return false;
-                    }
-                    if (scanAction != null)
+                    };
+
+                    dialog.ShowDialog(this);
+                    if (action.Succeeded)
                     {
-                        var dialog = new ActionProgressDialog(scanAction, ProgressBarStyle.Marquee);
-
-                        // never show the error message if it fails.
-                        scanAction.Completed += s =>
-                                                    {
-                                                        if (!scanAction.Succeeded)
-                                                        {
-                                                            Program.Invoke(dialog, dialog.Close);
-                                                        }
-                                                    };
-
-                        dialog.ShowDialog(this);
-
-                        if (scanAction.Succeeded)
-                        {
-                            _storages = scanAction.CslgSystemStorages;
-                            items.AddRange(Util.PopulateList<object>(_storages));
-                            items.Sort((x, y) => x.ToString().CompareTo(y.ToString()));
-                        }
+                        var adapters = action.GetAdapters();
+                        items.AddRange(Util.PopulateList<object>(adapters));
+                        items.Sort((x, y) => x.ToString().CompareTo(y.ToString()));
                     }
+                    else
+                        return false;
                 }
             }
 
             bool bostonHasDell = false;
             bool bostonHasNetapp = false;
-            if (Helpers.BostonOrGreater(Connection) && items != null)
+            if (items != null)
             {
                 bostonHasDell = (items.Find(item => ((StorageLinkAdapterBoston)item).Id == "DELL_EQUALLOGIC") != null);
                 bostonHasNetapp = (items.Find(item => ((StorageLinkAdapterBoston)item).Id == "NETAPP") != null);
@@ -286,30 +183,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if (_storageLinkObject != null)
             {
-                // the wizard was launched with a storagelink-server, storage-system or storage-pool selected.
-                if (scanAction != null && scanAction.Succeeded)
-                {
-                    comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(string.Format(Messages.CSLG_STORAGELINK_SERVER, credentials.Host), true));
-                    comboBoxStorageSystem.Items.AddRange(items.ToArray());
-                    comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(Messages.ADD_HOST, false));
-
-                    // if a specific storage-system was selected when the wizard was launched then select that storage-system
-                    // in the combo-box here.
-                    var system = _storageLinkObject as StorageLinkSystem;
-
-                    if (system == null)
-                    {
-                        // if a specific storage-pool was selected when the wizard was launched then select the storage-system
-                        // of that storage-pool here.
-                        var storagePool = _storageLinkObject as StorageLinkPool;
-                        system = storagePool == null ? null : storagePool.StorageLinkSystem;
-                    }
-
-                    if (system != null)
-                    {
-                        comboBoxStorageSystem.SelectedItem = items.Find(o => ((CslgSystemStorage)o).StorageSystemId == system.opaque_ref);
-                    }
-                }
+                ;
             }
             else if (_srToReattach != null)
             {
@@ -323,46 +197,20 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     // a direct-connect NetApp is being reattached. Only add this item.
                     comboBoxStorageSystem.Items.Add(Messages.CSLG_NETAPP_DIRECT);
                 }
-                else if (credentials != null)
-                {
-                    // credentials can be null if we don't have a license which supports CSLG.
-
-                    // re-attaching StorageLink SR
-                    Debug.Assert(_srToReattach.type == "cslg");
-                    comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(string.Format(Messages.CSLG_STORAGELINK_SERVER, credentials.Host), true));
-                    comboBoxStorageSystem.Items.AddRange(items.ToArray());
-                }
             }
             else
             {
                 // a pool or host was selected in the mainwindow tree when the wizard was launched.
-                bool canAdd = scanAction != null && scanAction.Succeeded && scanAction.StorageLinkConnection != null;
-                bool showHeaders = scanAction != null && scanAction.Succeeded && (items.Count > 0 || scanAction.StorageLinkConnection != null);
-
-                if (showHeaders || Helpers.BostonOrGreater(Connection))
-                {
-                    if (!bostonHasDell || !bostonHasNetapp)
-                        comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(Messages.CSLG_DIRECT_CONNECTION, true));
-                }
+                if (!bostonHasDell || !bostonHasNetapp)
+                    comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(Messages.CSLG_DIRECT_CONNECTION, true));
 
                 if (!bostonHasDell)
                     comboBoxStorageSystem.Items.Add(Messages.CSLG_DELL_DIRECT);
                 if (!bostonHasNetapp)
                     comboBoxStorageSystem.Items.Add(Messages.CSLG_NETAPP_DIRECT);
-
-                if (showHeaders)
-                {
-                    comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(string.Format(Messages.CSLG_STORAGELINK_SERVER, credentials.Host), true));
-                    comboBoxStorageSystem.Items.AddRange(items.ToArray());
-                }
-
-                if (canAdd)
-                {
-                    comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(Messages.ADD_HOST, false));
-                }
             }
 
-            if (Helpers.BostonOrGreater(Connection) && items != null && items.Count > 0)
+            if (items != null && items.Count > 0)
             {
                 if (!bostonHasDell || !bostonHasNetapp)
                     comboBoxStorageSystem.Items.Add(new NonSelectableComboBoxItem(Messages.CSLG_STORAGELINK_ADAPTERS, true));
@@ -373,8 +221,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 // select the first selectable item if nothing's already been selected.
                 comboBoxStorageSystem.SelectedItem = Util.PopulateList<object>(comboBoxStorageSystem.Items).Find(s => !(s is NonSelectableComboBoxItem));
-                if (_srToReattach != null && _srToReattach.type == "cslg" &&
-                              Helpers.BostonOrGreater(Connection))
+                if (_srToReattach != null && _srToReattach.type == "cslg")
                 {
                     comboBoxStorageSystem.SelectedItem =
                         Util.PopulateList<object>(comboBoxStorageSystem.Items).Find(s =>
@@ -404,7 +251,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private bool PerformStoragePoolScan()
         {
-            StorageLinkCredentials credentials = GetStorageLinkCredentials(Connection);
+            StorageLinkCredentials credentials = null;
 
             var scanAction = new SrCslgStoragePoolScanAction(Connection, Program.StorageLinkConnections.GetCopy(), credentials.Host,
                                                              credentials.Username, credentials.PasswordSecret, SelectedStorageSystem.StorageSystemId);
@@ -416,42 +263,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 StoragePools = scanAction.CslgStoragePools;
 
             return scanAction.Succeeded;
-        }
-
-        private void AddStorageSystem()
-        {
-            StorageLinkConnection slCon = Program.StorageLinkConnections.GetCopy().Find(s => s.Host == GetStorageLinkCredentials(Connection).Host);
-            
-            if (slCon == null)
-                return;
-
-            var systemsBefore = new List<StorageLinkSystem>(slCon.Cache.StorageSystems);
-            AddStorageLinkSystemCommand command = new AddStorageLinkSystemCommand(Program.MainWindow, slCon.Cache.Server, Parent);
-
-                command.Completed += (s, ee) =>
-                    {
-                        if (ee.Success)
-                        {
-                            var systemsAfter = new List<StorageLinkSystem>(slCon.Cache.StorageSystems);
-
-                            ThreadPool.QueueUserWorkItem(o =>
-                                {
-                                    Program.Invoke(Program.MainWindow, () =>
-                                        {
-                                            PerformStorageSystemScan();
-
-                                            if (systemsAfter.Count > systemsBefore.Count)
-                                            {
-                                                // the new item should be selected.
-                                                comboBoxStorageSystem.SelectedItem = systemsAfter.Find(ss => !systemsBefore.Contains(ss));
-                                                comboBoxStorageSystem.DroppedDown = true;
-                                            }
-                                        });
-                                });
-                        }
-                    };
-
-            command.Execute();
         }
 
         #region XenTabPage overrides
@@ -466,29 +277,27 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override void PopulatePage()
         {
-            linkLabelGotoStorageLinkProperties.Visible = Helpers.MidnightRideOrGreater(Connection) && _storageLinkObject == null;
+            linkLabelGotoStorageLinkProperties.Visible = _storageLinkObject == null;
             labelStorageLinkPropertiesLinkBlurb.Visible = linkLabelGotoStorageLinkProperties.Visible;
 
-            labelAdapter.Visible = Helpers.BostonOrGreater(Connection);
-            labelSystem.Visible = flowLayoutPanel1.Visible = !Helpers.BostonOrGreater(Connection);
-
-            if (Helpers.BostonOrGreater(Connection))
-                labelStorageSystem.Text = Messages.CSLG_STORAGEADAPTER;
+            labelAdapter.Visible = true;
+            labelSystem.Visible = flowLayoutPanel1.Visible = false;
+            labelStorageSystem.Text = Messages.CSLG_STORAGEADAPTER;
         }
 
         public override string Text
         {
-            get { return Helpers.BostonOrGreater(Connection) ? Messages.STORAGE_ADAPTER : Messages.STORAGE_SYSTEM; }
+            get { return Messages.STORAGE_ADAPTER; }
         }
 
         public override string PageTitle
         {
-            get { return Helpers.BostonOrGreater(Connection) ? Messages.NEWSR_CSLG_ADAPTER_PAGE_TITLE : Messages.NEWSR_CSLG_PAGE_TITLE; }
+            get { return Messages.NEWSR_CSLG_ADAPTER_PAGE_TITLE; }
         }
 
         public override string HelpID
         {
-            get { return Helpers.BostonOrGreater(Connection) ? "SL_System" : "SL_System_PreBoston"; }
+            get { return "SL_System"; }
         }
 
         public override bool EnableNext()
@@ -534,12 +343,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             if (comboBoxStorageSystem.SelectedItem is NonSelectableComboBoxItem)
             {
-                if (comboBoxStorageSystem.SelectedItem.ToString() == Messages.ADD_HOST)
-                {
-                    Program.BeginInvoke(Program.MainWindow, AddStorageSystem);
-                    comboBoxStorageSystem.SelectedIndex = -1;
-                }
-                else if (comboBoxStorageSystem.SelectedIndex < comboBoxStorageSystem.Items.Count - 1 &&
+                if (comboBoxStorageSystem.SelectedIndex < comboBoxStorageSystem.Items.Count - 1 &&
                     (_storageSystemComboLastSelectedIndex < comboBoxStorageSystem.SelectedIndex || comboBoxStorageSystem.SelectedIndex == 0))
                 {
                     _storageSystemComboLastSelectedIndex = comboBoxStorageSystem.SelectedIndex;
@@ -600,11 +404,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (storageSystem != null)
                 {
                     e.Graphics.DrawImageUnscaled(Resources.sl_system_16, new Point(e.Bounds.X + indent, e.Bounds.Y + 1));
-                    Drawing.DrawText(e.Graphics, item.ToString(), e.Font, textRect, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                }
-                else if (item.ToString() == Messages.ADD_HOST)
-                {
-                    e.Graphics.DrawImageUnscaled(Resources.sl_add_storage_system_small_16, new Point(e.Bounds.X + indent, e.Bounds.Y + 1));
                     Drawing.DrawText(e.Graphics, item.ToString(), e.Font, textRect, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
                 else if (nonSelectable != null)

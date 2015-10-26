@@ -64,11 +64,6 @@ namespace XenAdmin.Actions
                 throw new ArgumentException("Pool not licensed.", "host");
             }
 
-            if (!Helpers.MidnightRideOrGreater(connection))
-            {
-                throw new ArgumentException("Pool must by Midnight Ride or later.", "host");
-            }
-
             XenAPI.Pool pool = Helpers.GetPool(Connection);
 
             if (pool != null)

@@ -57,7 +57,7 @@ namespace XenAdmin.SettingsPanels
 
         private static List<IXenConnection> GetValidConnections()
         {
-            return ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected && Helpers.GetPoolOfOne(c) != null && Helpers.MidnightRideOrGreater(c) && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices));
+            return ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected && Helpers.GetPoolOfOne(c) != null && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices));
         }
 
         #region IEditPage Members
@@ -81,7 +81,7 @@ namespace XenAdmin.SettingsPanels
             _xenObjectCopy = clone;
             allServersCheckBox.Checked = true;
 
-            if (_xenObjectCopy != null && Helpers.MidnightRideOrGreater(_xenObjectCopy.Connection))
+            if (_xenObjectCopy != null)
             {
                 Pool pool = Helpers.GetPoolOfOne(_xenObjectCopy.Connection);
 

@@ -314,21 +314,16 @@ namespace XenAdminTests.TabsAndMenus
                                    new ExpectedSeparator(),
                                    new ExpectedTextMenuItem("&High Availability...", true)
                                };
-            if (Helpers.CowleyOrGreater(pool.Connection))
-                expected.Add(new ExpectedTextMenuItem("VM Pr&otection Policies...", true));
-            if (Helpers.BostonOrGreater(pool.Connection))
-            {
-                expected.Add(new ExpectedTextMenuItem("Manage &vApps...", true));
-                expected.Add(new ExpectedTextMenuItem("Di&saster Recovery", true, new ExpectedMenuItem[]
-                                                                                      {
-                                                                                          new ExpectedTextMenuItem(
-                                                                                              "&Configure...", true),
-                                                                                          new ExpectedTextMenuItem(
-                                                                                              "&Disaster Recovery Wizard...",
-                                                                                              true)
-                                                                                      }));
-            }
-
+            expected.Add(new ExpectedTextMenuItem("VM Pr&otection Policies...", true));
+            expected.Add(new ExpectedTextMenuItem("Manage &vApps...", true));
+            expected.Add(new ExpectedTextMenuItem("Di&saster Recovery", true, new ExpectedMenuItem[]
+                                                                                    {
+                                                                                        new ExpectedTextMenuItem(
+                                                                                            "&Configure...", true),
+                                                                                        new ExpectedTextMenuItem(
+                                                                                            "&Disaster Recovery Wizard...",
+                                                                                            true)
+                                                                                    }));
             expected.AddRange(new List<ExpectedMenuItem>{
                                    new ExpectedSeparator(),
                                    new ExpectedTextMenuItem("&Add Server", true, false,
@@ -413,7 +408,7 @@ namespace XenAdminTests.TabsAndMenus
                             }));
                     expectedMenuItems.Add(new ExpectedSeparator());
                 }
-                else if (Helpers.CowleyOrGreater(vm.Connection) && vm.IsOnSharedStorage() == string.Empty || !Helpers.CowleyOrGreater(vm.Connection))
+                else if (vm.IsOnSharedStorage() == string.Empty)
                 {
                     expectedMenuItems.Add(new ExpectedTextMenuItem("M&igrate to Server", true, false,
                         new ExpectedMenuItem[]
@@ -427,8 +422,7 @@ namespace XenAdminTests.TabsAndMenus
 
 
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Ta&ke a Snapshot...", true));
-                if (Helpers.CowleyOrGreater(vm.Connection))
-                    expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true), new ExpectedSeparator(), new ExpectedTextMenuItem("&1   Ewan's backups", true), new ExpectedTextMenuItem("&2   grage", true) }));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true), new ExpectedSeparator(), new ExpectedTextMenuItem("&1   Ewan's backups", true), new ExpectedTextMenuItem("&2   grage", true) }));
                 expectedMenuItems.Add(new ExpectedSeparator());
                 expectedMenuItems.Add(new ExpectedTextMenuItem("P&roperties", true));
 
@@ -547,9 +541,9 @@ namespace XenAdminTests.TabsAndMenus
                 {
                     var expected = new List<ExpectedMenuItem>(expectedForAll);
 
-                    if (Helpers.CowleyOrGreater(snapshot.Connection) && snapshot.tags.Length > 0)
+                    if (snapshot.tags.Length > 0)
                         expected.Insert(5, new ExpectedTextMenuItem("Untag Ob&ject", true));
-                    if (Helpers.CowleyOrGreater(snapshot.Connection) && Folders.GetFolder(snapshot) != null)
+                    if (Folders.GetFolder(snapshot) != null)
                         expected.Insert(5, new ExpectedTextMenuItem("Remove from &folder", true));
                     VerifyContextMenu(snapshot, expected.ToArray());
                 }
@@ -560,9 +554,9 @@ namespace XenAdminTests.TabsAndMenus
                 {
                     var expected = new List<ExpectedMenuItem>(expectedForAll);
 
-                    if (Helpers.CowleyOrGreater(snapshot.Connection) && snapshot.tags.Length > 0)
+                    if (snapshot.tags.Length > 0)
                         expected.Insert(5, new ExpectedTextMenuItem("Untag Ob&ject", true));
-                    if (Helpers.CowleyOrGreater(snapshot.Connection) && Folders.GetFolder(snapshot) != null)
+                    if (Folders.GetFolder(snapshot) != null)
                         expected.Insert(5, new ExpectedTextMenuItem("Remove from &folder", true));
                     VerifyContextMenu(snapshot, expected.ToArray());
                 }

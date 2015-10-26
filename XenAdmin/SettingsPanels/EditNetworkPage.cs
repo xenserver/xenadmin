@@ -329,7 +329,7 @@ namespace XenAdmin.SettingsPanels
                         HostPNICList.SelectedItem = pif.Name;
                 }
 
-                bool hasBondMode = HasBondMode;
+                bool hasBondMode = network.IsBond;
                 groupBoxBondMode.Visible = hasBondMode;
 
                 bool supportsLinkAggregation = Helpers.SupportsLinkAggregationBond(network.Connection);
@@ -677,17 +677,6 @@ namespace XenAdmin.SettingsPanels
                     return pif;
             }
             return null;
-        }
-
-        /// <summary>
-        /// Does the network being edited support bond mode (i.e., is it a bond of Boston or later)?
-        /// </summary>
-        private bool HasBondMode
-        {
-            get
-            {
-                return network.IsBond && Helpers.BostonOrGreater(network.Connection);
-            }
         }
 
         /// <summary>

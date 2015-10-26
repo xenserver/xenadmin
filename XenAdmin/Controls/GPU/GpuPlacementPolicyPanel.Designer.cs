@@ -42,7 +42,6 @@
             resources.ApplyResources(this.panelWithBorder, "panelWithBorder");
             this.panelWithBorder.BackColor = System.Drawing.Color.Transparent;
             this.panelWithBorder.Controls.Add(this.containerPanel);
-            this.panelWithBorder.MinimumSize = new System.Drawing.Size(755, 30);
             this.panelWithBorder.Name = "panelWithBorder";
             // 
             // containerPanel
@@ -50,7 +49,6 @@
             resources.ApplyResources(this.containerPanel, "containerPanel");
             this.containerPanel.Controls.Add(this.placementPolicyLabel);
             this.containerPanel.Controls.Add(this.editPlacementPolicyButton);
-            this.containerPanel.MinimumSize = new System.Drawing.Size(755, 33);
             this.containerPanel.Name = "containerPanel";
             // 
             // placementPolicyLabel
@@ -73,7 +71,6 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panelWithBorder);
             this.DoubleBuffered = true;
-            this.MinimumSize = new System.Drawing.Size(400, 32);
             this.Name = "GpuPlacementPolicyPanel";
             this.VisibleChanged += new System.EventHandler(this.GpuPlacementPolicyPanel_VisibleChanged);
             this.panelWithBorder.ResumeLayout(false);

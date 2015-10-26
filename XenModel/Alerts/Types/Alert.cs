@@ -370,7 +370,7 @@ namespace XenAdmin.Alerts
             if (c.Session == null)
                 return false;
 
-            if (c.Session.IsLocalSuperuser || !Helpers.MidnightRideOrGreater(c))
+            if (c.Session.IsLocalSuperuser)
                 return true;
 
             List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Message.destroy", c);

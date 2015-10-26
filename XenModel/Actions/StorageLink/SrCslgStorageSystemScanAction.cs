@@ -75,8 +75,6 @@ namespace XenAdmin.Actions
         public SrCslgStorageSystemScanAction(IXenConnection connection, string adapterid, string target, string user, string password)
             : base(connection, target, user, password)
         {
-            if (!Helpers.BostonOrGreater(connection))
-                throw new ArgumentException(@"Invalid connection, it has to be a boston or greater connection", connection.Name);
             _adapterid = adapterid;
         }
 
@@ -101,104 +99,11 @@ namespace XenAdmin.Actions
 
             Log.DebugFormat("Attempting to find SRs on CSLG {0}.", dconf["target"]);
 
-            if (Connection != null && Helpers.MidnightRideOrGreater(Connection) && !Helpers.CowleyOrGreater(Connection))
-            {
-                RunProbe(dconf);
-
+            dconf["adapterid"] = _adapterid;
+            RunProbe(dconf);
+            if (!string.IsNullOrEmpty(Result))
                 _cslgSystemStorages = new ReadOnlyCollection<CslgSystemStorage>(ParseStorageSystemsXml(Util.GetContentsOfValueNode(Result)));
-            }
-            else if (Connection != null && Helpers.BostonOrGreater(Connection))
-            {
-                dconf["adapterid"] = _adapterid;
-                RunProbe(dconf);
-                if (!string.IsNullOrEmpty(Result))
-                    _cslgSystemStorages = new ReadOnlyCollection<CslgSystemStorage>(ParseStorageSystemsXml(Util.GetContentsOfValueNode(Result)));
-            }
-            else
-            {
-                bool created = false;
-
-                if (Connection != null)
-                {
-                    // There will be no connection if a storagelink-object is selected in the tree.
-
-                    string secretRef = Secret.get_by_uuid(Connection.Session, dconf["password_secret"]);
-                    string password = Secret.get_value(Connection.Session, secretRef);
-
-                    StorageLinkConnection = _SLConnections.Find(c => c.Host == dconf["target"] && c.Username == dconf["username"] && c.Password == password);
-
-                    if (StorageLinkConnection == null)
-                    {
-                        // the user has clicked the "test connection" button in the properties dialog then
-                        // the storagelink connection won't exist in the Program.StorageLinkConnections collection.
-
-                        StorageLinkConnection = new StorageLinkConnection(_invoker, dconf["target"], dconf["username"], password);
-                        StorageLinkConnection.BeginConnect();
-                        created = true;
-                    }
-                }
-                else
-                {
-                    StorageLinkConnection = _SLConnections.Find(c => c.Host == dconf["target"] && c.Username == dconf["username"]);
-                }
-
-                try
-                {
-                    var list = new List<CslgSystemStorage>();
-
-                    // wait for storagelink connection to finish populating
-                    for (int i = 0; i < 600 && StorageLinkConnection.ConnectionState == StorageLinkConnectionState.Connecting; i++)
-                    {
-                        Thread.Sleep(100);
-                    }
-
-                    if (!string.IsNullOrEmpty(StorageLinkConnection.Error))
-                    {
-                        throw new InvalidOperationException(StorageLinkConnection.Error);
-                    }
-
-                    if (StorageLinkConnection.ConnectionState != StorageLinkConnectionState.Connected)
-                    {
-                        throw new InvalidOperationException(string.Format(Messages.STORAGELINK_UNABLE_TO_CONNECT, dconf["target"]));
-                    }
-
-                    foreach (StorageLinkSystem s in StorageLinkConnection.Cache.StorageSystems)
-                    {
-                        var provisioningOptions = new List<CslgParameter> { new CslgParameter(null, Messages.NEWSR_CSLG_NONE) };
-
-                        if ((s.Capabilities & StorageLinkEnums.StorageSystemCapabilities.POOL_LEVEL_DEDUPLICATION) != 0)
-                        {
-                            provisioningOptions.Add(new CslgParameter("DEDUP", Messages.NEWSR_CSLG_DEDUPLICATION));
-                        }
-
-                        var protocols = new List<CslgParameter> { new CslgParameter(null, Messages.NEWSR_CSLG_AUTO) };
-
-                        if ((s.Capabilities & StorageLinkEnums.StorageSystemCapabilities.ISCSI) != 0)
-                        {
-                            protocols.Add(new CslgParameter("ISCSI", Messages.NEWSR_CSLG_ISCSI));
-                        }
-                        if ((s.Capabilities & StorageLinkEnums.StorageSystemCapabilities.FIBRE_CHANNEL) != 0)
-                        {
-                            protocols.Add(new CslgParameter("FC", Messages.NEWSR_CSLG_FC));
-                        }
-
-                        list.Add(new CslgSystemStorage(s.ToString(), s.StorageSystemId, protocols, provisioningOptions, false, s));
-                    }
-
-                    _cslgSystemStorages = new ReadOnlyCollection<CslgSystemStorage>(list);
-                }
-                finally
-                {
-                    if (created)
-                    {
-                        StorageLinkConnection.EndConnect();
-                    }
-                }
-            }
         }
-
-
-
 
         private List<CslgSystemStorage> ParseStorageSystemsXml(String xml)
         {

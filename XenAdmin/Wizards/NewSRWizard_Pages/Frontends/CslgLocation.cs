@@ -79,23 +79,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             get
             {
-                var credentials = StorageLinkCredentials;
                 var dconf = new Dictionary<string, string>();
-
-                if (Helpers.BostonOrGreater(Connection))
-                {
-                    dconf[TARGET] = textBoxTarget.Text;
-                    dconf[USERNAME] = textBoxUsername.Text;
-                    dconf[PASSWORD] = textBoxPassword.Text;
-                    dconf[STORAGE_SYSTEM_ID] = SystemStorage.StorageSystemId;
-                }
-                else if (credentials != null)
-                {
-                    dconf[TARGET] = credentials.Host;
-                    dconf[USERNAME] = credentials.Username;
-                    dconf[PASSWORD] = credentials.Password;
-                }
-
+                dconf[TARGET] = textBoxTarget.Text;
+                dconf[USERNAME] = textBoxUsername.Text;
+                dconf[PASSWORD] = textBoxPassword.Text;
+                dconf[STORAGE_SYSTEM_ID] = SystemStorage.StorageSystemId;
                 return dconf;
             }
         }
@@ -215,11 +203,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (storageSystem != null)
                 {
                     e.Graphics.DrawImageUnscaled(Resources.sl_system_16, new Point(e.Bounds.X + indent, e.Bounds.Y + 1));
-                    Drawing.DrawText(e.Graphics, item.ToString(), e.Font, textRect, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                }
-                else if (item.ToString() == Messages.ADD_HOST)
-                {
-                    e.Graphics.DrawImageUnscaled(Resources.sl_add_storage_system_small_16, new Point(e.Bounds.X + indent, e.Bounds.Y + 1));
                     Drawing.DrawText(e.Graphics, item.ToString(), e.Font, textRect, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
                 else if (nonSelectable != null)

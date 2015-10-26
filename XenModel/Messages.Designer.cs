@@ -3770,15 +3770,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add....
-        /// </summary>
-        public static string ADD_HOST {
-            get {
-                return ResourceManager.GetString("ADD_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is configured to use AD authentication. All pool members must use the same authentication method.
         ///
         ///Do you want to enable AD authentication on your server and join it to the same domain as the pool?.
@@ -16433,25 +16424,6 @@ namespace XenAdmin {
         ///
         ///Failure tolerance:   {1}
         ///
-        ///Restart First:   {2}
-        ///
-        ///Restart:   {3}
-        ///
-        ///Restart if possible:   {4}
-        ///
-        ///Do not restart:   {5}.
-        /// </summary>
-        public static string HAWIZ_SUMMARY {
-            get {
-                return ResourceManager.GetString("HAWIZ_SUMMARY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Heartbeat SR:   {0}
-        ///
-        ///Failure tolerance:   {1}
-        ///
         ///Restart:   {2}
         ///
         ///Restart if possible:   {3}
@@ -16467,27 +16439,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to HA Plan.
         /// </summary>
-        public static string HAWIZARD_ASSIGNRIORITIESPAGE_TEXT {
+        public static string HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT {
             get {
-                return ResourceManager.GetString("HAWIZARD_ASSIGNRIORITIESPAGE_TEXT", resourceCulture);
+                return ResourceManager.GetString("HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Configure the HA restart priority, restart order and delay interval for the VMs in this pool.
         /// </summary>
-        public static string HAWIZARD_ASSIGNRIORITIESPAGE_TITLE {
+        public static string HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE {
             get {
-                return ResourceManager.GetString("HAWIZARD_ASSIGNRIORITIESPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configure the HA restart priority for the VMs in this pool.
-        /// </summary>
-        public static string HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER {
-            get {
-                return ResourceManager.GetString("HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER", resourceCulture);
+                return ResourceManager.GetString("HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE", resourceCulture);
             }
         }
         

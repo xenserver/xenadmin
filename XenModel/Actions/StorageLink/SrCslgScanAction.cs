@@ -70,15 +70,7 @@ namespace XenAdmin.Actions
         {
             // CA-40132 create a new secret based on the secret that was passed in to the constructor. This is required so that the
             // server doesn't associate the secret with a particular SR and then delete it when the SR is detached.         
-            string newPasswordSecret = "";
-            if (!Helpers.BostonOrGreater(Connection))
-            {
-                string secretRef = Secret.get_by_uuid(Session, _passwordSecret);
-                string password = Secret.get_value(Session, secretRef);
-                newPasswordSecret = Secret.CreateSecret(Session, password);
-            }
-            else
-                newPasswordSecret = Secret.CreateSecret(Session, _passwordSecret);
+            string newPasswordSecret = Secret.CreateSecret(Session, _passwordSecret);
 
             dconf["password_secret"] = newPasswordSecret;
             try

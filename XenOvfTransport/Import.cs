@@ -259,7 +259,7 @@ namespace XenOvfTransport
 			#region Create appliance
 
         	XenRef<VM_appliance> applRef = null;
-			if (Helpers.BostonOrGreater(xenSession.Connection) && ApplianceName != null)
+			if (ApplianceName != null)
 			{
 				var vmAppliance = new VM_appliance {name_label = ApplianceName, Connection = xenSession.Connection};
 				applRef = VM_appliance.create(xenSession, vmAppliance);
@@ -286,29 +286,26 @@ namespace XenOvfTransport
                 log.DebugFormat("OVF.Import.Process: DefineSystem completed ({0})", VM.get_name_label(xenSession, vmRef));
 				
 				#region Set appliance
-				if (Helpers.BostonOrGreater(xenSession.Connection))
+				if (applRef != null)
+					VM.set_appliance(xenSession, vmRef.opaque_ref, applRef.opaque_ref);
+
+				if (ovfObj.Sections != null)
 				{
-					if (applRef != null)
-						VM.set_appliance(xenSession, vmRef.opaque_ref, applRef.opaque_ref);
-
-					if (ovfObj.Sections != null)
+					StartupSection_Type[] startUpArray = OVF.FindSections<StartupSection_Type>(ovfObj.Sections);
+					if (startUpArray != null && startUpArray.Length > 0)
 					{
-						StartupSection_Type[] startUpArray = OVF.FindSections<StartupSection_Type>(ovfObj.Sections);
-						if (startUpArray != null && startUpArray.Length > 0)
+						var startupSection = startUpArray[0];
+						var itemList = startupSection.Item;
+
+						if (itemList != null)
 						{
-							var startupSection = startUpArray[0];
-							var itemList = startupSection.Item;
+							var item = itemList.FirstOrDefault(it => it.id == vSystem.id);
 
-							if (itemList != null)
+							if (item != null)
 							{
-								var item = itemList.FirstOrDefault(it => it.id == vSystem.id);
-
-								if (item != null)
-								{
-									VM.set_start_delay(xenSession, vmRef.opaque_ref, item.startDelay);
-									VM.set_shutdown_delay(xenSession, vmRef.opaque_ref, item.stopDelay);
-									VM.set_order(xenSession, vmRef.opaque_ref, item.order);
-								}
+								VM.set_start_delay(xenSession, vmRef.opaque_ref, item.startDelay);
+								VM.set_shutdown_delay(xenSession, vmRef.opaque_ref, item.stopDelay);
+								VM.set_order(xenSession, vmRef.opaque_ref, item.order);
 							}
 						}
 					}
@@ -1215,17 +1212,6 @@ namespace XenOvfTransport
             table.Add("actions_after_shutdown", "destroy");
             table.Add("actions_after_reboot", "restart");
             table.Add("actions_after_crash", "restart");
-
-			//place imported appliance in folder only for versions earlier than Boston
-			if (!Helpers.BostonOrGreater(xenSession.Connection) && ApplianceName != null && Properties.Settings.Default.CreateApplianceFolder)
-			{
-				Hashtable otherconfig = new Hashtable();
-				string parent_folder = Properties.Settings.Default.ApplianceFolderPath;
-				if (string.IsNullOrEmpty(parent_folder))
-					parent_folder = Messages.APPLIANCE_FOLDER_PATH;
-				otherconfig.Add("folder", string.Format("/{0}/{1}", parent_folder, ApplianceName));
-				table.Add("other_config", otherconfig);
-			}
 
         	double hvmshadowmultiplier = 1.0;
             table.Add("HVM_shadow_multiplier", hvmshadowmultiplier);

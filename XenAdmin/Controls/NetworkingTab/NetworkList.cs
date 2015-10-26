@@ -167,7 +167,8 @@ namespace XenAdmin.Controls.NetworkingTab
                         this.VlanColumn,
                         this.AutoColumn,
                         this.LinkStatusColumn,
-                        this.NetworkMacColumn});
+                        this.NetworkMacColumn,
+                        this.MtuColumn});
 
                 //CA-47050: the Description column should be autosized to Fill, but should not become smaller than a minimum
                 //width, which here is chosen to be the column header width. To find what this width is set temporarily the
@@ -176,10 +177,6 @@ namespace XenAdmin.Controls.NetworkingTab
                 int storedWidth = this.DescriptionColumn.Width;
                 this.DescriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 this.DescriptionColumn.MinimumWidth = storedWidth;
-
-                // add MTU to grid view on Network tab for pools and hosts, for Cowley or greater only (CA-45643)
-                if (Helpers.CowleyOrGreater(_xenObject.Connection))
-                    NetworksGridView.Columns.Add(this.MtuColumn);
             }
             finally
             {
@@ -904,12 +901,9 @@ namespace XenAdmin.Controls.NetworkingTab
                                VlanCell,
                                AutoCell,
                                LinkStatusCell,
-                               MacCell);
+                               MacCell,
+                               MtuCell);
 
-                // add MTU to grid view on Network tab for pools and hosts, for Cowley or greater only (CA-45643)
-                if (Helpers.CowleyOrGreater(Xmo.Connection))
-                    Cells.Add(this.MtuCell);
-                
                 Network.PropertyChanged += Server_PropertyChanged;
 
                 Program.Invoke(Program.MainWindow, UpdateDetails);

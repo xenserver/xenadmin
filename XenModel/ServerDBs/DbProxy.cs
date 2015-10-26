@@ -680,21 +680,6 @@ namespace XenAdmin.ServerDBs
                     break;
                 }
             }
-
-            if (version == "george")
-            {
-                if (!Helpers.GeorgeOrGreater(connection))
-                {
-                    throw new NotSupportedException("Server needs to be George or greater for this call.");
-                }
-            }
-            else if (version == "mnr")
-            {
-                if (!Helpers.MidnightRideOrGreater(connection))
-                {
-                    throw new NotSupportedException("Server needs to be Midnight Ride or greater for this call.");
-                }
-            }
         }
 
         public string CreateOpaqueRef()

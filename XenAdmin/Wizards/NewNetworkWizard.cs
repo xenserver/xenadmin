@@ -207,13 +207,10 @@ namespace XenAdmin.Wizards
             result.name_label = pageName.NetworkName;
             result.name_description = pageName.NetworkDescription;
             result.AutoPlug = (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM);
-            if (Helpers.CowleyOrGreater(xenConnection))
-            {
-                if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
-                    result.MTU = pageChinDetails.MTU;
-                else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something
-                    result.MTU = pageNetworkDetails.MTU.Value;
-            }
+            if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
+                result.MTU = pageChinDetails.MTU;
+            else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something
+                result.MTU = pageNetworkDetails.MTU.Value;
             return result;
         }
 

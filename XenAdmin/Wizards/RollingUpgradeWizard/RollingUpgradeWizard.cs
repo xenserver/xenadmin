@@ -77,7 +77,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         protected override void FinishWizard()
         {
             var brokenSRs = RollingUpgradeWizardSelectPool.SelectedMasters
-                .Where(Helpers.BostonOrGreater)
                 .Any(master => master != null && master.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
             if(brokenSRs)
             {

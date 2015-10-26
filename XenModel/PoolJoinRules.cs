@@ -408,13 +408,12 @@ namespace XenAdmin.Core
             if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
                 return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
 
-            if (slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
-                Host.RestrictHAFloodgate(slave) && !Host.RestrictHAFloodgate(master))
+            if (Host.RestrictHA(slave) && !Host.RestrictHA(master))
             {
                 // See http://scale.ad.xensource.com/confluence/display/engp/v6+licensing+for+XenServer+Essentials, req R21a.
                 // That section implies that we should downgrade a paid host to join a free pool, but that can't be the intention
                 // (confirmed by Carl Fischer). Carl's also not concerned about fixing up Enterprise/Platinum mismatches.
-                if (allowLicenseUpgrade && Helpers.MidnightRideOrGreater(master))
+                if (allowLicenseUpgrade)
                     return false;
                 return true;
             }
@@ -430,20 +429,15 @@ namespace XenAdmin.Core
             if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
                 return !slave.IsFreeLicense() && master.IsFreeLicense();
 
-            return (slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
-                !Host.RestrictHAFloodgate(slave) && Host.RestrictHAFloodgate(master));
+            return (!Host.RestrictHA(slave) && Host.RestrictHA(master));
         }
 
         private static bool LicenseMismatch(Host slave, Host master)
         {
-            if (Helpers.MidnightRideOrGreater(slave) && Helpers.MidnightRideOrGreater(master))
-            {
-                Host.Edition slaveEdition = Host.GetEdition(slave.edition);
-                Host.Edition masterEdition = Host.GetEdition(master.edition);
+            Host.Edition slaveEdition = Host.GetEdition(slave.edition);
+            Host.Edition masterEdition = Host.GetEdition(master.edition);
 
-                return slaveEdition != Host.Edition.Free && masterEdition != Host.Edition.Free && slaveEdition != masterEdition;
-            }
-            return false;
+            return slaveEdition != Host.Edition.Free && masterEdition != Host.Edition.Free && slaveEdition != masterEdition;
         }
 
         private static bool HaEnabled(IXenConnection connection)
@@ -454,9 +448,7 @@ namespace XenAdmin.Core
 
         private static bool RoleOK(IXenConnection connection)
         {
-            return
-                !Helpers.MidnightRideOrGreater(connection) ||
-                Role.CanPerform(new RbacMethodList("pool.join"), connection);
+            return Role.CanPerform(new RbacMethodList("pool.join"), connection);
         }
 
         private static bool DifferentNetworkBackends(Host slave, Host master)

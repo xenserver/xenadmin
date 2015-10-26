@@ -455,7 +455,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             get
             {
                 return !XenObject.Connection.Session.IsLocalSuperuser &&
-                       Helpers.MidnightRideOrGreater(XenObject.Connection) &&
                        !Registry.DontSudo;
             }
         }

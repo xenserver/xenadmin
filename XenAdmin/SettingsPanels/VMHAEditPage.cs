@@ -74,8 +74,6 @@ namespace XenAdmin.SettingsPanels
         /// </summary>
         private readonly List<Host_metrics> hostMetrics = new List<Host_metrics>();
 
-		private static bool showStartOrderAndDelay;
-
 		private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
 		#endregion
 
@@ -104,13 +102,6 @@ namespace XenAdmin.SettingsPanels
             {
                 if (vm == null)
                     return "";
-
-                // Disable editing if pool master doesn't have HA license flag
-                Host host = Helpers.GetMaster(vm.Connection);
-                if (host == null || host.RestrictHAOrlando)
-                {
-                    return Messages.HA_LICENSE_DISABLED;
-                }
 
                 Pool pool = Helpers.GetPool(vm.Connection);
                 if (pool == null)
@@ -339,16 +330,9 @@ namespace XenAdmin.SettingsPanels
 
         private void UpdateEnablement()
         {
-            // hide start order and delay for pre-Boston VMs
-            showStartOrderAndDelay = !Helpers.HaIgnoreStartupOptions(vm.Connection);
-            if (!showStartOrderAndDelay)
-            {
-                groupBoxStartupOptions.Visible = false;
-            }
-            
             // Disable editing if pool master doesn't have HA license flag
             Host host = Helpers.GetMaster(vm.Connection);
-            if (host == null || host.RestrictHA)
+            if (host == null || Host.RestrictHA(host))
             {
             	m_labelHaStatus.Text = Messages.HA_LICENSE_DISABLED;
 				m_tlpPriority.Visible = false;
@@ -420,7 +404,7 @@ namespace XenAdmin.SettingsPanels
 
         private bool ChangesMadeInStartupOptions()
         {
-            return showStartOrderAndDelay && (nudOrder.Value != origOrder || nudStartDelay.Value != origStartDelay);
+            return nudOrder.Value != origOrder || nudStartDelay.Value != origStartDelay;
 		}
 
 		public VM.HA_Restart_Priority SelectedPriority { get; private set; }
@@ -551,7 +535,7 @@ namespace XenAdmin.SettingsPanels
                 // If skankPanel is disabled, so is editing
             	var validToSaveHA = !IsHaEditable() || this.vm != null && !haNtolIndicator.UpdateInProgress && haNtolIndicator.Ntol >= 0;
 
-                var validToSaveStartupOptions = !showStartOrderAndDelay || this.vm != null;
+                var validToSaveStartupOptions = this.vm != null;
 
                 return validToSaveHA && validToSaveStartupOptions;
             }
@@ -606,10 +590,6 @@ namespace XenAdmin.SettingsPanels
 		{
 			if (pool == null)
 				return;
-			Host master = Helpers.GetMaster(pool.Connection);
-			if (master == null || master.RestrictHAOrlando)
-				return;
-
 			HAPage.EditHA(pool);
 		}
 

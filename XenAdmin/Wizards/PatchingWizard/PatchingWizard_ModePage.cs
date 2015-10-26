@@ -89,16 +89,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch);
-                    if (Helpers.MidnightRideOrGreater(SelectedServers[0].Connection))
-                    {
-                        AutomaticRadioButton.Enabled = true;
-                        AutomaticRadioButton.Checked = true;
-                    }
-                    else
-                    {
-                        AutomaticRadioButton.Enabled = false;
-                        ManualRadioButton.Checked = true;
-                    }
+                    AutomaticRadioButton.Enabled = true;
+                    AutomaticRadioButton.Checked = true;
                     break;
                 case UpdateType.NewOem:
                     ManualRadioButton.Checked = true;

@@ -148,7 +148,7 @@ namespace XenAdmin.Network.StorageLink
             {
                 Pool pool = Helpers.GetPoolOfOne(c);
 
-                if (c.IsConnected && pool != null && Helpers.MidnightRideOrGreater(c) && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices))
+                if (c.IsConnected && pool != null && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices))
                 {
                     Settings.CslgCredentials localCreds = null;
                     Invoke(() => localCreds = Settings.GetCslgCredentials(c));
@@ -190,29 +190,6 @@ namespace XenAdmin.Network.StorageLink
         private List<StorageLinkCredentials> GetAllStorageLinkCredentials()
         {
             var output = new List<StorageLinkCredentials>();
-
-            foreach (IXenConnection connection in GetXenConnectionsCopy())
-            {
-                if (connection.IsConnected && !Helpers.FeatureForbidden(connection, XenAPI.Host.RestrictStorageChoices) && !Helpers.BostonOrGreater(connection) && Helpers.CowleyOrGreater(connection))
-                {
-                    Pool pool = Helpers.GetPoolOfOne(connection);
-
-                    if (pool != null) // can be null if still connecting.
-                    {
-                        var allCreds = new List<StorageLinkCredentials> { pool.GetStorageLinkCredentials() };
-                        allCreds.AddRange(Array.ConvertAll(connection.Cache.PBDs, p => p.GetStorageLinkCredentials()));
-                        allCreds.RemoveAll(c => c == null || !c.IsValid || string.IsNullOrEmpty(c.Password));
-
-                        foreach (StorageLinkCredentials creds in allCreds)
-                        {
-                            if (null == output.Find(c => c.Host == creds.Host && c.Username == creds.Username))
-                            {
-                                output.Add(creds);
-                            }
-                        }
-                    }
-                }
-            }
             return output;
         }
 

@@ -1322,13 +1322,9 @@ namespace XenAdmin
             // 'Home' tab is only visible if the 'Overview' tree node is selected, or if the tree is
             // empty (i.e. at startup).
             bool show_home = SelectionManager.Selection.Count == 1 && SelectionManager.Selection[0].Value == null;
-            // Only show the HA tab if the host's license has the HA flag set
-            bool has_ha_license_flag = selectionMaster != null && !selectionMaster.RestrictHAOrlando;
-            bool george_or_greater = Helpers.GeorgeOrGreater(selectionConnection);
-            bool mr_or_greater = Helpers.MidnightRideOrGreater(selectionConnection);
             // The upsell pages use the first selected XenObject: but they're only shown if there is only one selected object (see calls to ShowTab() below).
             bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
-            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHAFloodgate);
+            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA);
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
 
@@ -1350,7 +1346,7 @@ namespace XenAdmin
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
             ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected || isDockerContainerSelected));
-            ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && mr_or_greater && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
+            ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
             ShowTab(TabPageSR, !multi && !SearchMode && (isSRSelected || isStorageLinkSRSelected));
             ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
@@ -1374,14 +1370,14 @@ namespace XenAdmin
 
             ShowTab(TabPageConsole, !shownConsoleReplacement && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
             ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected && has_ha_license_flag);
-            ShowTab(TabPageSnapshots, !multi && !SearchMode && george_or_greater && isRealVMSelected);
+            ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
+            ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
 
             //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
             if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell ))
-                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
+                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
 
-            ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
+            ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
@@ -1609,9 +1605,6 @@ namespace XenAdmin
             IXenConnection connection = SelectionManager.Selection.GetConnectionOfFirstItem();
             bool vm = SelectionManager.Selection.FirstIsRealVM && !((VM)SelectionManager.Selection.First).Locked;
 
-            Host best_host = hostAncestor ?? (connection == null ? null : Helpers.GetMaster(connection));
-            bool george_or_greater = best_host != null && Helpers.GeorgeOrGreater(best_host);
-
             exportSettingsToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
 
             this.MenuShortcuts = true;
@@ -1619,7 +1612,7 @@ namespace XenAdmin
             startOnHostToolStripMenuItem.Available = startOnHostToolStripMenuItem.Enabled;
             resumeOnToolStripMenuItem.Available = resumeOnToolStripMenuItem.Enabled;
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
-            storageLinkToolStripMenuItem.Available = storageLinkToolStripMenuItem.Enabled;
+            storageLinkToolStripMenuItem.Available = true;// storageLinkToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;

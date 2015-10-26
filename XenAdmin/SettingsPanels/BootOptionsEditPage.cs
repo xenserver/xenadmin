@@ -79,17 +79,13 @@ namespace XenAdmin.SettingsPanels
 		{
 			get
 			{
-				bool autoBootChanged = Helpers.BostonOrGreater(vm.Connection) ? false : m_checkBoxAutoBoot.Checked != vm.AutoPowerOn;
-				return autoBootChanged || (vm.IsHVM && GetOrder() != vm.BootOrder) || (m_textBoxOsParams.Text != vm.PV_args) || (VMPVBootableDVD() != bootFromCD);
+				return (vm.IsHVM && GetOrder() != vm.BootOrder) || (m_textBoxOsParams.Text != vm.PV_args) || (VMPVBootableDVD() != bootFromCD);
 			}
 		}
 
 		public AsyncAction SaveSettings()
 		{
 			vm.BootOrder = GetOrder();
-			
-			if (!Helpers.BostonOrGreater(vm.Connection))
-				vm.AutoPowerOn = m_checkBoxAutoBoot.Checked;
 			
 			vm.PV_args = m_textBoxOsParams.Text;
 
@@ -163,16 +159,10 @@ namespace XenAdmin.SettingsPanels
 
 					string order = String.Join(", ", driveLetters.ToArray());
 
-					if (!Helpers.BostonOrGreater(vm.Connection) && m_checkBoxAutoBoot.Checked)
-						return String.Format(Messages.BOOTORDER_AUTOSTART, order);
-					else
-						return String.Format(Messages.BOOTORDER, order);
+					return String.Format(Messages.BOOTORDER, order);
 				}
 
-				if (!Helpers.BostonOrGreater(vm.Connection) && m_checkBoxAutoBoot.Checked)
-					return Messages.AUTOSTART;
-				else
-					return Messages.NONE_DEFINED;
+				return Messages.NONE_DEFINED;
 			}
 		}
 
@@ -194,14 +184,6 @@ namespace XenAdmin.SettingsPanels
 
 		private void Repopulate()
 		{
-			if (Helpers.BostonOrGreater(vm.Connection))
-				m_checkBoxAutoBoot.Visible = false;
-			else
-			{
-				m_checkBoxAutoBoot.Visible = true;
-				m_checkBoxAutoBoot.Checked = vm.AutoPowerOn;
-			}
-
             BootDeviceAndOrderEnabled(vm.IsHVM);
 
 			if (vm.IsHVM)

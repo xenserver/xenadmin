@@ -98,19 +98,6 @@ namespace XenAdmin.Commands
 				&& (selection.PoolAncestor != null || selection.HostAncestor != null); //CA-61207: this check ensures there's no cross-pool selection
         }
 
-        protected override string GetCantExecuteReasonCore(SelectedItem item)
-        {
-            Pool poolAncestor = item.PoolAncestor;
-
-            if (poolAncestor != null)
-            {
-                string reason = VMGroup<T>.CantExecuteReason(poolAncestor.Connection);
-                if (!string.IsNullOrEmpty(reason))
-                    return reason;
-            }
-            return base.GetCantExecuteReasonCore(item);
-        }
-
         public override string ContextMenuText
         {
             get

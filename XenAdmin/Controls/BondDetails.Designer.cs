@@ -214,7 +214,6 @@ namespace XenAdmin.Controls
             this.tableLayoutPanelBondMode.Controls.Add(this.radioButtonLacpSrcMac, 0, 3);
             this.tableLayoutPanelBondMode.Controls.Add(this.radioButtonBalanceSlb, 0, 0);
             this.tableLayoutPanelBondMode.Controls.Add(this.radioButtonActiveBackup, 0, 1);
-            this.tableLayoutPanelBondMode.MinimumSize = new System.Drawing.Size(0, 40);
             this.tableLayoutPanelBondMode.Name = "tableLayoutPanelBondMode";
             // 
             // radioButtonLacpTcpudpPorts

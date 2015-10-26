@@ -65,7 +65,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override bool EnableNext()
         {
-            return textBoxName.Text.Trim() != "" && ValidName();
+            return textBoxName.Text.Trim() != "";
         }
 
         public override bool EnablePrevious()
@@ -113,17 +113,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             textBoxDescription.Enabled = labelDescription.Enabled = !checkBoxAutoDescription.Checked;
         }
 
-        private bool ValidName()
-        {
-            if (Helpers.BostonOrGreater(Connection))
-                return true;
-            
-            if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
-                return _nameRegex.IsMatch(textBoxName.Text);
-
-            return true;
-        }
-
         public int MatchingFrontends { private get; set; }
 
         #region Event handlers
@@ -136,7 +125,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
             OnPageUpdated();
-            labelInvalidName.Visible = textBoxName.Text.Length > 0 && !ValidName();
+            labelInvalidName.Visible = false;
         }
 
         #endregion

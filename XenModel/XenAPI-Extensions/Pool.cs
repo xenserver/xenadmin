@@ -113,60 +113,18 @@ namespace XenAPI
         {
             get
             {
-                if (Helpers.MidnightRideOrGreater(Connection))
+                var hosts = new List<Host>(Connection.Cache.Hosts);
+                foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
                 {
-                    var hosts = new List<Host>(Connection.Cache.Hosts);
-                    foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
-                    {
-                        Host.Edition edition1 = edition;
-                        Host host = hosts.Find(h => h.edition == Host.GetEditionText(edition1));
+                    Host.Edition edition1 = edition;
+                    Host host = hosts.Find(h => h.edition == Host.GetEditionText(edition1));
 
-                        if (host != null)
-                        {
-                            return Helpers.GetFriendlyLicenseName(host);
-                        }
-                    }
-                    return PropertyManager.GetFriendlyName("Label-host.edition-free");
-                }
-                else
-                {
-                    Host lowestLicenseHost = null;
-                    string lowestLicense = "";
-                    foreach (Host host in this.Connection.Cache.Hosts)
+                    if (host != null)
                     {
-                        string sku = host.license_params.ContainsKey("sku_type") ? host.license_params["sku_type"].Replace(" ", "_").ToLowerInvariant() : "xe_express";
-
-                        //Express
-                        if (sku.EndsWith("xe_express"))
-                        {
-                            lowestLicenseHost = host;
-                            lowestLicense = sku;
-                            break;
-                        }
-
-                        // Server
-                        if (sku.EndsWith("xe_server") && lowestLicense.EndsWith("xe_enterprise"))
-                        {
-                            lowestLicenseHost = host;
-                            lowestLicense = sku;
-                        }
-
-                        // Enterprise
-                        if (lowestLicense == "")
-                        {
-                            lowestLicenseHost = host;
-                            lowestLicense = sku;
-                        }
-                    }
-                    if (lowestLicense.EndsWith("xe_express"))
-                    {
-                        return PropertyManager.GetFriendlyName("Label-host.sku_type-FG-xe_express");
-                    }
-                    else
-                    {
-                        return Helpers.GetFriendlyLicenseName(lowestLicenseHost);
+                        return Helpers.GetFriendlyLicenseName(host);
                     }
                 }
+                return PropertyManager.GetFriendlyName("Label-host.edition-free");
             }
         }
         /// <summary>
@@ -301,16 +259,6 @@ namespace XenAPI
 
         public StorageLinkCredentials GetStorageLinkCredentials()
         {
-            if (other_config != null && Helpers.MidnightRideOrGreater(Connection) && !Helpers.BostonOrGreater(Connection))
-            {
-                var otherConfig = new Dictionary<string, string>(other_config);
-                string host, user, passwordSecret;
-                otherConfig.TryGetValue("storagelink_host", out host);
-                otherConfig.TryGetValue("storagelink_user", out user);
-                otherConfig.TryGetValue("storagelink_password_secret", out passwordSecret);
-
-                return new StorageLinkCredentials(Connection, host, user, null, passwordSecret);
-            }
             return null;
         }
 
@@ -325,8 +273,7 @@ namespace XenAPI
 
                 foreach (Host h in Connection.Cache.Hosts)
                 {
-                    if (!Helpers.CowleyOrGreater(h) ||
-                        Host.RestrictVSwitchController(h) ||
+                    if (Host.RestrictVSwitchController(h) ||
                         !h.software_version.ContainsKey("network_backend") ||
                         h.software_version["network_backend"] != "openvswitch")
                     {

@@ -91,11 +91,6 @@ namespace XenAdmin.Actions
         private readonly string Name;
 
         /// <summary>
-        /// In Boston, most network configuration is done automatically by xapi (PR-1006)
-        /// </summary>
-        private readonly bool bostonOrGreater;
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="bond"></param>
@@ -120,7 +115,6 @@ namespace XenAdmin.Actions
             Name = bond.Name;
 
             Pool = Helpers.GetPoolOfOne(Connection);
-            bostonOrGreater = Helpers.BostonOrGreater(Connection);
 
             foreach (Host host in Connection.Cache.Hosts)
             {
@@ -145,10 +139,7 @@ namespace XenAdmin.Actions
                             pif.Locked = true;
                         }
 
-                        if (bostonOrGreater)
-                        {
-                            FirstSlaves[master] = Connection.Resolve(b.primary_slave);
-                        }
+                        FirstSlaves[master] = Connection.Resolve(b.primary_slave);
 
                         if (!FirstSlaves.ContainsKey(master) && slaves.Count != 0)
                             FirstSlaves[master] = slaves[0];
@@ -173,25 +164,6 @@ namespace XenAdmin.Actions
             string old_network_name = Network == null ? "" : Network.Name;
             Exception e = null;
 
-            if (!bostonOrGreater)
-            {
-                if (Network != null && NewNetworkName != null)
-                {
-                    // Unplug all active VIFs, because we can't fiddle with the PIFs on the network while the
-                    // VIFs are active (xapi won't let us).
-                    foreach (VIF vif in Connection.ResolveAll(Network.VIFs))
-                    {
-                        if (vif.currently_attached)
-                        {
-                            log.DebugFormat("Unplugging VIF {0} from network {1}...", vif.uuid, old_network_name);
-                            VIF.unplug(Session, vif.opaque_ref);
-                            unplugged_vifs.Add(vif);
-                            log.DebugFormat("VIF {0} unplugged from network {1}.", vif.uuid, old_network_name);
-                        }
-                    }
-                }
-            }
-
             BestEffort(ref e, ReconfigureManagementInterfaces);
 
             if (e != null)
@@ -199,7 +171,7 @@ namespace XenAdmin.Actions
 
             PercentComplete = 50;
 
-            int inc = 40 / (Bonds.Count + Masters.Count + Slaves.Count);
+            int inc = 40 / Bonds.Count;
 
             int lo = PercentComplete;
             foreach (Bond bond in Bonds)
@@ -210,19 +182,6 @@ namespace XenAdmin.Actions
                 PollToCompletion(lo1, lo1 + inc);
 
                 lo += inc;
-            }
-
-            foreach (PIF master in Secondaries)
-            {
-                if (!bostonOrGreater)
-                    ReconfigureSecondaryManagement(master, PercentComplete + inc);
-                PercentComplete += inc;
-            }
-
-            if (!bostonOrGreater)
-            {
-                foreach (PIF pif in Slaves)
-                    NetworkingActionHelpers.Plug(this, pif, PercentComplete + inc);
             }
 
             if (Network != null)
@@ -249,20 +208,6 @@ namespace XenAdmin.Actions
                             n.SaveChanges(Session);
                             log.DebugFormat("Renaming network {0} ({1}) done.", NewNetworkName, n.uuid);
                         });
-
-                    // Replug all the VIFs that we unplugged before.
-                    if (!bostonOrGreater)
-                    {
-                        foreach (VIF vif in unplugged_vifs)
-                        {
-                            log.DebugFormat("Replugging VIF {0} into network {1}...", vif.opaque_ref, NewNetworkName);
-                            BestEffort(ref e, delegate()
-                                {
-                                    VIF.plug(Session, vif.opaque_ref);
-                                    log.DebugFormat("Replugging VIF {0} into network {1} done.", vif.opaque_ref, NewNetworkName);
-                                });
-                        }
-                    }
                 }
             }
 
@@ -280,39 +225,8 @@ namespace XenAdmin.Actions
             foreach (PIF master in Masters)
             {
                 progress += inc;
-                if (bostonOrGreater)
-                {
-                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstSlaves[master]);
-                }
-                else if (master.management)
-                {
-                    ReconfigurePrimaryManagement(master, progress);
-                }
-                else if (master.IsSecondaryManagementInterface(true))
-                {
-                    DeconfigureSecondaryManagement(master, progress);
-                }
+                NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstSlaves[master]);
             }
-        }
-
-        private void ReconfigurePrimaryManagement(PIF master, int hi)
-        {
-            System.Diagnostics.Trace.Assert(!bostonOrGreater);
-            NetworkingActionHelpers.ReconfigureSinglePrimaryManagement(this, master, FirstSlaves[master], hi);
-        }
-
-        private void DeconfigureSecondaryManagement(PIF master, int hi)
-        {
-            System.Diagnostics.Trace.Assert(!bostonOrGreater);
-            NewFirstSlaves[master] = NetworkingHelper.CopyIPConfig(master, FirstSlaves[master]);
-            NetworkingActionHelpers.BringDown(this, master, hi);
-            Secondaries.Add(master);
-        }
-
-        private void ReconfigureSecondaryManagement(PIF master, int hi)
-        {
-            System.Diagnostics.Trace.Assert(!bostonOrGreater);
-            NetworkingActionHelpers.BringUp(this, NewFirstSlaves[master], FirstSlaves[master], hi);
         }
 
         private void UnlockAll()

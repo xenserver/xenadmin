@@ -128,7 +128,7 @@ namespace XenAdmin.Network
                 if (AcceptCertificate)
                     log.Debug("Adding cert after confirmation");
                 else
-                    log.Debug("User refejected new cert");
+                    log.Debug("User rejected new cert");
                 return AcceptCertificate;
             }
         }

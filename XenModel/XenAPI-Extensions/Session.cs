@@ -229,10 +229,6 @@ namespace XenAPI
                 if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
                     return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-                // AD users pre midnight ride are all pool admins
-                if (!Helpers.MidnightRideOrGreater(Connection))
-                    return Messages.AD_ROLE_POOL_ADMIN;
-
                 return Role.FriendlyCSVRoleList(Roles);
             }
         }
@@ -248,9 +244,6 @@ namespace XenAPI
                 if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
                     return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-                // AD users pre midnight ride are all pool admins
-                if (!Helpers.MidnightRideOrGreater(Connection))
-                    return Messages.AD_ROLE_POOL_ADMIN;
                 //Sort roles from highest to lowest
                 roles.Sort((r1, r2) => { return r2.CompareTo(r1); });
                 //Take the highest role

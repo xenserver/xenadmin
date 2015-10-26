@@ -5186,13 +5186,13 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>带有任何自定义字段</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TEXT" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT" xml:space="preserve">
     <value>高可用性计划</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>为该池中的 VM 配置高可用性重启优先级、重启顺序和延迟间隔</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
     <value>为该池中的 VM 配置高可用性重启优先级</value>
   </data>
   <data name="HAWIZ_SUMMARY" xml:space="preserve">

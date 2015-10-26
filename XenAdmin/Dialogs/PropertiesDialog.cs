@@ -150,17 +150,7 @@ namespace XenAdmin.Dialogs
                 {
                     ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
                     ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
-
-                    if (!Helpers.BostonOrGreater(xenObjectCopy.Connection) && Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictHAFloodgate))
-                    {
-                        VMHAUpsellEditPage = new UpsellPage {Image = Properties.Resources._001_PowerOn_h32bit_16, Text = Messages.START_UP_OPTIONS};
-                        VMHAUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_HA, InvisibleMessages.UPSELL_LEARNMOREURL_HA);
-                        ShowTab(VMHAUpsellEditPage);
-                    }
-                    else
-                    {
-                        ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
-                    }
+                    ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
                 }
 
                 if (is_vm || is_host || (is_sr && Helpers.ClearwaterOrGreater(connection)))
@@ -189,24 +179,16 @@ namespace XenAdmin.Dialogs
                     {
                         ShowTab(PerfmonAlertOptionsEditPage = new PerfmonAlertOptionsPage());
                     }
-
-                    if (!Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictStorageChoices)
-                        && !Helpers.BostonOrGreater(xenObjectCopy.Connection)
-                        && Helpers.MidnightRideOrGreater(xenObjectCopy.Connection))
-                        ShowTab(StorageLinkPage = new StorageLinkEditPage());
                 }
 
                 if (is_host)
                 {
                     ShowTab(hostMultipathPage1 = new HostMultipathPage());
-
-                    if (Helpers.MidnightRideOrGreater(xenObject.Connection))
-                        ShowTab(HostPowerONEditPage = new HostPowerONEditPage());
-
+                    ShowTab(HostPowerONEditPage = new HostPowerONEditPage());
                     ShowTab(LogDestinationEditPage = new LogDestinationEditPage());
                 }
                 
-                if (is_pool && Helpers.MidnightRideOrGreater(xenObject.Connection))
+                if (is_pool)
                     ShowTab(PoolPowerONEditPage = new PoolPowerONEditPage());
 
                 if ((is_pool_or_standalone && Helpers.VGpuCapability(xenObjectCopy.Connection))
@@ -226,18 +208,15 @@ namespace XenAdmin.Dialogs
 
                 if (is_vm && ((VM)xenObjectCopy).CanHaveGpu)
                 {
-                    if (Helpers.BostonOrGreater(xenObject.Connection))
+                    if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
                     {
-                        if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
-                        {
-                            GpuUpsellEditPage = new UpsellPage { Image = Properties.Resources._000_GetMemoryInfo_h32bit_16, Text = Messages.GPU };
-                            GpuUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_GPU, InvisibleMessages.UPSELL_LEARNMOREURL_GPU);
-                            ShowTab(GpuUpsellEditPage);
-                        }
-                        else
-                        {
-                            ShowTab(GpuEditPage = new GpuEditPage());
-                        }
+                        GpuUpsellEditPage = new UpsellPage { Image = Properties.Resources._000_GetMemoryInfo_h32bit_16, Text = Messages.GPU };
+                        GpuUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_GPU, InvisibleMessages.UPSELL_LEARNMOREURL_GPU);
+                        ShowTab(GpuUpsellEditPage);
+                    }
+                    else
+                    {
+                        ShowTab(GpuEditPage = new GpuEditPage());
                     }
                 }
 

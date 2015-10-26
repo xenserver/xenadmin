@@ -52,9 +52,6 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-			if (!Helpers.BostonOrGreater(VM.Connection))
-				XenAPI.VM.set_ha_always_run(Session, VM.opaque_ref, false);
-
             XenAPI.VM.set_ha_restart_priority(Session, VM.opaque_ref, XenAPI.VM.RESTART_PRIORITY_DO_NOT_RESTART);
             Description = Messages.COMPLETED;
         }

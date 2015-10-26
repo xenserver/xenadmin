@@ -265,51 +265,22 @@ namespace XenAPI
             Download_PBD(session, list);
             Download_Crashdump(session, list);
             Download_Console(session, list);
-
-            if (session.APIVersion >= API_Version.API_1_2)
-            {
-                // Download Miami-only objects
-                Download_Pool_patch(session, list);
-                Download_Bond(session, list);
-                Download_VLAN(session, list);
-            }
-
-            if (session.APIVersion >= API_Version.API_1_3)
-            {
-                // Download Orlando-only objects
-                Download_Blob(session, list);
-                Download_Message(session, list);
-            }
-
-            if (session.APIVersion >= API_Version.API_1_6)
-            {
-                // Download George-only objects
-                Download_Subject(session, list);
-            }
-
-            if (session.APIVersion >= API_Version.API_1_7)
-            {
-                // Download Midnight Ride-only objects
-                Download_Role(session, list);
-            }
-
-            if (session.APIVersion >= API_Version.API_1_8)
-            {
-                // Download Cowley-only objects
-                Download_VMPP(session, list);
-                Download_Tunnel(session, list);
-            }
-
-            if (session.APIVersion >= API_Version.API_1_9)
-            {
-                // Download Boston-only objects
-                Download_VM_appliance(session, list);
-                Download_DR_task(session, list);
-                Download_PCI(session, list);
-                Download_PGPU(session, list);
-                Download_GPU_group(session, list);
-                Download_VGPU(session, list);
-            }
+            Download_Pool_patch(session, list);
+            Download_Bond(session, list);
+            Download_VLAN(session, list);
+            Download_Blob(session, list);
+            Download_Message(session, list);
+            Download_Subject(session, list);
+            Download_Role(session, list);
+            Download_VMPP(session, list);
+            Download_Tunnel(session, list);
+            Download_VM_appliance(session, list);
+            Download_DR_task(session, list);
+            Download_PCI(session, list);
+            Download_PGPU(session, list);
+            Download_GPU_group(session, list);
+            Download_VGPU(session, list);
+            // NB New types should be protected with if (session.APIVersion >= API_Version.API_x_y)
 
             foreach (ObjectChange o in list)
             {

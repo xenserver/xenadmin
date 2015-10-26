@@ -904,12 +904,6 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionBootOptions;
 
-            if (!Helpers.BostonOrGreater(vm.Connection))
-			{
-			    s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn),
-                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow, vm)));
-			}
-
         	if (vm.IsHVM)
             {	
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
@@ -1158,7 +1152,7 @@ namespace XenAdmin.TabPages
                 s.AddEntry(FriendlyName("host.uptime"), uptime == null ? "" : host.Uptime.ToString());
                 s.AddEntry(FriendlyName("host.agentUptime"), agentUptime == null ? "" : host.AgentUptime.ToString());
 
-                if ((Helpers.GeorgeOrGreater(xenObject.Connection) && host.external_auth_type == Auth.AUTH_TYPE_AD))
+                if (host.external_auth_type == Auth.AUTH_TYPE_AD)
                     s.AddEntry(FriendlyName("host.external_auth_service_name"), host.external_auth_service_name);
             }
             else if (xenObject is VM)
@@ -1169,12 +1163,12 @@ namespace XenAdmin.TabPages
 
                 s.AddEntry(FriendlyName("VM.OperatingMode"), vm.IsHVM ? Messages.VM_OPERATING_MODE_HVM : Messages.VM_OPERATING_MODE_PV);
 
-                if (!vm.DefaultTemplate && Helpers.MidnightRideOrGreater(vm.Connection))
+                if (!vm.DefaultTemplate)
                 {
                     s.AddEntry(Messages.BIOS_STRINGS_COPIED, vm.BiosStringsCopied ? Messages.YES : Messages.NO);
                 }
 
-				if (Helpers.BostonOrGreater(vm.Connection) && vm.Connection != null)
+				if (vm.Connection != null)
 				{
 					var appl = vm.Connection.Resolve(vm.appliance);
 					if (appl != null)

@@ -80,7 +80,6 @@ namespace XenAdmin.TabPages
                 if (_xenObject == null)
                     return;
 
-                SetRbacVisible(Helpers.MidnightRideOrGreater(_xenObject.Connection));
                 pool = Helpers.GetPoolOfOne(_xenObject.Connection);
                 if (pool == null)
                 {
@@ -165,17 +164,6 @@ namespace XenAdmin.TabPages
 
             if (pool.Connection.Session != null)
                 pool.Connection.Session.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(Session_PropertyChanged);
-        }
-
-        /// <summary>
-        /// Toggles whether the RBAC controls are visible on this control
-        /// </summary>
-        /// <param name="p"></param>
-        private void SetRbacVisible(bool p)
-        {
-            ButtonChangeRoles.Visible = p;
-            toolStripMenuItemChangeRoles.Visible = p;
-            GridViewSubjectList.Columns["ColumnRoles"].Visible = p;
         }
 
         /// <summary>
@@ -637,27 +625,20 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    if (!Helpers.MidnightRideOrGreater(subject.Connection))
+                    //Generate the role list
+                    string s = "";
+                    List<Role> roles = subject.Connection.ResolveAll<Role>(subject.roles);
+                    roles.Sort();
+                    roles.Reverse();
+                    foreach (Role r in roles)
                     {
-                        expandedRoles = contractedRoles = "";
+                        s = String.Format("{0}\n{1}", s, r.FriendlyName);
                     }
-                    else
-                    {
-                        //Generate the role list
-                        string s = "";
-                        List<Role> roles = subject.Connection.ResolveAll<Role>(subject.roles);
-                        roles.Sort();
-                        roles.Reverse();
-                        foreach (Role r in roles)
-                        {
-                            s = String.Format("{0}\n{1}", s, r.FriendlyName);
-                        }
-                        expandedRoles = s;
-                        contractedRoles = roles.Count > 0 ?
-                            roles.Count > 1 ? roles[0].FriendlyName.AddEllipsis() : roles[0].FriendlyName
-                            : "";
+                    expandedRoles = s;
+                    contractedRoles = roles.Count > 0 ?
+                        roles.Count > 1 ? roles[0].FriendlyName.AddEllipsis() : roles[0].FriendlyName
+                        : "";
 
-                    }
                     contractedSubjectInfo = new List<KeyValuePair<String, String>>();
                     contractedSubjectInfo.Add(new KeyValuePair<string, string>(subject.DisplayName ?? subject.SubjectName ?? "", ""));
                     expandedSubjectInfo = Subject.ExtractKvpInfo(subject);

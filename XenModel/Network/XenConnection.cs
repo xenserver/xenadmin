@@ -1229,18 +1229,12 @@ namespace XenAdmin.Network
                 // Save the session so we can log it out later
                 task.Session = session;
 
-                if (session.APIVersion <= API_Version.API_1_2)
+                if (session.APIVersion <= API_Version.API_1_8)
                     throw new ServerNotSupported();
 
                 // Event.next uses a different session with a shorter timeout: see CA-33145.
-                // Although Orlando hosts don't: see CA-40952.
-                Session eventNextSession =
-                    session.APIVersion >= API_Version.API_1_6 ?  // Helpers.GeorgeOrGreater, except we can't use that because the cache isn't populated before we fire the first Event.next.
-                    DuplicateSession(EVENT_NEXT_TIMEOUT) :
-                    session;
-
-                if (session.APIVersion >= API_Version.API_1_6)
-                    eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
+                Session eventNextSession = DuplicateSession(EVENT_NEXT_TIMEOUT);
+                eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
 
                 bool legacyEventSystem = XenObjectDownloader.LegacyEventSystem(session);
 

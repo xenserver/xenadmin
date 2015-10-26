@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             initialising = true;
 
             Template = SelectedTemplate;
-            if (Template.has_ballooning && Helpers.MidnightRideOrGreater(Template.Connection) && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
+            if (Template.has_ballooning && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
                 memoryMode = (Template.memory_dynamic_max == Template.memory_static_max ? 2 : 3);
             else
                 memoryMode = 1;

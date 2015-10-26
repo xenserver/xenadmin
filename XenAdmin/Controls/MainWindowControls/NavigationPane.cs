@@ -114,7 +114,9 @@ namespace XenAdmin.Controls.MainWindowControls
             Search.SearchesChanged += PopulateSearchDropDown;
             PopulateSearchDropDown();
 
-            buttonInfraBig.Checked = true;
+            // TODO: Remove
+            // comment markers
+            // buttonInfraBig.Checked = true;
         }
 
         protected override void OnResize(EventArgs e)

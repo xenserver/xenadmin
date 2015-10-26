@@ -123,14 +123,5 @@ namespace XenAdmin.Commands
             }
             return false;
         }
-
-        protected override string GetCantExecuteReasonCore(SelectedItem item)
-        {
-            IXenConnection connection = item.Connection;
-            Host best_host = item.HostAncestor ?? (connection == null ? null : Helpers.GetMaster(connection));
-            bool george_or_greater = best_host != null && Helpers.GeorgeOrGreater(best_host);
-
-            return george_or_greater ? base.GetCantExecuteReasonCore(item) : string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_GEORGE, Messages.WLB);
-        }
     }
 }

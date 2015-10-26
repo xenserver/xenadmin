@@ -102,7 +102,6 @@ namespace XenAPI
         {
             this._uuid = opaque_ref;
             SetAPIVersion();
-            if (APIVersion >= API_Version.API_1_6)
 	    	SetADDetails();
         }
 
@@ -144,9 +143,6 @@ namespace XenAPI
             // Cache the details of this user to avoid making server calls later
             // For example, some users get access to the pool through a group subject and will not be in the main cache
             UserDetails.UpdateDetails(_userSid, this);
-
-            if (APIVersion <= API_Version.API_1_6)  // Older versions have no RBAC, only AD
-                return;
 
             // allRoles will contain every role on the server, permissions contains the subset of those that are available to this session.
             permissions = Session.get_rbac_permissions(this, uuid);
@@ -261,8 +257,7 @@ namespace XenAPI
             {
                 _uuid = proxy.session_login_with_password(username, password, version).parse();
                 SetAPIVersion();
-                if (APIVersion >= API_Version.API_1_6)
-                    SetADDetails();
+                SetADDetails();
             }
             catch (Failure exn)
             {
@@ -284,8 +279,7 @@ namespace XenAPI
             {
                 _uuid = proxy.session_login_with_password(username, password, version, originator).parse();
                 SetAPIVersion();
-                if (APIVersion >= API_Version.API_1_6)
-                    SetADDetails();
+                SetADDetails();
             }
             catch (Failure exn)
             {

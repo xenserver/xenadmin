@@ -188,7 +188,7 @@ namespace XenAdmin.Actions
         {
             ShellCmd cmd = _menuItemFeature.ShellCmd;
             RbacMethodList methodsToCheck = cmd.RequiredMethods.Count == 0 ? _menuItemFeature.GetMethodList(cmd.RequiredMethodList) : cmd.RequiredMethods;
-            if (methodsToCheck == null || xenConnection.Session == null || xenConnection.Session.IsLocalSuperuser || !Helpers.MidnightRideOrGreater(xenConnection))
+            if (methodsToCheck == null || xenConnection.Session == null || xenConnection.Session.IsLocalSuperuser)
             {
                 return;
             }

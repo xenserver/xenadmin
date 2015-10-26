@@ -65,7 +65,6 @@ namespace XenAdmin.Actions
         private readonly long mtu;
         private readonly bond_mode bondMode;
         private readonly Dictionary<Host, List<PIF>> PIFs = new Dictionary<Host, List<PIF>>();
-        private readonly bool bostonOrGreater;  // in Boston, most network configuration is done automatically by xapi (PR-1006)
         private readonly bool tampaOrGreater;  
         private readonly Host Master;
         private readonly Bond.hashing_algoritm hashingAlgoritm;
@@ -94,7 +93,6 @@ namespace XenAdmin.Actions
             if (Master == null)
                 throw new Failure(Failure.INTERNAL_ERROR, "Pool master has gone away");
 
-            bostonOrGreater = Helpers.BostonOrGreater(connection);
             tampaOrGreater = Helpers.TampaOrGreater(connection);
 
             foreach (Host host in Connection.Cache.Hosts)
@@ -133,7 +131,7 @@ namespace XenAdmin.Actions
             new_bonds = new List<NewBond>();
             network = null;
             Connection.ExpectDisruption = true;
-            int inc = 100 / (Connection.Cache.HostCount * 3 + 1);
+            int inc = 100 / (Connection.Cache.HostCount * 2 + 1);
             string network_ref = CreateNetwork(0, inc);
 
             try
@@ -161,9 +159,7 @@ namespace XenAdmin.Actions
 
                     RelatedTask = tampaOrGreater ?
                         Bond.async_create(Session, network_ref, pif_refs, "", bondMode, bondProperties) :
-                        bostonOrGreater ?
-                            Bond.async_create(Session, network_ref, pif_refs, "", bondMode) : 
-                            Bond.async_create(Session, network_ref, pif_refs, "");
+                        Bond.async_create(Session, network_ref, pif_refs, "", bondMode);
 
                     PollToCompletion(lo, lo + inc);
                     lo += inc;
@@ -187,13 +183,6 @@ namespace XenAdmin.Actions
                 {
                     lo += inc;
                     ReconfigureManagementInterfaces(new_bond.slaves, new_bond.master, lo);
-                }
-
-                foreach (NewBond new_bond in new_bonds)
-                {
-                    lo += inc;
-                    if (!bostonOrGreater)
-                        NetworkingActionHelpers.Plug(this, new_bond.master, lo);
                 }
             }
             catch (Exception)
@@ -251,38 +240,8 @@ namespace XenAdmin.Actions
             foreach (PIF pif in slaves)
             {
                 lo += inc;
-
-                // In Boston and later, the only thing we need to do is move the ManagementPurpose
-                // (= management interface name) to the bond (see PR-1006/CP-2059).
-                if (bostonOrGreater)
-                {
-                    NetworkingActionHelpers.MoveManagementInterfaceName(this, pif, new_master);
-                }
-                else if (pif.management)
-                {
-                    log.DebugFormat("Moving primary management interface to {0}...", pif.uuid);
-                    NetworkingActionHelpers.ReconfigureSinglePrimaryManagement(this, pif, new_master, lo);
-                    log.DebugFormat("Moving primary management interface to {0} done.", pif.uuid);
-                }
-                else if (pif.IsSecondaryManagementInterface(true))
-                {
-                    log.DebugFormat("Moving secondary management interface to {0}...", pif.uuid);
-                    ReconfigureSecondaryManagement(pif, new_master, lo);
-                    log.DebugFormat("Moving secondary management interface to {0} done.", pif.uuid);
-                }
+                NetworkingActionHelpers.MoveManagementInterfaceName(this, pif, new_master);
             }
-        }
-
-        private void ReconfigureSecondaryManagement(PIF src, PIF dest, int hi)
-        {
-            System.Diagnostics.Trace.Assert(!bostonOrGreater);
-
-            int mid = (PercentComplete + hi) / 2;
-
-            PIF new_dest = NetworkingHelper.CopyIPConfig(src, dest);
-
-            NetworkingActionHelpers.BringDown(this, src, mid);
-            NetworkingActionHelpers.BringUp(this, new_dest, dest, hi);
         }
 
         /// <summary>
@@ -307,22 +266,7 @@ namespace XenAdmin.Actions
 
             try
             {
-                if (bostonOrGreater)
-                {
-                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, slave);
-                }
-                else if (master.management)
-                {
-                    log.DebugFormat("Reverting primary management interface change for {0} as part of cleanup...", master.uuid);
-                    NetworkingActionHelpers.ReconfigurePrimaryManagement(this, master, slave, PercentComplete);
-                    log.DebugFormat("Reverting primary management interface change for {0} as part of cleanup done.", master.uuid);
-                }
-                else if (master.IsSecondaryManagementInterface(true))
-                {
-                    log.DebugFormat("Reverting secondary management interface change for {0} as part of cleanup...", master.uuid);
-                    ReconfigureSecondaryManagement(master, slave, PercentComplete);
-                    log.DebugFormat("Reverting secondary management interface change for {0} as part of cleanup done.", master.uuid);
-                }
+                NetworkingActionHelpers.MoveManagementInterfaceName(this, master, slave);
             }
             catch (Exception exn)
             {
@@ -337,8 +281,7 @@ namespace XenAdmin.Actions
             XenAPI.Network network = new XenAPI.Network();
             network.name_label = name_label;
             network.AutoPlug = autoplug;
-            if (Helpers.CowleyOrGreater(Connection))
-                network.MTU = mtu;
+            network.MTU = mtu;
             if (network.other_config == null)
                 network.other_config = new Dictionary<string, string>();
             network.other_config[XenAPI.Network.CREATE_IN_PROGRESS] = "true";

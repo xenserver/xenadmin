@@ -98,14 +98,7 @@ namespace XenAdmin.Actions.HostActions
 
             public LicenseDataStruct(XenAPI.Host host)
             {
-                if (Helpers.MidnightRideOrGreater(host))
-                {
-                    Edition = host.edition;
-                }
-                else
-                {
-                    Edition = host.license_params.ContainsKey("sku_type") ? host.license_params["sku_type"] : "";
-                }
+                Edition = host.edition;
                 ExpiryDate = host.license_params.ContainsKey("expiry") ? host.license_params["expiry"] : "";
             }
         }
@@ -194,14 +187,7 @@ namespace XenAdmin.Actions.HostActions
                     string newEdition;
                     if (String.IsNullOrEmpty(CurrentEdition))
                     {
-                        if (Helpers.MidnightRideOrGreater(host))
-                        {
-                            newEdition = host.edition;
-                        }
-                        else
-                        {
-                            newEdition = host.license_params.ContainsKey("sku_type") ? host.license_params["sku_type"] : "";
-                        }
+                        newEdition = host.edition;
                     }
                     else
                     {

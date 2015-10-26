@@ -333,66 +333,6 @@ namespace XenAdmin.Core
             return false;
         }
 
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool GeorgeOrGreater(Host host)
-        {
-            return
-                TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "5.1.0") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool GeorgeOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : GeorgeOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool MidnightRideOrGreater(Host host)
-        {
-            return
-                TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "5.5.900") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool MidnightRideOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : MidnightRideOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool CowleyOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : CowleyOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool CowleyOrGreater(Host host)
-        {
-            return
-                TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "5.6.1") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool BostonOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : BostonOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool BostonOrGreater(Host host)
-        {
-            return
-                TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "5.6.199") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool TampaOrGreater(IXenConnection conn)
         {
@@ -1031,21 +971,11 @@ namespace XenAdmin.Core
 
         public static string GetFriendlyLicenseName(Host host)
         {
-            if (MidnightRideOrGreater(host))
-            {
-				if (string.IsNullOrEmpty(host.edition))
-					return Messages.UNKNOWN;
+			if (string.IsNullOrEmpty(host.edition))
+				return Messages.UNKNOWN;
 
-                string name = PropertyManager.GetFriendlyName("Label-host.edition-" + host.edition);
-                return name ?? Messages.UNKNOWN;
-            }
-            
-			if (host.license_params.ContainsKey("sku_type"))
-            {
-                string fmt = host.IsFloodgateOrLater() ? "Label-host.sku_type-FG-{0}" : "Label-host.sku_type-{0}";
-                return PropertyManager.GetFriendlyName(string.Format(fmt, host.license_params["sku_type"].Replace(" ", "_").ToLowerInvariant()));
-            }
-            return Messages.UNKNOWN;
+            string name = PropertyManager.GetFriendlyName("Label-host.edition-" + host.edition);
+            return name ?? Messages.UNKNOWN;
         }
 
         /// <summary>
@@ -2024,11 +1954,6 @@ namespace XenAdmin.Core
             }
             return ans.ToString();
         }
-
-       public static bool HaIgnoreStartupOptions(IXenConnection connection)
-       {
-            return !Helpers.BostonOrGreater(connection);
-       }
 
        /// <summary>
        /// Does the connection support Link aggregation (LACP) bonds (i.e., is Tampa or later on the vSwitch backend)?

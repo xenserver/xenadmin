@@ -354,8 +354,6 @@ namespace XenAdmin.TabPages
 
         private bool PassedRbacChecks()
         {
-            if (!Helpers.MidnightRideOrGreater(_pool.Connection))
-                return true;
             return Role.CanPerform(WLB_PERMISSION_CHECKS, _pool.Connection);
         }
 

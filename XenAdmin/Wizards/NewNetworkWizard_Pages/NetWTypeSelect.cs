@@ -105,7 +105,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 rbtnCHIN.Enabled = labelCHIN.Enabled = false;
 
                 labelWarningChinOption.Text = 
-                    !Helpers.CowleyOrGreater(connection) || Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
+                    Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
                     string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL, Messages.CHINS) :
                     Messages.CHINS_NEED_VSWITCHCONTROLLER;
 

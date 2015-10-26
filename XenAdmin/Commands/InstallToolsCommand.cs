@@ -310,8 +310,6 @@ namespace XenAdmin.Commands
             if (xenConnection.Session == null)
                 return false;
 
-            if (!Helpers.MidnightRideOrGreater(xenConnection))
-                return true;
             RbacMethodList r = new RbacMethodList("http/connect_console");
             if (Role.CanPerform(r, xenConnection, false))
                 return true;

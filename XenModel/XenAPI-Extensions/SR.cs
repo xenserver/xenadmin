@@ -425,7 +425,7 @@ namespace XenAPI
                 return true;
 
 			//CP-2458: hide SRs that were introduced by a DR_task
-			if (Helpers.BostonOrGreater(Connection) && introduced_by != null && introduced_by.opaque_ref != Helper.NullOpaqueRef)
+			if (introduced_by != null && introduced_by.opaque_ref != Helper.NullOpaqueRef)
 				return false;
 
             return !IsHidden;
@@ -450,9 +450,6 @@ namespace XenAPI
                     type == SRTypes.lvmofc ||
                     type == SRTypes.lvmohba ||
                     type == SRTypes.lvmoiscsi))
-                    return false;
-
-                if (!Helpers.GeorgeOrGreater(Connection))
                     return false;
 
                 return !BoolKey(sm_config, USE_VHD);

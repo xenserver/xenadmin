@@ -182,23 +182,8 @@ namespace XenAdmin.Core
                 return false;
 
             return typeof(T) == typeof(VMPP) ?
-                Helpers.CowleyOrGreater(connection) && Registry.VMPRFeatureEnabled :
-                Helpers.BostonOrGreater(connection);
-        }
-
-        internal static string CantExecuteReason(IXenConnection connection)
-        {
-            if (typeof(T) == typeof(VMPP))
-            {
-                if (!Helpers.CowleyOrGreater(connection))
-                    return Messages.ONLY_IN_COWLEY_OR_LATER;
-            }
-            else
-            {
-                if (!Helpers.BostonOrGreater(connection))
-                    return Messages.ONLY_IN_BOSTON_OR_LATER;
-            }
-            return null;
+                Registry.VMPRFeatureEnabled :
+                true;
         }
 
         internal static Predicate<Host> FeatureRestricted

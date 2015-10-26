@@ -191,7 +191,7 @@ namespace XenAdmin.Wizards.GenericPages
                 PermissionCheckHeaderRow headerRow = AddHeaderRow(connection);
                 PermissionCheckResult checkResult = PermissionCheckResult.OK;
 
-                if (connection.Session.IsLocalSuperuser || connectionChecks.Value.Count == 0 || !Helpers.MidnightRideOrGreater(connection))
+                if (connection.Session.IsLocalSuperuser || connectionChecks.Value.Count == 0)
                 {
                     SetNoWarnings();
                 }
@@ -222,10 +222,10 @@ namespace XenAdmin.Wizards.GenericPages
         {
             Program.AssertOffEventThread();
 
-            if (connection.Session.IsLocalSuperuser || !Helpers.MidnightRideOrGreater(connection))
+            if (connection.Session.IsLocalSuperuser)
             {
                 // We should not be here.
-                log.Warn("A pre RBAC user or local root account is being blocked access");
+                log.Warn("A local root account is being blocked access");
             }
 
             List<Role> roleList = connection.Session.Roles;

@@ -331,11 +331,7 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_Cslg)
                 {
                     AddPage(xenTabPageCslg);
-
-                    if (Helpers.BostonOrGreater(xenConnection))
-                        AddPages(xenTabPageCslgLocation, xenTabPageCslgSettings);
-                    else
-                        AddPages(new XenTabPage { Text = "" });
+                    AddPages(xenTabPageCslgLocation, xenTabPageCslgSettings);
                 }
                 else if (m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                 {
@@ -432,55 +428,12 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(CSLG))
             {
-                #region
-                if (Helpers.BostonOrGreater(xenConnection))
-                {
-                    xenTabPageCslgLocation.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
-                    xenTabPageCslgSettings.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
-                    NotifyNextPagesOfChange(xenTabPageCslgLocation, xenTabPageCslgSettings);
-                }
-                else
-                {
-                    RemovePagesFrom(_rbac ? 4 : 3);
-
-                    if (xenTabPageCslg.SelectedStorageSystem != null)
-                    {
-                        AddPages(xenTabPageCslgSettings);
-                        xenTabPageCslgSettings.SystemStorage = xenTabPageCslg.SelectedStorageSystem;
-                        xenTabPageCslgSettings.StoragePools = xenTabPageCslg.StoragePools;
-                        NotifyNextPagesOfChange(xenTabPageCslgLocation);
-                    }
-                    else if (xenTabPageCslg.NetAppSelected || xenTabPageCslg.DellSelected)
-                    {
-                        AddPage(xenTabPageFilerDetails);
-                        NotifyNextPagesOfChange(xenTabPageFilerDetails);
-
-                        if (xenTabPageCslg.NetAppSelected)
-                        {
-                            if (m_srWizardType is SrWizardType_Cslg)
-                            {
-                                m_srWizardType = ((SrWizardType_Cslg)m_srWizardType).ToNetApp();
-                                xenTabPageCslg.SrWizardType = m_srWizardType;
-                            }
-                            xenTabPageFilerDetails.IsNetApp = true;
-                            AddPage(xenTabPageNetApp);
-                        }
-                        else if (xenTabPageCslg.DellSelected)
-                        {
-                            if (m_srWizardType is SrWizardType_Cslg)
-                            {
-                                m_srWizardType = ((SrWizardType_Cslg)m_srWizardType).ToEqualLogic();
-                                xenTabPageCslg.SrWizardType = m_srWizardType;
-                            }
-                            xenTabPageFilerDetails.IsNetApp = false;
-                            AddPage(xentabPageEqualLogic);
-                        }
-                    }
-                }
+                xenTabPageCslgLocation.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
+                xenTabPageCslgSettings.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
+                NotifyNextPagesOfChange(xenTabPageCslgLocation, xenTabPageCslgSettings);
 
                 foreach (var entry in xenTabPageCslg.DeviceConfigParts)
                     m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-                #endregion
             }
             else if (senderPagetype == typeof(CslgLocation))
             {
@@ -857,11 +810,8 @@ namespace XenAdmin.Wizards
                     return;
             }
 
-            if (_srToReattach.type == "cslg" && Helpers.BostonOrGreater(_srToReattach.Connection)
-                && xenTabPageCslg.SelectedStorageAdapter != null)
-            {
+            if (_srToReattach.type == "cslg" && xenTabPageCslg.SelectedStorageAdapter != null)
                 NextStep();
-            }
         }
 
         protected override string WizardPaneHelpID()

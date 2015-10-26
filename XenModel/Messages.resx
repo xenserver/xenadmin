@@ -1241,9 +1241,6 @@ To use this file, visit https://{0}.</value>
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>Add custom field '{0}'</value>
   </data>
-  <data name="ADD_HOST" xml:space="preserve">
-    <value>Add...</value>
-  </data>
   <data name="ADD_HOST_TO_POOL_AD_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool that is configured to use AD authentication. All pool members must use the same authentication method.
 
@@ -5497,27 +5494,11 @@ Click Configure HA to enable HA for this pool and allow your virtual machines to
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>Has any custom field</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TEXT" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT" xml:space="preserve">
     <value>HA Plan</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>Configure the HA restart priority, restart order and delay interval for the VMs in this pool</value>
-  </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
-    <value>Configure the HA restart priority for the VMs in this pool</value>
-  </data>
-  <data name="HAWIZ_SUMMARY" xml:space="preserve">
-    <value>Heartbeat SR:   {0}
-
-Failure tolerance:   {1}
-
-Restart First:   {2}
-
-Restart:   {3}
-
-Restart if possible:   {4}
-
-Do not restart:   {5}</value>
   </data>
   <data name="HAWIZ_SUMMARY_NEW" xml:space="preserve">
     <value>Heartbeat SR:   {0}

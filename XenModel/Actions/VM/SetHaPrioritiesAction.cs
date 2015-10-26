@@ -48,7 +48,6 @@ namespace XenAdmin.Actions
         private readonly Dictionary<VM, VMStartupOptions> settings = new Dictionary<VM, VMStartupOptions>();
         private readonly long ntol;
         private readonly Pool pool;
-        private readonly bool ignoreStartupOptions; // ignore start order and delay
 
         /// <summary>
         /// 
@@ -71,8 +70,6 @@ namespace XenAdmin.Actions
                 throw new Exception("Could not resolve pool in constructor");
             }
             this.Pool = pool;
-            ignoreStartupOptions = Helpers.HaIgnoreStartupOptions(Connection);
-
         }
 
         protected override void Run()
@@ -91,11 +88,8 @@ namespace XenAdmin.Actions
                 // If the above succeeded, then at least some changes have been committed
 
                 // Set new VM order and delay
-                if (!ignoreStartupOptions)
-                {
-                    VM.set_order(this.Session, vm.opaque_ref, settings[vm].Order);
-                    VM.set_start_delay(this.Session, vm.opaque_ref, settings[vm].StartDelay);
-                }
+                VM.set_order(this.Session, vm.opaque_ref, settings[vm].Order);
+                VM.set_start_delay(this.Session, vm.opaque_ref, settings[vm].StartDelay);
 
                 this.PercentComplete = (int)(++i * (60.0 / settings.Count));
                 if (Cancelling)
@@ -118,11 +112,8 @@ namespace XenAdmin.Actions
                 // If the above succeeded, then at least some changes have been committed
 
                 // Set new VM order and delay
-                if (!ignoreStartupOptions)
-                {
-                    VM.set_order(this.Session, vm.opaque_ref, settings[vm].Order);
-                    VM.set_start_delay(this.Session, vm.opaque_ref, settings[vm].StartDelay);
-                }
+                VM.set_order(this.Session, vm.opaque_ref, settings[vm].Order);
+                VM.set_start_delay(this.Session, vm.opaque_ref, settings[vm].StartDelay);
 
                 this.PercentComplete = (int)(++i * (60.0 / settings.Count));
                 if (Cancelling)

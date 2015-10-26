@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(connections, "connections");
 
-            _connections = Util.GetList(connections).FindAll(c => c.IsConnected && Helpers.GetPoolOfOne(c) != null && Helpers.MidnightRideOrGreater(c) && !Helpers.FeatureForbidden(c, XenAPI.Host.RestrictStorageChoices));
+            _connections = Util.GetList(connections).FindAll(c => c.IsConnected && Helpers.GetPoolOfOne(c) != null && !Helpers.FeatureForbidden(c, XenAPI.Host.RestrictStorageChoices));
             _host = host;
             _username = username;
             _password = password;

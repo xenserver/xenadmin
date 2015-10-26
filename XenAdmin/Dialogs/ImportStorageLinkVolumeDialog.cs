@@ -144,7 +144,7 @@ namespace XenAdmin.Dialogs
             }
 
             var dontShow = new List<string>();
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected && Helpers.MidnightRideOrGreater(c)))
+            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected))
             {
                 foreach (VDI vdi in c.Cache.VDIs)
                 {

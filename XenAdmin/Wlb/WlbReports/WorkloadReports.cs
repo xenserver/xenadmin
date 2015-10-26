@@ -456,10 +456,7 @@ namespace XenAdmin
             {
                 // Adds the report node
                 TreeNode currentReportTreeNode = GetReportTreeNode(currentNodes[i]);
-
-                // Filter out Audit log report if it's early version than MidnightRide
-                if (Helpers.MidnightRideOrGreater(Pool.Connection) || (!Helpers.MidnightRideOrGreater(Pool.Connection) && !_midnightRideReports.Contains(currentReportTreeNode.Text)))
-                    treeViewReportList.Nodes.Add(currentReportTreeNode);
+                treeViewReportList.Nodes.Add(currentReportTreeNode);
 
                 // Add in each subscription for the current report
                 if (_isMROrLater && _subscriptionCollection != null && !_isBostonOrLater)

@@ -177,8 +177,7 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             vm = (VM)clone;
-            MROrGreater = Helpers.MidnightRideOrGreater(vm.Connection);
-            ShowMemory = !MROrGreater || Helpers.FeatureForbidden(vm, Host.RestrictDMC);
+            ShowMemory = Helpers.FeatureForbidden(vm, Host.RestrictDMC);
             Repopulate();
         }
 

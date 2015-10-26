@@ -100,7 +100,7 @@ namespace XenAdmin.ServerDBs.FakeAPI
 
         protected void ThrowIfReadOnly()
         {
-            if (Helpers.MidnightRideOrGreater(proxy.connection) && !proxy.IsSuperUser)
+            if (!proxy.IsSuperUser)
             {
                 throw new Failure("read only");
             }

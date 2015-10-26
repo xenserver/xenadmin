@@ -80,8 +80,6 @@ namespace XenAdmin.Actions
             _srIsShared = srIsShared;
             _dconf = dconf;
             _smconf = smconf;
-            if (_srType == SR.SRTypes.cslg && !Helpers.BostonOrGreater(connection))
-                _SLConnection = copyStorageLinkConnections.Find(s => s.Host == _dconf["target"]);
 
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
@@ -115,39 +113,18 @@ namespace XenAdmin.Actions
             log.DebugFormat("is shared='{0}'", _srIsShared);
 
             string secretuuid = null;
-            if (Helpers.MidnightRideOrGreater(Connection))
+            string value;
+            if (_dconf.TryGetValue("cifspassword", out value))
             {
-                string value;
-                if (_dconf.TryGetValue("cifspassword", out value))
-                {
-                    secretuuid = CreateSecret("cifspassword", value);
-                }
-                else if (_dconf.TryGetValue("password", out value))
-                {
-                    secretuuid = CreateSecret("password", value);
-                }
-                else if (_dconf.TryGetValue("chappassword", out value))
-                {
-                    secretuuid = CreateSecret("chappassword", value);
-                }
+                secretuuid = CreateSecret("cifspassword", value);
             }
-
-            if (Helpers.MidnightRideOrGreater(Connection))
+            else if (_dconf.TryGetValue("password", out value))
             {
-                string tempvalue;
-                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("password", out tempvalue), "The device config contains 'password', but it should have already been removed!");
-                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("cifspassword", out tempvalue), "The device config contains 'cifspassword', but it should have already been removed!");
-                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("chappassword", out tempvalue), "The device config contains 'chappassword', but it should have already been removed!");
+                secretuuid = CreateSecret("password", value);
             }
-
-            if (_srType == SR.SRTypes.cslg && !Helpers.BostonOrGreater(Connection))
+            else if (_dconf.TryGetValue("chappassword", out value))
             {
-                // make sure this connection is added to the storagelink service.
-                StorageLinkConnection slCon = _SLConnection;
-                if (slCon != null)
-                {
-                    slCon.AddXenConnection(Connection);
-                }
+                secretuuid = CreateSecret("chappassword", value);
             }
 
             Description = Messages.ACTION_SR_CREATING;
