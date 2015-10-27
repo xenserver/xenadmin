@@ -267,51 +267,6 @@
   <data name="&gt;&gt;addVirtualDiskButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="addDropDownButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <metadata name="addContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>172, 17</value>
-  </metadata>
-  <data name="addContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="&gt;&gt;addContextMenuStrip.Name" xml:space="preserve">
-    <value>addContextMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;addContextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="addDropDownButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 5</value>
-  </data>
-  <data name="addDropDownButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
-  </data>
-  <data name="addDropDownButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="addDropDownButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="addDropDownButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="addDropDownButton.Text" xml:space="preserve">
-    <value>追加(&amp;A)</value>
-  </data>
-  <data name="&gt;&gt;addDropDownButton.Name" xml:space="preserve">
-    <value>addDropDownButton</value>
-  </data>
-  <data name="&gt;&gt;addDropDownButton.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;addDropDownButton.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;addDropDownButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>324, 5</value>
   </data>
@@ -500,18 +455,6 @@
   </data>
   <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <metadata name="removeContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>344, 17</value>
-  </metadata>
-  <data name="removeContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="&gt;&gt;removeContextMenuStrip.Name" xml:space="preserve">
-    <value>removeContextMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;removeContextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="removeDropDownButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>653, 5</value>

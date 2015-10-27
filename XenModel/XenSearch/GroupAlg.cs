@@ -101,19 +101,6 @@ namespace XenAdmin.XenSearch
                     group.FilterAdd(search.Query, disconnectedHost);
                 }
             }
-
-            if (Search.GetStorageLinkConnectionsCopy != null)
-            {
-                List<StorageLinkConnection> storageLinkConnections = Search.GetStorageLinkConnectionsCopy();
-                foreach (StorageLinkConnection storageLinkConnection in storageLinkConnections)
-                {
-                    foreach (IXenObject o in storageLinkConnection.Cache.XenSearchableObjects(ConnectionsManager.XenConnectionsCopy))
-                    {
-                        if (!Hide(o))
-                            group.FilterAdd(search.Query, o);
-                    }
-                }
-            }
         }
 
         private static bool Hide(IXenObject o)

@@ -242,7 +242,6 @@ namespace XenAdmin
             ConnectionsManager.XenConnections.Clear();
             ConnectionsManager.History.Clear();
 
-            Search.InitSearch(() => Program.StorageLinkConnections.GetCopy());
             TreeSearch.InitSearch();
             
             ArgType argType = ArgType.None;

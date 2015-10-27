@@ -71,11 +71,6 @@ namespace XenAdmin.XenSearch
         LocalSR = 1 << 8,
         VDI = 1 << 9,
         Network = 1 << 10,
-        //StorageLinkServer = 1 << 11,
-        //StorageLinkSystem = 1 << 12,
-        //StorageLinkPool = 1 << 13,
-        //StorageLinkVolume = 1 << 14,
-        //StorageLinkRepository = 1 << 15,
         Folder = 1 << 11,
         AllIncFolders = (1 << 12) - 1,
         AllExcFolders = AllIncFolders & ~ObjectTypes.Folder,
@@ -173,22 +168,7 @@ namespace XenAdmin.XenSearch
         [HelpString("Whether the object has any custom fields defined")]
         has_custom_fields,
 
-        [HelpString("The StorageLink Server that this object belongs to")]
-        storageLinkServer,
-
-        [HelpString("The StorageLink Storage System that this object belongs to")]
-        storageLinkSystem,
-
-        [HelpString("The StorageLink Storage Pool that this object belongs to")]
-        storageLinkPool,
-
-        [HelpString("The StorageLink Storage Volume that this object belongs to")]
-        storageLinkVolume,
-
-        [HelpString("The StorageLink Storage Repository that this object belongs to")]
-        storageLinkRepository,
-
-		[HelpString("Whether the VM is in any vApp")]
+        [HelpString("Whether the VM is in any vApp")]
 		in_any_appliance
     }
 
@@ -250,11 +230,6 @@ namespace XenAdmin.XenSearch
             ObjectTypes_i18n[Messages.VIRTUAL_DISKS] = ObjectTypes.VDI;
             ObjectTypes_i18n[Messages.FOLDERS] = ObjectTypes.Folder;
         	ObjectTypes_i18n[Messages.VM_APPLIANCE] = ObjectTypes.Appliance;
-            //ObjectTypes_i18n[Messages.STORAGELINKSERVERS] = ObjectTypes.StorageLinkServer;
-            //ObjectTypes_i18n[Messages.STORAGELINKSYSTEMS] = ObjectTypes.StorageLinkSystem;
-            //ObjectTypes_i18n[Messages.STORAGELINKPOOLS] = ObjectTypes.StorageLinkPool;
-            //ObjectTypes_i18n[Messages.STORAGELINKVOLUMES] = ObjectTypes.StorageLinkVolume;
-            //ObjectTypes_i18n[Messages.STORAGELINKSRS] = ObjectTypes.StorageLinkRepository;
 
 
             foreach (VM.HA_Restart_Priority p in VM.GetAvailableRestartPriorities(null)) //CA-57600 - From Boston onwards, the HA restart priorities list contains Restart instead of AlwaysRestartHighPriority and AlwaysRestart
@@ -292,11 +267,6 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.folder] = Messages.PARENT_FOLDER;
             PropertyNames_i18n[PropertyNames.folders] = Messages.ANCESTOR_FOLDERS;
             PropertyNames_i18n[PropertyNames.has_custom_fields] = Messages.HAS_CUSTOM_FIELDS;
-            PropertyNames_i18n[PropertyNames.storageLinkServer] = Messages.STORAGELINKSERVER;
-            PropertyNames_i18n[PropertyNames.storageLinkSystem] = Messages.STORAGELINKSYSTEM;
-            PropertyNames_i18n[PropertyNames.storageLinkPool] = Messages.STORAGELINKPOOL;
-            PropertyNames_i18n[PropertyNames.storageLinkVolume] = Messages.STORAGELINKVOLUME;
-            PropertyNames_i18n[PropertyNames.storageLinkRepository] = Messages.SR;
 			PropertyNames_i18n[PropertyNames.in_any_appliance] = Messages.IN_ANY_APPLIANCE;
 
             VM_power_state_images[vm_power_state.Halted] = Icons.PowerStateHalted;
@@ -319,11 +289,6 @@ namespace XenAdmin.XenSearch
             ObjectTypes_images[ObjectTypes.VDI] = Icons.VDI;
             ObjectTypes_images[ObjectTypes.Folder] = Icons.Folder;
             ObjectTypes_images[ObjectTypes.Appliance] = Icons.VmAppliance;
-            //ObjectTypes_images[ObjectTypes.StorageLinkServer] = Icons.StorageLinkServer;
-            //ObjectTypes_images[ObjectTypes.StorageLinkSystem] = Icons.StorageLinkSystem;
-            //ObjectTypes_images[ObjectTypes.StorageLinkPool] = Icons.StorageLinkPool;
-            //ObjectTypes_images[ObjectTypes.StorageLinkVolume] = Icons.StorageLinkVolume;
-            //ObjectTypes_images[ObjectTypes.StorageLinkRepository] = Icons.StorageLinkRepository;
 
             property_types.Add(PropertyNames.pool, typeof(Pool));
             property_types.Add(PropertyNames.host, typeof(Host));
@@ -343,66 +308,8 @@ namespace XenAdmin.XenSearch
             property_types.Add(PropertyNames.sr_type, typeof(SR.SRTypes));
             property_types.Add(PropertyNames.folder, typeof(Folder));
             property_types.Add(PropertyNames.folders, typeof(Folder));
-            property_types.Add(PropertyNames.storageLinkServer, typeof(StorageLinkServer));
-            property_types.Add(PropertyNames.storageLinkSystem, typeof(StorageLinkSystem));
-            property_types.Add(PropertyNames.storageLinkPool, typeof(StorageLinkPool));
-            property_types.Add(PropertyNames.storageLinkRepository, typeof(StorageLinkRepository));
 			property_types.Add(PropertyNames.in_any_appliance, typeof(bool));
             property_types.Add(PropertyNames.disks, typeof(VDI));
-
-            properties[PropertyNames.storageLinkServer] = delegate(IXenObject o)
-            {
-                StorageLinkSystem system = o as StorageLinkSystem;
-                if (system != null)
-                {
-                    return system.StorageLinkConnection.Cache.Server;
-                }
-                StorageLinkPool pool = o as StorageLinkPool;
-                if (pool != null)
-                {
-                    return pool.StorageLinkConnection.Cache.Server;
-                }
-                StorageLinkRepository r = o as StorageLinkRepository;
-                if (r != null)
-                {
-                    return r.StorageLinkConnection.Cache.Server;
-                }
-                return null;
-            };
-
-            properties[PropertyNames.storageLinkSystem] = delegate(IXenObject o)
-            {
-                StorageLinkPool pool = o as StorageLinkPool;
-
-                if (pool != null)
-                {
-                    return pool.StorageLinkSystem;
-                }
-
-                StorageLinkRepository r = o as StorageLinkRepository;
-
-                if (r != null)
-                {
-                    return r.StorageLinkSystem;
-                }
-
-                return null;
-            };
-
-            properties[PropertyNames.storageLinkPool] = delegate(IXenObject o)
-            {
-                StorageLinkRepository repo = o as StorageLinkRepository;
-                StorageLinkPool pool = repo != null ? repo.StorageLinkPool : null;
-
-                if (pool != null)
-                {
-                    var l = new List<StorageLinkPool> { pool };
-                    l.AddRange(pool.GetAncestors());
-                    return l[l.Count - 1];
-                }
-
-                return null;
-            };
 
             properties[PropertyNames.os_name] = delegate(IXenObject o)
                 {
@@ -933,26 +840,6 @@ namespace XenAdmin.XenSearch
             {
                 return (IComparable)ObjectTypes.Folder;
             }
-            //else if (o is StorageLinkServer)
-            //{
-            //    return ObjectTypes.StorageLinkServer;
-            //}
-            //else if (o is StorageLinkSystem)
-            //{
-            //    return ObjectTypes.StorageLinkSystem;
-            //}
-            //else if (o is StorageLinkPool)
-            //{
-            //    return ObjectTypes.StorageLinkPool;
-            //}
-            //else if (o is StorageLinkVolume)
-            //{
-            //    return ObjectTypes.StorageLinkVolume;
-            //}
-            //else if (o is StorageLinkRepository)
-            //{
-            //    return ObjectTypes.StorageLinkRepository;
-            //}
             else if (o is DockerContainer)
             {
                 return (IComparable)ObjectTypes.DockerContainer;
@@ -1083,11 +970,6 @@ namespace XenAdmin.XenSearch
         private static ComparableList<Host> HostProperty(IXenObject o)
         {
             ComparableList<Host> hosts = new ComparableList<Host>();
-
-            if (o is IStorageLinkObject)
-            {
-                return null;
-            }
 
             // If we're not in a pool then just group everything under the same host 
             Pool pool = Helpers.GetPool(o.Connection);
@@ -1262,13 +1144,6 @@ namespace XenAdmin.XenSearch
                     if (ComparableAddress.TryParse(target, false, true, out ipAddress))
                         addresses.Add(ipAddress);
                 }
-            }
-            else if (o is StorageLinkServer)
-            {
-                StorageLinkServer storageLinkServer = (StorageLinkServer)o;
-                ComparableAddress ipAddress;
-                if (ComparableAddress.TryParse(storageLinkServer.FriendlyName, false, true, out ipAddress))
-                    addresses.Add(ipAddress);
             }
 
             return (addresses.Count == 0 ? null : addresses);   // CA-28300

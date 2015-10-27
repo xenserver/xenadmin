@@ -573,10 +573,6 @@
     <value>xs70-010</value>
     <comment>6320</comment>
   </data>
-  <data name="ImportStorageLinkVolumeDialog" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4035</comment>
-  </data>
   <data name="ImportWizard_GlobalSelectHostPane" xml:space="preserve">
     <value>xs70-018</value>
     <comment>9511</comment>

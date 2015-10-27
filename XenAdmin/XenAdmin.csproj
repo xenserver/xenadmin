@@ -2907,9 +2907,7 @@
     <Compile Include="Commands\DeleteVirtualDiskCommand.cs" />
     <Compile Include="Commands\DestroyBondCommand.cs" />
     <Compile Include="Commands\DetachVirtualDiskCommand.cs" />
-    <Compile Include="Commands\ImportStorageLinkVolumeCommand.cs" />
     <Compile Include="Commands\MoveVirtualDiskCommand.cs" />
-    <Compile Include="Commands\RemoveStorageLinkVolumeCommand.cs" />
     <Compile Include="Commands\RescanPIFsCommand.cs" />
     <Compile Include="Commands\SRCommand.cs" />
     <Compile Include="Commands\RollingUpgradeCommand.cs" />
@@ -3277,12 +3275,6 @@
     </Compile>
     <Compile Include="Dialogs\ExitMaintenanceModeDialog.Designer.cs">
       <DependentUpon>ExitMaintenanceModeDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ImportStorageLinkVolumeDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ImportStorageLinkVolumeDialog.Designer.cs">
-      <DependentUpon>ImportStorageLinkVolumeDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\MoveVirtualDiskDialog.cs">
       <SubType>Form</SubType>
@@ -5065,15 +5057,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.zh-CN.resx">
       <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ImportStorageLinkVolumeDialog.ja.resx">
-      <DependentUpon>ImportStorageLinkVolumeDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ImportStorageLinkVolumeDialog.resx">
-      <DependentUpon>ImportStorageLinkVolumeDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ImportStorageLinkVolumeDialog.zh-CN.resx">
-      <DependentUpon>ImportStorageLinkVolumeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputPromptDialog.ja.resx">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>

@@ -1112,9 +1112,6 @@
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>カスタム フィールド '{0}' を追加します</value>
   </data>
-  <data name="ADD_HOST" xml:space="preserve">
-    <value>追加...</value>
-  </data>
   <data name="ADD_HOST_TO_POOL_AD_MESSAGE" xml:space="preserve">
     <value>Active Directory 認証が使用されるプールにサーバー '{0}' を追加します。プール内のすべてのメンバで同じ認証方法を使用する必要があります。
 

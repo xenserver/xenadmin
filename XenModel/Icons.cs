@@ -139,15 +139,6 @@ namespace XenAdmin
         CustomField,
         HA,
 
-        StorageLinkServer,
-        StorageLinkServerConnected,
-        StorageLinkServerDisconnected,
-        StorageLinkServerConnecting,
-        StorageLinkSystem,
-        StorageLinkPool,
-        StorageLinkPools,
-        StorageLinkVolume,
-        StorageLinkVolumes,
         StorageLinkRepository,
 
         VmAppliance,

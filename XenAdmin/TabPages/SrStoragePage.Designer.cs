@@ -35,13 +35,9 @@ namespace XenAdmin.TabPages
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipContainerRescan = new XenAdmin.Controls.ToolTipContainer();
             this.buttonRefresh = new System.Windows.Forms.Button();
-            this.addDropDownButton = new XenAdmin.Controls.DropDownButton();
-            this.addContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolTipContainerMove = new XenAdmin.Controls.ToolTipContainer();
             this.buttonMove = new System.Windows.Forms.Button();
-            this.removeDropDownButton = new XenAdmin.Controls.DropDownButton();
-            this.removeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewVDIs = new System.Windows.Forms.DataGridView();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -149,12 +145,10 @@ namespace XenAdmin.TabPages
             // 
             this.flowLayoutPanel1.Controls.Add(this.toolTipContainerRescan);
             this.flowLayoutPanel1.Controls.Add(this.addVirtualDiskButton);
-            this.flowLayoutPanel1.Controls.Add(this.addDropDownButton);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.EditButtonContainer);
             this.flowLayoutPanel1.Controls.Add(this.toolTipContainerMove);
             this.flowLayoutPanel1.Controls.Add(this.RemoveButtonContainer);
-            this.flowLayoutPanel1.Controls.Add(this.removeDropDownButton);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -170,19 +164,6 @@ namespace XenAdmin.TabPages
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
-            // addDropDownButton
-            // 
-            resources.ApplyResources(this.addDropDownButton, "addDropDownButton");
-            this.addDropDownButton.ContextMenuStrip = this.addContextMenuStrip;
-            this.addDropDownButton.Name = "addDropDownButton";
-            this.addDropDownButton.UseVisualStyleBackColor = true;
-            // 
-            // addContextMenuStrip
-            // 
-            this.addContextMenuStrip.Name = "addContextMenuStrip";
-            resources.ApplyResources(this.addContextMenuStrip, "addContextMenuStrip");
-            this.addContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.addContextMenuStrip_Opening);
             // 
             // groupBox1
             // 
@@ -203,25 +184,11 @@ namespace XenAdmin.TabPages
             this.buttonMove.UseVisualStyleBackColor = true;
             this.buttonMove.Click += new System.EventHandler(this.buttonMove_Click);
             // 
-            // removeDropDownButton
-            // 
-            this.removeDropDownButton.ContextMenuStrip = this.removeContextMenuStrip;
-            resources.ApplyResources(this.removeDropDownButton, "removeDropDownButton");
-            this.removeDropDownButton.Name = "removeDropDownButton";
-            this.removeDropDownButton.UseVisualStyleBackColor = true;
-            // 
-            // removeContextMenuStrip
-            // 
-            this.removeContextMenuStrip.Name = "removeContextMenuStrip";
-            resources.ApplyResources(this.removeContextMenuStrip, "removeContextMenuStrip");
-            this.removeContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.removeContextMenuStrip_Opening);
-            // 
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.dataGridViewVDIs);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.MaximumSize = new System.Drawing.Size(900, 400);
             this.panel1.Name = "panel1";
             // 
             // dataGridViewVDIs
@@ -300,6 +267,7 @@ namespace XenAdmin.TabPages
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVDIs)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -320,10 +288,6 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button buttonRefresh;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerRescan;
         private System.Windows.Forms.GroupBox groupBox1;
-        private XenAdmin.Controls.DropDownButton addDropDownButton;
-        private XenAdmin.Controls.DropDownButton removeDropDownButton;
-        private System.Windows.Forms.ContextMenuStrip addContextMenuStrip;
-        private System.Windows.Forms.ContextMenuStrip removeContextMenuStrip;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerMove;
         private System.Windows.Forms.Button buttonMove;
         private System.Windows.Forms.ToolStripMenuItem moveVirtualDiskToolStripMenuItem;

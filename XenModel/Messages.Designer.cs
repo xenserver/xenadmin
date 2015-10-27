@@ -14883,15 +14883,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Full Name.
-        /// </summary>
-        public static string FULL_NAME {
-            get {
-                return ResourceManager.GetString("FULL_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fully applied.
         /// </summary>
         public static string FULLY_APPLIED {
@@ -17615,33 +17606,6 @@ namespace XenAdmin {
         public static string IMPORT_SOURCE_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("IMPORT_SOURCE_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Imported StorageLink Volume(s) to &apos;{0}&apos;.
-        /// </summary>
-        public static string IMPORT_STORAGELINK_VOLUME_ACTION_FINSH {
-            get {
-                return ResourceManager.GetString("IMPORT_STORAGELINK_VOLUME_ACTION_FINSH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Importing StorageLink Volume(s) to &apos;{0}&apos;.
-        /// </summary>
-        public static string IMPORT_STORAGELINK_VOLUME_ACTION_START {
-            get {
-                return ResourceManager.GetString("IMPORT_STORAGELINK_VOLUME_ACTION_START", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Import Storagelink Volume(s) to &apos;{0}&apos;.
-        /// </summary>
-        public static string IMPORT_STORAGELINK_VOLUME_ACTION_TITLE {
-            get {
-                return ResourceManager.GetString("IMPORT_STORAGELINK_VOLUME_ACTION_TITLE", resourceCulture);
             }
         }
         
@@ -20865,42 +20829,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete the selected storage volume? This operation cannot be undone..
-        /// </summary>
-        public static string MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete StorageLink Storage Volume.
-        /// </summary>
-        public static string MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete the selected storage volumes? This operation cannot be undone..
-        /// </summary>
-        public static string MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete StorageLink Storage Volumes.
-        /// </summary>
-        public static string MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This will delete this system disk permanently, possibly leaving the VM unable to boot. Do you wish to continue?.
         /// </summary>
         public static string MESSAGEBOX_DELETE_SYS_DISK {
@@ -21552,15 +21480,6 @@ namespace XenAdmin {
         public static string MIXED_POWER_ON_MODE {
             get {
                 return ResourceManager.GetString("MIXED_POWER_ON_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Model.
-        /// </summary>
-        public static string MODEL {
-            get {
-                return ResourceManager.GetString("MODEL", resourceCulture);
             }
         }
         
@@ -28958,15 +28877,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Serial Number.
-        /// </summary>
-        public static string SERIAL_NUMBER {
-            get {
-                return ResourceManager.GetString("SERIAL_NUMBER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Server.
         /// </summary>
         public static string SERVER {
@@ -30789,15 +30699,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} used of {1} total.
-        /// </summary>
-        public static string STORAGELINK_POOL_SIZE_USED {
-            get {
-                return ResourceManager.GetString("STORAGELINK_POOL_SIZE_USED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fibre Channel.
         /// </summary>
         public static string STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL {
@@ -30983,123 +30884,6 @@ namespace XenAdmin {
         public static string STORAGELINK_UPGRADE_TEST {
             get {
                 return ResourceManager.GetString("STORAGELINK_UPGRADE_TEST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Pool.
-        /// </summary>
-        public static string STORAGELINKPOOL {
-            get {
-                return ResourceManager.GetString("STORAGELINKPOOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage Pool General Properties.
-        /// </summary>
-        public static string STORAGELINKPOOL_GENERAL_TAB_TITLE {
-            get {
-                return ResourceManager.GetString("STORAGELINKPOOL_GENERAL_TAB_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Pools.
-        /// </summary>
-        public static string STORAGELINKPOOLS {
-            get {
-                return ResourceManager.GetString("STORAGELINKPOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage Repository General Properties.
-        /// </summary>
-        public static string STORAGELINKREPOSITORY_GENERAL_TAB_TITLE {
-            get {
-                return ResourceManager.GetString("STORAGELINKREPOSITORY_GENERAL_TAB_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Server.
-        /// </summary>
-        public static string STORAGELINKSERVER {
-            get {
-                return ResourceManager.GetString("STORAGELINKSERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Server General Properties.
-        /// </summary>
-        public static string STORAGELINKSERVER_GENERAL_TAB_TITLE {
-            get {
-                return ResourceManager.GetString("STORAGELINKSERVER_GENERAL_TAB_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Servers.
-        /// </summary>
-        public static string STORAGELINKSERVERS {
-            get {
-                return ResourceManager.GetString("STORAGELINKSERVERS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Repositories.
-        /// </summary>
-        public static string STORAGELINKSRS {
-            get {
-                return ResourceManager.GetString("STORAGELINKSRS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage System.
-        /// </summary>
-        public static string STORAGELINKSYSTEM {
-            get {
-                return ResourceManager.GetString("STORAGELINKSYSTEM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage System General Properties.
-        /// </summary>
-        public static string STORAGELINKSYSTEM_GENERAL_TAB_TITLE {
-            get {
-                return ResourceManager.GetString("STORAGELINKSYSTEM_GENERAL_TAB_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Systems.
-        /// </summary>
-        public static string STORAGELINKSYSTEMS {
-            get {
-                return ResourceManager.GetString("STORAGELINKSYSTEMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Volume.
-        /// </summary>
-        public static string STORAGELINKVOLUME {
-            get {
-                return ResourceManager.GetString("STORAGELINKVOLUME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Storage Volumes.
-        /// </summary>
-        public static string STORAGELINKVOLUMES {
-            get {
-                return ResourceManager.GetString("STORAGELINKVOLUMES", resourceCulture);
             }
         }
         
@@ -33874,24 +33658,6 @@ namespace XenAdmin {
         public static string USER_NOT_AUTHORIZED {
             get {
                 return ResourceManager.GetString("USER_NOT_AUTHORIZED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username.
-        /// </summary>
-        public static string USERNAME {
-            get {
-                return ResourceManager.GetString("USERNAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Username:.
-        /// </summary>
-        public static string USERNAME_LABLE {
-            get {
-                return ResourceManager.GetString("USERNAME_LABLE", resourceCulture);
             }
         }
         

@@ -5224,9 +5224,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FULLY_APPLIED" xml:space="preserve">
     <value>Fully applied</value>
   </data>
-  <data name="FULL_NAME" xml:space="preserve">
-    <value>Full Name</value>
-  </data>
   <data name="GALLERYSEARCHBAR_MATCHES" xml:space="preserve">
     <value>{0} matches</value>
   </data>
@@ -6199,15 +6196,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>Locate the file you want to import</value>
-  </data>
-  <data name="IMPORT_STORAGELINK_VOLUME_ACTION_FINSH" xml:space="preserve">
-    <value>Imported StorageLink Volume(s) to '{0}'</value>
-  </data>
-  <data name="IMPORT_STORAGELINK_VOLUME_ACTION_START" xml:space="preserve">
-    <value>Importing StorageLink Volume(s) to '{0}'</value>
-  </data>
-  <data name="IMPORT_STORAGELINK_VOLUME_ACTION_TITLE" xml:space="preserve">
-    <value>Import Storagelink Volume(s) to '{0}'</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new template</value>
@@ -7254,18 +7242,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_TITLE" xml:space="preserve">
     <value>Delete entire snapshot</value>
   </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE" xml:space="preserve">
-    <value>Are you sure you want to delete the selected storage volumes? This operation cannot be undone.</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE" xml:space="preserve">
-    <value>Delete StorageLink Storage Volumes</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE" xml:space="preserve">
-    <value>Are you sure you want to delete the selected storage volume? This operation cannot be undone.</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE" xml:space="preserve">
-    <value>Delete StorageLink Storage Volume</value>
-  </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
     <value>This will delete this system disk permanently, possibly leaving the VM unable to boot. Do you wish to continue?</value>
   </data>
@@ -7509,9 +7485,6 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
   </data>
   <data name="MIXED_POWER_ON_MODE" xml:space="preserve">
     <value>Mixed</value>
-  </data>
-  <data name="MODEL" xml:space="preserve">
-    <value>Model</value>
   </data>
   <data name="MONDAY_LONG" xml:space="preserve">
     <value>Monday</value>
@@ -10079,9 +10052,6 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SELECT_VMS_TO_SUSPEND_DLOG_TITLE" xml:space="preserve">
     <value>Select VMs to Suspend - server '{0}'</value>
   </data>
-  <data name="SERIAL_NUMBER" xml:space="preserve">
-    <value>Serial Number</value>
-  </data>
   <data name="SERVER" xml:space="preserve">
     <value>Server</value>
   </data>
@@ -10632,50 +10602,8 @@ The upper limit: SR size / {2}</value>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>
   </data>
-  <data name="STORAGELINKPOOL" xml:space="preserve">
-    <value>StorageLink Storage Pool</value>
-  </data>
-  <data name="STORAGELINKPOOLS" xml:space="preserve">
-    <value>StorageLink Storage Pools</value>
-  </data>
-  <data name="STORAGELINKPOOL_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>Storage Pool General Properties</value>
-  </data>
-  <data name="STORAGELINKREPOSITORY_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>Storage Repository General Properties</value>
-  </data>
-  <data name="STORAGELINKSERVER" xml:space="preserve">
-    <value>StorageLink Server</value>
-  </data>
-  <data name="STORAGELINKSERVERS" xml:space="preserve">
-    <value>StorageLink Servers</value>
-  </data>
-  <data name="STORAGELINKSERVER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>StorageLink Server General Properties</value>
-  </data>
-  <data name="STORAGELINKSRS" xml:space="preserve">
-    <value>StorageLink Storage Repositories</value>
-  </data>
-  <data name="STORAGELINKSYSTEM" xml:space="preserve">
-    <value>StorageLink Storage System</value>
-  </data>
-  <data name="STORAGELINKSYSTEMS" xml:space="preserve">
-    <value>StorageLink Storage Systems</value>
-  </data>
-  <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>Storage System General Properties</value>
-  </data>
-  <data name="STORAGELINKVOLUME" xml:space="preserve">
-    <value>StorageLink Storage Volume</value>
-  </data>
-  <data name="STORAGELINKVOLUMES" xml:space="preserve">
-    <value>StorageLink Storage Volumes</value>
-  </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{0} free of {1}</value>
-  </data>
-  <data name="STORAGELINK_POOL_SIZE_USED" xml:space="preserve">
-    <value>{0} used of {1} total</value>
   </data>
   <data name="STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
     <value>Fibre Channel</value>
@@ -11746,12 +11674,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
-  </data>
-  <data name="USERNAME" xml:space="preserve">
-    <value>Username</value>
-  </data>
-  <data name="USERNAME_LABLE" xml:space="preserve">
-    <value>&amp;Username:</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>XenCenter was unable to authorize the action as {0}. See the application log files for more information.</value>

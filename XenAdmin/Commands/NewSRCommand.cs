@@ -90,25 +90,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1 && selection.FirstIsStorageLink)
-            {
-                var storageLinkObject = (IStorageLinkObject)selection[0].XenObject;
-
-                if (storageLinkObject is StorageLinkServer || storageLinkObject is StorageLinkSystem || storageLinkObject is StorageLinkPool)
-                {
-                    if (storageLinkObject.StorageLinkConnection.ConnectionState == XenAdmin.Network.StorageLink.StorageLinkConnectionState.Connected)
-                    {
-                        foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-                        {
-                            if (c.IsConnected && CanExecuteOnPool(Helpers.GetPool(c)) || CanExecuteOnHost(Helpers.GetMaster(c)))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            else if (selection.HostAncestor != null)
+            if (selection.HostAncestor != null)
             {
                 return CanExecuteOnHost(selection.HostAncestor);
             }

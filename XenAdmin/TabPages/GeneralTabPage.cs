@@ -424,14 +424,6 @@ namespace XenAdmin.TabPages
                 base.Text = Messages.SR_GENERAL_TAB_TITLE;
             else if (xenObject is Pool)
                 base.Text = Messages.POOL_GENERAL_TAB_TITLE;
-            else if (xenObject is StorageLinkPool)
-                base.Text = Messages.STORAGELINKPOOL_GENERAL_TAB_TITLE;
-            else if (xenObject is StorageLinkServer)
-                base.Text = Messages.STORAGELINKSERVER_GENERAL_TAB_TITLE;
-            else if (xenObject is StorageLinkSystem)
-                base.Text = Messages.STORAGELINKSYSTEM_GENERAL_TAB_TITLE;
-            else if (xenObject is StorageLinkRepository)
-                base.Text = Messages.SR_GENERAL_TAB_TITLE;
             else if (xenObject is DockerContainer)
                 base.Text = Messages.CONTAINER_GENERAL_TAB_TITLE;
 
@@ -1301,35 +1293,6 @@ namespace XenAdmin.TabPages
                         }
                     }
                 }
-            }
-            else if (xenObject is StorageLinkPool)
-            {
-                var pool = (StorageLinkPool)xenObject;
-
-                string capacityText = Util.DiskSizeString(pool.Capacity * 1024L * 1024L);
-                string usedSpaceText = Util.DiskSizeString(pool.UsedSpace * 1024L * 1024L);
-                string text = string.Format(Messages.STORAGELINK_POOL_SIZE_USED, usedSpaceText, capacityText);
-
-                s.AddEntry(Messages.SIZE, text);
-            }
-            else if (xenObject is StorageLinkServer)
-            {
-                StorageLinkServer server = (StorageLinkServer)xenObject;
-                s.AddEntry(Messages.USERNAME, server.StorageLinkConnection.Username);
-
-                string error = server.StorageLinkConnection.Error;
-
-                if (!string.IsNullOrEmpty(error))
-                {
-                    s.AddEntry(Messages.ERROR, error);
-                }
-            }
-            else if (xenObject is StorageLinkSystem)
-            {
-                StorageLinkSystem sys = (StorageLinkSystem)xenObject;
-                s.AddEntry(Messages.FULL_NAME, sys.FullName);
-                s.AddEntry(Messages.MODEL, sys.Model);
-                s.AddEntry(Messages.SERIAL_NUMBER, sys.SerialNumber);
             }
 
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));

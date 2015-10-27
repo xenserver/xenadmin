@@ -1112,9 +1112,6 @@
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>添加自定义字段“{0}”</value>
   </data>
-  <data name="ADD_HOST" xml:space="preserve">
-    <value>添加...</value>
-  </data>
   <data name="ADD_HOST_TO_POOL_AD_MESSAGE" xml:space="preserve">
     <value>您正在尝试将服务器“{0}”添加到已配置为使用 AD 身份验证的池中。所有池成员必须使用同一种身份验证方法。
 

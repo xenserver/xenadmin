@@ -154,17 +154,6 @@ namespace XenAdmin
             ImageList16.Images.Add("000_Fields_h32bit_16.png", Properties.Resources._000_Fields_h32bit_16);
             ImageList16.Images.Add("ha_16.png", Properties.Resources.ha_16);
 
-            ImageList16.Images.Add("sl_16.png", Properties.Resources.sl_16);
-            ImageList16.Images.Add("sl_connected_16.png", Properties.Resources.sl_connected_16);
-            ImageList16.Images.Add("sl_disconnected_16.png", Properties.Resources.sl_disconnected_16);
-            ImageList16.Images.Add("sl_connecting_16.png", Properties.Resources.sl_connecting_16);
-            ImageList16.Images.Add("sl_system_16.png", Properties.Resources.sl_system_16);
-            ImageList16.Images.Add("sl_pool_16.png", Properties.Resources.sl_pool_16);
-            ImageList16.Images.Add("sl_pools_16.png", Properties.Resources.sl_pools_16);
-            ImageList16.Images.Add("sl_lun_16.png", Properties.Resources.sl_lun_16);
-            ImageList16.Images.Add("sl_luns_16.png", Properties.Resources.sl_luns_16);
-            ImageList16.Images.Add("000_Storage_h32bit_16.png", Properties.Resources._000_Storage_h32bit_16);
-
             ImageList16.Images.Add("virtualappliance_16.png", Properties.Resources._000_VirtualAppliance_h32bit_16);
 
             ImageList16.Images.Add("000_MigrateVM_h32bit_16.png", Properties.Resources._000_MigrateVM_h32bit_16);
@@ -275,26 +264,6 @@ namespace XenAdmin
             if (pif != null)
                 return GetIconFor(pif);
 
-            StorageLinkServer storageLinkServer = o as StorageLinkServer;
-            if (storageLinkServer != null)
-                return GetIconFor(storageLinkServer);
-
-            StorageLinkSystem storageLinkSystem = o as StorageLinkSystem;
-            if (storageLinkSystem != null)
-                return GetIconFor(storageLinkSystem);
-
-            StorageLinkPool storageLinkPool = o as StorageLinkPool;
-            if (storageLinkPool != null)
-                return GetIconFor(storageLinkPool);
-
-            StorageLinkVolume storageLinkVolume = o as StorageLinkVolume;
-            if (storageLinkVolume != null)
-                return GetIconFor(storageLinkVolume);
-            
-            StorageLinkRepository storageLinkRepository = o as StorageLinkRepository;
-            if (storageLinkRepository != null)
-                return GetIconFor(storageLinkRepository);
-
             DockerContainer dockerContainer = o as DockerContainer;
             if (dockerContainer != null)
                 return GetIconFor(dockerContainer);
@@ -326,44 +295,6 @@ namespace XenAdmin
             else
                 // Red disconnected icon
                 return Icons.HostDisconnected;
-        }
-
-        public static Icons GetIconFor(StorageLinkSystem storageLinkSystem)
-        {
-            return Icons.StorageLinkSystem;
-        }
-
-        public static Icons GetIconFor(StorageLinkServer storageLinkServer)
-        {
-            if (storageLinkServer.StorageLinkConnection.ConnectionState == StorageLinkConnectionState.Connecting)
-            {
-                return Icons.StorageLinkServerConnecting;
-            }
-            else if (storageLinkServer.StorageLinkConnection.ConnectionState == StorageLinkConnectionState.Connected)
-            {
-                return Icons.StorageLinkServerConnected;
-            }
-            return Icons.StorageLinkServerDisconnected;
-        }
-
-        public static Icons GetIconFor(StorageLinkPool storageLinkPool)
-        {
-            return Icons.StorageLinkPool;
-        }
-
-        public static Icons GetIconFor(StorageLinkVolume storageLinkVolume)
-        {
-            VDI vdi = storageLinkVolume.VDI(ConnectionsManager.XenConnectionsCopy);
-            if (vdi != null)
-            {
-                return GetIconFor(vdi);
-            }
-            return Icons.StorageLinkVolume;
-        }
-
-        public static Icons GetIconFor(StorageLinkRepository storageLinkRepository)
-        {
-            return Icons.StorageLinkRepository;
         }
 
         public static Icons GetIconFor(Folder folder)

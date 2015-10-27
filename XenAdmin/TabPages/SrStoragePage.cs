@@ -146,15 +146,6 @@ namespace XenAdmin.TabPages
                     sr.Connection.XenObjectsUpdated += Connection_XenObjectsUpdated;
                 }
 
-                // removeDropDownButton and addDropDownButton are for storagelink. They contain extra stuff for adding
-                // and removing SL volumes. 
-
-                addDropDownButton.Visible = sr != null && sr.type == "cslg" && sr.StorageLinkRepository(Program.StorageLinkConnections) != null;
-                addVirtualDiskButton.Visible &= !addDropDownButton.Visible;
-
-                removeDropDownButton.Visible = addDropDownButton.Visible;
-                RemoveButtonContainer.Visible = !removeDropDownButton.Visible;
-
                 BuildList(true);
                 SetupDeprecationBanner();
             }
@@ -165,12 +156,10 @@ namespace XenAdmin.TabPages
             dataGridViewVDIs.SuspendLayout();
             try
             {
-                storageLinkVolumeColumn.Visible = data.ShowStorageLink;
-
                 // Update existing rows
                 foreach (var vdiRow in data.VdiRowsToUpdate)
                 {
-                    vdiRow.RefreshRowDetails(data.ShowStorageLink);
+                    vdiRow.RefreshRowDetails();
                 }
 
                 // Remove rows for deleted VDIs
@@ -182,7 +171,7 @@ namespace XenAdmin.TabPages
                 // Add rows for new VDIs
                 foreach (var vdi in data.VdisToAdd)
                 {
-                    VDIRow newRow = new VDIRow(vdi, data.ShowStorageLink);
+                    VDIRow newRow = new VDIRow(vdi);
                     dataGridViewVDIs.Rows.Add(newRow);   
                 }
             }
@@ -429,36 +418,8 @@ namespace XenAdmin.TabPages
             }
             else
                 EditButton.Enabled = false;
-
-            // Remove drop down button
-            removeDropDownButton.Enabled = deleteCmd.CanExecute();
-
         }
 
-        private void removeContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            removeContextMenuStrip.Items.Clear();
-            SelectedItemCollection vdis = SelectedVDIs;
-            if (vdis.Count > 0)
-            {
-                Command cmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
-                removeContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.DELETE_VIRTUAL_DISK));
-
-                cmd = new RemoveStorageLinkVolumeCommand(Program.MainWindow, sr.StorageLinkRepository(Program.StorageLinkConnections), vdis);
-                removeContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.DELETE_SL_VOLUME_CONTEXT_MENU_ELIPS));
-            }
-        }
-
-        private void addContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            addContextMenuStrip.Items.Clear();
-
-            Command cmd = new AddVirtualDiskCommand(Program.MainWindow, sr);
-            addContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.ADD_VIRTUAL_DISK));
-
-            cmd = new ImportStorageLinkVolumeCommand(Program.MainWindow, sr.StorageLinkRepository(Program.StorageLinkConnections));
-            addContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.ADD_SL_VOLUME));
-        }
         #endregion
 
         #region buttonHandlers
@@ -541,11 +502,8 @@ namespace XenAdmin.TabPages
         {
             public VDI VDI { get; private set; }
 
-            private bool showStorageLink = false;
-
-            public VDIRow(VDI vdi, bool showStorageLink)
+            public VDIRow(VDI vdi)
             {
-                this.showStorageLink = showStorageLink;
                 VDI = vdi;
                 for (int i = 0; i < 5; i++)
                 {
@@ -574,9 +532,8 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            public void RefreshRowDetails(bool showSL)
+            public void RefreshRowDetails()
             {
-                showStorageLink = showSL;
                 for (int i = 0; i < 5; i++)
                 {
                     Cells[i].Value = GetCellText(i);
@@ -589,15 +546,12 @@ namespace XenAdmin.TabPages
             public List<VDIRow> VdiRowsToUpdate { get; private set; }
             public List<VDIRow> VdiRowsToRemove { get; private set; }
             public List<VDI> VdisToAdd { get; private set; }
-            public bool ShowStorageLink { get; private set; }
 
-            public VDIsData(List<VDIRow> vdiRowsToUpdate, List<VDIRow> vdiRowsToRemove, List<VDI> vdisToAdd,
-                bool showStorageLink) : this()
+            public VDIsData(List<VDIRow> vdiRowsToUpdate, List<VDIRow> vdiRowsToRemove, List<VDI> vdisToAdd) : this()
             {
                 VdiRowsToUpdate = vdiRowsToUpdate;
                 VdiRowsToRemove = vdiRowsToRemove;
                 VdisToAdd = vdisToAdd;
-                ShowStorageLink = showStorageLink;
             }
         }
 
@@ -649,8 +603,6 @@ namespace XenAdmin.TabPages
                             !vdi.IsAnIntermediateStorageMotionSnapshot)
                             .ToList();
 
-                bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
-
                 var vdiRowsToRemove =
                     currentVDIRows.Where(vdiRow => !vdis.Contains(vdiRow.VDI)).OrderByDescending(row => row.Index).ToList();
 
@@ -658,7 +610,7 @@ namespace XenAdmin.TabPages
 
                 var vdisToAdd = vdis.Except(vdiRowsToUpdate.ConvertAll(vdiRow => vdiRow.VDI)).ToList();
 
-                return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd, showStorageLink);
+                return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd);
             }
 
             private void DoWork(object sender, DoWorkEventArgs e)
