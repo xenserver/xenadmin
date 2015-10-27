@@ -39,7 +39,6 @@ using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
-using XenAdmin.Network.StorageLink;
 using XenAdmin.StorageLinkAPI;
 using XenAPI;
 using System.Threading;
@@ -53,7 +52,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
     {
         #region Private fields
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private IStorageLinkObject _storageLinkObject;
         private ReadOnlyCollection<CslgSystemStorage> _storages;
         private SR _srToReattach;
         private bool _disasterRecoveryTask;
@@ -124,16 +122,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy.FindAll(c => c.IsConnected && !Helpers.FeatureForbidden(c, Host.RestrictStorageChoices)))
             {
                 var p = Helpers.GetPoolOfOne(c);
-                credsList.Add(p.GetStorageLinkCredentials());
                 credsList.AddRange(Array.ConvertAll(p.Connection.Cache.PBDs, pbd => pbd.GetStorageLinkCredentials()));
             }
             credsList.RemoveAll(cc => cc == null || !cc.IsValid);
             return credsList;
-        }
-
-        public void SetStorageLinkObject(IStorageLinkObject storageLinkObject)
-        {
-            _storageLinkObject = storageLinkObject;
         }
 
         /// <summary>
@@ -144,7 +136,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             var items = new List<object>();
 
-            if (_storageLinkObject != null || (Connection.IsConnected && !Helpers.FeatureForbidden(Connection, Host.RestrictStorageChoices)))
+            if (Connection.IsConnected && !Helpers.FeatureForbidden(Connection, Host.RestrictStorageChoices))
             {
                 if (_srToReattach == null || _srToReattach.type == "cslg")
                 {
@@ -181,11 +173,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             comboBoxStorageSystem.Items.Clear();
 
-            if (_storageLinkObject != null)
-            {
-                ;
-            }
-            else if (_srToReattach != null)
+            if (_srToReattach != null)
             {
                 if (_srToReattach.type == "equal")
                 {
@@ -249,36 +237,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             return true;
         }
 
-        private bool PerformStoragePoolScan()
-        {
-            StorageLinkCredentials credentials = null;
-
-            var scanAction = new SrCslgStoragePoolScanAction(Connection, Program.StorageLinkConnections.GetCopy(), credentials.Host,
-                                                             credentials.Username, credentials.PasswordSecret, SelectedStorageSystem.StorageSystemId);
-
-            ActionProgressDialog dialog = new ActionProgressDialog(scanAction, ProgressBarStyle.Marquee);
-            dialog.ShowDialog(this);
-
-            if (scanAction.Succeeded)
-                StoragePools = scanAction.CslgStoragePools;
-
-            return scanAction.Succeeded;
-        }
-
         #region XenTabPage overrides
-
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
-        {
-            if (direction == PageLoadedDirection.Forward && SelectedStorageSystem != null)
-                cancel = !PerformStoragePoolScan();
-
-            base.PageLeave(direction, ref cancel);
-        }
 
         public override void PopulatePage()
         {
             labelAdapter.Visible = true;
-            labelSystem.Visible = flowLayoutPanel1.Visible = false;
             labelStorageSystem.Text = Messages.CSLG_STORAGEADAPTER;
         }
 
@@ -358,28 +321,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
 
             OnPageUpdated();
-
-            if (comboBoxStorageSystem.SelectedIndex >= 0)
-            {
-                if (_storageLinkObject != null)
-                {
-                    // The user has changed which SL object to use using the storage-system combo-box so update that here.
-
-                    if (_storageLinkObject is StorageLinkServer || _storageLinkObject is StorageLinkSystem)
-                    {
-                        _storageLinkObject = ((CslgSystemStorage)comboBoxStorageSystem.SelectedItem).StorageLinkSystem;
-                    }
-                    else
-                    {
-                        StorageLinkPool storageLinkPool = (StorageLinkPool)_storageLinkObject;
-
-                        if (storageLinkPool.StorageLinkSystem != ((CslgSystemStorage)comboBoxStorageSystem.SelectedItem).StorageLinkSystem)
-                        {
-                            _storageLinkObject = ((CslgSystemStorage)comboBoxStorageSystem.SelectedItem).StorageLinkSystem;
-                        }
-                    }
-                }
-            }
         }
 
         private void comboBoxStorageSystem_DrawItem(object sender, DrawItemEventArgs e)

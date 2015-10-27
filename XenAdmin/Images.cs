@@ -42,7 +42,6 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.XenSearch;
 using System.IO;
-using XenAdmin.Network.StorageLink;
 
 namespace XenAdmin
 {

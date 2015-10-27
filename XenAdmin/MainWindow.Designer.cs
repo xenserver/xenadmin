@@ -35,8 +35,6 @@ namespace XenAdmin
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             XenAdmin.Core.Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
-            Program.StorageLinkConnections.CollectionChanged -= StorageLinkConnections_CollectionChanged;
-            Program.StorageLinkConnections.Dispose();
             Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
             SearchPage.SearchChanged -= SearchPanel_SearchChanged;
 

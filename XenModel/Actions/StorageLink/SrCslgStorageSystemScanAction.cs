@@ -36,7 +36,6 @@ using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using XenAdmin.Network.StorageLink;
 using System.Threading;
 
 namespace XenAdmin.Actions
@@ -48,29 +47,8 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ReadOnlyCollection<CslgSystemStorage> _cslgSystemStorages;
-        public StorageLinkConnection StorageLinkConnection { get; private set; }
-        private List<StorageLinkConnection> _SLConnections;
         private System.ComponentModel.ISynchronizeInvoke _invoker;
         private string _adapterid;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SrCslgStorageSystemScanAction"/> class.
-        /// </summary>
-        /// <param name="connection">The connection.</param>
-        /// <param name="hostname">The hostname.</param>
-        /// <param name="username">The username.</param>
-        /// <param name="passwordSecret">The password secret.</param>
-        public SrCslgStorageSystemScanAction(System.ComponentModel.ISynchronizeInvoke invoker, IXenConnection connection, List<StorageLinkConnection> storageLinkConnections, string hostname, string username, string passwordSecret)
-            : base(connection, hostname, username, passwordSecret)
-        {
-            _SLConnections = storageLinkConnections;
-            _invoker = invoker;
-        }
-
-        /// <summary>
-        /// Boston or greater constructor
-        /// </summary>
-        /// <param name="connection"></param>
 
         public SrCslgStorageSystemScanAction(IXenConnection connection, string adapterid, string target, string user, string password)
             : base(connection, target, user, password)
@@ -146,8 +124,7 @@ namespace XenAdmin.Actions
                     }
                 }
 
-                output.Add(new CslgSystemStorage(displayName, storageSystemId, protocols, provisioningOptions,
-                                                 supportsCHAP, null));
+                output.Add(new CslgSystemStorage(displayName, storageSystemId, protocols, provisioningOptions, supportsCHAP));
             }
             return output;
         }
@@ -166,8 +143,6 @@ namespace XenAdmin.Actions
         private readonly ReadOnlyCollection<CslgParameter> _provisioningOptions;
         private readonly bool _supportsCHAP;
 
-        public StorageLinkSystem StorageLinkSystem { get; private set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CslgSystemStorage"/> class.
         /// </summary>
@@ -177,8 +152,7 @@ namespace XenAdmin.Actions
         /// <param name="provisioningOptions">The available provisioning options.</param>
         /// <param name="supportsCHAP">Indicates whether CHAP is supported.</param>
         public CslgSystemStorage(string displayName, string storageSystemId, IEnumerable<CslgParameter> protocols,
-            IEnumerable<CslgParameter> provisioningOptions, bool supportsCHAP,
-            StorageLinkSystem storageLinkSystem)
+            IEnumerable<CslgParameter> provisioningOptions, bool supportsCHAP)
         {
             Util.ThrowIfStringParameterNullOrEmpty(displayName, "displayName");
             Util.ThrowIfStringParameterNullOrEmpty(storageSystemId, "storageSystemId");
@@ -190,7 +164,6 @@ namespace XenAdmin.Actions
             _protocols = new ReadOnlyCollection<CslgParameter>(new List<CslgParameter>(protocols));
             _provisioningOptions = new ReadOnlyCollection<CslgParameter>(new List<CslgParameter>(provisioningOptions));
             _supportsCHAP = supportsCHAP;
-            StorageLinkSystem = storageLinkSystem;
         }
 
         /// <summary>

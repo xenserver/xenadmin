@@ -59,7 +59,6 @@ using XenAdmin.TabPages;
 using XenAdmin.XenSearch;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
-using XenAdmin.Network.StorageLink;
 
 using System.Linq;
 
@@ -534,8 +533,6 @@ namespace XenAdmin
                 }
             }
 
-            Program.StorageLinkConnections.CollectionChanged += StorageLinkConnections_CollectionChanged;
-
             RequestRefreshTreeView();
 
             ThreadPool.QueueUserWorkItem((WaitCallback)delegate(object o)
@@ -590,37 +587,6 @@ namespace XenAdmin
                 pair.Value.opaque_ref = pair.Key;
                 MeddlingActionManager.ForceAddTask(pair.Value);
             }
-        }
-
-        private void StorageLinkConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
-        {
-            var con = ((StorageLinkConnection)e.Element);
-
-            if (e.Action == CollectionChangeAction.Add)
-            {
-                con.ConnectionStateChanged += (s, ee) =>
-                    {
-                        if (ee.ConnectionState == StorageLinkConnectionState.Connected)
-                        {
-                            RequestRefreshTreeView();
-
-                            TrySelectNewNode(o =>
-                            {
-                                var server = con.Cache.Server;
-                                return server != null && server.Equals(o);
-                            }, false, true, false);
-
-                        }
-                        Program.Invoke(this, UpdateToolbars);
-                    };
-
-                con.Cache.Changed += Cache_Changed;
-            }
-            else if (e.Action == CollectionChangeAction.Remove)
-            {
-                con.Cache.Changed -= Cache_Changed;
-            }
-            RequestRefreshTreeView();
         }
 
         private void Cache_Changed(object sender, EventArgs e)
@@ -1337,18 +1303,16 @@ namespace XenAdmin
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
-            bool isStorageLinkSelected = SelectionManager.Selection.FirstIsStorageLink;
-            bool isStorageLinkSRSelected = SelectionManager.Selection.First is StorageLinkRepository && ((StorageLinkRepository)SelectionManager.Selection.First).SR(ConnectionsManager.XenConnectionsCopy) != null;
             bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML;
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected || isDockerContainerSelected));
+            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isDockerContainerSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
-            ShowTab(TabPageSR, !multi && !SearchMode && (isSRSelected || isStorageLinkSRSelected));
+            ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
             ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
@@ -1752,8 +1716,7 @@ namespace XenAdmin
                 }
                 else if (t == TabPageSR)
                 {
-                    StorageLinkRepository slr = SelectionManager.Selection.First as StorageLinkRepository;
-                    SrStoragePage.SR = slr == null ? SelectionManager.Selection.First as SR : slr.SR(ConnectionsManager.XenConnectionsCopy);
+                    SrStoragePage.SR = SelectionManager.Selection.First as SR;
                 }
                 else if (t == TabPageNetwork)
                 {
@@ -3042,8 +3005,6 @@ namespace XenAdmin
 
         // this explicit implementation of ISynchronizeInvoke is used to allow the model to update 
         // its API on the main program thread while being decoupled from MainWindow.
-
-        // See StorageLinkConnection for an example of its usage.
 
         IAsyncResult ISynchronizeInvoke.BeginInvoke(Delegate method, object[] args)
         {

@@ -2459,8 +2459,6 @@
     <Compile Include="Actions\OVFActions\ImportImageAction.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Actions\SetCslgCredentialsAction.cs" />
-    <Compile Include="Actions\SetCslgCredentialsToPoolAction.cs" />
     <Compile Include="Commands\Controls\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2909,7 +2907,6 @@
     <Compile Include="Commands\DetachVirtualDiskCommand.cs" />
     <Compile Include="Commands\MoveVirtualDiskCommand.cs" />
     <Compile Include="Commands\RescanPIFsCommand.cs" />
-    <Compile Include="Commands\SRCommand.cs" />
     <Compile Include="Commands\RollingUpgradeCommand.cs" />
     <Compile Include="Controls\Common\AutoHeightLabel.cs">
       <SubType>Component</SubType>
@@ -3352,7 +3349,6 @@
     <Compile Include="Dialogs\Wlb\WlbReportSubscriptionDialog.designer.cs">
       <DependentUpon>WlbReportSubscriptionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Network\StorageLinkConnectionManager.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\WlbEnabledFilter.cs" />
     <Compile Include="Wizards\ExportWizard\ApplianceChecks\ApplianceExistsCheck.cs" />
     <Compile Include="Wizards\GenericPages\HomeServerItem.cs" />
@@ -6294,9 +6290,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.ja.resx">
       <DependentUpon>CSLG.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.zh-CN.resx">
       <DependentUpon>CSLG.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\EqualLogic.ja.resx">
       <DependentUpon>EqualLogic.cs</DependentUpon>

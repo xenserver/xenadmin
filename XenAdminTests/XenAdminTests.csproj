@@ -369,7 +369,6 @@
     <Compile Include="UnitTests\AlertTests\DuplicateIqnAlertTests.cs" />
     <Compile Include="UnitTests\AlertTests\GuiOldAlertTest.cs" />
     <Compile Include="UnitTests\CPUMaskingTest.cs" />
-    <Compile Include="StorageLinkTests\StorageLinkConnectionTests.cs" />
     <Compile Include="StringExtensionsTests\TruncateStringTest.cs" />
     <Compile Include="UnitTests\UnitTestHelper\IUnitTestVerifier.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockObjectBuilder.cs" />

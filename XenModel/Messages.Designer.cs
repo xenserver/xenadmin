@@ -5693,15 +5693,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Boot order: {0} (auto-start on server boot).
-        /// </summary>
-        public static string BOOTORDER_AUTOSTART {
-            get {
-                return ResourceManager.GetString("BOOTORDER_AUTOSTART", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to There are broken SRs after the upgrade. To solve this problem you should reattach the SRs..
         /// </summary>
         public static string BROKEN_SRS_AFTER_UPGRADE {

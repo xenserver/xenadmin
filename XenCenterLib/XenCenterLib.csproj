@@ -91,7 +91,6 @@
     <Compile Include="QueuedBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ReadOnlyChangeableList.cs" />
     <Compile Include="Set.cs" />
     <Compile Include="StreamUtilities.cs" />
     <Compile Include="StringUtility.cs" />

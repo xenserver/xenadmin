@@ -163,12 +163,7 @@ namespace XenAdmin.TabPages
                 {
                     UnregisterHandlers();
 
-                    // special case for StorageLinkRepository, use its SR in this case.
-
-                    StorageLinkRepository slr = value as StorageLinkRepository;
-                    SR sr = slr != null ? slr.SR(ConnectionsManager.XenConnectionsCopy) : null;
-
-                    xenObject = sr ?? value;
+                    xenObject = value;
                     RegisterHandlers();
                     BuildList();
                     List<PDSection> listPDSections = null;
@@ -459,8 +454,6 @@ namespace XenAdmin.TabPages
                 generateStatusBox();
                 generateMultipathBox();
                 generatePoolPatchesBox();
-                generateStorageLinkBox();
-                generateStorageLinkSystemCapabilitiesBox();
                 generateMultipathBootBox();
                 generateVCPUsBox();
                 generateDockerInfoBox();
@@ -1086,18 +1079,15 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("host.name_label"), Helpers.GetName(xenObject),
                 new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject)));
 
-            if (!(xenObject is IStorageLinkObject))
+            VM vm = xenObject as VM;
+            if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
             {
-                VM vm = xenObject as VM;
-                if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
-                {
-                    s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
-                               new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
-                }
-
-                GenTagRow(s);
-                GenFolderRow(s);
+                s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
+                            new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
             }
+
+            GenTagRow(s);
+            GenFolderRow(s);
 
             if (xenObject is Host)
             {
@@ -1149,8 +1139,6 @@ namespace XenAdmin.TabPages
             }
             else if (xenObject is VM)
             {
-                VM vm = xenObject as VM;
-
                 s.AddEntry(FriendlyName("VM.OSName"), vm.GetOSName());
 
                 s.AddEntry(FriendlyName("VM.OperatingMode"), vm.IsHVM ? Messages.VM_OPERATING_MODE_HVM : Messages.VM_OPERATING_MODE_PV);
@@ -1475,71 +1463,6 @@ namespace XenAdmin.TabPages
                 var reason = vm.ReadCachingDisabledReason;
                 if (reason != null)
                     s.AddEntry(FriendlyName("VM.read_caching_reason"), reason);
-            }
-        }
-
-        private void generateStorageLinkBox()
-        {
-            SR sr = xenObject as SR;
-            StorageLinkRepository slr = sr == null ? null : sr.StorageLinkRepository(Program.StorageLinkConnections);
-
-            if (slr != null)
-            {
-                pdStorageLink.AddEntry(Messages.STORAGELINKSERVER, slr.StorageLinkConnection.Host);
-
-                StorageLinkSystem system = slr.StorageLinkSystem;
-                StorageLinkPool storagePool = slr.StorageLinkPool;
-
-                if (system != null)
-                {
-                    pdStorageLink.AddEntry(Messages.STORAGE_SYSTEM, system.FriendlyName);
-                }
-
-                if (storagePool != null)
-                {
-                    pdStorageLink.AddEntry(Messages.STORAGE_POOL, storagePool.StorageLinkPoolPath);
-                }
-                pdStorageLink.AddEntry(Messages.RAID_TYPE, StorageLinkEnums.GetDisplayText<StorageLinkEnums.RaidType>(slr.RaidType));
-                pdStorageLink.AddEntry(Messages.PROVISIONING_TYPE, StorageLinkEnums.GetDisplayText<StorageLinkEnums.ProvisioningType>(slr.ProvisioningType));
-                pdStorageLink.AddEntry(Messages.PROVISIONING_OPTIONS, StorageLinkEnums.GetDisplayText<StorageLinkEnums.ProvisioningOptions>(slr.ProvisioningOptions));
-            }
-        }
-
-        private void generateStorageLinkSystemCapabilitiesBox()
-        {
-            StorageLinkSystem system = xenObject as StorageLinkSystem;
-
-            if (system != null)
-            {
-                var capabilities = new Dictionary<StorageLinkEnums.StorageSystemCapabilities, string>();
-
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.ISCSI,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.ISCSI));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.FIBRE_CHANNEL,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.FIBRE_CHANNEL));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.PROVISION_FULL,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.PROVISION_FULL));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.PROVISION_THIN,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.PROVISION_THIN));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.POOL_LEVEL_DEDUPLICATION | StorageLinkEnums.StorageSystemCapabilities.VOLUME_LEVEL_DEDUPLICATION,
-                    Messages.NEWSR_CSLG_DEDUPLICATION);
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.DIFF_SNAPSHOT,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.DIFF_SNAPSHOT));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.REMOTE_REPLICATION,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.REMOTE_REPLICATION));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.CLONE,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.CLONE));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.RESIZE,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.RESIZE));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.CLONE_OF_SNAPSHOT,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.CLONE_OF_SNAPSHOT));
-                capabilities.Add(StorageLinkEnums.StorageSystemCapabilities.SNAPSHOT_OF_SNAPSHOT,
-                    StorageLinkEnums.GetDisplayText<StorageLinkEnums.StorageSystemCapabilities>(StorageLinkEnums.StorageSystemCapabilities.SNAPSHOT_OF_SNAPSHOT));
-
-                foreach (StorageLinkEnums.StorageSystemCapabilities capability in capabilities.Keys)
-                {
-                    pdSectionStorageLinkSystemCapabilities.AddEntry(capabilities[capability], ((system.Capabilities & capability) != 0) ? Messages.YES : Messages.NO);
-                }
             }
         }
 

@@ -41,7 +41,7 @@ namespace XenAdmin.Commands
     /// <summary>
     /// Forgets the selected SRs. Shows a confirmation dialog.
     /// </summary>
-    internal class ForgetSRCommand : SRCommand
+    internal class ForgetSRCommand : Command
     {
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 

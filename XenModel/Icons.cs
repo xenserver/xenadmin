@@ -139,8 +139,6 @@ namespace XenAdmin
         CustomField,
         HA,
 
-        StorageLinkRepository,
-
         VmAppliance,
 
         VmCrossPoolMigrate,

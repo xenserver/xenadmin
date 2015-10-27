@@ -68,14 +68,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.FirstIsStorageLink)
-            {
-                new NewSRWizard(null, null, (IStorageLinkObject)selection[0].XenObject).Show(Parent);
-            }
-            else
-            {
-                MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new NewSRWizard(selection[0].Connection));
-            }
+            MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new NewSRWizard(selection[0].Connection));
         }
 
         private static bool CanExecuteOnHost(Host host)

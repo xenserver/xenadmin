@@ -89,7 +89,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
             if (device_config == null) //no device config, we need to run the New SR wizard
             {
-                NewSRWizard wizard = new NewSRWizard(pool.Connection, sr, null, true);
+                NewSRWizard wizard = new NewSRWizard(pool.Connection, sr, true);
                 wizard.ShowDialog(Program.MainWindow);
                 return wizard.FinalAction;
             }

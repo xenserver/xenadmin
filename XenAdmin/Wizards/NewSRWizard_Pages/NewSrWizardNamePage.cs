@@ -125,7 +125,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
             OnPageUpdated();
-            labelInvalidName.Visible = false;
         }
 
         #endregion

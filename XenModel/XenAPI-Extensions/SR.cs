@@ -36,8 +36,6 @@ using System.Xml;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Network.StorageLink;
-
 
 namespace XenAPI
 {
@@ -1019,6 +1017,7 @@ namespace XenAPI
                 return Messages.GENERAL_SR_STATE_OK;
             }
         }
+
         /// <summary>
         /// Returns true when there is a pbd containing adapterid else false
         /// </summary>
@@ -1039,25 +1038,6 @@ namespace XenAPI
             }
         }
 
-
-        public StorageLinkRepository StorageLinkRepository(IEnumerable<StorageLinkConnection> connections)
-        {
-            if (type == "cslg")
-            {
-                foreach (StorageLinkConnection slCon in connections)
-                {
-                    foreach (StorageLinkRepository r in slCon.Cache.StorageRespositories)
-                    {
-                        if (r.opaque_ref == uuid)
-                        {
-                            return r;
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
         /// <summary>
         /// Whether SR supports database replication.
         /// </summary>
@@ -1065,7 +1045,6 @@ namespace XenAPI
         {
             return SupportsDatabaseReplication(Connection, this);
         }
-
 
         /// <summary>
         /// Whether SR supports database replication.

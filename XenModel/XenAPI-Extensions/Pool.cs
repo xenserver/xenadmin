@@ -257,11 +257,6 @@ namespace XenAPI
             }
         }
 
-        public StorageLinkCredentials GetStorageLinkCredentials()
-        {
-            return null;
-        }
-
         // Whether the vSwitch Controller appears to be configured.
         // (Note that we can't tell whether it's actually working properly through the API).
         public bool vSwitchController

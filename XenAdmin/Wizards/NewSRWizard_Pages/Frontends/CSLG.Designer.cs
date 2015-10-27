@@ -30,29 +30,19 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CSLG));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelSystem = new System.Windows.Forms.Label();
             this.labelAdapter = new System.Windows.Forms.Label();
             this.labelStorageSystem = new System.Windows.Forms.Label();
             this.comboBoxStorageSystem = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelSystem, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelAdapter, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelStorageSystem, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxStorageSystem, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // labelSystem
-            // 
-            resources.ApplyResources(this.labelSystem, "labelSystem");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelSystem, 2);
-            this.labelSystem.Name = "labelSystem";
             // 
             // labelAdapter
             // 
@@ -75,11 +65,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.comboBoxStorageSystem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxStorageSystem_DrawItem);
             this.comboBoxStorageSystem.SelectedIndexChanged += new System.EventHandler(this.comboBoxStorageSystem_SelectedIndexChanged);
             // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
             // CSLG
             // 
             resources.ApplyResources(this, "$this");
@@ -96,8 +81,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private System.Windows.Forms.Label labelStorageSystem;
         private System.Windows.Forms.ComboBox comboBoxStorageSystem;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label labelSystem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelAdapter;
     }

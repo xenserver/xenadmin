@@ -293,36 +293,6 @@
   <data name="&gt;&gt;labelStorageLinkPropertiesLinkBlurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="linkLabelGotoStorageLinkProperties.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="linkLabelGotoStorageLinkProperties.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 75</value>
-  </data>
-  <data name="linkLabelGotoStorageLinkProperties.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="linkLabelGotoStorageLinkProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 17</value>
-  </data>
-  <data name="linkLabelGotoStorageLinkProperties.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="linkLabelGotoStorageLinkProperties.Text" xml:space="preserve">
-    <value>配置 Citrix StorageLink Gateway 服务器连接</value>
-  </data>
-  <data name="&gt;&gt;linkLabelGotoStorageLinkProperties.Name" xml:space="preserve">
-    <value>linkLabelGotoStorageLinkProperties</value>
-  </data>
-  <data name="&gt;&gt;linkLabelGotoStorageLinkProperties.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;linkLabelGotoStorageLinkProperties.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;linkLabelGotoStorageLinkProperties.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>

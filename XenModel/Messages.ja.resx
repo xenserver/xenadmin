@@ -1911,9 +1911,6 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="BOOTORDER" xml:space="preserve">
     <value>起動順序: {0}</value>
   </data>
-  <data name="BOOTORDER_AUTOSTART" xml:space="preserve">
-    <value>起動順序: {0} (サーバー起動時に自動的に起動)</value>
-  </data>
   <data name="BOOT_DEVICE_DISABLED_ROW_TEXT" xml:space="preserve">
     <value>VM は、以下のデバイスからは起動しません</value>
   </data>
@@ -6912,18 +6909,6 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_TITLE" xml:space="preserve">
     <value>スナップショット全体の削除</value>
   </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE" xml:space="preserve">
-    <value>選択したストレージ ボリュームを削除してもよろしいですか? この操作は元に戻せません。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE" xml:space="preserve">
-    <value>StorageLink ストレージ ボリュームの削除</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE" xml:space="preserve">
-    <value>選択したストレージ ボリュームを削除してもよろしいですか? この操作は元に戻せません。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE" xml:space="preserve">
-    <value>StorageLink ストレージ ボリュームの削除</value>
-  </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
     <value>これにより、このシステム ディスクは完全に削除され、VM が起動不能になる場合があります。続行しますか?</value>
   </data>
@@ -10145,15 +10130,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>ストレージ システムの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKVOLUME" xml:space="preserve">
-    <value>StorageLink ストレージ ボリューム</value>
-  </data>
-  <data name="STORAGELINKVOLUMES" xml:space="preserve">
-    <value>StorageLink ストレージ ボリューム</value>
-  </data>
-  <data name="STORAGELINK_GATEWAY" xml:space="preserve">
-    <value>StorageLink Gateway</value>
   </data>
   <data name="STORAGELINK_IN_USE" xml:space="preserve">
     <value>ストレージ システムの使用</value>

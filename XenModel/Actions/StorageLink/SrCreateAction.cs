@@ -38,8 +38,6 @@ using XenAdmin;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
-using XenAdmin.Network.StorageLink;
-
 
 namespace XenAdmin.Actions
 {
@@ -54,7 +52,6 @@ namespace XenAdmin.Actions
         private readonly bool _srIsShared;
         private readonly Dictionary<string, string> _dconf;
         private readonly Dictionary<string, string> _smconf;
-        private StorageLinkConnection _SLConnection;
 
         /// <summary>
         /// RBAC dependencies needed to create SR.
@@ -67,7 +64,7 @@ namespace XenAdmin.Actions
 
         public SrCreateAction(IXenConnection connection, Host host, string srName,
             string srDescription, SR.SRTypes srType, string srContentType, bool srIsShared,
-            Dictionary<string, string> dconf, Dictionary<string, string> smconf, List<StorageLinkConnection> copyStorageLinkConnections)
+            Dictionary<string, string> dconf, Dictionary<string, string> smconf)
             : base(connection, string.Format(Messages.ACTION_SR_CREATING_TITLE,
             XenAPI.SR.getFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
         {

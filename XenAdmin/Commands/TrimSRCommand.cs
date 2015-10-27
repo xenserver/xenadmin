@@ -38,7 +38,7 @@ using XenAPI;
 
 namespace XenAdmin.Commands
 {
-    internal class TrimSRCommand : SRCommand
+    internal class TrimSRCommand : Command
     {
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required in the derived

@@ -1911,9 +1911,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="BOOTORDER" xml:space="preserve">
     <value>启动顺序: {0}</value>
   </data>
-  <data name="BOOTORDER_AUTOSTART" xml:space="preserve">
-    <value>启动顺序: {0}(在服务器启动时自动启动)</value>
-  </data>
   <data name="BOOT_DEVICE_DISABLED_ROW_TEXT" xml:space="preserve">
     <value>VM 将不从此行以下的设备启动</value>
   </data>
@@ -6910,18 +6907,6 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_TITLE" xml:space="preserve">
     <value>删除整个快照</value>
   </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE" xml:space="preserve">
-    <value>是否确实要删除所选存储卷? 此操作无法撤消。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储卷</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE" xml:space="preserve">
-    <value>是否确实要删除所选存储卷? 此操作无法撤消。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储卷</value>
-  </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
     <value>该操作将永久删除此系统磁盘，可能会使 VM 无法启动。是否继续?</value>
   </data>
@@ -10147,15 +10132,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>存储系统常规属性</value>
-  </data>
-  <data name="STORAGELINKVOLUME" xml:space="preserve">
-    <value>StorageLink 存储卷</value>
-  </data>
-  <data name="STORAGELINKVOLUMES" xml:space="preserve">
-    <value>StorageLink 存储卷</value>
-  </data>
-  <data name="STORAGELINK_GATEWAY" xml:space="preserve">
-    <value>StorageLink Gateway</value>
   </data>
   <data name="STORAGELINK_IN_USE" xml:space="preserve">
     <value>正在使用存储系统</value>

@@ -31,14 +31,14 @@
 
 using System.Collections.Generic;
 using XenAdmin;
-using XenAdmin.Network.StorageLink;
 using System;
 using System.Collections.ObjectModel;
 
 namespace XenAPI
 {
-    public class StorageLinkPool : StorageLinkObject<StorageLinkPool>
+    public class StorageLinkPool
     {
+        private string _friendlyName;
         private uint _capacity;
         private uint _usedSpace;
 
@@ -51,12 +51,14 @@ namespace XenAPI
         {
         }
 
-        public StorageLinkPool(StorageLinkConnection storageLinkConnection, string opaque_ref, string friendlyName, string parentStorageLinkPoolId, string storageLinkSystemId, uint capacity, uint usedSpace, StorageLinkEnums.RaidType raidTypes, StorageLinkEnums.ProvisioningType provisioningTypes)
-            : base(storageLinkConnection, opaque_ref, friendlyName)
+        public StorageLinkPool(string opaque_ref, string friendlyName, string parentStorageLinkPoolId, string storageLinkSystemId, uint capacity, uint usedSpace, StorageLinkEnums.RaidType raidTypes, StorageLinkEnums.ProvisioningType provisioningTypes)
         {
+            Util.ThrowIfStringParameterNullOrEmpty(opaque_ref, "opaque_ref");
+            Util.ThrowIfParameterNull(friendlyName, "friendlyName");
             Util.ThrowIfParameterNull(parentStorageLinkPoolId, "parentStorageLinkPoolId");
             Util.ThrowIfParameterNull(storageLinkSystemId, "storageLinkSystemId");
 
+            _friendlyName = friendlyName;
             ParentStorageLinkPoolId = parentStorageLinkPoolId;
             StorageLinkSystemId = storageLinkSystemId;
             _capacity = capacity;
@@ -65,59 +67,11 @@ namespace XenAPI
             ProvisioningTypes = provisioningTypes;
         }
 
-        public StorageLinkPool Parent
-        {
-            get
-            {
-                return StorageLinkConnection.Cache.Resolve<StorageLinkPool>(ParentStorageLinkPoolId);
-            }
-        }
-
-        public List<StorageLinkPool> GetAncestors()
-        {
-            var output = new List<StorageLinkPool>();
-
-            StorageLinkPool pool = Parent;
-
-            while (pool != null)
-            {
-                output.Add(pool);
-                pool = pool.Parent;
-            }
-            return output;
-        }
-
         public uint Capacity
         {
             get
             {
                 return _capacity;
-            }
-            private set
-            {
-                if (_capacity != value)
-                {
-                    _capacity = value;
-                    NotifyPropertyChanged("Capacity");
-                    NotifyPropertyChanged("FreeSpace");
-                }
-            }
-        }
-
-        public uint UsedSpace
-        {
-            get
-            {
-                return _usedSpace;
-            }
-            private set
-            {
-                if (_usedSpace != value)
-                {
-                    _usedSpace = value;
-                    NotifyPropertyChanged("UsedSpace");
-                    NotifyPropertyChanged("FreeSpace");
-                }
             }
         }
 
@@ -126,32 +80,6 @@ namespace XenAPI
             get
             {
                 return Math.Max(0, _capacity - _usedSpace);
-            }
-        }
-
-        public string StorageLinkPoolPath
-        {
-            get
-            {
-                var pathList = new List<string> { ToString() };
-                pathList.AddRange(GetAncestors().ConvertAll(p => p.ToString()));
-                pathList.Reverse();
-                return string.Join(" > ", pathList.ToArray());
-            }
-        }
-
-        public override void UpdateFrom(StorageLinkPool update)
-        {
-            base.UpdateFrom(update);
-            Capacity = update.Capacity;
-            UsedSpace = update.UsedSpace;
-        }
-
-        public StorageLinkSystem StorageLinkSystem
-        {
-            get
-            {
-                return StorageLinkConnection.Cache.Resolve<StorageLinkSystem>(StorageLinkSystemId);
             }
         }
     }

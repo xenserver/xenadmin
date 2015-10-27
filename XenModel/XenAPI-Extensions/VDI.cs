@@ -35,8 +35,6 @@ using System.Linq;
 using System.Text;
 using XenAdmin;
 using XenAdmin.Core;
-using XenAdmin.Network.StorageLink;
-
 
 namespace XenAPI
 {
