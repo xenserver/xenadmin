@@ -25234,24 +25234,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
-        /// </summary>
-        public static string OPTIONS_SEARCH {
-            get {
-                return ResourceManager.GetString("OPTIONS_SEARCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Search settings.
-        /// </summary>
-        public static string OPTIONS_SEARCH_DESC {
-            get {
-                return ResourceManager.GetString("OPTIONS_SEARCH_DESC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Out of date.
         /// </summary>
         public static string OUT_OF_DATE {
