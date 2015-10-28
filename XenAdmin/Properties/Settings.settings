@@ -158,7 +158,7 @@
     <Setting Name="ShowHealthCheckEnrollmentReminder" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ShowJustHostInSearch" Type="System.Boolean" Scope="User">
+    <Setting Name="ShowJustHostInSearch" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
