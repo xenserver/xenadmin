@@ -88,7 +88,10 @@ namespace XenAdmin.Actions
             {
                 // No CPU masking is needed for Dundee or greater hosts 
                 if (Helpers.DundeeOrGreater(host))
+                {
+                    System.Diagnostics.Trace.Assert(false, "No CPU masking should be done for Dundee or greater hosts");
                     continue;
+                }
 
                 Host.set_cpu_features(host.Connection.Session, host.opaque_ref, poolMaster.cpu_info["features"]);
                 RebootHostAction action = new RebootHostAction(host, acceptNTolChanges);
