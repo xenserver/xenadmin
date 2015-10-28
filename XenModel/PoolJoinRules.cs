@@ -270,6 +270,10 @@ namespace XenAdmin.Core
                 if (slave_cpu_info["vendor"] != master_cpu_info["vendor"])
                     return false;
 
+                // No feature checks are needed for Dundee or greater hosts
+                if (Helpers.DundeeOrGreater(master))
+                    return true;
+
                 if (slave_cpu_info["features"] == master_cpu_info["features"])
                     return true;
 
