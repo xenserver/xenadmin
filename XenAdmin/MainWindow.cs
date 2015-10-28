@@ -1863,8 +1863,17 @@ namespace XenAdmin
                         var connection = SelectionManager.Selection.GetConnectionOfAllItems(); // null for cross-pool selection
                         if (connection != null)
                         {
-                            var pool = Helpers.GetPool(connection);
-                            SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection); // pool or standalone server
+                            //If ShowJustHostInSearch is enabled and only one live host is selected, we show the search for the host only
+                            if (Properties.Settings.Default.ShowJustHostInSearch && SelectionManager.Selection.Count == 1 
+                                && SelectionManager.Selection.FirstIsLiveHost)
+                            {
+                                SearchPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
+                            }
+                            else
+                            {
+                                var pool = Helpers.GetPool(connection);
+                                SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection); // pool or standalone server
+                            }
                         }
                         else
                             SearchPage.XenObject = null;

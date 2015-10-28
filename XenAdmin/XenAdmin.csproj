@@ -242,6 +242,12 @@
     <Compile Include="Dialogs\ConvertToThinSRDialog.Designer.cs">
       <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </Compile>
+	<Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.Designer.cs">
+      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -393,11 +399,11 @@
     <Compile Include="Dialogs\OptionsPages\ConsolesOptionsPage.Designer.cs">
       <DependentUpon>ConsolesOptionsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\OptionsPages\GraphsOptionsPage.cs">
+    <Compile Include="Dialogs\OptionsPages\DisplayOptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dialogs\OptionsPages\GraphsOptionsPage.Designer.cs">
-      <DependentUpon>GraphsOptionsPage.cs</DependentUpon>
+    <Compile Include="Dialogs\OptionsPages\DisplayOptionsPage.Designer.cs">
+      <DependentUpon>DisplayOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\IOptionsPage.cs" />
     <Compile Include="Dialogs\OptionsPages\SecurityOptionsPage.cs">
@@ -1570,6 +1576,15 @@
     <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.zh-CN.resx">
       <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.ja.resx">
+      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.resx">
+      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.zh-CN.resx">
+      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ReconnectAsDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
@@ -1603,9 +1618,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ConsolesOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OptionsPages\GraphsOptionsPage.resx">
+    <EmbeddedResource Include="Dialogs\OptionsPages\DisplayOptionsPage.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>GraphsOptionsPage.cs</DependentUpon>
+      <DependentUpon>DisplayOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\SecurityOptionsPage.resx">
       <SubType>Designer</SubType>
@@ -2832,12 +2847,6 @@
     </Compile>
     <Compile Include="Dialogs\OptionsPages\PluginOptionsPage.Designer.cs">
       <DependentUpon>PluginOptionsPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.Designer.cs">
-      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\VMAppliances\FateSharingVMsDialog.cs">
       <SubType>Form</SubType>
@@ -5255,11 +5264,11 @@
     <EmbeddedResource Include="Dialogs\OptionsPages\ConsolesOptionsPage.zh-CN.resx">
       <DependentUpon>ConsolesOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OptionsPages\GraphsOptionsPage.ja.resx">
-      <DependentUpon>GraphsOptionsPage.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\OptionsPages\DisplayOptionsPage.ja.resx">
+      <DependentUpon>DisplayOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OptionsPages\GraphsOptionsPage.zh-CN.resx">
-      <DependentUpon>GraphsOptionsPage.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\OptionsPages\DisplayOptionsPage.zh-CN.resx">
+      <DependentUpon>DisplayOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\PluginOptionsPage.ja.resx">
       <DependentUpon>PluginOptionsPage.cs</DependentUpon>
@@ -5270,15 +5279,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\PluginOptionsPage.zh-CN.resx">
       <DependentUpon>PluginOptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.ja.resx">
-      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.resx">
-      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.zh-CN.resx">
-      <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\SecurityOptionsPage.ja.resx">
       <DependentUpon>SecurityOptionsPage.cs</DependentUpon>

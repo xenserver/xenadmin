@@ -10870,6 +10870,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string DISPLAY {
+            get {
+                return ResourceManager.GetString("DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display options.
+        /// </summary>
+        public static string DISPLAY_DETAILS {
+            get {
+                return ResourceManager.GetString("DISPLAY_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NO_IO_NO_MGMNT {
@@ -15411,15 +15429,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Graphs.
-        /// </summary>
-        public static string GRAPHS {
-            get {
-                return ResourceManager.GetString("GRAPHS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to It is not possible to add new performance graphs on VM &apos;{0}&apos; as the VM is not running..
         /// </summary>
         public static string GRAPHS_CANNOT_ADD_VM_HALTED {
@@ -15470,15 +15479,6 @@ namespace XenAdmin {
         public static string GRAPHS_DEFAULT_NAME_NETWORK {
             get {
                 return ResourceManager.GetString("GRAPHS_DEFAULT_NAME_NETWORK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Graph appearance.
-        /// </summary>
-        public static string GRAPHS_DESC {
-            get {
-                return ResourceManager.GetString("GRAPHS_DESC", resourceCulture);
             }
         }
         

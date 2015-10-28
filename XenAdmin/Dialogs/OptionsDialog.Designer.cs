@@ -31,7 +31,7 @@ namespace XenAdmin.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
             this.connectionOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage();
             this.consolesOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.ConsolesOptionsPage();
-            this.graphsOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.GraphsOptionsPage();
+            this.graphsOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage();
             this.updatesOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.UpdatesOptionsPage();
             this.securityOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage();
             this.saveAndRestoreOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage();
@@ -138,7 +138,7 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage connectionOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.ConsolesOptionsPage consolesOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.UpdatesOptionsPage updatesOptionsPage1;
-        private XenAdmin.Dialogs.OptionsPages.GraphsOptionsPage graphsOptionsPage1;
+        private XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage graphsOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage securityOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage saveAndRestoreOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.PluginOptionsPage pluginOptionsPage1;

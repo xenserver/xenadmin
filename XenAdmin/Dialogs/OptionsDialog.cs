@@ -87,7 +87,7 @@ namespace XenAdmin.Dialogs
             SecurityOptionsPage.Log();
             if (!Helpers.CommonCriteriaCertificationRelease)
                 UpdatesOptionsPage.Log();
-            GraphsOptionsPage.Log();
+            DisplayOptionsPage.Log();
             SaveAndRestoreOptionsPage.Log();
             PluginOptionsPage.Log();
         }
