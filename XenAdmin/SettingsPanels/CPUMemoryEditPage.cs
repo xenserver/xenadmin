@@ -234,15 +234,6 @@ namespace XenAdmin.SettingsPanels
             Host currentHost = Helpers.GetMaster(this.vm.Connection);
             if (currentHost != null)
             {
-                bool QosRestricted = currentHost.RestrictQoS;
-                transparentTrackBar1.Enabled = !QosRestricted;
-                licenseRestrictionTip.Active = QosRestricted;
-                lblSliderLowest.Enabled = !QosRestricted;
-                lblSliderNormal.Enabled = !QosRestricted;
-                lblSliderHighest.Enabled = !QosRestricted;
-                lblPriority.Enabled = !QosRestricted;
-                panel1.Enabled = !QosRestricted;
-
                 // Show the performance warning about vCPUs > pCPUs.
                 // Don't show if the VM isn't running, since we don't know which server it will
                 // run on (and so can't count the number of pCPUs).

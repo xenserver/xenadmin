@@ -92,9 +92,6 @@ namespace XenAdmin.Core
             if (Connecting(slaveHost))  // also implies slaveHost != null
                 return Reason.Connecting;
 
-            if (LicenseRestriction(slaveHost))
-                return Reason.LicenseRestriction;
-
             if (IsAPool(slaveConnection))
                 return Reason.IsAPool;
 
@@ -245,11 +242,6 @@ namespace XenAdmin.Core
         private static bool IsAPool(IXenConnection connection)
         {
             return Helpers.GetPool(connection) != null;
-        }
-
-        private static bool LicenseRestriction(Host host)
-        {
-            return host.RestrictPooling;
         }
 
         // If CompatibleCPUs(slave, master, false) is true, the CPUs can be pooled without masking first.

@@ -4704,9 +4704,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXTERNAL_NETWORK" xml:space="preserve">
     <value>外部ネットワーク</value>
   </data>
-  <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
-    <value>外部ネットワークを使用するには、Standard Edition のライセンスが必要です。</value>
-  </data>
   <data name="EXTERNAL_PLUGIN_BAD_EXIT" xml:space="preserve">
     <value>外部コマンドが終了しました。終了コード: {0}</value>
   </data>
@@ -4743,23 +4740,8 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} を使用するには XenServer 5.6 Feature Pack 1 以降の Enterprise Edition または Platinum Edition のライセンスが必要です。</value>
-  </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
     <value>{0} を使用するには Enterprise Edition\nまたは Platinum Edition のライセンスが必要です。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_GEORGE" xml:space="preserve">
-    <value>{0} には XenServer 5.5 またはそれ以降のバージョンが必要です</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR" xml:space="preserve">
-    <value>{0} には XenServer 5.6 またはそれ以降のバージョンが必要です</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} を使用するには XenServer 5.6 以降の Enterprise Edition\nまたは Platinum Edition のライセンスが必要です。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
-    <value>{0} には XenServer 5.6 またはそれ以降のバージョンが必要です</value>
   </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>次のセクション(&amp;N)</value>
@@ -10098,110 +10080,11 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>サーバーの状態レポートのパッケージ化時にエラーが発生しました。一部のレポートが作成されていない場合があります</value>
   </data>
-  <data name="STORAGELINKPOOL" xml:space="preserve">
-    <value>StorageLink ストレージ プール</value>
-  </data>
-  <data name="STORAGELINKPOOLS" xml:space="preserve">
-    <value>StorageLink ストレージ プール</value>
-  </data>
-  <data name="STORAGELINKPOOL_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>ストレージ プールの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKREPOSITORY_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>ストレージ リポジトリの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKSERVER" xml:space="preserve">
-    <value>StorageLink サーバー</value>
-  </data>
-  <data name="STORAGELINKSERVERS" xml:space="preserve">
-    <value>StorageLink サーバー</value>
-  </data>
-  <data name="STORAGELINKSERVER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>StorageLink サーバーの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKSRS" xml:space="preserve">
-    <value>StorageLink ストレージ リポジトリ</value>
-  </data>
-  <data name="STORAGELINKSYSTEM" xml:space="preserve">
-    <value>StorageLink ストレージ システム</value>
-  </data>
-  <data name="STORAGELINKSYSTEMS" xml:space="preserve">
-    <value>StorageLink ストレージ システム</value>
-  </data>
-  <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>ストレージ システムの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINK_IN_USE" xml:space="preserve">
-    <value>ストレージ システムの使用</value>
-  </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{1} の {0} 空き</value>
   </data>
-  <data name="STORAGELINK_POOL_SIZE_USED" xml:space="preserve">
-    <value>{0} 使用 / {1} 合計</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>ファイバ チャネル</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION" xml:space="preserve">
-    <value>重複排除</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_NONE" xml:space="preserve">
-    <value>なし</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THICK" xml:space="preserve">
-    <value>シック</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THIN" xml:space="preserve">
-    <value>シン</value>
-  </data>
-  <data name="STORAGELINK_SCANNING_FOR_SRS" xml:space="preserve">
-    <value>'{0}' 上の SR のスキャン</value>
-  </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>再接続が必要な StorageLink Gateway SR があります。</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE" xml:space="preserve">
-    <value>複製</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT" xml:space="preserve">
-    <value>スナップショットの複製</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION" xml:space="preserve">
-    <value>重複排除</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT" xml:space="preserve">
-    <value>スナップショット</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>ファイバ チャネル</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL" xml:space="preserve">
-    <value>シック プロビジョニング</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN" xml:space="preserve">
-    <value>シン プロビジョニング</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION" xml:space="preserve">
-    <value>リモート複製</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE" xml:space="preserve">
-    <value>ボリュームのサイズ変更</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT" xml:space="preserve">
-    <value>スナップショットのスナップショット</value>
-  </data>
-  <data name="STORAGELINK_TEST_CONNECTION" xml:space="preserve">
-    <value>StorageLink サーバー {0} との接続をテストしています</value>
-  </data>
-  <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
-    <value>{0} 上の StorageLink サーバーに接続できません</value>
   </data>
   <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
     <value>StorageLink SR 状態</value>

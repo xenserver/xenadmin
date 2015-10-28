@@ -59,8 +59,6 @@ namespace XenAdmin.Controls.NetworkingTab
         }
 
         private IXenObject _xenObject = null;
-        private bool QoSRestricted = false;
-
         public IXenObject XenObject
         {
             get
@@ -115,10 +113,6 @@ namespace XenAdmin.Controls.NetworkingTab
 
                     // update the list when we get new metrics
                     _xenObject.Connection.Cache.RegisterBatchCollectionChanged<VM_guest_metrics>(VM_guest_metrics_BatchCollectionChanged);
-
-                    // Check if QoS is enabled for this VM
-                    Host currentHost = Helpers.GetMaster(_xenObject.Connection);
-                    QoSRestricted = currentHost != null && currentHost.RestrictQoS;
 
                     AddNetworkButton.Text = Messages.VM_NETWORK_TAB_ADD_BUTTON_LABEL;
                     EditNetworkButton.Text = Messages.VM_NETWORK_TAB_EDIT_BUTTON_LABEL;

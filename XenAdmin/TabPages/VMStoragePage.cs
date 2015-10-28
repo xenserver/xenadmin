@@ -53,6 +53,7 @@ namespace XenAdmin.TabPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly ContextMenu _TheContextMenu = new ContextMenu();
+        private readonly DataGridViewColumn storageLinkColumn;
 
         private bool QoSRestricted = false;
         private VM vm;
@@ -62,6 +63,8 @@ namespace XenAdmin.TabPages
             InitializeComponent();
 
             _TheContextMenu.MenuItems.Add(AddButton.Text, AddButton_Click);
+
+            storageLinkColumn = ColumnSRVolume;
 
             TitleLabel.ForeColor = Program.HeaderGradientForeColor;
             TitleLabel.Font = Program.HeaderGradientFont;
@@ -111,19 +114,18 @@ namespace XenAdmin.TabPages
                 multipleDvdIsoList1.VM = vm;
 
                 if (vm != null)
-                {
-
                     vm.PropertyChanged += vm_PropertyChanged;
-
-                    Host currentHost = Helpers.GetMaster(vm.Connection);
-                    QoSRestricted = currentHost != null && currentHost.RestrictQoS;
-                }
 
                 BuildList();
 
                 // set all columns to be preferred width but allow user to resize.
                 foreach (DataGridViewTextBoxColumn col in dataGridViewStorage.Columns)
-                    col.Width = col.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, false);
+                {
+                    if (col != storageLinkColumn)
+                    {
+                        col.Width = col.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, false);
+                    }
+                }
             }
         }
 
@@ -209,6 +211,8 @@ namespace XenAdmin.TabPages
                 if (vm == null)
                     return;
 
+                bool storageLinkColumnVisible = false;
+
                 List<bool> devices_in_use = new List<bool>();
                 foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
                 {
@@ -224,6 +228,8 @@ namespace XenAdmin.TabPages
                         SR sr = vm.Connection.Resolve(vdi.SR);
                         if (sr == null || sr.IsToolsSR)
                             continue;
+
+                        storageLinkColumnVisible = vdi.sm_config.ContainsKey("SVID");
 
                         vdi.PropertyChanged -= new PropertyChangedEventHandler(vdi_PropertyChanged);
                         vdi.PropertyChanged += new PropertyChangedEventHandler(vdi_PropertyChanged);
@@ -247,6 +253,8 @@ namespace XenAdmin.TabPages
 					HelpersGUI.ResizeLastGridViewColumn(ColumnDevicePath);
                 }
 
+
+                storageLinkColumn.Visible = storageLinkColumnVisible;
                 dataGridViewStorage.Sort(dataGridViewStorage.SortedColumn, dataGridViewStorage.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
                 IEnumerable<VBD> vbdsSelected = from VBDRow row in vbdSavedItems select row.VBD;

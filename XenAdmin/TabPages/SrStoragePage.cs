@@ -156,10 +156,12 @@ namespace XenAdmin.TabPages
             dataGridViewVDIs.SuspendLayout();
             try
             {
+                storageLinkVolumeColumn.Visible = data.ShowStorageLink;
+
                 // Update existing rows
                 foreach (var vdiRow in data.VdiRowsToUpdate)
                 {
-                    vdiRow.RefreshRowDetails();
+                    vdiRow.RefreshRowDetails(data.ShowStorageLink);
                 }
 
                 // Remove rows for deleted VDIs
@@ -171,7 +173,7 @@ namespace XenAdmin.TabPages
                 // Add rows for new VDIs
                 foreach (var vdi in data.VdisToAdd)
                 {
-                    VDIRow newRow = new VDIRow(vdi);
+                    VDIRow newRow = new VDIRow(vdi, data.ShowStorageLink);
                     dataGridViewVDIs.Rows.Add(newRow);   
                 }
             }
@@ -502,8 +504,11 @@ namespace XenAdmin.TabPages
         {
             public VDI VDI { get; private set; }
 
-            public VDIRow(VDI vdi)
+            private bool showStorageLink = false;
+
+            public VDIRow(VDI vdi, bool showStorageLink)
             {
+                this.showStorageLink = showStorageLink;
                 VDI = vdi;
                 for (int i = 0; i < 5; i++)
                 {
@@ -532,8 +537,9 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            public void RefreshRowDetails()
+            public void RefreshRowDetails(bool showSL)
             {
+                showStorageLink = showSL;
                 for (int i = 0; i < 5; i++)
                 {
                     Cells[i].Value = GetCellText(i);
@@ -546,12 +552,15 @@ namespace XenAdmin.TabPages
             public List<VDIRow> VdiRowsToUpdate { get; private set; }
             public List<VDIRow> VdiRowsToRemove { get; private set; }
             public List<VDI> VdisToAdd { get; private set; }
+            public bool ShowStorageLink { get; private set; }
 
-            public VDIsData(List<VDIRow> vdiRowsToUpdate, List<VDIRow> vdiRowsToRemove, List<VDI> vdisToAdd) : this()
+            public VDIsData(List<VDIRow> vdiRowsToUpdate, List<VDIRow> vdiRowsToRemove, List<VDI> vdisToAdd,
+                bool showStorageLink) : this()
             {
                 VdiRowsToUpdate = vdiRowsToUpdate;
                 VdiRowsToRemove = vdiRowsToRemove;
                 VdisToAdd = vdisToAdd;
+                ShowStorageLink = showStorageLink;
             }
         }
 
@@ -603,6 +612,8 @@ namespace XenAdmin.TabPages
                             !vdi.IsAnIntermediateStorageMotionSnapshot)
                             .ToList();
 
+                bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
+
                 var vdiRowsToRemove =
                     currentVDIRows.Where(vdiRow => !vdis.Contains(vdiRow.VDI)).OrderByDescending(row => row.Index).ToList();
 
@@ -610,7 +621,7 @@ namespace XenAdmin.TabPages
 
                 var vdisToAdd = vdis.Except(vdiRowsToUpdate.ConvertAll(vdiRow => vdiRow.VDI)).ToList();
 
-                return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd);
+                return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd, showStorageLink);
             }
 
             private void DoWork(object sender, DoWorkEventArgs e)

@@ -48,7 +48,6 @@ namespace XenAdmin.Dialogs
     {
         private VIF ExistingVif;
         private int Device;
-        private readonly bool qosRestricted;
         private readonly bool vSwitchController;
 
         public VIFDialog(IXenConnection Connection, VIF ExistingVif, int Device)
@@ -61,10 +60,6 @@ namespace XenAdmin.Dialogs
             this.Device = Device;
             if (ExistingVif != null)
                 changeToPropertiesTitle();
-
-            // Check if QoS is enabled for this VM
-            Host currentHost = Helpers.GetMaster(connection);
-            qosRestricted = currentHost != null && currentHost.RestrictQoS;
 
             // Check if vSwitch Controller is configured for the pool (CA-46299)
             Pool pool = Helpers.GetPoolOfOne(connection);
@@ -111,7 +106,7 @@ namespace XenAdmin.Dialogs
 
         private void LoadDetails()
         {
-            if (qosRestricted || vSwitchController) 
+            if (vSwitchController) 
             {
                 flowLayoutPanelQoS.Enabled = checkboxQoS.Enabled = checkboxQoS.Checked = false;
                 panelLicenseRestriction.Visible = true;
@@ -318,20 +313,17 @@ namespace XenAdmin.Dialogs
                 if (ExistingVif.device != Device.ToString())
                     return true;
 
-                if (!qosRestricted)
+                if (ExistingVif.RateLimited)
                 {
-                    if (ExistingVif.RateLimited)
-                    {
-                        if (!checkboxQoS.Checked)
-                            return true;
-                        if (ExistingVif.qos_algorithm_params[VIF.KBPS_QOS_PARAMS_KEY] != promptTextBoxQoS.Text)
-                            return true;
-                    }
-                    else if (string.IsNullOrEmpty(ExistingVif.qos_algorithm_type))
-                    {
-                        if (checkboxQoS.Checked)
-                            return true;
-                    }
+                    if (!checkboxQoS.Checked)
+                        return true;
+                    if (ExistingVif.qos_algorithm_params[VIF.KBPS_QOS_PARAMS_KEY] != promptTextBoxQoS.Text)
+                        return true;
+                }
+                else if (string.IsNullOrEmpty(ExistingVif.qos_algorithm_type))
+                {
+                    if (checkboxQoS.Checked)
+                        return true;
                 }
 
                 return false;

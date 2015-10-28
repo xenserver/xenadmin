@@ -271,26 +271,6 @@ namespace XenAPI
             return h._RestrictVSwitchController;
         }
 
-        public bool RestrictPooling
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pooling"); }
-        }
-
-        public bool RestrictConnection
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_connection"); }
-        }
-
-        public bool RestrictQoS
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_qos"); }
-        }
-
-        public bool RestrictVLAN
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vlan"); }
-        }
-
         public static bool RestrictVMProtection(Host h)
         {
             return h._RestrictVMProtection;
@@ -329,11 +309,6 @@ namespace XenAPI
         private bool _RestrictCrossPoolMigrate
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_storage_xen_motion"); }
-        }
-
-        public bool RestrictPoolAttachedStorage
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pool_attached_storage"); }
         }
 
         public virtual bool IsFreeLicense()

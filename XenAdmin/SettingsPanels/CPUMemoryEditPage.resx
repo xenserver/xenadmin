@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="licenseRestrictionTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblSliderHighest.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -143,9 +140,6 @@
   </data>
   <data name="lblSliderHighest.Text" xml:space="preserve">
     <value>Highest</value>
-  </data>
-  <data name="lblSliderHighest.ToolTip" xml:space="preserve">
-    <value>This field is disabled due to license restrictions on the server.</value>
   </data>
   <data name="&gt;&gt;lblSliderHighest.Name" xml:space="preserve">
     <value>lblSliderHighest</value>
@@ -180,9 +174,6 @@
   <data name="lblSliderNormal.Text" xml:space="preserve">
     <value>Normal</value>
   </data>
-  <data name="lblSliderNormal.ToolTip" xml:space="preserve">
-    <value>This field is disabled due to license restrictions on the server.</value>
-  </data>
   <data name="&gt;&gt;lblSliderNormal.Name" xml:space="preserve">
     <value>lblSliderNormal</value>
   </data>
@@ -215,9 +206,6 @@
   </data>
   <data name="lblSliderLowest.Text" xml:space="preserve">
     <value>Lowest</value>
-  </data>
-  <data name="lblSliderLowest.ToolTip" xml:space="preserve">
-    <value>This field is disabled due to license restrictions on the server.</value>
   </data>
   <data name="&gt;&gt;lblSliderLowest.Name" xml:space="preserve">
     <value>lblSliderLowest</value>
@@ -485,9 +473,6 @@
   </data>
   <data name="transparentTrackBar1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="transparentTrackBar1.ToolTip" xml:space="preserve">
-    <value>This field is disabled due to license restrictions on the server.</value>
   </data>
   <data name="&gt;&gt;transparentTrackBar1.Name" xml:space="preserve">
     <value>transparentTrackBar1</value>
@@ -792,9 +777,6 @@
   <data name="lblPriority.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="lblPriority.ToolTip" xml:space="preserve">
-    <value>This field is disabled due to license restrictions on the server.</value>
-  </data>
   <data name="&gt;&gt;lblPriority.Name" xml:space="preserve">
     <value>lblPriority</value>
   </data>
@@ -816,14 +798,11 @@
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 500</value>
   </data>
-  <data name="&gt;&gt;licenseRestrictionTip.Name" xml:space="preserve">
-    <value>licenseRestrictionTip</value>
-  </data>
-  <data name="&gt;&gt;licenseRestrictionTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 500</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CPUMemoryEditPage</value>

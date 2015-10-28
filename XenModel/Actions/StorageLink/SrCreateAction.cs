@@ -63,7 +63,7 @@ namespace XenAdmin.Actions
                                                                                  "pbd.unplug");
 
         public SrCreateAction(IXenConnection connection, Host host, string srName,
-            string srDescription, SR.SRTypes srType, string srContentType, bool srIsShared,
+            string srDescription, SR.SRTypes srType, string srContentType,
             Dictionary<string, string> dconf, Dictionary<string, string> smconf)
             : base(connection, string.Format(Messages.ACTION_SR_CREATING_TITLE,
             XenAPI.SR.getFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
             _srDescription = srDescription;
             _srType = srType;
             _srContentType = srContentType;
-            _srIsShared = srIsShared;
+            _srIsShared = true;  // used to depend on restrict_pool_attached_storage flag: now always true
             _dconf = dconf;
             _smconf = smconf;
 

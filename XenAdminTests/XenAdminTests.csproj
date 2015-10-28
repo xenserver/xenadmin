@@ -289,7 +289,6 @@
     <Compile Include="DialogTests\ReconnectAsDialogTests.cs" />
     <Compile Include="DialogTests\RestoreVMsDialogTests.cs" />
     <Compile Include="DialogTests\ScreenShotDialogTest.cs" />
-    <Compile Include="DialogTests\SetStorageLinkLicenseServerDialogTests.cs" />
     <Compile Include="DialogTests\UpsellDialogTests.cs" />
     <Compile Include="DialogTests\WlbCredentialsDialogTests.cs" />
     <Compile Include="DialogTests\WlbEditScheduledTaskTests.cs" />

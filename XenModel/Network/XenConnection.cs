@@ -256,28 +256,6 @@ namespace XenAdmin.Network
             get { return cacheIsPopulated; }
         }
 
-        /// <summary>
-        /// Whether the connection is restricted by license -- i.e. whether one of the hosts in this pool
-        /// is XenExpress.  This uses the cache if that has been populated, but for the short time between
-        /// connections and the cache being populated, it uses the Restricted flag.
-        /// </summary>
-        private bool IsRestricted
-        {
-            get
-            {
-                if (cacheIsPopulated)
-                {
-                    foreach (XenAPI.Host h in Cache.Hosts)
-                    {
-                        if (h.RestrictConnection)
-                            return true;
-                    }
-                    return false;
-                }
-                return Restricted;
-            }
-        }
-
         private bool cacheUpdaterRunning = false;
         private bool updatesWaiting = false;
 
@@ -1337,22 +1315,6 @@ namespace XenAdmin.Network
                                 }
                             }
 
-                            // Check if the host being connected to has a XenExpress license
-                            foreach (Host newHost in ObjectChange.GetHosts(eventQueue))
-                            {
-                                if (newHost.RestrictConnection)
-                                {
-                                    Restricted = true;
-                                    foreach (IXenConnection existingConnection in ConnectionsManager.XenConnections)
-                                    {
-                                        XenConnection connection = existingConnection as XenConnection;
-                                        Trace.Assert(connection != null);
-                                        if (connection.IsConnected && connection.IsRestricted)
-                                            throw new ExpressRestriction(newHost.Name, existingConnection.Hostname);
-                                    }
-                                }
-                            }
-
                             task.Connected = true;
 
                             FriendlyName =
@@ -1497,7 +1459,7 @@ namespace XenAdmin.Network
                 {
                     EndConnect(true, task);
                     log.Info(error.Message);
-                    OnConnectionResult(false, "", error);
+                    OnConnectionResult(false, error.Message, error);
                 }
                 else if (task.Cancelled)
                 {
@@ -2114,7 +2076,7 @@ namespace XenAdmin.Network
         {
             get
             {
-                return Messages.MIAMI_NOT_SUPPORTED;
+                return Messages.SERVER_TOO_OLD;
             }
         }
     }

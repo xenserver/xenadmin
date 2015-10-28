@@ -4703,9 +4703,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="EXTERNAL_NETWORK" xml:space="preserve">
     <value>外部网络</value>
   </data>
-  <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
-    <value>外部网络需要使用 Standard Edition 许可证。</value>
-  </data>
   <data name="EXTERNAL_PLUGIN_BAD_EXIT" xml:space="preserve">
     <value>外部命令已退出，退出代码为: {0}</value>
   </data>
@@ -4742,23 +4739,8 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>功能已在注册表中禁用</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 Feature Pack 1 或更高版本的 Enterprise 或 Platinum Edition 许可证。</value>
-  </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
     <value>{0} 需要使用 Enterprise\n或 Enterprise Edition 许可证。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_GEORGE" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.5 或更高版本</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6\n或更高版本的 Enterprise 或 Platinum Edition 许可证。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
   </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>下一部分(&amp;N)</value>
@@ -10100,110 +10082,11 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>打包服务器状态报告时出错。可能只能获取部分报告</value>
   </data>
-  <data name="STORAGELINKPOOL" xml:space="preserve">
-    <value>StorageLink 存储池</value>
-  </data>
-  <data name="STORAGELINKPOOLS" xml:space="preserve">
-    <value>StorageLink 存储池</value>
-  </data>
-  <data name="STORAGELINKPOOL_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>存储池常规属性</value>
-  </data>
-  <data name="STORAGELINKREPOSITORY_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>存储库常规属性</value>
-  </data>
-  <data name="STORAGELINKSERVER" xml:space="preserve">
-    <value>StorageLink 服务器</value>
-  </data>
-  <data name="STORAGELINKSERVERS" xml:space="preserve">
-    <value>StorageLink 服务器</value>
-  </data>
-  <data name="STORAGELINKSERVER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>StorageLink 服务器常规属性</value>
-  </data>
-  <data name="STORAGELINKSRS" xml:space="preserve">
-    <value>StorageLink 存储库</value>
-  </data>
-  <data name="STORAGELINKSYSTEM" xml:space="preserve">
-    <value>StorageLink 存储系统</value>
-  </data>
-  <data name="STORAGELINKSYSTEMS" xml:space="preserve">
-    <value>StorageLink 存储系统</value>
-  </data>
-  <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>存储系统常规属性</value>
-  </data>
-  <data name="STORAGELINK_IN_USE" xml:space="preserve">
-    <value>正在使用存储系统</value>
-  </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>可用空间 {0}，总空间 {1}</value>
   </data>
-  <data name="STORAGELINK_POOL_SIZE_USED" xml:space="preserve">
-    <value>{0} 已用空间，总计 {1}</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>光纤通道</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION" xml:space="preserve">
-    <value>重复数据删除</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_NONE" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THICK" xml:space="preserve">
-    <value>复杂</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THIN" xml:space="preserve">
-    <value>精简</value>
-  </data>
-  <data name="STORAGELINK_SCANNING_FOR_SRS" xml:space="preserve">
-    <value>正在“{0}”上扫描 SR</value>
-  </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>存在需要重新连接的 StorageLink Gateway SR。</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE" xml:space="preserve">
-    <value>克隆</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT" xml:space="preserve">
-    <value>快照克隆</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION" xml:space="preserve">
-    <value>重复数据删除</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT" xml:space="preserve">
-    <value>快照</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>光纤通道</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL" xml:space="preserve">
-    <value>复杂置备</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN" xml:space="preserve">
-    <value>精简置备</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION" xml:space="preserve">
-    <value>远程复制</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE" xml:space="preserve">
-    <value>调整卷大小</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT" xml:space="preserve">
-    <value>快照的快照</value>
-  </data>
-  <data name="STORAGELINK_TEST_CONNECTION" xml:space="preserve">
-    <value>正在进行与 StorageLink 服务器 {0} 的连接测试</value>
-  </data>
-  <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
-    <value>无法连接 {0} 上的 StorageLink 服务器。</value>
   </data>
   <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
     <value>StorageLink SR 状态</value>

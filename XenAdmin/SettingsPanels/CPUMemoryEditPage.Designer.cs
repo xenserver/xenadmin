@@ -28,15 +28,15 @@ namespace XenAdmin.SettingsPanels
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CPUMemoryEditPage));
-            this.licenseRestrictionTip = new System.Windows.Forms.ToolTip(this.components);
             this.lblSliderHighest = new System.Windows.Forms.Label();
             this.lblSliderNormal = new System.Windows.Forms.Label();
             this.lblSliderLowest = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
+            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
+            this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
             this.labelTopology = new System.Windows.Forms.Label();
             this.MemWarningLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,8 +49,6 @@ namespace XenAdmin.SettingsPanels
             this.nudVCPUs = new System.Windows.Forms.NumericUpDown();
             this.VCPUWarningLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
-            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).BeginInit();
@@ -62,26 +60,29 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this.lblSliderHighest, "lblSliderHighest");
             this.lblSliderHighest.Name = "lblSliderHighest";
-            this.licenseRestrictionTip.SetToolTip(this.lblSliderHighest, resources.GetString("lblSliderHighest.ToolTip"));
             // 
             // lblSliderNormal
             // 
             resources.ApplyResources(this.lblSliderNormal, "lblSliderNormal");
             this.lblSliderNormal.Name = "lblSliderNormal";
-            this.licenseRestrictionTip.SetToolTip(this.lblSliderNormal, resources.GetString("lblSliderNormal.ToolTip"));
             // 
             // lblSliderLowest
             // 
             resources.ApplyResources(this.lblSliderLowest, "lblSliderLowest");
             this.lblSliderLowest.Name = "lblSliderLowest";
-            this.licenseRestrictionTip.SetToolTip(this.lblSliderLowest, resources.GetString("lblSliderLowest.ToolTip"));
             // 
             // lblPriority
             // 
             resources.ApplyResources(this.lblPriority, "lblPriority");
             this.tableLayoutPanel1.SetColumnSpan(this.lblPriority, 2);
             this.lblPriority.Name = "lblPriority";
-            this.licenseRestrictionTip.SetToolTip(this.lblPriority, resources.GetString("lblPriority.ToolTip"));
+            // 
+            // transparentTrackBar1
+            // 
+            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
+            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
+            this.transparentTrackBar1.Name = "transparentTrackBar1";
+            this.transparentTrackBar1.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -108,6 +109,15 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.SetColumnSpan(this.labelInvalidVCPUWarning, 2);
             this.labelInvalidVCPUWarning.ForeColor = System.Drawing.Color.Red;
             this.labelInvalidVCPUWarning.Name = "labelInvalidVCPUWarning";
+            // 
+            // comboBoxTopology
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
+            this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
+            this.comboBoxTopology.FormattingEnabled = true;
+            this.comboBoxTopology.Name = "comboBoxTopology";
+            this.comboBoxTopology.SelectedIndexChanged += new System.EventHandler(this.comboBoxTopology_SelectedIndexChanged);
             // 
             // labelTopology
             // 
@@ -217,23 +227,6 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
             // 
-            // comboBoxTopology
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
-            this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
-            this.comboBoxTopology.FormattingEnabled = true;
-            this.comboBoxTopology.Name = "comboBoxTopology";
-            this.comboBoxTopology.SelectedIndexChanged += new System.EventHandler(this.comboBoxTopology_SelectedIndexChanged);
-            // 
-            // transparentTrackBar1
-            // 
-            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
-            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.transparentTrackBar1.Name = "transparentTrackBar1";
-            this.transparentTrackBar1.TabStop = false;
-            this.licenseRestrictionTip.SetToolTip(this.transparentTrackBar1, resources.GetString("transparentTrackBar1.ToolTip"));
-            // 
             // CPUMemoryEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -242,7 +235,6 @@ namespace XenAdmin.SettingsPanels
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "CPUMemoryEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -258,7 +250,6 @@ namespace XenAdmin.SettingsPanels
 
         #endregion
 
-        private System.Windows.Forms.ToolTip licenseRestrictionTip;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         public System.Windows.Forms.NumericUpDown nudMemory;
         private System.Windows.Forms.Label lblMB;

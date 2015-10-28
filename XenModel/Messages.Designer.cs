@@ -14145,15 +14145,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to External networks require a Standard Edition license..
-        /// </summary>
-        public static string EXTERNAL_NETWORKS_REQUIRE_STANDARD {
-            get {
-                return ResourceManager.GetString("EXTERNAL_NETWORKS_REQUIRE_STANDARD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to External command exited with Exit Code: {0}.
         /// </summary>
         public static string EXTERNAL_PLUGIN_BAD_EXIT {
@@ -14262,56 +14253,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} require a XenServer 5.6 Feature Pack 1 or later Enterprise or Platinum Edition license..
-        /// </summary>
-        public static string FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL {
-            get {
-                return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} require an Enterprise\nor Platinum Edition license..
         /// </summary>
         public static string FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL {
             get {
                 return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} requires XenServer 5.5 or later.
-        /// </summary>
-        public static string FEATURE_NOT_AVAILABLE_NEED_GEORGE {
-            get {
-                return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_GEORGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} requires XenServer 5.6 or later.
-        /// </summary>
-        public static string FEATURE_NOT_AVAILABLE_NEED_MR {
-            get {
-                return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_MR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} require a XenServer 5.6\nor later Enterprise or Platinum Edition license..
-        /// </summary>
-        public static string FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL {
-            get {
-                return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} require XenServer 5.6 or later.
-        /// </summary>
-        public static string FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL {
-            get {
-                return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL", resourceCulture);
             }
         }
         
@@ -21333,16 +21279,6 @@ namespace XenAdmin {
         public static string MESSAGEBOX_VIF_DELETE_TITLE {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_VIF_DELETE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This version of XenCenter does not support XenServer 4.0 or 4.1.
-        ///Install an earlier version..
-        /// </summary>
-        public static string MIAMI_NOT_SUPPORTED {
-            get {
-                return ResourceManager.GetString("MIAMI_NOT_SUPPORTED", resourceCulture);
             }
         }
         
@@ -28985,6 +28921,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This version of XenCenter supports XenServer 6.0 onwards..
+        /// </summary>
+        public static string SERVER_TOO_OLD {
+            get {
+                return ResourceManager.GetString("SERVER_TOO_OLD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use an earlier version of XenCenter to manage this server..
+        /// </summary>
+        public static string SERVER_TOO_OLD_SOLUTION {
+            get {
+                return ResourceManager.GetString("SERVER_TOO_OLD_SOLUTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to server &apos;{0}&apos;.
         /// </summary>
         public static string SERVER_X {
@@ -30690,182 +30644,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fibre Channel.
-        /// </summary>
-        public static string STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL {
-            get {
-                return ResourceManager.GetString("STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to iSCSI.
-        /// </summary>
-        public static string STORAGELINK_PROTOCOLCAPABILITIES_ISCSI {
-            get {
-                return ResourceManager.GetString("STORAGELINK_PROTOCOLCAPABILITIES_ISCSI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deduplication.
-        /// </summary>
-        public static string STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION {
-            get {
-                return ResourceManager.GetString("STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string STORAGELINK_PROVISIONINGOPTIONS_NONE {
-            get {
-                return ResourceManager.GetString("STORAGELINK_PROVISIONINGOPTIONS_NONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thick.
-        /// </summary>
-        public static string STORAGELINK_PROVISIONINGTYPE_THICK {
-            get {
-                return ResourceManager.GetString("STORAGELINK_PROVISIONINGTYPE_THICK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thin.
-        /// </summary>
-        public static string STORAGELINK_PROVISIONINGTYPE_THIN {
-            get {
-                return ResourceManager.GetString("STORAGELINK_PROVISIONINGTYPE_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to There is a StorageLink Gateway SR that needs to be reattached..
         /// </summary>
         public static string STORAGELINK_SR_NEEDS_REATTACH {
             get {
                 return ResourceManager.GetString("STORAGELINK_SR_NEEDS_REATTACH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clone.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clone of Snapshot.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deduplication.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Snapshots.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fibre Channel.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to iSCSI.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thick Provisioning.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thin Provisioning.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remote Replication.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Volume Resize.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Snapshot of Snapshot.
-        /// </summary>
-        public static string STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT {
-            get {
-                return ResourceManager.GetString("STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Testing Connection to StorageLink server {0}.
-        /// </summary>
-        public static string STORAGELINK_TEST_CONNECTION {
-            get {
-                return ResourceManager.GetString("STORAGELINK_TEST_CONNECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to connect to StorageLink server on {0}..
-        /// </summary>
-        public static string STORAGELINK_UNABLE_TO_CONNECT {
-            get {
-                return ResourceManager.GetString("STORAGELINK_UNABLE_TO_CONNECT", resourceCulture);
             }
         }
         

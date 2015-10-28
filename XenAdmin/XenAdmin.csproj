@@ -3285,12 +3285,6 @@
     <Compile Include="Dialogs\NewPoolDialog.Designer.cs">
       <DependentUpon>NewPoolDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\SetStorageLinkLicenseServerDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\SetStorageLinkLicenseServerDialog.designer.cs">
-      <DependentUpon>SetStorageLinkLicenseServerDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\VIFDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5313,15 +5307,6 @@
     <EmbeddedResource Include="Dialogs\SelectHostDialog.zh-CN.resx">
       <DependentUpon>SelectHostDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SetStorageLinkLicenseServerDialog.ja.resx">
-      <DependentUpon>SetStorageLinkLicenseServerDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SetStorageLinkLicenseServerDialog.resx">
-      <DependentUpon>SetStorageLinkLicenseServerDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SetStorageLinkLicenseServerDialog.zh-CN.resx">
-      <DependentUpon>SetStorageLinkLicenseServerDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ThreeButtonDialog.ja.resx">
       <DependentUpon>ThreeButtonDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5572,9 +5557,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\CPUMemoryEditPage.ja.resx">
       <DependentUpon>CPUMemoryEditPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\CPUMemoryEditPage.zh-CN.resx">
       <DependentUpon>CPUMemoryEditPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\CustomFieldsDisplayPage.ja.resx">
       <DependentUpon>CustomFieldsDisplayPage.cs</DependentUpon>

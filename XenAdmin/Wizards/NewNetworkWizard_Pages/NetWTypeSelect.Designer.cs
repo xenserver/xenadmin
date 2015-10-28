@@ -42,14 +42,11 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.warningsTable = new System.Windows.Forms.TableLayoutPanel();
             this.iconWarningChinOption = new System.Windows.Forms.PictureBox();
-            this.iconWarningExternalOption = new System.Windows.Forms.PictureBox();
-            this.labelWarningExternalOption = new System.Windows.Forms.Label();
             this.labelWarningChinOption = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.warningsTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconWarningExternalOption)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNetTypeSel
@@ -122,8 +119,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // 
             resources.ApplyResources(this.warningsTable, "warningsTable");
             this.warningsTable.Controls.Add(this.iconWarningChinOption, 0, 1);
-            this.warningsTable.Controls.Add(this.iconWarningExternalOption, 0, 0);
-            this.warningsTable.Controls.Add(this.labelWarningExternalOption, 1, 0);
             this.warningsTable.Controls.Add(this.labelWarningChinOption, 1, 1);
             this.warningsTable.Name = "warningsTable";
             // 
@@ -133,18 +128,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.iconWarningChinOption.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             this.iconWarningChinOption.Name = "iconWarningChinOption";
             this.iconWarningChinOption.TabStop = false;
-            // 
-            // iconWarningExternalOption
-            // 
-            resources.ApplyResources(this.iconWarningExternalOption, "iconWarningExternalOption");
-            this.iconWarningExternalOption.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            this.iconWarningExternalOption.Name = "iconWarningExternalOption";
-            this.iconWarningExternalOption.TabStop = false;
-            // 
-            // labelWarningExternalOption
-            // 
-            resources.ApplyResources(this.labelWarningExternalOption, "labelWarningExternalOption");
-            this.labelWarningExternalOption.Name = "labelWarningExternalOption";
             // 
             // labelWarningChinOption
             // 
@@ -166,7 +149,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.warningsTable.ResumeLayout(false);
             this.warningsTable.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconWarningExternalOption)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,9 +168,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TableLayoutPanel warningsTable;
-        private System.Windows.Forms.PictureBox iconWarningExternalOption;
         private System.Windows.Forms.PictureBox iconWarningChinOption;
-        private System.Windows.Forms.Label labelWarningExternalOption;
         private System.Windows.Forms.Label labelWarningChinOption;
 
     }

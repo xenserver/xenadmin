@@ -4975,9 +4975,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXTERNAL_NETWORK" xml:space="preserve">
     <value>External network</value>
   </data>
-  <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
-    <value>External networks require a Standard Edition license.</value>
-  </data>
   <data name="EXTERNAL_PLUGIN_BAD_EXIT" xml:space="preserve">
     <value>External command exited with Exit Code: {0}</value>
   </data>
@@ -5014,23 +5011,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} require a XenServer 5.6 Feature Pack 1 or later Enterprise or Platinum Edition license.</value>
-  </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
     <value>{0} require an Enterprise\nor Platinum Edition license.</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_GEORGE" xml:space="preserve">
-    <value>{0} requires XenServer 5.5 or later</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR" xml:space="preserve">
-    <value>{0} requires XenServer 5.6 or later</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} require a XenServer 5.6\nor later Enterprise or Platinum Edition license.</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
-    <value>{0} require XenServer 5.6 or later</value>
   </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>&amp;Next Section</value>
@@ -7434,10 +7416,6 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   </data>
   <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
     <value>{0}: {1}</value>
-  </data>
-  <data name="MIAMI_NOT_SUPPORTED" xml:space="preserve">
-    <value>This version of XenCenter does not support XenServer 4.0 or 4.1.
-Install an earlier version.</value>
   </data>
   <data name="MIGRATE" xml:space="preserve">
     <value>Migrate</value>
@@ -10100,6 +10078,12 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SERVER_TIME" xml:space="preserve">
     <value>The current time on the pool master is: {0}</value>
   </data>
+  <data name="SERVER_TOO_OLD" xml:space="preserve">
+    <value>This version of XenCenter supports XenServer 6.0 onwards.</value>
+  </data>
+  <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
+    <value>Use an earlier version of XenCenter to manage this server.</value>
+  </data>
   <data name="SERVER_X" xml:space="preserve">
     <value>server '{0}'</value>
   </data>
@@ -10602,65 +10586,8 @@ The upper limit: SR size / {2}</value>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{0} free of {1}</value>
   </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>Fibre Channel</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION" xml:space="preserve">
-    <value>Deduplication</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_NONE" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THICK" xml:space="preserve">
-    <value>Thick</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THIN" xml:space="preserve">
-    <value>Thin</value>
-  </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>There is a StorageLink Gateway SR that needs to be reattached.</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE" xml:space="preserve">
-    <value>Clone</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT" xml:space="preserve">
-    <value>Clone of Snapshot</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION" xml:space="preserve">
-    <value>Deduplication</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT" xml:space="preserve">
-    <value>Snapshots</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>Fibre Channel</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL" xml:space="preserve">
-    <value>Thick Provisioning</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN" xml:space="preserve">
-    <value>Thin Provisioning</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION" xml:space="preserve">
-    <value>Remote Replication</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE" xml:space="preserve">
-    <value>Volume Resize</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT" xml:space="preserve">
-    <value>Snapshot of Snapshot</value>
-  </data>
-  <data name="STORAGELINK_TEST_CONNECTION" xml:space="preserve">
-    <value>Testing Connection to StorageLink server {0}</value>
-  </data>
-  <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
-    <value>Unable to connect to StorageLink server on {0}.</value>
   </data>
   <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
     <value>StorageLink SR status</value>

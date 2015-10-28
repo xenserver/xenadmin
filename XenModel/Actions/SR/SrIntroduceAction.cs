@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
 
         public SrIntroduceAction(IXenConnection connection,
             String srUuid, String srName, String srDescription, SR.SRTypes srType, 
-            String srContentType, bool srIsShared, Dictionary<String, String> dconf)
+            String srContentType, Dictionary<String, String> dconf)
             : base(connection, string.Format(Messages.ACTION_SR_ATTACHING_TITLE, srName, Helpers.GetName(connection)))
         {
             _srUuid = srUuid;
@@ -60,7 +60,7 @@ namespace XenAdmin.Actions
             _srDescription = srDescription;
             _srContentType = srContentType;
             _srType = srType;
-            _srIsShared = srIsShared;
+            _srIsShared = true;  // used to depend on restrict_pool_attached_storage flag: now always true
             _dconf = dconf;
         }
 

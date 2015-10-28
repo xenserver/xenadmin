@@ -81,22 +81,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             if (master == null)
                 return;
 
-            if (master.RestrictVLAN)
-            {
-                rbtnExternalNetwork.Checked = false;
-                rbtnExternalNetwork.Enabled = labelExternalNetwork.Enabled = false;
-
-                labelWarningExternalOption.Text = Messages.EXTERNAL_NETWORKS_REQUIRE_STANDARD;
-                iconWarningExternalOption.Visible = labelWarningExternalOption.Visible = true;
-
-                rbtnInternalNetwork.Checked = true;
-            }
-            else
-            {
-                rbtnExternalNetwork.Enabled = labelExternalNetwork.Enabled = true;
-                iconWarningExternalOption.Visible = labelWarningExternalOption.Visible = false;
-            }
-
             Pool pool = Helpers.GetPoolOfOne(connection);
 
             if (!pool.vSwitchController)
@@ -106,15 +90,12 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
                 labelWarningChinOption.Text = 
                     Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
-                    string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL, Messages.CHINS) :
+                    string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL, Messages.CHINS) :
                     Messages.CHINS_NEED_VSWITCHCONTROLLER;
 
                 iconWarningChinOption.Visible = labelWarningChinOption.Visible = true;
 
-                if (master.RestrictVLAN)
-                    rbtnInternalNetwork.Checked = true;
-                else
-                    rbtnExternalNetwork.Checked = true;
+                rbtnExternalNetwork.Checked = true;
             }
             else
             {
