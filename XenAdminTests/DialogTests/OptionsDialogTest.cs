@@ -42,7 +42,7 @@ namespace XenAdminTests.DialogTests.state1_xml
     public class OptionsDialogTest : VerticallyTabbedDialogTest<OptionsDialog>
     {
         public OptionsDialogTest()
-            : base(new string[] { "Security", "Updates", "Graphs", "Console", "Connection", "Save and Restore", "Plugins" })
+            : base(new string[] { "Security", "Updates", "Display", "Console", "Connection", "Save and Restore", "Plugins" })
         { }
 
         protected override OptionsDialog NewDialog()
