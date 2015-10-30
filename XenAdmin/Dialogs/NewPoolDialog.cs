@@ -173,7 +173,9 @@ namespace XenAdmin.Dialogs
                     Messages.NEW_POOL_CPU_MASKING_MESSAGE, Messages.NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking")
                     ||
                     !HelpersGUI.GetPermissionFor(slaves, host => !PoolJoinRules.CompatibleAdConfig(host, master, false),
-                Messages.NEW_POOL_AD_MESSAGE, Messages.NEW_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring"))
+                    Messages.NEW_POOL_AD_MESSAGE, Messages.NEW_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring")
+                    ||
+                    !HelpersGUI.GetPermissionForCpuFeatureLevelling(slaves, Helpers.GetPoolOfOne(master.Connection)))
                 {
                     return;
                 }

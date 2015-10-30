@@ -36,6 +36,7 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
+using System.Linq;
 
 
 namespace XenAdmin.Commands
@@ -126,7 +127,7 @@ namespace XenAdmin.Commands
                 return;
             }
 
-            // Get permission for any fix-ups: 1) Licensing free hosts; 2) CPU masking 3) Ad configuration
+            // Get permission for any fix-ups: 1) Licensing free hosts; 2) CPU masking 3) Ad configuration 4) CPU feature levelling (Dundee or higher only)
             // (We already know that these things are fixable because we have been through CanJoinPool() above).
             if (!HelpersGUI.GetPermissionFor(_hosts, host => PoolJoinRules.FreeHostPaidMaster(host, master, false),
                 Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE, Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE, true, "PoolJoinRelicensing")
@@ -136,8 +137,8 @@ namespace XenAdmin.Commands
                 ||
                 !HelpersGUI.GetPermissionFor(_hosts, host => !PoolJoinRules.CompatibleAdConfig(host, master, false),
                 Messages.ADD_HOST_TO_POOL_AD_MESSAGE, Messages.ADD_HOST_TO_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring")  
-                )
-
+                ||
+                !HelpersGUI.GetPermissionForCpuFeatureLevelling(_hosts, _pool))
             {
                 return;
             }
