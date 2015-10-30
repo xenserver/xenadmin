@@ -47,7 +47,6 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ReadOnlyCollection<CslgSystemStorage> _cslgSystemStorages;
-        private System.ComponentModel.ISynchronizeInvoke _invoker;
         private string _adapterid;
 
         public SrCslgStorageSystemScanAction(IXenConnection connection, string adapterid, string target, string user, string password)

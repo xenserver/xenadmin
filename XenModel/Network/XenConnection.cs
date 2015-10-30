@@ -122,12 +122,6 @@ namespace XenAdmin.Network
         private Heartbeat heartbeat = null;
 
         /// <summary>
-        /// Whether the connection is restricted by license.  This only is valid if CacheIsPopulated is false.
-        /// See IsRestricted.
-        /// </summary>
-        private bool Restricted = false;
-
-        /// <summary>
         /// Whether we are trying to automatically connect to the new master. Set in HandleConnectionLost.
         /// Note: I think we are not using this correctly -- see CA-37864 for details -- but I'm not going
         /// to fix it unless it gives rise to a reported bug, because I can't test the fix.

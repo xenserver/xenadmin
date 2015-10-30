@@ -267,12 +267,6 @@ namespace XenAdmin.Dialogs
                     case Keys.D4:
                         Launch(TestResource.Resource.Credits);
                         break;
-                    case Keys.D5:
-                        Launch(TestResource.Resource.GeorgeXapiDB);
-                        break;
-                    case Keys.D6:
-                        Launch(TestResource.Resource.GeorgeXapiDB2);
-                        break;
                     default:
                         break;
                 }
