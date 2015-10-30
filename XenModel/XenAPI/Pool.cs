@@ -78,7 +78,8 @@ namespace XenAPI
             List<XenRef<VDI>> metadata_VDIs,
             string ha_cluster_stack,
             List<pool_allowed_operations> allowed_operations,
-            Dictionary<string, pool_allowed_operations> current_operations)
+            Dictionary<string, pool_allowed_operations> current_operations,
+            Dictionary<string, string> cpu_info)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -111,6 +112,7 @@ namespace XenAPI
             this.ha_cluster_stack = ha_cluster_stack;
             this.allowed_operations = allowed_operations;
             this.current_operations = current_operations;
+            this.cpu_info = cpu_info;
         }
 
         /// <summary>
@@ -155,6 +157,7 @@ namespace XenAPI
             ha_cluster_stack = update.ha_cluster_stack;
             allowed_operations = update.allowed_operations;
             current_operations = update.current_operations;
+            cpu_info = update.cpu_info;
         }
 
         internal void UpdateFromProxy(Proxy_Pool proxy)
@@ -190,6 +193,7 @@ namespace XenAPI
             ha_cluster_stack = proxy.ha_cluster_stack == null ? null : (string)proxy.ha_cluster_stack;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<pool_allowed_operations>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_pool_allowed_operations(proxy.current_operations);
+            cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
         }
 
         public Proxy_Pool ToProxy()
@@ -226,6 +230,7 @@ namespace XenAPI
             result_.ha_cluster_stack = (ha_cluster_stack != null) ? ha_cluster_stack : "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_pool_allowed_operations(current_operations);
+            result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
             return result_;
         }
 
@@ -266,6 +271,7 @@ namespace XenAPI
             ha_cluster_stack = Marshalling.ParseString(table, "ha_cluster_stack");
             allowed_operations = Helper.StringArrayToEnumList<pool_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             current_operations = Maps.convert_from_proxy_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
+            cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
@@ -307,7 +313,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._restrictions, other._restrictions) &&
                 Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs) &&
                 Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations);
+                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(this._cpu_info, other._cpu_info);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -732,6 +739,17 @@ namespace XenAPI
         public static Dictionary<string, pool_allowed_operations> get_current_operations(Session session, string _pool)
         {
             return Maps.convert_from_proxy_string_pool_allowed_operations(session.proxy.pool_get_current_operations(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Get the cpu_info field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static Dictionary<string, string> get_cpu_info(Session session, string _pool)
+        {
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_cpu_info(session.uuid, (_pool != null) ? _pool : "").parse());
         }
 
         /// <summary>
@@ -2524,5 +2542,24 @@ namespace XenAPI
             }
         }
         private Dictionary<string, pool_allowed_operations> _current_operations;
+
+        /// <summary>
+        /// Details about the physical CPUs on the pool
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual Dictionary<string, string> cpu_info
+        {
+            get { return _cpu_info; }
+            set
+            {
+                if (!Helper.AreEqual(value, _cpu_info))
+                {
+                    _cpu_info = value;
+                    Changed = true;
+                    NotifyPropertyChanged("cpu_info");
+                }
+            }
+        }
+        private Dictionary<string, string> _cpu_info;
     }
 }
