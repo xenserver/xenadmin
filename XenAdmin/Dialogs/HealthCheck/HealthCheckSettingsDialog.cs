@@ -320,7 +320,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void CheckXenServerCredentials()
         {
-            if (!CheckCredentialsEntered())
+            if (string.IsNullOrEmpty(textboxXSUserName.Text) || string.IsNullOrEmpty(textboxXSPassword.Text))
                 return;
 
             bool passedRbacChecks = false;
