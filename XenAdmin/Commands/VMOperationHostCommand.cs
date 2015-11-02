@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             {
                 VM vm = (VM)item.XenObject;
 
-                string reason = GetVmCannotBootOnHostReason(vm, GetHost(vm), session);
+                string reason = GetVmCannotBootOnHostReason(vm, GetHost(vm), session, operation);
                 _cantBootReasons[vm] = reason;
 
                 if (reason == null)
@@ -117,7 +117,7 @@ namespace XenAdmin.Commands
             return vm != null && _cantBootReasons.ContainsKey(vm) && _cantBootReasons[vm] == null;
         }
 
-        private static string GetVmCannotBootOnHostReason(VM vm, Host host, Session session)
+        private static string GetVmCannotBootOnHostReason(VM vm, Host host, Session session, vm_operations operation)
         {
             Host residentHost = vm.Connection.Resolve(vm.resident_on);
 
@@ -133,6 +133,11 @@ namespace XenAdmin.Commands
             
             if (vm.power_state == vm_power_state.Running && residentHost != null && host.opaque_ref == residentHost.opaque_ref)
                 return Messages.HOST_MENU_CURRENT_SERVER;
+
+            if ((operation == vm_operations.pool_migrate || operation == vm_operations.resume_on) && VmCpuFeaturesIncompatibleWithHost(host, vm))
+            {
+                return FriendlyErrorNames.VM_INCOMPATIBLE_WITH_THIS_HOST;
+            }
 
             try
             {
@@ -176,6 +181,32 @@ namespace XenAdmin.Commands
             }
 
             return base.GetCantExecuteReasonCore(item);
+        }
+
+        public static bool VmCpuFeaturesIncompatibleWithHost(Host targetHost, VM vm)
+        {
+            // check the CPU feature compatibility for Dundee and higher hosts 
+            if (!Helpers.DundeeOrGreater(targetHost))
+                return false;
+
+            // only for running or suspended VMs
+            if (vm.power_state != vm_power_state.Running && vm.power_state != vm_power_state.Suspended)
+                return false;
+
+            if (vm.last_boot_CPU_flags == null || !vm.last_boot_CPU_flags.ContainsKey("vendor") || !vm.last_boot_CPU_flags.ContainsKey("features")
+                || targetHost.cpu_info == null || !targetHost.cpu_info.ContainsKey("vendor"))
+                return false;
+
+            if (vm.last_boot_CPU_flags["vendor"] != targetHost.cpu_info["vendor"])
+                return true;
+
+            if (vm.IsHVM && targetHost.cpu_info.ContainsKey("features_hvm"))
+                return PoolJoinRules.LessFeatures(targetHost.cpu_info["features_hvm"], vm.last_boot_CPU_flags["features"]);
+
+            if (!vm.IsHVM && targetHost.cpu_info.ContainsKey("features_pv"))
+                return PoolJoinRules.LessFeatures(targetHost.cpu_info["features_pv"], vm.last_boot_CPU_flags["features"]);
+
+            return false;
         }
     }
 }

@@ -1834,7 +1834,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools ISO must be ejected from all running VMs..
+        ///   Looks up a localized string similar to XenServer Tools ISO must be ejected from all running VMs in the pool..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_ISO_MOUNTED {
             get {
@@ -4845,7 +4845,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM is incompatible with the CPU features of this host..
+        ///   Looks up a localized string similar to The host does not have some of the CPU features that the VM is currently using.
         /// </summary>
         public static string VM_INCOMPATIBLE_WITH_THIS_HOST {
             get {
