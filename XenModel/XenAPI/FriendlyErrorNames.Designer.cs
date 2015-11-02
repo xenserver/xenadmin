@@ -403,6 +403,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An SR is using clustered local storage. It is not safe to reboot a host at the moment..
+        /// </summary>
+        public static string CLUSTERED_SR_DEGRADED {
+            get {
+                return ResourceManager.GetString("CLUSTERED_SR_DEGRADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a network interface with the specified device name and MAC address..
         /// </summary>
         public static string COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS {
@@ -1249,11 +1258,29 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation cannot be performed, because it is incompatible with the currently active HA cluster stack..
+        /// </summary>
+        public static string INCOMPATIBLE_CLUSTER_STACK_ACTIVE {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_CLUSTER_STACK_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to These PIFs can not be bonded, because their properties are different..
         /// </summary>
         public static string INCOMPATIBLE_PIF_PROPERTIES {
             get {
                 return ResourceManager.GetString("INCOMPATIBLE_PIF_PROPERTIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified SR is incompatible with the selected HA cluster stack..
+        /// </summary>
+        public static string INCOMPATIBLE_STATEFILE_SR {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_STATEFILE_SR", resourceCulture);
             }
         }
         
@@ -1834,7 +1861,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools ISO must be ejected from all running VMs..
+        ///   Looks up a localized string similar to XenServer Tools ISO must be ejected from all running VMs in the pool..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_ISO_MOUNTED {
             get {
@@ -2375,6 +2402,15 @@ namespace XenAPI {
         public static string SR_ATTACH_FAILED {
             get {
                 return ResourceManager.GetString("SR_ATTACH_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The SR is currently attached on non-master host..
+        /// </summary>
+        public static string SR_ATTACHED_ON_SLAVE {
+            get {
+                return ResourceManager.GetString("SR_ATTACHED_ON_SLAVE", resourceCulture);
             }
         }
         
@@ -3603,6 +3639,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not enough space to enable LVHD thin provisioning..
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_457 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_457", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VDI is not available.
         /// </summary>
         public static string SR_BACKEND_FAILURE_46 {
@@ -4089,6 +4134,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SR is currently detached on the master..
+        /// </summary>
+        public static string SR_DETACHED_ON_MASTER {
+            get {
+                return ResourceManager.GetString("SR_DETACHED_ON_MASTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SR operation cannot be performed because a device underlying the SR is in use by the server..
         /// </summary>
         public static string SR_DEVICE_IN_USE {
@@ -4485,6 +4539,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation cannot be performed because this VDI has rrd stats.
+        /// </summary>
+        public static string VDI_HAS_RRDS {
+            get {
+                return ResourceManager.GetString("VDI_HAS_RRDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation cannot be performed because a VDI is in use by some other operation..
         /// </summary>
         public static string VDI_IN_USE {
@@ -4706,6 +4769,15 @@ namespace XenAPI {
         public static string VM_BIOS_STRINGS_ALREADY_SET {
             get {
                 return ResourceManager.GetString("VM_BIOS_STRINGS_ALREADY_SET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is a minimal interval required between consecutive plugin calls made on the same VM, please wait before retry..
+        /// </summary>
+        public static string VM_CALL_PLUGIN_RATE_LIMIT {
+            get {
+                return ResourceManager.GetString("VM_CALL_PLUGIN_RATE_LIMIT", resourceCulture);
             }
         }
         
@@ -4940,6 +5012,15 @@ namespace XenAPI {
         public static string VM_NO_CRASHDUMP_SR {
             get {
                 return ResourceManager.GetString("VM_NO_CRASHDUMP_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM has no empty CD drive (VBD)..
+        /// </summary>
+        public static string VM_NO_EMPTY_CD_VBD {
+            get {
+                return ResourceManager.GetString("VM_NO_EMPTY_CD_VBD", resourceCulture);
             }
         }
         
