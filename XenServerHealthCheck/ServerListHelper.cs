@@ -110,6 +110,32 @@ namespace XenServerHealthCheck
             }
         }
 
+        public bool UpdateServerCredential(ServerInfo server, string masterName)
+        {
+            lock (serverListLock)
+            {
+                bool needRefresh = true;
+                foreach (ServerInfo con in serverList)
+                {
+                    if (masterName == con.HostName)
+                    {
+                        needRefresh = false;
+                        break;
+                    }
+                }
+
+                serverList.Remove(server);
+                if (needRefresh)
+                {
+                    server.HostName = masterName;
+                    serverList.Add(server);
+                }
+                
+                updateServerList();
+                return needRefresh;
+            }
+        }
+
         private void updateServerList()
         {
             List<string> encList = new List<string>();

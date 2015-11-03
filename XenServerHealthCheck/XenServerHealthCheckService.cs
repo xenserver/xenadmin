@@ -123,16 +123,60 @@ namespace XenServerHealthCheck
                     continue;
                 }
 
-                XenConnection connectionInfo = new XenConnection();
-                connectionInfo.Hostname = server.HostName;
-                connectionInfo.Username = server.UserName;
-                connectionInfo.Password = server.Password;
-                log.InfoFormat("Check server {0} with user {1}", connectionInfo.Hostname, connectionInfo.Username);
+                bool needReconnect = false;
+
+                log.InfoFormat("Check server {0} with user {1}", server.HostName, server.UserName);
+                
                 Session session = new Session(server.HostName, 80);
                 session.APIVersion = API_Version.LATEST;
                 try
                 {
                     session.login_with_password(server.UserName, server.Password);
+                }
+                catch (Exception exn)
+                {
+                    if (exn is Failure && ((Failure)exn).ErrorDescription[0] == Failure.HOST_IS_SLAVE)
+                    {
+                        string masterName = ((Failure)exn).ErrorDescription[1];
+                        if (ServerListHelper.instance.UpdateServerCredential(server, masterName))
+                        {
+                            log.InfoFormat("Refresh credential to master {0} need refresh connection", masterName);
+                            server.HostName = masterName;
+                            needReconnect = true;
+                        }
+                        else
+                        {
+                            log.InfoFormat("Remove credential since it is the slave of master {0}", masterName);
+                            if (session != null)
+                                session.logout();
+                            log.Error(exn, exn);
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (session != null)
+                            session.logout();
+                        log.Error(exn, exn);
+                        continue;
+                    }
+                }
+
+                try
+                {
+                    if (needReconnect)
+                    {
+                        if (session != null)
+                            session.logout();
+                        log.InfoFormat("Reconnect to master {0}", server.HostName);
+                        session = new Session(server.HostName, 80);
+                        session.APIVersion = API_Version.LATEST;
+                        session.login_with_password(server.UserName, server.Password);
+                    }
+                    XenConnection connectionInfo = new XenConnection();
+                    connectionInfo.Hostname = server.HostName;
+                    connectionInfo.Username = server.UserName;
+                    connectionInfo.Password = server.Password;
                     connectionInfo.LoadCache(session);
                     if (RequestUploadTask.Request(connectionInfo, session) || RequestUploadTask.OnDemandRequest(connectionInfo, session))
                     {
