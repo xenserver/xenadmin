@@ -51,8 +51,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
     public partial class BugToolPageDestination : XenTabPage
     {
         private bool m_buttonNextEnabled;
-        
-       private const int TokenExpiration = 86400; // 24 hours
+
+        private const int TokenExpiration = 86400; // 24 hours
 
         public BugToolPageDestination()
         {
@@ -121,6 +121,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         }
 
         public string UploadToken { get; private set; }
+
+        public string CaseNumber
+        {
+            get
+            {
+                return caseNumberTextBox.Text.Trim();
+            }
+        }
 
         private bool PerformCheck(params CheckDelegate[] checks)
         {
@@ -201,24 +209,41 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return !string.IsNullOrEmpty(UploadToken);
         }
 
+        private bool CheckCaseNumberValid(out string error)
+        {
+            error = string.Empty;
+
+            if (!uploadCheckBox.Checked || string.IsNullOrEmpty(caseNumberTextBox.Text.Trim()))
+                return true;
+
+            ulong val;
+            if (ulong.TryParse(caseNumberTextBox.Text.Trim(), out val) && val > 0 && val < 1000000000)
+                return true;
+
+            error = Messages.BUGTOOL_PAGE_DESTINATION_INVALID_CASE_NO;
+            return false;
+        }
+
         private void EnableDisableAuthenticationControls()
         {
             if (!Visible)
                 return;
 
-            authenticationGroupBox.Enabled = uploadCheckBox.Checked;
+            authenticationGroupBox.Enabled = 
+                caseNumberLabel.Enabled = caseNumberTextBox.Enabled = optionalLabel.Enabled =
+                uploadCheckBox.Checked;
         }
 
         #region Control event handlers
 
         private void m_textBoxName_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
 
         private void m_textBoxLocation_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -233,12 +258,17 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             EnableDisableAuthenticationControls();
-            PerformCheck(CheckPathValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
 
         private void credentials_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
+        }
+        
+        private void caseNumberLabelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
 
         #endregion

@@ -2101,6 +2101,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BUGTOOL_PAGE_CAPABILITIES_TEXT" xml:space="preserve">
     <value>Select Report Contents</value>
   </data>
+  <data name="BUGTOOL_PAGE_DESTINATION_INVALID_CASE_NO" xml:space="preserve">
+    <value>Case number is invalid.</value>
+  </data>
   <data name="BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER" xml:space="preserve">
     <value>Destination directory is invalid.</value>
   </data>

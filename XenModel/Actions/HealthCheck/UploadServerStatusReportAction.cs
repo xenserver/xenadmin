@@ -42,21 +42,23 @@ namespace XenAdmin.Actions
 
         private readonly string uploadToken;
         private readonly string bundleToUpload;
+        private readonly string caseNumber;
 
         private const string UPLOAD_URL = "/feeds/api/";
         private readonly string UPLOAD_DOMAIN_NAME = "https://rttf.citrix.com";
 
         private CancellationTokenSource cts;
 
-        public UploadServerStatusReportAction(string bundleToUpload, string uploadToken, bool suppressHistory)
+        public UploadServerStatusReportAction(string bundleToUpload, string uploadToken, string caseNumber, bool suppressHistory)
             : base(null, Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT, Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS, suppressHistory)
         {
-            this.bundleToUpload = bundleToUpload; 
+            this.bundleToUpload = bundleToUpload;
             this.uploadToken = uploadToken;
+            this.caseNumber = caseNumber;
         }
 
-        public UploadServerStatusReportAction(string bundleToUpload, string uploadToken, string uploadDomainName, bool suppressHistory)
-            : this(bundleToUpload, uploadToken, suppressHistory)
+        public UploadServerStatusReportAction(string bundleToUpload, string uploadToken, string caseNumber, string uploadDomainName, bool suppressHistory)
+            : this(bundleToUpload, uploadToken, caseNumber, suppressHistory)
         {
             if (!string.IsNullOrEmpty(uploadDomainName))
                 UPLOAD_DOMAIN_NAME = uploadDomainName;
@@ -102,7 +104,7 @@ namespace XenAdmin.Actions
             // Upload the zip file to CIS uploading server.
             var uploadUrl = string.Format("{0}{1}", UPLOAD_DOMAIN_NAME, UPLOAD_URL);
             XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, 9, uploadUrl, null);
-            string uploadUuid = upload.UploadZip(bundleToUpload, cts.Token);
+            string uploadUuid = upload.UploadZip(bundleToUpload, caseNumber, cts.Token);
 
             // Return the uuid of upload.
             return uploadUuid;
