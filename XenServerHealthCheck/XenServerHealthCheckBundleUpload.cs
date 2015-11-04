@@ -252,7 +252,7 @@ namespace XenServerHealthCheck
             string upload_uuid = "";
             try
             {
-                upload_uuid = upload.UploadZip(bundleToUpload, cancel);
+                upload_uuid = upload.UploadZip(bundleToUpload, null, cancel);
             }
             catch (Exception e)
             {

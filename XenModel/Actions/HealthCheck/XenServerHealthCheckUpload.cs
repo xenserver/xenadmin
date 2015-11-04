@@ -66,10 +66,12 @@ namespace XenServerHealthCheck
         }
 
         // Request an upload and fetch the uploading id from CIS.
-        public string InitiateUpload(string fileName, long size)
+        public string InitiateUpload(string fileName, long size, string caseNumber)
         {
             // Request a new bundle upload to CIS server.
             string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName;
+            if (!string.IsNullOrEmpty(caseNumber))
+                FULL_URL += "&sr=" + caseNumber;
             log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", FULL_URL);
             Uri uri = new Uri(FULL_URL);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
@@ -166,14 +168,14 @@ namespace XenServerHealthCheck
         }
 
         // Upload the zip file.
-        public string UploadZip(string fileName, System.Threading.CancellationToken cancel)
+        public string UploadZip(string fileName, string caseNumber, System.Threading.CancellationToken cancel)
         {
             log.InfoFormat("Start to upload bundle {0}", fileName);
             FileInfo fileInfo = new FileInfo(fileName);
             long size = fileInfo.Length;
 
             // Fetch the upload UUID from CIS server.
-            string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size);
+            string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size, caseNumber);
             if (string.IsNullOrEmpty(uploadUuid))
             {
                 log.ErrorFormat("Cannot fetch the upload UUID from CIS server");
