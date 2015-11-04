@@ -578,13 +578,20 @@ namespace XenAdmin.Core
             if (hosts == null || pool == null || !Helpers.DundeeOrGreater(pool.Connection))
                 return true;
 
-            if (hosts.Any(host => PoolJoinRules.PoolWillBeDownLevelled(host, pool)) && hosts.Any(host => PoolJoinRules.HostWillBeDownLevelled(host, pool)))
-                return GetPermissionFor(hosts, host => PoolJoinRules.PoolWillBeDownLevelled(host, pool) || PoolJoinRules.HostWillBeDownLevelled(host, pool),
-                     Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking"); 
+            List<Host> hostsWithFewerFeatures = hosts.Where(host => PoolJoinRules.HostHasFewerFeatures(host, pool)).ToList();
+            List<Host> hostsWithMoreFeatures = hosts.Where(host => PoolJoinRules.HostHasMoreFeatures(host, pool)).ToList();
 
-            return GetPermissionFor(hosts, host => PoolJoinRules.PoolWillBeDownLevelled(host, pool),
-                Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking")  
-                && GetPermissionFor(hosts, host => PoolJoinRules.HostWillBeDownLevelled(host, pool),
+            if (hostsWithFewerFeatures.Count > 0 && hostsWithMoreFeatures.Count > 0)
+            {
+                return GetPermissionFor(hostsWithFewerFeatures.Union(hostsWithMoreFeatures).ToList(), host => true,
+                     Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
+            }
+
+            if (hostsWithFewerFeatures.Count > 0)
+                return GetPermissionFor(hostsWithFewerFeatures, host => true,
+                    Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
+            
+            return GetPermissionFor(hostsWithMoreFeatures, host => true,
                 Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking", SystemIcons.Information);
         }
     }

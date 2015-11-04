@@ -121,7 +121,7 @@ namespace XenAdminTests.UnitTests
             System.Console.WriteLine("Asserting {0} < {1}", featureSet1, featureSet2);
             Assert.AreEqual(
                 Expected(featureSet1, featureSet2),
-                PoolJoinRules.LessFeatures(featureSet1, featureSet2), string.Format("Assertion failed on {0} < {1}", featureSet1, featureSet2));
+                PoolJoinRules.FewerFeatures(featureSet1, featureSet2), string.Format("Assertion failed on {0} < {1}", featureSet1, featureSet2));
         }
     }
 }

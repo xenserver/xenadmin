@@ -201,10 +201,10 @@ namespace XenAdmin.Commands
                 return true;
 
             if (vm.IsHVM && targetHost.cpu_info.ContainsKey("features_hvm"))
-                return PoolJoinRules.LessFeatures(targetHost.cpu_info["features_hvm"], vm.last_boot_CPU_flags["features"]);
+                return PoolJoinRules.FewerFeatures(targetHost.cpu_info["features_hvm"], vm.last_boot_CPU_flags["features"]);
 
             if (!vm.IsHVM && targetHost.cpu_info.ContainsKey("features_pv"))
-                return PoolJoinRules.LessFeatures(targetHost.cpu_info["features_pv"], vm.last_boot_CPU_flags["features"]);
+                return PoolJoinRules.FewerFeatures(targetHost.cpu_info["features_pv"], vm.last_boot_CPU_flags["features"]);
 
             return false;
         }
