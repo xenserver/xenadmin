@@ -1793,4 +1793,28 @@
   <data name="Label-performance.io_errors" xml:space="preserve">
     <value>I/O errors</value>
   </data>
+  <data name="Message.body-host_cpu_features_down" xml:space="preserve">
+    <value>The CPU feature level on host '{0}' has been reduced.</value>
+  </data>
+  <data name="Message.body-host_cpu_features_up" xml:space="preserve">
+    <value>The CPU feature level on host '{0}' has been increased.</value>
+  </data>
+  <data name="Message.body-pool_cpu_features_down" xml:space="preserve">
+    <value>The CPU feature level on pool '{0}' has been reduced.</value>
+  </data>
+  <data name="Message.body-pool_cpu_features_up" xml:space="preserve">
+    <value>The CPU feature level on pool '{0}' has been increased.</value>
+  </data>
+  <data name="Message.name-host_cpu_features_down" xml:space="preserve">
+    <value>Host CPU features reduced</value>
+  </data>
+  <data name="Message.name-host_cpu_features_up" xml:space="preserve">
+    <value>Host CPU features increased</value>
+  </data>
+  <data name="Message.name-pool_cpu_features_down" xml:space="preserve">
+    <value>Pool CPU features reduced</value>
+  </data>
+  <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
+    <value>Pool CPU features increased</value>
+  </data>
 </root>
