@@ -85,6 +85,8 @@ namespace XenAdmin.Wlb
         private const int WlbVersion_Minor_Tampa = 1;
         private const int WlbVersion_Major_Creedence = 6;
         private const int WlbVersion_Minor_Creedence = 5;
+        private const int WlbVersion_Major_Dundee = 7;
+        private const int WlbVersion_Minor_Dundee = 0;
 
 #endregion
 
@@ -446,7 +448,8 @@ namespace XenAdmin.Wlb
 
         public bool IsCreedenceOrLater
         {
-            get { return ((this.WlbMajorVersion >= WlbVersion_Major_Creedence) && (this.WlbMinorVersion >= WlbVersion_Minor_Creedence)); }
+            get { return ((this.WlbMajorVersion > WlbVersion_Major_Creedence) 
+                || ((this.WlbMajorVersion == WlbVersion_Major_Creedence) && (this.WlbMinorVersion >= WlbVersion_Minor_Creedence))); }
         }
 
         public bool IsTampaOrLater
