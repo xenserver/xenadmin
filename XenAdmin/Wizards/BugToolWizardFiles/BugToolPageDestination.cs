@@ -175,7 +175,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (!uploadCheckBox.Checked)
                 return true;
 
-            if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+            if (string.IsNullOrEmpty(usernameTextBox.Text.Trim()) || string.IsNullOrEmpty(passwordTextBox.Text))
                 return false;
 
             return true;
@@ -188,7 +188,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (!uploadCheckBox.Checked)
                 return true;
             
-            if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+            if (string.IsNullOrEmpty(usernameTextBox.Text.Trim()) || string.IsNullOrEmpty(passwordTextBox.Text))
                 return false;
 
             var action = new HealthCheckAuthenticationAction(usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
