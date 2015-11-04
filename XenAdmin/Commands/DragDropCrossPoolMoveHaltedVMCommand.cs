@@ -81,6 +81,12 @@ namespace XenAdmin.Commands
                                     return Messages.MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE;
                                 }
                             }
+
+                            if (targetHost != draggedVMHome && VMOperationHostCommand.VmCpuFeaturesIncompatibleWithHost(targetHost, draggedVM))
+                            {
+                                // target host does not offer some of the CPU features that the VM currently sees
+                                return Messages.MIGRATION_NOT_ALLOWED_CPU_FEATURES;
+                            }
                         }
                     }
                 }
@@ -125,6 +131,12 @@ namespace XenAdmin.Commands
 
                         if (draggedVM.allowed_operations == null || !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
                             return false;
+
+                        if (VMOperationHostCommand.VmCpuFeaturesIncompatibleWithHost(targetHost, draggedVM))
+                        {
+                            // target host does not offer some of the CPU features that the VM currently sees
+                            return false;
+                        }
                     }
 
                     return true;

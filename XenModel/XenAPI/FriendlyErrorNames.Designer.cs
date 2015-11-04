@@ -4917,7 +4917,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM is incompatible with the CPU features of this host..
+        ///   Looks up a localized string similar to The host does not have some of the CPU features that the VM is currently using.
         /// </summary>
         public static string VM_INCOMPATIBLE_WITH_THIS_HOST {
             get {

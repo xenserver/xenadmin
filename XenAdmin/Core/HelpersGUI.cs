@@ -42,6 +42,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.XenSearch;
 using XenAPI;
+using System.Linq;
 
 namespace XenAdmin.Core
 {
@@ -95,8 +96,9 @@ namespace XenAdmin.Core
         /// <param name="msg_multiple">Dialog message when more than one item needs action. {0} will be substituted for a list of the items.</param>
         /// <param name="defaultYes">Whether the default button should be Proceed (as opposed to Cancel)</param>
         /// <param name="helpName">Help ID for the dialog</param>
+        /// <param name="icon">Severity icon for the dialog</param>
         /// <returns>Whether permission was obtained (also true if no items needed action)</returns>
-        public static bool GetPermissionFor<T>(List<T> items, Predicate<T> pred, string msg_single, string msg_multiple, bool defaultYes, string helpName)
+        public static bool GetPermissionFor<T>(List<T> items, Predicate<T> pred, string msg_single, string msg_multiple, bool defaultYes, string helpName, Icon icon = null)
         {
             if (Program.RunInAutomatedTestMode)
                 return true;
@@ -111,7 +113,7 @@ namespace XenAdmin.Core
                     msg = string.Format(msg_multiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
 
                 ThreeButtonDialog dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Exclamation, msg),
+                    new ThreeButtonDialog.Details(icon ?? SystemIcons.Exclamation, msg),
                     helpName,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No));
@@ -569,6 +571,28 @@ namespace XenAdmin.Core
                        ? DateTimeToString(((CustomFieldDateQuery) (search.Query.QueryFilter)).query,
                                           Messages.DATEFORMAT_DMY_HMS, true)
                        : search.Name;
+        }
+
+        public static bool GetPermissionForCpuFeatureLevelling(List<Host> hosts, Pool pool)
+        {
+            if (hosts == null || pool == null || !Helpers.DundeeOrGreater(pool.Connection))
+                return true;
+
+            List<Host> hostsWithFewerFeatures = hosts.Where(host => PoolJoinRules.HostHasFewerFeatures(host, pool)).ToList();
+            List<Host> hostsWithMoreFeatures = hosts.Where(host => PoolJoinRules.HostHasMoreFeatures(host, pool)).ToList();
+
+            if (hostsWithFewerFeatures.Count > 0 && hostsWithMoreFeatures.Count > 0)
+            {
+                return GetPermissionFor(hostsWithFewerFeatures.Union(hostsWithMoreFeatures).ToList(), host => true,
+                     Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
+            }
+
+            if (hostsWithFewerFeatures.Count > 0)
+                return GetPermissionFor(hostsWithFewerFeatures, host => true,
+                    Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
+            
+            return GetPermissionFor(hostsWithMoreFeatures, host => true,
+                Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking", SystemIcons.Information);
         }
     }
 }

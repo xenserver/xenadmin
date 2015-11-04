@@ -1749,7 +1749,7 @@ Authorized Roles: {1}</value>
     <value>HVM not supported</value>
   </data>
   <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
-    <value>The VM is incompatible with the CPU features of this host.</value>
+    <value>The host does not have some of the CPU features that the VM is currently using</value>
   </data>
   <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
     <value>The VM cannot be recovered on its own as it is part of a VM appliance.</value>

@@ -576,6 +576,10 @@ namespace XenAPI
         Response<Object>
         pool_get_current_operations(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_cpu_info")]
+        Response<Object>
+        pool_get_cpu_info(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -6836,6 +6840,7 @@ namespace XenAPI
         public string ha_cluster_stack;
         public string [] allowed_operations;
         public Object current_operations;
+        public Object cpu_info;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

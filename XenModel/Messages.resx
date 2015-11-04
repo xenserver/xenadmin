@@ -1256,6 +1256,54 @@ Do you want to enable AD authentication on your server and join it to the same d
 
 All pool members must use the same authentication method. Do you want to enable AD authentication on these servers and join them to the same domain as the pool?</value>
   </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE" xml:space="preserve">
+    <value>You are attempting to add the server '{0}' to a pool that is using older CPUs.
+
+VMs running in the pool will only use the CPU features common to all the servers in the pool.
+
+Do you want to do this?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>You are attempting to add the following servers to a pool that is using older CPUs.
+
+{0}
+
+VMs running in the pool will only use the CPU features common to all the servers in the pool.
+
+Do you want to do this?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE" xml:space="preserve">
+    <value>You are attempting to add the server '{0}' to a pool that is using different CPUs.
+
+VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new server until they are restarted.
+
+Do you want to do this?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>You are attempting to add the following servers to a pool that is using different CPUs.
+
+{0}
+
+VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new servers until they are restarted.
+
+Do you want to do this?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE" xml:space="preserve">
+    <value>You are attempting to add the server '{0}' to a pool that is using newer CPUs.
+
+VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new server until they are restarted.
+
+Do you want to do this?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>You are attempting to add the following servers to a pool that is using newer CPUs.
+
+{0}
+
+VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new servers until they are restarted.
+
+Do you want to do this?</value>
+  </data>
   <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool that is using older CPUs.
 
@@ -7519,6 +7567,9 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
   </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
     <value>This VM may not migrate at the moment</value>
+  </data>
+  <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
+    <value>This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
     <value>This VM may not migrate because it has a dedicated GPU</value>

@@ -533,5 +533,85 @@ namespace XenAdmin.Core
 
             return badPacks;
         }
+
+        /// <summary>
+        /// Check whether the host that joins the pool has a more extensive feature set than the pool (as long as the CPU vendor is common)
+        /// In this case the host will transparently be down-levelled to the pool level (without needing reboots)
+        /// </summary>
+        public static bool HostHasMoreFeatures(Host slave, Pool pool)
+        {
+            if (slave == null || pool == null)
+                return false;
+
+            Dictionary<string, string> slave_cpu_info = slave.cpu_info;
+            Dictionary<string, string> pool_cpu_info = pool.cpu_info;
+            if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
+            {
+                // if pool has less features than slave, then slave will be down-levelled
+                return FewerFeatures(pool_cpu_info, slave_cpu_info);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Check whether the host that joins the pool has a less extensive feature set than the pool (as long as the CPU vendor is common)
+        /// In this case the pool is transparently down-levelled to the new host's level (without needing reboots)
+        /// </summary>
+        public static bool HostHasFewerFeatures(Host slave, Pool pool)
+        {
+            if (slave == null || pool == null)
+                return false;
+
+            Dictionary<string, string> slave_cpu_info = slave.cpu_info;
+            Dictionary<string, string> pool_cpu_info = pool.cpu_info;
+            if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
+            {
+                // if slave has less features than pool, then pool will be down-levelled
+                return FewerFeatures(slave_cpu_info, pool_cpu_info);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Check whether first CPU has fewer features than the second. 
+        /// It returns true if the first feature set is less than the second one in at least one bit
+        /// </summary>
+        public static bool FewerFeatures(Dictionary<string, string> cpu_infoA, Dictionary<string, string> cpu_infoB)
+        {
+            if (cpu_infoA.ContainsKey("features_hvm") && cpu_infoB.ContainsKey("features_hvm") &&
+                FewerFeatures(cpu_infoA["features_hvm"], cpu_infoB["features_hvm"]))
+                return true;
+            if (cpu_infoA.ContainsKey("features_pv") && cpu_infoB.ContainsKey("features_pv") &&
+                FewerFeatures(cpu_infoA["features_pv"], cpu_infoB["features_pv"]))
+                return true;
+
+            return false;
+        }
+
+        public static bool FewerFeatures(string featureSetA, string featureSetB)
+        {
+            if (string.IsNullOrEmpty(featureSetA) || string.IsNullOrEmpty(featureSetB))
+                return false;
+
+            string stringA = featureSetA.Replace(" ", "");
+            stringA = stringA.Replace("-", "");
+            string stringB = featureSetB.Replace(" ", "");
+            stringB = stringB.Replace("-", "");
+
+            if (stringA.Length < stringB.Length)
+                stringA = stringA.PadRight(stringB.Length, '0');
+            if (stringB.Length < stringA.Length)
+                stringB = stringB.PadRight(stringA.Length, '0');
+            
+            for (int i = 0; i < stringA.Length / 8; ++i)
+            {
+                uint intA = Convert.ToUInt32(stringA.Substring(8 * i, 8), 16);
+                uint intB = Convert.ToUInt32(stringB.Substring(8 * i, 8), 16);
+
+                if ((intA & intB) != intB)
+                    return true;
+            }
+            return false;
+        }
     }
 }

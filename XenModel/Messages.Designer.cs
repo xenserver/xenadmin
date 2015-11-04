@@ -3805,6 +3805,90 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is using older CPUs.
         ///
+        ///VMs running in the pool will only use the CPU features common to all the servers in the pool.
+        ///
+        ///Do you want to do this?.
+        /// </summary>
+        public static string ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE {
+            get {
+                return ResourceManager.GetString("ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool that is using older CPUs.
+        ///
+        ///{0}
+        ///
+        ///VMs running in the pool will only use the CPU features common to all the servers in the pool.
+        ///
+        ///Do you want to do this?.
+        /// </summary>
+        public static string ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE {
+            get {
+                return ResourceManager.GetString("ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is using different CPUs.
+        ///
+        ///VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new server until they are restarted.
+        ///
+        ///Do you want to do this?.
+        /// </summary>
+        public static string ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE {
+            get {
+                return ResourceManager.GetString("ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool that is using different CPUs.
+        ///
+        ///{0}
+        ///
+        ///VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new servers until they are restarted.
+        ///
+        ///Do you want to do this?.
+        /// </summary>
+        public static string ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE {
+            get {
+                return ResourceManager.GetString("ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is using newer CPUs.
+        ///
+        ///VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new server until they are restarted.
+        ///
+        ///Do you want to do this?.
+        /// </summary>
+        public static string ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE {
+            get {
+                return ResourceManager.GetString("ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool that is using newer CPUs.
+        ///
+        ///{0}
+        ///
+        ///VMs starting on the pool in future will only use the reduced set of CPU features common to all the servers in the pool. VMs already running in the pool will not be able to migrate to the new servers until they are restarted.
+        ///
+        ///Do you want to do this?.
+        /// </summary>
+        public static string ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE {
+            get {
+                return ResourceManager.GetString("ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is using older CPUs.
+        ///
         ///XenServer can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the XenServer Hardware Compatibility List.
         ///
         ///Do you want to do this?.
@@ -21622,6 +21706,15 @@ namespace XenAdmin {
         public static string MIGRATION_NOT_ALLOWED {
             get {
                 return ResourceManager.GetString("MIGRATION_NOT_ALLOWED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using.
+        /// </summary>
+        public static string MIGRATION_NOT_ALLOWED_CPU_FEATURES {
+            get {
+                return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_CPU_FEATURES", resourceCulture);
             }
         }
         
