@@ -1356,7 +1356,9 @@ namespace XenAdmin.TabPages
                     bool isXenPrepInProgress = false; //TODO in CP-13247  when XenPrep functions will be added
                     bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO in CP-13247: remove &&false when XenPrep functions have been added
 
-                    bool isManagementAgentInstalled = vm.HasRDP; //HasRDP is the way to detect .Net/Management Agent
+                    //vmtype is not yet implemented (will likely have different name) in XAPI, but this is the type that refers to the windows update readyness/capability of the VM and is expected to have the following values: yes, no, dontknow, got_it
+                    bool isManagementAgentInstalled = vm.HasUpgradeSupportInManagementAgent //&& vmtype != no"
+                        || vm.HasRDP; //&& vmtype == no;
 
                     bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized;
                     bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
