@@ -415,6 +415,9 @@ namespace XenAdmin.Wizards
                 {
                     xenTabPageStorageProvisioningMethod.ResetControls();
                 }
+
+                m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
+                m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
