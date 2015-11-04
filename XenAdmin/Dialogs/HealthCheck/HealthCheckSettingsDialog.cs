@@ -177,8 +177,8 @@ namespace XenAdmin.Dialogs.HealthCheck
                 newHealthCheckSettings.TimeOfDay = (int)timeOfDayComboBox.SelectedValue;
                 newHealthCheckSettings. RetryInterval = HealthCheckSettings.DEFAULT_RETRY_INTERVAL;
                 
-                new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, diagnosticToken, textboxXSUserName.Text, textboxXSPassword.Text, false).RunAsync();
-                new TransferHealthCheckSettingsAction(pool, newHealthCheckSettings, textboxXSUserName.Text, textboxXSPassword.Text, true).RunAsync();
+                new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, diagnosticToken, textboxXSUserName.Text.Trim(), textboxXSPassword.Text, false).RunAsync();
+                new TransferHealthCheckSettingsAction(pool, newHealthCheckSettings, textboxXSUserName.Text.Trim(), textboxXSPassword.Text, true).RunAsync();
             }
             okButton.Enabled = true;
             DialogResult = DialogResult.OK;
@@ -205,7 +205,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             SetXSCredentials(currentXsCredentialsRadioButton.Checked);
             testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
-                !string.IsNullOrEmpty(textboxXSUserName.Text) && !string.IsNullOrEmpty(textboxXSPassword.Text);
+                !string.IsNullOrEmpty(textboxXSUserName.Text.Trim()) && !string.IsNullOrEmpty(textboxXSPassword.Text);
         }
 
         private void SetXSCredentials(bool useCurrent)
@@ -250,11 +250,11 @@ namespace XenAdmin.Dialogs.HealthCheck
                 return true;
 
             if (newAuthenticationRadioButton.Checked && 
-                (string.IsNullOrEmpty(textBoxMyCitrixUsername.Text) || string.IsNullOrEmpty(textBoxMyCitrixPassword.Text)))
+                (string.IsNullOrEmpty(textBoxMyCitrixUsername.Text.Trim()) || string.IsNullOrEmpty(textBoxMyCitrixPassword.Text)))
                 return false;
 
             if (newXsCredentialsRadioButton.Checked &&
-                (string.IsNullOrEmpty(textboxXSUserName.Text) || string.IsNullOrEmpty(textboxXSPassword.Text)))
+                (string.IsNullOrEmpty(textboxXSUserName.Text.Trim()) || string.IsNullOrEmpty(textboxXSPassword.Text)))
                 return false;
 
             return true;
@@ -304,7 +304,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             UpdateButtons();
             testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
-                !string.IsNullOrEmpty(textboxXSUserName.Text) && !string.IsNullOrEmpty(textboxXSPassword.Text);
+                !string.IsNullOrEmpty(textboxXSUserName.Text.Trim()) && !string.IsNullOrEmpty(textboxXSPassword.Text);
             HideTestCredentialsStatus();
         }
 
@@ -320,7 +320,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void CheckXenServerCredentials()
         {
-            if (string.IsNullOrEmpty(textboxXSUserName.Text) || string.IsNullOrEmpty(textboxXSPassword.Text))
+            if (string.IsNullOrEmpty(textboxXSUserName.Text.Trim()) || string.IsNullOrEmpty(textboxXSPassword.Text))
                 return;
 
             bool passedRbacChecks = false;
