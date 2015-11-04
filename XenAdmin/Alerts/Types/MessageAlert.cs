@@ -142,6 +142,10 @@ namespace XenAdmin.Alerts
                     case XenAPI.Message.MessageType.LICENSE_SERVER_CONNECTED:
                     case XenAPI.Message.MessageType.LICENSE_SERVER_UNAVAILABLE:
                     case XenAPI.Message.MessageType.HOST_CLOCK_WENT_BACKWARDS:
+                    case XenAPI.Message.MessageType.POOL_CPU_FEATURES_UP:
+                    case XenAPI.Message.MessageType.POOL_CPU_FEATURES_DOWN:
+                    case XenAPI.Message.MessageType.HOST_CPU_FEATURES_UP:
+                    case XenAPI.Message.MessageType.HOST_CPU_FEATURES_DOWN:
                         if (XenObject != null)
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         break;

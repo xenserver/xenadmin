@@ -3501,6 +3501,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The CPU feature level on host &apos;{0}&apos; has been reduced..
+        /// </summary>
+        public static string Message_body_host_cpu_features_down {
+            get {
+                return ResourceManager.GetString("Message.body-host_cpu_features_down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The CPU feature level on host &apos;{0}&apos; has been increased..
+        /// </summary>
+        public static string Message_body_host_cpu_features_up {
+            get {
+                return ResourceManager.GetString("Message.body-host_cpu_features_up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was a temporary failure synchronizing performance statistics across the pool, probably because one or more servers were offline.  Another synchronization attempt will be made later..
         /// </summary>
         public static string Message_body_host_sync_data_failed {
@@ -3641,6 +3659,24 @@ namespace XenAdmin {
         public static string Message_body_pbd_plug_failed_on_server_start {
             get {
                 return ResourceManager.GetString("Message.body-pbd_plug_failed_on_server_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The CPU feature level on pool &apos;{0}&apos; has been reduced..
+        /// </summary>
+        public static string Message_body_pool_cpu_features_down {
+            get {
+                return ResourceManager.GetString("Message.body-pool_cpu_features_down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The CPU feature level on pool &apos;{0}&apos; has been increased..
+        /// </summary>
+        public static string Message_body_pool_cpu_features_up {
+            get {
+                return ResourceManager.GetString("Message.body-pool_cpu_features_up", resourceCulture);
             }
         }
         
@@ -4275,6 +4311,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host CPU features reduced.
+        /// </summary>
+        public static string Message_name_host_cpu_features_down {
+            get {
+                return ResourceManager.GetString("Message.name-host_cpu_features_down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host CPU features increased.
+        /// </summary>
+        public static string Message_name_host_cpu_features_up {
+            get {
+                return ResourceManager.GetString("Message.name-host_cpu_features_up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XenServer statistics synchronization failed.
         /// </summary>
         public static string Message_name_host_sync_data_failed {
@@ -4397,6 +4451,24 @@ namespace XenAdmin {
         public static string Message_name_pbd_plug_failed_on_server_start {
             get {
                 return ResourceManager.GetString("Message.name-pbd_plug_failed_on_server_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool CPU features reduced.
+        /// </summary>
+        public static string Message_name_pool_cpu_features_down {
+            get {
+                return ResourceManager.GetString("Message.name-pool_cpu_features_down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool CPU features increased.
+        /// </summary>
+        public static string Message_name_pool_cpu_features_up {
+            get {
+                return ResourceManager.GetString("Message.name-pool_cpu_features_up", resourceCulture);
             }
         }
         
