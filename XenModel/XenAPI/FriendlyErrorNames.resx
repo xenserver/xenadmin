@@ -231,6 +231,9 @@
   <data name="CHANGE_PASSWORD_REJECTED" xml:space="preserve">
     <value>Change password rejected</value>
   </data>
+  <data name="CLUSTERED_SR_DEGRADED" xml:space="preserve">
+    <value>An SR is using clustered local storage. It is not safe to reboot a host at the moment.</value>
+  </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
   </data>
@@ -513,8 +516,14 @@
   <data name="IMPORT_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>Cannot import on this server because it was saved on an incompatible version</value>
   </data>
+  <data name="INCOMPATIBLE_CLUSTER_STACK_ACTIVE" xml:space="preserve">
+    <value>This operation cannot be performed, because it is incompatible with the currently active HA cluster stack.</value>
+  </data>
   <data name="INCOMPATIBLE_PIF_PROPERTIES" xml:space="preserve">
     <value>These PIFs can not be bonded, because their properties are different.</value>
+  </data>
+  <data name="INCOMPATIBLE_STATEFILE_SR" xml:space="preserve">
+    <value>The specified SR is incompatible with the selected HA cluster stack.</value>
   </data>
   <data name="INTERFACE_HAS_NO_IP" xml:space="preserve">
     <value>The specified interface cannot be used because it has no IP address</value>
@@ -889,6 +898,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>The SM plugin did not respond to a query.</value>
+  </data>
+  <data name="SR_ATTACHED_ON_SLAVE" xml:space="preserve">
+    <value>The SR is currently attached on non-master host.</value>
   </data>
   <data name="SR_ATTACH_FAILED" xml:space="preserve">
     <value>Attaching this SR failed.</value>
@@ -1301,6 +1313,9 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>Unable to attach empty optical drive to VM.</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
+    <value>Not enough space to enable LVHD thin provisioning.</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
   </data>
@@ -1463,6 +1478,9 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_99" xml:space="preserve">
     <value>Only 1 LUN may be used with shared LVM</value>
   </data>
+  <data name="SR_DETACHED_ON_MASTER" xml:space="preserve">
+    <value>The SR is currently detached on the master.</value>
+  </data>
   <data name="SR_DEVICE_IN_USE" xml:space="preserve">
     <value>The SR operation cannot be performed because a device underlying the SR is in use by the server.</value>
   </data>
@@ -1595,6 +1613,9 @@ Authorized Roles: {1}</value>
   <data name="VDI_COPY_FAILED" xml:space="preserve">
     <value>The VDI copy action has failed</value>
   </data>
+  <data name="VDI_HAS_RRDS" xml:space="preserve">
+    <value>The operation cannot be performed because this VDI has rrd stats</value>
+  </data>
   <data name="VDI_INCOMPATIBLE_TYPE" xml:space="preserve">
     <value>This operation cannot be performed because the specified virtual disk is of an incompatible type (e.g., an HA statefile cannot be attached to a VM)</value>
   </data>
@@ -1679,6 +1700,9 @@ Authorized Roles: {1}</value>
   <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
     <value>The BIOS strings for this VM have already been set and cannot be changed anymore.</value>
   </data>
+  <data name="VM_CALL_PLUGIN_RATE_LIMIT" xml:space="preserve">
+    <value>There is a minimal interval required between consecutive plugin calls made on the same VM, please wait before retry.</value>
+  </data>
   <data name="VM_CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>You cannot delete the specified default template.</value>
   </data>
@@ -1759,6 +1783,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_NO_CRASHDUMP_SR" xml:space="preserve">
     <value>This VM does not have a crashdump SR specified.</value>
+  </data>
+  <data name="VM_NO_EMPTY_CD_VBD" xml:space="preserve">
+    <value>The VM has no empty CD drive (VBD).</value>
   </data>
   <data name="VM_NO_SUSPEND_SR" xml:space="preserve">
     <value>This VM does not have a suspend SR specified.</value>
