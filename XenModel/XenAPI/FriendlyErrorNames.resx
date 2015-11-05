@@ -900,7 +900,7 @@ Authorized Roles: {1}</value>
     <value>The SM plugin did not respond to a query.</value>
   </data>
   <data name="SR_ATTACHED_ON_SLAVE" xml:space="preserve">
-    <value>The SR is currently attached on non-master host.</value>
+    <value>The SR is currently attached on a host other than the master.</value>
   </data>
   <data name="SR_ATTACH_FAILED" xml:space="preserve">
     <value>Attaching this SR failed.</value>
