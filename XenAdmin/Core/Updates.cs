@@ -110,8 +110,14 @@ namespace XenAdmin.Core
         /// <param name="toBeDismissed"></param>
         public static void DismissUpdates(List<Alert> toBeDismissed)
         {
+            if (toBeDismissed.Count == 0)
+                return;
+
             foreach(IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
+                if (!Alert.AllowedToDismiss(connection))
+                    continue;
+
                 XenAPI.Pool pool = Helpers.GetPoolOfOne(connection);
                 if (pool == null)
                     continue;
@@ -468,6 +474,9 @@ namespace XenAdmin.Core
         {
             foreach (IXenConnection _connection in ConnectionsManager.XenConnectionsCopy)
             {
+                if (!AllowedToRestoreDismissedUpdates(_connection))
+                    continue;
+
                 XenAPI.Pool pool = Helpers.GetPoolOfOne(_connection);
                 if (pool == null)
                     continue;
@@ -490,6 +499,26 @@ namespace XenAdmin.Core
             Settings.TrySaveSettings();
 
             Updates.CheckForUpdates(true);
+        }
+
+        /// <summary>
+        /// Checks the user has sufficient RBAC privileges to restore dismissed alerts on a given connection
+        /// </summary>
+        public static bool AllowedToRestoreDismissedUpdates(IXenConnection c)
+        {
+            if (c == null || c.Session == null)
+                return false;
+
+            if (c.Session.IsLocalSuperuser)
+                return true;
+
+            List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Pool.set_other_config", c);
+            foreach (Role possibleRole in rolesAbleToCompleteAction)
+            {
+                if (c.Session.Roles.Contains(possibleRole))
+                    return true;
+            }
+            return false;
         }
     }
 }
