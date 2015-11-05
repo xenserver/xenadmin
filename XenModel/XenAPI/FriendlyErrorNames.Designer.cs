@@ -2406,7 +2406,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The SR is currently attached on non-master host..
+        ///   Looks up a localized string similar to The SR is currently attached on a host other than the master..
         /// </summary>
         public static string SR_ATTACHED_ON_SLAVE {
             get {
