@@ -146,7 +146,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     return;
 
                 // Start probe
-                SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.cifs, dconf);
+                SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.smb, dconf);
                 ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
                 dialog.ShowCancel = true;
                 dialog.ShowDialog(this);
