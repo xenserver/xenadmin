@@ -126,7 +126,6 @@
     <Compile Include="SearchTests\SearchMarshallingTests.cs" />
     <Compile Include="SearchTests\SearchTestsSetup.cs" />
     <Compile Include="TabsAndMenus\TabsAndMenus.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenusGeorge.cs" />
     <Compile Include="UnitTests\NaturalCompareTest.cs" />
     <Compile Include="UnitTests\TokenizerTest.cs" />
     <Compile Include="UnitTests\XenObjectEqualsTests.cs" />
@@ -170,9 +169,6 @@
     </Content>
     <Content Include="TestResources\ContextMenuBuilderTestResults.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\Cowley-db.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestResources\cowley1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -330,7 +326,6 @@
     <Compile Include="MiscTests\UpdateManagerTests.cs" />
     <Compile Include="MiscTests\WebBrowser2Tests.cs" />
     <Compile Include="PluginTests\PlaceholdersTests.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenusCowley.cs" />
     <Compile Include="TabsAndMenus\TabsAndMenusBoston.cs" />
     <Compile Include="TabsAndMenus\LogsTabTests.cs">
       <SubType>Code</SubType>
@@ -354,9 +349,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TabsAndMenus\StartUpStateTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\TabsAndMenusMidnightRide.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TabsAndMenus\ToolbarGeorge.cs">

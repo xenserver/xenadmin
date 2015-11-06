@@ -217,43 +217,43 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ContextMenu_XenCenterNode_AllClosed()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_AllClosed();
+            new TabsAndMenusBoston().ContextMenu_XenCenterNode_AllClosed();
         }
 
         [Test]
         public void ContextMenu_XenCenterNode_RootOpen()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_RootOpen();
+            new TabsAndMenusBoston().ContextMenu_XenCenterNode_RootOpen();
         }
 
         [Test]
         public void ContextMenu_XenCenterNode_PoolOpen()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_PoolOpen();
+            new TabsAndMenusBoston().ContextMenu_XenCenterNode_PoolOpen();
         }
 
         [Test]
         public void ContextMenu_XenCenterNode_AllOpen()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_AllOpen();
+            new TabsAndMenusBoston().ContextMenu_XenCenterNode_AllOpen();
         }
 
         [Test]
         public void ContextMenu_Pool()
         {
-            new TabsAndMenusGeorge().ContextMenu_Pool();
+            new TabsAndMenusBoston().ContextMenu_Pool();
         }
 
         [Test]
         public void ContextMenu_Master()
         {
-            new TabsAndMenusGeorge().ContextMenu_Master();
+            new TabsAndMenusBoston().ContextMenu_Master();
         }
 
         [Test]
         public void ContextMenu_Slave()
         {
-            new TabsAndMenusGeorge().ContextMenu_Slave();
+            new TabsAndMenusBoston().ContextMenu_Slave();
         }
 
         //[Test]
@@ -313,13 +313,13 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ContextMenu_SR()
         {
-            new TabsAndMenusGeorge().ContextMenu_SR();
+            new TabsAndMenusBoston().ContextMenu_SR();
         }
 
         [Test]
         public void ContextMenu_DefaultTemplate()
         {
-            new TabsAndMenusGeorge().ContextMenu_DefaultTemplate();
+            new TabsAndMenusBoston().ContextMenu_DefaultTemplate();
         }
 
         //[Test]
@@ -344,31 +344,31 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ContextMenu_Snapshot()
         {
-            new TabsAndMenusGeorge().ContextMenu_Snapshot();
+            new TabsAndMenusBoston().ContextMenu_Snapshot();
         }
 
         [Test]
         public void ContextMenu_VDI()
         {
-            new TabsAndMenusGeorge().ContextMenu_VDI();
+            new TabsAndMenusBoston().ContextMenu_VDI();
         }
 
         //[Test]
         //public void ContextMenu_Network()
         //{
-        //    new TabsAndMenusGeorge().ContextMenu_Network();
+        //    new TabsAndMenusBoston().ContextMenu_Network();
         //}
 
         [Test]
         public void ContextMenu_GroupingTag()
         {
-            new TabsAndMenusGeorge().ContextMenu_GroupingTag();
+            new TabsAndMenusBoston().ContextMenu_GroupingTag();
         }
 
         [Test]
         public void ContextMenu_Folder()
         {
-            new TabsAndMenusGeorge().ContextMenu_Folder();
+            new TabsAndMenusBoston().ContextMenu_Folder();
         }
 
         [Test]

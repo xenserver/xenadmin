@@ -40,6 +40,7 @@ using System.Collections.Generic;
 using XenAdmin;
 using XenAdmin.Controls;
 using XenAdmin.Model;
+using XenAdmin.XenSearch;
 
 namespace XenAdminTests.TabsAndMenus
 {
@@ -217,61 +218,293 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ContextMenu_XenCenterNode_AllClosed()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_AllClosed();
+            VirtualTreeNode rootNode = FindInTree(null);
+            MW(rootNode.Collapse);
+            VerifyContextMenu(null, new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("&Add...", true),
+                new ExpectedTextMenuItem("&New Pool...", true),
+                new ExpectedTextMenuItem("C&onnect All", false),
+                new ExpectedTextMenuItem("Di&sconnect All", true),
+                new ExpectedTextMenuItem("E&xpand All", true)
+            });
         }
 
         [Test]
         public void ContextMenu_XenCenterNode_RootOpen()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_RootOpen();
+            VirtualTreeNode rootNode = FindInTree(null);
+            MW(delegate
+            {
+                rootNode.Collapse();
+                rootNode.Expand();
+            });
+            VerifyContextMenu(null, new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("&Add...", true),
+                new ExpectedTextMenuItem("&New Pool...", true),
+                new ExpectedTextMenuItem("C&onnect All", false),
+                new ExpectedTextMenuItem("Di&sconnect All", true),
+                new ExpectedTextMenuItem("E&xpand All", true)
+            });
         }
 
         [Test]
         public void ContextMenu_XenCenterNode_PoolOpen()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_PoolOpen();
+            VirtualTreeNode rootNode = FindInTree(null);
+
+            MW(delegate
+            {
+                rootNode.Collapse();
+                rootNode.Expand();
+            });
+            VirtualTreeNode poolNode = FindInTree(GetAnyPool());
+
+            MW(delegate
+            {
+                poolNode.Expand();
+            });
+
+            VerifyContextMenu(null, new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("&Add...", true),
+                new ExpectedTextMenuItem("&New Pool...", true),
+                new ExpectedTextMenuItem("C&onnect All", false),
+                new ExpectedTextMenuItem("Di&sconnect All", true),
+                new ExpectedTextMenuItem("E&xpand All", true),
+                new ExpectedTextMenuItem("&Collapse Children", true)
+            });
         }
 
         [Test]
         public void ContextMenu_XenCenterNode_AllOpen()
         {
-            new TabsAndMenusGeorge().ContextMenu_XenCenterNode_AllOpen();
+            VirtualTreeNode rootNode = FindInTree(null);
+
+            MW(delegate
+            {
+                rootNode.ExpandAll();
+            });
+            VerifyContextMenu(null, new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("&Add...", true),
+                new ExpectedTextMenuItem("&New Pool...", true),
+                new ExpectedTextMenuItem("C&onnect All", false),
+                new ExpectedTextMenuItem("Di&sconnect All", true),
+                new ExpectedTextMenuItem("&Collapse Children", true)
+            });
         }
 
         [Test]
         public void ContextMenu_Pool()
         {
-            new TabsAndMenusGeorge().ContextMenu_Pool();
+            var pool = GetAnyPool();
+            var expected = new List<ExpectedMenuItem>
+                               {
+                                   new ExpectedTextMenuItem("New V&M...", true),
+                                   new ExpectedTextMenuItem("&New SR...", true),
+                                   new ExpectedTextMenuItem("&Import...", true),
+                                   new ExpectedSeparator(),
+                                   new ExpectedTextMenuItem("&High Availability...", true)
+                               };
+            expected.Add(new ExpectedTextMenuItem("VM Pr&otection Policies...", true));
+            expected.Add(new ExpectedTextMenuItem("Manage &vApps...", true));
+            expected.Add(new ExpectedTextMenuItem("Di&saster Recovery", true, new ExpectedMenuItem[]
+                                                                                    {
+                                                                                        new ExpectedTextMenuItem(
+                                                                                            "&Configure...", true),
+                                                                                        new ExpectedTextMenuItem(
+                                                                                            "&Disaster Recovery Wizard...",
+                                                                                            true)
+                                                                                    }));
+            expected.AddRange(new List<ExpectedMenuItem>{
+                                   new ExpectedSeparator(),
+                                   new ExpectedTextMenuItem("&Add Server", true, false,
+                                                            new ExpectedMenuItem[]
+                                                                {
+                                                                    new ExpectedTextMenuItem("(empty)", false),
+                                                                    new ExpectedSeparator(),
+                                                                    new ExpectedTextMenuItem("&Add New Server...", true)
+                                                                }),
+                                   new ExpectedTextMenuItem("&Disconnect", true),
+                                   new ExpectedTextMenuItem("Reconnec&t As...", true),
+                                   new ExpectedSeparator(),
+                                   new ExpectedTextMenuItem("E&xpand All", true),
+                                   new ExpectedTextMenuItem("P&roperties", true)
+                               });
+            VerifyContextMenu(pool, expected.ToArray());
         }
 
         [Test]
         public void ContextMenu_Master()
         {
-            new TabsAndMenusGeorge().ContextMenu_Master();
+            VerifyContextMenu(GetAnyHost(IsMaster), new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("New V&M...", true),
+                new ExpectedTextMenuItem("&New SR...", true),
+                new ExpectedTextMenuItem("&Import...", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("&Enter Maintenance Mode...", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("Re&boot", true),
+                new ExpectedTextMenuItem("S&hut Down", true),
+                new ExpectedTextMenuItem("Restart Toolstac&k", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("E&xpand All", true),
+                new ExpectedTextMenuItem("P&roperties", true)
+            });
         }
 
         [Test]
         public void ContextMenu_Slave()
         {
-            new TabsAndMenusGeorge().ContextMenu_Slave();
+            VerifyContextMenu(GetAnyHost(IsSlave), new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("New V&M...", true),
+                new ExpectedTextMenuItem("&New SR...", true),
+                new ExpectedTextMenuItem("&Import...", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("&Enter Maintenance Mode...", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("Re&boot", true),
+                new ExpectedTextMenuItem("S&hut Down", true),
+                new ExpectedTextMenuItem("Restart Toolstac&k", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("Remove Server from &Pool", false),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("E&xpand All", true),
+                new ExpectedTextMenuItem("P&roperties", true)
+            });
         }
 
         [Test]
         public void ContextMenu_VMWithTools()
         {
-            new TabsAndMenusGeorge().ContextMenu_VMWithTools();
+            foreach (VM vm in GetAllXenObjects<VM>(HasTools))
+            {
+                List<ExpectedMenuItem> expectedMenuItems = new List<ExpectedMenuItem>();
+
+                expectedMenuItems.Add(new ExpectedTextMenuItem("S&hut Down", true));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("S&uspend", true));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Reb&oot", true));
+                expectedMenuItems.Add(new ExpectedSeparator());
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Force Shut Do&wn", true));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Force Re&boot", true));
+                expectedMenuItems.Add(new ExpectedSeparator());
+
+                if (vm.Connection.Resolve<Host>(vm.resident_on).name_label == "inflames")
+                {
+                    expectedMenuItems.Add(new ExpectedTextMenuItem("M&igrate to Server", true, false,
+                        new ExpectedMenuItem[]
+                            {
+                                new ExpectedTextMenuItem("&Home Server (Current server)", false),
+                                new ExpectedTextMenuItem("inflames (Current server)", false, false, true),
+                                new ExpectedTextMenuItem("incubus (INTERNAL_ERROR)", false, false, true)
+                            }));
+                    expectedMenuItems.Add(new ExpectedSeparator());
+                }
+                else if (vm.IsOnSharedStorage() == string.Empty)
+                {
+                    expectedMenuItems.Add(new ExpectedTextMenuItem("M&igrate to Server", true, false,
+                        new ExpectedMenuItem[]
+                            {
+                                new ExpectedTextMenuItem("&Home Server (Current server)", false),
+                                new ExpectedTextMenuItem("inflames (INTERNAL_ERROR)", false, false, true),
+                                new ExpectedTextMenuItem("incubus (Current server)", false, false, true)
+                            }));
+                    expectedMenuItems.Add(new ExpectedSeparator());
+                }
+
+
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Ta&ke a Snapshot...", true));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }));
+                expectedMenuItems.Add(new ExpectedSeparator());
+                expectedMenuItems.Add(new ExpectedTextMenuItem("P&roperties", true));
+
+                VerifyContextMenu(vm, expectedMenuItems.ToArray());
+            }
+        }
+
+        [Test]
+        public void ContextMenu_VMWithoutTools()
+        {
+            foreach (VM vm in GetAllXenObjects<VM>(NoTools))
+            {
+                VerifyContextMenu(vm, new ExpectedMenuItem[] {
+                    new ExpectedTextMenuItem("Force Shut Do&wn", true),
+                    new ExpectedTextMenuItem("Force Re&boot", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("Ta&ke a Snapshot...", true),
+                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }),
+                    new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("Install &XenServer Tools...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("P&roperties", true)
+                });
+            }
+        }
+
+        [Test]
+        public void ContextMenu_VMShutdown()
+        {
+            foreach (VM vm in GetAllXenObjects<VM>(IsShutdown))
+            {
+                VerifyContextMenu(vm, new ExpectedMenuItem[] {
+                    new ExpectedTextMenuItem("S&tart", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("Start on Ser&ver", true, false,
+                        new ExpectedMenuItem[]
+                            {
+                                new ExpectedTextMenuItem("&Home Server (Home Server is not set)", false),
+                                new ExpectedTextMenuItem("inflames (INTERNAL_ERROR)", false, false, true),
+                                new ExpectedTextMenuItem("incubus (INTERNAL_ERROR)", false, false, true)
+                            }),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("&Copy VM...", true),
+                    new ExpectedTextMenuItem("&Export...", true),
+                    new ExpectedTextMenuItem("Ta&ke a Snapshot...", true),
+                    new ExpectedTextMenuItem("Co&nvert to Template...", true),
+                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }),
+                    new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("&Delete VM...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("P&roperties", true)
+                });
+            }
         }
 
         [Test]
         public void ContextMenu_SR()
         {
-            new TabsAndMenusGeorge().ContextMenu_SR();
-        }
+            EnsureChecked(MainWindowWrapper.ViewMenuItems.LocalStorageToolStripMenuItem);
 
-        [Test]
-        public void ContextMenu_DefaultTemplate()
-        {
-            new TabsAndMenusGeorge().ContextMenu_DefaultTemplate();
+            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR))
+            {
+                List<ExpectedMenuItem> expectedMenuItems = new List<ExpectedMenuItem>();
+
+                if (CanSetAsDefault(sr))
+                {
+                    expectedMenuItems.Add(new ExpectedTextMenuItem("Set as Defaul&t", true));
+                    expectedMenuItems.Add(new ExpectedSeparator());
+                }
+                if (CanDetach(sr))
+                {
+                    expectedMenuItems.Add(new ExpectedTextMenuItem("&Detach...", true));
+                }
+                if (CanForget(sr))
+                {
+                    expectedMenuItems.Add(new ExpectedTextMenuItem("&Forget", true));
+                }
+                if (CanDestroy(sr))
+                {
+                    expectedMenuItems.Add(new ExpectedTextMenuItem("Destr&oy...", true));
+                }
+                if (expectedMenuItems.Count > 0 && !(CanSetAsDefault(sr) && expectedMenuItems.Count == 2))
+                {
+                    expectedMenuItems.Add(new ExpectedSeparator());
+                }
+                expectedMenuItems.Add(new ExpectedTextMenuItem("P&roperties", true));
+
+                VerifyContextMenu(sr, expectedMenuItems.ToArray());
+            }
         }
 
         [Test]
@@ -297,7 +530,223 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ContextMenu_Snapshot()
         {
-            new TabsAndMenusGeorge().ContextMenu_Snapshot();
+            try
+            {
+                var expectedForAll = new List<ExpectedMenuItem>
+                                       {
+                                           new ExpectedTextMenuItem("&New VM From Snapshot...", true),
+                                           new ExpectedTextMenuItem("&Create Template From Snapshot...", true),
+                                           new ExpectedTextMenuItem("&Export Snapshot As Template...", true),
+                                           new ExpectedTextMenuItem("&Delete Snapshot", true),
+                                           new ExpectedSeparator(),
+                                           new ExpectedTextMenuItem("P&roperties", true)
+                                       };
+
+                PutInNavigationMode(NavigationPane.NavigationMode.Objects);
+
+                foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot))
+                {
+                    var expected = new List<ExpectedMenuItem>(expectedForAll);
+                    VerifyContextMenu(snapshot, expected.ToArray());
+                }
+
+                PutInNavigationMode(NavigationPane.NavigationMode.Tags);
+
+                foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot && v.tags.Length > 0))
+                {
+                    var expected = new List<ExpectedMenuItem>(expectedForAll);
+
+                    if (snapshot.tags.Length > 0)
+                        expected.Insert(5, new ExpectedTextMenuItem("Untag Ob&ject", true));
+                    if (Folders.GetFolder(snapshot) != null)
+                        expected.Insert(5, new ExpectedTextMenuItem("Remove from &folder", true));
+                    VerifyContextMenu(snapshot, expected.ToArray());
+                }
+
+                PutInNavigationMode(NavigationPane.NavigationMode.Folders);
+
+                foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot && Folders.GetFolder(v) != null))
+                {
+                    var expected = new List<ExpectedMenuItem>(expectedForAll);
+
+                    if (snapshot.tags.Length > 0)
+                        expected.Insert(5, new ExpectedTextMenuItem("Untag Ob&ject", true));
+                    if (Folders.GetFolder(snapshot) != null)
+                        expected.Insert(5, new ExpectedTextMenuItem("Remove from &folder", true));
+                    VerifyContextMenu(snapshot, expected.ToArray());
+                }
+            }
+            finally
+            {
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            }
+        }
+
+        [Test]
+        public void ContextMenu_VDI()
+        {
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
+            try
+            {
+                foreach (VDI v in GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot))
+                {
+
+                    VerifyContextMenu(v, new ExpectedMenuItem[] {
+                        new ExpectedTextMenuItem("&Move Virtual Disk...", v.VBDs.Count == 0), 
+                        new ExpectedTextMenuItem("&Delete Virtual Disk", v.allowed_operations.Contains(vdi_operations.destroy)),
+                        new ExpectedSeparator(),
+                        new ExpectedTextMenuItem("P&roperties", true),
+                        
+                    });
+                }
+            }
+            finally
+            {
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            }
+        }
+
+        [Test]
+        public void ContextMenu_Network()
+        {
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
+            try
+            {
+                foreach (XenAPI.Network network in GetAllXenObjects<XenAPI.Network>(n => n.name_label != "Host internal management network"))
+                {
+                    VerifyContextMenu(network, new ExpectedMenuItem[] {
+                        new ExpectedTextMenuItem("P&roperties", true)
+                    });
+                }
+            }
+            finally
+            {
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            }
+        }
+
+
+        [Test]
+        public void ContextMenu_GroupingTag()
+        {
+            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
+            try
+            {
+                var nodes = GetAllTreeNodes().Where(n => n.Parent != null);
+
+                foreach (VirtualTreeNode node in nodes)
+                {
+                    GroupingTag gt = node.Tag as GroupingTag;
+                    if (gt != null)
+                    {
+                        var expectedItems = new List<ExpectedMenuItem>();
+
+                        if (gt.Grouping is PropertyGrouping<string>)
+                        {
+                            expectedItems.Add(new ExpectedTextMenuItem("&Delete Tag...", true));
+                            expectedItems.Add(new ExpectedTextMenuItem("&Rename Tag...", true));
+                        }
+
+                        AddExpectedExpandAndCollapseItems(node, expectedItems);
+
+                        VerifyContextMenu(gt, expectedItems.ToArray());
+                    }
+                }
+            }
+            finally
+            {
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            }
+        }
+
+        [Test]
+        public void ContextMenu_Folder()
+        {
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
+            try
+            {
+                foreach (VirtualTreeNode node in GetAllTreeNodes())
+                {
+                    Folder folder = node.Tag as Folder;
+
+                    if (folder != null)
+                    {
+                        List<ExpectedMenuItem> expectedMenuItems = new List<ExpectedMenuItem>();
+
+                        expectedMenuItems.Add(new ExpectedTextMenuItem("&New Folder...", true));
+
+                        if (!folder.IsRootFolder)
+                        {
+                            expectedMenuItems.Add(new ExpectedTextMenuItem("&Rename Folder...", true));
+                            expectedMenuItems.Add(new ExpectedTextMenuItem("&Delete Folder...", true));
+                        }
+
+                        AddExpectedExpandAndCollapseItems(node, expectedMenuItems);
+
+                        VerifyContextMenu(folder, expectedMenuItems.ToArray());
+                    }
+                }
+            }
+            finally
+            {
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            }
+        }
+
+        [Test]
+        public void ContextMenu_DefaultTemplate()
+        {
+            EnsureDefaultTemplatesShown();
+
+            VerifyContextMenu(GetAnyDefaultTemplate(), new ExpectedMenuItem[] {
+                new ExpectedTextMenuItem("&New VM wizard...", true),
+                new ExpectedSeparator(),                
+                new ExpectedTextMenuItem("&Export to File...", true),
+                new ExpectedTextMenuItem("&Copy...", true),
+                new ExpectedSeparator(),
+                new ExpectedTextMenuItem("P&roperties", true)
+            });
+        }
+
+        [Test]
+        public void ContextMenu_UserTemplate_Instant()
+        {
+            EnsureDefaultTemplatesShown();
+
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.InstantTemplate))
+            {
+                VerifyContextMenu(vm, new ExpectedMenuItem[] {
+                    new ExpectedTextMenuItem("&New VM wizard...", true),
+                    new ExpectedTextMenuItem("&Quick Create", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("&Export to File...", true),
+                    new ExpectedTextMenuItem("&Copy...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("&Delete Template...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("P&roperties", true)
+                });
+            }
+        }
+
+        [Test]
+        public void ContextMenu_UserTemplate_NoInstant()
+        {
+            EnsureDefaultTemplatesShown();
+
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate && !v.is_a_snapshot && !v.InstantTemplate && !v.name_label.StartsWith("XenServer Transfer VM")))
+            {
+                VerifyContextMenu(vm, new ExpectedMenuItem[] {
+                    new ExpectedTextMenuItem("&New VM wizard...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("&Export to File...", true),
+                    new ExpectedTextMenuItem("&Copy...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("&Delete Template...", true),
+                    new ExpectedSeparator(),
+                    new ExpectedTextMenuItem("P&roperties", true)
+                });
+            }
         }
 
         [Test]
