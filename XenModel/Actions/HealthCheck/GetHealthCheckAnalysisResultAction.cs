@@ -36,6 +36,7 @@ using System.Net;
 using System.Web.Script.Serialization;
 using XenAdmin.Model;
 using XenAPI;
+using System.Linq;
 
 namespace XenAdmin.Actions
 {
@@ -84,7 +85,7 @@ namespace XenAdmin.Actions
                 log.Info("Saving analysis result");
                 Dictionary<string, string> newConfig = Pool.health_check_config;
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_SEVERITY] = GetMaxSeverity(analysisResult).ToString();
-                newConfig[HealthCheckSettings.REPORT_ANALYSIS_ISSUES_DETECTED] = analysisResult.Count.ToString();
+                newConfig[HealthCheckSettings.REPORT_ANALYSIS_ISSUES_DETECTED] = GetDistinctIssueCount(analysisResult).ToString();
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_UUID] = Pool.HealthCheckSettings.UploadUuid;
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_TIME] = Pool.HealthCheckSettings.LastSuccessfulUpload;
                 Pool.set_health_check_config(Session, Pool.opaque_ref, newConfig);
@@ -109,6 +110,12 @@ namespace XenAdmin.Actions
                     maxSeverity = severity;
             }
             return maxSeverity;
+        }
+
+        private int GetDistinctIssueCount(List<AnalysisResult> issues)
+        {
+            // get the number of distinct issues (by name)
+            return issues.Select(issue => issue.name).Distinct().Count();
         }
 
         private List<AnalysisResult> GetAnalysisResult(string diagnosticToken, string uploadUuid)
@@ -137,7 +144,7 @@ namespace XenAdmin.Actions
         private class AnalysisResult
         {
             public string severity { get; set; }
-            /*public string extra_information { get; set; }
+            public string extra_information { get; set; }
             public string owner { get; set; }
             public string crm_id { get; set; }
             public string id { get; set; }
@@ -152,7 +159,7 @@ namespace XenAdmin.Actions
             public string upload_description { get; set; }
             public string upload_id { get; set; }
             public string recommendations { get; set; }
-            public string env_identifier { get; set; }*/
+            public string env_identifier { get; set; }
         }
     }
 }
