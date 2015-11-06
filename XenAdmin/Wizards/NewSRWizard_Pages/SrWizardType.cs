@@ -304,7 +304,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override bool IsEnhancedSR { get { return false; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_CIFS_BLURB; } }
-        public override SR.SRTypes Type { get { return SR.SRTypes.cifs; } }
+        public override SR.SRTypes Type { get { return SR.SRTypes.smb; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return false; } }

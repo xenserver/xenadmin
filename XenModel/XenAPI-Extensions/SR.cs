@@ -55,7 +55,7 @@ namespace XenAPI
             lvmohba, egenera, egeneracd, dummy, unknown, equal, cslg, shm,
             iscsi,
             ebs, rawhba,
-            cifs, lvmofcoe
+            smb, lvmofcoe
         }
 
         public const string Content_Type_ISO = "iso";
@@ -267,7 +267,7 @@ namespace XenAPI
                     || type == SRTypes.netapp
                     || type == SRTypes.lvmohba
                     || type == SRTypes.cslg
-                    || type == SRTypes.cifs
+                    || type == SRTypes.smb
                     || type == SRTypes.lvmofcoe;
             }
         }
