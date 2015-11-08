@@ -134,7 +134,7 @@ namespace XenAdmin.Commands
             // done the right thing and that the bond hasn't been deleted in the meantime. (CA-27436).
             Bond bond = pif.BondMasterOf;
             if (bond != null)
-                new Actions.DestroyBondAction(bond, null).RunAsync();
+                new Actions.DestroyBondAction(bond).RunAsync();
         }
     }
 }

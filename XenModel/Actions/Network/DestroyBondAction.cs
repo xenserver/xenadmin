@@ -81,11 +81,6 @@ namespace XenAdmin.Actions
         private readonly XenAPI.Network Network;
 
         /// <summary>
-        /// The network's new name.  May be null, in which case the network will be destroyed.
-        /// </summary>
-        private readonly string NewNetworkName;
-
-        /// <summary>
         /// The bond's name.
         /// </summary>
         private readonly string Name;
@@ -94,8 +89,7 @@ namespace XenAdmin.Actions
         /// 
         /// </summary>
         /// <param name="bond"></param>
-        /// <param name="new_network_name">May be null, in which case the network will be destroyed.</param>
-        public DestroyBondAction(Bond bond, string new_network_name)
+        public DestroyBondAction(Bond bond)
             : base(bond.Connection, string.Format(Messages.ACTION_DESTROY_BOND_TITLE, bond.Name),
                    string.Format(Messages.ACTION_DESTROY_BOND_DESCRIPTION, bond.Name))
         {
@@ -111,7 +105,6 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonTaskApiList);
             #endregion
 
-            NewNetworkName = new_network_name;
             Name = bond.Name;
 
             Pool = Helpers.GetPoolOfOne(Connection);
@@ -186,29 +179,13 @@ namespace XenAdmin.Actions
 
             if (Network != null)
             {
-                if (NewNetworkName == null)
-                {
-                    // We can delete the whole network.
-                    log.DebugFormat("Destroying network {0} ({1})...", old_network_name, Network.uuid);
-                    BestEffort(ref e, delegate()
-                        {
-                            XenAPI.Network.destroy(Session, Network.opaque_ref);
-                            log.DebugFormat("Network {0} ({1}) destroyed.", old_network_name, Network.uuid);
-                        });
-                }
-                else
-                {
-                    // Rename the network, so that the VIFs still have somewhere to live.
-                    log.DebugFormat("Renaming network {0} ({1}) to {2}...", old_network_name, Network.uuid, NewNetworkName);
-
-                    XenAPI.Network n = (XenAPI.Network)Network.Clone();
-                    n.name_label = NewNetworkName;
-                    BestEffort(ref e, delegate()
-                        {
-                            n.SaveChanges(Session);
-                            log.DebugFormat("Renaming network {0} ({1}) done.", NewNetworkName, n.uuid);
-                        });
-                }
+                // Destroy the old network
+                log.DebugFormat("Destroying network {0} ({1})...", old_network_name, Network.uuid);
+                BestEffort(ref e, delegate()
+                    {
+                        XenAPI.Network.destroy(Session, Network.opaque_ref);
+                        log.DebugFormat("Network {0} ({1}) destroyed.", old_network_name, Network.uuid);
+                    });
             }
 
             if (e != null)

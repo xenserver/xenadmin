@@ -63,10 +63,7 @@ namespace XenAdmin.Dialogs
 
         public static bool CanActivate(Host host)
         {
-            //This check used to be "_expiresText != Messages.LICENSE_NEVER" but I've swapped it for
-            //"!host.isOEM" according to the ticket CA-37336 where this 3rd part of the check was added
-            //OEM licenses (< XS ver 5.5) have perpetual (2036) expiry dates
-            return host.IsFreeLicense() && !host.isOEM && !Helpers.ClearwaterOrGreater(host);
+            return host.IsFreeLicense() && !Helpers.ClearwaterOrGreater(host);
         }
 
         public static bool CanActivate(Pool pool)

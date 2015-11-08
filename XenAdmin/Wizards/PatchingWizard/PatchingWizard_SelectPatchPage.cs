@@ -139,22 +139,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var fileName = fileNameTextBox.Text;
                 if (downloadUpdateRadioButton.Checked)
                 {
-                    if (dataGridViewPatches.SelectedRows.Count > 0 && ((PatchGridViewRow)(dataGridViewPatches.SelectedRows[0])).UpdateAlert.WebPageLabel.EndsWith(".xsoem"))
-                    {
-                        SelectedUpdateType = UpdateType.NewOem;
-                    }
-                    else
-                    {
-                        SelectedUpdateType = UpdateType.NewRetail;
-                    }                   
+                    SelectedUpdateType = UpdateType.NewRetail;
                 }
                 else
                 {                    
                     if (isValidFile())
                     {
-                        if (fileName.EndsWith(".xsoem"))
-                            SelectedUpdateType = UpdateType.NewOem;
-                        else if (fileName.EndsWith(".xsupdate"))
+                        if (fileName.EndsWith(".xsupdate"))
                             SelectedUpdateType = UpdateType.NewRetail;
                         else if (fileName.EndsWith(".iso"))
                             SelectedUpdateType = UpdateType.NewSuppPack;
@@ -270,7 +261,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool isValidFile()
         {
             var fileName = fileNameTextBox.Text;
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(".xsoem") || fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"));
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"));
         }
 
 
@@ -314,7 +305,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.EndsWith(".xsoem") || fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"))
+            if (fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"))
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;
@@ -335,13 +326,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (downloadUpdateRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem || SelectedUpdateType == UpdateType.NewSuppPack
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewSuppPack
                                ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).PathPatch
                                : null;
                 }
                 else if (selectFromDiskRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem || SelectedUpdateType == UpdateType.NewSuppPack
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewSuppPack
                               ? fileNameTextBox.Text
                                : null;
                 }
@@ -562,5 +553,5 @@ namespace XenAdmin.Wizards.PatchingWizard
         }       
     }        
 
-    public enum UpdateType { NewRetail, NewOem, Existing, NewSuppPack}
+    public enum UpdateType { NewRetail, Existing, NewSuppPack}
 }

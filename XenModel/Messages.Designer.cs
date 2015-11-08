@@ -24820,61 +24820,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OEM.
-        /// </summary>
-        public static string OEM {
-            get {
-                return ResourceManager.GetString("OEM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server serial number.
-        /// </summary>
-        public static string OEM_MACHINE_SERIAL_NUMBER {
-            get {
-                return ResourceManager.GetString("OEM_MACHINE_SERIAL_NUMBER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server service tag.
-        /// </summary>
-        public static string OEM_MACHINE_SERVICE_TAG {
-            get {
-                return ResourceManager.GetString("OEM_MACHINE_SERVICE_TAG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The software on this server is out of date. Click here for more details.
-        /// </summary>
-        public static string OEM_OLD_SOFTWARE_VERSION {
-            get {
-                return ResourceManager.GetString("OEM_OLD_SOFTWARE_VERSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The software on this server does not contain the following updates:
-        ///{0}.
-        /// </summary>
-        public static string OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Outdated software - {0}.
-        /// </summary>
-        public static string OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE {
-            get {
-                return ResourceManager.GetString("OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
@@ -24916,24 +24861,6 @@ namespace XenAdmin {
         public static string ONE_VM_SELECTED {
             get {
                 return ResourceManager.GetString("ONE_VM_SELECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This feature is only available in XenServer 6.0 or later.
-        /// </summary>
-        public static string ONLY_IN_BOSTON_OR_LATER {
-            get {
-                return ResourceManager.GetString("ONLY_IN_BOSTON_OR_LATER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This feature is only available in XenServer 5.6 Feature Pack 1 or later.
-        /// </summary>
-        public static string ONLY_IN_COWLEY_OR_LATER {
-            get {
-                return ResourceManager.GetString("ONLY_IN_COWLEY_OR_LATER", resourceCulture);
             }
         }
         
@@ -32122,24 +32049,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select embedded update to install.
-        /// </summary>
-        public static string UPDATES_WIZARD_BROWSE_EMBEDDED {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_BROWSE_EMBEDDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select retail update to install.
-        /// </summary>
-        public static string UPDATES_WIZARD_BROWSE_RETAIL {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_BROWSE_RETAIL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unable to download update from &apos;{0}&apos;: no longer connected.
         ///
         ///Check your settings and try again..
@@ -32617,26 +32526,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_RESTART_AGENT {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_RESTART_AGENT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reboot these embedded edition servers:
-        ///.
-        /// </summary>
-        public static string UPDATES_WIZARD_RESTART_OEM {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_RESTART_OEM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reboot the embedded edition server &apos;{0}&apos; and apply any updates to these servers:
-        ///.
-        /// </summary>
-        public static string UPDATES_WIZARD_RESTART_OEM_MASTER {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_RESTART_OEM_MASTER", resourceCulture);
             }
         }
         
@@ -37347,24 +37236,6 @@ namespace XenAdmin {
         public static string XS_TOOLS_SR_NOT_FOUND {
             get {
                 return ResourceManager.GetString("XS_TOOLS_SR_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XenServer Embedded Edition Update Files ({0})|{0}|All files ({1})|{1}.
-        /// </summary>
-        public static string XSOEM {
-            get {
-                return ResourceManager.GetString("XSOEM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XenServer Embedded Edition Upgrade Files ({0})|{0}|All files ({1})|{1}.
-        /// </summary>
-        public static string XSREL {
-            get {
-                return ResourceManager.GetString("XSREL", resourceCulture);
             }
         }
         

@@ -8656,25 +8656,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="OBJECT_ON_SERVER" xml:space="preserve">
     <value>{0} on '{1}'</value>
   </data>
-  <data name="OEM" xml:space="preserve">
-    <value>OEM</value>
-  </data>
-  <data name="OEM_MACHINE_SERIAL_NUMBER" xml:space="preserve">
-    <value>Server serial number</value>
-  </data>
-  <data name="OEM_MACHINE_SERVICE_TAG" xml:space="preserve">
-    <value>Server service tag</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION" xml:space="preserve">
-    <value>The software on this server is out of date. Click here for more details</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT" xml:space="preserve">
-    <value>The software on this server does not contain the following updates:
-{0}</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE" xml:space="preserve">
-    <value>Outdated software - {0}</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -8686,12 +8667,6 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="ONE_VM_SELECTED" xml:space="preserve">
     <value>1 VM selected</value>
-  </data>
-  <data name="ONLY_IN_BOSTON_OR_LATER" xml:space="preserve">
-    <value>This feature is only available in XenServer 6.0 or later</value>
-  </data>
-  <data name="ONLY_IN_COWLEY_OR_LATER" xml:space="preserve">
-    <value>This feature is only available in XenServer 5.6 Feature Pack 1 or later</value>
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>Only VMs using StorageLink Gateway NetApp, Dell EqualLogic or SMI-S adapters can be upgraded</value>
@@ -11107,12 +11082,6 @@ Verify that the file is a valid xensearch export.</value>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>The {0} storage repository is broken.</value>
   </data>
-  <data name="UPDATES_WIZARD_BROWSE_EMBEDDED" xml:space="preserve">
-    <value>Select embedded update to install</value>
-  </data>
-  <data name="UPDATES_WIZARD_BROWSE_RETAIL" xml:space="preserve">
-    <value>Select retail update to install</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>Unable to download update from '{0}': no longer connected.
 
@@ -11281,14 +11250,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_AGENT" xml:space="preserve">
     <value>Restart agent</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM" xml:space="preserve">
-    <value>Reboot these embedded edition servers:
-</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM_MASTER" xml:space="preserve">
-    <value>Reboot the embedded edition server '{0}' and apply any updates to these servers:
-</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
     <value>Reboot these servers:
@@ -12895,12 +12856,6 @@ Are you sure you want to enable automated power management for this Host?</value
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>License Upgrade Required</value>
-  </data>
-  <data name="XSOEM" xml:space="preserve">
-    <value>XenServer Embedded Edition Update Files ({0})|{0}|All files ({1})|{1}</value>
-  </data>
-  <data name="XSREL" xml:space="preserve">
-    <value>XenServer Embedded Edition Upgrade Files ({0})|{0}|All files ({1})|{1}</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
     <value>XenServer Update Files ({0})|{0}|All files ({1})|{1}</value>

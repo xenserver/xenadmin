@@ -8223,25 +8223,6 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>タグ '{0}' のオブジェクト</value>
   </data>
-  <data name="OEM" xml:space="preserve">
-    <value>OEM</value>
-  </data>
-  <data name="OEM_MACHINE_SERIAL_NUMBER" xml:space="preserve">
-    <value>サーバーのシリアル番号</value>
-  </data>
-  <data name="OEM_MACHINE_SERVICE_TAG" xml:space="preserve">
-    <value>サーバーのサービス タグ</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION" xml:space="preserve">
-    <value>このサーバー上のソフトウェアのバージョンが古すぎます。詳しくはここをクリックしてください</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT" xml:space="preserve">
-    <value>このサーバー上のソフトウェアに以下のアップデートが適用されていません。
-{0}</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE" xml:space="preserve">
-    <value>古いソフトウェア - {0}</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -8253,12 +8234,6 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="ONE_VM_SELECTED" xml:space="preserve">
     <value>1 項目の VM を選択</value>
-  </data>
-  <data name="ONLY_IN_BOSTON_OR_LATER" xml:space="preserve">
-    <value>この機能は、XenServer 6.0 以降でのみ使用可能です</value>
-  </data>
-  <data name="ONLY_IN_COWLEY_OR_LATER" xml:space="preserve">
-    <value>この機能は、XenServer 5.6 Feature Pack 1 以降で使用できます</value>
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>StorageLink Gateway NetApp、Dell EqualLogic、または SMI-S アダプタを使用する VM のみアップグレード可能です</value>
@@ -10566,12 +10541,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>ストレージ リポジトリ {0} との接続に問題があります。</value>
   </data>
-  <data name="UPDATES_WIZARD_BROWSE_EMBEDDED" xml:space="preserve">
-    <value>インストールする埋め込みアップデートを選択してください</value>
-  </data>
-  <data name="UPDATES_WIZARD_BROWSE_RETAIL" xml:space="preserve">
-    <value>インストールするリテール アップデートを選択してください</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>'{0}' からアップデートをダウンロードできません。接続が切断されました。
 
@@ -10737,14 +10706,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="UPDATES_WIZARD_RESTART_AGENT" xml:space="preserve">
     <value>エージェントの再起動</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM" xml:space="preserve">
-    <value>これらの埋め込みエディション サーバーを再起動:
-</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM_MASTER" xml:space="preserve">
-    <value>埋め込みエディション サーバー '{0}' を再起動して、これらのサーバーにアップデートを適用:
-</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
     <value>これらのサーバーを再起動:
@@ -12162,12 +12123,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>ライセンスをアップグレードしてください</value>
-  </data>
-  <data name="XSOEM" xml:space="preserve">
-    <value>XenServer Embedded Edition アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
-  </data>
-  <data name="XSREL" xml:space="preserve">
-    <value>XenServer Embedded Edition アップグレード ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
     <value>XenServer アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>

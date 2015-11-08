@@ -92,11 +92,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;
                     break;
-                case UpdateType.NewOem:
-                    ManualRadioButton.Checked = true;
-                    AutomaticRadioButton.Enabled = false;
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeNewOem(SelectedServers);
-                    break;
                 case UpdateType.NewSuppPack:
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;

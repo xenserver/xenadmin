@@ -152,15 +152,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
             switch (type)
             {
-                case UpdateType.NewOem:
-                    if (!host.isOEM)
-                        row.Enabled = false;
-                    disableNotApplicableHosts(row, selectedHosts, host);
-                    break;
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    if (host.isOEM)
-                        row.Enabled = false;
                     disableNotApplicableHosts(row, selectedHosts, host);
                     break;
                 case UpdateType.NewSuppPack:

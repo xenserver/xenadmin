@@ -119,18 +119,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 actionManualMode = null;
                 actionsWorker = null;
-                oemWorker = null;
                 return;
             }
           
-            if (SelectedUpdateType == UpdateType.NewOem)
-            {
-                InstallOEMUpdates();
-                return;
-            }
-
-            //if we reach here it's either UpdateType.NewRetail, UpdateType.Existing or UpdateType.NewSuppPack
-
             if (!IsAutomaticMode)
             {
                 if (SelectedUpdateType != UpdateType.NewSuppPack)
@@ -195,107 +186,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             actionsWorker.RunWorkerAsync(planActions);
         }
         
-        #region oem
-
-        private BackgroundWorker oemWorker = null;
-        private void InstallOEMUpdates()
-        {
-            List<AsyncAction> actions = new List<AsyncAction>();
-            progressBar.Maximum = SelectedMasters.Count * 100;
-            //Upload the patches using patch-upload to the master
-            foreach (Host selectedServer in SelectedMasters)
-            {
-                AsyncAction action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatch);
-                actions.Add(action);
-            }
-
-            oemWorker = new BackgroundWorker();
-            oemWorker.WorkerReportsProgress = true;
-            oemWorker.DoWork += new DoWorkEventHandler(oemWorker_DoWork);
-            oemWorker.ProgressChanged += new ProgressChangedEventHandler(oemWorker_ProgressChanged);
-            oemWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(oemWorker_RunWorkerCompleted);
-            oemWorker.RunWorkerAsync(actions);
-        }
-
-        private void oemWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Exception exception = e.Result as Exception;
-            if (exception == null)
-            {
-                labelTitle.Text = string.Format(Messages.UPDATE_WAS_SUCCESSFULLY_INSTALLED, Messages.OEM);
-                pictureBox1.Image = null;
-                labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
-            }
-            else
-            {
-                labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, Messages.OEM);
-                string errorMessage = string.Format("\r\n{0}", exception.Message);
-                textBoxLog.Text += errorMessage;
-                labelError.Text = errorMessage;
-                pictureBox1.Image = SystemIcons.Error.ToBitmap();
-                panel1.Visible = true;
-            }
-            _nextEnabled = true;
-            _cancelEnabled = false;
-            _thisPageHasBeenCompleted = true;
-            OnPageUpdated();
-        }
-
-        private void oemWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (e.ProgressPercentage == 0)
-            {
-                AsyncAction action = (AsyncAction)e.UserState;
-                textBoxLog.Text += string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, Messages.OEM,
-                                               action.Host.Name);
-            }
-            else if (e.ProgressPercentage == 1)
-                textBoxLog.Text += string.Format("{0}\r\n", Messages.DONE);
-
-        }
-
-        private AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-        private int oemActionsDone = 0;
-        private void oemWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            List<AsyncAction> actions = (List<AsyncAction>)e.Argument;
-            for (int i = 0; i < actions.Count; i++)
-            {
-                AsyncAction currentAction = actions[i];
-                oemWorker.ReportProgress(0, currentAction);
-                currentAction.Changed += PatchingWizard_PatchingPage_Changed;
-                currentAction.Completed += PatchingWizard_PatchingPage_Completed;
-                currentAction.RunAsync();
-                autoResetEvent.WaitOne();
-                try
-                {
-                    string result = currentAction.Result;
-                    oemWorker.ReportProgress(1, currentAction);
-                }
-                catch (Exception except)
-                {
-                    e.Result = except;
-                    return;
-                }
-                oemActionsDone++;
-            }
-
-
-        }
-
-        private void PatchingWizard_PatchingPage_Completed(ActionBase sender)
-        {
-            autoResetEvent.Set();
-        }
-
-        private void PatchingWizard_PatchingPage_Changed(ActionBase sender)
-        {
-            AsyncAction action = (AsyncAction)sender;
-            Program.Invoke(Program.MainWindow, delegate { progressBar.Value = oemActionsDone * 100 + action.PercentComplete; });
-        }
-
-        #endregion
-
         #region manual_mode
 
         private void action_Completed(ActionBase sender)
@@ -411,8 +301,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             List<XenRef<VM>> runningVMs = RunningVMs(host, patch);
 
-            if (!host.isOEM)
-                actions.Add(new ApplyPatchPlanAction(host, patch));
+            actions.Add(new ApplyPatchPlanAction(host, patch));
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
             {

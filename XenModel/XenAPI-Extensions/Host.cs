@@ -722,14 +722,6 @@ namespace XenAPI
             }
         }
 
-        public bool isOEM
-        {
-            get
-            {
-                return software_version.ContainsKey("oem_build_number");
-            }
-        }
-
         public bool HasCrashDumps
         {
             get

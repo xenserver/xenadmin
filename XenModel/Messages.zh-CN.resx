@@ -8225,25 +8225,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>带标记“{0}”的对象</value>
   </data>
-  <data name="OEM" xml:space="preserve">
-    <value>OEM</value>
-  </data>
-  <data name="OEM_MACHINE_SERIAL_NUMBER" xml:space="preserve">
-    <value>服务器序列号</value>
-  </data>
-  <data name="OEM_MACHINE_SERVICE_TAG" xml:space="preserve">
-    <value>服务器服务标记</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION" xml:space="preserve">
-    <value>该服务器上的软件已过期。请单击此处了解更多详细信息</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT" xml:space="preserve">
-    <value>该服务器上的软件不包含以下更新:
-{0}</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE" xml:space="preserve">
-    <value>过期软件 - {0}</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>确定</value>
   </data>
@@ -8255,12 +8236,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="ONE_VM_SELECTED" xml:space="preserve">
     <value>已选择 1 个 VM</value>
-  </data>
-  <data name="ONLY_IN_BOSTON_OR_LATER" xml:space="preserve">
-    <value>该功能仅在 XenServer 6.0 或更高版本中提供</value>
-  </data>
-  <data name="ONLY_IN_COWLEY_OR_LATER" xml:space="preserve">
-    <value>此功能仅在 XenServer 5.6 Feature Pack 1 或更高版本中提供</value>
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>仅能升级使用 StorageLink Gateway NetApp、Dell EqualLogic 或 SMI-SOnly 适配器的 VM</value>
@@ -10568,12 +10543,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0} 存储库已损坏。</value>
   </data>
-  <data name="UPDATES_WIZARD_BROWSE_EMBEDDED" xml:space="preserve">
-    <value>选择要安装的嵌入更新</value>
-  </data>
-  <data name="UPDATES_WIZARD_BROWSE_RETAIL" xml:space="preserve">
-    <value>选择要安装的零售更新</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>无法从 {0} 中下载更新: 连接已断开。
 
@@ -10739,14 +10708,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="UPDATES_WIZARD_RESTART_AGENT" xml:space="preserve">
     <value>重新启动代理</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM" xml:space="preserve">
-    <value>重新启动这些 Embedded Edition 服务器:
-</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM_MASTER" xml:space="preserve">
-    <value>重新启动 Embedded Edition 服务器“{0}”，并对这些服务器应用任何更新:
-</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
     <value>重新启动这些服务器:
@@ -12164,12 +12125,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>需要升级许可证</value>
-  </data>
-  <data name="XSOEM" xml:space="preserve">
-    <value>XenServer Embedded Edition 更新文件({0})|{0}|所有文件({1})|{1}</value>
-  </data>
-  <data name="XSREL" xml:space="preserve">
-    <value>XenServer Embedded Edition 升级文件({0})|{0}|所有文件({1})|{1}</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
     <value>XenServer 更新文件({0})|{0}|所有文件({1})|{1}</value>
