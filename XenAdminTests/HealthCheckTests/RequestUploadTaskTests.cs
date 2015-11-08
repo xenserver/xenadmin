@@ -49,7 +49,7 @@ namespace XenAdminTests.HealthCheckTests
     public class RequestUploadTaskTests : DatabaseTester_TestFixture
     {
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
-        private const string dbName = "state1.xml";
+        private const string dbName = "TampaTwoHostPoolSelectioniSCSI.xml";
         public RequestUploadTaskTests() : base(dbName) { }
         private static string UUID = "test-test";
 

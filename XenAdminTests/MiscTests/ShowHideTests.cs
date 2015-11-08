@@ -47,7 +47,7 @@ namespace XenAdminTests.MiscTests
     public class ShowHideTests : MainWindowLauncher_TestFixture
     {
         public ShowHideTests()
-            : base(true, "state4.xml")
+            : base(true, "TampaTwoHostPoolSelectioniSCSI.xml")
         { }
 
         private ComparableList<IXenObject> Populate()

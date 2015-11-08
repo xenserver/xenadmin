@@ -1276,9 +1276,10 @@
 			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="8" />
 			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="9" />
       <ToolStripItem Text="&amp;Export..." IsSeparator="False" Bold="False" Available="True" Index="10" />
-      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="11" />
-			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="12" />
-			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="13" />
+      <ToolStripItem Text="Assign to vA&amp;pp" IsSeparator="False" Bold="False" Available="True" Index="11" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="12" />
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="13" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="14" />
 		</ToolStripItems>
 	</Test>
 	<Test>
@@ -1321,10 +1322,11 @@
 			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="8" />
 			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="9" />
       <ToolStripItem Text="&amp;Export..." IsSeparator="False" Bold="False" Available="True" Index="10" />
-      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="11" />
-			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="12" />
-			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="13" />
-			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="14" />
+      <ToolStripItem Text="Assign to vA&amp;pp" IsSeparator="False" Bold="False" Available="True" Index="11" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="12" />
+			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="13" />
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="14" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="15" />
 		</ToolStripItems>
 	</Test>
 	<Test>
@@ -1341,9 +1343,10 @@
 			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="5" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="6" />
 			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="7" />
-			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="8" />
-			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="9" />
-			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+      <ToolStripItem Text="Assign to vA&amp;pp" IsSeparator="False" Bold="False" Available="True" Index="8" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="9" />
+			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="11" />
 		</ToolStripItems>
 	</Test>
 	<Test>
@@ -1451,10 +1454,11 @@
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
 			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="5" />
       <ToolStripItem Text="&amp;Export..." IsSeparator="False" Bold="False" Available="True" Index="6" />
-      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="7" />
-			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="8" />
-			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="9" />
-			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+      <ToolStripItem Text="Assign to vA&amp;pp" IsSeparator="False" Bold="False" Available="True" Index="7" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="8" />
+			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="9" />
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="11" />
 		</ToolStripItems>
 	</Test>
 	<Test>

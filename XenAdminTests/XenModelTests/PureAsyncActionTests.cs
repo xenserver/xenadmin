@@ -45,14 +45,13 @@ namespace XenAdminTests.XenModelTests
     [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class PureAsyncActionTests : ActionTestBase
     {
-
-
         readonly AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
         [Test]
         public void VMTestPureAsyncAction()
         {
-
             mockProxy.Setup(x => x.vmpp_archive_now(It.IsAny<string>(), "testvm")).Returns(new Response<string>(""));
+            mockProxy.Setup(x => x.task_add_to_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
+            mockProxy.Setup(x => x.task_remove_from_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
             VM vm = GetVM();
             SetupPureAsyncAction(vm);
             //Async call pure async action extra setups needed
@@ -104,8 +103,9 @@ namespace XenAdminTests.XenModelTests
         [Test]
         public void ShutdownVMPureAsyncActionTest()
         {
-
             mockProxy.Setup(x => x.async_vm_clean_shutdown(It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
+            mockProxy.Setup(x => x.task_add_to_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
+            mockProxy.Setup(x => x.task_remove_from_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
             VM vm = GetVM();
             SetupPureAsyncAction(vm);
             ExtraAsyncMethodsSetup();

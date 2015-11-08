@@ -44,7 +44,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
     public class PropertiesDialogTest_Pool : VerticallyTabbedDialogTest<PropertiesDialog>
     {
         public PropertiesDialogTest_Pool()
-            : base(new string[] { "General", "Custom Fields", "Email Options"})
+            : base(new string[] { "General", "Custom Fields", "Email Options", "Power On"})
         { }
 
         protected override PropertiesDialog NewDialog()
@@ -57,7 +57,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
     public class PropertiesDialogTest_Host : VerticallyTabbedDialogTest<PropertiesDialog>
     {
         public PropertiesDialogTest_Host()
-            : base(new string[] { "General", "Custom Fields", "Alerts", "Multipathing", "Log Destination"})
+            : base(new string[] { "General", "Custom Fields", "Alerts", "Multipathing", "Power On", "Log Destination"})
         { }
 
         protected override PropertiesDialog NewDialog()
@@ -71,7 +71,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
     {
         public PropertiesDialogTest_VM_HVM()
             : base(new string[] { "General", "Custom Fields", "CPU and Memory",
-                "Boot Options", "Start Options", "Alerts",  "Home Server", "Advanced Options" })
+                "Boot Options", "Start Options", "Alerts",  "Home Server", "GPU", "Advanced Options" })
         { }
 
         private bool IsHVM(VM vm)
@@ -123,7 +123,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
     {
         public PropertiesDialogTest_UserTemplate_HVM()
             : base(new string[] { "General", "Custom Fields", "CPU and Memory",
-                "Boot Options", "Start Options", "Alerts", "Home Server", "Advanced Options" })
+                "Boot Options", "Start Options", "Alerts", "Home Server", "GPU", "Advanced Options" })
         { }
 
         private bool IsHVM(VM vm)

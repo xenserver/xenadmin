@@ -87,22 +87,6 @@ namespace XenAdminTests.CommandTests
     }
 
     [TestFixture, Category(TestCategories.UICategoryA)]
-    public class VMLifecycleCommandRbacTestGeorge : MainWindowLauncher_TestFixture
-    {
-        public VMLifecycleCommandRbacTestGeorge()
-            : base(true, CommandTestsDatabase.George)
-        { }
-
-        [Test]
-        public void Run()
-        {
-            VMLifecycleCommandTest tester = new VMLifecycleCommandTest();
-            tester.TestRbacGeorge();
-        }
-
-    }
-
-    [TestFixture, Category(TestCategories.UICategoryA)]
     public class VMLifecycleCommandRbacTestMidnightRide : MainWindowLauncher_TestFixture
     {
         public VMLifecycleCommandRbacTestMidnightRide()
@@ -193,19 +177,6 @@ namespace XenAdminTests.CommandTests
                       });
             }
         }
-
-        public void TestRbacGeorge()
-        {
-            foreach (SelectedItemCollection selection in RunTest(GetRbacSelections()))
-            {
-                foreach (VM vm in selection.AsXenObjects<VM>())
-                {
-                    MW(MainWindowWrapper.VMMenuItems.StartShutdownMenuItems.ForceShutdownToolStripMenuItem.PerformClick);
-                    MWWaitFor(() => vm.power_state == vm_power_state.Halted, "VM " + vm + " didn't shutdown.");
-                }
-            }
-        }
-
 
         public void TestRbacMidnightRide()
         {

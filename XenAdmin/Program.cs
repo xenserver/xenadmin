@@ -227,6 +227,7 @@ namespace XenAdmin
             ConnectionsManager.XenConnections.Clear();
             ConnectionsManager.History.Clear();
 
+            Search.InitSearch();
             TreeSearch.InitSearch();
             
             ArgType argType = ArgType.None;

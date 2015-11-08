@@ -126,8 +126,6 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         [TestCase("6.0.2", "XS62E006.xsupdate", Description = "Sanibel")]
         [TestCase("6.0.0", "XS60E001.xsupdate;XS62E006.xsupdate", Description = "Boston")]
-        [TestCase("5.6.100", "XS56EFP1002.xsupdate", Description = "Cowley")]
-        [TestCase("5.6.0", "XS56E008.xsupdate", Description = "MNR")]
         public void TestProductVersionNumbersWithHotfixes(string productVersion, string filenames)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
@@ -151,9 +149,6 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         [TestCase("6.0.2", Description = "Sanibel",  Result = true)]
         [TestCase("6.0.0", Description = "Boston", Result = true)]
-        [TestCase("5.6.100", Description = "Cowley", Result = true)]
-        [TestCase("5.6.0", Description = "MNR", Result = true)]
-        [TestCase("3.0.0", Description = "Burbank", Result = false)]
         public bool TestIsHotfixRequiredBasedOnProductVersion(string productVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);

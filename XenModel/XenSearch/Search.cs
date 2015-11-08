@@ -695,6 +695,16 @@ namespace XenAdmin.XenSearch
             }
         }
 
+        public static void InitSearch()
+        {
+            searches = new Dictionary<String, Search>();
+
+            InitDefaultSearches();
+
+            ConnectionsManager.XenConnections.CollectionChanged += CollectionChanged;
+            SynchroniseSearches();
+        }
+        
         private static void CollectionChanged(Object sender, System.ComponentModel.CollectionChangeEventArgs e)
         {
             //InvokeHelper.AssertOnEventThread();

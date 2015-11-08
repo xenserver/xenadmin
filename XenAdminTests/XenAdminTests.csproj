@@ -342,9 +342,6 @@
     <Compile Include="TabsAndMenus\MainMenuGeorge.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TabsAndMenus\MainMenuMidnightRide.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="TabsAndMenus\PluginTabsAndMenus.cs">
       <SubType>Code</SubType>
     </Compile>

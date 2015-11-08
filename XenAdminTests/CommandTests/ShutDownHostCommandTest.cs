@@ -72,21 +72,6 @@ namespace XenAdminTests.CommandTests
     }
 
     [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
-    public class ShutDownHostCommandTestRbacGeorge : MainWindowLauncher_TestFixture
-    {
-        public ShutDownHostCommandTestRbacGeorge()
-            : base(true, CommandTestsDatabase.George)
-        { }
-
-        [Test]
-        public void Run()
-        {
-            ShutDownHostCommandTest tester = new ShutDownHostCommandTest();
-            tester.Test();
-        }
-    }
-
-    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ShutDownHostCommandTestRbacMidnightRide : MainWindowLauncher_TestFixture
     {
         public ShutDownHostCommandTestRbacMidnightRide()

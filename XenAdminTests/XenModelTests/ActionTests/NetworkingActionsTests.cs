@@ -42,7 +42,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
         private AutoResetEvent AutoResetEvent = new AutoResetEvent(false);
         private int networks;
         private Network newNetwork;
-        private const string dbName = "state1.xml";
+        private const string dbName = "TampaTwoHostPoolSelectioniSCSI.xml";
 
         public NetworkingTests() : base(dbName){}
 
