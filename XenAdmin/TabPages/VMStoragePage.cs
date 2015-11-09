@@ -55,7 +55,6 @@ namespace XenAdmin.TabPages
         private readonly ContextMenu _TheContextMenu = new ContextMenu();
         private readonly DataGridViewColumn storageLinkColumn;
 
-        private bool QoSRestricted = false;
         private VM vm;
 
         public VMStoragePage()

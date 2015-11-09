@@ -62,7 +62,6 @@ namespace XenAdmin.Dialogs
         private VMHAEditPage VMHAEditPage;
         private GeneralEditPage GeneralEditPage;
         private UpsellPage PerfmonAlertUpsellEditPage;
-        private UpsellPage VMHAUpsellEditPage;
         private UpsellPage PerfmonAlertOptionsUpsellEditPage;
         private PerfmonAlertOptionsPage PerfmonAlertOptionsEditPage;
         private HostPowerONEditPage HostPowerONEditPage;

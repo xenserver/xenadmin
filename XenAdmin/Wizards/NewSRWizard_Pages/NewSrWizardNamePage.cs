@@ -39,8 +39,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 {
     public partial class NewSrWizardNamePage : XenTabPage
     {
-        private readonly Regex _nameRegex = new Regex(@"^[a-zA-Z0-9\ \(\)\-_]+$");
-
         public NewSrWizardNamePage()
         {
             InitializeComponent();

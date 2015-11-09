@@ -52,7 +52,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
     {
         #region Private fields
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private ReadOnlyCollection<CslgSystemStorage> _storages;
         private SR _srToReattach;
         private bool _disasterRecoveryTask;
         private int _storageSystemComboLastSelectedIndex = -1;
