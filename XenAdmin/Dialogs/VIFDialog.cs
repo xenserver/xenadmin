@@ -274,7 +274,7 @@ namespace XenAdmin.Dialogs
         /// <returns></returns>
         public Proxy_VIF GetNewSettings()
         {
-            Proxy_VIF proxyVIF = new Proxy_VIF();
+            Proxy_VIF proxyVIF = ExistingVif != null ? ExistingVif.ToProxy() : new Proxy_VIF();
             proxyVIF.network = new XenRef<XenAPI.Network>(SelectedNetwork.opaque_ref);
             proxyVIF.MAC = SelectedMac;
             proxyVIF.device = Device.ToString();
