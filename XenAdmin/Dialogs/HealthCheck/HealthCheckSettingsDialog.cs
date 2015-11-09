@@ -335,6 +335,15 @@ namespace XenAdmin.Dialogs.HealthCheck
                         if (elevatedSession != null && (elevatedSession.IsLocalSuperuser || SessionAuthorized(elevatedSession, Role.ValidRoleList("pool.set_health_check_config", connection))))
                             passedRbacChecks = true;
                     }
+                    catch (Failure f)
+                    {
+                        if (f.ErrorDescription.Count > 0 && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                        {
+                            // we use a different error message here from the standard one in friendly names
+                            throw new Exception(Messages.HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT);
+                        }
+                        throw;
+                    }
                     finally
                     {
                         if (elevatedSession != null)
