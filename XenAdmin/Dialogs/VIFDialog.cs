@@ -278,8 +278,6 @@ namespace XenAdmin.Dialogs
             proxyVIF.network = new XenRef<XenAPI.Network>(SelectedNetwork.opaque_ref);
             proxyVIF.MAC = SelectedMac;
             proxyVIF.device = Device.ToString();
-            if (ExistingVif != null)
-                proxyVIF.VM = ExistingVif.VM.opaque_ref;
 
             if (checkboxQoS.Checked)
             {
