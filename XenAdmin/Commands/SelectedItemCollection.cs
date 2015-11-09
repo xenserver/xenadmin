@@ -39,7 +39,6 @@ using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Network.StorageLink;
 
 namespace XenAdmin.Commands
 {
@@ -348,17 +347,6 @@ namespace XenAdmin.Commands
             get
             {
                 return First is GroupingTag;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the first item is a StorageLink object.
-        /// </summary>
-        public bool FirstIsStorageLink
-        {
-            get
-            {
-                return First is IStorageLinkObject;
             }
         }
 

@@ -145,9 +145,7 @@ namespace XenAdmin.Dialogs
         private void pictureBoxQuiesceInfo_Click(object sender, EventArgs e)
         {
             string tt;
-            if (!Helpers.MidnightRideOrGreater(_VM.Connection))
-                tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL, Messages.QUIESCED_SNAPSHOTS);
-            else if (Helpers.FeatureForbidden(_VM, Host.RestrictVss))
+            if (Helpers.FeatureForbidden(_VM, Host.RestrictVss))
                 tt = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_QUIESCE_MODE_POWER_STATE.Replace("\\n", "\n");
@@ -176,9 +174,7 @@ namespace XenAdmin.Dialogs
         private void CheckpointInfoPictureBox_Click(object sender, EventArgs e)
         {
             string tt;
-            if (!Helpers.MidnightRideOrGreater(_VM.Connection))
-                tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL.Replace("\\n", "\n"), Messages.DISKMEMORY_SNAPSHOTS);
-            else if (Helpers.FeatureForbidden(_VM, Host.RestrictCheckpoint))
+            if (Helpers.FeatureForbidden(_VM, Host.RestrictCheckpoint))
                 tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL.Replace("\\n", "\n"), Messages.DISKMEMORY_SNAPSHOTS);
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_DISKMEMORY_MODE_POWER_STATE.Replace("\\n", "\n");

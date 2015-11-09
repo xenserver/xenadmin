@@ -45,7 +45,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
     public partial class CslgSettings : XenTabPage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private IStorageLinkObject _storageLinkObject;
 
         private const string CHAPUSER = "chapuser";
         private const string CHAPPASSWORD = "chappassword";
@@ -58,11 +57,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public CslgSettings()
         {
             InitializeComponent();
-        }
-
-        public void SetStorageLinkObject(IStorageLinkObject storageLinkObject)
-        {
-            _storageLinkObject = storageLinkObject;
         }
 
         private void UpdateStoragePoolSpaceLabel()
@@ -251,16 +245,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     comboBoxStoragePool.Items.Add(pool);
             }
 
-            // if a storage-pool was selected in the main tree when the wizard was launched, then select that pool by default.
-            var storagePool = _storageLinkObject as StorageLinkPool;
-
-            if (storagePool != null)
-            {
-                comboBoxStoragePool.SelectedItem =
-                    Util.PopulateList<CslgStoragePool>(comboBoxStoragePool.Items).Find(
-                        s => s.StoragePoolId == storagePool.opaque_ref);
-            }
-
             if (comboBoxStoragePool.Items.Count > 0 && comboBoxStoragePool.SelectedIndex < 0)
                 comboBoxStoragePool.SelectedIndex = 0;
 
@@ -269,14 +253,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if (SystemStorage != null)
             {
-                if (SystemStorage.StorageLinkSystem != null)
-                {
-                    checkBoxShowAll.Visible = (SystemStorage.StorageLinkSystem.Capabilities & StorageLinkEnums.StorageSystemCapabilities.STORAGE_POOL_CLEANUP) != 0;
-                }
-                else
-                {
-                    checkBoxShowAll.Visible = true;
-                }
+                checkBoxShowAll.Visible = true;
 
                 foreach (CslgParameter protocol in SystemStorage.Protocols)
                     comboBoxProtocol.Items.Add(protocol);

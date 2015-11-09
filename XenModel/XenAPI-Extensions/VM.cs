@@ -544,6 +544,9 @@ namespace XenAPI
             other_config = new_other_config;
         }
 
+        // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
+        // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
+        // able to recognise it, and turn it off during Rolling Pool Upgrade.
         public bool AutoPowerOn
         {
             get
@@ -1215,17 +1218,12 @@ namespace XenAPI
 
         /// <summary>
         /// An enum-ified version of ha_restart_priority: use this one instead.
-        /// For pre-Boston VMs: If this VM is running and ha-always-run is false, returns DoNotRestart regardless of the underlying ha_restart_priority. 
         /// NB setting this property does not change ha-always-run.
         /// </summary>
         public HA_Restart_Priority HARestartPriority
         {
             get
             {
-                if (this.power_state == vm_power_state.Running && !this.ha_always_run && !Helpers.BostonOrGreater(this.Connection))
-                {
-                    return HA_Restart_Priority.DoNotRestart;
-                }
                 return StringToPriority(this.ha_restart_priority);
             }
             set
@@ -1285,15 +1283,7 @@ namespace XenAPI
         public static List<HA_Restart_Priority> GetAvailableRestartPriorities(IXenConnection connection)
         {
             var restartPriorities = new List<HA_Restart_Priority>();
-            if (connection == null || Helpers.BostonOrGreater(connection))
-            {
-                restartPriorities.Add(HA_Restart_Priority.Restart);
-            }
-            else
-            {
-                restartPriorities.Add(HA_Restart_Priority.AlwaysRestartHighPriority);
-                restartPriorities.Add(HA_Restart_Priority.AlwaysRestart);
-            }
+            restartPriorities.Add(HA_Restart_Priority.Restart);
             restartPriorities.Add(HA_Restart_Priority.BestEffort);
             restartPriorities.Add(HA_Restart_Priority.DoNotRestart);
             return restartPriorities;
@@ -1310,16 +1300,12 @@ namespace XenAPI
 
         public static bool HaPriorityIsRestart(IXenConnection connection, HA_Restart_Priority haRestartPriority)
         {
-            if (Helpers.BostonOrGreater(connection))
-                return haRestartPriority == HA_Restart_Priority.Restart;
-            return haRestartPriority == HA_Restart_Priority.AlwaysRestart || haRestartPriority == HA_Restart_Priority.AlwaysRestartHighPriority;
+            return haRestartPriority == HA_Restart_Priority.Restart;
         }
 
         public static HA_Restart_Priority HaHighestProtectionAvailable(IXenConnection connection)
         {
-            if (Helpers.BostonOrGreater(connection))
-                return HA_Restart_Priority.Restart;
-            return HA_Restart_Priority.AlwaysRestart;
+            return HA_Restart_Priority.Restart;
         }
 
         public const string RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY = "0"; //only used for Pre-Boston pools
@@ -1381,7 +1367,6 @@ namespace XenAPI
 
         /// <summary>
         /// True if this VM's ha_restart_priority is not "Do not restart" and its pool has ha_enabled true.
-        /// For pre-Boston VMs: True if this VM has ha_always_run set and its pool has ha_enabled true.
         /// </summary>
         public bool HAIsProtected
         {
@@ -1392,37 +1377,17 @@ namespace XenAPI
                 Pool myPool = Helpers.GetPoolOfOne(Connection);
                 if (myPool == null)
                     return false;
-                if (Helpers.BostonOrGreater(Connection))
-                    return myPool.ha_enabled && this.HARestartPriority != HA_Restart_Priority.DoNotRestart;
-                return myPool.ha_enabled && this.ha_always_run;
+                return myPool.ha_enabled && this.HARestartPriority != HA_Restart_Priority.DoNotRestart;
             }
         }
 
         /// <summary>
-        /// Calls set_ha_restart_priority and set_ha_always_run as appropriate.
+        /// Calls set_ha_restart_priority
         /// </summary>
         /// <param name="priority"></param>
         public static void SetHaRestartPriority(Session session, VM vm, HA_Restart_Priority priority)
         {
-            if (priority == HA_Restart_Priority.DoNotRestart)
-            {
-                // We must avoid the invalid state of ha_always_run==true, ha_restart_priority==DoNotRestart
-                if (!Helpers.BostonOrGreater(vm.Connection))
-                    VM.set_ha_always_run(session, vm.opaque_ref, false);
-
-                VM.set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
-            }
-            else
-            {
-                // Set new VM restart priority
-                VM.set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
-
-                if (!Helpers.BostonOrGreater(vm.Connection))
-                {
-                    // If VM is running, set ha_always_run to true to activate HA protection
-                    VM.set_ha_always_run(session, vm.opaque_ref, vm.power_state == vm_power_state.Running);
-                }
-            }
+            VM.set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
         }
 
         public bool AnyDiskFastClonable
@@ -1584,11 +1549,6 @@ namespace XenAPI
             get
             {
                 if (DefaultTemplate)
-                {
-                    return false;
-                }
-
-                if (!Helpers.MidnightRideOrGreater(Connection))
                 {
                     return false;
                 }

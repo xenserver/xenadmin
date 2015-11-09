@@ -82,20 +82,7 @@ namespace XenAdmin.Commands
             // We just want one, so that we can name it.
             PIF pif = pifs[0];
 
-            string new_name;
-            string msg;
-            if (network != null && !Helpers.BostonOrGreater(network.Connection) && network.Connection.ResolveAll(network.VIFs).Count > 0)
-            {
-                // We have a live pre-Boston network.  Tell the user that we're going to rename it.
-                new_name = Helpers.MakeUniqueName(Messages.RENAMED_BOND, GetAllNetworkNames(network.Connection));
-                msg = string.Format(Messages.DELETE_BOND_WITH_VIFS_MESSAGE, pif.Name, new_name);
-            }
-            else
-            {
-                // It's not in use -- delete the network as well as the bonds and PIFs.
-                new_name = null;
-                msg = string.Format(Messages.DELETE_BOND_MESSAGE, pif.Name);
-            }
+            string msg = string.Format(Messages.DELETE_BOND_MESSAGE, pif.Name);
 
             bool will_disturb_primary = NetworkingHelper.ContainsPrimaryManagement(pifs);
             bool will_disturb_secondary = NetworkingHelper.ContainsSecondaryManagement(pifs);
@@ -147,7 +134,7 @@ namespace XenAdmin.Commands
             // done the right thing and that the bond hasn't been deleted in the meantime. (CA-27436).
             Bond bond = pif.BondMasterOf;
             if (bond != null)
-                new Actions.DestroyBondAction(bond, new_name).RunAsync();
+                new Actions.DestroyBondAction(bond).RunAsync();
         }
     }
 }

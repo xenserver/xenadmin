@@ -36,7 +36,6 @@ using XenAdmin.Network;
 using System.Collections;
 using XenAPI;
 using XenAdmin.Core;
-using XenAdmin.Network.StorageLink;
 
 // I think this is more complicated then it needs to be. Rather than have three different types of nodes,
 // depending on the grouping of the next level, we should just have one type of node and do something like
@@ -99,19 +98,6 @@ namespace XenAdmin.XenSearch
                     disconnectedHost.Connection = connection;
 
                     group.FilterAdd(search.Query, disconnectedHost);
-                }
-            }
-
-            if (Search.GetStorageLinkConnectionsCopy != null)
-            {
-                List<StorageLinkConnection> storageLinkConnections = Search.GetStorageLinkConnectionsCopy();
-                foreach (StorageLinkConnection storageLinkConnection in storageLinkConnections)
-                {
-                    foreach (IXenObject o in storageLinkConnection.Cache.XenSearchableObjects(ConnectionsManager.XenConnectionsCopy))
-                    {
-                        if (!Hide(o))
-                            group.FilterAdd(search.Query, o);
-                    }
                 }
             }
         }

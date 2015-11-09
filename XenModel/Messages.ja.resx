@@ -1112,9 +1112,6 @@
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>カスタム フィールド '{0}' を追加します</value>
   </data>
-  <data name="ADD_HOST" xml:space="preserve">
-    <value>追加...</value>
-  </data>
   <data name="ADD_HOST_TO_POOL_AD_MESSAGE" xml:space="preserve">
     <value>Active Directory 認証が使用されるプールにサーバー '{0}' を追加します。プール内のすべてのメンバで同じ認証方法を使用する必要があります。
 
@@ -1913,9 +1910,6 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>起動順序: {0}</value>
-  </data>
-  <data name="BOOTORDER_AUTOSTART" xml:space="preserve">
-    <value>起動順序: {0} (サーバー起動時に自動的に起動)</value>
   </data>
   <data name="BOOT_DEVICE_DISABLED_ROW_TEXT" xml:space="preserve">
     <value>VM は、以下のデバイスからは起動しません</value>
@@ -4710,9 +4704,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXTERNAL_NETWORK" xml:space="preserve">
     <value>外部ネットワーク</value>
   </data>
-  <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
-    <value>外部ネットワークを使用するには、Standard Edition のライセンスが必要です。</value>
-  </data>
   <data name="EXTERNAL_PLUGIN_BAD_EXIT" xml:space="preserve">
     <value>外部コマンドが終了しました。終了コード: {0}</value>
   </data>
@@ -4749,23 +4740,8 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} を使用するには XenServer 5.6 Feature Pack 1 以降の Enterprise Edition または Platinum Edition のライセンスが必要です。</value>
-  </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
     <value>{0} を使用するには Enterprise Edition\nまたは Platinum Edition のライセンスが必要です。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_GEORGE" xml:space="preserve">
-    <value>{0} には XenServer 5.5 またはそれ以降のバージョンが必要です</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR" xml:space="preserve">
-    <value>{0} には XenServer 5.6 またはそれ以降のバージョンが必要です</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} を使用するには XenServer 5.6 以降の Enterprise Edition\nまたは Platinum Edition のライセンスが必要です。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
-    <value>{0} には XenServer 5.6 またはそれ以降のバージョンが必要です</value>
   </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>次のセクション(&amp;N)</value>
@@ -5188,13 +5164,13 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>カスタム フィールドあり</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TEXT" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT" xml:space="preserve">
     <value>高可用性プラン</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>このプールの VM の再起動優先度、再起動順序、および起動間隔の設定</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
     <value>このプールの VM の再起動優先度の設定</value>
   </data>
   <data name="HAWIZ_SUMMARY" xml:space="preserve">
@@ -6915,18 +6891,6 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_TITLE" xml:space="preserve">
     <value>スナップショット全体の削除</value>
   </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE" xml:space="preserve">
-    <value>選択したストレージ ボリュームを削除してもよろしいですか? この操作は元に戻せません。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE" xml:space="preserve">
-    <value>StorageLink ストレージ ボリュームの削除</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE" xml:space="preserve">
-    <value>選択したストレージ ボリュームを削除してもよろしいですか? この操作は元に戻せません。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE" xml:space="preserve">
-    <value>StorageLink ストレージ ボリュームの削除</value>
-  </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
     <value>これにより、このシステム ディスクは完全に削除され、VM が起動不能になる場合があります。続行しますか?</value>
   </data>
@@ -8259,25 +8223,6 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>タグ '{0}' のオブジェクト</value>
   </data>
-  <data name="OEM" xml:space="preserve">
-    <value>OEM</value>
-  </data>
-  <data name="OEM_MACHINE_SERIAL_NUMBER" xml:space="preserve">
-    <value>サーバーのシリアル番号</value>
-  </data>
-  <data name="OEM_MACHINE_SERVICE_TAG" xml:space="preserve">
-    <value>サーバーのサービス タグ</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION" xml:space="preserve">
-    <value>このサーバー上のソフトウェアのバージョンが古すぎます。詳しくはここをクリックしてください</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT" xml:space="preserve">
-    <value>このサーバー上のソフトウェアに以下のアップデートが適用されていません。
-{0}</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE" xml:space="preserve">
-    <value>古いソフトウェア - {0}</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -8289,12 +8234,6 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="ONE_VM_SELECTED" xml:space="preserve">
     <value>1 項目の VM を選択</value>
-  </data>
-  <data name="ONLY_IN_BOSTON_OR_LATER" xml:space="preserve">
-    <value>この機能は、XenServer 6.0 以降でのみ使用可能です</value>
-  </data>
-  <data name="ONLY_IN_COWLEY_OR_LATER" xml:space="preserve">
-    <value>この機能は、XenServer 5.6 Feature Pack 1 以降で使用できます</value>
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>StorageLink Gateway NetApp、Dell EqualLogic、または SMI-S アダプタを使用する VM のみアップグレード可能です</value>
@@ -10116,119 +10055,11 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>サーバーの状態レポートのパッケージ化時にエラーが発生しました。一部のレポートが作成されていない場合があります</value>
   </data>
-  <data name="STORAGELINKPOOL" xml:space="preserve">
-    <value>StorageLink ストレージ プール</value>
-  </data>
-  <data name="STORAGELINKPOOLS" xml:space="preserve">
-    <value>StorageLink ストレージ プール</value>
-  </data>
-  <data name="STORAGELINKPOOL_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>ストレージ プールの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKREPOSITORY_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>ストレージ リポジトリの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKSERVER" xml:space="preserve">
-    <value>StorageLink サーバー</value>
-  </data>
-  <data name="STORAGELINKSERVERS" xml:space="preserve">
-    <value>StorageLink サーバー</value>
-  </data>
-  <data name="STORAGELINKSERVER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>StorageLink サーバーの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKSRS" xml:space="preserve">
-    <value>StorageLink ストレージ リポジトリ</value>
-  </data>
-  <data name="STORAGELINKSYSTEM" xml:space="preserve">
-    <value>StorageLink ストレージ システム</value>
-  </data>
-  <data name="STORAGELINKSYSTEMS" xml:space="preserve">
-    <value>StorageLink ストレージ システム</value>
-  </data>
-  <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>ストレージ システムの全般プロパティ</value>
-  </data>
-  <data name="STORAGELINKVOLUME" xml:space="preserve">
-    <value>StorageLink ストレージ ボリューム</value>
-  </data>
-  <data name="STORAGELINKVOLUMES" xml:space="preserve">
-    <value>StorageLink ストレージ ボリューム</value>
-  </data>
-  <data name="STORAGELINK_GATEWAY" xml:space="preserve">
-    <value>StorageLink Gateway</value>
-  </data>
-  <data name="STORAGELINK_IN_USE" xml:space="preserve">
-    <value>ストレージ システムの使用</value>
-  </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{1} の {0} 空き</value>
   </data>
-  <data name="STORAGELINK_POOL_SIZE_USED" xml:space="preserve">
-    <value>{0} 使用 / {1} 合計</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>ファイバ チャネル</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION" xml:space="preserve">
-    <value>重複排除</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_NONE" xml:space="preserve">
-    <value>なし</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THICK" xml:space="preserve">
-    <value>シック</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THIN" xml:space="preserve">
-    <value>シン</value>
-  </data>
-  <data name="STORAGELINK_SCANNING_FOR_SRS" xml:space="preserve">
-    <value>'{0}' 上の SR のスキャン</value>
-  </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>再接続が必要な StorageLink Gateway SR があります。</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE" xml:space="preserve">
-    <value>複製</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT" xml:space="preserve">
-    <value>スナップショットの複製</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION" xml:space="preserve">
-    <value>重複排除</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT" xml:space="preserve">
-    <value>スナップショット</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>ファイバ チャネル</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL" xml:space="preserve">
-    <value>シック プロビジョニング</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN" xml:space="preserve">
-    <value>シン プロビジョニング</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION" xml:space="preserve">
-    <value>リモート複製</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE" xml:space="preserve">
-    <value>ボリュームのサイズ変更</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT" xml:space="preserve">
-    <value>スナップショットのスナップショット</value>
-  </data>
-  <data name="STORAGELINK_TEST_CONNECTION" xml:space="preserve">
-    <value>StorageLink サーバー {0} との接続をテストしています</value>
-  </data>
-  <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
-    <value>{0} 上の StorageLink サーバーに接続できません</value>
   </data>
   <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
     <value>StorageLink SR 状態</value>
@@ -10710,12 +10541,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>ストレージ リポジトリ {0} との接続に問題があります。</value>
   </data>
-  <data name="UPDATES_WIZARD_BROWSE_EMBEDDED" xml:space="preserve">
-    <value>インストールする埋め込みアップデートを選択してください</value>
-  </data>
-  <data name="UPDATES_WIZARD_BROWSE_RETAIL" xml:space="preserve">
-    <value>インストールするリテール アップデートを選択してください</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>'{0}' からアップデートをダウンロードできません。接続が切断されました。
 
@@ -10881,14 +10706,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="UPDATES_WIZARD_RESTART_AGENT" xml:space="preserve">
     <value>エージェントの再起動</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM" xml:space="preserve">
-    <value>これらの埋め込みエディション サーバーを再起動:
-</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM_MASTER" xml:space="preserve">
-    <value>埋め込みエディション サーバー '{0}' を再起動して、これらのサーバーにアップデートを適用:
-</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
     <value>これらのサーバーを再起動:
@@ -12306,12 +12123,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>ライセンスをアップグレードしてください</value>
-  </data>
-  <data name="XSOEM" xml:space="preserve">
-    <value>XenServer Embedded Edition アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
-  </data>
-  <data name="XSREL" xml:space="preserve">
-    <value>XenServer Embedded Edition アップグレード ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
     <value>XenServer アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>

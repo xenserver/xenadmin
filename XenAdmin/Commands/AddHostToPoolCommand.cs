@@ -166,10 +166,8 @@ namespace XenAdmin.Commands
                 foreach (Host host in _hosts)
                 {
                     // only allowed to add standalone hosts.
-                    if (Helpers.GetPool(host.Connection) != null || host.RestrictPooling)
-                    {
+                    if (Helpers.GetPool(host.Connection) != null)
                         return false;
-                    }
                 }
                 return true;
             }

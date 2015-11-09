@@ -72,7 +72,6 @@ namespace XenAdmin.Actions.Wlb
             ApiMethodsToRoleCheck.Add("pool.sync_database");
             ApiMethodsToRoleCheck.Add("pool.set_ha_host_failures_to_tolerate");
             ApiMethodsToRoleCheck.Add("vm.set_ha_restart_priority");
-            ApiMethodsToRoleCheck.Add("vm.set_ha_always_run");
 
             ApiMethodsToRoleCheck.Add("vm.assert_can_boot_here");
             ApiMethodsToRoleCheck.Add("vm.assert_agile");
@@ -405,12 +404,6 @@ namespace XenAdmin.Actions.Wlb
         /// <param name="end">progress bar end point</param>
         private static void SetHaProtection(bool protect, AsyncAction action, VM vm, int start, int end)
         {
-			if (!Helpers.BostonOrGreater(vm.Connection))
-			{
-				// Enable or disable HA protection for the VM.
-				XenAPI.VM.set_ha_always_run(action.Session, vm.opaque_ref, protect);
-			}
-
         	// Do database sync. Helps to ensure that the change persists over master failover.
             action.RelatedTask = XenAPI.Pool.async_sync_database(action.Session);
             action.PollToCompletion(start, end);

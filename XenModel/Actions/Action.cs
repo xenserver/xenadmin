@@ -206,36 +206,6 @@ namespace XenAdmin.Actions
                 VDI vdi = (VDI)xo;
                 SetAppliesTo(vdi.Connection.Resolve(vdi.SR));
             }
-            else if (xo is StorageLinkServer)
-            {
-                AppliesTo.Add(xo.opaque_ref);
-            }
-            else if (xo is StorageLinkSystem)
-            {
-                StorageLinkSystem system = (StorageLinkSystem)xo;
-                AppliesTo.Add(system.opaque_ref);
-                SetAppliesTo(system.StorageLinkServer);
-            }
-            else if (xo is StorageLinkPool)
-            {
-                StorageLinkPool pool = (StorageLinkPool)xo;
-                AppliesTo.Add(xo.opaque_ref);
-
-                if (pool.Parent == null)
-                {
-                    SetAppliesTo(pool.StorageLinkSystem);
-                }
-                else
-                {
-                    SetAppliesTo(pool.Parent);
-                }
-            }
-            else if (xo is StorageLinkVolume)
-            {
-                StorageLinkVolume volume = (StorageLinkVolume)xo;
-                AppliesTo.Add(xo.opaque_ref);
-                SetAppliesTo(volume.StorageLinkPool);
-            }
         }
 
         private string _description;

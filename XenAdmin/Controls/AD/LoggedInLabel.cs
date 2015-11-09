@@ -118,8 +118,7 @@ namespace XenAdmin.Controls
             labelLoggedInAs.Visible = true;
 
             // get the logged in username from the session to update the logged in label
-            if (connection.Session.IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(connection).external_auth_type != Auth.AUTH_TYPE_AD ||
-                !Helpers.MidnightRideOrGreater(Connection))
+            if (connection.Session.IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(connection).external_auth_type != Auth.AUTH_TYPE_AD)
             {
                 labelUsername.Text = connection.Session.UserFriendlyName;
             }

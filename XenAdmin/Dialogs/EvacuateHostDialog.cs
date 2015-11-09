@@ -813,7 +813,6 @@ namespace XenAdmin.Dialogs
             List<Role> validRoles = new List<Role>();
 
             if (!connection.Session.IsLocalSuperuser
-                && Helpers.MidnightRideOrGreater(connection)
                 && !Registry.DontSudo
                 && !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
             {

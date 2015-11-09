@@ -38,8 +38,6 @@ using XenAdmin.Network;
 using XenAPI;
 using System.Text.RegularExpressions;
 
-using XenAdmin.Network.StorageLink;
-
 namespace XenAdmin.Actions
 {
     /// <summary>
@@ -50,7 +48,6 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string _storageSystemId;
         private ReadOnlyCollection<CslgStoragePool> _cslgStoragePools;
-        private List<StorageLinkConnection> _SLConnections;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SrCslgStoragePoolScanAction"/> class.
@@ -60,14 +57,11 @@ namespace XenAdmin.Actions
         /// <param name="username">The username.</param>
         /// <param name="passwordSecret">The password secret.</param>
         /// <param name="storageSystemId">The storage system id.</param>
-        public SrCslgStoragePoolScanAction(IXenConnection connection, List<StorageLinkConnection> storageLinkConnections, string hostname, string username, string passwordSecret, string storageSystemId)
+        public SrCslgStoragePoolScanAction(IXenConnection connection, string hostname, string username, string passwordSecret, string storageSystemId)
             : base(connection, hostname, username, passwordSecret)
         {
             Util.ThrowIfStringParameterNullOrEmpty(storageSystemId, "storageSystemId");
-
             _storageSystemId = storageSystemId;
-            _SLConnections = storageLinkConnections;
-
         }
 
         private readonly string _adapterId;
@@ -132,24 +126,19 @@ namespace XenAdmin.Actions
                     provisioningTypes.Add(new CslgParameter(null, Messages.NEWSR_CSLG_DEFAULT_PROVISIONING));
                 }
 
-                if (Helpers.BostonOrGreater(Connection))
+                uint capacity = 0;
+                uint usedSpace = 0;
+                try
                 {
-                    uint capacity = 0;
-                    uint usedSpace = 0;
-                    try
-                    {
-                        capacity = UInt32.Parse(GetXmlNodeInnerText(storagePoolInfo, "sizeInMB").Trim());
-                        usedSpace = capacity - UInt32.Parse(GetXmlNodeInnerText(storagePoolInfo, "freeSpaceInMB").Trim());
-                    }
-                    catch { }
-                    
-                    StorageLinkPool storageLinkPool = new StorageLinkPool(null, storagePoolId, displayName, parentStoragePoolId, _storageSystemId, capacity, usedSpace,
-                        (StorageLinkEnums.RaidType)Enum.Parse(typeof(StorageLinkEnums.RaidType), raidTypes[0].ToUpper()),
-                        (StorageLinkEnums.ProvisioningType)Enum.Parse(typeof(StorageLinkEnums.ProvisioningType), provisioningTypes[0].Name.ToUpper()));
-                    output.Add(new CslgStoragePool(displayName, storagePoolId, raidTypes, provisioningTypes, !string.IsNullOrEmpty(parentStoragePoolId), storageLinkPool));
+                    capacity = UInt32.Parse(GetXmlNodeInnerText(storagePoolInfo, "sizeInMB").Trim());
+                    usedSpace = capacity - UInt32.Parse(GetXmlNodeInnerText(storagePoolInfo, "freeSpaceInMB").Trim());
                 }
-                else
-                    output.Add(new CslgStoragePool(displayName, storagePoolId, raidTypes, provisioningTypes, !string.IsNullOrEmpty(parentStoragePoolId), null));
+                catch { }
+                    
+                StorageLinkPool storageLinkPool = new StorageLinkPool(storagePoolId, displayName, parentStoragePoolId, _storageSystemId, capacity, usedSpace,
+                    (StorageLinkEnums.RaidType)Enum.Parse(typeof(StorageLinkEnums.RaidType), raidTypes[0].ToUpper()),
+                    (StorageLinkEnums.ProvisioningType)Enum.Parse(typeof(StorageLinkEnums.ProvisioningType), provisioningTypes[0].Name.ToUpper()));
+                output.Add(new CslgStoragePool(displayName, storagePoolId, raidTypes, provisioningTypes, !string.IsNullOrEmpty(parentStoragePoolId), storageLinkPool));
             }
 
             return output;
@@ -167,35 +156,9 @@ namespace XenAdmin.Actions
                 dconf["adapterid"] = _adapterId;
             Log.DebugFormat("Attempting to find pools on {0}.", _storageSystemId);
 
-            if (Connection != null && (
-                (!Helpers.CowleyOrGreater(Connection) && Helpers.MidnightRideOrGreater(Connection)))
-                || Helpers.BostonOrGreater(Connection)
-                )
-            {
-                RunProbe(dconf);
-                if (!string.IsNullOrEmpty(Result))
-                    _cslgStoragePools = new ReadOnlyCollection<CslgStoragePool>(ParseStoragePoolXml(Util.GetContentsOfValueNode(Result)));
-            }
-            else
-            {
-                var slCon = _SLConnections.Find(c => c.Host == dconf["target"] && c.Username == dconf["username"]);
-                var pools = new List<CslgStoragePool>();
-
-                if (slCon != null)
-                {
-                    pools = new List<StorageLinkPool>(slCon.Cache.StoragePools)
-                        .FindAll(p => p.StorageLinkSystemId == _storageSystemId)
-                        .ConvertAll(p => new CslgStoragePool(
-                            p.FriendlyName,
-                            p.opaque_ref,
-                            GetRaidTypes(p.RaidTypes),
-                            GetProvisioningTypes(p.ProvisioningTypes),
-                            p.Parent != null,
-                            p));
-
-                }
-                _cslgStoragePools = new ReadOnlyCollection<CslgStoragePool>(pools);
-            }
+            RunProbe(dconf);
+            if (!string.IsNullOrEmpty(Result))
+                _cslgStoragePools = new ReadOnlyCollection<CslgStoragePool>(ParseStoragePoolXml(Util.GetContentsOfValueNode(Result)));
         }
 
         private static List<string> GetRaidTypes(StorageLinkEnums.RaidType raidType)

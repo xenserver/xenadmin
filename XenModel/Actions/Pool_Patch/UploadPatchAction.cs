@@ -45,9 +45,6 @@ namespace XenAdmin.Actions
 
         private Dictionary<Host, Pool_patch> patches = new Dictionary<Host, Pool_patch>();
 
-        private readonly IList<Host> embeddedHosts;
-        private readonly string embeddedPatchPath;
-
         private readonly IList<Host> retailHosts;
         private readonly string retailPatchPath;
         private readonly bool deleteFileOnCancel;
@@ -70,27 +67,10 @@ namespace XenAdmin.Actions
                 throw new NullReferenceException();
 
             ApiMethodsToRoleCheck.Add("pool.sync_database");
-            ApiMethodsToRoleCheck.Add("http/put_oem_patch_stream");
             ApiMethodsToRoleCheck.Add("http/put_pool_patch_upload");
 
-            if (master.isOEM)
-            {
-                embeddedHosts = new List<Host>(connection.Cache.Hosts);
-                embeddedPatchPath = path;
-
-                retailHosts = new List<Host>();
-                retailPatchPath = string.Empty;
-            }
-            else
-            {
-
-                retailHosts = new List<Host>(new Host[] { master });
-                retailPatchPath = path;
-
-                embeddedHosts = new List<Host>();
-                embeddedPatchPath = string.Empty;
-
-            }
+            retailHosts = new List<Host>(new Host[] { master });
+            retailPatchPath = path;
 
             Host = master;
         }
@@ -115,14 +95,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             SafeToExit = false;
-            TotalSize =
-                (embeddedHosts.Count > 0 ? embeddedHosts.Count * FileSize(embeddedPatchPath) : 0)
-                + (retailHosts.Count > 0 ? retailHosts.Count * FileSize(retailPatchPath) : 0);
-
-            foreach (Host host in embeddedHosts)
-            {
-                UploadEmbeddedPatch(host);
-            }
+            TotalSize = retailHosts.Count * FileSize(retailPatchPath);
 
             foreach (Host host in retailHosts)
             {
@@ -147,58 +120,13 @@ namespace XenAdmin.Actions
                 }
             }
 
-            if (embeddedHosts.Count + retailHosts.Count > 1)
+            if (retailHosts.Count > 1)
                 this.Description = Messages.ALL_UPDATES_UPLOADED;
         }
 
         public override void RecomputeCanCancel()
         {
             CanCancel = !Cancelling;
-        }
-
-        private void UploadEmbeddedPatch(Host host)
-        {
-            this.Description = String.Format(Messages.UPLOADING_PATCH_TO, host.Name);
-
-            long size = FileSize(embeddedPatchPath);
-
-            Session session = NewSession();
-
-            HTTP.UpdateProgressDelegate progressDelegate = delegate(int percent)
-                {
-                    int actionPercent = (int)(((TotalUploaded * 90) + (size * percent)) / TotalSize);
-                    this.Tick(actionPercent, this.Description);
-                };
-
-            RelatedTask = XenAPI.Task.create(session, "uploadTask", host.address);
-            Connection = host.Connection;
-
-            try
-            {
-                HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session, embeddedPatchPath,
-                    host.address, (HTTP_actions.put_ss)HTTP_actions.put_oem_patch_stream, session.uuid);
-            }
-            finally
-            {
-                Task.destroy(session, RelatedTask);
-
-                Connection = null;
-                RelatedTask = null;
-            }
-
-            TotalUploaded += size;
-
-            try
-            {
-                RelatedTask = XenAPI.Pool.async_sync_database(session);
-                PollToCompletion(90, 100);
-            }
-            catch (Exception exn)
-            {
-                log.Warn("Exception during pool.sync_database", exn);
-            }
-
-            this.Description = String.Format(Messages.PATCH_UPLOADED, host.Name);
         }
 
         private Pool_patch UploadRetailPatch(Host host)

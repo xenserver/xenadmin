@@ -58,12 +58,6 @@ namespace XenAdmin.Actions.VMActions
         /// <param name="end"></param>
         protected static void SetHaProtection(bool protect, AsyncAction action, VM vm, int start, int end)
         {
-			if (!Helpers.BostonOrGreater(vm.Connection))
-			{
-				// Enable or disable HA protection for the VM.
-				XenAPI.VM.set_ha_always_run(action.Session, vm.opaque_ref, protect);
-			}
-
         	// Do database sync. Helps to ensure that the change persists over master failover.
             action.RelatedTask = XenAPI.Pool.async_sync_database(action.Session);
             action.PollToCompletion(start, end);

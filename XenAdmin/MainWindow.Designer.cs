@@ -35,8 +35,6 @@ namespace XenAdmin
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             XenAdmin.Core.Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
-            Program.StorageLinkConnections.CollectionChanged -= StorageLinkConnections_CollectionChanged;
-            Program.StorageLinkConnections.Dispose();
             Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
             SearchPage.SearchChanged -= SearchPanel_SearchChanged;
 
@@ -232,7 +230,6 @@ namespace XenAdmin
             this.virtualDisksToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.addVirtualDiskToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.attachVirtualDiskToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.storageLinkToolStripMenuItem = new XenAdmin.Commands.StorageLinkToolStripMenuItem();
             this.reclaimFreedSpacetripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.DetachStorageToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -1431,7 +1428,6 @@ namespace XenAdmin
             this.upgradeStorageRepositoryToolStripMenuItem,
             this.toolStripSeparator2,
             this.virtualDisksToolStripMenuItem,
-            this.storageLinkToolStripMenuItem,
             this.reclaimFreedSpacetripMenuItem,
             this.toolStripSeparator19,
             this.DetachStorageToolStripMenuItem,
@@ -1508,11 +1504,6 @@ namespace XenAdmin
             this.attachVirtualDiskToolStripMenuItem.Command = new XenAdmin.Commands.AttachVirtualDiskCommand();
             this.attachVirtualDiskToolStripMenuItem.Name = "attachVirtualDiskToolStripMenuItem";
             resources.ApplyResources(this.attachVirtualDiskToolStripMenuItem, "attachVirtualDiskToolStripMenuItem");
-            // 
-            // storageLinkToolStripMenuItem
-            // 
-            this.storageLinkToolStripMenuItem.Name = "storageLinkToolStripMenuItem";
-            resources.ApplyResources(this.storageLinkToolStripMenuItem, "storageLinkToolStripMenuItem");
             // 
             // reclaimFreedSpacetripMenuItem
             // 
@@ -2099,7 +2090,6 @@ namespace XenAdmin
         private CommandToolStripMenuItem MoveVMToolStripMenuItem;
         private CommandToolStripMenuItem rollingUpgradeToolStripMenuItem;
         private CommandToolStripMenuItem vMProtectionAndRecoveryToolStripMenuItem;
-        private StorageLinkToolStripMenuItem storageLinkToolStripMenuItem;
         private AssignGroupToolStripMenuItemVMPP assignPolicyToolStripMenuItem;
         private CommandToolStripMenuItem changePoolPasswordToolStripMenuItem;
 		private ToolStripSeparator toolStripSeparator30;

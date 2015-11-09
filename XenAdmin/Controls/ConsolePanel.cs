@@ -221,7 +221,7 @@ namespace XenAdmin.Controls
         public static bool RbacDenied(VM source, out List<Role> AllowedRoles)
         {
 
-            if (source == null || source.Connection == null || !Helpers.MidnightRideOrGreater(source.Connection))
+            if (source == null || source.Connection == null)
             {
                 AllowedRoles = null;
                 return false;

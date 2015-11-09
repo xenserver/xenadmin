@@ -55,7 +55,6 @@ namespace XenAdmin.TabPages
         private readonly ContextMenu _TheContextMenu = new ContextMenu();
         private readonly DataGridViewColumn storageLinkColumn;
 
-        private bool QoSRestricted = false;
         private VM vm;
 
         public VMStoragePage()
@@ -63,8 +62,6 @@ namespace XenAdmin.TabPages
             InitializeComponent();
 
             _TheContextMenu.MenuItems.Add(AddButton.Text, AddButton_Click);
-
-            //dataGridViewStorage.VirtualMode = true;
 
             storageLinkColumn = ColumnSRVolume;
 
@@ -116,13 +113,7 @@ namespace XenAdmin.TabPages
                 multipleDvdIsoList1.VM = vm;
 
                 if (vm != null)
-                {
-
                     vm.PropertyChanged += vm_PropertyChanged;
-
-                    Host currentHost = Helpers.GetMaster(vm.Connection);
-                    QoSRestricted = currentHost != null && currentHost.RestrictQoS;
-                }
 
                 BuildList();
 
@@ -264,7 +255,6 @@ namespace XenAdmin.TabPages
 
                 storageLinkColumn.Visible = storageLinkColumnVisible;
                 dataGridViewStorage.Sort(dataGridViewStorage.SortedColumn, dataGridViewStorage.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
-
 
                 IEnumerable<VBD> vbdsSelected = from VBDRow row in vbdSavedItems select row.VBD;
                 foreach (VBDRow row in dataGridViewStorage.Rows)
@@ -626,17 +616,8 @@ namespace XenAdmin.TabPages
                 case 3:
                     return SR.Name;
                 case 4:
-                    if (Helpers.BostonOrGreater(VDI.Connection))
-                    {
-                        string name;
-                        if (VDI.sm_config.TryGetValue("displayname", out name))
-                        {
-                            return name;
-                        }
-                        return string.Empty;
-                    }
-                    StorageLinkVolume vol = VDI.StorageLinkVolume(Program.StorageLinkConnections.GetCopy());
-                    return vol == null ? string.Empty : vol.Name;
+                    string name;
+                    return VDI.sm_config.TryGetValue("displayname", out name) ? name : "";
                 case 5:
                     return VDI.SizeText;
                 case 6:

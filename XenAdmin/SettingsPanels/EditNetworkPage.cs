@@ -46,7 +46,6 @@ namespace XenAdmin.SettingsPanels
     {
         private XenAPI.Network network;
         private Host host;
-        private bool nolicenseRestriction = false;
 
         private bool _ValidToSave = true;
         private readonly ToolTip InvalidParamToolTip;
@@ -299,8 +298,6 @@ namespace XenAdmin.SettingsPanels
             if (network == null || host == null)
                 return;
 
-            nolicenseRestriction = host != null && !host.RestrictVLAN;
-
             populateHostNicList();
 
             //set minimum value for VLAN
@@ -329,7 +326,7 @@ namespace XenAdmin.SettingsPanels
                         HostPNICList.SelectedItem = pif.Name;
                 }
 
-                bool hasBondMode = HasBondMode;
+                bool hasBondMode = network.IsBond;
                 groupBoxBondMode.Visible = hasBondMode;
 
                 bool supportsLinkAggregation = Helpers.SupportsLinkAggregationBond(network.Connection);
@@ -370,7 +367,7 @@ namespace XenAdmin.SettingsPanels
                 numUpDownVLAN.Visible = true;
                 HostVLanLabel.Visible = true;
                 HostPNICList.Visible = true;
-                nicHelpLabel.Visible = nolicenseRestriction;
+                nicHelpLabel.Visible = true;
 
                 groupBoxBondMode.Visible = false;
                 numUpDownVLAN.Enabled = false;
@@ -438,9 +435,6 @@ namespace XenAdmin.SettingsPanels
                 HostPNICList.Items.Clear();
 
                 HostPNICList.Items.Add(Messages.NETWORKPANEL_INTERNAL);
-
-                if (!nolicenseRestriction)
-                    return;
 
                 foreach (PIF pif in network.Connection.Cache.PIFs)
                 {
@@ -677,17 +671,6 @@ namespace XenAdmin.SettingsPanels
                     return pif;
             }
             return null;
-        }
-
-        /// <summary>
-        /// Does the network being edited support bond mode (i.e., is it a bond of Boston or later)?
-        /// </summary>
-        private bool HasBondMode
-        {
-            get
-            {
-                return network.IsBond && Helpers.BostonOrGreater(network.Connection);
-            }
         }
 
         /// <summary>

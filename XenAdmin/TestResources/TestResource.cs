@@ -43,8 +43,6 @@ namespace XenAdmin.TestResources
             InterestingDevelopment,
             InterestingXenApp,
             Credits,
-            GeorgeXapiDB,
-            GeorgeXapiDB2,
         }
 
         private static readonly Dictionary<Resource, string> Filenames = new Dictionary<Resource, string>();
@@ -54,8 +52,6 @@ namespace XenAdmin.TestResources
             Filenames[Resource.InterestingDevelopment] = "interesting-development.xml";
             Filenames[Resource.InterestingXenApp] = "interesting-xenapp.xml";
             Filenames[Resource.Credits] = "credits.xml";
-            Filenames[Resource.GeorgeXapiDB] = "george-xapi-db.xml";
-            Filenames[Resource.GeorgeXapiDB2] = "george-xapi-db-2.xml";
         }
 
         public static string Location(Resource r)

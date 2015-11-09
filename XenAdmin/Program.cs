@@ -47,7 +47,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.XenSearch;
 using XenAPI;
 using System.Runtime.InteropServices;
-using XenAdmin.Network.StorageLink;
 using XenAdmin.Actions;
 
 
@@ -108,20 +107,6 @@ namespace XenAdmin
         public static readonly XenAdmin.Core.PropertyManager PropertyManager = new XenAdmin.Core.PropertyManager();
 
         public static MainWindow MainWindow = null;
-
-
-        private static StorageLinkConnectionManager _storageLinkConnections;
-        public static StorageLinkConnectionManager StorageLinkConnections
-        {
-            get
-            {
-                if (_storageLinkConnections == null)
-                {
-                    _storageLinkConnections = new StorageLinkConnectionManager(() => MainWindow, ConnectionsManager.XenConnections, ConnectionsManager.ConnectionsLock);
-                }
-                return _storageLinkConnections;
-            }
-        }
 
 
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
@@ -242,7 +227,7 @@ namespace XenAdmin
             ConnectionsManager.XenConnections.Clear();
             ConnectionsManager.History.Clear();
 
-            Search.InitSearch(() => Program.StorageLinkConnections.GetCopy());
+            Search.InitSearch();
             TreeSearch.InitSearch();
             
             ArgType argType = ArgType.None;

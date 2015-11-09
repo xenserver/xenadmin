@@ -80,21 +80,12 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                         break;
                 }
             }
-            if (Helpers.BostonOrGreater(Connection))
-                labelSummary.Text = String.Format(Messages.HAWIZ_SUMMARY_NEW,
-                                                  HeartbeatSrName.Ellipsise(50),
-                                                  Ntol,
-                                                  GetVmNumber(alwaysRestart),
-                                                  GetVmNumber(bestEffort),
-                                                  GetVmNumber(doNotRestart));
-            else
-                labelSummary.Text = String.Format(Messages.HAWIZ_SUMMARY,
-                                                  HeartbeatSrName.Ellipsise(50),
-                                                  Ntol,
-                                                  GetVmNumber(alwaysRestartHighPriority),
-                                                  GetVmNumber(alwaysRestart),
-                                                  GetVmNumber(bestEffort),
-                                                  GetVmNumber(doNotRestart));
+            labelSummary.Text = String.Format(Messages.HAWIZ_SUMMARY_NEW,
+                                                HeartbeatSrName.Ellipsise(50),
+                                                Ntol,
+                                                GetVmNumber(alwaysRestart),
+                                                GetVmNumber(bestEffort),
+                                                GetVmNumber(doNotRestart));
 
             // If the user hasn't protected any VMs, show a warning.
             labelNoVmsProtected.Visible = (bestEffort + alwaysRestart + alwaysRestartHighPriority == 0) && doNotRestart > 0;

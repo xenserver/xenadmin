@@ -66,8 +66,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 PopulateTemplatesBox();
             templatesLoaded = true;
 
-            checkBoxCopyBiosStrings.Visible = Helpers.MidnightRideOrGreater(Connection);
-
             if (m_selectedTemplate == null)
                 return;
 

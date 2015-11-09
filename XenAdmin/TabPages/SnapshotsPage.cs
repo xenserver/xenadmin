@@ -56,7 +56,6 @@ namespace XenAdmin.TabPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private VM m_VM = null;
         private bool m_NeedToUpdate = false;
-        private bool m_TreeViewEnabled = false;
         private float defaultWidthProperties;
 
         private readonly ToolTip toolTipDescriptionLabel = new ToolTip();
@@ -138,34 +137,18 @@ namespace XenAdmin.TabPages
                         VM_BatchCollectionChanged);
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
-                    m_TreeViewEnabled = Helpers.MidnightRideOrGreater(m_VM.Connection);
-                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = Helpers.CowleyOrGreater(m_VM.Connection)
-                        && Registry.VMPRFeatureEnabled;
-                    if (m_TreeViewEnabled && VM.SnapshotView != SnapshotsView.ListView)
+                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = Registry.VMPRFeatureEnabled;
+                    if (VM.SnapshotView != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
-                    {
                         GridViewChecked();
-                    }
 
-                    if (m_TreeViewEnabled)
-                    {
-                        toolStripButtonTreeView.Enabled = true;
-                        toolStripButtonTreeView.ToolTipText = "";
+                    toolStripButtonTreeView.Enabled = true;
+                    toolStripButtonTreeView.ToolTipText = "";
 
-                        revertButton.Enabled = true;
-                        toolTipContainerRevertButton.SetToolTip("");
-                    }
-                    else
-                    {
-                        toolStripButtonTreeView.Enabled = false;
-                        toolStripButtonTreeView.ToolTipText =
-                            string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_MR, Messages.SNAPSHOT_TREE_VIEW);
+                    revertButton.Enabled = true;
+                    toolTipContainerRevertButton.SetToolTip("");
 
-                        revertButton.Enabled = false;
-                        toolTipContainerRevertButton.SetToolTip(
-                            string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_MR, Messages.SNAPSHOT_REVERT));
-                    }
                     //toolStripButtonListView.Enabled = toolStripButtonTreeView.Enabled = true;
                     //Refresh items
                     BuildList();
@@ -197,7 +180,7 @@ namespace XenAdmin.TabPages
 
         private void RefreshVMProtectionPanel()
         {
-            if (Helpers.CowleyOrGreater(VM.Connection) && Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection))
+            if (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection))
             {
                 panelVMPP.Visible = true;
                 var vmpp = VM.Connection.Resolve(VM.protection_policy);
@@ -307,16 +290,9 @@ namespace XenAdmin.TabPages
                 }
                 toolStripButtonListView.Enabled = true;
                 IList<VM> roots = RefreshDataGridView(snapshots);
-                if (m_TreeViewEnabled)
-                {
-                    toolStripButtonTreeView.Enabled = true;
-                    RefreshTreeView(roots);
-                    SelectPreviousItemVMTreeView();
-                }
-                else
-                {
-                    GridViewChecked();
-                }
+                toolStripButtonTreeView.Enabled = true;
+                RefreshTreeView(roots);
+                SelectPreviousItemVMTreeView();
                 UpdateSpinningIcon();
             }
         }
@@ -634,17 +610,7 @@ namespace XenAdmin.TabPages
 
         private void EnableAllButtons()
         {
-            if (m_TreeViewEnabled)
-            {
-                revertButton.Enabled = true;
-            }
-            else
-            {
-                revertButton.Enabled = false;
-                toolTipContainerRevertButton.SetToolTip(string.Format(
-                    Messages.FEATURE_NOT_AVAILABLE_NEED_MR, Messages.SNAPSHOT_REVERT));
-            }
-
+            revertButton.Enabled = true;
             saveButton.Enabled = true;
             deleteButton.Enabled = true;
         }
@@ -1198,14 +1164,11 @@ namespace XenAdmin.TabPages
         {
             contextMenuStrip.Items.Clear();
 
-            if (m_TreeViewEnabled)
-            {
-                contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                    {
-                        revertToolStripMenuItem,
-                        saveVMToolStripSeparator
-                    });
-            }
+            contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                {
+                    revertToolStripMenuItem,
+                    saveVMToolStripSeparator
+                });
             contextMenuStrip.Items.AddRange(new ToolStripItem[]
                 {
                     saveVMToolStripMenuItem,

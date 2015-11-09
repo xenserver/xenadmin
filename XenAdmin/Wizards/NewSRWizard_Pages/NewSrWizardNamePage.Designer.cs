@@ -36,7 +36,6 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.checkBoxAutoDescription = new System.Windows.Forms.CheckBox();
-            this.labelInvalidName = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +48,6 @@
             this.tableLayoutPanel1.Controls.Add(this.textBoxDescription, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelDescription, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxAutoDescription, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.labelInvalidName, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelwizard
@@ -89,12 +87,6 @@
             this.checkBoxAutoDescription.UseVisualStyleBackColor = true;
             this.checkBoxAutoDescription.CheckedChanged += new System.EventHandler(this.checkBoxAutoDescription_CheckedChanged);
             // 
-            // labelInvalidName
-            // 
-            resources.ApplyResources(this.labelInvalidName, "labelInvalidName");
-            this.labelInvalidName.ForeColor = System.Drawing.Color.Red;
-            this.labelInvalidName.Name = "labelInvalidName";
-            // 
             // NewSrWizardNamePage
             // 
             resources.ApplyResources(this, "$this");
@@ -115,7 +107,6 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Label labelInvalidName;
         private System.Windows.Forms.CheckBox checkBoxAutoDescription;
     }
 }

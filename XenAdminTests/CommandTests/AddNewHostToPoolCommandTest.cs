@@ -46,7 +46,7 @@ namespace XenAdminTests.CommandTests
     public class AddNewHostToPoolCommandTestGeorge : MainWindowLauncher_TestFixture
     {
         public AddNewHostToPoolCommandTestGeorge()
-            : base(true, CommandTestsDatabase.George)
+            : base(CommandTestsDatabase.George)
         { }
 
         [Test]

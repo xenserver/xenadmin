@@ -41,7 +41,7 @@ namespace XenAdmin.Commands
     /// <summary>
     /// Destroys the selected SRs. Shows a confirmation dialog.
     /// </summary>
-    internal class DestroySRCommand : SRCommand
+    internal class DestroySRCommand : Command
     {
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required in the derived

@@ -267,15 +267,12 @@ namespace XenAdmin.TabPages
         private RbacMethodList HA_PERMISSION_CHECKS = new RbacMethodList(
             "pool.set_ha_host_failures_to_tolerate",
             "pool.sync_database",
-            "vm.set_ha_always_run",
             "vm.set_ha_restart_priority",
             "pool.ha_compute_hypothetical_max_host_failures_to_tolerate"
         );
 
         private bool PassedRbacChecks()
         {
-            if (!Helpers.MidnightRideOrGreater(pool.Connection))
-                return true;
             return Role.CanPerform(HA_PERMISSION_CHECKS, pool.Connection);
         }
 
@@ -305,13 +302,6 @@ namespace XenAdmin.TabPages
 
         private void generatePoolHABox(Pool pool)
         {
-            Host master = Helpers.GetMaster(pool.Connection);
-            if (master == null || master.RestrictHAOrlando)
-            {
-                // Don't generate the box at all
-                return;
-            }
-
             if (!pool.ha_enabled)
                 return;
 
@@ -543,13 +533,6 @@ namespace XenAdmin.TabPages
 
         private void generateSRHABox(SR sr)
         {
-            Host master = Helpers.GetMaster(sr.Connection);
-            if (master == null)
-                return;
-            if (master.RestrictHAOrlando)
-                // Don't generate the box at all
-                return;
-
             CustomListRow header = CreateHeader(Messages.HA_CONFIGURATION_TITLE);
             customListPanel.AddRow(header);
 
@@ -629,10 +612,6 @@ namespace XenAdmin.TabPages
         {
             if (pool == null)
                 return;
-            Host master = Helpers.GetMaster(pool.Connection);
-            if (master == null || master.RestrictHAOrlando)
-                return;
-
             EditHA(pool);
         }
 

@@ -92,57 +92,46 @@ namespace XenAdmin.SettingsPanels
 
             // Set up the Automation checkboxes
             checkBoxUseAutomation.Checked = _poolConfiguration.AutoBalanceEnabled;
-            if (Helpers.MidnightRideOrGreater(_connection))
+            checkBoxEnablePowerManagement.Checked = _poolConfiguration.PowerManagementEnabled;
+            checkBoxEnablePowerManagement.Enabled = checkBoxUseAutomation.Checked;
+
+            this.decentGroupBoxPowerManagementHosts.Enabled = true;
+
+            // Set up the Power Management Host enlistment listview
+            listViewExPowerManagementHosts.Columns.Clear();
+            listViewExPowerManagementHosts.Columns.Add(String.Empty, 25);
+            listViewExPowerManagementHosts.Columns.Add(Messages.WLB_HOST_SERVER, 220); // "Host Server"
+            listViewExPowerManagementHosts.Columns.Add(Messages.WLB_POWERON_MODE, 95); // "PowerOn Mode"
+            listViewExPowerManagementHosts.Columns.Add(Messages.WLB_LAST_POWERON_SUCCEEDED, 135); // "Tested"
+
+            foreach (Host host in _connection.Cache.Hosts)
             {
-                checkBoxEnablePowerManagement.Checked = _poolConfiguration.PowerManagementEnabled;
-                checkBoxEnablePowerManagement.Enabled = checkBoxUseAutomation.Checked;
+                bool participatesInPowerManagement = false;
+                string powerManagementTested = Messages.NO;
 
-                this.decentGroupBoxPowerManagementHosts.Enabled = true;
-
-                // Set up the Power Management Host enlistment listview
-                listViewExPowerManagementHosts.Columns.Clear();
-                listViewExPowerManagementHosts.Columns.Add(String.Empty, 25);
-                listViewExPowerManagementHosts.Columns.Add(Messages.WLB_HOST_SERVER, 220); // "Host Server"
-                listViewExPowerManagementHosts.Columns.Add(Messages.WLB_POWERON_MODE, 95); // "PowerOn Mode"
-                listViewExPowerManagementHosts.Columns.Add(Messages.WLB_LAST_POWERON_SUCCEEDED, 135); // "Tested"
-
-                foreach (Host host in _connection.Cache.Hosts)
+                if (_poolConfiguration.HostConfigurations.ContainsKey(host.uuid))
                 {
-                    bool participatesInPowerManagement = false;
-                    string powerManagementTested = Messages.NO;
-
-                    if (_poolConfiguration.HostConfigurations.ContainsKey(host.uuid))
-                    {
-                        participatesInPowerManagement = _poolConfiguration.HostConfigurations[host.uuid].ParticipatesInPowerManagement;
-                        powerManagementTested = _poolConfiguration.HostConfigurations[host.uuid].LastPowerOnSucceeded ? Messages.YES : Messages.NO;
-                    }
-
-                    ListViewItem thisItem = new ListViewItem();
-                    thisItem.Tag = host;
-                    thisItem.Checked = participatesInPowerManagement;
-                    if (host.IsMaster())
-                    {
-                        thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name, Messages.POOL_MASTER));
-                    }
-                    else
-                    {
-                        thisItem.SubItems.Add(host.Name);
-                    }
-                    if (Helpers.MidnightRideOrGreater(_connection))
-                    {
-                        thisItem.SubItems.Add(GetHostPowerOnMode(host.power_on_mode));
-                    }
-                    thisItem.SubItems.Add(powerManagementTested);
-                    listViewExPowerManagementHosts.Items.Add(thisItem);
+                    participatesInPowerManagement = _poolConfiguration.HostConfigurations[host.uuid].ParticipatesInPowerManagement;
+                    powerManagementTested = _poolConfiguration.HostConfigurations[host.uuid].LastPowerOnSucceeded ? Messages.YES : Messages.NO;
                 }
 
-                labelNoHosts.Visible = (listViewExPowerManagementHosts.Items.Count == 0);
+                ListViewItem thisItem = new ListViewItem();
+                thisItem.Tag = host;
+                thisItem.Checked = participatesInPowerManagement;
+                if (host.IsMaster())
+                {
+                    thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name, Messages.POOL_MASTER));
+                }
+                else
+                {
+                    thisItem.SubItems.Add(host.Name);
+                }
+                thisItem.SubItems.Add(GetHostPowerOnMode(host.power_on_mode));
+                thisItem.SubItems.Add(powerManagementTested);
+                listViewExPowerManagementHosts.Items.Add(thisItem);
             }
-            else
-            {
-                this.checkBoxEnablePowerManagement.Enabled = false;
-                this.decentGroupBoxPowerManagementHosts.Enabled = false;
-            }
+
+            labelNoHosts.Visible = (listViewExPowerManagementHosts.Items.Count == 0);
             _loading = false;
         }
 
@@ -204,15 +193,7 @@ namespace XenAdmin.SettingsPanels
                 _hasChanged = true;
             }
 
-            if (Helpers.MidnightRideOrGreater(_connection))
-            {
-                checkBoxEnablePowerManagement.Enabled = checkBoxUseAutomation.Checked;
-            }
-            else
-            {
-                this.checkBoxEnablePowerManagement.Enabled = false;
-            }
-
+            checkBoxEnablePowerManagement.Enabled = checkBoxUseAutomation.Checked;
         }
 
         private void checkBoxEnablePowerManagement_CheckedChanged(object sender, EventArgs e)
@@ -288,7 +269,7 @@ namespace XenAdmin.SettingsPanels
 
         private bool HostCannotParticipateInPowerManagement(Host host)
         {
-            return host.IsMaster() || (string.IsNullOrEmpty(host.power_on_mode) && Helpers.MidnightRideOrGreater(_connection));
+            return host.IsMaster() || string.IsNullOrEmpty(host.power_on_mode);
         }
 
         private void listViewExPowerManagementHosts_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)

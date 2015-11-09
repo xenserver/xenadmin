@@ -150,7 +150,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private static bool IsNotAnUpgradeableVersion(Host host)
         {
-            return !Helpers.MidnightRideOrGreater(host);
+            return false; // currently, all supported versions are upgradable
         }
 
         public IList<Host> SelectedMasters

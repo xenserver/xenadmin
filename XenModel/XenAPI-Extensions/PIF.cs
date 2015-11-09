@@ -199,10 +199,7 @@ namespace XenAPI
             if (management)
                 return false;
 
-            bool criterion =
-                Helpers.BostonOrGreater(Connection) ?
-                (ip_configuration_mode != ip_configuration_mode.None && ip_configuration_mode != ip_configuration_mode.unknown) :
-                disallow_unplug;
+            bool criterion = (ip_configuration_mode != ip_configuration_mode.None && ip_configuration_mode != ip_configuration_mode.unknown);
             if (!criterion)
                 return false;
 

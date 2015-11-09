@@ -64,23 +64,12 @@ namespace XenAdmin.Diagnostics.Checks
                 return new HostDoesNotHaveHotfix(this, Host);
             }
 
-            if (Helpers.BostonOrGreater(Host) && !Helpers.SanibelOrGreater(Host)
+            if (!Helpers.SanibelOrGreater(Host)
                 && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).ShouldBeAppliedTo(Host))
             {
                 return new HostDoesNotHaveHotfix(this, Host);
             }
 
-            if (Helpers.CowleyOrGreater(Host) && !Helpers.BostonOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Cowley).ShouldBeAppliedTo(Host))
-            {
-                return new HostDoesNotHaveHotfix(this, Host);
-            }
-
-            if (Helpers.MidnightRideOrGreater(Host) && !Helpers.CowleyOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.MNR).ShouldBeAppliedTo(Host))
-            {
-                return new HostDoesNotHaveHotfix(this, Host);
-            }
             return null;
         }
 

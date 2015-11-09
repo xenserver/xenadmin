@@ -352,26 +352,6 @@ namespace XenAdmin
                 {
                     node = AddFolderNode((Folder)group);
                 }
-                else if (group is StorageLinkServer)
-                {
-                    node = AddStorageLinkServerNode((StorageLinkServer)group);
-                }
-                else if (group is StorageLinkSystem)
-                {
-                    node = AddStorageLinkSystemNode((StorageLinkSystem)group);
-                }
-                else if (group is StorageLinkPool)
-                {
-                    node = AddStorageLinkPoolNode((StorageLinkPool)group);
-                }
-                else if (group is StorageLinkVolume)
-                {
-                    node = AddStorageLinkVolumeNode((StorageLinkVolume)group);
-                }
-                else if (group is StorageLinkRepository)
-                {
-                    node = AddStorageLinkRepositoryNode((StorageLinkRepository)group);
-                }
                 else
                 {
                     node = AddNode(grouping.GetGroupName(group), grouping.GetGroupIcon(group),
@@ -400,43 +380,6 @@ namespace XenAdmin
                 }
 
                 return node.Tag;
-            }
-
-            private VirtualTreeNode AddStorageLinkServerNode(StorageLinkServer storageLinkServer)
-            {
-                return AddNode(storageLinkServer.Name, Images.GetIconFor(storageLinkServer), false, storageLinkServer);
-            }
-
-            private VirtualTreeNode AddStorageLinkSystemNode(StorageLinkSystem storageLinkSystem)
-            {
-                return AddNode(Helpers.GetName(storageLinkSystem), Images.GetIconFor(storageLinkSystem), false, storageLinkSystem);
-            }
-
-            private VirtualTreeNode AddStorageLinkPoolNode(StorageLinkPool storageLinkPool)
-            {
-                return AddNode(Helpers.GetName(storageLinkPool), Images.GetIconFor(storageLinkPool), false, storageLinkPool);
-            }
-
-            private VirtualTreeNode AddStorageLinkVolumeNode(StorageLinkVolume storageLinkVolume)
-            {
-                string name = storageLinkVolume.FriendlyName;
-
-                VDI vdi = storageLinkVolume.VDI(ConnectionsManager.XenConnectionsCopy);
-                if (vdi != null)
-                    name = string.Format("{0} ({1})", vdi.Name, name);
-
-                return AddNode(name, Images.GetIconFor(storageLinkVolume), false, storageLinkVolume);
-            }
-
-            private VirtualTreeNode AddStorageLinkRepositoryNode(StorageLinkRepository storageLinkRepository)
-            {
-                string name = storageLinkRepository.Name;
-                StorageLinkPool pool = storageLinkRepository.StorageLinkPool;
-
-                if (pool != null && !string.IsNullOrEmpty(pool.ParentStorageLinkPoolId))
-                    name = string.Format("{0} ({1})", storageLinkRepository.Name, pool);
-                
-                return AddNode(name, Images.GetIconFor(storageLinkRepository), false, storageLinkRepository);
             }
 
             private VirtualTreeNode AddPoolNode(Pool pool)

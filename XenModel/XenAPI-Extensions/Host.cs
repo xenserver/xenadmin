@@ -271,26 +271,6 @@ namespace XenAPI
             return h._RestrictVSwitchController;
         }
 
-        public bool RestrictPooling
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pooling"); }
-        }
-
-        public bool RestrictConnection
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_connection"); }
-        }
-
-        public bool RestrictQoS
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_qos"); }
-        }
-
-        public bool RestrictVLAN
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vlan"); }
-        }
-
         public static bool RestrictVMProtection(Host h)
         {
             return h._RestrictVMProtection;
@@ -331,24 +311,9 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_storage_xen_motion"); }
         }
 
-        public bool RestrictPoolAttachedStorage
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pool_attached_storage"); }
-        }
-
-        public bool IsFloodgateOrLater()
-        {
-            return (XenCenterMax  >= (int)API_Version.API_1_5);
-        }
-
         public virtual bool IsFreeLicense()
         {
-            if (Helpers.MidnightRideOrGreater(this))
-            {
-                return edition == "free";
-            }
-
-            return license_params.ContainsKey("sku_type") && license_params["sku_type"].Replace(" ", "_").ToLowerInvariant().EndsWith("xe_express");
+            return edition == "free";
         }
 
         private bool _RestrictHA
@@ -356,22 +321,9 @@ namespace XenAPI
             get { return !BoolKey(license_params, "enable_xha"); }
         }
 
-        public bool RestrictHA
+        public static bool RestrictHA(Host h)
         {
-            get { return _RestrictHA; }
-        }
-
-        public bool RestrictHAOrlando
-        {
-            get { return _RestrictHA && !IsFloodgateOrLater(); }
-        }
-        private bool _RestrictHAFloodgate
-        {
-            get { return _RestrictHA && IsFloodgateOrLater(); }
-        }
-        public static bool RestrictHAFloodgate(Host h)
-        {
-            return h._RestrictHAFloodgate;
+            return h._RestrictHA;
         }
 
         private bool _RestrictAlerts
@@ -766,18 +718,7 @@ namespace XenAPI
         {
             get
             {
-                if (Helpers.MidnightRideOrGreater(this))
-                    return software_version.ContainsKey("xs:linux");
-                else
-                    return Get(software_version, "package-linux") == "installed";
-            }
-        }
-
-        public bool isOEM
-        {
-            get
-            {
-                return software_version.ContainsKey("oem_build_number");
+                return software_version.ContainsKey("xs:linux");
             }
         }
 
@@ -1079,8 +1020,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// The amount of memory free on the host. For George and earlier hosts, we simply use
-        /// the obvious Host_metrics.memory_free. For Midnight Ride and later, however, we use
+        /// The amount of memory free on the host. For George and earlier hosts, we use to use
+        /// the obvious Host_metrics.memory_free. Since Midnight Ride, however, we use
         /// the same calculation as xapi, adding the used memory and the virtualisation overheads
         /// on each of the VMs. This is a more conservative estimate (i.e., it reports less memory
         /// free), but it's the one we need to make the memory go down to zero when ballooning
@@ -1093,9 +1034,6 @@ namespace XenAPI
                 Host_metrics host_metrics = Connection.Resolve(this.metrics);
                 if (host_metrics == null)
                     return 0;
-
-                if (!Helpers.MidnightRideOrGreater(Connection))
-                    return host_metrics.memory_free;
 
                 long used = memory_overhead;
                 foreach (VM vm in Connection.ResolveAll(resident_VMs))
@@ -1178,20 +1116,6 @@ namespace XenAPI
         {
             get
             {
-                if (!Helpers.MidnightRideOrGreater(Connection))
-                {
-                    Host_metrics host_metrics = Connection.Resolve(this.metrics);
-                    if (host_metrics == null)
-                        return 0;
-                    long totalused = 0;
-                    foreach (VM vm in Connection.ResolveAll(resident_VMs))
-                    {
-                        VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
-                        if (vmMetrics != null)
-                            totalused += vmMetrics.memory_actual;
-                    }
-                    return host_metrics.memory_total - totalused - host_metrics.memory_free;
-                }
                 long xen_mem = memory_overhead;
                 foreach (VM vm in Connection.ResolveAll(resident_VMs))
                 {

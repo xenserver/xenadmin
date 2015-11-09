@@ -52,8 +52,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IXenConnection connection;
 
-        private bool showStartOrderAndDelay;
-
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
         private readonly QueuedBackgroundWorker m_worker;
 
@@ -73,16 +71,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 this.connection = value;
 
                 RegisterEvents();
-
-                showStartOrderAndDelay = !Helpers.HaIgnoreStartupOptions(connection);
-                if (!showStartOrderAndDelay)
-                {
-                    colStartOrder.Visible = false;
-                    colDelay.Visible = false;
-
-                    nudOrder.Visible = nudStartDelay.Visible = false;
-                    labelStartOrder.Visible = labelStartDelay.Visible = labelStartDelayUnits.Visible = false;
-                }
 
                 UpdateMenuItems();
                 PopulateVMs();
@@ -532,11 +520,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             {
                 m_dropDownButtonRestartPriority.Enabled = false;
                 m_dropDownButtonRestartPriority.Text = "";
-                if (showStartOrderAndDelay)
-                {
-                    nudOrder.Enabled = nudStartDelay.Enabled = false;
-                    nudOrder.Text = nudStartDelay.Text = "";
-                }
+                nudOrder.Enabled = nudStartDelay.Enabled = false;
+                nudOrder.Text = nudStartDelay.Text = "";
                 return;
             }
 
@@ -546,11 +531,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             {
                 m_dropDownButtonRestartPriority.Enabled = true;
                 m_dropDownButtonRestartPriority.Text = "";
-                if (showStartOrderAndDelay)
-                {
-                    nudOrder.Enabled = nudStartDelay.Enabled = true;
-                    nudOrder.Text = nudStartDelay.Text = "";
-                }
+                nudOrder.Enabled = nudStartDelay.Enabled = true;
+                nudOrder.Text = nudStartDelay.Text = "";
                 return;
             }
 
@@ -578,16 +560,13 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             }
 
             // set the order and delay NUDs 
-            if (showStartOrderAndDelay)
-            {
-                nudOrder.Enabled = nudStartDelay.Enabled = true;
+            nudOrder.Enabled = nudStartDelay.Enabled = true;
 
-                var orderDistList = (from row in selectedRows select row.StartOrder).Distinct();
-                nudOrder.Text = orderDistList.Count() == 1 ? orderDistList.ElementAt(0).ToString() : "";
+            var orderDistList = (from row in selectedRows select row.StartOrder).Distinct();
+            nudOrder.Text = orderDistList.Count() == 1 ? orderDistList.ElementAt(0).ToString() : "";
 
-                var delayDistList = (from row in selectedRows select row.StartDelay).Distinct();
-                nudStartDelay.Text = delayDistList.Count() == 1 ? delayDistList.ElementAt(0).ToString() : "";
-            }
+            var delayDistList = (from row in selectedRows select row.StartDelay).Distinct();
+            nudStartDelay.Text = delayDistList.Count() == 1 ? delayDistList.ElementAt(0).ToString() : "";
 
             // check that all the VMs selected in the list are agile and make sure the protect button is disabled with the relevant reason
             VmWithSettingsRow nonAgileRow = selectedRows.FirstOrDefault(r => !r.IsAgile);
@@ -599,10 +578,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
                 if (VM.HaPriorityIsRestart(connection, priority))
                 {
-                    menuItem.Enabled = priority == VM.HA_Restart_Priority.AlwaysRestartHighPriority
-                                           ? (nonAgileRow == null && Helpers.CowleyOrGreater(connection))
-                                           : (nonAgileRow == null);
-
+                    menuItem.Enabled = (nonAgileRow == null);
                     menuItem.ToolTipText = (nonAgileRow == null)
                                                ? ""
                                                : nonAgileRow.FriendlyNonAgileReason;
@@ -683,14 +659,14 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         public override string Text
         {
-            get { return Messages.HAWIZARD_ASSIGNRIORITIESPAGE_TEXT; }
+            get { return Messages.HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT; }
         }
 
         public override string PageTitle
         {
             get 
             {
-                return showStartOrderAndDelay ? Messages.HAWIZARD_ASSIGNRIORITIESPAGE_TITLE : Messages.HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER;
+                return Messages.HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE;
             }
         }
 

@@ -231,16 +231,13 @@ namespace XenAPI
             else
                 validRoleList = ValidRoleList(apiMethodsToRoleCheck, connection, debug);
             
-            if (Helpers.MidnightRideOrGreater(connection))
-            {
-                if (connection.Session != null && connection.Session.IsLocalSuperuser)
-                    return true;
+            if (connection.Session != null && connection.Session.IsLocalSuperuser)
+                return true;
 
-                foreach (Role role in validRoleList)
-                {
-                    if (connection.Session != null && connection.Session.Roles != null && connection.Session.Roles.Contains(role))
-                        return true;
-                }
+            foreach (Role role in validRoleList)
+            {
+                if (connection.Session != null && connection.Session.Roles != null && connection.Session.Roles.Contains(role))
+                    return true;
             }
             return false;
         }

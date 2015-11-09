@@ -72,7 +72,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             AddPage(PatchingWizard_SelectPatchPage);
             AddPage(PatchingWizard_SelectServers);
             AddPage(PatchingWizard_UploadPage);
-            // This gets enabled/disabled in the select patch step depending on if it is an OEM patch or not
             AddPage(PatchingWizard_PrecheckPage);
             AddPage(PatchingWizard_ModePage);
             AddPage(PatchingWizard_PatchingPage);
@@ -108,9 +107,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var existPatch = PatchingWizard_SelectPatchPage.SelectedExistingPatch;
                 var alertPatch = PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
                 var fileFromDiskAlertPatch = PatchingWizard_SelectPatchPage.FileFromDiskAlert;
-
-                DisablePage(PatchingWizard_PrecheckPage, updateType == UpdateType.NewOem);
-                DisablePage(PatchingWizard_UploadPage, updateType == UpdateType.NewOem);
 
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;

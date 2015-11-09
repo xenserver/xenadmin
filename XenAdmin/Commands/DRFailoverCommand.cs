@@ -100,7 +100,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return selection.Count==1&&selection.FirstAsXenObject != null && selection.FirstAsXenObject.Connection != null && Helpers.BostonOrGreater(selection.FirstAsXenObject.Connection); 
+            return selection.Count==1 && selection.FirstAsXenObject != null && selection.FirstAsXenObject.Connection != null; 
         }
 
         public override string ContextMenuText

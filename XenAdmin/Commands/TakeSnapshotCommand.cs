@@ -131,7 +131,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(VM vm)
         {
-            return vm != null && !vm.is_a_template && !vm.Locked && Helpers.GeorgeOrGreater(vm.Connection) && (vm.allowed_operations.Contains(vm_operations.snapshot) || vm.allowed_operations.Contains(vm_operations.checkpoint)); 
+            return vm != null && !vm.is_a_template && !vm.Locked && (vm.allowed_operations.Contains(vm_operations.snapshot) || vm.allowed_operations.Contains(vm_operations.checkpoint)); 
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
@@ -151,23 +151,6 @@ namespace XenAdmin.Commands
             {
                 handler(_VM, e);
             }
-        }
-
-        protected override string GetCantExecuteReasonCore(SelectedItem item)
-        {
-            Host host = item.HostAncestor;
-
-            if (host == null && item.Connection != null)
-            {
-                host = Helpers.GetMaster(item.Connection);
-            }
-
-            if (host == null || !Helpers.GeorgeOrGreater(host))
-            {
-                return Messages.SNAPSHOT_REQUIRE_GEORGE;
-            }
-
-            return base.GetCantExecuteReasonCore(item);
         }
 
         public override string MenuText

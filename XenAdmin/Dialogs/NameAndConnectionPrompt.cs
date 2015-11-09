@@ -86,7 +86,6 @@ namespace XenAdmin.Dialogs
                     IXenObject xo = comboBox.Items[i] as IXenObject;
                     if (xo != null 
                         && (xo.Connection.Session.IsLocalSuperuser 
-                            || !Helpers.MidnightRideOrGreater(xo.Connection)
                             || !XenAdmin.Commands.CrossConnectionCommand.IsReadOnly(xo.Connection)))
                     {
                         nonReadOnlyIndex = i;

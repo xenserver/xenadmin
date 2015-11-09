@@ -154,14 +154,13 @@ namespace XenAdmin.TabPages
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GridViewSubjectList.DefaultCellStyle = dataGridViewCellStyle5;
-            this.GridViewSubjectList.MaximumSize = new System.Drawing.Size(900, 500);
             this.GridViewSubjectList.Name = "GridViewSubjectList";
             this.GridViewSubjectList.RowHeadersVisible = false;
             this.GridViewSubjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridViewSubjectList.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.GridViewSubjectList_SortCompare);
-            this.GridViewSubjectList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GridViewSubjectList_MouseClick);
             this.GridViewSubjectList.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridViewSubjectList_CellMouseClick);
             this.GridViewSubjectList.SelectionChanged += new System.EventHandler(this.GridViewSubjectList_SelectionChanged);
+            this.GridViewSubjectList.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.GridViewSubjectList_SortCompare);
+            this.GridViewSubjectList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GridViewSubjectList_MouseClick);
             // 
             // ColumnExpand
             // 
@@ -246,7 +245,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.labelBlurb, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonJoinLeave, 0, 1);
-            this.tableLayoutPanel2.MaximumSize = new System.Drawing.Size(900, 100);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // labelBlurb
@@ -316,7 +314,6 @@ namespace XenAdmin.TabPages
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.LabelGridViewDisabled);
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.MaximumSize = new System.Drawing.Size(900, 540);
             this.panel1.Name = "panel1";
             // 
             // panel2

@@ -54,8 +54,6 @@ namespace XenAdmin.Network
               X509Chain chain,
               SslPolicyErrors sslPolicyErrors)
         {
-            //this causes log spamming when using with StorageLink web service.
-            //log.Debug("Validating server cert");
             if (sslPolicyErrors == SslPolicyErrors.None)
             {
                 log.Debug("SslPolicyErrors is set to None, exiting validation");
@@ -85,8 +83,6 @@ namespace XenAdmin.Network
 
                     if (kvp.Value == certificate.GetCertHashString())
                     {
-                        //this causes log spamming when using with StorageLink web service.
-                        //log.Debug("Match found with existing cert");
                         return true;
                     }
                     else if (!XenAdmin.Properties.Settings.Default.WarnChangedCertificate && Registry.AlwaysShowSSLCertificates == SSLCertificateTypes.None)
@@ -128,7 +124,7 @@ namespace XenAdmin.Network
                 if (AcceptCertificate)
                     log.Debug("Adding cert after confirmation");
                 else
-                    log.Debug("User refejected new cert");
+                    log.Debug("User rejected new cert");
                 return AcceptCertificate;
             }
         }

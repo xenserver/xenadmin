@@ -32,6 +32,8 @@ namespace XenAdmin.SettingsPanels
             this.m_textBoxOsParams = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.m_autoHeightLabelHvm = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.m_autoHeightLabelNonHvm = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_tlpHvm = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.m_buttonUp = new System.Windows.Forms.Button();
@@ -40,9 +42,6 @@ namespace XenAdmin.SettingsPanels
             this.m_tlpNonHvm = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.m_comboBoxBootDevice = new System.Windows.Forms.ComboBox();
-            this.m_checkBoxAutoBoot = new System.Windows.Forms.CheckBox();
-            this.m_autoHeightLabelHvm = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.m_autoHeightLabelNonHvm = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.m_tlpHvm.SuspendLayout();
             this.m_tlpNonHvm.SuspendLayout();
@@ -63,10 +62,21 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.m_autoHeightLabelHvm, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.m_autoHeightLabelNonHvm, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.m_tlpHvm, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.m_tlpNonHvm, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.m_checkBoxAutoBoot, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m_tlpHvm, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m_tlpNonHvm, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // m_autoHeightLabelHvm
+            // 
+            resources.ApplyResources(this.m_autoHeightLabelHvm, "m_autoHeightLabelHvm");
+            this.tableLayoutPanel1.SetColumnSpan(this.m_autoHeightLabelHvm, 4);
+            this.m_autoHeightLabelHvm.Name = "m_autoHeightLabelHvm";
+            // 
+            // m_autoHeightLabelNonHvm
+            // 
+            resources.ApplyResources(this.m_autoHeightLabelNonHvm, "m_autoHeightLabelNonHvm");
+            this.tableLayoutPanel1.SetColumnSpan(this.m_autoHeightLabelNonHvm, 3);
+            this.m_autoHeightLabelNonHvm.Name = "m_autoHeightLabelNonHvm";
             // 
             // m_tlpHvm
             // 
@@ -127,24 +137,6 @@ namespace XenAdmin.SettingsPanels
             this.m_comboBoxBootDevice.Name = "m_comboBoxBootDevice";
             this.m_comboBoxBootDevice.SelectedIndexChanged += new System.EventHandler(this.m_comboBoxBootDevice_SelectedIndexChanged);
             // 
-            // m_checkBoxAutoBoot
-            // 
-            resources.ApplyResources(this.m_checkBoxAutoBoot, "m_checkBoxAutoBoot");
-            this.m_checkBoxAutoBoot.Name = "m_checkBoxAutoBoot";
-            this.m_checkBoxAutoBoot.UseVisualStyleBackColor = true;
-            // 
-            // m_autoHeightLabelHvm
-            // 
-            resources.ApplyResources(this.m_autoHeightLabelHvm, "m_autoHeightLabelHvm");
-            this.tableLayoutPanel1.SetColumnSpan(this.m_autoHeightLabelHvm, 4);
-            this.m_autoHeightLabelHvm.Name = "m_autoHeightLabelHvm";
-            // 
-            // m_autoHeightLabelNonHvm
-            // 
-            resources.ApplyResources(this.m_autoHeightLabelNonHvm, "m_autoHeightLabelNonHvm");
-            this.tableLayoutPanel1.SetColumnSpan(this.m_autoHeightLabelNonHvm, 3);
-            this.m_autoHeightLabelNonHvm.Name = "m_autoHeightLabelNonHvm";
-            // 
             // BootOptionsEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -177,8 +169,7 @@ namespace XenAdmin.SettingsPanels
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button m_buttonUp;
 		private System.Windows.Forms.Button m_buttonDown;
-		private System.Windows.Forms.CheckedListBox m_checkedListBox;
-		private System.Windows.Forms.CheckBox m_checkBoxAutoBoot;
+        private System.Windows.Forms.CheckedListBox m_checkedListBox;
 
     }
 }

@@ -126,7 +126,6 @@
     <Compile Include="SearchTests\SearchMarshallingTests.cs" />
     <Compile Include="SearchTests\SearchTestsSetup.cs" />
     <Compile Include="TabsAndMenus\TabsAndMenus.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenusGeorge.cs" />
     <Compile Include="UnitTests\NaturalCompareTest.cs" />
     <Compile Include="UnitTests\TokenizerTest.cs" />
     <Compile Include="UnitTests\XenObjectEqualsTests.cs" />
@@ -171,19 +170,7 @@
     <Content Include="TestResources\ContextMenuBuilderTestResults.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestResources\Cowley-db.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\cowley1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestResources\cowleyPolicies.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\licensing-pool-george.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\licensing-pool-midnightride.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="TestResources\PluginResources\ParentMenuItemFeatureTestPlugin.xcplugin.xml" />
@@ -281,7 +268,6 @@
     <Compile Include="Diagnostics\DiagnosticsTests.cs" />
     <Compile Include="DialogTests\BostonDialogTest.cs" />
     <Compile Include="DialogTests\CertificateDialogTests.cs" />
-    <Compile Include="DialogTests\ChangeStorageLinkPasswordDialogTests.cs" />
     <Compile Include="DialogTests\DecompressApplianceDialogTests.cs" />
     <Compile Include="DialogTests\DownloadApplianceDialogTests.cs" />
     <Compile Include="DialogTests\IscsiDeviceConfigDialogTests.cs" />
@@ -290,15 +276,12 @@
     <Compile Include="DialogTests\ReconnectAsDialogTests.cs" />
     <Compile Include="DialogTests\RestoreVMsDialogTests.cs" />
     <Compile Include="DialogTests\ScreenShotDialogTest.cs" />
-    <Compile Include="DialogTests\SetStorageLinkLicenseServerDialogTests.cs" />
     <Compile Include="DialogTests\UpsellDialogTests.cs" />
     <Compile Include="DialogTests\WlbCredentialsDialogTests.cs" />
     <Compile Include="DialogTests\WlbEditScheduledTaskTests.cs" />
     <Compile Include="I18nResourceFilesTests.cs" />
     <Compile Include="LicensingTests\LicenceTimerTests.cs" />
     <Compile Include="MainWindowLauncher.cs" />
-    <Compile Include="MainWindowWrapper\AddStorageLinkSystemDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\ChangeStorageLinkPasswordDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\CommandErrorDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\DRConfigureDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\DRFailoverWizardWrapper.cs" />
@@ -307,8 +290,6 @@
     <Compile Include="MainWindowWrapper\NewTagDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\OptionsDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\RoleElevationDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\StorageLinkEditPageWrapper.cs" />
-    <Compile Include="MainWindowWrapper\StorageLinkMenuWrapper.cs" />
     <Compile Include="MainWindowWrapper\TestUtils.cs" />
     <Compile Include="MiscTests\BasicXMLResolverTests.cs" />
     <Compile Include="MiscTests\ContextMenuBuilderTests.cs" />
@@ -336,7 +317,6 @@
     <Compile Include="MiscTests\UpdateManagerTests.cs" />
     <Compile Include="MiscTests\WebBrowser2Tests.cs" />
     <Compile Include="PluginTests\PlaceholdersTests.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenusCowley.cs" />
     <Compile Include="TabsAndMenus\TabsAndMenusBoston.cs" />
     <Compile Include="TabsAndMenus\LogsTabTests.cs">
       <SubType>Code</SubType>
@@ -353,16 +333,10 @@
     <Compile Include="TabsAndMenus\MainMenuGeorge.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TabsAndMenus\MainMenuMidnightRide.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="TabsAndMenus\PluginTabsAndMenus.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TabsAndMenus\StartUpStateTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\TabsAndMenusMidnightRide.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TabsAndMenus\ToolbarGeorge.cs">
@@ -374,7 +348,6 @@
     <Compile Include="UnitTests\AlertTests\DuplicateIqnAlertTests.cs" />
     <Compile Include="UnitTests\AlertTests\GuiOldAlertTest.cs" />
     <Compile Include="UnitTests\CPUMaskingTest.cs" />
-    <Compile Include="StorageLinkTests\StorageLinkConnectionTests.cs" />
     <Compile Include="StringExtensionsTests\TruncateStringTest.cs" />
     <Compile Include="UnitTests\UnitTestHelper\IUnitTestVerifier.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockObjectBuilder.cs" />
@@ -443,9 +416,6 @@
     <Content Include="TestResources\small_vms.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestResources\snapshots.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestResources\state1.treeview.orgview.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -462,9 +432,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestResources\state4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state4Cowley.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestResources\tampa-db_inc_snapshots.xml">

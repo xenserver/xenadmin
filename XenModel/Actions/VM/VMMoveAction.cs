@@ -139,7 +139,7 @@ namespace XenAdmin.Actions.VMActions
                     PercentComplete += halfstep;
                 }
 
-                if (Helpers.BostonOrGreater(Connection) && SR != null)
+                if (SR != null)
                     VM.set_suspend_SR(Session, VM.opaque_ref, SR.opaque_ref);
 
                 if (exn != null)

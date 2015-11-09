@@ -59,7 +59,6 @@ using XenAdmin.TabPages;
 using XenAdmin.XenSearch;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
-using XenAdmin.Network.StorageLink;
 
 using System.Linq;
 
@@ -534,8 +533,6 @@ namespace XenAdmin
                 }
             }
 
-            Program.StorageLinkConnections.CollectionChanged += StorageLinkConnections_CollectionChanged;
-
             RequestRefreshTreeView();
 
             ThreadPool.QueueUserWorkItem((WaitCallback)delegate(object o)
@@ -590,37 +587,6 @@ namespace XenAdmin
                 pair.Value.opaque_ref = pair.Key;
                 MeddlingActionManager.ForceAddTask(pair.Value);
             }
-        }
-
-        private void StorageLinkConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
-        {
-            var con = ((StorageLinkConnection)e.Element);
-
-            if (e.Action == CollectionChangeAction.Add)
-            {
-                con.ConnectionStateChanged += (s, ee) =>
-                    {
-                        if (ee.ConnectionState == StorageLinkConnectionState.Connected)
-                        {
-                            RequestRefreshTreeView();
-
-                            TrySelectNewNode(o =>
-                            {
-                                var server = con.Cache.Server;
-                                return server != null && server.Equals(o);
-                            }, false, true, false);
-
-                        }
-                        Program.Invoke(this, UpdateToolbars);
-                    };
-
-                con.Cache.Changed += Cache_Changed;
-            }
-            else if (e.Action == CollectionChangeAction.Remove)
-            {
-                con.Cache.Changed -= Cache_Changed;
-            }
-            RequestRefreshTreeView();
         }
 
         private void Cache_Changed(object sender, EventArgs e)
@@ -1322,13 +1288,9 @@ namespace XenAdmin
             // 'Home' tab is only visible if the 'Overview' tree node is selected, or if the tree is
             // empty (i.e. at startup).
             bool show_home = SelectionManager.Selection.Count == 1 && SelectionManager.Selection[0].Value == null;
-            // Only show the HA tab if the host's license has the HA flag set
-            bool has_ha_license_flag = selectionMaster != null && !selectionMaster.RestrictHAOrlando;
-            bool george_or_greater = Helpers.GeorgeOrGreater(selectionConnection);
-            bool mr_or_greater = Helpers.MidnightRideOrGreater(selectionConnection);
             // The upsell pages use the first selected XenObject: but they're only shown if there is only one selected object (see calls to ShowTab() below).
             bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
-            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHAFloodgate);
+            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA);
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
 
@@ -1341,18 +1303,16 @@ namespace XenAdmin
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
-            bool isStorageLinkSelected = SelectionManager.Selection.FirstIsStorageLink;
-            bool isStorageLinkSRSelected = SelectionManager.Selection.First is StorageLinkRepository && ((StorageLinkRepository)SelectionManager.Selection.First).SR(ConnectionsManager.XenConnectionsCopy) != null;
             bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML;
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected || isDockerContainerSelected));
-            ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && mr_or_greater && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
+            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isDockerContainerSelected));
+            ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
-            ShowTab(TabPageSR, !multi && !SearchMode && (isSRSelected || isStorageLinkSRSelected));
+            ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
             ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
@@ -1374,14 +1334,14 @@ namespace XenAdmin
 
             ShowTab(TabPageConsole, !shownConsoleReplacement && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
             ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected && has_ha_license_flag);
-            ShowTab(TabPageSnapshots, !multi && !SearchMode && george_or_greater && isRealVMSelected);
+            ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
+            ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
 
             //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
             if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell ))
-                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
+                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
 
-            ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
+            ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
@@ -1609,9 +1569,6 @@ namespace XenAdmin
             IXenConnection connection = SelectionManager.Selection.GetConnectionOfFirstItem();
             bool vm = SelectionManager.Selection.FirstIsRealVM && !((VM)SelectionManager.Selection.First).Locked;
 
-            Host best_host = hostAncestor ?? (connection == null ? null : Helpers.GetMaster(connection));
-            bool george_or_greater = best_host != null && Helpers.GeorgeOrGreater(best_host);
-
             exportSettingsToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
 
             this.MenuShortcuts = true;
@@ -1619,7 +1576,6 @@ namespace XenAdmin
             startOnHostToolStripMenuItem.Available = startOnHostToolStripMenuItem.Enabled;
             resumeOnToolStripMenuItem.Available = resumeOnToolStripMenuItem.Enabled;
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
-            storageLinkToolStripMenuItem.Available = storageLinkToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;
@@ -1760,8 +1716,7 @@ namespace XenAdmin
                 }
                 else if (t == TabPageSR)
                 {
-                    StorageLinkRepository slr = SelectionManager.Selection.First as StorageLinkRepository;
-                    SrStoragePage.SR = slr == null ? SelectionManager.Selection.First as SR : slr.SR(ConnectionsManager.XenConnectionsCopy);
+                    SrStoragePage.SR = SelectionManager.Selection.First as SR;
                 }
                 else if (t == TabPageNetwork)
                 {
@@ -3050,8 +3005,6 @@ namespace XenAdmin
 
         // this explicit implementation of ISynchronizeInvoke is used to allow the model to update 
         // its API on the main program thread while being decoupled from MainWindow.
-
-        // See StorageLinkConnection for an example of its usage.
 
         IAsyncResult ISynchronizeInvoke.BeginInvoke(Delegate method, object[] args)
         {

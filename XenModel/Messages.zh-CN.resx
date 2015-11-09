@@ -1112,9 +1112,6 @@
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>添加自定义字段“{0}”</value>
   </data>
-  <data name="ADD_HOST" xml:space="preserve">
-    <value>添加...</value>
-  </data>
   <data name="ADD_HOST_TO_POOL_AD_MESSAGE" xml:space="preserve">
     <value>您正在尝试将服务器“{0}”添加到已配置为使用 AD 身份验证的池中。所有池成员必须使用同一种身份验证方法。
 
@@ -1913,9 +1910,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>启动顺序: {0}</value>
-  </data>
-  <data name="BOOTORDER_AUTOSTART" xml:space="preserve">
-    <value>启动顺序: {0}(在服务器启动时自动启动)</value>
   </data>
   <data name="BOOT_DEVICE_DISABLED_ROW_TEXT" xml:space="preserve">
     <value>VM 将不从此行以下的设备启动</value>
@@ -4709,9 +4703,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="EXTERNAL_NETWORK" xml:space="preserve">
     <value>外部网络</value>
   </data>
-  <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
-    <value>外部网络需要使用 Standard Edition 许可证。</value>
-  </data>
   <data name="EXTERNAL_PLUGIN_BAD_EXIT" xml:space="preserve">
     <value>外部命令已退出，退出代码为: {0}</value>
   </data>
@@ -4748,23 +4739,8 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>功能已在注册表中禁用</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 Feature Pack 1 或更高版本的 Enterprise 或 Platinum Edition 许可证。</value>
-  </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
     <value>{0} 需要使用 Enterprise\n或 Enterprise Edition 许可证。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_GEORGE" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.5 或更高版本</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6\n或更高版本的 Enterprise 或 Platinum Edition 许可证。</value>
-  </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
   </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>下一部分(&amp;N)</value>
@@ -5186,13 +5162,13 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>带有任何自定义字段</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TEXT" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT" xml:space="preserve">
     <value>高可用性计划</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>为该池中的 VM 配置高可用性重启优先级、重启顺序和延迟间隔</value>
   </data>
-  <data name="HAWIZARD_ASSIGNRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
+  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
     <value>为该池中的 VM 配置高可用性重启优先级</value>
   </data>
   <data name="HAWIZ_SUMMARY" xml:space="preserve">
@@ -6913,18 +6889,6 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_TITLE" xml:space="preserve">
     <value>删除整个快照</value>
   </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE" xml:space="preserve">
-    <value>是否确实要删除所选存储卷? 此操作无法撤消。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUMES_CONTINUE_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储卷</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE" xml:space="preserve">
-    <value>是否确实要删除所选存储卷? 此操作无法撤消。</value>
-  </data>
-  <data name="MESSAGEBOX_DELETE_STORAGELINKVOLUME_CONTINUE_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储卷</value>
-  </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
     <value>该操作将永久删除此系统磁盘，可能会使 VM 无法启动。是否继续?</value>
   </data>
@@ -8261,25 +8225,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>带标记“{0}”的对象</value>
   </data>
-  <data name="OEM" xml:space="preserve">
-    <value>OEM</value>
-  </data>
-  <data name="OEM_MACHINE_SERIAL_NUMBER" xml:space="preserve">
-    <value>服务器序列号</value>
-  </data>
-  <data name="OEM_MACHINE_SERVICE_TAG" xml:space="preserve">
-    <value>服务器服务标记</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION" xml:space="preserve">
-    <value>该服务器上的软件已过期。请单击此处了解更多详细信息</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TEXT" xml:space="preserve">
-    <value>该服务器上的软件不包含以下更新:
-{0}</value>
-  </data>
-  <data name="OEM_OLD_SOFTWARE_VERSION_DIALOG_TITLE" xml:space="preserve">
-    <value>过期软件 - {0}</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>确定</value>
   </data>
@@ -8291,12 +8236,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="ONE_VM_SELECTED" xml:space="preserve">
     <value>已选择 1 个 VM</value>
-  </data>
-  <data name="ONLY_IN_BOSTON_OR_LATER" xml:space="preserve">
-    <value>该功能仅在 XenServer 6.0 或更高版本中提供</value>
-  </data>
-  <data name="ONLY_IN_COWLEY_OR_LATER" xml:space="preserve">
-    <value>此功能仅在 XenServer 5.6 Feature Pack 1 或更高版本中提供</value>
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>仅能升级使用 StorageLink Gateway NetApp、Dell EqualLogic 或 SMI-SOnly 适配器的 VM</value>
@@ -10118,119 +10057,11 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>打包服务器状态报告时出错。可能只能获取部分报告</value>
   </data>
-  <data name="STORAGELINKPOOL" xml:space="preserve">
-    <value>StorageLink 存储池</value>
-  </data>
-  <data name="STORAGELINKPOOLS" xml:space="preserve">
-    <value>StorageLink 存储池</value>
-  </data>
-  <data name="STORAGELINKPOOL_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>存储池常规属性</value>
-  </data>
-  <data name="STORAGELINKREPOSITORY_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>存储库常规属性</value>
-  </data>
-  <data name="STORAGELINKSERVER" xml:space="preserve">
-    <value>StorageLink 服务器</value>
-  </data>
-  <data name="STORAGELINKSERVERS" xml:space="preserve">
-    <value>StorageLink 服务器</value>
-  </data>
-  <data name="STORAGELINKSERVER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>StorageLink 服务器常规属性</value>
-  </data>
-  <data name="STORAGELINKSRS" xml:space="preserve">
-    <value>StorageLink 存储库</value>
-  </data>
-  <data name="STORAGELINKSYSTEM" xml:space="preserve">
-    <value>StorageLink 存储系统</value>
-  </data>
-  <data name="STORAGELINKSYSTEMS" xml:space="preserve">
-    <value>StorageLink 存储系统</value>
-  </data>
-  <data name="STORAGELINKSYSTEM_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>存储系统常规属性</value>
-  </data>
-  <data name="STORAGELINKVOLUME" xml:space="preserve">
-    <value>StorageLink 存储卷</value>
-  </data>
-  <data name="STORAGELINKVOLUMES" xml:space="preserve">
-    <value>StorageLink 存储卷</value>
-  </data>
-  <data name="STORAGELINK_GATEWAY" xml:space="preserve">
-    <value>StorageLink Gateway</value>
-  </data>
-  <data name="STORAGELINK_IN_USE" xml:space="preserve">
-    <value>正在使用存储系统</value>
-  </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>可用空间 {0}，总空间 {1}</value>
   </data>
-  <data name="STORAGELINK_POOL_SIZE_USED" xml:space="preserve">
-    <value>{0} 已用空间，总计 {1}</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>光纤通道</value>
-  </data>
-  <data name="STORAGELINK_PROTOCOLCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_DEDUPLICATION" xml:space="preserve">
-    <value>重复数据删除</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGOPTIONS_NONE" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THICK" xml:space="preserve">
-    <value>复杂</value>
-  </data>
-  <data name="STORAGELINK_PROVISIONINGTYPE_THIN" xml:space="preserve">
-    <value>精简</value>
-  </data>
-  <data name="STORAGELINK_SCANNING_FOR_SRS" xml:space="preserve">
-    <value>正在“{0}”上扫描 SR</value>
-  </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>存在需要重新连接的 StorageLink Gateway SR。</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE" xml:space="preserve">
-    <value>克隆</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_CLONE_OF_SNAPSHOT" xml:space="preserve">
-    <value>快照克隆</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DEDUPLICATION" xml:space="preserve">
-    <value>重复数据删除</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_DIFF_SNAPSHOT" xml:space="preserve">
-    <value>快照</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_FIBRE_CHANNEL" xml:space="preserve">
-    <value>光纤通道</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_FULL" xml:space="preserve">
-    <value>复杂置备</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_PROVISION_THIN" xml:space="preserve">
-    <value>精简置备</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_REMOTE_REPLICATION" xml:space="preserve">
-    <value>远程复制</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_RESIZE" xml:space="preserve">
-    <value>调整卷大小</value>
-  </data>
-  <data name="STORAGELINK_STORAGESYSTEMCAPABILITIES_SNAPSHOT_OF_SNAPSHOT" xml:space="preserve">
-    <value>快照的快照</value>
-  </data>
-  <data name="STORAGELINK_TEST_CONNECTION" xml:space="preserve">
-    <value>正在进行与 StorageLink 服务器 {0} 的连接测试</value>
-  </data>
-  <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
-    <value>无法连接 {0} 上的 StorageLink 服务器。</value>
   </data>
   <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
     <value>StorageLink SR 状态</value>
@@ -10712,12 +10543,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0} 存储库已损坏。</value>
   </data>
-  <data name="UPDATES_WIZARD_BROWSE_EMBEDDED" xml:space="preserve">
-    <value>选择要安装的嵌入更新</value>
-  </data>
-  <data name="UPDATES_WIZARD_BROWSE_RETAIL" xml:space="preserve">
-    <value>选择要安装的零售更新</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>无法从 {0} 中下载更新: 连接已断开。
 
@@ -10883,14 +10708,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="UPDATES_WIZARD_RESTART_AGENT" xml:space="preserve">
     <value>重新启动代理</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM" xml:space="preserve">
-    <value>重新启动这些 Embedded Edition 服务器:
-</value>
-  </data>
-  <data name="UPDATES_WIZARD_RESTART_OEM_MASTER" xml:space="preserve">
-    <value>重新启动 Embedded Edition 服务器“{0}”，并对这些服务器应用任何更新:
-</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
     <value>重新启动这些服务器:
@@ -12308,12 +12125,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>需要升级许可证</value>
-  </data>
-  <data name="XSOEM" xml:space="preserve">
-    <value>XenServer Embedded Edition 更新文件({0})|{0}|所有文件({1})|{1}</value>
-  </data>
-  <data name="XSREL" xml:space="preserve">
-    <value>XenServer Embedded Edition 升级文件({0})|{0}|所有文件({1})|{1}</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
     <value>XenServer 更新文件({0})|{0}|所有文件({1})|{1}</value>

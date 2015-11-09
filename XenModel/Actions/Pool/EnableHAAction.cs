@@ -47,7 +47,6 @@ namespace XenAdmin.Actions
         private readonly Dictionary<VM, VMStartupOptions> startupOptions;
         private readonly SR[] heartbeatSRs;
         private readonly long failuresToTolerate;
-        private readonly bool ignoreStartupOptions; // ignore start order and delay
 
         public EnableHAAction(Pool pool, Dictionary<VM, VMStartupOptions> startupOptions, List<SR> heartbeatSRs, long failuresToTolerate)
             : base(pool.Connection, string.Format(Messages.ENABLING_HA_ON, Helpers.GetName(pool).Ellipsise(50)), Messages.ENABLING_HA, false)
@@ -61,7 +60,6 @@ namespace XenAdmin.Actions
             this.startupOptions = startupOptions;
             this.heartbeatSRs = heartbeatSRs.ToArray();
             this.failuresToTolerate = failuresToTolerate;
-            ignoreStartupOptions = Helpers.HaIgnoreStartupOptions(pool.Connection);
         }
 
         public List<SR> HeartbeatSRs
@@ -83,14 +81,12 @@ namespace XenAdmin.Actions
                     XenAPI.VM.SetHaRestartPriority(this.Session, vm, (VM.HA_Restart_Priority)startupOptions[vm].HaRestartPriority);
 
                     // Set new VM order and start_delay
-                    if (!ignoreStartupOptions)
-                    {
-                        log.DebugFormat("Setting start order on {0} to {1}", vm.Name, startupOptions[vm].Order);
-                        XenAPI.VM.set_order(this.Session, vm.opaque_ref, startupOptions[vm].Order);
+                    log.DebugFormat("Setting start order on {0} to {1}", vm.Name, startupOptions[vm].Order);
+                    XenAPI.VM.set_order(this.Session, vm.opaque_ref, startupOptions[vm].Order);
 
-                        log.DebugFormat("Setting start order on {0} to {1}", vm.Name, startupOptions[vm].StartDelay);
-                        XenAPI.VM.set_start_delay(this.Session, vm.opaque_ref, startupOptions[vm].StartDelay);
-                    }
+                    log.DebugFormat("Setting start order on {0} to {1}", vm.Name, startupOptions[vm].StartDelay);
+                    XenAPI.VM.set_start_delay(this.Session, vm.opaque_ref, startupOptions[vm].StartDelay);
+
                     this.PercentComplete = (int)(++i * increment);
                 }
             }

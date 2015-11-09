@@ -68,14 +68,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.FirstIsStorageLink)
-            {
-                new NewSRWizard(null, null, (IStorageLinkObject)selection[0].XenObject).Show(Parent);
-            }
-            else
-            {
-                MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new NewSRWizard(selection[0].Connection));
-            }
+            MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new NewSRWizard(selection[0].Connection));
         }
 
         private static bool CanExecuteOnHost(Host host)
@@ -90,25 +83,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1 && selection.FirstIsStorageLink)
-            {
-                var storageLinkObject = (IStorageLinkObject)selection[0].XenObject;
-
-                if (storageLinkObject is StorageLinkServer || storageLinkObject is StorageLinkSystem || storageLinkObject is StorageLinkPool)
-                {
-                    if (storageLinkObject.StorageLinkConnection.ConnectionState == XenAdmin.Network.StorageLink.StorageLinkConnectionState.Connected)
-                    {
-                        foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-                        {
-                            if (c.IsConnected && CanExecuteOnPool(Helpers.GetPool(c)) || CanExecuteOnHost(Helpers.GetMaster(c)))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            else if (selection.HostAncestor != null)
+            if (selection.HostAncestor != null)
             {
                 return CanExecuteOnHost(selection.HostAncestor);
             }

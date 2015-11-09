@@ -242,6 +242,11 @@ namespace XenAdmin.Network
                 // changes type, for example.
                 AddError(owner, connection, Messages.SERVER_API_INCOMPATIBLE, Messages.SOLUTION_UNKNOWN);
             }
+            else if (error is ServerNotSupported)
+            {
+                // Server version is too old for this version of XenCenter
+                AddError(owner, connection, Messages.SERVER_TOO_OLD, Messages.SERVER_TOO_OLD_SOLUTION);
+            }
             else
             {
                 if (((XenConnection)connection).SupressErrors)

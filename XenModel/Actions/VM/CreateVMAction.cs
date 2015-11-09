@@ -287,19 +287,8 @@ namespace XenAdmin.Actions.VMActions
             if (HomeServerChanged())
                 XenAPI.VM.set_affinity(Session, VM.opaque_ref, HomeServer != null ? HomeServer.opaque_ref : Helper.NullOpaqueRef);
 
-            if (Helpers.MidnightRideOrGreater(VM.Connection))
-            {
-                if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
-                    XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, MemoryStaticMax, MemoryDynamicMin, MemoryDynamicMax);
-            }
-            else
-            {
-                // For George and earlier hosts, we set them all the same.
-                // The order of operations doesn't matter, because George didn't enforce the ordering of values.
-                XenAPI.VM.set_memory_dynamic_min(Session, VM.opaque_ref, MemoryStaticMax);
-                XenAPI.VM.set_memory_dynamic_max(Session, VM.opaque_ref, MemoryStaticMax);
-                XenAPI.VM.set_memory_static_max(Session, VM.opaque_ref, MemoryStaticMax);
-            }
+            if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
+                XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, MemoryStaticMax, MemoryDynamicMin, MemoryDynamicMax);
         }
 
         private bool HomeServerChanged()
@@ -472,7 +461,7 @@ namespace XenAdmin.Actions.VMActions
                 if (vdi.name_label != disk.Disk.name_label)
                     VDI.set_name_label(Session, vdi.opaque_ref, disk.Disk.name_label);
 
-                if (firstDisk && Helpers.BostonOrGreater(Connection))
+                if (firstDisk)
                 {
                     //use the first disk to set the VM.suspend_SR
                     SR vdiSR = Connection.Resolve(vdi.SR);
@@ -484,8 +473,8 @@ namespace XenAdmin.Actions.VMActions
 
                 progress += step;
             }
-			if (Helpers.BostonOrGreater(Connection))
-				VM.set_suspend_SR(Session, VM.opaque_ref, suspendSr);
+
+			VM.set_suspend_SR(Session, VM.opaque_ref, suspendSr);
         }
 
         private VBD GetDiskVBD(DiskDescription disk, List<VBD> vbds)

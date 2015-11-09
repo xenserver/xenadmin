@@ -36,7 +36,6 @@ using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using XenAdmin.Network.StorageLink;
 using System.Threading;
 
 namespace XenAdmin.Actions
@@ -48,35 +47,11 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ReadOnlyCollection<CslgSystemStorage> _cslgSystemStorages;
-        public StorageLinkConnection StorageLinkConnection { get; private set; }
-        private List<StorageLinkConnection> _SLConnections;
-        private System.ComponentModel.ISynchronizeInvoke _invoker;
         private string _adapterid;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SrCslgStorageSystemScanAction"/> class.
-        /// </summary>
-        /// <param name="connection">The connection.</param>
-        /// <param name="hostname">The hostname.</param>
-        /// <param name="username">The username.</param>
-        /// <param name="passwordSecret">The password secret.</param>
-        public SrCslgStorageSystemScanAction(System.ComponentModel.ISynchronizeInvoke invoker, IXenConnection connection, List<StorageLinkConnection> storageLinkConnections, string hostname, string username, string passwordSecret)
-            : base(connection, hostname, username, passwordSecret)
-        {
-            _SLConnections = storageLinkConnections;
-            _invoker = invoker;
-        }
-
-        /// <summary>
-        /// Boston or greater constructor
-        /// </summary>
-        /// <param name="connection"></param>
 
         public SrCslgStorageSystemScanAction(IXenConnection connection, string adapterid, string target, string user, string password)
             : base(connection, target, user, password)
         {
-            if (!Helpers.BostonOrGreater(connection))
-                throw new ArgumentException(@"Invalid connection, it has to be a boston or greater connection", connection.Name);
             _adapterid = adapterid;
         }
 
@@ -101,104 +76,11 @@ namespace XenAdmin.Actions
 
             Log.DebugFormat("Attempting to find SRs on CSLG {0}.", dconf["target"]);
 
-            if (Connection != null && Helpers.MidnightRideOrGreater(Connection) && !Helpers.CowleyOrGreater(Connection))
-            {
-                RunProbe(dconf);
-
+            dconf["adapterid"] = _adapterid;
+            RunProbe(dconf);
+            if (!string.IsNullOrEmpty(Result))
                 _cslgSystemStorages = new ReadOnlyCollection<CslgSystemStorage>(ParseStorageSystemsXml(Util.GetContentsOfValueNode(Result)));
-            }
-            else if (Connection != null && Helpers.BostonOrGreater(Connection))
-            {
-                dconf["adapterid"] = _adapterid;
-                RunProbe(dconf);
-                if (!string.IsNullOrEmpty(Result))
-                    _cslgSystemStorages = new ReadOnlyCollection<CslgSystemStorage>(ParseStorageSystemsXml(Util.GetContentsOfValueNode(Result)));
-            }
-            else
-            {
-                bool created = false;
-
-                if (Connection != null)
-                {
-                    // There will be no connection if a storagelink-object is selected in the tree.
-
-                    string secretRef = Secret.get_by_uuid(Connection.Session, dconf["password_secret"]);
-                    string password = Secret.get_value(Connection.Session, secretRef);
-
-                    StorageLinkConnection = _SLConnections.Find(c => c.Host == dconf["target"] && c.Username == dconf["username"] && c.Password == password);
-
-                    if (StorageLinkConnection == null)
-                    {
-                        // the user has clicked the "test connection" button in the properties dialog then
-                        // the storagelink connection won't exist in the Program.StorageLinkConnections collection.
-
-                        StorageLinkConnection = new StorageLinkConnection(_invoker, dconf["target"], dconf["username"], password);
-                        StorageLinkConnection.BeginConnect();
-                        created = true;
-                    }
-                }
-                else
-                {
-                    StorageLinkConnection = _SLConnections.Find(c => c.Host == dconf["target"] && c.Username == dconf["username"]);
-                }
-
-                try
-                {
-                    var list = new List<CslgSystemStorage>();
-
-                    // wait for storagelink connection to finish populating
-                    for (int i = 0; i < 600 && StorageLinkConnection.ConnectionState == StorageLinkConnectionState.Connecting; i++)
-                    {
-                        Thread.Sleep(100);
-                    }
-
-                    if (!string.IsNullOrEmpty(StorageLinkConnection.Error))
-                    {
-                        throw new InvalidOperationException(StorageLinkConnection.Error);
-                    }
-
-                    if (StorageLinkConnection.ConnectionState != StorageLinkConnectionState.Connected)
-                    {
-                        throw new InvalidOperationException(string.Format(Messages.STORAGELINK_UNABLE_TO_CONNECT, dconf["target"]));
-                    }
-
-                    foreach (StorageLinkSystem s in StorageLinkConnection.Cache.StorageSystems)
-                    {
-                        var provisioningOptions = new List<CslgParameter> { new CslgParameter(null, Messages.NEWSR_CSLG_NONE) };
-
-                        if ((s.Capabilities & StorageLinkEnums.StorageSystemCapabilities.POOL_LEVEL_DEDUPLICATION) != 0)
-                        {
-                            provisioningOptions.Add(new CslgParameter("DEDUP", Messages.NEWSR_CSLG_DEDUPLICATION));
-                        }
-
-                        var protocols = new List<CslgParameter> { new CslgParameter(null, Messages.NEWSR_CSLG_AUTO) };
-
-                        if ((s.Capabilities & StorageLinkEnums.StorageSystemCapabilities.ISCSI) != 0)
-                        {
-                            protocols.Add(new CslgParameter("ISCSI", Messages.NEWSR_CSLG_ISCSI));
-                        }
-                        if ((s.Capabilities & StorageLinkEnums.StorageSystemCapabilities.FIBRE_CHANNEL) != 0)
-                        {
-                            protocols.Add(new CslgParameter("FC", Messages.NEWSR_CSLG_FC));
-                        }
-
-                        list.Add(new CslgSystemStorage(s.ToString(), s.StorageSystemId, protocols, provisioningOptions, false, s));
-                    }
-
-                    _cslgSystemStorages = new ReadOnlyCollection<CslgSystemStorage>(list);
-                }
-                finally
-                {
-                    if (created)
-                    {
-                        StorageLinkConnection.EndConnect();
-                    }
-                }
-            }
         }
-
-
-
 
         private List<CslgSystemStorage> ParseStorageSystemsXml(String xml)
         {
@@ -241,8 +123,7 @@ namespace XenAdmin.Actions
                     }
                 }
 
-                output.Add(new CslgSystemStorage(displayName, storageSystemId, protocols, provisioningOptions,
-                                                 supportsCHAP, null));
+                output.Add(new CslgSystemStorage(displayName, storageSystemId, protocols, provisioningOptions, supportsCHAP));
             }
             return output;
         }
@@ -261,8 +142,6 @@ namespace XenAdmin.Actions
         private readonly ReadOnlyCollection<CslgParameter> _provisioningOptions;
         private readonly bool _supportsCHAP;
 
-        public StorageLinkSystem StorageLinkSystem { get; private set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CslgSystemStorage"/> class.
         /// </summary>
@@ -272,8 +151,7 @@ namespace XenAdmin.Actions
         /// <param name="provisioningOptions">The available provisioning options.</param>
         /// <param name="supportsCHAP">Indicates whether CHAP is supported.</param>
         public CslgSystemStorage(string displayName, string storageSystemId, IEnumerable<CslgParameter> protocols,
-            IEnumerable<CslgParameter> provisioningOptions, bool supportsCHAP,
-            StorageLinkSystem storageLinkSystem)
+            IEnumerable<CslgParameter> provisioningOptions, bool supportsCHAP)
         {
             Util.ThrowIfStringParameterNullOrEmpty(displayName, "displayName");
             Util.ThrowIfStringParameterNullOrEmpty(storageSystemId, "storageSystemId");
@@ -285,7 +163,6 @@ namespace XenAdmin.Actions
             _protocols = new ReadOnlyCollection<CslgParameter>(new List<CslgParameter>(protocols));
             _provisioningOptions = new ReadOnlyCollection<CslgParameter>(new List<CslgParameter>(provisioningOptions));
             _supportsCHAP = supportsCHAP;
-            StorageLinkSystem = storageLinkSystem;
         }
 
         /// <summary>

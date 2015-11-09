@@ -146,15 +146,6 @@ namespace XenAdmin.TabPages
                     sr.Connection.XenObjectsUpdated += Connection_XenObjectsUpdated;
                 }
 
-                // removeDropDownButton and addDropDownButton are for storagelink. They contain extra stuff for adding
-                // and removing SL volumes. 
-
-                addDropDownButton.Visible = sr != null && sr.type == "cslg" && sr.StorageLinkRepository(Program.StorageLinkConnections) != null;
-                addVirtualDiskButton.Visible &= !addDropDownButton.Visible;
-
-                removeDropDownButton.Visible = addDropDownButton.Visible;
-                RemoveButtonContainer.Visible = !removeDropDownButton.Visible;
-
                 BuildList(true);
                 SetupDeprecationBanner();
             }
@@ -429,36 +420,8 @@ namespace XenAdmin.TabPages
             }
             else
                 EditButton.Enabled = false;
-
-            // Remove drop down button
-            removeDropDownButton.Enabled = deleteCmd.CanExecute();
-
         }
 
-        private void removeContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            removeContextMenuStrip.Items.Clear();
-            SelectedItemCollection vdis = SelectedVDIs;
-            if (vdis.Count > 0)
-            {
-                Command cmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
-                removeContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.DELETE_VIRTUAL_DISK));
-
-                cmd = new RemoveStorageLinkVolumeCommand(Program.MainWindow, sr.StorageLinkRepository(Program.StorageLinkConnections), vdis);
-                removeContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.DELETE_SL_VOLUME_CONTEXT_MENU_ELIPS));
-            }
-        }
-
-        private void addContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            addContextMenuStrip.Items.Clear();
-
-            Command cmd = new AddVirtualDiskCommand(Program.MainWindow, sr);
-            addContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.ADD_VIRTUAL_DISK));
-
-            cmd = new ImportStorageLinkVolumeCommand(Program.MainWindow, sr.StorageLinkRepository(Program.StorageLinkConnections));
-            addContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.ADD_SL_VOLUME));
-        }
         #endregion
 
         #region buttonHandlers
@@ -561,17 +524,8 @@ namespace XenAdmin.TabPages
                     case 0:
                         return VDI.Name;
                     case 1:
-                        if (Helpers.BostonOrGreater(VDI.Connection))
-                        {
-                            string name;
-                            if (VDI.sm_config.TryGetValue("displayname", out name))
-                            {
-                                return name;
-                            }
-                            return string.Empty;
-                        }
-                        StorageLinkVolume volume = showStorageLink ? VDI.StorageLinkVolume(Program.StorageLinkConnections.GetCopy()) : null;
-                        return volume == null ? string.Empty : volume.Name;
+                        string name;
+                        return VDI.sm_config.TryGetValue("displayname", out name) ? name : "";
                     case 2:
                         return VDI.Description;
                     case 3:

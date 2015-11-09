@@ -35,8 +35,6 @@ using System.Linq;
 using System.Text;
 using XenAdmin;
 using XenAdmin.Core;
-using XenAdmin.Network.StorageLink;
-
 
 namespace XenAPI
 {
@@ -167,25 +165,6 @@ namespace XenAPI
             }
         }
 
-        public StorageLinkVolume StorageLinkVolume(IEnumerable<StorageLinkConnection> connections)
-        {
-            string svid;
-            if (sm_config.TryGetValue("SVID", out svid) && !string.IsNullOrEmpty(svid))
-            {
-                foreach (StorageLinkConnection slCon in connections)
-                {
-                    StorageLinkVolume volume = new List<StorageLinkVolume>(slCon.Cache.StorageVolumes).Find(v => v.opaque_ref == svid);
-
-                    if (volume != null)
-                    {
-                        return volume;
-                    }
-                }
-            }
-            return null;
-
-        }
-
         public override string ToString()
         {
             return Name;
@@ -271,11 +250,7 @@ namespace XenAPI
         {
             get
             {
-                // The HA types changed in Boston
-                if (Helpers.BostonOrGreater(Connection))
-                    return (type == vdi_type.ha_statefile || type == vdi_type.redo_log);
-                else
-                    return (type == vdi_type.ha_statefile || type == vdi_type.metadata);
+                return (type == vdi_type.ha_statefile || type == vdi_type.redo_log);
             }
         }
 
@@ -295,7 +270,7 @@ namespace XenAPI
         /// </summary>
         public bool IsMetadataForDR
         {
-            get { return Helpers.BostonOrGreater(Connection) && type == vdi_type.metadata; }
+            get { return type == vdi_type.metadata; }
         }
 
         /// <summary>

@@ -73,8 +73,6 @@ namespace XenAdmin.Commands
             if (selection.Count == 1)
             {
                 IXenConnection connection = selection[0].Connection;
-                if (!XenAdmin.Core.Helpers.GeorgeOrGreater(connection))
-                    return false;
                 bool connected = connection != null && connection.IsConnected;
                 Host host = selection[0].XenObject as Host;
                 bool is_host = (host != null);

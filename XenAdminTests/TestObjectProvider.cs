@@ -36,7 +36,6 @@ using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
-using XenAdmin.Network.StorageLink;
 using XenAdminTests.XenModelTests;
 using XenAPI;
 
@@ -375,20 +374,6 @@ namespace XenAdminTests
                 if (connection.IsConnected)
                 {
                     foreach (IXenObject o in connection.Cache.XenSearchableObjects)
-                    {
-                        if (cond(o))
-                        {
-                            return o;
-                        }
-                    }
-                }
-            }
-
-            foreach (StorageLinkConnection connection in Program.StorageLinkConnections)
-            {
-                if (connection.ConnectionState == StorageLinkConnectionState.Connected)
-                {
-                    foreach (IXenObject o in connection.Cache.XenSearchableObjects(ConnectionManagerCopy))
                     {
                         if (cond(o))
                         {

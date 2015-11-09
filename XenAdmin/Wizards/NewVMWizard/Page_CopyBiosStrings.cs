@@ -60,7 +60,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 _template = template;
                 ServersGridView.Rows.Clear();
 
-                if (Helpers.MidnightRideOrGreater(Connection) && template.DefaultTemplate)
+                if (template.DefaultTemplate)
                 {
                     List<Host> hosts = new List<Host>(Connection.Cache.Hosts);
                     hosts.Sort();

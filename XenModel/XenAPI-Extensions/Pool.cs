@@ -113,60 +113,18 @@ namespace XenAPI
         {
             get
             {
-                if (Helpers.MidnightRideOrGreater(Connection))
+                var hosts = new List<Host>(Connection.Cache.Hosts);
+                foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
                 {
-                    var hosts = new List<Host>(Connection.Cache.Hosts);
-                    foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
-                    {
-                        Host.Edition edition1 = edition;
-                        Host host = hosts.Find(h => h.edition == Host.GetEditionText(edition1));
+                    Host.Edition edition1 = edition;
+                    Host host = hosts.Find(h => h.edition == Host.GetEditionText(edition1));
 
-                        if (host != null)
-                        {
-                            return Helpers.GetFriendlyLicenseName(host);
-                        }
-                    }
-                    return PropertyManager.GetFriendlyName("Label-host.edition-free");
-                }
-                else
-                {
-                    Host lowestLicenseHost = null;
-                    string lowestLicense = "";
-                    foreach (Host host in this.Connection.Cache.Hosts)
+                    if (host != null)
                     {
-                        string sku = host.license_params.ContainsKey("sku_type") ? host.license_params["sku_type"].Replace(" ", "_").ToLowerInvariant() : "xe_express";
-
-                        //Express
-                        if (sku.EndsWith("xe_express"))
-                        {
-                            lowestLicenseHost = host;
-                            lowestLicense = sku;
-                            break;
-                        }
-
-                        // Server
-                        if (sku.EndsWith("xe_server") && lowestLicense.EndsWith("xe_enterprise"))
-                        {
-                            lowestLicenseHost = host;
-                            lowestLicense = sku;
-                        }
-
-                        // Enterprise
-                        if (lowestLicense == "")
-                        {
-                            lowestLicenseHost = host;
-                            lowestLicense = sku;
-                        }
-                    }
-                    if (lowestLicense.EndsWith("xe_express"))
-                    {
-                        return PropertyManager.GetFriendlyName("Label-host.sku_type-FG-xe_express");
-                    }
-                    else
-                    {
-                        return Helpers.GetFriendlyLicenseName(lowestLicenseHost);
+                        return Helpers.GetFriendlyLicenseName(host);
                     }
                 }
+                return PropertyManager.GetFriendlyName("Label-host.edition-free");
             }
         }
         /// <summary>
@@ -219,101 +177,6 @@ namespace XenAPI
             return string.Format("XC_PLUGIN_SECRET_{0}_{1}_{2}", obj.Connection.Username, plugin_name, Helpers.GetUuid(obj));
         }
 
-        public void ClearStorageLinkCredentials()
-        {
-            var otherConfig = new Dictionary<string, string>(other_config);
-
-            otherConfig.Remove("storagelink_host");
-            otherConfig.Remove("storagelink_user");
-            otherConfig.Remove("storagelink_password_secret");
-            Pool.set_other_config(Connection.Session, opaque_ref, otherConfig);
-        }
-
-        public void SetStorageLinkCredentials(string host, string username, string password)
-        {
-            var otherConfig = new Dictionary<string, string>(other_config);
-
-            if (host == null)
-            {
-                otherConfig.Remove("storagelink_host");
-            }
-            else
-            {
-                otherConfig["storagelink_host"] = host;
-            }
-
-            if (username == null)
-            {
-                otherConfig.Remove("storagelink_user");
-            }
-            else
-            {
-                otherConfig["storagelink_user"] = username;
-            }
-
-            if (password == null)
-            {
-                otherConfig.Remove("storagelink_password_secret");
-            }
-            else if (otherConfig.ContainsKey("storagelink_password_secret"))
-            {
-                try
-                {
-                    string secretRef = Secret.get_by_uuid(Connection.Session, otherConfig["storagelink_password_secret"]);
-                    Secret.set_value(Connection.Session, secretRef, password);
-                }
-                catch (Failure)
-                {
-                    otherConfig["storagelink_password_secret"] = Secret.CreateSecret(Connection.Session, password);
-                }
-                catch (WebException)
-                {
-                    otherConfig["storagelink_password_secret"] = Secret.CreateSecret(Connection.Session, password);
-                }
-            }
-            else
-            {
-                otherConfig["storagelink_password_secret"] = Secret.CreateSecret(Connection.Session, password);
-            }
-
-            Pool.set_other_config(Connection.Session, opaque_ref, otherConfig);
-        }
-
-        public string StorageLinkHost
-        {
-            get
-            {
-                string host;
-                other_config.TryGetValue("storagelink_host", out host);
-                return host;
-            }
-        }
-
-        public string StorageLinkUsername
-        {
-            get
-            {
-                string user;
-                other_config.TryGetValue("storagelink_user", out user);
-                return user;
-            }
-        }
-
-        public StorageLinkCredentials GetStorageLinkCredentials()
-        {
-            if (other_config != null && Helpers.MidnightRideOrGreater(Connection) && !Helpers.BostonOrGreater(Connection))
-            {
-                var otherConfig = new Dictionary<string, string>(other_config);
-                string host, user, passwordSecret;
-                otherConfig.TryGetValue("storagelink_host", out host);
-                otherConfig.TryGetValue("storagelink_user", out user);
-                otherConfig.TryGetValue("storagelink_password_secret", out passwordSecret);
-
-                return new StorageLinkCredentials(Connection, host, user, null, passwordSecret);
-            }
-            return null;
-        }
-
         // Whether the vSwitch Controller appears to be configured.
         // (Note that we can't tell whether it's actually working properly through the API).
         public bool vSwitchController
@@ -325,8 +188,7 @@ namespace XenAPI
 
                 foreach (Host h in Connection.Cache.Hosts)
                 {
-                    if (!Helpers.CowleyOrGreater(h) ||
-                        Host.RestrictVSwitchController(h) ||
+                    if (Host.RestrictVSwitchController(h) ||
                         !h.software_version.ContainsKey("network_backend") ||
                         h.software_version["network_backend"] != "openvswitch")
                     {

@@ -2336,12 +2336,6 @@
   <data name="virtualDisksToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Virtual Disks</value>
   </data>
-  <data name="storageLinkToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="storageLinkToolStripMenuItem.Text" xml:space="preserve">
-    <value>StorageLink</value>
-  </data>
   <data name="reclaimFreedSpacetripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
@@ -3523,12 +3517,6 @@
   </data>
   <data name="&gt;&gt;attachVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;storageLinkToolStripMenuItem.Name" xml:space="preserve">
-    <value>storageLinkToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;storageLinkToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.StorageLinkToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;reclaimFreedSpacetripMenuItem.Name" xml:space="preserve">
     <value>reclaimFreedSpacetripMenuItem</value>

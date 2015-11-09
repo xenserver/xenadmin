@@ -74,8 +74,6 @@ namespace XenAdmin.Commands
             if (selection.Count == 1)
             {
                 IXenConnection connection = selection[0].Connection;
-                if (!XenAdmin.Core.Helpers.GeorgeOrGreater(connection))
-                    return false;
                 bool connected = connection != null && connection.IsConnected;
                 bool inPool = selection[0].PoolAncestor != null;
 

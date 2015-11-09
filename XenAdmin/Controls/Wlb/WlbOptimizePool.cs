@@ -837,8 +837,6 @@ namespace XenAdmin.Controls.Wlb
 
         private bool PassedRbacChecks()
         {
-            if (!Helpers.MidnightRideOrGreater(_pool.Connection))
-                return true;
             return Role.CanPerform(WLB_PERMISSION_CHECKS, this._pool.Connection);
         }
         #endregion

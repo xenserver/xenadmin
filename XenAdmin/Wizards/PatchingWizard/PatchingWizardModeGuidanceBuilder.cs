@@ -49,30 +49,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Build(servers, guidance);
         }
 
-        public static string ModeNewOem(List<Host> hosts)
-        {
-            StringBuilder sbLog = new StringBuilder();
-
-            sbLog.AppendLine(Messages.PATCHING_EJECT_CDS);
-
-            //Add master
-            Host master = Helpers.GetMaster(hosts[0].Connection);
-            Pool pool = Helpers.GetPool(master.Connection);
-            if (pool != null && pool.ha_enabled)
-            {
-                sbLog.AppendLine(Messages.PATCHING_WARNING_HA);
-            }
-            sbLog.AppendLine(Messages.PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS);
-            sbLog.AppendFormat("\t{0}\r\n", master.Name);
-            hosts.Remove(master);
-            //Add slaves
-            foreach (Host host in hosts)
-            {
-                sbLog.AppendFormat("\t{0}\r\n", host.Name);
-            }
-            return sbLog.ToString();
-        }
-
         private static string Build(List<Host> servers, List<after_apply_guidance> guidance)
         {
             StringBuilder sbLog = new StringBuilder();

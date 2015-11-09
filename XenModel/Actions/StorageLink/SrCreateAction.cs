@@ -38,8 +38,6 @@ using XenAdmin;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
-using XenAdmin.Network.StorageLink;
-
 
 namespace XenAdmin.Actions
 {
@@ -54,7 +52,6 @@ namespace XenAdmin.Actions
         private readonly bool _srIsShared;
         private readonly Dictionary<string, string> _dconf;
         private readonly Dictionary<string, string> _smconf;
-        private StorageLinkConnection _SLConnection;
 
         /// <summary>
         /// RBAC dependencies needed to create SR.
@@ -66,8 +63,8 @@ namespace XenAdmin.Actions
                                                                                  "pbd.unplug");
 
         public SrCreateAction(IXenConnection connection, Host host, string srName,
-            string srDescription, SR.SRTypes srType, string srContentType, bool srIsShared,
-            Dictionary<string, string> dconf, Dictionary<string, string> smconf, List<StorageLinkConnection> copyStorageLinkConnections)
+            string srDescription, SR.SRTypes srType, string srContentType,
+            Dictionary<string, string> dconf, Dictionary<string, string> smconf)
             : base(connection, string.Format(Messages.ACTION_SR_CREATING_TITLE,
             XenAPI.SR.getFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
         {
@@ -77,11 +74,9 @@ namespace XenAdmin.Actions
             _srDescription = srDescription;
             _srType = srType;
             _srContentType = srContentType;
-            _srIsShared = srIsShared;
+            _srIsShared = true;  // used to depend on restrict_pool_attached_storage flag: now always true
             _dconf = dconf;
             _smconf = smconf;
-            if (_srType == SR.SRTypes.cslg && !Helpers.BostonOrGreater(connection))
-                _SLConnection = copyStorageLinkConnections.Find(s => s.Host == _dconf["target"]);
 
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
@@ -115,39 +110,18 @@ namespace XenAdmin.Actions
             log.DebugFormat("is shared='{0}'", _srIsShared);
 
             string secretuuid = null;
-            if (Helpers.MidnightRideOrGreater(Connection))
+            string value;
+            if (_dconf.TryGetValue("cifspassword", out value))
             {
-                string value;
-                if (_dconf.TryGetValue("cifspassword", out value))
-                {
-                    secretuuid = CreateSecret("cifspassword", value);
-                }
-                else if (_dconf.TryGetValue("password", out value))
-                {
-                    secretuuid = CreateSecret("password", value);
-                }
-                else if (_dconf.TryGetValue("chappassword", out value))
-                {
-                    secretuuid = CreateSecret("chappassword", value);
-                }
+                secretuuid = CreateSecret("cifspassword", value);
             }
-
-            if (Helpers.MidnightRideOrGreater(Connection))
+            else if (_dconf.TryGetValue("password", out value))
             {
-                string tempvalue;
-                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("password", out tempvalue), "The device config contains 'password', but it should have already been removed!");
-                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("cifspassword", out tempvalue), "The device config contains 'cifspassword', but it should have already been removed!");
-                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("chappassword", out tempvalue), "The device config contains 'chappassword', but it should have already been removed!");
+                secretuuid = CreateSecret("password", value);
             }
-
-            if (_srType == SR.SRTypes.cslg && !Helpers.BostonOrGreater(Connection))
+            else if (_dconf.TryGetValue("chappassword", out value))
             {
-                // make sure this connection is added to the storagelink service.
-                StorageLinkConnection slCon = _SLConnection;
-                if (slCon != null)
-                {
-                    slCon.AddXenConnection(Connection);
-                }
+                secretuuid = CreateSecret("chappassword", value);
             }
 
             Description = Messages.ACTION_SR_CREATING;

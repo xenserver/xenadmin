@@ -251,7 +251,7 @@ namespace XenAPI
             
             SR sr = Connection.Resolve<SR>(SR);
             
-            if (sr != null && sr.type == "cslg" && Helpers.MidnightRideOrGreater(sr.Connection))
+            if (sr != null && sr.type == "cslg")
             {
                 string host, username, passwordSecret;
 

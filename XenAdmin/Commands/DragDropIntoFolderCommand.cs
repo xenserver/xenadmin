@@ -77,12 +77,6 @@ namespace XenAdmin.Commands
             {
                 Folder folder = obj as Folder;
 
-                // can't put StorageLink objects in folders.
-                if (obj is IStorageLinkObject)
-                {
-                    return false;
-                }
-
                 // if all items are already in the target folder then cancel.
                 if (GetItemsNotAlreadyInTargetFolder().Count == 0)
                 {

@@ -208,13 +208,7 @@ namespace XenAdmin.SettingsPanels
             {
                 DiskPriorityPanel.Visible = true;
                 label1.Visible = true;
-                if (master.RestrictQoS)
-                {
-                    PriorityToolTipContainer.SetToolTip(Messages.FIELD_DISABLED);
-                    DiskPriorityPanel.Enabled = false;
-                }
-                else
-                    DiskPriorityPanel.Enabled = true;
+                DiskPriorityPanel.Enabled = true;
             }
         }
 

@@ -216,8 +216,7 @@ namespace XenOvfTransport
                 #endregion
 
 				#region SET STARTUP OPTIONS
-				if (Helpers.BostonOrGreater(xenSession.Connection))
-					OVF.AddStartupSection(ovfEnv, true, vsId, vm.order, vm.start_delay, vm.shutdown_delay);
+				OVF.AddStartupSection(ovfEnv, true, vsId, vm.order, vm.start_delay, vm.shutdown_delay);
 				#endregion
 
 				#region GET AND EXPORT DISKS using iSCSI

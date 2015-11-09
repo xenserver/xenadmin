@@ -77,27 +77,6 @@ namespace XenAdmin.Wizards
 
         protected override void OnShown(EventArgs e)
         {
-            // Check all the hosts in the pool have xha licenses
-            List<string> hostsWithoutLicense = new List<string>();
-            foreach (Host host in xenConnection.Cache.Hosts)
-            {
-                if (host.RestrictHAOrlando)
-                {
-                    hostsWithoutLicense.Add(host.Name);
-                }
-            }
-
-            if (hostsWithoutLicense.Count > 0)
-            {
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       String.Format(Messages.HA_HOSTS_LACK_LICENSE, String.Join("\n", hostsWithoutLicense.ToArray())),
-                       Messages.HIGH_AVAILABILITY)).ShowDialog(this);
-                this.Close();
-                return;
-            }
-
             // Check for broken SRs
             List<string> brokenSRs = new List<string>();
             foreach (SR sr in xenConnection.Cache.SRs)

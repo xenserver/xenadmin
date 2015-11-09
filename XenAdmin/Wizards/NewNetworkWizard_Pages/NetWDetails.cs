@@ -136,7 +136,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             comboBoxNICList.Visible = external;
             labelVLAN.Visible = external;
             numericUpDownVLAN.Visible = external;
-            numericUpDownMTU.Visible = labelMTU.Visible = (external && Helpers.CowleyOrGreater(host));
+            numericUpDownMTU.Visible = labelMTU.Visible = external;
             labelNIC.Visible = external;
             if (comboBoxNICList.Items.Count > 0)
                 comboBoxNICList.SelectedIndex = external ? comboBoxNICList.Items.Count - 1 : -1;

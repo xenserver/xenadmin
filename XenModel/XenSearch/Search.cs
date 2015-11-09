@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using XenAdmin.Network.StorageLink;
 using XenAPI;
 
 using XenAdmin.Core;
@@ -528,9 +527,6 @@ namespace XenAdmin.XenSearch
             {
                 // This is the default search on the treeview
 
-                //Grouping storageLinkPoolGrouping = new XenModelObjectPropertyGrouping<StorageLinkPool>(PropertyNames.storageLinkPool, (Grouping)null);
-                //Grouping storageLinkSystemGrouping = new XenModelObjectPropertyGrouping<StorageLinkSystem>(PropertyNames.storageLinkSystem, storageLinkPoolGrouping);
-                //Grouping storageLinkServerGrouping = new XenModelObjectPropertyGrouping<StorageLinkServer>(PropertyNames.storageLinkServer, storageLinkSystemGrouping);
                 Grouping dockervmGrouping = new XenModelObjectPropertyGrouping<VM>(PropertyNames.dockervm, null);
                 Grouping hostGrouping = new XenModelObjectPropertyGrouping<Host>(PropertyNames.host, dockervmGrouping);
                 Grouping poolGrouping = new XenModelObjectPropertyGrouping<Pool>(PropertyNames.pool, hostGrouping);
@@ -544,7 +540,6 @@ namespace XenAdmin.XenSearch
         {
             ObjectTypes types = ObjectTypes.DisconnectedServer | ObjectTypes.Server | ObjectTypes.VM |
                                 ObjectTypes.RemoteSR | ObjectTypes.DockerContainer;
-            //| ObjectTypes.StorageLinkServer | ObjectTypes.StorageLinkSystem | ObjectTypes.StorageLinkPool | ObjectTypes.StorageLinkVolume | ObjectTypes.StorageLinkRepository;
 
             return types;
         }
@@ -700,13 +695,7 @@ namespace XenAdmin.XenSearch
             }
         }
 
-        internal static Func<List<StorageLinkConnection>> GetStorageLinkConnectionsCopy;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="getStorageLinkConnectionsCopy">A function that gets a copy of the StorageLink connections.</param>
-        public static void InitSearch(Func<List<StorageLinkConnection>> getStorageLinkConnectionsCopy)
+        public static void InitSearch()
         {
             searches = new Dictionary<String, Search>();
 
@@ -714,10 +703,8 @@ namespace XenAdmin.XenSearch
 
             ConnectionsManager.XenConnections.CollectionChanged += CollectionChanged;
             SynchroniseSearches();
-
-            GetStorageLinkConnectionsCopy = getStorageLinkConnectionsCopy;
         }
-
+        
         private static void CollectionChanged(Object sender, System.ComponentModel.CollectionChangeEventArgs e)
         {
             //InvokeHelper.AssertOnEventThread();

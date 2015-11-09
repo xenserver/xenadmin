@@ -306,7 +306,7 @@ namespace XenAdmin.Actions
 
             RbacMethodList rbacMethodList;
 
-            if (Connection.Session.IsLocalSuperuser || !Helpers.MidnightRideOrGreater(Connection) || XenAdminConfigManager.Provider.DontSudo)  // don't need to / can't / don't want to sudo
+            if (Connection.Session.IsLocalSuperuser || XenAdminConfigManager.Provider.DontSudo)  // don't need / want to sudo
                 rbacMethodList = new RbacMethodList();
             else
                 rbacMethodList = GetApiMethodsToRoleCheck;

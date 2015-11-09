@@ -67,21 +67,5 @@ namespace XenAdminTests
                 return GetField<CommandToolStripMenuItem>("attachVirtualDiskToolStripMenuItem");
             }
         }
-
-        public StorageLinkToolStripMenuItem StorageLinkMenu
-        {
-            get
-            {
-                return GetField<StorageLinkToolStripMenuItem>("storageLinkToolStripMenuItem");
-            }
-        }
-
-        public StorageLinkMenuWrapper StorageLinkMenuItems
-        {
-            get
-            {
-                return new StorageLinkMenuWrapper(Item);
-            }
-        }
     }
 }

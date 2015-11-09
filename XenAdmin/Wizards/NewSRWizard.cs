@@ -85,21 +85,16 @@ namespace XenAdmin.Wizards
         private readonly bool _rbac;
 
         public NewSRWizard(IXenConnection connection)
-            : this(connection, null, null)
+            : this(connection, null)
         {
         }
 
         public NewSRWizard(IXenConnection connection, SR srToReattach)
-            : this(connection, srToReattach, null)
+            : this(connection, srToReattach, false)
         {
         }
 
-        public NewSRWizard(IXenConnection connection, SR srToReattach, IStorageLinkObject storageLinkObject)
-            : this(connection, srToReattach, storageLinkObject, false)
-        {
-        }
-
-        internal NewSRWizard(IXenConnection connection, SR srToReattach, IStorageLinkObject storageLinkObject, bool disasterRecoveryTask)
+        internal NewSRWizard(IXenConnection connection, SR srToReattach, bool disasterRecoveryTask)
             : base(connection)
         {
             InitializeComponent();
@@ -125,24 +120,16 @@ namespace XenAdmin.Wizards
                              : Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH);
             xenTabPageStorageProvisioningMethod = new StorageProvisioning();
 
-            if (connection == null)
-                Util.ThrowIfParameterNull(storageLinkObject, "storageLinkObject");
-            if (storageLinkObject == null)
-                Util.ThrowIfParameterNull(connection, "connection");
-            if (storageLinkObject != null && connection != null)
-                throw new ArgumentException("connection must be null when passing in a storageLinkObject", "connection");
-
             //do not use virtual members in constructor
             var format = (srToReattach == null && !disasterRecoveryTask)
                              ? Messages.NEWSR_TEXT
                              : Messages.NEWSR_TEXT_ATTACH;
-            m_text = string.Format(format, xenConnection == null ? storageLinkObject.ToString() : Helpers.GetName(xenConnection));
+            m_text = string.Format(format, Helpers.GetName(xenConnection));
 
             _srToReattach = srToReattach;
             
             xenTabPageChooseSrType.SrToReattach = srToReattach;
             xenTabPageChooseSrType.DisasterRecoveryTask = disasterRecoveryTask;
-            xenTabPageCslg.SetStorageLinkObject(storageLinkObject);
 
             // Order the tab pages
             AddPage(xenTabPageChooseSrType);
@@ -331,11 +318,7 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_Cslg)
                 {
                     AddPage(xenTabPageCslg);
-
-                    if (Helpers.BostonOrGreater(xenConnection))
-                        AddPages(xenTabPageCslgLocation, xenTabPageCslgSettings);
-                    else
-                        AddPages(new XenTabPage { Text = "" });
+                    AddPages(xenTabPageCslgLocation, xenTabPageCslgSettings);
                 }
                 else if (m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                 {
@@ -432,55 +415,12 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(CSLG))
             {
-                #region
-                if (Helpers.BostonOrGreater(xenConnection))
-                {
-                    xenTabPageCslgLocation.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
-                    xenTabPageCslgSettings.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
-                    NotifyNextPagesOfChange(xenTabPageCslgLocation, xenTabPageCslgSettings);
-                }
-                else
-                {
-                    RemovePagesFrom(_rbac ? 4 : 3);
-
-                    if (xenTabPageCslg.SelectedStorageSystem != null)
-                    {
-                        AddPages(xenTabPageCslgSettings);
-                        xenTabPageCslgSettings.SystemStorage = xenTabPageCslg.SelectedStorageSystem;
-                        xenTabPageCslgSettings.StoragePools = xenTabPageCslg.StoragePools;
-                        NotifyNextPagesOfChange(xenTabPageCslgLocation);
-                    }
-                    else if (xenTabPageCslg.NetAppSelected || xenTabPageCslg.DellSelected)
-                    {
-                        AddPage(xenTabPageFilerDetails);
-                        NotifyNextPagesOfChange(xenTabPageFilerDetails);
-
-                        if (xenTabPageCslg.NetAppSelected)
-                        {
-                            if (m_srWizardType is SrWizardType_Cslg)
-                            {
-                                m_srWizardType = ((SrWizardType_Cslg)m_srWizardType).ToNetApp();
-                                xenTabPageCslg.SrWizardType = m_srWizardType;
-                            }
-                            xenTabPageFilerDetails.IsNetApp = true;
-                            AddPage(xenTabPageNetApp);
-                        }
-                        else if (xenTabPageCslg.DellSelected)
-                        {
-                            if (m_srWizardType is SrWizardType_Cslg)
-                            {
-                                m_srWizardType = ((SrWizardType_Cslg)m_srWizardType).ToEqualLogic();
-                                xenTabPageCslg.SrWizardType = m_srWizardType;
-                            }
-                            xenTabPageFilerDetails.IsNetApp = false;
-                            AddPage(xentabPageEqualLogic);
-                        }
-                    }
-                }
+                xenTabPageCslgLocation.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
+                xenTabPageCslgSettings.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
+                NotifyNextPagesOfChange(xenTabPageCslgLocation, xenTabPageCslgSettings);
 
                 foreach (var entry in xenTabPageCslg.DeviceConfigParts)
                     m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-                #endregion
             }
             else if (senderPagetype == typeof(CslgLocation))
             {
@@ -725,10 +665,8 @@ namespace XenAdmin.Wizards
                                                         srDescriptor.Description,
                                                         m_srWizardType.Type,
                                                         m_srWizardType.ContentType,
-                                                        !master.RestrictPoolAttachedStorage,
                                                         srDescriptor.DeviceConfig,
-                                                        srDescriptor.SMConfig,
-                                                        Program.StorageLinkConnections.GetCopy()));
+                                                        srDescriptor.SMConfig));
                 }
                 else if (_srToReattach == null || _srToReattach.Connection != xenConnection)
                 {
@@ -749,7 +687,6 @@ namespace XenAdmin.Wizards
                                                                srDescriptor.Description,
                                                                m_srWizardType.Type,
                                                                m_srWizardType.ContentType,
-                                                               !master.RestrictPoolAttachedStorage,
                                                                srDescriptor.DeviceConfig));
                 }
                 else
@@ -857,11 +794,8 @@ namespace XenAdmin.Wizards
                     return;
             }
 
-            if (_srToReattach.type == "cslg" && Helpers.BostonOrGreater(_srToReattach.Connection)
-                && xenTabPageCslg.SelectedStorageAdapter != null)
-            {
+            if (_srToReattach.type == "cslg" && xenTabPageCslg.SelectedStorageAdapter != null)
                 NextStep();
-            }
         }
 
         protected override string WizardPaneHelpID()

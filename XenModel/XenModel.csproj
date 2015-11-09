@@ -160,6 +160,11 @@
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\LiveMigrateOptionsVmMapping.cs" />
     <Compile Include="Mappings\VmMapping.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Network\Cache.cs" />
     <Compile Include="Network\ConnectTask.cs" />
     <Compile Include="Network\Heartbeat.cs" />
@@ -260,14 +265,10 @@
     <Compile Include="Actions\SR\SrRepairAction.cs" />
     <Compile Include="Actions\SR\SrScanAction.cs" />
     <Compile Include="Actions\SR\SrShareAction.cs" />
-    <Compile Include="Actions\StorageLink\ChangeStorageLinkPasswordAction.cs" />
-    <Compile Include="Actions\StorageLink\RemoveStorageLinkSystemAction.cs" />
     <Compile Include="Actions\StorageLink\SrCreateAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgScanAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgStoragePoolScanAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgStorageSystemScanAction.cs" />
-    <Compile Include="Actions\StorageLink\SrCslgStorageVolumeScanAction.cs" />
-    <Compile Include="Actions\StorageLink\StorageLinkDelegatedAsyncAction.cs" />
     <Compile Include="Actions\VDI\DestroyDiskAction.cs" />
     <Compile Include="Actions\VDI\DetachVirtualDiskAction.cs" />
     <Compile Include="Actions\VDI\MoveVirtualDiskAction.cs" />
@@ -378,11 +379,6 @@
     <Compile Include="XenServerProxy\SimpleProxyMethodParser.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="I18NException.cs" />
-    <Compile Include="Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
     <Compile Include="Network\ICache.cs" />
     <Compile Include="Icons.cs" />
     <Compile Include="Network\IXenConnection.cs" />
@@ -392,23 +388,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\PropertyManager.cs" />
     <Compile Include="RbacMethod.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkAdapter.cs" />
     <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkCredentials.cs" />
     <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkEnums.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkJobInfo.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkObject.cs" />
     <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkPool.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkRepository.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkServer.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkSystem.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkVolume.cs" />
-    <Compile Include="Network\StorageLink\IStorageLinkWebService.cs" />
-    <Compile Include="Network\StorageLink\MockStorageLinkWebService.cs" />
-    <Compile Include="Network\StorageLink\StorageLinkCache.cs" />
-    <Compile Include="Network\StorageLink\StorageLinkConnection.cs" />
-    <Compile Include="Network\StorageLink\StorageLinkConnection.EventListener.cs" />
-    <Compile Include="Network\StorageLink\StorageLinkSSLWebService.cs" />
-    <Compile Include="Network\StorageLink\StorageLinkWebService.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="XenAPI-Extensions\Auth.cs" />
     <Compile Include="XenAPI-Extensions\BadServerResponse.cs" />

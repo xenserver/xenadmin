@@ -157,7 +157,7 @@ namespace XenAdminTests.WizardTests.state1_xml
     public class WizardTestSetUp : MainWindowLauncher_SetUpFixture
     {
         public WizardTestSetUp()
-            : base("state1.xml")
+            : base("TampaTwoHostPoolSelectioniSCSI.xml")
         { }
     }
 }
@@ -179,7 +179,7 @@ namespace XenAdminTests.WizardTests.cowley1_xml
     public class WizardTestSetUp : MainWindowLauncher_SetUpFixture
     {
         public WizardTestSetUp()
-            : base("cowley1.xml")
+            : base("TampaTwoHostPoolSelectioniSCSI.xml")
         { }
     }
 }
@@ -190,7 +190,7 @@ namespace XenAdminTests.WizardTests.updatesState_xml
     public class WizardTestSetUp : MainWindowLauncher_SetUpFixture
     {
         public WizardTestSetUp()
-            : base("updatesState.xml")
+            : base("TampaTwoHostPoolSelectioniSCSI.xml")
         { }
     }
 }
@@ -201,7 +201,7 @@ namespace XenAdminTests.WizardTests.cowleyPolicies_xml
     public class WizardTestSetUp : MainWindowLauncher_SetUpFixture
     {
         public WizardTestSetUp()
-            : base("cowleyPolicies.xml")
+            : base("TampaTwoHostPoolSelectioniSCSI.xml")
         { }
     }
 }
@@ -234,7 +234,7 @@ namespace XenAdminTests.WizardTests.xapidb_app
     public class WizardTestSetUp : MainWindowLauncher_SetUpFixture
     {
         public WizardTestSetUp()
-            : base("xapidb_app.xml")
+            : base("TampaTwoHostPoolSelectioniSCSI.xml")
         { }
     }
 }

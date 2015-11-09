@@ -122,12 +122,6 @@ namespace XenAdmin.Network
         private Heartbeat heartbeat = null;
 
         /// <summary>
-        /// Whether the connection is restricted by license.  This only is valid if CacheIsPopulated is false.
-        /// See IsRestricted.
-        /// </summary>
-        private bool Restricted = false;
-
-        /// <summary>
         /// Whether we are trying to automatically connect to the new master. Set in HandleConnectionLost.
         /// Note: I think we are not using this correctly -- see CA-37864 for details -- but I'm not going
         /// to fix it unless it gives rise to a reported bug, because I can't test the fix.
@@ -254,28 +248,6 @@ namespace XenAdmin.Network
         public bool CacheIsPopulated
         {
             get { return cacheIsPopulated; }
-        }
-
-        /// <summary>
-        /// Whether the connection is restricted by license -- i.e. whether one of the hosts in this pool
-        /// is XenExpress.  This uses the cache if that has been populated, but for the short time between
-        /// connections and the cache being populated, it uses the Restricted flag.
-        /// </summary>
-        private bool IsRestricted
-        {
-            get
-            {
-                if (cacheIsPopulated)
-                {
-                    foreach (XenAPI.Host h in Cache.Hosts)
-                    {
-                        if (h.RestrictConnection)
-                            return true;
-                    }
-                    return false;
-                }
-                return Restricted;
-            }
         }
 
         private bool cacheUpdaterRunning = false;
@@ -1229,18 +1201,12 @@ namespace XenAdmin.Network
                 // Save the session so we can log it out later
                 task.Session = session;
 
-                if (session.APIVersion <= API_Version.API_1_2)
+                if (session.APIVersion <= API_Version.API_1_8)
                     throw new ServerNotSupported();
 
                 // Event.next uses a different session with a shorter timeout: see CA-33145.
-                // Although Orlando hosts don't: see CA-40952.
-                Session eventNextSession =
-                    session.APIVersion >= API_Version.API_1_6 ?  // Helpers.GeorgeOrGreater, except we can't use that because the cache isn't populated before we fire the first Event.next.
-                    DuplicateSession(EVENT_NEXT_TIMEOUT) :
-                    session;
-
-                if (session.APIVersion >= API_Version.API_1_6)
-                    eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
+                Session eventNextSession = DuplicateSession(EVENT_NEXT_TIMEOUT);
+                eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
 
                 bool legacyEventSystem = XenObjectDownloader.LegacyEventSystem(session);
 
@@ -1340,22 +1306,6 @@ namespace XenAdmin.Network
                                     //           on which backup is restored.
 
                                     throw new BadRestoreDetected(connection);
-                                }
-                            }
-
-                            // Check if the host being connected to has a XenExpress license
-                            foreach (Host newHost in ObjectChange.GetHosts(eventQueue))
-                            {
-                                if (newHost.RestrictConnection)
-                                {
-                                    Restricted = true;
-                                    foreach (IXenConnection existingConnection in ConnectionsManager.XenConnections)
-                                    {
-                                        XenConnection connection = existingConnection as XenConnection;
-                                        Trace.Assert(connection != null);
-                                        if (connection.IsConnected && connection.IsRestricted)
-                                            throw new ExpressRestriction(newHost.Name, existingConnection.Hostname);
-                                    }
                                 }
                             }
 
@@ -1503,7 +1453,7 @@ namespace XenAdmin.Network
                 {
                     EndConnect(true, task);
                     log.Info(error.Message);
-                    OnConnectionResult(false, "", error);
+                    OnConnectionResult(false, error.Message, error);
                 }
                 else if (task.Cancelled)
                 {
@@ -2120,7 +2070,7 @@ namespace XenAdmin.Network
         {
             get
             {
-                return Messages.MIAMI_NOT_SUPPORTED;
+                return Messages.SERVER_TOO_OLD;
             }
         }
     }

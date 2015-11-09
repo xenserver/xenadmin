@@ -94,7 +94,6 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             Trace.Assert(clone is VM);  // only VMs should show this page
-            Trace.Assert(Helpers.BostonOrGreater(clone.Connection));  // If not Boston or greater, we shouldn't see this page
             Trace.Assert(!Helpers.FeatureForbidden(clone, Host.RestrictGpu));  // If license insufficient, we show upsell page instead
 
             vm = (VM)clone;

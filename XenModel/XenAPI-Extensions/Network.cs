@@ -280,16 +280,12 @@ namespace XenAPI
         /// <summary>
         /// Do not use for new networks, perform checks by hand:
         /// No jumbo frames on CHINs
-        /// No jumbo frames pre Cowley
         /// </summary>
         public bool CanUseJumboFrames
         {
             get 
             {
                 if (Connection == null)
-                    return false;
-
-                if (!Helpers.CowleyOrGreater(Connection))
                     return false;
 
                 // not supported on CHINs

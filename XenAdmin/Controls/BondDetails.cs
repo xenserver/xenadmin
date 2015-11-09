@@ -215,22 +215,13 @@ namespace XenAdmin.Controls
 
         private void ShowHideControls()
         {
-            labelMTU.Visible = numericUpDownMTU.Visible = Helpers.CowleyOrGreater(Connection);
-            groupBoxBondMode.Visible = Helpers.BostonOrGreater(Connection);
             radioButtonLacpSrcMac.Visible = radioButtonLacpTcpudpPorts.Visible = Helpers.SupportsLinkAggregationBond(Connection);
         }
 
         private string PIFDescription(PIF pif)
         {
             Bond bond = pif.BondSlaveOf;
-            if (bond != null)
-                return string.Format(Messages.ALREADY_IN_BOND, bond.Name);
-
-            XenAPI.Network network = Connection.Resolve(pif.network);
-            if (network != null && !Helpers.BostonOrGreater(network.Connection) && network.HasActiveVIFs)  // in Boston, can make a bond even if there are active VMs (PR-1006)
-                return Messages.PIF_IN_USE_BY_VMS;
-
-            return "";
+            return bond == null ? "" : string.Format(Messages.ALREADY_IN_BOND, bond.Name);
         }
 
         internal DialogResult ShowCreationWarning()

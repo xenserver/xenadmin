@@ -67,14 +67,7 @@ namespace XenAdmin.Commands
                 {
                     // can't tag folders.
                     if (xenObject is Folder)
-                    {
                         return false;
-                    }
-                    // can't tag StorageLink objects
-                    if(xenObject is IStorageLinkObject)
-                    {
-                        return false;
-                    }
                 }
 
                 return gt.Grouping.GroupingName == Messages.TAGS && !string.IsNullOrEmpty(gt.Group as string);
