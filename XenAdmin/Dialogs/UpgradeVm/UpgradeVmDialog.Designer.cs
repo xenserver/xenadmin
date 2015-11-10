@@ -4,6 +4,15 @@ namespace XenAdmin.Dialogs
 {
     partial class UpgradeVmDialog
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+
+
+
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -14,7 +23,7 @@ namespace XenAdmin.Dialogs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpgradeVmDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.searchTextBox1 = new XenAdmin.Controls.SearchTextBox();
             this.tableLayoutPanelWarning = new System.Windows.Forms.TableLayoutPanel();
@@ -35,13 +44,13 @@ namespace XenAdmin.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.vmsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // CancelButton
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.CancelButton, "CancelButton");
+            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -49,7 +58,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.searchTextBox1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelWarning, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.SelectAllButton, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.buttonCancel, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.CancelButton, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.vmsDataGridView, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.ClearAllButton, 1, 5);
@@ -186,7 +195,7 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label rubricLabel;
         private System.Windows.Forms.Button SelectAllButton;

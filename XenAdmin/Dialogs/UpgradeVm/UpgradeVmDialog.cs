@@ -52,8 +52,8 @@ namespace XenAdmin.Dialogs
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly SelectedItemCollection selection = null;
 
-        //private const bool SELECT_ALL_EFFECTS_NON_VISIBLE = true;
-        //private const bool CLEAR_ALL_EFFECTS_NON_VISIBLE = true;
+        private const bool SELECT_ALL_EFFECTS_NON_VISIBLE = true;
+        private const bool CLEAR_ALL_EFFECTS_NON_VISIBLE = true;
 
         private readonly IMainWindow mainWindow = null;
         private readonly IXenConnection xenConnection = null;
@@ -440,7 +440,7 @@ namespace XenAdmin.Dialogs
                 var vmRow = row as VmRow;
 
                 if (vmRow != null && !vmRow.ReadOnly)
-                    vmRow.Checked = true; //SELECT_ALL_EFFECTS_NON_VISIBLE ? true : vmRow.Visible || vmRow.Checked;
+                    vmRow.Checked = SELECT_ALL_EFFECTS_NON_VISIBLE ? true : vmRow.Visible || vmRow.Checked;
             }
         }
 
@@ -451,7 +451,7 @@ namespace XenAdmin.Dialogs
                 var vmRow = row as VmRow;
 
                 if (vmRow != null && !vmRow.ReadOnly)
-                    vmRow.Checked = false; //CLEAR_ALL_EFFECTS_NON_VISIBLE ? false : !vmRow.Visible && vmRow.Checked;
+                    vmRow.Checked = CLEAR_ALL_EFFECTS_NON_VISIBLE ? false : !vmRow.Visible && vmRow.Checked;
             }
         }
 
