@@ -2468,12 +2468,6 @@
   <data name="healthCheckToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Health Check...</value>
   </data>
-  <data name="upgradeVmToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
-  </data>
-  <data name="upgradeVmToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Upgrade VMs...</value>
-  </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 6</value>
   </data>
@@ -3804,12 +3798,6 @@
     <value>healthCheckToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;healthCheckToolStripMenuItem1.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;upgradeVmToolStripMenuItem1.Name" xml:space="preserve">
-    <value>upgradeVmToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;upgradeVmToolStripMenuItem1.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

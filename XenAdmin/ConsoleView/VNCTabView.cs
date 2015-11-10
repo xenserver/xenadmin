@@ -236,7 +236,7 @@ namespace XenAdmin.ConsoleView
                     // the VM we are looking at has gone away. We should redock if necessary, otherwise it
                     // avoids the destroy (and re-create in the case of dom0) when the tab itself goes.
                     if (!parentVNCView.isDocked)
-                        parentVNCView.ToogleDockUnDock();
+                        parentVNCView.DockUnDock();
                 }
             }
         }
@@ -946,7 +946,7 @@ namespace XenAdmin.ConsoleView
         {
             if (isFullscreen)
                 return;
-            this.parentVNCView.ToogleDockUnDock();
+            this.parentVNCView.DockUnDock();
         }
 
         private void fullscreenButton_Click(object sender, EventArgs e)
@@ -1102,7 +1102,7 @@ namespace XenAdmin.ConsoleView
                 default:
                     return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ENTER;
             }
-        }
+  }
         void Connection_BeforeConnectionEnd(object sender, EventArgs e)
         {
             Program.Invoke(this, toggleFullscreen);
@@ -1324,19 +1324,18 @@ namespace XenAdmin.ConsoleView
                 this.vncScreen.SendCAD();
         }
 
-        internal void focus_vnc(bool forceFocus = false)
+        internal void focus_vnc()
         {
             if (this.vncScreen != null)
-                FocusVNC(forceFocus);
+                FocusVNC();
         }
 
         // Focus the VNC screen, as long as we're in the right place at the moment.
         // Otherwise ignore the request to focus or it will steal the keyboard from
         // the rightful owner: see CA-41120.
-        private void FocusVNC(bool forceFocus = false)
+        private void FocusVNC()
         {
-            if (forceFocus
-                || Program.MainWindow.ContainsFocus && Program.MainWindow.TheTabControl.SelectedTab == Program.MainWindow.TabPageConsole)
+            if (Program.MainWindow.ContainsFocus && Program.MainWindow.TheTabControl.SelectedTab == Program.MainWindow.TabPageConsole)
                 vncScreen.Focus();
         }
 

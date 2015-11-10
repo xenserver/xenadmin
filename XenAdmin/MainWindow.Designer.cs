@@ -258,7 +258,6 @@ namespace XenAdmin
             this.LicenseManagerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.installNewUpdateToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
             this.rollingUpgradeToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
@@ -283,7 +282,6 @@ namespace XenAdmin
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.healthCheckToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.upgradeVmToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -890,8 +888,6 @@ namespace XenAdmin
             this.poolReconnectAsToolStripMenuItem,
             this.disconnectPoolToolStripMenuItem,
             this.toolStripSeparator27,
-            this.upgradeVmToolStripMenuItem1,
-            this.toolStripSeparator32,
             this.virtualAppliancesToolStripMenuItem,
             this.toolStripSeparator30,
             this.highAvailabilityToolStripMenuItem,
@@ -1858,12 +1854,6 @@ namespace XenAdmin
             this.healthCheckToolStripMenuItem1.Name = "healthCheckToolStripMenuItem1";
             resources.ApplyResources(this.healthCheckToolStripMenuItem1, "healthCheckToolStripMenuItem1");
             // 
-            // upgradeVmToolStripMenuItem1
-            // 
-            this.upgradeVmToolStripMenuItem1.Command = new XenAdmin.Commands.UpgradeVmLaunchUICommand();
-            this.upgradeVmToolStripMenuItem1.Name = "upgradeVmToolStripMenuItem1";
-            resources.ApplyResources(this.upgradeVmToolStripMenuItem1, "upgradeVmToolStripMenuItem1");
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2050,7 +2040,6 @@ namespace XenAdmin
         private CommandToolStripMenuItem NewVmToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
@@ -2128,7 +2117,6 @@ namespace XenAdmin
         private CommandToolStripButton resumeContainerToolStripButton;
         private CommandToolStripButton restartContainerToolStripButton;
         private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
-        private CommandToolStripMenuItem upgradeVmToolStripMenuItem1;
     }
 
 }
