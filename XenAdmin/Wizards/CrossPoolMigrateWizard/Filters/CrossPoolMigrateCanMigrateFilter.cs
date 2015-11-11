@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XenAdmin.Core;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 
@@ -86,6 +87,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     if (preSelectedVMs == null)
                         throw new NullReferenceException("Pre-selected VMs are null");
 
+                    var targetSR = GetDefaultSROrAny(host);
+                    var targetNetwork = GetANetwork(host);
+
                     foreach (VM vm in preSelectedVMs)
                     {
                         try
@@ -104,8 +108,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                                                   vm.opaque_ref,
                                                   receiveMapping,
                                                   true,
-                                                  new Dictionary<XenRef<VDI>, XenRef<SR>>(),
-                                                  new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>(),
+                                                  GetVdiMap(vm, targetSR),
+                                                  GetVifMap(vm, targetNetwork),
                                                   new Dictionary<string, string>());
                         }
                         catch (Failure failure)
@@ -175,6 +179,54 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                 return failureReasons.FirstOrDefault().Reason;
                 
             }
+        }
+
+        private SR GetDefaultSROrAny(Host host)
+        {
+            // try default SR or any other SR that supports VDI create
+            var pool = Helpers.GetPoolOfOne(host.Connection);
+            if (pool != null)
+                return host.Connection.Resolve(pool.default_SR) ?? host.Connection.Cache.SRs.FirstOrDefault(sr => sr.SupportsVdiCreate());
+
+            return null;
+        }
+
+        private Dictionary<XenRef<VDI>, XenRef<SR>> GetVdiMap(VM vm, SR targetSR)
+        {
+            var vdiMap = new Dictionary<XenRef<VDI>, XenRef<SR>>();
+
+            if (targetSR != null)
+            {
+                List<VDI> vdis = vm.Connection.ResolveAll(vm.VBDs).Select(v => vm.Connection.Resolve(v.VDI)).ToList();
+                vdis.RemoveAll(vdi => vdi == null || vm.Connection.Resolve(vdi.SR).GetSRType(true) == SR.SRTypes.iso);
+
+                foreach (var vdi in vdis)
+                {
+                    vdiMap.Add(new XenRef<VDI>(vdi.opaque_ref), new XenRef<SR>(targetSR));
+                }
+            }
+            return vdiMap;
+        }
+
+        private XenAPI.Network GetANetwork(Host host)
+        {
+            return host.Connection.Cache.Networks.FirstOrDefault(network => host.CanSeeNetwork(network));
+        }
+
+        private Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>> GetVifMap(VM vm, XenAPI.Network targetNetwork)
+        {
+            var vifMap = new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>();
+
+            if (targetNetwork != null)
+            {
+                List<VIF> vifs = vm.Connection.ResolveAll(vm.VIFs);
+
+                foreach (var vif in vifs)
+                {
+                    vifMap.Add(new XenRef<VIF>(vif.opaque_ref), new XenRef<XenAPI.Network>(targetNetwork));
+                }
+            }
+            return vifMap;
         }
     }
 }
