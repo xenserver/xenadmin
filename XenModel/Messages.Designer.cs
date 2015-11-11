@@ -16266,6 +16266,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This user is not authorized to access this server..
+        /// </summary>
+        public static string HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This user is not authorized to perform Health Check operations..
         /// </summary>
         public static string HEALTH_CHECK_USER_NOT_AUTHORIZED {
