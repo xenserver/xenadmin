@@ -95,47 +95,7 @@ namespace XenAdmin.ConsoleView
         private Point oldUndockedLocation = Point.Empty;
         private bool oldScaledSetting = false;
 
-        public void ToogleDockUnDock()
-        {
-            if (this.isDocked)
-                UnDockVncView();
-            else
-                DockVncView();
-        }
-
-        public void DockVncView()
-        {
-            if (!this.isDocked)
-            {
-                //save location of undock vnc control
-                this.oldUndockedLocation = undockedForm.Location;
-                this.oldUndockedSize = undockedForm.Size;
-
-                if (!Properties.Settings.Default.PreserveScaleWhenUndocked)
-                    vncTabView.scaleCheckBox.Checked = oldScaledSetting;
-
-                this.reattachConsoleButton.Hide();
-                this.findConsoleButton.Hide();
-
-                undockedForm.Hide();
-                vncTabView.showHeaderBar(true, false);
-                undockedForm.Controls.Remove(vncTabView);
-                this.Controls.Add(vncTabView);
-
-                undockedForm.Dispose();
-                undockedForm = null;
-            }
-
-            vncTabView.UpdateDockButton();
-
-            vncTabView.UpdateParentMinimumSize();
-
-            //Every time we dock / undock I'm going to force an unpause to make sure we don't ever pause a visible one.
-            vncTabView.Unpause();
-            vncTabView.focus_vnc();
-        }
-
-        public void UnDockVncView()
+        public void DockUnDock()
         {
             if (this.isDocked)
             {
@@ -148,7 +108,7 @@ namespace XenAdmin.ConsoleView
                     undockedForm.Icon = Program.MainWindow.Icon;
                     undockedForm.FormClosing += new FormClosingEventHandler(delegate(object sender, FormClosingEventArgs e)
                     {
-                        this.ToogleDockUnDock();
+                        this.DockUnDock();
                     });
                     undockedForm.StartPosition = FormStartPosition.CenterScreen;
                     undockedForm.Resize += new EventHandler(
@@ -174,7 +134,7 @@ namespace XenAdmin.ConsoleView
 
                 undockedForm.ClientSize = vncTabView.GrowToFit();
 
-                if (oldUndockedSize != Size.Empty
+                if (oldUndockedSize != Size.Empty 
                     && oldUndockedLocation != Point.Empty
                     && HelpersGUI.WindowIsOnScreen(oldUndockedLocation, oldUndockedSize))
                 {
@@ -191,11 +151,31 @@ namespace XenAdmin.ConsoleView
 
                 undockedForm.Show();
 
-                if (Properties.Settings.Default.PreserveScaleWhenUndocked)
+                if(Properties.Settings.Default.PreserveScaleWhenUndocked)
                     vncTabView.scaleCheckBox.Checked = oldScaledSetting;
 
                 this.reattachConsoleButton.Show();
                 this.findConsoleButton.Show();
+            }
+            else
+            {
+                //save location of undock vnc control
+                this.oldUndockedLocation = undockedForm.Location;
+                this.oldUndockedSize = undockedForm.Size;
+                
+                if (!Properties.Settings.Default.PreserveScaleWhenUndocked)
+                    vncTabView.scaleCheckBox.Checked = oldScaledSetting;
+
+                this.reattachConsoleButton.Hide();
+                this.findConsoleButton.Hide();
+
+                undockedForm.Hide();
+                vncTabView.showHeaderBar(true, false);
+                undockedForm.Controls.Remove(vncTabView);
+                this.Controls.Add(vncTabView);
+
+                undockedForm.Dispose();
+                undockedForm = null;
             }
 
             vncTabView.UpdateDockButton();
@@ -250,7 +230,7 @@ namespace XenAdmin.ConsoleView
 
         private void reattachConsoleButton_Click(object sender, EventArgs e)
         {
-            ToogleDockUnDock();
+            DockUnDock();
         }
 
         internal void SendCAD()
@@ -259,10 +239,10 @@ namespace XenAdmin.ConsoleView
                 this.vncTabView.SendCAD();
         }
 
-        internal void FocusConsole(bool forceFocus = false)
+        internal void FocusConsole()
         {
             if (this.vncTabView != null)
-                vncTabView.focus_vnc(forceFocus);
+                vncTabView.focus_vnc();
         }
 
         internal void SwitchIfRequired()
