@@ -69,9 +69,9 @@ namespace XenServerHealthCheck
         public string InitiateUpload(string fileName, long size, string caseNumber)
         {
             // Request a new bundle upload to CIS server.
-            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName;
+            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName.UrlEncode();
             if (!string.IsNullOrEmpty(caseNumber))
-                FULL_URL += "&sr=" + caseNumber;
+                FULL_URL += "&sr=" + caseNumber.UrlEncode();
             log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", FULL_URL);
             Uri uri = new Uri(FULL_URL);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
@@ -188,7 +188,7 @@ namespace XenServerHealthCheck
             long offset = 0;
             while (offset < size)
             {
-                StringBuilder url = new StringBuilder(UPLOAD_URL + "upload_raw_chunk/?id=" + uploadUuid);
+                StringBuilder url = new StringBuilder(UPLOAD_URL + "upload_raw_chunk/?id=" + uploadUuid.UrlEncode());
                 url.Append(String.Format("&offset={0}", offset));
                 long remainingSize = size - offset;
                 long thisChunkSize = (remainingSize > CHUNK_SIZE) ? CHUNK_SIZE : remainingSize;
@@ -230,6 +230,16 @@ namespace XenServerHealthCheck
             return uploadUuid;
 
         }
+    }
 
+    public static class Extensions
+    {
+        public static string UrlEncode(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
+            return WebUtility.UrlEncode(str);
+        }
     }
 }
