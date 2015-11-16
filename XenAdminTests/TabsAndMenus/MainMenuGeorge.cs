@@ -104,7 +104,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
 	            new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", false, false  ),
-                    new ExpectedTextMenuItem("&Forget", false, false  )}),
+                    new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
                 new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -215,7 +215,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", true, false  ),
-                    new ExpectedTextMenuItem("&Forget", false, false  )}),
+                    new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
                 new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -328,7 +328,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", true, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("D&estroy", false, false  ),
                     new ExpectedTextMenuItem("Remo&ve from XenCenter", host.IsMaster(), false  ),
@@ -441,7 +441,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
 	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -555,7 +555,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
 	                new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
 	                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -671,7 +671,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
 	                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -788,7 +788,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                         new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                        new ExpectedTextMenuItem("&Change...", false, false  ),
-                            new ExpectedTextMenuItem("&Forget", false, false  )}),
+                            new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("D&estroy", false, false  ),
 	                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -908,7 +908,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
                     new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1029,7 +1029,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                         new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                        new ExpectedTextMenuItem("&Change...", false, false  ),
-                            new ExpectedTextMenuItem("&Forget", false, false  )}),
+                            new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("D&estroy", false, false  ),
 	                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1151,7 +1151,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
                     new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1274,7 +1274,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                         new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                        new ExpectedTextMenuItem("&Change...", false, false  ),
-                            new ExpectedTextMenuItem("&Forget", false, false  )}),
+                            new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("D&estroy", false, false  ),
 	                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1392,7 +1392,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", true, false  ),
-                    new ExpectedTextMenuItem("&Forget", false, false  )}),
+                    new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
 	            new ExpectedTextMenuItem("Remo&ve from XenCenter", true, false  ),
@@ -1503,7 +1503,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", true, false  ),
-                    new ExpectedTextMenuItem("&Forget", false, false  )}),
+                    new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
 	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1616,7 +1616,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
-                        new ExpectedTextMenuItem("&Forget", false, false  )}),
+                        new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
 	                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1757,7 +1757,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", false, false  ),
-                    new ExpectedTextMenuItem("&Forget", false, false  )}),
+                    new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
 	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
@@ -1884,7 +1884,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", false, false  ),
-                    new ExpectedTextMenuItem("&Forget", false, false  )}),
+                    new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
 	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
