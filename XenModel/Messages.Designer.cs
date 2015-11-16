@@ -20218,7 +20218,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Forget password.
+        ///   Looks up a localized string similar to &amp;Forget Password.
         /// </summary>
         public static string MAINWINDOW_FORGET_SAVED_PASSWORD {
             get {

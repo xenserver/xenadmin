@@ -2109,7 +2109,7 @@
     <value>124, 22</value>
   </data>
   <data name="forgetSavedPasswordToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Forget password</value>
+    <value>&amp;Forget Password</value>
   </data>
   <data name="HostPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>

@@ -7049,7 +7049,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Force Shut Do&amp;wn</value>
   </data>
   <data name="MAINWINDOW_FORGET_SAVED_PASSWORD" xml:space="preserve">
-    <value>&amp;Forget password</value>
+    <value>&amp;Forget Password</value>
   </data>
   <data name="MAINWINDOW_FORGET_SR" xml:space="preserve">
     <value>&amp;Forget</value>
