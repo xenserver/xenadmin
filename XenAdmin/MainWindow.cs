@@ -779,10 +779,34 @@ namespace XenAdmin
             if (master == null)
                 return;
 
-            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with XenCenter {4} (build {5}.{6})",
+            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                Helpers.HostBuildNumber(master), Branding.PRODUCT_VERSION_TEXT,
+                Helpers.HostBuildNumber(master), Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
                 Branding.XENCENTER_VERSION, Program.Version.Revision);
+
+            // Check the PRODUCT_BRAND
+            if (!SameProductBrand(master))
+            {
+                connection.EndConnect();
+
+                Program.Invoke(Program.MainWindow, delegate()
+                {
+                    string msg = string.Format(Messages.INCOMPATIBLE_PRODUCTS, Helpers.GetName(master));
+                    string url = "";
+
+                    using (var dlog = new ConnectionRefusedDialog())
+                    {
+                        dlog.ErrorMessage = msg;
+                        dlog.Url = "";
+                        dlog.ShowDialog(this);
+                    }
+
+                    new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
+                                   string.Format("{0}\n{1}", msg, url), false,
+                                   true, Messages.CONNECTION_REFUSED);
+                });
+                return;
+            }
 
             // When releasing a new version of the server, we should set xencenter_min and xencenter_max on the server
             // as follows:
@@ -870,6 +894,14 @@ namespace XenAdmin
             new TransferHealthCheckSettingsAction(pool, newHealthCheckSSettings,
                 newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
                 newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
+        }
+
+        public static bool SameProductBrand(Host host)
+        {
+            if (Branding.PRODUCT_BRAND == "@BRANDING_PRODUCT_BRAND@")
+                return true; // private build
+            
+            return host.ProductBrand == Branding.PRODUCT_BRAND;
         }
 
         /// <summary>

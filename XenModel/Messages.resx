@@ -6287,6 +6287,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_WIZARD_VM_SR_HINT_TEXT" xml:space="preserve">
     <value>Select the storage repository for the imported virtual machine.</value>
   </data>
+  <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
+    <value>This server version is incompatible with iCenter.</value>
+  </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>Incorrect file size</value>
   </data>

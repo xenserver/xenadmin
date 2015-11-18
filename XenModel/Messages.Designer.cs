@@ -18024,6 +18024,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server version is incompatible with iCenter..
+        /// </summary>
+        public static string INCOMPATIBLE_PRODUCTS {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_PRODUCTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect file size.
         /// </summary>
         public static string INCORRECT_FILE_SIZE {
