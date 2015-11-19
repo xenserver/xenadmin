@@ -898,10 +898,7 @@ namespace XenAdmin
 
         public static bool SameProductBrand(Host host)
         {
-            if (Branding.PRODUCT_BRAND == "@BRANDING_PRODUCT_BRAND@")
-                return true; // private build
-            
-            return host.ProductBrand == Branding.PRODUCT_BRAND;
+            return host.ProductBrand == Branding.PRODUCT_BRAND || Branding.PRODUCT_BRAND == "@BRANDING_PRODUCT_BRAND@";
         }
 
         /// <summary>
