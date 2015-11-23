@@ -785,7 +785,7 @@ namespace XenAdmin
                 Branding.XENCENTER_VERSION, Program.Version.Revision);
 
             // Check the PRODUCT_BRAND
-            if (!SameProductBrand(master))
+            if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
             {
                 connection.EndConnect();
 
