@@ -15,7 +15,9 @@ namespace XenAdmin.TabPages
         {
             if (disposing && (components != null))
             {
-                licenseStatus.Dispose();
+                if (licenseStatus != null)
+                    licenseStatus.Dispose();
+
                 components.Dispose();
             }
             base.Dispose(disposing);

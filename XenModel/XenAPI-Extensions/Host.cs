@@ -195,7 +195,7 @@ namespace XenAPI
         {
             get
             {
-                if (license_params.ContainsKey("expiry"))
+                if (license_params != null && license_params.ContainsKey("expiry"))
                     return TimeUtil.ParseISO8601DateTime(license_params["expiry"]);
                 return new DateTime(2030, 1, 1);
             }
