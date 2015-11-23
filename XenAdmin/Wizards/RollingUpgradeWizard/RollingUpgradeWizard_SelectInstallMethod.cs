@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
                 if (InstallMethod != RollingUpgradeInstallMethod.nfs && textBoxUser.Text != string.Empty && textBoxPassword.Text != string.Empty)
                 {
-                    dict.Add("url", string.Format("{0}://{1}:{2}@{3}", InstallMethod, HttpUtility.UrlEncode(textBoxUser.Text), HttpUtility.UrlEncode(textBoxPassword.Text), url));
+                    dict.Add("url", string.Format("{0}://{1}:{2}@{3}", InstallMethod, textBoxUser.Text.UrlEncode(), textBoxPassword.Text.UrlEncode(), url));
                 }
                 else
                     dict.Add("url", string.Format("{0}://{1}", InstallMethod,  url));

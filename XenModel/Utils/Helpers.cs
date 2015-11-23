@@ -2071,5 +2071,13 @@ namespace XenAdmin.Core
 
            return vdi.virtual_size;
        }
+
+        public static string UrlEncode(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
+            return System.Net.WebUtility.UrlEncode(str);
+        }
     }
 }
