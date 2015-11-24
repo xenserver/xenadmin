@@ -133,7 +133,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="autoHeightLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 133</value>
+    <value>30, 131</value>
   </data>
   <data name="autoHeightLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>30, 3, 3, 6</value>
@@ -172,7 +172,7 @@
     <value>30, 171</value>
   </data>
   <data name="usernameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 3, 3, 3</value>
+    <value>30, 5, 3, 5</value>
   </data>
   <data name="usernameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -208,10 +208,10 @@
     <value>NoControl</value>
   </data>
   <data name="passwordLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 197</value>
+    <value>30, 201</value>
   </data>
   <data name="passwordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 3, 3, 3</value>
+    <value>30, 5, 3, 5</value>
   </data>
   <data name="passwordLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -238,7 +238,10 @@
     <value>2</value>
   </data>
   <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 194</value>
+    <value>108, 198</value>
+  </data>
+  <data name="passwordTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 20</value>
@@ -260,6 +263,9 @@
   </data>
   <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 168</value>
+  </data>
+  <data name="usernameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="usernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 20</value>
@@ -328,7 +334,7 @@
     <value>3, 31</value>
   </data>
   <data name="labelName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 3, 3, 5</value>
   </data>
   <data name="labelName.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -356,6 +362,9 @@
   </data>
   <data name="m_textBoxName.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 28</value>
+  </data>
+  <data name="m_textBoxName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 5</value>
   </data>
   <data name="m_textBoxName.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 20</value>
@@ -385,10 +394,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelFileLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 66</value>
+    <value>3, 62</value>
   </data>
   <data name="labelFileLocation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="labelFileLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
@@ -418,10 +427,10 @@
     <value>Fill</value>
   </data>
   <data name="m_textBoxLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 61</value>
+    <value>108, 58</value>
   </data>
   <data name="m_textBoxLocation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="m_textBoxLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 20</value>
@@ -445,10 +454,10 @@
     <value>NoControl</value>
   </data>
   <data name="BrowseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 61</value>
+    <value>491, 57</value>
   </data>
   <data name="BrowseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+    <value>3, 4, 3, 5</value>
   </data>
   <data name="BrowseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -484,7 +493,7 @@
     <value />
   </data>
   <data name="m_ctrlError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 260</value>
+    <value>0, 263</value>
   </data>
   <data name="m_ctrlError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
@@ -514,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="uploadCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 107</value>
+    <value>3, 105</value>
   </data>
   <data name="uploadCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 20, 3, 6</value>
@@ -550,10 +559,10 @@
     <value>NoControl</value>
   </data>
   <data name="caseNumberLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 230</value>
+    <value>30, 231</value>
   </data>
   <data name="caseNumberLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 10, 3, 3</value>
+    <value>30, 5, 3, 5</value>
   </data>
   <data name="caseNumberLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -577,10 +586,10 @@
     <value>13</value>
   </data>
   <data name="caseNumberTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 227</value>
+    <value>108, 228</value>
   </data>
   <data name="caseNumberTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="caseNumberTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 20</value>
@@ -610,10 +619,10 @@
     <value>NoControl</value>
   </data>
   <data name="optionalLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 230</value>
+    <value>360, 231</value>
   </data>
   <data name="optionalLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="optionalLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
