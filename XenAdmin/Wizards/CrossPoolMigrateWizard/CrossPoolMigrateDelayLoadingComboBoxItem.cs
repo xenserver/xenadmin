@@ -44,6 +44,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private readonly Host preSelectedHost;
         private readonly List<VM> preSelectedVMs;
         private  Queue<ReasoningFilter> filters;
+        private bool allowSameTargetPool;
 
         /// <summary>
         /// Instantiate a delay loading combo box item for cross pool migrate
@@ -51,11 +52,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <param name="itemAddedToComboBox">Item being added to the list</param>
         /// <param name="preSelectedHost">Host that was preselected by user prior to loading this item</param>
         /// <param name="preSelectedVMs">VMs selected prior to loading this item</param>
-        public CrossPoolMigrateDelayLoadingComboBoxItem(IXenObject itemAddedToComboBox, Host preSelectedHost, List<VM> preSelectedVMs)
+        public CrossPoolMigrateDelayLoadingComboBoxItem(IXenObject itemAddedToComboBox, Host preSelectedHost, List<VM> preSelectedVMs, bool allowSameTargetPool)
             : base(itemAddedToComboBox)
         {
             this.preSelectedHost = preSelectedHost;
             this.preSelectedVMs = preSelectedVMs;
+            this.allowSameTargetPool = allowSameTargetPool;
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             filters = new Queue<ReasoningFilter>();
             filters.Enqueue(new CrossPoolMigrateVersionFilter(Item));
             filters.Enqueue(new ResidentHostIsSameAsSelectionFilter(Item, preSelectedVMs));
-            filters.Enqueue(new CrossPoolMigrateCanMigrateFilter(Item, preSelectedVMs));
+            filters.Enqueue(new CrossPoolMigrateCanMigrateFilter(Item, preSelectedVMs, allowSameTargetPool));
             filters.Enqueue(new WlbEnabledFilter(Item, preSelectedVMs));
         }
 
