@@ -120,15 +120,7 @@ namespace XenAdmin.Actions
 
         	try
             {
-                string vmRef;
-
-				if (m_filename.EndsWith("ova.xml"))//importing version 1 from of VM
-				{
-					m_filename = m_filename.Replace("ova.xml", "");
-					vmRef = GetVmRef(applyVersionOneFiles());
-				}
-				else//importing current format of VM
-					vmRef = GetVmRef(applyFile());
+                string vmRef = GetVmRef(applyFile());
 
             	if (Cancelling)
                     throw new CancelledException();
