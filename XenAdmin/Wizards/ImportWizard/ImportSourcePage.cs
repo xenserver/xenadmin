@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 		private readonly string[] m_supportedImageTypes = new[] { ".vhd", ".vmdk" };//CA-61385: remove ".vdi", ".wim" support for Boston
 		private readonly string[] m_supportedApplianceTypes = new[] { ".ovf", ".ova", ".ova.gz" };
-		private readonly string[] m_supportedXvaTypes = new[] {".xva", "ova.xml"};
+		private readonly string[] m_supportedXvaTypes = new[] { ".xva" };
 
 		/// <summary>
 		/// Stores the last valid selected appliance
@@ -211,8 +211,6 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		public bool IsWIM { get; private set; }
 
-		public bool IsXvaVersion1 { get; private set; }
-
 		public ulong DiskCapacity { get; private set; }
 
 		#endregion
@@ -244,29 +242,13 @@ namespace XenAdmin.Wizards.ImportWizard
 				FileInfo info = new FileInfo(m_textBoxFile.Text);
 				ImageLength = info.Length > 0 ? (ulong)info.Length : 0;
 
-				DiskCapacity = IsXvaVersion1
-				               	? GetTotalSizeFromXmlGeneva() //Geneva style
-				               	: GetTotalSizeFromXmlXva(GetXmlStringFromTarXVA()); //xva style
+				DiskCapacity = GetTotalSizeFromXmlXva(GetXmlStringFromTarXVA()); //xva style
 			}
 			catch (Exception)
 			{
 				DiskCapacity = ImageLength;
 			}
 			return true;
-		}
-
-		private ulong GetTotalSizeFromXmlGeneva()
-		{
-			ulong totalSize = 0;
-			XmlDocument xmlMetadata = new XmlDocument();
-			xmlMetadata.Load(m_textBoxFile.Text);
-			XPathNavigator nav = xmlMetadata.CreateNavigator();
-			XPathNodeIterator nodeIterator = nav.Select(".//vdi");
-
-			while (nodeIterator.MoveNext())
-				totalSize += UInt64.Parse(nodeIterator.Current.GetAttribute("size", ""));
-
-			return totalSize;
 		}
 
 		private string GetXmlStringFromTarXVA()
@@ -474,8 +456,8 @@ namespace XenAdmin.Wizards.ImportWizard
 						return false;
 					}
 
-					if (ext == "ova.xml")
-						IsXvaVersion1 = true;
+                    if (ext == "ova.xml")
+                        return false; //not supported anymore
 
 					TypeOfImport = ImportWizard.ImportType.Xva;
 					return true;
