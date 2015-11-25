@@ -87,7 +87,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-            EnableDisableAuthenticationControls();
             PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 
@@ -224,16 +223,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return false;
         }
 
-        private void EnableDisableAuthenticationControls()
-        {
-            if (!Visible)
-                return;
-
-            authenticationGroupBox.Enabled = 
-                caseNumberLabel.Enabled = caseNumberTextBox.Enabled = optionalLabel.Enabled =
-                uploadCheckBox.Checked;
-        }
-
         #region Control event handlers
 
         private void m_textBoxName_TextChanged(object sender, EventArgs e)
@@ -255,19 +244,20 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void uploadCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            EnableDisableAuthenticationControls();
             PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
 
         private void credentials_TextChanged(object sender, EventArgs e)
         {
+            uploadCheckBox.Checked = true;
             PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
         
         private void caseNumberLabelTextBox_TextChanged(object sender, EventArgs e)
         {
+            uploadCheckBox.Checked = true;
             PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
         }
 

@@ -134,7 +134,7 @@ namespace XenAdmin.Wizards
                 var uploadAction = new Actions.UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,
                                                                        bugToolPageDestination1.UploadToken, bugToolPageDestination1.CaseNumber, 
                                                                        Registry.HealthCheckUploadDomainName, false);
-                dialog = new ActionProgressDialog(uploadAction, ProgressBarStyle.Blocks) {ShowCancel = true};
+                dialog = new ActionProgressDialog(uploadAction, ProgressBarStyle.Marquee) {ShowCancel = true};
                 dialog.ShowDialog();
             }
 

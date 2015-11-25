@@ -30,8 +30,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BugToolPageDestination));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.authenticationGroupBox = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
@@ -49,49 +47,33 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.caseNumberTextBox = new System.Windows.Forms.TextBox();
             this.optionalLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
-            this.authenticationGroupBox.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.authenticationGroupBox, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel2, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.usernameLabel, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.passwordLabel, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.passwordTextBox, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.usernameTextBox, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelFileLocation, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxLocation, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.uploadCheckBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.caseNumberLabel, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.caseNumberTextBox, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.optionalLabel, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.caseNumberLabel, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.caseNumberTextBox, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.optionalLabel, 2, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // authenticationGroupBox
-            // 
-            resources.ApplyResources(this.authenticationGroupBox, "authenticationGroupBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.authenticationGroupBox, 4);
-            this.authenticationGroupBox.Controls.Add(this.tableLayoutPanel2);
-            this.authenticationGroupBox.Name = "authenticationGroupBox";
-            this.authenticationGroupBox.TabStop = false;
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.autoHeightLabel2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.usernameLabel, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.passwordLabel, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.passwordTextBox, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.usernameTextBox, 1, 1);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // autoHeightLabel2
             // 
             resources.ApplyResources(this.autoHeightLabel2, "autoHeightLabel2");
-            this.tableLayoutPanel2.SetColumnSpan(this.autoHeightLabel2, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.autoHeightLabel2, 4);
             this.autoHeightLabel2.Name = "autoHeightLabel2";
             // 
             // usernameLabel
@@ -166,7 +148,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.SetColumnSpan(this.uploadCheckBox, 4);
             this.uploadCheckBox.Name = "uploadCheckBox";
             this.uploadCheckBox.UseVisualStyleBackColor = true;
-            this.uploadCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.uploadCheckBox.CheckedChanged += new System.EventHandler(this.uploadCheckBox_CheckedChanged);
             // 
             // caseNumberLabel
             // 
@@ -192,10 +174,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this, "$this");
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.authenticationGroupBox.ResumeLayout(false);
-            this.authenticationGroupBox.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -208,8 +186,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.TextBox m_textBoxName;
         private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
         private System.Windows.Forms.CheckBox uploadCheckBox;
-        private System.Windows.Forms.GroupBox authenticationGroupBox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox passwordTextBox;
