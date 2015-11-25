@@ -251,20 +251,6 @@ namespace XenAdmin.Wizards.ImportWizard
 			return true;
 		}
 
-		private ulong GetTotalSizeFromXmlGeneva()
-		{
-			ulong totalSize = 0;
-			XmlDocument xmlMetadata = new XmlDocument();
-			xmlMetadata.Load(m_textBoxFile.Text);
-			XPathNavigator nav = xmlMetadata.CreateNavigator();
-			XPathNodeIterator nodeIterator = nav.Select(".//vdi");
-
-			while (nodeIterator.MoveNext())
-				totalSize += UInt64.Parse(nodeIterator.Current.GetAttribute("size", ""));
-
-			return totalSize;
-		}
-
 		private string GetXmlStringFromTarXVA()
 		{
 			using (Stream stream = new FileStream(m_textBoxFile.Text, FileMode.Open, FileAccess.Read))
