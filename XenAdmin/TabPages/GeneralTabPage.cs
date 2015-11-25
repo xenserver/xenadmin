@@ -102,20 +102,18 @@ namespace XenAdmin.TabPages
             GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
             Program.Invoke(Program.MainWindow, () => 
             {
-                if (pdSectionLicense != null)
-                    pdSectionLicense.UpdateEntryValueWithKey(
-                        FriendlyName("host.license_params-expiry"),
-                        ss.ExpiryDate, 
-                        ss.ShowExpiryDate);
+                pdSectionLicense.UpdateEntryValueWithKey(
+                    FriendlyName("host.license_params-expiry"),
+                    ss.ExpiryDate, 
+                    ss.ShowExpiryDate);
             });
 
             Program.Invoke(Program.MainWindow, () =>
             {
-                if (pdSectionLicense != null)
-                    pdSectionLicense.UpdateEntryValueWithKey(
-                        Messages.LICENSE_STATUS,
-                        ss.ExpiryStatus,
-                        true);
+                pdSectionLicense.UpdateEntryValueWithKey(
+                    Messages.LICENSE_STATUS,
+                    ss.ExpiryStatus,
+                    true);
             });
         }
 
@@ -166,10 +164,7 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                UnregisterLicenseStatusUpdater();
-
-                if (value is Host || value is Pool)
-                    SetupAndStartLicenseStatus(value);
+                RegisterLicenseStatusUpdater(xenObject);
 
                 if (xenObject != value)
                 {
@@ -191,19 +186,17 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void SetupAndStartLicenseStatus(IXenObject xo)
-        {
-            System.Diagnostics.Debug.Assert(xo is Host || xo is Pool);
-
-            licenseStatus = new LicenseStatus(xo);
-            licenseStatus.ItemUpdated += licenseStatus_ItemUpdated;
-            licenseStatus.BeginUpdate();
-        }
-
-        private void UnregisterLicenseStatusUpdater()
+        private void RegisterLicenseStatusUpdater(IXenObject xenObject)
         {
             if (licenseStatus != null)
                 licenseStatus.ItemUpdated -= licenseStatus_ItemUpdated;
+
+            if (xenObject is Host || xenObject is Pool)
+            {
+                licenseStatus = new LicenseStatus(xenObject);
+                licenseStatus.ItemUpdated += licenseStatus_ItemUpdated;
+                licenseStatus.BeginUpdate();
+            }
         }
 
         void s_ExpandedEventHandler(PDSection pdSection)
