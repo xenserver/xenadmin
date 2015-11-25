@@ -96,19 +96,25 @@ namespace XenAdmin.TabPages
 
         private void licenseStatus_ItemUpdated(object sender, EventArgs e)
         {
-            if (pdSectionLicense == null)
+            if (pdSectionLicense == null || licenseStatus == null)
                 return;
 
             GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-            Program.Invoke(Program.MainWindow, () => pdSectionLicense.UpdateEntryValueWithKey(
-                                            FriendlyName("host.license_params-expiry"),
-                                            ss.ExpiryDate, 
-                                            ss.ShowExpiryDate));
+            Program.Invoke(Program.MainWindow, () => 
+            {
+                pdSectionLicense.UpdateEntryValueWithKey(
+                    FriendlyName("host.license_params-expiry"),
+                    ss.ExpiryDate, 
+                    ss.ShowExpiryDate);
+            });
 
-            Program.Invoke(Program.MainWindow, () => pdSectionLicense.UpdateEntryValueWithKey(
-                                           Messages.LICENSE_STATUS,
-                                           ss.ExpiryStatus,
-                                           true));
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                pdSectionLicense.UpdateEntryValueWithKey(
+                    Messages.LICENSE_STATUS,
+                    ss.ExpiryStatus,
+                    true);
+            });
         }
 
         void s_contentReceivedFocus(PDSection s)
@@ -158,7 +164,8 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                SetupAnStartLicenseStatus(value);
+                RegisterLicenseStatusUpdater(xenObject);
+
                 if (xenObject != value)
                 {
                     UnregisterHandlers();
@@ -179,11 +186,17 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void SetupAnStartLicenseStatus(IXenObject xo)
+        private void RegisterLicenseStatusUpdater(IXenObject xenObject)
         {
-            licenseStatus = new LicenseStatus(xo);
-            licenseStatus.ItemUpdated += licenseStatus_ItemUpdated;
-            licenseStatus.BeginUpdate();
+            if (licenseStatus != null)
+                licenseStatus.ItemUpdated -= licenseStatus_ItemUpdated;
+
+            if (xenObject is Host || xenObject is Pool)
+            {
+                licenseStatus = new LicenseStatus(xenObject);
+                licenseStatus.ItemUpdated += licenseStatus_ItemUpdated;
+                licenseStatus.BeginUpdate();
+            }
         }
 
         void s_ExpandedEventHandler(PDSection pdSection)
@@ -368,7 +381,7 @@ namespace XenAdmin.TabPages
                     // Atm we are rebuilding on almost any property changed event. 
                     // As long as we are just clearing and readding the rows in the PDSections this seems to be super quick. 
                     // If it gets slower we should update specific boxes for specific property changes.
-                    if (licenseStatus.Updated)
+                    if (licenseStatus != null && licenseStatus.Updated)
                         licenseStatus.BeginUpdate();
                     BuildList();
                     EnableDisableEdit();

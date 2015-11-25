@@ -48,7 +48,7 @@ namespace XenAdmin.TabPages
         {
             get
             {
-                if (Status != null && Status.LicencedHost != null && Status.LicenseExpiresIn.TotalDays < 3653)
+                if (Status != null && Status.LicencedHost != null && Status.LicenseExpiresIn != null && Status.LicenseExpiresIn.TotalDays < 3653)
                     return HelpersGUI.DateTimeToString(Status.LicencedHost.LicenseExpiryUTC.ToLocalTime(),
                                                         Messages.DATEFORMAT_DMY_LONG, true);
 
