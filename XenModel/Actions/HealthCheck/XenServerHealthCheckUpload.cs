@@ -37,7 +37,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using XenAdmin;
 using XenAdmin.Network;
-
+using XenAdmin.Core;
 
 namespace XenServerHealthCheck
 {
@@ -69,7 +69,7 @@ namespace XenServerHealthCheck
         public string InitiateUpload(string fileName, long size, string caseNumber)
         {
             // Request a new bundle upload to CIS server.
-            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName;
+            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName.UrlEncode();
             if (!string.IsNullOrEmpty(caseNumber))
                 FULL_URL += "&sr=" + caseNumber;
             log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", FULL_URL);
@@ -228,8 +228,9 @@ namespace XenServerHealthCheck
 
             log.InfoFormat("Succeed to upload bundle {0}", fileName);
             return uploadUuid;
-
+            
         }
-
     }
+
+
 }
