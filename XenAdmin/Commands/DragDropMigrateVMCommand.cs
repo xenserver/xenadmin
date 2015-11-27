@@ -168,6 +168,11 @@ namespace XenAdmin.Commands
                                 return false;
                             }
                         }
+                        else
+                        {
+                            if (Helpers.FeatureForbidden(draggedVM.Connection, Host.RestrictInterPoolMigrate))
+                                return false;
+                        }
 
                         if (draggedVM.allowed_operations == null || !draggedVM.allowed_operations.Contains(vm_operations.pool_migrate))
                         {
