@@ -9369,10 +9369,6 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>プールのローリング アップグレードが完了しませんでした。</value>
   </data>
-  <data name="ROLLING_UPGRADE_WARNING_SL" xml:space="preserve">
-    <value>StorageLink Gateway を使用している VM があります。 
-StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレードは、VM がシャットダウン状態で NetApp、Dell EqualLogic、または SMI-S アダプタを使用する場合のみサポートされます。</value>
-  </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
     <value>'{0}': 新しいバージョンの XenServer を使用するには、新しいライセンスをライセンス サーバーに追加する必要があります。</value>
   </data>
@@ -9805,9 +9801,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="SNAPSHOT_OF" xml:space="preserve">
     <value>スナップショット作成元</value>
-  </data>
-  <data name="SNAPSHOT_REQUIRE_GEORGE" xml:space="preserve">
-    <value>スナップショットは、XenServer 5.5 以降でサポートされます</value>
   </data>
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>スナップショットの復元</value>
