@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
-           return new CrossPoolMigrateDelayLoadingComboBoxItem(xenItem, preSelectedHost, selectedVMs, wizardMode != WizardMode.Copy);
+           return new CrossPoolMigrateDelayLoadingComboBoxItem(xenItem, preSelectedHost, selectedVMs);
         }
 
         protected override List<ReasoningFilter> CreateHomeServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)

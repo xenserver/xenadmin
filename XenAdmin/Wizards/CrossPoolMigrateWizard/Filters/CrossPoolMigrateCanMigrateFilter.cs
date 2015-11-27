@@ -44,7 +44,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly List<VM> preSelectedVMs;
         private readonly List<FailureReason> failureReasons = new List<FailureReason>();
-        private readonly bool allowSameTargetPool;
 
         /// <summary>
         /// Helper class used for determining if the hosts in the failure 
@@ -63,11 +62,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             }
         }
 
-        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs, bool allowSameTargetPool = true)
+        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs)
             : base(itemAddedToComboBox)
         {
             this.preSelectedVMs = preSelectedVMs;
-            this.allowSameTargetPool = allowSameTargetPool;
         }
 
         private struct FailureReason
@@ -96,15 +94,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     {
                         try
                         {
-                            if (!allowSameTargetPool && IsVmInTargetsPool(vm, host))
-                                throw new Failure(Messages.ACTION_VM_CROSS_POOL_COPY_CANNOT_COPY_TO_SAME_POOL, new Exception());
-                            else
-                            {
-                                //Skip the resident host as there's a filter for it and 
-                                //if not then you could exclude intrapool migration
-                                if (vm.resident_on == host.opaque_ref)
-                                    continue;
-                            }
+                            //Skip the resident host as there's a filter for it and 
+                            //if not then you could exclude intrapool migration
+                            if(vm.resident_on == host.opaque_ref)
+                                continue;
 
                             PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);
                             XenAPI.Network network = host.Connection.Cache.Resolve(managementPif.network);
@@ -128,20 +121,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 
                 return DetermineIfFailureGivenReasons();
             }
-        }
-
-        private bool IsVmInTargetsPool(VM vm, Host target)
-        {
-            if (vm == null || target == null)
-                return false;
-
-            var vmPool = Helpers.GetPoolOfOne(vm.Connection);
-            var targetPool = Helpers.GetPoolOfOne(target.Connection);
-
-            if (targetPool == vmPool)
-                    return true;
-
-            return false;
         }
 
         /// <summary>

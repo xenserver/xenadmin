@@ -1023,9 +1023,6 @@
   <data name="ACTION_VM_CROSS_POOL_COPY_CANCELLED" xml:space="preserve">
     <value>Copying {0} canceled</value>
   </data>
-  <data name="ACTION_VM_CROSS_POOL_COPY_CANNOT_COPY_TO_SAME_POOL" xml:space="preserve">
-    <value>Cannot copy to resident host or pool</value>
-  </data>
   <data name="ACTION_VM_CROSS_POOL_COPY_TITLE" xml:space="preserve">
     <value>Copying VM '{0}' to '{1}'</value>
   </data>

@@ -2743,15 +2743,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot copy to resident host or pool.
-        /// </summary>
-        public static string ACTION_VM_CROSS_POOL_COPY_CANNOT_COPY_TO_SAME_POOL {
-            get {
-                return ResourceManager.GetString("ACTION_VM_CROSS_POOL_COPY_CANNOT_COPY_TO_SAME_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_VM_CROSS_POOL_COPY_TITLE {
