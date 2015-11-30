@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
             _srDescription = srDescription;
             _srType = srType;
             _srContentType = srContentType;
-            _srIsShared = true;  // used to depend on restrict_pool_attached_storage flag: now always true
+            _srIsShared = true;  // used to depend on restrict_pool_attached_storage flag: now always true, but left in in case we want to create local SRs one day
             _dconf = dconf;
             _smconf = smconf;
 

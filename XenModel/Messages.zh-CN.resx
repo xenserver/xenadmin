@@ -4459,12 +4459,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="ERROR_DIALOG_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>挂起 VM 时出错</value>
   </data>
-  <data name="ERROR_DIALOG_UPGRADE_SR_TEXT" xml:space="preserve">
-    <value>未升级以下存储库:</value>
-  </data>
-  <data name="ERROR_DIALOG_UPGRADE_SR_TITLE" xml:space="preserve">
-    <value>升级存储库时出错</value>
-  </data>
   <data name="ERROR_FILE_NOT_FOUND" xml:space="preserve">
     <value>未找到文件 {0}</value>
   </data>
@@ -6783,9 +6777,6 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_TRIM_SR" xml:space="preserve">
     <value>回收释放的空间(&amp;C)</value>
-  </data>
-  <data name="MAINWINDOW_UPGRADE_SR" xml:space="preserve">
-    <value>升级(&amp;U)</value>
   </data>
   <data name="MAINWINDOW_XVA_BLURB" xml:space="preserve">
     <value>XVA 文件(*.xva)|*.xva|所有文件(*.*)|*.*</value>
@@ -9371,10 +9362,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>池滚动升级未完成。</value>
   </data>
-  <data name="ROLLING_UPGRADE_WARNING_SL" xml:space="preserve">
-    <value>存在使用 StorageLink Gateway 的 VM。 
-如果这些 VM 处于关闭状态，并且使用 NetApp、Dell EqualLogic 或 SMI-S 适配器，则仅支持使用 StorageLink Gateway 将 VM 升级到 XenServer 6.0。</value>
-  </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
     <value>{0}: 新版本的 XenServer 需要将新许可证添加到您的许可证服务器。</value>
   </data>
@@ -9807,9 +9794,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="SNAPSHOT_OF" xml:space="preserve">
     <value>快照属于</value>
-  </data>
-  <data name="SNAPSHOT_REQUIRE_GEORGE" xml:space="preserve">
-    <value>快照需要使用 XenServer 5.5 或更高版本</value>
   </data>
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>快照还原</value>
@@ -10812,28 +10796,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>升级“{0}”</value>
-  </data>
-  <data name="UPGRADE_SR" xml:space="preserve">
-    <value>升级...</value>
-  </data>
-  <data name="UPGRADE_SRS_PROMPT" xml:space="preserve">
-    <value>如果升级这些存储库，将无法再将其与 XenServer 5.0 结合使用。
-
-是否继续?</value>
-  </data>
-  <data name="UPGRADE_SRS_PROMPT_TITLE" xml:space="preserve">
-    <value>升级多个存储库</value>
-  </data>
-  <data name="UPGRADE_SR_PROMPT" xml:space="preserve">
-    <value>如果升级该存储库，将无法再将其与 XenServer 5.0 结合使用。
-
-是否继续?</value>
-  </data>
-  <data name="UPGRADE_SR_PROMPT_TITLE" xml:space="preserve">
-    <value>升级存储库</value>
-  </data>
-  <data name="UPGRADE_SR_WARNING" xml:space="preserve">
-    <value>该 SR 需要升级</value>
   </data>
   <data name="UPGRADING" xml:space="preserve">
     <value>正在升级</value>

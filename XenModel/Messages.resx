@@ -4722,12 +4722,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_DIALOG_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>Error Suspending VM</value>
   </data>
-  <data name="ERROR_DIALOG_UPGRADE_SR_TEXT" xml:space="preserve">
-    <value>The following storage repositories were not upgraded:</value>
-  </data>
-  <data name="ERROR_DIALOG_UPGRADE_SR_TITLE" xml:space="preserve">
-    <value>Error Upgrading Storage Repository</value>
-  </data>
   <data name="ERROR_FILE_NOT_FOUND" xml:space="preserve">
     <value>File {0} not found</value>
   </data>
@@ -7118,9 +7112,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_TRIM_SR" xml:space="preserve">
     <value>Re&amp;claim freed space</value>
-  </data>
-  <data name="MAINWINDOW_UPGRADE_SR" xml:space="preserve">
-    <value>&amp;Upgrade</value>
   </data>
   <data name="MAINWINDOW_XVA_BLURB" xml:space="preserve">
     <value>XVA Files (*.xva)|*.xva|All Files (*.*)|*.*</value>
@@ -9833,10 +9824,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
   </data>
-  <data name="ROLLING_UPGRADE_WARNING_SL" xml:space="preserve">
-    <value>There are VMs using StorageLink Gateway. 
-Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if the VMs are shut down and using NetApp, Dell EqualLogic or SMI-S adapters.</value>
-  </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
     <value>'{0}': New versions of XenServer require new licenses to be added to your license server.</value>
   </data>
@@ -10281,9 +10268,6 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SNAPSHOT_OF_TITLE" xml:space="preserve">
     <value>{0} (snapshot of '{1}' {2})</value>
-  </data>
-  <data name="SNAPSHOT_REQUIRE_GEORGE" xml:space="preserve">
-    <value>Snapshots require XenServer 5.5 or later</value>
   </data>
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>Snapshot revert</value>
@@ -11375,28 +11359,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>Upgrade '{0}'</value>
-  </data>
-  <data name="UPGRADE_SR" xml:space="preserve">
-    <value>Upgrade...</value>
-  </data>
-  <data name="UPGRADE_SRS_PROMPT" xml:space="preserve">
-    <value>If you upgrade these storage repositories, you will no longer be able to use them with XenServer 5.0.
-
-Do you want to continue?</value>
-  </data>
-  <data name="UPGRADE_SRS_PROMPT_TITLE" xml:space="preserve">
-    <value>Upgrade Multiple Storage Repositories</value>
-  </data>
-  <data name="UPGRADE_SR_PROMPT" xml:space="preserve">
-    <value>If you upgrade this storage repository, you will no longer be able to use it with XenServer 5.0.
-
-Do you want to continue?</value>
-  </data>
-  <data name="UPGRADE_SR_PROMPT_TITLE" xml:space="preserve">
-    <value>Upgrade Storage Repository</value>
-  </data>
-  <data name="UPGRADE_SR_WARNING" xml:space="preserve">
-    <value>This SR needs upgrading</value>
   </data>
   <data name="UPGRADING" xml:space="preserve">
     <value>Upgrading</value>

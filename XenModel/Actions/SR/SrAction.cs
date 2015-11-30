@@ -37,7 +37,7 @@ using System.Collections.Generic;
 
 namespace XenAdmin.Actions
 {
-    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UpgradeLVM, UnplugAndDestroyPBDs, ConvertToThin };
+    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UnplugAndDestroyPBDs, ConvertToThin };
 
     public class SrAction : PureAsyncAction
     {
@@ -84,10 +84,6 @@ namespace XenAdmin.Actions
 
                 case SrActionKind.Forget:
                     return String.Format(Messages.ACTION_SR_FORGETTING,
-                        sr.Name, Helpers.GetName(sr.Connection));
-
-                case SrActionKind.UpgradeLVM:
-                    return String.Format(Messages.ACTION_SR_CONVERT,
                         sr.Name, Helpers.GetName(sr.Connection));
 
                 case SrActionKind.ConvertToThin:
@@ -156,15 +152,6 @@ namespace XenAdmin.Actions
                     }
 
                     Description = Messages.ACTION_SR_SET_DEFAULT_SUCCESSFUL;
-                    break;
-
-                case SrActionKind.UpgradeLVM:
-                    Description = Messages.ACTION_SR_CONVERTING;
-
-                    XenAPI.SR.remove_from_sm_config(Session, SR.opaque_ref, XenAPI.SR.USE_VHD);
-                    XenAPI.SR.add_to_sm_config(Session, SR.opaque_ref, XenAPI.SR.USE_VHD, "true");
-
-                    Description = Messages.ACTION_SR_CONVERTED;
                     break;
 
                 case SrActionKind.UnplugAndDestroyPBDs:

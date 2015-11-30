@@ -241,7 +241,7 @@
     <Compile Include="Dialogs\ConvertToThinSRDialog.Designer.cs">
       <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </Compile>
-	<Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
+    <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.Designer.cs">
@@ -3082,7 +3082,6 @@
     <Compile Include="Commands\SelectedItemCollection.cs" />
     <Compile Include="Commands\SelectionBroadcaster.cs" />
     <Compile Include="Commands\SetAsDefaultSRCommand.cs" />
-    <Compile Include="Commands\ShareSRCommand.cs" />
     <Compile Include="Commands\ShutDownCommand.cs">
     </Compile>
     <Compile Include="Commands\ShutDownHostCommand.cs">
@@ -3103,7 +3102,6 @@
     </Compile>
     <Compile Include="Commands\SuspendVMCommand.cs" />
     <Compile Include="Commands\TakeSnapshotCommand.cs" />
-    <Compile Include="Commands\UpgradeSRCommand.cs" />
     <Compile Include="Commands\ViewWorkloadReportsCommand.cs">
     </Compile>
     <Compile Include="Commands\VirtualDiskCommand.cs" />

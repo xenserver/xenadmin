@@ -437,23 +437,6 @@ namespace XenAPI
             }
         }
 
-        public const String USE_VHD = "use_vhd";
-
-        public bool NeedsUpgrading
-        {
-            get
-            {
-                SRTypes type = GetSRType(false);
-                if (!(type == SRTypes.lvm ||
-                    type == SRTypes.lvmofc ||
-                    type == SRTypes.lvmohba ||
-                    type == SRTypes.lvmoiscsi))
-                    return false;
-
-                return !BoolKey(sm_config, USE_VHD);
-            }
-        }
-
         /// <summary>
         /// The SR is broken when it has the wrong number of PBDs, or (optionally) not all the PBDs are attached.
         /// </summary>
@@ -966,10 +949,6 @@ namespace XenAPI
                 {
                     return Icons.StorageBroken;
                 }
-                else if (NeedsUpgrading)
-                {
-                    return Icons.StorageNeedsUpgrading;
-                }
                 else if (SR.IsDefaultSr(this))
                 {
                     return Icons.StorageDefault;
@@ -1010,9 +989,6 @@ namespace XenAPI
 
                 if (!MultipathAOK)
                     return Messages.GENERAL_MULTIPATH_FAILURE;
-
-                if (NeedsUpgrading)
-                    return Messages.UPGRADE_SR_WARNING;
 
                 return Messages.GENERAL_SR_STATE_OK;
             }

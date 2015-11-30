@@ -684,20 +684,17 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionStatus;
 
-            bool broken = sr.IsBroken() || !sr.MultipathAOK || sr.NeedsUpgrading;
+            bool broken = sr.IsBroken() || !sr.MultipathAOK;
             bool detached = !sr.HasPBDs;
 
             ToolStripMenuItem repair = new ToolStripMenuItem
                 {
-                    Text = sr.NeedsUpgrading ? Messages.UPGRADE_SR : Messages.GENERAL_SR_CONTEXT_REPAIR,
+                    Text = Messages.GENERAL_SR_CONTEXT_REPAIR,
                     Image = Properties.Resources._000_StorageBroken_h32bit_16
                 };
             repair.Click += delegate
                 {
-                    if (sr.NeedsUpgrading)
-                        new UpgradeSRCommand(Program.MainWindow, sr).Execute();
-                    else
-                        Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
+                    Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
                 };
 
             var menuItems = new[] { repair };

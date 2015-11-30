@@ -34,14 +34,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RollingUpgradeWizardSelectPool));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new XenAdmin.Wizards.RollingUpgradeWizard.RollingUpgradeWizardSelectPool.UpgradeDataGridView(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.buttonClearAll = new System.Windows.Forms.Button();
             this.expansionColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.checkBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.buttonClearAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,25 +60,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Updating = false;
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // buttonSelectAll
-            // 
-            resources.ApplyResources(this.buttonSelectAll, "buttonSelectAll");
-            this.buttonSelectAll.Name = "buttonSelectAll";
-            this.buttonSelectAll.UseVisualStyleBackColor = true;
-            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
-            // 
-            // buttonClearAll
-            // 
-            resources.ApplyResources(this.buttonClearAll, "buttonClearAll");
-            this.buttonClearAll.Name = "buttonClearAll";
-            this.buttonClearAll.UseVisualStyleBackColor = true;
-            this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
             // expansionColumn
             // 
@@ -125,6 +106,25 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             resources.ApplyResources(this.ColumnVersion, "ColumnVersion");
             this.ColumnVersion.Name = "ColumnVersion";
             this.ColumnVersion.ReadOnly = true;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // buttonSelectAll
+            // 
+            resources.ApplyResources(this.buttonSelectAll, "buttonSelectAll");
+            this.buttonSelectAll.Name = "buttonSelectAll";
+            this.buttonSelectAll.UseVisualStyleBackColor = true;
+            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
+            // 
+            // buttonClearAll
+            // 
+            resources.ApplyResources(this.buttonClearAll, "buttonClearAll");
+            this.buttonClearAll.Name = "buttonClearAll";
+            this.buttonClearAll.UseVisualStyleBackColor = true;
+            this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
             // RollingUpgradeWizardSelectPool
             // 

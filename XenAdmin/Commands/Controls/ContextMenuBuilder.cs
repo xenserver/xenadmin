@@ -318,8 +318,6 @@ namespace XenAdmin.Commands
         {
             public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
             {
-                items.AddIfEnabled(new UpgradeSRCommand(mainWindow, selection));
-                items.AddIfEnabled(new ShareSRCommand(mainWindow, selection));
                 items.AddIfEnabled(new RepairSRCommand(mainWindow, selection));
                 items.AddIfEnabled(new DetachSRCommand(mainWindow, selection));
                 items.AddIfEnabled(new ForgetSRCommand(mainWindow, selection));
@@ -923,8 +921,6 @@ namespace XenAdmin.Commands
             {
                 items.AddIfEnabled(new RepairSRCommand(mainWindow, selection));
                 items.AddIfEnabled(new SetAsDefaultSRCommand(mainWindow, selection));
-                items.AddIfEnabled(new ShareSRCommand(mainWindow, selection));
-                items.AddIfEnabled(new UpgradeSRCommand(mainWindow, selection));
                 items.AddIfEnabled(new ConvertToThinSRCommand(mainWindow, selection));
                 items.AddSeparator();
 
