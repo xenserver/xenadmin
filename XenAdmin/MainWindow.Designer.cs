@@ -146,7 +146,6 @@ namespace XenAdmin
             this.removeServerToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.poolReconnectAsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disconnectPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.exportResourceReportPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             this.virtualAppliancesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
@@ -155,6 +154,7 @@ namespace XenAdmin
             this.drConfigureToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.DrWizardToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.vMProtectionAndRecoveryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.exportResourceReportPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbReportsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbDisconnectToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -224,8 +224,6 @@ namespace XenAdmin
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.RepairStorageToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.DefaultSRToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.shareStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.upgradeStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.virtualDisksToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.addVirtualDiskToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -254,6 +252,7 @@ namespace XenAdmin
             this.templatePropertiesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bugToolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.healthCheckToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.LicenseManagerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
@@ -271,17 +270,16 @@ namespace XenAdmin
             this.viewApplicationLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripSeparator();
             this.xenSourceOnTheWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xenCenterPluginsOnlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutXenSourceAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xenCenterPluginsOnlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.healthCheckToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1420,8 +1418,6 @@ namespace XenAdmin
             this.toolStripSeparator22,
             this.RepairStorageToolStripMenuItem,
             this.DefaultSRToolStripMenuItem,
-            this.shareStorageRepositoryToolStripMenuItem,
-            this.upgradeStorageRepositoryToolStripMenuItem,
             this.toolStripSeparator2,
             this.virtualDisksToolStripMenuItem,
             this.reclaimFreedSpacetripMenuItem,
@@ -1462,18 +1458,6 @@ namespace XenAdmin
             this.DefaultSRToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_StorageDefault_h32bit_16;
             this.DefaultSRToolStripMenuItem.Name = "DefaultSRToolStripMenuItem";
             resources.ApplyResources(this.DefaultSRToolStripMenuItem, "DefaultSRToolStripMenuItem");
-            // 
-            // shareStorageRepositoryToolStripMenuItem
-            // 
-            this.shareStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.ShareSRCommand();
-            this.shareStorageRepositoryToolStripMenuItem.Name = "shareStorageRepositoryToolStripMenuItem";
-            resources.ApplyResources(this.shareStorageRepositoryToolStripMenuItem, "shareStorageRepositoryToolStripMenuItem");
-            // 
-            // upgradeStorageRepositoryToolStripMenuItem
-            // 
-            this.upgradeStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.UpgradeSRCommand();
-            this.upgradeStorageRepositoryToolStripMenuItem.Name = "upgradeStorageRepositoryToolStripMenuItem";
-            resources.ApplyResources(this.upgradeStorageRepositoryToolStripMenuItem, "upgradeStorageRepositoryToolStripMenuItem");
             // 
             // toolStripSeparator2
             // 
@@ -1535,9 +1519,8 @@ namespace XenAdmin
             this.DestroyStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.DestroySRCommand();
             this.DestroyStorageRepositoryToolStripMenuItem.Name = "DestroyStorageRepositoryToolStripMenuItem";
             resources.ApplyResources(this.DestroyStorageRepositoryToolStripMenuItem, "DestroyStorageRepositoryToolStripMenuItem");
-            
             // 
-            // ConvertStorageRepositoryToolStripMenuItem
+            // ConvertToThinStorageRepositoryToolStripMenuItem
             // 
             this.ConvertToThinStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.ConvertToThinSRCommand();
             this.ConvertToThinStorageRepositoryToolStripMenuItem.Name = "ConvertToThinStorageRepositoryToolStripMenuItem";
@@ -1664,6 +1647,12 @@ namespace XenAdmin
             this.bugToolToolStripMenuItem.Command = new XenAdmin.Commands.BugToolCommand();
             this.bugToolToolStripMenuItem.Name = "bugToolToolStripMenuItem";
             resources.ApplyResources(this.bugToolToolStripMenuItem, "bugToolToolStripMenuItem");
+            // 
+            // healthCheckToolStripMenuItem1
+            // 
+            this.healthCheckToolStripMenuItem1.Command = new XenAdmin.Commands.HealthCheckCommand();
+            this.healthCheckToolStripMenuItem1.Name = "healthCheckToolStripMenuItem1";
+            resources.ApplyResources(this.healthCheckToolStripMenuItem1, "healthCheckToolStripMenuItem1");
             // 
             // toolStripSeparator14
             // 
@@ -1848,12 +1837,6 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
-            // healthCheckToolStripMenuItem1
-            // 
-            this.healthCheckToolStripMenuItem1.Command = new XenAdmin.Commands.HealthCheckCommand();
-            this.healthCheckToolStripMenuItem1.Name = "healthCheckToolStripMenuItem1";
-            resources.ApplyResources(this.healthCheckToolStripMenuItem1, "healthCheckToolStripMenuItem1");
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1973,8 +1956,6 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
         private CommandToolStripMenuItem RepairStorageToolStripMenuItem;
         private CommandToolStripMenuItem DefaultSRToolStripMenuItem;
-        private CommandToolStripMenuItem shareStorageRepositoryToolStripMenuItem;
-        private CommandToolStripMenuItem upgradeStorageRepositoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private CommandToolStripMenuItem DetachStorageToolStripMenuItem;
         private CommandToolStripMenuItem ReattachStorageRepositoryToolStripMenuItem;

@@ -68,7 +68,6 @@ namespace XenAdmin
         StorageBroken,
         StorageDefault,
         StorageDisabled,
-        StorageNeedsUpgrading,
 
         PowerStateHalted,
         PowerStateSuspended,

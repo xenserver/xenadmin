@@ -13397,24 +13397,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following storage repositories were not upgraded:.
-        /// </summary>
-        public static string ERROR_DIALOG_UPGRADE_SR_TEXT {
-            get {
-                return ResourceManager.GetString("ERROR_DIALOG_UPGRADE_SR_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error Upgrading Storage Repository.
-        /// </summary>
-        public static string ERROR_DIALOG_UPGRADE_SR_TITLE {
-            get {
-                return ResourceManager.GetString("ERROR_DIALOG_UPGRADE_SR_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to File {0} not found.
         /// </summary>
         public static string ERROR_FILE_NOT_FOUND {
@@ -20447,15 +20429,6 @@ namespace XenAdmin {
         public static string MAINWINDOW_TRIM_SR {
             get {
                 return ResourceManager.GetString("MAINWINDOW_TRIM_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Upgrade.
-        /// </summary>
-        public static string MAINWINDOW_UPGRADE_SR {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_UPGRADE_SR", resourceCulture);
             }
         }
         
@@ -32725,60 +32698,6 @@ namespace XenAdmin {
         public static string UPGRADE_SLAVE {
             get {
                 return ResourceManager.GetString("UPGRADE_SLAVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade....
-        /// </summary>
-        public static string UPGRADE_SR {
-            get {
-                return ResourceManager.GetString("UPGRADE_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you want to upgrade this storage repository?.
-        /// </summary>
-        public static string UPGRADE_SR_PROMPT {
-            get {
-                return ResourceManager.GetString("UPGRADE_SR_PROMPT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade Storage Repository.
-        /// </summary>
-        public static string UPGRADE_SR_PROMPT_TITLE {
-            get {
-                return ResourceManager.GetString("UPGRADE_SR_PROMPT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This SR needs upgrading.
-        /// </summary>
-        public static string UPGRADE_SR_WARNING {
-            get {
-                return ResourceManager.GetString("UPGRADE_SR_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you want to upgrade these storage repositories?.
-        /// </summary>
-        public static string UPGRADE_SRS_PROMPT {
-            get {
-                return ResourceManager.GetString("UPGRADE_SRS_PROMPT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade Multiple Storage Repositories.
-        /// </summary>
-        public static string UPGRADE_SRS_PROMPT_TITLE {
-            get {
-                return ResourceManager.GetString("UPGRADE_SRS_PROMPT_TITLE", resourceCulture);
             }
         }
         

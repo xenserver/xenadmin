@@ -2100,13 +2100,13 @@
     <value>Remove Crash &amp;Dump Files</value>
   </data>
   <data name="ChangeRootPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
+    <value>161, 22</value>
   </data>
   <data name="ChangeRootPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Change...</value>
   </data>
   <data name="forgetSavedPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
+    <value>161, 22</value>
   </data>
   <data name="forgetSavedPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Forget Password</value>
@@ -2303,18 +2303,6 @@
   <data name="DefaultSRToolStripMenuItem.Text" xml:space="preserve">
     <value>Set as Defaul&amp;t</value>
   </data>
-  <data name="shareStorageRepositoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="shareStorageRepositoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Share</value>
-  </data>
-  <data name="upgradeStorageRepositoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="upgradeStorageRepositoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Upgrade</value>
-  </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
   </data>
@@ -2368,6 +2356,9 @@
   </data>
   <data name="DestroyStorageRepositoryToolStripMenuItem.Text" xml:space="preserve">
     <value>Destr&amp;oy</value>
+  </data>
+  <data name="ConvertToThinStorageRepositoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
@@ -3476,18 +3467,6 @@
   <data name="&gt;&gt;DefaultSRToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;shareStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>shareStorageRepositoryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;shareStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;upgradeStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>upgradeStorageRepositoryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;upgradeStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
@@ -3546,6 +3525,12 @@
     <value>DestroyStorageRepositoryToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;DestroyStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ConvertToThinStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>ConvertToThinStorageRepositoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ConvertToThinStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
@@ -3648,6 +3633,12 @@
     <value>bugToolToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;bugToolToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Name" xml:space="preserve">
+    <value>healthCheckToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
@@ -3793,12 +3784,6 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Name" xml:space="preserve">
-    <value>healthCheckToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

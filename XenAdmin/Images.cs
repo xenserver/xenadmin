@@ -95,7 +95,6 @@ namespace XenAdmin
             ImageList16.Images.Add("000_StorageBroken_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageBroken_h32bit_16);
             ImageList16.Images.Add("000_StorageDefault_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageDefault_h32bit_16);
             ImageList16.Images.Add("000_StorageDisabled_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageDisabled_h32bit_16);
-            ImageList16.Images.Add("000_StorageNeedsUpgrading_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageNeedsUpgrading_h32bit_16);
 
             ImageList16.Images.Add("001_ShutDown_h32bit_16.png", Properties.Resources._001_ShutDown_h32bit_16);
             ImageList16.Images.Add("000_paused_h32bit_16.png", Properties.Resources._000_paused_h32bit_16);

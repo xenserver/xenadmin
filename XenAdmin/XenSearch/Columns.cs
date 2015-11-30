@@ -189,18 +189,6 @@ namespace XenAdmin.XenSearch
                 return true;
             }
 
-            SR sr = o as SR;
-            if (sr != null && sr.NeedsUpgrading)
-            {
-                if (property == PropertyNames.memoryValue)
-                    item = new GridStringItem(Messages.UPGRADE_SR_WARNING,
-                                              HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
-                                              QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush, Program.DefaultFontUnderline, 3,
-                                              (sender, args) => new UpgradeSRCommand(Program.MainWindow, sr).Execute(), null);
-
-                return true;
-            }
-
             Pool pool = o as Pool;
             if (pool != null && !pool.IsPoolFullyUpgraded)
             {

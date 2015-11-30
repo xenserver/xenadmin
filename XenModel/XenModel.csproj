@@ -62,7 +62,7 @@
     <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
     <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
     <Compile Include="Actions\HealthCheck\TransferHealthCheckSettingAction.cs" />
-	<Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
+    <Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
     <Compile Include="Actions\HealthCheck\GetHealthCheckAnalysisResultAction.cs" />
     <Compile Include="Actions\HealthCheck\UploadServerStatusReportAction.cs" />
     <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
@@ -263,7 +263,6 @@
     <Compile Include="Actions\SR\SrRefreshAction.cs" />
     <Compile Include="Actions\SR\SrRepairAction.cs" />
     <Compile Include="Actions\SR\SrScanAction.cs" />
-    <Compile Include="Actions\SR\SrShareAction.cs" />
     <Compile Include="Actions\StorageLink\SrCreateAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgScanAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgStoragePoolScanAction.cs" />
