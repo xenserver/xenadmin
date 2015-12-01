@@ -154,10 +154,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             CreateMappingsFromSelection(selection);
             UpdateWindowTitle();
-            m_pageDestination = new CrossPoolMigrateDestinationPage(hostPreSelection, VmsFromSelection(selection), wizardMode)
-                                    {
-                                        VmMappings = m_vmMappings,
-                                    };
+            m_pageDestination = CreateCrossPoolMigrateDestinationPage(selection);
 
             m_pageStorage = new CrossPoolMigrateStoragePage();
             m_pageNetwork = new CrossPoolMigrateNetworkingPage();
@@ -172,6 +169,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 AddPages(m_pageCopyMode, m_pageIntraPoolCopy);
             else
                 AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
+        }
+
+        private CrossPoolMigrateDestinationPage CreateCrossPoolMigrateDestinationPage(IEnumerable<SelectedItem> selection)
+        {
+            return
+                new CrossPoolMigrateDestinationPage(hostPreSelection, VmsFromSelection(selection), wizardMode, GetSourceConnectionsForSelection(selection))
+                {
+                    VmMappings = m_vmMappings,
+                };
         }
 
         public override sealed string Text
@@ -246,6 +252,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 
                 m_vmMappings.Add(item.XenObject.opaque_ref, mapping);
             }
+        }
+
+        private List<IXenConnection> GetSourceConnectionsForSelection(IEnumerable<SelectedItem> selection)
+        {
+            return 
+                wizardMode == WizardMode.Copy 
+                    ?   selection.Select(item => item.Connection).Where(conn => conn != null).Distinct().ToList()
+                    :   new List<IXenConnection>();
         }
 
         private List<VM> VmsFromSelection(IEnumerable<SelectedItem> selection)
