@@ -8407,7 +8407,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cannot migrate to resident host or pool.
+        ///   Looks up a localized string similar to cannot migrate to the same host.
         /// </summary>
         public static string CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST {
             get {
