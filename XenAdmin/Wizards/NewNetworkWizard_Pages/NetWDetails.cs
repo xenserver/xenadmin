@@ -194,6 +194,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
             if (SelectedHostNic == null)
                 return;
+            
+            numericUpDownMTU.Maximum = Math.Min(SelectedHostNic.MTU, XenAPI.Network.MTU_MAX);
 
             vlans = GetVLANList(SelectedHostNic);
 
