@@ -96,7 +96,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                         {
                             //Skip the resident host as there's a filter for it and 
                             //if not then you could exclude intrapool migration
-                            if(vm.resident_on == host.opaque_ref)
+                            if (vm.Connection == host.Connection)
                                 continue;
 
                             PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);

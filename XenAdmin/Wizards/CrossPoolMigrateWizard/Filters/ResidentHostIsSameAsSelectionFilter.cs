@@ -54,7 +54,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             get
             {
                 List<Host> residentHosts = new List<Host>();
-                preSelectedVMs.ForEach(vm=>residentHosts.Add( vm.Connection.Resolve(vm.resident_on)));
+                preSelectedVMs.ForEach(vm=>residentHosts.Add(vm.Home()));
                 
                 if(ItemToFilterOn is Host)
                 {
