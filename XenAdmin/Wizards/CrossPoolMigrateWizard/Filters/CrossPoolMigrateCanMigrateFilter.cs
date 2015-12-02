@@ -96,7 +96,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                         {
                             //Skip the resident host as there's a filter for it and 
                             //if not then you could exclude intrapool migration
-                            if (vm.Connection == host.Connection)
+                            if (vm.resident_on == host.opaque_ref)
                                 continue;
 
                             PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);
@@ -109,7 +109,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                                                   receiveMapping,
                                                   true,
                                                   GetVdiMap(vm, targetSR),
-                                                  GetVifMap(vm, targetNetwork),
+                                                  vm.Connection == host.Connection ? new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>() : GetVifMap(vm, targetNetwork),
                                                   new Dictionary<string, string>());
                         }
                         catch (Failure failure)
