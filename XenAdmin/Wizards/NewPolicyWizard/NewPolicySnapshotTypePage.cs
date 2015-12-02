@@ -165,9 +165,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
         {
-            string tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL.Replace("\\n", "\n"),
-                              Messages.DISKMEMORY_SNAPSHOTS);
-            toolTip.Show(tt, checkpointInfoPictureBox, 20, 0);
+            toolTip.Show(Messages.FIELD_DISABLED, checkpointInfoPictureBox, 20, 0);
         }
 
         private void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e)
