@@ -38,6 +38,7 @@ using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Mappings;
+using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Wizards.GenericPages
@@ -52,6 +53,7 @@ namespace XenAdmin.Wizards.GenericPages
 		private IXenObject m_selectedObject;
 		private bool updatingDestinationCombobox;
         private bool m_buttonNextEnabled;
+        protected List<IXenConnection> ignoredConnections = new List<IXenConnection>();
 
         /// <summary>
         /// Combobox item that can executes a command but also be an IEnableableComboBoxItem
@@ -245,7 +247,7 @@ namespace XenAdmin.Wizards.GenericPages
 			updatingDestinationCombobox = true;
 			Program.Invoke(Program.MainWindow, ClearComboBox);
 
-			foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy.Where(con => con.IsConnected))
+			foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy.Where(con => con.IsConnected).Except(ignoredConnections))
 			{
 			    DelayLoadingOptionComboBoxItem item = null;
 

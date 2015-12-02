@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using XenAdmin.Network;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
@@ -41,17 +42,21 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private Host preSelectedHost;
         private List<VM> selectedVMs;
         private WizardMode wizardMode;
+
         
-        public CrossPoolMigrateDestinationPage(): this(null, null, WizardMode.Migrate)
+        public CrossPoolMigrateDestinationPage()
+            : this(null, null, WizardMode.Migrate, null)
         {
         }
 
-        public CrossPoolMigrateDestinationPage(Host preSelectedHost, List<VM> selectedVMs, WizardMode wizardMode)
+        public CrossPoolMigrateDestinationPage(Host preSelectedHost, List<VM> selectedVMs, WizardMode wizardMode, List<IXenConnection> ignoredConnections)
         {
             this.preSelectedHost = preSelectedHost;
             SetDefaultTarget(preSelectedHost);
             this.selectedVMs = selectedVMs;
             this.wizardMode = wizardMode;
+            this.ignoredConnections = ignoredConnections ?? new List<IXenConnection>();
+
             InitializeText();
         }
 
