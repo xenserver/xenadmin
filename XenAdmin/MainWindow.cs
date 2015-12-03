@@ -456,7 +456,7 @@ namespace XenAdmin
                                                    : null);
             }
 
-            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
+            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !((a is CancellingAction) && ((CancellingAction)a).Cancelled));
             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
 
             if (eventsPage.Visible)
