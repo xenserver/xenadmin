@@ -197,6 +197,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             
             numericUpDownMTU.Maximum = Math.Min(SelectedHostNic.MTU, XenAPI.Network.MTU_MAX);
 
+            numericUpDownMTU.Enabled = !(infoMtuPanel.Visible = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum);
+
             vlans = GetVLANList(SelectedHostNic);
 
             //CA-72484: check whether the currently selected VLAN is available and keep it

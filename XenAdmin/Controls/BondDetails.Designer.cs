@@ -32,17 +32,12 @@ namespace XenAdmin.Controls
             this.cbxAutomatic = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ColumnCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColumnNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnMac = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLinkStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDuplex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDevice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPci = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numericUpDownMTU = new System.Windows.Forms.NumericUpDown();
             this.labelMTU = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.infoMtuPanel = new System.Windows.Forms.Panel();
+            this.infoMtuMessage = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelLACPWarning = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -60,9 +55,19 @@ namespace XenAdmin.Controls
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLinkStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDuplex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDevice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPci = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.infoMtuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelLACPWarning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxBondMode.SuspendLayout();
@@ -109,55 +114,6 @@ namespace XenAdmin.Controls
             resources.ApplyResources(this.ColumnCheckBox, "ColumnCheckBox");
             this.ColumnCheckBox.Name = "ColumnCheckBox";
             // 
-            // ColumnNic
-            // 
-            resources.ApplyResources(this.ColumnNic, "ColumnNic");
-            this.ColumnNic.Name = "ColumnNic";
-            this.ColumnNic.ReadOnly = true;
-            // 
-            // ColumnMac
-            // 
-            resources.ApplyResources(this.ColumnMac, "ColumnMac");
-            this.ColumnMac.Name = "ColumnMac";
-            this.ColumnMac.ReadOnly = true;
-            // 
-            // ColumnLinkStatus
-            // 
-            resources.ApplyResources(this.ColumnLinkStatus, "ColumnLinkStatus");
-            this.ColumnLinkStatus.Name = "ColumnLinkStatus";
-            this.ColumnLinkStatus.ReadOnly = true;
-            // 
-            // ColumnSpeed
-            // 
-            resources.ApplyResources(this.ColumnSpeed, "ColumnSpeed");
-            this.ColumnSpeed.Name = "ColumnSpeed";
-            this.ColumnSpeed.ReadOnly = true;
-            // 
-            // ColumnDuplex
-            // 
-            resources.ApplyResources(this.ColumnDuplex, "ColumnDuplex");
-            this.ColumnDuplex.Name = "ColumnDuplex";
-            this.ColumnDuplex.ReadOnly = true;
-            // 
-            // ColumnVendor
-            // 
-            resources.ApplyResources(this.ColumnVendor, "ColumnVendor");
-            this.ColumnVendor.Name = "ColumnVendor";
-            this.ColumnVendor.ReadOnly = true;
-            // 
-            // ColumnDevice
-            // 
-            resources.ApplyResources(this.ColumnDevice, "ColumnDevice");
-            this.ColumnDevice.Name = "ColumnDevice";
-            this.ColumnDevice.ReadOnly = true;
-            // 
-            // ColumnPci
-            // 
-            this.ColumnPci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.ColumnPci, "ColumnPci");
-            this.ColumnPci.Name = "ColumnPci";
-            this.ColumnPci.ReadOnly = true;
-            // 
             // numericUpDownMTU
             // 
             resources.ApplyResources(this.numericUpDownMTU, "numericUpDownMTU");
@@ -171,6 +127,7 @@ namespace XenAdmin.Controls
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.infoMtuPanel, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.panelLACPWarning, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
@@ -178,6 +135,25 @@ namespace XenAdmin.Controls
             this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxBondMode, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // infoMtuPanel
+            // 
+            resources.ApplyResources(this.infoMtuPanel, "infoMtuPanel");
+            this.infoMtuPanel.Controls.Add(this.infoMtuMessage);
+            this.infoMtuPanel.Controls.Add(this.pictureBox2);
+            this.infoMtuPanel.Name = "infoMtuPanel";
+            // 
+            // infoMtuMessage
+            // 
+            resources.ApplyResources(this.infoMtuMessage, "infoMtuMessage");
+            this.infoMtuMessage.Name = "infoMtuMessage";
+            // 
+            // pictureBox2
+            // 
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
             // 
             // panelLACPWarning
             // 
@@ -202,7 +178,7 @@ namespace XenAdmin.Controls
             // groupBoxBondMode
             // 
             resources.ApplyResources(this.groupBoxBondMode, "groupBoxBondMode");
-            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBondMode, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBondMode, 3);
             this.groupBoxBondMode.Controls.Add(this.tableLayoutPanelBondMode);
             this.groupBoxBondMode.Name = "groupBoxBondMode";
             this.groupBoxBondMode.TabStop = false;
@@ -295,6 +271,55 @@ namespace XenAdmin.Controls
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
+            // ColumnNic
+            // 
+            resources.ApplyResources(this.ColumnNic, "ColumnNic");
+            this.ColumnNic.Name = "ColumnNic";
+            this.ColumnNic.ReadOnly = true;
+            // 
+            // ColumnMac
+            // 
+            resources.ApplyResources(this.ColumnMac, "ColumnMac");
+            this.ColumnMac.Name = "ColumnMac";
+            this.ColumnMac.ReadOnly = true;
+            // 
+            // ColumnLinkStatus
+            // 
+            resources.ApplyResources(this.ColumnLinkStatus, "ColumnLinkStatus");
+            this.ColumnLinkStatus.Name = "ColumnLinkStatus";
+            this.ColumnLinkStatus.ReadOnly = true;
+            // 
+            // ColumnSpeed
+            // 
+            resources.ApplyResources(this.ColumnSpeed, "ColumnSpeed");
+            this.ColumnSpeed.Name = "ColumnSpeed";
+            this.ColumnSpeed.ReadOnly = true;
+            // 
+            // ColumnDuplex
+            // 
+            resources.ApplyResources(this.ColumnDuplex, "ColumnDuplex");
+            this.ColumnDuplex.Name = "ColumnDuplex";
+            this.ColumnDuplex.ReadOnly = true;
+            // 
+            // ColumnVendor
+            // 
+            resources.ApplyResources(this.ColumnVendor, "ColumnVendor");
+            this.ColumnVendor.Name = "ColumnVendor";
+            this.ColumnVendor.ReadOnly = true;
+            // 
+            // ColumnDevice
+            // 
+            resources.ApplyResources(this.ColumnDevice, "ColumnDevice");
+            this.ColumnDevice.Name = "ColumnDevice";
+            this.ColumnDevice.ReadOnly = true;
+            // 
+            // ColumnPci
+            // 
+            this.ColumnPci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnPci, "ColumnPci");
+            this.ColumnPci.Name = "ColumnPci";
+            this.ColumnPci.ReadOnly = true;
+            // 
             // BondDetails
             // 
             resources.ApplyResources(this, "$this");
@@ -306,6 +331,9 @@ namespace XenAdmin.Controls
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.infoMtuPanel.ResumeLayout(false);
+            this.infoMtuPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelLACPWarning.ResumeLayout(false);
             this.panelLACPWarning.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -351,5 +379,8 @@ namespace XenAdmin.Controls
         private System.Windows.Forms.Panel panelLACPWarning;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel infoMtuPanel;
+        private System.Windows.Forms.Label infoMtuMessage;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
