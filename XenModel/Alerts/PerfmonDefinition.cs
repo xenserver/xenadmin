@@ -82,12 +82,15 @@ namespace XenAdmin.Alerts
         private readonly decimal alarmTriggerPeriod;
         private readonly decimal alarmAutoInhibitPeriod;
 
+        public bool HasValueSet { private set; get; }
+
         public PerfmonDefinition(string name, decimal alarmTriggerLevel, decimal alarmTriggerPeriod, decimal alarmAutoInhibitPeriod)
         {
             this.name = name;
             this.alarmTriggerLevel = alarmTriggerLevel;
             this.alarmTriggerPeriod = alarmTriggerPeriod;
             this.alarmAutoInhibitPeriod = alarmAutoInhibitPeriod;
+            HasValueSet = true;
         }
 
         public bool IsCPUUsage
@@ -184,6 +187,7 @@ namespace XenAdmin.Alerts
                         NumberStyles.Any,
                         CultureInfo.InvariantCulture,
                         out alarmTriggerLevel);
+                    HasValueSet = HasValueSet || success;
                 }
                 else if (node.Name.Equals(ALARM_TRIGGER_PERIOD_ELEMENT_NAME))
                 {
@@ -192,6 +196,7 @@ namespace XenAdmin.Alerts
                         NumberStyles.Any,
                         CultureInfo.InvariantCulture,
                         out alarmTriggerPeriod);
+                    HasValueSet = HasValueSet || success;
                 }
                 else if (node.Name.Equals(ALARM_AUTO_INHIBIT_PERIOD_ELEMENT_NAME))
                 {
@@ -200,6 +205,7 @@ namespace XenAdmin.Alerts
                         NumberStyles.Any,
                         CultureInfo.InvariantCulture,
                         out alarmAutoInhibitPeriod);
+                    HasValueSet = HasValueSet || success;
                 }
 
                 if (!success)
