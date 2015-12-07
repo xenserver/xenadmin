@@ -982,10 +982,6 @@ namespace XenAdmin.TabPages
             {
                 s.AddEntry(FriendlyName(String.Format("host.license_server-port")), host.license_server["port"]);
             }
-            if (host.software_version.ContainsKey("dbv"))
-            {
-                s.AddEntry("DBV", host.software_version["dbv"]);
-            }
 
             foreach (string key in new string[] { "productcode", "serialnumber" })
             {
@@ -1022,6 +1018,8 @@ namespace XenAdmin.TabPages
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_XCP_PLATFORM_VERSION, host.software_version["platform_version"]);
             if (!isXCP && host.software_version.ContainsKey("product_version"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, host.ProductVersionText);
+            if (host.software_version.ContainsKey("dbv"))
+                pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
         }
 
         private void generateCPUBox()
