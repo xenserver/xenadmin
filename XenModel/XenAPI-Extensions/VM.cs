@@ -1892,10 +1892,23 @@ namespace XenAPI
         /// <summary>
         /// Returns true if this VM is Windows.
         /// </summary>
+        /// <remarks>
+        /// This really should be just a flag from XAPI, but we do not have such. 
+        /// 
+        /// To get an acceptable result, this getter is trying to detect some specific cases before falling back to the viridian flag 
+        /// that may not be correct at all times.</remarks>
         public bool IsWindows
         {
             get
             {
+                //try to detect special cases when we are sure - having guest_metrics can help
+                var gm = Connection.Resolve(this.guest_metrics);
+                if (gm != null)
+                    if (gm.os_version.ContainsKey("distro") && gm.os_version["distro"].ToLowerInvariant().Contains("freebsd")
+                    || gm.os_version.ContainsKey("uname") && gm.os_version["uname"].ToLowerInvariant().Contains("netscaler"))
+                        return false;
+
+                //generic check
                 return 
                     this.IsHVM && BoolKey(this.platform, "viridian");
             }
