@@ -267,7 +267,10 @@ namespace XenAdmin.SettingsPanels
                         physicalUtilisationAlert.Populate(perfmonDefinition);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                log.Error("Unexpected error during populating controls for Alerts. Exception swallowed.", ex); //Adding this to pre-existing empty catch block to log it at least
+            }
 
             // Dom0 memory usage is stored in the other_config of the Dom0 vm not on the host (or any other XenObject)
             try
@@ -295,7 +298,7 @@ namespace XenAdmin.SettingsPanels
             }
             catch (Exception ex)
             {
-                log.Error("Unexpected error during populating controls for Dom0 Memory Usage alert. Leaving it as is.", ex);    
+                log.Error("Unexpected error during populating controls for Dom0 Memory Usage alert. Exception swallowed.", ex);     //Any error here will cause the controls not being populated, but they will be still usable.
             }
         }
 
