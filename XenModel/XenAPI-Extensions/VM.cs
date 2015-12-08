@@ -1890,23 +1890,30 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// List of distro values that we treat as Linux/Non-Windows (written by Linux Guest Agent, evaluating xe-linux-distribution)
+        /// </summary>
+        private readonly string[] linuxDistros = { "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles", "lsb", "boot2docker", "freebsd" };
+
+        /// <summary>
         /// Returns true if this VM is Windows.
         /// </summary>
         /// <remarks>
-        /// This really should be just a flag from XAPI, but we do not have such. 
-        /// 
         /// To get an acceptable result, this getter is trying to detect some specific cases before falling back to the viridian flag 
-        /// that may not be correct at all times.</remarks>
+        /// that may not be correct at all times. (Linux distro can be detected if the guest agent is running on a Linux VM.)</remarks>
         public bool IsWindows
         {
             get
             {
-                //try to detect special cases when we are sure - having guest_metrics can help
+                //try to detect special cases when the decision is easy - the presence of guest_metrics helps
                 var gm = Connection.Resolve(this.guest_metrics);
-                if (gm != null)
-                    if (gm.os_version.ContainsKey("distro") && gm.os_version["distro"].ToLowerInvariant().Contains("freebsd")
-                    || gm.os_version.ContainsKey("uname") && gm.os_version["uname"].ToLowerInvariant().Contains("netscaler"))
+                if (gm != null && gm.os_version != null)
+                { 
+                    if (gm.os_version.ContainsKey("distro") && !string.IsNullOrEmpty(gm.os_version["distro"]) && linuxDistros.Contains(gm.os_version["distro"].ToLowerInvariant()))
                         return false;
+
+                    if (gm.os_version.ContainsKey("uname") && gm.os_version["uname"].ToLowerInvariant().Contains("netscaler"))
+                        return false;
+                }
 
                 //generic check
                 return 
