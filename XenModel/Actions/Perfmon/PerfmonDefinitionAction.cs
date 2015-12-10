@@ -115,9 +115,6 @@ namespace XenAdmin.Actions
                 }
             }
 
-            if (dom0_memory_usage != null && perfmonDefinitions.Contains(dom0_memory_usage))
-                perfmonDefinitions.Remove(dom0_memory_usage);
-
             if (perfmonDefinitions == null || perfmonDefinitions.Count == 0)
             {
                 Helpers.RemoveFromOtherConfig(Session, xo, PerfmonDefinition.PERFMON_KEY_NAME);
