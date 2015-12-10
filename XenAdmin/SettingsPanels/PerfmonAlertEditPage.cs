@@ -50,6 +50,8 @@ namespace XenAdmin.SettingsPanels
 {
     public partial class PerfmonAlertEditPage : UserControl, IEditPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private IXenObject _XenObject;
 
         private readonly ToolTip m_invalidParamToolTip;
@@ -242,6 +244,7 @@ namespace XenAdmin.SettingsPanels
         {
             if (_XenObject == null)
                 return;
+            
             try
             {
                 var perfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(_XenObject);
@@ -260,13 +263,43 @@ namespace XenAdmin.SettingsPanels
                         memoryAlert.Populate(perfmonDefinition);
                     else if (perfmonDefinition.IsSrUsage)
                         srAlert.Populate(perfmonDefinition);
-                    else if (perfmonDefinition.IsDom0MemoryUsage)
-                        dom0MemoryAlert.Populate(perfmonDefinition);
                     else if (perfmonDefinition.IsSrPhysicalUtilisation)
                         physicalUtilisationAlert.Populate(perfmonDefinition);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                log.Error("Unexpected error during populating controls for Alerts. Exception swallowed.", ex); //Adding this to pre-existing empty catch block to log it at least
+            }
+
+            // Dom0 memory usage is stored in the other_config of the Dom0 vm not on the host (or any other XenObject)
+            try
+            {
+                if (_XenObject is Host)
+                {
+                    var controlDomain = (_XenObject as Host).ControlDomain;
+
+                    if (controlDomain != null)
+                    {
+                        var controlDomainPerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(controlDomain);
+
+                        if (controlDomainPerfmonDefinitions != null)
+                        {
+                            for (int ii = 0; ii < controlDomainPerfmonDefinitions.Length; ii++)
+                            {
+                                var def = controlDomainPerfmonDefinitions[ii];
+
+                                if (def != null && def.IsDom0MemoryUsage)
+                                    dom0MemoryAlert.Populate(def);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Unexpected error during populating controls for Dom0 Memory Usage alert. Exception swallowed.", ex);     //Any error here will cause the controls not being populated, but they will be still usable.
+            }
         }
 
         public bool HasChanged
@@ -436,9 +469,13 @@ namespace XenAdmin.SettingsPanels
         {
             Debug.Assert(XapiToGuiTriggerLevel != null && XapiToGuiTriggerPeriod != null && XapiToGuiAlertInterval != null);
 
-            m_checkBox.Checked = true;
-            m_upDownTriggerLevel.Value = XapiToGuiTriggerLevel(perfmon.AlarmTriggerLevel);
-            m_upDownTriggerPeriod.Value = XapiToGuiTriggerPeriod(perfmon.AlarmTriggerPeriod);
+            if (perfmon.HasValueSet)
+            {
+                m_checkBox.Checked = true;
+                m_upDownTriggerLevel.Value = XapiToGuiTriggerLevel(perfmon.AlarmTriggerLevel);
+                m_upDownTriggerPeriod.Value = XapiToGuiTriggerPeriod(perfmon.AlarmTriggerPeriod);
+            }
+
             try
             {
                 m_upDownAlertInterval.Value = XapiToGuiAlertInterval(perfmon.AlarmAutoInhibitPeriod);
