@@ -4309,8 +4309,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The memory demand on {0}  is about {1} of the physical memory of the domain. Occasional performance degradation can be expected when memory swapping is forced to happen.
-        ///This alarm is set to be triggered when the ratio of the memory demand to the physical memory is beyond {2}..
+        ///   Looks up a localized string similar to The memory required by the control domain on {0} is {1} of its allocated memory. Occasional performance degradation can be expected when memory swapping is forced to happen.
+        ///This alarm is set to be triggered when the memory required by the control domain is above {2} of its allocated memory..
         /// </summary>
         public static string ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION {
             get {
