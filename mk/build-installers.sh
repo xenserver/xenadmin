@@ -131,8 +131,8 @@ cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/sign.bat $
 cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${DOTNETINST}
 cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${DOTNETINST}
 
-cd ${DOTNETINST} && InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
-cd ${DOTNETINST} && InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
+cd ${DOTNETINST} && ./InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
+cd ${DOTNETINST} && ./InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
 
 sign_files()
 {
