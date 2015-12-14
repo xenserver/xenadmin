@@ -68,7 +68,7 @@ namespace XenServerHealthCheck
 
             try
             {
-                session.login_with_password(connection.Username, connection.Password);
+                session.login_with_password(connection.Username, connection.Password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
                 connection.LoadCache(session);
                 var pool = Helpers.GetPoolOfOne(connection);
                 if (pool != null)
@@ -187,7 +187,7 @@ namespace XenServerHealthCheck
         public void updateHealthCheckSettings(bool success, DateTime time, string uploadUuid = "")
         {
             Session session = new Session(connection.Hostname, 80);
-            session.login_with_password(connection.Username, connection.Password);
+            session.login_with_password(connection.Username, connection.Password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
             connection.LoadCache(session);
 
             // Round-trip format time
