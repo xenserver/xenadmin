@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
                 Pool pool = selection[0].PoolAncestor;
                 bool inPool = pool != null;
 
-                return inPool  && (Helpers.WlbConfigured(pool.Connection) || Helpers.FeatureForbidden(connection, Host.RestrictWLB));
+                return inPool  && (Helpers.WlbConfigured(pool.Connection) && !Helpers.FeatureForbidden(connection, Host.RestrictWLB));
             }
             return false;
         }
