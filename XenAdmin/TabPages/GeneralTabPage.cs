@@ -1296,7 +1296,7 @@ namespace XenAdmin.TabPages
 
         private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)
         {
-            if (vm != null && vm.Connection != null && vm.power_state == vm_power_state.Running)
+            if (vm != null && vm.Connection != null)
             {
                 //For Dundee or higher Windows VMs
                 if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows)
@@ -1304,11 +1304,8 @@ namespace XenAdmin.TabPages
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
-                    bool isReceivingUpdates = false;// && vm.auto_update_drivers; //disabling it temporarily
 
                     bool isXenPrepInProgress = false; //TODO in CP-13247  when XenPrep functions will be added
-                    bool canTurnOnAutoUpdates = false && !isReceivingUpdates && !isXenPrepInProgress; //TODO in CP-13247: remove &&false when XenPrep functions have been added
-
                     //vmtype is not yet implemented (will likely have different name) in XAPI, but this is the type that refers to the windows update readyness/capability of the VM and is expected to have the following values: yes, no, dontknow, got_it
                     bool isManagementAgentInstalled = vm.HasUpgradeSupportInManagementAgent //&& vmtype != no"
                         || vm.HasRDP; //&& vmtype == no;
@@ -1317,57 +1314,49 @@ namespace XenAdmin.TabPages
                     bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
                     //canInstallIoDriversOnly is missing - management agent communicates with XS using the I/O drivers
 
-                    if (vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))
+                    var sb = new StringBuilder();
+
+                    if (vm.power_state == vm_power_state.Running)
                     {
-                        s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
+                        if (vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))
+                        {
+                            s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
+                        }
+                        else
+                        {
+                            //Row 1 : I/O Drivers
+                            if (isIoOptimized)
+                            {
+                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED);
+                            }
+                            else
+                            {
+                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED);
+                            }
+
+                            sb.Append(Environment.NewLine);
+
+                            //Row 2: Management Agent
+                            if (isManagementAgentInstalled)
+                            {
+                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED);
+                            }
+                            else
+                            {
+                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED);
+                            }
+                            sb.Append(Environment.NewLine);
+                        }
                     }
-                    else
+
+                    //Row 3 : vendor device - Windows Update
+                    sb.Append(vm.has_vendor_device ? Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES : Messages.VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES);
+
+                    // displaying Row1 - Row3
+                    s.AddEntry(FriendlyName("VM.VirtualizationState"), sb.ToString());
+
+                    if (vm.power_state == vm_power_state.Running)
                     {
-                        var sb = new StringBuilder();
-
-                        //Row 1 : I/O Drivers
-                        if (isIoOptimized)
-                        {
-                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED);
-                        }
-                        else
-                        {
-                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED);
-                        }
-
-                        sb.Append(Environment.NewLine);
-
-                        //Row 2: Management Agent
-                        if (isManagementAgentInstalled)
-                        {
-                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED);
-                        }
-                        else
-                        {
-                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED);
-                        }
-
-                        //Row 3 : Auto update
-                        if (isReceivingUpdates)
-                        {
-                            sb.Append(Environment.NewLine);
-                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES);
-                        }
-                        else if (isXenPrepInProgress)
-                        {
-                            sb.Append(Environment.NewLine);
-                            sb.Append(Messages.VIRTUALIZATION_STATE_VM_UPGRADING_VM);
-                        }
-
-                        // displaying Row1 - Row3
-                        s.AddEntry(FriendlyName("VM.VirtualizationState"), sb.ToString());
-
-                        //Row 4: Enable Auto Update link
-                        if (canTurnOnAutoUpdates)
-                        {
-                            //implement launching XenPrep here (CP-13247)
-                        }
-
                         //Row 4: Install Tools
                         string installMessage = string.Empty;
                         if (canInstallIoDriversAndManagementAgent)
@@ -1392,8 +1381,9 @@ namespace XenAdmin.TabPages
                         }
                     }
                 }
+
                 //for everything else (All VMs on pre-Dundee hosts & All non-Windows VMs on any host)
-                else 
+                else if (vm.power_state == vm_power_state.Running)
                 {
                     if (vm.virtualisation_status == 0 || vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                     {
