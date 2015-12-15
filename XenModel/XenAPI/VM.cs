@@ -124,7 +124,8 @@ namespace XenAPI
             long version,
             string generation_id,
             long hardware_platform_version,
-            bool auto_update_drivers)
+            bool auto_update_drivers,
+            bool has_vendor_device)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -203,6 +204,7 @@ namespace XenAPI
             this.generation_id = generation_id;
             this.hardware_platform_version = hardware_platform_version;
             this.auto_update_drivers = auto_update_drivers;
+            this.has_vendor_device = has_vendor_device;
         }
 
         /// <summary>
@@ -293,6 +295,7 @@ namespace XenAPI
             generation_id = update.generation_id;
             hardware_platform_version = update.hardware_platform_version;
             auto_update_drivers = update.auto_update_drivers;
+            has_vendor_device = update.has_vendor_device;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -374,6 +377,7 @@ namespace XenAPI
             generation_id = proxy.generation_id == null ? null : (string)proxy.generation_id;
             hardware_platform_version = proxy.hardware_platform_version == null ? 0 : long.Parse((string)proxy.hardware_platform_version);
             auto_update_drivers = (bool)proxy.auto_update_drivers;
+            has_vendor_device = (bool)proxy.has_vendor_device;
         }
 
         public Proxy_VM ToProxy()
@@ -456,6 +460,7 @@ namespace XenAPI
             result_.generation_id = (generation_id != null) ? generation_id : "";
             result_.hardware_platform_version = hardware_platform_version.ToString();
             result_.auto_update_drivers = auto_update_drivers;
+            result_.has_vendor_device = has_vendor_device;
             return result_;
         }
 
@@ -542,6 +547,7 @@ namespace XenAPI
             generation_id = Marshalling.ParseString(table, "generation_id");
             hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
             auto_update_drivers = Marshalling.ParseBool(table, "auto_update_drivers");
+            has_vendor_device = Marshalling.ParseBool(table, "has_vendor_device");
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -629,7 +635,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._version, other._version) &&
                 Helper.AreEqual2(this._generation_id, other._generation_id) &&
                 Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
-                Helper.AreEqual2(this._auto_update_drivers, other._auto_update_drivers);
+                Helper.AreEqual2(this._auto_update_drivers, other._auto_update_drivers) &&
+                Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -745,6 +752,10 @@ namespace XenAPI
                 {
                     VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
                 }
+                if (!Helper.AreEqual2(_has_vendor_device, server._has_vendor_device))
+                {
+                    VM.set_has_vendor_device(session, opaqueRef, _has_vendor_device);
+                }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
                     VM.set_memory_static_max(session, opaqueRef, _memory_static_max);
@@ -800,6 +811,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_order, server._order))
                 {
                     VM.set_order(session, opaqueRef, _order);
+                }
+                if (!Helper.AreEqual2(_auto_update_drivers, server._auto_update_drivers))
+                {
+                    VM.set_auto_update_drivers(session, opaqueRef, _auto_update_drivers);
                 }
 
                 return null;
@@ -1017,9 +1032,11 @@ namespace XenAPI
         /// <summary>
         /// Get the memory/target field of the given VM.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 5.6")]
         public static long get_memory_target(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_target(session.uuid, (_vm != null) ? _vm : "").parse());
@@ -1303,9 +1320,11 @@ namespace XenAPI
         /// <summary>
         /// Get the PCI_bus field of the given VM.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 6.0")]
         public static string get_PCI_bus(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pci_bus(session.uuid, (_vm != null) ? _vm : "").parse();
@@ -1424,9 +1443,11 @@ namespace XenAPI
         /// <summary>
         /// Get the ha_always_run field of the given VM.
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 6.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 6.0")]
         public static bool get_ha_always_run(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_ha_always_run(session.uuid, (_vm != null) ? _vm : "").parse();
@@ -1589,9 +1610,11 @@ namespace XenAPI
         /// <summary>
         /// Get the protection_policy field of the given VM.
         /// First published in XenServer 5.6 FP1.
+        /// Deprecated since XenServer 6.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 6.2")]
         public static XenRef<VMPP> get_protection_policy(Session session, string _vm)
         {
             return XenRef<VMPP>.Create(session.proxy.vm_get_protection_policy(session.uuid, (_vm != null) ? _vm : "").parse());
@@ -1600,9 +1623,11 @@ namespace XenAPI
         /// <summary>
         /// Get the is_snapshot_from_vmpp field of the given VM.
         /// First published in XenServer 5.6 FP1.
+        /// Deprecated since XenServer 6.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 6.2")]
         public static bool get_is_snapshot_from_vmpp(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.uuid, (_vm != null) ? _vm : "").parse();
@@ -1720,13 +1745,24 @@ namespace XenAPI
 
         /// <summary>
         /// Get the auto_update_drivers field of the given VM.
-        /// First published in XenServer Dundee.
+        /// Experimental. First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_auto_update_drivers(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
+        /// Get the has_vendor_device field of the given VM.
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_has_vendor_device(Session session, string _vm)
+        {
+            return (bool)session.proxy.vm_get_has_vendor_device(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
         /// <summary>
@@ -2023,10 +2059,12 @@ namespace XenAPI
         /// <summary>
         /// Set the PCI_bus field of the given VM.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_pci_bus">New value to set</param>
+        [Deprecated("XenServer 6.0")]
         public static void set_PCI_bus(Session session, string _vm, string _pci_bus)
         {
             session.proxy.vm_set_pci_bus(session.uuid, (_vm != null) ? _vm : "", (_pci_bus != null) ? _pci_bus : "").parse();
@@ -2213,6 +2251,18 @@ namespace XenAPI
         public static void set_hardware_platform_version(Session session, string _vm, long _hardware_platform_version)
         {
             session.proxy.vm_set_hardware_platform_version(session.uuid, (_vm != null) ? _vm : "", _hardware_platform_version.ToString()).parse();
+        }
+
+        /// <summary>
+        /// Set the has_vendor_device field of the given VM.
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_has_vendor_device">New value to set</param>
+        public static void set_has_vendor_device(Session session, string _vm, bool _has_vendor_device)
+        {
+            session.proxy.vm_set_has_vendor_device(session.uuid, (_vm != null) ? _vm : "", _has_vendor_device).parse();
         }
 
         /// <summary>
@@ -2778,10 +2828,12 @@ namespace XenAPI
         /// <summary>
         /// Set the value of the ha_always_run
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 6.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_value">The value</param>
+        [Deprecated("XenServer 6.0")]
         public static void set_ha_always_run(Session session, string _vm, bool _value)
         {
             session.proxy.vm_set_ha_always_run(session.uuid, (_vm != null) ? _vm : "", _value).parse();
@@ -2942,10 +2994,12 @@ namespace XenAPI
         /// <summary>
         /// Set the memory target for a running VM
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_target">The target in bytes</param>
+        [Deprecated("XenServer 5.6")]
         public static void set_memory_target_live(Session session, string _vm, long _target)
         {
             session.proxy.vm_set_memory_target_live(session.uuid, (_vm != null) ? _vm : "", _target.ToString()).parse();
@@ -2954,10 +3008,12 @@ namespace XenAPI
         /// <summary>
         /// Set the memory target for a running VM
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_target">The target in bytes</param>
+        [Deprecated("XenServer 5.6")]
         public static XenRef<Task> async_set_memory_target_live(Session session, string _vm, long _target)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.uuid, (_vm != null) ? _vm : "", _target.ToString()).parse());
@@ -2966,9 +3022,11 @@ namespace XenAPI
         /// <summary>
         /// Wait for a running VM to reach its current memory target
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 5.6")]
         public static void wait_memory_target_live(Session session, string _vm)
         {
             session.proxy.vm_wait_memory_target_live(session.uuid, (_vm != null) ? _vm : "").parse();
@@ -2977,9 +3035,11 @@ namespace XenAPI
         /// <summary>
         /// Wait for a running VM to reach its current memory target
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 5.6")]
         public static XenRef<Task> async_wait_memory_target_live(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.uuid, (_vm != null) ? _vm : "").parse());
@@ -2988,9 +3048,11 @@ namespace XenAPI
         /// <summary>
         /// Return true if the VM is currently 'co-operative' i.e. is expected to reach a balloon target and actually has done
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 6.1")]
         public static bool get_cooperative(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_cooperative(session.uuid, (_vm != null) ? _vm : "").parse();
@@ -2999,9 +3061,11 @@ namespace XenAPI
         /// <summary>
         /// Return true if the VM is currently 'co-operative' i.e. is expected to reach a balloon target and actually has done
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 6.1")]
         public static XenRef<Task> async_get_cooperative(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.uuid, (_vm != null) ? _vm : "").parse());
@@ -3810,30 +3874,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Check if PV auto update can be set on Windows vm
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
-        public static void assert_can_set_auto_update_drivers(Session session, string _vm, bool _value)
-        {
-            session.proxy.vm_assert_can_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse();
-        }
-
-        /// <summary>
-        /// Check if PV auto update can be set on Windows vm
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
-        public static XenRef<Task> async_assert_can_set_auto_update_drivers(Session session, string _vm, bool _value)
-        {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse());
-        }
-
-        /// <summary>
         /// Import an XVA from a URI
         /// First published in XenServer Dundee.
         /// </summary>
@@ -3990,7 +4030,7 @@ namespace XenAPI
         private string _name_description;
 
         /// <summary>
-        /// a user version number for this machine
+        /// Creators of VMs and templates may store version information here.
         /// </summary>
         public virtual long user_version
         {
@@ -5279,8 +5319,8 @@ namespace XenAPI
         private long _hardware_platform_version;
 
         /// <summary>
-        /// True if the Windows Update feature is enabled on the VM; false otherwise
-        /// First published in XenServer Dundee.
+        /// Does nothing at present. To be removed before Dundee release, once other code no longer refers to it.
+        /// Experimental. First published in XenServer Dundee.
         /// </summary>
         public virtual bool auto_update_drivers
         {
@@ -5296,5 +5336,24 @@ namespace XenAPI
             }
         }
         private bool _auto_update_drivers;
+
+        /// <summary>
+        /// Does nothing at present. Intended to replace auto_update_drivers to control the presence of the C000 PCI device.
+        /// Experimental. First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool has_vendor_device
+        {
+            get { return _has_vendor_device; }
+            set
+            {
+                if (!Helper.AreEqual(value, _has_vendor_device))
+                {
+                    _has_vendor_device = value;
+                    Changed = true;
+                    NotifyPropertyChanged("has_vendor_device");
+                }
+            }
+        }
+        private bool _has_vendor_device;
     }
 }

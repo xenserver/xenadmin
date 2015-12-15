@@ -1460,6 +1460,10 @@ namespace XenAPI
         Response<bool>
         vm_get_auto_update_drivers(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_has_vendor_device")]
+        Response<bool>
+        vm_get_has_vendor_device(string session, string _vm);
+
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
         vm_set_name_label(string session, string _vm, string _label);
@@ -1619,6 +1623,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.set_hardware_platform_version")]
         Response<string>
         vm_set_hardware_platform_version(string session, string _vm, string _hardware_platform_version);
+
+        [XmlRpcMethod("VM.set_has_vendor_device")]
+        Response<string>
+        vm_set_has_vendor_device(string session, string _vm, bool _has_vendor_device);
 
         [XmlRpcMethod("VM.snapshot")]
         Response<string>
@@ -6937,6 +6945,7 @@ namespace XenAPI
         public string generation_id;
         public string hardware_platform_version;
         public bool auto_update_drivers;
+        public bool has_vendor_device;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
