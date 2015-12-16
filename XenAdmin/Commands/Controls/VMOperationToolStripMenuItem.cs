@@ -162,6 +162,8 @@ namespace XenAdmin.Commands
                     base.DropDownItems.Insert(hostMenuItems.IndexOf(menuItem) + 1, menuItem);
                 }
             });
+
+            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
         }
 
         private void EnableAppropriateHostsNoWlb(Session session)

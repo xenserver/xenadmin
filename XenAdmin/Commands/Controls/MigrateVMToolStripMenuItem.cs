@@ -57,7 +57,7 @@ namespace XenAdmin.Commands
 
         protected override void AddAdditionalMenuItems(SelectedItemCollection selection)
         {
-            if (selection.ToList().All(item => Helpers.TampaOrGreater(item.Connection)))
+            if (selection.ToList().All(item => Helpers.TampaOrGreater(item.Connection) && !Helpers.CrossPoolMigrationRestrictedWithWlb(item.Connection)))
             {
                 VMOperationCommand cmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection);
                 DropDownItems.Add(new ToolStripSeparator());

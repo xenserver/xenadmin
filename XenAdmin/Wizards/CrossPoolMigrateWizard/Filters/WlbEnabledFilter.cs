@@ -58,9 +58,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                 bool targetWlb = false;
 
                 if(ItemToFilterOn != null)
-                    targetWlb = Helpers.WlbEnabledAndConfigured(ItemToFilterOn.Connection);
+                    targetWlb = Helpers.CrossPoolMigrationRestrictedWithWlb(ItemToFilterOn.Connection);
 
-                bool sourceWlb = preSelectedVMs.Any(vm => Helpers.WlbEnabledAndConfigured(vm.Connection));
+                bool sourceWlb = preSelectedVMs.Any(vm => Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection));
 
                 reason = targetWlb ? Messages.CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON : Messages.CPM_WLB_ENABLED_ON_VM_FAILURE_REASON;
 

@@ -114,7 +114,7 @@ namespace XenAdmin.Commands
             return !failureFound &&
                    vm.allowed_operations != null &&
                    vm.allowed_operations.Contains(vm_operations.migrate_send) &&
-                   !Helpers.WlbEnabledAndConfigured(vm.Connection) &&
+                   !Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection) &&
                    vm.SRs.ToList().All(sr=> sr != null && !sr.HBALunPerVDI) &&
                    (preselectedHost == null || vm.Connection.Resolve(vm.resident_on) != preselectedHost); //Not the same as the pre-selected host
         }
