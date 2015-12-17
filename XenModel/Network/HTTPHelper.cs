@@ -156,7 +156,7 @@ namespace XenAPI
             {
                 log.DebugFormat("Caught exception doing HTTP PUT from {0} to {1}", path, hostname);
                 log.Debug(e, e);
-                PollTaskForResult(connection, ref session, cancellingDelegate2, task);
+                PollTaskForResult(connection, ref session, cancellingDelegate2, task, true);
                 if (e is CancelledException || e.InnerException is CancelledException)
                     throw new XenAdmin.CancelledException();
                 else
@@ -273,24 +273,28 @@ namespace XenAPI
             return PollTaskForResult(connection, ref session, cancellingDelegate2, task);
         }
 
+        private const int POLL_FOR_TASK_RESULT_TIMEOUT = 2 * 60 * 1000; // 2 minutes
+        private const int POLL_FOR_TASK_RESULT_SLEEP_INTERVAL = 500;
+        
         private static String PollTaskForResult(IXenConnection connection, ref Session session,
-            HTTP.FuncBool cancellingDelegate, XenRef<Task> task)
+            HTTP.FuncBool cancellingDelegate, XenRef<Task> task, bool timeout = false)
         {
             //Program.AssertOffEventThread();
 
             task_status_type status;
-
+            int tries = POLL_FOR_TASK_RESULT_TIMEOUT / POLL_FOR_TASK_RESULT_SLEEP_INTERVAL;
             do
             {
                 if (cancellingDelegate != null && cancellingDelegate())
                     throw new XenAdmin.CancelledException();
 
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(POLL_FOR_TASK_RESULT_SLEEP_INTERVAL);
+                tries--;
 
                 status = (task_status_type)Task.DoWithSessionRetry(connection, ref session,
                     (Task.TaskStatusOp)Task.get_status, task.opaque_ref);
             }
-            while (status == task_status_type.pending || status == task_status_type.cancelling);
+            while ((status == task_status_type.pending || status == task_status_type.cancelling) && (!timeout || tries > 0));
 
             if (cancellingDelegate != null && cancellingDelegate())
                 throw new XenAdmin.CancelledException();
