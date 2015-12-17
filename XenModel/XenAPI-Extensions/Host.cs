@@ -253,6 +253,16 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_cifs"); }
         }
 
+        public static bool RestrictVendorDevice(Host h)
+        {
+            return h._RestrictVendorDevice;
+        }
+
+        private bool _RestrictVendorDevice
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_pci_device_for_auto_update"); }
+        }
+
         private bool _RestrictWLB
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_wlb"); }
