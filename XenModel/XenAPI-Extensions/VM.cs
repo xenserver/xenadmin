@@ -518,7 +518,7 @@ namespace XenAPI
                     if (xn == null || xn.Attributes == null)
                         return result;
 
-                    bool.TryParse(xn.Attributes["value"].Value, out result);
+                    result = bool.Parse(xn.Attributes["value"].Value);
                 }
                 catch (Exception ex)
                 {
