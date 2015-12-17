@@ -169,7 +169,10 @@ namespace XenAdmin.XenSearch
         has_custom_fields,
 
         [HelpString("Whether the VM is in any vApp")]
-		in_any_appliance
+		in_any_appliance,
+
+        [HelpString("Windows Update capability")]
+        vendor_device_state,
     }
 
     public enum ColumnNames
@@ -268,6 +271,8 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.folders] = Messages.ANCESTOR_FOLDERS;
             PropertyNames_i18n[PropertyNames.has_custom_fields] = Messages.HAS_CUSTOM_FIELDS;
 			PropertyNames_i18n[PropertyNames.in_any_appliance] = Messages.IN_ANY_APPLIANCE;
+            PropertyNames_i18n[PropertyNames.vendor_device_state] = Messages.WINDOWS_UPDATE_CAPABLE;
+            PropertyNames_i18n_false[PropertyNames.vendor_device_state] = Messages.WINDOWS_UPDATE_CAPABLE_NOT;
 
             VM_power_state_images[vm_power_state.Halted] = Icons.PowerStateHalted;
             VM_power_state_images[vm_power_state.Paused] = Icons.PowerStateSuspended;
@@ -325,6 +330,15 @@ namespace XenAdmin.XenSearch
                                             return vm.power_state;
                                         });
                 };
+            
+            properties[PropertyNames.vendor_device_state] = delegate(IXenObject o)
+            {
+                return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
+                {
+                    return (bool?)vm.WindowsUpdateCapable;
+                });
+            };
+
             properties[PropertyNames.virtualisation_status] = delegate(IXenObject o)
                 {
                     return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
