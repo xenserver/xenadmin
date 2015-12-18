@@ -491,6 +491,11 @@ namespace XenAdmin.Core
             return (p != null && !String.IsNullOrEmpty(p.wlb_url));
         }
 
+        public static bool CrossPoolMigrationRestrictedWithWlb(IXenConnection conn)
+        {
+            return WlbEnabledAndConfigured(conn) && !DundeeOrGreater(conn);
+        }
+
         #region AllocationBoundsStructAndMethods
         public struct AllocationBounds
         {
