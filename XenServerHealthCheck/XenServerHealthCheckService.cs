@@ -48,6 +48,9 @@ namespace XenServerHealthCheck
         {
             InitializeComponent();
             AutoLog = false;
+
+            XenAPI.Session.UserAgent = string.Format("XenServerHealthCheck/API-{0}", API_Version.LATEST);
+
             if (!System.Diagnostics.EventLog.SourceExists("XenServerHealthCheck"))
             {
                 System.Diagnostics.EventLog.CreateEventSource(
@@ -131,7 +134,7 @@ namespace XenServerHealthCheck
                 session.APIVersion = API_Version.LATEST;
                 try
                 {
-                    session.login_with_password(server.UserName, server.Password);
+                    session.login_with_password(server.UserName, server.Password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
                 }
                 catch (Exception exn)
                 {
@@ -171,7 +174,7 @@ namespace XenServerHealthCheck
                         log.InfoFormat("Reconnect to master {0}", server.HostName);
                         session = new Session(server.HostName, 80);
                         session.APIVersion = API_Version.LATEST;
-                        session.login_with_password(server.UserName, server.Password);
+                        session.login_with_password(server.UserName, server.Password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
                     }
                     XenConnection connectionInfo = new XenConnection();
                     connectionInfo.Hostname = server.HostName;
