@@ -33689,7 +33689,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not able to receive Updates via Windows Update.
+        ///   Looks up a localized string similar to Not able to receive updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES {
             get {
@@ -33707,7 +33707,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Able to receive Updates via Windows Update.
+        ///   Looks up a localized string similar to Able to receive updates via Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES {
             get {
@@ -34324,15 +34324,6 @@ namespace XenAdmin {
         public static string VMS {
             get {
                 return ResourceManager.GetString("VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMs by Windows Update Capability.
-        /// </summary>
-        public static string VMS_BY_WINDOWS_UPDATE_CAPABILITY {
-            get {
-                return ResourceManager.GetString("VMS_BY_WINDOWS_UPDATE_CAPABILITY", resourceCulture);
             }
         }
         
