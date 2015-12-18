@@ -198,6 +198,7 @@ namespace XenAdmin.Actions.VMActions
 
             VM = Connection.WaitForCache(new XenRef<VM>(Result));
 
+            ApplyRecommendationsForVendorDevice();
             CopyBiosStrings();
             SetXenCenterProperties();
             ProvisionVM();
@@ -221,6 +222,25 @@ namespace XenAdmin.Actions.VMActions
             }
 
             Description = Messages.VM_SUCCESSFULLY_CREATED;
+        }
+
+        private void ApplyRecommendationsForVendorDevice()
+        {
+            if (Template.HasVendorDeviceRecommendation && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
+            {
+                log.DebugFormat("Recommendation (has-vendor-device = true) has been found on the template ({0}) and the host is licensed, so applying it on VM ({1}) being created.", Template.opaque_ref, VM.opaque_ref);
+                VM.set_has_vendor_device(Connection.Session, VM.opaque_ref, true);
+            }
+            else
+            {
+                log.DebugFormat("Recommendation (has-vendor-device = true) has not been applied on the VM ({0}) being created.", VM.opaque_ref);
+
+                if (!Template.HasVendorDeviceRecommendation)
+                    log.InfoFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
+
+                if (Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
+                    log.InfoFormat("Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice) returned {0}", Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice));
+            }
         }
 
         private void CloudCreateConfigDrive()

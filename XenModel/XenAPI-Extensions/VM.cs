@@ -501,6 +501,35 @@ namespace XenAPI
             }
         }
 
+        public bool HasVendorDeviceRecommendation
+        {
+            get
+            {
+                bool result = false;
+
+                XmlDocument xd = GetRecommendations();
+
+                if (xd == null)
+                    return result;
+
+                try
+                {
+                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
+                    if (xn == null || xn.Attributes == null)
+                        return result;
+
+                    result = bool.Parse(xn.Attributes["value"].Value);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Error parsing has-vendor-device on the template.", ex);
+                }
+
+                return result;
+            }
+        }
+
+
         /// <summary>Returns true if
         /// 1) the guest is HVM and
         ///   2a) the allow-vgpu restriction is absent or
