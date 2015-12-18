@@ -358,7 +358,7 @@ namespace XenAdmin.Controls
 
         private void SetDefaultBoundariesOfMtuDropDown()
         {
-            numericUpDownMTU.Maximum = Math.Min(AllPIFs.Select(p => p.MTU).DefaultIfEmpty(XenAPI.Network.MTU_MAX).Max(), XenAPI.Network.MTU_MAX);
+            numericUpDownMTU.Maximum = XenAPI.Network.MTU_MAX;// Math.Min(AllPIFs.Select(p => p.MTU).DefaultIfEmpty(XenAPI.Network.MTU_MAX).Max(), XenAPI.Network.MTU_MAX);
             numericUpDownMTU.Minimum = XenAPI.Network.MTU_MIN;
 
             numericUpDownMTU.Value = XenAPI.Network.MTU_DEFAULT;
@@ -368,7 +368,11 @@ namespace XenAdmin.Controls
 
         private void ShowOrHideMtuInfo()
         {
-            numericUpDownMTU.Enabled = !(infoMtuPanel.Visible = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum);
+            numericUpDownMTU.Enabled = numericUpDownMTU.Minimum != numericUpDownMTU.Maximum;
+
+            infoMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum 
+                ? "Allowed MTU value: " + numericUpDownMTU.Minimum 
+                : "Allowed MTU range: " + numericUpDownMTU.Minimum + " to " + numericUpDownMTU.Maximum;
         }
 
         private void BondMode_CheckedChanged(object sender, EventArgs e)

@@ -32,6 +32,14 @@ namespace XenAdmin.Controls
             this.cbxAutomatic = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ColumnCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLinkStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDuplex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDevice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPci = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numericUpDownMTU = new System.Windows.Forms.NumericUpDown();
             this.labelMTU = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,14 +63,6 @@ namespace XenAdmin.Controls
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnMac = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLinkStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDuplex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDevice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPci = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -113,6 +113,55 @@ namespace XenAdmin.Controls
             this.ColumnCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnCheckBox, "ColumnCheckBox");
             this.ColumnCheckBox.Name = "ColumnCheckBox";
+            // 
+            // ColumnNic
+            // 
+            resources.ApplyResources(this.ColumnNic, "ColumnNic");
+            this.ColumnNic.Name = "ColumnNic";
+            this.ColumnNic.ReadOnly = true;
+            // 
+            // ColumnMac
+            // 
+            resources.ApplyResources(this.ColumnMac, "ColumnMac");
+            this.ColumnMac.Name = "ColumnMac";
+            this.ColumnMac.ReadOnly = true;
+            // 
+            // ColumnLinkStatus
+            // 
+            resources.ApplyResources(this.ColumnLinkStatus, "ColumnLinkStatus");
+            this.ColumnLinkStatus.Name = "ColumnLinkStatus";
+            this.ColumnLinkStatus.ReadOnly = true;
+            // 
+            // ColumnSpeed
+            // 
+            resources.ApplyResources(this.ColumnSpeed, "ColumnSpeed");
+            this.ColumnSpeed.Name = "ColumnSpeed";
+            this.ColumnSpeed.ReadOnly = true;
+            // 
+            // ColumnDuplex
+            // 
+            resources.ApplyResources(this.ColumnDuplex, "ColumnDuplex");
+            this.ColumnDuplex.Name = "ColumnDuplex";
+            this.ColumnDuplex.ReadOnly = true;
+            // 
+            // ColumnVendor
+            // 
+            resources.ApplyResources(this.ColumnVendor, "ColumnVendor");
+            this.ColumnVendor.Name = "ColumnVendor";
+            this.ColumnVendor.ReadOnly = true;
+            // 
+            // ColumnDevice
+            // 
+            resources.ApplyResources(this.ColumnDevice, "ColumnDevice");
+            this.ColumnDevice.Name = "ColumnDevice";
+            this.ColumnDevice.ReadOnly = true;
+            // 
+            // ColumnPci
+            // 
+            this.ColumnPci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnPci, "ColumnPci");
+            this.ColumnPci.Name = "ColumnPci";
+            this.ColumnPci.ReadOnly = true;
             // 
             // numericUpDownMTU
             // 
@@ -270,55 +319,6 @@ namespace XenAdmin.Controls
             resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // ColumnNic
-            // 
-            resources.ApplyResources(this.ColumnNic, "ColumnNic");
-            this.ColumnNic.Name = "ColumnNic";
-            this.ColumnNic.ReadOnly = true;
-            // 
-            // ColumnMac
-            // 
-            resources.ApplyResources(this.ColumnMac, "ColumnMac");
-            this.ColumnMac.Name = "ColumnMac";
-            this.ColumnMac.ReadOnly = true;
-            // 
-            // ColumnLinkStatus
-            // 
-            resources.ApplyResources(this.ColumnLinkStatus, "ColumnLinkStatus");
-            this.ColumnLinkStatus.Name = "ColumnLinkStatus";
-            this.ColumnLinkStatus.ReadOnly = true;
-            // 
-            // ColumnSpeed
-            // 
-            resources.ApplyResources(this.ColumnSpeed, "ColumnSpeed");
-            this.ColumnSpeed.Name = "ColumnSpeed";
-            this.ColumnSpeed.ReadOnly = true;
-            // 
-            // ColumnDuplex
-            // 
-            resources.ApplyResources(this.ColumnDuplex, "ColumnDuplex");
-            this.ColumnDuplex.Name = "ColumnDuplex";
-            this.ColumnDuplex.ReadOnly = true;
-            // 
-            // ColumnVendor
-            // 
-            resources.ApplyResources(this.ColumnVendor, "ColumnVendor");
-            this.ColumnVendor.Name = "ColumnVendor";
-            this.ColumnVendor.ReadOnly = true;
-            // 
-            // ColumnDevice
-            // 
-            resources.ApplyResources(this.ColumnDevice, "ColumnDevice");
-            this.ColumnDevice.Name = "ColumnDevice";
-            this.ColumnDevice.ReadOnly = true;
-            // 
-            // ColumnPci
-            // 
-            this.ColumnPci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.ColumnPci, "ColumnPci");
-            this.ColumnPci.Name = "ColumnPci";
-            this.ColumnPci.ReadOnly = true;
             // 
             // BondDetails
             // 
