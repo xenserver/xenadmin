@@ -4733,6 +4733,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowed MTU range: {0} to {1}.
+        /// </summary>
+        public static string ALLOWED_MTU_RANGE {
+            get {
+                return ResourceManager.GetString("ALLOWED_MTU_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allowed MTU value: {0}.
+        /// </summary>
+        public static string ALLOWED_MTU_VALUE {
+            get {
+                return ResourceManager.GetString("ALLOWED_MTU_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SR &apos;{0}&apos; is currently attached elsewhere. Do you want to attach it to &apos;{1}&apos;? 
         ///
         ///Warning: you must ensure that the SR is not in use by any server not connected to XenCenter. Failure to do so may result in data loss..

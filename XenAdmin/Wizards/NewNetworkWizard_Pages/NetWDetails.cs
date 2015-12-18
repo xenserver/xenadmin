@@ -200,8 +200,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             numericUpDownMTU.Enabled = numericUpDownMTU.Minimum != numericUpDownMTU.Maximum;
             
             infoMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum
-                                    ? "Allowed MTU value: " + numericUpDownMTU.Minimum
-                                    : "Allowed MTU range: " + numericUpDownMTU.Minimum + " to " + numericUpDownMTU.Maximum;
+                                    ? string.Format(Messages.ALLOWED_MTU_VALUE, numericUpDownMTU.Minimum)
+                                    : string.Format(Messages.ALLOWED_MTU_RANGE, numericUpDownMTU.Minimum, numericUpDownMTU.Maximum);
 
             vlans = GetVLANList(SelectedHostNic);
 

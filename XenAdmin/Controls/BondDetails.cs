@@ -370,9 +370,9 @@ namespace XenAdmin.Controls
         {
             numericUpDownMTU.Enabled = numericUpDownMTU.Minimum != numericUpDownMTU.Maximum;
 
-            infoMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum 
-                ? "Allowed MTU value: " + numericUpDownMTU.Minimum 
-                : "Allowed MTU range: " + numericUpDownMTU.Minimum + " to " + numericUpDownMTU.Maximum;
+            infoMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum
+                                    ? string.Format(Messages.ALLOWED_MTU_VALUE, numericUpDownMTU.Minimum)
+                                    : string.Format(Messages.ALLOWED_MTU_RANGE, numericUpDownMTU.Minimum, numericUpDownMTU.Maximum);
         }
 
         private void BondMode_CheckedChanged(object sender, EventArgs e)

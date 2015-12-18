@@ -1720,6 +1720,12 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>When storage throughput exceeds {0} for {1} min(s)</value>
   </data>
+  <data name="ALLOWED_MTU_RANGE" xml:space="preserve">
+    <value>Allowed MTU range: {0} to {1}</value>
+  </data>
+  <data name="ALLOWED_MTU_VALUE" xml:space="preserve">
+    <value>Allowed MTU value: {0}</value>
+  </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>&amp;Allow to continue</value>
   </data>
