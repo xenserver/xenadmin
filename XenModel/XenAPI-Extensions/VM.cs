@@ -1920,6 +1920,15 @@ namespace XenAPI
                     this.IsHVM && BoolKey(this.platform, "viridian");
             }
         }
+
+        public bool WindowsUpdateCapable
+        {
+            get
+            {
+                return 
+                    this.has_vendor_device && this.IsWindows;
+            }
+        }
     }
 
     public struct VMStartupOptions

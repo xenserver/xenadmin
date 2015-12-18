@@ -34328,6 +34328,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VMs by Windows Update Capability.
+        /// </summary>
+        public static string VMS_BY_WINDOWS_UPDATE_CAPABILITY {
+            get {
+                return ResourceManager.GetString("VMS_BY_WINDOWS_UPDATE_CAPABILITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VMs in pool &apos;{0}&apos;:.
         /// </summary>
         public static string VMS_IN_POOL {
@@ -34684,6 +34693,24 @@ namespace XenAdmin {
         public static string WEEKLY_SCHEDULE_FORMAT {
             get {
                 return ResourceManager.GetString("WEEKLY_SCHEDULE_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Update capable.
+        /// </summary>
+        public static string WINDOWS_UPDATE_CAPABLE {
+            get {
+                return ResourceManager.GetString("WINDOWS_UPDATE_CAPABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Windows Update capable.
+        /// </summary>
+        public static string WINDOWS_UPDATE_CAPABLE_NOT {
+            get {
+                return ResourceManager.GetString("WINDOWS_UPDATE_CAPABLE_NOT", resourceCulture);
             }
         }
         

@@ -12017,6 +12017,15 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="WEEKLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>Weekly; at {0} every {1}</value>
   </data>
+  <data name="VMS_BY_WINDOWS_UPDATE_CAPABILITY" xml:space="preserve">
+    <value>VMs by Windows Update Capability</value>
+  </data>
+  <data name="WINDOWS_UPDATE_CAPABLE" xml:space="preserve">
+    <value>Windows Update capable</value>
+  </data>
+  <data name="WINDOWS_UPDATE_CAPABLE_NOT" xml:space="preserve">
+    <value>Not Windows Update capable</value>
+  </data>
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>&amp;Next &gt;</value>
   </data>
