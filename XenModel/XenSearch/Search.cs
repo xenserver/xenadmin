@@ -868,18 +868,6 @@ namespace XenAdmin.XenSearch
 
             searches["dead-beef-1234-snapshotsbyvm"] = SnapshotsByVM;
 
-            // VMs by Windows Update capability
-
-            Search VMsByWindowsUpdateCapability = new Search(
-                new Query(
-                    new QueryScope(ObjectTypes.VM),
-                    null),
-                new PropertyGrouping<bool>(PropertyNames.vendor_device_state, null),
-                false, Messages.VMS_BY_WINDOWS_UPDATE_CAPABILITY, "dead-beef-1234-vmsbywinupdate", true
-            );
-
-            searches["dead-beef-1234-vmsbywinupdate"] = VMsByWindowsUpdateCapability;
-
             /*
             //Docker containers by VM
             Search dockerContainersByVM = new Search(

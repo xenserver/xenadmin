@@ -11673,13 +11673,13 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Not optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Not able to receive Updates via Windows Update</value>
+    <value>Not able to receive updates via Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_OPTIMIZED" xml:space="preserve">
     <value>Fully optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Able to receive Updates via Windows Update</value>
+    <value>Able to receive updates via Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
     <value>Unknown (please wait)</value>
@@ -12016,9 +12016,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="WEEKLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>Weekly; at {0} every {1}</value>
-  </data>
-  <data name="VMS_BY_WINDOWS_UPDATE_CAPABILITY" xml:space="preserve">
-    <value>VMs by Windows Update Capability</value>
   </data>
   <data name="WINDOWS_UPDATE_CAPABLE" xml:space="preserve">
     <value>Windows Update capable</value>
