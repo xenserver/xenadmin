@@ -151,11 +151,11 @@ namespace XenAPI
                 if (IsGuestInstallerNetwork)
                     return false;
 
-                if (showHiddenVMs)
-                    return true;
-
                 if (!ShowAllPifs(showHiddenVMs))
                     return false;
+
+                if (showHiddenVMs)
+                    return true;
 
                 if (IsSlave)
                     return false;
