@@ -136,7 +136,7 @@
     <value>3</value>
   </data>
   <data name="infoMtuPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Left</value>
   </data>
   <data name="infoMtuPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -211,7 +211,7 @@
     <value>1</value>
   </data>
   <data name="infoMtuPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 248</value>
+    <value>169, 243</value>
   </data>
   <data name="infoMtuPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 0, 0, 2</value>
@@ -335,6 +335,9 @@
   </data>
   <data name="&gt;&gt;panelLACPWarning.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="numericUpDownMTU.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="numericUpDownMTU.Location" type="System.Drawing.Point, System.Drawing">
     <value>40, 242</value>
@@ -465,9 +468,6 @@
   <data name="labelMTU.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelMTU.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelMTU.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -478,7 +478,7 @@
     <value>0, 6, 3, 0</value>
   </data>
   <data name="labelMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+    <value>34, 13</value>
   </data>
   <data name="labelMTU.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
