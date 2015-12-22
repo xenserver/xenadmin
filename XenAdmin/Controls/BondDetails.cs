@@ -38,7 +38,7 @@ using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Dialogs;
 using XenAdmin.Core;
-
+using System.Linq;
 
 namespace XenAdmin.Controls
 {
@@ -103,6 +103,14 @@ namespace XenAdmin.Controls
             }
         }
 
+        internal List<PIF> AllPIFs
+        {
+            get
+            {
+                return dataGridView1.Rows.OfType<DataGridViewRow>().Select(r => r.Tag as PIF).Where(t => t != null).ToList();
+            }
+        }
+
         internal bond_mode BondMode
         {
             get
@@ -143,10 +151,6 @@ namespace XenAdmin.Controls
             regStyle = dataGridView1.DefaultCellStyle.Clone();
             dimmedStyle = dataGridView1.DefaultCellStyle.Clone();
             dimmedStyle.ForeColor = SystemColors.GrayText;
-
-            numericUpDownMTU.Maximum = XenAPI.Network.MTU_MAX;
-            numericUpDownMTU.Minimum = XenAPI.Network.MTU_MIN;
-            numericUpDownMTU.Value = XenAPI.Network.MTU_DEFAULT;
         }
 
         internal void SetHost(Host host)
@@ -154,6 +158,7 @@ namespace XenAdmin.Controls
             Connection = host.Connection;
             bondSizeLimit = Helpers.BondSizeLimit(Connection);
             PopulateDataGridView(NetworkingHelper.GetAllPhysicalPIFs(host));
+            SetDefaultBoundariesOfMtuDropDown();
             ShowHideControls();
         }
 
@@ -162,6 +167,7 @@ namespace XenAdmin.Controls
             Connection = pool.Connection;
             bondSizeLimit = Helpers.BondSizeLimit(Connection);
             PopulateDataGridView(NetworkingHelper.GetAllPhysicalPIFs(pool));
+            SetDefaultBoundariesOfMtuDropDown();
             ShowHideControls();
         }
 
@@ -335,7 +341,38 @@ namespace XenAdmin.Controls
                 m_numberOfCheckedNics--;
 
             UpdateCellsReadOnlyState();
+            UpdateMtuControls();
+
             SetValid();
+        }
+
+        private void UpdateMtuControls()
+        {
+            if (BondedPIFs.Count > 0)
+                numericUpDownMTU.Maximum = Math.Min(BondedPIFs.Select(p => p.MTU).DefaultIfEmpty(XenAPI.Network.MTU_MAX).Min(), XenAPI.Network.MTU_MAX);
+            else
+                SetDefaultBoundariesOfMtuDropDown();
+
+            ShowOrHideMtuInfo();
+        }
+
+        private void SetDefaultBoundariesOfMtuDropDown()
+        {
+            numericUpDownMTU.Maximum = XenAPI.Network.MTU_MAX;// Math.Min(AllPIFs.Select(p => p.MTU).DefaultIfEmpty(XenAPI.Network.MTU_MAX).Max(), XenAPI.Network.MTU_MAX);
+            numericUpDownMTU.Minimum = XenAPI.Network.MTU_MIN;
+
+            numericUpDownMTU.Value = XenAPI.Network.MTU_DEFAULT;
+
+            ShowOrHideMtuInfo();
+        }
+
+        private void ShowOrHideMtuInfo()
+        {
+            numericUpDownMTU.Enabled = numericUpDownMTU.Minimum != numericUpDownMTU.Maximum;
+
+            infoMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum
+                                    ? string.Format(Messages.ALLOWED_MTU_VALUE, numericUpDownMTU.Minimum)
+                                    : string.Format(Messages.ALLOWED_MTU_RANGE, numericUpDownMTU.Minimum, numericUpDownMTU.Maximum);
         }
 
         private void BondMode_CheckedChanged(object sender, EventArgs e)

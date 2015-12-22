@@ -31,6 +31,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetWDetails));
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.infoMtuPanel = new System.Windows.Forms.Panel();
+            this.infoMtuMessage = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelNIC = new System.Windows.Forms.Label();
             this.labelVLAN = new System.Windows.Forms.Label();
             this.lblNicHelp = new System.Windows.Forms.Label();
@@ -44,6 +47,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.labelVLAN0Info = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.infoMtuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
             this.panelVLANInfo.SuspendLayout();
@@ -59,6 +64,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.infoMtuPanel, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.labelNIC, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelVLAN, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblNicHelp, 0, 0);
@@ -69,6 +75,26 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.panelVLANInfo, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // infoMtuPanel
+            // 
+            resources.ApplyResources(this.infoMtuPanel, "infoMtuPanel");
+            this.tableLayoutPanel1.SetColumnSpan(this.infoMtuPanel, 2);
+            this.infoMtuPanel.Controls.Add(this.infoMtuMessage);
+            this.infoMtuPanel.Controls.Add(this.pictureBox2);
+            this.infoMtuPanel.Name = "infoMtuPanel";
+            // 
+            // infoMtuMessage
+            // 
+            resources.ApplyResources(this.infoMtuMessage, "infoMtuMessage");
+            this.infoMtuMessage.Name = "infoMtuMessage";
+            // 
+            // pictureBox2
+            // 
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
             // 
             // labelNIC
             // 
@@ -165,6 +191,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.infoMtuPanel.ResumeLayout(false);
+            this.infoMtuPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
             this.panelVLANInfo.ResumeLayout(false);
@@ -188,5 +217,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.NumericUpDown numericUpDownMTU;
         private System.Windows.Forms.Panel panelVLANInfo;
         private System.Windows.Forms.Label labelVLAN0Info;
+        private System.Windows.Forms.Panel infoMtuPanel;
+        private System.Windows.Forms.Label infoMtuMessage;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

@@ -43,6 +43,9 @@ namespace XenAdmin.Controls
             this.numericUpDownMTU = new System.Windows.Forms.NumericUpDown();
             this.labelMTU = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.infoMtuPanel = new System.Windows.Forms.Panel();
+            this.infoMtuMessage = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelLACPWarning = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -63,6 +66,8 @@ namespace XenAdmin.Controls
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.infoMtuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelLACPWarning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxBondMode.SuspendLayout();
@@ -171,6 +176,7 @@ namespace XenAdmin.Controls
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.infoMtuPanel, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.panelLACPWarning, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
@@ -178,6 +184,25 @@ namespace XenAdmin.Controls
             this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxBondMode, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // infoMtuPanel
+            // 
+            resources.ApplyResources(this.infoMtuPanel, "infoMtuPanel");
+            this.infoMtuPanel.Controls.Add(this.infoMtuMessage);
+            this.infoMtuPanel.Controls.Add(this.pictureBox2);
+            this.infoMtuPanel.Name = "infoMtuPanel";
+            // 
+            // infoMtuMessage
+            // 
+            resources.ApplyResources(this.infoMtuMessage, "infoMtuMessage");
+            this.infoMtuMessage.Name = "infoMtuMessage";
+            // 
+            // pictureBox2
+            // 
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
             // 
             // panelLACPWarning
             // 
@@ -202,7 +227,7 @@ namespace XenAdmin.Controls
             // groupBoxBondMode
             // 
             resources.ApplyResources(this.groupBoxBondMode, "groupBoxBondMode");
-            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBondMode, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBondMode, 3);
             this.groupBoxBondMode.Controls.Add(this.tableLayoutPanelBondMode);
             this.groupBoxBondMode.Name = "groupBoxBondMode";
             this.groupBoxBondMode.TabStop = false;
@@ -306,6 +331,9 @@ namespace XenAdmin.Controls
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.infoMtuPanel.ResumeLayout(false);
+            this.infoMtuPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelLACPWarning.ResumeLayout(false);
             this.panelLACPWarning.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -351,5 +379,8 @@ namespace XenAdmin.Controls
         private System.Windows.Forms.Panel panelLACPWarning;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel infoMtuPanel;
+        private System.Windows.Forms.Label infoMtuMessage;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
