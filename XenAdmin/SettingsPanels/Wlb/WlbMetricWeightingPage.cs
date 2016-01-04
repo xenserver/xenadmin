@@ -52,6 +52,7 @@ namespace XenAdmin.SettingsPanels
         private WlbPoolConfiguration _poolConfiguration;
         private bool _loading = false;
         private bool _hasChanged = false;
+        private XenAdmin.Network.IXenConnection _connection;
 
         public WlbMetricWeightingPage()
         {
@@ -72,6 +73,17 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public XenAdmin.Network.IXenConnection Connection
+        {
+            set
+            {
+                if (null != value)
+                {
+                    _connection = value;
+                }
+            }
+        }
+
         private void InitializeControls()
         {
             _loading = true;
@@ -81,6 +93,16 @@ namespace XenAdmin.SettingsPanels
             trackbarNetWritePriority.Value = GetSafeTrackbarValue(trackbarNetWritePriority, _poolConfiguration.VmNetworkWriteWeightHigh / TRACKBAR_INTERVAL);
             trackbarDiskReadPriority.Value = GetSafeTrackbarValue(trackbarDiskReadPriority, _poolConfiguration.VmDiskReadWeightHigh / TRACKBAR_INTERVAL);
             trackbarDiskWritePriority.Value = GetSafeTrackbarValue(trackbarDiskWritePriority, _poolConfiguration.VmDiskWriteWeightHigh / TRACKBAR_INTERVAL);
+            // CA-194940:
+            // Host disk read/write threshold and weight settings work since Dundee.
+            // For previous XenServer, hide the host disk read/write settings.
+            if (!Helpers.DundeeOrGreater(_connection))
+            {
+                trackbarDiskReadPriority.Visible = false;
+                trackbarDiskWritePriority.Visible = false;
+                label10.Visible = false;
+                label11.Visible = false;
+            }
             _loading = false; ;
         }
 

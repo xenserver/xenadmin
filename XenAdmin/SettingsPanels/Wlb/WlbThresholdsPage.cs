@@ -50,6 +50,7 @@ namespace XenAdmin.SettingsPanels
         private WlbPoolConfiguration _poolConfiguration;
         private bool _loading = false;
         private bool _hasChanged = false;
+        private XenAdmin.Network.IXenConnection _connection;
 
         public WlbThresholdsPage()
         {
@@ -70,6 +71,18 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+         public XenAdmin.Network.IXenConnection Connection
+         {
+             set
+             {
+                 if (null != value)
+                 {
+                     _connection = value;
+                 }
+             }
+         }
+
+
         private void InitializeControls()
         {
             _loading = true;
@@ -86,7 +99,19 @@ namespace XenAdmin.SettingsPanels
             labelDiskWriteUnits.Text = string.Format(labelDiskWriteUnits.Text, updownDiskWriteCriticalPoint.Minimum, updownDiskWriteCriticalPoint.Maximum);
             labelNetworkReadUnits.Text = string.Format(labelNetworkReadUnits.Text, updownNetworkReadCriticalPoint.Minimum, updownNetworkReadCriticalPoint.Maximum);
             labelNetworkWriteUnits.Text = string.Format(labelNetworkWriteUnits.Text, updownNetworkWriteCriticalPoint.Minimum, updownNetworkWriteCriticalPoint.Maximum);
-            
+
+            // CA-194940:
+            // Host disk read/write threshold and weight settings work since Dundee.
+            // For previous XenServer, hide the host disk read/write settings.
+            if (!Helpers.DundeeOrGreater(_connection))
+            {
+                updownDiskReadCriticalPoint.Visible = false;
+                updownDiskWriteCriticalPoint.Visible = false;
+                labelDiskReadUnits.Visible = false;
+                labelDiskWriteUnits.Visible = false;
+                labelDiskRead.Visible = false;
+                label1DiskWrite.Visible = false;
+            }
             _loading = false; ;
         }
 
