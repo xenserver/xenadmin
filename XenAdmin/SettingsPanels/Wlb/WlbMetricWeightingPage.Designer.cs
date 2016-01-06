@@ -30,6 +30,7 @@ namespace XenAdmin.SettingsPanels
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WlbMetricWeightingPage));
             this.labelBlurb = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.decentGroupBox1 = new XenAdmin.Controls.DecentGroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelMoreImportant = new System.Windows.Forms.Label();
@@ -46,6 +47,7 @@ namespace XenAdmin.SettingsPanels
             this.trackbarNetReadPriority = new System.Windows.Forms.TrackBar();
             this.trackbarMemoryPriority = new System.Windows.Forms.TrackBar();
             this.trackbarCPUPriority = new System.Windows.Forms.TrackBar();
+            this.tableLayoutPanel1.SuspendLayout();
             this.decentGroupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarDiskWritePriority)).BeginInit();
@@ -60,6 +62,13 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
             this.labelBlurb.Name = "labelBlurb";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // decentGroupBox1
             // 
@@ -200,9 +209,10 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.decentGroupBox1);
-            this.Controls.Add(this.labelBlurb);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "WlbMetricWeightingPage";
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.decentGroupBox1.ResumeLayout(false);
             this.decentGroupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -220,6 +230,7 @@ namespace XenAdmin.SettingsPanels
         #endregion
 
         private XenAdmin.Controls.DecentGroupBox decentGroupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelMoreImportant;
         private System.Windows.Forms.Label labelLessImportant;

@@ -80,9 +80,11 @@ namespace XenAdmin.Dialogs.Wlb
                 }
 
                 verticalTabs.Items.Add(wlbThresholdsPage);
+                wlbThresholdsPage.Connection = _pool.Connection;
                 wlbThresholdsPage.PoolConfiguration = _poolConfiguration;
 
                 verticalTabs.Items.Add(wlbMetricWeightingPage);
+                wlbMetricWeightingPage.Connection = _pool.Connection;
                 wlbMetricWeightingPage.PoolConfiguration = _poolConfiguration;
 
                 if (_poolConfiguration.IsMROrLater)
