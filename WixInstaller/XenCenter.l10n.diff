@@ -40,9 +40,9 @@
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
 @@ -93,64 +93,64 @@
-                             <File Id="XslicIcon" Source="..\XenAdmin-Branding\Images\file_license.ico" />
-                             <File Id="XkbIcon" Source="..\XenAdmin-Branding\Images\file_backup.ico" />
-                             <File Id="XsupdateIcon" Source="..\XenAdmin-Branding\Images\file_updates.ico" />
+                             <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
+                             <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
+                             <File Id="XsupdateIcon" Source="..\Branding\Images\file_updates.ico" />
 -							<!-- Define XVA extension -->
 -							<ProgId Id="XenCenter.xva" Description="XVA File" Icon="XvaIcon">
 +                            <!-- Define XVA extension -->

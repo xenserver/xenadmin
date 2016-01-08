@@ -82,17 +82,17 @@ then
 	fi
 fi
 
-git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/XenAdmin-Branding.git &>-
+git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git &>-
 if [ "$?" -eq 0 ]; then
-  if [ -d "XenAdmin-Branding" ]
+  if [ -d "xenadmin-branding" ]
     then
-      (cd XenAdmin-Branding; git pull)
+      (cd xenadmin-branding; git pull)
     else
-      git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/XenAdmin-Branding.git
+      git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git
   fi
 
   if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-  cp -rf ${BRAND_REPO}/${XC_BRANDING} ${REPO}/XenAdmin-Branding/
+  cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
 fi
 
 production_jenkins_build()

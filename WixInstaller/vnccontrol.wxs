@@ -124,6 +124,6 @@
             <FindRelatedProducts Before="LaunchConditions" />
             <ExecuteAction Sequence="1102" />
         </InstallUISequence>
-        <Icon Id="XenCenterICO" SourceFile="..\XenAdmin-Branding\Images\AppIcon.ico" />
+        <Icon Id="XenCenterICO" SourceFile="..\Branding\Images\AppIcon.ico" />
     </Product>
 </Wix>

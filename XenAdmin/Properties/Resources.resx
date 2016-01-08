@@ -293,7 +293,7 @@
     <value>..\Images\usagebar_2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_ServerMaintenance_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ServerMaintenance_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -500,7 +500,7 @@
     <value>..\Images\memory_dynmax_slider_noedit_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="about_box_graphic_423x79" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\about_box_graphic_423x79.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\about_box_graphic_423x79.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_001_ShutDown_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\001_ShutDown_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -569,13 +569,13 @@
     <value>..\Images\suse_16x.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="alerts_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\alerts_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\alerts_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="000_WarningAlert_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_WarningAlert_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="XS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\XS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\XS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="memory_dynmin_slider_noedit_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\memory_dynmin_slider_noedit_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -593,7 +593,7 @@
     <value>..\Images\000_StorageBroken_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="upsell_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\upsell_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\upsell_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_Folder_open_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Folder_open_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -776,7 +776,7 @@
     <value>..\Images\SpinningFrame5.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_XenCenterAlerts_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\000_XenCenterAlerts_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\000_XenCenterAlerts_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="usagebar_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\usagebar_1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -809,7 +809,7 @@
     <value>..\Images\000_DeleteAllMessages_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AppIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\AppIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\AppIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="log_destination_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\log_destination_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -875,7 +875,7 @@
     <value>..\Images\000_ToolBar_USB_Icon_dis.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wizard_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\wizard_background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\wizard_background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="help_16_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\help_16_hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -983,7 +983,7 @@
     <value>..\Images\000_ConfigureIPAddresses_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_ManagementInterface_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\XenAdmin-Branding\Images\000_ManagementInterface_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\Branding\Images\000_ManagementInterface_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_RemoveIPAddress_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_RemoveIPAddress_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

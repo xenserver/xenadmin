@@ -136,7 +136,7 @@ fi
 echo "INFO:	Workspace located in: $ROOT"
 REPO=${XENADMIN_DIR}
 REF_REPO=${ROOT}/xenadmin-ref.hg
-BRAND_REPO=${ROOT}/XenAdmin-Branding
+BRAND_REPO=${ROOT}/xenadmin-branding
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 TEST_DIR=${ROOT}/tmp
