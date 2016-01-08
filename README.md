@@ -30,7 +30,7 @@ How to build XenCenter
 
 To build XenCenter, you need 
  *  the source from xenadmin repository
- *  Visual Studio 2010
+ *  Visual Studio 2013
  
 and also some libraries which we do not store in the source tree:
  *  CookComputing.XmlRpcV2.dll
