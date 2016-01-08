@@ -164,7 +164,7 @@
     <value>..\Images\usagebar_2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="usagebar_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\usagebar_5.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -215,7 +215,7 @@
     <value>..\Images\memory_dynmax_slider.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="about_box_graphic_423x79" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\about_box_graphic_423x79.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\about_box_graphic_423x79.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tree_minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\tree_minus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -233,7 +233,7 @@
     <value>..\Images\lifecycle_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="upsell_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\upsell_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\upsell_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_separator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\folder_separator.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -281,7 +281,7 @@
     <value>..\Images\log_destination_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AppIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\AppIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\AppIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="usagebar_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\usagebar_6.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -296,13 +296,13 @@
     <value>..\Images\tools_notinstalled_16x.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wizard_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\wizard_background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\wizard_background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="descending_triangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\descending_triangle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="alerts_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\alerts_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\alerts_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tshadowtopright" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\tshadowtopright.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -914,7 +914,7 @@
     <value>..\Images\000_Tick_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_XenCenterAlerts_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_XenCenterAlerts_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\..\XenAdmin-Branding\Images\000_XenCenterAlerts_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="000_DeleteVirtualAppliance_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_DeleteVirtualAppliance_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

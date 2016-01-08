@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xva_verify</RootNamespace>
     <AssemblyName>xva_verify</AssemblyName>
-    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <ApplicationIcon>..\XenAdmin-Branding\Images\AppIcon.ico</ApplicationIcon>
     <StartupObject>MainClass</StartupObject>
     <SignManifests>false</SignManifests>
     <ManifestCertificateThumbprint>4C1DD393E361B8BBCFA1E1D09539C446F88C0A11</ManifestCertificateThumbprint>
@@ -54,7 +54,7 @@
     <Compile Include="verify_main.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppIcon.ico" />
+    <Content Include="..\XenAdmin-Branding\Images\AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommandLib\CommandLib.csproj">

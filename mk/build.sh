@@ -82,6 +82,19 @@ then
 	fi
 fi
 
+git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/XenAdmin-Branding.git &>-
+if [ "$?" -eq 0 ]; then
+  if [ -d "XenAdmin-Branding" ]
+    then
+      (cd XenAdmin-Branding; git pull)
+    else
+      git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/XenAdmin-Branding.git
+  fi
+
+  if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
+  cp -rf ${BRAND_REPO}/${XC_BRANDING} ${REPO}/XenAdmin-Branding/
+fi
+
 production_jenkins_build()
 {
     source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
