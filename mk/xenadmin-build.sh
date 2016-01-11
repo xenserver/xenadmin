@@ -365,7 +365,7 @@ cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
 mkdir_clean ${EN_CD_DIR}
 cp ${DOTNETINST}/XenCenterSetup.exe ${EN_CD_DIR}
-cp ${REPO}/XenAdmin/AppIcon.ico ${EN_CD_DIR}/XenCenter.ico
+cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/XenCenter.ico
 L10N_CD_DIR=${OUTPUT_DIR}/client_install
 mkdir_clean ${L10N_CD_DIR}
 cp ${DOTNETINST}/XenCenterSetup.l10n.exe ${L10N_CD_DIR}

@@ -81,7 +81,7 @@
                             <File Id="XenOvf" Source="..\XenAdmin\bin\Release\XenOvf.dll" />
                             <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
                             <!-- Icons -->
-                            <File Id="XenCenterIcon" Source="..\XenAdmin\AppIcon.ico" />
+                            <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
                             <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
                             <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
                             <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
@@ -89,10 +89,10 @@
 							<File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
 							<File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
 							<File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
-							<File Id="XvaIcon" Source="..\XenAdmin\Images\file_vm.ico" />
-                            <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
-                            <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
-                            <File Id="XsupdateIcon" Source="..\XenAdmin\Images\file_updates.ico" />
+							<File Id="XvaIcon" Source="..\Branding\Images\file_vm.ico" />
+                            <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
+                            <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
+                            <File Id="XsupdateIcon" Source="..\Branding\Images\file_updates.ico" />
 							<!-- Define XVA extension -->
 							<ProgId Id="XenCenter.xva" Description="XVA File" Icon="XvaIcon">
                                 <Extension Id="xva" ContentType="application/xva">
@@ -300,6 +300,6 @@
             <Custom Action="ClearAllUsers" After="FindRelatedProducts">NOT Installed AND PERMACHINEINSTALL</Custom>
             <ExecuteAction Sequence="1102" />
         </InstallUISequence>
-        <Icon Id="XenCenterICO" SourceFile="..\XenAdmin\AppIcon.ico" />
+        <Icon Id="XenCenterICO" SourceFile="..\Branding\Images\AppIcon.ico" />
     </Product>
 </Wix>
