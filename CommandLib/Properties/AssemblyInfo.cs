@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Citrix")]
 [assembly: AssemblyProduct("CommandLib")]
-[assembly: AssemblyCopyright("Copyright © @COMPANY_NAME_LEGAL@")]
+[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT_YEARS@")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

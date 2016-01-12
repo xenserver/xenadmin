@@ -54,31 +54,6 @@ then
     chmod +x ${BUILD_TOOLS}/scripts/storefiles.py
 fi
 
-#the local revision numbers are the same as the local revision numbers on the remote repository;
-#also we know that xenadmin.git is not a patch queue style repository
-CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
-
-#bring in version and branding info from latest xe-phase-1
-wget ${WGET_OPT} -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/globals"
-BRAND_CONSOLE=$(cat ${SCRATCH_DIR}/globals | grep -w BRAND_CONSOLE | sed -e 's/BRAND_CONSOLE=//g' -e 's/"//g')
-COMPANY_NAME_LEGAL=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_LEGAL | sed -e 's/COMPANY_NAME_LEGAL=//g' -e 's/"//g')
-COMPANY_NAME_SHORT=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_SHORT | sed -e 's/COMPANY_NAME_SHORT=//g' -e 's/"//g')
-COPYRIGHT_YEARS=$(cat ${SCRATCH_DIR}/globals | grep -w COPYRIGHT_YEARS | sed -e 's/COPYRIGHT_YEARS=//g' -e 's/"//g')
-PRODUCT_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_VERSION | sed -e 's/PRODUCT_VERSION=//g' -e 's/"//g')
-PRODUCT_VERSION_TEXT=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_VERSION_TEXT | sed -e 's/PRODUCT_VERSION_TEXT=//g' -e 's/"//g')
-PRODUCT_MAJOR_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MAJOR_VERSION | sed -e 's/PRODUCT_MAJOR_VERSION=//g' -e 's/"//g')
-PRODUCT_MINOR_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MINOR_VERSION | sed -e 's/PRODUCT_MINOR_VERSION=//g' -e 's/"//g')
-
-# Check for the micro version override from declarations.sh and use it if present otherwise use the one from branding
-if [ -n "${PRODUCT_MICRO_VERSION_OVERRIDE+x}" ]; then
-	PRODUCT_MICRO_VERSION=$PRODUCT_MICRO_VERSION_OVERRIDE
-	echo Using override for micro product number of: $PRODUCT_MICRO_VERSION
-else
-	PRODUCT_MICRO_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MICRO_VERSION | sed -e 's/PRODUCT_MICRO_VERSION=//g' -e 's/"//g')
-fi
-
-XC_PRODUCT_VERSION=${PRODUCT_MAJOR_VERSION}.${PRODUCT_MINOR_VERSION}.${PRODUCT_MICRO_VERSION}
-
 WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
 WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL=0CE5C3E7-E786-467a-80CF-F3EC04D414E4
 WIX_INSTALLER_DEFAULT_VERSION=1.0.0
@@ -121,69 +96,10 @@ wget ${WGET_OPT} -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll
 wget ${WGET_OPT} -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
 wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
 
-#set version numbers and brand info
-
-version_cpp()
-{
-  num=$(echo "${XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}" | sed 's/\./, /g')
-  sed -e "s/1,0,0,1/${num}/g" \
-      -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${get_BUILD_NUMBER}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
-}
-
-version_csharp_git()
-{
-  sed -e "s/0\.0\.0\.0/${XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
-}
-
-version_csharp()
-{
-  sed -e "s/0\.0\.0\.0/${XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
-	  -e "s/0000/${CSET_NUMBER}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
-}
-
-subst_globals()
-{
-  sed -e "s/@COMPANY_NAME_LEGAL@/${COMPANY_NAME_LEGAL}/g" \
-      -e "s/@COMPANY_NAME_SHORT@/${COMPANY_NAME_SHORT}/g" \
-      -e "s/@COPYRIGHT_YEARS@/${COPYRIGHT_YEARS}/g" \
-      -e "s/@BRAND_CONSOLE@/${BRAND_CONSOLE}/g" \
-      -e "s/@PRODUCT_VERSION@/${XC_PRODUCT_VERSION}/g" \
-      -e "s/@PRODUCT_VERSION_TEXT@/${PRODUCT_VERSION_TEXT}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
-}
-
-version_brand_cpp()
-{
-  for file in $1
-  do
-    version_cpp ${file} && subst_globals ${file}
-  done
-}
-
-version_brand_csharp()
-{
-  for projectName in $1
-  do
-    assemblyInfo=${REPO}/${projectName}/Properties/AssemblyInfo.cs
-    version_csharp_git ${assemblyInfo} && subst_globals ${assemblyInfo}
-  done
-}
-
-version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp"
-subst_globals ${REPO}/XenAdmin/Branding.cs
-cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify VNCControl XenServerHealthCheck"
+source ${REPO}/Branding/branding.sh
+source ${REPO}/mk/re-branding.sh
 
 #build
-
 MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.5 /p:VisualStudioVersion=13.0"
 
 cd ${REPO}
@@ -283,7 +199,7 @@ sign_msi()
 version_installer()
 {
   sed -e "s/${WIX_INSTALLER_DEFAULT_GUID}/${PRODUCT_GUID}/g" \
-      -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${XC_PRODUCT_VERSION}/g" \
+      -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
       $1 > $1.tmp
   mv -f $1.tmp $1
 }
@@ -341,7 +257,7 @@ sign_files "XenCenterSetup.exe XenCenterSetup.l10n.exe"
 
 #create VNCCntrol installer
 sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
-    -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${XC_PRODUCT_VERSION}/g" \
+    -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
     ${WIX}/vnccontrol.wxs > ${WIX}/vnccontrol.wxs.tmp
 mv -f ${WIX}/vnccontrol.wxs.tmp ${WIX}/vnccontrol.wxs
 compile_installer "VNCControl" "en-us" && sign_msi "VNCControl"
@@ -389,7 +305,7 @@ mkdir_clean ${ISO_DIR}
 install -m 755 ${EN_CD_DIR}/XenCenterSetup.exe ${ISO_DIR}/XenCenterSetup.exe
 cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${ISO_DIR}/XenCenter.ico
-mkisofs -J -r -v -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.iso" "${ISO_DIR}"
+mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.iso" "${ISO_DIR}"
 
 echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
@@ -398,7 +314,7 @@ mkdir_clean ${L10N_ISO_DIR}
 install -m 755 ${L10N_CD_DIR}/XenCenterSetup.l10n.exe ${L10N_ISO_DIR}/XenCenterSetup.exe
 cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${L10N_ISO_DIR}/XenCenter.ico
-mkisofs -J -r -v -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.l10n.iso" "${L10N_ISO_DIR}"
+mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.l10n.iso" "${L10N_ISO_DIR}"
 
 # Create a tarball containing the XenCenter ISO, to be installed by the host installer
 # MAIN_PKG_DIR is our working directory, MAIN_PKG_ISO_SUBDIR is the pathname of the ISO
@@ -429,7 +345,7 @@ else
 fi
 
 # Write out version information
-echo "xc_product_version=${XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
+echo "xc_product_version=${BRANDING_XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
 echo "build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/xcversion
 
 echo "INFO:	Build phase succeeded at "

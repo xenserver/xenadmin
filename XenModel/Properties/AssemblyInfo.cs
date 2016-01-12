@@ -42,7 +42,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Citrix")]
 [assembly: AssemblyProduct("XenCenter")]
-[assembly: AssemblyCopyright("Copyright © @COMPANY_NAME_LEGAL@")]
+[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT_YEARS@")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -67,4 +67,4 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0000")]
-[assembly: XenAdmin.XSVersion("@PRODUCT_VERSION@")]
+[assembly: XenAdmin.XSVersion("@BRANDING_PRODUCT_VERSION@")]
