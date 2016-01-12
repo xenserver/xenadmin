@@ -678,6 +678,12 @@
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE" xml:space="preserve">
     <value>Delete VM</value>
   </data>
+  <data name="ACTION_SHUTTING_DOWN" xml:space="preserve">
+    <value>Shutting down</value>
+  </data>
+  <data name="ACTION_SHUT_DOWN" xml:space="preserve">
+    <value>Shut down</value>
+  </data>
   <data name="ACTION_SRS_DESTROYING" xml:space="preserve">
     <value>Destroying SRs</value>
   </data>
@@ -1063,7 +1069,7 @@
     <value>Rebooted</value>
   </data>
   <data name="ACTION_VM_REBOOTING" xml:space="preserve">
-    <value>Rebooting</value>
+    <value>Rebooting VM</value>
   </data>
   <data name="ACTION_VM_REBOOTING_TITLE" xml:space="preserve">
     <value>Rebooting VM '{0}' on '{1}'</value>
@@ -1072,7 +1078,7 @@
     <value>Resumed</value>
   </data>
   <data name="ACTION_VM_RESUMING" xml:space="preserve">
-    <value>Resuming</value>
+    <value>Resuming VM</value>
   </data>
   <data name="ACTION_VM_RESUMING_ON_TITLE" xml:space="preserve">
     <value>Resuming VM '{0}' on '{1}'</value>
@@ -1090,7 +1096,7 @@
     <value>Revert snapshot '{0}'</value>
   </data>
   <data name="ACTION_VM_SHUTTING_DOWN" xml:space="preserve">
-    <value>Shutting down</value>
+    <value>Shutting down VM</value>
   </data>
   <data name="ACTION_VM_SHUTTING_DOWN_TITLE" xml:space="preserve">
     <value>Shutting down VM '{0}' on '{1}'</value>
@@ -1108,7 +1114,7 @@
     <value>Started paused</value>
   </data>
   <data name="ACTION_VM_STARTING" xml:space="preserve">
-    <value>Starting</value>
+    <value>Starting VM</value>
   </data>
   <data name="ACTION_VM_STARTING_ON_TITLE" xml:space="preserve">
     <value>Starting VM '{0}' on '{1}'</value>
@@ -1129,7 +1135,7 @@
     <value>Suspended</value>
   </data>
   <data name="ACTION_VM_SUSPENDING" xml:space="preserve">
-    <value>Suspending</value>
+    <value>Suspending VM</value>
   </data>
   <data name="ACTION_VM_SUSPENDING_TITLE" xml:space="preserve">
     <value>Suspending VM '{0}'</value>
