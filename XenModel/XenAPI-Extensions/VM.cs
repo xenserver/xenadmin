@@ -40,6 +40,8 @@ using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
+using System.Net;
+using System.Text.RegularExpressions;
 
 
 namespace XenAPI
@@ -1919,11 +1921,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// List of distro values that we treat as Linux/Non-Windows (written by Linux Guest Agent, evaluating xe-linux-distribution)
-        /// </summary>
-        private readonly string[] linuxDistros = { "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles", "lsb", "boot2docker", "freebsd" };
-
-        /// <summary>
         /// Returns true if this VM is Windows.
         /// </summary>
         /// <remarks>
@@ -1933,20 +1930,38 @@ namespace XenAPI
         {
             get
             {
-                //try to detect special cases when the decision is easy - the presence of guest_metrics helps
                 var gm = Connection.Resolve(this.guest_metrics);
-                if (gm != null && gm.os_version != null)
-                { 
-                    if (gm.os_version.ContainsKey("distro") && !string.IsNullOrEmpty(gm.os_version["distro"]) && linuxDistros.Contains(gm.os_version["distro"].ToLowerInvariant()))
-                        return false;
 
-                    if (gm.os_version.ContainsKey("uname") && gm.os_version["uname"].ToLowerInvariant().Contains("netscaler"))
-                        return false;
-                }
+                if (gm != null && gm.IsVmNotWindows)
+                    return false;
+
+                var gmFromLastBootedRecord = GuestMetricsFromLastBootedRecord;
+                if (gmFromLastBootedRecord != null && gmFromLastBootedRecord.IsVmNotWindows)
+                     return false;
 
                 //generic check
                 return 
                     this.IsHVM && BoolKey(this.platform, "viridian");
+            }
+        }
+
+        private VM_guest_metrics GuestMetricsFromLastBootedRecord
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.last_booted_record))
+                {
+                    Regex regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
+
+                    var v = regex.Match(this.last_booted_record);
+                    if (v.Success)
+                    {
+                        string s = v.Groups[1].ToString();
+                        return this.Connection.Resolve<VM_guest_metrics>(new XenRef<VM_guest_metrics>(s));
+                    }
+                }
+
+                return null;
             }
         }
 
