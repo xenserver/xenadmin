@@ -193,7 +193,7 @@ $MSBUILD VNCControl/VNCControl.sln
 SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
 $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
 
-#sign (splash has already been signed through a post-build event)
+#sign
 for file in XenCenter.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
 do
   cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${file}
