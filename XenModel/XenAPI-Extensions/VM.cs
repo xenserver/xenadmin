@@ -458,18 +458,6 @@ namespace XenAPI
             }
         }
 
-        public bool HasUpgradeSupportInManagementAgent
-        {
-            get
-            {
-                var metrics = Connection.Resolve(this.guest_metrics);
-                if (metrics == null)
-                    return false;
-
-                return 0 != IntKey(metrics.other, "feature-supports-driver-update", 0);
-            }
-        }
-
         /// <summary>Returns true if
         /// 1) the guest is HVM and
         ///   2a) the allow-gpu-passthrough restriction is absent or

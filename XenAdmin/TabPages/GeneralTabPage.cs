@@ -1304,11 +1304,7 @@ namespace XenAdmin.TabPages
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
                     bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
-
-                    //vmtype is not yet implemented (will likely have different name) in XAPI, but this is the type that refers to the windows update readyness/capability of the VM and is expected to have the following values: yes, no, dontknow, got_it
-                    bool isManagementAgentInstalled = vm.HasUpgradeSupportInManagementAgent //&& vmtype != no"
-                        || vm.HasRDP; //&& vmtype == no;
-
+                    bool isManagementAgentInstalled = vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED);
                     bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized;
                     bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
                     //canInstallIoDriversOnly is missing - management agent communicates with XS using the I/O drivers
