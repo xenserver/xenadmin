@@ -153,6 +153,9 @@ namespace XenAdmin.Core
             if (action.Pool != null)
                 return action.Pool.Name;
 
+            if (action.Connection != null)
+                return action.Connection.FriendlyName;
+
             return string.Empty;
         }
 

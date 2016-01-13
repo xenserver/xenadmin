@@ -1726,6 +1726,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shut down.
+        /// </summary>
+        public static string ACTION_SHUT_DOWN {
+            get {
+                return ResourceManager.GetString("ACTION_SHUT_DOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete VM.
         /// </summary>
         public static string ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE {
@@ -1740,6 +1749,15 @@ namespace XenAdmin {
         public static string ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutting down.
+        /// </summary>
+        public static string ACTION_SHUTTING_DOWN {
+            get {
+                return ResourceManager.GetString("ACTION_SHUTTING_DOWN", resourceCulture);
             }
         }
         
@@ -2860,7 +2878,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rebooting.
+        ///   Looks up a localized string similar to Rebooting VM.
         /// </summary>
         public static string ACTION_VM_REBOOTING {
             get {
@@ -2887,7 +2905,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resuming.
+        ///   Looks up a localized string similar to Resuming VM.
         /// </summary>
         public static string ACTION_VM_RESUMING {
             get {
@@ -2950,7 +2968,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shutting down.
+        ///   Looks up a localized string similar to Shutting down VM.
         /// </summary>
         public static string ACTION_VM_SHUTTING_DOWN {
             get {
@@ -2995,7 +3013,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting.
+        ///   Looks up a localized string similar to Starting VM.
         /// </summary>
         public static string ACTION_VM_STARTING {
             get {
@@ -3058,7 +3076,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Suspending.
+        ///   Looks up a localized string similar to Suspending VM.
         /// </summary>
         public static string ACTION_VM_SUSPENDING {
             get {

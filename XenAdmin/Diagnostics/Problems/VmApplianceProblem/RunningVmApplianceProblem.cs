@@ -102,8 +102,8 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
                 else
                     actions.Add(new VMHardShutdown(vm));
             }
-            return new MultipleAction(VmAppliance.Connection, Messages.ACTION_VM_SHUTTING_DOWN,
-                                      Messages.ACTION_VM_SHUTTING_DOWN, Messages.ACTION_VM_SHUT_DOWN, actions);
+            return new MultipleAction(VmAppliance.Connection, Messages.ACTION_SHUTTING_DOWN,
+                                      Messages.ACTION_SHUTTING_DOWN, Messages.ACTION_SHUT_DOWN, actions);
         }
     }
 }
