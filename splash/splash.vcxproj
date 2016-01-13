@@ -104,9 +104,6 @@
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)\splash.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
-    <PostBuildEvent>
-      <Command>$(ProjectDir)..\sign.bat $(TargetDir)$(TargetFileName)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

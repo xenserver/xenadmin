@@ -170,7 +170,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="$(ProjectDir)..\sign.bat $(TargetDir)$(TargetFileName)"
 			/>
 		</Configuration>
 	</Configurations>
