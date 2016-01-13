@@ -101,7 +101,7 @@ BEGIN
             VALUE "FileDescription", "@BRANDING_BRAND_CONSOLE@"
             VALUE "FileVersion", "1, 0, 0, 1"
             VALUE "InternalName", "@BRANDING_BRAND_CONSOLE@"
-            VALUE "LegalCopyright", "@BRANDING_COPYRIGHT_YEARS_2@"
+            VALUE "LegalCopyright", "@BRANDING_COPYRIGHT_2@"
             VALUE "OriginalFilename", "XenCenter.exe"
             VALUE "ProductName", "@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@"
             VALUE "ProductVersion", "1, 0, 0, 1"
