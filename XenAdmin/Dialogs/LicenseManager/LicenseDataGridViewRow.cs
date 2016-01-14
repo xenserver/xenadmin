@@ -83,10 +83,10 @@ namespace XenAdmin.Dialogs
             if (RowShouldBeExpanded(XenObject) && DataGridView is LicenseCheckableDataGridView)
             {
                 refreshing = true;
-                TriggerRefreshAllEvent();  
+                Program.Invoke(Program.MainWindow, TriggerRefreshAllEvent);  
             }
             else
-                TriggerCellTextUpdatedEvent();
+                Program.Invoke(Program.MainWindow, TriggerCellTextUpdatedEvent);
         }
 
         public static bool RowShouldBeExpanded(IXenObject xenObject)
