@@ -496,7 +496,7 @@
     <value>7</value>
   </data>
   <data name="heading.Text" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="heading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -1072,7 +1072,7 @@
     <value>17</value>
   </data>
   <data name="labelSupport.Text" xml:space="preserve">
-    <value>Citrix Knowledge Center の参照</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Knowledge Center の参照</value>
   </data>
   <data name="&gt;&gt;labelSupport.Name" xml:space="preserve">
     <value>labelSupport</value>

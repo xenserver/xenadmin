@@ -997,7 +997,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Health Check analysis result from Citrix Insight Services.
+        ///   Looks up a localized string similar to Get Health Check analysis result from @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_GET_HEALTH_CHECK_RESULT {
             get {
@@ -1105,7 +1105,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services.
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_HEALTHCHECK_AUTHENTICATION {
             get {
@@ -1114,7 +1114,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authenticating with Citrix Insight Services.
+        ///   Looks up a localized string similar to Authenticating with @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS {
             get {
@@ -2437,7 +2437,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload server status report to Citrix Insight Services.
+        ///   Looks up a localized string similar to Upload server status report to @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
             get {
@@ -2455,7 +2455,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading report to Citrix Insight Services.
+        ///   Looks up a localized string similar to Uploading report to @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
             get {
@@ -4607,7 +4607,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the new version from the Citrix website..
+        ///   Looks up a localized string similar to {0} is now available. Download the new version from the @BRANDING_COMPANY_NAME_SHORT@ website..
         /// </summary>
         public static string ALERT_NEW_VERSION_DETAILS {
             get {
@@ -7935,9 +7935,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a Citrix @BRANDING_PRODUCT_BRAND@ Express Edition server ({1}) already exists.
+        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition server ({1}) already exists.
         ///
-        ///You can only connect to a single Citrix @BRANDING_PRODUCT_BRAND@ Express Edition server at a time. To find out how to upgrade your license, follow the link below..
+        ///You can only connect to a single @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition server at a time. To find out how to upgrade your license, follow the link below..
         /// </summary>
         public static string CONNECTION_RESTRICTED_MESSAGE_LONG {
             get {
@@ -11287,7 +11287,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the latest at the Citrix website..
+        ///   Looks up a localized string similar to {0} is now available. Download the latest at the @BRANDING_COMPANY_NAME_SHORT@ website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {
@@ -16266,7 +16266,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services failed. See the application log files for more information..
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services failed. See the application log files for more information..
         /// </summary>
         public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
             get {
@@ -16302,7 +16302,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
             get {
@@ -16311,7 +16311,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
@@ -24020,7 +24020,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix.
+        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_CITRIX {
             get {
@@ -25862,7 +25862,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix @BRANDING_PRODUCT_BRAND@ Per-&amp;Socket ({0} required).
+        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-&amp;Socket ({0} required).
         /// </summary>
         public static string PERSOCKET_LICENSES_X_REQUIRED {
             get {

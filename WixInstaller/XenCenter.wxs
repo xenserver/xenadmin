@@ -37,12 +37,12 @@
     <?define ProductVersion="1.0.0" ?>
     <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
-    <Product Id="$(var.ProductCode)" Name="Citrix @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
-        <Package Description="Citrix @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
+    <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
+        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="Citrix" Name="Citrix">
+                <Directory Id="Citrix" Name="@BRANDING_COMPANY_NAME_SHORT@">
                     <Directory Id="INSTALLDIR" ShortName="XenCente" Name="@BRANDING_BRAND_CONSOLE@">
                         <Component Id="ReportViewer" Guid="D01090B9-1988-4ab4-B48A-D0B6161FAA48">
                             <File Id="MicRepVwrCmnDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
@@ -203,8 +203,8 @@
 								  Type="ownProcess"
 								  Vital="no"
 								  Name="XenServerHealthCheck"
-								  DisplayName="Citrix XenServer Health Check Service"
-								  Description="Citrix XenServer Health Check Service"
+								  DisplayName="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service"
+								  Description="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service"
 								  Start="auto"
 								  Account="LocalSystem"
 								  ErrorControl="normal"
@@ -223,7 +223,7 @@
 				</Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationProgramsFolder" Name="Citrix" />
+                <Directory Id="ApplicationProgramsFolder" Name="@BRANDING_COMPANY_NAME_SHORT@" />
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
@@ -235,13 +235,13 @@
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="6B875059-26BC-4fa7-ACB7-0B9A4E4665CA">
-                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="Citrix @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
                 <RegistryValue Root="HKCU" Key="Software\Citrix\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 	
-        <Feature Id="MainProgram" Title="Citrix @BRANDING_BRAND_CONSOLE@" Description="Citrix @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
+        <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="TestResources" />
@@ -251,7 +251,7 @@
             <ComponentRef Id="ApplicationShortcut" />
         </Feature>
 		
-        <Feature Id="HealthCheckService" Title="Citrix XenServer Health Check Service" Description="Citrix XenServer Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
              <ComponentRef Id="XenServerHealthCheck" /> 
         </Feature>
 		
