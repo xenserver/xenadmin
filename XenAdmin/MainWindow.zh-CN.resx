@@ -2103,7 +2103,7 @@
     <value>246, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>安装 XenServer Tools(&amp;X)</value>
+    <value>安装 @BRANDING_PRODUCT_BRAND@ Tools(&amp;X)</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 22</value>
@@ -2415,7 +2415,7 @@
     <value>197, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
-    <value>Web 上的 XenServer(&amp;W)</value>
+    <value>Web 上的 @BRANDING_PRODUCT_BRAND@(&amp;W)</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>

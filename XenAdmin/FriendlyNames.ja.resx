@@ -1536,7 +1536,7 @@
     <value>{0} のローカル ストレージ</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>XenServer Tools ISO</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools ISO</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1563,7 +1563,7 @@
     <value>{0} のローカル ストレージ</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>XenServer Tools</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux VM を作成できます。業務での使用は推奨されません。</value>

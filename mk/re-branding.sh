@@ -151,4 +151,4 @@ rebranding_global ${REPO}/WixInstaller/XenCenter.l10n.diff
 rebranding_global ${REPO}/WixInstaller/XenCenter.wxs
 
 #XenAdminTests
-rebranding_global ${REPO}/XenAdminTests/MainWindowTester.cs
+rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml

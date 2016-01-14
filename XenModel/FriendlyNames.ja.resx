@@ -541,19 +541,19 @@
     <value>エディション</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix XenServer Advanced Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix XenServer Platinum Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>有効</value>
@@ -598,58 +598,58 @@
     <value>プール メンバ</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>Citrix XenServer Dell Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>Citrix XenServer HP Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer Dell Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>Citrix XenServer Dell Express Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>Citrix XenServer Dell Server Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer HP Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>Citrix XenServer HP Select Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>Citrix XenServer HP Server Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>Citrix XenServer Express Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>Citrix XenServer Server Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>XenServer ビルド番号</value>
@@ -1092,7 +1092,7 @@
     <value>プール内でのパフォーマンス統計値の同期に一時的な障害が発生しました。一部のサーバーがオフラインであることが考えられます。</value>
   </data>
   <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
-    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。このため、XenServer Enterprise の機能は使用できなくなりました。</value>
+    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。このため、@BRANDING_PRODUCT_BRAND@ Enterprise の機能は使用できなくなりました。</value>
   </data>
   <data name="Message.body-license_expired" xml:space="preserve">
     <value>{0} のライセンスの有効期限が切れました。</value>
@@ -1191,7 +1191,7 @@
     <value>バックアップ成功</value>
   </data>
   <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>使用している XenServer ライセンスでは、VMPR 機能を使用できません。VMPR 機能は、Citrix XenServer Advanced Edition またはそれ以上のエディションで使用できます。</value>
+    <value>使用している @BRANDING_PRODUCT_BRAND@ ライセンスでは、VMPR 機能を使用できません。VMPR 機能は、Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition またはそれ以上のエディションで使用できます。</value>
   </data>
   <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
     <value>このスナップショットはアーカイブ済みです。</value>
@@ -1536,7 +1536,7 @@
     <value>{0} のローカル ストレージ</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>XenServer Tools ISO</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools ISO</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1563,7 +1563,7 @@
     <value>{0} のローカル ストレージ</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>XenServer Tools</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux VM を作成できます。業務での使用は推奨されません。</value>
@@ -1629,10 +1629,10 @@
     <value>解放されるメモリ (概算値)</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Per-Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>AD のヘルプ</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} メモリ使用率</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>SR が既に使用中であるため空き領域を解放できません</value>
@@ -1707,13 +1707,13 @@
     <value>ライセンス サーバーのバージョンが古すぎます。</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Per Socket Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per User Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Per User Edition</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Standard Per Socket Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Standard Per Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
     <value>Citrix XenDesktop Platinum</value>
@@ -1737,9 +1737,9 @@
     <value>ライセンスのヘルプ</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>Citrix XenServer Desktop Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Desktop Edition</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>Citrix XenServer Desktop+ Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Desktop+ Edition</value>
   </data>
 </root>

@@ -2219,7 +2219,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>You must install I/O drivers on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install XenServer Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
+    <value>You must install @BRANDING_PRODUCT_BRAND@ Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(The network's MTU cannot be changed as it is in use as the management interface '{0}')</value>
@@ -2252,7 +2252,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>You must install I/O drivers on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install XenServer Tools on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
+    <value>You must install @BRANDING_PRODUCT_BRAND@ Tools on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>It is not possible to deactivate this virtual disk on VM '{0}' as the VM is not running.</value>
@@ -2293,7 +2293,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>This snapshot is currently in use and cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_TOOLS_SR" xml:space="preserve">
-    <value>Deleting the XenServer Tools ISO storage is not supported.</value>
+    <value>Deleting the @BRANDING_PRODUCT_BRAND@ Tools ISO storage is not supported.</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
     <value>This virtual disk is active on VM '{0}'. Deactivate the virtual disk before deleting.</value>
@@ -2875,9 +2875,9 @@ Would you like to carry out the operation at this time?</value>
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>Connection to server {0} restricted - a connection to a Citrix XenServer Express Edition server ({1}) already exists.
+    <value>Connection to server {0} restricted - a connection to a Citrix @BRANDING_PRODUCT_BRAND@ Express Edition server ({1}) already exists.
 
-You can only connect to a single Citrix XenServer Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
+You can only connect to a single Citrix @BRANDING_PRODUCT_BRAND@ Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>Cannot connect to {0} because of license restriction</value>
@@ -3506,7 +3506,7 @@ Please reconnect the host and try again.</value>
     <value>VMs by Power State</value>
   </data>
   <data name="DEFAULT_SEARCH_VMS_WO_XS_TOOLS" xml:space="preserve">
-    <value>VMs without XenServer Tools</value>
+    <value>VMs without @BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="DEFAULT_VDI_NAME" xml:space="preserve">
     <value>New virtual disk</value>
@@ -3873,10 +3873,10 @@ This will also delete its subfolders.</value>
     <value>Display options</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools are not installed on this VM.</value>
+    <value>A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are not installed on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools are not installed on these VMs.</value>
+    <value>A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED" xml:space="preserve">
     <value>A memory range cannot be set because the operating system on this VM does not support it.</value>
@@ -3891,10 +3891,10 @@ This will also delete its subfolders.</value>
     <value>A memory range cannot be set because I/O drivers are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools are out of date on this VM.</value>
+    <value>A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are out of date on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because XenServer Tools are out of date on these VMs.</value>
+    <value>A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are out of date on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>A memory range cannot be set for this template.</value>
@@ -4792,7 +4792,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>{0} Install Management Agent</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0} Install XenServer Tools</value>
+    <value>{0} Install @BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>This VM uses a local CD.</value>
@@ -5404,7 +5404,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Loading Data...</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
-    <value>To view memory data for this VM, you need to install XenServer Tools</value>
+    <value>To view memory data for this VM, you need to install @BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="GREATER_THAN" xml:space="preserve">
     <value>&gt; {0}</value>
@@ -6309,7 +6309,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Disk and memory snapshots need I/O drivers to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Disk and memory snapshots need XenServer Tools to be installed</value>
+    <value>Disk and memory snapshots need @BRANDING_PRODUCT_BRAND@ Tools to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_POWER_STATE" xml:space="preserve">
     <value>Disk and memory snapshots need the VM to be running</value>
@@ -6324,7 +6324,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Quiesced snapshots need Management Agent to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Quiesced snapshots need XenServer Tools to be installed</value>
+    <value>Quiesced snapshots need @BRANDING_PRODUCT_BRAND@ Tools to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>Quiesced snapshots need the VM to be running</value>
@@ -6342,19 +6342,19 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>Could not find the XenServer Tools install disc.</value>
+    <value>Could not find the @BRANDING_PRODUCT_BRAND@ Tools install disc.</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
-    <value>XenServer Tools installation launched.</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools installation launched.</value>
   </data>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
-    <value>XenServer Tools are already installed on this VM.</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools are already installed on this VM.</value>
   </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
-    <value>Launching XenServer Tools installation.</value>
+    <value>Launching @BRANDING_PRODUCT_BRAND@ Tools installation.</value>
   </data>
   <data name="INSTALLTOOLS_TITLE" xml:space="preserve">
-    <value>Installing XenServer Tools on VM {0}</value>
+    <value>Installing @BRANDING_PRODUCT_BRAND@ Tools on VM {0}</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
     <value>Install files could not be found at specified network location</value>
@@ -6366,13 +6366,13 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Install pending &amp;updates...</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
-    <value>Install XenServer Tools</value>
+    <value>Install @BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS_DOTS" xml:space="preserve">
-    <value>Install XenServer Tools...</value>
+    <value>Install @BRANDING_PRODUCT_BRAND@ Tools...</value>
   </data>
   <data name="INSTALL_XS_TOOLS" xml:space="preserve">
-    <value>Install XenServer Tools</value>
+    <value>Install @BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
     <value>Creating VM '{0}' from template '{1}'</value>
@@ -6958,7 +6958,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>&amp;High Availability...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>Install &amp;XenServer Tools...</value>
+    <value>Install &amp;@BRANDING_PRODUCT_BRAND@ Tools...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>&amp;Quick Create</value>
@@ -7513,7 +7513,7 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
     <value>Multipath capable</value>
   </data>
   <data name="MULTIPATH_FAILED" xml:space="preserve">
-    <value>One or more paths to at least one of your storages has failed. Refer to the "XenServer Administrator's Guide" for information about configuring storage multipathing.</value>
+    <value>One or more paths to at least one of your storages has failed. Refer to the "@BRANDING_PRODUCT_BRAND@ Administrator's Guide" for information about configuring storage multipathing.</value>
   </data>
   <data name="MULTIPATH_NOT_ACTIVE" xml:space="preserve">
     <value>Not active</value>
@@ -7765,7 +7765,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
   </data>
   <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>You cannot add server with a XenServer Advanced Edition or higher license to a pool of Free Edition XenServers</value>
+    <value>You cannot add server with a me="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="p Advanced Edition or higher license to a pool of Free Edition XenServers</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
@@ -8293,7 +8293,7 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Select a storage repository to create the disk on</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>At least one of the VMs you wish to install XenServer Tools onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
+    <value>At least one of the VMs you wish to install @BRANDING_PRODUCT_BRAND@ Tools onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATED" xml:space="preserve">
     <value>DVD Drive Created</value>
@@ -8312,10 +8312,10 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
     <value>You must shutdown and then restart the VM to finish the installation of the new DVD drive.
-Once the VM has restarted click the Install XenServer Tools menu item once again.</value>
+Once the VM has restarted click the Install @BRANDING_PRODUCT_BRAND@ Tools menu item once again.</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
-    <value>The VM you wish to install XenServer Tools onto has no DVD drive, would you like to create one?</value>
+    <value>The VM you wish to install @BRANDING_PRODUCT_BRAND@ Tools onto has no DVD drive, would you like to create one?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
@@ -9015,7 +9015,7 @@ File not found</value>
     <value>Permission Denied</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>Citrix XenServer Per-&amp;Socket ({0} required)</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>Physical device</value>
@@ -9347,13 +9347,13 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>Proxy servers are not supported.</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
-    <value>XenServer Tools not installed</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools not installed</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>XenServer Tools out of date (version {0} installed)</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools out of date (version {0} installed)</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>XenServer Tools out of date</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools out of date</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS limit must be between 1 and 2147483647 (or left empty).</value>
@@ -9715,7 +9715,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>Resolved as {0}</value>
   </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
-    <value>Backup file loaded to server '{0}'.  Refer to the "XenServer Administrator's Guide" for instructions on how to complete the restore procedure.</value>
+    <value>Backup file loaded to server '{0}'.  Refer to the "@BRANDING_PRODUCT_BRAND@ Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
@@ -10477,7 +10477,7 @@ The upper limit: SR size / {2}</value>
     <value>SR {0} on {1}</value>
   </data>
   <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>XenServer &amp;Standard Per-Socket ({0} required)</value>
+    <value>@BRANDING_PRODUCT_BRAND@ &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>Started</value>
@@ -10656,7 +10656,7 @@ The upper limit: SR size / {2}</value>
   <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
     <value>{0}
 
-Refer to the "XenServer Administrator's Guide" for instructions on how to manually install a supplemental pack on a XenServer host.</value>
+Refer to the "@BRANDING_PRODUCT_BRAND@ Administrator's Guide" for instructions on how to manually install a supplemental pack on a XenServer host.</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
@@ -10746,13 +10746,13 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>OS: {0}</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSNOTPRESENT" xml:space="preserve">
-    <value>XenServer Tools: Not present</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools: Not present</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>XenServer Tools: Out of date (version {0}.{1} installed)</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools: Out of date (version {0}.{1} installed)</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>XenServer Tools: Up to date</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools: Up to date</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPUs: {0}</value>
@@ -10851,7 +10851,7 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>System disks cannot be activated or deactivated while the VM is running</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be activated or deactivated from running VMs without XenServer Tools installed</value>
+    <value>Disks cannot be activated or deactivated from running VMs without @BRANDING_PRODUCT_BRAND@ Tools installed</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>Networks cannot be deactivated while the VM is suspended</value>
@@ -10866,7 +10866,7 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>System disks cannot be deleted while the VM is running</value>
   </data>
   <data name="TOOLTIP_DELETE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be deleted from running VMs without XenServer Tools installed</value>
+    <value>Disks cannot be deleted from running VMs without @BRANDING_PRODUCT_BRAND@ Tools installed</value>
   </data>
   <data name="TOOLTIP_DETACH_SUSPENDED" xml:space="preserve">
     <value>Disks cannot be removed while the VM is suspended</value>
@@ -10878,13 +10878,13 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>Disks must be deactivated before detaching.</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be removed from running VMs without XenServer Tools installed</value>
+    <value>Disks cannot be removed from running VMs without @BRANDING_PRODUCT_BRAND@ Tools installed</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>I/O drivers must be installed to edit a network on a running VM</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>XenServer Tools must be installed to edit a network on a running VM</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools must be installed to edit a network on a running VM</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>Default templates support a maximum of {0} networks at VM creation</value>
@@ -10902,7 +10902,7 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>Networks cannot be removed from suspended VMs</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>XenServer Tools must be installed to remove a network on a running VM</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools must be installed to remove a network on a running VM</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>This network cannot be removed because it is a physical device</value>
@@ -11197,10 +11197,10 @@ Check your settings and try again.</value>
     <value>{0}: There is not enough memory available on other servers to migrate all the VMs off this server.</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>The VM {0} does not have XenServer Tools installed.</value>
+    <value>The VM {0} does not have @BRANDING_PRODUCT_BRAND@ Tools installed.</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>The VM {0} cannot be suspended until it has up to date XenServer Tools.</value>
+    <value>The VM {0} cannot be suspended until it has up to date @BRANDING_PRODUCT_BRAND@ Tools.</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
     <value>Select the checkboxes for each server you wish to update. Select a pool checkbox to select all the available servers in the pool.</value>
@@ -12781,12 +12781,12 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>XenServer License Files</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
-    <value>XenServer Tools DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
+    <value>@BRANDING_PRODUCT_BRAND@ Tools DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
 
 You will need to navigate to the Console on each of the selected VMs to complete the installation.</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
-    <value>The XenServer Tools SR could not be found.</value>
+    <value>The @BRANDING_PRODUCT_BRAND@ Tools SR could not be found.</value>
   </data>
   <data name="X_HIDDEN" xml:space="preserve">
     <value>{0} (hidden)</value>
