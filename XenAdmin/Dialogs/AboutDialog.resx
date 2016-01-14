@@ -208,7 +208,7 @@
     <value>15</value>
   </data>
   <data name="VersionLabel.Text" xml:space="preserve">
-    <value>XenCenter version 1.2.3 (build 4567)</value>
+    <value>@BRANDING_BRAND_CONSOLE@ version 1.2.3 (build 4567)</value>
   </data>
   <data name="&gt;&gt;VersionLabel.Name" xml:space="preserve">
     <value>VersionLabel</value>
@@ -358,7 +358,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>About XenCenter</value>
+    <value>About @BRANDING_BRAND_CONSOLE@</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AboutDialog</value>

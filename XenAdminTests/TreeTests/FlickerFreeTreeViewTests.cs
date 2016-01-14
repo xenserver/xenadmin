@@ -79,7 +79,7 @@ namespace XenAdminTests.TreeTests
             _tv.SelectedNodes.SetContents(new VirtualTreeNode[] { folders.Nodes[0], folders.Nodes[1] });
 
             // now build up a new nodes tree
-            VirtualTreeNode newRootNode = new VirtualTreeNode("XenCenter");
+            VirtualTreeNode newRootNode = new VirtualTreeNode(Branding.BRAND_CONSOLE);
 
             VirtualTreeNode newFolders = new VirtualTreeNode("Folders") { Tag = foldersTag };
 

@@ -39,9 +39,9 @@ namespace XenAdmin
 {
     static public class Branding
     {
-        public const string PRODUCT_VERSION_TEXT = "@PRODUCT_VERSION_TEXT@";
-        public const string XENCENTER_VERSION = "@PRODUCT_VERSION@";
-        public const string COPYRIGHT_YEARS = "@COPYRIGHT_YEARS@";
-        public const string COMPANY_NAME_LEGAL = "@COMPANY_NAME_LEGAL@";
+        public const string PRODUCT_VERSION_TEXT = "@BRANDING_PRODUCT_VERSION_TEXT@";
+        public const string XENCENTER_VERSION = "@BRANDING_PRODUCT_VERSION@";
+        public const string COMPANY_NAME_LEGAL = "@BRANDING_COMPANY_NAME_LEGAL@";
+        public const string BRAND_CONSOLE = "@BRANDING_BRAND_CONSOLE@";
     }
 }

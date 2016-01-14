@@ -974,7 +974,7 @@ namespace XenAdmin
                 if (o is XSVersionAttribute)
                 {
                     string result = ((XSVersionAttribute)o).Version;
-                    return result == "@PRODUCT_VERSION@" ? "PRIVATE" : result;
+                    return result == "@BRANDING_PRODUCT_VERSION@" ? "PRIVATE" : result;
                 }
             }
             return "MISSING";

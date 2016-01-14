@@ -38,11 +38,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("XenModel")]
-[assembly: AssemblyDescription("Citrix XenCenter")]
+[assembly: AssemblyDescription("Citrix @BRANDING_BRAND_CONSOLE@")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Citrix")]
-[assembly: AssemblyProduct("XenCenter")]
-[assembly: AssemblyCopyright("Copyright © @COMPANY_NAME_LEGAL@")]
+[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@")]
+[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -67,4 +67,4 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0000")]
-[assembly: XenAdmin.XSVersion("@PRODUCT_VERSION@")]
+[assembly: XenAdmin.XSVersion("@BRANDING_PRODUCT_VERSION@")]

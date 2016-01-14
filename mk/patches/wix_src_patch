@@ -458,7 +458,7 @@ diff -ru wixlib/WixUI_en-us.wxl wixlib/WixUI_en-us.wxl
      <String Id="UITextVolumeCostVolume" Overridable="yes"><!-- _locID_text="UITextVolumeCostVolume" _locComment="UITextVolumeCostVolume" -->Volume</String>
 +
 +    <String Id="ErrorNewerProduct">A newer version of this product is already installed.</String>
-+    <String Id="InstallDirDlgUsersLabel">Install XenCenter for:</String>
++    <String Id="InstallDirDlgUsersLabel">Install for:</String>
 +    <String Id="InstallDirDlgUsersAllRadioButton">&amp;All Users</String>
 +    <String Id="InstallDirDlgUsersOneRadioButton">&amp;Just Me</String>
  </WixLocalization>

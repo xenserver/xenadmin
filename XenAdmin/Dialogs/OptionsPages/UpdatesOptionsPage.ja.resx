@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.Text" xml:space="preserve">
-    <value>XenCenter の新しいバージョンを確認する(&amp;N)</value>
+    <value>@BRANDING_BRAND_CONSOLE@ の新しいバージョンを確認する(&amp;N)</value>
   </data>
   <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenCenterUpdatesCheckBox</value>
@@ -190,7 +190,7 @@
     <value>2</value>
   </data>
   <data name="XenCenterGroupBox.Text" xml:space="preserve">
-    <value>XenCenter アップデートの自動確認</value>
+    <value>@BRANDING_BRAND_CONSOLE@ アップデートの自動確認</value>
   </data>
   <data name="&gt;&gt;XenCenterGroupBox.Name" xml:space="preserve">
     <value>XenCenterGroupBox</value>
@@ -337,7 +337,7 @@
     <value>3</value>
   </data>
   <data name="UpdatesBlurb.Text" xml:space="preserve">
-    <value>XenCenter では、XenServer の新しいバージョンやアップデートを定期的にチェックして、ダウンロードが可能になったときにメッセージを表示できます。</value>
+    <value>@BRANDING_BRAND_CONSOLE@ では、XenServer の新しいバージョンやアップデートを定期的にチェックして、ダウンロードが可能になったときにメッセージを表示できます。</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
     <value>UpdatesBlurb</value>
