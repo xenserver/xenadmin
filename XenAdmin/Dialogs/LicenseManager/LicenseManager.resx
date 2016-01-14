@@ -343,7 +343,7 @@
     <value>3</value>
   </data>
   <data name="activateFreeXenServerButton.Text" xml:space="preserve">
-    <value>Activate &amp;Free XenServer</value>
+    <value>Activate &amp;Free @BRANDING_SERVER@</value>
   </data>
   <data name="&gt;&gt;activateFreeXenServerButton.Name" xml:space="preserve">
     <value>activateFreeXenServerButton</value>

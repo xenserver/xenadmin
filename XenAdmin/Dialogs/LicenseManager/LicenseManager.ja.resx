@@ -343,7 +343,7 @@
     <value>3</value>
   </data>
   <data name="activateFreeXenServerButton.Text" xml:space="preserve">
-    <value>無償の XenServer のアクティブ化(&amp;F) </value>
+    <value>無償の @BRANDING_SERVER@ のアクティブ化(&amp;F) </value>
   </data>
   <data name="&gt;&gt;activateFreeXenServerButton.Name" xml:space="preserve">
     <value>activateFreeXenServerButton</value>

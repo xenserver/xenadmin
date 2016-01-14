@@ -1127,7 +1127,7 @@
   <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>旧型の CPU を使用しているプールにサーバー '{0}' を追加します。
 
-XenServer では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、XenServer のハードウェア互換性一覧に含まれている CPU でサポートされます。
+@BRANDING_SERVER@ では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、@BRANDING_SERVER@ のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
@@ -1136,7 +1136,7 @@ XenServer では、CPU の一部の機能をプールの既存のサーバーに
 
 {0}
 
-XenServer では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、XenServer のハードウェア互換性一覧に含まれている CPU でサポートされます。
+@BRANDING_SERVER@ では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、@BRANDING_SERVER@ のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
@@ -1457,7 +1457,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>コントロール ドメインのファイルシステムがいっぱいです</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>{0} のコントロール ドメインのディスク使用量が {1} に達しました。このディスクに空きがなくなると、XenServer のパフォーマンスが重大な影響を受けます。ログ ファイルや不要な (ユーザー作成の) ファイルを削除してください。</value>
+    <value>{0} のコントロール ドメインのディスク使用量が {1} に達しました。このディスクに空きがなくなると、@BRANDING_SERVER@ のパフォーマンスが重大な影響を受けます。ログ ファイルや不要な (ユーザー作成の) ファイルを削除してください。</value>
   </data>
   <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
     <value>メモリ使用アラーム</value>
@@ -2073,7 +2073,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>このテンプレートは XenServer テンプレートであり、削除できません。</value>
+    <value>このテンプレートは @BRANDING_SERVER@ テンプレートであり、削除できません。</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>この仮想ディスクは障害回復で使用されています。このディスクを削除するには、このストレージ リポジトリにデータを保存しないように障害回復を設定してください。</value>
@@ -2176,7 +2176,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>ポリシー '{0}' の状態の変更</value>
   </data>
   <data name="CHANGE_SERVER_CD" xml:space="preserve">
-    <value>XenServer CD の挿入</value>
+    <value>@BRANDING_SERVER@ CD の挿入</value>
   </data>
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>サーバーのパスワードの変更...</value>
@@ -2298,7 +2298,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>子ノードを閉じる(&amp;C)</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>情報セキュリティ国際評価基準 (Common Criteria) バージョンの XenServer のみ</value>
+    <value>情報セキュリティ国際評価基準 (Common Criteria) バージョンの @BRANDING_SERVER@ のみ</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>完了</value>
@@ -2430,7 +2430,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="CONFIRM_DESTROY_HOST" xml:space="preserve">
     <value>'{0}' を破棄してもよろしいですか?
 
-XenServer の破棄が必要になるのは、物理的な障害が発生した場合のみです。
+@BRANDING_SERVER@ の破棄が必要になるのは、物理的な障害が発生した場合のみです。
 このサーバーを破棄すると、サーバー、ローカル SR、DVD ドライブ、およびリムーバブル ストレージがプールから完全に削除されます。このサーバーを再使用するには、再インストールが必要になります。
 
 この操作を元に戻すことはできません。</value>
@@ -2697,7 +2697,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>{0} への接続: {1} 秒以内にほかのプール メンバに接続を試行します</value>
   </data>
   <data name="CONNECT_NO_XAPI_FAILURE" xml:space="preserve">
-    <value>{0} で実行中の XenServer が見つかりません。</value>
+    <value>{0} で実行中の @BRANDING_SERVER@ が見つかりません。</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
     <value>{0} が見つかりません。</value>
@@ -3226,7 +3226,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>デフォルト</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>XenServer のデフォルト インストール</value>
+    <value>@BRANDING_SERVER@ のデフォルト インストール</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>デフォルトの検索</value>
@@ -4029,7 +4029,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>プール '{0}' へのフェイルバックが完了しました。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
-    <value>XenServer 障害回復が完了しました。</value>
+    <value>@BRANDING_SERVER@ 障害回復が完了しました。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
     <value>フェイルオーバーされた vApp と VM を削除して結果レポートを表示するには、[次へ] をクリックします。</value>
@@ -4047,7 +4047,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>フェイルバックが進行中です。しばらくお待ちください。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>XenServer 障害回復が進行中です。しばらくお待ちください。</value>
+    <value>@BRANDING_SERVER@ 障害回復が進行中です。しばらくお待ちください。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>全体の進行状況: {0} / {1}  タスクが完了</value>
@@ -4080,7 +4080,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>プール '{0}' へのフェイルバックの進行状況</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER" xml:space="preserve">
-    <value>XenServer 障害回復の進行状況</value>
+    <value>@BRANDING_SERVER@ 障害回復の進行状況</value>
   </data>
   <data name="DR_WIZARD_REPORTPAGE_TEXT" xml:space="preserve">
     <value>結果</value>
@@ -4464,7 +4464,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>ファイル {0} が見つかりません</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
-    <value>XenServer は起動中です。</value>
+    <value>@BRANDING_SERVER@ は起動中です。</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>ゲートウェイが無効です。</value>
@@ -4485,7 +4485,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>このサーバーへのアクセスが許可されていません。</value>
   </data>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
-    <value>{0} で XenServer が見つかりません。</value>
+    <value>{0} で @BRANDING_SERVER@ が見つかりません。</value>
   </data>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>ホストの準備エラー</value>
@@ -6263,7 +6263,7 @@ SCSI ID: {2}
     <value>あと 1 分で期限切れ</value>
   </data>
   <data name="LICENSE_EXPIRY_PURCHACE" xml:space="preserve">
-    <value>XenServer オンライン</value>
+    <value>@BRANDING_SERVER@ オンライン</value>
     <comment>this text could be improved</comment>
   </data>
   <data name="LICENSE_EXPIRY_TITLE" xml:space="preserve">
@@ -6309,10 +6309,10 @@ SCSI ID: {2}
     <value>高可用性が有効であるため、ホストのライセンスを変更できません</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>無償の XenServer 製品をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>無償の @BRANDING_SERVER@ 製品をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>Version 5.6 よりも古い XenServer にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>Version 5.6 よりも古い @BRANDING_SERVER@ にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
@@ -6351,7 +6351,7 @@ SCSI ID: {2}
     <value>状態</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>アクティブ化キーを同時に複数の無償 XenServer 製品に適用することはできません。</value>
+    <value>アクティブ化キーを同時に複数の無償 @BRANDING_SERVER@ 製品に適用することはできません。</value>
   </data>
   <data name="LICENSE_UNSUPPORTED" xml:space="preserve">
     <value>サポートされません</value>
@@ -6375,13 +6375,13 @@ SCSI ID: {2}
     <value>ライセンスの有効期限が切れました。</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>有効期限が切れたサーバーがあります。XenServer ライセンスを割り当てるか、無償の XenServer 製品をアクティブ化してください。</value>
+    <value>有効期限が切れたサーバーがあります。@BRANDING_SERVER@ ライセンスを割り当てるか、無償の @BRANDING_SERVER@ 製品をアクティブ化してください。</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>有効期限が切れるサーバーがあります。XenServer ライセンスを割り当てるか、無償の XenServer 製品をアクティブ化してください。</value>
+    <value>有効期限が切れるサーバーがあります。@BRANDING_SERVER@ ライセンスを割り当てるか、無償の @BRANDING_SERVER@ 製品をアクティブ化してください。</value>
   </data>
   <data name="LICENSING_DIALOG_TEXT" xml:space="preserve">
-    <value>ここでは、無償の XenServer 製品のアクティブ化、または XenServer Advanced、Enterprise、および Platinum Edition のライセンスの割り当て/割り当て解除を行います。</value>
+    <value>ここでは、無償の @BRANDING_SERVER@ 製品のアクティブ化、または @BRANDING_SERVER@ Advanced、Enterprise、および Platinum Edition のライセンスの割り当て/割り当て解除を行います。</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>接続状態</value>
@@ -6589,10 +6589,10 @@ SCSI ID: {2}
     <value>タグの編集(&amp;G)...</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
-    <value>'{0}' の XenServer ライセンスの有効期限はあと {1}で切れます。</value>
+    <value>'{0}' の @BRANDING_SERVER@ ライセンスの有効期限はあと {1}で切れます。</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
-    <value>'{0}' の XenServer ライセンスの有効期限が切れました。</value>
+    <value>'{0}' の @BRANDING_SERVER@ ライセンスの有効期限が切れました。</value>
   </data>
   <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
     <value>リソース データのエクスポート(&amp;X)...</value>
@@ -7079,7 +7079,7 @@ SCSI ID: {2}
     <value>{0}: {1}</value>
   </data>
   <data name="MIAMI_NOT_SUPPORTED" xml:space="preserve">
-    <value>このバージョンの @BRANDING_BRAND_CONSOLE@ は XenServer 4.0 および 4.1 をサポートしません。
+    <value>このバージョンの @BRANDING_BRAND_CONSOLE@ は @BRANDING_SERVER@ 4.0 および 4.1 をサポートしません。
 以前のバージョンをインストールしてください。</value>
   </data>
   <data name="MIGRATE" xml:space="preserve">
@@ -7095,9 +7095,9 @@ SCSI ID: {2}
     <value>移行先のストレージ リポジトリの選択(&amp;D)</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>VDI ライブ マイグレーション機能を使用するには、XenServer ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールのストレージ リポジトリ間で移行できます。VM のダウンタイムは発生しません。 
+    <value>VDI ライブ マイグレーション機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールのストレージ リポジトリ間で移行できます。VM のダウンタイムは発生しません。 
 
-下のボタンを使用して、VDI ライブ マイグレーション機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、VDI ライブ マイグレーション機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
     <value>サーバー '{0}' からの VM の移行</value>
@@ -7385,7 +7385,7 @@ SCSI ID: {2}
     <value>このサーバーのバージョンはマスタのものと異なります</value>
   </data>
   <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>XenServer Advanced Edition またはそれ以上のエディションのプールに Free Edition のサーバーを追加することはできません</value>
+    <value>@BRANDING_SERVER@ Advanced Edition またはそれ以上のエディションのプールに Free Edition のサーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>このサーバーには実行中または一時停止中の VM があります</value>
@@ -7400,7 +7400,7 @@ SCSI ID: {2}
     <value>ライセンスが適用されていないプールにライセンス サーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>このサーバーの XenServer ライセンスのエディションはプール マスタのものと異なります</value>
+    <value>このサーバーの @BRANDING_SERVER@ ライセンスのエディションはプール マスタのものと異なります</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>このサーバーの Linux パックのインストール状態はマスタのものと異なります</value>
@@ -7415,7 +7415,7 @@ SCSI ID: {2}
     <value>マスタに対する現在の役割には、このプールへのホストの追加が許可されていません。</value>
   </data>
   <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>XenServer Free Edition のプールに Advanced Edition またはそれ以上のエディションのサーバーを追加することはできません</value>
+    <value>@BRANDING_SERVER@ Free Edition のプールに Advanced Edition またはそれ以上のエディションのサーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>このサーバーのライセンスではプール機能を使用できません</value>
@@ -7472,7 +7472,7 @@ SCSI ID: {2}
     <value>シン</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic は、高性能かつスケーラブルなネットワーク接続ストレージで、ダウンタイムのない容量増設をサポートしています。Dell EqualLogic 共有ストレージを使用すると、XenMotion や高可用性などの XenServer 機能をサポートできます。</value>
+    <value>Dell EqualLogic は、高性能かつスケーラブルなネットワーク接続ストレージで、ダウンタイムのない容量増設をサポートしています。Dell EqualLogic 共有ストレージを使用すると、XenMotion や高可用性などの @BRANDING_SERVER@ 機能をサポートできます。</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -7493,7 +7493,7 @@ SCSI ID: {2}
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
   <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>このLUN に仮想ディスクを作成すると、保存されているデータが失われます。XenServers を含むほかのシステムが LUN を使用していないことを確認してください。LUN が使用されていると、仮想ディスクが破損する場合があります。
+    <value>このLUN に仮想ディスクを作成すると、保存されているデータが失われます。@BRANDING_SERVER@s を含むほかのシステムが LUN を使用していないことを確認してください。LUN が使用されていると、仮想ディスクが破損する場合があります。
 
 ディスクをフォーマットしてもよろしいですか?</value>
   </data>
@@ -7516,9 +7516,9 @@ SCSI ID: {2}
     <value>この LUN はサーバー {1} の SR {0} として既に使用されています。</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
-    <value>XenServer ホストでは、ホスト バス アダプタ (HBA) を使ったファイバ チャネル (FC)、ファイバ チャネル オーバー イーサネット (FCoE)、および共有 SAS (Serial Attached SCSI) のストレージ エリア ネットワーク (SAN) がサポートされます。
+    <value>@BRANDING_SERVER@ ホストでは、ホスト バス アダプタ (HBA) を使ったファイバ チャネル (FC)、ファイバ チャネル オーバー イーサネット (FCoE)、および共有 SAS (Serial Attached SCSI) のストレージ エリア ネットワーク (SAN) がサポートされます。
 
-LUN をホストに提供するための設定は、XenServer ホストのストレージ デバイス、ネットワーク デバイス、および HBA を含め、すべて手作業で行う必要があります。
+LUN をホストに提供するための設定は、@BRANDING_SERVER@ ホストのストレージ デバイス、ネットワーク デバイス、および HBA を含め、すべて手作業で行う必要があります。
 
 すべての設定が完了すると、LUN が割り当てられた SCSI デバイスが HBA を介してホストに提供されます。</value>
   </data>
@@ -7952,7 +7952,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>旧型の CPU を使用しているマスタが動作するプールにサーバー '{0}' を追加します。
 
-XenServer では、CPU の一部の機能をマスタに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、XenServer のハードウェア互換性一覧に含まれている CPU でサポートされます。
+@BRANDING_SERVER@ では、CPU の一部の機能をマスタに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、@BRANDING_SERVER@ のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
@@ -7961,7 +7961,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
 
 {0}
 
-XenServer では、CPU の一部の機能をマスタに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、XenServer のハードウェア互換性一覧に含まれている CPU でサポートされます。
+@BRANDING_SERVER@ では、CPU の一部の機能をマスタに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、@BRANDING_SERVER@ のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
@@ -8179,7 +8179,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>クリア可能なシステム アラートはありません。</value>
   </data>
   <data name="NO_MORE_USERDEVICES" xml:space="preserve">
-    <value>XenServer では、この VM にこれ以上のディスクを作成できません</value>
+    <value>@BRANDING_SERVER@ では、この VM にこれ以上のディスクを作成できません</value>
   </data>
   <data name="NO_NAME" xml:space="preserve">
     <value>(名前なし)</value>
@@ -8191,7 +8191,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>現在、アクティブ化が必要なサーバーはありません。</value>
   </data>
   <data name="NO_SESSION_INFO" xml:space="preserve">
-    <value>XenServer セッション情報がないため続行できません。</value>
+    <value>@BRANDING_SERVER@ セッション情報がないため続行できません。</value>
   </data>
   <data name="NO_SNAPSHOTS" xml:space="preserve">
     <value>この VM にはスナップショットがありません。</value>
@@ -8422,7 +8422,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>既存のアップデートを選択するか、新たにアップロードします</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>XenServer アップデート|*.xsupdate;*.xsoem</value>
+    <value>@BRANDING_SERVER@ アップデート|*.xsupdate;*.xsoem</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage が必要です</value>
@@ -8475,7 +8475,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
 サイズ: {3} MB</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>このパッチは XenServer {0} 用です。</value>
+    <value>このパッチは @BRANDING_SERVER@ {0} 用です。</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>見つかりません</value>
@@ -8575,7 +8575,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>ホストがアップグレードされました</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
-    <value>XenServer をインストールしています</value>
+    <value>@BRANDING_SERVER@ をインストールしています</value>
   </data>
   <data name="PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST" xml:space="preserve">
     <value>ホストから VM を移行しています</value>
@@ -8744,7 +8744,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>この VM のインポート先プールまたはサーバーを選択します。ホーム サーバーは、テンプレートで指定されているものが使用されます\n\n選択したリソース プールに該当するサーバーがない場合は無視されます。</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>プールの一部が XenServer {0} にアップグレードされました</value>
+    <value>プールの一部が @BRANDING_SERVER@ {0} にアップグレードされました</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
     <value>一部アップグレード済み</value>
@@ -8801,7 +8801,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>以下の StorageLink Gateway への接続時にエラーが発生しました。\n\n{0}\n\nこのホストの設定を確認して再接続してください。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>StorageLink SR を XenServer 6.5 で使用することはできません。StorageLink SR を削除してからアップグレードしてください。</value>
+    <value>StorageLink SR を @BRANDING_SERVER@ 6.5 で使用することはできません。StorageLink SR を削除してからアップグレードしてください。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -8813,7 +8813,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>続行する(&amp;P)</value>
   </data>
   <data name="PROMPT_XS_CD" xml:space="preserve">
-    <value>サーバー '{0}' の物理ドライブに XenServer CD を挿入してください。
+    <value>サーバー '{0}' の物理ドライブに @BRANDING_SERVER@ CD を挿入してください。
 [OK] をクリックしてウィザードを続行し、サーバーに戻って画面の指示に従います。</value>
   </data>
   <data name="PROPERTIES_DIALOG_TITLE" xml:space="preserve">
@@ -9337,13 +9337,13 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
 このサーバーの起動順序の設定を確認してサーバーを再起動してください。</value>
   </data>
   <data name="ROLLING_UPGRADE_REBOOT_MESSAGE" xml:space="preserve">
-    <value>{0} に XenServer のアップグレードをインストールするには、以下の手順に従います。
+    <value>{0} に @BRANDING_SERVER@ のアップグレードをインストールするには、以下の手順に従います。
     
-1. サーバーの CD/DVD ドライブに XenServer インストール CD-ROM を挿入するか、PXE ブートを設定します。
+1. サーバーの CD/DVD ドライブに @BRANDING_SERVER@ インストール CD-ROM を挿入するか、PXE ブートを設定します。
 2. 下の [再起動する] をクリックします。サーバーが再起動して、インストールが開始されます。
 3. サーバーのコンソール画面の指示に従ってアップグレードをインストールします。
 
-このサーバーをスキップしてプール内の次のサーバーをアップグレードするには、[このサーバーをスキップ] をクリックします。ただし、プール内で異なるバージョンの XenServer を運用することはサポートされません。今回のローリング アップグレードでスキップしたサーバーは、後で早急にアップグレードしてください。
+このサーバーをスキップしてプール内の次のサーバーをアップグレードするには、[このサーバーをスキップ] をクリックします。ただし、プール内で異なるバージョンの @BRANDING_SERVER@ を運用することはサポートされません。今回のローリング アップグレードでスキップしたサーバーは、後で早急にアップグレードしてください。
 
 最初にプール マスタがアップグレードされます。このため、マスタをスキップすると、このプールのローリング アップグレードがキャンセルされます。
 </value>
@@ -9361,16 +9361,16 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>プールのローリング アップグレードが完了しませんでした。</value>
   </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>'{0}': 新しいバージョンの XenServer を使用するには、新しいライセンスをライセンス サーバーに追加する必要があります。</value>
+    <value>'{0}': 新しいバージョンの @BRANDING_SERVER@ を使用するには、新しいライセンスをライセンス サーバーに追加する必要があります。</value>
   </data>
   <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
     <value>ライセンスの状態を確認しています</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>'{0}': VM 保護ポリシーは、XenServer 6.2 で削除されました</value>
+    <value>'{0}': VM 保護ポリシーは、@BRANDING_SERVER@ 6.2 で削除されました</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>'{0}': WSS サーバーのサポートは、XenServer 6.2 で削除されました</value>
+    <value>'{0}': WSS サーバーのサポートは、@BRANDING_SERVER@ 6.2 で削除されました</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>アーカイブ中</value>
@@ -9493,7 +9493,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>選択したホストまたはプールに接続されていません</value>
   </data>
   <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
-    <value>異なるバージョンの XenServer のライセンスは、個別に適用してください。</value>
+    <value>異なるバージョンの @BRANDING_SERVER@ のライセンスは、個別に適用してください。</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>フィルタを選択...</value>
@@ -9550,7 +9550,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>サーバー(&amp;S):</value>
   </data>
   <data name="SERVER_OUT_OF_DATE" xml:space="preserve">
-    <value>XenServer の旧バージョン</value>
+    <value>@BRANDING_SERVER@ の旧バージョン</value>
   </data>
   <data name="SERVER_OUT_OF_DATE_DETAIL" xml:space="preserve">
     <value>サーバー '{0}' のバージョンが古いため、これ以降接続できません。</value>
@@ -9812,13 +9812,13 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>スケジュールによるスナップショットの種類</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>XenServer ビルド番号</value>
+    <value>@BRANDING_SERVER@ ビルド番号</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>XenServer ビルド日</value>
+    <value>@BRANDING_SERVER@ ビルド日</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>XenServer バージョン</value>
+    <value>@BRANDING_SERVER@ バージョン</value>
   </data>
   <data name="SOFTWARE_VERSION_XCP_BUILD_NUMBER" xml:space="preserve">
     <value>XCP ビルド番号</value>
@@ -9833,7 +9833,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>正しいユーザー名とパスワードを使用して再試行してください。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
-    <value>'{0}' 上の XenServer が正しく設定されていることを確認して、再試行してください。</value>
+    <value>'{0}' 上の @BRANDING_SERVER@ が正しく設定されていることを確認して、再試行してください。</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>後で再試行してください。</value>
@@ -10343,7 +10343,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>このテンプレートでサポートされるネットワークの最大数に達しました。</value>
   </data>
   <data name="TOOLTIP_NICS_PER_BOND_LIMIT" xml:space="preserve">
-    <value>XenServer のボンディングでサポートされる NIC の最大数は {0} です。</value>
+    <value>@BRANDING_SERVER@ のボンディングでサポートされる NIC の最大数は {0} です。</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_SUSPENDED" xml:space="preserve">
     <value>一時停止中の VM からネットワークを削除することはできません</value>
@@ -10453,7 +10453,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>アップデート</value>
   </data>
   <data name="UPDATES_DESC" xml:space="preserve">
-    <value>XenServer または @BRANDING_BRAND_CONSOLE@ アップデートの自動確認</value>
+    <value>@BRANDING_SERVER@ または @BRANDING_BRAND_CONSOLE@ アップデートの自動確認</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>適用したアップデートを有効にするには、以下の操作が必要です。
@@ -10808,67 +10808,67 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>アップデートをサーバー '{0}' にアップロードしています...</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>アラートとレポート機能を使用するには、XenServer ライセンスをアップグレードしてください。パフォーマンス上の問題やエラー状態に関するメール アラートにより、管理者は、基幹サービスが影響を受ける前に潜在的な問題に対処することができます。
+    <value>アラートとレポート機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。パフォーマンス上の問題やエラー状態に関するメール アラートにより、管理者は、基幹サービスが影響を受ける前に潜在的な問題に対処することができます。
 
-下のボタンを使用して、アラートとレポート機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、アラートとレポート機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>VM ライブ マイグレーション機能を使用するには、XenServer ライセンスをアップグレードしてください。この機能により、共有ストレージまたはローカル ストレージ上で実行されている複数の VM を、同一プールまたは別のプールのサーバー間で移行できます。VM のダウンタイムは発生しません。 
+    <value>VM ライブ マイグレーション機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能により、共有ストレージまたはローカル ストレージ上で実行されている複数の VM を、同一プールまたは別のプールのサーバー間で移行できます。VM のダウンタイムは発生しません。 
 
-下のボタンを使用して、プール間の移行機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、プール間の移行機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>異種混在型プールを使用するには、XenServer ライセンスをアップグレードしてください。異種混在型プールでは、異なる種類の CPU を搭載したホストでリソース プールを作成でき、そのホスト間での VM の移行がサポートされます。
+    <value>異種混在型プールを使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。異種混在型プールでは、異なる種類の CPU を搭載したホストでリソース プールを作成でき、そのホスト間での VM の移行がサポートされます。
 
-下のボタンを使用して、異種混在型プール機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、異種混在型プール機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>動的メモリ制御機能を使用するには、XenServer ライセンスをアップグレードしてください。動的メモリ制御により、実行中の仮想マシンのメモリがサーバーでの要求に応じて動的に調節されます。
+    <value>動的メモリ制御機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。動的メモリ制御により、実行中の仮想マシンのメモリがサーバーでの要求に応じて動的に調節されます。
 
-下のボタンを使用して、動的メモリ制御機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、動的メモリ制御機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>障害回復機能を有効にするには、XenServer ライセンスをアップグレードしてください。この機能では、プライマリの業務サイトに障害が発生した場合に、vApp や VM を障害回復 (DR) サイトにフェイルオーバーできます。
+    <value>障害回復機能を有効にするには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、プライマリの業務サイトに障害が発生した場合に、vApp や VM を障害回復 (DR) サイトにフェイルオーバーできます。
 
-下のボタンを使用して、障害回復機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、障害回復機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>StorageLink™ テクノロジを使用するには、XenServer ライセンスをアップグレードしてください。StorageLink では、既存のストレージ ハードウェアの機能を活用して、XenServer でのストレージ操作の負荷を自動的に軽減させることができます。このテクノロジを使用すると、高性能で効率的なストレージ プロビジョニング、複製、およびスナップショットを、使用するストレージ ハードウェア自体の機能を使用してハードウェア内で実行できます。</value>
+    <value>StorageLink™ テクノロジを使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。StorageLink では、既存のストレージ ハードウェアの機能を活用して、@BRANDING_SERVER@ でのストレージ操作の負荷を自動的に軽減させることができます。このテクノロジを使用すると、高性能で効率的なストレージ プロビジョニング、複製、およびスナップショットを、使用するストレージ ハードウェア自体の機能を使用してハードウェア内で実行できます。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>GPU パススルー機能を使用するには、XenServer ライセンスをアップグレードしてください。この機能では、VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。
+    <value>GPU パススルー機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。
 
-下のボタンを使用して、GPU パススルー機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、GPU パススルー機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>高可用性機能を使用するには、XenServer ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。
+    <value>高可用性機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。
 
-下のボタンを使用して、高可用性機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、高可用性機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>パフォーマンス レポート機能を使用するには、XenServer ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。
+    <value>パフォーマンス レポート機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。
 
-下のボタンを使用して、パフォーマンス レポート機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、パフォーマンス レポート機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>役割ベースのアクセス制御機能を使用するには、XenServer ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、XenServer リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。
+    <value>役割ベースのアクセス制御機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、@BRANDING_SERVER@ リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。
 
-下のボタンを使用して、役割ベースのアクセス制御機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、役割ベースのアクセス制御機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>vApp 機能を使用するには、XenServer ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの業務サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。
+    <value>vApp 機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの業務サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。
 
-下のボタンを使用して、vApp 機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、vApp 機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION" xml:space="preserve">
-    <value>VM の保護と回復機能を使用するには、XenServer ライセンスをアップグレードしてください。この機能では、定期的にスナップショットを作成したり、CIFS や NFS の共有にスナップショットをアーカイブしたりできます。
+    <value>VM の保護と回復機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、定期的にスナップショットを作成したり、CIFS や NFS の共有にスナップショットをアーカイブしたりできます。
 
-下のボタンを使用して、VM の保護と回復機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、VM の保護と回復機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>動的なワークロード バランス機能を使用するには、XenServer ライセンスをアップグレードしてください。動的なワークロード バランスにより、仮想マシンおよび XenServer ホストのパフォーマンスが継続的に監視され、新しいワークロードを最適に分散・配置して、リソース プール内の物理サーバー リソースを最大限に活用します。
+    <value>動的なワークロード バランス機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。動的なワークロード バランスにより、仮想マシンおよび @BRANDING_SERVER@ ホストのパフォーマンスが継続的に監視され、新しいワークロードを最適に分散・配置して、リソース プール内の物理サーバー リソースを最大限に活用します。
 
-下のボタンを使用して、動的なワークロード バランス機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、動的なワークロード バランス機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>アップタイム</value>
@@ -11491,34 +11491,34 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>WLB の不明なエラーです。</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>WLB で XenServer とのセッションを確立するときにエラーが発生しました。</value>
+    <value>WLB で @BRANDING_SERVER@ とのセッションを確立するときにエラーが発生しました。</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
-    <value>WLB で XenServer にログインできません。資格情報が無効である可能性があります。</value>
+    <value>WLB で @BRANDING_SERVER@ にログインできません。資格情報が無効である可能性があります。</value>
   </data>
   <data name="WLB_ERROR_4003" xml:space="preserve">
-    <value>WLB で XenServer に接続できません。XenServer がオフラインであるか、TCP/IP アドレスが間違っている可能性があります。</value>
+    <value>WLB で @BRANDING_SERVER@ に接続できません。@BRANDING_SERVER@ がオフラインであるか、TCP/IP アドレスが間違っている可能性があります。</value>
   </data>
   <data name="WLB_ERROR_4004" xml:space="preserve">
-    <value>WLB で XenServer から null 引数を受信しました。これは許可されません。</value>
+    <value>WLB で @BRANDING_SERVER@ から null 引数を受信しました。これは許可されません。</value>
   </data>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>WLB のレジストリ キーがありません。</value>
   </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
-    <value>WLB で XenServer から無効な引数を受信しました。</value>
+    <value>WLB で @BRANDING_SERVER@ から無効な引数を受信しました。</value>
   </data>
   <data name="WLB_ERROR_4008" xml:space="preserve">
-    <value>WLB のデータ収集サービスで XenServer データを取得できません。</value>
+    <value>WLB のデータ収集サービスで @BRANDING_SERVER@ データを取得できません。</value>
   </data>
   <data name="WLB_ERROR_4009" xml:space="preserve">
     <value>WLB 設定データが WLB データベースにありません。</value>
   </data>
   <data name="WLB_ERROR_4010" xml:space="preserve">
-    <value>WLB で XenServer から無効な操作を受信しました。</value>
+    <value>WLB で @BRANDING_SERVER@ から無効な操作を受信しました。</value>
   </data>
   <data name="WLB_ERROR_4011" xml:space="preserve">
-    <value>WLB で XenServer から範囲外の引数を受信しました。</value>
+    <value>WLB で @BRANDING_SERVER@ から範囲外の引数を受信しました。</value>
   </data>
   <data name="WLB_ERROR_4012" xml:space="preserve">
     <value>WLB のデータ収集サービスが正しく初期化されていません。</value>
@@ -11548,7 +11548,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>プール内に適切なライセンスがないホストがあります。</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>資格情報の指定が無効なため、WLB で XenServer セッションを開始できません。</value>
+    <value>資格情報の指定が無効なため、WLB で @BRANDING_SERVER@ セッションを開始できません。</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB で、明示的に除外されたホストを退避できません。</value>
@@ -11557,10 +11557,10 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>WLB で設定を保存できません。すべての ワークロード バランスのすべてのサービスが実行されていることを確認し、しばらくしてから設定内容を再入力してください。</value>
   </data>
   <data name="WLB_ERROR_5" xml:space="preserve">
-    <value>WLB サーバーの資格情報の指定が無効なため、XenServer で WLB サーバーに接続できません。</value>
+    <value>WLB サーバーの資格情報の指定が無効なため、@BRANDING_SERVER@ で WLB サーバーに接続できません。</value>
   </data>
   <data name="WLB_ERROR_6" xml:space="preserve">
-    <value>WLB で XenServer に接続するユーザー アカウントに、必要な権限がありません。適切なユーザー アカウントで WLB を再初期化してください。</value>
+    <value>WLB で @BRANDING_SERVER@ に接続するユーザー アカウントに、必要な権限がありません。適切なユーザー アカウントで WLB を再初期化してください。</value>
   </data>
   <data name="WLB_ERROR_SERVER_NOT_FOUND" xml:space="preserve">
     <value>指定された WLB サーバーが見つかりません。設定を確認してください。</value>
@@ -11737,7 +11737,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>設定エラー: {0}</value>
   </data>
   <data name="WLB_RECONFIGURE_CREDS" xml:space="preserve">
-    <value>保存されている XenServer の資格情報が無効になっています。ワークロード バランスの接続設定を更新してください。</value>
+    <value>保存されている @BRANDING_SERVER@ の資格情報が無効になっています。ワークロード バランスの接続設定を更新してください。</value>
   </data>
   <data name="WLB_RECONNECT" xml:space="preserve">
     <value>再接続(&amp;C)...</value>
@@ -12072,28 +12072,28 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>保存済みの検索</value>
   </data>
   <data name="XENSERVER" xml:space="preserve">
-    <value>XenServer</value>
+    <value>@BRANDING_SERVER@</value>
   </data>
   <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>XenServer 6.2</value>
+    <value>@BRANDING_SERVER@ 6.2</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>XenServer 6.5</value>
+    <value>@BRANDING_SERVER@ 6.5</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
-    <value>XenServer テンプレート</value>
+    <value>@BRANDING_SERVER@ テンプレート</value>
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>ライセンスをアップグレードしてください</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
-    <value>XenServer アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
+    <value>@BRANDING_SERVER@ アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
   </data>
   <data name="XS_BACKUP_FILES" xml:space="preserve">
-    <value>XenServer バックアップ ファイル</value>
+    <value>@BRANDING_SERVER@ バックアップ ファイル</value>
   </data>
   <data name="XS_LICENSE_FILES" xml:space="preserve">
-    <value>XenServer ライセンス ファイル</value>
+    <value>@BRANDING_SERVER@ ライセンス ファイル</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
     <value>選択した各 VM の DVD ドライブに @BRANDING_PRODUCT_BRAND@ Tools DVD が挿入されます。これらのドライブに挿入されているディスクはすべてイジェクトされます。

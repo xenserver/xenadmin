@@ -209,7 +209,7 @@
     <value>1</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>是否希望 @BRANDING_BRAND_CONSOLE@ 定期在 Internet 中检查 XenServer 更新和新版本的 @BRANDING_BRAND_CONSOLE@?</value>
+    <value>是否希望 @BRANDING_BRAND_CONSOLE@ 定期在 Internet 中检查 @BRANDING_SERVER@ 更新和新版本的 @BRANDING_BRAND_CONSOLE@?</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>

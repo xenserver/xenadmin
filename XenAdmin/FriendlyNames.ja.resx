@@ -160,7 +160,7 @@
     <value>X サーバーの認証ファイル</value>
   </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
-    <value>XenServer 上にバイナリ オブジェクトとして格納されているユーザー情報を取得します。</value>
+    <value>@BRANDING_SERVER@ 上にバイナリ オブジェクトとして格納されているユーザー情報を取得します。</value>
   </data>
   <data name="Description-host.system_status-boot-loader" xml:space="preserve">
     <value>システム起動時に表示される起動オプションおよびその説明の一覧</value>
@@ -214,7 +214,7 @@
     <value>OEM プロバイダ固有のデータを収集します。</value>
   </data>
   <data name="Description-host.system_status-pam" xml:space="preserve">
-    <value>XenServer の PAM (Pluggable Authentication Modules) により使用される設定ファイルです。</value>
+    <value>@BRANDING_SERVER@ の PAM (Pluggable Authentication Modules) により使用される設定ファイルです。</value>
   </data>
   <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
     <value>永続的なパフォーマンス統計値</value>
@@ -241,13 +241,13 @@
     <value>このプールを監視している WLB サーバーからのログと状態に関する情報です。</value>
   </data>
   <data name="Description-host.system_status-xapi" xml:space="preserve">
-    <value>XenServer デーモンの内部ログ</value>
+    <value>@BRANDING_SERVER@ デーモンの内部ログ</value>
   </data>
   <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
-    <value>XenServer デーモン クラッシュ ダンプ</value>
+    <value>@BRANDING_SERVER@ デーモン クラッシュ ダンプ</value>
   </data>
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>XenServer デーモン プロセスの詳細</value>
+    <value>@BRANDING_SERVER@ デーモン プロセスの詳細</value>
   </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>ハイパーバイザーのバージョンと現在の状態</value>
@@ -256,19 +256,19 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
-    <value>XenServer のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール設定などの詳細</value>
+    <value>@BRANDING_SERVER@ のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール設定などの詳細</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>XenServer の状態に関する情報を格納するデータベース</value>
+    <value>@BRANDING_SERVER@ の状態に関する情報を格納するデータベース</value>
   </data>
   <data name="Description-host.system_status-xenserver-domains" xml:space="preserve">
     <value>サーバーにインストールされているゲスト VM とその状態の一覧</value>
   </data>
   <data name="Description-host.system_status-xenserver-install" xml:space="preserve">
-    <value>XenServer インストール時のログ ファイル</value>
+    <value>@BRANDING_SERVER@ インストール時のログ ファイル</value>
   </data>
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>XenServer のアクティビティに関するログ ファイル</value>
+    <value>@BRANDING_SERVER@ のアクティビティに関するログ ファイル</value>
   </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性ライブセット</value>
@@ -298,7 +298,7 @@
     <value>PowerShell プラグインを使用するには、PowerShell をインストールしておく必要があります。PowerShell は、Microsoft 社の Web サイトからダウンロードできます。</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>XenServer PowerShell コマンドを使用するには、XenServerPSSnapIn をインストールしておく必要があります。XenServerPSSnapIn は SDK に含まれています。</value>
+    <value>@BRANDING_SERVER@ PowerShell コマンドを使用するには、XenServerPSSnapIn をインストールしておく必要があります。XenServerPSSnapIn は SDK に含まれています。</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>プラグイン '{1}' の検索 '{0}' を構文解析できません。</value>
@@ -541,19 +541,19 @@
     <value>エディション</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix XenServer Advanced Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>Citrix @BRANDING_SERVER@ for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_SERVER@</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix XenServer Platinum Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>有効</value>
@@ -598,67 +598,67 @@
     <value>プール メンバ</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_SERVER@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>Citrix XenServer Dell Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Dell Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_SERVER@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_SERVER@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>Citrix XenServer HP Edition</value>
+    <value>Citrix @BRANDING_SERVER@ HP Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_SERVER@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer</value>
+    <value>Citrix Essentials for @BRANDING_SERVER@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_SERVER@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer</value>
+    <value>Citrix Essentials for @BRANDING_SERVER@</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer Dell Enterprise Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>Citrix XenServer Dell Express Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Dell Express Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>Citrix XenServer Dell Server Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Dell Server Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer HP Enterprise Edition</value>
+    <value>Citrix @BRANDING_SERVER@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>Citrix XenServer HP Select Edition</value>
+    <value>Citrix @BRANDING_SERVER@ HP Select Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>Citrix XenServer HP Server Edition</value>
+    <value>Citrix @BRANDING_SERVER@ HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>Citrix XenServer Express Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>Citrix XenServer Server Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
-    <value>XenServer ビルド番号</value>
+    <value>@BRANDING_SERVER@ ビルド番号</value>
   </data>
   <data name="Label-host.software_version-date" xml:space="preserve">
-    <value>XenServer ビルド日</value>
+    <value>@BRANDING_SERVER@ ビルド日</value>
   </data>
   <data name="Label-host.software_version-product_version" xml:space="preserve">
-    <value>XenServer バージョン</value>
+    <value>@BRANDING_SERVER@ バージョン</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
     <value>Citrix StorageLink 設定</value>
@@ -751,13 +751,13 @@
     <value>ワークロード バランスの状態</value>
   </data>
   <data name="Label-host.system_status-xapi" xml:space="preserve">
-    <value>XenServer デーモンの内部ログ</value>
+    <value>@BRANDING_SERVER@ デーモンの内部ログ</value>
   </data>
   <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
-    <value>XenServer デーモン クラッシュ ダンプ</value>
+    <value>@BRANDING_SERVER@ デーモン クラッシュ ダンプ</value>
   </data>
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>XenServer デーモン サブプロセス</value>
+    <value>@BRANDING_SERVER@ デーモン サブプロセス</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>ハイパーバイザー設定</value>
@@ -766,19 +766,19 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
-    <value>XenServer 設定</value>
+    <value>@BRANDING_SERVER@ 設定</value>
   </data>
   <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>XenServer データベース</value>
+    <value>@BRANDING_SERVER@ データベース</value>
   </data>
   <data name="Label-host.system_status-xenserver-domains" xml:space="preserve">
-    <value>XenServer ドメイン一覧</value>
+    <value>@BRANDING_SERVER@ ドメイン一覧</value>
   </data>
   <data name="Label-host.system_status-xenserver-install" xml:space="preserve">
-    <value>XenServer インストール ログ ファイル</value>
+    <value>@BRANDING_SERVER@ インストール ログ ファイル</value>
   </data>
   <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>XenServer ログ</value>
+    <value>@BRANDING_SERVER@ ログ</value>
   </data>
   <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性ライブセット</value>
@@ -949,7 +949,7 @@
     <value>空きエージェント メモリ</value>
   </data>
   <data name="Label-performance.xapi_latency" xml:space="preserve">
-    <value>XenServer ヘルスチェック遅延</value>
+    <value>@BRANDING_SERVER@ ヘルスチェック遅延</value>
   </data>
   <data name="Label-performance.xapi_live_memory_kib" xml:space="preserve">
     <value>エージェント メモリ ライブ</value>
@@ -1015,10 +1015,10 @@
     <value>高可用性設定</value>
   </data>
   <data name="Message.action-license_does_not_support_pooling" xml:space="preserve">
-    <value>XenServer のオンライン購入</value>
+    <value>@BRANDING_SERVER@ のオンライン購入</value>
   </data>
   <data name="Message.action-license_expires_soon" xml:space="preserve">
-    <value>XenServer のオンライン購入</value>
+    <value>@BRANDING_SERVER@ のオンライン購入</value>
   </data>
   <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
     <value>ログ ファイルの表示</value>
@@ -1080,7 +1080,7 @@
     <value>プール '{0}'のサーバーでハートビート SR にアクセスできません。このため、高可用性による保護に問題が生じます。</value>
   </data>
   <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>サーバー '{0}'上の XenServer で応答に時間がかかっています。隔離される可能性があります。</value>
+    <value>サーバー '{0}'上の @BRANDING_SERVER@ で応答に時間がかかっています。隔離される可能性があります。</value>
   </data>
   <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
     <value>サーバー '{0}' の時計がプール '{1}' のほかのサーバーと同期していません。これにより、仮想マシンの移行や収集されるパフォーマンス データに問題が生じる場合があります。</value>
@@ -1092,7 +1092,7 @@
     <value>プール内でのパフォーマンス統計値の同期に一時的な障害が発生しました。一部のサーバーがオフラインであることが考えられます。</value>
   </data>
   <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
-    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。このため、XenServer Enterprise の機能は使用できなくなりました。</value>
+    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。このため、@BRANDING_SERVER@ Enterprise の機能は使用できなくなりました。</value>
   </data>
   <data name="Message.body-license_expired" xml:space="preserve">
     <value>{0} のライセンスの有効期限が切れました。</value>
@@ -1191,7 +1191,7 @@
     <value>バックアップ成功</value>
   </data>
   <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>使用している XenServer ライセンスでは、VMPR 機能を使用できません。VMPR 機能は、Citrix XenServer Advanced Edition またはそれ以上のエディションで使用できます。</value>
+    <value>使用している @BRANDING_SERVER@ ライセンスでは、VMPR 機能を使用できません。VMPR 機能は、Citrix @BRANDING_SERVER@ Advanced Edition またはそれ以上のエディションで使用できます。</value>
   </data>
   <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
     <value>このスナップショットはアーカイブ済みです。</value>
@@ -1311,7 +1311,7 @@
     <value>ハートビート SR のアクセス不可</value>
   </data>
   <data name="Message.name-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>XenServer ヘルスチェックのタイムアウト</value>
+    <value>@BRANDING_SERVER@ ヘルスチェックのタイムアウト</value>
   </data>
   <data name="Message.name-host_clock_skew_detected" xml:space="preserve">
     <value>サーバーの時計の非同期</value>
@@ -1320,7 +1320,7 @@
     <value>サーバーの時計が戻されました</value>
   </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
-    <value>XenServer 統計値の同期の失敗</value>
+    <value>@BRANDING_SERVER@ 統計値の同期の失敗</value>
   </data>
   <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
     <value>ネットワーク設定の問題</value>
@@ -1455,11 +1455,11 @@
     <value>WLB VM 再配置</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
-    <value>プール管理者には、XenServer のすべての機能および設定に対する完全なアクセス権が付与されます。プール管理者は、XenServer コンソールを使ってほかのユーザーの役割を管理できます。
+    <value>プール管理者には、@BRANDING_SERVER@ のすべての機能および設定に対する完全なアクセス権が付与されます。プール管理者は、@BRANDING_SERVER@ コンソールを使ってほかのユーザーの役割を管理できます。
  
 - 無制限
 - 役割およびユーザーの管理
-- XenServer コンソールへのアクセス</value>
+- @BRANDING_SERVER@ コンソールへのアクセス</value>
   </data>
   <data name="Role.pool-admin.NameLabel" xml:space="preserve">
     <value>プール管理者</value>
@@ -1483,7 +1483,7 @@
     <value>読み取り専用</value>
   </data>
   <data name="Role.vm-admin.Description" xml:space="preserve">
-    <value>VM 管理者は、VM およびテンプレートを管理でき、必要なストレージにアクセスできます。各 VM の実行サーバーの選択は XenServer に依存し、動的メモリ制御 (DMC) やホーム サーバーの設定はテンプレートに依存します。
+    <value>VM 管理者は、VM およびテンプレートを管理でき、必要なストレージにアクセスできます。各 VM の実行サーバーの選択は @BRANDING_SERVER@ に依存し、動的メモリ制御 (DMC) やホーム サーバーの設定はテンプレートに依存します。
  
 - VM およびテンプレートの管理
 - 動的メモリ制御は不可
@@ -1572,7 +1572,7 @@
     <value>一覧にないオペレーティング システムを使用する場合は、このテンプレートを選択します。このテンプレートは、詳しい知識がある管理者向けです。また、弊社の製品は、標準テンプレートでサポートされる特定のディストリビューションおよびバージョンでのみ、動作テストが実施されていることをご了承ください。</value>
   </data>
   <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
-    <value>このテンプレートを使用して、XenServer Software Development Kit (SDK) API VM を作成できます。 </value>
+    <value>このテンプレートを使用して、@BRANDING_SERVER@ Software Development Kit (SDK) API VM を作成できます。 </value>
   </data>
   <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
     <value>物理リムーバブル ストレージ</value>
@@ -1629,10 +1629,10 @@
     <value>解放されるメモリ (概算値)</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket Edition</value>
+    <value>Citrix @BRANDING_SERVER@ Per-Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>Citrix @BRANDING_SERVER@ for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>AD のヘルプ</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} メモリ使用率</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_SERVER@</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>SR が既に使用中であるため空き領域を解放できません</value>
