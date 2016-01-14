@@ -107,7 +107,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+                new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -216,7 +216,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+                new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -327,7 +327,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("D&estroy", false, false  ),
-                    new ExpectedTextMenuItem("Remo&ve from XenCenter", host.IsMaster(), false  ),
+                    new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, host.IsMaster(), false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -438,7 +438,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	            new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -550,7 +550,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
-	                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	                new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", vm.Home() != null, false  )
                 };
@@ -664,7 +664,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
-	                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	                new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", sr.Home != null, false  )
                 };
@@ -779,7 +779,7 @@ namespace XenAdminTests.TabsAndMenus
                             new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("D&estroy", false, false  ),
-	                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	                    new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -897,7 +897,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
-                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+                    new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1016,7 +1016,7 @@ namespace XenAdminTests.TabsAndMenus
                             new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("D&estroy", false, false  ),
-	                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	                    new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1136,7 +1136,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
-                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+                    new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1257,7 +1257,7 @@ namespace XenAdminTests.TabsAndMenus
                             new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("D&estroy", false, false  ),
-	                    new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	                    new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1373,7 +1373,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-	            new ExpectedTextMenuItem("Remo&ve from XenCenter", true, false  ),
+	            new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, true, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -1482,7 +1482,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	            new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -1593,7 +1593,7 @@ namespace XenAdminTests.TabsAndMenus
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("D&estroy", false, false  ),
-	                new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	                new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -1732,7 +1732,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	            new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -1857,7 +1857,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("D&estroy", false, false  ),
-	            new ExpectedTextMenuItem("Remo&ve from XenCenter", false, false  ),
+	            new ExpectedTextMenuItem("Remo&ve from " + Branding.BRAND_CONSOLE, false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };

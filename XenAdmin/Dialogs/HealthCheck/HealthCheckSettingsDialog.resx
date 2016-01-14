@@ -763,7 +763,7 @@
     <value>21</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
-    <value>Use the current &amp;XenCenter credentials</value>
+    <value>Use the current &amp;@BRANDING_BRAND_CONSOLE@ credentials</value>
   </data>
   <data name="&gt;&gt;currentXsCredentialsRadioButton.Name" xml:space="preserve">
     <value>currentXsCredentialsRadioButton</value>

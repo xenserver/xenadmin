@@ -37,10 +37,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("XenCenterLib")]
-[assembly: AssemblyDescription("Citrix XenCenter base library")]
+[assembly: AssemblyDescription("Citrix @BRANDING_BRAND_CONSOLE@ base library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Citrix")]
-[assembly: AssemblyProduct("XenCenter")]
+[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@")]
 [assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

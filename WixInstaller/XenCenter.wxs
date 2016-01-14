@@ -37,13 +37,13 @@
     <?define ProductVersion="1.0.0" ?>
     <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
-    <Product Id="$(var.ProductCode)" Name="Citrix XenCenter" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
-        <Package Description="Citrix XenCenter" Comments="none." InstallerVersion="200" Compressed="yes" />
+    <Product Id="$(var.ProductCode)" Name="Citrix @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
+        <Package Description="Citrix @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
                 <Directory Id="Citrix" Name="Citrix">
-                    <Directory Id="INSTALLDIR" ShortName="XenCente" Name="XenCenter">
+                    <Directory Id="INSTALLDIR" ShortName="XenCente" Name="@BRANDING_BRAND_CONSOLE@">
                         <Component Id="ReportViewer" Guid="D01090B9-1988-4ab4-B48A-D0B6161FAA48">
                             <File Id="MicRepVwrCmnDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
                             <File Id="MicRepVwrPrcObjDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
@@ -59,7 +59,7 @@
                         </Component>
                         <Component Id="MainExecutable" Guid="64FEF765-7593-4612-8D4D-EE81CF704DEB">
                             <!-- XenCenter EXE -->
-                            <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\XenCenter.exe" KeyPath="yes" />
+                            <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\@BRANDING_BRAND_CONSOLE@.exe" KeyPath="yes" />
                             <!-- other EXEs -->
                             <File Id="XenCenterMainEXE" Source="..\XenAdmin\bin\Release\XenCenterMain.exe" />
                             <File Id="XeEXE" Source="..\xe\bin\Release\xe.exe" />
@@ -148,7 +148,7 @@
                                 </Extension>
                             </ProgId>
                             <!-- Define XENSEARCH extension -->
-                            <ProgId Id="XenCenter.xensearch" Description="XenCenter Saved Search" Icon="XenCenterIcon">
+                            <ProgId Id="XenCenter.xensearch" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
                                 <Extension Id="xensearch" ContentType="application/xensearch">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
                                 </Extension>
@@ -228,20 +228,20 @@
         </Directory>
         <DirectoryRef Id="TARGETDIR">
             <Component Id="RegistryEntries" Guid="193BAE1F-F2AE-4451-94DC-4B105DB5179C">
-                <RegistryKey Root="HKMU" Key="Software\Citrix\XenCenter">
+                <RegistryKey Root="HKMU" Key="Software\Citrix\@BRANDING_BRAND_CONSOLE@">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
                 </RegistryKey>
             </Component>
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="6B875059-26BC-4fa7-ACB7-0B9A4E4665CA">
-                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="Citrix XenCenter" Description="XenCenter Shortcut" Target="[INSTALLDIR]XenCenter.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="Citrix @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\Citrix\XenCenter" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKCU" Key="Software\Citrix\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 	
-        <Feature Id="MainProgram" Title="Citrix XenCenter" Description="Citrix XenCenter" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
+        <Feature Id="MainProgram" Title="Citrix @BRANDING_BRAND_CONSOLE@" Description="Citrix @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="TestResources" />
@@ -264,7 +264,7 @@
         <PropertyRef Id="NETFRAMEWORK45" />
         <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
         <Property Id="PERMACHINEINSTALL">
-            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\XenCenter" Name="InstallDir" />
+            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
         </Property>
 		<Property Id="REINSTALLMODE" Value="amus" />
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />

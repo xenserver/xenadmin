@@ -104,7 +104,7 @@ RESX_rebranding()
 }
 
 #splace rebranding
-version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp"
+version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj"
 
 #projects sign change
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
@@ -121,7 +121,8 @@ do
     rebranding_global ${XENADMIN_RESX}
 done
 #xenadmin resouces
-RESX_rebranding ${REPO}/XenAdmin/Properties/Resources
+RESX_rebranding "${REPO}/XenAdmin/Properties/Resources"
+rebranding_global ${REPO}/XenAdmin/app.config
 
 #XenModel rebranding
 RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames"
@@ -131,3 +132,23 @@ RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
 
 #XenOvfTransport XenOvfTransport
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
+
+#dotNetInstaller
+rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper.xml
+rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper_l10n.xml
+
+#readme
+rebranding_global ${REPO}/README.md
+
+#mk
+rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
+
+#WixInstaller
+rebranding_global ${REPO}/WixInstaller/en-us.wxl
+rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
+rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
+rebranding_global ${REPO}/WixInstaller/XenCenter.l10n.diff
+rebranding_global ${REPO}/WixInstaller/XenCenter.wxs
+
+#XenAdminTests
+rebranding_global ${REPO}/XenAdminTests/MainWindowTester.cs

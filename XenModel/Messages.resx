@@ -874,7 +874,7 @@
     <value>Finished compiling status report (with errors). A partial status report was compiled.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS" xml:space="preserve">
-    <value>Finished compiling status report (with errors). Only XenCenter logs were compiled.</value>
+    <value>Finished compiling status report (with errors). Only @BRANDING_BRAND_CONSOLE@ logs were compiled.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>Getting system status information</value>
@@ -1180,7 +1180,7 @@
     <value>A&amp;ctivate</value>
   </data>
   <data name="ACTIVATION_FAILED_MESSAGE" xml:space="preserve">
-    <value>XenCenter is unable to contact the activation server.
+    <value>@BRANDING_BRAND_CONSOLE@ is unable to contact the activation server.
 
 If you are not currently connected to the internet, we can save
 the activation request to a file, for you to upload at a later date.
@@ -1242,7 +1242,7 @@ To use this file, visit https://{0}.</value>
     <value>Address</value>
   </data>
   <data name="ADDSERVER_PASS_NEW" xml:space="preserve">
-    <value>XenCenter can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed.</value>
+    <value>@BRANDING_BRAND_CONSOLE@ can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed.</value>
   </data>
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>Add custom field '{0}'</value>
@@ -1514,7 +1514,7 @@ Do you wish to continue?</value>
 Do you wish to continue?</value>
   </data>
   <data name="AD_MASTER_UNAVAILABLE_BLURB" xml:space="preserve">
-    <value>Please wait while XenCenter establishes your current external authentication configuration.</value>
+    <value>Please wait while @BRANDING_BRAND_CONSOLE@ establishes your current external authentication configuration.</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
     <value>AD is not currently configured for pool '{0}'. To enable AD authentication, click Join Domain.</value>
@@ -1712,7 +1712,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>Go to Web Page</value>
   </data>
   <data name="ALERT_NEW_VERSION" xml:space="preserve">
-    <value>New XenCenter Available</value>
+    <value>New @BRANDING_BRAND_CONSOLE@ Available</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
     <value>{0} is now available. Download the new version from the Citrix website.</value>
@@ -1762,7 +1762,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
 
-Warning: you must ensure that the SR is not in use by any server not connected to XenCenter. Failure to do so may result in data loss.</value>
+Warning: you must ensure that the SR is not in use by any server not connected to @BRANDING_BRAND_CONSOLE@. Failure to do so may result in data loss.</value>
   </data>
   <data name="ALREADY_CONNECTED" xml:space="preserve">
     <value>You are already connected to server '{0}'.</value>
@@ -2053,9 +2053,9 @@ Both types of interface cannot be added to the same bond. Choose different bond 
   <data name="BOND_CREATE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>Creating this bond will automatically move the management interface on one of your selected bond members to the bond itself:
 
-- XenCenter connections to the pool will temporarily be disturbed
+- @BRANDING_BRAND_CONSOLE@ connections to the pool will temporarily be disturbed
 
-- If your network configuration is incorrect then XenCenter may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
+- If your network configuration is incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
   </data>
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>Creating this bond will disrupt traffic through the secondary interfaces on the bond members while the interfaces are moved onto the bond itself.</value>
@@ -2075,20 +2075,20 @@ To continue, disable HA, delete the bond, and then enable HA again.</value>
 
 Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
 
-- XenCenter connections to the pool will temporarily be disturbed
+- @BRANDING_BRAND_CONSOLE@ connections to the pool will temporarily be disturbed
 
 - Traffic through the secondary interface will be disrupted
 
-- If your network configuration is incorrect then XenCenter may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
+- If your network configuration is incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
 Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
 
-- XenCenter connections to the pool will temporarily be disturbed
+- @BRANDING_BRAND_CONSOLE@ connections to the pool will temporarily be disturbed
 
-- If your network configuration is incorrect then XenCenter may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
+- If your network configuration is incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
@@ -2111,7 +2111,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>There are broken SRs after the upgrade. To solve this problem you should reattach the SRs.</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>Your Tools ISO is on a broken SR, XenCenter will attempt to fix it before proceeding. Do you wish to continue?</value>
+    <value>Your Tools ISO is on a broken SR, @BRANDING_BRAND_CONSOLE@ will attempt to fix it before proceeding. Do you wish to continue?</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
@@ -2314,7 +2314,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>This virtual disk is currently in use and cannot be deleted.</value>
   </data>
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
-    <value>You cannot configure an SR of type '{0}' using XenCenter.</value>
+    <value>You cannot configure an SR of type '{0}' using @BRANDING_BRAND_CONSOLE@.</value>
   </data>
   <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
     <value>Cannot move this virtual disk as it is attached to a non running VM.</value>
@@ -2360,10 +2360,10 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Change...</value>
   </data>
   <data name="CHANGED_MASTER_PASSWORD" xml:space="preserve">
-    <value>Changed XenCenter master password</value>
+    <value>Changed @BRANDING_BRAND_CONSOLE@ master password</value>
   </data>
   <data name="CHANGED_MASTER_PASSWORD_LONG" xml:space="preserve">
-    <value>Changed XenCenter master password for session restore</value>
+    <value>Changed @BRANDING_BRAND_CONSOLE@ master password for session restore</value>
   </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>Server CD changed</value>
@@ -2720,10 +2720,10 @@ Are you sure you want to export VM {2}?</value>
     <value>Reboot VM</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS" xml:space="preserve">
-    <value>Are you sure you want to restart the toolstack on the selected servers? Note that XenCenter will temporarily lose connection to them.</value>
+    <value>Are you sure you want to restart the toolstack on the selected servers? Note that @BRANDING_BRAND_CONSOLE@ will temporarily lose connection to them.</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_ONE_SERVER" xml:space="preserve">
-    <value>Are you sure you want to restart the toolstack on '{0}'? Note that XenCenter will temporarily lose connection to the server.</value>
+    <value>Are you sure you want to restart the toolstack on '{0}'? Note that @BRANDING_BRAND_CONSOLE@ will temporarily lose connection to the server.</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>Restart Toolstack</value>
@@ -3720,7 +3720,7 @@ This will also delete its subfolders.</value>
     <value>{0} (Detached)</value>
   </data>
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
-    <value>XenCenter has detected that an SR already exists on this LUN. This SR is not currently in use by '{0}',  would you like to attach it?</value>
+    <value>@BRANDING_BRAND_CONSOLE@ has detected that an SR already exists on this LUN. This SR is not currently in use by '{0}',  would you like to attach it?</value>
   </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>&amp;Detach</value>
@@ -4573,7 +4573,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>&amp;Enter Maintenance Mode...</value>
   </data>
   <data name="ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT" xml:space="preserve">
-    <value>To access your saved session it is required that you enter the master password when starting XenCenter</value>
+    <value>To access your saved session it is required that you enter the master password when starting @BRANDING_BRAND_CONSOLE@</value>
   </data>
   <data name="ENTER_VALID_QOS" xml:space="preserve">
     <value>The value for your QoS limit needs to be greater than zero</value>
@@ -4594,7 +4594,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Username and Password mismatch.</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
-    <value>XenCenter has encountered a problem connecting to this server.</value>
+    <value>@BRANDING_BRAND_CONSOLE@ has encountered a problem connecting to this server.</value>
   </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>The following virtual disks could not be deactivated:</value>
@@ -4765,7 +4765,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Error preparing host</value>
   </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
-    <value>XenCenter has encountered a problem launching PuTTY.</value>
+    <value>@BRANDING_BRAND_CONSOLE@ has encountered a problem launching PuTTY.</value>
   </data>
   <data name="ERROR_UNKNOWN" xml:space="preserve">
     <value>An unknown error occurred.</value>
@@ -5416,9 +5416,9 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Group Roles</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>This version of XenCenter is out of date and cannot connect to {0}.
+    <value>This version of @BRANDING_BRAND_CONSOLE@ is out of date and cannot connect to {0}.
 
-You can get a compatible version of XenCenter from the following location:</value>
+You can get a compatible version of @BRANDING_BRAND_CONSOLE@ from the following location:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>HA</value>
@@ -5711,7 +5711,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Review configuration and activate HA</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN" xml:space="preserve">
-    <value>Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
+    <value>Authentication with Citrix Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
     <value>Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
@@ -7021,7 +7021,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Start in Reco&amp;very Mode</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST" xml:space="preserve">
-    <value>Remo&amp;ve from XenCenter</value>
+    <value>Remo&amp;ve from @BRANDING_BRAND_CONSOLE@</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
     <value>Remove Crash &amp;Dump Files</value>
@@ -7389,7 +7389,7 @@ This action is final and unrecoverable.</value>
 {1}</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE" xml:space="preserve">
-    <value>XenCenter - Error</value>
+    <value>@BRANDING_BRAND_CONSOLE@ - Error</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL" xml:space="preserve">
     <value>Unable to reconnect to {0} . Server is unavailable.</value>
@@ -7593,12 +7593,12 @@ You can also assign IP addresses for dedicated storage or other types of network
     <value>Configure IP Addresses - {0}</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST" xml:space="preserve">
-    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then XenCenter may permanently lose the connection to the server.
+    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the server.
 
 You should only proceed if you have verified that these settings are correct.</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL" xml:space="preserve">
-    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then XenCenter may permanently lose the connection to the server, or pool members may be unable to contact each other.
+    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the server, or pool members may be unable to contact each other.
 
 You should only proceed if you have verified that these settings are correct.</value>
   </data>
@@ -7711,7 +7711,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Disk Created</value>
   </data>
   <data name="NEWER_GUI_AVAILABLE" xml:space="preserve">
-    <value>There is a newer version of XenCenter available. Please contact your support representative.</value>
+    <value>There is a newer version of @BRANDING_BRAND_CONSOLE@ available. Please contact your support representative.</value>
   </data>
   <data name="NEWNETWORKWIZARD_TITLE" xml:space="preserve">
     <value>New Network - {0}</value>
@@ -7931,7 +7931,7 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
 Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility.</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
-    <value>Warning: you must ensure that the following SR is not in use by any server not connected to XenCenter. Failure to do so may result in data loss.
+    <value>Warning: you must ensure that the following SR is not in use by any server not connected to @BRANDING_BRAND_CONSOLE@. Failure to do so may result in data loss.
 
 SR:  {0}
 
@@ -8544,7 +8544,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Space available: {0}</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
-    <value>XenCenter can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?</value>
+    <value>@BRANDING_BRAND_CONSOLE@ can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_INSTALL" xml:space="preserve">
     <value>There is not enough space on '{0}' to install update '{1}'.</value>
@@ -8720,7 +8720,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>(avg / max KBs)</value>
   </data>
   <data name="OVF_CREATED" xml:space="preserve">
-    <value>Created by XenCenter Disk Image Import</value>
+    <value>Created by @BRANDING_BRAND_CONSOLE@ Disk Image Import</value>
   </data>
   <data name="OVF_DISK_CAPTION" xml:space="preserve">
     <value>Virtual Disk</value>
@@ -8903,11 +8903,11 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Select the servers you wish to update</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
-    <value>XenCenter is now downloading your update and uploading it to the servers specified in the previous step.
+    <value>@BRANDING_BRAND_CONSOLE@ is now downloading your update and uploading it to the servers specified in the previous step.
 Please wait for these operations to complete, then click Next to continue with the installation.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD" xml:space="preserve">
-    <value>XenCenter is now uploading your update to the servers specified in the previous step.
+    <value>@BRANDING_BRAND_CONSOLE@ is now uploading your update to the servers specified in the previous step.
 Please wait for this operation to complete, then click Next to continue with the installation.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
@@ -9104,7 +9104,7 @@ Please reconnect the host and try again</value>
     <value>Plugins</value>
   </data>
   <data name="PLUGINS_DESC" xml:space="preserve">
-    <value>Adjust settings for plugins to XenCenter</value>
+    <value>Adjust settings for plugins to @BRANDING_BRAND_CONSOLE@</value>
   </data>
   <data name="PLUGINS_MENU_ITEMS_ONLY_ONE_CHILD_ALLOWED" xml:space="preserve">
     <value>Menu item features must only have a single command XML node as a child</value>
@@ -10020,7 +10020,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Servers, VMs, Custom Templates and Remote SRs</value>
   </data>
   <data name="SERVER_API_INCOMPATIBLE" xml:space="preserve">
-    <value>This server is using an API that is incompatible with XenCenter.</value>
+    <value>This server is using an API that is incompatible with @BRANDING_BRAND_CONSOLE@.</value>
   </data>
   <data name="SERVER_COLON" xml:space="preserve">
     <value>Server:</value>
@@ -10056,10 +10056,10 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The current time on the pool master is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of XenCenter supports XenServer 6.0 onwards.</value>
+    <value>This version of @BRANDING_BRAND_CONSOLE@ supports XenServer 6.0 onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
-    <value>Use an earlier version of XenCenter to manage this server.</value>
+    <value>Use an earlier version of @BRANDING_BRAND_CONSOLE@ to manage this server.</value>
   </data>
   <data name="SERVER_X" xml:space="preserve">
     <value>server '{0}'</value>
@@ -10336,7 +10336,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value />
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
-    <value>Some errors were encountered. See the XenCenter log for more information.</value>
+    <value>Some errors were encountered. See the @BRANDING_BRAND_CONSOLE@ log for more information.</value>
   </data>
   <data name="SPACED_HYPHEN" xml:space="preserve">
     <value> - </value>
@@ -10387,13 +10387,13 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>There is currently an action in progress on this SR.</value>
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be destroyed with XenCenter.</value>
+    <value>This SR cannot be destroyed with @BRANDING_BRAND_CONSOLE@.</value>
   </data>
   <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be detached with XenCenter.</value>
+    <value>This SR cannot be detached with @BRANDING_BRAND_CONSOLE@.</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be forgotten with XenCenter.</value>
+    <value>This SR cannot be forgotten with @BRANDING_BRAND_CONSOLE@.</value>
   </data>
   <data name="SR_CANNOT_BE_SEEN" xml:space="preserve">
     <value>This storage repository cannot be seen from {0}</value>
@@ -10959,12 +10959,12 @@ Refer to the "XenServer Administrator's Guide" for instructions on how to manual
     <value>Import a locally stored VM, template or snapshot as a new VM.</value>
   </data>
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
-    <value>XenCenter was unable to import a saved search from file '{0}'.
+    <value>@BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file '{0}'.
 
 Verify that the file is a valid xensearch export.</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
-    <value>XenCenter will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
+    <value>@BRANDING_BRAND_CONSOLE@ will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
   </data>
   <data name="UNINSTALL" xml:space="preserve">
     <value>Delete</value>
@@ -11006,7 +11006,7 @@ Verify that the file is a valid xensearch export.</value>
     <value>Updates</value>
   </data>
   <data name="UPDATES_DESC" xml:space="preserve">
-    <value>Automatically check for XenServer or XenCenter updates</value>
+    <value>Automatically check for XenServer or @BRANDING_BRAND_CONSOLE@ updates</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>For the update to take effect after application, the following action is required:
@@ -11472,7 +11472,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>^(http|https|file|ftp)://*</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
-    <value>XenCenter was unable to authorize the action as {0}. See the application log files for more information.</value>
+    <value>@BRANDING_BRAND_CONSOLE@ was unable to authorize the action as {0}. See the application log files for more information.</value>
   </data>
   <data name="USER_NOT_AUTHORIZED" xml:space="preserve">
     <value>The user you have entered is not authorized to complete this action</value>
@@ -11610,7 +11610,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Signature verification failed. {0}</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>XenCenter version {0} (build {1}.{2}) {3}-bit</value>
+    <value>@BRANDING_BRAND_CONSOLE@ version {0} (build {1}.{2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays)</value>
@@ -12745,13 +12745,13 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>Failed to run XenApplianceWizards executable. Please see the client log for details.</value>
   </data>
   <data name="XENCENTER" xml:space="preserve">
-    <value>XenCenter</value>
+    <value>@BRANDING_BRAND_CONSOLE@</value>
   </data>
   <data name="XENCENTER_CONFIG_FILTER" xml:space="preserve">
-    <value>XenCenter Settings|*.config</value>
+    <value>@BRANDING_BRAND_CONSOLE@ Settings|*.config</value>
   </data>
   <data name="XENCENTER_NEWER_AVAILABLE" xml:space="preserve">
-    <value>Newer XenCenter Available</value>
+    <value>Newer @BRANDING_BRAND_CONSOLE@ Available</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
     <value>Saved Searches</value>

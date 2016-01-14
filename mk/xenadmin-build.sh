@@ -110,7 +110,7 @@ SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
 $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
 
 #sign
-for file in XenCenter.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+for file in ${BRANDING_BRAND_CONSOLE}.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
 do
   cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${file}
 done
@@ -211,40 +211,40 @@ version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
 
 #create just english msi
-compile_installer "XenCenter" "en-us" && sign_msi "XenCenter"
+compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}"
 
 #then create l10n msi containing all resources
-compile_installer "XenCenter.l10n" "en-us" && sign_msi "XenCenter.l10n"
-compile_installer "XenCenter.l10n" "ja-jp" && sign_msi "XenCenter.l10n.ja-jp"
-compile_installer "XenCenter.l10n" "zh-cn" && sign_msi "XenCenter.l10n.zh-cn"
+compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n"
+compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.ja-jp"
+compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.zh-cn"
 
-cp ${WIX}/outXenCenter.l10n/XenCenter.l10n.msi \
-   ${WIX}/outXenCenter.l10n.ja-jp/XenCenter.l10n.ja-jp.msi \
-   ${WIX}/outXenCenter.l10n.zh-cn/XenCenter.l10n.zh-cn.msi \
+cp ${WIX}/outXenCenter.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
+   ${WIX}/outXenCenter.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
+   ${WIX}/outXenCenter.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
    ${WIX}
  
-cd ${WIX} && cp XenCenter.l10n.msi XenCenter.l10n.zh-tw.msi
-cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW XenCenter.l10n.zh-tw.msi
+cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
+cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
 
 #create localised mst files and then embed them into l10n msi
-cd ${WIX} && wscript msidiff.js XenCenter.l10n.msi XenCenter.l10n.ja-jp.msi ja-jp.mst
-cd ${WIX} && wscript msidiff.js XenCenter.l10n.msi XenCenter.l10n.zh-cn.msi zh-cn.mst
-cd ${WIX} && wscript msidiff.js XenCenter.l10n.msi XenCenter.l10n.zh-tw.msi zh-tw.mst
-cd ${WIX} && wscript WiSubStg.vbs XenCenter.l10n.msi ja-jp.mst 1041
-cd ${WIX} && wscript WiSubStg.vbs XenCenter.l10n.msi zh-cn.mst 2052
-cd ${WIX} && wscript WiSubStg.vbs XenCenter.l10n.msi zh-tw.mst 1028
+cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi ja-jp.mst
+cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi zh-cn.mst
+cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi zh-tw.mst
+cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi ja-jp.mst 1041
+cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-cn.mst 2052
+cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1028
 #sign again the combined msi because it seems the embedding breaks the signature
-cd ${WIX} && chmod a+rw XenCenter.l10n.msi && ${REPO}/sign.bat XenCenter.l10n.msi
+cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
 
 #create bundle exe installers - msi installers embedded
 DOTNETINST=${REPO}/dotNetInstaller
 cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
-cp ${WIX}/outXenCenter/XenCenter.msi ${DOTNETINST}
-cp ${WIX}/XenCenter.l10n.msi ${DOTNETINST}
+cp ${WIX}/outXenCenter/${BRANDING_BRAND_CONSOLE}.msi ${DOTNETINST}
+cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${DOTNETINST}
 
 cp "$(which dotNetInstaller.exe)" ${DOTNETINST}
-cd ${DOTNETINST} && InstallerLinker.exe "/Output:XenCenterSetup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
-cd ${DOTNETINST} && InstallerLinker.exe "/Output:XenCenterSetup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
+cd ${DOTNETINST} && InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
+cd ${DOTNETINST} && InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
 
 sign_files()
 {
@@ -253,7 +253,7 @@ sign_files()
 		chmod a+rw ${file} && ${REPO}/sign.bat ${file}
 	done
 }
-sign_files "XenCenterSetup.exe XenCenterSetup.l10n.exe"
+sign_files "${BRANDING_BRAND_CONSOLE}Setup.exe ${BRANDING_BRAND_CONSOLE}Setup.l10n.exe"
 
 #create VNCCntrol installer
 sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
@@ -280,11 +280,11 @@ cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 #collect output and extra files to the OUTPUT_DIR
 EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
 mkdir_clean ${EN_CD_DIR}
-cp ${DOTNETINST}/XenCenterSetup.exe ${EN_CD_DIR}
-cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/XenCenter.ico
+cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${EN_CD_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 L10N_CD_DIR=${OUTPUT_DIR}/client_install
 mkdir_clean ${L10N_CD_DIR}
-cp ${DOTNETINST}/XenCenterSetup.l10n.exe ${L10N_CD_DIR}
+cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_CD_DIR}
 
 cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
@@ -292,7 +292,7 @@ cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
 cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1006}.xsupdate \
    ${REPO}/XenAdmin/bin/Release/{XS60E001-src-pkgs,XS62E006-src-pkgs}.tar.gz \
-   ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,XenCenter.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
+   ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/VNCControl/bin/Release/VNCControl.pdb \
@@ -302,26 +302,26 @@ cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1
 echo "INFO:	Create English iso files"
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${EN_CD_DIR}/XenCenterSetup.exe ${ISO_DIR}/XenCenterSetup.exe
+install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
-cp ${EN_CD_DIR}/XenCenter.ico ${ISO_DIR}/XenCenter.ico
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.iso" "${ISO_DIR}"
+cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso" "${ISO_DIR}"
 
 echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${L10N_CD_DIR}/XenCenterSetup.l10n.exe ${L10N_ISO_DIR}/XenCenterSetup.exe
+install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
-cp ${EN_CD_DIR}/XenCenter.ico ${L10N_ISO_DIR}/XenCenter.ico
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.l10n.iso" "${L10N_ISO_DIR}"
+cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.iso" "${L10N_ISO_DIR}"
 
 # Create a tarball containing the XenCenter ISO, to be installed by the host installer
 # MAIN_PKG_DIR is our working directory, MAIN_PKG_ISO_SUBDIR is the pathname of the ISO
 # file within the tar file, and therefore the path it eventually installs into
 mkdir_clean ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso
-ln -sf ${OUTPUT_DIR}/XenCenter.iso ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso/XenCenter.iso
-tar -C ${OUTPUT_DIR}/PACKAGES.main -ch opt/xensource/packages/iso/XenCenter.iso | bzip2 > ${OUTPUT_DIR}/PACKAGES.main/XenCenter.iso.tar.bz2
+ln -sf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso
+tar -C ${OUTPUT_DIR}/PACKAGES.main -ch opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso | bzip2 > ${OUTPUT_DIR}/PACKAGES.main/${BRANDING_BRAND_CONSOLE}.iso.tar.bz2
 rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
 
 #bring in the pdbs from dotnet-packages latest build

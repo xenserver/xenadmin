@@ -283,7 +283,7 @@
     <value>0</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>输入有助于以后识别虚拟机的名称。此名称可以描述其软件和硬件，例如 RHEL DHCP Server、Win2K3 XenApp Server 或 Exchange 2007 Client Access Server。此名称还将显示在 XenCenter 的资源窗格中，以后可以更改。
+    <value>输入有助于以后识别虚拟机的名称。此名称可以描述其软件和硬件，例如 RHEL DHCP Server、Win2K3 XenApp Server 或 Exchange 2007 Client Access Server。此名称还将显示在 @BRANDING_BRAND_CONSOLE@ 的资源窗格中，以后可以更改。
 
 如果愿意，还可以添加更加详细的 VM 说明。</value>
   </data>

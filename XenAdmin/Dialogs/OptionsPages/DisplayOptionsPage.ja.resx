@@ -319,7 +319,7 @@
     <value>1</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>XenCenter の [パフォーマンス] タブに表示するグラフの種類を選択できます。</value>
+    <value>@BRANDING_BRAND_CONSOLE@ の [パフォーマンス] タブに表示するグラフの種類を選択できます。</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>

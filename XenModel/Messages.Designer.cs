@@ -2329,7 +2329,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report (with errors). Only XenCenter logs were compiled..
+        ///   Looks up a localized string similar to Finished compiling status report (with errors). Only @BRANDING_BRAND_CONSOLE@ logs were compiled..
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS {
             get {
@@ -3247,7 +3247,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter is unable to contact the activation server.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ is unable to contact the activation server.
         ///
         ///If you are not currently connected to the internet, we can save
         ///the activation request to a file, for you to upload at a later date.
@@ -3617,7 +3617,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please wait while XenCenter establishes your current external authentication configuration..
+        ///   Looks up a localized string similar to Please wait while @BRANDING_BRAND_CONSOLE@ establishes your current external authentication configuration..
         /// </summary>
         public static string AD_MASTER_UNAVAILABLE_BLURB {
             get {
@@ -4190,7 +4190,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed..
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed..
         /// </summary>
         public static string ADDSERVER_PASS_NEW {
             get {
@@ -4598,7 +4598,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New XenCenter Available.
+        ///   Looks up a localized string similar to New @BRANDING_BRAND_CONSOLE@ Available.
         /// </summary>
         public static string ALERT_NEW_VERSION {
             get {
@@ -4771,7 +4771,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The SR &apos;{0}&apos; is currently attached elsewhere. Do you want to attach it to &apos;{1}&apos;? 
         ///
-        ///Warning: you must ensure that the SR is not in use by any server not connected to XenCenter. Failure to do so may result in data loss..
+        ///Warning: you must ensure that the SR is not in use by any server not connected to @BRANDING_BRAND_CONSOLE@. Failure to do so may result in data loss..
         /// </summary>
         public static string ALREADY_ATTACHED_ELSEWHERE {
             get {
@@ -5608,9 +5608,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Creating this bond will automatically move the management interface on one of your selected bond members to the bond itself:
         ///
-        ///- XenCenter connections to the pool will temporarily be disturbed
+        ///- @BRANDING_BRAND_CONSOLE@ connections to the pool will temporarily be disturbed
         ///
-        ///- If your network configuration is incorrect then XenCenter may permanently lose the connection to the pool, or pool members may be unable to contact each other..
+        ///- If your network configuration is incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the pool, or pool members may be unable to contact each other..
         /// </summary>
         public static string BOND_CREATE_WILL_DISTURB_PRIMARY {
             get {
@@ -5654,11 +5654,11 @@ namespace XenAdmin {
         ///
         ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
         ///
-        ///- XenCenter connections to the pool will temporarily be disturbed
+        ///- @BRANDING_BRAND_CONSOLE@ connections to the pool will temporarily be disturbed
         ///
         ///- Traffic through the secondary interface will be disrupted
         ///
-        ///- If your network configuration is incorrect then XenCenter may permanently lose the connection to the pool, or pool members may be unable to contact each other..
+        ///- If your network configuration is incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the pool, or pool members may be unable to contact each other..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_BOTH {
             get {
@@ -5671,9 +5671,9 @@ namespace XenAdmin {
         ///
         ///Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
         ///
-        ///- XenCenter connections to the pool will temporarily be disturbed
+        ///- @BRANDING_BRAND_CONSOLE@ connections to the pool will temporarily be disturbed
         ///
-        ///- If your network configuration is incorrect then XenCenter may permanently lose the connection to the pool, or pool members may be unable to contact each other..
+        ///- If your network configuration is incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the pool, or pool members may be unable to contact each other..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_PRIMARY {
             get {
@@ -5738,7 +5738,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Tools ISO is on a broken SR, XenCenter will attempt to fix it before proceeding. Do you wish to continue?.
+        ///   Looks up a localized string similar to Your Tools ISO is on a broken SR, @BRANDING_BRAND_CONSOLE@ will attempt to fix it before proceeding. Do you wish to continue?.
         /// </summary>
         public static string BROKEN_TOOLS_PROMPT {
             get {
@@ -6343,7 +6343,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot configure an SR of type &apos;{0}&apos; using XenCenter..
+        ///   Looks up a localized string similar to You cannot configure an SR of type &apos;{0}&apos; using @BRANDING_BRAND_CONSOLE@..
         /// </summary>
         public static string CANNOT_FIND_SR_WIZARD_TYPE {
             get {
@@ -6562,7 +6562,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed XenCenter master password.
+        ///   Looks up a localized string similar to Changed @BRANDING_BRAND_CONSOLE@ master password.
         /// </summary>
         public static string CHANGED_MASTER_PASSWORD {
             get {
@@ -6571,7 +6571,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed XenCenter master password for session restore.
+        ///   Looks up a localized string similar to Changed @BRANDING_BRAND_CONSOLE@ master password for session restore.
         /// </summary>
         public static string CHANGED_MASTER_PASSWORD_LONG {
             get {
@@ -7451,7 +7451,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on the selected servers? Note that XenCenter will temporarily lose connection to them..
+        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on the selected servers? Note that @BRANDING_BRAND_CONSOLE@ will temporarily lose connection to them..
         /// </summary>
         public static string CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS {
             get {
@@ -7460,7 +7460,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on &apos;{0}&apos;? Note that XenCenter will temporarily lose connection to the server..
+        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on &apos;{0}&apos;? Note that @BRANDING_BRAND_CONSOLE@ will temporarily lose connection to the server..
         /// </summary>
         public static string CONFIRM_RESTART_TOOLSTACK_ONE_SERVER {
             get {
@@ -10414,7 +10414,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter has detected that an SR already exists on this LUN. This SR is not currently in use by &apos;{0}&apos;,  would you like to attach it?.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ has detected that an SR already exists on this LUN. This SR is not currently in use by &apos;{0}&apos;,  would you like to attach it?.
         /// </summary>
         public static string DETACHED_ISCI_DETECTED {
             get {
@@ -12929,7 +12929,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To access your saved session it is required that you enter the master password when starting XenCenter.
+        ///   Looks up a localized string similar to To access your saved session it is required that you enter the master password when starting @BRANDING_BRAND_CONSOLE@.
         /// </summary>
         public static string ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT {
             get {
@@ -13010,7 +13010,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter has encountered a problem connecting to this server..
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ has encountered a problem connecting to this server..
         /// </summary>
         public static string ERROR_CONNECTING_BLURB {
             get {
@@ -13523,7 +13523,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter has encountered a problem launching PuTTY..
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ has encountered a problem launching PuTTY..
         /// </summary>
         public static string ERROR_PUTTY_LAUNCHING {
             get {
@@ -15461,9 +15461,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of XenCenter is out of date and cannot connect to {0}.
+        ///   Looks up a localized string similar to This version of @BRANDING_BRAND_CONSOLE@ is out of date and cannot connect to {0}.
         ///
-        ///You can get a compatible version of XenCenter from the following location:.
+        ///You can get a compatible version of @BRANDING_BRAND_CONSOLE@ from the following location:.
         /// </summary>
         public static string GUI_OUT_OF_DATE {
             get {
@@ -16302,7 +16302,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. XenCenter detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
+        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
             get {
@@ -20154,7 +20154,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remo&amp;ve from XenCenter.
+        ///   Looks up a localized string similar to Remo&amp;ve from @BRANDING_BRAND_CONSOLE@.
         /// </summary>
         public static string MAINWINDOW_REMOVE_HOST {
             get {
@@ -21209,7 +21209,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter - Error.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ - Error.
         /// </summary>
         public static string MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE {
             get {
@@ -22025,7 +22025,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then XenCenter may permanently lose the connection to the server.
+        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the server.
         ///
         ///You should only proceed if you have verified that these settings are correct..
         /// </summary>
@@ -22036,7 +22036,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then XenCenter may permanently lose the connection to the server, or pool members may be unable to contact each other.
+        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then @BRANDING_BRAND_CONSOLE@ may permanently lose the connection to the server, or pool members may be unable to contact each other.
         ///
         ///You should only proceed if you have verified that these settings are correct..
         /// </summary>
@@ -22529,7 +22529,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is a newer version of XenCenter available. Please contact your support representative..
+        ///   Looks up a localized string similar to There is a newer version of @BRANDING_BRAND_CONSOLE@ available. Please contact your support representative..
         /// </summary>
         public static string NEWER_GUI_AVAILABLE {
             get {
@@ -23157,7 +23157,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning: you must ensure that the following SR is not in use by any server not connected to XenCenter. Failure to do so may result in data loss.
+        ///   Looks up a localized string similar to Warning: you must ensure that the following SR is not in use by any server not connected to @BRANDING_BRAND_CONSOLE@. Failure to do so may result in data loss.
         ///
         ///SR:  {0}
         ///
@@ -24551,7 +24551,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_CLEANUP {
             get {
@@ -25009,7 +25009,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created by XenCenter Disk Image Import.
+        ///   Looks up a localized string similar to Created by @BRANDING_BRAND_CONSOLE@ Disk Image Import.
         /// </summary>
         public static string OVF_CREATED {
             get {
@@ -25752,7 +25752,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter is now downloading your update and uploading it to the servers specified in the previous step.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ is now downloading your update and uploading it to the servers specified in the previous step.
         ///Please wait for these operations to complete, then click Next to continue with the installation..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD {
@@ -25762,7 +25762,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter is now uploading your update to the servers specified in the previous step.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ is now uploading your update to the servers specified in the previous step.
         ///Please wait for this operation to complete, then click Next to continue with the installation..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD {
@@ -26206,7 +26206,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adjust settings for plugins to XenCenter.
+        ///   Looks up a localized string similar to Adjust settings for plugins to @BRANDING_BRAND_CONSOLE@.
         /// </summary>
         public static string PLUGINS_DESC {
             get {
@@ -28748,7 +28748,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is using an API that is incompatible with XenCenter..
+        ///   Looks up a localized string similar to This server is using an API that is incompatible with @BRANDING_BRAND_CONSOLE@..
         /// </summary>
         public static string SERVER_API_INCOMPATIBLE {
             get {
@@ -28856,7 +28856,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of XenCenter supports XenServer 6.0 onwards..
+        ///   Looks up a localized string similar to This version of @BRANDING_BRAND_CONSOLE@ supports XenServer 6.0 onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -28865,7 +28865,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use an earlier version of XenCenter to manage this server..
+        ///   Looks up a localized string similar to Use an earlier version of @BRANDING_BRAND_CONSOLE@ to manage this server..
         /// </summary>
         public static string SERVER_TOO_OLD_SOLUTION {
             get {
@@ -29730,7 +29730,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some errors were encountered. See the XenCenter log for more information..
+        ///   Looks up a localized string similar to Some errors were encountered. See the @BRANDING_BRAND_CONSOLE@ log for more information..
         /// </summary>
         public static string SOME_ERRORS_ENCOUNTERED {
             get {
@@ -29775,7 +29775,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be destroyed with XenCenter..
+        ///   Looks up a localized string similar to This SR cannot be destroyed with @BRANDING_BRAND_CONSOLE@..
         /// </summary>
         public static string SR_CANNOT_BE_DESTROYED_WITH_XC {
             get {
@@ -29784,7 +29784,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be detached with XenCenter..
+        ///   Looks up a localized string similar to This SR cannot be detached with @BRANDING_BRAND_CONSOLE@..
         /// </summary>
         public static string SR_CANNOT_BE_DETACHED_WITH_XC {
             get {
@@ -29793,7 +29793,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be forgotten with XenCenter..
+        ///   Looks up a localized string similar to This SR cannot be forgotten with @BRANDING_BRAND_CONSOLE@..
         /// </summary>
         public static string SR_CANNOT_BE_FORGOTTEN_WITH_XC {
             get {
@@ -31589,7 +31589,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter was unable to import a saved search from file &apos;{0}&apos;.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file &apos;{0}&apos;.
         ///
         ///Verify that the file is a valid xensearch export..
         /// </summary>
@@ -31600,7 +31600,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter will uncompress the file to &apos;{0}&apos;. After uncompression the original file &apos;{1}&apos; will be deleted. Continue?.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ will uncompress the file to &apos;{0}&apos;. After uncompression the original file &apos;{1}&apos; will be deleted. Continue?.
         /// </summary>
         public static string UNCOMPRESS_APPLIANCE_DESCRIPTION {
             get {
@@ -31822,7 +31822,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically check for XenServer or XenCenter updates.
+        ///   Looks up a localized string similar to Automatically check for XenServer or @BRANDING_BRAND_CONSOLE@ updates.
         /// </summary>
         public static string UPDATES_DESC {
             get {
@@ -33050,7 +33050,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter was unable to authorize the action as {0}. See the application log files for more information..
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ was unable to authorize the action as {0}. See the application log files for more information..
         /// </summary>
         public static string USER_AUTHORIZATION_FAILED {
             get {
@@ -33464,7 +33464,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter version {0} (build {1}.{2}) {3}-bit.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ version {0} (build {1}.{2}) {3}-bit.
         /// </summary>
         public static string VERSION_NUMBER {
             get {
@@ -36873,7 +36873,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@.
         /// </summary>
         public static string XENCENTER {
             get {
@@ -36882,7 +36882,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter Settings|*.config.
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ Settings|*.config.
         /// </summary>
         public static string XENCENTER_CONFIG_FILTER {
             get {
@@ -36891,7 +36891,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Newer XenCenter Available.
+        ///   Looks up a localized string similar to Newer @BRANDING_BRAND_CONSOLE@ Available.
         /// </summary>
         public static string XENCENTER_NEWER_AVAILABLE {
             get {
