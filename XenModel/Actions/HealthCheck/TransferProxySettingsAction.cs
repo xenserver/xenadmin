@@ -88,9 +88,16 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
-            if (sc.Status != ServiceControllerStatus.Running)
+            try
+            {
+                ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
+                if (sc.Status != ServiceControllerStatus.Running)
+                    return;
+            }
+            catch
+            {
                 return;
+            }
 
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             int retryCount = 120;
