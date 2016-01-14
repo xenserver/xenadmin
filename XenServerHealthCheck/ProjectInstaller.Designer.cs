@@ -33,8 +33,8 @@
             // 
             // XenServerHealthCheckInstaller
             // 
-            this.XenServerHealthCheckInstaller.Description = "Citrix XenServer Health Check";
-            this.XenServerHealthCheckInstaller.DisplayName = "Citrix XenServer Health Check";
+            this.XenServerHealthCheckInstaller.Description = "Citrix " + Branding.PRODUCT_BRAND + " Health Check";
+            this.XenServerHealthCheckInstaller.DisplayName = "Citrix " + Branding.PRODUCT_BRAND + " Health Check";
             this.XenServerHealthCheckInstaller.ServiceName = "XenServerHealthCheck";
             this.XenServerHealthCheckInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             this.XenServerHealthCheckInstaller.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.XenServerHealthCheckInstaller_AfterInstall);
