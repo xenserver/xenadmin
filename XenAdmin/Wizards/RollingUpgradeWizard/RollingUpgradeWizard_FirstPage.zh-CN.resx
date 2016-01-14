@@ -199,7 +199,7 @@
     <value>11</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>可以使用此向导将服务器从 Citrix XenServer 5.6 或更高版本升级到 XenServer 的当前版本。运行更早版本 XenServer 的服务器需要逐个升级到每个中间版本，直至升级到 5.6 版本；然后，即可执行池滚动升级，将这些服务器全部升级到当前 XenServer 版本。</value>
+    <value>可以使用此向导将服务器从 Citrix @BRANDING_SERVER@ 5.6 或更高版本升级到 @BRANDING_SERVER@ 的当前版本。运行更早版本 @BRANDING_SERVER@ 的服务器需要逐个升级到每个中间版本，直至升级到 5.6 版本；然后，即可执行池滚动升级，将这些服务器全部升级到当前 @BRANDING_SERVER@ 版本。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

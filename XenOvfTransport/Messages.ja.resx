@@ -187,7 +187,7 @@
     <value>iSCSI 経由での仮想ディスクのインポートに失敗しました。</value>
   </data>
   <data name="ERROR_NOT_CONNECTED" xml:space="preserve">
-    <value>XenServer から切断されました。</value>
+    <value>@BRANDING_SERVER@ から切断されました。</value>
   </data>
   <data name="ERROR_NO_PASSWORD" xml:space="preserve">
     <value>OVF パッケージを暗号解除するためのパスワードが指定されませんでした。</value>
@@ -277,7 +277,7 @@
     <value>{0} を展開しています... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>XenServer の仮想マシンを構成しています... </value>
+    <value>@BRANDING_SERVER@ の仮想マシンを構成しています... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>インポート済み。</value>

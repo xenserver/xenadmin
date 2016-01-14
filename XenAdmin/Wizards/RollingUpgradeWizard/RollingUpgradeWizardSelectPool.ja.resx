@@ -186,7 +186,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnVersion.HeaderText" xml:space="preserve">
-    <value>XenServer バージョン</value>
+    <value>@BRANDING_SERVER@ バージョン</value>
   </data>
   <data name="ColumnVersion.MinimumWidth" type="System.Int32, mscorlib">
     <value>130</value>
@@ -230,7 +230,7 @@
   <data name="label1.Text" xml:space="preserve">
     <value>アップグレードするリソース プールまたはスタンドアロン サーバーを選択して、[次へ] をクリックします。
 
-注: このウィザードでは、XenServer Version 5.5 およびそれ以前のバージョンをアップグレードすることはできません。</value>
+注: このウィザードでは、@BRANDING_SERVER@ Version 5.5 およびそれ以前のバージョンをアップグレードすることはできません。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

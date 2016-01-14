@@ -682,7 +682,7 @@
     <value>13</value>
   </data>
   <data name="labelNetwork.Text" xml:space="preserve">
-    <value>与其他 XenServer 用户联网</value>
+    <value>与其他 @BRANDING_SERVER@ 用户联网</value>
   </data>
   <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
     <value>labelNetwork</value>

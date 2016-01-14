@@ -232,7 +232,7 @@
     <value>0</value>
   </data>
   <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
-    <value>检查新版本 XenServer(&amp;S)</value>
+    <value>检查新版本 @BRANDING_SERVER@(&amp;S)</value>
   </data>
   <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerUpdatesCheckBox</value>
@@ -268,7 +268,7 @@
     <value>1</value>
   </data>
   <data name="AllowXenServerPatchesCheckBox.Text" xml:space="preserve">
-    <value>检查 XenServer 更新(&amp;U)</value>
+    <value>检查 @BRANDING_SERVER@ 更新(&amp;U)</value>
   </data>
   <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerPatchesCheckBox</value>
@@ -301,7 +301,7 @@
     <value>1</value>
   </data>
   <data name="XenServerGroupBox.Text" xml:space="preserve">
-    <value>自动检查 XenServer 更新和新版本</value>
+    <value>自动检查 @BRANDING_SERVER@ 更新和新版本</value>
   </data>
   <data name="&gt;&gt;XenServerGroupBox.Name" xml:space="preserve">
     <value>XenServerGroupBox</value>
@@ -337,7 +337,7 @@
     <value>3</value>
   </data>
   <data name="UpdatesBlurb.Text" xml:space="preserve">
-    <value>可以将 @BRANDING_BRAND_CONSOLE@ 配置为定期检查可用更新，并在找到可供下载的更新或新 XenServer 版本时提示您。</value>
+    <value>可以将 @BRANDING_BRAND_CONSOLE@ 配置为定期检查可用更新，并在找到可供下载的更新或新 @BRANDING_SERVER@ 版本时提示您。</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
     <value>UpdatesBlurb</value>

@@ -268,7 +268,7 @@
     <value>1</value>
   </data>
   <data name="AllowXenServerPatchesCheckBox.Text" xml:space="preserve">
-    <value>Check for XenServer &amp;updates</value>
+    <value>Check for @BRANDING_SERVER@ &amp;updates</value>
   </data>
   <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerPatchesCheckBox</value>
@@ -301,7 +301,7 @@
     <value>1</value>
   </data>
   <data name="XenServerGroupBox.Text" xml:space="preserve">
-    <value>Automatically check for XenServer updates and new versions</value>
+    <value>Automatically check for @BRANDING_SERVER@ updates and new versions</value>
   </data>
   <data name="&gt;&gt;XenServerGroupBox.Name" xml:space="preserve">
     <value>XenServerGroupBox</value>
@@ -337,7 +337,7 @@
     <value>3</value>
   </data>
   <data name="UpdatesBlurb.Text" xml:space="preserve">
-    <value>You can configure @BRANDING_BRAND_CONSOLE@ to periodically check for available updates and prompt you when an update or new XenServer version is available for download.</value>
+    <value>You can configure @BRANDING_BRAND_CONSOLE@ to periodically check for available updates and prompt you when an update or new @BRANDING_SERVER@ version is available for download.</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
     <value>UpdatesBlurb</value>

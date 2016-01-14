@@ -718,7 +718,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>These settings allow you  to configure a proxy server or to customize your XenServer connections for high latency environments.</value>
+    <value>These settings allow you  to configure a proxy server or to customize your @BRANDING_SERVER@ connections for high latency environments.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

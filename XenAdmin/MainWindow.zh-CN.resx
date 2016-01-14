@@ -1642,7 +1642,7 @@
     <value>186, 22</value>
   </data>
   <data name="templatesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>XenServer 模板(&amp;X)</value>
+    <value>@BRANDING_SERVER@ 模板(&amp;X)</value>
   </data>
   <data name="localStorageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>

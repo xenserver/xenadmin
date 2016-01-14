@@ -175,7 +175,7 @@
     <value>3</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Citrix、Citrix XenServer、Xen、Xen 徽标、@BRANDING_BRAND_CONSOLE@、XenMotion 是 Citrix Systems, Inc. 在美国及其他国家/地区的商标和/或注册商标。</value>
+    <value>Citrix、Citrix @BRANDING_SERVER@、Xen、Xen 徽标、@BRANDING_BRAND_CONSOLE@、XenMotion 是 Citrix Systems, Inc. 在美国及其他国家/地区的商标和/或注册商标。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

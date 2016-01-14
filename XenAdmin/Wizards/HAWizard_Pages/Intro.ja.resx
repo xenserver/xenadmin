@@ -136,7 +136,7 @@
     <value>3</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>このウィザードでは、XenServer リソース プールの高可用性を設定します。
+    <value>このウィザードでは、@BRANDING_SERVER@ リソース プールの高可用性を設定します。
 
 まず、プール内のすべてのサーバーおよび VM が以下の条件を満たしていることを確認してください。
 
