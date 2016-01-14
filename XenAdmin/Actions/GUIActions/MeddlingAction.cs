@@ -50,6 +50,10 @@ namespace XenAdmin.Actions.GUIActions
             : base(task.MeddlingActionTitle ?? task.Title, task.Description, false, false)
         {
             RelatedTask = new XenRef<Task>(task.opaque_ref);
+
+            if (task.resident_on != null)
+                this.Host = task.Connection.Resolve(task.resident_on);
+
             Started = (task.created + task.Connection.ServerTimeOffset).ToLocalTime();
             SetAppliesToData(task);
             VM = VMFromAppliesTo(task);
