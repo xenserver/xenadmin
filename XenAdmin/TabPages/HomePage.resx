@@ -496,7 +496,7 @@
     <value>7</value>
   </data>
   <data name="heading.Text" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="heading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>

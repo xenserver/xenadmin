@@ -544,19 +544,19 @@
     <value>License</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>XenServer Advanced Edition</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>XenServer Enterprise Edition</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>XenServer for XenDesktop</value>
+    <value>@BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>XenServer</value>
+    <value>@BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>XenServer Platinum Edition</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -601,58 +601,58 @@
     <value>Pool members</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>Citrix XenServer Dell Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>Citrix XenServer HP Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for XenServer</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>Citrix Essentials for XenServer</value>
+    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer Dell Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>Citrix XenServer Dell Express Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>Citrix XenServer Dell Server Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer HP Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>Citrix XenServer HP Select Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>Citrix XenServer HP Server Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>Citrix XenServer Express Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>Citrix XenServer Server Edition</value>
+    <value>Citrix @BRANDING_PRODUCT_BRAND@ Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>XenServer build number</value>
@@ -1095,7 +1095,7 @@
     <value>There was a temporary failure synchronizing performance statistics across the pool, probably because one or more servers were offline.  Another synchronization attempt will be made later.</value>
   </data>
   <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
-    <value>The license on server '{0}' has expired or been changed, and no longer supports XenServer Enterprise features.</value>
+    <value>The license on server '{0}' has expired or been changed, and no longer supports @BRANDING_PRODUCT_BRAND@ Enterprise features.</value>
   </data>
   <data name="Message.body-license_expired" xml:space="preserve">
     <value>The license for {0} has expired.</value>
@@ -1194,7 +1194,7 @@
     <value>Backup succeeded</value>
   </data>
   <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>The XenServer license you are using does not allow you to use the VMPR feature. VMPR is available in Citrix XenServer Advanced Edition or higher.</value>
+    <value>The @BRANDING_PRODUCT_BRAND@ license you are using does not allow you to use the VMPR feature. VMPR is available in Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher.</value>
   </data>
   <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
     <value>The snapshot is already archived.</value>
@@ -1539,7 +1539,7 @@
     <value>Local storage on {0}</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>XenServer Tools ISOs</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools ISOs</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1566,7 +1566,7 @@
     <value>Local storage on {0}</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>XenServer Tools</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>This template can be used to create a Linux VM with a built-in Linux distro for testing and demonstration purposes. It is not recommended for production use.</value>
@@ -1632,10 +1632,10 @@
     <value>Potential Reclaimed Memory</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>XenServer Per-Socket</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>XenServer for XenDesktop</value>
+    <value>@BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>Help on AD</value>
@@ -1680,7 +1680,7 @@
     <value>{0} {1} Memory Utilization</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>XenServer</value>
+    <value>@BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>Cannot reclaim freed space because the SR is already busy</value>
@@ -1710,13 +1710,13 @@
     <value>The license server is an out-of-date version.</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>XenServer Enterprise Per-Socket</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Enterprise Per-Socket</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>XenServer Enterprise Per-User</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Enterprise Per-User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>XenServer Standard Per-Socket</value>
+    <value>@BRANDING_PRODUCT_BRAND@ Standard Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
     <value>XenDesktop Platinum</value>

@@ -403,7 +403,7 @@
     <value>スケジュールによるディスクとメモリのスナップショットは、この保護ポリシーの対象 VM が以下のすべての条件を満たす場合のみ作成されます。
 
 1. スケジュールされた時間に VM が実行中である。
-2. VM に XenServer Tools がインストールされている。
+2. VM に @BRANDING_PRODUCT_BRAND@ Tools がインストールされている。
 3. VM に専用の GPU が割り当てられていない。</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
