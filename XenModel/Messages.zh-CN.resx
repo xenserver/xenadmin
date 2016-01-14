@@ -1537,7 +1537,7 @@
     <value>新 @BRANDING_BRAND_CONSOLE@ 可用</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
-    <value>{0} 现在可用。可从 Citrix 网站下载新版本。</value>
+    <value>{0} 现在可用。可从 @BRANDING_COMPANY_NAME_SHORT@ 网站下载新版本。</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>转至 Web 页面</value>
@@ -2679,9 +2679,9 @@
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>与服务器 {0} 的连接受到限制 - 已经与 Citrix @BRANDING_PRODUCT_BRAND@ Express Edition 服务器({1})建立连接。
+    <value>与服务器 {0} 的连接受到限制 - 已经与 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition 服务器({1})建立连接。
 
-一次只能连接一个 Citrix @BRANDING_PRODUCT_BRAND@ Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
+一次只能连接一个 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>由于许可证限制，无法连接 {0}</value>
@@ -3745,7 +3745,7 @@
     <value>下载...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} 现在可用。请在 Citrix 网站下载最新版本。</value>
+    <value>{0} 现在可用。请在 @BRANDING_COMPANY_NAME_SHORT@ 网站下载最新版本。</value>
   </data>
   <data name="DRAC_NO_SUPP_PACK" xml:space="preserve">
     <value>未安装 Dell 补充软件包。</value>
@@ -7834,7 +7834,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>CentOS</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
-    <value>Citrix</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CUSTOM" xml:space="preserve">
     <value>自定义</value>
@@ -8511,7 +8511,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>权限遭拒</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Per-Socket(&amp;S)(需要 {0} 个)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket(&amp;S)(需要 {0} 个)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理设备</value>

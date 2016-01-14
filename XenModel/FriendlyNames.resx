@@ -151,7 +151,7 @@
     <value>Always try to restart VM</value>
   </data>
   <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>The configuration settings of Citrix Storagelink</value>
+    <value>The configuration settings of @BRANDING_COMPANY_NAME_SHORT@ Storagelink</value>
   </data>
   <data name="Description-host.system_status-X11" xml:space="preserve">
     <value>Log files from the X server</value>
@@ -601,58 +601,58 @@
     <value>Pool members</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Express Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Server Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>@BRANDING_SERVER@ build number</value>
@@ -664,7 +664,7 @@
     <value>@BRANDING_SERVER@ version</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>Citrix StorageLink configuration</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ StorageLink configuration</value>
   </data>
   <data name="Label-host.system_status-X11" xml:space="preserve">
     <value>X server logs</value>
@@ -1194,7 +1194,7 @@
     <value>Backup succeeded</value>
   </data>
   <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>The @BRANDING_PRODUCT_BRAND@ license you are using does not allow you to use the VMPR feature. VMPR is available in Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher.</value>
+    <value>The @BRANDING_PRODUCT_BRAND@ license you are using does not allow you to use the VMPR feature. VMPR is available in @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher.</value>
   </data>
   <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
     <value>The snapshot is already archived.</value>

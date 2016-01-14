@@ -304,7 +304,7 @@
     <value>1</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>Download update from &amp;Citrix</value>
+    <value>Download update from &amp;@BRANDING_COMPANY_NAME_SHORT@</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>
@@ -337,7 +337,7 @@
     <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Select an update that you wish to download from Citrix, or an update or supplemental pack that you have already downloaded to your local disk.
+    <value>Select an update that you wish to download from @BRANDING_COMPANY_NAME_SHORT@, or an update or supplemental pack that you have already downloaded to your local disk.
 </value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">

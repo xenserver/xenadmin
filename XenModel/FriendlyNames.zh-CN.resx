@@ -151,7 +151,7 @@
     <value>始终尝试重新启动 VM</value>
   </data>
   <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>Citrix Storagelink 的配置设置</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Storagelink 的配置设置</value>
   </data>
   <data name="Description-host.system_status-X11" xml:space="preserve">
     <value>来自 X 服务器的日志文件</value>
@@ -541,19 +541,19 @@
     <value>版本</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Platinum Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>已启用</value>
@@ -598,58 +598,58 @@
     <value>池成员</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>Citrix Essentials for @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Express Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Server Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>@BRANDING_SERVER@ 内部版本号</value>
@@ -661,7 +661,7 @@
     <value>@BRANDING_SERVER@ 版本</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>Citrix StorageLink 配置</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ StorageLink 配置</value>
   </data>
   <data name="Label-host.system_status-X11" xml:space="preserve">
     <value>X 服务器日志</value>
@@ -1191,7 +1191,7 @@
     <value>备份成功</value>
   </data>
   <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>您使用的 @BRANDING_PRODUCT_BRAND@ 许可证不允许您使用 VMPR 功能。VMPR 在 Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition 或更高版本中可用。</value>
+    <value>您使用的 @BRANDING_PRODUCT_BRAND@ 许可证不允许您使用 VMPR 功能。VMPR 在 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition 或更高版本中可用。</value>
   </data>
   <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
     <value>已存档快照。</value>
@@ -1629,10 +1629,10 @@
     <value>潜在回收的内存</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Per-Socket Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>有关 AD 的帮助</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} 内存利用率</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>无法回收释放的空间，因为 SR 正忙</value>
@@ -1707,16 +1707,16 @@
     <value>许可证服务器版本已过时。</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Per Socket Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Per Socket Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Per User Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Per User Edition</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Standard Per Socket Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Standard Per Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>Citrix XenDesktop Platinum</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>有关许可的帮助</value>
@@ -1737,9 +1737,9 @@
     <value>有关许可的帮助</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Desktop Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Desktop Edition</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Desktop+ Edition</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Desktop+ Edition</value>
   </data>
 </root>

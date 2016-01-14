@@ -1537,7 +1537,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>新しい @BRANDING_BRAND_CONSOLE@ が使用可能</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
-    <value>{0} がリリースされています。Citrix Web サイトから新しいバージョンをダウンロードできます。</value>
+    <value>{0} がリリースされています。@BRANDING_COMPANY_NAME_SHORT@ Web サイトから新しいバージョンをダウンロードできます。</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Web ページを開く</value>
@@ -2679,9 +2679,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Express Edition サーバー ({1}) に接続済みであるため、サーバー {0} への接続は制限されます。
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition サーバー ({1}) に接続済みであるため、サーバー {0} への接続は制限されます。
 
-同時に複数の Citrix @BRANDING_PRODUCT_BRAND@ Express Edition サーバーに接続することはできません。ライセンスのアップグレードについては、下のリンクを参照してください。</value>
+同時に複数の @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition サーバーに接続することはできません。ライセンスのアップグレードについては、下のリンクを参照してください。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>ライセンスによる制限のため、{0} に接続できません</value>
@@ -3746,7 +3746,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>ダウンロード...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} がリリースされています。Citrix Web サイトから最新バージョンをダウンロードできます。</value>
+    <value>{0} がリリースされています。@BRANDING_COMPANY_NAME_SHORT@ Web サイトから最新バージョンをダウンロードできます。</value>
   </data>
   <data name="DRAC_NO_SUPP_PACK" xml:space="preserve">
     <value>Dell サプリメンタル パックがインストールされていません。</value>
@@ -7832,7 +7832,7 @@ NFS ストレージ リポジトリを設定する場合は、NFS サーバー�
     <value>CentOS</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
-    <value>Citrix</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CUSTOM" xml:space="preserve">
     <value>カスタム</value>
@@ -8509,7 +8509,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>権限が拒否されました</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Per-Socket ({0} ソケット分必要)(&amp;S)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket ({0} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理デバイス</value>

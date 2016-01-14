@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("xe")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Citrix")]
+[assembly: AssemblyCompany("@BRANDING_COMPANY_NAME_SHORT@")]
 [assembly: AssemblyProduct("xe")]
 [assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
 [assembly: AssemblyTrademark("")]

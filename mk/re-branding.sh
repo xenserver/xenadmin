@@ -150,6 +150,7 @@ rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
 rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
 rebranding_global ${REPO}/WixInstaller/XenCenter.l10n.diff
 rebranding_global ${REPO}/WixInstaller/XenCenter.wxs
+rebranding_global ${REPO}/WixInstaller/vnccontrol.wxs
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml

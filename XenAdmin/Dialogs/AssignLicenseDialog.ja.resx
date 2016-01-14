@@ -424,7 +424,7 @@
     <value>0</value>
   </data>
   <data name="perSocketRadioButton.Text" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Per-Socket(&amp;S)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket(&amp;S)</value>
   </data>
   <data name="&gt;&gt;perSocketRadioButton.Name" xml:space="preserve">
     <value>perSocketRadioButton</value>
@@ -457,7 +457,7 @@
     <value>1</value>
   </data>
   <data name="advancedRadioButton.Text" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Advanced Edition(&amp;A)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition(&amp;A)</value>
   </data>
   <data name="&gt;&gt;advancedRadioButton.Name" xml:space="preserve">
     <value>advancedRadioButton</value>
@@ -490,7 +490,7 @@
     <value>2</value>
   </data>
   <data name="enterpriseRadioButton.Text" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Enterprise Edition(&amp;E)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition(&amp;E)</value>
   </data>
   <data name="&gt;&gt;enterpriseRadioButton.Name" xml:space="preserve">
     <value>enterpriseRadioButton</value>
@@ -523,7 +523,7 @@
     <value>3</value>
   </data>
   <data name="platinumRadioButton.Text" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ Platinum Edition(&amp;P)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Platinum Edition(&amp;P)</value>
   </data>
   <data name="&gt;&gt;platinumRadioButton.Name" xml:space="preserve">
     <value>platinumRadioButton</value>
@@ -556,7 +556,7 @@
     <value>4</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.Text" xml:space="preserve">
-    <value>Citrix @BRANDING_PRODUCT_BRAND@ for XenDesktop(&amp;X)</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ for XenDesktop(&amp;X)</value>
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Name" xml:space="preserve">
     <value>xenDesktopEnterpriseRadioButton</value>

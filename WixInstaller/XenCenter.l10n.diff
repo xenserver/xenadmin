@@ -33,9 +33,9 @@
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
-     <Product Id="$(var.ProductCode)" Name="Citrix @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
--        <Package Description="Citrix @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
-+        <Package Languages="1033,1041,2052,1028" Description="Citrix @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
+     <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
+-        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
++        <Package Languages="1033,1041,2052,1028" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
@@ -156,7 +156,7 @@
                                  <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
 @@ -245,6 +265,8 @@
  	
-         <Feature Id="MainProgram" Title="Citrix @BRANDING_BRAND_CONSOLE@" Description="Citrix @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
+         <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
