@@ -51,8 +51,10 @@ namespace XenAdmin.Actions.GUIActions
         {
             RelatedTask = new XenRef<Task>(task.opaque_ref);
 
-            if (task.resident_on != null)
-                this.Host = task.Connection.Resolve(task.resident_on);
+            this.Host = task.Connection.Resolve(task.resident_on);
+
+            if (this.Host == null)
+                this.Host = Helpers.GetMaster(task.Connection);
 
             Started = (task.created + task.Connection.ServerTimeOffset).ToLocalTime();
             SetAppliesToData(task);
