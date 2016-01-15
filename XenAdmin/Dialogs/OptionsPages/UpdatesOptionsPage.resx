@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.Text" xml:space="preserve">
-    <value>Check for new XenCe&amp;nter versions</value>
+    <value>Check for &amp;new @BRANDING_BRAND_CONSOLE@ versions</value>
   </data>
   <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenCenterUpdatesCheckBox</value>
@@ -232,7 +232,7 @@
     <value>0</value>
   </data>
   <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
-    <value>Check for new versions of Xen&amp;Server</value>
+    <value>Check for &amp;new versions of @BRANDING_SERVER@</value>
   </data>
   <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerUpdatesCheckBox</value>
