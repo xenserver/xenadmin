@@ -103,6 +103,11 @@ namespace XenAdmin.Commands
             {
                 string hostName = Helpers.GetName(host.Connection);
 
+                if (host.RestrictPooling)
+                {
+                    hostName = String.Format(Messages.HOST_MENU_ADD_SERVER, hostName);
+                }
+
                 AddHostToPoolCommand cmd = new AddHostToPoolCommand(Command.MainWindowCommandInterface, new Host[] { host }, Helpers.GetPool(connection), true);
                 CommandToolStripMenuItem hostMenuItem = new CommandToolStripMenuItem(cmd, hostName.EscapeAmpersands(), Resources._000_TreeConnected_h32bit_16);
 

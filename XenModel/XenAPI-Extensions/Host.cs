@@ -281,6 +281,11 @@ namespace XenAPI
             return h._RestrictVSwitchController;
         }
 
+        public bool RestrictPooling
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_pooling"); }
+        }
+
         public static bool RestrictVMProtection(Host h)
         {
             return h._RestrictVMProtection;
