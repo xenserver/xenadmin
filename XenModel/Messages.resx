@@ -6958,7 +6958,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>&amp;High Availability...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>Install &amp;@BRANDING_PRODUCT_BRAND@ Tools...</value>
+    <value>Inst&amp;all @BRANDING_PRODUCT_BRAND@ Tools...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>&amp;Quick Create</value>

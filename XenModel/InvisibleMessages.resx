@@ -156,6 +156,9 @@
   <data name="LOCALE" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="LOG_FILENAME" xml:space="preserve">
+    <value>@BRANDING_BRAND_CONSOLE@.log</value>
+  </data>
   <data name="MAINWINDOW_HOME_PATH" xml:space="preserve">
     <value>Home.htm</value>
   </data>

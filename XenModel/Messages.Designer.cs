@@ -19965,7 +19965,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install &amp;@BRANDING_PRODUCT_BRAND@ Tools....
+        ///   Looks up a localized string similar to Inst&amp;all @BRANDING_PRODUCT_BRAND@ Tools....
         /// </summary>
         public static string MAINWINDOW_INSTALL_TOOLS {
             get {

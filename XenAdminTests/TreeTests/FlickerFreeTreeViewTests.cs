@@ -66,7 +66,7 @@ namespace XenAdminTests.TreeTests
 
             Folder foldersTag = new Folder(null, "Folders");
 
-            _tv.Nodes.Add(new VirtualTreeNode("XenCenter"));
+            _tv.Nodes.Add(new VirtualTreeNode(Branding.BRAND_CONSOLE));
 
             VirtualTreeNode folders = new VirtualTreeNode("Folders") { Tag = foldersTag };
 

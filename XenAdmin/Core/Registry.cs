@@ -337,8 +337,8 @@ namespace XenAdmin.Core
         private const string DISABLE_PLUGINS = "DisablePlugins";
         private const string VMPR_ENABLED = "VMPREnabled";
         private const string DONT_SUDO = "DontSudo";
-        private const string XENCENTER_LOCAL_KEYS = @"SOFTWARE\Citrix\XenCenter";
-        private const string PSConsoleKey = @"Software\Citrix\XenServerPSSnapIn";
+        private const string XENCENTER_LOCAL_KEYS = @"SOFTWARE\" + Branding.COMPANY_NAME_SHORT + @"\" + Branding.BRAND_CONSOLE;
+        private const string PSConsoleKey = @"Software\" + Branding.COMPANY_NAME_SHORT + @"\XenServerPSSnapIn";
         private const string PSConsoleName = "ConsoleFile";
         private const string PSExecutionPolicyKey = @"Software\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell";
         private const string PSExecutionPolicyName = "ExecutionPolicy";

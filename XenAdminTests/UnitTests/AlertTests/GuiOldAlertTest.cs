@@ -45,12 +45,12 @@ namespace XenAdminTests.UnitTests.AlertTests
 
             validator.Verify(new AlertClassUnitTestData
                                         {
-                                            AppliesTo = "XenCenter",
+                                            AppliesTo = XenAdmin.Branding.BRAND_CONSOLE,
                                             Description = "There is a newer version of XenCenter available. Please contact your support representative.",
                                             FixLinkText = "Go to Web Page",
                                             HelpID = "GuiOldAlert",
                                             HelpLinkText = "Help",
-                                            Title = "Newer XenCenter Available",
+                                            Title = "Newer " + XenAdmin.Branding.BRAND_CONSOLE + " Available",
                                             Priority = "Priority5"
                                         });
         }

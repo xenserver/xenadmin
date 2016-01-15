@@ -119,7 +119,7 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XENSEARCH extension -->
--                            <ProgId Id="XenCenter.xensearch" Description="XenCenter Saved Search" Icon="XenCenterIcon">
+-                            <ProgId Id="XenCenter.xensearch" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
 +                            <ProgId Id="XenCenter.xensearch" Description="!(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
                                  <Extension Id="xensearch" ContentType="application/xensearch">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
@@ -170,5 +170,5 @@
 -        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
 +        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
          <Property Id="PERMACHINEINSTALL">
-             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
+             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
          </Property>

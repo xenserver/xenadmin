@@ -104,7 +104,8 @@ RESX_rebranding()
 }
 
 #splace rebranding
-version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj"
+version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj  ${REPO}/splash/util.cpp
+"
 
 #projects sign change
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
@@ -129,6 +130,7 @@ RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${
 
 #XenOvfApi rebranding
 RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
+rebranding_global ${REPO}/XenOvfApi/app.config
 
 #XenOvfTransport XenOvfTransport
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
@@ -154,7 +156,9 @@ rebranding_global ${REPO}/WixInstaller/vnccontrol.wxs
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
-
+rebranding_global ${REPO}/XenAdminTests/app.config
+rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.serverview.xml
 
 #XenServerHealthCheck
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
+rebranding_global ${REPO}/XenServerHealthCheck/app.config

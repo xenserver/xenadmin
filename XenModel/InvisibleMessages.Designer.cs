@@ -178,6 +178,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@.log.
+        /// </summary>
+        public static string LOG_FILENAME {
+            get {
+                return ResourceManager.GetString("LOG_FILENAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.htm.
         /// </summary>
         public static string MAINWINDOW_HOME_PATH {

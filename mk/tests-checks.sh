@@ -84,7 +84,7 @@ set -e
 sleeperpid2=$((ps | grep ${sleeperpid} | grep 'sleep$' | cut -b-10) || true)
 kill "$sleeperpid2" >/dev/null || true
 
-cp ${XENCENTER_LOGDIR}/XenCenter.log ${OUTPUT_DIR} || true 
+cp ${XENCENTER_LOGDIR}/${BRANDING_BRAND_CONSOLE}.log ${OUTPUT_DIR} || true 
 cp ${TEST_DIR}/XenAdminTests.xml ${OUTPUT_DIR}
 grep 'errors="0" failures="0"' ${OUTPUT_DIR}/XenAdminTests.xml
 

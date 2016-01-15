@@ -71,7 +71,7 @@ namespace XenAdmin.Actions
             string timestring = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             // Copy client logs
-            string logDestination = string.Format("{0}\\{1}-XenCenter.log", filepath, timestring);
+            string logDestination = string.Format("{0}\\{1}-{2}", filepath, timestring, InvisibleMessages.LOG_FILENAME);
             if (entries.Contains("client-logs"))
             {
                 if (File.Exists(logDestination))

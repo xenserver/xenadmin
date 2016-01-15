@@ -123,7 +123,7 @@ namespace XenServerHealthCheck
             }
         }
 
-        private const string HEALTH_CHECK_LOCAL_KEYS = @"SOFTWARE\Citrix\XenHealthCheck";
+        private const string HEALTH_CHECK_LOCAL_KEYS = @"SOFTWARE\"+ Branding.BRAND_CONSOLE +@"\XenHealthCheck";
         private const string HEALTH_CHECK_UPLOAD_DOMAIN_NAME = "HealthCheckUploadDomainName";
         private const string HEALTH_CHECK_TIME_INTERVAL = "HealthCheckTimeIntervalInMinutes";
         
