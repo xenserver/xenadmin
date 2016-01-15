@@ -76,6 +76,15 @@ namespace XenAdmin.Actions
             _licenseServerPort = licenseServerPort;
 
             this.DoOnLicensingFailure = DoOnLicensingFailure;
+
+            if (xos != null &&  Host == null && Pool == null && xos.Count() == 1)
+            {
+                var xo = xos.FirstOrDefault();
+                if (xo is Host)
+                    Host = xo as Host;
+                else if (xo is Pool)
+                    Pool = xo as Pool;
+            }
         }
 
         private static void SetLicenseServer(Host host, string licenseServerAddress, string licenseServerPort)
