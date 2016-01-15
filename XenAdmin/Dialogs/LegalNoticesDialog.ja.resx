@@ -175,7 +175,7 @@
     <value>3</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Citrix、Citrix XenServer、Xen、Xen のロゴ、@BRANDING_BRAND_CONSOLE@、XenMotion は、米国およびその他の国の Citrix Systems, Inc. の商標または登録商標です。</value>
+    <value>Xen、Xen のロゴ、XenMotion は、米国およびその他の国の Citrix Systems, Inc. の商標または登録商標です。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

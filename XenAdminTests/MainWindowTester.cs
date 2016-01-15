@@ -446,7 +446,7 @@ namespace XenAdminTests
                     return NavigationPane.NavigationMode.CustomFields;
                 case "vApps":
                     return NavigationPane.NavigationMode.vApps;
-                case "@BRANDING_BRAND_CONSOLE@":
+                case Branding.BRAND_CONSOLE:
                     return NavigationPane.NavigationMode.Infrastructure;
                 default:
                     return NavigationPane.NavigationMode.SavedSearch;

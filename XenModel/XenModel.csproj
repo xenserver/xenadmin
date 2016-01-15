@@ -502,8 +502,8 @@
   <ItemGroup>
     <EmbeddedResource Include="FriendlyNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>FriendlyNames.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>FriendlyNames1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FriendlyNames.ja.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

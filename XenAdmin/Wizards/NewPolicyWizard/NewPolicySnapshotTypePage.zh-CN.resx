@@ -403,7 +403,7 @@
     <value>请注意，将仅创建受此保护策略保护且满足以下所有条件的 VM 的计划磁盘和内存快照:
 
 1. VM 在计划快照时运行。
-2. VM 上已安装 XenServer Tools。
+2. VM 上已安装 @BRANDING_PRODUCT_BRAND@ Tools。
 3. VM 没有为其分配的专用 GPU。</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">

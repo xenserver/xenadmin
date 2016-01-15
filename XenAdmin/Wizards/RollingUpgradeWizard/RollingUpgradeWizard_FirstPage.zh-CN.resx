@@ -199,7 +199,7 @@
     <value>11</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>可以使用此向导将服务器从 Citrix XenServer 5.6 或更高版本升级到 XenServer 的当前版本。运行更早版本 XenServer 的服务器需要逐个升级到每个中间版本，直至升级到 5.6 版本；然后，即可执行池滚动升级，将这些服务器全部升级到当前 XenServer 版本。</value>
+    <value>可以使用此向导将服务器从 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ 5.6 或更高版本升级到 @BRANDING_SERVER@ 的当前版本。运行更早版本 @BRANDING_SERVER@ 的服务器需要逐个升级到每个中间版本，直至升级到 5.6 版本；然后，即可执行池滚动升级，将这些服务器全部升级到当前 @BRANDING_SERVER@ 版本。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -289,7 +289,7 @@
     <value>6</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>开始执行池滚动升级前，Citrix 强烈建议您使用 pool-dump-database CLI 命令备份现有池的状态(请参阅《XenServer 管理员指南》)。这样可确保您能够将部分完成的滚动升级还原回其原始状态，而不会丢失任何 VM 数据。</value>
+    <value>开始执行池滚动升级前，@BRANDING_COMPANY_NAME_SHORT@ 强烈建议您使用 pool-dump-database CLI 命令备份现有池的状态(请参阅《@BRANDING_PRODUCT_BRAND@ 管理员指南》)。这样可确保您能够将部分完成的滚动升级还原回其原始状态，而不会丢失任何 VM 数据。</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>

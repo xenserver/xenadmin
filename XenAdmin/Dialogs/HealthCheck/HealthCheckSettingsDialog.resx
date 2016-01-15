@@ -277,7 +277,7 @@
     <value>4</value>
   </data>
   <data name="decentGroupBox1.Text" xml:space="preserve">
-    <value>Authentication with Citrix Insight Services</value>
+    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services</value>
   </data>
   <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
     <value>decentGroupBox1</value>
@@ -316,7 +316,7 @@
     <value>10</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>Health Check will automatically upload a server status report to Citrix Insight Services, based on a predefined schedule configured on your XenServer pool.</value>
+    <value>Health Check will automatically upload a server status report to @BRANDING_COMPANY_NAME_SHORT@ Insight Services, based on a predefined schedule configured on your @BRANDING_SERVER@ pool.</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>
@@ -592,7 +592,7 @@
     <value>24</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Enter the credentials the Health Check Service will use to connect to XenServer.</value>
+    <value>Enter the credentials the Health Check Service will use to connect to @BRANDING_SERVER@.</value>
   </data>
   <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -895,7 +895,7 @@
     <value>3</value>
   </data>
   <data name="decentGroupBoxXSCredentials.Text" xml:space="preserve">
-    <value>XenServer Credentials</value>
+    <value>@BRANDING_SERVER@ Credentials</value>
   </data>
   <data name="&gt;&gt;decentGroupBoxXSCredentials.Name" xml:space="preserve">
     <value>decentGroupBoxXSCredentials</value>
@@ -1471,7 +1471,7 @@
     <value>24</value>
   </data>
   <data name="authenticationRubricLabel.Text" xml:space="preserve">
-    <value>Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="authenticationRubricLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

@@ -138,7 +138,7 @@
   <data name="label1.Text" xml:space="preserve">
     <value>The upgrade plan for the servers you have selected is shown below. 
 
-When prompted, you will need to insert the XenServer installation media or specify a PXE boot server for a network boot, then reboot the server and follow the on-screen instructions on the server’s serial console to install the upgrade.
+When prompted, you will need to insert the @BRANDING_SERVER@ installation media or specify a PXE boot server for a network boot, then reboot the server and follow the on-screen instructions on the server’s serial console to install the upgrade.
 
 Upgrade plan:</value>
   </data>

@@ -223,7 +223,7 @@
     <value>4</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>手動モードでは、CD-ROM または PXE ブート サーバー上の XenServer インストーラの指示に従って、各サーバーを順番にアップグレードする必要があります。管理者は、プール内のすべてのサーバーについてこの操作を繰り返す必要があります。</value>
+    <value>手動モードでは、CD-ROM または PXE ブート サーバー上の @BRANDING_SERVER@ インストーラの指示に従って、各サーバーを順番にアップグレードする必要があります。管理者は、プール内のすべてのサーバーについてこの操作を繰り返す必要があります。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

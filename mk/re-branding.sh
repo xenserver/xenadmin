@@ -132,6 +132,7 @@ RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
 
 #XenOvfTransport XenOvfTransport
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
+rebranding_global ${REPO}/XenOvfTransport/app.config
 
 #dotNetInstaller
 rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper.xml
@@ -149,6 +150,11 @@ rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
 rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
 rebranding_global ${REPO}/WixInstaller/XenCenter.l10n.diff
 rebranding_global ${REPO}/WixInstaller/XenCenter.wxs
+rebranding_global ${REPO}/WixInstaller/vnccontrol.wxs
 
 #XenAdminTests
-rebranding_global ${REPO}/XenAdminTests/MainWindowTester.cs
+rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
+
+
+#XenServerHealthCheck
+rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs

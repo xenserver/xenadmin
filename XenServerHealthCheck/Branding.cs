@@ -29,36 +29,21 @@
  * SUCH DAMAGE.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("VNCControl")]
-[assembly: AssemblyDescription("Active-X control to access XenServer VM administrative console")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("@BRANDING_COMPANY_NAME_SHORT@")]
-[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@")]
-[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+// Values taken from branding.hg
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7cd118ea-d8da-464d-8303-b189912a9878")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("0.0.0.0")]
-[assembly: AssemblyFileVersion("0000")]
+namespace XenServerHealthCheck
+{
+    static public class Branding
+    {
+        public const string PRODUCT_VERSION_TEXT = "@BRANDING_PRODUCT_VERSION_TEXT@";
+        public const string XENCENTER_VERSION = "@BRANDING_PRODUCT_VERSION@";
+        public const string COMPANY_NAME_LEGAL = "@BRANDING_COMPANY_NAME_LEGAL@";
+        public const string BRAND_CONSOLE = "@BRANDING_BRAND_CONSOLE@";
+        public const string PRODUCT_BRAND = "@BRANDING_PRODUCT_BRAND@";
+        public const string COMPANY_NAME_SHORT = "@BRANDING_COMPANY_NAME_SHORT@";
+    }
+}

@@ -496,7 +496,7 @@
     <value>7</value>
   </data>
   <data name="heading.Text" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
   </data>
   <data name="heading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -682,7 +682,7 @@
     <value>13</value>
   </data>
   <data name="labelNetwork.Text" xml:space="preserve">
-    <value>与其他 XenServer 用户联网</value>
+    <value>与其他 @BRANDING_SERVER@ 用户联网</value>
   </data>
   <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
     <value>labelNetwork</value>
@@ -1072,7 +1072,7 @@
     <value>17</value>
   </data>
   <data name="labelSupport.Text" xml:space="preserve">
-    <value>访问 Citrix 知识中心</value>
+    <value>访问 @BRANDING_COMPANY_NAME_SHORT@ 知识中心</value>
   </data>
   <data name="&gt;&gt;labelSupport.Name" xml:space="preserve">
     <value>labelSupport</value>

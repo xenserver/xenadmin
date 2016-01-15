@@ -370,7 +370,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>在产生与 VM 保护作业相关联的警报时(例如创建或存档 VM 快照时或者快照生成或存档操作失败时)，XenServer 可以向您发送电子邮件通知。</value>
+    <value>在产生与 VM 保护作业相关联的警报时(例如创建或存档 VM 快照时或者快照生成或存档操作失败时)，@BRANDING_SERVER@ 可以向您发送电子邮件通知。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
