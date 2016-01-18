@@ -140,9 +140,6 @@ rebranding_global ${REPO}/XenOvfTransport/app.config
 rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper.xml
 rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper_l10n.xml
 
-#readme
-rebranding_global ${REPO}/README.md
-
 #mk
 rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
 
@@ -158,6 +155,9 @@ rebranding_global ${REPO}/WixInstaller/vnccontrol.wxs
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/app.config
 rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.serverview.xml
+rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.orgview.xml
+rebranding_global ${REPO}/XenAdminTests/TestResources/searchresults.xml
+rebranding_global ${REPO}/XenAdminTests/TestResources/state3.xml
 
 #XenServerHealthCheck
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs

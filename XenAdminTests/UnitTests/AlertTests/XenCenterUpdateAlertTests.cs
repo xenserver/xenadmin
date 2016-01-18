@@ -50,7 +50,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = XenAdmin.Branding.BRAND_CONSOLE,
                 FixLinkText = "Go to Web Page",
                 HelpID = "XenCenterUpdateAlert",
-                Description = "xc is now available. Download the new version from the Citrix website.",
+                Description = "xc is now available. Download the new version from the " + XenAdmin.Branding.COMPANY_NAME_SHORT + " website.",
                 HelpLinkText = "Help",
                 Title = "New " + XenAdmin.Branding.BRAND_CONSOLE + " Available",
                 Priority = "Priority5"

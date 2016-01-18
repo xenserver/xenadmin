@@ -46,7 +46,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
                                         {
                                             AppliesTo = XenAdmin.Branding.BRAND_CONSOLE,
-                                            Description = "There is a newer version of XenCenter available. Please contact your support representative.",
+                                            Description = "There is a newer version of " + XenAdmin.Branding.BRAND_CONSOLE + " available. Please contact your support representative.",
                                             FixLinkText = "Go to Web Page",
                                             HelpID = "GuiOldAlert",
                                             HelpLinkText = "Help",
