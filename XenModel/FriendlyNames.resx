@@ -1817,4 +1817,28 @@
   <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
     <value>Pool CPU features increased</value>
   </data>
+  <data name="Description-host.system_status-control-slice" xml:space="preserve">
+    <value>Information and statistics about the system's control groups</value>
+  </data>
+  <data name="Description-host.system_status-fcoe" xml:space="preserve">
+    <value>Fibre Channel over Ethernet (FCoE) logs</value>
+  </data>
+  <data name="Description-host.system_status-message-switch" xml:space="preserve">
+    <value>Logs of messages exchanged between system deamons</value>
+  </data>
+  <data name="Description-host.system_status-xenvm" xml:space="preserve">
+    <value>Volume manager logs</value>
+  </data>
+  <data name="Label-host.system_status-control-slice" xml:space="preserve">
+    <value>Control group statistics</value>
+  </data>
+  <data name="Label-host.system_status-fcoe" xml:space="preserve">
+    <value>FCoE logs</value>
+  </data>
+  <data name="Label-host.system_status-message-switch" xml:space="preserve">
+    <value>Internal message logs</value>
+  </data>
+  <data name="Label-host.system_status-xenvm" xml:space="preserve">
+    <value>Volume manager logs</value>
+  </data>
 </root>
