@@ -142,6 +142,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information and statistics about the system&apos;s control groups.
+        /// </summary>
+        public static string Description_host_system_status_control_slice {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-control-slice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The configuration settings of Citrix Storagelink.
         /// </summary>
         public static string Description_host_system_status_CVSM {
@@ -165,6 +174,15 @@ namespace XenAdmin {
         public static string Description_host_system_status_disk_info {
             get {
                 return ResourceManager.GetString("Description-host.system_status-disk-info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fibre Channel over Ethernet (FCoE) logs.
+        /// </summary>
+        public static string Description_host_system_status_fcoe {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-fcoe", resourceCulture);
             }
         }
         
@@ -246,6 +264,15 @@ namespace XenAdmin {
         public static string Description_host_system_status_loopback_devices {
             get {
                 return ResourceManager.GetString("Description-host.system_status-loopback-devices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logs of messages exchanged between system deamons.
+        /// </summary>
+        public static string Description_host_system_status_message_switch {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-message-switch", resourceCulture);
             }
         }
         
@@ -480,6 +507,15 @@ namespace XenAdmin {
         public static string Description_host_system_status_xenserver_logs {
             get {
                 return ResourceManager.GetString("Description-host.system_status-xenserver-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume manager logs.
+        /// </summary>
+        public static string Description_host_system_status_xenvm {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-xenvm", resourceCulture);
             }
         }
         
@@ -1195,6 +1231,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control group statistics.
+        /// </summary>
+        public static string Label_host_system_status_control_slice {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-control-slice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Citrix StorageLink configuration.
         /// </summary>
         public static string Label_host_system_status_CVSM {
@@ -1218,6 +1263,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_disk_info {
             get {
                 return ResourceManager.GetString("Label-host.system_status-disk-info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FCoE logs.
+        /// </summary>
+        public static string Label_host_system_status_fcoe {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-fcoe", resourceCulture);
             }
         }
         
@@ -1299,6 +1353,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_loopback_devices {
             get {
                 return ResourceManager.GetString("Label-host.system_status-loopback-devices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal message logs.
+        /// </summary>
+        public static string Label_host_system_status_message_switch {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-message-switch", resourceCulture);
             }
         }
         
@@ -1533,6 +1596,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_xenserver_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-xenserver-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume manager logs.
+        /// </summary>
+        public static string Label_host_system_status_xenvm {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-xenvm", resourceCulture);
             }
         }
         
