@@ -434,7 +434,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }),
                     new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Install &XenServer Tools...", true),
+                    new ExpectedTextMenuItem("Inst&all " + Branding.PRODUCT_BRAND + " Tools...", true),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", true)
                 });

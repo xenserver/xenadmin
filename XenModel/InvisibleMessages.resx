@@ -127,7 +127,7 @@
     <value>https://{0}/reactivation_server.php</value>
   </data>
   <data name="CHECK_FOR_UPDATES_URL" xml:space="preserve">
-    <value>http://updates.xensource.com/XenServer/{0}/XenCenter</value>
+    <value>http://updates.xensource.com/@BRANDING_SERVER@/{0}/XenCenter</value>
   </data>
   <data name="COMMUNITY_URL" xml:space="preserve">
     <value>http://xenserver.org/</value>
@@ -155,6 +155,9 @@
   </data>
   <data name="LOCALE" xml:space="preserve">
     <value>en-US</value>
+  </data>
+  <data name="LOG_FILENAME" xml:space="preserve">
+    <value>@BRANDING_BRAND_CONSOLE@.log</value>
   </data>
   <data name="MAINWINDOW_HOME_PATH" xml:space="preserve">
     <value>Home.htm</value>

@@ -235,7 +235,7 @@
     <value>4</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>XenServer ホストの外部に接続しないネットワークを作成します。
+    <value>@BRANDING_SERVER@ ホストの外部に接続しないネットワークを作成します。
 これにより、同一ホスト上の VM どうしを接続できます。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -300,7 +300,7 @@
     <value>6</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
-    <value>XenServer プールの外部に接続しないネットワークを作成します。
+    <value>@BRANDING_SERVER@ プールの外部に接続しないネットワークを作成します。
 これにより、同一プール内の VM どうしを接続できます。
 vSwitch コントローラが実行されている必要があります。</value>
   </data>

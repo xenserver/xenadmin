@@ -187,7 +187,7 @@
     <value>无法通过 iSCSI 导入虚拟磁盘。</value>
   </data>
   <data name="ERROR_NOT_CONNECTED" xml:space="preserve">
-    <value>已与 XenServer 断开连接。</value>
+    <value>已与 @BRANDING_SERVER@ 断开连接。</value>
   </data>
   <data name="ERROR_NO_PASSWORD" xml:space="preserve">
     <value>未提供密码来解密 OVF 包。</value>
@@ -277,7 +277,7 @@
     <value>正在展开 {0}...</value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>正在配置 XenServer 的虚拟机...</value>
+    <value>正在配置 @BRANDING_SERVER@ 的虚拟机...</value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>已导入。</value>

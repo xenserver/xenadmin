@@ -960,7 +960,7 @@ namespace XenAdmin.Plugins
                 request.Method = "POST";
                 request.ContentType = "xml";
                 request.ContentLength = Encoding.UTF8.GetBytes(jsCallbackAndData[1]).Length;
-                request.UserAgent = "XenCenter\\Plugin";
+                request.UserAgent = Branding.BRAND_CONSOLE + "\\Plugin";
 
                 using (StreamWriter xmlstream = new StreamWriter(request.GetRequestStream()))
                 {

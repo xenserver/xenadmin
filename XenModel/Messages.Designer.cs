@@ -997,7 +997,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Health Check analysis result from Citrix Insight Services.
+        ///   Looks up a localized string similar to Get Health Check analysis result from @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_GET_HEALTH_CHECK_RESULT {
             get {
@@ -1105,7 +1105,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services.
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_HEALTHCHECK_AUTHENTICATION {
             get {
@@ -1114,7 +1114,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authenticating with Citrix Insight Services.
+        ///   Looks up a localized string similar to Authenticating with @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS {
             get {
@@ -2437,7 +2437,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload server status report to Citrix Insight Services.
+        ///   Looks up a localized string similar to Upload server status report to @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
             get {
@@ -2455,7 +2455,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading report to Citrix Insight Services.
+        ///   Looks up a localized string similar to Uploading report to @BRANDING_COMPANY_NAME_SHORT@ Insight Services.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
             get {
@@ -3898,7 +3898,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is using older CPUs.
         ///
-        ///XenServer can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the XenServer Hardware Compatibility List.
+        ///@BRANDING_SERVER@ can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the @BRANDING_SERVER@ Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -3913,7 +3913,7 @@ namespace XenAdmin {
         ///
         ///{0}
         ///
-        ///XenServer can continue by rebooting the servers and reducing their CPUs to the level of the existing servers in the pool. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the XenServer Hardware Compatibility List.
+        ///@BRANDING_SERVER@ can continue by rebooting the servers and reducing their CPUs to the level of the existing servers in the pool. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the @BRANDING_SERVER@ Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -4346,7 +4346,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk usage for the Control Domain on {0} has reached {1}. XenServer&apos;s performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed..
+        ///   Looks up a localized string similar to Disk usage for the Control Domain on {0} has reached {1}. @BRANDING_SERVER@&apos;s performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed..
         /// </summary>
         public static string ALERT_ALARM_FILESYSTEM_DESCRIPTION {
             get {
@@ -4607,7 +4607,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the new version from the Citrix website..
+        ///   Looks up a localized string similar to {0} is now available. Download the new version from the @BRANDING_COMPANY_NAME_SHORT@ website..
         /// </summary>
         public static string ALERT_NEW_VERSION_DETAILS {
             get {
@@ -6062,7 +6062,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install XenServer Tools on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install @BRANDING_PRODUCT_BRAND@ Tools on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS {
             get {
@@ -6161,7 +6161,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install XenServer Tools on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install @BRANDING_PRODUCT_BRAND@ Tools on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS {
             get {
@@ -6208,7 +6208,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This template is a XenServer template and cannot be deleted..
+        ///   Looks up a localized string similar to This template is a @BRANDING_SERVER@ template and cannot be deleted..
         /// </summary>
         public static string CANNOT_DELETE_DEFAULT_TEMPLATE {
             get {
@@ -6280,7 +6280,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting the XenServer Tools ISO storage is not supported..
+        ///   Looks up a localized string similar to Deleting the @BRANDING_PRODUCT_BRAND@ Tools ISO storage is not supported..
         /// </summary>
         public static string CANNOT_DELETE_TOOLS_SR {
             get {
@@ -6482,7 +6482,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert XenServer CD.
+        ///   Looks up a localized string similar to Insert @BRANDING_SERVER@ CD.
         /// </summary>
         public static string CHANGE_SERVER_CD {
             get {
@@ -6841,7 +6841,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to for use with Common Criteria versions of XenServer only.
+        ///   Looks up a localized string similar to for use with Common Criteria versions of @BRANDING_SERVER@ only.
         /// </summary>
         public static string COMMON_CRITERIA_TEXT {
             get {
@@ -7177,7 +7177,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to destroy &apos;{0}&apos;?
         ///
-        ///You should only need to destroy a XenServer if it has physically failed.
+        ///You should only need to destroy a @BRANDING_SERVER@ if it has physically failed.
         ///Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
         ///
         ///This action is final and unrecoverable..
@@ -7674,7 +7674,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find XenServer running on {0}..
+        ///   Looks up a localized string similar to Could not find @BRANDING_SERVER@ running on {0}..
         /// </summary>
         public static string CONNECT_NO_XAPI_FAILURE {
             get {
@@ -7935,9 +7935,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a Citrix XenServer Express Edition server ({1}) already exists.
+        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition server ({1}) already exists.
         ///
-        ///You can only connect to a single Citrix XenServer Express Edition server at a time. To find out how to upgrade your license, follow the link below..
+        ///You can only connect to a single @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition server at a time. To find out how to upgrade your license, follow the link below..
         /// </summary>
         public static string CONNECTION_RESTRICTED_MESSAGE_LONG {
             get {
@@ -9705,7 +9705,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default install of XenServer.
+        ///   Looks up a localized string similar to Default install of @BRANDING_SERVER@.
         /// </summary>
         public static string DEFAULT_INSTALL_OF_XENSERVER {
             get {
@@ -9777,7 +9777,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs without XenServer Tools.
+        ///   Looks up a localized string similar to VMs without @BRANDING_PRODUCT_BRAND@ Tools.
         /// </summary>
         public static string DEFAULT_SEARCH_VMS_WO_XS_TOOLS {
             get {
@@ -10882,7 +10882,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are not installed on this VM..
+        ///   Looks up a localized string similar to A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NOTOOLS {
             get {
@@ -10891,7 +10891,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are not installed on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are not installed on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_NOTOOLS_PLURAL {
             get {
@@ -10918,7 +10918,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are out of date on this VM..
+        ///   Looks up a localized string similar to A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are out of date on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_OLDTOOLS {
             get {
@@ -10927,7 +10927,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because XenServer Tools are out of date on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because @BRANDING_PRODUCT_BRAND@ Tools are out of date on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_OLDTOOLS_PLURAL {
             get {
@@ -11287,7 +11287,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the latest at the Citrix website..
+        ///   Looks up a localized string similar to {0} is now available. Download the latest at the @BRANDING_COMPANY_NAME_SHORT@ website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {
@@ -12088,7 +12088,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Disaster Recovery is complete..
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Disaster Recovery is complete..
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER {
             get {
@@ -12142,7 +12142,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Disaster Recovery is in progress. This may take some time..
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Disaster Recovery is in progress. This may take some time..
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER {
             get {
@@ -12241,7 +12241,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Disaster Recovery progress.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Disaster Recovery progress.
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER {
             get {
@@ -12947,7 +12947,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer &amp;Enterprise Per-Socket ({0} required).
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ &amp;Enterprise Per-Socket ({0} required).
         /// </summary>
         public static string ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED {
             get {
@@ -13442,7 +13442,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer is still booting..
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ is still booting..
         /// </summary>
         public static string ERROR_HOST_STILL_BOOTING {
             get {
@@ -13496,7 +13496,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find XenServer on &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Could not find @BRANDING_SERVER@ on &apos;{0}&apos;..
         /// </summary>
         public static string ERROR_NO_XENSERVER {
             get {
@@ -13595,7 +13595,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Install XenServer Tools.
+        ///   Looks up a localized string similar to {0} Install @BRANDING_PRODUCT_BRAND@ Tools.
         /// </summary>
         public static string EVACUATE_HOST_INSTALL_TOOLS_PROMPT {
             get {
@@ -15315,7 +15315,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To view memory data for this VM, you need to install XenServer Tools.
+        ///   Looks up a localized string similar to To view memory data for this VM, you need to install @BRANDING_PRODUCT_BRAND@ Tools.
         /// </summary>
         public static string GRAPH_NEEDS_TOOLS {
             get {
@@ -15694,7 +15694,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer High Availability (HA) allows virtual machines to automatically be restarted in the event of an underlying hardware failure or loss of an individual server. HA is enabled for &apos;{0}&apos;..
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ High Availability (HA) allows virtual machines to automatically be restarted in the event of an underlying hardware failure or loss of an individual server. HA is enabled for &apos;{0}&apos;..
         /// </summary>
         public static string HA_EDIT_DIALOG_BLURB {
             get {
@@ -16266,7 +16266,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services failed. See the application log files for more information..
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services failed. See the application log files for more information..
         /// </summary>
         public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
             get {
@@ -16302,7 +16302,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
             get {
@@ -16311,7 +16311,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with Citrix Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
@@ -18087,7 +18087,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk and memory snapshots need XenServer Tools to be installed.
+        ///   Looks up a localized string similar to Disk and memory snapshots need @BRANDING_PRODUCT_BRAND@ Tools to be installed.
         /// </summary>
         public static string INFO_DISKMEMORY_MODE_NO_TOOLS {
             get {
@@ -18123,7 +18123,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quiesced snapshots need XenServer Tools to be installed.
+        ///   Looks up a localized string similar to Quiesced snapshots need @BRANDING_PRODUCT_BRAND@ Tools to be installed.
         /// </summary>
         public static string INFO_QUIESCE_MODE_NO_TOOLS {
             get {
@@ -18204,7 +18204,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install XenServer Tools.
+        ///   Looks up a localized string similar to Install @BRANDING_PRODUCT_BRAND@ Tools.
         /// </summary>
         public static string INSTALL_XENSERVER_TOOLS {
             get {
@@ -18213,7 +18213,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install XenServer Tools....
+        ///   Looks up a localized string similar to Install @BRANDING_PRODUCT_BRAND@ Tools....
         /// </summary>
         public static string INSTALL_XENSERVER_TOOLS_DOTS {
             get {
@@ -18222,7 +18222,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install XenServer Tools.
+        ///   Looks up a localized string similar to Install @BRANDING_PRODUCT_BRAND@ Tools.
         /// </summary>
         public static string INSTALL_XS_TOOLS {
             get {
@@ -18240,7 +18240,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the XenServer Tools install disc..
+        ///   Looks up a localized string similar to Could not find the @BRANDING_PRODUCT_BRAND@ Tools install disc..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_WIN {
             get {
@@ -18249,7 +18249,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools installation launched..
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools installation launched..
         /// </summary>
         public static string INSTALLTOOLS_DONE {
             get {
@@ -18258,7 +18258,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools are already installed on this VM..
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools are already installed on this VM..
         /// </summary>
         public static string INSTALLTOOLS_EXIST {
             get {
@@ -18267,7 +18267,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Launching XenServer Tools installation..
+        ///   Looks up a localized string similar to Launching @BRANDING_PRODUCT_BRAND@ Tools installation..
         /// </summary>
         public static string INSTALLTOOLS_STARTING {
             get {
@@ -18276,7 +18276,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing XenServer Tools on VM {0}.
+        ///   Looks up a localized string similar to Installing @BRANDING_PRODUCT_BRAND@ Tools on VM {0}.
         /// </summary>
         public static string INSTALLTOOLS_TITLE {
             get {
@@ -18865,7 +18865,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Online.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Online.
         /// </summary>
         public static string LICENSE_EXPIRY_PURCHACE {
             get {
@@ -19000,7 +19000,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers must be selected one at a time when activating free XenServer..
+        ///   Looks up a localized string similar to Servers must be selected one at a time when activating free @BRANDING_SERVER@..
         /// </summary>
         public static string LICENSE_NO_MULTISELECT_ACTIVATE {
             get {
@@ -19193,7 +19193,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activation keys can only be applied to one Free XenServer product at a time..
+        ///   Looks up a localized string similar to Activation keys can only be applied to one Free @BRANDING_SERVER@ product at a time..
         /// </summary>
         public static string LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION {
             get {
@@ -19265,7 +19265,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more managed servers have expired. Either assign XenServer licenses, or activate Free XenServer products..
+        ///   Looks up a localized string similar to One or more managed servers have expired. Either assign @BRANDING_SERVER@ licenses, or activate Free @BRANDING_SERVER@ products..
         /// </summary>
         public static string LICENSING_DIALOG_EXPIRED_TEXT {
             get {
@@ -19274,7 +19274,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more managed servers will expire soon. Either assign XenServer licenses, or activate Free XenServer products..
+        ///   Looks up a localized string similar to One or more managed servers will expire soon. Either assign @BRANDING_SERVER@ licenses, or activate Free @BRANDING_SERVER@ products..
         /// </summary>
         public static string LICENSING_DIALOG_EXPIRING_SOON_TEXT {
             get {
@@ -19283,7 +19283,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activate your free XenServer products or assign/release licenses for XenServer Advanced, Enterprise and Platinum Editions..
+        ///   Looks up a localized string similar to Activate your free @BRANDING_SERVER@ products or assign/release licenses for @BRANDING_SERVER@ Advanced, Enterprise and Platinum Editions..
         /// </summary>
         public static string LICENSING_DIALOG_TEXT {
             get {
@@ -19857,7 +19857,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The XenServer license on &apos;{0}&apos; will expire in {1}..
+        ///   Looks up a localized string similar to The @BRANDING_SERVER@ license on &apos;{0}&apos; will expire in {1}..
         /// </summary>
         public static string MAINWINDOW_EXPIRE_MESSAGE {
             get {
@@ -19866,7 +19866,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The XenServer license on &apos;{0}&apos; has expired..
+        ///   Looks up a localized string similar to The @BRANDING_SERVER@ license on &apos;{0}&apos; has expired..
         /// </summary>
         public static string MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE {
             get {
@@ -19965,7 +19965,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install &amp;XenServer Tools....
+        ///   Looks up a localized string similar to Inst&amp;all @BRANDING_PRODUCT_BRAND@ Tools....
         /// </summary>
         public static string MAINWINDOW_INSTALL_TOOLS {
             get {
@@ -20622,7 +20622,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@.
         /// </summary>
         public static string MEMORY_XEN {
             get {
@@ -21337,9 +21337,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. 
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. 
         ///
-        ///To learn more about the XenServer Live VDI Migration feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Live VDI Migration feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string MIGRATE_VDI_UPSELL_BLURB {
             get {
@@ -21582,7 +21582,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more paths to at least one of your storages has failed. Refer to the &quot;XenServer Administrator&apos;s Guide&quot; for information about configuring storage multipathing..
+        ///   Looks up a localized string similar to One or more paths to at least one of your storages has failed. Refer to the &quot;@BRANDING_PRODUCT_BRAND@ Administrator&apos;s Guide&quot; for information about configuring storage multipathing..
         /// </summary>
         public static string MULTIPATH_FAILED {
             get {
@@ -22183,7 +22183,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to You must shutdown and then restart the VM to finish the installation of the new DVD drive.
-        ///Once the VM has restarted click the Install XenServer Tools menu item once again..
+        ///Once the VM has restarted click the Install @BRANDING_PRODUCT_BRAND@ Tools menu item once again..
         /// </summary>
         public static string NEW_DVD_DRIVE_REBOOT_TOOLS {
             get {
@@ -22192,7 +22192,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM you wish to install XenServer Tools onto has no DVD drive, would you like to create one?.
+        ///   Looks up a localized string similar to The VM you wish to install @BRANDING_PRODUCT_BRAND@ Tools onto has no DVD drive, would you like to create one?.
         /// </summary>
         public static string NEW_DVD_DRIVE_REQUIRED {
             get {
@@ -22201,7 +22201,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At least one of the VMs you wish to install XenServer Tools onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?.
+        ///   Looks up a localized string similar to At least one of the VMs you wish to install @BRANDING_PRODUCT_BRAND@ Tools onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?.
         /// </summary>
         public static string NEW_DVD_DRIVES_REQUIRED {
             get {
@@ -22281,7 +22281,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is using an older CPU.
         ///
-        ///XenServer can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the XenServer Hardware Compatibility List.
+        ///@BRANDING_SERVER@ can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the @BRANDING_SERVER@ Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -22296,7 +22296,7 @@ namespace XenAdmin {
         ///
         ///{0}
         ///
-        ///XenServer can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the XenServer Hardware Compatibility List.
+        ///@BRANDING_SERVER@ can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the @BRANDING_SERVER@ Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -22601,7 +22601,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot add a Free Edition XenServer to a pool with XenServer Advanced Edition or higher licenses.
+        ///   Looks up a localized string similar to You cannot add a Free Edition @BRANDING_SERVER@ to a pool with @BRANDING_SERVER@ Advanced Edition or higher licenses.
         /// </summary>
         public static string NEWPOOL_FREE_HOST_PAID_MASTER {
             get {
@@ -22691,7 +22691,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot add server with a XenServer Advanced Edition or higher license to a pool of Free Edition XenServers.
+        ///   Looks up a localized string similar to You cannot add server with a @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher license to a pool of Free Edition servers.
         /// </summary>
         public static string NEWPOOL_PAID_HOST_FREE_MASTER {
             get {
@@ -22884,7 +22884,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support XenServer features such as XenMotion and High Availability..
+        ///   Looks up a localized string similar to Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support @BRANDING_SERVER@ features such as XenMotion and High Availability..
         /// </summary>
         public static string NEWSR_EQUAL_LOGIC_BLURB {
             get {
@@ -22956,7 +22956,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any XenServers, or the virtual disk may become corrupted while in use.
+        ///   Looks up a localized string similar to Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any servers, or the virtual disk may become corrupted while in use.
         ///
         ///Do you wish to format the disk?.
         /// </summary>
@@ -23021,11 +23021,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
         ///
         ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
         ///
-        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI [rest of string was truncated]&quot;;.
+        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device.  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOFCOE_BLURB {
             get {
@@ -23043,11 +23043,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
         ///
-        ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the XenServer host.
+        ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the @BRANDING_SERVER@ host.
         ///
-        ///Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the LUN as if it we [rest of string was truncated]&quot;;.
+        ///Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOHBA_BLURB {
             get {
@@ -24020,7 +24020,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix.
+        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_CITRIX {
             get {
@@ -24353,7 +24353,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer cannot create any more disks for this VM.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ cannot create any more disks for this VM.
         /// </summary>
         public static string NO_MORE_USERDEVICES {
             get {
@@ -24389,7 +24389,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No XenServer session information is available, cannot continue..
+        ///   Looks up a localized string similar to No @BRANDING_SERVER@ session information is available, cannot continue..
         /// </summary>
         public static string NO_SESSION_INFO {
             get {
@@ -24607,9 +24607,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
         ///
-        ///A new disk partitioning scheme is available in XenServer 7.0 that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in @BRANDING_SERVER@ 7.0 that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to XenServer 7.0, VMs must be moved from local storage first..
+        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to @BRANDING_SERVER@ 7.0, VMs must be moved from local storage first..
         /// </summary>
         public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
             get {
@@ -24629,7 +24629,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
         ///
-        ///A new disk partitioning scheme is available in XenServer 7.0 that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in @BRANDING_SERVER@ 7.0 that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
         ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
         /// </summary>
@@ -25246,7 +25246,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This patch is for XenServers with version matching the regular expression &apos;{0}&apos;..
+        ///   Looks up a localized string similar to This patch is for servers with version matching the regular expression &apos;{0}&apos;..
         /// </summary>
         public static string PATCH_FOR_XENSERVER_VERSION {
             get {
@@ -25689,7 +25689,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
@@ -25698,7 +25698,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot install supplemental packs on this XenServer version.
+        ///   Looks up a localized string similar to Cannot install supplemental packs on this @BRANDING_SERVER@ version.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS {
             get {
@@ -25862,7 +25862,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix XenServer Per-&amp;Socket ({0} required).
+        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-&amp;Socket ({0} required).
         /// </summary>
         public static string PERSOCKET_LICENSES_X_REQUIRED {
             get {
@@ -26006,7 +26006,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing XenServer.
+        ///   Looks up a localized string similar to Installing @BRANDING_SERVER@.
         /// </summary>
         public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER {
             get {
@@ -26487,7 +26487,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool partially upgraded to XenServer {0}.
+        ///   Looks up a localized string similar to Pool partially upgraded to @BRANDING_SERVER@ {0}.
         /// </summary>
         public static string POOL_VERSIONS_LINK_TEXT {
             get {
@@ -26730,7 +26730,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in XenServer 6.5. Remove StorageLink SRs before upgrading..
+        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in @BRANDING_SERVER@ 6.5. Remove StorageLink SRs before upgrading..
         /// </summary>
         public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
             get {
@@ -26766,7 +26766,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please insert the XenServer CD into the physical drive on server &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Please insert the @BRANDING_SERVER@ CD into the physical drive on server &apos;{0}&apos;.
         ///Press OK to continue the wizard and return to the server and follow the instructions on screen..
         /// </summary>
         public static string PROMPT_XS_CD {
@@ -26848,7 +26848,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools not installed.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools not installed.
         /// </summary>
         public static string PV_DRIVERS_NOT_INSTALLED {
             get {
@@ -26857,7 +26857,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools out of date (version {0} installed).
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools out of date (version {0} installed).
         /// </summary>
         public static string PV_DRIVERS_OUT_OF_DATE {
             get {
@@ -26866,7 +26866,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools out of date.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools out of date.
         /// </summary>
         public static string PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION {
             get {
@@ -27894,7 +27894,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;.  Refer to the &quot;XenServer Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
+        ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;.  Refer to the &quot;@BRANDING_PRODUCT_BRAND@ Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
         /// </summary>
         public static string RESTORE_FROM_BACKUP_FINALIZE {
             get {
@@ -28175,13 +28175,13 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To install the XenServer upgrade on {0}, follow these steps:
+        ///   Looks up a localized string similar to To install the @BRANDING_SERVER@ upgrade on {0}, follow these steps:
         ///    
-        ///1. Insert the XenServer installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
+        ///1. Insert the @BRANDING_SERVER@ installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
         ///2. Click the Reboot Now button below to reboot the server and begin the installation.
         ///3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
         ///
-        ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of XenSer [rest of string was truncated]&quot;;.
+        ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different ve [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ROLLING_UPGRADE_REBOOT_MESSAGE {
             get {
@@ -28235,7 +28235,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: New versions of XenServer require new licenses to be added to your license server..
+        ///   Looks up a localized string similar to &apos;{0}&apos;: New versions of @BRANDING_SERVER@ require new licenses to be added to your license server..
         /// </summary>
         public static string RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER {
             get {
@@ -28253,7 +28253,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in XenServer 6.2.
+        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in @BRANDING_SERVER@ 6.2.
         /// </summary>
         public static string RPU_WIZARD_VMPR_VMPP_DEPRECATION {
             get {
@@ -28262,7 +28262,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in XenServer 6.2.
+        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in @BRANDING_SERVER@ 6.2.
         /// </summary>
         public static string RPU_WIZARD_WSS_DEPRECATED {
             get {
@@ -28730,7 +28730,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Different versions of XenServer must be licensed separately.
+        ///   Looks up a localized string similar to Different versions of @BRANDING_SERVER@ must be licensed separately.
         /// </summary>
         public static string SELECTION_CANNOT_BE_MIXED_FOR_LICENSING {
             get {
@@ -28784,7 +28784,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Out of Date.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Out of Date.
         /// </summary>
         public static string SERVER_OUT_OF_DATE {
             get {
@@ -28856,7 +28856,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of @BRANDING_BRAND_CONSOLE@ supports XenServer 6.0 onwards..
+        ///   Looks up a localized string similar to This version of @BRANDING_BRAND_CONSOLE@ supports @BRANDING_SERVER@ 6.0 onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -29622,7 +29622,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer build number.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ build number.
         /// </summary>
         public static string SOFTWARE_VERSION_BUILD_NUMBER {
             get {
@@ -29631,7 +29631,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer build date.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ build date.
         /// </summary>
         public static string SOFTWARE_VERSION_DATE {
             get {
@@ -29640,7 +29640,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer version.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ version.
         /// </summary>
         public static string SOFTWARE_VERSION_PRODUCT_VERSION {
             get {
@@ -29685,7 +29685,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check that XenServer is configured correctly on &apos;{0}&apos; and try again..
+        ///   Looks up a localized string similar to Check that @BRANDING_SERVER@ is configured correctly on &apos;{0}&apos; and try again..
         /// </summary>
         public static string SOLUTION_CHECK_XENSERVER {
             get {
@@ -30147,7 +30147,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer &amp;Standard Per-Socket ({0} required).
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ &amp;Standard Per-Socket ({0} required).
         /// </summary>
         public static string STANDARD_PERSOCKET_LICENSES_X_REQUIRED {
             get {
@@ -30680,7 +30680,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Refer to the &quot;XenServer Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a XenServer host..
+        ///Refer to the &quot;@BRANDING_PRODUCT_BRAND@ Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a @BRANDING_SERVER@ host..
         /// </summary>
         public static string SUPP_PACK_INSTALL_FAILED_MORE_INFO {
             get {
@@ -30950,7 +30950,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools: Not present.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools: Not present.
         /// </summary>
         public static string TEMPLATE_INFO_TOOLSNOTPRESENT {
             get {
@@ -30959,7 +30959,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools: Out of date (version {0}.{1} installed).
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools: Out of date (version {0}.{1} installed).
         /// </summary>
         public static string TEMPLATE_INFO_TOOLSOLD {
             get {
@@ -30968,7 +30968,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools: Up to date.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools: Up to date.
         /// </summary>
         public static string TEMPLATE_INFO_TOOLSUPTODATE {
             get {
@@ -31265,7 +31265,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disks cannot be activated or deactivated from running VMs without XenServer Tools installed.
+        ///   Looks up a localized string similar to Disks cannot be activated or deactivated from running VMs without @BRANDING_PRODUCT_BRAND@ Tools installed.
         /// </summary>
         public static string TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS {
             get {
@@ -31310,7 +31310,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disks cannot be deleted from running VMs without XenServer Tools installed.
+        ///   Looks up a localized string similar to Disks cannot be deleted from running VMs without @BRANDING_PRODUCT_BRAND@ Tools installed.
         /// </summary>
         public static string TOOLTIP_DELETE_VDI_NEED_TOOLS {
             get {
@@ -31346,7 +31346,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disks cannot be removed from running VMs without XenServer Tools installed.
+        ///   Looks up a localized string similar to Disks cannot be removed from running VMs without @BRANDING_PRODUCT_BRAND@ Tools installed.
         /// </summary>
         public static string TOOLTIP_DETACH_VDI_NEED_TOOLS {
             get {
@@ -31364,7 +31364,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools must be installed to edit a network on a running VM.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools must be installed to edit a network on a running VM.
         /// </summary>
         public static string TOOLTIP_EDIT_NETWORK_TOOLS {
             get {
@@ -31391,7 +31391,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer only supports {0} NICs per Bond..
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ only supports {0} NICs per Bond..
         /// </summary>
         public static string TOOLTIP_NICS_PER_BOND_LIMIT {
             get {
@@ -31418,7 +31418,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools must be installed to remove a network on a running VM.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools must be installed to remove a network on a running VM.
         /// </summary>
         public static string TOOLTIP_REMOVE_NETWORK_TOOLS {
             get {
@@ -31822,7 +31822,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically check for XenServer or @BRANDING_BRAND_CONSOLE@ updates.
+        ///   Looks up a localized string similar to Automatically check for @BRANDING_SERVER@ or @BRANDING_BRAND_CONSOLE@ updates.
         /// </summary>
         public static string UPDATES_DESC {
             get {
@@ -32358,7 +32358,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM {0} does not have XenServer Tools installed..
+        ///   Looks up a localized string similar to The VM {0} does not have @BRANDING_PRODUCT_BRAND@ Tools installed..
         /// </summary>
         public static string UPDATES_WIZARD_NO_TOOLS {
             get {
@@ -32394,7 +32394,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM {0} cannot be suspended until it has up to date XenServer Tools..
+        ///   Looks up a localized string similar to The VM {0} cannot be suspended until it has up to date @BRANDING_PRODUCT_BRAND@ Tools..
         /// </summary>
         public static string UPDATES_WIZARD_OUT_OF_DATE_TOOLS {
             get {
@@ -32891,9 +32891,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
         ///
-        ///To learn more about the XenServer Alerting and Reporting feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Alerting and Reporting feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_ALERTS {
             get {
@@ -32902,9 +32902,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. 
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. 
         ///
-        ///To learn more about the XenServer Cross-Pool Migration feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Cross-Pool Migration feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_CPM {
             get {
@@ -32913,9 +32913,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.
         ///
-        ///To learn more about the XenServer Heterogeneous Pools feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Heterogeneous Pools feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_CPUMASKING {
             get {
@@ -32924,9 +32924,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Dynamic Memory Control.  Dynamic Memory Control allows XenServer to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Dynamic Memory Control.  Dynamic Memory Control allows @BRANDING_SERVER@ to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.
         ///
-        ///To learn more about the XenServer Dynamic Memory Control feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Dynamic Memory Control feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_DMC {
             get {
@@ -32935,9 +32935,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.
         ///
-        ///To learn more about the XenServer Disaster Recovery feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Disaster Recovery feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_DR {
             get {
@@ -32946,7 +32946,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable StorageLink™ Technology. StorageLink allows XenServer to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable StorageLink™ Technology. StorageLink allows @BRANDING_SERVER@ to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
         /// </summary>
         public static string UPSELL_BLURB_ENHANCEDSR {
             get {
@@ -32955,9 +32955,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.
         ///
-        ///To learn more about the XenServer GPU pass-through feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ GPU pass-through feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_GPU {
             get {
@@ -32966,9 +32966,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.
         ///
-        ///To learn more about the XenServer High Availability feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ High Availability feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_HA {
             get {
@@ -32977,9 +32977,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.
         ///
-        ///To learn more about the XenServer Performance Reporting capabilities feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Performance Reporting capabilities feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_PERFORMANCE {
             get {
@@ -32988,9 +32988,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your XenServer resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your @BRANDING_SERVER@ resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.
         ///
-        ///To learn more about the XenServer Role Based Access Control feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Role Based Access Control feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_RBAC {
             get {
@@ -32999,9 +32999,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.
         ///
-        ///To learn more about the vApps feature of XenServer or to start a XenServer trial, click the button below..
+        ///To learn more about the vApps feature of @BRANDING_SERVER@ or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_VM_APPLIANCES {
             get {
@@ -33010,9 +33010,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share.
         ///
-        ///To learn more about the XenServer VM Protection and Recovery feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ VM Protection and Recovery feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_VM_PROTECTION {
             get {
@@ -33021,9 +33021,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your XenServer license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and XenServer hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and @BRANDING_SERVER@ hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.
         ///
-        ///To learn more about the XenServer Dynamic Workload Balancing feature or to start a XenServer trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Dynamic Workload Balancing feature or to start a @BRANDING_SERVER@ trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_WLB {
             get {
@@ -35038,7 +35038,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurd when WLB  establish a session with XenServer..
+        ///   Looks up a localized string similar to An error occurd when WLB  establish a session with @BRANDING_SERVER@..
         /// </summary>
         public static string WLB_ERROR_4001 {
             get {
@@ -35047,7 +35047,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not log into XenServer. It could be due to invalid credentials..
+        ///   Looks up a localized string similar to WLB could not log into @BRANDING_SERVER@. It could be due to invalid credentials..
         /// </summary>
         public static string WLB_ERROR_4002 {
             get {
@@ -35056,7 +35056,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB cannot connect to XenServer. It could be the XenServer being offline or an incorrect TCP/IP address..
+        ///   Looks up a localized string similar to WLB cannot connect to @BRANDING_SERVER@. It could be the @BRANDING_SERVER@ being offline or an incorrect TCP/IP address..
         /// </summary>
         public static string WLB_ERROR_4003 {
             get {
@@ -35065,7 +35065,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received a null argument from XenServer, which is not allowed..
+        ///   Looks up a localized string similar to WLB received a null argument from @BRANDING_SERVER@, which is not allowed..
         /// </summary>
         public static string WLB_ERROR_4004 {
             get {
@@ -35083,7 +35083,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an invalid argument from XenServer..
+        ///   Looks up a localized string similar to WLB received an invalid argument from @BRANDING_SERVER@..
         /// </summary>
         public static string WLB_ERROR_4007 {
             get {
@@ -35092,7 +35092,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB data collection service cannot retrieve XenServer data..
+        ///   Looks up a localized string similar to WLB data collection service cannot retrieve @BRANDING_SERVER@ data..
         /// </summary>
         public static string WLB_ERROR_4008 {
             get {
@@ -35110,7 +35110,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an invalid operation from XenServer..
+        ///   Looks up a localized string similar to WLB received an invalid operation from @BRANDING_SERVER@..
         /// </summary>
         public static string WLB_ERROR_4010 {
             get {
@@ -35119,7 +35119,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an out of range argument from XenServer..
+        ///   Looks up a localized string similar to WLB received an out of range argument from @BRANDING_SERVER@..
         /// </summary>
         public static string WLB_ERROR_4011 {
             get {
@@ -35209,7 +35209,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not start a XenServer session with supplied invalid credentials..
+        ///   Looks up a localized string similar to WLB could not start a @BRANDING_SERVER@ session with supplied invalid credentials..
         /// </summary>
         public static string WLB_ERROR_4021 {
             get {
@@ -35236,7 +35236,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer cannot connect to the WLB Server with the supplied WLB Server credentials..
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ cannot connect to the WLB Server with the supplied WLB Server credentials..
         /// </summary>
         public static string WLB_ERROR_5 {
             get {
@@ -35245,7 +35245,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The user WLB uses to connect to XenServer either doesn&apos;t have sufficient privileges or doesn&apos;t have access to XenServer. Please re-initialize WLB with an valid user..
+        ///   Looks up a localized string similar to The user WLB uses to connect to @BRANDING_SERVER@ either doesn&apos;t have sufficient privileges or doesn&apos;t have access to @BRANDING_SERVER@. Please re-initialize WLB with an valid user..
         /// </summary>
         public static string WLB_ERROR_6 {
             get {
@@ -35764,7 +35764,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The stored XenServer credentials are no longer valid.  Please update the connection settings for Workload Balancing..
+        ///   Looks up a localized string similar to The stored @BRANDING_SERVER@ credentials are no longer valid.  Please update the connection settings for Workload Balancing..
         /// </summary>
         public static string WLB_RECONFIGURE_CREDS {
             get {
@@ -36909,7 +36909,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@.
         /// </summary>
         public static string XENSERVER {
             get {
@@ -36918,7 +36918,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer 6.2.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ 6.2.
         /// </summary>
         public static string XENSERVER_6_2 {
             get {
@@ -36927,7 +36927,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer 6.5.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ 6.5.
         /// </summary>
         public static string XENSERVER_6_5 {
             get {
@@ -36936,7 +36936,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Templates.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Templates.
         /// </summary>
         public static string XENSERVER_TEMPLATES {
             get {
@@ -36954,7 +36954,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Backup Files.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Backup Files.
         /// </summary>
         public static string XS_BACKUP_FILES {
             get {
@@ -36963,7 +36963,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer License Files.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ License Files.
         /// </summary>
         public static string XS_LICENSE_FILES {
             get {
@@ -36972,7 +36972,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Tools DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
+        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
         ///
         ///You will need to navigate to the Console on each of the selected VMs to complete the installation..
         /// </summary>
@@ -36983,7 +36983,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The XenServer Tools SR could not be found..
+        ///   Looks up a localized string similar to The @BRANDING_PRODUCT_BRAND@ Tools SR could not be found..
         /// </summary>
         public static string XS_TOOLS_SR_NOT_FOUND {
             get {
@@ -36992,7 +36992,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Update Files ({0})|{0}|All files ({1})|{1}.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Update Files ({0})|{0}|All files ({1})|{1}.
         /// </summary>
         public static string XSUPDATE {
             get {

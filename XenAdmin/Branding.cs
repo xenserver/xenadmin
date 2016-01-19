@@ -43,5 +43,7 @@ namespace XenAdmin
         public const string XENCENTER_VERSION = "@BRANDING_PRODUCT_VERSION@";
         public const string COMPANY_NAME_LEGAL = "@BRANDING_COMPANY_NAME_LEGAL@";
         public const string BRAND_CONSOLE = "@BRANDING_BRAND_CONSOLE@";
+        public const string PRODUCT_BRAND = "@BRANDING_PRODUCT_BRAND@";
+        public const string COMPANY_NAME_SHORT = "@BRANDING_COMPANY_NAME_SHORT@";
     }
 }

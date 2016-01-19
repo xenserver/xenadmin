@@ -232,7 +232,7 @@
     <value>0</value>
   </data>
   <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
-    <value>XenServer の新しいバージョンを確認する(&amp;S)</value>
+    <value>@BRANDING_SERVER@ の新しいバージョンを確認する(&amp;V)</value>
   </data>
   <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerUpdatesCheckBox</value>
@@ -268,7 +268,7 @@
     <value>1</value>
   </data>
   <data name="AllowXenServerPatchesCheckBox.Text" xml:space="preserve">
-    <value>XenServer のアップデートを確認する(&amp;U)</value>
+    <value>@BRANDING_SERVER@ のアップデートを確認する(&amp;U)</value>
   </data>
   <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerPatchesCheckBox</value>
@@ -301,7 +301,7 @@
     <value>1</value>
   </data>
   <data name="XenServerGroupBox.Text" xml:space="preserve">
-    <value>XenServer アップデートの自動確認</value>
+    <value>@BRANDING_SERVER@ アップデートの自動確認</value>
   </data>
   <data name="&gt;&gt;XenServerGroupBox.Name" xml:space="preserve">
     <value>XenServerGroupBox</value>
@@ -337,7 +337,7 @@
     <value>3</value>
   </data>
   <data name="UpdatesBlurb.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ では、XenServer の新しいバージョンやアップデートを定期的にチェックして、ダウンロードが可能になったときにメッセージを表示できます。</value>
+    <value>@BRANDING_BRAND_CONSOLE@ では、@BRANDING_SERVER@ の新しいバージョンやアップデートを定期的にチェックして、ダウンロードが可能になったときにメッセージを表示できます。</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
     <value>UpdatesBlurb</value>

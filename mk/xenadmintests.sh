@@ -33,6 +33,7 @@
 set -eu
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
+source ${REPO}/Branding/branding.sh
 
 if [ ${XS_BRANCH} = "trunk" ]
 then
@@ -49,7 +50,7 @@ MYSCP="scp"
 
 # Kill any running nunit processes.
 ${MYTESTSSH} 'ps -W -s | grep nunit  | cut -b-10 | xargs kill -f' || true
-${MYTESTSSH} 'rm -rf /tmp/* /cygdrive/c/Documents\ and\ Settings/Administrator/AppData/Roaming/Citrix/XenCenter/logs/XenCenter.log' || true
+${MYTESTSSH} 'rm -rf /tmp/* /cygdrive/c/Documents\ and\ Settings/Administrator/AppData/Roaming/${BRANDING_COMPANY_NAME_SHORT}/${BRANDING_BRAND_CONSOLE}/logs/${BRANDING_BRAND_CONSOLE}.log' || true
 ${MYSCP} ./output/xenadmin/XenAdminTests.tgz Administrator@$ADDR:/tmp/
 
 ${MYTESTSSH} 'cd /tmp && tar xzf /tmp/XenAdminTests.tgz && chmod -R 777 /tmp/Release'
@@ -68,7 +69,7 @@ set -e
 sleeperpid2=$(ps --ppid "$sleeperpid" -o pid= || true)
 kill "$sleeperpid2" >/dev/null || true
 
-${MYSCP} "Administrator@$ADDR:/cygdrive/c/Documents\ and\ Settings/Administrator/AppData/Roaming/Citrix/XenCenter/logs/XenCenter.log" /var/www/XenCenter.log || true 
+${MYSCP} "Administrator@$ADDR:/cygdrive/c/Documents\ and\ Settings/Administrator/AppData/Roaming/${BRANDING_COMPANY_NAME_SHORT}/${BRANDING_BRAND_CONSOLE}/logs/${BRANDING_BRAND_CONSOLE}.log" /var/www/@BRANDING_BRAND_CONSOLE@.log || true 
 ${MYSCP} Administrator@$ADDR:/tmp/XenAdminTests.xml /var/www/XenAdminTests.xml
 
 grep 'errors="0" failures="0"' /var/www/XenAdminTests.xml

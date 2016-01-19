@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("xva_verify")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Citrix")]
+[assembly: AssemblyCompany("@BRANDING_COMPANY_NAME_SHORT@")]
 [assembly: AssemblyProduct("xva_verify")]
 [assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
 [assembly: AssemblyTrademark("")]

@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,30 +29,21 @@
  * SUCH DAMAGE.
  */
 
-using NUnit.Framework;
-using XenAdmin.Alerts;
-using XenAdminTests.UnitTests.UnitTestHelper;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace XenAdminTests.UnitTests.AlertTests
+// Values taken from branding.hg
+
+namespace XenServerHealthCheck
 {
-    [TestFixture, Category(TestCategories.Unit)]
-    public class GuiOldAlertTest
+    static public class Branding
     {
-        [Test]
-        public void VerifyStoredDataWithDefaultConstructor()
-        {
-            IUnitTestVerifier validator = new VerifyGetters(new GuiOldAlert());
-
-            validator.Verify(new AlertClassUnitTestData
-                                        {
-                                            AppliesTo = XenAdmin.Branding.BRAND_CONSOLE,
-                                            Description = "There is a newer version of " + XenAdmin.Branding.BRAND_CONSOLE + " available. Please contact your support representative.",
-                                            FixLinkText = "Go to Web Page",
-                                            HelpID = "GuiOldAlert",
-                                            HelpLinkText = "Help",
-                                            Title = "Newer " + XenAdmin.Branding.BRAND_CONSOLE + " Available",
-                                            Priority = "Priority5"
-                                        });
-        }
+        public const string PRODUCT_VERSION_TEXT = "@BRANDING_PRODUCT_VERSION_TEXT@";
+        public const string XENCENTER_VERSION = "@BRANDING_PRODUCT_VERSION@";
+        public const string COMPANY_NAME_LEGAL = "@BRANDING_COMPANY_NAME_LEGAL@";
+        public const string BRAND_CONSOLE = "@BRANDING_BRAND_CONSOLE@";
+        public const string PRODUCT_BRAND = "@BRANDING_PRODUCT_BRAND@";
+        public const string COMPANY_NAME_SHORT = "@BRANDING_COMPANY_NAME_SHORT@";
     }
 }

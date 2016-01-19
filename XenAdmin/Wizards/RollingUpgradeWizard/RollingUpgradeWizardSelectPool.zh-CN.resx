@@ -186,7 +186,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnVersion.HeaderText" xml:space="preserve">
-    <value>XenServer 版本</value>
+    <value>@BRANDING_SERVER@ 版本</value>
   </data>
   <data name="ColumnVersion.MinimumWidth" type="System.Int32, mscorlib">
     <value>130</value>
@@ -230,7 +230,7 @@
   <data name="label1.Text" xml:space="preserve">
     <value>选择要升级的资源池和/或独立服务器，然后单击“下一步”。
 
-注意: 使用此向导无法升级正在运行 XenServer 5.5 或更早版本的池或服务器。</value>
+注意: 使用此向导无法升级正在运行 @BRANDING_SERVER@ 5.5 或更早版本的池或服务器。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

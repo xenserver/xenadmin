@@ -46,7 +46,7 @@ mkdir_clean()
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 mkdir_clean ${BUILD_ARCHIVE}
-rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/XenCenter.log || true
+rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
 
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
@@ -211,6 +211,12 @@ version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
 
 #create just english msi
+if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
+then 
+  mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
+  mv XenCenter.l10n.wxs ${BRANDING_BRAND_CONSOLE}.l10n.wxs
+fi
+
 compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}"
 
 #then create l10n msi containing all resources
@@ -218,9 +224,9 @@ compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "en-us" && sign_msi "${BRANDI
 compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.ja-jp"
 compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.zh-cn"
 
-cp ${WIX}/outXenCenter.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
-   ${WIX}/outXenCenter.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
-   ${WIX}/outXenCenter.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
+cp ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
+   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
+   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
    ${WIX}
  
 cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
@@ -239,7 +245,7 @@ cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/sign.bat $
 #create bundle exe installers - msi installers embedded
 DOTNETINST=${REPO}/dotNetInstaller
 cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
-cp ${WIX}/outXenCenter/${BRANDING_BRAND_CONSOLE}.msi ${DOTNETINST}
+cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${DOTNETINST}
 cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${DOTNETINST}
 
 cp "$(which dotNetInstaller.exe)" ${DOTNETINST}

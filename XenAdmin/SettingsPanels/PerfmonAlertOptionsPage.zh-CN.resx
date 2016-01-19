@@ -358,7 +358,7 @@
     <value>32</value>
   </data>
   <data name="SendEmailNoteLabel.Text" xml:space="preserve">
-    <value>XenServer 可以通过电子邮件向您提供与托管服务器正在生成的系统警报有关的更新信息。要启用此功能，请为此池中的服务器和 VM (或此独立的服务器)输入用于接收电子邮件通知的地址。</value>
+    <value>@BRANDING_SERVER@ 可以通过电子邮件向您提供与托管服务器正在生成的系统警报有关的更新信息。要启用此功能，请为此池中的服务器和 VM (或此独立的服务器)输入用于接收电子邮件通知的地址。</value>
   </data>
   <data name="&gt;&gt;SendEmailNoteLabel.Name" xml:space="preserve">
     <value>SendEmailNoteLabel</value>
