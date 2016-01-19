@@ -139,7 +139,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Copyright © @BRANDING_COMPANY_NAME_SHORT@ Systems, Inc. All rights reserved.</value>
+    <value>Copyright © BRANDING_COMPANY_NAME_LEGAL All rights reserved.</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

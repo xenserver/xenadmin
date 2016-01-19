@@ -232,7 +232,7 @@
     <value>0</value>
   </data>
   <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
-    <value>检查新版本 @BRANDING_SERVER@(&amp;N)</value>
+    <value>检查新版本 @BRANDING_SERVER@(&amp;V)</value>
   </data>
   <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerUpdatesCheckBox</value>

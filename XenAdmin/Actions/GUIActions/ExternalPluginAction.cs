@@ -56,11 +56,11 @@ namespace XenAdmin.Actions
 
         private static readonly string SnapInTrustedCertXml = 
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            Branding.COMPANY_NAME_SHORT + "\\XenServerPSSnapIn\\XenServer_Known_Certificates.xml");
+            Branding.COMPANY_NAME_SHORT, "\\XenServerPSSnapIn\\XenServer_Known_Certificates.xml");
 
         private static readonly string SnapInTrustedCertXmlDir = 
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            Branding.COMPANY_NAME_SHORT + "\\XenServerPSSnapIn");
+            Branding.COMPANY_NAME_SHORT, "\\XenServerPSSnapIn");
 
         private readonly ReadOnlyCollection<IXenObject> _targets = new ReadOnlyCollection<IXenObject>(new List<IXenObject>());
         private readonly bool XenCenterNodeTarget = false;

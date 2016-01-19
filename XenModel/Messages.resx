@@ -7765,7 +7765,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
   </data>
   <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>You cannot add server with a me="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="p Advanced Edition or higher license to a pool of Free Edition @BRANDING_SERVER@s</value>
+    <value>You cannot add server with a @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher license to a pool of Free Edition servers</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
@@ -7856,7 +7856,7 @@ When you configure a SMB storage repository, you simply provide the hostname or 
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
   <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any @BRANDING_SERVER@s, or the virtual disk may become corrupted while in use.
+    <value>Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any servers, or the virtual disk may become corrupted while in use.
 
 Do you wish to format the disk?</value>
   </data>
@@ -8981,7 +8981,7 @@ Date created: {2}
 Size: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>This patch is for @BRANDING_SERVER@s with version matching the regular expression '{0}'.</value>
+    <value>This patch is for servers with version matching the regular expression '{0}'.</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>Not found</value>

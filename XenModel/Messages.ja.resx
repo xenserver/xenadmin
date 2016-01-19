@@ -7493,7 +7493,7 @@ SCSI ID: {2}
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
   <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>このLUN に仮想ディスクを作成すると、保存されているデータが失われます。@BRANDING_SERVER@s を含むほかのシステムが LUN を使用していないことを確認してください。LUN が使用されていると、仮想ディスクが破損する場合があります。
+    <value>このLUN に仮想ディスクを作成すると、保存されているデータが失われます。servers を含むほかのシステムが LUN を使用していないことを確認してください。LUN が使用されていると、仮想ディスクが破損する場合があります。
 
 ディスクをフォーマットしてもよろしいですか?</value>
   </data>

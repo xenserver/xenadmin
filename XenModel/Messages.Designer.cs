@@ -22691,7 +22691,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot add server with a me=&quot;NEWPOOL_FREE_HOST_PAID_MASTER&quot; xml:space=&quot;p Advanced Edition or higher license to a pool of Free Edition @BRANDING_SERVER@s.
+        ///   Looks up a localized string similar to You cannot add server with a @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher license to a pool of Free Edition servers.
         /// </summary>
         public static string NEWPOOL_PAID_HOST_FREE_MASTER {
             get {
@@ -22956,7 +22956,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any @BRANDING_SERVER@s, or the virtual disk may become corrupted while in use.
+        ///   Looks up a localized string similar to Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any servers, or the virtual disk may become corrupted while in use.
         ///
         ///Do you wish to format the disk?.
         /// </summary>
@@ -25246,7 +25246,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This patch is for @BRANDING_SERVER@s with version matching the regular expression &apos;{0}&apos;..
+        ///   Looks up a localized string similar to This patch is for servers with version matching the regular expression &apos;{0}&apos;..
         /// </summary>
         public static string PATCH_FOR_XENSERVER_VERSION {
             get {
