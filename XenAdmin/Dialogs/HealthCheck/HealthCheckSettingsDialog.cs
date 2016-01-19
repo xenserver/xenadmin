@@ -112,7 +112,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name);
             
-            authenticationRubricLabel.Text = authenticationRequired
+            authenticationRubricTextBox.Text = authenticationRequired
                 ? Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN
                 : Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
 
@@ -401,6 +401,11 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
             log.DebugFormat("Subject '{0}' is not authorized to complete the action", ud.UserName ?? ud.UserSid);
             return false;
+        }
+
+        private void authenticationRubricTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            Program.OpenURL(e.LinkText);
         }
     }
 }

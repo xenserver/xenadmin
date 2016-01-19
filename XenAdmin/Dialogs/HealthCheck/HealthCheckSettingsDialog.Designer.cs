@@ -43,7 +43,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.dayOfWeekComboBox = new System.Windows.Forms.ComboBox();
             this.decentGroupBox1 = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.authenticationRubricLabel = new System.Windows.Forms.Label();
+            this.authenticationRubricTextBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxMyCitrixPassword = new System.Windows.Forms.TextBox();
@@ -194,7 +194,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.authenticationRubricLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.authenticationRubricTextBox, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixPassword, 1, 4);
@@ -203,11 +203,16 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.tableLayoutPanel2.Controls.Add(this.newAuthenticationRadioButton, 0, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // authenticationRubricLabel
+            // authenticationRubricTextBox
             // 
-            resources.ApplyResources(this.authenticationRubricLabel, "authenticationRubricLabel");
-            this.tableLayoutPanel2.SetColumnSpan(this.authenticationRubricLabel, 2);
-            this.authenticationRubricLabel.Name = "authenticationRubricLabel";
+            resources.ApplyResources(this.authenticationRubricTextBox, "authenticationRubricTextBox");
+            this.authenticationRubricTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.authenticationRubricTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanel2.SetColumnSpan(this.authenticationRubricTextBox, 2);
+            this.authenticationRubricTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.authenticationRubricTextBox.Name = "authenticationRubricTextBox";
+            this.authenticationRubricTextBox.ShortcutsEnabled = false;
+            this.authenticationRubricTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.authenticationRubricTextBox_LinkClicked);
             // 
             // label1
             // 
@@ -419,7 +424,6 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.ComboBox dayOfWeekComboBox;
         private Controls.DecentGroupBox decentGroupBox1;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label authenticationRubricLabel;
         protected System.Windows.Forms.Label label1;
         protected System.Windows.Forms.Label label2;
         protected System.Windows.Forms.TextBox textBoxMyCitrixPassword;
@@ -445,5 +449,6 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.Button testCredentialsButton;
         private System.Windows.Forms.PictureBox testCredentialsStatusImage;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.RichTextBox authenticationRubricTextBox;
     }
 }
