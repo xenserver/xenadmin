@@ -431,7 +431,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             public void UpdateDescription(PreCheckResult precheckResult)
             {
                 string result = precheckResult == PreCheckResult.OK
-                                    ? Messages.OK
+                                    ? Messages.GENERAL_STATE_OK
                                     : precheckResult == PreCheckResult.Warning ? Messages.WARNING : Messages.FAILED;
 
                 _descriptionCell.Value = string.Format("{0} {1}", description, result);

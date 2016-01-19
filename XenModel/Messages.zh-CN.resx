@@ -5015,7 +5015,7 @@
   <data name="GENERAL_SR_STATE_BROKEN" xml:space="preserve">
     <value>已损坏</value>
   </data>
-  <data name="GENERAL_SR_STATE_OK" xml:space="preserve">
+  <data name="GENERAL_STATE_OK" xml:space="preserve">
     <value>正常</value>
   </data>
   <data name="GENERAL_UNKNOWN" xml:space="preserve">
@@ -7349,7 +7349,7 @@ SCSI ID: {2}
     <value>从不</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>新磁盘将在下次重新启动 VM 后显示。</value>
+    <value>新磁盘将在关机并重新启动 VM 后显示。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>已创建磁盘</value>

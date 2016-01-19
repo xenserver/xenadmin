@@ -6,10 +6,10 @@
     <String Id="OVA_File">OVA 文件</String>
     <String Id="VHD_File">VHD 文件</String>
     <String Id="VMDK_File">VMDK 文件</String>
-    <String Id="XenServer_License_File">XenServer 许可文件</String>
-    <String Id="XenServer_Backup_File">XenServer 备份文件</String>
-    <String Id="XenServer_Update_File">XenServer 更新文件</String>
-    <String Id="XenServer_OEM_Update_File">XenServer OEM 更新文件</String>
+    <String Id="XenServer_License_File">@BRANDING_SERVER@ 许可文件</String>
+    <String Id="XenServer_Backup_File">@BRANDING_SERVER@ 备份文件</String>
+    <String Id="XenServer_Update_File">@BRANDING_SERVER@ 更新文件</String>
+    <String Id="XenServer_OEM_Update_File">@BRANDING_SERVER@ OEM 更新文件</String>
     <String Id="XenCenter_Saved_Search">@BRANDING_BRAND_CONSOLE@ 保存的搜索</String>
     <String Id="Required_For_Installation">此安装需要 .NET Framework 4。</String>
 </WixLocalization>

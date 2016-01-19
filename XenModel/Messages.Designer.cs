@@ -15110,9 +15110,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        public static string GENERAL_SR_STATE_OK {
+        public static string GENERAL_STATE_OK {
             get {
-                return ResourceManager.GetString("GENERAL_SR_STATE_OK", resourceCulture);
+                return ResourceManager.GetString("GENERAL_STATE_OK", resourceCulture);
             }
         }
         

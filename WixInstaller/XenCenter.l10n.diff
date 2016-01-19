@@ -85,7 +85,7 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XSLIC extension -->
--							<ProgId Id="XenCenter.xslic" Description="XenServer License File" Icon="XslicIcon">
+-							<ProgId Id="XenCenter.xslic" Description="@BRANDING_SERVER@ License File" Icon="XslicIcon">
 +                            <!-- Define XSLIC extension -->
 +							<ProgId Id="XenCenter.xslic" Description="!(loc.XenServer_License_File)" Icon="XslicIcon">
                                  <Extension Id="xslic" ContentType="application/xslic">
@@ -94,7 +94,7 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XBK extension -->
--							<ProgId Id="XenCenter.xbk" Description="XenServer Backup File" Icon="XkbIcon">
+-							<ProgId Id="XenCenter.xbk" Description="@BRANDING_SERVER@ Backup File" Icon="XkbIcon">
 +                            <!-- Define XBK extension -->
 +							<ProgId Id="XenCenter.xbk" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
                                  <Extension Id="xbk" ContentType="application/xbk">
@@ -103,7 +103,7 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XSUPDATE extension -->
--							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="XenServer Update File" Icon="XsupdateIcon">
+-							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="@BRANDING_SERVER@ Update File" Icon="XsupdateIcon">
 +							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="!(loc.XenServer_Update_File)" Icon="XsupdateIcon">
                                  <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
@@ -111,7 +111,7 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XSOEM extension -->
--							<ProgId Id="XenCenter.xsoem" Description="XenServer OEM Update File" Icon="XsupdateIcon">
+-							<ProgId Id="XenCenter.xsoem" Description="@BRANDING_SERVER@ OEM Update File" Icon="XsupdateIcon">
 +							<ProgId Id="XenCenter.xsoem" Description="!(loc.XenServer_OEM_Update_File)" Icon="XsupdateIcon">
                                  <Extension Id="xsoem" ContentType="application/xsoem">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />

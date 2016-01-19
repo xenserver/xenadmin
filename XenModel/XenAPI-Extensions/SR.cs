@@ -990,7 +990,7 @@ namespace XenAPI
                 if (!MultipathAOK)
                     return Messages.GENERAL_MULTIPATH_FAILURE;
 
-                return Messages.GENERAL_SR_STATE_OK;
+                return Messages.GENERAL_STATE_OK;
             }
         }
 

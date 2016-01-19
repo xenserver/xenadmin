@@ -357,7 +357,7 @@ namespace XenAdmin.Wizards.GenericPages
             public void UpdateDescription(PermissionCheckResult permissionCheckResult)
             {
                 string result = permissionCheckResult == PermissionCheckResult.OK
-                                    ? Messages.OK
+                                    ? Messages.GENERAL_STATE_OK
                                     : permissionCheckResult == PermissionCheckResult.Warning
                                           ? Messages.WARNING
                                           : Messages.FAILED;

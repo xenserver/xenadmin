@@ -5016,7 +5016,7 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GENERAL_SR_STATE_BROKEN" xml:space="preserve">
     <value>接続の問題</value>
   </data>
-  <data name="GENERAL_SR_STATE_OK" xml:space="preserve">
+  <data name="GENERAL_STATE_OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="GENERAL_UNKNOWN" xml:space="preserve">

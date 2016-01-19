@@ -124,25 +124,25 @@
                                 </Extension>
                             </ProgId>
 							<!-- Define XSLIC extension -->
-							<ProgId Id="XenCenter.xslic" Description="XenServer License File" Icon="XslicIcon">
+							<ProgId Id="XenCenter.xslic" Description="@BRANDING_SERVER@ License File" Icon="XslicIcon">
                                 <Extension Id="xslic" ContentType="application/xslic">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
 							<!-- Define XBK extension -->
-							<ProgId Id="XenCenter.xbk" Description="XenServer Backup File" Icon="XkbIcon">
+							<ProgId Id="XenCenter.xbk" Description="@BRANDING_SERVER@ Backup File" Icon="XkbIcon">
                                 <Extension Id="xbk" ContentType="application/xbk">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XSUPDATE extension -->
-							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="XenServer Update File" Icon="XsupdateIcon">
+							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="@BRANDING_SERVER@ Update File" Icon="XsupdateIcon">
                                 <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XSOEM extension -->
-							<ProgId Id="XenCenter.xsoem" Description="XenServer OEM Update File" Icon="XsupdateIcon">
+							<ProgId Id="XenCenter.xsoem" Description="@BRANDING_SERVER@ OEM Update File" Icon="XsupdateIcon">
                                 <Extension Id="xsoem" ContentType="application/xsoem">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
@@ -203,8 +203,8 @@
 								  Type="ownProcess"
 								  Vital="no"
 								  Name="XenServerHealthCheck"
-								  DisplayName="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service"
-								  Description="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service"
+								  DisplayName="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service"
+								  Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service"
 								  Start="auto"
 								  Account="LocalSystem"
 								  ErrorControl="normal"
@@ -251,7 +251,7 @@
             <ComponentRef Id="ApplicationShortcut" />
         </Feature>
 		
-        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
              <ComponentRef Id="XenServerHealthCheck" /> 
         </Feature>
 		
