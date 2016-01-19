@@ -228,9 +228,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>アップグレードするリソース プールまたはスタンドアロン サーバーを選択して、[次へ] をクリックします。
-
-注: このウィザードでは、@BRANDING_SERVER@ Version 5.5 およびそれ以前のバージョンをアップグレードすることはできません。</value>
+    <value>アップグレードするリソース プールまたはスタンドアロン サーバーを選択して、[次へ] をクリックします。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

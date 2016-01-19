@@ -6312,7 +6312,7 @@ SCSI ID: {2}
     <value>無償の @BRANDING_SERVER@ 製品をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>Version 5.6 よりも古い @BRANDING_SERVER@ にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>Version @BRANDING_XC_PRODUCT_5_6_VERSION@ よりも古い @BRANDING_SERVER@ にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
@@ -7077,10 +7077,6 @@ SCSI ID: {2}
   </data>
   <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
     <value>{0}: {1}</value>
-  </data>
-  <data name="MIAMI_NOT_SUPPORTED" xml:space="preserve">
-    <value>このバージョンの @BRANDING_BRAND_CONSOLE@ は @BRANDING_SERVER@ 4.0 および 4.1 をサポートしません。
-以前のバージョンをインストールしてください。</value>
   </data>
   <data name="MIGRATE" xml:space="preserve">
     <value>移行</value>
@@ -8801,7 +8797,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>以下の StorageLink Gateway への接続時にエラーが発生しました。\n\n{0}\n\nこのホストの設定を確認して再接続してください。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>StorageLink SR を @BRANDING_SERVER@ 6.5 で使用することはできません。StorageLink SR を削除してからアップグレードしてください。</value>
+    <value>StorageLink SR を @BRANDING_SERVER@ で使用することはできません。StorageLink SR を削除してからアップグレードしてください。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -9367,7 +9363,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>ライセンスの状態を確認しています</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>'{0}': VM 保護ポリシーは、@BRANDING_SERVER@ 6.2 で削除されました</value>
+    <value>'{0}': VM 保護ポリシーは、@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@ で削除されました</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
     <value>'{0}': WSS サーバーのサポートは、@BRANDING_SERVER@ 6.2 で削除されました</value>
@@ -12075,10 +12071,10 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>@BRANDING_SERVER@</value>
   </data>
   <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.2</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.5</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>@BRANDING_SERVER@ テンプレート</value>

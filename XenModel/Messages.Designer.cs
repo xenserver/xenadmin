@@ -26730,7 +26730,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in @BRANDING_SERVER@ 6.5. Remove StorageLink SRs before upgrading..
+        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in @BRANDING_SERVER@. Remove StorageLink SRs before upgrading..
         /// </summary>
         public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
             get {
@@ -36927,7 +36927,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ 6.5.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@.
         /// </summary>
         public static string XENSERVER_6_5 {
             get {

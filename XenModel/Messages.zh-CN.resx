@@ -6310,7 +6310,7 @@ SCSI ID: {2}
     <value>激活免费 @BRANDING_SERVER@ 时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>为 5.6 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
+    <value>为 @BRANDING_XC_PRODUCT_5_6_VERSION@ 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
@@ -7075,10 +7075,6 @@ SCSI ID: {2}
   </data>
   <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
     <value>{0}: {1}</value>
-  </data>
-  <data name="MIAMI_NOT_SUPPORTED" xml:space="preserve">
-    <value>该版本的 @BRANDING_BRAND_CONSOLE@ 不支持 @BRANDING_SERVER@ 4.0 或 4.1。
-请安装更早的版本。</value>
   </data>
   <data name="MIGRATE" xml:space="preserve">
     <value>迁移</value>
@@ -8803,7 +8799,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>尝试连接到 StorageLink Gateway 时出错: \n\n{0}\n\n请检查此主机的设置并重新连接。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.5 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
+    <value>@BRANDING_SERVER@ 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -9369,7 +9365,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在检查许可状态</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>{0}: @BRANDING_SERVER@ 6.2 中删除了 VM 保护策略</value>
+    <value>{0}: @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@ 中删除了 VM 保护策略</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
     <value>{0}: @BRANDING_SERVER@ 6.2 中不再使用 WSS 服务器</value>
@@ -12077,10 +12073,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>@BRANDING_SERVER@</value>
   </data>
   <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.2</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.5</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>@BRANDING_SERVER@ 模板</value>

@@ -71,10 +71,12 @@ rebranding_global()
         -e "s#@BRANDING_SERVER@#${BRANDING_SERVER}#g" \
         -e "s#@BRANDING_BRAND_CONSOLE@#${BRANDING_BRAND_CONSOLE}#g" \
         -e "s#@BUILD_NUMBER@#${get_BUILD_NUMBER}#g" \
+        -e "s#@BRANDING_XC_PRODUCT_5_6_VERSION@#${BRANDING_XC_PRODUCT_5_6_VERSION}#g" \
+        -e "s#@BRANDING_XC_PRODUCT_6_2_VERSION@#${BRANDING_XC_PRODUCT_6_2_VERSION}#g" \
+        -e "s#@BRANDING_XC_PRODUCT_6_5_VERSION@#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
         $1 > $1.tmp
     mv -f $1.tmp $1    
 }
-
 
 version_brand_cpp()
 {
