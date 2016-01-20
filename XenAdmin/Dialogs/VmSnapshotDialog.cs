@@ -175,7 +175,7 @@ namespace XenAdmin.Dialogs
         {
             string tt;
             if (Helpers.FeatureForbidden(_VM, Host.RestrictCheckpoint))
-                tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL.Replace("\\n", "\n"), Messages.DISKMEMORY_SNAPSHOTS);
+                tt = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_DISKMEMORY_MODE_POWER_STATE.Replace("\\n", "\n");
             else if (_VM.HasVGPUs)

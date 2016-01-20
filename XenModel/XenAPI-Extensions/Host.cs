@@ -431,6 +431,16 @@ namespace XenAPI
             return h._RestrictExportResourceData;
         }
 
+        private bool _RestrictIntraPoolMigrate
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_xen_motion"); }
+        }
+
+        public static bool RestrictIntraPoolMigrate(Host h)
+        {
+            return h._RestrictIntraPoolMigrate;
+        }
+
         private bool _RestrictReadCaching
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_read_caching"); }
