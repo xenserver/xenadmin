@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -71,8 +71,15 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
-            if (sc.Status != ServiceControllerStatus.Running)
+            try
+            {
+                if (sc.Status != ServiceControllerStatus.Running)
+                    return;
+            }
+            catch
+            {
                 return;
+            }
 
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             int retryCount = 120;
