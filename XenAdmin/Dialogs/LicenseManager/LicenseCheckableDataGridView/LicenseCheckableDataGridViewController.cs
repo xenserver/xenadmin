@@ -99,32 +99,31 @@ namespace XenAdmin.Controls
             if (comparer == null || columnIndex < 0)
                 return;
 
-            lock (StoredRowsLock)
+            Program.AssertOnEventThread();
+
+            View.SuspendDrawing();
+            try
             {
-                View.SuspendDrawing();
-                try
-                {
-                    View.DrawAllRowsAsClearedMW();
-                    storedRows.Sort(comparer);
+                View.DrawAllRowsAsClearedMW();
+                storedRows.Sort(comparer);
 
-                    if(CurrentSortDirection == SortDirection.Descending)
-                        storedRows.Reverse();
+                if(CurrentSortDirection == SortDirection.Descending)
+                    storedRows.Reverse();
 
-                    foreach (CheckableDataGridViewRow row in storedRows)
-                    {
-                        View.DrawRowMW(row);
-                        LicenseDataGridViewRow lRow = row as LicenseDataGridViewRow;
-                        if (lRow == null)
-                            continue;
-                        LicenseView.DrawStatusIcon(row.Index, lRow.RowStatus);
-                        if (row.Highlighted)
-                            View.DrawRowAsHighlightedMW(true, row.Index);
-                    }
-                }
-                finally
+                foreach (CheckableDataGridViewRow row in storedRows)
                 {
-                    View.ResumeDrawing();
+                    View.DrawRowMW(row);
+                    LicenseDataGridViewRow lRow = row as LicenseDataGridViewRow;
+                    if (lRow == null)
+                        continue;
+                    LicenseView.DrawStatusIcon(row.Index, lRow.RowStatus);
+                    if (row.Highlighted)
+                        View.DrawRowAsHighlightedMW(true, row.Index);
                 }
+            }
+            finally
+            {
+                View.ResumeDrawing();
             }
         }
 

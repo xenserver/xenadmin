@@ -61,15 +61,13 @@ namespace XenAdmin.Controls.CheckableDataGridView
         }
 
         protected readonly List<CheckableDataGridViewRow> storedRows = new List<CheckableDataGridViewRow>();
-        protected readonly object StoredRowsLock = new object();
 
         public void ClearAllRows()
         {
-            lock (StoredRowsLock)
-            {
-                storedRows.ForEach(r => r.Dispose());
-                storedRows.Clear();
-            }
+            Program.AssertOnEventThread(); 
+            storedRows.ForEach(r => r.Dispose());
+            storedRows.Clear();
+
             View.DrawAllRowsAsCleared();
         }
 
@@ -82,10 +80,8 @@ namespace XenAdmin.Controls.CheckableDataGridView
         {
             foreach (CheckableDataGridViewRow cRow in rows)
             {
-                lock (StoredRowsLock)
-                {
-                    storedRows.Add(cRow);
-                }
+                Program.AssertOnEventThread();
+                storedRows.Add(cRow);
                 cRow.CellDataUpdated += cRow_CellDataUpdated;
                 IXenObject xenObject = GetXenObject(cRow);
                 if (xenObject != null && xenObject.Connection != null)
@@ -201,20 +197,21 @@ namespace XenAdmin.Controls.CheckableDataGridView
                 return;
 
             int indexToUpdate;
-            lock (StoredRowsLock)
+
+            Program.AssertOnEventThread();
+           
+            indexToUpdate = ReplaceStoredRow(toUpdate);
+
+            if (indexToUpdate >= storedRows.Count || indexToUpdate < 0)
             {
-                indexToUpdate = ReplaceStoredRow(toUpdate);
-
-                if (indexToUpdate >= storedRows.Count || indexToUpdate < 0)
-                {
-                    log.DebugFormat("Could not update row '{0}'; Stored rows contain '{1}' items", indexToUpdate,
-                                    storedRows.Count);
-                    return;
-                }
-
-                View.DrawUpdatedRow(storedRows[indexToUpdate].CellText, storedRows[indexToUpdate].CellDataLoaded,
-                                    storedRows[indexToUpdate].Disabled, indexToUpdate);
+                log.DebugFormat("Could not update row '{0}'; Stored rows contain '{1}' items", indexToUpdate,
+                                storedRows.Count);
+                return;
             }
+
+            View.DrawUpdatedRow(storedRows[indexToUpdate].CellText, storedRows[indexToUpdate].CellDataLoaded,
+                                storedRows[indexToUpdate].Disabled, indexToUpdate);
+
             View.TriggerRowUpdatedEvent(indexToUpdate, refreshGrid);
         }
 
@@ -288,12 +285,12 @@ namespace XenAdmin.Controls.CheckableDataGridView
             if(rowIndex < 0 || rowIndex >= storedRows.Count)
                 return;
 
-            lock (StoredRowsLock)
-            {
-                storedRows[rowIndex].DisabledReason = information;
-                storedRows[rowIndex].Disabled = disabled;
-                storedRows[rowIndex].LockDisabledState = disabled;
-            }
+            Program.AssertOnEventThread();
+
+            storedRows[rowIndex].DisabledReason = information;
+            storedRows[rowIndex].Disabled = disabled;
+            storedRows[rowIndex].LockDisabledState = disabled;
+            
             View.DrawSetRowInformation(rowIndex, information);
             View.DrawRowAsDisabled(disabled, rowIndex);
             View.DrawRowAsLocked(disabled, rowIndex);
