@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -262,5 +262,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         }
 
         #endregion
+
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            Program.OpenURL(e.LinkText);
+        }
     }
 }

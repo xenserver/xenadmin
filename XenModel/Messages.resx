@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -5714,7 +5714,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. @BRANDING_BRAND_CONSOLE@ detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>OK, Enable Health Check</value>

@@ -30,7 +30,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BugToolPageDestination));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
@@ -46,13 +45,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.caseNumberLabel = new System.Windows.Forms.Label();
             this.caseNumberTextBox = new System.Windows.Forms.TextBox();
             this.optionalLabel = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel2, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.usernameLabel, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.passwordLabel, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.passwordTextBox, 1, 6);
@@ -68,13 +67,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.Controls.Add(this.caseNumberLabel, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.caseNumberTextBox, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.optionalLabel, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // autoHeightLabel2
-            // 
-            resources.ApplyResources(this.autoHeightLabel2, "autoHeightLabel2");
-            this.tableLayoutPanel1.SetColumnSpan(this.autoHeightLabel2, 4);
-            this.autoHeightLabel2.Name = "autoHeightLabel2";
             // 
             // usernameLabel
             // 
@@ -166,6 +160,16 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this.optionalLabel, "optionalLabel");
             this.optionalLabel.Name = "optionalLabel";
             // 
+            // richTextBox1
+            // 
+            resources.ApplyResources(this.richTextBox1, "richTextBox1");
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 4);
+            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+            // 
             // BugToolPageDestination
             // 
             this.Controls.Add(this.tableLayoutPanel1);
@@ -190,12 +194,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox usernameTextBox;
-        private Controls.Common.AutoHeightLabel autoHeightLabel2;
         private System.Windows.Forms.Label labelFileLocation;
         private System.Windows.Forms.TextBox m_textBoxLocation;
         private System.Windows.Forms.Button BrowseButton;
         private System.Windows.Forms.Label caseNumberLabel;
         private System.Windows.Forms.TextBox caseNumberTextBox;
         private System.Windows.Forms.Label optionalLabel;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
