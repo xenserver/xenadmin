@@ -381,7 +381,7 @@ namespace XenAdmin
                     return ArgType.Restore;
                 case "update":
                     return ArgType.Update;
-                case "xensearch":
+                case "search":
                     return ArgType.XenSearch;
                 case "passwords":
                     return ArgType.Passwords;

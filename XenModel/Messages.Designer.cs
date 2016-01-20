@@ -31591,7 +31591,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file &apos;{0}&apos;.
         ///
-        ///Verify that the file is a valid xensearch export..
+        ///Verify that the file is a valid @BRANDING_SEARCH@ export..
         /// </summary>
         public static string UNABLE_TO_IMPORT_SEARCH {
             get {

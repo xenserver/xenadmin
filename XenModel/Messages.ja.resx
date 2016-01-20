@@ -10404,7 +10404,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>ファイル '{0}' に保存されている検索をインポートできません。
 
-このファイルが有効な xensearch ファイルであることを確認してください。</value>
+このファイルが有効な @BRANDING_SEARCH@ ファイルであることを確認してください。</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>ファイルが '{0}' に圧縮解除されます。元のファイル '{1}' は削除されます。続行しますか?</value>

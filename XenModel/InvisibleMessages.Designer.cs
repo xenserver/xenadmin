@@ -394,6 +394,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @BRANDING_SEARCH@.
+        /// </summary>
+        public static string XEN_SEARCH {
+            get {
+                return ResourceManager.GetString("XEN_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.citrix.com/TryXenDesktop.
         /// </summary>
         public static string XENDESKTOP_URL {

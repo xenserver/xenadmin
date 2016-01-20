@@ -10961,7 +10961,7 @@ Refer to the "@BRANDING_PRODUCT_BRAND@ Administrator's Guide" for instructions o
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file '{0}'.
 
-Verify that the file is a valid xensearch export.</value>
+Verify that the file is a valid @BRANDING_SEARCH@ export.</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>

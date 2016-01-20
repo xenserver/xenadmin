@@ -119,11 +119,11 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XENSEARCH extension -->
--                            <ProgId Id="XenCenter.xensearch" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
-+                            <ProgId Id="XenCenter.xensearch" Description="!(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
-                                 <Extension Id="xensearch" ContentType="application/xensearch">
--                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
-+                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
+-                            <ProgId Id="XenCenter.@BRANDING_SEARCH@" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
++                            <ProgId Id="XenCenter.@BRANDING_SEARCH@" Description="!(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
+                                 <Extension Id="@BRANDING_SEARCH@" ContentType="application/@BRANDING_SEARCH@">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="search &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="search &quot;%1&quot;" />
                                  </Extension>
                              </ProgId>
                          </Component>

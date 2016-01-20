@@ -88,10 +88,10 @@ namespace XenAdmin.Commands
                     oldDir = Directory.GetCurrentDirectory();
                     OpenFileDialog dialog = new OpenFileDialog();
                     dialog.AddExtension = true;
-                    dialog.Filter = string.Format("{0} (*.xensearch)|*.xensearch|{1} (*.*)|*.*", Messages.XENSEARCH_SAVED_SEARCH, Messages.ALL_FILES);
+                    dialog.Filter = string.Format("{0} (*." + Branding.SEARCH + ")|*." + Branding.SEARCH, Messages.XENSEARCH_SAVED_SEARCH);
                     dialog.FilterIndex = 0;
                     dialog.RestoreDirectory = true;
-                    dialog.DefaultExt = "xensearch";
+                    dialog.DefaultExt = Branding.SEARCH;
                     dialog.CheckPathExists = false;
 
                     if (dialog.ShowDialog(Parent) == DialogResult.OK)
@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
         {
             log.InfoFormat("Importing search from '{0}'", filename);
 
-            if (MainWindowCommandInterface.DoSearch(filename))
+            if (filename.EndsWith("." + Branding.SEARCH) && MainWindowCommandInterface.DoSearch(filename))
             {
                 log.InfoFormat("Imported search from '{0}' successfully.", filename);
             }
