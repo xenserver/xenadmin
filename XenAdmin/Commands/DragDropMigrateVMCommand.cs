@@ -170,7 +170,7 @@ namespace XenAdmin.Commands
                         }
                         else
                         {
-                            if (Helpers.FeatureForbidden(draggedVM.Connection, Host.RestrictInterPoolMigrate))
+                            if (Helpers.FeatureForbidden(draggedVM.Connection, Host.RestrictIntraPoolMigrate))
                                 return false;
                         }
 

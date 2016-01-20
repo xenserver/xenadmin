@@ -426,14 +426,14 @@ namespace XenAPI
             return h._RestrictExportResourceData;
         }
 
-        private bool _RestrictInterPoolMigrate
+        private bool _RestrictIntraPoolMigrate
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_xen_motion"); }
         }
 
-        public static bool RestrictInterPoolMigrate(Host h)
+        public static bool RestrictIntraPoolMigrate(Host h)
         {
-            return h._RestrictInterPoolMigrate;
+            return h._RestrictIntraPoolMigrate;
         }
 
         private bool _RestrictReadCaching

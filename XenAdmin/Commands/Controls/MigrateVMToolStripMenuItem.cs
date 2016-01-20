@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
             private static bool CanExecute(VM vm)
             {
                 if (vm.Connection != null && vm.Connection.IsConnected)
-                    if (Helpers.FeatureForbidden(vm.Connection, Host.RestrictInterPoolMigrate))
+                    if (Helpers.FeatureForbidden(vm.Connection, Host.RestrictIntraPoolMigrate))
                         return false;
 
                 if (vm != null && !vm.is_a_template && !vm.Locked)
