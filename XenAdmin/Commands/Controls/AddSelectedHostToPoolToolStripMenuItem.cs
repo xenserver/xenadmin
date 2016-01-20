@@ -114,13 +114,22 @@ namespace XenAdmin.Commands
 
             private bool CanExecute(Host host)
             {
-                return host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null;
+                return host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && !host.RestrictPooling;
             }
 
             public override string MenuText
             {
                 get
                 {
+                    foreach (SelectedItem item in GetSelection())
+                    {
+                        Host host = item.XenObject as Host;
+
+                        if (host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && host.RestrictPooling)
+                        {
+                            return Messages.HOST_MENU_ADD_TO_POOL_LICENSE_RESTRICTION;
+                        }
+                    }
                     return Messages.HOST_MENU_ADD_TO_POOL;
                 }
             }
