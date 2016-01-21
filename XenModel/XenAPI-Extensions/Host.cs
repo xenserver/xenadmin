@@ -59,7 +59,8 @@ namespace XenAPI
             EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
-            DesktopPlus            // Added in Creedence (desktop-plus)
+            DesktopPlus,           // Added in Creedence (desktop-plus)
+            Premium                // Added in Indigo (premium)
         }
 
         public static string LicenseServerWebConsolePort = "8082";
@@ -99,6 +100,8 @@ namespace XenAPI
                     return Edition.Desktop;
                 case "desktop-plus":
                     return Edition.DesktopPlus;
+                case "premium":
+                    return Edition.Premium;
                 default:
                     return Edition.Free;
             }
@@ -148,6 +151,8 @@ namespace XenAPI
                     return "desktop";
                 case Edition.DesktopPlus:
                     return "desktop-plus";
+                case Edition.Premium:
+                    return "premium";
                 default:
                     return "free";
             }

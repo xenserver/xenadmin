@@ -928,6 +928,10 @@ namespace XenAdmin.TabPages
             // enforced anyway.
             info.Remove("sockets");
 
+            // Remove "expiry" field for "basic" license
+            if (!string.IsNullOrEmpty(host.edition) && host.edition == "basic")
+                info.Remove("expiry");
+
             if (info.ContainsKey("expiry"))
             {
                 ToolStripMenuItem editItem = new ToolStripMenuItem(Messages.LAUNCH_LICENSE_MANAGER);

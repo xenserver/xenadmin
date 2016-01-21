@@ -1742,4 +1742,10 @@
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
     <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Desktop+ Edition</value>
   </data>
+  <data name="Label-host.edition-premium" xml:space="preserve">
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Premium Edition</value>
+  </data>
+  <data name="Label-host.edition-basic" xml:space="preserve">
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Basic Edition</value>
+  </data>
 </root>
