@@ -805,6 +805,8 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate()
                     {
                         string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
+                        if (!XenAdmin.Core.Registry.LinkLabelHidden)
+                            msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
                         string url = "https://" + connection.Hostname;
 
                         using (var dlog = new ConnectionRefusedDialog())
@@ -813,7 +815,7 @@ namespace XenAdmin
                             dlog.Url = url;
                             dlog.ShowDialog(this);
                         }
-
+                        
                         new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
                                        string.Format("{0}\n{1}", msg, url), false,
                                        true, Messages.CONNECTION_REFUSED);

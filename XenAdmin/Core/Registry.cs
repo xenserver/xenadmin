@@ -329,6 +329,41 @@ namespace XenAdmin.Core
             get { return ReadKey(HEALTH_CHECK_PRODUCT_KEY); }
         }
 
+        public static string HiddenFeatures
+        {
+            get { return ReadKey(HIDDEN_FEATURES); }
+        }
+
+        internal static bool CPSOptimizationHidden
+        {
+            get
+            { return HiddenFeatures.Contains(CPS_OPTIMIZATION_HIDDEN); }
+        }
+
+        internal static bool RDPPollingHidden
+        {
+            get
+            { return HiddenFeatures.Contains(RDP_POLLING_HIDDEN); }
+        }
+
+        internal static bool LearnMoreButtonHidden
+        {
+            get
+            { return HiddenFeatures.Contains(LEARN_MORE_HIDDEN); }
+        }
+
+        internal static bool LinkLabelHidden
+        {
+            get
+            { return HiddenFeatures.Contains(LINK_LABEL_HIDDEN); }
+        }
+
+        internal static bool ToolStripMenuItemHidden
+        {
+            get
+            { return HiddenFeatures.Contains(TOOL_STRIP_MENU_ITEM); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -350,6 +385,12 @@ namespace XenAdmin.Core
         private const string HEALTH_CHECK_UPLOAD_DOMAIN_NAME = "HealthCheckUploadDomainName";
         private const string HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME = "HealthCheckDiagnosticDomainName";
         private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
+        private const string HIDDEN_FEATURES = "HiddenFeatures";
+        private const string CPS_OPTIMIZATION_HIDDEN = "cps_optimization";
+        private const string RDP_POLLING_HIDDEN = "rdp_polling";
+        private const string LEARN_MORE_HIDDEN = "learn_more";
+        private const string LINK_LABEL_HIDDEN = "link_label";
+        private const string TOOL_STRIP_MENU_ITEM = "tool_strip_menu_item";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

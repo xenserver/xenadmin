@@ -5144,8 +5144,10 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ のバージョンが古いため {0} に接続できません。
-
-最新バージョンの @BRANDING_BRAND_CONSOLE@ は、以下の場所から入手できます。</value>
+    </value>
+  </data>
+  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
+    <value>最新バージョンの @BRANDING_BRAND_CONSOLE@ は、以下の場所から入手できます。</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>高可用性</value>
@@ -7095,7 +7097,10 @@ SCSI ID: {2}
     <value>移行先のストレージ リポジトリの選択(&amp;D)</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>VDI ライブ マイグレーション機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールのストレージ リポジトリ間で移行できます。VM のダウンタイムは発生しません。 
+    <value>VDI ライブ マイグレーション機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールのストレージ リポジトリ間で移行できます。VM のダウンタイムは発生しません。 </value>
+  </data>
+  <data name="MIGRATE_VDI_UPSELL_BLURB_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、VDI ライブ マイグレーション機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
@@ -10808,27 +10813,42 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>アップデートをサーバー '{0}' にアップロードしています...</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>アラートとレポート機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。パフォーマンス上の問題やエラー状態に関するメール アラートにより、管理者は、基幹サービスが影響を受ける前に潜在的な問題に対処することができます。
+    <value>アラートとレポート機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。パフォーマンス上の問題やエラー状態に関するメール アラートにより、管理者は、基幹サービスが影響を受ける前に潜在的な問題に対処することができます。</value>
+  </data>
+  <data name="UPSELL_BLURB_ALERTS_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、アラートとレポート機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>VM ライブ マイグレーション機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能により、共有ストレージまたはローカル ストレージ上で実行されている複数の VM を、同一プールまたは別のプールのサーバー間で移行できます。VM のダウンタイムは発生しません。 
+    <value>VM ライブ マイグレーション機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能により、共有ストレージまたはローカル ストレージ上で実行されている複数の VM を、同一プールまたは別のプールのサーバー間で移行できます。VM のダウンタイムは発生しません。 </value>
+  </data>
+  <data name="UPSELL_BLURB_CPM_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、プール間の移行機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>異種混在型プールを使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。異種混在型プールでは、異なる種類の CPU を搭載したホストでリソース プールを作成でき、そのホスト間での VM の移行がサポートされます。
+    <value>異種混在型プールを使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。異種混在型プールでは、異なる種類の CPU を搭載したホストでリソース プールを作成でき、そのホスト間での VM の移行がサポートされます。</value>
+  </data>
+  <data name="UPSELL_BLURB_CPUMASKING_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、異種混在型プール機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>動的メモリ制御機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。動的メモリ制御により、実行中の仮想マシンのメモリがサーバーでの要求に応じて動的に調節されます。
+    <value>動的メモリ制御機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。動的メモリ制御により、実行中の仮想マシンのメモリがサーバーでの要求に応じて動的に調節されます。</value>
+  </data>
+  <data name="UPSELL_BLURB_DMC_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、動的メモリ制御機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>障害回復機能を有効にするには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、プライマリの業務サイトに障害が発生した場合に、vApp や VM を障害回復 (DR) サイトにフェイルオーバーできます。
+    <value>障害回復機能を有効にするには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、プライマリの業務サイトに障害が発生した場合に、vApp や VM を障害回復 (DR) サイトにフェイルオーバーできます。</value>
+  </data>
+  <data name="UPSELL_BLURB_DR_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、障害回復機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
@@ -10836,37 +10856,58 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>StorageLink™ テクノロジを使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。StorageLink では、既存のストレージ ハードウェアの機能を活用して、@BRANDING_SERVER@ でのストレージ操作の負荷を自動的に軽減させることができます。このテクノロジを使用すると、高性能で効率的なストレージ プロビジョニング、複製、およびスナップショットを、使用するストレージ ハードウェア自体の機能を使用してハードウェア内で実行できます。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>GPU パススルー機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。
+    <value>GPU パススルー機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。</value>
+  </data>
+  <data name="UPSELL_BLURB_GPU_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、GPU パススルー機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>高可用性機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。
+    <value>高可用性機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。</value>
+  </data>
+  <data name="UPSELL_BLURB_HA_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、高可用性機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>パフォーマンス レポート機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。
+    <value>パフォーマンス レポート機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。</value>
+  </data>
+  <data name="UPSELL_BLURB_PERFORMANCE_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、パフォーマンス レポート機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>役割ベースのアクセス制御機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、@BRANDING_SERVER@ リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。
+    <value>役割ベースのアクセス制御機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、@BRANDING_SERVER@ リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。</value>
+  </data>
+  <data name="UPSELL_BLURB_RBAC_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、役割ベースのアクセス制御機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>vApp 機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの業務サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。
+    <value>vApp 機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの業務サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。</value>
+  </data>
+  <data name="UPSELL_BLURB_VM_APPLIANCES_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、vApp 機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION" xml:space="preserve">
-    <value>VM の保護と回復機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、定期的にスナップショットを作成したり、CIFS や NFS の共有にスナップショットをアーカイブしたりできます。
+    <value>VM の保護と回復機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。この機能では、定期的にスナップショットを作成したり、CIFS や NFS の共有にスナップショットをアーカイブしたりできます。</value>
+  </data>
+  <data name="UPSELL_BLURB_VM_PROTECTION_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、VM の保護と回復機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>動的なワークロード バランス機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。動的なワークロード バランスにより、仮想マシンおよび @BRANDING_SERVER@ ホストのパフォーマンスが継続的に監視され、新しいワークロードを最適に分散・配置して、リソース プール内の物理サーバー リソースを最大限に活用します。
+    <value>動的なワークロード バランス機能を使用するには、@BRANDING_SERVER@ ライセンスをアップグレードしてください。動的なワークロード バランスにより、仮想マシンおよび @BRANDING_SERVER@ ホストのパフォーマンスが継続的に監視され、新しいワークロードを最適に分散・配置して、リソース プール内の物理サーバー リソースを最大限に活用します。</value>
+  </data>
+  <data name="UPSELL_BLURB_WLB_MORE" xml:space="preserve">
+    <value>
 
 下のボタンを使用して、動的なワークロード バランス機能や @BRANDING_SERVER@ の試用についての情報を参照できます。</value>
   </data>

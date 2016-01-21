@@ -140,6 +140,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
             // 
             // tableLayoutPanel4
             // 

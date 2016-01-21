@@ -56,7 +56,9 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override Uri UriToLaunch
         {
-            get { return new Uri(InvisibleMessages.WSS_DEPRECATION_URL); }
+            get {
+                return new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? "" : InvisibleMessages.WSS_DEPRECATION_URL);
+                }
         }
     }
 }

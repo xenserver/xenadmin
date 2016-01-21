@@ -1760,17 +1760,20 @@ namespace XenAdmin
             this.xenSourceOnTheWebToolStripMenuItem.Name = "xenSourceOnTheWebToolStripMenuItem";
             resources.ApplyResources(this.xenSourceOnTheWebToolStripMenuItem, "xenSourceOnTheWebToolStripMenuItem");
             this.xenSourceOnTheWebToolStripMenuItem.Click += new System.EventHandler(this.xenSourceOnTheWebToolStripMenuItem_Click);
+            this.xenSourceOnTheWebToolStripMenuItem.Visible = !XenAdmin.Core.Registry.ToolStripMenuItemHidden;
             // 
             // xenCenterPluginsOnlineToolStripMenuItem
             // 
             this.xenCenterPluginsOnlineToolStripMenuItem.Name = "xenCenterPluginsOnlineToolStripMenuItem";
             resources.ApplyResources(this.xenCenterPluginsOnlineToolStripMenuItem, "xenCenterPluginsOnlineToolStripMenuItem");
             this.xenCenterPluginsOnlineToolStripMenuItem.Click += new System.EventHandler(this.xenCenterPluginsOnTheWebToolStripMenuItem_Click);
+            this.xenCenterPluginsOnlineToolStripMenuItem.Visible = !XenAdmin.Core.Registry.ToolStripMenuItemHidden;
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            this.toolStripSeparator7.Visible = !XenAdmin.Core.Registry.ToolStripMenuItemHidden;
             // 
             // pluginItemsPlaceHolderToolStripMenuItem8
             // 

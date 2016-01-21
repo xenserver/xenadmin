@@ -32,16 +32,16 @@ namespace XenAdmin.SettingsPanels
             this.GeneralOptimizationRadioButton = new System.Windows.Forms.RadioButton();
             this.CPSOptimizationRadioButton = new System.Windows.Forms.RadioButton();
             this.ManualOptimizationRadioButton = new System.Windows.Forms.RadioButton();
-            this.iconWarning = new System.Windows.Forms.PictureBox();
             this.labelWarning = new System.Windows.Forms.Label();
             this.ManualOptimizationGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.ShadowMultiplierTextBox = new System.Windows.Forms.TextBox();
             this.labelShadowMultiplier = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.iconWarning)).BeginInit();
+            this.iconWarning = new System.Windows.Forms.PictureBox();
             this.ManualOptimizationGroupBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconWarning)).BeginInit();
             this.SuspendLayout();
             // 
             // GeneralOptimizationRadioButton
@@ -59,6 +59,7 @@ namespace XenAdmin.SettingsPanels
             this.CPSOptimizationRadioButton.Name = "CPSOptimizationRadioButton";
             this.CPSOptimizationRadioButton.UseVisualStyleBackColor = true;
             this.CPSOptimizationRadioButton.CheckedChanged += new System.EventHandler(this.CPSOptimizationRadioButton_CheckedChanged);
+            this.CPSOptimizationRadioButton.Visible = !XenAdmin.Core.Registry.CPSOptimizationHidden;
             // 
             // ManualOptimizationRadioButton
             // 
@@ -67,13 +68,6 @@ namespace XenAdmin.SettingsPanels
             this.ManualOptimizationRadioButton.UseVisualStyleBackColor = true;
             this.ManualOptimizationRadioButton.CheckedChanged += new System.EventHandler(this.ManualOptimizationRadioButton_CheckedChanged);
             // 
-            // iconWarning
-            // 
-            this.iconWarning.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
-            resources.ApplyResources(this.iconWarning, "iconWarning");
-            this.iconWarning.Name = "iconWarning";
-            this.iconWarning.TabStop = false;
-            // 
             // labelWarning
             // 
             resources.ApplyResources(this.labelWarning, "labelWarning");
@@ -81,9 +75,9 @@ namespace XenAdmin.SettingsPanels
             // 
             // ManualOptimizationGroupBox
             // 
+            resources.ApplyResources(this.ManualOptimizationGroupBox, "ManualOptimizationGroupBox");
             this.ManualOptimizationGroupBox.Controls.Add(this.ShadowMultiplierTextBox);
             this.ManualOptimizationGroupBox.Controls.Add(this.labelShadowMultiplier);
-            resources.ApplyResources(this.ManualOptimizationGroupBox, "ManualOptimizationGroupBox");
             this.ManualOptimizationGroupBox.Name = "ManualOptimizationGroupBox";
             this.ManualOptimizationGroupBox.TabStop = false;
             // 
@@ -108,6 +102,13 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // iconWarning
+            // 
+            resources.ApplyResources(this.iconWarning, "iconWarning");
+            this.iconWarning.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            this.iconWarning.Name = "iconWarning";
+            this.iconWarning.TabStop = false;
+            // 
             // VMAdvancedEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -121,11 +122,11 @@ namespace XenAdmin.SettingsPanels
             this.Controls.Add(this.ManualOptimizationGroupBox);
             this.DoubleBuffered = true;
             this.Name = "VMAdvancedEditPage";
-            ((System.ComponentModel.ISupportInitialize)(this.iconWarning)).EndInit();
             this.ManualOptimizationGroupBox.ResumeLayout(false);
             this.ManualOptimizationGroupBox.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconWarning)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

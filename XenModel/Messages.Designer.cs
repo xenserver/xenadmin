@@ -15461,13 +15461,22 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of @BRANDING_BRAND_CONSOLE@ is out of date and cannot connect to {0}.
-        ///
-        ///You can get a compatible version of @BRANDING_BRAND_CONSOLE@ from the following location:.
+        ///   Looks up a localized string similar to This version of @BRANDING_BRAND_CONSOLE@ is out of date and cannot connect to {0}..
         /// </summary>
         public static string GUI_OUT_OF_DATE {
             get {
                 return ResourceManager.GetString("GUI_OUT_OF_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///You can get a compatible version of @BRANDING_BRAND_CONSOLE@ from the following location:.
+        /// </summary>
+        public static string GUI_OUT_OF_DATE_MORE {
+            get {
+                return ResourceManager.GetString("GUI_OUT_OF_DATE_MORE", resourceCulture);
             }
         }
         
@@ -21337,13 +21346,22 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. 
-        ///
-        ///To learn more about the @BRANDING_SERVER@ Live VDI Migration feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
         /// </summary>
         public static string MIGRATE_VDI_UPSELL_BLURB {
             get {
                 return ResourceManager.GetString("MIGRATE_VDI_UPSELL_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///To learn more about the @BRANDING_SERVER@ Live VDI Migration feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string MIGRATE_VDI_UPSELL_BLURB_MORE {
+            get {
+                return ResourceManager.GetString("MIGRATE_VDI_UPSELL_BLURB_MORE", resourceCulture);
             }
         }
         
@@ -32891,9 +32909,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
-        ///
-        ///To learn more about the @BRANDING_SERVER@ Alerting and Reporting feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services..
         /// </summary>
         public static string UPSELL_BLURB_ALERTS {
             get {
@@ -32902,9 +32918,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. 
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Cross-Pool Migration feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Alerting and Reporting feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_ALERTS_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_ALERTS_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. .
         /// </summary>
         public static string UPSELL_BLURB_CPM {
             get {
@@ -32913,9 +32938,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Heterogeneous Pools feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Cross-Pool Migration feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_CPM_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_CPM_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them..
         /// </summary>
         public static string UPSELL_BLURB_CPUMASKING {
             get {
@@ -32924,9 +32958,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Dynamic Memory Control.  Dynamic Memory Control allows @BRANDING_SERVER@ to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Dynamic Memory Control feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Heterogeneous Pools feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_CPUMASKING_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_CPUMASKING_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Dynamic Memory Control.  Dynamic Memory Control allows @BRANDING_SERVER@ to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server..
         /// </summary>
         public static string UPSELL_BLURB_DMC {
             get {
@@ -32935,13 +32978,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Disaster Recovery feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Dynamic Memory Control feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_DMC_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_DMC_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site..
         /// </summary>
         public static string UPSELL_BLURB_DR {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_DR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///To learn more about the @BRANDING_SERVER@ Disaster Recovery feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_DR_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_DR_MORE", resourceCulture);
             }
         }
         
@@ -32955,9 +33018,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.
-        ///
-        ///To learn more about the @BRANDING_SERVER@ GPU pass-through feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance..
         /// </summary>
         public static string UPSELL_BLURB_GPU {
             get {
@@ -32966,9 +33027,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ High Availability feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ GPU pass-through feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_GPU_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_GPU_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool..
         /// </summary>
         public static string UPSELL_BLURB_HA {
             get {
@@ -32977,9 +33047,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Performance Reporting capabilities feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ High Availability feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_HA_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_HA_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change..
         /// </summary>
         public static string UPSELL_BLURB_PERFORMANCE {
             get {
@@ -32988,9 +33067,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your @BRANDING_SERVER@ resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Role Based Access Control feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Performance Reporting capabilities feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_PERFORMANCE_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_PERFORMANCE_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your @BRANDING_SERVER@ resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup..
         /// </summary>
         public static string UPSELL_BLURB_RBAC {
             get {
@@ -32999,9 +33087,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the vApps feature of @BRANDING_SERVER@ or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ Role Based Access Control feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_RBAC_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_RBAC_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site..
         /// </summary>
         public static string UPSELL_BLURB_VM_APPLIANCES {
             get {
@@ -33010,9 +33107,18 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ VM Protection and Recovery feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the vApps feature of @BRANDING_SERVER@ or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_VM_APPLIANCES_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_VM_APPLIANCES_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share..
         /// </summary>
         public static string UPSELL_BLURB_VM_PROTECTION {
             get {
@@ -33021,13 +33127,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and @BRANDING_SERVER@ hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.
+        ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the @BRANDING_SERVER@ Dynamic Workload Balancing feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        ///To learn more about the @BRANDING_SERVER@ VM Protection and Recovery feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_VM_PROTECTION_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_VM_PROTECTION_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your @BRANDING_SERVER@ license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and @BRANDING_SERVER@ hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
         /// </summary>
         public static string UPSELL_BLURB_WLB {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_WLB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///To learn more about the @BRANDING_SERVER@ Dynamic Workload Balancing feature or to start a @BRANDING_SERVER@ trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_WLB_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_WLB_MORE", resourceCulture);
             }
         }
         

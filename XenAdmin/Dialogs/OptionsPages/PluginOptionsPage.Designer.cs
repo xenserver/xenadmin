@@ -129,6 +129,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.linkLabel1.TabStop = true;
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.Blue;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
             // 
             // tableLayoutPanel2
             // 

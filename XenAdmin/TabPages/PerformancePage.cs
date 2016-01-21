@@ -303,7 +303,8 @@ namespace XenAdmin.TabPages
 
         private void ShowUpsell()
         {
-            UpsellDialog upsellDialog = new UpsellDialog(Messages.UPSELL_BLURB_PERFORMANCE, InvisibleMessages.UPSELL_LEARNMOREURL_PERFORMANCE);
+            UpsellDialog upsellDialog = new UpsellDialog(XenAdmin.Core.Registry.LinkLabelHidden ? Messages.UPSELL_BLURB_PERFORMANCE : Messages.UPSELL_BLURB_PERFORMANCE + Messages.UPSELL_BLURB_PERFORMANCE_MORE,
+                                                        InvisibleMessages.UPSELL_LEARNMOREURL_PERFORMANCE);
             upsellDialog.ShowDialog(this);
         }
 
