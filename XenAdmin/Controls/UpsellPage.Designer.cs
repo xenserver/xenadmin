@@ -42,7 +42,6 @@ namespace XenAdmin.Controls
             this.LearnMoreButton.Name = "LearnMoreButton";
             this.LearnMoreButton.UseVisualStyleBackColor = true;
             this.LearnMoreButton.Click += new System.EventHandler(this.LearnMoreButton_Clicked);
-            this.LearnMoreButton.Visible = !XenAdmin.Core.Registry.LearnMoreButtonHidden;
             // 
             // tableLayoutPanel1
             // 

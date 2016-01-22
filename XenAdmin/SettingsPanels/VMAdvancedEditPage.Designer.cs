@@ -59,7 +59,6 @@ namespace XenAdmin.SettingsPanels
             this.CPSOptimizationRadioButton.Name = "CPSOptimizationRadioButton";
             this.CPSOptimizationRadioButton.UseVisualStyleBackColor = true;
             this.CPSOptimizationRadioButton.CheckedChanged += new System.EventHandler(this.CPSOptimizationRadioButton_CheckedChanged);
-            this.CPSOptimizationRadioButton.Visible = !XenAdmin.Core.Registry.CPSOptimizationHidden;
             // 
             // ManualOptimizationRadioButton
             // 

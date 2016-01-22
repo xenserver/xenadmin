@@ -66,6 +66,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             //set this here due to a framework bug
             splitContainer1.Panel1MinSize = 250;
             splitContainer1.Panel2MinSize = 200;
+            this.linkLabel1.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
         }
 
         public override string Text{get { return Messages.BUGTOOL_PAGE_CAPABILITIES_TEXT; }}

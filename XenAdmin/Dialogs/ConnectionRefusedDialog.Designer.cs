@@ -68,7 +68,6 @@ namespace XenAdmin.Dialogs
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.TabStop = true;
             this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
-            this.linkLabel.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
             // 
             // buttonOk
             // 

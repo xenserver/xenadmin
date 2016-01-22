@@ -65,6 +65,7 @@ namespace XenAdmin.SettingsPanels
                     ToolTipIcon = ToolTipIcon.Warning,
                     ToolTipTitle = Messages.INVALID_PARAMETER
                 };
+            this.CPSOptimizationRadioButton.Visible = !XenAdmin.Core.Registry.CPSOptimizationHidden;
         }
 
         public String SubText

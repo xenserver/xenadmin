@@ -225,6 +225,8 @@ namespace XenAdmin
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
+
+            toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !XenAdmin.Core.Registry.ToolStripMenuItemHidden;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
