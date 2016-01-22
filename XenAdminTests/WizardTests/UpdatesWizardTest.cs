@@ -69,7 +69,7 @@ namespace XenAdminTests.WizardTests.updatesState_xml
                 {
                     MW(TestUtils.GetRadioButton(wizard, "PatchingWizard_SelectPatchPage.selectFromDiskRadioButton").Select);
                     MW(() => TestUtils.GetTextBox(wizard, "PatchingWizard_SelectPatchPage.fileNameTextBox").Text = 
-                        TestResource("succeed.xsupdate"));
+                        TestResource("succeed" + XenAdmin.Branding.UPDATE));
                 }
             }
             else if (pageName == "Select Servers")

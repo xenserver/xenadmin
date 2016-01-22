@@ -420,7 +420,8 @@ namespace XenAPI
         public static Stream GET(Uri uri, IWebProxy proxy, int timeout_ms)
         {
             return DO_HTTP(uri, proxy, false, timeout_ms,
-                string.Format("GET {0} HTTP/1.0", uri.PathAndQuery));
+                string.Format("GET {0} HTTP/1.0", uri.PathAndQuery),
+                string.Format("Host: {0}", uri.Host));
         }
 
         /// <summary>

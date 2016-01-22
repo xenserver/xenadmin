@@ -403,11 +403,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @BRANDING_UPDATE@.
+        /// </summary>
+        public static string XEN_UPDATE {
+            get {
+                return ResourceManager.GetString("XEN_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.citrix.com/TryXenDesktop.
         /// </summary>
         public static string XENDESKTOP_URL {
             get {
                 return ResourceManager.GetString("XENDESKTOP_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @BRANDING_XENSERVER_UPDATE_URL@.
+        /// </summary>
+        public static string XENSERVER_UPDATE_URL {
+            get {
+                return ResourceManager.GetString("XENSERVER_UPDATE_URL", resourceCulture);
             }
         }
     }

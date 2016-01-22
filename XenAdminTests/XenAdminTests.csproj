@@ -159,7 +159,7 @@
     <None Include="TestResources\state.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestResources\succeed.xsupdate">
+    <None Include="TestResources\succeed.@BRANDING_UPDATE@">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

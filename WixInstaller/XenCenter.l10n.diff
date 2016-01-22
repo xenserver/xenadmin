@@ -103,9 +103,9 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XSUPDATE extension -->
--							<ProgId Id="XenCenter.xsupdate" Description="XenServer Update File" Icon="XsupdateIcon">
-+							<ProgId Id="XenCenter.xsupdate" Description="!(loc.XenServer_Update_File)" Icon="XsupdateIcon">
-                                 <Extension Id="xsupdate" ContentType="application/xsupdate">
+-							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="XenServer Update File" Icon="XsupdateIcon">
++							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="!(loc.XenServer_Update_File)" Icon="XsupdateIcon">
+                                 <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
 +                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                  </Extension>

@@ -82,13 +82,13 @@
                             <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
-                            <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
-                            <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
-                            <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
-                            <File Id="hotfixBostonSource" Source="..\XenAdmin\XS60E001-src-pkgs.tar.gz" />
-							<File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
-							<File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
-							<File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
+    <!-- CITRIX_ONLY_BEG --><File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" /><!-- CITRIX_ONLY_END -->
+    <!-- CITRIX_ONLY_BEG --><File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" /><!-- CITRIX_ONLY_END -->
+    <!-- CITRIX_ONLY_BEG --><File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" /><!-- CITRIX_ONLY_END -->
+    <!-- CITRIX_ONLY_BEG --><File Id="hotfixBostonSource" Source="..\XenAdmin\XS60E001-src-pkgs.tar.gz" /><!-- CITRIX_ONLY_END -->
+	<!-- CITRIX_ONLY_BEG --><File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" /><!-- CITRIX_ONLY_END -->
+	<!-- CITRIX_ONLY_BEG --><File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" /><!-- CITRIX_ONLY_END -->
+	<!-- CITRIX_ONLY_BEG --><File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" /><!-- CITRIX_ONLY_END -->
 							<File Id="XvaIcon" Source="..\Branding\Images\file_vm.ico" />
                             <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
                             <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
@@ -136,8 +136,8 @@
                                 </Extension>
                             </ProgId>
                             <!-- Define XSUPDATE extension -->
-							<ProgId Id="XenCenter.xsupdate" Description="XenServer Update File" Icon="XsupdateIcon">
-                                <Extension Id="xsupdate" ContentType="application/xsupdate">
+							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="XenServer Update File" Icon="XsupdateIcon">
+                                <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>

@@ -145,7 +145,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {                    
                     if (isValidFile())
                     {
-                        if (fileName.EndsWith(".xsupdate"))
+                        if (fileName.EndsWith(Branding.UPDATE))
                             SelectedUpdateType = UpdateType.NewRetail;
                         else if (fileName.EndsWith(".iso"))
                             SelectedUpdateType = UpdateType.NewSuppPack;
@@ -261,7 +261,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool isValidFile()
         {
             var fileName = fileNameTextBox.Text;
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"));
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(Branding.UPDATE) || fileName.EndsWith(".iso"));
         }
 
 
@@ -305,7 +305,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"))
+            if (fileName.EndsWith(Branding.UPDATE) || fileName.EndsWith(".iso"))
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;

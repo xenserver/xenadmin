@@ -25689,7 +25689,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.@BRANDING_UPDATE@, *.iso)|*.xsupdate;*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
