@@ -337,31 +337,37 @@ namespace XenAdmin.Core
         internal static bool CPSOptimizationHidden
         {
             get
-            { return HiddenFeatures.Contains(CPS_OPTIMIZATION_HIDDEN); }
+            { return HiddenFeatures != null && HiddenFeatures.Contains(CPS_OPTIMIZATION_HIDDEN); }
         }
 
         internal static bool RDPPollingHidden
         {
             get
-            { return HiddenFeatures.Contains(RDP_POLLING_HIDDEN); }
+            { return HiddenFeatures != null && HiddenFeatures.Contains(RDP_POLLING_HIDDEN); }
         }
 
         internal static bool LearnMoreButtonHidden
         {
             get
-            { return HiddenFeatures.Contains(LEARN_MORE_HIDDEN); }
+            { return HiddenFeatures != null && HiddenFeatures.Contains(LEARN_MORE_HIDDEN); }
         }
 
         internal static bool LinkLabelHidden
         {
             get
-            { return HiddenFeatures.Contains(LINK_LABEL_HIDDEN); }
+            { return HiddenFeatures != null && HiddenFeatures.Contains(LINK_LABEL_HIDDEN); }
         }
 
         internal static bool ToolStripMenuItemHidden
         {
             get
-            { return HiddenFeatures.Contains(TOOL_STRIP_MENU_ITEM); }
+            { return HiddenFeatures != null && HiddenFeatures.Contains(TOOL_STRIP_MENU_ITEM_HIDDEN); }
+        }
+
+        internal static bool CrossServerPrivateNetworkHidden
+        {
+            get
+            { return HiddenFeatures != null && HiddenFeatures.Contains(CROSS_SERVER_PRIVATE_NETWORK_HIDDEN); }
         }
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
@@ -390,7 +396,8 @@ namespace XenAdmin.Core
         private const string RDP_POLLING_HIDDEN = "rdp_polling";
         private const string LEARN_MORE_HIDDEN = "learn_more";
         private const string LINK_LABEL_HIDDEN = "link_label";
-        private const string TOOL_STRIP_MENU_ITEM = "tool_strip_menu_item";
+        private const string TOOL_STRIP_MENU_ITEM_HIDDEN = "tool_strip_menu_item";
+        private const string CROSS_SERVER_PRIVATE_NETWORK_HIDDEN = "cross_server_private_network";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }
