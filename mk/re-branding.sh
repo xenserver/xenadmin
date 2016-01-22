@@ -168,15 +168,3 @@ mv ${REPO}/XenAdminTests/TestResources/succeed.@BRANDING_UPDATE@ ${REPO}/XenAdmi
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
 rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
-mark_xml()
-{
-    sed -e "s#<!-- CITRIX_ONLY_BEG -->#<!-- #g" \
-        -e "s#<!-- CITRIX_ONLY_END --># -->#g" \
-        $1 > $1.tmp
-    mv -f $1.tmp $1    
-}
-
-if [ "${XC_BRANDING}" != "citrix" ]
-then
-mark_xml ${REPO}/WixInstaller/XenCenter.wxs
-fi
