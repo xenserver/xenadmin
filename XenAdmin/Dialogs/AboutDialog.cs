@@ -54,6 +54,7 @@ namespace XenAdmin.Dialogs
             VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, Branding.PRODUCT_VERSION_TEXT,
                 Branding.XENCENTER_VERSION, buildText, IntPtr.Size * 8);
             label2.Text = string.Format(Messages.COPYRIGHT, Branding.COMPANY_NAME_LEGAL);
+            label2.Visible = !Registry.CopyrightHidden;
         }
 
         private void OkButton_Click(object sender, EventArgs e)

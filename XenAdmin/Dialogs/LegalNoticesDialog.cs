@@ -46,6 +46,9 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             label2.Text = string.Format(Messages.COPYRIGHT, Branding.COMPANY_NAME_LEGAL);
+            this.panel1.Visible = !XenAdmin.Core.Registry.CopyrightHidden;
+            if (XenAdmin.Core.Registry.CopyrightHidden)
+                this.textBox1.SetBounds(textBox1.Location.X, textBox1.Location.Y, textBox1.Size.Width, 200);
         }
 
         private void button1_Click(object sender, EventArgs e)

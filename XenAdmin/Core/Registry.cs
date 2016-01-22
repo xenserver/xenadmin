@@ -370,6 +370,12 @@ namespace XenAdmin.Core
             { return HiddenFeatures != null && HiddenFeatures.Contains(CROSS_SERVER_PRIVATE_NETWORK_HIDDEN); }
         }
 
+        internal static bool CopyrightHidden
+        {
+            get
+            { return HiddenFeatures != null && HiddenFeatures.Contains(COPYRIGHT_HIDDEN); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -398,6 +404,7 @@ namespace XenAdmin.Core
         private const string LINK_LABEL_HIDDEN = "link_label";
         private const string TOOL_STRIP_MENU_ITEM_HIDDEN = "tool_strip_menu_item";
         private const string CROSS_SERVER_PRIVATE_NETWORK_HIDDEN = "cross_server_private_network";
+        private const string COPYRIGHT_HIDDEN = "copyright";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }
