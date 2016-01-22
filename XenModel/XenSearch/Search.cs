@@ -45,8 +45,6 @@ namespace XenAdmin.XenSearch
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const String SearchPrefix = "XenSearch.Search-";
-
         private readonly bool defaultSearch = false;
 
         private readonly Query query;
@@ -297,7 +295,7 @@ namespace XenAdmin.XenSearch
             if (uuid == null)
                 uuid = System.Guid.NewGuid().ToString();
 
-            String key = SearchPrefix + uuid;
+            String key = InvisibleMessages.XEN_SEARCH + ".Search-" + uuid;
             String value = GetXML();
 
             if (connection == null)
@@ -341,7 +339,7 @@ namespace XenAdmin.XenSearch
 
         public void Delete()
         {
-            String key = SearchPrefix + uuid;
+            String key = InvisibleMessages.XEN_SEARCH + ".Search-" + uuid;
 
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
@@ -719,7 +717,7 @@ namespace XenAdmin.XenSearch
         private static void SynchroniseSearches()
         {
             Dictionary<String, Search> localSearches = new Dictionary<String, Search>();
-
+            string SearchPrefix = InvisibleMessages.XEN_SEARCH + ".Search-";
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
                 connection.Cache.RegisterBatchCollectionChanged<Pool>(Pool_BatchCollectionChanged);

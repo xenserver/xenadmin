@@ -15110,9 +15110,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        public static string GENERAL_SR_STATE_OK {
+        public static string GENERAL_STATE_OK {
             get {
-                return ResourceManager.GetString("GENERAL_SR_STATE_OK", resourceCulture);
+                return ResourceManager.GetString("GENERAL_STATE_OK", resourceCulture);
             }
         }
         
@@ -25689,7 +25689,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.@BRANDING_UPDATE@, *.iso)|*.xsupdate;*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
@@ -26730,7 +26730,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in @BRANDING_SERVER@ 6.5. Remove StorageLink SRs before upgrading..
+        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in @BRANDING_SERVER@. Remove StorageLink SRs before upgrading..
         /// </summary>
         public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
             get {
@@ -31591,7 +31591,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file &apos;{0}&apos;.
         ///
-        ///Verify that the file is a valid xensearch export..
+        ///Verify that the file is a valid @BRANDING_SEARCH@ export..
         /// </summary>
         public static string UNABLE_TO_IMPORT_SEARCH {
             get {
@@ -36927,7 +36927,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ 6.5.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@.
         /// </summary>
         public static string XENSERVER_6_5 {
             get {

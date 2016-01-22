@@ -5296,7 +5296,7 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GENERAL_SR_STATE_BROKEN" xml:space="preserve">
     <value>Broken</value>
   </data>
-  <data name="GENERAL_SR_STATE_OK" xml:space="preserve">
+  <data name="GENERAL_STATE_OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="GENERAL_UNKNOWN" xml:space="preserve">
@@ -6635,7 +6635,7 @@ Size: {3}</value>
     <value>Servers must be selected one at a time when activating free @BRANDING_SERVER@.</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>Servers must be selected one at a time when licensing servers which have a version lower than 5.6.</value>
+    <value>Servers must be selected one at a time when licensing servers which have a version lower than @BRANDING_XC_PRODUCT_5_6_VERSION@.</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
@@ -8882,7 +8882,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>@BRANDING_SERVER@ Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso</value>
+    <value>@BRANDING_SERVER@ Updates and Supplemental Packs (*.@BRANDING_UPDATE@, *.iso)|*.@BRANDING_UPDATE@;*.iso</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this @BRANDING_SERVER@ version</value>
@@ -8965,14 +8965,14 @@ Installation size: {1}</value>
 
 The update is installed on '{1}', but the update installation file may have since been deleted.
 
-Upload the update from an .xsupdate file instead.</value>
+Upload the update from an .@BRANDING_UPDATE@ file instead.</value>
   </data>
   <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
     <value>Failed to download the update {0} from '{1}'.
 
 The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
 
-Upload the update from an .xsupdate file instead.</value>
+Upload the update from an .@BRANDING_UPDATE@ file instead.</value>
   </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
@@ -9307,7 +9307,7 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs was removed in @BRANDING_SERVER@ 6.5. Remove StorageLink SRs before upgrading.</value>
+    <value>The use of StorageLink SRs was removed in @BRANDING_SERVER@. Remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -9843,10 +9843,10 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Checking licensing status</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>'{0}': VM Protection Policies were removed in @BRANDING_SERVER@ 6.2</value>
+    <value>'{0}': VM Protection Policies were removed in @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>'{0}': The use of WSS servers was removed in @BRANDING_SERVER@ 6.2</value>
+    <value>'{0}': The use of WSS servers was removed in @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
@@ -10961,7 +10961,7 @@ Refer to the "@BRANDING_PRODUCT_BRAND@ Administrator's Guide" for instructions o
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file '{0}'.
 
-Verify that the file is a valid xensearch export.</value>
+Verify that the file is a valid @BRANDING_SEARCH@ export.</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
@@ -11173,7 +11173,7 @@ Check your settings and try again.</value>
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.xsupdate and *.iso</value>
+    <value>The selected file does not have a valid extension. Valid extensions are: *.@BRANDING_UPDATE@ and *.iso</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>This storage repository does not have enough space to suspend the required VMs.</value>
@@ -12760,10 +12760,10 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>@BRANDING_SERVER@</value>
   </data>
   <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.2</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.5</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>@BRANDING_SERVER@ Templates</value>

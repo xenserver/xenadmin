@@ -71,10 +71,13 @@ rebranding_global()
         -e "s#@BRANDING_SERVER@#${BRANDING_SERVER}#g" \
         -e "s#@BRANDING_BRAND_CONSOLE@#${BRANDING_BRAND_CONSOLE}#g" \
         -e "s#@BUILD_NUMBER@#${get_BUILD_NUMBER}#g" \
+        -e "s#@BRANDING_XC_PRODUCT_5_6_VERSION@#${BRANDING_XC_PRODUCT_5_6_VERSION}#g" \
+        -e "s#@BRANDING_XC_PRODUCT_6_2_VERSION@#${BRANDING_XC_PRODUCT_6_2_VERSION}#g" \
+        -e "s#@BRANDING_XC_PRODUCT_6_5_VERSION@#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
+        -e "s#@BRANDING_XENSERVER_UPDATE_URL@#${BRANDING_XENSERVER_UPDATE_URL}#g" \
         $1 > $1.tmp
     mv -f $1.tmp $1    
 }
-
 
 version_brand_cpp()
 {
@@ -158,7 +161,10 @@ rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.serverview
 rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.orgview.xml
 rebranding_global ${REPO}/XenAdminTests/TestResources/searchresults.xml
 rebranding_global ${REPO}/XenAdminTests/TestResources/state3.xml
+rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
+mv ${REPO}/XenAdminTests/TestResources/succeed.@BRANDING_UPDATE@ ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
 
 #XenServerHealthCheck
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
 rebranding_global ${REPO}/XenServerHealthCheck/app.config
+

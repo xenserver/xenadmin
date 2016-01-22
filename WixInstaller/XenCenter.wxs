@@ -82,13 +82,6 @@
                             <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
-                            <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
-                            <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
-                            <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
-                            <File Id="hotfixBostonSource" Source="..\XenAdmin\XS60E001-src-pkgs.tar.gz" />
-							<File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
-							<File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
-							<File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
 							<File Id="XvaIcon" Source="..\Branding\Images\file_vm.ico" />
                             <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
                             <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
@@ -124,35 +117,45 @@
                                 </Extension>
                             </ProgId>
 							<!-- Define XSLIC extension -->
-							<ProgId Id="XenCenter.xslic" Description="XenServer License File" Icon="XslicIcon">
+							<ProgId Id="XenCenter.xslic" Description="@BRANDING_SERVER@ License File" Icon="XslicIcon">
                                 <Extension Id="xslic" ContentType="application/xslic">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
 							<!-- Define XBK extension -->
-							<ProgId Id="XenCenter.xbk" Description="XenServer Backup File" Icon="XkbIcon">
+							<ProgId Id="XenCenter.xbk" Description="@BRANDING_SERVER@ Backup File" Icon="XkbIcon">
                                 <Extension Id="xbk" ContentType="application/xbk">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XSUPDATE extension -->
-							<ProgId Id="XenCenter.xsupdate" Description="XenServer Update File" Icon="XsupdateIcon">
-                                <Extension Id="xsupdate" ContentType="application/xsupdate">
+							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="@BRANDING_SERVER@ Update File" Icon="XsupdateIcon">
+                                <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XSOEM extension -->
-							<ProgId Id="XenCenter.xsoem" Description="XenServer OEM Update File" Icon="XsupdateIcon">
+							<ProgId Id="XenCenter.xsoem" Description="@BRANDING_SERVER@ OEM Update File" Icon="XsupdateIcon">
                                 <Extension Id="xsoem" ContentType="application/xsoem">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XENSEARCH extension -->
-                            <ProgId Id="XenCenter.xensearch" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
-                                <Extension Id="xensearch" ContentType="application/xensearch">
-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
+                            <ProgId Id="XenCenter.@BRANDING_SEARCH@" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
+                                <Extension Id="@BRANDING_SEARCH@" ContentType="application/@BRANDING_SEARCH@">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="search &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
+                        </Component>
+                        <Component Id="xsupdatesfiles" Guid="1cfbf607-cc80-4bf8-b2fc-37e69c872316">
+                            <Condition>"$(env.Branding)"="XenCenter"</Condition>
+                            <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
+                            <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
+                            <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
+                            <File Id="hotfixBostonSource" Source="..\XenAdmin\XS60E001-src-pkgs.tar.gz" />
+                            <File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
+                            <File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
+                            <File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
                         </Component>
                         <!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
@@ -203,8 +206,8 @@
 								  Type="ownProcess"
 								  Vital="no"
 								  Name="XenServerHealthCheck"
-								  DisplayName="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service"
-								  Description="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service"
+								  DisplayName="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service"
+								  Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service"
 								  Start="auto"
 								  Account="LocalSystem"
 								  ErrorControl="normal"
@@ -244,6 +247,7 @@
         <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="ReportViewer" />
+            <ComponentRef Id="xsupdatesfiles" />
             <ComponentRef Id="TestResources" />
             <ComponentRef Id="SchemasFilesComponent" />
             <ComponentRef Id="ExternalToolsComponent" />
@@ -251,7 +255,7 @@
             <ComponentRef Id="ApplicationShortcut" />
         </Feature>
 		
-        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ XenServer Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
              <ComponentRef Id="XenServerHealthCheck" /> 
         </Feature>
 		

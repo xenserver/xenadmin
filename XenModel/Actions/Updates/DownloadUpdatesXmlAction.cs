@@ -51,8 +51,6 @@ namespace XenAdmin.Actions
         private const string ConflictingPatchNode = "conflictingpatch";
         private const string RequiredPatchNode = "requiredpatch";
 
-        private const string UpdateXmlUrl = @"http://updates.xensource.com/XenServer/updates.xml";
-
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
         public List<XenServerVersion> XenServerVersions { get; private set; }
         public List<XenServerPatch> XenServerPatches { get; private set; }
@@ -89,7 +87,7 @@ namespace XenAdmin.Actions
         {
             this.Description = Messages.AVAILABLE_UPDATES_SEARCHING;
 
-            XmlDocument xdoc = FetchCheckForUpdatesXml(UpdateXmlUrl);
+            XmlDocument xdoc = FetchCheckForUpdatesXml(InvisibleMessages.XENSERVER_UPDATE_URL);
 
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);

@@ -5015,7 +5015,7 @@
   <data name="GENERAL_SR_STATE_BROKEN" xml:space="preserve">
     <value>已损坏</value>
   </data>
-  <data name="GENERAL_SR_STATE_OK" xml:space="preserve">
+  <data name="GENERAL_STATE_OK" xml:space="preserve">
     <value>正常</value>
   </data>
   <data name="GENERAL_UNKNOWN" xml:space="preserve">
@@ -6310,7 +6310,7 @@ SCSI ID: {2}
     <value>激活免费 @BRANDING_SERVER@ 时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>为 5.6 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
+    <value>为 @BRANDING_XC_PRODUCT_5_6_VERSION@ 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
@@ -7076,10 +7076,6 @@ SCSI ID: {2}
   <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
-  <data name="MIAMI_NOT_SUPPORTED" xml:space="preserve">
-    <value>该版本的 @BRANDING_BRAND_CONSOLE@ 不支持 @BRANDING_SERVER@ 4.0 或 4.1。
-请安装更早的版本。</value>
-  </data>
   <data name="MIGRATE" xml:space="preserve">
     <value>迁移</value>
   </data>
@@ -7353,7 +7349,7 @@ SCSI ID: {2}
     <value>从不</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>新磁盘将在下次重新启动 VM 后显示。</value>
+    <value>新磁盘将在关机并重新启动 VM 后显示。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>已创建磁盘</value>
@@ -8424,7 +8420,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择现有更新进行安装，或上载新更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 更新|*.xsupdate;*.xsoem</value>
+    <value>@BRANDING_SERVER@ 更新|*.@BRANDING_UPDATE@;*.xsoem</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
@@ -8803,7 +8799,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>尝试连接到 StorageLink Gateway 时出错: \n\n{0}\n\n请检查此主机的设置并重新连接。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.5 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
+    <value>@BRANDING_SERVER@ 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -9369,7 +9365,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在检查许可状态</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>{0}: @BRANDING_SERVER@ 6.2 中删除了 VM 保护策略</value>
+    <value>{0}: @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@ 中删除了 VM 保护策略</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
     <value>{0}: @BRANDING_SERVER@ 6.2 中不再使用 WSS 服务器</value>
@@ -10410,7 +10406,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ 无法从文件 {0} 中导入保存的搜索。
 
-请确认该文件属于有效的 xensearch 导出。</value>
+请确认该文件属于有效的 @BRANDING_SEARCH@ 导出。</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ 将文件解压到“{0}”。 解压后，将删除原始文件“{1}”。是否继续?</value>
@@ -10619,7 +10615,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: VM {1} 使用本地存储，无法迁移。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为: *.xsoem 和 *.xsupdate</value>
+    <value>所选文件的扩展名无效。有效扩展名为: *.xsoem 和 *.@BRANDING_UPDATE@</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>此存储库空间不足，无法挂起所需的 VM。</value>
@@ -12077,10 +12073,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>@BRANDING_SERVER@</value>
   </data>
   <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.2</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 6.5</value>
+    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>@BRANDING_SERVER@ 模板</value>

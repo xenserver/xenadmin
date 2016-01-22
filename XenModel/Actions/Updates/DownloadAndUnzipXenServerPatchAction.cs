@@ -117,7 +117,7 @@ namespace XenAdmin.Actions
 
                     while (iterator.HasNext())
                     {
-                        if (Path.GetExtension(iterator.CurrentFileName()) == ".xsupdate")
+                        if (Path.GetExtension(iterator.CurrentFileName()) == "."+InvisibleMessages.XEN_UPDATE)
                         {
                             string path = Path.Combine(Path.GetDirectoryName(outFileName), iterator.CurrentFileName());
 

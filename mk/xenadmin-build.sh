@@ -110,10 +110,12 @@ SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
 $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
 
 #sign
-for file in ${BRANDING_BRAND_CONSOLE}.exe XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
 do
   cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${file}
 done
+
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.exe
 
 cd ${REPO}/xe/bin/Release         && ${REPO}/sign.bat xe.exe
 cd ${REPO}/xva_verify/bin/Release && ${REPO}/sign.bat xva_verify.exe
@@ -179,7 +181,7 @@ compile_installer()
    
   cd ${WIX}
   mkdir -p obj${name}
-  WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
+  Branding=${BRANDING_BRAND_CONSOLE} WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
    
   mkdir -p out${name}
   
@@ -296,9 +298,15 @@ cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
-cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1006}.xsupdate \
-   ${REPO}/XenAdmin/bin/Release/{XS60E001-src-pkgs,XS62E006-src-pkgs}.tar.gz \
-   ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
+
+if [ "${XC_BRANDING}" = "citrix" ]
+then
+  cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1006}.xsupdate \
+     ${REPO}/XenAdmin/bin/Release/{XS60E001-src-pkgs,XS62E006-src-pkgs}.tar.gz \
+     ${OUTPUT_DIR}
+fi
+
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/VNCControl/bin/Release/VNCControl.pdb \
