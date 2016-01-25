@@ -192,6 +192,7 @@
                     </Directory>
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
 							<Component Id="XenServerHealthCheck" Guid="{9D686BFC-B4FD-435F-AC74-0ACE29425095}">
+                                <Condition>"$(env.Branding)"="XenCenter"</Condition>
 								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
 								<File Id="HealthCheck_CommandLib.dll" Name="CommandLib.dll" Source="..\XenServerHealthCheck\bin\Release\CommandLib.dll" />
 								<File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="..\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
