@@ -100,6 +100,8 @@ namespace XenAPI
                     return Edition.Desktop;
                 case "desktop-plus":
                     return Edition.DesktopPlus;
+                case "basic":
+                    return Edition.Free;
                 case "premium":
                     return Edition.Premium;
                 default:
