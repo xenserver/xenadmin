@@ -296,7 +296,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 deprecationBanner.AppliesToVersion = Messages.XENSERVER_6_2;
                 deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
                 deprecationBanner.FeatureName = Messages.VMPP;
-                deprecationBanner.LinkUri = new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? "" : InvisibleMessages.VMPR_DEPRECATION_URL);
+                deprecationBanner.LinkUri = new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? null : InvisibleMessages.VMPR_DEPRECATION_URL);
                 deprecationBanner.Visible = true;
             }
         }

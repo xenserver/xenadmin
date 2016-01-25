@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
         public override Uri UriToLaunch {
             get
             {
-                return new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? "" : InvisibleMessages.ISL_DEPRECATION_URL);
+                return new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? null : InvisibleMessages.ISL_DEPRECATION_URL);
             }
         }
 
