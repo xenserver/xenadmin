@@ -164,6 +164,7 @@
                         <!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
                             <Component Id="TestResources" Guid="FA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+                                <Condition>"$(env.Branding)"="XenCenter"</Condition>
                                 <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
                                 <File Id="interes1.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
                                 <File Id="interes2.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
