@@ -238,6 +238,7 @@
             <Component Id="RegistryEntries" Guid="193BAE1F-F2AE-4451-94DC-4B105DB5179C">
                 <RegistryKey Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
+                    <RegistryValue Type="string" Name="HiddenFeatures" Value="@BRANDING_HIDDEN_FEATURE@" />
                 </RegistryKey>
             </Component>
         </DirectoryRef>

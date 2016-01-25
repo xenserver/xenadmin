@@ -75,6 +75,7 @@ rebranding_global()
         -e "s#@BRANDING_XC_PRODUCT_6_2_VERSION@#${BRANDING_XC_PRODUCT_6_2_VERSION}#g" \
         -e "s#@BRANDING_XC_PRODUCT_6_5_VERSION@#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
         -e "s#@BRANDING_XENSERVER_UPDATE_URL@#${BRANDING_XENSERVER_UPDATE_URL}#g" \
+        -e "s#@BRANDING_HIDDEN_FEATURE@#${BRANDING_HIDDEN_FEATURE}#g" \
         $1 > $1.tmp
     mv -f $1.tmp $1    
 }
