@@ -227,6 +227,7 @@ namespace XenAdmin
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !XenAdmin.Core.Registry.ToolStripMenuItemHidden;
+            healthCheckToolStripMenuItem1.Visible = !XenAdmin.Core.Registry.HealthCheckHidden;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
@@ -856,7 +857,7 @@ namespace XenAdmin
 
         private void CheckHealthCheckEnrollment(object connection)
         {
-            if (HealthCheckOverviewLauncher != null)
+            if (HealthCheckOverviewLauncher != null && !XenAdmin.Core.Registry.HealthCheckHidden)
                 HealthCheckOverviewLauncher.CheckHealthCheckEnrollment((IXenConnection) connection);
         }
 
