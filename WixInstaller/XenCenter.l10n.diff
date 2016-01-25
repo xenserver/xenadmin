@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2016-01-25 16:46:53.853090300 +0800
-+++ XenCenter.l10n.wxs	2016-01-25 16:50:34.489016700 +0800
+--- XenCenter.wxs	2016-01-25 16:59:07.364478400 +0800
++++ XenCenter.l10n.wxs	2016-01-25 16:59:26.625279500 +0800
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -127,7 +127,16 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -166,6 +166,26 @@
+@@ -159,7 +159,7 @@
+                         </Component>
+                         <Component Id="readmefile" Guid="47427a60-4064-4fdb-878d-04309a0fd9ce">
+                             <Condition><![CDATA["$(env.Branding)"<>"XenCenter"]]></Condition>
+-                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
++                            <File Id="Readme" Source="..\Branding\WixInstaller\!(loc.Readme)" />
+                         </Component>
+                         <!-- TestResources -->
+                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
+@@ -170,6 +170,26 @@
                                  <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
                              </Component>
                          </Directory>
@@ -154,7 +163,7 @@
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                              <Component Id="ExternalToolsComponent" Guid="D5FC0252-C97B-46e7-9633-A6B68EDB6654">
                                  <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
-@@ -247,8 +267,10 @@
+@@ -251,9 +271,11 @@
  	
          <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
@@ -162,11 +171,12 @@
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
              <ComponentRef Id="xsupdatesfiles" />
+             <ComponentRef Id="readmefile" />
 +            <ComponentRef Id="ReportViewer" />
              <ComponentRef Id="TestResources" />
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
-@@ -267,7 +289,7 @@
+@@ -272,7 +294,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />

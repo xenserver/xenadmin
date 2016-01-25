@@ -157,6 +157,10 @@
                             <File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
                             <File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
                         </Component>
+                        <Component Id="readmefile" Guid="47427a60-4064-4fdb-878d-04309a0fd9ce">
+                            <Condition><![CDATA["$(env.Branding)"<>"XenCenter"]]></Condition>
+                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
+                        </Component>
                         <!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
                             <Component Id="TestResources" Guid="FA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
@@ -249,6 +253,7 @@
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="xsupdatesfiles" />
+            <ComponentRef Id="readmefile" />
             <ComponentRef Id="TestResources" />
             <ComponentRef Id="SchemasFilesComponent" />
             <ComponentRef Id="ExternalToolsComponent" />

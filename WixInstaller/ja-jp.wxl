@@ -12,4 +12,5 @@
     <String Id="XenServer_OEM_Update_File">@BRANDING_SERVER@ OEM アップデート ファイル</String>
     <String Id="XenCenter_Saved_Search">@BRANDING_BRAND_CONSOLE@ 保存された検索条件</String>
     <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 4 が必要です。</String>
+    <String Id="Readme">README.TXT</String>
 </WixLocalization>
