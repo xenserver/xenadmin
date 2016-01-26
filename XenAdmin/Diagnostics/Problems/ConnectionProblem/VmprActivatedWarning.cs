@@ -56,7 +56,7 @@ namespace XenAdmin.Diagnostics.Problems.ConnectionProblem
         public override Uri UriToLaunch
         {
             get {
-                return new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? null : InvisibleMessages.VMPR_DEPRECATION_URL); 
+                return XenAdmin.Core.Registry.LinkLabelHidden ? null : new Uri(InvisibleMessages.VMPR_DEPRECATION_URL);
             }
         }
     }

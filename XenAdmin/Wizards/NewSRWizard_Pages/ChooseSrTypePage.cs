@@ -72,7 +72,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 deprecationBanner.AppliesToVersion = Messages.XENSERVER_6_5;
                 deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
                 deprecationBanner.FeatureName = Messages.ISL_SR;
-                deprecationBanner.LinkUri = new Uri(XenAdmin.Core.Registry.LinkLabelHidden ? null : InvisibleMessages.ISL_DEPRECATION_URL);
+                deprecationBanner.LinkUri = XenAdmin.Core.Registry.LinkLabelHidden ? null : new Uri(InvisibleMessages.ISL_DEPRECATION_URL); 
                 deprecationBanner.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
             }
             else
