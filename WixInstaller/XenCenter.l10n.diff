@@ -31,7 +31,7 @@
 --- XenCenter.wxs	2016-01-25 17:12:12.929899400 +0800
 +++ XenCenter.l10n.wxs	2016-01-25 17:13:13.493104800 +0800
 @@ -38,7 +38,7 @@
-     <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
+     <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
      <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
 -        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
@@ -129,7 +129,7 @@
                          </Component>
 @@ -159,7 +159,7 @@
                          </Component>
-                         <Component Id="readmefile" Guid="47427a60-4064-4fdb-878d-04309a0fd9ce">
+                         <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
                              <Condition><![CDATA["$(env.Branding)"<>"XenCenter"]]></Condition>
 -                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
 +                            <File Id="Readme" Source="..\Branding\WixInstaller\!(loc.Readme)" />
@@ -141,7 +141,7 @@
                              </Component>
                          </Directory>
 +                        <Directory Id="ja" Name="ja">
-+                            <Component Id="JaResources" Guid="D3ADD803-AF0B-4787-AC29-C6387FFF403B">
++                            <Component Id="JaResources" Guid="@BRANDING_JA_RESOURCES_GUID@">
 +                                <File Id="JaResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
 +                                <File Id="JaXenModResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
 +                                <File Id="JaMicRepVwrCmnResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
@@ -151,7 +151,7 @@
 +                            </Component>
 +                        </Directory>
 +                        <Directory Id="sc" Name="zh-CN">
-+                            <Component Id="ScResources" Guid="381e9319-f0c4-4c69-a1c2-0a2fc725bd19">
++                            <Component Id="ScResources" Guid="@BRANDING_SC_RESOURCES_GUID@">
 +                                <File Id="ScResourcesDLL" Source="..\XenAdmin\bin\Release\zh-CN\XenCenterMain.resources.dll" />
 +                                <File Id="ScXenModResourcesDLL" Source="..\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
 +                                <File Id="ScMicRepVwrCmnResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
@@ -161,7 +161,7 @@
 +                            </Component>
 +                        </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-                             <Component Id="ExternalToolsComponent" Guid="D5FC0252-C97B-46e7-9633-A6B68EDB6654">
+                             <Component Id="ExternalToolsComponent" Guid="@BRANDING_EXTERNAL_TOOLS_GUID@">
                                  <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
 @@ -253,9 +273,11 @@
  	

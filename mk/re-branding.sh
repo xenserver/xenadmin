@@ -80,11 +80,40 @@ rebranding_global()
     mv -f $1.tmp $1    
 }
 
+rebranding_GUID()
+{
+  sed -e "s#@BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID@#${BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID}#g" \
+      -e "s#@BRANDING_VNC_MAIN_CONTROL_GUID@#${BRANDING_VNC_MAIN_CONTROL_GUID}#g" \
+      -e "s#@BRANDING_XENCENTER_UPGRADE_CODE_GUID@#${BRANDING_XENCENTER_UPGRADE_CODE_GUID}#g" \
+      -e "s#@BRANDING_JA_RESOURCES_GUID@#${BRANDING_JA_RESOURCES_GUID}#g" \
+      -e "s#@BRANDING_SC_RESOURCES_GUID@#${BRANDING_SC_RESOURCES_GUID}#g" \
+      -e "s#@BRANDING_REPORT_VIEWER_GUID@#${BRANDING_REPORT_VIEWER_GUID}#g" \
+      -e "s#@BRANDING_MAIN_EXECUTABLE_GUID@#${BRANDING_MAIN_EXECUTABLE_GUID}#g" \
+      -e "s#@BRANDING_TEST_RESOURCES_GUID@#${BRANDING_TEST_RESOURCES_GUID}#g" \
+      -e "s#@BRANDING_EXTERNAL_TOOLS_GUID@#${BRANDING_EXTERNAL_TOOLS_GUID}#g" \
+      -e "s#@BRANDING_SCHEMAS_FILES_GUID@#${BRANDING_SCHEMAS_FILES_GUID}#g" \
+      -e "s#@BRANDING_REGISTRY_ENTRIES_GUID@#${BRANDING_REGISTRY_ENTRIES_GUID}#g" \
+      -e "s#@BRANDING_APPLICAION_SHOTCUT_GUID@#${BRANDING_APPLICAION_SHOTCUT_GUID}#g" \
+      -e "s#@BRANDING_README_FILE_GUID@#${BRANDING_README_FILE_GUID}#g" \
+      -e "s#@BRANDING_XSUPDATE_FILE_GUID@#${BRANDING_XSUPDATE_FILE_GUID}#g" \
+      -e "s#@BRANDING_HEALTH_CHECK_GUID@#${BRANDING_HEALTH_CHECK_GUID}#g" \
+      $1 > $1.tmp
+  mv -f $1.tmp $1   
+}
+
 version_brand_cpp()
 {
   for file in $1
   do
     version_cpp ${file} && rebranding_global ${file}
+  done
+}
+
+branding_wxs()
+{
+  for file in $1
+  do
+    rebranding_global ${file} && rebranding_GUID ${file}
   done
 }
 
@@ -151,9 +180,7 @@ rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
 rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
 rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
-rebranding_global ${REPO}/WixInstaller/XenCenter.l10n.diff
-rebranding_global ${REPO}/WixInstaller/XenCenter.wxs
-rebranding_global ${REPO}/WixInstaller/vnccontrol.wxs
+branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs ${REPO}/WixInstaller/vnccontrol.wxs"
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
