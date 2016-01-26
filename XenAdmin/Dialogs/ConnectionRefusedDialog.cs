@@ -40,6 +40,7 @@ namespace XenAdmin.Dialogs
         public ConnectionRefusedDialog()
         {
             InitializeComponent();
+            this.linkLabel.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
         }
 
         public string ErrorMessage

@@ -71,6 +71,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 //this is normal; ignore
             }
+            usernameTextBox.Visible = usernameLabel.Visible = passwordLabel.Visible = passwordTextBox.Visible = 
+                caseNumberLabel.Visible = caseNumberTextBox.Visible = optionalLabel.Visible =
+                richTextBox1.Visible = uploadCheckBox.Visible = !XenAdmin.Core.Registry.UploadOptionHidden;
         }
 
         public override string Text { get { return Messages.BUGTOOL_PAGE_DESTINATION_TEXT; } }

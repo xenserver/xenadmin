@@ -108,10 +108,10 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.flowLayoutPanel1.Controls.Add(this.labelExternalNetwork);
             this.flowLayoutPanel1.Controls.Add(this.rbtnInternalNetwork);
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnCHIN);
-            this.flowLayoutPanel1.Controls.Add(this.labelCHIN);
             this.flowLayoutPanel1.Controls.Add(this.rbtnBondedNetwork);
             this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Controls.Add(this.rbtnCHIN);
+            this.flowLayoutPanel1.Controls.Add(this.labelCHIN);
             this.flowLayoutPanel1.Controls.Add(this.warningsTable);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 

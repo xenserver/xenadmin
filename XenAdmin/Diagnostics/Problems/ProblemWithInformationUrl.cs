@@ -52,14 +52,15 @@ namespace XenAdmin.Diagnostics.Problems
 
         public virtual string LinkText
         {
-            get { return Messages.DETAILS; }
+            get { return UriToLaunch != null ? Messages.DETAILS : string.Empty; }
         }
 
         public void LaunchUrlInBrowser()
         {
             try
             {
-                Process.Start(UriToLaunch.AbsoluteUri);
+                if (UriToLaunch != null)
+                    Process.Start(UriToLaunch.AbsoluteUri);
             }
             catch (Exception)
             {

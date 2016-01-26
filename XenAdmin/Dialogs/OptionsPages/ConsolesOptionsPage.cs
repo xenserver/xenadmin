@@ -74,6 +74,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             // Console scaling
             PreserveUndockedScaleCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenUndocked;
             PreserveVNCConsoleScalingCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC;
+            checkBoxDisableRDPPolling.Visible = !XenAdmin.Core.Registry.RDPPollingHidden;
             checkBoxDisableRDPPolling.Checked = Properties.Settings.Default.EnableRDPPolling;
         }
 

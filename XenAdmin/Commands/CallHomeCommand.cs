@@ -21,7 +21,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            if (Program.MainWindow.HealthCheckOverviewLauncher != null)
+            if (Program.MainWindow.HealthCheckOverviewLauncher != null && !XenAdmin.Core.Registry.HealthCheckHidden)
                 Program.MainWindow.HealthCheckOverviewLauncher.LaunchIfRequired(false, selection);
         }
 

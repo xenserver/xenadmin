@@ -51,6 +51,7 @@ namespace XenAdmin.Controls
         public UpsellPage()
         {
             InitializeComponent();
+            this.LearnMoreButton.Visible = !XenAdmin.Core.Registry.LearnMoreButtonHidden;
         }
 
         public void enableOkButton()
