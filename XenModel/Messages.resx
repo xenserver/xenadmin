@@ -5017,9 +5017,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} require an Enterprise\nor Platinum Edition license.</value>
-  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>&amp;Next Section</value>
   </data>

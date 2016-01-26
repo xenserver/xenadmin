@@ -90,7 +90,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
                 labelWarningChinOption.Text = 
                     Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
-                    string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL, Messages.CHINS) :
+                    Messages.FIELD_DISABLED :
                     Messages.CHINS_NEED_VSWITCHCONTROLLER;
 
                 iconWarningChinOption.Visible = labelWarningChinOption.Visible = !XenAdmin.Core.Registry.CrossServerPrivateNetworkHidden;

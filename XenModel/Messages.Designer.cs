@@ -14271,15 +14271,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} require an Enterprise\nor Platinum Edition license..
-        /// </summary>
-        public static string FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL {
-            get {
-                return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Next Section.
         /// </summary>
         public static string FETCH_EARLIER_DATA {
@@ -19018,7 +19009,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers must be selected one at a time when licensing servers which have a version lower than 5.6..
+        ///   Looks up a localized string similar to Servers must be selected one at a time when licensing servers which have a version lower than @BRANDING_XC_PRODUCT_5_6_VERSION@..
         /// </summary>
         public static string LICENSE_NO_MULTISELECT_LICENSE {
             get {
@@ -25230,7 +25221,7 @@ namespace XenAdmin {
         ///
         ///The update is installed on &apos;{1}&apos;, but the update installation file may have since been deleted.
         ///
-        ///Upload the update from an .xsupdate file instead..
+        ///Upload the update from an .@BRANDING_UPDATE@ file instead..
         /// </summary>
         public static string PATCH_DOWNLOAD_FAILED_MORE_INFO {
             get {
@@ -25243,7 +25234,7 @@ namespace XenAdmin {
         ///
         ///The update has previously been uploaded to &apos;{1}&apos;, but the update installation file may have since been deleted.
         ///
-        ///Upload the update from an .xsupdate file instead..
+        ///Upload the update from an .@BRANDING_UPDATE@ file instead..
         /// </summary>
         public static string PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED {
             get {
@@ -25707,7 +25698,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.@BRANDING_UPDATE@, *.iso)|*.xsupdate;*.iso.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ Updates and Supplemental Packs (*.@BRANDING_UPDATE@, *.iso)|*.@BRANDING_UPDATE@;*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
@@ -28271,7 +28262,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in @BRANDING_SERVER@ 6.2.
+        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@.
         /// </summary>
         public static string RPU_WIZARD_VMPR_VMPP_DEPRECATION {
             get {
@@ -28280,7 +28271,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in @BRANDING_SERVER@ 6.2.
+        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@.
         /// </summary>
         public static string RPU_WIZARD_WSS_DEPRECATED {
             get {
@@ -32403,7 +32394,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.xsupdate and *.iso.
+        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.@BRANDING_UPDATE@ and *.iso.
         /// </summary>
         public static string UPDATES_WIZARD_NOTVALID_EXTENSION {
             get {
@@ -37044,7 +37035,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ 6.2.
+        ///   Looks up a localized string similar to @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@.
         /// </summary>
         public static string XENSERVER_6_2 {
             get {
