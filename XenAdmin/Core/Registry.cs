@@ -388,6 +388,12 @@ namespace XenAdmin.Core
             { return HiddenFeatures != null && HiddenFeatures.Contains(UPLOAD_OPTION_HIDDEN); }
         }
 
+        internal static bool LicenseNagHidden
+        {
+            get
+            { return HiddenFeatures != null && HiddenFeatures.Contains(LICENSE_NAG_HIDDEN); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -419,6 +425,7 @@ namespace XenAdmin.Core
         private const string COPYRIGHT_HIDDEN = "copyright";
         private const string HEALTH_CHECK_HIDDEN = "health_check"; 
         private const string UPLOAD_OPTION_HIDDEN = "upload_option";
+        private const string LICENSE_NAG_HIDDEN = "license_nag";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }
