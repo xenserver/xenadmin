@@ -1841,4 +1841,10 @@
   <data name="Label-host.system_status-xenvm" xml:space="preserve">
     <value>Volume manager logs</value>
   </data>
+  <data name="Label-host.edition-premium" xml:space="preserve">
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Premium Edition</value>
+  </data>
+  <data name="Label-host.edition-basic" xml:space="preserve">
+    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Basic Edition</value>
+  </data>
 </root>
