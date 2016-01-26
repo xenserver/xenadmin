@@ -5268,7 +5268,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server rejected our configured authentication details..
+        ///   Looks up a localized string similar to WLB rejected our configured authentication details..
         /// </summary>
         public static string WLB_AUTHENTICATION_FAILED {
             get {
@@ -5277,7 +5277,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server refused a connection to XenServer..
+        ///   Looks up a localized string similar to WLB refused a connection to the server..
         /// </summary>
         public static string WLB_CONNECTION_REFUSED {
             get {
@@ -5304,7 +5304,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server reported an internal error..
+        ///   Looks up a localized string similar to WLB reported an internal error..
         /// </summary>
         public static string WLB_INTERNAL_ERROR {
             get {
@@ -5313,7 +5313,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server rejected XenServer&apos;s request as malformed..
+        ///   Looks up a localized string similar to WLB rejected the server&apos;s request as malformed..
         /// </summary>
         public static string WLB_MALFORMED_REQUEST {
             get {
@@ -5367,7 +5367,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server reported that XenServer rejected its configured authentication details..
+        ///   Looks up a localized string similar to WLB reported that the server rejected its configured authentication details..
         /// </summary>
         public static string WLB_XENSERVER_AUTHENTICATION_FAILED {
             get {
@@ -5376,7 +5376,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server reported that XenServer refused it a connection (even though we&apos;re connecting perfectly fine in the other direction)..
+        ///   Looks up a localized string similar to WLB reported that the server refused it a connection (even though we&apos;re connecting perfectly fine in the other direction)..
         /// </summary>
         public static string WLB_XENSERVER_CONNECTION_REFUSED {
             get {
@@ -5385,7 +5385,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server reported that XenServer said something to it that WLB wasn&apos;t expecting or didn&apos;t understand..
+        ///   Looks up a localized string similar to WLB reported that the server said something to it that WLB wasn&apos;t expecting or didn&apos;t understand..
         /// </summary>
         public static string WLB_XENSERVER_MALFORMED_RESPONSE {
             get {
@@ -5394,7 +5394,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server reported that communication with XenServer timed out..
+        ///   Looks up a localized string similar to WLB reported that communication with the server timed out..
         /// </summary>
         public static string WLB_XENSERVER_TIMEOUT {
             get {
@@ -5403,7 +5403,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server reported that its configured server name for this XenServer instance failed to resolve in DNS..
+        ///   Looks up a localized string similar to WLB reported that its configured server name for this server instance failed to resolve in DNS..
         /// </summary>
         public static string WLB_XENSERVER_UNKNOWN_HOST {
             get {
@@ -5457,7 +5457,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find any volumes supported by the Citrix XenServer Vss Provider.
+        ///   Looks up a localized string similar to Could not find any volumes supported by the Vss Provider.
         /// </summary>
         public static string XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED {
             get {
@@ -5475,7 +5475,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Citrix XenServer Vss Provider is not loaded.
+        ///   Looks up a localized string similar to The Vss Provider is not loaded.
         /// </summary>
         public static string XEN_VSS_REQ_ERROR_PROV_NOT_LOADED {
             get {
