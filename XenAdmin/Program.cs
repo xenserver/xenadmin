@@ -821,6 +821,9 @@ namespace XenAdmin
             {
                 if (!IsExiting(c))
                 {
+                    if (c == null)
+                        return;
+
                     if (c.InvokeRequired)
                     {
                         MethodInvoker exceptionLogger = () =>
@@ -869,7 +872,7 @@ namespace XenAdmin
 
         private static bool IsExiting(Control c)
         {
-            return Exiting || c.Disposing || c.IsDisposed || !c.IsHandleCreated;
+            return Exiting || ((c != null) && (c.Disposing || c.IsDisposed || !c.IsHandleCreated));
         }
 
         /// <summary>
