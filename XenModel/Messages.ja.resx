@@ -4734,9 +4734,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} を使用するには Enterprise Edition\nまたは Platinum Edition のライセンスが必要です。</value>
-  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>次のセクション(&amp;N)</value>
   </data>

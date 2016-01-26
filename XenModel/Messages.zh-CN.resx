@@ -4733,9 +4733,6 @@
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>功能已在注册表中禁用</value>
   </data>
-  <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 Enterprise\n或 Enterprise Edition 许可证。</value>
-  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>下一部分(&amp;N)</value>
   </data>
