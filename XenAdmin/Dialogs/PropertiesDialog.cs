@@ -67,10 +67,12 @@ namespace XenAdmin.Dialogs
         private HostPowerONEditPage HostPowerONEditPage;
         private PoolPowerONEditPage PoolPowerONEditPage;
         private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
-        private NewPolicySnapshotTypePage newPolicySnapshotTypePage1;
+        private NewPolicySnapshotTypePageSpecific<VMPP> newPolicySnapshotTypePage1;
+        private NewPolicySnapshotTypePageSpecific<VMSS> newPolicyVMSSTypePage1;
         private NewPolicyArchivePage newPolicyArchivePage1;
         private NewPolicyEmailPage newPolicyEmailPage1;
         private NewVMGroupVMsPage<VMPP> newPolicyVMsPage1;
+        private NewVMGroupVMsPage<VMSS> newVMSSVMsPage1;
         private NewVMGroupVMsPage<VM_appliance> newVMApplianceVMsPage1;
         private NewVMApplianceVMOrderAndDelaysPage newVmApplianceVmOrderAndDelaysPage1;
         private UpsellPage GpuUpsellEditPage;
@@ -131,6 +133,8 @@ namespace XenAdmin.Dialogs
             bool is_VMPP = xenObjectCopy is VMPP;
 
             bool is_VM_appliance = xenObjectCopy is VM_appliance;
+
+            bool is_VMSS = xenObjectCopy is VMSS;
 
             ContentPanel.SuspendLayout();
             verticalTabs.BeginUpdate();
@@ -232,9 +236,17 @@ namespace XenAdmin.Dialogs
                 if (is_VMPP)
                 {
                     ShowTab(newPolicyVMsPage1 = new NewVMGroupVMsPage<VMPP> {Pool = pool});
-                    ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePage());
+                    ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePageSpecific<VMPP>());
                     ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
                     ShowTab(newPolicyArchivePage1 = new NewPolicyArchivePage {Pool = pool, PropertiesDialog = this});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage {PropertiesDialog = this});
+                }
+
+                if(is_VMSS)
+                {
+                    ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
+                    ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePageSpecific<VMSS>());
+                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
                     ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage {PropertiesDialog = this});
                 }
 

@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
@@ -40,13 +41,49 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {
+    // This class acts as the base class for NewPolicySnapshotTypePageSpecific. It's only here
+    // because of a bug in Visual Studio: the Designer can't design classes of a
+    // generic class. The workaround is to do the design in this non-generic class,
+    // and then inherit the generic class from it. See
+    // http://stackoverflow.com/questions/1627431/fix-embedded-resources-for-generic-usercontrol
+    // http://bytes.com/topic/c-sharp/answers/537310-can-you-have-generic-type-windows-form
+    // http://connect.microsoft.com/VisualStudio/feedback/details/115397/component-resource-manager-doesnt-work-with-generic-form-classes
+    // (or search on Google for [ComponentResourceManager generic]).
+
     public partial class NewPolicySnapshotTypePage : XenTabPage, IEditPage
     {
+        protected List<VM> _selectedVMs;
+        public List<VM> SelectedVMs
+        {
+            get { return _selectedVMs; }
+            set
+            {
+                _selectedVMs = value;
+            }
+        }
+        protected virtual void doSave() {  }
+        protected virtual bool doHasChanged() { return true; }
+        protected virtual void doSetXenObjects(IXenObject orig, IXenObject clone) { }
+        protected virtual string doGetSubText() { return null; }
+
         public NewPolicySnapshotTypePage()
         {
             InitializeComponent();
         }
 
+        public NewPolicySnapshotTypePage(List<VM> selectedVMS)
+        {
+            InitializeComponent();
+            SelectedVMs = selectedVMS;
+        }
+
+        public AsyncAction SaveSettings()
+        {
+            this.doSave();
+            return null;
+        }
+
+/*
         public override string Text
         {
             get
@@ -55,28 +92,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        public string SubText
-        {
-            get
-            {
-                if (BackupType == vmpp_backup_type.snapshot)
-                    return Messages.DISKS_ONLY;
-                else
-                {
-                    return Messages.DISKS_AND_MEMORY;
-                }
-            }
-        }
-
+        
         public override string HelpID
         {
             get { return "Snapshottype"; }
         }
 
-        public Image Image
-        {
-            get { return Properties.Resources._000_VMSession_h32bit_16; }
-        }
+        
 
         public override string PageTitle
         {
@@ -85,37 +107,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 return Messages.SNAPSHOT_TYPE_TITLE;
             }
         }
-
-
-        public vmpp_backup_type BackupType
-        {
-            get
-            {
-                if (radioButtonDiskOnly.Checked)
-                    return vmpp_backup_type.snapshot;
-                else if (radioButtonDiskAndMemory.Checked)
-                    return vmpp_backup_type.checkpoint;
-                else
-                {
-                    return vmpp_backup_type.unknown;
-                }
-            }
-        }
-
-        private void RefreshTab(VMPP vmpp)
-        {
-            switch (vmpp.backup_type)
-            {
-                case vmpp_backup_type.checkpoint:
-                    radioButtonDiskAndMemory.Checked = true;
-                    break;
-                case vmpp_backup_type.snapshot:
-                    radioButtonDiskOnly.Checked = true;
-                    break;
-            }
-            EnableShapshotTypes(vmpp.Connection);
-        }
-
+                     
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
@@ -129,18 +121,15 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             checkpointInfoPictureBox.Visible = !radioButtonDiskAndMemory.Enabled;
             pictureBoxWarning.Visible = labelWarning.Visible = radioButtonDiskAndMemory.Enabled;
         }
-
-        public AsyncAction SaveSettings()
+*/
+        public string SubText
         {
-            _clone.backup_type = BackupType;
-            return null;
+            get { return doGetSubText(); }
         }
 
-        private VMPP _clone;
-        public void SetXenObjects(IXenObject orig, IXenObject clone)
+        public Image Image
         {
-            _clone = (VMPP)clone;
-            RefreshTab(_clone);
+            get { return Properties.Resources._000_VMSession_h32bit_16; }
         }
 
         public bool ValidToSave
@@ -160,7 +149,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public bool HasChanged
         {
-            get { return BackupType != _clone.backup_type; }
+            get { return doHasChanged(); }
+        }
+
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
+        {
+            doSetXenObjects(orig, clone);
         }
 
         private void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
@@ -174,5 +168,25 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             toolTip.Hide(checkpointInfoPictureBox);
         }
+
+        private void pictureBoxVSS_Click(object sender, System.EventArgs e)
+        {
+            string tt = Messages.INFO_QUIESCE_MODE.Replace("\\n","\n");  // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
+            toolTip.Show(tt, pictureBoxVSS, 20, 0);
+        }
+
+        private void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e)
+        {
+            toolTip.Hide(pictureBoxVSS);
+        }
+
+        private void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (quiesceCheckBox.Checked)
+            {
+                this.radioButtonDiskOnly.Checked = true;
+            }
+        }
+
     }
 }

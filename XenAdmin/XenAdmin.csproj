@@ -630,6 +630,12 @@
     <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\NewPolicyWizard\NewPolicySnapshotTypePageSpecific.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewPolicyWizard\NewPolicyWizardSpecific.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
     </Compile>

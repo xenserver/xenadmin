@@ -203,6 +203,7 @@ namespace XenAdmin
             this.startOnHostToolStripMenuItem = new XenAdmin.Commands.StartVMOnHostToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.assignPolicyToolStripMenuItem = new XenAdmin.Commands.AssignGroupToolStripMenuItemVMPP();
+            this.assignSnapshotScheduleToolStripMenuItem = new XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS();
             this.assignToVirtualApplianceToolStripMenuItem = new XenAdmin.Commands.AssignGroupToolStripMenuItemVM_appliance();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.copyVMtoSharedStorageMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -1265,6 +1266,7 @@ namespace XenAdmin
             this.relocateToolStripMenuItem,
             this.startOnHostToolStripMenuItem,
             this.toolStripSeparator20,
+            this.assignSnapshotScheduleToolStripMenuItem,
             this.assignPolicyToolStripMenuItem,
             this.assignToVirtualApplianceToolStripMenuItem,
             this.toolStripMenuItem9,
@@ -1837,6 +1839,11 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
+            // assignSnapshotScheduleToolStripMenuItem
+            // 
+            this.assignSnapshotScheduleToolStripMenuItem.Name = "assignSnapshotScheduleToolStripMenuItem";
+            resources.ApplyResources(this.assignSnapshotScheduleToolStripMenuItem, "assignSnapshotScheduleToolStripMenuItem");
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2098,6 +2105,7 @@ namespace XenAdmin
         private CommandToolStripButton resumeContainerToolStripButton;
         private CommandToolStripButton restartContainerToolStripButton;
         private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
+        private AssignGroupToolStripMenuItemVMSS assignSnapshotScheduleToolStripMenuItem;
     }
 
 }
