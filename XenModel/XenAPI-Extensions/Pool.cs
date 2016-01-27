@@ -117,7 +117,7 @@ namespace XenAPI
                 foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
                 {
                     Host.Edition edition1 = edition;
-                    Host host = hosts.Find(h => h.edition == Host.GetEditionText(edition1));
+                    Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
 
                     if (host != null)
                     {

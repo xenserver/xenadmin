@@ -35,7 +35,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define ProductVersion="1.0.0" ?>
-    <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
+    <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
     <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
         <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
@@ -44,7 +44,7 @@
             <Directory Id="ProgramFilesFolder">
                 <Directory Id="Citrix" Name="@BRANDING_COMPANY_NAME_SHORT@">
                     <Directory Id="INSTALLDIR" ShortName="XenCente" Name="@BRANDING_BRAND_CONSOLE@">
-                        <Component Id="ReportViewer" Guid="D01090B9-1988-4ab4-B48A-D0B6161FAA48">
+                        <Component Id="ReportViewer" Guid="@BRANDING_REPORT_VIEWER_GUID@">
                             <File Id="MicRepVwrCmnDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
                             <File Id="MicRepVwrPrcObjDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
                             <File Id="MicRepVwrWFDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.dll" />
@@ -57,7 +57,7 @@
                             <File Id="ReportConfigXML" Source="..\XenAdmin\ReportViewer\reports.xml" />
                             <File Id="ResourceReportRDLC" Source="..\XenAdmin\ReportViewer\resource_report.rdlc" />
                         </Component>
-                        <Component Id="MainExecutable" Guid="64FEF765-7593-4612-8D4D-EE81CF704DEB">
+                        <Component Id="MainExecutable" Guid="@BRANDING_MAIN_EXECUTABLE_GUID@">
                             <!-- XenCenter EXE -->
                             <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\@BRANDING_BRAND_CONSOLE@.exe" KeyPath="yes" />
                             <!-- other EXEs -->
@@ -147,7 +147,7 @@
                                 </Extension>
                             </ProgId>
                         </Component>
-                        <Component Id="xsupdatesfiles" Guid="1cfbf607-cc80-4bf8-b2fc-37e69c872316">
+                        <Component Id="xsupdatesfiles" Guid="@BRANDING_XSUPDATE_FILE_GUID@">
                             <Condition>"$(env.Branding)"="XenCenter"</Condition>
                             <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
                             <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
@@ -157,9 +157,14 @@
                             <File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
                             <File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
                         </Component>
+                        <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
+                            <Condition><![CDATA["$(env.Branding)"<>"XenCenter"]]></Condition>
+                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
+                        </Component>
                         <!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
-                            <Component Id="TestResources" Guid="FA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+                            <Component Id="TestResources" Guid="@BRANDING_TEST_RESOURCES_GUID@">
+                                <Condition>"$(env.Branding)"="XenCenter"</Condition>
                                 <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
                                 <File Id="interes1.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
                                 <File Id="interes2.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
@@ -167,13 +172,13 @@
                             </Component>
                         </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-                            <Component Id="ExternalToolsComponent" Guid="D5FC0252-C97B-46e7-9633-A6B68EDB6654">
+                            <Component Id="ExternalToolsComponent" Guid="@BRANDING_EXTERNAL_TOOLS_GUID@">
                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
                                 <File Id="REFERENCEVHD" Source="..\XenOvfApi\External Tools\bootablereference.vhd.bz2" />
                             </Component>
                         </Directory>
                         <Directory Id="SCHEMAS" Name="Schemas">
-                            <Component Id="SchemasFilesComponent" Guid="E2186CD8-5064-4414-8AD7-E4495B6A3204">
+                            <Component Id="SchemasFilesComponent" Guid="@BRANDING_SCHEMAS_FILES_GUID@">
                                 <File Id="CIMOSXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_OperatingSystem.xml" />
                                 <File Id="CIMRASDXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xml" />
                                 <File Id="CIMRASDXSD" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xsd" />
@@ -191,7 +196,8 @@
                         </Directory>
                     </Directory>
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
-							<Component Id="XenServerHealthCheck" Guid="{9D686BFC-B4FD-435F-AC74-0ACE29425095}">
+							<Component Id="XenServerHealthCheck" Guid="{@BRANDING_HEALTH_CHECK_GUID@}">
+                                <Condition>"$(env.Branding)"="XenCenter"</Condition>
 								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
 								<File Id="HealthCheck_CommandLib.dll" Name="CommandLib.dll" Source="..\XenServerHealthCheck\bin\Release\CommandLib.dll" />
 								<File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="..\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
@@ -230,14 +236,15 @@
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
-            <Component Id="RegistryEntries" Guid="193BAE1F-F2AE-4451-94DC-4B105DB5179C">
+            <Component Id="RegistryEntries" Guid="@BRANDING_REGISTRY_ENTRIES_GUID@">
                 <RegistryKey Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
+                    <RegistryValue Type="string" Name="HiddenFeatures" Value="@BRANDING_HIDDEN_FEATURE@" />
                 </RegistryKey>
             </Component>
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
-            <Component Id="ApplicationShortcut" Guid="6B875059-26BC-4fa7-ACB7-0B9A4E4665CA">
+            <Component Id="ApplicationShortcut" Guid="@BRANDING_APPLICAION_SHOTCUT_GUID@">
                 <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
                 <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
@@ -248,6 +255,7 @@
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="xsupdatesfiles" />
+            <ComponentRef Id="readmefile" />
             <ComponentRef Id="TestResources" />
             <ComponentRef Id="SchemasFilesComponent" />
             <ComponentRef Id="ExternalToolsComponent" />

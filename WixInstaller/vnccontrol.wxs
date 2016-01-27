@@ -35,7 +35,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define ProductVersion="1.0.0" ?>
-    <?define UpgradeCode="{A77AF69F-14AF-4cd0-B978-236945C7AC97}"?>
+    <?define UpgradeCode="{@BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID@}"?>
     <?define ProductCode="{0CE5C3E7-E786-467a-80CF-F3EC04D414E4}"?>
     <?define VersionShort="5.5" ?>
     <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ VNCControl" Language="$(env.WiXLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
@@ -45,7 +45,7 @@
             <Directory Id="ProgramFilesFolder">
                 <Directory Id="Citrix" Name="@BRANDING_COMPANY_NAME_SHORT@">
                     <Directory Id="INSTALLDIR" ShortName="VNCContr" Name="VNCControl">
-                        <Component Id="MainControl" Guid="C2E335C1-3ADF-492d-BD03-27DA10A44232">
+                        <Component Id="MainControl" Guid="@BRANDING_VNC_MAIN_CONTROL_GUID@">
                             <!--Main VNC Control-->
                             <File Id="VNCControlDLL" Source="..\VNCControl\bin\Release\VNCControl.dll" />
                             <!-- DLLs -->

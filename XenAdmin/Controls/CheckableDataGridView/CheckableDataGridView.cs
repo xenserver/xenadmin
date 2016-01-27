@@ -291,7 +291,16 @@ namespace XenAdmin.Controls.CheckableDataGridView
             if (rowIndex < 0 || rowIndex >= Rows.Count)
                 return;
 
-            CurrentCell = Rows[rowIndex].Cells[0];
+            CurrentCell = null;
+            // Set CurrentCell to first visible cell
+            for (int i = 0; i < Rows[rowIndex].Cells.Count; i++)
+            {
+                if (Rows[rowIndex].Cells[i].Visible)
+                {
+                    CurrentCell = Rows[rowIndex].Cells[i];
+                    break;
+                }
+            } 
             Rows[rowIndex].Selected = highlightStatus;
         }
 

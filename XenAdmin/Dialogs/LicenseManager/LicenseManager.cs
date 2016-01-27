@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
+using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
 
@@ -57,6 +58,7 @@ namespace XenAdmin.Dialogs
             checkableDataGridView.LoadView();
             Controller = lmcontroller;
             Controller.View = this;
+            downloadLicenseServerLink.Visible = checkBoxColumn.Visible = !Controller.ReadOnlyView;
         }
 
         private void LoadView(List<IXenObject> itemsToShow, List<IXenObject> selectedItems)
@@ -167,7 +169,7 @@ namespace XenAdmin.Dialogs
             Program.Invoke(this, Controller.Repopulate);
         }
 
-        #region ISummaryPanelView Members
+        #region ILicenseManagerView Members
         [EditorBrowsable(EditorBrowsableState.Never)]
         public LicenseManagerController Controller { set; private get; } 
 
@@ -206,7 +208,7 @@ namespace XenAdmin.Dialogs
 
                                          summaryPanel.Title = lRow.XenObject.Name;
                                          summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
-                                         summaryPanel.HelperUrlVisible = lRow.HelperUrlRequired;
+                                         summaryPanel.HelperUrlVisible = lRow.HelperUrlRequired && !Controller.ReadOnlyView;
                                          summaryPanel.WarningVisible = lRow.WarningRequired;
                                          summaryPanel.WarningText = lRow.WarningText;
                                          summaryPanel.SummaryText = summaryComponent;
@@ -293,6 +295,23 @@ namespace XenAdmin.Dialogs
         public void SetRowDisabledRowInfo(int rowIndex, string info, bool disabled)
         {
             checkableDataGridView.SetRowInformation(rowIndex, info, disabled);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawViewAsReadOnly(bool isReadOnly)
+        {
+            if (isReadOnly)
+            {
+                activateFreeXenServerButton.Hide();
+                assignLicenceButton.Hide();
+                releaseLicenseButton.Hide();
+            }
+            else
+            {
+                activateFreeXenServerButton.Show();
+                assignLicenceButton.Show();
+                releaseLicenseButton.Show();
+            }
         }
 
         #endregion

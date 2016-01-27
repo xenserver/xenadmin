@@ -60,5 +60,6 @@ namespace XenAdmin.Dialogs
         Control Parent { get; }
         void DrawSummaryInformation(string info, bool show);
         void SetRowDisabledRowInfo(int rowIndex, string info, bool disabled);
+        void DrawViewAsReadOnly(bool isReadOnly);
     }
 }

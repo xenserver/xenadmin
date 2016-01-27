@@ -1857,10 +1857,10 @@ Authorized Roles: {1}</value>
     <value>You attempted an operation on VM {0} that was judged to be unsafe by the server. This can happen if the VM would run on a CPU that has a potentially incompatible set of feature flags to those the VM requires. If you want to override this warning then use the 'force' option.</value>
   </data>
   <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>The WLB server rejected our configured authentication details.</value>
+    <value>WLB rejected our configured authentication details.</value>
   </data>
   <data name="WLB_CONNECTION_REFUSED" xml:space="preserve">
-    <value>The WLB server refused a connection to XenServer.</value>
+    <value>WLB refused a connection to the server.</value>
   </data>
   <data name="WLB_CONNECTION_RESET" xml:space="preserve">
     <value>The connection to the WLB server was reset.</value>
@@ -1869,10 +1869,10 @@ Authorized Roles: {1}</value>
     <value>This pool has wlb-enabled set to false.</value>
   </data>
   <data name="WLB_INTERNAL_ERROR" xml:space="preserve">
-    <value>The WLB server reported an internal error.</value>
+    <value>WLB reported an internal error.</value>
   </data>
   <data name="WLB_MALFORMED_REQUEST" xml:space="preserve">
-    <value>The WLB server rejected XenServer's request as malformed.</value>
+    <value>WLB rejected the server's request as malformed.</value>
   </data>
   <data name="WLB_MALFORMED_RESPONSE" xml:space="preserve">
     <value>The WLB server said something that XenServer wasn't expecting or didn't understand.</value>
@@ -1890,19 +1890,19 @@ Authorized Roles: {1}</value>
     <value>The WLB URL is invalid. Ensure it is in format: &lt;ipaddress&gt;:&lt;port&gt;.  The configured/given URL is returned.</value>
   </data>
   <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>The WLB server reported that XenServer rejected its configured authentication details.</value>
+    <value>WLB reported that the server rejected its configured authentication details.</value>
   </data>
   <data name="WLB_XENSERVER_CONNECTION_REFUSED" xml:space="preserve">
-    <value>The WLB server reported that XenServer refused it a connection (even though we're connecting perfectly fine in the other direction).</value>
+    <value>WLB reported that the server refused it a connection (even though we're connecting perfectly fine in the other direction).</value>
   </data>
   <data name="WLB_XENSERVER_MALFORMED_RESPONSE" xml:space="preserve">
-    <value>The WLB server reported that XenServer said something to it that WLB wasn't expecting or didn't understand.</value>
+    <value>WLB reported that the server said something to it that WLB wasn't expecting or didn't understand.</value>
   </data>
   <data name="WLB_XENSERVER_TIMEOUT" xml:space="preserve">
-    <value>The WLB server reported that communication with XenServer timed out.</value>
+    <value>WLB reported that communication with the server timed out.</value>
   </data>
   <data name="WLB_XENSERVER_UNKNOWN_HOST" xml:space="preserve">
-    <value>The WLB server reported that its configured server name for this XenServer instance failed to resolve in DNS.</value>
+    <value>WLB reported that its configured server name for this server instance failed to resolve in DNS.</value>
   </data>
   <data name="XAPI_HOOK_FAILED" xml:space="preserve">
     <value>3rd party xapi hook failed</value>
@@ -1926,13 +1926,13 @@ Authorized Roles: {1}</value>
     <value>Initialization of the VSS requester failed</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED" xml:space="preserve">
-    <value>Could not find any volumes supported by the Citrix XenServer Vss Provider</value>
+    <value>Could not find any volumes supported by the Vss Provider</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PREPARING_WRITERS" xml:space="preserve">
     <value>An attempt to prepare VSS writers for the snapshot failed</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PROV_NOT_LOADED" xml:space="preserve">
-    <value>The Citrix XenServer Vss Provider is not loaded</value>
+    <value>The Vss Provider is not loaded</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_START_SNAPSHOT_SET_FAILED" xml:space="preserve">
     <value>An attempt to start a new VSS snapshot failed</value>
