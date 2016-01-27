@@ -376,6 +376,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string UPSELL_LEARNMOREURL_VMSS {
+            get {
+                return ResourceManager.GetString("UPSELL_LEARNMOREURL_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/wlb.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_WLB {

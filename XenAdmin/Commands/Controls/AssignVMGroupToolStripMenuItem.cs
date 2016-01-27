@@ -297,6 +297,12 @@ namespace XenAdmin.Commands
     /// <summary>
     /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
     /// </summary>
+    internal sealed class AssignGroupToolStripMenuItemVMSS : AssignGroupToolStripMenuItem<VMSS>
+    { }
+
+    /// <summary>
+    /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
+    /// </summary>
     internal sealed class AssignGroupToolStripMenuItemVM_appliance : AssignGroupToolStripMenuItem<VM_appliance>
     { }
 }

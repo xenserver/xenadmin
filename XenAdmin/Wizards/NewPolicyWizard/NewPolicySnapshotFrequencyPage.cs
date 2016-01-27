@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public string SubText
         {
-            get { return NewPolicyWizard.FormatSchedule(Schedule, Frequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
+            get { return NewPolicyWizardSpecific<VMPP>.FormatSchedule(Schedule, Frequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
         }
 
         public Image Image

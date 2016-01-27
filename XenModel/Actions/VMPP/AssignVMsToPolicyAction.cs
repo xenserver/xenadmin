@@ -36,14 +36,14 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class AssignVMsToPolicyAction:PureAsyncAction
+    public class AssignVMsToPolicyAction<T>:PureAsyncAction where T : XenObject<T>
     {
 
-        private VMPP _vmpp;
+        private T _vmpp;
         private List<XenRef<VM>> _selectedVMs;
 
-        public AssignVMsToPolicyAction(VMPP vmpp, List<XenRef<VM>> selectedVMs, bool suppressHistory)
-            : base(vmpp.Connection, Messages.ASSIGN_PROTECTION_POLICY_NOAMP, suppressHistory)
+        public AssignVMsToPolicyAction(T vmpp, List<XenRef<VM>> selectedVMs, bool suppressHistory)
+            : base(vmpp.Connection, (typeof(T) == typeof(VMPP) ? Messages.ASSIGN_PROTECTION_POLICY_NOAMP : Messages.ASSIGN_VMSS_POLICY_NOAMP), suppressHistory)
         {
             _vmpp = vmpp;
             _selectedVMs = selectedVMs;
@@ -53,27 +53,45 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = Messages.ASSIGNING_PROTECTION_POLICY;
-            foreach (var xenRef in _vmpp.VMs)
+            Description = typeof(T) == typeof(VMPP) ? Messages.ASSIGNING_PROTECTION_POLICY : Messages.ASSIGNING_VMSS_POLICY;
+            if (typeof(T) == typeof(VMPP))
             {
-                VM.set_protection_policy(Session, xenRef, null);
+                VMPP vm = _vmpp as VMPP;
+                foreach (var xenRef in vm.VMs)
+                {
+                    VM.set_protection_policy(Session, xenRef, null);
+                }
+                
+                foreach (var xenRef in _selectedVMs)
+                {
+                    VM.set_protection_policy(Session, xenRef, vm.opaque_ref);
+                }
             }
-            foreach (var xenRef in _selectedVMs)
+            else
             {
-                VM.set_protection_policy(Session, xenRef, _vmpp.opaque_ref);
+                VMSS vm = _vmpp as VMSS;
+                foreach (var xenRef in vm.VMs)
+                {
+                    VM.set_snapshot_policy(Session, xenRef, null);
+                }
+                foreach (var xenRef in _selectedVMs)
+                {
+                    VM.set_snapshot_policy(Session, xenRef, vm.opaque_ref);
+                }
             }
-            Description = Messages.ASSIGNED_PROTECTION_POLICY;
+            Description = (typeof(T) == typeof(VMPP)) ? Messages.ASSIGNED_PROTECTION_POLICY : Messages.ASSIGNED_VMSS_POLICY;
         }
     }
 
-    public class RemoveVMsFromPolicyAction : PureAsyncAction
+    public class RemoveVMsFromPolicyAction<T> : PureAsyncAction where T : XenObject<T>
     {
         private List<XenRef<VM>> _selectedVMs;
 
-        public RemoveVMsFromPolicyAction(VMPP vmpp, List<XenRef<VM>> selectedVMs)
+        public RemoveVMsFromPolicyAction(T vmpp, List<XenRef<VM>> selectedVMs)
             : base(vmpp.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.REMOVE_VM_FROM_POLICY, vmpp.Connection.Resolve(selectedVMs[0]), vmpp.Name)
-            : string.Format(Messages.REMOVE_VMS_FROM_POLICY, vmpp.Name))
+            (typeof(T) == typeof(VMPP) ? string.Format(Messages.REMOVE_VM_FROM_POLICY, vmpp.Connection.Resolve(selectedVMs[0]), vmpp.Name) : 
+                                          string.Format(Messages.REMOVE_VM_FROM_VMSS, vmpp.Connection.Resolve(selectedVMs[0]), vmpp.Name))
+            : (typeof(T) == typeof(VMPP) ? string.Format(Messages.REMOVE_VMS_FROM_POLICY, vmpp.Name) : string.Format(Messages.REMOVE_VMS_FROM_VMSS, vmpp.Name)))
         {
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(vmpp.Connection);
@@ -81,12 +99,12 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = Messages.REMOVING_VMS_FROM_POLICY;
+            Description = typeof(T) == typeof(VMPP) ? Messages.REMOVING_VMS_FROM_POLICY : Messages.REMOVING_VMS_FROM_VMSS;
 
             foreach (var xenRef in _selectedVMs)
                 VM.set_protection_policy(Session, xenRef, null);
 
-            Description = Messages.REMOVED_VMS_FROM_POLICY;
+            Description = typeof(T) == typeof(VMPP) ? Messages.REMOVED_VMS_FROM_POLICY : Messages.REMOVED_VMS_FROM_VMSS;
         }
     }
 }

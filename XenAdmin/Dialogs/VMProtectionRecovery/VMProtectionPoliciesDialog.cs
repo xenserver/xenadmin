@@ -47,7 +47,7 @@ using XenCenterLib;
 
 namespace XenAdmin.Dialogs.VMProtection_Recovery
 {
-    public partial class VMProtectionPoliciesDialog : XenDialogBase
+    public partial class VMProtectionPoliciesDialog<T> : XenDialogBase where T : XenObject<T>
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -130,7 +130,8 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 Cells.Add(_status);
                 Cells.Add(_numVMs);
                 Cells.Add(_nextRunTime);
-                Cells.Add(_nextArchiveRuntime);
+                if (typeof(T) == typeof(VMPP))
+                    Cells.Add(_nextArchiveRuntime);
                 Cells.Add(_lastResult);
                 VMPP = policy;
                 RefreshRow();
@@ -171,20 +172,25 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                                          ? HelpersGUI.DateTimeToString(nextRunTime.Value, Messages.DATEFORMAT_DMY_HM,
                                                                        true)
                                          : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
-
-                DateTime? nextArchiveRuntime = GetVMPPDateTime(() => VMPP.GetNextArchiveRunTime());
-                _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
-                                                ? nextArchiveRuntime == DateTime.MinValue
-                                                      ? Messages.NEVER
-                                                      : HelpersGUI.DateTimeToString(nextArchiveRuntime.Value,
-                                                                                    Messages.DATEFORMAT_DMY_HM, true)
-                                                : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
+                if (typeof(T) == typeof(VMPP))
+                {
+                    DateTime? nextArchiveRuntime = GetVMPPDateTime(() => VMPP.GetNextArchiveRunTime());
+                    _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
+                                                    ? nextArchiveRuntime == DateTime.MinValue
+                                                          ? Messages.NEVER
+                                                          : HelpersGUI.DateTimeToString(nextArchiveRuntime.Value,
+                                                                                        Messages.DATEFORMAT_DMY_HM, true)
+                                                    : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
+                }
             }
         }
 
         private void buttonNew_Click(object sender, System.EventArgs e)
         {
-            new NewPolicyWizard(Pool).Show(this);
+            if (typeof(T) == typeof(VMPP))
+                new NewPolicyWizardSpecific<VMPP>(Pool).Show(this);
+            else
+                new NewPolicyWizardSpecific<VMSS>(Pool).Show(this);
         }
 
         private void buttonCancel_Click(object sender, System.EventArgs e)
