@@ -53,6 +53,7 @@ namespace XenAdmin.Dialogs
         {
             ActivationRequest = new LicenseActivationRequest();
             VerifierFactory = new LicenseSelectionVerifierFactory();
+            ReadOnlyView = Registry.LicenseOperationsHidden; 
         }
 
         public LicenseManagerController(ILicenseManagerView view)
@@ -63,6 +64,8 @@ namespace XenAdmin.Dialogs
         public ILicenseActivationRequest ActivationRequest { private get; set; }
 
         public SelectionVerifierFactory VerifierFactory { private get; set; }
+
+        public bool ReadOnlyView { get; private set; }
 
         private void AddToGrid(List<IXenObject> dataToDraw)
         {
@@ -107,7 +110,7 @@ namespace XenAdmin.Dialogs
 
         private void CheckPreSelectedRows(List<IXenObject> dataToCheck)
         {
-            if(dataToCheck.Count < 1)
+            if (dataToCheck.Count < 1 || ReadOnlyView)
             {
                 DisableAllButtons();
                 return;
@@ -297,12 +300,14 @@ namespace XenAdmin.Dialogs
         public void UpdateButtonEnablement(List<LicenseDataGridViewRow> lRows)
         {
             //All buttons disabled?
-            if(lRows.Count < 1)
+            if(lRows.Count < 1 || ReadOnlyView)
             {
                 DisableAllButtons();
-                
+                View.DrawViewAsReadOnly(ReadOnlyView);
                 return;
             }
+
+            View.DrawViewAsReadOnly(ReadOnlyView);
 
             LicenseSelectionVerifier verifier;
             verifier = VerifierFactory.Verifier(SelectionVerifierFactory.Option.NotLive, lRows);
@@ -351,7 +356,7 @@ namespace XenAdmin.Dialogs
             View.DrawAssignButtonAsDisabled(true);
             View.DrawReleaseButtonAsDisabled(true);
             View.DrawActivateButtonAsDisabled(true);
-            View.DrawActivateButtonAsHidden(false);
+            View.DrawActivateButtonAsHidden(ReadOnlyView);
         }
 
         private void ResetButtonEnablement()
