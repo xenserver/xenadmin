@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
     // http://connect.microsoft.com/VisualStudio/feedback/details/115397/component-resource-manager-doesnt-work-with-generic-form-classes
     // (or search on Google for [ComponentResourceManager generic]).
 
-    public partial class NewPolicySnapshotTypePage : XenTabPage, IEditPage
+    public abstract partial class NewPolicySnapshotTypePage : XenTabPage, IEditPage
     {
         protected List<VM> _selectedVMs;
         public List<VM> SelectedVMs
@@ -61,10 +61,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 _selectedVMs = value;
             }
         }
-        protected virtual void doSave() {  }
-        protected virtual bool doHasChanged() { return true; }
-        protected virtual void doSetXenObjects(IXenObject orig, IXenObject clone) { }
-        protected virtual string doGetSubText() { return null; }
+
+        public abstract AsyncAction SaveSettings();
+        public abstract string SubText { get; }
+        public abstract bool HasChanged { get; }
+        public abstract void SetXenObjects(IXenObject orig, IXenObject clone);
 
         public NewPolicySnapshotTypePage()
         {
@@ -75,56 +76,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             InitializeComponent();
             SelectedVMs = selectedVMS;
-        }
-
-        public AsyncAction SaveSettings()
-        {
-            this.doSave();
-            return null;
-        }
-
-/*
-        public override string Text
-        {
-            get
-            {
-                return Messages.SNAPSHOT_TYPE;
-            }
-        }
-
-        
-        public override string HelpID
-        {
-            get { return "Snapshottype"; }
-        }
-
-        
-
-        public override string PageTitle
-        {
-            get
-            {
-                return Messages.SNAPSHOT_TYPE_TITLE;
-            }
-        }
-                     
-        public override void PageLoaded(PageLoadedDirection direction)
-        {
-            base.PageLoaded(direction);
-            if (direction == PageLoadedDirection.Forward)
-                EnableShapshotTypes(Connection);
-        }
-
-        private void EnableShapshotTypes(IXenConnection connection)
-        {
-            radioButtonDiskAndMemory.Enabled = label3.Enabled = !Helpers.FeatureForbidden(connection, Host.RestrictCheckpoint);
-            checkpointInfoPictureBox.Visible = !radioButtonDiskAndMemory.Enabled;
-            pictureBoxWarning.Visible = labelWarning.Visible = radioButtonDiskAndMemory.Enabled;
-        }
-*/
-        public string SubText
-        {
-            get { return doGetSubText(); }
         }
 
         public Image Image
@@ -145,16 +96,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public void Cleanup()
         {
             radioButtonDiskOnly.Checked = true;
-        }
-
-        public bool HasChanged
-        {
-            get { return doHasChanged(); }
-        }
-
-        public void SetXenObjects(IXenObject orig, IXenObject clone)
-        {
-            doSetXenObjects(orig, clone);
         }
 
         private void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)

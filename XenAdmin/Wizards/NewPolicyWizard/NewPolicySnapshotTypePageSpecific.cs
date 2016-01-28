@@ -82,27 +82,28 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         }
 
-
-        protected override string doGetSubText()
+        public override string SubText
         {
-
-            if (typeof(T) == typeof(VMPP))
+            get
             {
-                if (BackupType == vmpp_backup_type.snapshot)
-                    return Messages.DISKS_ONLY;
+                if (typeof(T) == typeof(VMPP))
+                {
+                    if (BackupType == vmpp_backup_type.snapshot)
+                        return Messages.DISKS_ONLY;
+                    else
+                    {
+                        return Messages.DISKS_AND_MEMORY;
+                    }
+                }
                 else
                 {
-                    return Messages.DISKS_AND_MEMORY;
+                    if (BackupTypeVMSS == vmss_backup_type.snapshot)
+                        return Messages.DISKS_ONLY;
+                    else if (BackupTypeVMSS == vmss_backup_type.snapshot_with_quiesce)
+                        return Messages.QUIESCED_SNAPSHOTS;
+                    else
+                        return Messages.DISKS_AND_MEMORY;
                 }
-            }
-            else
-            {
-                if (BackupTypeVMSS == vmss_backup_type.snapshot)
-                    return Messages.DISKS_ONLY;
-                else if (BackupTypeVMSS == vmss_backup_type.snapshot_with_quiesce)
-                    return Messages.QUIESCED_SNAPSHOTS;
-                else
-                    return Messages.DISKS_AND_MEMORY;
             }
         
         }
@@ -206,7 +207,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             if (typeof(T) == typeof(VMSS))
             {
                 this.quiesceCheckBox.Visible = true;
-                this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
                 if (this._selectedVMs != null)
                 {
                     foreach (VM vm in this._selectedVMs)
@@ -222,6 +222,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 {
                     this.quiesceCheckBox.Enabled = false;
                 }
+                this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
             }
             else
             {
@@ -231,18 +232,20 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             
         }
 
-        protected override void doSave()
+        public override AsyncAction SaveSettings()
         {
             if (typeof(T) == typeof(VMPP))
                 _clone.backup_type = BackupType;
             else
                 _cloneVMSS.backup_type = BackupTypeVMSS;
-
+            
+            return null;
         }
 
         private VMPP _clone;
         private VMSS _cloneVMSS;
-        protected override void doSetXenObjects(IXenObject orig, IXenObject clone)
+
+        public override void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             if (typeof(T) == typeof(VMPP))
             {
@@ -256,12 +259,15 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        protected override bool doHasChanged()
+        public override bool HasChanged
         {
-            if (typeof(T) == typeof (VMPP))
-                return BackupType != _clone.backup_type;
-            else
-                return BackupTypeVMSS != _cloneVMSS.backup_type;
+            get
+            {
+                if (typeof(T) == typeof(VMPP))
+                    return BackupType != _clone.backup_type;
+                else
+                    return BackupTypeVMSS != _cloneVMSS.backup_type;
+            }
 
         }
 
