@@ -1908,7 +1908,7 @@ Archive destination: {0}</value>
     <value>Assign VM to Snaps&amp;hot Schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>Assign VM to Snaps&amp;hot Schedule</value>
+    <value>Assign VM to Snapshot Sch&amp;edule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>Assign VM to Snapshot Schedule...</value>
