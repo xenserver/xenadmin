@@ -141,7 +141,7 @@ namespace XenAdmin.Core
         {
             get
             {
-                if (XenAdmin.Core.Registry.LinkLabelHidden)
+                if (HiddenFeatures.LinkLabelHidden)
                     return typeof(T) == typeof(VMPP) ? Messages.UPSELL_BLURB_VM_PROTECTION : Messages.UPSELL_BLURB_VM_APPLIANCES;
                 else
                     return typeof(T) == typeof(VMPP) ? Messages.UPSELL_BLURB_VM_PROTECTION + Messages.UPSELL_BLURB_VM_PROTECTION_MORE : Messages.UPSELL_BLURB_VM_APPLIANCES + Messages.UPSELL_BLURB_VM_APPLIANCES_MORE;

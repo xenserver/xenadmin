@@ -37,6 +37,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Properties;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -74,7 +75,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             // Console scaling
             PreserveUndockedScaleCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenUndocked;
             PreserveVNCConsoleScalingCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC;
-            checkBoxDisableRDPPolling.Visible = !XenAdmin.Core.Registry.RDPPollingHidden;
+            checkBoxDisableRDPPolling.Visible = !HiddenFeatures.RDPPollingHidden;
             checkBoxDisableRDPPolling.Checked = Properties.Settings.Default.EnableRDPPolling;
         }
 

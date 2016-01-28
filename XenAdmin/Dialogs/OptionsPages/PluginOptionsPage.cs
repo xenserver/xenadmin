@@ -68,7 +68,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             InitializeComponent();
             m_tlpScanning.Visible = false;
             labelNoPlugins.Visible = false;
-            this.linkLabel1.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
+            this.linkLabel1.Visible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
         }
 
         public static void Log()

@@ -89,7 +89,7 @@ namespace XenAdmin.TabPages
 
         private void panelTry_Click(object sender, EventArgs e)
         {
-            if (!XenAdmin.Core.Registry.LinkLabelHidden) 
+            if (!HiddenFeatures.LinkLabelHidden) 
                 Program.OpenURL(InvisibleMessages.XENDESKTOP_URL);
         }
 

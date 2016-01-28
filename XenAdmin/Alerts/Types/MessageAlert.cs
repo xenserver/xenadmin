@@ -348,7 +348,7 @@ namespace XenAdmin.Alerts
 
 					case XenAPI.Message.MessageType.LICENSE_EXPIRES_SOON:
 					case XenAPI.Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
-                        return () => Program.OpenURL(XenAdmin.Core.Registry.LinkLabelHidden ? null : InvisibleMessages.LICENSE_EXPIRY_WEBPAGE);
+                        return () => Program.OpenURL(HiddenFeatures.LinkLabelHidden ? null : InvisibleMessages.LICENSE_EXPIRY_WEBPAGE);
 					case XenAPI.Message.MessageType.VBD_QOS_FAILED:
 					case XenAPI.Message.MessageType.VCPU_QOS_FAILED:
 					case XenAPI.Message.MessageType.VIF_QOS_FAILED:
