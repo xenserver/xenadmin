@@ -135,9 +135,6 @@
   <data name="HEALTH_CHECK_PRIVACY_STATEMENT_URL" xml:space="preserve">
     <value>https://cis.citrix.com/legal/</value>
   </data>
-  <data name="HELP_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/en-us/urls/{0}.html</value>
-  </data>
   <data name="HOMEPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserver</value>
   </data>
@@ -158,6 +155,12 @@
   </data>
   <data name="LOG_FILENAME" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@.log</value>
+  </data>
+  <data name="MAINWINDOW_HELP_PARAMS" xml:space="preserve">
+    <value>-mapid {0} {1}</value>
+  </data>
+  <data name="MAINWINDOW_HELP_PATH" xml:space="preserve">
+    <value>Help\XenCenter.chm</value>
   </data>
   <data name="MAINWINDOW_HOME_PATH" xml:space="preserve">
     <value>Home.htm</value>

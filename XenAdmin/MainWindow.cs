@@ -2378,10 +2378,26 @@ namespace XenAdmin
 
         public void ShowHelpTopic(string topicID)
         {
-            string helpTopicURL = string.Format(InvisibleMessages.HELP_URL, topicID ?? Help.HelpManager.GetID("TableOfContents"));
-
-            if (!string.IsNullOrEmpty(helpTopicURL))
-                Program.OpenURL(helpTopicURL);
+            // Abandon all hope, ye who enter here: if you're ever tempted to directly invoke hh.exe, see first:
+            // JAXC-43: Online help doesn't work if install XenCenter into the path that contains special characters.
+            // hh.exe can't seem to cope with certain multi-byte characters in the path to the chm.
+            // System.Windows.Forms.Help.ShowHelp() can cope with the special characters in the path, but has the
+            // irritating behaviour that the launched help is always on top of the app window (CA-8863).
+            // So we show the help 'on top' of an invisible dummy Form.
+             
+            using (var helpForm = new Form())
+            {
+                string chm = Path.Combine(Program.AssemblyDir, InvisibleMessages.MAINWINDOW_HELP_PATH);
+                if (topicID == null)
+                {
+                    // Show TOC
+                    System.Windows.Forms.Help.ShowHelp(helpForm, chm, HelpNavigator.TableOfContents);
+                }
+                else
+                {
+                    System.Windows.Forms.Help.ShowHelp(helpForm, chm, HelpNavigator.TopicId, topicID);
+                }
+            }
         }
 
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
