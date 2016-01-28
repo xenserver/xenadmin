@@ -53,7 +53,9 @@ namespace XenAdmin.Help
 
         internal static string GetID(string pageref)
         {
-            return resources.GetString(pageref);
+            int id;
+            string s = resources.GetString(pageref);
+            return s != null && int.TryParse(s, out id) ? s : null;
         }
 
         public static void Launch(string pageref)

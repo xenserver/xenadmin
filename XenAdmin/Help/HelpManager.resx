@@ -118,1251 +118,966 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActivationServerUnavailable" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7018</comment>
+    <value>7018</value>
   </data>
   <data name="AdPasswordPromptDisable" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>1311</comment>
+    <value>1311</value>
   </data>
   <data name="AdPasswordPromptEnable" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>1310</comment>
+    <value>1310</value>
   </data>
   <data name="AddServerDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6000</comment>
+    <value>6000</value>
+  </data>
+  <data name="AddStorageLinkSystemDialog" xml:space="preserve">
+    <value>4022</value>
   </data>
   <data name="AlertSummaryDialog" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>6830</comment>
+    <value>6830</value>
   </data>
   <data name="AllowUpdatesDialog" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6410</comment>
+    <value>6410</value>
   </data>
   <data name="AssignLicenseDialog" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7019</comment>
+    <value>7019</value>
   </data>
   <data name="AttachDiskDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>3000</comment>
+    <value>3000</value>
   </data>
   <data name="BallooningDialog" xml:space="preserve">
-    <value>xs70-014</value>
-    <comment>4210</comment>
+    <value>4210</value>
   </data>
   <data name="BallooningDialogAdvanced" xml:space="preserve">
-    <value>xs70-014</value>
-    <comment>4211</comment>
+    <value>4211</value>
   </data>
   <data name="BallooningWizard_SettingsPane" xml:space="preserve">
-    <value>xs70-014</value>
-    <comment>4202</comment>
+    <value>4202</value>
   </data>
   <data name="BallooningWizard_VMsPane" xml:space="preserve">
-    <value>xs70-014</value>
-    <comment>4201</comment>
+    <value>4201</value>
   </data>
   <data name="BondConfigError" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>6610</comment>
+    <value>6610</value>
   </data>
   <data name="BondProperties" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>6600</comment>
+    <value>6600</value>
   </data>
   <data name="BugToolWizard_CompileReportPane" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>4103</comment>
+    <value>4103</value>
   </data>
   <data name="BugToolWizard_ReportDestinationPane" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>4104</comment>
+    <value>4104</value>
   </data>
   <data name="BugToolWizard_SelectReportContentsPane" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>4102</comment>
+    <value>4102</value>
   </data>
   <data name="BugToolWizard_SelectServersPane" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>4101</comment>
+    <value>4101</value>
   </data>
   <data name="CancelActionDialog" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>4105</comment>
+    <value>4105</value>
   </data>
   <data name="CertificateChangedDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6220</comment>
+    <value>6220</value>
   </data>
   <data name="ChangeHomeDialog" xml:space="preserve">
-    <value>xs70-013</value>
-    <comment>6150</comment>
+    <value>6150</value>
   </data>
   <data name="ChangeMasterPasswordDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6120</comment>
+    <value>6120</value>
   </data>
   <data name="ChangeServerPasswordDialog" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>6900</comment>
+    <value>6900</value>
   </data>
   <data name="CloseXenCenterWarningDialog" xml:space="preserve">
-    <value>xs70-001</value>
-    <comment>1600</comment>
+    <value>1600</value>
   </data>
   <data name="ConfigureAdDialogAccessChanged" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>1303</comment>
+    <value>1303</value>
   </data>
   <data name="ConfirmTemplateConvertDialog" xml:space="preserve">
-    <value>xs70-011</value>
-    <comment>9600</comment>
+    <value>9600</value>
   </data>
   <data name="ConfirmVMDeleteDialog" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>6400</comment>
+    <value>6400</value>
   </data>
   <data name="CopyVMDialog" xml:space="preserve">
-    <value>xs70-011</value>
-    <comment>9000</comment>
+    <value>9000</value>
   </data>
   <data name="CpuUsageMessageAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7001</comment>
+    <value>7001</value>
   </data>
   <data name="CrossPoolMigrateWizard_CopyModePane" xml:space="preserve">
-    <value>xs70-011</value>
-    <comment>9000</comment>
+    <value>9000</value>
   </data>
   <data name="CrossPoolMigrateWizard_DestinationPane" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>9845</comment>
+    <value>9845</value>
   </data>
   <data name="CrossPoolMigrateWizard_IntraPoolCopyPane" xml:space="preserve">
-    <value>xs70-011</value>
-    <comment>9000</comment>
+    <value>9000</value>
   </data>
   <data name="CrossPoolMigrateWizard_MigrationSummaryPane" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>9852</comment>
+    <value>9852</value>
   </data>
   <data name="CrossPoolMigrateWizard_NetworkingPane" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>9847</comment>
+    <value>9847</value>
   </data>
   <data name="CrossPoolMigrateWizard_RBACPane" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>9853</comment>
+    <value>9853</value>
   </data>
   <data name="CrossPoolMigrateWizard_StoragePane" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>9846</comment>
+    <value>9846</value>
   </data>
   <data name="CrossPoolMigrateWizard_TransferNetworkPane" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>9848</comment>
+    <value>9848</value>
   </data>
   <data name="CustomFieldsDialog" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7400</comment>
+    <value>7400</value>
   </data>
   <data name="DRConfigureDialog" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9840</comment>
+    <value>9840</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_BeforeYouStartPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9832</comment>
+    <value>9832</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_PrechecksPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9835</comment>
+    <value>9835</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_RbacPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9830</comment>
+    <value>9830</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_RecoverPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9836</comment>
+    <value>9836</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_ReportPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9837</comment>
+    <value>9837</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_StoragePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9833</comment>
+    <value>9833</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_WelcomePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9831</comment>
+    <value>9831</value>
   </data>
   <data name="DRFailoverWizard_Dryrun_vAppsPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9834</comment>
+    <value>9834</value>
   </data>
   <data name="DRFailoverWizard_Failback_BeforeYouStartPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9822</comment>
+    <value>9822</value>
   </data>
   <data name="DRFailoverWizard_Failback_PrechecksPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9825</comment>
+    <value>9825</value>
   </data>
   <data name="DRFailoverWizard_Failback_RbacPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9820</comment>
+    <value>9820</value>
   </data>
   <data name="DRFailoverWizard_Failback_RecoverPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9826</comment>
+    <value>9826</value>
   </data>
   <data name="DRFailoverWizard_Failback_ReportPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9827</comment>
+    <value>9827</value>
   </data>
   <data name="DRFailoverWizard_Failback_StoragePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9823</comment>
+    <value>9823</value>
   </data>
   <data name="DRFailoverWizard_Failback_WelcomePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9821</comment>
+    <value>9821</value>
   </data>
   <data name="DRFailoverWizard_Failback_vAppsPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9824</comment>
+    <value>9824</value>
   </data>
   <data name="DRFailoverWizard_Failover_BeforeYouStartPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9812</comment>
+    <value>9812</value>
   </data>
   <data name="DRFailoverWizard_Failover_PrechecksPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9815</comment>
+    <value>9815</value>
   </data>
   <data name="DRFailoverWizard_Failover_RbacPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9810</comment>
+    <value>9810</value>
   </data>
   <data name="DRFailoverWizard_Failover_RecoverPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9816</comment>
+    <value>9816</value>
   </data>
   <data name="DRFailoverWizard_Failover_ReportPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9817</comment>
+    <value>9817</value>
   </data>
   <data name="DRFailoverWizard_Failover_StoragePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9813</comment>
+    <value>9813</value>
   </data>
   <data name="DRFailoverWizard_Failover_WelcomePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9811</comment>
+    <value>9811</value>
   </data>
   <data name="DRFailoverWizard_Failover_vAppsPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9814</comment>
+    <value>9814</value>
   </data>
   <data name="DRFailoverWizard_RbacPane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9808</comment>
+    <value>9808</value>
   </data>
   <data name="DRFailoverWizard_WelcomePane" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9809</comment>
+    <value>9809</value>
   </data>
   <data name="DefaultHelpTopic" xml:space="preserve">
-    <value>xs70-001</value>
-    <comment>1001</comment>
+    <value>1001</value>
   </data>
   <data name="DisableWLBDialog" xml:space="preserve">
-    <value>xs70-029</value>
-    <comment>8620</comment>
+    <value>8620</value>
   </data>
   <data name="DisconnectServerWarningDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>9850</comment>
+    <value>9850</value>
   </data>
   <data name="DiskUsageMessageAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7002</comment>
+    <value>7002</value>
   </data>
   <data name="DummyAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7003</comment>
+    <value>7003</value>
   </data>
   <data name="DuplicateIqnAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7004</comment>
+    <value>7004</value>
   </data>
   <data name="DuplicateTemplateNameDialog" xml:space="preserve">
-    <value>xs70-011</value>
-    <comment>6390</comment>
+    <value>6390</value>
   </data>
   <data name="EditHostGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6240</comment>
+    <value>6240</value>
   </data>
   <data name="EditNetworkGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>6252</comment>
+    <value>6252</value>
   </data>
   <data name="EditNewDiskDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>5002</comment>
+    <value>5002</value>
   </data>
   <data name="EditPoolGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>6242</comment>
+    <value>6242</value>
   </data>
   <data name="EditSRGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>6243</comment>
+    <value>6243</value>
   </data>
   <data name="EditStorageSettingsDialog" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>6260</comment>
+    <value>6260</value>
   </data>
   <data name="EditVDIGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>6262</comment>
+    <value>6262</value>
   </data>
   <data name="EditVMGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-013</value>
-    <comment>6241</comment>
+    <value>6241</value>
   </data>
   <data name="EditVMPPGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6536</comment>
+    <value>6536</value>
   </data>
   <data name="EditVMStorageDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>6261</comment>
+    <value>6261</value>
   </data>
   <data name="EditVM_applianceGeneralSettingsDialog" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9805</comment>
+    <value>9805</value>
   </data>
   <data name="EditVmHaPrioritiesDialog" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>7017</comment>
+    <value>7017</value>
   </data>
   <data name="EditVmNetworkSettingsDialog" xml:space="preserve">
-    <value>xs70-016</value>
-    <comment>6270</comment>
+    <value>6270</value>
   </data>
   <data name="EnterMasterPasswordDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6130</comment>
+    <value>6130</value>
   </data>
   <data name="EvacuateHostDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6280</comment>
+    <value>6280</value>
   </data>
   <data name="EventsPane" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>9856</comment>
+    <value>9856</value>
   </data>
   <data name="ExportApplianceWizard_AppliancePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9501</comment>
+    <value>9501</value>
   </data>
   <data name="ExportApplianceWizard_ExportEulaPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9502</comment>
+    <value>9502</value>
   </data>
   <data name="ExportApplianceWizard_ExportFinishOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9503</comment>
+    <value>9503</value>
   </data>
   <data name="ExportApplianceWizard_ExportFinishXvaPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9504</comment>
+    <value>9504</value>
   </data>
   <data name="ExportApplianceWizard_ExportOptionsPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9505</comment>
+    <value>9505</value>
   </data>
   <data name="ExportApplianceWizard_RbacExportOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9506</comment>
+    <value>9506</value>
   </data>
   <data name="ExportApplianceWizard_RbacExportXvaPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9507</comment>
+    <value>9507</value>
   </data>
   <data name="ExportApplianceWizard_SelectVMsOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9508</comment>
+    <value>9508</value>
   </data>
   <data name="ExportApplianceWizard_SelectVMsXvaPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9509</comment>
+    <value>9509</value>
   </data>
   <data name="ExportApplianceWizard_TvmIpExportPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9510</comment>
+    <value>9510</value>
   </data>
   <data name="ExportVMDialog" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>6510</comment>
+    <value>6510</value>
   </data>
   <data name="ExportVmDialogFSLimitExceeded" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>6516</comment>
+    <value>6516</value>
   </data>
   <data name="ExportVmDialogInsufficientDiskSpace" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>6515</comment>
+    <value>6515</value>
   </data>
   <data name="FileSystemUsageMessageAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>9857</comment>
+    <value>9857</value>
   </data>
   <data name="FolderChangeDialog" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7200</comment>
+    <value>7200</value>
   </data>
   <data name="GpuConfigurationDialog" xml:space="preserve">
-    <value>xs70-013</value>
-    <comment>9900</comment>
+    <value>9900</value>
   </data>
   <data name="GraphDetailsDialog" xml:space="preserve">
-    <value>xs70-030</value>
-    <comment>6820</comment>
+    <value>6820</value>
   </data>
   <data name="GuiOldAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7005</comment>
+    <value>7005</value>
   </data>
   <data name="GuiOutOfDateAlert" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7006</comment>
+    <value>7006</value>
   </data>
   <data name="HADisable" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>4501</comment>
+    <value>4501</value>
   </data>
   <data name="HADropInNtolAlert" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>7007</comment>
+    <value>7007</value>
   </data>
   <data name="HAOvercommittedAlert" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>7008</comment>
+    <value>7008</value>
   </data>
   <data name="HAWizard" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>4500</comment>
+    <value>4500</value>
   </data>
   <data name="HaNtolMax" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>3500</comment>
+    <value>3500</value>
   </data>
   <data name="HaNtolZero" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>3500</comment>
+    <value>3500</value>
   </data>
   <data name="IQNWarningDialog" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>6320</comment>
+    <value>6320</value>
+  </data>
+  <data name="ImportStorageLinkVolumeDialog" xml:space="preserve">
+    <value>4035</value>
   </data>
   <data name="ImportWizard_GlobalSelectHostPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9511</comment>
+    <value>9511</value>
   </data>
   <data name="ImportWizard_ImportEulaPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9512</comment>
+    <value>9512</value>
   </data>
   <data name="ImportWizard_ImportFinishImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9513</comment>
+    <value>9513</value>
   </data>
   <data name="ImportWizard_ImportFinishOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9514</comment>
+    <value>9514</value>
   </data>
   <data name="ImportWizard_ImportFinishXvaPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9515</comment>
+    <value>9515</value>
   </data>
   <data name="ImportWizard_ImportOptionsImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9516</comment>
+    <value>9516</value>
   </data>
   <data name="ImportWizard_ImportOptionsOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9517</comment>
+    <value>9517</value>
   </data>
   <data name="ImportWizard_NetworkPickerPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9528</comment>
+    <value>9528</value>
   </data>
   <data name="ImportWizard_RbacImportImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9519</comment>
+    <value>9519</value>
   </data>
   <data name="ImportWizard_RbacImportOvfPane" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>9520</comment>
+    <value>9520</value>
   </data>
   <data name="ImportWizard_RbacImportXvaPane" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>9521</comment>
+    <value>9521</value>
   </data>
   <data name="ImportWizard_SecurityPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9522</comment>
+    <value>9522</value>
   </data>
   <data name="ImportWizard_SelectHostImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9523</comment>
+    <value>9523</value>
   </data>
   <data name="ImportWizard_SelectHostOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9524</comment>
+    <value>9524</value>
   </data>
   <data name="ImportWizard_SelectNetworkImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9525</comment>
+    <value>9525</value>
   </data>
   <data name="ImportWizard_SelectNetworkOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9526</comment>
+    <value>9526</value>
   </data>
   <data name="ImportWizard_SelectStorageImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9527</comment>
+    <value>9527</value>
   </data>
   <data name="ImportWizard_SelectStorageOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9534</comment>
+    <value>9534</value>
   </data>
   <data name="ImportWizard_SourcePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9529</comment>
+    <value>9529</value>
   </data>
   <data name="ImportWizard_StoragePickerPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9530</comment>
+    <value>9530</value>
   </data>
   <data name="ImportWizard_TvmIpImportImagePane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9531</comment>
+    <value>9531</value>
   </data>
   <data name="ImportWizard_TvmIpImportOvfPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9532</comment>
+    <value>9532</value>
   </data>
   <data name="ImportWizard_VMConfigPane" xml:space="preserve">
-    <value>xs70-018</value>
-    <comment>9533</comment>
+    <value>9533</value>
   </data>
   <data name="InstallToolsWarningDialog" xml:space="preserve">
-    <value>xs70-013</value>
-    <comment>6700</comment>
+    <value>6700</value>
   </data>
   <data name="IscsiChoicesDialog" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>9591</comment>
+    <value>9591</value>
   </data>
   <data name="IscsiDeviceConfigDialog" xml:space="preserve">
-    <value>xs70-023</value>
-    <comment>9841</comment>
+    <value>9841</value>
   </data>
   <data name="LVMoHBAWarningDialog" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>9854</comment>
+    <value>9854</value>
   </data>
   <data name="LicenseKeyDialog" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>6800</comment>
+    <value>6800</value>
   </data>
   <data name="LicenseManager" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="LoadSessionDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6200</comment>
+    <value>6200</value>
   </data>
   <data name="LogWindow" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7000</comment>
+    <value>7000</value>
   </data>
   <data name="ManageUpdatesDialog" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>9851</comment>
+    <value>9851</value>
   </data>
   <data name="MemoryUsageMessageAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7016</comment>
+    <value>7016</value>
   </data>
   <data name="MessageAlert_EXTAUTH_INIT_IN_HOST_FAILED" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>1300</comment>
+    <value>1300</value>
   </data>
   <data name="MessageAlert_EXTAUTH_IN_POOL_IS_NON_HOMOGENEOUS" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>1302</comment>
+    <value>1302</value>
   </data>
   <data name="MessageAlert_HA_POOL_DROP_IN_PLAN_EXISTS_FOR" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>7007</comment>
+    <value>7007</value>
   </data>
   <data name="MessageAlert_HA_POOL_OVERCOMMITTED" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>7008</comment>
+    <value>7008</value>
   </data>
   <data name="MessageAlert_LICENSE_EXPIRED" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="MessageAlert_LICENSE_NOT_AVAILABLE" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="MessageAlert_LICENSE_SERVER_CONNECTED" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="MessageAlert_LICENSE_SERVER_UNAVAILABLE" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="MessageAlert_LICENSE_SERVER_UNREACHABLE" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="MessageAlert_LICENSE_SERVER_VERSION_OBSOLETE" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>7015</comment>
+    <value>7015</value>
   </data>
   <data name="MissingIqnAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7010</comment>
+    <value>7010</value>
   </data>
   <data name="MoveVMDialog" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>9010</comment>
+    <value>9010</value>
   </data>
   <data name="MoveVirtualDiskDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>5001</comment>
+    <value>5001</value>
   </data>
   <data name="NameAndConnectionPrompt" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7300</comment>
+    <value>7300</value>
   </data>
   <data name="NetUsageMessageAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7011</comment>
+    <value>7011</value>
   </data>
   <data name="NetworkingConfigWarning" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>8310</comment>
+    <value>8310</value>
   </data>
   <data name="NetworkingProperties" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>8300</comment>
+    <value>8300</value>
   </data>
   <data name="NetworkingPropertiesPMIWarning" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>8301</comment>
+    <value>8301</value>
   </data>
   <data name="NewCustomFieldDialog" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7410</comment>
+    <value>7410</value>
   </data>
   <data name="NewDiskDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>5000</comment>
+    <value>5000</value>
   </data>
   <data name="NewFolderDialog" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7210</comment>
+    <value>7210</value>
   </data>
   <data name="NewNetworkWizard" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>8000</comment>
+    <value>8000</value>
   </data>
   <data name="NewPolicyWizard_ArchivesnapshotsPane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPolicyWizard_EmailalertsPane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPolicyWizard_FinishPane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPolicyWizard_PolicyNamePane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPolicyWizard_RbacPane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>9843</comment>
+    <value>9843</value>
   </data>
   <data name="NewPolicyWizard_SnapshotfrequencyPane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPolicyWizard_SnapshottypePane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPolicyWizard_VirtualMachinesPane" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6535</comment>
+    <value>6535</value>
   </data>
   <data name="NewPoolDialog" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>5100</comment>
+    <value>5100</value>
   </data>
   <data name="NewSRWizard" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>4000</comment>
+    <value>4000</value>
   </data>
   <data name="NewSRWizard_FinishPane" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>4030</comment>
+    <value>4030</value>
+  </data>
+  <data name="NewSRWizard_FlexVols" xml:space="preserve">
+    <value>4025</value>
   </data>
   <data name="NewSRWizard_Location_CIFSISOPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4024</comment>
+    <value>4024</value>
   </data>
   <data name="NewSRWizard_Location_HBAPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4013</comment>
+    <value>4013</value>
   </data>
   <data name="NewSRWizard_Location_ISCSIPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4012</comment>
+    <value>4012</value>
   </data>
   <data name="NewSRWizard_Location_NFSISOPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4021</comment>
+    <value>4021</value>
   </data>
   <data name="NewSRWizard_Location_NFSVHDPane" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>4011</comment>
+    <value>4011</value>
+  </data>
+  <data name="NewSRWizard_NameandStorageSystemPane" xml:space="preserve">
+    <value>4023</value>
   </data>
   <data name="NewSRWizard_RbacPane" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>4026</comment>
+    <value>4026</value>
+  </data>
+  <data name="NewSRWizard_SL_EQL_filerPane" xml:space="preserve">
+    <value>4015</value>
+  </data>
+  <data name="NewSRWizard_SL_EQL_optionsPane" xml:space="preserve">
+    <value>4016</value>
+  </data>
+  <data name="NewSRWizard_SL_NETAPP_filerPane" xml:space="preserve">
+    <value>4017</value>
+  </data>
+  <data name="NewSRWizard_SL_NETAPP_optionsPane" xml:space="preserve">
+    <value>4018</value>
   </data>
   <data name="NewSRWizard_SL_SLServer_locationPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4020</comment>
+    <value>4020</value>
   </data>
   <data name="NewSRWizard_SL_SLServer_optionsPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4019</comment>
+    <value>4019</value>
+  </data>
+  <data name="NewSRWizard_SL_SLServer_options_PreBostonPane" xml:space="preserve">
+    <value>4023</value>
   </data>
   <data name="NewSRWizard_SL_SystemPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>4014</comment>
+    <value>4014</value>
+  </data>
+  <data name="NewSRWizard_SL_System_PreBostonPane" xml:space="preserve">
+    <value>4023</value>
   </data>
   <data name="NewSRWizard_SrNamePane" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>4029</comment>
+    <value>4029</value>
   </data>
   <data name="NewSRWizard_Summary_HBAPane" xml:space="preserve">
-    <value>xs70-010</value>
-    <comment>9855</comment>
+    <value>9855</value>
   </data>
   <data name="NewSRWizard_TypePane" xml:space="preserve">
-    <value>xs70-009</value>
-    <comment>4010</comment>
+    <value>4010</value>
   </data>
   <data name="NewTagDialog" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7220</comment>
+    <value>7220</value>
   </data>
   <data name="NewVMApplianceWizard_FinishPane" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9804</comment>
+    <value>9804</value>
   </data>
   <data name="NewVMApplianceWizard_RbacPane" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9842</comment>
+    <value>9842</value>
   </data>
   <data name="NewVMApplianceWizard_VMOrderAndDelaysPane" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9803</comment>
+    <value>9803</value>
   </data>
   <data name="NewVMApplianceWizard_VMsPane" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9802</comment>
+    <value>9802</value>
   </data>
   <data name="NewVMApplianceWizard_vAppNamePane" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9801</comment>
+    <value>9801</value>
   </data>
   <data name="NewVMNetworkWizard" xml:space="preserve">
-    <value>xs70-016</value>
-    <comment>8500</comment>
+    <value>8500</value>
   </data>
   <data name="NewVMWizard" xml:space="preserve">
-    <value>xs70-011</value>
-    <comment>2000</comment>
+    <value>2000</value>
   </data>
   <data name="NewVMWizard_BIOSStringsPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2015</comment>
+    <value>2015</value>
   </data>
   <data name="NewVMWizard_CPU&amp;MemoryPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2040</comment>
+    <value>2040</value>
   </data>
   <data name="NewVMWizard_CdMediaPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2030</comment>
+    <value>2030</value>
   </data>
   <data name="NewVMWizard_CloudConfigParametersPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2055</comment>
+    <value>2055</value>
   </data>
   <data name="NewVMWizard_FinishPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2070</comment>
+    <value>2070</value>
   </data>
   <data name="NewVMWizard_FirstRunPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2000</comment>
+    <value>2000</value>
   </data>
   <data name="NewVMWizard_GPUPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2080</comment>
+    <value>2080</value>
   </data>
   <data name="NewVMWizard_HomeServerPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2035</comment>
+    <value>2035</value>
   </data>
   <data name="NewVMWizard_InstallationMediaPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2030</comment>
+    <value>2030</value>
   </data>
   <data name="NewVMWizard_NamePane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2020</comment>
+    <value>2020</value>
   </data>
   <data name="NewVMWizard_NetworkMediaPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2030</comment>
+    <value>2030</value>
   </data>
   <data name="NewVMWizard_NetworkingPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2060</comment>
+    <value>2060</value>
   </data>
   <data name="NewVMWizard_PermissionChecksPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>9730</comment>
+    <value>9730</value>
   </data>
   <data name="NewVMWizard_RbacPane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>9844</comment>
+    <value>9844</value>
   </data>
   <data name="NewVMWizard_SourcePane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2020</comment>
+    <value>2020</value>
   </data>
   <data name="NewVMWizard_StoragePane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2050</comment>
+    <value>2050</value>
   </data>
   <data name="NewVMWizard_TemplatePane" xml:space="preserve">
-    <value>xs70-012</value>
-    <comment>2010</comment>
+    <value>2010</value>
   </data>
   <data name="OptionsDialog" xml:space="preserve">
-    <value>xs70-002</value>
-    <comment>6170</comment>
+    <value>6170</value>
   </data>
   <data name="PatchingWizard_ApplyUpdatePane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_BeforeyoustartPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_InstallUpdatePane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_SelectPatchPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_SelectServersPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_SelectUpdatePane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_UpdateModePane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_UpdatePrechecksPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PatchingWizard_UploadPatchPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6315</comment>
+    <value>6315</value>
   </data>
   <data name="PluginListDialog" xml:space="preserve">
-    <value>xs70-002</value>
-    <comment>1200</comment>
+    <value>1200</value>
   </data>
   <data name="PoolJoinAdConfiguring" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>5192</comment>
+    <value>5192</value>
   </data>
   <data name="PoolJoinCpuMasking" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>5191</comment>
+    <value>5191</value>
   </data>
   <data name="PoolJoinRelicensing" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>5190</comment>
+    <value>5190</value>
   </data>
   <data name="PoolJoinSuppPacks" xml:space="preserve">
-    <value>xs70-008</value>
-    <comment>5193</comment>
+    <value>5193</value>
   </data>
   <data name="ProcessForceClosePrompt" xml:space="preserve">
-    <value>xs70-001</value>
-    <comment>1002</comment>
+    <value>1002</value>
   </data>
   <data name="ReconnectAsDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6005</comment>
+    <value>6005</value>
   </data>
   <data name="RelocateToDialog" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>6300</comment>
+    <value>6300</value>
   </data>
   <data name="RemoveCrashDumpsWarningDialog" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>1500</comment>
+    <value>1500</value>
   </data>
   <data name="RepairSRDialog" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>6160</comment>
+    <value>6160</value>
   </data>
   <data name="ResolvingSubjectsDialog" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>9749</comment>
+    <value>9749</value>
   </data>
   <data name="RestoreVMsDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6280</comment>
+    <value>6280</value>
   </data>
   <data name="RevertDialog" xml:space="preserve">
-    <value>xs70-019</value>
-    <comment>6525</comment>
+    <value>6525</value>
   </data>
   <data name="RoleElevationDialog" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>9700</comment>
+    <value>9700</value>
   </data>
   <data name="RoleSelectionDialog" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>9710</comment>
+    <value>9710</value>
   </data>
   <data name="RollingUpgradeWizard" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_BeforeyoustartPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_ReadyupgradePane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_SelectpoolPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_UpgrademodePane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_UpgradepoolsPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_UpgradeprechecksPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="RollingUpgradeWizard_upgrademethodPane" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7500</comment>
+    <value>7500</value>
   </data>
   <data name="SaveAndRestoreDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6100</comment>
+    <value>6100</value>
   </data>
   <data name="SaveSearchDialog" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>7300</comment>
+    <value>7300</value>
   </data>
   <data name="SelectHostDialogBackup" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6810</comment>
+    <value>6810</value>
   </data>
   <data name="SelectHostDialogLicense" xml:space="preserve">
-    <value>xs70-005</value>
-    <comment>6801</comment>
+    <value>6801</value>
   </data>
   <data name="SelectVMsToSuspendDialog" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>6281</comment>
+    <value>6281</value>
   </data>
   <data name="SetMasterPasswordDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6110</comment>
+    <value>6110</value>
   </data>
   <data name="StorageUsageMessageAlert" xml:space="preserve">
-    <value>xs70-032</value>
-    <comment>7009</comment>
+    <value>7009</value>
   </data>
   <data name="TabPageAD" xml:space="preserve">
-    <value>xs70-024</value>
-    <comment>1301</comment>
+    <value>1301</value>
   </data>
   <data name="TabPageBallooning" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1033</comment>
+    <value>1033</value>
   </data>
   <data name="TabPageBallooningUpsell" xml:space="preserve">
-    <value>xs70-014</value>
-    <comment>1034</comment>
+    <value>1034</value>
   </data>
   <data name="TabPageCPUMemory" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1040</comment>
+    <value>1040</value>
   </data>
   <data name="TabPageConsole" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1020</comment>
+    <value>1020</value>
   </data>
   <data name="TabPageDockerDetails" xml:space="preserve">
-    <value />
-    <comment>9903</comment>
+    <value>9903</value>
   </data>
   <data name="TabPageDockerProcess" xml:space="preserve">
-    <value />
-    <comment>9902</comment>
+    <value>9902</value>
   </data>
   <data name="TabPageGPU" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>9901</comment>
+    <value>9901</value>
   </data>
   <data name="TabPageHA" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1095</comment>
+    <value>1095</value>
   </data>
   <data name="TabPageHAUpsell" xml:space="preserve">
-    <value>xs70-022</value>
-    <comment>1096</comment>
+    <value>1096</value>
   </data>
   <data name="TabPageHistory" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1100</comment>
+    <value>1100</value>
   </data>
   <data name="TabPageHome" xml:space="preserve">
-    <value>xs70-001</value>
-    <comment>1000</comment>
+    <value>1000</value>
   </data>
   <data name="TabPageNICs" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1080</comment>
+    <value>1080</value>
   </data>
   <data name="TabPageNICs_Dedicate" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>1085</comment>
+    <value>1085</value>
   </data>
   <data name="TabPageNetwork" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1070</comment>
+    <value>1070</value>
   </data>
   <data name="TabPageNetworkServer" xml:space="preserve">
-    <value>xs70-007</value>
-    <comment>1071</comment>
+    <value>1071</value>
   </data>
   <data name="TabPageNetworkVM" xml:space="preserve">
-    <value>xs70-016</value>
-    <comment>1072</comment>
+    <value>1072</value>
   </data>
   <data name="TabPagePerformance" xml:space="preserve">
-    <value>xs70-030</value>
-    <comment>1090</comment>
+    <value>1090</value>
   </data>
   <data name="TabPageSR" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1060</comment>
+    <value>1060</value>
   </data>
   <data name="TabPageSearch" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1010</comment>
+    <value>1010</value>
   </data>
   <data name="TabPageSettings" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1030</comment>
+    <value>1030</value>
   </data>
   <data name="TabPageSettingsVM" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1031</comment>
+    <value>1031</value>
   </data>
   <data name="TabPageSnapshots" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1032</comment>
+    <value>1032</value>
   </data>
   <data name="TabPageStorage" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1050</comment>
+    <value>1050</value>
   </data>
   <data name="TabPageStoragePool" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1051</comment>
+    <value>1051</value>
   </data>
   <data name="TabPageStorageServer" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1052</comment>
+    <value>1052</value>
   </data>
   <data name="TabPageStorageStorage" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1054</comment>
+    <value>1054</value>
   </data>
   <data name="TabPageStorageVM" xml:space="preserve">
-    <value>xs70-003</value>
-    <comment>1053</comment>
+    <value>1053</value>
   </data>
   <data name="TabPageTagCloud" xml:space="preserve">
-    <value>xs70-004</value>
-    <comment>1400</comment>
+    <value>1400</value>
   </data>
   <data name="TabPageUnknown" xml:space="preserve">
-    <value>xs70-002</value>
-    <comment>1110</comment>
+    <value>1110</value>
   </data>
   <data name="TabPageWLB" xml:space="preserve">
-    <value>xs70-026</value>
-    <comment>8610</comment>
+    <value>8610</value>
   </data>
   <data name="TabPageWLBUpsell" xml:space="preserve">
-    <value>xs70-025</value>
-    <comment>8611</comment>
-  </data>
-  <data name="TableOfContents" xml:space="preserve">
-    <value>xs70-033</value>
-    <comment>1003</comment>
+    <value>8611</value>
   </data>
   <data name="UnknownCertificateDialog" xml:space="preserve">
-    <value>xs70-006</value>
-    <comment>6210</comment>
+    <value>6210</value>
   </data>
   <data name="UpdatesDialog" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>6310</comment>
+    <value>6310</value>
   </data>
   <data name="VDIMigrateDialog" xml:space="preserve">
-    <value>xs70-015</value>
-    <comment>9849</comment>
+    <value>9849</value>
   </data>
   <data name="VIFDialog" xml:space="preserve">
-    <value>xs70-016</value>
-    <comment>6251</comment>
+    <value>6251</value>
   </data>
   <data name="VMAppliancesDialog" xml:space="preserve">
-    <value>xs70-020</value>
-    <comment>9800</comment>
+    <value>9800</value>
   </data>
   <data name="VMProtectionPoliciesDialog" xml:space="preserve">
-    <value>xs70-021</value>
-    <comment>6536</comment>
+    <value>6536</value>
   </data>
   <data name="VMSnapshotPage" xml:space="preserve">
-    <value>xs70-019</value>
-    <comment>6530</comment>
+    <value>6530</value>
   </data>
   <data name="VcpuWarningDialog" xml:space="preserve">
-    <value>xs70-013</value>
-    <comment>6290</comment>
+    <value>6290</value>
   </data>
   <data name="VmSnapshotDialog" xml:space="preserve">
-    <value>xs70-019</value>
-    <comment>6520</comment>
+    <value>6520</value>
   </data>
   <data name="WLBReports" xml:space="preserve">
-    <value>xs70-027</value>
-    <comment>8630</comment>
+    <value>8630</value>
   </data>
   <data name="WarningVmLifeCycleForceReboot" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>8101</comment>
+    <value>8101</value>
   </data>
   <data name="WarningVmLifeCycleForceShutDown" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>8102</comment>
+    <value>8102</value>
   </data>
   <data name="WarningVmLifeCycleReboot" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>8103</comment>
+    <value>8103</value>
   </data>
   <data name="WarningVmLifeCycleShutdown" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>8104</comment>
+    <value>8104</value>
   </data>
   <data name="WarningVmLifeCycleSuspend" xml:space="preserve">
-    <value>xs70-017</value>
-    <comment>8105</comment>
+    <value>8105</value>
   </data>
   <data name="WlbConfigurationDialog" xml:space="preserve">
-    <value>xs70-028</value>
-    <comment>8600</comment>
+    <value>8600</value>
   </data>
   <data name="WlbCredentialsDialog" xml:space="preserve">
-    <value>xs70-026</value>
-    <comment>8640</comment>
+    <value>8640</value>
   </data>
   <data name="WlbEditScheduledTask" xml:space="preserve">
-    <value>xs70-028</value>
-    <comment>8605</comment>
+    <value>8605</value>
   </data>
   <data name="WlbReportSubscriptionDialog" xml:space="preserve">
-    <value>xs70-027</value>
-    <comment>8632</comment>
+    <value>8632</value>
   </data>
   <data name="XenCenterUpdateAlert" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7012</comment>
+    <value>7012</value>
   </data>
   <data name="XenServerPatchAlert" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7013</comment>
+    <value>7013</value>
   </data>
   <data name="XenServerUpdateAlert" xml:space="preserve">
-    <value>xs70-031</value>
-    <comment>7014</comment>
+    <value>7014</value>
   </data>
 </root>
