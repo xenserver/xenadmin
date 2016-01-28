@@ -271,7 +271,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Reads a key from XENCENTER_LOCAL_KEYS\k.
+        /// Reads a key from HKEY_LOCAL_MACHINE\XENCENTER_LOCAL_KEYS\k.
         /// </summary>
         private static string ReadKey(string k)
         {
@@ -297,6 +297,46 @@ namespace XenAdmin.Core
                 log.Debug(e, e);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Reads a key from hKey\XENCENTER_LOCAL_KEYS\k, targeting the 32-bit registry view
+        /// </summary>
+        private static string ReadKey(string k, RegistryHive hKey)
+        {
+            try
+            {
+                RegistryKey masterKey = RegistryKey.OpenBaseKey(hKey, RegistryView.Registry32);
+                masterKey = masterKey.OpenSubKey(XENCENTER_LOCAL_KEYS) ?? null;
+
+                if (masterKey == null)
+                    return null;
+
+                try
+                {
+                    var v = masterKey.GetValue(k);
+                    return (v != null) ? v.ToString() : null;
+                }
+                finally
+                {
+                    masterKey.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                log.DebugFormat(@"Failed to read {0}\{1} from registry; assuming NULL.", XENCENTER_LOCAL_KEYS, k);
+                log.Debug(e, e);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Reads a key from XENCENTER_LOCAL_KEYS\k, trying CurrentUser first and then LocalMachine
+        /// </summary>
+        private static string ReadInstalledKey(string k)
+        {
+            var v = ReadKey(k, RegistryHive.CurrentUser);
+            return (v != null) ? v : ReadKey(k, RegistryHive.LocalMachine);
         }
 
         public static string HealthCheckIdentityTokenDomainName
@@ -331,7 +371,7 @@ namespace XenAdmin.Core
 
         public static string HiddenFeatures
         {
-            get { return ReadKey(HIDDEN_FEATURES); }
+            get { return ReadInstalledKey(HIDDEN_FEATURES); }
         }
 
         internal static bool CPSOptimizationHidden
