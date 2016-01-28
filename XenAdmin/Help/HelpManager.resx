@@ -462,9 +462,6 @@
   <data name="IQNWarningDialog" xml:space="preserve">
     <value>6320</value>
   </data>
-  <data name="ImportStorageLinkVolumeDialog" xml:space="preserve">
-    <value>4035</value>
-  </data>
   <data name="ImportWizard_GlobalSelectHostPane" xml:space="preserve">
     <value>9511</value>
   </data>
