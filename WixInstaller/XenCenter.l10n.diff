@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2016-01-25 17:12:12.929899400 +0800
-+++ XenCenter.l10n.wxs	2016-01-25 17:13:13.493104800 +0800
+--- XenCenter.wxs	2016-01-28 17:15:18.419410400 +0800
++++ XenCenter.l10n.wxs	2016-01-28 17:22:44.000717200 +0800
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -136,10 +136,18 @@
                          </Component>
                          <!-- TestResources -->
                          <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
-@@ -171,6 +171,26 @@
-                                 <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
-                             </Component>
+@@ -173,8 +173,30 @@
                          </Directory>
+                         <Directory Id="Help" Name="Help">
+                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
+-                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
++                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.ja.chm" />  
++                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />  
++                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.zh-CN.chm" />  
++                                <File Id="WLBScCHM" Source="..\XenAdmin\bin\Release\Help\WLB.zh-CN.chm" />  
++                            </Component>
++                        </Directory>
 +                        <Directory Id="ja" Name="ja">
 +                            <Component Id="JaResources" Guid="@BRANDING_JA_RESOURCES_GUID@">
 +                                <File Id="JaResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
@@ -158,15 +166,13 @@
 +                                <File Id="ScMicRepVwrPrcObjResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
 +                                <File Id="ScXOResourcesDLL" Source="..\XenOvfApi\bin\Release\zh-CN\XenOvf.resources.dll" />
 +                                <File Id="ScXOTResourcesDLL" Source="..\XenOvfTransport\bin\Release\zh-CN\XenOvfTransport.resources.dll" />
-+                            </Component>
-+                        </Directory>
+                             </Component>
+                         </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-                             <Component Id="ExternalToolsComponent" Guid="@BRANDING_EXTERNAL_TOOLS_GUID@">
-                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
-@@ -253,9 +273,11 @@
- 	
+@@ -260,9 +282,11 @@
          <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
+             <ComponentRef Id="HelpFiles" />
 -            <ComponentRef Id="ReportViewer" />
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
@@ -176,7 +182,7 @@
              <ComponentRef Id="TestResources" />
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
-@@ -274,7 +296,7 @@
+@@ -281,7 +305,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />

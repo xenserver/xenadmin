@@ -171,6 +171,12 @@
                                 <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
                             </Component>
                         </Directory>
+                        <Directory Id="Help" Name="Help">
+                            <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
+                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
+                            </Component>
+                        </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                             <Component Id="ExternalToolsComponent" Guid="@BRANDING_EXTERNAL_TOOLS_GUID@">
                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
@@ -253,6 +259,7 @@
 	
         <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
+            <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="xsupdatesfiles" />
             <ComponentRef Id="readmefile" />
