@@ -148,7 +148,7 @@ cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
 
 mkdir_clean ${WIX_BIN}
 ${UNZIP} ${SCRATCH_DIR}/wix39-binaries.zip -d ${WIX_BIN}
-#cp ${WIX_BIN}/PrintEula.dll ${REPO}/WixInstaller
+touch ${REPO}/WixInstaller/PrintEula.dll
 
 #compile_wix
 

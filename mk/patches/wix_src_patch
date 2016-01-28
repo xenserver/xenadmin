@@ -62,6 +62,21 @@ diff -ru wixlib/Common.wxs wixlib/Common.wxs
          <WixVariable Id="WixUICostingPopupOptOut" Value="1" Overridable="yes" />
  
          <UI Id="WixUI_Common">
+@@ -71,5 +71,13 @@
+             <UIText Id="VolumeCostSize">!(loc.UITextVolumeCostSize)</UIText>
+             <UIText Id="VolumeCostVolume">!(loc.UITextVolumeCostVolume)</UIText>
+         </UI>
+-    </Fragment>
++ </Fragment>
++<Fragment>
++    <!-- Validate install directory -->
++    <CustomAction Id="WixUIValidatePath" BinaryKey="WixUIWixca" DllEntry="ValidatePath" Return="ignore" Execute="immediate" />
++</Fragment>
++<Fragment>
++    <Binary Id="WixUIWixca" SourceFile="PrintEula.dll" />
++</Fragment>
++    
+ </Wix>
 diff -ru wixlib/InstallDirDlg.wxs wixlib/InstallDirDlg.wxs
 --- wixlib/InstallDirDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
 +++ wixlib/InstallDirDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
