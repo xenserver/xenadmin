@@ -5166,7 +5166,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign VM to Snaps&amp;hot Schedule.
+        ///   Looks up a localized string similar to Assign VM to Snapshot Sch&amp;edule.
         /// </summary>
         public static string ASSIGN_VMSS_POLICY_CONTEXT_MENU {
             get {
