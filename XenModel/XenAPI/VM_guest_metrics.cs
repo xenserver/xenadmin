@@ -60,7 +60,9 @@ namespace XenAPI
             Dictionary<string, string> other,
             DateTime last_updated,
             Dictionary<string, string> other_config,
-            bool live)
+            bool live,
+            tristate_type can_use_hotplug_vbd,
+            tristate_type can_use_hotplug_vif)
         {
             this.uuid = uuid;
             this.os_version = os_version;
@@ -75,6 +77,8 @@ namespace XenAPI
             this.last_updated = last_updated;
             this.other_config = other_config;
             this.live = live;
+            this.can_use_hotplug_vbd = can_use_hotplug_vbd;
+            this.can_use_hotplug_vif = can_use_hotplug_vif;
         }
 
         /// <summary>
@@ -101,6 +105,8 @@ namespace XenAPI
             last_updated = update.last_updated;
             other_config = update.other_config;
             live = update.live;
+            can_use_hotplug_vbd = update.can_use_hotplug_vbd;
+            can_use_hotplug_vif = update.can_use_hotplug_vif;
         }
 
         internal void UpdateFromProxy(Proxy_VM_guest_metrics proxy)
@@ -118,6 +124,8 @@ namespace XenAPI
             last_updated = proxy.last_updated;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             live = (bool)proxy.live;
+            can_use_hotplug_vbd = proxy.can_use_hotplug_vbd == null ? (tristate_type) 0 : (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)proxy.can_use_hotplug_vbd);
+            can_use_hotplug_vif = proxy.can_use_hotplug_vif == null ? (tristate_type) 0 : (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)proxy.can_use_hotplug_vif);
         }
 
         public Proxy_VM_guest_metrics ToProxy()
@@ -136,6 +144,8 @@ namespace XenAPI
             result_.last_updated = last_updated;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.live = live;
+            result_.can_use_hotplug_vbd = tristate_type_helper.ToString(can_use_hotplug_vbd);
+            result_.can_use_hotplug_vif = tristate_type_helper.ToString(can_use_hotplug_vif);
             return result_;
         }
 
@@ -158,6 +168,8 @@ namespace XenAPI
             last_updated = Marshalling.ParseDateTime(table, "last_updated");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             live = Marshalling.ParseBool(table, "live");
+            can_use_hotplug_vbd = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), Marshalling.ParseString(table, "can_use_hotplug_vbd"));
+            can_use_hotplug_vif = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), Marshalling.ParseString(table, "can_use_hotplug_vif"));
         }
 
         public bool DeepEquals(VM_guest_metrics other)
@@ -179,7 +191,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._other, other._other) &&
                 Helper.AreEqual2(this._last_updated, other._last_updated) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._live, other._live);
+                Helper.AreEqual2(this._live, other._live) &&
+                Helper.AreEqual2(this._can_use_hotplug_vbd, other._can_use_hotplug_vbd) &&
+                Helper.AreEqual2(this._can_use_hotplug_vif, other._can_use_hotplug_vif);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM_guest_metrics server)
@@ -257,9 +271,11 @@ namespace XenAPI
         /// <summary>
         /// Get the PV_drivers_up_to_date field of the given VM_guest_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        [Deprecated("XenServer Dundee")]
         public static bool get_PV_drivers_up_to_date(Session session, string _vm_guest_metrics)
         {
             return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
@@ -362,6 +378,28 @@ namespace XenAPI
         public static bool get_live(Session session, string _vm_guest_metrics)
         {
             return (bool)session.proxy.vm_guest_metrics_get_live(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+        }
+
+        /// <summary>
+        /// Get the can_use_hotplug_vbd field of the given VM_guest_metrics.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        public static tristate_type get_can_use_hotplug_vbd(Session session, string _vm_guest_metrics)
+        {
+            return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vbd(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+        }
+
+        /// <summary>
+        /// Get the can_use_hotplug_vif field of the given VM_guest_metrics.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        public static tristate_type get_can_use_hotplug_vif(Session session, string _vm_guest_metrics)
+        {
+            return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vif(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
         /// <summary>
@@ -658,5 +696,43 @@ namespace XenAPI
             }
         }
         private bool _live;
+
+        /// <summary>
+        /// The guest's statement of whether it supports VBD hotplug, i.e. whether it is capable of responding immediately to instantiation of a new VBD by bringing online a new PV block device. If the guest states that it is not capable, then the VBD plug and unplug operations will not be allowed while the guest is running.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual tristate_type can_use_hotplug_vbd
+        {
+            get { return _can_use_hotplug_vbd; }
+            set
+            {
+                if (!Helper.AreEqual(value, _can_use_hotplug_vbd))
+                {
+                    _can_use_hotplug_vbd = value;
+                    Changed = true;
+                    NotifyPropertyChanged("can_use_hotplug_vbd");
+                }
+            }
+        }
+        private tristate_type _can_use_hotplug_vbd;
+
+        /// <summary>
+        /// The guest's statement of whether it supports VIF hotplug, i.e. whether it is capable of responding immediately to instantiation of a new VIF by bringing online a new PV network device. If the guest states that it is not capable, then the VIF plug and unplug operations will not be allowed while the guest is running.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual tristate_type can_use_hotplug_vif
+        {
+            get { return _can_use_hotplug_vif; }
+            set
+            {
+                if (!Helper.AreEqual(value, _can_use_hotplug_vif))
+                {
+                    _can_use_hotplug_vif = value;
+                    Changed = true;
+                    NotifyPropertyChanged("can_use_hotplug_vif");
+                }
+            }
+        }
+        private tristate_type _can_use_hotplug_vif;
     }
 }

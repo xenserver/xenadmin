@@ -175,6 +175,13 @@ namespace XenAPI
                 "task_id", task_id, "session_id", session_id, "json", json);
         }
 
+        public static void sr_rrd(HTTP.DataCopiedDelegate dataCopiedDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
+            string hostname, IWebProxy proxy, string path, string task_id, string session_id, string uuid)
+        {
+            Get(dataCopiedDelegate, cancellingDelegate, timeout_ms, hostname, "/sr_rrd", proxy, path,
+                "task_id", task_id, "session_id", session_id, "uuid", uuid);
+        }
+
         public static void rrd_updates(HTTP.DataCopiedDelegate dataCopiedDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
             string hostname, IWebProxy proxy, string path, string task_id, string session_id, long start, string cf, long interval, bool host, string uuid, bool json)
         {

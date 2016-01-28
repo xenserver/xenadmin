@@ -133,15 +133,5 @@ namespace XenAPI
         {
             return (string [])session.proxy.auth_get_group_membership(session.uuid, (_subject_identifier != null) ? _subject_identifier : "").parse();
         }
-
-        /// <summary>
-        /// Get all the auth Records at once, in a single XML RPC call
-        /// First published in XenServer 5.5.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static Dictionary<XenRef<Auth>, Auth> get_all_records(Session session)
-        {
-            return XenRef<Auth>.Create<Proxy_Auth>(session.proxy.auth_get_all_records(session.uuid).parse());
-        }
     }
 }

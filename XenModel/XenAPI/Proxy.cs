@@ -176,6 +176,14 @@ namespace XenAPI
         Response<string>
         session_slave_local_login_with_password(string _uname, string _pwd);
 
+        [XmlRpcMethod("session.create_from_db_file")]
+        Response<string>
+        session_create_from_db_file(string session, string _filename);
+
+        [XmlRpcMethod("Async.session.create_from_db_file")]
+        Response<string>
+        async_session_create_from_db_file(string session, string _filename);
+
         [XmlRpcMethod("session.local_logout")]
         Response<string>
         session_local_logout(string session);
@@ -576,6 +584,10 @@ namespace XenAPI
         Response<Object>
         pool_get_current_operations(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_guest_agent_config")]
+        Response<Object>
+        pool_get_guest_agent_config(string session, string _pool);
+
         [XmlRpcMethod("pool.get_cpu_info")]
         Response<Object>
         pool_get_cpu_info(string session, string _pool);
@@ -723,14 +735,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.enable_ha")]
         Response<string>
         async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration);
-
-        [XmlRpcMethod("pool.enable_ha")]
-        Response<string>
-        pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
-
-        [XmlRpcMethod("Async.pool.enable_ha")]
-        Response<string>
-        async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
 
         [XmlRpcMethod("pool.disable_ha")]
         Response<string>
@@ -991,6 +995,30 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.disable_ssl_legacy")]
         Response<string>
         async_pool_disable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("pool.has_extension")]
+        Response<bool>
+        pool_has_extension(string session, string _pool, string _name);
+
+        [XmlRpcMethod("Async.pool.has_extension")]
+        Response<string>
+        async_pool_has_extension(string session, string _pool, string _name);
+
+        [XmlRpcMethod("pool.add_to_guest_agent_config")]
+        Response<string>
+        pool_add_to_guest_agent_config(string session, string _pool, string _key, string _value);
+
+        [XmlRpcMethod("Async.pool.add_to_guest_agent_config")]
+        Response<string>
+        async_pool_add_to_guest_agent_config(string session, string _pool, string _key, string _value);
+
+        [XmlRpcMethod("pool.remove_from_guest_agent_config")]
+        Response<string>
+        pool_remove_from_guest_agent_config(string session, string _pool, string _key);
+
+        [XmlRpcMethod("Async.pool.remove_from_guest_agent_config")]
+        Response<string>
+        async_pool_remove_from_guest_agent_config(string session, string _pool, string _key);
 
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
@@ -1456,10 +1484,6 @@ namespace XenAPI
         Response<string>
         vm_get_hardware_platform_version(string session, string _vm);
 
-        [XmlRpcMethod("VM.get_auto_update_drivers")]
-        Response<bool>
-        vm_get_auto_update_drivers(string session, string _vm);
-
         [XmlRpcMethod("VM.get_has_vendor_device")]
         Response<bool>
         vm_get_has_vendor_device(string session, string _vm);
@@ -1623,10 +1647,6 @@ namespace XenAPI
         [XmlRpcMethod("VM.set_hardware_platform_version")]
         Response<string>
         vm_set_hardware_platform_version(string session, string _vm, string _hardware_platform_version);
-
-        [XmlRpcMethod("VM.set_has_vendor_device")]
-        Response<string>
-        vm_set_has_vendor_device(string session, string _vm, bool _has_vendor_device);
 
         [XmlRpcMethod("VM.snapshot")]
         Response<string>
@@ -2144,21 +2164,13 @@ namespace XenAPI
         Response<string>
         async_vm_call_plugin(string session, string _vm, string _plugin, string _fn, Object _args);
 
-        [XmlRpcMethod("VM.set_auto_update_drivers")]
+        [XmlRpcMethod("VM.set_has_vendor_device")]
         Response<string>
-        vm_set_auto_update_drivers(string session, string _vm, bool _value);
+        vm_set_has_vendor_device(string session, string _vm, bool _value);
 
-        [XmlRpcMethod("Async.VM.set_auto_update_drivers")]
+        [XmlRpcMethod("Async.VM.set_has_vendor_device")]
         Response<string>
-        async_vm_set_auto_update_drivers(string session, string _vm, bool _value);
-
-        [XmlRpcMethod("VM.assert_can_set_auto_update_drivers")]
-        Response<string>
-        vm_assert_can_set_auto_update_drivers(string session, string _vm, bool _value);
-
-        [XmlRpcMethod("Async.VM.assert_can_set_auto_update_drivers")]
-        Response<string>
-        async_vm_assert_can_set_auto_update_drivers(string session, string _vm, bool _value);
+        async_vm_set_has_vendor_device(string session, string _vm, bool _value);
 
         [XmlRpcMethod("VM.import")]
         Response<string []>
@@ -2311,6 +2323,14 @@ namespace XenAPI
         [XmlRpcMethod("VM_guest_metrics.get_live")]
         Response<bool>
         vm_guest_metrics_get_live(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_can_use_hotplug_vbd")]
+        Response<string>
+        vm_guest_metrics_get_can_use_hotplug_vbd(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_can_use_hotplug_vif")]
+        Response<string>
+        vm_guest_metrics_get_can_use_hotplug_vif(string session, string _vm_guest_metrics);
 
         [XmlRpcMethod("VM_guest_metrics.set_other_config")]
         Response<string>
@@ -3103,6 +3123,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.license_apply")]
         Response<string>
         async_host_license_apply(string session, string _host, string _contents);
+
+        [XmlRpcMethod("host.license_add")]
+        Response<string>
+        host_license_add(string session, string _host, string _contents);
+
+        [XmlRpcMethod("Async.host.license_add")]
+        Response<string>
+        async_host_license_add(string session, string _host, string _contents);
+
+        [XmlRpcMethod("host.license_remove")]
+        Response<string>
+        host_license_remove(string session, string _host);
+
+        [XmlRpcMethod("Async.host.license_remove")]
+        Response<string>
+        async_host_license_remove(string session, string _host);
 
         [XmlRpcMethod("host.destroy")]
         Response<string>
@@ -4708,6 +4744,10 @@ namespace XenAPI
         Response<string>
         sm_get_driver_filename(string session, string _sm);
 
+        [XmlRpcMethod("SM.get_required_cluster_stack")]
+        Response<string []>
+        sm_get_required_cluster_stack(string session, string _sm);
+
         [XmlRpcMethod("SM.set_other_config")]
         Response<string>
         sm_set_other_config(string session, string _sm, Object _other_config);
@@ -4815,6 +4855,14 @@ namespace XenAPI
         [XmlRpcMethod("SR.get_introduced_by")]
         Response<string>
         sr_get_introduced_by(string session, string _sr);
+
+        [XmlRpcMethod("SR.get_clustered")]
+        Response<bool>
+        sr_get_clustered(string session, string _sr);
+
+        [XmlRpcMethod("SR.get_is_tools_sr")]
+        Response<bool>
+        sr_get_is_tools_sr(string session, string _sr);
 
         [XmlRpcMethod("SR.set_other_config")]
         Response<string>
@@ -5028,6 +5076,22 @@ namespace XenAPI
         Response<string>
         async_sr_disable_database_replication(string session, string _sr);
 
+        [XmlRpcMethod("SR.get_data_sources")]
+        Response<Proxy_Data_source[]>
+        sr_get_data_sources(string session, string _sr);
+
+        [XmlRpcMethod("SR.record_data_source")]
+        Response<string>
+        sr_record_data_source(string session, string _sr, string _data_source);
+
+        [XmlRpcMethod("SR.query_data_source")]
+        Response<double>
+        sr_query_data_source(string session, string _sr, string _data_source);
+
+        [XmlRpcMethod("SR.forget_data_source_archives")]
+        Response<string>
+        sr_forget_data_source_archives(string session, string _sr, string _data_source);
+
         [XmlRpcMethod("SR.get_all")]
         Response<string []>
         sr_get_all(string session);
@@ -5207,6 +5271,10 @@ namespace XenAPI
         [XmlRpcMethod("VDI.get_metadata_latest")]
         Response<bool>
         vdi_get_metadata_latest(string session, string _vdi);
+
+        [XmlRpcMethod("VDI.get_is_tools_iso")]
+        Response<bool>
+        vdi_get_is_tools_iso(string session, string _vdi);
 
         [XmlRpcMethod("VDI.set_other_config")]
         Response<string>
@@ -6848,6 +6916,7 @@ namespace XenAPI
         public string ha_cluster_stack;
         public string [] allowed_operations;
         public Object current_operations;
+        public Object guest_agent_config;
         public Object cpu_info;
     }
 
@@ -6944,7 +7013,6 @@ namespace XenAPI
         public string version;
         public string generation_id;
         public string hardware_platform_version;
-        public bool auto_update_drivers;
         public bool has_vendor_device;
     }
 
@@ -6981,6 +7049,8 @@ namespace XenAPI
         public DateTime last_updated;
         public Object other_config;
         public bool live;
+        public string can_use_hotplug_vbd;
+        public string can_use_hotplug_vif;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7284,6 +7354,7 @@ namespace XenAPI
         public Object features;
         public Object other_config;
         public string driver_filename;
+        public string [] required_cluster_stack;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7308,6 +7379,8 @@ namespace XenAPI
         public Object blobs;
         public bool local_cache_enabled;
         public string introduced_by;
+        public bool clustered;
+        public bool is_tools_sr;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7349,6 +7422,7 @@ namespace XenAPI
         public string on_boot;
         public string metadata_of_pool;
         public bool metadata_latest;
+        public bool is_tools_iso;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

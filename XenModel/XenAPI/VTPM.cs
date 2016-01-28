@@ -224,16 +224,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get all the VTPM Records at once, in a single XML RPC call
-        /// First published in XenServer 4.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static Dictionary<XenRef<VTPM>, VTPM> get_all_records(Session session)
-        {
-            return XenRef<VTPM>.Create<Proxy_VTPM>(session.proxy.vtpm_get_all_records(session.uuid).parse());
-        }
-
-        /// <summary>
         /// Unique identifier/object reference
         /// </summary>
         public virtual string uuid

@@ -744,12 +744,14 @@ namespace XenAPI
         /// <summary>
         /// Create a VLAN interface from an existing physical interface. This call is deprecated: use VLAN.create instead
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_device">physical interface on which to create the VLAN interface</param>
         /// <param name="_network">network to which this interface should be connected</param>
         /// <param name="_host">physical machine to which this PIF is connected</param>
         /// <param name="_vlan">VLAN tag for the new interface</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<PIF> create_VLAN(Session session, string _device, string _network, string _host, long _vlan)
         {
             return XenRef<PIF>.Create(session.proxy.pif_create_vlan(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", (_host != null) ? _host : "", _vlan.ToString()).parse());
@@ -758,12 +760,14 @@ namespace XenAPI
         /// <summary>
         /// Create a VLAN interface from an existing physical interface. This call is deprecated: use VLAN.create instead
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_device">physical interface on which to create the VLAN interface</param>
         /// <param name="_network">network to which this interface should be connected</param>
         /// <param name="_host">physical machine to which this PIF is connected</param>
         /// <param name="_vlan">VLAN tag for the new interface</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_create_VLAN(Session session, string _device, string _network, string _host, long _vlan)
         {
             return XenRef<Task>.Create(session.proxy.async_pif_create_vlan(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", (_host != null) ? _host : "", _vlan.ToString()).parse());
@@ -772,9 +776,11 @@ namespace XenAPI
         /// <summary>
         /// Destroy the PIF object (provided it is a VLAN interface). This call is deprecated: use VLAN.destroy or Bond.destroy instead
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
+        [Deprecated("XenServer 4.1")]
         public static void destroy(Session session, string _pif)
         {
             session.proxy.pif_destroy(session.uuid, (_pif != null) ? _pif : "").parse();
@@ -783,9 +789,11 @@ namespace XenAPI
         /// <summary>
         /// Destroy the PIF object (provided it is a VLAN interface). This call is deprecated: use VLAN.destroy or Bond.destroy instead
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_destroy(Session session, string _pif)
         {
             return XenRef<Task>.Create(session.proxy.async_pif_destroy(session.uuid, (_pif != null) ? _pif : "").parse());

@@ -60,7 +60,8 @@ namespace XenAPI
             string[] capabilities,
             Dictionary<string, long> features,
             Dictionary<string, string> other_config,
-            string driver_filename)
+            string driver_filename,
+            string[] required_cluster_stack)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -75,6 +76,7 @@ namespace XenAPI
             this.features = features;
             this.other_config = other_config;
             this.driver_filename = driver_filename;
+            this.required_cluster_stack = required_cluster_stack;
         }
 
         /// <summary>
@@ -101,6 +103,7 @@ namespace XenAPI
             features = update.features;
             other_config = update.other_config;
             driver_filename = update.driver_filename;
+            required_cluster_stack = update.required_cluster_stack;
         }
 
         internal void UpdateFromProxy(Proxy_SM proxy)
@@ -118,6 +121,7 @@ namespace XenAPI
             features = proxy.features == null ? null : Maps.convert_from_proxy_string_long(proxy.features);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             driver_filename = proxy.driver_filename == null ? null : (string)proxy.driver_filename;
+            required_cluster_stack = proxy.required_cluster_stack == null ? new string[] {} : (string [])proxy.required_cluster_stack;
         }
 
         public Proxy_SM ToProxy()
@@ -136,6 +140,7 @@ namespace XenAPI
             result_.features = Maps.convert_to_proxy_string_long(features);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.driver_filename = (driver_filename != null) ? driver_filename : "";
+            result_.required_cluster_stack = required_cluster_stack;
             return result_;
         }
 
@@ -158,6 +163,7 @@ namespace XenAPI
             features = Maps.convert_from_proxy_string_long(Marshalling.ParseHashTable(table, "features"));
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             driver_filename = Marshalling.ParseString(table, "driver_filename");
+            required_cluster_stack = Marshalling.ParseStringArray(table, "required_cluster_stack");
         }
 
         public bool DeepEquals(SM other)
@@ -179,7 +185,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._capabilities, other._capabilities) &&
                 Helper.AreEqual2(this._features, other._features) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._driver_filename, other._driver_filename);
+                Helper.AreEqual2(this._driver_filename, other._driver_filename) &&
+                Helper.AreEqual2(this._required_cluster_stack, other._required_cluster_stack);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SM server)
@@ -334,9 +341,11 @@ namespace XenAPI
         /// <summary>
         /// Get the capabilities field of the given SM.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sm">The opaque_ref of the given sm</param>
+        [Deprecated("XenServer 6.2")]
         public static string[] get_capabilities(Session session, string _sm)
         {
             return (string [])session.proxy.sm_get_capabilities(session.uuid, (_sm != null) ? _sm : "").parse();
@@ -373,6 +382,17 @@ namespace XenAPI
         public static string get_driver_filename(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_driver_filename(session.uuid, (_sm != null) ? _sm : "").parse();
+        }
+
+        /// <summary>
+        /// Get the required_cluster_stack field of the given SM.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
+        public static string[] get_required_cluster_stack(Session session, string _sm)
+        {
+            return (string [])session.proxy.sm_get_required_cluster_stack(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
         /// <summary>
@@ -668,5 +688,24 @@ namespace XenAPI
             }
         }
         private string _driver_filename;
+
+        /// <summary>
+        /// The storage plugin requires that one of these cluster stacks is configured and running.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual string[] required_cluster_stack
+        {
+            get { return _required_cluster_stack; }
+            set
+            {
+                if (!Helper.AreEqual(value, _required_cluster_stack))
+                {
+                    _required_cluster_stack = value;
+                    Changed = true;
+                    NotifyPropertyChanged("required_cluster_stack");
+                }
+            }
+        }
+        private string[] _required_cluster_stack;
     }
 }

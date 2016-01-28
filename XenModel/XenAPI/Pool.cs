@@ -79,6 +79,7 @@ namespace XenAPI
             string ha_cluster_stack,
             List<pool_allowed_operations> allowed_operations,
             Dictionary<string, pool_allowed_operations> current_operations,
+            Dictionary<string, string> guest_agent_config,
             Dictionary<string, string> cpu_info)
         {
             this.uuid = uuid;
@@ -112,6 +113,7 @@ namespace XenAPI
             this.ha_cluster_stack = ha_cluster_stack;
             this.allowed_operations = allowed_operations;
             this.current_operations = current_operations;
+            this.guest_agent_config = guest_agent_config;
             this.cpu_info = cpu_info;
         }
 
@@ -157,6 +159,7 @@ namespace XenAPI
             ha_cluster_stack = update.ha_cluster_stack;
             allowed_operations = update.allowed_operations;
             current_operations = update.current_operations;
+            guest_agent_config = update.guest_agent_config;
             cpu_info = update.cpu_info;
         }
 
@@ -193,6 +196,7 @@ namespace XenAPI
             ha_cluster_stack = proxy.ha_cluster_stack == null ? null : (string)proxy.ha_cluster_stack;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<pool_allowed_operations>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_pool_allowed_operations(proxy.current_operations);
+            guest_agent_config = proxy.guest_agent_config == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_agent_config);
             cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
         }
 
@@ -230,6 +234,7 @@ namespace XenAPI
             result_.ha_cluster_stack = (ha_cluster_stack != null) ? ha_cluster_stack : "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_pool_allowed_operations(current_operations);
+            result_.guest_agent_config = Maps.convert_to_proxy_string_string(guest_agent_config);
             result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
             return result_;
         }
@@ -271,6 +276,7 @@ namespace XenAPI
             ha_cluster_stack = Marshalling.ParseString(table, "ha_cluster_stack");
             allowed_operations = Helper.StringArrayToEnumList<pool_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             current_operations = Maps.convert_from_proxy_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
+            guest_agent_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_agent_config"));
             cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
         }
 
@@ -314,6 +320,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs) &&
                 Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(this._guest_agent_config, other._guest_agent_config) &&
                 Helper.AreEqual2(this._cpu_info, other._cpu_info);
         }
 
@@ -739,6 +746,17 @@ namespace XenAPI
         public static Dictionary<string, pool_allowed_operations> get_current_operations(Session session, string _pool)
         {
             return Maps.convert_from_proxy_string_pool_allowed_operations(session.proxy.pool_get_current_operations(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Get the guest_agent_config field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static Dictionary<string, string> get_guest_agent_config(Session session, string _pool)
+        {
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_guest_agent_config(session.uuid, (_pool != null) ? _pool : "").parse());
         }
 
         /// <summary>
@@ -1187,32 +1205,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Turn on High Availability mode
-        /// First published in XenServer 4.1.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
-        /// <param name="_configuration">Detailed HA configuration to apply</param>
-        /// <param name="_cluster_stack">HA cluster manager stack First published in XenServer Dundee.</param>
-        public static void enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration, string _cluster_stack)
-        {
-            session.proxy.pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration), (_cluster_stack != null) ? _cluster_stack : "").parse();
-        }
-
-        /// <summary>
-        /// Turn on High Availability mode
-        /// First published in XenServer 4.1.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_heartbeat_srs">Set of SRs to use for storage heartbeating</param>
-        /// <param name="_configuration">Detailed HA configuration to apply</param>
-        /// <param name="_cluster_stack">HA cluster manager stack First published in XenServer Dundee.</param>
-        public static XenRef<Task> async_enable_ha(Session session, List<XenRef<SR>> _heartbeat_srs, Dictionary<string, string> _configuration, string _cluster_stack)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pool_enable_ha(session.uuid, (_heartbeat_srs != null) ? Helper.RefListToStringArray(_heartbeat_srs) : new string[] {}, Maps.convert_to_proxy_string_string(_configuration), (_cluster_stack != null) ? _cluster_stack : "").parse());
-        }
-
-        /// <summary>
         /// Turn off High Availability mode
         /// First published in XenServer 4.1.
         /// </summary>
@@ -1452,7 +1444,7 @@ namespace XenAPI
         /// <param name="_wlb_url">The ip address and port to use when accessing the wlb server</param>
         /// <param name="_wlb_username">The username used to authenticate with the wlb server</param>
         /// <param name="_wlb_password">The password used to authenticate with the wlb server</param>
-        /// <param name="_xenserver_username">The usernamed used by the wlb server to authenticate with the xenserver</param>
+        /// <param name="_xenserver_username">The username used by the wlb server to authenticate with the xenserver</param>
         /// <param name="_xenserver_password">The password used by the wlb server to authenticate with the xenserver</param>
         public static void initialize_wlb(Session session, string _wlb_url, string _wlb_username, string _wlb_password, string _xenserver_username, string _xenserver_password)
         {
@@ -1467,7 +1459,7 @@ namespace XenAPI
         /// <param name="_wlb_url">The ip address and port to use when accessing the wlb server</param>
         /// <param name="_wlb_username">The username used to authenticate with the wlb server</param>
         /// <param name="_wlb_password">The password used to authenticate with the wlb server</param>
-        /// <param name="_xenserver_username">The usernamed used by the wlb server to authenticate with the xenserver</param>
+        /// <param name="_xenserver_username">The username used by the wlb server to authenticate with the xenserver</param>
         /// <param name="_xenserver_password">The password used by the wlb server to authenticate with the xenserver</param>
         public static XenRef<Task> async_initialize_wlb(Session session, string _wlb_url, string _wlb_username, string _wlb_password, string _xenserver_username, string _xenserver_password)
         {
@@ -1901,8 +1893,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
-        /// Experimental. First published in XenServer Dundee.
+        /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1912,8 +1904,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
-        /// Experimental. First published in XenServer Dundee.
+        /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1923,8 +1915,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
-        /// Experimental. First published in XenServer Dundee.
+        /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1934,14 +1926,88 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sets ssl_legacy true on each host: see Host.ssl_legacy
-        /// Experimental. First published in XenServer Dundee.
+        /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Task> async_disable_ssl_legacy(Session session, string _pool)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_disable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse());
+        }
+
+        /// <summary>
+        /// Return true if the extension is available on the pool
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_name">The name of the API call</param>
+        public static bool has_extension(Session session, string _pool, string _name)
+        {
+            return (bool)session.proxy.pool_has_extension(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "").parse();
+        }
+
+        /// <summary>
+        /// Return true if the extension is available on the pool
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_name">The name of the API call</param>
+        public static XenRef<Task> async_has_extension(Session session, string _pool, string _name)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_has_extension(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "").parse());
+        }
+
+        /// <summary>
+        /// Add a key-value pair to the pool-wide guest agent configuration
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_key">The key to add</param>
+        /// <param name="_value">The value to add</param>
+        public static void add_to_guest_agent_config(Session session, string _pool, string _key, string _value)
+        {
+            session.proxy.pool_add_to_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+        }
+
+        /// <summary>
+        /// Add a key-value pair to the pool-wide guest agent configuration
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_key">The key to add</param>
+        /// <param name="_value">The value to add</param>
+        public static XenRef<Task> async_add_to_guest_agent_config(Session session, string _pool, string _key, string _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_add_to_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse());
+        }
+
+        /// <summary>
+        /// Remove a key-value pair from the pool-wide guest agent configuration
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_key">The key to remove</param>
+        public static void remove_from_guest_agent_config(Session session, string _pool, string _key)
+        {
+            session.proxy.pool_remove_from_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
+        }
+
+        /// <summary>
+        /// Remove a key-value pair from the pool-wide guest agent configuration
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_key">The key to remove</param>
+        public static XenRef<Task> async_remove_from_guest_agent_config(Session session, string _pool, string _key)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_remove_from_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse());
         }
 
         /// <summary>
@@ -2489,7 +2555,7 @@ namespace XenAPI
         private List<XenRef<VDI>> _metadata_VDIs;
 
         /// <summary>
-        /// The ha cluster manager stack
+        /// The HA cluster stack that is currently in use. Only valid when HA is enabled.
         /// First published in XenServer Dundee.
         /// </summary>
         public virtual string ha_cluster_stack
@@ -2542,6 +2608,25 @@ namespace XenAPI
             }
         }
         private Dictionary<string, pool_allowed_operations> _current_operations;
+
+        /// <summary>
+        /// Pool-wide guest agent configuration information
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual Dictionary<string, string> guest_agent_config
+        {
+            get { return _guest_agent_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _guest_agent_config))
+                {
+                    _guest_agent_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("guest_agent_config");
+                }
+            }
+        }
+        private Dictionary<string, string> _guest_agent_config;
 
         /// <summary>
         /// Details about the physical CPUs on the pool

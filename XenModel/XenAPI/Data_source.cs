@@ -160,16 +160,6 @@ namespace XenAPI
             }
         }
         /// <summary>
-        /// Get all the data_source Records at once, in a single XML RPC call
-        /// First published in XenServer 5.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static Dictionary<XenRef<Data_source>, Data_source> get_all_records(Session session)
-        {
-            return XenRef<Data_source>.Create<Proxy_Data_source>(session.proxy.data_source_get_all_records(session.uuid).parse());
-        }
-
-        /// <summary>
         /// a human-readable name
         /// </summary>
         public virtual string name_label
