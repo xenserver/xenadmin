@@ -37,7 +37,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.automaticOptionLabel = new System.Windows.Forms.Label();
             this.AutomaticRadioButton = new System.Windows.Forms.RadioButton();
             this.RestoreDismUpdatesButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.automaticOptionLabel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.AutomaticRadioButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.RestoreDismUpdatesButton, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 7);
@@ -72,11 +72,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // label1
+            // automaticOptionLabel
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.automaticOptionLabel, "automaticOptionLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.automaticOptionLabel, 3);
+            this.automaticOptionLabel.Name = "automaticOptionLabel";
             // 
             // AutomaticRadioButton
             // 
@@ -246,7 +246,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label automaticOptionLabel;
         private System.Windows.Forms.RadioButton AutomaticRadioButton;
     }
 }
