@@ -5987,6 +5987,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_WIZARD_VM_SR_HINT_TEXT" xml:space="preserve">
     <value>インポートした VM のストレージ リポジトリを選択してください。</value>
   </data>
+  <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
+    <value>This server version is incompatible with @BRANDING_BRAND_CONSOLE@.</value>
+  </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>ファイルサイズが不正です</value>
   </data>

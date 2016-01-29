@@ -18024,7 +18024,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server version is incompatible with iCenter..
+        ///   Looks up a localized string similar to This server version is incompatible with @BRANDING_BRAND_CONSOLE@..
         /// </summary>
         public static string INCOMPATIBLE_PRODUCTS {
             get {

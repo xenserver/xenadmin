@@ -6288,7 +6288,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Select the storage repository for the imported virtual machine.</value>
   </data>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
-    <value>This server version is incompatible with iCenter.</value>
+    <value>This server version is incompatible with @BRANDING_BRAND_CONSOLE@.</value>
   </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>Incorrect file size</value>

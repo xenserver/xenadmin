@@ -5986,6 +5986,9 @@
   <data name="IMPORT_WIZARD_VM_SR_HINT_TEXT" xml:space="preserve">
     <value>为导入的虚拟机选择存储库。</value>
   </data>
+  <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
+    <value>此服务器版本与 @BRANDING_BRAND_CONSOLE@ 不兼容</value>
+  </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>文件大小不正确</value>
   </data>
