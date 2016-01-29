@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             if (typeof(T) == typeof(VMSS))
             {
                 this.quiesceCheckBox.Visible = true;
-                this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
+                this.quiesceCheckBox.Enabled = true;
                 if (selectedVMS != null)
                 {
                     foreach (VM vm in selectedVMS)
@@ -79,6 +79,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 this.quiesceCheckBox.Visible = false;
                 this.pictureBoxVSS.Visible = false;
             }
+            this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
 
         }
 
@@ -135,6 +136,56 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 EnableShapshotTypes(Connection);
         }
 
+        public override Image Image
+        {
+            get { return Properties.Resources._000_VMSession_h32bit_16; }
+        }
+
+        public override bool ValidToSave
+        {
+            get { return true; }
+        }
+
+        public override void ShowLocalValidationMessages()
+        {
+
+        }
+
+        public override void Cleanup()
+        {
+            radioButtonDiskOnly.Checked = true;
+        }
+
+        public override void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
+        {
+            string tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL.Replace("\\n", "\n"),
+                              Messages.DISKMEMORY_SNAPSHOTS);
+            toolTip.Show(tt, checkpointInfoPictureBox, 20, 0);
+        }
+
+        public override void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e)
+        {
+            toolTip.Hide(checkpointInfoPictureBox);
+        }
+
+        public override void pictureBoxVSS_Click(object sender, System.EventArgs e)
+        {
+            string tt = Messages.INFO_QUIESCE_MODE.Replace("\\n", "\n");  // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
+            toolTip.Show(tt, pictureBoxVSS, 20, 0);
+        }
+
+        public override void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e)
+        {
+            toolTip.Hide(pictureBoxVSS);
+        }
+
+        public override void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (this.quiesceCheckBox.Checked)
+            {
+                this.radioButtonDiskOnly.Checked = true;
+            }
+        }
 
         public vmpp_backup_type BackupType
         {
@@ -194,6 +245,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     break;
+                case vmss_backup_type.snapshot_with_quiesce:
+                    radioButtonDiskOnly.Checked = true;
+                    quiesceCheckBox.Enabled = true;
+                    quiesceCheckBox.Checked = true;
+                    break;
             }
             EnableShapshotTypes(vmss.Connection);
         }
@@ -203,11 +259,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             radioButtonDiskAndMemory.Enabled = label3.Enabled = !Helpers.FeatureForbidden(connection, Host.RestrictCheckpoint);
             checkpointInfoPictureBox.Visible = !radioButtonDiskAndMemory.Enabled;
             pictureBoxWarning.Visible = labelWarning.Visible = radioButtonDiskAndMemory.Enabled;
+            this.quiesceCheckBox.Enabled = true;
 
             if (typeof(T) == typeof(VMSS))
             {
                 this.quiesceCheckBox.Visible = true;
-                if (this._selectedVMs != null)
+                if (this._selectedVMs != null && this._selectedVMs.Count > 0)
                 {
                     foreach (VM vm in this._selectedVMs)
                     {
@@ -271,6 +328,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         }
 
+        public override void radioButtonDiskAndMemory_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if(this.quiesceCheckBox.Enabled)
+            {
+                this.quiesceCheckBox.Checked = false;
+            }
+        }
         
     }
 }

@@ -42,9 +42,10 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicyPolicyNamePage : XenTabPage, IEditPage
     {
-        public NewPolicyPolicyNamePage()
+        public NewPolicyPolicyNamePage(string text)
         {
             InitializeComponent();
+            this.labelwizard.Text = text;
         }
         public override string Text
         {

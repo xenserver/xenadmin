@@ -90,8 +90,14 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if(typeof(T) == typeof(VMPP) && selection.Any(s=>Helpers.ClearwaterOrGreater(s.Connection)))
+            if (typeof(T) == typeof(VMPP) && selection.Any(s => Helpers.ClearwaterOrGreater(s.Connection)))
+            {
                 return false;
+            }
+            else if (typeof(T) == typeof(VMSS) && selection.Any(s => !Helpers.DundeeOrGreater(s.Connection)))
+            {
+                return false;
+            }
 
             return selection.FirstAsXenObject != null && selection.FirstAsXenObject.Connection != null && selection.FirstAsXenObject.Connection.IsConnected
                 && VMGroup<T>.FeaturePossible(selection.FirstAsXenObject.Connection)
@@ -119,6 +125,12 @@ namespace XenAdmin.Commands
     /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
     /// </summary>
     internal sealed class VMGroupCommandVMPP : VMGroupCommand<VMPP>
+    { }
+
+    /// <summary>
+    /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
+    /// </summary>
+    internal sealed class VMGroupCommandVMSS : VMGroupCommand<VMSS>
     { }
 
     /// <summary>

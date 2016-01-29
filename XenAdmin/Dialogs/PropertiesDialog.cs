@@ -242,7 +242,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePageSpecific<VMPP>());
                     ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
                     ShowTab(newPolicyArchivePage1 = new NewPolicyArchivePage {Pool = pool, PropertiesDialog = this});
-                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage {PropertiesDialog = this});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage(Messages.VMPP_EMAIL_PAGE_TEXT, Messages.VMPP_EMAIL_CHECKBOX_TEXT) {PropertiesDialog = this});
                 }
 
                 if(is_VMSS)
@@ -250,7 +250,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
                     ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePageSpecific<VMSS>());
                     ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
-                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage {PropertiesDialog = this});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage(Messages.VMSS_EMAIL_PAGE_TEXT, Messages.VMSS_EMAIL_CHECKBOX_TEXT) {PropertiesDialog = this});
                 }
 
                 if (is_VM_appliance)

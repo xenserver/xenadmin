@@ -66,6 +66,16 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public abstract string SubText { get; }
         public abstract bool HasChanged { get; }
         public abstract void SetXenObjects(IXenObject orig, IXenObject clone);
+        public abstract Image Image { get; }
+        public abstract bool ValidToSave { get; }
+        public abstract void ShowLocalValidationMessages();
+        public abstract void Cleanup();
+        public abstract void checkpointInfoPictureBox_Click(object sender, System.EventArgs e);
+        public abstract void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e);
+        public abstract void pictureBoxVSS_Click(object sender, System.EventArgs e);
+        public abstract void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e);
+        public abstract void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e);
+        public abstract void radioButtonDiskAndMemory_CheckedChanged(object sender, System.EventArgs e);
 
         public NewPolicySnapshotTypePage()
         {

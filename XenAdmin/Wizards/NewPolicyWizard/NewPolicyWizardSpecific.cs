@@ -51,13 +51,15 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             :base(pool)
         {
 
-            xenTabPagePolicy = new NewPolicyPolicyNamePage();
+            xenTabPagePolicy = typeof(T) == typeof(VMPP) ? new NewPolicyPolicyNamePage(Messages.NEW_VMPP_PAGE_TEXT) : new NewPolicyPolicyNamePage(Messages.NEW_VMSS_PAGE_TEXT);
             xenTabPageSnapshotType = new NewPolicySnapshotTypePageSpecific<T>();
             xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage();
             xenTabPageVMsPage = new NewVMGroupVMsPage<T>();
             xenTabPageArchive = new NewPolicyArchivePage();
-            xenTabPageEmail = new NewPolicyEmailPage();
-            xenTabPageFinish = new NewPolicyFinishPage();
+            xenTabPageEmail = typeof(T) == typeof(VMPP) ? new NewPolicyEmailPage(Messages.VMPP_EMAIL_PAGE_TEXT, Messages.VMPP_EMAIL_CHECKBOX_TEXT)
+                : new NewPolicyEmailPage(Messages.VMSS_EMAIL_PAGE_TEXT, Messages.VMSS_EMAIL_CHECKBOX_TEXT);
+            xenTabPageFinish = typeof(T) == typeof(VMPP) ? new NewPolicyFinishPage(Messages.VMPP_FINISH_PAGE_TEXT, Messages.VMPP_FINISH_PAGE_CHECKBOX_TEXT)
+                : new NewPolicyFinishPage(Messages.VMSS_FINISH_PAGE_TEXT, Messages.VMSS_FINISH_PAGE_CHECKBOX_TEXT);
             xenTabPageRBAC = new RBACWarningPage();
 
             xenTabPageVMsPage.Pool = pool;
@@ -86,6 +88,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             if (typeof(T) == typeof(VMPP))
             {
                 AddPage(xenTabPageArchive);
+                this.Text = Messages.VMPP_WIZARD_TITLE;
+            }
+            else
+            {
+                this.Text = Messages.VMSS_WIZARD_TITLE;
             }
             AddPages(xenTabPageEmail, xenTabPageFinish);
         }
@@ -99,10 +106,19 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private new string GetSummary()
         {
 
-            return string.Format(Messages.POLICY_SUMMARY.Replace("\\n", "\n").Replace("\\r", "\r"), xenTabPagePolicy.PolicyName, CommaSeparated(xenTabPageVMsPage.SelectedVMs),
-                                 FormatBackupType(xenTabPageSnapshotType.BackupType),
-                                 FormatSchedule(xenTabPageSnapshotFrequency.Schedule, xenTabPageSnapshotFrequency.Frequency, DaysWeekCheckboxes.DaysMode.L10N_LONG),
-                                 FormatSchedule(xenTabPageArchive.Schedule, xenTabPageArchive.ArchiveFrequency, DaysWeekCheckboxes.DaysMode.L10N_LONG));
+            if (typeof(T) == typeof(VMPP))
+            {
+                return string.Format(Messages.POLICY_SUMMARY.Replace("\\n", "\n").Replace("\\r", "\r"), xenTabPagePolicy.PolicyName, CommaSeparated(xenTabPageVMsPage.SelectedVMs),
+                                     FormatBackupType(xenTabPageSnapshotType.BackupType),
+                                     FormatSchedule(xenTabPageSnapshotFrequency.Schedule, xenTabPageSnapshotFrequency.Frequency, DaysWeekCheckboxes.DaysMode.L10N_LONG),
+                                     FormatSchedule(xenTabPageArchive.Schedule, xenTabPageArchive.ArchiveFrequency, DaysWeekCheckboxes.DaysMode.L10N_LONG));
+            }
+            else
+            {
+                return string.Format(Messages.VMSS_POLICY_SUMMARY.Replace("\\n", "\n").Replace("\\r", "\r"), xenTabPagePolicy.PolicyName, CommaSeparated(xenTabPageVMsPage.SelectedVMs),
+                                     FormatBackupType(xenTabPageSnapshotType.BackupType),
+                                     FormatSchedule(xenTabPageSnapshotFrequency.Schedule, xenTabPageSnapshotFrequency.Frequency, DaysWeekCheckboxes.DaysMode.L10N_LONG));
+            }
         }
 
         private int GetBackupDaysCount()
