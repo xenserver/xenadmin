@@ -37,6 +37,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AutomaticRadioButton = new System.Windows.Forms.RadioButton();
             this.RestoreDismUpdatesButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.fileNameTextBox = new System.Windows.Forms.TextBox();
@@ -57,16 +59,31 @@ namespace XenAdmin.Wizards.PatchingWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.RestoreDismUpdatesButton, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.fileNameTextBox, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.selectFromDiskRadioButton, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.downloadUpdateRadioButton, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.AutomaticRadioButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.RestoreDismUpdatesButton, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.fileNameTextBox, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.selectFromDiskRadioButton, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.downloadUpdateRadioButton, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewPatches, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewPatches, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
+            this.label1.Name = "label1";
+            // 
+            // AutomaticRadioButton
+            // 
+            resources.ApplyResources(this.AutomaticRadioButton, "AutomaticRadioButton");
+            this.tableLayoutPanel1.SetColumnSpan(this.AutomaticRadioButton, 3);
+            this.AutomaticRadioButton.Name = "AutomaticRadioButton";
+            this.AutomaticRadioButton.UseVisualStyleBackColor = true;
             // 
             // RestoreDismUpdatesButton
             // 
@@ -120,7 +137,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             // dataGridViewPatches
             // 
             this.dataGridViewPatches.AllowUserToResizeColumns = false;
-            resources.ApplyResources(this.dataGridViewPatches, "dataGridViewPatches");
             this.dataGridViewPatches.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewPatches.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewPatches.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
@@ -131,6 +147,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnDate,
             this.webPageColumn});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewPatches, 3);
+            resources.ApplyResources(this.dataGridViewPatches, "dataGridViewPatches");
             this.dataGridViewPatches.Name = "dataGridViewPatches";
             this.dataGridViewPatches.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -229,5 +246,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton AutomaticRadioButton;
     }
 }
