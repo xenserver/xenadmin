@@ -116,8 +116,8 @@ namespace XenAdmin.TabPages
                 Banner.AppliesToVersion = Messages.XENSERVER_6_5;
                 Banner.BannerType = DeprecationBanner.Type.Removal;
                 Banner.FeatureName = Messages.ISL_SR;
-                Banner.LinkUri = XenAdmin.Core.Registry.LinkLabelHidden ? null : new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
-                Banner.Visible = !XenAdmin.Core.Registry.LinkLabelHidden;
+                Banner.LinkUri = HiddenFeatures.LinkLabelHidden ? null : new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
+                Banner.Visible = !HiddenFeatures.LinkLabelHidden;
             }
             else
                 Banner.Visible = false;

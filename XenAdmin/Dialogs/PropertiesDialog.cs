@@ -156,7 +156,7 @@ namespace XenAdmin.Dialogs
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {
                         PerfmonAlertUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Alert2_h32bit_16, Text = Messages.ALERTS};
-                        PerfmonAlertUpsellEditPage.SetAllTexts(XenAdmin.Core.Registry.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_ALERTS_MORE, 
+                        PerfmonAlertUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_ALERTS_MORE, 
                                                                 InvisibleMessages.UPSELL_LEARNMOREURL_ALERTS);
                         ShowTab(PerfmonAlertUpsellEditPage);
                     }
@@ -171,7 +171,7 @@ namespace XenAdmin.Dialogs
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {
                         PerfmonAlertOptionsUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Email_h32bit_16, Text = Messages.EMAIL_OPTIONS};
-                        PerfmonAlertOptionsUpsellEditPage.SetAllTexts(XenAdmin.Core.Registry.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_ALERTS_MORE,
+                        PerfmonAlertOptionsUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_ALERTS_MORE,
                                                                         InvisibleMessages.UPSELL_LEARNMOREURL_ALERTS);
                         ShowTab(PerfmonAlertOptionsUpsellEditPage);
                     }
@@ -211,7 +211,7 @@ namespace XenAdmin.Dialogs
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
                     {
                         GpuUpsellEditPage = new UpsellPage { Image = Properties.Resources._000_GetMemoryInfo_h32bit_16, Text = Messages.GPU };
-                        GpuUpsellEditPage.SetAllTexts(XenAdmin.Core.Registry.LinkLabelHidden ? Messages.UPSELL_BLURB_GPU : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_GPU_MORE,
+                        GpuUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_GPU : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_GPU_MORE,
                                                         InvisibleMessages.UPSELL_LEARNMOREURL_GPU);
                         ShowTab(GpuUpsellEditPage);
                     }

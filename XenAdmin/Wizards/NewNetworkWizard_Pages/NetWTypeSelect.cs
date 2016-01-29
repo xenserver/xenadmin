@@ -82,7 +82,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 return;
 
             Pool pool = Helpers.GetPoolOfOne(connection);
-            labelCHIN.Visible = rbtnCHIN.Visible = !XenAdmin.Core.Registry.CrossServerPrivateNetworkHidden;
+            labelCHIN.Visible = rbtnCHIN.Visible = !HiddenFeatures.CrossServerPrivateNetworkHidden;
             if (!pool.vSwitchController)
             {
                 rbtnCHIN.Checked = false;
@@ -93,7 +93,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                     Messages.FIELD_DISABLED :
                     Messages.CHINS_NEED_VSWITCHCONTROLLER;
 
-                iconWarningChinOption.Visible = labelWarningChinOption.Visible = !XenAdmin.Core.Registry.CrossServerPrivateNetworkHidden;
+                iconWarningChinOption.Visible = labelWarningChinOption.Visible = !HiddenFeatures.CrossServerPrivateNetworkHidden;
 
                 rbtnExternalNetwork.Checked = true;
             }

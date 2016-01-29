@@ -53,7 +53,7 @@ namespace XenAdmin.Dialogs
         {
             ActivationRequest = new LicenseActivationRequest();
             VerifierFactory = new LicenseSelectionVerifierFactory();
-            ReadOnlyView = Registry.LicenseOperationsHidden; 
+            ReadOnlyView = HiddenFeatures.LicenseOperationsHidden; 
         }
 
         public LicenseManagerController(ILicenseManagerView view)

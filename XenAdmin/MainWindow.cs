@@ -226,8 +226,8 @@ namespace XenAdmin
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
-            toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !XenAdmin.Core.Registry.ToolStripMenuItemHidden;
-            healthCheckToolStripMenuItem1.Visible = !XenAdmin.Core.Registry.HealthCheckHidden;
+            toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
+            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
@@ -808,7 +808,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate()
                     {
                         string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
-                        if (!XenAdmin.Core.Registry.LinkLabelHidden)
+                        if (!HiddenFeatures.LinkLabelHidden)
                             msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
                         string url = "https://" + connection.Hostname;
 
@@ -857,7 +857,7 @@ namespace XenAdmin
 
         private void CheckHealthCheckEnrollment(object connection)
         {
-            if (HealthCheckOverviewLauncher != null && !XenAdmin.Core.Registry.HealthCheckHidden)
+            if (HealthCheckOverviewLauncher != null && !HiddenFeatures.HealthCheckHidden)
                 HealthCheckOverviewLauncher.CheckHealthCheckEnrollment((IXenConnection) connection);
         }
 

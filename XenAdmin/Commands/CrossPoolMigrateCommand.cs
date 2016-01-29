@@ -93,7 +93,7 @@ namespace XenAdmin.Commands
 
         public static void ShowUpsellDialog(IWin32Window parent)
         {
-            UpsellDialog dlg = new UpsellDialog(XenAdmin.Core.Registry.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM: Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_CPM_MORE,
+            UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM : Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_CPM_MORE,
                                                 InvisibleMessages.UPSELL_LEARNMOREURL_CPM);
             dlg.ShowDialog(parent);
         }

@@ -1019,7 +1019,7 @@ namespace XenAdmin.TabPages
             if (Helpers.FeatureForbidden(pool.Connection, Host.RestrictRBAC))
             {
                 // Show upsell dialog
-                UpsellDialog dlg = new UpsellDialog(XenAdmin.Core.Registry.LinkLabelHidden ? Messages.UPSELL_BLURB_RBAC : Messages.UPSELL_BLURB_RBAC + Messages.UPSELL_BLURB_RBAC_MORE,
+                UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_RBAC : Messages.UPSELL_BLURB_RBAC + Messages.UPSELL_BLURB_RBAC_MORE,
                                                     InvisibleMessages.UPSELL_LEARNMOREURL_RBAC);
                 dlg.ShowDialog(this);
                 return;

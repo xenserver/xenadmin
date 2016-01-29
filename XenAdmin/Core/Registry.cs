@@ -271,7 +271,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Reads a key from XENCENTER_LOCAL_KEYS\k.
+        /// Reads a key from HKEY_LOCAL_MACHINE\XENCENTER_LOCAL_KEYS\k.
         /// </summary>
         private static string ReadKey(string k)
         {
@@ -297,6 +297,46 @@ namespace XenAdmin.Core
                 log.Debug(e, e);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Reads a key from hKey\XENCENTER_LOCAL_KEYS\k, targeting the 32-bit registry view
+        /// </summary>
+        private static string ReadKey(string k, RegistryHive hKey)
+        {
+            try
+            {
+                RegistryKey masterKey = RegistryKey.OpenBaseKey(hKey, RegistryView.Registry32);
+                masterKey = masterKey.OpenSubKey(XENCENTER_LOCAL_KEYS) ?? null;
+
+                if (masterKey == null)
+                    return null;
+
+                try
+                {
+                    var v = masterKey.GetValue(k);
+                    return (v != null) ? v.ToString() : null;
+                }
+                finally
+                {
+                    masterKey.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                log.DebugFormat(@"Failed to read {0}\{1} from registry; assuming NULL.", XENCENTER_LOCAL_KEYS, k);
+                log.Debug(e, e);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Reads a key from XENCENTER_LOCAL_KEYS\k, trying CurrentUser first and then LocalMachine
+        /// </summary>
+        private static string ReadInstalledKey(string k)
+        {
+            var v = ReadKey(k, RegistryHive.CurrentUser);
+            return (v != null) ? v : ReadKey(k, RegistryHive.LocalMachine);
         }
 
         public static string HealthCheckIdentityTokenDomainName
@@ -331,73 +371,7 @@ namespace XenAdmin.Core
 
         public static string HiddenFeatures
         {
-            get { return ReadKey(HIDDEN_FEATURES); }
-        }
-
-        internal static bool CPSOptimizationHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(CPS_OPTIMIZATION_HIDDEN); }
-        }
-
-        internal static bool RDPPollingHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(RDP_POLLING_HIDDEN); }
-        }
-
-        internal static bool LearnMoreButtonHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(LEARN_MORE_HIDDEN); }
-        }
-
-        internal static bool LinkLabelHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(LINK_LABEL_HIDDEN); }
-        }
-
-        internal static bool ToolStripMenuItemHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(TOOL_STRIP_MENU_ITEM_HIDDEN); }
-        }
-
-        internal static bool CrossServerPrivateNetworkHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(CROSS_SERVER_PRIVATE_NETWORK_HIDDEN); }
-        }
-
-        internal static bool CopyrightHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(COPYRIGHT_HIDDEN); }
-        }
-
-        internal static bool HealthCheckHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(HEALTH_CHECK_HIDDEN); }
-        }
-
-        internal static bool UploadOptionHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(UPLOAD_OPTION_HIDDEN); }
-        }
-
-        internal static bool LicenseNagHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(LICENSE_NAG_HIDDEN); }
-        }
-
-        internal static bool LicenseOperationsHidden
-        {
-            get
-            { return HiddenFeatures != null && HiddenFeatures.Contains(LICENSE_OPERATIONS_HIDDEN); }
+            get { return ReadInstalledKey(HIDDEN_FEATURES); }
         }
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
@@ -422,17 +396,6 @@ namespace XenAdmin.Core
         private const string HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME = "HealthCheckDiagnosticDomainName";
         private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
-        private const string CPS_OPTIMIZATION_HIDDEN = "cps_optimization";
-        private const string RDP_POLLING_HIDDEN = "rdp_polling";
-        private const string LEARN_MORE_HIDDEN = "learn_more";
-        private const string LINK_LABEL_HIDDEN = "link_label";
-        private const string TOOL_STRIP_MENU_ITEM_HIDDEN = "tool_strip_menu_item";
-        private const string CROSS_SERVER_PRIVATE_NETWORK_HIDDEN = "cross_server_private_network";
-        private const string COPYRIGHT_HIDDEN = "copyright";
-        private const string HEALTH_CHECK_HIDDEN = "health_check";
-        private const string UPLOAD_OPTION_HIDDEN = "upload_option";
-        private const string LICENSE_NAG_HIDDEN = "license_nag";
-        private const string LICENSE_OPERATIONS_HIDDEN = "license_operations";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

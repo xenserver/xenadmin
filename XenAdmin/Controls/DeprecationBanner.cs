@@ -57,7 +57,7 @@ namespace XenAdmin.Controls
         public DeprecationBanner()
         {
             InitializeComponent();
-            HelperLinkVisible = !XenAdmin.Core.Registry.LinkLabelHidden;
+            HelperLinkVisible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
             Visible = false;
             helperLink.Click += helperLink_Click;
             BackgroundColour = defaultBackgroundColour;
