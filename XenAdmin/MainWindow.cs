@@ -129,6 +129,9 @@ namespace XenAdmin
 
         private Dictionary<ToolStripMenuItem, int> pluginMenuItemStartIndexes = new Dictionary<ToolStripMenuItem, int>();
 
+        private bool expandTreeNodesOnStartup;
+        private int connectionsInProgressOnStartup;
+
         public MainWindow(ArgType argType, string[] args)
         {
             Program.MainWindow = this;
@@ -521,18 +524,19 @@ namespace XenAdmin
             RequestRefreshTreeView();
             UpdateToolbars();
 
+            // if there are fewer than 30 connections, then expand the tree nodes.
+            expandTreeNodesOnStartup = ConnectionsManager.XenConnectionsCopy.Count < 30;
+
+            connectionsInProgressOnStartup = 0;
             // kick-off connections for all the loaded server list
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
                 if (!connection.SaveDisconnected)
                 {
+                    connectionsInProgressOnStartup++;
+                    connection.ConnectionStateChanged += Connection_ConnectionStateChangedOnStartup;
+                    connection.CachePopulated += connection_CachePopulatedOnStartup;
                     XenConnectionUI.BeginConnect(connection, true, this, true);
-
-                    // if there are fewer than 30 connections, then expand the tree nodes.
-                    if (ConnectionsManager.XenConnectionsCopy.Count < 30)
-                    {
-                        connection.CachePopulated += connection_CachePopulatedOnStartup;
-                    }
                 }
             }
 
@@ -601,7 +605,37 @@ namespace XenAdmin
         {
             IXenConnection c = (IXenConnection)sender;
             c.CachePopulated -= connection_CachePopulatedOnStartup;
-            TrySelectNewNode(c, false, true, false);
+            if (expandTreeNodesOnStartup)
+                TrySelectNewNode(c, false, true, false);
+
+            Program.Invoke(this, ShowAboutDialogOnStartup);
+        }
+
+        private void Connection_ConnectionStateChangedOnStartup(object sender, EventArgs e)
+        {
+            IXenConnection c = (IXenConnection)sender;
+            c.CachePopulated -= Connection_ConnectionStateChangedOnStartup;
+
+            Program.Invoke(Program.MainWindow, delegate
+            {
+                connectionsInProgressOnStartup--;
+                // show the About dialog if this was the last connection in progress and the connection failed
+                if (!c.IsConnected)
+                    ShowAboutDialogOnStartup();
+            }); 
+        }
+
+        /// <summary>
+        /// Show the About dialog after all conncections kicked-off on startup have finished the connection phase (cache populated)
+        /// Must be called on the event thread.
+        /// </summary>
+        private void ShowAboutDialogOnStartup()
+        {
+            Program.AssertOnEventThread();
+            if (connectionsInProgressOnStartup > 0)
+                return;
+            if (Properties.Settings.Default.ShowAboutDialog && !HiddenFeatures.LicenseNagHidden)
+                ShowForm(typeof(AboutDialog));
         }
 
         private bool Launched = false;

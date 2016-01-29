@@ -35,6 +35,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Core;
+using System.Linq;
 
 
 namespace XenAdmin.Dialogs
@@ -55,6 +56,12 @@ namespace XenAdmin.Dialogs
                 Branding.XENCENTER_VERSION, buildText, IntPtr.Size * 8);
             label2.Text = string.Format(Messages.COPYRIGHT, Branding.COMPANY_NAME_LEGAL);
             label2.Visible = !HiddenFeatures.CopyrightHidden;
+
+            showAgainCheckBox.Checked = Properties.Settings.Default.ShowAboutDialog;
+            var showLicenseNag = !HiddenFeatures.LicenseNagHidden;
+            LicenseDetailsTextBox.Text = showLicenseNag ? GetLicenseDetails() : "";
+            licenseDetailsLabel.Visible = LicenseDetailsTextBox.Visible = showLicenseNag;
+            showAgainCheckBox.Visible = showLicenseNag;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -74,6 +81,31 @@ namespace XenAdmin.Dialogs
             {
                 TheLegalDialog.BringToFront();
                 TheLegalDialog.Focus();
+            }
+        }
+
+        private string GetLicenseDetails()
+        {
+            List<string> companies = new List<string>();
+            foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy.Where(c => c.IsConnected))
+            {
+                foreach (var host in xenConnection.Cache.Hosts.Where(h => h.license_params != null && h.license_params.ContainsKey("company")))
+                {
+                    if (!string.IsNullOrEmpty(host.license_params["company"]) && !companies.Contains(host.license_params["company"]))
+                    {
+                        companies.Add(host.license_params["company"]);
+                    }
+                }
+            }
+            return string.Join("\r\n", companies);
+        }
+
+        private void showAgainCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.ShowAboutDialog != showAgainCheckBox.Checked)
+            {
+                Properties.Settings.Default.ShowAboutDialog = showAgainCheckBox.Checked;
+                Settings.TrySaveSettings();
             }
         }
     }
