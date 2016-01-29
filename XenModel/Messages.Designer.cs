@@ -9151,6 +9151,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VM snapshot schedule policy &apos;{0}&apos; created..
+        /// </summary>
+        public static string CREATED_VMSS {
+            get {
+                return ResourceManager.GetString("CREATED_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created &apos;{0}&apos; by cloning &apos;{1}&apos;.
         /// </summary>
         public static string CREATEDVM_CLONE {
@@ -9309,6 +9318,15 @@ namespace XenAdmin {
         public static string CREATING_VMPP {
             get {
                 return ResourceManager.GetString("CREATING_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating VM snapshot schedule policy &apos;{0}&apos;....
+        /// </summary>
+        public static string CREATING_VMSS {
+            get {
+                return ResourceManager.GetString("CREATING_VMSS", resourceCulture);
             }
         }
         
@@ -10283,6 +10301,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VM snapshot schedule policies deleted..
+        /// </summary>
+        public static string DELETED_VMSS {
+            get {
+                return ResourceManager.GetString("DELETED_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleting tag &apos;{0}&apos;.
         /// </summary>
         public static string DELETING_ALL_TAG {
@@ -10360,6 +10387,15 @@ namespace XenAdmin {
         public static string DELETING_VMPP {
             get {
                 return ResourceManager.GetString("DELETING_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting VM snapshot schedule policy &apos;{0}&apos;.
+        /// </summary>
+        public static string DELETING_VMSS {
+            get {
+                return ResourceManager.GetString("DELETING_VMSS", resourceCulture);
             }
         }
         
@@ -10679,6 +10715,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VM snapshot schedule policy &apos;{0}&apos; disabled..
+        /// </summary>
+        public static string DISABLED_VMSS {
+            get {
+                return ResourceManager.GetString("DISABLED_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabling Active Directory Authentication.
         /// </summary>
         public static string DISABLING_AD {
@@ -10720,6 +10765,15 @@ namespace XenAdmin {
         public static string DISABLING_VMPP {
             get {
                 return ResourceManager.GetString("DISABLING_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling VM snapshot schedule policy &apos;{0}&apos;....
+        /// </summary>
+        public static string DISABLING_VMSS {
+            get {
+                return ResourceManager.GetString("DISABLING_VMSS", resourceCulture);
             }
         }
         
@@ -12825,7 +12879,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure email notification for VM protection alerts.
+        ///   Looks up a localized string similar to Configure email notification for policy alerts.
         /// </summary>
         public static string EMAIL_ALERTS_TITLE {
             get {
@@ -12915,6 +12969,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VM snapshot schedule policy &apos;{0}&apos; enabled..
+        /// </summary>
+        public static string ENABLED_VMSS {
+            get {
+                return ResourceManager.GetString("ENABLED_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling Active Directory Authentication.
         /// </summary>
         public static string ENABLING_AD {
@@ -12956,6 +13019,15 @@ namespace XenAdmin {
         public static string ENABLING_VMPP {
             get {
                 return ResourceManager.GetString("ENABLING_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling VM snapshot schedule policy &apos;{0}&apos;....
+        /// </summary>
+        public static string ENABLING_VMSS {
+            get {
+                return ResourceManager.GetString("ENABLING_VMSS", resourceCulture);
             }
         }
         
@@ -14770,7 +14842,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create the new VM protection policy.
+        ///   Looks up a localized string similar to Create the new policy.
         /// </summary>
         public static string FINISH_TITLE {
             get {
@@ -22596,6 +22668,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use this wizard to define a VM protection policy that will ensure your critical VMs are protected via automatic scheduled snapshot jobs..
+        /// </summary>
+        public static string NEW_VMPP_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("NEW_VMPP_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use this wizard to define a VM snapshot schedule policy that will create automatic schedule snapshot jobs for your VMs..
+        /// </summary>
+        public static string NEW_VMSS_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The new disk will appear when you next restart the VM..
         /// </summary>
         public static string NEWDISKWIZARD_MESSAGE {
@@ -28401,7 +28491,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Protection policy started.
+        ///   Looks up a localized string similar to Policy started.
         /// </summary>
         public static string RUN_POLICY_STARTED {
             get {
@@ -28622,24 +28712,6 @@ namespace XenAdmin {
         public static string SCANNING_VMS {
             get {
                 return ResourceManager.GetString("SCANNING_VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VM protection policies defined in pool &apos;{0}&apos; ({1} out of {2} VMs currently protected):.
-        /// </summary>
-        public static string SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL {
-            get {
-                return ResourceManager.GetString("SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VM protection policies defined in server &apos;{0}&apos; ({1} out of {2} VMs currently protected):.
-        /// </summary>
-        public static string SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
-            get {
-                return ResourceManager.GetString("SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
             }
         }
         
@@ -34487,6 +34559,69 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send &amp;email notifications about VM protection job alerts.
+        /// </summary>
+        public static string VMPP_EMAIL_CHECKBOX_TEXT {
+            get {
+                return ResourceManager.GetString("VMPP_EMAIL_CHECKBOX_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenServer can send you email notifications when alerts associated with VM protection jobs are raised, such as when a VM snapshot is created or archived, or when a snapshot or archive operation fails..
+        /// </summary>
+        public static string VMPP_EMAIL_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("VMPP_EMAIL_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Run the new VM protection job when I click Finish.
+        /// </summary>
+        public static string VMPP_FINISH_PAGE_CHECKBOX_TEXT {
+            get {
+                return ResourceManager.GetString("VMPP_FINISH_PAGE_CHECKBOX_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review the new VM protection policy below and click Previous if you want to change any settings or Finish to create the new policy..
+        /// </summary>
+        public static string VMPP_FINISH_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("VMPP_FINISH_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM protection policies defined in pool &apos;{0}&apos; ({1} out of {2} VMs currently protected):.
+        /// </summary>
+        public static string VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL {
+            get {
+                return ResourceManager.GetString("VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM protection policies defined in server &apos;{0}&apos; ({1} out of {2} VMs currently protected):.
+        /// </summary>
+        public static string VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
+            get {
+                return ResourceManager.GetString("VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New VM Protection Policy.
+        /// </summary>
+        public static string VMPP_WIZARD_TITLE {
+            get {
+                return ResourceManager.GetString("VMPP_WIZARD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VMs.
         /// </summary>
         public static string VMS {
@@ -34523,11 +34658,74 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send &amp;email notifications about VM snapshot schedule job alerts.
+        /// </summary>
+        public static string VMSS_EMAIL_CHECKBOX_TEXT {
+            get {
+                return ResourceManager.GetString("VMSS_EMAIL_CHECKBOX_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenServer can send you email notifications when alerts associated with VM snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
+        /// </summary>
+        public static string VMSS_EMAIL_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("VMSS_EMAIL_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Run the new VM snapshot schedule job when I click Finish.
+        /// </summary>
+        public static string VMSS_FINISH_PAGE_CHECKBOX_TEXT {
+            get {
+                return ResourceManager.GetString("VMSS_FINISH_PAGE_CHECKBOX_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review the new VM snapshot schedule policy below and click Previous if you want to change any settings or Finish to create the new policy..
+        /// </summary>
+        public static string VMSS_FINISH_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("VMSS_FINISH_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM Snaps&amp;hot Schedules....
         /// </summary>
         public static string VMSS_MAIN_MENU {
             get {
                 return ResourceManager.GetString("VMSS_MAIN_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n.
+        /// </summary>
+        public static string VMSS_POLICY_SUMMARY {
+            get {
+                return ResourceManager.GetString("VMSS_POLICY_SUMMARY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM snapshot schedule policies defined in pool &apos;{0}&apos; ({1} out of {2} VMs currently in policy):.
+        /// </summary>
+        public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL {
+            get {
+                return ResourceManager.GetString("VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM snapshot schedule policies defined in server &apos;{0}&apos; ({1} out of {2} VMs currently in policy):.
+        /// </summary>
+        public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
+            get {
+                return ResourceManager.GetString("VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
             }
         }
         
@@ -34546,6 +34744,15 @@ namespace XenAdmin {
         public static string VMSS_VMS_TITLE {
             get {
                 return ResourceManager.GetString("VMSS_VMS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Snapshot Schedule Policy.
+        /// </summary>
+        public static string VMSS_WIZARD_TITLE {
+            get {
+                return ResourceManager.GetString("VMSS_WIZARD_TITLE", resourceCulture);
             }
         }
         

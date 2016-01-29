@@ -36,9 +36,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicyFinishPage : XenTabPage
     {
-        public NewPolicyFinishPage()
+        public NewPolicyFinishPage(string pageText, string checkBoxText)
         {
             InitializeComponent();
+            this.label13.Text = pageText;
+            this.checkBox1.Text = checkBoxText;
         }
 
         public override string Text

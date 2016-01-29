@@ -47,7 +47,7 @@ using XenCenterLib;
 
 namespace XenAdmin.Dialogs.VMProtection_Recovery
 {
-    public partial class VMProtectionPoliciesDialog<T> : XenDialogBase where T : XenObject<T>
+    public partial class VMProtectionPoliciesDialog: XenDialogBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -78,8 +78,8 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 }
             }
             labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
-                                                      ? Messages.SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
-                                                      : Messages.SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
+                                                      ? Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
+                                                      : Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
                                                   pool.Name.Ellipsise(45), protectedVMs, realVMs);
         }
       
@@ -130,8 +130,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 Cells.Add(_status);
                 Cells.Add(_numVMs);
                 Cells.Add(_nextRunTime);
-                if (typeof(T) == typeof(VMPP))
-                    Cells.Add(_nextArchiveRuntime);
+                Cells.Add(_nextArchiveRuntime);
                 Cells.Add(_lastResult);
                 VMPP = policy;
                 RefreshRow();
@@ -172,25 +171,20 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                                          ? HelpersGUI.DateTimeToString(nextRunTime.Value, Messages.DATEFORMAT_DMY_HM,
                                                                        true)
                                          : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
-                if (typeof(T) == typeof(VMPP))
-                {
-                    DateTime? nextArchiveRuntime = GetVMPPDateTime(() => VMPP.GetNextArchiveRunTime());
-                    _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
-                                                    ? nextArchiveRuntime == DateTime.MinValue
-                                                          ? Messages.NEVER
-                                                          : HelpersGUI.DateTimeToString(nextArchiveRuntime.Value,
-                                                                                        Messages.DATEFORMAT_DMY_HM, true)
-                                                    : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
-                }
+                DateTime? nextArchiveRuntime = GetVMPPDateTime(() => VMPP.GetNextArchiveRunTime());
+                _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
+                                                ? nextArchiveRuntime == DateTime.MinValue
+                                                        ? Messages.NEVER
+                                                        : HelpersGUI.DateTimeToString(nextArchiveRuntime.Value,
+                                                                                    Messages.DATEFORMAT_DMY_HM, true)
+                                                : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
+
             }
         }
 
         private void buttonNew_Click(object sender, System.EventArgs e)
         {
-            if (typeof(T) == typeof(VMPP))
-                new NewPolicyWizardSpecific<VMPP>(Pool).Show(this);
-            else
-                new NewPolicyWizardSpecific<VMSS>(Pool).Show(this);
+             new NewPolicyWizardSpecific<VMPP>(Pool).Show(this);
         }
 
         private void buttonCancel_Click(object sender, System.EventArgs e)
@@ -231,7 +225,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes)
 
-                new DestroyPolicyAction(Pool.Connection, selectedPolicies).RunAsync();
+                new DestroyPolicyAction<VMPP>(Pool.Connection, selectedPolicies).RunAsync();
 
         }
 
@@ -272,7 +266,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
         {
             if (currentSelected != null)
             {
-                var action = new ChangePolicyEnabledAction(currentSelected);
+                var action = new ChangePolicyEnabledAction<VMPP>(currentSelected);
                 action.RunAsync();
             }
         }
@@ -283,7 +277,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 var vmpp = ((PolicyRow)dataGridView1.SelectedRows[0]).VMPP;
-                var action = new RunPolicyNowAction(vmpp);
+                var action = new RunPolicyNowAction<VMPP>(vmpp);
                 action.Completed += action_Completed;
                 buttonRunNow.Enabled = false;
                 action.RunAsync();

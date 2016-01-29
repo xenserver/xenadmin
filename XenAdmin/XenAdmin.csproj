@@ -283,6 +283,19 @@
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\VMSS\VMSSDataGridViewTextAndImageCell.cs" />
+    <Compile Include="Dialogs\VMSS\VMSSDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VMSS\VMSSDialog.Designer.cs">
+      <DependentUpon>VMSSDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\VMSS\VMSSPolicyHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VMSS\VMSSPolicyHistory.Designer.cs">
+      <DependentUpon>VMSSPolicyHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1655,6 +1668,24 @@
     <EmbeddedResource Include="Dialogs\VMDialogs\SelectVMsToSuspendDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectVMsToSuspendDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VMSS\VMSSDialog.ja.resx">
+      <DependentUpon>VMSSDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VMSS\VMSSDialog.resx">
+      <DependentUpon>VMSSDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VMSS\VMSSDialog.zh-CN.resx">
+      <DependentUpon>VMSSDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VMSS\VMSSPolicyHistory.ja.resx">
+      <DependentUpon>VMSSPolicyHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VMSS\VMSSPolicyHistory.resx">
+      <DependentUpon>VMSSPolicyHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VMSS\VMSSPolicyHistory.zh-CN.resx">
+      <DependentUpon>VMSSPolicyHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbEditScheduledTask.resx">
       <SubType>Designer</SubType>
@@ -6173,6 +6204,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.resx">
       <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.zh-CN.resx">
       <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>

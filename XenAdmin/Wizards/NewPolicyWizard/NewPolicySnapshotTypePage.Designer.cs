@@ -75,6 +75,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.ApplyResources(this.radioButtonDiskAndMemory, "radioButtonDiskAndMemory");
             this.radioButtonDiskAndMemory.Name = "radioButtonDiskAndMemory";
             this.radioButtonDiskAndMemory.UseVisualStyleBackColor = true;
+            this.radioButtonDiskAndMemory.CheckedChanged += new System.EventHandler(this.radioButtonDiskAndMemory_CheckedChanged);
             // 
             // label2
             // 

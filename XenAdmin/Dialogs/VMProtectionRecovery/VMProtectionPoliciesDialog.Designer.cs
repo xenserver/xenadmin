@@ -4,7 +4,7 @@ using XenAPI;
 
 namespace XenAdmin.Dialogs.VMProtection_Recovery
 {
-    partial class VMProtectionPoliciesDialog<T> where T : XenObject<T>
+    partial class VMProtectionPoliciesDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VMProtectionPoliciesDialog<T>));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VMProtectionPoliciesDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.NameColum = new System.Windows.Forms.DataGridViewTextBoxColumn();

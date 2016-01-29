@@ -47,10 +47,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
     {
         readonly EmailAddressValidator emailAddressValidator = new EmailAddressValidator();
 
-        public NewPolicyEmailPage()
+        public NewPolicyEmailPage(string pageText, string checkBoxText)
         {
             InitializeComponent();
             textBoxPort.Text = 25.ToString();
+            this.label1.Text = pageText;
+            this.checkBox1.Text = checkBoxText;
             RegisterEvents();
         }
 

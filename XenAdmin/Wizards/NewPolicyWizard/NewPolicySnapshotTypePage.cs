@@ -66,6 +66,16 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public abstract string SubText { get; }
         public abstract bool HasChanged { get; }
         public abstract void SetXenObjects(IXenObject orig, IXenObject clone);
+        public abstract Image Image { get; }
+        public abstract bool ValidToSave { get; }
+        public abstract void ShowLocalValidationMessages();
+        public abstract void Cleanup();
+        public abstract void checkpointInfoPictureBox_Click(object sender, System.EventArgs e);
+        public abstract void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e);
+        public abstract void pictureBoxVSS_Click(object sender, System.EventArgs e);
+        public abstract void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e);
+        public abstract void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e);
+        public abstract void radioButtonDiskAndMemory_CheckedChanged(object sender, System.EventArgs e);
 
         public NewPolicySnapshotTypePage()
         {
@@ -76,57 +86,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             InitializeComponent();
             SelectedVMs = selectedVMS;
-        }
-
-        public Image Image
-        {
-            get { return Properties.Resources._000_VMSession_h32bit_16; }
-        }
-
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
-
-        public void ShowLocalValidationMessages()
-        {
-
-        }
-
-        public void Cleanup()
-        {
-            radioButtonDiskOnly.Checked = true;
-        }
-
-        private void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
-        {
-            string tt = string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL.Replace("\\n", "\n"),
-                              Messages.DISKMEMORY_SNAPSHOTS);
-            toolTip.Show(tt, checkpointInfoPictureBox, 20, 0);
-        }
-
-        private void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e)
-        {
-            toolTip.Hide(checkpointInfoPictureBox);
-        }
-
-        private void pictureBoxVSS_Click(object sender, System.EventArgs e)
-        {
-            string tt = Messages.INFO_QUIESCE_MODE.Replace("\\n","\n");  // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
-            toolTip.Show(tt, pictureBoxVSS, 20, 0);
-        }
-
-        private void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e)
-        {
-            toolTip.Hide(pictureBoxVSS);
-        }
-
-        private void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (quiesceCheckBox.Checked)
-            {
-                this.radioButtonDiskOnly.Checked = true;
-            }
         }
 
     }

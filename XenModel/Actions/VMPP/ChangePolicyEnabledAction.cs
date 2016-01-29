@@ -39,23 +39,36 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class ChangePolicyEnabledAction : PureAsyncAction
+    public class ChangePolicyEnabledAction<T> : PureAsyncAction where T : XenObject<T>
     {
-        private VMPP _vmpp;
-        public ChangePolicyEnabledAction(VMPP vmpp)
-            : base(vmpp.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, vmpp.Name))
+        private T _policy;
+        public ChangePolicyEnabledAction(T policy)
+            : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name))
         {
-            _vmpp = vmpp;
-            Pool = Helpers.GetPool(vmpp.Connection);
+            _policy = policy;
+            Pool = Helpers.GetPool(_policy.Connection);
         }
 
         protected override void Run()
         {
-            bool value = !_vmpp.is_policy_enabled;
-            Description = value ? string.Format(Messages.ENABLING_VMPP, _vmpp.Name) : string.Format(Messages.DISABLING_VMPP, _vmpp.Name);
-            
-            VMPP.set_is_policy_enabled(Session, _vmpp.opaque_ref, !_vmpp.is_policy_enabled);
-            Description = value ? string.Format(Messages.ENABLED_VMPP, _vmpp.Name) : string.Format(Messages.DISABLED_VMPP, _vmpp.Name);
+            if (typeof(T) == typeof(VMPP))
+            {
+                var vmpp = _policy as VMPP;
+                bool value = !vmpp.is_policy_enabled;
+                Description = value ? string.Format(Messages.ENABLING_VMPP, vmpp.Name) : string.Format(Messages.DISABLING_VMPP, vmpp.Name);
+
+                VMPP.set_is_policy_enabled(Session, vmpp.opaque_ref, !vmpp.is_policy_enabled);
+                Description = value ? string.Format(Messages.ENABLED_VMPP, vmpp.Name) : string.Format(Messages.DISABLED_VMPP, vmpp.Name);
+            }
+            else
+            {
+                var vmss = _policy as VMSS;
+                bool value = !vmss.is_policy_enabled;
+                Description = value ? string.Format(Messages.ENABLING_VMSS, vmss.Name) : string.Format(Messages.DISABLING_VMSS, vmss.Name);
+
+                VMSS.set_is_policy_enabled(Session, vmss.opaque_ref, !vmss.is_policy_enabled);
+                Description = value ? string.Format(Messages.ENABLED_VMSS, vmss.Name) : string.Format(Messages.DISABLED_VMSS, vmss.Name);
+            }
             
         }
     }
