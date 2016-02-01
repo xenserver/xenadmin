@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -181,7 +181,7 @@ namespace XenAdmin.Commands
                 var firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
 
                 bool oldMigrateToHomeCmdCanRun = cmdHome.CanExecute();
-                if (affinityHost == null || !oldMigrateToHomeCmdCanRun && !cpmCmdHome.CanExecute())
+                if (affinityHost == null || _operation == vm_operations.start_on || !oldMigrateToHomeCmdCanRun && !cpmCmdHome.CanExecute())
                     firstItem.Command = cmdHome;
                 else
                     firstItem.Command = oldMigrateToHomeCmdCanRun ? cmdHome : cpmCmdHome;
@@ -207,7 +207,7 @@ namespace XenAdmin.Commands
                     Program.Invoke(Program.MainWindow, delegate
                                                            {
                                                                bool oldMigrateCmdCanRun = cmd.CanExecute();
-                                                               if (!oldMigrateCmdCanRun && !cpmCmd.CanExecute())
+                                                               if (_operation == vm_operations.start_on || !oldMigrateCmdCanRun && !cpmCmd.CanExecute())
                                                                    tempItem.Command = cmd;
                                                                else
                                                                    tempItem.Command = oldMigrateCmdCanRun ? cmd : cpmCmd;
