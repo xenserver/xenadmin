@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2016-02-01 16:42:15.810832400 +0800
-+++ XenCenter.l10n.wxs	2016-02-01 16:41:55.953846900 +0800
+--- XenCenter.wxs	2016-02-01 18:45:42.015924000 +0800
++++ XenCenter.l10n.wxs	2016-02-01 18:45:12.270949800 +0800
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -127,17 +127,14 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -159,7 +159,7 @@
-                         </Component>
+@@ -168,13 +168,35 @@
+                         </Directory>
+ <?else?>
                          <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
-                             <Condition><![CDATA["$(env.Branding)"<>"XenCenter"]]></Condition>
 -                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
 +                            <File Id="Readme" Source="..\Branding\WixInstaller\!(loc.Readme)" />
                          </Component>
-                         <!-- TestResources -->
-                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
-@@ -173,8 +173,30 @@
-                         </Directory>
+ <?endif?>
                          <Directory Id="Help" Name="Help">
                              <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
 -                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
@@ -169,20 +166,37 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -268,9 +290,11 @@
+@@ -269,25 +291,25 @@
          <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
 -            <ComponentRef Id="ReportViewer" />
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
+ <?if "$(env.Branding)"="XenCenter"?>
              <ComponentRef Id="xsupdatesfiles" />
-             <ComponentRef Id="readmefile" />
-+            <ComponentRef Id="ReportViewer" />
              <ComponentRef Id="TestResources" />
+ <?else?>
+             <ComponentRef Id="readmefile" />
+ <?endif?>
++            <ComponentRef Id="ReportViewer" />
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
-@@ -290,7 +314,7 @@
+             <ComponentRef Id="RegistryEntries" />
+             <ComponentRef Id="ApplicationShortcut" />
+             <ComponentRef Id="ProgramFilesShortcut" />
+         </Feature>
+-
+-<?if "$(env.Branding)"="XenCenter"?>		
++<?if "$(env.Branding)"="XenCenter"?>
+         <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+              <ComponentRef Id="XenServerHealthCheck" /> 
+         </Feature>
+-
+         <UIRef Id="WixUI_FeatureTree" />
+ <?else ?>
+        <UIRef Id="My_WixUI_InstallDir" />
+@@ -298,7 +320,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />
