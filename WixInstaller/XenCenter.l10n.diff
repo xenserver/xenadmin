@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2016-01-28 17:15:18.419410400 +0800
-+++ XenCenter.l10n.wxs	2016-01-28 17:22:44.000717200 +0800
+--- XenCenter.wxs	2016-02-01 16:42:15.810832400 +0800
++++ XenCenter.l10n.wxs	2016-02-01 16:41:55.953846900 +0800
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -169,7 +169,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -260,9 +282,11 @@
+@@ -268,9 +290,11 @@
          <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -182,7 +182,7 @@
              <ComponentRef Id="TestResources" />
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
-@@ -281,7 +305,7 @@
+@@ -290,7 +314,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />

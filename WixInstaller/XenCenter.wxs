@@ -240,6 +240,14 @@
             <Directory Id="ProgramMenuFolder">
                 <Directory Id="ApplicationProgramsFolder" Name="@BRANDING_COMPANY_NAME_SHORT@" />
             </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop">
+                <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
+                    <Condition>INSTALLSHORTCUT</Condition>
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="@BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR"/>
+                    <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+                    <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                </Component>
+            </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
             <Component Id="RegistryEntries" Guid="@BRANDING_REGISTRY_ENTRIES_GUID@">
@@ -268,6 +276,7 @@
             <ComponentRef Id="ExternalToolsComponent" />
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
+            <ComponentRef Id="ProgramFilesShortcut" />
         </Feature>
 		
         <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
@@ -286,6 +295,7 @@
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
         </Property>
 		<Property Id="REINSTALLMODE" Value="amus" />
+        <Property Id="INSTALLSHORTCUT" />
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
         <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
         <InstallExecuteSequence>
