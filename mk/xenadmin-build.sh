@@ -169,6 +169,13 @@ cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNET
 cp "$(which dotNetInstaller.exe)" ${DOTNETINST}
 cp "$(which InstallerLinker.exe)" ${DOTNETINST}
 
+# Collect the unsigned files, if the COLLECT_UNSIGNED_FILES is defined 
+# (the variable can be set from the jenkins ui by putting "export COLLECT_UNSIGNED_FILES=1" above the call for build script)
+if [ -n "${COLLECT_UNSIGNED_FILES+x}" ]; then
+	echo "INFO: Collect unsigned files..."
+	${REPO}/mk/archive-unsigned.sh
+fi
+
 #build and sign the installers
 . ${REPO}/mk/build-installers.sh
 
