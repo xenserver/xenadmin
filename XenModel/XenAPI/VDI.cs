@@ -77,7 +77,8 @@ namespace XenAPI
             bool allow_caching,
             on_boot on_boot,
             XenRef<Pool> metadata_of_pool,
-            bool metadata_latest)
+            bool metadata_latest,
+            bool is_tools_iso)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -109,6 +110,7 @@ namespace XenAPI
             this.on_boot = on_boot;
             this.metadata_of_pool = metadata_of_pool;
             this.metadata_latest = metadata_latest;
+            this.is_tools_iso = is_tools_iso;
         }
 
         /// <summary>
@@ -152,6 +154,7 @@ namespace XenAPI
             on_boot = update.on_boot;
             metadata_of_pool = update.metadata_of_pool;
             metadata_latest = update.metadata_latest;
+            is_tools_iso = update.is_tools_iso;
         }
 
         internal void UpdateFromProxy(Proxy_VDI proxy)
@@ -186,6 +189,7 @@ namespace XenAPI
             on_boot = proxy.on_boot == null ? (on_boot) 0 : (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)proxy.on_boot);
             metadata_of_pool = proxy.metadata_of_pool == null ? null : XenRef<Pool>.Create(proxy.metadata_of_pool);
             metadata_latest = (bool)proxy.metadata_latest;
+            is_tools_iso = (bool)proxy.is_tools_iso;
         }
 
         public Proxy_VDI ToProxy()
@@ -221,6 +225,7 @@ namespace XenAPI
             result_.on_boot = on_boot_helper.ToString(on_boot);
             result_.metadata_of_pool = (metadata_of_pool != null) ? metadata_of_pool : "";
             result_.metadata_latest = metadata_latest;
+            result_.is_tools_iso = is_tools_iso;
             return result_;
         }
 
@@ -260,6 +265,7 @@ namespace XenAPI
             on_boot = (on_boot)Helper.EnumParseDefault(typeof(on_boot), Marshalling.ParseString(table, "on_boot"));
             metadata_of_pool = Marshalling.ParseRef<Pool>(table, "metadata_of_pool");
             metadata_latest = Marshalling.ParseBool(table, "metadata_latest");
+            is_tools_iso = Marshalling.ParseBool(table, "is_tools_iso");
         }
 
         public bool DeepEquals(VDI other, bool ignoreCurrentOperations)
@@ -300,7 +306,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._allow_caching, other._allow_caching) &&
                 Helper.AreEqual2(this._on_boot, other._on_boot) &&
                 Helper.AreEqual2(this._metadata_of_pool, other._metadata_of_pool) &&
-                Helper.AreEqual2(this._metadata_latest, other._metadata_latest);
+                Helper.AreEqual2(this._metadata_latest, other._metadata_latest) &&
+                Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VDI server)
@@ -757,6 +764,17 @@ namespace XenAPI
         public static bool get_metadata_latest(Session session, string _vdi)
         {
             return (bool)session.proxy.vdi_get_metadata_latest(session.uuid, (_vdi != null) ? _vdi : "").parse();
+        }
+
+        /// <summary>
+        /// Get the is_tools_iso field of the given VDI.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static bool get_is_tools_iso(Session session, string _vdi)
+        {
+            return (bool)session.proxy.vdi_get_is_tools_iso(session.uuid, (_vdi != null) ? _vdi : "").parse();
         }
 
         /// <summary>
@@ -2173,5 +2191,24 @@ namespace XenAPI
             }
         }
         private bool _metadata_latest;
+
+        /// <summary>
+        /// Whether this VDI is a Tools ISO
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool is_tools_iso
+        {
+            get { return _is_tools_iso; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_tools_iso))
+                {
+                    _is_tools_iso = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_tools_iso");
+                }
+            }
+        }
+        private bool _is_tools_iso;
     }
 }

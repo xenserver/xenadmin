@@ -1063,7 +1063,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ssl_legacy field of the given host.
-        /// Experimental. First published in XenServer Dundee.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1552,7 +1552,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Run xen-bugtool --yestoall and upload the output to Citrix support
+        /// Run xen-bugtool --yestoall and upload the output to support
         /// First published in XenServer 4.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -1565,7 +1565,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Run xen-bugtool --yestoall and upload the output to Citrix support
+        /// Run xen-bugtool --yestoall and upload the output to support
         /// First published in XenServer 4.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -1609,6 +1609,52 @@ namespace XenAPI
         public static XenRef<Task> async_license_apply(Session session, string _host, string _contents)
         {
             return XenRef<Task>.Create(session.proxy.async_host_license_apply(session.uuid, (_host != null) ? _host : "", (_contents != null) ? _contents : "").parse());
+        }
+
+        /// <summary>
+        /// Apply a new license to a host
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_contents">The contents of the license file, base64 encoded</param>
+        public static void license_add(Session session, string _host, string _contents)
+        {
+            session.proxy.host_license_add(session.uuid, (_host != null) ? _host : "", (_contents != null) ? _contents : "").parse();
+        }
+
+        /// <summary>
+        /// Apply a new license to a host
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_contents">The contents of the license file, base64 encoded</param>
+        public static XenRef<Task> async_license_add(Session session, string _host, string _contents)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_license_add(session.uuid, (_host != null) ? _host : "", (_contents != null) ? _contents : "").parse());
+        }
+
+        /// <summary>
+        /// Remove any license file from the specified host, and switch that host to the unlicensed edition
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static void license_remove(Session session, string _host)
+        {
+            session.proxy.host_license_remove(session.uuid, (_host != null) ? _host : "").parse();
+        }
+
+        /// <summary>
+        /// Remove any license file from the specified host, and switch that host to the unlicensed edition
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_license_remove(Session session, string _host)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_license_remove(session.uuid, (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
@@ -1759,9 +1805,11 @@ namespace XenAPI
         /// <summary>
         /// Return a set of VMs which are not co-operating with the host's memory control system
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("XenServer 6.1")]
         public static List<XenRef<VM>> get_uncooperative_resident_VMs(Session session, string _host)
         {
             return XenRef<VM>.Create(session.proxy.host_get_uncooperative_resident_vms(session.uuid, (_host != null) ? _host : "").parse());
@@ -1770,9 +1818,11 @@ namespace XenAPI
         /// <summary>
         /// Return a set of VMs which are not co-operating with the host's memory control system
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("XenServer 6.1")]
         public static XenRef<Task> async_get_uncooperative_resident_VMs(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_get_uncooperative_resident_vms(session.uuid, (_host != null) ? _host : "").parse());
@@ -2395,8 +2445,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Enable/disable SSLv3 for interoperability with older versions of XenServer
-        /// Experimental. First published in XenServer Dundee.
+        /// Enable/disable SSLv3 for interoperability with older versions of XenServer. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2407,8 +2457,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Enable/disable SSLv3 for interoperability with older versions of XenServer
-        /// Experimental. First published in XenServer Dundee.
+        /// Enable/disable SSLv3 for interoperability with older versions of XenServer. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3131,7 +3181,7 @@ namespace XenAPI
         private Dictionary<string, string> _external_auth_configuration;
 
         /// <summary>
-        /// XenServer edition
+        /// Product edition
         /// First published in XenServer 5.6.
         /// </summary>
         public virtual string edition
@@ -3302,8 +3352,8 @@ namespace XenAPI
         private List<XenRef<PGPU>> _PGPUs;
 
         /// <summary>
-        /// Allow SSLv3 protocol and ciphersuites as used by older XenServers
-        /// Experimental. First published in XenServer Dundee.
+        /// Allow SSLv3 protocol and ciphersuites as used by older XenServers. This controls both incoming and outgoing connections. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
+        /// First published in XenServer Dundee.
         /// </summary>
         public virtual bool ssl_legacy
         {

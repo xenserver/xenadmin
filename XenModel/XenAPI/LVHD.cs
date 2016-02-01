@@ -170,16 +170,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get all the LVHD Records at once, in a single XML RPC call
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static Dictionary<XenRef<LVHD>, LVHD> get_all_records(Session session)
-        {
-            return XenRef<LVHD>.Create<Proxy_LVHD>(session.proxy.lvhd_get_all_records(session.uuid).parse());
-        }
-
-        /// <summary>
         /// Unique identifier/object reference
         /// </summary>
         public virtual string uuid

@@ -197,9 +197,11 @@ namespace XenAPI
         /// <summary>
         /// Get the memory/free field of the given host_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
+        [Deprecated("XenServer 5.6")]
         public static long get_memory_free(Session session, string _host_metrics)
         {
             return long.Parse((string)session.proxy.host_metrics_get_memory_free(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse());

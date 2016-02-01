@@ -66,7 +66,9 @@ namespace XenAPI
             Dictionary<string, string> sm_config,
             Dictionary<string, XenRef<Blob>> blobs,
             bool local_cache_enabled,
-            XenRef<DR_task> introduced_by)
+            XenRef<DR_task> introduced_by,
+            bool clustered,
+            bool is_tools_sr)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -87,6 +89,8 @@ namespace XenAPI
             this.blobs = blobs;
             this.local_cache_enabled = local_cache_enabled;
             this.introduced_by = introduced_by;
+            this.clustered = clustered;
+            this.is_tools_sr = is_tools_sr;
         }
 
         /// <summary>
@@ -119,6 +123,8 @@ namespace XenAPI
             blobs = update.blobs;
             local_cache_enabled = update.local_cache_enabled;
             introduced_by = update.introduced_by;
+            clustered = update.clustered;
+            is_tools_sr = update.is_tools_sr;
         }
 
         internal void UpdateFromProxy(Proxy_SR proxy)
@@ -142,6 +148,8 @@ namespace XenAPI
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
             local_cache_enabled = (bool)proxy.local_cache_enabled;
             introduced_by = proxy.introduced_by == null ? null : XenRef<DR_task>.Create(proxy.introduced_by);
+            clustered = (bool)proxy.clustered;
+            is_tools_sr = (bool)proxy.is_tools_sr;
         }
 
         public Proxy_SR ToProxy()
@@ -166,6 +174,8 @@ namespace XenAPI
             result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
             result_.local_cache_enabled = local_cache_enabled;
             result_.introduced_by = (introduced_by != null) ? introduced_by : "";
+            result_.clustered = clustered;
+            result_.is_tools_sr = is_tools_sr;
             return result_;
         }
 
@@ -194,6 +204,8 @@ namespace XenAPI
             blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             local_cache_enabled = Marshalling.ParseBool(table, "local_cache_enabled");
             introduced_by = Marshalling.ParseRef<DR_task>(table, "introduced_by");
+            clustered = Marshalling.ParseBool(table, "clustered");
+            is_tools_sr = Marshalling.ParseBool(table, "is_tools_sr");
         }
 
         public bool DeepEquals(SR other, bool ignoreCurrentOperations)
@@ -223,7 +235,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._sm_config, other._sm_config) &&
                 Helper.AreEqual2(this._blobs, other._blobs) &&
                 Helper.AreEqual2(this._local_cache_enabled, other._local_cache_enabled) &&
-                Helper.AreEqual2(this._introduced_by, other._introduced_by);
+                Helper.AreEqual2(this._introduced_by, other._introduced_by) &&
+                Helper.AreEqual2(this._clustered, other._clustered) &&
+                Helper.AreEqual2(this._is_tools_sr, other._is_tools_sr);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SR server)
@@ -506,6 +520,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the clustered field of the given SR.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sr">The opaque_ref of the given sr</param>
+        public static bool get_clustered(Session session, string _sr)
+        {
+            return (bool)session.proxy.sr_get_clustered(session.uuid, (_sr != null) ? _sr : "").parse();
+        }
+
+        /// <summary>
+        /// Get the is_tools_sr field of the given SR.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sr">The opaque_ref of the given sr</param>
+        public static bool get_is_tools_sr(Session session, string _sr)
+        {
+            return (bool)session.proxy.sr_get_is_tools_sr(session.uuid, (_sr != null) ? _sr : "").parse();
+        }
+
+        /// <summary>
         /// Set the other_config field of the given SR.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -758,6 +794,7 @@ namespace XenAPI
         /// <summary>
         /// Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>
@@ -767,6 +804,7 @@ namespace XenAPI
         /// <param name="_name_description">The description of the new storage repository</param>
         /// <param name="_type">The type of the SR; used to specify the SR backend driver to use</param>
         /// <param name="_content_type">The type of the new SRs content, if required (e.g. ISOs)</param>
+        [Deprecated("XenServer 4.1")]
         public static string make(Session session, string _host, Dictionary<string, string> _device_config, long _physical_size, string _name_label, string _name_description, string _type, string _content_type)
         {
             return (string)session.proxy.sr_make(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_device_config), _physical_size.ToString(), (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_type != null) ? _type : "", (_content_type != null) ? _content_type : "").parse();
@@ -775,6 +813,7 @@ namespace XenAPI
         /// <summary>
         /// Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>
@@ -784,6 +823,7 @@ namespace XenAPI
         /// <param name="_name_description">The description of the new storage repository</param>
         /// <param name="_type">The type of the SR; used to specify the SR backend driver to use</param>
         /// <param name="_content_type">The type of the new SRs content, if required (e.g. ISOs)</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_make(Session session, string _host, Dictionary<string, string> _device_config, long _physical_size, string _name_label, string _name_description, string _type, string _content_type)
         {
             return XenRef<Task>.Create(session.proxy.async_sr_make(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_device_config), _physical_size.ToString(), (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_type != null) ? _type : "", (_content_type != null) ? _content_type : "").parse());
@@ -792,6 +832,7 @@ namespace XenAPI
         /// <summary>
         /// Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>
@@ -802,6 +843,7 @@ namespace XenAPI
         /// <param name="_type">The type of the SR; used to specify the SR backend driver to use</param>
         /// <param name="_content_type">The type of the new SRs content, if required (e.g. ISOs)</param>
         /// <param name="_sm_config">Storage backend specific configuration options First published in XenServer 4.1.</param>
+        [Deprecated("XenServer 4.1")]
         public static string make(Session session, string _host, Dictionary<string, string> _device_config, long _physical_size, string _name_label, string _name_description, string _type, string _content_type, Dictionary<string, string> _sm_config)
         {
             return (string)session.proxy.sr_make(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_device_config), _physical_size.ToString(), (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_type != null) ? _type : "", (_content_type != null) ? _content_type : "", Maps.convert_to_proxy_string_string(_sm_config)).parse();
@@ -810,6 +852,7 @@ namespace XenAPI
         /// <summary>
         /// Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>
@@ -820,6 +863,7 @@ namespace XenAPI
         /// <param name="_type">The type of the SR; used to specify the SR backend driver to use</param>
         /// <param name="_content_type">The type of the new SRs content, if required (e.g. ISOs)</param>
         /// <param name="_sm_config">Storage backend specific configuration options First published in XenServer 4.1.</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_make(Session session, string _host, Dictionary<string, string> _device_config, long _physical_size, string _name_label, string _name_description, string _type, string _content_type, Dictionary<string, string> _sm_config)
         {
             return XenRef<Task>.Create(session.proxy.async_sr_make(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_device_config), _physical_size.ToString(), (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_type != null) ? _type : "", (_content_type != null) ? _content_type : "", Maps.convert_to_proxy_string_string(_sm_config)).parse());
@@ -1202,6 +1246,53 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// 
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sr">The opaque_ref of the given sr</param>
+        public static List<Data_source> get_data_sources(Session session, string _sr)
+        {
+            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.sr_get_data_sources(session.uuid, (_sr != null) ? _sr : "").parse());
+        }
+
+        /// <summary>
+        /// Start recording the specified data source
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sr">The opaque_ref of the given sr</param>
+        /// <param name="_data_source">The data source to record</param>
+        public static void record_data_source(Session session, string _sr, string _data_source)
+        {
+            session.proxy.sr_record_data_source(session.uuid, (_sr != null) ? _sr : "", (_data_source != null) ? _data_source : "").parse();
+        }
+
+        /// <summary>
+        /// Query the latest value of the specified data source
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sr">The opaque_ref of the given sr</param>
+        /// <param name="_data_source">The data source to query</param>
+        public static double query_data_source(Session session, string _sr, string _data_source)
+        {
+            return Convert.ToDouble(session.proxy.sr_query_data_source(session.uuid, (_sr != null) ? _sr : "", (_data_source != null) ? _data_source : "").parse());
+        }
+
+        /// <summary>
+        /// Forget the recorded statistics related to the specified data source
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sr">The opaque_ref of the given sr</param>
+        /// <param name="_data_source">The data source whose archives are to be forgotten</param>
+        public static void forget_data_source_archives(Session session, string _sr, string _data_source)
+        {
+            session.proxy.sr_forget_data_source_archives(session.uuid, (_sr != null) ? _sr : "", (_data_source != null) ? _data_source : "").parse();
+        }
+
+        /// <summary>
         /// Return a list of all the SRs known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1567,5 +1658,43 @@ namespace XenAPI
             }
         }
         private XenRef<DR_task> _introduced_by;
+
+        /// <summary>
+        /// True if the SR is using aggregated local storage
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool clustered
+        {
+            get { return _clustered; }
+            set
+            {
+                if (!Helper.AreEqual(value, _clustered))
+                {
+                    _clustered = value;
+                    Changed = true;
+                    NotifyPropertyChanged("clustered");
+                }
+            }
+        }
+        private bool _clustered;
+
+        /// <summary>
+        /// True if this is the SR that contains the Tools ISO VDIs
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool is_tools_sr
+        {
+            get { return _is_tools_sr; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_tools_sr))
+                {
+                    _is_tools_sr = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_tools_sr");
+                }
+            }
+        }
+        private bool _is_tools_sr;
     }
 }

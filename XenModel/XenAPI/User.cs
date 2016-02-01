@@ -143,9 +143,11 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given user.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_user">The opaque_ref of the given user</param>
+        [Deprecated("XenServer 5.5")]
         public static User get_record(Session session, string _user)
         {
             return new User((Proxy_User)session.proxy.user_get_record(session.uuid, (_user != null) ? _user : "").parse());
@@ -154,9 +156,11 @@ namespace XenAPI
         /// <summary>
         /// Get a reference to the user instance with the specified UUID.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("XenServer 5.5")]
         public static XenRef<User> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<User>.Create(session.proxy.user_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
@@ -165,9 +169,11 @@ namespace XenAPI
         /// <summary>
         /// Create a new user instance, and return its handle.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_record">All constructor arguments</param>
+        [Deprecated("XenServer 5.5")]
         public static XenRef<User> create(Session session, User _record)
         {
             return XenRef<User>.Create(session.proxy.user_create(session.uuid, _record.ToProxy()).parse());
@@ -176,9 +182,11 @@ namespace XenAPI
         /// <summary>
         /// Create a new user instance, and return its handle.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_record">All constructor arguments</param>
+        [Deprecated("XenServer 5.5")]
         public static XenRef<Task> async_create(Session session, User _record)
         {
             return XenRef<Task>.Create(session.proxy.async_user_create(session.uuid, _record.ToProxy()).parse());
@@ -187,9 +195,11 @@ namespace XenAPI
         /// <summary>
         /// Destroy the specified user instance.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_user">The opaque_ref of the given user</param>
+        [Deprecated("XenServer 5.5")]
         public static void destroy(Session session, string _user)
         {
             session.proxy.user_destroy(session.uuid, (_user != null) ? _user : "").parse();
@@ -198,9 +208,11 @@ namespace XenAPI
         /// <summary>
         /// Destroy the specified user instance.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_user">The opaque_ref of the given user</param>
+        [Deprecated("XenServer 5.5")]
         public static XenRef<Task> async_destroy(Session session, string _user)
         {
             return XenRef<Task>.Create(session.proxy.async_user_destroy(session.uuid, (_user != null) ? _user : "").parse());
@@ -297,16 +309,6 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _user, string _key)
         {
             session.proxy.user_remove_from_other_config(session.uuid, (_user != null) ? _user : "", (_key != null) ? _key : "").parse();
-        }
-
-        /// <summary>
-        /// Get all the user Records at once, in a single XML RPC call
-        /// First published in XenServer 4.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static Dictionary<XenRef<User>, User> get_all_records(Session session)
-        {
-            return XenRef<User>.Create<Proxy_User>(session.proxy.user_get_all_records(session.uuid).parse());
         }
 
         /// <summary>

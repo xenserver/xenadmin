@@ -1054,7 +1054,7 @@ namespace XenAPI
         private vmpp_backup_frequency _backup_frequency;
 
         /// <summary>
-        /// schedule of the backup containing 'hour', 'min', 'days'. Date/time-related information is in XenServer Local Timezone
+        /// schedule of the backup containing 'hour', 'min', 'days'. Date/time-related information is in Local Timezone
         /// </summary>
         public virtual Dictionary<string, string> backup_schedule
         {
@@ -1162,7 +1162,7 @@ namespace XenAPI
         private vmpp_archive_frequency _archive_frequency;
 
         /// <summary>
-        /// schedule of the archive containing 'hour', 'min', 'days'. Date/time-related information is in XenServer Local Timezone
+        /// schedule of the archive containing 'hour', 'min', 'days'. Date/time-related information is in Local Timezone
         /// </summary>
         public virtual Dictionary<string, string> archive_schedule
         {

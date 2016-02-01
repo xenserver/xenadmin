@@ -414,6 +414,7 @@ namespace XenAPI
         {
             return DO_HTTP(uri, proxy, false, timeout_ms,
                 string.Format("PUT {0} HTTP/1.0", uri.PathAndQuery),
+                string.Format("Host: {0}", uri.Host),
                 string.Format("Content-Length: {0}", ContentLength));
         }
 

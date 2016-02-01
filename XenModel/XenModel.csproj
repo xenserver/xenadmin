@@ -352,6 +352,7 @@
     <Compile Include="XenAPI\pgpu_dom0_access.cs" />
     <Compile Include="XenAPI\pool_allowed_operations.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
+    <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />
     <Compile Include="XenAPI\vgpu_type_implementation.cs" />

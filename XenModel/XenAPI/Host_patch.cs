@@ -361,9 +361,11 @@ namespace XenAPI
         /// <summary>
         /// Destroy the specified host patch, removing it from the disk. This does NOT reverse the patch
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
+        [Deprecated("XenServer 4.1")]
         public static void destroy(Session session, string _host_patch)
         {
             session.proxy.host_patch_destroy(session.uuid, (_host_patch != null) ? _host_patch : "").parse();
@@ -372,9 +374,11 @@ namespace XenAPI
         /// <summary>
         /// Destroy the specified host patch, removing it from the disk. This does NOT reverse the patch
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_destroy(Session session, string _host_patch)
         {
             return XenRef<Task>.Create(session.proxy.async_host_patch_destroy(session.uuid, (_host_patch != null) ? _host_patch : "").parse());
@@ -383,9 +387,11 @@ namespace XenAPI
         /// <summary>
         /// Apply the selected patch and return its output
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
+        [Deprecated("XenServer 4.1")]
         public static string apply(Session session, string _host_patch)
         {
             return (string)session.proxy.host_patch_apply(session.uuid, (_host_patch != null) ? _host_patch : "").parse();
@@ -394,9 +400,11 @@ namespace XenAPI
         /// <summary>
         /// Apply the selected patch and return its output
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 4.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
+        [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_apply(Session session, string _host_patch)
         {
             return XenRef<Task>.Create(session.proxy.async_host_patch_apply(session.uuid, (_host_patch != null) ? _host_patch : "").parse());

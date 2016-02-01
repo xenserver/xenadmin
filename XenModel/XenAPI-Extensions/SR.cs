@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -135,7 +135,7 @@ namespace XenAPI
         {
             get
             {
-                return name_label == SR.XenServer_Tools_Label;
+                return name_label == SR.XenServer_Tools_Label || is_tools_sr;
             }
         }
 

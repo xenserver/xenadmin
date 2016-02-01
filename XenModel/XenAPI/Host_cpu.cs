@@ -202,9 +202,11 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given host_cpu.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
+        [Deprecated("XenServer 5.6")]
         public static Host_cpu get_record(Session session, string _host_cpu)
         {
             return new Host_cpu((Proxy_Host_cpu)session.proxy.host_cpu_get_record(session.uuid, (_host_cpu != null) ? _host_cpu : "").parse());
@@ -213,9 +215,11 @@ namespace XenAPI
         /// <summary>
         /// Get a reference to the host_cpu instance with the specified UUID.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("XenServer 5.6")]
         public static XenRef<Host_cpu> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Host_cpu>.Create(session.proxy.host_cpu_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
@@ -404,8 +408,10 @@ namespace XenAPI
         /// <summary>
         /// Return a list of all the host_cpus known to the system.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 5.6.
         /// </summary>
         /// <param name="session">The session</param>
+        [Deprecated("XenServer 5.6")]
         public static List<XenRef<Host_cpu>> get_all(Session session)
         {
             return XenRef<Host_cpu>.Create(session.proxy.host_cpu_get_all(session.uuid).parse());
