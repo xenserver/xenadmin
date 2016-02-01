@@ -70,13 +70,13 @@ MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx452_web_setup
 PUTTY_DIR=${REPO}/putty
 
 wget ${WGET_OPT} -O "${SCRATCH_DIR}/dotnet-packages-manifest" "${WEB_DOTNET}/manifest"
-mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll
-mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/log4net.dll
-mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/ICSharpCode.SharpZipLib.dll
-mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/Ionic.Zip.dll
-mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/DiscUtils.dll
+mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/UNSIGNED/CookComputing.XmlRpcV2.dll
+mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/UNSIGNED/log4net.dll
+mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/UNSIGNED/ICSharpCode.SharpZipLib.dll
+mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/UNSIGNED/Ionic.Zip.dll
+mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/UNSIGNED/DiscUtils.dll
 mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} -P "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "${WEB_DOTNET}/NDP452-KB2901954-Web.exe"
-mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/putty.exe"
+mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/UNSIGNED/putty.exe"
 
 wget ${WGET_OPT} -P "${REPO}" "${WEB_DOTNET}/sign.bat" && chmod a+x ${REPO}/sign.bat
 

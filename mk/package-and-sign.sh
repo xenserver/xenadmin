@@ -39,7 +39,7 @@ REPO=${XENADMIN_DIR}
 OUTPUT_DIR=${ROOT}/output
 DOTNETINST=${REPO}/dotNetInstaller
 	
-
+source ${REPO}/Branding/branding.sh
 
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin

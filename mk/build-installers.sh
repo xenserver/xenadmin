@@ -53,6 +53,13 @@ do
   cd ${REPO}/VNCControl/bin/Release && ${REPO}/sign.bat ${file}
 done 
 
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET by Charles Cook, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat log4net.dll  "Log4Net by The Apache Software Foundation, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib by IC#Code, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat DiscUtils.dll "DiscUtils by Kenneth Bell, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat Ionic.Zip.dll "OSS, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat putty.exe "PuTTY by Simon Tatham, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+
 #create installers
 compile_installer()
 {
