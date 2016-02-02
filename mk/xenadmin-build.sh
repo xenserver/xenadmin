@@ -70,13 +70,13 @@ MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx452_web_setup
 PUTTY_DIR=${REPO}/putty
 
 wget ${WGET_OPT} -O "${SCRATCH_DIR}/dotnet-packages-manifest" "${WEB_DOTNET}/manifest"
-mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll
-mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/log4net.dll
-mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/ICSharpCode.SharpZipLib.dll
-mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/Ionic.Zip.dll
-mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/DiscUtils.dll
+mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/UNSIGNED/CookComputing.XmlRpcV2.dll
+mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/UNSIGNED/log4net.dll
+mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/UNSIGNED/ICSharpCode.SharpZipLib.dll
+mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/UNSIGNED/Ionic.Zip.dll
+mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/UNSIGNED/DiscUtils.dll
 mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} -P "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "${WEB_DOTNET}/NDP452-KB2901954-Web.exe"
-mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/putty.exe"
+mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/UNSIGNED/putty.exe"
 
 wget ${WGET_OPT} -P "${REPO}" "${WEB_DOTNET}/sign.bat" && chmod a+x ${REPO}/sign.bat
 
@@ -108,29 +108,6 @@ $MSBUILD xe/Xe.csproj
 $MSBUILD VNCControl/VNCControl.sln
 SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
 $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
-
-#sign
-for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
-do
-  cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${file}
-done
-
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.exe
-
-cd ${REPO}/xe/bin/Release         && ${REPO}/sign.bat xe.exe
-cd ${REPO}/xva_verify/bin/Release && ${REPO}/sign.bat xva_verify.exe
-
-for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
-do
-  cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/sign.bat ${file}
-done
-
-for file in VNCControl.dll XenCenterLib.dll XenCenterVNC.dll XenServer.dll
-do
-  cd ${REPO}/VNCControl/bin/Release && ${REPO}/sign.bat ${file}
-done 
-
-cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/sign.bat XenServerHealthCheck.exe
 
 #prepare wix
 
@@ -164,40 +141,10 @@ mkdir -p lib
    
 ${LIT} -out lib/WixUI_InstallDir.wixlib obj/WixUI_InstallDir.wixobj obj/WixUI_FeatureTree.wixobj obj/BrowseDlg.wixobj obj/CancelDlg.wixobj obj/Common.wixobj obj/CustomizeDlg.wixobj obj/CustomizeStdDlg.wixobj obj/DiskCostDlg.wixobj obj/ErrorDlg.wixobj obj/ErrorProgressText.wixobj obj/ExitDialog.wixobj obj/FatalError.wixobj obj/FilesInUse.wixobj obj/InstallDirDlg.wixobj obj/InvalidDirDlg.wixobj obj/LicenseAgreementDlg.wixobj obj/MaintenanceTypeDlg.wixobj obj/MaintenanceWelcomeDlg.wixobj obj/MsiRMFilesInUse.wixobj obj/OutOfDiskDlg.wixobj obj/OutOfRbDiskDlg.wixobj obj/PrepareDlg.wixobj obj/ProgressDlg.wixobj obj/ResumeDlg.wixobj obj/SetupTypeDlg.wixobj obj/UserExit.wixobj obj/VerifyReadyDlg.wixobj obj/WaitForCostingDlg.wixobj obj/WelcomeDlg.wixobj
 
-compile_installer()
-{
-  if [ "$2" = "ja-jp" ]
-  then
-    langid=1041
-    name=$1.$2
-  elif [ "$2" = "zh-cn" ]
-  then
-    langid=2052
-    name=$1.$2
-  else
-    langid=1033
-    name=$1
-  fi
-   
-  cd ${WIX}
-  mkdir -p obj${name}
-  Branding=${BRANDING_BRAND_CONSOLE} WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
-   
-  mkdir -p out${name}
-  
-  if [ "${name}" = "VNCControl" ]
-  then
-   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
-  else
-   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
-  fi
-}
+#create mui wxs file
+cd ${WIX} && patch --binary --output XenCenter.l10n.wxs XenCenter.wxs XenCenter.l10n.diff
 
-sign_msi()
-{
-  cd ${WIX}/out$1 && chmod a+rw $1.msi && ${REPO}/sign.bat $1.msi
-}
-
+#version installers
 version_installer()
 {
   sed -e "s/${WIX_INSTALLER_DEFAULT_GUID}/${PRODUCT_GUID}/g" \
@@ -205,70 +152,32 @@ version_installer()
       $1 > $1.tmp
   mv -f $1.tmp $1
 }
-
-#create mui wxs file
-cd ${WIX} && patch --binary --output XenCenter.l10n.wxs XenCenter.wxs XenCenter.l10n.diff
-
+version_vnccontrol_installer()
+{
+  sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
+      -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
+      $1 > $1.tmp
+  mv -f $1.tmp $1
+}
 version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
+version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
-#create just english msi
-if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
-then 
-  mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
-  mv XenCenter.l10n.wxs ${BRANDING_BRAND_CONSOLE}.l10n.wxs
-fi
-
-compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}"
-
-#then create l10n msi containing all resources
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n"
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.ja-jp"
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.zh-cn"
-
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
-   ${WIX}
- 
-cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
-cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
-
-#create localised mst files and then embed them into l10n msi
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi ja-jp.mst
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi zh-cn.mst
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi zh-tw.mst
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi ja-jp.mst 1041
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-cn.mst 2052
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1028
-#sign again the combined msi because it seems the embedding breaks the signature
-cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
-
-#create bundle exe installers - msi installers embedded
+#copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
 cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${DOTNETINST}
-cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${DOTNETINST}
-
 cp "$(which dotNetInstaller.exe)" ${DOTNETINST}
-cd ${DOTNETINST} && InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
-cd ${DOTNETINST} && InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
+cp "$(which InstallerLinker.exe)" ${DOTNETINST}
 
-sign_files()
-{
-	for file in $1
-	do
-		chmod a+rw ${file} && ${REPO}/sign.bat ${file}
-	done
-}
-sign_files "${BRANDING_BRAND_CONSOLE}Setup.exe ${BRANDING_BRAND_CONSOLE}Setup.l10n.exe"
+# Collect the unsigned files, if the COLLECT_UNSIGNED_FILES is defined 
+# (the variable can be set from the jenkins ui by putting "export COLLECT_UNSIGNED_FILES=1" above the call for build script)
+if [ -n "${COLLECT_UNSIGNED_FILES+x}" ]; then
+	echo "INFO: Collect unsigned files..."
+	${REPO}/mk/archive-unsigned.sh
+fi
 
-#create VNCCntrol installer
-sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
-    -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
-    ${WIX}/vnccontrol.wxs > ${WIX}/vnccontrol.wxs.tmp
-mv -f ${WIX}/vnccontrol.wxs.tmp ${WIX}/vnccontrol.wxs
-compile_installer "VNCControl" "en-us" && sign_msi "VNCControl"
+#build and sign the installers
+. ${REPO}/mk/build-installers.sh
 
 #build the tests
 echo "INFO: Build the tests..."
