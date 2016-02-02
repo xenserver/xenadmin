@@ -192,12 +192,14 @@ namespace XenAdmin.Dialogs.Wlb
             // pictureBox3
             // 
             resources.ApplyResources(this.pictureBox3, "pictureBox3");
+            this.pictureBox3.Image = global::XenAdmin.Properties.Resources.WLB;
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Image = global::XenAdmin.Properties.Resources.XS;
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
@@ -226,12 +228,14 @@ namespace XenAdmin.Dialogs.Wlb
             // pictureBox4
             // 
             resources.ApplyResources(this.pictureBox4, "pictureBox4");
+            this.pictureBox4.Image = global::XenAdmin.Properties.Resources.WLB;
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox5
             // 
             resources.ApplyResources(this.pictureBox5, "pictureBox5");
+            this.pictureBox5.Image = global::XenAdmin.Properties.Resources.XS;
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.TabStop = false;
             // 
