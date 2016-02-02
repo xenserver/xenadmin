@@ -147,8 +147,8 @@
                                 </Extension>
                             </ProgId>
                         </Component>
+                        <?if "$(env.Branding)"="XenCenter"?>
                         <Component Id="xsupdatesfiles" Guid="@BRANDING_XSUPDATE_FILE_GUID@">
-                            <Condition>"$(env.Branding)"="XenCenter"</Condition>
                             <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
                             <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
                             <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
@@ -157,20 +157,20 @@
                             <File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
                             <File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
                         </Component>
-                        <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
-                            <Condition><![CDATA["$(env.Branding)"<>"XenCenter"]]></Condition>
-                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
-                        </Component>
                         <!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
                             <Component Id="TestResources" Guid="@BRANDING_TEST_RESOURCES_GUID@">
-                                <Condition>"$(env.Branding)"="XenCenter"</Condition>
                                 <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
                                 <File Id="interes1.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
                                 <File Id="interes2.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
                                 <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
                             </Component>
                         </Directory>
+                        <?else?>
+                        <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
+                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
+                        </Component>
+                        <?endif?>
                         <Directory Id="Help" Name="Help">
                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
                                 <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
@@ -201,9 +201,9 @@
                             </Component>
                         </Directory>
                     </Directory>
+                    <?if "$(env.Branding)"="XenCenter"?>
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
 							<Component Id="XenServerHealthCheck" Guid="{@BRANDING_HEALTH_CHECK_GUID@}">
-                                <Condition>"$(env.Branding)"="XenCenter"</Condition>
 								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
 								<File Id="HealthCheck_CommandLib.dll" Name="CommandLib.dll" Source="..\XenServerHealthCheck\bin\Release\CommandLib.dll" />
 								<File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="..\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
@@ -235,10 +235,19 @@
 								/>
 							</Component>
 						</Directory>
+                    <?endif?>
 				</Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder">
                 <Directory Id="ApplicationProgramsFolder" Name="@BRANDING_COMPANY_NAME_SHORT@" />
+            </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop">
+                <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
+                    <Condition>INSTALLSHORTCUT</Condition>
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="@BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR"/>
+                    <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+                    <RegistryValue Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                </Component>
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
@@ -253,7 +262,7 @@
             <Component Id="ApplicationShortcut" Guid="@BRANDING_APPLICAION_SHOTCUT_GUID@">
                 <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 	
@@ -261,20 +270,28 @@
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
+            <?if "$(env.Branding)"="XenCenter"?>
             <ComponentRef Id="xsupdatesfiles" />
-            <ComponentRef Id="readmefile" />
             <ComponentRef Id="TestResources" />
+            <?else?>
+            <ComponentRef Id="readmefile" />
+            <?endif?>
             <ComponentRef Id="SchemasFilesComponent" />
             <ComponentRef Id="ExternalToolsComponent" />
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
+            <ComponentRef Id="ProgramFilesShortcut" />
         </Feature>
-		
+
+        <?if "$(env.Branding)"="XenCenter"?>		
         <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
              <ComponentRef Id="XenServerHealthCheck" /> 
         </Feature>
-		
+
         <UIRef Id="WixUI_FeatureTree" />
+        <?else ?>
+        <UIRef Id="My_WixUI_InstallDir" />
+        <?endif?>
         <UIRef Id="WixUI_ErrorProgressText" />
         <Property Id="Install_All" Value="0" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
@@ -286,6 +303,7 @@
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
         </Property>
 		<Property Id="REINSTALLMODE" Value="amus" />
+        <Property Id="INSTALLSHORTCUT" />
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
         <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
         <InstallExecuteSequence>
