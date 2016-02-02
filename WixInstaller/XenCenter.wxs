@@ -246,7 +246,7 @@
                     <Condition>INSTALLSHORTCUT</Condition>
                     <Shortcut Id="ApplicationDesktopShortcut" Name="@BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR"/>
                     <RemoveFolder Id="DesktopFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                    <RegistryValue Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
             </Directory>
         </Directory>
@@ -262,7 +262,7 @@
             <Component Id="ApplicationShortcut" Guid="@BRANDING_APPLICAION_SHOTCUT_GUID@">
                 <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 	
