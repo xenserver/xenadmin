@@ -48,8 +48,11 @@ namespace XenAdmin.Actions
         private const string PatchesNode = "patches";
         private const string ConflictingPatchesNode = "conflictingpatches";
         private const string RequiredPatchesNode = "requiredpatches";
+        private const string ContainedPatchesNode = "containedpatches";
         private const string ConflictingPatchNode = "conflictingpatch";
         private const string RequiredPatchNode = "requiredpatch";
+        private const string ContainedPatchNode = "containedpatch";
+
 
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
         public List<XenServerVersion> XenServerVersions { get; private set; }
@@ -174,9 +177,10 @@ namespace XenAdmin.Actions
 
                     var conflictingPatches = GetPatchDependencies(version, ConflictingPatchesNode, ConflictingPatchNode);
                     var requiredPatches = GetPatchDependencies(version, RequiredPatchesNode, RequiredPatchNode);
+                    var containedPatches = GetPatchDependencies(version, ContainedPatchesNode, ContainedPatchNode);
 
 					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
-                                                            patchUrl, timestamp, priority, installationSize, conflictingPatches, requiredPatches));
+                                                            patchUrl, timestamp, priority, installationSize, conflictingPatches, requiredPatches, containedPatches));
                 }
             }
         }
@@ -200,6 +204,7 @@ namespace XenAdmin.Actions
             var dependencies = new List<string>();
 
             dependencies.AddRange(from XmlNode node in dependenciesNode.ChildNodes
+                                  where node.Attributes != null
                                   from XmlAttribute attrib in node.Attributes
                                   where node.Name == dependencyNodeName && node.Attributes != null && attrib.Name == "uuid"
                                   select attrib.Value);

@@ -37,6 +37,7 @@ using XenAdmin.Actions;
 using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Core
@@ -403,6 +404,173 @@ namespace XenAdmin.Core
             }
 
             return alerts;
+        }
+        
+        public static UpgradeSequences GetUpgradeSequence(IXenConnection conn)
+        {
+            var uSeq = new UpgradeSequences();
+
+            Host master = Helpers.GetMaster(conn);
+            List<Host> hosts = conn.Cache.Hosts.ToList();
+            if (master == null)
+                return null;
+
+            var serverVersions = XenServerVersions.FindAll(version =>
+            {
+                if (version.BuildNumber != string.Empty)
+                    return (master.BuildNumberRaw == version.BuildNumber);
+
+                return Helpers.HostProductVersionWithOEM(master) == version.VersionAndOEM
+                       || (version.Oem != null && Helpers.OEMName(master).StartsWith(version.Oem)
+                           && Helpers.HostProductVersion(master) == version.Version.ToString());
+            });
+
+            if (serverVersions.Count != 1)
+                return null;
+
+            List<XenServerPatch> allPatches = new List<XenServerPatch>();
+
+            if (serverVersions.Count > 0)
+            {
+                // STEP 1 - Take all the hotfixes for this version
+                allPatches.AddRange(serverVersions[0].Patches);
+
+                // STEP 2 - Find the latest service pack
+
+                XenServerPatch latestSP = allPatches.FindLast(sp => sp.IsServicePack); //FindLast will be replaced once it is flagged in updates.xml
+
+                // STEP 3 - Remove conflicteds
+
+                var allNonConflictedPatches = RemoveConflictedPatches(allPatches, latestSP);
+
+                // STEP 4 - Remove anything from S0 that is contained in anything else in S0
+
+                var latestPatches = RemoveContainedPatches(allNonConflictedPatches);
+
+                // STEP 5 - Create ordered list L0 from S0 (order by hotfix number, lowest first). Move SPL to the front.
+
+                latestPatches.OrderBy(p => p.TimeStamp);
+                latestPatches.Reverse();
+                
+                // at this point we have the latestPatches list that contains patches that are needed for a host to be up-to-date
+
+                // STEP 6 - Create unique Upgrade Schedules for each host
+                //          Iterate through latestPatches once; in each iteration, move the first item from L0 that has its dependencies met to the end of the Update Schedule (US)
+
+                foreach (Host h in hosts)
+                {
+                    uSeq.Add(h, new List<XenServerPatch>());
+                    var appliedPatches = h.AppliedPatches();
+
+                    var neededPatches = new List<XenServerPatch>(latestPatches);
+
+                        for (int ii = 0; ii < neededPatches.Count; ii++)
+                        {
+                            var p = neededPatches[ii];
+
+                            //checking requirements
+                            if (// no requirements
+                                p.RequiredPatches == null 
+                                || p.RequiredPatches.Count == 0 
+                                // all requirements met?
+                                || p.RequiredPatches.All(
+                                    rp =>
+                                        //sequence already has the required-patch
+                                        (uSeq[h].Count != 0 && uSeq[h].Any(useqp => useqp.Uuid == rp))
+                                        
+                                        //the required-patch has already been applied
+                                        || (appliedPatches.Count != 0 && appliedPatches.Any(ap => ap.uuid == rp))
+
+                                        //a patch that contains the required-patch is already in the update sequence
+                                        || uSeq[h].Any(useqp => useqp.ContainedPatches != null && useqp.ContainedPatches.Any(useqpc => useqpc == rp))
+
+                                        //a patch that contains the required-patch has already been applied
+                                        || appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == rp )))
+                                    )
+                                )
+                            {
+                                // this patch can be added to the upgrade sequence now
+
+                                // however it will only be added if nothing is already installed on the host that contains this patch
+                                if (!appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == p.Uuid))))
+                                {
+                                    uSeq[h].Add(p);
+                                }
+                                
+                                // by now the patch has either been added to the upgrade sequence or something already contains it among the installed patches
+                                neededPatches.RemoveAt(ii);
+
+                                //resetting position - the loop will start on 0. item
+                                ii = -1;
+                            }
+                        }
+                }
+            }
+
+            return uSeq;
+        }
+
+        private static List<XenServerPatch> RemoveConflictedPatches(List<XenServerPatch> sps, XenServerPatch firstToCheck)
+        {
+            if (sps == null || sps.Count == 0)
+                return sps;
+
+            var startWith = firstToCheck ?? sps[0];
+            Stack<XenServerPatch> needToBeSeen = new Stack<XenServerPatch>();
+            List<XenServerPatch> toBeRemoved = new List<XenServerPatch>();
+
+            sps = new List<XenServerPatch>(sps.ToList());
+            sps.Reverse();
+            
+            needToBeSeen.Push(startWith);
+            sps.Where(sp => sp != firstToCheck).ToList().ForEach(sp => needToBeSeen.Push(sp));
+
+            var conflicted = new List<XenServerPatch>();
+
+            while (needToBeSeen.Count != 0)
+            {
+                var next = needToBeSeen.Pop();
+
+                conflicted = sps.Where(sp => sp.ConflictingPatches != null && sp.ConflictingPatches.Any(puuid => puuid == next.Uuid && !toBeRemoved.Contains(sp))).ToList();
+                
+                toBeRemoved.AddRange(conflicted);
+                
+                conflicted.ForEach(p => needToBeSeen.Push(p));
+            }
+
+            sps.RemoveAll(p => toBeRemoved.Any(r => r.Uuid == p.Uuid));
+
+            sps.Reverse();
+
+            return sps;
+        }
+
+        private static List<XenServerPatch> RemoveContainedPatches(List<XenServerPatch> sps)
+        {
+            Stack<XenServerPatch> needToBeSeen = new Stack<XenServerPatch>();
+            List<XenServerPatch> toBeRemoved = new List<XenServerPatch>();
+
+            sps = new List<XenServerPatch>(sps.ToList());
+            sps.Reverse();
+
+            sps.ForEach(sp => needToBeSeen.Push(sp));
+
+            while (needToBeSeen.Count != 0)
+            {
+                var next = needToBeSeen.Pop();
+
+                // if contained in anything else
+                if (sps.Except(toBeRemoved).Any(p => p.Uuid != next.Uuid && p.ContainedPatches != null && p.ContainedPatches.Any(puuid => puuid == next.Uuid)))
+                    toBeRemoved.Add(next);
+            }
+
+            sps.RemoveAll(p => toBeRemoved.Any(r => r.Uuid == p.Uuid));
+            
+            return sps;
+        }
+
+        public class UpgradeSequences : Dictionary<Host, List<XenServerPatch>>
+        {
         }
 
         public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)

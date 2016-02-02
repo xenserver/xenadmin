@@ -49,6 +49,7 @@ namespace XenAdmin.Core
 
         public readonly List<string> ConflictingPatches;
         public readonly List<string> RequiredPatches;
+        public readonly List<string> ContainedPatches;
 
         private const int DEFAULT_PRIORITY = 2;
 
@@ -72,11 +73,12 @@ namespace XenAdmin.Core
         }
 
         public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
-            string patchUrl, string timestamp, string priority, string installationSize, List<string> conflictingPatches, List<string> requiredPatches)
+            string patchUrl, string timestamp, string priority, string installationSize, List<string> conflictingPatches, List<string> requiredPatches, List<string> containedPatches)
             : this(uuid, name, description, guidance, version, url, patchUrl, timestamp, priority, installationSize)
         {
             ConflictingPatches = conflictingPatches;
             RequiredPatches = requiredPatches;
+            ContainedPatches = containedPatches;
         }
 
         public string Uuid
@@ -87,6 +89,15 @@ namespace XenAdmin.Core
         public bool Equals(XenServerPatch other)
         {
             return Uuid == other.Uuid;
+        }
+
+        public bool IsServicePack
+        {
+            get
+            {
+                //temporary implementation
+                return Description.Contains("(SP");
+            }
         }
     }
 }
