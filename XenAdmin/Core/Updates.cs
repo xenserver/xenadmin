@@ -459,55 +459,62 @@ namespace XenAdmin.Core
 
                 foreach (Host h in hosts)
                 {
-                    uSeq.Add(h, new List<XenServerPatch>());
-                    var appliedPatches = h.AppliedPatches();
-
-                    var neededPatches = new List<XenServerPatch>(latestPatches);
-
-                        for (int ii = 0; ii < neededPatches.Count; ii++)
-                        {
-                            var p = neededPatches[ii];
-
-                            //checking requirements
-                            if (// no requirements
-                                p.RequiredPatches == null 
-                                || p.RequiredPatches.Count == 0 
-                                // all requirements met?
-                                || p.RequiredPatches.All(
-                                    rp =>
-                                        //sequence already has the required-patch
-                                        (uSeq[h].Count != 0 && uSeq[h].Any(useqp => useqp.Uuid == rp))
-                                        
-                                        //the required-patch has already been applied
-                                        || (appliedPatches.Count != 0 && appliedPatches.Any(ap => ap.uuid == rp))
-
-                                        //a patch that contains the required-patch is already in the update sequence
-                                        || uSeq[h].Any(useqp => useqp.ContainedPatches != null && useqp.ContainedPatches.Any(useqpc => useqpc == rp))
-
-                                        //a patch that contains the required-patch has already been applied
-                                        || appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == rp )))
-                                    )
-                                )
-                            {
-                                // this patch can be added to the upgrade sequence now
-
-                                // however it will only be added if nothing is already installed on the host that contains this patch
-                                if (!appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == p.Uuid))))
-                                {
-                                    uSeq[h].Add(p);
-                                }
-                                
-                                // by now the patch has either been added to the upgrade sequence or something already contains it among the installed patches
-                                neededPatches.RemoveAt(ii);
-
-                                //resetting position - the loop will start on 0. item
-                                ii = -1;
-                            }
-                        }
+                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, latestPatches);
                 }
             }
 
             return uSeq;
+        }
+
+        private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> allPatches, List<XenServerPatch> latestPatches)
+        {
+            var sequence = new List<XenServerPatch>();
+            var appliedPatches = h.AppliedPatches();
+
+            var neededPatches = new List<XenServerPatch>(latestPatches);
+
+            for (int ii = 0; ii < neededPatches.Count; ii++)
+            {
+                var p = neededPatches[ii];
+
+                //checking requirements
+                if (// no requirements
+                    p.RequiredPatches == null
+                    || p.RequiredPatches.Count == 0
+                    // all requirements met?
+                    || p.RequiredPatches.All(
+                        rp =>
+                            //sequence already has the required-patch
+                            (sequence.Count != 0 && sequence.Any(useqp => useqp.Uuid == rp))
+
+                            //the required-patch has already been applied
+                            || (appliedPatches.Count != 0 && appliedPatches.Any(ap => ap.uuid == rp))
+
+                            //a patch that contains the required-patch is already in the update sequence
+                            || sequence.Any(useqp => useqp.ContainedPatches != null && useqp.ContainedPatches.Any(useqpc => useqpc == rp))
+
+                            //a patch that contains the required-patch has already been applied
+                            || appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == rp)))
+                        )
+                    )
+                {
+                    // this patch can be added to the upgrade sequence now
+
+                    // however it will only be added if nothing is already installed on the host that contains this patch
+                    if (!appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == p.Uuid))))
+                    {
+                        sequence.Add(p);
+                    }
+
+                    // by now the patch has either been added to the upgrade sequence or something already contains it among the installed patches
+                    neededPatches.RemoveAt(ii);
+
+                    //resetting position - the loop will start on 0. item
+                    ii = -1;
+                }
+            }
+
+            return sequence;
         }
 
         private static List<XenServerPatch> RemoveConflictedPatches(List<XenServerPatch> sps, XenServerPatch firstToCheck)
