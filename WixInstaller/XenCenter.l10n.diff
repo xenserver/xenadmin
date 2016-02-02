@@ -140,11 +140,11 @@
                          </Directory>
                          <Directory Id="Help" Name="Help">
                              <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
--                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
+-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.chm" />
 -                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
-+                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.ja.chm" />  
++                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.ja.chm" />  
 +                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />  
-+                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.zh-CN.chm" />  
++                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.zh-CN.chm" />  
 +                                <File Id="WLBScCHM" Source="..\XenAdmin\bin\Release\Help\WLB.zh-CN.chm" />  
 +                            </Component>
 +                        </Directory>
