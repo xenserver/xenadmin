@@ -450,7 +450,6 @@ namespace XenAdmin.Core
                 // STEP 5 - Create ordered list L0 from S0 (order by hotfix number, lowest first). Move SPL to the front.
 
                 latestPatches.OrderBy(p => p.TimeStamp);
-                latestPatches.Reverse();
                 
                 // at this point we have the latestPatches list that contains patches that are needed for a host to be up-to-date
 
@@ -527,10 +526,9 @@ namespace XenAdmin.Core
             List<XenServerPatch> toBeRemoved = new List<XenServerPatch>();
 
             sps = new List<XenServerPatch>(sps.ToList());
-            sps.Reverse();
-            
-            needToBeSeen.Push(startWith);
+          
             sps.Where(sp => sp != firstToCheck).ToList().ForEach(sp => needToBeSeen.Push(sp));
+            needToBeSeen.Push(startWith);
 
             var conflicted = new List<XenServerPatch>();
 
@@ -547,8 +545,6 @@ namespace XenAdmin.Core
 
             sps.RemoveAll(p => toBeRemoved.Any(r => r.Uuid == p.Uuid));
 
-            sps.Reverse();
-
             return sps;
         }
 
@@ -558,7 +554,6 @@ namespace XenAdmin.Core
             List<XenServerPatch> toBeRemoved = new List<XenServerPatch>();
 
             sps = new List<XenServerPatch>(sps.ToList());
-            sps.Reverse();
 
             sps.ForEach(sp => needToBeSeen.Push(sp));
 
