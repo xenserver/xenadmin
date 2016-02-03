@@ -395,7 +395,31 @@ namespace XenAdmin.TabPages
 
             //keeping it separate
             if (xenObject is DockerContainer)
+            {
                 buttonProperties.Enabled = false;
+
+                DockerContainer container = (DockerContainer)xenObject;
+                buttonViewConsole.Visible = true;
+                buttonViewLog.Visible = true;
+
+                // Grey out the buttons if the Container management VM is Windows.
+                // For Linux VM, enable the buttons only when the docker is running.
+                if (container.Parent.IsWindows)
+                {
+                    buttonViewConsole.Enabled = false;
+                    buttonViewLog.Enabled = false;
+                }
+                else
+                {
+                    buttonViewConsole.Enabled = buttonViewLog.Enabled = container.power_state == vm_power_state.Running;
+                }
+            }
+            else
+            {
+                buttonViewConsole.Visible = false;
+                buttonViewLog.Visible = false;
+            }
+
         }
 
         public void BuildList()
@@ -1765,6 +1789,16 @@ namespace XenAdmin.TabPages
             bool anyCollapsed = sectionsVisible.Any(s => !s.IsExpanded);
             linkLabelExpand.Enabled = anyCollapsed;
             linkLabelCollapse.Enabled = anyExpanded;
+        }
+
+        private void buttonViewConsole_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonViewLog_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

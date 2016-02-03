@@ -35,6 +35,9 @@ namespace XenAdmin.TabPages
             this.buttonProperties = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.buttonPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonViewConsole = new System.Windows.Forms.Button();
+            this.buttonViewLog = new System.Windows.Forms.Button();
             this.linkLabelExpand = new System.Windows.Forms.LinkLabel();
             this.linkLabelCollapse = new System.Windows.Forms.LinkLabel();
             this.panel2 = new XenAdmin.Controls.PanelNoFocusScroll();
@@ -79,6 +82,7 @@ namespace XenAdmin.TabPages
             this.pageContainerPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.buttonPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelReadCaching.SuspendLayout();
             this.panelDockerInfo.SuspendLayout();
@@ -122,11 +126,33 @@ namespace XenAdmin.TabPages
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.buttonProperties);
+            this.panel3.Controls.Add(this.buttonPanel);
             this.panel3.Controls.Add(this.linkLabelExpand);
             this.panel3.Controls.Add(this.linkLabelCollapse);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
+            // 
+            // buttonPanel
+            // 
+            this.buttonPanel.Controls.Add(this.buttonProperties);
+            this.buttonPanel.Controls.Add(this.buttonViewConsole);
+            this.buttonPanel.Controls.Add(this.buttonViewLog);
+            resources.ApplyResources(this.buttonPanel, "buttonPanel");
+            this.buttonPanel.Name = "buttonPanel";
+            // 
+            // buttonViewConsole
+            // 
+            resources.ApplyResources(this.buttonViewConsole, "buttonViewConsole");
+            this.buttonViewConsole.Name = "buttonViewConsole";
+            this.buttonViewConsole.UseVisualStyleBackColor = true;
+            this.buttonViewConsole.Click += new System.EventHandler(this.buttonViewConsole_Click);
+            // 
+            // buttonViewLog
+            // 
+            resources.ApplyResources(this.buttonViewLog, "buttonViewLog");
+            this.buttonViewLog.Name = "buttonViewLog";
+            this.buttonViewLog.UseVisualStyleBackColor = true;
+            this.buttonViewLog.Click += new System.EventHandler(this.buttonViewLog_Click);
             // 
             // linkLabelExpand
             // 
@@ -438,6 +464,7 @@ namespace XenAdmin.TabPages
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.buttonPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panelReadCaching.ResumeLayout(false);
@@ -510,5 +537,8 @@ namespace XenAdmin.TabPages
         private Controls.PDSection pdSectionDockerInfo;
         private System.Windows.Forms.Panel panelReadCaching;
         private Controls.PDSection pdSectionReadCaching;
+        private System.Windows.Forms.Button buttonViewConsole;
+        private System.Windows.Forms.Button buttonViewLog;
+        private System.Windows.Forms.FlowLayoutPanel buttonPanel;
     }
 }
