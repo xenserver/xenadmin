@@ -443,18 +443,17 @@ namespace XenAdmin.Core
 
                 var allNonConflictedPatches = RemoveConflictedPatches(allPatches, latestSP);
 
-                // STEP 4 - Remove anything from S0 that is contained in anything else in S0
+                // STEP 4 - Remove any patch that is contained in anything else
 
                 var latestPatches = RemoveContainedPatches(allNonConflictedPatches);
 
-                // STEP 5 - Create ordered list L0 from S0 (order by hotfix number, lowest first). Move SPL to the front.
+                // STEP 5 - Create ordered list
 
                 latestPatches.OrderBy(p => p.TimeStamp);
                 
                 // at this point we have the latestPatches list that contains patches that are needed for a host to be up-to-date
 
                 // STEP 6 - Create unique Upgrade Schedules for each host
-                //          Iterate through latestPatches once; in each iteration, move the first item from L0 that has its dependencies met to the end of the Update Schedule (US)
 
                 foreach (Host h in hosts)
                 {
@@ -472,6 +471,7 @@ namespace XenAdmin.Core
 
             var neededPatches = new List<XenServerPatch>(latestPatches);
 
+            //Iterate through latestPatches once; in each iteration, move the first item from L0 that has its dependencies met to the end of the Update Schedule (US)
             for (int ii = 0; ii < neededPatches.Count; ii++)
             {
                 var p = neededPatches[ii];
