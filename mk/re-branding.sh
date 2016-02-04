@@ -32,31 +32,28 @@ source ${REPO}/Branding/branding.sh
 version_cpp()
 {
   num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}" | sed 's/\./, /g')
-  sed -e "s/1,0,0,1/${num}/g" \
+  sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
       -e "s/@BUILD_NUMBER@/${get_BUILD_NUMBER}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
+      $1 
 }
 
 version_csharp_git()
 {
-  sed -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
+  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
+      $1 
 }
 
 version_csharp()
 {
-  sed -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
+  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
       -e "s/0000/${BRANDING_CSET_NUMBER}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
+      $1 
 }
 
 rebranding_global()
 {
-    sed -e "s#@BRANDING_COMPANY_NAME_LEGAL@#${BRANDING_COMPANY_NAME_LEGAL}#g" \
+    sed -b -i -e "s#@BRANDING_COMPANY_NAME_LEGAL@#${BRANDING_COMPANY_NAME_LEGAL}#g" \
         -e "s#@BRANDING_COMPANY_NAME_SHORT@#${BRANDING_COMPANY_NAME_SHORT}#g" \
         -e "s#\"@BRANDING_COPYRIGHT@\"#${BRANDING_COPYRIGHT}#g" \
         -e "s#\"@BRANDING_COPYRIGHT_2@\"#${BRANDING_COPYRIGHT_2}#g" \
@@ -76,13 +73,12 @@ rebranding_global()
         -e "s#@BRANDING_XC_PRODUCT_6_5_VERSION@#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
         -e "s#@BRANDING_XENSERVER_UPDATE_URL@#${BRANDING_XENSERVER_UPDATE_URL}#g" \
         -e "s#@BRANDING_HIDDEN_FEATURE@#${BRANDING_HIDDEN_FEATURE}#g" \
-        $1 > $1.tmp
-    mv -f $1.tmp $1    
+        $1    
 }
 
 rebranding_GUID()
 {
-  sed -e "s#@BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID@#${BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID}#g" \
+  sed -b -i -e "s#@BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID@#${BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID}#g" \
       -e "s#@BRANDING_VNC_MAIN_CONTROL_GUID@#${BRANDING_VNC_MAIN_CONTROL_GUID}#g" \
       -e "s#@BRANDING_XENCENTER_UPGRADE_CODE_GUID@#${BRANDING_XENCENTER_UPGRADE_CODE_GUID}#g" \
       -e "s#@BRANDING_JA_RESOURCES_GUID@#${BRANDING_JA_RESOURCES_GUID}#g" \
@@ -97,8 +93,7 @@ rebranding_GUID()
       -e "s#@BRANDING_README_FILE_GUID@#${BRANDING_README_FILE_GUID}#g" \
       -e "s#@BRANDING_XSUPDATE_FILE_GUID@#${BRANDING_XSUPDATE_FILE_GUID}#g" \
       -e "s#@BRANDING_HEALTH_CHECK_GUID@#${BRANDING_HEALTH_CHECK_GUID}#g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1   
+      $1   
 }
 
 version_brand_cpp()
@@ -200,11 +195,10 @@ rebranding_CHM()
 {
   for files in $1
   do
-    sed -e "s#XenCenter.chm#${BRANDING_BRAND_CONSOLE}.chm#g" \
+    sed -b -i -e "s#XenCenter.chm#${BRANDING_BRAND_CONSOLE}.chm#g" \
         -e "s#XenCenter.ja.chm#${BRANDING_BRAND_CONSOLE}.ja.chm#g" \
         -e "s#XenCenter.zh-CN.chm#${BRANDING_BRAND_CONSOLE}.zh-CN.chm#g" \
-      $files > $files.tmp
-    mv -f $files.tmp $files   
+      $files  
   done  
 }
 
