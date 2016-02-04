@@ -34,11 +34,6 @@ set -eu
 
 ZIP="zip -q"
 
-#copy all dotNetInstaller files
-DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
-DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
-cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
-
 #archive unsigned artifacts 
 mkdir_clean ${OUTPUT_DIR}/XenAdminUnsigned
 cp -R ${REPO}/* ${OUTPUT_DIR}/XenAdminUnsigned
