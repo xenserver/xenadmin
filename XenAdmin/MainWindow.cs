@@ -614,7 +614,7 @@ namespace XenAdmin
         private void Connection_ConnectionStateChangedOnStartup(object sender, EventArgs e)
         {
             IXenConnection c = (IXenConnection)sender;
-            c.CachePopulated -= Connection_ConnectionStateChangedOnStartup;
+            c.ConnectionStateChanged -= Connection_ConnectionStateChangedOnStartup;
 
             Program.Invoke(Program.MainWindow, delegate
             {
