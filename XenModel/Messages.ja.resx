@@ -8423,7 +8423,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>既存のアップデートを選択するか、新たにアップロードします</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>@BRANDING_SERVER@ アップデート|*.@BRANDING_UPDATE@;*.xsoem</value>
+    <value>@BRANDING_SERVER@ アップデート|*.{0};*.xsoem</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage が必要です</value>
@@ -10618,7 +10618,7 @@ VM が再起動したら、[@BRANDING_PRODUCT_BRAND@ Tools のインストール
     <value>{0}: VM '{1}' はローカル ストレージを使用しているため移行できません。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.xsoem および *.@BRANDING_UPDATE@</value>
+    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.xsoem および *.{0}</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>要求された VM を一時停止するために必要な空き容量がこのストレージ リポジトリにありません。</value>

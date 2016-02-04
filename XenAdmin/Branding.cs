@@ -46,8 +46,16 @@ namespace XenAdmin
         public const string PRODUCT_BRAND = "@BRANDING_PRODUCT_BRAND@";
         public const string COMPANY_NAME_SHORT = "@BRANDING_COMPANY_NAME_SHORT@";
         public const string SEARCH = "@BRANDING_SEARCH@";
-        public const string UPDATE = "." + "@BRANDING_UPDATE@";
+        public const string UPDATE = "@BRANDING_UPDATE@";
         public const string CHECK_FOR_UPDATES_URL = "@BRANDING_XENSERVER_UPDATE_URL@";
+
+        public static string Update
+        {
+            get
+            {
+                return UPDATE != "@BRANDING_UPDATE@" ? UPDATE : InvisibleMessages.XEN_UPDATE;
+            }
+        }
 
         public static string CheckForUpdatesUrl
         {
