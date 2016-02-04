@@ -49,6 +49,14 @@ namespace XenAdmin
         public const string UPDATE = "@BRANDING_UPDATE@";
         public const string CHECK_FOR_UPDATES_URL = "@BRANDING_XENSERVER_UPDATE_URL@";
 
+        public static string Search
+        {
+            get
+            {
+                return SEARCH != "@BRANDING_SEARCH@" ? SEARCH : InvisibleMessages.XEN_SEARCH;
+            }
+        }
+        
         public static string Update
         {
             get

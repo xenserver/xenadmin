@@ -10967,7 +10967,7 @@ Refer to the "@BRANDING_PRODUCT_BRAND@ Administrator's Guide" for instructions o
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ was unable to import a saved search from file '{0}'.
 
-Verify that the file is a valid @BRANDING_SEARCH@ export.</value>
+Verify that the file is a valid {1} export.</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
@@ -12796,7 +12796,7 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>Newer @BRANDING_BRAND_CONSOLE@ Available</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
-    <value>Saved Searches</value>
+    <value>Saved Searches (*.{0})|*.{0}</value>
   </data>
   <data name="XENSERVER" xml:space="preserve">
     <value>@BRANDING_SERVER@</value>

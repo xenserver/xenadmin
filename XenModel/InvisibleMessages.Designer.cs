@@ -403,7 +403,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SEARCH@.
+        ///   Looks up a localized string similar to xensearch.
         /// </summary>
         public static string XEN_SEARCH {
             get {

@@ -290,8 +290,7 @@ namespace XenAdmin.TabPages
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
                 dialog.AddExtension = true;
-                dialog.Filter = string.Format("{0} (*." + Branding.SEARCH + ")|*." + Branding.SEARCH,
-                    Messages.XENSEARCH_SAVED_SEARCH);
+                dialog.Filter = string.Format(Messages.XENSEARCH_SAVED_SEARCH, Branding.Search);
                 dialog.FilterIndex = 0;
                 dialog.RestoreDirectory = true;
                 dialog.DefaultExt = Branding.SEARCH;

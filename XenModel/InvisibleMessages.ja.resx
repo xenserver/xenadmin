@@ -175,7 +175,7 @@
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
   </data>
   <data name="XEN_SEARCH" xml:space="preserve">
-    <value>@BRANDING_SEARCH@</value>
+    <value>xensearch</value>
   </data>
   <data name="SUPPORT_URL" xml:space="preserve">
     <value>http://support.citrix.com/</value>
