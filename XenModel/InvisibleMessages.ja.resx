@@ -175,7 +175,7 @@
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
   </data>
   <data name="XEN_SEARCH" xml:space="preserve">
-    <value>@BRANDING_SEARCH@</value>
+    <value>xensearch</value>
   </data>
   <data name="SUPPORT_URL" xml:space="preserve">
     <value>http://support.citrix.com/</value>
@@ -235,9 +235,9 @@
     <value>http://www.citrix.com/TryXenDesktop</value>
   </data>
   <data name="XEN_UPDATE" xml:space="preserve">
-    <value>@BRANDING_UPDATE@</value>
+    <value>xsupdate</value>
   </data>
   <data name="XENSERVER_UPDATE_URL" xml:space="preserve">
-    <value>@BRANDING_XENSERVER_UPDATE_URL@</value>
+    <value>http://updates.xensource.com/XenServer/updates.xml</value>
   </data>
 </root>

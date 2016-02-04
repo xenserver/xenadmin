@@ -196,7 +196,8 @@ namespace XenAdmin.Core
                 DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
-                    Properties.Settings.Default.AllowPatchesUpdates || force);
+                    Properties.Settings.Default.AllowPatchesUpdates || force,
+                    Branding.CheckForUpdatesUrl);
                 {
                     action.Completed += actionCompleted;
                 }
