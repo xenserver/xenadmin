@@ -166,8 +166,9 @@ version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 #copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
 cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
-cp "$(which dotNetInstaller.exe)" ${DOTNETINST}
-cp "$(which InstallerLinker.exe)" ${DOTNETINST}
+DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
+DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
+cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
 
 # Collect the unsigned files, if the COLLECT_UNSIGNED_FILES is defined 
 # (the variable can be set from the jenkins ui by putting "export COLLECT_UNSIGNED_FILES=1" above the call for build script)
