@@ -98,9 +98,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 }
                 else
                 {
-                    if (BackupTypeVMSS == vmss_backup_type.snapshot)
+                    if (BackupTypeVMSS == vmss_schedule_snapshot_type.snapshot)
                         return Messages.DISKS_ONLY;
-                    else if (BackupTypeVMSS == vmss_backup_type.snapshot_with_quiesce)
+                    else if (BackupTypeVMSS == vmss_schedule_snapshot_type.snapshot_with_quiesce)
                         return Messages.QUIESCED_SNAPSHOTS;
                     else
                         return Messages.DISKS_AND_MEMORY;
@@ -202,19 +202,19 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        public vmss_backup_type BackupTypeVMSS
+        public vmss_schedule_snapshot_type BackupTypeVMSS
         {
             get
             {
                 if (quiesceCheckBox.Checked)
-                    return vmss_backup_type.snapshot_with_quiesce;
+                    return vmss_schedule_snapshot_type.snapshot_with_quiesce;
                 if (radioButtonDiskOnly.Checked)
-                    return vmss_backup_type.snapshot;
+                    return vmss_schedule_snapshot_type.snapshot;
                 else if (radioButtonDiskAndMemory.Checked)
-                    return vmss_backup_type.checkpoint;
+                    return vmss_schedule_snapshot_type.checkpoint;
                 else
                 {
-                    return vmss_backup_type.unknown;
+                    return vmss_schedule_snapshot_type.unknown;
                 }
             }
         }
@@ -235,17 +235,17 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void RefreshTabVMSS(VMSS vmss)
         {
-            switch (vmss.backup_type)
+            switch (vmss.schedule_snapshot_type)
             {
-                case vmss_backup_type.checkpoint:
+                case vmss_schedule_snapshot_type.checkpoint:
                     radioButtonDiskAndMemory.Checked = true;
                     quiesceCheckBox.Enabled = false;
                     break;
-                case vmss_backup_type.snapshot:
+                case vmss_schedule_snapshot_type.snapshot:
                     radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     break;
-                case vmss_backup_type.snapshot_with_quiesce:
+                case vmss_schedule_snapshot_type.snapshot_with_quiesce:
                     radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     quiesceCheckBox.Checked = true;
@@ -277,7 +277,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 }
                 else
                 {
-                    this.quiesceCheckBox.Enabled = false;
+                    if (!this.quiesceCheckBox.Checked)
+                        this.quiesceCheckBox.Enabled = false;
                 }
                 this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
             }
@@ -294,7 +295,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             if (typeof(T) == typeof(VMPP))
                 _clone.backup_type = BackupType;
             else
-                _cloneVMSS.backup_type = BackupTypeVMSS;
+                _cloneVMSS.schedule_snapshot_type = BackupTypeVMSS;
             
             return null;
         }
@@ -323,7 +324,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 if (typeof(T) == typeof(VMPP))
                     return BackupType != _clone.backup_type;
                 else
-                    return BackupTypeVMSS != _cloneVMSS.backup_type;
+                    return BackupTypeVMSS != _cloneVMSS.schedule_snapshot_type;
             }
 
         }

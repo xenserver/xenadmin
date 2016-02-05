@@ -291,6 +291,16 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_vmpr"); }
         }
 
+        public static bool RestrictVMSnapshotSchedule(Host h)
+        {
+            return h._RestrictVMSnapshotSchedule;
+        }
+
+        private bool _RestrictVMSnapshotSchedule
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_vmpr"); }
+        }
+
         public static bool RestrictVMAppliances(Host h)
         {
             return h._RestrictVMAppliances;

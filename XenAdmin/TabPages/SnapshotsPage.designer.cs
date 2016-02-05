@@ -176,7 +176,6 @@ namespace XenAdmin.TabPages
             this.panelVMPP.Controls.Add(this.linkLabelVMPPInfo);
             this.panelVMPP.Controls.Add(this.labelVMPPInfo);
             this.panelVMPP.Controls.Add(this.pictureBoxVMPPInfo);
-            this.panelVMPP.MinimumSize = new System.Drawing.Size(0, 60);
             this.panelVMPP.Name = "panelVMPP";
             // 
             // linkLabelVMPPInfo
@@ -213,7 +212,6 @@ namespace XenAdmin.TabPages
             this.propertiesTableLayoutPanel.Controls.Add(this.propertiesButton, 0, 3);
             this.propertiesTableLayoutPanel.Controls.Add(this.nameLabel, 0, 1);
             this.propertiesTableLayoutPanel.Controls.Add(this.shadowPanel1, 0, 0);
-            this.propertiesTableLayoutPanel.MaximumSize = new System.Drawing.Size(0, 450);
             this.propertiesTableLayoutPanel.Name = "propertiesTableLayoutPanel";
             // 
             // tableLayoutPanelSimpleSelection
@@ -239,8 +237,6 @@ namespace XenAdmin.TabPages
             // 
             this.folderLabel.AutoEllipsis = true;
             resources.ApplyResources(this.folderLabel, "folderLabel");
-            this.folderLabel.MaximumSize = new System.Drawing.Size(0, 50);
-            this.folderLabel.MinimumSize = new System.Drawing.Size(0, 25);
             this.folderLabel.Name = "folderLabel";
             this.folderLabel.UseMnemonic = false;
             // 
@@ -254,8 +250,6 @@ namespace XenAdmin.TabPages
             // 
             this.tagsLabel.AutoEllipsis = true;
             resources.ApplyResources(this.tagsLabel, "tagsLabel");
-            this.tagsLabel.MaximumSize = new System.Drawing.Size(0, 50);
-            this.tagsLabel.MinimumSize = new System.Drawing.Size(0, 25);
             this.tagsLabel.Name = "tagsLabel";
             this.tagsLabel.UseMnemonic = false;
             // 
@@ -263,8 +257,6 @@ namespace XenAdmin.TabPages
             // 
             this.descriptionLabel.AutoEllipsis = true;
             resources.ApplyResources(this.descriptionLabel, "descriptionLabel");
-            this.descriptionLabel.MaximumSize = new System.Drawing.Size(0, 90);
-            this.descriptionLabel.MinimumSize = new System.Drawing.Size(0, 25);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.UseMnemonic = false;
             // 
@@ -353,8 +345,6 @@ namespace XenAdmin.TabPages
             // 
             this.screenshotPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.screenshotPictureBox, "screenshotPictureBox");
-            this.screenshotPictureBox.MaximumSize = new System.Drawing.Size(100, 75);
-            this.screenshotPictureBox.MinimumSize = new System.Drawing.Size(100, 75);
             this.screenshotPictureBox.Name = "screenshotPictureBox";
             this.screenshotPictureBox.TabStop = false;
             this.screenshotPictureBox.Click += new System.EventHandler(this.screenshotPictureBox_Click);
@@ -441,7 +431,9 @@ namespace XenAdmin.TabPages
             ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items62"))),
             ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items63"))),
             ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items64"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items65")))});
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items65"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items66"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items67")))});
             this.snapshotTreeView.LinkLineColor = System.Drawing.SystemColors.ActiveBorder;
             this.snapshotTreeView.Name = "snapshotTreeView";
             this.snapshotTreeView.OwnerDraw = true;
@@ -450,16 +442,16 @@ namespace XenAdmin.TabPages
             this.snapshotTreeView.TileSize = new System.Drawing.Size(80, 60);
             this.snapshotTreeView.UseCompatibleStateImageBehavior = false;
             this.snapshotTreeView.VGap = 50;
-            this.snapshotTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView1_MouseDoubleClick);
-            this.snapshotTreeView.SelectedIndexChanged += new System.EventHandler(this.view_SelectionChanged);
-            this.snapshotTreeView.Leave += new System.EventHandler(this.snapshotTreeView_Leave);
-            this.snapshotTreeView.Enter += new System.EventHandler(this.snapshotTreeView_Enter);
-            this.snapshotTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragDrop);
-            this.snapshotTreeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseMove);
-            this.snapshotTreeView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseClick);
-            this.snapshotTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragEnter);
             this.snapshotTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.snapshotTreeView_ItemDrag);
+            this.snapshotTreeView.SelectedIndexChanged += new System.EventHandler(this.view_SelectionChanged);
+            this.snapshotTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragDrop);
+            this.snapshotTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragEnter);
             this.snapshotTreeView.DragOver += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragOver);
+            this.snapshotTreeView.Enter += new System.EventHandler(this.snapshotTreeView_Enter);
+            this.snapshotTreeView.Leave += new System.EventHandler(this.snapshotTreeView_Leave);
+            this.snapshotTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView1_MouseDoubleClick);
+            this.snapshotTreeView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseClick);
+            this.snapshotTreeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseMove);
             // 
             // tableLayoutPanel2
             // 
@@ -682,8 +674,8 @@ namespace XenAdmin.TabPages
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.view_SelectionChanged);
+            this.dataGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseClick);
             // 
             // Live
             // 

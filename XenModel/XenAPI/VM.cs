@@ -114,6 +114,8 @@ namespace XenAPI
             Dictionary<string, string> bios_strings,
             XenRef<VMPP> protection_policy,
             bool is_snapshot_from_vmpp,
+            XenRef<VMSS> schedule_snapshot,
+            bool is_snapshot_from_vmss,
             XenRef<VM_appliance> appliance,
             long start_delay,
             long shutdown_delay,
@@ -124,7 +126,6 @@ namespace XenAPI
             long version,
             string generation_id,
             long hardware_platform_version,
-            bool auto_update_drivers,
             bool has_vendor_device)
         {
             this.uuid = uuid;
@@ -193,6 +194,8 @@ namespace XenAPI
             this.bios_strings = bios_strings;
             this.protection_policy = protection_policy;
             this.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
+            this.schedule_snapshot = schedule_snapshot;
+            this.is_snapshot_from_vmss = is_snapshot_from_vmss;
             this.appliance = appliance;
             this.start_delay = start_delay;
             this.shutdown_delay = shutdown_delay;
@@ -203,7 +206,6 @@ namespace XenAPI
             this.version = version;
             this.generation_id = generation_id;
             this.hardware_platform_version = hardware_platform_version;
-            this.auto_update_drivers = auto_update_drivers;
             this.has_vendor_device = has_vendor_device;
         }
 
@@ -284,6 +286,8 @@ namespace XenAPI
             bios_strings = update.bios_strings;
             protection_policy = update.protection_policy;
             is_snapshot_from_vmpp = update.is_snapshot_from_vmpp;
+            schedule_snapshot = update.schedule_snapshot;
+            is_snapshot_from_vmss = update.is_snapshot_from_vmss;
             appliance = update.appliance;
             start_delay = update.start_delay;
             shutdown_delay = update.shutdown_delay;
@@ -294,7 +298,6 @@ namespace XenAPI
             version = update.version;
             generation_id = update.generation_id;
             hardware_platform_version = update.hardware_platform_version;
-            auto_update_drivers = update.auto_update_drivers;
             has_vendor_device = update.has_vendor_device;
         }
 
@@ -366,6 +369,8 @@ namespace XenAPI
             bios_strings = proxy.bios_strings == null ? null : Maps.convert_from_proxy_string_string(proxy.bios_strings);
             protection_policy = proxy.protection_policy == null ? null : XenRef<VMPP>.Create(proxy.protection_policy);
             is_snapshot_from_vmpp = (bool)proxy.is_snapshot_from_vmpp;
+            schedule_snapshot = proxy.schedule_snapshot == null ? null : XenRef<VMSS>.Create(proxy.schedule_snapshot);
+            is_snapshot_from_vmss = (bool)proxy.is_snapshot_from_vmss;
             appliance = proxy.appliance == null ? null : XenRef<VM_appliance>.Create(proxy.appliance);
             start_delay = proxy.start_delay == null ? 0 : long.Parse((string)proxy.start_delay);
             shutdown_delay = proxy.shutdown_delay == null ? 0 : long.Parse((string)proxy.shutdown_delay);
@@ -376,7 +381,6 @@ namespace XenAPI
             version = proxy.version == null ? 0 : long.Parse((string)proxy.version);
             generation_id = proxy.generation_id == null ? null : (string)proxy.generation_id;
             hardware_platform_version = proxy.hardware_platform_version == null ? 0 : long.Parse((string)proxy.hardware_platform_version);
-            auto_update_drivers = (bool)proxy.auto_update_drivers;
             has_vendor_device = (bool)proxy.has_vendor_device;
         }
 
@@ -449,6 +453,8 @@ namespace XenAPI
             result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
             result_.protection_policy = (protection_policy != null) ? protection_policy : "";
             result_.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
+            result_.schedule_snapshot = (schedule_snapshot != null) ? schedule_snapshot : "";
+            result_.is_snapshot_from_vmss = is_snapshot_from_vmss;
             result_.appliance = (appliance != null) ? appliance : "";
             result_.start_delay = start_delay.ToString();
             result_.shutdown_delay = shutdown_delay.ToString();
@@ -459,7 +465,6 @@ namespace XenAPI
             result_.version = version.ToString();
             result_.generation_id = (generation_id != null) ? generation_id : "";
             result_.hardware_platform_version = hardware_platform_version.ToString();
-            result_.auto_update_drivers = auto_update_drivers;
             result_.has_vendor_device = has_vendor_device;
             return result_;
         }
@@ -536,6 +541,8 @@ namespace XenAPI
             bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
             protection_policy = Marshalling.ParseRef<VMPP>(table, "protection_policy");
             is_snapshot_from_vmpp = Marshalling.ParseBool(table, "is_snapshot_from_vmpp");
+            schedule_snapshot = Marshalling.ParseRef<VMSS>(table, "schedule_snapshot");
+            is_snapshot_from_vmss = Marshalling.ParseBool(table, "is_snapshot_from_vmss");
             appliance = Marshalling.ParseRef<VM_appliance>(table, "appliance");
             start_delay = Marshalling.ParseLong(table, "start_delay");
             shutdown_delay = Marshalling.ParseLong(table, "shutdown_delay");
@@ -546,7 +553,6 @@ namespace XenAPI
             version = Marshalling.ParseLong(table, "version");
             generation_id = Marshalling.ParseString(table, "generation_id");
             hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
-            auto_update_drivers = Marshalling.ParseBool(table, "auto_update_drivers");
             has_vendor_device = Marshalling.ParseBool(table, "has_vendor_device");
         }
 
@@ -625,6 +631,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._bios_strings, other._bios_strings) &&
                 Helper.AreEqual2(this._protection_policy, other._protection_policy) &&
                 Helper.AreEqual2(this._is_snapshot_from_vmpp, other._is_snapshot_from_vmpp) &&
+                Helper.AreEqual2(this._schedule_snapshot, other._schedule_snapshot) &&
+                Helper.AreEqual2(this._is_snapshot_from_vmss, other._is_snapshot_from_vmss) &&
                 Helper.AreEqual2(this._appliance, other._appliance) &&
                 Helper.AreEqual2(this._start_delay, other._start_delay) &&
                 Helper.AreEqual2(this._shutdown_delay, other._shutdown_delay) &&
@@ -635,7 +643,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._version, other._version) &&
                 Helper.AreEqual2(this._generation_id, other._generation_id) &&
                 Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
-                Helper.AreEqual2(this._auto_update_drivers, other._auto_update_drivers) &&
                 Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device);
         }
 
@@ -752,10 +759,6 @@ namespace XenAPI
                 {
                     VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
                 }
-                if (!Helper.AreEqual2(_has_vendor_device, server._has_vendor_device))
-                {
-                    VM.set_has_vendor_device(session, opaqueRef, _has_vendor_device);
-                }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
                     VM.set_memory_static_max(session, opaqueRef, _memory_static_max);
@@ -796,6 +799,10 @@ namespace XenAPI
                 {
                     VM.set_protection_policy(session, opaqueRef, _protection_policy);
                 }
+                if (!Helper.AreEqual2(_schedule_snapshot, server._schedule_snapshot))
+                {
+                    VM.set_schedule_snapshot(session, opaqueRef, _schedule_snapshot);
+                }
                 if (!Helper.AreEqual2(_appliance, server._appliance))
                 {
                     VM.set_appliance(session, opaqueRef, _appliance);
@@ -812,9 +819,9 @@ namespace XenAPI
                 {
                     VM.set_order(session, opaqueRef, _order);
                 }
-                if (!Helper.AreEqual2(_auto_update_drivers, server._auto_update_drivers))
+                if (!Helper.AreEqual2(_has_vendor_device, server._has_vendor_device))
                 {
-                    VM.set_auto_update_drivers(session, opaqueRef, _auto_update_drivers);
+                    VM.set_has_vendor_device(session, opaqueRef, _has_vendor_device);
                 }
 
                 return null;
@@ -843,7 +850,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Create a new VM instance, and return its handle.
+        /// NOT RECOMMENDED! VM.clone or VM.copy (or VM.import) is a better choice in almost all situations. The standard way to obtain a new VM is to call VM.clone on a template VM, then call VM.provision on the new clone. Caution: if VM.create is used and then the new VM is attached to a virtual disc that has an operating system already installed, then there is no guarantee that the operating system will boot and run. Any software that calls VM.create on a future version of this API may fail or give unexpected results. For example this could happen if an additional parameter were added to VM.create. VM.create is intended only for use in the automatic creation of the system VM templates. It creates a new VM instance, and returns its handle.
         /// First published in XenServer 4.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -854,7 +861,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Create a new VM instance, and return its handle.
+        /// NOT RECOMMENDED! VM.clone or VM.copy (or VM.import) is a better choice in almost all situations. The standard way to obtain a new VM is to call VM.clone on a template VM, then call VM.provision on the new clone. Caution: if VM.create is used and then the new VM is attached to a virtual disc that has an operating system already installed, then there is no guarantee that the operating system will boot and run. Any software that calls VM.create on a future version of this API may fail or give unexpected results. For example this could happen if an additional parameter were added to VM.create. VM.create is intended only for use in the automatic creation of the system VM templates. It creates a new VM instance, and returns its handle.
         /// First published in XenServer 4.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -1634,6 +1641,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the schedule_snapshot field of the given VM.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<VMSS> get_schedule_snapshot(Session session, string _vm)
+        {
+            return XenRef<VMSS>.Create(session.proxy.vm_get_schedule_snapshot(session.uuid, (_vm != null) ? _vm : "").parse());
+        }
+
+        /// <summary>
+        /// Get the is_snapshot_from_vmss field of the given VM.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_is_snapshot_from_vmss(Session session, string _vm)
+        {
+            return (bool)session.proxy.vm_get_is_snapshot_from_vmss(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
         /// Get the appliance field of the given VM.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1744,19 +1773,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the auto_update_drivers field of the given VM.
-        /// Experimental. First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        public static bool get_auto_update_drivers(Session session, string _vm)
-        {
-            return (bool)session.proxy.vm_get_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "").parse();
-        }
-
-        /// <summary>
         /// Get the has_vendor_device field of the given VM.
-        /// Experimental. First published in XenServer Dundee.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -2251,18 +2269,6 @@ namespace XenAPI
         public static void set_hardware_platform_version(Session session, string _vm, long _hardware_platform_version)
         {
             session.proxy.vm_set_hardware_platform_version(session.uuid, (_vm != null) ? _vm : "", _hardware_platform_version.ToString()).parse();
-        }
-
-        /// <summary>
-        /// Set the has_vendor_device field of the given VM.
-        /// Experimental. First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_has_vendor_device">New value to set</param>
-        public static void set_has_vendor_device(Session session, string _vm, bool _has_vendor_device)
-        {
-            session.proxy.vm_set_has_vendor_device(session.uuid, (_vm != null) ? _vm : "", _has_vendor_device).parse();
         }
 
         /// <summary>
@@ -3576,6 +3582,18 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the value of the schedule snapshot field
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The value</param>
+        public static void set_schedule_snapshot(Session session, string _vm, string _value)
+        {
+            session.proxy.vm_set_schedule_snapshot(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+        }
+
+        /// <summary>
         /// Set this VM's start delay in seconds
         /// First published in XenServer 6.0.
         /// </summary>
@@ -3850,27 +3868,27 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Enable or disable PV auto update on Windows vm
+        /// Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
-        public static void set_auto_update_drivers(Session session, string _vm, bool _value)
+        /// <param name="_value">True to provide the vendor PCI device.</param>
+        public static void set_has_vendor_device(Session session, string _vm, bool _value)
         {
-            session.proxy.vm_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+            session.proxy.vm_set_has_vendor_device(session.uuid, (_vm != null) ? _vm : "", _value).parse();
         }
 
         /// <summary>
-        /// Enable or disable PV auto update on Windows vm
+        /// Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_value">True if the Windows Update feature is enabled on the VM; false otherwise</param>
-        public static XenRef<Task> async_set_auto_update_drivers(Session session, string _vm, bool _value)
+        /// <param name="_value">True to provide the vendor PCI device.</param>
+        public static XenRef<Task> async_set_has_vendor_device(Session session, string _vm, bool _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_auto_update_drivers(session.uuid, (_vm != null) ? _vm : "", _value).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_has_vendor_device(session.uuid, (_vm != null) ? _vm : "", _value).parse());
         }
 
         /// <summary>
@@ -5130,6 +5148,44 @@ namespace XenAPI
         private bool _is_snapshot_from_vmpp;
 
         /// <summary>
+        /// Ref pointing to a schedule snapshot for this VM
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual XenRef<VMSS> schedule_snapshot
+        {
+            get { return _schedule_snapshot; }
+            set
+            {
+                if (!Helper.AreEqual(value, _schedule_snapshot))
+                {
+                    _schedule_snapshot = value;
+                    Changed = true;
+                    NotifyPropertyChanged("schedule_snapshot");
+                }
+            }
+        }
+        private XenRef<VMSS> _schedule_snapshot;
+
+        /// <summary>
+        /// true if this snapshot was created by the schedule snapshot
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool is_snapshot_from_vmss
+        {
+            get { return _is_snapshot_from_vmss; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_snapshot_from_vmss))
+                {
+                    _is_snapshot_from_vmss = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_snapshot_from_vmss");
+                }
+            }
+        }
+        private bool _is_snapshot_from_vmss;
+
+        /// <summary>
         /// the appliance to which this VM belongs
         /// </summary>
         public virtual XenRef<VM_appliance> appliance
@@ -5319,27 +5375,8 @@ namespace XenAPI
         private long _hardware_platform_version;
 
         /// <summary>
-        /// Does nothing at present. To be removed before Dundee release, once other code no longer refers to it.
-        /// Experimental. First published in XenServer Dundee.
-        /// </summary>
-        public virtual bool auto_update_drivers
-        {
-            get { return _auto_update_drivers; }
-            set
-            {
-                if (!Helper.AreEqual(value, _auto_update_drivers))
-                {
-                    _auto_update_drivers = value;
-                    Changed = true;
-                    NotifyPropertyChanged("auto_update_drivers");
-                }
-            }
-        }
-        private bool _auto_update_drivers;
-
-        /// <summary>
-        /// Does nothing at present. Intended to replace auto_update_drivers to control the presence of the C000 PCI device.
-        /// Experimental. First published in XenServer Dundee.
+        /// When an HVM guest starts, this controls the presence of the emulated C000 PCI device which triggers Windows Update to fetch or update PV drivers.
+        /// First published in XenServer Dundee.
         /// </summary>
         public virtual bool has_vendor_device
         {

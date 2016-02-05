@@ -53,19 +53,18 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
             xenTabPagePolicy = typeof(T) == typeof(VMPP) ? new NewPolicyPolicyNamePage(Messages.NEW_VMPP_PAGE_TEXT) : new NewPolicyPolicyNamePage(Messages.NEW_VMSS_PAGE_TEXT);
             xenTabPageSnapshotType = new NewPolicySnapshotTypePageSpecific<T>();
-            xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage();
+            
             xenTabPageVMsPage = new NewVMGroupVMsPage<T>();
-            xenTabPageArchive = new NewPolicyArchivePage();
-            xenTabPageEmail = typeof(T) == typeof(VMPP) ? new NewPolicyEmailPage(Messages.VMPP_EMAIL_PAGE_TEXT, Messages.VMPP_EMAIL_CHECKBOX_TEXT)
-                : new NewPolicyEmailPage(Messages.VMSS_EMAIL_PAGE_TEXT, Messages.VMSS_EMAIL_CHECKBOX_TEXT);
+         
+            xenTabPageEmail = typeof(T) == typeof(VMPP) ? new NewPolicyEmailPage(Messages.VMPP_EMAIL_PAGE_TEXT, Messages.VMPP_EMAIL_CHECKBOX_TEXT, false)
+                : new NewPolicyEmailPage(Messages.VMSS_EMAIL_PAGE_TEXT, Messages.VMSS_EMAIL_CHECKBOX_TEXT, true);
             xenTabPageFinish = typeof(T) == typeof(VMPP) ? new NewPolicyFinishPage(Messages.VMPP_FINISH_PAGE_TEXT, Messages.VMPP_FINISH_PAGE_CHECKBOX_TEXT)
                 : new NewPolicyFinishPage(Messages.VMSS_FINISH_PAGE_TEXT, Messages.VMSS_FINISH_PAGE_CHECKBOX_TEXT);
             xenTabPageRBAC = new RBACWarningPage();
 
             xenTabPageVMsPage.Pool = pool;
             xenTabPageEmail.Pool = pool;
-            xenTabPageArchive.Pool = pool;
-            xenTabPageSnapshotFrequency.Pool = pool;
+            
             #region RBAC Warning Page Checks
             if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetMaster(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
             {
@@ -84,14 +83,24 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             AddPages(xenTabPagePolicy, xenTabPageVMsPage);
             AddPage(xenTabPageSnapshotType);
 
-            AddPages(xenTabPageSnapshotFrequency);
+            
             if (typeof(T) == typeof(VMPP))
             {
+                xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage(false);
+                xenTabPageSnapshotFrequency.Pool = pool;
+                AddPages(xenTabPageSnapshotFrequency);
+
+                xenTabPageArchive = new NewPolicyArchivePage();
+                xenTabPageArchive.Pool = pool;
                 AddPage(xenTabPageArchive);
                 this.Text = Messages.VMPP_WIZARD_TITLE;
             }
             else
             {
+                xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage(true);
+                xenTabPageSnapshotFrequency.Pool = pool;
+                AddPages(xenTabPageSnapshotFrequency);
+
                 this.Text = Messages.VMSS_WIZARD_TITLE;
             }
             AddPages(xenTabPageEmail, xenTabPageFinish);
@@ -136,14 +145,15 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             throw new ArgumentException("wrong argument");
         }
 
-        private static string FormatBackupTypeVMSS(vmss_backup_type backupType)
+        private static string FormatBackupTypeVMSS(vmss_schedule_snapshot_type backupType)
         {
-            if (backupType == vmss_backup_type.snapshot)
+            if (backupType == vmss_schedule_snapshot_type.snapshot)
                 return Messages.DISKS_ONLY;
-            else if (backupType == vmss_backup_type.checkpoint)
+            else if (backupType == vmss_schedule_snapshot_type.checkpoint)
                 return Messages.DISKS_AND_MEMORY;
-            //else if (backupType == vmss_backup_type.snapshot_with_quiesce)
-            //return Messages.DISKS_AND_MEMORY_QUIESCE;
+            else if (backupType == vmss_schedule_snapshot_type.snapshot_with_quiesce)
+                return Messages.QUIESCED_SNAPSHOTS;
+
             throw new ArgumentException("wrong argument");
         }
 
@@ -216,7 +226,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
             if (prevPageType == typeof(NewPolicyPolicyNamePage))
                 xenTabPageVMsPage.GroupName = xenTabPagePolicy.PolicyName;
-            else if (prevPageType == typeof(NewPolicySnapshotFrequencyPage))
+            else if (typeof(T) == typeof(VMPP) && (prevPageType == typeof(NewPolicySnapshotFrequencyPage)))
             {
                 xenTabPageArchive.SnapshotFrequency = xenTabPageSnapshotFrequency.Frequency;
                 xenTabPageArchive.BackupDaysCount = GetBackupDaysCount();
@@ -259,25 +269,21 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
             else
             {
-                var vmpp = new VMPP
+                var vmpp = new VMSS
                 {
                     name_label = xenTabPagePolicy.PolicyName,
                     name_description = xenTabPagePolicy.PolicyDescription,
-                    backup_type = xenTabPageSnapshotType.BackupType,
-                    backup_frequency = xenTabPageSnapshotFrequency.Frequency,
-                    backup_schedule = xenTabPageSnapshotFrequency.Schedule,
-                    backup_retention_value = xenTabPageSnapshotFrequency.BackupRetention,
-                    archive_frequency = xenTabPageArchive.ArchiveFrequency,
-                    archive_target_config = xenTabPageArchive.ArchiveConfig,
-                    archive_target_type = xenTabPageArchive.ArchiveTargetType,
-                    archive_schedule = xenTabPageArchive.Schedule,
+                    schedule_snapshot_type = xenTabPageSnapshotType.BackupTypeVMSS,
+                    schedule_snapshot_frequency = (vmss_schedule_snapshot_frequency)xenTabPageSnapshotFrequency.Frequency,
+                    snapshot_schedule = xenTabPageSnapshotFrequency.Schedule,
+                    schedule_snapshot_retention_value = xenTabPageSnapshotFrequency.BackupRetention,
                     is_alarm_enabled = xenTabPageEmail.EmailEnabled,
                     alarm_config = xenTabPageEmail.EmailSettings,
-                    is_policy_enabled = xenTabPageVMsPage.SelectedVMs.Count == 0 ? false : true,
+                    is_schedule_snapshot_enabled = xenTabPageVMsPage.SelectedVMs.Count == 0 ? false : true,
                     Connection = Pool.Connection
                 };
 
-                var action = new CreateVMPP(vmpp, xenTabPageVMsPage.SelectedVMs, xenTabPageFinish.RunNow);
+                var action = new CreateVMSS(vmpp, xenTabPageVMsPage.SelectedVMs, xenTabPageFinish.RunNow);
                 action.RunAsync();
             }
             base.FinishWizard();

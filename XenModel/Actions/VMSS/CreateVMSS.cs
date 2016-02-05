@@ -50,8 +50,8 @@ namespace XenAdmin.Actions
             _runNow = runNow;
             Pool = Helpers.GetPool(record.Connection);
             ApiMethodsToRoleCheck.Add("VMSS.async_create");
-            ApiMethodsToRoleCheck.Add("VM.set_snapshot_policy");
-            ApiMethodsToRoleCheck.Add("VMSS.protect_now");
+            ApiMethodsToRoleCheck.Add("VM.set_schedule_snapshot");
+            ApiMethodsToRoleCheck.Add("VMSS.snapshot_now");
         }
 
         protected override void Run()
@@ -63,12 +63,12 @@ namespace XenAdmin.Actions
             Connection.WaitForCache(vmssref);
             foreach (var selectedVM in _vms)
             {
-                VM.set_snapshot_policy(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
+                VM.set_schedule_snapshot(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
             }
             Description = string.Format(Messages.CREATED_VMSS, _record.Name);
             PercentComplete = 60;
             if (_runNow)
-                VMSS.protect_now(Session, vmssref);
+                VMSS.snapshot_now(Session, vmssref);
             PercentComplete = 100;
         }
     }

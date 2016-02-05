@@ -63,10 +63,10 @@ namespace XenAdmin.Actions
             else
             {
                 var vmss = _policy as VMSS;
-                bool value = !vmss.is_policy_enabled;
+                bool value = !vmss.is_schedule_snapshot_enabled;
                 Description = value ? string.Format(Messages.ENABLING_VMSS, vmss.Name) : string.Format(Messages.DISABLING_VMSS, vmss.Name);
 
-                VMSS.set_is_policy_enabled(Session, vmss.opaque_ref, !vmss.is_policy_enabled);
+                VMSS.set_is_schedule_snapshot_enabled(Session, vmss.opaque_ref, !vmss.is_schedule_snapshot_enabled);
                 Description = value ? string.Format(Messages.ENABLED_VMSS, vmss.Name) : string.Format(Messages.DISABLED_VMSS, vmss.Name);
             }
             

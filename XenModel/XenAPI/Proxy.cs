@@ -176,6 +176,14 @@ namespace XenAPI
         Response<string>
         session_slave_local_login_with_password(string _uname, string _pwd);
 
+        [XmlRpcMethod("session.create_from_db_file")]
+        Response<string>
+        session_create_from_db_file(string session, string _filename);
+
+        [XmlRpcMethod("Async.session.create_from_db_file")]
+        Response<string>
+        async_session_create_from_db_file(string session, string _filename);
+
         [XmlRpcMethod("session.local_logout")]
         Response<string>
         session_local_logout(string session);
@@ -576,6 +584,10 @@ namespace XenAPI
         Response<Object>
         pool_get_current_operations(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_guest_agent_config")]
+        Response<Object>
+        pool_get_guest_agent_config(string session, string _pool);
+
         [XmlRpcMethod("pool.get_cpu_info")]
         Response<Object>
         pool_get_cpu_info(string session, string _pool);
@@ -723,14 +735,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.enable_ha")]
         Response<string>
         async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration);
-
-        [XmlRpcMethod("pool.enable_ha")]
-        Response<string>
-        pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
-
-        [XmlRpcMethod("Async.pool.enable_ha")]
-        Response<string>
-        async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration, string _cluster_stack);
 
         [XmlRpcMethod("pool.disable_ha")]
         Response<string>
@@ -991,6 +995,30 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.disable_ssl_legacy")]
         Response<string>
         async_pool_disable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("pool.has_extension")]
+        Response<bool>
+        pool_has_extension(string session, string _pool, string _name);
+
+        [XmlRpcMethod("Async.pool.has_extension")]
+        Response<string>
+        async_pool_has_extension(string session, string _pool, string _name);
+
+        [XmlRpcMethod("pool.add_to_guest_agent_config")]
+        Response<string>
+        pool_add_to_guest_agent_config(string session, string _pool, string _key, string _value);
+
+        [XmlRpcMethod("Async.pool.add_to_guest_agent_config")]
+        Response<string>
+        async_pool_add_to_guest_agent_config(string session, string _pool, string _key, string _value);
+
+        [XmlRpcMethod("pool.remove_from_guest_agent_config")]
+        Response<string>
+        pool_remove_from_guest_agent_config(string session, string _pool, string _key);
+
+        [XmlRpcMethod("Async.pool.remove_from_guest_agent_config")]
+        Response<string>
+        async_pool_remove_from_guest_agent_config(string session, string _pool, string _key);
 
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
@@ -1416,6 +1444,14 @@ namespace XenAPI
         Response<bool>
         vm_get_is_snapshot_from_vmpp(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_schedule_snapshot")]
+        Response<string>
+        vm_get_schedule_snapshot(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_is_snapshot_from_vmss")]
+        Response<bool>
+        vm_get_is_snapshot_from_vmss(string session, string _vm);
+
         [XmlRpcMethod("VM.get_appliance")]
         Response<string>
         vm_get_appliance(string session, string _vm);
@@ -1455,10 +1491,6 @@ namespace XenAPI
         [XmlRpcMethod("VM.get_hardware_platform_version")]
         Response<string>
         vm_get_hardware_platform_version(string session, string _vm);
-
-        [XmlRpcMethod("VM.get_auto_update_drivers")]
-        Response<bool>
-        vm_get_auto_update_drivers(string session, string _vm);
 
         [XmlRpcMethod("VM.get_has_vendor_device")]
         Response<bool>
@@ -1623,10 +1655,6 @@ namespace XenAPI
         [XmlRpcMethod("VM.set_hardware_platform_version")]
         Response<string>
         vm_set_hardware_platform_version(string session, string _vm, string _hardware_platform_version);
-
-        [XmlRpcMethod("VM.set_has_vendor_device")]
-        Response<string>
-        vm_set_has_vendor_device(string session, string _vm, bool _has_vendor_device);
 
         [XmlRpcMethod("VM.snapshot")]
         Response<string>
@@ -2056,6 +2084,10 @@ namespace XenAPI
         Response<string>
         vm_set_protection_policy(string session, string _vm, string _value);
 
+        [XmlRpcMethod("VM.set_schedule_snapshot")]
+        Response<string>
+        vm_set_schedule_snapshot(string session, string _vm, string _value);
+
         [XmlRpcMethod("VM.set_start_delay")]
         Response<string>
         vm_set_start_delay(string session, string _vm, string _value);
@@ -2144,21 +2176,13 @@ namespace XenAPI
         Response<string>
         async_vm_call_plugin(string session, string _vm, string _plugin, string _fn, Object _args);
 
-        [XmlRpcMethod("VM.set_auto_update_drivers")]
+        [XmlRpcMethod("VM.set_has_vendor_device")]
         Response<string>
-        vm_set_auto_update_drivers(string session, string _vm, bool _value);
+        vm_set_has_vendor_device(string session, string _vm, bool _value);
 
-        [XmlRpcMethod("Async.VM.set_auto_update_drivers")]
+        [XmlRpcMethod("Async.VM.set_has_vendor_device")]
         Response<string>
-        async_vm_set_auto_update_drivers(string session, string _vm, bool _value);
-
-        [XmlRpcMethod("VM.assert_can_set_auto_update_drivers")]
-        Response<string>
-        vm_assert_can_set_auto_update_drivers(string session, string _vm, bool _value);
-
-        [XmlRpcMethod("Async.VM.assert_can_set_auto_update_drivers")]
-        Response<string>
-        async_vm_assert_can_set_auto_update_drivers(string session, string _vm, bool _value);
+        async_vm_set_has_vendor_device(string session, string _vm, bool _value);
 
         [XmlRpcMethod("VM.import")]
         Response<string []>
@@ -2311,6 +2335,14 @@ namespace XenAPI
         [XmlRpcMethod("VM_guest_metrics.get_live")]
         Response<bool>
         vm_guest_metrics_get_live(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_can_use_hotplug_vbd")]
+        Response<string>
+        vm_guest_metrics_get_can_use_hotplug_vbd(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_can_use_hotplug_vif")]
+        Response<string>
+        vm_guest_metrics_get_can_use_hotplug_vif(string session, string _vm_guest_metrics);
 
         [XmlRpcMethod("VM_guest_metrics.set_other_config")]
         Response<string>
@@ -2551,6 +2583,162 @@ namespace XenAPI
         [XmlRpcMethod("VMPP.get_all_records")]
         Response<Object>
         vmpp_get_all_records(string session);
+
+        [XmlRpcMethod("VMSS.get_record")]
+        Response<Proxy_VMSS>
+        vmss_get_record(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_by_uuid")]
+        Response<string>
+        vmss_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("VMSS.create")]
+        Response<string>
+        vmss_create(string session, Proxy_VMSS _record);
+
+        [XmlRpcMethod("Async.VMSS.create")]
+        Response<string>
+        async_vmss_create(string session, Proxy_VMSS _record);
+
+        [XmlRpcMethod("VMSS.destroy")]
+        Response<string>
+        vmss_destroy(string session, string _vmss);
+
+        [XmlRpcMethod("Async.VMSS.destroy")]
+        Response<string>
+        async_vmss_destroy(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_by_name_label")]
+        Response<string []>
+        vmss_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("VMSS.get_uuid")]
+        Response<string>
+        vmss_get_uuid(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_name_label")]
+        Response<string>
+        vmss_get_name_label(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_name_description")]
+        Response<string>
+        vmss_get_name_description(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_is_schedule_snapshot_enabled")]
+        Response<bool>
+        vmss_get_is_schedule_snapshot_enabled(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_type")]
+        Response<string>
+        vmss_get_schedule_snapshot_type(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_retention_value")]
+        Response<string>
+        vmss_get_schedule_snapshot_retention_value(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_frequency")]
+        Response<string>
+        vmss_get_schedule_snapshot_frequency(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_snapshot_schedule")]
+        Response<Object>
+        vmss_get_snapshot_schedule(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_is_schedule_snapshot_running")]
+        Response<bool>
+        vmss_get_is_schedule_snapshot_running(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_last_run_time")]
+        Response<DateTime>
+        vmss_get_schedule_snapshot_last_run_time(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_VMs")]
+        Response<string []>
+        vmss_get_vms(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_is_alarm_enabled")]
+        Response<bool>
+        vmss_get_is_alarm_enabled(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_alarm_config")]
+        Response<Object>
+        vmss_get_alarm_config(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_recent_alerts")]
+        Response<string []>
+        vmss_get_recent_alerts(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.set_name_label")]
+        Response<string>
+        vmss_set_name_label(string session, string _vmss, string _label);
+
+        [XmlRpcMethod("VMSS.set_name_description")]
+        Response<string>
+        vmss_set_name_description(string session, string _vmss, string _description);
+
+        [XmlRpcMethod("VMSS.set_is_schedule_snapshot_enabled")]
+        Response<string>
+        vmss_set_is_schedule_snapshot_enabled(string session, string _vmss, bool _is_schedule_snapshot_enabled);
+
+        [XmlRpcMethod("VMSS.snapshot_now")]
+        Response<string>
+        vmss_snapshot_now(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_alerts")]
+        Response<string []>
+        vmss_get_alerts(string session, string _vmss, string _hours_from_now);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_retention_value")]
+        Response<string>
+        vmss_set_schedule_snapshot_retention_value(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_frequency")]
+        Response<string>
+        vmss_set_schedule_snapshot_frequency(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.set_snapshot_schedule")]
+        Response<string>
+        vmss_set_snapshot_schedule(string session, string _vmss, Object _value);
+
+        [XmlRpcMethod("VMSS.set_is_alarm_enabled")]
+        Response<string>
+        vmss_set_is_alarm_enabled(string session, string _vmss, bool _value);
+
+        [XmlRpcMethod("VMSS.set_alarm_config")]
+        Response<string>
+        vmss_set_alarm_config(string session, string _vmss, Object _value);
+
+        [XmlRpcMethod("VMSS.add_to_snapshot_schedule")]
+        Response<string>
+        vmss_add_to_snapshot_schedule(string session, string _vmss, string _key, string _value);
+
+        [XmlRpcMethod("VMSS.add_to_alarm_config")]
+        Response<string>
+        vmss_add_to_alarm_config(string session, string _vmss, string _key, string _value);
+
+        [XmlRpcMethod("VMSS.remove_from_snapshot_schedule")]
+        Response<string>
+        vmss_remove_from_snapshot_schedule(string session, string _vmss, string _key);
+
+        [XmlRpcMethod("VMSS.remove_from_alarm_config")]
+        Response<string>
+        vmss_remove_from_alarm_config(string session, string _vmss, string _key);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_last_run_time")]
+        Response<string>
+        vmss_set_schedule_snapshot_last_run_time(string session, string _vmss, DateTime _value);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_type")]
+        Response<string>
+        vmss_set_schedule_snapshot_type(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.get_all")]
+        Response<string []>
+        vmss_get_all(string session);
+
+        [XmlRpcMethod("VMSS.get_all_records")]
+        Response<Object>
+        vmss_get_all_records(string session);
 
         [XmlRpcMethod("VM_appliance.get_record")]
         Response<Proxy_VM_appliance>
@@ -3103,6 +3291,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.license_apply")]
         Response<string>
         async_host_license_apply(string session, string _host, string _contents);
+
+        [XmlRpcMethod("host.license_add")]
+        Response<string>
+        host_license_add(string session, string _host, string _contents);
+
+        [XmlRpcMethod("Async.host.license_add")]
+        Response<string>
+        async_host_license_add(string session, string _host, string _contents);
+
+        [XmlRpcMethod("host.license_remove")]
+        Response<string>
+        host_license_remove(string session, string _host);
+
+        [XmlRpcMethod("Async.host.license_remove")]
+        Response<string>
+        async_host_license_remove(string session, string _host);
 
         [XmlRpcMethod("host.destroy")]
         Response<string>
@@ -4708,6 +4912,10 @@ namespace XenAPI
         Response<string>
         sm_get_driver_filename(string session, string _sm);
 
+        [XmlRpcMethod("SM.get_required_cluster_stack")]
+        Response<string []>
+        sm_get_required_cluster_stack(string session, string _sm);
+
         [XmlRpcMethod("SM.set_other_config")]
         Response<string>
         sm_set_other_config(string session, string _sm, Object _other_config);
@@ -4815,6 +5023,10 @@ namespace XenAPI
         [XmlRpcMethod("SR.get_introduced_by")]
         Response<string>
         sr_get_introduced_by(string session, string _sr);
+
+        [XmlRpcMethod("SR.get_clustered")]
+        Response<bool>
+        sr_get_clustered(string session, string _sr);
 
         [XmlRpcMethod("SR.set_other_config")]
         Response<string>
@@ -5027,6 +5239,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.SR.disable_database_replication")]
         Response<string>
         async_sr_disable_database_replication(string session, string _sr);
+
+        [XmlRpcMethod("SR.get_data_sources")]
+        Response<Proxy_Data_source[]>
+        sr_get_data_sources(string session, string _sr);
+
+        [XmlRpcMethod("SR.record_data_source")]
+        Response<string>
+        sr_record_data_source(string session, string _sr, string _data_source);
+
+        [XmlRpcMethod("SR.query_data_source")]
+        Response<double>
+        sr_query_data_source(string session, string _sr, string _data_source);
+
+        [XmlRpcMethod("SR.forget_data_source_archives")]
+        Response<string>
+        sr_forget_data_source_archives(string session, string _sr, string _data_source);
 
         [XmlRpcMethod("SR.get_all")]
         Response<string []>
@@ -6848,6 +7076,7 @@ namespace XenAPI
         public string ha_cluster_stack;
         public string [] allowed_operations;
         public Object current_operations;
+        public Object guest_agent_config;
         public Object cpu_info;
     }
 
@@ -6934,6 +7163,8 @@ namespace XenAPI
         public Object bios_strings;
         public string protection_policy;
         public bool is_snapshot_from_vmpp;
+        public string schedule_snapshot;
+        public bool is_snapshot_from_vmss;
         public string appliance;
         public string start_delay;
         public string shutdown_delay;
@@ -6944,7 +7175,6 @@ namespace XenAPI
         public string version;
         public string generation_id;
         public string hardware_platform_version;
-        public bool auto_update_drivers;
         public bool has_vendor_device;
     }
 
@@ -6981,6 +7211,8 @@ namespace XenAPI
         public DateTime last_updated;
         public Object other_config;
         public bool live;
+        public string can_use_hotplug_vbd;
+        public string can_use_hotplug_vif;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7002,6 +7234,25 @@ namespace XenAPI
         public Object archive_schedule;
         public bool is_archive_running;
         public DateTime archive_last_run_time;
+        public string [] VMs;
+        public bool is_alarm_enabled;
+        public Object alarm_config;
+        public string [] recent_alerts;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_VMSS
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public bool is_schedule_snapshot_enabled;
+        public string schedule_snapshot_type;
+        public string schedule_snapshot_retention_value;
+        public string schedule_snapshot_frequency;
+        public Object snapshot_schedule;
+        public bool is_schedule_snapshot_running;
+        public DateTime schedule_snapshot_last_run_time;
         public string [] VMs;
         public bool is_alarm_enabled;
         public Object alarm_config;
@@ -7284,6 +7535,7 @@ namespace XenAPI
         public Object features;
         public Object other_config;
         public string driver_filename;
+        public string [] required_cluster_stack;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7308,6 +7560,7 @@ namespace XenAPI
         public Object blobs;
         public bool local_cache_enabled;
         public string introduced_by;
+        public bool clustered;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
