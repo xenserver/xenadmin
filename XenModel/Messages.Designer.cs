@@ -31297,6 +31297,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This VM is currently part of the scheduled snapshot policy &apos;{0}&apos;.
+        /// </summary>
+        public static string THIS_VM_IS_IN_VMSS {
+            get {
+                return ResourceManager.GetString("THIS_VM_IS_IN_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM is not currently part of a scheduled snapshot policy.
+        /// </summary>
+        public static string THIS_VM_IS_NOT_IN_VMSS {
+            get {
+                return ResourceManager.GetString("THIS_VM_IS_NOT_IN_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This VM is not currently protected with a VM protection policy.
         /// </summary>
         public static string THIS_VM_IS_NOT_PROTECTED {
@@ -33926,6 +33944,15 @@ namespace XenAdmin {
         public static string VIEW_TAG_MENU_OPTION {
             get {
                 return ResourceManager.GetString("VIEW_TAG_MENU_OPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View VM Snapshot Schedule Policies.
+        /// </summary>
+        public static string VIEW_VMSS_POLICIES {
+            get {
+                return ResourceManager.GetString("VIEW_VMSS_POLICIES", resourceCulture);
             }
         }
         

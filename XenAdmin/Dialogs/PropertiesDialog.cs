@@ -240,17 +240,17 @@ namespace XenAdmin.Dialogs
                 {
                     ShowTab(newPolicyVMsPage1 = new NewVMGroupVMsPage<VMPP> {Pool = pool});
                     ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePageSpecific<VMPP>());
-                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
+                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage(false) {Pool = pool});
                     ShowTab(newPolicyArchivePage1 = new NewPolicyArchivePage {Pool = pool, PropertiesDialog = this});
-                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage(Messages.VMPP_EMAIL_PAGE_TEXT, Messages.VMPP_EMAIL_CHECKBOX_TEXT) {PropertiesDialog = this});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage(Messages.VMPP_EMAIL_PAGE_TEXT, Messages.VMPP_EMAIL_CHECKBOX_TEXT, false) {PropertiesDialog = this});
                 }
 
                 if(is_VMSS)
                 {
                     ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
                     ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePageSpecific<VMSS>());
-                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
-                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage(Messages.VMSS_EMAIL_PAGE_TEXT, Messages.VMSS_EMAIL_CHECKBOX_TEXT) {PropertiesDialog = this});
+                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage(true) {Pool = pool});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage(Messages.VMSS_EMAIL_PAGE_TEXT, Messages.VMSS_EMAIL_CHECKBOX_TEXT, true) {PropertiesDialog = this});
                 }
 
                 if (is_VM_appliance)

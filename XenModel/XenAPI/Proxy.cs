@@ -1444,6 +1444,14 @@ namespace XenAPI
         Response<bool>
         vm_get_is_snapshot_from_vmpp(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_schedule_snapshot")]
+        Response<string>
+        vm_get_schedule_snapshot(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_is_snapshot_from_vmss")]
+        Response<bool>
+        vm_get_is_snapshot_from_vmss(string session, string _vm);
+
         [XmlRpcMethod("VM.get_appliance")]
         Response<string>
         vm_get_appliance(string session, string _vm);
@@ -2076,6 +2084,10 @@ namespace XenAPI
         Response<string>
         vm_set_protection_policy(string session, string _vm, string _value);
 
+        [XmlRpcMethod("VM.set_schedule_snapshot")]
+        Response<string>
+        vm_set_schedule_snapshot(string session, string _vm, string _value);
+
         [XmlRpcMethod("VM.set_start_delay")]
         Response<string>
         vm_set_start_delay(string session, string _vm, string _value);
@@ -2571,6 +2583,162 @@ namespace XenAPI
         [XmlRpcMethod("VMPP.get_all_records")]
         Response<Object>
         vmpp_get_all_records(string session);
+
+        [XmlRpcMethod("VMSS.get_record")]
+        Response<Proxy_VMSS>
+        vmss_get_record(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_by_uuid")]
+        Response<string>
+        vmss_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("VMSS.create")]
+        Response<string>
+        vmss_create(string session, Proxy_VMSS _record);
+
+        [XmlRpcMethod("Async.VMSS.create")]
+        Response<string>
+        async_vmss_create(string session, Proxy_VMSS _record);
+
+        [XmlRpcMethod("VMSS.destroy")]
+        Response<string>
+        vmss_destroy(string session, string _vmss);
+
+        [XmlRpcMethod("Async.VMSS.destroy")]
+        Response<string>
+        async_vmss_destroy(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_by_name_label")]
+        Response<string []>
+        vmss_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("VMSS.get_uuid")]
+        Response<string>
+        vmss_get_uuid(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_name_label")]
+        Response<string>
+        vmss_get_name_label(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_name_description")]
+        Response<string>
+        vmss_get_name_description(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_is_schedule_snapshot_enabled")]
+        Response<bool>
+        vmss_get_is_schedule_snapshot_enabled(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_type")]
+        Response<string>
+        vmss_get_schedule_snapshot_type(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_retention_value")]
+        Response<string>
+        vmss_get_schedule_snapshot_retention_value(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_frequency")]
+        Response<string>
+        vmss_get_schedule_snapshot_frequency(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_snapshot_schedule")]
+        Response<Object>
+        vmss_get_snapshot_schedule(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_is_schedule_snapshot_running")]
+        Response<bool>
+        vmss_get_is_schedule_snapshot_running(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule_snapshot_last_run_time")]
+        Response<DateTime>
+        vmss_get_schedule_snapshot_last_run_time(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_VMs")]
+        Response<string []>
+        vmss_get_vms(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_is_alarm_enabled")]
+        Response<bool>
+        vmss_get_is_alarm_enabled(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_alarm_config")]
+        Response<Object>
+        vmss_get_alarm_config(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_recent_alerts")]
+        Response<string []>
+        vmss_get_recent_alerts(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.set_name_label")]
+        Response<string>
+        vmss_set_name_label(string session, string _vmss, string _label);
+
+        [XmlRpcMethod("VMSS.set_name_description")]
+        Response<string>
+        vmss_set_name_description(string session, string _vmss, string _description);
+
+        [XmlRpcMethod("VMSS.set_is_schedule_snapshot_enabled")]
+        Response<string>
+        vmss_set_is_schedule_snapshot_enabled(string session, string _vmss, bool _is_schedule_snapshot_enabled);
+
+        [XmlRpcMethod("VMSS.snapshot_now")]
+        Response<string>
+        vmss_snapshot_now(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_alerts")]
+        Response<string []>
+        vmss_get_alerts(string session, string _vmss, string _hours_from_now);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_retention_value")]
+        Response<string>
+        vmss_set_schedule_snapshot_retention_value(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_frequency")]
+        Response<string>
+        vmss_set_schedule_snapshot_frequency(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.set_snapshot_schedule")]
+        Response<string>
+        vmss_set_snapshot_schedule(string session, string _vmss, Object _value);
+
+        [XmlRpcMethod("VMSS.set_is_alarm_enabled")]
+        Response<string>
+        vmss_set_is_alarm_enabled(string session, string _vmss, bool _value);
+
+        [XmlRpcMethod("VMSS.set_alarm_config")]
+        Response<string>
+        vmss_set_alarm_config(string session, string _vmss, Object _value);
+
+        [XmlRpcMethod("VMSS.add_to_snapshot_schedule")]
+        Response<string>
+        vmss_add_to_snapshot_schedule(string session, string _vmss, string _key, string _value);
+
+        [XmlRpcMethod("VMSS.add_to_alarm_config")]
+        Response<string>
+        vmss_add_to_alarm_config(string session, string _vmss, string _key, string _value);
+
+        [XmlRpcMethod("VMSS.remove_from_snapshot_schedule")]
+        Response<string>
+        vmss_remove_from_snapshot_schedule(string session, string _vmss, string _key);
+
+        [XmlRpcMethod("VMSS.remove_from_alarm_config")]
+        Response<string>
+        vmss_remove_from_alarm_config(string session, string _vmss, string _key);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_last_run_time")]
+        Response<string>
+        vmss_set_schedule_snapshot_last_run_time(string session, string _vmss, DateTime _value);
+
+        [XmlRpcMethod("VMSS.set_schedule_snapshot_type")]
+        Response<string>
+        vmss_set_schedule_snapshot_type(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.get_all")]
+        Response<string []>
+        vmss_get_all(string session);
+
+        [XmlRpcMethod("VMSS.get_all_records")]
+        Response<Object>
+        vmss_get_all_records(string session);
 
         [XmlRpcMethod("VM_appliance.get_record")]
         Response<Proxy_VM_appliance>
@@ -7003,6 +7171,8 @@ namespace XenAPI
         public Object bios_strings;
         public string protection_policy;
         public bool is_snapshot_from_vmpp;
+        public string schedule_snapshot;
+        public bool is_snapshot_from_vmss;
         public string appliance;
         public string start_delay;
         public string shutdown_delay;
@@ -7072,6 +7242,25 @@ namespace XenAPI
         public Object archive_schedule;
         public bool is_archive_running;
         public DateTime archive_last_run_time;
+        public string [] VMs;
+        public bool is_alarm_enabled;
+        public Object alarm_config;
+        public string [] recent_alerts;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_VMSS
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public bool is_schedule_snapshot_enabled;
+        public string schedule_snapshot_type;
+        public string schedule_snapshot_retention_value;
+        public string schedule_snapshot_frequency;
+        public Object snapshot_schedule;
+        public bool is_schedule_snapshot_running;
+        public DateTime schedule_snapshot_last_run_time;
         public string [] VMs;
         public bool is_alarm_enabled;
         public Object alarm_config;

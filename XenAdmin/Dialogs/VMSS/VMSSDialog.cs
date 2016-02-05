@@ -72,7 +72,7 @@ namespace XenAdmin.Dialogs.VMSSPolicy
                 if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
                 {
                     realVMs++;
-                    if (vm.Connection.Resolve(vm.snapshot_policy) != null)
+                    if (vm.Connection.Resolve(vm.schedule_snapshot) != null)
                         protectedVMs++;
                 }
             }
@@ -153,8 +153,8 @@ namespace XenAdmin.Dialogs.VMSSPolicy
             {
                 _name.Value = Policies.Name;
                 _numVMs.Value = Policies.VMs.FindAll(vm => Policies.Connection.Resolve(vm).is_a_real_vm).Count;
-                _status.Value = Policies.is_policy_enabled ? Messages.ENABLED : Messages.DISABLED;
-                if (Policies.is_backup_running)
+                _status.Value = Policies.is_schedule_snapshot_enabled ? Messages.ENABLED : Messages.DISABLED;
+                if (Policies.is_schedule_snapshot_running)
                     _status.Value = Messages.RUNNING_SNAPSHOTS;
                 _lastResult.Value = Policies.LastResult;
                 if (Policies.LastResult == Messages.FAILED)
@@ -232,10 +232,10 @@ namespace XenAdmin.Dialogs.VMSSPolicy
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 currentSelected = ((VMSSPolicyRow)dataGridView1.SelectedRows[0]).Policies;
-                buttonEnable.Text = currentSelected.is_policy_enabled ? Messages.DISABLE : Messages.ENABLE;
-                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.is_policy_enabled ? false : true;
+                buttonEnable.Text = currentSelected.is_schedule_snapshot_enabled ? Messages.DISABLE : Messages.ENABLE;
+                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.is_schedule_snapshot_enabled ? false : true;
                 buttonProperties.Enabled = true;
-                buttonRunNow.Enabled = currentSelected.is_policy_enabled && !currentSelected.is_backup_running;
+                buttonRunNow.Enabled = currentSelected.is_schedule_snapshot_enabled && !currentSelected.is_schedule_snapshot_running;
 
             }
             else

@@ -10864,6 +10864,12 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="THE_SNAPSHOT" xml:space="preserve">
     <value>the snapshot '{0}'</value>
   </data>
+  <data name="THIS_VM_IS_IN_VMSS" xml:space="preserve">
+    <value>This VM is currently part of the scheduled snapshot policy '{0}'</value>
+  </data>
+  <data name="THIS_VM_IS_NOT_IN_VMSS" xml:space="preserve">
+    <value>This VM is not currently part of a scheduled snapshot policy</value>
+  </data>
   <data name="THIS_VM_IS_NOT_PROTECTED" xml:space="preserve">
     <value>This VM is not currently protected with a VM protection policy</value>
   </data>
@@ -11768,6 +11774,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VIEW_TAG_MENU_OPTION" xml:space="preserve">
     <value>View tag...</value>
+  </data>
+  <data name="VIEW_VMSS_POLICIES" xml:space="preserve">
+    <value>View VM Snapshot Schedule Policies</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
     <value>The virtual network device changes will take effect when you next restart the VM.</value>

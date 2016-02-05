@@ -45,11 +45,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicySnapshotFrequencyPage : XenTabPage, IEditPage
     {
-        public NewPolicySnapshotFrequencyPage()
+        public NewPolicySnapshotFrequencyPage(bool isVMSS)
         {
             InitializeComponent();
             radioButtonDaily.Checked = true;
             comboBoxMin.SelectedIndex = 1;
+            this.isVMSS = isVMSS;
             daysWeekCheckboxes.CheckBoxChanged += checkBox_CheckedChanged;
 
         }
@@ -199,6 +200,40 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             numericUpDownRetention.Value = vmpp.backup_retention_value;
         }
 
+        private void RefreshTabVMSS(VMSS vmss)
+        {
+            if (ParentForm != null)
+            {
+                var parentFormType = ParentForm.GetType();
+
+                if (parentFormType == typeof(XenWizardBase))
+                    sectionLabelSchedule.LineColor = sectionLabelNumber.LineColor = SystemColors.Window;
+                else if (parentFormType == typeof(PropertiesDialog))
+                    sectionLabelSchedule.LineColor = sectionLabelNumber.LineColor = SystemColors.ActiveBorder;
+            }
+
+            switch (vmss.schedule_snapshot_frequency)
+            {
+                case vmss_schedule_snapshot_frequency.hourly:
+                    radioButtonHourly.Checked = true;
+                    SetHourlyMinutes(Convert.ToDecimal(vmss.backup_schedule_min));
+                    break;
+                case vmss_schedule_snapshot_frequency.daily:
+                    radioButtonDaily.Checked = true;
+                    dateTimePickerDaily.Value = new DateTime(1970, 1, 1, Convert.ToInt32(vmss.backup_schedule_hour),
+                                                                 Convert.ToInt32(vmss.backup_schedule_min), 0);
+                    break;
+                case vmss_schedule_snapshot_frequency.weekly:
+                    radioButtonWeekly.Checked = true;
+                    dateTimePickerWeekly.Value = new DateTime(1970, 1, 1, Convert.ToInt32(vmss.backup_schedule_hour),
+                                                                 Convert.ToInt32(vmss.backup_schedule_min), 0);
+                    daysWeekCheckboxes.Days = vmss.backup_schedule_days;
+                    break;
+            }
+
+            numericUpDownRetention.Value = vmss.schedule_snapshot_retention_value;
+        }
+
         private void SetHourlyMinutes(decimal min)
         {
             if (min == 0)
@@ -224,26 +259,54 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public AsyncAction SaveSettings()
         {
-            _copy.backup_frequency = Frequency;
-            _copy.backup_schedule = Schedule;
-            _copy.backup_retention_value = BackupRetention;
+            if (!isVMSS)
+            {
+                _copy.backup_frequency = Frequency;
+                _copy.backup_schedule = Schedule;
+                _copy.backup_retention_value = BackupRetention;
+            }
+            else
+            {
+                _copyVMSS.schedule_snapshot_frequency = (vmss_schedule_snapshot_frequency)Frequency;
+                _copyVMSS.snapshot_schedule = Schedule;
+                _copyVMSS.schedule_snapshot_retention_value = BackupRetention;
+            }
             return null;
         }
 
+        private bool isVMSS;
         private VMPP _copy;
+        private VMSS _copyVMSS;
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            _copy = (VMPP)clone;
-            RefreshTab(_copy);
+            if (!isVMSS)
+            {
+                _copy = (VMPP)clone;
+                RefreshTab(_copy);
+            }
+            else
+            {
+                _copyVMSS = (VMSS)clone;
+                RefreshTabVMSS(_copyVMSS);
+            }
         }
 
         public bool ValidToSave
         {
             get
             {
-                _copy.backup_frequency = Frequency;
-                _copy.backup_schedule = Schedule;
-                _copy.backup_retention_value = BackupRetention;
+                if (!isVMSS)
+                {
+                    _copy.backup_frequency = Frequency;
+                    _copy.backup_schedule = Schedule;
+                    _copy.backup_retention_value = BackupRetention;
+                }
+                else
+                {
+                    _copyVMSS.schedule_snapshot_frequency = (vmss_schedule_snapshot_frequency)Frequency;
+                    _copyVMSS.snapshot_schedule = Schedule;
+                    _copyVMSS.schedule_snapshot_retention_value = BackupRetention;
+                }
                 return true;
             }
         }
@@ -260,12 +323,24 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if (!Helper.AreEqual2(_copy.backup_frequency, Frequency))
-                    return true;
-                if (!Helper.AreEqual2(_copy.backup_schedule, Schedule))
-                    return true;
-                if (!Helper.AreEqual2(_copy.backup_retention_value, BackupRetention))
-                    return true;
+                if (!isVMSS)
+                {
+                    if (!Helper.AreEqual2(_copy.backup_frequency, Frequency))
+                        return true;
+                    if (!Helper.AreEqual2(_copy.backup_schedule, Schedule))
+                        return true;
+                    if (!Helper.AreEqual2(_copy.backup_retention_value, BackupRetention))
+                        return true;
+                }
+                else
+                {
+                    if (!Helper.AreEqual2(_copyVMSS.schedule_snapshot_frequency, (vmss_schedule_snapshot_frequency)Frequency))
+                        return true;
+                    if (!Helper.AreEqual2(_copyVMSS.snapshot_schedule, Schedule))
+                        return true;
+                    if (!Helper.AreEqual2(_copyVMSS.schedule_snapshot_retention_value, BackupRetention))
+                        return true;
+                }
                 return false;
             }
         }

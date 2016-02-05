@@ -249,6 +249,9 @@
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
     <value>[XenServer] daemon process details</value>
   </data>
+  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>Log files from the RRD daemon</value>
+  </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>Details of the hypervisor version and its current state</value>
   </data>
@@ -336,9 +339,6 @@
   <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
     <value>Partially applied</value>
   </data>
-  <data name="Label-SR.SRTypes-smb" xml:space="preserve">
-    <value>SMB/CIFS</value>
-  </data>
   <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
     <value>StorageLink</value>
   </data>
@@ -372,6 +372,9 @@
   <data name="Label-SR.SRTypes-lvmofc" xml:space="preserve">
     <value>Hardware HBA</value>
   </data>
+  <data name="Label-SR.SRTypes-lvmofcoe" xml:space="preserve">
+    <value>FCoE</value>
+  </data>
   <data name="Label-SR.SRTypes-lvmohba" xml:space="preserve">
     <value>Hardware HBA</value>
   </data>
@@ -384,14 +387,26 @@
   <data name="Label-SR.SRTypes-nfs" xml:space="preserve">
     <value>NFS</value>
   </data>
+  <data name="Label-SR.SRTypes-rawhba" xml:space="preserve">
+    <value>LUN-per-VDI</value>
+  </data>
   <data name="Label-SR.SRTypes-shm" xml:space="preserve">
     <value>Local Performance Monitoring</value>
+  </data>
+  <data name="Label-SR.SRTypes-smb" xml:space="preserve">
+    <value>SMB/CIFS</value>
   </data>
   <data name="Label-SR.SRTypes-udev" xml:space="preserve">
     <value>udev</value>
   </data>
   <data name="Label-SR.SRTypes-unknown" xml:space="preserve">
     <value>Unknown</value>
+  </data>
+  <data name="Label-SR.disk-space-allocations" xml:space="preserve">
+    <value>Disk space allocations</value>
+  </data>
+  <data name="Label-SR.provisioning" xml:space="preserve">
+    <value>Provisioning</value>
   </data>
   <data name="Label-SR.scsiid" xml:space="preserve">
     <value>SCSI ID</value>
@@ -401,6 +416,9 @@
   </data>
   <data name="Label-SR.state" xml:space="preserve">
     <value>State</value>
+  </data>
+  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
+    <value>Installed supplemental packs</value>
   </data>
   <data name="Label-VM.BootOrder" xml:space="preserve">
     <value>Boot order</value>
@@ -417,8 +435,14 @@
   <data name="Label-VM.KeyName" xml:space="preserve">
     <value>Key name</value>
   </data>
+  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
+    <value>Max number of vCPUs</value>
+  </data>
   <data name="Label-VM.OSName" xml:space="preserve">
     <value>Operating System</value>
+  </data>
+  <data name="Label-VM.OperatingMode" xml:space="preserve">
+    <value>Virtualization mode</value>
   </data>
   <data name="Label-VM.P2V_ImportDate" xml:space="preserve">
     <value>P2V Import Date</value>
@@ -434,6 +458,9 @@
   </data>
   <data name="Label-VM.PublicDnsName" xml:space="preserve">
     <value>Public DNS entry</value>
+  </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>Topology</value>
   </data>
   <data name="Label-VM.VCPUWeight" xml:space="preserve">
     <value>vCPU priority</value>
@@ -522,6 +549,15 @@
   <data name="Label-VM.power_state-unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
+  <data name="Label-VM.read_caching_disks" xml:space="preserve">
+    <value>Disks</value>
+  </data>
+  <data name="Label-VM.read_caching_reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Label-VM.read_caching_status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="Label-VM.uptime" xml:space="preserve">
     <value>Time since startup</value>
   </data>
@@ -546,8 +582,20 @@
   <data name="Label-host.edition-advanced" xml:space="preserve">
     <value>[XenServer product] Advanced Edition</value>
   </data>
+  <data name="Label-host.edition-desktop" xml:space="preserve">
+    <value>XenApp/XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
+    <value>XenApp/XenDesktop Platinum</value>
+  </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
     <value>[XenServer product] Enterprise Edition</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>XenServer Enterprise Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>XenServer Enterprise Per-User</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
     <value>[XenServer product] for XenDesktop</value>
@@ -555,8 +603,23 @@
   <data name="Label-host.edition-free" xml:space="preserve">
     <value>[XenServer product]</value>
   </data>
+  <data name="Label-host.edition-free/libre" xml:space="preserve">
+    <value>XenServer</value>
+  </data>
+  <data name="Label-host.edition-per-socket" xml:space="preserve">
+    <value>XenServer Per-Socket</value>
+  </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
     <value>[XenServer product] Platinum Edition</value>
+  </data>
+  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
+    <value>XenServer Standard Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-xendesktop" xml:space="preserve">
+    <value>XenServer for XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
+    <value>XenDesktop Platinum</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -762,6 +825,9 @@
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
     <value>[XenServer] daemon subprocesses</value>
   </data>
+  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD plugin logs</value>
+  </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>Hypervisor configuration</value>
   </data>
@@ -795,6 +861,9 @@
   <data name="Label-host.uuid" xml:space="preserve">
     <value>UUID</value>
   </data>
+  <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
+    <value>Tapdisks in low memory mode</value>
+  </data>
   <data name="Label-performance.avg_cpu" xml:space="preserve">
     <value>Average CPU</value>
   </data>
@@ -812,6 +881,33 @@
   </data>
   <data name="Label-performance.cpu" xml:space="preserve">
     <value>CPU {0}</value>
+  </data>
+  <data name="Label-performance.cpu-state" xml:space="preserve">
+    <value>CPU {0} {1}-state {2}</value>
+  </data>
+  <data name="Label-performance.cpu_avg" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
+    <value>{0} {1} Free Memory</value>
+  </data>
+  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
+    <value>{0} {1} Used Memory</value>
+  </data>
+  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
+    <value>{0} {1} Power Usage</value>
+  </data>
+  <data name="Label-performance.gpu_temperature" xml:space="preserve">
+    <value>{0} {1} Temperature</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
+    <value>{0} {1} Utilization</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
+    <value>{0} {1} Memory Utilization</value>
+  </data>
+  <data name="Label-performance.io_errors" xml:space="preserve">
+    <value>I/O errors</value>
   </data>
   <data name="Label-performance.lo_rx" xml:space="preserve">
     <value>Loopback Receive</value>
@@ -840,6 +936,12 @@
   <data name="Label-performance.memory_internal_used" xml:space="preserve">
     <value>Used Memory</value>
   </data>
+  <data name="Label-performance.memory_reclaimed" xml:space="preserve">
+    <value>Reclaimed Memory</value>
+  </data>
+  <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
+    <value>Potential Reclaimed Memory</value>
+  </data>
   <data name="Label-performance.memory_target" xml:space="preserve">
     <value>Memory target</value>
   </data>
@@ -864,6 +966,18 @@
   <data name="Label-performance.nic_tx_errors" xml:space="preserve">
     <value>NIC {0} Send Errors</value>
   </data>
+  <data name="Label-performance.pif_aggr_rx" xml:space="preserve">
+    <value>Total NIC Receive</value>
+  </data>
+  <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
+    <value>Total NIC Send</value>
+  </data>
+  <data name="Label-performance.pool_session_count" xml:space="preserve">
+    <value>pool_session_count</value>
+  </data>
+  <data name="Label-performance.pool_task_count" xml:space="preserve">
+    <value>pool_task_count</value>
+  </data>
   <data name="Label-performance.runstate_blocked" xml:space="preserve">
     <value>vCPUs idle</value>
   </data>
@@ -885,6 +999,9 @@
   <data name="Label-performance.runstate_partial_run" xml:space="preserve">
     <value>vCPUs partial run</value>
   </data>
+  <data name="Label-performance.sr_avgqu_sz" xml:space="preserve">
+    <value>'{0}' Queue Size</value>
+  </data>
   <data name="Label-performance.sr_cache_hits" xml:space="preserve">
     <value>IntelliCache Cache Hits</value>
   </data>
@@ -893,6 +1010,33 @@
   </data>
   <data name="Label-performance.sr_cache_size" xml:space="preserve">
     <value>IntelliCache Cache Size</value>
+  </data>
+  <data name="Label-performance.sr_inflight" xml:space="preserve">
+    <value>'{0}' Inflight Requests</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_read" xml:space="preserve">
+    <value>'{0}' Read Throughput</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_total" xml:space="preserve">
+    <value>'{0}' Total Throughput</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_write" xml:space="preserve">
+    <value>'{0}' Write Throughput</value>
+  </data>
+  <data name="Label-performance.sr_iops_read" xml:space="preserve">
+    <value>'{0}' Read IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_total" xml:space="preserve">
+    <value>'{0}' Total IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_write" xml:space="preserve">
+    <value>'{0}' Write IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iowait" xml:space="preserve">
+    <value>'{0}' IO Wait</value>
+  </data>
+  <data name="Label-performance.sr_latency" xml:space="preserve">
+    <value>'{0}' Latency</value>
   </data>
   <data name="Label-performance.statefile_latency" xml:space="preserve">
     <value>HA Statefile Latency</value>
@@ -908,6 +1052,33 @@
   </data>
   <data name="Label-performance.tap_tx_errors" xml:space="preserve">
     <value>TAP {0} Send Errors</value>
+  </data>
+  <data name="Label-performance.vbd_avgqu_sz" xml:space="preserve">
+    <value>Disk {0} Queue Size</value>
+  </data>
+  <data name="Label-performance.vbd_inflight" xml:space="preserve">
+    <value>Disk {0} Inflight Requests</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_read" xml:space="preserve">
+    <value>Disk {0} IO Read Throughput</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_total" xml:space="preserve">
+    <value>Disk {0} IO Total Throughput</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
+    <value>Disk {0} IO Write Throughput</value>
+  </data>
+  <data name="Label-performance.vbd_iops_read" xml:space="preserve">
+    <value>Disk {0} Read IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_total" xml:space="preserve">
+    <value>Disk {0} Total IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_write" xml:space="preserve">
+    <value>Disk {0} Write IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iowait" xml:space="preserve">
+    <value>Disk {0} IO Wait</value>
   </data>
   <data name="Label-performance.vbd_read" xml:space="preserve">
     <value>Disk {0} Read</value>
@@ -959,6 +1130,9 @@
   </data>
   <data name="Label-performance.xapi_memory_usage_kib" xml:space="preserve">
     <value>Agent Memory Usage</value>
+  </data>
+  <data name="Label-performance.xapi_open_fds" xml:space="preserve">
+    <value>xapi_open_fds</value>
   </data>
   <data name="Label-performance.xapi_rx" xml:space="preserve">
     <value>&lt;Internal&gt; Network {0} Receive</value>
@@ -1091,6 +1265,12 @@
   <data name="Message.body-host_clock_went_backwards" xml:space="preserve">
     <value>The server clock on '{0}' has gone backwards.</value>
   </data>
+  <data name="Message.body-host_cpu_features_down" xml:space="preserve">
+    <value>The CPU feature level on host '{0}' has been reduced.</value>
+  </data>
+  <data name="Message.body-host_cpu_features_up" xml:space="preserve">
+    <value>The CPU feature level on host '{0}' has been increased.</value>
+  </data>
   <data name="Message.body-host_sync_data_failed" xml:space="preserve">
     <value>There was a temporary failure synchronizing performance statistics across the pool, probably because one or more servers were offline.  Another synchronization attempt will be made later.</value>
   </data>
@@ -1115,6 +1295,9 @@
   <data name="Message.body-license_server_unreachable" xml:space="preserve">
     <value>A license for {0} could not be checked-out because the license server could not be reached at the given address and port. Please check the connection details, and verify that the license server is running.</value>
   </data>
+  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
+    <value>The license server for {0} is an out-of-date version.</value>
+  </data>
   <data name="Message.body-metadata_lun_broken" xml:space="preserve">
     <value>Pool '{0}' is unable to access the HA metadata disk. Until access is restored changes to the pool metadata may be lost in the event of an HA failover.</value>
   </data>
@@ -1135,6 +1318,12 @@
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>A storage repository could not be attached when server '{0}' started.  You may be able to fix this using the 'Repair Storage' option in the Storage menu.</value>
+  </data>
+  <data name="Message.body-pool_cpu_features_down" xml:space="preserve">
+    <value>The CPU feature level on pool '{0}' has been reduced.</value>
+  </data>
+  <data name="Message.body-pool_cpu_features_up" xml:space="preserve">
+    <value>The CPU feature level on pool '{0}' has been increased.</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
     <value>Server '{0}' is now the master of pool '{1}'.</value>
@@ -1214,6 +1403,24 @@
   <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>Unable to log in to XAPI session.</value>
   </data>
+  <data name="Message.body-vmss_license_error" xml:space="preserve">
+    <value>The XenServer license you are using does not allow you to use the Scheduled Snapshot feature.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
+    <value>Scheduled snapshot failed: snapshot could not be created</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. One only scheduled snapshot operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>Scheduled Snapshot succeeded</value>
+  </data>
+  <data name="Message.body-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>Scheduled snapshot XAPI logon failure</value>
+  </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
     <value>Pool '{0}' failed to retrieve placement recommendations from WLB for VM '{1}'.</value>
   </data>
@@ -1222,6 +1429,12 @@
   </data>
   <data name="Message.help-alarm" xml:space="preserve">
     <value>Help on Alarms</value>
+  </data>
+  <data name="Message.help-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
+    <value>Help on AD</value>
+  </data>
+  <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
+    <value>Help on AD</value>
   </data>
   <data name="Message.help-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>Help on HA</value>
@@ -1259,6 +1472,24 @@
   <data name="Message.help-license_does_not_support_pooling" xml:space="preserve">
     <value>Help on Licensing</value>
   </data>
+  <data name="Message.help-license_expired" xml:space="preserve">
+    <value>Help on Licensing</value>
+  </data>
+  <data name="Message.help-license_not_available" xml:space="preserve">
+    <value>Help on Licensing</value>
+  </data>
+  <data name="Message.help-license_server_connected" xml:space="preserve">
+    <value>Help on Licensing</value>
+  </data>
+  <data name="Message.help-license_server_unavailable" xml:space="preserve">
+    <value>Help on Licensing</value>
+  </data>
+  <data name="Message.help-license_server_unreachable" xml:space="preserve">
+    <value>Help on Licensing</value>
+  </data>
+  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
+    <value>Help on Licensing</value>
+  </data>
   <data name="Message.help-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>Help on Broken Storage</value>
   </data>
@@ -1270,6 +1501,15 @@
   </data>
   <data name="Message.help-vif_qos_failed" xml:space="preserve">
     <value>Help on QoS</value>
+  </data>
+  <data name="Message.name-SRUnavailable" xml:space="preserve">
+    <value>Cannot reclaim freed space because the SR is already busy</value>
+  </data>
+  <data name="Message.name-UnknownTrimException" xml:space="preserve">
+    <value>An unknown error occurred when reclaiming freed space</value>
+  </data>
+  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
+    <value>Reclaiming freed space not supported on this SR</value>
   </data>
   <data name="Message.name-alarm" xml:space="preserve">
     <value>Unrecognized alarm</value>
@@ -1322,6 +1562,12 @@
   <data name="Message.name-host_clock_went_backwards" xml:space="preserve">
     <value>Server clock has gone backwards</value>
   </data>
+  <data name="Message.name-host_cpu_features_down" xml:space="preserve">
+    <value>Host CPU features reduced</value>
+  </data>
+  <data name="Message.name-host_cpu_features_up" xml:space="preserve">
+    <value>Host CPU features increased</value>
+  </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
     <value>[XenServer] statistics synchronization failed</value>
   </data>
@@ -1349,6 +1595,9 @@
   <data name="Message.name-license_server_unreachable" xml:space="preserve">
     <value>The license server could not be reached.</value>
   </data>
+  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
+    <value>The license server is an out-of-date version.</value>
+  </data>
   <data name="Message.name-metadata_lun_broken" xml:space="preserve">
     <value>Lost access to HA metadata disk</value>
   </data>
@@ -1360,6 +1609,12 @@
   </data>
   <data name="Message.name-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>Failed to attach storage on server start</value>
+  </data>
+  <data name="Message.name-pool_cpu_features_down" xml:space="preserve">
+    <value>Pool CPU features reduced</value>
+  </data>
+  <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
+    <value>Pool CPU features increased</value>
   </data>
   <data name="Message.name-pool_master_transition" xml:space="preserve">
     <value>Pool master changed</value>
@@ -1438,6 +1693,24 @@
   </data>
   <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>VMPP XAPI logon failure</value>
+  </data>
+  <data name="Message.name-vmss_license_error" xml:space="preserve">
+    <value>Scheduled snapshot failed: insufficient license for Scheduled snapshot</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_failed" xml:space="preserve">
+    <value>Scheduled snapshot failed: snapshot could not be created</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>Scheduled snapshot failed: snapshot could not be created</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>Snapshot Schedule failed: snapshot could not be created</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>Scheduled snapshot succeeded</value>
+  </data>
+  <data name="Message.name-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>Scheduled snapshot XAPI logon failure</value>
   </data>
   <data name="Message.name-wlb_consultation_failed" xml:space="preserve">
     <value>WLB consultation has failed</value>
@@ -1528,6 +1801,9 @@
   </data>
   <data name="SR.name_description-local-hotplug-cd-host" xml:space="preserve">
     <value>Physical DVD drives on {0}</value>
+  </data>
+  <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
+    <value>Physical removable storage</value>
   </data>
   <data name="SR.name_description-local-hotplug-disk-host" xml:space="preserve">
     <value>Physical removable storage on {0}</value>

@@ -57,7 +57,7 @@ namespace XenAdmin.Actions
             else
             {
                 var _vmss = _policy as VMSS;
-                Result = VMSS.protect_now(Session, _vmss.opaque_ref);
+                Result = VMSS.snapshot_now(Session, _vmss.opaque_ref);
                 Description = string.Format(Messages.RUN_POLICY_STARTED, _vmss.Name);
             }
         }
