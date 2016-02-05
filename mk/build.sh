@@ -93,6 +93,12 @@ if [ "$?" -eq 0 ]; then
   cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
 fi
 
+# overwrite archive-push.sh file, if it exists in Branding folder
+if [ -f ${XENADMIN_DIR}/Branding/branding-archive-push.sh ]; then
+  echo "Overwriting mk/archive-push.sh with Branding/branding-archive-push.sh."
+  cp ${XENADMIN_DIR}/Branding/branding-archive-push.sh ${XENADMIN_DIR}/mk/archive-push.sh
+fi
+
 production_jenkins_build()
 {
     source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
