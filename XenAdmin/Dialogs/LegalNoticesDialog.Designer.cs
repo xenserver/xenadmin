@@ -85,7 +85,9 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.HelpButton = false;
+            this.MaximizeBox = true;
             this.Name = "LegalNoticesDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
