@@ -32,20 +32,22 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using XenAdmin.Controls;
-using XenAdmin.CustomFields;
-using XenAdmin.Model;
-using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Dialogs;
-using XenAdmin.SettingsPanels;
-using XenAdmin.Network;
-using XenAdmin.Commands;
+using System.Net;
 using System.Text;
-
+using System.Windows.Forms;
+using XenAdmin.Commands;
+using XenAdmin.Controls;
+using XenAdmin.Core;
+using XenAdmin.CustomFields;
+using XenAdmin.Dialogs;
+using XenAdmin.Model;
+using XenAdmin.Network;
+using XenAdmin.SettingsPanels;
+using XenAPI;
 
 namespace XenAdmin.TabPages
 {
@@ -1793,12 +1795,46 @@ namespace XenAdmin.TabPages
 
         private void buttonViewConsole_Click(object sender, EventArgs e)
         {
-
+            if (xenObject is DockerContainer)
+            {
+                DockerContainer dockerContainer = (DockerContainer)xenObject;
+                string vmIp = dockerContainer.Parent.IPAddressForSSH;
+                //Set command 'docker attach' to attach to the container.
+                string dockerCmd = "env docker attach --sig-proxy=false " + dockerContainer.uuid;
+                startPutty(dockerCmd, vmIp);
+            }
         }
 
         private void buttonViewLog_Click(object sender, EventArgs e)
         {
+            if (xenObject is DockerContainer)
+            {
+                DockerContainer dockerContainer = (DockerContainer)xenObject;
+                string vmIp = dockerContainer.Parent.IPAddressForSSH;
+                //Set command 'docker logs' to retrieve the logs of the container.
+                string dockerCmd = "env docker logs --tail=50 --follow --timestamps " + dockerContainer.uuid;
+                startPutty(dockerCmd, vmIp);
+            }
+        }
 
+        private void startPutty(string command, string ipAddr)
+        {
+            try
+            {
+                //Write docker command to a temp file.
+                string cmdFile = Path.Combine(Path.GetTempPath(), "cmdXSContainer.txt");
+                File.WriteAllText(cmdFile, command);
+
+                //Invoke Putty, SSH to VM and execute docker command.
+                var puttyPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
+                var startInfo = new ProcessStartInfo(puttyPath, "-m " + cmdFile + " -t " + ipAddr);
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error starting PuTTY.", ex);
+                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+            }
         }
     }
 }
