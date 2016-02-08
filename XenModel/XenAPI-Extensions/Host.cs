@@ -1421,6 +1421,14 @@ namespace XenAPI
             }
         }
 
+        public bool PremiumFeaturesEnabled
+        {
+            get
+            {
+                return GetEdition(edition) == Edition.Premium;
+            }
+        }
+
         public bool EligibleForSupport
         {
             get
