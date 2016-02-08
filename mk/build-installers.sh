@@ -98,6 +98,7 @@ sign_msi()
 #create just english msi
 if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
 then 
+  cd ${WIX}
   mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
   mv XenCenter.l10n.wxs ${BRANDING_BRAND_CONSOLE}.l10n.wxs
 fi

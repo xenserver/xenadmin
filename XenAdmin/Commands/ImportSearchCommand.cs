@@ -88,10 +88,10 @@ namespace XenAdmin.Commands
                     oldDir = Directory.GetCurrentDirectory();
                     OpenFileDialog dialog = new OpenFileDialog();
                     dialog.AddExtension = true;
-                    dialog.Filter = string.Format("{0} (*." + Branding.SEARCH + ")|*." + Branding.SEARCH, Messages.XENSEARCH_SAVED_SEARCH);
+                    dialog.Filter = string.Format(Messages.XENSEARCH_SAVED_SEARCH, Branding.Search);
                     dialog.FilterIndex = 0;
                     dialog.RestoreDirectory = true;
-                    dialog.DefaultExt = Branding.SEARCH;
+                    dialog.DefaultExt = Branding.Search;
                     dialog.CheckPathExists = false;
 
                     if (dialog.ShowDialog(Parent) == DialogResult.OK)
@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
         {
             log.InfoFormat("Importing search from '{0}'", filename);
 
-            if (filename.EndsWith("." + Branding.SEARCH) && MainWindowCommandInterface.DoSearch(filename))
+            if (filename.EndsWith("." + Branding.Search) && MainWindowCommandInterface.DoSearch(filename))
             {
                 log.InfoFormat("Imported search from '{0}' successfully.", filename);
             }
@@ -119,7 +119,7 @@ namespace XenAdmin.Commands
                 new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        String.Format(Messages.UNABLE_TO_IMPORT_SEARCH, filename),
+                        String.Format(Messages.UNABLE_TO_IMPORT_SEARCH, filename, Branding.Search),
                         Messages.XENCENTER)).ShowDialog(Parent);
             }
         }

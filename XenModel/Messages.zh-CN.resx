@@ -8426,7 +8426,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择现有更新进行安装，或上载新更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 更新|*.@BRANDING_UPDATE@;*.xsoem</value>
+    <value>@BRANDING_SERVER@ 更新|*.{0};*.xsoem</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
@@ -10412,7 +10412,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ 无法从文件 {0} 中导入保存的搜索。
 
-请确认该文件属于有效的 @BRANDING_SEARCH@ 导出。</value>
+请确认该文件属于有效的 {1} 导出。</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>@BRANDING_BRAND_CONSOLE@ 将文件解压到“{0}”。 解压后，将删除原始文件“{1}”。是否继续?</value>
@@ -10621,7 +10621,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: VM {1} 使用本地存储，无法迁移。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为: *.xsoem 和 *.@BRANDING_UPDATE@</value>
+    <value>所选文件的扩展名无效。有效扩展名为: *.xsoem 和 *.{0}</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>此存储库空间不足，无法挂起所需的 VM。</value>
@@ -12109,7 +12109,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>更新的 @BRANDING_BRAND_CONSOLE@ 可用</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
-    <value>保存的搜索</value>
+    <value>保存的搜索 (*.{0})|*.{0}</value>>
   </data>
   <data name="XENSERVER" xml:space="preserve">
     <value>@BRANDING_SERVER@</value>

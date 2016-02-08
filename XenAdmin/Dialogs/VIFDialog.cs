@@ -147,6 +147,11 @@ namespace XenAdmin.Dialogs
 
         void promptTextBoxMac_TextChanged(object sender, EventArgs e)
         {
+            ValidateMACAddress();
+        }
+
+        private void ValidateMACAddress()
+        {
             if (MACAddressHasChanged() && !MACAddressIsAcceptable())
             {
                 MarkMACAsInvalid();
@@ -215,6 +220,7 @@ namespace XenAdmin.Dialogs
 
         private void NetworkComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ValidateMACAddress();
             updateEnablement();
         }
 
