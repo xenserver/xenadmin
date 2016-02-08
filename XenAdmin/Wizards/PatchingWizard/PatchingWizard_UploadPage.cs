@@ -144,7 +144,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var poolPatches = new List<Pool_patch>(poolMaster.Connection.Cache.Pool_patches);
 
-            return (poolPatches.Exists(p => p.uuid == patch.uuid));
+            return (poolPatches.Exists(p => string.Equals(p.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase)));
         }
 
         private void PrepareUploadActions()

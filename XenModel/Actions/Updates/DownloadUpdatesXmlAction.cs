@@ -244,7 +244,7 @@ namespace XenAdmin.Actions
                     {
                         if (childnode.Name != "patch")
                             continue;
-                        XenServerPatch patch = XenServerPatches.Find(item => item.Uuid == childnode.Attributes["uuid"].Value);
+                        XenServerPatch patch = XenServerPatches.Find(item => string.Equals(item.Uuid, childnode.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
                         if (patch == null)
                             continue;
                         patches.Add(patch);

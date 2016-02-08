@@ -55,7 +55,7 @@ namespace XenAdmin.Core
         public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
             string patchUrl, string timestamp, string priority, string installationSize)
         {
-            _uuid = uuid.ToLowerInvariant();
+            _uuid = uuid;
             Name = name;
             Description = description;
             Guidance = guidance;
@@ -86,7 +86,7 @@ namespace XenAdmin.Core
 
         public bool Equals(XenServerPatch other)
         {
-            return Uuid == other.Uuid;
+            return string.Equals(Uuid, other.Uuid, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
