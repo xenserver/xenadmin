@@ -53,7 +53,8 @@ namespace XenAdmin
         {
             get
             {
-                return SEARCH != "@BRANDING_SEARCH@" ? SEARCH : InvisibleMessages.XEN_SEARCH;
+                var s = SEARCH;
+                return s != "@" + "BRANDING_SEARCH@" ? s : InvisibleMessages.XEN_SEARCH;
             }
         }
         
@@ -61,7 +62,8 @@ namespace XenAdmin
         {
             get
             {
-                return UPDATE != "@BRANDING_UPDATE@" ? UPDATE : InvisibleMessages.XEN_UPDATE;
+                var s = UPDATE;
+                return s != "@" + "RANDING_UPDATE@" ? s : InvisibleMessages.XEN_UPDATE;
             }
         }
 
@@ -69,7 +71,8 @@ namespace XenAdmin
         {
             get
             {
-                return CHECK_FOR_UPDATES_URL != "@BRANDING_XENSERVER_UPDATE_URL@" ? CHECK_FOR_UPDATES_URL : InvisibleMessages.XENSERVER_UPDATE_URL;
+                var s = CHECK_FOR_UPDATES_URL;
+                return s != "@" + "BRANDING_XENSERVER_UPDATE_URL@" ? s : InvisibleMessages.XENSERVER_UPDATE_URL;
             }
         }
     }
