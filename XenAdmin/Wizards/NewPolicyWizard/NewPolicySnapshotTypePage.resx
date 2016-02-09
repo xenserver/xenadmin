@@ -190,7 +190,7 @@
     <value>10</value>
   </data>
   <data name="quiesceCheckBox.Text" xml:space="preserve">
-    <value>&amp;Quiesce the VM before taking the snapshot (Windows only)</value>
+    <value>&amp;Quiesce the VM before taking snapshot (Windows only)</value>
   </data>
   <data name="&gt;&gt;quiesceCheckBox.Name" xml:space="preserve">
     <value>quiesceCheckBox</value>
@@ -410,7 +410,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBoxVSS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 94</value>
+    <value>343, 94</value>
   </data>
   <data name="pictureBoxVSS.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>

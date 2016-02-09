@@ -47,13 +47,10 @@ namespace XenAdmin.Wizards.NewPolicyWizard
     {
         readonly EmailAddressValidator emailAddressValidator = new EmailAddressValidator();
 
-        public NewPolicyEmailPage(string pageText, string checkBoxText, bool isVMSS)
+        public NewPolicyEmailPage()
         {
             InitializeComponent();
             textBoxPort.Text = 25.ToString();
-            this.label1.Text = pageText;
-            this.checkBox1.Text = checkBoxText;
-            this.isVMSS = isVMSS;
             RegisterEvents();
         }
 
@@ -153,17 +150,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        private void RefreshTabVMSS(VMSS vmss)
-        {
-            checkBox1.Checked = vmss.is_alarm_enabled;
-            if (vmss.is_alarm_enabled)
-            {
-                textBoxSMTP.Text = vmss.alarm_config_smtp_server;
-                textBoxPort.Text = vmss.alarm_config_smtp_port;
-                textBoxEmailAddress.Text = vmss.alarm_config_email_address;
-            }
-        }
-
 
         private void EnableOkButton()
         {
@@ -175,36 +161,17 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public AsyncAction SaveSettings()
         {
-            if (!isVMSS)
-            {
-                _clone.is_alarm_enabled = EmailEnabled;
-                _clone.alarm_config = EmailSettings;
-            }
-            else
-            {
-                _cloneVMSS.is_alarm_enabled = EmailEnabled;
-                _cloneVMSS.alarm_config = EmailSettings;
-            }
+            _clone.is_alarm_enabled = EmailEnabled;
+            _clone.alarm_config = EmailSettings;
             return null;
         }
 
-        private bool isVMSS;
         private VMPP _clone;
-        private VMSS _cloneVMSS;
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            if (!isVMSS)
-            {
-                _clone = (VMPP)clone;
-                Pool = Helpers.GetPoolOfOne(_clone.Connection);
-                RefreshTab(_clone);
-            }
-            else
-            {
-                _cloneVMSS = (VMSS)clone;
-                Pool = Helpers.GetPoolOfOne(_cloneVMSS.Connection);
-                RefreshTabVMSS(_cloneVMSS);
-            }
+            _clone = (VMPP)clone;
+            Pool = Helpers.GetPoolOfOne(_clone.Connection);
+            RefreshTab(_clone);
         }
 
         /// <summary>
@@ -258,9 +225,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if ((!isVMSS && EmailEnabled != _clone.is_alarm_enabled) || (isVMSS && EmailEnabled != _cloneVMSS.is_alarm_enabled))
+                if (EmailEnabled != _clone.is_alarm_enabled)
                     return true;
-                if ((!isVMSS && !Helper.AreEqual2(_clone.alarm_config, EmailSettings)) || (isVMSS && !Helper.AreEqual2(_cloneVMSS.alarm_config, EmailSettings)))
+                if (!Helper.AreEqual2(_clone.alarm_config, EmailSettings))
                     return true;
                 return false;
             }

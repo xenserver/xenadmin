@@ -27496,6 +27496,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot create VM Snapshot schedule policies. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_WARNING_VMSS {
+            get {
+                return ResourceManager.GetString("RBAC_WARNING_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read Only.
         /// </summary>
         public static string READ_ONLY {
