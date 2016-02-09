@@ -1578,7 +1578,9 @@ namespace XenAdmin
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
-            if (hostAncestor != null && (Helpers.GetMaster(connection) != null) && (Helpers.DundeeOrGreater(connection))) /* hide VMPP */
+            IXenConnection conn;
+            conn = SelectionManager.Selection.GetConnectionOfAllItems();
+            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.DundeeOrGreater(conn))) /* hide VMPP */
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = true;
                 VMSnapshotScheduleToolStripMenuItem.Available = true;

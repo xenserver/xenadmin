@@ -9546,6 +9546,9 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   <data name="RBAC_WARNING_VMPP" xml:space="preserve">
     <value>A {0} user cannot create VM protection policies. Log in as a different user with sufficient privileges and try again.</value>
   </data>
+  <data name="RBAC_WARNING_VMSS" xml:space="preserve">
+    <value>A {0} user cannot create VM Snapshot schedule policies. Log in as a different user with sufficient privileges and try again.</value>
+  </data>
   <data name="RBAC_WARNING_VM_APPLIANCE" xml:space="preserve">
     <value>A {0} user cannot create vApps. Log in as a different user with sufficient privileges and try again.</value>
   </data>

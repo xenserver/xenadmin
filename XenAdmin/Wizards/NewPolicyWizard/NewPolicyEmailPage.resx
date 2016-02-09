@@ -112,24 +112,46 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 22</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>E&amp;mail address:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -137,11 +159,32 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 34</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 0</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 23</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>&amp;SMTP server:</value>
+  </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -149,11 +192,23 @@
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="textBoxEmailAddress.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="textBoxEmailAddress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 3</value>
+  </data>
+  <data name="textBoxEmailAddress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 20</value>
+  </data>
+  <data name="textBoxEmailAddress.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;textBoxEmailAddress.Name" xml:space="preserve">
     <value>textBoxEmailAddress</value>
   </data>
   <data name="&gt;&gt;textBoxEmailAddress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxEmailAddress.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -161,11 +216,23 @@
   <data name="&gt;&gt;textBoxEmailAddress.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="textBoxSMTP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="textBoxSMTP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 31</value>
+  </data>
+  <data name="textBoxSMTP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 20</value>
+  </data>
+  <data name="textBoxSMTP.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;textBoxSMTP.Name" xml:space="preserve">
     <value>textBoxSMTP</value>
   </data>
   <data name="&gt;&gt;textBoxSMTP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxSMTP.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -173,11 +240,32 @@
   <data name="&gt;&gt;textBoxSMTP.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>346, 34</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>P&amp;ort:</value>
+  </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -185,11 +273,20 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="textBoxPort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>393, 31</value>
+  </data>
+  <data name="textBoxPort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="textBoxPort.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;textBoxPort.Name" xml:space="preserve">
     <value>textBoxPort</value>
   </data>
   <data name="&gt;&gt;textBoxPort.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPort.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -200,7 +297,6 @@
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
@@ -217,7 +313,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -253,181 +349,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 6</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 22</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>E&amp;mail address:</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 34</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 0</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>&amp;SMTP server:</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="textBoxEmailAddress.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="textBoxEmailAddress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 3</value>
-  </data>
-  <data name="textBoxEmailAddress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 20</value>
-  </data>
-  <data name="textBoxEmailAddress.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmailAddress.Name" xml:space="preserve">
-    <value>textBoxEmailAddress</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmailAddress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmailAddress.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmailAddress.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="textBoxSMTP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="textBoxSMTP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 31</value>
-  </data>
-  <data name="textBoxSMTP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 20</value>
-  </data>
-  <data name="textBoxSMTP.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;textBoxSMTP.Name" xml:space="preserve">
-    <value>textBoxSMTP</value>
-  </data>
-  <data name="&gt;&gt;textBoxSMTP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxSMTP.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;textBoxSMTP.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 34</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 0</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 23</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>P&amp;ort:</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="textBoxPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 31</value>
-  </data>
-  <data name="textBoxPort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
-  </data>
-  <data name="textBoxPort.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textBoxPort.Name" xml:space="preserve">
-    <value>textBoxPort</value>
-  </data>
-  <data name="&gt;&gt;textBoxPort.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxPort.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;textBoxPort.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -441,11 +369,14 @@
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>XenServer can send you email notifications when alerts associated with VM protection jobs are raised, such as when a VM snapshot is created or archived, or when a snapshot or archive operation fails.</value>
+  </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -460,16 +391,19 @@
     <value>3, 60</value>
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 14</value>
+    <value>281, 17</value>
   </data>
   <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>Send &amp;email notifications about VM protection job alerts</value>
   </data>
   <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
     <value>checkBox1</value>
   </data>
   <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -477,11 +411,26 @@
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="errorMessageLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="errorMessageLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 3</value>
+  </data>
+  <data name="errorMessageLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 13</value>
+  </data>
+  <data name="errorMessageLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="errorMessageLabel.Text" xml:space="preserve">
+    <value>The email address entered has an invalid format</value>
+  </data>
   <data name="&gt;&gt;errorMessageLabel.Name" xml:space="preserve">
     <value>errorMessageLabel</value>
   </data>
   <data name="&gt;&gt;errorMessageLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;errorMessageLabel.Parent" xml:space="preserve">
     <value>errorPanel</value>
@@ -489,11 +438,20 @@
   <data name="&gt;&gt;errorMessageLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 19</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>errorPanel</value>
@@ -517,7 +475,7 @@
     <value>errorPanel</value>
   </data>
   <data name="&gt;&gt;errorPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;errorPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -525,58 +483,7 @@
   <data name="&gt;&gt;errorPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="errorMessageLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="errorMessageLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 3</value>
-  </data>
-  <data name="errorMessageLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 13</value>
-  </data>
-  <data name="errorMessageLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="errorMessageLabel.Text" xml:space="preserve">
-    <value>The email address entered has an invalid format</value>
-  </data>
-  <data name="&gt;&gt;errorMessageLabel.Name" xml:space="preserve">
-    <value>errorMessageLabel</value>
-  </data>
-  <data name="&gt;&gt;errorMessageLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;errorMessageLabel.Parent" xml:space="preserve">
-    <value>errorPanel</value>
-  </data>
-  <data name="&gt;&gt;errorMessageLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox1.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 19</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>errorPanel</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

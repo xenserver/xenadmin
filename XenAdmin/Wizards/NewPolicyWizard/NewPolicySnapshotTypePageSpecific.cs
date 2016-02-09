@@ -54,32 +54,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public NewPolicySnapshotTypePageSpecific(List<VM> selectedVMS)
             : base(selectedVMS)
         {
-            if (typeof(T) == typeof(VMSS))
-            {
-                this.quiesceCheckBox.Visible = true;
-                this.quiesceCheckBox.Enabled = true;
-                if (selectedVMS != null)
-                {
-                    foreach (VM vm in selectedVMS)
-                    {
-                        if (!vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) || Helpers.FeatureForbidden(vm, Host.RestrictVss))
-                        {
-                            this.quiesceCheckBox.Enabled = false;
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    this.quiesceCheckBox.Enabled = false;
-                }
-            }
-            else
-            {
-                this.quiesceCheckBox.Visible = false;
-                this.pictureBoxVSS.Visible = false;
-            }
-            this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
 
         }
 
