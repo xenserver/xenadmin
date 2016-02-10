@@ -319,7 +319,7 @@
     <value>1</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>可以在此处配置 @BRANDING_BRAND_CONSOLE@“性能”选项卡上所显示的性能图表的外观。</value>
+    <value>可以在此处配置 [XenCenter]“性能”选项卡上所显示的性能图表的外观。</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>

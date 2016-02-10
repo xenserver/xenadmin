@@ -265,7 +265,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>この @BRANDING_SERVER@ アクティブ化キーの適用先サーバーを選択します。一覧に表示されていないサーバーを追加するには、[新規サーバーの追加] をクリックします。</value>
+    <value>この [XenServer] アクティブ化キーの適用先サーバーを選択します。一覧に表示されていないサーバーを追加するには、[新規サーバーの追加] をクリックします。</value>
   </data>
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

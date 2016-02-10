@@ -187,7 +187,7 @@
     <value>Failed to import a virtual disk via iSCSI.</value>
   </data>
   <data name="ERROR_NOT_CONNECTED" xml:space="preserve">
-    <value>Disconnected from @BRANDING_SERVER@.</value>
+    <value>Disconnected from [XenServer].</value>
   </data>
   <data name="ERROR_NO_PASSWORD" xml:space="preserve">
     <value>A password was not provided to decrypt an OVF package.</value>
@@ -277,7 +277,7 @@
     <value>Expanding {0} ... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>Configuring virtual machine for @BRANDING_SERVER@ ... </value>
+    <value>Configuring virtual machine for [XenServer] ... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>Imported.</value>

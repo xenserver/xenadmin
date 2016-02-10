@@ -88,7 +88,7 @@ const size_t PathLen = 17;
 const TCHAR ProductVersion[] = TEXT("0.0");
 const TCHAR ProductBuild[] = TEXT("0000");
 #else
-const TCHAR ProductVersion[] = TEXT("@BRANDING_PRODUCT_VERSION@");
+const TCHAR ProductVersion[] = TEXT("[BRANDING_PRODUCT_VERSION]");
 const TCHAR ProductBuild[] = TEXT("@BUILD_NUMBER@");
 #endif
 

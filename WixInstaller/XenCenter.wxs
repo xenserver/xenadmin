@@ -35,16 +35,16 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define ProductVersion="1.0.0" ?>
-    <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
+    <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
-    <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
-        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
+    <Product Id="$(var.ProductCode)" Name="[Citrix] [XenCenter]" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
+        <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="Citrix" Name="@BRANDING_COMPANY_NAME_SHORT@">
-                    <Directory Id="INSTALLDIR" ShortName="XenCente" Name="@BRANDING_BRAND_CONSOLE@">
-                        <Component Id="ReportViewer" Guid="@BRANDING_REPORT_VIEWER_GUID@">
+                <Directory Id="Citrix" Name="[Citrix]">
+                    <Directory Id="INSTALLDIR" ShortName="XenCente" Name="[XenCenter]">
+                        <Component Id="ReportViewer" Guid="[BRANDING_REPORT_VIEWER_GUID]">
                             <File Id="MicRepVwrCmnDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
                             <File Id="MicRepVwrPrcObjDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
                             <File Id="MicRepVwrWFDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.dll" />
@@ -57,9 +57,9 @@
                             <File Id="ReportConfigXML" Source="..\XenAdmin\ReportViewer\reports.xml" />
                             <File Id="ResourceReportRDLC" Source="..\XenAdmin\ReportViewer\resource_report.rdlc" />
                         </Component>
-                        <Component Id="MainExecutable" Guid="@BRANDING_MAIN_EXECUTABLE_GUID@">
+                        <Component Id="MainExecutable" Guid="[BRANDING_MAIN_EXECUTABLE_GUID]">
                             <!-- XenCenter EXE -->
-                            <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\@BRANDING_BRAND_CONSOLE@.exe" KeyPath="yes" />
+                            <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\[XenCenter].exe" KeyPath="yes" />
                             <!-- other EXEs -->
                             <File Id="XenCenterMainEXE" Source="..\XenAdmin\bin\Release\XenCenterMain.exe" />
                             <File Id="XeEXE" Source="..\xe\bin\Release\xe.exe" />
@@ -117,38 +117,38 @@
                                 </Extension>
                             </ProgId>
 							<!-- Define XSLIC extension -->
-							<ProgId Id="XenCenter.xslic" Description="@BRANDING_SERVER@ License File" Icon="XslicIcon">
+							<ProgId Id="XenCenter.xslic" Description="[XenServer] License File" Icon="XslicIcon">
                                 <Extension Id="xslic" ContentType="application/xslic">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
 							<!-- Define XBK extension -->
-							<ProgId Id="XenCenter.xbk" Description="@BRANDING_SERVER@ Backup File" Icon="XkbIcon">
+							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
                                 <Extension Id="xbk" ContentType="application/xbk">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XSUPDATE extension -->
-							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="@BRANDING_SERVER@ Update File" Icon="XsupdateIcon">
-                                <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
+							<ProgId Id="XenCenter.[xsupdate]" Description="[XenServer] Update File" Icon="XsupdateIcon">
+                                <Extension Id="[xsupdate]" ContentType="application/[xsupdate]">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XSOEM extension -->
-							<ProgId Id="XenCenter.xsoem" Description="@BRANDING_SERVER@ OEM Update File" Icon="XsupdateIcon">
+							<ProgId Id="XenCenter.xsoem" Description="[XenServer] OEM Update File" Icon="XsupdateIcon">
                                 <Extension Id="xsoem" ContentType="application/xsoem">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <!-- Define XENSEARCH extension -->
-                            <ProgId Id="XenCenter.@BRANDING_SEARCH@" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
-                                <Extension Id="@BRANDING_SEARCH@" ContentType="application/@BRANDING_SEARCH@">
+                            <ProgId Id="XenCenter.[xensearch]" Description="[XenCenter] Saved Search" Icon="XenCenterIcon">
+                                <Extension Id="[xensearch]" ContentType="application/[xensearch]">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="search &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
-                        <Component Id="xsupdatesfiles" Guid="@BRANDING_XSUPDATE_FILE_GUID@">
+                        <Component Id="xsupdatesfiles" Guid="[BRANDING_XSUPDATE_FILE_GUID]">
                             <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
                             <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
                             <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
@@ -159,7 +159,7 @@
                         </Component>
                         <!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
-                            <Component Id="TestResources" Guid="@BRANDING_TEST_RESOURCES_GUID@">
+                            <Component Id="TestResources" Guid="[BRANDING_TEST_RESOURCES_GUID]">
                                 <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
                                 <File Id="interes1.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
                                 <File Id="interes2.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
@@ -167,24 +167,24 @@
                             </Component>
                         </Directory>
                         <?else?>
-                        <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
+                        <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
                             <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
                         </Component>
                         <?endif?>
                         <Directory Id="Help" Name="Help">
                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.chm" />
+                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
                                 <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
                             </Component>
                         </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-                            <Component Id="ExternalToolsComponent" Guid="@BRANDING_EXTERNAL_TOOLS_GUID@">
+                            <Component Id="ExternalToolsComponent" Guid="[BRANDING_EXTERNAL_TOOLS_GUID]">
                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
                                 <File Id="REFERENCEVHD" Source="..\XenOvfApi\External Tools\bootablereference.vhd.bz2" />
                             </Component>
                         </Directory>
                         <Directory Id="SCHEMAS" Name="Schemas">
-                            <Component Id="SchemasFilesComponent" Guid="@BRANDING_SCHEMAS_FILES_GUID@">
+                            <Component Id="SchemasFilesComponent" Guid="[BRANDING_SCHEMAS_FILES_GUID]">
                                 <File Id="CIMOSXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_OperatingSystem.xml" />
                                 <File Id="CIMRASDXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xml" />
                                 <File Id="CIMRASDXSD" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xsd" />
@@ -203,7 +203,7 @@
                     </Directory>
                     <?if "$(env.Branding)"="XenCenter"?>
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
-							<Component Id="XenServerHealthCheck" Guid="{@BRANDING_HEALTH_CHECK_GUID@}">
+							<Component Id="XenServerHealthCheck" Guid="{[BRANDING_HEALTH_CHECK_GUID]}">
 								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
 								<File Id="HealthCheck_CommandLib.dll" Name="CommandLib.dll" Source="..\XenServerHealthCheck\bin\Release\CommandLib.dll" />
 								<File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="..\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
@@ -218,8 +218,8 @@
 								  Type="ownProcess"
 								  Vital="no"
 								  Name="XenServerHealthCheck"
-								  DisplayName="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service"
-								  Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service"
+								  DisplayName="[Citrix] [XenServer] Health Check Service"
+								  Description="[Citrix] [XenServer] Health Check Service"
 								  Start="auto"
 								  Account="LocalSystem"
 								  ErrorControl="normal"
@@ -239,34 +239,34 @@
 				</Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationProgramsFolder" Name="@BRANDING_COMPANY_NAME_SHORT@" />
+                <Directory Id="ApplicationProgramsFolder" Name="[Citrix]" />
             </Directory>
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
                     <Condition>INSTALLSHORTCUT</Condition>
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="@BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR"/>
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="[XenCenter]" Description="[XenCenter] Shortcut" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR"/>
                     <RemoveFolder Id="DesktopFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                    <RegistryValue Root="HKCU" Key="Software\[Citrix]\[XenCenter]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
-            <Component Id="RegistryEntries" Guid="@BRANDING_REGISTRY_ENTRIES_GUID@">
-                <RegistryKey Root="HKMU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@">
+            <Component Id="RegistryEntries" Guid="[BRANDING_REGISTRY_ENTRIES_GUID]">
+                <RegistryKey Root="HKMU" Key="Software\[Citrix]\[XenCenter]">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
-                    <RegistryValue Type="string" Name="HiddenFeatures" Value="@BRANDING_HIDDEN_FEATURE@" />
+                    <RegistryValue Type="string" Name="HiddenFeatures" Value="[BRANDING_HIDDEN_FEATURE]" />
                 </RegistryKey>
             </Component>
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
-            <Component Id="ApplicationShortcut" Guid="@BRANDING_APPLICAION_SHOTCUT_GUID@">
-                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_BRAND_CONSOLE@ Shortcut" Target="[INSTALLDIR]@BRANDING_BRAND_CONSOLE@.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+            <Component Id="ApplicationShortcut" Guid="[BRANDING_APPLICAION_SHOTCUT_GUID]">
+                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="[Citrix] [XenCenter]" Description="[XenCenter] Shortcut" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKCU" Key="Software\[Citrix]\[XenCenter]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 	
-        <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
+        <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
@@ -284,7 +284,7 @@
         </Feature>
 
         <?if "$(env.Branding)"="XenCenter"?>		
-        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+        <Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="[Citrix] [XenServer] Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
              <ComponentRef Id="XenServerHealthCheck" /> 
         </Feature>
 
@@ -300,7 +300,7 @@
         <PropertyRef Id="NETFRAMEWORK45" />
         <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
         <Property Id="PERMACHINEINSTALL">
-            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
+            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
         </Property>
 		<Property Id="REINSTALLMODE" Value="amus" />
         <Property Id="INSTALLSHORTCUT" />

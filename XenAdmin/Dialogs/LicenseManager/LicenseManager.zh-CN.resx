@@ -232,7 +232,7 @@
     <value>4</value>
   </data>
   <data name="downloadLicenseServerLink.Text" xml:space="preserve">
-    <value>下载 @BRANDING_COMPANY_NAME_SHORT@ 许可证服务器虚拟设备</value>
+    <value>下载 [Citrix] 许可证服务器虚拟设备</value>
   </data>
   <data name="downloadLicenseServerLink.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -343,7 +343,7 @@
     <value>3</value>
   </data>
   <data name="activateFreeXenServerButton.Text" xml:space="preserve">
-    <value>激活免费版 @BRANDING_SERVER@(&amp;F)</value>
+    <value>激活免费版 [XenServer](&amp;F)</value>
   </data>
   <data name="&gt;&gt;activateFreeXenServerButton.Name" xml:space="preserve">
     <value>activateFreeXenServerButton</value>

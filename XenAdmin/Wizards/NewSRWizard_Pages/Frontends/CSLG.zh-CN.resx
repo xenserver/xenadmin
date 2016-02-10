@@ -277,7 +277,7 @@
     <value>7</value>
   </data>
   <data name="labelStorageLinkPropertiesLinkBlurb.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ StorageLink Gateway 是一项存储管理技术，它支持使用任何领先的存储体系结构和协议(包括 DAS、NAS、SAN、iSCSI 和光纤通道)来自动检测和一键式访问本机存储服务。
+    <value>[Citrix] StorageLink Gateway 是一项存储管理技术，它支持使用任何领先的存储体系结构和协议(包括 DAS、NAS、SAN、iSCSI 和光纤通道)来自动检测和一键式访问本机存储服务。
 
 </value>
   </data>

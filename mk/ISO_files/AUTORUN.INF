@@ -29,5 +29,5 @@
 ;  SUCH DAMAGE.
 	
 [AutoRun]
-shellexecute=@BRANDING_BRAND_CONSOLE@Setup.exe
-icon=@BRANDING_BRAND_CONSOLE@.ico
+shellexecute=[XenCenter]Setup.exe
+icon=[XenCenter].ico

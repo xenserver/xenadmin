@@ -115,7 +115,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrieve the user information stored as binary objects on @BRANDING_SERVER@..
+        ///   Looks up a localized string similar to Retrieve the user information stored as binary objects on [XenServer]..
         /// </summary>
         public static string Description_host_system_status_blobs {
             get {
@@ -151,7 +151,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The configuration settings of @BRANDING_COMPANY_NAME_SHORT@ Storagelink.
+        ///   Looks up a localized string similar to The configuration settings of [Citrix] Storagelink.
         /// </summary>
         public static string Description_host_system_status_CVSM {
             get {
@@ -313,7 +313,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuration files used by the Pluggable Authentication Modules (PAM) in @BRANDING_SERVER@..
+        ///   Looks up a localized string similar to Configuration files used by the Pluggable Authentication Modules (PAM) in [XenServer]..
         /// </summary>
         public static string Description_host_system_status_pam {
             get {
@@ -412,7 +412,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ daemon internal logs.
+        ///   Looks up a localized string similar to [XenServer] daemon internal logs.
         /// </summary>
         public static string Description_host_system_status_xapi {
             get {
@@ -421,7 +421,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ daemon crash dumps.
+        ///   Looks up a localized string similar to [XenServer] daemon crash dumps.
         /// </summary>
         public static string Description_host_system_status_xapi_debug {
             get {
@@ -430,7 +430,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ daemon process details.
+        ///   Looks up a localized string similar to [XenServer] daemon process details.
         /// </summary>
         public static string Description_host_system_status_xapi_subprocess {
             get {
@@ -466,7 +466,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Details of the @BRANDING_SERVER@ such as version and build information, primary hard disk location and pool configuration.
+        ///   Looks up a localized string similar to Details of the [XenServer] such as version and build information, primary hard disk location and pool configuration.
         /// </summary>
         public static string Description_host_system_status_xenserver_config {
             get {
@@ -475,7 +475,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The database which stores the state of the @BRANDING_SERVER@.
+        ///   Looks up a localized string similar to The database which stores the state of the [XenServer].
         /// </summary>
         public static string Description_host_system_status_xenserver_databases {
             get {
@@ -493,7 +493,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log files generated during the installation of the @BRANDING_SERVER@.
+        ///   Looks up a localized string similar to Log files generated during the installation of the [XenServer].
         /// </summary>
         public static string Description_host_system_status_xenserver_install {
             get {
@@ -502,7 +502,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log files concerning the @BRANDING_SERVER@&apos;s activity.
+        ///   Looks up a localized string similar to Log files concerning the [XenServer]&apos;s activity.
         /// </summary>
         public static string Description_host_system_status_xenserver_logs {
             get {
@@ -646,7 +646,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must have the XenServerPSSnapIn installed to use @BRANDING_SERVER@ PowerShell Commands. This can be found in the SDK..
+        ///   Looks up a localized string similar to You must have the XenServerPSSnapIn installed to use [XenServer] PowerShell Commands. This can be found in the SDK..
         /// </summary>
         public static string Exception_PowerShellSnapInNotPresent {
             get {
@@ -754,7 +754,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Advanced Edition.
+        ///   Looks up a localized string similar to [XenServer product] Advanced Edition.
         /// </summary>
         public static string Label_host_edition_advanced {
             get {
@@ -763,7 +763,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Basic Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Basic Edition.
         /// </summary>
         public static string Label_host_edition_basic {
             get {
@@ -790,7 +790,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Enterprise Edition.
+        ///   Looks up a localized string similar to [XenServer product] Enterprise Edition.
         /// </summary>
         public static string Label_host_edition_enterprise {
             get {
@@ -799,7 +799,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Enterprise Per-Socket.
+        ///   Looks up a localized string similar to [XenServer product] Enterprise Per-Socket.
         /// </summary>
         public static string Label_host_edition_enterprise_per_socket {
             get {
@@ -808,7 +808,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Enterprise Per-User.
+        ///   Looks up a localized string similar to [XenServer product] Enterprise Per-User.
         /// </summary>
         public static string Label_host_edition_enterprise_per_user {
             get {
@@ -817,7 +817,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ for XenDesktop.
+        ///   Looks up a localized string similar to [XenServer product] for XenDesktop.
         /// </summary>
         public static string Label_host_edition_enterprise_xd {
             get {
@@ -826,7 +826,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@.
+        ///   Looks up a localized string similar to [XenServer product].
         /// </summary>
         public static string Label_host_edition_free {
             get {
@@ -835,7 +835,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@.
+        ///   Looks up a localized string similar to [XenServer product].
         /// </summary>
         public static string Label_host_edition_free_libre {
             get {
@@ -844,7 +844,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Per-Socket.
+        ///   Looks up a localized string similar to [XenServer product] Per-Socket.
         /// </summary>
         public static string Label_host_edition_per_socket {
             get {
@@ -853,7 +853,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Platinum Edition.
+        ///   Looks up a localized string similar to [XenServer product] Platinum Edition.
         /// </summary>
         public static string Label_host_edition_platinum {
             get {
@@ -862,7 +862,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Premium Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Premium Edition.
         /// </summary>
         public static string Label_host_edition_premium {
             get {
@@ -871,7 +871,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Standard Per-Socket.
+        ///   Looks up a localized string similar to [XenServer product] Standard Per-Socket.
         /// </summary>
         public static string Label_host_edition_standard_per_socket {
             get {
@@ -880,7 +880,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ for XenDesktop.
+        ///   Looks up a localized string similar to [XenServer product] for XenDesktop.
         /// </summary>
         public static string Label_host_edition_xendesktop {
             get {
@@ -1033,7 +1033,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_dell_xe_enterprise {
             get {
@@ -1042,7 +1042,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Express Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Express Edition.
         /// </summary>
         public static string Label_host_sku_type_dell_xe_express {
             get {
@@ -1051,7 +1051,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Server Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Server Edition.
         /// </summary>
         public static string Label_host_sku_type_dell_xe_server {
             get {
@@ -1060,7 +1060,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], Dell Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_FG_dell_xe_enterprise {
             get {
@@ -1069,7 +1069,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Edition.
         /// </summary>
         public static string Label_host_sku_type_FG_dell_xe_express {
             get {
@@ -1078,7 +1078,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, Dell Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], Dell Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_FG_dell_xe_server {
             get {
@@ -1087,7 +1087,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], HP Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_FG_hp_xe_enterprise {
             get {
@@ -1096,7 +1096,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Edition.
         /// </summary>
         public static string Label_host_sku_type_FG_hp_xe_express {
             get {
@@ -1105,7 +1105,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@, HP Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], HP Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_FG_hp_xe_server {
             get {
@@ -1114,7 +1114,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@.
+        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product].
         /// </summary>
         public static string Label_host_sku_type_FG_xe_enterprise {
             get {
@@ -1123,7 +1123,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product].
         /// </summary>
         public static string Label_host_sku_type_FG_xe_express {
             get {
@@ -1132,7 +1132,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@.
+        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product].
         /// </summary>
         public static string Label_host_sku_type_FG_xe_server {
             get {
@@ -1141,7 +1141,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_hp_xe_enterprise {
             get {
@@ -1150,7 +1150,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Select Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Select Edition.
         /// </summary>
         public static string Label_host_sku_type_hp_xe_express {
             get {
@@ -1159,7 +1159,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Server Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Server Edition.
         /// </summary>
         public static string Label_host_sku_type_hp_xe_server {
             get {
@@ -1168,7 +1168,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Enterprise Edition.
         /// </summary>
         public static string Label_host_sku_type_xe_enterprise {
             get {
@@ -1177,7 +1177,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Express Edition.
         /// </summary>
         public static string Label_host_sku_type_xe_express {
             get {
@@ -1186,7 +1186,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Server Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Server Edition.
         /// </summary>
         public static string Label_host_sku_type_xe_server {
             get {
@@ -1195,7 +1195,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ build number.
+        ///   Looks up a localized string similar to [XenServer] build number.
         /// </summary>
         public static string Label_host_software_version_build_number {
             get {
@@ -1204,7 +1204,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ build date.
+        ///   Looks up a localized string similar to [XenServer] build date.
         /// </summary>
         public static string Label_host_software_version_date {
             get {
@@ -1213,7 +1213,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ version.
+        ///   Looks up a localized string similar to [XenServer] version.
         /// </summary>
         public static string Label_host_software_version_product_version {
             get {
@@ -1240,7 +1240,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@ logs.
+        ///   Looks up a localized string similar to [XenCenter] logs.
         /// </summary>
         public static string Label_host_system_status_client_logs {
             get {
@@ -1258,7 +1258,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ StorageLink configuration.
+        ///   Looks up a localized string similar to [Citrix] StorageLink configuration.
         /// </summary>
         public static string Label_host_system_status_CVSM {
             get {
@@ -1519,7 +1519,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ daemon internal logs.
+        ///   Looks up a localized string similar to [XenServer] daemon internal logs.
         /// </summary>
         public static string Label_host_system_status_xapi {
             get {
@@ -1528,7 +1528,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ daemon crash dumps.
+        ///   Looks up a localized string similar to [XenServer] daemon crash dumps.
         /// </summary>
         public static string Label_host_system_status_xapi_debug {
             get {
@@ -1537,7 +1537,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ daemon subprocesses.
+        ///   Looks up a localized string similar to [XenServer] daemon subprocesses.
         /// </summary>
         public static string Label_host_system_status_xapi_subprocess {
             get {
@@ -1573,7 +1573,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ configuration.
+        ///   Looks up a localized string similar to [XenServer] configuration.
         /// </summary>
         public static string Label_host_system_status_xenserver_config {
             get {
@@ -1582,7 +1582,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ database.
+        ///   Looks up a localized string similar to [XenServer] database.
         /// </summary>
         public static string Label_host_system_status_xenserver_databases {
             get {
@@ -1591,7 +1591,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ domains list.
+        ///   Looks up a localized string similar to [XenServer] domains list.
         /// </summary>
         public static string Label_host_system_status_xenserver_domains {
             get {
@@ -1600,7 +1600,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ installation log files.
+        ///   Looks up a localized string similar to [XenServer] installation log files.
         /// </summary>
         public static string Label_host_system_status_xenserver_install {
             get {
@@ -1609,7 +1609,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ logs.
+        ///   Looks up a localized string similar to [XenServer] logs.
         /// </summary>
         public static string Label_host_system_status_xenserver_logs {
             get {
@@ -1672,7 +1672,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@.
+        ///   Looks up a localized string similar to [XenServer].
         /// </summary>
         public static string Label_host_XenMemory {
             get {
@@ -2464,7 +2464,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ Healthcheck Latency.
+        ///   Looks up a localized string similar to [XenServer] Healthcheck Latency.
         /// </summary>
         public static string Label_performance_xapi_latency {
             get {
@@ -3373,7 +3373,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buy @BRANDING_SERVER@ Online.
+        ///   Looks up a localized string similar to Buy [XenServer] Online.
         /// </summary>
         public static string Message_action_license_does_not_support_pooling {
             get {
@@ -3382,7 +3382,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buy @BRANDING_SERVER@ Online.
+        ///   Looks up a localized string similar to Buy [XenServer] Online.
         /// </summary>
         public static string Message_action_license_expires_soon {
             get {
@@ -3564,7 +3564,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ on server &apos;{0}&apos; is taking too long to respond and may fence..
+        ///   Looks up a localized string similar to [XenServer] on server &apos;{0}&apos; is taking too long to respond and may fence..
         /// </summary>
         public static string Message_body_ha_xapi_healthcheck_approaching_timeout {
             get {
@@ -3618,7 +3618,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license on server &apos;{0}&apos; has expired or been changed, and no longer supports @BRANDING_PRODUCT_BRAND@ Enterprise features..
+        ///   Looks up a localized string similar to The license on server &apos;{0}&apos; has expired or been changed, and no longer supports [XenServer product] Enterprise features..
         /// </summary>
         public static string Message_body_license_does_not_support_pooling {
             get {
@@ -3708,7 +3708,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; has experienced a change in multipath status. Currently {1} out of {2} paths are active. See the @BRANDING_BRAND_CONSOLE@ logs for the full details..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; has experienced a change in multipath status. Currently {1} out of {2} paths are active. See the [XenCenter] logs for the full details..
         /// </summary>
         public static string Message_body_multipath_periodic_alert {
             get {
@@ -3717,7 +3717,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers in pool &apos;{0}&apos; have experienced a change in multipath status. Currently all paths are active. See the @BRANDING_BRAND_CONSOLE@ logs for the full details..
+        ///   Looks up a localized string similar to Servers in pool &apos;{0}&apos; have experienced a change in multipath status. Currently all paths are active. See the [XenCenter] logs for the full details..
         /// </summary>
         public static string Message_body_multipath_periodic_alert_healthy {
             get {
@@ -3726,7 +3726,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; has experienced a change in multipath status. Currently all paths are active. See the @BRANDING_BRAND_CONSOLE@ logs for the full details..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; has experienced a change in multipath status. Currently all paths are active. See the [XenCenter] logs for the full details..
         /// </summary>
         public static string Message_body_multipath_periodic_alert_healthy_standalone {
             get {
@@ -3735,7 +3735,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers in pool &apos;{0}&apos; have experienced a change in multipath status. Currently the following servers have inactive paths: {1}. See the @BRANDING_BRAND_CONSOLE@ logs for the full details..
+        ///   Looks up a localized string similar to Servers in pool &apos;{0}&apos; have experienced a change in multipath status. Currently the following servers have inactive paths: {1}. See the [XenCenter] logs for the full details..
         /// </summary>
         public static string Message_body_multipath_periodic_alert_summary {
             get {
@@ -3942,7 +3942,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The @BRANDING_PRODUCT_BRAND@ license you are using does not allow you to use the VMPR feature. VMPR is available in @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition or higher..
+        ///   Looks up a localized string similar to The [XenServer product] license you are using does not allow you to use the VMPR feature. VMPR is available in [Citrix] [XenServer product] Advanced Edition or higher..
         /// </summary>
         public static string Message_body_vmpp_license_error {
             get {
@@ -4374,7 +4374,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ healthcheck approaching timeout.
+        ///   Looks up a localized string similar to [XenServer] healthcheck approaching timeout.
         /// </summary>
         public static string Message_name_ha_xapi_healthcheck_approaching_timeout {
             get {
@@ -4419,7 +4419,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SERVER@ statistics synchronization failed.
+        ///   Looks up a localized string similar to [XenServer] statistics synchronization failed.
         /// </summary>
         public static string Message_name_host_sync_data_failed {
             get {
@@ -4878,11 +4878,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool Admins have full access to all @BRANDING_SERVER@ features and settings. They can access the @BRANDING_SERVER@ console and manage the roles of other users.
+        ///   Looks up a localized string similar to Pool Admins have full access to all [XenServer] features and settings. They can access the [XenServer] console and manage the roles of other users.
         /// 
         ///- No restrictions
         ///- Role and user management
-        ///- Access to @BRANDING_SERVER@ console.
+        ///- Access to [XenServer] console.
         /// </summary>
         public static string Role_pool_admin_Description {
             get {
@@ -4942,7 +4942,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on @BRANDING_SERVER@ to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
+        ///   Looks up a localized string similar to VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on [XenServer] to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
         /// 
         ///- Manage VMs and Templates
         ///- No access to dynamic memory control features
@@ -5082,7 +5082,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools ISOs.
+        ///   Looks up a localized string similar to [XenServer product] Tools ISOs.
         /// </summary>
         public static string SR_name_description_xenserver_tools {
             get {
@@ -5163,7 +5163,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_PRODUCT_BRAND@ Tools.
+        ///   Looks up a localized string similar to [XenServer product] Tools.
         /// </summary>
         public static string SR_name_label_xenserver_tools {
             get {
@@ -5190,7 +5190,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This template may be used to install the @BRANDING_SERVER@ Software Development Kit (SDK) API VM. .
+        ///   Looks up a localized string similar to This template may be used to install the [XenServer] Software Development Kit (SDK) API VM. .
         /// </summary>
         public static string VM_TemplateDescription_Xen_API_SDK {
             get {

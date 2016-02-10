@@ -36,12 +36,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("@BRANDING_BRAND_CONSOLE@")]
-[assembly: AssemblyDescription("Citrix @BRANDING_BRAND_CONSOLE@")]
+[assembly: AssemblyTitle("[XenCenter]")]
+[assembly: AssemblyDescription("[Citrix] [XenCenter]")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Citrix")]
-[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@")]
-[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
+[assembly: AssemblyCompany("[Citrix]")]
+[assembly: AssemblyProduct("[XenCenter]")]
+[assembly: AssemblyCopyright("[BRANDING_COPYRIGHT]")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -62,6 +62,6 @@ using System.Runtime.InteropServices;
 //
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0000")]
-[assembly: XenAdmin.XSVersion("@BRANDING_PRODUCT_VERSION@")]
+[assembly: XenAdmin.XSVersion("[BRANDING_PRODUCT_VERSION]")]
 [assembly: InternalsVisibleTo("XenAdminTests"),
            InternalsVisibleTo("XenAdminScalabilityTests")]

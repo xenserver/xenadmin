@@ -202,7 +202,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CPSOptimizationRadioButton.Text" xml:space="preserve">
-    <value>Optimize for @BRANDING_COMPANY_NAME_SHORT@ &amp;XenApp</value>
+    <value>Optimize for [Citrix] &amp;XenApp</value>
   </data>
   <data name="iconWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

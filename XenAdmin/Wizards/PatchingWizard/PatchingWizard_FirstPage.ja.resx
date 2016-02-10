@@ -132,7 +132,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>このウィザードでは、@BRANDING_SERVER@ ホストにソフトウェア アップデートをインストールします。
+    <value>このウィザードでは、[XenServer] ホストにソフトウェア アップデートをインストールします。
 </value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -224,7 +224,7 @@
     <value>6</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>プール管理者、プール オペレータ、またはローカルのルート アカウントで @BRANDING_BRAND_CONSOLE@ にログインしていることを確認します。</value>
+    <value>プール管理者、プール オペレータ、またはローカルのルート アカウントで [XenCenter] にログインしていることを確認します。</value>
   </data>
   <data name="label9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

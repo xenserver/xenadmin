@@ -6,11 +6,11 @@
     <String Id="OVA_File">OVA ファイル</String>
     <String Id="VHD_File">VHD ファイル</String>
     <String Id="VMDK_File">VMDK ファイル</String>
-    <String Id="XenServer_License_File">@BRANDING_SERVER@ ライセンス ファイル</String>
-    <String Id="XenServer_Backup_File">@BRANDING_SERVER@ バックアップ ファイル</String>
-    <String Id="XenServer_Update_File">@BRANDING_SERVER@ アップデート ファイル</String>
-    <String Id="XenServer_OEM_Update_File">@BRANDING_SERVER@ OEM アップデート ファイル</String>
-    <String Id="XenCenter_Saved_Search">@BRANDING_BRAND_CONSOLE@ 保存された検索条件</String>
+    <String Id="XenServer_License_File">[XenServer] ライセンス ファイル</String>
+    <String Id="XenServer_Backup_File">[XenServer] バックアップ ファイル</String>
+    <String Id="XenServer_Update_File">[XenServer] アップデート ファイル</String>
+    <String Id="XenServer_OEM_Update_File">[XenServer] OEM アップデート ファイル</String>
+    <String Id="XenCenter_Saved_Search">[XenCenter] 保存された検索条件</String>
     <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 4 が必要です。</String>
     <String Id="Readme">README.TXT</String>
 </WixLocalization>

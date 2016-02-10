@@ -760,7 +760,7 @@
     <value>已完成编译状态报告(出错)。已完成编译部分状态报告。</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS" xml:space="preserve">
-    <value>已完成编译状态报告(出错)。仅完成编译 @BRANDING_BRAND_CONSOLE@ 日志。</value>
+    <value>已完成编译状态报告(出错)。仅完成编译 [XenCenter] 日志。</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>正在获取系统状态信息</value>
@@ -1045,7 +1045,7 @@
     <value>激活(&amp;C)</value>
   </data>
   <data name="ACTIVATION_FAILED_MESSAGE" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 无法与激活服务器联系。
+    <value>[XenCenter] 无法与激活服务器联系。
 
 如果您当前未连接 Internet，我们可以将激活请求保存为一个文件，
 供您以后上载。
@@ -1107,7 +1107,7 @@
     <value>地址</value>
   </data>
   <data name="ADDSERVER_PASS_NEW" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 无法再使用现有凭据向该服务器进行身份验证。请输入新的凭据继续操作。</value>
+    <value>[XenCenter] 无法再使用现有凭据向该服务器进行身份验证。请输入新的凭据继续操作。</value>
   </data>
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>添加自定义字段“{0}”</value>
@@ -1127,7 +1127,7 @@
   <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>您正在尝试将服务器“{0}”添加到使用较低级别 CPU 的池中。
 
-@BRANDING_SERVER@ 可以重新启动服务器并将其 CPU 降至池中现有服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“@BRANDING_SERVER@ 硬件兼容性”列表中所列的 CPU 组合。
+[XenServer] 可以重新启动服务器并将其 CPU 降至池中现有服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性”列表中所列的 CPU 组合。
 
 是否执行此操作?</value>
   </data>
@@ -1136,7 +1136,7 @@
 
 {0}
 
-@BRANDING_SERVER@ 可以重新启动服务器并将服务器的 CPU 级别降至池中现有服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“@BRANDING_SERVER@ 硬件兼容性列表”中所列的 CPU 组合。
+[XenServer] 可以重新启动服务器并将服务器的 CPU 级别降至池中现有服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性列表”中所列的 CPU 组合。
 
 是否执行此操作?</value>
   </data>
@@ -1349,7 +1349,7 @@
 是否要继续?</value>
   </data>
   <data name="AD_MASTER_UNAVAILABLE_BLURB" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 正在建立当前的外部身份验证配置，请稍候。</value>
+    <value>[XenCenter] 正在建立当前的外部身份验证配置，请稍候。</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
     <value>池“{0}”当前未配置 AD。要启用 AD 身份验证，请单击“加入域”。</value>
@@ -1457,7 +1457,7 @@
     <value>控制域上的文件系统已满</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>{0} 上控制域的磁盘使用率已达到 {1}。如果该磁盘全部占满，@BRANDING_SERVER@ 的性能将受到严重影响。应删除日志文件或其他不重要的(用户创建的)文件。</value>
+    <value>{0} 上控制域的磁盘使用率已达到 {1}。如果该磁盘全部占满，[XenServer] 的性能将受到严重影响。应删除日志文件或其他不重要的(用户创建的)文件。</value>
   </data>
   <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
     <value>内存使用率警报</value>
@@ -1534,10 +1534,10 @@
     <value>转至 Web 页面</value>
   </data>
   <data name="ALERT_NEW_VERSION" xml:space="preserve">
-    <value>新 @BRANDING_BRAND_CONSOLE@ 可用</value>
+    <value>新 [XenCenter] 可用</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
-    <value>{0} 现在可用。可从 @BRANDING_COMPANY_NAME_SHORT@ 网站下载新版本。</value>
+    <value>{0} 现在可用。可从 [Citrix] 网站下载新版本。</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>转至 Web 页面</value>
@@ -1575,7 +1575,7 @@
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>SR {0} 当前已连接到其他位置。是否要将其连接到 {1}? 
 
-警告: 必须确保 SR 当前未由任何未连接 @BRANDING_BRAND_CONSOLE@ 的服务器使用。否则可能会导致数据丢失。</value>
+警告: 必须确保 SR 当前未由任何未连接 [XenCenter] 的服务器使用。否则可能会导致数据丢失。</value>
   </data>
   <data name="ALREADY_CONNECTED" xml:space="preserve">
     <value>已经连接到服务器“{0}”。</value>
@@ -1866,9 +1866,9 @@
   <data name="BOND_CREATE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>创建此绑定会自动将其中一个所选绑定成员上的管理接口移动到绑定本身:
 
-- @BRANDING_BRAND_CONSOLE@ 与池之间的连接将暂时中断
+- [XenCenter] 与池之间的连接将暂时中断
 
-- 如果您的网络配置不正确，@BRANDING_BRAND_CONSOLE@ 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
+- 如果您的网络配置不正确，[XenCenter] 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>创建此绑定将中断通过绑定成员上的辅助接口进行的通信，而接口将移动到绑定本身。</value>
@@ -1888,20 +1888,20 @@
 
 删除此绑定会自动将绑定上的管理接口和辅助接口转移到绑定的第一个从属成员: 
 
-- @BRANDING_BRAND_CONSOLE@ 与池之间的连接将暂时中断
+- [XenCenter] 与池之间的连接将暂时中断
 
 - 通过辅助接口进行的通信将中断
 
-- 如果您的网络配置不正确，@BRANDING_BRAND_CONSOLE@ 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
+- 如果您的网络配置不正确，[XenCenter] 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
 删除此绑定会自动将绑定上的管理接口转移到绑定的第一个从属成员: 
 
-- @BRANDING_BRAND_CONSOLE@ 与池之间的连接将暂时中断
+- [XenCenter] 与池之间的连接将暂时中断
 
-- 如果您的网络配置不正确，@BRANDING_BRAND_CONSOLE@ 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
+- 如果您的网络配置不正确，[XenCenter] 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
@@ -1924,7 +1924,7 @@
     <value>升级后存在损坏的 SR。要解决该问题，应重新连接 SR。</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>Tools ISO 位于损坏的 SR 上，@BRANDING_BRAND_CONSOLE@ 将尝试修复该问题，然后再继续操作。是否继续?</value>
+    <value>Tools ISO 位于损坏的 SR 上，[XenCenter] 将尝试修复该问题，然后再继续操作。是否继续?</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
@@ -2026,7 +2026,7 @@
     <value>无法在 VM“{0}”上激活该虚拟磁盘，因为该 VM 未运行。</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>必须首先在 VM“{0}”上安装 @BRANDING_PRODUCT_BRAND@ Tools，然后才能为 VM 激活该虚拟磁盘。</value>
+    <value>必须首先在 VM“{0}”上安装 [XenServer product] Tools，然后才能为 VM 激活该虚拟磁盘。</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(无法更改网络的 MTU，因为它正作为管理接口“{0}”使用)</value>
@@ -2056,7 +2056,7 @@
     <value>此虚拟磁盘正在使用，无法取消激活。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>必须首先在 VM“{0}”上安装 @BRANDING_PRODUCT_BRAND@ Tools，然后才能为 VM 取消激活该虚拟磁盘。</value>
+    <value>必须首先在 VM“{0}”上安装 [XenServer product] Tools，然后才能为 VM 取消激活该虚拟磁盘。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>无法在 VM“{0}”上取消激活该虚拟磁盘，因为 VM 未运行。</value>
@@ -2073,7 +2073,7 @@
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>该模板为 @BRANDING_SERVER@ 模板，无法删除。</value>
+    <value>该模板为 [XenServer] 模板，无法删除。</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>此虚拟磁盘供 DR 使用。要将其删除，请对 DR 进行配置，使其不将数据保存到此存储库中。</value>
@@ -2097,7 +2097,7 @@
     <value>此快照当前正在使用，无法删除。</value>
   </data>
   <data name="CANNOT_DELETE_TOOLS_SR" xml:space="preserve">
-    <value>不支持删除 @BRANDING_PRODUCT_BRAND@ Tools ISO 存储。</value>
+    <value>不支持删除 [XenServer product] Tools ISO 存储。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
     <value>该虚拟磁盘在 VM“{0}”上处于活动状态。请先将该虚拟磁盘取消激活，然后再删除。</value>
@@ -2118,7 +2118,7 @@
     <value>该虚拟磁盘当前正在使用，无法删除。</value>
   </data>
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
-    <value>无法使用 @BRANDING_BRAND_CONSOLE@ 配置类型为“{0}”的 SR。</value>
+    <value>无法使用 [XenCenter] 配置类型为“{0}”的 SR。</value>
   </data>
   <data name="CANNOT_MOVE_DR_VD" xml:space="preserve">
     <value>此虚拟磁盘供 DR 使用。无法将其移动到其他存储库。</value>
@@ -2158,10 +2158,10 @@
     <value>更改...</value>
   </data>
   <data name="CHANGED_MASTER_PASSWORD" xml:space="preserve">
-    <value>已更改 @BRANDING_BRAND_CONSOLE@ 主密码</value>
+    <value>已更改 [XenCenter] 主密码</value>
   </data>
   <data name="CHANGED_MASTER_PASSWORD_LONG" xml:space="preserve">
-    <value>已更改用于会话还原的 @BRANDING_BRAND_CONSOLE@ 主密码</value>
+    <value>已更改用于会话还原的 [XenCenter] 主密码</value>
   </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>服务器 CD 已更改</value>
@@ -2176,7 +2176,7 @@
     <value>更改策略“{0}”状态</value>
   </data>
   <data name="CHANGE_SERVER_CD" xml:space="preserve">
-    <value>插入 @BRANDING_SERVER@ CD</value>
+    <value>插入 [XenServer] CD</value>
   </data>
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>更改服务器密码...</value>
@@ -2298,7 +2298,7 @@
     <value>折叠子项(&amp;C)</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>只能与 @BRANDING_SERVER@ 的 Common Criteria 版结合使用</value>
+    <value>只能与 [XenServer] 的 Common Criteria 版结合使用</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>已完成</value>
@@ -2430,7 +2430,7 @@
   <data name="CONFIRM_DESTROY_HOST" xml:space="preserve">
     <value>是否确实要销毁“{0}”?
 
-仅当 @BRANDING_SERVER@ 实际出现故障时才需要将其销毁。
+仅当 [XenServer] 实际出现故障时才需要将其销毁。
 销毁该服务器会将其从池中永久删除，同时删除其本地 SR、DVD 驱动器和可移动存储。需要重新安装该服务器才能再次使用。
 
 此操作为最终操作，无法恢复。</value>
@@ -2524,10 +2524,10 @@
     <value>重新启动 VM</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS" xml:space="preserve">
-    <value>是否确实要重新启动所选服务器上的 Toolstack? 请注意，@BRANDING_BRAND_CONSOLE@ 将暂时断开与所选服务器的连接。</value>
+    <value>是否确实要重新启动所选服务器上的 Toolstack? 请注意，[XenCenter] 将暂时断开与所选服务器的连接。</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_ONE_SERVER" xml:space="preserve">
-    <value>是否确实要重新启动“{0}”上的 Toolstack? 请注意，@BRANDING_BRAND_CONSOLE@ 将暂时断开与服务器的连接。</value>
+    <value>是否确实要重新启动“{0}”上的 Toolstack? 请注意，[XenCenter] 将暂时断开与服务器的连接。</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>重新启动 Toolstack</value>
@@ -2679,9 +2679,9 @@
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>与服务器 {0} 的连接受到限制 - 已经与 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition 服务器({1})建立连接。
+    <value>与服务器 {0} 的连接受到限制 - 已经与 [Citrix] [XenServer product] Express Edition 服务器({1})建立连接。
 
-一次只能连接一个 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
+一次只能连接一个 [Citrix] [XenServer product] Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>由于许可证限制，无法连接 {0}</value>
@@ -2697,7 +2697,7 @@
     <value>连接 {0}: 将尝试在 {1} 秒后连接其他池成员</value>
   </data>
   <data name="CONNECT_NO_XAPI_FAILURE" xml:space="preserve">
-    <value>找不到在 {0} 上运行的 @BRANDING_SERVER@。</value>
+    <value>找不到在 {0} 上运行的 [XenServer]。</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
     <value>找不到 {0}。</value>
@@ -3226,7 +3226,7 @@
     <value>默认值</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>默认安装 @BRANDING_SERVER@</value>
+    <value>默认安装 [XenServer]</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>默认搜索</value>
@@ -3250,7 +3250,7 @@
     <value>按电源状态搜索 VM</value>
   </data>
   <data name="DEFAULT_SEARCH_VMS_WO_XS_TOOLS" xml:space="preserve">
-    <value>未安装 @BRANDING_PRODUCT_BRAND@ Tools 的 VM</value>
+    <value>未安装 [XenServer product] Tools 的 VM</value>
   </data>
   <data name="DEFAULT_VDI_NAME" xml:space="preserve">
     <value>新虚拟磁盘</value>
@@ -3463,7 +3463,7 @@
     <value>{0} (已分离)</value>
   </data>
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 检测到该 LUN 上已存在 SR。该 SR 当前未由“{0}”使用，要进行连接吗?</value>
+    <value>[XenCenter] 检测到该 LUN 上已存在 SR。该 SR 当前未由“{0}”使用，要进行连接吗?</value>
   </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>分离(&amp;D)</value>
@@ -3607,10 +3607,10 @@
     <value>仅消除可见警报(&amp;V)</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>无法设置内存范围，因为该 VM 上未安装 @BRANDING_PRODUCT_BRAND@ Tools。</value>
+    <value>无法设置内存范围，因为该 VM 上未安装 [XenServer product] Tools。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
-    <value>无法设置内存范围，因为这些 VM 上未安装 @BRANDING_PRODUCT_BRAND@ Tools。</value>
+    <value>无法设置内存范围，因为这些 VM 上未安装 [XenServer product] Tools。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED" xml:space="preserve">
     <value>无法设置内存范围，因为该 VM 上的操作系统不支持内存范围。</value>
@@ -3619,10 +3619,10 @@
     <value>无法设置内存范围，因为这些 VM 上的操作系统不支持内存范围。</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
-    <value>无法设置内存范围，因为该 VM 上的 @BRANDING_PRODUCT_BRAND@ Tools 已过期。</value>
+    <value>无法设置内存范围，因为该 VM 上的 [XenServer product] Tools 已过期。</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>无法设置内存范围，因为这些 VM 上的 @BRANDING_PRODUCT_BRAND@ Tools 已过期。</value>
+    <value>无法设置内存范围，因为这些 VM 上的 [XenServer product] Tools 已过期。</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>无法为该模板设置内存范围。</value>
@@ -3745,7 +3745,7 @@
     <value>下载...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} 现在可用。请在 @BRANDING_COMPANY_NAME_SHORT@ 网站下载最新版本。</value>
+    <value>{0} 现在可用。请在 [Citrix] 网站下载最新版本。</value>
   </data>
   <data name="DRAC_NO_SUPP_PACK" xml:space="preserve">
     <value>未安装 Dell 补充软件包。</value>
@@ -4028,7 +4028,7 @@
     <value>已完成针对池“{0}”的故障恢复。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 灾难恢复已完成。</value>
+    <value>[XenServer] 灾难恢复已完成。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
     <value>单击“下一步”删除已故障转移的 vApp 和 VM，并查看摘要报告。</value>
@@ -4046,7 +4046,7 @@
     <value>正在进行故障恢复。此过程需要一段时间。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>正在进行 @BRANDING_SERVER@ 灾难恢复。该过程需要一些时间。</value>
+    <value>正在进行 [XenServer] 灾难恢复。该过程需要一些时间。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>总体进度: 已完成 {0} 项任务(共 {1} 项)</value>
@@ -4079,7 +4079,7 @@
     <value>针对池“{0}”的故障恢复进度</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 灾难恢复进度</value>
+    <value>[XenServer] 灾难恢复进度</value>
   </data>
   <data name="DR_WIZARD_REPORTPAGE_TEXT" xml:space="preserve">
     <value>摘要</value>
@@ -4298,7 +4298,7 @@
     <value>进入维护模式(&amp;E)...</value>
   </data>
   <data name="ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT" xml:space="preserve">
-    <value>要访问保存的会话，需要在启动 @BRANDING_BRAND_CONSOLE@ 时输入主密码</value>
+    <value>要访问保存的会话，需要在启动 [XenCenter] 时输入主密码</value>
   </data>
   <data name="ENTER_VALID_QOS" xml:space="preserve">
     <value>QoS 限制值应大于零</value>
@@ -4319,7 +4319,7 @@
     <value>用户名和密码不匹配。</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 在连接该服务器时遇到问题。</value>
+    <value>[XenCenter] 在连接该服务器时遇到问题。</value>
   </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>无法取消激活以下虚拟磁盘:</value>
@@ -4463,7 +4463,7 @@
     <value>未找到文件 {0}</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 仍在启动。</value>
+    <value>[XenServer] 仍在启动。</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>网关无效。</value>
@@ -4484,7 +4484,7 @@
     <value>您无权访问该服务器。</value>
   </data>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
-    <value>在“{0}”上找不到 @BRANDING_SERVER@。</value>
+    <value>在“{0}”上找不到 [XenServer]。</value>
   </data>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>准备主机时出错</value>
@@ -4511,7 +4511,7 @@
     <value>{0}弹出 CD</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0}安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>{0}安装 [XenServer product] Tools</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>此 VM 使用本地 CD。</value>
@@ -5126,7 +5126,7 @@
     <value>正在加载数据...</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
-    <value>要查看该 VM 的内存数据，需要安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>要查看该 VM 的内存数据，需要安装 [XenServer product] Tools</value>
   </data>
   <data name="GREATER_THAN" xml:space="preserve">
     <value>&gt; {0}</value>
@@ -5138,12 +5138,12 @@
     <value>组角色</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>此版本的 @BRANDING_BRAND_CONSOLE@ 已过时，无法连接到 {0}。</value>
+    <value>此版本的 [XenCenter] 已过时，无法连接到 {0}。</value>
   </data>
   <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
     <value>
 
-可以从以下位置获取兼容版本的 @BRANDING_BRAND_CONSOLE@:</value>
+可以从以下位置获取兼容版本的 [XenCenter]:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>高可用性</value>
@@ -5265,7 +5265,7 @@
     <value>是否确实要为池“{0}”禁用高可用性?</value>
   </data>
   <data name="HA_EDIT_DIALOG_BLURB" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 高可用性(HA)允许在基础硬件出现故障或单个服务器丢失时自动重新启动虚拟机。“{0}”已启用高可用性。</value>
+    <value>[XenServer] 高可用性(HA)允许在基础硬件出现故障或单个服务器丢失时自动重新启动虚拟机。“{0}”已启用高可用性。</value>
   </data>
   <data name="HA_EDIT_NOW" xml:space="preserve">
     <value>立即更改这些高可用性设置...</value>
@@ -5987,7 +5987,7 @@
     <value>为导入的虚拟机选择存储库。</value>
   </data>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
-    <value>此服务器版本与 @BRANDING_BRAND_CONSOLE@ 不兼容</value>
+    <value>此服务器版本与 [XenCenter] 不兼容</value>
   </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>文件大小不正确</value>
@@ -6008,7 +6008,7 @@
     <value>磁盘和内存快照当前不可供该 VM 使用</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
-    <value>磁盘和内存快照需要安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>磁盘和内存快照需要安装 [XenServer product] Tools</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_POWER_STATE" xml:space="preserve">
     <value>磁盘和内存快照需要 VM 处于运行状态</value>
@@ -6020,7 +6020,7 @@
     <value>静止快照需要在 VM 上启用 VSS 服务</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>静止快照需要安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>静止快照需要安装 [XenServer product] Tools</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>静止快照需要 VM 处于运行状态</value>
@@ -6038,19 +6038,19 @@
     <value>在所选 VM 上找不到 CD 驱动器。</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>找不到 @BRANDING_PRODUCT_BRAND@ Tools 安装磁盘。</value>
+    <value>找不到 [XenServer product] Tools 安装磁盘。</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
-    <value>已启动 @BRANDING_PRODUCT_BRAND@ Tools 安装。</value>
+    <value>已启动 [XenServer product] Tools 安装。</value>
   </data>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
-    <value>该 VM 上已安装 @BRANDING_PRODUCT_BRAND@ Tools。</value>
+    <value>该 VM 上已安装 [XenServer product] Tools。</value>
   </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
-    <value>正在启动 @BRANDING_PRODUCT_BRAND@ Tools 安装。</value>
+    <value>正在启动 [XenServer product] Tools 安装。</value>
   </data>
   <data name="INSTALLTOOLS_TITLE" xml:space="preserve">
-    <value>正在 VM {0} 上安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>正在 VM {0} 上安装 [XenServer product] Tools</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
     <value>在指定网络位置找不到安装文件</value>
@@ -6062,13 +6062,13 @@
     <value>安装待定更新(&amp;U)...</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
-    <value>安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>安装 [XenServer product] Tools</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS_DOTS" xml:space="preserve">
-    <value>安装 @BRANDING_PRODUCT_BRAND@ Tools...</value>
+    <value>安装 [XenServer product] Tools...</value>
   </data>
   <data name="INSTALL_XS_TOOLS" xml:space="preserve">
-    <value>安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>安装 [XenServer product] Tools</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
     <value>正在从模板“{1}”创建 VM“{0}”</value>
@@ -6264,7 +6264,7 @@ SCSI ID: {2}
     <value>1 分钟后过期</value>
   </data>
   <data name="LICENSE_EXPIRY_PURCHACE" xml:space="preserve">
-    <value>在线 @BRANDING_SERVER@</value>
+    <value>在线 [XenServer]</value>
     <comment>this text could be improved</comment>
   </data>
   <data name="LICENSE_EXPIRY_TITLE" xml:space="preserve">
@@ -6310,10 +6310,10 @@ SCSI ID: {2}
     <value>高可用性处于启用状态时无法更改主机的许可证</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>激活免费 @BRANDING_SERVER@ 时，必须一次选择一个服务器。</value>
+    <value>激活免费 [XenServer] 时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>为 @BRANDING_XC_PRODUCT_5_6_VERSION@ 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
+    <value>为 [BRANDING_VERSION_5_6] 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
@@ -6352,7 +6352,7 @@ SCSI ID: {2}
     <value>状态</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>激活密钥一次只能应用到一款免费 @BRANDING_SERVER@ 产品。</value>
+    <value>激活密钥一次只能应用到一款免费 [XenServer] 产品。</value>
   </data>
   <data name="LICENSE_UNSUPPORTED" xml:space="preserve">
     <value>不受支持</value>
@@ -6376,13 +6376,13 @@ SCSI ID: {2}
     <value>您的许可证已过期</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>一个或多个托管服务器已过期。请分配 @BRANDING_SERVER@ 许可证，或激活免费 @BRANDING_SERVER@ 产品。</value>
+    <value>一个或多个托管服务器已过期。请分配 [XenServer] 许可证，或激活免费 [XenServer] 产品。</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>一个或多个托管服务器即将到期。请分配 @BRANDING_SERVER@ 许可证，或激活免费 @BRANDING_SERVER@ 产品。</value>
+    <value>一个或多个托管服务器即将到期。请分配 [XenServer] 许可证，或激活免费 [XenServer] 产品。</value>
   </data>
   <data name="LICENSING_DIALOG_TEXT" xml:space="preserve">
-    <value>激活免费 @BRANDING_SERVER@ 产品或为 @BRANDING_SERVER@ Advanced Edition、Enterprise Edition 和 Platinum Edition 分配/释放许可证。</value>
+    <value>激活免费 [XenServer] 产品或为 [XenServer] Advanced Edition、Enterprise Edition 和 Platinum Edition 分配/释放许可证。</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>链接状态</value>
@@ -6590,10 +6590,10 @@ SCSI ID: {2}
     <value>编辑标记(&amp;G)...</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
-    <value>“{0}”上的 @BRANDING_SERVER@ 许可证将于 {1}内过期。</value>
+    <value>“{0}”上的 [XenServer] 许可证将于 {1}内过期。</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
-    <value>“{0}”上的 @BRANDING_SERVER@ 许可证已过期。</value>
+    <value>“{0}”上的 [XenServer] 许可证已过期。</value>
   </data>
   <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
     <value>导出资源数据(&amp;X)...</value>
@@ -6626,7 +6626,7 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>安装 @BRANDING_PRODUCT_BRAND@ Tools(&amp;X)...</value>
+    <value>安装 [XenServer product] Tools(&amp;X)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>快速创建(&amp;Q)</value>
@@ -6683,7 +6683,7 @@ SCSI ID: {2}
     <value>在恢复模式下启动(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST" xml:space="preserve">
-    <value>从 @BRANDING_BRAND_CONSOLE@ 中删除(&amp;V)</value>
+    <value>从 [XenCenter] 中删除(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
     <value>删除故障转储文件(&amp;D)</value>
@@ -7045,7 +7045,7 @@ SCSI ID: {2}
 {1}</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ - 错误</value>
+    <value>[XenCenter] - 错误</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL" xml:space="preserve">
     <value>无法重新连接 {0}。服务器不可用。</value>
@@ -7092,12 +7092,12 @@ SCSI ID: {2}
     <value>选择目标存储库(&amp;D)</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用 VDI 实时迁移。通过此功能，您能够在同一池中的 SR 之间迁移多个正在运行的 VDI，而不会导致 VM 停机。 </value>
+    <value>升级 [XenServer] 许可证以启用 VDI 实时迁移。通过此功能，您能够在同一池中的 SR 之间迁移多个正在运行的 VDI，而不会导致 VM 停机。 </value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ VDI 实时迁移功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] VDI 实时迁移功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
     <value>将 VM 迁移出服务器“{0}”</value>
@@ -7166,7 +7166,7 @@ SCSI ID: {2}
     <value>支持多路径</value>
   </data>
   <data name="MULTIPATH_FAILED" xml:space="preserve">
-    <value>至少一个存储的一个或多个路径失败。有关配置存储多路径的信息，请参阅《@BRANDING_PRODUCT_BRAND@ 管理员指南》。</value>
+    <value>至少一个存储的一个或多个路径失败。有关配置存储多路径的信息，请参阅《[XenServer product] 管理员指南》。</value>
   </data>
   <data name="MULTIPATH_NOT_ACTIVE" xml:space="preserve">
     <value>非活动</value>
@@ -7243,12 +7243,12 @@ SCSI ID: {2}
     <value>配置 IP 地址 - {0}</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST" xml:space="preserve">
-    <value>您正在重新配置主管理接口。如果新的设置不正确，则 @BRANDING_BRAND_CONSOLE@ 可能将与服务器永久失去连接。
+    <value>您正在重新配置主管理接口。如果新的设置不正确，则 [XenCenter] 可能将与服务器永久失去连接。
 
 只有在确认这些设置正确后才能继续操作。</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL" xml:space="preserve">
-    <value>您正在重新配置主管理接口。如果新的设置不正确，则 @BRANDING_BRAND_CONSOLE@ 可能将与服务器永久失去连接，或者池成员可能无法互相联系。
+    <value>您正在重新配置主管理接口。如果新的设置不正确，则 [XenCenter] 可能将与服务器永久失去连接，或者池成员可能无法互相联系。
 
 只有在确认这些设置正确后才能继续操作。</value>
   </data>
@@ -7361,7 +7361,7 @@ SCSI ID: {2}
     <value>已创建磁盘</value>
   </data>
   <data name="NEWER_GUI_AVAILABLE" xml:space="preserve">
-    <value>有更新版本的 @BRANDING_BRAND_CONSOLE@ 可供使用。请与支持代表联系。</value>
+    <value>有更新版本的 [XenCenter] 可供使用。请与支持代表联系。</value>
   </data>
   <data name="NEWNETWORKWIZARD_TITLE" xml:space="preserve">
     <value>新建网络 - {0}</value>
@@ -7385,7 +7385,7 @@ SCSI ID: {2}
     <value>此服务器的版本与主服务器不同</value>
   </data>
   <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>无法将免费版 @BRANDING_SERVER@ 添加到使用 @BRANDING_SERVER@ Advanced Edition 或更高版本的许可证的池中</value>
+    <value>无法将免费版 [XenServer] 添加到使用 [XenServer] Advanced Edition 或更高版本的许可证的池中</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>此服务器有正在运行或已挂起的 VM</value>
@@ -7400,7 +7400,7 @@ SCSI ID: {2}
     <value>无法将已获得许可的服务器添加到未获得许可的池</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>此服务器使用的 @BRANDING_SERVER@ 许可证版本与池主服务器不同</value>
+    <value>此服务器使用的 [XenServer] 许可证版本与池主服务器不同</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>此服务器的 Linux 软件包安装状态与主服务器不同</value>
@@ -7415,7 +7415,7 @@ SCSI ID: {2}
     <value>您在主服务器上的当前角色无权将主机添加到主服务器的池中</value>
   </data>
   <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>无法将使用 @BRANDING_SERVER@ Advanced Edition 或更高版本的许可证的服务器添加到免费版 @BRANDING_SERVER@ 的池中</value>
+    <value>无法将使用 [XenServer] Advanced Edition 或更高版本的许可证的服务器添加到免费版 [XenServer] 的池中</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>池操作受该服务器许可证的限制</value>
@@ -7472,7 +7472,7 @@ SCSI ID: {2}
     <value>精简</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic 是一种可伸缩的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 @BRANDING_SERVER@ 功能，例如 XenMotion 和高可用性。</value>
+    <value>Dell EqualLogic 是一种可伸缩的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如 XenMotion 和高可用性。</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -7493,7 +7493,7 @@ SCSI ID: {2}
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
   <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>如果在此 LUN 中创建新虚拟磁盘，将销毁其中的任何数据。必须确保没有其他系统在使用该 LUN (包括任何 @BRANDING_SERVER@)，否则虚拟磁盘在使用时可能会遭到损坏。
+    <value>如果在此 LUN 中创建新虚拟磁盘，将销毁其中的任何数据。必须确保没有其他系统在使用该 LUN (包括任何 [XenServer])，否则虚拟磁盘在使用时可能会遭到损坏。
 
 是否格式化磁盘?</value>
   </data>
@@ -7516,9 +7516,9 @@ SCSI ID: {2}
     <value>该 LUN 已在服务器 {1} 中作为 SR {0} 使用。</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 主机通过主机总线适配器(HBA)支持光纤通道(FC)、以太网光纤通道(FCoE)和共享串联 SCSI (SAS)存储局域网。
+    <value>[XenServer] 主机通过主机总线适配器(HBA)支持光纤通道(FC)、以太网光纤通道(FCoE)和共享串联 SCSI (SAS)存储局域网。
 
-要将 LUN 显示给主机，必须手动完成所需要的所有配置，其中包括 @BRANDING_SERVER@ 主机中的存储设备、网络设备和 HBA。
+要将 LUN 显示给主机，必须手动完成所需要的所有配置，其中包括 [XenServer] 主机中的存储设备、网络设备和 HBA。
 
 完成所有配置后，HBA 将一个由 LUN 支持的 SCSI 设备显示给主机。然后可以使用该 SCSI 设备访问 LUN，就像本地连接了 SCSI 设备一样。</value>
   </data>
@@ -7558,7 +7558,7 @@ SCSI ID: {2}
 对共享 SR 使用 LVM 提供的性能优势与对本地磁盘存储使用非共享 LVM 相同，但前者还能够灵活地启用 VM。</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
-    <value>警告: 必须确保以下 SR 当前未由任何未连接 @BRANDING_BRAND_CONSOLE@ 的服务器使用。否则可能导致数据丢失。
+    <value>警告: 必须确保以下 SR 当前未由任何未连接 [XenCenter] 的服务器使用。否则可能导致数据丢失。
 
 SR:  {0}
 
@@ -7836,7 +7836,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>CentOS</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@</value>
+    <value>[Citrix]</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CUSTOM" xml:space="preserve">
     <value>自定义</value>
@@ -7902,7 +7902,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要创建磁盘的存储库</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>在要安装 @BRANDING_PRODUCT_BRAND@ Tools 的 VM 中，至少有一个没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
+    <value>在要安装 [XenServer product] Tools 的 VM 中，至少有一个没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATED" xml:space="preserve">
     <value>已创建 DVD 驱动器</value>
@@ -7921,10 +7921,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
     <value>必须关闭后重新启动 VM，才能完成安装新 DVD 驱动器。
-重新启动 VM 后，请再次单击“安装 @BRANDING_PRODUCT_BRAND@ Tools”菜单项。</value>
+重新启动 VM 后，请再次单击“安装 [XenServer product] Tools”菜单项。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
-    <value>要安装 @BRANDING_PRODUCT_BRAND@ Tools 的 VM 没有 DVD 驱动器，是否要创建?</value>
+    <value>要安装 [XenServer product] Tools 的 VM 没有 DVD 驱动器，是否要创建?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新建文件夹(&amp;N)...</value>
@@ -7956,7 +7956,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>您正在尝试将服务器“{0}”添加到主服务器使用较低级别 CPU 的池中。
 
-@BRANDING_SERVER@ 可以重新启动服务器并将其 CPU 降至主服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“@BRANDING_SERVER@ 硬件兼容性列表”中所列的 CPU 组合。
+[XenServer] 可以重新启动服务器并将其 CPU 降至主服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性列表”中所列的 CPU 组合。
 
 是否执行此操作?</value>
   </data>
@@ -7965,7 +7965,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 {0}
 
-@BRANDING_SERVER@ 可以重新启动服务器并将其 CPU 降至主服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“@BRANDING_SERVER@ 硬件兼容性列表”中所列的 CPU 组合。
+[XenServer] 可以重新启动服务器并将其 CPU 降至主服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性列表”中所列的 CPU 组合。
 
 是否执行此操作?</value>
   </data>
@@ -8183,7 +8183,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>没有可消除的系统警报。</value>
   </data>
   <data name="NO_MORE_USERDEVICES" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 无法为此 VM 创建更多磁盘</value>
+    <value>[XenServer] 无法为此 VM 创建更多磁盘</value>
   </data>
   <data name="NO_NAME" xml:space="preserve">
     <value>(无名称)</value>
@@ -8195,7 +8195,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>此时没有需要激活的服务器。</value>
   </data>
   <data name="NO_SESSION_INFO" xml:space="preserve">
-    <value>没有可用的 @BRANDING_SERVER@ 会话信息，无法继续。</value>
+    <value>没有可用的 [XenServer] 会话信息，无法继续。</value>
   </data>
   <data name="NO_SNAPSHOTS" xml:space="preserve">
     <value>该 VM 没有任何快照。</value>
@@ -8273,7 +8273,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>(平均/最大 KB/秒)</value>
   </data>
   <data name="OVF_CREATED" xml:space="preserve">
-    <value>由 @BRANDING_BRAND_CONSOLE@ 磁盘映像导入创建</value>
+    <value>由 [XenCenter] 磁盘映像导入创建</value>
   </data>
   <data name="OVF_DISK_CAPTION" xml:space="preserve">
     <value>虚拟磁盘</value>
@@ -8426,7 +8426,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择现有更新进行安装，或上载新更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 更新|*.{0};*.xsoem</value>
+    <value>[XenServer] 更新|*.{0};*.xsoem</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
@@ -8479,7 +8479,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 大小: {3} MB</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>该修补程序适用于 @BRANDING_SERVER@ {0}。</value>
+    <value>该修补程序适用于 [XenServer] {0}。</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>未找到</value>
@@ -8513,7 +8513,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>权限遭拒</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket(&amp;S)(需要 {0} 个)</value>
+    <value>[Citrix] [XenServer product] Per-Socket(&amp;S)(需要 {0} 个)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理设备</value>
@@ -8579,7 +8579,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已升级主机</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
-    <value>正在安装 @BRANDING_SERVER@</value>
+    <value>正在安装 [XenServer]</value>
   </data>
   <data name="PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST" xml:space="preserve">
     <value>正在从主机中迁移 VM</value>
@@ -8602,7 +8602,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>插件</value>
   </data>
   <data name="PLUGINS_DESC" xml:space="preserve">
-    <value>调整 @BRANDING_BRAND_CONSOLE@ 插件的设置</value>
+    <value>调整 [XenCenter] 插件的设置</value>
   </data>
   <data name="PLUGINS_MENU_ITEMS_ONLY_ONE_CHILD_ALLOWED" xml:space="preserve">
     <value>菜单项功能必须只有一个命令 XML 节点作为子项</value>
@@ -8748,7 +8748,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要导入该 VM 的池或独立服务器。主服务器设置将从模板获得。\n\n如果该值与所选资源池中的服务器不对应，则所有资源安排决策都将忽略该值。</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>池已部分升级到 @BRANDING_SERVER@ {0}</value>
+    <value>池已部分升级到 [XenServer] {0}</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
     <value>已部分升级</value>
@@ -8805,7 +8805,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>尝试连接到 StorageLink Gateway 时出错: \n\n{0}\n\n请检查此主机的设置并重新连接。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
+    <value>[XenServer] 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -8817,7 +8817,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>继续(&amp;P)</value>
   </data>
   <data name="PROMPT_XS_CD" xml:space="preserve">
-    <value>请将 @BRANDING_SERVER@ CD 插入服务器“{0}”上的物理驱动器中。
+    <value>请将 [XenServer] CD 插入服务器“{0}”上的物理驱动器中。
 按“确定”继续执行向导，然后返回到服务器，并按屏幕说明操作。</value>
   </data>
   <data name="PROPERTIES_DIALOG_TITLE" xml:space="preserve">
@@ -8845,13 +8845,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>不支持代理服务器。</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
-    <value>未安装 @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>未安装 [XenServer product] Tools</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools 已过期(已安装 {0} 版本)</value>
+    <value>[XenServer product] Tools 已过期(已安装 {0} 版本)</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools 已过期</value>
+    <value>[XenServer product] Tools 已过期</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS 限制必须介于 1 和 2147483647 之间(或者留空)。</value>
@@ -9243,7 +9243,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已解析为 {0}</value>
   </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
-    <value>备份文件已加载到服务器“{0}”中。有关如何完成还原过程的说明，请参阅《@BRANDING_PRODUCT_BRAND@ 管理员指南》。</value>
+    <value>备份文件已加载到服务器“{0}”中。有关如何完成还原过程的说明，请参阅《[XenServer product] 管理员指南》。</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>从备份还原...</value>
@@ -9341,13 +9341,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 请检查服务器的启动顺序，然后再次重新启动。</value>
   </data>
   <data name="ROLLING_UPGRADE_REBOOT_MESSAGE" xml:space="preserve">
-    <value>要在 {0} 上安装 @BRANDING_SERVER@ 升级，请执行以下步骤:
+    <value>要在 {0} 上安装 [XenServer] 升级，请执行以下步骤:
     
-1. 将 @BRANDING_SERVER@ 安装 CD-ROM 插入到服务器的 CD/DVD 驱动器中或设置 PXE 网络引导顺序。
+1. 将 [XenServer] 安装 CD-ROM 插入到服务器的 CD/DVD 驱动器中或设置 PXE 网络引导顺序。
 2. 单击下面的“立即重新启动”按钮以重新启动服务器并开始安装。
 3. 转至服务器的控制台并按照屏幕上的说明进行操作以安装升级。
 
-要跳过此服务器并继续在池中的下一个服务器上进行安装，请单击“跳过此服务器”。请注意，不支持在安装了不同 @BRANDING_SERVER@ 版本的服务器上运行池，因此，过后应尽快升级此池滚动升级过程中未升级的任何服务器。
+要跳过此服务器并继续在池中的下一个服务器上进行安装，请单击“跳过此服务器”。请注意，不支持在安装了不同 [XenServer] 版本的服务器上运行池，因此，过后应尽快升级此池滚动升级过程中未升级的任何服务器。
 
 必须先升级主机，因此，如果跳过此主机，将取消此主机的池滚动升级。
 </value>
@@ -9365,16 +9365,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池滚动升级未完成。</value>
   </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>{0}: 新版本的 @BRANDING_SERVER@ 需要将新许可证添加到您的许可证服务器。</value>
+    <value>{0}: 新版本的 [XenServer] 需要将新许可证添加到您的许可证服务器。</value>
   </data>
   <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
     <value>正在检查许可状态</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>{0}: @BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@ 中删除了 VM 保护策略</value>
+    <value>{0}: [XenServer] [BRANDING_VERSION_6_2] 中删除了 VM 保护策略</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>{0}: @BRANDING_SERVER@ 6.2 中不再使用 WSS 服务器</value>
+    <value>{0}: [XenServer] 6.2 中不再使用 WSS 服务器</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
@@ -9497,7 +9497,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>所选主机或池未连接</value>
   </data>
   <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
-    <value>必须分别对不同版本的 @BRANDING_SERVER@ 进行许可</value>
+    <value>必须分别对不同版本的 [XenServer] 进行许可</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>选择过滤器...</value>
@@ -9542,7 +9542,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>服务器、VM、自定义模板和远程 SR</value>
   </data>
   <data name="SERVER_API_INCOMPATIBLE" xml:space="preserve">
-    <value>该服务器正在使用与 @BRANDING_BRAND_CONSOLE@ 不兼容的 API。</value>
+    <value>该服务器正在使用与 [XenCenter] 不兼容的 API。</value>
   </data>
   <data name="SERVER_COLON" xml:space="preserve">
     <value>服务器:</value>
@@ -9554,7 +9554,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>服务器(&amp;S):</value>
   </data>
   <data name="SERVER_OUT_OF_DATE" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 已过期</value>
+    <value>[XenServer] 已过期</value>
   </data>
   <data name="SERVER_OUT_OF_DATE_DETAIL" xml:space="preserve">
     <value>服务器“{0}”已过期，不能再与之连接。</value>
@@ -9816,13 +9816,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>要对计划快照使用哪种快照类型?</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 内部版本号</value>
+    <value>[XenServer] 内部版本号</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 内部版本日期</value>
+    <value>[XenServer] 内部版本日期</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 版本</value>
+    <value>[XenServer] 版本</value>
   </data>
   <data name="SOFTWARE_VERSION_XCP_BUILD_NUMBER" xml:space="preserve">
     <value>XCP 内部版本号</value>
@@ -9837,7 +9837,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>使用正确的用户名和密码重试。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
-    <value>检查确认已在“{0}”上正确配置 @BRANDING_SERVER@，然后重试。</value>
+    <value>检查确认已在“{0}”上正确配置 [XenServer]，然后重试。</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>请稍候，然后重试。</value>
@@ -9852,7 +9852,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value />
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
-    <value>遇到一些错误。有关详细信息，请参阅 @BRANDING_BRAND_CONSOLE@ 日志。</value>
+    <value>遇到一些错误。有关详细信息，请参阅 [XenCenter] 日志。</value>
   </data>
   <data name="SPACED_HYPHEN" xml:space="preserve">
     <value> - </value>
@@ -9900,13 +9900,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>该 SR 上当前正在执行某项操作。</value>
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
-    <value>通过 @BRANDING_BRAND_CONSOLE@ 无法销毁该 SR。</value>
+    <value>通过 [XenCenter] 无法销毁该 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>通过 @BRANDING_BRAND_CONSOLE@ 无法分离该 SR。</value>
+    <value>通过 [XenCenter] 无法分离该 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
-    <value>通过 @BRANDING_BRAND_CONSOLE@ 无法忘记该 SR。</value>
+    <value>通过 [XenCenter] 无法忘记该 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_SEEN" xml:space="preserve">
     <value>从 {0} 无法看到该存储库</value>
@@ -10203,13 +10203,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>操作系统: {0}</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSNOTPRESENT" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools: 不存在</value>
+    <value>[XenServer product] Tools: 不存在</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools: 已过期(已安装 {0}.{1} 版本)</value>
+    <value>[XenServer product] Tools: 已过期(已安装 {0}.{1} 版本)</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools: 最新</value>
+    <value>[XenServer product] Tools: 最新</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU 数: {0}</value>
@@ -10308,7 +10308,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 运行时无法激活或取消激活系统磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>在未安装 @BRANDING_PRODUCT_BRAND@ Tools 的情况下，无法从运行中的 VM 激活或取消激活磁盘</value>
+    <value>在未安装 [XenServer product] Tools 的情况下，无法从运行中的 VM 激活或取消激活磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法停用网络</value>
@@ -10323,7 +10323,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 运行时无法删除系统磁盘</value>
   </data>
   <data name="TOOLTIP_DELETE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>在未安装 @BRANDING_PRODUCT_BRAND@ Tools 的情况下，无法从运行中的 VM 中删除磁盘</value>
+    <value>在未安装 [XenServer product] Tools 的情况下，无法从运行中的 VM 中删除磁盘</value>
   </data>
   <data name="TOOLTIP_DETACH_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法删除磁盘</value>
@@ -10335,10 +10335,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>必须先取消激活磁盘，才能进行分离。</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>在未安装 @BRANDING_PRODUCT_BRAND@ Tools 的情况下，无法从运行中的 VM 删除磁盘</value>
+    <value>在未安装 [XenServer product] Tools 的情况下，无法从运行中的 VM 删除磁盘</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>必须安装 @BRANDING_PRODUCT_BRAND@ Tools 才能在运行中的 VM 上编辑网络</value>
+    <value>必须安装 [XenServer product] Tools 才能在运行中的 VM 上编辑网络</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>创建 VM 时，默认模板最多支持 {0} 个网络</value>
@@ -10347,13 +10347,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已达到该模板的最大网络数。</value>
   </data>
   <data name="TOOLTIP_NICS_PER_BOND_LIMIT" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 对每个绑定仅支持 {0} 个 NIC。</value>
+    <value>[XenServer] 对每个绑定仅支持 {0} 个 NIC。</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_SUSPENDED" xml:space="preserve">
     <value>无法从挂起的 VM 中删除网络</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>必须安装 @BRANDING_PRODUCT_BRAND@ Tools 才能删除运行中的 VM 上的网络</value>
+    <value>必须安装 [XenServer product] Tools 才能删除运行中的 VM 上的网络</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>无法删除该网络，因为它是物理设备</value>
@@ -10410,12 +10410,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>将本地存储的 VM、模板或快照作为新 VM 导入。</value>
   </data>
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 无法从文件 {0} 中导入保存的搜索。
+    <value>[XenCenter] 无法从文件 {0} 中导入保存的搜索。
 
 请确认该文件属于有效的 {1} 导出。</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 将文件解压到“{0}”。 解压后，将删除原始文件“{1}”。是否继续?</value>
+    <value>[XenCenter] 将文件解压到“{0}”。 解压后，将删除原始文件“{1}”。是否继续?</value>
   </data>
   <data name="UNINSTALL" xml:space="preserve">
     <value>删除</value>
@@ -10457,7 +10457,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>更新</value>
   </data>
   <data name="UPDATES_DESC" xml:space="preserve">
-    <value>自动检查 @BRANDING_SERVER@ 或 @BRANDING_BRAND_CONSOLE@ 更新</value>
+    <value>自动检查 [XenServer] 或 [XenCenter] 更新</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>要使更新在应用后生效，需要执行以下操作:
@@ -10645,10 +10645,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 其他服务器上的可用内存不足，无法将所有 VM 迁移出此服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>VM {0} 未安装 @BRANDING_PRODUCT_BRAND@ Tools。</value>
+    <value>VM {0} 未安装 [XenServer product] Tools。</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>必须安装最新版本的 @BRANDING_PRODUCT_BRAND@ Tools，才能挂起 VM {0}。</value>
+    <value>必须安装最新版本的 [XenServer product] Tools，才能挂起 VM {0}。</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
     <value>选中每个要更新的每个服务器所对应的复选框。选中池的复选框可选择该池中的所有可用服务器。</value>
@@ -10812,103 +10812,103 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在将更新上载到服务器“{0}”...</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
+    <value>升级 [XenServer] 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 警报和报告功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 警报和报告功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用 VM 实时迁移。通过此功能，您能够在同一个池中的服务器之间或跨池迁移共享存储或本地存储上正在运行的 VM，而不会导致 VM 停机。 </value>
+    <value>升级 [XenServer] 许可证以启用 VM 实时迁移。通过此功能，您能够在同一个池中的服务器之间或跨池迁移共享存储或本地存储上正在运行的 VM，而不会导致 VM 停机。 </value>
   </data>
   <data name="UPSELL_BLURB_CPM_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 跨池迁移功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 跨池迁移功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用异构池。异构池允许由使用不同 CPU 的主机构成一个资源池，并允许虚拟机在这些主机之间迁移。</value>
+    <value>升级 [XenServer] 许可证以启用异构池。异构池允许由使用不同 CPU 的主机构成一个资源池，并允许虚拟机在这些主机之间迁移。</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 异构池功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 异构池功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用动态内存控制功能。通过动态内存控制功能，@BRANDING_SERVER@ 可以调整活动虚拟机的内存，并对主机服务器不断变化的要求进行动态响应。</value>
+    <value>升级 [XenServer] 许可证以启用动态内存控制功能。通过动态内存控制功能，[XenServer] 可以调整活动虚拟机的内存，并对主机服务器不断变化的要求进行动态响应。</value>
   </data>
   <data name="UPSELL_BLURB_DMC_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 动态内存控制功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 动态内存控制功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
+    <value>升级 [XenServer] 许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
   </data>
   <data name="UPSELL_BLURB_DR_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 灾难恢复功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 灾难恢复功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用 StorageLink™ 技术。StorageLink 使 @BRANDING_SERVER@ 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
+    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 [XenServer] 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
+    <value>升级 [XenServer] 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ GPU 直通功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] GPU 直通功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用高可用性。通过高可用性，虚拟机可以在基础硬件出现故障或单个 VM 出现故障时自动重新启动。如果服务器出现故障，VM 将智能地在资源池中的其他虚拟化服务器上重新启动。</value>
+    <value>升级 [XenServer] 许可证以启用高可用性。通过高可用性，虚拟机可以在基础硬件出现故障或单个 VM 出现故障时自动重新启动。如果服务器出现故障，VM 将智能地在资源池中的其他虚拟化服务器上重新启动。</value>
   </data>
   <data name="UPSELL_BLURB_HA_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 高可用性功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 高可用性功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用性能报告功能。性能报告提供关于整体环境性能趋势的指导，并使您能够在业务需求发生变化时对生产能力做出准确规划。</value>
+    <value>升级 [XenServer] 许可证以启用性能报告功能。性能报告提供关于整体环境性能趋势的指导，并使您能够在业务需求发生变化时对生产能力做出准确规划。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 性能报告功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 性能报告功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用基于角色的访问控制。通过 RBAC 功能，可以控制对 @BRANDING_SERVER@ 资源池中重要组件的访问，并具有完全的审核日志记录功能，能够与当前 Active Directory 设置实现无缝集成。</value>
+    <value>升级 [XenServer] 许可证以启用基于角色的访问控制。通过 RBAC 功能，可以控制对 [XenServer] 资源池中重要组件的访问，并具有完全的审核日志记录功能，能够与当前 Active Directory 设置实现无缝集成。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 基于角色的访问控制功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 基于角色的访问控制功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
+    <value>升级 [XenServer] 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES_MORE" xml:space="preserve">
     <value>
 
-要了解有关 @BRANDING_SERVER@ 的 vApp 功能的更多信息，或者要启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解有关 [XenServer] 的 vApp 功能的更多信息，或者要启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用 VM 保护和恢复功能。通过 VM 保护和恢复功能，您可以安排时间自动生成快照并(可选)将这些快照存档到 CIFS 或 NFS 共享，从而保护关键 VM。</value>
+    <value>升级 [XenServer] 许可证以启用 VM 保护和恢复功能。通过 VM 保护和恢复功能，您可以安排时间自动生成快照并(可选)将这些快照存档到 CIFS 或 NFS 共享，从而保护关键 VM。</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION_MORE" xml:space="preserve">
     <value>
 
-要了解有关 @BRANDING_SERVER@ VM 保护和恢复功能的更多信息，或者要启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解有关 [XenServer] VM 保护和恢复功能的更多信息，或者要启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>升级 @BRANDING_SERVER@ 许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和 @BRANDING_SERVER@ 主机的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
+    <value>升级 [XenServer] 许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和 [XenServer] 主机的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
   </data>
   <data name="UPSELL_BLURB_WLB_MORE" xml:space="preserve">
     <value>
 
-要了解与 @BRANDING_SERVER@ 动态工作负载平衡功能有关的更多信息或启动 @BRANDING_SERVER@ 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 动态工作负载平衡功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>运行时间</value>
@@ -10923,7 +10923,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>用户名(&amp;U):</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 无法以 {0} 身份为操作授权。有关详细信息，请参阅应用程序日志文件。</value>
+    <value>[XenCenter] 无法以 {0} 身份为操作授权。有关详细信息，请参阅应用程序日志文件。</value>
   </data>
   <data name="USER_NOT_AUTHORIZED" xml:space="preserve">
     <value>您所输入的用户无权完成该操作</value>
@@ -11055,7 +11055,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>签名验证失败。{0}</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 版本 {0} (build {1}.{2}) {3} 位</value>
+    <value>[XenCenter] 版本 {0} (build {1}.{2}) {3} 位</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} vGPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
@@ -11531,34 +11531,34 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 未知错误。</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>WLB 与 @BRANDING_SERVER@ 建立会话时出错。</value>
+    <value>WLB 与 [XenServer] 建立会话时出错。</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
-    <value>WLB 无法登录 @BRANDING_SERVER@。这可能是因为凭据无效。</value>
+    <value>WLB 无法登录 [XenServer]。这可能是因为凭据无效。</value>
   </data>
   <data name="WLB_ERROR_4003" xml:space="preserve">
-    <value>WLB 无法连接到 @BRANDING_SERVER@。这可能是因为 @BRANDING_SERVER@ 处于脱机状态或 TCP/IP 地址不正确。</value>
+    <value>WLB 无法连接到 [XenServer]。这可能是因为 [XenServer] 处于脱机状态或 TCP/IP 地址不正确。</value>
   </data>
   <data name="WLB_ERROR_4004" xml:space="preserve">
-    <value>WLB 从 @BRANDING_SERVER@ 接收到空参数，而这是不允许的。</value>
+    <value>WLB 从 [XenServer] 接收到空参数，而这是不允许的。</value>
   </data>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>缺少 WLB 注册表项。</value>
   </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
-    <value>WLB 从 @BRANDING_SERVER@ 接收到无效参数。</value>
+    <value>WLB 从 [XenServer] 接收到无效参数。</value>
   </data>
   <data name="WLB_ERROR_4008" xml:space="preserve">
-    <value>WLB 数据收集服务无法检索 @BRANDING_SERVER@ 数据。</value>
+    <value>WLB 数据收集服务无法检索 [XenServer] 数据。</value>
   </data>
   <data name="WLB_ERROR_4009" xml:space="preserve">
     <value>WLB 数据库中缺少 WLB 配置数据。</value>
   </data>
   <data name="WLB_ERROR_4010" xml:space="preserve">
-    <value>WLB 从 @BRANDING_SERVER@ 接收到无效操作。</value>
+    <value>WLB 从 [XenServer] 接收到无效操作。</value>
   </data>
   <data name="WLB_ERROR_4011" xml:space="preserve">
-    <value>WLB 从 @BRANDING_SERVER@ 接收到超出范围的参数。</value>
+    <value>WLB 从 [XenServer] 接收到超出范围的参数。</value>
   </data>
   <data name="WLB_ERROR_4012" xml:space="preserve">
     <value>WLB 数据收集服务未正确初始化。</value>
@@ -11588,7 +11588,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池中的一个或多个主机没有合适的许可证。</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB 无法使用所提供的无效凭据来启动 @BRANDING_SERVER@ 会话。</value>
+    <value>WLB 无法使用所提供的无效凭据来启动 [XenServer] 会话。</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB 无法撤离显式排除的主机。</value>
@@ -11597,10 +11597,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 此时无法保存配置。请确认所有 Workload Balancing 服务都在运行，然后在几分钟后尝试重新输入配置。</value>
   </data>
   <data name="WLB_ERROR_5" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 无法使用提供的 WLB 服务器凭据连接到 WLB 服务器。</value>
+    <value>[XenServer] 无法使用提供的 WLB 服务器凭据连接到 WLB 服务器。</value>
   </data>
   <data name="WLB_ERROR_6" xml:space="preserve">
-    <value>WLB 连接 @BRANDING_SERVER@ 时所用的用户身份权限不足，或者没有访问 @BRANDING_SERVER@ 的权限。请使用有效用户身份重新初始化 WLB。</value>
+    <value>WLB 连接 [XenServer] 时所用的用户身份权限不足，或者没有访问 [XenServer] 的权限。请使用有效用户身份重新初始化 WLB。</value>
   </data>
   <data name="WLB_ERROR_SERVER_NOT_FOUND" xml:space="preserve">
     <value>找不到指定的 WLB 服务器。请检查设置。</value>
@@ -11777,7 +11777,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>配置错误: {0}</value>
   </data>
   <data name="WLB_RECONFIGURE_CREDS" xml:space="preserve">
-    <value>存储的 @BRANDING_SERVER@ 凭据不再有效。请更新 Workload Balancing 的连接设置。</value>
+    <value>存储的 [XenServer] 凭据不再有效。请更新 Workload Balancing 的连接设置。</value>
   </data>
   <data name="WLB_RECONNECT" xml:space="preserve">
     <value>重新连接(&amp;C)...</value>
@@ -12100,48 +12100,48 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>无法运行 XenApplianceWizards 可执行文件。有关详细信息，请参阅客户端日志。</value>
   </data>
   <data name="XENCENTER" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@</value>
+    <value>[XenCenter]</value>
   </data>
   <data name="XENCENTER_CONFIG_FILTER" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 设置|*.config</value>
+    <value>[XenCenter] 设置|*.config</value>
   </data>
   <data name="XENCENTER_NEWER_AVAILABLE" xml:space="preserve">
-    <value>更新的 @BRANDING_BRAND_CONSOLE@ 可用</value>
+    <value>更新的 [XenCenter] 可用</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
     <value>保存的搜索 (*.{0})|*.{0}</value>>
   </data>
   <data name="XENSERVER" xml:space="preserve">
-    <value>@BRANDING_SERVER@</value>
+    <value>[XenServer]</value>
   </data>
   <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_2_VERSION@</value>
+    <value>[XenServer] [BRANDING_VERSION_6_2]</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>@BRANDING_SERVER@ @BRANDING_XC_PRODUCT_6_5_VERSION@</value>
+    <value>[XenServer] [BRANDING_VERSION_6_5]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 模板</value>
+    <value>[XenServer] 模板</value>
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>需要升级许可证</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 更新文件({0})|{0}|所有文件({1})|{1}</value>
+    <value>[XenServer] 更新文件({0})|{0}|所有文件({1})|{1}</value>
   </data>
   <data name="XS_BACKUP_FILES" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 备份文件</value>
+    <value>[XenServer] 备份文件</value>
   </data>
   <data name="XS_LICENSE_FILES" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 许可证文件</value>
+    <value>[XenServer] 许可证文件</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools DVD 现在将插入每个所选 VM 的 DVD 驱动器中。驱动器中当前的任何磁盘都将弹出。
+    <value>[XenServer product] Tools DVD 现在将插入每个所选 VM 的 DVD 驱动器中。驱动器中当前的任何磁盘都将弹出。
 
 您将需要导航到每个所选 VM 上的控制台，以完成安装。</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
-    <value>找不到 @BRANDING_PRODUCT_BRAND@ Tools SR。</value>
+    <value>找不到 [XenServer product] Tools SR。</value>
   </data>
   <data name="X_HIDDEN" xml:space="preserve">
     <value>{0} (隐藏)</value>
@@ -12168,10 +12168,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>您在此处</value>
   </data>
   <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Enterprise Per-Socket (需要 {0})(&amp;E)</value>
+    <value>[XenServer product] Enterprise Per-Socket (需要 {0})(&amp;E)</value>
   </data>
   <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Standard Per-Socket (需要 {0})(&amp;S)</value>
+    <value>[XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
     <value>不符合支持条件</value>
