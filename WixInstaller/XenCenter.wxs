@@ -281,17 +281,21 @@
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
             <ComponentRef Id="ProgramFilesShortcut" />
-        </Feature>
-
-        <?if "$(env.Branding)"="XenCenter"?>		
-        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-             <ComponentRef Id="XenServerHealthCheck" /> 
-        </Feature>
-
+               
+               <?if "$(env.Branding)"="XenCenter"?>		
+	        <Feature Id="HealthCheckService" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_SERVER@ Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+	             <ComponentRef Id="XenServerHealthCheck" /> 
+	        </Feature>
+	       <?else ?>
+	       <?endif?>
+ 	</Feature>
+	
+	<?if "$(env.Branding)"="XenCenter"?>
         <UIRef Id="WixUI_FeatureTree" />
         <?else ?>
         <UIRef Id="My_WixUI_InstallDir" />
         <?endif?>
+        
         <UIRef Id="WixUI_ErrorProgressText" />
         <Property Id="Install_All" Value="0" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
