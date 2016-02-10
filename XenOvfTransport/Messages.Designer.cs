@@ -277,7 +277,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disconnected from @BRANDING_SERVER@..
+        ///   Looks up a localized string similar to Disconnected from [XenServer]..
         /// </summary>
         internal static string ERROR_NOT_CONNECTED {
             get {
@@ -538,7 +538,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuring virtual machine for @BRANDING_SERVER@ ... .
+        ///   Looks up a localized string similar to Configuring virtual machine for [XenServer] ... .
         /// </summary>
         internal static string START_POST_INSTALL_INSTRUCTIONS {
             get {

@@ -36,12 +36,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("@BRANDING_BRAND_CONSOLE@OVFTransport")]
-[assembly: AssemblyDescription("@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@ OVF transport layer")]
+[assembly: AssemblyTitle("[XenCenter]OVFTransport")]
+[assembly: AssemblyDescription("[Citrix] [XenCenter] OVF transport layer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("@BRANDING_COMPANY_NAME_SHORT@")]
-[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@OVFTransport")]
-[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
+[assembly: AssemblyCompany("[Citrix]")]
+[assembly: AssemblyProduct("[XenCenter]OVFTransport")]
+[assembly: AssemblyCopyright("[BRANDING_COPYRIGHT]")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

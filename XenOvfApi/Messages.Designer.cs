@@ -160,7 +160,7 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_COMPANY_NAME_SHORT@ OVF EULA.
+        ///   Looks up a localized string similar to [Citrix] OVF EULA.
         /// </summary>
         public static string EULA_TITLE {
             get {

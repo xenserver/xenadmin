@@ -559,7 +559,7 @@
     <value>24</value>
   </data>
   <data name="authenticationRubricTextBox.Text" xml:space="preserve">
-    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="&gt;&gt;authenticationRubricTextBox.Name" xml:space="preserve">
     <value>authenticationRubricTextBox</value>
@@ -1309,7 +1309,7 @@
     <value>21</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
-    <value>Use the current &amp;@BRANDING_BRAND_CONSOLE@ credentials</value>
+    <value>Use the current &amp;[XenCenter] credentials</value>
   </data>
   <data name="&gt;&gt;currentXsCredentialsRadioButton.Name" xml:space="preserve">
     <value>currentXsCredentialsRadioButton</value>

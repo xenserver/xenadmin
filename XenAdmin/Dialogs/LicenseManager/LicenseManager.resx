@@ -232,7 +232,7 @@
     <value>4</value>
   </data>
   <data name="downloadLicenseServerLink.Text" xml:space="preserve">
-    <value>Download a @BRANDING_COMPANY_NAME_SHORT@ License Server virtual appliance</value>
+    <value>Download a [Citrix] License Server virtual appliance</value>
   </data>
   <data name="downloadLicenseServerLink.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -343,7 +343,7 @@
     <value>3</value>
   </data>
   <data name="activateFreeXenServerButton.Text" xml:space="preserve">
-    <value>Activate &amp;Free @BRANDING_SERVER@</value>
+    <value>Activate &amp;Free [XenServer]</value>
   </data>
   <data name="&gt;&gt;activateFreeXenServerButton.Name" xml:space="preserve">
     <value>activateFreeXenServerButton</value>

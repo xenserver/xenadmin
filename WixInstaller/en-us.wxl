@@ -6,11 +6,11 @@
     <String Id="OVA_File">OVA File</String>
     <String Id="VHD_File">VHD File</String>
     <String Id="VMDK_File">VMDK File</String>
-    <String Id="XenServer_License_File">@BRANDING_SERVER@ License File</String>
-    <String Id="XenServer_Backup_File">@BRANDING_SERVER@ Backup File</String>
-    <String Id="XenServer_Update_File">@BRANDING_SERVER@ Update File</String>
-    <String Id="XenServer_OEM_Update_File">@BRANDING_SERVER@ OEM Update File</String>
-    <String Id="XenCenter_Saved_Search">@BRANDING_BRAND_CONSOLE@ Saved Search</String>
+    <String Id="XenServer_License_File">[XenServer] License File</String>
+    <String Id="XenServer_Backup_File">[XenServer] Backup File</String>
+    <String Id="XenServer_Update_File">[XenServer] Update File</String>
+    <String Id="XenServer_OEM_Update_File">[XenServer] OEM Update File</String>
+    <String Id="XenCenter_Saved_Search">[XenCenter] Saved Search</String>
     <String Id="Required_For_Installation">.NET Framework 4 is required for this installation.</String>
     <String Id="Readme">README.TXT</String>
 </WixLocalization>

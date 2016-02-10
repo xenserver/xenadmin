@@ -190,7 +190,7 @@
     <value>4</value>
   </data>
   <data name="checkBoxDisableRDPPolling.Text" xml:space="preserve">
-    <value>E&amp;nable Remote Desktop console scanning (@BRANDING_SERVER@ 6.5 and earlier)</value>
+    <value>E&amp;nable Remote Desktop console scanning ([XenServer] 6.5 and earlier)</value>
   </data>
   <data name="&gt;&gt;checkBoxDisableRDPPolling.Name" xml:space="preserve">
     <value>checkBoxDisableRDPPolling</value>
@@ -781,7 +781,7 @@
     <value>4</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>The server and VM consoles in @BRANDING_BRAND_CONSOLE@ can be configured with a variety of keyboard shortcuts and clipboard options, with specific options available for those VMs which support a Remote Desktop connection.</value>
+    <value>The server and VM consoles in [XenCenter] can be configured with a variety of keyboard shortcuts and clipboard options, with specific options available for those VMs which support a Remote Desktop connection.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

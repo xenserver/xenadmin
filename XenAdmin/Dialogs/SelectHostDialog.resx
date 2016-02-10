@@ -265,7 +265,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Select the server on which to apply this @BRANDING_SERVER@ activation key. If the server you want is not listed here, you can add it by clicking Add New Server.</value>
+    <value>Select the server on which to apply this [XenServer] activation key. If the server you want is not listed here, you can add it by clicking Add New Server.</value>
   </data>
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

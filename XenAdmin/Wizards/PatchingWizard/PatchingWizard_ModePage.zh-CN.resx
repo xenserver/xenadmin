@@ -136,7 +136,7 @@
     <value>2</value>
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
-    <value>允许 @BRANDING_BRAND_CONSOLE@ 在应用更新后立即执行更新后任务(&amp;A)。</value>
+    <value>允许 [XenCenter] 在应用更新后立即执行更新后任务(&amp;A)。</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>

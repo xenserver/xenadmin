@@ -148,7 +148,7 @@
     <value>11</value>
   </data>
   <data name="automaticOptionLabel.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ will &amp;automatically download and install all current updates from @BRANDING_COMPANY_NAME_SHORT@, usually with only a single reboot at the end.</value>
+    <value>[XenCenter] will &amp;automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
   </data>
   <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
     <value>automaticOptionLabel</value>
@@ -385,7 +385,7 @@
     <value>1</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>Download update from &amp;@BRANDING_COMPANY_NAME_SHORT@</value>
+    <value>Download update from &amp;[Citrix]</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>
@@ -418,7 +418,7 @@
     <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Select Automatic mode or manually select an update to be downloaded from @BRANDING_COMPANY_NAME_SHORT@, or browse an update or supplemental pack file from your computer.</value>
+    <value>Select Automatic mode or manually select an update to be downloaded from [Citrix], or browse an update or supplemental pack file from your computer.</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

@@ -151,7 +151,7 @@
     <value>始终尝试重新启动 VM</value>
   </data>
   <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Storagelink 的配置设置</value>
+    <value>[Citrix] Storagelink 的配置设置</value>
   </data>
   <data name="Description-host.system_status-X11" xml:space="preserve">
     <value>来自 X 服务器的日志文件</value>
@@ -160,7 +160,7 @@
     <value>X 服务器授权文件</value>
   </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
-    <value>检索以二进制对象形式存储在 @BRANDING_SERVER@ 上的用户信息。</value>
+    <value>检索以二进制对象形式存储在 [XenServer] 上的用户信息。</value>
   </data>
   <data name="Description-host.system_status-boot-loader" xml:space="preserve">
     <value>系统引导时提供给用户的引导选项及其详细信息列表</value>
@@ -214,7 +214,7 @@
     <value>收集特定于 OEM 提供商的数据。</value>
   </data>
   <data name="Description-host.system_status-pam" xml:space="preserve">
-    <value>由 @BRANDING_SERVER@ 中的可插拔身份验证模块(PAM)使用的配置文件。</value>
+    <value>由 [XenServer] 中的可插拔身份验证模块(PAM)使用的配置文件。</value>
   </data>
   <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
     <value>持久性能统计信息</value>
@@ -241,13 +241,13 @@
     <value>来自监视该池的 WLB 服务器的日志和状态信息。</value>
   </data>
   <data name="Description-host.system_status-xapi" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 后台程序内部日志</value>
+    <value>[XenServer] 后台程序内部日志</value>
   </data>
   <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 后台程序故障转储</value>
+    <value>[XenServer] 后台程序故障转储</value>
   </data>
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 后台程序进程详细信息</value>
+    <value>[XenServer] 后台程序进程详细信息</value>
   </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>虚拟机管理程序版本及其当前状态的详细信息</value>
@@ -256,19 +256,19 @@
     <value>VM 内部诊断</value>
   </data>
   <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 的详细信息，例如版本和内部版本信息、主硬盘位置和池配置</value>
+    <value>[XenServer] 的详细信息，例如版本和内部版本信息、主硬盘位置和池配置</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>用于存储 @BRANDING_SERVER@ 状态的数据库</value>
+    <value>用于存储 [XenServer] 状态的数据库</value>
   </data>
   <data name="Description-host.system_status-xenserver-domains" xml:space="preserve">
     <value>服务器上安装的来宾 VM 及其当前状态的列表</value>
   </data>
   <data name="Description-host.system_status-xenserver-install" xml:space="preserve">
-    <value>在 @BRANDING_SERVER@ 安装期间生成的日志文件</value>
+    <value>在 [XenServer] 安装期间生成的日志文件</value>
   </data>
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>有关 @BRANDING_SERVER@ 活动的日志文件</value>
+    <value>有关 [XenServer] 活动的日志文件</value>
   </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性实时集</value>
@@ -298,7 +298,7 @@
     <value>必须安装 Powershell 才能使用 Powershell 插件。可以从 Microsoft 网站下载 Powershell。</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>必须安装 XenServerPSSnapIn 才能使用 @BRANDING_SERVER@ PowerShell 命令。可以在 SDK 中找到 XenServerPSSnapIn。</value>
+    <value>必须安装 XenServerPSSnapIn 才能使用 [XenServer] PowerShell 命令。可以在 SDK 中找到 XenServerPSSnapIn。</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>无法解析插件“{1}”的搜索“{0}”。</value>
@@ -541,19 +541,19 @@
     <value>版本</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition</value>
+    <value>[Citrix] [XenServer product] Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
+    <value>[Citrix] [XenServer product] Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
+    <value>[Citrix] [XenServer product] for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
+    <value>[Citrix] [XenServer product]</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Platinum Edition</value>
+    <value>[Citrix] [XenServer product] Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>已启用</value>
@@ -598,70 +598,70 @@
     <value>池成员</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>[Citrix] Essentials for [XenServer product] Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Edition</value>
+    <value>[Citrix] [XenServer product] Dell Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>[Citrix] Essentials for [XenServer product] Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>[Citrix] Essentials for [XenServer product] HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Edition</value>
+    <value>[Citrix] [XenServer product] HP Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>[Citrix] Essentials for [XenServer product] HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@</value>
+    <value>[Citrix] Essentials for [XenServer product]</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
+    <value>[Citrix] [XenServer product]</value>
   </data>
   <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ Essentials for @BRANDING_PRODUCT_BRAND@</value>
+    <value>[Citrix] Essentials for [XenServer product]</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Enterprise Edition</value>
+    <value>[Citrix] [XenServer product] Dell Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Express Edition</value>
+    <value>[Citrix] [XenServer product] Dell Express Edition</value>
   </data>
   <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Dell Server Edition</value>
+    <value>[Citrix] [XenServer product] Dell Server Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Enterprise Edition</value>
+    <value>[Citrix] [XenServer product] HP Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Select Edition</value>
+    <value>[Citrix] [XenServer product] HP Select Edition</value>
   </data>
   <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ HP Server Edition</value>
+    <value>[Citrix] [XenServer product] HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition</value>
+    <value>[Citrix] [XenServer product] Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Express Edition</value>
+    <value>[Citrix] [XenServer product] Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Server Edition</value>
+    <value>[Citrix] [XenServer product] Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 内部版本号</value>
+    <value>[XenServer] 内部版本号</value>
   </data>
   <data name="Label-host.software_version-date" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 内部版本日期</value>
+    <value>[XenServer] 内部版本日期</value>
   </data>
   <data name="Label-host.software_version-product_version" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 版本</value>
+    <value>[XenServer] 版本</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ StorageLink 配置</value>
+    <value>[Citrix] StorageLink 配置</value>
   </data>
   <data name="Label-host.system_status-X11" xml:space="preserve">
     <value>X 服务器日志</value>
@@ -676,7 +676,7 @@
     <value>引导加载程序配置</value>
   </data>
   <data name="Label-host.system_status-client-logs" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 日志</value>
+    <value>[XenCenter] 日志</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>设备型号</value>
@@ -751,13 +751,13 @@
     <value>Workload Balancing 状态</value>
   </data>
   <data name="Label-host.system_status-xapi" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 后台程序内部日志</value>
+    <value>[XenServer] 后台程序内部日志</value>
   </data>
   <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 后台程序故障转储</value>
+    <value>[XenServer] 后台程序故障转储</value>
   </data>
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 后台程序子进程</value>
+    <value>[XenServer] 后台程序子进程</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>虚拟机管理程序配置</value>
@@ -766,19 +766,19 @@
     <value>VM 内部诊断</value>
   </data>
   <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 配置</value>
+    <value>[XenServer] 配置</value>
   </data>
   <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 数据库</value>
+    <value>[XenServer] 数据库</value>
   </data>
   <data name="Label-host.system_status-xenserver-domains" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 域列表</value>
+    <value>[XenServer] 域列表</value>
   </data>
   <data name="Label-host.system_status-xenserver-install" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 安装日志文件</value>
+    <value>[XenServer] 安装日志文件</value>
   </data>
   <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 日志</value>
+    <value>[XenServer] 日志</value>
   </data>
   <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性实时集</value>
@@ -949,7 +949,7 @@
     <value>可用代理内存</value>
   </data>
   <data name="Label-performance.xapi_latency" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 运行状况检查延迟</value>
+    <value>[XenServer] 运行状况检查延迟</value>
   </data>
   <data name="Label-performance.xapi_live_memory_kib" xml:space="preserve">
     <value>活动代理内存</value>
@@ -1015,10 +1015,10 @@
     <value>高可用性设置</value>
   </data>
   <data name="Message.action-license_does_not_support_pooling" xml:space="preserve">
-    <value>在线购买 @BRANDING_SERVER@</value>
+    <value>在线购买 [XenServer]</value>
   </data>
   <data name="Message.action-license_expires_soon" xml:space="preserve">
-    <value>在线购买 @BRANDING_SERVER@</value>
+    <value>在线购买 [XenServer]</value>
   </data>
   <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
     <value>查看日志文件</value>
@@ -1080,7 +1080,7 @@
     <value>池“{0}”中的服务器无法访问检测信号 SR。如果没有检测信号 SR，高可用性保护的作用将严重削弱。</value>
   </data>
   <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>服务器“{0}”上的 @BRANDING_SERVER@ 响应时间过长，可能要进行防护。</value>
+    <value>服务器“{0}”上的 [XenServer] 响应时间过长，可能要进行防护。</value>
   </data>
   <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
     <value>服务器“{0}”的时钟与池“{1}”中其他服务器不同步。这可能导致在迁移虚拟机时出现错误，并且还会影响以后收集的任何性能数据。</value>
@@ -1092,7 +1092,7 @@
     <value>在池中同步性能统计信息时出现临时故障，这可能是因为一个或多个服务器处于脱机状态。稍后将再次尝试同步。</value>
   </data>
   <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
-    <value>服务器“{0}”上的许可证已过期或更改，不再支持 @BRANDING_PRODUCT_BRAND@ Enterprise 功能。</value>
+    <value>服务器“{0}”上的许可证已过期或更改，不再支持 [XenServer product] Enterprise 功能。</value>
   </data>
   <data name="Message.body-license_expired" xml:space="preserve">
     <value>{0} 的许可证已过期。</value>
@@ -1119,16 +1119,16 @@
     <value>池“{0}”在上一次故障后已成功访问过高可用性元数据磁盘，如果发生高可用性故障转移，可以成功进行恢复。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert" xml:space="preserve">
-    <value>服务器“{0}”的多路径状态发生变化。在 {2} 条路径中，当前有 {1} 条处于活动状态。有关完整详细信息，请参阅 @BRANDING_BRAND_CONSOLE@ 日志。</value>
+    <value>服务器“{0}”的多路径状态发生变化。在 {2} 条路径中，当前有 {1} 条处于活动状态。有关完整详细信息，请参阅 [XenCenter] 日志。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy" xml:space="preserve">
-    <value>池“{0}”中服务器的多路径状态发生变化。当前所有路径均处于活动状态。有关完整详细信息，请参阅 @BRANDING_BRAND_CONSOLE@ 日志。</value>
+    <value>池“{0}”中服务器的多路径状态发生变化。当前所有路径均处于活动状态。有关完整详细信息，请参阅 [XenCenter] 日志。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy_standalone" xml:space="preserve">
-    <value>服务器“{0}”的多路径状态发生变化。当前所有路径均处于活动状态。有关完整详细信息，请参阅 @BRANDING_BRAND_CONSOLE@ 日志。</value>
+    <value>服务器“{0}”的多路径状态发生变化。当前所有路径均处于活动状态。有关完整详细信息，请参阅 [XenCenter] 日志。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_summary" xml:space="preserve">
-    <value>池“{0}”中服务器的多路径状态发生变化。以下服务器当前具有非活动路径: {1}。有关完整详细信息，请参阅 @BRANDING_BRAND_CONSOLE@ 日志。</value>
+    <value>池“{0}”中服务器的多路径状态发生变化。以下服务器当前具有非活动路径: {1}。有关完整详细信息，请参阅 [XenCenter] 日志。</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>启动服务器“{0}”后，无法连接存储库。或许可以使用“存储”菜单中的“修复存储”选项修复此问题。</value>
@@ -1191,7 +1191,7 @@
     <value>备份成功</value>
   </data>
   <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>您使用的 @BRANDING_PRODUCT_BRAND@ 许可证不允许您使用 VMPR 功能。VMPR 在 @BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition 或更高版本中可用。</value>
+    <value>您使用的 [XenServer product] 许可证不允许您使用 VMPR 功能。VMPR 在 [Citrix] [XenServer product] Advanced Edition 或更高版本中可用。</value>
   </data>
   <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
     <value>已存档快照。</value>
@@ -1311,7 +1311,7 @@
     <value>检测信号 SR 已丢失</value>
   </data>
   <data name="Message.name-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 运行状况检查接近超时</value>
+    <value>[XenServer] 运行状况检查接近超时</value>
   </data>
   <data name="Message.name-host_clock_skew_detected" xml:space="preserve">
     <value>服务器时钟未同步</value>
@@ -1320,7 +1320,7 @@
     <value>服务器时钟已倒退</value>
   </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
-    <value>@BRANDING_SERVER@ 统计信息同步失败</value>
+    <value>[XenServer] 统计信息同步失败</value>
   </data>
   <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
     <value>网络配置问题</value>
@@ -1455,11 +1455,11 @@
     <value>WLB VM 重新定位</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
-    <value>池管理员对所有 @BRANDING_SERVER@ 功能和设置具有完全访问权限，可以访问 @BRANDING_SERVER@ 控制台并管理其他用户的角色。
+    <value>池管理员对所有 [XenServer] 功能和设置具有完全访问权限，可以访问 [XenServer] 控制台并管理其他用户的角色。
  
 - 无任何限制
 - 可进行角色和用户管理
-- 可访问 @BRANDING_SERVER@ 控制台</value>
+- 可访问 [XenServer] 控制台</value>
   </data>
   <data name="Role.pool-admin.NameLabel" xml:space="preserve">
     <value>池管理员</value>
@@ -1483,7 +1483,7 @@
     <value>只读</value>
   </data>
   <data name="Role.vm-admin.Description" xml:space="preserve">
-    <value>VM 管理员可以管理 VM 和模板，并可以访问完成这些任务所需要的存储。此角色依赖于 @BRANDING_SERVER@ 来选择每个 VM 的运行位置，依赖于模板来为动态内存控制(DMC)和主服务器设置提供值。
+    <value>VM 管理员可以管理 VM 和模板，并可以访问完成这些任务所需要的存储。此角色依赖于 [XenServer] 来选择每个 VM 的运行位置，依赖于模板来为动态内存控制(DMC)和主服务器设置提供值。
  
 - 管理 VM 和模板
 - 无权访问动态内存控制功能
@@ -1536,7 +1536,7 @@
     <value>{0} 上的本地存储</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools ISO</value>
+    <value>[XenServer product] Tools ISO</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1563,7 +1563,7 @@
     <value>{0} 上的本地存储</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>[XenServer product] Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>此模板可用于通过内置 Linux 发行版创建 Linux VM，以进行测试和演示。建议不要在生产环境中使用。</value>
@@ -1572,7 +1572,7 @@
     <value>如果未列出您要使用的操作系统，或许可以通过选择此模板来进行安装。建议仅由高级用户尝试使用此模板，并且请注意，我们的产品仅在运行标准随附模板所涵盖的受支持发行版和特定版本的情况下经过测试。</value>
   </data>
   <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
-    <value>此模板可用于安装 @BRANDING_SERVER@ 软件开发工具包(SDK) API VM。</value>
+    <value>此模板可用于安装 [XenServer] 软件开发工具包(SDK) API VM。</value>
   </data>
   <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
     <value>可移动物理存储</value>
@@ -1629,10 +1629,10 @@
     <value>潜在回收的内存</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket Edition</value>
+    <value>[Citrix] [XenServer product] Per-Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ for XenDesktop</value>
+    <value>[Citrix] [XenServer product] for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>有关 AD 的帮助</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} 内存利用率</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
+    <value>[Citrix] [XenServer product]</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>无法回收释放的空间，因为 SR 正忙</value>
@@ -1707,16 +1707,16 @@
     <value>许可证服务器版本已过时。</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Per Socket Edition</value>
+    <value>[Citrix] [XenServer product] Enterprise Per Socket Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Per User Edition</value>
+    <value>[Citrix] [XenServer product] Enterprise Per User Edition</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Standard Per Socket Edition</value>
+    <value>[Citrix] [XenServer product] Standard Per Socket Edition</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ XenDesktop Platinum</value>
+    <value>[Citrix] XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>有关许可的帮助</value>
@@ -1737,15 +1737,15 @@
     <value>有关许可的帮助</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Desktop Edition</value>
+    <value>[Citrix] [XenServer product] Desktop Edition</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Desktop+ Edition</value>
+    <value>[Citrix] [XenServer product] Desktop+ Edition</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Premium Edition</value>
+    <value>[Citrix] [XenServer product] Premium Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Basic Edition</value>
+    <value>[Citrix] [XenServer product] Basic Edition</value>
   </data>
 </root>
