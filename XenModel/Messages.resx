@@ -6694,6 +6694,10 @@ XenApp/XenDesktop Platinum features enabled</value>
     <value>Eligible for support 
 Enterprise features enabled</value>
   </data>
+  <data name="LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Premium features enabled</value>
+  </data>
   <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
 Standard features only</value>

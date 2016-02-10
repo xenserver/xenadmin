@@ -19193,6 +19193,16 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
+        ///Premium features enabled.
+        /// </summary>
+        public static string LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eligible for support 
         ///Standard features only.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED {
