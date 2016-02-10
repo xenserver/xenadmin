@@ -717,7 +717,7 @@ namespace XenAPI
             foreach (Pool_patch patch in patches)
             {
                 Pool_patch patch1 = patch;
-                if (!appliedPatches.Exists(otherPatch => patch1.uuid == otherPatch.uuid))
+                if (!appliedPatches.Exists(otherPatch => string.Equals(patch1.uuid, otherPatch.uuid, StringComparison.OrdinalIgnoreCase)))
                     return false;
             }
 

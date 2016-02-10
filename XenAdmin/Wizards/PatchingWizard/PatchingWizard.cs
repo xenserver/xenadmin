@@ -310,7 +310,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 List<Pool_patch> patchesToRemove =
                     PatchingWizard_UploadPage.NewUploadedPatches.Keys.ToList().Where(
-                        patch => patch.uuid != PatchingWizard_UploadPage.Patch.uuid).ToList();
+                        patch => !string.Equals(patch.uuid, PatchingWizard_UploadPage.Patch.uuid, System.StringComparison.OrdinalIgnoreCase)).ToList();
 
                 RemoveUnwantedPatches(patchesToRemove);
             }

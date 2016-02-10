@@ -200,7 +200,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<Pool_patch> hostPatches = host.AppliedPatches();
             foreach (Pool_patch patch in hostPatches)
             {
-                if (patch.uuid.Equals(uuid))
+                if (string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

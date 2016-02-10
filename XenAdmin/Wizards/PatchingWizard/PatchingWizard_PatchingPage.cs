@@ -149,7 +149,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
                                                      {
                                                          if (Patch != null)
-                                                             return otherPatch.uuid == Patch.uuid;
+                                                             return string.Equals(otherPatch.uuid, Patch.uuid, StringComparison.OrdinalIgnoreCase);
                                                          return false;
                                                      });
                 }

@@ -342,7 +342,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (Host host in SelectedServers)
                 {
                     List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
-                    Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => otherPatch.uuid == patch.uuid);
+                    Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => string.Equals(otherPatch.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase));
                     checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
                 }
             }
