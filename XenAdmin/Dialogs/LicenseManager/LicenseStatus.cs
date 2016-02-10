@@ -164,7 +164,7 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                return LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "regular grace";
+                return LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "regular grace";
             }
         }
 
@@ -172,7 +172,7 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                return LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "upgrade grace";
+                return LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "upgrade grace";
             }
         }
 
@@ -313,7 +313,7 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                if (LicencedHost.license_params.ContainsKey("expiry"))
+                if (LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("expiry"))
                     return LicencedHost.LicenseExpiryUTC.ToLocalTime();
                 return null;
             }
