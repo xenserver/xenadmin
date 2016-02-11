@@ -388,7 +388,7 @@
     <value>24</value>
   </data>
   <data name="authenticationRubricLabel.Text" xml:space="preserve">
-    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ upload server is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with [Citrix] upload server is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="authenticationRubricLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -433,7 +433,7 @@
     <value>23</value>
   </data>
   <data name="authenticationLabel.Text" xml:space="preserve">
-    <value>Authentication with @BRANDING_COMPANY_NAME_SHORT@ upload server</value>
+    <value>Authentication with [Citrix] upload server</value>
   </data>
   <data name="&gt;&gt;authenticationLabel.Name" xml:space="preserve">
     <value>authenticationLabel</value>
@@ -811,7 +811,7 @@
     <value>10</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>Health Check will automatically upload a server status report to the @BRANDING_COMPANY_NAME_SHORT@ Insight Services, based on a predefined schedule configured on your @BRANDING_SERVER@ pool.</value>
+    <value>Health Check will automatically upload a server status report to the [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pool.</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>

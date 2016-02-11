@@ -421,7 +421,7 @@
     <value>16</value>
   </data>
   <data name="labelMasterBlurb.Text" xml:space="preserve">
-    <value>このサーバーはプール マスタとして動作しています。保守モードに入る前に、新しいプール マスタが選出されます。@BRANDING_BRAND_CONSOLE@ とプールとの接続は、一時的に切断されます。</value>
+    <value>このサーバーはプール マスタとして動作しています。保守モードに入る前に、新しいプール マスタが選出されます。[XenCenter] とプールとの接続は、一時的に切断されます。</value>
   </data>
   <data name="&gt;&gt;labelMasterBlurb.Name" xml:space="preserve">
     <value>labelMasterBlurb</value>

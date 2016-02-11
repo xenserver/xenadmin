@@ -277,7 +277,7 @@
     <value>7</value>
   </data>
   <data name="labelStorageLinkPropertiesLinkBlurb.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ StorageLink Gateway は、ネイティブ ストレージ サービスの自動検出およびワンクリック アクセスを可能にするストレージ管理テクノロジで、DAS、NAS、SAN、iSCSI、およびファイバ チャネルなどの最新のストレージ アーキテクチャおよびプロトコルがサポートされます。 
+    <value>[Citrix] StorageLink Gateway は、ネイティブ ストレージ サービスの自動検出およびワンクリック アクセスを可能にするストレージ管理テクノロジで、DAS、NAS、SAN、iSCSI、およびファイバ チャネルなどの最新のストレージ アーキテクチャおよびプロトコルがサポートされます。 
 
 </value>
   </data>

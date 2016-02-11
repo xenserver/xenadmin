@@ -31,11 +31,11 @@
 --- XenCenter.wxs	2016-02-02 09:43:41.049833000 +0800
 +++ XenCenter.l10n.wxs	2016-02-02 09:43:24.009129100 +0800
 @@ -38,7 +38,7 @@
-     <?define UpgradeCode="{@BRANDING_XENCENTER_UPGRADE_CODE_GUID@}"?>
+     <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
-     <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
--        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
-+        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Comments="none." InstallerVersion="200" Compressed="yes" />
+     <Product Id="$(var.ProductCode)" Name="[Citrix] [XenCenter]" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
+-        <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
++        <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
@@ -85,7 +85,7 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XSLIC extension -->
--							<ProgId Id="XenCenter.xslic" Description="@BRANDING_SERVER@ License File" Icon="XslicIcon">
+-							<ProgId Id="XenCenter.xslic" Description="[XenServer] License File" Icon="XslicIcon">
 +                            <!-- Define XSLIC extension -->
 +							<ProgId Id="XenCenter.xslic" Description="!(loc.XenServer_License_File)" Icon="XslicIcon">
                                  <Extension Id="xslic" ContentType="application/xslic">
@@ -94,7 +94,7 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XBK extension -->
--							<ProgId Id="XenCenter.xbk" Description="@BRANDING_SERVER@ Backup File" Icon="XkbIcon">
+-							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
 +                            <!-- Define XBK extension -->
 +							<ProgId Id="XenCenter.xbk" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
                                  <Extension Id="xbk" ContentType="application/xbk">
@@ -103,15 +103,15 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XSUPDATE extension -->
--							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="@BRANDING_SERVER@ Update File" Icon="XsupdateIcon">
-+							<ProgId Id="XenCenter.@BRANDING_UPDATE@" Description="!(loc.XenServer_Update_File)" Icon="XsupdateIcon">
-                                 <Extension Id="@BRANDING_UPDATE@" ContentType="application/@BRANDING_UPDATE@">
+-							<ProgId Id="XenCenter.[xsupdate]" Description="[XenServer] Update File" Icon="XsupdateIcon">
++							<ProgId Id="XenCenter.[xsupdate]" Description="!(loc.XenServer_Update_File)" Icon="XsupdateIcon">
+                                 <Extension Id="[xsupdate]" ContentType="application/[xsupdate]">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
 +                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                  </Extension>
                              </ProgId>
                              <!-- Define XSOEM extension -->
--							<ProgId Id="XenCenter.xsoem" Description="@BRANDING_SERVER@ OEM Update File" Icon="XsupdateIcon">
+-							<ProgId Id="XenCenter.xsoem" Description="[XenServer] OEM Update File" Icon="XsupdateIcon">
 +							<ProgId Id="XenCenter.xsoem" Description="!(loc.XenServer_OEM_Update_File)" Icon="XsupdateIcon">
                                  <Extension Id="xsoem" ContentType="application/xsoem">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
@@ -119,9 +119,9 @@
                                  </Extension>
                              </ProgId>
                              <!-- Define XENSEARCH extension -->
--                            <ProgId Id="XenCenter.@BRANDING_SEARCH@" Description="@BRANDING_BRAND_CONSOLE@ Saved Search" Icon="XenCenterIcon">
-+                            <ProgId Id="XenCenter.@BRANDING_SEARCH@" Description="!(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
-                                 <Extension Id="@BRANDING_SEARCH@" ContentType="application/@BRANDING_SEARCH@">
+-                            <ProgId Id="XenCenter.[xensearch]" Description="[XenCenter] Saved Search" Icon="XenCenterIcon">
++                            <ProgId Id="XenCenter.[xensearch]" Description="!(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
+                                 <Extension Id="[xensearch]" ContentType="application/[xensearch]">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="search &quot;%1&quot;" />
 +                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="search &quot;%1&quot;" />
                                  </Extension>
@@ -130,23 +130,23 @@
 @@ -168,13 +168,35 @@
                          </Directory>
                          <?else?>
-                         <Component Id="readmefile" Guid="@BRANDING_README_FILE_GUID@">
+                         <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
 -                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
 +                            <File Id="Readme" Source="..\Branding\WixInstaller\!(loc.Readme)" />
                          </Component>
                          <?endif?>
                          <Directory Id="Help" Name="Help">
                              <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
--                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.chm" />
+-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
 -                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
-+                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.ja.chm" />  
++                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].ja.chm" />  
 +                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />  
-+                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\@BRANDING_BRAND_CONSOLE@.zh-CN.chm" />  
++                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].zh-CN.chm" />  
 +                                <File Id="WLBScCHM" Source="..\XenAdmin\bin\Release\Help\WLB.zh-CN.chm" />  
 +                            </Component>
 +                        </Directory>
 +                        <Directory Id="ja" Name="ja">
-+                            <Component Id="JaResources" Guid="@BRANDING_JA_RESOURCES_GUID@">
++                            <Component Id="JaResources" Guid="[BRANDING_JA_RESOURCES_GUID]">
 +                                <File Id="JaResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
 +                                <File Id="JaXenModResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
 +                                <File Id="JaMicRepVwrCmnResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
@@ -156,7 +156,7 @@
 +                            </Component>
 +                        </Directory>
 +                        <Directory Id="sc" Name="zh-CN">
-+                            <Component Id="ScResources" Guid="@BRANDING_SC_RESOURCES_GUID@">
++                            <Component Id="ScResources" Guid="[BRANDING_SC_RESOURCES_GUID]">
 +                                <File Id="ScResourcesDLL" Source="..\XenAdmin\bin\Release\zh-CN\XenCenterMain.resources.dll" />
 +                                <File Id="ScXenModResourcesDLL" Source="..\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
 +                                <File Id="ScMicRepVwrCmnResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
@@ -167,7 +167,7 @@
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
 @@ -269,25 +291,25 @@
-         <Feature Id="MainProgram" Title="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Description="@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
+         <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
 -            <ComponentRef Id="ReportViewer" />
@@ -190,5 +190,5 @@
 -        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
 +        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
          <Property Id="PERMACHINEINSTALL">
-             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\@BRANDING_COMPANY_NAME_SHORT@\@BRANDING_BRAND_CONSOLE@" Name="InstallDir" />
+             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
          </Property>

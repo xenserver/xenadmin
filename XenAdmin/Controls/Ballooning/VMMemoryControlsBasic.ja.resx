@@ -394,7 +394,7 @@
     <value>8</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Tools のインストール</value>
+    <value>[XenServer product] Tools のインストール</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>

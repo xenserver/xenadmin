@@ -69,7 +69,7 @@ set -e
 sleeperpid2=$(ps --ppid "$sleeperpid" -o pid= || true)
 kill "$sleeperpid2" >/dev/null || true
 
-${MYSCP} "Administrator@$ADDR:/cygdrive/c/Documents\ and\ Settings/Administrator/AppData/Roaming/${BRANDING_COMPANY_NAME_SHORT}/${BRANDING_BRAND_CONSOLE}/logs/${BRANDING_BRAND_CONSOLE}.log" /var/www/@BRANDING_BRAND_CONSOLE@.log || true 
+${MYSCP} "Administrator@$ADDR:/cygdrive/c/Documents\ and\ Settings/Administrator/AppData/Roaming/${BRANDING_COMPANY_NAME_SHORT}/${BRANDING_BRAND_CONSOLE}/logs/${BRANDING_BRAND_CONSOLE}.log" /var/www/[XenCenter].log || true 
 ${MYSCP} Administrator@$ADDR:/tmp/XenAdminTests.xml /var/www/XenAdminTests.xml
 
 grep 'errors="0" failures="0"' /var/www/XenAdminTests.xml

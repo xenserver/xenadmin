@@ -139,7 +139,7 @@
     <value>2</value>
   </data>
   <data name="line2Learn.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@</value>
+    <value>[XenCenter]</value>
   </data>
   <data name="line2Learn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -496,7 +496,7 @@
     <value>7</value>
   </data>
   <data name="heading.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@</value>
+    <value>[Citrix] [XenServer product]</value>
   </data>
   <data name="heading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -682,7 +682,7 @@
     <value>13</value>
   </data>
   <data name="labelNetwork.Text" xml:space="preserve">
-    <value>Network with other @BRANDING_SERVER@ users</value>
+    <value>Network with other [XenServer] users</value>
   </data>
   <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
     <value>labelNetwork</value>
@@ -1072,7 +1072,7 @@
     <value>17</value>
   </data>
   <data name="labelSupport.Text" xml:space="preserve">
-    <value>Visit the @BRANDING_COMPANY_NAME_SHORT@ Knowledge Center</value>
+    <value>Visit the [Citrix] Knowledge Center</value>
   </data>
   <data name="&gt;&gt;labelSupport.Name" xml:space="preserve">
     <value>labelSupport</value>

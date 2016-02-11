@@ -39,22 +39,22 @@ namespace XenAdmin
 {
     static public class Branding
     {
-        public const string PRODUCT_VERSION_TEXT = "@BRANDING_PRODUCT_VERSION_TEXT@";
-        public const string XENCENTER_VERSION = "@BRANDING_PRODUCT_VERSION@";
-        public const string COMPANY_NAME_LEGAL = "@BRANDING_COMPANY_NAME_LEGAL@";
-        public const string BRAND_CONSOLE = "@BRANDING_BRAND_CONSOLE@";
-        public const string PRODUCT_BRAND = "@BRANDING_PRODUCT_BRAND@";
-        public const string COMPANY_NAME_SHORT = "@BRANDING_COMPANY_NAME_SHORT@";
-        public const string SEARCH = "@BRANDING_SEARCH@";
-        public const string UPDATE = "@BRANDING_UPDATE@";
-        public const string CHECK_FOR_UPDATES_URL = "@BRANDING_XENSERVER_UPDATE_URL@";
+        public const string PRODUCT_VERSION_TEXT = "[BRANDING_PRODUCT_VERSION_TEXT]";
+        public const string XENCENTER_VERSION = "[BRANDING_PRODUCT_VERSION]";
+        public const string COMPANY_NAME_LEGAL = "[BRANDING_COMPANY_NAME_LEGAL]";
+        public const string BRAND_CONSOLE = "[XenCenter]";
+        public const string PRODUCT_BRAND = "[XenServer product]";
+        public const string COMPANY_NAME_SHORT = "[Citrix]";
+        public const string SEARCH = "[xensearch]";
+        public const string UPDATE = "[xsupdate]";
+        public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
 
         public static string Search
         {
             get
             {
                 var s = SEARCH;
-                return s != "@" + "BRANDING_SEARCH@" ? s : InvisibleMessages.XEN_SEARCH;
+                return s != "[" + "xensearch]" ? s : InvisibleMessages.XEN_SEARCH;
             }
         }
         
@@ -63,7 +63,7 @@ namespace XenAdmin
             get
             {
                 var s = UPDATE;
-                return s != "@" + "RANDING_UPDATE@" ? s : InvisibleMessages.XEN_UPDATE;
+                return s != "[" + "xsupdate]" ? s : InvisibleMessages.XEN_UPDATE;
             }
         }
 
@@ -72,7 +72,7 @@ namespace XenAdmin
             get
             {
                 var s = CHECK_FOR_UPDATES_URL;
-                return s != "@" + "BRANDING_XENSERVER_UPDATE_URL@" ? s : InvisibleMessages.XENSERVER_UPDATE_URL;
+                return s != "[" + "BRANDING_XENSERVER_UPDATE_URL]" ? s : InvisibleMessages.XENSERVER_UPDATE_URL;
             }
         }
     }

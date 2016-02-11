@@ -932,7 +932,7 @@ namespace XenAdmin
 
         public static bool SameProductBrand(Host host)
         {
-            return host.ProductBrand == Branding.PRODUCT_BRAND || Branding.PRODUCT_BRAND == "@BRANDING_PRODUCT_BRAND@";
+            return host.ProductBrand == Branding.PRODUCT_BRAND || Branding.PRODUCT_BRAND == "[XenServer product]";
         }
 
         /// <summary>

@@ -136,7 +136,7 @@
     <value>3</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>This wizard helps you configure HA (high availability) on a @BRANDING_SERVER@ resource pool.
+    <value>This wizard helps you configure HA (high availability) on a [XenServer] resource pool.
 
 Before you begin, ensure that the following requirements are satisfied for all servers and virtual machines in the pool:
 

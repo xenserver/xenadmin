@@ -139,19 +139,19 @@
     <value>COM,FLOPPY,ISO,DISPLAY</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_1" xml:space="preserve">
-    <value>@BRANDING_SERVER@ Specific Information</value>
+    <value>[XenServer] Specific Information</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_2" xml:space="preserve">
     <value>Boot Order: CD/DVD - Network - Disk</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
-    <value>@BRANDING_SERVER@ Platform Information</value>
+    <value>[XenServer] Platform Information</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
     <value>Virtual GPU Information</value>
   </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
-    <value>@BRANDING_SERVER@ Post Install Operations ONLY (Attempt to fix up Linux distributions.)</value>
+    <value>[XenServer] Post Install Operations ONLY (Attempt to fix up Linux distributions.)</value>
   </data>
   <data name="RASD_10_ALLOCATIONUNITS" xml:space="preserve">
     <value>Ports</value>
@@ -286,9 +286,9 @@
     <value>Xen Virtual Machine</value>
   </data>
   <data name="XENSERVER_PLATFORM_DESCRIPTION" xml:space="preserve">
-    <value>@BRANDING_SERVER@ Platform Configuration Item</value>
+    <value>[XenServer] Platform Configuration Item</value>
   </data>
   <data name="XENSERVER_SPECIFIC_DESCRIPTION" xml:space="preserve">
-    <value>@BRANDING_SERVER@ Specific Configuration Item</value>
+    <value>[XenServer] Specific Configuration Item</value>
   </data>
 </root>

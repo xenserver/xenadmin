@@ -499,7 +499,7 @@
     <value>6</value>
   </data>
   <data name="uploadCheckBox.Text" xml:space="preserve">
-    <value>&amp;Upload the status report to @BRANDING_COMPANY_NAME_SHORT@ Insight Services</value>
+    <value>&amp;Upload the status report to [Citrix] Insight Services</value>
   </data>
   <data name="&gt;&gt;uploadCheckBox.Name" xml:space="preserve">
     <value>uploadCheckBox</value>
@@ -628,7 +628,7 @@
     <value>16</value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Enter your MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to authenticate with @BRANDING_COMPANY_NAME_SHORT@ Insight Services once and will not be stored on this machine or on your server.</value>
+    <value>Enter your MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
   </data>
   <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
     <value>richTextBox1</value>

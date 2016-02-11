@@ -35,17 +35,17 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define ProductVersion="1.0.0" ?>
-    <?define UpgradeCode="{@BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID@}"?>
+    <?define UpgradeCode="{[BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID]}"?>
     <?define ProductCode="{0CE5C3E7-E786-467a-80CF-F3EC04D414E4}"?>
     <?define VersionShort="5.5" ?>
-    <Product Id="$(var.ProductCode)" Name="@BRANDING_COMPANY_NAME_SHORT@ VNCControl" Language="$(env.WiXLangId)" Version="$(var.ProductVersion)" Manufacturer="@BRANDING_COMPANY_NAME_LEGAL@" UpgradeCode="$(var.UpgradeCode)">
-        <Package Description="@BRANDING_COMPANY_NAME_SHORT@ VNCControl" Languages="$(env.WiXLangId)" Comments="none." InstallerVersion="200" Compressed="yes" />
+    <Product Id="$(var.ProductCode)" Name="[Citrix] VNCControl" Language="$(env.WiXLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
+        <Package Description="[Citrix] VNCControl" Languages="$(env.WiXLangId)" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="VNCControl.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="Citrix" Name="@BRANDING_COMPANY_NAME_SHORT@">
+                <Directory Id="Citrix" Name="[Citrix]">
                     <Directory Id="INSTALLDIR" ShortName="VNCContr" Name="VNCControl">
-                        <Component Id="MainControl" Guid="@BRANDING_VNC_MAIN_CONTROL_GUID@">
+                        <Component Id="MainControl" Guid="[BRANDING_VNC_MAIN_CONTROL_GUID]">
                             <!--Main VNC Control-->
                             <File Id="VNCControlDLL" Source="..\VNCControl\bin\Release\VNCControl.dll" />
                             <!-- DLLs -->
@@ -82,7 +82,7 @@
                 </Directory>
             </Directory>
         </Directory>
-        <Feature Id="MainControl" Title="VNCControl $(var.VersionShort)" Description="@BRANDING_COMPANY_NAME_SHORT@ VNCControl $(var.VersionShort) - for accessing XenServer VM Consoles " Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
+        <Feature Id="MainControl" Title="VNCControl $(var.VersionShort)" Description="[Citrix] VNCControl $(var.VersionShort) - for accessing XenServer VM Consoles " Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
             <ComponentRef Id="MainControl" />
         </Feature>
         <Property Id="Install_All" Value="0" />

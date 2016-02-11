@@ -424,7 +424,7 @@
     <value>0</value>
   </data>
   <data name="perSocketRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Per-Socket(&amp;S)</value>
+    <value>[Citrix] [XenServer product] Per-Socket(&amp;S)</value>
   </data>
   <data name="&gt;&gt;perSocketRadioButton.Name" xml:space="preserve">
     <value>perSocketRadioButton</value>
@@ -457,7 +457,7 @@
     <value>1</value>
   </data>
   <data name="advancedRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Advanced Edition(&amp;A)</value>
+    <value>[Citrix] [XenServer product] Advanced Edition(&amp;A)</value>
   </data>
   <data name="&gt;&gt;advancedRadioButton.Name" xml:space="preserve">
     <value>advancedRadioButton</value>
@@ -490,7 +490,7 @@
     <value>2</value>
   </data>
   <data name="enterpriseRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Enterprise Edition(&amp;E)</value>
+    <value>[Citrix] [XenServer product] Enterprise Edition(&amp;E)</value>
   </data>
   <data name="&gt;&gt;enterpriseRadioButton.Name" xml:space="preserve">
     <value>enterpriseRadioButton</value>
@@ -523,7 +523,7 @@
     <value>3</value>
   </data>
   <data name="platinumRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ Platinum Edition(&amp;P)</value>
+    <value>[Citrix] [XenServer product] Platinum Edition(&amp;P)</value>
   </data>
   <data name="&gt;&gt;platinumRadioButton.Name" xml:space="preserve">
     <value>platinumRadioButton</value>
@@ -556,7 +556,7 @@
     <value>4</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_PRODUCT_BRAND@ for XenDesktop(&amp;X)</value>
+    <value>[Citrix] [XenServer product] for XenDesktop(&amp;X)</value>
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Name" xml:space="preserve">
     <value>xenDesktopEnterpriseRadioButton</value>
@@ -589,7 +589,7 @@
     <value>5</value>
   </data>
   <data name="enterprisePerSocketRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Enterprise Per-Socket(&amp;N)</value>
+    <value>[XenServer product] Enterprise Per-Socket(&amp;N)</value>
   </data>
   <data name="&gt;&gt;enterprisePerSocketRadioButton.Name" xml:space="preserve">
     <value>enterprisePerSocketRadioButton</value>
@@ -622,7 +622,7 @@
     <value>6</value>
   </data>
   <data name="enterprisePerUserRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ &amp;Enterprise Per-User(&amp;E)</value>
+    <value>[XenServer product] &amp;Enterprise Per-User(&amp;E)</value>
   </data>
   <data name="enterprisePerUserRadioButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -658,7 +658,7 @@
     <value>10</value>
   </data>
   <data name="desktopPlusRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Desktop+(&amp;P)</value>
+    <value>[XenServer product] Desktop+(&amp;P)</value>
   </data>
   <data name="&gt;&gt;desktopPlusRadioButton.Name" xml:space="preserve">
     <value>desktopPlusRadioButton</value>
@@ -691,7 +691,7 @@
     <value>9</value>
   </data>
   <data name="desktopRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Desktop(&amp;D)</value>
+    <value>[XenServer product] Desktop(&amp;D)</value>
   </data>
   <data name="&gt;&gt;desktopRadioButton.Name" xml:space="preserve">
     <value>desktopRadioButton</value>
@@ -724,7 +724,7 @@
     <value>7</value>
   </data>
   <data name="standardPerSocketRadioButton.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ Standard Per-Socket(&amp;S)</value>
+    <value>[XenServer product] Standard Per-Socket(&amp;S)</value>
   </data>
   <data name="&gt;&gt;standardPerSocketRadioButton.Name" xml:space="preserve">
     <value>standardPerSocketRadioButton</value>

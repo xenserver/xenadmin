@@ -136,7 +136,7 @@
     <value>3</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>此向导将帮助您在 @BRANDING_SERVER@ 资源池上配置高可用性。
+    <value>此向导将帮助您在 [XenServer] 资源池上配置高可用性。
 
 开始之前，请确保满足池中所有服务器和虚拟机的以下要求:
 

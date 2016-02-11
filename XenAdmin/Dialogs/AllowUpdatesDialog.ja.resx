@@ -209,7 +209,7 @@
     <value>1</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ で定期的に @BRANDING_SERVER@ や @BRANDING_BRAND_CONSOLE@ のアップデートをチェックしますか?</value>
+    <value>[XenCenter] で定期的に [XenServer] や [XenCenter] のアップデートをチェックしますか?</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
@@ -356,7 +356,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@</value>
+    <value>[XenCenter]</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AllowUpdatesDialog</value>

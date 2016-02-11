@@ -39,9 +39,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VNCControl")]
 [assembly: AssemblyDescription("Active-X control to access XenServer VM administrative console")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("@BRANDING_COMPANY_NAME_SHORT@")]
-[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@")]
-[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
+[assembly: AssemblyCompany("[Citrix]")]
+[assembly: AssemblyProduct("[XenCenter]")]
+[assembly: AssemblyCopyright("[BRANDING_COPYRIGHT]")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
