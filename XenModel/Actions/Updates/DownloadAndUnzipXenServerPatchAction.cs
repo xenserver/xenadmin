@@ -49,6 +49,7 @@ namespace XenAdmin.Actions
         private readonly Uri address;
         private readonly string outFileName;
         private readonly string updateName;
+        private readonly string updateFileExtension;
         private DownloadState patchDownloadState;
         private Exception patchDownloadError;
 
@@ -58,11 +59,16 @@ namespace XenAdmin.Actions
         }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName)
+            : this(patchName, uri, outputFileName, InvisibleMessages.XEN_UPDATE)
+        { }
+
+        public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, string updateFileExtension)
             : base(null, string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName), string.Empty, false)
         {
             updateName = patchName;
             address = uri;
             outFileName = outputFileName;
+            this.updateFileExtension = updateFileExtension;
         }
 
         private void DownloadFile()
@@ -117,7 +123,7 @@ namespace XenAdmin.Actions
 
                     while (iterator.HasNext())
                     {
-                        if (Path.GetExtension(iterator.CurrentFileName()) == "."+InvisibleMessages.XEN_UPDATE)
+                        if (Path.GetExtension(iterator.CurrentFileName()) == "." + updateFileExtension)
                         {
                             string path = Path.Combine(Path.GetDirectoryName(outFileName), iterator.CurrentFileName());
 
@@ -152,7 +158,7 @@ namespace XenAdmin.Actions
             if (string.IsNullOrEmpty(PatchPath))
             {
                 MarkCompleted(new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND));
-                log.DebugFormat("File '{0}{1}' could not be located in downloaded archive", updateName, ".xsupdate");
+                log.DebugFormat("File '{0}.{1}' could not be located in downloaded archive", updateName, updateFileExtension);
             }
         }
 

@@ -49,7 +49,6 @@ namespace XenAdmin.Diagnostics.Hotfixing
             get
             {
                 List<string> uuids = ComponentHotfixes.Select(hotfix => hotfix.UUID).ToList();
-                uuids.Sort();
                 return String.Join(";", uuids.ToArray());
             }
             set { throw new NotImplementedException("Multiple hotfix string does not implement a setter"); }
@@ -64,7 +63,6 @@ namespace XenAdmin.Diagnostics.Hotfixing
             get
             {
                 List<string> filenames = ComponentHotfixes.Select(h => h.Filename).ToList();
-                filenames.Sort();
                 return String.Join(";", filenames.ToArray());
             }
             set { throw new NotImplementedException("Multiple hotfix string does not implement a setter"); }

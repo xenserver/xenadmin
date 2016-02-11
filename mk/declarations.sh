@@ -169,6 +169,9 @@ BUILD_TOOLS_REPO=git://admin/git/closed/windows/buildtools.git
 BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
 STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
+# this is where the build will find the RPU hotfixes
+WEB_HOTFIXES=https://repo.citrite.net/builds/xs/hotfixes/${XS_BRANCH}
+
 #check there are xenserver builds on this branch before proceeding
 wget -T 10 -N -q --spider ${WEB_XE_PHASE_1}/globals || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 

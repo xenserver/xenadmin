@@ -147,17 +147,17 @@
                                 </Extension>
                             </ProgId>
                         </Component>
-                        <?if "$(env.Branding)"="XenCenter"?>
-                        <Component Id="xsupdatesfiles" Guid="[BRANDING_XSUPDATE_FILE_GUID]">
-                            <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
-                            <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
-                            <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
-                            <File Id="hotfixBostonSource" Source="..\XenAdmin\XS60E001-src-pkgs.tar.gz" />
-                            <File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
-                            <File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
-                            <File Id="hotfixCreedence" Source="..\XenAdmin\XS65ESP1006.xsupdate" />
+                        <Component Id="UpdateFiles" Guid="[BRANDING_XSUPDATE_FILE_GUID]">
+                            <?if "$(env.Branding)"="XenCenter"?>
+							<File Id="hotfixBoston" Source="..\Branding\Hotfixes\XS60E001.xsupdate" />
+							<File Id="hotfixBostonSource" Source="..\Branding\Hotfixes\XS60E001-src-pkgs.tar.gz" />
+							<File Id="hotfixSanibelToClearwater" Source="..\Branding\Hotfixes\RPU001.xsupdate" />
+                            <File Id="hotfixSanibelToClearwaterSource" Source="..\Branding\Hotfixes\RPU001-src-pkgs.tar.gz" />
+							<?endif?>
+                            <File Id="hotfixCreedence" Source="..\Branding\Hotfixes\RPU002.[xsupdate]" />
                         </Component>
-                        <!-- TestResources -->
+                        <?if "$(env.Branding)"="XenCenter"?>
+						<!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
                             <Component Id="TestResources" Guid="[BRANDING_TEST_RESOURCES_GUID]">
                                 <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
@@ -270,8 +270,8 @@
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
+            <ComponentRef Id="UpdateFiles" />
             <?if "$(env.Branding)"="XenCenter"?>
-            <ComponentRef Id="xsupdatesfiles" />
             <ComponentRef Id="TestResources" />
             <?else?>
             <ComponentRef Id="readmefile" />
