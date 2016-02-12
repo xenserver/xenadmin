@@ -85,10 +85,7 @@ namespace XenAdmin.SettingsPanels
             transparentTrackBar1.Scroll += new EventHandler(tbPriority_Scroll);
 
             this.nudMemory.TextChanged += new EventHandler(nudMemory_TextChanged);
-            this.nudVCPUs.TextChanged += new EventHandler(nudVCPUs_TextChanged);
-
             this.nudMemory.LostFocus += new EventHandler(nudMemory_LostFocus);
-            this.nudVCPUs.LostFocus += new EventHandler(nudVCPUs_LostFocus);
         }
 
         public Image Image
@@ -97,11 +94,6 @@ namespace XenAdmin.SettingsPanels
             {
                 return Properties.Resources._000_CPU_h32bit_16;
             }
-        }
-
-        void nudVCPUs_LostFocus(object sender, EventArgs e)
-        {
-            ValidateNud(nudVCPUs, Convert.ToDecimal(vm.VCPUs_at_startup));
         }
 
         void nudMemory_LostFocus(object sender, EventArgs e)
@@ -118,28 +110,6 @@ namespace XenAdmin.SettingsPanels
                 defaultValue : nud.Maximum;
 
             nud.Text = nud.Value.ToString();
-        }
-
-        void nudVCPUs_TextChanged(object sender, EventArgs e)
-        {
-            decimal val;
-            if (decimal.TryParse(nudVCPUs.Text, out val))
-            {
-                if (val >= nudVCPUs.Minimum && val <= nudVCPUs.Maximum)
-                    nudVCPUs_ValueChanged(null, null);
-                else if (val > nudVCPUs.Maximum)
-                    ShowVcpuError(true, false);
-                else
-                    ShowVcpuError(false, false);
-            }
-            if (this.nudVCPUs.Text == "")
-            {
-                _ValidToSave = false;
-            }
-            else
-            {
-                _ValidToSave = true;
-            }
         }
 
         void nudMemory_TextChanged(object sender, EventArgs e)
@@ -198,7 +168,7 @@ namespace XenAdmin.SettingsPanels
 
             if (MROrGreater && vm.power_state != vm_power_state.Halted)
             {
-                nudVCPUs.Enabled = false;
+                comboBoxVCPUs.Enabled = false;
                 comboBoxTopology.Enabled = false;
                 VCPUWarningLabel.Text = Messages.VCPU_ONLY_WHEN_HALTED;
                 VCPUWarningLabel.ForeColor = SystemColors.ControlText;
@@ -223,11 +193,6 @@ namespace XenAdmin.SettingsPanels
                 this.nudMemory.Text = (this.nudMemory.Value = value).ToString();
             }
 
-            // CA-12941 
-            // We set a sensible maximum of about 8, but if the user sets something higher 
-            // from the CLI then use that as the maximum.
-            this.nudVCPUs.Maximum = Convert.ToDecimal(vm.MaxVCPUsAllowed < vm.VCPUs_at_startup ? vm.VCPUs_at_startup : vm.MaxVCPUsAllowed);
-            this.nudVCPUs.Text = (this.nudVCPUs.Value = Convert.ToDecimal(vm.VCPUs_at_startup > 0 ? vm.VCPUs_at_startup : 1)).ToString();
             _CurrentVCPUWeight = Convert.ToDecimal(vm.VCPUWeight);
             this.transparentTrackBar1.Value = Convert.ToInt32(Math.Log(Convert.ToDouble(vm.VCPUWeight)) / Math.Log(4.0d));
 
@@ -256,12 +221,33 @@ namespace XenAdmin.SettingsPanels
             }
 
             _OrigMemory = nudMemory.Value;
-            _OrigVCPUs = nudVCPUs.Value;
+            _OrigVCPUs = vm.VCPUs_at_startup > 0 ? vm.VCPUs_at_startup : 1;
             _OrigVCPUWeight = _CurrentVCPUWeight;
             
             comboBoxTopology.Populate(vm.VCPUs_at_startup, vm.VCPUs_max, vm.CoresPerSocket, vm.MaxCoresPerSocket);
 
+            // CA-12941 
+            // We set a sensible maximum based on the template, but if the user sets something higher 
+            // from the CLI then use that as the maximum.
+            long maxVCPUs = vm.MaxVCPUsAllowed < vm.VCPUs_at_startup ? vm.VCPUs_at_startup : vm.MaxVCPUsAllowed;
+            PopulateVCPUs(maxVCPUs, (long)_OrigVCPUs);
+
             _ValidToSave = true;
+        }
+
+        private void PopulateVCPUs(long maxVCPUs, long currentVCPUs)
+        {
+            comboBoxVCPUs.BeginUpdate();
+            comboBoxVCPUs.Items.Clear();
+            for (long i = 1; i <= maxVCPUs; ++i)
+            {
+                if (i == currentVCPUs || comboBoxTopology.IsValidVCPU(i))
+                    comboBoxVCPUs.Items.Add(i);
+            }
+            if (currentVCPUs > maxVCPUs)
+                comboBoxVCPUs.Items.Add(currentVCPUs);
+            comboBoxVCPUs.SelectedItem = currentVCPUs;
+            comboBoxVCPUs.EndUpdate();
         }
 
         public bool HasChanged
@@ -281,7 +267,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return _OrigVCPUs != nudVCPUs.Value || _OrigVCPUWeight != _CurrentVCPUWeight;
+                return _OrigVCPUs != (long)comboBoxVCPUs.SelectedItem || _OrigVCPUWeight != _CurrentVCPUWeight;
             }
         }
 
@@ -300,8 +286,8 @@ namespace XenAdmin.SettingsPanels
             if (HasVCPUChanged)
             {
                 vm.VCPUWeight = Convert.ToInt32(_CurrentVCPUWeight);
-                if (_OrigVCPUs != nudVCPUs.Value)
-                    actions.Add(new ChangeVCPUSettingsAction(vm, Convert.ToInt64(nudVCPUs.Value)));
+                if (_OrigVCPUs != (long)comboBoxVCPUs.SelectedItem)
+                    actions.Add(new ChangeVCPUSettingsAction(vm, (long)comboBoxVCPUs.SelectedItem));
             }
 
             if (HasTopologyChanged)
@@ -386,22 +372,22 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        private void nudVCPUs_ValueChanged(object sender, EventArgs e)
+        private void comboBoxVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
             ShowVcpuError(false, true);
-            comboBoxTopology.Update((long)(nudVCPUs.Value));
+            comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
             ValidateVCPUSettings();
         }
 
         private void ShowVcpuError(bool showAlways, bool testValue)
         {
-            if (vm == null || !nudVCPUs.Enabled)
+            if (vm == null || !comboBoxVCPUs.Enabled)
                 return;
             Host selectedAffinity = vm.Home();
             if (selectedAffinity == null && vm.Connection.Cache.Hosts.Length == 1)
                 selectedAffinity = vm.Connection.Cache.Hosts[0];
 
-            if (showAlways || (testValue && (selectedAffinity != null && selectedAffinity.host_CPUs.Count < nudVCPUs.Value)))
+            if (showAlways || (testValue && (selectedAffinity != null && selectedAffinity.host_CPUs.Count < (long)comboBoxVCPUs.SelectedItem)))
             {
                 VCPUWarningLabel.Visible = true;
             }
@@ -416,8 +402,8 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 return ShowMemory ?
-                    String.Format(Messages.CPU_AND_MEMORY_SUB, nudVCPUs.Value, nudMemory.Value) :
-                    String.Format(Messages.CPU_SUB, nudVCPUs.Value);
+                    String.Format(Messages.CPU_AND_MEMORY_SUB, comboBoxVCPUs.SelectedItem, nudMemory.Value) :
+                    String.Format(Messages.CPU_SUB, comboBoxVCPUs.SelectedItem);
             }
         }
         
@@ -428,7 +414,8 @@ namespace XenAdmin.SettingsPanels
 
         private void ValidateVCPUSettings()
         {
-            labelInvalidVCPUWarning.Visible = !VM.ValidVCPUConfiguration((long)(nudVCPUs.Value), comboBoxTopology.CoresPerSocket);
+            if (comboBoxVCPUs.SelectedItem != null)
+                labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
         }
     }
 }

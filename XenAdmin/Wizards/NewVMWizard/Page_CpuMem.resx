@@ -117,41 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="VcpuSpinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 43</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="VcpuSpinner.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
-  </data>
-  <data name="VcpuSpinner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="VcpuSpinner.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="VcpuSpinner.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;VcpuSpinner.Name" xml:space="preserve">
-    <value>VcpuSpinner</value>
-  </data>
-  <data name="&gt;&gt;VcpuSpinner.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VcpuSpinner.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;VcpuSpinner.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="labelVCPUs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 40</value>
+    <value>24, 41</value>
   </data>
   <data name="labelVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 0, 0, 0</value>
@@ -159,6 +131,7 @@
   <data name="labelVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 25</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -193,22 +166,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelInvalidVCPUWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 96</value>
+    <value>170, 97</value>
   </data>
   <data name="labelInvalidVCPUWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 6</value>
   </data>
   <data name="labelInvalidVCPUWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 26</value>
+    <value>342, 13</value>
   </data>
   <data name="labelInvalidVCPUWarning.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Text" xml:space="preserve">
-    <value>The number of vCPUs must be a multiple of the number of cores per socket</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;labelInvalidVCPUWarning.Name" xml:space="preserve">
     <value>labelInvalidVCPUWarning</value>
@@ -226,7 +193,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="comboBoxTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 69</value>
+    <value>170, 70</value>
   </data>
   <data name="comboBoxTopology.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 6</value>
@@ -250,7 +217,7 @@
     <value>1</value>
   </data>
   <data name="spinnerStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 190</value>
+    <value>0, 178</value>
   </data>
   <data name="spinnerStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -274,7 +241,7 @@
     <value>3</value>
   </data>
   <data name="spinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 159</value>
+    <value>0, 147</value>
   </data>
   <data name="spinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -298,7 +265,7 @@
     <value>5</value>
   </data>
   <data name="spinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 128</value>
+    <value>0, 116</value>
   </data>
   <data name="spinnerDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -328,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 68</value>
+    <value>24, 69</value>
   </data>
   <data name="labelTopology.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 0, 0, 0</value>
@@ -355,6 +322,30 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTopology.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="comboBoxVCPUs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 43</value>
+  </data>
+  <data name="comboBoxVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="comboBoxVCPUs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 21</value>
+  </data>
+  <data name="comboBoxVCPUs.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.Name" xml:space="preserve">
+    <value>comboBoxVCPUs</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -385,7 +376,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerDynMin" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="VcpuSpinner" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,170,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerDynMin" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,170,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

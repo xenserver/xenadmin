@@ -3214,6 +3214,12 @@ Please reconnect the host and try again.</value>
   <data name="CPU_SUB" xml:space="preserve">
     <value>{0} vCPU(s)</value>
   </data>
+  <data name="CPU_TOPOLOGY_INVALID_REASON_MULTIPLE" xml:space="preserve">
+    <value>The number of vCPUs must be a multiple of the number of cores per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_INVALID_REASON_SOCKETS" xml:space="preserve">
+    <value>The number of sockets must be at most 16</value>
+  </data>
   <data name="CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE" xml:space="preserve">
     <value>1 socket with 1 core per socket</value>
   </data>
@@ -3222,6 +3228,9 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CPU_TOPOLOGY_STRING_INVALID_VALUE" xml:space="preserve">
     <value>{0} cores per socket (Invalid configuration)</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_INVALID_VALUE_1" xml:space="preserve">
+    <value>1 core per socket (Invalid configuration)</value>
   </data>
   <data name="CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE" xml:space="preserve">
     <value>{0} sockets with 1 core per socket</value>

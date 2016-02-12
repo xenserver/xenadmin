@@ -88,10 +88,15 @@ namespace XenAdmin.Controls
             var maxCoresPerSocket = maxNoOfCoresPerSocket > 0 ? Math.Min(noOfVCPUs, maxNoOfCoresPerSocket) : noOfVCPUs;
             for (var cores = 1; cores <= maxCoresPerSocket; cores++)
             {
-                if (noOfVCPUs % cores == 0)
+                if (noOfVCPUs % cores == 0 && noOfVCPUs / cores <= VM.MAX_SOCKETS)
                     result.Add(new TopologyTuple(noOfVCPUs / cores, cores));
             }
             return result;
+        }
+
+        public bool IsValidVCPU(long noOfVCPUs)
+        {
+            return GetTopologies(noOfVCPUs, maxNoOfCoresPerSocket).Count != 0;
         }
 
         protected override void OnSelectedIndexChanged(EventArgs e)
