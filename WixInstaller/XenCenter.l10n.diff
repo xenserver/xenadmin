@@ -183,19 +183,6 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-             <ComponentRef Id="ApplicationShortcut" />
-             <ComponentRef Id="ProgramFilesShortcut" />
-         </Feature>
--
--        <?if "$(env.Branding)"="XenCenter"?>		
-+        <?if "$(env.Branding)"="XenCenter"?>
-         <Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="[Citrix] [XenServer] Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-              <ComponentRef Id="XenServerHealthCheck" /> 
-         </Feature>
--
-         <UIRef Id="WixUI_FeatureTree" />
-         <?else ?>
-         <UIRef Id="My_WixUI_InstallDir" />
 @@ -298,7 +320,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
