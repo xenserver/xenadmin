@@ -183,7 +183,7 @@ namespace XenAdmin.Network
                        if (m_startTime.Ticks == 0)//log it the first time it is detected
                         {
                             m_startTime = now;
-                            log.Debug(debugMsg);
+                            log.Info(debugMsg);
                         }
 
                         //then log every 5mins
@@ -191,7 +191,7 @@ namespace XenAdmin.Network
                         if (currDebug > m_lastDebug)
                         {
                             m_lastDebug = currDebug;
-                            log.DebugFormat(debugMsg);
+                            log.InfoFormat(debugMsg);
                         }
                     }
 
