@@ -1728,7 +1728,7 @@ namespace XenAPI
             {
                 if (noOfVCPUs % coresPerSocket != 0)
                     return Messages.CPU_TOPOLOGY_INVALID_REASON_MULTIPLE;
-                if (noOfVCPUs / coresPerSocket > 16)
+                if (noOfVCPUs / coresPerSocket > MAX_SOCKETS)
                     return Messages.CPU_TOPOLOGY_INVALID_REASON_SOCKETS;
             }
             return "";
