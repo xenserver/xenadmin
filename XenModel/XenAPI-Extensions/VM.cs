@@ -63,6 +63,8 @@ namespace XenAPI
         private const int DEFAULT_NUM_VBDS_ALLOWED = 16;
         public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
+        public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
+
         private SnapshotsView _snapshotView = SnapshotsView.None;
 
         private XmlDocument xdRecommendations = null;
@@ -1717,12 +1719,19 @@ namespace XenAPI
 
         public bool HasValidVCPUConfiguration
         {
-            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket); }
+            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket) == ""; }
         }
 
-        public static bool ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
+        public static string ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
         {
-            return coresPerSocket > 0 && noOfVCPUs % coresPerSocket == 0;
+            if (coresPerSocket > 0)
+            {
+                if (noOfVCPUs % coresPerSocket != 0)
+                    return Messages.CPU_TOPOLOGY_INVALID_REASON_MULTIPLE;
+                if (noOfVCPUs / coresPerSocket > 16)
+                    return Messages.CPU_TOPOLOGY_INVALID_REASON_SOCKETS;
+            }
+            return "";
         }
 
         public string Topology
@@ -1730,7 +1739,7 @@ namespace XenAPI
             get
             {
                 var cores = CoresPerSocket;
-                var sockets = ValidVCPUConfiguration(VCPUs_max, cores) ? VCPUs_max/cores : 0;
+                var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max/cores : 0;
                 return GetTopology(sockets, cores);
             }
         }
@@ -1738,7 +1747,7 @@ namespace XenAPI
         public static string GetTopology(long sockets, long cores)
         {
             if (sockets == 0) // invalid cores value
-                return string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
+                return cores == 1 ? string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE_1) : string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
             if (sockets == 1 && cores == 1)
                 return Messages.CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE;
             if (sockets == 1)
