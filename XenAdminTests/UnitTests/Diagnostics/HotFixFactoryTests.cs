@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = new []{"Cowley", "MNR", "Boston", "SanibelToClearwater", "Creedence"};
+            string[] expectedNames = new []{"Boston", "SanibelToClearwater", "Creedence"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -68,23 +68,15 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void UUIDLookedUpFromEnum()
         {
-            Assert.AreEqual("95ac709c-e408-423f-8d22-84b8134a149e;b412a910-0453-42ed-bae0-982cc48b00d6", 
+            Assert.AreEqual("95ac709c-e408-423f-8d22-84b8134a149e;591d0209-531e-4ed8-9ed2-98df2a1a445c", 
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).UUID,
                             "Boston UUID lookup from enum");
 
-            Assert.AreEqual("ca0ca2c6-cc96-4e4b-946b-39ebe6652fd6", 
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Cowley).UUID,
-                            "Cowley UUID lookup from enum");
-
-            Assert.AreEqual("e2cb047b-66ed-4fa0-882a-67ff1726f4b9", 
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.MNR).UUID,
-                            "MNR UUID lookup from enum");
-
-            Assert.AreEqual("b412a910-0453-42ed-bae0-982cc48b00d6", 
+            Assert.AreEqual("591d0209-531e-4ed8-9ed2-98df2a1a445c", 
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).UUID,
                             "SanibelToClearwater UUID lookup from enum");
 
-            Assert.AreEqual("0c8accf4-060f-47fb-85a1-3470f815fd88",
+            Assert.AreEqual("3f92b111-0a90-4ec6-b85a-737f241a3fc1 ",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).UUID,
                             "Creedence UUID lookup from enum");
         }
@@ -92,23 +84,15 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void FilenameLookedUpFromEnum()
         {
-            Assert.AreEqual("XS60E001.xsupdate;XS62E006.xsupdate",
+            Assert.AreEqual("XS60E001;RPU001",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).Filename,
                             "Boston Filename lookup from enum");
 
-            Assert.AreEqual("XS56EFP1002.xsupdate",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Cowley).Filename,
-                            "Cowley Filename lookup from enum");
-
-            Assert.AreEqual("XS56E008.xsupdate",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.MNR).Filename,
-                            "MNR Filename lookup from enum");
-
-            Assert.AreEqual("XS62E006.xsupdate",
+            Assert.AreEqual("RPU001",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).Filename,
                             "SanibelToClearwater Filename lookup from enum");
 
-            Assert.AreEqual("XS65ESP1006.xsupdate",
+            Assert.AreEqual("RPU002",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).Filename,
                             "Creedence Filename lookup from enum");
         }
@@ -124,8 +108,8 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("6.0.2", "XS62E006.xsupdate", Description = "Sanibel")]
-        [TestCase("6.0.0", "XS60E001.xsupdate;XS62E006.xsupdate", Description = "Boston")]
+        [TestCase("6.0.2", "RPU001", Description = "Sanibel")]
+        [TestCase("6.0.0", "XS60E001;RPU001", Description = "Boston")]
         public void TestProductVersionNumbersWithHotfixes(string productVersion, string filenames)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
