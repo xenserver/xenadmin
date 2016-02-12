@@ -247,7 +247,7 @@
     <value>396, 20</value>
   </data>
   <data name="labelInvalidVCPUWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;labelInvalidVCPUWarning.Name" xml:space="preserve">
     <value>labelInvalidVCPUWarning</value>
@@ -274,7 +274,7 @@
     <value>250, 21</value>
   </data>
   <data name="comboBoxTopology.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.Name" xml:space="preserve">
     <value>comboBoxTopology</value>
@@ -304,7 +304,7 @@
     <value>95, 33</value>
   </data>
   <data name="labelTopology.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="labelTopology.Text" xml:space="preserve">
     <value>&amp;Topology:</value>
@@ -340,7 +340,7 @@
     <value>298, 47</value>
   </data>
   <data name="MemWarningLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="MemWarningLabel.Text" xml:space="preserve">
     <value>The amount of physical memory allocated to this VM is greater than the total memory of its home server</value>
@@ -366,6 +366,30 @@
   <data name="panel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="lblMB.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 2</value>
+  </data>
+  <data name="lblMB.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblMB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="lblMB.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblMB.Text" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="lblMB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
   <data name="&gt;&gt;lblMB.Name" xml:space="preserve">
     <value>lblMB</value>
   </data>
@@ -376,6 +400,18 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;lblMB.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudMemory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 0</value>
+  </data>
+  <data name="nudMemory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="nudMemory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 20</value>
+  </data>
+  <data name="nudMemory.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;nudMemory.Name" xml:space="preserve">
@@ -403,7 +439,7 @@
     <value>95, 20</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
@@ -419,6 +455,18 @@
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="transparentTrackBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="transparentTrackBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, -6</value>
+  </data>
+  <data name="transparentTrackBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 36</value>
+  </data>
+  <data name="transparentTrackBar1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;transparentTrackBar1.Name" xml:space="preserve">
     <value>transparentTrackBar1</value>
@@ -445,7 +493,7 @@
     <value>494, 42</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
@@ -550,7 +598,7 @@
     <value>95, 18</value>
   </data>
   <data name="lblMemory.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="lblMemory.Text" xml:space="preserve">
     <value>&amp;VM memory:</value>
@@ -652,7 +700,7 @@
     <value>50, 21</value>
   </data>
   <data name="comboBoxVCPUs.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;comboBoxVCPUs.Name" xml:space="preserve">
     <value>comboBoxVCPUs</value>
@@ -712,7 +760,7 @@
     <value>179, 23</value>
   </data>
   <data name="lblPriority.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="lblPriority.Text" xml:space="preserve">
     <value>vCPU priority for this virtual machine:</value>
@@ -731,90 +779,6 @@
   </data>
   <data name="&gt;&gt;lblPriority.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="lblMB.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 2</value>
-  </data>
-  <data name="lblMB.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="lblMB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 13</value>
-  </data>
-  <data name="lblMB.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblMB.Text" xml:space="preserve">
-    <value>MB</value>
-  </data>
-  <data name="lblMB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblMB.Name" xml:space="preserve">
-    <value>lblMB</value>
-  </data>
-  <data name="&gt;&gt;lblMB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMB.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;lblMB.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="nudMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 0</value>
-  </data>
-  <data name="nudMemory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="nudMemory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 20</value>
-  </data>
-  <data name="nudMemory.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;nudMemory.Name" xml:space="preserve">
-    <value>nudMemory</value>
-  </data>
-  <data name="&gt;&gt;nudMemory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudMemory.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;nudMemory.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="transparentTrackBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="transparentTrackBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, -6</value>
-  </data>
-  <data name="transparentTrackBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 36</value>
-  </data>
-  <data name="transparentTrackBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;transparentTrackBar1.Name" xml:space="preserve">
-    <value>transparentTrackBar1</value>
-  </data>
-  <data name="&gt;&gt;transparentTrackBar1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.TransparentTrackBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;transparentTrackBar1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;transparentTrackBar1.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
