@@ -1908,7 +1908,7 @@ Archive destination: {0}</value>
     <value>Assign VM to Snaps&amp;hot Schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>Assign VM to Snapshot Sch&amp;edule</value>
+    <value>Assign VM to Snapshot S&amp;chedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>Assign VM to Snapshot Schedule...</value>
@@ -11798,6 +11798,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VMPP" xml:space="preserve">
     <value>VM Protection Policy</value>
   </data>
+  <data name="VMPP_DIALOG_TEXT" xml:space="preserve">
+    <value>Protect your critical VMs with a protection policy that takes regular scheduled snapshots and, optionally, archives the snapshots to a CIFS or NFS share.</value>
+  </data>
+  <data name="VMPP_DIALOG_TITLE" xml:space="preserve">
+    <value>VM Protection Policies</value>
+  </data>
   <data name="VMPP_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about VM protection job alerts</value>
   </data>
@@ -11824,6 +11830,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>VM Snaps&amp;hot Schedule...</value>
+  </data>
+  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
+    <value>Create a snapshot schedule for your VMs.</value>
+  </data>
+  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
+    <value>VM Snapshot Schedule Policies</value>
   </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about VM snapshot schedule job alerts</value>

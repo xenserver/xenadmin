@@ -271,28 +271,28 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
 
         #endregion
 
-        private DataGridViewEx dataGridView1;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonNew;
-        private System.Windows.Forms.Button buttonEnable;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonRunNow;
-        private System.Windows.Forms.Label labelPolicyTitle;
-        private System.Windows.Forms.Button buttonProperties;
-        private XenAdmin.Dialogs.VMProtectionRecovery.PolicyHistory policyHistory1;
-        private System.Windows.Forms.Label label2;
-        private LocalServerTime localServerTime1;
-        private XenAdmin.Controls.ChevronButton chevronButton1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameColum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EnabledColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionColum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNextArchive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private XenAdmin.Controls.DeprecationBanner deprecationBanner;
+        protected DataGridViewEx dataGridView1;
+        protected System.Windows.Forms.Button buttonCancel;
+        protected System.Windows.Forms.Button buttonNew;
+        protected System.Windows.Forms.Button buttonEnable;
+        protected System.Windows.Forms.Button buttonDelete;
+        protected System.Windows.Forms.Button buttonRunNow;
+        protected System.Windows.Forms.Label labelPolicyTitle;
+        protected System.Windows.Forms.Button buttonProperties;
+        protected XenAdmin.Dialogs.VMProtectionRecovery.PolicyHistory policyHistory1;
+        protected System.Windows.Forms.Label label2;
+        protected LocalServerTime localServerTime1;
+        protected XenAdmin.Controls.ChevronButton chevronButton1;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn NameColum;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn EnabledColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn DescriptionColum;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnNextArchive;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        protected XenAdmin.Controls.DeprecationBanner deprecationBanner;
     }
 }

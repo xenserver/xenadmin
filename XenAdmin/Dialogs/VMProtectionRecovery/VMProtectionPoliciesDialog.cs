@@ -43,6 +43,7 @@ using System.Diagnostics;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.VMProtectionRecovery;
 using XenCenterLib;
+using XenAdmin.Alerts;
 
 
 namespace XenAdmin.Dialogs.VMProtection_Recovery
@@ -53,69 +54,33 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
 
         public readonly Pool Pool;
         public VMProtectionPoliciesDialog(Pool pool)
+            : base(pool.Connection)
         {
             Pool = pool;
-            InitializeComponent();
-            RefreshPoolTitle(pool);
+            InitializeComponent();      
             localServerTime1.Pool = pool;
             chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
             chevronButton1.Image = Properties.Resources.PDChevronDown;
             policyHistory1.Visible = false;
-            SetupDeprecationBanner();
+            policyHistory1.pool = pool;
+            
         }
+        public VMProtectionPoliciesDialog() { }
 
-        private void RefreshPoolTitle(Pool pool)
-        {
-            int protectedVMs = 0;
-            int realVMs = 0;
-            foreach (var vm in pool.Connection.Cache.VMs)
-            {
-                if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
-                {
-                    realVMs++;
-                    if (vm.Connection.Resolve(vm.protection_policy) != null)
-                        protectedVMs++;
-                }
-            }
-            labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
-                                                      ? Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
-                                                      : Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
-                                                  pool.Name.Ellipsise(45), protectedVMs, realVMs);
-        }
-      
-        void VMPPCollectionChanged(object sender, EventArgs e)
-        {
-            LoadPolicies();
-        }
+        protected virtual void chevronButton1_KeyDown(object sender, KeyEventArgs e) {}
+        protected virtual void chevronButton1_ButtonClick(object sender, EventArgs e) { }
+        protected virtual void buttonProperties_Click(object sender, EventArgs e) { }
+        protected virtual void button1_Click(object sender, EventArgs e) { }
+        protected virtual void buttonEnable_Click(object sender, EventArgs e) { }
+        protected virtual void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e) { }
+        protected virtual void dataGridView1_SelectionChanged(object sender, EventArgs e) { }
+        protected virtual void VMProtectionPoliciesDialog_Load(object sender, EventArgs e) { }
+        protected virtual void buttonCancel_Click(object sender, System.EventArgs e) { }
+        protected virtual void buttonNew_Click(object sender, System.EventArgs e) { }
+        protected virtual void buttonDelete_Click(object sender, EventArgs e) { }
+        
 
-        private void LoadPolicies()
-        {
-            dataGridView1.SuspendLayout();
-            var selectedVMPP = currentSelected;
-            dataGridView1.Rows.Clear();
-            foreach (var policy in Pool.Connection.Cache.VMPPs)
-            {
-                if (dataGridView1.ColumnCount > 0)
-                    dataGridView1.Rows.Add(new PolicyRow(policy));
-            }
-            RefreshButtons();
-            if (selectedVMPP != null)
-            {
-                foreach (PolicyRow row in dataGridView1.Rows)
-                {
-                    if (row.VMPP.uuid == selectedVMPP.uuid)
-                    {
-                        dataGridView1.ClearSelection();
-                        row.Selected = true;
-                        break;
-                    }
-                }
-            }
-            RefreshPoolTitle(Pool);
-            dataGridView1.ResumeLayout();
-        }
-
-        private class PolicyRow : DataGridViewRow
+        public class PolicyRow : DataGridViewRow
         {
             private DataGridViewTextBoxCell _name = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _numVMs = new DataGridViewTextBoxCell();
@@ -123,8 +88,8 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             private DataGridViewTextBoxCell _status = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _nextArchiveRuntime = new DataGridViewTextBoxCell();
             private DataGridViewTextAndImageCell _lastResult = new DataGridViewTextAndImageCell();
-            public readonly VMPP VMPP;
-            public PolicyRow(VMPP policy)
+            public readonly IVMPolicy _Policy;
+            public PolicyRow(IVMPolicy policy)
             {
                 Cells.Add(_name);
                 Cells.Add(_status);
@@ -132,7 +97,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 Cells.Add(_nextRunTime);
                 Cells.Add(_nextArchiveRuntime);
                 Cells.Add(_lastResult);
-                VMPP = policy;
+                _Policy = policy;
                 RefreshRow();
             }
 
@@ -151,62 +116,187 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
 
             private void RefreshRow()
             {
-                _name.Value = VMPP.Name;
-                _numVMs.Value = VMPP.VMs.FindAll(vm => VMPP.Connection.Resolve(vm).is_a_real_vm).Count;
-                _status.Value = VMPP.is_policy_enabled ? Messages.ENABLED : Messages.DISABLED;
-                if (VMPP.is_backup_running)
+                _name.Value = _Policy.Name;
+                _numVMs.Value = _Policy.VMs.FindAll(vm => _Policy.Connection.Resolve(vm).is_a_real_vm).Count;
+                _status.Value = _Policy.is_enabled() ? Messages.ENABLED : Messages.DISABLED;
+                if (_Policy.is_running())
                     _status.Value = Messages.RUNNING_SNAPSHOTS;
-                if (VMPP.is_archive_running)
-                    _status.Value = Messages.RUNNING_ARCHIVE;
-                _lastResult.Value = VMPP.LastResult;
-                if (VMPP.LastResult == Messages.FAILED)
+                if (this._Policy._Type() == typeof(VMPP))
+                {
+                    if (_Policy.is_archiving())
+                        _status.Value = Messages.RUNNING_ARCHIVE;
+                }
+                _lastResult.Value = _Policy.LastResult;
+                if (_Policy.LastResult == Messages.FAILED)
                     _lastResult.Image = Properties.Resources._075_WarningRound_h32bit_16;
-                else if (VMPP.LastResult == Messages.NOT_YET_RUN)
+                else if (_Policy.LastResult == Messages.NOT_YET_RUN)
                     _lastResult.Image = null;
                 else
                     _lastResult.Image = Properties.Resources._075_TickRound_h32bit_16;
 
-                DateTime? nextRunTime = GetVMPPDateTime(() => VMPP.GetNextRunTime());
+                DateTime? nextRunTime = GetVMPPDateTime(() => _Policy._GetNextRunTime());
                 _nextRunTime.Value = nextRunTime.HasValue
                                          ? HelpersGUI.DateTimeToString(nextRunTime.Value, Messages.DATEFORMAT_DMY_HM,
                                                                        true)
                                          : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
-                DateTime? nextArchiveRuntime = GetVMPPDateTime(() => VMPP.GetNextArchiveRunTime());
-                _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
-                                                ? nextArchiveRuntime == DateTime.MinValue
-                                                        ? Messages.NEVER
-                                                        : HelpersGUI.DateTimeToString(nextArchiveRuntime.Value,
-                                                                                    Messages.DATEFORMAT_DMY_HM, true)
-                                                : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
+                if (this._Policy._Type() == typeof(VMPP))
+                {
+                    DateTime? nextArchiveRuntime = GetVMPPDateTime(() => _Policy._GetNextArchiveRunTime());
+                    _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
+                                                    ? nextArchiveRuntime == DateTime.MinValue
+                                                            ? Messages.NEVER
+                                                            : HelpersGUI.DateTimeToString(nextArchiveRuntime.Value,
+                                                                                        Messages.DATEFORMAT_DMY_HM, true)
+                                                    : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
+                }
 
             }
         }
+    }
 
-        private void buttonNew_Click(object sender, System.EventArgs e)
+}
+
+namespace XenAdmin.Dialogs.VMPolicies
+{
+    public class VMPoliciesDialogSpecific<T> : XenAdmin.Dialogs.VMProtection_Recovery.VMProtectionPoliciesDialog where T : XenObject<T>
+    {
+        public VMPoliciesDialogSpecific() { }
+        public VMPoliciesDialogSpecific(Pool pool)
+            : base(pool)
         {
-             new NewPolicyWizardSpecific<VMPP>(Pool).Show(this);
+            RefreshPoolTitle(pool);
+            if(typeof(T) == typeof(VMPP))
+                SetupDeprecationBanner();
+        }
+        private void RefreshPoolTitle(Pool pool)
+        {
+            int protectedVMs = 0;
+            int realVMs = 0;
+            
+            if (typeof(T) == typeof(VMPP))
+            {
+                foreach (var vm in pool.Connection.Cache.VMs)
+                {
+                    if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    {
+                        realVMs++;
+                        if (vm.Connection.Resolve(vm.protection_policy) != null)
+                            protectedVMs++;
+                    }
+                }
+
+                this.Text = Messages.VMPP_DIALOG_TITLE;
+                label2.Text = Messages.VMPP_DIALOG_TEXT;
+                labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
+                                                          ? Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
+                                                          : Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
+                                                      pool.Name.Ellipsise(45), protectedVMs, realVMs);
+            }
+            else
+            {
+                foreach (var vm in pool.Connection.Cache.VMs)
+                {
+                    if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    {
+                        realVMs++;
+                        if (vm.Connection.Resolve(vm.scheduled_snapshot) != null)
+                            protectedVMs++;
+                    }
+                }
+
+                this.Text = Messages.VMSS_DIALOG_TITLE;
+                label2.Text = Messages.VMSS_DIALOG_TEXT;
+                labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
+                                                      ? Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
+                                                      : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
+                                                  pool.Name.Ellipsise(45), protectedVMs, realVMs);
+            }
         }
 
-        private void buttonCancel_Click(object sender, System.EventArgs e)
+        void VMPPCollectionChanged(object sender, EventArgs e)
+        {
+            LoadPolicies();
+        }
+
+        private void LoadPolicies()
+        {
+            dataGridView1.SuspendLayout();
+            var selectedPolicy = currentSelected;
+            dataGridView1.Rows.Clear();
+            if (typeof(T) == typeof(VMPP))
+            {
+                foreach (var policy in Pool.Connection.Cache.VMPPs)
+                {
+                    if (dataGridView1.ColumnCount > 0)
+                        dataGridView1.Rows.Add(new PolicyRow(policy));
+                }
+            }
+            else
+            {
+                foreach (var policy in Pool.Connection.Cache.VMSSs)
+                {
+                    /*Populate the alerts*/
+                    //List<PolicyAlert> message_alerts = new List<PolicyAlert>();
+                    foreach (var message in Pool.Connection.Cache.Messages)
+                    {
+                        if (message.cls == cls.VMSS && message.obj_uuid == policy.uuid)
+                        {
+                            policy.Alerts.Add(new PolicyAlert(Pool.Connection, message.body));
+                        }
+                    }
+                    //policy.Alerts = message_alerts;
+                    if (dataGridView1.ColumnCount > 0)
+                        dataGridView1.Rows.Add(new PolicyRow(policy));
+                }
+            }
+            RefreshButtons();
+            if (selectedPolicy != null)
+            {
+                foreach (PolicyRow row in dataGridView1.Rows)
+                {
+                    if (row._Policy.uuid == selectedPolicy.uuid)
+                    {
+                        dataGridView1.ClearSelection();
+                        row.Selected = true;
+                        break;
+                    }
+                }
+            }
+            RefreshPoolTitle(Pool);
+            dataGridView1.ResumeLayout();
+        }
+
+
+
+        protected override void buttonNew_Click(object sender, System.EventArgs e)
+        {
+            new NewPolicyWizardSpecific<T>(Pool).Show(this);
+        }
+
+        protected override void buttonCancel_Click(object sender, System.EventArgs e)
         {
             this.Close();
         }
 
-        private void VMProtectionPoliciesDialog_Load(object sender, EventArgs e)
+        protected override void VMProtectionPoliciesDialog_Load(object sender, EventArgs e)
         {
+            if (typeof(T) == typeof(VMSS))
+            {
+                this.dataGridView1.Columns["ColumnNextArchive"].Visible = false;
+            }
             LoadPolicies();
             localServerTime1.GetServerTime();
-            Pool.Connection.Cache.RegisterBatchCollectionChanged<VMPP>(VMPPCollectionChanged);
+            Pool.Connection.Cache.RegisterBatchCollectionChanged<T>(VMPPCollectionChanged);
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        protected override void buttonDelete_Click(object sender, EventArgs e)
         {
-            var selectedPolicies = new List<VMPP>();
+            var selectedPolicies = new List<T>();
             int numberOfProtectedVMs = 0;
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                var policy = ((PolicyRow)row).VMPP;
-                selectedPolicies.Add(policy);
+                var policy = (((PolicyRow)row)._Policy);
+                selectedPolicies.Add((T)policy);
                 numberOfProtectedVMs += policy.VMs.Count;
 
             }
@@ -225,13 +315,13 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes)
 
-                new DestroyPolicyAction<VMPP>(Pool.Connection, selectedPolicies).RunAsync();
+                new DestroyPolicyAction<T>(Pool.Connection, selectedPolicies).RunAsync();
 
         }
 
-        private VMPP currentSelected = null;
+        private IVMPolicy currentSelected = null;
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        protected override void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             RefreshButtons();
         }
@@ -240,11 +330,11 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                currentSelected = (VMPP)((PolicyRow)dataGridView1.SelectedRows[0]).VMPP;
-                buttonEnable.Text = currentSelected.is_policy_enabled ? Messages.DISABLE : Messages.ENABLE;
-                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.is_policy_enabled ? false : true;
+                currentSelected = ((PolicyRow)dataGridView1.SelectedRows[0])._Policy;
+                buttonEnable.Text = currentSelected.is_enabled() ? Messages.DISABLE : Messages.ENABLE;
+                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.is_enabled() ? false : true;
                 buttonProperties.Enabled = true;
-                buttonRunNow.Enabled = currentSelected.is_policy_enabled && !currentSelected.is_backup_running && !currentSelected.is_archive_running;
+                buttonRunNow.Enabled = currentSelected.is_enabled() && !currentSelected.is_archiving() && !currentSelected.is_running();
 
             }
             else
@@ -253,31 +343,37 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 buttonProperties.Enabled = buttonEnable.Enabled = buttonRunNow.Enabled = false;
                 policyHistory1.Clear();
             }
-            policyHistory1.RefreshTab(currentSelected);
+            if (typeof(T) == typeof(VMPP))
+            {
+                policyHistory1.RefreshTab((VMPP)currentSelected);
+            }
+            else
+            {
+                policyHistory1.RefreshTabVMSS((VMSS)currentSelected);
+            }
             buttonDelete.Enabled = (dataGridView1.SelectedRows.Count != 0);
         }
 
-        private void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e)
+        protected override void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Pool.Connection.Cache.DeregisterBatchCollectionChanged<VMPP>(VMPPCollectionChanged);
+            Pool.Connection.Cache.DeregisterBatchCollectionChanged<T>(VMPPCollectionChanged);
         }
 
-        private void buttonEnable_Click(object sender, EventArgs e)
+        protected override void buttonEnable_Click(object sender, EventArgs e)
         {
             if (currentSelected != null)
             {
-                var action = new ChangePolicyEnabledAction<VMPP>(currentSelected);
+                var action = new ChangePolicyEnabledAction<T>((T)currentSelected);
                 action.RunAsync();
             }
         }
-
-
-        private void button1_Click(object sender, EventArgs e)
+        
+        protected override void button1_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                var vmpp = ((PolicyRow)dataGridView1.SelectedRows[0]).VMPP;
-                var action = new RunPolicyNowAction<VMPP>(vmpp);
+                var policy = ((PolicyRow)dataGridView1.SelectedRows[0])._Policy;
+                var action = new RunPolicyNowAction<T>((T)policy);
                 action.Completed += action_Completed;
                 buttonRunNow.Enabled = false;
                 action.RunAsync();
@@ -291,7 +387,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
 
         private void SetupDeprecationBanner()
         {
-            if(deprecationBanner != null && !Helpers.ClearwaterOrGreater(Pool.Connection))
+            if (deprecationBanner != null && !Helpers.ClearwaterOrGreater(Pool.Connection))
             {
                 deprecationBanner.AppliesToVersion = Messages.XENSERVER_6_2;
                 deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
@@ -301,37 +397,46 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             }
         }
 
-        private void buttonProperties_Click(object sender, EventArgs e)
+        protected override void buttonProperties_Click(object sender, EventArgs e)
         {
-            using (PropertiesDialog propertiesDialog = new PropertiesDialog(currentSelected))
+            if (typeof(T) == typeof(VMPP))
             {
-                propertiesDialog.ShowDialog(this);
+                using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMPP)currentSelected))
+                {
+                    propertiesDialog.ShowDialog(this);
+                }
+            }
+            else
+            {
+                using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMSS)currentSelected))
+                {
+                    propertiesDialog.ShowDialog(this);
+                }
             }
         }
 
 
-        private void chevronButton1_ButtonClick(object sender, EventArgs e)
+        protected override void chevronButton1_ButtonClick(object sender, EventArgs e)
         {
             if (chevronButton1.Text == Messages.HIDE_RUN_HISTORY)
             {
-                chevronButton1.Text=Messages.SHOW_RUN_HISTORY;
-                chevronButton1.Image=Properties.Resources.PDChevronDown;
+                chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
+                chevronButton1.Image = Properties.Resources.PDChevronDown;
                 policyHistory1.Visible = false;
             }
             else
             {
-                chevronButton1.Text=Messages.HIDE_RUN_HISTORY;
-                chevronButton1.Image=Properties.Resources.PDChevronUp;
+                chevronButton1.Text = Messages.HIDE_RUN_HISTORY;
+                chevronButton1.Image = Properties.Resources.PDChevronUp;
                 policyHistory1.Visible = true;
             }
         }
 
-        private void chevronButton1_KeyDown(object sender, KeyEventArgs e)
+        protected override void chevronButton1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
                 chevronButton1_ButtonClick(sender, e);
         }
+
     }
-
-
 }

@@ -152,22 +152,19 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             throw new ArgumentException("wrong argument");
         }
 
-        private static string FormatBackupTypeVMSS(vmss_schedule_snapshot_type backupType)
+        private static string FormatBackupTypeVMSS(vmss_type backupType)
         {
-            if (backupType == vmss_schedule_snapshot_type.snapshot)
+            if (backupType == vmss_type.snapshot)
                 return Messages.DISKS_ONLY;
-            else if (backupType == vmss_schedule_snapshot_type.checkpoint)
+            else if (backupType == vmss_type.checkpoint)
                 return Messages.DISKS_AND_MEMORY;
-            else if (backupType == vmss_schedule_snapshot_type.snapshot_with_quiesce)
+            else if (backupType == vmss_type.snapshot_with_quiesce)
                 return Messages.QUIESCED_SNAPSHOTS;
 
             throw new ArgumentException("wrong argument");
         }
 
-
-
-
-
+        
         // These two instances of FormatSchedule used to be in the VMPP class. That's probably where
         // they really belong, but because of the way they're constructed (see DaysWeekCheckboxes.L10NDays())
         // they had to move into the View. (CA-51612).
@@ -290,19 +287,19 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
             else
             {
-                var vmpp = new VMSS
+                var vmss = new VMSS
                 {
                     name_label = xenTabPagePolicy.PolicyName,
                     name_description = xenTabPagePolicy.PolicyDescription,
-                    schedule_snapshot_type = xenTabPageSnapshotType.BackupTypeVMSS,
-                    schedule_snapshot_frequency = (vmss_schedule_snapshot_frequency)xenTabPageSnapshotFrequency.Frequency,
-                    snapshot_schedule = xenTabPageSnapshotFrequency.Schedule,
-                    schedule_snapshot_retention_value = xenTabPageSnapshotFrequency.BackupRetention,
-                    is_schedule_snapshot_enabled = xenTabPageVMsPage.SelectedVMs.Count == 0 ? false : true,
+                    type = xenTabPageSnapshotType.BackupTypeVMSS,
+                    frequency = (vmss_frequency)xenTabPageSnapshotFrequency.Frequency,
+                    schedule = xenTabPageSnapshotFrequency.Schedule,
+                    retained_snapshots = xenTabPageSnapshotFrequency.BackupRetention,
+                    enabled = xenTabPageVMsPage.SelectedVMs.Count == 0 ? false : true,
                     Connection = Pool.Connection
                 };
 
-                var action = new CreateVMSS(vmpp, xenTabPageVMsPage.SelectedVMs, xenTabPageFinish.RunNow);
+                var action = new CreateVMSS(vmss, xenTabPageVMsPage.SelectedVMs, xenTabPageFinish.RunNow);
                 action.RunAsync();
             }
             base.FinishWizard();

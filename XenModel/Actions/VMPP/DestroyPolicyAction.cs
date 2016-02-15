@@ -80,7 +80,7 @@ namespace XenAdmin.Actions
                     Description = string.Format(Messages.DELETING_VMSS, vmss.Name);
                     foreach (var vmref in vmss.VMs)
                     {
-                        VM.set_schedule_snapshot(Session, vmref.opaque_ref, null);
+                        VM.set_scheduled_snapshot(Session, vmref.opaque_ref, null);
                     }
                     try
                     {

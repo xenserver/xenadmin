@@ -202,7 +202,7 @@ namespace XenAdmin.TabPages
             else if (Helpers.DundeeOrGreater(VM.Connection))
             {
                 panelVMPP.Visible = true;
-                var vmss = VM.Connection.Resolve(VM.schedule_snapshot);
+                var vmss = VM.Connection.Resolve(VM.scheduled_snapshot);
                 if (vmss == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
                 {
                     labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_IN_VMSS;
@@ -379,10 +379,10 @@ namespace XenAdmin.TabPages
 
             foreach (VM root in roots)
             {
-                if (!((root.is_snapshot_from_vmpp || root.is_snapshot_from_vmss) && !toolStripMenuItemScheduledSnapshots.Checked))
+                if (!((root.is_snapshot_from_vmpp || root.is_vmss_snapshot) && !toolStripMenuItemScheduledSnapshots.Checked))
                 {
                     int icon;
-                    if (root.is_snapshot_from_vmpp || root.is_snapshot_from_vmss)
+                    if (root.is_snapshot_from_vmpp || root.is_vmss_snapshot)
                         icon = root.power_state == vm_power_state.Suspended ? SnapshotIcon.ScheduledDiskMemorySnapshot : SnapshotIcon.ScheduledDiskSnapshot;
                     else
                         icon = root.power_state == vm_power_state.Suspended ? SnapshotIcon.DiskAndMemorySnapshot : SnapshotIcon.DiskSnapshot;
@@ -435,7 +435,7 @@ namespace XenAdmin.TabPages
                     row.Tag = snapshot;
                     DataGridView.Rows.Add(row);
                 }
-                else if (!(snapshot.is_snapshot_from_vmss && !toolStripMenuItemScheduledSnapshots.Checked))
+                else if (!(snapshot.is_vmss_snapshot && !toolStripMenuItemScheduledSnapshots.Checked))
                 {
                     snapshot.PropertyChanged -= snapshot_PropertyChanged;
                     snapshot.PropertyChanged += snapshot_PropertyChanged;
@@ -588,10 +588,10 @@ namespace XenAdmin.TabPages
                 if (VM.snapshots.Contains(child))
                 {
                     VM childSnapshot = VM.Connection.Resolve<VM>(child);
-                    if (!((childSnapshot.is_snapshot_from_vmpp || childSnapshot.is_snapshot_from_vmss) && !toolStripMenuItemScheduledSnapshots.Checked))
+                    if (!((childSnapshot.is_snapshot_from_vmpp || childSnapshot.is_vmss_snapshot) && !toolStripMenuItemScheduledSnapshots.Checked))
                     {
                         int icon;
-                        if (childSnapshot.is_snapshot_from_vmpp || childSnapshot.is_snapshot_from_vmss)
+                        if (childSnapshot.is_snapshot_from_vmpp || childSnapshot.is_vmss_snapshot)
                             icon = childSnapshot.power_state == vm_power_state.Suspended ? SnapshotIcon.ScheduledDiskMemorySnapshot : SnapshotIcon.ScheduledDiskSnapshot;
                         else
                             icon = childSnapshot.power_state == vm_power_state.Suspended ? SnapshotIcon.DiskAndMemorySnapshot : SnapshotIcon.DiskSnapshot;

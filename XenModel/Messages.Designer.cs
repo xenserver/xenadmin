@@ -5166,7 +5166,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign VM to Snapshot Sch&amp;edule.
+        ///   Looks up a localized string similar to Assign VM to Snapshot S&amp;chedule.
         /// </summary>
         public static string ASSIGN_VMSS_POLICY_CONTEXT_MENU {
             get {
@@ -34595,6 +34595,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Protect your critical VMs with a protection policy that takes regular scheduled snapshots and, optionally, archives the snapshots to a CIFS or NFS share..
+        /// </summary>
+        public static string VMPP_DIALOG_TEXT {
+            get {
+                return ResourceManager.GetString("VMPP_DIALOG_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM Protection Policies.
+        /// </summary>
+        public static string VMPP_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("VMPP_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send &amp;email notifications about VM protection job alerts.
         /// </summary>
         public static string VMPP_EMAIL_CHECKBOX_TEXT {
@@ -34690,6 +34708,24 @@ namespace XenAdmin {
         public static string VMSS_CONTEXT_MENU {
             get {
                 return ResourceManager.GetString("VMSS_CONTEXT_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a snapshot schedule for your VMs..
+        /// </summary>
+        public static string VMSS_DIALOG_TEXT {
+            get {
+                return ResourceManager.GetString("VMSS_DIALOG_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM Snapshot Schedule Policies.
+        /// </summary>
+        public static string VMSS_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("VMSS_DIALOG_TITLE", resourceCulture);
             }
         }
         

@@ -52,12 +52,13 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             var now = DateTime.Now;
-            var result = new List<string>(VMSS.get_alerts(VMSS.Connection.Session, VMSS.opaque_ref, _hoursFromNow));
+            //var result = new List<string>(VMSS.get_alerts(VMSS.Connection.Session, VMSS.opaque_ref, _hoursFromNow));
+            var result = new Dictionary<XenRef<Message>, Message>(Message.get(VMSS.Connection.Session, cls.VMSS, VMSS.uuid, now.Subtract(new TimeSpan(_hoursFromNow,0,0))));
             
             var listAlerts=new List<PolicyAlert>();
-            foreach(string item in result)
+            foreach(var item in result)
             {
-                listAlerts.Add(new PolicyAlert(VMSS.Connection, item));
+                listAlerts.Add(new PolicyAlert(VMSS.Connection, item.Value.body));
             }
             VMSS.Alerts = new List<PolicyAlert>(listAlerts);
             Debug.WriteLine(string.Format("GetAlerts took: {0}", DateTime.Now - now));

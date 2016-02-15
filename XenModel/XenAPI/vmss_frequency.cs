@@ -35,23 +35,23 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum vmss_schedule_snapshot_type
+    public enum vmss_frequency
     {
-        snapshot, checkpoint, snapshot_with_quiesce, unknown
+        hourly, daily, weekly, unknown
     }
 
-    public static class vmss_schedule_snapshot_type_helper
+    public static class vmss_frequency_helper
     {
-        public static string ToString(vmss_schedule_snapshot_type x)
+        public static string ToString(vmss_frequency x)
         {
             switch (x)
             {
-                case vmss_schedule_snapshot_type.snapshot:
-                    return "snapshot";
-                case vmss_schedule_snapshot_type.checkpoint:
-                    return "checkpoint";
-                case vmss_schedule_snapshot_type.snapshot_with_quiesce:
-                    return "snapshot_with_quiesce";
+                case vmss_frequency.hourly:
+                    return "hourly";
+                case vmss_frequency.daily:
+                    return "daily";
+                case vmss_frequency.weekly:
+                    return "weekly";
                 default:
                     return "unknown";
             }
