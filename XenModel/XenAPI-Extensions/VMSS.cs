@@ -34,21 +34,49 @@ using System.Collections.Generic;
 using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
-
+using XenAdmin.Network;
 
 namespace XenAPI
 {
-    public partial class VMSS
+    public partial class VMSS : IVMPolicy
     {
+        public bool is_enabled()
+        {
+            return this.enabled;
+        }
+
+        public bool is_running()
+        {
+            return false;
+        }
+
+        public bool is_archiving()
+        {
+            return false;
+        }
+        public DateTime _GetNextRunTime()
+        {
+            return this.GetNextRunTime();
+        }
+        public DateTime _GetNextArchiveRunTime()
+        {
+            return new DateTime();
+        }
+        public Type _Type()
+        {
+            return typeof(VMSS);
+        }
+
+
         public DateTime GetNextRunTime()
         {
             var time = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
 
-            if (schedule_snapshot_frequency == vmss_schedule_snapshot_frequency.hourly)
+            if (frequency == vmss_frequency.hourly)
             {
                 return GetHourlyDate(time, Convert.ToInt32(backup_schedule_min));
             }
-            if (schedule_snapshot_frequency == vmss_schedule_snapshot_frequency.daily)
+            if (frequency == vmss_frequency.daily)
             {
 
                 var hour = Convert.ToInt32(backup_schedule_hour);
@@ -56,7 +84,7 @@ namespace XenAPI
                 return GetDailyDate(time, min, hour);
 
             }
-            if (schedule_snapshot_frequency == vmss_schedule_snapshot_frequency.weekly)
+            if (frequency == vmss_frequency.weekly)
             {
                 var hour = Convert.ToInt32(backup_schedule_hour);
                 var min = Convert.ToInt32(backup_schedule_min);
@@ -122,7 +150,7 @@ namespace XenAPI
         {
             get
             {
-                return GetDaysFromDictionary(snapshot_schedule);
+                return GetDaysFromDictionary(schedule);
             }
         }
 
@@ -158,22 +186,6 @@ namespace XenAPI
             get { return name_description; }
         }
 
-        public string alarm_config_smtp_server
-        {
-            get
-            {
-                return TryGetKey(alarm_config, "smtp_server");
-            }
-        }
-
-        public string alarm_config_smtp_port
-        {
-            get
-            {
-                return TryGetKey(alarm_config, "smtp_port");
-            }
-        }
-
         private string TryGetKey(Dictionary<string, string> dict, string key)
         {
             string r;
@@ -184,19 +196,11 @@ namespace XenAPI
             return "";
         }
 
-        public string alarm_config_email_address
-        {
-            get
-            {
-                return TryGetKey(alarm_config, "email_address");
-            }
-        }
-
         public string backup_schedule_min
         {
             get
             {
-                return TryGetKey(snapshot_schedule, "min");
+                return TryGetKey(schedule, "min");
             }
         }
 
@@ -205,7 +209,7 @@ namespace XenAPI
             get
             {
 
-                return TryGetKey(snapshot_schedule, "hour");
+                return TryGetKey(schedule, "hour");
             }
         }
 
@@ -214,7 +218,7 @@ namespace XenAPI
             get
             {
 
-                return TryGetKey(snapshot_schedule, "days");
+                return TryGetKey(schedule, "days");
             }
         }
         private List<PolicyAlert> _alerts = new List<PolicyAlert>();
@@ -223,7 +227,7 @@ namespace XenAPI
         {
             get
             {
-                foreach (var recent in RecentAlerts)
+                foreach (var recent in _alerts)
                 {
                     if (!_alerts.Contains(recent))
                         _alerts.Add(recent);
@@ -233,26 +237,27 @@ namespace XenAPI
             set { _alerts = value; }
         }
 
-        public List<PolicyAlert> RecentAlerts
+        /*public List<PolicyAlert> RecentAlerts
         {
             get
             {
                 List<PolicyAlert> result = new List<PolicyAlert>();
-                foreach (var body in recent_alerts)
+                foreach (var body in _alerts)
                 {
-                    result.Add(new PolicyAlert(Connection, body));
+                    result.Add(new PolicyAlert(Connection, body.Text));
                 }
                 return result;
             }
         }
+         */
 
         public string LastResult
         {
             get
             {
-                if (_recent_alerts.Length > 0)
+                if (_alerts.Count > 0)
                 {
-                    var listRecentAlerts = new List<PolicyAlert>(RecentAlerts);
+                    var listRecentAlerts = new List<PolicyAlert>(_alerts);
                     listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
                     if (listRecentAlerts[0].Type == "info")
                         return Messages.VM_PROTECTION_POLICY_SUCCEEDED;

@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
-using XenAdmin.Dialogs.VMProtection_Recovery;
+using XenAdmin.Dialogs.VMPolicies;
 using XenAdmin.Dialogs.VMAppliances;
 using XenAdmin.Dialogs.VMSSPolicy;
 using XenAdmin.Network;
@@ -65,7 +65,7 @@ namespace XenAdmin.Core
 
         internal static XenRef<T> VmToGroup(VM vm)
         {
-            return typeof(T) == typeof(VMPP) ? vm.protection_policy as XenRef<T> : (typeof(T) == typeof(VMSS) ? vm.schedule_snapshot as XenRef <T> : vm.appliance as XenRef<T>);
+            return typeof(T) == typeof(VMPP) ? vm.protection_policy as XenRef<T> : (typeof(T) == typeof(VMSS) ? vm.scheduled_snapshot as XenRef <T> : vm.appliance as XenRef<T>);
         }
 
         internal static List<XenRef<VM>> GroupToVMs(T group)
@@ -183,7 +183,7 @@ namespace XenAdmin.Core
 
         internal static XenDialogBase ManageGroupsDialog(Pool pool)
         {
-            return typeof(T) == typeof(VMPP) ? (XenDialogBase)(new VMProtectionPoliciesDialog(pool)) : (typeof(T) == typeof(VMSS) ? (XenDialogBase)(new VMSSDialog(pool)) : (XenDialogBase)(new VMAppliancesDialog(pool)));
+            return typeof(T) == typeof(VMPP) ? (XenDialogBase)(new VMPoliciesDialogSpecific<VMPP>(pool)) : (typeof(T) == typeof(VMSS) ? (XenDialogBase)(new VMPoliciesDialogSpecific<VMSS>(pool)) : (XenDialogBase)(new VMAppliancesDialog(pool)));
         }
 
         internal static bool FeaturePossible(IXenConnection connection)

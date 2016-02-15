@@ -325,6 +325,7 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\IVMPolicy.cs" />
     <Compile Include="XenAPI-Extensions\VMSS.cs" />
     <Compile Include="XenAPI-Extensions\VM_Docker_Info.cs" />
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />
@@ -344,6 +345,7 @@
       <DependentUpon>FriendlyErrorNames.resx</DependentUpon>
     </Compile>
     <Compile Include="XenAPI\GPU_group.cs" />
+    <Compile Include="XenAPI\host_allowed_operations.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\LVHD.cs">
@@ -361,8 +363,8 @@
     <Compile Include="XenAPI\vgpu_type_implementation.cs" />
     <Compile Include="XenAPI\vif_locking_mode.cs" />
     <Compile Include="XenAPI\VMSS.cs" />
-    <Compile Include="XenAPI\vmss_schedule_snapshot_frequency.cs" />
-    <Compile Include="XenAPI\vmss_schedule_snapshot_type.cs" />
+    <Compile Include="XenAPI\vmss_frequency.cs" />
+    <Compile Include="XenAPI\vmss_type.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />
     <Compile Include="XenSearch\Common.cs" />
@@ -439,7 +441,6 @@
     <Compile Include="XenAPI\Failure.cs" />
     <Compile Include="XenAPI\Helper.cs" />
     <Compile Include="XenAPI\Host.cs" />
-    <Compile Include="XenAPI\host_allowed_operations.cs" />
     <Compile Include="XenAPI\Host_cpu.cs" />
     <Compile Include="XenAPI\Host_crashdump.cs" />
     <Compile Include="XenAPI\Host_metrics.cs" />

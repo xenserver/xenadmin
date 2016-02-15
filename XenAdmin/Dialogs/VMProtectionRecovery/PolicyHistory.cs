@@ -44,6 +44,8 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 {
     public partial class PolicyHistory : UserControl
     {
+        public Pool pool;
+
         public PolicyHistory()
         {
             InitializeComponent();
@@ -70,6 +72,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         }
 
         private VMPP _vmpp;
+        private VMSS _vmss;
         public void RefreshTab(VMPP vmpp)
         {
             _vmpp = vmpp;
@@ -85,13 +88,42 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             }
 
         }
+        public void RefreshTabVMSS(VMSS vmss)
+        {
+            _vmss = vmss;
+            if (_vmss == null)
+            {
+                labelHistory.Text = "";
+                comboBox1.Enabled = false;
+            }
+            else
+            {
+                comboBox1.Enabled = true;
+                RefreshGrid(_vmss.Alerts);
+            }
+
+        }
 
         private void RefreshGrid(List<PolicyAlert> alerts)
         {
-            if (_vmpp != null)
+            if (_vmpp != null || _vmss != null)
             {
+                //string uuid;
+                //if (_vmpp != null)
+                //    uuid = _vmpp.uuid;
+                //else
+                //    uuid = _vmss.uuid;
                 ReloadHistoryLabel();
                 dataGridView1.Rows.Clear();
+                //List<PolicyAlert> message_alerts = new List<PolicyAlert>();
+                //foreach (var message in pool.Connection.Cache.Messages)
+                //{
+                //    if ((message.cls == cls.VMSS || message.cls == cls.VMPP) && message.obj_uuid == uuid)
+                //    {
+                //        message_alerts.Add(new PolicyAlert(pool.Connection, message.body));
+                //    }
+                //}
+
                 var readOnlyAlerts = alerts.AsReadOnly();
                 foreach (var alert in readOnlyAlerts)
                 {
@@ -185,6 +217,27 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
                     action.RunAsync();
                 }
             }
+            else if (_vmss != null)
+            {
+                if (comboBox1.SelectedIndex == 0)
+                    RefreshGrid(_vmss.Alerts);
+                else if (comboBox1.SelectedIndex == 1)
+                {
+                    dataGridView1.Rows.Clear();
+                    panelLoading.Visible = true;
+                    GetVMSSAlertsAction action = new GetVMSSAlertsAction(_vmss, 24);
+                    action.Completed += action_Completed;
+                    action.RunAsync();
+                }
+                else if (comboBox1.SelectedIndex == 2)
+                {
+                    dataGridView1.Rows.Clear();
+                    panelLoading.Visible = true;
+                    GetVMSSAlertsAction action = new GetVMSSAlertsAction(_vmss, 7 * 24);
+                    action.Completed += action_Completed;
+                    action.RunAsync();
+                }
+            }
         }
 
         void action_Completed(ActionBase sender)
@@ -199,15 +252,19 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
         private void ReloadHistoryLabel()
         {
-            string vmppName = _vmpp.Name;
+            string Name;
+            if(_vmpp != null)
+                Name = _vmpp.Name;
+            else
+                Name = _vmss.Name;
             // ellipsise if necessary
             using (System.Drawing.Graphics g = labelHistory.CreateGraphics())
             {
                 int maxWidth = label1.Left - labelHistory.Left;
                 int availableWidth = maxWidth - (int)g.MeasureString(string.Format(Messages.HISTORY_FOR_POLICY, ""), labelHistory.Font).Width;
-                vmppName = vmppName.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
+                Name = Name.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
             }
-            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, vmppName);
+            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, Name);
         }
     }
 }

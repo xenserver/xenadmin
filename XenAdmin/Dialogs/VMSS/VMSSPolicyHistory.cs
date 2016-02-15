@@ -66,7 +66,7 @@ namespace XenAdmin.Dialogs.VMSSPolicy
             else
             {
                 comboBox1.Enabled = true;
-                RefreshGrid(_policy.RecentAlerts);
+                RefreshGrid(_policy.Alerts);
 
             }
 
@@ -164,7 +164,7 @@ namespace XenAdmin.Dialogs.VMSSPolicy
             if (_policy != null)
             {
                 if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_policy.RecentAlerts);
+                    RefreshGrid(_policy.Alerts);
                 else if (comboBox1.SelectedIndex == 1)
                 {
                     dataGridView1.Rows.Clear();

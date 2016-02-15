@@ -72,11 +72,11 @@ namespace XenAdmin.Actions
                 VMSS vm = _vmpp as VMSS;
                 foreach (var xenRef in vm.VMs)
                 {
-                    VM.set_schedule_snapshot(Session, xenRef, null);
+                    VM.set_scheduled_snapshot(Session, xenRef, null);
                 }
                 foreach (var xenRef in _selectedVMs)
                 {
-                    VM.set_schedule_snapshot(Session, xenRef, vm.opaque_ref);
+                    VM.set_scheduled_snapshot(Session, xenRef, vm.opaque_ref);
                 }
             }
             Description = (typeof(T) == typeof(VMPP)) ? Messages.ASSIGNED_PROTECTION_POLICY : Messages.ASSIGNED_VMSS_POLICY;

@@ -39,7 +39,7 @@ using CookComputing.XmlRpc;
 namespace XenAPI
 {
     /// <summary>
-    /// VM Schedule Snapshot
+    /// VM Scheduled Snapshot
     /// First published in XenServer Dundee.
     /// </summary>
     public partial class VMSS : XenObject<VMSS>
@@ -51,32 +51,24 @@ namespace XenAPI
         public VMSS(string uuid,
             string name_label,
             string name_description,
-            bool is_schedule_snapshot_enabled,
-            vmss_schedule_snapshot_type schedule_snapshot_type,
-            long schedule_snapshot_retention_value,
-            vmss_schedule_snapshot_frequency schedule_snapshot_frequency,
-            Dictionary<string, string> snapshot_schedule,
-            bool is_schedule_snapshot_running,
-            DateTime schedule_snapshot_last_run_time,
-            List<XenRef<VM>> VMs,
-            bool is_alarm_enabled,
-            Dictionary<string, string> alarm_config,
-            string[] recent_alerts)
+            bool enabled,
+            vmss_type type,
+            long retained_snapshots,
+            vmss_frequency frequency,
+            Dictionary<string, string> schedule,
+            DateTime last_run_time,
+            List<XenRef<VM>> VMs)
         {
             this.uuid = uuid;
             this.name_label = name_label;
             this.name_description = name_description;
-            this.is_schedule_snapshot_enabled = is_schedule_snapshot_enabled;
-            this.schedule_snapshot_type = schedule_snapshot_type;
-            this.schedule_snapshot_retention_value = schedule_snapshot_retention_value;
-            this.schedule_snapshot_frequency = schedule_snapshot_frequency;
-            this.snapshot_schedule = snapshot_schedule;
-            this.is_schedule_snapshot_running = is_schedule_snapshot_running;
-            this.schedule_snapshot_last_run_time = schedule_snapshot_last_run_time;
+            this.enabled = enabled;
+            this.type = type;
+            this.retained_snapshots = retained_snapshots;
+            this.frequency = frequency;
+            this.schedule = schedule;
+            this.last_run_time = last_run_time;
             this.VMs = VMs;
-            this.is_alarm_enabled = is_alarm_enabled;
-            this.alarm_config = alarm_config;
-            this.recent_alerts = recent_alerts;
         }
 
         /// <summary>
@@ -93,17 +85,13 @@ namespace XenAPI
             uuid = update.uuid;
             name_label = update.name_label;
             name_description = update.name_description;
-            is_schedule_snapshot_enabled = update.is_schedule_snapshot_enabled;
-            schedule_snapshot_type = update.schedule_snapshot_type;
-            schedule_snapshot_retention_value = update.schedule_snapshot_retention_value;
-            schedule_snapshot_frequency = update.schedule_snapshot_frequency;
-            snapshot_schedule = update.snapshot_schedule;
-            is_schedule_snapshot_running = update.is_schedule_snapshot_running;
-            schedule_snapshot_last_run_time = update.schedule_snapshot_last_run_time;
+            enabled = update.enabled;
+            type = update.type;
+            retained_snapshots = update.retained_snapshots;
+            frequency = update.frequency;
+            schedule = update.schedule;
+            last_run_time = update.last_run_time;
             VMs = update.VMs;
-            is_alarm_enabled = update.is_alarm_enabled;
-            alarm_config = update.alarm_config;
-            recent_alerts = update.recent_alerts;
         }
 
         internal void UpdateFromProxy(Proxy_VMSS proxy)
@@ -111,17 +99,13 @@ namespace XenAPI
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
             name_label = proxy.name_label == null ? null : (string)proxy.name_label;
             name_description = proxy.name_description == null ? null : (string)proxy.name_description;
-            is_schedule_snapshot_enabled = (bool)proxy.is_schedule_snapshot_enabled;
-            schedule_snapshot_type = proxy.schedule_snapshot_type == null ? (vmss_schedule_snapshot_type) 0 : (vmss_schedule_snapshot_type)Helper.EnumParseDefault(typeof(vmss_schedule_snapshot_type), (string)proxy.schedule_snapshot_type);
-            schedule_snapshot_retention_value = proxy.schedule_snapshot_retention_value == null ? 0 : long.Parse((string)proxy.schedule_snapshot_retention_value);
-            schedule_snapshot_frequency = proxy.schedule_snapshot_frequency == null ? (vmss_schedule_snapshot_frequency) 0 : (vmss_schedule_snapshot_frequency)Helper.EnumParseDefault(typeof(vmss_schedule_snapshot_frequency), (string)proxy.schedule_snapshot_frequency);
-            snapshot_schedule = proxy.snapshot_schedule == null ? null : Maps.convert_from_proxy_string_string(proxy.snapshot_schedule);
-            is_schedule_snapshot_running = (bool)proxy.is_schedule_snapshot_running;
-            schedule_snapshot_last_run_time = proxy.schedule_snapshot_last_run_time;
+            enabled = (bool)proxy.enabled;
+            type = proxy.type == null ? (vmss_type) 0 : (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)proxy.type);
+            retained_snapshots = proxy.retained_snapshots == null ? 0 : long.Parse((string)proxy.retained_snapshots);
+            frequency = proxy.frequency == null ? (vmss_frequency) 0 : (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)proxy.frequency);
+            schedule = proxy.schedule == null ? null : Maps.convert_from_proxy_string_string(proxy.schedule);
+            last_run_time = proxy.last_run_time;
             VMs = proxy.VMs == null ? null : XenRef<VM>.Create(proxy.VMs);
-            is_alarm_enabled = (bool)proxy.is_alarm_enabled;
-            alarm_config = proxy.alarm_config == null ? null : Maps.convert_from_proxy_string_string(proxy.alarm_config);
-            recent_alerts = proxy.recent_alerts == null ? new string[] {} : (string [])proxy.recent_alerts;
         }
 
         public Proxy_VMSS ToProxy()
@@ -130,17 +114,13 @@ namespace XenAPI
             result_.uuid = (uuid != null) ? uuid : "";
             result_.name_label = (name_label != null) ? name_label : "";
             result_.name_description = (name_description != null) ? name_description : "";
-            result_.is_schedule_snapshot_enabled = is_schedule_snapshot_enabled;
-            result_.schedule_snapshot_type = vmss_schedule_snapshot_type_helper.ToString(schedule_snapshot_type);
-            result_.schedule_snapshot_retention_value = schedule_snapshot_retention_value.ToString();
-            result_.schedule_snapshot_frequency = vmss_schedule_snapshot_frequency_helper.ToString(schedule_snapshot_frequency);
-            result_.snapshot_schedule = Maps.convert_to_proxy_string_string(snapshot_schedule);
-            result_.is_schedule_snapshot_running = is_schedule_snapshot_running;
-            result_.schedule_snapshot_last_run_time = schedule_snapshot_last_run_time;
+            result_.enabled = enabled;
+            result_.type = vmss_type_helper.ToString(type);
+            result_.retained_snapshots = retained_snapshots.ToString();
+            result_.frequency = vmss_frequency_helper.ToString(frequency);
+            result_.schedule = Maps.convert_to_proxy_string_string(schedule);
+            result_.last_run_time = last_run_time;
             result_.VMs = (VMs != null) ? Helper.RefListToStringArray(VMs) : new string[] {};
-            result_.is_alarm_enabled = is_alarm_enabled;
-            result_.alarm_config = Maps.convert_to_proxy_string_string(alarm_config);
-            result_.recent_alerts = recent_alerts;
             return result_;
         }
 
@@ -153,17 +133,13 @@ namespace XenAPI
             uuid = Marshalling.ParseString(table, "uuid");
             name_label = Marshalling.ParseString(table, "name_label");
             name_description = Marshalling.ParseString(table, "name_description");
-            is_schedule_snapshot_enabled = Marshalling.ParseBool(table, "is_schedule_snapshot_enabled");
-            schedule_snapshot_type = (vmss_schedule_snapshot_type)Helper.EnumParseDefault(typeof(vmss_schedule_snapshot_type), Marshalling.ParseString(table, "schedule_snapshot_type"));
-            schedule_snapshot_retention_value = Marshalling.ParseLong(table, "schedule_snapshot_retention_value");
-            schedule_snapshot_frequency = (vmss_schedule_snapshot_frequency)Helper.EnumParseDefault(typeof(vmss_schedule_snapshot_frequency), Marshalling.ParseString(table, "schedule_snapshot_frequency"));
-            snapshot_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "snapshot_schedule"));
-            is_schedule_snapshot_running = Marshalling.ParseBool(table, "is_schedule_snapshot_running");
-            schedule_snapshot_last_run_time = Marshalling.ParseDateTime(table, "schedule_snapshot_last_run_time");
+            enabled = Marshalling.ParseBool(table, "enabled");
+            type = (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), Marshalling.ParseString(table, "type"));
+            retained_snapshots = Marshalling.ParseLong(table, "retained_snapshots");
+            frequency = (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), Marshalling.ParseString(table, "frequency"));
+            schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "schedule"));
+            last_run_time = Marshalling.ParseDateTime(table, "last_run_time");
             VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
-            is_alarm_enabled = Marshalling.ParseBool(table, "is_alarm_enabled");
-            alarm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "alarm_config"));
-            recent_alerts = Marshalling.ParseStringArray(table, "recent_alerts");
         }
 
         public bool DeepEquals(VMSS other)
@@ -176,17 +152,13 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._name_label, other._name_label) &&
                 Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._is_schedule_snapshot_enabled, other._is_schedule_snapshot_enabled) &&
-                Helper.AreEqual2(this._schedule_snapshot_type, other._schedule_snapshot_type) &&
-                Helper.AreEqual2(this._schedule_snapshot_retention_value, other._schedule_snapshot_retention_value) &&
-                Helper.AreEqual2(this._schedule_snapshot_frequency, other._schedule_snapshot_frequency) &&
-                Helper.AreEqual2(this._snapshot_schedule, other._snapshot_schedule) &&
-                Helper.AreEqual2(this._is_schedule_snapshot_running, other._is_schedule_snapshot_running) &&
-                Helper.AreEqual2(this._schedule_snapshot_last_run_time, other._schedule_snapshot_last_run_time) &&
-                Helper.AreEqual2(this._VMs, other._VMs) &&
-                Helper.AreEqual2(this._is_alarm_enabled, other._is_alarm_enabled) &&
-                Helper.AreEqual2(this._alarm_config, other._alarm_config) &&
-                Helper.AreEqual2(this._recent_alerts, other._recent_alerts);
+                Helper.AreEqual2(this._enabled, other._enabled) &&
+                Helper.AreEqual2(this._type, other._type) &&
+                Helper.AreEqual2(this._retained_snapshots, other._retained_snapshots) &&
+                Helper.AreEqual2(this._frequency, other._frequency) &&
+                Helper.AreEqual2(this._schedule, other._schedule) &&
+                Helper.AreEqual2(this._last_run_time, other._last_run_time) &&
+                Helper.AreEqual2(this._VMs, other._VMs);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VMSS server)
@@ -206,33 +178,25 @@ namespace XenAPI
                 {
                     VMSS.set_name_description(session, opaqueRef, _name_description);
                 }
-                if (!Helper.AreEqual2(_is_schedule_snapshot_enabled, server._is_schedule_snapshot_enabled))
+                if (!Helper.AreEqual2(_enabled, server._enabled))
                 {
-                    VMSS.set_is_schedule_snapshot_enabled(session, opaqueRef, _is_schedule_snapshot_enabled);
+                    VMSS.set_enabled(session, opaqueRef, _enabled);
                 }
-                if (!Helper.AreEqual2(_schedule_snapshot_type, server._schedule_snapshot_type))
+                if (!Helper.AreEqual2(_type, server._type))
                 {
-                    VMSS.set_schedule_snapshot_type(session, opaqueRef, _schedule_snapshot_type);
+                    VMSS.set_type(session, opaqueRef, _type);
                 }
-                if (!Helper.AreEqual2(_schedule_snapshot_retention_value, server._schedule_snapshot_retention_value))
+                if (!Helper.AreEqual2(_retained_snapshots, server._retained_snapshots))
                 {
-                    VMSS.set_schedule_snapshot_retention_value(session, opaqueRef, _schedule_snapshot_retention_value);
+                    VMSS.set_retained_snapshots(session, opaqueRef, _retained_snapshots);
                 }
-                if (!Helper.AreEqual2(_schedule_snapshot_frequency, server._schedule_snapshot_frequency))
+                if (!Helper.AreEqual2(_frequency, server._frequency))
                 {
-                    VMSS.set_schedule_snapshot_frequency(session, opaqueRef, _schedule_snapshot_frequency);
+                    VMSS.set_frequency(session, opaqueRef, _frequency);
                 }
-                if (!Helper.AreEqual2(_snapshot_schedule, server._snapshot_schedule))
+                if (!Helper.AreEqual2(_schedule, server._schedule))
                 {
-                    VMSS.set_snapshot_schedule(session, opaqueRef, _snapshot_schedule);
-                }
-                if (!Helper.AreEqual2(_is_alarm_enabled, server._is_alarm_enabled))
-                {
-                    VMSS.set_is_alarm_enabled(session, opaqueRef, _is_alarm_enabled);
-                }
-                if (!Helper.AreEqual2(_alarm_config, server._alarm_config))
-                {
-                    VMSS.set_alarm_config(session, opaqueRef, _alarm_config);
+                    VMSS.set_schedule(session, opaqueRef, _schedule);
                 }
 
                 return null;
@@ -349,80 +313,69 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the is_schedule_snapshot_enabled field of the given VMSS.
+        /// Get the enabled field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static bool get_is_schedule_snapshot_enabled(Session session, string _vmss)
+        public static bool get_enabled(Session session, string _vmss)
         {
-            return (bool)session.proxy.vmss_get_is_schedule_snapshot_enabled(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return (bool)session.proxy.vmss_get_enabled(session.uuid, (_vmss != null) ? _vmss : "").parse();
         }
 
         /// <summary>
-        /// Get the schedule_snapshot_type field of the given VMSS.
+        /// Get the type field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static vmss_schedule_snapshot_type get_schedule_snapshot_type(Session session, string _vmss)
+        public static vmss_type get_type(Session session, string _vmss)
         {
-            return (vmss_schedule_snapshot_type)Helper.EnumParseDefault(typeof(vmss_schedule_snapshot_type), (string)session.proxy.vmss_get_schedule_snapshot_type(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)session.proxy.vmss_get_type(session.uuid, (_vmss != null) ? _vmss : "").parse());
         }
 
         /// <summary>
-        /// Get the schedule_snapshot_retention_value field of the given VMSS.
+        /// Get the retained_snapshots field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static long get_schedule_snapshot_retention_value(Session session, string _vmss)
+        public static long get_retained_snapshots(Session session, string _vmss)
         {
-            return long.Parse((string)session.proxy.vmss_get_schedule_snapshot_retention_value(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return long.Parse((string)session.proxy.vmss_get_retained_snapshots(session.uuid, (_vmss != null) ? _vmss : "").parse());
         }
 
         /// <summary>
-        /// Get the schedule_snapshot_frequency field of the given VMSS.
+        /// Get the frequency field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static vmss_schedule_snapshot_frequency get_schedule_snapshot_frequency(Session session, string _vmss)
+        public static vmss_frequency get_frequency(Session session, string _vmss)
         {
-            return (vmss_schedule_snapshot_frequency)Helper.EnumParseDefault(typeof(vmss_schedule_snapshot_frequency), (string)session.proxy.vmss_get_schedule_snapshot_frequency(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)session.proxy.vmss_get_frequency(session.uuid, (_vmss != null) ? _vmss : "").parse());
         }
 
         /// <summary>
-        /// Get the snapshot_schedule field of the given VMSS.
+        /// Get the schedule field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static Dictionary<string, string> get_snapshot_schedule(Session session, string _vmss)
+        public static Dictionary<string, string> get_schedule(Session session, string _vmss)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_snapshot_schedule(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_schedule(session.uuid, (_vmss != null) ? _vmss : "").parse());
         }
 
         /// <summary>
-        /// Get the is_schedule_snapshot_running field of the given VMSS.
+        /// Get the last_run_time field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static bool get_is_schedule_snapshot_running(Session session, string _vmss)
+        public static DateTime get_last_run_time(Session session, string _vmss)
         {
-            return (bool)session.proxy.vmss_get_is_schedule_snapshot_running(session.uuid, (_vmss != null) ? _vmss : "").parse();
-        }
-
-        /// <summary>
-        /// Get the schedule_snapshot_last_run_time field of the given VMSS.
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static DateTime get_schedule_snapshot_last_run_time(Session session, string _vmss)
-        {
-            return session.proxy.vmss_get_schedule_snapshot_last_run_time(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return session.proxy.vmss_get_last_run_time(session.uuid, (_vmss != null) ? _vmss : "").parse();
         }
 
         /// <summary>
@@ -434,39 +387,6 @@ namespace XenAPI
         public static List<XenRef<VM>> get_VMs(Session session, string _vmss)
         {
             return XenRef<VM>.Create(session.proxy.vmss_get_vms(session.uuid, (_vmss != null) ? _vmss : "").parse());
-        }
-
-        /// <summary>
-        /// Get the is_alarm_enabled field of the given VMSS.
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static bool get_is_alarm_enabled(Session session, string _vmss)
-        {
-            return (bool)session.proxy.vmss_get_is_alarm_enabled(session.uuid, (_vmss != null) ? _vmss : "").parse();
-        }
-
-        /// <summary>
-        /// Get the alarm_config field of the given VMSS.
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static Dictionary<string, string> get_alarm_config(Session session, string _vmss)
-        {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_alarm_config(session.uuid, (_vmss != null) ? _vmss : "").parse());
-        }
-
-        /// <summary>
-        /// Get the recent_alerts field of the given VMSS.
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        public static string[] get_recent_alerts(Session session, string _vmss)
-        {
-            return (string [])session.proxy.vmss_get_recent_alerts(session.uuid, (_vmss != null) ? _vmss : "").parse();
         }
 
         /// <summary>
@@ -494,19 +414,19 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Set the is_schedule_snapshot_enabled field of the given VMSS.
+        /// Set the enabled field of the given VMSS.
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_is_schedule_snapshot_enabled">New value to set</param>
-        public static void set_is_schedule_snapshot_enabled(Session session, string _vmss, bool _is_schedule_snapshot_enabled)
+        /// <param name="_enabled">New value to set</param>
+        public static void set_enabled(Session session, string _vmss, bool _enabled)
         {
-            session.proxy.vmss_set_is_schedule_snapshot_enabled(session.uuid, (_vmss != null) ? _vmss : "", _is_schedule_snapshot_enabled).parse();
+            session.proxy.vmss_set_enabled(session.uuid, (_vmss != null) ? _vmss : "", _enabled).parse();
         }
 
         /// <summary>
-        /// This call executes the schedule snapshot immediately
+        /// This call executes the scheduled snapshot immediately
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
@@ -517,15 +437,27 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// This call fetches a history of alerts for a given schedule snapshot
+        /// 
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_hours_from_now">how many hours in the past the oldest record to fetch is</param>
-        public static string[] get_alerts(Session session, string _vmss, long _hours_from_now)
+        /// <param name="_value">the value to set</param>
+        public static void set_retained_snapshots(Session session, string _vmss, long _value)
         {
-            return (string [])session.proxy.vmss_get_alerts(session.uuid, (_vmss != null) ? _vmss : "", _hours_from_now.ToString()).parse();
+            session.proxy.vmss_set_retained_snapshots(session.uuid, (_vmss != null) ? _vmss : "", _value.ToString()).parse();
+        }
+
+        /// <summary>
+        /// Set the value of the frequency field
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vmss">The opaque_ref of the given vmss</param>
+        /// <param name="_value">the scheduled snapshot frequency</param>
+        public static void set_frequency(Session session, string _vmss, vmss_frequency _value)
+        {
+            session.proxy.vmss_set_frequency(session.uuid, (_vmss != null) ? _vmss : "", vmss_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -535,57 +467,9 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         /// <param name="_value">the value to set</param>
-        public static void set_schedule_snapshot_retention_value(Session session, string _vmss, long _value)
+        public static void set_schedule(Session session, string _vmss, Dictionary<string, string> _value)
         {
-            session.proxy.vmss_set_schedule_snapshot_retention_value(session.uuid, (_vmss != null) ? _vmss : "", _value.ToString()).parse();
-        }
-
-        /// <summary>
-        /// Set the value of the schedule_snapshot_frequency field
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">the schedule snapshot frequency</param>
-        public static void set_schedule_snapshot_frequency(Session session, string _vmss, vmss_schedule_snapshot_frequency _value)
-        {
-            session.proxy.vmss_set_schedule_snapshot_frequency(session.uuid, (_vmss != null) ? _vmss : "", vmss_schedule_snapshot_frequency_helper.ToString(_value)).parse();
-        }
-
-        /// <summary>
-        /// 
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">the value to set</param>
-        public static void set_snapshot_schedule(Session session, string _vmss, Dictionary<string, string> _value)
-        {
-            session.proxy.vmss_set_snapshot_schedule(session.uuid, (_vmss != null) ? _vmss : "", Maps.convert_to_proxy_string_string(_value)).parse();
-        }
-
-        /// <summary>
-        /// Set the value of the is_alarm_enabled field
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">true if alarm is enabled for this schedule snapshot</param>
-        public static void set_is_alarm_enabled(Session session, string _vmss, bool _value)
-        {
-            session.proxy.vmss_set_is_alarm_enabled(session.uuid, (_vmss != null) ? _vmss : "", _value).parse();
-        }
-
-        /// <summary>
-        /// 
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">the value to set</param>
-        public static void set_alarm_config(Session session, string _vmss, Dictionary<string, string> _value)
-        {
-            session.proxy.vmss_set_alarm_config(session.uuid, (_vmss != null) ? _vmss : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.vmss_set_schedule(session.uuid, (_vmss != null) ? _vmss : "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -596,22 +480,9 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         /// <param name="_key">the key to add</param>
         /// <param name="_value">the value to add</param>
-        public static void add_to_snapshot_schedule(Session session, string _vmss, string _key, string _value)
+        public static void add_to_schedule(Session session, string _vmss, string _key, string _value)
         {
-            session.proxy.vmss_add_to_snapshot_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
-        }
-
-        /// <summary>
-        /// 
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_key">the key to add</param>
-        /// <param name="_value">the value to add</param>
-        public static void add_to_alarm_config(Session session, string _vmss, string _key, string _value)
-        {
-            session.proxy.vmss_add_to_alarm_config(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vmss_add_to_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
         /// <summary>
@@ -621,21 +492,9 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         /// <param name="_key">the key to remove</param>
-        public static void remove_from_snapshot_schedule(Session session, string _vmss, string _key)
+        public static void remove_from_schedule(Session session, string _vmss, string _key)
         {
-            session.proxy.vmss_remove_from_snapshot_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "").parse();
-        }
-
-        /// <summary>
-        /// 
-        /// First published in XenServer Dundee.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_key">the key to remove</param>
-        public static void remove_from_alarm_config(Session session, string _vmss, string _key)
-        {
-            session.proxy.vmss_remove_from_alarm_config(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "").parse();
+            session.proxy.vmss_remove_from_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "").parse();
         }
 
         /// <summary>
@@ -645,9 +504,9 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         /// <param name="_value">the value to set</param>
-        public static void set_schedule_snapshot_last_run_time(Session session, string _vmss, DateTime _value)
+        public static void set_last_run_time(Session session, string _vmss, DateTime _value)
         {
-            session.proxy.vmss_set_schedule_snapshot_last_run_time(session.uuid, (_vmss != null) ? _vmss : "", _value).parse();
+            session.proxy.vmss_set_last_run_time(session.uuid, (_vmss != null) ? _vmss : "", _value).parse();
         }
 
         /// <summary>
@@ -656,10 +515,10 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">the schedule snapshot type</param>
-        public static void set_schedule_snapshot_type(Session session, string _vmss, vmss_schedule_snapshot_type _value)
+        /// <param name="_value">the scheduled snapshot type</param>
+        public static void set_type(Session session, string _vmss, vmss_type _value)
         {
-            session.proxy.vmss_set_schedule_snapshot_type(session.uuid, (_vmss != null) ? _vmss : "", vmss_schedule_snapshot_type_helper.ToString(_value)).parse();
+            session.proxy.vmss_set_type(session.uuid, (_vmss != null) ? _vmss : "", vmss_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -737,133 +596,115 @@ namespace XenAPI
         private string _name_description;
 
         /// <summary>
-        /// enable or disable this schedule snapshot
+        /// enable or disable this scheduled snapshot
         /// </summary>
-        public virtual bool is_schedule_snapshot_enabled
+        public virtual bool enabled
         {
-            get { return _is_schedule_snapshot_enabled; }
+            get { return _enabled; }
             set
             {
-                if (!Helper.AreEqual(value, _is_schedule_snapshot_enabled))
+                if (!Helper.AreEqual(value, _enabled))
                 {
-                    _is_schedule_snapshot_enabled = value;
+                    _enabled = value;
                     Changed = true;
-                    NotifyPropertyChanged("is_schedule_snapshot_enabled");
+                    NotifyPropertyChanged("enabled");
                 }
             }
         }
-        private bool _is_schedule_snapshot_enabled;
+        private bool _enabled;
 
         /// <summary>
-        /// type of the snapshot schedule
+        /// type of the scheduled snapshot
         /// </summary>
-        public virtual vmss_schedule_snapshot_type schedule_snapshot_type
+        public virtual vmss_type type
         {
-            get { return _schedule_snapshot_type; }
+            get { return _type; }
             set
             {
-                if (!Helper.AreEqual(value, _schedule_snapshot_type))
+                if (!Helper.AreEqual(value, _type))
                 {
-                    _schedule_snapshot_type = value;
+                    _type = value;
                     Changed = true;
-                    NotifyPropertyChanged("schedule_snapshot_type");
+                    NotifyPropertyChanged("type");
                 }
             }
         }
-        private vmss_schedule_snapshot_type _schedule_snapshot_type;
+        private vmss_type _type;
 
         /// <summary>
         /// maximum number of snapshots that should be stored at any time
         /// </summary>
-        public virtual long schedule_snapshot_retention_value
+        public virtual long retained_snapshots
         {
-            get { return _schedule_snapshot_retention_value; }
+            get { return _retained_snapshots; }
             set
             {
-                if (!Helper.AreEqual(value, _schedule_snapshot_retention_value))
+                if (!Helper.AreEqual(value, _retained_snapshots))
                 {
-                    _schedule_snapshot_retention_value = value;
+                    _retained_snapshots = value;
                     Changed = true;
-                    NotifyPropertyChanged("schedule_snapshot_retention_value");
+                    NotifyPropertyChanged("retained_snapshots");
                 }
             }
         }
-        private long _schedule_snapshot_retention_value;
+        private long _retained_snapshots;
 
         /// <summary>
-        /// frequency of taking snapshot from snapshot schedule
+        /// frequency of taking snapshot from scheduled snapshot
         /// </summary>
-        public virtual vmss_schedule_snapshot_frequency schedule_snapshot_frequency
+        public virtual vmss_frequency frequency
         {
-            get { return _schedule_snapshot_frequency; }
+            get { return _frequency; }
             set
             {
-                if (!Helper.AreEqual(value, _schedule_snapshot_frequency))
+                if (!Helper.AreEqual(value, _frequency))
                 {
-                    _schedule_snapshot_frequency = value;
+                    _frequency = value;
                     Changed = true;
-                    NotifyPropertyChanged("schedule_snapshot_frequency");
+                    NotifyPropertyChanged("frequency");
                 }
             }
         }
-        private vmss_schedule_snapshot_frequency _schedule_snapshot_frequency;
+        private vmss_frequency _frequency;
 
         /// <summary>
         /// schedule of the snapshot containing 'hour', 'min', 'days'. Date/time-related information is in Local Timezone
         /// </summary>
-        public virtual Dictionary<string, string> snapshot_schedule
+        public virtual Dictionary<string, string> schedule
         {
-            get { return _snapshot_schedule; }
+            get { return _schedule; }
             set
             {
-                if (!Helper.AreEqual(value, _snapshot_schedule))
+                if (!Helper.AreEqual(value, _schedule))
                 {
-                    _snapshot_schedule = value;
+                    _schedule = value;
                     Changed = true;
-                    NotifyPropertyChanged("snapshot_schedule");
+                    NotifyPropertyChanged("schedule");
                 }
             }
         }
-        private Dictionary<string, string> _snapshot_schedule;
-
-        /// <summary>
-        /// true if this schedule snapshot is running
-        /// </summary>
-        public virtual bool is_schedule_snapshot_running
-        {
-            get { return _is_schedule_snapshot_running; }
-            set
-            {
-                if (!Helper.AreEqual(value, _is_schedule_snapshot_running))
-                {
-                    _is_schedule_snapshot_running = value;
-                    Changed = true;
-                    NotifyPropertyChanged("is_schedule_snapshot_running");
-                }
-            }
-        }
-        private bool _is_schedule_snapshot_running;
+        private Dictionary<string, string> _schedule;
 
         /// <summary>
         /// time of the last snapshot
         /// </summary>
-        public virtual DateTime schedule_snapshot_last_run_time
+        public virtual DateTime last_run_time
         {
-            get { return _schedule_snapshot_last_run_time; }
+            get { return _last_run_time; }
             set
             {
-                if (!Helper.AreEqual(value, _schedule_snapshot_last_run_time))
+                if (!Helper.AreEqual(value, _last_run_time))
                 {
-                    _schedule_snapshot_last_run_time = value;
+                    _last_run_time = value;
                     Changed = true;
-                    NotifyPropertyChanged("schedule_snapshot_last_run_time");
+                    NotifyPropertyChanged("last_run_time");
                 }
             }
         }
-        private DateTime _schedule_snapshot_last_run_time;
+        private DateTime _last_run_time;
 
         /// <summary>
-        /// all VMs attached to this schedule snapshot
+        /// all VMs attached to this scheduled snapshot
         /// </summary>
         public virtual List<XenRef<VM>> VMs
         {
@@ -879,59 +720,5 @@ namespace XenAPI
             }
         }
         private List<XenRef<VM>> _VMs;
-
-        /// <summary>
-        /// true if alarm is enabled for this schedule snapshot
-        /// </summary>
-        public virtual bool is_alarm_enabled
-        {
-            get { return _is_alarm_enabled; }
-            set
-            {
-                if (!Helper.AreEqual(value, _is_alarm_enabled))
-                {
-                    _is_alarm_enabled = value;
-                    Changed = true;
-                    NotifyPropertyChanged("is_alarm_enabled");
-                }
-            }
-        }
-        private bool _is_alarm_enabled;
-
-        /// <summary>
-        /// configuration for the alarm
-        /// </summary>
-        public virtual Dictionary<string, string> alarm_config
-        {
-            get { return _alarm_config; }
-            set
-            {
-                if (!Helper.AreEqual(value, _alarm_config))
-                {
-                    _alarm_config = value;
-                    Changed = true;
-                    NotifyPropertyChanged("alarm_config");
-                }
-            }
-        }
-        private Dictionary<string, string> _alarm_config;
-
-        /// <summary>
-        /// recent alerts
-        /// </summary>
-        public virtual string[] recent_alerts
-        {
-            get { return _recent_alerts; }
-            set
-            {
-                if (!Helper.AreEqual(value, _recent_alerts))
-                {
-                    _recent_alerts = value;
-                    Changed = true;
-                    NotifyPropertyChanged("recent_alerts");
-                }
-            }
-        }
-        private string[] _recent_alerts;
     }
 }

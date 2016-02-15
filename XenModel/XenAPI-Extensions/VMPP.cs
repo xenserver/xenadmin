@@ -34,11 +34,12 @@ using System.Collections.Generic;
 using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
+using XenAdmin.Network;
 
 
 namespace XenAPI
 {
-    public partial class VMPP
+    public partial class VMPP : IVMPolicy
     {
         public DateTime GetNextRunTime()
         {
@@ -156,15 +157,34 @@ namespace XenAPI
             }
         }
 
-        public override string Name
+        public bool is_enabled()
         {
-            get { return name_label; }
+            return this.is_policy_enabled;
         }
 
-        public override string Description
+        public bool is_running()
         {
-            get { return name_description; }
+            return this.is_backup_running;
         }
+
+        public bool is_archiving()
+        {
+            return this.is_archive_running;
+        }
+
+        public DateTime _GetNextRunTime()
+        {
+            return this.GetNextRunTime();
+        }
+        public DateTime _GetNextArchiveRunTime()
+        {
+            return this.GetNextArchiveRunTime();
+        }
+        public Type _Type()
+        {
+            return typeof(VMPP);
+        }
+               
 
         public string alarm_config_smtp_server
         {

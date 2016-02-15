@@ -31,45 +31,29 @@
 
 using System;
 using System.Collections.Generic;
-using XenAPI;
+using XenAdmin;
+using XenAdmin.Alerts;
 using XenAdmin.Core;
+using XenAdmin.Network;
 
 
-namespace XenAdmin.Actions
+namespace XenAPI
 {
-    public class CreateVMSS : AsyncAction
+    public interface IVMPolicy
     {
-        private VMSS _record;
-        private List<VM> _vms;
-        private bool _runNow = false;
-        public CreateVMSS(VMSS record, List<VM> vms, bool runNow)
-            : base(record.Connection, Messages.CREATE_POLICY)
-        {
-            _record = record;
-            _vms = vms;
-            _runNow = runNow;
-            Pool = Helpers.GetPool(record.Connection);
-            ApiMethodsToRoleCheck.Add("VMSS.async_create");
-            ApiMethodsToRoleCheck.Add("VM.set_scheduled_snapshot");
-            ApiMethodsToRoleCheck.Add("VMSS.snapshot_now");
-        }
-
-        protected override void Run()
-        {
-            Description = string.Format(Messages.CREATING_VMSS, _record.Name);
-            RelatedTask = VMSS.async_create(Session, _record);
-            PollToCompletion();
-            var vmssref = new XenRef<VMSS>(Result);
-            Connection.WaitForCache(vmssref);
-            foreach (var selectedVM in _vms)
-            {
-                VM.set_scheduled_snapshot(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
-            }
-            Description = string.Format(Messages.CREATED_VMSS, _record.Name);
-            PercentComplete = 60;
-            if (_runNow)
-                VMSS.snapshot_now(Session, vmssref);
-            PercentComplete = 100;
-        }
+        //string test { get; }
+        string Name { get; }
+        string name_description {get; }
+        string uuid { get; }
+        List<XenRef<VM>> VMs { get; }
+        IXenConnection Connection { get; }
+        bool is_enabled();
+        bool is_running();
+        bool is_archiving();
+        string LastResult { get;}
+        DateTime _GetNextRunTime();
+        DateTime _GetNextArchiveRunTime();
+        Type _Type();
+ 
     }
 }
