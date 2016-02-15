@@ -1905,7 +1905,7 @@ Archive destination: {0}</value>
     <value>Assign to VM Protection Policy...</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>Assign VM to Snaps&amp;hot Schedule</value>
+    <value>Assign VM to Snapsh&amp;ot Schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
     <value>Assign VM to Snapshot S&amp;chedule</value>
@@ -11887,7 +11887,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>VMs</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
-    <value>VM Snaps&amp;hot Schedule...</value>
+    <value>VM Snapshot Sched&amp;ules...</value>
   </data>
   <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
     <value>Create a snapshot schedule for your VMs.</value>
