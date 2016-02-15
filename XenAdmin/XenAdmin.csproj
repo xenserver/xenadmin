@@ -345,6 +345,12 @@
     <Compile Include="TabPages\DockerDetailsPage.Designer.cs">
       <DependentUpon>DockerDetailsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\HomePage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabPages\HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\SnapshotsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -952,12 +958,6 @@
     </Compile>
     <Compile Include="SettingsPanels\VMHAEditPage.Designer.cs">
       <DependentUpon>VMHAEditPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TabPages\HomePage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TabPages\HomePage.Designer.cs">
-      <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\SearchPage.cs">
       <SubType>UserControl</SubType>
@@ -1823,6 +1823,16 @@
       <DependentUpon>GeneralTabPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HomePage.ja.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WlbPage.cs</DependentUpon>
@@ -2233,10 +2243,6 @@
       <DependentUpon>GeneralEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\HomePage.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\LogDestinationEditPage.resx">
       <DependentUpon>LogDestinationEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2396,6 +2402,10 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="HomePage\index.mht">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="HomePage\License" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -4070,6 +4080,19 @@
     <None Include="Images\000_error_h32bit_32.png" />
     <None Include="Images\000_AddIPAddress_h32bit_16.png" />
     <None Include="Images\000_ConfigureIPAddresses_h32bit_16.png" />
+    <Content Include="HomePage\css\ie.css" />
+    <Content Include="HomePage\css\print.css" />
+    <Content Include="HomePage\css\screen.css" />
+    <Content Include="HomePage\css\theme.css" />
+    <Content Include="HomePage\index.html" />
+    <Content Include="HomePage\media\grid.png" />
+    <Content Include="HomePage\media\icons\cx-cloudServerGraphic.png" />
+    <Content Include="HomePage\media\icons\cx-icon-addServer.png" />
+    <Content Include="HomePage\media\icons\cx-icon-generic-doc.png" />
+    <Content Include="HomePage\media\icons\cx-icon-purchaseSupport.png" />
+    <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
+    <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
+    <Content Include="HomePage\media\logos\cx-logo-citrixXenServer.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
     <None Include="Images\000_ImportVirtualAppliance_h32bit_16.png" />
@@ -5761,12 +5784,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HistoryPage.zh-CN.resx">
       <DependentUpon>HistoryPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\HomePage.ja.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\NetworkPage.ja.resx">
       <DependentUpon>NetworkPage.cs</DependentUpon>

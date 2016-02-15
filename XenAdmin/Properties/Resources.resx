@@ -127,9 +127,6 @@
   <data name="sl_add_storage_system_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\sl_add_storage_system_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="homepage_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_000_Alert2_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Alert2_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -210,9 +207,6 @@
   </data>
   <data name="oracle_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\oracle_16x.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="homepage_community_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_community_icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_weighting_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_weighting_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -331,9 +325,6 @@
   <data name="_000_Fields_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Fields_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="homepage_learn_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_learn_icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_000_Resumed_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Resumed_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -366,9 +357,6 @@
   </data>
   <data name="_001_ForceReboot_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\001_ForceReboot_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="homepage_get_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_get_icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_VMSnapShotDiskOnly_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_VMSnapShotDiskOnly_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -454,9 +442,6 @@
   <data name="_000_host_4_star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_host_4_star.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="homepage_add_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_add_icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_000_PoolNew_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_PoolNew_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -531,9 +516,6 @@
   </data>
   <data name="_000_Optimize_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Optimize_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="homepage_bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_bullet.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VMTemplate_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\VMTemplate_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -628,14 +610,8 @@
   <data name="_000_ImportVirtualAppliance_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ImportVirtualAppliance_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="homepage_vert_div" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_vert_div.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_000_Storage_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Storage_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="homepage_try_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_try_icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_001_Reboot_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\001_Reboot_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -660,9 +636,6 @@
   </data>
   <data name="_000_DeleteVirtualAppliance_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_DeleteVirtualAppliance_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="homepage_hor_div" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\homepage_hor_div.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_ToolBar_Pref_Icon_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ToolBar_Pref_Icon_up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1104,5 +1077,8 @@
   </data>
   <data name="padlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\padlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="homepage_bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\homepage_bullet.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

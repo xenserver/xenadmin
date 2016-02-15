@@ -41,236 +41,59 @@ using XenAdmin.Core;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using XenAdmin.Commands;
+using System.Linq;
 
 
 namespace XenAdmin.TabPages
 {
     public partial class HomePage : DoubleBufferedPanel
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private const string XCNS = "XenCenter://";
+        bool initializing = true;
+
         public HomePage()
         {
             InitializeComponent();
-        }
 
-        private Label[] LearnLabels
-        {
-            get { return new Label[] { titleLearn, line1Learn, line2Learn }; }
-        }
-
-        private Label[] AddLabels
-        {
-            get { return new Label[] { titleAdd, line1Add }; }
-        }
-
-        private Label[] GetLabels
-        {
-            get { return new Label[] { titleUpgrade, line1Upgrade }; }
-        }
-
-        private Label[] TryLabels
-        {
-            get { return new Label[] { titleTry, line1Try, line2Try }; }
-        }
-
-        private void panelLearn_Click(object sender, EventArgs e)
-        {
-            Program.MainWindow.ShowHelpTOC();
-        }
-
-        private void panelAdd_Click(object sender, EventArgs e)
-        {
-            new AddHostCommand(Program.MainWindow).Execute();
-        }
-
-        private void panelGet_Click(object sender, EventArgs e)
-        {
-            Program.OpenURL(InvisibleMessages.UPSELL_LEARNMOREURL_GENERAL);
-        }
-
-        private void panelTry_Click(object sender, EventArgs e)
-        {
-            if (!HiddenFeatures.LinkLabelHidden) 
-                Program.OpenURL(InvisibleMessages.XENDESKTOP_URL);
-        }
-
-        private void labelNetwork_Click(object sender, EventArgs e)
-        {
-            Program.OpenURL(InvisibleMessages.COMMUNITY_URL);
-        }
-
-        private void labelSupport_Click(object sender, EventArgs e)
-        {
-            Program.OpenURL(InvisibleMessages.SUPPORT_URL);
-        }
-
-        private void labelPartners_Click(object sender, EventArgs e)
-        {
-            Program.OpenURL(InvisibleMessages.PARTNEROFFERS_URL);
-        }
-
-        private void Underline(bool b, params Label[] lbls)
-        {
-            foreach (Label lbl in lbls)
+            try
             {
-                lbl.Font = b ?
-                    new Font(lbl.Font, lbl.Font.Style | FontStyle.Underline) :
-                    new Font(lbl.Font, lbl.Font.Style & ~FontStyle.Underline);
+                var location = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "HomePage", "index.mht");
+                webBrowser.Navigate(location);
             }
+            catch (Exception ex)
+            {
+                log.Error(string.Format("Failed to load the HomePage. Url = {0}", Location), ex);
+            }
+
+            initializing = false;
         }
 
-        private void Colour(Color c, params Label[] lbls)
+        private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            foreach (Label lbl in lbls)
-                lbl.ForeColor = c;
-        }
+            if (initializing)
+                return;
 
-        private void panelLearn_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, LearnLabels);
-        }
+            e.Cancel = true;
 
-        private void panelLearn_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, LearnLabels);
-        }
+            string url = e.Url.OriginalString;
 
-        private void panelLearn_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, LearnLabels);
-        }
-
-        private void panelLearn_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, LearnLabels);
-        }
-
-        private void panelAdd_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, AddLabels);
-        }
-
-        private void panelAdd_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, AddLabels);
-        }
-
-        private void panelAdd_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, AddLabels);
-        }
-
-        private void panelAdd_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, AddLabels);
-        }
-
-        private void panelGet_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, GetLabels);
-        }
-
-        private void panelGet_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, GetLabels);
-        }
-
-        private void panelGet_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, GetLabels);
-        }
-
-        private void panelGet_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, GetLabels);
-        }
-
-        private void panelTry_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, TryLabels);
-        }
-
-        private void panelTry_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, TryLabels);
-        }
-
-        private void panelTry_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, TryLabels);
-        }
-
-        private void panelTry_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, TryLabels);
-        }
-
-        private void labelNetwork_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, labelNetwork);
-        }
-
-        private void labelNetwork_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, labelNetwork);
-        }
-
-        private void labelNetwork_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, labelNetwork);
-        }
-
-        private void labelNetwork_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, labelNetwork);
-        }
-
-        private void labelSupport_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, labelSupport);
-        }
-
-        private void labelSupport_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, labelSupport);
-        }
-
-        private void labelSupport_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, labelSupport);
-        }
-
-        private void labelSupport_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, labelSupport);
-        }
-
-        private void labelPartners_MouseEnter(object sender, EventArgs e)
-        {
-            Underline(true, labelPartners);
-        }
-
-        private void labelPartners_MouseLeave(object sender, EventArgs e)
-        {
-            Underline(false, labelPartners);
-        }
-
-        private void labelPartners_MouseDown(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Red, labelPartners);
-        }
-
-        private void labelPartners_MouseUp(object sender, MouseEventArgs e)
-        {
-            Colour(Color.Black, labelPartners);
-        }
-
-        private void HomePage_SizeChanged(object sender, EventArgs e)
-        {
-            // Implement own centring, because built-in anchoring loses both edges if the window gets too narrow.
-            if (this.Width <= mainPanel.Width)
-                mainPanel.Left = 0;
+            if (url != null && url.StartsWith(XCNS, StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (url.Contains("HelpContents"))
+                {
+                    XenAdmin.Help.HelpManager.Launch(null);
+                }
+                else if (url.Contains("AddServer"))
+                {
+                    new AddHostCommand(Program.MainWindow, this).Execute();
+                }
+            }
             else
-                mainPanel.Left = (this.Width - mainPanel.Width) / 2;
+            {
+                Program.OpenURL(url);
+            }
         }
 
     }
