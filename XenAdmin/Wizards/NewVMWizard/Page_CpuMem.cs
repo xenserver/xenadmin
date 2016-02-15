@@ -84,10 +84,6 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             memoryRatio = VMMemoryControlsEdit.GetMemoryRatio(Template);
 
-            VcpuSpinner.Minimum = 1;
-            VcpuSpinner.Maximum = (decimal)(Template.MaxVCPUsAllowed);
-            VcpuSpinner.Value = (decimal)(Template.VCPUs_at_startup);
-
             FreeSpinnerLimits();
 
             if (memoryMode == 1)
@@ -111,13 +107,28 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
 
             comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.CoresPerSocket, Template.MaxCoresPerSocket);
+            PopulateVCPUs(Template.MaxVCPUsAllowed, Template.VCPUs_at_startup);
 
             SetSpinnerLimits();
 
-            VcpuSpinner.Select();
             ValuesUpdated();
 
             initialising = false;
+        }
+
+        private void PopulateVCPUs(long maxVCPUs, long currentVCPUs)
+        {
+            comboBoxVCPUs.BeginUpdate();
+            comboBoxVCPUs.Items.Clear();
+            for (long i = 1; i <= maxVCPUs; ++i)
+            {
+                if (i == currentVCPUs || comboBoxTopology.IsValidVCPU(i))
+                    comboBoxVCPUs.Items.Add(i);
+            }
+            if (currentVCPUs > maxVCPUs)
+                comboBoxVCPUs.Items.Add(currentVCPUs);
+            comboBoxVCPUs.SelectedItem = currentVCPUs;
+            comboBoxVCPUs.EndUpdate();
         }
 
         public VM SelectedTemplate { private get; set; }
@@ -201,7 +212,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                return (long)VcpuSpinner.Value;
+                return (long)comboBoxVCPUs.SelectedItem;
             }
         }
 
@@ -308,7 +319,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void vCPU_ValueChanged(object sender, EventArgs e)
         {
-            comboBoxTopology.Update((long)(VcpuSpinner.Value));
+            comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
             ValuesUpdated();
             ValidateVCPUSettings();
         }
@@ -322,15 +333,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             ValuesUpdated();
         }
 
-        private void VcpuSpinner_Leave(object sender, EventArgs e)
-        {
-            if (sender is NumericUpDown)
-                ((Control)sender).Text = ((NumericUpDown)sender).Value.ToString();
-        }
-        
         private void ValidateVCPUSettings()
         {
-            labelInvalidVCPUWarning.Visible = !VM.ValidVCPUConfiguration((long)(VcpuSpinner.Value), comboBoxTopology.CoresPerSocket);
+            if (comboBoxVCPUs.SelectedItem != null)
+                labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
         }
 
         private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)

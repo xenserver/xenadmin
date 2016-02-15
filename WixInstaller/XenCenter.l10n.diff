@@ -28,17 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2016-02-02 09:43:41.049833000 +0800
-+++ XenCenter.l10n.wxs	2016-02-02 09:43:24.009129100 +0800
-@@ -38,7 +38,7 @@
-     <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
-     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
-     <Product Id="$(var.ProductCode)" Name="[Citrix] [XenCenter]" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
--        <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
-+        <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
-         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
-         <Directory Id="TARGETDIR" Name="SourceDir">
-             <Directory Id="ProgramFilesFolder">
+--- XenCenter.wxs	Thu Feb 11 17:06:22 2016
++++ XenCenter.l10n.wxs	Thu Feb 11 17:00:41 2016
 @@ -86,64 +86,64 @@
                              <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
                              <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
@@ -166,15 +157,15 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -269,25 +291,25 @@
+@@ -269,13 +291,15 @@
          <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
 -            <ComponentRef Id="ReportViewer" />
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
+             <ComponentRef Id="UpdateFiles" />
              <?if "$(env.Branding)"="XenCenter"?>
-             <ComponentRef Id="xsupdatesfiles" />
              <ComponentRef Id="TestResources" />
              <?else?>
              <ComponentRef Id="readmefile" />
@@ -183,20 +174,7 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-             <ComponentRef Id="ApplicationShortcut" />
-             <ComponentRef Id="ProgramFilesShortcut" />
-         </Feature>
--
--        <?if "$(env.Branding)"="XenCenter"?>		
-+        <?if "$(env.Branding)"="XenCenter"?>
-         <Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="[Citrix] [XenServer] Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-              <ComponentRef Id="XenServerHealthCheck" /> 
-         </Feature>
--
-         <UIRef Id="WixUI_FeatureTree" />
-         <?else ?>
-         <UIRef Id="My_WixUI_InstallDir" />
-@@ -298,7 +320,7 @@
+@@ -302,7 +324,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />

@@ -50,7 +50,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             if (patch == null)
             {
                 var master = Helpers.GetMaster(host.Connection);
-                var action = new Actions.UploadPatchAction(master.Connection, Path.Combine(Program.AssemblyDir, Filename));
+                var action = new Actions.UploadPatchAction(master.Connection, Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.Update)));
                 action.RunExternal(session);
                 patch = action.PatchRefs[master];
             }

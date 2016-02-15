@@ -82,6 +82,8 @@ then
 	fi
 fi
 
+if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
+
 git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git &>-
 if [ "$?" -eq 0 ]; then
   if [ -d "xenadmin-branding" ]
@@ -89,8 +91,10 @@ if [ "$?" -eq 0 ]; then
       rm -rf xenadmin-branding 
   fi
   git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git
-  if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-  cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
+  if [ -d ${BRAND_REPO}/${XC_BRANDING} ]; then
+	echo "Overwriting Branding folder"
+	cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
+  fi
 fi
 
 # overwrite archive-push.sh file, if it exists in Branding folder

@@ -33,7 +33,6 @@ namespace XenAdmin.SettingsPanels
             this.lblSliderNormal = new System.Windows.Forms.Label();
             this.lblSliderLowest = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
-            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
             this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
@@ -43,17 +42,17 @@ namespace XenAdmin.SettingsPanels
             this.lblMB = new System.Windows.Forms.Label();
             this.nudMemory = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.lblVCPUs = new System.Windows.Forms.Label();
             this.lblVcpuWarning = new System.Windows.Forms.LinkLabel();
             this.lblMemory = new System.Windows.Forms.Label();
-            this.nudVCPUs = new System.Windows.Forms.NumericUpDown();
             this.VCPUWarningLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVCPUs)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSliderHighest
@@ -77,13 +76,6 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.SetColumnSpan(this.lblPriority, 2);
             this.lblPriority.Name = "lblPriority";
             // 
-            // transparentTrackBar1
-            // 
-            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
-            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.transparentTrackBar1.Name = "transparentTrackBar1";
-            this.transparentTrackBar1.TabStop = false;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -98,9 +90,9 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.Controls.Add(this.lblVCPUs, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblVcpuWarning, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.nudVCPUs, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.VCPUWarningLabel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelInvalidVCPUWarning
@@ -174,6 +166,13 @@ namespace XenAdmin.SettingsPanels
             this.panel1.Controls.Add(this.transparentTrackBar1);
             this.panel1.Name = "panel1";
             // 
+            // transparentTrackBar1
+            // 
+            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
+            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
+            this.transparentTrackBar1.Name = "transparentTrackBar1";
+            this.transparentTrackBar1.TabStop = false;
+            // 
             // lblVCPUs
             // 
             resources.ApplyResources(this.lblVCPUs, "lblVCPUs");
@@ -193,27 +192,6 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.lblMemory, "lblMemory");
             this.lblMemory.Name = "lblMemory";
             // 
-            // nudVCPUs
-            // 
-            resources.ApplyResources(this.nudVCPUs, "nudVCPUs");
-            this.nudVCPUs.Maximum = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.nudVCPUs.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudVCPUs.Name = "nudVCPUs";
-            this.nudVCPUs.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudVCPUs.ValueChanged += new System.EventHandler(this.nudVCPUs_ValueChanged);
-            // 
             // VCPUWarningLabel
             // 
             resources.ApplyResources(this.VCPUWarningLabel, "VCPUWarningLabel");
@@ -226,6 +204,14 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.label1, "label1");
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
+            // 
+            // comboBoxVCPUs
+            // 
+            this.comboBoxVCPUs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVCPUs.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxVCPUs, "comboBoxVCPUs");
+            this.comboBoxVCPUs.Name = "comboBoxVCPUs";
+            this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxVCPUs_SelectedIndexChanged);
             // 
             // CPUMemoryEditPage
             // 
@@ -243,7 +229,6 @@ namespace XenAdmin.SettingsPanels
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVCPUs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -253,7 +238,6 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         public System.Windows.Forms.NumericUpDown nudMemory;
         private System.Windows.Forms.Label lblMB;
-        public System.Windows.Forms.NumericUpDown nudVCPUs;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblSliderHighest;
         private System.Windows.Forms.Label lblSliderNormal;
@@ -270,5 +254,6 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.Label labelTopology;
         private XenAdmin.Controls.CPUTopologyComboBox comboBoxTopology;
         private System.Windows.Forms.Label labelInvalidVCPUWarning;
+        private System.Windows.Forms.ComboBox comboBoxVCPUs;
     }
 }

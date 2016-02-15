@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(DockerContainer dockerContainer)
         {
-            return dockerContainer.power_state == vm_power_state.Running;
+            return dockerContainer.power_state == vm_power_state.Running && !dockerContainer.Parent.IsWindows;
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

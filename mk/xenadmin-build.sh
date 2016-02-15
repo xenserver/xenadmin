@@ -99,6 +99,14 @@ wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-bin
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
+#bring RPU hotfixes
+if [ "${BRANDING_UPDATE}" = "xsupdate" ]
+then
+  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU001/1.0/RPU001.xsupdate
+  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && gzip RPU001-src-pkgs.tar
+  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU002/1.0/RPU002.xsupdate
+fi
+
 #build
 MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.5 /p:VisualStudioVersion=13.0"
 
@@ -208,13 +216,6 @@ cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
-
-if [ "${XC_BRANDING}" = "citrix" ]
-then
-  cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS62E006,XS65ESP1006}.xsupdate \
-     ${REPO}/XenAdmin/bin/Release/{XS60E001-src-pkgs,XS62E006-src-pkgs}.tar.gz \
-     ${OUTPUT_DIR}
-fi
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \

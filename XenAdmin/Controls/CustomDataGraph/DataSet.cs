@@ -768,10 +768,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (Uuid == other.Uuid)
                 return 0;
 
-            double disp1 = DisplayArea;
-            double disp2 = other.DisplayArea;
-            //attempt some sort of hysteresis type thing to prevent graphs swapping too frequently
-            int comp = disp1 == disp2 ? 0 : disp1 * 1.1 < disp2 ? -1 : disp1 / 1.1 > disp2 ? 1 : 0;
+            int comp = DisplayArea.CompareTo(other.DisplayArea);
             if (comp == 0)
                 return StringUtility.NaturalCompare(Name, other.Name);
             return comp;
