@@ -59,7 +59,7 @@ namespace XenAdmin.TabPages
 
             try
             {
-                var location = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "HomePage", "index.mht");
+                var location = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "HomePage.mht");
                 webBrowser.Navigate(location);
             }
             catch (Exception ex)

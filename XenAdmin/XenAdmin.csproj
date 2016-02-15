@@ -2402,7 +2402,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="HomePage\index.mht">
+    <None Include="HomePage.mht">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="HomePage\License" />
