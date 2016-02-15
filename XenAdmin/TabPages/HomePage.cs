@@ -79,6 +79,7 @@ namespace XenAdmin.TabPages
 
             string url = e.Url.OriginalString;
 
+            // this is not abstracted away as long as we have only a very limited number of functionalities:
             if (url != null && url.StartsWith(XCNS, StringComparison.InvariantCultureIgnoreCase))
             {
                 if (url.Contains("HelpContents"))

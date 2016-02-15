@@ -81,20 +81,7 @@
                             <File Id="XenOvf" Source="..\XenAdmin\bin\Release\XenOvf.dll" />
                             <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
 							<!-- Homepage -->
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\css\ie.css" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\css\print.css" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\css\screen.css" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\css\theme.css" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\icons\cx-cloudServerGraphic.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\icons\cx-icon-addServer.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\icons\cx-icon-generic-doc.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\icons\cx-icon-purchaseSupport.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\icons\cx-icon-regServPool.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\icons\cx-icon-tryVirtualization.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\logos\cx-logo-citrixXenServer.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\media\grid.png" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\index.html" />
-	                        <File Id="" Source="..\XenAdmin\bin\Release\Home\LICENSE" />
+	                        <File Id="" Source="..\XenAdmin\bin\Release\HomePage\index.mht" />
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
 							<File Id="XvaIcon" Source="..\Branding\Images\file_vm.ico" />
