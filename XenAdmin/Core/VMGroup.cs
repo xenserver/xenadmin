@@ -36,7 +36,6 @@ using XenAdmin.Actions;
 using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.VMPolicies;
 using XenAdmin.Dialogs.VMAppliances;
-using XenAdmin.Dialogs.VMSSPolicy;
 using XenAdmin.Network;
 using XenAdmin.Wizards;
 using XenAdmin.Wizards.NewPolicyWizard;

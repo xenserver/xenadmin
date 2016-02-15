@@ -88,54 +88,5 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             SelectedVMs = selectedVMS;
         }
 
-        public Image Image
-        {
-            get { return Properties.Resources._000_VMSession_h32bit_16; }
-        }
-
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
-
-        public void ShowLocalValidationMessages()
-        {
-
-        }
-
-        public void Cleanup()
-        {
-            radioButtonDiskOnly.Checked = true;
-        }
-
-        private void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
-        {
-            toolTip.Show(Messages.FIELD_DISABLED, checkpointInfoPictureBox, 20, 0);
-        }
-
-        private void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e)
-        {
-            toolTip.Hide(checkpointInfoPictureBox);
-        }
-
-        private void pictureBoxVSS_Click(object sender, System.EventArgs e)
-        {
-            string tt = Messages.INFO_QUIESCE_MODE.Replace("\\n","\n");  // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
-            toolTip.Show(tt, pictureBoxVSS, 20, 0);
-        }
-
-        private void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e)
-        {
-            toolTip.Hide(pictureBoxVSS);
-        }
-
-        private void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (quiesceCheckBox.Checked)
-            {
-                this.radioButtonDiskOnly.Checked = true;
-            }
-        }
-
     }
 }
