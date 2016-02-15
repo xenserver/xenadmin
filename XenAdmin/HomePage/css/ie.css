@@ -1,0 +1,45 @@
+/* -----------------------------------------------------------------------
+ File encoded as ISO-8859-1
+ Blueprint CSS Framework 1.0.1
+ http://blueprintcss.org
+
+ * Copyright (c) 2007-Present. See src/LICENSE for more info.
+
+ number of columns:24
+ column width:30
+ gutter width:10
+ total width:950
+ row height:18 px
+ ----------------------------------------------------------------------- */
+
+/* ie.css */
+html {
+	overflow: auto;
+}
+body {
+	text-align: center;
+}
+.container {
+	text-align: left;
+}
+* html .column,
+* html [class^="span-"],
+* html [class*=" span- "] {
+	display: inline;
+	overflow-x: hidden;
+}
+img {
+	-ms-interpolation-mode: bicubic;
+}
+.clearfix, .container {
+	display: inline-block;
+}
+* html .clearfix, * html .container {
+	height: 1%;
+}
+/* fix opacity for tagline fonts */
+p.cx-tagline  span{
+	display: inline-block;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=69)"; /* IE 8 */ 
+	filter: alpha(opacity=69); /* IE 5-7 */ 
+}

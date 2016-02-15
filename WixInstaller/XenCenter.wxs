@@ -80,6 +80,8 @@
                             <File Id="DiscUtils" Source="..\XenAdmin\bin\Release\DiscUtils.dll" />
                             <File Id="XenOvf" Source="..\XenAdmin\bin\Release\XenOvf.dll" />
                             <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
+                            <!-- Homepage -->
+                            <File Id="XenCenterHomePage" Source="..\XenAdmin\bin\Release\HomePage.mht" />
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
 							<File Id="XvaIcon" Source="..\Branding\Images\file_vm.ico" />
