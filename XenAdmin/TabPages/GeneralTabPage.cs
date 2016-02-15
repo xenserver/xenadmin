@@ -1822,12 +1822,21 @@ namespace XenAdmin.TabPages
             try
             {
                 //Write docker command to a temp file.
-                string cmdFile = Path.Combine(Path.GetTempPath(), "cmdXSContainer.txt");
+                string cmdFile = Path.Combine(Path.GetTempPath(), "ContainerManagementCommand.txt");
                 File.WriteAllText(cmdFile, command);
 
                 //Invoke Putty, SSH to VM and execute docker command.
                 var puttyPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
-                var startInfo = new ProcessStartInfo(puttyPath, "-m " + cmdFile + " -t " + ipAddr);
+                string args = "-m " + cmdFile + " -t " + ipAddr;
+
+                //Specify the key for SSH connection.
+                var keyFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "ContainerManagement.ppk");
+                if (File.Exists(keyFile))
+                {
+                    args = args + " -i " + keyFile;
+                }
+                var startInfo = new ProcessStartInfo(puttyPath, args);
+
                 Process.Start(startInfo);
             }
             catch (Exception ex)
