@@ -4201,6 +4201,7 @@
     <Content Include="Images\help_24.png" />
     <Content Include="Images\help_24_hover.png" />
     <Content Include="Images\help_32_hover.png" />
+    <Content Include="Images\homepage_bullet.png" />
     <Content Include="Images\import_32.png" />
     <None Include="Images\infra_view_16.png" />
     <None Include="Images\infra_view_24.png" />
@@ -4239,15 +4240,6 @@
     <None Include="Images\grapharea.png" />
     <None Include="Images\grab.png" />
     <Content Include="Images\ha_16.png" />
-    <None Include="Images\homepage_vert_div.png" />
-    <None Include="Images\homepage_add_icon.png" />
-    <None Include="Images\homepage_background.png" />
-    <None Include="Images\homepage_community_icon.png" />
-    <None Include="Images\homepage_get_icon.png" />
-    <None Include="Images\homepage_hor_div.png" />
-    <None Include="Images\homepage_learn_icon.png" />
-    <None Include="Images\homepage_try_icon.png" />
-    <None Include="Images\homepage_bullet.png" />
     <None Include="Images\lifecycle_pressed.png" />
     <None Include="Images\lifecycle_hot.png" />
     <None Include="Images\licensekey_32.png" />
