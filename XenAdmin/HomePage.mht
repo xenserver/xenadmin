@@ -1,15 +1,15 @@
 From: "Saved by Internet Explorer 11"
 Subject: Citrix XenServer
-Date: Mon, 15 Feb 2016 11:54:37 -0000
+Date: Tue, 16 Feb 2016 14:44:44 -0000
 MIME-Version: 1.0
 Content-Type: multipart/related;
 	type="text/html";
-	boundary="----=_NextPart_000_0000_01D167E7.A5378300"
+	boundary="----=_NextPart_000_0072_01D168C8.9309DCA0"
 X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17609
 
 This is a multi-part message in MIME format.
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: text/html;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -48,8 +48,8 @@ the browser window width -->=20
 <DIV class=3D"container"><!-- add css class "showgrid" to see grid -->		 =
 <!-- Start Top Section -->
 		=20
-<DIV class=3D"span-24 top cx-hero-top">
-<DIV class=3D"span-18 prepend-3 append-3 inner last"><!-- start left =
+<DIV class=3D"span-18 top cx-hero-top">
+<DIV class=3D"span-16 prepend-1 append-0 inner last"><!-- start left =
 column -->
 				=20
 <DIV class=3D"column left span-12 first"><!-- Citrix XenServer Logo -->		=
@@ -93,8 +93,8 @@ g">
 				 </DIV><!-- end right column -->			 </DIV></DIV><!-- End Top Section =
 -->		 <!-- Bottom Section -->
 		=20
-<DIV class=3D"span-24 cx-hero-bottom clearfix">
-<DIV class=3D"column prepend-3 clearfix"><!-- start card 1 -->				=20
+<DIV class=3D"span-18  cx-hero-bottom clearfix">
+<DIV class=3D"column prepend-1 clearfix"><!-- start card 1 -->				=20
 <DIV title=3D"Add a Server" class=3D"span-6 cx-cards"><A =
 class=3D"cx-link" href=3D"xencenter://AddServer/"><IMG=20
 id=3D"addServer" alt=3D"Add a Server" =
@@ -123,7 +123,7 @@ card 3 -->
 container -->  =20
 </BODY></HTML>
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/logos/cx-logo-citrixXenServer.png
@@ -196,7 +196,7 @@ EzHkdxcUB6rYFPyE3LMKoK9mwByKBUHB9ndFKouqQTGAfzETKKRDf7diaT72hiRJtx23g4TbMVAX
 AbwtRW+ob92XfZ2sP7uvGrkfV8En0j3/Z4buzsn7RfG3c3zs/K9Oe/LkCdN/AgwAEDB38/aPJQAA
 AAAASUVORK5CYII=
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-cloudServerGraphic.png
@@ -357,7 +357,7 @@ yw33zeHeGHs3MQFfTcUTT4WAEpHp9CyjFj+kIEU7hbHDhXtizGNOzz7xYwEwHU88NRal1tVoAT8r
 rENqV7Ii754jCCWJhCrcy2ksw7j4klkZHHA8ocmSBthRu9zMtcwMPFF2AkXi/wUYAKHmYva3WaRg
 AAAAAElFTkSuQmCC
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png
@@ -436,7 +436,7 @@ rveJjysRyavryJegXL9kmayXGcosVGqxTLWYHEhem/QSbkf7XpgtYyUEJpaNpCXLpMXSe2P5b1jZ
 pcDfTVFELKlF12NWOpRX2q4IYm9pfNlcRhQroVCQessxqJ56pIuvFxWJSSfqukWzL3M1cqhQh6+h
 B/zVwbrePRnnAHiuSf6FhDMUhmM4n+aW1kx8M9+Hnq0U+hRgAIYz031FnvkhAAAAAElFTkSuQmCC
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-purchaseSupport.png
@@ -523,7 +523,7 @@ AHIxwDbF+7fBAc69COw1T3H6D5+rJQV56b0qPQ/bMh5KbQf5Ys7fxKOmLsW73m8GB/OLlT9fpts9
 QQskUviMJxTBAJ+Bdzz1UQdi/f67JRrJa9hu5tRXixt2K/RVWtVvBlOsaNMfCZZ9Iki9LrWvOcES
 FNGSk9lFae1Qi2cqRNVDjmd/CzAA4cJVq5HwYZMAAAAASUVORK5CYII=
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualization.png
@@ -610,7 +610,7 @@ ZkyahOFf5/dkEibT+2n++wr/pg35BJBn04aZbCr/8Yt2kVl9BCtg6vNUl1GCkBzlLP6d3UKRtpYZ
 MZWMTY2NIpzqiKWtmv7e6IVkbGo0ixj1B6W0zoCP/JYXbJCxcvDVQVvtLDEiyCOBPLsSfwUYAP2G
 LP9CyPswAAAAAElFTkSuQmCC
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -756,7 +756,7 @@ ol {
 	padding-bottom: 0px; margin-bottom: 0px;
 }
 .container {
-	margin: 0px auto; width: 950px;
+	width: 750px;
 }
 .showgrid {
 	background: url("../media/grid.png");
@@ -849,7 +849,7 @@ ol {
 	width: 950px; margin-right: 0px;
 }
 .append-1 {
-	padding-right: 40px;
+	padding-right: 20px;
 }
 .append-2 {
 	padding-right: 80px;
@@ -1183,7 +1183,7 @@ hidden; content: "\0020";
 	clear: both;
 }
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1249,7 +1249,7 @@ square; list-style-position: inside;
 	margin: 34px 0px 0px; text-align: center; padding-bottom: 48px;
 }
 .cx-hero-bottom .cx-cards {
-	width: 223px; height: 198px; margin-right: 20px;
+	width: 200px; height: 198px; margin-right: 20px;
 }
 .cx-hero-bottom .cx-cards:hover {
 	border-radius: 4px; cursor: pointer; background-color: rgb(242, 242, =
@@ -1277,7 +1277,7 @@ img#deskTopVirt {
 	width: 86px; height: 66px;
 }
 
-------=_NextPart_000_0000_01D167E7.A5378300
+------=_NextPart_000_0072_01D168C8.9309DCA0
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1313,4 +1313,4 @@ a:visited::after {
 	font-size: 90%; content: " (" attr(href) ")";
 }
 
-------=_NextPart_000_0000_01D167E7.A5378300--
+------=_NextPart_000_0072_01D168C8.9309DCA0--
