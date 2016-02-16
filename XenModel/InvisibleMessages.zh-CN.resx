@@ -135,6 +135,9 @@
   <data name="HOMEPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserver</value>
   </data>
+  <data name="HOMEPAGE_FILENAME" xml:space="preserve">
+    <value>HomePage.zh-CN.mht</value>
+  </data>
   <data name="HTTP_LICENSES" xml:space="preserve">
     <value>www.citrix.com/xenserverenterprise</value>
   </data>
