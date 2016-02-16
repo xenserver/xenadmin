@@ -182,7 +182,7 @@ cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
 # (the variable can be set from the jenkins ui by putting "export COLLECT_UNSIGNED_FILES=1" above the call for build script)
 if [ -n "${COLLECT_UNSIGNED_FILES+x}" ]; then
 	echo "INFO: Collect unsigned files..."
-	${REPO}/mk/archive-unsigned.sh
+	. ${REPO}/mk/archive-unsigned.sh
 fi
 
 #build and sign the installers
