@@ -71,12 +71,11 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             }
         }
 
-        private VMPP _vmpp;
-        private VMSS _vmss;
-        public void RefreshTab(VMPP vmpp)
+        private IVMPolicy _policy;
+        public void RefreshTab(IVMPolicy policy)
         {
-            _vmpp = vmpp;
-            if (_vmpp == null)
+            _policy = policy;
+            if (_policy == null)
             {
                 labelHistory.Text = "";
                 comboBox1.Enabled = false;
@@ -84,29 +83,14 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             else
             {
                 comboBox1.Enabled = true;
-                RefreshGrid(_vmpp.RecentAlerts);
-            }
-
-        }
-        public void RefreshTabVMSS(VMSS vmss)
-        {
-            _vmss = vmss;
-            if (_vmss == null)
-            {
-                labelHistory.Text = "";
-                comboBox1.Enabled = false;
-            }
-            else
-            {
-                comboBox1.Enabled = true;
-                RefreshGrid(_vmss.Alerts);
+                RefreshGrid(_policy.PolicyAlerts);
             }
 
         }
 
         private void RefreshGrid(List<PolicyAlert> alerts)
         {
-            if (_vmpp != null || _vmss != null)
+            if (_policy != null)
             {
                 //string uuid;
                 //if (_vmpp != null)
@@ -196,46 +180,44 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_vmpp != null)
+            if (_policy != null)
             {
                 if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_vmpp.RecentAlerts);
+                    RefreshGrid(_policy.PolicyAlerts);
                 else if (comboBox1.SelectedIndex == 1)
                 {
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
-                    GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
+                    if (_policy._Type == typeof(VMPP))
+                    {
+                        GetVMPPAlertsAction action = new GetVMPPAlertsAction((VMPP)_policy, 24);
+                        action.Completed += action_Completed;
+                        action.RunAsync();
+                    }
+                    else
+                    {
+                        GetVMSSAlertsAction action = new GetVMSSAlertsAction((VMSS)_policy, 24);
+                        action.Completed += action_Completed;
+                        action.RunAsync();
+                    }
+                    
                 }
                 else if (comboBox1.SelectedIndex == 2)
                 {
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
-                    GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 7 * 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
-                }
-            }
-            else if (_vmss != null)
-            {
-                if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_vmss.Alerts);
-                else if (comboBox1.SelectedIndex == 1)
-                {
-                    dataGridView1.Rows.Clear();
-                    panelLoading.Visible = true;
-                    GetVMSSAlertsAction action = new GetVMSSAlertsAction(_vmss, 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
-                }
-                else if (comboBox1.SelectedIndex == 2)
-                {
-                    dataGridView1.Rows.Clear();
-                    panelLoading.Visible = true;
-                    GetVMSSAlertsAction action = new GetVMSSAlertsAction(_vmss, 7 * 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
+                    if (_policy._Type == typeof(VMPP))
+                    {
+                        GetVMPPAlertsAction action = new GetVMPPAlertsAction((VMPP)_policy, 7 * 24);
+                        action.Completed += action_Completed;
+                        action.RunAsync();
+                    }
+                    else
+                    {
+                        GetVMSSAlertsAction action = new GetVMSSAlertsAction((VMSS)_policy, 7 * 24);
+                        action.Completed += action_Completed;
+                        action.RunAsync();
+                    }
                 }
             }
         }
@@ -253,10 +235,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         private void ReloadHistoryLabel()
         {
             string Name;
-            if(_vmpp != null)
-                Name = _vmpp.Name;
-            else
-                Name = _vmss.Name;
+            Name = _policy.Name;
             // ellipsise if necessary
             using (System.Drawing.Graphics g = labelHistory.CreateGraphics())
             {

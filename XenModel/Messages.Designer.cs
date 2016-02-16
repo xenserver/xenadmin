@@ -5202,7 +5202,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedule policy assigned..
+        ///   Looks up a localized string similar to Snapshot Schedule assigned..
         /// </summary>
         public static string ASSIGNED_VMSS_POLICY {
             get {
@@ -5229,7 +5229,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assigning snapshot schedule policy....
+        ///   Looks up a localized string similar to Assigning to a Snapshot Schedule....
         /// </summary>
         public static string ASSIGNING_VMSS_POLICY {
             get {
@@ -6872,7 +6872,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a checkbox to add a VM to the snapshot schedule policy; clear its checkbox to remove it from the policy..
+        ///   Looks up a localized string similar to Select a checkbox to add a VM to the snapshot schedule; clear its checkbox to remove it from the schedule..
         /// </summary>
         public static string CHOOSE_VMS_VMSS_RUBRIC {
             get {
@@ -9178,7 +9178,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM snapshot schedule policy &apos;{0}&apos; created..
+        ///   Looks up a localized string similar to VM Snapshot Schedule &apos;{0}&apos; created..
         /// </summary>
         public static string CREATED_VMSS {
             get {
@@ -9349,7 +9349,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating VM snapshot schedule policy &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Creating VM Snapshot Schedule &apos;{0}&apos;....
         /// </summary>
         public static string CREATING_VMSS {
             get {
@@ -10328,7 +10328,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM snapshot schedule policies deleted..
+        ///   Looks up a localized string similar to VM Snapshot Schedules deleted..
         /// </summary>
         public static string DELETED_VMSS {
             get {
@@ -10418,7 +10418,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting VM snapshot schedule policy &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Deleting VM Snapshot Schedule &apos;{0}&apos;.
         /// </summary>
         public static string DELETING_VMSS {
             get {
@@ -10742,7 +10742,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM snapshot schedule policy &apos;{0}&apos; disabled..
+        ///   Looks up a localized string similar to VM Snapshot Schedule &apos;{0}&apos; disabled..
         /// </summary>
         public static string DISABLED_VMSS {
             get {
@@ -10796,7 +10796,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabling VM snapshot schedule policy &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Disabling VM Snapshot schedule &apos;{0}&apos;....
         /// </summary>
         public static string DISABLING_VMSS {
             get {
@@ -12996,7 +12996,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM snapshot schedule policy &apos;{0}&apos; enabled..
+        ///   Looks up a localized string similar to VM Snapshot Schedule &apos;{0}&apos; enabled..
         /// </summary>
         public static string ENABLED_VMSS {
             get {
@@ -13050,7 +13050,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling VM snapshot schedule policy &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Enabling VM Snapshot Schedule &apos;{0}&apos;....
         /// </summary>
         public static string ENABLING_VMSS {
             get {
@@ -22732,7 +22732,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this wizard to define a VM snapshot schedule policy that will create automatic schedule snapshot jobs for your VMs..
+        ///   Looks up a localized string similar to Use this wizard to define a VM Snapshot Schedule that will create automatic schedule snapshot jobs for your VMs..
         /// </summary>
         public static string NEW_VMSS_PAGE_TEXT {
             get {
@@ -27496,7 +27496,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} user cannot create VM Snapshot schedule policies. Log in as a different user with sufficient privileges and try again..
+        ///   Looks up a localized string similar to A {0} user cannot create a VM Snapshot Schedule. Log in as a different user with sufficient privileges and try again..
         /// </summary>
         public static string RBAC_WARNING_VMSS {
             get {
@@ -27845,7 +27845,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove VM &apos;{0}&apos; from VM Snapshot Schedule Policy &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Remove VM &apos;{0}&apos; from VM Snapshot Schedule &apos;{1}&apos;.
         /// </summary>
         public static string REMOVE_VM_FROM_VMSS {
             get {
@@ -27872,7 +27872,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove VMs from VM Snapshot Schedule Policy &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Remove VMs from VM Snapshot Schedule &apos;{1}&apos;.
         /// </summary>
         public static string REMOVE_VMS_FROM_VMSS {
             get {
@@ -27926,7 +27926,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed from VM Snapshot Schedule Policy.
+        ///   Looks up a localized string similar to Removed from VM Snapshot Schedule.
         /// </summary>
         public static string REMOVED_VMS_FROM_VMSS {
             get {
@@ -27998,7 +27998,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing from VM Snapshot Schedule Policy.
+        ///   Looks up a localized string similar to Removing from VM Snapshot Schedule.
         /// </summary>
         public static string REMOVING_VMS_FROM_VMSS {
             get {
@@ -31306,7 +31306,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM is currently part of the scheduled snapshot policy &apos;{0}&apos;.
+        ///   Looks up a localized string similar to This VM is currently part of the Snapshot Schedule &apos;{0}&apos;.
         /// </summary>
         public static string THIS_VM_IS_IN_VMSS {
             get {
@@ -31315,7 +31315,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM is not currently part of a scheduled snapshot policy.
+        ///   Looks up a localized string similar to This VM is not currently part of a Snapshot Schedule.
         /// </summary>
         public static string THIS_VM_IS_NOT_IN_VMSS {
             get {
@@ -33395,7 +33395,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Snapshot Schedule. VM Snapshot Schedule allows you to create automatic snapshots for your critical VMs..
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshost allows you to create automatic snapshots for your critical VMs..
         /// </summary>
         public static string UPSELL_BLURB_VMSS {
             get {
@@ -33406,7 +33406,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the [XenServer] VM Snapshot Schedule feature or to start a XenServer trial, click the button below..
+        ///To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a XenServer trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_VMSS_MORE {
             get {
@@ -33957,7 +33957,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View VM Snapshot Schedule Policies.
+        ///   Looks up a localized string similar to View VM Snapshot Schedules.
         /// </summary>
         public static string VIEW_VMSS_POLICIES {
             get {
@@ -34875,7 +34875,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Snapshot Sched&amp;ules....
+        ///   Looks up a localized string similar to VM Snapshot Sched&amp;ules ....
         /// </summary>
         public static string VMSS_CONTEXT_MENU {
             get {
@@ -34884,7 +34884,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a snapshot schedule for your VMs..
+        ///   Looks up a localized string similar to Create a Snapshot Schedule for your VMs..
         /// </summary>
         public static string VMSS_DIALOG_TEXT {
             get {
@@ -34893,7 +34893,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Snapshot Schedule Policies.
+        ///   Looks up a localized string similar to VM Snapshot Schedules.
         /// </summary>
         public static string VMSS_DIALOG_TITLE {
             get {
@@ -34902,7 +34902,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send &amp;email notifications about VM snapshot schedule job alerts.
+        ///   Looks up a localized string similar to Send &amp;email notifications about VM Snapshot Schedule job alerts.
         /// </summary>
         public static string VMSS_EMAIL_CHECKBOX_TEXT {
             get {
@@ -34911,7 +34911,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer can send you email notifications when alerts associated with VM snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
+        ///   Looks up a localized string similar to XenServer can send you email notifications when alerts associated with VM Snapshot Schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
         /// </summary>
         public static string VMSS_EMAIL_PAGE_TEXT {
             get {
@@ -34920,7 +34920,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Run the new VM snapshot schedule job when I click Finish.
+        ///   Looks up a localized string similar to &amp;Run the new VM Snapshot Schedule job when I click Finish.
         /// </summary>
         public static string VMSS_FINISH_PAGE_CHECKBOX_TEXT {
             get {
@@ -34929,7 +34929,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Review the new VM snapshot schedule policy below and click Previous if you want to change any settings or Finish to create the new policy..
+        ///   Looks up a localized string similar to Review the new VM Snapshot Schedule below and click Previous if you want to change any settings or Finish to create the new schedule..
         /// </summary>
         public static string VMSS_FINISH_PAGE_TEXT {
             get {
@@ -34956,7 +34956,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM snapshot schedule policies defined in pool &apos;{0}&apos; ({1} out of {2} VMs currently in policy):.
+        ///   Looks up a localized string similar to VM Snapshot Schedules defined in pool &apos;{0}&apos; ({1} out of {2} VMs currently in schedule):.
         /// </summary>
         public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL {
             get {
@@ -34965,7 +34965,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM snapshot schedule policies defined in server &apos;{0}&apos; ({1} out of {2} VMs currently in policy):.
+        ///   Looks up a localized string similar to VM Snapshot Schedules defined in server &apos;{0}&apos; ({1} out of {2} VMs currently in schedule):.
         /// </summary>
         public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
             get {
@@ -34992,7 +34992,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Snapshot Schedule Policy.
+        ///   Looks up a localized string similar to New Snapshot Schedule.
         /// </summary>
         public static string VMSS_WIZARD_TITLE {
             get {

@@ -157,19 +157,19 @@ namespace XenAPI
             }
         }
 
-        public bool is_enabled()
+        public bool is_enabled
         {
-            return this.is_policy_enabled;
+            get { return this.is_policy_enabled; }
         }
 
-        public bool is_running()
+        public bool is_running
         {
-            return this.is_backup_running;
+            get { return this.is_backup_running; }
         }
 
-        public bool is_archiving()
+        public bool is_archiving
         {
-            return this.is_archive_running;
+            get { return this.is_archive_running; }
         }
 
         public DateTime _GetNextRunTime()
@@ -180,9 +180,14 @@ namespace XenAPI
         {
             return this.GetNextArchiveRunTime();
         }
-        public Type _Type()
+        public Type _Type
         {
-            return typeof(VMPP);
+            get {return typeof(VMPP);}
+        }
+
+        public List<PolicyAlert> PolicyAlerts
+        {
+            get { return RecentAlerts;}
         }
                
 

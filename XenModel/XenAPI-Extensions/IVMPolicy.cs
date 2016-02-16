@@ -36,24 +36,23 @@ using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
 
-
+/* Interface that will be implemented by VMSS and VMPP XenObjects*/
 namespace XenAPI
 {
     public interface IVMPolicy
     {
-        //string test { get; }
         string Name { get; }
         string name_description {get; }
         string uuid { get; }
         List<XenRef<VM>> VMs { get; }
         IXenConnection Connection { get; }
-        bool is_enabled();
-        bool is_running();
-        bool is_archiving();
+        bool is_enabled { get; }
+        bool is_running { get; }
+        bool is_archiving { get; }
         string LastResult { get;}
         DateTime _GetNextRunTime();
         DateTime _GetNextArchiveRunTime();
-        Type _Type();
- 
-    }
+        Type _Type { get; }
+        List<PolicyAlert> PolicyAlerts { get; }
+     }
 }

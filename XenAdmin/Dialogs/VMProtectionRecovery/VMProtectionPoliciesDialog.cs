@@ -118,12 +118,12 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             {
                 _name.Value = _Policy.Name;
                 _numVMs.Value = _Policy.VMs.FindAll(vm => _Policy.Connection.Resolve(vm).is_a_real_vm).Count;
-                _status.Value = _Policy.is_enabled() ? Messages.ENABLED : Messages.DISABLED;
-                if (_Policy.is_running())
+                _status.Value = _Policy.is_enabled ? Messages.ENABLED : Messages.DISABLED;
+                if (_Policy.is_running)
                     _status.Value = Messages.RUNNING_SNAPSHOTS;
-                if (this._Policy._Type() == typeof(VMPP))
+                if (this._Policy._Type == typeof(VMPP))
                 {
-                    if (_Policy.is_archiving())
+                    if (_Policy.is_archiving)
                         _status.Value = Messages.RUNNING_ARCHIVE;
                 }
                 _lastResult.Value = _Policy.LastResult;
@@ -139,7 +139,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                                          ? HelpersGUI.DateTimeToString(nextRunTime.Value, Messages.DATEFORMAT_DMY_HM,
                                                                        true)
                                          : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
-                if (this._Policy._Type() == typeof(VMPP))
+                if (this._Policy._Type == typeof(VMPP))
                 {
                     DateTime? nextArchiveRuntime = GetVMPPDateTime(() => _Policy._GetNextArchiveRunTime());
                     _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
@@ -235,16 +235,21 @@ namespace XenAdmin.Dialogs.VMPolicies
             {
                 foreach (var policy in Pool.Connection.Cache.VMSSs)
                 {
-                    /*Populate the alerts*/
-                    //List<PolicyAlert> message_alerts = new List<PolicyAlert>();
+                    /*Populate the alerts from Messages by filtering out the alerts for this schedule*/
                     foreach (var message in Pool.Connection.Cache.Messages)
                     {
                         if (message.cls == cls.VMSS && message.obj_uuid == policy.uuid)
                         {
-                            policy.Alerts.Add(new PolicyAlert(Pool.Connection, message.body));
+                            if (message.Type == XenAPI.Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED)
+                            {
+                                policy.Alerts.Add(new PolicyAlert(Pool.Connection, message.body));
+                            }
+                            else
+                            {
+                                policy.Alerts.Add(new PolicyAlert(message.name, message.timestamp));
+                            }
                         }
                     }
-                    //policy.Alerts = message_alerts;
                     if (dataGridView1.ColumnCount > 0)
                         dataGridView1.Rows.Add(new PolicyRow(policy));
                 }
@@ -331,10 +336,10 @@ namespace XenAdmin.Dialogs.VMPolicies
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 currentSelected = ((PolicyRow)dataGridView1.SelectedRows[0])._Policy;
-                buttonEnable.Text = currentSelected.is_enabled() ? Messages.DISABLE : Messages.ENABLE;
-                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.is_enabled() ? false : true;
+                buttonEnable.Text = currentSelected.is_enabled? Messages.DISABLE : Messages.ENABLE;
+                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.is_enabled? false : true;
                 buttonProperties.Enabled = true;
-                buttonRunNow.Enabled = currentSelected.is_enabled() && !currentSelected.is_archiving() && !currentSelected.is_running();
+                buttonRunNow.Enabled = currentSelected.is_enabled && !currentSelected.is_archiving && !currentSelected.is_running;
 
             }
             else
@@ -343,14 +348,8 @@ namespace XenAdmin.Dialogs.VMPolicies
                 buttonProperties.Enabled = buttonEnable.Enabled = buttonRunNow.Enabled = false;
                 policyHistory1.Clear();
             }
-            if (typeof(T) == typeof(VMPP))
-            {
-                policyHistory1.RefreshTab((VMPP)currentSelected);
-            }
-            else
-            {
-                policyHistory1.RefreshTabVMSS((VMSS)currentSelected);
-            }
+
+            policyHistory1.RefreshTab(currentSelected);
             buttonDelete.Enabled = (dataGridView1.SelectedRows.Count != 0);
         }
 
@@ -399,19 +398,9 @@ namespace XenAdmin.Dialogs.VMPolicies
 
         protected override void buttonProperties_Click(object sender, EventArgs e)
         {
-            if (typeof(T) == typeof(VMPP))
+            using (PropertiesDialog propertiesDialog = new PropertiesDialog((T)currentSelected))
             {
-                using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMPP)currentSelected))
-                {
-                    propertiesDialog.ShowDialog(this);
-                }
-            }
-            else
-            {
-                using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMSS)currentSelected))
-                {
-                    propertiesDialog.ShowDialog(this);
-                }
+                propertiesDialog.ShowDialog(this);
             }
         }
 

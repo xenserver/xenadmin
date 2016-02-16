@@ -40,19 +40,19 @@ namespace XenAPI
 {
     public partial class VMSS : IVMPolicy
     {
-        public bool is_enabled()
+        public bool is_enabled
         {
-            return this.enabled;
+            get { return this.enabled; }
         }
 
-        public bool is_running()
+        public bool is_running
         {
-            return false;
+            get { return false; }
         }
 
-        public bool is_archiving()
+        public bool is_archiving
         {
-            return false;
+            get { return false; }
         }
         public DateTime _GetNextRunTime()
         {
@@ -62,11 +62,14 @@ namespace XenAPI
         {
             return new DateTime();
         }
-        public Type _Type()
+        public Type _Type
         {
-            return typeof(VMSS);
+            get { return typeof(VMSS); }
         }
-
+        public List<PolicyAlert> PolicyAlerts
+        {
+            get { return Alerts; }
+        }
 
         public DateTime GetNextRunTime()
         {
