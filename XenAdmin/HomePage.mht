@@ -1,15 +1,15 @@
 From: "Saved by Internet Explorer 11"
 Subject: Citrix XenServer
-Date: Tue, 16 Feb 2016 14:44:44 -0000
+Date: Tue, 16 Feb 2016 18:18:24 -0000
 MIME-Version: 1.0
 Content-Type: multipart/related;
 	type="text/html";
-	boundary="----=_NextPart_000_0072_01D168C8.9309DCA0"
+	boundary="----=_NextPart_000_0000_01D168E6.6CB764A0"
 X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17609
 
 This is a multi-part message in MIME format.
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: text/html;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -123,7 +123,7 @@ card 3 -->
 container -->  =20
 </BODY></HTML>
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/logos/cx-logo-citrixXenServer.png
@@ -196,7 +196,7 @@ EzHkdxcUB6rYFPyE3LMKoK9mwByKBUHB9ndFKouqQTGAfzETKKRDf7diaT72hiRJtx23g4TbMVAX
 AbwtRW+ob92XfZ2sP7uvGrkfV8En0j3/Z4buzsn7RfG3c3zs/K9Oe/LkCdN/AgwAEDB38/aPJQAA
 AAAASUVORK5CYII=
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-cloudServerGraphic.png
@@ -357,7 +357,7 @@ yw33zeHeGHs3MQFfTcUTT4WAEpHp9CyjFj+kIEU7hbHDhXtizGNOzz7xYwEwHU88NRal1tVoAT8r
 rENqV7Ii754jCCWJhCrcy2ksw7j4klkZHHA8ocmSBthRu9zMtcwMPFF2AkXi/wUYAKHmYva3WaRg
 AAAAAElFTkSuQmCC
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png
@@ -436,7 +436,7 @@ rveJjysRyavryJegXL9kmayXGcosVGqxTLWYHEhem/QSbkf7XpgtYyUEJpaNpCXLpMXSe2P5b1jZ
 pcDfTVFELKlF12NWOpRX2q4IYm9pfNlcRhQroVCQessxqJ56pIuvFxWJSSfqukWzL3M1cqhQh6+h
 B/zVwbrePRnnAHiuSf6FhDMUhmM4n+aW1kx8M9+Hnq0U+hRgAIYz031FnvkhAAAAAElFTkSuQmCC
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-purchaseSupport.png
@@ -523,7 +523,7 @@ AHIxwDbF+7fBAc69COw1T3H6D5+rJQV56b0qPQ/bMh5KbQf5Ys7fxKOmLsW73m8GB/OLlT9fpts9
 QQskUviMJxTBAJ+Bdzz1UQdi/f67JRrJa9hu5tRXixt2K/RVWtVvBlOsaNMfCZZ9Iki9LrWvOcES
 FNGSk9lFae1Qi2cqRNVDjmd/CzAA4cJVq5HwYZMAAAAASUVORK5CYII=
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualization.png
@@ -610,7 +610,7 @@ ZkyahOFf5/dkEibT+2n++wr/pg35BJBn04aZbCr/8Yt2kVl9BCtg6vNUl1GCkBzlLP6d3UKRtpYZ
 MZWMTY2NIpzqiKWtmv7e6IVkbGo0ixj1B6W0zoCP/JYXbJCxcvDVQVvtLDEiyCOBPLsSfwUYAP2G
 LP9CyPswAAAAAElFTkSuQmCC
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -756,7 +756,7 @@ ol {
 	padding-bottom: 0px; margin-bottom: 0px;
 }
 .container {
-	width: 750px;
+	margin: 0px auto; width: 750px;
 }
 .showgrid {
 	background: url("../media/grid.png");
@@ -1183,7 +1183,7 @@ hidden; content: "\0020";
 	clear: both;
 }
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1246,7 +1246,7 @@ ul.cx-callouts-list li.cx-doc-icon ul.cx-link-list {
 square; list-style-position: inside;
 }
 .cx-hero-bottom {
-	margin: 34px 0px 0px; text-align: center; padding-bottom: 48px;
+	margin: 34px 0px 0px; text-align: center; padding-bottom: 0px;
 }
 .cx-hero-bottom .cx-cards {
 	width: 200px; height: 198px; margin-right: 20px;
@@ -1277,7 +1277,7 @@ img#deskTopVirt {
 	width: 86px; height: 66px;
 }
 
-------=_NextPart_000_0072_01D168C8.9309DCA0
+------=_NextPart_000_0000_01D168E6.6CB764A0
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1313,4 +1313,4 @@ a:visited::after {
 	font-size: 90%; content: " (" attr(href) ")";
 }
 
-------=_NextPart_000_0072_01D168C8.9309DCA0--
+------=_NextPart_000_0000_01D168E6.6CB764A0--

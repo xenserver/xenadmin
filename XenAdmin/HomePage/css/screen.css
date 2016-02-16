@@ -103,7 +103,7 @@ ol {
 }
 /* grid.css */
 .container {
-	width: 750px; //was 950
+	width: 750px; 
 	margin: 0 auto;
 }
 .showgrid {
