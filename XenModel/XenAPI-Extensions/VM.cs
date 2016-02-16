@@ -1970,6 +1970,60 @@ namespace XenAPI
                     this.has_vendor_device && this.IsWindows;
             }
         }
+
+        /// <summary>
+        /// Returns the VM IP address for SSH login.
+        /// </summary>
+        public string IPAddressForSSH
+        {
+            get
+            {
+                List<string> ipAddresses = new List<string>();
+
+                if (!this.is_control_domain) //vm
+                {
+                    List<VIF> vifs = this.Connection.ResolveAll(this.VIFs);
+                    vifs.Sort();
+
+                    foreach (var vif in vifs)
+                    {
+                        if (!vif.currently_attached)
+                            continue;
+
+                        var network = vif.Connection.Resolve(vif.network);
+                        if (network != null && network.IsGuestInstallerNetwork)
+                            continue;
+
+                        ipAddresses.AddRange(vif.IPAddresses);
+                    }
+                }
+                else //control domain
+                {
+                    List<PIF> pifList = new List<PIF>(this.Connection.Cache.PIFs);
+                    pifList.Sort();  // This sort ensures that the primary PIF comes before other management PIFs
+
+                    foreach (PIF pif in pifList)
+                    {
+                        if (pif.host.opaque_ref != this.resident_on.opaque_ref || !pif.currently_attached)
+                            continue;
+
+                        if (pif.IsManagementInterface(false))
+                        {
+                            ipAddresses.Add(pif.IP);
+                        }
+                    }
+                }
+
+                //find first IPv4 address and return it - we would use it if there is one
+                IPAddress addr;
+                foreach (string addrString in ipAddresses)
+                    if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        return addrString;
+
+                //return the first address (this will not be IPv4)
+                return ipAddresses.FirstOrDefault() ?? string.Empty;
+            }
+        }
     }
 
     public struct VMStartupOptions
