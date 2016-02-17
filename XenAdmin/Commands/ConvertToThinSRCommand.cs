@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            var sr = GetFirstThickSRFromSelection(selection);
+            SR sr = null; //removed GetFirstThickSRFromSelection(selection);
 
             return sr != null ;
         }

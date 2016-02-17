@@ -298,15 +298,17 @@ namespace XenAdmin.Wizards
                 {
                     AddPage(xenTabPageLvmoIscsi);
 
-                    if (Helpers.DundeeOrGreater(xenConnection))
-                        AddPage(xenTabPageStorageProvisioningMethod);
+                    //removed 
+                    //if (Helpers.DundeeOrGreater(xenConnection))
+                    //    AddPage(xenTabPageStorageProvisioningMethod);
                 }
                 else if (m_srWizardType is SrWizardType_LvmoHba)
                 {
                     AddPage(xenTabPageLvmoHba);
 
-                    if (Helpers.DundeeOrGreater(xenConnection))
-                        AddPage(xenTabPageStorageProvisioningMethod);
+                    //removed
+                    //if (Helpers.DundeeOrGreater(xenConnection))
+                    //    AddPage(xenTabPageStorageProvisioningMethod);
                     
                     AddPage(xenTabPageLvmoHbaSummary);
                 }

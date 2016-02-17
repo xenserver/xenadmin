@@ -1068,7 +1068,7 @@ namespace XenAPI
         {
             get
             {
-                return this.sm_config != null && this.sm_config.ContainsKey("allocation") && this.sm_config["allocation"] == "xlvhd";
+                return false; //removed this.sm_config != null && this.sm_config.ContainsKey("allocation") && this.sm_config["allocation"] == "xlvhd";
             }
         }
 
