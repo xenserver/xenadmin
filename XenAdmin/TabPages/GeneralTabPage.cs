@@ -1245,6 +1245,7 @@ namespace XenAdmin.TabPages
                 {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
 
+                    /* DISABLED THIN PROVISIONING
                     if (sr.type == "lvmohba" || sr.type == "lvmoiscsi")
                     {
                         // add entries related to thin lvhd SRs
@@ -1262,7 +1263,8 @@ namespace XenAdmin.TabPages
                             s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
                                        Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
                         }
-                    }                    
+                    } 
+                    */
                 }
 
                 if (sr.GetScsiID() != null)
