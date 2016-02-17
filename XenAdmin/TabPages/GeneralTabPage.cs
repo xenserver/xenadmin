@@ -1245,7 +1245,7 @@ namespace XenAdmin.TabPages
                 {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
 
-                    /* removed
+                    /* DISABLED THIN PROVISIONING
                     if (sr.type == "lvmohba" || sr.type == "lvmoiscsi")
                     {
                         // add entries related to thin lvhd SRs

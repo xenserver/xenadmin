@@ -298,7 +298,7 @@ namespace XenAdmin.Wizards
                 {
                     AddPage(xenTabPageLvmoIscsi);
 
-                    //removed 
+                    // DISABLED THIN PROVISIONING 
                     //if (Helpers.DundeeOrGreater(xenConnection))
                     //    AddPage(xenTabPageStorageProvisioningMethod);
                 }
@@ -306,7 +306,7 @@ namespace XenAdmin.Wizards
                 {
                     AddPage(xenTabPageLvmoHba);
 
-                    //removed
+                    // DISABLED THIN PROVISIONING
                     //if (Helpers.DundeeOrGreater(xenConnection))
                     //    AddPage(xenTabPageStorageProvisioningMethod);
                     
