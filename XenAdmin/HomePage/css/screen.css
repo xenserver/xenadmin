@@ -103,7 +103,7 @@ ol {
 }
 /* grid.css */
 .container {
-	width: 950px;
+	width: 750px; 
 	margin: 0 auto;
 }
 .showgrid {
@@ -191,7 +191,7 @@ ol {
 	margin-right: 0;
 }
 .append-1 {
-	padding-right: 40px;
+	padding-right: 20px;
 }
 .append-2 {
 	padding-right: 80px;

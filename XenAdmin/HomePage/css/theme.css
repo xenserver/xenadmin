@@ -87,13 +87,13 @@ ul.cx-callouts-list li.cx-doc-icon ul.cx-link-list{
 /* Bottom Hero Section */
 .cx-hero-bottom {
 	margin:34px 0 0 0;
-	padding-bottom: 48px; 
+	padding-bottom: 0px; 
 	text-align: center;
 }
 /* cards */
 .cx-hero-bottom .cx-cards {
 	height: 198px;
-	width: 223px;
+	width: 200px;
 	margin-right: 20px;
 }
 .cx-hero-bottom .cx-cards:hover {
