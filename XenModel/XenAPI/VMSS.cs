@@ -39,7 +39,7 @@ using CookComputing.XmlRpc;
 namespace XenAPI
 {
     /// <summary>
-    /// VM Scheduled Snapshot
+    /// VM Snapshot Schedule
     /// First published in XenServer Dundee.
     /// </summary>
     public partial class VMSS : XenObject<VMSS>
@@ -426,7 +426,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// This call executes the scheduled snapshot immediately
+        /// This call executes the snapshot schedule immediately
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
@@ -454,7 +454,7 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">the scheduled snapshot frequency</param>
+        /// <param name="_value">the snapshot schedule frequency</param>
         public static void set_frequency(Session session, string _vmss, vmss_frequency _value)
         {
             session.proxy.vmss_set_frequency(session.uuid, (_vmss != null) ? _vmss : "", vmss_frequency_helper.ToString(_value)).parse();
@@ -515,7 +515,7 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
-        /// <param name="_value">the scheduled snapshot type</param>
+        /// <param name="_value">the snapshot schedule type</param>
         public static void set_type(Session session, string _vmss, vmss_type _value)
         {
             session.proxy.vmss_set_type(session.uuid, (_vmss != null) ? _vmss : "", vmss_type_helper.ToString(_value)).parse();
@@ -596,7 +596,7 @@ namespace XenAPI
         private string _name_description;
 
         /// <summary>
-        /// enable or disable this scheduled snapshot
+        /// enable or disable this snapshot schedule
         /// </summary>
         public virtual bool enabled
         {
@@ -614,7 +614,7 @@ namespace XenAPI
         private bool _enabled;
 
         /// <summary>
-        /// type of the scheduled snapshot
+        /// type of the snapshot schedule
         /// </summary>
         public virtual vmss_type type
         {
@@ -650,7 +650,7 @@ namespace XenAPI
         private long _retained_snapshots;
 
         /// <summary>
-        /// frequency of taking snapshot from scheduled snapshot
+        /// frequency of taking snapshot from snapshot schedule
         /// </summary>
         public virtual vmss_frequency frequency
         {
@@ -704,7 +704,7 @@ namespace XenAPI
         private DateTime _last_run_time;
 
         /// <summary>
-        /// all VMs attached to this scheduled snapshot
+        /// all VMs attached to this snapshot schedule
         /// </summary>
         public virtual List<XenRef<VM>> VMs
         {

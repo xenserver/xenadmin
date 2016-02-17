@@ -1444,9 +1444,9 @@ namespace XenAPI
         Response<bool>
         vm_get_is_snapshot_from_vmpp(string session, string _vm);
 
-        [XmlRpcMethod("VM.get_scheduled_snapshot")]
+        [XmlRpcMethod("VM.get_snapshot_schedule")]
         Response<string>
-        vm_get_scheduled_snapshot(string session, string _vm);
+        vm_get_snapshot_schedule(string session, string _vm);
 
         [XmlRpcMethod("VM.get_is_vmss_snapshot")]
         Response<bool>
@@ -2084,9 +2084,9 @@ namespace XenAPI
         Response<string>
         vm_set_protection_policy(string session, string _vm, string _value);
 
-        [XmlRpcMethod("VM.set_scheduled_snapshot")]
+        [XmlRpcMethod("VM.set_snapshot_schedule")]
         Response<string>
-        vm_set_scheduled_snapshot(string session, string _vm, string _value);
+        vm_set_snapshot_schedule(string session, string _vm, string _value);
 
         [XmlRpcMethod("VM.set_start_delay")]
         Response<string>
@@ -7135,7 +7135,7 @@ namespace XenAPI
         public Object bios_strings;
         public string protection_policy;
         public bool is_snapshot_from_vmpp;
-        public string scheduled_snapshot;
+        public string snapshot_schedule;
         public bool is_vmss_snapshot;
         public string appliance;
         public string start_delay;

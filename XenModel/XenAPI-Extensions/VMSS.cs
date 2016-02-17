@@ -79,7 +79,7 @@ namespace XenAPI
 
         public void set_vm_policy(Session session, string _vm, string _value)
         {
-            VM.set_scheduled_snapshot(session, _vm, _value);
+            VM.set_snapshot_schedule(session, _vm, _value);
         }
 
         public void do_destroy(Session session, string _policy)

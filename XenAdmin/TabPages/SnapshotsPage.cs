@@ -202,7 +202,7 @@ namespace XenAdmin.TabPages
             else if (Helpers.DundeeOrGreater(VM.Connection))
             {
                 panelVMPP.Visible = true;
-                var vmss = VM.Connection.Resolve(VM.scheduled_snapshot);
+                var vmss = VM.Connection.Resolve(VM.snapshot_schedule);
                 if (vmss == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
                 {
                     labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_IN_VMSS;

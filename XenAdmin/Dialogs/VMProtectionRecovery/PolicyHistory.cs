@@ -92,22 +92,8 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         {
             if (_policy != null)
             {
-                //string uuid;
-                //if (_vmpp != null)
-                //    uuid = _vmpp.uuid;
-                //else
-                //    uuid = _vmss.uuid;
                 ReloadHistoryLabel();
                 dataGridView1.Rows.Clear();
-                //List<PolicyAlert> message_alerts = new List<PolicyAlert>();
-                //foreach (var message in pool.Connection.Cache.Messages)
-                //{
-                //    if ((message.cls == cls.VMSS || message.cls == cls.VMPP) && message.obj_uuid == uuid)
-                //    {
-                //        message_alerts.Add(new PolicyAlert(pool.Connection, message.body));
-                //    }
-                //}
-
                 var readOnlyAlerts = alerts.AsReadOnly();
                 foreach (var alert in readOnlyAlerts)
                 {

@@ -63,7 +63,7 @@ namespace XenAdmin.Actions
             Connection.WaitForCache(vmssref);
             foreach (var selectedVM in _vms)
             {
-                VM.set_scheduled_snapshot(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
+                VM.set_snapshot_schedule(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
             }
             Description = string.Format(Messages.CREATED_VMSS, _record.Name);
             PercentComplete = 60;

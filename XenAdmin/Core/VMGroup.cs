@@ -64,7 +64,7 @@ namespace XenAdmin.Core
 
         internal static XenRef<T> VmToGroup(VM vm)
         {
-            return typeof(T) == typeof(VMPP) ? vm.protection_policy as XenRef<T> : (typeof(T) == typeof(VMSS) ? vm.scheduled_snapshot as XenRef <T> : vm.appliance as XenRef<T>);
+            return typeof(T) == typeof(VMPP) ? vm.protection_policy as XenRef<T> : (typeof(T) == typeof(VMSS) ? vm.snapshot_schedule as XenRef<T> : vm.appliance as XenRef<T>);
         }
 
         internal static List<XenRef<VM>> GroupToVMs(T group)
