@@ -171,6 +171,7 @@ rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper_l10n.xml
 
 #mk
 rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
+rebranding_global ${REPO}/mk/package-and-sign.sh
 
 #WixInstaller
 rebranding_global ${REPO}/WixInstaller/en-us.wxl

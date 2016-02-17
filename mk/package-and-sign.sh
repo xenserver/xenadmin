@@ -39,7 +39,8 @@ REPO=${XENADMIN_DIR}
 OUTPUT_DIR=${ROOT}/output
 DOTNETINST=${REPO}/dotNetInstaller
 	
-source ${REPO}/Branding/branding.sh
+BRANDING_BRAND_CONSOLE=[XenCenter]
+BRANDING_COMPANY_NAME_SHORT=[Citrix]
 
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
