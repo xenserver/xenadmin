@@ -147,7 +147,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -256,7 +256,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -366,7 +366,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", false, false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-	                new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+	                /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -477,7 +477,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-                new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+                /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -590,7 +590,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", false, false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -819,7 +819,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                    new ExpectedTextMenuItem("&Forget", false, false  ),
 	                    new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-        	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+        	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -937,7 +937,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("R&eattach...", false, false  ),
                     new ExpectedTextMenuItem("&Forget", false, false  ),
                     new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1056,7 +1056,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                    new ExpectedTextMenuItem("&Forget", false, false  ),
 	                    new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-        	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+        	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1176,7 +1176,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("R&eattach...", false, false  ),
                     new ExpectedTextMenuItem("&Forget", false, false  ),
                     new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1297,7 +1297,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                    new ExpectedTextMenuItem("&Forget", false, false  ),
 	                    new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-        	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+        	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1413,7 +1413,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -1522,7 +1522,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -1661,7 +1661,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", false, false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1785,7 +1785,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -1919,7 +1919,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            new ExpectedTextMenuItem("&Convert SR...", false, false  ),
+   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
