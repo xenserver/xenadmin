@@ -47,7 +47,7 @@ namespace XenAdminTests.XenModelTests
         [Test]
         public void TestEmptyList()
         {
-            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<VMPP>());
+            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<IVMPolicy>());
             action.Completed += action_Completed;
             action.RunAsync();
             _autoResetEvent.WaitOne();
@@ -64,7 +64,7 @@ namespace XenAdminTests.XenModelTests
         {
             mockProxy.Setup(x => x.vmpp_destroy(It.IsAny<string>(), "1")).Returns(new Response<string>(""));
             mockProxy.Setup(x => x.vm_set_protection_policy(It.IsAny<string>(), "1", It.IsAny<string>())).Returns(new Response<string>(""));
-            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<VMPP>()
+            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<IVMPolicy>()
             {new VMPP(){opaque_ref = "1",VMs = new List<XenRef<VM>>(){new XenRef<VM>("1")}}});
             action.Completed += action_Completed;
             action.RunAsync();
@@ -79,7 +79,7 @@ namespace XenAdminTests.XenModelTests
         {
             mockProxy.Setup(x => x.vmpp_destroy(It.IsAny<string>(),"1")).Returns(new Response<string>(""));
             mockProxy.Setup(x => x.vm_set_protection_policy(It.IsAny<string>(),  It.Is<string>(s=>s=="1"||s=="2"), It.IsAny<string>())).Returns(new Response<string>(""));
-            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<VMPP>() 
+            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<IVMPolicy>() 
             { new VMPP() { opaque_ref = "1", VMs = new List<XenRef<VM>>() { new XenRef<VM>("1"), new XenRef<VM>("2") } } });
             action.Completed += action_Completed;
             action.RunAsync();

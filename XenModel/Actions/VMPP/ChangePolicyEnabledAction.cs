@@ -41,8 +41,8 @@ namespace XenAdmin.Actions
 {
     public class ChangePolicyEnabledAction<T> : PureAsyncAction where T : XenObject<T>
     {
-        private T _policy;
-        public ChangePolicyEnabledAction(T policy)
+        private IVMPolicy _policy;
+        public ChangePolicyEnabledAction(IVMPolicy policy)
             : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name))
         {
             _policy = policy;
@@ -51,25 +51,27 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            bool value = !_policy.is_enabled;
             if (typeof(T) == typeof(VMPP))
             {
-                var vmpp = _policy as VMPP;
-                bool value = !vmpp.is_policy_enabled;
-                Description = value ? string.Format(Messages.ENABLING_VMPP, vmpp.Name) : string.Format(Messages.DISABLING_VMPP, vmpp.Name);
-
-                VMPP.set_is_policy_enabled(Session, vmpp.opaque_ref, !vmpp.is_policy_enabled);
-                Description = value ? string.Format(Messages.ENABLED_VMPP, vmpp.Name) : string.Format(Messages.DISABLED_VMPP, vmpp.Name);
+                Description = value ? string.Format(Messages.ENABLING_VMPP, _policy.Name) : string.Format(Messages.DISABLING_VMPP, _policy.Name);
             }
             else
             {
-                var vmss = _policy as VMSS;
-                bool value = !vmss.enabled;
-                Description = value ? string.Format(Messages.ENABLING_VMSS, vmss.Name) : string.Format(Messages.DISABLING_VMSS, vmss.Name);
-
-                VMSS.set_enabled(Session, vmss.opaque_ref, !vmss.enabled);
-                Description = value ? string.Format(Messages.ENABLED_VMSS, vmss.Name) : string.Format(Messages.DISABLED_VMSS, vmss.Name);
+                Description = value ? string.Format(Messages.ENABLING_VMSS, _policy.Name) : string.Format(Messages.DISABLING_VMSS, _policy.Name);
             }
-            
+
+            _policy.set_is_enabled(Session, _policy.opaque_ref, !_policy.is_enabled);
+
+            if (typeof(T) == typeof(VMPP))
+            {
+                Description = value ? string.Format(Messages.ENABLED_VMPP, _policy.Name) : string.Format(Messages.DISABLED_VMPP, _policy.Name);
+            }
+            else
+            {
+                Description = value ? string.Format(Messages.ENABLED_VMSS, _policy.Name) : string.Format(Messages.DISABLED_VMSS, _policy.Name);
+            }
+           
         }
     }
 }

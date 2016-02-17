@@ -188,36 +188,17 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
                 {
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
-                    if (_policy._Type == typeof(VMPP))
-                    {
-                        GetVMPPAlertsAction action = new GetVMPPAlertsAction((VMPP)_policy, 24);
-                        action.Completed += action_Completed;
-                        action.RunAsync();
-                    }
-                    else
-                    {
-                        GetVMSSAlertsAction action = new GetVMSSAlertsAction((VMSS)_policy, 24);
-                        action.Completed += action_Completed;
-                        action.RunAsync();
-                    }
-                    
+                    PureAsyncAction action = _policy.getAlertsAction(_policy, 24) ;                
+                    action.Completed += action_Completed;
+                    action.RunAsync();                   
                 }
                 else if (comboBox1.SelectedIndex == 2)
                 {
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
-                    if (_policy._Type == typeof(VMPP))
-                    {
-                        GetVMPPAlertsAction action = new GetVMPPAlertsAction((VMPP)_policy, 7 * 24);
-                        action.Completed += action_Completed;
-                        action.RunAsync();
-                    }
-                    else
-                    {
-                        GetVMSSAlertsAction action = new GetVMSSAlertsAction((VMSS)_policy, 7 * 24);
-                        action.Completed += action_Completed;
-                        action.RunAsync();
-                    }
+                    PureAsyncAction action = _policy.getAlertsAction(_policy, 7 * 24);
+                    action.Completed += action_Completed;
+                    action.RunAsync();
                 }
             }
         }

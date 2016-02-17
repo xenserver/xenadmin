@@ -61,7 +61,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if (typeof(T) == typeof(VMPP))
+                if (VMGroup<T>.isVMPolicyVMPP)
                 {
                     if (BackupType == vmpp_backup_type.snapshot)
                         return Messages.DISKS_ONLY;
@@ -233,7 +233,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             pictureBoxWarning.Visible = labelWarning.Visible = radioButtonDiskAndMemory.Enabled;
             this.quiesceCheckBox.Enabled = true;
 
-            if (typeof(T) == typeof(VMSS))
+            if (VMGroup<T>.isQuescingSupported)
             {
                 this.quiesceCheckBox.Visible = true;
                 if (this._selectedVMs != null && this._selectedVMs.Count > 0)
@@ -254,7 +254,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 }
                 this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
             }
-            else
+            else /*quiescing snapshots are not supported in VMPP*/
             {
                 this.quiesceCheckBox.Visible = false;
                 this.pictureBoxVSS.Visible = false;
@@ -264,7 +264,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public override AsyncAction SaveSettings()
         {
-            if (typeof(T) == typeof(VMPP))
+            if (VMGroup<T>.isVMPolicyVMPP)
                 _clone.backup_type = BackupType;
             else
                 _cloneVMSS.type = BackupTypeVMSS;
@@ -277,7 +277,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public override void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            if (typeof(T) == typeof(VMPP))
+            if (VMGroup<T>.isVMPolicyVMPP)
             {
                 _clone = (VMPP)clone;
                 RefreshTab(_clone);
@@ -293,7 +293,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if (typeof(T) == typeof(VMPP))
+                if (VMGroup<T>.isVMPolicyVMPP)
                     return BackupType != _clone.backup_type;
                 else
                     return BackupTypeVMSS != _cloneVMSS.type;

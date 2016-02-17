@@ -35,7 +35,7 @@ using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
-
+using XenAdmin.Actions;
 
 namespace XenAPI
 {
@@ -157,6 +157,16 @@ namespace XenAPI
             }
         }
 
+        public override string Name
+        {
+            get { return name_label; }
+        }
+
+        public override string Description
+        {
+            get { return name_description; }
+        }
+
         public bool is_enabled
         {
             get { return this.is_policy_enabled; }
@@ -189,7 +199,36 @@ namespace XenAPI
         {
             get { return RecentAlerts;}
         }
-               
+
+        public bool hasArchive
+        {
+            get { return true; }
+        }
+        
+        public void set_vm_policy(Session session, string _vm, string _value)
+        {
+            VM.set_protection_policy(session, _vm, _value);
+        }
+
+        public void do_destroy(Session session, string _policy)
+        {
+            VMPP.destroy(session, _policy);
+        }
+
+        public string run_now(Session session, string _policy)
+        {
+            return VMPP.protect_now(session, _policy);
+        }
+
+        public void set_is_enabled(Session session, string _policy, bool _is_enabled)
+        {
+            VMPP.set_is_policy_enabled(session, _policy, _is_enabled);
+        }
+
+        public PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow)
+        {
+            return new GetVMPPAlertsAction((VMPP)policy, hoursfromnow);
+        }
 
         public string alarm_config_smtp_server
         {

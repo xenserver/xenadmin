@@ -50,12 +50,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public NewPolicyWizardSpecific(Pool pool)
             :base(pool)
         {
+            this.Text = VMGroup<T>.VMPolicyWizardTitle;
 
-            xenTabPagePolicy = typeof(T) == typeof(VMPP) ? new NewPolicyPolicyNamePage(Messages.NEW_VMPP_PAGE_TEXT) : new NewPolicyPolicyNamePage(Messages.NEW_VMSS_PAGE_TEXT);
+            xenTabPagePolicy = new NewPolicyPolicyNamePage(VMGroup<T>.VMPolicyNamePageText);
             xenTabPageSnapshotType = new NewPolicySnapshotTypePageSpecific<T>();
             xenTabPageVMsPage = new NewVMGroupVMsPage<T>();
-            xenTabPageFinish = typeof(T) == typeof(VMPP) ? new NewPolicyFinishPage(Messages.VMPP_FINISH_PAGE_TEXT, Messages.VMPP_FINISH_PAGE_CHECKBOX_TEXT)
-                : new NewPolicyFinishPage(Messages.VMSS_FINISH_PAGE_TEXT, Messages.VMSS_FINISH_PAGE_CHECKBOX_TEXT);
+            xenTabPageFinish = new NewPolicyFinishPage(VMGroup<T>.VMPolicyFinishPageText, VMGroup<T>.VMPolicyFinishPageCheckboxText);
             xenTabPageRBAC = new RBACWarningPage();
             xenTabPageVMsPage.Pool = pool;
             
@@ -67,16 +67,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             else
             {
                 RBACWarningPage.WizardPermissionCheck check;
-                if (typeof(T) == typeof(VMPP))
-                {
-                    check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VMPP);
-                    check.AddApiCheck("VMPP.async_create");
-                }
-                else
-                {
-                    check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VMSS);
-                    check.AddApiCheck("VMSS.async_create");
-                }
+                check = new RBACWarningPage.WizardPermissionCheck(VMGroup<T>.VMPolicyRBACWarning);
+                check.AddApiCheck(VMGroup<T>.VMPolicyRBACapiCheck);
                 check.Blocking = true;
                 xenTabPageRBAC.AddPermissionChecks(xenConnection, check);
                 AddPage(xenTabPageRBAC, 0);
@@ -86,7 +78,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             AddPages(xenTabPagePolicy, xenTabPageVMsPage);
             AddPage(xenTabPageSnapshotType);
                        
-            if (typeof(T) == typeof(VMPP))
+            if (VMGroup<T>.isVMPolicyVMPP)
             {
                 xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage(false);
                 xenTabPageSnapshotFrequency.Pool = pool;
@@ -100,15 +92,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 xenTabPageEmail.Pool = pool;
                 AddPages(xenTabPageEmail);
 
-                this.Text = Messages.VMPP_WIZARD_TITLE;
             }
             else /*VMSS*/
             {
                 xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage(true);
                 xenTabPageSnapshotFrequency.Pool = pool;
                 AddPages(xenTabPageSnapshotFrequency);
-
-                this.Text = Messages.VMSS_WIZARD_TITLE;
             }
             AddPages(xenTabPageFinish);
         }
@@ -122,7 +111,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private new string GetSummary()
         {
 
-            if (typeof(T) == typeof(VMPP))
+            if (VMGroup<T>.isVMPolicyVMPP)
             {
                 return string.Format(Messages.POLICY_SUMMARY.Replace("\\n", "\n").Replace("\\r", "\r"), xenTabPagePolicy.PolicyName, CommaSeparated(xenTabPageVMsPage.SelectedVMs),
                                      FormatBackupType(xenTabPageSnapshotType.BackupType),
@@ -232,7 +221,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 xenTabPageVMsPage.GroupName = xenTabPagePolicy.PolicyName;
             }
-            else if (typeof(T) == typeof(VMPP))
+            else if (VMGroup<T>.isVMPolicyVMPP)
             {
                 if (prevPageType == typeof(NewPolicySnapshotFrequencyPage))
                 {
@@ -245,14 +234,14 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     xenTabPageFinish.SelectedVMsCount = xenTabPageVMsPage.SelectedVMs.Count;
                 }
             }
-            else if (typeof(T) == typeof(VMSS))
+            else
             {
                 if (prevPageType == typeof(NewPolicySnapshotFrequencyPage))
                 {
                     xenTabPageFinish.Summary = GetSummary();
                     xenTabPageFinish.SelectedVMsCount = xenTabPageVMsPage.SelectedVMs.Count;
                 }
-                else if (prevPageType == typeof(NewVMGroupVMsPage<VMSS>))
+                else if (prevPageType == typeof(NewVMGroupVMsPage<T>))
                 {
                     xenTabPageSnapshotType.SelectedVMs = xenTabPageVMsPage.SelectedVMs;
                 }
@@ -262,7 +251,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         protected override void FinishWizard()
         {
-            if (typeof(T) == typeof(VMPP))
+            if (VMGroup<T>.isVMPolicyVMPP)
             {
                 var vmpp = new VMPP
                 {

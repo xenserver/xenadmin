@@ -35,6 +35,7 @@ using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using XenAdmin.Actions;
 
 namespace XenAPI
 {
@@ -69,6 +70,36 @@ namespace XenAPI
         public List<PolicyAlert> PolicyAlerts
         {
             get { return Alerts; }
+        }
+
+        public bool hasArchive
+        {
+            get { return false; }
+        }
+
+        public void set_vm_policy(Session session, string _vm, string _value)
+        {
+            VM.set_scheduled_snapshot(session, _vm, _value);
+        }
+
+        public void do_destroy(Session session, string _policy)
+        {
+            VMSS.destroy(session, _policy);
+        }
+
+        public string run_now(Session session, string _policy)
+        {
+            return VMSS.snapshot_now(session, _policy);
+        }
+
+        public void set_is_enabled(Session session, string _policy, bool _is_enabled)
+        {
+            VMSS.set_enabled(session, _policy, _is_enabled);
+        }
+
+        public PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow)
+        {
+            return new GetVMSSAlertsAction((VMSS)policy, hoursfromnow);
         }
 
         public DateTime GetNextRunTime()

@@ -35,6 +35,7 @@ using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using XenAdmin.Actions;
 
 /* Interface that will be implemented by VMSS and VMPP XenObjects*/
 namespace XenAPI
@@ -54,5 +55,12 @@ namespace XenAPI
         DateTime _GetNextArchiveRunTime();
         Type _Type { get; }
         List<PolicyAlert> PolicyAlerts { get; }
+        bool hasArchive { get; }
+        void set_vm_policy(Session session, string _vm, string _value);
+        void do_destroy(Session session, string _policy);
+        string run_now(Session session, string _policy);
+        string opaque_ref { get; }
+        void set_is_enabled(Session session, string _policy, bool _is_enabled);
+        PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow);
      }
 }

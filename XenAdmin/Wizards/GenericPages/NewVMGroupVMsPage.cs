@@ -186,7 +186,7 @@ namespace XenAdmin.Wizards.GenericPages
                 Cells.Add(_nameCell);
                 Cells.Add(_descriptionCell);
                 Cells.Add(_currentGroupCell);
-                if(typeof(T) == typeof(VMSS))
+                if (VMGroup<T>.isQuescingSupported)
                 {
                     _quiesce_supported = new DataGridViewTextBoxCell();
                     Cells.Add(_quiesce_supported);
@@ -201,7 +201,7 @@ namespace XenAdmin.Wizards.GenericPages
                 _descriptionCell.Value = Vm.Description;
                 T group = Vm.Connection.Resolve(VMGroup<T>.VmToGroup(Vm));
                 _currentGroupCell.Value = group == null ? Messages.NONE : group.Name;
-                if(typeof(T) == typeof(VMSS))
+                if(VMGroup<T>.isQuescingSupported)
                 {
                     if (Vm.allowed_operations.Contains((vm_operations.snapshot_with_quiesce)) && !Helpers.FeatureForbidden(Vm, Host.RestrictVss))
                     {
@@ -218,7 +218,7 @@ namespace XenAdmin.Wizards.GenericPages
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-            if(typeof(T) == typeof(VMPP))
+            if (!VMGroup<T>.isQuescingSupported)
             {
                 this.dataGridView1.Columns["ColumnQuiesceSupported"].Visible = false;
             }

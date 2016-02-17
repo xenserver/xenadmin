@@ -41,59 +41,34 @@ namespace XenAdmin.Actions
 {
     public class DestroyPolicyAction <T> :PureAsyncAction where T: XenObject<T>
     {
-        private List<T> _selectedToDelete;
-        public DestroyPolicyAction(IXenConnection connection,List<T> deleteVMPPs) : base(connection, Messages.DELETE_POLICIES)
+        private List<IVMPolicy> _selectedToDelete;
+        public DestroyPolicyAction(IXenConnection connection,List<IVMPolicy> deletePolicies) : base(connection, Messages.DELETE_POLICIES)
         {
-            _selectedToDelete = deleteVMPPs;
+            _selectedToDelete = deletePolicies;
             Pool = Helpers.GetPool(connection);
         }
 
         protected override void Run()
         {
-            if (typeof(T) == typeof(VMPP))
+
+            foreach (var policy in _selectedToDelete)
             {
-                var selectedToDelete = _selectedToDelete as List<VMPP>;
-                foreach (var vmpp in selectedToDelete)
+                Description = typeof(T) == typeof(VMPP) ? string.Format(Messages.DELETING_VMPP, policy.Name) : string.Format(Messages.DELETING_VMSS, policy.Name);
+                foreach (var vmref in policy.VMs)
                 {
-                    Description = string.Format(Messages.DELETING_VMPP, vmpp.Name);
-                    foreach (var vmref in vmpp.VMs)
-                    {
-                        VM.set_protection_policy(Session, vmref.opaque_ref, null);
-                    }
-                    try
-                    {
-                        VMPP.destroy(Session, vmpp.opaque_ref);
-                    }
-                    catch (Exception e)
-                    {
-                        if (!e.Message.StartsWith("Object has been deleted"))
-                            throw e;
-                    }
+                    policy.set_vm_policy(Session, vmref.opaque_ref, null);
                 }
-                Description = Messages.DELETED_VMPP;
-            }
-            else
-            {
-                var selectedToDelete = _selectedToDelete as List<VMSS>;
-                foreach (var vmss in selectedToDelete)
+                try
                 {
-                    Description = string.Format(Messages.DELETING_VMSS, vmss.Name);
-                    foreach (var vmref in vmss.VMs)
-                    {
-                        VM.set_scheduled_snapshot(Session, vmref.opaque_ref, null);
-                    }
-                    try
-                    {
-                        VMSS.destroy(Session, vmss.opaque_ref);
-                    }
-                    catch (Exception e)
-                    {
-                        if (!e.Message.StartsWith("Object has been deleted"))
-                            throw e;
-                    }
+                    policy.do_destroy(Session, policy.opaque_ref);
                 }
-                Description = Messages.DELETED_VMSS;
+                catch (Exception e)
+                {
+                    if (!e.Message.StartsWith("Object has been deleted"))
+                        throw e;
+                }
             }
+            Description = typeof(T) == typeof(VMPP) ? Messages.DELETED_VMPP : Messages.DELETED_VMSS;
         }
     }
 }

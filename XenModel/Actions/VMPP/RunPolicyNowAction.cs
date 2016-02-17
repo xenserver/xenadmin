@@ -38,8 +38,8 @@ namespace XenAdmin.Actions
 {
     public class RunPolicyNowAction<T> : PureAsyncAction where T : XenObject<T>
     {
-        private T _policy;
-        public RunPolicyNowAction(T policy)
+        private IVMPolicy _policy;
+        public RunPolicyNowAction(IVMPolicy policy)
             : base(policy.Connection, string.Format(Messages.RUN_POLICY, policy.Name))
         {
             _policy = policy;
@@ -48,18 +48,9 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            if (typeof(T) == typeof(VMPP))
-            {
-                var _vmpp = _policy as VMPP;
-                Result = VMPP.protect_now(Session, _vmpp.opaque_ref);
-                Description = string.Format(Messages.RUN_POLICY_STARTED, _vmpp.Name);
-            }
-            else
-            {
-                var _vmss = _policy as VMSS;
-                Result = VMSS.snapshot_now(Session, _vmss.opaque_ref);
-                Description = string.Format(Messages.RUN_POLICY_STARTED, _vmss.Name);
-            }
+            var _vmpp = _policy as VMPP;
+            Result = _policy.run_now(Session, _policy.opaque_ref);
+            Description = string.Format(Messages.RUN_POLICY_STARTED, _policy.Name);
         }
     }
 }

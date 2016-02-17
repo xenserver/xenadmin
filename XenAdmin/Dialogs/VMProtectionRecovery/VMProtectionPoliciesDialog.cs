@@ -121,7 +121,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                 _status.Value = _Policy.is_enabled ? Messages.ENABLED : Messages.DISABLED;
                 if (_Policy.is_running)
                     _status.Value = Messages.RUNNING_SNAPSHOTS;
-                if (this._Policy._Type == typeof(VMPP))
+                if (this._Policy.hasArchive)
                 {
                     if (_Policy.is_archiving)
                         _status.Value = Messages.RUNNING_ARCHIVE;
@@ -139,7 +139,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
                                          ? HelpersGUI.DateTimeToString(nextRunTime.Value, Messages.DATEFORMAT_DMY_HM,
                                                                        true)
                                          : Messages.VM_PROTECTION_POLICY_HOST_NOT_LIVE;
-                if (this._Policy._Type == typeof(VMPP))
+                if (this._Policy.hasArchive)
                 {
                     DateTime? nextArchiveRuntime = GetVMPPDateTime(() => _Policy._GetNextArchiveRunTime());
                     _nextArchiveRuntime.Value = nextArchiveRuntime.HasValue
@@ -165,52 +165,30 @@ namespace XenAdmin.Dialogs.VMPolicies
             : base(pool)
         {
             RefreshPoolTitle(pool);
-            if(typeof(T) == typeof(VMPP))
+            if (VMGroup<T>.isVMPolicyVMPP)
                 SetupDeprecationBanner();
+
         }
         private void RefreshPoolTitle(Pool pool)
         {
             int protectedVMs = 0;
             int realVMs = 0;
-            
-            if (typeof(T) == typeof(VMPP))
-            {
-                foreach (var vm in pool.Connection.Cache.VMs)
-                {
-                    if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
-                    {
-                        realVMs++;
-                        if (vm.Connection.Resolve(vm.protection_policy) != null)
-                            protectedVMs++;
-                    }
-                }
 
-                this.Text = Messages.VMPP_DIALOG_TITLE;
-                label2.Text = Messages.VMPP_DIALOG_TEXT;
-                labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
-                                                          ? Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
-                                                          : Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
-                                                      pool.Name.Ellipsise(45), protectedVMs, realVMs);
-            }
-            else
+            foreach (var vm in pool.Connection.Cache.VMs)
             {
-                foreach (var vm in pool.Connection.Cache.VMs)
+                if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
                 {
-                    if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
-                    {
-                        realVMs++;
-                        if (vm.Connection.Resolve(vm.scheduled_snapshot) != null)
-                            protectedVMs++;
-                    }
+                    realVMs++;
+                    if (vm.Connection.Resolve(VMGroup<T>.VmToGroup(vm)) != null)
+                        protectedVMs++;
                 }
-
-                this.Text = Messages.VMSS_DIALOG_TITLE;
-                label2.Text = Messages.VMSS_DIALOG_TEXT;
-                labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
-                                                      ? Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
-                                                      : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
-                                                  pool.Name.Ellipsise(45), protectedVMs, realVMs);
             }
+            this.Text = VMGroup<T>.VMPolicyDialogTitle;
+            label2.Text = VMGroup<T>.VMPolicyDialogText;
+            labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
+                                                        ? VMGroup<T>.VMPolicyDialogSchedulesInPool
+                                                        : VMGroup<T>.VMPolicyDialogSchedulesInServer,
+                                                    pool.Name.Ellipsise(45), protectedVMs, realVMs);
         }
 
         void VMPPCollectionChanged(object sender, EventArgs e)
@@ -223,36 +201,31 @@ namespace XenAdmin.Dialogs.VMPolicies
             dataGridView1.SuspendLayout();
             var selectedPolicy = currentSelected;
             dataGridView1.Rows.Clear();
-            if (typeof(T) == typeof(VMPP))
+
+            foreach (var policy in VMGroup<T>.VMPolicies(Pool.Connection.Cache))
             {
-                foreach (var policy in Pool.Connection.Cache.VMPPs)
+                if (!VMGroup<T>.isVMPolicyVMPP)
                 {
-                    if (dataGridView1.ColumnCount > 0)
-                        dataGridView1.Rows.Add(new PolicyRow(policy));
-                }
-            }
-            else
-            {
-                foreach (var policy in Pool.Connection.Cache.VMSSs)
-                {
-                    /*Populate the alerts from Messages by filtering out the alerts for this schedule*/
+                    /*for VMSS: Populate the alerts from Messages by filtering out the alerts for this schedule
+                     This is not required in VMPP as the VMPP record itself has the recentAlerts */
                     foreach (var message in Pool.Connection.Cache.Messages)
                     {
                         if (message.cls == cls.VMSS && message.obj_uuid == policy.uuid)
                         {
                             if (message.Type == XenAPI.Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED)
                             {
-                                policy.Alerts.Add(new PolicyAlert(Pool.Connection, message.body));
+                                policy.PolicyAlerts.Add(new PolicyAlert(Pool.Connection, message.body));
                             }
                             else
                             {
-                                policy.Alerts.Add(new PolicyAlert(message.name, message.timestamp));
+                                policy.PolicyAlerts.Add(new PolicyAlert(message.name, message.timestamp));
                             }
                         }
                     }
-                    if (dataGridView1.ColumnCount > 0)
-                        dataGridView1.Rows.Add(new PolicyRow(policy));
                 }
+
+                if (dataGridView1.ColumnCount > 0)
+                    dataGridView1.Rows.Add(new PolicyRow(policy));
             }
             RefreshButtons();
             if (selectedPolicy != null)
@@ -285,7 +258,7 @@ namespace XenAdmin.Dialogs.VMPolicies
 
         protected override void VMProtectionPoliciesDialog_Load(object sender, EventArgs e)
         {
-            if (typeof(T) == typeof(VMSS))
+            if (!VMGroup<T>.isVMPolicyVMPP)
             {
                 this.dataGridView1.Columns["ColumnNextArchive"].Visible = false;
             }
@@ -296,12 +269,12 @@ namespace XenAdmin.Dialogs.VMPolicies
 
         protected override void buttonDelete_Click(object sender, EventArgs e)
         {
-            var selectedPolicies = new List<T>();
+            var selectedPolicies = new List<IVMPolicy>();
             int numberOfProtectedVMs = 0;
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 var policy = (((PolicyRow)row)._Policy);
-                selectedPolicies.Add((T)policy);
+                selectedPolicies.Add(policy);
                 numberOfProtectedVMs += policy.VMs.Count;
 
             }
@@ -362,7 +335,7 @@ namespace XenAdmin.Dialogs.VMPolicies
         {
             if (currentSelected != null)
             {
-                var action = new ChangePolicyEnabledAction<T>((T)currentSelected);
+                var action = new ChangePolicyEnabledAction<T>(currentSelected);
                 action.RunAsync();
             }
         }
@@ -372,7 +345,7 @@ namespace XenAdmin.Dialogs.VMPolicies
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 var policy = ((PolicyRow)dataGridView1.SelectedRows[0])._Policy;
-                var action = new RunPolicyNowAction<T>((T)policy);
+                var action = new RunPolicyNowAction<T>(policy);
                 action.Completed += action_Completed;
                 buttonRunNow.Enabled = false;
                 action.RunAsync();

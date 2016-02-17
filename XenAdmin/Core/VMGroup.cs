@@ -46,14 +46,14 @@ using XenAPI;
 namespace XenAdmin.Core
 {
     /// <summary>
-    /// A helper class for dealing with a group of VMs (currently either a VMPP or a vApp);
+    /// A helper class for dealing with a group of VMs (currently either a VMPP, VMSS or a vApp);
     /// it contains all the functions necessary to abstract away what type of group it is.
     /// 
     /// In C++, we would use template specialization for this, but C# generics don't have that, so we
     /// end up switching on T. It's ugly, but it's the way that maximises the amount of shared code.
     /// </summary>
 
-    internal static class VMGroup<T> where T : XenObject<T>
+    static class VMGroup<T> where T : XenObject<T>
     {
         // This section covers all the functions that depend on the type of group we're talking about.
 
@@ -201,6 +201,79 @@ namespace XenAdmin.Core
         internal static Predicate<Host> FeatureRestricted
         {
             get { return typeof(T) == typeof(VMPP) ? (Predicate<Host>)Host.RestrictVMProtection : (typeof(T) == typeof(VMSS) ? ((Predicate<Host>)Host.RestrictVMSnapshotSchedule) : (Predicate<Host>)Host.RestrictVMAppliances); }
+        }
+
+        internal static string VMPolicyDialogTitle
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_DIALOG_TITLE : Messages.VMSS_DIALOG_TITLE; }
+        }
+
+        internal static string VMPolicyDialogText
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_DIALOG_TEXT : Messages.VMSS_DIALOG_TEXT; }
+        }
+
+        internal static string VMPolicyDialogSchedulesInPool
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL; }
+        }
+
+        internal static string VMPolicyDialogSchedulesInServer
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER; }
+        }
+
+        internal static IVMPolicy[] VMPolicies (ICache cache)
+        {
+            if (typeof(T) == typeof(VMPP))
+                return cache.VMPPs;
+            else
+                return cache.VMSSs;
+        }
+
+        internal static bool isQuescingSupported
+        { 
+            get { return typeof(T) == typeof(VMPP) ? false : true; } 
+        }
+
+        internal static string VMPolicyNamePageText
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.NEW_VMPP_PAGE_TEXT : Messages.NEW_VMSS_PAGE_TEXT; }
+        }
+
+        internal static string VMPolicyFinishPageText
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_FINISH_PAGE_TEXT : Messages.VMSS_FINISH_PAGE_TEXT; }
+        }
+
+        internal static string VMPolicyFinishPageCheckboxText
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_FINISH_PAGE_CHECKBOX_TEXT : Messages.VMSS_FINISH_PAGE_CHECKBOX_TEXT; }
+        }
+
+        internal static string VMPolicyRBACWarning
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.RBAC_WARNING_VMPP : Messages.RBAC_WARNING_VMSS; }
+        }
+
+        internal static string VMPolicyRBACapiCheck
+        {
+            get { return typeof(T) == typeof(VMPP) ? "VMPP.async_create" : "VMSS.async_create"; }
+        }
+
+        internal static string VMPolicyWizardTitle
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_WIZARD_TITLE : Messages.VMSS_WIZARD_TITLE; }
+        }
+
+        internal static bool isVMPolicyVMPP
+        {
+            get { return typeof(T) == typeof(VMPP) ? true : false; }
+        }
+
+        internal static string VMAssigningPolicy
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.ASSIGNING_PROTECTION_POLICY : Messages.ASSIGNING_VMSS_POLICY; }
         }
     }
 }
