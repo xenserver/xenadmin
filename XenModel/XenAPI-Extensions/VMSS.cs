@@ -161,54 +161,17 @@ namespace XenAPI
 
         private static DateTime GetDailyDate(DateTime time, int min, int hour)
         {
-            var nextDateTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
-            if (time > nextDateTime)
-                nextDateTime = nextDateTime.AddDays(1);
-            return nextDateTime;
+            return VMPP.GetDailyDate(time, min, hour);
         }
 
         private static DateTime GetHourlyDate(DateTime time, int min)
         {
-            var nextDateTime = new DateTime(time.Year, time.Month, time.Day, time.Hour, min, 0);
-            if (time > nextDateTime)
-                nextDateTime = nextDateTime.AddHours(1);
-            return nextDateTime;
+            return VMPP.GetHourlyDate(time, min);
         }
 
         public static DateTime GetWeeklyDate(DateTime time, int hour, int min, List<DayOfWeek> listDaysOfWeek)
         {
-            listDaysOfWeek.Sort();
-
-            int daysOfDifference;
-            DayOfWeek today = time.DayOfWeek;
-
-            int nextDay = listDaysOfWeek.FindIndex(x => x >= time.DayOfWeek);
-
-            // No scheduled days later in the week: take first day next week
-            if (nextDay < 0)
-            {
-                daysOfDifference = 7 - (today - listDaysOfWeek[0]);
-            }
-            else
-            {
-                daysOfDifference = listDaysOfWeek[nextDay] - today;
-
-                // Today is a scheduled day: but is the time already past?
-                if (daysOfDifference == 0)
-                {
-                    var todaysScheduledTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
-                    if (time > todaysScheduledTime)
-                    {
-                        // Yes, the time is already past. Find the next day in the schedule instead.
-                        if (listDaysOfWeek.Count == nextDay + 1)  // we're at the last scheduled day in the week: go to next week
-                            daysOfDifference = 7 - (today - listDaysOfWeek[0]);
-                        else
-                            daysOfDifference = listDaysOfWeek[nextDay + 1] - today;
-                    }
-                }
-            }
-            return (new DateTime(time.Year, time.Month, time.Day, hour, min, 0)).AddDays(daysOfDifference);
-
+            return VMPP.GetWeeklyDate(time, hour, min, listDaysOfWeek);
         }
 
         public IEnumerable<DayOfWeek> DaysOfWeekBackup
@@ -251,21 +214,11 @@ namespace XenAPI
             get { return name_description; }
         }
 
-        private string TryGetKey(Dictionary<string, string> dict, string key)
-        {
-            string r;
-            if (dict.TryGetValue(key, out r))
-            {
-                return r;
-            }
-            return "";
-        }
-
         public string backup_schedule_min
         {
             get
             {
-                return TryGetKey(schedule, "min");
+                return VMPP.TryGetKey(schedule, "min");
             }
         }
 
@@ -274,7 +227,7 @@ namespace XenAPI
             get
             {
 
-                return TryGetKey(schedule, "hour");
+                return VMPP.TryGetKey(schedule, "hour");
             }
         }
 
@@ -283,7 +236,7 @@ namespace XenAPI
             get
             {
 
-                return TryGetKey(schedule, "days");
+                return VMPP.TryGetKey(schedule, "days");
             }
         }
         private List<PolicyAlert> _alerts = new List<PolicyAlert>();
@@ -301,20 +254,6 @@ namespace XenAPI
             }
             set { _alerts = value; }
         }
-
-        /*public List<PolicyAlert> RecentAlerts
-        {
-            get
-            {
-                List<PolicyAlert> result = new List<PolicyAlert>();
-                foreach (var body in _alerts)
-                {
-                    result.Add(new PolicyAlert(Connection, body.Text));
-                }
-                return result;
-            }
-        }
-         */
 
         public string LastResult
         {

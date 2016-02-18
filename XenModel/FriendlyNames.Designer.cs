@@ -4878,7 +4878,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scheduled snapshot failed: insufficient license for Scheduled snapshot.
+        ///   Looks up a localized string similar to Scheduled snapshot failed: insufficient license for Scheduled snapshots.
         /// </summary>
         public static string Message_name_vmss_license_error {
             get {
@@ -4905,7 +4905,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot Schedule failed: snapshot could not be created.
+        ///   Looks up a localized string similar to Scheduled snapshot failed: snapshot could not be created.
         /// </summary>
         public static string Message_name_vmss_snapshot_missed_event {
             get {

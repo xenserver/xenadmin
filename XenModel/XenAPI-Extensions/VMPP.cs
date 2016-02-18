@@ -67,7 +67,7 @@ namespace XenAPI
 
         }
 
-        private static DateTime GetDailyDate(DateTime time, int min, int hour)
+        public static DateTime GetDailyDate(DateTime time, int min, int hour)
         {
             var nextDateTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
             if (time > nextDateTime)
@@ -75,7 +75,7 @@ namespace XenAPI
             return nextDateTime;
         }
 
-        private static DateTime GetHourlyDate(DateTime time, int min)
+        public static DateTime GetHourlyDate(DateTime time, int min)
         {
             var nextDateTime = new DateTime(time.Year, time.Month, time.Day, time.Hour, min, 0);
             if (time > nextDateTime)
@@ -272,7 +272,7 @@ namespace XenAPI
             }
         }
 
-        private string TryGetKey(Dictionary<string, string> dict, string key)
+        public static string TryGetKey(Dictionary<string, string> dict, string key)
         {
             string r;
             if (dict.TryGetValue(key, out r))
