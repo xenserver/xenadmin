@@ -55,12 +55,9 @@ namespace XenAPI
         {
             get { return false; }
         }
-        public DateTime _GetNextRunTime()
+        public DateTime GetNextArchiveRunTime()
         {
-            return this.GetNextRunTime();
-        }
-        public DateTime _GetNextArchiveRunTime()
-        {
+            /*Not supported*/
             return new DateTime();
         }
         public Type _Type
@@ -100,6 +97,40 @@ namespace XenAPI
         public PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow)
         {
             return new GetVMSSAlertsAction((VMSS)policy, hoursfromnow);
+        }
+
+        public policy_frequency policy_frequency 
+        {
+            get { return ((policy_frequency)(frequency)); }
+            set { frequency = (vmss_frequency)value; }
+        }
+
+        public Dictionary<string, string> policy_schedule
+        {
+            get { return schedule; }
+            set { schedule = value; }
+        }
+
+        public long policy_retention
+        {
+            get { return retained_snapshots; }
+            set { retained_snapshots = value; }
+        }
+
+        public policy_backup_type policy_type
+        {
+            get { return (policy_backup_type)type; }
+            set { type = (vmss_type)value; }
+        }
+
+        public XenRef<Task> async_task_create(Session session)
+        {
+            return VMSS.async_create(session, (VMSS)this);
+        }
+
+        public void set_policy(Session session, string _vm, string _value)
+        {
+            VM.set_snapshot_schedule(session, _vm, _value);
         }
 
         public DateTime GetNextRunTime()

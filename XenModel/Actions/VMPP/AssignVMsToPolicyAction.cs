@@ -75,10 +75,10 @@ namespace XenAdmin.Actions
         private IVMPolicy _policy;
 
         public RemoveVMsFromPolicyAction(IVMPolicy policy, List<XenRef<VM>> selectedVMs)
-            : base(policy.Connection, selectedVMs.Count == 1 ?
-            (typeof(T) == typeof(VMPP) ? string.Format(Messages.REMOVE_VM_FROM_POLICY, policy.Connection.Resolve(selectedVMs[0]), policy.Name) :
-                                          string.Format(Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name))
-            : (typeof(T) == typeof(VMPP) ? string.Format(Messages.REMOVE_VMS_FROM_POLICY, policy.Name) : string.Format(Messages.REMOVE_VMS_FROM_VMSS, policy.Name)))
+            : base(policy.Connection, 
+            selectedVMs.Count == 1 ?
+            string.Format(typeof(T) == typeof(VMPP) ? Messages.REMOVE_VM_FROM_POLICY : Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name) :
+            string.Format(typeof(T) == typeof(VMPP) ? Messages.REMOVE_VMS_FROM_POLICY : Messages.REMOVE_VMS_FROM_VMSS, policy.Name))
         {
             _policy = policy;
             _selectedVMs = selectedVMs;

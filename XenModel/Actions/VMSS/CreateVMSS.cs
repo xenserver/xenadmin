@@ -50,7 +50,7 @@ namespace XenAdmin.Actions
             _runNow = runNow;
             Pool = Helpers.GetPool(record.Connection);
             ApiMethodsToRoleCheck.Add("VMSS.async_create");
-            ApiMethodsToRoleCheck.Add("VM.set_scheduled_snapshot");
+            ApiMethodsToRoleCheck.Add("VM.set_snapshot_schedule");
             ApiMethodsToRoleCheck.Add("VMSS.snapshot_now");
         }
 

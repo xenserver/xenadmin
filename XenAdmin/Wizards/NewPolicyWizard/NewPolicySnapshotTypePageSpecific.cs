@@ -61,24 +61,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if (VMGroup<T>.isVMPolicyVMPP)
-                {
-                    if (BackupType == vmpp_backup_type.snapshot)
-                        return Messages.DISKS_ONLY;
-                    else
-                    {
-                        return Messages.DISKS_AND_MEMORY;
-                    }
-                }
+                if (BackupType == policy_backup_type.snapshot)
+                    return Messages.DISKS_ONLY;
+                else if (BackupType == policy_backup_type.snapshot_with_quiesce)
+                    return Messages.QUIESCED_SNAPSHOTS;
                 else
-                {
-                    if (BackupTypeVMSS == vmss_type.snapshot)
-                        return Messages.DISKS_ONLY;
-                    else if (BackupTypeVMSS == vmss_type.snapshot_with_quiesce)
-                        return Messages.QUIESCED_SNAPSHOTS;
-                    else
-                        return Messages.DISKS_AND_MEMORY;
-                }
+                    return Messages.DISKS_AND_MEMORY;
             }
         
         }
@@ -159,71 +147,42 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        public vmpp_backup_type BackupType
-        {
-            get
-            {
-                if (radioButtonDiskOnly.Checked)
-                    return vmpp_backup_type.snapshot;
-                else if (radioButtonDiskAndMemory.Checked)
-                    return vmpp_backup_type.checkpoint;
-                else
-                {
-                    return vmpp_backup_type.unknown;
-                }
-            }
-        }
-
-        public vmss_type BackupTypeVMSS
+        public policy_backup_type BackupType
         {
             get
             {
                 if (quiesceCheckBox.Checked)
-                    return vmss_type.snapshot_with_quiesce;
+                    return policy_backup_type.snapshot_with_quiesce;
                 if (radioButtonDiskOnly.Checked)
-                    return vmss_type.snapshot;
+                    return policy_backup_type.snapshot;
                 else if (radioButtonDiskAndMemory.Checked)
-                    return vmss_type.checkpoint;
+                    return policy_backup_type.checkpoint;
                 else
                 {
-                    return vmss_type.unknown;
+                    return policy_backup_type.unknown;
                 }
             }
         }
 
-        private void RefreshTab(VMPP vmpp)
+        private void RefreshTab(IVMPolicy policy)
         {
-            switch (vmpp.backup_type)
+            switch (policy.policy_type)
             {
-                case vmpp_backup_type.checkpoint:
-                    radioButtonDiskAndMemory.Checked = true;
-                    break;
-                case vmpp_backup_type.snapshot:
-                    radioButtonDiskOnly.Checked = true;
-                    break;
-            }
-            EnableShapshotTypes(vmpp.Connection);
-        }
-
-        private void RefreshTabVMSS(VMSS vmss)
-        {
-            switch (vmss.type)
-            {
-                case vmss_type.checkpoint:
+                case policy_backup_type.checkpoint:
                     radioButtonDiskAndMemory.Checked = true;
                     quiesceCheckBox.Enabled = false;
                     break;
-                case vmss_type.snapshot:
+                case policy_backup_type.snapshot:
                     radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     break;
-                case vmss_type.snapshot_with_quiesce:
+                case policy_backup_type.snapshot_with_quiesce:
                     radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     quiesceCheckBox.Checked = true;
                     break;
             }
-            EnableShapshotTypes(vmss.Connection);
+            EnableShapshotTypes(policy.Connection);
         }
 
         private void EnableShapshotTypes(IXenConnection connection)
@@ -264,39 +223,23 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public override AsyncAction SaveSettings()
         {
-            if (VMGroup<T>.isVMPolicyVMPP)
-                _clone.backup_type = BackupType;
-            else
-                _cloneVMSS.type = BackupTypeVMSS;
-            
+            _policy.policy_type = BackupType;         
             return null;
         }
 
-        private VMPP _clone;
-        private VMSS _cloneVMSS;
+        private IVMPolicy _policy;
 
         public override void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            if (VMGroup<T>.isVMPolicyVMPP)
-            {
-                _clone = (VMPP)clone;
-                RefreshTab(_clone);
-            }
-            else
-            {
-                _cloneVMSS = (VMSS)clone;
-                RefreshTabVMSS(_cloneVMSS);
-            }
+            _policy = (IVMPolicy)clone;
+            RefreshTab(_policy);
         }
 
         public override bool HasChanged
         {
             get
             {
-                if (VMGroup<T>.isVMPolicyVMPP)
-                    return BackupType != _clone.backup_type;
-                else
-                    return BackupTypeVMSS != _cloneVMSS.type;
+                return BackupType != _policy.policy_type;
             }
 
         }

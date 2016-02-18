@@ -52,25 +52,13 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             bool value = !_policy.is_enabled;
-            if (typeof(T) == typeof(VMPP))
-            {
-                Description = value ? string.Format(Messages.ENABLING_VMPP, _policy.Name) : string.Format(Messages.DISABLING_VMPP, _policy.Name);
-            }
-            else
-            {
-                Description = value ? string.Format(Messages.ENABLING_VMSS, _policy.Name) : string.Format(Messages.DISABLING_VMSS, _policy.Name);
-            }
+            Description = value ? string.Format(typeof(T) == typeof(VMPP) ? Messages.ENABLING_VMPP : Messages.ENABLING_VMSS, _policy.Name) :
+                string.Format(typeof(T) == typeof(VMPP) ? Messages.DISABLING_VMPP : Messages.DISABLING_VMSS, _policy.Name);
 
             _policy.set_is_enabled(Session, _policy.opaque_ref, !_policy.is_enabled);
 
-            if (typeof(T) == typeof(VMPP))
-            {
-                Description = value ? string.Format(Messages.ENABLED_VMPP, _policy.Name) : string.Format(Messages.DISABLED_VMPP, _policy.Name);
-            }
-            else
-            {
-                Description = value ? string.Format(Messages.ENABLED_VMSS, _policy.Name) : string.Format(Messages.DISABLED_VMSS, _policy.Name);
-            }
+            Description = value ? string.Format(typeof(T) == typeof(VMPP) ? Messages.ENABLED_VMPP : Messages.ENABLED_VMSS, _policy.Name) :
+                string.Format(typeof(T) == typeof(VMPP) ? Messages.DISABLED_VMPP : Messages.DISABLED_VMSS, _policy.Name);
            
         }
     }

@@ -191,11 +191,18 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
         void action_Completed(ActionBase sender)
         {
-            var action = (GetVMPPAlertsAction)sender;
+            var action = sender;
             Program.Invoke(Program.MainWindow, () =>
             {
                 panelLoading.Visible = false;
-                RefreshGrid(action.VMPP.Alerts);
+                if (_policy._Type == typeof(VMPP))
+                {
+                    RefreshGrid(((GetVMPPAlertsAction)(action)).VMPP.Alerts);
+                }
+                else
+                {
+                    RefreshGrid(((GetVMSSAlertsAction)(action)).VMSS.Alerts);
+                }
             });
         }
 

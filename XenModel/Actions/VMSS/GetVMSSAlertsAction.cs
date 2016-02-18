@@ -52,14 +52,26 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             var now = DateTime.Now;
-            //var result = new List<string>(VMSS.get_alerts(VMSS.Connection.Session, VMSS.opaque_ref, _hoursFromNow));
-            var result = new Dictionary<XenRef<Message>, Message>(Message.get(VMSS.Connection.Session, cls.VMSS, VMSS.uuid, now.Subtract(new TimeSpan(_hoursFromNow,0,0))));
-            
-            var listAlerts=new List<PolicyAlert>();
-            foreach(var item in result)
+            var messages = Pool.Connection.Cache.Messages;
+            var listAlerts = new List<PolicyAlert>();
+
+            /*for VMSS: Populate the alerts from Messages by filtering out the alerts for this schedule
+                This is not required in VMPP as the VMPP record itself has the recentAlerts */
+            foreach (var message in messages)
             {
-                listAlerts.Add(new PolicyAlert(VMSS.Connection, item.Value.body));
+                if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid)
+                {
+                    if (message.Type == XenAPI.Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED)
+                    {
+                        listAlerts.Add(new PolicyAlert(Pool.Connection, message.body));
+                    }
+                    else
+                    {
+                        listAlerts.Add(new PolicyAlert(message.name, message.timestamp));
+                    }
+                }
             }
+
             VMSS.Alerts = new List<PolicyAlert>(listAlerts);
             Debug.WriteLine(string.Format("GetAlerts took: {0}", DateTime.Now - now));
         }

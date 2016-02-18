@@ -182,14 +182,6 @@ namespace XenAPI
             get { return this.is_archive_running; }
         }
 
-        public DateTime _GetNextRunTime()
-        {
-            return this.GetNextRunTime();
-        }
-        public DateTime _GetNextArchiveRunTime()
-        {
-            return this.GetNextArchiveRunTime();
-        }
         public Type _Type
         {
             get {return typeof(VMPP);}
@@ -228,6 +220,40 @@ namespace XenAPI
         public PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow)
         {
             return new GetVMPPAlertsAction((VMPP)policy, hoursfromnow);
+        }
+
+        public policy_frequency policy_frequency
+        {
+            get { return ((policy_frequency)(backup_frequency)); }
+            set { backup_frequency = (vmpp_backup_frequency)value; }
+        }
+
+        public Dictionary<string, string> policy_schedule 
+        {
+            get { return backup_schedule; }
+            set { backup_schedule = value; }
+        }
+
+        public long policy_retention 
+        {
+            get { return backup_retention_value; }
+            set { backup_retention_value = value; }
+        }
+
+        public policy_backup_type policy_type 
+        {
+            get { return (policy_backup_type)backup_type; }
+            set { backup_type = (vmpp_backup_type)value; }
+        }
+
+        public XenRef<Task> async_task_create(Session session)
+        {
+            return VMPP.async_create(session, (VMPP)this);
+        }
+
+        public void set_policy(Session session, string _vm, string _value)
+        {
+            VM.set_protection_policy(session, _vm, _value);
         }
 
         public string alarm_config_smtp_server

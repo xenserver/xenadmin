@@ -40,6 +40,16 @@ using XenAdmin.Actions;
 /* Interface that will be implemented by VMSS and VMPP XenObjects*/
 namespace XenAPI
 {
+    public enum policy_frequency
+    {
+        hourly, daily, weekly, unknown
+    }
+
+    public enum policy_backup_type
+    {
+        snapshot, checkpoint, snapshot_with_quiesce, unknown
+    }
+
     public interface IVMPolicy
     {
         string Name { get; }
@@ -51,8 +61,8 @@ namespace XenAPI
         bool is_running { get; }
         bool is_archiving { get; }
         string LastResult { get;}
-        DateTime _GetNextRunTime();
-        DateTime _GetNextArchiveRunTime();
+        DateTime GetNextRunTime();
+        DateTime GetNextArchiveRunTime();
         Type _Type { get; }
         List<PolicyAlert> PolicyAlerts { get; }
         bool hasArchive { get; }
@@ -62,5 +72,15 @@ namespace XenAPI
         string opaque_ref { get; }
         void set_is_enabled(Session session, string _policy, bool _is_enabled);
         PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow);
+        policy_frequency policy_frequency { get; set; }
+        Dictionary<string, string> policy_schedule { get; set; }
+        long policy_retention { get; set; }
+        string backup_schedule_min { get; }
+        string backup_schedule_hour { get; }
+        string backup_schedule_days { get; }
+        policy_backup_type policy_type { get; set; }
+        XenRef<Task> async_task_create(Session session);
+        void set_policy(Session session, string _vm, string _value);
+
      }
 }

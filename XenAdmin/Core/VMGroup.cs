@@ -275,5 +275,62 @@ namespace XenAdmin.Core
         {
             get { return typeof(T) == typeof(VMPP) ? Messages.ASSIGNING_PROTECTION_POLICY : Messages.ASSIGNING_VMSS_POLICY; }
         }
+
+        internal static AsyncAction VMCreateObjectAction(
+            string _name_label,
+            string _name_description,
+            policy_backup_type _backup_type,
+            policy_frequency _backup_frequency,
+            Dictionary<string, string> _backup_schedule,
+            long _backup_retention_value,
+            vmpp_archive_frequency _archive_frequency,
+            Dictionary<string, string> _archive_target_config,
+            vmpp_archive_target_type _archive_target_type,
+            Dictionary<string, string> _archive_schedule,
+            bool _is_alarm_enabled,           
+            Dictionary<string, string> _alarm_config,
+            bool _is_policy_enabled,
+            List<VM> vms, 
+            bool runNow,
+            IXenConnection _connection)
+        {
+            if (typeof(T) == typeof(VMPP))
+            {
+                var vmpp = new VMPP
+                {
+                    name_label = _name_label,
+                    name_description = _name_description,
+                    backup_type = (vmpp_backup_type)_backup_type,
+                    backup_frequency = (vmpp_backup_frequency)_backup_frequency,
+                    backup_schedule = _backup_schedule,
+                    backup_retention_value = _backup_retention_value,
+                    archive_frequency = _archive_frequency,
+                    archive_target_config = _archive_target_config,
+                    archive_target_type = _archive_target_type,
+                    archive_schedule = _archive_schedule,
+                    is_alarm_enabled = _is_alarm_enabled,
+                    alarm_config = _alarm_config,
+                    is_policy_enabled = _is_policy_enabled,
+                    Connection = _connection
+                };
+                return new CreateVMPolicy<VMPP>(vmpp, vms, runNow);
+            }
+            else
+            {
+                var vmss = new VMSS
+                {
+                    name_label = _name_label,
+                    name_description = _name_description,
+                    type = (vmss_type)_backup_type,
+                    frequency = (vmss_frequency)_backup_frequency,
+                    schedule = _backup_schedule,
+                    retained_snapshots = _backup_retention_value,
+                    enabled = _is_policy_enabled,
+                    Connection = _connection
+                };
+
+                return new CreateVMPolicy<VMSS>(vmss, vms, runNow);
+            }
+        }
     }
 }
