@@ -15,6 +15,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override bool ShowNicColumn { get { return true; } }
 
+        public override string HelpID { get { return "Location_FCOE"; } }
+
         public override LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
         {
             return new FcoeSrDescriptor(device);

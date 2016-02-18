@@ -50,6 +50,8 @@ namespace XenAdmin.Dialogs.HealthCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        internal override string HelpName { get { return "HealthCheckOverviewDialog"; } }
+
         public HealthCheckOverviewDialog()
         {
             InitializeComponent();
