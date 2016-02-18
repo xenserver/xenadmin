@@ -704,7 +704,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", CanForget(sr), false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", CanDestroy(sr), false  ),
-    	            new ExpectedTextMenuItem("&Convert SR...", CanConvertSR(sr), false  ),
+    	                /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", CanConvertSR(sr), false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
