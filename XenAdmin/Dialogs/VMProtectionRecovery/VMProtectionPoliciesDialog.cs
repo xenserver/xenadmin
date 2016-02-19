@@ -217,9 +217,9 @@ namespace XenAdmin.Dialogs.VMPolicies
             }
             foreach (var policy in VMGroup<T>.VMPolicies(Pool.Connection.Cache))
             {
-                
                 if (!VMGroup<T>.isVMPolicyVMPP)
                 {
+                    policy.PolicyAlerts.Clear();
                     List<XenAPI.Message> processedMessages = new List<XenAPI.Message>();
                     /*for VMSS: Populate the alerts from Messages by filtering out the alerts for this schedule
                      This is not required in VMPP as the VMPP record itself has the recentAlerts */
