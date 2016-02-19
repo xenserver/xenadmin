@@ -1881,6 +1881,12 @@
   <data name="disasterRecoveryToolStripMenuItem.Text" xml:space="preserve">
     <value>Di&amp;saster Recovery</value>
   </data>
+  <data name="VMSnapshotScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="VMSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
+    <value>VM Snapshot Schedule Policies...</value>
+  </data>
   <data name="vMProtectionAndRecoveryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
@@ -1942,16 +1948,16 @@
     <value>&amp;Pool</value>
   </data>
   <data name="AddHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="AddHostToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Add...</value>
   </data>
   <data name="toolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="RebootHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="RebootHostToolStripMenuItem.Text" xml:space="preserve">
     <value>Reb&amp;oot</value>
@@ -1978,7 +1984,7 @@
 </value>
   </data>
   <data name="powerOnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="powerOnToolStripMenuItem.Text" xml:space="preserve">
     <value>Power O&amp;n</value>
@@ -2007,19 +2013,19 @@
 </value>
   </data>
   <data name="ShutdownHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="ShutdownHostToolStripMenuItem.Text" xml:space="preserve">
     <value>S&amp;hut Down</value>
   </data>
   <data name="restartToolstackToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="restartToolstackToolStripMenuItem.Text" xml:space="preserve">
     <value>Restart Toolstac&amp;k</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="ReconnectToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 22</value>
@@ -2055,37 +2061,37 @@
     <value>Di&amp;sconnect All</value>
   </data>
   <data name="connectDisconnectToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="connectDisconnectToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Connect/Disconnect</value>
   </data>
   <data name="addServerToPoolMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="addServerToPoolMenuItem.Text" xml:space="preserve">
     <value>Add to &amp;Pool</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="backupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="backupToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Back Up...</value>
   </data>
   <data name="restoreFromBackupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="restoreFromBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>Restore From Back&amp;up...</value>
   </data>
   <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="maintenanceModeToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="maintenanceModeToolStripMenuItem1.Text" xml:space="preserve">
     <value>Enter &amp;Maintenance Mode</value>
@@ -2094,7 +2100,7 @@
     <value>Testing</value>
   </data>
   <data name="RemoveCrashdumpsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="RemoveCrashdumpsToolStripMenuItem.Text" xml:space="preserve">
     <value>Remove Crash &amp;Dump Files</value>
@@ -2112,37 +2118,37 @@
     <value>&amp;Forget Password</value>
   </data>
   <data name="HostPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="HostPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>Pass&amp;word</value>
   </data>
   <data name="toolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="destroyServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="destroyServerToolStripMenuItem.Text" xml:space="preserve">
     <value>D&amp;estroy</value>
   </data>
   <data name="removeHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="removeHostToolStripMenuItem.Text" xml:space="preserve">
     <value>Remo&amp;ve from [XenCenter]</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem3.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="ServerPropertiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="ServerPropertiesToolStripMenuItem.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
@@ -2188,6 +2194,12 @@
   </data>
   <data name="toolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 6</value>
+  </data>
+  <data name="assignSnapshotScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 22</value>
+  </data>
+  <data name="assignSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Assign to Snaps&amp;hot Schedule...</value>
   </data>
   <data name="assignPolicyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 22</value>
@@ -2523,7 +2535,7 @@
     <value>False</value>
   </data>
   <data name="helpTopicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="helpTopicsToolStripMenuItem.Text" xml:space="preserve">
     <value>Help &amp;Contents</value>
@@ -2532,46 +2544,46 @@
     <value>F1</value>
   </data>
   <data name="helpContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="helpContextMenuItem.Text" xml:space="preserve">
     <value>Conte&amp;xt Help</value>
   </data>
   <data name="toolStripMenuItem15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+    <value>322, 6</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
     <value>View [XenCenter] &amp;Log Files</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+    <value>322, 6</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
     <value>[XenServer product] on the &amp;Web</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Text" xml:space="preserve">
     <value>[XenCenter] &amp;Plugins online</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+    <value>322, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>325, 22</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About [XenCenter]</value>
@@ -3338,6 +3350,12 @@
   <data name="&gt;&gt;toolStripSeparator20.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;assignSnapshotScheduleToolStripMenuItem.Name" xml:space="preserve">
+    <value>assignSnapshotScheduleToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;assignSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;assignPolicyToolStripMenuItem.Name" xml:space="preserve">
     <value>assignPolicyToolStripMenuItem</value>
   </data>
@@ -3787,6 +3805,12 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Name" xml:space="preserve">
+    <value>VMSnapshotScheduleToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

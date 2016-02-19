@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
@@ -40,137 +41,52 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {
-    public partial class NewPolicySnapshotTypePage : XenTabPage, IEditPage
+    // This class acts as the base class for NewPolicySnapshotTypePageSpecific. It's only here
+    // because of a bug in Visual Studio: the Designer can't design classes of a
+    // generic class. The workaround is to do the design in this non-generic class,
+    // and then inherit the generic class from it. See
+    // http://stackoverflow.com/questions/1627431/fix-embedded-resources-for-generic-usercontrol
+    // http://bytes.com/topic/c-sharp/answers/537310-can-you-have-generic-type-windows-form
+    // http://connect.microsoft.com/VisualStudio/feedback/details/115397/component-resource-manager-doesnt-work-with-generic-form-classes
+    // (or search on Google for [ComponentResourceManager generic]).
+
+    public abstract partial class NewPolicySnapshotTypePage : XenTabPage, IEditPage
     {
+        protected List<VM> _selectedVMs;
+        public List<VM> SelectedVMs
+        {
+            get { return _selectedVMs; }
+            set
+            {
+                _selectedVMs = value;
+            }
+        }
+
+        public abstract AsyncAction SaveSettings();
+        public abstract string SubText { get; }
+        public abstract bool HasChanged { get; }
+        public abstract void SetXenObjects(IXenObject orig, IXenObject clone);
+        public abstract Image Image { get; }
+        public abstract bool ValidToSave { get; }
+        public abstract void ShowLocalValidationMessages();
+        public abstract void Cleanup();
+        public abstract void checkpointInfoPictureBox_Click(object sender, System.EventArgs e);
+        public abstract void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e);
+        public abstract void pictureBoxVSS_Click(object sender, System.EventArgs e);
+        public abstract void pictureBoxVSS_MouseLeave(object sender, System.EventArgs e);
+        public abstract void quiesceCheckBox_CheckedChanged(object sender, System.EventArgs e);
+        public abstract void radioButtonDiskAndMemory_CheckedChanged(object sender, System.EventArgs e);
+
         public NewPolicySnapshotTypePage()
         {
             InitializeComponent();
         }
 
-        public override string Text
+        public NewPolicySnapshotTypePage(List<VM> selectedVMS)
         {
-            get
-            {
-                return Messages.SNAPSHOT_TYPE;
-            }
+            InitializeComponent();
+            SelectedVMs = selectedVMS;
         }
 
-        public string SubText
-        {
-            get
-            {
-                if (BackupType == vmpp_backup_type.snapshot)
-                    return Messages.DISKS_ONLY;
-                else
-                {
-                    return Messages.DISKS_AND_MEMORY;
-                }
-            }
-        }
-
-        public override string HelpID
-        {
-            get { return "Snapshottype"; }
-        }
-
-        public Image Image
-        {
-            get { return Properties.Resources._000_VMSession_h32bit_16; }
-        }
-
-        public override string PageTitle
-        {
-            get
-            {
-                return Messages.SNAPSHOT_TYPE_TITLE;
-            }
-        }
-
-
-        public vmpp_backup_type BackupType
-        {
-            get
-            {
-                if (radioButtonDiskOnly.Checked)
-                    return vmpp_backup_type.snapshot;
-                else if (radioButtonDiskAndMemory.Checked)
-                    return vmpp_backup_type.checkpoint;
-                else
-                {
-                    return vmpp_backup_type.unknown;
-                }
-            }
-        }
-
-        private void RefreshTab(VMPP vmpp)
-        {
-            switch (vmpp.backup_type)
-            {
-                case vmpp_backup_type.checkpoint:
-                    radioButtonDiskAndMemory.Checked = true;
-                    break;
-                case vmpp_backup_type.snapshot:
-                    radioButtonDiskOnly.Checked = true;
-                    break;
-            }
-            EnableShapshotTypes(vmpp.Connection);
-        }
-
-        public override void PageLoaded(PageLoadedDirection direction)
-        {
-            base.PageLoaded(direction);
-            if (direction == PageLoadedDirection.Forward)
-                EnableShapshotTypes(Connection);
-        }
-
-        private void EnableShapshotTypes(IXenConnection connection)
-        {
-            radioButtonDiskAndMemory.Enabled = label3.Enabled = !Helpers.FeatureForbidden(connection, Host.RestrictCheckpoint);
-            checkpointInfoPictureBox.Visible = !radioButtonDiskAndMemory.Enabled;
-            pictureBoxWarning.Visible = labelWarning.Visible = radioButtonDiskAndMemory.Enabled;
-        }
-
-        public AsyncAction SaveSettings()
-        {
-            _clone.backup_type = BackupType;
-            return null;
-        }
-
-        private VMPP _clone;
-        public void SetXenObjects(IXenObject orig, IXenObject clone)
-        {
-            _clone = (VMPP)clone;
-            RefreshTab(_clone);
-        }
-
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
-
-        public void ShowLocalValidationMessages()
-        {
-
-        }
-
-        public void Cleanup()
-        {
-            radioButtonDiskOnly.Checked = true;
-        }
-
-        public bool HasChanged
-        {
-            get { return BackupType != _clone.backup_type; }
-        }
-
-        private void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
-        {
-            toolTip.Show(Messages.FIELD_DISABLED, checkpointInfoPictureBox, 20, 0);
-        }
-
-        private void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e)
-        {
-            toolTip.Hide(checkpointInfoPictureBox);
-        }
     }
 }

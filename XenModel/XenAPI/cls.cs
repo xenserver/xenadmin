@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum cls
     {
-        VM, Host, SR, Pool, VMPP, unknown
+        VM, Host, SR, Pool, VMPP, VMSS, unknown
     }
 
     public static class cls_helper
@@ -56,6 +56,8 @@ namespace XenAPI
                     return "Pool";
                 case cls.VMPP:
                     return "VMPP";
+                case cls.VMSS:
+                    return "VMSS";
                 default:
                     return "unknown";
             }

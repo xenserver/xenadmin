@@ -37,38 +37,47 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class CreateVMPP : AsyncAction
+    public class CreateVMPolicy<T> : AsyncAction where T : XenObject<T>
     {
-        private VMPP _record;
+        private IVMPolicy _record;
         private List<VM> _vms;
         private bool _runNow = false;
-        public CreateVMPP( VMPP record, List<VM> vms, bool runNow)
+        public CreateVMPolicy(IVMPolicy record, List<VM> vms, bool runNow)
             : base(record.Connection, Messages.CREATE_POLICY)
         {
             _record = record;
             _vms = vms;
             _runNow = runNow;
             Pool = Helpers.GetPool(record.Connection);
-            ApiMethodsToRoleCheck.Add("VMPP.async_create");
-            ApiMethodsToRoleCheck.Add("VM.set_protection_policy");
-            ApiMethodsToRoleCheck.Add("VMPP.protect_now");
+            if (typeof(T) == typeof(VMPP))
+            {
+                ApiMethodsToRoleCheck.Add("VMPP.async_create");
+                ApiMethodsToRoleCheck.Add("VM.set_protection_policy");
+                ApiMethodsToRoleCheck.Add("VMPP.protect_now");
+            }
+            else
+            {
+                ApiMethodsToRoleCheck.Add("VMSS.async_create");
+                ApiMethodsToRoleCheck.Add("VM.set_snapshot_schedule");
+                ApiMethodsToRoleCheck.Add("VMSS.protect_now");
+            }
         }
 
         protected override void Run()
         {
-            Description = string.Format(Messages.CREATING_VMPP, _record.Name);
-            RelatedTask = VMPP.async_create(Session, _record);
+            Description = string.Format(typeof(T) == typeof(VMPP) ? Messages.CREATING_VMPP : Messages.CREATING_VMSS, _record.Name);
+            RelatedTask = _record.async_task_create(Session);
             PollToCompletion();
-            var vmppref = new XenRef<VMPP>(Result);
+            var vmppref = new XenRef<T>(Result);
             Connection.WaitForCache(vmppref);
             foreach (var selectedVM in _vms)
             {
-                VM.set_protection_policy(Session, selectedVM.opaque_ref, vmppref.opaque_ref);
+                _record.set_policy(Session, selectedVM.opaque_ref, vmppref.opaque_ref);
             }
-            Description = string.Format(Messages.CREATED_VMPP, _record.Name);
+            Description = string.Format(typeof(T) == typeof(VMPP) ? Messages.CREATED_VMPP : Messages.CREATED_VMSS, _record.Name);
             PercentComplete = 60;
             if (_runNow)
-                VMPP.protect_now(Session, vmppref);
+                _record.run_now (Session, vmppref);
             PercentComplete = 100;
         }
     }

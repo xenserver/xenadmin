@@ -44,6 +44,12 @@ namespace XenAdmin.Alerts
         public readonly string Text;
         public readonly DateTime Time;
 
+        public PolicyAlert(long priority, string name, DateTime _time)
+        {
+            Type = (priority == 4 ? "info": "error");
+            Time = _time;
+            Text = Message.FriendlyBody(name);
+        }
 
         public PolicyAlert(IXenConnection connection, string body)
         {

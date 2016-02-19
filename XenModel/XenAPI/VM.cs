@@ -114,6 +114,8 @@ namespace XenAPI
             Dictionary<string, string> bios_strings,
             XenRef<VMPP> protection_policy,
             bool is_snapshot_from_vmpp,
+            XenRef<VMSS> snapshot_schedule,
+            bool is_vmss_snapshot,
             XenRef<VM_appliance> appliance,
             long start_delay,
             long shutdown_delay,
@@ -192,6 +194,8 @@ namespace XenAPI
             this.bios_strings = bios_strings;
             this.protection_policy = protection_policy;
             this.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
+            this.snapshot_schedule = snapshot_schedule;
+            this.is_vmss_snapshot = is_vmss_snapshot;
             this.appliance = appliance;
             this.start_delay = start_delay;
             this.shutdown_delay = shutdown_delay;
@@ -282,6 +286,8 @@ namespace XenAPI
             bios_strings = update.bios_strings;
             protection_policy = update.protection_policy;
             is_snapshot_from_vmpp = update.is_snapshot_from_vmpp;
+            snapshot_schedule = update.snapshot_schedule;
+            is_vmss_snapshot = update.is_vmss_snapshot;
             appliance = update.appliance;
             start_delay = update.start_delay;
             shutdown_delay = update.shutdown_delay;
@@ -363,6 +369,8 @@ namespace XenAPI
             bios_strings = proxy.bios_strings == null ? null : Maps.convert_from_proxy_string_string(proxy.bios_strings);
             protection_policy = proxy.protection_policy == null ? null : XenRef<VMPP>.Create(proxy.protection_policy);
             is_snapshot_from_vmpp = (bool)proxy.is_snapshot_from_vmpp;
+            snapshot_schedule = proxy.snapshot_schedule == null ? null : XenRef<VMSS>.Create(proxy.snapshot_schedule);
+            is_vmss_snapshot = (bool)proxy.is_vmss_snapshot;
             appliance = proxy.appliance == null ? null : XenRef<VM_appliance>.Create(proxy.appliance);
             start_delay = proxy.start_delay == null ? 0 : long.Parse((string)proxy.start_delay);
             shutdown_delay = proxy.shutdown_delay == null ? 0 : long.Parse((string)proxy.shutdown_delay);
@@ -445,6 +453,8 @@ namespace XenAPI
             result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
             result_.protection_policy = (protection_policy != null) ? protection_policy : "";
             result_.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
+            result_.snapshot_schedule = (snapshot_schedule != null) ? snapshot_schedule : "";
+            result_.is_vmss_snapshot = is_vmss_snapshot;
             result_.appliance = (appliance != null) ? appliance : "";
             result_.start_delay = start_delay.ToString();
             result_.shutdown_delay = shutdown_delay.ToString();
@@ -531,6 +541,8 @@ namespace XenAPI
             bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
             protection_policy = Marshalling.ParseRef<VMPP>(table, "protection_policy");
             is_snapshot_from_vmpp = Marshalling.ParseBool(table, "is_snapshot_from_vmpp");
+            snapshot_schedule = Marshalling.ParseRef<VMSS>(table, "snapshot_schedule");
+            is_vmss_snapshot = Marshalling.ParseBool(table, "is_vmss_snapshot");
             appliance = Marshalling.ParseRef<VM_appliance>(table, "appliance");
             start_delay = Marshalling.ParseLong(table, "start_delay");
             shutdown_delay = Marshalling.ParseLong(table, "shutdown_delay");
@@ -619,6 +631,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._bios_strings, other._bios_strings) &&
                 Helper.AreEqual2(this._protection_policy, other._protection_policy) &&
                 Helper.AreEqual2(this._is_snapshot_from_vmpp, other._is_snapshot_from_vmpp) &&
+                Helper.AreEqual2(this._snapshot_schedule, other._snapshot_schedule) &&
+                Helper.AreEqual2(this._is_vmss_snapshot, other._is_vmss_snapshot) &&
                 Helper.AreEqual2(this._appliance, other._appliance) &&
                 Helper.AreEqual2(this._start_delay, other._start_delay) &&
                 Helper.AreEqual2(this._shutdown_delay, other._shutdown_delay) &&
@@ -784,6 +798,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_protection_policy, server._protection_policy))
                 {
                     VM.set_protection_policy(session, opaqueRef, _protection_policy);
+                }
+                if (!Helper.AreEqual2(_snapshot_schedule, server._snapshot_schedule))
+                {
+                    VM.set_snapshot_schedule(session, opaqueRef, _snapshot_schedule);
                 }
                 if (!Helper.AreEqual2(_appliance, server._appliance))
                 {
@@ -1620,6 +1638,28 @@ namespace XenAPI
         public static bool get_is_snapshot_from_vmpp(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
+        /// Get the snapshot_schedule field of the given VM.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<VMSS> get_snapshot_schedule(Session session, string _vm)
+        {
+            return XenRef<VMSS>.Create(session.proxy.vm_get_snapshot_schedule(session.uuid, (_vm != null) ? _vm : "").parse());
+        }
+
+        /// <summary>
+        /// Get the is_vmss_snapshot field of the given VM.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_is_vmss_snapshot(Session session, string _vm)
+        {
+            return (bool)session.proxy.vm_get_is_vmss_snapshot(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
         /// <summary>
@@ -3542,6 +3582,18 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the value of the snapshot schedule field
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The value</param>
+        public static void set_snapshot_schedule(Session session, string _vm, string _value)
+        {
+            session.proxy.vm_set_snapshot_schedule(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+        }
+
+        /// <summary>
         /// Set this VM's start delay in seconds
         /// First published in XenServer 6.0.
         /// </summary>
@@ -5094,6 +5146,44 @@ namespace XenAPI
             }
         }
         private bool _is_snapshot_from_vmpp;
+
+        /// <summary>
+        /// Ref pointing to a snapshot schedule for this VM
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual XenRef<VMSS> snapshot_schedule
+        {
+            get { return _snapshot_schedule; }
+            set
+            {
+                if (!Helper.AreEqual(value, _snapshot_schedule))
+                {
+                    _snapshot_schedule = value;
+                    Changed = true;
+                    NotifyPropertyChanged("snapshot_schedule");
+                }
+            }
+        }
+        private XenRef<VMSS> _snapshot_schedule;
+
+        /// <summary>
+        /// true if this VM was created by a scheduled snapshot
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool is_vmss_snapshot
+        {
+            get { return _is_vmss_snapshot; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_vmss_snapshot))
+                {
+                    _is_vmss_snapshot = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_vmss_snapshot");
+                }
+            }
+        }
+        private bool _is_vmss_snapshot;
 
         /// <summary>
         /// the appliance to which this VM belongs
