@@ -26488,6 +26488,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server may not have any bonds, VLANs or cross-server private networks.
+        /// </summary>
+        public static string POOL_JOIN_NOT_PHYSICAL_PIF {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_NOT_PHYSICAL_PIF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool License.
         /// </summary>
         public static string POOL_LICENSE {

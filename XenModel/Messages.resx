@@ -9250,6 +9250,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_JOIN_IMPOSSIBLE" xml:space="preserve">
     <value>Pool join not possible</value>
   </data>
+  <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
+    <value>This server may not have any bonds, VLANs or cross-server private networks</value>
+  </data>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>Pool License</value>
   </data>
