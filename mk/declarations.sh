@@ -154,9 +154,11 @@ if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     WEB_LIB="http://admin/linux/distfiles/windows-build"
     WEB_LATEST_BUILD="http://admin/builds/carbon/${XS_BRANCH}/xe-phase-2-latest"
+    REBRANDING_WEB_LATEST_BUILD="http://admin/builds/carbon/${XS_BRANCH}/xe-phase-rebrand-latest"
 else
     WEB_LIB="http://files.uk.xensource.com/linux/distfiles/windows-build"
     WEB_LATEST_BUILD="http://www.uk.xensource.com/carbon/${XS_BRANCH}/xe-phase-2-latest"
+    REBRANDING_WEB_LATEST_BUILD="http://www.uk.xensource.com/carbon/${XS_BRANCH}/xe-phase-rebrand-latest"
 fi
 WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
 WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
