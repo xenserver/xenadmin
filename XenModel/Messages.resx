@@ -4840,7 +4840,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>A general exception has occurred.</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED" xml:space="preserve">
-    <value>User Canceled</value>
+    <value>Canceled</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>User canceled. Master needs to be upgraded first.</value>
