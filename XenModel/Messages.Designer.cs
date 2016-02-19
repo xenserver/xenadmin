@@ -23080,7 +23080,7 @@ namespace XenAdmin {
         ///
         ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
         ///
-        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device.  [rest of string was truncated]&quot;;.
+        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SC [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOFCOE_BLURB {
             get {
@@ -23102,7 +23102,7 @@ namespace XenAdmin {
         ///
         ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the [XenServer] host.
         ///
-        ///Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the [rest of string was truncated]&quot;;.
+        ///Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the LUN as if i [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOHBA_BLURB {
             get {
@@ -26488,6 +26488,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server may not have any bonds, VLANs or cross-server private networks.
+        /// </summary>
+        public static string POOL_JOIN_NOT_PHYSICAL_PIF {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_NOT_PHYSICAL_PIF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool License.
         /// </summary>
         public static string POOL_LICENSE {
@@ -28236,7 +28245,7 @@ namespace XenAdmin {
         ///2. Click the Reboot Now button below to reboot the server and begin the installation.
         ///3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
         ///
-        ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different ve [rest of string was truncated]&quot;;.
+        ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of [X [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ROLLING_UPGRADE_REBOOT_MESSAGE {
             get {
