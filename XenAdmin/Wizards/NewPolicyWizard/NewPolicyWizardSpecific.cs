@@ -52,10 +52,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             this.Text = VMGroup<T>.VMPolicyWizardTitle;
 
-            xenTabPagePolicy = new NewPolicyPolicyNamePage(VMGroup<T>.VMPolicyNamePageText);
+            xenTabPagePolicy = new NewPolicyPolicyNamePage(VMGroup<T>.VMPolicyNamePageText, VMGroup<T>.VMPolicyNamePageTextMore, 
+                                                            VMGroup<T>.VMPolicyNamePageTabName, VMGroup<T>.VMPolicyNamePageTabText, VMGroup<T>.VMPolicyNamePageNameFieldText);
             xenTabPageSnapshotType = new NewPolicySnapshotTypePageSpecific<T>();
             xenTabPageVMsPage = new NewVMGroupVMsPage<T>();
-            xenTabPageFinish = new NewPolicyFinishPage(VMGroup<T>.VMPolicyFinishPageText, VMGroup<T>.VMPolicyFinishPageCheckboxText);
+            xenTabPageFinish = new NewPolicyFinishPage(VMGroup<T>.VMPolicyFinishPageText, VMGroup<T>.VMPolicyFinishPageCheckboxText, VMGroup<T>.VMPolicyFinishPageTitle);
             xenTabPageRBAC = new RBACWarningPage();
             xenTabPageVMsPage.Pool = pool;
             xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage();

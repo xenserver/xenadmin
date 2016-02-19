@@ -334,7 +334,7 @@
     <value>1</value>
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
-    <value>Note that scheduled disk and memory snapshots will only be taken of VMs in this Protection Policy that meet all of the following conditions:
+    <value>Note that scheduled disk and memory snapshots will only be taken of VMs in this {0} that meet all of the following conditions:
 
 1. The VM is running at the time the snapshot is scheduled.
 2. The VM has [XenServer product] Tools installed.

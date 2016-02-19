@@ -42,16 +42,23 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicyPolicyNamePage : XenTabPage, IEditPage
     {
-        public NewPolicyPolicyNamePage(string text)
+        private readonly string _tabName;
+        private readonly string _tabTitle;
+
+        public NewPolicyPolicyNamePage(string pageText, string pageTextMore, string tabName, string tabTitle, string nameFieldText)
         {
             InitializeComponent();
-            this.labelwizard.Text = text;
+            this.labelwizard.Text = pageText;
+            this.autoHeightLabel1.Text = pageTextMore;
+            this.label2.Text = nameFieldText;
+            _tabName = tabName;
+            _tabTitle = tabTitle;
         }
         public override string Text
         {
             get
             {
-                return Messages.POLICY_NAME;
+                return _tabName;
             }
         }
 
@@ -69,7 +76,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                return Messages.POLICY_NAME_TITLE;
+                return _tabTitle;
             }
         }
 

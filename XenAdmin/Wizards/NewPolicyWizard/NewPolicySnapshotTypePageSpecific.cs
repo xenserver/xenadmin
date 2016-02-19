@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public NewPolicySnapshotTypePageSpecific() : base()
         {
-            
+            this.labelWarning.Text = string.Format(this.labelWarning.Text, VMGroup<T>.VMPolicyTypeName);
         }
 
         public NewPolicySnapshotTypePageSpecific(List<VM> selectedVMS)

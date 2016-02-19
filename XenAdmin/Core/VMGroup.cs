@@ -84,7 +84,7 @@ namespace XenAdmin.Core
 
         internal static string NewGroupString
         {
-            get { return typeof(T) == typeof(VMPP) ? Messages.NEW_POLICY : (typeof(T) == typeof(VMSS) ? Messages.NEW_POLICY : Messages.NEW_VM_APPLIANCE); }
+            get { return typeof(T) == typeof(VMPP) ? Messages.NEW_POLICY : (typeof(T) == typeof(VMSS) ? Messages.NEW_SCHEDULE : Messages.NEW_VM_APPLIANCE); }
         }
 
         internal static string ChangeVMsGroupString
@@ -129,7 +129,12 @@ namespace XenAdmin.Core
 
         internal static string ChooseVMsPage_CurrentGroup
         {
-            get { return typeof(T) == typeof(VMPP) ? Messages.CURRENT_POLICY : (typeof(T) == typeof(VMSS) ? Messages.CURRENT_POLICY : Messages.CURRENT_VAPP); }
+            get { return typeof(T) == typeof(VMPP) ? Messages.CURRENT_POLICY : (typeof(T) == typeof(VMSS) ? Messages.CURRENT_SCHEDULE : Messages.CURRENT_VAPP); }
+        }
+
+        internal static string VMPolicyTypeName
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_TYPE : Messages.VMSS_TYPE; }
         }
 
         internal static string ChooseVMsPage_HelpID
@@ -241,9 +246,34 @@ namespace XenAdmin.Core
             get { return typeof(T) == typeof(VMPP) ? Messages.NEW_VMPP_PAGE_TEXT : Messages.NEW_VMSS_PAGE_TEXT; }
         }
 
+        internal static string VMPolicyNamePageTextMore
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.NEW_VMPP_PAGE_TEXT_MORE : Messages.NEW_VMSS_PAGE_TEXT_MORE; }
+        }
+
+        internal static string VMPolicyNamePageTabName
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.POLICY_NAME : Messages.VMSS_NAME; }
+        }
+
+        internal static string VMPolicyNamePageTabText
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.POLICY_NAME_TITLE : Messages.VMSS_NAME_TITLE; }
+        }
+
+        internal static string VMPolicyNamePageNameFieldText
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.POLICY_NAME_FIELD_TEXT : Messages.VMSS_NAME_FIELD_TEXT; }
+        }
+
         internal static string VMPolicyFinishPageText
         {
             get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_FINISH_PAGE_TEXT : Messages.VMSS_FINISH_PAGE_TEXT; }
+        }
+
+        internal static string VMPolicyFinishPageTitle
+        {
+            get { return typeof(T) == typeof(VMPP) ? Messages.VMPP_FINISH_TITLE : Messages.VMSS_FINISH_TITLE; }
         }
 
         internal static string VMPolicyFinishPageCheckboxText

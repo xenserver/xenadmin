@@ -227,14 +227,7 @@ namespace XenAdmin.Dialogs.VMPolicies
                     {
                         if (message.obj_uuid == policy.uuid)
                         {
-                            if (message.Type == XenAPI.Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED)
-                            {
-                                policy.PolicyAlerts.Add(new PolicyAlert(Pool.Connection, message.body));
-                            }
-                            else
-                            {
-                                policy.PolicyAlerts.Add(new PolicyAlert(message.name, message.timestamp));
-                            }
+                            policy.PolicyAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
                             processedMessages.Add(message);
                         }
                     }

@@ -101,8 +101,38 @@ namespace XenAPI
 
         public policy_frequency policy_frequency 
         {
-            get { return ((policy_frequency)(frequency)); }
-            set { frequency = (vmss_frequency)value; }
+            get 
+            {
+                switch(frequency)
+                {
+                    case vmss_frequency.hourly:
+                        return policy_frequency.hourly;
+                    case vmss_frequency.daily:
+                        return policy_frequency.daily;
+                    case vmss_frequency.weekly:
+                        return policy_frequency.weekly;
+                    default:
+                        return policy_frequency.unknown;
+                }
+            }
+            set 
+            {
+                switch (value)
+                {
+                    case policy_frequency.hourly:
+                        frequency = vmss_frequency.hourly;
+                        break;
+                    case policy_frequency.daily:
+                        frequency = vmss_frequency.daily;
+                        break;
+                    case policy_frequency.weekly:
+                        frequency = vmss_frequency.weekly;
+                        break;
+                    default:
+                        frequency = vmss_frequency.unknown;
+                        break;
+                }
+            }
         }
 
         public Dictionary<string, string> policy_schedule
@@ -119,8 +149,39 @@ namespace XenAPI
 
         public policy_backup_type policy_type
         {
-            get { return (policy_backup_type)type; }
-            set { type = (vmss_type)value; }
+            get
+            {
+                switch(type)
+                {
+                    case vmss_type.checkpoint:
+                        return policy_backup_type.checkpoint;
+                    case vmss_type.snapshot:
+                        return policy_backup_type.snapshot;
+                    case vmss_type.snapshot_with_quiesce:
+                        return policy_backup_type.snapshot_with_quiesce;
+                    default:
+                        return policy_backup_type.unknown;
+                }
+            }
+
+            set 
+            {
+                switch (value)
+                {
+                    case policy_backup_type.checkpoint:
+                        type = vmss_type.checkpoint;
+                        break;
+                    case policy_backup_type.snapshot:
+                        type = vmss_type.snapshot;
+                        break;
+                    case policy_backup_type.snapshot_with_quiesce:
+                        type = vmss_type.snapshot_with_quiesce;
+                        break;
+                    default:
+                        type = vmss_type.unknown;
+                        break;
+                }
+            }
         }
 
         public XenRef<Task> async_task_create(Session session)

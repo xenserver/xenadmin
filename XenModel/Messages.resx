@@ -1905,10 +1905,10 @@ Archive destination: {0}</value>
     <value>Assign to VM Protection Policy...</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>Assign VM to Snapsh&amp;ot Schedule</value>
+    <value>Assign VM to snapsh&amp;ot schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>Assign VM to Snapshot S&amp;chedule</value>
+    <value>Assign VM to snapshot schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>Assign VM to snapshot schedule...</value>
@@ -3412,6 +3412,9 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CURRENT_POLICY" xml:space="preserve">
     <value>Current policy</value>
+  </data>
+  <data name="CURRENT_SCHEDULE" xml:space="preserve">
+    <value>Current schedule</value>
   </data>
   <data name="CURRENT_VAPP" xml:space="preserve">
     <value>Current vApp</value>
@@ -5215,9 +5218,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FINISH_PAGE_VMNAME" xml:space="preserve">
     <value>VM name:</value>
-  </data>
-  <data name="FINISH_TITLE" xml:space="preserve">
-    <value>Create the new policy</value>
   </data>
   <data name="FLOPPY_DRIVE_LABEL_NUMBERED" xml:space="preserve">
     <value>Floppy Drive {0}:</value>
@@ -8460,6 +8460,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
 
 It is strongly recommended that you Cancel and apply the latest version of the packs to all servers before creating the pool.</value>
   </data>
+  <data name="NEW_SCHEDULE" xml:space="preserve">
+    <value>&amp;New schedule...</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>
@@ -8488,8 +8491,14 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VMPP_PAGE_TEXT" xml:space="preserve">
     <value>Use this wizard to define a VM protection policy that will ensure your critical VMs are protected via automatic scheduled snapshot jobs.</value>
   </data>
+  <data name="NEW_VMPP_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>To begin, enter a name for the policy and a description (optional), then click Next.</value>
+  </data>
   <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
     <value>Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs.</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>To begin, enter a name for the schedule and a description (optional), then click Next.</value>
   </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>&amp;New vApp...</value>
@@ -9244,6 +9253,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   </data>
   <data name="POLICY_NAME" xml:space="preserve">
     <value>Policy Name</value>
+  </data>
+  <data name="POLICY_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>Policy na&amp;me:</value>
   </data>
   <data name="POLICY_NAME_TITLE" xml:space="preserve">
     <value>What do you want to call this policy?</value>
@@ -11874,11 +11886,17 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMPP_FINISH_PAGE_TEXT" xml:space="preserve">
     <value>Review the new VM protection policy below and click Previous if you want to change any settings or Finish to create the new policy.</value>
   </data>
+  <data name="VMPP_FINISH_TITLE" xml:space="preserve">
+    <value>Create the new policy</value>
+  </data>
   <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
     <value>VM protection policies defined in pool '{0}' ({1} out of {2} VMs currently protected):</value>
   </data>
   <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
     <value>VM protection policies defined in server '{0}' ({1} out of {2} VMs currently protected):</value>
+  </data>
+  <data name="VMPP_TYPE" xml:space="preserve">
+    <value>protection policy</value>
   </data>
   <data name="VMPP_WIZARD_TITLE" xml:space="preserve">
     <value>New VM Protection Policy</value>
@@ -11907,8 +11925,20 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMSS_FINISH_PAGE_TEXT" xml:space="preserve">
     <value>Review the new snapshot schedule below and click Previous if you want to change any settings or Finish to create the new schedule.</value>
   </data>
+  <data name="VMSS_FINISH_TITLE" xml:space="preserve">
+    <value>Create the new schedule</value>
+  </data>
   <data name="VMSS_MAIN_MENU" xml:space="preserve">
     <value>VM Snaps&amp;hot Schedules...</value>
+  </data>
+  <data name="VMSS_NAME" xml:space="preserve">
+    <value>Schedule Name</value>
+  </data>
+  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>Schedule na&amp;me:</value>
+  </data>
+  <data name="VMSS_NAME_TITLE" xml:space="preserve">
+    <value>What do you want to call this schedule?</value>
   </data>
   <data name="VMSS_POLICY_SUMMARY" xml:space="preserve">
     <value>Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n</value>
@@ -11918,6 +11948,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
     <value>Snapshot schedules defined in server '{0}' ({1} out of {2} VMs currently in schedule):</value>
+  </data>
+  <data name="VMSS_TYPE" xml:space="preserve">
+    <value>schedule</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>VMs in the snapshot schedule</value>

@@ -61,14 +61,7 @@ namespace XenAdmin.Actions
             {
                 if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid)
                 {
-                    if (message.Type == XenAPI.Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED)
-                    {
-                        listAlerts.Add(new PolicyAlert(Pool.Connection, message.body));
-                    }
-                    else
-                    {
-                        listAlerts.Add(new PolicyAlert(message.name, message.timestamp));
-                    }
+                    listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
                 }
             }
 
