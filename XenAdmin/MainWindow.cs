@@ -1646,6 +1646,26 @@ namespace XenAdmin
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
+            IXenConnection conn;
+            conn = SelectionManager.Selection.GetConnectionOfAllItems();
+            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.DundeeOrGreater(conn))) /* hide VMPP */
+            {
+                assignSnapshotScheduleToolStripMenuItem.Available = true;
+                VMSnapshotScheduleToolStripMenuItem.Available = true;
+
+                assignPolicyToolStripMenuItem.Available = false;
+                vMProtectionAndRecoveryToolStripMenuItem.Available = false;
+
+            }
+            else /* hide VMSS */
+            {
+                assignSnapshotScheduleToolStripMenuItem.Available = false;
+                VMSnapshotScheduleToolStripMenuItem.Available = false;
+
+                assignPolicyToolStripMenuItem.Available = true;
+                vMProtectionAndRecoveryToolStripMenuItem.Available = true;
+            }
+            
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;
             customTemplatesToolStripMenuItem.Checked = Properties.Settings.Default.UserTemplatesVisible;
             localStorageToolStripMenuItem.Checked = Properties.Settings.Default.LocalSRsVisible;

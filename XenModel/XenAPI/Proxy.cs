@@ -1444,6 +1444,14 @@ namespace XenAPI
         Response<bool>
         vm_get_is_snapshot_from_vmpp(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_snapshot_schedule")]
+        Response<string>
+        vm_get_snapshot_schedule(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_is_vmss_snapshot")]
+        Response<bool>
+        vm_get_is_vmss_snapshot(string session, string _vm);
+
         [XmlRpcMethod("VM.get_appliance")]
         Response<string>
         vm_get_appliance(string session, string _vm);
@@ -2076,6 +2084,10 @@ namespace XenAPI
         Response<string>
         vm_set_protection_policy(string session, string _vm, string _value);
 
+        [XmlRpcMethod("VM.set_snapshot_schedule")]
+        Response<string>
+        vm_set_snapshot_schedule(string session, string _vm, string _value);
+
         [XmlRpcMethod("VM.set_start_delay")]
         Response<string>
         vm_set_start_delay(string session, string _vm, string _value);
@@ -2571,6 +2583,126 @@ namespace XenAPI
         [XmlRpcMethod("VMPP.get_all_records")]
         Response<Object>
         vmpp_get_all_records(string session);
+
+        [XmlRpcMethod("VMSS.get_record")]
+        Response<Proxy_VMSS>
+        vmss_get_record(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_by_uuid")]
+        Response<string>
+        vmss_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("VMSS.create")]
+        Response<string>
+        vmss_create(string session, Proxy_VMSS _record);
+
+        [XmlRpcMethod("Async.VMSS.create")]
+        Response<string>
+        async_vmss_create(string session, Proxy_VMSS _record);
+
+        [XmlRpcMethod("VMSS.destroy")]
+        Response<string>
+        vmss_destroy(string session, string _vmss);
+
+        [XmlRpcMethod("Async.VMSS.destroy")]
+        Response<string>
+        async_vmss_destroy(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_by_name_label")]
+        Response<string []>
+        vmss_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("VMSS.get_uuid")]
+        Response<string>
+        vmss_get_uuid(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_name_label")]
+        Response<string>
+        vmss_get_name_label(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_name_description")]
+        Response<string>
+        vmss_get_name_description(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_enabled")]
+        Response<bool>
+        vmss_get_enabled(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_type")]
+        Response<string>
+        vmss_get_type(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_retained_snapshots")]
+        Response<string>
+        vmss_get_retained_snapshots(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_frequency")]
+        Response<string>
+        vmss_get_frequency(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_schedule")]
+        Response<Object>
+        vmss_get_schedule(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_last_run_time")]
+        Response<DateTime>
+        vmss_get_last_run_time(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.get_VMs")]
+        Response<string []>
+        vmss_get_vms(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.set_name_label")]
+        Response<string>
+        vmss_set_name_label(string session, string _vmss, string _label);
+
+        [XmlRpcMethod("VMSS.set_name_description")]
+        Response<string>
+        vmss_set_name_description(string session, string _vmss, string _description);
+
+        [XmlRpcMethod("VMSS.set_enabled")]
+        Response<string>
+        vmss_set_enabled(string session, string _vmss, bool _enabled);
+
+        [XmlRpcMethod("VMSS.snapshot_now")]
+        Response<string>
+        vmss_snapshot_now(string session, string _vmss);
+
+        [XmlRpcMethod("VMSS.set_retained_snapshots")]
+        Response<string>
+        vmss_set_retained_snapshots(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.set_frequency")]
+        Response<string>
+        vmss_set_frequency(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.set_schedule")]
+        Response<string>
+        vmss_set_schedule(string session, string _vmss, Object _value);
+
+        [XmlRpcMethod("VMSS.add_to_schedule")]
+        Response<string>
+        vmss_add_to_schedule(string session, string _vmss, string _key, string _value);
+
+        [XmlRpcMethod("VMSS.remove_from_schedule")]
+        Response<string>
+        vmss_remove_from_schedule(string session, string _vmss, string _key);
+
+        [XmlRpcMethod("VMSS.set_last_run_time")]
+        Response<string>
+        vmss_set_last_run_time(string session, string _vmss, DateTime _value);
+
+        [XmlRpcMethod("VMSS.set_type")]
+        Response<string>
+        vmss_set_type(string session, string _vmss, string _value);
+
+        [XmlRpcMethod("VMSS.get_all")]
+        Response<string []>
+        vmss_get_all(string session);
+
+        [XmlRpcMethod("VMSS.get_all_records")]
+        Response<Object>
+        vmss_get_all_records(string session);
 
         [XmlRpcMethod("VM_appliance.get_record")]
         Response<Proxy_VM_appliance>
@@ -7003,6 +7135,8 @@ namespace XenAPI
         public Object bios_strings;
         public string protection_policy;
         public bool is_snapshot_from_vmpp;
+        public string snapshot_schedule;
+        public bool is_vmss_snapshot;
         public string appliance;
         public string start_delay;
         public string shutdown_delay;
@@ -7076,6 +7210,21 @@ namespace XenAPI
         public bool is_alarm_enabled;
         public Object alarm_config;
         public string [] recent_alerts;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_VMSS
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public bool enabled;
+        public string type;
+        public string retained_snapshots;
+        public string frequency;
+        public Object schedule;
+        public DateTime last_run_time;
+        public string [] VMs;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

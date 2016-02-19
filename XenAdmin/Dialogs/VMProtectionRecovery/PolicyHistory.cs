@@ -44,6 +44,8 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 {
     public partial class PolicyHistory : UserControl
     {
+        public Pool pool;
+
         public PolicyHistory()
         {
             InitializeComponent();
@@ -69,11 +71,11 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             }
         }
 
-        private VMPP _vmpp;
-        public void RefreshTab(VMPP vmpp)
+        private IVMPolicy _policy;
+        public void RefreshTab(IVMPolicy policy)
         {
-            _vmpp = vmpp;
-            if (_vmpp == null)
+            _policy = policy;
+            if (_policy == null)
             {
                 labelHistory.Text = "";
                 comboBox1.Enabled = false;
@@ -81,14 +83,14 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             else
             {
                 comboBox1.Enabled = true;
-                RefreshGrid(_vmpp.RecentAlerts);
+                RefreshGrid(_policy.PolicyAlerts);
             }
 
         }
 
         private void RefreshGrid(List<PolicyAlert> alerts)
         {
-            if (_vmpp != null)
+            if (_policy != null)
             {
                 ReloadHistoryLabel();
                 dataGridView1.Rows.Clear();
@@ -164,23 +166,23 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_vmpp != null)
+            if (_policy != null)
             {
                 if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_vmpp.RecentAlerts);
+                    RefreshGrid(_policy.PolicyAlerts);
                 else if (comboBox1.SelectedIndex == 1)
                 {
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
-                    GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 24);
+                    PureAsyncAction action = _policy.getAlertsAction(_policy, 24) ;                
                     action.Completed += action_Completed;
-                    action.RunAsync();
+                    action.RunAsync();                   
                 }
                 else if (comboBox1.SelectedIndex == 2)
                 {
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
-                    GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 7 * 24);
+                    PureAsyncAction action = _policy.getAlertsAction(_policy, 7 * 24);
                     action.Completed += action_Completed;
                     action.RunAsync();
                 }
@@ -189,25 +191,33 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
         void action_Completed(ActionBase sender)
         {
-            var action = (GetVMPPAlertsAction)sender;
+            var action = sender;
             Program.Invoke(Program.MainWindow, () =>
             {
                 panelLoading.Visible = false;
-                RefreshGrid(action.VMPP.Alerts);
+                if (_policy._Type == typeof(VMPP))
+                {
+                    RefreshGrid(((GetVMPPAlertsAction)(action)).VMPP.Alerts);
+                }
+                else
+                {
+                    RefreshGrid(((GetVMSSAlertsAction)(action)).VMSS.Alerts);
+                }
             });
         }
 
         private void ReloadHistoryLabel()
         {
-            string vmppName = _vmpp.Name;
+            string Name;
+            Name = _policy.Name;
             // ellipsise if necessary
             using (System.Drawing.Graphics g = labelHistory.CreateGraphics())
             {
                 int maxWidth = label1.Left - labelHistory.Left;
                 int availableWidth = maxWidth - (int)g.MeasureString(string.Format(Messages.HISTORY_FOR_POLICY, ""), labelHistory.Font).Width;
-                vmppName = vmppName.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
+                Name = Name.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
             }
-            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, vmppName);
+            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, Name);
         }
     }
 }
