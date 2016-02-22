@@ -1847,4 +1847,7 @@
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>
   </data>
+  <data name="Label-host.system_status-xscontainer" xml:space="preserve">
+    <value>Container management logs</value>
+  </data>
 </root>
