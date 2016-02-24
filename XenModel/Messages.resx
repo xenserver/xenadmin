@@ -3042,6 +3042,12 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="COPY_VM_SLOW_CLONE_DESCRIPTION" xml:space="preserve">
     <value>Clone the existing template</value>
   </data>
+  <data name="COPY_VM_WIZARD_RUBRIC_TEMPLATE" xml:space="preserve">
+    <value>Select where would you like to copy your template</value>
+  </data>
+  <data name="COPY_VM_WIZARD_RUBRIC_VM" xml:space="preserve">
+    <value>Select where would you like to copy your VM.</value>
+  </data>
   <data name="COPY_VM_WIZARD_TITLE" xml:space="preserve">
     <value>Copy VM</value>
   </data>
@@ -3076,6 +3082,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
     <value>Home Server:</value>
+  </data>
+  <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
+    <value>Template:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_VM" xml:space="preserve">
     <value>VM:</value>
@@ -3116,6 +3125,12 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected VM to.</value>
   </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to copy the selected template to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to copy the selected templates to.</value>
+  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
   </data>
@@ -3142,6 +3157,12 @@ Please reconnect the host and try again.</value>
   <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE" xml:space="preserve">
     <value>The wizard is ready to begin copying the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VM.</value>
   </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE_TEMPLATE" xml:space="preserve">
+    <value>The wizard is ready to begin copying the selected template using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the template.</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_TEMPLATE" xml:space="preserve">
+    <value>The wizard is ready to begin copying the selected templates using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the templates.</value>
+  </data>
   <data name="CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE" xml:space="preserve">
     <value>The wizard is ready to begin migrating the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VM.</value>
   </data>
@@ -3159,6 +3180,12 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CPM_WIZARD_NETWORKING_INTRO_SINGLE" xml:space="preserve">
     <value>Map the virtual network interfaces in the selected VM to networks in the destination pool or standalone server.</value>
+  </data>
+  <data name="CPM_WIZARD_NETWORKING_INTRO_TEMPLATE" xml:space="preserve">
+    <value>Map the virtual network interfaces in the selected templates to networks in the destination pool or standalone server.</value>
+  </data>
+  <data name="CPM_WIZARD_NETWORKING_INTRO_TEMPLATE_SINGLE" xml:space="preserve">
+    <value>Map the virtual network interfaces in the selected template to networks in the destination pool or standalone server.</value>
   </data>
   <data name="CPM_WIZARD_SELECT_NETWORK_PAGE_TEXT" xml:space="preserve">
     <value>Networking</value>
@@ -3201,6 +3228,28 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CPM_WLB_ENABLED_ON_VM_FAILURE_REASON" xml:space="preserve">
     <value>WLB is enabled on the source</value>
+  </data>
+  <data name="CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE" xml:space="preserve">
+    <value>Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
+
+For optimal performance and reliability during template migration, ensure that the network used for the storage migration is not being used for management or virtual machine traffic.</value>
+  </data>
+  <data name="CPS_WIZARD_MIGRATION_PAGE_TITLE_VM" xml:space="preserve">
+    <value>Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
+
+For optimal performance and reliability during VM migration, ensure that the network used for the storage migration is not being used for management or virtual machine traffic.</value>
+  </data>
+  <data name="CPS_WIZARD_NETWORKING_NETWORK_COLUMN_TEMPLATE" xml:space="preserve">
+    <value>Template - Virtual Network Interface</value>
+  </data>
+  <data name="CPS_WIZARD_NETWORKING_NETWORK_COLUMN_VM" xml:space="preserve">
+    <value>VM - Virtual Network Interface</value>
+  </data>
+  <data name="CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE" xml:space="preserve">
+    <value>Template - Virtual Disk</value>
+  </data>
+  <data name="CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM" xml:space="preserve">
+    <value>VM - Virtual Disk</value>
   </data>
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>

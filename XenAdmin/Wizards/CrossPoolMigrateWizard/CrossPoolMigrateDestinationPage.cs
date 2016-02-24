@@ -34,6 +34,7 @@ using XenAdmin.Network;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
+using System.Linq;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
@@ -73,7 +74,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return "Destination"; } }
+        public override string HelpID { get { return TemplatesOnly ? "DestinationTemplate" : "Destination"; } }
 
         /// <summary>
         /// Gets the page's title (headline)
@@ -85,13 +86,29 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// </summary>
         public override string Text { get { return Messages.CPM_WIZARD_DESTINATION_TAB_TITLE; } }
 
+        private bool TemplatesOnly { get { return selectedVMs != null && selectedVMs.All(vm => vm.is_a_template); } }
+
         protected override string InstructionText 
         {
             get
             {
-                if (selectedVMs != null && selectedVMs.Count > 1)
-                    return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS;
-                return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE;
+                if (TemplatesOnly)
+                {
+                    if (selectedVMs.Count == 1)
+                    {
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE;
+                    }
+                    else
+                    {
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE;
+                    }
+                }
+                else
+                {
+                    if (selectedVMs != null && selectedVMs.Count > 1)
+                        return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS;
+                    return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE;
+                }
             }
         }
 
@@ -142,6 +159,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
 
             base.PageLeave(direction, ref cancel);
+        }
+
+        protected override string VmColumnHeaderText
+        {
+            get
+            {
+                return TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
+            }
         }
     }
 }

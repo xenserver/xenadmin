@@ -111,12 +111,13 @@ namespace XenAdmin.Wizards.GenericPages
 		    InitializeText();
 		}
 
-        private void InitializeText()
+        protected void InitializeText()
         {
             m_labelIntro.Text = IntroductionText;
             m_radioAllOnSameSr.Text = AllOnSameSRRadioButtonText;
             m_radioSpecifySr.Text = OnSpecificSRRadioButtonText;
             m_comboBoxSr.GotFocus += m_comboBoxSr_GotFocus;
+            m_colVmDisk.HeaderText = VmDiskColumnHeaderText;
             SetupTabIndices();
         }
 
@@ -136,6 +137,14 @@ namespace XenAdmin.Wizards.GenericPages
 	    protected abstract string IntroductionText { get; }
         protected abstract string AllOnSameSRRadioButtonText { get; }
         protected abstract string OnSpecificSRRadioButtonText { get; }
+
+        protected virtual string VmDiskColumnHeaderText
+        {
+            get
+            {
+                return m_colVmDisk.HeaderText;
+            }
+        }
 
 		#region Base class (XenTabPage) overrides
 

@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards.GenericPages
     }
 
     #region Decorator classes to convert VM Mappings to a summary
-    public class TitleSummary : MappingSummaryDecorator
+    public abstract class TitleSummary : MappingSummaryDecorator
     {
         private readonly VmMapping mapping;
         public TitleSummary(MappingSummary summary, VmMapping mapping)
@@ -84,11 +84,43 @@ namespace XenAdmin.Wizards.GenericPages
             get
             {
                 List<SummaryDetails> decoratedSummary = summary.Details;
-                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_MIGRATE_VM, mapping.VmNameLabel));
+                decoratedSummary.Add(new SummaryDetails(SummaryKeyText, mapping.VmNameLabel));
                 return decoratedSummary;
             }
         }
+
+        protected abstract string SummaryKeyText
+        {
+            get;
+        }
     }
+
+    public class VmTitleSummary : TitleSummary
+    {
+        public VmTitleSummary(MappingSummary summary, VmMapping mapping)
+            : base(summary, mapping)
+        {
+        }
+
+        protected override string SummaryKeyText
+        {
+            get { return Messages.CPM_SUMMARY_KEY_MIGRATE_VM; }
+        }
+    }
+
+    public class TemplateTitleSummary : TitleSummary
+    {
+        public TemplateTitleSummary(MappingSummary summary, VmMapping mapping)
+            : base(summary, mapping)
+        {
+        }
+
+        protected override string SummaryKeyText
+        {
+            get { return Messages.CPM_SUMMARY_KEY_MIGRATE_TEMPLATE; }
+        }
+    }
+
 
     public class DestinationPoolSummary : MappingSummaryDecorator
     {

@@ -86,6 +86,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             InitialiseWizard(selection);
         }
 
+        private bool HasTemplatesOnly { get; set; }
+
         private bool IsIntraPoolMigration()
         {
             return m_vmMappings.All(IsIntraPoolMigration);
@@ -152,18 +154,22 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected void InitialiseWizard(IEnumerable<SelectedItem> selection)
         {
+            var vmsFromSelection = VmsFromSelection(selection);
+
             CreateMappingsFromSelection(selection);
+            HasTemplatesOnly = vmsFromSelection != null && vmsFromSelection.All(vm => vm.is_a_template);
+
             UpdateWindowTitle();
             m_pageDestination = CreateCrossPoolMigrateDestinationPage(selection);
 
-            m_pageStorage = new CrossPoolMigrateStoragePage();
-            m_pageNetwork = new CrossPoolMigrateNetworkingPage();
-            m_pageTransferNetwork = new CrossPoolMigrateTransferNetworkPage(VmsFromSelection(selection));
-            m_pageFinish = new CrossPoolMigrateFinishPage(selection.Count(), wizardMode) { SummaryRetreiver = GetVMMappingSummary };
+            m_pageStorage = new CrossPoolMigrateStoragePage(HasTemplatesOnly);
+            m_pageNetwork = new CrossPoolMigrateNetworkingPage(HasTemplatesOnly);
+            m_pageTransferNetwork = new CrossPoolMigrateTransferNetworkPage(vmsFromSelection, HasTemplatesOnly);
+            m_pageFinish = new CrossPoolMigrateFinishPage(selection.Count(), wizardMode, HasTemplatesOnly) { SummaryRetreiver = GetVMMappingSummary };
             m_pageTargetRbac = new RBACWarningPage();
 
-            m_pageCopyMode = new CrossPoolMigrateCopyModePage(VmsFromSelection(selection));
-            m_pageIntraPoolCopy = new IntraPoolCopyPage(VmsFromSelection(selection));
+            m_pageCopyMode = new CrossPoolMigrateCopyModePage(vmsFromSelection);
+            m_pageIntraPoolCopy = new IntraPoolCopyPage(vmsFromSelection);
 
             if (wizardMode == WizardMode.Copy)
                 AddPages(m_pageCopyMode, m_pageIntraPoolCopy);
@@ -404,7 +410,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             MappingSummary summary = new VMMappingSummary();
             foreach (KeyValuePair<string, VmMapping> pair in m_vmMappings)
             {
-                summary = new TitleSummary(summary, pair.Value);
+                if (HasTemplatesOnly)
+                    summary = new TemplateTitleSummary(summary, pair.Value);
+                else
+                    summary = new VmTitleSummary(summary, pair.Value);
+
                 summary = new DestinationPoolSummary(summary, pair.Value, TargetConnection);
                 summary = new HomeServerSummary(summary, pair.Value, TargetConnection);
                 summary = new TransferNetworkSummary(summary, m_pageTransferNetwork.NetworkUuid.Value);

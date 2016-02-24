@@ -38,16 +38,21 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     public partial class CrossPoolMigrateTransferNetworkPage : XenTabPage
     {
         private List<VM> selectedVMs;
+        private readonly bool templatesOnly = false;
 
-        public CrossPoolMigrateTransferNetworkPage(List<VM> selectedVMs)
+        public CrossPoolMigrateTransferNetworkPage(List<VM> selectedVMs, bool templatesOnly)
         {
-            this.selectedVMs = selectedVMs; 
+            this.selectedVMs = selectedVMs;
+            this.templatesOnly = templatesOnly;
+
             InitializeComponent();
             InitializeCustomPageElements();
         }
 
         private void InitializeCustomPageElements()
         {
+            blurbText.Text = templatesOnly ? Messages.CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE : Messages.CPS_WIZARD_MIGRATION_PAGE_TITLE_VM;
+
             networkComboBox.IncludePoolNameInComboBox = true;
             networkComboBox.IncludeOnlyEnabledNetworksInComboBox = true;
             networkComboBox.IncludeOnlyNetworksWithIPAddresses = true;
@@ -71,7 +76,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return "TransferNetwork"; } }
+        public override string HelpID { get { return templatesOnly ? "TransferNetworkTemplate" : "TransferNetwork"; } }
 
         protected override bool ImplementsIsDirty()
         {

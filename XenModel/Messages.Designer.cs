@@ -8387,6 +8387,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select where would you like to copy your template.
+        /// </summary>
+        public static string COPY_VM_WIZARD_RUBRIC_TEMPLATE {
+            get {
+                return ResourceManager.GetString("COPY_VM_WIZARD_RUBRIC_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select where would you like to copy your VM..
+        /// </summary>
+        public static string COPY_VM_WIZARD_RUBRIC_VM {
+            get {
+                return ResourceManager.GetString("COPY_VM_WIZARD_RUBRIC_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy VM.
         /// </summary>
         public static string COPY_VM_WIZARD_TITLE {
@@ -8493,6 +8511,15 @@ namespace XenAdmin {
         public static string CPM_SUMMARY_KEY_HOME_SERVER {
             get {
                 return ResourceManager.GetString("CPM_SUMMARY_KEY_HOME_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template:.
+        /// </summary>
+        public static string CPM_SUMMARY_KEY_MIGRATE_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPM_SUMMARY_KEY_MIGRATE_TEMPLATE", resourceCulture);
             }
         }
         
@@ -8614,6 +8641,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected templates to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE {
@@ -8688,6 +8733,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected template using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the template..
+        /// </summary>
+        public static string CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected templates using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the templates..
+        /// </summary>
+        public static string CPM_WIZARD_FINISH_PAGE_INTRO_COPY_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_INTRO_COPY_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VM..
         /// </summary>
         public static string CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE {
@@ -8738,6 +8801,24 @@ namespace XenAdmin {
         public static string CPM_WIZARD_NETWORKING_INTRO_SINGLE {
             get {
                 return ResourceManager.GetString("CPM_WIZARD_NETWORKING_INTRO_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map the virtual network interfaces in the selected templates to networks in the destination pool or standalone server..
+        /// </summary>
+        public static string CPM_WIZARD_NETWORKING_INTRO_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_NETWORKING_INTRO_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map the virtual network interfaces in the selected template to networks in the destination pool or standalone server..
+        /// </summary>
+        public static string CPM_WIZARD_NETWORKING_INTRO_TEMPLATE_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_NETWORKING_INTRO_TEMPLATE_SINGLE", resourceCulture);
             }
         }
         
@@ -8864,6 +8945,64 @@ namespace XenAdmin {
         public static string CPM_WLB_ENABLED_ON_VM_FAILURE_REASON {
             get {
                 return ResourceManager.GetString("CPM_WLB_ENABLED_ON_VM_FAILURE_REASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
+        ///
+        ///For optimal performance and reliability during template migration, ensure that the network used for the storage migration is not being used for management or virtual machine traffic..
+        /// </summary>
+        public static string CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
+        ///
+        ///For optimal performance and reliability during VM migration, ensure that the network used for the storage migration is not being used for management or virtual machine traffic..
+        /// </summary>
+        public static string CPS_WIZARD_MIGRATION_PAGE_TITLE_VM {
+            get {
+                return ResourceManager.GetString("CPS_WIZARD_MIGRATION_PAGE_TITLE_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template - Virtual Network Interface.
+        /// </summary>
+        public static string CPS_WIZARD_NETWORKING_NETWORK_COLUMN_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPS_WIZARD_NETWORKING_NETWORK_COLUMN_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM - Virtual Network Interface.
+        /// </summary>
+        public static string CPS_WIZARD_NETWORKING_NETWORK_COLUMN_VM {
+            get {
+                return ResourceManager.GetString("CPS_WIZARD_NETWORKING_NETWORK_COLUMN_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template - Virtual Disk.
+        /// </summary>
+        public static string CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM - Virtual Disk.
+        /// </summary>
+        public static string CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM {
+            get {
+                return ResourceManager.GetString("CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM", resourceCulture);
             }
         }
         

@@ -40,9 +40,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     class CrossPoolMigrateStoragePage : SelectVMStorageWithMultipleVirtualDisksPage
     {
-        public CrossPoolMigrateStoragePage()
+        private readonly bool templatesOnly = false;
+
+        public CrossPoolMigrateStoragePage(bool templatesOnly)
         {
             DisplayDiskCapacity = false;
+            this.templatesOnly = templatesOnly;
+
+            InitializeText();
         }
 
         protected override bool ImplementsIsDirty()
@@ -72,7 +77,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return "Storage"; } }
+        public override string HelpID { get { return templatesOnly ? "StorageTemplate" : "Storage"; } }
 
         public override StorageResourceContainer ResourceData(string sysId)
         {
@@ -96,6 +101,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
 
             base.PageLeave(direction, ref cancel);
+        }
+
+        protected override string VmDiskColumnHeaderText
+        {
+            get
+            {
+                return templatesOnly ? Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE : Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM;
+            }
         }
     }
 }
