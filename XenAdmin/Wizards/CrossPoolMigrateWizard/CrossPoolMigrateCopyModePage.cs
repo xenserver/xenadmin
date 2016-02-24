@@ -43,6 +43,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             this.selectedVMs = selectedVMs; 
             InitializeComponent();
+
+            if (selectedVMs != null && selectedVMs.Count == 1 && selectedVMs[0] != null && selectedVMs[0].is_a_template)
+                labelRubric.Text = Messages.COPY_VM_WIZARD_RUBRIC_TEMPLATE;
+            else
+                labelRubric.Text = Messages.COPY_VM_WIZARD_RUBRIC_VM;
         }
 
         private bool _buttonNextEnabled;
