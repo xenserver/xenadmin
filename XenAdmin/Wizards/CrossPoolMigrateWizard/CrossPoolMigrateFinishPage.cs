@@ -61,7 +61,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 			get { return Messages.FINISH_PAGE_TEXT; }
 		}
 
-        public override string HelpID { get { return "MigrationSummary"; } }
+        public override string HelpID { get { return templatesOnly ? "MigrationSummaryTemplate" : "MigrationSummary"; } }
 
         /// <summary>
         /// Gets the page's title (headline)

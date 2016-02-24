@@ -1089,4 +1089,22 @@
   <data name="XenServerUpdateAlert" xml:space="preserve">
     <value>7014</value>
   </data>
+  <data name="CrossPoolMigrateWizard_DestinationTemplatePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_IntraPoolCopyPane1" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_MigrationSummaryTemplatePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_NetworkingTemplatePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_StorageTemplatePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_TransferNetworkTemplatePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
 </root>

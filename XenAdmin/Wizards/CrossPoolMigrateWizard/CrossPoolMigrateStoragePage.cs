@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return "Storage"; } }
+        public override string HelpID { get { return templatesOnly ? "StorageTemplate" : "Storage"; } }
 
         public override StorageResourceContainer ResourceData(string sysId)
         {
