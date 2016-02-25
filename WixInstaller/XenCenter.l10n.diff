@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	2016-02-16 11:09:24.524929500 +0800
-+++ XenCenter.l10n.wxs	2016-02-16 11:50:37.348205900 +0800
+--- XenCenter.wxs	Thu Feb 25 09:58:51 2016
++++ XenCenter.l10n.wxs	Thu Feb 25 10:03:59 2016
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -39,7 +39,7 @@
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
-@@ -86,64 +86,64 @@
+@@ -88,64 +88,64 @@
                              <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
                              <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
                              <File Id="XsupdateIcon" Source="..\Branding\Images\file_updates.ico" />
@@ -127,7 +127,7 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -168,13 +168,35 @@
+@@ -170,13 +170,37 @@
                          </Directory>
                          <?else?>
                          <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
@@ -137,8 +137,8 @@
                          <?endif?>
                          <Directory Id="Help" Name="Help">
                              <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
--                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
--                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
+                                 <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
+                                 <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
 +                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].ja.chm" />  
 +                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />  
 +                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].zh-CN.chm" />  
@@ -166,7 +166,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -269,13 +291,15 @@
+@@ -271,13 +295,15 @@
          <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -183,7 +183,7 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-@@ -302,7 +326,7 @@
+@@ -304,7 +330,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />
