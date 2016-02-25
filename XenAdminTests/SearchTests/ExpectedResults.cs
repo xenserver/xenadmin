@@ -73,7 +73,6 @@ namespace XenAdminTests.SearchTests
                 
         }
 
-        [Ignore]
         public void RunTest()
         {
             Assert.AreEqual(Search.Searches.Length, expectedResults.Count, "Wrong number of searches in results file " + resultsFileName);

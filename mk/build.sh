@@ -111,7 +111,12 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    source ${XENADMIN_DIR}/mk/tests-checks.sh
+	# Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+	if [ -n "${SKIP_TESTS+x}" ]; then
+		echo "Tests skipped because SKIP_TESTS declared"
+	else
+		source ${XENADMIN_DIR}/mk/tests-checks.sh
+	fi
     source ${XENADMIN_DIR}/mk/archive-push.sh
     source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
@@ -121,7 +126,12 @@ private_jenkins_build()
 {
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    source ${XENADMIN_DIR}/mk/tests-checks.sh
+    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+	if [ -n "${SKIP_TESTS+x}" ]; then
+		echo "Tests skipped because SKIP_TESTS declared"
+	else
+		source ${XENADMIN_DIR}/mk/tests-checks.sh
+	fi
     source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
 
