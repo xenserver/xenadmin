@@ -44,10 +44,6 @@ namespace XenAdmin.Actions
         private readonly Action _xsToolsNotFound;
         private readonly bool _searchHiddenIsOs;
 
-        // The 'well known' name of the ISO containing our PV tools.
-        public const string ISONameOld = "xswindrivers.iso";
-        public const string ISONameNew = "xs-tools.iso";
-
         public InstallPVToolsAction(VM vm, Action xsToolsNotfound, bool searchHiddenISOs)
             : base(vm.Connection, string.Format(Messages.INSTALLTOOLS_TITLE, vm.Name))
         {
@@ -140,12 +136,8 @@ namespace XenAdmin.Actions
                 {
                     foreach (VDI vdi in Connection.ResolveAllShownXenModelObjects(sr.VDIs, searchHiddenISOs))
                     {
-                        if (ISONameOld.Equals(vdi.name_label) ||
-                            ISONameNew.Equals(vdi.name_label) ||
-                            vdi.is_tools_iso)
-                        {
+                        if (vdi.IsToolsIso)
                             return vdi;
-                        }
                     }
                 }
             }

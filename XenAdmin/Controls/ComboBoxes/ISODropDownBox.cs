@@ -257,8 +257,7 @@ namespace XenAdmin.Controls
                 {
                     foreach (VDI vdi in connection.ResolveAll<VDI>(srWrapper.item.VDIs))
                     {
-                        if(Actions.InstallPVToolsAction.ISONameOld.Equals(vdi.name_label) ||
-                            Actions.InstallPVToolsAction.ISONameNew.Equals(vdi.name_label))
+                        if (vdi.IsToolsIso)
                             items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name));
                     }
                 }
