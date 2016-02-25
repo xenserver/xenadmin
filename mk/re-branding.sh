@@ -211,3 +211,10 @@ then
   rm ${REPO}/XenAdmin/Help/XenCenter.chm ${REPO}/XenAdmin/Help/XenCenter.ja.chm ${REPO}/XenAdmin/Help/XenCenter.zh-CN.chm
   mv ${REPO}/Branding/Help/*.chm ${REPO}/XenAdmin/Help/
 fi
+
+#Overwrite HomePage
+if [ -d ${REPO}/Branding/HomePage ]; then
+then 
+  rm ${REPO}/XenAdmin/HomePage*.mht
+  cp ${REPO}/Branding/HomePage/*.mht ${REPO}/XenAdmin/
+fi
