@@ -17686,7 +17686,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva)|*.xva.
+        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva)|*.xva|XVA Version 1|ova.xml.
         /// </summary>
         public static string IMPORT_SOURCE_PAGE_FILETYPES {
             get {
@@ -25993,7 +25993,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XVA (*.xva)|*.xva.
+        ///   Looks up a localized string similar to XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml.
         /// </summary>
         public static string PATHPICKER_FILETYPE {
             get {
