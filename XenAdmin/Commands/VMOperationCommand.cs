@@ -224,7 +224,7 @@ namespace XenAdmin.Commands
         }
 
 
-        public static void StartDiagnosisForm(VM vm)
+        public static void StartDiagnosisForm(VM vm, bool isStart)
         {
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -246,6 +246,11 @@ namespace XenAdmin.Commands
                     foreach (Host host in connection.Cache.Hosts)
                     {
                         reasons[host] = string.Empty;
+                        if (!isStart && VMOperationHostCommand.VmCpuFeaturesIncompatibleWithHost(host, vm))
+                        {
+                            reasons[host] = FriendlyErrorNames.VM_INCOMPATIBLE_WITH_THIS_HOST;
+                            continue;
+                        }
                         try
                         {
                             VM.assert_can_boot_here(session, vm.opaque_ref, host.opaque_ref);
@@ -276,7 +281,7 @@ namespace XenAdmin.Commands
             if (failure.ErrorDescription[0] == Failure.NO_HOSTS_AVAILABLE)
             {
                 // Show a dialog displaying why the VM couldn't be started on each host
-                StartDiagnosisForm(VMStartAction.VM);
+                StartDiagnosisForm(VMStartAction.VM, VMStartAction.IsStart);
             }
             else if (failure.ErrorDescription[0] == Failure.HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN)
             {
