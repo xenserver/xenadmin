@@ -312,7 +312,7 @@ namespace XenAdmin.Actions.Wlb
 
             if (failure.ErrorDescription[0] == Failure.NO_HOSTS_AVAILABLE)
             {
-                VMOperationCommand.StartDiagnosisForm(vm);
+                VMOperationCommand.StartDiagnosisForm(vm, vm.power_state == vm_power_state.Halted);
             }
             else if (failure.ErrorDescription[0] == Failure.HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN)
             {
