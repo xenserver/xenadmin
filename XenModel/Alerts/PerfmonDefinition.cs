@@ -266,9 +266,17 @@ namespace XenAdmin.Alerts
 
                 foreach (XmlNode node in parentNode.ChildNodes)
                 {
-                    var def = new PerfmonDefinition(node);
-                    if (def.HasValueSet)
-                        perfmonDefinitions.Add(def);
+                    try
+                    {
+                        var def = new PerfmonDefinition(node);
+                        if (def.HasValueSet)
+                            perfmonDefinitions.Add(def);
+                    }
+                    catch (Exception e)
+                    {
+                        log.DebugFormat("Exception unmarshalling perfmon definition '{0}'", node.OuterXml);
+                        log.Debug(e, e);
+                    }
                 }
 
                 return perfmonDefinitions.ToArray();
