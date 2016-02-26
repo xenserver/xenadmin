@@ -213,7 +213,7 @@ then
 fi
 
 #Overwrite HomePage
-if [ -d ${REPO}/Branding/HomePage ]; then
+if [ -d ${REPO}/Branding/HomePage ]
 then 
   rm ${REPO}/XenAdmin/HomePage*.mht
   cp ${REPO}/Branding/HomePage/*.mht ${REPO}/XenAdmin/
