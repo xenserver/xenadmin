@@ -43,7 +43,7 @@
                              <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
                              <!-- Homepage -->
                              <File Id="XenCenterHomePage" Source="..\XenAdmin\bin\Release\HomePage.mht" />
-+                            <File Id="XenCenterJaHomePage"Source="..\XenAdmin\bin\Release\HomePage.ja.mht" />
++                            <File Id="XenCenterJaHomePage" Source="..\XenAdmin\bin\Release\HomePage.ja.mht" />
 +                            <File Id="XenCenterScHomePage" Source="..\XenAdmin\bin\Release\HomePage.zh-CN.mht" />
                              <!-- Icons -->
                              <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
