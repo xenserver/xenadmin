@@ -179,6 +179,7 @@ namespace XenAdmin.Alerts
                 else if (node.Name.Equals(ALARM_TYPE_ELEMENT_NAME))
                 {
                     name = node.Attributes[ALARM_COMMON_ATTR_NAME].Value;
+                    success = true;
                 }
                 else if (node.Name.Equals(ALARM_TRIGGER_LEVEL_ELEMENT_NAME))
                 {
@@ -264,15 +265,11 @@ namespace XenAdmin.Alerts
                 List<PerfmonDefinition> perfmonDefinitions = new List<PerfmonDefinition>();
 
                 foreach (XmlNode node in parentNode.ChildNodes)
-                    try
-                    {
-                        perfmonDefinitions.Add(new PerfmonDefinition(node));
-                    }
-                    catch (Exception e)
-                    {
-                        log.DebugFormat("Exception unmarshalling perfmon definition '{0}'", node.OuterXml);
-                        log.Debug(e, e);
-                    }
+                {
+                    var def = new PerfmonDefinition(node);
+                    if (def.HasValueSet)
+                        perfmonDefinitions.Add(def);
+                }
 
                 return perfmonDefinitions.ToArray();
             }
