@@ -41,10 +41,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     class CrossPoolMigrateNetworkingPage : SelectMultipleVMNetworkPage
     {
         private readonly bool templatesOnly = false;
+        private readonly WizardMode wizardMode;
 
-        public CrossPoolMigrateNetworkingPage(bool templatesOnly)
+        public CrossPoolMigrateNetworkingPage(bool templatesOnly, WizardMode wizardMode)
         {
             this.templatesOnly = templatesOnly;
+            this.wizardMode = wizardMode;
 
             InitializeText();
         }
@@ -81,7 +83,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return templatesOnly ? "NetworkingTemplate" : "Networking"; } }
+        public override string HelpID { get { return templatesOnly || wizardMode == WizardMode.Copy ? "NetworkingTemplate" : "Networking"; } }
 
         public override NetworkResourceContainer NetworkData(string sysId)
         {

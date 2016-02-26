@@ -39,11 +39,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     {
         private List<VM> selectedVMs;
         private readonly bool templatesOnly = false;
+        private readonly WizardMode wizardMode;
 
-        public CrossPoolMigrateTransferNetworkPage(List<VM> selectedVMs, bool templatesOnly)
+        public CrossPoolMigrateTransferNetworkPage(List<VM> selectedVMs, bool templatesOnly, WizardMode wizardMode)
         {
             this.selectedVMs = selectedVMs;
             this.templatesOnly = templatesOnly;
+            this.wizardMode = wizardMode;
 
             InitializeComponent();
             InitializeCustomPageElements();
@@ -76,7 +78,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return templatesOnly ? "TransferNetworkTemplate" : "TransferNetwork"; } }
+        public override string HelpID { get { return templatesOnly || wizardMode == WizardMode.Copy ? "TransferNetworkTemplate" : "TransferNetwork"; } }
 
         protected override bool ImplementsIsDirty()
         {

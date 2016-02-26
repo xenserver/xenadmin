@@ -41,11 +41,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     class CrossPoolMigrateStoragePage : SelectVMStorageWithMultipleVirtualDisksPage
     {
         private readonly bool templatesOnly = false;
+        private readonly WizardMode wizardMode;
 
-        public CrossPoolMigrateStoragePage(bool templatesOnly)
+        public CrossPoolMigrateStoragePage(bool templatesOnly, WizardMode wizardMode)
         {
             DisplayDiskCapacity = false;
             this.templatesOnly = templatesOnly;
+            this.wizardMode = wizardMode;
 
             InitializeText();
         }
@@ -77,7 +79,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return templatesOnly ? "StorageTemplate" : "Storage"; } }
+        public override string HelpID { get { return templatesOnly || wizardMode == WizardMode.Copy ? "StorageTemplate" : "Storage"; } }
 
         public override StorageResourceContainer ResourceData(string sysId)
         {
