@@ -374,6 +374,11 @@ namespace XenAdmin.Core
             get { return ReadInstalledKey(HIDDEN_FEATURES); }
         }
 
+        public static string AdditionalFeatures
+        {
+            get { return ReadInstalledKey(ADDITIONAL_FEATURES); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -396,6 +401,7 @@ namespace XenAdmin.Core
         private const string HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME = "HealthCheckDiagnosticDomainName";
         private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
+        private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

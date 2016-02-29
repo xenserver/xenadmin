@@ -73,8 +73,9 @@ rebranding_global()
 
 rebranding_features()
 {
-  sed -b -i -e "s#\[BRANDING_HIDDEN_FEATURE\]#${BRANDING_HIDDEN_FEATURE}#g" \
-      $1   
+  sed -b -i -e "s#\[BRANDING_HIDDEN_FEATURES\]#${BRANDING_HIDDEN_FEATURES}#g" \
+	  -e "s#\[BRANDING_ADDITIONAL_FEATURES\]#${BRANDING_ADDITIONAL_FEATURES}#g" \
+	  $1   
 }
 
 rebranding_GUID()
