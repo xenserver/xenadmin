@@ -413,6 +413,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             
             labelError.Text = errorMessage ?? string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
 
+            log.ErrorFormat("Error message displayed: {0}", labelError.Text);
+
             pictureBox1.Image = SystemIcons.Error.ToBitmap();
             if (exception.InnerException is SupplementalPackInstallFailedException)
             {
