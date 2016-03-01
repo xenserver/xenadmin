@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return templatesOnly || wizardMode == WizardMode.Copy ? "NetworkingTemplate" : "Networking"; } }
+        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "NetworkingTemplate" : "Networking"; } }
 
         public override NetworkResourceContainer NetworkData(string sysId)
         {
