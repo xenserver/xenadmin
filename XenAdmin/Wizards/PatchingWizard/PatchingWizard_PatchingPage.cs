@@ -409,6 +409,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 var innerEx = exception.InnerException as Failure;
                 errorMessage = innerEx.Message;
+
+                if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
+                    log.Error(string.Concat(innerEx.ErrorDescription.ToArray()));
             }
             
             labelError.Text = errorMessage ?? string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
