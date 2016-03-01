@@ -41,8 +41,6 @@ using XenAdmin.Dialogs.VMProtectionRecovery;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAPI;
-using XenCenterLib;
-
 
 namespace XenAdmin.Dialogs.HealthCheck
 {
@@ -60,18 +58,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private Pool currentSelected = null;
 
-        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                log.Error(e.Error);
-                return;
-            }
-
-            Program.Invoke(this, () => RefreshGrid((List<DataGridViewRow>)e.Result));
-        }
-
-        private void RefreshGrid(List<DataGridViewRow> rows)
+        private void LoadPools()
         {
             Program.AssertOnEventThread();
 
@@ -81,11 +68,14 @@ namespace XenAdmin.Dialogs.HealthCheck
             {
                 poolsDataGridView.Rows.Clear();
 
-                foreach (var row in rows)
+                foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
                 {
-                    if (poolsDataGridView.ColumnCount > 0)
+                    if (!xenConnection.IsConnected || Helpers.FeatureForbidden(xenConnection, Host.RestrictHealthCheck))
+                        continue;
+                    var pool = Helpers.GetPoolOfOne(xenConnection);
+                    if (pool != null && poolsDataGridView.ColumnCount > 0)
                     {
-                        poolsDataGridView.Rows.Add(row);
+                        poolsDataGridView.Rows.Add(new PoolRow(pool));
                     }
                 }
                 RefreshButtons();
@@ -110,35 +100,11 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
         }
 
-        object worker_DoWork(object sender, object argument)
-        {
-            var list = new List<DataGridViewRow>();
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (!xenConnection.IsConnected || Helpers.FeatureForbidden(xenConnection, Host.RestrictHealthCheck)) 
-                    continue;
-                var pool = Helpers.GetPoolOfOne(xenConnection);
-                if (pool != null)
-                {
-                    var poolRow = new PoolRow(pool);
-                    list.Add(poolRow);
-                }
-            }
-            return list;
-        }
-
         void Pool_BatchCollectionChanged(object sender, EventArgs e)
         {
             LoadPools();
         }
-
-
-        QueuedBackgroundWorker worker = new QueuedBackgroundWorker();
-        private void LoadPools()
-        {
-            worker.RunWorkerAsync(worker_DoWork, worker_RunWorkerCompleted);
-        }
-
+        
         #region PoolRow
         private class PoolRow : DataGridViewRow
         {
