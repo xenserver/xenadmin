@@ -74,7 +74,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return TemplatesOnly ? "DestinationTemplate" : "Destination"; } }
+        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "DestinationCopyMode" : "Destination"; } }
 
         /// <summary>
         /// Gets the page's title (headline)
