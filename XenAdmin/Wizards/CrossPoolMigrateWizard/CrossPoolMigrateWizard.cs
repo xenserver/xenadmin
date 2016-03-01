@@ -162,7 +162,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             UpdateWindowTitle();
             m_pageDestination = CreateCrossPoolMigrateDestinationPage(selection);
 
-            m_pageStorage = new CrossPoolMigrateStoragePage(HasTemplatesOnly, wizardMode);
+            m_pageStorage = new CrossPoolMigrateStoragePage(wizardMode);
             m_pageNetwork = new CrossPoolMigrateNetworkingPage(HasTemplatesOnly, wizardMode);
             m_pageTransferNetwork = new CrossPoolMigrateTransferNetworkPage(vmsFromSelection, HasTemplatesOnly, wizardMode);
             m_pageFinish = new CrossPoolMigrateFinishPage(selection.Count(), wizardMode, HasTemplatesOnly) { SummaryRetreiver = GetVMMappingSummary };
