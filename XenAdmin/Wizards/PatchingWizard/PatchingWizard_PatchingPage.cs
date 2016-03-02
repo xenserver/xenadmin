@@ -402,8 +402,22 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void FinishedWithErrors(Exception exception)
         {
             labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, GetUpdateName());
-            string errorMessage = string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
-            labelError.Text = errorMessage;
+            
+            string errorMessage = null;
+
+            if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
+            {
+                var innerEx = exception.InnerException as Failure;
+                errorMessage = innerEx.Message;
+
+                if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
+                    log.Error(string.Concat(innerEx.ErrorDescription.ToArray()));
+            }
+            
+            labelError.Text = errorMessage ?? string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
+
+            log.ErrorFormat("Error message displayed: {0}", labelError.Text);
+
             pictureBox1.Image = SystemIcons.Error.ToBitmap();
             if (exception.InnerException is SupplementalPackInstallFailedException)
             {
