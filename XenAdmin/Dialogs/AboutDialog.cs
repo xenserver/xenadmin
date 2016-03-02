@@ -58,7 +58,7 @@ namespace XenAdmin.Dialogs
             label2.Visible = !HiddenFeatures.CopyrightHidden;
 
             showAgainCheckBox.Checked = Properties.Settings.Default.ShowAboutDialog;
-            var showLicenseNag = !HiddenFeatures.LicenseNagHidden;
+            var showLicenseNag = HiddenFeatures.LicenseNagVisible;
             LicenseDetailsTextBox.Text = showLicenseNag ? GetLicenseDetails() : "";
             licenseDetailsLabel.Visible = LicenseDetailsTextBox.Visible = showLicenseNag;
             showAgainCheckBox.Visible = showLicenseNag;

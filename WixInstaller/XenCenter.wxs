@@ -37,6 +37,8 @@
     <?define ProductVersion="1.0.0" ?>
     <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
+	<?define HiddenFeatures="[BRANDING_HIDDEN_FEATURES]"?>
+	<?define AdditionalFeatures="[BRANDING_ADDITIONAL_FEATURES]"?>
     <Product Id="$(var.ProductCode)" Name="[Citrix] [XenCenter]" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
         <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
@@ -256,7 +258,12 @@
             <Component Id="RegistryEntries" Guid="[BRANDING_REGISTRY_ENTRIES_GUID]">
                 <RegistryKey Root="HKMU" Key="Software\[Citrix]\[XenCenter]">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
-                    <RegistryValue Type="string" Name="HiddenFeatures" Value="[BRANDING_HIDDEN_FEATURE]" />
+                    <?if "$(var.HiddenFeatures)" != ""?>
+						<RegistryValue Type="string" Name="HiddenFeatures" Value="$(var.HiddenFeatures)" />
+					<?endif?>
+                    <?if "$(var.AdditionalFeatures)" != ""?>
+						<RegistryValue Type="string" Name="AdditionalFeatures" Value="$(var.AdditionalFeatures)" />
+					<?endif?>
                 </RegistryKey>
             </Component>
         </DirectoryRef>

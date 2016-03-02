@@ -28,18 +28,18 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	Thu Feb 25 10:17:31 2016
-+++ XenCenter.l10n.wxs	Thu Feb 25 10:21:15 2016
-@@ -38,7 +38,7 @@
-     <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
-     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
+--- XenCenter.wxs	Mon Feb 29 13:51:55 2016
++++ XenCenter.l10n.wxs	Mon Feb 29 13:56:26 2016
+@@ -40,7 +40,7 @@
+ 	<?define HiddenFeatures="[BRANDING_HIDDEN_FEATURES]"?>
+ 	<?define AdditionalFeatures="[BRANDING_ADDITIONAL_FEATURES]"?>
      <Product Id="$(var.ProductCode)" Name="[Citrix] [XenCenter]" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
 -        <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
 +        <Package Languages="1033,1041,2052,1028" Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
-@@ -82,70 +82,72 @@
+@@ -84,70 +84,72 @@
                              <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
                              <!-- Homepage -->
                              <File Id="XenCenterHomePage" Source="..\XenAdmin\bin\Release\HomePage.mht" />
@@ -135,7 +135,7 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -170,13 +172,37 @@
+@@ -172,13 +174,37 @@
                          </Directory>
                          <?else?>
                          <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
@@ -174,7 +174,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -271,13 +297,15 @@
+@@ -278,13 +304,15 @@
          <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -191,7 +191,7 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-@@ -304,7 +332,7 @@
+@@ -311,7 +339,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK45" />

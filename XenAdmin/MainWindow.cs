@@ -634,7 +634,7 @@ namespace XenAdmin
             Program.AssertOnEventThread();
             if (connectionsInProgressOnStartup > 0)
                 return;
-            if (Properties.Settings.Default.ShowAboutDialog && !HiddenFeatures.LicenseNagHidden)
+            if (Properties.Settings.Default.ShowAboutDialog && HiddenFeatures.LicenseNagVisible)
                 ShowForm(typeof(AboutDialog));
         }
 
