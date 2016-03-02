@@ -391,7 +391,7 @@
     <value>1</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>Download update from &amp;[Citrix]</value>
+    <value>Download &amp;update from [Citrix]</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>

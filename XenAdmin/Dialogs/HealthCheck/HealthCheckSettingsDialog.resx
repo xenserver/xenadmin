@@ -1309,7 +1309,7 @@
     <value>21</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
-    <value>Use the current &amp;[XenCenter] credentials</value>
+    <value>Use the cu&amp;rrent [XenCenter] credentials</value>
   </data>
   <data name="&gt;&gt;currentXsCredentialsRadioButton.Name" xml:space="preserve">
     <value>currentXsCredentialsRadioButton</value>
