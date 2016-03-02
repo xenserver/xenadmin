@@ -1777,7 +1777,7 @@
     <value>186, 22</value>
   </data>
   <data name="templatesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;[XenServer] Templates</value>
+    <value>[XenServer] &amp;Templates</value>
   </data>
   <data name="localStorageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
