@@ -102,6 +102,7 @@
     <Compile Include="Actions\Pool_Patch\CheckDiskSpaceForPatchUploadAction.cs" />
     <Compile Include="Actions\Pool_Patch\CleanupDiskSpaceAction.cs" />
     <Compile Include="Actions\Pool_Patch\GetDiskSpaceRequirementsAction.cs" />
+    <Compile Include="Actions\Pool_Patch\PoolPatchCleanAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />

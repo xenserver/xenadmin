@@ -124,14 +124,29 @@ namespace XenAdmin.Wizards.PatchingWizard
           
             if (!IsAutomaticMode)
             {
+                textBoxLog.Text = ManualTextInstructions;
+                
+                List<AsyncAction> actions = new List<AsyncAction>();
                 if (SelectedUpdateType != UpdateType.NewSuppPack)
                     actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
                 else
                     actionManualMode = new InstallSupplementalPackAction(SuppPackVdis, false);
-                actionManualMode.Changed += action_Changed;
-                actionManualMode.Completed += action_Completed;
-                textBoxLog.Text = ManualTextInstructions;
-                actionManualMode.RunAsync();
+
+                actions.Add(actionManualMode);
+                if (RemoveUpdateFile && SelectedUpdateType != UpdateType.NewSuppPack)
+                {
+                    foreach (Pool pool in SelectedPools)
+                    {
+                        actions.Add(new PoolPatchCleanAction(pool, Patch, false));
+                    }
+                }
+
+                using (var multipleAction = new MultipleAction(Connection, "", "", "", actions, true, true, true))
+                {
+                    multipleAction.Changed += action_Changed;
+                    multipleAction.Completed += action_Completed;
+                    multipleAction.RunAsync();
+                }
                 return;
             }
 
