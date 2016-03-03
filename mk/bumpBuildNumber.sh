@@ -37,25 +37,18 @@ fi
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
-then
-    JENKINS_SERVER=http://tizon-1.xs.cbg.ccsi.eng.citrite.net:8080
-else
-    JENKINS_SERVER=http://tocco.do.citrite.net:8080
-fi
-
 url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
-if curl -n -s --fail "${url}" -o out.tmp ; then
+if curl -n -s -k --fail "${url}" -o out.tmp ; then
   echo "INFO:	URL exists: ${url}"
 else
   echo "ERROR:	URL does not exist: ${url}"
   exit 1
 fi
 
-NEXT_BN=$(curl -s -n "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
+NEXT_BN=$(curl -s -n -k "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
 
 echo "INFO:	NEXT_BN=${NEXT_BN}"
 
-curl -s -n --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
+curl -s -n -k --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
 
 set +u

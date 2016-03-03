@@ -37,18 +37,26 @@
 # way that it will continue to work even if it's executed manually by a developer
 # or from a build automation system.
 
-
-FATAL=""
-for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe signtool.exe candle.exe light.exe
-do
-  which $DEP >/dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    FATAL="$DEP $FATAL"
+function check_deps ()
+{
+  local -a MISSING=()
+  for DEP in "$@"
+  do
+    which $DEP >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      MISSING[${#MISSING}]=${DEP}
+    fi
+  done
+  if [ ${#MISSING} -gt 0 ]; then
+    echo "FATAL: One or more build tools were not found in PATH: ${MISSING[@]}"
+    exit 1
   fi
-done
-if [ -n "${FATAL}" ]; then
-  echo "FATAL: One or more build tools were not found in PATH: $FATAL"
-  exit 1
+}
+
+check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe
+if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
+then
+    check_deps signtool.exe
 fi
 
 
