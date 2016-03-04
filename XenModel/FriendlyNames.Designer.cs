@@ -142,6 +142,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tests for connectivity between [XenServer] and the internet.
+        /// </summary>
+        public static string Description_host_system_status_conntest {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-conntest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information and statistics about the system&apos;s control groups.
         /// </summary>
         public static string Description_host_system_status_control_slice {
@@ -1245,6 +1254,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_client_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-client-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection test.
+        /// </summary>
+        public static string Label_host_system_status_conntest {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-conntest", resourceCulture);
             }
         }
         

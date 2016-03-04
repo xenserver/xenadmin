@@ -1850,4 +1850,10 @@
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>Container management logs</value>
   </data>
+  <data name="Description-host.system_status-conntest" xml:space="preserve">
+    <value>Tests for connectivity between [XenServer] and the internet</value>
+  </data>
+  <data name="Label-host.system_status-conntest" xml:space="preserve">
+    <value>Connection test</value>
+  </data>
 </root>
