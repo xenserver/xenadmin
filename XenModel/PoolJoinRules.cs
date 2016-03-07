@@ -263,8 +263,7 @@ namespace XenAdmin.Core
         // the CPUs can be pooled but only if they are masked first.
         public static bool CompatibleCPUs(Host slave, Host master, bool allowCpuLevelling)
         {
-            // As of Dundee, feature levelling makes all CPUs compatible
-            if (slave == null || master == null || Helpers.DundeeOrGreater(master) || Helpers.DundeeOrGreater(slave))
+            if (slave == null || master == null)
                 return true;
 
             Dictionary<string, string> slave_cpu_info = slave.cpu_info;
@@ -276,6 +275,10 @@ namespace XenAdmin.Core
                 // (after masking the slave, if allowed).
                 if (slave_cpu_info["vendor"] != master_cpu_info["vendor"])
                     return false;
+
+                // As of Dundee, feature levelling makes all CPUs from the same vendor compatible
+                if (Helpers.DundeeOrGreater(master) || Helpers.DundeeOrGreater(slave))
+                    return true;
 
                 if (slave_cpu_info["features"] == master_cpu_info["features"])
                     return true;
