@@ -2425,7 +2425,7 @@ Do you want to assign it to the policy '{2}' instead?</value>
     <value>Checking role...</value>
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
-    <value>Checking safe to upgrade status</value>
+    <value>Checking partition layout</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>Checking server side status</value>

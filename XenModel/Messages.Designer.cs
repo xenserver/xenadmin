@@ -6661,7 +6661,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking safe to upgrade status.
+        ///   Looks up a localized string similar to Checking partition layout.
         /// </summary>
         public static string CHECKING_SAFE_TO_UPGRADE {
             get {
