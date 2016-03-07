@@ -115,7 +115,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists..
+        ///   Looks up a localized string similar to The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists..
         /// </summary>
         public static string AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED {
             get {
@@ -1501,7 +1501,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This type of license file is for previous versions. Please upgrade to the new licensing system..
+        ///   Looks up a localized string similar to This type of license file is for previous versions of the server. Please upgrade to the new licensing system..
         /// </summary>
         public static string LICENSE_FILE_DEPRECATED {
             get {
@@ -1528,7 +1528,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to contact your domain server. Check your settings are correct and that a route to the server exists..
+        ///   Looks up a localized string similar to The server was unable to contact your domain server. Check your settings are correct and that a route to the server exists..
         /// </summary>
         public static string LIKEWISE_WINERROR_0251E {
             get {
@@ -1834,7 +1834,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update failed to apply.  View output for more details..
+        ///   Looks up a localized string similar to The update failed to apply. View logs for more details..
         /// </summary>
         public static string PATCH_APPLY_FAILED {
             get {
@@ -1861,7 +1861,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tools ISO must be ejected from all running VMs in the pool..
+        ///   Looks up a localized string similar to The Tools ISO must be ejected from all running VMs in the pool..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_ISO_MOUNTED {
             get {
@@ -1906,7 +1906,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current build number ({1}) is incompatible with the update build number ({2})..
+        ///   Looks up a localized string similar to The current build number ({1}) is incompatible with the update build number ({2})..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_WRONG_SERVER_BUILD {
             get {
@@ -1915,7 +1915,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current version number ({1}) is incompatible with the update version number regular expression ({2})..
+        ///   Looks up a localized string similar to The current version number ({1}) is incompatible with the update version number regular expression ({2})..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION {
             get {
@@ -2167,7 +2167,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists..
+        ///   Looks up a localized string similar to The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists..
         /// </summary>
         public static string POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED {
             get {
@@ -2248,7 +2248,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host joining the pool may not have any bonds, VLANs or tunnels..
+        ///   Looks up a localized string similar to The host joining the pool must not have any bonds, VLANs or tunnels..
         /// </summary>
         public static string POOL_JOINING_HOST_MUST_ONLY_HAVE_PHYSICAL_PIFS {
             get {
@@ -2325,7 +2325,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The restore could not be performed because the restore script failed. Your Backup file may be corrupt. See the logs for more information..
+        ///   Looks up a localized string similar to The restore could not be performed because the restore script failed. Your backup file may be corrupt. See the logs for more information..
         /// </summary>
         public static string RESTORE_SCRIPT_FAILED {
             get {
@@ -2420,15 +2420,6 @@ namespace XenAPI {
         public static string SR_ATTACH_FAILED {
             get {
                 return ResourceManager.GetString("SR_ATTACH_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The SR is currently attached on a host other than the master..
-        /// </summary>
-        public static string SR_ATTACHED_ON_SLAVE {
-            get {
-                return ResourceManager.GetString("SR_ATTACHED_ON_SLAVE", resourceCulture);
             }
         }
         
@@ -3558,7 +3549,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer does not support extended characters in SMB paths, usernames, and passwords..
+        ///   Looks up a localized string similar to Extended characters are not supported in SMB paths, usernames, and passwords..
         /// </summary>
         public static string SR_BACKEND_FAILURE_446 {
             get {
@@ -4161,7 +4152,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VDI on SR which doesn&apos;t have snapshot capability.
+        ///   Looks up a localized string similar to You attempted to migrate a VDI to or from an SR that doesn&apos;t support migration.
         /// </summary>
         public static string SR_DOES_NOT_SUPPORT_MIGRATION {
             get {
@@ -4728,7 +4719,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VIF was not mapped to a destination Network in VM.migrate_send operation.
+        ///   Looks up a localized string similar to This VIF was not mapped to a destination network.
         /// </summary>
         public static string VIF_NOT_IN_MAP {
             get {
@@ -5349,7 +5340,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB server said something that your server wasn&apos;t expecting or didn&apos;t understand..
+        ///   Looks up a localized string similar to The WLB server said something that the server wasn&apos;t expecting or didn&apos;t understand..
         /// </summary>
         public static string WLB_MALFORMED_RESPONSE {
             get {
@@ -5403,7 +5394,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB reported that the server refused it a connection (even though we&apos;re connecting perfectly fine in the other direction)..
+        ///   Looks up a localized string similar to WLB reported that the server refused to let it connect (even though we&apos;re connecting perfectly fine in the other direction)..
         /// </summary>
         public static string WLB_XENSERVER_CONNECTION_REFUSED {
             get {
