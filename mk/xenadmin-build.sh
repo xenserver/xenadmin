@@ -130,12 +130,20 @@ _WGET -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
+
+function get_hotfix ()
+{
+    local -r hotfix="$1"
+    local -r p=${REPO}/Branding/Hotfixes
+    _WGET -P ${p} ${WEB_HOTFIXES}/${hotfix} || _WGET -P ${p} ${WEB_HOTFIXES_TRUNK}/${hotfix}
+}
+
 #bring RPU hotfixes
 if [ "${BRANDING_UPDATE}" = "xsupdate" ]
 then
-  _WGET -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES_TRUNK}/RPU001/1.0/RPU001.xsupdate
-  _WGET -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES_TRUNK}/RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && rm -f RPU001-src-pkgs.tar.gz && gzip RPU001-src-pkgs.tar
-  _WGET -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES_TRUNK}/RPU002/1.0/RPU002.xsupdate
+  get_hotfix RPU001/1.0/RPU001.xsupdate
+  get_hotfix RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && rm -f RPU001-src-pkgs.tar.gz && gzip RPU001-src-pkgs.tar
+  get_hotfix RPU002/1.0/RPU002.xsupdate
 fi
 
 #build
