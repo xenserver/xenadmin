@@ -308,7 +308,6 @@ namespace XenAdmin.Dialogs
             }
             else
             {
-                activateFreeXenServerButton.Show();
                 assignLicenceButton.Show();
                 releaseLicenseButton.Show();
             }
