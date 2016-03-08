@@ -67,7 +67,6 @@ namespace XenAdmin.Wizards
         private readonly FilerDetails xenTabPageFilerDetails;
         private readonly ChooseSrTypePage xenTabPageChooseSrType;
         private readonly RBACWarningPage xenTabPageRbacWarning;
-        private readonly StorageProvisioning xenTabPageStorageProvisioningMethod;
         #endregion
 
         /// <summary>
@@ -118,7 +117,6 @@ namespace XenAdmin.Wizards
             xenTabPageRbacWarning = new RBACWarningPage((srToReattach == null && !disasterRecoveryTask)
                              ? Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_CREATE
                              : Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH);
-            xenTabPageStorageProvisioningMethod = new StorageProvisioning();
 
             //do not use virtual members in constructor
             var format = (srToReattach == null && !disasterRecoveryTask)
@@ -261,21 +259,8 @@ namespace XenAdmin.Wizards
 
             if (m_srWizardType is SrWizardType_LvmoHba)
             {
-                if (!Helpers.DundeeOrGreater(xenConnection) && senderPage == xenTabPageLvmoHba)
+                if (senderPage == xenTabPageLvmoHba)
                 {
-                    return CanShowLVMoHBASummaryPage(xenTabPageLvmoHba.SrDescriptors);
-                }
-                else if (senderPage == xenTabPageStorageProvisioningMethod
-                            //if there is no sr to be created (all will be reattached)
-                            || senderPage == xenTabPageLvmoHba && xenTabPageLvmoHba.SrDescriptors.All(srDescriptor => !string.IsNullOrEmpty(srDescriptor.UUID)))
-                {
-                    //setting SM Config to the SRs being created (UUID == empty)
-                    if (xenTabPageStorageProvisioningMethod.SMConfig.Count > 0)
-                    {
-                        xenTabPageLvmoHba.SrDescriptors
-                            .Where(desc => string.IsNullOrEmpty(desc.UUID)).ToList()
-                            .ForEach(desc => desc.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig);
-                    }
                     return CanShowLVMoHBASummaryPage(xenTabPageLvmoHba.SrDescriptors);
                 }
             }
@@ -297,19 +282,10 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_LvmoIscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
-
-                    // DISABLED THIN PROVISIONING 
-                    //if (Helpers.DundeeOrGreater(xenConnection))
-                    //    AddPage(xenTabPageStorageProvisioningMethod);
                 }
                 else if (m_srWizardType is SrWizardType_LvmoHba)
                 {
                     AddPage(xenTabPageLvmoHba);
-
-                    // DISABLED THIN PROVISIONING
-                    //if (Helpers.DundeeOrGreater(xenConnection))
-                    //    AddPage(xenTabPageStorageProvisioningMethod);
-                    
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
@@ -388,18 +364,7 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(LVMoISCSI))
             {
-                xenTabPageStorageProvisioningMethod.SRSize = xenTabPageLvmoIscsi.SRSize;
                 SetCustomDescription(m_srWizardType, xenTabPageLvmoIscsi.SrDescription);
-
-                if (xenTabPageLvmoIscsi.UUID != null) //already existing SR
-                {
-                    xenTabPageStorageProvisioningMethod.SetControlsUsingExistingSMConfig(m_srWizardType.SMConfig);
-                    xenTabPageStorageProvisioningMethod.DisableControls();
-                }
-                else
-                {
-                    xenTabPageStorageProvisioningMethod.ResetControls();
-                }
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
@@ -473,23 +438,6 @@ namespace XenAdmin.Wizards
                 foreach (var entry in xentabPageEqualLogic.DeviceConfigParts)
                     m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
                 SetCustomDescription(m_srWizardType, xentabPageEqualLogic.SrDescription);
-            }
-            else if (senderPagetype == typeof(LVMoHBA))
-            {
-                xenTabPageStorageProvisioningMethod.SRSize = xenTabPageLvmoHba.SRSize;
-                bool creatingNew = m_srWizardType.SrDescriptors.Any(srDescriptor => string.IsNullOrEmpty(srDescriptor.UUID));
-                if (!creatingNew)
-                {
-                    DisablePage(xenTabPageStorageProvisioningMethod, true);
-                    xenTabPageStorageProvisioningMethod.ResetControls();
-                }
-            }
-            else if (senderPagetype == typeof(StorageProvisioning))
-            {
-                m_srWizardType.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig;
-                m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
-                m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
-
             }
         }
 
