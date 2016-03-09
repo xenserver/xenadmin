@@ -2425,7 +2425,7 @@ Do you want to assign it to the policy '{2}' instead?</value>
     <value>Checking role...</value>
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
-    <value>Checking safe to upgrade status</value>
+    <value>Checking partition layout</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>Checking server side status</value>
@@ -9300,7 +9300,7 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>Pool join not possible</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
-    <value>This server may not have any bonds, VLANs or cross-server private networks</value>
+    <value>This server must not have any bonds, VLANs or cross-server private networks</value>
   </data>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>Pool License</value>

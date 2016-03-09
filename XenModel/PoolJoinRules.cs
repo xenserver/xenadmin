@@ -615,7 +615,7 @@ namespace XenAdmin.Core
         public static bool HasSlaveAnyNonPhysicalPif(IXenConnection slaveConnection)
         {
             return
-                slaveConnection.Cache.PIFs.Any(p => !p.IsPhysical);
+                slaveConnection.Cache.PIFs.Any(p => !p.physical);
         }
     }
 }
