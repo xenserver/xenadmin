@@ -95,13 +95,13 @@ dotnet_cp_file ()
     local -r dest="${1}"; shift
     if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
     then
-        cp "${src}" "${dest}"
+        cp "${DOTNET_LOC}/${src}" "${dest}"
     else
         _WGET -O "${dest}" "${WEB_DOTNET}/${src}"
     fi
 }
 
-dotnet_cp_file "${DOTNET_LOC}/manifest" "${SCRATCH_DIR}/dotnet-packages-manifest"
+dotnet_cp_file "manifest" "${SCRATCH_DIR}/dotnet-packages-manifest"
 dotnet_cp_to_dir "${XMLRPC_DIR}" "UNSIGNED/CookComputing.XmlRpcV2.dll"
 dotnet_cp_to_dir "${LOG4NET_DIR}" "UNSIGNED/log4net.dll"
 dotnet_cp_to_dir "${SHARPZIPLIB_DIR}" "UNSIGNED/ICSharpCode.SharpZipLib.dll"
