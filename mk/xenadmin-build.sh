@@ -34,7 +34,7 @@ set -eu
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-WGET_OPT="-q -N --timestamp"
+_WGET () { WGET --timestamp "${@}"; }
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -50,7 +50,7 @@ rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
 
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
-    git clone ${BUILD_TOOLS_REPO} ${BUILD_TOOLS}
+    ( mkdir -p ${BUILD_TOOLS%/*} && cd ${BUILD_TOOLS%/*} && git clone ${BUILD_TOOLS_REPO} ${BUILD_TOOLS##*/} )
     chmod +x ${BUILD_TOOLS}/scripts/storefiles.py
 fi
 
@@ -69,42 +69,81 @@ DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
 MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx452_web_setup
 PUTTY_DIR=${REPO}/putty
 
-wget ${WGET_OPT} -O "${SCRATCH_DIR}/dotnet-packages-manifest" "${WEB_DOTNET}/manifest"
-mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/UNSIGNED/CookComputing.XmlRpcV2.dll
-mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/UNSIGNED/log4net.dll
-mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/UNSIGNED/ICSharpCode.SharpZipLib.dll
-mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/UNSIGNED/Ionic.Zip.dll
-mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/UNSIGNED/DiscUtils.dll
-mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} -P "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "${WEB_DOTNET}/NDP452-KB2901954-Web.exe"
-mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/UNSIGNED/putty.exe"
+mkdir_clean ${XMLRPC_DIR}
+mkdir_clean ${LOG4NET_DIR}
+mkdir_clean ${SHARPZIPLIB_DIR}
+mkdir_clean ${DOTNETZIP_DIR}
+mkdir_clean ${DISCUTILS_DIR}
+mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
+mkdir_clean ${PUTTY_DIR}
 
-wget ${WGET_OPT} -P "${REPO}" "${WEB_DOTNET}/sign.bat" && chmod a+x ${REPO}/sign.bat
+dotnet_cp_to_dir ()
+{
+    local -r destdir="${1}"; shift
+    local -r src="${1}"; shift
+    if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+    then
+        cp "${DOTNET_LOC}/${src}" "${destdir}/"
+    else
+        _WGET -P "${destdir}" "${WEB_DOTNET}/${src}"
+    fi
+}
+
+dotnet_cp_file ()
+{
+    local -r src="${1}"; shift
+    local -r dest="${1}"; shift
+    if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+    then
+        cp "${DOTNET_LOC}/${src}" "${dest}"
+    else
+        _WGET -O "${dest}" "${WEB_DOTNET}/${src}"
+    fi
+}
+
+dotnet_cp_file "manifest" "${SCRATCH_DIR}/dotnet-packages-manifest"
+dotnet_cp_to_dir "${XMLRPC_DIR}" "UNSIGNED/CookComputing.XmlRpcV2.dll"
+dotnet_cp_to_dir "${LOG4NET_DIR}" "UNSIGNED/log4net.dll"
+dotnet_cp_to_dir "${SHARPZIPLIB_DIR}" "UNSIGNED/ICSharpCode.SharpZipLib.dll"
+dotnet_cp_to_dir "${DOTNETZIP_DIR}" "UNSIGNED/Ionic.Zip.dll"
+dotnet_cp_to_dir "${DISCUTILS_DIR}" "UNSIGNED/DiscUtils.dll"
+dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP452-KB2901954-Web.exe"
+dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
+dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
 #bring in stuff from xencenter-ovf latest xe-phase-1
-wget ${WGET_OPT} -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/XenCenterOVF.zip"
+_WGET -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/XenCenterOVF.zip"
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 
 #bring manifest from latest xe-phase-1
-wget ${WGET_OPT} -O ${SCRATCH_DIR}/xe-phase-1-manifest "${WEB_XE_PHASE_1}/manifest"
+_WGET -O ${SCRATCH_DIR}/xe-phase-1-manifest "${WEB_XE_PHASE_1}/manifest"
 
 #bring XenServer.NET from latest xe-phase-2
-wget ${WGET_OPT} -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
+_WGET -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit
-wget ${WGET_OPT} -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
-wget ${WGET_OPT} -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
-wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
+_WGET -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
+_WGET -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
+_WGET -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
+
+function get_hotfix ()
+{
+    local -r hotfix="$1"
+    local -r p=${REPO}/Branding/Hotfixes
+    _WGET -P ${p} ${WEB_HOTFIXES}/${hotfix} || _WGET -P ${p} ${WEB_HOTFIXES_TRUNK}/${hotfix}
+}
+
 #bring RPU hotfixes
 if [ "${BRANDING_UPDATE}" = "xsupdate" ]
 then
-  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU001/1.0/RPU001.xsupdate
-  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && gzip RPU001-src-pkgs.tar
-  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU002/1.0/RPU002.xsupdate
+  get_hotfix RPU001/1.0/RPU001.xsupdate
+  get_hotfix RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && rm -f RPU001-src-pkgs.tar.gz && gzip RPU001-src-pkgs.tar
+  get_hotfix RPU002/1.0/RPU002.xsupdate
 fi
 
 #build
@@ -252,7 +291,7 @@ rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
 #bring in the pdbs from dotnet-packages latest build
 for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
 do
-  wget ${WGET_OPT} -P "${OUTPUT_DIR}" "${WEB_DOTNET}/${pdb}"
+  dotnet_cp_to_dir "${OUTPUT_DIR}" "${pdb}"
 done
 
 #create manifest
@@ -262,11 +301,13 @@ cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/man
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
+get_BUILD_PATH=/usr/groups/xen/carbon/windowsbuilds/WindowsBuilds/${get_JOB_NAME}/${BUILD_NUMBER}
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
-    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-secure-build
+    echo ${get_BUILD_URL} > ${OUTPUT_DIR}/latest-secure-build
+    echo ${get_BUILD_PATH} > ${OUTPUT_DIR}/latest-successful-build
 else
-    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-successful-build
+    echo ${get_BUILD_URL} > ${OUTPUT_DIR}/latest-successful-build
 fi
 
 # Write out version information
