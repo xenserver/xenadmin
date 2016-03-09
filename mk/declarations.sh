@@ -183,8 +183,8 @@ WEB_HOTFIXES_ROOT=https://repo.citrite.net/builds/xs/hotfixes
 WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}
 WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk
 
-WGET () { wget -T 10 -N -q --spider "${@}"; }
+WGET () { wget -T 10 -N -q "${@}"; }
 
 #check there are xenserver builds on this branch before proceeding
-WGET ${GLOBALS} || WGET ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
+WGET --spider ${GLOBALS} || WGET --spider ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 
