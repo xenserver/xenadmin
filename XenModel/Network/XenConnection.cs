@@ -1532,13 +1532,17 @@ namespace XenAdmin.Network
                                 }
                                 MaybeStartNextSlaveTimer(reason, error);
                             }
-                            else
+                            else if (LastMasterHostname != "")
                             {
                                 log.DebugFormat("Stopping search for new master for {0}: timeout reached without success. Trying the old master one last time",
                                                 LastConnectionFullName);
                                 FindingNewMaster = false;
                                 Hostname = LastMasterHostname;
                                 ReconnectMaster();
+                            }
+                            else
+                            {
+                                OnConnectionResult(false, reason, error);
                             }
                         }
                     }
