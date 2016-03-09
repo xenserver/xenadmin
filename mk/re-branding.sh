@@ -23,6 +23,7 @@
 #ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #POSSIBILITY OF SUCH DAMAGE.
 
+echo Entered re-branding.sh
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
@@ -189,7 +190,8 @@ rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.orgview.xm
 rebranding_global ${REPO}/XenAdminTests/TestResources/searchresults.xml
 rebranding_global ${REPO}/XenAdminTests/TestResources/state3.xml
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-mv ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
+echo cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
+cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
 
 #XenServerHealthCheck
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
