@@ -300,6 +300,24 @@ namespace XenAPI
             get { return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true"; }
 
         }
+
+        /// <summary>
+        /// Whether this is a Tools ISO. Finds the old method (by name) as well as
+        /// the new method (field on the VDI).
+        /// </summary>
+        public bool IsToolsIso
+        {
+            get
+            {
+                const string ISONameOld = "xswindrivers.iso";
+                const string ISONameNew = "xs-tools.iso";
+
+                return
+                    is_tools_iso ||
+                    ISONameOld.Equals(name_label) ||
+                    ISONameNew.Equals(name_label);
+            }
+        }
         
         /// <summary>
         /// Whether read caching is enabled on this disk on a specific host

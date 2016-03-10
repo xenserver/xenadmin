@@ -40,24 +40,10 @@ namespace XenAdmin.Diagnostics.Hotfixing
     {
         public enum HotfixableServerVersion
         {
-            MNR,
-            Cowley,
             Boston,
             SanibelToClearwater,
             Creedence
         }
-
-        private readonly Hotfix mnrHotfix = new SingleHotfix
-                                       {
-                                           Filename = "XS56E008.xsupdate",
-                                           UUID = "e2cb047b-66ed-4fa0-882a-67ff1726f4b9"
-                                       };
-
-        private readonly Hotfix cowleyHotfix = new SingleHotfix
-                                       {
-                                           Filename = "XS56EFP1002.xsupdate",
-                                           UUID = "ca0ca2c6-cc96-4e4b-946b-39ebe6652fd6"
-                                       };
 
         private readonly Hotfix bostonHotfix = new MultipleHotfix()
                                         {
@@ -65,27 +51,27 @@ namespace XenAdmin.Diagnostics.Hotfixing
                                                      {
                                                           new SingleHotfix
                                                          {
-                                                             Filename = "XS60E001.xsupdate",
+                                                             Filename = "XS60E001",
                                                              UUID = "95ac709c-e408-423f-8d22-84b8134a149e"
                                                          },
                                                           new SingleHotfix
                                                          {
-                                                             Filename = "XS62E006.xsupdate",
-                                                             UUID = "b412a910-0453-42ed-bae0-982cc48b00d6"
+                                                             Filename = "RPU001",
+                                                             UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
                                                          }
                                                      }
                                         };
 
         private readonly Hotfix sanibelToClearwaterHotfix = new SingleHotfix
                                                          {
-                                                             Filename = "XS62E006.xsupdate",
-                                                             UUID = "b412a910-0453-42ed-bae0-982cc48b00d6"
+                                                             Filename = "RPU001",
+                                                             UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
                                                          };
 
         private readonly Hotfix creedenceHotfix = new SingleHotfix
                                                          {
-                                                             Filename = "XS65ESP1006.xsupdate",
-                                                             UUID = "0c8accf4-060f-47fb-85a1-3470f815fd88"
+                                                             Filename = "RPU002",
+                                                             UUID = "3f92b111-0a90-4ec6-b85a-737f241a3fc1 "
                                                          };
 
         public Hotfix Hotfix(Host host)
@@ -108,10 +94,6 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 return sanibelToClearwaterHotfix;
             if (version == HotfixableServerVersion.Boston)
                 return bostonHotfix;
-            if (version == HotfixableServerVersion.Cowley)
-                return cowleyHotfix;
-            if (version == HotfixableServerVersion.MNR)
-                return mnrHotfix;
 
             throw new ArgumentException("A version was provided for which there is no hotfix filename");
         }

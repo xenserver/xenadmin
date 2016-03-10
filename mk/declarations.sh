@@ -142,7 +142,7 @@ OUTPUT_DIR=${ROOT}/output
 TEST_DIR=${ROOT}/tmp
 mkdir -p ${TEST_DIR}
 BUILD_ARCHIVE=${ROOT}/../builds/${get_BUILD_ID}/archive
-SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/windowsbuilds/WindowsBuilds/$get_JOB_NAME/$BUILD_NUMBER/
+SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/WindowsBuilds
 XENCENTER_LOGDIR="${ROOT}/log"
 mkdir -p ${XENCENTER_LOGDIR}
 
@@ -150,25 +150,42 @@ mkdir -p ${XENCENTER_LOGDIR}
 #WEB_LATEST_BUILD is where the current build will retrieve some of its dependendencies,
 #i.e. XenCenterOvf, version number, branding info and XenServer.NET;
 #use xe-phase-2-latest to ensure we use a build where phases 1 and 2 have succeeded
-if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
-then
-    WEB_LIB="http://admin/linux/distfiles/windows-build"
-    WEB_LATEST_BUILD="http://admin/builds/carbon/${XS_BRANCH}/xe-phase-2-latest"
-else
-    WEB_LIB="http://files.uk.xensource.com/linux/distfiles/windows-build"
-    WEB_LATEST_BUILD="http://www.uk.xensource.com/carbon/${XS_BRANCH}/xe-phase-2-latest"
-fi
+WEB_HOST="http://www.uk.xensource.com"
+WEB_LIB="${WEB_HOST}/linux/distfiles/windows-build"
+WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-2-latest"
+REBRANDING_WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-rebrand-latest"
 WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
 WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
+GLOBALS=${WEB_XE_PHASE_1}/globals
+WEB_TRUNK_LATEST_BUILD="${WEB_HOST}/carbon/trunk/xe-phase-2-latest"
+WEB_TRUNK_XE_PHASE_1=${WEB_TRUNK_LATEST_BUILD}/xe-phase-1
+TRUNK_GLOBALS=${WEB_TRUNK_XE_PHASE_1}/globals
+
+if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+then
+    JENKINS_SERVER=https://jenkins-dev.xs.cbg.ccsi.eng.citrite.net
+else
+    JENKINS_SERVER=http://tocco.do.citrite.net:8080
+fi
 
 #this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET="http://tocco.do.citrite.net:8080/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+WEB_DOTNET="${JENKINS_SERVER}/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_${XS_BRANCH}_dotnet-packages
+DOTNET_LOC=$DOTNET_BASE/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
 
 # used to copy results out of the secure build enclave
-BUILD_TOOLS_REPO=git://admin/git/closed/windows/buildtools.git
+BUILD_TOOLS_REPO=git://hg.uk.xensource.com/closed/windows/buildtools.git
 BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
 STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
+# this is where the build will find the RPU hotfixes
+WEB_HOTFIXES_ROOT=https://repo.citrite.net/builds/xs/hotfixes
+WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}
+WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk
+
+WGET_OPT="-T 10 -N -q"
+WGET () { wget ${WGET_OPT} "${@}"; }
+
 #check there are xenserver builds on this branch before proceeding
-wget -T 10 -N -q --spider ${WEB_XE_PHASE_1}/globals || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
+WGET --spider ${GLOBALS} || WGET --spider ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 

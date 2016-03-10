@@ -64,6 +64,7 @@ namespace XenAdmin.Actions
         {
             if (xo == null)
                 return;
+            Host theHost = xo as Host;
 
             // Dom0 Memory usage alert is an exception. While configuration for all the alerts (eg. related to the Host) have to be saved to this "xo", 
             // dom0 Memory usage's has to be in the Dom0's other config.
@@ -73,7 +74,7 @@ namespace XenAdmin.Actions
             {
                 perfmonDefinitions.Remove(dom0_memory_usage);
 
-                var dom0Vm = xo.Connection.Cache.VMs.FirstOrDefault(vm => vm.is_control_domain);
+                var dom0Vm = theHost == null ? null : theHost.ControlDomain;
                 if (dom0Vm != null)
                 {
                     var dom0PerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(dom0Vm).ToList();
@@ -101,7 +102,7 @@ namespace XenAdmin.Actions
             }
             else
             {
-                var dom0Vm = xo.Connection.Cache.VMs.FirstOrDefault(vm => vm.is_control_domain);
+                var dom0Vm = theHost == null ? null : theHost.ControlDomain;
                 if (dom0Vm != null)
                 {
                     var dom0PerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(dom0Vm).ToList();
@@ -127,7 +128,6 @@ namespace XenAdmin.Actions
 
             var hosts = new List<Host>();
 
-            Host theHost = xo as Host;
             if (theHost == null)
             {
                 VM vm = xo as VM;

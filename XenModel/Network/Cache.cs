@@ -419,7 +419,7 @@ namespace XenAdmin.Network
             {
                 foreach (T m in d.Values)
                 {
-                    if (((string)p.GetValue(m, null)) == uuid)
+                    if (string.Equals((string)p.GetValue(m, null), uuid, StringComparison.OrdinalIgnoreCase))
                         return m;
                 }
             }
@@ -443,7 +443,7 @@ namespace XenAdmin.Network
             {
                 foreach (KeyValuePair<XenRef<T>, T> kvp in d)
                 {
-                    if (((string)p.GetValue(kvp.Value, null)) == uuid)
+                    if (string.Equals((string)p.GetValue(kvp.Value, null), uuid, StringComparison.OrdinalIgnoreCase))
                         return kvp.Key;
                 }
             }

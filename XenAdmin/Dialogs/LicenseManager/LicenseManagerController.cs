@@ -356,7 +356,7 @@ namespace XenAdmin.Dialogs
             View.DrawAssignButtonAsDisabled(true);
             View.DrawReleaseButtonAsDisabled(true);
             View.DrawActivateButtonAsDisabled(true);
-            View.DrawActivateButtonAsHidden(ReadOnlyView);
+            View.DrawActivateButtonAsHidden(true);
         }
 
         private void ResetButtonEnablement()

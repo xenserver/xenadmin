@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Network;
 using XenAdmin.Core;
+using System.Linq;
 
 namespace XenAdmin.Actions
 {
@@ -61,7 +62,7 @@ namespace XenAdmin.Actions
             if (other_config.ContainsKey(IgnorePatchKey))
             {
                 List<string> current = new List<string>(other_config[IgnorePatchKey].Split(','));
-                if (current.Contains(Patch.Uuid))
+                if (current.Contains(Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                     return;
                 current.Add(Patch.Uuid);
                 other_config[IgnorePatchKey] = string.Join(",", current.ToArray());

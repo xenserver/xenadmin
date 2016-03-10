@@ -96,7 +96,7 @@ namespace XenAPI
             {
                 Pool_patch patch = host.Connection.Resolve(hostPatch.pool_patch);
 
-                if (patch != null && patch.uuid == uuid)
+                if (patch != null && string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
                     return hostPatch.timestamp_applied;
             }
 
@@ -108,7 +108,7 @@ namespace XenAPI
         {
             foreach (Pool_patch p in patches)
             {
-                if (p.uuid == patch.uuid)
+                if (string.Equals(p.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase))
                     return true;
             }
 
@@ -176,7 +176,7 @@ namespace XenAPI
             {
                 foreach (Pool_patch patch in connection.Cache.Pool_patches)
                 {
-                    if (patch.uuid == uuid)
+                    if (string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
                         patches.Add(patch);
                 }
             }

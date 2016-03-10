@@ -139,7 +139,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>版权所有 © @BRANDING_COMPANY_NAME_LEGAL 保留所有权利。</value>
+    <value>版权所有 © [BRANDING_COMPANY_NAME_LEGAL] 保留所有权利。</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -208,7 +208,7 @@
     <value>15</value>
   </data>
   <data name="VersionLabel.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ 1.2.3 (build 4567)</value>
+    <value>[XenCenter] 1.2.3 (build 4567)</value>
   </data>
   <data name="&gt;&gt;VersionLabel.Name" xml:space="preserve">
     <value>VersionLabel</value>
@@ -358,7 +358,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>关于 @BRANDING_BRAND_CONSOLE@</value>
+    <value>关于 [XenCenter]</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AboutDialog</value>

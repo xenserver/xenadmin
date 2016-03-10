@@ -614,7 +614,7 @@ namespace XenAdmin
         private void Connection_ConnectionStateChangedOnStartup(object sender, EventArgs e)
         {
             IXenConnection c = (IXenConnection)sender;
-            c.CachePopulated -= Connection_ConnectionStateChangedOnStartup;
+            c.ConnectionStateChanged -= Connection_ConnectionStateChangedOnStartup;
 
             Program.Invoke(Program.MainWindow, delegate
             {
@@ -634,7 +634,7 @@ namespace XenAdmin
             Program.AssertOnEventThread();
             if (connectionsInProgressOnStartup > 0)
                 return;
-            if (Properties.Settings.Default.ShowAboutDialog && !HiddenFeatures.LicenseNagHidden)
+            if (Properties.Settings.Default.ShowAboutDialog && HiddenFeatures.LicenseNagVisible)
                 ShowForm(typeof(AboutDialog));
         }
 
@@ -932,7 +932,7 @@ namespace XenAdmin
 
         public static bool SameProductBrand(Host host)
         {
-            return host.ProductBrand == Branding.PRODUCT_BRAND || Branding.PRODUCT_BRAND == "@BRANDING_PRODUCT_BRAND@";
+            return host.ProductBrand == Branding.PRODUCT_BRAND || Branding.PRODUCT_BRAND == "[XenServer product]";
         }
 
         /// <summary>
@@ -1384,7 +1384,7 @@ namespace XenAdmin
             ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
-            ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected);
+            ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows);
             ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);

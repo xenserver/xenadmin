@@ -238,7 +238,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelInvalidVCPUWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 119</value>
+    <value>101, 120</value>
   </data>
   <data name="labelInvalidVCPUWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 0</value>
@@ -247,13 +247,7 @@
     <value>396, 20</value>
   </data>
   <data name="labelInvalidVCPUWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Text" xml:space="preserve">
-    <value>The number of vCPUs must be a multiple of the number of cores per socket</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;labelInvalidVCPUWarning.Name" xml:space="preserve">
     <value>labelInvalidVCPUWarning</value>
@@ -271,7 +265,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="comboBoxTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 92</value>
+    <value>101, 93</value>
   </data>
   <data name="comboBoxTopology.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 6, 0, 6</value>
@@ -280,7 +274,7 @@
     <value>250, 21</value>
   </data>
   <data name="comboBoxTopology.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.Name" xml:space="preserve">
     <value>comboBoxTopology</value>
@@ -304,13 +298,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 86</value>
+    <value>3, 87</value>
   </data>
   <data name="labelTopology.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 33</value>
   </data>
   <data name="labelTopology.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="labelTopology.Text" xml:space="preserve">
     <value>&amp;Topology:</value>
@@ -340,13 +334,13 @@
     <value>NoControl</value>
   </data>
   <data name="MemWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 231</value>
+    <value>199, 232</value>
   </data>
   <data name="MemWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 48</value>
+    <value>298, 47</value>
   </data>
   <data name="MemWarningLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="MemWarningLabel.Text" xml:space="preserve">
     <value>The amount of physical memory allocated to this VM is greater than the total memory of its home server</value>
@@ -436,7 +430,7 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 231</value>
+    <value>101, 232</value>
   </data>
   <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -445,7 +439,7 @@
     <value>95, 20</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
@@ -487,7 +481,7 @@
     <value>3</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 165</value>
+    <value>3, 166</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 24</value>
@@ -499,7 +493,7 @@
     <value>494, 42</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
@@ -526,7 +520,7 @@
     <value>3, 60</value>
   </data>
   <data name="lblVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 22</value>
+    <value>95, 27</value>
   </data>
   <data name="lblVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -595,7 +589,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 233</value>
+    <value>3, 234</value>
   </data>
   <data name="lblMemory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 0</value>
@@ -604,7 +598,7 @@
     <value>95, 18</value>
   </data>
   <data name="lblMemory.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="lblMemory.Text" xml:space="preserve">
     <value>&amp;VM memory:</value>
@@ -621,33 +615,6 @@
   <data name="&gt;&gt;lblMemory.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="nudVCPUs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="nudVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 62</value>
-  </data>
-  <data name="nudVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 2, 0, 0</value>
-  </data>
-  <data name="nudVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 20</value>
-  </data>
-  <data name="nudVCPUs.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;nudVCPUs.Name" xml:space="preserve">
-    <value>nudVCPUs</value>
-  </data>
-  <data name="&gt;&gt;nudVCPUs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudVCPUs.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;nudVCPUs.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="VCPUWarningLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -661,7 +628,7 @@
     <value>199, 60</value>
   </data>
   <data name="VCPUWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 26</value>
+    <value>298, 27</value>
   </data>
   <data name="VCPUWarningLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -685,7 +652,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;VCPUWarningLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -721,6 +688,30 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="comboBoxVCPUs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 63</value>
+  </data>
+  <data name="comboBoxVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="comboBoxVCPUs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 21</value>
+  </data>
+  <data name="comboBoxVCPUs.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.Name" xml:space="preserve">
+    <value>comboBoxVCPUs</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVCPUs.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -754,13 +745,13 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="comboBoxTopology" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemWarningLabel" Row="8" RowSpan="2" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblPriority" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblVCPUs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblVcpuWarning" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblMemory" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nudVCPUs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="VCPUWarningLabel" Row="2" RowSpan="2" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="comboBoxTopology" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemWarningLabel" Row="8" RowSpan="2" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblPriority" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblVCPUs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblVcpuWarning" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblMemory" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="VCPUWarningLabel" Row="2" RowSpan="2" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="comboBoxVCPUs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblPriority.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblPriority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 139</value>
+    <value>3, 140</value>
   </data>
   <data name="lblPriority.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
@@ -769,7 +760,7 @@
     <value>179, 23</value>
   </data>
   <data name="lblPriority.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="lblPriority.Text" xml:space="preserve">
     <value>vCPU priority for this virtual machine:</value>

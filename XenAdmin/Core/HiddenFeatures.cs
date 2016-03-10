@@ -62,10 +62,10 @@ namespace XenAdmin.Core
             { return Registry.HiddenFeatures != null && Registry.HiddenFeatures.Contains(UPLOAD_OPTION_HIDDEN); }
         }
 
-        internal static bool LicenseNagHidden
+        internal static bool LicenseNagVisible
         {
             get
-            { return Registry.HiddenFeatures != null && Registry.HiddenFeatures.Contains(LICENSE_NAG_HIDDEN); }
+            { return Registry.AdditionalFeatures != null && Registry.AdditionalFeatures.Contains(LICENSE_NAG); }
         }
 
         internal static bool LicenseOperationsHidden
@@ -83,7 +83,7 @@ namespace XenAdmin.Core
         private const string COPYRIGHT_HIDDEN = "copyright";
         private const string HEALTH_CHECK_HIDDEN = "health_check";
         private const string UPLOAD_OPTION_HIDDEN = "upload_option";
-        private const string LICENSE_NAG_HIDDEN = "license_nag";
+        private const string LICENSE_NAG = "license_nag";
         private const string LICENSE_OPERATIONS_HIDDEN = "license_operations";
     }
 }

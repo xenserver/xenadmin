@@ -90,8 +90,8 @@ namespace XenAdmin.Controls.XenSearch
             this.queryTypeComboButton.SelectedItem = null;
             this.queryTypeComboButton.UseVisualStyleBackColor = true;
             this.queryTypeComboButton.SelectedItemChanged += new System.EventHandler(this.queryTypeComboButton_SelectedItemChanged);
-            this.queryTypeComboButton.BeforeItemSelected += new System.EventHandler(this.queryTypeComboButton_BeforeItemSelected);
             this.queryTypeComboButton.ItemSelected += new System.EventHandler(this.queryTypeComboButton_ItemSelected);
+            this.queryTypeComboButton.BeforeItemSelected += new System.EventHandler(this.queryTypeComboButton_BeforeItemSelected);
             // 
             // resourceSelectButton
             // 

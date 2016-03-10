@@ -227,7 +227,7 @@ namespace XenAdmin
             ConnectionsManager.XenConnections.Clear();
             ConnectionsManager.History.Clear();
 
-            Search.InitSearch();
+            Search.InitSearch(Branding.Search);
             TreeSearch.InitSearch();
             
             ArgType argType = ArgType.None;
@@ -977,7 +977,7 @@ namespace XenAdmin
                 if (o is XSVersionAttribute)
                 {
                     string result = ((XSVersionAttribute)o).Version;
-                    return result == "@BRANDING_PRODUCT_VERSION@" ? "PRIVATE" : result;
+                    return result == "[BRANDING_PRODUCT_VERSION]" ? "PRIVATE" : result;
                 }
             }
             return "MISSING";

@@ -18,7 +18,7 @@
         <node text="Red Hat Enterprise Linux 5.3 (1)" imageindex="TemplateUser" tag="Red Hat Enterprise Linux 5.3 (1)" />
         <node text="Windows Server 2008 (2)" imageindex="TemplateUser" tag="Windows Server 2008 (2)" />
       </node>
-      <node text="@BRANDING_SERVER@ Templates" imageindex="Template" tag="XenAdmin.GroupingTag">
+      <node text="[XenServer] Templates" imageindex="Template" tag="XenAdmin.GroupingTag">
         <node text="CentOS 4.5" imageindex="Template" tag="CentOS 4.5" />
         <node text="CentOS 4.6" imageindex="Template" tag="CentOS 4.6" />
         <node text="CentOS 4.7" imageindex="Template" tag="CentOS 4.7" />

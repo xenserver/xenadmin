@@ -132,7 +132,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>可以使用此向导将软件更新安装到 @BRANDING_SERVER@ 主机上。
+    <value>可以使用此向导将软件更新安装到 [XenServer] 主机上。
 </value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -224,7 +224,7 @@
     <value>6</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>确保以池管理员或池操作员身份或者使用本地 root 帐户登录 @BRANDING_BRAND_CONSOLE@。</value>
+    <value>确保以池管理员或池操作员身份或者使用本地 root 帐户登录 [XenCenter]。</value>
   </data>
   <data name="label9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

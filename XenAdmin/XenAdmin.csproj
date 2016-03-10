@@ -345,6 +345,12 @@
     <Compile Include="TabPages\DockerDetailsPage.Designer.cs">
       <DependentUpon>DockerDetailsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\HomePage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabPages\HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\SnapshotsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -636,12 +642,6 @@
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.Designer.cs">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.Designer.cs">
-      <DependentUpon>StorageProvisioning.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.cs">
       <SubType>UserControl</SubType>
@@ -952,12 +952,6 @@
     </Compile>
     <Compile Include="SettingsPanels\VMHAEditPage.Designer.cs">
       <DependentUpon>VMHAEditPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TabPages\HomePage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TabPages\HomePage.Designer.cs">
-      <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\SearchPage.cs">
       <SubType>UserControl</SubType>
@@ -1823,6 +1817,16 @@
       <DependentUpon>GeneralTabPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HomePage.ja.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WlbPage.cs</DependentUpon>
@@ -1900,16 +1904,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.zh-CN.resx">
       <DependentUpon>LVMoFCoE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.ja.resx">
-      <DependentUpon>StorageProvisioning.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.resx">
-      <DependentUpon>StorageProvisioning.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\StorageProvisioning.zh-CN.resx">
-      <DependentUpon>StorageProvisioning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.ja.resx">
       <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
@@ -2233,10 +2227,6 @@
       <DependentUpon>GeneralEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\HomePage.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\LogDestinationEditPage.resx">
       <DependentUpon>LogDestinationEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2396,6 +2386,16 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="HomePage.zh-CN.mht">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="HomePage.ja.mht">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="HomePage.mht">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="HomePage\License" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -2405,18 +2405,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="XS60E001-src-pkgs.tar.gz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="XS62E006-src-pkgs.tar.gz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="XS62E006.xsupdate">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="XS65ESP1006.xsupdate">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Branding\Images\AppIcon.ico" />
@@ -3973,7 +3961,9 @@
     <None Include="Images\ascending_triangle.png" />
     <None Include="Images\contracted_triangle.png" />
     <None Include="Images\expanded_triangle.png" />
-    <None Include="..\Branding\Images\about_box_graphic_423x79.png" />
+    <None Include="..\Branding\Images\about_box_graphic_423x79.png">
+      <Link>Images\about_box_graphic_423x79.png</Link>
+    </None>
     <None Include="Images\000_ToolBar_USB_Icon_up.png" />
     <None Include="Images\000_SwitcherBackground.png" />
     <None Include="Images\000_ToolBar_Pref_Icon_dis.png" />
@@ -4068,13 +4058,28 @@
     <None Include="Images\000_error_h32bit_32.png" />
     <None Include="Images\000_AddIPAddress_h32bit_16.png" />
     <None Include="Images\000_ConfigureIPAddresses_h32bit_16.png" />
+    <Content Include="HomePage\css\ie.css" />
+    <Content Include="HomePage\css\print.css" />
+    <Content Include="HomePage\css\screen.css" />
+    <Content Include="HomePage\css\theme.css" />
+    <Content Include="HomePage\index.html" />
+    <Content Include="HomePage\media\grid.png" />
+    <Content Include="HomePage\media\icons\cx-cloudServerGraphic.png" />
+    <Content Include="HomePage\media\icons\cx-icon-addServer.png" />
+    <Content Include="HomePage\media\icons\cx-icon-generic-doc.png" />
+    <Content Include="HomePage\media\icons\cx-icon-purchaseSupport.png" />
+    <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
+    <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
+    <Content Include="HomePage\media\logos\cx-logo-citrixXenServer.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
     <None Include="Images\000_ImportVirtualAppliance_h32bit_16.png" />
     <None Include="Images\000_ImportVirtualAppliance_h32bit_32.png" />
     <None Include="Images\000_NewVirtualAppliance_h32bit_16.png" />
     <None Include="Images\000_NewVirtualAppliance_h32bit_32.png" />
-    <None Include="..\Branding\Images\000_ManagementInterface_h32bit_16.png" />
+    <None Include="..\Branding\Images\000_ManagementInterface_h32bit_16.png">
+      <Link>Images\000_ManagementInterface_h32bit_16.png</Link>
+    </None>
     <Content Include="Images\000_FilterSeverity_h32bit_16.png" />
     <None Include="Images\000_MigrateStoppedVM_h32bit_16.png" />
     <None Include="Images\000_MigrateSuspendedVM_h32bit_16.png" />
@@ -4108,12 +4113,10 @@
     <None Include="Images\000_UserTemplate_h32bit_16.png" />
     <None Include="Images\000_Storage_h32bit_16.png" />
     <None Include="Images\000_StorageDisabled_h32bit_16.png" />
-    <None Include="Images\000_StorageNeedsUpgrading_h32bit_16.png" />
     <None Include="Images\000_StorageBroken_h32bit_16.png" />
     <None Include="Images\000_StorageDefault_h32bit_16.png" />
     <None Include="Images\000_VirtualStorage_h32bit_16.png" />
     <None Include="Images\002_Configure_h32bit_16.png" />
-    <None Include="Images\005_SSLRelayConfig_h32bit_16.png" />
     <None Include="Images\000_ServerWlb_h32bit_16.png" />
     <None Include="Images\001_Tools_h32bit_16.png" />
     <None Include="Images\001_PerformanceGraph_h32bit_16.png" />
@@ -4138,11 +4141,15 @@
     <None Include="Images\000_Tick_h32bit_16.png" />
     <None Include="Images\001_CreateVM_h32bit_16.png" />
     <None Include="Images\000_Tick_h32bit_24.png" />
-    <None Include="..\Branding\Images\000_XenCenterAlerts_h32bit_24.png" />
+    <None Include="..\Branding\Images\000_XenCenterAlerts_h32bit_24.png">
+      <Link>Images\000_XenCenterAlerts_h32bit_24.png</Link>
+    </None>
     <None Include="Images\000_WarningAlert_h32bit_32.png" />
     <None Include="Images\112_LeftArrowLong_Blue_24x24_72.png" />
     <None Include="Images\WLB.png" />
-    <None Include="..\Branding\Images\XS.png" />
+    <None Include="..\Branding\Images\XS.png">
+      <Link>Images\XS.png</Link>
+    </None>
     <None Include="Images\112_RightArrowLong_Blue_24x24_72.png" />
     <None Include="Images\000_VirtualAppliance_h32bit_16.png" />
     <None Include="Images\000_UpgradePool_h32bit_32.png" />
@@ -4156,8 +4163,10 @@
     <None Include="Images\alert3_16.png" />
     <None Include="Images\alert4_16.png" />
     <None Include="Images\alert5_16.png" />
-    <None Include="..\Branding\Images\alert6_16.png" />
-    <Content Include="Images\alerts_32.png" />
+    <None Include="Images\alert6_16.png" />
+    <Content Include="..\Branding\Images\alerts_32.png">
+      <Link>Images\alerts_32.png</Link>
+    </Content>
     <Content Include="Images\asterisk.png" />
     <Content Include="Images\attach_24.png" />
     <None Include="Images\cancelled_action_16.png" />
@@ -4178,16 +4187,18 @@
     <None Include="Images\detach_24.png" />
     <None Include="Images\DC_16.png" />
     <Content Include="Images\export_32.png" />
-    <None Include="Images\failed_action_16.png" />
     <Content Include="Images\help_16_hover.png" />
     <Content Include="Images\help_24.png" />
     <Content Include="Images\help_24_hover.png" />
     <Content Include="Images\help_32_hover.png" />
+    <Content Include="Images\homepage_bullet.png" />
     <Content Include="Images\import_32.png" />
     <None Include="Images\infra_view_16.png" />
     <None Include="Images\infra_view_24.png" />
     <None Include="Images\infra_view_16_textured.png" />
-    <Content Include="..\Branding\Images\Logo.png" />
+    <Content Include="..\Branding\Images\Logo.png">
+      <Link>Images\Logo.png</Link>
+    </Content>
     <None Include="Images\more_16.png" />
     <None Include="Images\notif_alerts_16.png" />
     <None Include="Images\notif_events_16.png" />
@@ -4219,15 +4230,6 @@
     <None Include="Images\grapharea.png" />
     <None Include="Images\grab.png" />
     <Content Include="Images\ha_16.png" />
-    <None Include="Images\homepage_vert_div.png" />
-    <None Include="Images\homepage_add_icon.png" />
-    <None Include="Images\homepage_background.png" />
-    <None Include="Images\homepage_community_icon.png" />
-    <None Include="Images\homepage_get_icon.png" />
-    <None Include="Images\homepage_hor_div.png" />
-    <None Include="Images\homepage_learn_icon.png" />
-    <None Include="Images\homepage_try_icon.png" />
-    <None Include="Images\homepage_bullet.png" />
     <None Include="Images\lifecycle_pressed.png" />
     <None Include="Images\lifecycle_hot.png" />
     <None Include="Images\licensekey_32.png" />
@@ -4276,7 +4278,6 @@
     <None Include="Images\SpinningFrame7.png" />
     <None Include="Images\StoppedDC_16.png" />
     <Content Include="Images\subscribe.png" />
-    <None Include="Images\success_action_16.png" />
     <Content Include="Images\suse_16x.png" />
     <Content Include="Images\tempAdd.png" />
     <None Include="Images\tempCancel.png" />
@@ -4308,6 +4309,7 @@
     <Content Include="Images\ubuntu_16x.png" />
     <Content Include="..\Branding\Images\upsell_16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Link>Images\upsell_16.png</Link>
     </Content>
     <Content Include="Images\usagebar_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -5753,12 +5755,6 @@
     <EmbeddedResource Include="TabPages\HistoryPage.zh-CN.resx">
       <DependentUpon>HistoryPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\HomePage.ja.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\NetworkPage.ja.resx">
       <DependentUpon>NetworkPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -6686,18 +6682,11 @@
     <Content Include="TestResources\interesting-xenapp.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="..\Branding\Images\wizard_background.png" />
+    <None Include="..\Branding\Images\wizard_background.png">
+      <Link>Images\wizard_background.png</Link>
+    </None>
     <None Include="TestResources\vmexport.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="XS56E008.xsupdate">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="XS56EFP1002.xsupdate">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="XS60E001.xsupdate">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

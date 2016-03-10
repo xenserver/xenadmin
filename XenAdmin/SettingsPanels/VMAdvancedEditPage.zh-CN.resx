@@ -128,7 +128,7 @@
     <value>376, 17</value>
   </data>
   <data name="CPSOptimizationRadioButton.Text" xml:space="preserve">
-    <value>针对 @BRANDING_COMPANY_NAME_SHORT@ XenApp 进行优化(&amp;X)</value>
+    <value>针对 [Citrix] XenApp 进行优化(&amp;X)</value>
   </data>
   <data name="ManualOptimizationRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 17</value>
@@ -149,6 +149,6 @@
     <value>重影内存系数(&amp;M):</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>您可以对此 VM 进行优化，以提高在不同环境中的性能。要实现一般用途或者要提高 @BRANDING_COMPANY_NAME_SHORT@ XenApp 性能，请使用预设选项进行配置。或者，高级用户可以选择手动设置来实现自定义优化。</value>
+    <value>您可以对此 VM 进行优化，以提高在不同环境中的性能。要实现一般用途或者要提高 [Citrix] XenApp 性能，请使用预设选项进行配置。或者，高级用户可以选择手动设置来实现自定义优化。</value>
   </data>
 </root>

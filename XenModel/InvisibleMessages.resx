@@ -127,7 +127,7 @@
     <value>https://{0}/reactivation_server.php</value>
   </data>
   <data name="CHECK_FOR_UPDATES_URL" xml:space="preserve">
-    <value>http://updates.xensource.com/@BRANDING_SERVER@/{0}/XenCenter</value>
+    <value>http://updates.xensource.com/[XenServer]/{0}/XenCenter</value>
   </data>
   <data name="COMMUNITY_URL" xml:space="preserve">
     <value>http://xenserver.org/</value>
@@ -137,6 +137,9 @@
   </data>
   <data name="HOMEPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserver</value>
+  </data>
+  <data name="HOMEPAGE_FILENAME" xml:space="preserve">
+    <value>HomePage.mht</value>
   </data>
   <data name="HTTP_LICENSES" xml:space="preserve">
     <value>www.citrix.com/xenserverenterprise</value>
@@ -154,7 +157,7 @@
     <value>en-US</value>
   </data>
   <data name="LOG_FILENAME" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@.log</value>
+    <value>[XenCenter].log</value>
   </data>
   <data name="MAINWINDOW_HELP_PARAMS" xml:space="preserve">
     <value>-mapid {0} {1}</value>
@@ -178,7 +181,7 @@
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
   </data>
   <data name="XEN_SEARCH" xml:space="preserve">
-    <value>@BRANDING_SEARCH@</value>
+    <value>xensearch</value>
   </data>
   <data name="SUPPORT_URL" xml:space="preserve">
     <value>http://support.citrix.com/</value>
@@ -238,9 +241,9 @@
     <value>http://www.citrix.com/TryXenDesktop</value>
   </data>
   <data name="XEN_UPDATE" xml:space="preserve">
-    <value>@BRANDING_UPDATE@</value>
+    <value>xsupdate</value>
   </data>
   <data name="XENSERVER_UPDATE_URL" xml:space="preserve">
-    <value>@BRANDING_XENSERVER_UPDATE_URL@</value>
+    <value>http://updates.xensource.com/XenServer/updates.xml</value>
   </data>
 </root>

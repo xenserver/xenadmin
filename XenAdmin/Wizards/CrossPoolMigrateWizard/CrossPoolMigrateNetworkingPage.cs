@@ -40,6 +40,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     class CrossPoolMigrateNetworkingPage : SelectMultipleVMNetworkPage
     {
+        private readonly bool templatesOnly = false;
+        private readonly WizardMode wizardMode;
+
+        public CrossPoolMigrateNetworkingPage(bool templatesOnly, WizardMode wizardMode)
+        {
+            this.templatesOnly = templatesOnly;
+            this.wizardMode = wizardMode;
+
+            InitializeText();
+        }
+        
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
@@ -52,7 +63,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public override string IntroductionText
         {
-            get { return VmMappings != null && VmMappings.Count > 1 ? Messages.CPM_WIZARD_NETWORKING_INTRO : Messages.CPM_WIZARD_NETWORKING_INTRO_SINGLE; }
+            get 
+            {
+                if (templatesOnly)
+                {
+                    return 
+                        VmMappings != null && VmMappings.Count > 1 ? Messages.CPM_WIZARD_NETWORKING_INTRO_TEMPLATE : Messages.CPM_WIZARD_NETWORKING_INTRO_TEMPLATE_SINGLE;
+                }
+                else
+                {
+                    return 
+                        VmMappings != null && VmMappings.Count > 1 ? Messages.CPM_WIZARD_NETWORKING_INTRO : Messages.CPM_WIZARD_NETWORKING_INTRO_SINGLE;
+                }
+            }
         }
 
         public override string TableIntroductionText { get { return Messages.CPM_WIZARD_VM_SELECTION_INTRODUCTION; } }
@@ -60,7 +83,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return "Networking"; } }
+        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "NetworkingCopyMode" : "Networking"; } }
 
         public override NetworkResourceContainer NetworkData(string sysId)
         {
@@ -83,6 +106,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
 
             base.PageLeave(direction, ref cancel);
+        }
+
+        protected override string NetworkColumnHeaderText
+        {
+            get
+            {
+                return templatesOnly ? Messages.CPS_WIZARD_NETWORKING_NETWORK_COLUMN_TEMPLATE : Messages.CPS_WIZARD_NETWORKING_NETWORK_COLUMN_VM;
+            }
         }
     }
 }

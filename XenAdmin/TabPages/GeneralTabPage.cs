@@ -32,20 +32,22 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using XenAdmin.Controls;
-using XenAdmin.CustomFields;
-using XenAdmin.Model;
-using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Dialogs;
-using XenAdmin.SettingsPanels;
-using XenAdmin.Network;
-using XenAdmin.Commands;
+using System.Net;
 using System.Text;
-
+using System.Windows.Forms;
+using XenAdmin.Commands;
+using XenAdmin.Controls;
+using XenAdmin.Core;
+using XenAdmin.CustomFields;
+using XenAdmin.Dialogs;
+using XenAdmin.Model;
+using XenAdmin.Network;
+using XenAdmin.SettingsPanels;
+using XenAPI;
 
 namespace XenAdmin.TabPages
 {
@@ -395,7 +397,31 @@ namespace XenAdmin.TabPages
 
             //keeping it separate
             if (xenObject is DockerContainer)
+            {
                 buttonProperties.Enabled = false;
+
+                DockerContainer container = (DockerContainer)xenObject;
+                buttonViewConsole.Visible = true;
+                buttonViewLog.Visible = true;
+
+                // Grey out the buttons if the Container management VM is Windows.
+                // For Linux VM, enable the buttons only when the docker is running.
+                if (container.Parent.IsWindows)
+                {
+                    buttonViewConsole.Enabled = false;
+                    buttonViewLog.Enabled = false;
+                }
+                else
+                {
+                    buttonViewConsole.Enabled = buttonViewLog.Enabled = container.power_state == vm_power_state.Running;
+                }
+            }
+            else
+            {
+                buttonViewConsole.Visible = false;
+                buttonViewLog.Visible = false;
+            }
+
         }
 
         public void BuildList()
@@ -1219,6 +1245,7 @@ namespace XenAdmin.TabPages
                 {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
 
+                    /* DISABLED THIN PROVISIONING
                     if (sr.type == "lvmohba" || sr.type == "lvmoiscsi")
                     {
                         // add entries related to thin lvhd SRs
@@ -1236,7 +1263,8 @@ namespace XenAdmin.TabPages
                             s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
                                        Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
                         }
-                    }                    
+                    } 
+                    */
                 }
 
                 if (sr.GetScsiID() != null)
@@ -1765,6 +1793,59 @@ namespace XenAdmin.TabPages
             bool anyCollapsed = sectionsVisible.Any(s => !s.IsExpanded);
             linkLabelExpand.Enabled = anyCollapsed;
             linkLabelCollapse.Enabled = anyExpanded;
+        }
+
+        private void buttonViewConsole_Click(object sender, EventArgs e)
+        {
+            if (xenObject is DockerContainer)
+            {
+                DockerContainer dockerContainer = (DockerContainer)xenObject;
+                string vmIp = dockerContainer.Parent.IPAddressForSSH;
+                //Set command 'docker attach' to attach to the container.
+                string dockerCmd = "env docker attach --sig-proxy=false " + dockerContainer.uuid;
+                startPutty(dockerCmd, vmIp);
+            }
+        }
+
+        private void buttonViewLog_Click(object sender, EventArgs e)
+        {
+            if (xenObject is DockerContainer)
+            {
+                DockerContainer dockerContainer = (DockerContainer)xenObject;
+                string vmIp = dockerContainer.Parent.IPAddressForSSH;
+                //Set command 'docker logs' to retrieve the logs of the container.
+                string dockerCmd = "env docker logs --tail=50 --follow --timestamps " + dockerContainer.uuid;
+                startPutty(dockerCmd, vmIp);
+            }
+        }
+
+        private void startPutty(string command, string ipAddr)
+        {
+            try
+            {
+                //Write docker command to a temp file.
+                string cmdFile = Path.Combine(Path.GetTempPath(), "ContainerManagementCommand.txt");
+                File.WriteAllText(cmdFile, command);
+
+                //Invoke Putty, SSH to VM and execute docker command.
+                var puttyPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
+                string args = "-m " + cmdFile + " -t " + ipAddr;
+
+                //Specify the key for SSH connection.
+                var keyFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "ContainerManagement.ppk");
+                if (File.Exists(keyFile))
+                {
+                    args = args + " -i " + keyFile;
+                }
+                var startInfo = new ProcessStartInfo(puttyPath, args);
+
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error starting PuTTY.", ex);
+                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+            }
         }
     }
 }

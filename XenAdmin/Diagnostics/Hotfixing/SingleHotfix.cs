@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -49,7 +50,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             if (patch == null)
             {
                 var master = Helpers.GetMaster(host.Connection);
-                var action = new Actions.UploadPatchAction(master.Connection, Path.Combine(Program.AssemblyDir, Filename));
+                var action = new Actions.UploadPatchAction(master.Connection, Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.Update)));
                 action.RunExternal(session);
                 patch = action.PatchRefs[master];
             }
@@ -69,7 +70,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
         {
             var patches = host.Connection.ResolveAll(host.patches);
             var poolPatches = patches.Select(hostPatch => hostPatch.Connection.Resolve(hostPatch.pool_patch));
-            return !poolPatches.Any( patch => UUID.Contains(patch.uuid));
+            return !poolPatches.Any( patch => UUID.ToLowerInvariant().Contains(patch.uuid.ToLowerInvariant()));
         }
     }
 

@@ -40,8 +40,6 @@ source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 echo -n "Starting tests at "
 date
 
-# Kill any running nunit processes.
-ps -W -s | grep nunit  | cut -b-10 | xargs kill -f || true
 
 cp ${OUTPUT_DIR}/XenAdminTests.tgz ${TEST_DIR}
 cd ${TEST_DIR} && tar xzf XenAdminTests.tgz && chmod -R 777 Release
@@ -64,6 +62,11 @@ set +e
 
   echo -e "\nINFO:	Lock aquired and starting execution"
    # /output="$(cygpath -d ${TEST_DIR})\output.nunit.log"
+
+# Kill any running nunit processes.
+ps -W -s | grep nunit  | cut -b-10 | xargs kill -f || true
+
+#start nunit tests
 nunit-console /nologo /labels /stoponerror /nodots /process=separate /noshadow /labels /err="$(cygpath -d ${TEST_DIR})\error.nunit.log" /timeout=40000 /xml="$(cygpath -d ${TEST_DIR})\XenAdminTests.xml" "$(cygpath -d ${TEST_DIR})\Release\XenAdminTests.dll" "/framework=net-4.5" &
 
 pid=$!

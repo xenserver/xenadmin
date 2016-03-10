@@ -103,6 +103,7 @@ namespace XenAdmin.Wizards.GenericPages
 	        m_labelIntro.Text = InstructionText;
 	        label1.Text = HomeServerText;
 	        label2.Text = HomeServerSelectionIntroText;
+            m_colVmName.HeaderText = VmColumnHeaderText;
 	    }
 
 	    private IXenObject _chosenItem;
@@ -125,6 +126,14 @@ namespace XenAdmin.Wizards.GenericPages
         /// Text demarking what the label fot the home server drop down should be
         /// </summary>
 	    protected abstract string HomeServerText { get; }
+
+        protected virtual string VmColumnHeaderText 
+        {
+            get
+            {
+                return m_colVmName.HeaderText;
+            }
+        }
 
         /// <summary>
         /// Text above the table containing a list of VMs and concomitant home server

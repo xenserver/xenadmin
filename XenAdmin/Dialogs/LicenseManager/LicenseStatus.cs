@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -164,7 +164,7 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                return LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "regular grace";
+                return LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "regular grace";
             }
         }
 
@@ -172,7 +172,7 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                return LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "upgrade grace";
+                return LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("grace") && LicenseExpiresIn.Ticks > 0 && LicencedHost.license_params["grace"] == "upgrade grace";
             }
         }
 
@@ -313,7 +313,7 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                if (LicencedHost.license_params.ContainsKey("expiry"))
+                if (LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("expiry"))
                     return LicencedHost.LicenseExpiryUTC.ToLocalTime();
                 return null;
             }
@@ -333,6 +333,10 @@ namespace XenAdmin.Dialogs
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled))
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED;
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled))
+                        return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled))
+                        return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport))
                         return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
                     return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;

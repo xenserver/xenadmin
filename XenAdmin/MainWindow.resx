@@ -1777,7 +1777,7 @@
     <value>186, 22</value>
   </data>
   <data name="templatesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;@BRANDING_SERVER@ Templates</value>
+    <value>[XenServer] T&amp;emplates</value>
   </data>
   <data name="localStorageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -2130,7 +2130,7 @@
     <value>212, 22</value>
   </data>
   <data name="removeHostToolStripMenuItem.Text" xml:space="preserve">
-    <value>Remo&amp;ve from @BRANDING_BRAND_CONSOLE@</value>
+    <value>Remo&amp;ve from [XenCenter]</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 6</value>
@@ -2241,7 +2241,7 @@
     <value>246, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Inst&amp;all @BRANDING_PRODUCT_BRAND@ Tools</value>
+    <value>Inst&amp;all [XenServer product] Tools</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 22</value>
@@ -2359,6 +2359,9 @@
   </data>
   <data name="ConvertToThinStorageRepositoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
+  </data>
+  <data name="ConvertToThinStorageRepositoryToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
@@ -2541,7 +2544,7 @@
     <value>195, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
-    <value>View @BRANDING_BRAND_CONSOLE@ &amp;Log Files</value>
+    <value>View [XenCenter] &amp;Log Files</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 6</value>
@@ -2550,13 +2553,13 @@
     <value>195, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
-    <value>@BRANDING_PRODUCT_BRAND@ on the &amp;Web</value>
+    <value>[XenServer product] on the &amp;Web</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 22</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@ &amp;Plugins online</value>
+    <value>[XenCenter] &amp;Plugins online</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 6</value>
@@ -2571,7 +2574,7 @@
     <value>195, 22</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About @BRANDING_BRAND_CONSOLE@</value>
+    <value>&amp;About [XenCenter]</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
@@ -2709,7 +2712,7 @@
     <value>No</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>@BRANDING_BRAND_CONSOLE@</value>
+    <value>[XenCenter]</value>
   </data>
   <data name="&gt;&gt;backButton.Name" xml:space="preserve">
     <value>backButton</value>

@@ -145,7 +145,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {                    
                     if (isValidFile())
                     {
-                        if (fileName.EndsWith(Branding.UPDATE))
+                        if (fileName.EndsWith(UpdateExtension))
                             SelectedUpdateType = UpdateType.NewRetail;
                         else if (fileName.EndsWith(".iso"))
                             SelectedUpdateType = UpdateType.NewSuppPack;
@@ -258,10 +258,15 @@ namespace XenAdmin.Wizards.PatchingWizard
             return false;
         }
 
+        private string UpdateExtension
+        {
+            get { return "." + Branding.Update; }
+        }
+
         private bool isValidFile()
         {
             var fileName = fileNameTextBox.Text;
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(Branding.UPDATE) || fileName.EndsWith(".iso"));
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(UpdateExtension) || fileName.EndsWith(".iso"));
         }
 
 
@@ -285,7 +290,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 OpenFileDialog dlg = new OpenFileDialog();
                 dlg.Multiselect = false;
                 dlg.ShowReadOnly = false;
-                dlg.Filter = Messages.PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT;
+                dlg.Filter = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT, Branding.Update);
                 dlg.FilterIndex = 0;
                 dlg.CheckFileExists = true;
                 dlg.ShowHelp = false;
@@ -305,14 +310,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.EndsWith(Branding.UPDATE) || fileName.EndsWith(".iso"))
+            if (fileName.EndsWith(UpdateExtension) || fileName.EndsWith(".iso"))
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;
             }
             else
             {
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Messages.UPDATES)).ShowDialog(this);
+                new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                        SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)).ShowDialog(this);
             }
         }
 

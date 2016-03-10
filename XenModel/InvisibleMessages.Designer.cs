@@ -88,7 +88,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://updates.xensource.com/@BRANDING_SERVER@/{0}/XenCenter.
+        ///   Looks up a localized string similar to http://updates.xensource.com/[XenServer]/{0}/XenCenter.
         /// </summary>
         public static string CHECK_FOR_UPDATES_URL {
             get {
@@ -120,6 +120,15 @@ namespace XenAdmin {
         public static string HOMEPAGE {
             get {
                 return ResourceManager.GetString("HOMEPAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HomePage.mht.
+        /// </summary>
+        public static string HOMEPAGE_FILENAME {
+            get {
+                return ResourceManager.GetString("HOMEPAGE_FILENAME", resourceCulture);
             }
         }
         
@@ -169,13 +178,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_BRAND_CONSOLE@.log.
+        ///   Looks up a localized string similar to [XenCenter].log.
         /// </summary>
         public static string LOG_FILENAME {
             get {
                 return ResourceManager.GetString("LOG_FILENAME", resourceCulture);
             }
         }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -mapid {0} {1}.
         /// </summary>
         public static string MAINWINDOW_HELP_PARAMS {
@@ -401,7 +412,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_SEARCH@.
+        ///   Looks up a localized string similar to xensearch.
         /// </summary>
         public static string XEN_SEARCH {
             get {
@@ -410,7 +421,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_UPDATE@.
+        ///   Looks up a localized string similar to xsupdate.
         /// </summary>
         public static string XEN_UPDATE {
             get {
@@ -428,7 +439,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @BRANDING_XENSERVER_UPDATE_URL@.
+        ///   Looks up a localized string similar to http://updates.xensource.com/XenServer/updates.xml.
         /// </summary>
         public static string XENSERVER_UPDATE_URL {
             get {

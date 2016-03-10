@@ -134,7 +134,7 @@ namespace XenAdmin.Core
                         if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
                         {
                             List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
-                            if (current.Contains(((XenServerPatchAlert)alert).Patch.Uuid))
+                            if (current.Contains(((XenServerPatchAlert)alert).Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                                 continue;
                             current.Add(((XenServerPatchAlert)alert).Patch.Uuid);
                             other_config[IgnorePatchAction.IgnorePatchKey] = string.Join(",", current.ToArray());
@@ -197,7 +197,8 @@ namespace XenAdmin.Core
                 DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
-                    Properties.Settings.Default.AllowPatchesUpdates || force);
+                    Properties.Settings.Default.AllowPatchesUpdates || force,
+                    Branding.CheckForUpdatesUrl);
                 {
                     action.Completed += actionCompleted;
                 }
@@ -379,17 +380,17 @@ namespace XenAdmin.Core
                             {
                                 var appliedPatches = host.AppliedPatches();
                                 // 1. patch is not already installed 
-                                if (appliedPatches.Any(patch => patch.uuid == serverPatch.Uuid))
+                                if (appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
                                     return false;
 
                                 // 2. the host has all the required patches installed
                                 if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
-                                    !serverPatch.RequiredPatches.All(requiredPatchUuid => appliedPatches.Any(patch => patch.uuid == requiredPatchUuid)))
+                                    !serverPatch.RequiredPatches.All(requiredPatchUuid => appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))))
                                     return false;
 
                                 // 3. the host doesn't have any of the conflicting patches installed
                                 if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
-                                    serverPatch.ConflictingPatches.Any(conflictingPatchUuid => appliedPatches.Any(patch => patch.uuid == conflictingPatchUuid)))
+                                    serverPatch.ConflictingPatches.Any(conflictingPatchUuid => appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))))
                                     return false;
 
                                 return true;

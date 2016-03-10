@@ -572,7 +572,7 @@
         <IXenObject opaqueref="OpaqueRef:6b360a95-c520-883e-6713-0dc1729459e4" />
       </IXenObject>
     </Object>
-    <Object ToString="@BRANDING_SERVER@ Templates">
+    <Object ToString="[XenServer] Templates">
       <IXenObject opaqueref="OpaqueRef:96e6f77e-f669-9fea-b93d-be2a414c4a8c">
         <IXenObject opaqueref="OpaqueRef:a41b9805-3938-1502-3b99-507c3eae2fc4" />
         <IXenObject opaqueref="OpaqueRef:57779e65-2006-dfa4-fd6e-ed433708282b" />

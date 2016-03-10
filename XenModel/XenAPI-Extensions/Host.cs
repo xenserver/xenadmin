@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -60,7 +60,8 @@ namespace XenAPI
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
             DesktopPlus,           // Added in Creedence (desktop-plus)
-            Premium                // Added in Indigo (premium)
+            Premium,               // Added in Indigo (premium)
+            Standard               // Added in Dundee/Violet (standard)
         }
 
         public static string LicenseServerWebConsolePort = "8082";
@@ -104,6 +105,8 @@ namespace XenAPI
                     return Edition.Free;
                 case "premium":
                     return Edition.Premium;
+                case "standard":
+                    return Edition.Standard;
                 default:
                     return Edition.Free;
             }
@@ -155,6 +158,8 @@ namespace XenAPI
                     return "desktop-plus";
                 case Edition.Premium:
                     return "premium";
+                case Edition.Standard:
+                    return "standard";
                 default:
                     return "free";
             }
@@ -717,7 +722,7 @@ namespace XenAPI
             foreach (Pool_patch patch in patches)
             {
                 Pool_patch patch1 = patch;
-                if (!appliedPatches.Exists(otherPatch => patch1.uuid == otherPatch.uuid))
+                if (!appliedPatches.Exists(otherPatch => string.Equals(patch1.uuid, otherPatch.uuid, StringComparison.OrdinalIgnoreCase)))
                     return false;
             }
 
@@ -1418,6 +1423,22 @@ namespace XenAPI
             get
             {
                 return GetEdition(edition) == Edition.Desktop;
+            }
+        }
+
+        public bool PremiumFeaturesEnabled
+        {
+            get
+            {
+                return GetEdition(edition) == Edition.Premium;
+            }
+        }
+
+        public bool StandardFeaturesEnabled
+        {
+            get
+            {
+                return GetEdition(edition) == Edition.Standard;
             }
         }
 

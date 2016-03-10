@@ -1,0 +1,134 @@
+/* Top Hero Section */
+.cx-hero-top,
+.cx-hero-top-bg {
+	background: #5F67B5;
+	height: 310px;
+}
+.cx-hero-top-bg {
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: -1;	
+}
+.cx-hero-top {
+	color: #fff;
+}
+/* top hero columns */
+.cx-hero-top .inner .column {
+	height: 165px;
+}
+.cx-hero-top .inner .column.left {
+	padding-top: 36px;
+	padding-bottom: 42px;
+}
+.cx-hero-top .inner .column.right {
+	width: 127px;
+	height: 165px;
+	line-height: 165px;
+	text-align: center;
+	margin-top: 65px;
+}
+.cx-hero-top .inner .column.right img#cloudServerGraphic {
+	width: 129px;
+	height: 165px;
+}
+.cx-hero-top .inner .column.left img#logo-citrixXenServer {
+	display: block;
+	width: 261px;
+	height: 31px;
+	margin-bottom: 10px;
+}
+p.cx-tagline {
+	font: 16px/1.3 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	color: rgba(256, 256, 256, 0.69);
+	letter-spacing: 0.02em;
+	margin-bottom: 32px!important;
+	font-weight: 300;
+}
+/* call out list */
+ul.cx-callouts-list {
+	font: 14px/1.3 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-weight:300;
+	letter-spacing: 0.02em;
+	margin: 0;
+	list-style: none;
+}
+ul.cx-callouts-list li.cx-doc-icon{
+	display: block;
+	height: 21px;
+	line-height: 21px;
+	margin-bottom: 10px;	
+	margin-left: -17px;
+	padding-left: 32px;
+	background: transparent url(../media/icons/cx-icon-generic-doc.png) no-repeat 0 50%;
+}
+ul.cx-callouts-list li.cx-doc-icon.last{
+	margin-bottom: 0;
+}
+/* start callout links */
+ul.cx-callouts-list li.cx-doc-icon a.cx-link {
+	color: #fff;
+	text-decoration: none;
+}
+ul.cx-callouts-list li.cx-doc-icon a.cx-link:hover {
+	text-decoration: underline;
+}
+	
+ul.cx-callouts-list li.cx-doc-icon ul.cx-link-list{
+	list-style-type: square;
+	list-style-position: inside;
+	padding: 0 0 0 0;
+	margin: 5px 0 0 0;
+	line-height: 1.5;
+}
+/* end callout links */
+	
+
+/* Bottom Hero Section */
+.cx-hero-bottom {
+	margin:34px 0 0 0;
+	padding-bottom: 0px; 
+	text-align: center;
+}
+/* cards */
+.cx-hero-bottom .cx-cards {
+	height: 198px;
+	width: 200px;
+	margin-right: 20px;
+}
+.cx-hero-bottom .cx-cards:hover {
+	background-color: #f2f2f2;
+	cursor: pointer;
+	border-radius: 4px;
+}
+.cx-hero-bottom .cx-cards.last {
+	margin-right: 0;
+}
+.cx-hero-bottom .cx-cards p {
+	padding-top: 35px;
+	color: #5F67B5;
+	font: 14px/1.3 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+}
+/* card icons */
+.cx-cards img {
+	margin-top: 37px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+img#addServer {
+	width: 55px;
+	height: 66px;
+}
+img#purchaseSupport {
+	width: 57px;
+	height: 65px;
+}
+img#deskTopVirt {
+	width: 86px;
+	height: 66px;
+}
+
+

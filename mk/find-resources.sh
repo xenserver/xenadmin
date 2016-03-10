@@ -35,7 +35,7 @@ ZIP="zip -q"
 for project in XenAdmin XenModel XenOvfApi XenOvfTransport
 do
     cd ${REPO}/${project}
-    files=$(/usr/bin/find . -not -name \*.ja.resx -not -name \*.zh-CN.resx -name \*.resx -o -name \*.htm)
+    files=$(/usr/bin/find . -not -name \*.ja.resx -not -name \*.zh-CN.resx -not -name \*.ja.mht -not -name \*.zh-CN.mht -name \*.resx -o -name \*.htm -o -name \*.mht)
 
     for file in ${files}
     do

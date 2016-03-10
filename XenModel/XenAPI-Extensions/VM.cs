@@ -63,6 +63,8 @@ namespace XenAPI
         private const int DEFAULT_NUM_VBDS_ALLOWED = 16;
         public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
+        public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
+
         private SnapshotsView _snapshotView = SnapshotsView.None;
 
         private XmlDocument xdRecommendations = null;
@@ -1717,12 +1719,19 @@ namespace XenAPI
 
         public bool HasValidVCPUConfiguration
         {
-            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket); }
+            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket) == ""; }
         }
 
-        public static bool ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
+        public static string ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
         {
-            return coresPerSocket > 0 && noOfVCPUs % coresPerSocket == 0;
+            if (coresPerSocket > 0)
+            {
+                if (noOfVCPUs % coresPerSocket != 0)
+                    return Messages.CPU_TOPOLOGY_INVALID_REASON_MULTIPLE;
+                if (noOfVCPUs / coresPerSocket > MAX_SOCKETS)
+                    return Messages.CPU_TOPOLOGY_INVALID_REASON_SOCKETS;
+            }
+            return "";
         }
 
         public string Topology
@@ -1730,7 +1739,7 @@ namespace XenAPI
             get
             {
                 var cores = CoresPerSocket;
-                var sockets = ValidVCPUConfiguration(VCPUs_max, cores) ? VCPUs_max/cores : 0;
+                var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max/cores : 0;
                 return GetTopology(sockets, cores);
             }
         }
@@ -1738,7 +1747,7 @@ namespace XenAPI
         public static string GetTopology(long sockets, long cores)
         {
             if (sockets == 0) // invalid cores value
-                return string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
+                return cores == 1 ? string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE_1) : string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
             if (sockets == 1 && cores == 1)
                 return Messages.CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE;
             if (sockets == 1)
@@ -1959,6 +1968,60 @@ namespace XenAPI
             {
                 return 
                     this.has_vendor_device && this.IsWindows;
+            }
+        }
+
+        /// <summary>
+        /// Returns the VM IP address for SSH login.
+        /// </summary>
+        public string IPAddressForSSH
+        {
+            get
+            {
+                List<string> ipAddresses = new List<string>();
+
+                if (!this.is_control_domain) //vm
+                {
+                    List<VIF> vifs = this.Connection.ResolveAll(this.VIFs);
+                    vifs.Sort();
+
+                    foreach (var vif in vifs)
+                    {
+                        if (!vif.currently_attached)
+                            continue;
+
+                        var network = vif.Connection.Resolve(vif.network);
+                        if (network != null && network.IsGuestInstallerNetwork)
+                            continue;
+
+                        ipAddresses.AddRange(vif.IPAddresses);
+                    }
+                }
+                else //control domain
+                {
+                    List<PIF> pifList = new List<PIF>(this.Connection.Cache.PIFs);
+                    pifList.Sort();  // This sort ensures that the primary PIF comes before other management PIFs
+
+                    foreach (PIF pif in pifList)
+                    {
+                        if (pif.host.opaque_ref != this.resident_on.opaque_ref || !pif.currently_attached)
+                            continue;
+
+                        if (pif.IsManagementInterface(false))
+                        {
+                            ipAddresses.Add(pif.IP);
+                        }
+                    }
+                }
+
+                //find first IPv4 address and return it - we would use it if there is one
+                IPAddress addr;
+                foreach (string addrString in ipAddresses)
+                    if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        return addrString;
+
+                //return the first address (this will not be IPv4)
+                return ipAddresses.FirstOrDefault() ?? string.Empty;
             }
         }
     }

@@ -39,8 +39,8 @@ namespace XenAdmin.Controls.XenSearch
             this.searchForComboButton.SelectedItem = null;
             this.searchForComboButton.UseVisualStyleBackColor = true;
             this.searchForComboButton.SelectedItemChanged += new System.EventHandler(this.searchForComboButton_selChanged);
-            this.searchForComboButton.BeforePopup += new System.EventHandler(this.searchForComboButton_BeforePopup);
             this.searchForComboButton.ItemSelected += new System.EventHandler(this.searchForComboButton_itemSelected);
+            this.searchForComboButton.BeforePopup += new System.EventHandler(this.searchForComboButton_BeforePopup);
             // 
             // SearchFor
             // 

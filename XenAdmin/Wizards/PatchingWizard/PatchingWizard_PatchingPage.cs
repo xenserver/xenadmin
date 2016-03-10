@@ -124,14 +124,29 @@ namespace XenAdmin.Wizards.PatchingWizard
           
             if (!IsAutomaticMode)
             {
+                textBoxLog.Text = ManualTextInstructions;
+                
+                List<AsyncAction> actions = new List<AsyncAction>();
                 if (SelectedUpdateType != UpdateType.NewSuppPack)
                     actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
                 else
                     actionManualMode = new InstallSupplementalPackAction(SuppPackVdis, false);
-                actionManualMode.Changed += action_Changed;
-                actionManualMode.Completed += action_Completed;
-                textBoxLog.Text = ManualTextInstructions;
-                actionManualMode.RunAsync();
+
+                actions.Add(actionManualMode);
+                if (RemoveUpdateFile && SelectedUpdateType != UpdateType.NewSuppPack)
+                {
+                    foreach (Pool pool in SelectedPools)
+                    {
+                        actions.Add(new PoolPatchCleanAction(pool, Patch, false));
+                    }
+                }
+
+                using (var multipleAction = new MultipleAction(Connection, "", "", "", actions, true, true, true))
+                {
+                    multipleAction.Changed += action_Changed;
+                    multipleAction.Completed += action_Completed;
+                    multipleAction.RunAsync();
+                }
                 return;
             }
 
@@ -149,7 +164,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
                                                      {
                                                          if (Patch != null)
-                                                             return otherPatch.uuid == Patch.uuid;
+                                                             return string.Equals(otherPatch.uuid, Patch.uuid, StringComparison.OrdinalIgnoreCase);
                                                          return false;
                                                      });
                 }
@@ -402,8 +417,22 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void FinishedWithErrors(Exception exception)
         {
             labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, GetUpdateName());
-            string errorMessage = string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
-            labelError.Text = errorMessage;
+            
+            string errorMessage = null;
+
+            if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
+            {
+                var innerEx = exception.InnerException as Failure;
+                errorMessage = innerEx.Message;
+
+                if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
+                    log.Error(string.Concat(innerEx.ErrorDescription.ToArray()));
+            }
+            
+            labelError.Text = errorMessage ?? string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
+
+            log.ErrorFormat("Error message displayed: {0}", labelError.Text);
+
             pictureBox1.Image = SystemIcons.Error.ToBitmap();
             if (exception.InnerException is SupplementalPackInstallFailedException)
             {

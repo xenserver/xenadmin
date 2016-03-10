@@ -73,8 +73,9 @@ namespace XenAdmin.Actions
         private readonly bool _checkForXenCenter;
         private readonly bool _checkForServerVersion;
         private readonly bool _checkForPatches;
+        private readonly string _checkForUpdatesUrl;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl)
             : base(null, "_get_updates", "_get_updates", true)
         {
             XenServerPatches = new List<XenServerPatch>();
@@ -84,13 +85,18 @@ namespace XenAdmin.Actions
             _checkForXenCenter = checkForXenCenter;
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
+            _checkForUpdatesUrl = string.IsNullOrEmpty(checkForUpdatesUrl) ? InvisibleMessages.XENSERVER_UPDATE_URL : checkForUpdatesUrl;
         }
+
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
+            : this(checkForXenCenter, checkForServerVersion, checkForPatches, null)
+        { }
 
         protected override void Run()
         {
             this.Description = Messages.AVAILABLE_UPDATES_SEARCHING;
 
-            XmlDocument xdoc = FetchCheckForUpdatesXml(InvisibleMessages.XENSERVER_UPDATE_URL);
+            XmlDocument xdoc = FetchCheckForUpdatesXml(_checkForUpdatesUrl);
 
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);
@@ -249,7 +255,7 @@ namespace XenAdmin.Actions
                     {
                         if (childnode.Name != "patch")
                             continue;
-                        XenServerPatch patch = XenServerPatches.Find(item => item.Uuid == childnode.Attributes["uuid"].Value);
+                        XenServerPatch patch = XenServerPatches.Find(item => string.Equals(item.Uuid, childnode.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
                         if (patch == null)
                             continue;
                         patches.Add(patch);

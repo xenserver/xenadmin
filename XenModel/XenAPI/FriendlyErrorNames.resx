@@ -136,7 +136,7 @@
     <value>Could not enable external authentication.</value>
   </data>
   <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
-    <value>XenServer was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
+    <value>The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
   </data>
   <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>Failed to enable external authentication, permission on the AD server was denied.</value>
@@ -311,6 +311,9 @@
   </data>
   <data name="EVENT_SUBSCRIPTION_PARSE_FAILURE" xml:space="preserve">
     <value>The server failed to parse your event subscription. Valid values include: *, class-name, class-name/object-reference.</value>
+  </data>
+  <data name="FAILED_TO_START_EMULATOR" xml:space="preserve">
+    <value>An emulator required to run this VM failed to start</value>
   </data>
   <data name="FEATURE_REQUIRES_HVM" xml:space="preserve">
     <value>The VM is set up to use a feature that requires it to boot as HVM.</value>
@@ -558,9 +561,6 @@
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
     <value>The server joining the pool cannot already be a master of another pool.</value>
   </data>
-  <data name="JOINING_HOST_CANNOT_CONTAIN_NETWORK_BOND" xml:space="preserve">
-    <value>The host joining the pool cannot contain any network bond.</value>
-  </data>
   <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
     <value>The server joining the pool cannot contain any shared storage.</value>
   </data>
@@ -598,7 +598,7 @@
     <value>Your license has expired</value>
   </data>
   <data name="LICENSE_FILE_DEPRECATED" xml:space="preserve">
-    <value>This type of license file is for previous versions of XenServer. Please upgrade to the new licensing system.</value>
+    <value>This type of license file is for previous versions of the server. Please upgrade to the new licensing system.</value>
   </data>
   <data name="LICENSE_HOST_POOL_MISMATCH" xml:space="preserve">
     <value>Host and pool have incompatible licenses.</value>
@@ -607,7 +607,7 @@
     <value>There was an error processing your license.  Please contact your support representative</value>
   </data>
   <data name="LIKEWISE_WINERROR_0251E" xml:space="preserve">
-    <value>XenServer was unable to contact your domain server. Check your settings are correct and that a route to the server exists.</value>
+    <value>The server was unable to contact your domain server. Check your settings are correct and that a route to the server exists.</value>
   </data>
   <data name="LOCATION_NOT_UNIQUE" xml:space="preserve">
     <value>A VDI with the specified location already exists within the SR</value>
@@ -709,7 +709,7 @@
     <value>The uploaded update already exists</value>
   </data>
   <data name="PATCH_APPLY_FAILED" xml:space="preserve">
-    <value>The update failed to apply.  View output for more details.</value>
+    <value>The update failed to apply. View logs for more details.</value>
   </data>
   <data name="PATCH_APPLY_FAILED_BACKUP_FILES_EXIST" xml:space="preserve">
     <value>The patch apply failed: there are backup files created while applying patch. Please remove these backup files before applying patch again.</value>
@@ -718,7 +718,7 @@
     <value>The specified patch is applied and cannot be destroyed.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_ISO_MOUNTED" xml:space="preserve">
-    <value>XenServer Tools ISO must be ejected from all running VMs in the pool.</value>
+    <value>The Tools ISO must be ejected from all running VMs in the pool.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>The patch precheck stage failed: the server does not have enough space.</value>
@@ -733,10 +733,10 @@
     <value>The update precheck stage failed: there are one or more VMs still running on the server.  All VMs must be shut down or suspended before the update can be applied.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_BUILD" xml:space="preserve">
-    <value>XenServer build number ({1}) is incompatible with the update build number ({2}).</value>
+    <value>The current build number ({1}) is incompatible with the update build number ({2}).</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
-    <value>XenServer version number ({1}) is incompatible with the update version number regular expression ({2}).</value>
+    <value>The current version number ({1}) is incompatible with the update version number regular expression ({2}).</value>
   </data>
   <data name="PBD_EXISTS" xml:space="preserve">
     <value>A PBD already exists connecting the SR to the server</value>
@@ -755,6 +755,9 @@
   </data>
   <data name="PIF_ALREADY_BONDED" xml:space="preserve">
     <value>You cannot create a bond of an interface which is a member of an existing bond.</value>
+  </data>
+  <data name="PIF_BOND_MORE_THAN_ONE_IP" xml:space="preserve">
+    <value>Only one PIF on a bond is allowed to have an IP configuration.</value>
   </data>
   <data name="PIF_BOND_NEEDS_MORE_MEMBERS" xml:space="preserve">
     <value>A bond must consist of at least two member interfaces</value>
@@ -817,7 +820,7 @@
     <value>Could not enable external authentication: {1}</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
-    <value>XenServer was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
+    <value>The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
     <value>Failed to enable external authentication, a duplicate hostname was detected.</value>
@@ -842,6 +845,9 @@
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
     <value>The server joining the pool must have the same product version as the pool master.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_ONLY_HAVE_PHYSICAL_PIFS" xml:space="preserve">
+    <value>The host joining the pool must not have any bonds, VLANs or tunnels.</value>
   </data>
   <data name="PROVISION_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>The provision call failed because it ran out of space.</value>
@@ -870,7 +876,7 @@ Authorized Roles: {1}</value>
     <value>Cannot restore on this server because it was saved on an incompatible version</value>
   </data>
   <data name="RESTORE_SCRIPT_FAILED" xml:space="preserve">
-    <value>The restore could not be performed because the restore script failed. Your XenServer Backup file may be corrupt. See the logs for more information.</value>
+    <value>The restore could not be performed because the restore script failed. Your backup file may be corrupt. See the logs for more information.</value>
   </data>
   <data name="RESTORE_TARGET_MGMT_IF_NOT_IN_BACKUP" xml:space="preserve">
     <value>The restore could not be performed because the server's current management interface is not in the backup. The interfaces mentioned in the backup are:</value>
@@ -898,9 +904,6 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>The SM plugin did not respond to a query.</value>
-  </data>
-  <data name="SR_ATTACHED_ON_SLAVE" xml:space="preserve">
-    <value>The SR is currently attached on a host other than the master.</value>
   </data>
   <data name="SR_ATTACH_FAILED" xml:space="preserve">
     <value>Attaching this SR failed.</value>
@@ -1281,7 +1284,7 @@ Authorized Roles: {1}</value>
     <value>The tapdisk is already running</value>
   </data>
   <data name="SR_BACKEND_FAILURE_446" xml:space="preserve">
-    <value>XenServer does not support extended characters in SMB paths, usernames, and passwords.</value>
+    <value>Extended characters are not supported in SMB paths, usernames, and passwords.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_447" xml:space="preserve">
     <value>Illegal XML character.</value>
@@ -1478,11 +1481,11 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_99" xml:space="preserve">
     <value>Only 1 LUN may be used with shared LVM</value>
   </data>
-  <data name="SR_DETACHED_ON_MASTER" xml:space="preserve">
-    <value>The SR is currently detached on the master.</value>
-  </data>
   <data name="SR_DEVICE_IN_USE" xml:space="preserve">
     <value>The SR operation cannot be performed because a device underlying the SR is in use by the server.</value>
+  </data>
+  <data name="SR_DOES_NOT_SUPPORT_MIGRATION" xml:space="preserve">
+    <value>You attempted to migrate a VDI to or from an SR that doesn't support migration</value>
   </data>
   <data name="SR_FULL" xml:space="preserve">
     <value>The SR is full. Requested size {0} exceeds the maximum size {1}</value>
@@ -1675,6 +1678,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VIF_IN_USE" xml:space="preserve">
     <value>Network has active VIFs</value>
+  </data>
+  <data name="VIF_NOT_IN_MAP" xml:space="preserve">
+    <value>This VIF was not mapped to a destination network</value>
   </data>
   <data name="VLAN_TAG_INVALID" xml:space="preserve">
     <value>You tried to create a VLAN, but the tag you gave ({0}) was invalid -- it must be between 0 and 4094.</value>
@@ -1875,7 +1881,7 @@ Authorized Roles: {1}</value>
     <value>WLB rejected the server's request as malformed.</value>
   </data>
   <data name="WLB_MALFORMED_RESPONSE" xml:space="preserve">
-    <value>The WLB server said something that XenServer wasn't expecting or didn't understand.</value>
+    <value>The WLB server said something that the server wasn't expecting or didn't understand.</value>
   </data>
   <data name="WLB_NOT_INITIALIZED" xml:space="preserve">
     <value>No WLB connection is configured.</value>
@@ -1893,7 +1899,7 @@ Authorized Roles: {1}</value>
     <value>WLB reported that the server rejected its configured authentication details.</value>
   </data>
   <data name="WLB_XENSERVER_CONNECTION_REFUSED" xml:space="preserve">
-    <value>WLB reported that the server refused it a connection (even though we're connecting perfectly fine in the other direction).</value>
+    <value>WLB reported that the server refused to let it connect (even though we're connecting perfectly fine in the other direction).</value>
   </data>
   <data name="WLB_XENSERVER_MALFORMED_RESPONSE" xml:space="preserve">
     <value>WLB reported that the server said something to it that WLB wasn't expecting or didn't understand.</value>

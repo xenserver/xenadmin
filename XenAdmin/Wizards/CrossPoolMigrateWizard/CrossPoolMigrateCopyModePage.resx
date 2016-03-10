@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>Select where would you like to copy your VM.</value>
+    <value>labelRubric</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -244,7 +244,7 @@
     <value>2</value>
   </data>
   <data name="intraPoolDescriptionLabel.Text" xml:space="preserve">
-    <value>Make a copy of the VM within the same pool</value>
+    <value>Make a copy in the same pool</value>
   </data>
   <data name="&gt;&gt;intraPoolDescriptionLabel.Name" xml:space="preserve">
     <value>intraPoolDescriptionLabel</value>
@@ -280,7 +280,7 @@
     <value>4</value>
   </data>
   <data name="crossPoolDescriptionLabel.Text" xml:space="preserve">
-    <value>Make a copy of the VM in a different pool</value>
+    <value>Make a copy in a different pool</value>
   </data>
   <data name="&gt;&gt;crossPoolDescriptionLabel.Name" xml:space="preserve">
     <value>crossPoolDescriptionLabel</value>

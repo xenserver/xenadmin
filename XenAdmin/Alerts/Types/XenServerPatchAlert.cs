@@ -171,7 +171,7 @@ namespace XenAdmin.Alerts
             if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
             {
                 List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
-                if (current.Contains(Patch.Uuid))
+                if (current.Contains(Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                     return true;
             }
             return false;
@@ -181,7 +181,7 @@ namespace XenAdmin.Alerts
         {
             if (other is XenServerPatchAlert)
             {
-                return Patch.Uuid == ((XenServerPatchAlert)other).Patch.Uuid;
+                return string.Equals(Patch.Uuid, ((XenServerPatchAlert)other).Patch.Uuid, StringComparison.OrdinalIgnoreCase);
             }
             return base.Equals(other);
         }

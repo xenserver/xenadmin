@@ -55,6 +55,8 @@ namespace XenAdmin.Dialogs.HealthCheck
         private string xsUserName;
         private string xsPassword;
 
+        internal override string HelpName { get { return "HealthCheckSettingsDialog"; } }
+
         public HealthCheckSettingsDialog(Pool pool, bool enrollNow)
         {
             this.pool = pool;

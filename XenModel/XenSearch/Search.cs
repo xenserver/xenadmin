@@ -295,7 +295,7 @@ namespace XenAdmin.XenSearch
             if (uuid == null)
                 uuid = System.Guid.NewGuid().ToString();
 
-            String key = InvisibleMessages.XEN_SEARCH + ".Search-" + uuid;
+            String key = SearchPrefix + uuid;
             String value = GetXML();
 
             if (connection == null)
@@ -339,7 +339,7 @@ namespace XenAdmin.XenSearch
 
         public void Delete()
         {
-            String key = InvisibleMessages.XEN_SEARCH + ".Search-" + uuid;
+            String key = SearchPrefix + uuid;
 
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
@@ -672,6 +672,7 @@ namespace XenAdmin.XenSearch
         }
 
         private static Dictionary<String, Search> searches =new Dictionary<string, Search>();
+        public static string BrandedSearchKey { get; private set; }
         public static event Action SearchesChanged;
 
         private static void OnSearchesChanged()
@@ -693,9 +694,10 @@ namespace XenAdmin.XenSearch
             }
         }
 
-        public static void InitSearch()
+        public static void InitSearch(string brandedSearchKey)
         {
             searches = new Dictionary<String, Search>();
+            BrandedSearchKey = brandedSearchKey;
 
             InitDefaultSearches();
 
@@ -714,10 +716,14 @@ namespace XenAdmin.XenSearch
             SynchroniseSearches();
         }
 
+        private static string SearchPrefix
+        {
+            get { return BrandedSearchKey + ".Search-"; }
+        }
+
         private static void SynchroniseSearches()
         {
             Dictionary<String, Search> localSearches = new Dictionary<String, Search>();
-            string SearchPrefix = InvisibleMessages.XEN_SEARCH + ".Search-";
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
                 connection.Cache.RegisterBatchCollectionChanged<Pool>(Pool_BatchCollectionChanged);

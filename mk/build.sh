@@ -37,18 +37,26 @@
 # way that it will continue to work even if it's executed manually by a developer
 # or from a build automation system.
 
-
-FATAL=""
-for DEP in nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe signtool.exe candle.exe light.exe
-do
-  which $DEP >/dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    FATAL="$DEP $FATAL"
+function check_deps ()
+{
+  local -a MISSING=()
+  for DEP in "$@"
+  do
+    which $DEP >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      MISSING[${#MISSING}]=${DEP}
+    fi
+  done
+  if [ ${#MISSING} -gt 0 ]; then
+    echo "FATAL: One or more build tools were not found in PATH: ${MISSING[@]}"
+    exit 1
   fi
-done
-if [ -n "${FATAL}" ]; then
-  echo "FATAL: One or more build tools were not found in PATH: $FATAL"
-  exit 1
+}
+
+check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe
+if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
+then
+    check_deps signtool.exe
 fi
 
 
@@ -82,6 +90,8 @@ then
 	fi
 fi
 
+if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
+
 git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git &>-
 if [ "$?" -eq 0 ]; then
   if [ -d "xenadmin-branding" ]
@@ -89,8 +99,16 @@ if [ "$?" -eq 0 ]; then
       rm -rf xenadmin-branding 
   fi
   git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git
-  if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-  cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
+  if [ -d ${BRAND_REPO}/${XC_BRANDING} ]; then
+	echo "Overwriting Branding folder"
+	cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
+  fi
+fi
+
+# overwrite archive-push.sh file, if it exists in Branding folder
+if [ -f ${XENADMIN_DIR}/Branding/branding-archive-push.sh ]; then
+  echo "Overwriting mk/archive-push.sh with Branding/branding-archive-push.sh."
+  cp ${XENADMIN_DIR}/Branding/branding-archive-push.sh ${XENADMIN_DIR}/mk/archive-push.sh
 fi
 
 production_jenkins_build()
@@ -101,7 +119,12 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    source ${XENADMIN_DIR}/mk/tests-checks.sh
+	# Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+	if [ -n "${SKIP_TESTS+x}" ]; then
+		echo "Tests skipped because SKIP_TESTS declared"
+	else
+		source ${XENADMIN_DIR}/mk/tests-checks.sh
+	fi
     source ${XENADMIN_DIR}/mk/archive-push.sh
     source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
@@ -111,7 +134,12 @@ private_jenkins_build()
 {
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    source ${XENADMIN_DIR}/mk/tests-checks.sh
+    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+	if [ -n "${SKIP_TESTS+x}" ]; then
+		echo "Tests skipped because SKIP_TESTS declared"
+	else
+		source ${XENADMIN_DIR}/mk/tests-checks.sh
+	fi
     source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
 

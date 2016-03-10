@@ -37,11 +37,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("XenCenterLib")]
-[assembly: AssemblyDescription("@BRANDING_COMPANY_NAME_SHORT@ @BRANDING_BRAND_CONSOLE@ base library")]
+[assembly: AssemblyDescription("[Citrix] [XenCenter] base library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("@BRANDING_COMPANY_NAME_SHORT@")]
-[assembly: AssemblyProduct("@BRANDING_BRAND_CONSOLE@")]
-[assembly: AssemblyCopyright("@BRANDING_COPYRIGHT@")]
+[assembly: AssemblyCompany("[Citrix]")]
+[assembly: AssemblyProduct("[XenCenter]")]
+[assembly: AssemblyCopyright("[BRANDING_COPYRIGHT]")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -62,5 +62,5 @@ using System.Runtime.InteropServices;
 //
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0000")]
-[assembly: XenAdmin.XSVersion("@BRANDING_PRODUCT_VERSION@")]
+[assembly: XenAdmin.XSVersion("[BRANDING_PRODUCT_VERSION]")]
 [assembly: InternalsVisibleTo("XenAdminTests")]
