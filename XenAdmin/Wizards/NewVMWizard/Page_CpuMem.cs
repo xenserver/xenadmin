@@ -109,7 +109,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.CoresPerSocket, Template.MaxCoresPerSocket);
             PopulateVCPUs(Template.MaxVCPUsAllowed, Template.VCPUs_at_startup);
 
-            SetSpinnerLimits();
+            SetSpinnerLimitsAndIncrement();
 
             ValuesUpdated();
 
@@ -153,8 +153,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             spinnerStatMax.SetRange(0, maxMemAllowed);
         }
 
-        private void SetSpinnerLimits()
+        private void SetSpinnerLimitsAndIncrement()
         {
+            spinnerDynMin.Increment = spinnerDynMax.Increment = spinnerStatMax.Increment = VMMemoryControlsEdit.CalcIncrement(Template.memory_static_max, spinnerDynMin.Units);
+            
             long maxMemAllowed = MaxMemAllowed;
             double min = Template.memory_static_min;
             if (memoryMode == 1)
@@ -329,7 +331,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (initialising)
                 return;
 
-            SetSpinnerLimits();
+            SetSpinnerLimitsAndIncrement();
             ValuesUpdated();
         }
 
