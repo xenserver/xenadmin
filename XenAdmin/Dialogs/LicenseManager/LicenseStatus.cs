@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -335,6 +335,8 @@ namespace XenAdmin.Dialogs
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled))
                         return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled))
+                        return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport))
                         return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
                     return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;

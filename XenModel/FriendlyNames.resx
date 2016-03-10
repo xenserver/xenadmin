@@ -1856,4 +1856,7 @@
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>Connection test</value>
   </data>
+  <data name="Label-host.edition-standard" xml:space="preserve">
+    <value>[Citrix] [XenServer product] Standard Edition</value>
+  </data>
 </root>
