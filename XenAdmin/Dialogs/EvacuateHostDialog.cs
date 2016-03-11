@@ -326,9 +326,9 @@ namespace XenAdmin.Dialogs
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName == "resident_on" || args.PropertyName == "allowed_operations")
+            if (args.PropertyName == "resident_on" || args.PropertyName == "allowed_operations" || args.PropertyName == "current_operations")
             {
-                Program.Invoke(this, dataGridViewVms.Refresh);
+                Program.Invoke(this, () => RefreshVM(sender as VM));
             }
             else if (args.PropertyName == "virtualisation_status")
             {
@@ -385,7 +385,7 @@ namespace XenAdmin.Dialogs
 
                     var row = new VmPrecheckRow(this, vm);
                     if (solveActionsByUuid.ContainsKey(vm.uuid))
-                        row.solutionAction = solveActionsByUuid[vm.uuid];
+                        row.UpdateSolutionAction(solveActionsByUuid[vm.uuid]);
 
                     vms.Add(vm.opaque_ref, row);
                     dataGridViewVms.Rows.Add(row);
@@ -405,7 +405,7 @@ namespace XenAdmin.Dialogs
             foreach (var row in dataGridViewVms.Rows)
             {
                 var precheckRow = row as VmPrecheckRow;
-                if (precheckRow != null && precheckRow.hasSolution())
+                if (precheckRow != null && (precheckRow.hasSolution() || precheckRow.hasSolutionActionInProgress()))
                 {
                     EvacuateButton.Enabled = false;
                     break;
@@ -458,6 +458,21 @@ namespace XenAdmin.Dialogs
                 NewMasterComboBox.EndUpdate();
             }
         }
+
+        private void RefreshVM(VM vm)
+        {
+            foreach (var row in dataGridViewVms.Rows)
+            {
+                var precheckRow = row as VmPrecheckRow;
+                if (precheckRow != null && (precheckRow.vm == vm))
+                {
+                    precheckRow.Update();
+                    break;
+                }
+            }
+            dataGridViewVms.Refresh();
+        }
+
 
         private class VmPrecheckRow : DataGridViewRow, IComparable<VmPrecheckRow>
         {
@@ -516,7 +531,7 @@ namespace XenAdmin.Dialogs
             public void UpdateError(string message, Solution solution)
             {
                 // still running action to solve a previous error, no point in overwriting or we could end up 'solving' it twice
-                if (solutionAction != null && !solutionAction.IsCompleted)
+                if (hasSolutionActionInProgress())
                 {
                     this.error = Messages.EVACUATE_SOLUTION_IN_PROGRESS;
                     return;
@@ -551,6 +566,13 @@ namespace XenAdmin.Dialogs
                         break;
                 }
 
+                Update();
+            }
+            
+            public void UpdateSolutionAction(AsyncAction action)
+            {
+                this.solutionAction = action;
+                this.error = hasSolutionActionInProgress() ? Messages.EVACUATE_SOLUTION_IN_PROGRESS : "";
                 Update();
             }
 
@@ -597,6 +619,12 @@ namespace XenAdmin.Dialogs
                 return solution != Solution.None 
                     && solution != Solution.InstallPVDriversNoSolution;
             }
+
+            internal bool hasSolutionActionInProgress()
+            {
+                return solutionAction != null && !solutionAction.IsCompleted;
+            }
+            
         }
 
         private void RepairButton_Click(object sender, EventArgs e)
@@ -694,6 +722,8 @@ namespace XenAdmin.Dialogs
 
         private bool CanSuspendVm(String vmRef)
         {
+            if (vmRef == null)
+                return false;
             VM vm = connection.Resolve(new XenRef<VM>(vmRef));
             return vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.suspend);
         }
@@ -752,7 +782,7 @@ namespace XenAdmin.Dialogs
 
                         foreach (string _vmRef in vms.Keys)
                         {
-                            UpdateVMWithError(_vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
+                            UpdateVMWithError(_vmRef, String.Empty, CanSuspendVm(_vmRef) ? Solution.Suspend : Solution.Shutdown);
                         }
 
                         if (vmRef == null)
@@ -790,6 +820,9 @@ namespace XenAdmin.Dialogs
 
         void UpdateVMWithError(string opaqueRef, string message, Solution solution)
         {
+            if (opaqueRef == null || !vms.ContainsKey(opaqueRef))
+                return;
+
             var row = vms[opaqueRef];
 
             row.UpdateError(message, solution);
