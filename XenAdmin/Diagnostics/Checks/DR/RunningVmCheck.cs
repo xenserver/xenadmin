@@ -55,7 +55,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             Vm = vm;
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             foreach (VM existingVm in Pool.Connection.Cache.VMs)
             {

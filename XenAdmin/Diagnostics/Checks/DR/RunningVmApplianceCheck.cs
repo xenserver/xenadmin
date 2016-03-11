@@ -55,7 +55,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             this.vmAppliance = vmAppliance;
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (vmAppliance != null)
             {

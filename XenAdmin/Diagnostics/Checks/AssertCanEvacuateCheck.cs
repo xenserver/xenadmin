@@ -52,19 +52,32 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        protected Problem CheckHost()
+        protected List<Problem> CheckHost()
         {
+            var problems = new List<Problem>();
+
+            var VMsWithProblems = new List<string>();
             var residentVMs = Host.Connection.ResolveAll(Host.resident_VMs);
             foreach (var residentVM in residentVMs)
             {
                 if (residentVM.AutoPowerOn)
-                    return new AutoStartEnabled(this, residentVM);
+                {
+                    problems.Add(new AutoStartEnabled(this, residentVM));
+                    VMsWithProblems.Add(residentVM.opaque_ref);
+                    continue;
+                }
 
                 SR sr = residentVM.FindVMCDROMSR();
                 if (sr != null && sr.IsToolsSR)
-                    return new ToolsCD(this, residentVM);
-                if (sr != null && sr.content_type == SR.Content_Type_ISO)
-                    return new LocalCD(this, residentVM);
+                {
+                    problems.Add(new ToolsCD(this, residentVM));
+                    VMsWithProblems.Add(residentVM.opaque_ref);
+                }
+                else if (sr != null && sr.content_type == SR.Content_Type_ISO)
+                {
+                    problems.Add(new LocalCD(this, residentVM));
+                    VMsWithProblems.Add(residentVM.opaque_ref);
+                }
             }
 
             Session session = Host.Connection.DuplicateSession();
@@ -76,11 +89,14 @@ namespace XenAdmin.Diagnostics.Checks
                 String[] exception = kvp.Value;
                 XenRef<VM> vmRef = kvp.Key;
 
+                if (VMsWithProblems.Contains(vmRef))
+                    continue;
+
                 try
                 {
-                    // We can actually ignore some errors, indicated by null
-                    return GetProblem(Host.Connection, vmRef, exception);
-
+                    Problem p = GetProblem(Host.Connection, vmRef, exception);
+                    if (p != null)
+                        problems.Add(p);
                 }
                 catch (Exception e)
                 {
@@ -91,10 +107,11 @@ namespace XenAdmin.Diagnostics.Checks
                     VM vm = Host.Connection.Resolve(kvp.Key);
 
                     if (vm != null)
-                        return new CannotMigrateVM(this, vm);
+                        problems.Add(new CannotMigrateVM(this, vm));
                 }
             }
-            return null;
+
+            return problems;
         }
 
         private Problem GetProblem(IXenConnection connection, XenRef<VM> vmRef, string[] exception)
@@ -209,7 +226,10 @@ namespace XenAdmin.Diagnostics.Checks
             }
         }
 
-        public override Problem RunCheck()
+        // This function only tests certain host-wide conditions.
+        // Further per-VM conditions are in CheckHost().
+        // See RunAllChecks() for how we combine them.
+        protected override Problem RunCheck()
         {
             if (!Host.IsLive)
                 return new HostNotLiveWarning(this, Host);
@@ -223,7 +243,17 @@ namespace XenAdmin.Diagnostics.Checks
                 if (Helpers.WlbEnabled(pool.Connection))
                     return new WLBEnabledWarning(this, pool, Host);
             }
-            return CheckHost();
+
+            return null;
+        }
+
+        public override List<Problem> RunAllChecks()
+        {
+            var list = base.RunAllChecks();
+            if (list.Count > 0)
+                return list;
+            else
+                return CheckHost();
         }
 
         public override string Description

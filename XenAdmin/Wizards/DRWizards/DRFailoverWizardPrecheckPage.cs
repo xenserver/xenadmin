@@ -227,10 +227,12 @@ namespace XenAdmin.Wizards.DRWizards
 
         private DataGridViewRow ExecuteCheck(Check check)
         {
-            Problem problem = check.RunCheck();
-            if (problem != null)
+            var problems = check.RunAllChecks();
+            if (problems.Count != 0)
             {
-                return new PreCheckItemRow(problem);
+                // None of the checks used in the DR wizard returns more than one problem, so we just take the first.
+                // (Even if they did, we would only suffer the usability problem described in CA-77990).
+                return new PreCheckItemRow(problems[0]);
             } 
             return new PreCheckItemRow(check);
         }
