@@ -150,9 +150,6 @@
   <data name="automaticOptionLabel.Text" xml:space="preserve">
     <value>[XenCenter] will &amp;automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
   </data>
-  <data name="automaticOptionLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
     <value>automaticOptionLabel</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
     <value>Automatic</value>
-  </data>
-  <data name="AutomaticRadioButton.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
@@ -385,7 +379,7 @@
     <value>No</value>
   </data>
   <data name="downloadUpdateRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 17</value>
+    <value>354, 17</value>
   </data>
   <data name="downloadUpdateRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -424,7 +418,7 @@
     <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Select an update that you wish to download from [Citrix], or an update or supplemental pack that you have already downloaded to your local disk.</value>
+    <value>Select Automatic mode or manually select an update to be downloaded from [Citrix], or browse an update or supplemental pack file from your computer.</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
