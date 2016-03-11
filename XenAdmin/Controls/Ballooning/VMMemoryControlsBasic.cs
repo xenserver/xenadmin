@@ -175,7 +175,7 @@ namespace XenAdmin.Controls.Ballooning
 
         private void SetIncrements()
         {
-            vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = memorySpinnerFixed.Increment = CalcIncrement(memorySpinnerDynMax.Units);
+            vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = memorySpinnerFixed.Increment = CalcIncrement(static_max, memorySpinnerDynMax.Units);
         }
 
         private void DynamicSpinners_ValueChanged(object sender, EventArgs e)
