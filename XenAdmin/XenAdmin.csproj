@@ -848,6 +848,12 @@
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.designer.cs">
+      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2038,6 +2044,16 @@
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_ModePage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PatchingWizard_ModePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.ja.resx">
+      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.resx">
+      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.zh-CN.resx">
+      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PatchingPage.resx">
       <SubType>Designer</SubType>

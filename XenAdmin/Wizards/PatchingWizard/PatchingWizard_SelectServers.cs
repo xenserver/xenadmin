@@ -130,39 +130,64 @@ namespace XenAdmin.Wizards.PatchingWizard
                 throw;//better throw an exception rather than closing the wizard suddenly and silently
             }
         }
-        
+
+        public bool IsInAutomaticMode { set; get; }
+
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
-            List<Host> selectedHosts = null;
-            if (SelectedUpdateAlert != null)
+
+            if (IsInAutomaticMode)
             {
-                selectedHosts = SelectedUpdateAlert.DistinctHosts;
-            }
-            else if(FileFromDiskAlert != null) 
-            {
-                selectedHosts = FileFromDiskAlert.DistinctHosts;
-            }
-            if(type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
-            {
-                row.Enabled = false;
-                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
-                return;
-            }
-                
-            switch (type)
-            {
-                case UpdateType.NewRetail:
-                case UpdateType.Existing:
-                    disableNotApplicableHosts(row, selectedHosts, host);
-                    break;
-                case UpdateType.NewSuppPack:
-                    if (!host.CanInstallSuppPack)
+                var us = Updates.GetUpgradeSequence(host.Connection);
+
+                if (us.ContainsKey(host))
+                {
+                    if (us[host].Count == 0)
                     {
                         row.Enabled = false;
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
+                        //add tooltip  why not
                     }
-                    break;
+                }
+                else
+                {
+                    row.Enabled = false;
+                    //add tooltip why not
+                }
+            }
+            else
+            {
+                List<Host> selectedHosts = null;
+                if (SelectedUpdateAlert != null)
+                {
+                    selectedHosts = SelectedUpdateAlert.DistinctHosts;
+                }
+                else if(FileFromDiskAlert != null) 
+                {
+                    selectedHosts = FileFromDiskAlert.DistinctHosts;
+                }
+            
+                if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
+                    return;
+                }
+
+                switch (type)
+                {
+                    case UpdateType.NewRetail:
+                    case UpdateType.Existing:
+                        disableNotApplicableHosts(row, selectedHosts, host);
+                        break;
+                    case UpdateType.NewSuppPack:
+                        if (!host.CanInstallSuppPack)
+                        {
+                            row.Enabled = false;
+                            row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
+                        }
+                        break;
+                }
             }
         }
 

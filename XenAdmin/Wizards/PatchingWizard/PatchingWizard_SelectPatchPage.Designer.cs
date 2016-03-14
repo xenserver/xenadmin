@@ -46,12 +46,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.selectFromDiskRadioButton = new System.Windows.Forms.RadioButton();
             this.downloadUpdateRadioButton = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
+            this.RefreshListButton = new System.Windows.Forms.Button();
             this.dataGridViewPatches = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webPageColumn = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.RefreshListButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatches)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +84,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.SetColumnSpan(this.AutomaticRadioButton, 3);
             this.AutomaticRadioButton.Name = "AutomaticRadioButton";
             this.AutomaticRadioButton.UseVisualStyleBackColor = true;
+            this.AutomaticRadioButton.CheckedChanged += new System.EventHandler(this.AutomaticRadioButton_CheckedChanged);
             // 
             // RestoreDismUpdatesButton
             // 
@@ -127,12 +128,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.downloadUpdateRadioButton.Name = "downloadUpdateRadioButton";
             this.downloadUpdateRadioButton.TabStop = true;
             this.downloadUpdateRadioButton.UseVisualStyleBackColor = true;
+            this.downloadUpdateRadioButton.CheckedChanged += new System.EventHandler(this.downloadUpdateRadioButton_CheckedChanged);
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.tableLayoutPanel1.SetColumnSpan(this.label3, 3);
             this.label3.Name = "label3";
+            // 
+            // RefreshListButton
+            // 
+            resources.ApplyResources(this.RefreshListButton, "RefreshListButton");
+            this.RefreshListButton.Name = "RefreshListButton";
+            this.RefreshListButton.UseVisualStyleBackColor = true;
+            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
             // 
             // dataGridViewPatches
             // 
@@ -209,13 +218,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.webPageColumn.Name = "webPageColumn";
             this.webPageColumn.ReadOnly = true;
             this.webPageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // RefreshListButton
-            // 
-            resources.ApplyResources(this.RefreshListButton, "RefreshListButton");
-            this.RefreshListButton.Name = "RefreshListButton";
-            this.RefreshListButton.UseVisualStyleBackColor = true;
-            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
             // 
             // PatchingWizard_SelectPatchPage
             // 

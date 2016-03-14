@@ -66,9 +66,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             Program.Invoke(Program.MainWindow, () =>
             {
-                dataGridViewPatches.Focus();
-                RestoreDismUpdatesButton.Enabled = false;
-                RefreshListButton.Enabled = false;
             });
         }
 
@@ -77,8 +74,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             Program.Invoke(Program.MainWindow, delegate
             {
-                PopulatePatchesBox();               
-                RefreshListButton.Enabled = true;
+                if (!IsInAutomaticMode)
+                {
+                    PopulatePatchesBox();
+                    RefreshListButton.Enabled = true;
+                }
+
                 CheckForUpdatesInProgress = false;
                 OnPageUpdated();
                 RestoreDismUpdatesButton.Enabled = true;
@@ -132,45 +133,56 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public bool IsInAutomaticMode { get { return AutomaticRadioButton.Checked; } }
+
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                var fileName = fileNameTextBox.Text;
-                if (downloadUpdateRadioButton.Checked)
+                if (IsInAutomaticMode)
                 {
-                    SelectedUpdateType = UpdateType.NewRetail;
+                    
+                    
                 }
                 else
-                {                    
-                    if (isValidFile())
+                {
+
+                    var fileName = fileNameTextBox.Text;
+                    if (downloadUpdateRadioButton.Checked)
                     {
-                        if (fileName.EndsWith(UpdateExtension))
-                            SelectedUpdateType = UpdateType.NewRetail;
-                        else if (fileName.EndsWith(".iso"))
-                            SelectedUpdateType = UpdateType.NewSuppPack;
-                        else
-                            SelectedUpdateType = UpdateType.Existing;
+                        SelectedUpdateType = UpdateType.NewRetail;
                     }
-                }
-                SelectedUpdateAlert = downloadUpdateRadioButton.Checked
-                                             ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
-                                             : null;
-                FileFromDiskAlert = selectFromDiskRadioButton.Checked
-                                             ? GetAlertFromFileName(fileName)
-                                             : null;
+                    else
+                    {
+                        if (isValidFile())
+                        {
+                            if (fileName.EndsWith(UpdateExtension))
+                                SelectedUpdateType = UpdateType.NewRetail;
+                            else if (fileName.EndsWith(".iso"))
+                                SelectedUpdateType = UpdateType.NewSuppPack;
+                            else
+                                SelectedUpdateType = UpdateType.Existing;
+                        }
+                    }
+                    SelectedUpdateAlert = downloadUpdateRadioButton.Checked
+                                                 ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                                                 : null;
+                    FileFromDiskAlert = selectFromDiskRadioButton.Checked
+                                                 ? GetAlertFromFileName(fileName)
+                                                 : null;
 
 
-                if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
-                {
-                    cancel = true;
-                    PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH,
-                                                     SelectedExistingPatch.Connection.Name));
-                }
-                else if (!string.IsNullOrEmpty(SelectedNewPatch) && !File.Exists(SelectedNewPatch))
-                {
-                    cancel = true;
-                    PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch));
+                    if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
+                    {
+                        cancel = true;
+                        PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH,
+                                                         SelectedExistingPatch.Connection.Name));
+                    }
+                    else if (!string.IsNullOrEmpty(SelectedNewPatch) && !File.Exists(SelectedNewPatch))
+                    {
+                        cancel = true;
+                        PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch));
+                    }
                 }
             }
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
@@ -237,6 +249,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 return false;
             }
+
+            if (AutomaticRadioButton.Checked && AutomaticRadioButton.Enabled)
+            {
+                return true;
+            }
+
             if (downloadUpdateRadioButton.Checked)
             {                
                 if (dataGridViewPatches.SelectedRows.Count == 1)
@@ -372,6 +390,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RefreshListButton_Click(object sender, EventArgs e)
         {
+            dataGridViewPatches.Focus();
+            RestoreDismUpdatesButton.Enabled = false;
+            RefreshListButton.Enabled = false;
+
             CheckForUpdatesInProgress = true;
             Updates.CheckForUpdates(true);
             PopulatePatchesBox();
@@ -556,6 +578,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RestoreDismUpdatesButton_Click(object sender, EventArgs e)
         {
             Updates.RestoreDismissedUpdates();
+        }
+
+        private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckForUpdatesInProgress = true;
+            Updates.CheckForUpdates(true);
+
+            UpdateEnablement();
+        }
+
+        private void downloadUpdateRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateEnablement();
         }       
     }        
 

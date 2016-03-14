@@ -101,6 +101,7 @@ namespace XenAdmin.Actions
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);
             GetXenServerVersions(xdoc);
+
         }
 
         private void GetXenCenterVersions(XmlDocument xdoc)
@@ -250,18 +251,36 @@ namespace XenAdmin.Actions
                     }
 
                     List<XenServerPatch> patches = new List<XenServerPatch>();
+                    List<XenServerPatch> minimalPatches = new List<XenServerPatch>();
 
                     foreach (XmlNode childnode in version.ChildNodes)
                     {
-                        if (childnode.Name != "patch")
-                            continue;
-                        XenServerPatch patch = XenServerPatches.Find(item => string.Equals(item.Uuid, childnode.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
-                        if (patch == null)
-                            continue;
-                        patches.Add(patch);
+                        if (childnode.Name == "minimalpatches")
+                        {
+                            foreach (XmlNode minimalpatch in childnode.ChildNodes)
+                            {
+                                if (minimalpatch.Name != "patch")
+                                    continue;
+
+                                XenServerPatch mp = XenServerPatches.Find(p => string.Equals(p.Uuid, minimalpatch.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
+                                if (mp == null)
+                                    continue;
+                                minimalPatches.Add(mp);
+                            }
+                        }
+
+                        if (childnode.Name == "patch")
+                        {
+
+                            XenServerPatch patch = XenServerPatches.Find(item => string.Equals(item.Uuid, childnode.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
+                            if (patch == null)
+                                continue;
+                            patches.Add(patch);
+                        }
+
                     }
 
-                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, timestamp,
+                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, minimalPatches, timestamp,
                                                                buildNumber));
                 }
             }

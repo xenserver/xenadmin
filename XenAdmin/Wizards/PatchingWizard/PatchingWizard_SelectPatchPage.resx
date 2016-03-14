@@ -128,9 +128,6 @@
   <data name="automaticOptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="automaticOptionLabel.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="automaticOptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -167,9 +164,6 @@
   </data>
   <data name="AutomaticRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="AutomaticRadioButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="AutomaticRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -379,7 +373,7 @@
     <value>No</value>
   </data>
   <data name="downloadUpdateRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 17</value>
+    <value>163, 17</value>
   </data>
   <data name="downloadUpdateRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -463,7 +457,7 @@
     <value>80</value>
   </data>
   <data name="ColumnDate.Width" type="System.Int32, mscorlib">
-    <value>80</value>
+    <value>55</value>
   </data>
   <metadata name="webPageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -426,39 +426,18 @@ namespace XenAdmin.Core
                            && Helpers.HostProductVersion(master) == version.Version.ToString());
             });
 
-            if (serverVersions.Count != 1)
-                return null;
-
             List<XenServerPatch> allPatches = new List<XenServerPatch>();
 
             if (serverVersions.Count > 0)
             {
-                // STEP 1 - Take all the hotfixes for this version
+                // Take all the hotfixes for this version
                 allPatches.AddRange(serverVersions[0].Patches);
 
-                // STEP 2 - Find the latest service pack
-
-                XenServerPatch latestSP = allPatches.FindLast(sp => sp.IsServicePack); //FindLast will be replaced once it is flagged in updates.xml
-
-                // STEP 3 - Remove conflicteds
-
-                var allNonConflictedPatches = RemoveConflictedPatches(allPatches, latestSP);
-
-                // STEP 4 - Remove any patch that is contained in anything else
-
-                var latestPatches = RemoveContainedPatches(allNonConflictedPatches);
-
-                // STEP 5 - Create ordered list
-
-                latestPatches.OrderBy(p => p.TimeStamp);
-                
-                // at this point we have the latestPatches list that contains patches that are needed for a host to be up-to-date
-
-                // STEP 6 - Create unique Upgrade Schedules for each host
+                var minimumPatches = serverVersions[0].MinimalPatches;
 
                 foreach (Host h in hosts)
                 {
-                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, latestPatches);
+                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, minimumPatches);
                 }
             }
 
@@ -515,61 +494,6 @@ namespace XenAdmin.Core
             }
 
             return sequence;
-        }
-
-        private static List<XenServerPatch> RemoveConflictedPatches(List<XenServerPatch> sps, XenServerPatch firstToCheck)
-        {
-            if (sps == null || sps.Count == 0)
-                return sps;
-
-            var startWith = firstToCheck ?? sps[0];
-            Stack<XenServerPatch> needToBeSeen = new Stack<XenServerPatch>();
-            List<XenServerPatch> toBeRemoved = new List<XenServerPatch>();
-
-            sps = new List<XenServerPatch>(sps.ToList());
-          
-            sps.Where(sp => sp != firstToCheck).ToList().ForEach(sp => needToBeSeen.Push(sp));
-            needToBeSeen.Push(startWith);
-
-            var conflicted = new List<XenServerPatch>();
-
-            while (needToBeSeen.Count != 0)
-            {
-                var next = needToBeSeen.Pop();
-
-                conflicted = sps.Where(sp => sp.ConflictingPatches != null && sp.ConflictingPatches.Any(puuid => puuid == next.Uuid && !toBeRemoved.Contains(sp))).ToList();
-                
-                toBeRemoved.AddRange(conflicted);
-                
-                conflicted.ForEach(p => needToBeSeen.Push(p));
-            }
-
-            sps.RemoveAll(p => toBeRemoved.Any(r => r.Uuid == p.Uuid));
-
-            return sps;
-        }
-
-        private static List<XenServerPatch> RemoveContainedPatches(List<XenServerPatch> sps)
-        {
-            Stack<XenServerPatch> needToBeSeen = new Stack<XenServerPatch>();
-            List<XenServerPatch> toBeRemoved = new List<XenServerPatch>();
-
-            sps = new List<XenServerPatch>(sps.ToList());
-
-            sps.ForEach(sp => needToBeSeen.Push(sp));
-
-            while (needToBeSeen.Count != 0)
-            {
-                var next = needToBeSeen.Pop();
-
-                // if contained in anything else
-                if (sps.Except(toBeRemoved).Any(p => p.Uuid != next.Uuid && p.ContainedPatches != null && p.ContainedPatches.Any(puuid => puuid == next.Uuid)))
-                    toBeRemoved.Add(next);
-            }
-
-            sps.RemoveAll(p => toBeRemoved.Any(r => r.Uuid == p.Uuid));
-            
-            return sps;
         }
 
         public class UpgradeSequences : Dictionary<Host, List<XenServerPatch>>

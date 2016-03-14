@@ -55,6 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly PatchingWizard_UploadPage PatchingWizard_UploadPage;
         private readonly PatchingWizard_PrecheckPage PatchingWizard_PrecheckPage;
         private readonly PatchingWizard_FirstPage PatchingWizard_FirstPage;
+        private readonly PatchingWizard_AutoUpdatingPage PatchingWizard_AutoUpdatingPage;
 
         public PatchingWizard()
         {
@@ -67,6 +68,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             PatchingWizard_UploadPage = new PatchingWizard_UploadPage();
             PatchingWizard_PrecheckPage = new PatchingWizard_PrecheckPage();
             PatchingWizard_FirstPage = new PatchingWizard_FirstPage();
+            PatchingWizard_AutoUpdatingPage = new PatchingWizard_AutoUpdatingPage();
 
             AddPage(PatchingWizard_FirstPage);
             AddPage(PatchingWizard_SelectPatchPage);
@@ -107,11 +109,28 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var existPatch = PatchingWizard_SelectPatchPage.SelectedExistingPatch;
                 var alertPatch = PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
                 var fileFromDiskAlertPatch = PatchingWizard_SelectPatchPage.FileFromDiskAlert;
+                var wizardModeAutomatic = PatchingWizard_SelectPatchPage.IsInAutomaticMode;
 
+                PatchingWizard_SelectServers.IsInAutomaticMode = wizardModeAutomatic;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
                 PatchingWizard_SelectServers.FileFromDiskAlert = fileFromDiskAlertPatch;
+
+                RemovePage(PatchingWizard_UploadPage);
+                RemovePage(PatchingWizard_ModePage);
+                RemovePage(PatchingWizard_PatchingPage);
+                RemovePage(PatchingWizard_AutoUpdatingPage);
+                if (!wizardModeAutomatic)
+                {
+                    AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
+                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
+                    AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
+                }
+                else
+                {
+                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_AutoUpdatingPage);
+                }
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;

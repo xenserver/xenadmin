@@ -42,11 +42,12 @@ namespace XenAdmin.Core
         public string Url;
         public string Oem;
         public List<XenServerPatch> Patches;
+        public List<XenServerPatch> MinimalPatches;
         public DateTime TimeStamp;
         public const string UpdateRoot = @"http://updates.xensource.com";
         public string BuildNumber;
 
-        public XenServerVersion(string version_oem, string name, bool latest, string url, List<XenServerPatch> patches,
+        public XenServerVersion(string version_oem, string name, bool latest, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
             string timestamp, string buildNumber)
         {
             ParseVersion(version_oem);
@@ -56,6 +57,7 @@ namespace XenAdmin.Core
                 url = UpdateRoot + url;
             Url = url;
             Patches = patches;
+            MinimalPatches = minimumPatches;
             DateTime.TryParse(timestamp, out TimeStamp);
             BuildNumber = buildNumber;
         }

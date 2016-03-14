@@ -91,13 +91,5 @@ namespace XenAdmin.Core
             return string.Equals(Uuid, other.Uuid, StringComparison.OrdinalIgnoreCase);
         }
 
-        public bool IsServicePack
-        {
-            get
-            {
-                //temporary implementation
-                return Description.Contains("(SP");
-            }
-        }
     }
 }
