@@ -209,9 +209,10 @@ namespace XenAdmin.SettingsPanels
                 ShadowValue = SHADOW_MULTIPLIER_CPS;
         }
 
-        private void ShadowMultiplierTextBox_Enter(object sender, EventArgs e)
+        private void ShadowMultiplierTextBox_TextChanged(object sender, EventArgs e)
         {
-            ManualOptimizationRadioButton.Checked = true;
+            if (ShadowMultiplierTextBox.Focused)
+                ManualOptimizationRadioButton.Checked = true;
         }
     }
 }
