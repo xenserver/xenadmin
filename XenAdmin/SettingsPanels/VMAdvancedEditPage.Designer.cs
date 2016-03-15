@@ -103,7 +103,7 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this.ShadowMultiplierTextBox, "ShadowMultiplierTextBox");
             this.ShadowMultiplierTextBox.Name = "ShadowMultiplierTextBox";
-            this.ShadowMultiplierTextBox.Enter += new System.EventHandler(this.ShadowMultiplierTextBox_Enter);
+            this.ShadowMultiplierTextBox.TextChanged += new System.EventHandler(this.ShadowMultiplierTextBox_TextChanged);
             // 
             // labelShadowMultiplier
             // 
