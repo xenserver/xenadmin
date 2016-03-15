@@ -443,9 +443,12 @@ namespace XenAPI
             return h._RestrictExportResourceData;
         }
 
+        /// <summary>
+        /// Intra pool migration is restricted only if the "restrict_xen_motion" key exists and it is true
+        /// </summary>
         private bool _RestrictIntraPoolMigrate
         {
-            get { return BoolKeyPreferTrue(license_params, "restrict_xen_motion"); }
+            get { return BoolKey(license_params, "restrict_xen_motion"); }
         }
 
         public static bool RestrictIntraPoolMigrate(Host h)
