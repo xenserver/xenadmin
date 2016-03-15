@@ -8454,6 +8454,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
 
 It is strongly recommended that you Cancel and apply the latest version of the packs to all servers before creating the pool.</value>
   </data>
+  <data name="NEW_SEARCH" xml:space="preserve">
+    <value>New Search</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>

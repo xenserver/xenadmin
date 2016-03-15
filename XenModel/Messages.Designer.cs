@@ -22551,6 +22551,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Search.
+        /// </summary>
+        public static string NEW_SEARCH {
+            get {
+                return ResourceManager.GetString("NEW_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection to {0} has been lost.
         /// </summary>
         public static string NEW_SR_CONNECTION_LOST {
