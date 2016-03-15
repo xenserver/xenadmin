@@ -166,7 +166,7 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                RegisterLicenseStatusUpdater(xenObject);
+                RegisterLicenseStatusUpdater(value);
 
                 if (xenObject != value)
                 {
