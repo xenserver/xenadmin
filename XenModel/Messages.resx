@@ -11795,13 +11795,13 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>Not optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Not able to receive updates via Windows Update</value>
+    <value>Not able to receive updates from Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_OPTIMIZED" xml:space="preserve">
     <value>Fully optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Able to receive updates via Windows Update</value>
+    <value>Able to receive updates from Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
     <value>Unknown (please wait)</value>
