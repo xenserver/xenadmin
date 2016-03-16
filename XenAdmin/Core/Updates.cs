@@ -464,10 +464,10 @@ namespace XenAdmin.Core
                     || p.RequiredPatches.All(
                         rp =>
                             //sequence already has the required-patch
-                            (sequence.Count != 0 && sequence.Any(useqp => useqp.Uuid == rp))
+                            (sequence.Count != 0 && sequence.Any(useqp => string.Equals(useqp.Uuid, rp, StringComparison.OrdinalIgnoreCase)))
 
                             //the required-patch has already been applied
-                            || (appliedPatches.Count != 0 && appliedPatches.Any(ap => ap.uuid == rp))
+                            || (appliedPatches.Count != 0 && appliedPatches.Any(ap => string.Equals(ap.uuid, rp, StringComparison.OrdinalIgnoreCase)))
                         )
                     )
                 {
