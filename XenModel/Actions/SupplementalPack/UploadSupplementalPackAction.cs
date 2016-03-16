@@ -157,7 +157,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", "Failed to import a virtual disk via HTTP.", ex.Message);
+                log.ErrorFormat("{0} {1}", "Failed to import a virtual disk over HTTP.", ex.Message);
                 if (vdiRef != null)
                     RemoveVDI(Session, vdiRef);
                 throw;
