@@ -1476,7 +1476,7 @@ You must use a user account with sufficient privileges.</value>
     <value>Enter your fully qualified AD domain name, and a username and password with sufficient privileges to add servers to your domain.</value>
   </data>
   <data name="AD_LEAVE_CONFIRM" xml:space="preserve">
-    <value>You are about to remove '{0}' from the AD domain '{1}'. Any users authenticated via AD will be disconnected.
+    <value>You are about to remove '{0}' from the AD domain '{1}'. Any users authenticated using AD will be disconnected.
 
 Do you want to continue?</value>
   </data>
