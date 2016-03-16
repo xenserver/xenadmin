@@ -128,9 +128,6 @@
   <data name="automaticOptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="automaticOptionLabel.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="automaticOptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -150,9 +147,6 @@
   <data name="automaticOptionLabel.Text" xml:space="preserve">
     <value>[XenCenter] will &amp;automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
   </data>
-  <data name="automaticOptionLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
     <value>automaticOptionLabel</value>
   </data>
@@ -170,9 +164,6 @@
   </data>
   <data name="AutomaticRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="AutomaticRadioButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="AutomaticRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -194,9 +185,6 @@
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
     <value>Automatic</value>
-  </data>
-  <data name="AutomaticRadioButton.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
@@ -424,7 +412,7 @@
     <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Select an update that you wish to download from [Citrix], or an update or supplemental pack that you have already downloaded to your local disk.</value>
+    <value>Select Automatic mode or manually select an update to be downloaded from [Citrix], or browse an update or supplemental pack file from your computer.</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -469,7 +457,7 @@
     <value>80</value>
   </data>
   <data name="ColumnDate.Width" type="System.Int32, mscorlib">
-    <value>80</value>
+    <value>55</value>
   </data>
   <metadata name="webPageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

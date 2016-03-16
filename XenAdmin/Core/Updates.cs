@@ -37,6 +37,7 @@ using XenAdmin.Actions;
 using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Core
@@ -404,6 +405,88 @@ namespace XenAdmin.Core
             }
 
             return alerts;
+        }
+        
+        public static UpgradeSequences GetUpgradeSequence(IXenConnection conn)
+        {
+            var uSeq = new UpgradeSequences();
+
+            Host master = Helpers.GetMaster(conn);
+            List<Host> hosts = conn.Cache.Hosts.ToList();
+            if (master == null)
+                return null;
+
+            var serverVersions = XenServerVersions.FindAll(version =>
+            {
+                if (version.BuildNumber != string.Empty)
+                    return (master.BuildNumberRaw == version.BuildNumber);
+
+                return Helpers.HostProductVersionWithOEM(master) == version.VersionAndOEM
+                       || (version.Oem != null && Helpers.OEMName(master).StartsWith(version.Oem)
+                           && Helpers.HostProductVersion(master) == version.Version.ToString());
+            });
+
+            List<XenServerPatch> allPatches = new List<XenServerPatch>();
+
+            if (serverVersions.Count > 0)
+            {
+                // Take all the hotfixes for this version
+                allPatches.AddRange(serverVersions[0].Patches);
+
+                var minimumPatches = serverVersions[0].MinimalPatches;
+
+                foreach (Host h in hosts)
+                {
+                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, minimumPatches);
+                }
+            }
+
+            return uSeq;
+        }
+
+        private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> allPatches, List<XenServerPatch> latestPatches)
+        {
+            var sequence = new List<XenServerPatch>();
+            var appliedPatches = h.AppliedPatches();
+
+            var neededPatches = new List<XenServerPatch>(latestPatches);
+
+            //Iterate through latestPatches once; in each iteration, move the first item from L0 that has its dependencies met to the end of the Update Schedule (US)
+            for (int ii = 0; ii < neededPatches.Count; ii++)
+            {
+                var p = neededPatches[ii];
+
+                //checking requirements
+                if (// no requirements
+                    p.RequiredPatches == null
+                    || p.RequiredPatches.Count == 0
+                    // all requirements met?
+                    || p.RequiredPatches.All(
+                        rp =>
+                            //sequence already has the required-patch
+                            (sequence.Count != 0 && sequence.Any(useqp => string.Equals(useqp.Uuid, rp, StringComparison.OrdinalIgnoreCase)))
+
+                            //the required-patch has already been applied
+                            || (appliedPatches.Count != 0 && appliedPatches.Any(ap => string.Equals(ap.uuid, rp, StringComparison.OrdinalIgnoreCase)))
+                        )
+                    )
+                {
+                    // this patch can be added to the upgrade sequence now
+                    sequence.Add(p);
+
+                    // by now the patch has either been added to the upgrade sequence or something already contains it among the installed patches
+                    neededPatches.RemoveAt(ii);
+
+                    //resetting position - the loop will start on 0. item
+                    ii = -1;
+                }
+            }
+
+            return sequence;
+        }
+
+        public class UpgradeSequences : Dictionary<Host, List<XenServerPatch>>
+        {
         }
 
         public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)

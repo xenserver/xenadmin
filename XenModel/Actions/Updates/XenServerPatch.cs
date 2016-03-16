@@ -88,5 +88,6 @@ namespace XenAdmin.Core
         {
             return string.Equals(Uuid, other.Uuid, StringComparison.OrdinalIgnoreCase);
         }
+
     }
 }

@@ -130,10 +130,34 @@ namespace XenAdmin.Wizards.PatchingWizard
                 throw;//better throw an exception rather than closing the wizard suddenly and silently
             }
         }
-        
+
+        public bool IsInAutomaticMode { set; get; }
+
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
+
+            if (IsInAutomaticMode)
+            {
+                var us = Updates.GetUpgradeSequence(host.Connection);
+
+                if (us.ContainsKey(host))
+                {
+                    if (us[host].Count == 0)
+                    {
+                        row.Enabled = false;
+                        //add tooltip  why not
+                    }
+                }
+                else
+                {
+                    row.Enabled = false;
+                    //add tooltip why not
+                }
+
+                return;
+            }
+
             List<Host> selectedHosts = null;
             if (SelectedUpdateAlert != null)
             {
@@ -143,13 +167,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 selectedHosts = FileFromDiskAlert.DistinctHosts;
             }
-            if(type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
+            
+            if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return;
             }
-                
+
             switch (type)
             {
                 case UpdateType.NewRetail:
