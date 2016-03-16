@@ -34045,7 +34045,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not able to receive updates via Windows Update.
+        ///   Looks up a localized string similar to Not able to receive updates from Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES {
             get {
@@ -34063,7 +34063,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Able to receive updates via Windows Update.
+        ///   Looks up a localized string similar to Able to receive updates from Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES {
             get {
