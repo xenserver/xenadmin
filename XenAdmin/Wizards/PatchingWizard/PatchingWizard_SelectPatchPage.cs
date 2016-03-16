@@ -66,6 +66,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             Program.Invoke(Program.MainWindow, () =>
             {
+                RestoreDismUpdatesButton.Enabled = false;
+                RefreshListButton.Enabled = false;
             });
         }
 
@@ -77,9 +79,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (!IsInAutomaticMode)
                 {
                     PopulatePatchesBox();
-                    RefreshListButton.Enabled = true;
                 }
 
+                RefreshListButton.Enabled = true;
                 CheckForUpdatesInProgress = false;
                 OnPageUpdated();
                 RestoreDismUpdatesButton.Enabled = true;
@@ -133,20 +135,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public bool IsInAutomaticMode { get { return AutomaticRadioButton.Checked; } }
+        public bool IsInAutomaticMode { get { return AutomaticRadioButton.Checked && AutomaticRadioButton.Enabled; } }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                if (IsInAutomaticMode)
+                if (!IsInAutomaticMode)
                 {
-                    
-                    
-                }
-                else
-                {
-
                     var fileName = fileNameTextBox.Text;
                     if (downloadUpdateRadioButton.Checked)
                     {
@@ -185,6 +181,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
             }
+
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
             base.PageLeave(direction, ref cancel);
         }
@@ -250,7 +247,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
 
-            if (AutomaticRadioButton.Checked && AutomaticRadioButton.Enabled)
+            if (IsInAutomaticMode)
             {
                 return true;
             }
@@ -391,8 +388,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RefreshListButton_Click(object sender, EventArgs e)
         {
             dataGridViewPatches.Focus();
-            RestoreDismUpdatesButton.Enabled = false;
-            RefreshListButton.Enabled = false;
 
             CheckForUpdatesInProgress = true;
             Updates.CheckForUpdates(true);
@@ -582,10 +577,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            CheckForUpdatesInProgress = true;
-            Updates.CheckForUpdates(true);
+            if (AutomaticRadioButton.Checked)
+            {
+                CheckForUpdatesInProgress = true;
+                Updates.CheckForUpdates(true);
 
-            UpdateEnablement();
+                UpdateEnablement();
+            }
         }
 
         private void downloadUpdateRadioButton_CheckedChanged(object sender, EventArgs e)

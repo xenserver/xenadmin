@@ -154,40 +154,40 @@ namespace XenAdmin.Wizards.PatchingWizard
                     row.Enabled = false;
                     //add tooltip why not
                 }
-            }
-            else
-            {
-                List<Host> selectedHosts = null;
-                if (SelectedUpdateAlert != null)
-                {
-                    selectedHosts = SelectedUpdateAlert.DistinctHosts;
-                }
-                else if(FileFromDiskAlert != null) 
-                {
-                    selectedHosts = FileFromDiskAlert.DistinctHosts;
-                }
-            
-                if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
-                    return;
-                }
 
-                switch (type)
-                {
-                    case UpdateType.NewRetail:
-                    case UpdateType.Existing:
-                        disableNotApplicableHosts(row, selectedHosts, host);
-                        break;
-                    case UpdateType.NewSuppPack:
-                        if (!host.CanInstallSuppPack)
-                        {
-                            row.Enabled = false;
-                            row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
-                        }
-                        break;
-                }
+                return;
+            }
+
+            List<Host> selectedHosts = null;
+            if (SelectedUpdateAlert != null)
+            {
+                selectedHosts = SelectedUpdateAlert.DistinctHosts;
+            }
+            else if(FileFromDiskAlert != null) 
+            {
+                selectedHosts = FileFromDiskAlert.DistinctHosts;
+            }
+            
+            if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
+            {
+                row.Enabled = false;
+                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
+                return;
+            }
+
+            switch (type)
+            {
+                case UpdateType.NewRetail:
+                case UpdateType.Existing:
+                    disableNotApplicableHosts(row, selectedHosts, host);
+                    break;
+                case UpdateType.NewSuppPack:
+                    if (!host.CanInstallSuppPack)
+                    {
+                        row.Enabled = false;
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
+                    }
+                    break;
             }
         }
 
