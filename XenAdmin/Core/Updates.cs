@@ -468,22 +468,11 @@ namespace XenAdmin.Core
 
                             //the required-patch has already been applied
                             || (appliedPatches.Count != 0 && appliedPatches.Any(ap => ap.uuid == rp))
-
-                            //a patch that contains the required-patch is already in the update sequence
-                            || sequence.Any(useqp => useqp.ContainedPatches != null && useqp.ContainedPatches.Any(useqpc => useqpc == rp))
-
-                            //a patch that contains the required-patch has already been applied
-                            || appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == rp)))
                         )
                     )
                 {
                     // this patch can be added to the upgrade sequence now
-
-                    // however it will only be added if nothing is already installed on the host that contains this patch
-                    if (!appliedPatches.Any(applp => allPatches.Any(p1 => p1.Uuid == applp.uuid && p1.ContainedPatches != null && p1.ContainedPatches.Any(p1cp => p1cp == p.Uuid))))
-                    {
-                        sequence.Add(p);
-                    }
+                    sequence.Add(p);
 
                     // by now the patch has either been added to the upgrade sequence or something already contains it among the installed patches
                     neededPatches.RemoveAt(ii);
