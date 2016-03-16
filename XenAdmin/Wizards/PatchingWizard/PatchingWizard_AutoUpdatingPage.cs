@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get
             {
-                return "Upload and Install";//Messages.PATCHINGWIZARD_PATCHINGPAGE_TEXT;
+                return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
             }
         }
 
@@ -67,7 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get
             {
-                return "Automatically uploading and installing updates";
+                return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE;
             }
         }
 
