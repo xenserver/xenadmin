@@ -2680,6 +2680,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GFS2.
+        /// </summary>
+        public static string Label_SR_SRTypes_gfs2 {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-gfs2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VDI-per-LUN iSCSI.
         /// </summary>
         public static string Label_SR_SRTypes_iscsi {
