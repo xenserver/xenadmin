@@ -55,6 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
+        public bool IsInAutomaticMode { get; set; }
 
         protected List<Pool> SelectedPools
         {
@@ -127,9 +128,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                labelPrechecksFirstLine.Text = Patch != null 
-                    ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, Patch.Name) 
-                    : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
+                if (IsInAutomaticMode)
+                {
+                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE;
+                }
+                else
+                {
+                    labelPrechecksFirstLine.Text = Patch != null
+                        ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, Patch.Name)
+                        : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
+                }
+
                 RefreshRechecks();
             }
             catch (Exception e)
