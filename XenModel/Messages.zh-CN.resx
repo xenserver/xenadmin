@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -213,6 +213,21 @@
   <data name="ACTION_CHANGING_SHADOW_MULTIPLIER_FOR" xml:space="preserve">
     <value>正在更改“{0}”的重影系数...</value>
   </data>
+  <data name="ACTION_CHECK_DISK_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>正在检查 {0} 上的磁盘空间</value>
+  </data>
+  <data name="ACTION_CHECK_DISK_SPACE_TITLE" xml:space="preserve">
+    <value>检查磁盘空间</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>正在清理 {0} 上的磁盘空间</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_SUCCESS" xml:space="preserve">
+    <value>已成功清理 {0} 上的磁盘空间</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_TITLE" xml:space="preserve">
+    <value>清理磁盘空间</value>
+  </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>正在创建 {0} ...</value>
   </data>
@@ -248,6 +263,12 @@
   </data>
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>正在分离多个存储项</value>
+  </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>正在禁用 </value>
+  </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>在 VM“{0}”上禁用容器管理</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>已激活磁盘...</value>
@@ -345,6 +366,12 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR 清理 ({0})</value>
   </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>正在启用</value>
+  </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>在 VM“{0}”上启用容器管理</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因块校验和不匹配而失败。请重新尝试导出。</value>
   </data>
@@ -399,6 +426,21 @@
   <data name="ACTION_GET_DATASOURCES" xml:space="preserve">
     <value>提取数据源</value>
   </data>
+  <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION" xml:space="preserve">
+    <value>正在获取 {0} 上的空间要求</value>
+  </data>
+  <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE" xml:space="preserve">
+    <value>获取空间要求</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT" xml:space="preserve">
+    <value>从 [Citrix] Insight Services 获取运行状况检查分析结果</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT_FAILED" xml:space="preserve">
+    <value>获取分析结果失败</value>
+  </data>
+  <data name="ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS" xml:space="preserve">
+    <value>正在获取分析结果</value>
+  </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>操作已完成。找到 {0} 个 VDI。</value>
   </data>
@@ -422,6 +464,12 @@
   </data>
   <data name="ACTION_HA_UNPROTECT_VM_TITLE" xml:space="preserve">
     <value>正在将 {0} 上的高可用性重启优先级设置为 {1}</value>
+  </data>
+  <data name="ACTION_HEALTHCHECK_AUTHENTICATION" xml:space="preserve">
+    <value>在 [Citrix] Insight Services 中进行身份验证</value>
+  </data>
+  <data name="ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS" xml:space="preserve">
+    <value>正在 [Citrix] Insight Services 中进行身份验证</value>
   </data>
   <data name="ACTION_HOSTS_REBOOTED" xml:space="preserve">
     <value>服务器已重新启动</value>
@@ -486,6 +534,15 @@
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_TITLE" xml:space="preserve">
     <value>准备存储库</value>
   </data>
+  <data name="ACTION_PAUSE_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在暂停</value>
+  </data>
+  <data name="ACTION_PAUSE_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="ACTION_PAUSE_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在暂停 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_PIF_SCAN_START_DESC" xml:space="preserve">
     <value>正在扫描...</value>
   </data>
@@ -534,6 +591,15 @@
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>正在删除 {1} 条警报中的第 {0} 条...</value>
   </data>
+  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在重新启动</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已重新启动</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在重新启动 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
     <value>正在准备恢复并启动 VM...</value>
   </data>
@@ -542,6 +608,15 @@
   </data>
   <data name="ACTION_RESUMEANDSTARTVMS_STARTINGN" xml:space="preserve">
     <value>正在启动第 {0} 个 VM，共 {1} 个</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在恢复</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已恢复</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在恢复 Docker 容器“{0}”</value>
   </data>
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>保存警报</value>
@@ -564,6 +639,9 @@
   <data name="ACTION_SAVE_FOLDER_TAGS" xml:space="preserve">
     <value>保存文件夹和标记</value>
   </data>
+  <data name="ACTION_SAVE_HEALTHCHECK_SETTINGS" xml:space="preserve">
+    <value>保存运行状况检查设置</value>
+  </data>
   <data name="ACTION_SAVE_SETTINGS" xml:space="preserve">
     <value>保存“{0}”的设置...</value>
   </data>
@@ -578,6 +656,9 @@
   </data>
   <data name="ACTION_SAVING_FOLDER_TAGS_FOR" xml:space="preserve">
     <value>正在保存“{0}”的文件夹和标记...</value>
+  </data>
+  <data name="ACTION_SAVING_HEALTHCHECK_SETTINGS" xml:space="preserve">
+    <value>正在保存“{0}”的运行状况检查设置...</value>
   </data>
   <data name="ACTION_SAVING_SETTINGS_FOR" xml:space="preserve">
     <value>正在保存“{0}”的设置...</value>
@@ -596,6 +677,12 @@
   </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE" xml:space="preserve">
     <value>删除 VM</value>
+  </data>
+  <data name="ACTION_SHUTTING_DOWN" xml:space="preserve">
+    <value>正在关闭</value>
+  </data>
+  <data name="ACTION_SHUT_DOWN" xml:space="preserve">
+    <value>关闭</value>
   </data>
   <data name="ACTION_SRS_DESTROYING" xml:space="preserve">
     <value>正在销毁 SR</value>
@@ -627,6 +714,24 @@
   <data name="ACTION_SR_ATTACH_SUCCESSFUL" xml:space="preserve">
     <value>已连接 SR</value>
   </data>
+  <data name="ACTION_SR_CONVERT" xml:space="preserve">
+    <value>转换“{1}”上的 SR“{0}”</value>
+  </data>
+  <data name="ACTION_SR_CONVERTED" xml:space="preserve">
+    <value>已转换 SR</value>
+  </data>
+  <data name="ACTION_SR_CONVERTED_TO_THIN" xml:space="preserve">
+    <value>已将 SR“{0}”转换为精简置备</value>
+  </data>
+  <data name="ACTION_SR_CONVERTING" xml:space="preserve">
+    <value>正在转换 SR</value>
+  </data>
+  <data name="ACTION_SR_CONVERTING_TO_THIN" xml:space="preserve">
+    <value>正在将 SR“{0}”转换为精简置备</value>
+  </data>
+  <data name="ACTION_SR_CONVERT_TO_THIN" xml:space="preserve">
+    <value>将 SR“{0}”转换为精简置备</value>
+  </data>
   <data name="ACTION_SR_CREATE_SUCCESSFUL" xml:space="preserve">
     <value>已创建 SR</value>
   </data>
@@ -634,7 +739,7 @@
     <value>正在创建 SR</value>
   </data>
   <data name="ACTION_SR_CREATING_TITLE" xml:space="preserve">
-    <value>正在“{2}”上创建 {0} SR“{1}” </value>
+    <value>正在“{2}”上创建 {0} SR“{1}”</value>
   </data>
   <data name="ACTION_SR_DESTROYING" xml:space="preserve">
     <value>正在销毁“{1}”上的“{0}”...</value>
@@ -643,7 +748,7 @@
     <value>已销毁 SR</value>
   </data>
   <data name="ACTION_SR_DETACHING" xml:space="preserve">
-    <value>正在将 SR“{0}”从“{1}”分离 </value>
+    <value>正在将 SR“{0}”从“{1}”分离</value>
   </data>
   <data name="ACTION_SR_DETACH_SUCCESSFUL" xml:space="preserve">
     <value>已分离 SR {0}</value>
@@ -705,14 +810,14 @@
   <data name="ACTION_SR_TRIM_TITLE" xml:space="preserve">
     <value>正在回收 SR“{0}”上已释放的空间</value>
   </data>
-  <data name="ACTION_SR_UPGRADE" xml:space="preserve">
-    <value>升级“{1}”上的 SR“{0}”</value>
+  <data name="ACTION_START_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在启动</value>
   </data>
-  <data name="ACTION_SR_UPGRADED" xml:space="preserve">
-    <value>已升级 SR</value>
+  <data name="ACTION_START_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已启动</value>
   </data>
-  <data name="ACTION_SR_UPGRADING" xml:space="preserve">
-    <value>正在升级 SR</value>
+  <data name="ACTION_START_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在启动 Docker 容器“{0}”</value>
   </data>
   <data name="ACTION_START_VMS_AND_APPLIANCES_NONE_SELECTED" xml:space="preserve">
     <value>没有要启动的 VM 或 vApp</value>
@@ -732,6 +837,15 @@
   <data name="ACTION_STATUS_SUCCEEDED" xml:space="preserve">
     <value>成功</value>
   </data>
+  <data name="ACTION_STOP_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在停止</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在停止 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
     <value>已取消获取系统状态</value>
   </data>
@@ -745,7 +859,7 @@
     <value>获取系统状态失败: 磁盘已满</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>无法编译状态报告</value>
+    <value>无法编译状态报告 </value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED" xml:space="preserve">
     <value>未编译数据</value>
@@ -789,6 +903,21 @@
   <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
     <value>在“{0}”上重新启动 Toolstack</value>
   </data>
+  <data name="ACTION_TRANSFER_HEALTHCHECK_SETTINGS" xml:space="preserve">
+    <value>传输运行状况检查设置</value>
+  </data>
+  <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
+    <value>正在更新“{0}”上的集成 GPU 直通</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
+    <value>将服务器状态报告上载到 [Citrix] Insight Services</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
+    <value>上载状态报告失败。</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
+    <value>正在将报告上载到 [Citrix] Insight Services</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>已创建虚拟磁盘</value>
   </data>
@@ -823,10 +952,10 @@
     <value>从 SR“{0}”打开元数据数据库</value>
   </data>
   <data name="ACTION_VGPU_CONFIGURATION_SAVED" xml:space="preserve">
-    <value>vGPU 配置已保存</value>
+    <value>已保存虚拟 GPU 配置</value>
   </data>
   <data name="ACTION_VGPU_CONFIGURATION_SAVING" xml:space="preserve">
-    <value>正在保存 vGPU 配置</value>
+    <value>正在保存虚拟 GPU 配置</value>
   </data>
   <data name="ACTION_VIF_CREATED" xml:space="preserve">
     <value>已创建虚拟网络接口</value>
@@ -897,6 +1026,12 @@
   <data name="ACTION_VM_COPYING_TITLE_MEDDLING" xml:space="preserve">
     <value>正在复制 VM“{0}”</value>
   </data>
+  <data name="ACTION_VM_CROSS_POOL_COPY_CANCELLED" xml:space="preserve">
+    <value>已取消复制 {0}</value>
+  </data>
+  <data name="ACTION_VM_CROSS_POOL_COPY_TITLE" xml:space="preserve">
+    <value>正在将 VM“{0}”复制到“{1}”</value>
+  </data>
   <data name="ACTION_VM_DELETE_SNAPSHOTS_TITLE" xml:space="preserve">
     <value>正在删除快照</value>
   </data>
@@ -934,7 +1069,7 @@
     <value>已重新启动</value>
   </data>
   <data name="ACTION_VM_REBOOTING" xml:space="preserve">
-    <value>正在重新启动</value>
+    <value>正在重新启动 VM</value>
   </data>
   <data name="ACTION_VM_REBOOTING_TITLE" xml:space="preserve">
     <value>正在重新启动“{1}”上的 VM“{0}”</value>
@@ -943,7 +1078,7 @@
     <value>已恢复</value>
   </data>
   <data name="ACTION_VM_RESUMING" xml:space="preserve">
-    <value>正在恢复</value>
+    <value>正在恢复 VM</value>
   </data>
   <data name="ACTION_VM_RESUMING_ON_TITLE" xml:space="preserve">
     <value>正在恢复“{1}”上的 VM“{0}”</value>
@@ -961,7 +1096,7 @@
     <value>还原快照“{0}”</value>
   </data>
   <data name="ACTION_VM_SHUTTING_DOWN" xml:space="preserve">
-    <value>正在关闭</value>
+    <value>正在关闭 VM</value>
   </data>
   <data name="ACTION_VM_SHUTTING_DOWN_TITLE" xml:space="preserve">
     <value>正在关闭“{1}”上的 VM“{0}”</value>
@@ -979,7 +1114,7 @@
     <value>已启动暂停项</value>
   </data>
   <data name="ACTION_VM_STARTING" xml:space="preserve">
-    <value>正在启动</value>
+    <value>正在启动 VM</value>
   </data>
   <data name="ACTION_VM_STARTING_ON_TITLE" xml:space="preserve">
     <value>正在启动“{1}”上的 VM“{0}”</value>
@@ -1000,7 +1135,7 @@
     <value>已挂起</value>
   </data>
   <data name="ACTION_VM_SUSPENDING" xml:space="preserve">
-    <value>正在挂起</value>
+    <value>正在暂停 VM</value>
   </data>
   <data name="ACTION_VM_SUSPENDING_TITLE" xml:space="preserve">
     <value>正在挂起 VM {0}</value>
@@ -1047,8 +1182,8 @@
   <data name="ACTIVATION_FAILED_MESSAGE" xml:space="preserve">
     <value>[XenCenter] 无法与激活服务器联系。
 
-如果您当前未连接 Internet，我们可以将激活请求保存为一个文件，
-供您以后上载。
+如果您当前未连接到 Internet，我们可以将激活请求
+保存为一个文件，供您以后上载。
 
 要使用该文件，请访问 https://{0}。</value>
   </data>
@@ -1107,7 +1242,7 @@
     <value>地址</value>
   </data>
   <data name="ADDSERVER_PASS_NEW" xml:space="preserve">
-    <value>[XenCenter] 无法再使用现有凭据向该服务器进行身份验证。请输入新的凭据继续操作。</value>
+    <value>[XenCenter] 无法再使用现有凭据向此服务器进行身份验证。请输入新凭据以继续操作。</value>
   </data>
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>添加自定义字段“{0}”</value>
@@ -1124,21 +1259,69 @@
 
 所有池成员必须使用同一种身份验证方法。是否在这些服务器上启用 AD 身份验证并将这些服务器加入该池所在的域中?</value>
   </data>
-  <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
-    <value>您正在尝试将服务器“{0}”添加到使用较低级别 CPU 的池中。
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE" xml:space="preserve">
+    <value>正在尝试将服务器“{0}”添加到使用较旧 CPU 的池。
 
-[XenServer] 可以重新启动服务器并将其 CPU 降至池中现有服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性”列表中所列的 CPU 组合。
+池中正在运行的 VM 仅使用池中的所有服务器共有的 CPU 功能。
 
-是否执行此操作?</value>
+是否要执行此操作?</value>
   </data>
-  <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>您正在尝试将以下服务器添加到使用较低级别 CPU 的池中:
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>正在尝试将以下服务器添加到使用较旧 CPU 的池。
 
 {0}
 
-[XenServer] 可以重新启动服务器并将服务器的 CPU 级别降至池中现有服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性列表”中所列的 CPU 组合。
+池中正在运行的 VM 仅使用池中的所有服务器共有的 CPU 功能。
 
-是否执行此操作?</value>
+是否要执行此操作?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE" xml:space="preserve">
+    <value>正在尝试将服务器“{0}”添加到使用其他 CPU 的池。
+
+将来要在池中启动的 VM 将仅使用池中的所有服务器共有的一组减少的功能。池中已运行的 VM 在重新启动之前无法迁移到新服务器。
+
+是否要执行此操作?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>正在尝试将以下服务器添加到使用其他 CPU 的池。
+
+{0}
+
+将来要在池中启动的 VM 将仅使用池中的所有服务器共有的一组减少的功能。池中已运行的 VM 在重新启动之前无法迁移到新服务器。
+
+是否要执行此操作?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE" xml:space="preserve">
+    <value>正在尝试将服务器“{0}”添加到使用较新 CPU 的池。
+
+将来要在池中启动的 VM 将仅使用池中的所有服务器共有的一组减少的功能。池中已运行的 VM 在重新启动之前无法迁移到新服务器。
+
+是否要执行此操作?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>正在尝试将以下服务器添加到使用较新 CPU 的池。
+
+{0}
+
+将来要在池中启动的 VM 将仅使用池中的所有服务器共有的一组减少的功能。池中已运行的 VM 在重新启动之前无法迁移到新服务器。
+
+是否要执行此操作?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
+    <value>正在尝试将服务器“{0}”添加到使用较旧 CPU 的池。
+
+[XenServer] 可以通过重新启动服务器并将其 CPU 降至池中现有服务器的级别来继续进行操作。这样将关闭服务器上运行的所有 VM。此功能适用于“[XenServer] 硬件兼容性列表”中列出的 CPU 组合。
+
+是否要执行此操作?</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE_MULTIPLE" xml:space="preserve">
+    <value>正在尝试将以下服务器添加到使用较旧 CPU 的池:
+
+{0}
+
+[XenServer] 可以通过重新启动服务器并将其 CPU 降至池中现有服务器的级别来继续进行操作。这样将关闭服务器上运行的所有 VM。此功能适用于“[XenServer] 硬件兼容性列表”中列出的 CPU 组合。
+
+是否要执行此操作?</value>
   </data>
   <data name="ADD_HOST_TO_POOL_DISCONNECTED_POOL" xml:space="preserve">
     <value>无法将服务器“{0}”移至池“{1}”: 此池不再处于连接状态。</value>
@@ -1147,16 +1330,16 @@
     <value>无法将所选服务器移至池“{0}”: 此池不再处于连接状态。</value>
   </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE" xml:space="preserve">
-    <value>您正在尝试将服务器“{0}”添加到许可证已升级的池中。
+    <value>您正在尝试将服务器“{0}”添加到已获授权的池。
 
-是否将池的许可应用到该服务器?</value>
+是否要将来自池的许可应用到此服务器?</value>
   </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>您正在尝试将以下服务器添加到许可证已升级的池中。
+    <value>您正在尝试将以下服务器添加到已获授权的池。
 
 {0}
 
-是否将池的许可应用到这些服务器?</value>
+是否要将来自池的许可应用到这些服务器?</value>
   </data>
   <data name="ADD_HOST_TO_POOL_SUPP_PACK" xml:space="preserve">
     <value>池中所有服务器上都应安装以下补充软件包，但目前尚未安装:
@@ -1189,24 +1372,6 @@
   </data>
   <data name="ADD_SL_VOLUME" xml:space="preserve">
     <value>导入 StorageLink 卷(&amp;S)...</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION" xml:space="preserve">
-    <value>已成功添加 StorageLink 存储系统“{0}”</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION" xml:space="preserve">
-    <value>正在添加 StorageLink 存储系统“{0}”</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_ACTION_TITLE" xml:space="preserve">
-    <value>添加 StorageLink 存储系统“{0}”</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_CIMOM_IP_ADDRESS_LABEL" xml:space="preserve">
-    <value>CIMOM IP 地址:</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_IP_ADDRESS_LABEL" xml:space="preserve">
-    <value>主机名/IP 地址:</value>
-  </data>
-  <data name="ADD_STORAGE_LINK_SYSTEM_MENU" xml:space="preserve">
-    <value>添加存储系统(&amp;A)...</value>
   </data>
   <data name="ADD_TAG" xml:space="preserve">
     <value>添加标记“{0}”</value>
@@ -1311,9 +1476,9 @@
     <value>输入完全限定 AD 域名以及具有足够权限的用户名和密码，以将服务器添加到域中。</value>
   </data>
   <data name="AD_LEAVE_CONFIRM" xml:space="preserve">
-    <value>您要从 AD 域“{1}”中删除“{0}”。通过 AD 完成身份验证的所有用户都将断开连接。
+    <value>您要从 AD 域“{1}”中删除“{0}”。使用 AD 进行身份验证的所有用户都将断开连接。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="AD_LEAVE_DOMAIN" xml:space="preserve">
     <value>离开域(&amp;E)</value>
@@ -1385,10 +1550,10 @@
     <value>VM 超级管理员</value>
   </data>
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
-    <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。 </value>
+    <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
-    <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下面从属角色的所有权限。 </value>
+    <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
     <value>选择要分配给用户“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
@@ -1450,14 +1615,20 @@
     <value>控制域内存要求警报</value>
   </data>
   <data name="ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION" xml:space="preserve">
-    <value>{0} 上所需的内存大约占域物理内存的 {1}。强制执行内存交换时性能有时会下降。
-此警报设置为在所需内存占物理内存的比率超过 {2} 时触发。</value>
+    <value>{0} 上的控制域所需的内存占所分配内存的 {1}。如果强制执行内存交换，性能有时会下降。
+此警报设置为在控制域所需的内存超过所分配内存的 {2} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM" xml:space="preserve">
     <value>控制域上的文件系统已满</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>{0} 上控制域的磁盘使用率已达到 {1}。如果该磁盘全部占满，[XenServer] 的性能将受到严重影响。应删除日志文件或其他不重要的(用户创建的)文件。</value>
+    <value>{0} 上控制域的磁盘使用率已达到 {1}。如果此磁盘满载，[XenServer] 的性能将受到严重影响。应删除日志文件或其他不重要的(用户创建的)文件。</value>
+  </data>
+  <data name="ALERT_ALARM_LOG_FILESYSTEM" xml:space="preserve">
+    <value>日志分区上的文件系统已满载</value>
+  </data>
+  <data name="ALERT_ALARM_LOG_FILESYSTEM_DESCRIPTION" xml:space="preserve">
+    <value>{0} 上的日志分区的磁盘使用率已达到 {1}。如果此磁盘满载，日志记录功能将受到严重影响。应删除旧日志文件。</value>
   </data>
   <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
     <value>内存使用率警报</value>
@@ -1472,6 +1643,13 @@
   <data name="ALERT_ALARM_NETWORK_DESCRIPTION" xml:space="preserve">
     <value>在过去 {2}内{0}上的网络使用率平均达到 {1}。
 该警报设置为在网络使用率超过 {3} 时触发。</value>
+  </data>
+  <data name="ALERT_ALARM_SR_PHYSICAL_UTILISATION" xml:space="preserve">
+    <value>SR 磁盘空间警报</value>
+  </data>
+  <data name="ALERT_ALARM_SR_PHYSICAL_UTILISATION_DESCRIPTION" xml:space="preserve">
+    <value>{0} 上的实际利用率大约占其容量的 {1}。 
+此警报设置为在 SR 的实际利用率高于 {2} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_STORAGE" xml:space="preserve">
     <value>存储吞吐量警报</value>
@@ -1542,8 +1720,17 @@
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>转至 Web 页面</value>
   </data>
+  <data name="ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT" xml:space="preserve">
+    <value>当 SR 实际利用率在 {1} 分钟内超过 {0} 时</value>
+  </data>
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>当存储吞吐量超过 {0} 并持续 {1} 分钟时</value>
+  </data>
+  <data name="ALLOWED_MTU_RANGE" xml:space="preserve">
+    <value>允许的 MTU 范围: {0} 到 {1}</value>
+  </data>
+  <data name="ALLOWED_MTU_VALUE" xml:space="preserve">
+    <value>允许的 MTU 值: {0}</value>
   </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>允许继续(&amp;A)</value>
@@ -1573,9 +1760,9 @@
     <value>已上载所有更新</value>
   </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
-    <value>SR {0} 当前已连接到其他位置。是否要将其连接到 {1}? 
+    <value>SR“{0}”当前已连接到其他位置。是否要将其连接到“{1}”? 
 
-警告: 必须确保 SR 当前未由任何未连接 [XenCenter] 的服务器使用。否则可能会导致数据丢失。</value>
+警告: 必须确保 SR 当前未由任何未连接到 [XenCenter] 的服务器使用。否则可能会导致数据丢失。</value>
   </data>
   <data name="ALREADY_CONNECTED" xml:space="preserve">
     <value>已经连接到服务器“{0}”。</value>
@@ -1868,7 +2055,7 @@
 
 - [XenCenter] 与池之间的连接将暂时中断
 
-- 如果您的网络配置不正确，[XenCenter] 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
+- 如果您的网络配置不正确，[XenCenter] 可能会永久断开与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>创建此绑定将中断通过绑定成员上的辅助接口进行的通信，而接口将移动到绑定本身。</value>
@@ -1892,7 +2079,7 @@
 
 - 通过辅助接口进行的通信将中断
 
-- 如果您的网络配置不正确，[XenCenter] 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
+- 如果您的网络配置不正确，[XenCenter] 可能会永久断开与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
@@ -1901,7 +2088,7 @@
 
 - [XenCenter] 与池之间的连接将暂时中断
 
-- 如果您的网络配置不正确，[XenCenter] 可能会永久丢失与池之间的连接，或者池成员可能无法相互通信。</value>
+- 如果您的网络配置不正确，[XenCenter] 可能会永久断开与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
@@ -1949,6 +2136,9 @@
   </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_TEXT" xml:space="preserve">
     <value>选择报告内容</value>
+  </data>
+  <data name="BUGTOOL_PAGE_DESTINATION_INVALID_CASE_NO" xml:space="preserve">
+    <value>案例号无效。</value>
   </data>
   <data name="BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER" xml:space="preserve">
     <value>目标目录无效。</value>
@@ -2025,8 +2215,11 @@
   <data name="CANNOT_ACTIVATE_VD_VM_HALTED" xml:space="preserve">
     <value>无法在 VM“{0}”上激活该虚拟磁盘，因为该 VM 未运行。</value>
   </data>
+  <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS" xml:space="preserve">
+    <value>必须先在 VM“{0}”上安装 I/O 驱动程序，才能为该 VM 激活此虚拟磁盘。</value>
+  </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>必须首先在 VM“{0}”上安装 [XenServer product] Tools，然后才能为 VM 激活该虚拟磁盘。</value>
+    <value>必须先在 VM“{0}”上安装 [XenServer product] Tools，才能为该 VM 激活此虚拟磁盘。</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(无法更改网络的 MTU，因为它正作为管理接口“{0}”使用)</value>
@@ -2055,8 +2248,11 @@
   <data name="CANNOT_DEACTIVATE_VDI_IN_USE" xml:space="preserve">
     <value>此虚拟磁盘正在使用，无法取消激活。</value>
   </data>
+  <data name="CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS" xml:space="preserve">
+    <value>必须先在 VM“{0}”上安装 I/O 驱动程序，才能为该 VM 取消激活此虚拟磁盘。</value>
+  </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>必须首先在 VM“{0}”上安装 [XenServer product] Tools，然后才能为 VM 取消激活该虚拟磁盘。</value>
+    <value>必须先在 VM“{0}”上安装 [XenServer product] Tools，才能为该 VM 取消激活此虚拟磁盘。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>无法在 VM“{0}”上取消激活该虚拟磁盘，因为 VM 未运行。</value>
@@ -2073,7 +2269,7 @@
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>该模板为 [XenServer] 模板，无法删除。</value>
+    <value>此模板为 [XenServer] 模板，不能删除。</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>此虚拟磁盘供 DR 使用。要将其删除，请对 DR 进行配置，使其不将数据保存到此存储库中。</value>
@@ -2120,6 +2316,9 @@
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
     <value>无法使用 [XenCenter] 配置类型为“{0}”的 SR。</value>
   </data>
+  <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
+    <value>不能移动此虚拟磁盘，因为此虚拟磁盘连接到未运行的 VM。</value>
+  </data>
   <data name="CANNOT_MOVE_DR_VD" xml:space="preserve">
     <value>此虚拟磁盘供 DR 使用。无法将其移动到其他存储库。</value>
   </data>
@@ -2136,7 +2335,7 @@
     <value>该虚拟磁盘必须先分离，然后才能移动。</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
-    <value>无法解析 XML 节点“{0}”上的必需参数“{1}” </value>
+    <value>无法解析 XML 节点“{0}”上的必需参数“{1}”</value>
   </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>无法删除该 StorageLink 服务器，因为该服务器当前正在使用。</value>
@@ -2150,6 +2349,9 @@
     <value>以下服务器无法加入池“{0}”中:
 
 {1}</value>
+  </data>
+  <data name="CDDRIVE_MAX_ALLOWED_VBDS" xml:space="preserve">
+    <value>无法创建 DVD 驱动器，因为已达到允许您为此虚拟机创建的虚拟磁盘数量上限。</value>
   </data>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>{0} 上的 DVD 驱动器</value>
@@ -2180,21 +2382,6 @@
   </data>
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>更改服务器密码...</value>
-  </data>
-  <data name="CHANGE_SL_PASSWORD" xml:space="preserve">
-    <value>更改服务器密码(&amp;C)...</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_ACTION_DES_FINISH" xml:space="preserve">
-    <value>已更改 StorageLink 服务器密码</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_ACTION_DES_START" xml:space="preserve">
-    <value>正在更改 StorageLink 服务器密码</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_ACTION_TITLE" xml:space="preserve">
-    <value>更改 StorageLink 服务器密码</value>
-  </data>
-  <data name="CHANGE_SL_SERVER_PASSWORD_DIALOG_TEXT" xml:space="preserve">
-    <value>更改 {0} 的服务器密码</value>
   </data>
   <data name="CHANGE_VMS_APPLIANCE" xml:space="preserve">
     <value>将 VM 分配给 vApp</value>
@@ -2236,6 +2423,9 @@
   </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>正在检查角色...</value>
+  </data>
+  <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
+    <value>正在检查分区布局</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>正在检查服务器端状态</value>
@@ -2298,7 +2488,7 @@
     <value>折叠子项(&amp;C)</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>只能与 [XenServer] 的 Common Criteria 版结合使用</value>
+    <value>只能与 [XenServer] 的 Common Criteria 版本结合使用</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>已完成</value>
@@ -2313,7 +2503,7 @@
     <value>配置高可用性(&amp;C)...</value>
   </data>
   <data name="CONFIGURING_WLB" xml:space="preserve">
-    <value>正在配置 Workload Balancing</value>
+    <value>正在配置 Workload Balancing </value>
   </data>
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>正在池“{0}”上配置 Workload Balancing</value>
@@ -2431,7 +2621,7 @@
     <value>是否确实要销毁“{0}”?
 
 仅当 [XenServer] 实际出现故障时才需要将其销毁。
-销毁该服务器会将其从池中永久删除，同时删除其本地 SR、DVD 驱动器和可移动存储。需要重新安装该服务器才能再次使用。
+销毁此服务器会将其从池中永久删除，同时删除其本地 SR、DVD 驱动器和可移动存储。需要重新安装此服务器才能再次使用。
 
 此操作为最终操作，无法恢复。</value>
   </data>
@@ -2440,6 +2630,12 @@
   </data>
   <data name="CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL" xml:space="preserve">
     <value>是，销毁(&amp;Y)</value>
+  </data>
+  <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
+    <value>是否确实要在选定的池上禁用运行状况检查?</value>
+  </data>
+  <data name="CONFIRM_DISABLE_HEALTH_CHECK_SERVER" xml:space="preserve">
+    <value>是否确实要在选定的服务器上禁用运行状况检查?</value>
   </data>
   <data name="CONFIRM_EXPORT_FAT" xml:space="preserve">
     <value>导出文件的大小可能超出文件系统的限制。
@@ -2524,10 +2720,10 @@
     <value>重新启动 VM</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS" xml:space="preserve">
-    <value>是否确实要重新启动所选服务器上的 Toolstack? 请注意，[XenCenter] 将暂时断开与所选服务器的连接。</value>
+    <value>是否确实要重新启动选定服务器上的 Toolstack? 请注意，[XenCenter] 将暂时断开与选定服务器的连接。</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_ONE_SERVER" xml:space="preserve">
-    <value>是否确实要重新启动“{0}”上的 Toolstack? 请注意，[XenCenter] 将暂时断开与服务器的连接。</value>
+    <value>是否确实要重新启动“{0}”上的 Toolstack? 请注意，[XenCenter] 将暂时断开与该服务器的连接。</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>重新启动 Toolstack</value>
@@ -2681,7 +2877,7 @@
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
     <value>与服务器 {0} 的连接受到限制 - 已经与 [Citrix] [XenServer product] Express Edition 服务器({1})建立连接。
 
-一次只能连接一个 [Citrix] [XenServer product] Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
+一次只能连接到一个 [Citrix] [XenServer product] Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>由于许可证限制，无法连接 {0}</value>
@@ -2742,22 +2938,37 @@
     <value>包含于</value>
   </data>
   <data name="CONTAINER" xml:space="preserve">
-    <value>Container</value>
+    <value>容器</value>
   </data>
   <data name="CONTAINER_COMMAND" xml:space="preserve">
-    <value>Command</value>
+    <value>命令</value>
   </data>
   <data name="CONTAINER_CREATED" xml:space="preserve">
-    <value>Created</value>
+    <value>已创建</value>
   </data>
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>Container General Properties</value>
-  </data>
-  <data name="CONTAINER_PORTS" xml:space="preserve">
-    <value>Ports</value>
+    <value>容器的常规属性</value>
   </data>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
-    <value>Image</value>
+    <value>图片</value>
+  </data>
+  <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
+    <value>“{1}”{2} 上的 {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="CONTAINER_PORTS_ADDRESS" xml:space="preserve">
+    <value>地址: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PRIVATE_PORT" xml:space="preserve">
+    <value>专用端口: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PROTOCOL" xml:space="preserve">
+    <value>协议: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PUBLIC_PORT" xml:space="preserve">
+    <value>公用端口: {0}</value>
   </data>
   <data name="CONTAINS" xml:space="preserve">
     <value>包含</value>
@@ -2792,11 +3003,20 @@
   <data name="COPY_TEMPLATE_FAST_CLONE_DESCRIPTION" xml:space="preserve">
     <value>使用存储级快速磁盘克隆操作克隆现有模板</value>
   </data>
+  <data name="COPY_TEMPLATE_INTRA_POOL_RUBRIC" xml:space="preserve">
+    <value>提供新模板的名称和说明(可选)，然后选择复制模式。</value>
+  </data>
   <data name="COPY_TEMPLATE_REMOVE" xml:space="preserve">
     <value>复制后删除原始模板</value>
   </data>
   <data name="COPY_TEMPLATE_SELECT_SR" xml:space="preserve">
     <value>在该存储库中创建现有模板的完整副本:</value>
+  </data>
+  <data name="COPY_TEMPLATE_WIZARD_TITLE" xml:space="preserve">
+    <value>复制模板</value>
+  </data>
+  <data name="COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
+    <value>将模板复制到 {0}</value>
   </data>
   <data name="COPY_TO_SHARED_CANCELLED" xml:space="preserve">
     <value>已取消复制 {0}。</value>
@@ -2810,6 +3030,9 @@
   <data name="COPY_VM_FAST_CLONE_DESCRIPTION" xml:space="preserve">
     <value>使用存储级快速磁盘克隆操作克隆现有 VM</value>
   </data>
+  <data name="COPY_VM_INTRA_POOL_RUBRIC" xml:space="preserve">
+    <value>提供新 VM 的名称和说明(可选)，然后选择复制模式。</value>
+  </data>
   <data name="COPY_VM_REMOVE" xml:space="preserve">
     <value>复制后删除原始 VM</value>
   </data>
@@ -2818,6 +3041,18 @@
   </data>
   <data name="COPY_VM_SLOW_CLONE_DESCRIPTION" xml:space="preserve">
     <value>克隆现有模板</value>
+  </data>
+  <data name="COPY_VM_WIZARD_RUBRIC_TEMPLATE" xml:space="preserve">
+    <value>选择要将模板复制到的位置</value>
+  </data>
+  <data name="COPY_VM_WIZARD_RUBRIC_VM" xml:space="preserve">
+    <value>选择要将 VM 复制到的位置。</value>
+  </data>
+  <data name="COPY_VM_WIZARD_TITLE" xml:space="preserve">
+    <value>复制 VM</value>
+  </data>
+  <data name="COPY_VM_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
+    <value>将 VM 复制到 {0}</value>
   </data>
   <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
     <value>无法打开 URL {0}</value>
@@ -2831,7 +3066,7 @@
     <value>/秒</value>
   </data>
   <data name="CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST" xml:space="preserve">
-    <value>无法迁移到驻留的主机或池</value>
+    <value>不能迁移到相同的主机</value>
   </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>版本号不兼容</value>
@@ -2848,8 +3083,11 @@
   <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
     <value>主服务器:</value>
   </data>
+  <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
+    <value>模板:</value>
+  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_VM" xml:space="preserve">
-    <value>迁移 VM:</value>
+    <value>VM:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_NETWORK" xml:space="preserve">
     <value>网络连接:</value>
@@ -2858,7 +3096,7 @@
     <value>存储:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
-    <value>实时迁移网络:</value>
+    <value>迁移网络:</value>
   </data>
   <data name="CPM_SUMMARY_NETWORK_NOT_FOUND" xml:space="preserve">
     <value>未找到网络</value>
@@ -2867,7 +3105,13 @@
     <value>未设置</value>
   </data>
   <data name="CPM_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
-    <value>将迁移的所有虚拟磁盘置于同一个 SR 上(&amp;A):</value>
+    <value>将所有虚拟磁盘放置在相同的 SR 上(&amp;A):</value>
+  </data>
+  <data name="CPM_WIZARD_COPY_MODE_TAB_TITLE" xml:space="preserve">
+    <value>目标位置</value>
+  </data>
+  <data name="CPM_WIZARD_COPY_MODE_TITLE" xml:space="preserve">
+    <value>目标位置</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>目标(&amp;D):</value>
@@ -2875,11 +3119,26 @@
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
     <value>选择要将所选 VM 迁移到的池或独立服务器。</value>
   </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY" xml:space="preserve">
+    <value>选择要将所选 VM 复制到的池或独立服务器。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
+    <value>选择要将所选 VM 复制到的池或独立服务器。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE" xml:space="preserve">
+    <value>选择要将所选模板复制到的池或独立服务器。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE" xml:space="preserve">
+    <value>选择要将所选模板复制到的池或独立服务器。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE" xml:space="preserve">
+    <value>选择要将所选 VM 迁移到的池或独立服务器。</value>
+  </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>(可选)在目标池中指定主服务器(&amp;H):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
-    <value>目标</value>
+    <value>目标池</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TITLE" xml:space="preserve">
     <value>选择目标池或独立服务器</value>
@@ -2889,32 +3148,65 @@
 
 请重新连接目标主机并重试。</value>
   </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO" xml:space="preserve">
+    <value>向导已准备好使用如下设置迁移所选 VM。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以迁移这些 VM。</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY" xml:space="preserve">
+    <value>向导已准备好使用如下设置复制所选 VM。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以复制这些 VM。</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE" xml:space="preserve">
+    <value>向导已准备好使用如下设置复制所选 VM。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以复制该 VM。</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE_TEMPLATE" xml:space="preserve">
+    <value>向导已准备好使用如下设置复制所选模板。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以复制该模板。</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_TEMPLATE" xml:space="preserve">
+    <value>向导已准备好使用如下设置复制所选模板。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以复制这些模板。</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE" xml:space="preserve">
+    <value>向导已准备好使用如下设置迁移所选 VM。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以迁移该 VM。</value>
+  </data>
   <data name="CPM_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
-    <value>检查设置并开始实时迁移</value>
+    <value>检查设置</value>
+  </data>
+  <data name="CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE" xml:space="preserve">
+    <value>名称和存储</value>
+  </data>
+  <data name="CPM_WIZARD_INTRA_POOL_COPY_TITLE" xml:space="preserve">
+    <value>名称和存储</value>
   </data>
   <data name="CPM_WIZARD_NETWORKING_INTRO" xml:space="preserve">
-    <value>将要迁移的 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
+    <value>将选定 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
+  </data>
+  <data name="CPM_WIZARD_NETWORKING_INTRO_SINGLE" xml:space="preserve">
+    <value>将选定 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
+  </data>
+  <data name="CPM_WIZARD_NETWORKING_INTRO_TEMPLATE" xml:space="preserve">
+    <value>将选定模板中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
+  </data>
+  <data name="CPM_WIZARD_NETWORKING_INTRO_TEMPLATE_SINGLE" xml:space="preserve">
+    <value>将选定模板中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
   </data>
   <data name="CPM_WIZARD_SELECT_NETWORK_PAGE_TEXT" xml:space="preserve">
     <value>网络连接</value>
   </data>
   <data name="CPM_WIZARD_SELECT_NETWORK_PAGE_TITLE" xml:space="preserve">
-    <value>为迁移的 VM 配置网络连接</value>
+    <value>配置网络连接</value>
   </data>
   <data name="CPM_WIZARD_SELECT_STORAGE_PAGE_TEXT" xml:space="preserve">
     <value>存储</value>
   </data>
   <data name="CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE" xml:space="preserve">
-    <value>为迁移的 VM 配置存储</value>
+    <value>配置存储</value>
   </data>
   <data name="CPM_WIZARD_SELECT_TRANSFER_NETWORK_PAGE_TEXT" xml:space="preserve">
-    <value>实时迁移网络</value>
+    <value>迁移网络</value>
   </data>
   <data name="CPM_WIZARD_SELECT_TRANSFER_NETWORK_TITLE" xml:space="preserve">
-    <value>配置存储实时迁移设置</value>
+    <value>配置存储迁移设置</value>
   </data>
   <data name="CPM_WIZARD_SPECIFIC_SR_RADIO" xml:space="preserve">
-    <value>将迁移的虚拟磁盘置于指定的 SR 上(&amp;C):</value>
+    <value>将虚拟磁盘放置在指定 SR 上(&amp;C):</value>
   </data>
   <data name="CPM_WIZARD_STORAGE_INSTRUCTIONS" xml:space="preserve">
     <value>选择目标池或独立服务器中的一个或多个存储库(SR)。</value>
@@ -2929,13 +3221,35 @@
     <value>所选 VM 不再可迁移。请验证您的选择是否有效，然后重新启动向导。</value>
   </data>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
-    <value>迁移的 VM 中的虚拟网络接口(&amp;V):</value>
+    <value>虚拟网络接口(&amp;V):</value>
   </data>
   <data name="CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON" xml:space="preserve">
     <value>已在主机上启用 WLB</value>
   </data>
   <data name="CPM_WLB_ENABLED_ON_VM_FAILURE_REASON" xml:space="preserve">
     <value>已在源上启用 WLB</value>
+  </data>
+  <data name="CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE" xml:space="preserve">
+    <value>选择目标池或独立服务器上用于实时迁移虚拟磁盘的存储网络。 
+
+要在模板迁移期间实现最佳性能和可靠性，请确保用于存储迁移的网络不会用于管理或虚拟机通信。</value>
+  </data>
+  <data name="CPS_WIZARD_MIGRATION_PAGE_TITLE_VM" xml:space="preserve">
+    <value>选择目标池或独立服务器上用于实时迁移虚拟磁盘的存储网络。 
+
+要在 VM 迁移期间实现最佳性能和可靠性，请确保用于存储迁移的网络不会用于管理或虚拟机通信。</value>
+  </data>
+  <data name="CPS_WIZARD_NETWORKING_NETWORK_COLUMN_TEMPLATE" xml:space="preserve">
+    <value>模板 - 虚拟网络接口</value>
+  </data>
+  <data name="CPS_WIZARD_NETWORKING_NETWORK_COLUMN_VM" xml:space="preserve">
+    <value>VM - 虚拟网络接口</value>
+  </data>
+  <data name="CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE" xml:space="preserve">
+    <value>模板 - 虚拟磁盘</value>
+  </data>
+  <data name="CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM" xml:space="preserve">
+    <value>VM - 虚拟磁盘</value>
   </data>
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
@@ -2949,6 +3263,12 @@
   <data name="CPU_SUB" xml:space="preserve">
     <value>{0} 个 vCPU</value>
   </data>
+  <data name="CPU_TOPOLOGY_INVALID_REASON_MULTIPLE" xml:space="preserve">
+    <value>vCPU 的数量必须是每个插槽的核心数的倍数</value>
+  </data>
+  <data name="CPU_TOPOLOGY_INVALID_REASON_SOCKETS" xml:space="preserve">
+    <value>插槽的数量不得超过 16</value>
+  </data>
   <data name="CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE" xml:space="preserve">
     <value>1 个插槽，每个插槽 1 个核心</value>
   </data>
@@ -2957,6 +3277,9 @@
   </data>
   <data name="CPU_TOPOLOGY_STRING_INVALID_VALUE" xml:space="preserve">
     <value>每个插槽 {0} 个核心(无效配置)</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_INVALID_VALUE_1" xml:space="preserve">
+    <value>每个插槽 1 个核心(无效配置)</value>
   </data>
   <data name="CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE" xml:space="preserve">
     <value>{0} 个插槽，每个插槽 1 个核心</value>
@@ -3030,6 +3353,9 @@
   <data name="CREATE_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>正在从模板“{1}”创建 VM“{0}”</value>
   </data>
+  <data name="CREATING_CLOUD_CONFIG_DRIVE" xml:space="preserve">
+    <value>正在创建云配置驱动器</value>
+  </data>
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>正在创建磁盘</value>
   </data>
@@ -3068,18 +3394,6 @@
   </data>
   <data name="CSLG_DIRECT_CONNECTION" xml:space="preserve">
     <value>直接连接</value>
-  </data>
-  <data name="CSLG_EDIT_CONNECTION_FAILED" xml:space="preserve">
-    <value>连接失败</value>
-  </data>
-  <data name="CSLG_EDIT_CONNECTION_PASSED" xml:space="preserve">
-    <value>连接成功</value>
-  </data>
-  <data name="CSLG_EDIT_DETAILS_ENTERED" xml:space="preserve">
-    <value>已输入详细信息</value>
-  </data>
-  <data name="CSLG_EDIT_NO_DETAILS_ENTERED" xml:space="preserve">
-    <value>未输入详细信息</value>
   </data>
   <data name="CSLG_NETAPP_DIRECT" xml:space="preserve">
     <value>NetApp</value>
@@ -3463,7 +3777,7 @@
     <value>{0} (已分离)</value>
   </data>
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
-    <value>[XenCenter] 检测到该 LUN 上已存在 SR。该 SR 当前未由“{0}”使用，要进行连接吗?</value>
+    <value>[XenCenter] 检测到此 LUN 上已存在 SR。此 SR 当前未由“{0}”使用，是否要连接?</value>
   </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>分离(&amp;D)</value>
@@ -3500,6 +3814,9 @@
   </data>
   <data name="DISABLED" xml:space="preserve">
     <value>已禁用</value>
+  </data>
+  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
+    <value>找不到任何更新，因为已禁用自动检查更新。</value>
   </data>
   <data name="DISABLED_VMPP" xml:space="preserve">
     <value>已禁用 VM 保护策略“{0}”。</value>
@@ -3606,11 +3923,17 @@
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
     <value>仅消除可见警报(&amp;V)</value>
   </data>
+  <data name="DISPLAY" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="DISPLAY_DETAILS" xml:space="preserve">
+    <value>显示选项</value>
+  </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>无法设置内存范围，因为该 VM 上未安装 [XenServer product] Tools。</value>
+    <value>无法设置内存范围，因为未在此 VM 上安装 [XenServer product] Tools。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
-    <value>无法设置内存范围，因为这些 VM 上未安装 [XenServer product] Tools。</value>
+    <value>无法设置内存范围，因为未在这些 VM 上安装 [XenServer product] Tools。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED" xml:space="preserve">
     <value>无法设置内存范围，因为该 VM 上的操作系统不支持内存范围。</value>
@@ -3618,11 +3941,17 @@
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL" xml:space="preserve">
     <value>无法设置内存范围，因为这些 VM 上的操作系统不支持内存范围。</value>
   </data>
+  <data name="DMC_UNAVAILABLE_NO_IO_NO_MGMNT" xml:space="preserve">
+    <value>无法设置内存范围，因为未在此 VM 上安装 I/O 驱动程序。</value>
+  </data>
+  <data name="DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL" xml:space="preserve">
+    <value>无法设置内存范围，因为未在这些 VM 上安装 I/O 驱动程序。</value>
+  </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
-    <value>无法设置内存范围，因为该 VM 上的 [XenServer product] Tools 已过期。</value>
+    <value>无法设置内存范围，因为此 VM 上安装的 [XenServer product] Tools 已过时。</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>无法设置内存范围，因为这些 VM 上的 [XenServer product] Tools 已过期。</value>
+    <value>无法设置内存范围，因为这些 VM 上安装的 [XenServer product] Tools 已过时。</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>无法为该模板设置内存范围。</value>
@@ -3633,65 +3962,59 @@
   <data name="DMC_UNAVAILABLE_VMS" xml:space="preserve">
     <value>无法为这些 VM 设置内存范围。</value>
   </data>
-  <data name="DOES_NOT_USE" xml:space="preserve">
-    <value>不使用</value>
-  </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
-    <value>Docker详细信息</value>
-  </data>
-  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker进程</value>
+    <value>容器详细信息</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
-    <value>Api Version</value>
+    <value>Api 版本</value>
   </data>
   <data name="DOCKER_INFO_ARCH" xml:space="preserve">
     <value>Arch</value>
   </data>
   <data name="DOCKER_INFO_DEBUG" xml:space="preserve">
-    <value>Debug</value>
+    <value>调试</value>
   </data>
   <data name="DOCKER_INFO_DRIVER" xml:space="preserve">
-    <value>Driver</value>
+    <value>驱动程序</value>
   </data>
   <data name="DOCKER_INFO_DRIVER_STATUS" xml:space="preserve">
-    <value>Driver Status</value>
+    <value>驱动程序状态</value>
   </data>
   <data name="DOCKER_INFO_EXECUTION_DRIVER" xml:space="preserve">
-    <value>Execution Driver</value>
+    <value>执行驱动程序</value>
   </data>
   <data name="DOCKER_INFO_GIT_COMMIT" xml:space="preserve">
     <value>Git Commit</value>
   </data>
   <data name="DOCKER_INFO_GO_VERSION" xml:space="preserve">
-    <value>Go Version</value>
+    <value>Go 版本</value>
   </data>
   <data name="DOCKER_INFO_INDEX_SERVER_ADDRESS" xml:space="preserve">
-    <value>Index Server Address</value>
+    <value>索引服务器地址</value>
   </data>
   <data name="DOCKER_INFO_INITIATE_PATH" xml:space="preserve">
-    <value>Initiate Path</value>
+    <value>启动路径</value>
   </data>
   <data name="DOCKER_INFO_INITIATE_SHA1" xml:space="preserve">
-    <value>Initiate Sha1</value>
+    <value>启动 Sha1</value>
   </data>
   <data name="DOCKER_INFO_IPV4_FORWARDING" xml:space="preserve">
-    <value>IPv4 Forwarding</value>
+    <value>IPv4 转发</value>
   </data>
   <data name="DOCKER_INFO_KERNEL_VERSION" xml:space="preserve">
-    <value>Kernel Version</value>
+    <value>内核版本</value>
   </data>
   <data name="DOCKER_INFO_LABELS" xml:space="preserve">
-    <value>Labels</value>
+    <value>标签</value>
   </data>
   <data name="DOCKER_INFO_MEMORY_LIMIT" xml:space="preserve">
-    <value>Memory Limit</value>
+    <value>内存限制</value>
   </data>
   <data name="DOCKER_INFO_NCPU" xml:space="preserve">
     <value>NCPU</value>
   </data>
   <data name="DOCKER_INFO_NEVENT_LISTENER" xml:space="preserve">
-    <value>NEvents Listener</value>
+    <value>NEvents 侦听器</value>
   </data>
   <data name="DOCKER_INFO_NFD" xml:space="preserve">
     <value>NFd</value>
@@ -3700,13 +4023,19 @@
     <value>NGoroutines</value>
   </data>
   <data name="DOCKER_INFO_ROOT_DIR" xml:space="preserve">
-    <value>Root Directory</value>
+    <value>根目录</value>
   </data>
   <data name="DOCKER_INFO_SWAP_LIMIT" xml:space="preserve">
-    <value>Swap Limit</value>
+    <value>交换限制</value>
   </data>
   <data name="DOCKER_INFO_VERSION" xml:space="preserve">
-    <value>Version</value>
+    <value>版本</value>
+  </data>
+  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
+    <value>容器进程</value>
+  </data>
+  <data name="DOES_NOT_USE" xml:space="preserve">
+    <value>不使用</value>
   </data>
   <data name="DONE" xml:space="preserve">
     <value>已完成。</value>
@@ -3718,7 +4047,7 @@
     <value>{0} 当前可用</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>正在从服务器 {0} 下载更新...</value>
+    <value>正在从 {0} 下载更新...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>正在下载 {0}</value>
@@ -4046,7 +4375,7 @@
     <value>正在进行故障恢复。此过程需要一段时间。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>正在进行 [XenServer] 灾难恢复。该过程需要一些时间。</value>
+    <value>正在进行 [XenServer] 灾难恢复。此过程需要一段时间。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>总体进度: 已完成 {0} 项任务(共 {1} 项)</value>
@@ -4127,7 +4456,7 @@
     <value>恢复后的电源状态: {0}</value>
   </data>
   <data name="DR_WIZARD_REPORT_SELECTED_SRS" xml:space="preserve">
-    <value>所选 SR:</value>
+    <value>所选 SR: </value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
     <value>选择包含要执行故障恢复的 VM 和 vApp 的配置数据的存储库(SR)。如果您知道哪些 SR 包含 VM 的磁盘，则可以立即将其包含在内。</value>
@@ -4291,6 +4620,9 @@
   <data name="ENDS_WITH" xml:space="preserve">
     <value>结尾</value>
   </data>
+  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>[XenServer] Enterprise Per-Socket (需要 {0})(&amp;E)</value>
+  </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>进入维护模式(&amp;M)...</value>
   </data>
@@ -4319,7 +4651,7 @@
     <value>用户名和密码不匹配。</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
-    <value>[XenCenter] 在连接该服务器时遇到问题。</value>
+    <value>[XenCenter] 在连接到此服务器时遇到问题。</value>
   </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>无法取消激活以下虚拟磁盘:</value>
@@ -4489,6 +4821,9 @@
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>准备主机时出错</value>
   </data>
+  <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
+    <value>[XenCenter] 在启动 PuTTY 时遇到问题。</value>
+  </data>
   <data name="ERROR_UNKNOWN" xml:space="preserve">
     <value>出现未知错误。</value>
   </data>
@@ -4510,8 +4845,11 @@
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0}弹出 CD</value>
   </data>
+  <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
+    <value>{0} 安装管理代理</value>
+  </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0}安装 [XenServer product] Tools</value>
+    <value>{0} 安装 [XenServer product] Tools</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>此 VM 使用本地 CD。</value>
@@ -4531,6 +4869,9 @@
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
     <value>没有可用服务器</value>
   </data>
+  <data name="EVACUATE_HOST_SHUTDOWN_VM_PROMPT" xml:space="preserve">
+    <value>{0} 关闭 VM</value>
+  </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
     <value>{0}暂停 VM</value>
   </data>
@@ -4547,7 +4888,7 @@
     <value>出现常规性异常。</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED" xml:space="preserve">
-    <value>用户已取消</value>
+    <value>已取消</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>用户已取消。需要先升级主服务器。</value>
@@ -4893,7 +5234,7 @@
     <value>插件 {0} 尚未对您的取消请求作出响应。是强制关闭进程还是允许其继续在后台运行?</value>
   </data>
   <data name="FORCE_ENABLE_RDP" xml:space="preserve">
-    <value>Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?</value>
+    <value>是否要将此 VM 配置为接受远程桌面连接，然后再通过远程桌面进行连接?</value>
   </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>强制重启</value>
@@ -4921,9 +5262,6 @@
   </data>
   <data name="FULLY_APPLIED" xml:space="preserve">
     <value>已完全应用</value>
-  </data>
-  <data name="FULL_NAME" xml:space="preserve">
-    <value>完整名称</value>
   </data>
   <data name="GALLERYSEARCHBAR_MATCHES" xml:space="preserve">
     <value>{0} 个匹配项</value>
@@ -5070,16 +5408,13 @@
     <value>通过为 VM 分配专用的图形处理单元(GPU)可以提高图形性能。但在该服务器中未检测到 GPU，因此该选项当前不可用。</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
-    <value>选择允许在这些 GPU 上使用的 vGPU 类型:</value>
+    <value>选择允许在这些 GPU 上使用的虚拟 GPU 类型:</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
-    <value>选择允许在此 GPU 上使用的 vGPU 类型:</value>
+    <value>选择允许在此 GPU 上使用的虚拟 GPU 类型:</value>
   </data>
   <data name="GPU_UNAVAILABLE" xml:space="preserve">
     <value>不可用</value>
-  </data>
-  <data name="GRAPHS" xml:space="preserve">
-    <value>图形</value>
   </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
     <value>无法在 VM {0} 上添加新的性能图表，因为该 VM 未运行。</value>
@@ -5098,9 +5433,6 @@
   </data>
   <data name="GRAPHS_DEFAULT_NAME_NETWORK" xml:space="preserve">
     <value>网络性能</value>
-  </data>
-  <data name="GRAPHS_DESC" xml:space="preserve">
-    <value>图形外观</value>
   </data>
   <data name="GRAPHS_DETAILS_TITLE" xml:space="preserve">
     <value>“{0}”详细信息</value>
@@ -5126,7 +5458,7 @@
     <value>正在加载数据...</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
-    <value>要查看该 VM 的内存数据，需要安装 [XenServer product] Tools</value>
+    <value>需要安装 [XenServer product] Tools，才能查看此 VM 的内存数据</value>
   </data>
   <data name="GREATER_THAN" xml:space="preserve">
     <value>&gt; {0}</value>
@@ -5143,7 +5475,7 @@
   <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
     <value>
 
-可以从以下位置获取兼容版本的 [XenCenter]:</value>
+可以从以下位置获取兼容的 [XenCenter] 版本:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>高可用性</value>
@@ -5160,23 +5492,7 @@
     <value>高可用性计划</value>
   </data>
   <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
-    <value>为该池中的 VM 配置高可用性重启优先级、重启顺序和延迟间隔</value>
-  </data>
-  <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE_NOORDER" xml:space="preserve">
-    <value>为该池中的 VM 配置高可用性重启优先级</value>
-  </data>
-  <data name="HAWIZ_SUMMARY" xml:space="preserve">
-    <value>检测信号 SR:   {0}
-
-故障容错:   {1}
-
-首先重新启动:   {2}
-
-重新启动:   {3}
-
-在可能时重新启动:   {4}
-
-不重新启动:   {5}</value>
+    <value>为此池中的 VM 配置高可用性重启优先级、重启顺序和延迟间隔</value>
   </data>
   <data name="HAWIZ_SUMMARY_NEW" xml:space="preserve">
     <value>检测信号 SR:   {0}
@@ -5450,6 +5766,57 @@
   </data>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>检查配置并激活高可用性</value>
+  </data>
+  <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN" xml:space="preserve">
+    <value>需要在 [Citrix] Insight Services 中进行身份验证才能启用此功能。[XenCenter] 检测到之前已成功为其他已连接的池之一进行身份验证。可以选择重复使用或再次进行身份验证。</value>
+  </data>
+  <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
+    <value>需要在 [Citrix] Insight Services 中进行身份验证才能启用此功能。请通过提供 MyCitrix 凭据进行注册(请参阅 http://www.citrix.com/welcome.html)。这些凭据只能用于获取上载令牌，不存储在此计算机或您的服务器上。</value>
+  </data>
+  <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
+    <value>好的，启用运行状况检查</value>
+  </data>
+  <data name="HEALTHCHECK_ENROLLMENT_TITLE" xml:space="preserve">
+    <value>运行状况检查注册 - {0}</value>
+  </data>
+  <data name="HEALTHCHECK_ON_DEMAND_REQUEST" xml:space="preserve">
+    <value>立即请求额外上载</value>
+  </data>
+  <data name="HEALTHCHECK_ON_DEMAND_REQUESTED_AT" xml:space="preserve">
+    <value>{0} 请求再上载一次</value>
+  </data>
+  <data name="HEALTHCHECK_SCHEDULE_DESCRIPTION" xml:space="preserve">
+    <value>每 {0} 周的{1} {2} 开始上载运行状况检查报告</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_ISSUES_FOUND" xml:space="preserve">
+    <value>检测到 {0} 个问题</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_NOT_AVAILABLE_YET" xml:space="preserve">
+    <value>分析暂不可用</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_NOT_ENROLLED" xml:space="preserve">
+    <value>未启用运行状况检查</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_NO_ISSUES_FOUND" xml:space="preserve">
+    <value>未检测到任何问题</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_NO_UPLOAD_YET" xml:space="preserve">
+    <value>尚未上载任何报告</value>
+  </data>
+  <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
+    <value>检测到 1 个问题</value>
+  </data>
+  <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>在 [Citrix] Insight Services 中进行身份验证失败。有关详细信息，请参阅应用程序日志文件。</value>
+  </data>
+  <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
+    <value>无效用户名或密码。请重试。</value>
+  </data>
+  <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
+    <value>此用户无权访问此服务器。</value>
+  </data>
+  <data name="HEALTH_CHECK_USER_NOT_AUTHORIZED" xml:space="preserve">
+    <value>此用户无权执行运行状况检查操作。</value>
   </data>
   <data name="HEARTBEATING_STATUS" xml:space="preserve">
     <value>检测信号状态</value>
@@ -5875,15 +6242,6 @@
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>查找要导入的文件</value>
   </data>
-  <data name="IMPORT_STORAGELINK_VOLUME_ACTION_FINSH" xml:space="preserve">
-    <value>已将 StorageLink 卷导入“{0}”</value>
-  </data>
-  <data name="IMPORT_STORAGELINK_VOLUME_ACTION_START" xml:space="preserve">
-    <value>正在将 StorageLink 卷导入“{0}”</value>
-  </data>
-  <data name="IMPORT_STORAGELINK_VOLUME_ACTION_TITLE" xml:space="preserve">
-    <value>将 Storagelink 卷导入“{0}”</value>
-  </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>配置新模板的存储</value>
   </data>
@@ -5951,10 +6309,10 @@
     <value>为新 VM 配置虚拟网络接口</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_MANY" xml:space="preserve">
-    <value>正在导入的部分或全部 VM 分配有 vGPU。所选位置没有类型正确的 GPU。如果继续导入，这些 VM 的 vGPU 设置将丢失。</value>
+    <value>正在导入的部分或全部 VM 分配有虚拟 GPU。所选位置没有类型正确的 GPU。如果继续导入，这些 VM 的虚拟 GPU 设置将丢失。</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_ONE" xml:space="preserve">
-    <value>正在导入的 VM 分配有 vGPU。所选位置没有类型正确的 GPU。如果继续导入，该 VM 的 vGPU 设置将丢失。</value>
+    <value>正在导入的 VM 分配有虚拟 GPU。所选位置没有类型正确的 GPU。如果继续导入，该 VM 的虚拟 GPU 设置将丢失。</value>
   </data>
   <data name="IMPORT_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>将导入的所有虚拟磁盘放在此目标 SR 上(&amp;A):</value>
@@ -5987,7 +6345,7 @@
     <value>为导入的虚拟机选择存储库。</value>
   </data>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
-    <value>此服务器版本与 [XenCenter] 不兼容</value>
+    <value>此服务器版本与 [XenCenter] 不兼容。</value>
   </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>文件大小不正确</value>
@@ -6007,6 +6365,9 @@
   <data name="INFO_DISKMEMORY_MODE_MISC" xml:space="preserve">
     <value>磁盘和内存快照当前不可供该 VM 使用</value>
   </data>
+  <data name="INFO_DISKMEMORY_MODE_NO_IO_DRIVERS" xml:space="preserve">
+    <value>磁盘和内存快照需要安装 I/O 驱动程序</value>
+  </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
     <value>磁盘和内存快照需要安装 [XenServer product] Tools</value>
   </data>
@@ -6019,8 +6380,11 @@
   <data name="INFO_QUIESCE_MODE" xml:space="preserve">
     <value>静止快照需要在 VM 上启用 VSS 服务</value>
   </data>
+  <data name="INFO_QUIESCE_MODE_NO_MGMNT" xml:space="preserve">
+    <value>静态快照需要安装管理代理</value>
+  </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>静止快照需要安装 [XenServer product] Tools</value>
+    <value>静态快照需要安装 [XenServer product] Tools</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>静止快照需要 VM 处于运行状态</value>
@@ -6038,19 +6402,19 @@
     <value>在所选 VM 上找不到 CD 驱动器。</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>找不到 [XenServer product] Tools 安装磁盘。</value>
+    <value>找不到 [XenServer product] Tools 安装光盘。</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
     <value>已启动 [XenServer product] Tools 安装。</value>
   </data>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
-    <value>该 VM 上已安装 [XenServer product] Tools。</value>
+    <value>已在此 VM 上安装 [XenServer product] Tools。</value>
   </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
     <value>正在启动 [XenServer product] Tools 安装。</value>
   </data>
   <data name="INSTALLTOOLS_TITLE" xml:space="preserve">
-    <value>正在 VM {0} 上安装 [XenServer product] Tools</value>
+    <value>正在 VM“{0}”上安装 [XenServer product] Tools</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
     <value>在指定网络位置找不到安装文件</value>
@@ -6075,6 +6439,18 @@
   </data>
   <data name="INSTANT_VM_CREATE_TITLE" xml:space="preserve">
     <value>即时创建 VM</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>此服务器当前不使用集成 GPU。</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED_SHORT" xml:space="preserve">
+    <value>不使用集成 GPU</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>此服务器当前使用集成 GPU。</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_ENABLED_SHORT" xml:space="preserve">
+    <value>使用集成 GPU</value>
   </data>
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>接口: {0}</value>
@@ -6102,6 +6478,9 @@
   </data>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>在 vApp 中</value>
+  </data>
+  <data name="IN_POOL" xml:space="preserve">
+    <value>在“{0}”中</value>
   </data>
   <data name="IN_PROGRESS" xml:space="preserve">
     <value>进行中</value>
@@ -6162,7 +6541,7 @@ SCSI ID: {2}
     <value>StorageLink 技术</value>
   </data>
   <data name="ISOCOMBOBOX_CD_DRIVE" xml:space="preserve">
-    <value>{1} 上的 DVD 驱动器 {0} </value>
+    <value>{1} 上的 DVD 驱动器 {0}</value>
   </data>
   <data name="ISO_LOADED" xml:space="preserve">
     <value>已将 ISO“{0}”加载到 VM {1} 上的 DVD 驱动器中</value>
@@ -6183,7 +6562,7 @@ SCSI ID: {2}
     <value>在池中</value>
   </data>
   <data name="IS_IN_STORAGELINK_SR" xml:space="preserve">
-    <value>VM 在 StorageLink Gateway SR 上 </value>
+    <value>VM 在 StorageLink Gateway SR 上</value>
   </data>
   <data name="IS_NOT" xml:space="preserve">
     <value>不是</value>
@@ -6207,13 +6586,13 @@ SCSI ID: {2}
     <value>正在与 {0} 同步...</value>
   </data>
   <data name="LAST_REFRESH_FAIL" xml:space="preserve">
-    <value>该信息暂时无法获取。</value>
+    <value>信息不可用。</value>
   </data>
   <data name="LAST_REFRESH_IN_PROGRESS" xml:space="preserve">
-    <value>正在获取信息...</value>
+    <value>正在加载...</value>
   </data>
   <data name="LAST_REFRESH_SUCCESS" xml:space="preserve">
-    <value>最近更新于: {0}</value>
+    <value>上次刷新时间: {0}</value>
   </data>
   <data name="LAST_WEEK" xml:space="preserve">
     <value>为上周</value>
@@ -6306,6 +6685,9 @@ SCSI ID: {2}
   <data name="LICENSE_NEVER" xml:space="preserve">
     <value>从不</value>
   </data>
+  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>不符合支持条件</value>
+  </data>
   <data name="LICENSE_NO_HA" xml:space="preserve">
     <value>高可用性处于启用状态时无法更改主机的许可证</value>
   </data>
@@ -6313,7 +6695,7 @@ SCSI ID: {2}
     <value>激活免费 [XenServer] 时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>为 [BRANDING_VERSION_5_6] 以下版本的服务器授予许可时，必须一次选择一个服务器。</value>
+    <value>向版本低于 [BRANDING_VERSION_5_6] 的服务器授权时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
@@ -6348,8 +6730,34 @@ SCSI ID: {2}
   <data name="LICENSE_SERVER_PORT_FORMAT" xml:space="preserve">
     <value>{0}:{1}</value>
   </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
+    <value>http://{0}:{1}</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
+    <value>转至...</value>
+  </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>状态</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>满足支持条件 
+XenApp/XenDesktop 功能已启用</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
+    <value>满足支持条件 
+XenApp/XenDesktop Platinum 功能已启用</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+启用了 Enterprise 功能</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+已启用高级功能</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+仅限 Standard 功能</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
     <value>激活密钥一次只能应用到一款免费 [XenServer] 产品。</value>
@@ -6493,18 +6901,6 @@ SCSI ID: {2}
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_YES_BUTTON_LABEL" xml:space="preserve">
     <value>是，删除(&amp;Y)</value>
   </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TEXT" xml:space="preserve">
-    <value>是否删除所选 StorageLink 存储系统? 以下 SR 正在使用这些系统:</value>
-  </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEMS_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储系统</value>
-  </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TEXT" xml:space="preserve">
-    <value>是否删除 StorageLink 存储系统“{0}”? 以下 SR 正在使用该系统:</value>
-  </data>
-  <data name="MAINWINDOW_CONFIRM_REMOVE_STORAGE_SYSTEM_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储系统</value>
-  </data>
   <data name="MAINWINDOW_CONNECTHOST" xml:space="preserve">
     <value>连接(&amp;C)</value>
   </data>
@@ -6617,7 +7013,7 @@ SCSI ID: {2}
     <value>强制关闭(&amp;W)</value>
   </data>
   <data name="MAINWINDOW_FORGET_SAVED_PASSWORD" xml:space="preserve">
-    <value>忘记(&amp;F)</value>
+    <value>忘记密码(&amp;F)</value>
   </data>
   <data name="MAINWINDOW_FORGET_SR" xml:space="preserve">
     <value>忘记(&amp;F)</value>
@@ -6626,13 +7022,16 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>安装 [XenServer product] Tools(&amp;X)...</value>
+    <value>安装 [XenServer product] Tools(&amp;A)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>快速创建(&amp;Q)</value>
   </data>
   <data name="MAINWINDOW_LOG_REMOVECONNECTION" xml:space="preserve">
     <value>已删除与 {0} 的连接</value>
+  </data>
+  <data name="MAINWINDOW_MIGRATEVM" xml:space="preserve">
+    <value>迁移 VM(&amp;M)...</value>
   </data>
   <data name="MAINWINDOW_MIGRATE_TO_SERVER" xml:space="preserve">
     <value>迁移至服务器(&amp;I)</value>
@@ -6654,6 +7053,9 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_NEW_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>新建 VM 向导(&amp;N)...</value>
+  </data>
+  <data name="MAINWINDOW_PAUSE" xml:space="preserve">
+    <value>暂停(&amp;P)</value>
   </data>
   <data name="MAINWINDOW_POWER_ON" xml:space="preserve">
     <value>开机(&amp;N)</value>
@@ -6700,6 +7102,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>修复(&amp;P)...</value>
   </data>
+  <data name="MAINWINDOW_RESTART" xml:space="preserve">
+    <value>重新启动(&amp;S)</value>
+  </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
     <value>重新启动 Toolstack(&amp;K)</value>
   </data>
@@ -6718,14 +7123,14 @@ SCSI ID: {2}
   <data name="MAINWINDOW_SET_AS_DEFAULT_SR" xml:space="preserve">
     <value>设为默认值(&amp;T)</value>
   </data>
-  <data name="MAINWINDOW_SET_STORAGELINK_LICENSE_SERVER" xml:space="preserve">
-    <value>设置许可证服务器...</value>
-  </data>
   <data name="MAINWINDOW_SHARE_SR" xml:space="preserve">
     <value>共享(&amp;S)</value>
   </data>
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>关闭(&amp;H)</value>
+  </data>
+  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
+    <value>转换 SR(&amp;C)...</value>
   </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>启动(&amp;S)</value>
@@ -6735,6 +7140,9 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_START_ON_HOST" xml:space="preserve">
     <value>在服务器上启动(&amp;V)</value>
+  </data>
+  <data name="MAINWINDOW_STOP" xml:space="preserve">
+    <value>停止(&amp;T)</value>
   </data>
   <data name="MAINWINDOW_SUSPEND" xml:space="preserve">
     <value>挂起(&amp;U)</value>
@@ -6830,7 +7238,7 @@ SCSI ID: {2}
     <value>内存(&amp;M):</value>
   </data>
   <data name="MEMORY_XEN" xml:space="preserve">
-    <value>Xen</value>
+    <value>[XenServer]</value>
   </data>
   <data name="MEM_NOT_WHEN_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法更改内存</value>
@@ -7092,18 +7500,21 @@ SCSI ID: {2}
     <value>选择目标存储库(&amp;D)</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 VDI 实时迁移。通过此功能，您能够在同一池中的 SR 之间迁移多个正在运行的 VDI，而不会导致 VM 停机。 </value>
+    <value>升级您的 [XenServer] 许可证以启用 VDI 实时迁移。此功能允许您在同一池中的两个 SR 之间迁移多个正在运行的 VDI，而不会造成 VM 停机。 </value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB_MORE" xml:space="preserve">
     <value>
 
-要了解与 [XenServer] VDI 实时迁移功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
+要了解有关 [XenServer] 实时 VDI 迁移功能的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
     <value>将 VM 迁移出服务器“{0}”</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
     <value>此时无法迁移该 VM</value>
+  </data>
+  <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
+    <value>此 VM 可能不迁移，因为目标主机不具备此 VM 当前正在使用的某些 CPU 功能</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
     <value>无法迁移该 VM，因为其包含专用的 GPU</value>
@@ -7122,9 +7533,6 @@ SCSI ID: {2}
   </data>
   <data name="MIXED_POWER_ON_MODE" xml:space="preserve">
     <value>混合</value>
-  </data>
-  <data name="MODEL" xml:space="preserve">
-    <value>型号</value>
   </data>
   <data name="MONDAY_LONG" xml:space="preserve">
     <value>星期一</value>
@@ -7149,6 +7557,12 @@ SCSI ID: {2}
   </data>
   <data name="MOVE_VDI_CONTEXT_MENU" xml:space="preserve">
     <value>移动虚拟磁盘(&amp;M)...</value>
+  </data>
+  <data name="MOVE_VM_WIZARD_TITLE" xml:space="preserve">
+    <value>移动 VM</value>
+  </data>
+  <data name="MOVE_VM_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
+    <value>将 VM 移动到 {0}</value>
   </data>
   <data name="MOVING" xml:space="preserve">
     <value>正在移动...</value>
@@ -7194,6 +7608,9 @@ SCSI ID: {2}
   </data>
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>常规</value>
+  </data>
+  <data name="NAME_WITH_LOCATION" xml:space="preserve">
+    <value>{0} {1}</value>
   </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>选择要重新连接的 SR 或创建一个新 SR</value>
@@ -7243,12 +7660,12 @@ SCSI ID: {2}
     <value>配置 IP 地址 - {0}</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST" xml:space="preserve">
-    <value>您正在重新配置主管理接口。如果新的设置不正确，则 [XenCenter] 可能将与服务器永久失去连接。
+    <value>正在重新配置主管理接口。如果新设置不正确，[XenCenter] 可能会与服务器永久断开连接。
 
 只有在确认这些设置正确后才能继续操作。</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL" xml:space="preserve">
-    <value>您正在重新配置主管理接口。如果新的设置不正确，则 [XenCenter] 可能将与服务器永久失去连接，或者池成员可能无法互相联系。
+    <value>正在重新配置主管理接口。如果新设置不正确，[XenCenter] 可能会与服务器永久断开连接，或者池成员可能无法互相联系。
 
 只有在确认这些设置正确后才能继续操作。</value>
   </data>
@@ -7301,7 +7718,7 @@ SCSI ID: {2}
     <value>正在更新网络</value>
   </data>
   <data name="NETWORK_ACTION_UPDATING_NETWORK_TITLE" xml:space="preserve">
-    <value>正在更新“{1}”上的网络“{0}” </value>
+    <value>正在更新“{1}”上的网络“{0}”</value>
   </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (正由 {1} 使用)</value>
@@ -7355,13 +7772,13 @@ SCSI ID: {2}
     <value>从不</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>新磁盘将在关机并重新启动 VM 后显示。</value>
+    <value>新磁盘将在下次重新启动 VM 后显示。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>已创建磁盘</value>
   </data>
   <data name="NEWER_GUI_AVAILABLE" xml:space="preserve">
-    <value>有更新版本的 [XenCenter] 可供使用。请与支持代表联系。</value>
+    <value>有更新版本的 [XenCenter] 可用。请与支持代表联系。</value>
   </data>
   <data name="NEWNETWORKWIZARD_TITLE" xml:space="preserve">
     <value>新建网络 - {0}</value>
@@ -7385,7 +7802,7 @@ SCSI ID: {2}
     <value>此服务器的版本与主服务器不同</value>
   </data>
   <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>无法将免费版 [XenServer] 添加到使用 [XenServer] Advanced Edition 或更高版本的许可证的池中</value>
+    <value>不能将免费版 [XenServer] 添加到使用 [XenServer] Advanced Edition 或更高版本的许可证的池中</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>此服务器有正在运行或已挂起的 VM</value>
@@ -7400,7 +7817,7 @@ SCSI ID: {2}
     <value>无法将已获得许可的服务器添加到未获得许可的池</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>此服务器使用的 [XenServer] 许可证版本与池主服务器不同</value>
+    <value>此服务器的许可证与池主服务器的许可证不同</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>此服务器的 Linux 软件包安装状态与主服务器不同</value>
@@ -7415,7 +7832,7 @@ SCSI ID: {2}
     <value>您在主服务器上的当前角色无权将主机添加到主服务器的池中</value>
   </data>
   <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>无法将使用 [XenServer] Advanced Edition 或更高版本的许可证的服务器添加到免费版 [XenServer] 的池中</value>
+    <value>不能将使用 [XenServer product] Advanced Edition 或更高版本的许可证的服务器添加到免费版服务器的池中</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>池操作受该服务器许可证的限制</value>
@@ -7429,11 +7846,21 @@ SCSI ID: {2}
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
   </data>
+  <data name="NEWSR_CIFS_ACTION" xml:space="preserve">
+    <value>SMB SR [{0}]</value>
+  </data>
+  <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
+    <value>SMB 服务器是常见的 Windows 共享文件系统基础结构形式，可用作虚拟磁盘的存储库基底。
+
+由于 SMB 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 XenMotion 在这些服务器之间迁移。
+
+配置 SMB 存储库时，只需提供 SMB 服务器的主机名或 IP 地址、用户名、密码以及用来包含存储库的目录路径。SMB 服务器必须配置为导出池中所有服务器的指定路径。</value>
+  </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
-    <value>如果以 Windows (CIFS)共享形式提供要连接到主机或池的 VM 安装 ISO 映像库，请选择此选项。</value>
+    <value>如果以 Windows (SMB/CIFS)共享形式提供要连接到主机或池的 VM 安装 ISO 映像库，请选择此选项。</value>
   </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
-    <value>CIFS ISO 库 [{0}]</value>
+    <value>SMB ISO 库 [{0}]</value>
   </data>
   <data name="NEWSR_CSLG_ADAPTER_PAGE_TITLE" xml:space="preserve">
     <value>选择存储系统适配器</value>
@@ -7472,7 +7899,7 @@ SCSI ID: {2}
     <value>精简</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic 是一种可伸缩的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如 XenMotion 和高可用性。</value>
+    <value>Dell EqualLogic 是一种可扩展的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如 XenMotion 和高可用性。</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -7486,6 +7913,9 @@ SCSI ID: {2}
   <data name="NEWSR_EQUAL_LOGIC_FILER_PAGE_TITLE" xml:space="preserve">
     <value>输入 Dell EqualLogic 文件管理器详细信息</value>
   </data>
+  <data name="NEWSR_FCOE_DEFAULT_NAME" xml:space="preserve">
+    <value>软件 FCoE 虚拟磁盘存储</value>
+  </data>
   <data name="NEWSR_HBA_DEFAULT_NAME" xml:space="preserve">
     <value>硬件 HBA 虚拟磁盘存储</value>
   </data>
@@ -7493,7 +7923,7 @@ SCSI ID: {2}
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
   <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>如果在此 LUN 中创建新虚拟磁盘，将销毁其中的任何数据。必须确保没有其他系统在使用该 LUN (包括任何 [XenServer])，否则虚拟磁盘在使用时可能会遭到损坏。
+    <value>在此 LUN 中创建新虚拟磁盘将销毁其中的任何数据。必须确保没有其他系统正在使用该 LUN (包括任何服务器)，否则虚拟磁盘在使用时可能会遭到损坏。
 
 是否格式化磁盘?</value>
   </data>
@@ -7514,6 +7944,16 @@ SCSI ID: {2}
   </data>
   <data name="NEWSR_LUN_IN_USE_ON_SERVER" xml:space="preserve">
     <value>该 LUN 已在服务器 {1} 中作为 SR {0} 使用。</value>
+  </data>
+  <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
+    <value>[XenServer] 主机在这种情况下使用支持 FCoE 的受支持融合网络适配器(CNA)来支持基于软件的以太网光纤通道。
+
+要将 LUN 显示给主机，必须手动完成所需要的所有配置，其中包括配置 FCoE 架构以及将 LUN 分配给 CNA 的公共全球名称(PWWN)。 
+
+完成此配置后，此向导将引导您完成发现和装载对主机 CNA 可用的 LUN 作为 SCSI 设备。然后可以使用该 SCSI 设备访问 LUN，就像本地连接了 SCSI 设备一样。</value>
+  </data>
+  <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
+    <value>软件 FCoE SR [{0} - {1}]</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
     <value>[XenServer] 主机通过主机总线适配器(HBA)支持光纤通道(FC)、以太网光纤通道(FCoE)和共享串联 SCSI (SAS)存储局域网。
@@ -7544,7 +7984,7 @@ SCSI ID: {2}
     <value>新存储库创建摘要</value>
   </data>
   <data name="NEWSR_LVMOHBA_SUMMARY_SUCCESS_MULTIPLE" xml:space="preserve">
-    <value>已成功创建 {0} 个 SR </value>
+    <value>已成功创建 {0} 个 SR</value>
   </data>
   <data name="NEWSR_LVMOHBA_SUMMARY_SUCCESS_SINGLE" xml:space="preserve">
     <value>SR 已成功创建</value>
@@ -7558,7 +7998,7 @@ SCSI ID: {2}
 对共享 SR 使用 LVM 提供的性能优势与对本地磁盘存储使用非共享 LVM 相同，但前者还能够灵活地启用 VM。</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
-    <value>警告: 必须确保以下 SR 当前未由任何未连接 [XenCenter] 的服务器使用。否则可能导致数据丢失。
+    <value>警告: 必须确保以下 SR 当前未由任何未连接到 [XenCenter] 的服务器使用。否则可能会导致数据丢失。
 
 SR:  {0}
 
@@ -7595,9 +8035,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
     <value>如果以 NFS 共享形式提供要连接到主机或池的 VM 安装 ISO 映像库，请选择此选项。</value>
   </data>
-  <data name="NEWSR_NFS_NO_SRS_FOUND" xml:space="preserve">
-    <value>&lt;未找到 SR&gt;</value>
-  </data>
   <data name="NEWSR_NOWHERE_TO_CREATE" xml:space="preserve">
     <value>指定的文件管理器没有现有 SR，并且找不到创建新 SR 的位置。</value>
   </data>
@@ -7607,6 +8044,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWSR_NO_LUNS_FOUND" xml:space="preserve">
     <value>在 {0} 上未找到 LUN。</value>
   </data>
+  <data name="NEWSR_NO_SRS_FOUND" xml:space="preserve">
+    <value>&lt;未找到 SR&gt;</value>
+  </data>
+  <data name="NEWSR_PATH_CIFS" xml:space="preserve">
+    <value>输入 SMB 存储的路径</value>
+  </data>
   <data name="NEWSR_PATH_ISCSI" xml:space="preserve">
     <value>输入 iSCSI 存储的路径</value>
   </data>
@@ -7614,7 +8057,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>输入 NFS ISO 存储的路径</value>
   </data>
   <data name="NEWSR_PATH_ISO_CIFS" xml:space="preserve">
-    <value>输入 CIFS 存储的路径</value>
+    <value>输入 SMB ISO 存储的路径</value>
   </data>
   <data name="NEWSR_PATH_NFS" xml:space="preserve">
     <value>输入 NFS 存储的路径</value>
@@ -7667,6 +8110,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVMWIZARD_CDMEDIAPAGE_TITLE" xml:space="preserve">
     <value>查找操作系统安装介质</value>
+  </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE" xml:space="preserve">
+    <value>云配置参数</value>
+  </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE_TITLE" xml:space="preserve">
+    <value>配置云配置参数</value>
   </data>
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_HOST" xml:space="preserve">
     <value>复制 BIOS 字符串自</value>
@@ -7826,6 +8275,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
     <value>SR“{0}”被过度使用。只有 {1} 可用空间，但新 VM 需要 {2} 可用空间。</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN" xml:space="preserve">
+    <value>SR“{0}”过载。可用空间只有 {1}，而新 VM 需要 {2} (初始空间为 {3})。</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>为新 VM 配置存储</value>
   </data>
@@ -7837,6 +8289,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
     <value>[Citrix]</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
+    <value>CoreOS</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CUSTOM" xml:space="preserve">
     <value>自定义</value>
@@ -7858,6 +8313,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_REDHAT" xml:space="preserve">
     <value>Red Hat</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_SCILINUX" xml:space="preserve">
+    <value>Scientific Linux</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_SNAPSHOTS" xml:space="preserve">
     <value>快照</value>
@@ -7902,7 +8360,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要创建磁盘的存储库</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>在要安装 [XenServer product] Tools 的 VM 中，至少有一个没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
+    <value>在要安装 [XenServer product] Tools 的 VM 中，至少有一个 VM 没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATED" xml:space="preserve">
     <value>已创建 DVD 驱动器</value>
@@ -7920,7 +8378,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>必须关闭后重新启动 VM，才能完成安装新 DVD 驱动器。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
-    <value>必须关闭后重新启动 VM，才能完成安装新 DVD 驱动器。
+    <value>必须关闭并重新启动 VM，才能完成安装新 DVD 驱动器。
 重新启动 VM 后，请再次单击“安装 [XenServer product] Tools”菜单项。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
@@ -7954,32 +8412,32 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 所有池成员必须使用同一种身份验证方法。是否在这些服务器上启用 AD 身份验证并将这些服务器加入该池所在的域中?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
-    <value>您正在尝试将服务器“{0}”添加到主服务器使用较低级别 CPU 的池中。
+    <value>正在尝试将服务器“{0}”添加到主服务器使用较旧 CPU 的池中。
 
-[XenServer] 可以重新启动服务器并将其 CPU 降至主服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性列表”中所列的 CPU 组合。
+[XenServer] 可以通过重新启动服务器并将其 CPU 降至主服务器的级别来继续进行操作。这样将关闭服务器上运行的所有 VM。此功能适用于“[XenServer] 硬件兼容性列表”中列出的 CPU 组合。
 
-是否执行此操作?</value>
+是否要执行此操作?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>您正在尝试将以下服务器添加到主服务器使用较低级别 CPU 的池中:
+    <value>正在尝试将以下服务器添加到主服务器使用较旧 CPU 的池中:
 
 {0}
 
-[XenServer] 可以重新启动服务器并将其 CPU 降至主服务器的级别，从而继续操作。这样做将关闭服务器上运行的所有 VM。该功能适用于“[XenServer] 硬件兼容性列表”中所列的 CPU 组合。
+[XenServer] 可以通过重新启动服务器并将其 CPU 降至主服务器的级别来继续进行操作。这样将关闭服务器上运行的所有 VM。此功能适用于“[XenServer] 硬件兼容性列表”中列出的 CPU 组合。
 
-是否执行此操作?</value>
+是否要执行此操作?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE" xml:space="preserve">
-    <value>您正在尝试将服务器“{0}”添加到许可证已升级的池中。
+    <value>您正在尝试将服务器“{0}”添加到已获授权的池。
 
-是否将主服务器的许可应用到该服务器?</value>
+是否要将来自主服务器的许可应用到此服务器?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>您正在尝试将以下服务器添加到许可证已升级的池中。
+    <value>您正在尝试将以下服务器添加到已获授权的池。
 
 {0}
 
-是否将主服务器的许可应用到这些服务器?</value>
+是否要将来自主服务器的许可应用到这些服务器?</value>
   </data>
   <data name="NEW_POOL_SUPP_PACK" xml:space="preserve">
     <value>池中所有服务器上都应安装以下补充软件包，但目前尚未安装:
@@ -7994,6 +8452,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 {0}
 
 强烈建议您首先单击“取消”并将最新版本的软件包应用到所有服务器，然后再创建池。</value>
+  </data>
+  <data name="NEW_SEARCH" xml:space="preserve">
+    <value>新搜索</value>
   </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>与 {0} 的连接丢失</value>
@@ -8146,8 +8607,49 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_CONTAINS" xml:space="preserve">
     <value>不包含</value>
   </data>
+  <data name="NOT_ENOUGH_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>此主机的磁盘空间不足，无法安装此更新</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
+    <value>可用空间: {0}</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
+    <value>[XenCenter] 可以通过删除其余的更新文件释放 {0}。是否要继续清理?</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_INSTALL" xml:space="preserve">
+    <value>“{0}”上的空间不足，无法安装更新“{1}”。</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
+    <value>释放部分空间并重试。</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
+    <value>所需空间: {0}</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_UPLOAD" xml:space="preserve">
+    <value>“{0}”上的空间不足，无法上载更新“{1}”。</value>
+  </data>
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>不在任何文件夹中</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
+    <value>本地磁盘上的 VM 将阻止磁盘重新分区。
+
+新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 中可用。
+
+但是，本地存储上存在 VM，因此将保留当前的分区方案。要在升级到 [XenServer] [BRANDING_VERSION_7_0] 时从重新分区中获益，必须先从本地存储中删除 VM。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: 本地磁盘上的 VM 将阻止磁盘重新分区。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
+    <value>本地存储的磁盘大小阻止重新分区。
+
+新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 中可用。
+
+但是，由于空间不足，无法执行重新分区，因此将保留当前的分区方案。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT" xml:space="preserve">
+    <value>{0}: 本地存储的磁盘大小阻止重新分区。</value>
   </data>
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>不受信任</value>
@@ -8172,6 +8674,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
     <value>没有服务器符合成为新池主服务器的条件</value>
+  </data>
+  <data name="NO_GPU_IN_POOL" xml:space="preserve">
+    <value>GPU 配置和监视已禁用，因为此池中没有可用的 GPU。</value>
+  </data>
+  <data name="NO_GPU_ON_HOST" xml:space="preserve">
+    <value>GPU 配置和监视已禁用，因为此主机上没有可用的 GPU。</value>
   </data>
   <data name="NO_HALTED_VMS" xml:space="preserve">
     <value>没有要导出的已停止或已挂起的 VM</value>
@@ -8218,8 +8726,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>带标记“{0}”的对象</value>
   </data>
+  <data name="OBJECT_IN_POOL" xml:space="preserve">
+    <value>“{1}”中的 {0}</value>
+  </data>
+  <data name="OBJECT_ON_SERVER" xml:space="preserve">
+    <value>“{1}”上的 {0}</value>
+  </data>
   <data name="OK" xml:space="preserve">
-    <value>确定</value>
+    <value>正常</value>
   </data>
   <data name="OLDER_THAN_CURRENT_SERVER" xml:space="preserve">
     <value>早于当前服务器</value>
@@ -8232,6 +8746,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>仅能升级使用 StorageLink Gateway NetApp、Dell EqualLogic 或 SMI-SOnly 适配器的 VM</value>
+  </data>
+  <data name="ON_SERVER" xml:space="preserve">
+    <value>在“{0}”上</value>
   </data>
   <data name="OPERATING_SYSTEM" xml:space="preserve">
     <value>操作系统</value>
@@ -8329,6 +8846,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PASTE" xml:space="preserve">
     <value>粘贴</value>
   </data>
+  <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
+    <value>清理...</value>
+  </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>不需要操作</value>
   </data>
@@ -8349,6 +8869,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION" xml:space="preserve">
     <value>未知</value>
+  </data>
+  <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
+    <value>更多信息...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>解决池问题</value>
@@ -8407,6 +8930,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>执行更新预检查是为了确认更新 {0} 能够在服务器上应用。</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
+    <value>执行更新预检查以验证是否能够将所选更新应用到服务器。</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>解决</value>
   </data>
@@ -8426,7 +8952,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择现有更新进行安装，或上载新更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>[XenServer] 更新|*.{0};*.xsoem</value>
+    <value>[XenServer] 更新和补充包(*.{0}、*.iso)|*.{0};*.iso</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
+    <value>无法在此版本的 [XenServer] 上安装补充包</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
@@ -8434,11 +8963,31 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
+    <value>更新不适用</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>选择服务器</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>选择要更新的服务器</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
+    <value>[XenCenter] 现在正在下载您的更新并将其上载到在上一步骤中指定的服务器。
+请等待完成这些操作，然后单击“下一步”继续进行安装。</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD" xml:space="preserve">
+    <value>[XenCenter] 正在将您的更新上载到在上一步骤中指定的服务器。
+请等待完成此操作，然后单击“下一步”继续安装。</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
+    <value>上载</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
+    <value>下载所选文件并将其上载到您的服务器</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD" xml:space="preserve">
+    <value>正在将所选文件上载到您的服务器</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>从 VM 中弹出任何虚拟 CD</value>
@@ -8453,8 +9002,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0,4}{1}</value>
   </data>
   <data name="PATCHING_WIZARD_ERROR" xml:space="preserve">
-    <value>
-{0} 错误。</value>
+    <value>{0} 错误。</value>
   </data>
   <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
     <value>{0}: {1} 正常。</value>
@@ -8469,17 +9017,41 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHING_WIZARD_SOLVING_PROBLEMS" xml:space="preserve">
     <value>正在解决问题</value>
   </data>
+  <data name="PATCHING_WIZARD_WEBPAGE_CELL" xml:space="preserve">
+    <value>转至 Web 页面</value>
+  </data>
   <data name="PATCH_APPLIED" xml:space="preserve">
     <value>更新“{0}”已应用到服务器“{1}”</value>
+  </data>
+  <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
+    <value>{0} 
+安装大小: {1}</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
+    <value>从 {1} 下载 {0} 失败</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
+    <value>从 {1} 下载更新 {0} 失败。
+
+该更新安装在“{1}”上，但更新安装文件可能已被删除。
+
+请改为从 .{2} 文件上载更新。</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>从 {1} 下载更新 {0} 失败。
+
+该更新以前已上载到“{1}”，但更新安装文件可能已被删除。
+
+请改为从 .{2} 文件上载更新。</value>
   </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 修改日期: {1}
 创建日期: {2}
-大小: {3} MB</value>
+大小: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>该修补程序适用于 [XenServer] {0}。</value>
+    <value>此修补程序适用于版本匹配正则表达式“{0}”的服务器。</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>未找到</value>
@@ -8489,7 +9061,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 未找到文件</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
-    <value>更新已上载到服务器“{0}”</value>
+    <value>更新已上载到服务器“{0}” </value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA 版本 1 (ova.xml)|ova.xml</value>
@@ -8513,7 +9085,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>权限遭拒</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Per-Socket(&amp;S)(需要 {0} 个)</value>
+    <value>[Citrix] [XenServer product] Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理设备</value>
@@ -8729,6 +9301,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="POOL_JOIN_IMPOSSIBLE" xml:space="preserve">
     <value>无法加入池</value>
   </data>
+  <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
+    <value>此服务器不得具有任何绑定、VLAN 或跨服务器专用网络</value>
+  </data>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>池许可证</value>
   </data>
@@ -8848,10 +9423,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>未安装 [XenServer product] Tools</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenServer product] Tools 已过期(已安装 {0} 版本)</value>
+    <value>[XenServer product] Tools 已过时(安装的版本为 {0})</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>[XenServer product] Tools 已过期</value>
+    <value>[XenServer product] Tools 已过时</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS 限制必须介于 1 和 2147483647 之间(或者留空)。</value>
@@ -9032,18 +9607,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 要从此服务器注销并使用其他用户帐户重新登录，请在下面输入帐户凭据，然后单击“确定”。</value>
   </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS" xml:space="preserve">
-    <value>刷新存储系统(&amp;F)</value>
-  </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS_ACTION_END" xml:space="preserve">
-    <value>刷新完成</value>
-  </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS_ACTION_START" xml:space="preserve">
-    <value>正在刷新存储系统</value>
-  </data>
-  <data name="REFRESH_STORAGELINK_SYSTEMS_ACTION_TITLE" xml:space="preserve">
-    <value>刷新 {0} 上的存储系统</value>
-  </data>
   <data name="REGION_LABLE" xml:space="preserve">
     <value>区域(&amp;R):</value>
   </data>
@@ -9066,7 +9629,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已删除更新</value>
   </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
-    <value>已从 vApp 删除</value>
+    <value>已从 vApp 删除 </value>
   </data>
   <data name="REMOVED_VMS_FROM_POLICY" xml:space="preserve">
     <value>已从 VM 保护策略中删除</value>
@@ -9124,24 +9687,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="REMOVE_STORAGELINK_VOLUME_MESSAGEBOX_TITLE" xml:space="preserve">
     <value>删除 StorageLink 卷</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEMS_ACTION_END_DESCRIPTION" xml:space="preserve">
-    <value>已成功删除 StorageLink 存储系统</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEMS_ACTION_START_DESCRIPTION" xml:space="preserve">
-    <value>正在删除 StorageLink 存储系统</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEMS_ACTION_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储系统</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEM_ACTION_END_DESCRIPTION" xml:space="preserve">
-    <value>已成功删除 StorageLink 存储系统“{0}”</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEM_ACTION_START_DESCRIPTION" xml:space="preserve">
-    <value>正在删除 StorageLink 存储系统“{0}”</value>
-  </data>
-  <data name="REMOVE_STORAGE_LINK_SYSTEM_ACTION_TITLE" xml:space="preserve">
-    <value>删除 StorageLink 存储系统“{0}”</value>
   </data>
   <data name="REMOVE_STORAGE_SYSTEM" xml:space="preserve">
     <value>删除存储系统(&amp;E)</value>
@@ -9349,7 +9894,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 要跳过此服务器并继续在池中的下一个服务器上进行安装，请单击“跳过此服务器”。请注意，不支持在安装了不同 [XenServer] 版本的服务器上运行池，因此，过后应尽快升级此池滚动升级过程中未升级的任何服务器。
 
-必须先升级主机，因此，如果跳过此主机，将取消此主机的池滚动升级。
+必须先升级主服务器，因此，如果跳过此主服务器，则将取消此池的池滚动升级过程。
 </value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
@@ -9371,10 +9916,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在检查许可状态</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>{0}: [XenServer] [BRANDING_VERSION_6_2] 中删除了 VM 保护策略</value>
+    <value>{0}: [XenServer] [BRANDING_VERSION_6_2] 不再使用 VM 保护策略</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>{0}: [XenServer] 6.2 中不再使用 WSS 服务器</value>
+    <value>{0}: [XenServer] [BRANDING_VERSION_6_2] 不再使用 WSS 服务器</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
@@ -9484,6 +10029,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SECURITY" xml:space="preserve">
     <value>安全</value>
   </data>
+  <data name="SECURITYEDITPAGE_RUBRIC_HOST" xml:space="preserve">
+    <value>选择与此服务器进行通信时可以使用的安全协议。</value>
+  </data>
+  <data name="SECURITYEDITPAGE_SUBTEXT_SSL" xml:space="preserve">
+    <value>SSL 和 TLS</value>
+  </data>
+  <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
+    <value>仅限 TLS 1.2</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>安全检查</value>
   </data>
@@ -9497,7 +10051,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>所选主机或池未连接</value>
   </data>
   <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
-    <value>必须分别对不同版本的 [XenServer] 进行许可</value>
+    <value>必须分别对不同版本的 [XenServer] 进行授权</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>选择过滤器...</value>
@@ -9523,9 +10077,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SELECT_VMS_TO_SUSPEND_DLOG_TITLE" xml:space="preserve">
     <value>选择要挂起的 VM - 服务器 {0}</value>
   </data>
-  <data name="SERIAL_NUMBER" xml:space="preserve">
-    <value>序列号</value>
-  </data>
   <data name="SERVER" xml:space="preserve">
     <value>服务器</value>
   </data>
@@ -9542,7 +10093,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>服务器、VM、自定义模板和远程 SR</value>
   </data>
   <data name="SERVER_API_INCOMPATIBLE" xml:space="preserve">
-    <value>该服务器正在使用与 [XenCenter] 不兼容的 API。</value>
+    <value>此服务器正在使用与 [XenCenter] 不兼容的 API。</value>
   </data>
   <data name="SERVER_COLON" xml:space="preserve">
     <value>服务器:</value>
@@ -9554,7 +10105,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>服务器(&amp;S):</value>
   </data>
   <data name="SERVER_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenServer] 已过期</value>
+    <value>[XenServer] 已过时</value>
   </data>
   <data name="SERVER_OUT_OF_DATE_DETAIL" xml:space="preserve">
     <value>服务器“{0}”已过期，不能再与之连接。</value>
@@ -9577,11 +10128,20 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SERVER_TIME" xml:space="preserve">
     <value>池主服务器上的当前时间为: {0}</value>
   </data>
+  <data name="SERVER_TOO_OLD" xml:space="preserve">
+    <value>此版本的 [XenCenter] 支持 [XenServer] 6.0 及更高版本。</value>
+  </data>
+  <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
+    <value>使用早期版本的 [XenCenter] 管理此服务器。</value>
+  </data>
   <data name="SERVER_X" xml:space="preserve">
     <value>服务器“{0}”</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>设置</value>
+  </data>
+  <data name="SETTING_SECURITY_SETTINGS" xml:space="preserve">
+    <value>设置安全设置</value>
   </data>
   <data name="SETTING_VM_PROPERTIES" xml:space="preserve">
     <value>正在设置 VM 属性</value>
@@ -9633,12 +10193,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SET_STORAGELINK_CREDS_TO_POOL_ACTION_TITLE" xml:space="preserve">
     <value>将 StorageLink 凭据设置为“{0}”</value>
-  </data>
-  <data name="SET_STORAGELINK_LICENSE_SERVER_ACTION_START" xml:space="preserve">
-    <value>正在为“{0}”设置许可证服务器</value>
-  </data>
-  <data name="SET_STORAGELINK_LICENSE_SERVER_ACTION_TITLE" xml:space="preserve">
-    <value>为“{0}”设置许可证服务器</value>
   </data>
   <data name="SEVERITY" xml:space="preserve">
     <value>安全</value>
@@ -9712,11 +10266,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>正在关闭 {1} 个 VM 中的第 {0} 个</value>
   </data>
-  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
-    <value>单服务器专用网络</value>
-  </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>正在将数字签名应用到设备...</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>单服务器专用网络</value>
   </data>
   <data name="SIZE" xml:space="preserve">
     <value>大小</value>
@@ -9797,6 +10351,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SNAPSHOT_OF" xml:space="preserve">
     <value>快照属于</value>
   </data>
+  <data name="SNAPSHOT_OF_TITLE" xml:space="preserve">
+    <value>{0} (“{1}”{2} 的快照)</value>
+  </data>
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>快照还原</value>
   </data>
@@ -9849,7 +10406,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>使用权限更大的用户帐户重试。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>遇到一些错误。有关详细信息，请参阅 [XenCenter] 日志。</value>
@@ -9882,7 +10439,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已忘记 SR</value>
   </data>
   <data name="SRWIZARD_CIFS_LIBRARY" xml:space="preserve">
-    <value>CIFS ISO 库</value>
+    <value>SMB ISO 库</value>
+  </data>
+  <data name="SRWIZARD_CIFS_STORAGE" xml:space="preserve">
+    <value>SMB 虚拟存储</value>
   </data>
   <data name="SRWIZARD_ISCSI_STORAGE" xml:space="preserve">
     <value>iSCSI 虚拟磁盘存储</value>
@@ -9900,13 +10460,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>该 SR 上当前正在执行某项操作。</value>
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
-    <value>通过 [XenCenter] 无法销毁该 SR。</value>
+    <value>通过 [XenCenter] 无法销毁此 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>通过 [XenCenter] 无法分离该 SR。</value>
+    <value>通过 [XenCenter] 无法分离此 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
-    <value>通过 [XenCenter] 无法忘记该 SR。</value>
+    <value>通过 [XenCenter] 无法忘记此 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_SEEN" xml:space="preserve">
     <value>从 {0} 无法看到该存储库</value>
@@ -9916,6 +10476,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SR_DETACHED" xml:space="preserve">
     <value>SR 当前已分离。</value>
+  </data>
+  <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
+    <value>初始分配: {0}
+增量分配: {1}</value>
   </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>该 SR 不需要升级。</value>
@@ -9935,8 +10499,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>没有主服务器的 VM 不能位于本地存储上</value>
   </data>
+  <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
+    <value>磁盘大小({0})超过 SR 大小({1})</value>
+  </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>如果只有 {1} 可用，则需要 {0}</value>
+  </data>
+  <data name="SR_QUANTUM_ALLOCATION_LIMITS_INFO" xml:space="preserve">
+    <value>增量分配限制如下: 
+下限: SR 大小/{0} (不低于 {1})
+上限: SR 大小/{2}</value>
   </data>
   <data name="SR_REFRESH_ACTION_DESC" xml:space="preserve">
     <value>正在扫描 SR</value>
@@ -9959,11 +10531,26 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} 已用空间，总计 {1} (已分配 {2})</value>
   </data>
+  <data name="SR_THICK_PROVISIONING" xml:space="preserve">
+    <value>完整置备</value>
+  </data>
+  <data name="SR_THIN_PROVISIONING" xml:space="preserve">
+    <value>精简置备</value>
+  </data>
+  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
+    <value>精简置备(占 {0}%)</value>
+  </data>
+  <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
+    <value>由于 SR 已分离，因此无法回收释放的空间。</value>
+  </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>无法连接到 iSCSI 目标</value>
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>{1} 上的 SR {0}</value>
+  </data>
+  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>[XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>已启动</value>
@@ -10068,7 +10655,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>设备位置</value>
   </data>
   <data name="STORAGE_DISK" xml:space="preserve">
-    <value>磁盘</value>
+    <value>磁盘 </value>
   </data>
   <data name="STORAGE_IN_USE" xml:space="preserve">
     <value>SR“{0}”正在“{1}”上使用，无法引入。必须先从“{1}”将其分离，然后才能再次使用。</value>
@@ -10084,6 +10671,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="STORAGE_PRIORITY" xml:space="preserve">
     <value>优先级</value>
+  </data>
+  <data name="STORAGE_PROVISIONING_METHOD_TITLE" xml:space="preserve">
+    <value>选择存储置备方法</value>
+  </data>
+  <data name="STORAGE_PROVISIONING_SETTINGS" xml:space="preserve">
+    <value>存储置备设置</value>
   </data>
   <data name="STORAGE_READ_ONLY" xml:space="preserve">
     <value>只读</value>
@@ -10113,7 +10706,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>, </value>
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
-    <value> 和</value>
+    <value> 和 </value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>
@@ -10127,8 +10720,31 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>日</value>
   </data>
+  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+    <value>{0} (版本: {1})</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
+    <value>在“{1}”上安装补充包“{0}”失败。</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
+    <value>{0}
+
+有关如何在 [XenServer] 主机上手动安装补充包的说明，请参阅《[XenServer product] 管理员指南》。</value>
+  </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (未在 {1} 上安装)</value>
+  </data>
+  <data name="SUPP_PACK_TEMP_VDI_DESCRIPTION" xml:space="preserve">
+    <value>用于安装补充包的临时虚拟磁盘</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADED" xml:space="preserve">
+    <value>文件已上载到“{0}”</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADING" xml:space="preserve">
+    <value>正在上载文件</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADING_TO" xml:space="preserve">
+    <value>正在上载到“{0}”</value>
   </data>
   <data name="SUPP_PACK_VERSIONS_DIFFER" xml:space="preserve">
     <value>{0} (并非所有主机上版本都相同)</value>
@@ -10143,7 +10759,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在挂起指定的 VM</value>
   </data>
   <data name="SUSPENDING_VM_OUT_OF" xml:space="preserve">
-    <value>正在挂起第 {0} 个 VM，共 {1} 个 </value>
+    <value>正在挂起第 {0} 个 VM，共 {1} 个</value>
   </data>
   <data name="SUSPEND_SHUTDOWN_VMS_ACTION_DESC" xml:space="preserve">
     <value>正在准备挂起并关闭 VM...</value>
@@ -10206,10 +10822,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer product] Tools: 不存在</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>[XenServer product] Tools: 已过期(已安装 {0}.{1} 版本)</value>
+    <value>[XenServer product] Tools: 已过时(安装的版本为 {0}.{1})</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>[XenServer product] Tools: 最新</value>
+    <value>[XenServer product] Tools: 最新版本</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU 数: {0}</value>
@@ -10308,7 +10924,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 运行时无法激活或取消激活系统磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>在未安装 [XenServer product] Tools 的情况下，无法从运行中的 VM 激活或取消激活磁盘</value>
+    <value>不能从正在运行的未安装 [XenServer product] Tools 的 VM 中激活或取消激活磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法停用网络</value>
@@ -10323,7 +10939,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 运行时无法删除系统磁盘</value>
   </data>
   <data name="TOOLTIP_DELETE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>在未安装 [XenServer product] Tools 的情况下，无法从运行中的 VM 中删除磁盘</value>
+    <value>不能从正在运行的未安装 [XenServer product] Tools 的 VM 中删除磁盘</value>
   </data>
   <data name="TOOLTIP_DETACH_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法删除磁盘</value>
@@ -10335,10 +10951,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>必须先取消激活磁盘，才能进行分离。</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>在未安装 [XenServer product] Tools 的情况下，无法从运行中的 VM 删除磁盘</value>
+    <value>不能从正在运行的未安装 [XenServer product] Tools 的 VM 中移除磁盘</value>
+  </data>
+  <data name="TOOLTIP_EDIT_NETWORK_IO_DRIVERS" xml:space="preserve">
+    <value>必须安装 I/O 驱动程序才能编辑正在运行的 VM 上的网络</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>必须安装 [XenServer product] Tools 才能在运行中的 VM 上编辑网络</value>
+    <value>必须安装 [XenServer product] Tools 才能编辑正在运行的 VM 上的网络</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>创建 VM 时，默认模板最多支持 {0} 个网络</value>
@@ -10347,13 +10966,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已达到该模板的最大网络数。</value>
   </data>
   <data name="TOOLTIP_NICS_PER_BOND_LIMIT" xml:space="preserve">
-    <value>[XenServer] 对每个绑定仅支持 {0} 个 NIC。</value>
+    <value>[XenServer] 仅支持每个绑定使用 {0} 个 NIC。</value>
+  </data>
+  <data name="TOOLTIP_REMOVE_NETWORK_IO_DRIVERS" xml:space="preserve">
+    <value>必须安装 I/O 驱动程序才能删除正在运行的 VM 上的网络</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_SUSPENDED" xml:space="preserve">
     <value>无法从挂起的 VM 中删除网络</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>必须安装 [XenServer product] Tools 才能删除运行中的 VM 上的网络</value>
+    <value>必须安装 [XenServer product] Tools 才能删除正在运行的 VM 上的网络</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>无法删除该网络，因为它是物理设备</value>
@@ -10404,13 +11026,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>从 OVF 或 OVA 包导入设备。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>将本地存储的 VM、模板或快照作为新 VM 导入。</value>
   </data>
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
-    <value>[XenCenter] 无法从文件 {0} 中导入保存的搜索。
+    <value>[XenCenter] 无法从文件“{0}”中导入保存的搜索。
 
 请确认该文件属于有效的 {1} 导出。</value>
   </data>
@@ -10518,7 +11140,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已安装更新</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
-    <value>正在将更新 {0} 安装到 {1} ... </value>
+    <value>正在将更新 {0} 安装到 {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
+    <value>正在将更新安装到 {0} 台服务器...</value>
   </data>
   <data name="UPDATES_WIZARD_APPLY_FAILED" xml:space="preserve">
     <value>更新无法应用。是否要查看输出?</value>
@@ -10621,7 +11246,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: VM {1} 使用本地存储，无法迁移。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为: *.xsoem 和 *.{0}</value>
+    <value>所选文件的扩展名无效。有效扩展名为 *.{0} 和 *.iso</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>此存储库空间不足，无法挂起所需的 VM。</value>
@@ -10648,7 +11273,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM {0} 未安装 [XenServer product] Tools。</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>必须安装最新版本的 [XenServer product] Tools，才能挂起 VM {0}。</value>
+    <value>安装最新版本的 [XenServer product] Tools 之前不能暂停 VM {0}。</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
     <value>选中每个要更新的每个服务器所对应的复选框。选中池的复选框可选择该池中的所有可用服务器。</value>
@@ -10682,6 +11307,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>正在重新启动 {0} ... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
+    <value>正在从 {1} 中删除更新 {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>单击此处修复</value>
@@ -10720,6 +11348,24 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
     <value>{0}: 由于在池 {1} 上启用了 WLB，因此已跳过检查。</value>
+  </data>
+  <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
+    <value>已对更新列表应用过滤器。您想消除每个已连接的服务器中的所有更新，还是仅消除已选择查看的更新? 在这两种情况下，消除的更新都将从服务器中永久删除。
+
+请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
+  </data>
+  <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
+    <value>此操作将从每个已连接的服务器中永久删除所有更新。是否要继续?
+
+请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
+  </data>
+  <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
+    <value>是否确实要消除此更新?</value>
+  </data>
+  <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
+    <value>此操作将从服务器中永久删除选定更新。是否要继续?
+
+请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
   </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>您已对更新列表应用过滤器。您想从每个已连接的服务器中导出所有更新，还是仅导出已选择查看的更新?</value>
@@ -10808,11 +11454,29 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPLOADING_PATCH" xml:space="preserve">
     <value>正在上载更新...</value>
   </data>
+  <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
+    <value>正在上载 - {0}%</value>
+  </data>
   <data name="UPLOADING_PATCH_TO" xml:space="preserve">
-    <value>正在将更新上载到服务器“{0}”...</value>
+    <value>正在上载到服务器“{0}”...</value>
+  </data>
+  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
+    <value>已上载</value>
+  </data>
+  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
+    <value>正在上载...</value>
+  </data>
+  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
+    <value>更新已成功上载到所选服务器</value>
+  </data>
+  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
+    <value>上载</value>
+  </data>
+  <data name="UPLOAD_PATCH_UPLOADED" xml:space="preserve">
+    <value>已上载</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
+    <value>升级您的 [XenServer] 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS_MORE" xml:space="preserve">
     <value>
@@ -10820,7 +11484,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 警报和报告功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 VM 实时迁移。通过此功能，您能够在同一个池中的服务器之间或跨池迁移共享存储或本地存储上正在运行的 VM，而不会导致 VM 停机。 </value>
+    <value>升级您的 [XenServer] 许可证以启用 VM 实时迁移。通过此功能，您能够在同一池中的服务器之间或跨池迁移共享存储或本地存储上正在运行的 VM，而不会导致 VM 停机。 </value>
   </data>
   <data name="UPSELL_BLURB_CPM_MORE" xml:space="preserve">
     <value>
@@ -10828,7 +11492,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 跨池迁移功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用异构池。异构池允许由使用不同 CPU 的主机构成一个资源池，并允许虚拟机在这些主机之间迁移。</value>
+    <value>升级您的 [XenServer] 许可证以启用异构池。异构池允许由使用不同 CPU 的主机构成一个资源池，并允许虚拟机在这些主机之间迁移。</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING_MORE" xml:space="preserve">
     <value>
@@ -10836,7 +11500,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 异构池功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用动态内存控制功能。通过动态内存控制功能，[XenServer] 可以调整活动虚拟机的内存，并对主机服务器不断变化的要求进行动态响应。</value>
+    <value>升级您的 [XenServer] 许可证以启用动态内存控制功能。通过动态内存控制功能，[XenServer] 可以调整活动虚拟机的内存，并对主机服务器不断变化的要求进行动态响应。</value>
   </data>
   <data name="UPSELL_BLURB_DMC_MORE" xml:space="preserve">
     <value>
@@ -10844,7 +11508,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 动态内存控制功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
+    <value>升级您的 [XenServer] 许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
   </data>
   <data name="UPSELL_BLURB_DR_MORE" xml:space="preserve">
     <value>
@@ -10852,10 +11516,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 灾难恢复功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 [XenServer] 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
+    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 XenServer 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
+    <value>升级您的 [XenServer] 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU_MORE" xml:space="preserve">
     <value>
@@ -10863,7 +11527,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] GPU 直通功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用高可用性。通过高可用性，虚拟机可以在基础硬件出现故障或单个 VM 出现故障时自动重新启动。如果服务器出现故障，VM 将智能地在资源池中的其他虚拟化服务器上重新启动。</value>
+    <value>升级您的 [XenServer] 许可证以启用高可用性。通过高可用性，虚拟机可以在基础硬件出现故障或单个 VM 出现故障时自动重新启动。如果服务器出现故障，VM 将智能地在资源池中的其他虚拟化服务器上重新启动。</value>
   </data>
   <data name="UPSELL_BLURB_HA_MORE" xml:space="preserve">
     <value>
@@ -10871,7 +11535,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 高可用性功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用性能报告功能。性能报告提供关于整体环境性能趋势的指导，并使您能够在业务需求发生变化时对生产能力做出准确规划。</value>
+    <value>升级您的 [XenServer] 许可证以启用性能报告功能。性能报告提供关于整体环境性能趋势的指导，并使您能够在业务需求发生变化时对生产能力做出准确规划。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE_MORE" xml:space="preserve">
     <value>
@@ -10879,7 +11543,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 性能报告功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用基于角色的访问控制。通过 RBAC 功能，可以控制对 [XenServer] 资源池中重要组件的访问，并具有完全的审核日志记录功能，能够与当前 Active Directory 设置实现无缝集成。</value>
+    <value>升级您的 [XenServer] 许可证以启用基于角色的访问控制。通过 RBAC 功能，可以控制对 [XenServer] 资源池中重要组件的访问，并具有完全的审核日志记录功能，能够与当前 Active Directory 设置实现无缝集成。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC_MORE" xml:space="preserve">
     <value>
@@ -10887,23 +11551,23 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 基于角色的访问控制功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
+    <value>升级您的 [XenServer] 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES_MORE" xml:space="preserve">
     <value>
 
-要了解有关 [XenServer] 的 vApp 功能的更多信息，或者要启动 [XenServer] 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] 的 vApp 功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 VM 保护和恢复功能。通过 VM 保护和恢复功能，您可以安排时间自动生成快照并(可选)将这些快照存档到 CIFS 或 NFS 共享，从而保护关键 VM。</value>
+    <value>升级您的 [XenServer] 许可证以启用 VM 保护和恢复功能。通过 VM 保护和恢复功能，您可以安排时间自动生成快照并(可选)将这些快照存档到 CIFS 或 NFS 共享，从而保护关键 VM。</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION_MORE" xml:space="preserve">
     <value>
 
-要了解有关 [XenServer] VM 保护和恢复功能的更多信息，或者要启动 [XenServer] 试用版，请单击下面的按钮。</value>
+要了解与 [XenServer] VM 保护和恢复功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和 [XenServer] 主机的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
+    <value>升级您的 [XenServer] 许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和 [XenServer] 主机的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
   </data>
   <data name="UPSELL_BLURB_WLB_MORE" xml:space="preserve">
     <value>
@@ -10915,12 +11579,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
-  </data>
-  <data name="USERNAME" xml:space="preserve">
-    <value>用户名</value>
-  </data>
-  <data name="USERNAME_LABLE" xml:space="preserve">
-    <value>用户名(&amp;U):</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] 无法以 {0} 身份为操作授权。有关详细信息，请参阅应用程序日志文件。</value>
@@ -10957,6 +11615,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VAL_GB" xml:space="preserve">
     <value>{0} GB</value>
+  </data>
+  <data name="VAL_GB_ONE_DECIMAL" xml:space="preserve">
+    <value>{0:F1} GB</value>
   </data>
   <data name="VAL_GIGB" xml:space="preserve">
     <value>GB</value>
@@ -11039,6 +11700,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VDI_COPYING" xml:space="preserve">
     <value>正在将磁盘“{0}”从 SR“{1}”复制到 SR“{2}”</value>
   </data>
+  <data name="VDI_ON_SR_TITLE" xml:space="preserve">
+    <value>“{1}”{2} 上的 {0}</value>
+  </data>
   <data name="VENDOR_NAME" xml:space="preserve">
     <value>供应商</value>
   </data>
@@ -11055,16 +11719,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>签名验证失败。{0}</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>[XenCenter] 版本 {0} (build {1}.{2}) {3} 位</value>
+    <value>[XenCenter] {0} (build {1}.{2}) {3} 位</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
-    <value>{0} vGPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
+    <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>在整个 GPU 中直通</value>
   </data>
   <data name="VGPU_TOSTRING" xml:space="preserve">
-    <value>{0} 个 vGPU (每个 GPU {1} 个)</value>
+    <value>{0} 虚拟 GPU (每个 GPU {1} 个)</value>
   </data>
   <data name="VIEW_FOLDER_MENU_OPTION" xml:space="preserve">
     <value>查看文件夹...</value>
@@ -11102,8 +11766,44 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VIRTUALIZATION_OUT_OF_DATE" xml:space="preserve">
     <value>工具已过期(已安装 {0} 版本)</value>
   </data>
+  <data name="VIRTUALIZATION_STATE_VM_INSTALL_IO_DRIVERS_AND_MANAGEMENT_AGENT" xml:space="preserve">
+    <value>安装 I/O 驱动程序和管理代理</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT" xml:space="preserve">
+    <value>安装管理代理</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
+    <value>已安装 I/O 驱动程序和管理代理</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED" xml:space="preserve">
+    <value>未优化 I/O</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_OPTIMIZED" xml:space="preserve">
+    <value>已优化 I/O</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY" xml:space="preserve">
+    <value>仅优化 I/O</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
+    <value>已安装管理代理</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED" xml:space="preserve">
+    <value>未安装管理代理</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED" xml:space="preserve">
+    <value>未优化</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES" xml:space="preserve">
+    <value>无法接收来自 Windows Update 的更新</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_OPTIMIZED" xml:space="preserve">
+    <value>完全优化</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
+    <value>能够接收来自 Windows Update 的更新</value>
+  </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
-    <value>未知</value>
+    <value>未知(请稍候)</value>
   </data>
   <data name="VIRTUAL_DISK" xml:space="preserve">
     <value>虚拟磁盘</value>
@@ -11145,7 +11845,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>在池“{0}”中定义的 vApp: </value>
   </data>
   <data name="VM_APPLIANCES_DEFINED_FOR_SERVER" xml:space="preserve">
-    <value>在服务器 {0} 中定义的 vApp:</value>
+    <value>在服务器 {0} 中定义的 vApp: </value>
   </data>
   <data name="VM_APPLIANCES_MENU" xml:space="preserve">
     <value>管理 vApp(&amp;V)...</value>
@@ -11186,17 +11886,35 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp 名称:\r\n    {0}\r\n\r\n所选 VM:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT" xml:space="preserve">
+    <value>无法获取默认云配置参数。</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
+    <value>包括配置驱动器</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
+    <value>不包括配置驱动器</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
+    <value>仅当 VM 处于关闭状态时才能更改云配置参数。</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
+    <value>无法获取云配置参数。</value>
+  </data>
+  <data name="VM_ENLIGHTENMENT" xml:space="preserve">
+    <value>容器管理</value>
+  </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM 常规属性</value>
-  </data>
-  <data name="VM_IN_POOL" xml:space="preserve">
-    <value>{1} 中的 {0}</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>内存和/或 VCPU 更改将在重新启动 VM 时生效。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE" xml:space="preserve">
     <value>VM 常规更改</value>
+  </data>
+  <data name="VM_MISSING_IO_DRIVERS" xml:space="preserve">
+    <value>未安装 I/O 驱动程序。</value>
   </data>
   <data name="VM_NETWORK_TAB_ACTIVATE_BUTTON_LABEL" xml:space="preserve">
     <value>激活(&amp;C)</value>
@@ -11225,8 +11943,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VM_NOT_SUSPENDED" xml:space="preserve">
     <value>此 VM 未挂起。</value>
   </data>
-  <data name="VM_ON_SERVER" xml:space="preserve">
-    <value>“{1}”上的 {0}</value>
+  <data name="VM_OPERATING_MODE_HVM" xml:space="preserve">
+    <value>硬件协助虚拟化(HVM)</value>
+  </data>
+  <data name="VM_OPERATING_MODE_PV" xml:space="preserve">
+    <value>半虚拟化(PV)</value>
   </data>
   <data name="VM_PAUSED" xml:space="preserve">
     <value>此 VM 已暂停。</value>
@@ -11245,6 +11966,33 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>成功</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
+    <value>此 VM 不使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
+    <value>未许可此池使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE" xml:space="preserve">
+    <value>此 VM 没有任何只读磁盘或父磁盘为只读的磁盘</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE" xml:space="preserve">
+    <value>未许可此池在启动 VM 时使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
+    <value>不支持在此 VM 使用的存储库类型上使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
+    <value>读缓存在此 VM 使用的存储库上已禁用</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_SEARCH" xml:space="preserve">
+    <value>未使用读取缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>此 VM 使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
+    <value>使用读缓存</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM 已还原为“{0}”</value>
@@ -11325,7 +12073,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>切换到远程桌面(&amp;I)</value>
   </data>
   <data name="VNC_RDESKTOP_TURN_ON" xml:space="preserve">
-    <value>启用远程桌面(&amp;o)</value>
+    <value>打开远程桌面(&amp;O)</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">
     <value>重新停靠(&amp;R)</value>
@@ -11389,6 +12137,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="WEEKLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>每周；在每 {1} 的 {0}</value>
+  </data>
+  <data name="WINDOWS_UPDATE_CAPABLE" xml:space="preserve">
+    <value>支持 Windows Update</value>
+  </data>
+  <data name="WINDOWS_UPDATE_CAPABLE_NOT" xml:space="preserve">
+    <value>不支持 Windows Update</value>
   </data>
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>下一步(&amp;N) &gt;</value>
@@ -11454,7 +12208,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>高级</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大值</value>
@@ -11576,7 +12330,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 没有当前指标。</value>
   </data>
   <data name="WLB_ERROR_4017" xml:space="preserve">
-    <value>WLB 找不到带有所需存储库的主机来放置 VM。</value>
+    <value>WLB 找不到带有所需存储库的主机来放置 VM。 </value>
   </data>
   <data name="WLB_ERROR_4018" xml:space="preserve">
     <value>WLB 找不到所需的可用 CPU 来放置 VM。</value>
@@ -11600,7 +12354,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer] 无法使用提供的 WLB 服务器凭据连接到 WLB 服务器。</value>
   </data>
   <data name="WLB_ERROR_6" xml:space="preserve">
-    <value>WLB 连接 [XenServer] 时所用的用户身份权限不足，或者没有访问 [XenServer] 的权限。请使用有效用户身份重新初始化 WLB。</value>
+    <value>WLB 连接到 [XenServer] 时所使用的用户身份权限不足，或者没有访问 [XenServer] 的权限。请使用有效用户身份重新初始化 WLB。</value>
   </data>
   <data name="WLB_ERROR_SERVER_NOT_FOUND" xml:space="preserve">
     <value>找不到指定的 WLB 服务器。请检查设置。</value>
@@ -11643,7 +12397,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>未针对池“{0}”进行配置</value>
   </data>
   <data name="WLB_NO_PERMISSION_BLURB" xml:space="preserve">
-    <value>权限为“{0}”的用户无法更改 Workload Balancing 设置。</value>
+    <value>权限为“{0}”的用户无法更改 Workload Balancing 设置。 </value>
   </data>
   <data name="WLB_OPTIMIZATION_MODE" xml:space="preserve">
     <value>优化模式</value>
@@ -11679,7 +12433,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>指定在该池中放置 VM 时使用的优化模式。</value>
   </data>
   <data name="WLB_OPT_MODE_DENSITY_BLURB" xml:space="preserve">
-    <value>在每个服务器上放置尽可能多的 VM</value>
+    <value>在每个服务器上放置尽可能多的 VM </value>
   </data>
   <data name="WLB_OPT_MODE_MAXIMIZEDENSITY" xml:space="preserve">
     <value>最大化密度</value>
@@ -11688,7 +12442,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>最大化性能</value>
   </data>
   <data name="WLB_OPT_MODE_PERF_BLURB" xml:space="preserve">
-    <value>保证所放置 VM 的性能指标</value>
+    <value>保证所放置 VM 的性能指标 </value>
   </data>
   <data name="WLB_OPT_OK_NOTICE_TEXT" xml:space="preserve">
     <value>已成功优化。</value>
@@ -12109,7 +12863,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>更新的 [XenCenter] 可用</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
-    <value>保存的搜索 (*.{0})|*.{0}</value>
+    <value>保存的搜索(*.{0})|*.{0}</value>
   </data>
   <data name="XENSERVER" xml:space="preserve">
     <value>[XenServer]</value>
@@ -12136,9 +12890,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer] 许可证文件</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
-    <value>[XenServer product] Tools DVD 现在将插入每个所选 VM 的 DVD 驱动器中。驱动器中当前的任何磁盘都将弹出。
+    <value>[XenServer product] Tools DVD 现在将插入每个选定 VM 的 DVD 驱动器中。驱动器中当前的任何磁盘都将被弹出。
 
-您将需要导航到每个所选 VM 上的控制台，以完成安装。</value>
+您将需要导航到每个选定 VM 上的控制台才能完成安装。</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
     <value>找不到 [XenServer product] Tools SR。</value>
@@ -12166,36 +12920,5 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
-  </data>
-  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-Socket (需要 {0})(&amp;E)</value>
-  </data>
-  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
-  </data>
-  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
-    <value>不符合支持条件</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Enterprise 功能</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-仅限 Standard 功能</value>
-  </data>
-  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
-    <value>http://{0}:{1}</value>
-  </data>
-  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
-    <value>转至...</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Desktop 功能</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Desktop+ 功能</value>
   </data>
 </root>
