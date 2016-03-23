@@ -679,7 +679,7 @@
     <value>VM の削除</value>
   </data>
   <data name="ACTION_SHUTTING_DOWN" xml:space="preserve">
-    <value>シャット ダウン中</value>
+    <value>シャットダウンしています</value>
   </data>
   <data name="ACTION_SHUT_DOWN" xml:space="preserve">
     <value>シャット ダウン</value>
@@ -3017,7 +3017,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>既存のテンプレートの複製をこのストレージ リポジトリに作成します。</value>
   </data>
   <data name="COPY_TEMPLATE_WIZARD_TITLE" xml:space="preserve">
-    <value>テンプレートをコピー</value>
+    <value>テンプレートのコピー</value>
   </data>
   <data name="COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
     <value>テンプレートを {0} にコピー</value>
@@ -4893,7 +4893,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>一般的な例外が発生しました。</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>キャンセルされました</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>キャンセルされました。最初にマスターをアップグレードしてください。</value>
@@ -11897,7 +11897,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>構成ドライブは含まれていません</value>
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
-    <value>仮想マシンをシャット ダウンする場合にのみ、クラウド構成パラメーターを変更できます。</value>
+    <value>VM をシャット ダウンする場合にのみ、クラウド構成パラメーターを変更できます。</value>
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
     <value>クラウド構成パラメーターを取得できませんでした。</value>
