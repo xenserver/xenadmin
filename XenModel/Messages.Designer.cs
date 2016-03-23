@@ -25847,6 +25847,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prechecks are performed to verify that the automatic update can proceed..
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update prechecks are performed to verify that the selected update can be applied to the servers..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME {

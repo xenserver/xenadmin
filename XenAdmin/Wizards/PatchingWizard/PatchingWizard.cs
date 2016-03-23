@@ -140,6 +140,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_ModePage.Patch = existPatch;
                 PatchingWizard_ModePage.SelectedUpdateAlert = alertPatch;
 
+                PatchingWizard_PrecheckPage.IsInAutomaticMode = wizardModeAutomatic;
                 PatchingWizard_PrecheckPage.Patch = existPatch;
                 PatchingWizard_PatchingPage.Patch = existPatch;
 
