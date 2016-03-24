@@ -586,7 +586,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AccessibleDescription" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>

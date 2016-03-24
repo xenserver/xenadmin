@@ -172,7 +172,7 @@
     <value>http://www.citrix.com/xenserverenterprise</value>
   </data>
   <data name="PARTNEROFFERS_URL" xml:space="preserve">
-    <value>https://www.citrix.co.jp/partners.html?posit=glnav</value>
+    <value>http://www.citrix.co.jp/partners.html?posit=glnav</value>
   </data>
   <data name="PLUGINS_URL" xml:space="preserve">
     <value>https://wiki.xenserver.org/XenCenter_Plugins</value>
