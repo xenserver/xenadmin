@@ -97,6 +97,7 @@
     <Compile Include="Actions\GUIActions\ExportResourceReportAction.cs" />
     <Compile Include="Actions\GUIActions\DeleteAllAlertsAction.cs" />
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
+    <Compile Include="Actions\GUIActions\IAction.cs" />
     <Compile Include="Actions\GUIActions\MeddlingAction.cs" />
     <Compile Include="Actions\GUIActions\IgnoreServerAction.cs" />
     <Compile Include="Actions\GUIActions\IgnorePatchAction.cs" />
@@ -860,6 +861,9 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.Designer.cs">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyXenServerPatchPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadAndUploadPatch.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\PoolPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">

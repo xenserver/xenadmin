@@ -165,6 +165,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_UploadPage.SelectedMasters = PatchingWizard_SelectServers.SelectedMasters;
                 PatchingWizard_UploadPage.SelectedServers = selectedServers;
+
+                PatchingWizard_AutoUpdatingPage.SelectedMasters = PatchingWizard_SelectServers.SelectedMasters;
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {

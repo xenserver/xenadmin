@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using XenAPI;
 
 namespace XenAdmin.Core
 {
@@ -87,6 +88,38 @@ namespace XenAdmin.Core
         public bool Equals(XenServerPatch other)
         {
             return string.Equals(Uuid, other.Uuid, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public after_apply_guidance after_apply_guidance
+        {
+            get
+            {
+                switch (Guidance)
+                {
+                    case "restartHVM":
+                        return after_apply_guidance.restartHVM;
+
+                    case "restartPV":
+                        return after_apply_guidance.restartPV;
+
+                    case "restartHost":
+                        return after_apply_guidance.restartHost;
+
+                    case "restartXAPI":
+                        return after_apply_guidance.restartXAPI;
+
+                    default:
+                        return after_apply_guidance.unknown;
+                }
+            }
+        }
+
+        public bool GuidanceMandatory 
+        {
+            get
+            {
+                return this.Guidance != null && this.Guidance.ToLowerInvariant().Contains("mandatory");
+            }
         }
 
     }

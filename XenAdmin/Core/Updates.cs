@@ -39,7 +39,6 @@ using XenAdmin.Alerts;
 using XenAdmin.Network;
 using System.Diagnostics;
 
-
 namespace XenAdmin.Core
 {
     public class Updates
@@ -407,9 +406,9 @@ namespace XenAdmin.Core
             return alerts;
         }
         
-        public static UpgradeSequences GetUpgradeSequence(IXenConnection conn)
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
-            var uSeq = new UpgradeSequences();
+            var uSeq = new UpgradeSequence();
 
             Host master = Helpers.GetMaster(conn);
             List<Host> hosts = conn.Cache.Hosts.ToList();
@@ -485,8 +484,26 @@ namespace XenAdmin.Core
             return sequence;
         }
 
-        public class UpgradeSequences : Dictionary<Host, List<XenServerPatch>>
+        public class UpgradeSequence : Dictionary<Host, List<XenServerPatch>>
         {
+            private IEnumerable<XenServerPatch> AllPatches
+            {
+                get
+                {
+                    foreach (var patches in this.Values)
+                        foreach(var patch in patches)
+                            yield return patch;
+                }
+            }
+
+            public List<XenServerPatch> UniquePatches
+            {
+                get
+                {
+                    return AllPatches.Distinct().ToList();
+                }
+            }
+            
         }
 
         public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
