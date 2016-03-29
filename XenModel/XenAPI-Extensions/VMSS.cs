@@ -306,11 +306,6 @@ namespace XenAPI
         {
             get
             {
-                foreach (var recent in _alerts)
-                {
-                    if (!_alerts.Contains(recent))
-                        _alerts.Add(recent);
-                }
                 return _alerts;
             }
             set { _alerts = value; }
