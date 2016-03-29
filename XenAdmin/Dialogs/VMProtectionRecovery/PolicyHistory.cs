@@ -169,7 +169,13 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             if (_policy != null)
             {
                 if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_policy.PolicyAlerts);
+		{
+                    dataGridView1.Rows.Clear();
+                    panelLoading.Visible = true;
+                    PureAsyncAction action = _policy.getAlertsAction(_policy, 0) ;
+                    action.Completed += action_Completed;
+                    action.RunAsync();
+		}
                 else if (comboBox1.SelectedIndex == 1)
                 {
                     dataGridView1.Rows.Clear();
