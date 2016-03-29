@@ -3590,7 +3590,7 @@ namespace XenAPI
         /// <param name="_value">The value</param>
         public static void set_snapshot_schedule(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_snapshot_schedule(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_set_snapshot_schedule(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : Helper.NullOpaqueRef).parse();
         }
 
         /// <summary>
