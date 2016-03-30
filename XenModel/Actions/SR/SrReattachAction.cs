@@ -73,12 +73,8 @@ namespace XenAdmin.Actions
             log.DebugFormat("description = '{0}'", description);
 
             Description = Messages.ACTION_SR_ATTACHING;
-
-            // Update the name and description of the SR
-            XenAPI.SR.set_name_label(Session, sr.opaque_ref, name);
-            XenAPI.SR.set_name_description(Session, sr.opaque_ref, description);
-            
-            // Now repair the SR with new PBDs for each host in the pool
+                        
+            // Repair the SR with new PBDs for each host in the pool
             PBD pbdTemplate = new PBD();
             pbdTemplate.currently_attached = false;
             pbdTemplate.device_config = dconf;
@@ -101,6 +97,10 @@ namespace XenAdmin.Actions
                 RelatedTask = PBD.async_plug(this.Session, pbdRef);
                 PollToCompletion(PercentComplete, PercentComplete + delta);
             }
+
+            // Update the name and description of the SR
+            XenAPI.SR.set_name_label(Session, sr.opaque_ref, name);
+            XenAPI.SR.set_name_description(Session, sr.opaque_ref, description);
 
             Description = Messages.ACTION_SR_ATTACH_SUCCESSFUL;
         }
