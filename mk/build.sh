@@ -126,7 +126,6 @@ production_jenkins_build()
 		source ${XENADMIN_DIR}/mk/tests-checks.sh
 	fi
     source ${XENADMIN_DIR}/mk/archive-push.sh
-    source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
 
 # Use this option if you're running on a Jenkins that is not the production Jenkins server
@@ -140,7 +139,6 @@ private_jenkins_build()
 	else
 		source ${XENADMIN_DIR}/mk/tests-checks.sh
 	fi
-    source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
 
 # Set the PRIVATE_BUILD_MODE variable in order to use the private build mode
