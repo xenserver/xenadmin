@@ -425,6 +425,18 @@ namespace XenAdmin.Core
                            && Helpers.HostProductVersion(master) == version.Version.ToString());
             });
 
+/*
+ * 
+ * 
+ * REMOVE - TEMP CODE FOR EASIER DEBUGGING
+ * 
+ * 
+ */
+if (serverVersions.Count == 0)
+{
+    serverVersions.Add(XenServerVersions.Last());
+}
+
             List<XenServerPatch> allPatches = new List<XenServerPatch>();
 
             if (serverVersions.Count > 0)
@@ -456,8 +468,10 @@ namespace XenAdmin.Core
                 var p = neededPatches[ii];
 
                 //checking requirements
-                if (// no requirements
-                    p.RequiredPatches == null
+                if (//not applied yet
+                    !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase))
+                    // and either no requirements or they are meet
+                    && (p.RequiredPatches == null
                     || p.RequiredPatches.Count == 0
                     // all requirements met?
                     || p.RequiredPatches.All(
@@ -468,7 +482,7 @@ namespace XenAdmin.Core
                             //the required-patch has already been applied
                             || (appliedPatches.Count != 0 && appliedPatches.Any(ap => string.Equals(ap.uuid, rp, StringComparison.OrdinalIgnoreCase)))
                         )
-                    )
+                    ))
                 {
                     // this patch can be added to the upgrade sequence now
                     sequence.Add(p);

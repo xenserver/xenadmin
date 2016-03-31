@@ -118,7 +118,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, hasPool));
                         EnabledRow(host, SelectedUpdateType, index);
-                    }                  
+                    }
                 }
 
                 // restore server selection

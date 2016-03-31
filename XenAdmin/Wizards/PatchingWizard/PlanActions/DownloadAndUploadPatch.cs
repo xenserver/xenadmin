@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private string tempFileName = null;
 
         public DownloadAndUploadPatch(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
-            : base(connection, string.Format("Download and upload {0} {1}", patch.Name, connection.Name))
+            : base(connection, string.Format("Downloading and uploading {0} to {1}...", patch.Name, connection.Name))
         {
             this.patch = patch;
             this.mappings = mappings;
@@ -93,7 +93,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (!mappings.Any(m => m.Host == newMapping.Host && m.Pool_patch == newMapping.Pool_patch && m.XenServerPatch == patch))
                     mappings.Add(newMapping);
             }
-
         }
 
         private void DownloadFile(ref Session session)
@@ -145,7 +144,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     Host master = Helpers.GetMaster(action.Connection);
 
-                    AllDownloadedPatches[patch] = tempFileName;
+                    AllDownloadedPatches[patch] = (action as DownloadAndUnzipXenServerPatchAction).PatchPath;
                 }
             }
            

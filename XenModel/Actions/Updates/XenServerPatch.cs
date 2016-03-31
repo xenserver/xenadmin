@@ -41,6 +41,7 @@ namespace XenAdmin.Core
         public readonly string Name;
         public readonly string Description;
         public readonly string Guidance;
+        public readonly string Guidance_mandatory;
         public readonly Version Version;
         public readonly string Url;
         public readonly string PatchUrl;
@@ -53,13 +54,14 @@ namespace XenAdmin.Core
 
         private const int DEFAULT_PRIORITY = 2;
 
-        public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
+        public XenServerPatch(string uuid, string name, string description, string guidance, string guidance_mandatory , string version, string url,
             string patchUrl, string timestamp, string priority, string installationSize)
         {
             _uuid = uuid;
             Name = name;
             Description = description;
             Guidance = guidance;
+            Guidance_mandatory = guidance_mandatory;
             Version = new Version(version);
             if (url.StartsWith("/XenServer"))
                 url = XenServerVersion.UpdateRoot + url;
@@ -72,10 +74,11 @@ namespace XenAdmin.Core
                 InstallationSize = 0;
         }
 
-        public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
+        public XenServerPatch(string uuid, string name, string description, string guidance, string guidance_mandatory, string version, string url,
             string patchUrl, string timestamp, string priority, string installationSize, List<string> conflictingPatches, List<string> requiredPatches)
-            : this(uuid, name, description, guidance, version, url, patchUrl, timestamp, priority, installationSize)
+            : this(uuid, name, description, guidance, guidance_mandatory, version, url, patchUrl, timestamp, priority, installationSize)
         {
+
             ConflictingPatches = conflictingPatches;
             RequiredPatches = requiredPatches;
         }
@@ -118,7 +121,7 @@ namespace XenAdmin.Core
         {
             get
             {
-                return this.Guidance != null && this.Guidance.ToLowerInvariant().Contains("mandatory");
+                return !string.IsNullOrEmpty(Guidance_mandatory) && this.Guidance_mandatory.ToLowerInvariant().Contains("true");
             }
         }
 

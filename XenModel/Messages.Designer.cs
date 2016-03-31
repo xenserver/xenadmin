@@ -25973,6 +25973,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatic update has finished..
+        /// </summary>
+        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
         ///Please wait for these operations to complete, then click Next to continue with the installation..
         /// </summary>
@@ -32737,6 +32746,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_REMOVING_UPDATE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing update files from {0}....
+        /// </summary>
+        public static string UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL", resourceCulture);
             }
         }
         
