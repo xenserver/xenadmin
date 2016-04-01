@@ -330,11 +330,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void ReportException(Exception exception, PlanAction planAction, Host host)
         {
             Program.Invoke(this, () =>
-                                     {
-                                         if (host != null && !host.enabled && host.Connection != null && host.Connection.Session != null)
-                                             new EnableHostAction(host, false,
-                                                                  AddHostToPoolCommand.EnableNtolDialog).RunExternal(host.Connection.Session);
-                                     });
+                                    {
+                                        if (host != null && !host.enabled && host.Connection != null && host.Connection.Session != null)
+                                            try
+                                            {
+                                                new EnableHostAction(host, false,
+                                                                AddHostToPoolCommand.EnableNtolDialog).RunExternal(host.Connection.Session);
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                log.Error("Exception while trying to re-enable the host", e);
+                                            }
+                                    });
             Program.BeginInvoke(this, () =>
                                           {
                                               var row = planAction is UnwindProblemsAction
