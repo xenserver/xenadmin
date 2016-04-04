@@ -150,6 +150,10 @@ namespace XenAdmin.Commands
 
                 actionsToComplete.Add(getDeactivateVBDAction(vbd));
             }
+
+            if (actionsToComplete.Count == 0)
+                return;
+
             if (actionsToComplete.Count > 1)
                 RunMultipleActions(actionsToComplete, Messages.ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
             else
