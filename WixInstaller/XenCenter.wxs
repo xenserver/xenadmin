@@ -292,7 +292,7 @@
             <ComponentRef Id="ProgramFilesShortcut" />
   
            <?if "$(env.Branding)"="XenCenter"?>		
-				<Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="[Citrix] [XenServer] Health Check Service is installed by default during XenCenter installation. It is responsible for establishing a connection to the [XenServer] pool using credentials provided during Health Check enrollment. The Health Check Service periodically checks whether an upload is due for a host and initiates report generation and the upload process." Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+				<Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="Enables monitoring of the health of your Citrix XenServer pools by periodically uploading data from the servers to Citrix Insight Services" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
 					<ComponentRef Id="XenServerHealthCheck" /> 
 				</Feature>
 	       <?else ?>
