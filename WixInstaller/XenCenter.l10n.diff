@@ -191,6 +191,15 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
+@@ -292,7 +320,7 @@
+             <ComponentRef Id="ProgramFilesShortcut" />
+   
+            <?if "$(env.Branding)"="XenCenter"?>		
+-				<Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="Enables monitoring of the health of your Citrix XenServer pools by periodically uploading data from the servers to Citrix Insight Services" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
++				<Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="!(loc.HealthCheckDescr)" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+ 					<ComponentRef Id="XenServerHealthCheck" /> 
+ 				</Feature>
+ 	       <?else ?>
 @@ -311,7 +339,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
