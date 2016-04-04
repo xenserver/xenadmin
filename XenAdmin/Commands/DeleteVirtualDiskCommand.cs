@@ -454,6 +454,10 @@ namespace XenAdmin.Commands
 
                 actionsToComplete.AddRange(getDestroyVDIAction(vdi, deletedVMSnapshots));
             }
+
+            if (actionsToComplete.Count == 0)
+                return;
+
             if (actionsToComplete.Count > 1)
                 RunMultipleActions(actionsToComplete, Messages.ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_TITLE, Messages.ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS, Messages.COMPLETED, true);
             else
