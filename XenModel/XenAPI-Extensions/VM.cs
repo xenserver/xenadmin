@@ -830,7 +830,7 @@ namespace XenAPI
             {
                 Debug.Assert(HasNewVirtualisationStates);
 
-                var flags = !Helpers.DundeeOrGreater(Connection) && HasRDP || HasStaticIP
+                var flags = HasStaticIP
                     ? VirtualisationStatus.MANAGEMENT_INSTALLED 
                     : 0;
 
