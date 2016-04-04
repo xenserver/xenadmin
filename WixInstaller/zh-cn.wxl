@@ -13,4 +13,5 @@
     <String Id="XenCenter_Saved_Search">[XenCenter] 保存的搜索</String>
     <String Id="Required_For_Installation">此安装需要 .NET Framework 4。</String>
     <String Id="Readme">声明.TXT</String>
+	<String Id="HealthCheckDescr">[Citrix] [XenServer] Health Check Service is installed by default during XenCenter installation. It is responsible for establishing a connection to the [XenServer] pool using credentials provided during Health Check enrollment. The Health Check Service periodically checks whether an upload is due for a host and initiates report generation and the upload process.</String>
 </WixLocalization>
