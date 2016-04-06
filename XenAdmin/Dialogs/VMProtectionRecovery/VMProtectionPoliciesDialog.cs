@@ -44,7 +44,7 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs.VMProtectionRecovery;
 using XenCenterLib;
 using XenAdmin.Alerts;
-
+using System.Linq;
 
 namespace XenAdmin.Dialogs.VMProtection_Recovery
 {
@@ -237,15 +237,18 @@ namespace XenAdmin.Dialogs.VMPolicies
             }
 
             /* add only 10 messages for each policy and referesh the rows*/
-
+            
             foreach (var policy in policyList)
             {
-                for (int messageCount = 0; messageCount < 10 && messageCount < policyMessage[policy.uuid].Count; messageCount++)
+                /* message list need not be always sorted */
+
+                var messageListSorted = policyMessage[policy.uuid].OrderByDescending(message => message.timestamp).ToList();
+                for (int messageCount = 0; messageCount < 10 && messageCount < messageListSorted.Count; messageCount++)
                 {
-                    policy.PolicyAlerts.Add(new PolicyAlert(policyMessage[policy.uuid][messageCount].priority, policyMessage[policy.uuid][messageCount].name, policyMessage[policy.uuid][messageCount].timestamp));
+                    policy.PolicyAlerts.Add(new PolicyAlert(messageListSorted[messageCount].priority, messageListSorted[messageCount].name, messageListSorted[messageCount].timestamp));
                 }
-                    if (dataGridView1.ColumnCount > 0)
-                        dataGridView1.Rows.Add(new PolicyRow(policy));
+                if (dataGridView1.ColumnCount > 0)
+                    dataGridView1.Rows.Add(new PolicyRow(policy));
             }
 
            RefreshButtons();

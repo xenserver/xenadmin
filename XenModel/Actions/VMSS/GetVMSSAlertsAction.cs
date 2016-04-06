@@ -35,6 +35,7 @@ using System.Text;
 using XenAdmin.Alerts;
 using XenAPI;
 using System.Diagnostics;
+using System.Linq;
 
 namespace XenAdmin.Actions
 {
@@ -52,7 +53,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             var now = DateTime.Now;
-            var messages = Pool.Connection.Cache.Messages;
+ 	    var messages = Pool.Connection.Cache.Messages.OrderByDescending(message => message.timestamp).ToList();
             var listAlerts = new List<PolicyAlert>();
  	    DateTime currentTime = DateTime.Now;
             DateTime offset = currentTime.Add(new TimeSpan(- _hoursFromNow, 0, 0));
@@ -84,6 +85,11 @@ namespace XenAdmin.Actions
                     {
                         listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
                     }
+
+                    /* since the messages are sorted on timestamp you need not scan the entire message list */
+
+                    else if (message.timestamp < offset)
+                        break;
                 }
 	    }
 
