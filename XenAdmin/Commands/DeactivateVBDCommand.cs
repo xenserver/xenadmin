@@ -155,7 +155,7 @@ namespace XenAdmin.Commands
                 return;
 
             if (actionsToComplete.Count > 1)
-                RunMultipleActions(actionsToComplete, Messages.ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
+                RunMultipleActions(actionsToComplete, Messages.ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ACTION_DEACTIVATING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
             else
                 actionsToComplete[0].RunAsync();
         }
