@@ -371,7 +371,7 @@ namespace XenAdmin.TabPages
             else
             {
                 informationLabel.Text = reason;
-                tableLayoutPanel1.Visible = true;
+                tableLayoutPanel1.Visible = !HiddenFeatures.LinkLabelHidden;
             }
         }
 
@@ -930,6 +930,11 @@ namespace XenAdmin.TabPages
             MakeWarningInvisible();
             PageWasRefreshed = true;
             Updates.CheckForUpdates(true);
+        }
+
+        private void tableLayoutPanel3_Resize(object sender, EventArgs e)
+        {
+            labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
     }
 }
