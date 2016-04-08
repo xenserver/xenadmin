@@ -835,7 +835,7 @@ namespace XenAPI
                     : 0;
 
                 var vm_guest_metrics = Connection.Resolve(guest_metrics);
-                if (vm_guest_metrics != null && vm_guest_metrics.storage_paths_optimized && vm_guest_metrics.network_paths_optimized)
+                if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_detected)
                     flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
 
                 if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
