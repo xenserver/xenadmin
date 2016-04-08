@@ -72,6 +72,31 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         }
 
         private IVMPolicy _policy;
+        public void StartRefreshTab()
+        {
+            /* hoursFromNow has 3 possible values:
+                1) 0 -> top 10 messages (default)
+                2) 24 -> messages from past 24 Hrs
+                3) 7 * 24 -> messages from lst 7 days */
+
+            var hoursFromNow = 0;
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0: /* default value*/
+                    break;
+                case 1:
+                    hoursFromNow = 24;
+                    break;
+                case 2:
+                    hoursFromNow = 7 * 24;
+                    break;
+            }
+
+            PureAsyncAction action = _policy.getAlertsAction(_policy, hoursFromNow);
+            action.Completed += action_Completed;
+            action.RunAsync();
+        }
+
         public void RefreshTab(IVMPolicy policy)
         {
             _policy = policy;
@@ -83,7 +108,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             else
             {
                 comboBox1.Enabled = true;
-                RefreshGrid(_policy.PolicyAlerts);
+                StartRefreshTab();
             }
 
         }
@@ -168,24 +193,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         {
             if (_policy != null)
             {
-                if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_policy.PolicyAlerts);
-                else if (comboBox1.SelectedIndex == 1)
-                {
-                    dataGridView1.Rows.Clear();
-                    panelLoading.Visible = true;
-                    PureAsyncAction action = _policy.getAlertsAction(_policy, 24) ;                
-                    action.Completed += action_Completed;
-                    action.RunAsync();                   
-                }
-                else if (comboBox1.SelectedIndex == 2)
-                {
-                    dataGridView1.Rows.Clear();
-                    panelLoading.Visible = true;
-                    PureAsyncAction action = _policy.getAlertsAction(_policy, 7 * 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
-                }
+               StartRefreshTab();  
             }
         }
 

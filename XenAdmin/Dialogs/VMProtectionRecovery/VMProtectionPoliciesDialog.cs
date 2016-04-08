@@ -44,7 +44,7 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs.VMProtectionRecovery;
 using XenCenterLib;
 using XenAdmin.Alerts;
-
+using System.Linq;
 
 namespace XenAdmin.Dialogs.VMProtection_Recovery
 {
@@ -201,43 +201,57 @@ namespace XenAdmin.Dialogs.VMPolicies
             dataGridView1.SuspendLayout();
             var selectedPolicy = currentSelected;
             dataGridView1.Rows.Clear();
+	    var policyList = VMGroup<T>.VMPolicies(Pool.Connection.Cache);
 
-            /* filter out the messages for VMSS as the VMSS does not have recent alerts and that need to be populated below*/
-            List<XenAPI.Message> vmssMessages = new List<XenAPI.Message>();
+            /* creating a dictionary to hold (policy_uuid, message list) */
+
+            Dictionary<string, List<XenAPI.Message>> policyMessage = new Dictionary<string, List<XenAPI.Message>>();
+    
+            /* populate the dictionary with policy uuid */
+
+            foreach (var policy in policyList)
+            {
+                policy.PolicyAlerts.Clear();
+                List<XenAPI.Message> messageList = new List<XenAPI.Message>();
+                policyMessage.Add(policy.uuid, messageList);
+            }
+       
+            /* iterate through all messages and populate the dictionary with message list */
+
             if (!VMGroup<T>.isVMPolicyVMPP)
             {
                 var messages = Pool.Connection.Cache.Messages;
+                List<XenAPI.Message> value = new List<XenAPI.Message>();
+
                 foreach (var message in messages)
                 {
                     if (message.cls == cls.VMSS)
                     {
-                        vmssMessages.Add(message);
+                        if (policyMessage.TryGetValue(message.obj_uuid, out value))
+                        {
+                            value.Add(message);
+                        }
+
                     }
                 }
             }
-            foreach (var policy in VMGroup<T>.VMPolicies(Pool.Connection.Cache))
-            {
-                if (!VMGroup<T>.isVMPolicyVMPP)
-                {
-                    policy.PolicyAlerts.Clear();
-                    List<XenAPI.Message> processedMessages = new List<XenAPI.Message>();
-                    /*for VMSS: Populate the alerts from Messages by filtering out the alerts for this schedule
-                     This is not required in VMPP as the VMPP record itself has the recentAlerts */
-                    foreach (var message in vmssMessages)
-                    {
-                        if (message.obj_uuid == policy.uuid)
-                        {
-                            policy.PolicyAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
-                            processedMessages.Add(message);
-                        }
-                    }
-                    vmssMessages.RemoveAll(message => processedMessages.Contains(message));
-                }
 
+            /* add only 10 messages for each policy and referesh the rows*/
+            
+            foreach (var policy in policyList)
+            {
+                /* message list need not be always sorted */
+
+                var messageListSorted = policyMessage[policy.uuid].OrderByDescending(message => message.timestamp).ToList();
+                for (int messageCount = 0; messageCount < 10 && messageCount < messageListSorted.Count; messageCount++)
+                {
+                    policy.PolicyAlerts.Add(new PolicyAlert(messageListSorted[messageCount].priority, messageListSorted[messageCount].name, messageListSorted[messageCount].timestamp));
+                }
                 if (dataGridView1.ColumnCount > 0)
                     dataGridView1.Rows.Add(new PolicyRow(policy));
             }
-            RefreshButtons();
+
+           RefreshButtons();
             if (selectedPolicy != null)
             {
                 foreach (PolicyRow row in dataGridView1.Rows)

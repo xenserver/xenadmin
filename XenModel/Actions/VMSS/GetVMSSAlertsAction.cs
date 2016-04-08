@@ -35,6 +35,7 @@ using System.Text;
 using XenAdmin.Alerts;
 using XenAPI;
 using System.Diagnostics;
+using System.Linq;
 
 namespace XenAdmin.Actions
 {
@@ -52,18 +53,45 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             var now = DateTime.Now;
-            var messages = Pool.Connection.Cache.Messages;
+ 	    var messages = Pool.Connection.Cache.Messages.OrderByDescending(message => message.timestamp).ToList();
             var listAlerts = new List<PolicyAlert>();
+ 	    DateTime currentTime = DateTime.Now;
+            DateTime offset = currentTime.Add(new TimeSpan(- _hoursFromNow, 0, 0));
+          
+            /* _hoursFromNow has 3 possible values:
+                1) 0 -> top 10 messages
+                2) 24 -> messages from past 24 Hrs
+                3) 7 * 24 -> messages from lst 7 days */
 
-            /*for VMSS: Populate the alerts from Messages by filtering out the alerts for this schedule
-                This is not required in VMPP as the VMPP record itself has the recentAlerts */
-            foreach (var message in messages)
+            if (_hoursFromNow == 0)
             {
-                if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid)
+                int messageCounter = 0;
+                foreach (var message in messages)
                 {
-                    listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
+                    if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid && messageCounter < 10)
+                    {
+                        listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
+                        messageCounter++;
+                    }
+                    else if (messageCounter >= 10)
+                        break;
                 }
-            }
+            } 
+            else
+            {
+                foreach (var message in messages)
+                {
+                    if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid && message.timestamp > offset)
+                    {
+                        listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp));
+                    }
+
+                    /* since the messages are sorted on timestamp you need not scan the entire message list */
+
+                    else if (message.timestamp < offset)
+                        break;
+                }
+	    }
 
             VMSS.Alerts = new List<PolicyAlert>(listAlerts);
             Debug.WriteLine(string.Format("GetAlerts took: {0}", DateTime.Now - now));
