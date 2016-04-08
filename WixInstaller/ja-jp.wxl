@@ -13,5 +13,6 @@
     <String Id="XenCenter_Saved_Search">[XenCenter] 保存された検索条件</String>
     <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 4 が必要です。</String>
     <String Id="Readme">README.TXT</String>
-	<String Id="HealthCheckDescr">Enables monitoring of the health of your Citrix XenServer pools by periodically uploading data from the servers to Citrix Insight Services</String>
+	<String Id="HealthCheckDescr">Enables monitoring of the health of your Citrix XenServer pools by periodically uploading data from the servers to Citrix Insight Services.</String>
+	<String Id="HealthCheckDescrShort">Enables monitoring of the health of your Citrix XenServer pools.</String>
 </WixLocalization>
