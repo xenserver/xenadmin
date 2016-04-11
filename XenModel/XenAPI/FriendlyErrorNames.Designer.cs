@@ -70,6 +70,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The specified IP address violates the VIF locking configuration..
+        /// </summary>
+        public static string ADDRESS_VIOLATES_LOCKING_CONSTRAINT {
+            get {
+                return ResourceManager.GetString("ADDRESS_VIOLATES_LOCKING_CONSTRAINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to External authentication for this server is already enabled..
         /// </summary>
         public static string AUTH_ALREADY_ENABLED {
@@ -1308,6 +1317,15 @@ namespace XenAPI {
         public static string INTERNAL_ERROR {
             get {
                 return ResourceManager.GetString("INTERNAL_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A required parameter contained an invalid CIDR address (&lt;addr&gt;/&lt;prefix length&gt;).
+        /// </summary>
+        public static string INVALID_CIDR_ADDRESS_SPECIFIED {
+            get {
+                return ResourceManager.GetString("INVALID_CIDR_ADDRESS_SPECIFIED", resourceCulture);
             }
         }
         
@@ -3108,7 +3126,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for SMB targets.
+        ///   Looks up a localized string similar to Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for CIFS targets.
         /// </summary>
         public static string SR_BACKEND_FAILURE_225 {
             get {
@@ -4485,15 +4503,6 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot eject the disk, because this VM is being upgraded to receive updates via Windows Update. The upgrade can only be cancelled using the command line..
-        /// </summary>
-        public static string VBD_XENPREP_CD_IN_USE {
-            get {
-                return ResourceManager.GetString("VBD_XENPREP_CD_IN_USE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You have reached the maximum number of virtual disks allowed for this virtual machine..
         /// </summary>
         public static string VBDS_MAX_ALLOWED {
@@ -4976,6 +4985,15 @@ namespace XenAPI {
         public static string VM_LACKS_FEATURE_SHUTDOWN {
             get {
                 return ResourceManager.GetString("VM_LACKS_FEATURE_SHUTDOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You attempted an operation which needs the VM static-ip-setting feature on a VM which lacks it..
+        /// </summary>
+        public static string VM_LACKS_FEATURE_STATIC_IP_SETTING {
+            get {
+                return ResourceManager.GetString("VM_LACKS_FEATURE_STATIC_IP_SETTING", resourceCulture);
             }
         }
         

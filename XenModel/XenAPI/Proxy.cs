@@ -2288,14 +2288,6 @@ namespace XenAPI
         Response<bool>
         vm_guest_metrics_get_pv_drivers_up_to_date(string session, string _vm_guest_metrics);
 
-        [XmlRpcMethod("VM_guest_metrics.get_network_paths_optimized")]
-        Response<bool>
-        vm_guest_metrics_get_network_paths_optimized(string session, string _vm_guest_metrics);
-
-        [XmlRpcMethod("VM_guest_metrics.get_storage_paths_optimized")]
-        Response<bool>
-        vm_guest_metrics_get_storage_paths_optimized(string session, string _vm_guest_metrics);
-
         [XmlRpcMethod("VM_guest_metrics.get_memory")]
         Response<Object>
         vm_guest_metrics_get_memory(string session, string _vm_guest_metrics);
@@ -2331,6 +2323,10 @@ namespace XenAPI
         [XmlRpcMethod("VM_guest_metrics.get_can_use_hotplug_vif")]
         Response<string>
         vm_guest_metrics_get_can_use_hotplug_vif(string session, string _vm_guest_metrics);
+
+        [XmlRpcMethod("VM_guest_metrics.get_PV_drivers_detected")]
+        Response<bool>
+        vm_guest_metrics_get_pv_drivers_detected(string session, string _vm_guest_metrics);
 
         [XmlRpcMethod("VM_guest_metrics.set_other_config")]
         Response<string>
@@ -3972,6 +3968,30 @@ namespace XenAPI
         Response<string []>
         vif_get_ipv6_allowed(string session, string _vif);
 
+        [XmlRpcMethod("VIF.get_ipv4_configuration_mode")]
+        Response<string>
+        vif_get_ipv4_configuration_mode(string session, string _vif);
+
+        [XmlRpcMethod("VIF.get_ipv4_addresses")]
+        Response<string []>
+        vif_get_ipv4_addresses(string session, string _vif);
+
+        [XmlRpcMethod("VIF.get_ipv4_gateway")]
+        Response<string>
+        vif_get_ipv4_gateway(string session, string _vif);
+
+        [XmlRpcMethod("VIF.get_ipv6_configuration_mode")]
+        Response<string>
+        vif_get_ipv6_configuration_mode(string session, string _vif);
+
+        [XmlRpcMethod("VIF.get_ipv6_addresses")]
+        Response<string []>
+        vif_get_ipv6_addresses(string session, string _vif);
+
+        [XmlRpcMethod("VIF.get_ipv6_gateway")]
+        Response<string>
+        vif_get_ipv6_gateway(string session, string _vif);
+
         [XmlRpcMethod("VIF.set_other_config")]
         Response<string>
         vif_set_other_config(string session, string _vif, Object _other_config);
@@ -4079,6 +4099,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.VIF.remove_ipv6_allowed")]
         Response<string>
         async_vif_remove_ipv6_allowed(string session, string _vif, string _value);
+
+        [XmlRpcMethod("VIF.configure_ipv4")]
+        Response<string>
+        vif_configure_ipv4(string session, string _vif, string _mode, string _address, string _gateway);
+
+        [XmlRpcMethod("Async.VIF.configure_ipv4")]
+        Response<string>
+        async_vif_configure_ipv4(string session, string _vif, string _mode, string _address, string _gateway);
+
+        [XmlRpcMethod("VIF.configure_ipv6")]
+        Response<string>
+        vif_configure_ipv6(string session, string _vif, string _mode, string _address, string _gateway);
+
+        [XmlRpcMethod("Async.VIF.configure_ipv6")]
+        Response<string>
+        async_vif_configure_ipv6(string session, string _vif, string _mode, string _address, string _gateway);
 
         [XmlRpcMethod("VIF.get_all")]
         Response<string []>
@@ -7040,8 +7076,6 @@ namespace XenAPI
         public Object os_version;
         public Object PV_drivers_version;
         public bool PV_drivers_up_to_date;
-        public bool network_paths_optimized;
-        public bool storage_paths_optimized;
         public Object memory;
         public Object disks;
         public Object networks;
@@ -7051,6 +7085,7 @@ namespace XenAPI
         public bool live;
         public string can_use_hotplug_vbd;
         public string can_use_hotplug_vif;
+        public bool PV_drivers_detected;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7249,6 +7284,12 @@ namespace XenAPI
         public string locking_mode;
         public string [] ipv4_allowed;
         public string [] ipv6_allowed;
+        public string ipv4_configuration_mode;
+        public string [] ipv4_addresses;
+        public string ipv4_gateway;
+        public string ipv6_configuration_mode;
+        public string [] ipv6_addresses;
+        public string ipv6_gateway;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
