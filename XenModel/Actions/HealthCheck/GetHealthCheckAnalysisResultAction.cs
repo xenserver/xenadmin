@@ -72,23 +72,23 @@ namespace XenAdmin.Actions
                 var diagnosticToken = Pool.HealthCheckSettings.GetSecretyInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
                 if (string.IsNullOrEmpty(diagnosticToken))
                 {
-                    log.InfoFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name);
+                    log.DebugFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name);
                     Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                     return;
                 }
                 if (!Pool.HealthCheckSettings.HasUpload)
                 {
-                    log.InfoFormat("Cannot get the diagnostic result for {0}, because the there is no upload completed yet", Pool.Name);
+                    log.DebugFormat("Cannot get the diagnostic result for {0}, because the there is no upload completed yet", Pool.Name);
                     Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                     return;
                 }
 
 
-                int analysisProgress = GetAnalysisProgress(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
+                var analysisProgress = GetAnalysisProgress(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
 
                 if (analysisProgress >= 0 && analysisProgress < 100) // check if the progress is a valid value less than 100
                 {
-                    log.InfoFormat("Analysis for {0} not completed yet", Pool.Name);
+                    log.DebugFormat("Analysis for {0} not completed yet", Pool.Name);
                     Description = Messages.COMPLETED;
                     return;
                 }
@@ -97,7 +97,7 @@ namespace XenAdmin.Actions
 
                 if (analysisResult.Count == 0 && analysisProgress == -1 && DateTime.Compare(Pool.HealthCheckSettings.LastSuccessfulUploadTime.AddMinutes(10), DateTime.UtcNow) > 0)
                 {
-                    log.InfoFormat("Diagnostic result for {0} is empty. Maybe analysis result is not yet available", Pool.Name);
+                    log.DebugFormat("Diagnostic result for {0} is empty. Maybe analysis result is not yet available", Pool.Name);
                     Description = Messages.COMPLETED;
                     return;
                 }
@@ -144,7 +144,7 @@ namespace XenAdmin.Actions
         /// <param name="diagnosticToken"></param>
         /// <param name="uploadUuid"></param>
         /// <returns>the analysis progress as pecentage, or -1 if the progress cannot be retrieved</returns>
-        private int GetAnalysisProgress(string diagnosticToken, string uploadUuid)
+        private double GetAnalysisProgress(string diagnosticToken, string uploadUuid)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                log.InfoFormat("Exception while getting analysis progress result from {0}. Exception Message: {1} ", diagnosticDomainName, e.Message);
+                log.DebugFormat("Exception while getting analysis progress result from {0}. Exception Message: {1} ", diagnosticDomainName, e.Message);
                 return -1;
             }
         }
@@ -176,7 +176,7 @@ namespace XenAdmin.Actions
         /// <param name="jsonString"></param>
         /// <param name="uploadUuid"></param>
         /// <returns>the analysis progress as pecentage, or -1 if the JSON object is invalid</returns>
-        public static int ParseAnalysisProgress(string jsonString, string uploadUuid)
+        public static double ParseAnalysisProgress(string jsonString, string uploadUuid)
         {
             if (string.IsNullOrEmpty(jsonString))
                 return -1;
@@ -184,11 +184,12 @@ namespace XenAdmin.Actions
             {
                 var serializer = new JavaScriptSerializer();
                 Dictionary<string, object> result = serializer.DeserializeObject(jsonString) as Dictionary<string, object>;
-                return result != null && result.ContainsKey(uploadUuid) ? (int) result[uploadUuid] : -1;
+                var progress = result != null && result.ContainsKey(uploadUuid) ? Convert.ToDouble(result[uploadUuid]) : -1;
+                return progress >= 0 && progress <= 100 ? progress : -1;
             }
             catch (Exception e)
             {
-                log.InfoFormat("Exception while deserializing json: {0}. Exception Message: {1} ", jsonString, e.Message);
+                log.DebugFormat("Exception while deserializing json: {0}. Exception Message: {1} ", jsonString, e.Message);
                 return -1;
             }
         }

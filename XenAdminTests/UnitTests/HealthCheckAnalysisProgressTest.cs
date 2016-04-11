@@ -39,11 +39,14 @@ namespace XenAdminTests.UnitTests
     [TestFixture, Category(TestCategories.Unit)]
     public class HealthCheckAnalysisProgressTest
     {
-        private Dictionary<string, int> expectedResults = new Dictionary<string, int>()
+        private Dictionary<string, double> expectedResults = new Dictionary<string, double>()
                                          { 
                                             { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 0 }", 0 },
                                             { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 10 }", 10 },
                                             { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 100 }", 100 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 100.0 }", 100 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 0.01 }", 0.01 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 99.99 }", 99.99 },
                                             { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 10,  \"131-435\" : 12 }", 10 },
                                             { "{ \"30253b07-138a-1b17-80a1\" : 12, \"30253b07-138a-1b17-80a1-117317ded3ca\" : 10 }", 10 },
                                             { "{ 30253b07-138a-1b17-80a1-117317ded3ca : 10 }", 10 },
@@ -51,7 +54,13 @@ namespace XenAdminTests.UnitTests
                                             { "{ 2345: 25, 30253b07-138a-1b17-80a1-117317ded3ca : 10 }", 10 },
                                             { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : not a number }", -1 },
                                             { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : \"not a number\" }", -1 },
-                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : \"10\" }", -1 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : \"10\" }", 10 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : \"-10\" }", -1},
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : -0.56 }", -1 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : -10 }", -1 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : -100 }", -1 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 123 }", -1 },
+                                            { "{ \"30253b07-138a-1b17-80a1-117317ded3ca\" : 123.89 }", -1 },
                                             { string.Empty, -1 },
                                             { " ", -1 },
                                             { "{ }", -1 }
