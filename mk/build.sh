@@ -105,10 +105,14 @@ if [ "$?" -eq 0 ]; then
   fi
 fi
 
-# overwrite archive-push.sh file, if it exists in Branding folder
+# overwrite archive-push.sh and push-latest-successful-build.sh files, if they exists in Branding folder
 if [ -f ${XENADMIN_DIR}/Branding/branding-archive-push.sh ]; then
   echo "Overwriting mk/archive-push.sh with Branding/branding-archive-push.sh."
   cp ${XENADMIN_DIR}/Branding/branding-archive-push.sh ${XENADMIN_DIR}/mk/archive-push.sh
+fi
+if [ -f ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ]; then
+  echo "Overwriting mk/push-latest-successful-build.sh with Branding/branding-push-latest-successful-build.sh."
+  cp ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ${XENADMIN_DIR}/mk/push-latest-successful-build.sh
 fi
 
 production_jenkins_build()
