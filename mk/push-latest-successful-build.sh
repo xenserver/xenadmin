@@ -34,9 +34,6 @@ set -eu
 
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
-#mark the build as "keep forever"
-./keep-build.sh
-
 cd ${ROOT}/xenadmin-ref.hg && hg out && hg push
 	
 echo "INFO: Pushing xenadmin-ref.hg succeeded at "
