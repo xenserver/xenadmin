@@ -112,13 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>An activation key can only be applied when the edition is set to 'free'.</value>
+  </data>
+  <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
+    <value>The specified IP address violates the VIF locking configuration.</value>
   </data>
   <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
     <value>External authentication for this server is already enabled.</value>
@@ -533,6 +536,9 @@
   </data>
   <data name="INTERNAL_ERROR" xml:space="preserve">
     <value>Internal error: {0}</value>
+  </data>
+  <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
+    <value>A required parameter contained an invalid CIDR address (&lt;addr&gt;/&lt;prefix length&gt;)</value>
   </data>
   <data name="INVALID_DEVICE" xml:space="preserve">
     <value>The device name {0} is invalid</value>
@@ -1137,7 +1143,7 @@ Authorized Roles: {1}</value>
     <value>Could not locate the ISO sharename on the target, or the access permissions may be incorrect.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
-    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for SMB targets</value>
+    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for CIFS targets</value>
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>Invalid local path</value>
@@ -1601,9 +1607,6 @@ Authorized Roles: {1}</value>
   <data name="VBD_TRAY_LOCKED" xml:space="preserve">
     <value>This VM has locked the DVD drive tray, so the disk cannot be ejected</value>
   </data>
-  <data name="VBD_XENPREP_CD_IN_USE" xml:space="preserve">
-    <value>Cannot eject the disk, because this VM is being upgraded to receive updates via Windows Update. The upgrade can only be cancelled using the command line.</value>
-  </data>
   <data name="VCPUS_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum number of virtual CPUs allowed for this virtual machine.</value>
   </data>
@@ -1768,6 +1771,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_STATIC_IP_SETTING" xml:space="preserve">
+    <value>You attempted an operation which needs the VM static-ip-setting feature on a VM which lacks it.</value>
   </data>
   <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
     <value>You attempted an operation which needs the VM cooperative suspend feature on a VM which lacks it.</value>
