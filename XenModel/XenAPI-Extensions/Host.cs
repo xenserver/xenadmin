@@ -191,7 +191,7 @@ namespace XenAPI
         {
             get
             {
-                if (name_description == "Default install of XenServer")  // i18n: CA-30372
+                if (name_description == "Default install of XenServer" || name_description == "Default install")  // i18n: CA-30372, CA-207273
                     return Messages.DEFAULT_INSTALL_OF_XENSERVER;
                 else if (name_description == null)
                     return "";
