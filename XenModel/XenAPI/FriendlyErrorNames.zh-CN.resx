@@ -112,13 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
+  </data>
+  <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
+    <value>The specified IP address violates the VIF locking configuration.</value>
   </data>
   <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
     <value>已对此服务器启用外部身份验证。</value>
@@ -533,6 +536,9 @@
   </data>
   <data name="INTERNAL_ERROR" xml:space="preserve">
     <value>内部错误: {0}</value>
+  </data>
+  <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
+    <value>A required parameter contained an invalid CIDR address (&lt;addr&gt;/&lt;prefix length&gt;)</value>
   </data>
   <data name="INVALID_DEVICE" xml:space="preserve">
     <value>设备名称 {0} 无效</value>
@@ -1137,7 +1143,7 @@
     <value>在目标中找不到该 ISO 共享名，或者访问权限可能不正确。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
-    <value>位置字符串格式不正确。对于 NFS 目标，字符串格式必须为 SERVER:PATH，对于 SMB 目标，格式必须为 \\SERVER\PATH</value>
+    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for CIFS targets</value>
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>本地路径无效</value>
@@ -1601,9 +1607,6 @@
   <data name="VBD_TRAY_LOCKED" xml:space="preserve">
     <value>此 VM 已锁定 DVD 驱动器托盘，因此无法弹出磁盘</value>
   </data>
-  <data name="VBD_XENPREP_CD_IN_USE" xml:space="preserve">
-    <value>无法弹出磁盘，因为正在升级此 VM 以通过 Windows Update 接收更新。只能使用命令行取消升级。</value>
-  </data>
   <data name="VCPUS_MAX_ALLOWED" xml:space="preserve">
     <value>此虚拟机已达到允许使用的最大虚拟 CPU 数。</value>
   </data>
@@ -1768,6 +1771,9 @@
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>您尝试在缺少协作关闭功能的 VM 上执行需要使用该功能的操作。</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_STATIC_IP_SETTING" xml:space="preserve">
+    <value>You attempted an operation which needs the VM static-ip-setting feature on a VM which lacks it.</value>
   </data>
   <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
     <value>您尝试在缺少协作暂停功能的 VM 上执行需要使用该功能的操作。</value>
