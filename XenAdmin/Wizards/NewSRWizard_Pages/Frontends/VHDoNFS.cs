@@ -167,6 +167,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (!action.Succeeded)
                     return;
 
+                GetSupportedNfsVersionsAndSetUI(action.Result);
+
                 List<SR.SRInfo> SRs = SR.ParseSRListXML(action.Result);
                 if (SRs.Count == 0)
                 {
@@ -181,8 +183,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     listBoxNfsSRs.Items.Add(info);
 
                 listBoxNfsSRs.TryAndSelectUUID();
-
-                GetSupportedNfsVersionsAndSetUI(action.Result);
                 
                 ToggleReattachControlsEnabledState(true);
             }
