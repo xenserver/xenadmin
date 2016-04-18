@@ -53,6 +53,7 @@ namespace XenAdmin.Controls
         private SrPickerItem LastSelectedItem;
         public event EventHandler ItemSelectionNull;
         public event EventHandler ItemSelectionNotNull;
+        public event EventHandler DoubleClickOnRow;
         public long DiskSize = 0;
         public long? OverridenInitialAllocationRate = null;
 
@@ -71,7 +72,8 @@ namespace XenAdmin.Controls
             srListBox.ShowDescription = true;
             srListBox.ShowImages = true;
             srListBox.NodeIndent = 3;
-            srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
+            srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
+            srListBox.DoubleClickOnRow += srListBox_DoubleClickOnRow;
 
             SrHint.Text = usage == SRPickerType.MoveOrCopy ?
                 Messages.IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT :
@@ -130,7 +132,8 @@ namespace XenAdmin.Controls
                 srListBox.ShowDescription = true;
                 srListBox.ShowImages = true;
                 srListBox.NodeIndent = 3;
-                srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
+                srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
+                srListBox.DoubleClickOnRow += srListBox_DoubleClickOnRow;
 
                 SrHint.Text = Messages.NEW_DISK_DIALOG_SR_HINT_TEXT;
 
@@ -147,6 +150,10 @@ namespace XenAdmin.Controls
             }
         }
 
+        private void srListBox_DoubleClickOnRow(object sender, EventArgs e)
+        {
+            DoubleClickOnRow(sender, e);
+        }
 
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {

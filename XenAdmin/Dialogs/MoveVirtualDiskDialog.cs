@@ -77,6 +77,7 @@ namespace XenAdmin.Dialogs
         {
             SRPicker.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
             SRPicker.ItemSelectionNull += srPicker1_ItemSelectionNull;
+            SRPicker.DoubleClickOnRow += SRPicker_DoubleClickOnRow;
         }
 
         protected SrPicker SRPicker
@@ -92,6 +93,12 @@ namespace XenAdmin.Dialogs
         private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
         {
             updateButtons();
+        }
+
+        void SRPicker_DoubleClickOnRow(object sender, EventArgs e)
+        {
+            if (buttonMove.Enabled)
+                buttonMove.PerformClick();
         }
 
         private void updateButtons()

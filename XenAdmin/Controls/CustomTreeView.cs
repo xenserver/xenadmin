@@ -492,9 +492,12 @@ namespace XenAdmin.Controls
         }
 
         public event EventHandler<EventArgs> ItemCheckChanged;
+        public event EventHandler DoubleClickOnRow;
 
         protected override void OnMouseDoubleClick(MouseEventArgs e)
         {
+            base.OnMouseDoubleClick(e);
+
             bool anythingChanged = false;
             Point loc = this.PointToClient(MousePosition);
             int index = this.IndexFromPoint(loc);
@@ -529,6 +532,8 @@ namespace XenAdmin.Controls
                 Resort();
                 Refresh();
             }
+
+            DoubleClickOnRow(this, e);
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
