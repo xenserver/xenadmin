@@ -612,12 +612,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                         actions.Add(action);
                 }
             }
-            foreach (var asyncAction in actions)
-            {
-                _progressDialog = new ActionProgressDialog(asyncAction, ProgressBarStyle.Blocks);
-                _progressDialog.ShowDialog(this);
-                Program.Invoke(Program.MainWindow, RefreshRechecks);
-            }
+            var multipleAction = new CrossConnectionParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, "", "", actions);
+            _progressDialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
+            _progressDialog.ShowDialog(this);
             Program.Invoke(Program.MainWindow, RefreshRechecks);
         }
 
