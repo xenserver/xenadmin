@@ -94,7 +94,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private void UpdateButtons()
         {
             NfsScanButton.Enabled = SrWizardHelpers.ValidateNfsSharename(NfsServerPathTextBox.Text);
-            nfsVersionSelectorTableLayoutPanel.Enabled = radioButtonNfsNew.Checked;
 
             OnPageUpdated();
         }
@@ -262,7 +261,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     dconf[SERVERPATH] = fullpath[1];
                 }
 
-                if (nfsVersion4RadioButton.Enabled && nfsVersion4RadioButton.Checked)
+                if (nfsVersion4RadioButton.Checked)
                     dconf[NFSVERSION] = "4";
 
                 return dconf;
