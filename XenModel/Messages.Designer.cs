@@ -14140,6 +14140,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The certificate is invalid..
+        /// </summary>
+        public static string EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID {
+            get {
+                return ResourceManager.GetString("EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Certificate path is invalid..
         /// </summary>
         public static string EXPORT_SECURITY_PAGE_ERROR_INVALID_CERT {
