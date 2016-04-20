@@ -533,7 +533,8 @@ namespace XenAdmin.Controls
                 Refresh();
             }
 
-            DoubleClickOnRow(this, e);
+            if (DoubleClickOnRow != null)
+                DoubleClickOnRow(this, e);
         }
 
         protected override void OnKeyUp(KeyEventArgs e)

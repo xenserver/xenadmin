@@ -152,7 +152,8 @@ namespace XenAdmin.Controls
 
         private void srListBox_DoubleClickOnRow(object sender, EventArgs e)
         {
-            DoubleClickOnRow(sender, e);
+            if (DoubleClickOnRow != null)
+                DoubleClickOnRow(sender, e);
         }
 
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)
