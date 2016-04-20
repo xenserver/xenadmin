@@ -1012,7 +1012,7 @@
     <value>VM の再開</value>
   </data>
   <data name="ACTION_VMS_SHUTTING_DOWN_TITLE" xml:space="preserve">
-    <value>Shutting Down VMs</value>
+    <value>VM をシャット ダウンしています</value>
   </data>
   <data name="ACTION_VMS_STARTING_ON_TITLE" xml:space="preserve">
     <value>VM の起動</value>
@@ -3035,7 +3035,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>複製</value>
   </data>
   <data name="COPY_VM_FAST_CLONE_DESCRIPTION" xml:space="preserve">
-    <value>ストレージレベルの高速ディスク クローン処理により、既存の VM を複製します。</value>
+    <value>ストレージレベルの高速ディスク クローン処理により、既存の VM を複製します</value>
   </data>
   <data name="COPY_VM_INTRA_POOL_RUBRIC" xml:space="preserve">
     <value>新しい VM の名前と説明 (オプション) を入力し、コピー モードを選択してください。</value>
@@ -3689,7 +3689,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>削除(&amp;D)</value>
   </data>
   <data name="DELETE_SEARCH_PROMPT" xml:space="preserve">
-    <value>保存済みの検索 {0} を削除してもよろしいですか?</value>
+    <value>保存済みの検索 '{0}' を削除してもよろしいですか?</value>
   </data>
   <data name="DELETE_SL_VOLUME_CONTEXT_MENU_ELIPS" xml:space="preserve">
     <value>StorageLink ボリュームの削除(&amp;S)...</value>
@@ -11408,10 +11408,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>アップグレードの事前チェック実行時に問題が発生しました。</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS" xml:space="preserve">
-    <value>Hosts in pool '{0}' have incompatible CPUs</value>
+    <value>プール '{0}' のホストに互換性のない CPU があります</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS_HELPMESSAGE" xml:space="preserve">
-    <value>Shut down all VMs</value>
+    <value>すべての VM のシャットダウン</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS" xml:space="preserve">
     <value>VM '{0}' の vCPU 設定が無効です。</value>
@@ -11423,7 +11423,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>アップグレードするサーバーを選択します。</value>
   </data>
   <data name="UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS" xml:space="preserve">
-    <value>{0}: Check skipped because hosts in pool '{1}' have incompatible CPUs</value>
+    <value>{0}: プール '{1}' のホストに互換性のない CPU があるためチェックがスキップされました</value>
   </data>
   <data name="UPGRADE_HOST" xml:space="preserve">
     <value>サーバー {0} のアップグレード</value>

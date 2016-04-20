@@ -727,7 +727,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="UncaptureKeyComboBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="UncaptureLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="FullscreenHeader" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="DockKeyComboBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="DockUndockabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="KeyComboListBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,30" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="UncaptureKeyComboBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="UncaptureLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="FullscreenHeader" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="DockKeyComboBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="DockUndockabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="KeyComboListBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="ShortcutsGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

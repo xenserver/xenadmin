@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,131 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data name="splitContainer1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 55</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>639, 395</value>
+  <data name="PoolNameColumn.HeaderText" xml:space="preserve">
+    <value>池</value>
   </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rubricLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="rubricLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rubricLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="rubricLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rubricLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="rubricLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="rubricLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 4</value>
-  </data>
-  <data name="rubricLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 34</value>
-  </data>
-  <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="rubricLabel.Text" xml:space="preserve">
-    <value>Health Check will automatically upload a server status report to the [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pools.</value>
-  </data>
-  <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
-    <value>rubricLabel</value>
-  </data>
-  <data name="&gt;&gt;rubricLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rubricLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;rubricLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PoolNameColum.HeaderText" xml:space="preserve">
-    <value>Pool</value>
-  </data>
-  <data name="PoolNameColum.MinimumWidth" type="System.Int32, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="PoolNameColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="PoolNameColum.Width" type="System.Int32, mscorlib">
+  <data name="PoolNameColumn.Width" type="System.Int32, mscorlib">
     <value>200</value>
   </data>
   <data name="StatusColumn.HeaderText" xml:space="preserve">
-    <value>Status</value>
+    <value>状态</value>
   </data>
   <data name="StatusColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="dataGridViewVMAppliances.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="poolsDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="dataGridViewVMAppliances.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="poolsDataGridView.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="dataGridViewVMAppliances.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 37</value>
+  <data name="poolsDataGridView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="dataGridViewVMAppliances.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 337</value>
+  <data name="poolsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>495, 356</value>
   </data>
-  <data name="dataGridViewVMAppliances.TabIndex" type="System.Int32, mscorlib">
+  <data name="poolsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVMAppliances.Name" xml:space="preserve">
-    <value>dataGridViewVMAppliances</value>
+  <data name="&gt;&gt;poolsDataGridView.Name" xml:space="preserve">
+    <value>poolsDataGridView</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVMAppliances.Type" xml:space="preserve">
+  <data name="&gt;&gt;poolsDataGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVMAppliances.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+  <data name="&gt;&gt;poolsDataGridView.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVMAppliances.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;poolsDataGridView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitContainer1.Panel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>300</value>
   </data>
   <data name="tableLayoutPanel2.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
     <value>Single</value>
@@ -265,7 +211,7 @@
     <value>0, 2, 0, 4</value>
   </data>
   <data name="poolNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 21</value>
+    <value>280, 21</value>
   </data>
   <data name="poolNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -285,13 +231,13 @@
   <data name="&gt;&gt;poolNameLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="poolDetailsPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="poolDetailsPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+  <data name="poolDetailsPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="healthCheckStatusPanel.AutoSize" type="System.Boolean, mscorlib">
@@ -303,80 +249,116 @@
   <data name="healthCheckStatusPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="scheduleLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="failedUploadDateLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="scheduleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="scheduleLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="failedUploadDateLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="scheduleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="failedUploadDateLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="scheduleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 150</value>
+  <data name="failedUploadDateLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 94</value>
   </data>
-  <data name="scheduleLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="failedUploadDateLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 3</value>
   </data>
-  <data name="scheduleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 15</value>
+  <data name="failedUploadDateLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 15</value>
   </data>
-  <data name="scheduleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="failedUploadDateLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="scheduleLabel.Text" xml:space="preserve">
-    <value>Upload a Health Check report </value>
+  <data name="&gt;&gt;failedUploadDateLabel.Name" xml:space="preserve">
+    <value>failedUploadDateLabel</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.Name" xml:space="preserve">
-    <value>scheduleLabel</value>
-  </data>
-  <data name="&gt;&gt;scheduleLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;failedUploadDateLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;failedUploadDateLabel.Parent" xml:space="preserve">
     <value>healthCheckStatusPanel</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;failedUploadDateLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="linkLabel2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="failedUploadLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="linkLabel2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="failedUploadLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="linkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="failedUploadLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="linkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 171</value>
+  <data name="failedUploadLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 94</value>
   </data>
-  <data name="linkLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="failedUploadLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 0, 3</value>
   </data>
-  <data name="linkLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 15</value>
+  <data name="failedUploadLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 15</value>
   </data>
-  <data name="linkLabel2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="failedUploadLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
-  <data name="linkLabel2.Text" xml:space="preserve">
-    <value>Edit Health Check settings</value>
+  <data name="failedUploadLabel.Text" xml:space="preserve">
+    <value>上次失败的上载:</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.Name" xml:space="preserve">
-    <value>linkLabel2</value>
+  <data name="failedUploadLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;failedUploadLabel.Name" xml:space="preserve">
+    <value>failedUploadLabel</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;failedUploadLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;failedUploadLabel.Parent" xml:space="preserve">
     <value>healthCheckStatusPanel</value>
   </data>
-  <data name="&gt;&gt;linkLabel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;failedUploadLabel.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lastUploadDateLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lastUploadDateLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="lastUploadDateLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lastUploadDateLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 24</value>
+  </data>
+  <data name="lastUploadDateLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="lastUploadDateLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 15</value>
+  </data>
+  <data name="lastUploadDateLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;lastUploadDateLabel.Name" xml:space="preserve">
+    <value>lastUploadDateLabel</value>
+  </data>
+  <data name="&gt;&gt;lastUploadDateLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lastUploadDateLabel.Parent" xml:space="preserve">
+    <value>healthCheckStatusPanel</value>
+  </data>
+  <data name="&gt;&gt;lastUploadDateLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="issuesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -391,16 +373,19 @@
     <value>NoControl</value>
   </data>
   <data name="issuesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 42</value>
+    <value>3, 3</value>
+  </data>
+  <data name="issuesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="issuesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 15</value>
+    <value>175, 15</value>
   </data>
   <data name="issuesLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="issuesLabel.Text" xml:space="preserve">
-    <value>No issues found</value>
+    <value>报告分析暂不可用</value>
   </data>
   <data name="&gt;&gt;issuesLabel.Name" xml:space="preserve">
     <value>issuesLabel</value>
@@ -409,46 +394,226 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;issuesLabel.Parent" xml:space="preserve">
-    <value>healthCheckStatusPanel</value>
+    <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;issuesLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
-  <data name="lastUploadDateLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="refreshLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lastUploadDateLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="refreshLinkLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="refreshLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="lastUploadDateLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="refreshLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lastUploadDateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 24</value>
+  <data name="refreshLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 3</value>
   </data>
-  <data name="lastUploadDateLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="refreshLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="lastUploadDateLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="refreshLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 15</value>
   </data>
-  <data name="lastUploadDateLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="refreshLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="lastUploadDateLabel.Text" xml:space="preserve">
-    <value>&lt;date&gt;</value>
+  <data name="refreshLinkLabel.Text" xml:space="preserve">
+    <value>刷新</value>
   </data>
-  <data name="&gt;&gt;lastUploadDateLabel.Name" xml:space="preserve">
-    <value>lastUploadDateLabel</value>
+  <data name="refreshLinkLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;lastUploadDateLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;refreshLinkLabel.Name" xml:space="preserve">
+    <value>refreshLinkLabel</value>
   </data>
-  <data name="&gt;&gt;lastUploadDateLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;refreshLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;refreshLinkLabel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;refreshLinkLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 42</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 21</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>healthCheckStatusPanel</value>
   </data>
-  <data name="&gt;&gt;lastUploadDateLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="disableLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="disableLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="disableLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="disableLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 240</value>
+  </data>
+  <data name="disableLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="disableLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 15</value>
+  </data>
+  <data name="disableLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="disableLinkLabel.Text" xml:space="preserve">
+    <value>禁用运行状况检查</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.Name" xml:space="preserve">
+    <value>disableLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.Parent" xml:space="preserve">
+    <value>healthCheckStatusPanel</value>
+  </data>
+  <data name="&gt;&gt;disableLinkLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="uploadRequestLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="uploadRequestLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="uploadRequestLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="uploadRequestLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 268</value>
+  </data>
+  <data name="uploadRequestLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 3</value>
+  </data>
+  <data name="uploadRequestLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 15</value>
+  </data>
+  <data name="uploadRequestLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="uploadRequestLinkLabel.Text" xml:space="preserve">
+    <value>立即请求额外上载</value>
+  </data>
+  <data name="&gt;&gt;uploadRequestLinkLabel.Name" xml:space="preserve">
+    <value>uploadRequestLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;uploadRequestLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;uploadRequestLinkLabel.Parent" xml:space="preserve">
+    <value>healthCheckStatusPanel</value>
+  </data>
+  <data name="&gt;&gt;uploadRequestLinkLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="scheduleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="scheduleLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="scheduleLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="scheduleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="scheduleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 198</value>
+  </data>
+  <data name="scheduleLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="scheduleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 15</value>
+  </data>
+  <data name="scheduleLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="scheduleLabel.Text" xml:space="preserve">
+    <value>上载运行状况检查报告 </value>
+  </data>
+  <data name="&gt;&gt;scheduleLabel.Name" xml:space="preserve">
+    <value>scheduleLabel</value>
+  </data>
+  <data name="&gt;&gt;scheduleLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;scheduleLabel.Parent" xml:space="preserve">
+    <value>healthCheckStatusPanel</value>
+  </data>
+  <data name="&gt;&gt;scheduleLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="editLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="editLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="editLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="editLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 219</value>
+  </data>
+  <data name="editLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="editLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 15</value>
+  </data>
+  <data name="editLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="editLinkLabel.Text" xml:space="preserve">
+    <value>编辑运行状况检查设置</value>
+  </data>
+  <data name="&gt;&gt;editLinkLabel.Name" xml:space="preserve">
+    <value>editLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;editLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;editLinkLabel.Parent" xml:space="preserve">
+    <value>healthCheckStatusPanel</value>
+  </data>
+  <data name="&gt;&gt;editLinkLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -460,10 +625,10 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 129</value>
+    <value>3, 177</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 10, 3, 3</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 15</value>
@@ -472,7 +637,7 @@
     <value>1</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Schedule:</value>
+    <value>计划:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -484,7 +649,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -505,7 +670,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Health Check analysis status:</value>
+    <value>运行状况检查分析状态:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -517,40 +682,43 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lastUploadLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lastUploadLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lastUploadLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="lastUploadLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 15</value>
+  <data name="lastUploadLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 15</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lastUploadLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Last successful upload: </value>
+  <data name="lastUploadLabel.Text" xml:space="preserve">
+    <value>上次成功上载:</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+  <data name="lastUploadLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lastUploadLabel.Name" xml:space="preserve">
+    <value>lastUploadLabel</value>
+  </data>
+  <data name="&gt;&gt;lastUploadLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lastUploadLabel.Parent" xml:space="preserve">
     <value>healthCheckStatusPanel</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;lastUploadLabel.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="ReportAnalysisLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -559,7 +727,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="ReportAnalysisLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 60</value>
+    <value>3, 66</value>
   </data>
   <data name="ReportAnalysisLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -571,7 +739,10 @@
     <value>3</value>
   </data>
   <data name="ReportAnalysisLinkLabel.Text" xml:space="preserve">
-    <value>View report analysis</value>
+    <value>查看报告分析</value>
+  </data>
+  <data name="ReportAnalysisLinkLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ReportAnalysisLinkLabel.Name" xml:space="preserve">
     <value>ReportAnalysisLinkLabel</value>
@@ -583,7 +754,7 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;ReportAnalysisLinkLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="previousUploadPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -594,40 +765,40 @@
   <data name="previousUploadPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="viewReportLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="linkLabel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="viewReportLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="linkLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="viewReportLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="viewReportLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="linkLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="viewReportLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="viewReportLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 15</value>
   </data>
-  <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="viewReportLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="linkLabel1.Text" xml:space="preserve">
-    <value>View previous report analysis</value>
+  <data name="viewReportLinkLabel.Text" xml:space="preserve">
+    <value>查看以前的报告分析</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
-    <value>linkLabel1</value>
+  <data name="&gt;&gt;viewReportLinkLabel.Name" xml:space="preserve">
+    <value>viewReportLinkLabel</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;viewReportLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;viewReportLinkLabel.Parent" xml:space="preserve">
     <value>previousUploadPanel</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;viewReportLinkLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="previousUploadDateLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -640,19 +811,16 @@
     <value>NoControl</value>
   </data>
   <data name="previousUploadDateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 3</value>
+    <value>104, 3</value>
   </data>
   <data name="previousUploadDateLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="previousUploadDateLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 15</value>
+    <value>0, 15</value>
   </data>
   <data name="previousUploadDateLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="previousUploadDateLabel.Text" xml:space="preserve">
-    <value>&lt;date&gt;</value>
   </data>
   <data name="&gt;&gt;previousUploadDateLabel.Name" xml:space="preserve">
     <value>previousUploadDateLabel</value>
@@ -679,7 +847,7 @@
     <value>3, 3</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 3, 0, 3</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -688,7 +856,7 @@
     <value>2</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Previous upload: </value>
+    <value>上次上载: </value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -709,16 +877,22 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="previousUploadPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 81</value>
+    <value>0, 122</value>
+  </data>
+  <data name="previousUploadPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 10, 0, 3</value>
   </data>
   <data name="previousUploadPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="previousUploadPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 42</value>
+    <value>274, 42</value>
   </data>
   <data name="previousUploadPanel.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
+  </data>
+  <data name="previousUploadPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;previousUploadPanel.Name" xml:space="preserve">
     <value>previousUploadPanel</value>
@@ -730,10 +904,10 @@
     <value>healthCheckStatusPanel</value>
   </data>
   <data name="&gt;&gt;previousUploadPanel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="previousUploadPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabel1" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadDateLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,52,Percent,48" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="viewReportLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="previousUploadDateLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,52,Percent,48" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="healthCheckStatusPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -745,10 +919,10 @@
     <value>3, 3</value>
   </data>
   <data name="healthCheckStatusPanel.RowCount" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="healthCheckStatusPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 189</value>
+    <value>274, 307</value>
   </data>
   <data name="healthCheckStatusPanel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -760,13 +934,13 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;healthCheckStatusPanel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
+    <value>poolDetailsPanel</value>
   </data>
   <data name="&gt;&gt;healthCheckStatusPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="healthCheckStatusPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="scheduleLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="linkLabel2" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="issuesLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ReportAnalysisLinkLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,AutoSize,20,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="failedUploadDateLabel" Row="5" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="failedUploadLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="flowLayoutPanel1" Row="3" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="disableLinkLabel" Row="10" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="uploadRequestLinkLabel" Row="11" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="scheduleLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="editLinkLabel" Row="9" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="label4" Row="7" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="lastUploadLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="ReportAnalysisLinkLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="previousUploadPanel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="notEnrolledPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -777,40 +951,40 @@
   <data name="notEnrolledPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="linkLabel3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="enrollNowLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="linkLabel3.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="enrollNowLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="linkLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="enrollNowLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="linkLabel3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="enrollNowLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="linkLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="enrollNowLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="linkLabel3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="enrollNowLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 15</value>
   </data>
-  <data name="linkLabel3.TabIndex" type="System.Int32, mscorlib">
+  <data name="enrollNowLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="linkLabel3.Text" xml:space="preserve">
-    <value>Enroll now</value>
+  <data name="enrollNowLinkLabel.Text" xml:space="preserve">
+    <value>立即注册</value>
   </data>
-  <data name="&gt;&gt;linkLabel3.Name" xml:space="preserve">
-    <value>linkLabel3</value>
+  <data name="&gt;&gt;enrollNowLinkLabel.Name" xml:space="preserve">
+    <value>enrollNowLinkLabel</value>
   </data>
-  <data name="&gt;&gt;linkLabel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;enrollNowLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;enrollNowLinkLabel.Parent" xml:space="preserve">
     <value>notEnrolledPanel</value>
   </data>
-  <data name="&gt;&gt;linkLabel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;enrollNowLinkLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
@@ -832,13 +1006,13 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 15</value>
+    <value>268, 15</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Not enrolled into Health Check</value>
+    <value>未在运行状况检查中注册</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -859,13 +1033,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="notEnrolledPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 198</value>
+    <value>3, 316</value>
   </data>
   <data name="notEnrolledPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="notEnrolledPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 106</value>
+    <value>274, 42</value>
   </data>
   <data name="notEnrolledPanel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -877,46 +1051,46 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;notEnrolledPanel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
+    <value>poolDetailsPanel</value>
   </data>
   <data name="&gt;&gt;notEnrolledPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="notEnrolledPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabel3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="enrollNowLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
-  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="poolDetailsPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tableLayoutPanel3.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="poolDetailsPanel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="poolDetailsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 26</value>
   </data>
-  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+  <data name="poolDetailsPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 307</value>
+  <data name="poolDetailsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 326</value>
   </data>
-  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+  <data name="poolDetailsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
+  <data name="&gt;&gt;poolDetailsPanel.Name" xml:space="preserve">
+    <value>poolDetailsPanel</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;poolDetailsPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;poolDetailsPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;poolDetailsPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="healthCheckStatusPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="notEnrolledPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="poolDetailsPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="healthCheckStatusPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="notEnrolledPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -925,13 +1099,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 37</value>
+    <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 337</value>
+    <value>288, 356</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -943,13 +1117,169 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+    <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="poolNameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,75" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="poolNameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="poolDetailsPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,Percent,75,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="splitContainer1.Panel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>220</value>
+  </data>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>787, 356</value>
+  </data>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>495</value>
+  </data>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>727, 432</value>
+  </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 3</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 15</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Text" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.Name" xml:space="preserve">
+    <value>PolicyStatementLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rubricLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="rubricLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rubricLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rubricLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rubricLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="rubricLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="rubricLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 4</value>
+  </data>
+  <data name="rubricLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>790, 34</value>
+  </data>
+  <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="rubricLabel.Text" xml:space="preserve">
+    <value>运行状况检查会自动将服务器状态报告上载到 [Citrix] Insight Services，具体取决于您的 [XenServer] 池上配置的预定义计划。</value>
+  </data>
+  <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
+    <value>rubricLabel</value>
+  </data>
+  <data name="&gt;&gt;rubricLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rubricLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;rubricLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -957,14 +1287,17 @@
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 12</value>
   </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
+  </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 377</value>
+    <value>793, 414</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -979,7 +1312,40 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="rubricLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="dataGridViewVMAppliances" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,295" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="PolicyStatementLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="splitContainer1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="rubricLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,20,Percent,100" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="showAgainCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="showAgainCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="showAgainCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="showAgainCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 435</value>
+  </data>
+  <data name="showAgainCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 19</value>
+  </data>
+  <data name="showAgainCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="showAgainCheckBox.Text" xml:space="preserve">
+    <value>连接到未在运行状况检查中注册的服务器时显示此对话框(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;showAgainCheckBox.Name" xml:space="preserve">
+    <value>showAgainCheckBox</value>
+  </data>
+  <data name="&gt;&gt;showAgainCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;showAgainCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;showAgainCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -988,21 +1354,21 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>721, 428</value>
+    <value>819, 467</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>580, 320</value>
+    <value>600, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Health Check Overview</value>
+    <value>运行状况检查概述</value>
   </data>
-  <data name="&gt;&gt;PoolNameColum.Name" xml:space="preserve">
-    <value>PoolNameColum</value>
+  <data name="&gt;&gt;PoolNameColumn.Name" xml:space="preserve">
+    <value>PoolNameColumn</value>
   </data>
-  <data name="&gt;&gt;PoolNameColum.Type" xml:space="preserve">
+  <data name="&gt;&gt;PoolNameColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;StatusColumn.Name" xml:space="preserve">
