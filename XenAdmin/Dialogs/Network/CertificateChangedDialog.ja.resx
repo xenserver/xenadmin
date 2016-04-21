@@ -316,10 +316,10 @@
     <value>NoControl</value>
   </data>
   <data name="Blurb2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 154</value>
+    <value>50, 126</value>
   </data>
   <data name="Blurb2Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 66</value>
+    <value>464, 82</value>
   </data>
   <data name="Blurb2Label.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
