@@ -11,7 +11,7 @@ This is a multi-part message in MIME format.
 
 ------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/html;
-	charset="iso-8859-1"
+	charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Location: file://C:\XenCenter\HomePage\index.html
 
@@ -19,9 +19,9 @@ Content-Location: file://C:\XenCenter\HomePage\index.html
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" =
 "http://www.w3.org/TR/html4/strict.dtd"><HTML><HEAD><META=20
 content=3D"IE=3D11.0000" http-equiv=3D"X-UA-Compatible">
-     <!-- File saved as ISO-8859-1 encoding. -->    =20
+     <!-- File saved as UTF-8 encoding. -->    =20
 <META http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3DISO-8859-1">    =20
+charset=3DUTF-8">    =20
 <TITLE>Citrix XenServer</TITLE>     <!-- CSS Framework -->     <LINK =
 href=3D"file:///C:/XenCenter/HomePage/css/screen.css"=20
 rel=3D"stylesheet" type=3D"text/css" media=3D"screen, projection">     =
@@ -58,36 +58,30 @@ id=3D"logo-citrixXenServer" alt=3D"Citrix XenServer Logo" =
 src=3D"file:///C:/XenCenter/HomePage/media/logos/cx-logo-citrixXenServer.=
 png"><!-- start tagline -->
 					=20
-<P title=3D"Industry leading open srouce platform for cloud server and =
-desktop virtualization"=20
-class=3D"cx-tagline"><SPAN>Industry leading open source platform for =
-cloud=20
-server<BR> and desktop virtualization</SPAN><!-- need span for ie7 =
+<P title=3D"業界で高く評価されているクラウド、サーバー、デスクトップの仮想化プラットフォームです。"=20
+class=3D"cx-tagline"><SPAN>業界で高く評価されているクラウド サーバー<BR>およびデスクトップの仮想化プラットフォームです。</SPAN><!-- need span for ie7 =
 opacity -->
 					 </P><!-- end tagline -->					 <!-- start call outs -->					=20
 <UL class=3D"cx-callouts-list">
-  <LI title=3D"Learn about using XenCenter" class=3D"cx-doc-icon"><A =
+  <LI title=3D"XenCenter の使用について" class=3D"cx-doc-icon"><A =
 class=3D"cx-link"=20
-  href=3D"xencenter://HelpContents/">Learn about using XenCenter</A>					=
+  href=3D"xencenter://HelpContents/">XenCenter の使用について</A>					=
 	 </LI>
-  <LI title=3D"Learn about XenServer and Workspace Cloud" =
+  <LI title=3D"XenServerおよびWorkspace Cloudについて" =
 class=3D"cx-doc-icon"><A=20
-  class=3D"cx-link" href=3D"https://www.citrix.com/xenserver/clm">Learn =
-about=20
-  XenServer and Citrix Lifecycle Manager</A>						 </LI>
-  <LI title=3D"Network with other XenServer users" =
+  class=3D"cx-link" href=3D"https://www.citrix.com/xenserver/clm">XenServer および Citrix Lifecycle Manager について</A>						 </LI>
+  <LI title=3D"XenServer ユーザー ネットワーク" =
 class=3D"cx-doc-icon"><A class=3D"cx-link"=20
-  href=3D"http://xenserver.org/">Network with other XenServer users</A>
+  href=3D"http://xenserver.org/">XenServer ユーザー ネットワーク</A>
 						 </LI>
-  <LI title=3D"Community Support Partners" class=3D"cx-doc-icon last"><A =
+  <LI title=3D"製品情報、コミュニティ、サポート、対応製品" class=3D"cx-doc-icon last"><A =
 class=3D"cx-link"=20
-  href=3D"https://www.citrix.com/support">Visit the Citrix Knowledge =
-Center</A>
+  href=3D"https://www.citrix.com/support">Citrix Knowledge Center の参照</A>
   						 </LI></UL><!-- end call outs -->				 </DIV><!-- end left column =
 -->				 <!-- start right column -->
 				=20
 <DIV class=3D"column right span-6 last"><IMG id=3D"cloudServerGraphic" =
-alt=3D"Cloud Server Graphic"=20
+alt=3D"クラウド サーバーのグラフィック"=20
 src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-cloudServerGraphic.pn=
 g">
 				 </DIV><!-- end right column -->			 </DIV></DIV><!-- End Top Section =
@@ -95,29 +89,29 @@ g">
 		=20
 <DIV class=3D"span-18  cx-hero-bottom clearfix">
 <DIV class=3D"column prepend-1 clearfix"><!-- start card 1 -->				=20
-<DIV title=3D"Add a Server" class=3D"span-6 cx-cards"><A =
+<DIV title=3D"サーバーの追加" class=3D"span-6 cx-cards"><A =
 class=3D"cx-link" href=3D"xencenter://AddServer/"><IMG=20
-id=3D"addServer" alt=3D"Add a Server" =
+id=3D"addServer" alt=3D"サーバーの追加" =
 src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png">
-<P>							Add a Server						 </P></A>				 </DIV><!-- end card 1 -->				 =
+<P>							サーバーの追加						 </P></A>				 </DIV><!-- end card 1 -->				 =
 <!-- start card 2 -->
 				=20
-<DIV title=3D"Purchase Support" class=3D"span-6 cx-cards"><A =
+<DIV title=3D"購入サポート" class=3D"span-6 cx-cards"><A =
 class=3D"cx-link" =
 href=3D"http://www.citrix.com/xenserver/le/features"><IMG=20
-id=3D"purchaseSupport" alt=3D"Purchase Support" =
+id=3D"purchaseSupport" alt=3D"購入サポート" =
 src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-purchaseSupport.=
 png">
-<P>							Purchase Support						 </P></A>				 </DIV><!-- end card 2 -->		=
+<P>							購入サポート						 </P></A>				 </DIV><!-- end card 2 -->		=
 		 <!-- start card 3 -->
 				=20
-<DIV title=3D"Try Desktop Virtualization" class=3D"span-6 cx-cards =
+<DIV title=3D"デスクトップの仮想化の試行" class=3D"span-6 cx-cards =
 last"><A class=3D"cx-link"=20
 href=3D"http://www.citrix.com/TryXenDesktop"><IMG id=3D"deskTopVirt" =
-alt=3D"Try Desktop Virtualization"=20
+alt=3D"デスクトップの仮想化の試行"=20
 src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualizatio=
 n.png">
-<P>							Try Desktop Virtualization						 </P></A>				 </DIV><!-- end =
+<P>							デスクトップの仮想化の試行						 </P></A>				 </DIV><!-- end =
 card 3 -->
 			 </DIV></DIV><!-- END Bottom Section -->     </DIV><IMG width=3D"0" =
 height=3D"0"=20
@@ -687,7 +681,7 @@ eecZkDIYMt6pA7p4E05DBtw7VDEEVDz2AOkQCsxoAggwACbuXbJX+JbPAAAAAElFTkSuQmCC
 
 ------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/css;
-	charset="iso-8859-1"
+	charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Location: file:///C:/XenCenter/HomePage/css/screen.css
 
@@ -1260,7 +1254,7 @@ hidden; content: "\0020";
 
 ------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/css;
-	charset="iso-8859-1"
+	charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Location: file:///C:/XenCenter/HomePage/css/theme.css
 
@@ -1354,7 +1348,7 @@ img#deskTopVirt {
 
 ------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/css;
-	charset="iso-8859-1"
+	charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Location: file:///C:/XenCenter/HomePage/css/print.css
 
