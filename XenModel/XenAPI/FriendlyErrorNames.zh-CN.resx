@@ -121,7 +121,7 @@
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
   </data>
   <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
-    <value>The specified IP address violates the VIF locking configuration.</value>
+    <value>指定 IP 地址与 VIF 锁定配置不符。</value>
   </data>
   <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
     <value>已对此服务器启用外部身份验证。</value>
@@ -538,7 +538,7 @@
     <value>内部错误: {0}</value>
   </data>
   <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
-    <value>A required parameter contained an invalid CIDR address (&lt;addr&gt;/&lt;prefix length&gt;)</value>
+    <value>必需参数包含无效 CIDR 地址(&lt;地址&gt;/&lt;前缀长度&gt;)</value>
   </data>
   <data name="INVALID_DEVICE" xml:space="preserve">
     <value>设备名称 {0} 无效</value>
@@ -1143,7 +1143,7 @@
     <value>在目标中找不到该 ISO 共享名，或者访问权限可能不正确。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
-    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for CIFS targets</value>
+    <value>位置字符串格式不正确。对于 NFS 目标，字符串格式必须为 SERVER:PATH，对于 CIFS 目标，格式必须为 \\SERVER\PATH</value>
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>本地路径无效</value>
@@ -1773,7 +1773,7 @@
     <value>您尝试在缺少协作关闭功能的 VM 上执行需要使用该功能的操作。</value>
   </data>
   <data name="VM_LACKS_FEATURE_STATIC_IP_SETTING" xml:space="preserve">
-    <value>You attempted an operation which needs the VM static-ip-setting feature on a VM which lacks it.</value>
+    <value>尝试执行的操作要求在 VM 上启用 VM static-ip-setting 功能，但 VM 缺少该功能。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
     <value>您尝试在缺少协作暂停功能的 VM 上执行需要使用该功能的操作。</value>

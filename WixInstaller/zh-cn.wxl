@@ -6,13 +6,13 @@
     <String Id="OVA_File">OVA 文件</String>
     <String Id="VHD_File">VHD 文件</String>
     <String Id="VMDK_File">VMDK 文件</String>
-    <String Id="XenServer_License_File">[XenServer] 许可文件</String>
+    <String Id="XenServer_License_File">[XenServer] 许可证文件</String>
     <String Id="XenServer_Backup_File">[XenServer] 备份文件</String>
     <String Id="XenServer_Update_File">[XenServer] 更新文件</String>
     <String Id="XenServer_OEM_Update_File">[XenServer] OEM 更新文件</String>
     <String Id="XenCenter_Saved_Search">[XenCenter] 保存的搜索</String>
     <String Id="Required_For_Installation">此安装需要 .NET Framework 4。</String>
     <String Id="Readme">声明.TXT</String>
-	<String Id="HealthCheckDescr">Enables monitoring of the health of your Citrix XenServer pools by periodically uploading data from the servers to Citrix Insight Services.</String>
-	<String Id="HealthCheckDescrShort">Enables monitoring of the health of your Citrix XenServer pools.</String>
+	<String Id="HealthCheckDescr">通过定期将数据从服务器上载到 Citrix Insight Services，实现对 Citrix XenServer 池的运行状况监视。</String>
+	<String Id="HealthCheckDescrShort">允许监视 Citrix XenServer 池的运行状况。</String>
 </WixLocalization>

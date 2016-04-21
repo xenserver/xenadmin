@@ -10037,7 +10037,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Select the security protocols that can be used for communicating with this server.</value>
   </data>
   <data name="SECURITYEDITPAGE_SUBTEXT_SSL" xml:space="preserve">
-    <value>SSL &amp; TLS</value>
+    <value>Backwards compatibility</value>
   </data>
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>TLS 1.2 only</value>

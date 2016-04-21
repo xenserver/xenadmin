@@ -28852,7 +28852,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SSL &amp; TLS.
+        ///   Looks up a localized string similar to Backwards compatibility.
         /// </summary>
         public static string SECURITYEDITPAGE_SUBTEXT_SSL {
             get {
