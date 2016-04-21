@@ -214,7 +214,7 @@
     <value>500, 90</value>
   </data>
   <data name="vmShinyBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>530, 90</value>
+    <value>500, 90</value>
   </data>
   <data name="vmShinyBar.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
