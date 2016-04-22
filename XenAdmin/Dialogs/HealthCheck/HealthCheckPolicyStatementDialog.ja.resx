@@ -166,7 +166,7 @@
     <value>None</value>
   </data>
   <data name="policyStatementTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 80</value>
+    <value>424, 90</value>
   </data>
   <data name="policyStatementTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

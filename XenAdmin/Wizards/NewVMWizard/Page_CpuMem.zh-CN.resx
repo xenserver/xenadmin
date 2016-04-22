@@ -217,13 +217,13 @@
     <value>1</value>
   </data>
   <data name="spinnerStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 178</value>
+    <value>0, 182</value>
   </data>
   <data name="spinnerStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="spinnerStatMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 31</value>
+    <value>265, 25</value>
   </data>
   <data name="spinnerStatMax.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -241,13 +241,13 @@
     <value>3</value>
   </data>
   <data name="spinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 147</value>
+    <value>0, 157</value>
   </data>
   <data name="spinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="spinnerDynMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 31</value>
+    <value>265, 25</value>
   </data>
   <data name="spinnerDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -265,13 +265,13 @@
     <value>5</value>
   </data>
   <data name="spinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 116</value>
+    <value>0, 132</value>
   </data>
   <data name="spinnerDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="spinnerDynMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 31</value>
+    <value>265, 25</value>
   </data>
   <data name="spinnerDynMin.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
