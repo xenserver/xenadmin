@@ -168,6 +168,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 4);
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
             // 
             // BugToolPageDestination
