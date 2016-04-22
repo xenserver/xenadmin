@@ -45,7 +45,7 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const string DIAG_RESULT_URL = "/diag_sdk/diag_results/";
-        private const string ANALYSIS_PROGRESS_URL = "/diag_sdk/analysis_progress";
+        private const string ANALYSIS_PROGRESS_URL = "/diag_sdk/analysis_progress/";
         private readonly string diagnosticDomainName = "https://cis.citrix.com";
        
         public GetHealthCheckAnalysisResultAction(Pool pool, bool suppressHistory)
