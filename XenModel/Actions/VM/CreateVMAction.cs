@@ -226,7 +226,10 @@ namespace XenAdmin.Actions.VMActions
 
         private void ApplyRecommendationsForVendorDevice()
         {
-            if (Template.HasVendorDeviceRecommendation && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
+            var pool = Helpers.GetPoolOfOne(Connection);
+            bool poolPolicyNoVendorDevice = pool == null || pool.policy_no_vendor_device;
+
+            if (Template.HasVendorDeviceRecommendation && !poolPolicyNoVendorDevice && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
             {
                 log.DebugFormat("Recommendation (has-vendor-device = true) has been found on the template ({0}) and the host is licensed, so applying it on VM ({1}) being created.", Template.opaque_ref, VM.opaque_ref);
                 VM.set_has_vendor_device(Connection.Session, VM.opaque_ref, true);
@@ -236,10 +239,13 @@ namespace XenAdmin.Actions.VMActions
                 log.DebugFormat("Recommendation (has-vendor-device = true) has not been applied on the VM ({0}) being created.", VM.opaque_ref);
 
                 if (!Template.HasVendorDeviceRecommendation)
-                    log.InfoFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
+                    log.DebugFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
+
+                if (poolPolicyNoVendorDevice)
+                    log.DebugFormat("pool.policy_no_vendor_device returned {0}", poolPolicyNoVendorDevice);
 
                 if (Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
-                    log.InfoFormat("Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice) returned {0}", Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice));
+                    log.DebugFormat("Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice) returned {0}", Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice));
             }
         }
 
