@@ -592,6 +592,10 @@ namespace XenAPI
         Response<Object>
         pool_get_cpu_info(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_policy_no_vendor_device")]
+        Response<bool>
+        pool_get_policy_no_vendor_device(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -671,6 +675,10 @@ namespace XenAPI
         [XmlRpcMethod("pool.set_wlb_verify_cert")]
         Response<string>
         pool_set_wlb_verify_cert(string session, string _pool, bool _wlb_verify_cert);
+
+        [XmlRpcMethod("pool.set_policy_no_vendor_device")]
+        Response<string>
+        pool_set_policy_no_vendor_device(string session, string _pool, bool _policy_no_vendor_device);
 
         [XmlRpcMethod("pool.join")]
         Response<string>
@@ -6954,6 +6962,7 @@ namespace XenAPI
         public Object current_operations;
         public Object guest_agent_config;
         public Object cpu_info;
+        public bool policy_no_vendor_device;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
