@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -95,7 +94,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             Dictionary<int, string> days = new Dictionary<int, string>();
             foreach (var dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {
-                days.Add((int)dayOfWeek, DateTimeFormatInfo.CurrentInfo.GetDayName((DayOfWeek)dayOfWeek));
+                days.Add((int)dayOfWeek, HelpersGUI.DayOfWeekToString((DayOfWeek)dayOfWeek, true));
             }
             return days;
         }

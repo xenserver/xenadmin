@@ -503,6 +503,23 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
+        /// Returns the full name of the specified DayOfWeek, making sure that the resultant string is localised if and only if necessary.
+        /// Localised means: in the language of the program (not in the language of the OS).
+        /// </summary>
+        public static string DayOfWeekToString(DayOfWeek dayOfWeek, bool localise)
+        {
+            if (localise)
+            {
+                Program.AssertOnEventThread();
+                // get the day of the week localized to culture of the current thread
+                return DateTimeFormatInfo.CurrentInfo.GetDayName(dayOfWeek);
+            }
+            else
+                return dayOfWeek.ToString();
+        }
+
+
+        /// <summary>
         /// The expiry date of a host's license
         /// </summary>
         /// <param name="referenceDate">Should be UTC!</param>
