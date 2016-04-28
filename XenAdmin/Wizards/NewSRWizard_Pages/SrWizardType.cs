@@ -212,7 +212,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         }
     }
 
-    public class SrWizardType_LvmoIscsi : SrWizardType
+    public class SrWizardType_Iscsi : SrWizardType
     {
         public override bool IsEnhancedSR { get { return false; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_LVMOISCSI_BLURB; } }

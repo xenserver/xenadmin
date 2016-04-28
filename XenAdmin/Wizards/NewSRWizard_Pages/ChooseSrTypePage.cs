@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
             // Store the SrWizardType on the tag of their RadioButton
             radioButtonNfs.Tag = new SrWizardType_VhdoNfs();
-            radioButtonIscsi.Tag = new SrWizardType_LvmoIscsi();
+            radioButtonIscsi.Tag = new SrWizardType_Iscsi();
             radioButtonFibreChannel.Tag = new SrWizardType_LvmoHba();
             radioButtonNfsIso.Tag = new SrWizardType_NfsIso();
             radioButtonCifsIso.Tag = new SrWizardType_CifsIso();

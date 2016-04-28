@@ -279,7 +279,7 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     AddPage(xenTabPageVhdoNFS);
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
                 }
@@ -335,7 +335,7 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     xenTabPageVhdoNFS.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_LvmoHba)
                     xenTabPageLvmoHba.SrWizardType = m_srWizardType;
