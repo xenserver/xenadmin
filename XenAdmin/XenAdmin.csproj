@@ -167,6 +167,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomGridView\GridTreeExpanderItem.cs" />
+    <Compile Include="Controls\SrProvisioningMethod.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SrProvisioningMethod.Designer.cs">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ThinProvisioningParametersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1399,6 +1405,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\SrProvisioningMethod.ja.resx">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SrProvisioningMethod.resx">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SrProvisioningMethod.zh-CN.resx">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
       <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
     </EmbeddedResource>

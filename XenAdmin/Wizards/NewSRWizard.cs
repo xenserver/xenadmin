@@ -368,6 +368,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
+                m_srWizardType.IsLVM = xenTabPageLvmoIscsi.SRType == SR.SRTypes.lvmoiscsi;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
