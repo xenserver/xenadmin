@@ -229,20 +229,17 @@ namespace XenAPI
         /// </summary>
         public bool CanCreateWithXenCenter()
         {
-            get
-            {
-                SRTypes type = GetSRType(false);
-                return type == SRTypes.iso
-                    || type == SRTypes.lvmoiscsi
-                    || type == SRTypes.nfs
-                    || type == SRTypes.equal
-                    || type == SRTypes.netapp
-                    || type == SRTypes.lvmohba
-                    || type == SRTypes.cslg
-                    || type == SRTypes.smb
-                    || type == SRTypes.lvmofcoe
-                    || type == SRTypes.gfs2;
-            }
+            SRTypes type = GetSRType(false);
+            return type == SRTypes.iso
+                || type == SRTypes.lvmoiscsi
+                || type == SRTypes.nfs
+                || type == SRTypes.equal
+                || type == SRTypes.netapp
+                || type == SRTypes.lvmohba
+                || type == SRTypes.cslg
+                || type == SRTypes.smb
+                || type == SRTypes.lvmofcoe
+                || type == SRTypes.gfs2;
         }
 
         public bool IsLocalSR()

@@ -107,6 +107,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public abstract bool ShowIntroducePrompt { get; }
         public abstract bool ShowReattachWarning { get; }
         public abstract bool AllowToCreateNewSr { get; set; }
+        public virtual bool IsLVM { get { return false; } set { } }
 
         public string SrName
         {
@@ -216,11 +217,18 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override bool IsEnhancedSR { get { return false; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_LVMOISCSI_BLURB; } }
         public override string FrontendTypeName { get { return Messages.NEWSR_LVMOISCSI_TYPE_NAME; } }
-        public override SR.SRTypes Type { get { return SR.SRTypes.lvmoiscsi; } }
+        public override SR.SRTypes Type { get { return IsLVM ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return true; } }
         public override bool AllowToCreateNewSr { get; set; }
+
+        private bool isLVM = true;
+        public override bool IsLVM 
+        {
+            get { return isLVM; }
+            set { isLVM = value; }
+        }
 
         public override void ResetSrName(IXenConnection connection)
         {
