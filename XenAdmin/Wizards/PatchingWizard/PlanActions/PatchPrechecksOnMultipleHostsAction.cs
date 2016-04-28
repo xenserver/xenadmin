@@ -29,38 +29,88 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
+using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
+using System.IO;
+using XenAdmin.Network;
+using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    class RemoveUpdateFileFromMasterPlanAction : PlanActionWithSession
+    class PatchPrechecksOnMultipleHostsPlanAction : PlanActionWithSession
     {
-        private readonly List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
-        private readonly XenServerPatch patch = null;
-        private readonly Host master = null;
+        private readonly XenServerPatch patch;
+        private readonly List<PoolPatchMapping> mappings;
+        private List<Host> hosts = null;
 
-        public RemoveUpdateFileFromMasterPlanAction(Host master, List<PoolPatchMapping> patchMappings, XenServerPatch patch)
-            : base(master.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, master.Name))
+        public PatchPrechecksOnMultipleHostsPlanAction(IXenConnection connection, XenServerPatch patch, List<Host> hosts, List<PoolPatchMapping> mappings)
+            : base(connection, string.Format("Checking free space for uploading and installing {0}...", patch.Name))
         {
-            this.patchMappings = patchMappings;
             this.patch = patch;
-            this.master = master;
+            this.hosts = hosts;
+            this.mappings = mappings;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            var mapping = patchMappings.FirstOrDefault(pm => pm.Host == master && pm.XenServerPatch == patch);
-
-            if (mapping != null)
+            var mapping = mappings.Find(m => m.XenServerPatch == patch);
+            if (mapping != null && mapping.Pool_patch != null)
             {
-                var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
-                PollTaskForResultAndDestroy(Connection, ref session, task);
 
-                patchMappings.Remove(mapping);
+                foreach (var host in hosts)
+                {
+                    try
+                    {
+                        var check = new PatchPrecheckCheck(host, mapping.Pool_patch);
+                        var problem = check.RunCheck();
+                        
+                        if (problem != null)
+                        {
+                            //there is a problem...
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.WarnFormat("Could not run PatchPrecheckCheck");
+                        throw ex;
+                    }
+                }
+
+
+
+
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
     }
 }

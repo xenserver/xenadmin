@@ -40,17 +40,15 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    class DownloadAndUploadPatch : PlanActionWithSession
+    class DownloadPatchPlanAction : PlanActionWithSession
     {
-        private readonly XenRef<Pool_patch> _patchRef;
-        //private readonly string path;
         private readonly XenServerPatch patch;
         private readonly List<PoolPatchMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private string tempFileName = null;
 
-        public DownloadAndUploadPatch(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
-            : base(connection, string.Format("Downloading and uploading {0} to {1}...", patch.Name, connection.Name))
+        public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
+            : base(connection, string.Format("Downloading update {0}...", patch.Name))
         {
             this.patch = patch;
             this.mappings = mappings;
@@ -62,37 +60,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             lock (patch)
             {
                 //if it has not been already downloaded
-                if (!AllDownloadedPatches.Any(dp => dp.Key == patch && !string.IsNullOrEmpty(dp.Value)) 
+                if (!AllDownloadedPatches.Any(dp => dp.Key == patch && !string.IsNullOrEmpty(dp.Value))
                     || !File.Exists(AllDownloadedPatches[patch]))
                 {
                     DownloadFile(ref session);
                 }
-            }
-
-            var path = AllDownloadedPatches[patch];
-
-            var poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
-            var conn = session.Connection;
-
-            var existingMapping = mappings.Find(m => m.Host == Helpers.GetMaster(conn) && m.Pool_patch != null && m.XenServerPatch == patch);
-            if (existingMapping == null
-                || !poolPatches.Any(p => string.Equals(p.uuid, existingMapping.Pool_patch.uuid, StringComparison.OrdinalIgnoreCase)))
-            {
-                var action = new UploadPatchAction(session.Connection, path, true, false);
-                action.RunExternal(session);
-
-                var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
-
-                var newMapping = new PoolPatchMapping()
+                else
                 {
-                    Host = Helpers.GetMaster(session.Connection),
-                    XenServerPatch = patch,
-                    Pool_patch = poolPatch
-                };
-
-                if (!mappings.Any(m => m.Host == newMapping.Host && m.Pool_patch == newMapping.Pool_patch && m.XenServerPatch == patch))
-                    mappings.Add(newMapping);
+                    //already downloaded
+                }
             }
+
         }
 
         private void DownloadFile(ref Session session)
