@@ -1859,4 +1859,7 @@
   <data name="Label-host.edition-standard" xml:space="preserve">
     <value>[Citrix] [XenServer product] Standard Edition</value>
   </data>
+  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
+    <value>GFS2</value>
+  </data>
 </root>

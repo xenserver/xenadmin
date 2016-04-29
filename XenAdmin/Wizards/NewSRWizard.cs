@@ -279,7 +279,7 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     AddPage(xenTabPageVhdoNFS);
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
                 }
@@ -335,7 +335,7 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     xenTabPageVhdoNFS.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_LvmoHba)
                     xenTabPageLvmoHba.SrWizardType = m_srWizardType;
@@ -368,6 +368,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
+                m_srWizardType.IsLVM = xenTabPageLvmoIscsi.SRType == SR.SRTypes.lvmoiscsi;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
