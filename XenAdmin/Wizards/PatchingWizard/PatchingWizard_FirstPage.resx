@@ -126,7 +126,7 @@
     <value>3, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 13</value>
+    <value>369, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -452,7 +452,7 @@
     <value>3</value>
   </data>
   <data name="labelDownloadUpdate.Text" xml:space="preserve">
-    <value>Download the relevant update and ensure that you can access the update file from your computer.</value>
+    <value>Select Automatic mode or manually download the relevant update and ensure that you can access the update file from your computer.</value>
   </data>
   <data name="labelDownloadUpdate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
