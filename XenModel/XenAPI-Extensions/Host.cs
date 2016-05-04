@@ -246,6 +246,16 @@ namespace XenAPI
             return h._RestrictHotfixApply;
         }
 
+        private bool _RestrictBatchHotfixApply
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_batch_hotfix_apply"); }
+        }
+
+        public static bool RestrictBatchHotfixApply(Host h)
+        {
+            return h._RestrictBatchHotfixApply;
+        }
+
         private bool _RestrictCheckpoint
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_checkpoint"); }
