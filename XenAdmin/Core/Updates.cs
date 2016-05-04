@@ -425,18 +425,6 @@ namespace XenAdmin.Core
                            && Helpers.HostProductVersion(master) == version.Version.ToString());
             });
 
-/*
- * 
- * 
- * REMOVE - TEMP CODE FOR EASIER DEBUGGING
- * 
- * 
- */
-if (serverVersions.Count == 0)
-{
-    serverVersions.Add(XenServerVersions.Last());
-}
-
             List<XenServerPatch> allPatches = new List<XenServerPatch>();
 
             if (serverVersions.Count > 0)

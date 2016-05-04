@@ -288,17 +288,11 @@ namespace XenAdmin.Actions
 
         protected virtual XmlDocument FetchCheckForUpdatesXml(string location)
         {
-
-            XmlDocument xdoc = new XmlDocument();
-            
-            
-            xdoc.Load(@"C:\ang\updates_xml\example_updates.xml");
-
-            //XmlDocument xdoc;
-            //using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
-            //{
-            //    xdoc = Helpers.LoadXmlDocument(xmlstream);
-            //}
+            XmlDocument xdoc;
+            using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+            {
+                xdoc = Helpers.LoadXmlDocument(xmlstream);
+            }
             return xdoc;
         }
     }
