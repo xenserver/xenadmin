@@ -121,12 +121,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var master in SelectedMasters)
             {
-                Dictionary<Host, List<PlanAction>> planActionsByPoolMaster = new Dictionary<Host, List<PlanAction>>();
+                Dictionary<Host, List<PlanAction>> planActionsByHost = new Dictionary<Host, List<PlanAction>>();
                 Dictionary<Host, List<PlanAction>> delayedActionsByHost = new Dictionary<Host, List<PlanAction>>();
 
                 foreach (var host in master.Connection.Cache.Hosts)
                 {
-                    planActionsByPoolMaster.Add(host, new List<PlanAction>());
+                    planActionsByHost.Add(host, new List<PlanAction>());
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
@@ -139,28 +139,28 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
 
-                    planActionsByPoolMaster[master].Add(new DownloadPatchPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
-                    planActionsByPoolMaster[master].Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
-                    planActionsByPoolMaster[master].Add(new PatchPrechecksOnMultipleHostsPlanAction(master.Connection, patch, hostsToApply, patchMappings));
+                    planActionsByHost[master].Add(new DownloadPatchPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                    planActionsByHost[master].Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                    planActionsByHost[master].Add(new PatchPrechecksOnMultipleHostsPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
                     if (hostsToApply.Contains(master))
                     {
-                        planActionsByPoolMaster[master].Add(new ApplyXenServerPatchPlanAction(master, patch, patchMappings));
-                        planActionsByPoolMaster[master].AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[master], master, patch));
+                        planActionsByHost[master].Add(new ApplyXenServerPatchPlanAction(master, patch, patchMappings));
+                        planActionsByHost[master].AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[master], master, patch));
                         UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[master], master, patch);
                     }
 
                     foreach (var host in hostsToApply)
                     {
                         if (host != master)
-                            planActionsByPoolMaster[host].Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-                            planActionsByPoolMaster[host].AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
+                            planActionsByHost[host].Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+                            planActionsByHost[host].AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
                             UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
                     }
 
                     // now add all non-delayed actions to the pool action list
 
-                    foreach (var kvp in planActionsByPoolMaster)
+                    foreach (var kvp in planActionsByHost)
                     {
                         if (!planActionsPerPool.ContainsKey(master))
                         {
@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 //add all delayed actions to the end of the actions, per host
                 foreach (var kvp in delayedActionsByHost)
                 {
-                    planActionsPerPool[kvp.Key].AddRange(kvp.Value);
+                    planActionsPerPool[master].AddRange(kvp.Value);
                 }
 
             } //foreach in SelectedMasters
@@ -277,31 +277,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateDelayedAfterPatchGuidanceActionListForHost(List<PlanAction> delayedGuidances, Host host, XenServerPatch patch)
         {
-            List<PlanAction> actions = new List<PlanAction>();
-
-            List<XenRef<VM>> runningVMs = RunningVMs(host);
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartHost)
-            {
-                actions.Add(new EvacuateHostPlanAction(host));
-                actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(runningVMs, host, false));
-            }
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartXAPI)
-            {
-                actions.Add(new RestartAgentPlanAction(host));
-            }
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartHVM)
-            {
-                actions.Add(new RebootVMsPlanAction(host, RunningHvmVMs(host)));
-            }
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartPV)
-            {
-                actions.Add(new RebootVMsPlanAction(host, RunningPvVMs(host)));
-            }
+            List<PlanAction> actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
 
             if (!patch.GuidanceMandatory)
             {
@@ -331,33 +307,30 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private List<PlanAction> GetMandatoryActionListForPatch(List<PlanAction> delayedGuidances, Host host, XenServerPatch patch)
+        private static List<PlanAction> GetAfterApplyGuidanceActionsForPatch(Host host, XenServerPatch patch)
         {
-            var actions = new List<PlanAction>();
-
-            if (!patch.GuidanceMandatory)
-                return actions;
+            List<PlanAction> actions = new List<PlanAction>();
 
             List<XenRef<VM>> runningVMs = RunningVMs(host);
 
-            if (patch.after_apply_guidance == after_apply_guidance.restartHost
-                || delayedGuidances.Any(da => da is RebootHostPlanAction))
+            if (patch.after_apply_guidance == after_apply_guidance.restartHost)
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));
                 actions.Add(new BringBabiesBackAction(runningVMs, host, false));
-
-                delayedGuidances.Clear();
             }
-            else if (patch.after_apply_guidance == after_apply_guidance.restartXAPI)
+
+            if (patch.after_apply_guidance == after_apply_guidance.restartXAPI)
             {
                 actions.Add(new RestartAgentPlanAction(host));
-            } 
-            else if (patch.after_apply_guidance == after_apply_guidance.restartHVM)
+            }
+
+            if (patch.after_apply_guidance == after_apply_guidance.restartHVM)
             {
                 actions.Add(new RebootVMsPlanAction(host, RunningHvmVMs(host)));
             }
-            else if (patch.after_apply_guidance == after_apply_guidance.restartPV)
+
+            if (patch.after_apply_guidance == after_apply_guidance.restartPV)
             {
                 actions.Add(new RebootVMsPlanAction(host, RunningPvVMs(host)));
             }
@@ -365,17 +338,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             return actions;
         }
 
-        private static List<XenRef<VM>> RunningVMs(Host host, Pool_patch patch)
+        private List<PlanAction> GetMandatoryActionListForPatch(List<PlanAction> delayedGuidances, Host host, XenServerPatch patch)
         {
-            List<XenRef<VM>> vms = new List<XenRef<VM>>();
-            foreach (VM vm in patch.Connection.ResolveAll(host.resident_VMs))
-            {
-                if (!vm.is_a_real_vm)
-                    continue;
+            var actions = new List<PlanAction>();
 
-                vms.Add(new XenRef<VM>(vm.opaque_ref));
-            }
-            return vms;
+            if (!patch.GuidanceMandatory)
+                return actions;
+
+            actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
+
+            return actions;
         }
 
         private static List<XenRef<VM>> RunningHvmVMs(Host host)

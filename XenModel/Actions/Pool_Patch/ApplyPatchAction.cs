@@ -112,7 +112,6 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly List<Pool_patch> patches;
-        private readonly XenAdmin.Core.XenServerPatch xenServerPatch = null;
         private readonly List<Host> hosts; //do we need a generic list in action for hosts rather than specifying 1 host there and many here?
 
         private string output = "";
@@ -124,27 +123,9 @@ namespace XenAdmin.Actions
             this.hosts = hosts;
         }
 
-        public ApplyPatchAction(XenAdmin.Core.XenServerPatch xenServerPatch, List<Host> hosts)
-            : base(null, string.Format(Messages.APPLYING_UPDATES, 1, hosts.Count))
-        {
-            this.patches = new List<Pool_patch>();
-            this.hosts = hosts;
-            this.xenServerPatch = xenServerPatch;
-        }
-
         protected override void Run()
         {
             SafeToExit = false;
-
-            if (xenServerPatch != null && hosts != null && hosts.Count != 0 && hosts[0] != null)
-            {
-                var poolPatches = new List<Pool_patch>(hosts[0].Connection.Cache.Pool_patches);
-                var poolPatch = poolPatches.Find(pp => string.Equals(pp.uuid, xenServerPatch.Uuid));
-                if (poolPatch != null)
-                    patches.Add(poolPatch);
-                else
-                    throw new NullReferenceException("poolPatch");
-            }
 
             foreach (Pool_patch patch in patches)
             {

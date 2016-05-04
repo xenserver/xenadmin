@@ -70,47 +70,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         
                         if (problem != null)
                         {
-                            //there is a problem...
+                            throw new Exception(problem.Title);
                         }
                     }
                     catch (Exception ex)
                     {
-                        log.WarnFormat("Could not run PatchPrecheckCheck");
+                        log.Error(string.Format("Precheck failed on host {0}", host.Name), ex);
                         throw ex;
                     }
                 }
-
-
-
-
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
     }
 }
