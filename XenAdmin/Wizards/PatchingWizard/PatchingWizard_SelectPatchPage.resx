@@ -147,6 +147,9 @@
   <data name="automaticOptionLabel.Text" xml:space="preserve">
     <value>[XenCenter] will &amp;automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
   </data>
+  <data name="automaticOptionLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
     <value>automaticOptionLabel</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
     <value>Automatic</value>
+  </data>
+  <data name="AutomaticRadioButton.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
@@ -457,7 +463,7 @@
     <value>80</value>
   </data>
   <data name="ColumnDate.Width" type="System.Int32, mscorlib">
-    <value>55</value>
+    <value>80</value>
   </data>
   <metadata name="webPageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

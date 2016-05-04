@@ -25946,6 +25946,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to a.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update already applied.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED {
@@ -25978,6 +25987,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic update has finished..
+        /// </summary>
+        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE", resourceCulture);
             }
         }
         
@@ -32746,6 +32764,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_REMOVING_UPDATE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing update files from {0}....
+        /// </summary>
+        public static string UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL", resourceCulture);
             }
         }
         

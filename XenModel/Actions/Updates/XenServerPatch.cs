@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using XenAPI;
 
 namespace XenAdmin.Core
 {
@@ -40,6 +41,7 @@ namespace XenAdmin.Core
         public readonly string Name;
         public readonly string Description;
         public readonly string Guidance;
+        public readonly string Guidance_mandatory;
         public readonly Version Version;
         public readonly string Url;
         public readonly string PatchUrl;
@@ -52,13 +54,14 @@ namespace XenAdmin.Core
 
         private const int DEFAULT_PRIORITY = 2;
 
-        public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
+        public XenServerPatch(string uuid, string name, string description, string guidance, string guidance_mandatory , string version, string url,
             string patchUrl, string timestamp, string priority, string installationSize)
         {
             _uuid = uuid;
             Name = name;
             Description = description;
             Guidance = guidance;
+            Guidance_mandatory = guidance_mandatory;
             Version = new Version(version);
             if (url.StartsWith("/XenServer"))
                 url = XenServerVersion.UpdateRoot + url;
@@ -71,10 +74,11 @@ namespace XenAdmin.Core
                 InstallationSize = 0;
         }
 
-        public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
+        public XenServerPatch(string uuid, string name, string description, string guidance, string guidance_mandatory, string version, string url,
             string patchUrl, string timestamp, string priority, string installationSize, List<string> conflictingPatches, List<string> requiredPatches)
-            : this(uuid, name, description, guidance, version, url, patchUrl, timestamp, priority, installationSize)
+            : this(uuid, name, description, guidance, guidance_mandatory, version, url, patchUrl, timestamp, priority, installationSize)
         {
+
             ConflictingPatches = conflictingPatches;
             RequiredPatches = requiredPatches;
         }
@@ -87,6 +91,38 @@ namespace XenAdmin.Core
         public bool Equals(XenServerPatch other)
         {
             return string.Equals(Uuid, other.Uuid, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public after_apply_guidance after_apply_guidance
+        {
+            get
+            {
+                switch (Guidance)
+                {
+                    case "restartHVM":
+                        return after_apply_guidance.restartHVM;
+
+                    case "restartPV":
+                        return after_apply_guidance.restartPV;
+
+                    case "restartHost":
+                        return after_apply_guidance.restartHost;
+
+                    case "restartXAPI":
+                        return after_apply_guidance.restartXAPI;
+
+                    default:
+                        return after_apply_guidance.unknown;
+                }
+            }
+        }
+
+        public bool GuidanceMandatory 
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(Guidance_mandatory) && this.Guidance_mandatory.ToLowerInvariant().Contains("true");
+            }
         }
 
     }

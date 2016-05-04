@@ -39,7 +39,6 @@ using XenAdmin.Alerts;
 using XenAdmin.Network;
 using System.Diagnostics;
 
-
 namespace XenAdmin.Core
 {
     public class Updates
@@ -407,9 +406,9 @@ namespace XenAdmin.Core
             return alerts;
         }
         
-        public static UpgradeSequences GetUpgradeSequence(IXenConnection conn)
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
-            var uSeq = new UpgradeSequences();
+            var uSeq = new UpgradeSequence();
 
             Host master = Helpers.GetMaster(conn);
             List<Host> hosts = conn.Cache.Hosts.ToList();
@@ -457,8 +456,10 @@ namespace XenAdmin.Core
                 var p = neededPatches[ii];
 
                 //checking requirements
-                if (// no requirements
-                    p.RequiredPatches == null
+                if (//not applied yet
+                    !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase))
+                    // and either no requirements or they are meet
+                    && (p.RequiredPatches == null
                     || p.RequiredPatches.Count == 0
                     // all requirements met?
                     || p.RequiredPatches.All(
@@ -469,7 +470,7 @@ namespace XenAdmin.Core
                             //the required-patch has already been applied
                             || (appliedPatches.Count != 0 && appliedPatches.Any(ap => string.Equals(ap.uuid, rp, StringComparison.OrdinalIgnoreCase)))
                         )
-                    )
+                    ))
                 {
                     // this patch can be added to the upgrade sequence now
                     sequence.Add(p);
@@ -485,8 +486,26 @@ namespace XenAdmin.Core
             return sequence;
         }
 
-        public class UpgradeSequences : Dictionary<Host, List<XenServerPatch>>
+        public class UpgradeSequence : Dictionary<Host, List<XenServerPatch>>
         {
+            private IEnumerable<XenServerPatch> AllPatches
+            {
+                get
+                {
+                    foreach (var patches in this.Values)
+                        foreach(var patch in patches)
+                            yield return patch;
+                }
+            }
+
+            public List<XenServerPatch> UniquePatches
+            {
+                get
+                {
+                    return AllPatches.Distinct().ToList();
+                }
+            }
+            
         }
 
         public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)

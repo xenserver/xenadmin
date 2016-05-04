@@ -44,6 +44,7 @@ using System.IO;
 using XenAdmin.Dialogs;
 using System.Drawing;
 using XenAdmin.Alerts;
+using System.Linq;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -288,6 +289,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void UpdateEnablement()
         {
             dataGridViewPatches.HideSelection = !downloadUpdateRadioButton.Checked;
+
+            //if any connected host is licensed for automatic updating
+            if (ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h))))
+                automaticOptionLabel.Visible = AutomaticRadioButton.Visible = true;
+
             OnPageUpdated();
         }
 

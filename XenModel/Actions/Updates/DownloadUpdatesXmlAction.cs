@@ -149,6 +149,7 @@ namespace XenAdmin.Actions
                     string name = "";
                     string description = "";
                     string guidance = "";
+                    string guidance_mandatory = "";
                     string patchVersion = "";
                     string url = "";
                     string patchUrl = "";
@@ -166,6 +167,8 @@ namespace XenAdmin.Actions
                             description = attrib.Value;
                         else if (attrib.Name == "after-apply-guidance")
                             guidance = attrib.Value;
+                        else if (attrib.Name == "guidance-mandatory")
+                            guidance_mandatory = attrib.Value;
                         else if (attrib.Name == "version")
                             patchVersion = attrib.Value;
                         else if (attrib.Name == "url")
@@ -183,7 +186,7 @@ namespace XenAdmin.Actions
                     var conflictingPatches = GetPatchDependencies(version, ConflictingPatchesNode, ConflictingPatchNode);
                     var requiredPatches = GetPatchDependencies(version, RequiredPatchesNode, RequiredPatchNode);
 
-					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
+					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, guidance_mandatory, patchVersion, url,
                                                             patchUrl, timestamp, priority, installationSize, conflictingPatches, requiredPatches));
                 }
             }

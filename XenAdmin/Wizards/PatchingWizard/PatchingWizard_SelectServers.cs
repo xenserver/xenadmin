@@ -118,7 +118,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, hasPool));
                         EnabledRow(host, SelectedUpdateType, index);
-                    }                  
+                    }
                 }
 
                 // restore server selection
@@ -139,6 +139,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (IsInAutomaticMode)
             {
+                //unlicensed servers are not enabled
+                if (Host.RestrictBatchHotfixApply(host))
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING;
+
+                    return;
+                }
+                
+                //check updgrade sequences
                 var us = Updates.GetUpgradeSequence(host.Connection);
 
                 if (us.ContainsKey(host))
