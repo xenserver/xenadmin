@@ -612,7 +612,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         actions.Add(action);
                 }
             }
-            var multipleAction = new CrossConnectionParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, "", "", actions);
+            var multipleAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
             _progressDialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
             _progressDialog.ShowDialog(this);
             Program.Invoke(Program.MainWindow, RefreshRechecks);
