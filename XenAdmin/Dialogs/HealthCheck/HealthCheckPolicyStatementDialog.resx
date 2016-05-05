@@ -172,7 +172,7 @@
     <value>7</value>
   </data>
   <data name="policyStatementTextBox.Text" xml:space="preserve">
-    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at https://taas.citrix.com/legal/ and [Citrix] Privacy Policy at http://www.citrix.com/about/legal/privacy.html.</value>
+    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at https://cis.citrix.com/legal/ and [Citrix] Privacy Policy at http://www.citrix.com/about/legal/privacy.html.</value>
   </data>
   <data name="&gt;&gt;policyStatementTextBox.Name" xml:space="preserve">
     <value>policyStatementTextBox</value>

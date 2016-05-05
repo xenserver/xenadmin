@@ -94,7 +94,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             Dictionary<int, string> days = new Dictionary<int, string>();
             foreach (var dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {
-                days.Add((int)dayOfWeek, dayOfWeek.ToString());
+                days.Add((int)dayOfWeek, HelpersGUI.DayOfWeekToString((DayOfWeek)dayOfWeek, true));
             }
             return days;
         }

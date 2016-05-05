@@ -3148,6 +3148,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shutting Down VMs.
+        /// </summary>
+        public static string ACTION_VMS_SHUTTING_DOWN_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VMS_SHUTTING_DOWN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Starting VMs.
         /// </summary>
         public static string ACTION_VMS_STARTING_ON_TITLE {
@@ -3531,7 +3540,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are about to remove &apos;{0}&apos; from the AD domain &apos;{1}&apos;. Any users authenticated via AD will be disconnected.
+        ///   Looks up a localized string similar to You are about to remove &apos;{0}&apos; from the AD domain &apos;{1}&apos;. Any users authenticated using AD will be disconnected.
         ///
         ///Do you want to continue?.
         /// </summary>
@@ -14131,6 +14140,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The certificate is invalid..
+        /// </summary>
+        public static string EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID {
+            get {
+                return ResourceManager.GetString("EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Certificate path is invalid..
         /// </summary>
         public static string EXPORT_SECURITY_PAGE_ERROR_INVALID_CERT {
@@ -22551,6 +22569,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Search.
+        /// </summary>
+        public static string NEW_SEARCH {
+            get {
+                return ResourceManager.GetString("NEW_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection to {0} has been lost.
         /// </summary>
         public static string NEW_SR_CONNECTION_LOST {
@@ -28879,7 +28906,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SSL &amp; TLS.
+        ///   Looks up a localized string similar to Backwards compatibility.
         /// </summary>
         public static string SECURITYEDITPAGE_SUBTEXT_SSL {
             get {
@@ -33031,6 +33058,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hosts in pool &apos;{0}&apos; have incompatible CPUs.
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shut down all VMs.
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS_HELPMESSAGE {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS_HELPMESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM &apos;{0}&apos; has invalid vCPU settings..
         /// </summary>
         public static string UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS {
@@ -33054,6 +33099,15 @@ namespace XenAdmin {
         public static string UPGRADEWIZARD_SELECTSERVERS_TITLE {
             get {
                 return ResourceManager.GetString("UPGRADEWIZARD_SELECTSERVERS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because hosts in pool &apos;{1}&apos; have incompatible CPUs.
+        /// </summary>
+        public static string UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS", resourceCulture);
             }
         }
         
@@ -34090,7 +34144,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not able to receive updates via Windows Update.
+        ///   Looks up a localized string similar to Not able to receive updates from Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES {
             get {
@@ -34108,7 +34162,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Able to receive updates via Windows Update.
+        ///   Looks up a localized string similar to Able to receive updates from Windows Update.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES {
             get {

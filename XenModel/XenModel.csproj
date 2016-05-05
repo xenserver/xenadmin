@@ -357,6 +357,8 @@
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />
     <Compile Include="XenAPI\vgpu_type_implementation.cs" />
+    <Compile Include="XenAPI\vif_ipv4_configuration_mode.cs" />
+    <Compile Include="XenAPI\vif_ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\vif_locking_mode.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />

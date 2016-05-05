@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,26 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="upsellPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="upsellPage1.Location" type="System.Drawing.Point, System.Drawing">
@@ -175,7 +175,7 @@
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="TitleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>

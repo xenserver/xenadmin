@@ -60,6 +60,13 @@ cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat DiscUtils.dll "DiscUtils by 
 cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat Ionic.Zip.dll "OSS, signed by ${BRANDING_COMPANY_NAME_SHORT}"
 cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat putty.exe "PuTTY by Simon Tatham, signed by ${BRANDING_COMPANY_NAME_SHORT}"
 
+#copy signed files in XenServerHealthService folder
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+   ${REPO}/XenServerHealthCheck/bin/Release
+
+#sign XenServerHealthService
+cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/sign.bat XenServerHealthCheck.exe
+
 #create installers
 compile_installer()
 {

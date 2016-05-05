@@ -33,6 +33,8 @@ set -eu
 DISABLE_PUSH=1
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
+source ${XENADMIN_DIR}/mk/copy-build-output.sh
+
 if [ ${XS_BRANCH} = "trunk" ]
 then
   TRUNK_COLOUR=$(sh ${REPO}/mk/colour.sh)
@@ -42,15 +44,6 @@ then
 	echo "trunk is not green, disabling push"
     DISABLE_PUSH=1
   fi
-fi
-
-# Secure build: update buildtools, copy output to local disk, then to remote.
-cd ${OUTPUT_DIR}
-if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
-then
-     $STORE_FILES remoteupdate xensb.uk.xensource.com xenbuild git://hg.uk.xensource.com/closed/windows buildtools.git /usr/groups/build/windowsbuilds
-     $STORE_FILES store $SECURE_BUILD_ARCHIVE_UNC $get_JOB_NAME $BUILD_NUMBER *
-     $STORE_FILES remotestore xensb.uk.xensource.com xenbuild /usr/groups/build/windowsbuilds buildtools.git /usr/groups/build/windowsbuilds/WindowsBuilds $SECURE_BUILD_ARCHIVE_UNC $get_JOB_NAME $BUILD_NUMBER *
 fi
 
 #update local xenadmin-ref.hg repository

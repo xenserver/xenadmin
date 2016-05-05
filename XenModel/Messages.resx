@@ -1011,6 +1011,9 @@
   <data name="ACTION_VMS_RESUMING_ON_TITLE" xml:space="preserve">
     <value>Resuming VMs</value>
   </data>
+  <data name="ACTION_VMS_SHUTTING_DOWN_TITLE" xml:space="preserve">
+    <value>Shutting Down VMs</value>
+  </data>
   <data name="ACTION_VMS_STARTING_ON_TITLE" xml:space="preserve">
     <value>Starting VMs</value>
   </data>
@@ -1476,7 +1479,7 @@ You must use a user account with sufficient privileges.</value>
     <value>Enter your fully qualified AD domain name, and a username and password with sufficient privileges to add servers to your domain.</value>
   </data>
   <data name="AD_LEAVE_CONFIRM" xml:space="preserve">
-    <value>You are about to remove '{0}' from the AD domain '{1}'. Any users authenticated via AD will be disconnected.
+    <value>You are about to remove '{0}' from the AD domain '{1}'. Any users authenticated using AD will be disconnected.
 
 Do you want to continue?</value>
   </data>
@@ -4994,6 +4997,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_OPTIONS_PAGE_TITLE" xml:space="preserve">
     <value>Select the manifest, signing and output file format options you want</value>
   </data>
+  <data name="EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID" xml:space="preserve">
+    <value>The certificate is invalid.</value>
+  </data>
   <data name="EXPORT_SECURITY_PAGE_ERROR_CERT_NON_EXIST" xml:space="preserve">
     <value>Certificate file does not exist.</value>
   </data>
@@ -8454,6 +8460,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
 
 It is strongly recommended that you Cancel and apply the latest version of the packs to all servers before creating the pool.</value>
   </data>
+  <data name="NEW_SEARCH" xml:space="preserve">
+    <value>New Search</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>
@@ -10046,7 +10055,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Select the security protocols that can be used for communicating with this server.</value>
   </data>
   <data name="SECURITYEDITPAGE_SUBTEXT_SSL" xml:space="preserve">
-    <value>SSL &amp; TLS</value>
+    <value>Backwards compatibility</value>
   </data>
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>TLS 1.2 only</value>
@@ -11419,6 +11428,12 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADEWIZARD_PRECHECK_TITLE" xml:space="preserve">
     <value>Problems encountered when perfoming upgrade prechecks.</value>
   </data>
+  <data name="UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS" xml:space="preserve">
+    <value>Hosts in pool '{0}' have incompatible CPUs</value>
+  </data>
+  <data name="UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS_HELPMESSAGE" xml:space="preserve">
+    <value>Shut down all VMs</value>
+  </data>
   <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS" xml:space="preserve">
     <value>VM '{0}' has invalid vCPU settings.</value>
   </data>
@@ -11427,6 +11442,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADEWIZARD_SELECTSERVERS_TITLE" xml:space="preserve">
     <value>Select the servers you wish to upgrade.</value>
+  </data>
+  <data name="UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS" xml:space="preserve">
+    <value>{0}: Check skipped because hosts in pool '{1}' have incompatible CPUs</value>
   </data>
   <data name="UPGRADE_HOST" xml:space="preserve">
     <value>Upgrade host {0}</value>
@@ -11810,13 +11828,13 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>Not optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Not able to receive updates via Windows Update</value>
+    <value>Not able to receive updates from Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_OPTIMIZED" xml:space="preserve">
     <value>Fully optimized</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES" xml:space="preserve">
-    <value>Able to receive updates via Windows Update</value>
+    <value>Able to receive updates from Windows Update</value>
   </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
     <value>Unknown (please wait)</value>

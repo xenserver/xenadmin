@@ -276,6 +276,7 @@ namespace XenAdmin.TabPages
         {
             Searcher.ToggleExpandedState(true);
             Searcher.BlankSearch();
+            base.Text = Messages.NEW_SEARCH;
         }
 
         private void applyDefaultSearch_Click(object sender, EventArgs e)

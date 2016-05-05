@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,15 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="okButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -133,7 +133,7 @@
     <value>NoControl</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>409, 3</value>
+    <value>4, 3</value>
   </data>
   <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 25</value>
@@ -142,7 +142,7 @@
     <value>6</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>OK</value>
+    <value>确定</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
@@ -166,7 +166,7 @@
     <value>NoControl</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 3</value>
+    <value>85, 3</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 25</value>
@@ -175,7 +175,7 @@
     <value>7</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
@@ -193,409 +193,22 @@
     <value>True</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="flowLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="flowLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="flowLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="flowLayoutPanel3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="flowLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 390</value>
-  </data>
-  <data name="flowLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="flowLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 1</value>
-  </data>
-  <data name="flowLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Name" xml:space="preserve">
-    <value>flowLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="passwordTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 364</value>
-  </data>
-  <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 23</value>
-  </data>
-  <data name="passwordTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Name" xml:space="preserve">
-    <value>passwordTextBox</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="usernameTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 335</value>
-  </data>
-  <data name="usernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 23</value>
-  </data>
-  <data name="usernameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.Name" xml:space="preserve">
-    <value>usernameTextBox</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="passwordLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="decentGroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="decentGroupBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="passwordLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="tableLayoutPanel4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="passwordLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="tableLayoutPanel4.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="passwordLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="passwordLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 361</value>
-  </data>
-  <data name="passwordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="passwordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 29</value>
-  </data>
-  <data name="passwordLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="passwordLabel.Text" xml:space="preserve">
-    <value>&amp;Password:</value>
-  </data>
-  <data name="passwordLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.Name" xml:space="preserve">
-    <value>passwordLabel</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel4.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="usernameLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="usernameLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="usernameLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="usernameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="usernameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 332</value>
-  </data>
-  <data name="usernameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="usernameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 29</value>
-  </data>
-  <data name="usernameLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="usernameLabel.Text" xml:space="preserve">
-    <value>&amp;Username:</value>
-  </data>
-  <data name="usernameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.Name" xml:space="preserve">
-    <value>usernameLabel</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="authenticationRubricLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="authenticationRubricLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="authenticationRubricLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="authenticationRubricLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="authenticationRubricLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 233</value>
-  </data>
-  <data name="authenticationRubricLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 4</value>
-  </data>
-  <data name="authenticationRubricLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 45</value>
-  </data>
-  <data name="authenticationRubricLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="authenticationRubricLabel.Text" xml:space="preserve">
-    <value>Authentication with [Citrix] upload server is required in order to enable this feature. Please register by  providing MyCitrix credentials. These credentials will only be used to obtain a Call Home upload grant token and will not be stored on this machine or on your server.</value>
-  </data>
-  <data name="authenticationRubricLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;authenticationRubricLabel.Name" xml:space="preserve">
-    <value>authenticationRubricLabel</value>
-  </data>
-  <data name="&gt;&gt;authenticationRubricLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;authenticationRubricLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;authenticationRubricLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="authenticationLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="authenticationLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="authenticationLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="authenticationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="authenticationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 205</value>
-  </data>
-  <data name="authenticationLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 3</value>
-  </data>
-  <data name="authenticationLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 6, 0, 4</value>
-  </data>
-  <data name="authenticationLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 25</value>
-  </data>
-  <data name="authenticationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="authenticationLabel.Text" xml:space="preserve">
-    <value>Authentication with [Citrix] upload server</value>
-  </data>
-  <data name="&gt;&gt;authenticationLabel.Name" xml:space="preserve">
-    <value>authenticationLabel</value>
-  </data>
-  <data name="&gt;&gt;authenticationLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;authenticationLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;authenticationLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="timeOfDayComboBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="timeOfDayComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 179</value>
-  </data>
-  <data name="timeOfDayComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
-  </data>
-  <data name="timeOfDayComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayComboBox.Name" xml:space="preserve">
-    <value>timeOfDayComboBox</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayComboBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayComboBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="timeOfDayLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="timeOfDayLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="timeOfDayLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="timeOfDayLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="timeOfDayLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 176</value>
-  </data>
-  <data name="timeOfDayLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="timeOfDayLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 29</value>
-  </data>
-  <data name="timeOfDayLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="timeOfDayLabel.Text" xml:space="preserve">
-    <value>&amp;Time of the day:</value>
-  </data>
-  <data name="timeOfDayLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayLabel.Name" xml:space="preserve">
-    <value>timeOfDayLabel</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;timeOfDayLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="dayOfweekLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dayOfweekLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dayOfweekLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="dayOfweekLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dayOfweekLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 147</value>
-  </data>
-  <data name="dayOfweekLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="dayOfweekLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 29</value>
-  </data>
-  <data name="dayOfweekLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="dayOfweekLabel.Text" xml:space="preserve">
-    <value>&amp;Day of the week:</value>
-  </data>
-  <data name="dayOfweekLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;dayOfweekLabel.Name" xml:space="preserve">
-    <value>dayOfweekLabel</value>
-  </data>
-  <data name="&gt;&gt;dayOfweekLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dayOfweekLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;dayOfweekLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="weeksLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeksLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="weeksLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="weeksLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeksLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 118</value>
-  </data>
-  <data name="weeksLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="weeksLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 29</value>
-  </data>
-  <data name="weeksLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="weeksLabel.Text" xml:space="preserve">
-    <value>weeks</value>
-  </data>
-  <data name="weeksLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;weeksLabel.Name" xml:space="preserve">
-    <value>weeksLabel</value>
-  </data>
-  <data name="&gt;&gt;weeksLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeksLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeksLabel.ZOrder" xml:space="preserve">
-    <value>10</value>
   </data>
   <data name="frequencyLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -610,7 +223,7 @@
     <value>NoControl</value>
   </data>
   <data name="frequencyLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 118</value>
+    <value>0, 3</value>
   </data>
   <data name="frequencyLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -619,10 +232,10 @@
     <value>94, 29</value>
   </data>
   <data name="frequencyLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>10</value>
   </data>
   <data name="frequencyLabel.Text" xml:space="preserve">
-    <value>&amp;Frequency:</value>
+    <value>频率(&amp;F):</value>
   </data>
   <data name="frequencyLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -634,157 +247,592 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;frequencyLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+    <value>tableLayoutPanel4</value>
   </data>
   <data name="&gt;&gt;frequencyLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="flowLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="policyStatementLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="policyStatementLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="policyStatementLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="policyStatementLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="policyStatementLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 3</value>
-  </data>
-  <data name="policyStatementLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 15</value>
-  </data>
-  <data name="policyStatementLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="policyStatementLabel.Text" xml:space="preserve">
-    <value>See what sort of data is collected:</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.Name" xml:space="preserve">
-    <value>policyStatementLabel</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.Parent" xml:space="preserve">
-    <value>flowLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;policyStatementLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="PolicyStatementLinkLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PolicyStatementLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="frequencyNumericBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="PolicyStatementLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="frequencyNumericBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 6</value>
   </data>
-  <data name="PolicyStatementLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 0</value>
+  <data name="frequencyNumericBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
   </data>
-  <data name="PolicyStatementLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 15</value>
+  <data name="frequencyNumericBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="PolicyStatementLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="&gt;&gt;frequencyNumericBox.Name" xml:space="preserve">
+    <value>frequencyNumericBox</value>
   </data>
-  <data name="PolicyStatementLinkLabel.Text" xml:space="preserve">
-    <value>Policy statement</value>
+  <data name="&gt;&gt;frequencyNumericBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PolicyStatementLinkLabel.Name" xml:space="preserve">
-    <value>PolicyStatementLinkLabel</value>
+  <data name="&gt;&gt;frequencyNumericBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;PolicyStatementLinkLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PolicyStatementLinkLabel.Parent" xml:space="preserve">
-    <value>flowLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;PolicyStatementLinkLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;frequencyNumericBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="flowLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="flowLayoutPanel2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 41</value>
-  </data>
-  <data name="flowLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 4</value>
-  </data>
-  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 18</value>
-  </data>
-  <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
-    <value>flowLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="scheduleLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="weeksLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="scheduleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="weeksLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="scheduleLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
+  <data name="weeksLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="scheduleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="weeksLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="scheduleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 96</value>
+  <data name="weeksLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>154, 3</value>
   </data>
-  <data name="scheduleLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 3</value>
+  <data name="weeksLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="scheduleLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 4</value>
+  <data name="weeksLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>437, 29</value>
   </data>
-  <data name="scheduleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 19</value>
+  <data name="weeksLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
-  <data name="scheduleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="weeksLabel.Text" xml:space="preserve">
+    <value>周</value>
   </data>
-  <data name="scheduleLabel.Text" xml:space="preserve">
-    <value>Health check upload schedule</value>
+  <data name="weeksLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.Name" xml:space="preserve">
-    <value>scheduleLabel</value>
+  <data name="&gt;&gt;weeksLabel.Name" xml:space="preserve">
+    <value>weeksLabel</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;weeksLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;weeksLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;weeksLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="dayOfweekLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dayOfweekLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dayOfweekLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="dayOfweekLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="dayOfweekLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 61</value>
+  </data>
+  <data name="dayOfweekLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="dayOfweekLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="dayOfweekLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="dayOfweekLabel.Text" xml:space="preserve">
+    <value>星期(&amp;D):</value>
+  </data>
+  <data name="dayOfweekLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;dayOfweekLabel.Name" xml:space="preserve">
+    <value>dayOfweekLabel</value>
+  </data>
+  <data name="&gt;&gt;dayOfweekLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dayOfweekLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;dayOfweekLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="timeOfDayLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="timeOfDayLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="timeOfDayLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="timeOfDayLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="timeOfDayLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="timeOfDayLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="timeOfDayLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="timeOfDayLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="timeOfDayLabel.Text" xml:space="preserve">
+    <value>时间(&amp;T):</value>
+  </data>
+  <data name="timeOfDayLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayLabel.Name" xml:space="preserve">
+    <value>timeOfDayLabel</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="timeOfDayComboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="timeOfDayComboBox.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="timeOfDayComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 35</value>
+  </data>
+  <data name="timeOfDayComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="timeOfDayComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayComboBox.Name" xml:space="preserve">
+    <value>timeOfDayComboBox</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;timeOfDayComboBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dayOfWeekComboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="dayOfWeekComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 64</value>
+  </data>
+  <data name="dayOfWeekComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="dayOfWeekComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;dayOfWeekComboBox.Name" xml:space="preserve">
+    <value>dayOfWeekComboBox</value>
+  </data>
+  <data name="&gt;&gt;dayOfWeekComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dayOfWeekComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;dayOfWeekComboBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 19</value>
+  </data>
+  <data name="tableLayoutPanel4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 93</value>
+  </data>
+  <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
+    <value>decentGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="frequencyLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="frequencyNumericBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="weeksLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="dayOfweekLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="timeOfDayLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="timeOfDayComboBox" Row="1" RowSpan="1" Column="1" ColumnSpan="2" />&lt;Control Name="dayOfWeekComboBox" Row="2" RowSpan="1" Column="1" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="decentGroupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="decentGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 92</value>
+  </data>
+  <data name="decentGroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 115</value>
+  </data>
+  <data name="decentGroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="decentGroupBox2.Text" xml:space="preserve">
+    <value>运行状况检查上载计划</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox2.Name" xml:space="preserve">
+    <value>decentGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox2.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;scheduleLabel.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;decentGroupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="decentGroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="decentGroupBox1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="authenticationRubricTextBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="authenticationRubricTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="authenticationRubricTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="authenticationRubricTextBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="authenticationRubricTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 6</value>
+  </data>
+  <data name="authenticationRubricTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 0, 4</value>
+  </data>
+  <data name="authenticationRubricTextBox.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="authenticationRubricTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>589, 46</value>
+  </data>
+  <data name="authenticationRubricTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="authenticationRubricTextBox.Text" xml:space="preserve">
+    <value>需要在 [Citrix] Insight Services 中进行身份验证才能启用此功能。请通过提供 MyCitrix 凭据进行注册(请参阅 http://www.citrix.com/welcome.html)。这些凭据只能用于获取上载令牌，不存储在此计算机或您的服务器上。</value>
+  </data>
+  <data name="&gt;&gt;authenticationRubricTextBox.Name" xml:space="preserve">
+    <value>authenticationRubricTextBox</value>
+  </data>
+  <data name="&gt;&gt;authenticationRubricTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;authenticationRubricTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;authenticationRubricTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 106</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 29</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>用户名(&amp;S):</value>
+  </data>
+  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 135</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 29</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>密码(&amp;W):</value>
+  </data>
+  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxMyCitrixPassword.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="textBoxMyCitrixPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 138</value>
+  </data>
+  <data name="textBoxMyCitrixPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 23</value>
+  </data>
+  <data name="textBoxMyCitrixPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixPassword.Name" xml:space="preserve">
+    <value>textBoxMyCitrixPassword</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixPassword.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixPassword.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBoxMyCitrixUsername.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="textBoxMyCitrixUsername.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 109</value>
+  </data>
+  <data name="textBoxMyCitrixUsername.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 23</value>
+  </data>
+  <data name="textBoxMyCitrixUsername.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixUsername.Name" xml:space="preserve">
+    <value>textBoxMyCitrixUsername</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixUsername.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixUsername.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxMyCitrixUsername.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 59</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 19</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="existingAuthenticationRadioButton.Text" xml:space="preserve">
+    <value>使用现有身份验证(&amp;A)</value>
+  </data>
+  <data name="&gt;&gt;existingAuthenticationRadioButton.Name" xml:space="preserve">
+    <value>existingAuthenticationRadioButton</value>
+  </data>
+  <data name="&gt;&gt;existingAuthenticationRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;existingAuthenticationRadioButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;existingAuthenticationRadioButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="newAuthenticationRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="newAuthenticationRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="newAuthenticationRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="newAuthenticationRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 84</value>
+  </data>
+  <data name="newAuthenticationRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 19</value>
+  </data>
+  <data name="newAuthenticationRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="newAuthenticationRadioButton.Text" xml:space="preserve">
+    <value>使用 MyCitrix 凭据进行身份验证(&amp;M)</value>
+  </data>
+  <data name="&gt;&gt;newAuthenticationRadioButton.Name" xml:space="preserve">
+    <value>newAuthenticationRadioButton</value>
+  </data>
+  <data name="&gt;&gt;newAuthenticationRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newAuthenticationRadioButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;newAuthenticationRadioButton.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 19</value>
+  </data>
+  <data name="tableLayoutPanel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 3</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 167</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="authenticationRubricTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="label1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="textBoxMyCitrixPassword" Row="4" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="textBoxMyCitrixUsername" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="existingAuthenticationRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="newAuthenticationRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="decentGroupBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="decentGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 402</value>
+  </data>
+  <data name="decentGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 188</value>
+  </data>
+  <data name="decentGroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="decentGroupBox1.Text" xml:space="preserve">
+    <value>通过 Citrix Insight Services 进行身份验证</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="rubricLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -805,13 +853,13 @@
     <value>0, 0, 0, 3</value>
   </data>
   <data name="rubricLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 30</value>
+    <value>603, 30</value>
   </data>
   <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>Health Check will automatically upload a server status report to the [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pool.</value>
+    <value>运行状况检查会自动将服务器状态报告上载到 Citrix Insight Services，具体取决于您的 XenServer 池上配置的预定义计划。</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>
@@ -823,16 +871,91 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;rubricLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 41</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 15</value>
+  </data>
+  <data name="PolicyStatementLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="PolicyStatementLinkLabel.Text" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.Name" xml:space="preserve">
+    <value>PolicyStatementLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;PolicyStatementLinkLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="m_ctrlError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="m_ctrlError.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="m_ctrlError.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="m_ctrlError.Error" xml:space="preserve">
+    <value/>
+  </data>
+  <data name="m_ctrlError.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="m_ctrlError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 593</value>
+  </data>
+  <data name="m_ctrlError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 0</value>
+  </data>
+  <data name="m_ctrlError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 42</value>
+  </data>
+  <data name="m_ctrlError.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="m_ctrlError.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlError.Name" xml:space="preserve">
+    <value>m_ctrlError</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlError.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlError.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlError.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="flowLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
-  </data>
-  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
     <value>RightToLeft</value>
@@ -841,16 +964,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 423</value>
+    <value>448, 593</value>
   </data>
   <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 31</value>
+    <value>163, 42</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -862,7 +985,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>5</value>
   </data>
   <data name="enrollmentCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -874,7 +997,7 @@
     <value>NoControl</value>
   </data>
   <data name="enrollmentCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 66</value>
+    <value>11, 59</value>
   </data>
   <data name="enrollmentCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 4, 0, 4</value>
@@ -883,10 +1006,10 @@
     <value>139, 27</value>
   </data>
   <data name="enrollmentCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>1</value>
   </data>
   <data name="enrollmentCheckBox.Text" xml:space="preserve">
-    <value>&amp;Enable Health Check</value>
+    <value>启用运行状况检查(&amp;E)</value>
   </data>
   <data name="&gt;&gt;enrollmentCheckBox.Name" xml:space="preserve">
     <value>enrollmentCheckBox</value>
@@ -898,313 +1021,439 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;enrollmentCheckBox.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>6</value>
   </data>
-  <data name="frequencyNumericBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="decentGroupBoxXSCredentials.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="frequencyNumericBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 121</value>
-  </data>
-  <data name="frequencyNumericBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 23</value>
-  </data>
-  <data name="frequencyNumericBox.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;frequencyNumericBox.Name" xml:space="preserve">
-    <value>frequencyNumericBox</value>
-  </data>
-  <data name="&gt;&gt;frequencyNumericBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;frequencyNumericBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;frequencyNumericBox.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="dayOfWeekComboBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="dayOfWeekComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 150</value>
-  </data>
-  <data name="dayOfWeekComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
-  </data>
-  <data name="dayOfWeekComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;dayOfWeekComboBox.Name" xml:space="preserve">
-    <value>dayOfWeekComboBox</value>
-  </data>
-  <data name="&gt;&gt;dayOfWeekComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dayOfWeekComboBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;dayOfWeekComboBox.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="existingAuthenticationRadioButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="decentGroupBoxXSCredentials.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="existingAuthenticationRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="existingAuthenticationRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="existingAuthenticationRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 285</value>
-  </data>
-  <data name="existingAuthenticationRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 19</value>
-  </data>
-  <data name="existingAuthenticationRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="existingAuthenticationRadioButton.Text" xml:space="preserve">
-    <value>Use existing authentication</value>
-  </data>
-  <data name="&gt;&gt;existingAuthenticationRadioButton.Name" xml:space="preserve">
-    <value>existingAuthenticationRadioButton</value>
-  </data>
-  <data name="&gt;&gt;existingAuthenticationRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;existingAuthenticationRadioButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;existingAuthenticationRadioButton.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="newAuthenticationRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="newAuthenticationRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="newAuthenticationRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="newAuthenticationRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 310</value>
-  </data>
-  <data name="newAuthenticationRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 19</value>
-  </data>
-  <data name="newAuthenticationRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="newAuthenticationRadioButton.Text" xml:space="preserve">
-    <value>Authenticate using MyCitrix credentials</value>
-  </data>
-  <data name="&gt;&gt;newAuthenticationRadioButton.Name" xml:space="preserve">
-    <value>newAuthenticationRadioButton</value>
-  </data>
-  <data name="&gt;&gt;newAuthenticationRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;newAuthenticationRadioButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;newAuthenticationRadioButton.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="authenticationStatusTable.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="authenticationStatusTable.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="decentGroupBoxXSCredentials.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="authenticationStatusTable.ColumnCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="spinnerIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="spinnerIcon.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="spinnerIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="spinnerIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 7</value>
-  </data>
-  <data name="spinnerIcon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
-  </data>
-  <data name="spinnerIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="spinnerIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="spinnerIcon.TabIndex" type="System.Int32, mscorlib">
-    <value>117</value>
-  </data>
-  <data name="spinnerIcon.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;spinnerIcon.Name" xml:space="preserve">
-    <value>spinnerIcon</value>
-  </data>
-  <data name="&gt;&gt;spinnerIcon.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SpinnerIcon, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;spinnerIcon.Parent" xml:space="preserve">
-    <value>authenticationStatusTable</value>
-  </data>
-  <data name="&gt;&gt;spinnerIcon.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="authenticateButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="authenticateButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="authenticateButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="authenticateButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="authenticateButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 25</value>
-  </data>
-  <data name="authenticateButton.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="authenticateButton.Text" xml:space="preserve">
-    <value>&amp;Authenticate</value>
-  </data>
-  <data name="&gt;&gt;authenticateButton.Name" xml:space="preserve">
-    <value>authenticateButton</value>
-  </data>
-  <data name="&gt;&gt;authenticateButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;authenticateButton.Parent" xml:space="preserve">
-    <value>authenticationStatusTable</value>
-  </data>
-  <data name="&gt;&gt;authenticateButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="statusPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="statusPictureBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="statusPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="statusPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 7</value>
-  </data>
-  <data name="statusPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="statusPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="statusPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
-  </data>
-  <data name="statusPictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="statusPictureBox.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;statusPictureBox.Name" xml:space="preserve">
-    <value>statusPictureBox</value>
-  </data>
-  <data name="&gt;&gt;statusPictureBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;statusPictureBox.Parent" xml:space="preserve">
-    <value>authenticationStatusTable</value>
-  </data>
-  <data name="&gt;&gt;statusPictureBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="statusLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="statusLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="statusLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="statusLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 0</value>
-  </data>
-  <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 31</value>
-  </data>
-  <data name="statusLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="statusLabel.Text" xml:space="preserve">
-    <value>Error</value>
+  <data name="errorLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="statusLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="statusLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;statusLabel.Name" xml:space="preserve">
-    <value>statusLabel</value>
-  </data>
-  <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;statusLabel.Parent" xml:space="preserve">
-    <value>authenticationStatusTable</value>
-  </data>
-  <data name="&gt;&gt;statusLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="authenticationStatusTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="errorLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="authenticationStatusTable.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="errorLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="authenticationStatusTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 393</value>
+  <data name="errorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="authenticationStatusTable.RowCount" type="System.Int32, mscorlib">
+  <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 138</value>
+  </data>
+  <data name="errorLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
+  </data>
+  <data name="errorLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 20</value>
+  </data>
+  <data name="errorLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
+    <value>errorLabel</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="testCredentialsStatusImage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="testCredentialsStatusImage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="testCredentialsStatusImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="testCredentialsStatusImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 138</value>
+  </data>
+  <data name="testCredentialsStatusImage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 3</value>
+  </data>
+  <data name="testCredentialsStatusImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="testCredentialsStatusImage.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
+  <data name="testCredentialsStatusImage.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsStatusImage.Name" xml:space="preserve">
+    <value>testCredentialsStatusImage</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsStatusImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsStatusImage.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsStatusImage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="authenticationStatusTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 31</value>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="authenticationStatusTable.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="&gt;&gt;authenticationStatusTable.Name" xml:space="preserve">
-    <value>authenticationStatusTable</value>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="&gt;&gt;authenticationStatusTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;authenticationStatusTable.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
   </data>
-  <data name="&gt;&gt;authenticationStatusTable.ZOrder" xml:space="preserve">
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 4</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 15</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>请输入运行状况检查服务连接到 XenServer 时使用的凭据。</value>
+  </data>
+  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 75</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 29</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>用户名(&amp;U):</value>
+  </data>
+  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 104</value>
+  </data>
+  <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 29</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>密码(&amp;P):</value>
+  </data>
+  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textboxXSPassword.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="textboxXSPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 107</value>
+  </data>
+  <data name="textboxXSPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 23</value>
+  </data>
+  <data name="textboxXSPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;textboxXSPassword.Name" xml:space="preserve">
+    <value>textboxXSPassword</value>
+  </data>
+  <data name="&gt;&gt;textboxXSPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textboxXSPassword.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;textboxXSPassword.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textboxXSUserName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="textboxXSUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 78</value>
+  </data>
+  <data name="textboxXSUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 23</value>
+  </data>
+  <data name="textboxXSUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="textboxXSUserName.Text" xml:space="preserve">
+    <value>root</value>
+  </data>
+  <data name="&gt;&gt;textboxXSUserName.Name" xml:space="preserve">
+    <value>textboxXSUserName</value>
+  </data>
+  <data name="&gt;&gt;textboxXSUserName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textboxXSUserName.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;textboxXSUserName.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="currentXsCredentialsRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="currentXsCredentialsRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="currentXsCredentialsRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="currentXsCredentialsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 28</value>
+  </data>
+  <data name="currentXsCredentialsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 19</value>
+  </data>
+  <data name="currentXsCredentialsRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="authenticationStatusTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="spinnerIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="authenticateButton" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="statusPictureBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="statusLabel" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
+    <value>使用当前的 [XenCenter] 凭据(&amp;R)</value>
+  </data>
+  <data name="&gt;&gt;currentXsCredentialsRadioButton.Name" xml:space="preserve">
+    <value>currentXsCredentialsRadioButton</value>
+  </data>
+  <data name="&gt;&gt;currentXsCredentialsRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentXsCredentialsRadioButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;currentXsCredentialsRadioButton.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 53</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 19</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="newXsCredentialsRadioButton.Text" xml:space="preserve">
+    <value>使用不同的凭据(&amp;C)</value>
+  </data>
+  <data name="&gt;&gt;newXsCredentialsRadioButton.Name" xml:space="preserve">
+    <value>newXsCredentialsRadioButton</value>
+  </data>
+  <data name="&gt;&gt;newXsCredentialsRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newXsCredentialsRadioButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;newXsCredentialsRadioButton.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="testCredentialsButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="testCredentialsButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="testCredentialsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="testCredentialsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 133</value>
+  </data>
+  <data name="testCredentialsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 0</value>
+  </data>
+  <data name="testCredentialsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 25</value>
+  </data>
+  <data name="testCredentialsButton.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="testCredentialsButton.Text" xml:space="preserve">
+    <value>测试凭据</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsButton.Name" xml:space="preserve">
+    <value>testCredentialsButton</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;testCredentialsButton.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 19</value>
+  </data>
+  <data name="tableLayoutPanel3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 3</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 161</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>decentGroupBoxXSCredentials</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="errorLabel" Row="5" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="testCredentialsStatusImage" Row="5" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="label4" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label5" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="textboxXSPassword" Row="4" RowSpan="1" Column="1" ColumnSpan="3" />&lt;Control Name="textboxXSUserName" Row="3" RowSpan="1" Column="1" ColumnSpan="3" />&lt;Control Name="currentXsCredentialsRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="newXsCredentialsRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="testCredentialsButton" Row="5" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,100,AutoSize,50,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,25" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="decentGroupBoxXSCredentials.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="decentGroupBoxXSCredentials.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 213</value>
+  </data>
+  <data name="decentGroupBoxXSCredentials.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 183</value>
+  </data>
+  <data name="decentGroupBoxXSCredentials.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="decentGroupBoxXSCredentials.Text" xml:space="preserve">
+    <value>XenServer 凭据</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBoxXSCredentials.Name" xml:space="preserve">
+    <value>decentGroupBoxXSCredentials</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBoxXSCredentials.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBoxXSCredentials.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBoxXSCredentials.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1219,10 +1468,10 @@
     <value>8, 8, 8, 8</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>11</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 462</value>
+    <value>619, 632</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1240,7 +1489,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutPanel3" Row="15" RowSpan="1" Column="2" ColumnSpan="3" /&gt;&lt;Control Name="passwordTextBox" Row="14" RowSpan="1" Column="3" ColumnSpan="2" /&gt;&lt;Control Name="usernameTextBox" Row="13" RowSpan="1" Column="3" ColumnSpan="2" /&gt;&lt;Control Name="passwordLabel" Row="14" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="usernameLabel" Row="13" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="authenticationRubricLabel" Row="10" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="authenticationLabel" Row="9" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="timeOfDayComboBox" Row="8" RowSpan="1" Column="3" ColumnSpan="2" /&gt;&lt;Control Name="timeOfDayLabel" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="dayOfweekLabel" Row="7" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="weeksLabel" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="frequencyLabel" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="flowLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="scheduleLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="rubricLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="flowLayoutPanel1" Row="18" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="enrollmentCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="frequencyNumericBox" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="dayOfWeekComboBox" Row="7" RowSpan="1" Column="3" ColumnSpan="2" /&gt;&lt;Control Name="existingAuthenticationRadioButton" Row="11" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="newAuthenticationRadioButton" Row="12" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="authenticationStatusTable" Row="16" RowSpan="1" Column="2" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Absolute,20,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="decentGroupBox2" Row="3" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="decentGroupBox1" Row="8" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="rubricLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="PolicyStatementLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="m_ctrlError" Row="10" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="flowLayoutPanel1" Row="10" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="enrollmentCheckBox" Row="2" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="decentGroupBoxXSCredentials" Row="7" RowSpan="1" Column="0" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1249,19 +1498,19 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>584, 462</value>
+    <value>619, 632</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>590, 490</value>
+    <value>520, 490</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Health Check Enrollment</value>
+    <value>运行状况检查注册</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>HealthCheckEnrollmentDialog</value>
+    <value>HealthCheckSettingsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

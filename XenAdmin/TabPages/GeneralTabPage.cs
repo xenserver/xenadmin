@@ -166,7 +166,7 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                RegisterLicenseStatusUpdater(xenObject);
+                RegisterLicenseStatusUpdater(value);
 
                 if (xenObject != value)
                 {
@@ -1335,7 +1335,7 @@ namespace XenAdmin.TabPages
                 {
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
-                    bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
+                    bool isIoOptimized = gm != null && gm.PV_drivers_detected;
                     bool isManagementAgentInstalled = vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED);
                     bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized;
                     bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;

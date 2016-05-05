@@ -330,11 +330,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void ReportException(Exception exception, PlanAction planAction, Host host)
         {
             Program.Invoke(this, () =>
-                                     {
-                                         if (host != null && !host.enabled && host.Connection != null && host.Connection.Session != null)
-                                             new EnableHostAction(host, false,
-                                                                  AddHostToPoolCommand.EnableNtolDialog).RunExternal(host.Connection.Session);
-                                     });
+                                    {
+                                        if (host != null && !host.enabled && host.Connection != null && host.Connection.Session != null)
+                                            try
+                                            {
+                                                new EnableHostAction(host, false,
+                                                                AddHostToPoolCommand.EnableNtolDialog).RunExternal(host.Connection.Session);
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                log.Error("Exception while trying to re-enable the host", e);
+                                            }
+                                    });
             Program.BeginInvoke(this, () =>
                                           {
                                               var row = planAction is UnwindProblemsAction
@@ -414,15 +421,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if(senderHost == null || plan == null)
                 return;
 
-            List<DataGridViewRowUpgrade> rowsForHost = (from DataGridViewRowUpgrade row in dataGridView1.Rows
-                                                       where row.RowIsForHost(senderHost)
-                                                       select row).ToList();
-
-            foreach (DataGridViewRowUpgrade row in rowsForHost)
+            Program.Invoke(Program.MainWindow, () =>
             {
-                DataGridViewRowUpgrade closureRow = row;
-                Program.Invoke(Program.MainWindow, () => closureRow.UpdateStatus(HostUpgradeState.Upgrading, plan.Status));
-            }
+                List<DataGridViewRowUpgrade> rowsForHost = (from DataGridViewRowUpgrade row in dataGridView1.Rows
+                                                           where row.RowIsForHost(senderHost)
+                                                           select row).ToList();
+
+                foreach (DataGridViewRowUpgrade row in rowsForHost)
+                {
+                    row.UpdateStatus(HostUpgradeState.Upgrading, plan.Status);
+                }
+            });
         }
 
         private List<PlanAction> GetSubTasksFor(Host host)
@@ -524,29 +533,28 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             public void UpdateStatus(HostUpgradeState state, string value)
             {
+                try 
+                { 
+                    switch (state)
+                    {
+                        case HostUpgradeState.Upgraded:
+                            imageCell.Value = Resources._000_Tick_h32bit_16;
+                            break;
 
-                switch (state)
-                {
-                    case HostUpgradeState.Upgraded:
-                        imageCell.Value = Resources._000_Tick_h32bit_16;
-                        break;
-                    case HostUpgradeState.Upgrading:
-                        try
-                        {
+                        case HostUpgradeState.Upgrading:
                             imageCell.Value = animatedImage;
-                        }
-                        catch (Exception) { }
-                        break;
+                            break;
 
-                    case HostUpgradeState.Error:
-                        imageCell.Value = Resources._000_Abort_h32bit_16;
-                        break;
+                        case HostUpgradeState.Error:
+                            imageCell.Value = Resources._000_Abort_h32bit_16;
+                            break;
 
-                    case HostUpgradeState.NotUpgraded:
-                        imageCell.Value = new Bitmap(1, 1);
-                        break;
+                        case HostUpgradeState.NotUpgraded:
+                            imageCell.Value = new Bitmap(1, 1);
+                            break;
+                    }
                 }
-
+                catch (Exception) { }
                 statusCell.Value = value;
             }
         }

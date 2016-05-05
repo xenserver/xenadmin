@@ -214,14 +214,15 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        protected double CalcIncrement(string units)
+        public static double CalcIncrement(double static_max, string units)
         {
             if (units == "MB")
             {
-                // Calculate a suitable increment for dynamic_min and dynamic_max, if static_max small
-                int i;
-                for (i = 1; i < static_max / Util.BINARY_MEGA / 8 && i < 128; i *= 2)
-                    ;
+                // Calculate a suitable increment if the static_max is small
+                int i = 1;
+                while (i < static_max / Util.BINARY_MEGA / 8 && i < 128)
+                    i *= 2;
+                
                 return i * Util.BINARY_MEGA;
             }
             else
