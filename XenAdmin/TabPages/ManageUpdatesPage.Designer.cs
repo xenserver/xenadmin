@@ -150,6 +150,7 @@
             this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.Resize += new System.EventHandler(this.tableLayoutPanel3_Resize);
             // 
             // checkForUpdatesNowButton
             // 

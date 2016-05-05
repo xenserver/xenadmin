@@ -175,7 +175,7 @@
     <value>The file to import was not provided.</value>
   </data>
   <data name="ERROR_HTTP_UPLOAD_FAILED" xml:space="preserve">
-    <value>Failed to import a virtual disk via HTTP.</value>
+    <value>Failed to import a virtual disk over HTTP.</value>
   </data>
   <data name="ERROR_IMPORT_DISK_FAILED" xml:space="preserve">
     <value>Failed to import virtual disk from file {0} to storage repository {1}.</value>
@@ -184,7 +184,7 @@
     <value>Failed to import.</value>
   </data>
   <data name="ERROR_ISCSI_UPLOAD_FAILED" xml:space="preserve">
-    <value>Failed to import a virtual disk via iSCSI.</value>
+    <value>Failed to import a virtual disk over iSCSI.</value>
   </data>
   <data name="ERROR_NOT_CONNECTED" xml:space="preserve">
     <value>Disconnected from [XenServer].</value>
@@ -235,7 +235,7 @@
     <value>Transferring virtual disk {0} ... </value>
   </data>
   <data name="ISCSI_ERROR" xml:space="preserve">
-    <value>Failed to connect to virtual disk via iSCSI.</value>
+    <value>Failed to connect to virtual disk over iSCSI.</value>
   </data>
   <data name="ISCSI_ERROR_CANNOT_OPEN_DISK" xml:space="preserve">
     <value>Failed to open virtual disk.</value>

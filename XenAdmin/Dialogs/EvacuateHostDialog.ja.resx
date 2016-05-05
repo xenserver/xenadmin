@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -112,23 +112,26 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="ActionStatusLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ActionStatusLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 339</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="ActionStatusLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ActionStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>518, 29</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="ActionStatusLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -136,7 +139,7 @@
     <value>ActionStatusLabel</value>
   </data>
   <data name="&gt;&gt;ActionStatusLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ActionStatusLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -150,6 +153,9 @@
   <data name="ProgressSeparator.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 331</value>
   </data>
+  <data name="ProgressSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>515, 2</value>
+  </data>
   <data name="ProgressSeparator.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
@@ -157,7 +163,7 @@
     <value>ProgressSeparator</value>
   </data>
   <data name="&gt;&gt;ProgressSeparator.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ProgressSeparator.Parent" xml:space="preserve">
     <value>$this</value>
@@ -171,6 +177,9 @@
   <data name="ActionProgressBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 368</value>
   </data>
+  <data name="ActionProgressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>515, 17</value>
+  </data>
   <data name="ActionProgressBar.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
@@ -178,7 +187,7 @@
     <value>ActionProgressBar</value>
   </data>
   <data name="&gt;&gt;ActionProgressBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ActionProgressBar.Parent" xml:space="preserve">
     <value>$this</value>
@@ -205,7 +214,7 @@
     <value>174, 21</value>
   </data>
   <data name="vmListLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="vmListLabel.Text" xml:space="preserve">
     <value>このサーバー上の VM:</value>
@@ -214,7 +223,7 @@
     <value>vmListLabel</value>
   </data>
   <data name="&gt;&gt;vmListLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;vmListLabel.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -238,7 +247,7 @@
     <value>77, 24</value>
   </data>
   <data name="CloseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="CloseButton.Text" xml:space="preserve">
     <value>キャンセル</value>
@@ -247,7 +256,7 @@
     <value>CloseButton</value>
   </data>
   <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -271,7 +280,7 @@
     <value>182, 24</value>
   </data>
   <data name="EvacuateButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="EvacuateButton.Text" xml:space="preserve">
     <value>保守モードに切り替える(&amp;E)</value>
@@ -280,7 +289,7 @@
     <value>EvacuateButton</value>
   </data>
   <data name="&gt;&gt;EvacuateButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;EvacuateButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -294,6 +303,9 @@
   <data name="labelBlurb.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="labelBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelBlurb.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 7</value>
   </data>
@@ -301,16 +313,16 @@
     <value>457, 41</value>
   </data>
   <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>0</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>これにより、実行中のすべての VM が移行または一時停止され、サーバーが保守モードに切り替わります。</value>
+    <value>この操作により、このサーバー上で実行中のすべての VM が移行され、サーバーが保守モードに切り替わります。VM を移行できない場合は、VM を一時停止またはシャットダウンする必要があります。</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
     <value>$this</value>
@@ -340,7 +352,7 @@
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -361,13 +373,13 @@
     <value>382, 23</value>
   </data>
   <data name="NewMasterComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;NewMasterComboBox.Name" xml:space="preserve">
     <value>NewMasterComboBox</value>
   </data>
   <data name="&gt;&gt;NewMasterComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NewMasterComboBox.Parent" xml:space="preserve">
     <value>$this</value>
@@ -388,16 +400,16 @@
     <value>98, 21</value>
   </data>
   <data name="NewMasterLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>2</value>
   </data>
   <data name="NewMasterLabel.Text" xml:space="preserve">
-    <value>新しいマスタ(&amp;N):</value>
+    <value>新しいマスター(&amp;N):</value>
   </data>
   <data name="&gt;&gt;NewMasterLabel.Name" xml:space="preserve">
     <value>NewMasterLabel</value>
   </data>
   <data name="&gt;&gt;NewMasterLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NewMasterLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -418,16 +430,16 @@
     <value>457, 50</value>
   </data>
   <data name="labelMasterBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>1</value>
   </data>
   <data name="labelMasterBlurb.Text" xml:space="preserve">
-    <value>このサーバーはプール マスタとして動作しています。保守モードに入る前に、新しいプール マスタが選出されます。[XenCenter] とプールとの接続は、一時的に切断されます。</value>
+    <value>このサーバーはプール マスターとして動作しています。保守モードに入る前に、新しいプール マスターが選出されます。[XenCenter] とプールとの接続は、一時的に切断されます。</value>
   </data>
   <data name="&gt;&gt;labelMasterBlurb.Name" xml:space="preserve">
     <value>labelMasterBlurb</value>
   </data>
   <data name="&gt;&gt;labelMasterBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelMasterBlurb.Parent" xml:space="preserve">
     <value>$this</value>
@@ -441,11 +453,11 @@
   <data name="dataGridViewVms.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="columnImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnImage.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="columnImage.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
@@ -453,17 +465,17 @@
   <data name="columnImage.Width" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <metadata name="columnVm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnVm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnVm.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
-  <metadata name="columnAction.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnAction.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnAction.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="columnAction.MinimumWidth" type="System.Int32, mscorlib">
     <value>80</value>
@@ -514,7 +526,7 @@
     <value>160, 21</value>
   </data>
   <data name="lableWLBEnabled.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="lableWLBEnabled.Text" xml:space="preserve">
     <value>ワークロード バランスが有効</value>
@@ -526,13 +538,13 @@
     <value>lableWLBEnabled</value>
   </data>
   <data name="&gt;&gt;lableWLBEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lableWLBEnabled.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;lableWLBEnabled.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="panel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -544,13 +556,13 @@
     <value>492, 157</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -558,7 +570,7 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -573,6 +585,9 @@
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>555, 430</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
   </data>
@@ -583,19 +598,19 @@
     <value>columnImage</value>
   </data>
   <data name="&gt;&gt;columnImage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnVm.Name" xml:space="preserve">
     <value>columnVm</value>
   </data>
   <data name="&gt;&gt;columnVm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnAction.Name" xml:space="preserve">
     <value>columnAction</value>
   </data>
   <data name="&gt;&gt;columnAction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EvacuateHostDialog</value>

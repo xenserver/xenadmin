@@ -45,7 +45,8 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const string DIAG_RESULT_URL = "/diag_sdk/diag_results/";
-        private readonly string diagnosticDomainName = "https://taas.citrix.com";
+        private const string ANALYSIS_PROGRESS_URL = "/diag_sdk/analysis_progress/";
+        private readonly string diagnosticDomainName = "https://cis.citrix.com";
        
         public GetHealthCheckAnalysisResultAction(Pool pool, bool suppressHistory)
             : base(pool.Connection, Messages.ACTION_GET_HEALTH_CHECK_RESULT, Messages.ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS, suppressHistory)
@@ -71,18 +72,37 @@ namespace XenAdmin.Actions
                 var diagnosticToken = Pool.HealthCheckSettings.GetSecretyInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
                 if (string.IsNullOrEmpty(diagnosticToken))
                 {
-                    log.InfoFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name);
+                    log.DebugFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name);
                     Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                     return;
                 }
                 if (!Pool.HealthCheckSettings.HasUpload)
                 {
-                    log.InfoFormat("Cannot get the diagnostic result for {0}, because the there is no upload completed yet", Pool.Name);
+                    log.DebugFormat("Cannot get the diagnostic result for {0}, because the there is no upload completed yet", Pool.Name);
                     Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                     return;
                 }
+
+
+                var analysisProgress = GetAnalysisProgress(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
+
+                if (analysisProgress >= 0 && analysisProgress < 100) // check if the progress is a valid value less than 100
+                {
+                    log.DebugFormat("Analysis for {0} not completed yet", Pool.Name);
+                    Description = Messages.COMPLETED;
+                    return;
+                }
+
                 var analysisResult = GetAnalysisResult(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
-                log.Info("Saving analysis result");
+
+                if (analysisResult.Count == 0 && analysisProgress == -1 && DateTime.Compare(Pool.HealthCheckSettings.LastSuccessfulUploadTime.AddMinutes(10), DateTime.UtcNow) > 0)
+                {
+                    log.DebugFormat("Diagnostic result for {0} is empty. Maybe analysis result is not yet available", Pool.Name);
+                    Description = Messages.COMPLETED;
+                    return;
+                }
+
+                log.Debug("Saving analysis result");
                 Dictionary<string, string> newConfig = Pool.health_check_config;
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_SEVERITY] = GetMaxSeverity(analysisResult).ToString();
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_ISSUES_DETECTED] = GetDistinctIssueCount(analysisResult).ToString();
@@ -92,7 +112,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                log.InfoFormat("Exception while getting diagnostic result from {0}. Exception Message: {1} ", diagnosticDomainName, e.Message);
+                log.ErrorFormat("Exception while getting diagnostic result from {0}. Exception Message: {1} ", diagnosticDomainName, e.Message);
                 Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                 throw;
             }
@@ -116,6 +136,62 @@ namespace XenAdmin.Actions
         {
             // get the number of distinct issues (by name)
             return issues.Select(issue => issue.name).Distinct().Count();
+        }
+
+        /// <summary>
+        /// Tries to retrieve the analysis progress for a particulat upload
+        /// </summary>
+        /// <param name="diagnosticToken"></param>
+        /// <param name="uploadUuid"></param>
+        /// <returns>the analysis progress as pecentage, or -1 if the progress cannot be retrieved</returns>
+        private double GetAnalysisProgress(string diagnosticToken, string uploadUuid)
+        {
+            try
+            {
+                var urlString = string.Format("{0}{1}?upload_id={2}", diagnosticDomainName, ANALYSIS_PROGRESS_URL, uploadUuid);
+                var authorizationHeader = "BT " + diagnosticToken;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlString);
+                httpWebRequest.Headers.Add("Authorization", authorizationHeader);
+                httpWebRequest.Method = "GET";
+
+                string result;
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return ParseAnalysisProgress(result, uploadUuid);
+            }
+            catch (Exception e)
+            {
+                log.DebugFormat("Exception while getting analysis progress result from {0}. Exception Message: {1} ", diagnosticDomainName, e.Message);
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// Deserialize the analysis progress from a JSON object that has "upload_id" as key and a number (percentage from 0 to 100) as a value
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <param name="uploadUuid"></param>
+        /// <returns>the analysis progress as pecentage, or -1 if the JSON object is invalid</returns>
+        public static double ParseAnalysisProgress(string jsonString, string uploadUuid)
+        {
+            if (string.IsNullOrEmpty(jsonString))
+                return -1;
+            try
+            {
+                var serializer = new JavaScriptSerializer();
+                Dictionary<string, object> result = serializer.DeserializeObject(jsonString) as Dictionary<string, object>;
+                var progress = result != null && result.ContainsKey(uploadUuid) ? Convert.ToDouble(result[uploadUuid]) : -1;
+                return progress >= 0 && progress <= 100 ? progress : -1;
+            }
+            catch (Exception e)
+            {
+                log.DebugFormat("Exception while deserializing json: {0}. Exception Message: {1} ", jsonString, e.Message);
+                return -1;
+            }
         }
 
         private List<AnalysisResult> GetAnalysisResult(string diagnosticToken, string uploadUuid)

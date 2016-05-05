@@ -232,7 +232,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to import a virtual disk via HTTP..
+        ///   Looks up a localized string similar to Failed to import a virtual disk over HTTP..
         /// </summary>
         internal static string ERROR_HTTP_UPLOAD_FAILED {
             get {
@@ -259,7 +259,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to import a virtual disk via iSCSI..
+        ///   Looks up a localized string similar to Failed to import a virtual disk over iSCSI..
         /// </summary>
         internal static string ERROR_ISCSI_UPLOAD_FAILED {
             get {
@@ -412,7 +412,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to connect to virtual disk via iSCSI..
+        ///   Looks up a localized string similar to Failed to connect to virtual disk over iSCSI..
         /// </summary>
         internal static string ISCSI_ERROR {
             get {

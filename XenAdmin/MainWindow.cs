@@ -866,8 +866,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate()
                     {
                         string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
-                        if (!HiddenFeatures.LinkLabelHidden)
-                            msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
+                        msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
                         string url = "https://" + connection.Hostname;
 
                         using (var dlog = new ConnectionRefusedDialog())
