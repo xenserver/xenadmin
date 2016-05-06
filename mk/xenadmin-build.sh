@@ -131,19 +131,25 @@ source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
 
-function get_hotfix ()
+function get_hotfixes ()
 {
-    local -r hotfix="$1"
-    local -r p=${REPO}/Branding/Hotfixes
-    _WGET -P ${p} ${WEB_HOTFIXES}/${hotfix} || _WGET -P ${p} ${WEB_HOTFIXES_TRUNK}/${hotfix}
+    local -r p="$1"
+    _WGET -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES} || _WGET -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_TRUNK}
 }
 
 #bring RPU hotfixes
 if [ "${BRANDING_UPDATE}" = "xsupdate" ]
 then
-  get_hotfix RPU001/1.0/RPU001.xsupdate
-  get_hotfix RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && rm -f RPU001-src-pkgs.tar.gz && gzip RPU001-src-pkgs.tar
-  get_hotfix RPU002/1.0/RPU002.xsupdate
+  echo "INFO: Bring RPU hotfixes..."
+  get_hotfixes ${REPO}/Branding/Hotfixes 
+  cd ${REPO}/Branding/Hotfixes
+  latest=$(ls RPU001 | /usr/bin/sort -n | tail -n 1)
+  echo "INFO: Latest version of RPU001 hotfix is $latest"
+  cp RPU001/$latest/RPU001.xsupdate RPU001.xsupdate
+  cp RPU001/$latest/RPU001-src-pkgs.tar RPU001-src-pkgs.tar && rm -f RPU001-src-pkgs.tar.gz && gzip RPU001-src-pkgs.tar
+  latest=$(ls RPU002 | /usr/bin/sort -n | tail -n 1)
+  echo "INFO: Latest version of RPU002 hotfix is $latest"
+  cp RPU002/$latest/RPU002.xsupdate RPU002.xsupdate
 fi
 
 #build
