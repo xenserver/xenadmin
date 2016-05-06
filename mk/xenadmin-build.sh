@@ -134,7 +134,7 @@ source ${REPO}/mk/re-branding.sh
 function get_hotfixes ()
 {
     local -r p="$1"
-    _WGET -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES} || _WGET -P ${p} ${WEB_HOTFIXES_TRUNK}
+    _WGET -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES} || _WGET -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_TRUNK}
 }
 
 #bring RPU hotfixes
