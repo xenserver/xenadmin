@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             // Store the SrWizardType on the tag of their RadioButton
             radioButtonNfs.Tag = new SrWizardType_VhdoNfs();
             radioButtonIscsi.Tag = new SrWizardType_Iscsi();
-            radioButtonFibreChannel.Tag = new SrWizardType_LvmoHba();
+            radioButtonFibreChannel.Tag = new SrWizardType_Hba();
             radioButtonNfsIso.Tag = new SrWizardType_NfsIso();
             radioButtonCifsIso.Tag = new SrWizardType_CifsIso();
             radioButtonCslg.Tag = new SrWizardType_Cslg();
@@ -171,7 +171,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                         radioButtonCslg.Checked = true;
                         radioButtonCslg.Tag = ((SrWizardType_Cslg)radioButtonCslg.Tag).ToEqualLogic();
                     }
-                    else if (wizardType.Type.ToString() == SrToReattach.type)
+                    else if (wizardType.PossibleTypes.Contains(SrToReattach.GetSRType(true)))
+
                     {
                         if (_matchingFrontends == 0)
                             radioButton.Checked = true;

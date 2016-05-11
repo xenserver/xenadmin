@@ -212,8 +212,9 @@ namespace XenAdmin.Wizards
                     lvmOhbaSrDescriptor.Description = description;
 
                 m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
+                m_srWizardType.IsGfs2 = lvmOhbaSrDescriptor is Gfs2SrDescriptor;
                 names.Add(name);
-                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_LvmoHba 
+                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_Hba 
                                                         ? Messages.NEWSR_HBA_DEFAULT_NAME
                                                         : Messages.NEWSR_FCOE_DEFAULT_NAME, names);
             }
@@ -241,7 +242,7 @@ namespace XenAdmin.Wizards
                 {
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoFcoe);
                 }
-                if (m_srWizardType is SrWizardType_LvmoHba)
+                if (m_srWizardType is SrWizardType_Hba)
                 {
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoHba);
                 }
@@ -257,7 +258,7 @@ namespace XenAdmin.Wizards
                 return CanShowLVMoHBASummaryPage(xenTabPageLvmoFcoe.SrDescriptors);
             }
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_Hba)
             {
                 if (senderPage == xenTabPageLvmoHba)
                 {
@@ -283,7 +284,7 @@ namespace XenAdmin.Wizards
                 {
                     AddPage(xenTabPageLvmoIscsi);
                 }
-                else if (m_srWizardType is SrWizardType_LvmoHba)
+                else if (m_srWizardType is SrWizardType_Hba)
                 {
                     AddPage(xenTabPageLvmoHba);
                     AddPage(xenTabPageLvmoHbaSummary);
@@ -337,7 +338,7 @@ namespace XenAdmin.Wizards
                     xenTabPageVhdoNFS.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_Iscsi)
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoHba)
+                else if (m_srWizardType is SrWizardType_Hba)
                     xenTabPageLvmoHba.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                     xenTabPageCslg.SrWizardType = m_srWizardType;
@@ -368,7 +369,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
-                m_srWizardType.IsLVM = xenTabPageLvmoIscsi.SRType == SR.SRTypes.lvmoiscsi;
+                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SRType == SR.SRTypes.gfs2;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
@@ -450,7 +451,7 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
             {
                 base.FinishWizard();
                 return;
@@ -534,7 +535,7 @@ namespace XenAdmin.Wizards
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
             using (var dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true})
             {
-                if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+                if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
                 {
                     ActionProgressDialog closureDialog = dialog;
                     // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
@@ -548,7 +549,7 @@ namespace XenAdmin.Wizards
                 dialog.ShowDialog(this);
             }
 
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
             {
                 foreach (var asyncAction in actionList)
                 {

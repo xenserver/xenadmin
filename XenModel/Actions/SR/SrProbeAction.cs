@@ -46,6 +46,7 @@ namespace XenAdmin.Actions
         public const String DEVICE = "device";
         public const String SCSIid = "SCSIid";
         public const String PATH = "path";
+        public const String URI = "uri";
 
         private readonly Dictionary<String, String> smconf;
         /// <summary>
