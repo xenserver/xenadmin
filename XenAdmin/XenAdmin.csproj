@@ -869,6 +869,7 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
     <Compile Include="Dialogs\FolderChangeDialog.cs">

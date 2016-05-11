@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private List<Host> hosts = null;
 
         public PatchPrechecksOnMultipleHostsPlanAction(IXenConnection connection, XenServerPatch patch, List<Host> hosts, List<PoolPatchMapping> mappings)
-            : base(connection, string.Format("Checking free space for uploading and installing {0}...", patch.Name))
+            : base(connection, string.Format("Precheck for {0} in {1}...", patch.Name, connection.Name))
         {
             this.patch = patch;
             this.hosts = hosts;

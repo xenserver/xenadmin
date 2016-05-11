@@ -46,6 +46,7 @@ using XenAdmin.Actions;
 using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Text;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -54,7 +55,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public XenAdmin.Core.Updates.UpgradeSequence UpgradeSequences { get; set; }
-        private BackgroundWorker actionsWorker = null;
         private bool _thisPageHasBeenCompleted = false;
 
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
@@ -63,6 +63,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+
+        private List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>();
+
+        private List<UpgradeProgressDescriptor> upgradeProgressDescriptors = new List<UpgradeProgressDescriptor>();
+
 
         public PatchingWizard_AutoUpdatingPage()
         {
@@ -176,77 +181,130 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 }//patch
 
+                var delayedActions = new List<PlanAction>();
                 //add all delayed actions to the end of the actions, per host
                 foreach (var kvp in delayedActionsByHost)
                 {
-                    planActionsPerPool[master].AddRange(kvp.Value);
+                    delayedActions.AddRange(kvp.Value);
                 }
+
+                var upd = new UpgradeProgressDescriptor(master, planActionsPerPool[master], delayedActions);
+                upgradeProgressDescriptors.Add(upd);
 
             } //foreach in SelectedMasters
 
 
-            var planActions = new List<PlanAction>();
+            //var planActions = new List<PlanAction>();
 
             //actions list for serial execution
-            foreach (var actionListPerPool in planActionsPerPool)
+            foreach (var desc in upgradeProgressDescriptors)
             {
-                planActions.AddRange(actionListPerPool.Value);
+                //planActions.AddRange(actionListPerPool.Value);
+
+                var bgw = new BackgroundWorker();
+                backgroundWorkers.Add(bgw);
+
+                bgw.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
+                bgw.WorkerReportsProgress = true;
+                bgw.ProgressChanged += new ProgressChangedEventHandler(actionsWorker_ProgressChanged);
+                bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(actionsWorker_RunWorkerCompleted);
+                bgw.WorkerSupportsCancellation = true;
+                bgw.RunWorkerAsync(desc);
             }
 
-            planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));
+            //planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));
 
-            actionsWorker = new BackgroundWorker();
-            actionsWorker.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
-            actionsWorker.WorkerReportsProgress = true;
-            actionsWorker.ProgressChanged += new ProgressChangedEventHandler(actionsWorker_ProgressChanged);
-            actionsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(actionsWorker_RunWorkerCompleted);
-            actionsWorker.WorkerSupportsCancellation = true;
-            actionsWorker.RunWorkerAsync(planActions);
+            //actionsWorker = new BackgroundWorker();
+            //actionsWorker.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
+            //actionsWorker.WorkerReportsProgress = true;
+            //actionsWorker.ProgressChanged += new ProgressChangedEventHandler(actionsWorker_ProgressChanged);
+            //actionsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(actionsWorker_RunWorkerCompleted);
+            //actionsWorker.WorkerSupportsCancellation = true;
+            //actionsWorker.RunWorkerAsync(planActions);
         }
 
         #region automatic_mode
 
+        private List<PlanAction> doneActions = new List<PlanAction>();
+        private List<PlanAction> inProgressActions = new List<PlanAction>();
+
         private void actionsWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            var actionsWorker = sender as BackgroundWorker;
+
             if (!actionsWorker.CancellationPending)
             {
                 PlanAction action = (PlanAction)e.UserState;
                 if (e.ProgressPercentage == 0)
-                    textBoxLog.Text += action;
+                {
+                    inProgressActions.Add(action);
+                }
                 else
                 {
-                    textBoxLog.Text += string.Format("{0}\r\n", Messages.DONE);
-                    progressBar.Value += e.ProgressPercentage;
+                    doneActions.Add(action);
+                    inProgressActions.Remove(action);
+
+                    progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
                 }
+
+                var sb = new StringBuilder();
+
+                foreach (var pa in doneActions)
+                {
+                    sb.Append(pa);
+                    sb.AppendLine(Messages.DONE);
+                }
+
+                foreach (var pa in inProgressActions)
+                {
+                    sb.Append(pa);
+                    sb.AppendLine();
+                }
+
+                textBoxLog.Text = sb.ToString();
             }
         }
 
-        private void PatchingWizardAutomaticPatchWork(object obj, DoWorkEventArgs doWorkEventArgs)
+        private void PatchingWizardAutomaticPatchWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
-            List<PlanAction> actionList = (List<PlanAction>)doWorkEventArgs.Argument;
+            var actionsWorker = sender as BackgroundWorker;
+
+            UpgradeProgressDescriptor descriptor = (UpgradeProgressDescriptor)doWorkEventArgs.Argument;
+
+            var actionList = descriptor.planActions.Concat(descriptor.delayedActions).ToList();
+
             foreach (PlanAction action in actionList)
             {
                 try
                 {
                     if (actionsWorker.CancellationPending)
                     {
+                        //descriptor.InProgressAction = null;
                         doWorkEventArgs.Cancel = true;
                         return;
                     }
-                    this.actionsWorker.ReportProgress(0, action);
+                    //descriptor.InProgressAction = action;
+
+                    actionsWorker.ReportProgress(0, action);
                     action.Run();
                     Thread.Sleep(1000);
 
-                    this.actionsWorker.ReportProgress((int)((1.0 / (double)actionList.Count) * 100), action);
+                    //descriptor.doneActions.Add(action);
 
+                    actionsWorker.ReportProgress((int)((1.0 / (double)actionList.Count) * 100), action);
                 }
                 catch (Exception e)
                 {
+                    //descriptor.FailedWithExceptionAction = action;
 
                     log.Error("Failed to carry out plan.", e);
                     log.Debug(actionList);
                     doWorkEventArgs.Result = new Exception(action.Title, e);
                     break;
+                }
+                finally
+                {
+                    //descriptor.InProgressAction = null;
                 }
             }
         }
@@ -297,8 +355,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             else
             {
                 //remove delayed action of the same kind for this host (because it is mandatory and will run immediately)
-                foreach (var mg in delayedGuidances)
-                    delayedGuidances.RemoveAll(a => a.GetType() == mg.GetType());
+                delayedGuidances.RemoveAll(dg => actions.Any(ma => ma.GetType() == dg.GetType())); 
 
                 //if it is a restart, clean delayed list
                 if (patch.after_apply_guidance == after_apply_guidance.restartHost)
