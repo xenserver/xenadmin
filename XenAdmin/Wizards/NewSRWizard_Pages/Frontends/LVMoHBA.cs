@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public virtual LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
         {
-            return SrType == SR.SRTypes.gfs2 ? new Gfs2SrDescriptor(device) : new LvmOhbaSrDescriptor(device, Connection);
+            return SrType == SR.SRTypes.gfs2 ? new Gfs2HbaSrDescriptor(device) : new LvmOhbaSrDescriptor(device, Connection);
         }
 
         public virtual LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)

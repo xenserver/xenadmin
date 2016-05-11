@@ -84,11 +84,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         }
     }
 
-    public class Gfs2SrDescriptor : LvmOhbaSrDescriptor
+    public class Gfs2HbaSrDescriptor : LvmOhbaSrDescriptor
     {
         private const string URIFORMAT = "file:///dev/disk/by-id/scsi-{0}";  // uri=file:///dev/disk/by-id/scsi-<SCSIID>
 
-        public Gfs2SrDescriptor(FibreChannelDevice device)
+        public Gfs2HbaSrDescriptor(FibreChannelDevice device)
             : base(device)
         {
             DeviceConfig[SrProbeAction.URI] = string.Format(URIFORMAT, device.SCSIid);
