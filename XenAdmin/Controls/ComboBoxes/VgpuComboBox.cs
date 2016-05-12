@@ -170,6 +170,9 @@ namespace XenAdmin.Controls
 
         public bool Equals(GpuTuple other)
         {
+            if (other == null)
+                return false;
+
             if (GpuGroup == null && other.GpuGroup == null)
                 return true;
             if (GpuGroup == null || other.GpuGroup == null)
