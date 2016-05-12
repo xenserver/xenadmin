@@ -196,7 +196,8 @@ namespace XenAdmin.Controls
                         return false;
                 }
 
-                if (IsGpuHeaderItem && other.IsVgpuSubitem)
+                if ((IsGpuHeaderItem && other.IsVgpuSubitem) ||
+                    (IsVgpuSubitem && other.IsGpuHeaderItem))
                     return false;
             }
 
