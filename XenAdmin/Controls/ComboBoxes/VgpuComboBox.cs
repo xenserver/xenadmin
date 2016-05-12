@@ -195,6 +195,9 @@ namespace XenAdmin.Controls
                     if (!VgpuTypes[i].Equals(other.VgpuTypes[i]))
                         return false;
                 }
+
+                if (IsGpuHeaderItem && other.IsVgpuSubitem)
+                    return false;
             }
 
             return result;
