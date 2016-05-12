@@ -211,6 +211,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.tableLayoutPanel2.SetColumnSpan(this.authenticationRubricTextBox, 2);
             this.authenticationRubricTextBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.authenticationRubricTextBox.Name = "authenticationRubricTextBox";
+            this.authenticationRubricTextBox.ReadOnly = true;
             this.authenticationRubricTextBox.ShortcutsEnabled = false;
             this.authenticationRubricTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.authenticationRubricTextBox_LinkClicked);
             // 
