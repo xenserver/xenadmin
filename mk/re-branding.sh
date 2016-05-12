@@ -59,7 +59,7 @@ rebranding_global()
         -e "s#\"\[BRANDING_COPYRIGHT\]\"#${BRANDING_COPYRIGHT}#g" \
         -e "s#\"\[BRANDING_COPYRIGHT_2\]\"#${BRANDING_COPYRIGHT_2}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
-        -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_PRODUCT_VERSION}#g" \
+        -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
         -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
         -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
