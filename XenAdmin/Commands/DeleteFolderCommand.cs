@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             {
                 actions.Add(new FolderAction((IXenObject)folder, null, FolderAction.Kind.Delete));
             }
-            RunMultipleActions(actions, Messages.DELETING_FOLDERS, Messages.DELETING_FOLDERS, Messages.DELETED_FOLDERS, true);
+            RunMultipleActions(actions, Messages.DELETING_FOLDERS, Messages.DELETING_FOLDERS, Messages.DELETED_FOLDERS, false);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
