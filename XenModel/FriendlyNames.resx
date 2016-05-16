@@ -1215,7 +1215,7 @@
     <value>Unable to log in to XAPI session.</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>Pool '{0}' failed to retrieve placement recommendations from WLB for VM '{1}'.</value>
+    <value>Pool '{0}' failed to retrieve placement recommendations from WLB for '{1}'.</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB reports that the pool '{0}' is in need of optimization. The pool optimization mode is set to '{1}' and the severity of the alert is '{2}'.</value>
