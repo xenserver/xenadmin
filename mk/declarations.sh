@@ -34,7 +34,7 @@
 #Set and uncomment this to override the 3rd value of the product number 
 #normally fetched from branding
 #
-#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
+PRODUCT_MICRO_VERSION_OVERRIDE=1
 
 #this is the XenServer branch we're building; change this when making a new branch
 
@@ -180,8 +180,8 @@ STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
 WEB_HOTFIXES_ROOT=https://repo.citrite.net/builds/xs/hotfixes
-WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}
-WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk
+WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/
+WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 
 WGET_OPT="-T 10 -N -q"
 WGET () { wget ${WGET_OPT} "${@}"; }
