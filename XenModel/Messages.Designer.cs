@@ -25595,6 +25595,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update was not completed successfully.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following error occured while automatic upgrade was in progress: .
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following errors occured while automatic upgrade was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update was not completed successfully.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload and Install.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT {
@@ -25964,7 +26000,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to a.
+        ///   Looks up a localized string similar to This server is not licensed for automatic updating.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING {
             get {
