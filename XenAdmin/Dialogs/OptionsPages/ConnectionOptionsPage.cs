@@ -51,6 +51,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private OptionsDialog optionsDialog;
 
+        // used for preventing the event handlers (mainly the SelectUseThisProxyServer function)  from being called when loading the settings into the text/check boxes
+        private bool built = false;
+
         public ConnectionOptionsPage()
         {
             InitializeComponent();
@@ -95,6 +98,8 @@ namespace XenAdmin.Dialogs.OptionsPages
             ProxyPasswordTextBox.Text = protectedPassword == "" ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
 
             ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
+
+            built = true;
         }
 
         private void UseProxyRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -153,7 +158,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void SelectUseThisProxyServer()
         {
-            if (!UseProxyRadioButton.Checked)
+            if (!UseProxyRadioButton.Checked && built)
                 UseProxyRadioButton.Checked = true;
         }
 
