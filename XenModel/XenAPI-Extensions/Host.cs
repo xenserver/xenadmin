@@ -456,6 +456,19 @@ namespace XenAPI
             return h._RestrictIntraPoolMigrate;
         }
 
+        /// <summary>
+        /// Active directory is restricted only if the "restrict_ad" key exists and it is true
+        /// </summary>
+        private bool _RestrictAD
+        {
+            get { return BoolKey(license_params, "restrict_ad"); }
+        }
+
+        public static bool RestrictAD(Host h)
+        {
+            return h._RestrictAD;
+        }
+
         private bool _RestrictReadCaching
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_read_caching"); }
