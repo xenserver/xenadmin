@@ -11487,6 +11487,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPLOAD_PATCH_UPLOADED" xml:space="preserve">
     <value>已上载</value>
   </data>
+  <data name="UPSELL_BLURB_AD" xml:space="preserve">
+    <value>Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
+  </data>
+  <data name="UPSELL_BLURB_AD_MORE" xml:space="preserve">
+    <value>
+
+To learn more about the [XenServer] Active Directory feature or to start a [XenServer] trial, click the button below.</value>
+  </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
   </data>
