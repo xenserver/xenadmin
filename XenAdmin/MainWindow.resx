@@ -684,6 +684,33 @@
   <data name="&gt;&gt;TabPageAD.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="TabPageADUpsell.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageADUpsell.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPageADUpsell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageADUpsell.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="TabPageADUpsell.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.Name" xml:space="preserve">
+    <value>TabPageADUpsell</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
   <data name="TabPageGPU.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -706,7 +733,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageGPU.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="TabPageSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -736,7 +763,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -766,7 +793,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -796,7 +823,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>
@@ -1699,13 +1726,13 @@
     <value>163, 5</value>
   </metadata>
   <data name="ShowToolbarMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="ShowToolbarMenuItem.Text" xml:space="preserve">
     <value>Show &amp;Toolbar</value>
   </data>
   <data name="ToolBarContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 26</value>
+    <value>147, 26</value>
   </data>
   <data name="&gt;&gt;ToolBarContextMenu.Name" xml:space="preserve">
     <value>ToolBarContextMenu</value>
@@ -2523,7 +2550,7 @@
     <value>False</value>
   </data>
   <data name="helpTopicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="helpTopicsToolStripMenuItem.Text" xml:space="preserve">
     <value>Help &amp;Contents</value>
@@ -2532,46 +2559,46 @@
     <value>F1</value>
   </data>
   <data name="helpContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="helpContextMenuItem.Text" xml:space="preserve">
     <value>Conte&amp;xt Help</value>
   </data>
   <data name="toolStripMenuItem15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+    <value>225, 6</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
     <value>View [XenCenter] &amp;Log Files</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+    <value>225, 6</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
     <value>[XenServer product] on the &amp;Web</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Text" xml:space="preserve">
     <value>[XenCenter] &amp;Plugins online</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+    <value>225, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>228, 22</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About [XenCenter]</value>
