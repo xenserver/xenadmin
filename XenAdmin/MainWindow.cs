@@ -2390,6 +2390,8 @@ namespace XenAdmin
                 return "TabPageBallooning" + modelObj;
             if (TheTabControl.SelectedTab == TabPageAD)
                 return "TabPageAD" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageADUpsell)
+                return "TabPageADUpsell" + modelObj;
             if (TheTabControl.SelectedTab == TabPageBallooningUpsell)
                 return "TabPageBallooningUpsell";
             if (TheTabControl.SelectedTab == TabPageWLBUpsell)
