@@ -3945,15 +3945,6 @@
     <Content Include="Help\XenCenter.zh-CN.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Help\WLB.zh-CN.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Help\WLB.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Help\WLB.ja.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Images\attach_virtualstorage_32.png" />
     <None Include="Images\backup_restore_32.png" />
     <None Include="Images\copy_16.png" />
