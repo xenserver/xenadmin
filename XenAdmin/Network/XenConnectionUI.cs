@@ -206,6 +206,9 @@ namespace XenAdmin.Network
                     case WebExceptionStatus.SendFailure:
                         AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
                         break;
+                    case WebExceptionStatus.SecureChannelFailure:
+                        AddError(owner, connection, string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, ((XenConnection)connection).Hostname), Messages.SOLUTION_UNKNOWN);
+                        break;
                     default:
                         AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
                         break;
