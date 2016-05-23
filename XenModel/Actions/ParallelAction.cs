@@ -53,11 +53,13 @@ namespace XenAdmin.Actions
         private List<AsyncAction> actionsWithNoConnection = new List<AsyncAction>();
         private ProduceConsumerQueue queueWithNoConnection;
 
+        private readonly int maxNumberOfParallelActions;
+
         public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
             : base(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
         {
             actionsByConnection.Add(connection, subActions);
-            CreateQueues(maxNumberOfParallelActions);
+            this.maxNumberOfParallelActions = maxNumberOfParallelActions;
         }
 
         public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
@@ -74,7 +76,7 @@ namespace XenAdmin.Actions
             : base(null, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
         {
             GroupActionsByConnection();
-            CreateQueues(maxNumberOfParallelActions);
+            this.maxNumberOfParallelActions = maxNumberOfParallelActions;
         }
 
         public ParallelAction(string title, string startDescription, string endDescription, List<AsyncAction> subActions, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
@@ -104,22 +106,12 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void CreateQueues(int maxNumberOfParallelActions)
-        {
-            foreach (IXenConnection connection in actionsByConnection.Keys)
-            {
-                queuesByConnection[connection] = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsByConnection[connection].Count));
-            }
-
-            if (actionsWithNoConnection.Count > 0)
-                queueWithNoConnection = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsWithNoConnection.Count));
-        }
 
         protected override void RunSubActions(List<Exception> exceptions)
         {
             foreach (IXenConnection connection in actionsByConnection.Keys)
             {
-                queuesByConnection[connection] = new ProduceConsumerQueue(Math.Min(DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS, actionsByConnection[connection].Count));
+                queuesByConnection[connection] = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsByConnection[connection].Count));
                 foreach (AsyncAction subAction in actionsByConnection[connection])
                 {
                     EnqueueAction(subAction, queuesByConnection[connection], exceptions);
@@ -127,7 +119,7 @@ namespace XenAdmin.Actions
             }
 
             if (actionsWithNoConnection.Count > 0)
-                queueWithNoConnection = new ProduceConsumerQueue(Math.Min(DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS, actionsWithNoConnection.Count));
+                queueWithNoConnection = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsWithNoConnection.Count));
 
             foreach (AsyncAction subAction in actionsWithNoConnection)
             {
