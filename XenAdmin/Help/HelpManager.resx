@@ -1104,7 +1104,4 @@
   <data name="CrossPoolMigrateWizard_TransferNetworkCopyModePane" xml:space="preserve">
     <value>9000</value>
   </data>
-  <data name="TabPageADUpsell" xml:space="preserve">
-    <value>1301</value>
-  </data>
 </root>
