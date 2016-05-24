@@ -280,7 +280,6 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.TabPageADUpsell = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -354,7 +353,6 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageWLB);
             this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
             this.TheTabControl.Controls.Add(this.TabPageAD);
-            this.TheTabControl.Controls.Add(this.TabPageADUpsell);
             this.TheTabControl.Controls.Add(this.TabPageGPU);
             this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
@@ -1839,12 +1837,6 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
-            // TabPageADUpsell
-            // 
-            resources.ApplyResources(this.TabPageADUpsell, "TabPageADUpsell");
-            this.TabPageADUpsell.Name = "TabPageADUpsell";
-            this.TabPageADUpsell.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2106,7 +2098,6 @@ namespace XenAdmin
         private CommandToolStripButton resumeContainerToolStripButton;
         private CommandToolStripButton restartContainerToolStripButton;
         private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
-        private TabPage TabPageADUpsell;
     }
 
 }

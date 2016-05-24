@@ -97,7 +97,6 @@ namespace XenAdmin
         internal readonly PhysicalStoragePage PhysicalStoragePage = new PhysicalStoragePage();
         internal readonly VMStoragePage VMStoragePage = new VMStoragePage();
         internal readonly AdPage AdPage = new AdPage();
-        internal readonly ADUpsellPage AdUpsellPage = new ADUpsellPage();
         internal readonly GpuPage GpuPage = new GpuPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
@@ -179,7 +178,6 @@ namespace XenAdmin
             AddTabContents(WLBUpsellPage, TabPageWLBUpsell);
             AddTabContents(PhysicalStoragePage, TabPagePhysicalStorage);
             AddTabContents(AdPage, TabPageAD);
-            AddTabContents(AdUpsellPage, TabPageADUpsell);
             AddTabContents(GpuPage, TabPageGPU);
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
@@ -1361,7 +1359,6 @@ namespace XenAdmin
             bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
             bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA);
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
-            bool ad_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictAD);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
 
             bool multi = SelectionManager.Selection.Count > 1;
@@ -1411,7 +1408,7 @@ namespace XenAdmin
             if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell ))
                 ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
 
-            ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
+            ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
@@ -2390,8 +2387,6 @@ namespace XenAdmin
                 return "TabPageBallooning" + modelObj;
             if (TheTabControl.SelectedTab == TabPageAD)
                 return "TabPageAD" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageADUpsell)
-                return "TabPageADUpsell" + modelObj;
             if (TheTabControl.SelectedTab == TabPageBallooningUpsell)
                 return "TabPageBallooningUpsell";
             if (TheTabControl.SelectedTab == TabPageWLBUpsell)
