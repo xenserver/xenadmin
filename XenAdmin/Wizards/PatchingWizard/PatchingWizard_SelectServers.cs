@@ -156,13 +156,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (us[host].Count == 0)
                     {
                         row.Enabled = false;
-                        //add tooltip  why not
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
                     }
                 }
                 else
                 {
                     row.Enabled = false;
-                    //add tooltip why not
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
                 }
 
                 return;

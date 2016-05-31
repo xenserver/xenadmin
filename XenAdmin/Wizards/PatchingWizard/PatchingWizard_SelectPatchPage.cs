@@ -45,6 +45,7 @@ using XenAdmin.Dialogs;
 using System.Drawing;
 using XenAdmin.Alerts;
 using System.Linq;
+using XenAdmin.Actions;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -181,9 +182,25 @@ namespace XenAdmin.Wizards.PatchingWizard
                         PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch));
                     }
                 }
+                else //In Automatic Mode
+                {
+                    var downloadUpdatesAction = new DownloadUpdatesXmlAction(false, true, true);
+                    var dialog = new ActionProgressDialog(downloadUpdatesAction, ProgressBarStyle.Marquee);
+
+                    dialog.ShowDialog(this.Parent); //Will block until dialog closes, action completed
+
+                    if (!downloadUpdatesAction.Succeeded)
+                    {
+                        cancel = true;
+
+                    }
+                }
             }
 
-            Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
+            if (!cancel) //unsubscribe only if we are really leaving this page
+            {
+                Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
+            }
             base.PageLeave(direction, ref cancel);
         }
 
@@ -583,13 +600,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (AutomaticRadioButton.Checked)
-            {
-                CheckForUpdatesInProgress = true;
-                Updates.CheckForUpdates(true);
-
-                UpdateEnablement();
-            }
+            UpdateEnablement();
         }
 
         private void downloadUpdateRadioButton_CheckedChanged(object sender, EventArgs e)
