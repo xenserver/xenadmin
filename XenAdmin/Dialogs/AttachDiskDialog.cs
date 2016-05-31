@@ -161,9 +161,11 @@ namespace XenAdmin.Dialogs
                             DiskListVdiItem VDIitem = new DiskListVdiItem(TheVDI);
                             if (VDIitem.Show)
                                 DiskListTreeView.AddChildNode(item, VDIitem);
+                            TheVDI.PropertyChanged -= new PropertyChangedEventHandler(Server_Changed);
                             TheVDI.PropertyChanged += new PropertyChangedEventHandler(Server_Changed);
                         }
                     }
+                    sr.PropertyChanged -= new PropertyChangedEventHandler(Server_Changed);
                     sr.PropertyChanged += new PropertyChangedEventHandler(Server_Changed);
                 }
             }
