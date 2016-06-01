@@ -25595,7 +25595,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update was not completed successfully.
+        ///   Looks up a localized string similar to Update process was not completed successfully. Check .
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
             get {
@@ -25654,6 +25654,33 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_CLEANUP {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_CLEANUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skipping download: Already downloaded update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to download update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING", resourceCulture);
             }
         }
         

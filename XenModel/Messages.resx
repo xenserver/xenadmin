@@ -8854,7 +8854,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>Update was not completed successfully</value>
+    <value>Update process was not completed successfully. Check </value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED" xml:space="preserve">
     <value>Following errors occured while automatic upgrade was in progress:</value>
@@ -8873,6 +8873,15 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
+    <value>Downloading update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
+    <value>Skipping download: Already downloaded update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
+    <value>Waiting to download update {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>

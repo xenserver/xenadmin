@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         
                         if (problem != null)
                         {
-                            throw new Exception(problem.Title);
+                            throw new Exception(string.Format("{0}: {1}. {2}", host, problem.Title, problem.Description));
                         }
                     }
                     catch (Exception ex)

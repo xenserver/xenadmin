@@ -81,7 +81,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        private string _title;
+        protected string _title;
 
         public string Title
         {
