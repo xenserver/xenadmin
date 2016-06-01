@@ -4828,6 +4828,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] has encountered a problem launching PuTTY.</value>
   </data>
+  <data name="ERROR_SECURE_CHANNEL_FAILURE" xml:space="preserve">
+    <value>Could not create SSL/TLS secure channel.</value>
+  </data>
   <data name="ERROR_UNKNOWN" xml:space="preserve">
     <value>An unknown error occurred.</value>
   </data>
