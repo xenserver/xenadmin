@@ -117,6 +117,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
                 backgroundWorkers.Clear();
+
                 return;
             }
 
@@ -218,23 +219,26 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var actionsWorker = sender as BackgroundWorker;
 
-            if (!actionsWorker.CancellationPending)
-            {
-                PlanAction action = (PlanAction)e.UserState;
-                if (e.ProgressPercentage == 0)
+            Program.Invoke(Program.MainWindow, () =>
                 {
-                    inProgressActions.Add(action);
-                }
-                else
-                {
-                    doneActions.Add(action);
-                    inProgressActions.Remove(action);
+                    if (!actionsWorker.CancellationPending)
+                    {
+                        PlanAction action = (PlanAction)e.UserState;
+                        if (e.ProgressPercentage == 0)
+                        {
+                            inProgressActions.Add(action);
+                        }
+                        else
+                        {
+                            doneActions.Add(action);
+                            inProgressActions.Remove(action);
 
-                    progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
-                }
+                            progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
+                        }
 
-                UpdateStatusTextBox();
-            }
+                        UpdateStatusTextBox();
+                    }
+                });
         }
 
         private void UpdateStatusTextBox()
@@ -245,6 +249,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 sb.Append(pa);
                 sb.AppendLine(Messages.DONE);
+            }
+
+            foreach (var pa in errorActions)
+            {
+                sb.Append(pa);
+                sb.AppendLine(Messages.ERROR);
             }
 
             foreach (var pa in inProgressActions)
@@ -282,10 +292,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     bgw.FailedWithExceptionAction = action;
                     errorActions.Add(action);
+                    inProgressActions.Remove(action);
 
                     log.Error("Failed to carry out plan.", e);
-                    log.Debug(bgw.AllActions);
+                    log.Debug(action.Title);
+
                     doWorkEventArgs.Result = new Exception(action.Title, e);
+
+                    bgw.ReportProgress(0);
                     break;
                 }
             }
@@ -295,27 +309,29 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var bgw = (UpdateProgressBackgroundWorker)sender;
 
-            if (!e.Cancelled)
-            {
-                Exception exception = e.Result as Exception;
-                if (exception != null)
+            Program.Invoke(Program.MainWindow, () =>
                 {
-                    //not showing exceptions in the meantime
-                }
+                    if (!e.Cancelled)
+                    {
+                        Exception exception = e.Result as Exception;
+                        if (exception != null)
+                        {
+                            //not showing exceptions in the meantime
+                        }
 
-                //if all finished
-                if (backgroundWorkers.All(w => !w.IsBusy))
-                {
-                    AllWorkersFinished();
-                    ShowErrors();
+                        //if all finished
+                        if (backgroundWorkers.All(w => !w.IsBusy))
+                        {
+                            AllWorkersFinished();
+                            ShowErrors();
 
-                    progressBar.Value = 100;
-                    _thisPageHasBeenCompleted = true;
-                }
+                            _thisPageHasBeenCompleted = true;
+                        }
 
-                _cancelEnabled = false;
-                _nextEnabled = true;
-            }
+                        _cancelEnabled = false;
+                        _nextEnabled = true;
+                    }
+                });
 
             OnPageUpdated();
         }
@@ -458,6 +474,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var sb = new StringBuilder();
 
+                sb.AppendLine();
                 sb.AppendLine(errorActions.Count > 1 ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED);
 
                 foreach (var action in errorActions)
@@ -493,7 +510,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void AllWorkersFinished()
         {
             labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE;
-
+            progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
         }
