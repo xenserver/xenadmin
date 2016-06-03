@@ -3711,6 +3711,12 @@ This will also delete its subfolders.</value>
   <data name="DELETE_VM_PROTECTION_TITLE" xml:space="preserve">
     <value>Delete VM Protection Policy</value>
   </data>
+  <data name="DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION" xml:space="preserve">
+    <value>Delete WLB Optimization Scheduler</value>
+  </data>
+  <data name="DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING" xml:space="preserve">
+    <value>This will delete the selected scheduler. Continue?</value>
+  </data>
   <data name="DELETING_ALL_TAG" xml:space="preserve">
     <value>Deleting tag '{0}'</value>
   </data>

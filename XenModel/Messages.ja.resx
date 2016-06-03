@@ -3715,6 +3715,12 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DELETE_VM_PROTECTION_TITLE" xml:space="preserve">
     <value>VM 保護ポリシーの削除</value>
   </data>
+  <data name="DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION" xml:space="preserve">
+    <value>Delete WLB Optimization Scheduler</value>
+  </data>
+  <data name="DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING" xml:space="preserve">
+    <value>This will delete the selected scheduler. Continue?</value>
+  </data>
   <data name="DELETING_ALL_TAG" xml:space="preserve">
     <value>タグ '{0}' を削除しています</value>
   </data>

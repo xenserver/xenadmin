@@ -646,8 +646,17 @@ namespace XenAdmin.Controls.Wlb
         {
             if (lvTaskList.SelectedItems.Count > 0)
             {
-                WlbScheduledTask task = TaskFromItem(lvTaskList.SelectedItems[0]);
-                DeleteTask(task);
+                var confirmResult = MessageBox.Show(this,
+                                                    Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING,
+                                                    Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION,
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    WlbScheduledTask task = TaskFromItem(lvTaskList.SelectedItems[0]);
+                    DeleteTask(task);
+                }
             }
             weekView1.Refresh();
         }
