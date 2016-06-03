@@ -13707,6 +13707,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not create SSL/TLS secure channel..
+        /// </summary>
+        public static string ERROR_SECURE_CHANNEL_FAILURE {
+            get {
+                return ResourceManager.GetString("ERROR_SECURE_CHANNEL_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unknown error occurred..
         /// </summary>
         public static string ERROR_UNKNOWN {
@@ -33261,6 +33270,26 @@ namespace XenAdmin {
         public static string UPLOADING_PATCH_TO {
             get {
                 return ResourceManager.GetString("UPLOADING_PATCH_TO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts..
+        /// </summary>
+        public static string UPSELL_BLURB_AD {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_AD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///To learn more about the [XenServer] Active Directory feature or to start a [XenServer] trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_AD_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_AD_MORE", resourceCulture);
             }
         }
         

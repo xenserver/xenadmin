@@ -1347,7 +1347,7 @@ namespace XenAdmin.TabPages
                     {
                         if (vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))
                         {
-                            s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
+                            sb.AppendLine(vm.VirtualisationStatusString);
                         }
                         else
                         {

@@ -921,6 +921,10 @@ namespace XenAdmin.Network
                 {
                     return string.Format(Messages.CONNECT_NO_XAPI_FAILURE, this.Hostname);
                 }
+                else if (w.Status == WebExceptionStatus.SecureChannelFailure)
+                {
+                    return string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, this.Hostname);
+                }
                 else
                 {
                     return w.Message;
