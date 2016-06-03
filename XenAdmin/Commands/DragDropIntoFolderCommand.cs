@@ -162,12 +162,6 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore()
         {
             Folder targetFolder = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Folder>();
-            List<AsyncAction> actions = new List<AsyncAction>();
-
-            foreach (IXenObject draggedItem in GetItemsNotAlreadyInTargetFolder())
-            {
-                actions.Add(new FolderAction(draggedItem, targetFolder, FolderAction.Kind.Move));
-            }
 
             if (DraggedNodes != null)
             {
@@ -180,8 +174,7 @@ namespace XenAdmin.Commands
                 }
             }
 
-            MultipleActionLauncher launcher = new MultipleActionLauncher(actions, string.Format(Messages.MOVE_OBJECTS_TO_FOLDER, targetFolder.Name), Messages.MOVING, Messages.MOVED, true);
-            launcher.Run();
+            new FolderAction(GetItemsNotAlreadyInTargetFolder(), targetFolder, FolderAction.Kind.Move).RunAsync();
 
             // need to now wait until the operation has finished... then we can expand the node.
             ThreadPool.QueueUserWorkItem(delegate

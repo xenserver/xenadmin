@@ -66,14 +66,14 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            List<Folder> folders = new List<Folder>(selection.AsXenObjects<Folder>(CanExecute));
+            List<IXenObject> folders = new List<IXenObject>(selection.AsXenObjects<Folder>(CanExecute));
 
-            folders.RemoveAll((Predicate<Folder>)delegate(Folder folder)
+            folders.RemoveAll((Predicate<IXenObject>)delegate(IXenObject folder)
             {
                 // if the list contains any folders that are children to others in the list then
                 // they will automatically get deleted, so remove them here.
 
-                foreach (Folder f in folders)
+                foreach (var f in folders)
                 {
                     if (folder.opaque_ref.StartsWith(f.opaque_ref + "/"))
                     {
@@ -83,12 +83,7 @@ namespace XenAdmin.Commands
                 return false;
             });
 
-            List<AsyncAction> actions = new List<AsyncAction>();
-            foreach (Folder folder in folders)
-            {
-                actions.Add(new FolderAction((IXenObject)folder, null, FolderAction.Kind.Delete));
-            }
-            RunMultipleActions(actions, Messages.DELETING_FOLDERS, Messages.DELETING_FOLDERS, Messages.DELETED_FOLDERS, true);
+            new FolderAction(folders, null, FolderAction.Kind.Delete).RunAsync();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

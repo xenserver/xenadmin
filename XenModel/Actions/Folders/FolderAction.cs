@@ -65,12 +65,17 @@ namespace XenAdmin.Actions
         //   leave extra empty folders in the list, so we just catch the RBAC error and fail silently.
         //
         // * For safety, destructive operations are called last: duplication is not as bad as destructive failure.
+        //
+        // * When this action is used to move or delete multiple objects across multiple connections, 
+        //   the action can not be sudo'ed as it does not have a single session that can be escalated. In this the action
+        //   would fail if any of the connections does not have sufficient roles.
+        //
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public enum Kind { New, Move, Delete, Rename }
 
-        private readonly IXenObject obj;
+        private readonly List<IXenObject> objs = new List<IXenObject>();
         private readonly Folder folder;
         private readonly string path;
         private readonly string[] paths;
@@ -84,7 +89,7 @@ namespace XenAdmin.Actions
         {
             System.Diagnostics.Trace.Assert(kind == Kind.Move || kind == Kind.Delete);
 
-            this.obj = obj;
+            this.objs.Add(obj);
             this.folder = folder;
             this.kind = kind;
 
@@ -100,6 +105,20 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.Add("pool.add_to_other_config", Folders.EMPTY_FOLDERS);
 
             AppliesTo.Add(obj.opaque_ref);
+            if (folder != null)
+                AppliesTo.Add(folder.opaque_ref);
+        }
+
+        // Constructor used for Move and Delete multiple objects, across multiple connections
+        public FolderAction(List<IXenObject> objs, Folder folder, Kind kind)
+            : base(null, GetTitle(folder, kind))
+        {
+            System.Diagnostics.Trace.Assert(kind == Kind.Move || kind == Kind.Delete);
+
+            this.objs.AddRange(objs);
+            this.folder = folder;
+            this.kind = kind;
+
             if (folder != null)
                 AppliesTo.Add(folder.opaque_ref);
         }
@@ -126,7 +145,7 @@ namespace XenAdmin.Actions
             System.Diagnostics.Trace.Assert(kind == Kind.Rename);
 
             this.kind = kind;
-            this.obj = obj;
+            this.objs.Add(obj);
             this.path = Folders.AppendPath(obj.Path, name);
             AppliesTo.Add(obj.opaque_ref);
             AppliesTo.Add(path);
@@ -141,6 +160,21 @@ namespace XenAdmin.Actions
 
                 case Kind.Delete:
                     return String.Format(Messages.DELETING_FOLDER, Helpers.GetName(ixmo));
+
+                default:
+                    return String.Empty;
+            }
+        }
+
+        internal static string GetTitle(Folder folder, Kind kind)
+        {
+            switch (kind)
+            {
+                case Kind.Move:
+                    return string.Format(Messages.MOVE_OBJECTS_TO_FOLDER, folder.Name);
+
+                case Kind.Delete:
+                    return Messages.DELETING_FOLDERS;
 
                 default:
                     return String.Empty;
@@ -164,7 +198,7 @@ namespace XenAdmin.Actions
                 case Kind.Move:
                     Description = folder == null ? Messages.DELETING_FOLDER : Messages.MOVING;
                     
-                    DeleteOrMove(obj, folder, GetCancelling);
+                    DeleteOrMove(objs, folder, GetCancelling);
                     
                     Description = folder == null ? Messages.DELETED_FOLDER : Messages.MOVED;
                     break;
@@ -172,7 +206,8 @@ namespace XenAdmin.Actions
                 case Kind.Rename:
                     Description = Messages.RENAMING;
 
-                    Rename(obj, path, GetCancelling);
+                    if (objs.Count > 0) // objects should only contain one item
+                        Rename(objs[0], path, GetCancelling);
 
                     Description = Messages.RENAMED;
                     break;
@@ -192,9 +227,68 @@ namespace XenAdmin.Actions
             // CanCancel is always true.
         }
 
+        private Dictionary<IXenConnection, List<string>> emptyFolders = new Dictionary<IXenConnection, List<string>>();
+
+       /// <summary>
+       /// Mark a folder as empty. The folder will be added to a collection of empty folders that will be used later to update the server
+       /// </summary>
+        private void MarkEmptyFolder(IXenConnection connection, string folder)
+        {
+            if (!emptyFolders.ContainsKey(connection))
+                emptyFolders.Add(connection, new List<string>());
+            emptyFolders[connection].Add(folder);
+        }
+
+        private List<string> nonEmptyFolders = new List<string>();
+
+        /// <summary>
+        /// Mark a folder as non-empty. The folder will be added to a collection of non-empty folders that will be used later to update the server
+        /// </summary>
+        private void MarkNonEmptyFolder(string folder)
+        {
+            nonEmptyFolders.Add(folder);
+        }
+        
+        /// <summary>
+        /// Update the EMPTY_FOLDERS property on all servers, using the emptyFolders and nonEmptyFolders collections
+        /// </summary>
+        private void UpdateEmptyFolders(Func<bool> cancelling)
+        {
+            foreach (var con in emptyFolders.Keys)
+            {
+                AddFoldersToEmptyList(con, cancelling, emptyFolders[con].ToArray());
+            }
+            RemoveFoldersFromEmptyList(nonEmptyFolders.ToArray(), cancelling);
+        }
+
+        internal void DeleteOrMove(List<IXenObject> objects, Folder folder, Func<bool> cancelling)
+        {
+            IXenConnection connection = null;
+            if (objects.Count > 0 && objects[0] != null)
+                connection = objects[0].Connection;
+
+            if (connection != null)
+                ((XenConnection)connection).OnBeforeMajorChange(true);
+            try
+            {
+                foreach(var obj in objects)
+                {
+                    DeleteOrMove(obj, folder, cancelling);
+                }
+
+                // Update EMPTY_FOLDERS on all servers
+                UpdateEmptyFolders(cancelling);
+            }
+            finally
+            {
+                if (connection != null)
+                    ((XenConnection)connection).OnAfterMajorChange(true);
+            }
+        }
+
         internal void DeleteOrMove(IXenObject obj, Folder folder, Func<bool> cancelling)
         {
-            // if, by moving candidate, we makes its parent
+            // if, by moving candidate, we make its parent
             // empty, then we must add from's parent to the empty list
             // CA-34379: Folder actions do not work with sudo. Make sure destructive operations are called last.
 
@@ -203,7 +297,7 @@ namespace XenAdmin.Actions
             {
                 if (new List<IXenObject>(Folders.Children(parent)).Count == 1)
                 {
-                    AddFoldersToEmptyList(obj.Connection, cancelling, parent);
+                    MarkEmptyFolder(obj.Connection, parent);
                 }
             }
 
@@ -215,41 +309,29 @@ namespace XenAdmin.Actions
             // do the whole thing in a BackgroundMajorChange so the treeview doesn't get updated while the update
             // is only partially completed.
 
-            ((XenConnection)Connection).OnBeforeMajorChange(true);
+            ((XenConnection)obj.Connection).OnBeforeMajorChange(true);
             try
             {
                 // CA-34379: Folder actions do not work with sudo. Make sure destructive operations are called last.
                 if (obj.opaque_ref != path)
                 {
-                    AddFoldersToEmptyList(obj.Connection, cancelling, path);
+                    MarkEmptyFolder(obj.Connection, path);
 
                     foreach (IXenObject ixmo in Folders.Children(obj.opaque_ref))
                         MoveContents(ixmo, path, cancelling);
 
-                    RemoveFolderFromEmptyList(obj.opaque_ref, cancelling);
+                    MarkNonEmptyFolder(obj.opaque_ref);
+                    // Update EMPTY_FOLDERS
+                    UpdateEmptyFolders(cancelling);
                 }
             }
             finally
             {
-                ((XenConnection)Connection).OnAfterMajorChange(true);
+                ((XenConnection)obj.Connection).OnAfterMajorChange(true);
             }
         }
 
         private void MoveContents(IXenObject from, string to, Func<bool> cancelling)
-        {
-            ((XenConnection)Connection).OnBeforeMajorChange(true);
-            try
-            {
-                MoveContents_(from, to, cancelling);
-            }
-            finally 
-            {
-                ((XenConnection)Connection).OnAfterMajorChange(true);
-            }
-            
-        }
-
-        private void MoveContents_(IXenObject from, string to, Func<bool> cancelling)
         {
             // CA-34379: Folder actions do not work with sudo. Make sure destructive operations are called last.
             if (cancelling())
@@ -260,7 +342,7 @@ namespace XenAdmin.Actions
             {
                 log.DebugFormat("Moving {0} to {1}", Helpers.GetName(from), to ?? "<null>");
                 SetFolder(from, to, cancelling);
-                RemoveFolderFromEmptyList(to, cancelling);
+                MarkNonEmptyFolder(to);
                 return;
             }
 
@@ -273,14 +355,14 @@ namespace XenAdmin.Actions
             {
                 empty = false;
 
-                MoveContents_(ixmo, newLocation, cancelling);
+                MoveContents(ixmo, newLocation, cancelling);
             }
 
-            RemoveFolderFromEmptyList(from.opaque_ref, cancelling);
+            MarkNonEmptyFolder(from.opaque_ref);
 
             if (empty && newLocation != null)
             {
-                AddFoldersToEmptyList(from.Connection, cancelling, newLocation);
+                MarkEmptyFolder(from.Connection, newLocation);
             }
         }
 
@@ -330,7 +412,7 @@ namespace XenAdmin.Actions
         private Session GetSession(IXenConnection conn)
         {
             // First we look at this.Session. This allows us to sudo if we have only one connection.
-            if (Session.Connection == conn)
+            if (Session != null && Session.Connection == conn)
                 return Session;
 
             // Otherwise we dig into our dictionary of sessions for other connections. These cannot be sudo'ed,
@@ -342,7 +424,7 @@ namespace XenAdmin.Actions
             return s;
         }
 
-        private void RemoveFolderFromEmptyList(string path, Func<bool> cancelling)
+        private void RemoveFoldersFromEmptyList(string[] paths, Func<bool> cancelling)
         {
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
             {
@@ -350,9 +432,19 @@ namespace XenAdmin.Actions
                     continue;
 
                 List<string> emptyFolders = new List<string>(Folders.GetEmptyFolders(connection));
-                if (emptyFolders.Contains(path))
+                
+                bool somethingChanged = false;
+                foreach(string path in paths)
                 {
-                    emptyFolders.Remove(path);
+                    if (emptyFolders.Contains(path))
+                    {
+                        emptyFolders.Remove(path);
+                        somethingChanged = true;
+                    }
+                }
+                
+                if (somethingChanged)
+                {
                     try
                     {
                         SetEmptyFolders(connection, emptyFolders, cancelling);

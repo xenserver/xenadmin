@@ -37,6 +37,7 @@ using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Model;
 using XenAPI;
+using System.Linq;
 
 
 namespace XenAdmin.Commands
@@ -77,18 +78,12 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            var actions = new List<AsyncAction>();
+            var objectsToBeRemoved = (from VirtualTreeNode node in _nodes
+                                    let xenObject = node.Tag as IXenObject
+                                    where xenObject != null
+                                    select xenObject).ToList();
 
-            foreach (VirtualTreeNode node in _nodes)
-            {
-                IXenObject xenObject = node.Tag as IXenObject;
-
-                if (xenObject != null)
-                    actions.Add(new FolderAction(xenObject, null, FolderAction.Kind.Delete));
-            }
-
-            if (actions.Count != 0)
-                RunMultipleActions(actions, Messages.REMOVE_FROM_FOLDER, Messages.REMOVING_FROM_FOLDER, Messages.REMOVED_FROM_FOLDER, true);
+            new FolderAction(objectsToBeRemoved, null, FolderAction.Kind.Delete).RunAsync();
         }
 
         public override string MenuText
