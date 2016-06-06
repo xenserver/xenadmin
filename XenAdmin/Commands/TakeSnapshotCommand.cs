@@ -89,6 +89,7 @@ namespace XenAdmin.Commands
                     {
                         if (dialog.ShowDialog(Parent) != DialogResult.Cancel && dialog.SnapshotName != null)
                         {
+                            //XenAdmin.Controls.ConsolePanel consolePanelCopy = new XenAdmin.Controls.ConsolePanel(Program.MainWindow.ConsolePanel)
                             Program.Invoke(Program.MainWindow, () => Program.MainWindow.ConsolePanel.setCurrentSource(vm));
                             return new VMSnapshotCreateAction(vm, dialog.SnapshotName, dialog.SnapshotDescription, dialog.SnapshotType,
                                                               (vmToSnapshot, username, password) =>
