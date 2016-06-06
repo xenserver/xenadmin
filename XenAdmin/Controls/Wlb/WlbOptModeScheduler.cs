@@ -646,10 +646,20 @@ namespace XenAdmin.Controls.Wlb
         {
             if (lvTaskList.SelectedItems.Count > 0)
             {
-                WlbScheduledTask task = TaskFromItem(lvTaskList.SelectedItems[0]);
-                DeleteTask(task);
+                DialogResult confirmResult = new ThreeButtonDialog(
+                                                new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                                                                Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING,
+                                                                                Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION),
+                                                ThreeButtonDialog.ButtonYes,
+                                                ThreeButtonDialog.ButtonNo).ShowDialog(this);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    WlbScheduledTask task = TaskFromItem(lvTaskList.SelectedItems[0]);
+                    DeleteTask(task);
+                    weekView1.Refresh();
+                }
             }
-            weekView1.Refresh();
         }
 
         private void lvTaskList_SelectedIndexChanged(object sender, EventArgs e)
