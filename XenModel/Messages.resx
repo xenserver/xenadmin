@@ -4828,6 +4828,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] has encountered a problem launching PuTTY.</value>
   </data>
+  <data name="ERROR_SECURE_CHANNEL_FAILURE" xml:space="preserve">
+    <value>Could not create SSL/TLS secure channel.</value>
+  </data>
   <data name="ERROR_UNKNOWN" xml:space="preserve">
     <value>An unknown error occurred.</value>
   </data>
@@ -8853,6 +8856,18 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
+    <value>Update process was not completed successfully. Check </value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED" xml:space="preserve">
+    <value>Following errors occured while automatic upgrade was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED" xml:space="preserve">
+    <value>Following error occured while automatic upgrade was in progress: </value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
+    <value>Update was not completed successfully</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
   </data>
@@ -8861,6 +8876,15 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
+    <value>Downloading update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
+    <value>Skipping download: Already downloaded update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
+    <value>Waiting to download update {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -11514,6 +11538,14 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPLOAD_PATCH_UPLOADED" xml:space="preserve">
     <value>Uploaded</value>
+  </data>
+  <data name="UPSELL_BLURB_AD" xml:space="preserve">
+    <value>Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
+  </data>
+  <data name="UPSELL_BLURB_AD_MORE" xml:space="preserve">
+    <value>
+
+To learn more about the [XenServer] Active Directory feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>

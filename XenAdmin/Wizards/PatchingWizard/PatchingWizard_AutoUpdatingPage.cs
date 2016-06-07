@@ -66,9 +66,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>();
 
-        private List<UpgradeProgressDescriptor> upgradeProgressDescriptors = new List<UpgradeProgressDescriptor>();
-
-
         public PatchingWizard_AutoUpdatingPage()
         {
             InitializeComponent();
@@ -118,7 +115,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (_thisPageHasBeenCompleted)
             {
-                actionsWorker = null;
+                backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
+                backgroundWorkers.Clear();
+
                 return;
             }
 
@@ -128,6 +127,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 Dictionary<Host, List<PlanAction>> planActionsByHost = new Dictionary<Host, List<PlanAction>>();
                 Dictionary<Host, List<PlanAction>> delayedActionsByHost = new Dictionary<Host, List<PlanAction>>();
+                planActionsPerPool.Add(master, new List<PlanAction>());
 
                 foreach (var host in master.Connection.Cache.Hosts)
                 {
@@ -135,7 +135,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
-                //var master = Helpers.GetMaster(pool.Connection);
                 var hosts = master.Connection.Cache.Hosts;
 
                 var us = Updates.GetUpgradeSequence(master.Connection);
@@ -167,11 +166,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     foreach (var kvp in planActionsByHost)
                     {
-                        if (!planActionsPerPool.ContainsKey(master))
-                        {
-                            planActionsPerPool.Add(master, new List<PlanAction>());
-                        }
-
                         planActionsPerPool[master].AddRange(kvp.Value);
                         kvp.Value.Clear();
                     }
@@ -188,149 +182,158 @@ namespace XenAdmin.Wizards.PatchingWizard
                     delayedActions.AddRange(kvp.Value);
                 }
 
-                var upd = new UpgradeProgressDescriptor(master, planActionsPerPool[master], delayedActions);
-                upgradeProgressDescriptors.Add(upd);
+                if (planActionsPerPool.ContainsKey(master) && planActionsPerPool[master].Count > 0)
+                {
+                    var bgw = new UpdateProgressBackgroundWorker(master, planActionsPerPool[master], delayedActions);
+                    backgroundWorkers.Add(bgw);
 
+                }
             } //foreach in SelectedMasters
 
-
-            //var planActions = new List<PlanAction>();
-
-            //actions list for serial execution
-            foreach (var desc in upgradeProgressDescriptors)
+            foreach (var bgw in backgroundWorkers)
             {
-                //planActions.AddRange(actionListPerPool.Value);
-
-                var bgw = new BackgroundWorker();
-                backgroundWorkers.Add(bgw);
-
-                bgw.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
+                bgw.DoWork += new DoWorkEventHandler(WorkerDoWork);
                 bgw.WorkerReportsProgress = true;
-                bgw.ProgressChanged += new ProgressChangedEventHandler(actionsWorker_ProgressChanged);
-                bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(actionsWorker_RunWorkerCompleted);
+                bgw.ProgressChanged += new ProgressChangedEventHandler(WorkerProgressChanged);
+                bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCompleted);
                 bgw.WorkerSupportsCancellation = true;
-                bgw.RunWorkerAsync(desc);
+                bgw.RunWorkerAsync();
             }
 
-            //planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));
+            if (backgroundWorkers.Count == 0)
+            {
+                _thisPageHasBeenCompleted = true;
+                _nextEnabled = true;
 
-            //actionsWorker = new BackgroundWorker();
-            //actionsWorker.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
-            //actionsWorker.WorkerReportsProgress = true;
-            //actionsWorker.ProgressChanged += new ProgressChangedEventHandler(actionsWorker_ProgressChanged);
-            //actionsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(actionsWorker_RunWorkerCompleted);
-            //actionsWorker.WorkerSupportsCancellation = true;
-            //actionsWorker.RunWorkerAsync(planActions);
+                OnPageUpdated();
+            }
         }
 
         #region automatic_mode
 
         private List<PlanAction> doneActions = new List<PlanAction>();
         private List<PlanAction> inProgressActions = new List<PlanAction>();
+        private List<PlanAction> errorActions = new List<PlanAction>();
 
-        private void actionsWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void WorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             var actionsWorker = sender as BackgroundWorker;
 
-            if (!actionsWorker.CancellationPending)
-            {
-                PlanAction action = (PlanAction)e.UserState;
-                if (e.ProgressPercentage == 0)
+            Program.Invoke(Program.MainWindow, () =>
                 {
-                    inProgressActions.Add(action);
-                }
-                else
-                {
-                    doneActions.Add(action);
-                    inProgressActions.Remove(action);
+                    if (!actionsWorker.CancellationPending)
+                    {
+                        PlanAction action = (PlanAction)e.UserState;
+                        if (e.ProgressPercentage == 0)
+                        {
+                            inProgressActions.Add(action);
+                        }
+                        else
+                        {
+                            doneActions.Add(action);
+                            inProgressActions.Remove(action);
 
-                    progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
-                }
+                            progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
+                        }
 
-                var sb = new StringBuilder();
-
-                foreach (var pa in doneActions)
-                {
-                    sb.Append(pa);
-                    sb.AppendLine(Messages.DONE);
-                }
-
-                foreach (var pa in inProgressActions)
-                {
-                    sb.Append(pa);
-                    sb.AppendLine();
-                }
-
-                textBoxLog.Text = sb.ToString();
-            }
+                        UpdateStatusTextBox();
+                    }
+                });
         }
 
-        private void PatchingWizardAutomaticPatchWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        private void UpdateStatusTextBox()
         {
-            var actionsWorker = sender as BackgroundWorker;
+            var sb = new StringBuilder();
 
-            UpgradeProgressDescriptor descriptor = (UpgradeProgressDescriptor)doWorkEventArgs.Argument;
+            foreach (var pa in doneActions)
+            {
+                sb.Append(pa);
+                sb.AppendLine(Messages.DONE);
+            }
 
-            var actionList = descriptor.planActions.Concat(descriptor.delayedActions).ToList();
+            foreach (var pa in errorActions)
+            {
+                sb.Append(pa);
+                sb.AppendLine(Messages.ERROR);
+            }
 
-            foreach (PlanAction action in actionList)
+            foreach (var pa in inProgressActions)
+            {
+                sb.Append(pa);
+                sb.AppendLine();
+            }
+
+            textBoxLog.Text = sb.ToString();
+        }
+
+        private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            var bgw = sender as UpdateProgressBackgroundWorker;
+
+            foreach (PlanAction action in bgw.AllActions)
             {
                 try
                 {
-                    if (actionsWorker.CancellationPending)
+                    if (bgw.CancellationPending)
                     {
-                        //descriptor.InProgressAction = null;
                         doWorkEventArgs.Cancel = true;
                         return;
                     }
-                    //descriptor.InProgressAction = action;
-
-                    actionsWorker.ReportProgress(0, action);
+                    
+                    bgw.ReportProgress(0, action);
                     action.Run();
                     Thread.Sleep(1000);
 
-                    //descriptor.doneActions.Add(action);
+                    bgw.doneActions.Add(action);
 
-                    actionsWorker.ReportProgress((int)((1.0 / (double)actionList.Count) * 100), action);
+                    bgw.ReportProgress((int)((1.0 / (double)bgw.AllActions.Count) * 100), action);
                 }
                 catch (Exception e)
                 {
-                    //descriptor.FailedWithExceptionAction = action;
+                    bgw.FailedWithExceptionAction = action;
+                    errorActions.Add(action);
+                    inProgressActions.Remove(action);
 
                     log.Error("Failed to carry out plan.", e);
-                    log.Debug(actionList);
+                    log.Debug(action.Title);
+
                     doWorkEventArgs.Result = new Exception(action.Title, e);
+
+                    bgw.ReportProgress(0);
                     break;
-                }
-                finally
-                {
-                    //descriptor.InProgressAction = null;
                 }
             }
         }
 
-        private void actionsWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!e.Cancelled)
-            {
-                Exception exception = e.Result as Exception;
-                if (exception != null)
-                {
-                    FinishedWithErrors(exception);
-                    
-                }
-                else
-                {
-                    FinishedSuccessfully();
-                }
+            var bgw = (UpdateProgressBackgroundWorker)sender;
 
-                progressBar.Value = 100;
-                _cancelEnabled = false;
-                _nextEnabled = true;
-            }
+            Program.Invoke(Program.MainWindow, () =>
+                {
+                    if (!e.Cancelled)
+                    {
+                        Exception exception = e.Result as Exception;
+                        if (exception != null)
+                        {
+                            //not showing exceptions in the meantime
+                        }
+
+                        //if all finished
+                        if (backgroundWorkers.All(w => !w.IsBusy))
+                        {
+                            AllWorkersFinished();
+                            ShowErrors();
+
+                            _thisPageHasBeenCompleted = true;
+                        }
+
+                        _cancelEnabled = false;
+                        _nextEnabled = true;
+                    }
+                });
+
             OnPageUpdated();
-
-            _thisPageHasBeenCompleted = true;
         }
 
         private void UpdateDelayedAfterPatchGuidanceActionListForHost(List<PlanAction> delayedGuidances, Host host, XenServerPatch patch)
@@ -447,37 +450,67 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #endregion
 
-        private void FinishedWithErrors(Exception exception)
+        private void ShowErrors()
         {
-            //labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, GetUpdateName());
-
-            string errorMessage = null;
-
-            if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
+            if (ErrorMessages != null)
             {
-                var innerEx = exception.InnerException as Failure;
-                errorMessage = innerEx.Message;
+                labelTitle.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED;
+                labelError.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR;
 
-                if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
-                    log.Error(string.Concat(innerEx.ErrorDescription.ToArray()));
+                textBoxLog.Text += ErrorMessages;
+
+                log.ErrorFormat("Error message displayed: {0}", labelError.Text);
+                pictureBox1.Image = SystemIcons.Error.ToBitmap();
+                panel1.Visible = true;
             }
-
-            labelError.Text = errorMessage ?? string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
-
-            log.ErrorFormat("Error message displayed: {0}", labelError.Text);
-
-            pictureBox1.Image = SystemIcons.Error.ToBitmap();
-            if (exception.InnerException is SupplementalPackInstallFailedException)
-            {
-                errorLinkLabel.Visible = true;
-                errorLinkLabel.Tag = exception.InnerException;
-            }
-            panel1.Visible = true;
         }
 
-        private void FinishedSuccessfully()
+        private string ErrorMessages
+        {
+            get
+            {
+                if (errorActions.Count == 0)
+                    return null;
+
+                var sb = new StringBuilder();
+
+                sb.AppendLine();
+                sb.AppendLine(errorActions.Count > 1 ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED);
+
+                foreach (var action in errorActions)
+                {
+                    var exception = action.Error;
+                    if (exception == null)
+                    {
+                        log.ErrorFormat("An action has failed with an empty exception. Action: {0}", action.ToString());
+                        continue;
+                    }
+
+                    if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
+                    {
+                        var innerEx = exception.InnerException as Failure;
+                        sb.AppendLine(innerEx.Message);
+
+                        if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
+                            sb.AppendLine(string.Concat(innerEx.ErrorDescription.ToArray()));
+                    }
+                    else
+                    {
+                        if (exception is Failure && ((Failure)exception).ErrorDescription != null)
+                            sb.AppendLine(string.Concat(((Failure)exception).ErrorDescription.ToArray()));
+                        else
+                            sb.AppendLine(exception.Message);
+                    }
+                }
+
+                return sb.ToString();
+            }
+        }
+
+        private void AllWorkersFinished()
         {
             labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE;
+            progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
         }

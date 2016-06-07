@@ -869,6 +869,9 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\UpdateProgressBackgroundWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
@@ -3968,15 +3971,6 @@
     <Content Include="Help\XenCenter.zh-CN.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Help\WLB.zh-CN.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Help\WLB.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Help\WLB.ja.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Images\attach_virtualstorage_32.png" />
     <None Include="Images\backup_restore_32.png" />
     <None Include="Images\copy_16.png" />

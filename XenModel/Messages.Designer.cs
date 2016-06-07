@@ -13707,6 +13707,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not create SSL/TLS secure channel..
+        /// </summary>
+        public static string ERROR_SECURE_CHANNEL_FAILURE {
+            get {
+                return ResourceManager.GetString("ERROR_SECURE_CHANNEL_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unknown error occurred..
         /// </summary>
         public static string ERROR_UNKNOWN {
@@ -25595,6 +25604,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update process was not completed successfully. Check .
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following error occured while automatic upgrade was in progress: .
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following errors occured while automatic upgrade was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update was not completed successfully.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload and Install.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT {
@@ -25618,6 +25663,33 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_CLEANUP {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_CLEANUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skipping download: Already downloaded update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to download update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING", resourceCulture);
             }
         }
         
@@ -25964,7 +26036,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to a.
+        ///   Looks up a localized string similar to This server is not licensed for automatic updating.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING {
             get {
@@ -33216,6 +33288,26 @@ namespace XenAdmin {
         public static string UPLOADING_PATCH_TO {
             get {
                 return ResourceManager.GetString("UPLOADING_PATCH_TO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts..
+        /// </summary>
+        public static string UPSELL_BLURB_AD {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_AD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///To learn more about the [XenServer] Active Directory feature or to start a [XenServer] trial, click the button below..
+        /// </summary>
+        public static string UPSELL_BLURB_AD_MORE {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_AD_MORE", resourceCulture);
             }
         }
         

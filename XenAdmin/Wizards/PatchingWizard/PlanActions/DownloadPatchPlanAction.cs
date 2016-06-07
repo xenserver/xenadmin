@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private string tempFileName = null;
 
         public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
-            : base(connection, string.Format("Downloading update {0}...", patch.Name))
+            : base(connection, string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name))
         {
             this.patch = patch;
             this.mappings = mappings;
@@ -59,6 +59,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             lock (patch)
             {
+                this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
+
                 //if it has not been already downloaded
                 if (!AllDownloadedPatches.Any(dp => dp.Key == patch && !string.IsNullOrEmpty(dp.Value))
                     || !File.Exists(AllDownloadedPatches[patch]))
@@ -67,7 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
-                    //already downloaded
+                    this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
                 }
             }
 
