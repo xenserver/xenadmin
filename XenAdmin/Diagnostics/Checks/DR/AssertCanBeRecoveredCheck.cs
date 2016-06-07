@@ -95,7 +95,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             return srDeviceConfigList;
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (MetadataSession == null)
                 return null;

@@ -25892,6 +25892,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resolving issues....
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prechecks.
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_TEXT {

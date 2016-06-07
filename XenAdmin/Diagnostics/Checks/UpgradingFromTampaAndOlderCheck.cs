@@ -43,7 +43,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             bool licenseStatus = !Host.IsFreeLicense() || Host.InGrace;
             return !Helpers.ClearwaterOrGreater(Host) && licenseStatus ? new UpgradingFromTampaAndOlderWarning(this, Host) : null;

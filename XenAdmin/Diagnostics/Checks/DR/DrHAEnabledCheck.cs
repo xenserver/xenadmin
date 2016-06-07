@@ -44,7 +44,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
         {
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (Pool == null)
                 return null;
