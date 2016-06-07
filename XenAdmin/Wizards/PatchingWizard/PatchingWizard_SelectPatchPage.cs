@@ -184,7 +184,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else //In Automatic Mode
                 {
-                    var downloadUpdatesAction = new DownloadUpdatesXmlAction(false, true, true);
+                    var downloadUpdatesAction = new DownloadUpdatesXmlAction(false, true, true, Updates.CheckForUpdatesUrl);
                     var dialog = new ActionProgressDialog(downloadUpdatesAction, ProgressBarStyle.Marquee);
 
                     dialog.ShowDialog(this.Parent); //Will block until dialog closes, action completed

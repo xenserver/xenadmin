@@ -197,7 +197,7 @@ namespace XenAdmin.Core
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
                     Properties.Settings.Default.AllowPatchesUpdates || force,
-                    Branding.CheckForUpdatesUrl);
+                    Updates.CheckForUpdatesUrl);
                 {
                     action.Completed += actionCompleted;
                 }
@@ -208,7 +208,15 @@ namespace XenAdmin.Core
                 action.RunAsync();
             }
         }
-        
+
+        public static string CheckForUpdatesUrl
+        {
+            get
+            {
+                return Registry.CustomUpdatesXmlLocation ?? Branding.CheckForUpdatesUrl;
+            }
+        }
+
         private static void actionCompleted(ActionBase sender)
         {
             Program.AssertOffEventThread();
