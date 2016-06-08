@@ -2653,11 +2653,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recommended Patches.
+        ///   Looks up a localized string similar to Required Updates.
         /// </summary>
-        public static string Label_Pool_patch_recommended {
+        public static string Label_Pool_patch_required_updates {
             get {
-                return ResourceManager.GetString("Label-Pool_patch.recommended", resourceCulture);
+                return ResourceManager.GetString("Label-Pool_patch.required-updates", resourceCulture);
             }
         }
         
