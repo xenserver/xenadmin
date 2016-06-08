@@ -679,7 +679,7 @@ namespace XenAdmin.TabPages
             var recommendedPatches = RecommendedPatchesForHost(host);
             if (!string.IsNullOrEmpty(recommendedPatches))
             {
-                s.AddEntry(FriendlyName("Pool_patch.recommended"), recommendedPatches);
+                s.AddEntry(FriendlyName("Pool_patch.required-updates"), recommendedPatches);
             }
 
             // add supplemental packs
