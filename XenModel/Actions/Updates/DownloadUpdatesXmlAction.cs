@@ -36,6 +36,7 @@ using XenAPI;
 using System.IO;
 using System.Xml;
 using XenAdmin.Core;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Actions
@@ -76,6 +77,8 @@ namespace XenAdmin.Actions
         public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl)
             : base(null, "_get_updates", "_get_updates", true)
         {
+            Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
+
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
