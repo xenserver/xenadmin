@@ -8857,7 +8857,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>Update process was not completed successfully. Check </value>
+    <value>Update process was not completed successfully.</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED" xml:space="preserve">
     <value>Following errors occured while automatic upgrade was in progress:</value>

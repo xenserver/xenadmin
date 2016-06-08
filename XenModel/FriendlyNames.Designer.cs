@@ -2653,6 +2653,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recommended Patches.
+        /// </summary>
+        public static string Label_Pool_patch_recommended {
+            get {
+                return ResourceManager.GetString("Label-Pool_patch.recommended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk space allocations.
         /// </summary>
         public static string Label_SR_disk_space_allocations {
@@ -4041,7 +4050,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool &apos;{0}&apos; failed to retrieve placement recommendations from WLB for VM &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Pool &apos;{0}&apos; failed to retrieve placement recommendations from WLB for &apos;{1}&apos;..
         /// </summary>
         public static string Message_body_wlb_consultation_failed {
             get {

@@ -414,14 +414,51 @@ namespace XenAdmin.Core
             return alerts;
         }
         
+        /// <summary>
+        /// This method returns the minimal set of patches for a host if this class already has information about them. Otherwise it returns empty list.
+        /// Calling this function will not initiate a download or update.
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        public static List<XenServerPatch> RecommendedPatchesForHost(Host host)
+        {
+            var recommendedPatches = new List<XenServerPatch>();
+
+            if (XenServerVersions == null)
+                return recommendedPatches;
+
+            var serverVersions = XenServerVersions.FindAll(version =>
+            {
+                if (version.BuildNumber != string.Empty)
+                    return (host.BuildNumberRaw == version.BuildNumber);
+
+                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                           && Helpers.HostProductVersion(host) == version.Version.ToString());
+            });
+
+            if (serverVersions.Count != 0)
+            {
+                var minimumPatches = new List<XenServerPatch>();
+                minimumPatches = serverVersions[0].MinimalPatches;
+
+                var appliedPatches = host.AppliedPatches();
+                recommendedPatches = minimumPatches.FindAll(p => !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
+
+            }
+
+            return recommendedPatches;
+        }
+
         public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
             var uSeq = new UpgradeSequence();
 
             Host master = Helpers.GetMaster(conn);
-            List<Host> hosts = conn.Cache.Hosts.ToList();
             if (master == null)
                 return null;
+
+            List<Host> hosts = conn.Cache.Hosts.ToList();
 
             var serverVersions = XenServerVersions.FindAll(version =>
             {
