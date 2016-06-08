@@ -1859,4 +1859,7 @@
   <data name="Label-host.edition-standard" xml:space="preserve">
     <value>[Citrix] [XenServer product] Standard Edition</value>
   </data>
+  <data name="Label-Pool_patch.recommended" xml:space="preserve">
+    <value>Recommended Patches</value>
+  </data>
 </root>

@@ -36,6 +36,7 @@ using XenAPI;
 using System.IO;
 using System.Xml;
 using XenAdmin.Core;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Actions
@@ -76,6 +77,8 @@ namespace XenAdmin.Actions
         public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl)
             : base(null, "_get_updates", "_get_updates", true)
         {
+            Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
+
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
@@ -83,10 +86,10 @@ namespace XenAdmin.Actions
             _checkForXenCenter = checkForXenCenter;
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
-            _checkForUpdatesUrl = string.IsNullOrEmpty(checkForUpdatesUrl) ? InvisibleMessages.XENSERVER_UPDATE_URL : checkForUpdatesUrl;
+            _checkForUpdatesUrl = checkForUpdatesUrl;
         }
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
+        protected DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
             : this(checkForXenCenter, checkForServerVersion, checkForPatches, null)
         { }
 
@@ -288,10 +291,19 @@ namespace XenAdmin.Actions
 
         protected virtual XmlDocument FetchCheckForUpdatesXml(string location)
         {
-            XmlDocument xdoc;
-            using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+            var xdoc = new XmlDocument();
+            var uri = new Uri(location);
+            
+            if (uri.IsFile)
             {
-                xdoc = Helpers.LoadXmlDocument(xmlstream);
+                xdoc.Load(location);
+            }
+            else
+            {
+                using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+                {
+                    xdoc = Helpers.LoadXmlDocument(xmlstream);
+                }
             }
             return xdoc;
         }
