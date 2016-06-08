@@ -40,6 +40,7 @@ using XenAdmin.Properties;
 using XenAdmin.Actions;
 using XenAPI;
 using System.Text.RegularExpressions;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -49,6 +50,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         private const string ConnectionTabSettingsHeader = "Connection Tab Settings -";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private OptionsDialog optionsDialog;
+
+        // used for preventing the event handlers (mainly the SelectUseThisProxyServer function)  from being called when loading the settings into the text/check boxes
+        private bool built = false;
 
         public ConnectionOptionsPage()
         {
@@ -81,36 +85,81 @@ namespace XenAdmin.Dialogs.OptionsPages
                     break;
             }
 
-            ProxyAddressTextBox.Text    = Properties.Settings.Default.ProxyAddress;
-            ProxyPortTextBox.Text       = Properties.Settings.Default.ProxyPort.ToString();
+            ProxyAddressTextBox.Text = Properties.Settings.Default.ProxyAddress;
+            ProxyPortTextBox.Text = Properties.Settings.Default.ProxyPort.ToString();
             BypassLocalCheckBox.Checked = Properties.Settings.Default.BypassProxyForLocal;
-            ProxyAddressLabel.Enabled   = UseProxyRadioButton.Checked;
-            ProxyAddressTextBox.Enabled = UseProxyRadioButton.Checked;
-            ProxyPortLabel.Enabled      = UseProxyRadioButton.Checked;
-            ProxyPortTextBox.Enabled    = UseProxyRadioButton.Checked;
-            BypassLocalCheckBox.Enabled = UseProxyRadioButton.Checked;
+            BypassAllCheckbox.Checked = Properties.Settings.Default.BypassProxyForServers;
+            AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
 
-            ConnectionTimeoutNud.Value  = Properties.Settings.Default.ConnectionTimeout / 1000;
+            // checks for empty default username/password which starts out unencrypted
+            string protectedUsername = Properties.Settings.Default.ProxyUsername;
+            ProxyUsernameTextBox.Text = protectedUsername == "" ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
+            string protectedPassword = Properties.Settings.Default.ProxyPassword;
+            ProxyPasswordTextBox.Text = protectedPassword == "" ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
+
+            ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
+
+            built = true;
         }
 
         private void UseProxyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            ProxyAddressLabel.Enabled = UseProxyRadioButton.Checked;
-            ProxyAddressTextBox.Enabled = UseProxyRadioButton.Checked;
-            ProxyPortLabel.Enabled = UseProxyRadioButton.Checked;
-            ProxyPortTextBox.Enabled = UseProxyRadioButton.Checked;
-            BypassLocalCheckBox.Enabled = UseProxyRadioButton.Checked;
+            enableOK();
+        }
+
+        private void AuthenticationCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!AuthenticationCheckBox.Checked)
+            {
+                ProxyUsernameTextBox.Clear();
+                ProxyPasswordTextBox.Clear();
+            }
+
+            SelectUseThisProxyServer();
+
             enableOK();
         }
 
         private void ProxyAddressTextBox_TextChanged(object sender, EventArgs e)
         {
+            SelectUseThisProxyServer();
             enableOK();
         }
 
         private void ProxyPortTextBox_TextChanged(object sender, EventArgs e)
         {
+            SelectUseThisProxyServer();
             enableOK();
+        }
+
+        private void ProxyUsernameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SelectUseThisProxyServer();
+            enableOK();
+        }
+
+        private void ProxyPasswordTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SelectUseThisProxyServer();
+            enableOK();
+        }
+
+        private void BypassLocalCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SelectUseThisProxyServer();
+            enableOK(); // not needed at the moment, but more future-proof
+        }
+
+        private void BypassAllCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            SelectUseThisProxyServer();
+            enableOK(); // not needed at the moment, but more future-proof
+        }
+
+        private void SelectUseThisProxyServer()
+        {
+            if (!UseProxyRadioButton.Checked && built)
+                UseProxyRadioButton.Checked = true;
         }
 
         private void enableOK()
@@ -121,6 +170,11 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (!UseProxyRadioButton.Checked)
             {
                 optionsDialog.okButton.Enabled = true;
+                return;
+            }
+            else if (AuthenticationCheckBox.Checked && ProxyUsernameTextBox.Text == "")
+            {
+                optionsDialog.okButton.Enabled = false;
                 return;
             }
 
@@ -151,6 +205,10 @@ namespace XenAdmin.Dialogs.OptionsPages
             log.Info("=== ProxyAddress: " + Properties.Settings.Default.ProxyAddress.ToString());
             log.Info("=== ProxyPort: " + Properties.Settings.Default.ProxyPort.ToString());
             log.Info("=== BypassProxyForLocal: " + Properties.Settings.Default.BypassProxyForLocal.ToString());
+            log.Info("=== ByPassProxyForServers: " + Properties.Settings.Default.BypassProxyForServers.ToString());
+            log.Info("=== ProvideProxyAuthentication: " + Properties.Settings.Default.ProvideProxyAuthentication.ToString());
+            //log.Info("=== ProxyUsername: " + Properties.Settings.Default.ProxyUsername.ToString()); // No use in logging encrypted string
+            //log.Info("=== ProxyPassword: " + Properties.Settings.Default.ProxyPassword.ToString()); // No use in logging encrypted string
             log.Info("=== ConnectionTimeout: " + Properties.Settings.Default.ConnectionTimeout.ToString());
         }
 
@@ -158,7 +216,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public void Save()
         {
-            // Proxy server
+            // Proxy server settings
             HTTPHelper.ProxyStyle new_proxy_style =
                 DirectConnectionRadioButton.Checked ? HTTPHelper.ProxyStyle.DirectConnection :
                 UseIERadioButton.Checked ? HTTPHelper.ProxyStyle.SystemProxy :
@@ -170,28 +228,9 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (ProxyAddressTextBox.Text != Properties.Settings.Default.ProxyAddress && ProxyAddressTextBox.Text != "")
                 Properties.Settings.Default.ProxyAddress = ProxyAddressTextBox.Text;
 
-            if (new_proxy_style == HTTPHelper.ProxyStyle.SpecifiedProxy)
-            {
-                SetSpecifiedProxySettings();
-            }
+            Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
+            Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
 
-            int timeout = (int)ConnectionTimeoutNud.Value;
-            if (timeout * 1000 != Properties.Settings.Default.ConnectionTimeout)
-            {
-                Properties.Settings.Default.ConnectionTimeout = timeout * 1000;
-            }
-
-            Program.ReconfigureConnectionSettings();
-            new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                                            Properties.Settings.Default.ProxyAddress,
-                                            Properties.Settings.Default.ProxyPort,
-                                            Properties.Settings.Default.ConnectionTimeout,
-                                            Properties.Settings.Default.BypassProxyForLocal,
-                                            true).RunAsync();
-        }
-
-        private void SetSpecifiedProxySettings()
-        {
             if (int.Parse(ProxyPortTextBox.Text) != Properties.Settings.Default.ProxyPort)
             {
                 try
@@ -206,6 +245,27 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if (BypassLocalCheckBox.Checked != Properties.Settings.Default.BypassProxyForLocal)
                 Properties.Settings.Default.BypassProxyForLocal = BypassLocalCheckBox.Checked;
+
+            if (BypassAllCheckbox.Checked != Properties.Settings.Default.BypassProxyForServers)
+                Properties.Settings.Default.BypassProxyForServers = BypassAllCheckbox.Checked;
+
+            if (AuthenticationCheckBox.Checked != Properties.Settings.Default.ProvideProxyAuthentication)
+                Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
+
+            // timeout settings
+            int timeout = (int)ConnectionTimeoutNud.Value;
+            if (timeout * 1000 != Properties.Settings.Default.ConnectionTimeout)
+            {
+                Properties.Settings.Default.ConnectionTimeout = timeout * 1000;
+            }
+
+            Program.ReconfigureConnectionSettings();
+            new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                                            Properties.Settings.Default.ProxyAddress,
+                                            Properties.Settings.Default.ProxyPort,
+                                            Properties.Settings.Default.ConnectionTimeout,
+                                            Properties.Settings.Default.BypassProxyForLocal,
+                                            true).RunAsync();
         }
 
         #endregion
