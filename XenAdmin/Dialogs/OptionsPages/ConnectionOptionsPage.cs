@@ -93,9 +93,9 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             // checks for empty default username/password which starts out unencrypted
             string protectedUsername = Properties.Settings.Default.ProxyUsername;
-            ProxyUsernameTextBox.Text = protectedUsername == "" ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
+            ProxyUsernameTextBox.Text = string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
             string protectedPassword = Properties.Settings.Default.ProxyPassword;
-            ProxyPasswordTextBox.Text = protectedPassword == "" ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
+            ProxyPasswordTextBox.Text = string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
 
             ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
 
@@ -177,7 +177,7 @@ namespace XenAdmin.Dialogs.OptionsPages
                 optionsDialog.okButton.Enabled = true;
                 return;
             }
-            else if (AuthenticationCheckBox.Checked && ProxyUsernameTextBox.Text == "")
+            else if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
             {
                 optionsDialog.okButton.Enabled = false;
                 return;
@@ -230,22 +230,21 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (Properties.Settings.Default.ProxySetting != (int)new_proxy_style)
                 Properties.Settings.Default.ProxySetting = (int)new_proxy_style;
             
-            if (ProxyAddressTextBox.Text != Properties.Settings.Default.ProxyAddress && ProxyAddressTextBox.Text != "")
+            if (ProxyAddressTextBox.Text != Properties.Settings.Default.ProxyAddress && !string.IsNullOrEmpty(ProxyAddressTextBox.Text))
                 Properties.Settings.Default.ProxyAddress = ProxyAddressTextBox.Text;
 
             Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
             Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
 
-            if (int.Parse(ProxyPortTextBox.Text) != Properties.Settings.Default.ProxyPort)
+            try
             {
-                try
-                {
-                    Properties.Settings.Default.ProxyPort = int.Parse(ProxyPortTextBox.Text);
-                }
-                catch
-                {
-                    Properties.Settings.Default.ProxyPort = 80;
-                }
+                int port = int.Parse(ProxyPortTextBox.Text);
+                if (port != Properties.Settings.Default.ProxyPort)
+                    Properties.Settings.Default.ProxyPort = port;
+            }
+            catch
+            {
+                Properties.Settings.Default.ProxyPort = 80;
             }
 
             if (BypassLocalCheckBox.Checked != Properties.Settings.Default.BypassProxyForLocal)
