@@ -113,6 +113,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             {
                 ProxyUsernameTextBox.Clear();
                 ProxyPasswordTextBox.Clear();
+                AuthenticationCheckBox.Checked = false; // have to redo this as the 2 Clears above cause the checkbox to recheck
             }
 
             SelectUseThisProxyServer();
@@ -135,12 +136,16 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void ProxyUsernameTextBox_TextChanged(object sender, EventArgs e)
         {
             SelectUseThisProxyServer();
+            if (!AuthenticationCheckBox.Checked)
+                AuthenticationCheckBox.Checked = true;
             enableOK();
         }
 
         private void ProxyPasswordTextBox_TextChanged(object sender, EventArgs e)
         {
             SelectUseThisProxyServer();
+            if (!AuthenticationCheckBox.Checked)
+                AuthenticationCheckBox.Checked = true;
             enableOK();
         }
 
