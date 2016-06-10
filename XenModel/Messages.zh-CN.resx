@@ -7855,7 +7855,7 @@ SCSI ID: {2}
   <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
     <value>SMB 服务器是常见的 Windows 共享文件系统基础结构形式，可用作虚拟磁盘的存储库基底。
 
-由于 SMB 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 XenMotion 在这些服务器之间迁移。
+由于 SMB 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 Live Migration 在这些服务器之间迁移。
 
 配置 SMB 存储库时，只需提供 SMB 服务器的主机名或 IP 地址、用户名、密码以及用来包含存储库的目录路径。SMB 服务器必须配置为导出池中所有服务器的指定路径。</value>
   </data>
@@ -7902,7 +7902,7 @@ SCSI ID: {2}
     <value>精简</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic 是一种可扩展的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如 XenMotion 和高可用性。</value>
+    <value>Dell EqualLogic 是一种可扩展的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如 Live Migration 和高可用性。</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -8077,7 +8077,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWSR_VHDONFS_BLURB" xml:space="preserve">
     <value>NFS 服务器是常见的共享文件系统基础结构形式，可用作虚拟磁盘的存储库基础。
 
-由于 NFS 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 XenMotion 在这些服务器之间迁移。
+由于 NFS 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 Live Migration 在这些服务器之间迁移。
 
 配置 NFS 存储库时，只需提供 NFS 服务器的主机名或 IP 地址以及用来包含存储库的目录路径。NFS 服务器必须配置为导出池中所有服务器的指定路径。</value>
   </data>
