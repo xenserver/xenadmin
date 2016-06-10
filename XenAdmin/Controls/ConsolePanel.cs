@@ -259,7 +259,6 @@ namespace XenAdmin.Controls
 
             bool useElevatedCredentials = false;
 
-            //*
             if (!vncViews.ContainsKey(vm))
             {
                 Program.Invoke(this, delegate
@@ -280,9 +279,6 @@ namespace XenAdmin.Controls
             {
                 view = vncViews[vm];
             }
-            //*/
-
-            //view = new VNCView(vm, elevatedUsername, elevatedPassword);
 
             if (view == null)
                 return null;
