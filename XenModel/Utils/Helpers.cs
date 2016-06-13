@@ -1410,6 +1410,9 @@ namespace XenAdmin.Core
         /// </summary>
         public static string OEMName(Host host)
         {
+            if (host.software_version == null)
+                return string.Empty;
+
             if (!host.software_version.ContainsKey("oem_manufacturer"))
                 return "";
 
