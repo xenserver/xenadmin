@@ -424,5 +424,17 @@ namespace XenAdmin.Dialogs.VMPolicies
                 chevronButton1_ButtonClick(sender, e);
         }
 
+        internal override string HelpName
+        {
+            get
+            {
+                if (!VMGroup<T>.isVMPolicyVMPP)
+                {
+                    return "VMSnapshotSchedulesDialog";
+                }
+                return "VMProtectionPoliciesDialog";
+            }
+        }
+
     }
 }
