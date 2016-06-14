@@ -261,7 +261,17 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         protected override string WizardPaneHelpID()
         {
-            return CurrentStepTabPage is RBACWarningPage ? FormatHelpId("Rbac") : base.WizardPaneHelpID();
+            if (CurrentStepTabPage is RBACWarningPage)
+            {
+                return FormatHelpId("Rbac");
+            }
+
+            else if (!VMGroup<T>.isVMPolicyVMPP)
+            {
+                return "NewPolicyWizardVMSS_" + CurrentStepTabPage.HelpID + "Pane";    
+            }
+
+            return "NewPolicyWizard_" + CurrentStepTabPage.HelpID + "Pane";
         }
 
     }

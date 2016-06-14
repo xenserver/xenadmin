@@ -657,6 +657,24 @@
   <data name="NewPolicyWizard_VirtualMachinesPane" xml:space="preserve">
     <value>6535</value>
   </data>
+  <data name="NewPolicyWizardVMSS_EmailalertsPane" xml:space="preserve">
+    <value>6551</value>
+  </data>
+  <data name="NewPolicyWizardVMSS_FinishPane" xml:space="preserve">
+    <value>6551</value>
+  </data>
+  <data name="NewPolicyWizardVMSS_PolicyNamePane" xml:space="preserve">
+    <value>6551</value>
+  </data>
+  <data name="NewPolicyWizardVMSS_SnapshotfrequencyPane" xml:space="preserve">
+    <value>6551</value>
+  </data>
+  <data name="NewPolicyWizardVMSS_SnapshottypePane" xml:space="preserve">
+    <value>6551</value>
+  </data>
+  <data name="NewPolicyWizardVMSS_VMsPane" xml:space="preserve">
+    <value>6551</value>
+  </data>
   <data name="NewPoolDialog" xml:space="preserve">
     <value>5100</value>
   </data>
