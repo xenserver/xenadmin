@@ -60,8 +60,8 @@ namespace XenAPI
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
             DesktopPlus,           // Added in Creedence (desktop-plus)
-            Premium,               // Added in Indigo (premium)
-            Standard               // Added in Dundee/Violet (standard)
+            Standard,              // Added in Dundee/Violet (standard)
+            Premium                // Added in Indigo (premium)
         }
 
         public static string LicenseServerWebConsolePort = "8082";
