@@ -40,7 +40,7 @@ namespace XenAdminTests.WizardTests.cowleyPolicies_xml
     [TestFixture, Category(TestCategories.UICategoryB)]
     class NewPolicyWizardTest : WizardTest<NewPolicyWizardSpecific<XenAPI.VMPP>>
     {
-        public NewPolicyWizardSpecific()
+        public NewPolicyWizardTest()
             : base(new string[] { "Policy Name", "Protected VMs", "Snapshot Type", "Snapshot schedule","Archive Options","Email Alerts","Finish" }
             , true, false)
         { }
