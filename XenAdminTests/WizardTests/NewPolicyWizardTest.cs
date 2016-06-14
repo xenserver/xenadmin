@@ -38,16 +38,16 @@ namespace XenAdminTests.WizardTests.cowleyPolicies_xml
 {
 
     [TestFixture, Category(TestCategories.UICategoryB)]
-    class NewPolicyWizardSpecific<VMPP> : WizardTest<NewPolicyWizard>
+    class NewPolicyWizardTest : WizardTest<NewPolicyWizardSpecific<XenAPI.VMPP>>
     {
         public NewPolicyWizardSpecific()
-            : base(new string[] { "Policy Name", "Protected VMs", "Snapshot Type", "Snapshot Schedule","Archive Options","Email Alerts","Finish" }
+            : base(new string[] { "Policy Name", "Protected VMs", "Snapshot Type", "Snapshot schedule","Archive Options","Email Alerts","Finish" }
             , true, false)
         { }
 
-        protected override NewPolicyWizard NewWizard()
+        protected override NewPolicyWizardSpecific<XenAPI.VMPP> NewWizard()
         {
-            return new NewPolicyWizard(base.GetAnyPool());
+            return new NewPolicyWizardSpecific<XenAPI.VMPP>(base.GetAnyPool());
         }
 
         protected override void TestPage(string pageName)

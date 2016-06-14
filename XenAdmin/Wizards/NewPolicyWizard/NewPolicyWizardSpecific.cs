@@ -268,7 +268,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
             else if (!VMGroup<T>.isVMPolicyVMPP)
             {
-                return "NewPolicyWizardSpecific_" + CurrentStepTabPage.HelpID + "Pane";    
+                return "NewPolicyWizardVMSS_" + CurrentStepTabPage.HelpID + "Pane";    
             }
 
             return "NewPolicyWizard_" + CurrentStepTabPage.HelpID + "Pane";
