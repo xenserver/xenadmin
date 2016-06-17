@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
+using System;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
@@ -52,14 +53,33 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            var mapping = patchMappings.FirstOrDefault(pm => pm.Host == master && pm.XenServerPatch == patch);
-
-            if (mapping != null)
+            try
             {
-                var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
-                PollTaskForResultAndDestroy(Connection, ref session, task);
+                Pool_patch poolPatch = null;
 
-                patchMappings.Remove(mapping);
+                var mapping = patchMappings.FirstOrDefault(pm => pm.Host == master && pm.XenServerPatch == patch);
+
+                if (mapping != null || mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
+                {
+                    poolPatch = mapping.Pool_patch;
+                }
+                else
+                {
+                    poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, patch.Uuid, System.StringComparison.InvariantCultureIgnoreCase));
+                }
+
+                if (poolPatch != null && poolPatch.opaque_ref != null )
+                {
+                    var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
+                    PollTaskForResultAndDestroy(Connection, ref session, task);
+
+                    patchMappings.Remove(mapping);
+                }
+            }
+            catch (Exception ex)
+            {
+                //best effort
+                log.Error("Failed to remove Pool_patch from the server.", ex);
             }
         }
     }

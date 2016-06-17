@@ -104,12 +104,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (prevPageType == typeof(PatchingWizard_SelectPatchPage))
             {
-                var updateType = PatchingWizard_SelectPatchPage.SelectedUpdateType;
-                var newPatch = PatchingWizard_SelectPatchPage.SelectedNewPatch;
-                var existPatch = PatchingWizard_SelectPatchPage.SelectedExistingPatch;
-                var alertPatch = PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
-                var fileFromDiskAlertPatch = PatchingWizard_SelectPatchPage.FileFromDiskAlert;
                 var wizardModeAutomatic = PatchingWizard_SelectPatchPage.IsInAutomaticMode;
+
+                var updateType = wizardModeAutomatic ? UpdateType.NewRetail : PatchingWizard_SelectPatchPage.SelectedUpdateType;
+                var newPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.SelectedNewPatch;
+                var existPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.SelectedExistingPatch;
+                var alertPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
+                var fileFromDiskAlertPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
 
                 PatchingWizard_SelectServers.IsInAutomaticMode = wizardModeAutomatic;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
@@ -311,7 +312,20 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RemoveDownloadedPatches()
         {
-            foreach (string downloadedPatch in PatchingWizard_UploadPage.AllDownloadedPatches.Values)
+            var isInAutomaticMode = PatchingWizard_SelectPatchPage.IsInAutomaticMode;
+
+            List<string> listOfDownloadedFiles = new List<string>();
+
+            if (isInAutomaticMode)
+            {
+                listOfDownloadedFiles.AddRange(PatchingWizard_AutoUpdatingPage.AllDownloadedPatches.Values);
+            }
+            else
+            {
+                listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values);
+            }
+
+            foreach (string downloadedPatch in listOfDownloadedFiles)
             {
                 try
                 {

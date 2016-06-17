@@ -31,9 +31,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace XenAdmin.Core
 {
+    [DebuggerDisplay("XenServerVersion (Name={Name}; Patches.Count={Patches.Count}; MinimalPatches.Count={MinimalPatches.Count})")]
     public class XenServerVersion
     {
         public Version Version;

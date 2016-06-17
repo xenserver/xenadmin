@@ -60,9 +60,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var mapping = mappings.Find(m => m.XenServerPatch == patch);
             if (mapping != null && mapping.Pool_patch != null)
             {
-
                 foreach (var host in hosts)
                 {
+                    if (Cancelling)
+                    {
+                        throw new CancelledException();
+                    }
+
                     try
                     {
                         var check = new PatchPrecheckCheck(host, mapping.Pool_patch);

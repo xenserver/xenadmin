@@ -47,6 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly List<PoolPatchMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private string tempFileName = null;
+        private AsyncAction inProgressAction = null;
 
         public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
             : base(connection, string.Format("Uploading update {0} to {1}...", patch.Name, connection.Name))
@@ -71,10 +72,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 try
                 {
                     var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetMaster(conn), path, true);
+                    inProgressAction = checkSpaceForUpload;
                     checkSpaceForUpload.RunExternal(session);
 
-                    var action = new UploadPatchAction(session.Connection, path, true, false);
-                    action.RunExternal(session);
+                    var uploadPatchAction = new UploadPatchAction(session.Connection, path, true, false);
+                    inProgressAction = uploadPatchAction;
+                    uploadPatchAction.RunExternal(session);
 
                     var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
                     if (poolPatch == null)
@@ -126,6 +129,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (action == null)
                 return;
 
+            if (Cancelling)
+                action.Cancel();
+
             Program.Invoke(Program.MainWindow, () =>
             {
                 //UpdateActionProgress(action);
@@ -153,6 +159,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
             }
            
+        }
+
+        public override void Cancel()
+        {
+            if (inProgressAction != null)
+                inProgressAction.Cancel();
+
+            base.Cancel();
         }
     }
 }
