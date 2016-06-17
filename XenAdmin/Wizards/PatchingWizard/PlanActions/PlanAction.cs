@@ -35,6 +35,7 @@ using System.Threading;
 using log4net;
 using XenAdmin.Network;
 using XenAPI;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
@@ -48,7 +49,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public event EventHandler OnActionError;
         public event Action<PlanAction, Host> StatusChanged;
         public Exception Error;
+        protected bool Cancelling = false;
 
+        protected bool visible = true;
+        public bool Visible
+        {
+            get
+            {
+                return visible;
+            }
+        }
+        
         private string status;
         public string Status
         {
@@ -229,6 +240,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public override string ToString()
         {
             return this.Title;
+        }
+
+        public virtual void Cancel()
+        {
+            Cancelling = true;
         }
     }
 }

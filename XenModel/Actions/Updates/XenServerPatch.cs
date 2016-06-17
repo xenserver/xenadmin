@@ -31,10 +31,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using XenAPI;
 
 namespace XenAdmin.Core
 {
+    [DebuggerDisplay("XenServerPatch (Name={Name}; Uuid={Uuid})")]
     public class XenServerPatch : IEquatable<XenServerPatch>
     {
         private string _uuid;

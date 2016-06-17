@@ -55,16 +55,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public XenAdmin.Core.Updates.UpgradeSequence UpgradeSequences { get; set; }
-        private bool _thisPageHasBeenCompleted = false;
+        private bool _thisPageIsCompleted = false;
 
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
 
         public List<Host> SelectedMasters { private get; set; }
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
-        private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+        public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
 
-        private List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>();
+        private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
 
         public PatchingWizard_AutoUpdatingPage()
         {
@@ -109,15 +109,28 @@ namespace XenAdmin.Wizards.PatchingWizard
             return _cancelEnabled;
         }
 
+        public override void PageCancelled()
+        {
+            if (!_thisPageIsCompleted)
+            {
+                backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
+                backgroundWorkers.Clear();
+            }
+
+            base.PageCancelled();
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            base.PageLeave(direction, ref cancel);
+        }
+
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
 
-            if (_thisPageHasBeenCompleted)
+            if (_thisPageIsCompleted)
             {
-                backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
-                backgroundWorkers.Clear();
-
                 return;
             }
 
@@ -157,9 +170,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var host in hostsToApply)
                     {
                         if (host != master)
+                        {
                             planActionsByHost[host].Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
                             planActionsByHost[host].AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
                             UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
+                        }
                     }
 
                     // now add all non-delayed actions to the pool action list
@@ -202,7 +217,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (backgroundWorkers.Count == 0)
             {
-                _thisPageHasBeenCompleted = true;
+                _thisPageIsCompleted = true;
                 _nextEnabled = true;
 
                 OnPageUpdated();
@@ -224,16 +239,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (!actionsWorker.CancellationPending)
                     {
                         PlanAction action = (PlanAction)e.UserState;
-                        if (e.ProgressPercentage == 0)
+                        if (action != null)
                         {
-                            inProgressActions.Add(action);
-                        }
-                        else
-                        {
-                            doneActions.Add(action);
-                            inProgressActions.Remove(action);
+                            if (e.ProgressPercentage == 0)
+                            {
+                                inProgressActions.Add(action);
+                            }
+                            else
+                            {
+                                doneActions.Add(action);
+                                inProgressActions.Remove(action);
 
-                            progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
+                                progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
+                            }
                         }
 
                         UpdateStatusTextBox();
@@ -247,8 +265,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var pa in doneActions)
             {
-                sb.Append(pa);
-                sb.AppendLine(Messages.DONE);
+                if (pa.Visible)
+                {
+                    sb.Append(pa);
+                    sb.AppendLine(Messages.DONE);
+                }
             }
 
             foreach (var pa in errorActions)
@@ -259,8 +280,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var pa in inProgressActions)
             {
-                sb.Append(pa);
-                sb.AppendLine();
+                if (pa.Visible)
+                {
+                    sb.Append(pa);
+                    sb.AppendLine(Messages.DONE);
+                }
             }
 
             textBoxLog.Text = sb.ToString();
@@ -325,7 +349,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             AllWorkersFinished();
                             ShowErrors();
 
-                            _thisPageHasBeenCompleted = true;
+                            _thisPageIsCompleted = true;
                         }
 
                         _cancelEnabled = false;

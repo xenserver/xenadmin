@@ -18,6 +18,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<PlanAction> FinsihedActions = new List<PlanAction>();
         public PlanAction FailedWithExceptionAction = null;
         public List<PlanAction> doneActions = new List<PlanAction>();
+        public PlanAction InProgressAction { get; set; }
 
         public UpdateProgressBackgroundWorker(Host master, List<PlanAction> planActions, List<PlanAction> delayedActions)
         {
@@ -48,6 +49,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 return (int)(1.0 / (double)TotalNumberOfActions * (double)(FinsihedActions.Count));
             }
+        }
+
+        public new void CancelAsync()
+        {
+            if (PlanActions != null)
+                PlanActions.ForEach(pa => 
+                {
+                    if (!pa.IsComplete)
+                        pa.Cancel();
+                });
+
+            base.CancelAsync();
         }
     }
 }

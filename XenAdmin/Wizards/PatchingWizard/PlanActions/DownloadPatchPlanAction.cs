@@ -57,9 +57,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            this.visible = false;
+
             lock (patch)
             {
+                this.visible = true;
                 this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
+
+                if (Cancelling)
+                    return;
 
                 //if it has not been already downloaded
                 if (!AllDownloadedPatches.Any(dp => dp.Key == patch && !string.IsNullOrEmpty(dp.Value))
@@ -69,6 +75,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
+                    this.visible = false;
                     this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
                 }
             }
@@ -100,6 +107,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var action = sender as AsyncAction;
             if (action == null)
                 return;
+
+            if (Cancelling)
+                action.Cancel();
 
             Program.Invoke(Program.MainWindow, () =>
             {
