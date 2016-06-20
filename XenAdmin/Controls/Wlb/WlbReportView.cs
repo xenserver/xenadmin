@@ -990,7 +990,8 @@ namespace XenAdmin.Controls.Wlb
                                                 _reportInfo.ReportName, 
                                                 false,
                                                 parms);
-            new ActionProgressDialog(a, ProgressBarStyle.Marquee).ShowDialog();
+            using (var dlg = new ActionProgressDialog(a, ProgressBarStyle.Marquee))
+                dlg.ShowDialog();
 
             if (a.Succeeded)
             {
@@ -1468,7 +1469,8 @@ namespace XenAdmin.Controls.Wlb
             //and run our own code to export
 
             ExportReportAction action = new ExportReportAction(e.Extension.Name, ref reportViewer1);
-            new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog();
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dlg.ShowDialog();
 
             //ReportExporterDelgate exp = new ReportExporterDelgate(RunExportReport);
 

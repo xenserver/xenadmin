@@ -209,9 +209,11 @@ namespace XenAdmin.TabPages
             }
 
             SendWlbConfigurationAction action = new SendWlbConfigurationAction(_pool, PoolConfiguration.ToDictionary(), kind);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
             Program.MainWindow.UpdateToolbars();
         }
 

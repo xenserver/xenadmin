@@ -531,20 +531,21 @@ namespace XenAdmin.Wizards
             }
 
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
-            ActionProgressDialog dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true};
-
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            using (var dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true})
             {
-                ActionProgressDialog closureDialog = dialog;
-                // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
-                FinalAction.Completed +=
-                    s => Program.Invoke(Program.MainWindow, () =>
+                if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+                {
+                    ActionProgressDialog closureDialog = dialog;
+                    // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
+                    FinalAction.Completed +=
+                        s => Program.Invoke(Program.MainWindow, () =>
                         {
                             if (closureDialog != null)
                                 closureDialog.Close();
                         });
+                }
+                dialog.ShowDialog(this);
             }
-            dialog.ShowDialog(this);
 
             if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
@@ -557,9 +558,11 @@ namespace XenAdmin.Wizards
             if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs)
             {
                 // reattach failed. Ensure PBDs are now unplugged and destroyed.
-                dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle);
-                dialog.ShowCancel = false;
-                dialog.ShowDialog();
+                using (var dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle))
+                {
+                    dialog.ShowCancel = false;
+                    dialog.ShowDialog();
+                }
             }
 
             // If action failed and frontend wants to stay open, just return

@@ -153,8 +153,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                                                                           Messages.REVERTED_WIZARD_CHANGES,
                                                                           subActions, false, true))
                 {
-                    ActionProgressDialog dialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
-                    dialog.ShowDialog(Program.MainWindow);
+                    using (var dialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks))
+                        dialog.ShowDialog(Program.MainWindow);
                 }
             }
         }

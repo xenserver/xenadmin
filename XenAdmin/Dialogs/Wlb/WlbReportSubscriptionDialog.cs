@@ -403,9 +403,11 @@ namespace XenAdmin.Dialogs.Wlb
             _subscription.ReportParameters = rps;
 
             SendWlbConfigurationAction action = new SendWlbConfigurationAction(this._pool, _subscription.ToDictionary(), SendWlbConfigurationKind.SetReportSubscription);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
            
             if (action.Succeeded)
             {

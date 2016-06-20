@@ -95,7 +95,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 LvmOhbaSrDescriptor descr = CreateSrDescriptor(device);
 
                 var action = new SrProbeAction(Connection, master, SrType, descr.DeviceConfig);
-                new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog(this);
+                using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                    dlg.ShowDialog(this);
 
                 if (!action.Succeeded)
                 {
@@ -328,8 +329,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return false;
 
             FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-            dialog.ShowDialog(owner); //Will block until dialog closes, action completed
+            using (var  dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 
             if (!action.Succeeded)
                 return false;

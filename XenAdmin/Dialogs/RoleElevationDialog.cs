@@ -114,7 +114,8 @@ namespace XenAdmin.Dialogs
                     }
                 });
 
-                new ActionProgressDialog(loginAction, ProgressBarStyle.Marquee, false).ShowDialog(this);
+                using (var dlg = new ActionProgressDialog(loginAction, ProgressBarStyle.Marquee, false))
+                    dlg.ShowDialog(this);
                 
                 // The exception would have been handled by the action progress dialog, just return the user to the sudo dialog
                 if (loginAction.Exception != null)

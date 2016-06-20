@@ -72,30 +72,33 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             ApplyLicenseEditionAction action = new ApplyLicenseEditionAction(xos, _edition, _licenseServerAddress, _licenseServerPort, null);
-            ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-
-            // close dialog even when there's an error as this action shows its own error dialog box.
-            action.Completed += s =>
-                                    {
-                                        Program.Invoke(Program.MainWindow, () =>
-                                        {
-                                            Failure f = action.Exception as Failure;
-                                            if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)
-                                                return;
-                                            actionProgress.Close();
-                                        });
-
-                                        if (action.Exception != null)
-                                        {
-                                            ShowLicensingFailureDialog(action.LicenseFailures, action.Exception.Message, Parent);
-                                        }
-                                    };
-
-            actionProgress.ShowDialog(Parent);
-
-            if (actionProgress.action.Succeeded)
+            using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
-                InvokeSuccedded(null);
+                //ActionProgressDialog closureDialog = actionProgress;
+                // close dialog even when there's an error as this action shows its own error dialog box.
+                action.Completed += s =>
+                {
+                    Program.Invoke(Program.MainWindow, () =>
+                    {
+                        Failure f = action.Exception as Failure;
+                        if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)
+                            return;
+
+                        actionProgress.Close();
+                    });
+
+                    if (action.Exception != null)
+                    {
+                        ShowLicensingFailureDialog(action.LicenseFailures, action.Exception.Message, Parent);
+                    }
+                };
+
+                actionProgress.ShowDialog(Parent);
+
+                if (actionProgress.action.Succeeded)
+                {
+                    InvokeSuccedded(null);
+                }
             }
         }
 

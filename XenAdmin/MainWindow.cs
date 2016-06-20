@@ -1728,10 +1728,11 @@ namespace XenAdmin
         private void DoLicenseAction(Host host, string filePath)
         {
             ApplyLicenseAction action = new ApplyLicenseAction(host.Connection, host, filePath);
-            ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-
-            actionProgress.Text = Messages.INSTALL_LICENSE_KEY;
-            actionProgress.ShowDialog(this);
+            using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+            {
+                actionProgress.Text = Messages.INSTALL_LICENSE_KEY;
+                actionProgress.ShowDialog(this);
+            }
         }
 
         private void dialog_HelpRequest(object sender, EventArgs e)

@@ -405,9 +405,11 @@ namespace XenAdmin
 
             WlbPoolConfiguration poolConfiguration;
             RetrieveWlbConfigurationAction action = new RetrieveWlbConfigurationAction(_pool);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);    
+            }
 
             if (action.Succeeded)
             {
@@ -542,7 +544,8 @@ namespace XenAdmin
                                                 true,
                                                 parms);
 
-            new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog();
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dlg.ShowDialog();
 
             returnValue = action.Result;
 

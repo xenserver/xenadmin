@@ -125,9 +125,11 @@ namespace XenAdmin.Wizards
             // zip up the report files and save them to the chosen file
             Actions.ZipStatusReportAction action =
                 new Actions.ZipStatusReportAction(bugToolPageRetrieveData.OutputFolder, bugToolPageDestination1.OutputFile);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog();
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog();
+            }
 
             if (!action.Succeeded)
             {
@@ -142,8 +144,8 @@ namespace XenAdmin.Wizards
                 var uploadAction = new Actions.UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,
                                                                        bugToolPageDestination1.UploadToken, bugToolPageDestination1.CaseNumber, 
                                                                        Registry.HealthCheckUploadDomainName, false);
-                dialog = new ActionProgressDialog(uploadAction, ProgressBarStyle.Marquee) {ShowCancel = true};
-                dialog.ShowDialog();
+                using (var dialog = new ActionProgressDialog(uploadAction, ProgressBarStyle.Marquee) {ShowCancel = true})
+                    dialog.ShowDialog();
             }
 
             // Save away the output path for next time

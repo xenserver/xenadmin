@@ -320,7 +320,8 @@ namespace XenAdmin.Dialogs
             SetSession(saveVMsAction);
             SetSession(action);
             saveVMsAction.RunAsync();
-            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(this);
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+                dlg.ShowDialog(this);
             RefreshEntermaintenanceButton();
         }
 
