@@ -140,13 +140,22 @@ namespace XenAPI
             }
         }
 
-        private const String ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
+        private const string ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
+        private const string FORBID_RPU_FOR_HCI = "hci-forbid-rpu";
 
         public bool RollingUpgrade
         {
             get
             {
                 return other_config != null && other_config.ContainsKey(ROLLING_UPGRADE_IN_PROGRESS);
+            }
+        }
+
+        public bool IsUpgradeForbidden
+        {
+            get
+            {
+                return other_config != null && other_config.ContainsKey(FORBID_RPU_FOR_HCI);
             }
         }
 
