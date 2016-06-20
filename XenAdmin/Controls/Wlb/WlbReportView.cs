@@ -469,11 +469,14 @@ namespace XenAdmin.Controls.Wlb
                 }
                 else if (StartDatePicker.Value.CompareTo(EndDatePicker.Value) > 0)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
                            Messages.WLB_REPORT_DATE_ORDERING_MESSAGE,
-                           Messages.WLB_REPORT_DATE_ORDERING_CAPTION)).ShowDialog(this);
+                           Messages.WLB_REPORT_DATE_ORDERING_CAPTION)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                 }
                 else
                 {
@@ -499,12 +502,14 @@ namespace XenAdmin.Controls.Wlb
             catch (Exception ex)
             {
                 log.Debug(ex, ex);
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        ex.Message,
-                       Messages.XENCENTER)).ShowDialog(this);
-                return;
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
 
@@ -1504,16 +1509,22 @@ namespace XenAdmin.Controls.Wlb
                 catch (Exception ex)
                 {
                     log.Debug(ex, ex);
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Error,
                            ex.Message,
-                           Messages.XENCENTER)).ShowDialog(this);
+                           Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                 }
                 finally
                 {
                     if (fs != null)
+                    {
                         fs.Close();
+                        fs.Dispose();
+                    }
                 }
             }
 

@@ -277,9 +277,13 @@ namespace XenAdmin.Wizards.DRWizards
             else
             {
                 if (succeeded)
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Information, Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE,
-                                                      Messages.XENCENTER)).ShowDialog(this);
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Information,
+                            Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE,
+                            Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
             }
         }
 

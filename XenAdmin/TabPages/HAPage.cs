@@ -628,14 +628,18 @@ namespace XenAdmin.TabPages
             }
 
             // Offer to disable HA
-            DialogResult dr = new ThreeButtonDialog(
+            DialogResult dr;
+            using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     null,
                     string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
                     Messages.DISABLE_HA),
                 "HADisable",
                 ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo).ShowDialog(this);
+                ThreeButtonDialog.ButtonNo))
+            {
+                dr = dlg.ShowDialog(this);
+            }
             if (dr != DialogResult.Yes)
                 return;
 

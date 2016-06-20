@@ -514,11 +514,14 @@ namespace XenAdmin
             {
                 log.Error("Could not load settings.", ex);
                 Program.CloseSplash();
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)).ShowDialog(this);
+                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 Application.Exit();
                 return; // Application.Exit() does not exit the current method.
             }
@@ -2137,11 +2140,14 @@ namespace XenAdmin
             }
             catch (ConfigurationErrorsException ex)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)).ShowDialog(this);
+                       Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 log.Error("Couldn't save settings");
                 log.Error(ex, ex);
             }
@@ -3039,11 +3045,15 @@ namespace XenAdmin
             var details = new ThreeButtonDialog.Details(SystemIcons.Exclamation,
                 args.Length == 0 ? msg : string.Format(msg, args), title);
 
-            var dialog = String.IsNullOrEmpty(helpName)
+            DialogResult dialogResult;
+            using (var dialog = String.IsNullOrEmpty(helpName)
                              ? new ThreeButtonDialog(details, buttons)
-                             : new ThreeButtonDialog(details, helpName, buttons);
+                             : new ThreeButtonDialog(details, helpName, buttons))
+            {
+                dialogResult = dialog.ShowDialog(parent ?? Program.MainWindow);
+            }
 
-            if (dialog.ShowDialog(parent ?? Program.MainWindow) != DialogResult.Yes)
+            if (dialogResult != DialogResult.Yes)
                 return false;
 
 
@@ -3072,11 +3082,14 @@ namespace XenAdmin
                 if (parent.Disposing || parent.IsDisposed)
                     return;
             }
-            new ThreeButtonDialog(
+            using (var dlg = new ThreeButtonDialog(
                new ThreeButtonDialog.Details(
                    SystemIcons.Warning,
                    Messages.DISCONNECTED_BEFORE_ACTION_STARTED,
-                   Messages.XENCENTER)).ShowDialog(parent);
+                   Messages.XENCENTER)))
+            {
+                dlg.ShowDialog(parent);
+            }
         }
 
         private static void Trim(object[] args)
@@ -3161,9 +3174,11 @@ namespace XenAdmin
                     {
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
-                        new ThreeButtonDialog(
-                      new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST, Messages.XENCENTER))
-                      .ShowDialog(this);
+                        using (var dlg = new ThreeButtonDialog(
+                                  new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST, Messages.XENCENTER)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
                     }
                 }
             }

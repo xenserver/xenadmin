@@ -244,7 +244,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private static void ShowErrorMessageBox(string message)
         {
-            new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)).ShowDialog(Program.MainWindow);
+            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 
         private void CreateMappingsFromSelection(IEnumerable<SelectedItem> selection)
@@ -473,9 +476,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         internal static void ShowWarningMessageBox(string message)
         {
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)).ShowDialog(
-                    Program.MainWindow);
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 	}
 }

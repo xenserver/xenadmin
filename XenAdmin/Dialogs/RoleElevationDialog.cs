@@ -139,11 +139,14 @@ namespace XenAdmin.Dialogs
             catch (Exception ex)
             {
                 log.DebugFormat("Exception when attempting to sudo action: {0} ", ex);
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        String.Format(Messages.USER_AUTHORIZATION_FAILED, TextBoxUsername.Text),
-                       Messages.XENCENTER)).ShowDialog(Parent);
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
             finally
             {
@@ -177,11 +180,14 @@ namespace XenAdmin.Dialogs
 
         private void ShowNotAuthorisedDialog()
         {
-            new ThreeButtonDialog(
+            using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     SystemIcons.Error,
                     Messages.USER_NOT_AUTHORIZED,
-                    Messages.PERMISSION_DENIED)).ShowDialog(this);
+                    Messages.PERMISSION_DENIED)))
+            {
+                dlg.ShowDialog(this);
+            }
         }
 
         private bool SessionAuthorized(Session s)

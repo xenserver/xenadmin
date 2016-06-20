@@ -80,10 +80,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 .Any(master => master != null && master.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
             if(brokenSRs)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        Messages.BROKEN_SRS_AFTER_UPGRADE))
-                        .ShowDialog(Program.MainWindow);
+                        Messages.BROKEN_SRS_AFTER_UPGRADE)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
             }
             base.FinishWizard();
         }

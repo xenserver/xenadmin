@@ -753,16 +753,25 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     // No existing SRs were found on this LUN. If allowed to create new SR, ask the user if they want to proceed and format.
                     if (!SrWizardType.AllowToCreateNewSr)
                     {
-                        new ThreeButtonDialog(
-                           new ThreeButtonDialog.Details(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS, Messages.XENCENTER)).ShowDialog(this);
+                        using (var dlg = new ThreeButtonDialog(
+                           new ThreeButtonDialog.Details(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS, Messages.XENCENTER)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
 
                         return false;
                     }
-                    DialogResult result = Program.RunInAutomatedTestMode ? DialogResult.Yes :
-                        new ThreeButtonDialog(
+                    DialogResult result = DialogResult.Yes;
+                    if (!Program.RunInAutomatedTestMode)
+                    {
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEWSR_ISCSI_FORMAT_WARNING, this.Text),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            result = dlg.ShowDialog(this);
+                        }
+                    }
 
                     return result == DialogResult.Yes;
                 }
@@ -777,12 +786,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     SR sr = SrWizardHelpers.SrInUse(info.UUID);
                     if (sr != null)
                     {
-                        ThreeButtonDialog d = new ThreeButtonDialog(
+                        DialogResult res;
+                        using (var d = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(null, string.Format(Messages.DETACHED_ISCI_DETECTED, Helpers.GetName(sr.Connection))),
                             new ThreeButtonDialog.TBDButton(Messages.ATTACH_SR, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel);
+                            ThreeButtonDialog.ButtonCancel))
+                        {
+                            res = d.ShowDialog(Program.MainWindow);
+                        }
 
-                        DialogResult res = d.ShowDialog(Program.MainWindow);
                         if (res == DialogResult.Cancel)
                             return false;
 

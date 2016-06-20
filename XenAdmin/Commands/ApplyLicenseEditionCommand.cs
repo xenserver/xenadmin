@@ -111,10 +111,15 @@ namespace XenAdmin.Commands
 
              if (licenseFailures.Count == 1)
              {
-                 Program.Invoke(Program.MainWindow, () => new ThreeButtonDialog(
-                                                              new ThreeButtonDialog.Details(SystemIcons.Error, licenseFailures[0].AlertText, 
-                                                                  Messages.LICENSE_ERROR_TITLE),
-                                                              ThreeButtonDialog.ButtonOK).ShowDialog(parent));
+                 Program.Invoke(Program.MainWindow, () =>
+                 {
+                     using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, licenseFailures[0].AlertText,
+                                                                Messages.LICENSE_ERROR_TITLE),
+                                                            ThreeButtonDialog.ButtonOK))
+                     {
+                         dlg.ShowDialog(parent);
+                     }
+                 });
              }
              else
              {
@@ -125,9 +130,13 @@ namespace XenAdmin.Commands
                      failureDic.Add(new SelectedItem(f.Host), f.AlertText);
                  }
 
-                 Program.Invoke(Program.MainWindow, () => new CommandErrorDialog(
-                                                              Messages.LICENSE_ERROR_TITLE, exceptionMessage, 
-                                                              failureDic).ShowDialog(parent));
+                 Program.Invoke(Program.MainWindow, () => 
+                 {
+                     using (var dlg = new CommandErrorDialog(Messages.LICENSE_ERROR_TITLE, exceptionMessage, failureDic))
+                     {
+                         dlg.ShowDialog(parent);
+                     }
+                 });
              }
         }
     }

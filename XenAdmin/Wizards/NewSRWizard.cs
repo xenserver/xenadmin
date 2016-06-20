@@ -472,8 +472,11 @@ namespace XenAdmin.Wizards
             if (pool == null)
             {
                 log.Error("New SR Wizard: Pool has disappeared");
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 closeWizard = true;
                 return;
@@ -483,8 +486,11 @@ namespace XenAdmin.Wizards
             if (master == null)
             {
                 log.Error("New SR Wizard: Master has disappeared");
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 closeWizard = true;
                 return;
@@ -674,10 +680,15 @@ namespace XenAdmin.Wizards
                     // introduce
                     if (m_srWizardType.ShowIntroducePrompt)
                     {
-                        return DialogResult.Yes == new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID), Text),
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        return DialogResult.Yes == dialogResult;
                     }
 
                 }
@@ -686,10 +697,15 @@ namespace XenAdmin.Wizards
                     // Reattach
                     if (m_srWizardType.ShowReattachWarning)
                     {
-                        return DialogResult.Yes == new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name), Text),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        return DialogResult.Yes == dialogResult;
                     }
                 }
                 else
@@ -701,13 +717,18 @@ namespace XenAdmin.Wizards
 
                     // Warn user SR is already attached to other pool, and then introduce to this pool 
 
-                    return DialogResult.OK == new ThreeButtonDialog(
+                    DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
                             string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name, Helpers.GetName(xenConnection), 
                             Text)),
                         ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                        ThreeButtonDialog.ButtonCancel))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                    return DialogResult.Yes == dialogResult;
                 }
             }
 
@@ -725,11 +746,14 @@ namespace XenAdmin.Wizards
 
             if (xenTabPageChooseSrType.MatchingFrontends <= 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type),
-                        Messages.XENCENTER)).ShowDialog(this);
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 Close();
             }

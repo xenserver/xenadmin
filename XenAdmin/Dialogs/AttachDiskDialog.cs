@@ -220,10 +220,13 @@ namespace XenAdmin.Dialogs
                 {
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Error,
-                               FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)).ShowDialog(Program.MainWindow);
+                               FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)))
+                        {
+                            dlg.ShowDialog(Program.MainWindow);
+                        }
                     });
                     // Give up
                     return;

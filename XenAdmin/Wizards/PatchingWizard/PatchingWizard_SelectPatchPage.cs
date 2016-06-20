@@ -191,8 +191,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void PageLeaveCancelled(string message)
         {
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.UPDATES_WIZARD)).ShowDialog(this);
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.UPDATES_WIZARD)))
+            {
+                dlg.ShowDialog(this);
+            }
             
             ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateDetails();
         }
@@ -317,8 +320,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else
             {
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                        SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                        SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
 

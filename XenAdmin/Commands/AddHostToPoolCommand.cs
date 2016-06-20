@@ -100,8 +100,11 @@ namespace XenAdmin.Commands
                                      : string.Format(Messages.ADD_HOST_TO_POOL_DISCONNECTED_POOL_MULTIPLE,
                                                      Helpers.GetName(_pool).Ellipsise(500));
 
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, message, Messages.XENCENTER)).ShowDialog(Parent);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Error, message, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
                 return;
             }
 
@@ -221,13 +224,15 @@ namespace XenAdmin.Commands
                 string poolName = Helpers.GetName(pool).Ellipsise(500);
                 string hostName = Helpers.GetName(host).Ellipsise(500);
                 string msg = string.Format(Messages.HA_HOST_ENABLE_NTOL_RAISE_QUERY, poolName, hostName, currentNtol, max);
-                if (new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(null, msg, Messages.HIGH_AVAILABILITY),
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(Program.MainWindow)
-                    == DialogResult.Yes)
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                 {
-                    doit = true;
+                    if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                    {
+                        doit = true;
+                    }
                 }
             });
             return doit;
@@ -279,13 +284,16 @@ namespace XenAdmin.Commands
                     msg = string.Format(f, poolName, currentNtol, hostName, targetNtol);
                 }
 
-                if (new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY),
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)
-                        ).ShowDialog(Program.MainWindow) == DialogResult.No)
+                        ))
                 {
-                    cancel = true;
+                    if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                    {
+                        cancel = true;
+                    }
                 }
 
             });

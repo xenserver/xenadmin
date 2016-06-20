@@ -340,8 +340,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 if (devices.Count == 0)
                 {
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS, Messages.XENCENTER)).ShowDialog();
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS, Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog();
+                    }
 
                     return false;
                 }
@@ -351,8 +354,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 log.Debug("Exception parsing result of fibre channel scan", e);
                 log.Debug(e, e);
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_XML_ERROR, Messages.XENCENTER)).ShowDialog();
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_XML_ERROR, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog();
+                }
 
                 return false;
             }

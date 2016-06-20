@@ -80,10 +80,15 @@ namespace XenAdmin.Wizards
             string path = bugToolPageDestination1.OutputFile;
             if (File.Exists(path))
             {
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path), Messages.XENCENTER),
                         ThreeButtonDialog.ButtonOK,
-                        new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this) != DialogResult.OK)
+                        new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult != DialogResult.OK)
                 {
                     FinishCanceled();
                     return;
@@ -103,11 +108,14 @@ namespace XenAdmin.Wizards
             catch (Exception exn)
             {
                 // Failure
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message),
-                       Messages.XENCENTER)).ShowDialog(this);
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 FinishCanceled();
                 return;
             }
@@ -151,11 +159,14 @@ namespace XenAdmin.Wizards
                     if (!hostList.Any(h => h.HasCrashDumps))
                         break;
 
-                    DialogResult result = new ThreeButtonDialog(
+                    DialogResult result;
+                    using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(null, Messages.REMOVE_CRASHDUMP_QUESTION, Messages.REMOVE_CRASHDUMP_FILES),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(this);
-                        
+                                ThreeButtonDialog.ButtonNo))
+                    {
+                        result = dlg.ShowDialog(this);
+                    }
                     if (result == DialogResult.Yes)
                     {
                         foreach (Host host in hostList)

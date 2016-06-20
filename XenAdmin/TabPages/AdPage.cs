@@ -733,13 +733,17 @@ namespace XenAdmin.TabPages
                     string msg = string.Format(Messages.AD_LEAVE_CONFIRM,
                                 Helpers.GetName(pool).Ellipsise(50).EscapeAmpersands(), Domain);
 
-                    DialogResult r = new ThreeButtonDialog(
+                    DialogResult r;
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             null,
                             msg,
                             Messages.AD_FEATURE_NAME),
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                    {
+                        r = dlg.ShowDialog(this);
+                    }
 
                     //CA-64818: DialogResult can be No if the No button has been hit
                     //or Cancel if the dialog has been closed from the control box
@@ -752,10 +756,14 @@ namespace XenAdmin.TabPages
                     string msg = string.Format(pool.name_label.Length > 0 ? Messages.AD_LEAVE_WARNING : Messages.AD_LEAVE_WARNING_HOST,
                                 Helpers.GetName(pool).Ellipsise(50), Domain);
 
-                    DialogResult r = new ThreeButtonDialog(
+                    DialogResult r;
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.ACTIVE_DIRECTORY_TAB_TITLE),
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                    {
+                        r = dlg.ShowDialog(this);
+                    }
 
                     //CA-64818: DialogResult can be No if the No button has been hit
                     //or Cancel if the dialog has been closed from the control box
@@ -831,13 +839,17 @@ namespace XenAdmin.TabPages
                 ? string.Format(Messages.QUESTION_REMOVE_AD_USER_ONE, subjectsToRemove[0].DisplayName ?? subjectsToRemove[0].SubjectName)
                 : string.Format(Messages.QUESTION_REMOVE_AD_USER_MANY, subjectsToRemove.Count);
 
-            DialogResult questionDialog = new ThreeButtonDialog(
+            DialogResult questionDialog;
+            using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(
                                     null,
                                     removeMessage,
                                     Messages.AD_FEATURE_NAME),
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+            {
+                questionDialog = dlg.ShowDialog(this);
+            }
 
             //CA-64818: DialogResult can be No if the No button has been hit
             //or Cancel if the dialog has been closed from the control box
@@ -864,13 +876,17 @@ namespace XenAdmin.TabPages
                         string msg = string.Format(entry.IsGroup ? Messages.AD_CONFIRM_SUICIDE_GROUP : Messages.AD_CONFIRM_SUICIDE,
                                     subjectName, Helpers.GetName(pool).Ellipsise(50));
 
-                        DialogResult r = new ThreeButtonDialog(
+                        DialogResult r;
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
                                 SystemIcons.Warning,
                                 msg,
                                 Messages.AD_FEATURE_NAME),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            r = dlg.ShowDialog(this);
+                        }
 
                         //CA-64818: DialogResult can be No if the No button has been hit
                         //or Cancel if the dialog has been closed from the control box
@@ -1077,13 +1093,17 @@ namespace XenAdmin.TabPages
                 {
                     if (entry.opaque_ref == session.Subject)
                     {
-                        DialogResult r = new ThreeButtonDialog(
+                        DialogResult r;
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
                                 SystemIcons.Warning,
                                 warnMsg,
                                 Messages.AD_FEATURE_NAME),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            r = dlg.ShowDialog(this);
+                        }
 
                         //CA-64818: DialogResult can be No if the No button has been hit
                         //or Cancel if the dialog has been closed from the control box
@@ -1102,13 +1122,17 @@ namespace XenAdmin.TabPages
 
             if (!suicide)//CA-68645
             {
-                DialogResult questionDialog = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(
-                    SystemIcons.Warning,
-                    logoutMessage,
-                    Messages.AD_FEATURE_NAME),
-                ThreeButtonDialog.ButtonYes,
-                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                DialogResult questionDialog;
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Warning,
+                        logoutMessage,
+                        Messages.AD_FEATURE_NAME),
+                    ThreeButtonDialog.ButtonYes,
+                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                {
+                    questionDialog = dlg.ShowDialog(this);
+                }
 
                 //CA-64818: DialogResult can be No if the No button has been hit
                 //or Cancel if the dialog has been closed from the control box
