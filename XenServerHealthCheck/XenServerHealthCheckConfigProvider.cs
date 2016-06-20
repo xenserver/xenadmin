@@ -90,6 +90,11 @@ namespace XenServerHealthCheck
 
         public IWebProxy GetProxyFromSettings(IXenConnection connection)
         {
+            return GetProxyFromSettings(connection, true);
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
+        {
             try
             {
                 if (connection != null && connection.Session != null && connection.Session.uuid == "dummy")

@@ -38,7 +38,7 @@ namespace XenAdmin.Core
 {
     /// <summary>
     /// Used to centralise the encryption routines used for master password
-    /// & session lists
+    /// and session lists
     /// </summary>
     public class EncryptionUtils
     {
@@ -60,6 +60,20 @@ namespace XenAdmin.Core
             byte[] hash = hasher.ComputeHash(bytes);
 
             return hash;
+        }
+
+        /// <summary>
+        /// Returns a secure MD5 hash of the given input string.
+        /// </summary>
+        /// <param name="str">The string to hash.</param>
+        /// <returns>The secure hash as a hex string.</returns>
+        public static string MD5Hash(string str)
+        {
+            MD5 hasher = MD5.Create();
+            ASCIIEncoding enc = new ASCIIEncoding();
+            byte[] bytes = enc.GetBytes(str);
+            byte[] hash = hasher.ComputeHash(bytes);
+            return BitConverter.ToString(hash).Replace("-", "").ToLower();
         }
 
         public static string Protect(string data)

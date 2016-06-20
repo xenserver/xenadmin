@@ -265,7 +265,7 @@ namespace XenAdmin.Actions
         protected virtual XmlDocument FetchCheckForUpdatesXml(string location)
         {
             XmlDocument xdoc;
-            using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+            using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true, false))
             {
                 xdoc = Helpers.LoadXmlDocument(xmlstream);
             }
