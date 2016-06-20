@@ -84,9 +84,9 @@ namespace XenAdmin.Commands
             if (Helpers.FeatureForbidden(selection[0].XenObject, Host.RestrictWLB))
             {
                 // Show upsell dialog
-                UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_WLB : Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_WLB_MORE, 
-                                                    InvisibleMessages.UPSELL_LEARNMOREURL_WLB);
-                dlg.ShowDialog(Parent);
+                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_WLB : Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_WLB_MORE, 
+                                                    InvisibleMessages.UPSELL_LEARNMOREURL_WLB))
+                    dlg.ShowDialog(Parent);
                 return;
             }
 

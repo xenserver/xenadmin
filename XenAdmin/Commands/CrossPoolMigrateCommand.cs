@@ -93,9 +93,9 @@ namespace XenAdmin.Commands
 
         public static void ShowUpsellDialog(IWin32Window parent)
         {
-            UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM : Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_CPM_MORE,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_CPM);
-            dlg.ShowDialog(parent);
+            using (var  dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM : Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_CPM_MORE,
+                                                InvisibleMessages.UPSELL_LEARNMOREURL_CPM))
+                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecute(VM vm)
