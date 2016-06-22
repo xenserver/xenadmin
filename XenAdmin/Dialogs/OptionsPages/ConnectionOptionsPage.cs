@@ -256,7 +256,10 @@ namespace XenAdmin.Dialogs.OptionsPages
                                             Properties.Settings.Default.ProxyPort,
                                             Properties.Settings.Default.ConnectionTimeout,
                                             false,
-                                            true).RunAsync();
+                                            Properties.Settings.Default.BypassProxyForServers,
+                                            Properties.Settings.Default.ProvideProxyAuthentication,
+                                            EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername),
+                                            EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword)).RunAsync();
         }
 
         #endregion

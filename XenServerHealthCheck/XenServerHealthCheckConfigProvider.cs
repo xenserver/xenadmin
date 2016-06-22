@@ -36,6 +36,7 @@ using System.IO;
 using System.Net;
 using XenAdmin;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.ServerDBs;
 using XenAPI;
@@ -103,10 +104,19 @@ namespace XenServerHealthCheck
                 switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)
                 {
                     case HTTPHelper.ProxyStyle.SpecifiedProxy:
-                        return new WebProxy(string.Format("http://{0}:{1}",
+                        if (isForXenServer && Properties.Settings.Default.BypassProxyForServers)
+                            return null;
+
+                        string address = string.Format("http://{0}:{1}",
                             Properties.Settings.Default.ProxyAddress,
-                            Properties.Settings.Default.ProxyPort),
-                            Properties.Settings.Default.BypassProxyForLocal);
+                            Properties.Settings.Default.ProxyPort);
+
+                        if (Properties.Settings.Default.ProvideProxyAuthentication)
+                            return new WebProxy(address, false, null,
+                                new NetworkCredential(EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername),
+                                    EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword)));
+                        else
+                            return new WebProxy(address, false);
 
                     case HTTPHelper.ProxyStyle.SystemProxy:
                         return WebRequest.GetSystemWebProxy();

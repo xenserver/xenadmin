@@ -18,7 +18,7 @@
     <Setting Name="ProxyAddress" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="BypassProxyForLocal" Roaming="true" Type="System.Boolean" Scope="User">
+    <Setting Name="BypassProxyForServers" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ProxyPort" Roaming="true" Type="System.Int32" Scope="User">
@@ -26,6 +26,15 @@
     </Setting>
     <Setting Name="ConnectionTimeout" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20000</Value>
+    </Setting>
+    <Setting Name="ProvideProxyAuthentication" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProxyUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProxyPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
