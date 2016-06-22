@@ -8859,11 +8859,11 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
     <value>Update process was not completed successfully.</value>
   </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED" xml:space="preserve">
-    <value>Following errors occured while automatic upgrade was in progress:</value>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
+    <value>Following errors occurred while automatic upgrade was in progress:</value>
   </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED" xml:space="preserve">
-    <value>Following error occured while automatic upgrade was in progress: </value>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
+    <value>Following error occurred while automatic upgrade was in progress: </value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
     <value>Update was not completed successfully</value>

@@ -25613,20 +25613,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Following error occured while automatic upgrade was in progress: .
+        ///   Looks up a localized string similar to Following error occurred while automatic upgrade was in progress: .
         /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED {
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Following errors occured while automatic upgrade was in progress:.
+        ///   Looks up a localized string similar to Following errors occurred while automatic upgrade was in progress:.
         /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED {
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED", resourceCulture);
             }
         }
         
