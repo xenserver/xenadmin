@@ -499,7 +499,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var sb = new StringBuilder();
 
                 sb.AppendLine();
-                sb.AppendLine(errorActions.Count > 1 ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURED : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURED);
+                sb.AppendLine(errorActions.Count > 1 ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED);
 
                 foreach (var action in errorActions)
                 {
