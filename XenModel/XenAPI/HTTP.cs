@@ -169,7 +169,7 @@ namespace XenAPI
             string line = ReadLine(stream), initialLine = line, transferEncodingField = null;
             if (string.IsNullOrEmpty(initialLine)) // sanity check
                 return false;
-            while (!string.IsNullOrEmpty(line) && line != "\r\n" && line != "\n")
+            while (!string.IsNullOrEmpty(line) && !string.IsNullOrWhiteSpace(line))
             {
                 if (headers != null)
                 {

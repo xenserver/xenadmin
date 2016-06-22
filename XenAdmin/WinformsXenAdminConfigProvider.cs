@@ -107,9 +107,14 @@ namespace XenAdmin
                             XenAdmin.Properties.Settings.Default.ProxyPort);
 
                         if (XenAdmin.Properties.Settings.Default.ProvideProxyAuthentication)
-                            return new WebProxy(address, false, null,
-                                new NetworkCredential(EncryptionUtils.Unprotect(XenAdmin.Properties.Settings.Default.ProxyUsername),
-                                    EncryptionUtils.Unprotect(XenAdmin.Properties.Settings.Default.ProxyPassword)));
+                        {
+                            string protectedUsername = XenAdmin.Properties.Settings.Default.ProxyUsername;
+                            string protectedPassword = XenAdmin.Properties.Settings.Default.ProxyPassword;
+                            return new WebProxy(address, false, null, new NetworkCredential(
+                                // checks for empty default username/password which starts out unencrypted
+                                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
+                                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword)));
+                        }
                         else
                             return new WebProxy(address, false);
 

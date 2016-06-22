@@ -112,9 +112,14 @@ namespace XenServerHealthCheck
                             Properties.Settings.Default.ProxyPort);
 
                         if (Properties.Settings.Default.ProvideProxyAuthentication)
-                            return new WebProxy(address, false, null,
-                                new NetworkCredential(EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername),
-                                    EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword)));
+                        {
+                            string protectedUsername = Properties.Settings.Default.ProxyUsername;
+                            string protectedPassword = Properties.Settings.Default.ProxyPassword;
+                            return new WebProxy(address, false, null, new NetworkCredential(
+                                // checks for empty default username/password which starts out unencrypted
+                                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
+                                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword)));
+                        }
                         else
                             return new WebProxy(address, false);
 

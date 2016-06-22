@@ -258,8 +258,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                                             false,
                                             Properties.Settings.Default.BypassProxyForServers,
                                             Properties.Settings.Default.ProvideProxyAuthentication,
-                                            EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername),
-                                            EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword)).RunAsync();
+                                            Properties.Settings.Default.ProxyUsername,
+                                            Properties.Settings.Default.ProxyPassword).RunAsync();
         }
 
         #endregion
