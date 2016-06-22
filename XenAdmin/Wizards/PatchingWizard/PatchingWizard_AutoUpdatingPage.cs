@@ -283,7 +283,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (pa.Visible)
                 {
                     sb.Append(pa);
-                    sb.AppendLine(Messages.DONE);
+                    sb.AppendLine();
                 }
             }
 
