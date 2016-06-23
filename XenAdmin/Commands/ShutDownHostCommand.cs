@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -132,14 +133,31 @@ namespace XenAdmin.Commands
             get
             {
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
-                bool hasRunningVMs = (hosts.Find(h => h.resident_VMs.Count >= 2) != null);  // 2 not 1, because the Control Domain doesn't count
+                bool hasRunningVMs = false;
+                var hciHosts = new List<Host>();
 
-                if (hosts.Count == 1)
-                    return (hasRunningVMs
-                                ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name)
-                                : string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name));
-                else
-                    return (hasRunningVMs ? Messages.CONFIRM_SHUTDOWN_SERVERS : Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS);
+                foreach (Host h in hosts)
+                {
+                    if (h.HasRunningVMs)
+                        hasRunningVMs = true;
+
+                    if (h.Connection.ResolveAll(h.resident_VMs).FindAll(v => v.HciWarnBeforeShutdown).Count > 0)
+                        hciHosts.Add(h);
+                }
+
+                if (hciHosts.Count > 0)
+                    return hciHosts.Count == 1
+                        ? string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name)
+                        : string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name)));
+
+                if (hasRunningVMs)
+                    return hosts.Count == 1
+                        ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name)
+                        : Messages.CONFIRM_SHUTDOWN_SERVERS;
+
+                return hosts.Count == 1
+                    ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name)
+                    : Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS;
             }
         }
 

@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Properties;
@@ -120,12 +121,32 @@ namespace XenAdmin.Commands
             get
             {
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
-                bool hasRunningVMs = (hosts.Find(h => h.resident_VMs.Count >= 2) != null);  // 2 not 1, because the Control Domain doesn't count
 
-                if (hosts.Count == 1)
-                    return (hasRunningVMs ? Messages.CONFIRM_REBOOT_SERVER : Messages.CONFIRM_REBOOT_SERVER_NO_VMS);
-                else
-                    return (hasRunningVMs ? Messages.CONFIRM_REBOOT_SERVERS : Messages.CONFIRM_REBOOT_SERVERS_NO_VMS);
+                bool hasRunningVMs = false;
+                var hciHosts = new List<Host>();
+
+                foreach (Host h in hosts)
+                {
+                    if (h.HasRunningVMs)
+                        hasRunningVMs = true;
+
+                    if (h.Connection.ResolveAll(h.resident_VMs).FindAll(v => v.HciWarnBeforeShutdown).Count > 0)
+                        hciHosts.Add(h);
+                }
+
+                if (hciHosts.Count > 0)
+                    return hciHosts.Count == 1
+                        ? string.Format(Messages.CONFIRM_REBOOT_HCI_WARN_SERVER, hciHosts[0].Name)
+                        : string.Format(Messages.CONFIRM_REBOOT_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name)));
+                
+                if (hasRunningVMs)
+                    return hosts.Count == 1
+                        ? string.Format(Messages.CONFIRM_REBOOT_SERVER, hosts[0].Name)
+                        : Messages.CONFIRM_REBOOT_SERVERS;
+                
+                return hosts.Count == 1
+                    ? string.Format(Messages.CONFIRM_REBOOT_SERVER_NO_VMS, hosts[0].Name)
+                    : Messages.CONFIRM_REBOOT_SERVERS_NO_VMS;
             }
         }
 
@@ -181,6 +202,22 @@ namespace XenAdmin.Commands
             get
             {
                 return Messages.MAINWINDOW_REBOOT_HOST_CONTEXT_MENU;
+            }
+        }
+
+        protected override string ConfirmationDialogYesButtonLabel
+        {
+            get
+            {
+                return Messages.CONFIRM_REBOOT_SERVER_YES_BUTTON_LABEL;
+            }
+        }
+
+        protected override bool ConfirmationDialogNoButtonSelected
+        {
+            get
+            {
+                return true;
             }
         }
     }
