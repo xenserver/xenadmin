@@ -234,10 +234,15 @@ namespace XenAdmin.Dialogs
             XenAPI.SR sr = SrListBox.SR;
             if (!sr.shared && TheVM != null && TheVM.HaPriorityIsRestart())
             {
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA, Messages.XENCENTER),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(Program.MainWindow) != DialogResult.Yes)
+                                ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                }
+                if (dialogResult != DialogResult.Yes)
                     return;
                 new HAUnprotectVMAction(TheVM).RunExternal(TheVM.Connection.Session);
             }
@@ -699,13 +704,13 @@ namespace XenAdmin.Dialogs
             {
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                      Messages.
-                                                          NEWDISKWIZARD_MESSAGE,
-                                                      Messages.
-                                                          NEWDISKWIZARD_MESSAGE_TITLE))
-                        .ShowDialog(Program.MainWindow);
+                                                      Messages.NEWDISKWIZARD_MESSAGE,
+                                                      Messages.NEWDISKWIZARD_MESSAGE_TITLE)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
             });
         }

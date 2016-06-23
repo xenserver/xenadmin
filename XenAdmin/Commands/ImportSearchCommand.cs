@@ -116,11 +116,14 @@ namespace XenAdmin.Commands
             {
                 log.ErrorFormat("Failed to import search from '{0}'", filename);
 
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         String.Format(Messages.UNABLE_TO_IMPORT_SEARCH, filename, Branding.Search),
-                        Messages.XENCENTER)).ShowDialog(Parent);
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
         }
     }

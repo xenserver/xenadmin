@@ -97,9 +97,9 @@ namespace XenAdmin.Commands
         public static void ShowUpsellDialog(IWin32Window parent)
         {
             // Show upsell dialog
-            UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DR : Messages.UPSELL_BLURB_DR + Messages.UPSELL_BLURB_DR_MORE,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_DR);
-            dlg.ShowDialog(parent);
+            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DR : Messages.UPSELL_BLURB_DR + Messages.UPSELL_BLURB_DR_MORE,
+                                                InvisibleMessages.UPSELL_LEARNMOREURL_DR))
+                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

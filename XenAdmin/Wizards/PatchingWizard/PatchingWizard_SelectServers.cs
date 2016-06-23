@@ -236,7 +236,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (pool != null)
                                 nameLabel = pool.Name;
 
-                            new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPDATES_WIZARD, master.Connection.Username, nameLabel), Messages.UPDATES_WIZARD)).ShowDialog(this);
+                            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPDATES_WIZARD, master.Connection.Username, nameLabel), Messages.UPDATES_WIZARD)))
+                            {
+                                dlg.ShowDialog(this);
+                            }
                             
                             cancel = true;
                             base.PageLeave(direction, ref cancel);
@@ -269,10 +272,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (disconnectedServerNames.Count > 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning,
                         string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, Helpers.StringifyList(disconnectedServerNames)),
-                        Messages.UPDATES_WIZARD)).ShowDialog(this);
+                        Messages.UPDATES_WIZARD)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 return false;
             }
             return true;

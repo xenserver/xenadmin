@@ -327,14 +327,23 @@ namespace XenAdmin.TabPages
 
         private void row_DismissalRequested(DataGridViewActionRow row)
         {
-            if (ConnectionsManager.History.Count > 0 &&
-                (Program.RunInAutomatedTestMode ||
-                 new ThreeButtonDialog(
-                     new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
-                     ThreeButtonDialog.ButtonYes,
-                     ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes))
+            if (ConnectionsManager.History.Count > 0)
             {
-                ConnectionsManager.History.Remove(row.Action);   
+                DialogResult dialogResult = DialogResult.Yes;
+                if (!Program.RunInAutomatedTestMode)
+                {
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
+                        ThreeButtonDialog.ButtonYes,
+                        ThreeButtonDialog.ButtonNo))
+                    {
+                        dialogResult = dlg.ShowDialog(this);
+                    }
+                }
+                if (dialogResult == DialogResult.Yes)
+                {
+                    ConnectionsManager.History.Remove(row.Action);
+                }
             }
         }
 

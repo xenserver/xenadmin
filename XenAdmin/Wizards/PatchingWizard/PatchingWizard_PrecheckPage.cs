@@ -579,9 +579,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     (preCheckHostRow.Problem as ProblemWithInformationUrl).LaunchUrlInBrowser();
                     
                 else if (!cancelled)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
                                                                         string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"),
-                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)).ShowDialog(this);
+                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
             }
         }
 

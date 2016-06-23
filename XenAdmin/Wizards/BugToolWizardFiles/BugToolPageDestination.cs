@@ -198,7 +198,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
                 TokenExpiration, false);
 
-            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(Parent);
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+                dlg.ShowDialog(Parent);
 
             if (!action.Succeeded)
             {

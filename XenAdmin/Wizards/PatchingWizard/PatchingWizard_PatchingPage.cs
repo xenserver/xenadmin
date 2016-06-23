@@ -474,9 +474,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!(exception is SupplementalPackInstallFailedException)) 
                 return;
             var msg = string.Format(Messages.SUPP_PACK_INSTALL_FAILED_MORE_INFO, exception.Message);
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Error, msg))
-                .ShowDialog(this);
+            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, msg)))
+            {
+                dlg.ShowDialog(this);
+            }
         }
     }
 }

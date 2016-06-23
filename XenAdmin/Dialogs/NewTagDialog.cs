@@ -316,12 +316,15 @@ namespace XenAdmin.Dialogs
             {
                 string tag = tagsListView.SelectedItems[0].Text;
 
-                ThreeButtonDialog tbd = new ThreeButtonDialog(
+                DialogResult result;
+                using (var  tbd = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_TAG, tag), Messages.CONFIRM_DELETE_TAG_TITLE),
                     new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
-                    ThreeButtonDialog.ButtonCancel);
-                    
-                DialogResult result = tbd.ShowDialog(this);
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    result = tbd.ShowDialog(this);
+                }
+
                 if (result != DialogResult.OK)
                     return;
 

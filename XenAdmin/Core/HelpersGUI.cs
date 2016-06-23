@@ -112,13 +112,17 @@ namespace XenAdmin.Core
                 else
                     msg = string.Format(msg_multiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
 
-                ThreeButtonDialog dlg = new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(icon ?? SystemIcons.Exclamation, msg),
                     helpName,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No));
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                {
+                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                }
 
-                return DialogResult.Yes == dlg.ShowDialog(Program.MainWindow);
+                return DialogResult.Yes == dialogResult;
             }
             return true;
         }

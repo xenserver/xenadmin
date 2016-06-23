@@ -272,7 +272,7 @@ namespace XenAdmin.Dialogs
                 if (vbdEditPages.Count <= 0)
                     return;
 
-                ActionProgressDialog dialog = new ActionProgressDialog(
+                using (var dialog = new ActionProgressDialog(
                     new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
                         Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
                         delegate(Session session)
@@ -280,9 +280,11 @@ namespace XenAdmin.Dialogs
                             foreach (VBDEditPage page in vbdEditPages)
                                 page.UpdateDevicePositions(session);
                         }),
-                    ProgressBarStyle.Continuous);
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(Program.MainWindow);
+                    ProgressBarStyle.Continuous))
+                {
+                    dialog.ShowCancel = true;
+                    dialog.ShowDialog(Program.MainWindow);
+                }
             }
             finally
             {
