@@ -92,9 +92,9 @@ namespace XenAdmin.Controls
 			this.cdChanger1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cdChanger1.Empty = true;
 			this.cdChanger1.FormattingEnabled = true;
-			this.cdChanger1.ISO = false;
+            this.cdChanger1.DisplayISO = false;
 			this.cdChanger1.Name = "cdChanger1";
-			this.cdChanger1.Physical = false;
+            this.cdChanger1.DisplayPhysical = false;
 			this.cdChanger1.SelectedCD = null;
 			this.cdChanger1.TheVM = null;
 			// 

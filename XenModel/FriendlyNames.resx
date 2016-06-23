@@ -1859,4 +1859,10 @@
   <data name="Label-host.edition-standard" xml:space="preserve">
     <value>[Citrix] [XenServer product] Standard Edition</value>
   </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
 </root>
