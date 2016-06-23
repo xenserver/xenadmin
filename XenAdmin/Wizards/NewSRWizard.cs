@@ -731,7 +731,7 @@ namespace XenAdmin.Wizards
                         {
                             dialogResult = dlg.ShowDialog(this);
                         }
-                    return DialogResult.Yes == dialogResult;
+                    return DialogResult.OK == dialogResult;
                 }
             }
 
