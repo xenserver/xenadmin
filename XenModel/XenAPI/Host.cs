@@ -98,7 +98,8 @@ namespace XenAPI
             bool ssl_legacy,
             Dictionary<string, string> guest_VCPUs_params,
             host_display display,
-            long[] virtual_hardware_platform_versions)
+            long[] virtual_hardware_platform_versions,
+            XenRef<VM> control_domain)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -151,6 +152,7 @@ namespace XenAPI
             this.guest_VCPUs_params = guest_VCPUs_params;
             this.display = display;
             this.virtual_hardware_platform_versions = virtual_hardware_platform_versions;
+            this.control_domain = control_domain;
         }
 
         /// <summary>
@@ -215,6 +217,7 @@ namespace XenAPI
             guest_VCPUs_params = update.guest_VCPUs_params;
             display = update.display;
             virtual_hardware_platform_versions = update.virtual_hardware_platform_versions;
+            control_domain = update.control_domain;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -270,6 +273,7 @@ namespace XenAPI
             guest_VCPUs_params = proxy.guest_VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_VCPUs_params);
             display = proxy.display == null ? (host_display) 0 : (host_display)Helper.EnumParseDefault(typeof(host_display), (string)proxy.display);
             virtual_hardware_platform_versions = proxy.virtual_hardware_platform_versions == null ? null : Helper.StringArrayToLongArray(proxy.virtual_hardware_platform_versions);
+            control_domain = proxy.control_domain == null ? null : XenRef<VM>.Create(proxy.control_domain);
         }
 
         public Proxy_Host ToProxy()
@@ -326,6 +330,7 @@ namespace XenAPI
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
             result_.display = host_display_helper.ToString(display);
             result_.virtual_hardware_platform_versions = (virtual_hardware_platform_versions != null) ? Helper.LongArrayToStringArray(virtual_hardware_platform_versions) : new string[] {};
+            result_.control_domain = (control_domain != null) ? control_domain : "";
             return result_;
         }
 
@@ -386,6 +391,7 @@ namespace XenAPI
             guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
             display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
             virtual_hardware_platform_versions = Marshalling.ParseLongArray(table, "virtual_hardware_platform_versions");
+            control_domain = Marshalling.ParseRef<VM>(table, "control_domain");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -447,7 +453,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._ssl_legacy, other._ssl_legacy) &&
                 Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
                 Helper.AreEqual2(this._display, other._display) &&
-                Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions);
+                Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
+                Helper.AreEqual2(this._control_domain, other._control_domain);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -506,6 +513,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_display, server._display))
                 {
                     Host.set_display(session, opaqueRef, _display);
+                }
+                if (!Helper.AreEqual2(_ssl_legacy, server._ssl_legacy))
+                {
+                    Host.set_ssl_legacy(session, opaqueRef, _ssl_legacy);
                 }
 
                 return null;
@@ -1103,6 +1114,17 @@ namespace XenAPI
         public static long[] get_virtual_hardware_platform_versions(Session session, string _host)
         {
             return Helper.StringArrayToLongArray(session.proxy.host_get_virtual_hardware_platform_versions(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the control_domain field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<VM> get_control_domain(Session session, string _host)
+        {
+            return XenRef<VM>.Create(session.proxy.host_get_control_domain(session.uuid, (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
@@ -3426,5 +3448,24 @@ namespace XenAPI
             }
         }
         private long[] _virtual_hardware_platform_versions;
+
+        /// <summary>
+        /// The control domain (domain 0)
+        /// First published in .
+        /// </summary>
+        public virtual XenRef<VM> control_domain
+        {
+            get { return _control_domain; }
+            set
+            {
+                if (!Helper.AreEqual(value, _control_domain))
+                {
+                    _control_domain = value;
+                    Changed = true;
+                    NotifyPropertyChanged("control_domain");
+                }
+            }
+        }
+        private XenRef<VM> _control_domain;
     }
 }
