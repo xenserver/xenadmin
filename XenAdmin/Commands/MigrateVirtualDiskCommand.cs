@@ -92,7 +92,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return selection.Count >= 1 && selection.All(v=>VDIIsSuitable(v.XenObject as VDI));
+            return selection.Count >= 1 && selection.All(v => CanBeMigrated(v.XenObject as VDI));
         }
 
         private SR GetSR(VDI vdi)
@@ -100,7 +100,7 @@ namespace XenAdmin.Commands
             return vdi.Connection.Resolve(vdi.SR);
         }
 
-        private bool VDIIsSuitable(VDI vdi)
+        private bool CanBeMigrated(VDI vdi)
         {
             
             if (vdi == null)
@@ -115,9 +115,13 @@ namespace XenAdmin.Commands
                 return false;
             if(vdi.GetVMs().Any(vm=>!vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return false;
+
             SR sr = GetSR(vdi);
             if (sr == null || sr.HBALunPerVDI)
                 return false;
+            if (Helpers.DundeePlusOrGreater(vdi.Connection) && !sr.allowed_operations.Contains(storage_operations.vdi_mirror))
+                return false;
+
             return true;
         }
 
@@ -136,10 +140,13 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_DR_VD;
             if (vdi.GetVMs().Any(vm => !vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return Messages.CANNOT_MIGRATE_VDI_NON_RUNNING_VM;
+
             SR sr = GetSR(vdi);
             if (sr == null)
                 return base.GetCantExecuteReasonCore(item);
             if (sr.HBALunPerVDI)
+                return Messages.UNSUPPORTED_SR_TYPE;
+            if (Helpers.DundeePlusOrGreater(vdi.Connection) && !sr.allowed_operations.Contains(storage_operations.vdi_mirror))
                 return Messages.UNSUPPORTED_SR_TYPE;
 
             return base.GetCantExecuteReasonCore(item);
