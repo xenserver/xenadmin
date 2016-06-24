@@ -382,7 +382,7 @@
     <value>8</value>
   </data>
   <data name="BypassForServersCheckbox.Text" xml:space="preserve">
-    <value>Bypass proxy server for &amp;all [XenServer] connections</value>
+    <value>&amp;Bypass proxy server for all [XenServer] connections</value>
   </data>
   <data name="&gt;&gt;BypassForServersCheckbox.Name" xml:space="preserve">
     <value>BypassForServersCheckbox</value>

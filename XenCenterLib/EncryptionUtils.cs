@@ -62,20 +62,6 @@ namespace XenAdmin.Core
             return hash;
         }
 
-        /// <summary>
-        /// Returns a secure MD5 hash of the given input string.
-        /// </summary>
-        /// <param name="str">The string to hash.</param>
-        /// <returns>The secure hash as a hex string.</returns>
-        public static string MD5Hash(string str)
-        {
-            MD5 hasher = MD5.Create();
-            ASCIIEncoding enc = new ASCIIEncoding();
-            byte[] bytes = enc.GetBytes(str);
-            byte[] hash = hasher.ComputeHash(bytes);
-            return BitConverter.ToString(hash).Replace("-", "").ToLower();
-        }
-
         public static string Protect(string data)
         {
             byte[] dataBytes = Encoding.Unicode.GetBytes(data);

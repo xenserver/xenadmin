@@ -36,9 +36,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Net.Security;
 using System.Security.Authentication;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.Serialization;
-using XenAdmin.Core;
 
 namespace XenAPI
 {
@@ -169,11 +169,11 @@ namespace XenAPI
             string line = ReadLine(stream), initialLine = line, transferEncodingField = null;
             if (string.IsNullOrEmpty(initialLine)) // sanity check
                 return false;
-            while (!string.IsNullOrEmpty(line) && !string.IsNullOrWhiteSpace(line))
+            while (!string.IsNullOrWhiteSpace(line)) // IsNullOrWhiteSpace also checks for empty string
             {
                 if (headers != null)
                 {
-                    RemoveNewLineEnding(ref line);
+                    line = line.TrimEnd('\r', '\n');
                     headers.Add(line);
                     if (line == "Transfer-Encoding: Chunked")
                         transferEncodingField = line;
@@ -189,7 +189,7 @@ namespace XenAPI
                 do
                 {
                     string chunkSizeStr = ReadLine(stream);
-                    RemoveNewLineEnding(ref chunkSizeStr);
+                    chunkSizeStr = chunkSizeStr.TrimEnd('\r', '\n');
                     int chunkSize = int.Parse(chunkSizeStr, System.Globalization.NumberStyles.HexNumber);
 
                     byte[] bytes = new byte[chunkSize];
@@ -212,7 +212,7 @@ namespace XenAPI
 
                 if (headers != null)
                 {
-                    RemoveNewLineEnding(ref entityBody);
+                    entityBody = entityBody.TrimEnd('\r', '\n');
                     headers.Add(entityBody); // keep entityBody if it's needed for Digest authentication (when qop="auth-int")
                 }
             }
@@ -270,6 +270,20 @@ namespace XenAPI
               SslPolicyErrors sslPolicyErrors)
         {
             return true;
+        }
+
+        /// <summary>
+        /// Returns a secure MD5 hash of the given input string.
+        /// </summary>
+        /// <param name="str">The string to hash.</param>
+        /// <returns>The secure hash as a hex string.</returns>
+        public static string MD5Hash(string str)
+        {
+            MD5 hasher = MD5.Create();
+            ASCIIEncoding enc = new ASCIIEncoding();
+            byte[] bytes = enc.GetBytes(str);
+            byte[] hash = hasher.ComputeHash(bytes);
+            return BitConverter.ToString(hash).Replace("-", "").ToLower();
         }
 
         public static long CopyStream(Stream inStream, Stream outStream,
@@ -357,37 +371,10 @@ namespace XenAPI
             return uri.Uri;
         }
 
-        private static List<string> GetFields(List<string> lines, string field)
-        {
-            List<string> fields = new List<string>();
-            foreach (string line in lines)
-                if (line.StartsWith(field))
-                    fields.Add(line);
-            return fields;
-        }
-
-        private static string GetField(List<string> lines, string field)
-        {
-            foreach (string line in lines)
-                if (line.StartsWith(field))
-                    return line;
-            return null;
-        }
-
         private static string GetPartOrNull(string str, int partIndex)
         {
             string[] parts = str.Split(new char[] { ' ' }, partIndex + 2, StringSplitOptions.RemoveEmptyEntries);
             return partIndex < parts.Length - 1 ? parts[partIndex] : null;
-        }
-
-        private static void RemoveNewLineEnding(ref string str)
-        {
-            if (string.IsNullOrEmpty(str))
-                return;
-            if (str.EndsWith("\r\n"))
-                str = str.Substring(0, str.Length - 2);
-            else if (str.EndsWith("\n"))
-                str = str.Substring(0, str.Length - 1);
         }
 
         #endregion
@@ -469,11 +456,11 @@ namespace XenAPI
         private static void AuthenticateProxy(ref Stream stream, Uri uri, IWebProxy proxy, bool nodelay, int timeout_ms, List<string> initialResponse, string header)
         {
             // perform authentication only if proxy requires it
-            List<string> fields = GetFields(initialResponse, "Proxy-Authenticate:");
+            List<string> fields = initialResponse.FindAll(delegate(string str) { return str.StartsWith("Proxy-Authenticate:"); });
             if (fields.Count > 0)
             {
                 // clean up (if initial server response specifies "Proxy-Connection: Close" then stream cannot be re-used)
-                string field = GetField(initialResponse, "Proxy-Connection: Close");
+                string field = initialResponse.Find(delegate(string str) { return str.StartsWith("Proxy-Connection: Close"); });
                 if (!string.IsNullOrEmpty(field))
                 {
                     stream.Close();
@@ -485,8 +472,8 @@ namespace XenAPI
                     throw new BadServerResponseException(string.Format("Received error code {0} from the server", initialResponse[0]));
                 NetworkCredential credentials = proxy.Credentials.GetCredential(uri, null);
 
-                string basicField = GetField(fields, "Proxy-Authenticate: Basic");
-                string digestField = GetField(fields, "Proxy-Authenticate: Digest");
+                string basicField = fields.Find(delegate(string str) { return str.StartsWith("Proxy-Authenticate: Basic"); });
+                string digestField = fields.Find(delegate(string str) { return str.StartsWith("Proxy-Authenticate: Digest"); });
                 if (!string.IsNullOrEmpty(basicField))
                 {
                     string authenticationFieldReply = String.Format("Proxy-Authorization: Basic {0}",
@@ -564,27 +551,27 @@ namespace XenAPI
                     string HA1 = "";
                     string scratch = string.Format("{0}:{1}:{2}", credentials.UserName, realm, credentials.Password);
                     if (algorithm == null || algorithm == "MD5")
-                        HA1 = EncryptionUtils.MD5Hash(scratch);
+                        HA1 = MD5Hash(scratch);
                     else
-                        HA1 = EncryptionUtils.MD5Hash(string.Format("{0}:{1}:{2}", EncryptionUtils.MD5Hash(scratch), nonce, clientNonce));
+                        HA1 = MD5Hash(string.Format("{0}:{1}:{2}", MD5Hash(scratch), nonce, clientNonce));
 
                     string HA2 = "";
                     scratch = GetPartOrNull(header, 0);
                     scratch = string.Format("{0}:{1}:{2}", scratch ?? "CONNECT", uri.Host, uri.Port);
                     if (qop == null || qop == "auth")
-                        HA2 = EncryptionUtils.MD5Hash(scratch);
+                        HA2 = MD5Hash(scratch);
                     else
                     {
                         string entityBody = initialResponse[initialResponse.Count - 1]; // entity body should have been stored as last element of initialResponse
-                        string str = string.Format("{0}:{1}", scratch, EncryptionUtils.MD5Hash(entityBody));
-                        HA2 = EncryptionUtils.MD5Hash(str);
+                        string str = string.Format("{0}:{1}", scratch, MD5Hash(entityBody));
+                        HA2 = MD5Hash(str);
                     }
 
                     string response = "";
                     if (qop == null)
-                        response = EncryptionUtils.MD5Hash(string.Format("{0}:{1}:{2}", HA1, nonce, HA2));
+                        response = MD5Hash(string.Format("{0}:{1}:{2}", HA1, nonce, HA2));
                     else
-                        response = EncryptionUtils.MD5Hash(string.Format("{0}:{1}:{2}:{3}:{4}:{5}", HA1, nonce, nonceCount, clientNonce, qop, HA2));
+                        response = MD5Hash(string.Format("{0}:{1}:{2}:{3}:{4}:{5}", HA1, nonce, nonceCount, clientNonce, qop, HA2));
 
                     authenticationFieldReply += string.Format(", response=\"{0}\"", response);
 
