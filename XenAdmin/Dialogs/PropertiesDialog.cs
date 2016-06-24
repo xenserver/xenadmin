@@ -197,7 +197,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
-                if (is_pool_or_standalone && Helpers.DundeeOrGreater(xenObject.Connection))
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
 
                 if (is_network)
