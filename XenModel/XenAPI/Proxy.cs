@@ -2956,6 +2956,10 @@ namespace XenAPI
         Response<string []>
         host_get_virtual_hardware_platform_versions(string session, string _host);
 
+        [XmlRpcMethod("host.get_control_domain")]
+        Response<string>
+        host_get_control_domain(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -7194,6 +7198,7 @@ namespace XenAPI
         public Object guest_VCPUs_params;
         public string display;
         public string [] virtual_hardware_platform_versions;
+        public string control_domain;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

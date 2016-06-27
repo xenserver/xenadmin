@@ -146,7 +146,7 @@ namespace XenAPI
             return opaqueRef.GetHashCode();
         }
 
-        // convert an opaqueRef to a string
+        // convert to an opaqueRef
         public static implicit operator string(XenRef<T> xenRef)
         {
             return xenRef == null ? null : xenRef.opaque_ref;
