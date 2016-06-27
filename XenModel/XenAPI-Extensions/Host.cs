@@ -502,6 +502,25 @@ namespace XenAPI
             return h._RestrictVss;
         }
 
+        /// <summary>
+        /// For Dundee and greater hosts: the feature is restricted only if the "restrict_ssl_legacy_switch" key exists and it is true
+        /// For pre-Dundee hosts: the feature is restricted if the "restrict_ssl_legacy_switch" key is absent or it is true
+        /// </summary>
+        private bool _RestrictSslLegacySwitch
+        {
+            get
+            {
+                return Helpers.DundeeOrGreater(this) 
+                    ? BoolKey(license_params, "restrict_ssl_legacy_switch") 
+                    : BoolKeyPreferTrue(license_params, "restrict_ssl_legacy_switch");
+            }
+        }
+
+        public static bool RestrictSslLegacySwitch(Host h)
+        {
+            return h._RestrictSslLegacySwitch;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
