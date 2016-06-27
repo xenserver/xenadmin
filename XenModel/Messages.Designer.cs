@@ -2464,6 +2464,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload error. The patch was uploaded, but it cannot be found on the host..
+        /// </summary>
+        public static string ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual disk created.
         /// </summary>
         public static string ACTION_VDI_CREATED {
