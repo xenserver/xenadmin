@@ -32334,6 +32334,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos; due to license restrictions..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos; for an unknown reason. See application logs for more details..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON {

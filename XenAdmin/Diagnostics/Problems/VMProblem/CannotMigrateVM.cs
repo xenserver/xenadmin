@@ -38,12 +38,22 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
     public class CannotMigrateVM : VMProblem
     {
-        public CannotMigrateVM(Check check, VM vm)
-            : base(check, vm) { }
+        private readonly bool licenseRestriction;
+
+        public CannotMigrateVM(Check check, VM vm, bool licenseRestriction = false)
+            : base(check, vm) 
+        {
+            this.licenseRestriction = licenseRestriction;
+        }
 
         public override string Description
         {
-            get { return String.Format(Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON, VM.Name); }
+            get 
+            {
+                return String.Format(licenseRestriction
+                    ? Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON           
+                    : Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON, VM.Name); 
+            }
         }
     }
 }

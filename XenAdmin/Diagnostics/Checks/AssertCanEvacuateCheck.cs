@@ -56,6 +56,8 @@ namespace XenAdmin.Diagnostics.Checks
         {
             var problems = new List<Problem>();
 
+            var restrictMigration = Helpers.FeatureForbidden(Host.Connection, Host.RestrictIntraPoolMigrate);
+
             var VMsWithProblems = new List<string>();
             var residentVMs = Host.Connection.ResolveAll(Host.resident_VMs);
             foreach (var residentVM in residentVMs)
@@ -78,7 +80,17 @@ namespace XenAdmin.Diagnostics.Checks
                     problems.Add(new LocalCD(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
+
+                if (restrictMigration && residentVM.is_a_real_vm && !VMsWithProblems.Contains(residentVM.opaque_ref))
+                {
+                    problems.Add(new CannotMigrateVM(this, residentVM, true));
+                    VMsWithProblems.Add(residentVM.opaque_ref);
+                }
             }
+
+            // if VM migration is restricted, then we are already forcing all VMs to be shutdown/suspended, so there is not need to call get_vms_which_prevent_evacuation
+            if (restrictMigration)
+                return problems;
 
             Session session = Host.Connection.DuplicateSession();
             Dictionary<XenRef<VM>, String[]> vms =
