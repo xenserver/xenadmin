@@ -85,12 +85,12 @@ namespace XenAdmin.Dialogs
             get { return srPicker1; }
         }
 
-        private void srPicker1_ItemSelectionNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNull()
         {
             updateButtons();
         }
 
-        private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNotNull()
         {
             updateButtons();
         }
