@@ -143,6 +143,10 @@ namespace XenAPI
             WriteLine("", stream);
         }
 
+        // Stream.ReadByte() is used because using StreamReader in its place causes the reading to become stuck,
+        // as it seems the Stream object has trouble recognizing the end of the stream. This seems to be a common
+        // problem, of which a common solution is to read each byte until an EndOfStreamException is thrown, as is
+        // done here.
         private static string ReadLine(Stream stream)
         {
             System.Text.StringBuilder result = new StringBuilder();
@@ -456,11 +460,11 @@ namespace XenAPI
         private static void AuthenticateProxy(ref Stream stream, Uri uri, IWebProxy proxy, bool nodelay, int timeout_ms, List<string> initialResponse, string header)
         {
             // perform authentication only if proxy requires it
-            List<string> fields = initialResponse.FindAll(delegate(string str) { return str.StartsWith("Proxy-Authenticate:"); });
+            List<string> fields = initialResponse.FindAll(str => str.StartsWith("Proxy-Authenticate:"));
             if (fields.Count > 0)
             {
                 // clean up (if initial server response specifies "Proxy-Connection: Close" then stream cannot be re-used)
-                string field = initialResponse.Find(delegate(string str) { return str.StartsWith("Proxy-Connection: Close"); });
+                string field = initialResponse.Find(str => str.StartsWith("Proxy-Connection: Close"));
                 if (!string.IsNullOrEmpty(field))
                 {
                     stream.Close();
@@ -472,8 +476,8 @@ namespace XenAPI
                     throw new BadServerResponseException(string.Format("Received error code {0} from the server", initialResponse[0]));
                 NetworkCredential credentials = proxy.Credentials.GetCredential(uri, null);
 
-                string basicField = fields.Find(delegate(string str) { return str.StartsWith("Proxy-Authenticate: Basic"); });
-                string digestField = fields.Find(delegate(string str) { return str.StartsWith("Proxy-Authenticate: Digest"); });
+                string basicField = fields.Find(str => str.StartsWith("Proxy-Authenticate: Basic"));
+                string digestField = fields.Find(str => str.StartsWith("Proxy-Authenticate: Digest"));
                 if (!string.IsNullOrEmpty(basicField))
                 {
                     string authenticationFieldReply = String.Format("Proxy-Authorization: Basic {0}",
