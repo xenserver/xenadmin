@@ -2725,7 +2725,7 @@ This will also shut down all the VMs currently running on them.</value>
     <value>Reboot Server</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVER_YES_BUTTON_LABEL" xml:space="preserve">
-    <value>Yes, Reboot</value>
+    <value>&amp;Yes, Reboot</value>
   </data>
   <data name="CONFIRM_REBOOT_VM" xml:space="preserve">
     <value>Are you sure you want to reboot the selected VM?</value>

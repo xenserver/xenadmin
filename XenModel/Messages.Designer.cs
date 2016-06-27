@@ -7421,7 +7421,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, Reboot.
+        ///   Looks up a localized string similar to &amp;Yes, Reboot.
         /// </summary>
         public static string CONFIRM_REBOOT_SERVER_YES_BUTTON_LABEL {
             get {

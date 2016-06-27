@@ -141,7 +141,7 @@ namespace XenAdmin.Commands
                     if (h.HasRunningVMs)
                         hasRunningVMs = true;
 
-                    if (h.Connection.ResolveAll(h.resident_VMs).FindAll(v => v.HciWarnBeforeShutdown).Count > 0)
+                    if (h.Connection.ResolveAll(h.resident_VMs).Exists(v => v.HciWarnBeforeShutdown))
                         hciHosts.Add(h);
                 }
 
