@@ -181,7 +181,8 @@ namespace XenAdmin.Core
 
             // test each url with a WebClient to see if it works.
             _webClients.Clear();
-            _webClients.AddRange(uriList.ConvertAll(u => new WebClient()));
+            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
+            _webClients.AddRange(uriList.ConvertAll(u => new WebClient() { Proxy = proxy }));
 
             // start all urls downloading in parallel.
             for (int i = 0; i < _webClients.Count; i++)

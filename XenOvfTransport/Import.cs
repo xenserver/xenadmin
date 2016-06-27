@@ -2584,6 +2584,7 @@ namespace XenOvfTransport
                 _downloadexception = null;
                 OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Web Download Start", downloadupdatemsg, 0, _filedownloadsize));
                 WebClient wc = new WebClient();
+                wc.Proxy = XenAdmin.XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
                 wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
                 wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
                 wc.DownloadFileAsync(filetodownload, tmpfilename);
