@@ -53,6 +53,7 @@ namespace XenAdmin
         string XenCenterUUID { get; }
         bool DontSudo { get; }
         IWebProxy GetProxyFromSettings(IXenConnection connection);
+        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
         int GetProxyTimeout(bool timeout);
         void ShowObject(string newVMRef);
         void HideObject(string newVMRef);

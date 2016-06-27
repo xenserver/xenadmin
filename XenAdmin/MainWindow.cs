@@ -507,8 +507,11 @@ namespace XenAdmin
                                 Properties.Settings.Default.ProxyAddress,
                                 Properties.Settings.Default.ProxyPort,
                                 Properties.Settings.Default.ConnectionTimeout,
-                                Properties.Settings.Default.BypassProxyForLocal,
-                                true).RunAsync();
+                                true,
+                                Properties.Settings.Default.BypassProxyForServers,
+                                Properties.Settings.Default.ProvideProxyAuthentication,
+                                Properties.Settings.Default.ProxyUsername,
+                                Properties.Settings.Default.ProxyPassword).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
             {

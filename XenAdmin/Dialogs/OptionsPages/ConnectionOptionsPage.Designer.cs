@@ -39,14 +39,19 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.TimeOutLabel = new System.Windows.Forms.Label();
             this.ProxyGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.BypassForServersCheckbox = new System.Windows.Forms.CheckBox();
+            this.ProxyPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.ProxyUsernameLabel = new System.Windows.Forms.Label();
+            this.ProxyUsernameTextBox = new System.Windows.Forms.TextBox();
+            this.ProxyPasswordLabel = new System.Windows.Forms.Label();
+            this.AuthenticationCheckBox = new System.Windows.Forms.CheckBox();
             this.ProxyAddressLabel = new System.Windows.Forms.Label();
             this.UseProxyRadioButton = new System.Windows.Forms.RadioButton();
             this.DirectConnectionRadioButton = new System.Windows.Forms.RadioButton();
             this.UseIERadioButton = new System.Windows.Forms.RadioButton();
-            this.BypassLocalCheckBox = new System.Windows.Forms.CheckBox();
             this.ProxyAddressTextBox = new System.Windows.Forms.TextBox();
-            this.ProxyPortLabel = new System.Windows.Forms.Label();
             this.ProxyPortTextBox = new System.Windows.Forms.TextBox();
+            this.ProxyPortLabel = new System.Windows.Forms.Label();
             this.ConnectionTableLayoutPanel.SuspendLayout();
             this.TimeoutGroupBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -129,25 +134,71 @@ namespace XenAdmin.Dialogs.OptionsPages
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.ProxyAddressLabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BypassForServersCheckbox, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyPasswordTextBox, 6, 6);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyUsernameLabel, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyUsernameTextBox, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyPasswordLabel, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationCheckBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyAddressLabel, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.UseProxyRadioButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.DirectConnectionRadioButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.UseIERadioButton, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BypassLocalCheckBox, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.ProxyAddressTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.ProxyPortLabel, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.ProxyPortTextBox, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyAddressTextBox, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyPortTextBox, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyPortLabel, 4, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // BypassForServersCheckbox
+            // 
+            resources.ApplyResources(this.BypassForServersCheckbox, "BypassForServersCheckbox");
+            this.tableLayoutPanel1.SetColumnSpan(this.BypassForServersCheckbox, 6);
+            this.BypassForServersCheckbox.Name = "BypassForServersCheckbox";
+            this.BypassForServersCheckbox.UseVisualStyleBackColor = true;
+            this.BypassForServersCheckbox.CheckedChanged += new System.EventHandler(this.BypassForServersCheckbox_CheckedChanged);
+            // 
+            // ProxyPasswordTextBox
+            // 
+            resources.ApplyResources(this.ProxyPasswordTextBox, "ProxyPasswordTextBox");
+            this.ProxyPasswordTextBox.Name = "ProxyPasswordTextBox";
+            this.ProxyPasswordTextBox.UseSystemPasswordChar = true;
+            this.ProxyPasswordTextBox.TextChanged += new System.EventHandler(this.ProxyPasswordTextBox_TextChanged);
+            // 
+            // ProxyUsernameLabel
+            // 
+            resources.ApplyResources(this.ProxyUsernameLabel, "ProxyUsernameLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.ProxyUsernameLabel, 2);
+            this.ProxyUsernameLabel.Name = "ProxyUsernameLabel";
+            // 
+            // ProxyUsernameTextBox
+            // 
+            resources.ApplyResources(this.ProxyUsernameTextBox, "ProxyUsernameTextBox");
+            this.ProxyUsernameTextBox.Name = "ProxyUsernameTextBox";
+            this.ProxyUsernameTextBox.TextChanged += new System.EventHandler(this.ProxyUsernameTextBox_TextChanged);
+            // 
+            // ProxyPasswordLabel
+            // 
+            resources.ApplyResources(this.ProxyPasswordLabel, "ProxyPasswordLabel");
+            this.ProxyPasswordLabel.Name = "ProxyPasswordLabel";
+            // 
+            // AuthenticationCheckBox
+            // 
+            resources.ApplyResources(this.AuthenticationCheckBox, "AuthenticationCheckBox");
+            this.tableLayoutPanel1.SetColumnSpan(this.AuthenticationCheckBox, 6);
+            this.AuthenticationCheckBox.Name = "AuthenticationCheckBox";
+            this.AuthenticationCheckBox.UseVisualStyleBackColor = true;
+            this.AuthenticationCheckBox.CheckedChanged += new System.EventHandler(this.AuthenticationCheckBox_CheckedChanged);
             // 
             // ProxyAddressLabel
             // 
             resources.ApplyResources(this.ProxyAddressLabel, "ProxyAddressLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.ProxyAddressLabel, 2);
             this.ProxyAddressLabel.Name = "ProxyAddressLabel";
             // 
             // UseProxyRadioButton
             // 
             resources.ApplyResources(this.UseProxyRadioButton, "UseProxyRadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.UseProxyRadioButton, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.UseProxyRadioButton, 6);
             this.UseProxyRadioButton.Name = "UseProxyRadioButton";
             this.UseProxyRadioButton.TabStop = true;
             this.UseProxyRadioButton.UseVisualStyleBackColor = true;
@@ -156,7 +207,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             // DirectConnectionRadioButton
             // 
             resources.ApplyResources(this.DirectConnectionRadioButton, "DirectConnectionRadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.DirectConnectionRadioButton, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.DirectConnectionRadioButton, 6);
             this.DirectConnectionRadioButton.Name = "DirectConnectionRadioButton";
             this.DirectConnectionRadioButton.TabStop = true;
             this.DirectConnectionRadioButton.UseVisualStyleBackColor = true;
@@ -164,34 +215,28 @@ namespace XenAdmin.Dialogs.OptionsPages
             // UseIERadioButton
             // 
             resources.ApplyResources(this.UseIERadioButton, "UseIERadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.UseIERadioButton, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.UseIERadioButton, 6);
             this.UseIERadioButton.Name = "UseIERadioButton";
             this.UseIERadioButton.TabStop = true;
             this.UseIERadioButton.UseVisualStyleBackColor = true;
             // 
-            // BypassLocalCheckBox
-            // 
-            resources.ApplyResources(this.BypassLocalCheckBox, "BypassLocalCheckBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.BypassLocalCheckBox, 4);
-            this.BypassLocalCheckBox.Name = "BypassLocalCheckBox";
-            this.BypassLocalCheckBox.UseVisualStyleBackColor = true;
-            // 
             // ProxyAddressTextBox
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.ProxyAddressTextBox, 2);
             resources.ApplyResources(this.ProxyAddressTextBox, "ProxyAddressTextBox");
             this.ProxyAddressTextBox.Name = "ProxyAddressTextBox";
             this.ProxyAddressTextBox.TextChanged += new System.EventHandler(this.ProxyAddressTextBox_TextChanged);
-            // 
-            // ProxyPortLabel
-            // 
-            resources.ApplyResources(this.ProxyPortLabel, "ProxyPortLabel");
-            this.ProxyPortLabel.Name = "ProxyPortLabel";
             // 
             // ProxyPortTextBox
             // 
             resources.ApplyResources(this.ProxyPortTextBox, "ProxyPortTextBox");
             this.ProxyPortTextBox.Name = "ProxyPortTextBox";
             this.ProxyPortTextBox.TextChanged += new System.EventHandler(this.ProxyPortTextBox_TextChanged);
+            // 
+            // ProxyPortLabel
+            // 
+            resources.ApplyResources(this.ProxyPortLabel, "ProxyPortLabel");
+            this.ProxyPortLabel.Name = "ProxyPortLabel";
             // 
             // ConnectionOptionsPage
             // 
@@ -224,7 +269,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.Label ConnectionTimeoutLabel;
         private System.Windows.Forms.Label SecondsLabel;
         private XenAdmin.Controls.DecentGroupBox ProxyGroupBox;
-        private System.Windows.Forms.CheckBox BypassLocalCheckBox;
         private System.Windows.Forms.RadioButton DirectConnectionRadioButton;
         private System.Windows.Forms.TextBox ProxyAddressTextBox;
         private System.Windows.Forms.RadioButton UseProxyRadioButton;
@@ -235,5 +279,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox AuthenticationCheckBox;
+        private System.Windows.Forms.CheckBox BypassForServersCheckbox;
+        private System.Windows.Forms.TextBox ProxyPasswordTextBox;
+        private System.Windows.Forms.Label ProxyUsernameLabel;
+        private System.Windows.Forms.TextBox ProxyUsernameTextBox;
+        private System.Windows.Forms.Label ProxyPasswordLabel;
     }
 }
