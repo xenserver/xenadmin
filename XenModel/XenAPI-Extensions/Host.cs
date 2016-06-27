@@ -827,7 +827,6 @@ namespace XenAPI
             }
         }
 
-
         public PrettyTimeSpan Uptime
         {
             get
@@ -881,6 +880,15 @@ namespace XenAPI
             return (BoolKey(other_config, "multipathed") &&
                 other_config.ContainsKey("mpath-boot") &&
                 PBD.ParsePathCounts(other_config["mpath-boot"], out current, out max));
+        }
+
+        public bool HasRunningVMs
+        {
+            get
+            {
+                // 2 not 1, because the Control Domain doesn't count
+                return resident_VMs != null && resident_VMs.Count >= 2;
+            }
         }
 
         #region Save Evacuated VMs for later

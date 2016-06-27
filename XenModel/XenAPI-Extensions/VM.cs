@@ -2038,6 +2038,14 @@ namespace XenAPI
                 return ipAddresses.FirstOrDefault() ?? string.Empty;
             }
         }
+
+        public bool HciWarnBeforeShutdown
+        {
+            get
+            {
+                return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
+            }
+        }
     }
 
     public struct VMStartupOptions
