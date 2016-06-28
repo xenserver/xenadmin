@@ -74,6 +74,7 @@ namespace XenAdmin.Actions
         private void DownloadFile()
         {
             WebClient client = new WebClient();
+            client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
             //register download events
             client.DownloadProgressChanged += client_DownloadProgressChanged;
             client.DownloadFileCompleted += client_DownloadFileCompleted;

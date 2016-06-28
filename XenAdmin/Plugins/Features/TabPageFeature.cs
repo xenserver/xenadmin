@@ -961,6 +961,7 @@ namespace XenAdmin.Plugins
                 request.ContentType = "xml";
                 request.ContentLength = Encoding.UTF8.GetBytes(jsCallbackAndData[1]).Length;
                 request.UserAgent = Branding.BRAND_CONSOLE + "\\Plugin";
+                request.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection, true);
 
                 using (StreamWriter xmlstream = new StreamWriter(request.GetRequestStream()))
                 {
