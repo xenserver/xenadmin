@@ -51,8 +51,8 @@ namespace XenAdmin.Controls
 
         private Host affinity;
         private SrPickerItem LastSelectedItem;
-        public event EventHandler ItemSelectionNull;
-        public event EventHandler ItemSelectionNotNull;
+        public event Action ItemSelectionNull;
+        public event Action ItemSelectionNotNull;
         public event EventHandler DoubleClickOnRow;
         public long DiskSize = 0;
         public long? OverridenInitialAllocationRate = null;
@@ -167,13 +167,12 @@ namespace XenAdmin.Controls
             if (item == null || !item.Enabled)
             {
                 if (ItemSelectionNull != null)
-                    ItemSelectionNull(null, null);
+                    ItemSelectionNull();
                 return;
             }
-            else if (ItemSelectionNotNull != null)
-            {
-                ItemSelectionNotNull(null, null);
-            }
+
+            if (ItemSelectionNotNull != null)
+                ItemSelectionNotNull();
 
             if (!item.Enabled && LastSelectedItem != null && LastSelectedItem.TheSR.opaque_ref != item.TheSR.opaque_ref)
                 srListBox.SelectedItem = LastSelectedItem;
@@ -369,7 +368,7 @@ namespace XenAdmin.Controls
             }
 
             if (ItemSelectionNull != null)
-                ItemSelectionNull(null, null);
+                ItemSelectionNull();
         }
 
         internal void selectDefaultSROrAny()
@@ -387,7 +386,7 @@ namespace XenAdmin.Controls
                 }
             }
             if (ItemSelectionNull != null)
-                ItemSelectionNull(null, null);
+                ItemSelectionNull();
         }
 
         public void selectSRorDefaultorAny(SR sr)

@@ -412,6 +412,11 @@ namespace XenAdmin.Core
             return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_4;
         }
 
+        public static bool DundeePlusOrGreater(IXenConnection conn)
+        {
+            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_6;
+        }
+
         /// Clearwater is ver. 1.7.0
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool IsClearwater(IXenConnection conn)

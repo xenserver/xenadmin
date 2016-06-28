@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum storage_operations
     {
-        scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, pbd_create, pbd_destroy, unknown
+        scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, vdi_mirror, pbd_create, pbd_destroy, unknown
     }
 
     public static class storage_operations_helper
@@ -70,6 +70,8 @@ namespace XenAPI
                     return "vdi_clone";
                 case storage_operations.vdi_snapshot:
                     return "vdi_snapshot";
+                case storage_operations.vdi_mirror:
+                    return "vdi_mirror";
                 case storage_operations.pbd_create:
                     return "pbd_create";
                 case storage_operations.pbd_destroy:

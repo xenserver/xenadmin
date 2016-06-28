@@ -79,8 +79,8 @@ namespace XenAdmin.Dialogs
             // Add events
             NameTextBox.Text = GetDefaultVDIName();
             SrListBox.srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
-            SrListBox.ItemSelectionNotNull += new EventHandler(SrListBox_ItemSelectionNotNull);
-            SrListBox.ItemSelectionNull += new EventHandler(SrListBox_ItemSelectionNull);
+            SrListBox.ItemSelectionNotNull += SrListBox_ItemSelectionNotNull;
+            SrListBox.ItemSelectionNull += SrListBox_ItemSelectionNull;
             srListBox_SelectedIndexChanged(null, null);
 
             DiskSizeNumericUpDown.TextChanged += new EventHandler(DiskSizeNumericUpDown_TextChanged);
@@ -178,12 +178,12 @@ namespace XenAdmin.Dialogs
             return Helpers.MakeUniqueName(Messages.DEFAULT_VDI_NAME, usedNames);
         }
 
-        void SrListBox_ItemSelectionNull(object sender, EventArgs e)
+        void SrListBox_ItemSelectionNull()
         {
             SelectionNull = true;
         }
 
-        void SrListBox_ItemSelectionNotNull(object sender, EventArgs e)
+        void SrListBox_ItemSelectionNotNull()
         {
             SelectionNull = false;
         }
