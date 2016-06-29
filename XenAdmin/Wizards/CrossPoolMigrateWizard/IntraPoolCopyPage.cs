@@ -85,8 +85,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         public override void PopulatePage()
         {
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            srPicker1.ItemSelectionNotNull += new EventHandler(srPicker1_ItemSelectionNotNull);
-            srPicker1.ItemSelectionNull += new EventHandler(srPicker1_ItemSelectionNull);
+            srPicker1.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
+            srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
             srPicker1.DiskSize = TheVM.TotalVMSize;
@@ -167,12 +167,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             OnPageUpdated();
         }
 
-        private void srPicker1_ItemSelectionNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNull()
         {
             EnableMoveButton();
         }
 
-        private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNotNull()
         {
             EnableMoveButton();
         }

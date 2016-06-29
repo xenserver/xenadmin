@@ -223,11 +223,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             catch (Exception) { }
         }
 
-        private PreCheckHostRow ExecuteCheck(Check check)
+        private List<PreCheckHostRow> ExecuteCheck(Check check)
         {
-            Problem problem = check.RunCheck();
-            if (problem != null)
+            var rows = new List<PreCheckHostRow>();
+
+            var problems = check.RunAllChecks();
+            if (problems.Count == 0)
             {
+                rows.Add(new PreCheckHostRow(check));
+                return rows;
+            }
+
+            foreach (var pr in problems)
+            {
+                var problem = pr;  // we need this line because we sometimes reassign it below
                 if (problem is HostNotLive)
                 {
                     // this host is no longer live -> remove all previous problems regarding this host
@@ -242,10 +251,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else
                     ProblemsResolvedPreCheck.Add(problem);
-                
-                return new PreCheckHostRow(problem);
+
+                rows.Add(new PreCheckHostRow(problem));
             }
-            return new PreCheckHostRow(check);
+            return rows;
         }
 
         private int _numberChecks = 0;
@@ -287,10 +296,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
 
                         Check check = checkGroup[j];
-                        PreCheckHostRow row = ExecuteCheck(check);
-                        if (precheckResult != PreCheckResult.Failed && row.Problem != null)
-                            precheckResult = row.IsProblem ? PreCheckResult.Failed : PreCheckResult.Warning;
-                        _worker.ReportProgress(PercentageSelectedServers(j + 1), row);
+                        foreach (PreCheckHostRow row in ExecuteCheck(check))
+                        {
+                            if (precheckResult != PreCheckResult.Failed && row.Problem != null)
+                                precheckResult = row.IsProblem ? PreCheckResult.Failed : PreCheckResult.Warning;
+                            _worker.ReportProgress(PercentageSelectedServers(j + 1), row);
+                        }
                     }
 
                     lock (_update_grid_lock)
@@ -577,9 +588,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     (preCheckHostRow.Problem as ProblemWithInformationUrl).LaunchUrlInBrowser();
                     
                 else if (!cancelled)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
                                                                         string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"),
-                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)).ShowDialog(this);
+                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
             }
         }
 
@@ -610,12 +624,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                         actions.Add(action);
                 }
             }
-            foreach (var asyncAction in actions)
-            {
-                _progressDialog = new ActionProgressDialog(asyncAction, ProgressBarStyle.Blocks);
-                _progressDialog.ShowDialog(this);
-                Program.Invoke(Program.MainWindow, RefreshRechecks);
-            }
+            var multipleAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
+            _progressDialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
+            _progressDialog.ShowDialog(this);
             Program.Invoke(Program.MainWindow, RefreshRechecks);
         }
 

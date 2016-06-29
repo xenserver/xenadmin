@@ -89,11 +89,14 @@ namespace XenAdmin.Wizards
 
             if (brokenSRs.Count > 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                         SystemIcons.Warning,
                         String.Format(Messages.HA_SRS_BROKEN_WARNING, String.Join("\n", brokenSRs.ToArray())),
-                        Messages.HIGH_AVAILABILITY)).ShowDialog(this);
+                        Messages.HIGH_AVAILABILITY)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
 
             base.OnShown(e);

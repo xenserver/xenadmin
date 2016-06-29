@@ -649,11 +649,14 @@ namespace XenAdmin.TabPages
                     string disconnectedServerNames =
                            clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning,
                                                       string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
                                                                    disconnectedServerNames),
-                                                      Messages.UPDATES_WIZARD)).ShowDialog(this);
+                                                      Messages.UPDATES_WIZARD)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                  }
             });
         }
@@ -904,11 +907,14 @@ namespace XenAdmin.TabPages
             }
             catch (Exception)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK),
-                       Messages.XENCENTER)).ShowDialog(this);
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
         

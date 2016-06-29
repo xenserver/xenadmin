@@ -231,7 +231,8 @@ namespace XenAdmin.Controls
             if (VM != null)
             {
                 CreateCdDriveAction createDriveAction = new CreateCdDriveAction(VM, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
-                new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(this);
+                using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
+                    dlg.ShowDialog(this);
             }
         }
 

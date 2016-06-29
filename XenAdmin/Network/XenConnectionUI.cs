@@ -129,33 +129,43 @@ namespace XenAdmin.Network
                         {
                             if (pool_name == oldHost)
                             {
-                                new ThreeButtonDialog(
+                                using (var dlg = new ThreeButtonDialog(
                                     new ThreeButtonDialog.Details(
                                        SystemIcons.Information,
                                        string.Format(Messages.OLD_CONNECTION_ALREADY_CONNECTED, pool_name),
-                                       Messages.ADD_NEW_CONNECT_TO)).ShowDialog(owner);
+                                       Messages.ADD_NEW_CONNECT_TO)))
+                                {
+                                    dlg.ShowDialog(owner);
+                                }
                             }
                             else
                             {
 
-                                new ThreeButtonDialog(
+                                using (var dlg = new ThreeButtonDialog(
                                     new ThreeButtonDialog.Details(
                                        SystemIcons.Information,
                                         string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name),
-                                       Messages.ADD_NEW_CONNECT_TO)).ShowDialog(owner);
+                                       Messages.ADD_NEW_CONNECT_TO)))
+                                {
+                                    dlg.ShowDialog(owner);
+                                }
                             }
                         }
                     }
                     else
                     {
-                        if (DialogResult.Yes ==
-                            new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(
                                     SystemIcons.Warning,
                                     String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
                                     Messages.CONNECT_TO_SERVER),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(owner))
+                                ThreeButtonDialog.ButtonNo))
+                        {
+                            dialogResult = dlg.ShowDialog(owner);
+                        }
+                        if (DialogResult.Yes == dialogResult)
                         {
                             ((XenConnection) connection).Hostname = poolMasterName;
                             BeginConnect(connection, true, owner, false);
@@ -231,11 +241,14 @@ namespace XenAdmin.Network
                 {
                     ConnectionExists c = error as ConnectionExists;
 
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Information,
                            c.GetDialogMessage(connection),
-                           Messages.XENCENTER)).ShowDialog(owner);
+                           Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(owner);
+                    }
                 }
             }
             else if (error is ArgumentException)
@@ -279,21 +292,29 @@ namespace XenAdmin.Network
 
             if (((XenConnection)connection).fromDialog)
             {
-                if (DialogResult.Retry == new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Error, text, Messages.CONNECT_TO_SERVER),
                     new ThreeButtonDialog.TBDButton(Messages.RETRY_BUTTON_LABEL, DialogResult.Retry, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                    ThreeButtonDialog.ButtonCancel).ShowDialog(owner))
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    dialogResult = dlg.ShowDialog(owner);
+                }
+                if (DialogResult.Retry == dialogResult)
                 {
                     new AddServerDialog(connection, false).Show(owner);
                 }
             }
             else
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        text,
-                       Messages.CONNECT_TO_SERVER)).ShowDialog(owner);
+                       Messages.CONNECT_TO_SERVER)))
+                {
+                    dlg.ShowDialog(owner);
+                }
             }
         }
 

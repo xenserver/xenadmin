@@ -217,11 +217,14 @@ namespace XenAdmin.SettingsPanels
                             (!_poolConfiguration.HostConfigurations.ContainsKey(host.uuid) ||
                              !_poolConfiguration.HostConfigurations[host.uuid].LastPowerOnSucceeded))
                         {
-                            DialogResult dr =
-                                new ThreeButtonDialog(
+                            DialogResult dr;
+                            using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.WLB_UNTESTED_HOST_WARNING, Messages.WLB_UNTESTED_HOST_CAPTION),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog();
+                                ThreeButtonDialog.ButtonNo))
+                            {
+                                dr = dlg.ShowDialog();
+                            }
                             if (dr == DialogResult.No)
                             {
                                 e.NewValue = e.CurrentValue;

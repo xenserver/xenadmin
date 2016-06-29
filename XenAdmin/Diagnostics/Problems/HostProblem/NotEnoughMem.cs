@@ -58,15 +58,17 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
-            SelectVMsToSuspendDialog dlg = new SelectVMsToSuspendDialog(Server);
-            if (dlg.ShowDialog() == DialogResult.OK)
+            using (var dlg = new SelectVMsToSuspendDialog(Server))
             {
-                cancelled = false;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    cancelled = false;
 
-                VmsToSuspend = dlg.SelectedVMsToSuspend;
-                VmsToShutdown = dlg.SelectedVMsToShutdown;
+                    VmsToSuspend = dlg.SelectedVMsToSuspend;
+                    VmsToShutdown = dlg.SelectedVMsToShutdown;
 
-                return new SuspendAndShutdownVMsAction(Server.Connection, Server, VmsToSuspend, VmsToShutdown);
+                    return new SuspendAndShutdownVMsAction(Server.Connection, Server, VmsToSuspend, VmsToShutdown);
+                }
             }
 
             cancelled = true;

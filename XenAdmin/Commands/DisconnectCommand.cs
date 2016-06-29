@@ -129,8 +129,10 @@ namespace XenAdmin.Commands
                             }
                         });
 
-                    ActionProgressDialog pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee);
-                    pd.ShowDialog(Parent);
+                    using (var pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee))
+                    {
+                        pd.ShowDialog(Parent);
+                    }
                 }
                 else
                 {

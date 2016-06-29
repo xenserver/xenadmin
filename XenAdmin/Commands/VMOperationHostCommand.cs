@@ -185,8 +185,15 @@ namespace XenAdmin.Commands
 
         public static bool VmCpuFeaturesIncompatibleWithHost(Host targetHost, VM vm)
         {
-            // check the CPU feature compatibility for Dundee and higher hosts 
-            if (!Helpers.DundeeOrGreater(targetHost) || !Helpers.DundeeOrGreater(vm.Connection))
+            // check the CPU feature compatibility for Dundee and higher hosts
+            if (!Helpers.DundeeOrGreater(targetHost))
+                return false;
+
+            Host home = vm.Home();
+            if (home != null && !Helpers.DundeeOrGreater(home))
+                return false;
+
+            if (home == null && !Helpers.DundeeOrGreater(vm.Connection))
                 return false;
 
             // only for running or suspended VMs

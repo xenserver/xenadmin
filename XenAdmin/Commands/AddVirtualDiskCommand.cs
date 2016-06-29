@@ -80,11 +80,14 @@ namespace XenAdmin.Commands
                 }
                 else
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
-                            SystemIcons.Error, 
-                            FriendlyErrorNames.VBDS_MAX_ALLOWED, 
-                            Messages.DISK_ADD)).ShowDialog(Program.MainWindow);
+                            SystemIcons.Error,
+                            FriendlyErrorNames.VBDS_MAX_ALLOWED,
+                            Messages.DISK_ADD)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
             }
             else

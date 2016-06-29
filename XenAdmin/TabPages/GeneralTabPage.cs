@@ -1861,7 +1861,10 @@ namespace XenAdmin.TabPages
             catch (Exception ex)
             {
                 log.Error("Error starting PuTTY.", ex);
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
         }
     }

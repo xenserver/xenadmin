@@ -254,11 +254,14 @@ namespace XenAdmin.Actions.Wlb
                     // Tell the user the VM will be started without HA protection.
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
-                                SystemIcons.Warning, 
-                                String.Format(Messages.HA_INVALID_CONFIG_RESUME, Helpers.GetName(vm).Ellipsise(500)), 
-                                Messages.HIGH_AVAILABILITY)).ShowDialog(Program.MainWindow);
+                                SystemIcons.Warning,
+                                String.Format(Messages.HA_INVALID_CONFIG_RESUME, Helpers.GetName(vm).Ellipsise(500)),
+                                Messages.HIGH_AVAILABILITY)))
+                        {
+                            dlg.ShowDialog(Program.MainWindow);
+                        }
                     });
 
                     // Set the VM to 'Do not restart'.
@@ -334,11 +337,14 @@ namespace XenAdmin.Actions.Wlb
                         Helpers.GetName(vm).Ellipsise(100));
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Warning,
                                msg,
-                               Messages.HIGH_AVAILABILITY)).ShowDialog(Program.MainWindow);
+                               Messages.HIGH_AVAILABILITY)))
+                        {
+                            dlg.ShowDialog(Program.MainWindow);
+                        }
                     });
                 }
                 else
@@ -350,17 +356,19 @@ namespace XenAdmin.Actions.Wlb
 
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        DialogResult r = new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
                                SystemIcons.Warning,
                                msg,
                                Messages.HIGH_AVAILABILITY),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(Program.MainWindow);
- 
-                        if (r != DialogResult.Yes)
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                         {
-                            error = true;
+                            DialogResult r = dlg.ShowDialog(Program.MainWindow);
+                            if (r != DialogResult.Yes)
+                            {
+                                error = true;
+                            }
                         }
                     });
                 }

@@ -153,11 +153,14 @@ namespace XenAdmin.Commands
 
             MainWindowCommandInterface.Invoke(delegate
             {
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Information,
-                       string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host)),
-                       Messages.XENCENTER)).ShowDialog(Parent);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Information,
+                        string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host)),
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             });
         }
     }

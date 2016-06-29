@@ -1200,12 +1200,16 @@ namespace XenAdmin.ConsoleView
 
                     if (CanEnableRDPOnCreamOrGreater(source.Connection))
                     {
-                        ThreeButtonDialog d = new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (ThreeButtonDialog dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(System.Drawing.SystemIcons.Question, Messages.FORCE_ENABLE_RDP),
-                                "EnableRDPonVM",
+                            "EnableRDPonVM",
                             new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes),
-                            new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No));
-                        if (d.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                            new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)))
+                        {
+                            dialogResult = dlg.ShowDialog(Program.MainWindow);
+                        }
+                        if (dialogResult == DialogResult.Yes)
                         {
                             Session session = source.Connection.DuplicateSession();
                             Dictionary<string, string> _arguments = new Dictionary<string, string>();
@@ -1544,7 +1548,10 @@ namespace XenAdmin.ConsoleView
                 {
                     log.Error("Error starting PuTTY.", ex);
 
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)))
+                    {    
+                        dlg.ShowDialog(Parent);
+                    }
                 }
             }
         }

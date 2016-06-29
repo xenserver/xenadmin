@@ -70,8 +70,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     try
                     {
                         var check = new PatchPrecheckCheck(host, mapping.Pool_patch);
-                        var problem = check.RunCheck();
-                        
+                        var problems = check.RunAllChecks();
+
+                        Diagnostics.Problems.Problem problem = null;
+
+                        if (problems != null && problems.Count > 0)
+                            problem = problems[0];
+
                         if (problem != null)
                         {
                             throw new Exception(string.Format("{0}: {1}. {2}", host, problem.Title, problem.Description));

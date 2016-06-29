@@ -56,7 +56,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             vmsToRecover = vms;
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (applianceToRecover != null)
             {

@@ -515,9 +515,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 var msgtemplate = SelectedExistingPatch.host_patches.Count > 0 ? Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO : Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED;
                 var msg = string.Format(msgtemplate, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name, Branding.Update);
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Error, msg))
-                   .ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Error, msg)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
 
             if (diskSpaceRequirements == null)
@@ -525,31 +527,37 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (diskSpaceRequirements.CanCleanup)
             {
-                ThreeButtonDialog d = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceRequirements.GetSpaceRequirementsMessage()),
+                using (var d = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        diskSpaceRequirements.GetSpaceRequirementsMessage()),
                     new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel));
-
-                if (d.ShowDialog(this) == DialogResult.OK)
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel)))
                 {
-                    // do the cleanup and retry uploading
-                    CleanupDiskSpaceAction action = new CleanupDiskSpaceAction(diskSpaceRequirements.Host, null, true);
+                    if (d.ShowDialog(this) == DialogResult.OK)
+                    {
+                        // do the cleanup and retry uploading
+                        CleanupDiskSpaceAction action = new CleanupDiskSpaceAction(diskSpaceRequirements.Host, null,
+                            true);
 
-                    action.Completed += delegate
-                                        {
-                                            if (action.Succeeded)
-                                            {
-                                                Program.Invoke(Program.MainWindow, TryUploading);
-                                            }
-                                        };
-                    action.RunAsync();
+                        action.Completed += delegate
+                        {
+                            if (action.Succeeded)
+                            {
+                                Program.Invoke(Program.MainWindow, TryUploading);
+                            }
+                        };
+                        action.RunAsync();
+                    }
                 }
             }
             else
             {
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceRequirements.GetSpaceRequirementsMessage()))
-                    .ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        diskSpaceRequirements.GetSpaceRequirementsMessage())))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
     }
