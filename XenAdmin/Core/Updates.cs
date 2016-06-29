@@ -52,7 +52,7 @@ namespace XenAdmin.Core
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
         private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
-        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
+        public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly object updateAlertsLock = new object();
         private static readonly ChangeableList<Alert> updateAlerts = new ChangeableList<Alert>();
