@@ -44,7 +44,7 @@ namespace XenAdminTests.UnitTests
     public class BatchUpdatesTests
     {
 
-        private static Mock<Host> GetAMockHost(string productVersion, string buildNumber)
+        private static Mock<Host> GetAMockHost(string productVersion, string buildNumber, List<Pool_patch> applied_patches = null)
         {
             var id = System.Guid.NewGuid().ToString();
 
@@ -65,7 +65,7 @@ namespace XenAdminTests.UnitTests
 
             master.Setup(h => h.software_version).Returns(new Dictionary<string, string>());
             master.Setup(h => h.ProductVersion).Returns(productVersion);
-            master.Setup(h => h.AppliedPatches()).Returns(new List<Pool_patch>());
+            master.Setup(h => h.AppliedPatches()).Returns(applied_patches ?? new List<Pool_patch>());
             master.Setup(h => h.BuildNumberRaw).Returns(buildNumber);
             master.Setup(h => h.uuid).Returns(id);
             return master;
@@ -167,6 +167,41 @@ namespace XenAdminTests.UnitTests
             Assert.AreEqual(upgradeSequence.First().Value[0], patch);
         }
 
+
+        /// <summary>
+        /// Version exist
+        /// 1 patch in updates. 1 in minimal list. But it is applied already on master.
+        /// 0 has to be installed on host
+        /// </summary>
+        [Test]
+        public void AlreadyInstalledOneFromMinimalForCurrentVersion()
+        {
+            // Arrange
+
+            var serverVersions = GetAVersionWithGivenNumberOfPatches(1);
+            var patch = serverVersions.First().Patches[0];
+
+            Pool_patch pool_patch = new Pool_patch();
+            pool_patch.uuid = patch.Uuid;
+
+            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber, new List<Pool_patch>() { pool_patch });
+            SetXenServerVersionsInUpdates(serverVersions);
+
+            // Act
+
+            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
+
+            // Assert
+
+            Assert.NotNull(upgradeSequence);
+            Assert.AreEqual(1, upgradeSequence.Count);
+            Assert.NotNull(upgradeSequence.First().Key);
+            Assert.AreEqual(upgradeSequence.First().Key.uuid, master.Object.uuid);
+            Assert.NotNull(upgradeSequence.First().Value);
+            Assert.AreEqual(upgradeSequence.First().Value.Count, 0);
+        }
+
+
         /// <summary>
         /// Version exist
         /// 100 patch in updates. 100 in minimal list.
@@ -203,7 +238,7 @@ namespace XenAdminTests.UnitTests
         /// Version exist
         /// 100 patch in updates. 51 in minimal list.
         /// 51 has to be installed on host
-        /// Result: update sequence has all the 100 patches in it
+        /// Result: update sequence has all the 51 patches in it
         /// </summary>
         [Test]
         public void FiftyOnePatchToBeInstalledForCurrentVersion()
@@ -232,6 +267,57 @@ namespace XenAdminTests.UnitTests
                 Assert.IsTrue(serverVersions.First().MinimalPatches.Contains(patch));
 
             Assert.False(seqToCheck.Value.Exists(seqpatch => !serverVersions.First().MinimalPatches.Contains(seqpatch)));
+        }
+
+
+        /// <summary>
+        /// Version exist
+        /// 100 patch in updates. 51 in minimal list.
+        /// 41 has to be installed on host (only 41 of 51, because 10 is already installed from the Minimal list (as well as 5 other))
+        /// Result: update sequence has all the 41 patches in it and all are from Minimal List and also not installed on the host
+        /// </summary>
+        [Test]
+        public void FourtyOnePatchToBeInstalledForCurrentVersion()
+        {
+            // Arrange
+            var serverVersions = GetAVersionWithGivenNumberOfPatches(100);
+            RemoveANumberOfPatchesPseudoRandomly(serverVersions.First().MinimalPatches, 49);
+
+            var pool_patches = new List<Pool_patch>();
+            for (int ii = 0; ii < 10; ii++)
+            {
+                pool_patches.Add(new Pool_patch() { uuid = serverVersions.First().MinimalPatches[ii].Uuid });
+            }
+
+            var notMinimalPatchesInVersion = serverVersions.First().Patches.Where(p => !serverVersions.First().MinimalPatches.Exists(mp => mp.Uuid == p.Uuid)).ToList();
+            for (int ii = 0; ii < 5; ii++)
+            {
+                pool_patches.Add(new Pool_patch() { uuid = notMinimalPatchesInVersion[ii].Uuid });
+            }
+
+            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber, pool_patches);
+
+            SetXenServerVersionsInUpdates(serverVersions);
+
+            // Act
+
+            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
+
+            // Assert
+
+            Assert.NotNull(upgradeSequence);
+            Assert.AreEqual(1, upgradeSequence.Count);
+            var seqToCheck = upgradeSequence.First();
+            Assert.NotNull(seqToCheck.Key);
+            Assert.AreEqual(seqToCheck.Key.uuid, master.Object.uuid);
+            Assert.NotNull(seqToCheck.Value);
+            Assert.AreEqual(seqToCheck.Value.Count, 41);
+
+            foreach (var patch in seqToCheck.Value)
+                Assert.IsTrue(serverVersions.First().MinimalPatches.Contains(patch) && !pool_patches.Exists(p  => p.uuid == patch.Uuid));
+
+            Assert.False(seqToCheck.Value.Exists(seqpatch => !serverVersions.First().MinimalPatches.Contains(seqpatch)));
+            Assert.True(seqToCheck.Value.Exists(seqpatch => !pool_patches.Exists(pp => pp.uuid == seqpatch.Uuid)));
         }
 
 
