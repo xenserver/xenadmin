@@ -197,7 +197,7 @@ namespace XenAdmin.Controls
                     Session dupSess = connection.DuplicateSession(60 * 1000);
 
                     // Use a 1 minute timeout here (rather than the default 1 day)
-                    ntolMax = Pool.ha_compute_hypothetical_max_host_failures_to_tolerate(dupSess, config);
+                    ntolMax = Pool.GetMaximumTolerableHostFailures(dupSess, config);
 
                     if (exitNtolUpdateThread)
                         continue;
