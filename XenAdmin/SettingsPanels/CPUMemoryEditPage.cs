@@ -306,9 +306,15 @@ namespace XenAdmin.SettingsPanels
             if (!Program.RunInAutomatedTestMode && vm.power_state != vm_power_state.Halted)
             {
                 if (!HasMemoryChanged)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, Messages.VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE, Messages.VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE)).ShowDialog();
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, Messages.VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE, Messages.VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE)))
+                    {
+                        dlg.ShowDialog();
+                    }
                 else if (!MROrGreater)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, Messages.VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE, Messages.VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE)).ShowDialog();
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, Messages.VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE, Messages.VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE)))
+                    {
+                        dlg.ShowDialog();
+                    }
                 // If it is >= Midnight Ride, and memory has changed (which can only happen in the free version),
                 // we have already given a message in ValidToSave that the VM will be forcibly rebooted, so no
                 // further message is needed here.

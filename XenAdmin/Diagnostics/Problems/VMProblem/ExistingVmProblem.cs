@@ -67,10 +67,15 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
             Program.AssertOnEventThread();
 
-            if (new ThreeButtonDialog(
+            DialogResult dialogResult;
+            using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VM, VM.Name, VM.Connection.Name), Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
+                    ThreeButtonDialog.ButtonNo))
+            {
+                dialogResult = dlg.ShowDialog();
+            }
+            if (dialogResult == DialogResult.Yes)
             {
                 cancelled = false;
                 List<VM> vms = new List<VM> { VM };

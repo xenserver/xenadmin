@@ -277,9 +277,13 @@ namespace XenAdmin.Wizards.DRWizards
             else
             {
                 if (succeeded)
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Information, Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE,
-                                                      Messages.XENCENTER)).ShowDialog(this);
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Information,
+                            Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE,
+                            Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
             }
         }
 
@@ -290,8 +294,8 @@ namespace XenAdmin.Wizards.DRWizards
                 return false;
 
             FibreChannelProbeAction action = new FibreChannelProbeAction(master);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-            dialog.ShowDialog(this); //Will block until dialog closes, action completed
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dialog.ShowDialog(this); //Will block until dialog closes, action completed
 
             if (!action.Succeeded)
                 return false;
@@ -346,7 +350,8 @@ namespace XenAdmin.Wizards.DRWizards
 
             // Start probe
             SrProbeAction srProbeAction = new SrProbeAction(Connection, master, type, dconf, smconf);
-            new ActionProgressDialog(srProbeAction, ProgressBarStyle.Marquee).ShowDialog(this);
+            using (var dlg = new ActionProgressDialog(srProbeAction, ProgressBarStyle.Marquee))
+                dlg.ShowDialog(this);
 
             if (!srProbeAction.Succeeded)
                 return false;
@@ -411,9 +416,11 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 var newDevice = kvp.Value;
                 DrTaskCreateAction action = new DrTaskCreateAction(Connection, newDevice);
-                ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(this);
+                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                {
+                    dialog.ShowCancel = true;
+                    dialog.ShowDialog(this);
+                }
 
                 if(!cldl.IsStillConnected(Connection))
                     return;
@@ -477,8 +484,8 @@ namespace XenAdmin.Wizards.DRWizards
             if (!cldl.IsStillConnected(Connection))
                 return;
 
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dialog.ShowDialog(this);
 
             if (!cldl.IsStillConnected(Connection))
                 return;
@@ -503,8 +510,8 @@ namespace XenAdmin.Wizards.DRWizards
             try
             {
                 VdiLoadMetadataAction action = new VdiLoadMetadataAction(Connection, vdi);
-                ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-                dialog.ShowDialog(this); //Will block until dialog closes, action completed
+                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                    dialog.ShowDialog(this); //Will block until dialog closes, action completed
 
                 if (action.Succeeded && action.MetadataSession != null)
                 {

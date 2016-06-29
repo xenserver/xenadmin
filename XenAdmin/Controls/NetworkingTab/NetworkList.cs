@@ -478,11 +478,14 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 if (NetworksGridView.Rows.Count >= vm.MaxVIFsAllowed)
                 {
-                    new ThreeButtonDialog(
-                      new ThreeButtonDialog.Details(
-                          SystemIcons.Error,
-                          FriendlyErrorNames.VIFS_MAX_ALLOWED,
-                           FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)).ShowDialog(Program.MainWindow);
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(
+                            SystemIcons.Error,
+                            FriendlyErrorNames.VIFS_MAX_ALLOWED,
+                            FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
                     return;
                 }
 
@@ -574,17 +577,23 @@ namespace XenAdmin.Controls.NetworkingTab
                 else if (XenObject is VM)
                 {
                     // Deleting a VIF, not a Network.
-                    result = new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_VIF_DELETE, Messages.MESSAGEBOX_VIF_DELETE_TITLE),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(Program.MainWindow);
+                                ThreeButtonDialog.ButtonNo))
+                    {
+                        result = dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
                 else
                 {
-                    result = new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_NETWORK_DELETE, Messages.MESSAGEBOX_NETWORK_DELETE_TITLE),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(Program.MainWindow);
+                                ThreeButtonDialog.ButtonNo))
+                    {
+                        result = dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
 
                 if (result == DialogResult.Yes)

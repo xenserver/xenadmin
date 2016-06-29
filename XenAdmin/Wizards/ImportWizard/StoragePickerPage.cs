@@ -301,7 +301,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			});
 		}
 
-		private void m_srPicker_ItemSelectionNotNull(object sender, EventArgs e)
+		private void m_srPicker_ItemSelectionNotNull()
 		{
 			if (ImportInProgress())
 				return;
@@ -310,7 +310,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			IsDirty = true;
 		}
 
-		private void m_srPicker_ItemSelectionNull(object sender, EventArgs e)
+		private void m_srPicker_ItemSelectionNull()
 		{
 			if (ImportInProgress())
 				return;

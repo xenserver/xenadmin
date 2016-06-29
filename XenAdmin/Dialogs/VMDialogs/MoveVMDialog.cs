@@ -92,12 +92,12 @@ namespace XenAdmin.Dialogs.VMDialogs
             buttonMove.Enabled = srPicker1.SR != null;
         }
 
-        private void srPicker1_ItemSelectionNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNull()
         {
             EnableMoveButton();
         }
 
-        private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNotNull()
         {
             EnableMoveButton();
         }

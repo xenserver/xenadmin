@@ -119,16 +119,24 @@ namespace XenAdmin.Commands
         {
             if (vm.FindVMCDROM() == null)
             {
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             null,
                             Messages.NEW_DVD_DRIVE_REQUIRED,
                             Messages.XENCENTER),
                         ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo).ShowDialog(Parent) == DialogResult.Yes)
+                        ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog(Parent);
+                }
+                if (dialogResult == DialogResult.Yes)
                 {
                     CreateCdDriveAction createDriveAction = new CreateCdDriveAction(vm, true,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
-                    new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(Parent);
+                    using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
+                    {
+                        dlg.ShowDialog(Parent);
+                    }
 
                     if (createDriveAction.Succeeded)
                     {
@@ -156,8 +164,11 @@ namespace XenAdmin.Commands
         {
             Program.Invoke(Program.MainWindow, delegate
                         {
-                            new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Error, Messages.XS_TOOLS_SR_NOT_FOUND, Messages.XENCENTER)).ShowDialog(Program.MainWindow);
+                            using (var dlg = new ThreeButtonDialog(
+                                new ThreeButtonDialog.Details(SystemIcons.Error, Messages.XS_TOOLS_SR_NOT_FOUND, Messages.XENCENTER)))
+                            {
+                                dlg.ShowDialog(Program.MainWindow);
+                            }
                         });
         }
 
@@ -180,16 +191,24 @@ namespace XenAdmin.Commands
 
             if (newDvdDrivesRequired)
             {
-                if (new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_DVD_DRIVES_REQUIRED, Messages.XENCENTER),
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_DVD_DRIVES_REQUIRED, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog(Parent) == DialogResult.Yes)
+                    ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog(Parent);
+                }
+                if (dialogResult == DialogResult.Yes)
                 {
                     foreach (VM vm in vms)
                     {
                         if (CanExecute(vm) && vm.FindVMCDROM() == null)
                         {
                             CreateCdDriveAction createDriveAction = new CreateCdDriveAction(vm, true,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
-                            new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(Parent);
+                            using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
+                            {
+                                dlg.ShowDialog(Parent);
+                            }
                         }
                     }
                     ShowMustRebootBox();
@@ -255,11 +274,14 @@ namespace XenAdmin.Commands
         {
             if (!MainWindowCommandInterface.RunInAutomatedTestMode)
             {
-                new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(
-                           SystemIcons.Information,
-                           Messages.NEW_DVD_DRIVE_REBOOT_TOOLS,
-                           Messages.NEW_DVD_DRIVE_CREATED)).ShowDialog(Parent);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Information,
+                        Messages.NEW_DVD_DRIVE_REBOOT_TOOLS,
+                        Messages.NEW_DVD_DRIVE_CREATED)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
         }
 

@@ -84,8 +84,8 @@ namespace XenAdmin.Commands
 
         public static void ShowUpsellDialog(IWin32Window parent)
         {
-            UpsellDialog dlg = new UpsellDialog(VMGroup<T>.UpsellBlurb, VMGroup<T>.UpsellLearnMoreUrl); 
-            dlg.ShowDialog(parent);
+            using (var dlg = new UpsellDialog(VMGroup<T>.UpsellBlurb, VMGroup<T>.UpsellLearnMoreUrl))
+                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

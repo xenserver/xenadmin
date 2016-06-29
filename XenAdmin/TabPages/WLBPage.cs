@@ -209,9 +209,11 @@ namespace XenAdmin.TabPages
             }
 
             SendWlbConfigurationAction action = new SendWlbConfigurationAction(_pool, PoolConfiguration.ToDictionary(), kind);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
             Program.MainWindow.UpdateToolbars();
         }
 
@@ -550,10 +552,14 @@ namespace XenAdmin.TabPages
                         if (scheduledPerfMode != _wlbPoolConfiguration.PerformanceMode)
                         {
                             string blurb = string.Format(Messages.WLB_PROMPT_FOR_MODE_CHANGE_BLURB, getOptModeText(scheduledPerfMode), getOptModeText(_wlbPoolConfiguration.PerformanceMode));
-                            DialogResult drModeCheck = new ThreeButtonDialog(
+                            DialogResult drModeCheck;
+                            using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(null, blurb, Messages.WLB_PROMPT_FOR_MODE_CHANGE_CAPTION),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(this);
+                                ThreeButtonDialog.ButtonNo))
+                            {
+                                drModeCheck = dlg.ShowDialog(this);
+                            }
 
                             if (drModeCheck == DialogResult.Yes)
                             {
