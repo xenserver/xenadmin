@@ -73,7 +73,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case after_apply_guidance.restartPV:
                         foreach (VM vm in Helpers.VMsRunningOn(servers))
                         {
-                            if (vm.IsHVM)
+                            if (vm.IsHVM || !vm.is_a_real_vm)
                                 continue;
                             sbLog.AppendFormat("\t{0}\r\n", vm.Name);
                         }
@@ -81,7 +81,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case after_apply_guidance.restartHVM:
                         foreach (VM vm in Helpers.VMsRunningOn(servers))
                         {
-                            if (!vm.IsHVM)
+                            if (!vm.IsHVM || !vm.is_a_real_vm)
                                 continue;
                             sbLog.AppendFormat("\t{0}\r\n", vm.Name);
                         }
