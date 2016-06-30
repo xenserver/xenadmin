@@ -174,7 +174,7 @@ namespace XenAdmin.Commands
                 }
             }
 
-            new FolderAction(GetItemsNotAlreadyInTargetFolder(), targetFolder, FolderAction.Kind.Move).RunAsync();
+            new MoveToFolderAction(GetItemsNotAlreadyInTargetFolder(), targetFolder).RunAsync();
 
             // need to now wait until the operation has finished... then we can expand the node.
             ThreadPool.QueueUserWorkItem(delegate

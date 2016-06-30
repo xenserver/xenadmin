@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
                 return false;
             });
 
-            new FolderAction(folders, null, FolderAction.Kind.Delete).RunAsync();
+            new DeleteFolderAction(folders).RunAsync();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

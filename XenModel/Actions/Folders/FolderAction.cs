@@ -41,7 +41,7 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Actions
 {
-    public class FolderAction : AsyncAction
+    public abstract class FolderAction : AsyncAction
     {
         // CA-34379 Many folder operations do not work well with RBAC, because they operate across multiple connections.
         // Our strategy is roughly as follows:
@@ -73,178 +73,41 @@ namespace XenAdmin.Actions
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public enum Kind { New, Move, Delete, Rename }
-
-        private readonly List<IXenObject> objs = new List<IXenObject>();
-        private readonly Folder folder;
-        private readonly string path;
-        private readonly string[] paths;
-        private readonly Kind kind;
-
         private readonly Dictionary<IXenConnection, Session> Sessions = new Dictionary<IXenConnection, Session>();
 
-        // Constructor used for Move and Delete
-        public FolderAction(IXenObject obj, Folder folder, Kind kind)
-            : base(obj.Connection, GetTitle(obj, folder, kind))
+        protected FolderAction(IXenConnection connection, string title)
+            : base(connection, title)
         {
-            System.Diagnostics.Trace.Assert(kind == Kind.Move || kind == Kind.Delete);
-
-            this.objs.Add(obj);
-            this.folder = folder;
-            this.kind = kind;
-
-            if ( obj.GetType() != typeof(Folder) )
+            if (connection != null)
             {
-                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
-                                          Folders.FOLDER);
-                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
-                                          Folders.FOLDER);
-            }
-
-            ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", Folders.EMPTY_FOLDERS);
-            ApiMethodsToRoleCheck.Add("pool.add_to_other_config", Folders.EMPTY_FOLDERS);
-
-            AppliesTo.Add(obj.opaque_ref);
-            if (folder != null)
-                AppliesTo.Add(folder.opaque_ref);
-        }
-
-        // Constructor used for Move and Delete multiple objects, across multiple connections
-        public FolderAction(List<IXenObject> objs, Folder folder, Kind kind)
-            : base(null, GetTitle(folder, kind))
-        {
-            System.Diagnostics.Trace.Assert(kind == Kind.Move || kind == Kind.Delete);
-
-            this.objs.AddRange(objs);
-            this.folder = folder;
-            this.kind = kind;
-
-            if (folder != null)
-                AppliesTo.Add(folder.opaque_ref);
-        }
-
-        // Constructor used for New
-        public FolderAction(IXenConnection connection, Kind kind, params string[] paths)
-            : base(connection, GetTitleForNew(paths))
-        {
-            System.Diagnostics.Trace.Assert(kind == Kind.New);
-            this.kind = kind;
-            this.paths = paths;
-
-            ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", Folders.EMPTY_FOLDERS);
-            ApiMethodsToRoleCheck.Add("pool.add_to_other_config", Folders.EMPTY_FOLDERS);
-
-            foreach (string path in paths)
-                AppliesTo.Add(path);
-        }
-
-        // Constructor used for Rename
-        public FolderAction(Folder obj, String name, Kind kind)
-            : base(obj.Connection, String.Format(Messages.RENAMING_FOLDER, Helpers.GetName(obj), name))
-        {
-            System.Diagnostics.Trace.Assert(kind == Kind.Rename);
-
-            this.kind = kind;
-            this.objs.Add(obj);
-            this.path = Folders.AppendPath(obj.Path, name);
-            AppliesTo.Add(obj.opaque_ref);
-            AppliesTo.Add(path);
-        }
-
-        internal static string GetTitle(IXenObject ixmo, Folder folder, Kind kind)
-        {
-            switch (kind)
-            {
-                case Kind.Move:
-                    return String.Format(Messages.MOVE_OBJECT_TO_FOLDER, Helpers.GetName(ixmo), folder.Name);
-
-                case Kind.Delete:
-                    return String.Format(Messages.DELETING_FOLDER, Helpers.GetName(ixmo));
-
-                default:
-                    return String.Empty;
+                ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", Folders.EMPTY_FOLDERS);
+                ApiMethodsToRoleCheck.Add("pool.add_to_other_config", Folders.EMPTY_FOLDERS);
             }
         }
-
-        internal static string GetTitle(Folder folder, Kind kind)
-        {
-            switch (kind)
-            {
-                case Kind.Move:
-                    return string.Format(Messages.MOVE_OBJECTS_TO_FOLDER, folder.Name);
-
-                case Kind.Delete:
-                    return Messages.DELETING_FOLDERS;
-
-                default:
-                    return String.Empty;
-            }
-        }
-
-        internal static string GetTitleForNew(params string[] paths)
-        {
-            if (paths.Length == 1)
-                return String.Format(Messages.CREATE_NEW_FOLDER, paths[0]);
-            else
-                return String.Format(Messages.CREATE_NEW_FOLDERS, String.Join("; ", paths));
-        }
-
-        protected override void Run()
-        {
-            CanCancel = true;
-            switch (kind)
-            {
-                case Kind.Delete:
-                case Kind.Move:
-                    Description = folder == null ? Messages.DELETING_FOLDER : Messages.MOVING;
-                    
-                    DeleteOrMove(objs, folder, GetCancelling);
-                    
-                    Description = folder == null ? Messages.DELETED_FOLDER : Messages.MOVED;
-                    break;
-
-                case Kind.Rename:
-                    Description = Messages.RENAMING;
-
-                    if (objs.Count > 0) // objects should only contain one item
-                        Rename(objs[0], path, GetCancelling);
-
-                    Description = Messages.RENAMED;
-                    break;
-
-                case Kind.New:
-                    Description = paths.Length == 1 ? Messages.CREATING_NEW_FOLDER : Messages.CREATING_NEW_FOLDERS;
-
-                    if(!AddFoldersToEmptyList(Connection, GetCancelling, paths))
-                        throw new Exception(Messages.FOLDER_ALREADY_EXISTS);
-                    Description = paths.Length == 1 ? Messages.CREATED_NEW_FOLDER : Messages.CREATED_NEW_FOLDERS;
-                    break;
-            }
-        }
-
+        
         public override void RecomputeCanCancel()
         {
             // CanCancel is always true.
         }
 
-        private Dictionary<IXenConnection, List<string>> emptyFolders = new Dictionary<IXenConnection, List<string>>();
+        private readonly Dictionary<IXenConnection, List<string>> emptyFolders = new Dictionary<IXenConnection, List<string>>();
 
        /// <summary>
        /// Mark a folder as empty. The folder will be added to a collection of empty folders that will be used later to update the server
        /// </summary>
-        private void MarkEmptyFolder(IXenConnection connection, string folder)
+       protected void MarkEmptyFolder(IXenConnection connection, string folder)
         {
             if (!emptyFolders.ContainsKey(connection))
                 emptyFolders.Add(connection, new List<string>());
             emptyFolders[connection].Add(folder);
         }
 
-        private List<string> nonEmptyFolders = new List<string>();
+        private readonly List<string> nonEmptyFolders = new List<string>();
 
         /// <summary>
         /// Mark a folder as non-empty. The folder will be added to a collection of non-empty folders that will be used later to update the server
         /// </summary>
-        private void MarkNonEmptyFolder(string folder)
+        protected void MarkNonEmptyFolder(string folder)
         {
             nonEmptyFolders.Add(folder);
         }
@@ -252,7 +115,7 @@ namespace XenAdmin.Actions
         /// <summary>
         /// Update the EMPTY_FOLDERS property on all servers, using the emptyFolders and nonEmptyFolders collections
         /// </summary>
-        private void UpdateEmptyFolders(Func<bool> cancelling)
+        protected void UpdateEmptyFolders(Func<bool> cancelling)
         {
             foreach (var con in emptyFolders.Keys)
             {
@@ -261,10 +124,10 @@ namespace XenAdmin.Actions
             RemoveFoldersFromEmptyList(nonEmptyFolders.ToArray(), cancelling);
         }
 
-        internal void DeleteOrMove(List<IXenObject> objects, Folder folder, Func<bool> cancelling)
+        protected void DeleteOrMove(List<IXenObject> objects, Folder folder, Func<bool> cancelling)
         {
             IXenConnection connection = null;
-            if (objects.Count > 0 && objects[0] != null)
+            if (objects.Count > 0)
                 connection = objects[0].Connection;
 
             if (connection != null)
@@ -286,7 +149,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        internal void DeleteOrMove(IXenObject obj, Folder folder, Func<bool> cancelling)
+        protected void DeleteOrMove(IXenObject obj, Folder folder, Func<bool> cancelling)
         {
             // if, by moving candidate, we make its parent
             // empty, then we must add from's parent to the empty list
@@ -304,7 +167,7 @@ namespace XenAdmin.Actions
             MoveContents(obj, folder == null ? null : folder.opaque_ref, cancelling);
         }
 
-        internal void Rename(IXenObject obj, string path, Func<bool> cancelling)
+        protected void Rename(IXenObject obj, string path, Func<bool> cancelling)
         {
             // do the whole thing in a BackgroundMajorChange so the treeview doesn't get updated while the update
             // is only partially completed.
@@ -331,7 +194,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void MoveContents(IXenObject from, string to, Func<bool> cancelling)
+        protected void MoveContents(IXenObject from, string to, Func<bool> cancelling)
         {
             // CA-34379: Folder actions do not work with sudo. Make sure destructive operations are called last.
             if (cancelling())
@@ -371,7 +234,7 @@ namespace XenAdmin.Actions
         // from the server in between. Each thread does that in WaitForEmptyFoldersCacheChange(),
         // but that won't stop another thread getting the wrong list.
         //Returns true if anyfolder was add to the empty list
-        internal bool AddFoldersToEmptyList(IXenConnection connection, Func<bool> cancelling, params string[] paths)
+        protected bool AddFoldersToEmptyList(IXenConnection connection, Func<bool> cancelling, params string[] paths)
         {
             if (connection == null)
                 return false;
@@ -380,20 +243,20 @@ namespace XenAdmin.Actions
             if (pool == null)
                 return false;
 
-            List<string> emptyFolders = new List<string>(Folders.GetEmptyFolders(pool));
+            List<string> emptyFoldersOnThisConnection = new List<string>(Folders.GetEmptyFolders(pool));
             bool anyAdded = false;
             foreach (string path in paths)
             {
-                if (!emptyFolders.Contains(path))
+                if (!emptyFoldersOnThisConnection.Contains(path))
                 {
                     log.DebugFormat("Adding {0} to empty list on {1}", path, Helpers.GetName(pool));
-                    emptyFolders.Add(path);
+                    emptyFoldersOnThisConnection.Add(path);
                     anyAdded = true;
                 }
             }
             if (anyAdded)
             {
-                SetEmptyFolders(connection, emptyFolders, cancelling);
+                SetEmptyFolders(connection, emptyFoldersOnThisConnection, cancelling);
                 return true;
             }
             return false;
@@ -431,14 +294,14 @@ namespace XenAdmin.Actions
                 if (!connection.IsConnected)
                     continue;
 
-                List<string> emptyFolders = new List<string>(Folders.GetEmptyFolders(connection));
+                List<string> emptyFoldersOnThisConnection = new List<string>(Folders.GetEmptyFolders(connection));
                 
                 bool somethingChanged = false;
                 foreach(string path in paths)
                 {
-                    if (emptyFolders.Contains(path))
+                    if (emptyFoldersOnThisConnection.Contains(path))
                     {
-                        emptyFolders.Remove(path);
+                        emptyFoldersOnThisConnection.Remove(path);
                         somethingChanged = true;
                     }
                 }
@@ -447,7 +310,7 @@ namespace XenAdmin.Actions
                 {
                     try
                     {
-                        SetEmptyFolders(connection, emptyFolders, cancelling);
+                        SetEmptyFolders(connection, emptyFoldersOnThisConnection, cancelling);
                     }
                     // We ignore RBAC exceptions. They are caused by trying to remove a folder from
                     // the empty list on a read-only connection. Leaving an additional empty folder
@@ -493,6 +356,145 @@ namespace XenAdmin.Actions
                 cancelling);
             if (cancelling())
                 throw new CancelledException();
+        }
+    }
+
+    public class CreateFolderAction : FolderAction
+    {
+        private readonly string[] paths;
+
+        public CreateFolderAction(IXenConnection connection, params string[] paths)
+            : base(connection, GetTitle(paths))
+        {
+            this.paths = paths;
+
+            foreach (string path in paths)
+                AppliesTo.Add(path);
+        }
+
+        protected override void Run()
+        {
+            CanCancel = true;
+
+            Description = paths.Length == 1 ? Messages.CREATING_NEW_FOLDER : Messages.CREATING_NEW_FOLDERS;
+
+            if (!AddFoldersToEmptyList(Connection, GetCancelling, paths))
+                throw new Exception(Messages.FOLDER_ALREADY_EXISTS);
+
+            Description = paths.Length == 1 ? Messages.CREATED_NEW_FOLDER : Messages.CREATED_NEW_FOLDERS;
+        }
+
+        internal static string GetTitle(params string[] paths)
+        {
+            return paths.Length == 1
+                ? string.Format(Messages.CREATE_NEW_FOLDER, paths[0])
+                : string.Format(Messages.CREATE_NEW_FOLDERS, string.Join("; ", paths));
+        }
+    }
+
+    public class RenameFolderAction : FolderAction
+    {
+        private readonly string path;
+        protected readonly IXenObject obj;
+
+        public RenameFolderAction(Folder folder, String name)
+            : base(folder.Connection, string.Format(Messages.RENAMING_FOLDER, Helpers.GetName(folder), name))
+        {
+            obj = folder;
+            path = Folders.AppendPath(obj.Path, name);
+            AppliesTo.Add(obj.opaque_ref);
+            AppliesTo.Add(path);
+        }
+        protected override void Run()
+        {
+            CanCancel = true;
+
+            Description = Messages.RENAMING;
+
+            Rename(obj, path, GetCancelling);
+
+            Description = Messages.RENAMED;
+        }
+    }
+
+    public class MoveToFolderAction : FolderAction
+    {
+        private readonly List<IXenObject> objs = new List<IXenObject>();
+        private readonly Folder folder;
+
+        public MoveToFolderAction(IXenObject obj, Folder folder)
+            : base(obj.Connection, string.Format(Messages.MOVE_OBJECT_TO_FOLDER, Helpers.GetName(obj), folder.Name))
+        {
+            this.objs.Add(obj);
+            this.folder = folder;
+            if (obj.GetType() != typeof(Folder))
+            {
+                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
+                    Folders.FOLDER);
+                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
+                    Folders.FOLDER);
+            }
+
+            AppliesTo.Add(obj.opaque_ref);
+            AppliesTo.Add(folder.opaque_ref);
+        }
+
+
+        // Constructor used for moving multiple objects, across multiple connections
+        public MoveToFolderAction(List<IXenObject> objs, Folder folder)
+            : base(null, string.Format(Messages.MOVE_OBJECTS_TO_FOLDER, folder.Name))
+        {
+            this.objs.AddRange(objs);
+            this.folder = folder; 
+            if (this.folder != null)
+                AppliesTo.Add(this.folder.opaque_ref);
+        }
+
+        protected override void Run()
+        {
+            CanCancel = true;
+            Description = Messages.MOVING;
+
+            DeleteOrMove(objs, folder, GetCancelling);
+
+            Description = Messages.MOVED;
+        }
+    }
+
+    public class DeleteFolderAction : FolderAction
+    {
+        private readonly List<IXenObject> objs = new List<IXenObject>();
+
+        public DeleteFolderAction(IXenObject obj)
+            : base(obj.Connection, Messages.DELETING_FOLDER)
+        {
+            objs.Add(obj);
+            if (obj.GetType() != typeof(Folder))
+            {
+                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
+                    Folders.FOLDER);
+                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
+                    Folders.FOLDER);
+            }
+
+            AppliesTo.Add(obj.opaque_ref);
+        }
+
+        // Constructor used for deleting multiple objects, across multiple connections
+        public DeleteFolderAction(List<IXenObject> objs)
+            : base(null, Messages.DELETING_FOLDERS)
+        {
+            this.objs.AddRange(objs);
+        }
+
+        protected override void Run()
+        {
+            CanCancel = true;
+            Description = objs.Count == 1 ? Messages.DELETING_FOLDER : Messages.DELETING_FOLDERS;
+
+            DeleteOrMove(objs, null, GetCancelling);
+
+            Description = objs.Count == 1 ? Messages.DELETED_FOLDER : Messages.DELETED_FOLDERS;
         }
     }
 }

@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
                                     where xenObject != null
                                     select xenObject).ToList();
 
-            new FolderAction(objectsToBeRemoved, null, FolderAction.Kind.Delete).RunAsync();
+            new DeleteFolderAction(objectsToBeRemoved).RunAsync();
         }
 
         public override string MenuText
