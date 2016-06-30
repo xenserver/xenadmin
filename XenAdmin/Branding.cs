@@ -47,6 +47,7 @@ namespace XenAdmin
         public const string COMPANY_NAME_SHORT = "[Citrix]";
         public const string SEARCH = "[xensearch]";
         public const string UPDATE = "[xsupdate]";
+        public const string BACKUP = "[xbk]";
         public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
 
         public static string Search
