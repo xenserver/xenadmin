@@ -102,10 +102,10 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XBK extension -->
--							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
+-							<ProgId Id="XenCenter.[xbk]" Description="[XenServer] Backup File" Icon="XkbIcon">
 +                            <!-- Define XBK extension -->
-+							<ProgId Id="XenCenter.xbk" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
-                                 <Extension Id="xbk" ContentType="application/xbk">
++							<ProgId Id="XenCenter.[xbk]" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
+                                 <Extension Id="[xbk]" ContentType="application/[xbk]">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
 +                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                  </Extension>
