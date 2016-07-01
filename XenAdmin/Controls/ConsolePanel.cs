@@ -35,37 +35,26 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.ConsoleView;
 using XenAPI;
-using XenAdmin.Core;
 using System.Drawing;
 
 
 namespace XenAdmin.Controls
 {
-    public class ConsolePanel : UserControl
+    public partial class ConsolePanel : UserControl
     {
         private const int MAX_ACTIVE_VM_CONSOLES = 10;
 
-        private List<VM> activeVMConsoles;
-        private Dictionary<VM, VNCView> vncViews;
-        private Label errorLabel;
         private static string CouldNotConnect = Messages.VNC_COULD_NOT_CONNECT_CONSOLE;
         private static string CouldNotFindConsole = Messages.VNC_COULD_NOT_FIND_CONSOLES;
-        public VNCView activeVNCView = null;
-        private Panel RbacWarningPanel;
-        private TableLayoutPanel tableLayoutPanel3;
-        private PictureBox pictureBox2;
-        private Label lableRbacWarning;
+        public VNCView activeVNCView;
+        private List<VM> activeVMConsoles = new List<VM>();
+        private Dictionary<VM, VNCView> vncViews = new Dictionary<VM, VNCView>();
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ConsolePanel()
-            : base()
         {
             InitializeComponent();
-            this.vncViews = new Dictionary<VM, VNCView>();
-            this.activeVMConsoles = new List<VM>();
-            this.Dock = DockStyle.Fill;
-            pictureBox2.Image = SystemIcons.Warning.ToBitmap();
         }
 
         public void PauseAllViews()
@@ -350,63 +339,7 @@ namespace XenAdmin.Controls
             this.errorLabel.Visible = false;
             this.Controls.Remove(this.errorLabel);
         }
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsolePanel));
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.RbacWarningPanel = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lableRbacWarning = new System.Windows.Forms.Label();
-            this.RbacWarningPanel.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // errorLabel
-            // 
-            resources.ApplyResources(this.errorLabel, "errorLabel");
-            this.errorLabel.Name = "errorLabel";
-            // 
-            // RbacWarningPanel
-            // 
-            this.RbacWarningPanel.BackColor = System.Drawing.Color.Transparent;
-            this.RbacWarningPanel.Controls.Add(this.tableLayoutPanel3);
-            resources.ApplyResources(this.RbacWarningPanel, "RbacWarningPanel");
-            this.RbacWarningPanel.Name = "RbacWarningPanel";
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.pictureBox2, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lableRbacWarning, 1, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // pictureBox2
-            // 
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
-            // lableRbacWarning
-            // 
-            resources.ApplyResources(this.lableRbacWarning, "lableRbacWarning");
-            this.lableRbacWarning.Name = "lableRbacWarning";
-            // 
-            // ConsolePanel
-            // 
-            this.Controls.Add(this.RbacWarningPanel);
-            this.Name = "ConsolePanel";
-            resources.ApplyResources(this, "$this");
-            this.RbacWarningPanel.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.ResumeLayout(false);
-
-        }
-
+        
         public void SendCAD()
         {
             if (this.activeVNCView != null)
