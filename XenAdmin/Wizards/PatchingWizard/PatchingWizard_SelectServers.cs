@@ -96,6 +96,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 List<Host> selectedServers = SelectedServers;
 
                 dataGridViewHosts.Rows.Clear();
+
+                if (IsInAutomaticMode)
+                {
+                    //hides expand column
+                    dataGridViewHosts.Columns[0].Visible = false;
+                }
+                else
+                {
+                    dataGridViewHosts.Columns[0].Visible = true;
+                }
+
                 List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
                 xenConnections.Sort();
                 foreach (IXenConnection xenConnection in xenConnections)
@@ -105,9 +116,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (!xenConnection.IsConnected)
                             continue;
 
-                        var host = Helpers.GetMaster(xenConnection);
-                        int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, false));
-                        EnabledRow(host, SelectedUpdateType, index);
+                        var pool = Helpers.GetPoolOfOne(xenConnection);
+                        Host master = pool.Connection.Resolve(pool.master);
+                        int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(pool, true));
+                        EnabledRow(master, SelectedUpdateType, index);
                     }
                     else
                     {
@@ -467,6 +479,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else if ((int)row.Cells[POOL_CHECKBOX_COL].Value != value)
                         dataGridViewHosts.CheckBoxChange(row.Index, POOL_CHECKBOX_COL);
                 }
+                if (IsInAutomaticMode && row.Tag is Pool)
+                {
+                    dataGridViewHosts.CheckBoxChange(row.Index, POOL_CHECKBOX_COL);
+                }
             }
         }
 
@@ -618,6 +634,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private class PatchingHostsDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
+            public bool AutomaticMode = false;
+
             private class DataGridViewNameCell : DataGridViewExNameCell
             {
                 protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
@@ -709,9 +727,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             private DataGridViewCell _poolIconHostCheckCell;
             private DataGridViewTextBoxCell _versionCell;
 
-            public PatchingHostsDataGridViewRow(Pool pool)
+            public PatchingHostsDataGridViewRow(Pool pool, bool automaticMode = false)
                 : base(pool)
             {
+                AutomaticMode = automaticMode;
                 SetupCells();
             }
 

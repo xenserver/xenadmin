@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
 
-        public List<Host> SelectedMasters { private get; set; }
+        public List<Pool> SelectedPools { private get; set; }
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
@@ -136,21 +136,23 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             Dictionary<Host, List<PlanAction>> planActionsPerPool = new Dictionary<Host, List<PlanAction>>();
 
-            foreach (var master in SelectedMasters)
+            foreach (var pool in SelectedPools)
             {
+                var master = Helpers.GetMaster(pool.Connection);
+
                 Dictionary<Host, List<PlanAction>> planActionsByHost = new Dictionary<Host, List<PlanAction>>();
                 Dictionary<Host, List<PlanAction>> delayedActionsByHost = new Dictionary<Host, List<PlanAction>>();
                 planActionsPerPool.Add(master, new List<PlanAction>());
 
-                foreach (var host in master.Connection.Cache.Hosts)
+                foreach (var host in pool.Connection.Cache.Hosts)
                 {
                     planActionsByHost.Add(host, new List<PlanAction>());
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
-                var hosts = master.Connection.Cache.Hosts;
+                var hosts = pool.Connection.Cache.Hosts;
 
-                var us = Updates.GetUpgradeSequence(master.Connection);
+                var us = Updates.GetUpgradeSequence(pool.Connection);
 
                 foreach (var patch in us.UniquePatches)
                 {
@@ -288,6 +290,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             textBoxLog.Text = sb.ToString();
+
+            textBoxLog.SelectionStart = textBoxLog.Text.Length;
+            textBoxLog.ScrollToCaret();
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
