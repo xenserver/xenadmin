@@ -185,8 +185,6 @@ namespace XenAdmin.ConsoleView
             this.vncScreen.Parent = this.contentPanel;
             this.vncScreen.Dock = DockStyle.Fill;
 
-            this.Dock = DockStyle.Fill;
-
             string rdpLabel = GuessNativeConsoleLabel(source);
             this.toggleConsoleButton.Text = rdpLabel;
 

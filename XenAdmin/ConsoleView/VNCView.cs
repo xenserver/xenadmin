@@ -78,10 +78,9 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
 
             this.source = source;
-            this.vncTabView = new VNCTabView(this, source, elevatedUsername, elevatedPassword);
+            this.vncTabView = new VNCTabView(this, source, elevatedUsername, elevatedPassword) {Dock = DockStyle.Fill};
 
             InitializeComponent();
-            this.Dock = DockStyle.Fill;
             this.Controls.Add(this.vncTabView);
         }
 

@@ -146,7 +146,7 @@ namespace XenAdmin.Controls
             }
             else
             {
-                activeVNCView = new VNCView(source, null, null);
+                activeVNCView = new VNCView(source, null, null) { Dock = DockStyle.Fill };
                 vncViews[source] = activeVNCView;
             }
 
@@ -252,7 +252,7 @@ namespace XenAdmin.Controls
                     // use elevated credentials, if provided, to create a vncView (CA-91132)
                     useElevatedCredentials = !String.IsNullOrEmpty(elevatedUsername) && !String.IsNullOrEmpty(elevatedPassword);
                     if (useElevatedCredentials)
-                        view = new VNCView(vm, elevatedUsername, elevatedPassword);
+                        view = new VNCView(vm, elevatedUsername, elevatedPassword) { Dock = DockStyle.Fill };
                     else
                     {
                         setCurrentSource(vm);
