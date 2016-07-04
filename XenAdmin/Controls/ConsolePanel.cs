@@ -264,18 +264,6 @@ namespace XenAdmin.Controls
             closeVNCForSource(source);
         }
 
-        public bool isVNCPausedForSource(VM source)
-        {
-            Program.AssertOnEventThread();
-            VNCView vncView = null;
-            if (vncViews.ContainsKey(source))
-            {
-                vncView = vncViews[source];
-                return vncView.isPaused;
-            }
-            return false;
-        }
-
         private void SetErrorMessage(string message)
         {
             errorLabel.Text = message;

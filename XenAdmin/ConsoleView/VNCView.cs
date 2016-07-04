@@ -42,7 +42,7 @@ namespace XenAdmin.ConsoleView
     public partial class VNCView : UserControl
     {
         private readonly VM source;
-        public readonly VNCTabView vncTabView;
+        private readonly VNCTabView vncTabView;
         public Form undockedForm = null;
 
         public bool isDocked
@@ -50,14 +50,6 @@ namespace XenAdmin.ConsoleView
             get
             {
                 return this.undockedForm == null || !this.undockedForm.Visible;
-            }
-        }
-
-        public bool isPaused
-        {
-            get
-            {
-                return vncTabView.isPaused;
             }
         }
 
@@ -127,7 +119,7 @@ namespace XenAdmin.ConsoleView
                 this.Controls.Remove(vncTabView);
                 undockedForm.Controls.Add(vncTabView);
 
-                oldScaledSetting = vncTabView.scaleCheckBox.Checked;
+                oldScaledSetting = vncTabView.IsScaled;
 
                 vncTabView.showHeaderBar(!source.IsControlDomainZero, !source.is_control_domain);
 
@@ -143,15 +135,13 @@ namespace XenAdmin.ConsoleView
                 }
 
                 undockedForm.HelpButton = true;
-                //undockedForm.MinimizeBox = false;
-                //undockedForm.MaximizeBox = false;
                 undockedForm.HelpButtonClicked += undockedForm_HelpButtonClicked;
                 undockedForm.HelpRequested += undockedForm_HelpRequested;
 
                 undockedForm.Show();
 
                 if(Properties.Settings.Default.PreserveScaleWhenUndocked)
-                    vncTabView.scaleCheckBox.Checked = oldScaledSetting;
+                    vncTabView.IsScaled = oldScaledSetting;
 
                 this.reattachConsoleButton.Show();
                 this.findConsoleButton.Show();
@@ -163,7 +153,7 @@ namespace XenAdmin.ConsoleView
                 this.oldUndockedSize = undockedForm.Size;
                 
                 if (!Properties.Settings.Default.PreserveScaleWhenUndocked)
-                    vncTabView.scaleCheckBox.Checked = oldScaledSetting;
+                    vncTabView.IsScaled = oldScaledSetting;
 
                 this.reattachConsoleButton.Hide();
                 this.findConsoleButton.Hide();

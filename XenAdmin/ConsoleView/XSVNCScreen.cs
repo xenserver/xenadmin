@@ -225,7 +225,7 @@ namespace XenAdmin.ConsoleView
             return true;
         }
 
-        public bool wasPaused = true;
+        private bool wasPaused = true;
 
         public void Pause()
         {

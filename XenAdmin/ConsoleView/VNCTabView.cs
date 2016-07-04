@@ -43,7 +43,7 @@ using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
+
 
 namespace XenAdmin.ConsoleView
 {
@@ -96,7 +96,6 @@ namespace XenAdmin.ConsoleView
 
             HostLabel.Font = Program.HeaderGradientFont;
             HostLabel.ForeColor = Program.HeaderGradientForeColor;
-            multipleDvdIsoList1.SetTextColor(Program.HeaderGradientForeColor);
 
 #pragma warning disable 0219
             // Force the handle to be created, because resize events
@@ -206,6 +205,12 @@ namespace XenAdmin.ConsoleView
             //This change is only for Cream, because RDP port scan was removed in Cream.
             if ( Helpers.CreamOrGreater(source.Connection) && Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled )
                 vncScreen.AutoSwitchRDPLater = true;
+        }
+
+        public bool IsScaled
+        {
+            get { return scaleCheckBox.Checked; }
+            set { scaleCheckBox.Checked = value; }
         }
 
         //CA-75479 - add to aid debugging
@@ -599,11 +604,6 @@ namespace XenAdmin.ConsoleView
             multipleDvdIsoList1.VM = source;
         }
 
-        private void cdLabel_Click(object sender, EventArgs e)
-        {
-            new InstallToolsCommand(Program.MainWindow, source, this).Execute();
-        }
-
         private void updatePowerState()
         {
             if (source.IsControlDomainZero)
@@ -762,17 +762,6 @@ namespace XenAdmin.ConsoleView
                         new ResumeVMCommand(Program.MainWindow, source).Execute();
                     }
                     break;
-            }
-        }
-
-        public bool isPaused
-        {
-            get
-            {
-                if (vncScreen != null && !isFullscreen)
-                    return vncScreen.wasPaused;
-                else
-                    return false;
             }
         }
 

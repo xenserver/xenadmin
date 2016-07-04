@@ -51,6 +51,8 @@ namespace XenAdmin.Controls
         public MultipleDvdIsoList()
         {
             InitializeComponent();
+            labelSingleDvd.ForeColor = Program.HeaderGradientForeColor;
+            newCDLabel.ForeColor = Program.HeaderGradientForeColor;
         }
 
         private VM vm = null;
@@ -233,12 +235,6 @@ namespace XenAdmin.Controls
                 CreateCdDriveAction createDriveAction = new CreateCdDriveAction(VM, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
                 new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(this);
             }
-        }
-
-        public void SetTextColor(Color c)
-        {
-            labelSingleDvd.ForeColor = c;
-            newCDLabel.ForeColor = c;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
