@@ -1038,18 +1038,18 @@ namespace XenAPI
         /// <summary>
         /// Will return null if cannot find connection or any control domain in list of vms
         /// </summary>
-        public VM ControlDomain
+        public VM ControlDomainZero
         {
             get
             {
                 if (Connection == null)
                     return null;
-                foreach (VM vm in Connection.ResolveAll<VM>(resident_VMs))
-                {
-                    if (vm.is_control_domain)
-                        return vm;
-                }
-                return null;
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return Connection.Resolve(control_domain);
+
+                var vms = Connection.ResolveAll(resident_VMs);
+                return vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
             }
         }
 
