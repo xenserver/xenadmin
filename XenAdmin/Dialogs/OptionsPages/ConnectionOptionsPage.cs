@@ -51,8 +51,8 @@ namespace XenAdmin.Dialogs.OptionsPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private OptionsDialog optionsDialog;
 
-        // used for preventing the event handlers (mainly the SelectUseThisProxyServer function)  from being called when loading the settings into the text/check boxes
-        private bool built = false;
+        // used for preventing the event handlers from doing anything when changing controls through code
+        private bool freezeEventHandling = true;
 
         public ConnectionOptionsPage()
         {
@@ -88,17 +88,30 @@ namespace XenAdmin.Dialogs.OptionsPages
             ProxyAddressTextBox.Text = Properties.Settings.Default.ProxyAddress;
             ProxyPortTextBox.Text = Properties.Settings.Default.ProxyPort.ToString();
             BypassForServersCheckbox.Checked = Properties.Settings.Default.BypassProxyForServers;
-            AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
 
-            // checks for empty default username/password which starts out unencrypted
-            string protectedUsername = Properties.Settings.Default.ProxyUsername;
-            ProxyUsernameTextBox.Text = string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
-            string protectedPassword = Properties.Settings.Default.ProxyPassword;
-            ProxyPasswordTextBox.Text = string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
+            if (Registry.ProxyAuthenticationEnabled)
+            {
+                AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
 
+                // checks for empty default username/password which starts out unencrypted
+                string protectedUsername = Properties.Settings.Default.ProxyUsername;
+                ProxyUsernameTextBox.Text = string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
+                string protectedPassword = Properties.Settings.Default.ProxyPassword;
+                ProxyPasswordTextBox.Text = string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
+            }
+            else
+            {
+                // hide controls
+                AuthenticationCheckBox.Visible = false;
+                ProxyUsernameLabel.Visible = false;
+                ProxyUsernameTextBox.Visible = false;
+                ProxyPasswordLabel.Visible = false;
+                ProxyPasswordTextBox.Visible = false;
+            }
+            
             ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
 
-            built = true;
+            freezeEventHandling = false;
         }
 
         private void UseProxyRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -108,56 +121,74 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void AuthenticationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!AuthenticationCheckBox.Checked)
-            {
-                ProxyUsernameTextBox.Clear();
-                ProxyPasswordTextBox.Clear();
-                AuthenticationCheckBox.Checked = false; // have to redo this as the 2 Clears above cause the checkbox to recheck
-            }
-
-            SelectUseThisProxyServer();
-
-            enableOK();
+            CallWithFreezeAwareness(AuthenticationCheckBoxChanged);
         }
 
         private void ProxyAddressTextBox_TextChanged(object sender, EventArgs e)
         {
-            SelectUseThisProxyServer();
-            enableOK();
+            CallWithFreezeAwareness(SelectUseThisProxyServer);
         }
 
         private void ProxyPortTextBox_TextChanged(object sender, EventArgs e)
         {
-            SelectUseThisProxyServer();
-            enableOK();
+            CallWithFreezeAwareness(SelectUseThisProxyServer);
         }
 
         private void ProxyUsernameTextBox_TextChanged(object sender, EventArgs e)
         {
-            SelectUseThisProxyServer();
-            if (!AuthenticationCheckBox.Checked)
-                AuthenticationCheckBox.Checked = true;
-            enableOK();
+            CallWithFreezeAwareness(SelectProvideCredentials);
         }
 
         private void ProxyPasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            SelectUseThisProxyServer();
-            if (!AuthenticationCheckBox.Checked)
-                AuthenticationCheckBox.Checked = true;
-            enableOK();
+            CallWithFreezeAwareness(SelectProvideCredentials);
         }
 
         private void BypassForServersCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            SelectUseThisProxyServer();
-            enableOK();
+            CallWithFreezeAwareness(SelectUseThisProxyServer);
         }
 
         private void SelectUseThisProxyServer()
         {
-            if (!UseProxyRadioButton.Checked && built)
-                UseProxyRadioButton.Checked = true;
+            UseProxyRadioButton.Checked = true;
+        }
+
+        private void SelectProvideCredentials()
+        {
+            SelectUseThisProxyServer();
+            AuthenticationCheckBox.Checked = true;
+        }
+
+        private void AuthenticationCheckBoxChanged()
+        {
+            SelectUseThisProxyServer();
+            if (!AuthenticationCheckBox.Checked)
+            {
+                ProxyUsernameTextBox.Clear();
+                ProxyPasswordTextBox.Clear();
+            }
+        }
+
+        private void CallWithFreezeAwareness(Action func)
+        {
+            if (freezeEventHandling)
+                return;
+            freezeEventHandling = true;
+
+            try
+            {
+                func();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                freezeEventHandling = false;
+                enableOK();
+            }
         }
 
         private void enableOK()
@@ -223,8 +254,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (ProxyAddressTextBox.Text != Properties.Settings.Default.ProxyAddress && !string.IsNullOrEmpty(ProxyAddressTextBox.Text))
                 Properties.Settings.Default.ProxyAddress = ProxyAddressTextBox.Text;
 
-            Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
-            Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
+            if (Registry.ProxyAuthenticationEnabled)
+            {
+                Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
+                Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
+                Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
+            }
 
             try
             {
@@ -239,9 +274,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if (BypassForServersCheckbox.Checked != Properties.Settings.Default.BypassProxyForServers)
                 Properties.Settings.Default.BypassProxyForServers = BypassForServersCheckbox.Checked;
-
-            if (AuthenticationCheckBox.Checked != Properties.Settings.Default.ProvideProxyAuthentication)
-                Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
 
             // timeout settings
             int timeout = (int)ConnectionTimeoutNud.Value;

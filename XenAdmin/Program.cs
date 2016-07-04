@@ -985,6 +985,11 @@ namespace XenAdmin
 
         public static void ReconfigureConnectionSettings()
         {
+            if (!Registry.ProxyAuthenticationEnabled)
+            {
+                Properties.Settings.Default.ProvideProxyAuthentication = false;
+                Properties.Settings.Default.Save();
+            }
             XenAPI.Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
         }
 

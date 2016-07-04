@@ -80,6 +80,14 @@ namespace XenAdmin.Core
             }
         }
 
+        internal static bool ProxyAuthenticationEnabled
+        {
+            get
+            {
+                return ReadBool(PROXY_AUTHENTICATION_ENABLED, false);
+            }
+        }
+
         public static SSLCertificateTypes AlwaysShowSSLCertificates
         {
             get
@@ -402,6 +410,7 @@ namespace XenAdmin.Core
         private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
+        private const string PROXY_AUTHENTICATION_ENABLED = "ProxyAuthenticationEnabled";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }
