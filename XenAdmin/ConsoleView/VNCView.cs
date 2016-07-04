@@ -129,7 +129,7 @@ namespace XenAdmin.ConsoleView
 
                 oldScaledSetting = vncTabView.scaleCheckBox.Checked;
 
-                vncTabView.showHeaderBar(!source.is_control_domain, true);
+                vncTabView.showHeaderBar(!source.IsControlDomainZero, !source.is_control_domain);
 
                 undockedForm.ClientSize = vncTabView.GrowToFit();
 
@@ -188,7 +188,7 @@ namespace XenAdmin.ConsoleView
 
         private string UndockedWindowTitle(VM source)
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve(source.resident_on);
                 return host == null ? source.Name : string.Format(Messages.CONSOLE_HOST, host.Name);

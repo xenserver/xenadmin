@@ -44,8 +44,6 @@ namespace XenAdmin.Controls
     {
         private const int MAX_ACTIVE_VM_CONSOLES = 10;
 
-        private static string CouldNotConnect = Messages.VNC_COULD_NOT_CONNECT_CONSOLE;
-        private static string CouldNotFindConsole = Messages.VNC_COULD_NOT_FIND_CONSOLES;
         public VNCView activeVNCView;
         private Dictionary<VM, VNCView> vncViews = new Dictionary<VM, VNCView>();
 
@@ -159,82 +157,41 @@ namespace XenAdmin.Controls
         {
             if (source == null)
             {
-                log.Error("No local copy of host information when connecting to host VNC console...");
-                SetErrorMessage(CouldNotConnect);
+                log.Error("No local copy of host information when connecting to host VNC console.");
+                SetErrorMessage(Messages.VNC_COULD_NOT_CONNECT_CONSOLE);
                 return;
             }
 
-            if (source.resident_VMs == null)
+            VM dom0 = source.ControlDomainZero;
+            if (dom0 == null)
             {
                 log.Error("No dom0 on host when connecting to host VNC console.");
-                SetErrorMessage(CouldNotConnect);
-                return;
-            }
-
-            List<XenRef<VM>> controlVMs =
-                source.resident_VMs.FindAll((Predicate<XenRef<VM>>)delegate(XenRef<VM> vmRef)
-            {
-                VM vm = source.Connection.Resolve<VM>(vmRef);
-
-                if (vm == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return vm.is_control_domain;
-                }
-            });
-
-            if (controlVMs.Count > 0)
-            {
-                VM vm = source.Connection.Resolve<VM>(controlVMs[0]);
-                if (vm == null)
-                {
-                    SetErrorMessage(CouldNotFindConsole);
-                }
-                else
-                {
-                    this.setCurrentSource(vm);
-                }
+                SetErrorMessage(Messages.VNC_COULD_NOT_FIND_CONSOLES);
             }
             else
-            {
-                SetErrorMessage(CouldNotFindConsole);
-            }
+                setCurrentSource(dom0);
         }
 
-        public static bool RbacDenied(VM source, out List<Role> AllowedRoles)
+        public static bool RbacDenied(VM source, out List<Role> allowedRoles)
         {
 
             if (source == null || source.Connection == null)
             {
-                AllowedRoles = null;
+                allowedRoles = null;
                 return false;
             }
-            else
+            
+            var session = source.Connection.Session;
+            if (session != null && session.IsLocalSuperuser)
             {
-                var session = source.Connection.Session;
-                if (session != null && session.IsLocalSuperuser)
-                {
-                    AllowedRoles = null;
-                    return false;
-                }
-            }
-
-            List<Role> allowedRoles = null;
-            if (source.is_control_domain)
-                allowedRoles = Role.ValidRoleList("http/connect_console/host_console", source.Connection);
-            else
-                allowedRoles = Role.ValidRoleList("http/connect_console", source.Connection);
-
-            if (source.Connection.Session.Roles.Find(delegate(Role r) { return allowedRoles.Contains(r); }) != null)
-            {
-                AllowedRoles = allowedRoles;
+                allowedRoles = null;
                 return false;
             }
-            AllowedRoles = allowedRoles;
-            return true;
+
+            string roleList = source.IsControlDomainZero ? "http/connect_console/host_console" : "http/connect_console";
+            List<Role> validRoles = Role.ValidRoleList(roleList, source.Connection);
+            allowedRoles = validRoles;
+            return source.Connection.Session.Roles.Find(r => validRoles.Contains(r)) == null;
         }
 
         internal Image Snapshot(VM vm, string elevatedUsername, string elevatedPassword)

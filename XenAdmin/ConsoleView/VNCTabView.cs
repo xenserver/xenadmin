@@ -116,7 +116,7 @@ namespace XenAdmin.ConsoleView
             VM_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_CollectionChanged);
             source.Connection.Cache.RegisterCollectionChanged<VM>(VM_CollectionChangedWithInvoke);
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve(source.resident_on);
                 if (host != null)
@@ -155,7 +155,7 @@ namespace XenAdmin.ConsoleView
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired();
 
-            if (source.is_control_domain || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
+            if (source.IsControlDomainZero || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -241,7 +241,7 @@ namespace XenAdmin.ConsoleView
 
         private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
                 return;
 
             Host host = e.Element as Host;
@@ -277,7 +277,7 @@ namespace XenAdmin.ConsoleView
             if (this.guestMetrics != null)
                 this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host != null)
@@ -516,7 +516,7 @@ namespace XenAdmin.ConsoleView
                 UpdateOpenSSHConsoleButtonState();
             }
 
-            if (source.is_control_domain && e.PropertyName == "name_label")
+            if (source.IsControlDomainZero && e.PropertyName == "name_label")
             {
                 HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
@@ -578,7 +578,7 @@ namespace XenAdmin.ConsoleView
 
         private void Server_EnabledPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "enabled" || source.is_control_domain)
+            if (e.PropertyName != "enabled" || source.IsControlDomainZero)
                 return;
 
             Host host = sender as Host;
@@ -606,7 +606,7 @@ namespace XenAdmin.ConsoleView
 
         private void updatePowerState()
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host == null)
@@ -672,7 +672,7 @@ namespace XenAdmin.ConsoleView
         private void hideTopBarContents()
         {
             VMPowerOff();
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 log.DebugFormat("'{0}' console: Hide top bar contents, server is unavailable", source.Name);
                 DisablePowerStateLabel(Messages.CONSOLE_HOST_DEAD);
@@ -1409,7 +1409,7 @@ namespace XenAdmin.ConsoleView
 
             ContextMenuItemCollection contextMenuItems = new ContextMenuItemCollection();
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 // We're looking at the host console
                 if (host.Connection.IsConnected)
@@ -1569,7 +1569,7 @@ namespace XenAdmin.ConsoleView
                 if (source.IsWindows)
                     return false;
 
-                if (source.is_control_domain)
+                if (source.IsControlDomainZero)
                 {
                     Host host = source.Connection.Resolve<Host>(source.resident_on);
                     if (host == null)

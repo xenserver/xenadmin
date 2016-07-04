@@ -726,10 +726,9 @@ namespace XenAdmin.ConsoleView
                 {
                     parentVNCTabView.DisableToggleVNCButton();
                 }
-            
 
                 //Start the polling again
-                if (Source != null && !Source.is_control_domain)
+                if (Source != null && !Source.IsControlDomainZero)
                 {
                     if (!Source.IsHVM)
                     {
@@ -740,7 +739,7 @@ namespace XenAdmin.ConsoleView
                         connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                     }
                 }
-                }
+            }
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)

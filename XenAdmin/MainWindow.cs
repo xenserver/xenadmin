@@ -769,9 +769,7 @@ namespace XenAdmin
                     }
 
                     foreach (Host host in connection.Cache.Hosts)
-                        foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
-                            if (vm.is_control_domain)
-                                this.ConsolePanel.closeVNCForSource(vm);
+                        ConsolePanel.closeVNCForSource(host.ControlDomainZero);
 
                     connection.EndConnect();
 
