@@ -96,6 +96,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 List<Host> selectedServers = SelectedServers;
 
                 dataGridViewHosts.Rows.Clear();
+
+                if (IsInAutomaticMode)
+                {
+                    //hides expand column
+                    dataGridViewHosts.Columns[0].Visible = false;
+                }
+                else
+                {
+                    dataGridViewHosts.Columns[0].Visible = true;
+                }
+
                 List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
                 xenConnections.Sort();
                 foreach (IXenConnection xenConnection in xenConnections)
@@ -105,9 +116,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (!xenConnection.IsConnected)
                             continue;
 
-                        var host = Helpers.GetMaster(xenConnection);
-                        int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, false));
-                        EnabledRow(host, SelectedUpdateType, index);
+                        var pool = Helpers.GetPoolOfOne(xenConnection);
+                        Host master = pool.Connection.Resolve(pool.master);
+
+                        int index = -1;
+                        if (Helpers.GetPool(xenConnection) != null) //pools
+                        {
+                            index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(pool));
+                        }
+                        else //standalone hosts
+                        {
+                            index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(master, false));
+                        }
+
+                        EnabledRow(master, SelectedUpdateType, index);
                     }
                     else
                     {
@@ -466,6 +488,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         dataGridViewHosts.CheckBoxChange(row.Index, POOL_ICON_HOST_CHECKBOX_COL);
                     else if ((int)row.Cells[POOL_CHECKBOX_COL].Value != value)
                         dataGridViewHosts.CheckBoxChange(row.Index, POOL_CHECKBOX_COL);
+                }
+                if (IsInAutomaticMode && row.Tag is Pool)
+                {
+                    dataGridViewHosts.CheckBoxChange(row.Index, POOL_CHECKBOX_COL);
                 }
             }
         }
