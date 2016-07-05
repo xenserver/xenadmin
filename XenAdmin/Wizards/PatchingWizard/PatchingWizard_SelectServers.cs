@@ -118,7 +118,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         var pool = Helpers.GetPoolOfOne(xenConnection);
                         Host master = pool.Connection.Resolve(pool.master);
-                        int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(pool, true));
+
+                        int index = -1;
+                        if (Helpers.GetPool(xenConnection) != null) //pools
+                        {
+                            index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(pool, true));
+                        }
+                        else //standalone hosts
+                        {
+                            index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(master, false));
+                        }
+
                         EnabledRow(master, SelectedUpdateType, index);
                     }
                     else
