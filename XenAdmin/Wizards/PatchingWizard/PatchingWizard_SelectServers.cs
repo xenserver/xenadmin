@@ -122,7 +122,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         int index = -1;
                         if (Helpers.GetPool(xenConnection) != null) //pools
                         {
-                            index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(pool, true));
+                            index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(pool));
                         }
                         else //standalone hosts
                         {
@@ -644,8 +644,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private class PatchingHostsDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
-            public bool AutomaticMode = false;
-
             private class DataGridViewNameCell : DataGridViewExNameCell
             {
                 protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
@@ -737,10 +735,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             private DataGridViewCell _poolIconHostCheckCell;
             private DataGridViewTextBoxCell _versionCell;
 
-            public PatchingHostsDataGridViewRow(Pool pool, bool automaticMode = false)
+            public PatchingHostsDataGridViewRow(Pool pool)
                 : base(pool)
             {
-                AutomaticMode = automaticMode;
                 SetupCells();
             }
 
