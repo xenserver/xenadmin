@@ -153,26 +153,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var patch in us.UniquePatches)
                 {
                     var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
+                    hostsToApply.Sort();
 
                     planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
                     planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
                     planActions.Add(new PatchPrechecksOnMultipleHostsPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
-                    if (hostsToApply.Contains(master))
-                    {
-                        planActions.Add(new ApplyXenServerPatchPlanAction(master, patch, patchMappings));
-                        planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[master], master, patch));
-                        UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[master], master, patch);
-                    }
-
                     foreach (var host in hostsToApply)
                     {
-                        if (host != master)
-                        {
-                            planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-                            planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
-                            UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
-                        }
+                        planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+                        planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
+                        UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
                     }
 
                     //clean up master at the end:
