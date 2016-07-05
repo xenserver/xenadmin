@@ -52,7 +52,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         private OptionsDialog optionsDialog;
 
         // used for preventing the event handlers from doing anything when changing controls through code
-        private bool freezeEventHandling = true;
+        private bool eventsDisabled = true;
 
         public ConnectionOptionsPage()
         {
@@ -111,42 +111,84 @@ namespace XenAdmin.Dialogs.OptionsPages
             
             ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
 
-            freezeEventHandling = false;
+            eventsDisabled = false;
         }
 
         private void UseProxyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            if (eventsDisabled)
+                return;
+
             enableOK();
         }
 
         private void AuthenticationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            CallWithFreezeAwareness(AuthenticationCheckBoxChanged);
+            if (eventsDisabled)
+                return;
+
+            eventsDisabled = true;
+
+            if (!AuthenticationCheckBox.Checked)
+            {
+                ProxyUsernameTextBox.Clear();
+                ProxyPasswordTextBox.Clear();
+            }
+            SelectUseThisProxyServer();
+
+            eventsDisabled = false;
+
+            enableOK();
         }
 
         private void ProxyAddressTextBox_TextChanged(object sender, EventArgs e)
         {
-            CallWithFreezeAwareness(SelectUseThisProxyServer);
+            if (eventsDisabled)
+                return;
+
+            SelectUseThisProxyServer();
+
+            enableOK();
         }
 
         private void ProxyPortTextBox_TextChanged(object sender, EventArgs e)
         {
-            CallWithFreezeAwareness(SelectUseThisProxyServer);
+            if (eventsDisabled)
+                return;
+
+            SelectUseThisProxyServer();
+
+            enableOK();
         }
 
         private void ProxyUsernameTextBox_TextChanged(object sender, EventArgs e)
         {
-            CallWithFreezeAwareness(SelectProvideCredentials);
+            if (eventsDisabled)
+                return;
+
+            SelectProvideCredentials();
+
+            enableOK();
         }
 
         private void ProxyPasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            CallWithFreezeAwareness(SelectProvideCredentials);
+            if (eventsDisabled)
+                return;
+
+            SelectProvideCredentials();
+
+            enableOK();
         }
 
         private void BypassForServersCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            CallWithFreezeAwareness(SelectUseThisProxyServer);
+            if (eventsDisabled)
+                return;
+
+            SelectUseThisProxyServer();
+
+            enableOK();
         }
 
         private void SelectUseThisProxyServer()
@@ -156,39 +198,8 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void SelectProvideCredentials()
         {
-            SelectUseThisProxyServer();
             AuthenticationCheckBox.Checked = true;
-        }
-
-        private void AuthenticationCheckBoxChanged()
-        {
-            SelectUseThisProxyServer();
-            if (!AuthenticationCheckBox.Checked)
-            {
-                ProxyUsernameTextBox.Clear();
-                ProxyPasswordTextBox.Clear();
-            }
-        }
-
-        private void CallWithFreezeAwareness(Action func)
-        {
-            if (freezeEventHandling)
-                return;
-            freezeEventHandling = true;
-
-            try
-            {
-                func();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                freezeEventHandling = false;
-                enableOK();
-            }
+            UseProxyRadioButton.Checked = true;
         }
 
         private void enableOK()
