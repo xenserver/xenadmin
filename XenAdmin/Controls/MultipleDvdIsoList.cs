@@ -32,8 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -113,7 +111,7 @@ namespace XenAdmin.Controls
             }
 
             comboBoxDrive.Items.Clear();
-            if (VM != null)
+            if (VM != null && !VM.is_control_domain)
             {
                 List<VBD> vbds = VM.Connection.ResolveAll(VM.VBDs);
                 if (vbds == null)

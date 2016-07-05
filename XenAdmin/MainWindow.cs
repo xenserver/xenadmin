@@ -85,6 +85,7 @@ namespace XenAdmin
         internal readonly BallooningPage BallooningPage = new BallooningPage();
         internal readonly BallooningUpsellPage BallooningUpsellPage = new BallooningUpsellPage();
         internal readonly ConsolePanel ConsolePanel = new ConsolePanel();
+        internal readonly CvmConsolePanel CvmConsolePanel = new CvmConsolePanel();
         internal readonly HAPage HAPage = new HAPage();
         internal readonly HAUpsellPage HAUpsellPage = new HAUpsellPage();
         internal readonly HomePage HomePage = new HomePage();
@@ -153,6 +154,7 @@ namespace XenAdmin
             components.Add(GeneralPage);
             components.Add(BallooningPage);
             components.Add(ConsolePanel);
+            components.Add(CvmConsolePanel);
             components.Add(NetworkPage);
             components.Add(HAPage);
             components.Add(HomePage);
@@ -171,6 +173,7 @@ namespace XenAdmin
             AddTabContents(BallooningPage, TabPageBallooning);
             AddTabContents(BallooningUpsellPage, TabPageBallooningUpsell);
             AddTabContents(ConsolePanel, TabPageConsole);
+            AddTabContents(CvmConsolePanel, TabPageCvmConsole);
             AddTabContents(NetworkPage, TabPageNetwork);
             AddTabContents(HAPage, TabPageHA);
             AddTabContents(HAUpsellPage, TabPageHAUpsell);
@@ -246,8 +249,8 @@ namespace XenAdmin
 
 				if (SelectionManager.Selection.FirstIsRealVM)
 					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
-				else if (SelectionManager.Selection.FirstIsHost)
-					ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                else if (SelectionManager.Selection.FirstIsHost)
+                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
 
                 UnpauseVNC(sender == TheTabControl);
             }
@@ -765,11 +768,16 @@ namespace XenAdmin
 
                     foreach (VM vm in connection.Cache.VMs)
                     {
-                        this.ConsolePanel.closeVNCForSource(vm);
+                        ConsolePanel.closeVNCForSource(vm);
                     }
 
                     foreach (Host host in connection.Cache.Hosts)
+                    {
                         ConsolePanel.closeVNCForSource(host.ControlDomainZero);
+
+                        foreach (VM vm in host.OtherControlDomains)
+                            CvmConsolePanel.closeVNCForSource(vm);
+                    }
 
                     connection.EndConnect();
 
@@ -1372,6 +1380,7 @@ namespace XenAdmin
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
             bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
+            bool hasManyControlDomains = isHostSelected && ((Host)SelectionManager.Selection.First).HasManyControlDomains;
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML;
 
@@ -1401,6 +1410,7 @@ namespace XenAdmin
             }
 
             ShowTab(TabPageConsole, !shownConsoleReplacement && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
+            ShowTab(TabPageCvmConsole, !shownConsoleReplacement && !multi && !SearchMode && isHostLive && hasManyControlDomains);
             ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
             ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
             ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
@@ -1766,13 +1776,23 @@ namespace XenAdmin
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
             }
+            else if (t == TabPageCvmConsole)
+            {
+                if (SelectionManager.Selection.FirstIsHost)
+                {
+                    CvmConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    UnpauseVNC(e != null && sender == TheTabControl);
+                }
+            }
             else
             {
-                ConsolePanel.PauseAllViews();            
+                ConsolePanel.PauseAllViews();  
+                CvmConsolePanel.PauseAllViews();
                 
                 // Start timer for closing the VNC connection after an interval (20 seconds)
                 // when the console tab is not selected
                 ConsolePanel.StartCloseVNCTimer(ConsolePanel.activeVNCView);
+                CvmConsolePanel.StartCloseVNCTimer(CvmConsolePanel.activeVNCView);
 
                 if (t == TabPageGeneral)
                 {
@@ -1965,10 +1985,14 @@ namespace XenAdmin
         private void UnpauseVNC(bool focus)
         {
             ConsolePanel.UnpauseActiveView();
+            CvmConsolePanel.UnpauseActiveView();
+
             if (focus)
             {
                 ConsolePanel.FocusActiveView();
+                CvmConsolePanel.FocusActiveView();
                 ConsolePanel.SwitchIfRequired();
+                CvmConsolePanel.SwitchIfRequired();
             }
         }
 
@@ -1977,7 +2001,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR, DockerProcess, DockerDetails
+            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails
         }
 
         public void SwitchToTab(Tab tab)
@@ -2001,6 +2025,9 @@ namespace XenAdmin
                     break;
                 case Tab.Console:
                     TheTabControl.SelectedTab = TabPageConsole;
+                    break;
+                case Tab.CvmConsole:
+                    TheTabControl.SelectedTab = TabPageCvmConsole;
                     break;
                 case Tab.Performance:
                     TheTabControl.SelectedTab = TabPagePeformance;
@@ -2366,6 +2393,8 @@ namespace XenAdmin
                 return "TabPageSearch" + modelObj;
             if (TheTabControl.SelectedTab == TabPageConsole)
                 return "TabPageConsole" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageCvmConsole)
+                return "TabPageCvmConsole" + modelObj;
             if (TheTabControl.SelectedTab == TabPageGeneral)
                 return "TabPageSettings" + modelObj;
             if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)

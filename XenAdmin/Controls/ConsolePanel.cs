@@ -47,7 +47,7 @@ namespace XenAdmin.Controls
         public VNCView activeVNCView;
         private Dictionary<VM, VNCView> vncViews = new Dictionary<VM, VNCView>();
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ConsolePanel()
         {
@@ -153,7 +153,7 @@ namespace XenAdmin.Controls
             ClearErrorMessage();
         }
 
-        internal void setCurrentSource(Host source)
+        internal virtual void setCurrentSource(Host source)
         {
             if (source == null)
             {
@@ -264,7 +264,7 @@ namespace XenAdmin.Controls
             closeVNCForSource(source);
         }
 
-        private void SetErrorMessage(string message)
+        protected void SetErrorMessage(string message)
         {
             errorLabel.Text = message;
             tableLayoutPanelError.Visible = true;
@@ -355,5 +355,27 @@ namespace XenAdmin.Controls
         }
 
         #endregion
+    }
+
+    internal class CvmConsolePanel : ConsolePanel
+    {
+        internal override void setCurrentSource(Host source)
+        {
+            if (source == null)
+            {
+                log.Error("No local copy of host information when connecting to host VNC console.");
+                SetErrorMessage(Messages.VNC_COULD_NOT_CONNECT_CONSOLE);
+                return;
+            }
+
+            VM cvm = source.OtherControlDomains.FirstOrDefault();
+            if (cvm == null)
+            {
+                log.Error("Could not find CVM console on host.");
+                SetErrorMessage(Messages.VNC_COULD_NOT_FIND_CONSOLES);
+            }
+            else
+                setCurrentSource(cvm);
+        }
     }
 }

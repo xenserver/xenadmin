@@ -1053,6 +1053,34 @@ namespace XenAPI
             }
         }
 
+        public bool HasManyControlDomains
+        {
+            get
+            {
+                if (Connection == null)
+                    return false;
+
+                var vms = Connection.ResolveAll(resident_VMs);
+                return vms.FindAll(v => v.is_control_domain).Count > 1;
+            }
+        }
+
+        public IEnumerable<VM> OtherControlDomains
+        {
+            get
+            {
+                if (Connection == null)
+                    return null;
+
+                var vms = Connection.ResolveAll(resident_VMs);
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return vms.Where(v => v.is_control_domain && v.opaque_ref != control_domain);
+
+                return vms.Where(v => v.is_control_domain && v.domid != 0);
+            }
+        }
+
         /// <summary>
         /// Interpret a value from the software_version dictionary as a int, or 0 if we couldn't parse it.
         /// </summary>
