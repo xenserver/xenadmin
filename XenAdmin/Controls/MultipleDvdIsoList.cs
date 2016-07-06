@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -49,8 +50,6 @@ namespace XenAdmin.Controls
         public MultipleDvdIsoList()
         {
             InitializeComponent();
-            labelSingleDvd.ForeColor = Program.HeaderGradientForeColor;
-            newCDLabel.ForeColor = Program.HeaderGradientForeColor;
         }
 
         private VM vm = null;
@@ -72,6 +71,34 @@ namespace XenAdmin.Controls
                 return cdChanger1.vm;
             }
         }
+
+        #region Designer browsable properties
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public Color LabelSingleDvdForeColor
+        {
+            get { return labelSingleDvd.ForeColor; }
+            set { labelSingleDvd.ForeColor = value; }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public Color LabelNewCdForeColor
+        {
+            get { return newCDLabel.ForeColor; }
+            set { newCDLabel.ForeColor = value; }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public Color LinkLabelLinkColor
+        {
+            get { return linkLabel1.LinkColor; }
+            set { linkLabel1.LinkColor = value; }
+        }
+
+        #endregion
 
         protected virtual void DeregisterEvents()
         {

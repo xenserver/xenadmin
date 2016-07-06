@@ -96,6 +96,9 @@ namespace XenAdmin.ConsoleView
 
             HostLabel.Font = Program.HeaderGradientFont;
             HostLabel.ForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LabelSingleDvdForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LabelNewCdForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LinkLabelLinkColor = Color.White;
 
 #pragma warning disable 0219
             // Force the handle to be created, because resize events
