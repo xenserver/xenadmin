@@ -83,6 +83,7 @@ namespace XenAdmin
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
+            this.TabPageADUpsell = new System.Windows.Forms.TabPage();
             this.TabPageGPU = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.TabPageDockerProcess = new System.Windows.Forms.TabPage();
@@ -280,7 +281,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.TabPageADUpsell = new System.Windows.Forms.TabPage();
+            this.TabPageCvmConsole = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -342,6 +343,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageBallooning);
             this.TheTabControl.Controls.Add(this.TabPageBallooningUpsell);
             this.TheTabControl.Controls.Add(this.TabPageConsole);
+            this.TheTabControl.Controls.Add(this.TabPageCvmConsole);
             this.TheTabControl.Controls.Add(this.TabPageStorage);
             this.TheTabControl.Controls.Add(this.TabPagePhysicalStorage);
             this.TheTabControl.Controls.Add(this.TabPageSR);
@@ -470,6 +472,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageAD, "TabPageAD");
             this.TabPageAD.Name = "TabPageAD";
             this.TabPageAD.UseVisualStyleBackColor = true;
+            // 
+            // TabPageADUpsell
+            // 
+            resources.ApplyResources(this.TabPageADUpsell, "TabPageADUpsell");
+            this.TabPageADUpsell.Name = "TabPageADUpsell";
+            this.TabPageADUpsell.UseVisualStyleBackColor = true;
             // 
             // TabPageGPU
             // 
@@ -1839,11 +1847,11 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
-            // TabPageADUpsell
+            // TabPageCvmConsole
             // 
-            resources.ApplyResources(this.TabPageADUpsell, "TabPageADUpsell");
-            this.TabPageADUpsell.Name = "TabPageADUpsell";
-            this.TabPageADUpsell.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.TabPageCvmConsole, "TabPageCvmConsole");
+            this.TabPageCvmConsole.Name = "TabPageCvmConsole";
+            this.TabPageCvmConsole.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -2107,6 +2115,7 @@ namespace XenAdmin
         private CommandToolStripButton restartContainerToolStripButton;
         private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
         private TabPage TabPageADUpsell;
+        private TabPage TabPageCvmConsole;
     }
 
 }

@@ -1472,6 +1472,29 @@ namespace XenAPI
             }
         }
 
+        /// <summary>
+        /// Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
+        /// </summary>
+        public bool IsControlDomainZero
+        {
+            get
+            {
+                if (!is_control_domain)
+                    return false;
+                
+                var host = Connection.Resolve(resident_on);
+                if (host == null)
+                    return false;
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return host.control_domain == opaque_ref;
+
+                var vms = Connection.ResolveAll(host.resident_VMs);
+                var first = vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
+                return first != null && first.opaque_ref == opaque_ref;
+            }
+        }
+
         public bool not_a_real_vm
         {
             get { return is_a_snapshot || is_a_template || is_control_domain; }

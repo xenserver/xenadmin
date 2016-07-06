@@ -67,7 +67,6 @@ namespace XenAdmin.TabPages
 
             TitleLabel.ForeColor = Program.HeaderGradientForeColor;
             TitleLabel.Font = Program.HeaderGradientFont;
-            multipleDvdIsoList1.linkLabel1.LinkColor = Color.FromArgb(0, 0, 255);
             dataGridViewStorage.SortCompare += new DataGridViewSortCompareEventHandler(dataGridViewStorage_SortCompare);
             dataGridViewStorage.Sort(ColumnDevicePosition, ListSortDirection.Ascending);
         }
