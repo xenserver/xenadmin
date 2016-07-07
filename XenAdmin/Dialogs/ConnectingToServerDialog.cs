@@ -31,6 +31,7 @@
 
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Network;
 
@@ -41,6 +42,7 @@ namespace XenAdmin.Dialogs
     {
         private readonly IXenConnection _connection;
         private Form ownerForm;
+        private static Dictionary<IXenConnection, ConnectingToServerDialog> openDialogs = new Dictionary<IXenConnection, ConnectingToServerDialog>();
 
         public ConnectingToServerDialog(IXenConnection connection)
             : base(connection)
@@ -98,6 +100,9 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
+            if (_connection != null)
+                openDialogs.Remove(_connection);
+
             base.OnFormClosing(e);
         }
 
@@ -123,6 +128,16 @@ namespace XenAdmin.Dialogs
         {
             if (_connection != null && _connection is XenConnection)
             {
+                // CA-214953 - Focus on existing dialog for this connection, instead of creating a new one
+                ConnectingToServerDialog dlg;
+                if (openDialogs.TryGetValue(_connection, out dlg))
+                {
+                    dlg.Focus();
+                    this.Close();
+                    return;
+                }
+                openDialogs.Add(_connection, this);
+
                 ownerForm = owner;
 
                 RegisterEventHandlers();
