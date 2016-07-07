@@ -131,7 +131,7 @@ namespace XenAdmin.Actions
                     // which probably means there was an exception in the GUI code before the
                     // action got going. Kill the task so that we don't block forever on
                     // taskThread.Join(). Brought to light by CA-11100.
-                    XenAPI.Task.destroy(this.Session, this.RelatedTask.opaque_ref);
+                    DestroyTask();
                 }
                 // Test for null: don't overwrite a previous exception
                 if (_exception == null)
