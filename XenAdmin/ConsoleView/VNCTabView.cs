@@ -526,17 +526,11 @@ namespace XenAdmin.ConsoleView
 
             if (source.is_control_domain && e.PropertyName == "name_label")
             {
-                bool isDom0 = source.IsControlDomainZero;
-
-                if (isDom0)
-                    HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
+                string text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString);
+                HostLabel.Text = text;
 
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
-                {
-                    parentVNCView.undockedForm.Text = isDom0
-                        ? source.AffinityServerString
-                        : string.Format(Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString);
-                }
+                    parentVNCView.undockedForm.Text = text;
             }
         }
 
