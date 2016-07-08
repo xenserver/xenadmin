@@ -19,6 +19,7 @@ BRANDING_PRODUCT_MAJOR_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MA
 BRANDING_PRODUCT_MINOR_VERION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MINOR_VERSION | sed -e 's/PRODUCT_MINOR_VERSION=//g' -e 's/"//g')
 BRANDING_SEARCH=xensearch
 BRANDING_UPDATE=xsupdate
+BRANDING_BACKUP=xbk
 BRANDING_SERVER=XenServer
 BRANDING_BRAND_CONSOLE=$(cat ${SCRATCH_DIR}/globals | grep -w BRAND_CONSOLE | sed -e 's/BRAND_CONSOLE=//g' -e 's/"//g')
 # Check for the micro version override from declarations.sh and use it if present otherwise use the one from branding
