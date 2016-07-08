@@ -127,8 +127,8 @@
                                 </Extension>
                             </ProgId>
 							<!-- Define XBK extension -->
-							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
-                                <Extension Id="xbk" ContentType="application/xbk">
+							<ProgId Id="XenCenter.[xbk]" Description="[XenServer] Backup File" Icon="XkbIcon">
+                                <Extension Id="[xbk]" ContentType="application/[xbk]">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
