@@ -328,7 +328,7 @@
     <value>22</value>
   </data>
   <data name="TabPageCvmConsole.Text" xml:space="preserve">
-    <value>CVM Console</value>
+    <value>Nutanix CVM Console</value>
   </data>
   <data name="&gt;&gt;TabPageCvmConsole.Name" xml:space="preserve">
     <value>TabPageCvmConsole</value>

@@ -118,7 +118,7 @@ namespace XenAdmin.ConsoleView
             VM_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_CollectionChanged);
             source.Connection.Cache.RegisterCollectionChanged<VM>(VM_CollectionChangedWithInvoke);
 
-            if (source.IsControlDomainZero)
+            if (source.is_control_domain)
             {
                 Host host = source.Connection.Resolve(source.resident_on);
                 if (host != null)
@@ -133,7 +133,7 @@ namespace XenAdmin.ConsoleView
                         hostMetrics.PropertyChanged += Server_PropertyChanged;
                     }
 
-                    HostLabel.Text = string.Format(Messages.CONSOLE_HOST, host.Name);
+                    HostLabel.Text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name);
                     HostLabel.Visible = true;
                 }
             }
@@ -524,11 +524,13 @@ namespace XenAdmin.ConsoleView
                 UpdateOpenSSHConsoleButtonState();
             }
 
-            if (source.IsControlDomainZero && e.PropertyName == "name_label")
+            if (source.is_control_domain && e.PropertyName == "name_label")
             {
-                HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
+                string text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString);
+                HostLabel.Text = text;
+
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
-                    parentVNCView.undockedForm.Text = source.AffinityServerString;
+                    parentVNCView.undockedForm.Text = text;
             }
         }
 

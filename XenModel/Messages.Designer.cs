@@ -8084,6 +8084,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Nutanix CVM console.
+        /// </summary>
+        public static string CONSOLE_HOST_NUTANIX {
+            get {
+                return ResourceManager.GetString("CONSOLE_HOST_NUTANIX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This VM is currently shut down..
         /// </summary>
         public static string CONSOLE_POWER_STATE_HALTED {

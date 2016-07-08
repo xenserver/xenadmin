@@ -70,6 +70,7 @@ namespace XenAdmin
             this.TabPageBallooning = new System.Windows.Forms.TabPage();
             this.TabPageBallooningUpsell = new System.Windows.Forms.TabPage();
             this.TabPageConsole = new System.Windows.Forms.TabPage();
+            this.TabPageCvmConsole = new System.Windows.Forms.TabPage();
             this.TabPageStorage = new System.Windows.Forms.TabPage();
             this.TabPagePhysicalStorage = new System.Windows.Forms.TabPage();
             this.TabPageSR = new System.Windows.Forms.TabPage();
@@ -281,7 +282,6 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.TabPageCvmConsole = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -393,6 +393,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageConsole, "TabPageConsole");
             this.TabPageConsole.Name = "TabPageConsole";
             this.TabPageConsole.UseVisualStyleBackColor = true;
+            // 
+            // TabPageCvmConsole
+            // 
+            resources.ApplyResources(this.TabPageCvmConsole, "TabPageCvmConsole");
+            this.TabPageCvmConsole.Name = "TabPageCvmConsole";
+            this.TabPageCvmConsole.UseVisualStyleBackColor = true;
             // 
             // TabPageStorage
             // 
@@ -1846,12 +1852,6 @@ namespace XenAdmin
             this.statusProgressBar.Margin = new System.Windows.Forms.Padding(5);
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            // 
-            // TabPageCvmConsole
-            // 
-            resources.ApplyResources(this.TabPageCvmConsole, "TabPageCvmConsole");
-            this.TabPageCvmConsole.Name = "TabPageCvmConsole";
-            this.TabPageCvmConsole.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 

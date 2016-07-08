@@ -2946,6 +2946,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>This server is unavailable.</value>
   </data>
+  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
+    <value>{0} Nutanix CVM console</value>
+  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>This VM is currently shut down.</value>
   </data>
