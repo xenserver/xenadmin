@@ -154,6 +154,9 @@
     <Compile Include="Controls\ComboBoxes\CPUTopologyComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ConsolePanel.Designer.cs">
+      <DependentUpon>ConsolePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

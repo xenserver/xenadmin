@@ -1463,22 +1463,22 @@ namespace XenAdmin.Core
         public static string GetNameAndObject(IXenObject XenObject)
         {
             if (XenObject is Pool)
-                return string.Format(Messages.POOL_X, Helpers.GetName(XenObject));
+                return string.Format(Messages.POOL_X, GetName(XenObject));
 
             if (XenObject is Host)
-                return string.Format(Messages.SERVER_X, Helpers.GetName(XenObject));
+                return string.Format(Messages.SERVER_X, GetName(XenObject));
 
             if (XenObject is VM)
             {
                 VM vm = (VM)XenObject;
-                if (vm.is_control_domain)
-                    return string.Format(Messages.SERVER_X, Helpers.GetName(XenObject.Connection.Resolve(vm.resident_on)));
+                if (vm.IsControlDomainZero)
+                    return string.Format(Messages.SERVER_X, GetName(XenObject.Connection.Resolve(vm.resident_on)));
                 else
-                    return string.Format(Messages.VM_X, Helpers.GetName(XenObject));
+                    return string.Format(Messages.VM_X, GetName(XenObject));
             }
 
             if (XenObject is SR)
-                return string.Format(Messages.STORAGE_REPOSITORY_X, Helpers.GetName(XenObject));
+                return string.Format(Messages.STORAGE_REPOSITORY_X, GetName(XenObject));
 
             return Messages.UNKNOWN_OBJECT;
         }

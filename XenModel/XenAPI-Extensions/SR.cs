@@ -53,7 +53,8 @@ namespace XenAPI
             lvmohba, egenera, egeneracd, dummy, unknown, equal, cslg, shm,
             iscsi,
             ebs, rawhba,
-            smb, lvmofcoe
+            smb, lvmofcoe,
+            nutanix, nutanixiso
         }
 
         public const string Content_Type_ISO = "iso";

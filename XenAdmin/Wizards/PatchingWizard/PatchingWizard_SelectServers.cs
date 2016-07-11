@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 throw;//better throw an exception rather than closing the wizard suddenly and silently
             }
         }
-        
+
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
@@ -139,17 +139,26 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 selectedHosts = SelectedUpdateAlert.DistinctHosts;
             }
-            else if(FileFromDiskAlert != null) 
+            else if (FileFromDiskAlert != null)
             {
                 selectedHosts = FileFromDiskAlert.DistinctHosts;
             }
-            if(type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
+
+            Pool pool = Helpers.GetPoolOfOne(host.Connection);
+            if (pool != null && pool.IsPatchingForbidden)
+            {
+                row.Enabled = false;
+                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN;
+                return;
+            }
+
+            if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return;
             }
-                
+
             switch (type)
             {
                 case UpdateType.NewRetail:

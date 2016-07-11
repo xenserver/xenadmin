@@ -195,17 +195,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             dataGridView1.Rows.Clear();
             List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
             xenConnections.Sort();
-            var currentVersion = Program.VersionThreePart;
 
             foreach (IXenConnection xenConnection in xenConnections)
             {
                 Pool pool = Helpers.GetPool(xenConnection);
+                Pool poolOfOne = Helpers.GetPoolOfOne(xenConnection);
+
                 bool hasPool = true;
                 if (pool != null)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(pool));
 
-                    if (IsNotAnUpgradeableVersion(pool.SmallerVersionHost) && !pool.RollingUpgrade)
+                    if ((IsNotAnUpgradeableVersion(pool.SmallerVersionHost) && !pool.RollingUpgrade) || pool.IsUpgradeForbidden)
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
                     else if (masters.Contains(pool.Connection.Resolve(pool.master)))
                         dataGridView1.CheckBoxChange(index, 1);
@@ -214,12 +215,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     hasPool = false;
                 }
+
                 Host[] hosts = xenConnection.Cache.Hosts;
                 Array.Sort(hosts);
                 foreach (Host host in hosts)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(host, hasPool));
-                    if (IsNotAnUpgradeableVersion(host))
+                    if (IsNotAnUpgradeableVersion(host) || (poolOfOne != null && poolOfOne.IsUpgradeForbidden))
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
                     else if (!hasPool && masters.Contains(host))
                         dataGridView1.CheckBoxChange(index, 1);

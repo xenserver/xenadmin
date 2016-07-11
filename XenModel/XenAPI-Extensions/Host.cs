@@ -846,7 +846,6 @@ namespace XenAPI
             }
         }
 
-
         public PrettyTimeSpan Uptime
         {
             get
@@ -900,6 +899,15 @@ namespace XenAPI
             return (BoolKey(other_config, "multipathed") &&
                 other_config.ContainsKey("mpath-boot") &&
                 PBD.ParsePathCounts(other_config["mpath-boot"], out current, out max));
+        }
+
+        public bool HasRunningVMs
+        {
+            get
+            {
+                // 2 not 1, because the Control Domain doesn't count
+                return resident_VMs != null && resident_VMs.Count >= 2;
+            }
         }
 
         #region Save Evacuated VMs for later
@@ -1049,18 +1057,46 @@ namespace XenAPI
         /// <summary>
         /// Will return null if cannot find connection or any control domain in list of vms
         /// </summary>
-        public VM ControlDomain
+        public VM ControlDomainZero
         {
             get
             {
                 if (Connection == null)
                     return null;
-                foreach (VM vm in Connection.ResolveAll<VM>(resident_VMs))
-                {
-                    if (vm.is_control_domain)
-                        return vm;
-                }
-                return null;
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return Connection.Resolve(control_domain);
+
+                var vms = Connection.ResolveAll(resident_VMs);
+                return vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
+            }
+        }
+
+        public bool HasManyControlDomains
+        {
+            get
+            {
+                if (Connection == null)
+                    return false;
+
+                var vms = Connection.ResolveAll(resident_VMs);
+                return vms.FindAll(v => v.is_control_domain).Count > 1;
+            }
+        }
+
+        public IEnumerable<VM> OtherControlDomains
+        {
+            get
+            {
+                if (Connection == null)
+                    return null;
+
+                var vms = Connection.ResolveAll(resident_VMs);
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return vms.Where(v => v.is_control_domain && v.opaque_ref != control_domain);
+
+                return vms.Where(v => v.is_control_domain && v.domid != 0);
             }
         }
 
