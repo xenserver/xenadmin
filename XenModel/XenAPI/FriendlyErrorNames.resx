@@ -861,6 +861,18 @@
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>The provision call can only be invoked on templates, not regular VMs.</value>
   </data>
+  <data name="PVS_FARM_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
+    <value>The PVS farm contains running proxies.</value>
+  </data>
+  <data name="PVS_FARM_CONTAINS_SERVERS" xml:space="preserve">
+    <value>The PVS farm contains servers and cannot be forgotten.</value>
+  </data>
+  <data name="PVS_FARM_SR_ALREADY_ADDED" xml:space="preserve">
+    <value>Trying to add a cache SR that is already associated with the farm</value>
+  </data>
+  <data name="PVS_FARM_SR_IS_IN_USE" xml:space="preserve">
+    <value>The SR is in use by the farm and cannot be removed.</value>
+  </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>Your current role is not authorized to perform this action.
 Action: {0}</value>
@@ -1322,9 +1334,6 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>Unable to attach empty optical drive to VM.</value>
   </data>
-  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
-    <value>Not enough space to enable LVHD thin provisioning.</value>
-  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
   </data>
@@ -1516,6 +1525,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>The SR operation cannot be performed because the SR is not empty.</value>
+  </data>
+  <data name="SR_NOT_IN_PVS_FARM" xml:space="preserve">
+    <value>The SR is not associated with the farm.</value>
   </data>
   <data name="SR_NOT_SHARABLE" xml:space="preserve">
     <value>SR is not sharable</value>

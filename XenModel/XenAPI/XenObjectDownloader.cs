@@ -589,5 +589,26 @@ namespace XenAPI
             foreach (KeyValuePair<XenRef<VGPU_type>, VGPU_type> entry in records)
                 changes.Add(new ObjectChange(typeof(VGPU_type), entry.Key.opaque_ref, entry.Value));
         }
+
+        private static void Download_PVS_farm(Session session, List<ObjectChange> changes)
+        {
+            Dictionary<XenRef<PVS_farm>, PVS_farm> records = PVS_farm.get_all_records(session);
+            foreach (KeyValuePair<XenRef<PVS_farm>, PVS_farm> entry in records)
+                changes.Add(new ObjectChange(typeof(PVS_farm), entry.Key.opaque_ref, entry.Value));
+        }
+
+        private static void Download_PVS_server(Session session, List<ObjectChange> changes)
+        {
+            Dictionary<XenRef<PVS_server>, PVS_server> records = PVS_server.get_all_records(session);
+            foreach (KeyValuePair<XenRef<PVS_server>, PVS_server> entry in records)
+                changes.Add(new ObjectChange(typeof(PVS_server), entry.Key.opaque_ref, entry.Value));
+        }
+
+        private static void Download_PVS_proxy(Session session, List<ObjectChange> changes)
+        {
+            Dictionary<XenRef<PVS_proxy>, PVS_proxy> records = PVS_proxy.get_all_records(session);
+            foreach (KeyValuePair<XenRef<PVS_proxy>, PVS_proxy> entry in records)
+                changes.Add(new ObjectChange(typeof(PVS_proxy), entry.Key.opaque_ref, entry.Value));
+        }
     }
 }
