@@ -42,7 +42,7 @@ namespace XenAdmin.ConsoleView
     public partial class VNCView : UserControl
     {
         private readonly VM source;
-        public readonly VNCTabView vncTabView;
+        private readonly VNCTabView vncTabView;
         public Form undockedForm = null;
 
         public bool isDocked
@@ -50,14 +50,6 @@ namespace XenAdmin.ConsoleView
             get
             {
                 return this.undockedForm == null || !this.undockedForm.Visible;
-            }
-        }
-
-        public bool isPaused
-        {
-            get
-            {
-                return vncTabView.isPaused;
             }
         }
 
@@ -78,10 +70,9 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
 
             this.source = source;
-            this.vncTabView = new VNCTabView(this, source, elevatedUsername, elevatedPassword);
+            this.vncTabView = new VNCTabView(this, source, elevatedUsername, elevatedPassword) {Dock = DockStyle.Fill};
 
             InitializeComponent();
-            this.Dock = DockStyle.Fill;
             this.Controls.Add(this.vncTabView);
         }
 
@@ -128,7 +119,7 @@ namespace XenAdmin.ConsoleView
                 this.Controls.Remove(vncTabView);
                 undockedForm.Controls.Add(vncTabView);
 
-                oldScaledSetting = vncTabView.scaleCheckBox.Checked;
+                oldScaledSetting = vncTabView.IsScaled;
 
                 vncTabView.showHeaderBar(!source.is_control_domain, true);
 
@@ -144,15 +135,13 @@ namespace XenAdmin.ConsoleView
                 }
 
                 undockedForm.HelpButton = true;
-                //undockedForm.MinimizeBox = false;
-                //undockedForm.MaximizeBox = false;
                 undockedForm.HelpButtonClicked += undockedForm_HelpButtonClicked;
                 undockedForm.HelpRequested += undockedForm_HelpRequested;
 
                 undockedForm.Show();
 
                 if(Properties.Settings.Default.PreserveScaleWhenUndocked)
-                    vncTabView.scaleCheckBox.Checked = oldScaledSetting;
+                    vncTabView.IsScaled = oldScaledSetting;
 
                 this.reattachConsoleButton.Show();
                 this.findConsoleButton.Show();
@@ -164,7 +153,7 @@ namespace XenAdmin.ConsoleView
                 this.oldUndockedSize = undockedForm.Size;
                 
                 if (!Properties.Settings.Default.PreserveScaleWhenUndocked)
-                    vncTabView.scaleCheckBox.Checked = oldScaledSetting;
+                    vncTabView.IsScaled = oldScaledSetting;
 
                 this.reattachConsoleButton.Hide();
                 this.findConsoleButton.Hide();
@@ -192,7 +181,10 @@ namespace XenAdmin.ConsoleView
             if (source.is_control_domain)
             {
                 Host host = source.Connection.Resolve(source.resident_on);
-                return host == null ? source.Name : string.Format(Messages.CONSOLE_HOST, host.Name);
+                if (host == null)
+                    return source.Name;
+
+                return string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name);
             }
             else
             {

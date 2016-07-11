@@ -35,7 +35,6 @@ using System.Text;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Wizards;
-using System.Collections.ObjectModel;
 
 
 namespace XenAdmin.Commands
@@ -91,7 +90,8 @@ namespace XenAdmin.Commands
                 && !sr.HasPBDs
                 && sr.CanCreateWithXenCenter
                 && !HelpersGUI.GetActionInProgress(sr)
-                && !(sr.type == "cslg" && Helpers.FeatureForbidden(sr.Connection, Host.RestrictStorageChoices));
+                && !(sr.type == "cslg" && Helpers.FeatureForbidden(sr.Connection, Host.RestrictStorageChoices))
+                && (SM.GetByType(sr.Connection, sr.type) != null);
         }
 
         public override string MenuText

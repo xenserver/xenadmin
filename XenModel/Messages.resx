@@ -2692,11 +2692,25 @@ Are you sure you want to export VM {2}?</value>
   <data name="CONFIRM_FORCESHUTDOWN_VM_TITLE" xml:space="preserve">
     <value>Force Shut Down VM</value>
   </data>
+  <data name="CONFIRM_REBOOT_HCI_WARN_SERVER" xml:space="preserve">
+    <value>Rebooting a server will also shut down all the VMs running on it. '{0}' is running a storage virtual appliance and rebooting it might impact the availability of your storage. Are you sure you want to continue?</value>
+  </data>
+  <data name="CONFIRM_REBOOT_HCI_WARN_SERVERS" xml:space="preserve">
+    <value>Rebooting a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and rebooting them might impact the availablity of your storage:
+
+{0}
+
+Are you sure you want to continue?</value>
+  </data>
   <data name="CONFIRM_REBOOT_SERVER" xml:space="preserve">
-    <value>Are you sure you want to reboot the selected server?  This will also shut down all the VMs running on it.</value>
+    <value>Are you sure you want to reboot '{0}'?
+
+This will also shut down all the VMs currently running on it.</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVERS" xml:space="preserve">
-    <value>Are you sure you want to reboot the selected servers?  This will also shut down all the VMs running on them.</value>
+    <value>Are you sure you want to reboot the selected servers?
+
+This will also shut down all the VMs currently running on them.</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVERS_NO_VMS" xml:space="preserve">
     <value>Are you sure you want to reboot the selected servers?</value>
@@ -2705,10 +2719,13 @@ Are you sure you want to export VM {2}?</value>
     <value>Reboot Multiple Servers</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVER_NO_VMS" xml:space="preserve">
-    <value>Are you sure you want to reboot the selected server?</value>
+    <value>Are you sure you want to reboot '{0}'?</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVER_TITLE" xml:space="preserve">
     <value>Reboot Server</value>
+  </data>
+  <data name="CONFIRM_REBOOT_SERVER_YES_BUTTON_LABEL" xml:space="preserve">
+    <value>&amp;Yes, Reboot</value>
   </data>
   <data name="CONFIRM_REBOOT_VM" xml:space="preserve">
     <value>Are you sure you want to reboot the selected VM?</value>
@@ -2730,6 +2747,16 @@ Are you sure you want to export VM {2}?</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>Restart Toolstack</value>
+  </data>
+  <data name="CONFIRM_SHUTDOWN_HCI_WARN_SERVER" xml:space="preserve">
+    <value>Shutting down a server will also shut down all the VMs running on it. '{0}' is running a storage virtual appliance and shutting it down might impact the availability of your storage. Are you sure you want to continue?</value>
+  </data>
+  <data name="CONFIRM_SHUTDOWN_HCI_WARN_SERVERS" xml:space="preserve">
+    <value>Shutting down a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and shutting them down might impact the availablity of your storage:
+
+{0}
+
+Are you sure you want to continue?</value>
   </data>
   <data name="CONFIRM_SHUTDOWN_SERVER" xml:space="preserve">
     <value>Are you sure you want to shut down '{0}'?
@@ -2918,6 +2945,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>This server is unavailable.</value>
+  </data>
+  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
+    <value>{0} Nutanix CVM console</value>
   </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>This VM is currently shut down.</value>
@@ -8978,6 +9008,9 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
+    <value>You cannot apply updates using [XenCenter].</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>

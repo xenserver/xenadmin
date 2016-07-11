@@ -30,11 +30,11 @@ namespace XenAdmin.TabPages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseTabPage));
             this.pageContainerPanel = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelBanner = new System.Windows.Forms.TableLayoutPanel();
             this.deprecationBanner1 = new XenAdmin.Controls.DeprecationBanner();
             this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanelBanner.SuspendLayout();
             this.gradientPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,11 +43,11 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pageContainerPanel, "pageContainerPanel");
             this.pageContainerPanel.Name = "pageContainerPanel";
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanelBanner
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.deprecationBanner1, 1, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            resources.ApplyResources(this.tableLayoutPanelBanner, "tableLayoutPanelBanner");
+            this.tableLayoutPanelBanner.Controls.Add(this.deprecationBanner1, 1, 0);
+            this.tableLayoutPanelBanner.Name = "tableLayoutPanelBanner";
             // 
             // deprecationBanner1
             // 
@@ -77,11 +77,11 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.pageContainerPanel);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayoutPanelBanner);
             this.Controls.Add(this.gradientPanel1);
             this.Name = "BaseTabPage";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanelBanner.ResumeLayout(false);
+            this.tableLayoutPanelBanner.PerformLayout();
             this.gradientPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -93,7 +93,7 @@ namespace XenAdmin.TabPages
         private XenAdmin.Controls.GradientPanel.GradientPanel gradientPanel1;
         private System.Windows.Forms.Label titleLabel;
         protected System.Windows.Forms.Panel pageContainerPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBanner;
         private XenAdmin.Controls.DeprecationBanner deprecationBanner1;
 
     }
