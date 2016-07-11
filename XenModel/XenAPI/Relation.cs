@@ -109,6 +109,11 @@ namespace XenAPI
                 new Relation("subtasks", "task", "subtask_of"),
             });
 
+            relations.Add(typeof(Proxy_PVS_farm), new Relation[] {
+                new Relation("proxies", "PVS_proxy", "farm"),
+                new Relation("servers", "PVS_server", "farm"),
+            });
+
             relations.Add(typeof(Proxy_PGPU), new Relation[] {
                 new Relation("resident_VGPUs", "VGPU", "resident_on"),
             });
