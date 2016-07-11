@@ -102,56 +102,46 @@ namespace XenAdmin.Actions.Wlb
                 foreach (KeyValuePair<VM, WlbOptimizationRecommendation> vmItem in vmOptList)
                 {
                         VM vm = vmItem.Key;
-                        Host fromHost = null; 
-                        Host toHost = null; 
 
                         if (vmItem.Key.is_control_domain)
                         {
                             log.Debug(vmItem.Value.powerOperation + " " + Helpers.GetName(vmItem.Value.toHost));
-                            fromHost = vmItem.Value.fromHost;
+                            Host fromHost = vmItem.Value.fromHost;
                             Helpers.SetOtherConfig(fromHost.Connection.Session, fromHost,WlbOptimizationRecommendation.OPTIMIZINGPOOL, vmItem.Value.recId.ToString());
 
-                            try
+                            AsyncAction hostAction = null;
+                            int waitingInterval = 10 * 1000; // default to 10s 
+
+                            if (vmItem.Value.fromHost.IsLive)
                             {
-                                AsyncAction hostAction = null;
-                                int waitingInterval = 10 * 1000; // default to 10s 
-                                
-                                if (vmItem.Value.fromHost.IsLive)
+                                hostAction = new ShutdownHostAction(fromHost, AddHostToPoolCommand.NtolDialog);
+                            }
+                            else
+                            {
+                                hostAction = new HostPowerOnAction(fromHost);
+                                waitingInterval = 30 * 1000; // wait for 30s
+                            }
+
+                            hostAction.Completed += HostAction_Completed;
+                            hostAction.RunAsync();
+
+                            while (!moveToNext)
+                            {
+                                if (!String.IsNullOrEmpty(hostActionError))
                                 {
-                                    hostAction = new ShutdownHostAction(fromHost,AddHostToPoolCommand.NtolDialog);
+                                    throw new Exception(hostActionError);
                                 }
                                 else
                                 {
-                                    hostAction = new HostPowerOnAction(fromHost);
-                                    waitingInterval = 30 * 1000; // wait for 30s
+                                    //wait
+                                    System.Threading.Thread.Sleep(waitingInterval);
                                 }
-
-                                hostAction.Completed += HostAction_Completed;
-                                hostAction.RunAsync();
-
-                                while (!moveToNext)
-                                {
-                                    if (!String.IsNullOrEmpty(hostActionError))
-                                    {
-                                        throw new Exception(hostActionError);
-                                    }
-                                    else
-                                    {
-                                        //wait
-                                        System.Threading.Thread.Sleep(waitingInterval);           
-                                    }
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                throw;
                             }
                         }
                         else
                         {
                             log.Debug("Migrating VM " + vm.Name);
-                            fromHost = this.Pool.Connection.Resolve(vm.resident_on);
-                            toHost = vmItem.Value.toHost;
+                            Host toHost = vmItem.Value.toHost;
 
                             try
                             {
@@ -162,7 +152,7 @@ namespace XenAdmin.Actions.Wlb
                             catch (Failure f)
                             {
                                 // prompt to user if ha notl can be raised, if yes, continue
-                                long newNtol = 0;
+                                long newNtol;
                                 if (RaiseHANotl(vm, f, out newNtol))
                                 {
                                     DelegatedAsyncAction action = new DelegatedAsyncAction(vm.Connection, Messages.HA_LOWERING_NTOL, null, null,
@@ -180,7 +170,7 @@ namespace XenAdmin.Actions.Wlb
                                 {
                                     Helpers.SetOtherConfig(this.Session, this.Pool, WlbOptimizationRecommendation.OPTIMIZINGPOOL, Messages.WLB_OPT_FAILED);
                                     this.Description = Messages.WLB_OPT_FAILED;
-                                    throw f;
+                                    throw;
                                 }
                             }
                         }
@@ -197,7 +187,7 @@ namespace XenAdmin.Actions.Wlb
             catch (Failure ex)
             {
                 Helpers.SetOtherConfig(this.Session, this.Pool, WlbOptimizationRecommendation.OPTIMIZINGPOOL, optId);
-                WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
+                WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, ex);
                 throw;
             }
             catch (CancelledException)
