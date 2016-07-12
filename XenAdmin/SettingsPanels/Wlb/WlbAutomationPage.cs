@@ -53,6 +53,7 @@ namespace XenAdmin.SettingsPanels
         private XenAdmin.Network.IXenConnection _connection;
         private bool _hasChanged = false;
         private bool _loading = false;
+        private HashSet<string> _uuidSet = new HashSet<string>();
 
         private int[] minimumColumnWidths = {25, 50, 50, 50 };
 
@@ -214,6 +215,7 @@ namespace XenAdmin.SettingsPanels
                     if (!HostCannotParticipateInPowerManagement(host))
                     {
                         if (e.NewValue == CheckState.Checked &&
+                            _uuidSet.Contains(host.uuid) &&
                             (!_poolConfiguration.HostConfigurations.ContainsKey(host.uuid) ||
                              !_poolConfiguration.HostConfigurations[host.uuid].LastPowerOnSucceeded))
                         {
@@ -236,6 +238,7 @@ namespace XenAdmin.SettingsPanels
                         }
                         else
                         {
+                            _uuidSet.Add(host.uuid);
                             _hasChanged = true;
                         }
                     }
