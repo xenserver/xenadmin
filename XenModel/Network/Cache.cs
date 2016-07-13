@@ -67,6 +67,9 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics> _pif_metrics = new ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics>();
         private readonly ChangeableDictionary<XenRef<Pool>, Pool> _pool = new ChangeableDictionary<XenRef<Pool>, Pool>();
         private readonly ChangeableDictionary<XenRef<Pool_patch>, Pool_patch> _pool_patch = new ChangeableDictionary<XenRef<Pool_patch>, Pool_patch>();
+        private readonly ChangeableDictionary<XenRef<PVS_farm>, PVS_farm> _pvs_farm = new ChangeableDictionary<XenRef<PVS_farm>, PVS_farm>();
+        private readonly ChangeableDictionary<XenRef<PVS_server>, PVS_server> _pvs_server = new ChangeableDictionary<XenRef<PVS_server>, PVS_server>();
+        private readonly ChangeableDictionary<XenRef<PVS_proxy>, PVS_proxy> _pvs_proxy = new ChangeableDictionary<XenRef<PVS_proxy>, PVS_proxy>();
         private readonly ChangeableDictionary<XenRef<Role>, Role> _role = new ChangeableDictionary<XenRef<Role>, Role>();
         private readonly ChangeableDictionary<XenRef<SM>, SM> _sm = new ChangeableDictionary<XenRef<SM>, SM>();
         private readonly ChangeableDictionary<XenRef<SR>, SR> _sr = new ChangeableDictionary<XenRef<SR>, SR>();
@@ -188,6 +191,21 @@ namespace XenAdmin.Network
         public Pool_patch[] Pool_patches
         {
             get { return contents(_pool_patch); }
+        }
+
+        public PVS_farm[] PVS_farms
+        {
+            get { return contents(_pvs_farm); }
+        }
+        
+        public PVS_server[] PVS_servers
+        {
+            get { return contents(_pvs_server); }
+        }
+
+        public PVS_proxy[] PVS_proxies
+        {
+            get { return contents(_pvs_proxy); }
         }
 
         public Role[] Roles

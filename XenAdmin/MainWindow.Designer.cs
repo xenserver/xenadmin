@@ -86,6 +86,7 @@ namespace XenAdmin
             this.TabPageAD = new System.Windows.Forms.TabPage();
             this.TabPageADUpsell = new System.Windows.Forms.TabPage();
             this.TabPageGPU = new System.Windows.Forms.TabPage();
+            this.TabPagePvs = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.TabPageDockerProcess = new System.Windows.Forms.TabPage();
             this.TabPageDockerDetails = new System.Windows.Forms.TabPage();
@@ -358,6 +359,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageAD);
             this.TheTabControl.Controls.Add(this.TabPageADUpsell);
             this.TheTabControl.Controls.Add(this.TabPageGPU);
+            this.TheTabControl.Controls.Add(this.TabPagePvs);
             this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
             this.TheTabControl.Controls.Add(this.TabPageDockerDetails);
@@ -490,6 +492,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageGPU, "TabPageGPU");
             this.TabPageGPU.Name = "TabPageGPU";
             this.TabPageGPU.UseVisualStyleBackColor = true;
+            // 
+            // TabPagePvs
+            // 
+            resources.ApplyResources(this.TabPagePvs, "TabPagePvs");
+            this.TabPagePvs.Name = "TabPagePvs";
+            this.TabPagePvs.UseVisualStyleBackColor = true;
             // 
             // TabPageSearch
             // 
@@ -2116,6 +2124,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
         private TabPage TabPageADUpsell;
         private TabPage TabPageCvmConsole;
+        private TabPage TabPagePvs;
     }
 
 }

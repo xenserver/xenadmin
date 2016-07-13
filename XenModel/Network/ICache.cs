@@ -82,6 +82,9 @@ namespace XenAdmin.Network
         VM[] VMs { get; }
         IEnumerable<IXenObject> XenSearchableObjects { get; }
         DockerContainer[] DockerContainers { get; }
+        PVS_farm[] PVS_farms { get; }
+        PVS_server[] PVS_servers { get; }
+        PVS_proxy[] PVS_proxies { get; }
         void UpdateDockerContainersForVM(IList<DockerContainer> d, VM v);
         void CheckDockerContainersBatchChange();
     }

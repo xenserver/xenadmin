@@ -9471,6 +9471,15 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>Proxy servers are not supported.</value>
   </data>
+  <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
+    <value>Memory and disk</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
+    <value>Memory only</value>
+  </data>
+  <data name="PVS_TAB_TITLE" xml:space="preserve">
+    <value>PVS</value>
+  </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools not installed</value>
   </data>
