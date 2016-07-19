@@ -130,7 +130,8 @@ namespace XenAdmin.Actions
             {
                 foreach (Host host in hosts)
                 {
-                    ApplyPatch(host, patch);
+                    if (patch.AppliedOn(host) == DateTime.MaxValue)
+                        ApplyPatch(host, patch);
                 }
             }
         
