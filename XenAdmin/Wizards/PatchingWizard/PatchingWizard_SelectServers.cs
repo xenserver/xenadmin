@@ -41,6 +41,7 @@ using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Alerts;
+using System.Linq;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -92,6 +93,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLoaded(direction);
             try
             {
+                label1.Text = IsInAutomaticMode ? Messages.PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE : Messages.PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT;
+                
                 // catch selected servers, in order to restore selection after the dataGrid is reloaded
                 List<Host> selectedServers = SelectedServers;
 
@@ -180,20 +183,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 
                 //check updgrade sequences
-                var us = Updates.GetUpgradeSequence(host.Connection);
+                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
 
-                if (us.ContainsKey(host))
-                {
-                    if (us[host].Count == 0)
-                    {
-                        row.Enabled = false;
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
-                    }
-                }
-                else
+                //if there is a host missing from the upgrade sequence
+                if (host.Connection.Cache.Hosts.Any(h => !us.Keys.Contains(h)))
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
+
+                    return;
+                }
+
+                //if all hosts are up-to-date
+                if (us.AllHostsUpToDate)
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+
+                    return;
                 }
 
                 return;

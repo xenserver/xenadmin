@@ -550,7 +550,23 @@ namespace XenAdmin.Core
                     return AllPatches.Distinct().ToList();
                 }
             }
-            
+
+            public bool AllHostsUpToDate
+            {
+                get
+                {
+                    if (this.Count == 0)
+                        return false;
+
+                    foreach (var host in this.Keys)
+                    {
+                        if (this[host].Count > 0)
+                            return false;
+                    }
+
+                    return true;
+                }
+            }
         }
 
         public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
