@@ -341,10 +341,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                             ShowErrors();
 
                             _thisPageIsCompleted = true;
+                            
+                            _cancelEnabled = false;
+                            _nextEnabled = true;
                         }
-
-                        _cancelEnabled = false;
-                        _nextEnabled = true;
                     }
                 });
 
