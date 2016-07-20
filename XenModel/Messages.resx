@@ -417,9 +417,6 @@
   <data name="ACTION_EXPORT_VERIFY" xml:space="preserve">
     <value>Verifying Export...</value>
   </data>
-  <data name="ACTION_EXPORT_VM_FROM_X" xml:space="preserve">
-    <value>Exporting VM '{0}' from '{1}'</value>
-  </data>
   <data name="ACTION_GETTING_DATASOURCES" xml:space="preserve">
     <value>Fetching data sources</value>
   </data>
@@ -5036,6 +5033,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_OPTIONS_PAGE_TITLE" xml:space="preserve">
     <value>Select the manifest, signing and output file format options you want</value>
   </data>
+  <data name="EXPORT_OVA_PACKAGE" xml:space="preserve">
+    <value>Export OVA package '{0}' from '{1}'</value>
+  </data>
+  <data name="EXPORT_OVF_PACKAGE" xml:space="preserve">
+    <value>Export OVF package '{0}' from '{1}'</value>
+  </data>
   <data name="EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID" xml:space="preserve">
     <value>The certificate is invalid.</value>
   </data>
@@ -5077,6 +5080,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_UPDATES" xml:space="preserve">
     <value>Exported updates to {0}</value>
+  </data>
+  <data name="EXPORT_VM_TITLE" xml:space="preserve">
+    <value>Export VM '{0}' from '{1}'</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
@@ -6136,7 +6142,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Starting VM...</value>
   </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
-    <value>Importing VM from '{0}' to '{1}'</value>
+    <value>Import VM from '{0}' to '{1}'</value>
   </data>
   <data name="IMPORTVM_UPDATING_NETWORKS" xml:space="preserve">
     <value>Updating VM networking...</value>
@@ -6148,10 +6154,10 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Waiting for Import VM wizard to complete...</value>
   </data>
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
-    <value>Import Appliance</value>
+    <value>Import Appliance '{0}' to '{1}'</value>
   </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
-    <value>Import Disk Image</value>
+    <value>Import VM '{0}' from Disk Image to '{1}'</value>
   </data>
   <data name="IMPORT_DOWNLOAD_ERROR" xml:space="preserve">
     <value>Error downloading file '{0}'. {1}</value>

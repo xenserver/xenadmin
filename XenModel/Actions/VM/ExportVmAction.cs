@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
         /// <param name="verify"></param>
         public ExportVmAction(IXenConnection connection, Host host,
             VM vm, string filename, bool verify)
-            : base(connection, string.Format(Messages.ACTION_EXPORT_VM_FROM_X, vm.Name, Helpers.GetName(connection)),
+            : base(connection, string.Format(Messages.EXPORT_VM_TITLE, vm.Name, Helpers.GetName(connection)),
             Messages.ACTION_EXPORT_DESCRIPTION_PREPARING)
         {
             #region RBAC Dependencies

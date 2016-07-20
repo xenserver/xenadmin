@@ -961,15 +961,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporting VM &apos;{0}&apos; from &apos;{1}&apos;.
-        /// </summary>
-        public static string ACTION_EXPORT_VM_FROM_X {
-            get {
-                return ResourceManager.GetString("ACTION_EXPORT_VM_FROM_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fetch data sources.
         /// </summary>
         public static string ACTION_GET_DATASOURCES {
@@ -14224,6 +14215,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export OVA package &apos;{0}&apos; from &apos;{1}&apos;.
+        /// </summary>
+        public static string EXPORT_OVA_PACKAGE {
+            get {
+                return ResourceManager.GetString("EXPORT_OVA_PACKAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export OVF package &apos;{0}&apos; from &apos;{1}&apos;.
+        /// </summary>
+        public static string EXPORT_OVF_PACKAGE {
+            get {
+                return ResourceManager.GetString("EXPORT_OVF_PACKAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Certificate file does not exist..
         /// </summary>
         public static string EXPORT_SECURITY_PAGE_ERROR_CERT_NON_EXIST {
@@ -14346,6 +14355,15 @@ namespace XenAdmin {
         public static string EXPORT_UPDATES {
             get {
                 return ResourceManager.GetString("EXPORT_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export VM &apos;{0}&apos; from &apos;{1}&apos;.
+        /// </summary>
+        public static string EXPORT_VM_TITLE {
+            get {
+                return ResourceManager.GetString("EXPORT_VM_TITLE", resourceCulture);
             }
         }
         
@@ -17434,7 +17452,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import Appliance.
+        ///   Looks up a localized string similar to Import Appliance &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
         public static string IMPORT_APPLIANCE {
             get {
@@ -17443,7 +17461,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import Disk Image.
+        ///   Looks up a localized string similar to Import VM &apos;{0}&apos; from Disk Image to &apos;{1}&apos;.
         /// </summary>
         public static string IMPORT_DISK_IMAGE {
             get {
@@ -18229,7 +18247,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importing VM from &apos;{0}&apos; to &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Import VM from &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
         public static string IMPORTVM_TITLE {
             get {
