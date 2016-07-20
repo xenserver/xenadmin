@@ -32870,7 +32870,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing update {0} from {1}... .
+        ///   Looks up a localized string similar to Removing update file {0} from {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_REMOVING_UPDATE {
             get {
