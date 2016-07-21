@@ -37,13 +37,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.quiesceCheckBox = new System.Windows.Forms.CheckBox();
             this.radioButtonDiskAndMemory = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.checkpointInfoPictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelWarning = new System.Windows.Forms.Label();
             this.pictureBoxWarning = new System.Windows.Forms.PictureBox();
             this.pictureBoxVSS = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.checkpointInfoPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning)).BeginInit();
@@ -82,11 +82,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
             // checkpointInfoPictureBox
             // 
             this.checkpointInfoPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -100,7 +95,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelWarning, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBoxWarning, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -127,10 +121,16 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.pictureBoxVSS.Click += new System.EventHandler(this.pictureBoxVSS_Click);
             this.pictureBoxVSS.MouseLeave += new System.EventHandler(this.pictureBoxVSS_MouseLeave);
             // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // NewPolicySnapshotTypePage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBoxVSS);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.checkpointInfoPictureBox);
@@ -157,12 +157,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         protected System.Windows.Forms.RadioButton radioButtonDiskAndMemory;
         protected System.Windows.Forms.CheckBox quiesceCheckBox;
         protected System.Windows.Forms.Label label2;
-        protected System.Windows.Forms.Label label3;
         protected System.Windows.Forms.PictureBox checkpointInfoPictureBox;
         protected System.Windows.Forms.ToolTip toolTip;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         protected System.Windows.Forms.PictureBox pictureBoxWarning;
         protected System.Windows.Forms.Label labelWarning;
         protected System.Windows.Forms.PictureBox pictureBoxVSS;
+        protected System.Windows.Forms.Label label3;
     }
 }
