@@ -33998,9 +33998,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays).
         /// </summary>
-        public static string VGPU_DESCRIPTION {
+        public static string VGPU_DESCRIPTION_MANY {
             get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("VGPU_DESCRIPTION_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display).
+        /// </summary>
+        public static string VGPU_DESCRIPTION_ONE {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_ONE", resourceCulture);
             }
         }
         
