@@ -516,6 +516,16 @@ namespace XenAPI
             }
         }
 
+        public static bool RestrictPvsCache(Host h)
+        {
+            return h._RestrictPvsCache;
+        }
+
+        private bool _RestrictPvsCache
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_pvs_cache"); }
+        }
+
         public static bool RestrictSslLegacySwitch(Host h)
         {
             return h._RestrictSslLegacySwitch;

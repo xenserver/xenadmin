@@ -759,6 +759,33 @@
   <data name="&gt;&gt;TabPageGPU.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="TabPagePvs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPagePvs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPagePvs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPagePvs.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="TabPagePvs.Text" xml:space="preserve">
+    <value>PVS</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.Name" xml:space="preserve">
+    <value>TabPagePvs</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
   <data name="TabPageSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -787,7 +814,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -817,7 +844,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -847,7 +874,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>
@@ -1750,13 +1777,13 @@
     <value>163, 5</value>
   </metadata>
   <data name="ShowToolbarMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>147, 22</value>
   </data>
   <data name="ShowToolbarMenuItem.Text" xml:space="preserve">
     <value>Show &amp;Toolbar</value>
   </data>
   <data name="ToolBarContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 26</value>
+    <value>148, 26</value>
   </data>
   <data name="&gt;&gt;ToolBarContextMenu.Name" xml:space="preserve">
     <value>ToolBarContextMenu</value>

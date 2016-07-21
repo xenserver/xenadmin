@@ -355,6 +355,12 @@
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\PvsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\PvsPage.Designer.cs">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\SnapshotsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1830,6 +1836,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.ja.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
       <SubType>Designer</SubType>
