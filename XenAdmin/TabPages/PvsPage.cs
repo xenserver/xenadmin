@@ -153,7 +153,7 @@ namespace XenAdmin.TabPages
         {
             var vm = pvsProxy.VM;
             System.Diagnostics.Trace.Assert(vm != null);
-            var vmCell = new DataGridViewTextBoxCell {Value = pvsProxy.VM.Name};
+            var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
             var cachedCell = new DataGridViewTextBoxCell
             {
                 Value = pvsProxy.currently_attached ? Messages.YES : Messages.NO
@@ -176,8 +176,7 @@ namespace XenAdmin.TabPages
             foreach (DataGridViewRow row in dataGridViewVms.Rows)
             {
                 var vm = row.Tag as VM;
-                if (vm == null) 
-                    continue;
+                System.Diagnostics.Trace.Assert(vm != null);
                 vm.PropertyChanged -= VmPropertyChanged;
             }
         }
@@ -201,7 +200,10 @@ namespace XenAdmin.TabPages
             {
                 var vm = row.Tag as VM;
                 if (vm != null && vm.Equals(sender))
+                {
                     row.Cells["columnVM"].Value = vm.Name;
+                    break;
+                }
             }
         }
     }

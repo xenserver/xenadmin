@@ -9478,7 +9478,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>Memory only</value>
   </data>
   <data name="PVS_TAB_TITLE" xml:space="preserve">
-    <value>PVS</value>
+    <value>PVS Read Cache</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools not installed</value>

@@ -27234,7 +27234,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS.
+        ///   Looks up a localized string similar to PVS Read Cache.
         /// </summary>
         public static string PVS_TAB_TITLE {
             get {

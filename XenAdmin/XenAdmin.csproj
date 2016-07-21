@@ -1837,7 +1837,13 @@
     <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.ja.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
