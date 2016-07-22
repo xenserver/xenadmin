@@ -95,7 +95,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
-                EnableShapshotTypes(Connection);
+                EnableShapshotTypes(Connection, false);
         }
 
         public override Image Image
@@ -166,6 +166,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void RefreshTab(IVMPolicy policy)
         {
+            /* when a policy does not have any VMs, irrespective of
+             * the snapshot type, enable Quiesce 
+             */
+
+            quiesceCheckBox.Enabled = (policy.VMs.Count == 0);
+ 
             switch (policy.policy_type)
             {
                 case policy_backup_type.checkpoint:
@@ -174,42 +180,51 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     break;
                 case policy_backup_type.snapshot:
                     radioButtonDiskOnly.Checked = true;
-                    quiesceCheckBox.Enabled = true;
                     break;
                 case policy_backup_type.snapshot_with_quiesce:
                     radioButtonDiskOnly.Checked = true;
+
+                    /* when the snapshot type itself is quiesce then we need to 
+                     * enable it irrespective of the number of VMs ( > 1 condition)
+                     */
+
                     quiesceCheckBox.Enabled = true;
                     quiesceCheckBox.Checked = true;
                     break;
             }
-            EnableShapshotTypes(policy.Connection);
+            EnableShapshotTypes(policy.Connection, quiesceCheckBox.Enabled);
         }
 
-        private void EnableShapshotTypes(IXenConnection connection)
+        private void EnableShapshotTypes(IXenConnection connection, bool isQuiesceEnabled)
         {
             radioButtonDiskAndMemory.Enabled = label3.Enabled = !Helpers.FeatureForbidden(connection, Host.RestrictCheckpoint);
             checkpointInfoPictureBox.Visible = !radioButtonDiskAndMemory.Enabled;
             pictureBoxWarning.Visible = labelWarning.Visible = radioButtonDiskAndMemory.Enabled;
             this.quiesceCheckBox.Enabled = true;
-
+            
             if (VMGroup<T>.isQuescingSupported)
             {
                 this.quiesceCheckBox.Visible = true;
-                if (this._selectedVMs != null && this._selectedVMs.Count > 0)
+                if (this._selectedVMs != null)
                 {
-                    foreach (VM vm in this._selectedVMs)
+                    if (this._selectedVMs.Count > 0)
                     {
-                        if (!vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) || Helpers.FeatureForbidden(vm, Host.RestrictVss))
+                        foreach (VM vm in this._selectedVMs)
                         {
-                            this.quiesceCheckBox.Enabled = false;
-                            break;
+                            if (!vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) || Helpers.FeatureForbidden(vm, Host.RestrictVss))
+                            {
+                                this.quiesceCheckBox.Enabled = false;
+                                this.quiesceCheckBox.Checked = false;
+                                break;
+                            }
                         }
+
                     }
+
                 }
-                else
+                else /* we enter this block only when we are editing a policy, in that case the decision has already been taken in RefreshTab function */
                 {
-                    if (!this.quiesceCheckBox.Checked)
-                        this.quiesceCheckBox.Enabled = false;
+                    this.quiesceCheckBox.Enabled = isQuiesceEnabled;
                 }
                 this.pictureBoxVSS.Visible = !this.quiesceCheckBox.Enabled;
             }
