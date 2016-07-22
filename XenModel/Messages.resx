@@ -5276,6 +5276,15 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FOLDER_ALREADY_EXISTS" xml:space="preserve">
     <value>Folder with this name already exists</value>
   </data>
+  <data name="FOLDER_BROWSER_BUG_TOOL" xml:space="preserve">
+    <value>Specify the folder where your report will be saved.</value>
+  </data>
+  <data name="FOLDER_BROWSER_DOWNLOAD_APPLIANCE" xml:space="preserve">
+    <value>Specify the folder where the files will be downloaded.</value>
+  </data>
+  <data name="FOLDER_BROWSER_EXPORT_APPLIANCE" xml:space="preserve">
+    <value>Specify the folder where the exported file(s) will be saved.</value>
+  </data>
   <data name="FOLDER_NO_CONNECTION" xml:space="preserve">
     <value>Connect to a server to create your folder</value>
   </data>
@@ -6227,6 +6236,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH" xml:space="preserve">
     <value>Path contains invalid characters.</value>
+  </data>
+  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI" xml:space="preserve">
+    <value>Please specify a valid URI.</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH" xml:space="preserve">
     <value>Path does not exist.</value>

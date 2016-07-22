@@ -241,7 +241,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog dlog = new FolderBrowserDialog {SelectedPath = m_textBoxLocation.Text})
+            using (FolderBrowserDialog dlog = new FolderBrowserDialog {SelectedPath = m_textBoxLocation.Text, Description = Messages.FOLDER_BROWSER_BUG_TOOL})
             {
                 if (dlog.ShowDialog() == DialogResult.OK)
                     m_textBoxLocation.Text = dlog.SelectedPath;

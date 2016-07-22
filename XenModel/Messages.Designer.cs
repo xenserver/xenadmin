@@ -15007,6 +15007,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify the folder where your report will be saved..
+        /// </summary>
+        public static string FOLDER_BROWSER_BUG_TOOL {
+            get {
+                return ResourceManager.GetString("FOLDER_BROWSER_BUG_TOOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the folder where the files will be downloaded..
+        /// </summary>
+        public static string FOLDER_BROWSER_DOWNLOAD_APPLIANCE {
+            get {
+                return ResourceManager.GetString("FOLDER_BROWSER_DOWNLOAD_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the folder where the exported file(s) will be saved..
+        /// </summary>
+        public static string FOLDER_BROWSER_EXPORT_APPLIANCE {
+            get {
+                return ResourceManager.GetString("FOLDER_BROWSER_EXPORT_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect to a server to create your folder.
         /// </summary>
         public static string FOLDER_NO_CONNECTION {
@@ -17673,6 +17700,15 @@ namespace XenAdmin {
         public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH {
             get {
                 return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a valid URI..
+        /// </summary>
+        public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI {
+            get {
+                return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI", resourceCulture);
             }
         }
         
