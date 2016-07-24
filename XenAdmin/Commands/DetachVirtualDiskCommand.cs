@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using XenAPI;
 using XenAdmin.Commands.Controls;
@@ -142,7 +143,10 @@ namespace XenAdmin.Commands
 
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
                     if (!cmd.CanExecute())
-                        return cmd.ToolTipText;
+                    {
+                        var reasons = cmd.GetCantExecuteReasons();
+                        return reasons.Count > 0 ? reasons.ElementAt(0).Value : Messages.UNKNOWN;
+                    }
                 }
             }
             return base.GetCantExecuteReasonCore(item);
