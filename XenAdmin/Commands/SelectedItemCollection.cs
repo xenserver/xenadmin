@@ -58,6 +58,15 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SelectedItemCollection"/> class with one item
+        /// </summary>
+        /// <param name="item">The itemsthat will populate the collection.</param>
+        public SelectedItemCollection(SelectedItem item)
+            : base(new List<SelectedItem> {item})
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SelectedItemCollection"/> class.
         /// </summary>
         /// <param name="items">The items that will populate the collection.</param>
