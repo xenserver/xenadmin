@@ -426,7 +426,7 @@ namespace XenAdmin.TabPages
             for (int i = 0; i < snapshots.Count; i++)
             {
                 VM snapshot = snapshots[i];
-                if (!(snapshot.is_snapshot_from_vmpp && !toolStripMenuItemScheduledSnapshots.Checked))
+                if (!(snapshot.is_snapshot_from_vmpp || snapshot.is_vmss_snapshot) || toolStripMenuItemScheduledSnapshots.Checked)
                 {
                     snapshot.PropertyChanged -= snapshot_PropertyChanged;
                     snapshot.PropertyChanged += snapshot_PropertyChanged;
@@ -435,15 +435,7 @@ namespace XenAdmin.TabPages
                     row.Tag = snapshot;
                     DataGridView.Rows.Add(row);
                 }
-                else if (!(snapshot.is_vmss_snapshot && !toolStripMenuItemScheduledSnapshots.Checked))
-                {
-                    snapshot.PropertyChanged -= snapshot_PropertyChanged;
-                    snapshot.PropertyChanged += snapshot_PropertyChanged;
-                    //Build DataGridView
-                    SnapshotDataGridViewRow row = new SnapshotDataGridViewRow(snapshot);
-                    row.Tag = snapshot;
-                    DataGridView.Rows.Add(row);
-                }
+
                 VM parent = VM.Connection.Resolve<VM>(snapshot.parent);
                 if (parent == null)
                     roots.Add(snapshot);
