@@ -409,5 +409,10 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             Program.OpenURL(e.LinkText);
         }
+
+        private void existingAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
     }
 }
