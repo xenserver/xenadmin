@@ -36,6 +36,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Network;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 namespace XenAdmin.TabPages
@@ -205,6 +206,11 @@ namespace XenAdmin.TabPages
                     break;
                 }
             }
+        }
+
+        private void ViewPvsFarmsButton_Click(object sender, EventArgs e)
+        {
+            Program.MainWindow.ShowPerConnectionWizard(connection, new PvsFarmDialog(connection));
         }
     }
 }

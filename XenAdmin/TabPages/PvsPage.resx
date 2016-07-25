@@ -363,37 +363,37 @@
   <data name="&gt;&gt;ConfigureButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="button1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="ViewPvsFarmsButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="ViewPvsFarmsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ViewPvsFarmsButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 186</value>
   </data>
-  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ViewPvsFarmsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 3</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ViewPvsFarmsButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 23</value>
   </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ViewPvsFarmsButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
+  <data name="ViewPvsFarmsButton.Text" xml:space="preserve">
     <value>View PVS &amp;Farms...</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
+  <data name="&gt;&gt;ViewPvsFarmsButton.Name" xml:space="preserve">
+    <value>ViewPvsFarmsButton</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ViewPvsFarmsButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ViewPvsFarmsButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ViewPvsFarmsButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -460,7 +460,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="button2" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="dataGridViewVms" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="dataGridViewFarms" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="ConfigureButton" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="button1" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,160,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="button2" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="dataGridViewVms" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="dataGridViewFarms" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="ConfigureButton" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ViewPvsFarmsButton" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,160,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 91</value>
