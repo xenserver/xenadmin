@@ -216,6 +216,17 @@ namespace XenAdmin.Controls
             else
                 ServersGridView.Select();
         }
+
+        bool selectedOnVisibleChanged = false;
+
+        private void ServersGridView_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!selectedOnVisibleChanged)
+            {
+                selectedOnVisibleChanged = true;
+                SelectSomething();//CA-213728
+            }
+        }
     }
 
     internal class ServerGridRow : DataGridViewExRow
