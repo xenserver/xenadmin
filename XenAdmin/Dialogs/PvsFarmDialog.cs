@@ -64,14 +64,21 @@ namespace XenAdmin.Dialogs
         {
             UnregisterEventHandlers();
             connection.Cache.RegisterBatchCollectionChanged<PVS_farm>(PvsFarmBatchCollectionChanged);
+            connection.Cache.RegisterBatchCollectionChanged<PVS_server>(PvsServerBatchCollectionChanged);
         }
 
         private void UnregisterEventHandlers()
         {
             connection.Cache.DeregisterBatchCollectionChanged<PVS_farm>(PvsFarmBatchCollectionChanged);
+            connection.Cache.DeregisterBatchCollectionChanged<PVS_server>(PvsServerBatchCollectionChanged);
         }
 
         private void PvsFarmBatchCollectionChanged(object sender, EventArgs e)
+        {
+            Program.Invoke(this, Rebuild);
+        }
+
+        private void PvsServerBatchCollectionChanged(object sender, EventArgs e)
         {
             Program.Invoke(this, Rebuild);
         }
