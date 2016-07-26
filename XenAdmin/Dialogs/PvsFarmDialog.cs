@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using XenAdmin.Network;
@@ -99,9 +98,10 @@ namespace XenAdmin.Dialogs
                 gridView.SuspendLayout();
                 gridView.Rows.Clear();
 
-                PVS_farm[] pvsFarmsArray = connection.Cache.PVS_farms;
-                List<PVS_farm> sortedPvsFarms = pvsFarmsArray.OrderBy(farm => farm.name).ToList();
-                foreach (var pvsFarm in sortedPvsFarms)
+                var pvsFarms = connection.Cache.PVS_farms.ToList();
+                pvsFarms.Sort();
+
+                foreach (var pvsFarm in pvsFarms)
                 {
                     var farmRow = new CollapsingPvsFarmServerDataGridViewRow(pvsFarm);
                     gridView.Rows.Add(farmRow);

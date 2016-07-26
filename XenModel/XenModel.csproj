@@ -324,6 +324,7 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\PVS_farm.cs" />
     <Compile Include="XenAPI-Extensions\PVS_proxy.cs" />
     <Compile Include="XenAPI-Extensions\VM_Docker_Info.cs" />
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />

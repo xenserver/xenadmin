@@ -102,31 +102,6 @@ namespace XenAdmin.Controls.DataGridViewEx
             }
         }
 
-        public int ExpansionCellIndex
-        {
-            get { return Cells.IndexOf(expansionCell); }
-        }
-
-        public int FarmCellIndex
-        {
-            get { return Cells.IndexOf(farmCell); }
-        }
-
-        public int IpAddressesCellIndex
-        {
-            get { return Cells.IndexOf(ipAddressesCell); }
-        }
-
-        public int FirstPortCellIndex
-        {
-            get { return Cells.IndexOf(firstPortCell); }
-        }
-
-        public int LastPortCellIndex
-        {
-            get { return Cells.IndexOf(lastPortCell); }
-        }
-
         public bool IsFarmRow
         {
             get { return isPvsFarmRow; }
