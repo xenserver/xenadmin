@@ -49,7 +49,7 @@
             this.ColumnConfiguration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSRs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfigureButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ViewPvsFarmsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -70,7 +70,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewFarms, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ConfigureButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ViewPvsFarmsButton, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -197,11 +197,12 @@
             this.ConfigureButton.Name = "ConfigureButton";
             this.ConfigureButton.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // ViewPvsFarmsButton
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.ViewPvsFarmsButton, "ViewPvsFarmsButton");
+            this.ViewPvsFarmsButton.Name = "ViewPvsFarmsButton";
+            this.ViewPvsFarmsButton.UseVisualStyleBackColor = true;
+            this.ViewPvsFarmsButton.Click += new System.EventHandler(this.ViewPvsFarmsButton_Click);
             // 
             // label1
             // 
@@ -229,7 +230,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewFarms;
         public System.Windows.Forms.Button ConfigureButton;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button ViewPvsFarmsButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Button button2;
