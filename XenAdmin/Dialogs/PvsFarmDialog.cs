@@ -50,7 +50,7 @@ namespace XenAdmin.Dialogs
             connection = _connection;
 
             InitializeComponent();
-            Text += string.Format(" - '{0}'", this.connection.Name);
+            Text = string.Format(Messages.PVS_FARM_DIALOG_TITLE, this.connection.Name);
 
             System.Diagnostics.Trace.Assert(gridView.Columns.Count > 0);
             gridView.Columns[0].DefaultCellStyle.NullValue = null;

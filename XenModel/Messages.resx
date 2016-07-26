@@ -9478,7 +9478,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>Memory only</value>
   </data>
   <data name="PVS_FARM_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Farm - '{0}'</value>
+    <value>PVS Farms - '{0}'</value>
   </data>
   <data name="PVS_TAB_TITLE" xml:space="preserve">
     <value>PVS Read Cache</value>

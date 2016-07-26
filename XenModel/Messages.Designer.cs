@@ -27234,7 +27234,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Farm - &apos;{0}&apos;.
+        ///   Looks up a localized string similar to PVS Farms - &apos;{0}&apos;.
         /// </summary>
         public static string PVS_FARM_DIALOG_TITLE {
             get {

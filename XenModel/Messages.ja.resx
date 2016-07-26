@@ -9430,7 +9430,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プロキシ サーバーはサポートされません。</value>
   </data>
   <data name="PVS_FARM_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Farm - '{0}'</value>
+    <value>PVS Farms - '{0}'</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools 未インストール</value>
