@@ -141,6 +141,7 @@
             // 
             // SRBlurb
             // 
+            this.SRBlurb.AutoEllipsis = true;
             resources.ApplyResources(this.SRBlurb, "SRBlurb");
             this.SRBlurb.Name = "SRBlurb";
             // 
