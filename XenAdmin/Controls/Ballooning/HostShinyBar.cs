@@ -53,12 +53,14 @@ namespace XenAdmin.Controls.Ballooning
         List<VM> vms;
         Dictionary<VM, VM_metrics> vm_metrics;
         long xen_memory;
+        long dom0_memory;
 
-        public void Initialize(Host host, long xen_memory)
+        public void Initialize(Host host, long xen_memory, long dom0_memory)
         {
             this.host = host;
             this.host_metrics = host.Connection.Resolve(host.metrics);
             this.xen_memory = xen_memory;
+            this.dom0_memory = dom0_memory;
             vms = host.Connection.ResolveAll(host.resident_VMs);
             vm_metrics = new Dictionary<VM, VM_metrics>();
             foreach (VM vm in vms)
@@ -79,7 +81,10 @@ namespace XenAdmin.Controls.Ballooning
 
             // A bar for Xen memory
             double left = (double)barArea.Left;
-            DrawSegment(g, xen_memory, bytesPerPixel, Messages.MEMORY_XEN, null, BallooningColors.HostShinyBar_Control, ref left);
+            DrawSegment(g, xen_memory - dom0_memory, bytesPerPixel, Messages.MEMORY_XEN, null, BallooningColors.HostShinyBar_Xen, ref left);
+
+            // A bar for Dom0 memory
+            DrawSegment(g, dom0_memory, bytesPerPixel, string.Format(Messages.CONTROL_DOM_ON_HOST, host.Name), null, BallooningColors.HostShinyBar_ControlDomain, ref left);
 
             // A bar for each VM
             int i = 0;

@@ -29,23 +29,37 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
+using System;
+using XenAPI;
+using XenAdmin.Actions.VMActions;
 
-namespace XenAdmin.Controls.Ballooning
+
+namespace XenAdmin.Actions
 {
-    public static class BallooningColors
+    public class ChangeControlDomainMemoryAction : AsyncAction
     {
-        public static Color VMShinyBar_Used = Color.ForestGreen;
-        public static Color VMShinyBar_Unused = Color.Black;
-        public static Color VMShinyBar_Text = Color.White;
+        long memory;
 
-        public static Color HostShinyBar_Xen = Color.DarkGray;
-        public static Color HostShinyBar_ControlDomain = Color.DimGray; 
-        public static Color[] HostShinyBar_VMs = { Color.MidnightBlue, Color.SteelBlue };
-        public static Color HostShinyBar_Unused = Color.Black;
-        public static Color HostShinyBar_Text = Color.White;
+        public ChangeControlDomainMemoryAction(Host host, long memory, bool suppressHistory)
+            : base(host.Connection, string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name), suppressHistory)
+        {
+            Host = host;
+            this.memory = memory;
 
-        public static Color Grid = Color.DarkGray;
-        public static Color SliderLimits = Color.LightGray;
+            #region RBAC Dependencies
+ 
+            ApiMethodsToRoleCheck.Add("vm.set_memory");
+
+            #endregion
+        }
+
+        protected override void Run()
+        {
+            VM vm = Host.ControlDomainZero;
+
+            XenAPI.VM.set_memory(Session, vm.opaque_ref, memory);
+
+            Description = Messages.COMPLETED;
+        }
     }
 }

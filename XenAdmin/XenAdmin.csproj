@@ -111,6 +111,7 @@
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
+    <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
@@ -231,6 +232,12 @@
     </Compile>
     <Compile Include="Dialogs\PvsSiteDialog.Designer.cs">
       <DependentUpon>PvsSiteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDomainMemoryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ControlDomainMemoryDialog.Designer.cs">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewLauncher.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
@@ -1541,6 +1548,15 @@
     <EmbeddedResource Include="Dialogs\BallooningDialogAdvanced.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BallooningDialogAdvanced.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.resx">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.zh-CN.resx">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.ja.resx">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DateFilterDialog.resx">
       <SubType>Designer</SubType>

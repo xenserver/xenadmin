@@ -79,6 +79,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing control domain memory settings on &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_CHANGE_CONTROL_DOMAIN_MEMORY {
+            get {
+                return ResourceManager.GetString("ACTION_CHANGE_CONTROL_DOMAIN_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change disk size.
         /// </summary>
         public static string ACTION_CHANGE_DISK_SIZE {
@@ -6913,6 +6922,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing the Control Domain memory will cause the server to be rebooted.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY {
+            get {
+                return ResourceManager.GetString("CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changing the maximum memory of these VMs will cause them to be rebooted.
         ///
         ///Do you want to continue?.
@@ -8278,6 +8298,24 @@ namespace XenAdmin {
         public static string CONTROL_DOM_ON_HOST {
             get {
                 return ResourceManager.GetString("CONTROL_DOM_ON_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Control Domain Memory Settings - {0}.
+        /// </summary>
+        public static string CONTROL_DOMAIN_MEMORY_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("CONTROL_DOMAIN_MEMORY_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Control Domain Memory:.
+        /// </summary>
+        public static string CONTROL_DOMAIN_MEMORY_LABEL {
+            get {
+                return ResourceManager.GetString("CONTROL_DOMAIN_MEMORY_LABEL", resourceCulture);
             }
         }
         
@@ -17038,6 +17076,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control &amp;Domain Memory....
+        /// </summary>
+        public static string HOST_MENU_CONTROL_DOMAIN_MEMORY {
+            get {
+                return ResourceManager.GetString("HOST_MENU_CONTROL_DOMAIN_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Migrate VM wizard....
         /// </summary>
         public static string HOST_MENU_CPM_TEXT {
@@ -20459,7 +20506,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Crash &amp;Dump Files.
+        ///   Looks up a localized string similar to Remove Crash Dump &amp;Files.
         /// </summary>
         public static string MAINWINDOW_REMOVE_HOST_CRASHDUMPS {
             get {

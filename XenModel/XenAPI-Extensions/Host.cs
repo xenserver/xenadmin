@@ -1249,6 +1249,22 @@ namespace XenAPI
             }
         }
 
+        public long dom0_memory
+        {
+            get
+            {
+                long dom0_mem = 0;
+                VM vm = ControlDomainZero;
+                if (vm != null)
+                {
+                    VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
+                    dom0_mem = vmMetrics != null ? vmMetrics.memory_actual : vm.memory_dynamic_min;
+                }
+                return dom0_mem;
+            }
+        }
+
+
         /// <summary>
         /// Friendly string showing memory usage on the host
         /// </summary>

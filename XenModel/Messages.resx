@@ -126,6 +126,9 @@
   <data name="ACTION_CHANGED_DISK_SIZE_FOR" xml:space="preserve">
     <value>Disk size changed for '{0}'.</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>Changing control domain memory settings on '{0}'</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>Change disk size</value>
   </data>
@@ -2511,6 +2514,11 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>Configuring Workload Balancing on pool '{0}'</value>
   </data>
+  <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>Changing the Control Domain memory will cause the server to be rebooted.
+
+Do you want to continue?</value>
+  </data>
   <data name="CONFIRM_CHANGE_MEMORY_MAX_PLURAL" xml:space="preserve">
     <value>Changing the maximum memory of these VMs will cause them to be rebooted.
 
@@ -3008,6 +3016,12 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CONTINUE_WITH_EXPORT" xml:space="preserve">
     <value>&amp;Continue with export</value>
+  </data>
+  <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
+    <value>Control Domain Memory Settings - {0}</value>
+  </data>
+  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
+    <value>&amp;Control Domain Memory:</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
@@ -6003,6 +6017,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOST_MENU_COMPLETE_FAILURE" xml:space="preserve">
     <value>(Error generating menu)</value>
   </data>
+  <data name="HOST_MENU_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>Control &amp;Domain Memory...</value>
+  </data>
   <data name="HOST_MENU_CPM_TEXT" xml:space="preserve">
     <value>&amp;Migrate VM wizard...</value>
   </data>
@@ -7134,7 +7151,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Remo&amp;ve from [XenCenter]</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
-    <value>Remove Crash &amp;Dump Files</value>
+    <value>Remove Crash Dump &amp;Files</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
     <value>Remove Crash Dump &amp;Files</value>

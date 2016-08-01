@@ -87,7 +87,7 @@ namespace XenAdmin.Controls.Ballooning
                 valueDynMin.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_min, true);
                 valueDynMax.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_max, true);
                 if (vm0.memory_dynamic_max == vm0.memory_static_max)
-                    labelStatMax.Visible = valueStatMax.Visible = unitsStatMax.Visible = false;
+                    labelStatMax.Visible = valueStatMax.Visible = false;
                 else
                     valueStatMax.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_static_max, true);
             }
@@ -97,8 +97,8 @@ namespace XenAdmin.Controls.Ballooning
                 iconBoxDynMin.Visible = false;
                 labelDynMin.Text = Messages.MEMORY;
 
-                iconBoxDynMax.Visible = labelDynMax.Visible = valueDynMax.Visible = unitsDynMax.Visible = false;
-                labelStatMax.Visible = valueStatMax.Visible = unitsStatMax.Visible = false;
+                iconBoxDynMax.Visible = labelDynMax.Visible = valueDynMax.Visible = false;
+                labelStatMax.Visible = valueStatMax.Visible = false;
             }
         }
 

@@ -47,14 +47,12 @@ namespace XenAdmin.Controls.Ballooning
             // 
             resources.ApplyResources(this.hostMemoryControls, "hostMemoryControls");
             this.hostMemoryControls.BackColor = System.Drawing.Color.Transparent;
-            this.hostMemoryControls.MinimumSize = new System.Drawing.Size(700, 90);
             this.hostMemoryControls.Name = "hostMemoryControls";
             // 
             // memoryRowLabel
             // 
             resources.ApplyResources(this.memoryRowLabel, "memoryRowLabel");
             this.memoryRowLabel.BackColor = System.Drawing.Color.Transparent;
-            this.memoryRowLabel.MinimumSize = new System.Drawing.Size(0, 26);
             this.memoryRowLabel.Name = "memoryRowLabel";
             // 
             // HostMemoryRow
@@ -64,7 +62,6 @@ namespace XenAdmin.Controls.Ballooning
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panel);
             this.DoubleBuffered = true;
-            this.MinimumSize = new System.Drawing.Size(700, 118);
             this.Name = "HostMemoryRow";
             this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
