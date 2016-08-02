@@ -12,7 +12,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         public XenServerPatch XenServerPatch { get; set; }
         public Pool_patch Pool_patch { get; set; }
-        public Host Host { get; set; }
+        public Host MasterHost { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -24,12 +24,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             return
                 this.XenServerPatch == that.XenServerPatch
                 && this.Pool_patch == that.Pool_patch
-                && this.Host == that.Host;
+                && this.MasterHost == that.MasterHost;
         }
 
         public override int GetHashCode()
         {
-            return XenServerPatch.GetHashCode() ^ Pool_patch.GetHashCode() ^ Host.GetHashCode();
+            return XenServerPatch.GetHashCode() ^ Pool_patch.GetHashCode() ^ MasterHost.GetHashCode();
         }
     }
 }
