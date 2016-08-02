@@ -477,11 +477,11 @@ namespace XenAdmin.Core
                 // Take all the hotfixes for this version
                 allPatches.AddRange(serverVersions[0].Patches);
 
-                var minimumPatches = serverVersions[0].MinimalPatches;
+                uSeq.MinimalPatches = serverVersions[0].MinimalPatches;
 
                 foreach (Host h in hosts)
                 {
-                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, minimumPatches);
+                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, uSeq.MinimalPatches);
                 }
             }
 
@@ -547,7 +547,17 @@ namespace XenAdmin.Core
             {
                 get
                 {
-                    return AllPatches.Distinct().ToList();
+                    var uniquePatches = new List<XenServerPatch>();
+
+                    foreach (var mp in MinimalPatches)
+                    {
+                        if (AllPatches.Any(p => p.Uuid == mp.Uuid))
+                        {
+                            uniquePatches.Add(mp);
+                        }
+                    }
+
+                    return uniquePatches;
                 }
             }
 
@@ -566,6 +576,12 @@ namespace XenAdmin.Core
 
                     return true;
                 }
+            }
+
+            public List<XenServerPatch> MinimalPatches
+            {
+                set;
+                get;
             }
         }
 
