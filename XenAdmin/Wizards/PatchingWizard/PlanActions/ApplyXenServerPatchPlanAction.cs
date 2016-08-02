@@ -38,14 +38,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class ApplyXenServerPatchPlanAction : PlanActionWithSession
     {
-        private readonly XenRef<Host> host;
+        private readonly Host host;
         private readonly XenServerPatch xenServerPatch;
         private readonly List<PoolPatchMapping> mappings;
 
         public ApplyXenServerPatchPlanAction(Host host, XenServerPatch xenServerPatch, List<PoolPatchMapping> mappings)
             : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name))
         {
-            this.host = new XenRef<Host>(host);
+            this.host = host;
             this.xenServerPatch = xenServerPatch;
             this.mappings = mappings;
         }
@@ -53,7 +53,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
 
-            var mapping = mappings.Find(m => m.XenServerPatch.Uuid == xenServerPatch.Uuid);
+            var mapping = mappings.Find(m => m.XenServerPatch.Uuid == xenServerPatch.Uuid && m.MasterHost == Helpers.GetMaster(host.Connection));
             if (mapping != null && mapping.Pool_patch != null)
             {
                 var patchRef = mapping.Pool_patch;

@@ -64,7 +64,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
             var conn = session.Connection;
 
-            var existingMapping = mappings.Find(m => m.Host == Helpers.GetMaster(conn) && m.Pool_patch != null && m.XenServerPatch == patch);
+            var existingMapping = mappings.Find(m => m.MasterHost == Helpers.GetMaster(conn) && m.Pool_patch != null && m.XenServerPatch == patch);
             if (existingMapping == null
                 || !poolPatches.Any(p => string.Equals(p.uuid, existingMapping.Pool_patch.uuid, StringComparison.OrdinalIgnoreCase)))
             {
@@ -92,12 +92,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     var newMapping = new PoolPatchMapping()
                     {
-                        Host = Helpers.GetMaster(session.Connection),
+                        MasterHost = Helpers.GetMaster(session.Connection),
                         XenServerPatch = patch,
                         Pool_patch = poolPatch
                     };
 
-                    if (!mappings.Any(m => m.Host == newMapping.Host && m.Pool_patch == newMapping.Pool_patch && m.XenServerPatch == patch))
+                    if (!mappings.Any(m => m.MasterHost == newMapping.MasterHost && m.Pool_patch == newMapping.Pool_patch && m.XenServerPatch == patch))
                         mappings.Add(newMapping);
                 }
                 catch (Exception ex)

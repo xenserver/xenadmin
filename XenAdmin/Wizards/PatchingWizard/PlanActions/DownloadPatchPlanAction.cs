@@ -43,15 +43,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     class DownloadPatchPlanAction : PlanActionWithSession
     {
         private readonly XenServerPatch patch;
-        private readonly List<PoolPatchMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private string tempFileName = null;
 
-        public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
+        public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, Dictionary<XenServerPatch, string> allDownloadedPatches)
             : base(connection, string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name))
         {
             this.patch = patch;
-            this.mappings = mappings;
             this.AllDownloadedPatches = allDownloadedPatches;
         }
 

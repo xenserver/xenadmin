@@ -38,16 +38,17 @@ using System.Linq;
 using System.IO;
 using XenAdmin.Network;
 using XenAdmin.Diagnostics.Checks;
+using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    class PatchPrechecksOnMultipleHostsPlanAction : PlanActionWithSession
+    class PatchPrechecksOnMultipleHostsInAPoolPlanAction : PlanActionWithSession
     {
         private readonly XenServerPatch patch;
         private readonly List<PoolPatchMapping> mappings;
         private List<Host> hosts = null;
 
-        public PatchPrechecksOnMultipleHostsPlanAction(IXenConnection connection, XenServerPatch patch, List<Host> hosts, List<PoolPatchMapping> mappings)
+        public PatchPrechecksOnMultipleHostsInAPoolPlanAction(IXenConnection connection, XenServerPatch patch, List<Host> hosts, List<PoolPatchMapping> mappings)
             : base(connection, string.Format("Precheck for {0} in {1}...", patch.Name, connection.Name))
         {
             this.patch = patch;
@@ -57,7 +58,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            var mapping = mappings.Find(m => m.XenServerPatch == patch);
+            var mapping = mappings.Find(m => m.XenServerPatch == patch && m.MasterHost == Helpers.GetMaster(Connection));
             if (mapping != null && mapping.Pool_patch != null)
             {
                 foreach (var host in hosts)

@@ -155,9 +155,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
                     hostsToApply.Sort();
 
-                    planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                    planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
                     planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
-                    planActions.Add(new PatchPrechecksOnMultipleHostsPlanAction(master.Connection, patch, hostsToApply, patchMappings));
+                    planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
                     foreach (var host in hostsToApply)
                     {
