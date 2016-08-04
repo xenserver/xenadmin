@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public static string ModeRetailPatch(List<Host> servers, Pool_patch patch)
         {
-            return Build(servers, patch.after_apply_guidance);
+            return Build(servers, patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>());
         }
 
         public static string ModeSuppPack(List<Host> servers)
