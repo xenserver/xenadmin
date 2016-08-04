@@ -500,20 +500,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                         continue;
                     }
 
+                    log.Error(exception);
+
                     if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
                     {
                         var innerEx = exception.InnerException as Failure;
-                        sb.AppendLine(innerEx.Message);
+                        log.Error(innerEx);
 
-                        if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
-                            sb.AppendLine(string.Concat(innerEx.ErrorDescription.ToArray()));
+                        sb.AppendLine(innerEx.Message);
                     }
                     else
                     {
-                        if (exception is Failure && ((Failure)exception).ErrorDescription != null)
-                            sb.AppendLine(string.Concat(((Failure)exception).ErrorDescription.ToArray()));
-                        else
-                            sb.AppendLine(exception.Message);
+                        sb.AppendLine(exception.Message);
                     }
                 }
 
