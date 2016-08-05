@@ -45,6 +45,7 @@ namespace XenAdmin.Actions
         private readonly string updateName;
         private readonly long updateSize;
         private readonly Pool_patch currentPatch;
+        private readonly Actions.DiskSpaceRequirements.OperationTypes operation = Actions.DiskSpaceRequirements.OperationTypes.upload;
 
         public DiskSpaceRequirements DiskSpaceRequirements { get; private set; }
 
@@ -63,6 +64,15 @@ namespace XenAdmin.Actions
         public GetDiskSpaceRequirementsAction(Host host, string path, bool suppressHistory)
             : this(host, FileName(path), FileSize(path), suppressHistory)
         { }
+
+        /// <summary>
+        /// This constructor is used to calculate the disk space when the required space is known only
+        /// </summary>
+        public GetDiskSpaceRequirementsAction(Host host, long size, bool suppressHistory)
+            : this(host, null, size, suppressHistory)
+        {
+            this.operation = Actions.DiskSpaceRequirements.OperationTypes.autoupdate;
+        }
 
         /// <summary>
         /// This constructor is used to check disk space for installing or uploading an update of given size
@@ -125,20 +135,22 @@ namespace XenAdmin.Actions
 
             // get reclaimable disk space (excluding current patch)
             long reclaimableDiskSpace = 0;
-            try
-            {
-                var args = new Dictionary<string, string>();
-                if (currentPatch != null)
-                    args.Add("exclude", currentPatch.uuid);
-                 result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_reclaimable_disk_space", args);
-                 reclaimableDiskSpace = Convert.ToInt64(result);
-            }
-            catch (Failure failure)
-            {
-                log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
-            }
 
-            var operation = Actions.DiskSpaceRequirements.OperationTypes.upload;
+            if (operation != Actions.DiskSpaceRequirements.OperationTypes.autoupdate || availableDiskSpace < requiredDiskSpace)
+            {
+                try
+                {
+                    var args = new Dictionary<string, string>();
+                    if (currentPatch != null)
+                        args.Add("exclude", currentPatch.uuid);
+                    result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_reclaimable_disk_space", args);
+                    reclaimableDiskSpace = Convert.ToInt64(result);
+                }
+                catch (Failure failure)
+                {
+                    log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
+                }
+            }
 
             DiskSpaceRequirements = new DiskSpaceRequirements(operation, Host, updateName, requiredDiskSpace, availableDiskSpace, reclaimableDiskSpace);
 
@@ -156,7 +168,7 @@ namespace XenAdmin.Actions
         public readonly long AvailableDiskSpace;
         public readonly long ReclaimableDiskSpace;
 
-        public enum OperationTypes { install, upload }
+        public enum OperationTypes { install, upload, autoupdate }
       
         public DiskSpaceRequirements(OperationTypes operation, Host host, string updateName, long requiredDiskSpace, long availableDiskSpace, long reclaimableDiskSpace)
         {
@@ -184,6 +196,9 @@ namespace XenAdmin.Actions
                     break;
                 case OperationTypes.upload :
                     sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Host.Name, UpdateName);
+                    break;
+                case OperationTypes.autoupdate :
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Host.Name);
                     break;
             }
 

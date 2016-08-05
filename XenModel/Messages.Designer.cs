@@ -24799,6 +24799,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not enough space to automatically update &apos;{0}&apos;..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Space available: {0}.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE {
@@ -25946,6 +25955,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking disk space requirements.
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prechecks failed..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FAILED {
@@ -26135,7 +26153,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have automatically updated.
+        ///Greyed out servers cannot be updated automatically..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE {
             get {
@@ -26144,7 +26163,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Select one or more servers from the list of available servers.
+        ///Servers where the selected update cannot be applied appear disabled in this list..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT {
             get {
@@ -29226,6 +29246,15 @@ namespace XenAdmin {
         public static string SERVER_REQUEST_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("SERVER_REQUEST_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk space check.
+        /// </summary>
+        public static string SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION", resourceCulture);
             }
         }
         

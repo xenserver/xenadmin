@@ -40,6 +40,7 @@ using System.Collections.Generic;
 using XenAdmin.Dialogs;
 using System.Drawing;
 using System;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
@@ -60,9 +61,21 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             get
             {
-                return string.Format(diskSpaceReq.Operation == DiskSpaceRequirements.OperationTypes.install 
-                    ? Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL 
-                    : Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, patch.Name);
+                switch (diskSpaceReq.Operation)
+                {
+                    case DiskSpaceRequirements.OperationTypes.install :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, patch.Name);
+                    
+                    case DiskSpaceRequirements.OperationTypes.upload :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, patch.Name);
+                    
+                    case DiskSpaceRequirements.OperationTypes.autoupdate :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Server.Name);
+
+                    default:
+                        Debug.Assert(false);
+                        return string.Empty;
+                }
             }
         }
 
