@@ -58,7 +58,10 @@ namespace XenAdmin.Actions
         public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
             : base(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
         {
-            actionsByConnection.Add(connection, subActions);
+            if (Connection != null)
+                actionsByConnection.Add(Connection, subActions);
+            else
+                GroupActionsByConnection(); 
             this.maxNumberOfParallelActions = maxNumberOfParallelActions;
         }
 
@@ -138,6 +141,8 @@ namespace XenAdmin.Actions
             queue.EnqueueItem(
                 () =>
                 {
+                    if (Cancelling) // don't start any more actions
+                        return;
                     try
                     {
                         action.RunExternal(action.Session);
@@ -163,12 +168,15 @@ namespace XenAdmin.Actions
         
         void action_Completed(ActionBase sender)
         {
+            sender.Completed -= action_Completed;
             lock (_lock)
             {
                 i++;
-                PercentComplete = 100 * i / subActions.Count;
                 if (i == subActions.Count)
+                {
                     Monitor.Pulse(_lock);
+                    PercentComplete = 100;
+                }
             }
         }
 

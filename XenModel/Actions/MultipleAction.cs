@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
+using System.Linq;
 
 
 namespace XenAdmin.Actions
@@ -56,6 +57,7 @@ namespace XenAdmin.Actions
             this.endDescription = endDescription;
             this.subActions = subActions;
             this.Completed += MultipleAction_Completed;
+            RegisterEvents();
         }
 
         public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions)
@@ -67,8 +69,6 @@ namespace XenAdmin.Actions
             : this(connection, title, startDescription, endDescription, subActions, suppressHistory)
         {
             ShowSubActionsDetails = showSubActionsDetails;
-            if (showSubActionsDetails)
-                RegisterEvents();
         }
 
         public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription,
@@ -94,7 +94,8 @@ namespace XenAdmin.Actions
         {
             PercentComplete = 0;
             var exceptions = new List<Exception>();
-            
+            RecomputeCanCancel();
+
             RunSubActions(exceptions);
 
             PercentComplete = 100;
@@ -105,6 +106,21 @@ namespace XenAdmin.Actions
                     log.Error(e);
 
                 Exception = new Exception(Messages.SOME_ERRORS_ENCOUNTERED);
+            }
+            if (Cancelling)
+                Exception = new CancelledException();
+        }
+
+        public override void RecomputeCanCancel()
+        {
+            CanCancel = !this.IsCompleted && subActions.Any(a => !a.IsCompleted);
+        }
+
+        protected override void CancelRelatedTask()
+        {
+            foreach (AsyncAction subAction in subActions.Where(a => !a.IsCompleted))
+            {
+                subAction.Cancel();
             }
         }
 
@@ -127,15 +143,26 @@ namespace XenAdmin.Actions
             {
                 SubActionTitle = subAction.Title;
                 SubActionDescription = subAction.Description;
+                RecalculatePercentComplete();
                 OnChanged();
             }
         }
 
+        private void RecalculatePercentComplete()
+        {
+            int total = 0;
+            int n = subActions.Count;
+            foreach (var action in subActions)
+                total += action.PercentComplete;
+            PercentComplete = (int)(total / n);
+        }
+
         protected virtual void RunSubActions(List<Exception> exceptions)
         {
-            int i = 0;
             foreach (AsyncAction subAction in subActions)
             {
+                if (Cancelling) // don't start any more actions
+                    break;
                 try
                 {
                     subAction.RunExternal(Session);
@@ -154,8 +181,6 @@ namespace XenAdmin.Actions
                     if (StopOnFirstException)
                         break;
                 }
-                i++;
-                PercentComplete = 100 * i / subActions.Count;
             }
         }
 
