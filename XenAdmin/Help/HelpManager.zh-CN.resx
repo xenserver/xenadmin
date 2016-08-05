@@ -1107,4 +1107,7 @@
   <data name="TabPageADUpsell" xml:space="preserve">
     <value>1301</value>
   </data>
+  <data name="Dom0MemoryDemandUsageMessageAlert" xml:space="preserve">
+    <value>7016</value>
+  </data>
 </root>
