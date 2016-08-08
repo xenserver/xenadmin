@@ -218,6 +218,7 @@
   </data>
   <data name="buttonColumns.Text" xml:space="preserve">
     <value>Sh&amp;ow Columns</value>
+    <value>Show &amp;Columns</value>
   </data>
   <data name="&gt;&gt;buttonColumns.Name" xml:space="preserve">
     <value>buttonColumns</value>
