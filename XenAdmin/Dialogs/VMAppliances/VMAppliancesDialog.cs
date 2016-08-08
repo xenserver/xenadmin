@@ -445,7 +445,7 @@ namespace XenAdmin.Dialogs.VMAppliances
 			if (currentSelected == null)
 				return;
 
-			var selection = new SelectedItemCollection(new[] {new SelectedItem(currentSelected)});
+			var selection = new SelectedItemCollection(new SelectedItem(currentSelected));
 			(new ExportApplianceWizard(Pool.Connection, selection)).Show(this);
 		}
 

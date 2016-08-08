@@ -32,10 +32,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using XenAPI;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.TabPages;
 using XenAdmin.Core;
 using XenAdmin.Commands.Controls;
 using XenAdmin.Dialogs;
@@ -419,8 +419,11 @@ namespace XenAdmin.Commands
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
                     if (!cmd.CanExecute())
                     {
-                        return string.Format(Messages.CANNOT_DELETE_CANNOT_DEACTIVATE_REASON,
-                            Helpers.GetName(vm).Ellipsise(20), cmd.ToolTipText);
+                        var reasons = cmd.GetCantExecuteReasons();
+                        return reasons.Count > 0
+                            ? string.Format(Messages.CANNOT_DELETE_CANNOT_DEACTIVATE_REASON,
+                                Helpers.GetName(vm).Ellipsise(20), reasons.ElementAt(0).Value)
+                            : Messages.UNKNOWN;
                     }
                 }
             }
