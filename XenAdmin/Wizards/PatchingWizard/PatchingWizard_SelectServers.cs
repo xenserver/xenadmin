@@ -406,16 +406,23 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get
             {
-                List<Host> hosts = new List<Host>();
-                foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
+                if (IsInAutomaticMode)
                 {
-                    if (row.Tag is Host)
-                    {
-                        if ((row.HasPool && ((int)row.Cells[POOL_ICON_HOST_CHECKBOX_COL].Value) == CHECKED) || (!row.HasPool && ((int)row.Cells[POOL_CHECKBOX_COL].Value) == CHECKED))
-                            hosts.Add((Host)row.Tag);
-                    }
+                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
                 }
-                return hosts;
+                else
+                {
+                    List<Host> hosts = new List<Host>();
+                    foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
+                    {
+                        if (row.Tag is Host)
+                        {
+                            if ((row.HasPool && ((int)row.Cells[POOL_ICON_HOST_CHECKBOX_COL].Value) == CHECKED) || (!row.HasPool && ((int)row.Cells[POOL_CHECKBOX_COL].Value) == CHECKED))
+                                hosts.Add((Host)row.Tag);
+                        }
+                    }
+                    return hosts;
+                }
             }
         }
 

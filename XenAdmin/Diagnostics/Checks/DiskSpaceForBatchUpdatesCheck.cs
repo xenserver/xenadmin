@@ -62,11 +62,9 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.Connection.IsConnected)
                 throw new EndOfStreamException(Helpers.GetName(Host.Connection));
 
-            Session session = Host.Connection.DuplicateSession();
-
             if (Helpers.CreamOrGreater(Host.Connection))
             {
-                var action = new GetDiskSpaceRequirementsAction(Host, size, true);
+                var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.autoupdate);
 
                 try
                 {

@@ -68,10 +68,10 @@ namespace XenAdmin.Actions
         /// <summary>
         /// This constructor is used to calculate the disk space when the required space is known only
         /// </summary>
-        public GetDiskSpaceRequirementsAction(Host host, long size, bool suppressHistory)
+        public GetDiskSpaceRequirementsAction(Host host, long size, bool suppressHistory, XenAdmin.Actions.DiskSpaceRequirements.OperationTypes operation)
             : this(host, null, size, suppressHistory)
         {
-            this.operation = Actions.DiskSpaceRequirements.OperationTypes.autoupdate;
+            this.operation = operation;
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace XenAdmin.Actions
             // get reclaimable disk space (excluding current patch)
             long reclaimableDiskSpace = 0;
 
-            if (operation != Actions.DiskSpaceRequirements.OperationTypes.autoupdate || availableDiskSpace < requiredDiskSpace)
+            if (availableDiskSpace < requiredDiskSpace)
             {
                 try
                 {

@@ -156,7 +156,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
                 
-                PatchingWizard_PrecheckPage.SelectedServers = PatchingWizard_SelectPatchPage.IsInAutomaticMode ? PatchingWizard_SelectServers.SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList() : selectedServers;
+                PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
