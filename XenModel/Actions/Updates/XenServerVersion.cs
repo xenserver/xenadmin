@@ -44,11 +44,28 @@ namespace XenAdmin.Core
         public string Url;
         public string Oem;
         public List<XenServerPatch> Patches;
+        
+        /// <summary>
+        /// A host of this version is considered up-to-date when it has all the patches in this list installed on it
+        /// <value>null</value> means that the list is not known (batch updates/automatic updating is not supported)
+        /// </summary>
         public List<XenServerPatch> MinimalPatches;
+        
         public DateTime TimeStamp;
         public const string UpdateRoot = @"http://updates.xensource.com";
         public string BuildNumber;
 
+        /// <summary>
+        /// Defines metadata for a XenServer version
+        /// </summary>
+        /// <param name="version_oem"></param>
+        /// <param name="name"></param>
+        /// <param name="latest"></param>
+        /// <param name="url"></param>
+        /// <param name="patches"></param>
+        /// <param name="minimumPatches">can be null (see <paramref name="MinimalPatches"/></param>
+        /// <param name="timestamp"></param>
+        /// <param name="buildNumber"></param>
         public XenServerVersion(string version_oem, string name, bool latest, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
             string timestamp, string buildNumber)
         {

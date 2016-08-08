@@ -173,6 +173,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (IsInAutomaticMode)
             {
+                //check updgrade sequences
+                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
+
+                if (us == null) //version not supported
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION;
+
+                    return;
+                }
+
                 //unlicensed servers are not enabled
                 if (Host.RestrictBatchHotfixApply(host))
                 {
@@ -181,9 +192,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     return;
                 }
-                
-                //check updgrade sequences
-                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
 
                 //if there is a host missing from the upgrade sequence
                 if (host.Connection.Cache.Hosts.Any(h => !us.Keys.Contains(h)))

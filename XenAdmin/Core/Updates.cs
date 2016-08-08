@@ -442,6 +442,9 @@ namespace XenAdmin.Core
                 var minimumPatches = new List<XenServerPatch>();
                 minimumPatches = serverVersions[0].MinimalPatches;
 
+                if (minimumPatches == null) //unknown
+                    return recommendedPatches;
+
                 var appliedPatches = host.AppliedPatches();
                 recommendedPatches = minimumPatches.FindAll(p => !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
 
@@ -477,12 +480,19 @@ namespace XenAdmin.Core
                 // Take all the hotfixes for this version
                 allPatches.AddRange(serverVersions[0].Patches);
 
+                if (serverVersions[0].MinimalPatches == null)
+                    return null;
+
                 uSeq.MinimalPatches = serverVersions[0].MinimalPatches;
 
                 foreach (Host h in hosts)
                 {
                     uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, uSeq.MinimalPatches);
                 }
+            }
+            else
+            {
+                return null;
             }
 
             return uSeq;

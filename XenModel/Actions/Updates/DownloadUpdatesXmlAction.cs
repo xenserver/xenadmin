@@ -254,12 +254,14 @@ namespace XenAdmin.Actions
                     }
 
                     List<XenServerPatch> patches = new List<XenServerPatch>();
-                    List<XenServerPatch> minimalPatches = new List<XenServerPatch>();
+                    List<XenServerPatch> minimalPatches = null; //keep it null to indicate that there is no a minimalpatches tag
 
                     foreach (XmlNode childnode in version.ChildNodes)
                     {
                         if (childnode.Name == "minimalpatches")
                         {
+                            minimalPatches = new List<XenServerPatch>();
+
                             foreach (XmlNode minimalpatch in childnode.ChildNodes)
                             {
                                 if (minimalpatch.Name != "patch")
