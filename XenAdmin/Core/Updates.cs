@@ -47,6 +47,7 @@ namespace XenAdmin.Core
 
         public static event Action<bool, string> CheckForUpdatesCompleted;
         public static event Action CheckForUpdatesStarted;
+        public static event Action RestoreDismissedUpdatesStarted;
 
         private static readonly object downloadedUpdatesLock = new object();
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
@@ -198,9 +199,8 @@ namespace XenAdmin.Core
                     Properties.Settings.Default.AllowXenServerUpdates || force,
                     Properties.Settings.Default.AllowPatchesUpdates || force,
                     Updates.CheckForUpdatesUrl);
-                {
-                    action.Completed += actionCompleted;
-                }
+
+                action.Completed += actionCompleted;
 
                 if (CheckForUpdatesStarted != null)
                     CheckForUpdatesStarted();
@@ -652,53 +652,28 @@ namespace XenAdmin.Core
 
         public static void RestoreDismissedUpdates()
         {
-            foreach (IXenConnection _connection in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (!AllowedToRestoreDismissedUpdates(_connection))
-                    continue;
+            var actions = new List<AsyncAction>();
+            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+                actions.Add(new RestoreDismissedUpdatesAction(connection));
 
-                XenAPI.Pool pool = Helpers.GetPoolOfOne(_connection);
-                if (pool == null)
-                    continue;
+            var action = new ParallelAction(Messages.RESTORE_DISMISSED_UPDATES, Messages.RESTORING, Messages.COMPLETED, actions, true, false);
+            action.Completed += action_Completed;
 
-                Dictionary<string, string> other_config = pool.other_config;
+            if (RestoreDismissedUpdatesStarted != null)
+                RestoreDismissedUpdatesStarted();
 
-                if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
-                {
-                    other_config.Remove(IgnorePatchAction.IgnorePatchKey);
-                }
-                if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
-                {
-                    other_config.Remove(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY);
-                }
-
-                XenAPI.Pool.set_other_config(_connection.Session, pool.opaque_ref, other_config);
-            }
-
-            Properties.Settings.Default.LatestXenCenterSeen = "";
-            Settings.TrySaveSettings();
-
-            Updates.CheckForUpdates(true);
+            action.RunAsync();
         }
 
-        /// <summary>
-        /// Checks the user has sufficient RBAC privileges to restore dismissed alerts on a given connection
-        /// </summary>
-        public static bool AllowedToRestoreDismissedUpdates(IXenConnection c)
+        private static void action_Completed(ActionBase action)
         {
-            if (c == null || c.Session == null)
-                return false;
-
-            if (c.Session.IsLocalSuperuser)
-                return true;
-
-            List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Pool.set_other_config", c);
-            foreach (Role possibleRole in rolesAbleToCompleteAction)
+            Program.Invoke(Program.MainWindow, () =>
             {
-                if (c.Session.Roles.Contains(possibleRole))
-                    return true;
-            }
-            return false;
+                Properties.Settings.Default.LatestXenCenterSeen = "";
+                Settings.TrySaveSettings();
+
+                CheckForUpdates(true);
+            });
         }
     }
 }

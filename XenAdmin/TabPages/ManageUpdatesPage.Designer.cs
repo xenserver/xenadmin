@@ -16,6 +16,7 @@
             if (disposing)
             {
                 XenAdmin.Core.Updates.DeregisterCollectionChanged(UpdatesCollectionChanged);
+                XenAdmin.Core.Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
                 XenAdmin.Core.Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
                 XenAdmin.Core.Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
 

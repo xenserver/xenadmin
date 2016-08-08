@@ -67,6 +67,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             Program.Invoke(Program.MainWindow, StartCheckForUpdates);
         }
 
+        private void Updates_RestoreDismissedUpdatesStarted()
+        {
+            Program.Invoke(Program.MainWindow, StartCheckForUpdates);
+        }
+
         private void StartCheckForUpdates()
         {
             if (CheckForUpdatesInProgress)
@@ -135,6 +140,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLoaded(direction);
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+            Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
          
             if (direction == PageLoadedDirection.Forward)
             {
@@ -213,6 +219,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (!cancel) //unsubscribe only if we are really leaving this page
             {
+                Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
                 Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
                 Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
             }
@@ -273,6 +280,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         
         public override void PageCancelled()
         {
+            Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
         }
@@ -591,10 +599,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RestoreDismUpdatesButton_Click(object sender, EventArgs e)
         {
-            //call this here because the restore method sends a call to the server for each connection,
-            //and then does CheckForUpdates, i.e. it takes some time before the CheckForUpdatesStarted
-            //event is fired
-            StartCheckForUpdates();
             Updates.RestoreDismissedUpdates();
         }
 

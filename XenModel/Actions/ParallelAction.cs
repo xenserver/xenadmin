@@ -166,9 +166,12 @@ namespace XenAdmin.Actions
             lock (_lock)
             {
                 i++;
-                PercentComplete = 100 * i / subActions.Count;
-                if (i == subActions.Count)
+                int totalCount = actionsByConnection.Count + actionsWithNoConnection.Count;
+                PercentComplete = 100 * i / totalCount;
+                if (i == totalCount)
+                {
                     Monitor.Pulse(_lock);
+                }
             }
         }
 
