@@ -24307,7 +24307,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk {0}.
+        ///   Looks up a localized string similar to Disk &apos;{0}&apos;.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_DISK {
             get {
@@ -32906,7 +32906,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing update file {0} from {1}... .
+        ///   Looks up a localized string similar to Deleting update installation file {0} from {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_REMOVING_UPDATE {
             get {

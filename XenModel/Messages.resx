@@ -8325,7 +8325,7 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Locate the operating system installation media</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
-    <value>Disk {0}</value>
+    <value>Disk '{0}'</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
     <value>Created by template provisioner</value>
