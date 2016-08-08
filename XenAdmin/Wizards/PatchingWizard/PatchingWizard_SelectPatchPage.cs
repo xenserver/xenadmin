@@ -36,7 +36,6 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenAPI;
 using System.ComponentModel;
@@ -59,34 +58,42 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_SelectPatchPage()
         {
             InitializeComponent();
-            PopulatePatchesBox();
+            tableLayoutPanelSpinner.Visible = false;
             dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
         }
 
-
         private void CheckForUpdates_CheckForUpdatesStarted()
         {
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                RestoreDismUpdatesButton.Enabled = false;
-                RefreshListButton.Enabled = false;
-            });
+            Program.Invoke(Program.MainWindow, StartCheckForUpdates);
         }
 
+        private void StartCheckForUpdates()
+        {
+            if (CheckForUpdatesInProgress)
+                return;
+
+            CheckForUpdatesInProgress = true;
+            dataGridViewPatches.Rows.Clear();
+            dataGridViewPatches.Focus();
+            tableLayoutPanelSpinner.Visible = true;
+            RestoreDismUpdatesButton.Enabled = false;
+            RefreshListButton.Enabled = false;
+            OnPageUpdated();
+        }
 
         private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
         {
             Program.Invoke(Program.MainWindow, delegate
             {
+                tableLayoutPanelSpinner.Visible = false;
                 if (!IsInAutomaticMode)
                 {
                     PopulatePatchesBox();
                 }
-
                 RefreshListButton.Enabled = true;
+                RestoreDismUpdatesButton.Enabled = true;
                 CheckForUpdatesInProgress = false;
                 OnPageUpdated();
-                RestoreDismUpdatesButton.Enabled = true;
             });
         }
 
@@ -126,18 +133,26 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageLoaded(PageLoadedDirection direction)
         {           
             base.PageLoaded(direction);
-            RefreshListButton.Enabled = true;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
          
             if (direction == PageLoadedDirection.Forward)
             {
+                //if any connected host is licensed for automatic updating
+                bool autoUpdatePossible = ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
+               
+                labelWithAutomatic.Visible = automaticOptionLabel.Visible = AutomaticRadioButton.Visible = autoUpdatePossible;
+                labelWithoutAutomatic.Visible = !autoUpdatePossible;
+
+                AutomaticRadioButton.Checked = autoUpdatePossible;
+                downloadUpdateRadioButton.Checked = !autoUpdatePossible;
+
                 PopulatePatchesBox();
-                UpdateEnablement();
+                OnPageUpdated();
             }
         }
 
-        public bool IsInAutomaticMode { get { return AutomaticRadioButton.Checked && AutomaticRadioButton.Enabled; } }
+        public bool IsInAutomaticMode { get { return AutomaticRadioButton.Visible && AutomaticRadioButton.Checked; } }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
@@ -185,20 +200,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else //In Automatic Mode
                 {
                     var downloadUpdatesAction = new DownloadUpdatesXmlAction(false, true, true, Updates.CheckForUpdatesUrl);
-                    var dialog = new ActionProgressDialog(downloadUpdatesAction, ProgressBarStyle.Marquee);
 
-                    dialog.ShowDialog(this.Parent); //Will block until dialog closes, action completed
+                    using (var dialog = new ActionProgressDialog(downloadUpdatesAction, ProgressBarStyle.Marquee))
+                        dialog.ShowDialog(this.Parent); //Will block until dialog closes, action completed
 
                     if (!downloadUpdatesAction.Succeeded)
                     {
                         cancel = true;
-
                     }
                 }
             }
 
             if (!cancel) //unsubscribe only if we are really leaving this page
             {
+                Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
                 Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
             }
             base.PageLeave(direction, ref cancel);
@@ -258,6 +273,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         
         public override void PageCancelled()
         {
+            Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
         }
 
@@ -294,6 +310,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             return false;
         }
 
+        public override bool EnablePrevious()
+        {
+            return !CheckForUpdatesInProgress;
+        }
+
         private string UpdateExtension
         {
             get { return "." + Branding.Update; }
@@ -303,18 +324,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var fileName = fileNameTextBox.Text;
             return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(UpdateExtension) || fileName.EndsWith(".iso"));
-        }
-
-
-        private void UpdateEnablement()
-        {
-            dataGridViewPatches.HideSelection = !downloadUpdateRadioButton.Checked;
-
-            //if any connected host is licensed for automatic updating
-            if (ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h))))
-                automaticOptionLabel.Visible = AutomaticRadioButton.Visible = true;
-
-            OnPageUpdated();
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -328,18 +337,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             try
             {
                 oldDir = Directory.GetCurrentDirectory();
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.Multiselect = false;
-                dlg.ShowReadOnly = false;
-                dlg.Filter = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT, Branding.Update);
-                dlg.FilterIndex = 0;
-                dlg.CheckFileExists = true;
-                dlg.ShowHelp = false;
-                dlg.Title = Messages.PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE;
-
-                if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
+                using (OpenFileDialog dlg = new OpenFileDialog
+                    {
+                        Multiselect = false,
+                        ShowReadOnly = false,
+                        Filter = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT, Branding.Update),
+                        FilterIndex = 0,
+                        CheckFileExists = true,
+                        ShowHelp = false,
+                        Title = Messages.PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE
+                    })
                 {
-                    AddFile(dlg.FileName);
+                    if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
+                        AddFile(dlg.FileName);
                 }
                 OnPageUpdated();
             }
@@ -390,15 +400,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        #region DataGridView
+
         private void dataGridViewPatches_SelectionChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
-        }
-
-        private void fileNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            selectFromDiskRadioButton.Checked = true;
-            UpdateEnablement();
+            OnPageUpdated();
         }
 
         private void dataGridViewPatches_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -411,26 +417,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             PatchGridViewRow row = (PatchGridViewRow)dataGridViewPatches.Rows[e.RowIndex];
             row.toggleExpandedState();
-            UpdateEnablement();
-        }
-
-        private void RefreshListButton_Click(object sender, EventArgs e)
-        {
-            dataGridViewPatches.Focus();
-
-            CheckForUpdatesInProgress = true;
-            Updates.CheckForUpdates(true);
-            PopulatePatchesBox();
-        }
-
-        private void selectFromDiskRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateEnablement();
+            OnPageUpdated();
         }
 
         private void dataGridViewPatches_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-
             Alert alert1 = ((PatchGridViewRow)dataGridViewPatches.Rows[e.RowIndex1]).UpdateAlert;
             Alert alert2 = ((PatchGridViewRow)dataGridViewPatches.Rows[e.RowIndex2]).UpdateAlert;
 
@@ -448,14 +439,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PopulatePatchesBox();
         }
 
-        private void fileNameTextBox_Enter(object sender, EventArgs e)
-        {
-            selectFromDiskRadioButton.Checked = true;
-            UpdateEnablement();
-        }
-
         private void dataGridViewPatches_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {   // The click is on a column header
+        {
+            // The click is on a column header
             if (e.RowIndex == -1)
             {
                 return;
@@ -464,14 +450,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (row != null && e.ColumnIndex == 3)
             {
                 row.UpdateAlert.FixLinkAction();
-                return;
             }
         }
 
         private void dataGridViewPatches_Enter(object sender, EventArgs e)
         {
             downloadUpdateRadioButton.Checked = true;
-            UpdateEnablement();
+            OnPageUpdated();
         }
 
         private class PatchGridViewRow : DataGridViewExRow, IEquatable<PatchGridViewRow>
@@ -599,20 +584,84 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        #endregion
+
+
+        #region Buttons
+
         private void RestoreDismUpdatesButton_Click(object sender, EventArgs e)
         {
+            //call this here because the restore method sends a call to the server for each connection,
+            //and then does CheckForUpdates, i.e. it takes some time before the CheckForUpdatesStarted
+            //event is fired
+            StartCheckForUpdates();
             Updates.RestoreDismissedUpdates();
         }
 
+        private void RefreshListButton_Click(object sender, EventArgs e)
+        {
+            Updates.CheckForUpdates(true);
+        }
+
+        #endregion
+
+
+        #region TextBox
+
+        private void fileNameTextBox_Enter(object sender, EventArgs e)
+        {
+            selectFromDiskRadioButton.Checked = true;
+            OnPageUpdated();
+        }
+
+        private void fileNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            selectFromDiskRadioButton.Checked = true;
+            OnPageUpdated();
+        }
+
+        #endregion
+
+
+        #region RadioButtons
+
         private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
+            OnPageUpdated();
         }
 
         private void downloadUpdateRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
-        }       
+            dataGridViewPatches.HideSelection = !downloadUpdateRadioButton.Checked;
+            if (downloadUpdateRadioButton.Checked)
+                dataGridViewPatches.Focus();
+            OnPageUpdated();
+        }
+
+        private void selectFromDiskRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
+
+        private void AutomaticRadioButton_TabStopChanged(object sender, EventArgs e)
+        {
+            if (!AutomaticRadioButton.TabStop)
+                AutomaticRadioButton.TabStop = true;
+        }
+
+        private void downloadUpdateRadioButton_TabStopChanged(object sender, EventArgs e)
+        {
+            if (!downloadUpdateRadioButton.TabStop)
+                downloadUpdateRadioButton.TabStop = true;
+        }
+
+        private void selectFromDiskRadioButton_TabStopChanged(object sender, EventArgs e)
+        {
+            if (!selectFromDiskRadioButton.TabStop)
+                selectFromDiskRadioButton.TabStop = true;
+        }
+
+        #endregion
     }        
 
     public enum UpdateType { NewRetail, Existing, NewSuppPack}
