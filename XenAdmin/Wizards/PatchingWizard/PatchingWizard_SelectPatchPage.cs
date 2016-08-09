@@ -59,6 +59,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             InitializeComponent();
             tableLayoutPanelSpinner.Visible = false;
+
+            labelWithAutomatic.Visible = automaticOptionLabel.Visible = AutomaticRadioButton.Visible = false;
+            downloadUpdateRadioButton.Checked = true;
+
             dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
         }
 
