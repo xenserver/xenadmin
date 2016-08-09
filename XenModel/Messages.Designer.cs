@@ -26099,7 +26099,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server cannot be updated automatically..
+        ///   Looks up a localized string similar to This server cannot be updated automatically.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {
             get {

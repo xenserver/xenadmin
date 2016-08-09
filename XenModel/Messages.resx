@@ -9022,7 +9022,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Update not applicable</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
-    <value>This server cannot be updated automatically.</value>
+    <value>This server cannot be updated automatically</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
     <value>This server is already up-to-date.</value>
