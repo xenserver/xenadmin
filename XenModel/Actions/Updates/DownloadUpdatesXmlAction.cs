@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
         private readonly bool _checkForPatches;
         private readonly string _checkForUpdatesUrl;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
             : base(null, "_get_updates", "_get_updates", true)
         {
             Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
@@ -88,10 +88,6 @@ namespace XenAdmin.Actions
             _checkForPatches = checkForPatches;
             _checkForUpdatesUrl = checkForUpdatesUrl;
         }
-
-        protected DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
-            : this(checkForXenCenter, checkForServerVersion, checkForPatches, null)
-        { }
 
         protected override void Run()
         {

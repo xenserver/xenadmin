@@ -455,7 +455,13 @@ namespace XenAdmin.Core
 
         public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
-            var uSeq = new UpgradeSequence();
+            return GetUpgradeSequence(conn, XenServerVersions);
+        }
+
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn, List<XenServerVersion> xsVersions)
+        {
+            if (xsVersions == null)
+                return null;
 
             Host master = Helpers.GetMaster(conn);
             if (master == null)
@@ -463,7 +469,7 @@ namespace XenAdmin.Core
 
             List<Host> hosts = conn.Cache.Hosts.ToList();
 
-            var serverVersions = XenServerVersions.FindAll(version =>
+            var serverVersions = xsVersions.FindAll(version =>
             {
                 if (version.BuildNumber != string.Empty)
                     return (master.BuildNumberRaw == version.BuildNumber);
@@ -473,29 +479,28 @@ namespace XenAdmin.Core
                            && Helpers.HostProductVersion(master) == version.Version.ToString());
             });
 
-            List<XenServerPatch> allPatches = new List<XenServerPatch>();
-
             if (serverVersions.Count > 0)
             {
-                // Take all the hotfixes for this version
-                allPatches.AddRange(serverVersions[0].Patches);
+                var uSeq = new UpgradeSequence();
 
                 if (serverVersions[0].MinimalPatches == null)
                     return null;
 
                 uSeq.MinimalPatches = serverVersions[0].MinimalPatches;
 
+                List<XenServerPatch> allPatches = serverVersions[0].Patches;
+
                 foreach (Host h in hosts)
                 {
                     uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, uSeq.MinimalPatches);
                 }
+
+                return uSeq;
             }
             else
             {
                 return null;
             }
-
-            return uSeq;
         }
 
         private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> allPatches, List<XenServerPatch> latestPatches)

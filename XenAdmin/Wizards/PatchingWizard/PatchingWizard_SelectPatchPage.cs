@@ -164,6 +164,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public bool IsInAutomaticMode { get { return AutomaticRadioButton.Visible && AutomaticRadioButton.Checked; } }
 
+        public List<XenServerVersion> AutoDownloadedXenServerVersions { get; private set; }
+
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
@@ -218,6 +220,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         cancel = true;
                     }
+                    AutoDownloadedXenServerVersions = downloadUpdatesAction.XenServerVersions;
                 }
             }
 
