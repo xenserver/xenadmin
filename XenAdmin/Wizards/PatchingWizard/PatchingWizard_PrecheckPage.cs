@@ -366,6 +366,30 @@ namespace XenAdmin.Wizards.PatchingWizard
                     checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
                 }
             }
+
+            if (IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Pool pool in SelectedPools)
+                {
+                    var us = Updates.GetUpgradeSequence(pool.Connection);
+
+                    foreach (Host host in us.Keys)
+                    {
+                        checkGroup.Add(
+                            new DiskSpaceForBatchUpdatesCheck(
+                                host, 
+
+                                host.IsMaster() 
+                                    ? us[host].Sum(p => p.InstallationSize) + us.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master + largest update in pool
+                                    : us[host].Sum(p => p.InstallationSize) + us[host].Max(p => p.InstallationSize) // non-master: all updates on this host + largest on this host
+                        ));
+                    }
+                }
+
+            }
+
             return checks;
         }
 

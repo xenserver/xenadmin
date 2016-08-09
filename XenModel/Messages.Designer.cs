@@ -24799,6 +24799,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not enough space to automatically update &apos;{0}&apos;..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Space available: {0}.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE {
@@ -25942,6 +25951,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_PATCHINGPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_PATCHINGPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking disk space requirements.
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE", resourceCulture);
             }
         }
         
@@ -29255,6 +29273,15 @@ namespace XenAdmin {
         public static string SERVER_REQUEST_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("SERVER_REQUEST_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk space check.
+        /// </summary>
+        public static string SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION", resourceCulture);
             }
         }
         
