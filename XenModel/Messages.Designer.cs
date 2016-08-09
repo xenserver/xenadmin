@@ -26054,7 +26054,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported on this [XenServer] version..
+        ///   Looks up a localized string similar to Automatic update is not supported on this [XenServer] version.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION {
             get {
