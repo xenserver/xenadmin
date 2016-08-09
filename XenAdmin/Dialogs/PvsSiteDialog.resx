@@ -160,7 +160,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="bottomPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 324</value>
+    <value>8, 325</value>
   </data>
   <data name="bottomPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>602, 29</value>
@@ -192,13 +192,13 @@
   <data name="expansionColumn.Width" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <metadata name="farmColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="siteColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="farmColumn.HeaderText" xml:space="preserve">
-    <value>PVS Farm</value>
+  <data name="siteColumn.HeaderText" xml:space="preserve">
+    <value>PVS Site</value>
   </data>
-  <data name="farmColumn.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="siteColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
   <metadata name="ipAddressesColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -238,7 +238,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 311</value>
+    <value>602, 312</value>
   </data>
   <data name="gridView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -247,7 +247,7 @@
     <value>gridView</value>
   </data>
   <data name="&gt;&gt;gridView.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.CollapsingPvsFarmServerDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.CollapsingPvsSiteServerDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gridView.Parent" xml:space="preserve">
     <value>mainPanel</value>
@@ -268,7 +268,7 @@
     <value>0, 0, 0, 5</value>
   </data>
   <data name="mainPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 316</value>
+    <value>602, 317</value>
   </data>
   <data name="mainPanel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -292,7 +292,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>618, 361</value>
+    <value>618, 362</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -307,7 +307,7 @@
     <value>8, 8, 8, 8</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PVS Farms</value>
+    <value>PVS Sites</value>
   </data>
   <data name="&gt;&gt;expansionColumn.Name" xml:space="preserve">
     <value>expansionColumn</value>
@@ -315,10 +315,10 @@
   <data name="&gt;&gt;expansionColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;farmColumn.Name" xml:space="preserve">
-    <value>farmColumn</value>
+  <data name="&gt;&gt;siteColumn.Name" xml:space="preserve">
+    <value>siteColumn</value>
   </data>
-  <data name="&gt;&gt;farmColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;siteColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ipAddressesColumn.Name" xml:space="preserve">
@@ -340,7 +340,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PvsFarmDialog</value>
+    <value>PvsSiteDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

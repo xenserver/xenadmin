@@ -38,19 +38,19 @@ using XenAPI;
 
 namespace XenAdmin.Dialogs
 {
-    public partial class PvsFarmDialog : XenDialogBase
+    public partial class PvsSiteDialog : XenDialogBase
     {
         /// <summary>
-        /// Creates a dialog for viewing the PVS farms and PVS servers on a particular connection.
+        /// Creates a dialog for viewing the PVS sites and PVS servers on a particular connection.
         /// </summary>
         /// <param name="_connection">May not be null.</param>
-        public PvsFarmDialog(IXenConnection _connection)
+        public PvsSiteDialog(IXenConnection _connection)
         {
             System.Diagnostics.Trace.Assert(_connection != null);
             connection = _connection;
 
             InitializeComponent();
-            Text = string.Format(Messages.PVS_FARM_DIALOG_TITLE, this.connection.Name);
+            Text = string.Format(Messages.PVS_SITE_DIALOG_TITLE, this.connection.Name);
 
             System.Diagnostics.Trace.Assert(gridView.Columns.Count > 0);
             gridView.Columns[0].DefaultCellStyle.NullValue = null;
@@ -62,17 +62,17 @@ namespace XenAdmin.Dialogs
         private void RegisterEventHandlers()
         {
             UnregisterEventHandlers();
-            connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
+            connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
             connection.Cache.RegisterBatchCollectionChanged<PVS_server>(PvsServerBatchCollectionChanged);
         }
 
         private void UnregisterEventHandlers()
         {
-            connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
+            connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
             connection.Cache.DeregisterBatchCollectionChanged<PVS_server>(PvsServerBatchCollectionChanged);
         }
 
-        private void PvsFarmBatchCollectionChanged(object sender, EventArgs e)
+        private void PvsSiteBatchCollectionChanged(object sender, EventArgs e)
         {
             Program.Invoke(this, Rebuild);
         }
@@ -98,17 +98,17 @@ namespace XenAdmin.Dialogs
                 gridView.SuspendLayout();
                 gridView.Rows.Clear();
 
-                var pvsFarms = connection.Cache.PVS_sites.ToList();
-                pvsFarms.Sort();
+                var pvsSites = connection.Cache.PVS_sites.ToList();
+                pvsSites.Sort();
 
-                foreach (var pvsFarm in pvsFarms)
+                foreach (var pvsSite in pvsSites)
                 {
-                    var farmRow = new CollapsingPvsFarmServerDataGridViewRow(pvsFarm);
-                    gridView.Rows.Add(farmRow);
+                    var siteRow = new CollapsingPvsSiteServerDataGridViewRow(pvsSite);
+                    gridView.Rows.Add(siteRow);
 
-                    foreach (var pvsServer in connection.ResolveAll(pvsFarm.servers))
+                    foreach (var pvsServer in connection.ResolveAll(pvsSite.servers))
                     {
-                        var serverRow = new CollapsingPvsFarmServerDataGridViewRow(pvsServer);
+                        var serverRow = new CollapsingPvsSiteServerDataGridViewRow(pvsServer);
                         gridView.Rows.Add(serverRow);
                     }
                 }

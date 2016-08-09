@@ -35,27 +35,27 @@ using XenAPI;
 
 namespace XenAdmin.Controls.DataGridViewEx
 {
-    public class CollapsingPvsFarmServerDataGridViewRow : DataGridViewExRow
+    public class CollapsingPvsSiteServerDataGridViewRow : DataGridViewExRow
     {
         protected DataGridViewImageCell expansionCell;
-        protected DataGridViewTextBoxCell farmCell;
+        protected DataGridViewTextBoxCell siteCell;
         protected DataGridViewTextBoxCell ipAddressesCell;
         protected DataGridViewTextBoxCell firstPortCell;
         protected DataGridViewTextBoxCell lastPortCell;
-        protected bool isPvsFarmRow;
+        protected bool isPvsSiteRow;
 
-        public CollapsingPvsFarmServerDataGridViewRow(PVS_site farm)
+        public CollapsingPvsSiteServerDataGridViewRow(PVS_site site)
         {
-            Tag = farm;
-            isPvsFarmRow = true;
+            Tag = site;
+            isPvsSiteRow = true;
             
             SetupCells();
         }
 
-        public CollapsingPvsFarmServerDataGridViewRow(PVS_server server)
+        public CollapsingPvsSiteServerDataGridViewRow(PVS_server server)
         {
             Tag = server;
-            isPvsFarmRow = false;
+            isPvsSiteRow = false;
 
             SetupCells();
         }
@@ -63,13 +63,13 @@ namespace XenAdmin.Controls.DataGridViewEx
         private void SetupCells()
         {
             expansionCell = new DataGridViewImageCell();
-            farmCell = new DataGridViewTextBoxCell();
+            siteCell = new DataGridViewTextBoxCell();
             ipAddressesCell = new DataGridViewTextBoxCell();
             firstPortCell = new DataGridViewTextBoxCell();
             lastPortCell = new DataGridViewTextBoxCell();
 
             Cells.Add(expansionCell);
-            Cells.Add(farmCell);
+            Cells.Add(siteCell);
             Cells.Add(ipAddressesCell);
             Cells.Add(firstPortCell);
             Cells.Add(lastPortCell);
@@ -79,16 +79,16 @@ namespace XenAdmin.Controls.DataGridViewEx
 
         protected void UpdateDetails()
         {
-            if (isPvsFarmRow)
+            if (isPvsSiteRow)
             {
-                PVS_site farm = (PVS_site)Tag;
+                PVS_site site = (PVS_site)Tag;
 
-                if (farm.servers.Count == 0)
+                if (site.servers.Count == 0)
                     SetNoIcon();
                 else
                     SetCollapseIcon();
 
-                farmCell.Value = farm.name;
+                siteCell.Value = site.name;
             }
             else
             {
@@ -102,17 +102,17 @@ namespace XenAdmin.Controls.DataGridViewEx
             }
         }
 
-        public bool IsFarmRow
+        public bool IsSiteRow
         {
-            get { return isPvsFarmRow; }
+            get { return isPvsSiteRow; }
         }
 
         public bool IsServerRow
         {
-            get { return !isPvsFarmRow; }
+            get { return !isPvsSiteRow; }
         }
 
-        public PVS_site UnderlyingFarm
+        public PVS_site UnderlyingSite
         {
             get { return Tag as PVS_site; }
         }

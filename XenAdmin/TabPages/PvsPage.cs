@@ -61,7 +61,7 @@ namespace XenAdmin.TabPages
             {
                 if (connection != null)
                 {
-                    connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
+                    connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
                     connection.Cache.DeregisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
                 }
 
@@ -69,16 +69,16 @@ namespace XenAdmin.TabPages
 
                 if (connection != null)
                 {
-                    connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
+                    connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
                     connection.Cache.RegisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
                 }
 
-                LoadFarms();
+                LoadSites();
                 LoadVMs();
             }
         }
 
-        private void LoadFarms()
+        private void LoadSites()
         {
             Program.AssertOnEventThread();
 
@@ -87,22 +87,22 @@ namespace XenAdmin.TabPages
 
             try
             {
-                dataGridViewFarms.SuspendLayout();
-                dataGridViewFarms.Rows.Clear();
+                dataGridViewSites.SuspendLayout();
+                dataGridViewSites.Rows.Clear();
 
                 var rowList = new List<DataGridViewRow>();
 
-                foreach (var pvsFarm in Connection.Cache.PVS_sites)
-                    rowList.Add(NewPvsFarmRow(pvsFarm));
+                foreach (var pvsSite in Connection.Cache.PVS_sites)
+                    rowList.Add(NewPvsSiteRow(pvsSite));
 
-                dataGridViewFarms.Rows.AddRange(rowList.ToArray());
+                dataGridViewSites.Rows.AddRange(rowList.ToArray());
 
-                if (dataGridViewFarms.SelectedRows.Count == 0 && dataGridViewFarms.Rows.Count > 0)
-                    dataGridViewFarms.Rows[0].Selected = true;
+                if (dataGridViewSites.SelectedRows.Count == 0 && dataGridViewSites.Rows.Count > 0)
+                    dataGridViewSites.Rows[0].Selected = true;
             }
             finally
             {
-                dataGridViewFarms.ResumeLayout();
+                dataGridViewSites.ResumeLayout();
             }
         }
 
@@ -132,20 +132,20 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private DataGridViewRow NewPvsFarmRow(PVS_site pvsFarm)
+        private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
         {
-            var farmCell = new DataGridViewTextBoxCell {Value = pvsFarm.name};
+            var siteCell = new DataGridViewTextBoxCell {Value = pvsSite.name};
             var configurationCell = new DataGridViewTextBoxCell
             {
-                Value = pvsFarm.cache_storage.Count > 0 ? Messages.PVS_CACHE_MEMORY_AND_DISK: Messages.PVS_CACHE_MEMORY_ONLY
+                Value = pvsSite.cache_storage.Count > 0 ? Messages.PVS_CACHE_MEMORY_AND_DISK: Messages.PVS_CACHE_MEMORY_ONLY
             };
             var cacheSrsCell = new DataGridViewTextBoxCell
             {
-                Value = string.Join(",  ", Connection.ResolveAll(pvsFarm.cache_storage))
+                Value = string.Join(",  ", Connection.ResolveAll(pvsSite.cache_storage))
             };
 
-            var newRow = new DataGridViewRow { Tag = pvsFarm };
-            newRow.Cells.AddRange(farmCell, configurationCell, cacheSrsCell);
+            var newRow = new DataGridViewRow { Tag = pvsSite };
+            newRow.Cells.AddRange(siteCell, configurationCell, cacheSrsCell);
 
             return newRow;
         }
@@ -182,9 +182,9 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void PvsFarmBatchCollectionChanged(object sender, EventArgs e)
+        private void PvsSiteBatchCollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, LoadFarms); 
+            Program.Invoke(this, LoadSites); 
         }
 
         private void PvsProxyBatchCollectionChanged(object sender, EventArgs e)
@@ -208,9 +208,9 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void ViewPvsFarmsButton_Click(object sender, EventArgs e)
+        private void ViewPvsSitesButton_Click(object sender, EventArgs e)
         {
-            Program.MainWindow.ShowPerConnectionWizard(connection, new PvsFarmDialog(connection));
+            Program.MainWindow.ShowPerConnectionWizard(connection, new PvsSiteDialog(connection));
         }
     }
 }

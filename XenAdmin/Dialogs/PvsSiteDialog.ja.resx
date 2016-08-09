@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="assignPriorities.AccessibleDescription" xml:space="preserve">
-    <value>指定该池中虚拟机的高可用性重启优先级</value>
+    <value>このプール内の VM に適用する高可用性再起動優先度を指定します</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="assignPriorities.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="assignPriorities.Text" xml:space="preserve">
-    <value>高可用性计划</value>
+    <value>高可用性プラン</value>
   </data>
   <data name="&gt;&gt;assignPriorities.Name" xml:space="preserve">
     <value>assignPriorities</value>
@@ -241,7 +241,7 @@
     <value>3</value>
   </data>
   <data name="buttonOk.Text" xml:space="preserve">
-    <value>确定</value>
+    <value>OK</value>
   </data>
   <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
     <value>buttonOk</value>
@@ -274,7 +274,7 @@
     <value>2</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
-    <value>取消</value>
+    <value>キャンセル</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
@@ -412,16 +412,16 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>634, 452</value>
+    <value>664, 452</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 8, 8, 8</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>配置高可用性</value>
+    <value>高可用性の構成</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PvsFarmDialog</value>
+    <value>PvsSiteDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

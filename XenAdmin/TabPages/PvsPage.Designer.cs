@@ -44,17 +44,17 @@
             this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrepopulation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridViewFarms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnFarm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewSites = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.ColumnSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConfiguration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSRs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfigureButton = new System.Windows.Forms.Button();
-            this.ViewPvsFarmsButton = new System.Windows.Forms.Button();
+            this.ViewPvsSitesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFarms)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).BeginInit();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -68,9 +68,9 @@
             this.tableLayoutPanel1.Controls.Add(this.button2, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewVms, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewFarms, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewSites, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ConfigureButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.ViewPvsFarmsButton, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ViewPvsSitesButton, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -144,32 +144,32 @@
             this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.Name = "label2";
             // 
-            // dataGridViewFarms
+            // dataGridViewSites
             // 
-            this.dataGridViewFarms.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewFarms.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewFarms.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridViewFarms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridViewFarms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnFarm,
+            this.dataGridViewSites.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewSites.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewSites.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewSites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnSite,
             this.ColumnConfiguration,
             this.ColumnSRs});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewFarms, 2);
-            resources.ApplyResources(this.dataGridViewFarms, "dataGridViewFarms");
-            this.dataGridViewFarms.MultiSelect = true;
-            this.dataGridViewFarms.Name = "dataGridViewFarms";
-            this.dataGridViewFarms.ReadOnly = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewSites, 2);
+            resources.ApplyResources(this.dataGridViewSites, "dataGridViewSites");
+            this.dataGridViewSites.MultiSelect = true;
+            this.dataGridViewSites.Name = "dataGridViewSites";
+            this.dataGridViewSites.ReadOnly = true;
             // 
-            // ColumnFarm
+            // ColumnSite
             // 
-            this.ColumnFarm.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ColumnSite.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnFarm.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColumnFarm.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnFarm, "ColumnFarm");
-            this.ColumnFarm.Name = "ColumnFarm";
-            this.ColumnFarm.ReadOnly = true;
+            this.ColumnSite.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColumnSite.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnSite, "ColumnSite");
+            this.ColumnSite.Name = "ColumnSite";
+            this.ColumnSite.ReadOnly = true;
             // 
             // ColumnConfiguration
             // 
@@ -197,12 +197,12 @@
             this.ConfigureButton.Name = "ConfigureButton";
             this.ConfigureButton.UseVisualStyleBackColor = true;
             // 
-            // ViewPvsFarmsButton
+            // ViewPvsSitesButton
             // 
-            resources.ApplyResources(this.ViewPvsFarmsButton, "ViewPvsFarmsButton");
-            this.ViewPvsFarmsButton.Name = "ViewPvsFarmsButton";
-            this.ViewPvsFarmsButton.UseVisualStyleBackColor = true;
-            this.ViewPvsFarmsButton.Click += new System.EventHandler(this.ViewPvsFarmsButton_Click);
+            resources.ApplyResources(this.ViewPvsSitesButton, "ViewPvsSitesButton");
+            this.ViewPvsSitesButton.Name = "ViewPvsSitesButton";
+            this.ViewPvsSitesButton.UseVisualStyleBackColor = true;
+            this.ViewPvsSitesButton.Click += new System.EventHandler(this.ViewPvsSitesButton_Click);
             // 
             // label1
             // 
@@ -219,7 +219,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFarms)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,9 +228,9 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.DataGridViewEx.DataGridViewEx dataGridViewFarms;
+        private Controls.DataGridViewEx.DataGridViewEx dataGridViewSites;
         public System.Windows.Forms.Button ConfigureButton;
-        public System.Windows.Forms.Button ViewPvsFarmsButton;
+        public System.Windows.Forms.Button ViewPvsSitesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Button button2;
@@ -239,7 +239,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrepopulation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFarm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConfiguration;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRs;
     }

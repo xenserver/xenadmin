@@ -157,12 +157,12 @@
     <Compile Include="Controls\ConsolePanel.Designer.cs">
       <DependentUpon>ConsolePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataGridViewEx\CollapsingPvsFarmServerDataGridViewRow.cs" />
-    <Compile Include="Controls\DataGridViewEx\CollapsingPvsFarmServerDataGridView.cs">
+    <Compile Include="Controls\DataGridViewEx\CollapsingPvsSiteServerDataGridViewRow.cs" />
+    <Compile Include="Controls\DataGridViewEx\CollapsingPvsSiteServerDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DataGridViewEx\CollapsingPvsFarmServerDataGridView.Designer.cs">
-      <DependentUpon>CollapsingPvsFarmServerDataGridView.cs</DependentUpon>
+    <Compile Include="Controls\DataGridViewEx\CollapsingPvsSiteServerDataGridView.Designer.cs">
+      <DependentUpon>CollapsingPvsSiteServerDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
@@ -226,11 +226,11 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
-    <Compile Include="Dialogs\PvsFarmDialog.cs">
+    <Compile Include="Dialogs\PvsSiteDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\PvsFarmDialog.Designer.cs">
-      <DependentUpon>PvsFarmDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\PvsSiteDialog.Designer.cs">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewLauncher.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
@@ -1550,16 +1550,16 @@
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PvsFarmDialog.ja.resx">
-      <DependentUpon>PvsFarmDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\PvsSiteDialog.ja.resx">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PvsFarmDialog.resx">
-      <DependentUpon>PvsFarmDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\PvsSiteDialog.resx">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PvsFarmDialog.zh-CN.resx">
-      <DependentUpon>PvsFarmDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\PvsSiteDialog.zh-CN.resx">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.ja.resx">
@@ -1864,9 +1864,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.ja.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
