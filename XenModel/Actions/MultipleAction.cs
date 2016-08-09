@@ -148,7 +148,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void RecalculatePercentComplete()
+        protected virtual void RecalculatePercentComplete()
         {
             int total = 0;
             int n = subActions.Count;

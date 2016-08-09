@@ -54,12 +54,16 @@ namespace XenAdmin.Actions
         private ProduceConsumerQueue queueWithNoConnection;
 
         private readonly int maxNumberOfParallelActions;
+        private int actionsCount;
 
         public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
             : base(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
         {
             if (Connection != null)
+            {
                 actionsByConnection.Add(Connection, subActions);
+                actionsCount = subActions.Count;
+            }
             else
                 GroupActionsByConnection(); 
             this.maxNumberOfParallelActions = maxNumberOfParallelActions;
@@ -88,6 +92,7 @@ namespace XenAdmin.Actions
 
         private void GroupActionsByConnection()
         {
+            actionsCount = 0;
             foreach (AsyncAction action in subActions)
             {
                 if (action.Connection != null)
@@ -100,11 +105,13 @@ namespace XenAdmin.Actions
                         }
 
                         actionsByConnection[action.Connection].Add(action);
+                        actionsCount++;
                     }
                 }
                 else
                 {
                     actionsWithNoConnection.Add(action);
+                    actionsCount++;
                 }
             }
         }
@@ -163,6 +170,19 @@ namespace XenAdmin.Actions
                 });
         }
 
+        protected override void RecalculatePercentComplete()
+        {
+            int total = 0;
+            foreach (IXenConnection connection in actionsByConnection.Keys)
+            {
+                foreach (var action in actionsByConnection[connection]) 
+                    total += action.PercentComplete;
+            }
+            foreach (var action in actionsWithNoConnection)
+                total += action.PercentComplete;
+            PercentComplete = (int)(total / actionsCount);
+        }
+
         private readonly object _lock = new object();
         private volatile int i = 0;
         
@@ -172,7 +192,7 @@ namespace XenAdmin.Actions
             lock (_lock)
             {
                 i++;
-                if (i == subActions.Count)
+                if (i == actionsCount)
                 {
                     Monitor.Pulse(_lock);
                     PercentComplete = 100;
