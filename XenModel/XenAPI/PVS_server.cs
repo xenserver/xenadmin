@@ -51,13 +51,13 @@ namespace XenAPI
             string[] addresses,
             long first_port,
             long last_port,
-            XenRef<PVS_farm> farm)
+            XenRef<PVS_site> site)
         {
             this.uuid = uuid;
             this.addresses = addresses;
             this.first_port = first_port;
             this.last_port = last_port;
-            this.farm = farm;
+            this.site = site;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace XenAPI
             addresses = update.addresses;
             first_port = update.first_port;
             last_port = update.last_port;
-            farm = update.farm;
+            site = update.site;
         }
 
         internal void UpdateFromProxy(Proxy_PVS_server proxy)
@@ -84,7 +84,7 @@ namespace XenAPI
             addresses = proxy.addresses == null ? new string[] {} : (string [])proxy.addresses;
             first_port = proxy.first_port == null ? 0 : long.Parse((string)proxy.first_port);
             last_port = proxy.last_port == null ? 0 : long.Parse((string)proxy.last_port);
-            farm = proxy.farm == null ? null : XenRef<PVS_farm>.Create(proxy.farm);
+            site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
         }
 
         public Proxy_PVS_server ToProxy()
@@ -94,7 +94,7 @@ namespace XenAPI
             result_.addresses = addresses;
             result_.first_port = first_port.ToString();
             result_.last_port = last_port.ToString();
-            result_.farm = (farm != null) ? farm : "";
+            result_.site = (site != null) ? site : "";
             return result_;
         }
 
@@ -108,7 +108,7 @@ namespace XenAPI
             addresses = Marshalling.ParseStringArray(table, "addresses");
             first_port = Marshalling.ParseLong(table, "first_port");
             last_port = Marshalling.ParseLong(table, "last_port");
-            farm = Marshalling.ParseRef<PVS_farm>(table, "farm");
+            site = Marshalling.ParseRef<PVS_site>(table, "site");
         }
 
         public bool DeepEquals(PVS_server other)
@@ -122,7 +122,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._addresses, other._addresses) &&
                 Helper.AreEqual2(this._first_port, other._first_port) &&
                 Helper.AreEqual2(this._last_port, other._last_port) &&
-                Helper.AreEqual2(this._farm, other._farm);
+                Helper.AreEqual2(this._site, other._site);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PVS_server server)
@@ -204,14 +204,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the farm field of the given PVS_server.
+        /// Get the site field of the given PVS_server.
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
-        public static XenRef<PVS_farm> get_farm(Session session, string _pvs_server)
+        public static XenRef<PVS_site> get_site(Session session, string _pvs_server)
         {
-            return XenRef<PVS_farm>.Create(session.proxy.pvs_server_get_farm(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
+            return XenRef<PVS_site>.Create(session.proxy.pvs_server_get_site(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
         }
 
         /// <summary>
@@ -222,10 +222,10 @@ namespace XenAPI
         /// <param name="_addresses">IPv4 addresses of the server</param>
         /// <param name="_first_port">first UDP port accepted by this server</param>
         /// <param name="_last_port">last UDP port accepted by this server</param>
-        /// <param name="_farm">PVS farm this server is a part of</param>
-        public static XenRef<PVS_server> introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _farm)
+        /// <param name="_site">PVS site this server is a part of</param>
+        public static XenRef<PVS_server> introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _site)
         {
-            return XenRef<PVS_server>.Create(session.proxy.pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), (_farm != null) ? _farm : "").parse());
+            return XenRef<PVS_server>.Create(session.proxy.pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), (_site != null) ? _site : "").parse());
         }
 
         /// <summary>
@@ -236,10 +236,10 @@ namespace XenAPI
         /// <param name="_addresses">IPv4 addresses of the server</param>
         /// <param name="_first_port">first UDP port accepted by this server</param>
         /// <param name="_last_port">last UDP port accepted by this server</param>
-        /// <param name="_farm">PVS farm this server is a part of</param>
-        public static XenRef<Task> async_introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _farm)
+        /// <param name="_site">PVS site this server is a part of</param>
+        public static XenRef<Task> async_introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _site)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), (_farm != null) ? _farm : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), (_site != null) ? _site : "").parse());
         }
 
         /// <summary>
@@ -360,22 +360,22 @@ namespace XenAPI
         private long _last_port;
 
         /// <summary>
-        /// PVS farm this server is part of
+        /// PVS site this server is part of
         /// Experimental. First published in .
         /// </summary>
-        public virtual XenRef<PVS_farm> farm
+        public virtual XenRef<PVS_site> site
         {
-            get { return _farm; }
+            get { return _site; }
             set
             {
-                if (!Helper.AreEqual(value, _farm))
+                if (!Helper.AreEqual(value, _site))
                 {
-                    _farm = value;
+                    _site = value;
                     Changed = true;
-                    NotifyPropertyChanged("farm");
+                    NotifyPropertyChanged("site");
                 }
             }
         }
-        private XenRef<PVS_farm> _farm;
+        private XenRef<PVS_site> _site;
     }
 }

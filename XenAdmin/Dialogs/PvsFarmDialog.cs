@@ -62,13 +62,13 @@ namespace XenAdmin.Dialogs
         private void RegisterEventHandlers()
         {
             UnregisterEventHandlers();
-            connection.Cache.RegisterBatchCollectionChanged<PVS_farm>(PvsFarmBatchCollectionChanged);
+            connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
             connection.Cache.RegisterBatchCollectionChanged<PVS_server>(PvsServerBatchCollectionChanged);
         }
 
         private void UnregisterEventHandlers()
         {
-            connection.Cache.DeregisterBatchCollectionChanged<PVS_farm>(PvsFarmBatchCollectionChanged);
+            connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
             connection.Cache.DeregisterBatchCollectionChanged<PVS_server>(PvsServerBatchCollectionChanged);
         }
 
@@ -98,7 +98,7 @@ namespace XenAdmin.Dialogs
                 gridView.SuspendLayout();
                 gridView.Rows.Clear();
 
-                var pvsFarms = connection.Cache.PVS_farms.ToList();
+                var pvsFarms = connection.Cache.PVS_sites.ToList();
                 pvsFarms.Sort();
 
                 foreach (var pvsFarm in pvsFarms)

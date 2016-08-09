@@ -61,7 +61,7 @@ namespace XenAdmin.TabPages
             {
                 if (connection != null)
                 {
-                    connection.Cache.DeregisterBatchCollectionChanged<PVS_farm>(PvsFarmBatchCollectionChanged);
+                    connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
                     connection.Cache.DeregisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
                 }
 
@@ -69,7 +69,7 @@ namespace XenAdmin.TabPages
 
                 if (connection != null)
                 {
-                    connection.Cache.RegisterBatchCollectionChanged<PVS_farm>(PvsFarmBatchCollectionChanged);
+                    connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsFarmBatchCollectionChanged);
                     connection.Cache.RegisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
                 }
 
@@ -92,7 +92,7 @@ namespace XenAdmin.TabPages
 
                 var rowList = new List<DataGridViewRow>();
 
-                foreach (var pvsFarm in Connection.Cache.PVS_farms)
+                foreach (var pvsFarm in Connection.Cache.PVS_sites)
                     rowList.Add(NewPvsFarmRow(pvsFarm));
 
                 dataGridViewFarms.Rows.AddRange(rowList.ToArray());
@@ -132,7 +132,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private DataGridViewRow NewPvsFarmRow(PVS_farm pvsFarm)
+        private DataGridViewRow NewPvsFarmRow(PVS_site pvsFarm)
         {
             var farmCell = new DataGridViewTextBoxCell {Value = pvsFarm.name};
             var configurationCell = new DataGridViewTextBoxCell

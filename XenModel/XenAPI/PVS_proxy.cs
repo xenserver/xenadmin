@@ -39,7 +39,7 @@ using CookComputing.XmlRpc;
 namespace XenAPI
 {
     /// <summary>
-    /// a proxy connects a VM/VIF with a PVS farm
+    /// a proxy connects a VM/VIF with a PVS site
     /// </summary>
     public partial class PVS_proxy : XenObject<PVS_proxy>
     {
@@ -48,14 +48,14 @@ namespace XenAPI
         }
 
         public PVS_proxy(string uuid,
-            XenRef<PVS_farm> farm,
+            XenRef<PVS_site> site,
             XenRef<VIF> VIF,
             bool prepopulate,
             bool currently_attached,
             XenRef<SR> cache_SR)
         {
             this.uuid = uuid;
-            this.farm = farm;
+            this.site = site;
             this.VIF = VIF;
             this.prepopulate = prepopulate;
             this.currently_attached = currently_attached;
@@ -74,7 +74,7 @@ namespace XenAPI
         public override void UpdateFrom(PVS_proxy update)
         {
             uuid = update.uuid;
-            farm = update.farm;
+            site = update.site;
             VIF = update.VIF;
             prepopulate = update.prepopulate;
             currently_attached = update.currently_attached;
@@ -84,7 +84,7 @@ namespace XenAPI
         internal void UpdateFromProxy(Proxy_PVS_proxy proxy)
         {
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            farm = proxy.farm == null ? null : XenRef<PVS_farm>.Create(proxy.farm);
+            site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
             VIF = proxy.VIF == null ? null : XenRef<VIF>.Create(proxy.VIF);
             prepopulate = (bool)proxy.prepopulate;
             currently_attached = (bool)proxy.currently_attached;
@@ -95,7 +95,7 @@ namespace XenAPI
         {
             Proxy_PVS_proxy result_ = new Proxy_PVS_proxy();
             result_.uuid = (uuid != null) ? uuid : "";
-            result_.farm = (farm != null) ? farm : "";
+            result_.site = (site != null) ? site : "";
             result_.VIF = (VIF != null) ? VIF : "";
             result_.prepopulate = prepopulate;
             result_.currently_attached = currently_attached;
@@ -110,7 +110,7 @@ namespace XenAPI
         public PVS_proxy(Hashtable table)
         {
             uuid = Marshalling.ParseString(table, "uuid");
-            farm = Marshalling.ParseRef<PVS_farm>(table, "farm");
+            site = Marshalling.ParseRef<PVS_site>(table, "site");
             VIF = Marshalling.ParseRef<VIF>(table, "VIF");
             prepopulate = Marshalling.ParseBool(table, "prepopulate");
             currently_attached = Marshalling.ParseBool(table, "currently_attached");
@@ -125,7 +125,7 @@ namespace XenAPI
                 return true;
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._farm, other._farm) &&
+                Helper.AreEqual2(this._site, other._site) &&
                 Helper.AreEqual2(this._VIF, other._VIF) &&
                 Helper.AreEqual2(this._prepopulate, other._prepopulate) &&
                 Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
@@ -183,14 +183,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the farm field of the given PVS_proxy.
+        /// Get the site field of the given PVS_proxy.
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
-        public static XenRef<PVS_farm> get_farm(Session session, string _pvs_proxy)
+        public static XenRef<PVS_site> get_site(Session session, string _pvs_proxy)
         {
-            return XenRef<PVS_farm>.Create(session.proxy.pvs_proxy_get_farm(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+            return XenRef<PVS_site>.Create(session.proxy.pvs_proxy_get_site(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
         }
 
         /// <summary>
@@ -242,12 +242,12 @@ namespace XenAPI
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_farm">PVS farm that we proxy for</param>
+        /// <param name="_site">PVS site that we proxy for</param>
         /// <param name="_vif">VIF for the VM that needs to be proxied</param>
         /// <param name="_prepopulate">if true, prefetch whole disk for VM</param>
-        public static XenRef<PVS_proxy> create(Session session, string _farm, string _vif, bool _prepopulate)
+        public static XenRef<PVS_proxy> create(Session session, string _site, string _vif, bool _prepopulate)
         {
-            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, (_farm != null) ? _farm : "", (_vif != null) ? _vif : "", _prepopulate).parse());
+            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "", _prepopulate).parse());
         }
 
         /// <summary>
@@ -255,12 +255,12 @@ namespace XenAPI
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_farm">PVS farm that we proxy for</param>
+        /// <param name="_site">PVS site that we proxy for</param>
         /// <param name="_vif">VIF for the VM that needs to be proxied</param>
         /// <param name="_prepopulate">if true, prefetch whole disk for VM</param>
-        public static XenRef<Task> async_create(Session session, string _farm, string _vif, bool _prepopulate)
+        public static XenRef<Task> async_create(Session session, string _site, string _vif, bool _prepopulate)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, (_farm != null) ? _farm : "", (_vif != null) ? _vif : "", _prepopulate).parse());
+            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "", _prepopulate).parse());
         }
 
         /// <summary>
@@ -348,23 +348,23 @@ namespace XenAPI
         private string _uuid;
 
         /// <summary>
-        /// PVS farm this proxy is part of
+        /// PVS site this proxy is part of
         /// Experimental. First published in .
         /// </summary>
-        public virtual XenRef<PVS_farm> farm
+        public virtual XenRef<PVS_site> site
         {
-            get { return _farm; }
+            get { return _site; }
             set
             {
-                if (!Helper.AreEqual(value, _farm))
+                if (!Helper.AreEqual(value, _site))
                 {
-                    _farm = value;
+                    _site = value;
                     Changed = true;
-                    NotifyPropertyChanged("farm");
+                    NotifyPropertyChanged("site");
                 }
             }
         }
-        private XenRef<PVS_farm> _farm;
+        private XenRef<PVS_site> _site;
 
         /// <summary>
         /// VIF of the VM using the proxy

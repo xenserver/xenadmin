@@ -44,7 +44,7 @@ namespace XenAdmin.Controls.DataGridViewEx
         protected DataGridViewTextBoxCell lastPortCell;
         protected bool isPvsFarmRow;
 
-        public CollapsingPvsFarmServerDataGridViewRow(PVS_farm farm)
+        public CollapsingPvsFarmServerDataGridViewRow(PVS_site farm)
         {
             Tag = farm;
             isPvsFarmRow = true;
@@ -81,7 +81,7 @@ namespace XenAdmin.Controls.DataGridViewEx
         {
             if (isPvsFarmRow)
             {
-                PVS_farm farm = (PVS_farm)Tag;
+                PVS_site farm = (PVS_site)Tag;
 
                 if (farm.servers.Count == 0)
                     SetNoIcon();
@@ -112,9 +112,9 @@ namespace XenAdmin.Controls.DataGridViewEx
             get { return !isPvsFarmRow; }
         }
 
-        public PVS_farm UnderlyingFarm
+        public PVS_site UnderlyingFarm
         {
-            get { return Tag as PVS_farm; }
+            get { return Tag as PVS_site; }
         }
 
         public PVS_server UnderlyingServer
