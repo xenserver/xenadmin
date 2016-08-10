@@ -166,7 +166,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             bool deleteFileOnCancel = AllDownloadedPatches.ContainsValue(SelectedNewPatchPath);
                             action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatchPath, true, deleteFileOnCancel);
-                            AddToUploadedUpdates(SelectedNewPatchPath, selectedServer);
                         }
                         break;
                     case UpdateType.Existing:
@@ -185,8 +184,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                             SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(),
                             SelectedNewPatchPath,
                             true);
-
-                            AddToUploadedUpdates(SelectedNewPatchPath, selectedServer);
                         }
                         break;
                 }
@@ -252,7 +249,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 switch (SelectedUpdateType)
                 {
                     case UpdateType.NewRetail:
-                        action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatchPath, true);
+                        if (CanUploadUpdateOnHost(SelectedNewPatchPath, master))
+                            action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatchPath, true);
                         break;
                     case UpdateType.Existing:
                         if (SelectedExistingPatch != null && !PatchExistsOnPool(SelectedExistingPatch, master))
@@ -409,7 +407,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Host master = Helpers.GetMaster(action.Connection);
 
                     if (action is UploadPatchAction)
+                    {
                         _patch = (action as UploadPatchAction).PatchRefs[master];
+                        AddToUploadedUpdates(SelectedNewPatchPath, master);
+                    }
                     if (action is CopyPatchFromHostToOther && action.Host != null)
                         _patch = action.Host.Connection.Cache.Resolve((action as CopyPatchFromHostToOther).NewPatchRef);
 
@@ -421,6 +422,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
                         AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+                        AddToUploadedUpdates(SelectedNewPatchPath, master);
                     }
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
