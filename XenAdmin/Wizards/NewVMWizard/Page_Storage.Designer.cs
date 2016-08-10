@@ -32,17 +32,17 @@ namespace XenAdmin.Wizards.NewVMWizard
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CloneCheckBox = new System.Windows.Forms.CheckBox();
             this.DisksGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.ImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SharedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.PropertiesButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.DisklessVMRadioButton = new System.Windows.Forms.RadioButton();
             this.DisksRadioButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.ImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SharedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DisksGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +74,43 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.DisksGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.DisksGridView.Name = "DisksGridView";
             this.DisksGridView.SelectionChanged += new System.EventHandler(this.DisksGridView_SelectionChanged);
+            // 
+            // ImageColumn
+            // 
+            this.ImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ImageColumn, "ImageColumn");
+            this.ImageColumn.Name = "ImageColumn";
+            this.ImageColumn.ReadOnly = true;
+            // 
+            // NameColumn
+            // 
+            this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameColumn.FillWeight = 40F;
+            resources.ApplyResources(this.NameColumn, "NameColumn");
+            this.NameColumn.Name = "NameColumn";
+            this.NameColumn.ReadOnly = true;
+            // 
+            // SrColumn
+            // 
+            this.SrColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SrColumn.FillWeight = 60F;
+            resources.ApplyResources(this.SrColumn, "SrColumn");
+            this.SrColumn.Name = "SrColumn";
+            this.SrColumn.ReadOnly = true;
+            // 
+            // SizeColumn
+            // 
+            this.SizeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.SizeColumn, "SizeColumn");
+            this.SizeColumn.Name = "SizeColumn";
+            this.SizeColumn.ReadOnly = true;
+            // 
+            // SharedColumn
+            // 
+            this.SharedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.SharedColumn, "SharedColumn");
+            this.SharedColumn.Name = "SharedColumn";
+            this.SharedColumn.ReadOnly = true;
             // 
             // DeleteButton
             // 
@@ -116,43 +153,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // ImageColumn
-            // 
-            this.ImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ImageColumn, "ImageColumn");
-            this.ImageColumn.Name = "ImageColumn";
-            this.ImageColumn.ReadOnly = true;
-            // 
-            // NameColumn
-            // 
-            this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameColumn.FillWeight = 40F;
-            resources.ApplyResources(this.NameColumn, "NameColumn");
-            this.NameColumn.Name = "NameColumn";
-            this.NameColumn.ReadOnly = true;
-            // 
-            // SrColumn
-            // 
-            this.SrColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SrColumn.FillWeight = 60F;
-            resources.ApplyResources(this.SrColumn, "SrColumn");
-            this.SrColumn.Name = "SrColumn";
-            this.SrColumn.ReadOnly = true;
-            // 
-            // SizeColumn
-            // 
-            this.SizeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.SizeColumn, "SizeColumn");
-            this.SizeColumn.Name = "SizeColumn";
-            this.SizeColumn.ReadOnly = true;
-            // 
-            // SharedColumn
-            // 
-            this.SharedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.SharedColumn, "SharedColumn");
-            this.SharedColumn.Name = "SharedColumn";
-            this.SharedColumn.ReadOnly = true;
             // 
             // Page_Storage
             // 
