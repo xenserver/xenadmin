@@ -188,6 +188,7 @@ namespace XenAdmin
             this.restoreFromBackupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.maintenanceModeToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.controlDomainMemoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.RemoveCrashdumpsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.HostPasswordToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.ChangeRootPasswordToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -1086,6 +1087,7 @@ namespace XenAdmin
             this.restoreFromBackupToolStripMenuItem,
             this.toolStripSeparator23,
             this.maintenanceModeToolStripMenuItem1,
+            this.controlDomainMemoryToolStripMenuItem,
             this.RemoveCrashdumpsToolStripMenuItem,
             this.HostPasswordToolStripMenuItem,
             this.toolStripSeparator25,
@@ -1218,6 +1220,12 @@ namespace XenAdmin
             this.maintenanceModeToolStripMenuItem1.Command = new XenAdmin.Commands.HostMaintenanceModeCommand();
             this.maintenanceModeToolStripMenuItem1.Name = "maintenanceModeToolStripMenuItem1";
             resources.ApplyResources(this.maintenanceModeToolStripMenuItem1, "maintenanceModeToolStripMenuItem1");
+            // 
+            // controlDomainMemoryToolStripMenuItem
+            // 
+            this.controlDomainMemoryToolStripMenuItem.Command = new XenAdmin.Commands.ChangeControlDomainMemoryCommand();
+            this.controlDomainMemoryToolStripMenuItem.Name = "controlDomainMemoryToolStripMenuItem";
+            resources.ApplyResources(this.controlDomainMemoryToolStripMenuItem, "controlDomainMemoryToolStripMenuItem");
             // 
             // RemoveCrashdumpsToolStripMenuItem
             // 
@@ -2125,6 +2133,7 @@ namespace XenAdmin
         private TabPage TabPageADUpsell;
         private TabPage TabPageCvmConsole;
         private TabPage TabPagePvs;
+        private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
     }
 
 }

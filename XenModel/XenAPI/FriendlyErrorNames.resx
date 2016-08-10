@@ -861,17 +861,17 @@
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>The provision call can only be invoked on templates, not regular VMs.</value>
   </data>
-  <data name="PVS_FARM_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
-    <value>The PVS farm contains running proxies.</value>
+  <data name="PVS_SITE_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
+    <value>The PVS site contains running proxies.</value>
   </data>
-  <data name="PVS_FARM_CONTAINS_SERVERS" xml:space="preserve">
-    <value>The PVS farm contains servers and cannot be forgotten.</value>
+  <data name="PVS_SITE_CONTAINS_SERVERS" xml:space="preserve">
+    <value>The PVS site contains servers and cannot be forgotten.</value>
   </data>
-  <data name="PVS_FARM_SR_ALREADY_ADDED" xml:space="preserve">
-    <value>Trying to add a cache SR that is already associated with the farm</value>
+  <data name="PVS_SITE_SR_ALREADY_ADDED" xml:space="preserve">
+    <value>Trying to add a cache SR that is already associated with the site</value>
   </data>
-  <data name="PVS_FARM_SR_IS_IN_USE" xml:space="preserve">
-    <value>The SR is in use by the farm and cannot be removed.</value>
+  <data name="PVS_SITE_SR_IS_IN_USE" xml:space="preserve">
+    <value>The SR is in use by the site and cannot be removed.</value>
   </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>Your current role is not authorized to perform this action.
@@ -1526,8 +1526,8 @@ Authorized Roles: {1}</value>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>The SR operation cannot be performed because the SR is not empty.</value>
   </data>
-  <data name="SR_NOT_IN_PVS_FARM" xml:space="preserve">
-    <value>The SR is not associated with the farm.</value>
+  <data name="SR_NOT_IN_PVS_SITE" xml:space="preserve">
+    <value>The SR is not associated with the site.</value>
   </data>
   <data name="SR_NOT_SHARABLE" xml:space="preserve">
     <value>SR is not sharable</value>
@@ -1697,6 +1697,9 @@ Authorized Roles: {1}</value>
   <data name="VIF_NOT_IN_MAP" xml:space="preserve">
     <value>This VIF was not mapped to a destination network</value>
   </data>
+  <data name="VLAN_IN_USE" xml:space="preserve">
+    <value>Operation cannot be performed because this VLAN is already in use. Please check your network configuration.</value>
+  </data>
   <data name="VLAN_TAG_INVALID" xml:space="preserve">
     <value>You tried to create a VLAN, but the tag you gave ({0}) was invalid -- it must be between 0 and 4094.</value>
   </data>
@@ -1771,6 +1774,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
     <value>The host does not have some of the CPU features that the VM is currently using</value>
+  </data>
+  <data name="VM_IS_IMMOBILE" xml:space="preserve">
+    <value>The VM is configured in a way that prevents it from being mobile.</value>
   </data>
   <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
     <value>The VM cannot be recovered on its own as it is part of a VM appliance.</value>

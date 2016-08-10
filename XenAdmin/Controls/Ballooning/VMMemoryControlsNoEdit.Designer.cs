@@ -37,9 +37,6 @@ namespace XenAdmin.Controls.Ballooning
             this.valueDynMin = new System.Windows.Forms.Label();
             this.valueDynMax = new System.Windows.Forms.Label();
             this.valueStatMax = new System.Windows.Forms.Label();
-            this.unitsDynMin = new System.Windows.Forms.Label();
-            this.unitsDynMax = new System.Windows.Forms.Label();
-            this.unitsStatMax = new System.Windows.Forms.Label();
             this.editButton = new System.Windows.Forms.Button();
             this.vmShinyBar = new XenAdmin.Controls.Ballooning.VMShinyBar();
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMin)).BeginInit();
@@ -98,24 +95,6 @@ namespace XenAdmin.Controls.Ballooning
             this.valueStatMax.BackColor = System.Drawing.Color.Transparent;
             this.valueStatMax.Name = "valueStatMax";
             // 
-            // unitsDynMin
-            // 
-            resources.ApplyResources(this.unitsDynMin, "unitsDynMin");
-            this.unitsDynMin.BackColor = System.Drawing.Color.Transparent;
-            this.unitsDynMin.Name = "unitsDynMin";
-            // 
-            // unitsDynMax
-            // 
-            resources.ApplyResources(this.unitsDynMax, "unitsDynMax");
-            this.unitsDynMax.BackColor = System.Drawing.Color.Transparent;
-            this.unitsDynMax.Name = "unitsDynMax";
-            // 
-            // unitsStatMax
-            // 
-            resources.ApplyResources(this.unitsStatMax, "unitsStatMax");
-            this.unitsStatMax.BackColor = System.Drawing.Color.Transparent;
-            this.unitsStatMax.Name = "unitsStatMax";
-            // 
             // editButton
             // 
             resources.ApplyResources(this.editButton, "editButton");
@@ -126,6 +105,7 @@ namespace XenAdmin.Controls.Ballooning
             // vmShinyBar
             // 
             resources.ApplyResources(this.vmShinyBar, "vmShinyBar");
+            this.vmShinyBar.Increment = 0D;
             this.vmShinyBar.Name = "vmShinyBar";
             // 
             // VMMemoryControlsNoEdit
@@ -133,9 +113,6 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.editButton);
-            this.Controls.Add(this.unitsStatMax);
-            this.Controls.Add(this.unitsDynMax);
-            this.Controls.Add(this.unitsDynMin);
             this.Controls.Add(this.valueStatMax);
             this.Controls.Add(this.valueDynMax);
             this.Controls.Add(this.valueDynMin);
@@ -163,9 +140,6 @@ namespace XenAdmin.Controls.Ballooning
         private System.Windows.Forms.Label valueDynMin;
         private System.Windows.Forms.Label valueDynMax;
         private System.Windows.Forms.Label valueStatMax;
-        private System.Windows.Forms.Label unitsDynMin;
-        private System.Windows.Forms.Label unitsDynMax;
-        private System.Windows.Forms.Label unitsStatMax;
         private System.Windows.Forms.Button editButton;
     }
 }

@@ -34,14 +34,14 @@ using System.Windows.Forms;
 
 namespace XenAdmin.Controls.DataGridViewEx
 {
-    public partial class CollapsingPvsFarmServerDataGridView : DataGridViewEx
+    public partial class CollapsingPvsSiteServerDataGridView : DataGridViewEx
     {
-        public CollapsingPvsFarmServerDataGridView()
+        public CollapsingPvsSiteServerDataGridView()
         {
             InitializeComponent();
         }
 
-        public CollapsingPvsFarmServerDataGridView(IContainer container)
+        public CollapsingPvsSiteServerDataGridView(IContainer container)
         {
             container.Add(this);
 
@@ -62,23 +62,23 @@ namespace XenAdmin.Controls.DataGridViewEx
 
         public void ExpandCollapseClicked(int rowIndex)
         {
-            var farmRow = (CollapsingPvsFarmServerDataGridViewRow)Rows[rowIndex];
+            var siteRow = (CollapsingPvsSiteServerDataGridViewRow)Rows[rowIndex];
 
-            if (farmRow.UnderlyingFarm != null)
+            if (siteRow.UnderlyingSite != null)
             {
                 for (int i = rowIndex + 1; i < Rows.Count; i++)
                 {
-                    var row = (CollapsingPvsFarmServerDataGridViewRow)Rows[i];
+                    var row = (CollapsingPvsSiteServerDataGridViewRow)Rows[i];
 
-                    if (row.IsFarmRow)
+                    if (row.IsSiteRow)
                         break;
 
                     row.Visible = !row.Visible;
 
                     if (row.Visible)
-                        farmRow.SetCollapseIcon();
+                        siteRow.SetCollapseIcon();
                     else
-                        farmRow.SetExpandIcon();
+                        siteRow.SetExpandIcon();
                 }
             }
         }

@@ -101,7 +101,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
 	            new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", false, false  ),
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -210,7 +211,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", true, false  ),
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -321,7 +323,8 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Restore From Back&up...", true, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("Enter &Maintenance Mode...", true, false  ),
-	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", true, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -432,7 +435,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -544,7 +548,8 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("Enter &Maintenance Mode...", vm.Home() != null, false  ),
-	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
 	                new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -658,7 +663,8 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("Enter &Maintenance Mode...", sr.Home != null, false  ),
-	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -773,7 +779,8 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                    new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                    new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                         new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                        new ExpectedTextMenuItem("&Change...", false, false  ),
                             new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -891,7 +898,8 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1010,7 +1018,8 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                    new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                    new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                         new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                        new ExpectedTextMenuItem("&Change...", false, false  ),
                             new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1130,7 +1139,8 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1251,7 +1261,8 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	                    new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                    new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                    new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                         new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                        new ExpectedTextMenuItem("&Change...", false, false  ),
                             new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1367,7 +1378,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", true, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", true, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", true, false  ),
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1476,7 +1488,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", true, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", true, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", true, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", true, false  ),
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1587,7 +1600,8 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("Enter &Maintenance Mode...", true, false  ),
-	                new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	                new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	                new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                     new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&Change...", false, false  ),
                         new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1726,7 +1740,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", true, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", false, false  ),
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),
@@ -1851,7 +1866,8 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Restore From Back&up...", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("Enter &Maintenance Mode...", false, false  ),
-	            new ExpectedTextMenuItem("Remove Crash &Dump Files", false, false  ),
+	            new ExpectedTextMenuItem("Control &Domain Memory...", false, false  ),
+	            new ExpectedTextMenuItem("Remove Crash Dump &Files", false, false  ),
                 new ExpectedTextMenuItem("Pass&word", false, false, new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&Change...", false, false  ),
                     new ExpectedTextMenuItem("&Forget Password", false, false  )}),

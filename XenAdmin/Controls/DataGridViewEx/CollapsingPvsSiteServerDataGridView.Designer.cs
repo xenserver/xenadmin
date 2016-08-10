@@ -1,6 +1,6 @@
 ﻿namespace XenAdmin.Controls.DataGridViewEx
 {
-    partial class CollapsingPvsFarmServerDataGridView
+    partial class CollapsingPvsSiteServerDataGridView
     {
         /// <summary>
         /// Required designer variable.

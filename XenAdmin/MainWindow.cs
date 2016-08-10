@@ -1427,8 +1427,8 @@ namespace XenAdmin
 
             ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
 
-            bool hasPvsFarms = selectionConnection != null && selectionConnection.Cache.PVS_farms.Length > 0;
-            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && hasPvsFarms && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache));
+            bool hasPvsSites = selectionConnection != null && selectionConnection.Cache.PVS_sites.Length > 0;
+            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && hasPvsSites && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache));
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
