@@ -156,7 +156,6 @@ namespace XenAdmin.Dialogs
             {
                 DialogResult = DialogResult.OK;
             }
-            Close();
         }
 
         private void maintenanceModeLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -167,11 +166,6 @@ namespace XenAdmin.Dialogs
         private void ControlDomainMemoryDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
             Cleanup();
-        }
-
-        private void CloseButton_Click(object sender, EventArgs e)
-        {
-            Close();
         }
     }
 }

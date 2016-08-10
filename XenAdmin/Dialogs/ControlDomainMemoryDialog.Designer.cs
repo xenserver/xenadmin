@@ -73,7 +73,6 @@
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // OkButton
             // 
@@ -113,12 +112,12 @@
             resources.ApplyResources(this.maintenanceWarningLabel, "maintenanceWarningLabel");
             this.maintenanceWarningLabel.Name = "maintenanceWarningLabel";
             // 
-            // memorySpinnerDynMin
+            // memorySpinner
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.memorySpinner, 2);
-            resources.ApplyResources(this.memorySpinner, "memorySpinnerDynMin");
+            resources.ApplyResources(this.memorySpinner, "memorySpinner");
             this.memorySpinner.Increment = 0.1D;
-            this.memorySpinner.Name = "memorySpinnerDynMin";
+            this.memorySpinner.Name = "memorySpinner";
             // 
             // maintenanceModeLinkLabel
             // 
