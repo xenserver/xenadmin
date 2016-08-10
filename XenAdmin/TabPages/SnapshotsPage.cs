@@ -1115,7 +1115,11 @@ namespace XenAdmin.TabPages
                     {
                         VM snap = (VM)item.Tag;
                         if (snap != null && snap.is_a_snapshot)
-                            snapshots.Add(snap);
+                        {
+                            if(!(snap.is_snapshot_from_vmpp || snap.is_vmss_snapshot) || toolStripMenuItemScheduledSnapshots.Checked)
+                                snapshots.Add(snap);
+                        }
+                            
                     }
                     return snapshots;
                 }
@@ -1129,7 +1133,10 @@ namespace XenAdmin.TabPages
                     {
                         VM snap = (VM)row.Tag;
                         if (snap != null && snap.is_a_snapshot)
-                            snapshots.Add(snap);
+                        {
+                            if (!(snap.is_snapshot_from_vmpp || snap.is_vmss_snapshot) || toolStripMenuItemScheduledSnapshots.Checked)
+                                snapshots.Add(snap);
+                        }
                     }
                     return snapshots;
                 }
