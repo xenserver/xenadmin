@@ -113,6 +113,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var fileFromDiskAlertPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
 
                 PatchingWizard_SelectServers.IsInAutomaticMode = wizardModeAutomatic;
+                PatchingWizard_SelectServers.AutoDownloadedXenServerVersions = PatchingWizard_SelectPatchPage.AutoDownloadedXenServerVersions;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
@@ -155,19 +156,21 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (prevPageType == typeof(PatchingWizard_SelectServers))
             {
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
-                
+                var selectedPools = PatchingWizard_SelectServers.SelectedPools;
+                var selectedMasters = PatchingWizard_SelectServers.SelectedMasters;
+
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
-                PatchingWizard_PatchingPage.SelectedMasters = PatchingWizard_SelectServers.SelectedMasters;
+                PatchingWizard_PatchingPage.SelectedMasters = selectedMasters;
                 PatchingWizard_PatchingPage.SelectedServers = selectedServers;
-                PatchingWizard_PatchingPage.SelectedPools = PatchingWizard_SelectServers.SelectedPools;
+                PatchingWizard_PatchingPage.SelectedPools = selectedPools;
 
-                PatchingWizard_UploadPage.SelectedMasters = PatchingWizard_SelectServers.SelectedMasters;
+                PatchingWizard_UploadPage.SelectedMasters = selectedMasters;
                 PatchingWizard_UploadPage.SelectedServers = selectedServers;
 
-                PatchingWizard_AutoUpdatingPage.SelectedPools = PatchingWizard_SelectServers.SelectedPools;
+                PatchingWizard_AutoUpdatingPage.SelectedPools = selectedPools;
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {

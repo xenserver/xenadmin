@@ -454,33 +454,41 @@ namespace XenAdmin.Core
 
         public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
-            var uSeq = new UpgradeSequence();
+            return GetUpgradeSequence(conn, XenServerVersions);
+        }
+
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn, List<XenServerVersion> xsVersions)
+        {
+            if (xsVersions == null)
+                return null;
 
             Host master = Helpers.GetMaster(conn);
             if (master == null)
                 return null;
 
-            var version = GetCommonServerVersionOfHostsInAConnection(conn);
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, xsVersions);
 
             if (version != null)
             {
                 if (version.MinimalPatches == null)
                     return null;
 
+                var uSeq = new UpgradeSequence();
                 uSeq.MinimalPatches = version.MinimalPatches;
 
                 List<Host> hosts = conn.Cache.Hosts.ToList();
+                
                 foreach (Host h in hosts)
                 {
                     uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches);
                 }
+
+                return uSeq;
             }
             else
             {
                 return null;
             }
-
-            return uSeq;
         }
 
         /// <summary>
@@ -488,9 +496,9 @@ namespace XenAdmin.Core
         /// Returns null if it is unknown or they don't match
         /// </summary>
         /// <returns></returns>
-        private static XenServerVersion GetCommonServerVersionOfHostsInAConnection(IXenConnection connection)
+        private static XenServerVersion GetCommonServerVersionOfHostsInAConnection(IXenConnection connection, List<XenServerVersion> xsVersions)
         {
-            XenServerVersion xenServerVersion = null;
+            XenServerVersion commonXenServerVersion = null;
 
             if (connection == null)
                 return null;
@@ -499,7 +507,7 @@ namespace XenAdmin.Core
 
             foreach (Host host in hosts)
             {
-                var hostVersions = XenServerVersions.FindAll(version =>
+                var hostVersions = xsVersions.FindAll(version =>
                 {
                     if (version.BuildNumber != string.Empty)
                         return (host.BuildNumberRaw == version.BuildNumber);
@@ -517,19 +525,19 @@ namespace XenAdmin.Core
                 }
                 else
                 {
-                    if (xenServerVersion == null)
+                    if (commonXenServerVersion == null)
                     {
-                        xenServerVersion = foundVersion;
+                        commonXenServerVersion = foundVersion;
                     }
                     else
                     {
-                        if (xenServerVersion != foundVersion)
+                        if (commonXenServerVersion != foundVersion)
                             return null;
                     }
                 }
             }
 
-            return xenServerVersion;
+            return commonXenServerVersion;
         }
 
         private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> latestPatches)
