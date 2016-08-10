@@ -193,6 +193,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
+                var pool = Helpers.GetPool(host.Connection);
+                if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED;
+
+                    return;
+                }
+
                 //if there is a host missing from the upgrade sequence
                 if (host.Connection.Cache.Hosts.Any(h => !us.Keys.Contains(h)))
                 {
