@@ -167,6 +167,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public bool IsInAutomaticMode { set; get; }
 
+        public List<XenServerVersion> AutoDownloadedXenServerVersions { private get; set; }
+
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
@@ -174,7 +176,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (IsInAutomaticMode)
             {
                 //check updgrade sequences
-                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
+                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection, AutoDownloadedXenServerVersions);
 
                 if (us == null) //version not supported
                 {
