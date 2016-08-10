@@ -387,7 +387,7 @@ namespace XenAdminTests.UnitTests
 
         /// <summary>
         /// Version does not exist
-        /// Result: update sequence does not have the host
+        /// Result: update sequence is null
         /// </summary>
         [Test]
         public void NoInfoForCurrentVersion()
@@ -404,7 +404,7 @@ namespace XenAdminTests.UnitTests
 
             // Assert
 
-            Assert.NotNull(upgradeSequence);
+            Assert.Null(upgradeSequence);
             Assert.AreEqual(0, upgradeSequence.Count);
         }
 
