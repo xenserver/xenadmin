@@ -492,7 +492,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Returns a XenServerVersion if all hosts of the pool has the same version
+        /// Returns a XenServerVersion if all hosts of the pool have the same version
         /// Returns null if it is unknown or they don't match
         /// </summary>
         /// <returns></returns>

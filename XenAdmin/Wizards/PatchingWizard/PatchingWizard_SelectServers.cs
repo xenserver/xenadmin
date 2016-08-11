@@ -175,6 +175,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (IsInAutomaticMode)
             {
+                var pool = Helpers.GetPool(host.Connection);
+                if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED;
+
+                    return;
+                }
+
                 //check updgrade sequences
                 Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection, AutoDownloadedXenServerVersions);
 
@@ -191,15 +200,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING;
-
-                    return;
-                }
-
-                var pool = Helpers.GetPool(host.Connection);
-                if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED;
 
                     return;
                 }
