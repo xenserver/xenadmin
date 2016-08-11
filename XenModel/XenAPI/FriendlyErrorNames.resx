@@ -1322,9 +1322,6 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>Unable to attach empty optical drive to VM.</value>
   </data>
-  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
-    <value>Not enough space to enable LVHD thin provisioning.</value>
-  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
   </data>
@@ -1685,6 +1682,9 @@ Authorized Roles: {1}</value>
   <data name="VIF_NOT_IN_MAP" xml:space="preserve">
     <value>This VIF was not mapped to a destination network</value>
   </data>
+  <data name="VLAN_IN_USE" xml:space="preserve">
+    <value>Operation cannot be performed because this VLAN is already in use. Please check your network configuration.</value>
+  </data>
   <data name="VLAN_TAG_INVALID" xml:space="preserve">
     <value>You tried to create a VLAN, but the tag you gave ({0}) was invalid -- it must be between 0 and 4094.</value>
   </data>
@@ -1759,6 +1759,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
     <value>The host does not have some of the CPU features that the VM is currently using</value>
+  </data>
+  <data name="VM_IS_IMMOBILE" xml:space="preserve">
+    <value>The VM is configured in a way that prevents it from being mobile.</value>
   </data>
   <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
     <value>The VM cannot be recovered on its own as it is part of a VM appliance.</value>
