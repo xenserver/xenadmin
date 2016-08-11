@@ -439,8 +439,7 @@ namespace XenAdmin.Core
 
             if (serverVersions.Count != 0)
             {
-                var minimumPatches = new List<XenServerPatch>();
-                minimumPatches = serverVersions[0].MinimalPatches;
+                var minimumPatches = serverVersions[0].MinimalPatches;
 
                 if (minimumPatches == null) //unknown
                     return recommendedPatches;
@@ -467,32 +466,21 @@ namespace XenAdmin.Core
             if (master == null)
                 return null;
 
-            List<Host> hosts = conn.Cache.Hosts.ToList();
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, xsVersions);
 
-            var serverVersions = xsVersions.FindAll(version =>
+            if (version != null)
             {
-                if (version.BuildNumber != string.Empty)
-                    return (master.BuildNumberRaw == version.BuildNumber);
-
-                return Helpers.HostProductVersionWithOEM(master) == version.VersionAndOEM
-                       || (version.Oem != null && Helpers.OEMName(master).StartsWith(version.Oem)
-                           && Helpers.HostProductVersion(master) == version.Version.ToString());
-            });
-
-            if (serverVersions.Count > 0)
-            {
-                var uSeq = new UpgradeSequence();
-
-                if (serverVersions[0].MinimalPatches == null)
+                if (version.MinimalPatches == null)
                     return null;
 
-                uSeq.MinimalPatches = serverVersions[0].MinimalPatches;
+                var uSeq = new UpgradeSequence();
+                uSeq.MinimalPatches = version.MinimalPatches;
 
-                List<XenServerPatch> allPatches = serverVersions[0].Patches;
-
+                List<Host> hosts = conn.Cache.Hosts.ToList();
+                
                 foreach (Host h in hosts)
                 {
-                    uSeq[h] = GetUpgradeSequenceForHost(h, allPatches, uSeq.MinimalPatches);
+                    uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches);
                 }
 
                 return uSeq;
@@ -503,7 +491,56 @@ namespace XenAdmin.Core
             }
         }
 
-        private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> allPatches, List<XenServerPatch> latestPatches)
+        /// <summary>
+        /// Returns a XenServerVersion if all hosts of the pool have the same version
+        /// Returns null if it is unknown or they don't match
+        /// </summary>
+        /// <returns></returns>
+        private static XenServerVersion GetCommonServerVersionOfHostsInAConnection(IXenConnection connection, List<XenServerVersion> xsVersions)
+        {
+            XenServerVersion commonXenServerVersion = null;
+
+            if (connection == null)
+                return null;
+            
+            List<Host> hosts = connection.Cache.Hosts.ToList();
+
+            foreach (Host host in hosts)
+            {
+                var hostVersions = xsVersions.FindAll(version =>
+                {
+                    if (version.BuildNumber != string.Empty)
+                        return (host.BuildNumberRaw == version.BuildNumber);
+
+                    return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                           || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                               && Helpers.HostProductVersion(host) == version.Version.ToString());
+                });
+
+                var foundVersion = hostVersions.FirstOrDefault();
+
+                if (foundVersion == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (commonXenServerVersion == null)
+                    {
+                        commonXenServerVersion = foundVersion;
+                    }
+                    else
+                    {
+                        if (commonXenServerVersion != foundVersion)
+                            return null;
+                    }
+                }
+            }
+
+            return commonXenServerVersion;
+        }
+
+        private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> latestPatches)
         {
             var sequence = new List<XenServerPatch>();
             var appliedPatches = h.AppliedPatches();

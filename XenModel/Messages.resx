@@ -9015,6 +9015,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>Automatic update is not supported on this [XenServer] version</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+    <value>Automatic update is not supported on partially upgraded [XenServer] pools.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this [XenServer] version</value>
   </data>
