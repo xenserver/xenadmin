@@ -405,7 +405,6 @@ namespace XenAdminTests.UnitTests
             // Assert
 
             Assert.Null(upgradeSequence);
-            Assert.AreEqual(0, upgradeSequence.Count);
         }
 
 
