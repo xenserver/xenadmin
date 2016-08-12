@@ -123,9 +123,6 @@
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Activating Multiple Virtual Disks</value>
   </data>
-  <data name="ACTION_ALLOW_LIVE_PATCHING" xml:space="preserve">
-    <value>Allowing live patching for '{0}'</value>
-  </data>
   <data name="ACTION_CHANGED_DISK_SIZE_FOR" xml:space="preserve">
     <value>Disk size changed for '{0}'.</value>
   </data>
@@ -267,14 +264,17 @@
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
+  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Disable live patching</value>
+  </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Disable container management on VM '{0}'</value>
   </data>
-  <data name="ACTION_DISALLOW_LIVE_PATCHING" xml:space="preserve">
-    <value>Disallowing live patching for '{0}'</value>
+  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -372,11 +372,17 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR cleanup ({0})</value>
   </data>
+  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Enable live patching</value>
+  </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Enable container management on VM '{0}'</value>
+  </data>
+  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -1731,9 +1737,6 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   </data>
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>When storage throughput exceeds {0} for {1} min(s)</value>
-  </data>
-  <data name="ALLOWED" xml:space="preserve">
-    <value>Allowed</value>
   </data>
   <data name="ALLOWED_MTU_RANGE" xml:space="preserve">
     <value>Allowed MTU range: {0} to {1}</value>
@@ -8670,9 +8673,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM has one or more virtual GPUs. Restart cannot be guaranteed.</value>
-  </data>
-  <data name="NOT_ALLOWED" xml:space="preserve">
-    <value>Not allowed</value>
   </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>Not applied</value>

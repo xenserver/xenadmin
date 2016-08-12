@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -52,13 +51,24 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
-            bool nowAllowed = checkLivePatchingAllowed.Checked;
-            string title = nowAllowed ?
-                String.Format(Messages.ACTION_ALLOW_LIVE_PATCHING, pool.Name) :
-                String.Format(Messages.ACTION_DISALLOW_LIVE_PATCHING, pool.Name);
+            bool now_enabled = radioButtonEnable.Checked;
 
-            return new DelegatedAsyncAction(pool.Connection, title, null, null,
-                delegate(Session session) { Pool.set_live_patching_disabled(session, pool.opaque_ref, !checkLivePatchingAllowed.Checked); }, true);
+            string title = null;
+            string description = null;
+
+            if (now_enabled)
+            {
+                title = Messages.ACTION_ENABLE_LIVE_PATCHING;
+                description = Messages.ACTION_ENABLING_LIVE_PATCHING;
+            }
+            else
+            {
+                title = Messages.ACTION_DISABLE_LIVE_PATCHING;
+                description = Messages.ACTION_DISABLING_LIVE_PATCHING;
+            }
+
+            return new DelegatedAsyncAction(pool.Connection, title, description, null,
+               delegate(Session session) { Pool.set_live_patching_disabled(session, pool.opaque_ref, radioButtonDisable.Checked); }, true);
         }
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
@@ -66,9 +76,13 @@ namespace XenAdmin.SettingsPanels
             pool = Helpers.GetPoolOfOne(clone.Connection);  // clone could be a pool or a host
 
             if (pool.live_patching_disabled)
-                checkLivePatchingAllowed.Checked = false;
+            {
+                radioButtonDisable.Checked = true;
+            }
             else
-                checkLivePatchingAllowed.Checked = true;
+            {
+                radioButtonEnable.Checked = true;
+            }
         }
 
         public bool ValidToSave
@@ -84,8 +98,8 @@ namespace XenAdmin.SettingsPanels
 
         public bool HasChanged
         {
-            // Changed if pool disabled = UI allowed
-            get { return pool.live_patching_disabled.Equals(checkLivePatchingAllowed.Checked); }
+            // Server flag is for disabled, so compare to disable radio
+            get { return pool.live_patching_disabled != radioButtonDisable.Checked; }
         }
 
         #endregion
@@ -94,7 +108,7 @@ namespace XenAdmin.SettingsPanels
 
         public string SubText
         {
-            get { return checkLivePatchingAllowed.Checked? Messages.ALLOWED : Messages.NOT_ALLOWED; }
+            get { return radioButtonEnable.Checked? Messages.ENABLED : Messages.DISABLED; }
         }
 
         public Image Image
