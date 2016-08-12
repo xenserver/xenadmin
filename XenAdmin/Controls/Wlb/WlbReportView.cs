@@ -176,6 +176,34 @@ namespace XenAdmin.Controls.Wlb
             };
         }
 
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
+        {
+            if ((keyData & Keys.Control) != 0)
+            {
+                ToolStrip toolStrip = (ToolStrip)reportViewer1.Controls.Find("toolStrip1", true)[0];
+                switch (keyData ^ Keys.Control)
+                {
+                    case Keys.F:
+                        toolStrip.Items["find"].PerformClick();
+                        break;
+                    case Keys.N:
+                        toolStrip.Items["findNext"].PerformClick();
+                        break;
+                    case Keys.E:
+                    case Keys.P:
+                        ToolStripDropDownButton exportButton = (ToolStripDropDownButton)toolStrip.Items["export"];
+                        if (exportButton.DropDownItems.Count == 0)
+                        {
+                            exportButton.ShowDropDown();
+                        }
+                        int index = (keyData == (Keys.Control | Keys.E)) ? 0 : 1;
+                        exportButton.DropDownItems[index].PerformClick();
+                        break;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         /// <summary>
         /// Sets the maximum number of characters allowed in the find textbox to 32
         /// </summary>

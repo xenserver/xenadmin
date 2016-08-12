@@ -5145,10 +5145,10 @@ Would you like to eject these ISOs before continuing?</value>
     <value>All files</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
-    <value>Acrobat (PDF) file</value>
+    <value>Acrobat (PDF) file (CTRL+P)</value>
   </data>
   <data name="FILE_XLS" xml:space="preserve">
-    <value>Excel file</value>
+    <value>Excel file (CTRL+E)</value>
   </data>
   <data name="FILE_X_EXISTS_OVERWRITE" xml:space="preserve">
     <value>File {0} already exists. Overwrite?</value>
@@ -12678,7 +12678,7 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
     <value>Invalid Value</value>
   </data>
   <data name="WLB_REPORT_FIND" xml:space="preserve">
-    <value>Find</value>
+    <value>Find(CTRL+F)</value>
   </data>
   <data name="WLB_REPORT_FINDNEXT" xml:space="preserve">
     <value>Find Next</value>
@@ -12708,7 +12708,7 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
     <value>Never</value>
   </data>
   <data name="WLB_REPORT_NEXT" xml:space="preserve">
-    <value>Next</value>
+    <value>Next(CTRL+N)</value>
   </data>
   <data name="WLB_REPORT_NEXTPAGE" xml:space="preserve">
     <value>Next Page</value>
