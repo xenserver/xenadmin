@@ -55,6 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
+        private AsyncAction resolvePrechecksAction = null;
 
         protected List<Pool> SelectedPools
         {
@@ -94,7 +95,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnablePrevious()
         {
-            return _worker != null && !_worker.IsBusy;
+            return _worker != null && !_worker.IsBusy && (resolvePrechecksAction == null || resolvePrechecksAction.IsCompleted);
         }
         
         void Connection_ConnectionStateChanged(object sender, EventArgs e)
@@ -141,7 +142,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected void RefreshRechecks()
         {
-            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = false;
+            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = false;
             _worker = null;
             _worker = new BackgroundWorker();
             _worker.DoWork += new DoWorkEventHandler(worker_DoWork);
@@ -157,6 +158,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!e.Cancelled)
                 OnPageUpdated();
             progressBar1.Value = 100;
+            labelProgress.Text = string.Empty;
 
             bool showResolveAllButton = false;
             foreach (PreCheckGridRow row in dataGridView1.Rows)
@@ -179,7 +181,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             buttonResolveAll.Enabled = showResolveAllButton;
-            buttonReCheckProblems.Enabled = true;
+            buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = true;
         }
 
         private void AddRowToGridView(DataGridViewRow row)
@@ -259,6 +261,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                          {
                                              dataGridView1.Rows.Clear();
                                              progressBar1.Value = 0;
+                                             labelProgress.Text = Messages.PATCHING_WIZARD_RUNNING_PRECHECKS;
                                          });
                 Pool_patch patch = e.Argument as Pool_patch;
 
@@ -373,6 +376,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             DeregisterEventHandlers();
             if (_worker != null)
                 _worker.CancelAsync();
+            if (resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted)
+                resolvePrechecksAction.Cancel();
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
@@ -401,8 +406,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             }
 
-            bool result = _worker != null && !_worker.IsBusy && !problemsFound;
-            panelErrorsFound.Visible = problemsFound;
+            bool result = _worker != null && !_worker.IsBusy && !problemsFound && (resolvePrechecksAction == null || resolvePrechecksAction.IsCompleted);
+            UpdateControls(problemsFound);
             return result;
         }
 
@@ -412,7 +417,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         internal enum PreCheckResult { OK, Warning, Failed }
 
-        private abstract class PreCheckGridRow : DataGridViewRow
+        private abstract class PreCheckGridRow : XenAdmin.Controls.DataGridViewEx.DataGridViewExRow
         {
             protected DataGridViewImageCell _iconCell = new DataGridViewImageCell();
             protected DataGridViewTextBoxCell _descriptionCell = new DataGridViewTextBoxCell();
@@ -500,8 +505,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (Problem is ProblemWithInformationUrl)
                     _solutionCell.Value = (Problem as ProblemWithInformationUrl).LinkText;
 
-                _solutionCell.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
-                _solutionCell.Style.ForeColor = Color.Blue;
+                UpdateSolutionCellStyle();
+            }
+
+            private void UpdateSolutionCellStyle()
+            {
+                if (_solutionCell == null)
+                    return;
+                if (Enabled) 
+                {
+                    _solutionCell.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
+                    _solutionCell.Style.ForeColor = Color.Blue;
+                }
+                else
+                    _solutionCell.Style = DefaultCellStyle;
             }
 
             public Problem Problem
@@ -535,14 +552,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return (_problem != null ? _problem.GetHashCode() : 0);
             }
 
+            public override bool Enabled
+            {
+                get
+                {
+                    return base.Enabled;
+                }
+                set
+                {
+                    base.Enabled = value;
+                    UpdateSolutionCellStyle();
+                }
+            }
         }
 
-
-        private ActionProgressDialog _progressDialog = null;
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             PreCheckHostRow preCheckHostRow = dataGridView1.Rows[e.RowIndex] as PreCheckHostRow;
-            if (preCheckHostRow != null && e.ColumnIndex == 2)
+            if (preCheckHostRow != null && preCheckHostRow.Enabled && e.ColumnIndex == 2)
             {
                 ExecuteSolution(preCheckHostRow);
             }
@@ -555,7 +582,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PreCheckHostRow preCheckHostRow = dataGridView1.CurrentCell.OwningRow as PreCheckHostRow;
                 int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
-                if (preCheckHostRow != null && columnIndex == 2)
+                if (preCheckHostRow != null && preCheckHostRow.Enabled && columnIndex == 2)
                     ExecuteSolution(preCheckHostRow);
             }
         }
@@ -563,13 +590,20 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void ExecuteSolution(PreCheckHostRow preCheckHostRow)
         {
             bool cancelled;
-            AsyncAction action = preCheckHostRow.Problem.SolveImmediately(out cancelled);
+            resolvePrechecksAction = preCheckHostRow.Problem.SolveImmediately(out cancelled);
 
-            if (action != null)
+            if (resolvePrechecksAction != null)
             {
-                action.Completed += action_Completed;
-                _progressDialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-                _progressDialog.ShowDialog(this);
+                // disable all problems 
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    PreCheckHostRow preCheckRow = row as PreCheckHostRow;
+                    if (preCheckRow != null && preCheckRow.Problem != null)
+                    {
+                        preCheckRow.Enabled = false;
+                    }
+                }
+                StartResolvePrechecksAction();
             }
             else
             {
@@ -588,13 +622,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private void action_Completed(ActionBase sender)
-        {
-            Thread.Sleep(1000);
-            Program.Invoke(Program.MainWindow, RefreshRechecks);
-        }
-
-
         private void buttonReCheckProblems_Click(object sender, EventArgs e)
         {
             RefreshRechecks();
@@ -610,17 +637,68 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     bool cancelled;
                     AsyncAction action = preCheckHostRow.Problem.SolveImmediately(out cancelled);
-                    
                     if (action != null)
+                    {
+                        preCheckHostRow.Enabled = false;
                         actions.Add(action);
+                    }
                 }
             }
-            var multipleAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
-            _progressDialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
-            _progressDialog.ShowDialog(this);
-            Program.Invoke(Program.MainWindow, RefreshRechecks);
+            resolvePrechecksAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
+            StartResolvePrechecksAction();
         }
 
+        private void resolvePrecheckAction_Changed(object sender)
+        {
+            var action = sender as AsyncAction;
+            if (action == null)
+                return;
+
+            Program.Invoke(this, () => UpdateActionProgress(action));
+        }
+
+        private void resolvePrecheckAction_Completed(object sender)
+        {
+            var action = sender as AsyncAction;
+            if (action == null)
+                return;
+
+            action.Changed -= resolvePrecheckAction_Changed;
+            action.Completed -= resolvePrecheckAction_Completed;
+
+            Program.Invoke(this,  () =>
+            {
+                UpdateControls();
+                RefreshRechecks();
+            });
+        }
+
+        private void StartResolvePrechecksAction()
+        {
+            if (resolvePrechecksAction == null)
+                return;
+            resolvePrechecksAction.Changed += resolvePrecheckAction_Changed;
+            resolvePrechecksAction.Completed += resolvePrecheckAction_Completed;
+            resolvePrechecksAction.RunAsync();
+            UpdateActionProgress(resolvePrechecksAction);
+            UpdateControls();
+            OnPageUpdated();
+        }
+
+        private void UpdateActionProgress(AsyncAction action)
+        {
+            progressBar1.Value = action == null ? 0 : action.PercentComplete;
+            labelProgress.Text = action == null ? string.Empty : action.Description;
+        }
+
+        private void UpdateControls(bool problemsFound = false)
+        {
+            bool actionInProgress = resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted;
+            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress;
+            labelProgress.Visible = actionInProgress || !problemsFound;
+            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress;
+        }
+        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             RefreshRechecks();
@@ -629,10 +707,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             PreCheckHostRow preCheckHostRow = dataGridView1.Rows[e.RowIndex] as PreCheckHostRow;
-            if (preCheckHostRow != null && e.ColumnIndex == 2 && !string.IsNullOrEmpty(preCheckHostRow.Solution))
-            {
+            if (preCheckHostRow != null && preCheckHostRow.Enabled && e.ColumnIndex == 2 && !string.IsNullOrEmpty(preCheckHostRow.Solution))
                 Cursor = Cursors.Hand;
-            }
             else
                 Cursor = Cursors.Arrow;
         }
