@@ -5102,10 +5102,10 @@
     <value>所有文件</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
-    <value>Acrobat (PDF) 文件</value>
+    <value>Acrobat (PDF) 文件 (CTRL+P)</value>
   </data>
   <data name="FILE_XLS" xml:space="preserve">
-    <value>Excel 文件</value>
+    <value>Excel 文件 (CTRL+E)</value>
   </data>
   <data name="FILE_X_EXISTS_OVERWRITE" xml:space="preserve">
     <value>文件 {0} 已存在。是否覆盖?</value>
@@ -12611,7 +12611,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>值无效</value>
   </data>
   <data name="WLB_REPORT_FIND" xml:space="preserve">
-    <value>查找</value>
+    <value>查找(CTRL+F)</value>
   </data>
   <data name="WLB_REPORT_FINDNEXT" xml:space="preserve">
     <value>查找下一项</value>
@@ -12641,7 +12641,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>从不</value>
   </data>
   <data name="WLB_REPORT_NEXT" xml:space="preserve">
-    <value>下一个</value>
+    <value>下一个(CTRL+N)</value>
   </data>
   <data name="WLB_REPORT_NEXTPAGE" xml:space="preserve">
     <value>下一页</value>

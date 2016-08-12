@@ -5107,10 +5107,10 @@ CD をイジェクトしてから再試行してください。</value>
     <value>すべてのファイル</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
-    <value>Acrobat (PDF) ファイル</value>
+    <value>Acrobat (PDF) ファイル (CTRL+P)</value>
   </data>
   <data name="FILE_XLS" xml:space="preserve">
-    <value>Excel ファイル</value>
+    <value>Excel ファイル (CTRL+E)</value>
   </data>
   <data name="FILE_X_EXISTS_OVERWRITE" xml:space="preserve">
     <value>ファイル {0} は既に存在します。上書きしますか?</value>
@@ -12612,7 +12612,7 @@ To learn more about the [XenServer] Active Directory feature or to start a [XenS
     <value>無効な値</value>
   </data>
   <data name="WLB_REPORT_FIND" xml:space="preserve">
-    <value>検索</value>
+    <value>検索(CTRL+F)</value>
   </data>
   <data name="WLB_REPORT_FINDNEXT" xml:space="preserve">
     <value>次を検索</value>
@@ -12642,7 +12642,7 @@ To learn more about the [XenServer] Active Directory feature or to start a [XenS
     <value>なし</value>
   </data>
   <data name="WLB_REPORT_NEXT" xml:space="preserve">
-    <value>次へ</value>
+    <value>次へ(CTRL+N)</value>
   </data>
   <data name="WLB_REPORT_NEXTPAGE" xml:space="preserve">
     <value>次のページ</value>
