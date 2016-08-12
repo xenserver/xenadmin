@@ -523,7 +523,7 @@ namespace XenAPI
 
         private bool _RestrictLivePatching
         {
-            get { return BoolKey(license_params, "restrict_live_patching"); }
+            get { return BoolKeyPreferTrue(license_params, "restrict_live_patching"); }
         }
 
         public static bool RestrictLivePatching(Host h)
