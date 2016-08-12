@@ -12947,19 +12947,4 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
   </data>
-  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Disable live patching</value>
-  </data>
-  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Disabling live patching for '{0}'</value>
-  </data>
-  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Enable live patching</value>
-  </data>
-  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Enabling live patching for '{0}'</value>
-  </data>
-  <data name="LIVE_PATCHING" xml:space="preserve">
-    <value>Live Patching</value>
-  </data>
 </root>

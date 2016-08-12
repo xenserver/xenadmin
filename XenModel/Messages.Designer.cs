@@ -502,15 +502,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable live patching.
-        /// </summary>
-        public static string ACTION_DISABLE_LIVE_PATCHING {
-            get {
-                return ResourceManager.GetString("ACTION_DISABLE_LIVE_PATCHING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disabling .
         /// </summary>
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION {
@@ -525,15 +516,6 @@ namespace XenAdmin {
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disabling live patching for &apos;{0}&apos;.
-        /// </summary>
-        public static string ACTION_DISABLING_LIVE_PATCHING {
-            get {
-                return ResourceManager.GetString("ACTION_DISABLING_LIVE_PATCHING", resourceCulture);
             }
         }
         
@@ -826,15 +808,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable live patching.
-        /// </summary>
-        public static string ACTION_ENABLE_LIVE_PATCHING {
-            get {
-                return ResourceManager.GetString("ACTION_ENABLE_LIVE_PATCHING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Enabling.
         /// </summary>
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION {
@@ -849,15 +822,6 @@ namespace XenAdmin {
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabling live patching for &apos;{0}&apos;.
-        /// </summary>
-        public static string ACTION_ENABLING_LIVE_PATCHING {
-            get {
-                return ResourceManager.GetString("ACTION_ENABLING_LIVE_PATCHING", resourceCulture);
             }
         }
         
@@ -19692,15 +19656,6 @@ namespace XenAdmin {
         public static string LIST_SEPARATOR {
             get {
                 return ResourceManager.GetString("LIST_SEPARATOR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Live Patching.
-        /// </summary>
-        public static string LIVE_PATCHING {
-            get {
-                return ResourceManager.GetString("LIVE_PATCHING", resourceCulture);
             }
         }
         

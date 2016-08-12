@@ -79,7 +79,6 @@ namespace XenAdmin.Dialogs
         private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
-        private LivePatchingEditPage LivePatchingEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -200,9 +199,6 @@ namespace XenAdmin.Dialogs
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
-
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
-                    ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
