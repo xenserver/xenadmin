@@ -521,6 +521,16 @@ namespace XenAPI
             return h._RestrictSslLegacySwitch;
         }
 
+        private bool _RestrictLivePatching
+        {
+            get { return BoolKey(license_params, "restrict_live_patching"); }
+        }
+
+        public static bool RestrictLivePatching(Host h)
+        {
+            return h._RestrictLivePatching;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)

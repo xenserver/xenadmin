@@ -201,7 +201,7 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
 
-                if (is_pool_or_standalone)
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
                     ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
 
                 if (is_network)

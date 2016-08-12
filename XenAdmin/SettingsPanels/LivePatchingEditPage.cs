@@ -30,11 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
@@ -55,8 +52,8 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
-            bool now_allowed = checkLivePatchingAllowed.Checked;
-            string title = now_allowed ?
+            bool nowAllowed = checkLivePatchingAllowed.Checked;
+            string title = nowAllowed ?
                 String.Format(Messages.ACTION_ALLOW_LIVE_PATCHING, pool.Name) :
                 String.Format(Messages.ACTION_DISALLOW_LIVE_PATCHING, pool.Name);
 
