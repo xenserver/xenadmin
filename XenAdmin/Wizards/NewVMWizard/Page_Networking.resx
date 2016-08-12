@@ -184,7 +184,7 @@
     <value>75, 23</value>
   </data>
   <data name="PropertiesButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="PropertiesButton.Text" xml:space="preserve">
     <value>&amp;Edit...</value>
@@ -211,7 +211,7 @@
     <value>75, 23</value>
   </data>
   <data name="DeleteButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="DeleteButton.Text" xml:space="preserve">
     <value>&amp;Delete</value>
