@@ -79,6 +79,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowing live patching for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ALLOW_LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("ACTION_ALLOW_LIVE_PATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change disk size.
         /// </summary>
         public static string ACTION_CHANGE_DISK_SIZE {
@@ -516,6 +525,15 @@ namespace XenAdmin {
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disallowing live patching for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISALLOW_LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISALLOW_LIVE_PATCHING", resourceCulture);
             }
         }
         
@@ -4747,6 +4765,15 @@ namespace XenAdmin {
         public static string ALLOW_TO_CONTINUE {
             get {
                 return ResourceManager.GetString("ALLOW_TO_CONTINUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allowed.
+        /// </summary>
+        public static string ALLOWED {
+            get {
+                return ResourceManager.GetString("ALLOWED", resourceCulture);
             }
         }
         
@@ -19660,6 +19687,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live Patching.
+        /// </summary>
+        public static string LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("LIVE_PATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading &apos;{0}&apos;....
         /// </summary>
         public static string LOADING {
@@ -24861,6 +24897,15 @@ namespace XenAdmin {
         public static string NOT_AGILE_VM_HAS_VGPU {
             get {
                 return ResourceManager.GetString("NOT_AGILE_VM_HAS_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not allowed.
+        /// </summary>
+        public static string NOT_ALLOWED {
+            get {
+                return ResourceManager.GetString("NOT_ALLOWED", resourceCulture);
             }
         }
         
