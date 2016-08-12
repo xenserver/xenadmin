@@ -26081,7 +26081,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported on partially upgraded [XenServer] pools..
+        ///   Looks up a localized string similar to Automatic update is not supported on partially upgraded [XenServer] pools.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED {
             get {
@@ -26144,7 +26144,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is already up-to-date..
+        ///   Looks up a localized string similar to This server is already up-to-date.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE {
             get {
