@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class DestroyHostCrashDumpAction : AsyncAction
+    public class DestroyHostCrashDumpAction : PureAsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
