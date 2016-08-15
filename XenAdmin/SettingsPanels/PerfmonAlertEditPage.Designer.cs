@@ -33,6 +33,7 @@ namespace XenAdmin.SettingsPanels
             this.AlertIntervalMinutesLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.nudAlertInterval = new XenAdmin.SettingsPanels.AlertNumericUpDown();
             this.PhysicalUtilisationGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.physicalUtilisationMinutesLabel = new System.Windows.Forms.Label();
@@ -91,6 +92,7 @@ namespace XenAdmin.SettingsPanels
             this.CPUUsagePercentLabel = new System.Windows.Forms.Label();
             this.CPUDurationThresholdLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).BeginInit();
             this.PhysicalUtilisationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisationDurationThreshold)).BeginInit();
@@ -141,6 +143,12 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // nudAlertInterval
             // 
@@ -746,13 +754,15 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.AlertIntervalLabel);
             this.Controls.Add(this.nudAlertInterval);
             this.Controls.Add(this.AlertIntervalMinutesLabel);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PerfmonAlertEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).EndInit();
             this.PhysicalUtilisationGroupBox.ResumeLayout(false);
             this.PhysicalUtilisationGroupBox.PerformLayout();
@@ -850,5 +860,6 @@ namespace XenAdmin.SettingsPanels
         private AlertCheckBox physicalUtilisationAlertCheckBox;
         private System.Windows.Forms.Label physicalUtilisationDurationLabel;
         private System.Windows.Forms.Label physicalUtilisationLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
