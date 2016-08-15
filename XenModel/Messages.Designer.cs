@@ -31273,15 +31273,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Target Server.
-        /// </summary>
-        public static string TARGET_SERVER_MENU_ITEM {
-            get {
-                return ResourceManager.GetString("TARGET_SERVER_MENU_ITEM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tell me more ....
         /// </summary>
         public static string TELL_ME_MORE {

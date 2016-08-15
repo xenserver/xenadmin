@@ -174,7 +174,7 @@ namespace XenAdmin.Commands
             VMOperationCommand cmdHome = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
             
             Host affinityHost = connection.Resolve(((VM)Command.GetSelection()[0].XenObject).affinity);
-            VMOperationCommand cpmCmdHome = new CrossPoolMigrateToTargetCommand(Command.MainWindowCommandInterface, selection, affinityHost);
+            VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost);
 
             Program.Invoke(Program.MainWindow, delegate
             {

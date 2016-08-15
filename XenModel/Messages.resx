@@ -10864,9 +10864,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TARGET_SERVER" xml:space="preserve">
     <value>Target Server</value>
   </data>
-  <data name="TARGET_SERVER_MENU_ITEM" xml:space="preserve">
-    <value>&amp;Target Server</value>
-  </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>
   </data>

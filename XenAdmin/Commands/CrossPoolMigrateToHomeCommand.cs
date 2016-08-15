@@ -40,12 +40,12 @@ namespace XenAdmin.Commands
     /// <summary>
     /// The command for the 'Target Server' subitem which is shown when WLB isn't enabled in the submenu for start-on, resume-on or migrate.
     /// </summary>
-    internal class CrossPoolMigrateToTargetCommand : CrossPoolMigrateCommand
+    internal class CrossPoolMigrateToHomeCommand : CrossPoolMigrateCommand
     {
-        public CrossPoolMigrateToTargetCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
+        public CrossPoolMigrateToHomeCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection, preSelectedHost)
         {
-            MenuText = Messages.TARGET_SERVER_MENU_ITEM;
+            MenuText = Messages.HOME_SERVER_MENU_ITEM;
         }
 
         public override Image MenuImage
