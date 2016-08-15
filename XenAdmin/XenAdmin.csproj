@@ -123,7 +123,7 @@
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Commands\CrossPoolMigrateToHomeCommand.cs" />
+    <Compile Include="Commands\CrossPoolMigrateToTargetCommand.cs" />
     <Compile Include="Commands\TrimSRCommand.cs" />
     <Compile Include="Commands\ExportResourceReportCommand.cs" />
     <Compile Include="Controls\AffinityPicker.cs">

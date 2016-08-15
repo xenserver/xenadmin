@@ -12948,4 +12948,13 @@ To learn more about the [XenServer] Active Directory feature or to start a [XenS
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>現在の位置</value>
   </data>
+  <data name="TARGET_SERVER_MENU_ITEM" xml:space="preserve">
+    <value>&amp;Target Server</value>
+  </data>
+  <data name="TARGET_SERVER" xml:space="preserve">
+    <value>Target Server</value>
+  </data>
+  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
+    <value>Target Server:</value>
+  </data>
 </root>
