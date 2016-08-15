@@ -67,10 +67,10 @@
             resources.ApplyResources(this.networkComboBox, "networkComboBox");
             this.networkComboBox.Name = "networkComboBox";
             // 
-            // label3
+            // blurbText
             // 
-            resources.ApplyResources(this.blurbText, "label3");
-            this.blurbText.Name = "label3";
+            resources.ApplyResources(this.blurbText, "blurbText");
+            this.blurbText.Name = "blurbText";
             // 
             // CrossPoolMigrateTransferNetworkPage
             // 

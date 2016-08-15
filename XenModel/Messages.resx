@@ -3110,9 +3110,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>Destination:</value>
   </data>
-  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
-    <value>Home Server:</value>
-  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>Template:</value>
   </data>
@@ -3124,6 +3121,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>Storage:</value>
+  </data>
+  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
+    <value>Target Server:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>Migration Network:</value>
@@ -3165,7 +3165,7 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
     <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Specify a &amp;home server in the destination pool (optional):</value>
+    <value>Specify a &amp;target server in the destination pool (optional):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
@@ -10860,6 +10860,9 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="TARGET" xml:space="preserve">
     <value>Target</value>
+  </data>
+  <data name="TARGET_SERVER" xml:space="preserve">
+    <value>Target Server</value>
   </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>
