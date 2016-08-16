@@ -32,9 +32,8 @@ namespace XenAdmin.SettingsPanels
             this.AlertIntervalLabel = new System.Windows.Forms.Label();
             this.AlertIntervalMinutesLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.nudAlertInterval = new XenAdmin.SettingsPanels.AlertNumericUpDown();
+            this.labelRubric = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.PhysicalUtilisationGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.physicalUtilisationMinutesLabel = new System.Windows.Forms.Label();
             this.nudPhysicalUtilisationDurationThreshold = new XenAdmin.SettingsPanels.AlertNumericUpDown();
@@ -91,9 +90,9 @@ namespace XenAdmin.SettingsPanels
             this.CPUAlertCheckBox = new XenAdmin.SettingsPanels.AlertCheckBox();
             this.CPUUsagePercentLabel = new System.Windows.Forms.Label();
             this.CPUDurationThresholdLabel = new System.Windows.Forms.Label();
+            this.nudAlertInterval = new XenAdmin.SettingsPanels.AlertNumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).BeginInit();
+            this.panel1.SuspendLayout();
             this.PhysicalUtilisationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisationDurationThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisation)).BeginInit();
@@ -115,6 +114,7 @@ namespace XenAdmin.SettingsPanels
             this.CpuGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCPUUsagePercent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCPUDurationThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // AlertIntervalLabel
@@ -130,53 +130,33 @@ namespace XenAdmin.SettingsPanels
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.PhysicalUtilisationGroupBox, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.Dom0MemoryUsageGroupBox, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.MemoryGroupBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.SrGroupBox, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.DiskGroupBox, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.NetGroupBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.CpuGroupBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelRubric, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.PhysicalUtilisationGroupBox, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.Dom0MemoryUsageGroupBox, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.MemoryGroupBox, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.SrGroupBox, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.DiskGroupBox, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.NetGroupBox, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.CpuGroupBox, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // label1
+            // labelRubric
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelRubric, "labelRubric");
+            this.labelRubric.Name = "labelRubric";
             // 
-            // tableLayoutPanel2
+            // panel1
             // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // nudAlertInterval
-            // 
-            this.nudAlertInterval.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            resources.ApplyResources(this.nudAlertInterval, "nudAlertInterval");
-            this.nudAlertInterval.Maximum = new decimal(new int[] {
-            86400,
-            0,
-            0,
-            0});
-            this.nudAlertInterval.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nudAlertInterval.Name = "nudAlertInterval";
-            this.nudAlertInterval.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.AlertIntervalLabel);
+            this.panel1.Controls.Add(this.AlertIntervalMinutesLabel);
+            this.panel1.Controls.Add(this.nudAlertInterval);
+            this.panel1.Name = "panel1";
             // 
             // PhysicalUtilisationGroupBox
             // 
+            resources.ApplyResources(this.PhysicalUtilisationGroupBox, "PhysicalUtilisationGroupBox");
             this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationMinutesLabel);
             this.PhysicalUtilisationGroupBox.Controls.Add(this.nudPhysicalUtilisationDurationThreshold);
             this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationPercentLabel);
@@ -184,7 +164,6 @@ namespace XenAdmin.SettingsPanels
             this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationAlertCheckBox);
             this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationDurationLabel);
             this.PhysicalUtilisationGroupBox.Controls.Add(this.physicalUtilisationLabel);
-            resources.ApplyResources(this.PhysicalUtilisationGroupBox, "PhysicalUtilisationGroupBox");
             this.PhysicalUtilisationGroupBox.Name = "PhysicalUtilisationGroupBox";
             this.PhysicalUtilisationGroupBox.TabStop = false;
             // 
@@ -257,6 +236,7 @@ namespace XenAdmin.SettingsPanels
             // 
             // Dom0MemoryUsageGroupBox
             // 
+            resources.ApplyResources(this.Dom0MemoryUsageGroupBox, "Dom0MemoryUsageGroupBox");
             this.Dom0MemoryUsageGroupBox.Controls.Add(this.nudDom0MemUsage);
             this.Dom0MemoryUsageGroupBox.Controls.Add(this.Dom0MemoryDurationThresholdLabel);
             this.Dom0MemoryUsageGroupBox.Controls.Add(this.nudDom0MemoryDurationThreshold);
@@ -264,7 +244,6 @@ namespace XenAdmin.SettingsPanels
             this.Dom0MemoryUsageGroupBox.Controls.Add(this.Dom0MemoryAlertCheckBox);
             this.Dom0MemoryUsageGroupBox.Controls.Add(this.dom0MemoryMinutesLabel);
             this.Dom0MemoryUsageGroupBox.Controls.Add(this.dom0MemoryPercentLabel);
-            resources.ApplyResources(this.Dom0MemoryUsageGroupBox, "Dom0MemoryUsageGroupBox");
             this.Dom0MemoryUsageGroupBox.Name = "Dom0MemoryUsageGroupBox";
             this.Dom0MemoryUsageGroupBox.TabStop = false;
             // 
@@ -337,6 +316,7 @@ namespace XenAdmin.SettingsPanels
             // 
             // MemoryGroupBox
             // 
+            resources.ApplyResources(this.MemoryGroupBox, "MemoryGroupBox");
             this.MemoryGroupBox.Controls.Add(this.memoryMinutesLabel);
             this.MemoryGroupBox.Controls.Add(this.nudMemoryDurationThreshold);
             this.MemoryGroupBox.Controls.Add(this.memoryUnitsLabel);
@@ -344,7 +324,6 @@ namespace XenAdmin.SettingsPanels
             this.MemoryGroupBox.Controls.Add(this.MemoryAlertCheckBox);
             this.MemoryGroupBox.Controls.Add(this.memoryDurationThresholdLabel);
             this.MemoryGroupBox.Controls.Add(this.memoryUsageLabel);
-            resources.ApplyResources(this.MemoryGroupBox, "MemoryGroupBox");
             this.MemoryGroupBox.Name = "MemoryGroupBox";
             this.MemoryGroupBox.TabStop = false;
             // 
@@ -422,6 +401,7 @@ namespace XenAdmin.SettingsPanels
             // 
             // SrGroupBox
             // 
+            resources.ApplyResources(this.SrGroupBox, "SrGroupBox");
             this.SrGroupBox.Controls.Add(this.srMinutesLabel);
             this.SrGroupBox.Controls.Add(this.nudSrMinutes);
             this.SrGroupBox.Controls.Add(this.srUnitsLabel);
@@ -429,7 +409,6 @@ namespace XenAdmin.SettingsPanels
             this.SrGroupBox.Controls.Add(this.SrAlertCheckBox);
             this.SrGroupBox.Controls.Add(this.SrDurationThresholdLabel);
             this.SrGroupBox.Controls.Add(this.SrUsageLabel);
-            resources.ApplyResources(this.SrGroupBox, "SrGroupBox");
             this.SrGroupBox.Name = "SrGroupBox";
             this.SrGroupBox.TabStop = false;
             // 
@@ -507,6 +486,7 @@ namespace XenAdmin.SettingsPanels
             // 
             // DiskGroupBox
             // 
+            resources.ApplyResources(this.DiskGroupBox, "DiskGroupBox");
             this.DiskGroupBox.Controls.Add(this.DiskMinutesLabel);
             this.DiskGroupBox.Controls.Add(this.nudDiskDurationThreshold);
             this.DiskGroupBox.Controls.Add(this.DiskPercentLabel);
@@ -514,7 +494,6 @@ namespace XenAdmin.SettingsPanels
             this.DiskGroupBox.Controls.Add(this.DiskAlertCheckBox);
             this.DiskGroupBox.Controls.Add(this.DiskDurationThresholdLabel);
             this.DiskGroupBox.Controls.Add(this.DiskUsagePercentLabel);
-            resources.ApplyResources(this.DiskGroupBox, "DiskGroupBox");
             this.DiskGroupBox.Name = "DiskGroupBox";
             this.DiskGroupBox.TabStop = false;
             // 
@@ -592,6 +571,7 @@ namespace XenAdmin.SettingsPanels
             // 
             // NetGroupBox
             // 
+            resources.ApplyResources(this.NetGroupBox, "NetGroupBox");
             this.NetGroupBox.Controls.Add(this.NetPercentLabel);
             this.NetGroupBox.Controls.Add(this.nudNetUsagePercent);
             this.NetGroupBox.Controls.Add(this.NetMinutesLabel);
@@ -599,7 +579,6 @@ namespace XenAdmin.SettingsPanels
             this.NetGroupBox.Controls.Add(this.NetAlertCheckBox);
             this.NetGroupBox.Controls.Add(this.NetDurationThresholdLabel);
             this.NetGroupBox.Controls.Add(this.NetUsagePercentLabel);
-            resources.ApplyResources(this.NetGroupBox, "NetGroupBox");
             this.NetGroupBox.Name = "NetGroupBox";
             this.NetGroupBox.TabStop = false;
             // 
@@ -672,6 +651,7 @@ namespace XenAdmin.SettingsPanels
             // 
             // CpuGroupBox
             // 
+            resources.ApplyResources(this.CpuGroupBox, "CpuGroupBox");
             this.CpuGroupBox.Controls.Add(this.cpuPercentLabel);
             this.CpuGroupBox.Controls.Add(this.nudCPUUsagePercent);
             this.CpuGroupBox.Controls.Add(this.cpuMinutesLabel);
@@ -679,7 +659,6 @@ namespace XenAdmin.SettingsPanels
             this.CpuGroupBox.Controls.Add(this.CPUAlertCheckBox);
             this.CpuGroupBox.Controls.Add(this.CPUUsagePercentLabel);
             this.CpuGroupBox.Controls.Add(this.CPUDurationThresholdLabel);
-            resources.ApplyResources(this.CpuGroupBox, "CpuGroupBox");
             this.CpuGroupBox.Name = "CpuGroupBox";
             this.CpuGroupBox.TabStop = false;
             // 
@@ -750,20 +729,41 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.CPUDurationThresholdLabel, "CPUDurationThresholdLabel");
             this.CPUDurationThresholdLabel.Name = "CPUDurationThresholdLabel";
             // 
+            // nudAlertInterval
+            // 
+            this.nudAlertInterval.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.nudAlertInterval, "nudAlertInterval");
+            this.nudAlertInterval.Maximum = new decimal(new int[] {
+            86400,
+            0,
+            0,
+            0});
+            this.nudAlertInterval.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudAlertInterval.Name = "nudAlertInterval";
+            this.nudAlertInterval.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
             // PerfmonAlertEditPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.AlertIntervalLabel);
-            this.Controls.Add(this.nudAlertInterval);
-            this.Controls.Add(this.AlertIntervalMinutesLabel);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PerfmonAlertEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).EndInit();
+            this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.PhysicalUtilisationGroupBox.ResumeLayout(false);
             this.PhysicalUtilisationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPhysicalUtilisationDurationThreshold)).EndInit();
@@ -792,6 +792,7 @@ namespace XenAdmin.SettingsPanels
             this.CpuGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCPUUsagePercent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCPUDurationThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAlertInterval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -843,7 +844,7 @@ namespace XenAdmin.SettingsPanels
         private AlertCheckBox SrAlertCheckBox;
         private System.Windows.Forms.Label SrDurationThresholdLabel;
         private System.Windows.Forms.Label SrUsageLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelRubric;
         private Controls.DecentGroupBox Dom0MemoryUsageGroupBox;
         private AlertNumericUpDown nudDom0MemUsage;
         private System.Windows.Forms.Label Dom0MemoryDurationThresholdLabel;
@@ -860,6 +861,6 @@ namespace XenAdmin.SettingsPanels
         private AlertCheckBox physicalUtilisationAlertCheckBox;
         private System.Windows.Forms.Label physicalUtilisationDurationLabel;
         private System.Windows.Forms.Label physicalUtilisationLabel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }
