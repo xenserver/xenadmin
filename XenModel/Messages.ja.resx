@@ -12963,4 +12963,7 @@ To learn more about the [XenServer] Active Directory feature or to start a [XenS
   <data name="LIVE_PATCHING" xml:space="preserve">
     <value>Live Patching</value>
   </data>
+  <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
+    <value>{0} on {1}</value>
+  </data>
 </root>
