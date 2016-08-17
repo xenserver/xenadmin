@@ -663,14 +663,35 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionUpdates;
 
-            List<KeyValuePair<String, String>> messages = CheckServerUpdates(host);
-            if (messages.Count > 0)
+            if (Helpers.ElyOrGreater(host))
             {
-                foreach (KeyValuePair<String, String> kvp in messages)
+                // As of Ely we use host.patches_requiring_reboot to generate the list of reboot required messages
+                var patchRefs = host.patches_requiring_reboot;
+                foreach (var patchRef in patchRefs)
                 {
-                    s.AddEntry(kvp.Key, kvp.Value);
+                    var patch = host.Connection.Resolve(patchRef);
+                    var key = patch.NameWithLocation;
+                    var value = string.Format(
+                        Messages.GENERAL_PANEL_UPDATE_WARNING,
+                        patch.Connection.FriendlyName,
+                        patch.Name);
+
+                    s.AddEntry(key, value);
                 }
             }
+            else
+            {
+                // For older versions no change to how messages are generated
+                List<KeyValuePair<String, String>> messages = CheckServerUpdates(host);
+                if (messages.Count > 0)
+                {
+                    foreach (KeyValuePair<String, String> kvp in messages)
+                    {
+                        s.AddEntry(kvp.Key, kvp.Value);
+                    }
+                }
+            }
+
             if (hostAppliedPatches(host) != "")
             {
                 s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
