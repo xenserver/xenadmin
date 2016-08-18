@@ -92,6 +92,9 @@ namespace XenAdmin.Core
 
         public bool Equals(XenServerPatch other)
         {
+            if (other == null)
+                return false;
+
             return string.Equals(Uuid, other.Uuid, StringComparison.OrdinalIgnoreCase);
         }
 

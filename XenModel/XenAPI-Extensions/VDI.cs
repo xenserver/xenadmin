@@ -302,20 +302,15 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether this is a Tools ISO. Finds the old method (by name) as well as
-        /// the new method (field on the VDI).
+        /// Whether this is a Tools ISO.
+        /// The new method is to check the is_tools_iso flag, the old one to check the name_label.
         /// </summary>
         public bool IsToolsIso
         {
             get
             {
-                const string ISONameOld = "xswindrivers.iso";
-                const string ISONameNew = "xs-tools.iso";
-
-                return
-                    is_tools_iso ||
-                    ISONameOld.Equals(name_label) ||
-                    ISONameNew.Equals(name_label);
+                string[] toolIsoNames = {"xswindrivers.iso", "xs-tools.iso", "guest-tools.iso"};
+                return is_tools_iso || toolIsoNames.Contains(name_label);
             }
         }
         

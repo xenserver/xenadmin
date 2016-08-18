@@ -36,7 +36,8 @@ using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Properties;
 using System.Drawing;
-using System.Collections.ObjectModel;
+using XenAdmin.Core;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -68,10 +69,14 @@ namespace XenAdmin.Commands
         {
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                if (xenConnection.IsConnected)
-                {
-                    return true;
-                }
+                if (!xenConnection.IsConnected)
+                    continue;
+
+                Pool pool = Helpers.GetPoolOfOne(xenConnection);
+                if (pool != null && pool.IsPatchingForbidden)
+                    continue;
+
+                return true;
             }
             return false;
         }

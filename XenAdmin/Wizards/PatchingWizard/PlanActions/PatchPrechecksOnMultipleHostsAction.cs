@@ -58,7 +58,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            var mapping = mappings.Find(m => m.XenServerPatch == patch && m.MasterHost == Helpers.GetMaster(Connection));
+            var master = Helpers.GetMaster(Connection);
+            var mapping = mappings.Find(m => m.XenServerPatch.Equals(patch) && m.MasterHost.uuid == master.uuid);
+
             if (mapping != null && mapping.Pool_patch != null)
             {
                 foreach (var host in hosts)

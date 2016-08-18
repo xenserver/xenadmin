@@ -34,6 +34,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
@@ -43,6 +44,8 @@ namespace XenAdmin.Network
 {
     class XenConnectionUI
     {
+        public static Dictionary<IXenConnection, ConnectingToServerDialog> connectionDialogs = new Dictionary<IXenConnection, ConnectingToServerDialog>();
+
         /// <summary>
         /// Start connecting to a server
         /// </summary>
@@ -55,9 +58,23 @@ namespace XenAdmin.Network
         public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateMasterSearch)
         {
             Program.AssertOnEventThread();
-            RegisterEventHandlers(connection); 
+            RegisterEventHandlers(connection);
             if (interactive)
-                new ConnectingToServerDialog(connection).BeginConnect(owner, initiateMasterSearch);
+            {
+                // CA-214953 - Focus on this connection's dialog, if one exists, otherwise create one
+                ConnectingToServerDialog dlg;
+                if (connectionDialogs.TryGetValue(connection, out dlg))
+                {
+                    UnregisterEventHandlers(connection);
+                    if (dlg.WindowState == FormWindowState.Minimized)
+                        dlg.WindowState = FormWindowState.Normal;
+                    dlg.Focus();
+                    return;
+                }
+                dlg = new ConnectingToServerDialog(connection);
+                connectionDialogs.Add(connection, dlg);
+                dlg.BeginConnect(owner, initiateMasterSearch);
+            }
             else
                 ((XenConnection)connection).BeginConnect(initiateMasterSearch, PromptForNewPassword);
         }

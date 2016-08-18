@@ -68,11 +68,15 @@ namespace XenAdmin.Controls.ConsoleTab
         private void DisplayConnectionName()
         {
             if (_selectedScreen == null) //screen not assigned yet
-                return; 
+                return;
 
-            string connectionName = _selectedScreen.Source.is_control_domain 
-                ? _selectedScreen.Source.AffinityServerString 
-                : _selectedScreen.Source.Name;
+            string connectionName;
+            if (_selectedScreen.Source.IsControlDomainZero)
+                connectionName = _selectedScreen.Source.AffinityServerString;
+            else if (_selectedScreen.Source.is_control_domain)
+                connectionName = string.Format(Messages.CONSOLE_HOST_NUTANIX, _selectedScreen.Source.AffinityServerString);
+            else
+                connectionName = _selectedScreen.Source.Name;
 
             using (Graphics g = toolStrip1.CreateGraphics())
             {
@@ -169,7 +173,7 @@ namespace XenAdmin.Controls.ConsoleTab
         }
 
 
-        public void ShowAnimated()
+        private void ShowAnimated()
         {
             if (state == Animating.Open)
                 return;
@@ -239,8 +243,7 @@ namespace XenAdmin.Controls.ConsoleTab
     {
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
 
-        protected override void OnRenderToolStripBackground(
-         ToolStripRenderEventArgs e)
+        protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         {
             using (var brush = new LinearGradientBrush(e.AffectedBounds, Color.FromArgb(64, 64, 64), Color.Gray, 90))
             {

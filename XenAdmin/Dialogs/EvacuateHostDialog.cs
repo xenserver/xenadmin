@@ -876,7 +876,7 @@ namespace XenAdmin.Dialogs
         {
             bool selected = false;
 
-            if (previousSelection != null && !selected)
+            if (previousSelection != null)
             {
                 foreach (ToStringWrapper<Host> host in NewMasterComboBox.Items)
                 {
@@ -892,7 +892,6 @@ namespace XenAdmin.Dialogs
             if (NewMasterComboBox.Items.Count > 0 && !selected)
             {
                 NewMasterComboBox.SelectedIndex = 0;
-                selected = true;
             }
         }
 

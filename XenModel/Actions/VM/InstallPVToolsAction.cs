@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Linq;
 using XenAPI;
 
 
@@ -41,16 +42,15 @@ namespace XenAdmin.Actions
     public class InstallPVToolsAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly Action _xsToolsNotFound;
         private readonly bool _searchHiddenIsOs;
 
-        public InstallPVToolsAction(VM vm, Action xsToolsNotfound, bool searchHiddenISOs)
+        public InstallPVToolsAction(VM vm, bool searchHiddenISOs)
             : base(vm.Connection, string.Format(Messages.INSTALLTOOLS_TITLE, vm.Name))
         {
             VM = vm;
-            _xsToolsNotFound = xsToolsNotfound;
             _searchHiddenIsOs = searchHiddenISOs;
-#region RBAC Dependencies
+
+            #region RBAC Dependencies
             foreach (SR sr in VM.Connection.Cache.SRs)
             {
                 if (sr.IsToolsSR && sr.IsBroken())
@@ -63,7 +63,7 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.Add("vbd.eject");
             ApiMethodsToRoleCheck.Add("vbd.insert");
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
-#endregion
+            #endregion
         }
 
         protected override void Run()
@@ -75,12 +75,12 @@ namespace XenAdmin.Actions
                 {
                     try
                     {
-                        SrRepairAction action = new SrRepairAction(sr.Connection, sr,false);
+                        SrRepairAction action = new SrRepairAction(sr.Connection, sr, false);
                         action.RunExternal(Session);
                     }
-                    catch (Failure)
+                    catch (Failure f)
                     {
-                        _xsToolsNotFound();
+                        throw new Failure(Messages.XS_TOOLS_SR_NOT_FOUND, f);
                     }
                 }
 
@@ -98,17 +98,14 @@ namespace XenAdmin.Actions
             XenAPI.VBD cdrom = VM.FindVMCDROM();
             if (cdrom == null)
             {
-                Description = Messages.INSTALLTOOLS_COULDNOTFIND_CD;
-                return;
+                throw new Failure(Messages.INSTALLTOOLS_COULDNOTFIND_CD);
             }
 
             // Find the tools ISO...
             XenAPI.VDI winIso = findWinISO(_searchHiddenIsOs);
             if (winIso == null)
             {
-                // Could not find the windows PV drivers ISO.
-                Description = Messages.INSTALLTOOLS_COULDNOTFIND_WIN;
-                return;
+                throw new Failure(Messages.INSTALLTOOLS_COULDNOTFIND_WIN);
             }
 
             Description = Messages.INSTALLTOOLS_STARTING;
@@ -122,7 +119,7 @@ namespace XenAdmin.Actions
             // Insert the tools ISO...
             XenAPI.VBD.insert(Session, cdrom.opaque_ref, winIso.opaque_ref);
 
-            // done(ish)...
+            // done here; installation continues on the VM
             Description = Messages.INSTALLTOOLS_DONE;
         }
 
@@ -134,11 +131,10 @@ namespace XenAdmin.Actions
             {
                 if (XenAPI.SR.SRTypes.iso.ToString() == sr.content_type)
                 {
-                    foreach (VDI vdi in Connection.ResolveAllShownXenModelObjects(sr.VDIs, searchHiddenISOs))
-                    {
-                        if (vdi.IsToolsIso)
-                            return vdi;
-                    }
+                    var vdis = Connection.ResolveAllShownXenModelObjects(sr.VDIs, searchHiddenISOs);
+                    var vdi = vdis.FirstOrDefault(v => v.IsToolsIso);
+                    if (vdi != null)
+                        return vdi;
                 }
             }
 

@@ -140,7 +140,10 @@ namespace XenAPI
             }
         }
 
-        private const String ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
+        private const string ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
+        private const string FORBID_RPU_FOR_HCI = "hci-forbid-rpu";
+        private const string FORBID_PATCHING_FOR_HCI = "hci-forbid-update";
+        private const string FAULT_TOLERANCE_LIMIT_FOR_HCI = "hci-limit-fault-tolerance";
 
         public bool RollingUpgrade
         {
@@ -148,6 +151,39 @@ namespace XenAPI
             {
                 return other_config != null && other_config.ContainsKey(ROLLING_UPGRADE_IN_PROGRESS);
             }
+        }
+
+        public bool IsUpgradeForbidden
+        {
+            get
+            {
+                return other_config != null && other_config.ContainsKey(FORBID_RPU_FOR_HCI);
+            }
+        }
+
+        public bool IsPatchingForbidden
+        {
+            get
+            {
+                return other_config != null && other_config.ContainsKey(FORBID_PATCHING_FOR_HCI);
+            }
+        }
+
+        public static long GetMaximumTolerableHostFailures(Session session, Dictionary<XenRef<VM>, string> config)
+        {
+            long max = ha_compute_hypothetical_max_host_failures_to_tolerate(session, config);
+            long result;
+            Pool p = Helpers.GetPoolOfOne(session.Connection);
+            
+            if (p!= null && p.other_config != null
+                && p.other_config.ContainsKey(FAULT_TOLERANCE_LIMIT_FOR_HCI)
+                && long.TryParse(p.other_config[FAULT_TOLERANCE_LIMIT_FOR_HCI], out result)
+                && result <= max)//extra check in case the number set is accidentally wrong
+            {
+                return result;
+            }
+
+            return max;
         }
 
         public static Dictionary<string, string> retrieve_wlb_default_configuration(Session session)

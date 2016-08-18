@@ -112,10 +112,8 @@ namespace XenAdmin.Commands
                     Image = _command.ToolBarImage;
                 }
 
-                if (_command.ToolTipText != null)
-                {
-                    ToolTipText = _command.ToolTipText;
-                }
+                //null is allowed (CA-147657)
+                ToolTipText = _command.ToolTipText;
             }
         }
 

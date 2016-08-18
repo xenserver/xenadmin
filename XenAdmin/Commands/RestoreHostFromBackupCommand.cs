@@ -98,10 +98,10 @@ namespace XenAdmin.Commands
                     oldDir = Directory.GetCurrentDirectory();
                     OpenFileDialog dialog = new OpenFileDialog();
                     dialog.AddExtension = true;
-                    dialog.Filter = string.Format("{0} (*.xbk)|*.xbk|{1} (*.*)|*.*", Messages.XS_BACKUP_FILES, Messages.ALL_FILES);
+                    dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*", Messages.XS_BACKUP_FILES, Branding.BACKUP, Messages.ALL_FILES);
                     dialog.FilterIndex = 0;
                     dialog.RestoreDirectory = true;
-                    dialog.DefaultExt = "xbk";
+                    dialog.DefaultExt = Branding.BACKUP;
                     dialog.CheckPathExists = false;
                     if (dialog.ShowDialog(Parent) == DialogResult.Cancel)
                         return;

@@ -127,14 +127,14 @@ namespace XenAdmin.Dialogs
 
             if(Row.LicenseExpires.HasValue)
             {
-                if(Row.LicenseExpiresIn.TotalDays < 3653)
+                if(LicenseStatus.IsInfinite(Row.LicenseExpiresIn))
                 {
-                    string date = HelpersGUI.DateTimeToString(Row.LicenseExpires.Value, Messages.DATEFORMAT_DMY_LONG, true);
-                    sb.AppendLine(date);
+                    sb.AppendLine(Messages.NEVER);
                 }
                 else
                 {
-                    sb.AppendLine(Messages.NEVER);
+                    string date = HelpersGUI.DateTimeToString(Row.LicenseExpires.Value, Messages.DATEFORMAT_DMY_LONG, true);
+                    sb.AppendLine(date);
                 }
             }
             else

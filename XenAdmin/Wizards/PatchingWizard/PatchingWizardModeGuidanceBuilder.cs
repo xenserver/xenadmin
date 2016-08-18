@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public static string ModeRetailPatch(List<Host> servers, Pool_patch patch)
         {
-            return Build(servers, patch.after_apply_guidance);
+            return Build(servers, patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>());
         }
 
         public static string ModeSuppPack(List<Host> servers)
@@ -73,7 +73,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case after_apply_guidance.restartPV:
                         foreach (VM vm in Helpers.VMsRunningOn(servers))
                         {
-                            if (vm.IsHVM)
+                            if (vm.IsHVM || !vm.is_a_real_vm)
                                 continue;
                             sbLog.AppendFormat("\t{0}\r\n", vm.Name);
                         }
@@ -81,7 +81,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case after_apply_guidance.restartHVM:
                         foreach (VM vm in Helpers.VMsRunningOn(servers))
                         {
-                            if (!vm.IsHVM)
+                            if (!vm.IsHVM || !vm.is_a_real_vm)
                                 continue;
                             sbLog.AppendFormat("\t{0}\r\n", vm.Name);
                         }

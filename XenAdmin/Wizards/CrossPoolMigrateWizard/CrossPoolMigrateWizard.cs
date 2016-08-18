@@ -419,7 +419,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     summary = new VmTitleSummary(summary, pair.Value);
 
                 summary = new DestinationPoolSummary(summary, pair.Value, TargetConnection);
-                summary = new HomeServerSummary(summary, pair.Value, TargetConnection);
+                summary = new TargetServerSummary(summary, pair.Value, TargetConnection);
                 summary = new TransferNetworkSummary(summary, m_pageTransferNetwork.NetworkUuid.Value);
                 summary = new StorageSummary(summary, pair.Value, xenConnection);
                 summary = new NetworkSummary(summary, pair.Value, xenConnection); 

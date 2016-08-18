@@ -2842,6 +2842,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nutanix.
+        /// </summary>
+        public static string Label_SR_SRTypes_nutanix {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-nutanix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nutanix ISO.
+        /// </summary>
+        public static string Label_SR_SRTypes_nutanixiso {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-nutanixiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LUN-per-VDI.
         /// </summary>
         public static string Label_SR_SRTypes_rawhba {
