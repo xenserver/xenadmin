@@ -38,7 +38,7 @@ using XenAPI;
 namespace XenAdmin.Commands
 {
     /// <summary>
-    /// The command for the 'Home Server' subitem which is shown when WLB isn't enabled in the submenu for start-on, resume-on or migrate.
+    /// The command for the 'Target Server' subitem which is shown when WLB isn't enabled in the submenu for start-on, resume-on or migrate.
     /// </summary>
     internal class CrossPoolMigrateToHomeCommand : CrossPoolMigrateCommand
     {

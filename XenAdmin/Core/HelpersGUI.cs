@@ -533,7 +533,7 @@ namespace XenAdmin.Core
             {
                 TimeSpan timeDiff = h.LicenseExpiryUTC.Subtract(referenceDate);
 
-                if (timeDiff.TotalDays < 3653)
+                if (!LicenseStatus.IsInfinite(timeDiff))
                 {
                     var expiryString = "";
                     Program.Invoke(Program.MainWindow, delegate

@@ -98,6 +98,9 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
+            if (_connection != null)
+                XenConnectionUI.connectionDialogs.Remove(_connection);
+
             base.OnFormClosing(e);
         }
 

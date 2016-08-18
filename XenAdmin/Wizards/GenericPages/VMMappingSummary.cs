@@ -168,12 +168,12 @@ namespace XenAdmin.Wizards.GenericPages
         }
     }
 
-    public class HomeServerSummary : MappingSummaryDecorator
+    public class TargetServerSummary : MappingSummaryDecorator
     {
         private readonly VmMapping mapping;
         private readonly IXenConnection connection;
 
-        public HomeServerSummary(MappingSummary summary, VmMapping mapping, IXenConnection connection)
+        public TargetServerSummary(MappingSummary summary, VmMapping mapping, IXenConnection connection)
             : base(summary)
         {
             this.mapping = mapping;
@@ -185,7 +185,7 @@ namespace XenAdmin.Wizards.GenericPages
             get
             {
                 List<SummaryDetails> decoratedSummary = summary.Details;
-                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_HOME_SERVER, ResolveLabel()));
+                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_TARGET_SERVER, ResolveLabel()));
                 return decoratedSummary;
             }
         }

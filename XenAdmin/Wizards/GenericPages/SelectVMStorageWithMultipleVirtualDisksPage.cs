@@ -429,7 +429,7 @@ namespace XenAdmin.Wizards.GenericPages
 					continue;
 
                 var sr = TargetConnection.Resolve(pbd.SR);
-				if (sr == null)
+				if (sr == null || sr.IsDetached)
 					continue;
 
                 if ((sr.content_type.ToLower() == "iso" || sr.type.ToLower() == "iso") && !resource.SRTypeInvalid)

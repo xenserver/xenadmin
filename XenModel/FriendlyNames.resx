@@ -1862,4 +1862,10 @@
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>Required Updates</value>
   </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
 </root>

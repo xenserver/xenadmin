@@ -64,10 +64,14 @@ namespace XenAdmin.Commands
         {
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                if (xenConnection.IsConnected)
-                {
-                    return true;
-                }
+                if (!xenConnection.IsConnected)
+                    continue;
+
+                var pool = Helpers.GetPoolOfOne(xenConnection);
+                if (pool != null && pool.IsUpgradeForbidden)
+                    continue;
+
+                return true;
             }
             return false;
         }

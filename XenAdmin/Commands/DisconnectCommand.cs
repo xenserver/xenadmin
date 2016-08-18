@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return _connection != null && _connection.IsConnected;
+            return _connection != null && (_connection.IsConnected || _connection.InProgress);
         }
 
         /// <summary>

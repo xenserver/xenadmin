@@ -257,11 +257,11 @@ namespace XenAdmin.ConsoleView
         #endregion
 
         private System.Windows.Forms.Panel buttonPanel;
-        public System.Windows.Forms.Button dockButton;
+        private System.Windows.Forms.Button dockButton;
         private System.Windows.Forms.Button sendCAD;
         private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.Panel bottomPanel;
-        public System.Windows.Forms.CheckBox scaleCheckBox;
+        private System.Windows.Forms.CheckBox scaleCheckBox;
         private System.Windows.Forms.Button fullscreenButton;
         private XenAdmin.Controls.DecentGroupBox groupBox1;
         private System.Windows.Forms.ToolTip tip;
@@ -272,10 +272,10 @@ namespace XenAdmin.ConsoleView
         private System.Windows.Forms.Panel panel2;
         private XenAdmin.Controls.GradientPanel.GradientPanel gradientPanel1;
         private System.Windows.Forms.Label HostLabel;
-        public System.Windows.Forms.Button toggleConsoleButton;
+        private System.Windows.Forms.Button toggleConsoleButton;
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;
         private System.Windows.Forms.Label powerStateLabel;
         private System.Windows.Forms.Label dedicatedGpuWarning;
-        public System.Windows.Forms.Button buttonSSH;
+        private System.Windows.Forms.Button buttonSSH;
     }
 }

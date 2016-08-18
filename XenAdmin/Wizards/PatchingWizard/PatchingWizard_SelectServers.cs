@@ -168,7 +168,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool IsInAutomaticMode { set; get; }
 
         public List<XenServerVersion> AutoDownloadedXenServerVersions { private get; set; }
-
+       
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
@@ -230,11 +230,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 selectedHosts = SelectedUpdateAlert.DistinctHosts;
             }
-            else if(FileFromDiskAlert != null) 
+            else if (FileFromDiskAlert != null)
             {
                 selectedHosts = FileFromDiskAlert.DistinctHosts;
             }
-            
+
+            Pool poolOfOne = Helpers.GetPoolOfOne(host.Connection);
+            if (poolOfOne != null && poolOfOne.IsPatchingForbidden)
+            {
+                row.Enabled = false;
+                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN;
+                return;
+            }
+
             if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;

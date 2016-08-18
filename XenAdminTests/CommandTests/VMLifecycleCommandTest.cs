@@ -190,7 +190,7 @@ namespace XenAdminTests.CommandTests
 
         private IEnumerable<SelectedItemCollection> GetRbacSelections()
         {
-            yield return new SelectedItemCollection(new[] { new SelectedItem(GetAnyVM(v => v.allowed_operations.Contains(vm_operations.hard_shutdown))) });
+            yield return new SelectedItemCollection(new SelectedItem(GetAnyVM(v => v.allowed_operations.Contains(vm_operations.hard_shutdown))));
         }
 
         private IEnumerable<SelectedItemCollection> GetMultipleSelections()

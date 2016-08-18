@@ -80,10 +80,10 @@ namespace XenAdmin.Commands
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.AddExtension = true;
-                dialog.Filter = string.Format("{0} (*.xbk)|*.xbk|{1} (*.*)|*.*", Messages.XS_BACKUP_FILES, Messages.ALL_FILES);
+                dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*", Messages.XS_BACKUP_FILES, Branding.BACKUP, Messages.ALL_FILES);
                 dialog.FilterIndex = 0;
                 dialog.RestoreDirectory = true;
-                dialog.DefaultExt = "xbk";
+                dialog.DefaultExt = Branding.BACKUP;
 
                 if (dialog.ShowDialog(Parent) != DialogResult.Cancel)
                     new HostBackupRestoreAction(host, HostBackupRestoreAction.HostBackupRestoreType.backup, dialog.FileName).RunAsync();

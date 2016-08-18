@@ -200,7 +200,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                var subs = from AlertGroup g in new[] { cpuAlert, netAlert, diskAlert, memoryAlert, srAlert, physicalUtilisationAlert }
+                var subs = from AlertGroup g in new[] { cpuAlert, netAlert, diskAlert, memoryAlert, srAlert, physicalUtilisationAlert, dom0MemoryAlert }
                            where !string.IsNullOrEmpty(g.SubText)
                            select g.SubText;
 
@@ -275,19 +275,20 @@ namespace XenAdmin.SettingsPanels
             // Dom0 memory usage is stored in the other_config of the Dom0 vm not on the host (or any other XenObject)
             try
             {
-                if (_XenObject is Host)
+                var host = _XenObject as Host;
+                if (host != null)
                 {
-                    var controlDomain = (_XenObject as Host).ControlDomain;
+                    var dom0 = host.ControlDomainZero;
 
-                    if (controlDomain != null)
+                    if (dom0 != null)
                     {
-                        var controlDomainPerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(controlDomain);
+                        var controlDomainPerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(dom0);
 
                         if (controlDomainPerfmonDefinitions != null)
                         {
-                            for (int ii = 0; ii < controlDomainPerfmonDefinitions.Length; ii++)
+                            for (int i = 0; i < controlDomainPerfmonDefinitions.Length; i++)
                             {
-                                var def = controlDomainPerfmonDefinitions[ii];
+                                var def = controlDomainPerfmonDefinitions[i];
 
                                 if (def != null && def.IsDom0MemoryUsage)
                                     dom0MemoryAlert.Populate(def);

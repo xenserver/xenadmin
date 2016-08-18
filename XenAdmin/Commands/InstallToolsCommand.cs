@@ -150,7 +150,7 @@ namespace XenAdmin.Commands
                 DialogResult dr = new InstallToolsWarningDialog(vm.Connection).ShowDialog(Parent);
                 if (dr == DialogResult.Yes)
                 {
-                    InstallPVToolsAction installToolsAction = new InstallPVToolsAction( vm, XSToolsSRNotFound, Properties.Settings.Default.ShowHiddenVMs);
+                    var installToolsAction = new InstallPVToolsAction(vm, Properties.Settings.Default.ShowHiddenVMs);
                     installToolsAction.Completed += InstallToolsActionCompleted;
 
                     installToolsAction.RunAsync();
@@ -158,18 +158,6 @@ namespace XenAdmin.Commands
                 }
             }
             return null;
-        }
-
-        private static void XSToolsSRNotFound()
-        {
-            Program.Invoke(Program.MainWindow, delegate
-                        {
-                            using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Error, Messages.XS_TOOLS_SR_NOT_FOUND, Messages.XENCENTER)))
-                            {
-                                dlg.ShowDialog(Program.MainWindow);
-                            }
-                        });
         }
 
         /// <summary>
@@ -225,7 +213,7 @@ namespace XenAdmin.Commands
                 {
                     foreach (VM vm in vms)
                     {
-                        InstallPVToolsAction installToolsAction = new InstallPVToolsAction(vm, XSToolsSRNotFound, Properties.Settings.Default.ShowHiddenVMs);
+                        var installToolsAction = new InstallPVToolsAction(vm, Properties.Settings.Default.ShowHiddenVMs);
 
                         if (vms.IndexOf(vm) == 0)
                         {

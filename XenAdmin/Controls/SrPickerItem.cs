@@ -131,8 +131,12 @@ namespace XenAdmin.Controls
                     return Messages.CURRENT_LOCATION;
                 if (LocalToLocalMove())
                     return Messages.LOCAL_TO_LOCAL_MOVE;
-                if (!SrIsLocalToTheHostOnForExsistingVDIs())
+                if (TheSR.IsLocalSR && !SrIsLocalToTheHostOnForExsistingVDIs())
                     return Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS;
+                if (!TheSR.CanBeSeenFrom(Affinity))
+                    return TheSR.Connection != null
+                        ? string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
+                        : Messages.SR_DETACHED;
                 return base.CannotBeShownReason;
             }
         }
@@ -195,7 +199,17 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled
         {
-            get { return TheSR.SupportsVdiCreate() && TargetSRHasEnoughFreeSpace; }
+            get { return TheSR.SupportsVdiCreate() && !TheSR.IsDetached && TargetSRHasEnoughFreeSpace; }
+        }
+
+        protected override string CannotBeShownReason
+        {
+            get
+            {
+                if (TheSR.IsDetached)
+                    return Messages.SR_DETACHED;
+                return base.CannotBeShownReason;
+            }
         }
     }
 
@@ -221,7 +235,9 @@ namespace XenAdmin.Controls
                 if (Affinity == null && !TheSR.shared)
                     return Messages.SR_IS_LOCAL;
                 if (!TheSR.CanBeSeenFrom(Affinity))
-                    return string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity));
+                    return TheSR.Connection != null
+                        ? string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
+                        : Messages.SR_DETACHED;
                 return base.CannotBeShownReason;
             }
         }

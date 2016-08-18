@@ -155,6 +155,9 @@
     <Compile Include="Controls\ComboBoxes\CPUTopologyComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ConsolePanel.Designer.cs">
+      <DependentUpon>ConsolePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2424,7 +2427,6 @@
     <None Include="HomePage.mht">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="HomePage\License" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -5765,6 +5767,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HAPage.ja.resx">
       <DependentUpon>HAPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HAPage.zh-CN.resx">
       <DependentUpon>HAPage.cs</DependentUpon>
@@ -5835,10 +5838,10 @@
     <EmbeddedResource Include="TabPages\VMStoragePage.zh-CN.resx">
       <DependentUpon>VMStoragePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\WLBPage.ja.resx">
+    <EmbeddedResource Include="TabPages\WlbPage.ja.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\WLBPage.zh-CN.resx">
+    <EmbeddedResource Include="TabPages\WlbPage.zh-CN.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestResources\api-version.xml">

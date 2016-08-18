@@ -43,7 +43,7 @@ using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
+
 
 namespace XenAdmin.ConsoleView
 {
@@ -96,7 +96,9 @@ namespace XenAdmin.ConsoleView
 
             HostLabel.Font = Program.HeaderGradientFont;
             HostLabel.ForeColor = Program.HeaderGradientForeColor;
-            multipleDvdIsoList1.SetTextColor(Program.HeaderGradientForeColor);
+            multipleDvdIsoList1.LabelSingleDvdForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LabelNewCdForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LinkLabelLinkColor = Color.White;
 
 #pragma warning disable 0219
             // Force the handle to be created, because resize events
@@ -131,7 +133,7 @@ namespace XenAdmin.ConsoleView
                         hostMetrics.PropertyChanged += Server_PropertyChanged;
                     }
 
-                    HostLabel.Text = string.Format(Messages.CONSOLE_HOST, host.Name);
+                    HostLabel.Text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name);
                     HostLabel.Visible = true;
                 }
             }
@@ -155,7 +157,7 @@ namespace XenAdmin.ConsoleView
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired();
 
-            if (source.is_control_domain || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
+            if (source.IsControlDomainZero || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -185,8 +187,6 @@ namespace XenAdmin.ConsoleView
             this.vncScreen.Parent = this.contentPanel;
             this.vncScreen.Dock = DockStyle.Fill;
 
-            this.Dock = DockStyle.Fill;
-
             string rdpLabel = GuessNativeConsoleLabel(source);
             this.toggleConsoleButton.Text = rdpLabel;
 
@@ -208,6 +208,12 @@ namespace XenAdmin.ConsoleView
             //This change is only for Cream, because RDP port scan was removed in Cream.
             if ( Helpers.CreamOrGreater(source.Connection) && Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled )
                 vncScreen.AutoSwitchRDPLater = true;
+        }
+
+        public bool IsScaled
+        {
+            get { return scaleCheckBox.Checked; }
+            set { scaleCheckBox.Checked = value; }
         }
 
         //CA-75479 - add to aid debugging
@@ -243,7 +249,7 @@ namespace XenAdmin.ConsoleView
 
         private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
                 return;
 
             Host host = e.Element as Host;
@@ -279,7 +285,7 @@ namespace XenAdmin.ConsoleView
             if (this.guestMetrics != null)
                 this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host != null)
@@ -520,9 +526,11 @@ namespace XenAdmin.ConsoleView
 
             if (source.is_control_domain && e.PropertyName == "name_label")
             {
-                HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
+                string text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString);
+                HostLabel.Text = text;
+
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
-                    parentVNCView.undockedForm.Text = source.AffinityServerString;
+                    parentVNCView.undockedForm.Text = text;
             }
         }
 
@@ -580,7 +588,7 @@ namespace XenAdmin.ConsoleView
 
         private void Server_EnabledPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "enabled" || source.is_control_domain)
+            if (e.PropertyName != "enabled" || source.IsControlDomainZero)
                 return;
 
             Host host = sender as Host;
@@ -601,14 +609,9 @@ namespace XenAdmin.ConsoleView
             multipleDvdIsoList1.VM = source;
         }
 
-        private void cdLabel_Click(object sender, EventArgs e)
-        {
-            new InstallToolsCommand(Program.MainWindow, source, this).Execute();
-        }
-
         private void updatePowerState()
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host == null)
@@ -674,7 +677,7 @@ namespace XenAdmin.ConsoleView
         private void hideTopBarContents()
         {
             VMPowerOff();
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 log.DebugFormat("'{0}' console: Hide top bar contents, server is unavailable", source.Name);
                 DisablePowerStateLabel(Messages.CONSOLE_HOST_DEAD);
@@ -764,17 +767,6 @@ namespace XenAdmin.ConsoleView
                         new ResumeVMCommand(Program.MainWindow, source).Execute();
                     }
                     break;
-            }
-        }
-
-        public bool isPaused
-        {
-            get
-            {
-                if (vncScreen != null && !isFullscreen)
-                    return vncScreen.wasPaused;
-                else
-                    return false;
             }
         }
 
@@ -1415,7 +1407,7 @@ namespace XenAdmin.ConsoleView
 
             ContextMenuItemCollection contextMenuItems = new ContextMenuItemCollection();
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 // We're looking at the host console
                 if (host.Connection.IsConnected)
@@ -1578,7 +1570,7 @@ namespace XenAdmin.ConsoleView
                 if (source.IsWindows)
                     return false;
 
-                if (source.is_control_domain)
+                if (source.IsControlDomainZero)
                 {
                     Host host = source.Connection.Resolve<Host>(source.resident_on);
                     if (host == null)
