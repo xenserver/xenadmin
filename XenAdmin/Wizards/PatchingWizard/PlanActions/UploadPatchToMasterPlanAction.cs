@@ -92,12 +92,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
                     }
 
-                    var newMapping = new PoolPatchMapping()
-                    {
-                        MasterHost = Helpers.GetMaster(session.Connection),
-                        XenServerPatch = patch,
-                        Pool_patch = poolPatch
-                    };
+                    var newMapping = new PoolPatchMapping(patch, poolPatch, Helpers.GetMaster(session.Connection));
 
                     if (!mappings.Any(m => m.MasterHost.uuid == newMapping.MasterHost.uuid && m.Pool_patch == newMapping.Pool_patch && m.XenServerPatch == patch))
                         mappings.Add(newMapping);

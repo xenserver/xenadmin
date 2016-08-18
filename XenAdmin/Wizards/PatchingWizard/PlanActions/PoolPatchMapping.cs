@@ -10,9 +10,25 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class PoolPatchMapping
     {
-        public XenServerPatch XenServerPatch { get; set; }
-        public Pool_patch Pool_patch { get; set; }
-        public Host MasterHost { get; set; }
+        public XenServerPatch XenServerPatch { get; private set; }
+        public Pool_patch Pool_patch { get; private set; }
+        public Host MasterHost { get; private set; }
+
+        public PoolPatchMapping(XenServerPatch xenServerPatch, Pool_patch pool_patch, Host masterHost)
+        {
+            if (xenServerPatch == null)
+                throw new ArgumentNullException("xenServerPatch");
+
+            if (pool_patch == null)
+                throw new ArgumentNullException("pool_patch");
+
+            if (masterHost == null)
+                throw new ArgumentNullException("masterHost");
+
+            this.XenServerPatch = xenServerPatch;
+            this.Pool_patch = pool_patch;
+            this.MasterHost = masterHost;
+        }
 
         public override bool Equals(object obj)
         {
