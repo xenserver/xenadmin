@@ -1932,10 +1932,7 @@ namespace XenAdmin.Network
         public List<VDI> ResolveAllShownXenModelObjects(List<XenRef<VDI>> xenRefs, bool showHiddenObjects)
         {
             List<VDI> result = ResolveAll(xenRefs);
-            result.RemoveAll(delegate(VDI vdi)
-                                 {
-                                     return !vdi.Show(showHiddenObjects);
-                                 });
+            result.RemoveAll(vdi => !vdi.Show(showHiddenObjects));
             return result;
         }
 
