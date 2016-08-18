@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
@@ -53,14 +54,22 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
 
-            var mapping = mappings.Find(m => m.XenServerPatch.Uuid == xenServerPatch.Uuid && m.MasterHost == Helpers.GetMaster(host.Connection));
+            var master = Helpers.GetMaster(host.Connection);
+            var mapping = mappings.Find(m => m.XenServerPatch.Uuid == xenServerPatch.Uuid && m.MasterHost.uuid == master.uuid);
+
             if (mapping != null && mapping.Pool_patch != null)
             {
                 var patchRef = mapping.Pool_patch;
 
                 XenRef<Task> task = Pool_patch.async_apply(session, patchRef.opaque_ref, host.opaque_ref);
-         
+
                 PollTaskForResultAndDestroy(Connection, ref session, task);
+            }
+            else
+            {
+                log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
+
+                throw new Exception("Pool_patch not found.");
             }
         }
     }
