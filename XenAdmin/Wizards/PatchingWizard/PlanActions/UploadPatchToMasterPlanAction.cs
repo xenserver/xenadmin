@@ -94,7 +94,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     var newMapping = new PoolPatchMapping(patch, poolPatch, Helpers.GetMaster(session.Connection));
 
-                    if (!mappings.Any(m => m.MasterHost.uuid == newMapping.MasterHost.uuid && m.Pool_patch == newMapping.Pool_patch && m.XenServerPatch == patch))
+                    if (!mappings.Contains(newMapping))
                         mappings.Add(newMapping);
                 }
                 catch (Exception ex)
