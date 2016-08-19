@@ -38,7 +38,6 @@ namespace XenAdminTests.WizardTests.state5_xml
 {
 
     [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
-    [Ignore]
     class RollingUpgradeWizardTest : WizardTest<RollingUpgradeWizard>
     {
         public RollingUpgradeWizardTest()
