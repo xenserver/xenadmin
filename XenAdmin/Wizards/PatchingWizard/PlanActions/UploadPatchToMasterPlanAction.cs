@@ -65,7 +65,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var conn = session.Connection;
             var master = Helpers.GetMaster(conn);
 
-            var existingMapping = mappings.Find(m => m.MasterHost.uuid == master.uuid && m.Pool_patch != null && m.XenServerPatch.Equals(patch));
+            var existingMapping = mappings.Find(m => m.MasterHost != null && master != null &&
+                                                     m.MasterHost.uuid == master.uuid && m.Pool_patch != null && m.XenServerPatch.Equals(patch));
             
             if (existingMapping == null
                 || !poolPatches.Any(p => string.Equals(p.uuid, existingMapping.Pool_patch.uuid, StringComparison.OrdinalIgnoreCase)))

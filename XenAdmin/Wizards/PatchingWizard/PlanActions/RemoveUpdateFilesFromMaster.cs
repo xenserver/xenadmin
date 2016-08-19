@@ -57,7 +57,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 Pool_patch poolPatch = null;
 
-                var mapping = patchMappings.FirstOrDefault(pm => pm.MasterHost.uuid == master.uuid && pm.XenServerPatch.Equals(patch));
+                var mapping = patchMappings.FirstOrDefault(pm => pm.MasterHost != null && master != null &&
+                                                                 pm.MasterHost.uuid == master.uuid && pm.XenServerPatch.Equals(patch));
 
                 if (mapping != null || mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
                 {

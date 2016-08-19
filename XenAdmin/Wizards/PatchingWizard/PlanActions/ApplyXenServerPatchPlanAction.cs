@@ -55,7 +55,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
 
             var master = Helpers.GetMaster(host.Connection);
-            var mapping = mappings.Find(m => m.XenServerPatch.Equals(xenServerPatch) && m.MasterHost.uuid == master.uuid);
+            var mapping = mappings.Find(m => m.XenServerPatch.Equals(xenServerPatch)
+                                             && m.MasterHost != null && master != null && m.MasterHost.uuid == master.uuid);
 
             if (mapping != null && mapping.Pool_patch != null)
             {
@@ -67,7 +68,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
             else
             {
-                log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
+                if (xenServerPatch != null && master != null)
+                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
 
                 throw new Exception("Pool_patch not found.");
             }
