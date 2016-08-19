@@ -69,7 +69,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             InitializeComponent();
             dataGridView1.BackgroundColor = dataGridView1.DefaultCellStyle.BackColor;
-            checkBoxViewPrecheckFailuresOnly.Checked = true;
         }
 
         public override string PageTitle
@@ -93,11 +92,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "UpdatePrechecks"; }
         }
 
-        public override bool EnablePrevious()
-        {
-            return _worker != null && !_worker.IsBusy && (resolvePrechecksAction == null || resolvePrechecksAction.IsCompleted);
-        }
-        
         void Connection_ConnectionStateChanged(object sender, EventArgs e)
         {
             Program.Invoke(Program.MainWindow, RefreshRechecks);
@@ -214,6 +208,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 progressBar1.Value += (step + progressBar1.Value) > 100 ? 0 : step;
             }
             catch (Exception) { }
+        }
+
+        private bool IsCheckInProgress
+        {
+            get { return _worker != null && _worker.IsBusy; }
+        }
+
+        private bool IsResolveActionInProgress
+        {
+            get { return resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted; }
         }
 
         private List<PreCheckHostRow> ExecuteCheck(Check check)
@@ -392,6 +396,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLeave(direction, ref cancel);
         }
 
+        public override bool EnablePrevious()
+        {
+            return !IsCheckInProgress && !IsResolveActionInProgress;
+        }
+        
         public override bool EnableNext()
         {
             bool problemsFound = false;
@@ -403,17 +412,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     problemsFound = true;
                     break;
                 }
-
             }
 
-            bool result = _worker != null && !_worker.IsBusy && !problemsFound && (resolvePrechecksAction == null || resolvePrechecksAction.IsCompleted);
             UpdateControls(problemsFound);
-            return result;
+            return !IsCheckInProgress && !IsResolveActionInProgress && !problemsFound;
         }
 
         public UpdateType SelectedUpdateType { private get; set; }
         public Pool_patch Patch { private get; set; }
-        public List<Pool_patch> NewUploadedPatches { private get; set; }
 
         internal enum PreCheckResult { OK, Warning, Failed }
 
@@ -693,10 +699,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateControls(bool problemsFound = false)
         {
-            bool actionInProgress = resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted;
-            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress;
-            labelProgress.Visible = actionInProgress || !problemsFound;
-            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress;
+            bool actionInProgress = IsResolveActionInProgress;
+            bool checkInProgress = IsCheckInProgress;
+            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress && !checkInProgress;
+            labelProgress.Visible = actionInProgress || checkInProgress || !problemsFound;
+            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
         }
         
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
