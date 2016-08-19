@@ -32,15 +32,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         public override bool Equals(object obj)
         {
-            if (!(obj is PoolPatchMapping))
-                return false;
-
             var that = obj as PoolPatchMapping;
 
+            if (that == null)
+                return false;
+
             return
-                this.XenServerPatch == that.XenServerPatch
-                && this.Pool_patch == that.Pool_patch
-                && this.MasterHost == that.MasterHost;
+                this.XenServerPatch != null && this.XenServerPatch.Equals(that.XenServerPatch)
+                && this.Pool_patch != null && this.Pool_patch.Equals(that.Pool_patch)
+                && this.MasterHost != null && that.MasterHost != null & this.MasterHost.uuid == that.MasterHost.uuid;
         }
 
         public override int GetHashCode()
