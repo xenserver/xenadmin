@@ -75,12 +75,6 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.HostVLanLabel, "HostVLanLabel");
             this.HostVLanLabel.Name = "HostVLanLabel";
             // 
-            // autoCheckBox
-            // 
-            resources.ApplyResources(this.autoCheckBox, "autoCheckBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.autoCheckBox, 4);
-            this.autoCheckBox.Name = "autoCheckBox";
-            // 
             // HostPNICList
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.HostPNICList, 3);

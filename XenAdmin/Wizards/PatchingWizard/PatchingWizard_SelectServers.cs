@@ -169,6 +169,18 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public List<XenServerVersion> AutoDownloadedXenServerVersions { private get; set; }
        
+        private bool PoolForbidsAutomaticUpdates(Pool pool)
+        {
+            var poolForbidsAutomaticKey = "XenCenter.CustomFields.hci-forbid-update-auto-restart";
+            var poolOtherConfig = Helpers.GetOtherConfig(pool);
+            if (poolOtherConfig.ContainsKey(poolForbidsAutomaticKey) &&
+                poolOtherConfig[poolForbidsAutomaticKey].ToLowerInvariant().Equals(bool.TrueString.ToLowerInvariant()))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
@@ -247,6 +259,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
+                return;
+            }
+
+            if (poolOfOne != null && PoolForbidsAutomaticUpdates(poolOfOne))
+            {
+                row.Enabled = false;
+                row.Cells[3].ToolTipText = "TODO: Neptune message";
                 return;
             }
 

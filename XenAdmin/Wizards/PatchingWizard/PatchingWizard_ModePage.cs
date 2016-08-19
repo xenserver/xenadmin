@@ -33,12 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Alerts;
 
@@ -77,25 +73,43 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             return Messages.UPDATES_WIZARD_APPLY_UPDATE;
         }
-        
+
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
 
             textBoxLog.Clear();
 
+            
+            var anyPoolForbidsAutoRestart = AnyPoolForbidsAutoRestart();
+            var patchRequiresReboot = PatchRequiresReboot();
+
+            var automaticDisabled = anyPoolForbidsAutoRestart && patchRequiresReboot;
+
+            if (automaticDisabled)
+            {
+                AutomaticRadioButton.Checked = false;
+                AutomaticRadioButton.Enabled = false;
+            }
+
             switch (SelectedUpdateType)
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch);
-                    AutomaticRadioButton.Enabled = true;
-                    AutomaticRadioButton.Checked = true;
+                    if (!automaticDisabled)
+                    {
+                        AutomaticRadioButton.Enabled = true;
+                        AutomaticRadioButton.Checked = true;
+                    }
                     break;
                 case UpdateType.NewSuppPack:
-                    AutomaticRadioButton.Enabled = true;
-                    AutomaticRadioButton.Checked = true;
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
+                    if (!automaticDisabled)
+                    {
+                        AutomaticRadioButton.Enabled = true;
+                        AutomaticRadioButton.Checked = true;
+                    }
                     break;
             }
 
@@ -158,6 +172,43 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             UpdateEnablement();
         }
+
+        //Check for pool:other-config:hci-forbid-update-auto-restart setting
+        private bool AnyPoolForbidsAutoRestart()
+        {
+            var poolForbidRestartKey = "XenCenter.CustomFields.hci-forbid-update-auto-restart";
+            foreach (var server in SelectedServers)
+            {
+                var pool = Helpers.GetPoolOfOne(server.Connection);
+                var poolOtherConfig = Helpers.GetOtherConfig(pool);
+                if (poolOtherConfig.ContainsKey(poolForbidRestartKey) &&
+                    poolOtherConfig[poolForbidRestartKey].ToLowerInvariant().Equals(bool.TrueString.ToLowerInvariant()))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool PatchRequiresReboot()
+        {
+            var guidance = Patch.after_apply_guidance ?? new List<after_apply_guidance>();
+
+            foreach (var guide in guidance)
+            {
+                switch (guide)
+                {
+                    case after_apply_guidance.restartHost:
+                        return true;
+                    case after_apply_guidance.restartXAPI:
+                        return true;
+                }
+            }
+
+            return false; // no host restart needed
+        }
+            
 
         private void button1_Click(object sender, EventArgs e)
         {
