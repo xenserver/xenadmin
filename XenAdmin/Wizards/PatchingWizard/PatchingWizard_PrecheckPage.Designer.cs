@@ -148,6 +148,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             // checkBoxViewPrecheckFailuresOnly
             // 
             resources.ApplyResources(this.checkBoxViewPrecheckFailuresOnly, "checkBoxViewPrecheckFailuresOnly");
+            this.checkBoxViewPrecheckFailuresOnly.Checked = true;
+            this.checkBoxViewPrecheckFailuresOnly.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tableLayoutPanel1.SetColumnSpan(this.checkBoxViewPrecheckFailuresOnly, 2);
             this.checkBoxViewPrecheckFailuresOnly.Name = "checkBoxViewPrecheckFailuresOnly";
             this.checkBoxViewPrecheckFailuresOnly.UseVisualStyleBackColor = true;
