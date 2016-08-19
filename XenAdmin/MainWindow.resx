@@ -2706,6 +2706,9 @@
   <data name="statusLabel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="statusLabel.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>883, 22</value>
   </data>
