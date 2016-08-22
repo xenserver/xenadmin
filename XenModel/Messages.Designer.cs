@@ -2455,6 +2455,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload error. The patch was uploaded, but it cannot be found on the host..
+        /// </summary>
+        public static string ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual disk created.
         /// </summary>
         public static string ACTION_VDI_CREATED {
@@ -24910,6 +24919,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not enough space to automatically update &apos;{0}&apos;..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Space available: {0}.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE {
@@ -25751,11 +25769,92 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update process was not completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following error occurred while automatic upgrade was in progress: .
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following errors occurred while automatic upgrade was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update was not completed successfully.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload and Install.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically uploading and installing updates.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clean up....
         /// </summary>
         public static string PATCHINGWIZARD_CLEANUP {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_CLEANUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skipping download: Already downloaded update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to download update {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING", resourceCulture);
             }
         }
         
@@ -25985,6 +26084,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking disk space requirements.
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prechecks failed..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FAILED {
@@ -25999,6 +26107,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prechecks are performed to verify that the automatic update can proceed..
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE", resourceCulture);
             }
         }
         
@@ -26084,6 +26201,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatic update is not supported on this [XenServer] version.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic update is not supported on partially upgraded [XenServer] pools.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot install supplemental packs on this [XenServer] version.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS {
@@ -26098,6 +26233,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is not licensed for automatic updating.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING", resourceCulture);
             }
         }
         
@@ -26129,6 +26273,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server cannot be updated automatically.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is already up-to-date.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Servers.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TEXT {
@@ -26143,6 +26305,35 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have automatically updated.
+        ///Greyed out servers cannot be updated automatically..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select one or more servers from the list of available servers.
+        ///Servers where the selected update cannot be applied appear disabled in this list..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic update has finished..
+        /// </summary>
+        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE", resourceCulture);
             }
         }
         
@@ -28298,6 +28489,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore dismissed updates.
+        /// </summary>
+        public static string RESTORE_DISMISSED_UPDATES {
+            get {
+                return ResourceManager.GetString("RESTORE_DISMISSED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;.  Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
         /// </summary>
         public static string RESTORE_FROM_BACKUP_FINALIZE {
@@ -28312,6 +28512,15 @@ namespace XenAdmin {
         public static string RESTORE_HOST {
             get {
                 return ResourceManager.GetString("RESTORE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restoring....
+        /// </summary>
+        public static string RESTORING {
+            get {
+                return ResourceManager.GetString("RESTORING", resourceCulture);
             }
         }
         
@@ -29211,6 +29420,15 @@ namespace XenAdmin {
         public static string SERVER_REQUEST_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("SERVER_REQUEST_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk space check.
+        /// </summary>
+        public static string SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -32929,6 +33147,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_REMOVING_UPDATE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing update files from {0}....
+        /// </summary>
+        public static string UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL", resourceCulture);
             }
         }
         

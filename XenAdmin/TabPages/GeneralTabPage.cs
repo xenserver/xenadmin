@@ -676,6 +676,12 @@ namespace XenAdmin.TabPages
                 s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
             }
 
+            var recommendedPatches = RecommendedPatchesForHost(host);
+            if (!string.IsNullOrEmpty(recommendedPatches))
+            {
+                s.AddEntry(FriendlyName("Pool_patch.required-updates"), recommendedPatches);
+            }
+
             // add supplemental packs
             var suppPacks = hostInstalledSuppPacks(host);
             if (!string.IsNullOrEmpty(suppPacks))
@@ -1611,6 +1617,17 @@ namespace XenAdmin.TabPages
                     return false;
             }
             return true;
+        }
+
+        private string RecommendedPatchesForHost(Host host)
+        {
+            var result = new List<string>();
+            var recommendedPatches = Updates.RecommendedPatchesForHost(host);
+
+            foreach (var patch in recommendedPatches)
+                result.Add(patch.Name);
+
+            return string.Join(Environment.NewLine, result.ToArray());
         }
 
         private string hostAppliedPatches(Host host)
