@@ -360,9 +360,10 @@ namespace XenAdmin.TabPages
 
         private void DeleteGraph()
         {
+            var formattableName = GraphList.SelectedGraph.DisplayName.Replace("&", "&&");
             using (ThreeButtonDialog dlog = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(SystemIcons.Warning,
-                    string.Format(Messages.DELETE_GRAPH_MESSAGE, GraphList.SelectedGraph.DisplayName),
+                    string.Format(Messages.DELETE_GRAPH_MESSAGE, formattableName),
                     Messages.XENCENTER),
                 ThreeButtonDialog.ButtonYes,
                 ThreeButtonDialog.ButtonNo))
