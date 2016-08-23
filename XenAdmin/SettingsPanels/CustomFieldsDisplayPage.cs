@@ -243,7 +243,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     // Create the display label
                     Label lblKey = new Label();
-                    lblKey.Text = customFieldDefinition.Name;
+                    lblKey.Text = customFieldDefinition.Name.EscapeAmpersands();
                     lblKey.Margin = new Padding(3, 7, 3, 3);
                     lblKey.Font = Program.DefaultFont;
                     lblKey.Width = (int)tableLayoutPanel.ColumnStyles[0].Width;
