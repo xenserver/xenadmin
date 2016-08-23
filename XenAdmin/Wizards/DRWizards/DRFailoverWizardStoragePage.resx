@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelText.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -131,9 +131,9 @@
   <data name="buttonClearAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonClearAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1314, 159</value>
+    <value>479, 89</value>
   </data>
   <data name="buttonClearAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -148,7 +148,7 @@
     <value>buttonClearAll</value>
   </data>
   <data name="&gt;&gt;buttonClearAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonClearAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -156,7 +156,7 @@
   <data name="&gt;&gt;buttonClearAll.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="columnTick.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnTick.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnTick.HeaderText" xml:space="preserve">
@@ -165,7 +165,7 @@
   <data name="columnTick.Width" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <metadata name="columnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnName.HeaderText" xml:space="preserve">
@@ -177,7 +177,7 @@
   <data name="columnName.Width" type="System.Int32, mscorlib">
     <value>115</value>
   </data>
-  <metadata name="columnDesc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnDesc.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnDesc.HeaderText" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="columnDesc.Width" type="System.Int32, mscorlib">
     <value>115</value>
   </data>
-  <metadata name="columnType.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnType.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnType.HeaderText" xml:space="preserve">
@@ -201,7 +201,7 @@
   <data name="columnType.Width" type="System.Int32, mscorlib">
     <value>90</value>
   </data>
-  <metadata name="columnMetadata.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="columnMetadata.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnMetadata.HeaderText" xml:space="preserve">
@@ -220,10 +220,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="dataGridViewSRs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 130</value>
+    <value>3, 60</value>
   </data>
   <data name="dataGridViewSRs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1305, 782</value>
+    <value>470, 303</value>
   </data>
   <data name="dataGridViewSRs.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -253,7 +253,7 @@
     <value>NoControl</value>
   </data>
   <data name="FindSrsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 79</value>
+    <value>3, 28</value>
   </data>
   <data name="FindSrsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 6, 6</value>
@@ -262,13 +262,13 @@
     <value>0, 0, 5, 0</value>
   </data>
   <data name="FindSrsButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 42</value>
+    <value>150, 23</value>
   </data>
   <data name="FindSrsButton.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="FindSrsButton.Text" xml:space="preserve">
-    <value>Find Storage &amp;Repositories</value>
+    <value>Find &amp;Storage Repositories</value>
   </data>
   <data name="FindSrsButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -280,7 +280,7 @@
     <value>FindSrsButton</value>
   </data>
   <data name="&gt;&gt;FindSrsButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FindSrsButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSelectAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1314, 130</value>
+    <value>479, 60</value>
   </data>
   <data name="buttonSelectAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -307,7 +307,7 @@
     <value>buttonSelectAll</value>
   </data>
   <data name="&gt;&gt;buttonSelectAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSelectAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -325,7 +325,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1392, 915</value>
+    <value>557, 366</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -334,7 +334,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -358,7 +358,7 @@
     <value>0, 3, 0, 6</value>
   </data>
   <data name="labelText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1361, 73</value>
+    <value>554, 22</value>
   </data>
   <data name="labelText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -370,7 +370,7 @@
     <value>labelText</value>
   </data>
   <data name="&gt;&gt;labelText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelText.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -378,23 +378,23 @@
   <data name="&gt;&gt;labelText.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <metadata name="FindSrsOptionsMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="FindSrsOptionsMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 11</value>
   </metadata>
   <data name="iscsiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 46</value>
+    <value>199, 22</value>
   </data>
   <data name="iscsiToolStripMenuItem.Text" xml:space="preserve">
     <value>Find Software iSCSI SRs</value>
   </data>
   <data name="fcToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 46</value>
+    <value>199, 22</value>
   </data>
   <data name="fcToolStripMenuItem.Text" xml:space="preserve">
     <value>Find Hardware HBA SRs</value>
   </data>
   <data name="FindSrsOptionsMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>446, 96</value>
+    <value>200, 48</value>
   </data>
   <data name="&gt;&gt;FindSrsOptionsMenuStrip.Name" xml:space="preserve">
     <value>FindSrsOptionsMenuStrip</value>
@@ -402,62 +402,59 @@
   <data name="&gt;&gt;FindSrsOptionsMenuStrip.Type" xml:space="preserve">
     <value>XenAdmin.Controls.NonReopeningContextMenuStrip, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>92</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>240, 240</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1392, 915</value>
+    <value>557, 366</value>
   </data>
   <data name="&gt;&gt;columnTick.Name" xml:space="preserve">
     <value>columnTick</value>
   </data>
   <data name="&gt;&gt;columnTick.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnName.Name" xml:space="preserve">
     <value>columnName</value>
   </data>
   <data name="&gt;&gt;columnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnDesc.Name" xml:space="preserve">
     <value>columnDesc</value>
   </data>
   <data name="&gt;&gt;columnDesc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnType.Name" xml:space="preserve">
     <value>columnType</value>
   </data>
   <data name="&gt;&gt;columnType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnMetadata.Name" xml:space="preserve">
     <value>columnMetadata</value>
   </data>
   <data name="&gt;&gt;columnMetadata.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;iscsiToolStripMenuItem.Name" xml:space="preserve">
     <value>iscsiToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;iscsiToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fcToolStripMenuItem.Name" xml:space="preserve">
     <value>fcToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;fcToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DRFailoverWizardStoragePage</value>

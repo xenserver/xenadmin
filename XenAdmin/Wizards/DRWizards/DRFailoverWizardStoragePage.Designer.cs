@@ -99,8 +99,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridViewSRs.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.tableLayoutPanel1.SetRowSpan(this.dataGridViewSRs, 2);
-            this.dataGridViewSRs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellClick);
             this.dataGridViewSRs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellValueChanged);
+            this.dataGridViewSRs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellClick);
             // 
             // columnTick
             // 
@@ -152,7 +152,6 @@
             // 
             // FindSrsOptionsMenuStrip
             // 
-            this.FindSrsOptionsMenuStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.FindSrsOptionsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.iscsiToolStripMenuItem,
             this.fcToolStripMenuItem});
