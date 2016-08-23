@@ -5414,6 +5414,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>Enter the vApp name and an optional description.</value>
   </data>
+  <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
+    <value>{0} on {1}</value>
+  </data>
   <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
     <value>The server '{0}' needs to be rebooted for update '{1}' to take effect</value>
   </data>

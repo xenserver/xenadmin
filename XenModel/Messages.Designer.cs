@@ -15430,6 +15430,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} on {1}.
+        /// </summary>
+        public static string GENERAL_PANEL_UPDATE_KEY {
+            get {
+                return ResourceManager.GetString("GENERAL_PANEL_UPDATE_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The server &apos;{0}&apos; needs to be rebooted for update &apos;{1}&apos; to take effect.
         /// </summary>
         public static string GENERAL_PANEL_UPDATE_WARNING {
