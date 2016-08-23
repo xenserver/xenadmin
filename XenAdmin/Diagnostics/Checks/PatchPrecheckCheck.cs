@@ -39,6 +39,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Collections.Generic;
 using XenAdmin.Actions;
+using XenAdmin.Wizards.PatchingWizard;
 
 
 namespace XenAdmin.Diagnostics.Checks
@@ -48,12 +49,15 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly Pool_patch _patch;
 
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
+        private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
+        private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
 
-        public PatchPrecheckCheck(Host host, Pool_patch patch)
+        public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, LivePatchCode> livePatchCodesByHost)
             : base(host)
         {
             _patch = patch;
+            this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
 
@@ -78,7 +82,13 @@ namespace XenAdmin.Diagnostics.Checks
 
             try
             {
-                return FindProblem(Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref));
+                var result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                var livePatchCode = TryToFindLivePatchCode(result);
+
+                if (livePatchCodesByHost != null)
+                    livePatchCodesByHost[Host.uuid] = livePatchCode;
+
+                return FindProblem(result);
 
             }
             catch (Failure f)
@@ -96,6 +106,38 @@ namespace XenAdmin.Diagnostics.Checks
                 Problem problem = FindProblem(f);
                 return problem ?? new PrecheckFailed(this, Host, f);
             }
+        }
+
+        private LivePatchCode TryToFindLivePatchCode(string result)
+        {
+            LivePatchCode livePatchCodeResult = LivePatchCode.UNKNOWN;
+
+            if (Helpers.ElyOrGreater(Host.Connection))
+            {
+                result = result.Replace("\n", "");
+
+                if (LivePatchResponseRegex.IsMatch(result))
+                {
+                    var m = LivePatchResponseRegex.Match(result);
+                    
+                    var doc = new XmlDocument();
+                    doc.LoadXml(m.ToString());
+                    var firstNode = doc.FirstChild;
+
+                    if (firstNode == null)
+                        return LivePatchCode.UNKNOWN;
+
+                    var livePatchCodeNode = firstNode.Attributes["code"];
+
+                    if (livePatchCodeNode == null)
+                        return LivePatchCode.UNKNOWN;
+
+                    if (Enum.TryParse(livePatchCodeNode.Value, out livePatchCodeResult))
+                        return livePatchCodeResult;
+                }
+            }
+
+            return LivePatchCode.UNKNOWN;
         }
 
         public override string Description

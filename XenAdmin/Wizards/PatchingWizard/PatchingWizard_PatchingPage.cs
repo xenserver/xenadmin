@@ -50,6 +50,12 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
+
         private AsyncAction actionManualMode = null;
         private bool _thisPageHasBeenCompleted = false;
         private BackgroundWorker actionsWorker = null;
@@ -318,7 +324,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             actions.Add(new ApplyPatchPlanAction(host, patch));
 
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) 
+                && !(LivePatchCodesByHost !=null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE))
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));

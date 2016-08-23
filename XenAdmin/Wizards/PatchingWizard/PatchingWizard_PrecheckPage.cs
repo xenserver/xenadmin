@@ -303,9 +303,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
+
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
+            LivePatchCodesByHost = new Dictionary<string, LivePatchCode>();
 
             //HostLivenessCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
@@ -322,19 +329,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (Helpers.HostIsMaster(host))
                     checkGroup.Add(new HAOffCheck(host));
-            }
-
-            //Checking can evacuate host
-            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
-            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
-            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
-            {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
-                {
-                        checkGroup.Add(new AssertCanEvacuateCheck(host));
-                }
             }
 
             //PBDsPluggedCheck
@@ -354,9 +348,23 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
                     Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => string.Equals(otherPatch.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase));
-                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
+                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost, LivePatchCodesByHost));
                 }
             }
+
+            //Checking can evacuate host
+            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
+            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
+            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
+                }
+            }
+
             return checks;
         }
 
