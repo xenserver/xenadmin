@@ -6880,12 +6880,6 @@ Standard features only</value>
   <data name="LIVE_PATCHING" xml:space="preserve">
     <value>Live Patching</value>
   </data>
-  <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
-    <value>Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them.</value>
-  </data>
-  <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
-    <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
-  </data>
   <data name="LOADING" xml:space="preserve">
     <value>Loading '{0}'...</value>
   </data>
