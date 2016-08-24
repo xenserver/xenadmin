@@ -114,6 +114,7 @@ namespace XenAdmin.ConsoleView
 
         public event EventHandler UserCancelledAuth;
         public event EventHandler VncConnectionAttemptCancelled;
+        public event Action<bool> GpuStatusChanged;
 
         internal readonly VNCTabView parentVNCTabView;
 
@@ -568,7 +569,14 @@ namespace XenAdmin.ConsoleView
                     RemoteConsole.Activate();
             }
 
-            parentVNCTabView.ShowGpuWarningIfRequired();
+            if (GpuStatusChanged != null)
+                GpuStatusChanged(MustConnectRemoteDesktop());
+        }
+
+        internal bool MustConnectRemoteDesktop()
+        {
+            return (UseVNC || string.IsNullOrEmpty(rdpIP)) &&
+                Source.HasGPUPassthrough && Source.power_state == vm_power_state.Running;
         }
 
         private void SetKeyboardAndMouseCapture(bool value)
@@ -785,7 +793,13 @@ namespace XenAdmin.ConsoleView
             }
 
             if (e.PropertyName == "power_state" || e.PropertyName == "VGPUs")
-                parentVNCTabView.ShowGpuWarningIfRequired();
+            {
+                Program.Invoke(this, () =>
+                {
+                    if (GpuStatusChanged != null)
+                        GpuStatusChanged(MustConnectRemoteDesktop());
+                });
+            }
         }
 
         internal void imediatelyPollForConsole()

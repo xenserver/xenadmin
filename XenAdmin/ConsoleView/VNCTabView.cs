@@ -156,7 +156,8 @@ namespace XenAdmin.ConsoleView
             log.DebugFormat("'{0}' console: Update power state (on VNCTabView constructor)", this.source.Name);
             updatePowerState();
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
-            ShowGpuWarningIfRequired();
+            ShowGpuWarningIfRequired(vncScreen.MustConnectRemoteDesktop());
+            vncScreen.GpuStatusChanged += ShowGpuWarningIfRequired;
 
             if (source.IsControlDomainZero || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
@@ -1498,10 +1499,9 @@ namespace XenAdmin.ConsoleView
             inToogleConsoleFocus = false;
         }
 
-        internal void ShowGpuWarningIfRequired()
+        private void ShowGpuWarningIfRequired(bool mustConnectRemoteDesktop)
         {
-            dedicatedGpuWarning.Visible = vncScreen != null && (vncScreen.UseVNC || string.IsNullOrEmpty(vncScreen.rdpIP)) &&
-                vncScreen.Source.HasGPUPassthrough && vncScreen.Source.power_state == vm_power_state.Running;
+            dedicatedGpuWarning.Visible = mustConnectRemoteDesktop;
         }
 
         internal bool IsVNC
