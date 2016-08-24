@@ -19714,6 +19714,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them..
+        /// </summary>
+        public static string LIVE_PATCHING_FAILED_MULTI_HOST {
+            get {
+                return ResourceManager.GetString("LIVE_PATCHING_FAILED_MULTI_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it..
+        /// </summary>
+        public static string LIVE_PATCHING_FAILED_ONE_HOST {
+            get {
+                return ResourceManager.GetString("LIVE_PATCHING_FAILED_ONE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading &apos;{0}&apos;....
         /// </summary>
         public static string LOADING {
