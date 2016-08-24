@@ -387,7 +387,10 @@ namespace XenAdmin.Commands
 
             public override bool IsValid(SelectedItemCollection selection)
             {
-                return selection.ContainsOneItemOfType<XenAPI.Network>();
+                return selection.ContainsOneItemOfType<XenAPI.Network>() &&
+                    !(selection.FirstAsXenObject as XenAPI.Network).IsGuestInstallerNetwork;
+                // CA-218956 - Expose HIMN when showing hidden objects
+                // HIMN should not be editable
             }
         }
 

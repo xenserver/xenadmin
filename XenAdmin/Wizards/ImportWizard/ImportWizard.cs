@@ -478,7 +478,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			{
 				var netref = new XenRef<XenAPI.Network>(vif.network);
 				var network = con.Resolve(netref);
-				if (network == null || network.IsGuestInstallerNetwork)
+				// CA-218956 - Expose HIMN when showing hidden objects
+				if (network == null || (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
 					continue;
 
 				temp.Add(new Tuple(first ? Messages.FINISH_PAGE_NETWORK : "", network.Name));

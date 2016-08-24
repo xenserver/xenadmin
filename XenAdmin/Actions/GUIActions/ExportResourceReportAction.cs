@@ -659,7 +659,8 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
 
-                if (network.IsGuestInstallerNetwork)
+                // CA-218956 - Expose HIMN when showing hidden objects
+                if (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs)
                 {
                     PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
                     continue;
