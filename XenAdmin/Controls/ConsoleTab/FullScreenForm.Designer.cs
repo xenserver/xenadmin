@@ -69,7 +69,7 @@
         #endregion
 
         private ConnectionBar connectionBar1;
-        internal System.Windows.Forms.Panel contentPanel;
+        private System.Windows.Forms.Panel contentPanel;
     }
 }
 

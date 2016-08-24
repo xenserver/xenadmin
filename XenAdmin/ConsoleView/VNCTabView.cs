@@ -66,7 +66,7 @@ namespace XenAdmin.ConsoleView
         private readonly VM source;
         private readonly Host targetHost;
         private VM_guest_metrics guestMetrics = null;
-        private Form fullscreenForm = null;
+        private FullScreenForm fullscreenForm;
         private FullScreenHint fullscreenHint;
         private Size LastDesktopSize;
         private bool switchOnTabOpened = false;
@@ -1019,36 +1019,14 @@ namespace XenAdmin.ConsoleView
 
             if (!isFullscreen)
             {
-                if (vncScreen.showConnectionBar) 
-                    fullscreenForm = new XenAdmin.Controls.ConsoleTab.FullScreenForm(vncScreen);
-                else
-                    fullscreenForm = new Form();
-                fullscreenForm.ShowIcon = false;
-                fullscreenForm.ShowInTaskbar = false;
+                fullscreenForm = new FullScreenForm(this);
+                fullscreenForm.FormClosing += delegate { toggleFullscreen(); };
 
-                fullscreenForm.FormBorderStyle = FormBorderStyle.None;
-                fullscreenForm.FormClosing += new FormClosingEventHandler(
-                    delegate(Object o, FormClosingEventArgs a)
-                    {
-                        toggleFullscreen();
-                    });
-                //fullscreenForm.Deactivate += new EventHandler(
-                //    delegate(Object o, EventArgs e)
-                //    {
-                //        toggleFullscreen();
-                //    });
                 if (source != null && source.Connection != null)
                     source.Connection.BeforeConnectionEnd += Connection_BeforeConnectionEnd;
 
-                vncScreen.Parent = fullscreenForm is Controls.ConsoleTab.FullScreenForm
-                                       ? (Control) ((Controls.ConsoleTab.FullScreenForm) fullscreenForm).contentPanel
-                                       : fullscreenForm;
+                fullscreenForm.AttachVncScreen(vncScreen);
                 vncScreen.DisplayFocusRectangle = false;
-
-                Screen screen = Screen.FromControl(this);
-                fullscreenForm.StartPosition = FormStartPosition.Manual;
-                fullscreenForm.Location = screen.WorkingArea.Location;
-                fullscreenForm.Size = screen.Bounds.Size;
 
                 fullscreenHint = new FullScreenHint();
                 fullscreenHint.Show(fullscreenForm);
@@ -1062,6 +1040,7 @@ namespace XenAdmin.ConsoleView
                 if (source != null && source.Connection != null)
                     source.Connection.BeforeConnectionEnd -= Connection_BeforeConnectionEnd;
 
+                fullscreenForm.DetachVncScreen(vncScreen);
                 vncScreen.Parent = this.contentPanel;
                 vncScreen.DisplayFocusRectangle = true;
                 FocusVNC();

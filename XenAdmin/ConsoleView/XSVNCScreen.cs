@@ -71,7 +71,6 @@ namespace XenAdmin.ConsoleView
         private volatile bool useVNC = true;
 
         private bool autoCaptureKeyboardAndMouse = true;
-        internal bool showConnectionBar = true;
 
         private readonly Color focusColor = SystemColors.MenuHighlight;
 
@@ -115,6 +114,7 @@ namespace XenAdmin.ConsoleView
         public event EventHandler UserCancelledAuth;
         public event EventHandler VncConnectionAttemptCancelled;
         public event Action<bool> GpuStatusChanged;
+        public event Action<string> ConnectionNameChanged;
 
         internal readonly VNCTabView parentVNCTabView;
 
@@ -542,7 +542,7 @@ namespace XenAdmin.ConsoleView
                 if (rdpClient == null)
                 {
                     if (this.ParentForm is FullScreenForm)
-                        oldSize = ((FullScreenForm)ParentForm).contentPanel.Size;
+                        oldSize = ((FullScreenForm)ParentForm).GetContentSize();
                     this.AutoScroll = true;
                     this.AutoScrollMinSize = oldSize;
 
@@ -667,7 +667,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public VM Source
+        private VM Source
         {
             get
             {
@@ -707,6 +707,22 @@ namespace XenAdmin.ConsoleView
             }
         }
 
+        public string ConnectionName
+        {
+            get
+            {
+                if (Source == null)
+                    return null;
+
+                if (Source.IsControlDomainZero)
+                    return string.Format(Messages.CONSOLE_HOST, Source.AffinityServerString);
+                
+                if (Source.is_control_domain)
+                    return string.Format(Messages.CONSOLE_HOST_NUTANIX, Source.AffinityServerString);
+                
+                return Source.Name;
+            }
+        }
 
         private bool InDefaultConsole()
         {
@@ -800,6 +816,9 @@ namespace XenAdmin.ConsoleView
                         GpuStatusChanged(MustConnectRemoteDesktop());
                 });
             }
+
+            if (e.PropertyName == "name_label" && ConnectionNameChanged != null)
+                ConnectionNameChanged(ConnectionName);
         }
 
         internal void imediatelyPollForConsole()
