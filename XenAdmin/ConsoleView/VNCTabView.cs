@@ -43,6 +43,7 @@ using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using System.Collections.Generic;
 using System.Diagnostics;
+using XenAdmin.Controls.ConsoleTab;
 
 
 namespace XenAdmin.ConsoleView
@@ -66,7 +67,7 @@ namespace XenAdmin.ConsoleView
         private readonly Host targetHost;
         private VM_guest_metrics guestMetrics = null;
         private Form fullscreenForm = null;
-        private Form fullscreenHint = null;
+        private FullScreenHint fullscreenHint;
         private Size LastDesktopSize;
         private bool switchOnTabOpened = false;
 
@@ -1048,8 +1049,7 @@ namespace XenAdmin.ConsoleView
                 fullscreenForm.Location = screen.WorkingArea.Location;
                 fullscreenForm.Size = screen.Bounds.Size;
 
-                fullscreenHint = new Controls.ConsoleTab.FullScreenHint(GetFullScreenMessage());                
-                
+                fullscreenHint = new FullScreenHint();
                 fullscreenHint.Show(fullscreenForm);
                 fullscreenForm.Show();
 
@@ -1081,20 +1081,6 @@ namespace XenAdmin.ConsoleView
                 fullscreenForm.Refresh();
         }
 
-        string GetFullScreenMessage()
-        {
-            switch (Properties.Settings.Default.FullScreenShortcutKey)
-            {
-                case 0:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ALT;
-                case 1:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ALT_F;
-                case 2:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_F12;
-                default:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ENTER;
-            }
-  }
         void Connection_BeforeConnectionEnd(object sender, EventArgs e)
         {
             Program.Invoke(this, toggleFullscreen);
