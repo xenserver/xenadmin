@@ -30,16 +30,12 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
-using System.Windows.Forms;
 using log4net;
 using XenAdmin.Controls;
 using XenAdmin.Diagnostics.Problems;
@@ -47,7 +43,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -121,8 +116,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             return _cancelEnabled;
         }
-
-        private bool _livePatchingFailed = true; // TODO: default false, set properly as needed
 
         public override void PageLoaded(PageLoadedDirection direction)
         {
@@ -314,37 +307,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             OnPageUpdated();
             _thisPageHasBeenCompleted = true;
+
         }
-
-        /// <summary>
-        /// Simple action completed callback for the reboot VMs action if live patching fails
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void actionsWorker_RunRebootWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (!e.Cancelled)
-            {
-                Exception exception = e.Result as Exception;
-                if (exception != null)
-                {
-                    FinishedWithErrors(exception);
-
-                }
-                else
-                {
-                    // Don't rerun the live patching check, we've now rebooted
-                    FinishedSuccessfully(false);
-                }
-
-                progressBar.Value = 100;
-                _cancelEnabled = false;
-                _nextEnabled = true;
-            }
-            OnPageUpdated();
-            _thisPageHasBeenCompleted = true;
-        }
-
 
         private List<PlanAction> CompileActionList(Host host, Pool_patch patch)
         {
@@ -485,124 +449,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             panel1.Visible = true;
         }
 
-        // So we can still use a 0 argument delegate
         private void FinishedSuccessfully()
-        {
-            FinishedSuccessfully(true);
-        }
-
-        // TODO: actual behavior, for now just say all hosts have to test
-        private bool LivePatchingFailedForHost(Host host)
-        {
-            return true;
-        }
-
-        private void FinishedSuccessfully(bool checkLivePatching)
         {
             labelTitle.Text = string.Format(Messages.UPDATE_WAS_SUCCESSFULLY_INSTALLED, GetUpdateName());
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
-
-            if (!checkLivePatching)
-            {
-                return;
-            }
-
-            // Live patching failed is per-host
-            var livePatchingFailedHosts = new List<Host>();
-            foreach (var host in SelectedMasters)
-            {
-                if (LivePatchingFailedForHost(host))
-                {
-                    livePatchingFailedHosts.Add(host);
-                }
-            }
-
-            if (livePatchingFailedHosts.Count == 0)
-            {
-                return;
-            }
-
-            if (livePatchingFailedHosts.Count == 1)
-            {
-                LivePatchingFailed_OneHost(livePatchingFailedHosts[0]);
-            }
-            else
-            {
-                LivePatchingFailed_MultipleHosts(livePatchingFailedHosts, Patch);
-            }
-        }
-
-        private void LivePatchingFailed_OneHost(Host host)
-        {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                    string.Format(
-                        "Live patching failed for host {0} and it will need to be restarted. Would you like to do that now?",
-                        this.SelectedMasters[0]), "Live patching failed"),
-                new ThreeButtonDialog.TBDButton("Yes, reboot", DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT,
-                    true),
-                ThreeButtonDialog.ButtonNo))
-            {
-                var dialogResult = dlg.ShowDialog(Program.MainWindow);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    LivePatchingFailed_RestartHost(host);
-                }
-
-                Debug.WriteLine(dialogResult);
-            }
-        }
-
-        private void LivePatchingFailed_MultipleHosts(IList<Host> hosts, Pool_patch patch)
-        {
-            using (var dlg = new RebootHostsDialog(hosts, patch))
-            {
-                var dialogResult = dlg.ShowDialog(Program.MainWindow);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    var selectedHosts = dlg.GetSelectedHosts().ToList();
-                    if (!selectedHosts.Any())
-                    {
-                        return;
-                    }
-
-                    LivePatchingFailed_RestartHosts(selectedHosts);
-                }
-            }
-        }
-
-        private void LivePatchingFailed_RestartHost(Host host)
-        {
-            LivePatchingFailed_RestartHosts(new List<Host> { host });
-        }
-
-        private void LivePatchingFailed_RestartHosts(IEnumerable<Host> hosts)
-        {
-            // For now re-use the text log + progress bar (probably should use its own dialog?)
-            progressBar.Value = 0;
-            textBoxLog.Text += "\r\nLive patching failed\r\n"; // TODO: localise
-            _nextEnabled = false;
-            _cancelEnabled = true;
-            _thisPageHasBeenCompleted = false;
-
-            var actions = new List<PlanAction>();
-            actionsWorker = new BackgroundWorker();
-            foreach (var host in hosts)
-            {
-                var runningVMs = RunningVMs(host, Patch);
-
-                actions.Add(new EvacuateHostPlanAction(host));
-                actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(runningVMs, host, false));
-            }
-
-            actionsWorker.DoWork += PatchingWizardAutomaticPatchWork;
-            actionsWorker.WorkerReportsProgress = true;
-            actionsWorker.ProgressChanged += actionsWorker_ProgressChanged;
-            actionsWorker.RunWorkerCompleted += actionsWorker_RunRebootWorkerCompleted;
-            actionsWorker.WorkerSupportsCancellation = true;
-            actionsWorker.RunWorkerAsync(actions);
         }
 
         private string GetUpdateName()
