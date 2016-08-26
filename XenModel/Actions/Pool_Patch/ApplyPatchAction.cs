@@ -126,6 +126,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             SafeToExit = false;
+
             foreach (Pool_patch patch in patches)
             {
                 foreach (Host host in hosts)

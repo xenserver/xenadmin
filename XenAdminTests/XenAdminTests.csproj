@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="HealthCheckTests\CredentialTests.cs" />
     <Compile Include="HealthCheckTests\RequestUploadTaskTests.cs" />
+    <Compile Include="UnitTests\BatchUpdatesTests\BatchUpdatesTests.cs" />
     <Compile Include="UnitTests\CPUFeaturesTest.cs" />
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />

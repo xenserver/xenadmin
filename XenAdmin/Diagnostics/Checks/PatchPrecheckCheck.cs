@@ -53,6 +53,11 @@ namespace XenAdmin.Diagnostics.Checks
 
         private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
 
+        public PatchPrecheckCheck(Host host, Pool_patch patch)
+            : this(host, patch, null)
+        { 
+        }
+
         public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, LivePatchCode> livePatchCodesByHost)
             : base(host)
         {
