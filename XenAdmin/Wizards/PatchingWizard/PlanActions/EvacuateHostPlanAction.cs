@@ -48,6 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             base.TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name);
             this._host = new XenRef<Host>(host);
             currentHost = host;
+            visible = false;
         }
 
         protected override Host CurrentHost
@@ -76,12 +77,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         AvoidRestartHosts.Add(hostObject.uuid);
                     }
 
-                    this.visible = false;
                     log.Debug("Will skip scheduled restart (livepatching succeeded), because hostObject.patches_requiring_reboot is empty.");
 
                     return;
                 }
             }
+
+            visible = true;
 
             PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObject.resident_VMs));
 

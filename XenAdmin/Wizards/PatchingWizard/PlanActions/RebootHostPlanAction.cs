@@ -47,6 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
         {
             _host = host;
+            visible = false;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -55,12 +56,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 if (AvoidRestartHosts != null && AvoidRestartHosts.Contains(_host.uuid))
                 {
-                    visible = false;
                     log.Debug("Skipping scheduled restart (livepatching succeeded). RebootHostPlanAction is skipped.");
 
                     return;
                 }
             }
+
+            visible = true;
+
             _host.Connection.ExpectDisruption = true;
             try
             {

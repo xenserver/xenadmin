@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             this._vms = vms;
             this._enableOnly = enableOnly;
             currentHost = host;
+            visible = false;
         }
 
         protected override Host CurrentHost
@@ -65,11 +66,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             if (Helpers.ElyOrGreater(currentHost) && AvoidRestartHosts != null && AvoidRestartHosts.Contains(currentHost.uuid))
             {
-                visible = false;
                 log.Debug("Skipped scheduled restart (livepatching succeeded), BringBabiesBackAction is skipped.");
 
                 return;
             }
+            
+            visible = true;
 
             Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
             PBD.CheckAndBestEffortPlugPBDsFor(Connection, _vms);

@@ -299,6 +299,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     bgw.ReportProgress(0, action);
                     action.Run();
+
                     Thread.Sleep(1000);
 
                     bgw.doneActions.Add(action);
