@@ -9418,6 +9418,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>{0} failure tolerated</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
+    <value>This pool forbids automatic updates. (TODO: Neptune message)</value>
+  </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Pool General Properties</value>
   </data>

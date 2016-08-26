@@ -12954,4 +12954,7 @@ To learn more about the [XenServer] Active Directory feature or to start a [XenS
   <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
     <value>Target Server:</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
+    <value>This pool forbids automatic updates. (TODO: Neptune message)</value>
+  </data>
 </root>

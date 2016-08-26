@@ -12953,4 +12953,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
     <value>Target Server:</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
+    <value>This pool forbids automatic updates. (TODO: Neptune message)</value>
+  </data>
 </root>

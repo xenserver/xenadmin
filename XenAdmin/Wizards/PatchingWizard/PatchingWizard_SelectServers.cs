@@ -239,7 +239,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (pool != null && PoolForbidsAutomaticUpdates(pool))
                 {
                     row.Enabled = false;
-                    row.Cells[3].ToolTipText = "This pool forbids automatic updates. (TODO: Neptune message)";
+                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES; // TODO: this message needs changing
                     return;
                 }
 
