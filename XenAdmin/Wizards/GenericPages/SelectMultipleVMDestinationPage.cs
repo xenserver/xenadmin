@@ -101,9 +101,10 @@ namespace XenAdmin.Wizards.GenericPages
 	    protected void InitializeText()
 	    {
 	        m_labelIntro.Text = InstructionText;
-	        label1.Text = HomeServerText;
-	        label2.Text = HomeServerSelectionIntroText;
+	        label1.Text = TargetServerText;
+	        label2.Text = TargetServerSelectionIntroText;
             m_colVmName.HeaderText = VmColumnHeaderText;
+	        m_colTarget.HeaderText = TargetColumnHeaderText;
 	    }
 
 	    private IXenObject _chosenItem;
@@ -123,9 +124,9 @@ namespace XenAdmin.Wizards.GenericPages
 	    protected abstract string InstructionText { get; }
 
         /// <summary>
-        /// Text demarking what the label fot the home server drop down should be
+        /// Text demarking what the label for the target server drop down should be
         /// </summary>
-	    protected abstract string HomeServerText { get; }
+	    protected abstract string TargetServerText { get; }
 
         protected virtual string VmColumnHeaderText 
         {
@@ -135,10 +136,19 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
+	    protected virtual string TargetColumnHeaderText
+	    {
+	        get
+	        {
+	            return m_colTarget.HeaderText;
+	        }
+	    }
+           
+
         /// <summary>
         /// Text above the table containing a list of VMs and concomitant home server
         /// </summary>
-        protected abstract string HomeServerSelectionIntroText { get; }
+        protected abstract string TargetServerSelectionIntroText { get; }
 
         protected virtual void OnChosenItemChanged()
         {}
@@ -553,7 +563,7 @@ namespace XenAdmin.Wizards.GenericPages
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
 			        ChosenItem = item == null ? null : item.Item;
-			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(CreateHomeServerFilterList(item)));
+			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(CreateTargetServerFilterList(item)));
 			    }
 			    finally
 			    {
@@ -569,7 +579,7 @@ namespace XenAdmin.Wizards.GenericPages
         /// </summary>
         /// <param name="item">selected item from the host combobox</param>
         /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateHomeServerFilterList(IEnableableXenObjectComboBoxItem item)
+        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
         {
             return new List<ReasoningFilter>();
         }

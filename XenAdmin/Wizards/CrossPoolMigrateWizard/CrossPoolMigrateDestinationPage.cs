@@ -112,9 +112,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
         }
 
-        protected override string HomeServerText { get { return Messages.CPM_WIZARD_DESTINATION_DESTINATION; } }
+        protected override string TargetServerText { get { return Messages.CPM_WIZARD_DESTINATION_DESTINATION; } }
 
-        protected override string HomeServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
+        protected override string TargetServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
 
 
         public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
@@ -122,7 +122,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
            return new CrossPoolMigrateDelayLoadingComboBoxItem(xenItem, preSelectedHost, selectedVMs);
         }
 
-        protected override List<ReasoningFilter> CreateHomeServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)
         {
             List<ReasoningFilter> filters = new List<ReasoningFilter>{ new ResidentHostIsSameAsSelectionFilter(selectedVMs) };
 
@@ -166,6 +166,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             get
             {
                 return TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
+            }
+        }
+
+        protected override string TargetColumnHeaderText
+        {
+            get
+            {
+                return Messages.TARGET_SERVER;
             }
         }
     }

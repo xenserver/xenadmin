@@ -264,17 +264,11 @@
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
-  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Disable live patching</value>
-  </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Disable container management on VM '{0}'</value>
-  </data>
-  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -372,17 +366,11 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR cleanup ({0})</value>
   </data>
-  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Enable live patching</value>
-  </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Enable container management on VM '{0}'</value>
-  </data>
-  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -917,6 +905,9 @@
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU passthrough on '{0}'</value>
+  </data>
+  <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
+    <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
     <value>Upload server status report to [Citrix] Insight Services</value>
@@ -3122,9 +3113,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>Destination:</value>
   </data>
-  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
-    <value>Home Server:</value>
-  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>Template:</value>
   </data>
@@ -3136,6 +3124,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>Storage:</value>
+  </data>
+  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
+    <value>Target Server:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>Migration Network:</value>
@@ -3177,7 +3168,7 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
     <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Specify a &amp;home server in the destination pool (optional):</value>
+    <value>Specify a &amp;target server in the destination pool (optional):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
@@ -8698,6 +8689,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_ENOUGH_SPACE_DESCRIPTION" xml:space="preserve">
     <value>This host does not have enough disk space to install this update</value>
   </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
+    <value>There is not enough space to automatically update '{0}'.</value>
+  </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>Space available: {0}</value>
   </data>
@@ -8934,8 +8928,35 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
+    <value>Update process was not completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
+    <value>Following errors occurred while automatic upgrade was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
+    <value>Following error occurred while automatic upgrade was in progress: </value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
+    <value>Update was not completed successfully</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
+    <value>Upload and Install</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
+    <value>Automatically uploading and installing updates</value>
+  </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
+    <value>Downloading update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
+    <value>Skipping download: Already downloaded update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
+    <value>Waiting to download update {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -9012,11 +9033,17 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_PATCHINGPAGE_TITLE" xml:space="preserve">
     <value>Install the update</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE" xml:space="preserve">
+    <value>Checking disk space requirements</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FAILED" xml:space="preserve">
     <value>Prechecks failed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
+  </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>Update prechecks are performed to verify that the selected update can be applied to the servers.</value>
@@ -9045,11 +9072,20 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+    <value>Automatic update is not supported on this [XenServer] version</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this [XenServer] version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
+    <value>This server is not licensed for automatic updating</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
     <value>You cannot apply updates using [XenCenter].</value>
@@ -9060,11 +9096,28 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>Update not applicable</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
+    <value>This server cannot be updated automatically</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
+    <value>This server is already up-to-date</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>Select Servers</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you wish to update</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
+Greyed out servers cannot be updated automatically.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>Select one or more servers from the list of available servers.
+Servers where the selected update cannot be applied appear disabled in this list.</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Automatic update has finished.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
@@ -9103,6 +9156,9 @@ Please wait for this operation to complete, then click Next to continue with the
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
+  </data>
+  <data name="PATCHING_WIZARD_RUNNING_PRECHECKS" xml:space="preserve">
+    <value>Running prechecks...</value>
   </data>
   <data name="PATCHING_WIZARD_SOLVE_MANUALLY" xml:space="preserve">
     <value>Unable to resolve this issue:\n{0}\n\nPlease resolve this issue manually and then click Check Again.
@@ -9881,11 +9937,17 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>Restore dismissed updates</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>Backup file loaded to server '{0}'.  Refer to the "[XenServer product] Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>Restoring...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>Restoring server '{0}'</value>
@@ -10206,6 +10268,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>A server request is in progress</value>
+  </data>
+  <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
+    <value>Disk space check</value>
   </data>
   <data name="SERVER_SIDE_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Server side patch check</value>
@@ -10885,6 +10950,9 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TARGET" xml:space="preserve">
     <value>Target</value>
   </data>
+  <data name="TARGET_SERVER" xml:space="preserve">
+    <value>Target Server</value>
+  </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>
   </data>
@@ -11407,6 +11475,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>Deleting update installation file {0} from {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
+    <value>Removing update files from {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>
