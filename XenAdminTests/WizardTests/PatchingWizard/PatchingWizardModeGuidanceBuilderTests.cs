@@ -72,6 +72,7 @@ namespace XenAdminTests.WizardTests
             host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.IsMaster()).Returns(true);
             host.Setup(h => h.Name).Returns("MyHost");
+            host.Setup(h => h.uuid).Returns("MyHostUUID");
             patch.Setup(p => p.after_apply_guidance).Returns(new List<after_apply_guidance> { guidance });
             msg = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(new List<Host> { host.Object }, patch.Object, new Dictionary<string,LivePatchCode>());
             return patch;
