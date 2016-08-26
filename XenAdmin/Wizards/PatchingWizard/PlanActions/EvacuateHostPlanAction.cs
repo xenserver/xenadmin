@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly XenRef<Host> _host;
         private readonly Host currentHost;
-        public List<string> AvoidRestartHosts { get; set; }
+        public List<string> AvoidRestartHosts { private get; set; }
         
         public EvacuateHostPlanAction(Host host)
             : base(host.Connection, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name))

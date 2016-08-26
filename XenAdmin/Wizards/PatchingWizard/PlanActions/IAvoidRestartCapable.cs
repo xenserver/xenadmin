@@ -7,6 +7,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     interface IAvoidRestartHostsAware
     {
-        List<string> AvoidRestartHosts { get; set; }
+        List<string> AvoidRestartHosts { set; }
     }
 }

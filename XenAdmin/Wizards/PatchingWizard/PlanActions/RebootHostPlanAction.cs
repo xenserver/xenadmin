@@ -41,7 +41,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
 
         private readonly Host _host;
-        public List<string> AvoidRestartHosts { get; set; }
+        public List<string> AvoidRestartHosts { private get; set; }
         
         public RebootHostPlanAction(Host host)
             : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))

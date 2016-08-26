@@ -44,7 +44,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host currentHost;
         private readonly List<XenRef<VM>> _vms;
         private readonly bool _enableOnly = false;
-        public List<string> AvoidRestartHosts { get; set; }
+        public List<string> AvoidRestartHosts { private get; set; }
 
         public BringBabiesBackAction(List<XenRef<VM>> vms, Host host,bool enableOnly)
             : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE,host.Name))
