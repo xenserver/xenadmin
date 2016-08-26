@@ -234,6 +234,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
+                // if pool forbids automatic updates with other_config key (Neptune project)
+                // TODO: can poolOfOne have these keys?
+                if (pool != null && PoolForbidsAutomaticUpdates(pool))
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = "This pool forbids automatic updates. (TODO: Neptune message)";
+                    return;
+                }
+
                 return;
             }
 
@@ -259,13 +268,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
-                return;
-            }
-
-            if (poolOfOne != null && PoolForbidsAutomaticUpdates(poolOfOne))
-            {
-                row.Enabled = false;
-                row.Cells[3].ToolTipText = "TODO: Neptune message";
                 return;
             }
 
