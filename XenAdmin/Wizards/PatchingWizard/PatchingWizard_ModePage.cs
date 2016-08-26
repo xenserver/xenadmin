@@ -86,31 +86,29 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var automaticDisabled = anyPoolForbidsAutoRestart && patchRequiresReboot;
 
-            if (automaticDisabled)
-            {
-                AutomaticRadioButton.Checked = false;
-                AutomaticRadioButton.Enabled = false;
-            }
-
             switch (SelectedUpdateType)
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch);
-                    if (!automaticDisabled)
-                    {
-                        AutomaticRadioButton.Enabled = true;
-                        AutomaticRadioButton.Checked = true;
-                    }
                     break;
                 case UpdateType.NewSuppPack:
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
-                    if (!automaticDisabled)
-                    {
-                        AutomaticRadioButton.Enabled = true;
-                        AutomaticRadioButton.Checked = true;
-                    }
                     break;
+                default:
+                    automaticDisabled = true;
+                    break;
+            }
+
+            if (automaticDisabled)
+            {
+                AutomaticRadioButton.Checked = false;
+                AutomaticRadioButton.Enabled = false;
+            }
+            else
+            {
+                AutomaticRadioButton.Enabled = true;
+                AutomaticRadioButton.Checked = true;
             }
 
             if (SelectedUpdateType == UpdateType.NewSuppPack || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
