@@ -302,7 +302,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Thread.Sleep(1000);
 
                     bgw.doneActions.Add(action);
-
                     bgw.ReportProgress((int)((1.0 / (double)bgw.AllActions.Count) * 100), action);
                 }
                 catch (Exception e)

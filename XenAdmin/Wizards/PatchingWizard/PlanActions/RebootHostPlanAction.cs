@@ -29,17 +29,20 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class RebootHostPlanAction : RebootPlanAction
+    public class RebootHostPlanAction : RebootPlanAction, IAvoidRestartHostsAware
     {
 
         private readonly Host _host;
-
+        public List<string> AvoidRestartHosts { get; set; }
+        
         public RebootHostPlanAction(Host host)
             : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
         {
@@ -48,6 +51,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            if (Helpers.ElyOrGreater(_host))
+            {
+                if (AvoidRestartHosts != null && AvoidRestartHosts.Contains(_host.uuid))
+                {
+                    visible = false;
+                    log.Debug("Skipping scheduled restart (livepatching succeeded). RebootHostPlanAction is skipped.");
+
+                    return;
+                }
+            }
             _host.Connection.ExpectDisruption = true;
             try
             {
