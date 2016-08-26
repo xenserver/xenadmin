@@ -294,13 +294,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                         doWorkEventArgs.Cancel = true;
                         return;
                     }
-                    
+
+                    InitializePlanAction(bgw, action);
+
                     bgw.ReportProgress(0, action);
                     action.Run();
+
                     Thread.Sleep(1000);
 
                     bgw.doneActions.Add(action);
-
                     bgw.ReportProgress((int)((1.0 / (double)bgw.AllActions.Count) * 100), action);
                 }
                 catch (Exception e)
@@ -317,6 +319,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                     bgw.ReportProgress(0);
                     break;
                 }
+            }
+        }
+
+        private static void InitializePlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
+        {
+            if (action is IAvoidRestartHostsAware)
+            {
+                var avoidRestartAction = action as IAvoidRestartHostsAware;
+                avoidRestartAction.AvoidRestartHosts = bgw.AvoidRestartHosts;
             }
         }
 

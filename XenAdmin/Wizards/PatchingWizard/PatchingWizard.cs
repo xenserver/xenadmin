@@ -199,6 +199,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (prevPageType == typeof(PatchingWizard_PrecheckPage))
             {
                 PatchingWizard_PatchingPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
+                PatchingWizard_PatchingPage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
+                PatchingWizard_ModePage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
                 PatchingWizard_AutoUpdatingPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
             }
         }
@@ -362,5 +364,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             base.FinishWizard();
         }
+    }
+
+    public enum LivePatchCode
+    {
+        UNKNOWN,
+        PATCH_PRECHECK_LIVEPATCH_COMPLETE,      // An applicable live patch exists for every required component
+        PATCH_PRECHECK_LIVEPATCH_INCOMPLETE,    // An applicable live patch exists but it is not sufficient
+        PATCH_PRECHECK_LIVEPATCH_MISSING,       // There is no applicable live patch
     }
 }

@@ -662,8 +662,19 @@ namespace XenAdmin.TabPages
                 return;
 
             PDSection s = pdSectionUpdates;
+            List<KeyValuePair<String, String>> messages;
 
-            List<KeyValuePair<String, String>> messages = CheckServerUpdates(host);
+            if (Helpers.ElyOrGreater(host))
+            {
+                // As of Ely we use host.patches_requiring_reboot to generate the list of reboot required messages
+                messages = CheckHostPatchesRequiringReboot(host);
+            }
+            else
+            {
+                // For older versions no change to how messages are generated
+                messages = CheckServerUpdates(host);
+            }
+
             if (messages.Count > 0)
             {
                 foreach (KeyValuePair<String, String> kvp in messages)
@@ -671,6 +682,7 @@ namespace XenAdmin.TabPages
                     s.AddEntry(kvp.Key, kvp.Value);
                 }
             }
+
             if (hostAppliedPatches(host) != "")
             {
                 s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
@@ -1716,9 +1728,22 @@ namespace XenAdmin.TabPages
         private List<KeyValuePair<String, String>> CheckPoolUpdate(Pool pool)
         {
             List<KeyValuePair<String, String>> warnings = new List<KeyValuePair<string, string>>();
-            foreach (Host host in xenObject.Connection.Cache.Hosts)
+
+            if (Helpers.ElyOrGreater(pool.Connection))
             {
-                warnings.AddRange(CheckServerUpdates(host));
+                // As of Ely we use CheckHostPatchesRequiringReboot to get reboot messages for a host
+                foreach (Host host in xenObject.Connection.Cache.Hosts)
+                {
+                    warnings.AddRange(CheckHostPatchesRequiringReboot(host));
+                }
+            }
+            else
+            {
+                // Earlier versions use the old server updates method
+                foreach (Host host in xenObject.Connection.Cache.Hosts)
+                {
+                    warnings.AddRange(CheckServerUpdates(host));
+                }
             }
             return warnings;
         }
@@ -1745,23 +1770,47 @@ namespace XenAdmin.TabPages
                 if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
                     && applyTime > bootTime)
                 {
-                    //TODO: Could we come up with a better key string than foopatch on blahhost? Also needs i18
-                    warnings.Add(new KeyValuePair<String, String>(
-                        String.Format("{0} on {1}", patch.Name, host.Name),
-                        String.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name)));
+                    warnings.Add(CreateWarningRow(host, patch));
                 }
                 else if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI)
                     && applyTime > agentStart)
                 {
                     // Actually, it only needs xapi restart, but we have no UI to do that.
-                    warnings.Add(new KeyValuePair<String, String>(
-                        String.Format("{0} on {1}", patch.Name, host.Name),
-                        String.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name)));
+                    warnings.Add(CreateWarningRow(host, patch));
                 }
             }
             return warnings;
         }
 
+        /// <summary>
+        /// Creates a list of warnings for patches that require the host to be rebooted
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        private List<KeyValuePair<String, String>> CheckHostPatchesRequiringReboot(Host host)
+        {
+            var warnings = new List<KeyValuePair<String, String>>();
+            var patchRefs = host.patches_requiring_reboot;
+            foreach (var patchRef in patchRefs)
+            {
+                var patch = host.Connection.Resolve(patchRef);
+                warnings.Add(CreateWarningRow(host, patch));
+            }
+
+            return warnings;
+        }
+
+
+
+        private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_patch patch)
+        {
+            //TODO: Could we come up with a better key string than foopatch on blahhost?
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, patch.Name, host.Name);
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name);
+
+            return new KeyValuePair<string, string>(key, value);
+        }
+ 
         private static string GetUUID(IXenObject o)
         {
             return o.Get("uuid") as String;

@@ -867,6 +867,7 @@
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyXenServerPatchPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\IAvoidRestartCapable.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrechecksOnMultipleHostsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
