@@ -22605,7 +22605,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unnamed Pool.
+        ///   Looks up a localized string similar to Pool.
         /// </summary>
         public static string NEW_POOL {
             get {
