@@ -184,7 +184,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (fileName.EndsWith(UpdateExtension))
                                 SelectedUpdateType = UpdateType.NewRetail;
                             else if (fileName.EndsWith(".iso"))
-                                SelectedUpdateType = UpdateType.NewSuppPack;
+                                SelectedUpdateType = UpdateType.ISO;
                             else
                                 SelectedUpdateType = UpdateType.Existing;
                         }
@@ -401,13 +401,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (downloadUpdateRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewSuppPack
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
                                ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).PathPatch
                                : null;
                 }
                 else if (selectFromDiskRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewSuppPack
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
                               ? fileNameTextBox.Text
                                : null;
                 }
@@ -675,5 +675,5 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
     }        
 
-    public enum UpdateType { NewRetail, Existing, NewSuppPack}
+    public enum UpdateType { NewRetail, Existing, ISO}
 }

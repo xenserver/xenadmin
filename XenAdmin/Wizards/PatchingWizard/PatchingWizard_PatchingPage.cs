@@ -135,13 +135,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 textBoxLog.Text = ManualTextInstructions;
                 
                 List<AsyncAction> actions = new List<AsyncAction>();
-                if (SelectedUpdateType != UpdateType.NewSuppPack)
+                if (SelectedUpdateType != UpdateType.ISO)
                     actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
                 else
                     actionManualMode = new InstallSupplementalPackAction(SuppPackVdis, false);
 
                 actions.Add(actionManualMode);
-                if (RemoveUpdateFile && SelectedUpdateType != UpdateType.NewSuppPack)
+                if (RemoveUpdateFile && SelectedUpdateType != UpdateType.ISO)
                 {
                     foreach (Pool pool in SelectedPools)
                     {
@@ -166,7 +166,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             foreach (Pool pool in SelectedPools)
             {
                 Pool_patch poolPatch = null;
-                if (SelectedUpdateType != UpdateType.NewSuppPack)
+                if (SelectedUpdateType != UpdateType.ISO)
                 {
                     List<Pool_patch> poolPatches = new List<Pool_patch>(pool.Connection.Cache.Pool_patches);
                     poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
@@ -313,7 +313,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PlanAction> CompileActionList(Host host, Pool_patch patch)
         {
-            if (SelectedUpdateType == UpdateType.NewSuppPack)
+            if (SelectedUpdateType == UpdateType.ISO)
                 return CompileSuppPackActionList(host);
 
             List<PlanAction> actions = new List<PlanAction>();
@@ -405,7 +405,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             List<PlanAction> actions = new List<PlanAction>();
             
-            if (SelectedUpdateType != UpdateType.NewSuppPack || SuppPackVdis == null || !SuppPackVdis.ContainsKey(host))
+            if (SelectedUpdateType != UpdateType.ISO || SuppPackVdis == null || !SuppPackVdis.ContainsKey(host))
                 return actions;
             
             List<XenRef<VM>> runningVMs = RunningVMs(host);

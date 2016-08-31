@@ -98,14 +98,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;
                     break;
-                case UpdateType.NewSuppPack:
+                case UpdateType.ISO:
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
                     break;
             }
 
-            if (SelectedUpdateType == UpdateType.NewSuppPack || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
+            if (SelectedUpdateType == UpdateType.ISO || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
             {
                 removeUpdateFileCheckBox.Checked = false;
                 removeUpdateFileCheckBox.Visible = false;

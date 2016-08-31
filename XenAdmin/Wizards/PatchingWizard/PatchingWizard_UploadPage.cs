@@ -176,7 +176,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                                                   SelectedExistingPatch);
                         }
                         break;
-                    case UpdateType.NewSuppPack:
+                    case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
                             action = new UploadSupplementalPackAction(
