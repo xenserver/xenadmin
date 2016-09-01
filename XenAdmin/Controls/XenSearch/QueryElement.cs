@@ -282,7 +282,7 @@ namespace XenAdmin.Controls.XenSearch
 
                 if (CurrentQueryType != null)
                 {
-                    queryTypeComboButton.Text = CurrentQueryType.ToString().Ellipsise(20);
+                    queryTypeComboButton.Text = CurrentQueryType.ToString();
                     CurrentQueryType.SomeThingChanged += queryType_SomeThingChanged;
                     Setup();
                 }
