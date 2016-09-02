@@ -285,16 +285,7 @@ namespace XenAdmin.TabPages
                 var vdi1 = ((VDIRow) dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
                 var vdi2 = ((VDIRow) dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
 
-                var nameCompare = StringUtility.NaturalCompare(vdi1.Name, vdi2.Name);
-                if (nameCompare != 0)
-                {
-                    e.SortResult = nameCompare;
-                }
-                else
-                {
-                    var uuidCompare = String.Compare(vdi1.uuid, vdi2.uuid, StringComparison.Ordinal);
-                    e.SortResult = uuidCompare;
-                }
+                e.SortResult = vdi1.CompareTo(vdi2);
                 e.Handled = true;
                 return;
             }
@@ -311,8 +302,8 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    var uuidCompare = String.Compare(vdi1.uuid, vdi2.uuid, StringComparison.Ordinal);
-                    e.SortResult = uuidCompare;
+                    var refCompare = string.Compare(vdi1.opaque_ref, vdi2.opaque_ref, StringComparison.Ordinal);
+                    e.SortResult = refCompare;
                 }
                 e.Handled = true;
                 return;
