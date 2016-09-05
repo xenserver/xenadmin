@@ -6928,22 +6928,6 @@ namespace XenAPI
         Response<string>
         async_pvs_site_set_name(string session, string _pvs_site, string _value);
 
-        [XmlRpcMethod("PVS_site.add_cache_storage")]
-        Response<string>
-        pvs_site_add_cache_storage(string session, string _pvs_site, string _value);
-
-        [XmlRpcMethod("Async.PVS_site.add_cache_storage")]
-        Response<string>
-        async_pvs_site_add_cache_storage(string session, string _pvs_site, string _value);
-
-        [XmlRpcMethod("PVS_site.remove_cache_storage")]
-        Response<string>
-        pvs_site_remove_cache_storage(string session, string _pvs_site, string _value);
-
-        [XmlRpcMethod("Async.PVS_site.remove_cache_storage")]
-        Response<string>
-        async_pvs_site_remove_cache_storage(string session, string _pvs_site, string _value);
-
         [XmlRpcMethod("PVS_site.get_all")]
         Response<string []>
         pvs_site_get_all(string session);
@@ -7107,6 +7091,10 @@ namespace XenAPI
         [XmlRpcMethod("PVS_cache_storage.get_size")]
         Response<string>
         pvs_cache_storage_get_size(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_all")]
+        Response<string []>
+        pvs_cache_storage_get_all(string session);
 
         [XmlRpcMethod("PVS_cache_storage.get_all_records")]
         Response<Object>

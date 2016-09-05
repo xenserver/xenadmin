@@ -49,7 +49,7 @@ namespace XenAPI
 
         public PVS_site(string uuid,
             string name,
-            List<XenRef<SR>> cache_storage,
+            List<XenRef<PVS_cache_storage>> cache_storage,
             List<XenRef<PVS_server>> servers,
             List<XenRef<PVS_proxy>> proxies)
         {
@@ -82,7 +82,7 @@ namespace XenAPI
         {
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
             name = proxy.name == null ? null : (string)proxy.name;
-            cache_storage = proxy.cache_storage == null ? null : XenRef<SR>.Create(proxy.cache_storage);
+            cache_storage = proxy.cache_storage == null ? null : XenRef<PVS_cache_storage>.Create(proxy.cache_storage);
             servers = proxy.servers == null ? null : XenRef<PVS_server>.Create(proxy.servers);
             proxies = proxy.proxies == null ? null : XenRef<PVS_proxy>.Create(proxy.proxies);
         }
@@ -106,7 +106,7 @@ namespace XenAPI
         {
             uuid = Marshalling.ParseString(table, "uuid");
             name = Marshalling.ParseString(table, "name");
-            cache_storage = Marshalling.ParseSetRef<SR>(table, "cache_storage");
+            cache_storage = Marshalling.ParseSetRef<PVS_cache_storage>(table, "cache_storage");
             servers = Marshalling.ParseSetRef<PVS_server>(table, "servers");
             proxies = Marshalling.ParseSetRef<PVS_proxy>(table, "proxies");
         }
@@ -192,9 +192,9 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        public static List<XenRef<SR>> get_cache_storage(Session session, string _pvs_site)
+        public static List<XenRef<PVS_cache_storage>> get_cache_storage(Session session, string _pvs_site)
         {
-            return XenRef<SR>.Create(session.proxy.pvs_site_get_cache_storage(session.uuid, (_pvs_site != null) ? _pvs_site : "").parse());
+            return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_site_get_cache_storage(session.uuid, (_pvs_site != null) ? _pvs_site : "").parse());
         }
 
         /// <summary>
@@ -288,54 +288,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Add a cache SR for the proxies on the site
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        /// <param name="_value">SR to be used</param>
-        public static void add_cache_storage(Session session, string _pvs_site, string _value)
-        {
-            session.proxy.pvs_site_add_cache_storage(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse();
-        }
-
-        /// <summary>
-        /// Add a cache SR for the proxies on the site
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        /// <param name="_value">SR to be used</param>
-        public static XenRef<Task> async_add_cache_storage(Session session, string _pvs_site, string _value)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pvs_site_add_cache_storage(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse());
-        }
-
-        /// <summary>
-        /// Remove a cache SR for the proxies on the site
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        /// <param name="_value">SR to be removed</param>
-        public static void remove_cache_storage(Session session, string _pvs_site, string _value)
-        {
-            session.proxy.pvs_site_remove_cache_storage(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse();
-        }
-
-        /// <summary>
-        /// Remove a cache SR for the proxies on the site
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        /// <param name="_value">SR to be removed</param>
-        public static XenRef<Task> async_remove_cache_storage(Session session, string _pvs_site, string _value)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pvs_site_remove_cache_storage(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse());
-        }
-
-        /// <summary>
         /// Return a list of all the PVS_sites known to the system.
         /// Experimental. First published in .
         /// </summary>
@@ -396,7 +348,7 @@ namespace XenAPI
         /// The SR used by PVS proxy for the cache
         /// Experimental. First published in .
         /// </summary>
-        public virtual List<XenRef<SR>> cache_storage
+        public virtual List<XenRef<PVS_cache_storage>> cache_storage
         {
             get { return _cache_storage; }
             set
@@ -409,7 +361,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<SR>> _cache_storage;
+        private List<XenRef<PVS_cache_storage>> _cache_storage;
 
         /// <summary>
         /// The set of PVS servers in the site

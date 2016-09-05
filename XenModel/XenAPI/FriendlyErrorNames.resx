@@ -1526,9 +1526,6 @@ Authorized Roles: {1}</value>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>The SR operation cannot be performed because the SR is not empty.</value>
   </data>
-  <data name="SR_NOT_IN_PVS_SITE" xml:space="preserve">
-    <value>The SR is not associated with the site.</value>
-  </data>
   <data name="SR_NOT_SHARABLE" xml:space="preserve">
     <value>SR is not sharable</value>
   </data>

@@ -241,6 +241,25 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Return a list of all the PVS_cache_storages known to the system.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static List<XenRef<PVS_cache_storage>> get_all(Session session)
+        {
+            return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_get_all(session.uuid).parse());
+        }
+
+        /// <summary>
+        /// Get all the PVS_cache_storage Records at once, in a single XML RPC call
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static Dictionary<XenRef<PVS_cache_storage>, PVS_cache_storage> get_all_records(Session session)
+        {
+            return XenRef<PVS_cache_storage>.Create<Proxy_PVS_cache_storage>(session.proxy.pvs_cache_storage_get_all_records(session.uuid).parse());
+        }
+
+        /// <summary>
         /// Unique identifier/object reference
         /// Experimental. First published in .
         /// </summary>

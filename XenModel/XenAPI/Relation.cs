@@ -97,6 +97,7 @@ namespace XenAPI
             });
 
             relations.Add(typeof(Proxy_PVS_site), new Relation[] {
+                new Relation("cache_storage", "PVS_cache_storage", "site"),
                 new Relation("proxies", "PVS_proxy", "site"),
                 new Relation("servers", "PVS_server", "site"),
             });
