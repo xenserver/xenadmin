@@ -182,17 +182,18 @@ namespace XenAdmin.Dialogs
             long newNtol = assignPriorities.Ntol;                         
 
             // User has configured ntol to be zero. Check this is what they want (since it is practically useless).
-            DialogResult dialogResult;
-            using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY, Messages.HIGH_AVAILABILITY),
-                    ThreeButtonDialog.ButtonYes,
-                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+            if (newNtol == 0)
             {
-                dialogResult = dlg.ShowDialog(this);
-            }
-            if (newNtol == 0 && dialogResult == DialogResult.No)
-            {
-                return;
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY, Messages.HIGH_AVAILABILITY),
+                        ThreeButtonDialog.ButtonYes,
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult == DialogResult.No)
+                    return;
             }
 
             if (assignPriorities.ChangesMade || newNtol != originalNtol)
