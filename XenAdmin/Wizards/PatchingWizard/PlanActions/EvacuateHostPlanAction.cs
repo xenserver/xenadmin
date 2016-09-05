@@ -66,13 +66,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 if (hostObject.patches_requiring_reboot.Count > 0)
                 {
-                    AvoidRestartHosts.Remove(hostObject.uuid);
+                    if (AvoidRestartHosts != null)
+                        AvoidRestartHosts.Remove(hostObject.uuid);
 
                     log.DebugFormat("Restart is needed now (hostObject.patches_requiring_reboot has {0} items in it). Evacuating now. Will restart after.", hostObject.patches_requiring_reboot.Count);
                 }
                 else
                 {
-                    if (!AvoidRestartHosts.Contains(hostObject.uuid))
+                    if (AvoidRestartHosts != null && !AvoidRestartHosts.Contains(hostObject.uuid))
                     {
                         AvoidRestartHosts.Add(hostObject.uuid);
                     }
