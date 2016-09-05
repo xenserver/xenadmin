@@ -29,10 +29,12 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Core;
 using XenAPI;
+using System.Linq;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -40,18 +42,13 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public static string ModeRetailPatch(List<Host> servers, Pool_patch patch, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
         {
-            return Build(servers, patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>(), LivePatchCodesByHost);
+            return Build(servers.Where(h => patch != null && patch.AppliedOn(h) == DateTime.MaxValue).ToList(), patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>(), LivePatchCodesByHost);
         }
 
         public static string ModeSuppPack(List<Host> servers)
         {
             List<after_apply_guidance> guidance = new List<after_apply_guidance> { after_apply_guidance.restartHost };
-            return Build(servers, guidance);
-        }
-
-        private static string Build(List<Host> servers, List<after_apply_guidance> guidance)
-        {
-            return Build(servers, guidance);
+            return Build(servers, guidance, new Dictionary<string, LivePatchCode>());
         }
 
         private static string Build(List<Host> servers, List<after_apply_guidance> guidance, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
@@ -62,7 +59,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (guide == after_apply_guidance.restartHost
                     && (LivePatchCodesByHost != null && servers.TrueForAll(h => LivePatchCodesByHost.ContainsKey(h.uuid) && LivePatchCodesByHost[h.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)))
-                    break;
+                    continue;
 
                 sbLog.AppendLine(GetGuideMessage(guide));
 
@@ -72,7 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case after_apply_guidance.restartXAPI:
                         foreach (Host host in servers)
                         {
-                            if (LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)
+                            if (guide == after_apply_guidance.restartHost && LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)
                                 continue;
 
                             if (host.IsMaster())
