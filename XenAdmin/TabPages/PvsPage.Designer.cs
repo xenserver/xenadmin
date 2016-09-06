@@ -37,7 +37,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,13 +47,19 @@
             this.ColumnSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConfiguration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSRs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.ConfigureButton = new System.Windows.Forms.Button();
             this.ViewPvsSitesButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.enableButton = new System.Windows.Forms.Button();
+            this.disableButton = new System.Windows.Forms.Button();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -65,21 +70,13 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewVms, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewSites, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.ConfigureButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.ViewPvsSitesButton, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.tableLayoutPanel1.SetColumnSpan(this.button2, 2);
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // dataGridViewVms
             // 
@@ -92,7 +89,6 @@
             this.columnCurrentlyCached,
             this.ColumnSR,
             this.ColumnPrepopulation});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewVms, 2);
             resources.ApplyResources(this.dataGridViewVms, "dataGridViewVms");
             this.dataGridViewVms.MultiSelect = true;
             this.dataGridViewVms.Name = "dataGridViewVms";
@@ -141,7 +137,6 @@
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
-            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.Name = "label2";
             // 
             // dataGridViewSites
@@ -154,7 +149,6 @@
             this.ColumnSite,
             this.ColumnConfiguration,
             this.ColumnSRs});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewSites, 2);
             resources.ApplyResources(this.dataGridViewSites, "dataGridViewSites");
             this.dataGridViewSites.MultiSelect = true;
             this.dataGridViewSites.Name = "dataGridViewSites";
@@ -191,6 +185,18 @@
             this.ColumnSRs.Name = "ColumnSRs";
             this.ColumnSRs.ReadOnly = true;
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.ConfigureButton);
+            this.panel1.Controls.Add(this.ViewPvsSitesButton);
+            this.panel1.Name = "panel1";
+            // 
             // ConfigureButton
             // 
             resources.ApplyResources(this.ConfigureButton, "ConfigureButton");
@@ -204,11 +210,24 @@
             this.ViewPvsSitesButton.UseVisualStyleBackColor = true;
             this.ViewPvsSitesButton.Click += new System.EventHandler(this.ViewPvsSitesButton_Click);
             // 
-            // label1
+            // panel2
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.enableButton);
+            this.panel2.Controls.Add(this.disableButton);
+            this.panel2.Name = "panel2";
+            // 
+            // enableButton
+            // 
+            resources.ApplyResources(this.enableButton, "enableButton");
+            this.enableButton.Name = "enableButton";
+            this.enableButton.UseVisualStyleBackColor = true;
+            // 
+            // disableButton
+            // 
+            resources.ApplyResources(this.disableButton, "disableButton");
+            this.disableButton.Name = "disableButton";
+            this.disableButton.UseVisualStyleBackColor = true;
             // 
             // PvsPage
             // 
@@ -220,6 +239,10 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,7 +256,6 @@
         public System.Windows.Forms.Button ViewPvsSitesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.Button button2;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
@@ -242,5 +264,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConfiguration;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRs;
+        public System.Windows.Forms.Button disableButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.Button enableButton;
     }
 }
