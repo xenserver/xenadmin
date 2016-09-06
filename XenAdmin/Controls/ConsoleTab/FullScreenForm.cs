@@ -29,26 +29,70 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.ConsoleView;
+
 
 namespace XenAdmin.Controls.ConsoleTab
 {
     public partial class FullScreenForm : Form
     {
+        private Control _referenceControl;
+
         public FullScreenForm()
         {
             InitializeComponent();
         }
 
-        public FullScreenForm(XSVNCScreen VNCScreen)
+        public FullScreenForm(Control referenceControl)
         {
             InitializeComponent();
-            connectionBar1.SelectedScreen = VNCScreen;
-            if (XenAdmin.Properties.Settings.Default.PinConnectionBar)
-                connectionBar1.ShowPinned(); 
-            else 
+            _referenceControl = referenceControl;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            Screen screen = Screen.FromControl(_referenceControl);
+            StartPosition = FormStartPosition.Manual;
+            Location = screen.WorkingArea.Location;
+            Size = screen.Bounds.Size;
+            WindowState = FormWindowState.Maximized;
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            if (Properties.Settings.Default.PinConnectionBar)
+                connectionBar1.ShowPinned();
+            else
                 connectionBar1.HideAnimated();
+        }
+
+        public void AttachVncScreen(XSVNCScreen screen)
+        {
+            screen.Parent = contentPanel;
+            SetConnectionName(screen.ConnectionName);
+            screen.ConnectionNameChanged += SetConnectionName;
+        }
+
+        public void DetachVncScreen(XSVNCScreen screen)
+        {
+            screen.ConnectionNameChanged -= SetConnectionName;
+        }
+
+        public Size GetContentSize()
+        {
+            return contentPanel.Size;
+        }
+
+        private void SetConnectionName(string connectionName)
+        {
+            connectionBar1.ConnectionName = connectionName;
         }
     }
 }

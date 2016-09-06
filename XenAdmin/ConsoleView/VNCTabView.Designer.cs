@@ -24,6 +24,7 @@ namespace XenAdmin.ConsoleView
 
             if (disposing && vncScreen != null && !vncScreen.IsDisposed)
             {
+                vncScreen.GpuStatusChanged -= ShowGpuWarningIfRequired;
                 vncScreen.Dispose();
             }
 
