@@ -258,10 +258,10 @@
   <data name="ACTION_DESTROY_BOND_TITLE" xml:space="preserve">
     <value>Destroying {0}</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
-    <value>Detatching storage items...</value>
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
+    <value>Detaching storage items...</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
@@ -2347,7 +2347,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Snapshot disks cannot be moved</value>
   </data>
   <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>You must detatch this virtual disk before it can be moved.</value>
+    <value>You must detach this virtual disk before it can be moved.</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
@@ -3831,14 +3831,14 @@ This will also delete its subfolders.</value>
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
     <value>[XenCenter] has detected that an SR already exists on this LUN. This SR is not currently in use by '{0}',  would you like to attach it?</value>
   </data>
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
+    <value>&amp;Detach all</value>
+  </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>&amp;Detach</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>Details</value>
-  </data>
-  <data name="DETATCH_ALL_BUTTON_LABEL" xml:space="preserve">
-    <value>&amp;Detatch all</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
     <value>Device</value>
@@ -4717,11 +4717,11 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_TITLE" xml:space="preserve">
     <value>Error Destroying Storage Items</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_MESSAGE" xml:space="preserve">
-    <value>The following virtual disks could not be detatched:</value>
+  <data name="ERROR_DETACHING_VDIS_MESSAGE" xml:space="preserve">
+    <value>The following virtual disks could not be detached:</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_TITLE" xml:space="preserve">
-    <value>Error Detatching Virtual Disks</value>
+  <data name="ERROR_DETACHING_VDIS_TITLE" xml:space="preserve">
+    <value>Error Detaching Virtual Disks</value>
   </data>
   <data name="ERROR_DIALOG_ADD_TO_POOL_TEXT" xml:space="preserve">
     <value>The following servers could not be added to the pool '{0}':</value>
@@ -7461,7 +7461,7 @@ Are you sure you want to detach this storage repository?</value>
   <data name="MESSAGEBOX_DETACH_VD_TITLE" xml:space="preserve">
     <value>Detach virtual disk</value>
   </data>
-  <data name="MESSAGEBOX_DETATCH_VD_TITLE_MUTLIPLE" xml:space="preserve">
+  <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>Detach Multiple Virtual Disks</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
@@ -7688,7 +7688,7 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   <data name="MULTI_VDI_DELETE_WARNING" xml:space="preserve">
     <value>You are about to delete multiple virtual disks. Are you sure you wish to proceed?</value>
   </data>
-  <data name="MULTI_VDI_DETATCH_WARNING" xml:space="preserve">
+  <data name="MULTI_VDI_DETACH_WARNING" xml:space="preserve">
     <value>You are about to detach multiple virtual disks, are you sure you wish to proceed?</value>
   </data>
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">

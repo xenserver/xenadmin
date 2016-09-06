@@ -258,10 +258,10 @@
   <data name="ACTION_DESTROY_BOND_TITLE" xml:space="preserve">
     <value>{0} の破棄</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
     <value>ストレージの接続を解除しています...</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>複数ストレージの接続解除</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
@@ -3799,7 +3799,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DETAILS" xml:space="preserve">
     <value>詳細</value>
   </data>
-  <data name="DETATCH_ALL_BUTTON_LABEL" xml:space="preserve">
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
     <value>すべて接続解除(&amp;D)</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
@@ -4679,10 +4679,10 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_TITLE" xml:space="preserve">
     <value>ストレージの破棄エラー</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_MESSAGE" xml:space="preserve">
+  <data name="ERROR_DETACHING_VDIS_MESSAGE" xml:space="preserve">
     <value>以下の仮想ディスクを接続解除できません。</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_TITLE" xml:space="preserve">
+  <data name="ERROR_DETACHING_VDIS_TITLE" xml:space="preserve">
     <value>仮想ディスクの接続解除エラー</value>
   </data>
   <data name="ERROR_DIALOG_ADD_TO_POOL_TEXT" xml:space="preserve">
@@ -7384,7 +7384,7 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DETACH_VD_TITLE" xml:space="preserve">
     <value>仮想ディスクの接続解除</value>
   </data>
-  <data name="MESSAGEBOX_DETATCH_VD_TITLE_MUTLIPLE" xml:space="preserve">
+  <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>複数仮想ディスクの接続解除</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
@@ -7611,7 +7611,7 @@ SCSI ID: {2}
   <data name="MULTI_VDI_DELETE_WARNING" xml:space="preserve">
     <value>複数の仮想ディスクが削除されます。続行しますか?</value>
   </data>
-  <data name="MULTI_VDI_DETATCH_WARNING" xml:space="preserve">
+  <data name="MULTI_VDI_DETACH_WARNING" xml:space="preserve">
     <value>複数の仮想ディスクが接続解除されます。続行しますか?</value>
   </data>
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">

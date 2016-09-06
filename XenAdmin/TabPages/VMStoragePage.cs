@@ -345,7 +345,7 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                // this is the default cause in the mixed attached/detatched scenario. We try to activate all the selection
+                // this is the default cause in the mixed attached/detached scenario. We try to activate all the selection
                 // The command error reports afterwards about the ones which are already attached
                 DeactivateButton.Text = Messages.ACTIVATE;
                 activationCmd = new ActivateVBDCommand(Program.MainWindow, selectedVBDs);
