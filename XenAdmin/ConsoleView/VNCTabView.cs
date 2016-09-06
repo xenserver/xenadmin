@@ -1029,8 +1029,8 @@ namespace XenAdmin.ConsoleView
                 vncScreen.DisplayFocusRectangle = false;
 
                 fullscreenHint = new FullScreenHint();
-                fullscreenHint.Show(fullscreenForm);
                 fullscreenForm.Show();
+                fullscreenHint.Show(fullscreenForm);
 
                 FocusVNC();
                 vncScreen.CaptureKeyboardAndMouse();

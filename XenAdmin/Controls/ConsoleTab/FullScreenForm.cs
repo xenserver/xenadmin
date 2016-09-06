@@ -60,6 +60,7 @@ namespace XenAdmin.Controls.ConsoleTab
             StartPosition = FormStartPosition.Manual;
             Location = screen.WorkingArea.Location;
             Size = screen.Bounds.Size;
+            WindowState = FormWindowState.Maximized;
         }
 
         protected override void OnShown(EventArgs e)

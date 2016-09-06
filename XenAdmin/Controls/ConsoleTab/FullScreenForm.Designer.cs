@@ -37,7 +37,6 @@
             // 
             resources.ApplyResources(this.connectionBar1, "connectionBar1");
             this.connectionBar1.BackColor = System.Drawing.Color.Transparent;
-            this.connectionBar1.MinimumSize = new System.Drawing.Size(298, 24);
             this.connectionBar1.Name = "connectionBar1";
             this.connectionBar1.TabStop = false;
             // 
@@ -61,7 +60,6 @@
             this.Name = "FullScreenForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }
