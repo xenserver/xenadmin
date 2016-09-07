@@ -116,6 +116,7 @@
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\ConvertToThinSRCommand.cs" />
+    <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
     <Compile Include="Commands\PauseDockerContainerCommand.cs" />
@@ -227,6 +228,12 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EnablePvsReadCachingDialog.Designer.cs">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\PvsSiteDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1436,6 +1443,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
       <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.resx">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.zh-CN.resx">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>

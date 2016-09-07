@@ -1865,4 +1865,7 @@
   <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
     <value>Nutanix ISO</value>
   </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS proxy setup failed</value>
+  </data>
 </root>

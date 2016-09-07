@@ -284,6 +284,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.enablePVSReadcachingToolStripMenuItem = new CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1305,6 +1306,7 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem,
             this.convertToTemplateToolStripMenuItem,
             this.exportToolStripMenuItem,
+            this.enablePVSReadcachingToolStripMenuItem,
             this.toolStripMenuItem12,
             this.installToolsToolStripMenuItem,
             this.sendCtrlAltDelToolStripMenuItem,
@@ -1869,6 +1871,18 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
+            // enablePVSReadcachingToolStripMenuItem
+            //
+            this.enablePVSReadcachingToolStripMenuItem.Command = new EnablePvsReadCachingCommand();
+            // TODO: need an image?
+            this.enablePVSReadcachingToolStripMenuItem.Name = "enablePVSReadcachingToolStripMenuItem";
+            resources.ApplyResources(this.enablePVSReadcachingToolStripMenuItem, "enablePVSReadcachingToolStripMenuItem");
+
+            this.VMPropertiesToolStripMenuItem.Command = new XenAdmin.Commands.VMPropertiesCommand();
+            this.VMPropertiesToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.edit_16;
+            this.VMPropertiesToolStripMenuItem.Name = "VMPropertiesToolStripMenuItem";
+            resources.ApplyResources(this.VMPropertiesToolStripMenuItem, "VMPropertiesToolStripMenuItem");
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2134,6 +2148,7 @@ namespace XenAdmin
         private TabPage TabPageCvmConsole;
         private TabPage TabPagePvs;
         private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
+        private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
     }
 
 }

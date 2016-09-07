@@ -119,9 +119,11 @@ namespace XenAdmin.TabPages
                 
                 UnregisterVMHandlers();
                 dataGridViewVms.Rows.Clear();
-                
-                foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
-                    dataGridViewVms.Rows.Add(NewVmRow(pvsProxy));
+
+               
+                //foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
+                foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
+                    dataGridViewVms.Rows.Add(vm);
 
                 if (dataGridViewVms.SelectedRows.Count == 0 && dataGridViewVms.Rows.Count > 0)
                     dataGridViewVms.Rows[0].Selected = true;
@@ -211,6 +213,23 @@ namespace XenAdmin.TabPages
         private void ViewPvsSitesButton_Click(object sender, EventArgs e)
         {
             Program.MainWindow.ShowPerConnectionWizard(connection, new PvsSiteDialog(connection));
+        }
+
+        private void enableButton_Click(object sender, EventArgs e)
+        {
+            var selectedRows = dataGridViewVms.SelectedRows;
+
+            var selectedVMs = new List<VM>();
+            foreach (var row in selectedRows)
+            {
+                var rowObject = (DataGridViewRow) row;
+                selectedVMs.Add((VM) rowObject.Tag);
+            }
+
+            using (var dlg = new EnablePvsReadCachingDialog(selectedVMs))
+            {
+                dlg.ShowDialog(Program.MainWindow); // TODO: use result
+            }
         }
     }
 }

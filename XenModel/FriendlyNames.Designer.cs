@@ -4059,7 +4059,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool &apos;{0}&apos; failed to retrieve placement recommendations from WLB for VM &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Pool &apos;{0}&apos; failed to retrieve placement recommendations from WLB for &apos;{1}&apos;..
         /// </summary>
         public static string Message_body_wlb_consultation_failed {
             get {
@@ -4622,6 +4622,15 @@ namespace XenAdmin {
         public static string Message_name_pool_master_transition {
             get {
                 return ResourceManager.GetString("Message.name-pool_master_transition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS proxy setup failed.
+        /// </summary>
+        public static string Message_name_pvs_proxy_setup_failed {
+            get {
+                return ResourceManager.GetString("Message.name-pvs_proxy_setup_failed", resourceCulture);
             }
         }
         

@@ -28,13 +28,28 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+using System;
+
 namespace XenAPI
 {
-    public partial class PVS_site : XenObject<PVS_site>
+    public partial class PVS_site : XenObject<PVS_site>, IEquatable<PVS_site>
     {
         public override string Name
         {
             get { return name; }
         }
+
+        #region IEquatable<PVS_site> Members
+
+        /// <summary>
+        /// Indicates whether the current object is equal to the specified object. This calls the implementation from XenObject.
+        /// This implementation is required for ToStringWrapper.
+        /// </summary>
+        public bool Equals(PVS_site other)
+        {
+            return base.Equals(other);
+        }
+
+        #endregion
     }
 }
