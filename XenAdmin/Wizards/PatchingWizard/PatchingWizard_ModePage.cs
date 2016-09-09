@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
@@ -46,7 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public PatchingWizard_ModePage()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         public override string Text
@@ -86,11 +87,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             textBoxLog.Clear();
 
-            
-            var anyPoolForbidsAutoRestart = AnyPoolForbidsAutoRestart();
-            var patchRequiresReboot = PatchRequiresReboot();
-
-            var automaticDisabled = anyPoolForbidsAutoRestart && patchRequiresReboot;
+            var unknownType = false;
 
             switch (SelectedUpdateType)
             {
@@ -102,19 +99,30 @@ namespace XenAdmin.Wizards.PatchingWizard
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
                     break;
                 default:
-                    automaticDisabled = true;
+                    unknownType = true;
                     break;
             }
+
+            var anyPoolForbidsAutoRestart = AnyPoolForbidsAutoRestart();
+            var patchRequiresReboot = PatchRequiresReboot();
+
+            var automaticDisabled = unknownType || (anyPoolForbidsAutoRestart && patchRequiresReboot);
 
             if (automaticDisabled)
             {
                 AutomaticRadioButton.Checked = false;
                 AutomaticRadioButton.Enabled = false;
+
+                ManualRadioButton.Checked = true;
+
+                allowRadioButtonContainer.SetToolTip(Messages.POOL_FORBIDS_AUTOMATIC_RESTARTS);
             }
             else
             {
                 AutomaticRadioButton.Enabled = true;
                 AutomaticRadioButton.Checked = true;
+
+                ManualRadioButton.Checked = false;
             }
 
             if (SelectedUpdateType == UpdateType.NewSuppPack || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
@@ -177,7 +185,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             UpdateEnablement();
         }
 
-        //Check for pool:other-config:hci-forbid-update-auto-restart setting
         private bool AnyPoolForbidsAutoRestart()
         {
             var poolForbidRestartKey = "XenCenter.CustomFields.hci-forbid-update-auto-restart";
@@ -197,20 +204,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool PatchRequiresReboot()
         {
-            var guidance = Patch.after_apply_guidance ?? new List<after_apply_guidance>();
-
-            foreach (var guide in guidance)
-            {
-                switch (guide)
-                {
-                    case after_apply_guidance.restartHost:
-                        return true;
-                    case after_apply_guidance.restartXAPI:
-                        return true;
-                }
-            }
-
-            return false; // no host restart needed
+            return !textBoxLog.Text.Equals(Messages.PATCHINGWIZARD_MODEPAGE_NOACTION);
         }
             
 

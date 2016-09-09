@@ -185,6 +185,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
 
+            var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
+
             if (IsInAutomaticMode)
             {
                 var pool = Helpers.GetPool(host.Connection);
@@ -234,12 +236,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
-                // if pool forbids automatic updates with other_config key (Neptune project)
-                // TODO: can poolOfOne have these keys?
-                if (pool != null && PoolForbidsAutomaticUpdates(pool))
+                
+                if (poolOfOne != null && PoolForbidsAutomaticUpdates(poolOfOne))
                 {
                     row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES; // TODO: this message needs changing
+                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES;
                     return;
                 }
 
@@ -256,7 +257,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 selectedHosts = FileFromDiskAlert.DistinctHosts;
             }
 
-            Pool poolOfOne = Helpers.GetPoolOfOne(host.Connection);
             if (poolOfOne != null && poolOfOne.IsPatchingForbidden)
             {
                 row.Enabled = false;

@@ -27028,7 +27028,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool forbids automatic updates. (TODO: Neptune message).
+        ///   Looks up a localized string similar to Automatic post-update tasks are not supported for at least one server to be updated..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_RESTARTS {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_RESTARTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic updates are not supported for this server..
         /// </summary>
         public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
             get {
