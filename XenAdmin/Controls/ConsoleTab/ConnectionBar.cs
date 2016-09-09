@@ -46,7 +46,7 @@ namespace XenAdmin.Controls.ConsoleTab
 
         private readonly Timer timer = new Timer();
 
-        private XSVNCScreen _selectedScreen;
+        private string _connectionName;
 
         public ConnectionBar()
         {
@@ -56,42 +56,34 @@ namespace XenAdmin.Controls.ConsoleTab
             AttachMouseOnChildren(this);
         }
 
-        public XSVNCScreen SelectedScreen
+        public string ConnectionName
         {
             set
             {
-                _selectedScreen = value;
+                _connectionName = value;
                 DisplayConnectionName();
             }
         }
 
         private void DisplayConnectionName()
         {
-            if (_selectedScreen == null) //screen not assigned yet
+            if (string.IsNullOrEmpty(_connectionName))
                 return;
-
-            string connectionName;
-            if (_selectedScreen.Source.IsControlDomainZero)
-                connectionName = _selectedScreen.Source.AffinityServerString;
-            else if (_selectedScreen.Source.is_control_domain)
-                connectionName = string.Format(Messages.CONSOLE_HOST_NUTANIX, _selectedScreen.Source.AffinityServerString);
-            else
-                connectionName = _selectedScreen.Source.Name;
 
             using (Graphics g = toolStrip1.CreateGraphics())
             {
-                int width = Drawing.MeasureText(g, connectionName, labelConnection.Font, TextFormatFlags.NoPadding).Width;
+                int width = Drawing.MeasureText(g, _connectionName, labelConnection.Font, TextFormatFlags.NoPadding).Width;
                 if (width > labelConnection.ContentRectangle.Width)
                 {
-                    labelConnection.ToolTipText = connectionName;
-                    connectionName = connectionName.Ellipsise(labelConnection.ContentRectangle, labelConnection.Font);
+                    labelConnection.ToolTipText = _connectionName;
+                    labelConnection.Text = _connectionName.Ellipsise(labelConnection.ContentRectangle, labelConnection.Font);
                 }
                 else
                 {
                     labelConnection.ToolTipText = string.Empty;
+                    labelConnection.Text = _connectionName;
                 }
             }
-            labelConnection.Text = connectionName;
         }
 
         private void AttachMouseOnChildren(Control control)

@@ -51,6 +51,8 @@ namespace XenAdmin.TabPages
         private SR sr;
         private readonly DataGridViewColumn sizeColumn;
         private readonly DataGridViewColumn storageLinkVolumeColumn;
+        private readonly DataGridViewColumn nameColumn;
+        private readonly DataGridViewColumn descriptionColumn;
         private bool rebuildRequired;
 
         private readonly VDIsDataGridViewBuilder dataGridViewBuilder;
@@ -61,6 +63,9 @@ namespace XenAdmin.TabPages
 
             storageLinkVolumeColumn = ColumnVolume;
             sizeColumn = ColumnSize;
+            nameColumn = ColumnName;
+            descriptionColumn = ColumnDesc;
+
             for (int i = 0; i < 5; i++)
             {
                 dataGridViewVDIs.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
@@ -275,6 +280,35 @@ namespace XenAdmin.TabPages
         #region datagridviewevents
         void DataGridViewObject_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
+            if (e.Column.Index == nameColumn.Index)
+            {
+                var vdi1 = ((VDIRow) dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
+                var vdi2 = ((VDIRow) dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
+
+                e.SortResult = vdi1.CompareTo(vdi2);
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Column.Index == descriptionColumn.Index)
+            {
+                var vdi1 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
+                var vdi2 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
+
+                var descCompare = StringUtility.NaturalCompare(vdi1.Description, vdi2.Description);
+                if (descCompare != 0)
+                {
+                    e.SortResult = descCompare;
+                }
+                else
+                {
+                    var refCompare = string.Compare(vdi1.opaque_ref, vdi2.opaque_ref, StringComparison.Ordinal);
+                    e.SortResult = refCompare;
+                }
+                e.Handled = true;
+                return;
+            }
+
             if (e.Column.Index == sizeColumn.Index)
             {
                 VDI vdi1 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
