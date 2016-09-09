@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private static string Build(List<Host> servers, List<after_apply_guidance> guidance)
         {
-            return Build(servers, guidance);
+            return Build(servers, guidance, new Dictionary<string, LivePatchCode>());
         }
 
         private static string Build(List<Host> servers, List<after_apply_guidance> guidance, Dictionary<string, LivePatchCode> LivePatchCodesByHost)

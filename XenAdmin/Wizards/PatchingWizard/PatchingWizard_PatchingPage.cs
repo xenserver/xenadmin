@@ -177,6 +177,31 @@ namespace XenAdmin.Wizards.PatchingWizard
                                                      });
                 }
 
+                if (SelectedUpdateType == UpdateType.ISO && AllServersElyOrGreater())
+                {
+                    // new ISOs
+                    foreach (var hostVdiPair in SuppPackVdis)
+                    {
+                        var host = hostVdiPair.Key;
+                        var vdi = hostVdiPair.Value;
+
+                        var poolUpdate = Pool_update.introduce(pool.Connection.Session, vdi.opaque_ref);
+                        try
+                        {
+
+                            Pool_update.apply(pool.Connection.Session, poolUpdate.opaque_ref, host.opaque_ref);
+                        }
+                        catch (Failure F)
+                        {
+                            
+                        }
+                        finally
+                        {
+                            Pool_update.pool_clean(host.Connection.Session, poolUpdate);
+                        }
+                    }
+                }
+
                 List<Host> poolHosts = new List<Host>(pool.Connection.Cache.Hosts);
                 Host master = SelectedServers.Find(host => host.IsMaster() && poolHosts.Contains(host));
                 if (master != null && poolPatch != null && poolPatch.AppliedOn(master) == DateTime.MaxValue)
@@ -421,6 +446,18 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #endregion
+
+        private bool AllServersElyOrGreater()
+        {
+            foreach (var server in SelectedServers)
+            {
+                if (!Helpers.ElyOrGreater(server.Connection))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         private void FinishedWithErrors(Exception exception)
         {

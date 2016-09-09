@@ -1244,14 +1244,6 @@ namespace XenAPI
         Response<string>
         async_pool_update_pool_apply(string session, string _pool_update);
 
-        [XmlRpcMethod("pool_update.clean")]
-        Response<string>
-        pool_update_clean(string session, string _pool_update, string _host);
-
-        [XmlRpcMethod("Async.pool_update.clean")]
-        Response<string>
-        async_pool_update_clean(string session, string _pool_update, string _host);
-
         [XmlRpcMethod("pool_update.pool_clean")]
         Response<string>
         pool_update_pool_clean(string session, string _pool_update);
@@ -1267,22 +1259,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool_update.destroy")]
         Response<string>
         async_pool_update_destroy(string session, string _pool_update);
-
-        [XmlRpcMethod("pool_update.attach")]
-        Response<string>
-        pool_update_attach(string session, string _pool_update, string _host);
-
-        [XmlRpcMethod("Async.pool_update.attach")]
-        Response<string>
-        async_pool_update_attach(string session, string _pool_update, string _host);
-
-        [XmlRpcMethod("pool_update.detach")]
-        Response<string>
-        pool_update_detach(string session, string _pool_update, string _host);
-
-        [XmlRpcMethod("Async.pool_update.detach")]
-        Response<string>
-        async_pool_update_detach(string session, string _pool_update, string _host);
 
         [XmlRpcMethod("pool_update.get_all")]
         Response<string []>

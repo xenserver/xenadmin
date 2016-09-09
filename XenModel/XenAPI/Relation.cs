@@ -143,10 +143,13 @@ namespace XenAPI
                 new Relation("snapshots", "VM", "snapshot_of"),
             });
 
+            relations.Add(typeof(Proxy_Pool_update), new Relation[] {
+                new Relation("hosts", "host", "updates"),
+            });
+
             relations.Add(typeof(Proxy_Host), new Relation[] {
                 new Relation("PGPUs", "PGPU", "host"),
                 new Relation("PCIs", "PCI", "host"),
-                new Relation("updates", "pool_update", "hosts"),
                 new Relation("patches", "host_patch", "host"),
                 new Relation("crashdumps", "host_crashdump", "host"),
                 new Relation("host_CPUs", "host_cpu", "host"),

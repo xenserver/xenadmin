@@ -373,30 +373,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Removes the update's files from the host
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
-        /// <param name="_host">The host to clean the update from.</param>
-        public static void clean(Session session, string _pool_update, string _host)
-        {
-            session.proxy.pool_update_clean(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse();
-        }
-
-        /// <summary>
-        /// Removes the update's files from the host
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
-        /// <param name="_host">The host to clean the update from.</param>
-        public static XenRef<Task> async_clean(Session session, string _pool_update, string _host)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pool_update_clean(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse());
-        }
-
-        /// <summary>
         /// Removes the update's files from all hosts in the pool, but does not revert the update
         /// First published in .
         /// </summary>
@@ -438,54 +414,6 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _pool_update)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_update_destroy(session.uuid, (_pool_update != null) ? _pool_update : "").parse());
-        }
-
-        /// <summary>
-        /// Attach the pool update VDI
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
-        /// <param name="_host">The host to attach the update to</param>
-        public static string attach(Session session, string _pool_update, string _host)
-        {
-            return (string)session.proxy.pool_update_attach(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse();
-        }
-
-        /// <summary>
-        /// Attach the pool update VDI
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
-        /// <param name="_host">The host to attach the update to</param>
-        public static XenRef<Task> async_attach(Session session, string _pool_update, string _host)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pool_update_attach(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse());
-        }
-
-        /// <summary>
-        /// Detach the pool update VDI
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
-        /// <param name="_host">The host to detach the update from</param>
-        public static void detach(Session session, string _pool_update, string _host)
-        {
-            session.proxy.pool_update_detach(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse();
-        }
-
-        /// <summary>
-        /// Detach the pool update VDI
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
-        /// <param name="_host">The host to detach the update from</param>
-        public static XenRef<Task> async_detach(Session session, string _pool_update, string _host)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pool_update_detach(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
