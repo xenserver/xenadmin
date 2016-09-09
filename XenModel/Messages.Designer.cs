@@ -24804,6 +24804,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string NO_VALUE {
+            get {
+                return ResourceManager.GetString("NO_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;None&gt;.
         /// </summary>
         public static string NONE {

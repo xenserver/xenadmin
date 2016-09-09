@@ -214,13 +214,13 @@
     <value>0, 0, 0, 3</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 54</value>
+    <value>301, 54</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>VMs with PVS Caching enabled</value>
+    <value>Virtual Machines</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

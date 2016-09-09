@@ -8783,6 +8783,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="NO_VALID_DISK_LOCATION" xml:space="preserve">
     <value>There are no SR locations that can support this disk</value>
   </data>
+  <data name="NO_VALUE" xml:space="preserve">
+    <value>-</value>
+  </data>
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>Number of snapshots to keep</value>
   </data>

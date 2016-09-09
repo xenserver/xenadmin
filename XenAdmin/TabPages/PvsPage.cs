@@ -123,7 +123,7 @@ namespace XenAdmin.TabPages
                
                 //foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
                 foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
-                    dataGridViewVms.Rows.Add(vm);
+                    dataGridViewVms.Rows.Add(NewVmRow(vm));
 
                 if (dataGridViewVms.SelectedRows.Count == 0 && dataGridViewVms.Rows.Count > 0)
                     dataGridViewVms.Rows[0].Selected = true;
@@ -152,16 +152,48 @@ namespace XenAdmin.TabPages
             return newRow;
         }
 
-        private DataGridViewRow NewVmRow(PVS_proxy pvsProxy)
+        private DataGridViewRow NewVmRow(VM vm)
         {
-            var vm = pvsProxy.VM;
             System.Diagnostics.Trace.Assert(vm != null);
+
+            var pvsProxy = vm.Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(vm)); // null if no proxy
+            if (pvsProxy == null)
+            {
+                return NewVmRowWithNoProxy(vm);
+            }
+            return NewVmRowWithProxy(vm, pvsProxy);
+        }
+
+        private DataGridViewRow NewVmRowWithNoProxy(VM vm)
+        {
+            var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
+            var cachedCell = new DataGridViewTextBoxCell
+            {
+                Value = Messages.NO
+            };
+            var srCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
+            var prepopulationCell = new DataGridViewTextBoxCell
+            {
+                Value = Messages.NO_VALUE
+            };
+
+            var newRow = new DataGridViewRow { Tag = vm };
+            newRow.Cells.AddRange(vmCell, cachedCell, srCell, prepopulationCell);
+            vm.PropertyChanged += VmPropertyChanged;
+
+            return newRow;
+        }
+
+        private DataGridViewRow NewVmRowWithProxy(VM vm, PVS_proxy pvsProxy)
+        {
+            System.Diagnostics.Trace.Assert(pvsProxy != null);
+
             var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
             var cachedCell = new DataGridViewTextBoxCell
             {
                 Value = pvsProxy.currently_attached ? Messages.YES : Messages.NO
             };
-            var srCell = new DataGridViewTextBoxCell {Value = Connection.Resolve(pvsProxy.cache_SR)};
+            var srCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.cache_SR) };
             var prepopulationCell = new DataGridViewTextBoxCell
             {
                 Value = pvsProxy.prepopulate ? Messages.YES : Messages.NO
