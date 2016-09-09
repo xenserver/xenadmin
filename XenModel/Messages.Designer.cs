@@ -30578,7 +30578,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs with no home server cannot be on local storage.
+        ///   Looks up a localized string similar to VMs without a home server cannot have disks on local storage.
         /// </summary>
         public static string SR_IS_LOCAL {
             get {

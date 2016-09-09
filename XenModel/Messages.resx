@@ -10668,7 +10668,7 @@ Incremental allocation: {1}</value>
     <value>This storage repository is broken</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
-    <value>VMs with no home server cannot be on local storage</value>
+    <value>VMs without a home server cannot have disks on local storage</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
