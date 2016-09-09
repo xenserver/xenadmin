@@ -295,6 +295,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\LivePatchingEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\LivePatchingEditPage.Designer.cs">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -867,6 +873,7 @@
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyXenServerPatchPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\IAvoidRestartCapable.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrechecksOnMultipleHostsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
@@ -1757,6 +1764,15 @@
     <EmbeddedResource Include="SettingsPanels\EditNetworkPage.resx">
       <DependentUpon>EditNetworkPage.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.ja.resx">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.resx">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.zh-CN.resx">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.ja.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>

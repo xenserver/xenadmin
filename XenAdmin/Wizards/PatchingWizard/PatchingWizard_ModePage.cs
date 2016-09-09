@@ -74,6 +74,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Messages.UPDATES_WIZARD_APPLY_UPDATE;
         }
 
+        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
+        
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
@@ -90,7 +96,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch);
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch, LivePatchCodesByHost);
                     break;
                 case UpdateType.NewSuppPack:
                     textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);

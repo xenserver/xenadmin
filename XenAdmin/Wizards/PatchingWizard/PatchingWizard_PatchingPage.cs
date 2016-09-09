@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using log4net;
@@ -43,12 +44,19 @@ using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_PatchingPage : XenTabPage
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
 
         private AsyncAction actionManualMode = null;
         private bool _thisPageHasBeenCompleted = false;
@@ -301,7 +309,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             OnPageUpdated();
             _thisPageHasBeenCompleted = true;
-
         }
 
         private List<PlanAction> CompileActionList(Host host, Pool_patch patch)
@@ -318,7 +325,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             actions.Add(new ApplyPatchPlanAction(host, patch));
 
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) 
+                && !(LivePatchCodesByHost !=null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE))
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));
@@ -442,11 +450,88 @@ namespace XenAdmin.Wizards.PatchingWizard
             panel1.Visible = true;
         }
 
+        /// <summary>
+        /// Live patching is attempted for a host if the LivePatchCodesByHost contains the LIVEPATCH_COMPLETE value for that host
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        private bool LivePatchingAttemptedForHost(Host host)
+        {
+            return LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) &&
+                   LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE;
+
+        }
+
+        /// <summary>
+        /// Live patching has failed for a host if that host requires a reboot for this patch, and we expected to live patch
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        private bool LivePatchingFailedForHost(Host host)
+        {
+            if (!host.patches_requiring_reboot.Any())
+            {
+                return false;
+            }
+
+            foreach (var patchRef in host.patches_requiring_reboot)
+            {
+                var poolPatch = host.Connection.Resolve(patchRef);
+                if (poolPatch.uuid.Equals(Patch.uuid))
+                {
+                    // This patch failed
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void FinishedSuccessfully()
         {
             labelTitle.Text = string.Format(Messages.UPDATE_WAS_SUCCESSFULLY_INSTALLED, GetUpdateName());
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
+
+            // Live patching failed is per-host
+            var livePatchingFailedHosts = new List<Host>();
+
+            foreach (var host in SelectedMasters)
+            {
+                if (LivePatchingAttemptedForHost(host) && LivePatchingFailedForHost(host))
+                {
+                    livePatchingFailedHosts.Add(host);
+                }
+            }
+
+            if (livePatchingFailedHosts.Count == 0)
+            {
+                return;
+            }
+
+            LivePatchingFailed(livePatchingFailedHosts);
+        }
+
+        private void LivePatchingFailed(IList<Host> hosts)
+        {
+            string dialogMessage;
+            if (hosts.Count == 1)
+            {
+                dialogMessage = string.Format(Messages.LIVE_PATCHING_FAILED_ONE_HOST, hosts[0]);
+            }
+            else
+            {
+                dialogMessage = string.Format(Messages.LIVE_PATCHING_FAILED_MULTI_HOST,
+                    string.Join(Messages.LIST_SEPARATOR, hosts.Select(s => s.ToString().SurroundWith('\''))));
+            }
+
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning,
+                    dialogMessage, Messages.XENCENTER),
+                ThreeButtonDialog.ButtonOK))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 
         private string GetUpdateName()

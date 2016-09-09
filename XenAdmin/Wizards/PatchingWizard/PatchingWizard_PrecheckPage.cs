@@ -70,7 +70,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             InitializeComponent();
             dataGridView1.BackgroundColor = dataGridView1.DefaultCellStyle.BackColor;
-            checkBoxViewPrecheckFailuresOnly.Checked = true;
         }
 
         public override string PageTitle
@@ -94,11 +93,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "UpdatePrechecks"; }
         }
 
-        public override bool EnablePrevious()
-        {
-            return _worker != null && !_worker.IsBusy && (resolvePrechecksAction == null || resolvePrechecksAction.IsCompleted);
-        }
-        
         void Connection_ConnectionStateChanged(object sender, EventArgs e)
         {
             Program.Invoke(Program.MainWindow, RefreshRechecks);
@@ -225,6 +219,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             catch (Exception) { }
         }
 
+        private bool IsCheckInProgress
+        {
+            get { return _worker != null && _worker.IsBusy; }
+        }
+
+        private bool IsResolveActionInProgress
+        {
+            get { return resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted; }
+        }
+
         private List<PreCheckHostRow> ExecuteCheck(Check check)
         {
             var rows = new List<PreCheckHostRow>();
@@ -315,9 +319,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
+
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
+            LivePatchCodesByHost = new Dictionary<string, LivePatchCode>();
 
             //HostLivenessCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
@@ -334,19 +345,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (Helpers.HostIsMaster(host))
                     checkGroup.Add(new HAOffCheck(host));
-            }
-
-            //Checking can evacuate host
-            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
-            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
-            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
-            {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
-                {
-                        checkGroup.Add(new AssertCanEvacuateCheck(host));
-                }
             }
 
             //PBDsPluggedCheck
@@ -366,7 +364,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
                     Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => string.Equals(otherPatch.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase));
-                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
+                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost, LivePatchCodesByHost));
+                }
+            }
+
+            //Checking can evacuate host
+            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
+            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
+            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }
             }
 
@@ -425,6 +436,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLeave(direction, ref cancel);
         }
 
+        public override bool EnablePrevious()
+        {
+            return !IsCheckInProgress && !IsResolveActionInProgress;
+        }
+        
         public override bool EnableNext()
         {
             bool problemsFound = false;
@@ -436,17 +452,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     problemsFound = true;
                     break;
                 }
-
             }
 
-            bool result = _worker != null && !_worker.IsBusy && !problemsFound && (resolvePrechecksAction == null || resolvePrechecksAction.IsCompleted);
             UpdateControls(problemsFound);
-            return result;
+            return !IsCheckInProgress && !IsResolveActionInProgress && !problemsFound;
         }
 
         public UpdateType SelectedUpdateType { private get; set; }
         public Pool_patch Patch { private get; set; }
-        public List<Pool_patch> NewUploadedPatches { private get; set; }
 
         internal enum PreCheckResult { OK, Warning, Failed }
 
@@ -726,10 +739,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateControls(bool problemsFound = false)
         {
-            bool actionInProgress = resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted;
-            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress;
-            labelProgress.Visible = actionInProgress || !problemsFound;
-            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress;
+            bool actionInProgress = IsResolveActionInProgress;
+            bool checkInProgress = IsCheckInProgress;
+            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress && !checkInProgress;
+            labelProgress.Visible = actionInProgress || checkInProgress || !problemsFound;
+            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
         }
         
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

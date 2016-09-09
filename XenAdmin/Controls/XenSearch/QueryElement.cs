@@ -203,9 +203,20 @@ namespace XenAdmin.Controls.XenSearch
 
             queryTypeComboButton.BeforePopup += new EventHandler(queryTypeComboButton_BeforePopup);
             resourceSelectButton.BeforePopup += new EventHandler(resourceSelectButton_BeforePopup);
-            SelectDefaultQueryType();
 
+            queryTypeComboButton.SelectedItemChanged += OnQueryTypeComboButton_OnSelectedItemChanged;
+
+            SelectDefaultQueryType();
             Setup();
+        }
+
+        private void OnQueryTypeComboButton_OnSelectedItemChanged(object sender, EventArgs e)
+        {
+            var selectedItem = queryTypeComboButton.SelectedItem;
+            if (selectedItem.Tag is CustomFieldQueryTypeBase)
+            {
+                queryTypeComboButton.Text = selectedItem.ToString().Ellipsise(24);
+            }
         }
 
         /// <summary> 

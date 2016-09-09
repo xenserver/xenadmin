@@ -292,7 +292,9 @@ namespace XenAdmin.Controls.NetworkingTab
                     foreach (var vif in vifs)
                     {
                         var network = vif.Connection.Resolve(vif.network);
-                        if (network != null && network.IsGuestInstallerNetwork)
+                        if (network != null &&
+                            // CA-218956 - Expose HIMN when showing hidden objects
+                            (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
                             continue;   // Don't show the guest installer network in the network tab (CA-73056)
                         vifRowsToAdd.Add(new VifRow(vif));
                     }
@@ -394,7 +396,10 @@ namespace XenAdmin.Controls.NetworkingTab
                 XenAPI.Network TheNetwork = SelectedNetwork;
 
                 AddNetworkButton.Enabled = !locked;
-                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress;
+                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress 
+                    && !TheNetwork.IsGuestInstallerNetwork;
+                // CA-218956 - Expose HIMN when showing hidden objects
+                // HIMN should not be editable
 
                 if (HasPhysicalNonBondNIC(TheNetwork))
                 {
@@ -403,7 +408,11 @@ namespace XenAdmin.Controls.NetworkingTab
                 }
                 else
                 {
-                    RemoveNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress;
+                    RemoveNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress
+                        && !TheNetwork.IsGuestInstallerNetwork;
+                    // CA-218956 - Expose HIMN when showing hidden objects
+                    // HIMN should not be removable
+
                     RemoveButtonContainer.SetToolTip("");
                 }
             }

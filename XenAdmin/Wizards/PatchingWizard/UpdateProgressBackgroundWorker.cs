@@ -20,6 +20,20 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<PlanAction> doneActions = new List<PlanAction>();
         public PlanAction InProgressAction { get; set; }
 
+
+        private readonly List<string> avoidRestartHosts = new List<string>();
+        
+        /// <summary>
+        /// This list lists uuids of hosts that does not need to be restarted
+        /// </summary>
+        public List<string> AvoidRestartHosts
+        {
+            get
+            {
+                return avoidRestartHosts;
+            }
+        }
+
         public UpdateProgressBackgroundWorker(Host master, List<PlanAction> planActions, List<PlanAction> delayedActions)
         {
             this.master = master;

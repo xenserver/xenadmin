@@ -386,6 +386,7 @@ namespace XenAdmin.SettingsPanels
 
             // Populate Automatic checkbox
             autoCheckBox.Checked = network.AutoPlug;
+            autoCheckBox.Enabled = !network.IsGuestInstallerNetwork;
             // in case some odd value has been set on the CLI
             numericUpDownMTU.Maximum = Math.Max(network.MTU, XenAPI.Network.MTU_MAX);
             numericUpDownMTU.Minimum = Math.Min(network.MTU, XenAPI.Network.MTU_MIN);

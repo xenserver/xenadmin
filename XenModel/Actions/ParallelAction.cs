@@ -119,6 +119,9 @@ namespace XenAdmin.Actions
 
         protected override void RunSubActions(List<Exception> exceptions)
         {
+            if (actionsCount == 0)
+                return;
+
             foreach (IXenConnection connection in actionsByConnection.Keys)
             {
                 queuesByConnection[connection] = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsByConnection[connection].Count));
