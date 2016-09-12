@@ -49,10 +49,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         bool initialising = true;
         private bool isVcpuHotplugSupported;
 
-        // Please note that the comboBoxVCPUs control can represent two different VM properties, depending whether the VM supports vCPU hotplug or not: 
-        // When vCPU hotplug is not supported, comboBoxVCPUs represents the initial number of vCPUs (VCPUs_at_startup). In this case we will also set the VM property VCPUs_max to the same value.
-        // When vCPU hotplug is supported, comboBoxVCPUs represents the maximum number of vCPUs (VCPUs_max). And the initial number of vCPUs is represented in comboBoxInitialVCPUs (which is only visible in this case) 
-
         public Page_CpuMem()
         {
             InitializeComponent();
@@ -113,7 +109,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
 
             isVcpuHotplugSupported = Template.SupportsVcpuHotplug;
-            _prevVCPUsMax = Template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
 
             label5.Text = GetRubric();
 
@@ -412,6 +407,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             // refresh comboBoxInitialVCPUs if it's visible and populated
             if (comboBoxInitialVCPUs.Visible && comboBoxInitialVCPUs.Items.Count > 0)
             {
+                if (_prevVCPUsMax == 0)
+                    _prevVCPUsMax = Template.VCPUs_max;
+
                 // VcpusAtStartup is always <= VcpusMax
                 // So if VcpusMax is decreased below VcpusAtStartup, then VcpusAtStartup is decreased to that number too
                 // If VcpusAtStartup and VcpusMax are equal, and VcpusMax is changed, then VcpusAtStartup is changed to match

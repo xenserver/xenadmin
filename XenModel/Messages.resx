@@ -11944,7 +11944,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>Ma&amp;ximum number of vCPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
-    <value>The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. </value>
+    <value>The maximum number of vCPUs and the topology can only be changed when the VM is shut down. </value>
   </data>
   <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
     <value>Specify the number of vCPUs, their topology, and the priority to assign them over other vCPUs. </value>
