@@ -8130,6 +8130,12 @@ When you configure an NFS storage repository, you simply provide the hostname or
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_TITLE" xml:space="preserve">
     <value>Select the server that will provide the BIOS strings</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS" xml:space="preserve">
+    <value>Initial number of vCPUs</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
+    <value>Maximum number of vCPUs</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
 
@@ -8146,6 +8152,9 @@ You will not be able to start this VM without freeing some space on one of the s
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU &amp;&amp; Memory</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>Allocate processor and memory resources</value>
@@ -11710,7 +11719,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>The disk is attached to a VM that is not in halted state.</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>The VCPUs can only be changed when the VM is shut down</value>
+    <value>The VCPUs can only be changed when the VM is shut down.</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -11921,6 +11930,30 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
     <value>The cloud-config parameters could not be retrieved.</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL" xml:space="preserve">
+    <value>Current number of v&amp;CPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY" xml:space="preserve">
+    <value>The current number of vCPUs can only be changed when the VM is running or shut down. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL" xml:space="preserve">
+    <value>Initial number of v&amp;CPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
+    <value>Ma&amp;ximum number of vCPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
+    <value>The maximum number of vCPUs and the topology can only be changed when the VM is shut down. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>Specify the number of vCPUs, their topology, and the priority to assign them over other vCPUs. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
+    <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
+    <value>Number of v&amp;CPUs:</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>
