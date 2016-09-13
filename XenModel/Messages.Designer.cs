@@ -34416,7 +34416,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The maximum number of vCPUs and the topology can only be changed when the VM is shut down. .
+        ///   Looks up a localized string similar to The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. .
         /// </summary>
         public static string VM_CPUMEMPAGE_MAX_VCPUS_READONLY {
             get {
