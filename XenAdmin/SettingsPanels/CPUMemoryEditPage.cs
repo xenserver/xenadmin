@@ -263,7 +263,7 @@ namespace XenAdmin.SettingsPanels
                 PopulateVCPUsAtStartup(_OrigVCPUsMax, _OrigVCPUsAtStartup);
 
             transparentTrackBar1.Value = Convert.ToInt32(Math.Log(Convert.ToDouble(vm.VCPUWeight)) / Math.Log(4.0d));
-            transparentTrackBar1.Enabled = vm.power_state == vm_power_state.Halted;
+            panel1.Enabled = vm.power_state == vm_power_state.Halted;
         }
 
         private void PopulateVCPUComboBox(ComboBox comboBox, long min, long max, long currentValue, Predicate<long> isValid)
