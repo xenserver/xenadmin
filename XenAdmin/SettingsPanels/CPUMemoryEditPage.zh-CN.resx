@@ -778,7 +778,7 @@
     <value>8</value>
   </data>
   <data name="lblPriority.Text" xml:space="preserve">
-    <value>vCPU priority for this virtual machine:</value>
+    <value>此虚拟机的 vCPU 优先级:</value>
   </data>
   <data name="lblPriority.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
