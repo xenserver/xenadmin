@@ -38,6 +38,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.spinnerDynMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.spinnerStatMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBoxInitialVCPUs = new System.Windows.Forms.ComboBox();
+            this.labelInitialVCPUs = new System.Windows.Forms.Label();
             this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
             this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
             this.labelTopology = new System.Windows.Forms.Label();
@@ -54,8 +56,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             // label5
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
             resources.ApplyResources(this.label5, "label5");
+            this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
             this.label5.Name = "label5";
             // 
             // pictureBox1
@@ -104,16 +106,30 @@ namespace XenAdmin.Wizards.NewVMWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxInitialVCPUs, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelInitialVCPUs, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.labelVCPUs, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // comboBoxInitialVCPUs
+            // 
+            this.comboBoxInitialVCPUs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxInitialVCPUs.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxInitialVCPUs, "comboBoxInitialVCPUs");
+            this.comboBoxInitialVCPUs.Name = "comboBoxInitialVCPUs";
+            // 
+            // labelInitialVCPUs
+            // 
+            resources.ApplyResources(this.labelInitialVCPUs, "labelInitialVCPUs");
+            this.labelInitialVCPUs.Name = "labelInitialVCPUs";
             // 
             // labelInvalidVCPUWarning
             // 
@@ -173,5 +189,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private Controls.CPUTopologyComboBox comboBoxTopology;
         private System.Windows.Forms.Label labelInvalidVCPUWarning;
         private System.Windows.Forms.ComboBox comboBoxVCPUs;
+        private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
+        private System.Windows.Forms.Label labelInitialVCPUs;
     }
 }

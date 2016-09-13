@@ -2038,6 +2038,14 @@ namespace XenAPI
                 return ipAddresses.FirstOrDefault() ?? string.Empty;
             }
         }
+
+        public bool SupportsVcpuHotplug
+        {
+            get
+            {
+                return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
+            }
+        }
     }
 
     public struct VMStartupOptions
