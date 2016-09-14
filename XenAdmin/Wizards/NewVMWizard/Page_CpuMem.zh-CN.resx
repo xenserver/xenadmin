@@ -126,13 +126,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 40</value>
+    <value>38, 27</value>
   </data>
   <data name="labelVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>26, 0, 0, 0</value>
+    <value>38, 0, 0, 0</value>
   </data>
   <data name="labelVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 27</value>
+    <value>166, 27</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelVCPUs.TabIndex" type="System.Int32, mscorlib">
@@ -163,7 +163,7 @@
     <value>2</value>
   </data>
   <data name="comboBoxInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 122</value>
+    <value>204, 109</value>
   </data>
   <data name="comboBoxInitialVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 20</value>
@@ -193,13 +193,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 119</value>
+    <value>38, 106</value>
   </data>
   <data name="labelInitialVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>26, 0, 0, 17</value>
+    <value>38, 0, 0, 17</value>
   </data>
   <data name="labelInitialVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 27</value>
+    <value>166, 27</value>
   </data>
   <data name="labelInitialVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -232,13 +232,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelInvalidVCPUWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 100</value>
+    <value>204, 87</value>
   </data>
   <data name="labelInvalidVCPUWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 6</value>
   </data>
   <data name="labelInvalidVCPUWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 13</value>
+    <value>308, 13</value>
   </data>
   <data name="labelInvalidVCPUWarning.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -259,7 +259,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="comboBoxTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 73</value>
+    <value>204, 60</value>
   </data>
   <data name="comboBoxTopology.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 6, 0, 6</value>
@@ -283,7 +283,7 @@
     <value>3</value>
   </data>
   <data name="spinnerStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 225</value>
+    <value>0, 212</value>
   </data>
   <data name="spinnerStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -307,7 +307,7 @@
     <value>5</value>
   </data>
   <data name="spinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 194</value>
+    <value>0, 181</value>
   </data>
   <data name="spinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -331,7 +331,7 @@
     <value>7</value>
   </data>
   <data name="spinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 163</value>
+    <value>0, 150</value>
   </data>
   <data name="spinnerDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -361,13 +361,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 67</value>
+    <value>38, 54</value>
   </data>
   <data name="labelTopology.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>26, 0, 0, 0</value>
+    <value>38, 0, 0, 0</value>
   </data>
   <data name="labelTopology.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 33</value>
+    <value>166, 33</value>
   </data>
   <data name="labelTopology.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -391,7 +391,7 @@
     <value>9</value>
   </data>
   <data name="comboBoxVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 43</value>
+    <value>204, 30</value>
   </data>
   <data name="comboBoxVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 3</value>
@@ -442,7 +442,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerDynMin" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,190,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerDynMin" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,204,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -454,7 +454,7 @@
     <value>3, 0, 3, 14</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 26</value>
+    <value>509, 13</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
