@@ -67,10 +67,6 @@ opacity -->
 class=3D"cx-link"=20
   href=3D"xencenter://HelpContents/">了解如何使用 XenCenter</A>					=
 	 </LI>
-  <LI title=3D"了解 XenServer 和 Workspace Cloud" =
-class=3D"cx-doc-icon"><A=20
-  class=3D"cx-link" href=3D"https://www.citrix.com/xenserver/clm">了解 
-  XenServer 和 Citrix Lifecycle Manager</A>						 </LI>
   <LI title=3D"与其他 XenServer 用户联网" =
 class=3D"cx-doc-icon"><A class=3D"cx-link"=20
   href=3D"http://xenserver.org/">与其他 XenServer 用户联网</A>
