@@ -453,14 +453,11 @@
   <data name="enableButton.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="enableButton.Text" xml:space="preserve">
-    <value>E&amp;nable PVS read-caching</value>
-  </data>
   <data name="&gt;&gt;enableButton.Name" xml:space="preserve">
     <value>enableButton</value>
   </data>
   <data name="&gt;&gt;enableButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Commands.CommandButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;enableButton.Parent" xml:space="preserve">
     <value>panel2</value>
