@@ -38,16 +38,22 @@ using System.Windows.Forms;
 using XenAdmin.Network;
 using XenAdmin.Dialogs;
 using XenAPI;
+using XenAdmin.Commands;
 
 namespace XenAdmin.TabPages
 {
     public partial class PvsPage : BaseTabPage
     {
         private IXenConnection connection;
+        private SelectionManager selectionManager;
         
         public PvsPage()
         {
             InitializeComponent();
+
+            enableButton.Command = new EnablePvsReadCachingCommand();
+            selectionManager = new SelectionManager();
+            
             base.Text = Messages.PVS_TAB_TITLE;
         }
 
@@ -120,6 +126,7 @@ namespace XenAdmin.TabPages
                 UnregisterVMHandlers();
                 dataGridViewVms.Rows.Clear();
 
+                selectionManager.BindTo(enableButton, Program.MainWindow);
                
                 //foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
                 foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
@@ -127,11 +134,19 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewVms.SelectedRows.Count == 0 && dataGridViewVms.Rows.Count > 0)
                     dataGridViewVms.Rows[0].Selected = true;
+
+                dataGridViewVms.SelectionChanged += VmSelectionChanged;
             }
             finally
             {
                 dataGridViewVms.ResumeLayout();
             }
+        }
+
+        private void VmSelectionChanged(object sender, EventArgs e)
+        {
+            List<SelectedItem> selectedVMs = (from DataGridViewRow row in dataGridViewVms.SelectedRows select new SelectedItem((VM)row.Tag)).ToList();
+            selectionManager.SetSelection(selectedVMs);
         }
 
         private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
@@ -157,6 +172,7 @@ namespace XenAdmin.TabPages
             System.Diagnostics.Trace.Assert(vm != null);
 
             var pvsProxy = vm.Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(vm)); // null if no proxy
+            
             if (pvsProxy == null)
             {
                 return NewVmRowWithNoProxy(vm);
@@ -208,6 +224,8 @@ namespace XenAdmin.TabPages
 
         private void UnregisterVMHandlers()
         {
+            dataGridViewVms.SelectionChanged -= VmSelectionChanged;
+
             foreach (DataGridViewRow row in dataGridViewVms.Rows)
             {
                 var vm = row.Tag as VM;

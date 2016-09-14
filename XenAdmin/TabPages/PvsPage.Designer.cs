@@ -52,7 +52,7 @@
             this.ConfigureButton = new System.Windows.Forms.Button();
             this.ViewPvsSitesButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.enableButton = new System.Windows.Forms.Button();
+            this.enableButton = new XenAdmin.Commands.CommandButton();
             this.disableButton = new System.Windows.Forms.Button();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -268,6 +268,6 @@
         public System.Windows.Forms.Button disableButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        public System.Windows.Forms.Button enableButton;
+        private XenAdmin.Commands.CommandButton enableButton;
     }
 }

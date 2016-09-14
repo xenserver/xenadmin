@@ -117,9 +117,12 @@ namespace XenAdmin.Commands
             return false; // No PVS proxy is on this VM
         }
 
-        public override string ContextMenuText
+        public override string MenuText
         {
-            get { return "Enable PVS read-caching"; }
+            get
+            {
+                return "Enable PVS Read-caching";
+            }
         }
 
         public override Image MenuImage
