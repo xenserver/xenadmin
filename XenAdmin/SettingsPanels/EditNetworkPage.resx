@@ -130,13 +130,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="HostNicLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 102</value>
+    <value>0, 41</value>
   </data>
   <data name="HostNicLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 8, 0</value>
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="HostNicLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 41</value>
+    <value>38, 21</value>
   </data>
   <data name="HostNicLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -169,13 +169,13 @@
     <value>NoControl</value>
   </data>
   <data name="HostVLanLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 213</value>
+    <value>0, 90</value>
   </data>
   <data name="HostVLanLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 22, 8, 18</value>
+    <value>0, 9, 3, 7</value>
   </data>
   <data name="HostVLanLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 36</value>
+    <value>38, 18</value>
   </data>
   <data name="HostVLanLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -198,290 +198,8 @@
   <data name="autoCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;autoCheckBox.Name" xml:space="preserve">
-    <value>autoCheckBox</value>
-  </data>
-  <data name="&gt;&gt;autoCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoCheckBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;autoCheckBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="HostPNICList.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="HostPNICList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 102</value>
-  </data>
-  <data name="HostPNICList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="HostPNICList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 41</value>
-  </data>
-  <data name="HostPNICList.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.Name" xml:space="preserve">
-    <value>HostPNICList</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="numUpDownVLAN.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="numUpDownVLAN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 209</value>
-  </data>
-  <data name="numUpDownVLAN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 18, 0, 18</value>
-  </data>
-  <data name="numUpDownVLAN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 40</value>
-  </data>
-  <data name="numUpDownVLAN.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.Name" xml:space="preserve">
-    <value>numUpDownVLAN</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="nicHelpLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="nicHelpLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nicHelpLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="nicHelpLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="nicHelpLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 158</value>
-  </data>
-  <data name="nicHelpLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 15, 8, 0</value>
-  </data>
-  <data name="nicHelpLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1179, 33</value>
-  </data>
-  <data name="nicHelpLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="nicHelpLabel.Text" xml:space="preserve">
-    <value>Network interface card. Can also be an &lt;internal&gt; Virtual Network.</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.Name" xml:space="preserve">
-    <value>nicHelpLabel</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;labelVLAN0Info.Name" xml:space="preserve">
-    <value>labelVLAN0Info</value>
-  </data>
-  <data name="&gt;&gt;labelVLAN0Info.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelVLAN0Info.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelVLAN0Info.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelLACPWarning.Name" xml:space="preserve">
-    <value>panelLACPWarning</value>
-  </data>
-  <data name="&gt;&gt;panelLACPWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelLACPWarning.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panelLACPWarning.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
-    <value>labelBlurb</value>
-  </data>
-  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.Name" xml:space="preserve">
-    <value>numUpDownVLAN</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;numUpDownVLAN.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.Name" xml:space="preserve">
-    <value>nicHelpLabel</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;nicHelpLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.Name" xml:space="preserve">
-    <value>HostPNICList</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;HostPNICList.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;panelDisruptionWarning.Name" xml:space="preserve">
-    <value>panelDisruptionWarning</value>
-  </data>
-  <data name="&gt;&gt;panelDisruptionWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelDisruptionWarning.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panelDisruptionWarning.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMTU.Name" xml:space="preserve">
-    <value>numericUpDownMTU</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMTU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMTU.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMTU.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;labelMTU.Name" xml:space="preserve">
-    <value>labelMTU</value>
-  </data>
-  <data name="&gt;&gt;labelMTU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelMTU.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelMTU.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;warningText.Name" xml:space="preserve">
-    <value>warningText</value>
-  </data>
-  <data name="&gt;&gt;warningText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;warningText.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;warningText.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;labelCannotConfigureMTU.Name" xml:space="preserve">
-    <value>labelCannotConfigureMTU</value>
-  </data>
-  <data name="&gt;&gt;labelCannotConfigureMTU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCannotConfigureMTU.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelCannotConfigureMTU.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBondMode.Name" xml:space="preserve">
-    <value>groupBoxBondMode</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBondMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBondMode.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBondMode.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 25</value>
-  </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1292, 1062</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelVLAN0Info" Row="3" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="panelLACPWarning" Row="5" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="numUpDownVLAN" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nicHelpLabel" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="HostVLanLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="HostNicLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="HostPNICList" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="panelDisruptionWarning" Row="11" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="numericUpDownMTU" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelMTU" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="autoCheckBox" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="warningText" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelCannotConfigureMTU" Row="10" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="groupBoxBondMode" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,67.44186,Percent,32.55814" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,89,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,23,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="labelVLAN0Info.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -490,13 +208,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelVLAN0Info.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 219</value>
+    <value>133, 92</value>
   </data>
   <data name="labelVLAN0Info.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 28, 0, 0</value>
+    <value>3, 11, 0, 0</value>
   </data>
   <data name="labelVLAN0Info.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 32</value>
+    <value>252, 13</value>
   </data>
   <data name="labelVLAN0Info.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -550,13 +268,13 @@
     <value>Fill</value>
   </data>
   <data name="panelLACPWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 538</value>
+    <value>6, 232</value>
   </data>
   <data name="panelLACPWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>15, 0, 0, 5</value>
+    <value>6, 0, 0, 2</value>
   </data>
   <data name="panelLACPWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1277, 37</value>
+    <value>511, 15</value>
   </data>
   <data name="panelLACPWarning.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -576,78 +294,6 @@
   <data name="&gt;&gt;panelLACPWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 0</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="label2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 5, 0, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>647, 37</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>LACP must also be configured on the switch ports</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>panelLACPWarning</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="pictureBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
-  </data>
-  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 37</value>
-  </data>
-  <data name="pictureBox2.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
-  </data>
-  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
-    <value>pictureBox2</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
-    <value>panelLACPWarning</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="labelBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -664,10 +310,10 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="labelBlurb.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 38</value>
+    <value>0, 0, 0, 15</value>
   </data>
   <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1292, 102</value>
+    <value>517, 41</value>
   </data>
   <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -686,6 +332,99 @@
   </data>
   <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="numUpDownVLAN.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="numUpDownVLAN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 88</value>
+  </data>
+  <data name="numUpDownVLAN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 7, 0, 7</value>
+  </data>
+  <data name="numUpDownVLAN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 20</value>
+  </data>
+  <data name="numUpDownVLAN.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;numUpDownVLAN.Name" xml:space="preserve">
+    <value>numUpDownVLAN</value>
+  </data>
+  <data name="&gt;&gt;numUpDownVLAN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numUpDownVLAN.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;numUpDownVLAN.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nicHelpLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nicHelpLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nicHelpLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="nicHelpLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="nicHelpLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 68</value>
+  </data>
+  <data name="nicHelpLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 3, 0</value>
+  </data>
+  <data name="nicHelpLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>473, 13</value>
+  </data>
+  <data name="nicHelpLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="nicHelpLabel.Text" xml:space="preserve">
+    <value>Network interface card. Can also be an &lt;internal&gt; Virtual Network.</value>
+  </data>
+  <data name="&gt;&gt;nicHelpLabel.Name" xml:space="preserve">
+    <value>nicHelpLabel</value>
+  </data>
+  <data name="&gt;&gt;nicHelpLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nicHelpLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;nicHelpLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="HostPNICList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="HostPNICList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 41</value>
+  </data>
+  <data name="HostPNICList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="HostPNICList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 21</value>
+  </data>
+  <data name="HostPNICList.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;HostPNICList.Name" xml:space="preserve">
+    <value>HostPNICList</value>
+  </data>
+  <data name="&gt;&gt;HostPNICList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HostPNICList.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;HostPNICList.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -715,16 +454,16 @@
     <value>Fill</value>
   </data>
   <data name="panelDisruptionWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 820</value>
+    <value>0, 348</value>
   </data>
   <data name="panelDisruptionWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panelDisruptionWarning.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 60, 0, 0</value>
+    <value>0, 24, 0, 0</value>
   </data>
   <data name="panelDisruptionWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1292, 242</value>
+    <value>517, 77</value>
   </data>
   <data name="panelDisruptionWarning.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -744,86 +483,14 @@
   <data name="&gt;&gt;panelDisruptionWarning.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 60</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 5, 0, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1057, 37</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Warning: Your network will be temporarily disrupted when you apply these settings</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panelDisruptionWarning</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 60</value>
-  </data>
-  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 182</value>
-  </data>
-  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>panelDisruptionWarning</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="numericUpDownMTU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 588</value>
+    <value>41, 252</value>
   </data>
   <data name="numericUpDownMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 8, 0, 8</value>
+    <value>0, 3, 0, 3</value>
   </data>
   <data name="numericUpDownMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 38</value>
+    <value>89, 20</value>
   </data>
   <data name="numericUpDownMTU.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -847,13 +514,13 @@
     <value>Fill</value>
   </data>
   <data name="labelMTU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 595</value>
+    <value>0, 255</value>
   </data>
   <data name="labelMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 15, 8, 18</value>
+    <value>0, 6, 3, 7</value>
   </data>
   <data name="labelMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 32</value>
+    <value>38, 13</value>
   </data>
   <data name="labelMTU.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -883,13 +550,13 @@
     <value>NoControl</value>
   </data>
   <data name="warningText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 726</value>
+    <value>0, 310</value>
   </data>
   <data name="warningText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 30, 0, 0</value>
+    <value>0, 12, 0, 0</value>
   </data>
   <data name="warningText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1292, 32</value>
+    <value>517, 13</value>
   </data>
   <data name="warningText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -919,13 +586,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelCannotConfigureMTU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 788</value>
+    <value>0, 335</value>
   </data>
   <data name="labelCannotConfigureMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 30, 0, 0</value>
+    <value>0, 12, 0, 0</value>
   </data>
   <data name="labelCannotConfigureMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1292, 32</value>
+    <value>517, 13</value>
   </data>
   <data name="labelCannotConfigureMTU.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -970,16 +637,13 @@
     <value>Fill</value>
   </data>
   <data name="groupBoxBondMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 275</value>
-  </data>
-  <data name="groupBoxBondMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>3, 118</value>
   </data>
   <data name="groupBoxBondMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 25, 8</value>
+    <value>3, 3, 10, 3</value>
   </data>
   <data name="groupBoxBondMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>961, 255</value>
+    <value>384, 111</value>
   </data>
   <data name="groupBoxBondMode.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -998,6 +662,201 @@
   </data>
   <data name="&gt;&gt;groupBoxBondMode.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>517, 425</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelVLAN0Info" Row="3" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="panelLACPWarning" Row="5" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="numUpDownVLAN" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nicHelpLabel" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="HostVLanLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="HostNicLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="HostPNICList" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="panelDisruptionWarning" Row="11" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="numericUpDownMTU" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelMTU" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="autoCheckBox" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="warningText" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelCannotConfigureMTU" Row="10" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="groupBoxBondMode" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,67.44186,Percent,32.55814" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,89,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,23,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="autoCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 281</value>
+  </data>
+  <data name="autoCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 0</value>
+  </data>
+  <data name="autoCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 17</value>
+  </data>
+  <data name="autoCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="autoCheckBox.Text" xml:space="preserve">
+    <value>A&amp;utomatically add this network to new virtual machines.</value>
+  </data>
+  <data name="&gt;&gt;autoCheckBox.Name" xml:space="preserve">
+    <value>autoCheckBox</value>
+  </data>
+  <data name="&gt;&gt;autoCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;autoCheckBox.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 0</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="label2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 0, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 15</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>LACP must also be configured on the switch ports</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>panelLACPWarning</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pictureBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 15</value>
+  </data>
+  <data name="pictureBox2.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
+  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+    <value>pictureBox2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+    <value>panelLACPWarning</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 24</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 0, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 15</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Warning: Your network will be temporarily disrupted when you apply these settings</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>panelDisruptionWarning</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 53</value>
+  </data>
+  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>panelDisruptionWarning</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tableLayoutPanelBondMode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1060,19 +919,19 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanelBondMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 39</value>
+    <value>3, 16</value>
   </data>
   <data name="tableLayoutPanelBondMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanelBondMode.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 100</value>
+    <value>0, 40</value>
   </data>
   <data name="tableLayoutPanelBondMode.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tableLayoutPanelBondMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>928, 208</value>
+    <value>371, 92</value>
   </data>
   <data name="tableLayoutPanelBondMode.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1099,13 +958,10 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonLacpTcpudpPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 112</value>
-  </data>
-  <data name="radioButtonLacpTcpudpPorts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>3, 49</value>
   </data>
   <data name="radioButtonLacpTcpudpPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>912, 36</value>
+    <value>365, 17</value>
   </data>
   <data name="radioButtonLacpTcpudpPorts.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1129,13 +985,10 @@
     <value>True</value>
   </data>
   <data name="radioButtonBalanceSlb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="radioButtonBalanceSlb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>3, 3</value>
   </data>
   <data name="radioButtonBalanceSlb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 36</value>
+    <value>87, 17</value>
   </data>
   <data name="radioButtonBalanceSlb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1159,13 +1012,10 @@
     <value>True</value>
   </data>
   <data name="radioButtonActiveBackup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 60</value>
-  </data>
-  <data name="radioButtonActiveBackup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>3, 26</value>
   </data>
   <data name="radioButtonActiveBackup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 36</value>
+    <value>94, 17</value>
   </data>
   <data name="radioButtonActiveBackup.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1192,13 +1042,10 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonLacpSrcMac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 164</value>
-  </data>
-  <data name="radioButtonLacpSrcMac.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>3, 72</value>
   </data>
   <data name="radioButtonLacpSrcMac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 36</value>
+    <value>294, 17</value>
   </data>
   <data name="radioButtonLacpSrcMac.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1222,16 +1069,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>240, 240</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>25, 25, 25, 25</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1342, 1112</value>
+    <value>537, 445</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditNetworkPage</value>
