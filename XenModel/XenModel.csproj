@@ -105,6 +105,7 @@
     <Compile Include="Actions\Pool_Patch\GetDiskSpaceRequirementsAction.cs" />
     <Compile Include="Actions\Pool_Patch\PoolPatchCleanAction.cs" />
     <Compile Include="Actions\PVS_Proxy\PvsProxyCreateAction.cs" />
+    <Compile Include="Actions\PVS_Proxy\PvsProxyDestroyAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
