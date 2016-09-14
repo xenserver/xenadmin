@@ -264,22 +264,5 @@ namespace XenAdmin.TabPages
         {
             Program.MainWindow.ShowPerConnectionWizard(connection, new PvsSiteDialog(connection));
         }
-
-        private void enableButton_Click(object sender, EventArgs e)
-        {
-            var selectedRows = dataGridViewVms.SelectedRows;
-
-            var selectedVMs = new List<VM>();
-            foreach (var row in selectedRows)
-            {
-                var rowObject = (DataGridViewRow) row;
-                selectedVMs.Add((VM) rowObject.Tag);
-            }
-
-            using (var dlg = new EnablePvsReadCachingDialog(selectedVMs))
-            {
-                dlg.ShowDialog(Program.MainWindow); // TODO: use result
-            }
-        }
     }
 }

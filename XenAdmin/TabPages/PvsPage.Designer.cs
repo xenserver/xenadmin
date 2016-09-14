@@ -222,7 +222,6 @@
             resources.ApplyResources(this.enableButton, "enableButton");
             this.enableButton.Name = "enableButton";
             this.enableButton.UseVisualStyleBackColor = true;
-            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
             // 
             // disableButton
             // 
