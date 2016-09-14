@@ -129,7 +129,7 @@ namespace XenAdmin.TabPages
                 selectionManager.BindTo(enableButton, Program.MainWindow);
                
                 //foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
-                foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
+                foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs)))
                     dataGridViewVms.Rows.Add(NewVmRow(vm));
 
                 if (dataGridViewVms.SelectedRows.Count == 0 && dataGridViewVms.Rows.Count > 0)
