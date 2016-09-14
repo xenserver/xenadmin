@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 List<Host> poolHosts = new List<Host>(pool.Connection.Cache.Hosts);
                 Host master = SelectedServers.Find(host => host.IsMaster() && poolHosts.Contains(host));
-                if (master != null && poolPatch != null && poolPatch.AppliedOn(master) == DateTime.MaxValue)
+                if (master != null && (poolPatch == null || poolPatch.AppliedOn(master) == DateTime.MaxValue))
                     planActions.AddRange(CompileActionList(master, poolPatch));
                 foreach (Host server in SelectedServers)
                 {
