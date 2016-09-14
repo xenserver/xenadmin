@@ -135,13 +135,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 textBoxLog.Text = ManualTextInstructions;
                 
                 List<AsyncAction> actions = new List<AsyncAction>();
-                if (SelectedUpdateType != UpdateType.NewSuppPack)
+                if (SelectedUpdateType != UpdateType.ISO)
                     actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
                 else
                     actionManualMode = new InstallSupplementalPackAction(SuppPackVdis, false);
 
                 actions.Add(actionManualMode);
-                if (RemoveUpdateFile && SelectedUpdateType != UpdateType.NewSuppPack)
+                if (RemoveUpdateFile && SelectedUpdateType != UpdateType.ISO)
                 {
                     foreach (Pool pool in SelectedPools)
                     {
@@ -166,7 +166,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             foreach (Pool pool in SelectedPools)
             {
                 Pool_patch poolPatch = null;
-                if (SelectedUpdateType != UpdateType.NewSuppPack)
+                if (SelectedUpdateType != UpdateType.ISO)
                 {
                     List<Pool_patch> poolPatches = new List<Pool_patch>(pool.Connection.Cache.Pool_patches);
                     poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
@@ -175,6 +175,31 @@ namespace XenAdmin.Wizards.PatchingWizard
                                                              return string.Equals(otherPatch.uuid, Patch.uuid, StringComparison.OrdinalIgnoreCase);
                                                          return false;
                                                      });
+                }
+
+                if (SelectedUpdateType == UpdateType.ISO && AllServersElyOrGreater())
+                {
+                    // new ISOs
+                    foreach (var hostVdiPair in SuppPackVdis)
+                    {
+                        var host = hostVdiPair.Key;
+                        var vdi = hostVdiPair.Value;
+
+                        var poolUpdate = Pool_update.introduce(pool.Connection.Session, vdi.opaque_ref);
+                        try
+                        {
+
+                            Pool_update.apply(pool.Connection.Session, poolUpdate.opaque_ref, host.opaque_ref);
+                        }
+                        catch (Failure F)
+                        {
+                            
+                        }
+                        finally
+                        {
+                            Pool_update.pool_clean(host.Connection.Session, poolUpdate);
+                        }
+                    }
                 }
 
                 List<Host> poolHosts = new List<Host>(pool.Connection.Cache.Hosts);
@@ -313,7 +338,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PlanAction> CompileActionList(Host host, Pool_patch patch)
         {
-            if (SelectedUpdateType == UpdateType.NewSuppPack)
+            if (SelectedUpdateType == UpdateType.ISO)
                 return CompileSuppPackActionList(host);
 
             List<PlanAction> actions = new List<PlanAction>();
@@ -405,7 +430,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             List<PlanAction> actions = new List<PlanAction>();
             
-            if (SelectedUpdateType != UpdateType.NewSuppPack || SuppPackVdis == null || !SuppPackVdis.ContainsKey(host))
+            if (SelectedUpdateType != UpdateType.ISO || SuppPackVdis == null || !SuppPackVdis.ContainsKey(host))
                 return actions;
             
             List<XenRef<VM>> runningVMs = RunningVMs(host);
@@ -421,6 +446,18 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #endregion
+
+        private bool AllServersElyOrGreater()
+        {
+            foreach (var server in SelectedServers)
+            {
+                if (!Helpers.ElyOrGreater(server.Connection))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         private void FinishedWithErrors(Exception exception)
         {

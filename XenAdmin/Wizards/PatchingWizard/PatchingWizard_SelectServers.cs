@@ -243,7 +243,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
 
-            if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
+            if (type != UpdateType.ISO && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
@@ -256,7 +256,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.Existing:
                     disableNotApplicableHosts(row, selectedHosts, host);
                     break;
-                case UpdateType.NewSuppPack:
+                case UpdateType.ISO:
                     if (!host.CanInstallSuppPack)
                     {
                         row.Enabled = false;

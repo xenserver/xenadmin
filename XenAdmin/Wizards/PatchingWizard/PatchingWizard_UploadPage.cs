@@ -47,6 +47,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _patch; }
         }
 
+        private Pool_update _poolUpdate;
+        public Pool_update PoolUpdate
+        {
+            get { return _poolUpdate; }
+        }
+
         public Dictionary<string, string> AllDownloadedPatches = new Dictionary<string, string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
@@ -176,7 +182,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                                                   SelectedExistingPatch);
                         }
                         break;
-                    case UpdateType.NewSuppPack:
+                    case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
                             action = new UploadSupplementalPackAction(
@@ -423,6 +429,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
                         AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
+
+                        if (AllServersElyOrGreater())
+                        {
+                            set_pool_update();
+                        }
                     }
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
@@ -437,6 +448,34 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
             });
+        }
+
+        private void set_pool_update()
+        {
+            if (SelectedUpdateType == UpdateType.ISO && AllServersElyOrGreater())
+            {
+                // new ISOs
+                foreach (var hostVdiPair in SuppPackVdis)
+                {
+                    var host = hostVdiPair.Key;
+                    var vdi = hostVdiPair.Value;
+
+                    var poolUpdate = Pool_update.introduce(host.Connection.Session, vdi.opaque_ref);
+                    _poolUpdate = host.Connection.Resolve(poolUpdate);
+                }
+            }
+        }
+
+        private bool AllServersElyOrGreater()
+        {
+            foreach (var server in SelectedServers)
+            {
+                if (!Helpers.ElyOrGreater(server.Connection))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void multipleAction_Completed(object sender)

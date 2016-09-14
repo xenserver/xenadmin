@@ -72,6 +72,7 @@ namespace XenAPI
             XenRef<SR> crash_dump_sr,
             List<XenRef<Host_crashdump>> crashdumps,
             List<XenRef<Host_patch>> patches,
+            List<XenRef<Pool_update>> updates,
             List<XenRef<PBD>> PBDs,
             List<XenRef<Host_cpu>> host_CPUs,
             Dictionary<string, string> cpu_info,
@@ -126,6 +127,7 @@ namespace XenAPI
             this.crash_dump_sr = crash_dump_sr;
             this.crashdumps = crashdumps;
             this.patches = patches;
+            this.updates = updates;
             this.PBDs = PBDs;
             this.host_CPUs = host_CPUs;
             this.cpu_info = cpu_info;
@@ -192,6 +194,7 @@ namespace XenAPI
             crash_dump_sr = update.crash_dump_sr;
             crashdumps = update.crashdumps;
             patches = update.patches;
+            updates = update.updates;
             PBDs = update.PBDs;
             host_CPUs = update.host_CPUs;
             cpu_info = update.cpu_info;
@@ -249,6 +252,7 @@ namespace XenAPI
             crash_dump_sr = proxy.crash_dump_sr == null ? null : XenRef<SR>.Create(proxy.crash_dump_sr);
             crashdumps = proxy.crashdumps == null ? null : XenRef<Host_crashdump>.Create(proxy.crashdumps);
             patches = proxy.patches == null ? null : XenRef<Host_patch>.Create(proxy.patches);
+            updates = proxy.updates == null ? null : XenRef<Pool_update>.Create(proxy.updates);
             PBDs = proxy.PBDs == null ? null : XenRef<PBD>.Create(proxy.PBDs);
             host_CPUs = proxy.host_CPUs == null ? null : XenRef<Host_cpu>.Create(proxy.host_CPUs);
             cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
@@ -307,6 +311,7 @@ namespace XenAPI
             result_.crash_dump_sr = (crash_dump_sr != null) ? crash_dump_sr : "";
             result_.crashdumps = (crashdumps != null) ? Helper.RefListToStringArray(crashdumps) : new string[] {};
             result_.patches = (patches != null) ? Helper.RefListToStringArray(patches) : new string[] {};
+            result_.updates = (updates != null) ? Helper.RefListToStringArray(updates) : new string[] {};
             result_.PBDs = (PBDs != null) ? Helper.RefListToStringArray(PBDs) : new string[] {};
             result_.host_CPUs = (host_CPUs != null) ? Helper.RefListToStringArray(host_CPUs) : new string[] {};
             result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
@@ -369,6 +374,7 @@ namespace XenAPI
             crash_dump_sr = Marshalling.ParseRef<SR>(table, "crash_dump_sr");
             crashdumps = Marshalling.ParseSetRef<Host_crashdump>(table, "crashdumps");
             patches = Marshalling.ParseSetRef<Host_patch>(table, "patches");
+            updates = Marshalling.ParseSetRef<Pool_update>(table, "updates");
             PBDs = Marshalling.ParseSetRef<PBD>(table, "PBDs");
             host_CPUs = Marshalling.ParseSetRef<Host_cpu>(table, "host_CPUs");
             cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
@@ -433,6 +439,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._crash_dump_sr, other._crash_dump_sr) &&
                 Helper.AreEqual2(this._crashdumps, other._crashdumps) &&
                 Helper.AreEqual2(this._patches, other._patches) &&
+                Helper.AreEqual2(this._updates, other._updates) &&
                 Helper.AreEqual2(this._PBDs, other._PBDs) &&
                 Helper.AreEqual2(this._host_CPUs, other._host_CPUs) &&
                 Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
@@ -824,6 +831,17 @@ namespace XenAPI
         public static List<XenRef<Host_patch>> get_patches(Session session, string _host)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_get_patches(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the updates field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<Pool_update>> get_updates(Session session, string _host)
+        {
+            return XenRef<Pool_update>.Create(session.proxy.host_get_updates(session.uuid, (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
@@ -3007,6 +3025,25 @@ namespace XenAPI
             }
         }
         private List<XenRef<Host_patch>> _patches;
+
+        /// <summary>
+        /// Set of updates
+        /// First published in .
+        /// </summary>
+        public virtual List<XenRef<Pool_update>> updates
+        {
+            get { return _updates; }
+            set
+            {
+                if (!Helper.AreEqual(value, _updates))
+                {
+                    _updates = value;
+                    Changed = true;
+                    NotifyPropertyChanged("updates");
+                }
+            }
+        }
+        private List<XenRef<Pool_update>> _updates;
 
         /// <summary>
         /// physical blockdevices

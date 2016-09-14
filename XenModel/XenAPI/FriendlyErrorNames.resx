@@ -1772,6 +1772,9 @@ Authorized Roles: {1}</value>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>The operation attempted is not valid for templates</value>
   </data>
+  <data name="VM_LACKS_FEATURE" xml:space="preserve">
+    <value>You attempted an operation on a VM which lacks the feature.</value>
+  </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
   </data>

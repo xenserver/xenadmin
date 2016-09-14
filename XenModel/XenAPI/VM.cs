@@ -124,7 +124,8 @@ namespace XenAPI
             long version,
             string generation_id,
             long hardware_platform_version,
-            bool has_vendor_device)
+            bool has_vendor_device,
+            bool requires_reboot)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -203,6 +204,7 @@ namespace XenAPI
             this.generation_id = generation_id;
             this.hardware_platform_version = hardware_platform_version;
             this.has_vendor_device = has_vendor_device;
+            this.requires_reboot = requires_reboot;
         }
 
         /// <summary>
@@ -293,6 +295,7 @@ namespace XenAPI
             generation_id = update.generation_id;
             hardware_platform_version = update.hardware_platform_version;
             has_vendor_device = update.has_vendor_device;
+            requires_reboot = update.requires_reboot;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -374,6 +377,7 @@ namespace XenAPI
             generation_id = proxy.generation_id == null ? null : (string)proxy.generation_id;
             hardware_platform_version = proxy.hardware_platform_version == null ? 0 : long.Parse((string)proxy.hardware_platform_version);
             has_vendor_device = (bool)proxy.has_vendor_device;
+            requires_reboot = (bool)proxy.requires_reboot;
         }
 
         public Proxy_VM ToProxy()
@@ -456,6 +460,7 @@ namespace XenAPI
             result_.generation_id = (generation_id != null) ? generation_id : "";
             result_.hardware_platform_version = hardware_platform_version.ToString();
             result_.has_vendor_device = has_vendor_device;
+            result_.requires_reboot = requires_reboot;
             return result_;
         }
 
@@ -542,6 +547,7 @@ namespace XenAPI
             generation_id = Marshalling.ParseString(table, "generation_id");
             hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
             has_vendor_device = Marshalling.ParseBool(table, "has_vendor_device");
+            requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -629,7 +635,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._version, other._version) &&
                 Helper.AreEqual2(this._generation_id, other._generation_id) &&
                 Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
-                Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device);
+                Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device) &&
+                Helper.AreEqual2(this._requires_reboot, other._requires_reboot);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1741,6 +1748,17 @@ namespace XenAPI
         public static bool get_has_vendor_device(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_has_vendor_device(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
+        /// Get the requires_reboot field of the given VM.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_requires_reboot(Session session, string _vm)
+        {
+            return (bool)session.proxy.vm_get_requires_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
         /// <summary>
@@ -2955,6 +2973,30 @@ namespace XenAPI
         public static XenRef<Task> async_set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.uuid, (_vm != null) ? _vm : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
+        }
+
+        /// <summary>
+        /// Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new memory allocation (bytes).</param>
+        public static void set_memory(Session session, string _vm, long _value)
+        {
+            session.proxy.vm_set_memory(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+        }
+
+        /// <summary>
+        /// Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new memory allocation (bytes).</param>
+        public static XenRef<Task> async_set_memory(Session session, string _vm, long _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_set_memory(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -5302,5 +5344,24 @@ namespace XenAPI
             }
         }
         private bool _has_vendor_device;
+
+        /// <summary>
+        /// Indicates whether a VM requires a reboot in order to update its configuration, e.g. its memory allocation.
+        /// First published in .
+        /// </summary>
+        public virtual bool requires_reboot
+        {
+            get { return _requires_reboot; }
+            set
+            {
+                if (!Helper.AreEqual(value, _requires_reboot))
+                {
+                    _requires_reboot = value;
+                    Changed = true;
+                    NotifyPropertyChanged("requires_reboot");
+                }
+            }
+        }
+        private bool _requires_reboot;
     }
 }

@@ -67,6 +67,7 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics> _pif_metrics = new ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics>();
         private readonly ChangeableDictionary<XenRef<Pool>, Pool> _pool = new ChangeableDictionary<XenRef<Pool>, Pool>();
         private readonly ChangeableDictionary<XenRef<Pool_patch>, Pool_patch> _pool_patch = new ChangeableDictionary<XenRef<Pool_patch>, Pool_patch>();
+        private readonly ChangeableDictionary<XenRef<Pool_update>, Pool_update> _pool_update = new ChangeableDictionary<XenRef<Pool_update>, Pool_update>();
         private readonly ChangeableDictionary<XenRef<Role>, Role> _role = new ChangeableDictionary<XenRef<Role>, Role>();
         private readonly ChangeableDictionary<XenRef<SM>, SM> _sm = new ChangeableDictionary<XenRef<SM>, SM>();
         private readonly ChangeableDictionary<XenRef<SR>, SR> _sr = new ChangeableDictionary<XenRef<SR>, SR>();
