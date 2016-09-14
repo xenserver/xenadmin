@@ -8129,6 +8129,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_TITLE" xml:space="preserve">
     <value>选择将提供 BIOS 字符串的服务器</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS" xml:space="preserve">
+    <value>虚拟CPU初始个数</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
+    <value>虚拟CPU最大个数</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>分配给新 VM 的内存量超过池中任何服务器上的物理内存量。
 
@@ -8145,6 +8151,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU 和内存</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>指定虚拟CPU的个数，拓扑和分配到新虚机上的内存总的大小。</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>分配处理器和内存资源</value>
@@ -11920,6 +11929,30 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
     <value>无法获取云配置参数。</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL" xml:space="preserve">
+    <value>当前虚拟CPU的个数(&amp;C):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY" xml:space="preserve">
+    <value>当前虚拟CPU的个数仅能虚机在运行或关机时改变。</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL" xml:space="preserve">
+    <value>虚拟CPU的初始个数(&amp;C):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
+    <value>虚拟CPU最大个数(&amp;x):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
+    <value>虚拟CPU的最大个数和拓扑仅能在虚机关机时改变。</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>指定虚拟CPU的个数，拓扑和分配它们的优先级。</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
+    <value>如果设置的虚拟CPU初始个数小于其最大值，可以在虚机运行时给它增加新的虚拟CPU。</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
+    <value>虚拟CPU的个数(&amp;C):</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>容器管理</value>
