@@ -189,18 +189,13 @@ namespace XenAdmin.TabPages
         private DataGridViewRow NewVmRowWithNoProxy(VM vm)
         {
             var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
-            var cachedCell = new DataGridViewTextBoxCell
-            {
-                Value = Messages.NO
-            };
+            var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.NO };
+            var cachedCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
             var srCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
-            var prepopulationCell = new DataGridViewTextBoxCell
-            {
-                Value = Messages.NO_VALUE
-            };
+            var prepopulationCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cachedCell, srCell, prepopulationCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, srCell, prepopulationCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;
@@ -211,18 +206,22 @@ namespace XenAdmin.TabPages
             System.Diagnostics.Trace.Assert(pvsProxy != null);
 
             var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
+            var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.YES };
+
             var cachedCell = new DataGridViewTextBoxCell
             {
                 Value = pvsProxy.currently_attached ? Messages.YES : Messages.NO
             };
+
             var srCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.cache_SR) };
+            
             var prepopulationCell = new DataGridViewTextBoxCell
             {
                 Value = pvsProxy.prepopulate ? Messages.YES : Messages.NO
             };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cachedCell, srCell, prepopulationCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, srCell, prepopulationCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;

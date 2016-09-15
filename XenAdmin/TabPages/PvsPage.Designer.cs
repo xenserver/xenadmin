@@ -29,19 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsPage));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPrepopulation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridViewSites = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +50,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.enableButton = new XenAdmin.Commands.CommandButton();
             this.disableButton = new XenAdmin.Commands.CommandButton();
+            this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPrepopulation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
@@ -86,6 +87,7 @@
             this.dataGridViewVms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewVms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnVM,
+            this.ColumnCachingEnabled,
             this.columnCurrentlyCached,
             this.ColumnSR,
             this.ColumnPrepopulation});
@@ -93,46 +95,6 @@
             this.dataGridViewVms.MultiSelect = true;
             this.dataGridViewVms.Name = "dataGridViewVms";
             this.dataGridViewVms.ReadOnly = true;
-            // 
-            // columnVM
-            // 
-            this.columnVM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.columnVM.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.columnVM, "columnVM");
-            this.columnVM.Name = "columnVM";
-            this.columnVM.ReadOnly = true;
-            // 
-            // columnCurrentlyCached
-            // 
-            this.columnCurrentlyCached.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.columnCurrentlyCached.DefaultCellStyle = dataGridViewCellStyle2;
-            this.columnCurrentlyCached.FillWeight = 30F;
-            resources.ApplyResources(this.columnCurrentlyCached, "columnCurrentlyCached");
-            this.columnCurrentlyCached.Name = "columnCurrentlyCached";
-            this.columnCurrentlyCached.ReadOnly = true;
-            this.columnCurrentlyCached.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnSR
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnSR.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnSR.FillWeight = 30F;
-            resources.ApplyResources(this.ColumnSR, "ColumnSR");
-            this.ColumnSR.Name = "ColumnSR";
-            this.ColumnSR.ReadOnly = true;
-            // 
-            // ColumnPrepopulation
-            // 
-            this.ColumnPrepopulation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnPrepopulation.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnPrepopulation.FillWeight = 40F;
-            resources.ApplyResources(this.ColumnPrepopulation, "ColumnPrepopulation");
-            this.ColumnPrepopulation.Name = "ColumnPrepopulation";
-            this.ColumnPrepopulation.ReadOnly = true;
             // 
             // label2
             // 
@@ -229,6 +191,52 @@
             this.disableButton.Name = "disableButton";
             this.disableButton.UseVisualStyleBackColor = true;
             // 
+            // columnVM
+            // 
+            this.columnVM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.columnVM.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.columnVM, "columnVM");
+            this.columnVM.Name = "columnVM";
+            this.columnVM.ReadOnly = true;
+            // 
+            // ColumnCachingEnabled
+            // 
+            resources.ApplyResources(this.ColumnCachingEnabled, "ColumnCachingEnabled");
+            this.ColumnCachingEnabled.Name = "ColumnCachingEnabled";
+            this.ColumnCachingEnabled.ReadOnly = true;
+            // 
+            // columnCurrentlyCached
+            // 
+            this.columnCurrentlyCached.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.columnCurrentlyCached.DefaultCellStyle = dataGridViewCellStyle2;
+            this.columnCurrentlyCached.FillWeight = 30F;
+            resources.ApplyResources(this.columnCurrentlyCached, "columnCurrentlyCached");
+            this.columnCurrentlyCached.Name = "columnCurrentlyCached";
+            this.columnCurrentlyCached.ReadOnly = true;
+            this.columnCurrentlyCached.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnSR
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnSR.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnSR.FillWeight = 30F;
+            resources.ApplyResources(this.ColumnSR, "ColumnSR");
+            this.ColumnSR.Name = "ColumnSR";
+            this.ColumnSR.ReadOnly = true;
+            // 
+            // ColumnPrepopulation
+            // 
+            this.ColumnPrepopulation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnPrepopulation.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnPrepopulation.FillWeight = 40F;
+            resources.ApplyResources(this.ColumnPrepopulation, "ColumnPrepopulation");
+            this.ColumnPrepopulation.Name = "ColumnPrepopulation";
+            this.ColumnPrepopulation.ReadOnly = true;
+            // 
             // PvsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -257,10 +265,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrepopulation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConfiguration;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRs;
@@ -268,5 +272,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private XenAdmin.Commands.CommandButton enableButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCachingEnabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrepopulation;
     }
 }
