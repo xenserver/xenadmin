@@ -39,6 +39,11 @@ namespace XenAPI
             get { return name; }
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         #region IEquatable<PVS_site> Members
 
         /// <summary>

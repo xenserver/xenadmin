@@ -53,6 +53,7 @@
             this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrepopulation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
@@ -89,6 +90,7 @@
             this.columnVM,
             this.ColumnCachingEnabled,
             this.columnCurrentlyCached,
+            this.ColumnPvsSite,
             this.ColumnSR,
             this.ColumnPrepopulation});
             resources.ApplyResources(this.dataGridViewVms, "dataGridViewVms");
@@ -218,6 +220,12 @@
             this.columnCurrentlyCached.ReadOnly = true;
             this.columnCurrentlyCached.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // ColumnPvsSite
+            // 
+            resources.ApplyResources(this.ColumnPvsSite, "ColumnPvsSite");
+            this.ColumnPvsSite.Name = "ColumnPvsSite";
+            this.ColumnPvsSite.ReadOnly = true;
+            // 
             // ColumnSR
             // 
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -275,6 +283,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCachingEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPvsSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrepopulation;
     }

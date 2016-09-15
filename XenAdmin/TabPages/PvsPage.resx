@@ -152,6 +152,12 @@
   <data name="columnCurrentlyCached.Width" type="System.Int32, mscorlib">
     <value>247</value>
   </data>
+  <metadata name="ColumnPvsSite.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnPvsSite.HeaderText" xml:space="preserve">
+    <value>PVS Site</value>
+  </data>
   <metadata name="ColumnSR.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -625,6 +631,12 @@
     <value>columnCurrentlyCached</value>
   </data>
   <data name="&gt;&gt;columnCurrentlyCached.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnPvsSite.Name" xml:space="preserve">
+    <value>ColumnPvsSite</value>
+  </data>
+  <data name="&gt;&gt;ColumnPvsSite.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnSR.Name" xml:space="preserve">
