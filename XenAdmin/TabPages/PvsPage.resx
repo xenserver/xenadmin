@@ -167,18 +167,6 @@
   <data name="ColumnSR.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
-  <metadata name="ColumnPrepopulation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnPrepopulation.HeaderText" xml:space="preserve">
-    <value>Marked for prepopulation</value>
-  </data>
-  <data name="ColumnPrepopulation.MinimumWidth" type="System.Int32, mscorlib">
-    <value>168</value>
-  </data>
-  <data name="ColumnPrepopulation.Width" type="System.Int32, mscorlib">
-    <value>367</value>
-  </data>
   <data name="dataGridViewVms.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -643,12 +631,6 @@
     <value>ColumnSR</value>
   </data>
   <data name="&gt;&gt;ColumnSR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnPrepopulation.Name" xml:space="preserve">
-    <value>ColumnPrepopulation</value>
-  </data>
-  <data name="&gt;&gt;ColumnPrepopulation.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

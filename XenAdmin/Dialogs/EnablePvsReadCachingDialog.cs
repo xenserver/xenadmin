@@ -87,13 +87,11 @@ namespace XenAdmin.Dialogs
             var siteItemSelected = (ToStringWrapper<PVS_site>) pvsSiteList.SelectedItem;
             var siteSelected = siteItemSelected.item;
 
-            var prepopulate = prepopulateCheckBox.Checked;
-
             var actions = new List<AsyncAction>();
 
             foreach (var vm in vms)
             {
-                var action = GetAsyncActionForVm(vm, siteSelected, prepopulate);
+                var action = GetAsyncActionForVm(vm, siteSelected);
                 if (action != null)
                 {
                     actions.Add(action);
@@ -113,7 +111,7 @@ namespace XenAdmin.Dialogs
         /// <param name="siteSelected"></param>
         /// <param name="prepopulate"></param>
         /// <returns></returns>
-        private AsyncAction GetAsyncActionForVm(VM vm, PVS_site siteSelected, bool prepopulate)
+        private AsyncAction GetAsyncActionForVm(VM vm, PVS_site siteSelected)
         {
             if (PvsProxyAlreadyEnabled(vm))
             {
@@ -126,7 +124,7 @@ namespace XenAdmin.Dialogs
                 return null; // No VIF with device = 0, so can't enable
             }
 
-            return new PvsProxyCreateAction(vm, siteSelected, vif, prepopulate);
+            return new PvsProxyCreateAction(vm, siteSelected, vif, false); // TODO: new API will drop prepopulate
         }
 
         /// <summary>

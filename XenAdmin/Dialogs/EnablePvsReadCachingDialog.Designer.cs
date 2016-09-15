@@ -38,7 +38,6 @@ namespace XenAdmin.Dialogs
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cancel = new System.Windows.Forms.Button();
             this.enableButton = new System.Windows.Forms.Button();
-            this.prepopulateCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -54,8 +53,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.prepopulateCheckBox, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // rubricLabel
@@ -104,12 +102,6 @@ namespace XenAdmin.Dialogs
             this.enableButton.UseVisualStyleBackColor = true;
             this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
             // 
-            // prepopulateCheckBox
-            // 
-            resources.ApplyResources(this.prepopulateCheckBox, "prepopulateCheckBox");
-            this.prepopulateCheckBox.Name = "prepopulateCheckBox";
-            this.prepopulateCheckBox.UseVisualStyleBackColor = true;
-            // 
             // EnablePvsReadCachingDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -121,7 +113,6 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -140,6 +131,5 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button enableButton;
-        private System.Windows.Forms.CheckBox prepopulateCheckBox;
     }
 }

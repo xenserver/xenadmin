@@ -226,10 +226,9 @@ namespace XenAdmin.TabPages
             var cachedCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
             var srCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
-            var prepopulationCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell, prepopulationCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;
@@ -250,14 +249,9 @@ namespace XenAdmin.TabPages
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.site) };
 
             var srCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.cache_SR) };
-            
-            var prepopulationCell = new DataGridViewTextBoxCell
-            {
-                Value = pvsProxy.prepopulate ? Messages.YES : Messages.NO
-            };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell, prepopulationCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;
