@@ -73,6 +73,7 @@ namespace XenAdmin.TabPages
                 {
                     connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
                     connection.Cache.DeregisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
+                    connection.Cache.DeregisterBatchCollectionChanged<VM>(PvsProxyBatchCollectionChanged);
                 }
 
                 connection = value;
@@ -81,6 +82,7 @@ namespace XenAdmin.TabPages
                 {
                     connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
                     connection.Cache.RegisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
+                    connection.Cache.RegisterBatchCollectionChanged<VM>(PvsProxyBatchCollectionChanged);
                 }
 
                 LoadSites();
