@@ -89,24 +89,23 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var unknownType = false;
 
+            var someHostMayRequireRestart = false; // If a host has restartHost guidance, even if is a live patch,  we want this true (as live patch may fail)
+
             switch (SelectedUpdateType)
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch, LivePatchCodesByHost);
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch, LivePatchCodesByHost, out someHostMayRequireRestart);
                     break;
                 case UpdateType.NewSuppPack:
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers, out someHostMayRequireRestart);
                     break;
                 default:
                     unknownType = true;
                     break;
             }
 
-            var anyPoolForbidsAutoRestart = AnyPoolForbidsAutoRestart();
-            var patchRequiresReboot = PatchRequiresReboot();
-
-            var automaticDisabled = unknownType || (anyPoolForbidsAutoRestart && patchRequiresReboot);
+            var automaticDisabled = unknownType || (AnyPoolForbidsAutoRestart() && someHostMayRequireRestart);
 
             AutomaticRadioButton.Enabled = !automaticDisabled;
             AutomaticRadioButton.Checked = !automaticDisabled;
@@ -188,13 +187,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             return false;
         }
-
-        private bool PatchRequiresReboot()
-        {
-            return !textBoxLog.Text.Equals(Messages.PATCHINGWIZARD_MODEPAGE_NOACTION);
-        }
             
-
         private void button1_Click(object sender, EventArgs e)
         {
             string filePath = Path.GetTempFileName();
