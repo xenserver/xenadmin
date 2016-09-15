@@ -168,18 +168,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool IsInAutomaticMode { set; get; }
 
         public List<XenServerVersion> AutoDownloadedXenServerVersions { private get; set; }
-       
-        private bool PoolForbidsAutomaticUpdates(Pool pool)
-        {
-            var poolForbidsAutomaticKey = "XenCenter.CustomFields.hci-forbid-update-auto-restart";
-            var poolOtherConfig = Helpers.GetOtherConfig(pool);
-            if (poolOtherConfig.ContainsKey(poolForbidsAutomaticKey) &&
-                poolOtherConfig[poolForbidsAutomaticKey].ToLowerInvariant().Equals(bool.TrueString.ToLowerInvariant()))
-            {
-                return true;
-            }
-            return false;
-        }
 
         private void EnabledRow(Host host, UpdateType type, int index)
         {
@@ -189,6 +177,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (IsInAutomaticMode)
             {
+                // This check is first because it generally can't be fixed, it's a property of the host
+                if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden) // Forbids update auto restarts
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES;
+                    return;
+                }
+
                 var pool = Helpers.GetPool(host.Connection);
                 if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
                 {
@@ -233,14 +229,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
 
-                    return;
-                }
-
-                
-                if (poolOfOne != null && PoolForbidsAutomaticUpdates(poolOfOne))
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES;
                     return;
                 }
 
