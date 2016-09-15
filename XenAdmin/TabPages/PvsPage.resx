@@ -453,6 +453,9 @@
   <data name="enableButton.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
+  <data name="enableButton.Text" xml:space="preserve">
+    <value>Enable PVS read-caching</value>
+  </data>
   <data name="&gt;&gt;enableButton.Name" xml:space="preserve">
     <value>enableButton</value>
   </data>

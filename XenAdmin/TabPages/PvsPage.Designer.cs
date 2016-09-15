@@ -53,7 +53,7 @@
             this.ViewPvsSitesButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.enableButton = new XenAdmin.Commands.CommandButton();
-            this.disableButton = new System.Windows.Forms.Button();
+            this.disableButton = new XenAdmin.Commands.CommandButton();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
@@ -264,7 +264,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConfiguration;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRs;
-        public System.Windows.Forms.Button disableButton;
+        private XenAdmin.Commands.CommandButton disableButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private XenAdmin.Commands.CommandButton enableButton;

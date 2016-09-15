@@ -45,14 +45,18 @@ namespace XenAdmin.TabPages
     public partial class PvsPage : BaseTabPage
     {
         private IXenConnection connection;
-        private SelectionManager selectionManager;
+        private SelectionManager enableSelectionManager;
+        private SelectionManager disableSelectionManager;
         
         public PvsPage()
         {
             InitializeComponent();
 
             enableButton.Command = new EnablePvsReadCachingCommand();
-            selectionManager = new SelectionManager();
+            disableButton.Command = new DisablePvsReadCachingCommand();
+
+            enableSelectionManager = new SelectionManager();
+            disableSelectionManager = new SelectionManager();
             
             base.Text = Messages.PVS_TAB_TITLE;
         }
@@ -126,7 +130,8 @@ namespace XenAdmin.TabPages
                 UnregisterVMHandlers();
                 dataGridViewVms.Rows.Clear();
 
-                selectionManager.BindTo(enableButton, Program.MainWindow);
+                enableSelectionManager.BindTo(enableButton, Program.MainWindow);
+                disableSelectionManager.BindTo(disableButton, Program.MainWindow);
                
                 //foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
                 foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs)))
@@ -146,7 +151,8 @@ namespace XenAdmin.TabPages
         private void VmSelectionChanged(object sender, EventArgs e)
         {
             List<SelectedItem> selectedVMs = (from DataGridViewRow row in dataGridViewVms.SelectedRows select new SelectedItem((VM)row.Tag)).ToList();
-            selectionManager.SetSelection(selectedVMs);
+            enableSelectionManager.SetSelection(selectedVMs);
+            disableSelectionManager.SetSelection(selectedVMs);
         }
 
         private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
