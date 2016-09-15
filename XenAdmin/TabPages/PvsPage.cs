@@ -128,6 +128,8 @@ namespace XenAdmin.TabPages
             try
             {
                 dataGridViewVms.SuspendLayout();
+
+                var previousSelection = GetSelectedVMs();
                 
                 UnregisterVMHandlers();
                 dataGridViewVms.Rows.Clear();
@@ -139,8 +141,24 @@ namespace XenAdmin.TabPages
                 foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs)))
                     dataGridViewVms.Rows.Add(NewVmRow(vm));
 
-                if (dataGridViewVms.SelectedRows.Count == 0 && dataGridViewVms.Rows.Count > 0)
-                    dataGridViewVms.Rows[0].Selected = true;
+                if (dataGridViewVms.Rows.Count > 0)
+                {
+                    if (previousSelection.Any())
+                    {
+                        UnselectAllVMs(); // Component defaults the first row to selected
+                        foreach (var row in dataGridViewVms.Rows.Cast<DataGridViewRow>())
+                        {
+                            if (previousSelection.Contains((VM)row.Tag))
+                            {
+                                row.Selected = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        dataGridViewVms.Rows[0].Selected = true;
+                    }
+                }
 
                 dataGridViewVms.SelectionChanged += VmSelectionChanged;
             }
@@ -150,9 +168,22 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private void UnselectAllVMs()
+        {
+            foreach (var row in dataGridViewVms.SelectedRows.Cast<DataGridViewRow>())
+            {
+                row.Selected = false;
+            }
+        }
+
+        private IList<VM> GetSelectedVMs()
+        {
+            return dataGridViewVms.SelectedRows.Cast<DataGridViewRow>().Select(row => (VM)row.Tag).ToList();
+        }
+
         private void VmSelectionChanged(object sender, EventArgs e)
         {
-            List<SelectedItem> selectedVMs = (from DataGridViewRow row in dataGridViewVms.SelectedRows select new SelectedItem((VM)row.Tag)).ToList();
+            var selectedVMs = GetSelectedVMs().Select(vm => new SelectedItem(vm));
             enableSelectionManager.SetSelection(selectedVMs);
             disableSelectionManager.SetSelection(selectedVMs);
         }
