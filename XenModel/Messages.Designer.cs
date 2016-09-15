@@ -24831,6 +24831,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None (memory only).
+        /// </summary>
+        public static string NONE_MEMORY_ONLY {
+            get {
+                return ResourceManager.GetString("NONE_MEMORY_ONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None of the following:.
         /// </summary>
         public static string NONE_OF {

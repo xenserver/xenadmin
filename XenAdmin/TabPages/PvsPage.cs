@@ -248,7 +248,10 @@ namespace XenAdmin.TabPages
 
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.site) };
 
-            var srCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.cache_SR) };
+            var sr = Connection.Resolve(pvsProxy.cache_SR);
+            var srCell = new DataGridViewTextBoxCell { 
+                Value = sr != null? sr.ToString() : Messages.NONE_MEMORY_ONLY 
+            };
 
             var newRow = new DataGridViewRow { Tag = vm };
             newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell);

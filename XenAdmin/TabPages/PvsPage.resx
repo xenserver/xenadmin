@@ -162,7 +162,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnSR.HeaderText" xml:space="preserve">
-    <value>SR used for cache</value>
+    <value>Storage Repository</value>
   </data>
   <data name="ColumnSR.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>

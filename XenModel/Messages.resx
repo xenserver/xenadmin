@@ -8616,6 +8616,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NONE_DEFINED" xml:space="preserve">
     <value>None defined</value>
   </data>
+  <data name="NONE_MEMORY_ONLY" xml:space="preserve">
+    <value>None (memory only)</value>
+  </data>
   <data name="NONE_OF" xml:space="preserve">
     <value>None of the following:</value>
   </data>
