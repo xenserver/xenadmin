@@ -29,24 +29,34 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnablePvsReadCachingDialog));
-            this.readonlyCheckboxToolTipContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.enableButton = new System.Windows.Forms.Button();
+            this.cancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pvsSiteList = new System.Windows.Forms.ComboBox();
             this.pvsSiteLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cancel = new System.Windows.Forms.Button();
-            this.enableButton = new System.Windows.Forms.Button();
+            this.readonlyCheckboxToolTipContainer = new XenAdmin.Controls.ToolTipContainer();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // readonlyCheckboxToolTipContainer
+            // enableButton
             // 
-            resources.ApplyResources(this.readonlyCheckboxToolTipContainer, "readonlyCheckboxToolTipContainer");
-            this.readonlyCheckboxToolTipContainer.Name = "readonlyCheckboxToolTipContainer";
+            resources.ApplyResources(this.enableButton, "enableButton");
+            this.enableButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.enableButton.Name = "enableButton";
+            this.enableButton.UseVisualStyleBackColor = true;
+            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
+            // 
+            // cancel
+            // 
+            resources.ApplyResources(this.cancel, "cancel");
+            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancel.Name = "cancel";
+            this.cancel.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -87,25 +97,17 @@ namespace XenAdmin.Dialogs
             this.flowLayoutPanel1.Controls.Add(this.enableButton);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
-            // cancel
+            // readonlyCheckboxToolTipContainer
             // 
-            resources.ApplyResources(this.cancel, "cancel");
-            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.Name = "cancel";
-            this.cancel.UseVisualStyleBackColor = true;
-            // 
-            // enableButton
-            // 
-            resources.ApplyResources(this.enableButton, "enableButton");
-            this.enableButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.enableButton.Name = "enableButton";
-            this.enableButton.UseVisualStyleBackColor = true;
-            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
+            resources.ApplyResources(this.readonlyCheckboxToolTipContainer, "readonlyCheckboxToolTipContainer");
+            this.readonlyCheckboxToolTipContainer.Name = "readonlyCheckboxToolTipContainer";
             // 
             // EnablePvsReadCachingDialog
             // 
+            this.AcceptButton = this.enableButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.CancelButton = this.cancel;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.readonlyCheckboxToolTipContainer);
             this.HelpButton = false;
