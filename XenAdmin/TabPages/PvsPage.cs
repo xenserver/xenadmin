@@ -47,6 +47,8 @@ namespace XenAdmin.TabPages
         private IXenConnection connection;
         private SelectionManager enableSelectionManager;
         private SelectionManager disableSelectionManager;
+
+        private DataGridViewVms_DefaultSort vmDefaultSort;
         
         public PvsPage()
         {
@@ -57,6 +59,8 @@ namespace XenAdmin.TabPages
 
             enableSelectionManager = new SelectionManager();
             disableSelectionManager = new SelectionManager();
+
+            vmDefaultSort = new DataGridViewVms_DefaultSort();
             
             base.Text = Messages.PVS_TAB_TITLE;
         }
@@ -132,6 +136,9 @@ namespace XenAdmin.TabPages
                 var previousSelection = GetSelectedVMs();
                 
                 UnregisterVMHandlers();
+
+                dataGridViewVms.SortCompare += dataGridViewVms_SortCompare;
+
                 dataGridViewVms.Rows.Clear();
 
                 enableSelectionManager.BindTo(enableButton, Program.MainWindow);
@@ -141,11 +148,26 @@ namespace XenAdmin.TabPages
                 foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs)))
                     dataGridViewVms.Rows.Add(NewVmRow(vm));
 
+                if (dataGridViewVms.SortedColumn == null)
+                {
+                    dataGridViewVms.Sort(vmDefaultSort);
+                }
+                else
+                {
+
+                    var order = dataGridViewVms.SortOrder;
+                    ListSortDirection sortDirection = ListSortDirection.Ascending;
+                    if(order.Equals(SortOrder.Descending))
+                        sortDirection = ListSortDirection.Descending;
+
+                    dataGridViewVms.Sort(dataGridViewVms.SortedColumn, sortDirection);
+                }
+
                 if (dataGridViewVms.Rows.Count > 0)
                 {
+                    UnselectAllVMs(); // Component defaults the first row to selected
                     if (previousSelection.Any())
                     {
-                        UnselectAllVMs(); // Component defaults the first row to selected
                         foreach (var row in dataGridViewVms.Rows.Cast<DataGridViewRow>())
                         {
                             if (previousSelection.Contains((VM)row.Tag))
@@ -263,6 +285,7 @@ namespace XenAdmin.TabPages
         private void UnregisterVMHandlers()
         {
             dataGridViewVms.SelectionChanged -= VmSelectionChanged;
+            dataGridViewVms.SortCompare -= dataGridViewVms_SortCompare;
 
             foreach (DataGridViewRow row in dataGridViewVms.Rows)
             {
@@ -271,6 +294,35 @@ namespace XenAdmin.TabPages
                 vm.PropertyChanged -= VmPropertyChanged;
             }
         }
+
+        void dataGridViewVms_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            e.Handled = false;
+
+            if (!e.Column.Equals(columnVM))
+            {
+                // All columns in this table except VM name are likely to contain a lot of duplicates
+                // so always use VM as the tiebreaker for consistency
+                var cellValue1 = e.CellValue1.ToString();
+                var cellValue2 = e.CellValue2.ToString();
+
+                if (cellValue1 != cellValue2)
+                {
+                    e.SortResult = cellValue1.CompareTo(cellValue2);
+                    e.Handled = true;
+                    return;
+                }
+            }
+
+            // If we get here, either sorting by VM name column, or using it as tie breaker
+            // In order to sort by name, we actually use the built-in VM sort.
+            // This ensures we use the correct name sorting, and gives a consistent tie-breaker.
+            VM vm1 = (VM)dataGridViewVms.Rows[e.RowIndex1].Tag;
+            VM vm2 = (VM)dataGridViewVms.Rows[e.RowIndex2].Tag;
+            e.SortResult = vm1.CompareTo(vm2);
+            e.Handled = true;
+        }
+        
 
         private void PvsSiteBatchCollectionChanged(object sender, EventArgs e)
         {
@@ -301,6 +353,35 @@ namespace XenAdmin.TabPages
         private void ViewPvsSitesButton_Click(object sender, EventArgs e)
         {
             Program.MainWindow.ShowPerConnectionWizard(connection, new PvsSiteDialog(connection));
+        }
+    }
+
+    class DataGridViewVms_DefaultSort : System.Collections.IComparer
+    {
+        public int Compare(object first, object second)
+        {
+            // Default sort: Sort by whether caching is enabled (yes before no), using VM name (asc) as tiebreaker
+            DataGridViewRow row1 = (DataGridViewRow)first;
+            DataGridViewRow row2 = (DataGridViewRow)second;
+
+            string ce1 = row1.Cells[1].Value.ToString();
+            string ce2 = row2.Cells[1].Value.ToString();
+
+            int cachingEnabled1 = row1.Cells[1].Value.ToString().Equals(Messages.YES) ? 0 : 1;
+            int cachingEnabled2 = row2.Cells[1].Value.ToString().Equals(Messages.YES) ? 0 : 1;
+
+            if (cachingEnabled1 != cachingEnabled2)
+            {
+                return cachingEnabled1.CompareTo(cachingEnabled2);
+            }
+            else
+            {
+                // VM name as tiebreaker
+                var vm1 = row1.Tag as VM;
+                var vm2 = row2.Tag as VM;
+
+                return vm1.CompareTo(vm2);
+            }
         }
     }
 }
