@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
             if (selection.Any() &&  selection.AllItemsAre<VM>() && selection.GetConnectionOfAllItems() != null)
             {
                 var vms = selection.AsXenObjects<VM>();
-                if (vms.Any(vm => vm.Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(vm)) != null))
+                if (vms.Any(vm => vm.PvsProxy != null))
                 {
                     return true;
                 }

@@ -232,7 +232,7 @@ namespace XenAdmin.TabPages
         {
             System.Diagnostics.Trace.Assert(vm != null);
 
-            var pvsProxy = vm.Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(vm)); // null if no proxy
+            var pvsProxy = vm.PvsProxy;
             
             if (pvsProxy == null)
             {

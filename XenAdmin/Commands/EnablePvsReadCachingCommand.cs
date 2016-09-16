@@ -86,35 +86,13 @@ namespace XenAdmin.Commands
             if (selection.Any() &&  selection.AllItemsAre<VM>() && selection.GetConnectionOfAllItems() != null)
             {
                 var vms = selection.AsXenObjects<VM>();
-                if (vms.Any(vm => !PvsProxyAlreadyEnabled(vm)))
+                if (vms.Any(vm => vm.PvsProxy == null))
                 {
                     return true;
                 }
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// A VM can be enabled if there isn't already a PVS_Proxy on its VIF
-        /// </summary>
-        /// <param name="vm"></param>
-        /// <returns></returns>
-        private bool PvsProxyAlreadyEnabled(VM vm)
-        {
-            var connection = vm.Connection;
-
-            var pvsProxies = connection.Cache.PVS_proxies;
-
-            foreach (var pvsProxy in pvsProxies)
-            {
-                if (vm.Equals(pvsProxy.VM))
-                {
-                    return true; // Already got a PVS proxy on this vm
-                }
-            }
-
-            return false; // No PVS proxy is on this VM
         }
 
         public override string ButtonText
