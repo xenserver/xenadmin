@@ -165,6 +165,8 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewVms.Rows.Count > 0)
                 {
+                    dataGridViewVms.SelectionChanged += VmSelectionChanged;
+
                     UnselectAllVMs(); // Component defaults the first row to selected
                     if (previousSelection.Any())
                     {
@@ -181,8 +183,6 @@ namespace XenAdmin.TabPages
                         dataGridViewVms.Rows[0].Selected = true;
                     }
                 }
-
-                dataGridViewVms.SelectionChanged += VmSelectionChanged;
             }
             finally
             {
