@@ -511,6 +511,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable PVS Read-caching.
+        /// </summary>
+        public static string ACTION_DISABLE_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling PVS Read-caching for VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLE_PVS_READ_CACHING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_PVS_READ_CACHING_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabling .
         /// </summary>
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION {
@@ -525,6 +543,24 @@ namespace XenAdmin {
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled PVS Read-caching for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLED_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling PVS Read-caching for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLING_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_PVS_READ_CACHING", resourceCulture);
             }
         }
         
@@ -817,6 +853,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable PVS Read-caching.
+        /// </summary>
+        public static string ACTION_ENABLE_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling PVS Read-caching for VM &apos;{0}&apos; on site &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLE_PVS_READ_CACHING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_PVS_READ_CACHING_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling.
         /// </summary>
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION {
@@ -831,6 +885,24 @@ namespace XenAdmin {
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled PVS Read-caching for selected VMs.
+        /// </summary>
+        public static string ACTION_ENABLED_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling PVS Read-caching for selected VMs.
+        /// </summary>
+        public static string ACTION_ENABLING_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_PVS_READ_CACHING", resourceCulture);
             }
         }
         

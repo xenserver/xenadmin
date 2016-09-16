@@ -43,14 +43,12 @@ namespace XenAdmin.Actions
         private VM vm;
         private PVS_site site;
         private VIF vif;
-        private bool prepopulate;
 
-        public PvsProxyCreateAction(VM vm, PVS_site site, VIF vif, bool prepopulate)
-            : base(vm.Connection, "TODO: enabling PVS read-caching")
+        public PvsProxyCreateAction(VM vm, PVS_site site, VIF vif)
+            : base(vm.Connection, string.Format(Messages.ACTION_ENABLE_PVS_READ_CACHING_FOR, vm, site))
         {
             this.site = site;
             this.vif = vif;
-            this.prepopulate = prepopulate;
 
             this.Session = vm.Connection.Session;
             this.VM = vm;
@@ -70,12 +68,10 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Title = "TODO";
-            Description = "TODO: enabling read-caching";
-
             try
             {
-                PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref, prepopulate);
+                PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref, false); //prepopulate is being removed
+                this.Description = Messages.ENABLED;
             }
             catch (Exception e)
             {

@@ -83,7 +83,20 @@ namespace XenAdmin.Commands
 
             if (actions.Any())
             {
-                new ParallelAction("TODO title", "TODO start desc", "TODO end desc", actions).RunExternal(vms[0].Connection.Session);
+                var session = vms[0].Connection.Session;
+
+                if (actions.Count == 1)
+                {
+                    actions[0].RunExternal(session);
+                }
+                else
+                {
+                    new ParallelAction(
+                        Messages.ACTION_DISABLE_PVS_READ_CACHING,
+                        Messages.ACTION_DISABLING_PVS_READ_CACHING,
+                        Messages.ACTION_DISABLED_PVS_READ_CACHING,
+                        actions).RunExternal(session);
+                }
             }
         }
 

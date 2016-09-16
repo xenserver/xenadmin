@@ -100,7 +100,20 @@ namespace XenAdmin.Dialogs
 
             if (actions.Any())
             {
-                new ParallelAction("TODO title", "TODO start desc", "TODO end desc", actions).RunExternal(vms[0].Connection.Session);
+                var session = vms[0].Connection.Session;
+
+                if (actions.Count == 1)
+                {
+                    actions[0].RunExternal(session);
+                }
+                else
+                {
+                    new ParallelAction(
+                        Messages.ACTION_ENABLE_PVS_READ_CACHING,
+                        Messages.ACTION_ENABLING_PVS_READ_CACHING,
+                        Messages.ACTION_ENABLED_PVS_READ_CACHING,
+                        actions).RunExternal(session);
+                }
             }
         }
 
@@ -124,7 +137,7 @@ namespace XenAdmin.Dialogs
                 return null; // No VIF with device = 0, so can't enable
             }
 
-            return new PvsProxyCreateAction(vm, siteSelected, vif, false); // TODO: new API will drop prepopulate
+            return new PvsProxyCreateAction(vm, siteSelected, vif);
         }
 
         /// <summary>

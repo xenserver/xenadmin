@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
         private PVS_proxy proxy;
 
         public PvsProxyDestroyAction(PVS_proxy proxy)
-            : base(proxy.Connection, "TODO: enabling PVS read-caching")
+            : base(proxy.Connection, string.Format(Messages.ACTION_DISABLE_PVS_READ_CACHING_FOR, proxy.VM))
         {
             this.proxy = proxy;
             this.Session = proxy.Connection.Session;
@@ -64,12 +64,10 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Title = "TODO";
-            Description = "TODO: disabling read-caching";
-
             try
             {
                 PVS_proxy.async_destroy(Session, proxy.opaque_ref);
+                this.Description = Messages.DISABLED;
             }
             catch (Exception e)
             {

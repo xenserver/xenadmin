@@ -267,11 +267,23 @@
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
+  <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disabled PVS Read-caching for selected VMs</value>
+  </data>
+  <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disable PVS Read-caching</value>
+  </data>
+  <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
+    <value>Disabling PVS Read-caching for VM '{0}'</value>
+  </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Disable container management on VM '{0}'</value>
+  </data>
+  <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disabling PVS Read-caching for selected VMs</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -369,11 +381,23 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR cleanup ({0})</value>
   </data>
+  <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enabled PVS Read-caching for selected VMs</value>
+  </data>
+  <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enable PVS Read-caching</value>
+  </data>
+  <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
+    <value>Enabling PVS Read-caching for VM '{0}' on site '{1}'</value>
+  </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Enable container management on VM '{0}'</value>
+  </data>
+  <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enabling PVS Read-caching for selected VMs</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
