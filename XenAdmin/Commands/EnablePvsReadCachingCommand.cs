@@ -110,13 +110,5 @@ namespace XenAdmin.Commands
                 return "Enable PVS Read-caching";
             }
         }
-
-        public override Image MenuImage
-        {
-            get
-            {
-                return Resources.edit_16;
-            }
-        }
     }
 }
