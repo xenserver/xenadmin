@@ -9443,10 +9443,10 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>{0} failure tolerated</value>
   </data>
   <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
-    <value>Automatic post-update tasks are not supported for at least one server to be updated.</value>
+    <value>Post-update tasks cannot be carried out automatically for all the servers to be updated.</value>
   </data>
   <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>Automatic updates are not supported for this server.</value>
+    <value>Automatic update is not supported for this server.</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Pool General Properties</value>

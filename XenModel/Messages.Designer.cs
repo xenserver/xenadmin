@@ -27028,7 +27028,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic post-update tasks are not supported for at least one server to be updated..
+        ///   Looks up a localized string similar to Post-update tasks cannot be carried out automatically for all the servers to be updated..
         /// </summary>
         public static string POOL_FORBIDS_AUTOMATIC_RESTARTS {
             get {
@@ -27037,7 +27037,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic updates are not supported for this server..
+        ///   Looks up a localized string similar to Automatic update is not supported for this server..
         /// </summary>
         public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
             get {
