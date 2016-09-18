@@ -1322,9 +1322,6 @@
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>无法将空光盘驱动器连接到 VM。</value>
   </data>
-  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
-    <value>空间不足，无法启用 LVHD 精简置备。</value>
-  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
   </data>
@@ -1685,6 +1682,9 @@
   <data name="VIF_NOT_IN_MAP" xml:space="preserve">
     <value>此 VIF 未映射到目标网络</value>
   </data>
+  <data name="VLAN_IN_USE" xml:space="preserve">
+    <value>无法执行操作，因为此 VLAN 已在使用中。请检查您的网络配置。</value>
+  </data>
   <data name="VLAN_TAG_INVALID" xml:space="preserve">
     <value>您尝试创建 VLAN，但提供的标记({0})无效 -- 它必须介于 0 与 4094 之间。</value>
   </data>
@@ -1759,6 +1759,9 @@
   </data>
   <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
     <value>主机不具备 VM 当前正在使用的部分 CPU 功能</value>
+  </data>
+  <data name="VM_IS_IMMOBILE" xml:space="preserve">
+    <value>VM 是通过阻止其被移动的方式配置的。</value>
   </data>
   <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
     <value>该 VM 无法单独恢复，因为它是 VM 设备的一部分。</value>

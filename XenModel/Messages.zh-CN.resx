@@ -264,11 +264,17 @@
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>正在分离多个存储项</value>
   </data>
+  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Disable live patching</value>
+  </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在禁用 </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>在 VM“{0}”上禁用容器管理</value>
+  </data>
+  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>已激活磁盘...</value>
@@ -366,11 +372,17 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR 清理 ({0})</value>
   </data>
+  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Enable live patching</value>
+  </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在启用</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>在 VM“{0}”上启用容器管理</value>
+  </data>
+  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因块校验和不匹配而失败。请重新尝试导出。</value>
@@ -416,9 +428,6 @@
   </data>
   <data name="ACTION_EXPORT_VERIFY" xml:space="preserve">
     <value>正在对导出进行验证...</value>
-  </data>
-  <data name="ACTION_EXPORT_VM_FROM_X" xml:space="preserve">
-    <value>正在从“{1}”导出 VM“{0}”</value>
   </data>
   <data name="ACTION_GETTING_DATASOURCES" xml:space="preserve">
     <value>正在提取数据源</value>
@@ -908,6 +917,9 @@
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>正在更新“{0}”上的集成 GPU 直通</value>
+  </data>
+  <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
+    <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
     <value>将服务器状态报告上载到 [Citrix] Insight Services</value>
@@ -2692,11 +2704,25 @@
   <data name="CONFIRM_FORCESHUTDOWN_VM_TITLE" xml:space="preserve">
     <value>强制关闭 VM</value>
   </data>
+  <data name="CONFIRM_REBOOT_HCI_WARN_SERVER" xml:space="preserve">
+    <value>重新启动服务器还将关闭其上运行的所有 VM。“{0}”正在运行存储虚拟设备，重新启动可能会影响您的存储的可用性。是否确实要继续?</value>
+  </data>
+  <data name="CONFIRM_REBOOT_HCI_WARN_SERVERS" xml:space="preserve">
+    <value>重新启动服务器还将关闭其上运行的所有 VM。以下服务器正在运行存储虚拟设备，重新启动可能会影响您的存储的可用性:
+
+{0}
+
+是否确实要继续?</value>
+  </data>
   <data name="CONFIRM_REBOOT_SERVER" xml:space="preserve">
-    <value>是否确实要重新启动所选服务器? 该操作还将关闭该服务器上运行的所有 VM。</value>
+    <value>是否确实要重新启动“{0}”?
+
+此操作还将关闭其上当前正在运行的所有 VM。</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVERS" xml:space="preserve">
-    <value>是否确实要重新启动所选服务器? 此操作还将关闭所选服务器上正在运行的所有 VM。</value>
+    <value>是否确实要重新启动所选服务器?
+
+此操作还将关闭所选服务器上当前正在运行的所有 VM。</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVERS_NO_VMS" xml:space="preserve">
     <value>是否确实要重新启动所选服务器?</value>
@@ -2705,10 +2731,13 @@
     <value>重新启动多个服务器</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVER_NO_VMS" xml:space="preserve">
-    <value>是否确实要重新启动所选服务器?</value>
+    <value>是否确实要重新启动“{0}”?</value>
   </data>
   <data name="CONFIRM_REBOOT_SERVER_TITLE" xml:space="preserve">
     <value>重新启动服务器</value>
+  </data>
+  <data name="CONFIRM_REBOOT_SERVER_YES_BUTTON_LABEL" xml:space="preserve">
+    <value>是，重新启动(&amp;Y)</value>
   </data>
   <data name="CONFIRM_REBOOT_VM" xml:space="preserve">
     <value>是否确实要重新启动所选 VM?</value>
@@ -2730,6 +2759,16 @@
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>重新启动 Toolstack</value>
+  </data>
+  <data name="CONFIRM_SHUTDOWN_HCI_WARN_SERVER" xml:space="preserve">
+    <value>关闭服务器还将关闭其上运行的所有 VM。“{0}”正在运行存储虚拟设备，关闭可能会影响您的存储的可用性。是否确实要继续?</value>
+  </data>
+  <data name="CONFIRM_SHUTDOWN_HCI_WARN_SERVERS" xml:space="preserve">
+    <value>关闭服务器还将关闭其上运行的所有 VM。以下服务器正在运行存储虚拟设备，关闭可能会影响您的存储的可用性:
+
+{0}
+
+是否确实要继续?</value>
   </data>
   <data name="CONFIRM_SHUTDOWN_SERVER" xml:space="preserve">
     <value>是否确实要关闭 {0}?
@@ -2919,6 +2958,9 @@
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>此服务器不可用。</value>
   </data>
+  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
+    <value>{0} Nutanix CVM 控制台</value>
+  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>此 VM 当前已关闭。</value>
   </data>
@@ -3083,9 +3125,6 @@
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>目标位置:</value>
   </data>
-  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
-    <value>主服务器:</value>
-  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>模板:</value>
   </data>
@@ -3097,6 +3136,9 @@
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>存储:</value>
+  </data>
+  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
+    <value>目标服务器:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>迁移网络:</value>
@@ -3138,7 +3180,7 @@
     <value>选择要将所选 VM 迁移到的池或独立服务器。</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>(可选)在目标池中指定主服务器(&amp;H):</value>
+    <value>(可选)在目标池中指定目标服务器(&amp;T):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>目标池</value>
@@ -3711,10 +3753,10 @@
     <value>删除 VM 保护策略</value>
   </data>
   <data name="DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION" xml:space="preserve">
-    <value>删除 WLB 优化模式</value>
+    <value>删除 WLB 优化计划程序</value>
   </data>
   <data name="DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING" xml:space="preserve">
-    <value>是否确实要删除选中的优化模式?</value>
+    <value>此操作将删除所选计划程序。是否要继续?</value>
   </data>
   <data name="DELETING_ALL_TAG" xml:space="preserve">
     <value>正在删除标记“{0}”</value>
@@ -4833,6 +4875,9 @@
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] 在启动 PuTTY 时遇到问题。</value>
   </data>
+  <data name="ERROR_SECURE_CHANNEL_FAILURE" xml:space="preserve">
+    <value>无法创建 SSL/TLS 安全通道。</value>
+  </data>
   <data name="ERROR_UNKNOWN" xml:space="preserve">
     <value>出现未知错误。</value>
   </data>
@@ -5002,6 +5047,15 @@
   <data name="EXPORT_OPTIONS_PAGE_TITLE" xml:space="preserve">
     <value>选择所需的清单文件、签名和输出文件格式选项</value>
   </data>
+  <data name="EXPORT_OVA_PACKAGE" xml:space="preserve">
+    <value>从“{1}”中导出 OVA 包“{0}”</value>
+  </data>
+  <data name="EXPORT_OVF_PACKAGE" xml:space="preserve">
+    <value>从“{1}”中导出 OVF 包“{0}”</value>
+  </data>
+  <data name="EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID" xml:space="preserve">
+    <value>此证书无效。</value>
+  </data>
   <data name="EXPORT_SECURITY_PAGE_ERROR_CERT_NON_EXIST" xml:space="preserve">
     <value>证书文件不存在。</value>
   </data>
@@ -5040,6 +5094,9 @@
   </data>
   <data name="EXPORT_UPDATES" xml:space="preserve">
     <value>将更新导出到 {0}</value>
+  </data>
+  <data name="EXPORT_VM_TITLE" xml:space="preserve">
+    <value>从“{1}”中导出 VM“{0}”</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>完成时验证导出(&amp;V)</value>
@@ -5233,6 +5290,15 @@
   <data name="FOLDER_ALREADY_EXISTS" xml:space="preserve">
     <value>已存在同名文件夹</value>
   </data>
+  <data name="FOLDER_BROWSER_BUG_TOOL" xml:space="preserve">
+    <value>指定要用于保存报告的文件夹。</value>
+  </data>
+  <data name="FOLDER_BROWSER_DOWNLOAD_APPLIANCE" xml:space="preserve">
+    <value>指定要将文件下载到的文件夹。</value>
+  </data>
+  <data name="FOLDER_BROWSER_EXPORT_APPLIANCE" xml:space="preserve">
+    <value>指定用于保存所导出的文件的文件夹。</value>
+  </data>
   <data name="FOLDER_NO_CONNECTION" xml:space="preserve">
     <value>连接服务器以创建文件夹</value>
   </data>
@@ -5349,6 +5415,9 @@
   </data>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>输入 vApp 名称和可选说明。</value>
+  </data>
+  <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
+    <value>{0} on {1}</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
     <value>需要重新启动服务器“{0}”，更新“{1}”才能生效</value>
@@ -6099,7 +6168,7 @@
     <value>正在启动 VM...</value>
   </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
-    <value>正在将 VM 从“{0}”导入“{1}”</value>
+    <value>将 VM 从“{0}”导入到“{1}”</value>
   </data>
   <data name="IMPORTVM_UPDATING_NETWORKS" xml:space="preserve">
     <value>正在更新 VM 网络连接...</value>
@@ -6111,10 +6180,10 @@
     <value>正在等待“导入 VM”向导完成...</value>
   </data>
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
-    <value>导入设备</value>
+    <value>将设备“{0}”导入到“{1}”</value>
   </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
-    <value>导入磁盘映像</value>
+    <value>将 VM“{0}”从磁盘映像导入到“{1}”</value>
   </data>
   <data name="IMPORT_DOWNLOAD_ERROR" xml:space="preserve">
     <value>下载文件“{0}”时出错。{1}</value>
@@ -6184,6 +6253,9 @@
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH" xml:space="preserve">
     <value>路径包含无效字符。</value>
+  </data>
+  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI" xml:space="preserve">
+    <value>请指定一个有效的 URI。</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH" xml:space="preserve">
     <value>路径不存在。</value>
@@ -6806,6 +6878,15 @@ XenApp/XenDesktop Platinum 功能已启用</value>
   </data>
   <data name="LIST_SEPARATOR" xml:space="preserve">
     <value>, </value>
+  </data>
+  <data name="LIVE_PATCHING" xml:space="preserve">
+    <value>Live Patching</value>
+  </data>
+  <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
+    <value>Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them.</value>
+  </data>
+  <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
+    <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
   </data>
   <data name="LOADING" xml:space="preserve">
     <value>正在加载“{0}”...</value>
@@ -7781,7 +7862,7 @@ SCSI ID: {2}
     <value>从不</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>新磁盘将在下次重新启动 VM 后显示。</value>
+    <value>You need to shutdown and then restart the VM before it can access the new disk.</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>已创建磁盘</value>
@@ -7861,7 +7942,7 @@ SCSI ID: {2}
   <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
     <value>SMB 服务器是常见的 Windows 共享文件系统基础结构形式，可用作虚拟磁盘的存储库基底。
 
-由于 SMB 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 Live Migration 在这些服务器之间迁移。
+由于 SMB 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用实时迁移功能在这些服务器之间迁移。
 
 配置 SMB 存储库时，只需提供 SMB 服务器的主机名或 IP 地址、用户名、密码以及用来包含存储库的目录路径。SMB 服务器必须配置为导出池中所有服务器的指定路径。</value>
   </data>
@@ -7908,7 +7989,7 @@ SCSI ID: {2}
     <value>精简</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic 是一种可扩展的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如 Live Migration 和高可用性。</value>
+    <value>Dell EqualLogic 是一种可扩展的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如实时迁移和高可用性。</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -8083,7 +8164,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWSR_VHDONFS_BLURB" xml:space="preserve">
     <value>NFS 服务器是常见的共享文件系统基础结构形式，可用作虚拟磁盘的存储库基础。
 
-由于 NFS 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用 Live Migration 在这些服务器之间迁移。
+由于 NFS 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用实时迁移功能在这些服务器之间迁移。
 
 配置 NFS 存储库时，只需提供 NFS 服务器的主机名或 IP 地址以及用来包含存储库的目录路径。NFS 服务器必须配置为导出池中所有服务器的指定路径。</value>
   </data>
@@ -8270,7 +8351,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>查找操作系统安装介质</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
-    <value>磁盘 {0}</value>
+    <value>磁盘“{0}”</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
     <value>由模板设置程序创建</value>
@@ -8619,6 +8700,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_ENOUGH_SPACE_DESCRIPTION" xml:space="preserve">
     <value>此主机的磁盘空间不足，无法安装此更新</value>
   </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
+    <value>There is not enough space to automatically update '{0}'.</value>
+  </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>可用空间: {0}</value>
   </data>
@@ -8855,8 +8939,35 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PASTE" xml:space="preserve">
     <value>粘贴</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
+    <value>Update process was not completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
+    <value>Following errors occurred while automatic upgrade was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
+    <value>Following error occurred while automatic upgrade was in progress: </value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
+    <value>Update was not completed successfully</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
+    <value>Upload and Install</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
+    <value>Automatically uploading and installing updates</value>
+  </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>清理...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
+    <value>Downloading update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
+    <value>Skipping download: Already downloaded update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
+    <value>Waiting to download update {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>不需要操作</value>
@@ -8933,17 +9044,26 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_PATCHINGPAGE_TITLE" xml:space="preserve">
     <value>安装更新</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE" xml:space="preserve">
+    <value>Checking disk space requirements</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FAILED" xml:space="preserve">
     <value>预检查失败。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>执行更新预检查是为了确认更新 {0} 能够在服务器上应用。</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>执行更新预检查以验证是否能够将所选更新应用到服务器。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>解决</value>
+  </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL" xml:space="preserve">
+    <value>正在解决问题...</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TEXT" xml:space="preserve">
     <value>预检查</value>
@@ -8963,11 +9083,23 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] 更新和补充包(*.{0}、*.iso)|*.{0};*.iso</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+    <value>Automatic update is not supported on this [XenServer] version</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>无法在此版本的 [XenServer] 上安装补充包</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
+    <value>This server is not licensed for automatic updating</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
+    <value>不能使用 [XenCenter] 应用更新。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新</value>
@@ -8975,11 +9107,28 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>更新不适用</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
+    <value>This server cannot be updated automatically</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
+    <value>This server is already up-to-date</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>选择服务器</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>选择要更新的服务器</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
+Greyed out servers cannot be updated automatically.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>Select one or more servers from the list of available servers.
+Servers where the selected update cannot be applied appear disabled in this list.</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Automatic update has finished.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] 现在正在下载您的更新并将其上载到在上一步骤中指定的服务器。
@@ -9018,6 +9167,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
+  </data>
+  <data name="PATCHING_WIZARD_RUNNING_PRECHECKS" xml:space="preserve">
+    <value>正在运行预检查...</value>
   </data>
   <data name="PATCHING_WIZARD_SOLVE_MANUALLY" xml:space="preserve">
     <value>无法解决该问题:\n{0}\n\n请手动解决该问题，然后单击“重新检查”。
@@ -9796,11 +9948,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>已解析为 {0}</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>Restore dismissed updates</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>备份文件已加载到服务器“{0}”中。有关如何完成还原过程的说明，请参阅《[XenServer product] 管理员指南》。</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>从备份还原...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>Restoring...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>正在还原服务器“{0}”</value>
@@ -10121,6 +10279,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>正在执行服务器请求</value>
+  </data>
+  <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
+    <value>Disk space check</value>
   </data>
   <data name="SERVER_SIDE_CHECK_DESCRIPTION" xml:space="preserve">
     <value>服务器端修补程序检查</value>
@@ -10800,6 +10961,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="TARGET" xml:space="preserve">
     <value>目标</value>
   </data>
+  <data name="TARGET_SERVER" xml:space="preserve">
+    <value>目标服务器</value>
+  </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>了解更多信息 ...</value>
   </data>
@@ -11171,6 +11335,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>无法迁移 VM“{0}”</value>
   </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON" xml:space="preserve">
+    <value>由于许可证限制，无法迁移 VM“{0}”。</value>
+  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON" xml:space="preserve">
     <value>由于未知原因，无法迁移 VM“{0}”。有关更多详细信息，请参阅应用程序日志。</value>
   </data>
@@ -11318,7 +11485,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在重新启动 {0} ... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
-    <value>正在从 {1} 中删除更新 {0}... </value>
+    <value>正在从 {1} 中删除更新安装文件 {0}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
+    <value>Removing update files from {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>单击此处修复</value>
@@ -11494,12 +11664,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已上载</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
-    <value>升级你的 [XenServer] 许可来激活 Active Directory 功能。Active Directory 功能允许你通过增加命名用户帐号来配置 [XenServer] 实现访问控制。</value>
+    <value>升级您的 [XenServer] 许可证以启用 Active Directory。Active Directory 允许您通过添加命名用户帐户来配置 [XenServer] 访问控制功能。</value>
   </data>
   <data name="UPSELL_BLURB_AD_MORE" xml:space="preserve">
     <value>
 
-要了解更多 [XenServer] 的 Active Directory 功能，或 获取一个 [XenServer]试用许可，请点击以下按钮。</value>
+要了解与 [XenServer] Active Directory 功能有关的更多信息，或者启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
@@ -11747,7 +11917,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>[XenCenter] {0} (build {1}.{2}) {3} 位</value>
   </data>
-  <data name="VGPU_DESCRIPTION" xml:space="preserve">
+  <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
+    <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
@@ -12946,23 +13119,5 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
-  </data>
-  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Disable live patching</value>
-  </data>
-  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Disabling live patching for '{0}'</value>
-  </data>
-  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Enable live patching</value>
-  </data>
-  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Enabling live patching for '{0}'</value>
-  </data>
-  <data name="LIVE_PATCHING" xml:space="preserve">
-    <value>Live Patching</value>
-  </data>
-  <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
-    <value>{0} on {1}</value>
   </data>
 </root>
