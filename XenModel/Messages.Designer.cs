@@ -11447,11 +11447,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t assign a home server.
+        ///   Looks up a localized string similar to Don&apos;t select a target server.
         /// </summary>
-        public static string DONT_ASSIGN_HOME_SERVER {
+        public static string DONT_SELECT_TARGET_SERVER {
             get {
-                return ResourceManager.GetString("DONT_ASSIGN_HOME_SERVER", resourceCulture);
+                return ResourceManager.GetString("DONT_SELECT_TARGET_SERVER", resourceCulture);
             }
         }
         
