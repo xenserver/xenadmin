@@ -1717,7 +1717,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set VM other_config.
+        ///   Looks up a localized string similar to Saving VM Configuration.
         /// </summary>
         public static string ACTION_SET_VM_OTHER_CONFIG_TITLE {
             get {
