@@ -861,17 +861,23 @@
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>The provision call can only be invoked on templates, not regular VMs.</value>
   </data>
+  <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
+    <value>The PVS site already has cache storage configured for the host.</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_IS_IN_USE" xml:space="preserve">
+    <value>The PVS cache storage is in use by the site and cannot be removed.</value>
+  </data>
+  <data name="PVS_PROXY_ALREADY_PRESENT" xml:space="preserve">
+    <value>The VIF is already associated with a PVS proxy</value>
+  </data>
+  <data name="PVS_SERVER_ADDRESS_IN_USE" xml:space="preserve">
+    <value>The address specified is already in use by an existing PVS_server object</value>
+  </data>
   <data name="PVS_SITE_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
     <value>The PVS site contains running proxies.</value>
   </data>
   <data name="PVS_SITE_CONTAINS_SERVERS" xml:space="preserve">
     <value>The PVS site contains servers and cannot be forgotten.</value>
-  </data>
-  <data name="PVS_SITE_SR_ALREADY_ADDED" xml:space="preserve">
-    <value>Trying to add a cache SR that is already associated with the site</value>
-  </data>
-  <data name="PVS_SITE_SR_IS_IN_USE" xml:space="preserve">
-    <value>The SR is in use by the site and cannot be removed.</value>
   </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>Your current role is not authorized to perform this action.
@@ -1553,6 +1559,9 @@ Authorized Roles: {1}</value>
   <data name="SUBJECT_CANNOT_BE_RESOLVED" xml:space="preserve">
     <value>Subject cannot be resolved by the external directory service.</value>
   </data>
+  <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
+    <value>The suspend image of a checkpoint is not accessible from the host on which the VM is running</value>
+  </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>You must use tar output to retrieve system status from an OEM server.</value>
   </data>
@@ -1783,6 +1792,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>The operation attempted is not valid for templates</value>
+  </data>
+  <data name="VM_LACKS_FEATURE" xml:space="preserve">
+    <value>You attempted an operation on a VM which lacks the feature.</value>
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>

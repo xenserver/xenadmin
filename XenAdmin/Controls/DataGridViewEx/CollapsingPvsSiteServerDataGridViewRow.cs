@@ -88,7 +88,7 @@ namespace XenAdmin.Controls.DataGridViewEx
                 else
                     SetCollapseIcon();
 
-                siteCell.Value = site.name;
+                siteCell.Value = site.Name;
             }
             else
             {

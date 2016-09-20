@@ -70,7 +70,7 @@ namespace XenAdmin.Actions
         {
             try
             {
-                PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref, false); //prepopulate is being removed
+                PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref);
                 this.Description = Messages.ENABLED;
             }
             catch (Exception e)

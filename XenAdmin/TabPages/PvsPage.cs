@@ -212,7 +212,7 @@ namespace XenAdmin.TabPages
 
         private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
         {
-            var siteCell = new DataGridViewTextBoxCell {Value = pvsSite.name};
+            var siteCell = new DataGridViewTextBoxCell {Value = pvsSite.name_label};
             var configurationCell = new DataGridViewTextBoxCell
             {
                 Value = pvsSite.cache_storage.Count > 0 ? Messages.PVS_CACHE_MEMORY_AND_DISK: Messages.PVS_CACHE_MEMORY_ONLY
@@ -270,7 +270,7 @@ namespace XenAdmin.TabPages
 
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.site) };
 
-            var sr = Connection.Resolve(pvsProxy.cache_SR);
+            var sr = string.Empty;
             var srCell = new DataGridViewTextBoxCell { 
                 Value = sr != null? sr.ToString() : Messages.NONE_MEMORY_ONLY 
             };

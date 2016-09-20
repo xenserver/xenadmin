@@ -28,28 +28,37 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 using System;
+using System.Collections.Generic;
+
 
 namespace XenAPI
 {
-    public partial class PVS_site : XenObject<PVS_site>, IEquatable<PVS_site>
+    public enum pvs_proxy_status
     {
-        public override string ToString()
+        stopped, initialised, caching, incompatible_write_cache_mode, incompatible_protocol_version, unknown
+    }
+
+    public static class pvs_proxy_status_helper
+    {
+        public static string ToString(pvs_proxy_status x)
         {
-            return name_label;
+            switch (x)
+            {
+                case pvs_proxy_status.stopped:
+                    return "stopped";
+                case pvs_proxy_status.initialised:
+                    return "initialised";
+                case pvs_proxy_status.caching:
+                    return "caching";
+                case pvs_proxy_status.incompatible_write_cache_mode:
+                    return "incompatible_write_cache_mode";
+                case pvs_proxy_status.incompatible_protocol_version:
+                    return "incompatible_protocol_version";
+                default:
+                    return "unknown";
+            }
         }
-
-        #region IEquatable<PVS_site> Members
-
-        /// <summary>
-        /// Indicates whether the current object is equal to the specified object. This calls the implementation from XenObject.
-        /// This implementation is required for ToStringWrapper.
-        /// </summary>
-        public bool Equals(PVS_site other)
-        {
-            return base.Equals(other);
-        }
-
-        #endregion
     }
 }
