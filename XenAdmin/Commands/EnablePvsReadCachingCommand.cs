@@ -82,9 +82,17 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            // Can execute criteria: A selection of VMs in the same pool, where at least one doesn't have PVS read caching enabled
-            if (selection.Any() &&  selection.AllItemsAre<VM>() && selection.GetConnectionOfAllItems() != null)
+            // Must have a selection, of all VMs
+            if (selection.Any() &&  selection.AllItemsAre<VM>())
             {
+                // Must all be in the same pool, which must have at least one PVS site
+                var connection = selection.GetConnectionOfAllItems();
+                if (connection == null || !connection.Cache.PVS_sites.Any())
+                {
+                    return false;
+                }
+
+                // At least one must not currently have a PVS Proxy
                 var vms = selection.AsXenObjects<VM>();
                 if (vms.Any(vm => vm.PvsProxy == null))
                 {
