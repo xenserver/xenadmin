@@ -8460,9 +8460,6 @@ Once the VM has restarted click the Install [XenServer product] Tools menu item 
   <data name="NEW_POLICY" xml:space="preserve">
     <value>&amp;New Policy...</value>
   </data>
-  <data name="NEW_POOL" xml:space="preserve">
-    <value>Pool</value>
-  </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
 
