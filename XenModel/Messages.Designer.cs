@@ -1753,6 +1753,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving VM Configuration.
+        /// </summary>
+        public static string ACTION_SET_VM_OTHER_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_SET_VM_OTHER_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shut down.
         /// </summary>
         public static string ACTION_SHUT_DOWN {

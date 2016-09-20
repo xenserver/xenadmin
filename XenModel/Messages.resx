@@ -681,6 +681,9 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>Performing SR scan from '{0}'</value>
   </data>
+  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
+    <value>Saving VM Configuration</value>
+  </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>Delete VMs</value>
   </data>
