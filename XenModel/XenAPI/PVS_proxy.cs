@@ -50,16 +50,14 @@ namespace XenAPI
         public PVS_proxy(string uuid,
             XenRef<PVS_site> site,
             XenRef<VIF> VIF,
-            bool prepopulate,
             bool currently_attached,
-            XenRef<SR> cache_SR)
+            pvs_proxy_status status)
         {
             this.uuid = uuid;
             this.site = site;
             this.VIF = VIF;
-            this.prepopulate = prepopulate;
             this.currently_attached = currently_attached;
-            this.cache_SR = cache_SR;
+            this.status = status;
         }
 
         /// <summary>
@@ -76,9 +74,8 @@ namespace XenAPI
             uuid = update.uuid;
             site = update.site;
             VIF = update.VIF;
-            prepopulate = update.prepopulate;
             currently_attached = update.currently_attached;
-            cache_SR = update.cache_SR;
+            status = update.status;
         }
 
         internal void UpdateFromProxy(Proxy_PVS_proxy proxy)
@@ -86,9 +83,8 @@ namespace XenAPI
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
             site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
             VIF = proxy.VIF == null ? null : XenRef<VIF>.Create(proxy.VIF);
-            prepopulate = (bool)proxy.prepopulate;
             currently_attached = (bool)proxy.currently_attached;
-            cache_SR = proxy.cache_SR == null ? null : XenRef<SR>.Create(proxy.cache_SR);
+            status = proxy.status == null ? (pvs_proxy_status) 0 : (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)proxy.status);
         }
 
         public Proxy_PVS_proxy ToProxy()
@@ -97,9 +93,8 @@ namespace XenAPI
             result_.uuid = (uuid != null) ? uuid : "";
             result_.site = (site != null) ? site : "";
             result_.VIF = (VIF != null) ? VIF : "";
-            result_.prepopulate = prepopulate;
             result_.currently_attached = currently_attached;
-            result_.cache_SR = (cache_SR != null) ? cache_SR : "";
+            result_.status = pvs_proxy_status_helper.ToString(status);
             return result_;
         }
 
@@ -112,9 +107,8 @@ namespace XenAPI
             uuid = Marshalling.ParseString(table, "uuid");
             site = Marshalling.ParseRef<PVS_site>(table, "site");
             VIF = Marshalling.ParseRef<VIF>(table, "VIF");
-            prepopulate = Marshalling.ParseBool(table, "prepopulate");
             currently_attached = Marshalling.ParseBool(table, "currently_attached");
-            cache_SR = Marshalling.ParseRef<SR>(table, "cache_SR");
+            status = (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), Marshalling.ParseString(table, "status"));
         }
 
         public bool DeepEquals(PVS_proxy other)
@@ -127,9 +121,8 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._site, other._site) &&
                 Helper.AreEqual2(this._VIF, other._VIF) &&
-                Helper.AreEqual2(this._prepopulate, other._prepopulate) &&
                 Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
-                Helper.AreEqual2(this._cache_SR, other._cache_SR);
+                Helper.AreEqual2(this._status, other._status);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PVS_proxy server)
@@ -141,12 +134,7 @@ namespace XenAPI
             }
             else
             {
-                if (!Helper.AreEqual2(_prepopulate, server._prepopulate))
-                {
-                    PVS_proxy.set_prepopulate(session, opaqueRef, _prepopulate);
-                }
-
-                return null;
+              throw new InvalidOperationException("This type has no read/write properties");
             }
         }
         /// <summary>
@@ -205,17 +193,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the prepopulate field of the given PVS_proxy.
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
-        public static bool get_prepopulate(Session session, string _pvs_proxy)
-        {
-            return (bool)session.proxy.pvs_proxy_get_prepopulate(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse();
-        }
-
-        /// <summary>
         /// Get the currently_attached field of the given PVS_proxy.
         /// Experimental. First published in .
         /// </summary>
@@ -227,14 +204,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the cache_SR field of the given PVS_proxy.
+        /// Get the status field of the given PVS_proxy.
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
-        public static XenRef<SR> get_cache_SR(Session session, string _pvs_proxy)
+        public static pvs_proxy_status get_status(Session session, string _pvs_proxy)
         {
-            return XenRef<SR>.Create(session.proxy.pvs_proxy_get_cache_sr(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+            return (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)session.proxy.pvs_proxy_get_status(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
         }
 
         /// <summary>
@@ -244,10 +221,9 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_site">PVS site that we proxy for</param>
         /// <param name="_vif">VIF for the VM that needs to be proxied</param>
-        /// <param name="_prepopulate">if true, prefetch whole disk for VM</param>
-        public static XenRef<PVS_proxy> create(Session session, string _site, string _vif, bool _prepopulate)
+        public static XenRef<PVS_proxy> create(Session session, string _site, string _vif)
         {
-            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "", _prepopulate).parse());
+            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "").parse());
         }
 
         /// <summary>
@@ -257,10 +233,9 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_site">PVS site that we proxy for</param>
         /// <param name="_vif">VIF for the VM that needs to be proxied</param>
-        /// <param name="_prepopulate">if true, prefetch whole disk for VM</param>
-        public static XenRef<Task> async_create(Session session, string _site, string _vif, bool _prepopulate)
+        public static XenRef<Task> async_create(Session session, string _site, string _vif)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "", _prepopulate).parse());
+            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "").parse());
         }
 
         /// <summary>
@@ -283,30 +258,6 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _pvs_proxy)
         {
             return XenRef<Task>.Create(session.proxy.async_pvs_proxy_destroy(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
-        }
-
-        /// <summary>
-        /// change the value of the prepopulate field
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
-        /// <param name="_value">set to this value</param>
-        public static void set_prepopulate(Session session, string _pvs_proxy, bool _value)
-        {
-            session.proxy.pvs_proxy_set_prepopulate(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "", _value).parse();
-        }
-
-        /// <summary>
-        /// change the value of the prepopulate field
-        /// Experimental. First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
-        /// <param name="_value">set to this value</param>
-        public static XenRef<Task> async_set_prepopulate(Session session, string _pvs_proxy, bool _value)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_set_prepopulate(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "", _value).parse());
         }
 
         /// <summary>
@@ -386,25 +337,6 @@ namespace XenAPI
         private XenRef<VIF> _VIF;
 
         /// <summary>
-        /// true = proxy prefetches whole disk for the VM
-        /// Experimental. First published in .
-        /// </summary>
-        public virtual bool prepopulate
-        {
-            get { return _prepopulate; }
-            set
-            {
-                if (!Helper.AreEqual(value, _prepopulate))
-                {
-                    _prepopulate = value;
-                    Changed = true;
-                    NotifyPropertyChanged("prepopulate");
-                }
-            }
-        }
-        private bool _prepopulate;
-
-        /// <summary>
         /// true = VM is currently proxied
         /// Experimental. First published in .
         /// </summary>
@@ -424,22 +356,22 @@ namespace XenAPI
         private bool _currently_attached;
 
         /// <summary>
-        /// SR used by this proxy
+        /// The run-time status of the proxy
         /// Experimental. First published in .
         /// </summary>
-        public virtual XenRef<SR> cache_SR
+        public virtual pvs_proxy_status status
         {
-            get { return _cache_SR; }
+            get { return _status; }
             set
             {
-                if (!Helper.AreEqual(value, _cache_SR))
+                if (!Helper.AreEqual(value, _status))
                 {
-                    _cache_SR = value;
+                    _status = value;
                     Changed = true;
-                    NotifyPropertyChanged("cache_SR");
+                    NotifyPropertyChanged("status");
                 }
             }
         }
-        private XenRef<SR> _cache_SR;
+        private pvs_proxy_status _status;
     }
 }

@@ -48,14 +48,18 @@ namespace XenAPI
         }
 
         public PVS_cache_storage(string uuid,
-            XenRef<PVS_site> site,
+            XenRef<Host> host,
             XenRef<SR> SR,
-            long size)
+            XenRef<PVS_site> site,
+            long size,
+            XenRef<VDI> VDI)
         {
             this.uuid = uuid;
-            this.site = site;
+            this.host = host;
             this.SR = SR;
+            this.site = site;
             this.size = size;
+            this.VDI = VDI;
         }
 
         /// <summary>
@@ -70,26 +74,32 @@ namespace XenAPI
         public override void UpdateFrom(PVS_cache_storage update)
         {
             uuid = update.uuid;
-            site = update.site;
+            host = update.host;
             SR = update.SR;
+            site = update.site;
             size = update.size;
+            VDI = update.VDI;
         }
 
         internal void UpdateFromProxy(Proxy_PVS_cache_storage proxy)
         {
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
+            host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
             SR = proxy.SR == null ? null : XenRef<SR>.Create(proxy.SR);
+            site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
             size = proxy.size == null ? 0 : long.Parse((string)proxy.size);
+            VDI = proxy.VDI == null ? null : XenRef<VDI>.Create(proxy.VDI);
         }
 
         public Proxy_PVS_cache_storage ToProxy()
         {
             Proxy_PVS_cache_storage result_ = new Proxy_PVS_cache_storage();
             result_.uuid = (uuid != null) ? uuid : "";
-            result_.site = (site != null) ? site : "";
+            result_.host = (host != null) ? host : "";
             result_.SR = (SR != null) ? SR : "";
+            result_.site = (site != null) ? site : "";
             result_.size = size.ToString();
+            result_.VDI = (VDI != null) ? VDI : "";
             return result_;
         }
 
@@ -100,9 +110,11 @@ namespace XenAPI
         public PVS_cache_storage(Hashtable table)
         {
             uuid = Marshalling.ParseString(table, "uuid");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
+            host = Marshalling.ParseRef<Host>(table, "host");
             SR = Marshalling.ParseRef<SR>(table, "SR");
+            site = Marshalling.ParseRef<PVS_site>(table, "site");
             size = Marshalling.ParseLong(table, "size");
+            VDI = Marshalling.ParseRef<VDI>(table, "VDI");
         }
 
         public bool DeepEquals(PVS_cache_storage other)
@@ -113,9 +125,11 @@ namespace XenAPI
                 return true;
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._site, other._site) &&
+                Helper.AreEqual2(this._host, other._host) &&
                 Helper.AreEqual2(this._SR, other._SR) &&
-                Helper.AreEqual2(this._size, other._size);
+                Helper.AreEqual2(this._site, other._site) &&
+                Helper.AreEqual2(this._size, other._size) &&
+                Helper.AreEqual2(this._VDI, other._VDI);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PVS_cache_storage server)
@@ -208,14 +222,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the site field of the given PVS_cache_storage.
+        /// Get the host field of the given PVS_cache_storage.
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
-        public static XenRef<PVS_site> get_site(Session session, string _pvs_cache_storage)
+        public static XenRef<Host> get_host(Session session, string _pvs_cache_storage)
         {
-            return XenRef<PVS_site>.Create(session.proxy.pvs_cache_storage_get_site(session.uuid, (_pvs_cache_storage != null) ? _pvs_cache_storage : "").parse());
+            return XenRef<Host>.Create(session.proxy.pvs_cache_storage_get_host(session.uuid, (_pvs_cache_storage != null) ? _pvs_cache_storage : "").parse());
         }
 
         /// <summary>
@@ -230,6 +244,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the site field of the given PVS_cache_storage.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
+        public static XenRef<PVS_site> get_site(Session session, string _pvs_cache_storage)
+        {
+            return XenRef<PVS_site>.Create(session.proxy.pvs_cache_storage_get_site(session.uuid, (_pvs_cache_storage != null) ? _pvs_cache_storage : "").parse());
+        }
+
+        /// <summary>
         /// Get the size field of the given PVS_cache_storage.
         /// Experimental. First published in .
         /// </summary>
@@ -238,6 +263,17 @@ namespace XenAPI
         public static long get_size(Session session, string _pvs_cache_storage)
         {
             return long.Parse((string)session.proxy.pvs_cache_storage_get_size(session.uuid, (_pvs_cache_storage != null) ? _pvs_cache_storage : "").parse());
+        }
+
+        /// <summary>
+        /// Get the VDI field of the given PVS_cache_storage.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
+        public static XenRef<VDI> get_VDI(Session session, string _pvs_cache_storage)
+        {
+            return XenRef<VDI>.Create(session.proxy.pvs_cache_storage_get_vdi(session.uuid, (_pvs_cache_storage != null) ? _pvs_cache_storage : "").parse());
         }
 
         /// <summary>
@@ -279,23 +315,23 @@ namespace XenAPI
         private string _uuid;
 
         /// <summary>
-        /// PVS site this proxy is part of
+        /// The host on which this object defines PVS cache storage
         /// Experimental. First published in .
         /// </summary>
-        public virtual XenRef<PVS_site> site
+        public virtual XenRef<Host> host
         {
-            get { return _site; }
+            get { return _host; }
             set
             {
-                if (!Helper.AreEqual(value, _site))
+                if (!Helper.AreEqual(value, _host))
                 {
-                    _site = value;
+                    _host = value;
                     Changed = true;
-                    NotifyPropertyChanged("site");
+                    NotifyPropertyChanged("host");
                 }
             }
         }
-        private XenRef<PVS_site> _site;
+        private XenRef<Host> _host;
 
         /// <summary>
         /// SR providing storage for the PVS cache
@@ -317,6 +353,25 @@ namespace XenAPI
         private XenRef<SR> _SR;
 
         /// <summary>
+        /// The PVS_site for which this object defines the storage
+        /// Experimental. First published in .
+        /// </summary>
+        public virtual XenRef<PVS_site> site
+        {
+            get { return _site; }
+            set
+            {
+                if (!Helper.AreEqual(value, _site))
+                {
+                    _site = value;
+                    Changed = true;
+                    NotifyPropertyChanged("site");
+                }
+            }
+        }
+        private XenRef<PVS_site> _site;
+
+        /// <summary>
         /// The size of the cache VDI (in bytes)
         /// Experimental. First published in .
         /// </summary>
@@ -334,5 +389,24 @@ namespace XenAPI
             }
         }
         private long _size;
+
+        /// <summary>
+        /// The VDI used for caching
+        /// Experimental. First published in .
+        /// </summary>
+        public virtual XenRef<VDI> VDI
+        {
+            get { return _VDI; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VDI))
+                {
+                    _VDI = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VDI");
+                }
+            }
+        }
+        private XenRef<VDI> _VDI;
     }
 }
