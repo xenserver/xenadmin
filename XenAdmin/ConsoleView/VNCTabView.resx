@@ -127,13 +127,16 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="sendCAD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>2, 2</value>
+  </data>
+  <data name="sendCAD.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="sendCAD.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>154, 38</value>
+    <value>123, 30</value>
   </data>
   <data name="sendCAD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 38</value>
+    <value>209, 30</value>
   </data>
   <data name="sendCAD.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -157,16 +160,13 @@
     <value>Fill</value>
   </data>
   <data name="contentPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 130</value>
-  </data>
-  <data name="contentPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 105</value>
   </data>
   <data name="contentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 500</value>
+    <value>703, 400</value>
   </data>
   <data name="contentPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;contentPanel.Name" xml:space="preserve">
     <value>contentPanel</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;contentPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -199,10 +199,13 @@
     <value>NoControl</value>
   </data>
   <data name="scaleCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 10</value>
+    <value>433, 8</value>
+  </data>
+  <data name="scaleCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="scaleCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 23</value>
+    <value>52, 17</value>
   </data>
   <data name="scaleCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -229,13 +232,16 @@
     <value>NoControl</value>
   </data>
   <data name="fullscreenButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 3</value>
+    <value>578, 2</value>
+  </data>
+  <data name="fullscreenButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="fullscreenButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>142, 38</value>
+    <value>114, 30</value>
   </data>
   <data name="fullscreenButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 38</value>
+    <value>123, 30</value>
   </data>
   <data name="fullscreenButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -268,13 +274,16 @@
     <value>NoControl</value>
   </data>
   <data name="dockButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 3</value>
+    <value>489, 2</value>
+  </data>
+  <data name="dockButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="dockButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>106, 38</value>
+    <value>85, 30</value>
   </data>
   <data name="dockButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 38</value>
+    <value>85, 30</value>
   </data>
   <data name="dockButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -304,19 +313,22 @@
     <value>Bottom</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 630</value>
+    <value>0, 505</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tableLayoutPanel1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 0</value>
+    <value>320, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 44</value>
+    <value>703, 34</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -331,7 +343,7 @@
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sendCAD" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="scaleCheckBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="fullscreenButton" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="dockButton" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sendCAD" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="scaleCheckBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="fullscreenButton" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="dockButton" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,16" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -340,7 +352,7 @@
     <value>81, 17</value>
   </metadata>
   <data name="LifeCycleMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 4</value>
+    <value>61, 4</value>
   </data>
   <data name="&gt;&gt;LifeCycleMenuStrip.Name" xml:space="preserve">
     <value>LifeCycleMenuStrip</value>
@@ -358,16 +370,13 @@
     <value>NoControl</value>
   </data>
   <data name="powerStateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 46</value>
-  </data>
-  <data name="powerStateLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>0, 37</value>
   </data>
   <data name="powerStateLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 42</value>
+    <value>703, 34</value>
   </data>
   <data name="powerStateLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="powerStateLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -394,16 +403,13 @@
     <value>NoControl</value>
   </data>
   <data name="dedicatedGpuWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 88</value>
-  </data>
-  <data name="dedicatedGpuWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>0, 71</value>
   </data>
   <data name="dedicatedGpuWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 42</value>
+    <value>703, 34</value>
   </data>
   <data name="dedicatedGpuWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="dedicatedGpuWarning.Text" xml:space="preserve">
     <value>This VM has a pass-through GPU assigned. You must connect to it using Remote Desktop.</value>
@@ -439,16 +445,13 @@
     <value>NoControl</value>
   </data>
   <data name="HostLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 0</value>
-  </data>
-  <data name="HostLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>3, 0</value>
   </data>
   <data name="HostLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 0, 0, 0</value>
+    <value>8, 0, 0, 0</value>
   </data>
   <data name="HostLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 46</value>
+    <value>8, 37</value>
   </data>
   <data name="HostLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -481,13 +484,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSSH.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 8</value>
+    <value>399, 6</value>
   </data>
   <data name="buttonSSH.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 8, 8, 8</value>
+    <value>3, 6, 6, 6</value>
   </data>
   <data name="buttonSSH.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 29</value>
+    <value>114, 23</value>
   </data>
   <data name="buttonSSH.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -517,13 +520,13 @@
     <value>NoControl</value>
   </data>
   <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 8</value>
+    <value>522, 6</value>
   </data>
   <data name="toggleConsoleButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 8, 8, 8</value>
+    <value>3, 6, 6, 6</value>
   </data>
   <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 30</value>
+    <value>175, 24</value>
   </data>
   <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -550,13 +553,13 @@
     <value>Fill</value>
   </data>
   <data name="multipleDvdIsoList1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 4</value>
+    <value>47, 3</value>
   </data>
   <data name="multipleDvdIsoList1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 15, 4</value>
+    <value>3, 3, 12, 3</value>
   </data>
   <data name="multipleDvdIsoList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 38</value>
+    <value>337, 31</value>
   </data>
   <data name="multipleDvdIsoList1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -583,13 +586,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 1</value>
+    <value>15, 1</value>
   </data>
   <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 44</value>
+    <value>28, 35</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>CenterImage</value>
@@ -622,13 +625,13 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel2.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>506, 0</value>
+    <value>405, 0</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 46</value>
+    <value>703, 37</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -654,11 +657,8 @@
   <data name="gradientPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="gradientPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="gradientPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 46</value>
+    <value>703, 37</value>
   </data>
   <data name="gradientPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -679,16 +679,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 674</value>
+    <value>703, 539</value>
   </data>
   <data name="&gt;&gt;tip.Name" xml:space="preserve">
     <value>tip</value>
