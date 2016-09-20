@@ -596,10 +596,6 @@ namespace XenAPI
         Response<bool>
         pool_get_policy_no_vendor_device(string session, string _pool);
 
-        [XmlRpcMethod("pool.get_live_patching_disabled")]
-        Response<bool>
-        pool_get_live_patching_disabled(string session, string _pool);
-
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -683,10 +679,6 @@ namespace XenAPI
         [XmlRpcMethod("pool.set_policy_no_vendor_device")]
         Response<string>
         pool_set_policy_no_vendor_device(string session, string _pool, bool _policy_no_vendor_device);
-
-        [XmlRpcMethod("pool.set_live_patching_disabled")]
-        Response<string>
-        pool_set_live_patching_disabled(string session, string _pool, bool _live_patching_disabled);
 
         [XmlRpcMethod("pool.join")]
         Response<string>
@@ -2272,18 +2264,6 @@ namespace XenAPI
         Response<Object>
         vm_metrics_get_other_config(string session, string _vm_metrics);
 
-        [XmlRpcMethod("VM_metrics.get_hvm")]
-        Response<bool>
-        vm_metrics_get_hvm(string session, string _vm_metrics);
-
-        [XmlRpcMethod("VM_metrics.get_nested_virt")]
-        Response<bool>
-        vm_metrics_get_nested_virt(string session, string _vm_metrics);
-
-        [XmlRpcMethod("VM_metrics.get_nomigrate")]
-        Response<bool>
-        vm_metrics_get_nomigrate(string session, string _vm_metrics);
-
         [XmlRpcMethod("VM_metrics.set_other_config")]
         Response<string>
         vm_metrics_set_other_config(string session, string _vm_metrics, Object _other_config);
@@ -2992,10 +2972,6 @@ namespace XenAPI
         Response<string>
         host_get_control_domain(string session, string _host);
 
-        [XmlRpcMethod("host.get_patches_requiring_reboot")]
-        Response<string []>
-        host_get_patches_requiring_reboot(string session, string _host);
-
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3351,22 +3327,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.call_plugin")]
         Response<string>
         async_host_call_plugin(string session, string _host, string _plugin, string _fn, Object _args);
-
-        [XmlRpcMethod("host.has_extension")]
-        Response<bool>
-        host_has_extension(string session, string _host, string _name);
-
-        [XmlRpcMethod("Async.host.has_extension")]
-        Response<string>
-        async_host_has_extension(string session, string _host, string _name);
-
-        [XmlRpcMethod("host.call_extension")]
-        Response<string>
-        host_call_extension(string session, string _host, string _call);
-
-        [XmlRpcMethod("Async.host.call_extension")]
-        Response<string>
-        async_host_call_extension(string session, string _host, string _call);
 
         [XmlRpcMethod("host.get_servertime")]
         Response<DateTime>
@@ -4107,14 +4067,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.VIF.unplug_force")]
         Response<string>
         async_vif_unplug_force(string session, string _vif);
-
-        [XmlRpcMethod("VIF.move")]
-        Response<string>
-        vif_move(string session, string _vif, string _network);
-
-        [XmlRpcMethod("Async.VIF.move")]
-        Response<string>
-        async_vif_move(string session, string _vif, string _network);
 
         [XmlRpcMethod("VIF.set_locking_mode")]
         Response<string>
@@ -5222,11 +5174,11 @@ namespace XenAPI
 
         [XmlRpcMethod("LVHD.enable_thin_provisioning")]
         Response<string>
-        lvhd_enable_thin_provisioning(string session, string _host, string _sr, string _initial_allocation, string _allocation_quantum);
+        lvhd_enable_thin_provisioning(string session, string _sr, string _initial_allocation, string _allocation_quantum);
 
         [XmlRpcMethod("Async.LVHD.enable_thin_provisioning")]
         Response<string>
-        async_lvhd_enable_thin_provisioning(string session, string _host, string _sr, string _initial_allocation, string _allocation_quantum);
+        async_lvhd_enable_thin_provisioning(string session, string _sr, string _initial_allocation, string _allocation_quantum);
 
         [XmlRpcMethod("LVHD.get_all_records")]
         Response<Object>
@@ -7267,7 +7219,6 @@ namespace XenAPI
         public Object guest_agent_config;
         public Object cpu_info;
         public bool policy_no_vendor_device;
-        public bool live_patching_disabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7382,9 +7333,6 @@ namespace XenAPI
         public DateTime install_time;
         public DateTime last_updated;
         public Object other_config;
-        public bool hvm;
-        public bool nested_virt;
-        public bool nomigrate;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7504,7 +7452,6 @@ namespace XenAPI
         public string display;
         public string [] virtual_hardware_platform_versions;
         public string control_domain;
-        public string [] patches_requiring_reboot;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
