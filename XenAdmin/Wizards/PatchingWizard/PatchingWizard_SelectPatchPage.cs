@@ -149,7 +149,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (direction == PageLoadedDirection.Forward)
             {
                 //if any connected host is licensed for automatic updating
-                bool autoUpdatePossible = false; //temporarily disabled ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
+                bool autoUpdatePossible = ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
                
                 labelWithAutomatic.Visible = automaticOptionLabel.Visible = AutomaticRadioButton.Visible = autoUpdatePossible;
                 labelWithoutAutomatic.Visible = !autoUpdatePossible;
