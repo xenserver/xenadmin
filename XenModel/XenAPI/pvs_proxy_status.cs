@@ -28,13 +28,37 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+using System;
+using System.Collections.Generic;
+
+
 namespace XenAPI
 {
-    public partial class PVS_site : XenObject<PVS_site>
+    public enum pvs_proxy_status
     {
-        public override string Name
+        stopped, initialised, caching, incompatible_write_cache_mode, incompatible_protocol_version, unknown
+    }
+
+    public static class pvs_proxy_status_helper
+    {
+        public static string ToString(pvs_proxy_status x)
         {
-            get { return name; }
+            switch (x)
+            {
+                case pvs_proxy_status.stopped:
+                    return "stopped";
+                case pvs_proxy_status.initialised:
+                    return "initialised";
+                case pvs_proxy_status.caching:
+                    return "caching";
+                case pvs_proxy_status.incompatible_write_cache_mode:
+                    return "incompatible_write_cache_mode";
+                case pvs_proxy_status.incompatible_protocol_version:
+                    return "incompatible_protocol_version";
+                default:
+                    return "unknown";
+            }
         }
     }
 }

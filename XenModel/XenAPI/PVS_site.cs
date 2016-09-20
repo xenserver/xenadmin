@@ -48,13 +48,17 @@ namespace XenAPI
         }
 
         public PVS_site(string uuid,
-            string name,
+            string name_label,
+            string name_description,
+            string PVS_uuid,
             List<XenRef<PVS_cache_storage>> cache_storage,
             List<XenRef<PVS_server>> servers,
             List<XenRef<PVS_proxy>> proxies)
         {
             this.uuid = uuid;
-            this.name = name;
+            this.name_label = name_label;
+            this.name_description = name_description;
+            this.PVS_uuid = PVS_uuid;
             this.cache_storage = cache_storage;
             this.servers = servers;
             this.proxies = proxies;
@@ -72,7 +76,9 @@ namespace XenAPI
         public override void UpdateFrom(PVS_site update)
         {
             uuid = update.uuid;
-            name = update.name;
+            name_label = update.name_label;
+            name_description = update.name_description;
+            PVS_uuid = update.PVS_uuid;
             cache_storage = update.cache_storage;
             servers = update.servers;
             proxies = update.proxies;
@@ -81,7 +87,9 @@ namespace XenAPI
         internal void UpdateFromProxy(Proxy_PVS_site proxy)
         {
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            name = proxy.name == null ? null : (string)proxy.name;
+            name_label = proxy.name_label == null ? null : (string)proxy.name_label;
+            name_description = proxy.name_description == null ? null : (string)proxy.name_description;
+            PVS_uuid = proxy.PVS_uuid == null ? null : (string)proxy.PVS_uuid;
             cache_storage = proxy.cache_storage == null ? null : XenRef<PVS_cache_storage>.Create(proxy.cache_storage);
             servers = proxy.servers == null ? null : XenRef<PVS_server>.Create(proxy.servers);
             proxies = proxy.proxies == null ? null : XenRef<PVS_proxy>.Create(proxy.proxies);
@@ -91,7 +99,9 @@ namespace XenAPI
         {
             Proxy_PVS_site result_ = new Proxy_PVS_site();
             result_.uuid = (uuid != null) ? uuid : "";
-            result_.name = (name != null) ? name : "";
+            result_.name_label = (name_label != null) ? name_label : "";
+            result_.name_description = (name_description != null) ? name_description : "";
+            result_.PVS_uuid = (PVS_uuid != null) ? PVS_uuid : "";
             result_.cache_storage = (cache_storage != null) ? Helper.RefListToStringArray(cache_storage) : new string[] {};
             result_.servers = (servers != null) ? Helper.RefListToStringArray(servers) : new string[] {};
             result_.proxies = (proxies != null) ? Helper.RefListToStringArray(proxies) : new string[] {};
@@ -105,7 +115,9 @@ namespace XenAPI
         public PVS_site(Hashtable table)
         {
             uuid = Marshalling.ParseString(table, "uuid");
-            name = Marshalling.ParseString(table, "name");
+            name_label = Marshalling.ParseString(table, "name_label");
+            name_description = Marshalling.ParseString(table, "name_description");
+            PVS_uuid = Marshalling.ParseString(table, "PVS_uuid");
             cache_storage = Marshalling.ParseSetRef<PVS_cache_storage>(table, "cache_storage");
             servers = Marshalling.ParseSetRef<PVS_server>(table, "servers");
             proxies = Marshalling.ParseSetRef<PVS_proxy>(table, "proxies");
@@ -119,7 +131,9 @@ namespace XenAPI
                 return true;
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name, other._name) &&
+                Helper.AreEqual2(this._name_label, other._name_label) &&
+                Helper.AreEqual2(this._name_description, other._name_description) &&
+                Helper.AreEqual2(this._PVS_uuid, other._PVS_uuid) &&
                 Helper.AreEqual2(this._cache_storage, other._cache_storage) &&
                 Helper.AreEqual2(this._servers, other._servers) &&
                 Helper.AreEqual2(this._proxies, other._proxies);
@@ -134,9 +148,17 @@ namespace XenAPI
             }
             else
             {
-                if (!Helper.AreEqual2(_name, server._name))
+                if (!Helper.AreEqual2(_name_label, server._name_label))
                 {
-                    PVS_site.set_name(session, opaqueRef, _name);
+                    PVS_site.set_name_label(session, opaqueRef, _name_label);
+                }
+                if (!Helper.AreEqual2(_name_description, server._name_description))
+                {
+                    PVS_site.set_name_description(session, opaqueRef, _name_description);
+                }
+                if (!Helper.AreEqual2(_PVS_uuid, server._PVS_uuid))
+                {
+                    PVS_site.set_PVS_uuid(session, opaqueRef, _PVS_uuid);
                 }
 
                 return null;
@@ -165,6 +187,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get all the PVS_site instances with the given label.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
+        public static List<XenRef<PVS_site>> get_by_name_label(Session session, string _label)
+        {
+            return XenRef<PVS_site>.Create(session.proxy.pvs_site_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+        }
+
+        /// <summary>
         /// Get the uuid field of the given PVS_site.
         /// Experimental. First published in .
         /// </summary>
@@ -176,14 +209,36 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the name field of the given PVS_site.
+        /// Get the name/label field of the given PVS_site.
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        public static string get_name(Session session, string _pvs_site)
+        public static string get_name_label(Session session, string _pvs_site)
         {
-            return (string)session.proxy.pvs_site_get_name(session.uuid, (_pvs_site != null) ? _pvs_site : "").parse();
+            return (string)session.proxy.pvs_site_get_name_label(session.uuid, (_pvs_site != null) ? _pvs_site : "").parse();
+        }
+
+        /// <summary>
+        /// Get the name/description field of the given PVS_site.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
+        public static string get_name_description(Session session, string _pvs_site)
+        {
+            return (string)session.proxy.pvs_site_get_name_description(session.uuid, (_pvs_site != null) ? _pvs_site : "").parse();
+        }
+
+        /// <summary>
+        /// Get the PVS_uuid field of the given PVS_site.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
+        public static string get_PVS_uuid(Session session, string _pvs_site)
+        {
+            return (string)session.proxy.pvs_site_get_pvs_uuid(session.uuid, (_pvs_site != null) ? _pvs_site : "").parse();
         }
 
         /// <summary>
@@ -220,14 +275,27 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Introduce new PVS site
+        /// Set the name/label field of the given PVS_site.
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_name">name of the PVS site</param>
-        public static XenRef<PVS_site> introduce(Session session, string _name)
+        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
+        /// <param name="_label">New value to set</param>
+        public static void set_name_label(Session session, string _pvs_site, string _label)
         {
-            return XenRef<PVS_site>.Create(session.proxy.pvs_site_introduce(session.uuid, (_name != null) ? _name : "").parse());
+            session.proxy.pvs_site_set_name_label(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_label != null) ? _label : "").parse();
+        }
+
+        /// <summary>
+        /// Set the name/description field of the given PVS_site.
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
+        /// <param name="_description">New value to set</param>
+        public static void set_name_description(Session session, string _pvs_site, string _description)
+        {
+            session.proxy.pvs_site_set_name_description(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_description != null) ? _description : "").parse();
         }
 
         /// <summary>
@@ -235,10 +303,25 @@ namespace XenAPI
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_name">name of the PVS site</param>
-        public static XenRef<Task> async_introduce(Session session, string _name)
+        /// <param name="_name_label">name of the PVS site</param>
+        /// <param name="_name_description">description of the PVS site</param>
+        /// <param name="_pvs_uuid">unique identifier of the PVS site</param>
+        public static XenRef<PVS_site> introduce(Session session, string _name_label, string _name_description, string _pvs_uuid)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_site_introduce(session.uuid, (_name != null) ? _name : "").parse());
+            return XenRef<PVS_site>.Create(session.proxy.pvs_site_introduce(session.uuid, (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_pvs_uuid != null) ? _pvs_uuid : "").parse());
+        }
+
+        /// <summary>
+        /// Introduce new PVS site
+        /// Experimental. First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_name_label">name of the PVS site</param>
+        /// <param name="_name_description">description of the PVS site</param>
+        /// <param name="_pvs_uuid">unique identifier of the PVS site</param>
+        public static XenRef<Task> async_introduce(Session session, string _name_label, string _name_description, string _pvs_uuid)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pvs_site_introduce(session.uuid, (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_pvs_uuid != null) ? _pvs_uuid : "").parse());
         }
 
         /// <summary>
@@ -264,27 +347,27 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Update the name of the PVS site
+        /// Update the PVS UUID of the PVS site
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        /// <param name="_value">name to be used</param>
-        public static void set_name(Session session, string _pvs_site, string _value)
+        /// <param name="_value">PVS UUID to be used</param>
+        public static void set_PVS_uuid(Session session, string _pvs_site, string _value)
         {
-            session.proxy.pvs_site_set_name(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse();
+            session.proxy.pvs_site_set_pvs_uuid(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse();
         }
 
         /// <summary>
-        /// Update the name of the PVS site
+        /// Update the PVS UUID of the PVS site
         /// Experimental. First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
-        /// <param name="_value">name to be used</param>
-        public static XenRef<Task> async_set_name(Session session, string _pvs_site, string _value)
+        /// <param name="_value">PVS UUID to be used</param>
+        public static XenRef<Task> async_set_PVS_uuid(Session session, string _pvs_site, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_site_set_name(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pvs_site_set_pvs_uuid(session.uuid, (_pvs_site != null) ? _pvs_site : "", (_value != null) ? _value : "").parse());
         }
 
         /// <summary>
@@ -326,23 +409,61 @@ namespace XenAPI
         private string _uuid;
 
         /// <summary>
-        /// Name of the PVS site. Must match name configured in PVS
+        /// a human-readable name
         /// Experimental. First published in .
         /// </summary>
-        public virtual string name
+        public virtual string name_label
         {
-            get { return _name; }
+            get { return _name_label; }
             set
             {
-                if (!Helper.AreEqual(value, _name))
+                if (!Helper.AreEqual(value, _name_label))
                 {
-                    _name = value;
+                    _name_label = value;
                     Changed = true;
-                    NotifyPropertyChanged("name");
+                    NotifyPropertyChanged("name_label");
                 }
             }
         }
-        private string _name;
+        private string _name_label;
+
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// Experimental. First published in .
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
+        private string _name_description;
+
+        /// <summary>
+        /// Unique identifier of the PVS site, as configured in PVS
+        /// Experimental. First published in .
+        /// </summary>
+        public virtual string PVS_uuid
+        {
+            get { return _PVS_uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PVS_uuid))
+                {
+                    _PVS_uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PVS_uuid");
+                }
+            }
+        }
+        private string _PVS_uuid;
 
         /// <summary>
         /// The SR used by PVS proxy for the cache

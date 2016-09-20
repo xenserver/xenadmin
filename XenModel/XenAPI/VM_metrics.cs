@@ -59,7 +59,10 @@ namespace XenAPI
             DateTime start_time,
             DateTime install_time,
             DateTime last_updated,
-            Dictionary<string, string> other_config)
+            Dictionary<string, string> other_config,
+            bool hvm,
+            bool nested_virt,
+            bool nomigrate)
         {
             this.uuid = uuid;
             this.memory_actual = memory_actual;
@@ -73,6 +76,9 @@ namespace XenAPI
             this.install_time = install_time;
             this.last_updated = last_updated;
             this.other_config = other_config;
+            this.hvm = hvm;
+            this.nested_virt = nested_virt;
+            this.nomigrate = nomigrate;
         }
 
         /// <summary>
@@ -98,6 +104,9 @@ namespace XenAPI
             install_time = update.install_time;
             last_updated = update.last_updated;
             other_config = update.other_config;
+            hvm = update.hvm;
+            nested_virt = update.nested_virt;
+            nomigrate = update.nomigrate;
         }
 
         internal void UpdateFromProxy(Proxy_VM_metrics proxy)
@@ -114,6 +123,9 @@ namespace XenAPI
             install_time = proxy.install_time;
             last_updated = proxy.last_updated;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            hvm = (bool)proxy.hvm;
+            nested_virt = (bool)proxy.nested_virt;
+            nomigrate = (bool)proxy.nomigrate;
         }
 
         public Proxy_VM_metrics ToProxy()
@@ -131,6 +143,9 @@ namespace XenAPI
             result_.install_time = install_time;
             result_.last_updated = last_updated;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.hvm = hvm;
+            result_.nested_virt = nested_virt;
+            result_.nomigrate = nomigrate;
             return result_;
         }
 
@@ -152,6 +167,9 @@ namespace XenAPI
             install_time = Marshalling.ParseDateTime(table, "install_time");
             last_updated = Marshalling.ParseDateTime(table, "last_updated");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            hvm = Marshalling.ParseBool(table, "hvm");
+            nested_virt = Marshalling.ParseBool(table, "nested_virt");
+            nomigrate = Marshalling.ParseBool(table, "nomigrate");
         }
 
         public bool DeepEquals(VM_metrics other)
@@ -172,7 +190,10 @@ namespace XenAPI
                 Helper.AreEqual2(this._start_time, other._start_time) &&
                 Helper.AreEqual2(this._install_time, other._install_time) &&
                 Helper.AreEqual2(this._last_updated, other._last_updated) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._hvm, other._hvm) &&
+                Helper.AreEqual2(this._nested_virt, other._nested_virt) &&
+                Helper.AreEqual2(this._nomigrate, other._nomigrate);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM_metrics server)
@@ -344,6 +365,39 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _vm_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_other_config(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
+        }
+
+        /// <summary>
+        /// Get the hvm field of the given VM_metrics.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        public static bool get_hvm(Session session, string _vm_metrics)
+        {
+            return (bool)session.proxy.vm_metrics_get_hvm(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
+        }
+
+        /// <summary>
+        /// Get the nested_virt field of the given VM_metrics.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        public static bool get_nested_virt(Session session, string _vm_metrics)
+        {
+            return (bool)session.proxy.vm_metrics_get_nested_virt(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
+        }
+
+        /// <summary>
+        /// Get the nomigrate field of the given VM_metrics.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        public static bool get_nomigrate(Session session, string _vm_metrics)
+        {
+            return (bool)session.proxy.vm_metrics_get_nomigrate(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
         }
 
         /// <summary>
@@ -619,5 +673,62 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _other_config;
+
+        /// <summary>
+        /// hardware virtual machine
+        /// First published in .
+        /// </summary>
+        public virtual bool hvm
+        {
+            get { return _hvm; }
+            set
+            {
+                if (!Helper.AreEqual(value, _hvm))
+                {
+                    _hvm = value;
+                    Changed = true;
+                    NotifyPropertyChanged("hvm");
+                }
+            }
+        }
+        private bool _hvm;
+
+        /// <summary>
+        /// VM supports nested virtualisation
+        /// First published in .
+        /// </summary>
+        public virtual bool nested_virt
+        {
+            get { return _nested_virt; }
+            set
+            {
+                if (!Helper.AreEqual(value, _nested_virt))
+                {
+                    _nested_virt = value;
+                    Changed = true;
+                    NotifyPropertyChanged("nested_virt");
+                }
+            }
+        }
+        private bool _nested_virt;
+
+        /// <summary>
+        /// VM is immobile and can't migrate between hosts
+        /// First published in .
+        /// </summary>
+        public virtual bool nomigrate
+        {
+            get { return _nomigrate; }
+            set
+            {
+                if (!Helper.AreEqual(value, _nomigrate))
+                {
+                    _nomigrate = value;
+                    Changed = true;
+                    NotifyPropertyChanged("nomigrate");
+                }
+            }
+        }
+        private bool _nomigrate;
     }
 }
