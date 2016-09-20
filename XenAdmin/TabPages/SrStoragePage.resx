@@ -547,13 +547,13 @@
     <value>205, 26</value>
   </data>
   <data name="moveVirtualDiskToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move virtual disk...</value>
+    <value>Mov&amp;e virtual disk...</value>
   </data>
   <data name="deleteVirtualDiskToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 26</value>
   </data>
   <data name="deleteVirtualDiskToolStripMenuItem.Text" xml:space="preserve">
-    <value>Delete virtual disk</value>
+    <value>&amp;Delete virtual disk</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 6</value>
@@ -568,7 +568,7 @@
     <value>P&amp;roperties</value>
   </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 168</value>
+    <value>206, 140</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
