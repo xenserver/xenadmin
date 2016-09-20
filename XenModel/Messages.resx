@@ -4092,8 +4092,8 @@ This will also delete its subfolders.</value>
   <data name="DONE" xml:space="preserve">
     <value>done.</value>
   </data>
-  <data name="DONT_ASSIGN_HOME_SERVER" xml:space="preserve">
-    <value>Don't assign a home server</value>
+  <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
+    <value>Don't select a target server</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
