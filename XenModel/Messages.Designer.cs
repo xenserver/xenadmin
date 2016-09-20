@@ -6053,6 +6053,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Caching.
+        /// </summary>
+        public static string CACHING {
+            get {
+                return ResourceManager.GetString("CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CANCEL {
@@ -18447,6 +18456,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incompatible protocol version.
+        /// </summary>
+        public static string INCOMPATIBLE_PROTOCOL_VERSION {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_PROTOCOL_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible write cache mode.
+        /// </summary>
+        public static string INCOMPATIBLE_WRITE_CACHE_MODE {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_WRITE_CACHE_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect file size.
         /// </summary>
         public static string INCORRECT_FILE_SIZE {
@@ -18578,6 +18605,15 @@ namespace XenAdmin {
         public static string INITIALIZE_WLB {
             get {
                 return ResourceManager.GetString("INITIALIZE_WLB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialized.
+        /// </summary>
+        public static string INITIALIZED {
+            get {
+                return ResourceManager.GetString("INITIALIZED", resourceCulture);
             }
         }
         
@@ -24903,15 +24939,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to None (memory only).
-        /// </summary>
-        public static string NONE_MEMORY_ONLY {
-            get {
-                return ResourceManager.GetString("NONE_MEMORY_ONLY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to None of the following:.
         /// </summary>
         public static string NONE_OF {
@@ -30918,6 +30945,15 @@ namespace XenAdmin {
         public static string STATUS_REPORT_ZIP_FAILED {
             get {
                 return ResourceManager.GetString("STATUS_REPORT_ZIP_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        public static string STOPPED {
+            get {
+                return ResourceManager.GetString("STOPPED", resourceCulture);
             }
         }
         

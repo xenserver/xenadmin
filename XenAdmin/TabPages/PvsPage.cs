@@ -247,10 +247,10 @@ namespace XenAdmin.TabPages
             var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.NO };
             var cachedCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
-            var srCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
+            var statusCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, statusCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;
@@ -270,13 +270,13 @@ namespace XenAdmin.TabPages
 
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.site) };
 
-            var sr = string.Empty;
-            var srCell = new DataGridViewTextBoxCell { 
-                Value = sr != null? sr.ToString() : Messages.NONE_MEMORY_ONLY 
+            var statusCell = new DataGridViewTextBoxCell
+            {
+                Value = pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status)
             };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, srCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, statusCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;

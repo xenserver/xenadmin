@@ -158,13 +158,13 @@
   <data name="ColumnPvsSite.HeaderText" xml:space="preserve">
     <value>PVS Site</value>
   </data>
-  <metadata name="ColumnSR.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnSR.HeaderText" xml:space="preserve">
-    <value>Storage Repository</value>
+  <data name="ColumnStatus.HeaderText" xml:space="preserve">
+    <value>Status</value>
   </data>
-  <data name="ColumnSR.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
   <data name="dataGridViewVms.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -627,10 +627,10 @@
   <data name="&gt;&gt;ColumnPvsSite.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSR.Name" xml:space="preserve">
-    <value>ColumnSR</value>
+  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
+    <value>ColumnStatus</value>
   </data>
-  <data name="&gt;&gt;ColumnSR.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -53,7 +53,7 @@
             this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
@@ -89,7 +89,7 @@
             this.ColumnCachingEnabled,
             this.columnCurrentlyCached,
             this.ColumnPvsSite,
-            this.ColumnSR});
+            this.ColumnStatus});
             resources.ApplyResources(this.dataGridViewVms, "dataGridViewVms");
             this.dataGridViewVms.MultiSelect = true;
             this.dataGridViewVms.Name = "dataGridViewVms";
@@ -223,14 +223,14 @@
             this.ColumnPvsSite.Name = "ColumnPvsSite";
             this.ColumnPvsSite.ReadOnly = true;
             // 
-            // ColumnSR
+            // ColumnStatus
             // 
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnSR.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnSR.FillWeight = 30F;
-            resources.ApplyResources(this.ColumnSR, "ColumnSR");
-            this.ColumnSR.Name = "ColumnSR";
-            this.ColumnSR.ReadOnly = true;
+            this.ColumnStatus.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnStatus.FillWeight = 30F;
+            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
+            this.ColumnStatus.Name = "ColumnStatus";
+            this.ColumnStatus.ReadOnly = true;
             // 
             // PvsPage
             // 
@@ -271,6 +271,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCachingEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPvsSite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
     }
 }

@@ -2215,6 +2215,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CACHE_NOT_YET_POPULATED" xml:space="preserve">
     <value>Cache not yet populated</value>
   </data>
+  <data name="CACHING" xml:space="preserve">
+    <value>Caching</value>
+  </data>
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -6440,6 +6443,12 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
     <value>This server version is incompatible with [XenCenter].</value>
   </data>
+  <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
+    <value>Incompatible protocol version</value>
+  </data>
+  <data name="INCOMPATIBLE_WRITE_CACHE_MODE" xml:space="preserve">
+    <value>Incompatible write cache mode</value>
+  </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>Incorrect file size</value>
   </data>
@@ -6481,6 +6490,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>Quiesced snapshots need the VM to be running</value>
+  </data>
+  <data name="INITIALIZED" xml:space="preserve">
+    <value>Initialized</value>
   </data>
   <data name="INITIALIZE_WLB" xml:space="preserve">
     <value>Initialize WLB...</value>
@@ -8640,9 +8652,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NONE_DEFINED" xml:space="preserve">
     <value>None defined</value>
   </data>
-  <data name="NONE_MEMORY_ONLY" xml:space="preserve">
-    <value>None (memory only)</value>
-  </data>
   <data name="NONE_OF" xml:space="preserve">
     <value>None of the following:</value>
   </data>
@@ -10746,6 +10755,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>
+  </data>
+  <data name="STOPPED" xml:space="preserve">
+    <value>Stopped</value>
   </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{0} free of {1}</value>
