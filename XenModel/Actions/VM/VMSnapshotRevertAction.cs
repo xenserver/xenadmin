@@ -38,10 +38,14 @@ namespace XenAdmin.Actions
     public class VMSnapshotRevertAction : PureAsyncAction
     {
         private VM m_Snapshot;
+        private Host previousHost; // The host the VM was running on before the snapshot
+
         public VMSnapshotRevertAction(VM snapshot)
             : base(snapshot.Connection, String.Format(Messages.ACTION_VM_REVERT_SNAPSHOT_TITLE, snapshot.Name))
         {
             this.VM = Connection.Resolve<VM>(snapshot.snapshot_of);
+            previousHost = Connection.Resolve<Host>(VM.resident_on);
+
             this.m_Snapshot = snapshot;
             Description = String.Format(Messages.VM_REVERTING, m_Snapshot.Name);
 
@@ -91,19 +95,35 @@ namespace XenAdmin.Actions
                 {
                     if (vm.power_state == vm_power_state.Halted)
                     {
-                        RelatedTask = XenAPI.VM.async_start(Session,
-                                          vm.opaque_ref, false, false);
+                        if (previousHost != null && vm.CanBootOnHost(previousHost))
+                        {
+                            RelatedTask = XenAPI.VM.async_start_on(Session,
+                                vm.opaque_ref, previousHost.opaque_ref, false, false);
+                        }
+                        else
+                        {
+                            RelatedTask = XenAPI.VM.async_start(Session,
+                                vm.opaque_ref, false, false);
+                        }
+
                     }
-                    else if (vm.power_state == vm_power_state.Suspended)
+                }
+                else if (vm.power_state == vm_power_state.Suspended)
+                {
+                    if (previousHost != null && vm.CanBootOnHost(previousHost))
+                    {
+                        RelatedTask = XenAPI.VM.async_resume_on(Session, vm.opaque_ref, previousHost.opaque_ref,
+                            false, false);
+                    }
+                    else
                     {
                         RelatedTask = XenAPI.VM.async_resume(Session, vm.opaque_ref, false, false);
-                        
                     }
-                    PollToCompletion();
+
                 }
+
+                PollToCompletion();
             }
         }
-
-
     }
 }

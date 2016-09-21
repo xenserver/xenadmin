@@ -2073,6 +2073,20 @@ namespace XenAPI
                 return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
             }
         }
+
+        public bool CanBootOnHost(Host host)
+        {
+            try
+            {
+                assert_can_boot_here(Connection.Session, this.opaque_ref, host.opaque_ref);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 
     public struct VMStartupOptions
