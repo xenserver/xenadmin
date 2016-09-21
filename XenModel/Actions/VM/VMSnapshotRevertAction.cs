@@ -45,7 +45,6 @@ namespace XenAdmin.Actions
         {
             this.VM = Connection.Resolve<VM>(snapshot.snapshot_of);
             previousHost = Connection.Resolve<Host>(VM.resident_on);
-
             this.m_Snapshot = snapshot;
             Description = String.Format(Messages.VM_REVERTING, m_Snapshot.Name);
 
@@ -107,22 +106,21 @@ namespace XenAdmin.Actions
                         }
 
                     }
-                }
-                else if (vm.power_state == vm_power_state.Suspended)
-                {
-                    if (previousHost != null && vm.CanBootOnHost(previousHost))
+                    else if (vm.power_state == vm_power_state.Suspended)
                     {
-                        RelatedTask = XenAPI.VM.async_resume_on(Session, vm.opaque_ref, previousHost.opaque_ref,
-                            false, false);
-                    }
-                    else
-                    {
-                        RelatedTask = XenAPI.VM.async_resume(Session, vm.opaque_ref, false, false);
-                    }
+                        if (previousHost != null && vm.CanBootOnHost(previousHost))
+                        {
+                            RelatedTask = XenAPI.VM.async_resume_on(Session, vm.opaque_ref, previousHost.opaque_ref,
+                                false, false);
+                        }
+                        else
+                        {
+                            RelatedTask = XenAPI.VM.async_resume(Session, vm.opaque_ref, false, false);
+                        }
 
+                    }
+                    PollToCompletion();
                 }
-
-                PollToCompletion();
             }
         }
     }
