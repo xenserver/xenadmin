@@ -1865,4 +1865,13 @@
   <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
     <value>Nutanix ISO</value>
   </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS proxy setup failed</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>No cache storage available for PVS site</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>Unable to setup PVS Read-caching on VM '{0}'. No cache storage found on site '{1}'.</value>
+  </data>
 </root>

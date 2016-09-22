@@ -214,6 +214,8 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.convertToTemplateToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.exportToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.enablePVSReadcachingToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.disablePVSReadcachingToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
             this.installToolsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.sendCtrlAltDelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -773,6 +775,7 @@ namespace XenAdmin
             // 
             // ToolBarContextMenu
             // 
+            this.ToolBarContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.ToolBarContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowToolbarMenuItem});
             this.ToolBarContextMenu.Name = "ToolBarContextMenu";
@@ -1305,6 +1308,8 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem,
             this.convertToTemplateToolStripMenuItem,
             this.exportToolStripMenuItem,
+            this.enablePVSReadcachingToolStripMenuItem,
+            this.disablePVSReadcachingToolStripMenuItem,
             this.toolStripMenuItem12,
             this.installToolsToolStripMenuItem,
             this.sendCtrlAltDelToolStripMenuItem,
@@ -1392,6 +1397,18 @@ namespace XenAdmin
             this.exportToolStripMenuItem.Command = new XenAdmin.Commands.ExportCommand();
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+            // 
+            // enablePVSReadcachingToolStripMenuItem
+            // 
+            this.enablePVSReadcachingToolStripMenuItem.Command = new EnablePvsReadCachingCommand();
+            this.enablePVSReadcachingToolStripMenuItem.Name = "enablePVSReadcachingToolStripMenuItem";
+            resources.ApplyResources(this.enablePVSReadcachingToolStripMenuItem, "enablePVSReadcachingToolStripMenuItem");
+            // 
+            // disablePVSReadcachingToolStripMenuItem
+            // 
+            this.disablePVSReadcachingToolStripMenuItem.Command = new DisablePvsReadCachingCommand();
+            this.disablePVSReadcachingToolStripMenuItem.Name = "disablePVSReadcachingToolStripMenuItem";
+            resources.ApplyResources(this.disablePVSReadcachingToolStripMenuItem, "disablePVSReadcachingToolStripMenuItem");
             // 
             // toolStripMenuItem12
             // 
@@ -2134,6 +2151,8 @@ namespace XenAdmin
         private TabPage TabPageCvmConsole;
         private TabPage TabPagePvs;
         private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
+        private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
+        private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
     }
 
 }

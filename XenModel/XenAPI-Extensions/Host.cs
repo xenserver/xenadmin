@@ -523,7 +523,7 @@ namespace XenAPI
 
         private bool _RestrictPvsCache
         {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pvs_cache"); }
+            get { return BoolKeyPreferTrue(license_params, "restrict_pvs_proxy"); }
         }
 
         public static bool RestrictSslLegacySwitch(Host h)

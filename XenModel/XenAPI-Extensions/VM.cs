@@ -2069,6 +2069,14 @@ namespace XenAPI
                 return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
             }
         }
+
+        public PVS_proxy PvsProxy
+        {
+            get
+            {
+                return Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(this)); // null if none
+            }
+        }
     }
 
     public struct VMStartupOptions

@@ -1624,6 +1624,11 @@ namespace XenAdmin.Core
                     if (vmpp != null)
                         return vmpp;
                     break;
+                case cls.PVS_proxy:
+                    PVS_proxy proxy = message.Connection.Cache.Find_By_Uuid<PVS_proxy>(message.obj_uuid);
+                    if (proxy != null)
+                        return proxy;
+                    break;
             }
             return null;
         }

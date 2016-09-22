@@ -104,6 +104,8 @@
     <Compile Include="Actions\Pool_Patch\CleanupDiskSpaceAction.cs" />
     <Compile Include="Actions\Pool_Patch\GetDiskSpaceRequirementsAction.cs" />
     <Compile Include="Actions\Pool_Patch\PoolPatchCleanAction.cs" />
+    <Compile Include="Actions\PVS_Proxy\PvsProxyCreateAction.cs" />
+    <Compile Include="Actions\PVS_Proxy\PvsProxyDestroyAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
@@ -325,6 +327,8 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\pvs_proxy_status.cs" />
+    <Compile Include="XenAPI-Extensions\PVS_site.cs" />
     <Compile Include="XenAPI-Extensions\PVS_proxy.cs" />
     <Compile Include="XenAPI-Extensions\VM_Docker_Info.cs" />
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />
