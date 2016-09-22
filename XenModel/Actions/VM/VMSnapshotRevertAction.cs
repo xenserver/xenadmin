@@ -94,7 +94,7 @@ namespace XenAdmin.Actions
                 {
                     if (vm.power_state == vm_power_state.Halted)
                     {
-                        if (previousHost != null && vm.CanBootOnHost(previousHost))
+                        if (previousHost != null && VMCanBootOnHost(vm, previousHost))
                         {
                             RelatedTask = XenAPI.VM.async_start_on(Session,
                                 vm.opaque_ref, previousHost.opaque_ref, false, false);
@@ -108,7 +108,7 @@ namespace XenAdmin.Actions
                     }
                     else if (vm.power_state == vm_power_state.Suspended)
                     {
-                        if (previousHost != null && vm.CanBootOnHost(previousHost))
+                        if (previousHost != null && VMCanBootOnHost(vm, previousHost))
                         {
                             RelatedTask = XenAPI.VM.async_resume_on(Session, vm.opaque_ref, previousHost.opaque_ref,
                                 false, false);
@@ -122,6 +122,20 @@ namespace XenAdmin.Actions
                     PollToCompletion();
                 }
             }
+        }
+
+        private bool VMCanBootOnHost(VM vm, Host host)
+        {
+            try
+            {
+                VM.assert_can_boot_here(Session, vm.opaque_ref, host.opaque_ref);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
