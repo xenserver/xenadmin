@@ -29,24 +29,18 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
 using XenAPI;
-using System.Linq;
 
 namespace XenAdmin.Actions
 {
     public class PvsProxyDestroyAction : AsyncAction
     {
-        private PVS_proxy proxy;
+        private readonly PVS_proxy proxy;
 
         public PvsProxyDestroyAction(PVS_proxy proxy)
             : base(proxy.Connection, string.Format(Messages.ACTION_DISABLE_PVS_READ_CACHING_FOR, proxy.VM))
         {
             this.proxy = proxy;
-            this.Session = proxy.Connection.Session;
             this.VM = proxy.VM;
 
             this.Description = Messages.WAITING;
@@ -55,24 +49,15 @@ namespace XenAdmin.Actions
 
         private void SetRBACPermissions()
         {
-            //AddCommonAPIMethodsToRoleCheck();
-            //ApiMethodsToRoleCheck.Add("host.destroy");
-            //ApiMethodsToRoleCheck.Add("sr.forget");
-
-            // TODO: what to use here?
+            ApiMethodsToRoleCheck.Add("pvs_proxy.destroy");
         }
 
         protected override void Run()
         {
-            try
-            {
-                PVS_proxy.async_destroy(Session, proxy.opaque_ref);
-                this.Description = Messages.DISABLED;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
+            RelatedTask = PVS_proxy.async_destroy(Session, proxy.opaque_ref);
+            Description = Messages.DISABLING;
+            PollToCompletion(0, 100);
+            Description = Messages.DISABLED;
         }
     }
 }

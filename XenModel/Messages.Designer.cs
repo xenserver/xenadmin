@@ -10927,6 +10927,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Disable PVS Read-caching.
+        /// </summary>
+        public static string DISABLE_PVS_READ_CACHING_BUTTON {
+            get {
+                return ResourceManager.GetString("DISABLE_PVS_READ_CACHING_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable P&amp;VS Read-caching.
+        /// </summary>
+        public static string DISABLE_PVS_READ_CACHING_MENU {
+            get {
+                return ResourceManager.GetString("DISABLE_PVS_READ_CACHING_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pause Workload Balancing .
         /// </summary>
         public static string DISABLE_WLB {
@@ -10968,6 +10986,15 @@ namespace XenAdmin {
         public static string DISABLED_VMPP {
             get {
                 return ResourceManager.GetString("DISABLED_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling.
+        /// </summary>
+        public static string DISABLING {
+            get {
+                return ResourceManager.GetString("DISABLING", resourceCulture);
             }
         }
         
@@ -13181,7 +13208,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose the PVS site where the selected VMs should be cached. You can also configure these VMs to be prepopulated in the PVS Cache..
+        ///   Looks up a localized string similar to E&amp;nable PVS Read-caching.
+        /// </summary>
+        public static string ENABLE_PVS_READ_CACHING_BUTTON {
+            get {
+                return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ena&amp;ble PVS Read-caching.
+        /// </summary>
+        public static string ENABLE_PVS_READ_CACHING_MENU {
+            get {
+                return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the PVS site where the selected VMs should be cached..
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE {
             get {
@@ -13190,7 +13235,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose the PVS site where the selected VM should be cached. You can also configure this VM to be prepopulated in the PVS Cache..
+        ///   Looks up a localized string similar to Choose the PVS site where the selected VM should be cached..
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE {
             get {
@@ -13222,6 +13267,15 @@ namespace XenAdmin {
         public static string ENABLED_VMPP {
             get {
                 return ResourceManager.GetString("ENABLED_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling.
+        /// </summary>
+        public static string ENABLING {
+            get {
+                return ResourceManager.GetString("ENABLING", resourceCulture);
             }
         }
         

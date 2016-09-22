@@ -4626,6 +4626,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No cache storage available for PVS site.
+        /// </summary>
+        public static string Message_name_pvs_proxy_no_cache_sr_available {
+            get {
+                return ResourceManager.GetString("Message.name-pvs_proxy_no_cache_sr_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PVS proxy setup failed.
         /// </summary>
         public static string Message_name_pvs_proxy_setup_failed {

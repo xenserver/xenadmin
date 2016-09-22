@@ -1868,4 +1868,7 @@
   <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
     <value>PVS proxy setup failed</value>
   </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>No cache storage available for PVS site</value>
+  </data>
 </root>

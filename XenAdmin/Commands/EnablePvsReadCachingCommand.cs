@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
         {
             using (var dlg = new EnablePvsReadCachingDialog(vms))
             {
-                dlg.ShowDialog(Program.MainWindow); // TODO: use result
+                dlg.ShowDialog(Program.MainWindow);
             }
         }
 
@@ -105,18 +105,12 @@ namespace XenAdmin.Commands
 
         public override string ButtonText
         {
-            get
-            {
-                return "E&nable PVS Read-caching";
-            }
+            get { return Messages.ENABLE_PVS_READ_CACHING_BUTTON; }
         }
 
         public override string MenuText
         {
-            get
-            {
-                return "Enable PVS Read-caching";
-            }
+            get { return Messages.ENABLE_PVS_READ_CACHING_MENU; }
         }
     }
 }

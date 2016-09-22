@@ -29,17 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
-using XenAdmin.Dialogs;
-using XenAdmin.Network;
-using XenAdmin.Properties;
-using System.Drawing;
-using System.Collections.ObjectModel;
 using System.Linq;
-using XenAdmin.Model;
 using XenAdmin.Actions;
 
 
@@ -83,11 +75,9 @@ namespace XenAdmin.Commands
 
             if (actions.Any())
             {
-                var session = vms[0].Connection.Session;
-
                 if (actions.Count == 1)
                 {
-                    actions[0].RunExternal(session);
+                    actions[0].RunAsync();
                 }
                 else
                 {
@@ -95,7 +85,7 @@ namespace XenAdmin.Commands
                         Messages.ACTION_DISABLE_PVS_READ_CACHING,
                         Messages.ACTION_DISABLING_PVS_READ_CACHING,
                         Messages.ACTION_DISABLED_PVS_READ_CACHING,
-                        actions).RunExternal(session);
+                        actions).RunAsync();
                 }
             }
         }
@@ -136,18 +126,12 @@ namespace XenAdmin.Commands
 
         public override string ButtonText
         {
-            get
-            {
-                return "&Disable PVS Read-caching";
-            }
+            get { return Messages.DISABLE_PVS_READ_CACHING_BUTTON; }
         }
 
         public override string MenuText
         {
-            get
-            {
-                return "Disable PVS Read-caching";
-            }
+            get { return Messages.DISABLE_PVS_READ_CACHING_MENU; }
         }
     }
 }

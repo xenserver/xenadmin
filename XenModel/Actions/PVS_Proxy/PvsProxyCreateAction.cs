@@ -29,19 +29,13 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
 using XenAPI;
-using System.Linq;
 
 namespace XenAdmin.Actions
 {
     public class PvsProxyCreateAction : AsyncAction
     {
-        private VM vm;
-        private PVS_site site;
+        private readonly PVS_site site;
         private VIF vif;
 
         public PvsProxyCreateAction(VM vm, PVS_site site, VIF vif)
@@ -49,8 +43,6 @@ namespace XenAdmin.Actions
         {
             this.site = site;
             this.vif = vif;
-
-            this.Session = vm.Connection.Session;
             this.VM = vm;
 
             this.Description = Messages.WAITING;
@@ -59,24 +51,15 @@ namespace XenAdmin.Actions
 
         private void SetRBACPermissions()
         {
-            //AddCommonAPIMethodsToRoleCheck();
-            //ApiMethodsToRoleCheck.Add("host.destroy");
-            //ApiMethodsToRoleCheck.Add("sr.forget");
-
-            // TODO: what to use here?
+            ApiMethodsToRoleCheck.Add("pvs_proxy.create");
         }
 
         protected override void Run()
         {
-            try
-            {
-                PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref);
-                this.Description = Messages.ENABLED;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);               
-            }
+            RelatedTask = PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref);
+            Description = Messages.ENABLING;
+            PollToCompletion(0, 100);
+            Description = Messages.ENABLED;
         }
     }
 }

@@ -30,13 +30,8 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Actions;
@@ -100,11 +95,9 @@ namespace XenAdmin.Dialogs
 
             if (actions.Any())
             {
-                var session = vms[0].Connection.Session;
-
                 if (actions.Count == 1)
                 {
-                    actions[0].RunExternal(session);
+                    actions[0].RunAsync();
                 }
                 else
                 {
@@ -112,7 +105,7 @@ namespace XenAdmin.Dialogs
                         Messages.ACTION_ENABLE_PVS_READ_CACHING,
                         Messages.ACTION_ENABLING_PVS_READ_CACHING,
                         Messages.ACTION_ENABLED_PVS_READ_CACHING,
-                        actions).RunExternal(session);
+                        actions).RunAsync();
                 }
             }
         }
@@ -122,7 +115,6 @@ namespace XenAdmin.Dialogs
         /// </summary>
         /// <param name="vm"></param>
         /// <param name="siteSelected"></param>
-        /// <param name="prepopulate"></param>
         /// <returns></returns>
         private AsyncAction GetAsyncActionForVm(VM vm, PVS_site siteSelected)
         {
@@ -147,19 +139,9 @@ namespace XenAdmin.Dialogs
         /// <returns></returns>
         private bool PvsProxyAlreadyEnabled(VM vm)
         {
-            var connection = vm.Connection;
+            var pvsProxies = vm.Connection.Cache.PVS_proxies;
 
-            var pvsProxies = connection.Cache.PVS_proxies;
-
-            foreach (var pvsProxy in pvsProxies)
-            {
-                if(pvsProxy.VM.Equals(vm))
-                {
-                    return true; // Already got a PVS proxy on this vm
-                }
-            }
-
-            return false; // No PVS proxy is on this VM
+            return pvsProxies.Any(pvsProxy => pvsProxy.VM.Equals(vm));
         }
 
         /// <summary>
@@ -171,14 +153,7 @@ namespace XenAdmin.Dialogs
             var vifRefs = vm.VIFs;
             var vifs = vm.Connection.ResolveAll(vifRefs);
 
-            foreach (var vif in vifs)
-            {
-                if (vif.device.Equals("0"))
-                {
-                    return vif;
-                }
-            }
-            return null;
+            return vifs.FirstOrDefault(vif => vif.device.Equals("0"));
         }
     }
 }

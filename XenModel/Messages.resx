@@ -3914,11 +3914,20 @@ This will also delete its subfolders.</value>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>Disable</value>
   </data>
+  <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
+    <value>&amp;Disable PVS Read-caching</value>
+  </data>
+  <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
+    <value>Disable P&amp;VS Read-caching</value>
+  </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>Pause Workload Balancing </value>
   </data>
   <data name="DISABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Pa&amp;use</value>
+  </data>
+  <data name="DISABLING" xml:space="preserve">
+    <value>Disabling</value>
   </data>
   <data name="DISABLING_AD" xml:space="preserve">
     <value>Disabling Active Directory Authentication</value>
@@ -4671,14 +4680,23 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>Enable</value>
   </data>
+  <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
+    <value>E&amp;nable PVS Read-caching</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
+    <value>Ena&amp;ble PVS Read-caching</value>
+  </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
-    <value>Choose the PVS site where the selected VMs should be cached. You can also configure these VMs to be prepopulated in the PVS Cache.</value>
+    <value>Choose the PVS site where the selected VMs should be cached.</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
-    <value>Choose the PVS site where the selected VM should be cached. You can also configure this VM to be prepopulated in the PVS Cache.</value>
+    <value>Choose the PVS site where the selected VM should be cached.</value>
   </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Res&amp;ume</value>
+  </data>
+  <data name="ENABLING" xml:space="preserve">
+    <value>Enabling</value>
   </data>
   <data name="ENABLING_AD" xml:space="preserve">
     <value>Enabling Active Directory Authentication</value>
