@@ -2076,6 +2076,12 @@ namespace XenAdmin.Core
            return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
+       public static bool PvsCacheCapability(IXenConnection connection)
+       {
+           var master = GetMaster(connection);
+           return master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xspvscache"));
+       }
+
        /// <summary>
        /// This method returns the disk space required (bytes) on the provided SR for the provided VDI.
        /// This method also considers thin provisioning. For thin provisioned SRs the provided sm_config in the VDI will be considered first, or it will use the values from the SR's sm_config in case the VDI does not have these set. For fully provisioned SRs the sm_config in the VDI will be ignored.
