@@ -258,10 +258,10 @@
   <data name="ACTION_DESTROY_BOND_TITLE" xml:space="preserve">
     <value>正在销毁 {0}</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
     <value>正在分离存储项...</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>正在分离多个存储项</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
@@ -3836,7 +3836,7 @@
   <data name="DETAILS" xml:space="preserve">
     <value>详细信息</value>
   </data>
-  <data name="DETATCH_ALL_BUTTON_LABEL" xml:space="preserve">
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
     <value>全部分离(&amp;D)</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
@@ -4716,10 +4716,10 @@
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_TITLE" xml:space="preserve">
     <value>销毁存储项时出错</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_MESSAGE" xml:space="preserve">
+  <data name="ERROR_DETACHING_VDIS_MESSAGE" xml:space="preserve">
     <value>无法分离以下虚拟磁盘:</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_TITLE" xml:space="preserve">
+  <data name="ERROR_DETACHING_VDIS_TITLE" xml:space="preserve">
     <value>分离虚拟磁盘时出错</value>
   </data>
   <data name="ERROR_DIALOG_ADD_TO_POOL_TEXT" xml:space="preserve">
@@ -7460,7 +7460,7 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DETACH_VD_TITLE" xml:space="preserve">
     <value>分离虚拟磁盘</value>
   </data>
-  <data name="MESSAGEBOX_DETATCH_VD_TITLE_MUTLIPLE" xml:space="preserve">
+  <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>分离多个虚拟磁盘</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
@@ -7687,7 +7687,7 @@ SCSI ID: {2}
   <data name="MULTI_VDI_DELETE_WARNING" xml:space="preserve">
     <value>您将删除多个虚拟磁盘。是否确实要继续?</value>
   </data>
-  <data name="MULTI_VDI_DETATCH_WARNING" xml:space="preserve">
+  <data name="MULTI_VDI_DETACH_WARNING" xml:space="preserve">
     <value>您将分离多个虚拟磁盘，是否确实要继续?</value>
   </data>
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">

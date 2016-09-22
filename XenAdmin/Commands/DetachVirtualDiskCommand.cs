@@ -169,8 +169,8 @@ namespace XenAdmin.Commands
             if (actionsToComplete.Count == 1)
                 actionsToComplete[0].RunAsync();
             else
-                RunMultipleActions(actionsToComplete, Messages.ACTION_DETATCHING_MULTIPLE_VDIS_TITLE, 
-                                   Messages.ACTION_DETATCHING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
+                RunMultipleActions(actionsToComplete, Messages.ACTION_DETACHING_MULTIPLE_VDIS_TITLE, 
+                                   Messages.ACTION_DETACHING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
         }
 
         private List<AsyncAction> getDetachVDIAction(VDI vdi)
@@ -194,9 +194,9 @@ namespace XenAdmin.Commands
                 return true;
 
             MultipleWarningDialog warningDialog = new MultipleWarningDialog(
-                Messages.MESSAGEBOX_DETATCH_VD_TITLE_MUTLIPLE,
-                Messages.MULTI_VDI_DETATCH_WARNING,
-                Messages.DETATCH_ALL_BUTTON_LABEL);
+                Messages.MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE,
+                Messages.MULTI_VDI_DETACH_WARNING,
+                Messages.DETACH_ALL_BUTTON_LABEL);
 
             SelectedItemCollection selectedItems = GetSelection();
             List<VDI> sysDisks = new List<VDI>();
