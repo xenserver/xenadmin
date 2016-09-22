@@ -4684,7 +4684,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>E&amp;nable PVS Read-caching</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Ena&amp;ble PVS Read-caching</value>
+    <value>Ena&amp;ble PVS Read-caching...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
     <value>Choose the PVS site where the selected VMs should be cached.</value>

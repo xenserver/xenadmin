@@ -3834,6 +3834,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to setup PVS Read-caching on VM &apos;{0}&apos;. No cache storage found on site &apos;{1}&apos;..
+        /// </summary>
+        public static string Message_body_pvs_proxy_no_cache_sr_available {
+            get {
+                return ResourceManager.GetString("Message.body-pvs_proxy_no_cache_sr_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quality of Service settings for disk &apos;{0}&apos; on virtual machine &apos;{1}&apos; could not be obeyed..
         /// </summary>
         public static string Message_body_vbd_qos_failed {

@@ -54,8 +54,8 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            RelatedTask = PVS_proxy.async_destroy(Session, proxy.opaque_ref);
             Description = Messages.DISABLING;
+            RelatedTask = PVS_proxy.async_destroy(Session, proxy.opaque_ref);
             PollToCompletion(0, 100);
             Description = Messages.DISABLED;
         }

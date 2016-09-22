@@ -13217,7 +13217,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ena&amp;ble PVS Read-caching.
+        ///   Looks up a localized string similar to Ena&amp;ble PVS Read-caching....
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_MENU {
             get {
