@@ -54,7 +54,8 @@ namespace XenAPI
             iscsi,
             ebs, rawhba,
             smb, lvmofcoe,
-            nutanix, nutanixiso
+            nutanix, nutanixiso, 
+            tmpfs
         }
 
         public const string Content_Type_ISO = "iso";
@@ -416,8 +417,14 @@ namespace XenAPI
             if (name_label.StartsWith(Helpers.GuiTempObjectPrefix))
                 return false;
 
+            SRTypes srType = GetSRType(false);
+
             // CA-15012 - dont show cd drives of type local on miami (if dont get destroyed properly on upgrade)
-            if (GetSRType(false) == SRTypes.local)
+            if (srType == SRTypes.local)
+                return false;
+
+            // Hide Memory SR
+            if (srType == SRTypes.tmpfs)
                 return false;
 
             if (showHiddenVMs)
