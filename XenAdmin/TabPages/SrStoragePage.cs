@@ -49,8 +49,6 @@ namespace XenAdmin.TabPages
     internal partial class SrStoragePage : BaseTabPage
     {
         private SR sr;
-        private readonly DataGridViewColumn sizeColumn;
-        private readonly DataGridViewColumn storageLinkVolumeColumn;
         private bool rebuildRequired;
 
         private readonly VDIsDataGridViewBuilder dataGridViewBuilder;
@@ -59,24 +57,14 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
 
-            storageLinkVolumeColumn = ColumnVolume;
-            sizeColumn = ColumnSize;
             for (int i = 0; i < 5; i++)
             {
                 dataGridViewVDIs.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
             }
 
-            dataGridViewVDIs.SortCompare += DataGridViewObject_SortCompare;
-            dataGridViewVDIs.SelectionChanged += dataGridViewVDIs_SelectedIndexChanged;
-            dataGridViewVDIs.MouseUp += dataGridViewVDIs_MouseUp;
-            dataGridViewVDIs.KeyUp += dataGridViewVDIs_KeyUp;
-
-            ConnectionsManager.History.CollectionChanged += new CollectionChangeEventHandler(History_CollectionChanged);
-
+            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             base.Text = Messages.VIRTUAL_DISKS;
-
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
-            
             dataGridViewBuilder = new VDIsDataGridViewBuilder(this);
         }
 
@@ -156,12 +144,12 @@ namespace XenAdmin.TabPages
             dataGridViewVDIs.SuspendLayout();
             try
             {
-                storageLinkVolumeColumn.Visible = data.ShowStorageLink;
+                ColumnVolume.Visible = data.ShowStorageLink;
 
                 // Update existing rows
                 foreach (var vdiRow in data.VdiRowsToUpdate)
                 {
-                    vdiRow.RefreshRowDetails(data.ShowStorageLink);
+                    vdiRow.RefreshRowDetails();
                 }
 
                 // Remove rows for deleted VDIs
@@ -173,8 +161,7 @@ namespace XenAdmin.TabPages
                 // Add rows for new VDIs
                 foreach (var vdi in data.VdisToAdd)
                 {
-                    VDIRow newRow = new VDIRow(vdi, data.ShowStorageLink);
-                    dataGridViewVDIs.Rows.Add(newRow);   
+                    dataGridViewVDIs.Rows.Add(new VDIRow(vdi));   
                 }
             }
             finally
@@ -272,10 +259,39 @@ namespace XenAdmin.TabPages
         }
         #endregion
 
-        #region datagridviewevents
-        void DataGridViewObject_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        #region datagridvie wevents
+        private void  DataGridViewObject_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (e.Column.Index == sizeColumn.Index)
+            if (e.Column.Index == ColumnName.Index)
+            {
+                var vdi1 = ((VDIRow) dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
+                var vdi2 = ((VDIRow) dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
+
+                e.SortResult = vdi1.CompareTo(vdi2);
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Column.Index == ColumnDesc.Index)
+            {
+                var vdi1 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
+                var vdi2 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
+
+                var descCompare = StringUtility.NaturalCompare(vdi1.Description, vdi2.Description);
+                if (descCompare != 0)
+                {
+                    e.SortResult = descCompare;
+                }
+                else
+                {
+                    var refCompare = string.Compare(vdi1.opaque_ref, vdi2.opaque_ref, StringComparison.Ordinal);
+                    e.SortResult = refCompare;
+                }
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Column.Index == ColumnSize.Index)
             {
                 VDI vdi1 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
                 VDI vdi2 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
@@ -298,55 +314,71 @@ namespace XenAdmin.TabPages
             if (e.KeyCode != Keys.Apps)
                 return;
 
-            if (dataGridViewVDIs.SelectedRows.Count <= 0)
-                return;
-
-            DataGridViewRow row = dataGridViewVDIs.SelectedRows[0];
-
-            contextMenuStrip1.Show(dataGridViewVDIs, 5, row.Height * (row.Index + 2));
+            if (dataGridViewVDIs.SelectedRows.Count == 0)
+            {
+                // 3 is the defaul control margin
+                contextMenuStrip1.Show(dataGridViewVDIs, 3, dataGridViewVDIs.ColumnHeadersHeight + 3);
+            }
+            else
+            {
+                DataGridViewRow row = dataGridViewVDIs.SelectedRows[0];
+                contextMenuStrip1.Show(dataGridViewVDIs, 3, row.Height * (row.Index + 2));
+            }
         }
 
         private void dataGridViewVDIs_MouseUp(object sender, MouseEventArgs e)
         {
-            // Load context menus on right mouse click
-            DataGridView.HitTestInfo hitTestInfo;
-            if (e.Button == MouseButtons.Right)
+            DataGridView.HitTestInfo hitTestInfo = dataGridViewVDIs.HitTest(e.X, e.Y);
+
+            if (hitTestInfo.Type == DataGridViewHitTestType.None)
             {
-                hitTestInfo = dataGridViewVDIs.HitTest(e.X, e.Y);
-                if (hitTestInfo.Type == DataGridViewHitTestType.Cell)
-                {
-                    if (dataGridViewVDIs.Rows.Count >= 0)
-                    {
-                        if (!dataGridViewVDIs.Rows[hitTestInfo.RowIndex].Selected)
-                        {
-                            // Select the row that the user right clicked on (similiar to outlook) if it's not already in the selection
-                            // (avoids clearing a multiselect if you right click inside it)
-                            dataGridViewVDIs.CurrentCell = dataGridViewVDIs[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex];
-                        }
-                        // Show the menus.  We will always have at least one (Add).
-                        contextMenuStrip1.Show(dataGridViewVDIs, new Point(e.X, e.Y));
-                    }
-                }
+                dataGridViewVDIs.ClearSelection();
+            }
+            else if (hitTestInfo.Type == DataGridViewHitTestType.Cell && e.Button == MouseButtons.Right
+                     && 0 <= hitTestInfo.RowIndex && hitTestInfo.RowIndex < dataGridViewVDIs.Rows.Count
+                     && !dataGridViewVDIs.Rows[hitTestInfo.RowIndex].Selected)
+            {
+                // Select the row that the user right clicked on (similiar to outlook) if it's not already in the selection
+                // (avoids clearing a multiselect if you right click inside it)
+                // Check if the CurrentCell is the cell the user right clicked on (but the row is not Selected) [CA-64954]
+                // This happens when the grid is initially shown: the current cell is the first cell in the first column, but the row is not selected
+
+                if (dataGridViewVDIs.CurrentCell == dataGridViewVDIs[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex])
+                    dataGridViewVDIs.Rows[hitTestInfo.RowIndex].Selected = true;
+                else
+                    dataGridViewVDIs.CurrentCell = dataGridViewVDIs[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex];
+            }
+
+            if ((hitTestInfo.Type == DataGridViewHitTestType.None || hitTestInfo.Type == DataGridViewHitTestType.Cell)
+                && e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(dataGridViewVDIs, new Point(e.X, e.Y));
             }
         }
+
         #endregion
 
         #region Button and context menu population
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            SelectedItemCollection vdis = SelectedVDIs;
-            if (vdis.Count == 0)
+            bool rescan = buttonRescan.Enabled;
+            bool add = addVirtualDiskButton.Enabled;
+            bool move = buttonMove.Enabled;
+            bool delete = RemoveButton.Enabled;
+            bool edit = EditButton.Enabled;
+            
+            if (!(rescan || add || move || delete || edit))
+            {
+                e.Cancel = true;
                 return;
+            }
 
-            contextMenuStrip1.Items.Clear();
-
-            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
-            contextMenuStrip1.Items.Add(new CommandToolStripMenuItem(deleteCmd, true));
-
-            contextMenuStrip1.Items.Add(new CommandToolStripMenuItem(MoveMigrateCommand(vdis), true));
-
-            contextMenuStrip1.Items.Add(editVirtualDiskToolStripMenuItem);
-            editVirtualDiskToolStripMenuItem.Enabled = vdis.Count == 1 && !vdis.AsXenObjects<VDI>()[0].is_a_snapshot;
+            rescanToolStripMenuItem.Visible = rescan;
+            addToolStripMenuItem.Visible = add;
+            moveVirtualDiskToolStripMenuItem.Visible = move;
+            deleteVirtualDiskToolStripMenuItem.Visible = delete;
+            editVirtualDiskToolStripMenuItem.Visible = edit;
+            toolStripSeparator1.Visible = (rescan || add || move || delete) && edit;
         }
 
         private Command MoveMigrateCommand(IEnumerable<SelectedItem> selection)
@@ -361,14 +393,13 @@ namespace XenAdmin.TabPages
 
         private void RefreshButtons()
         {
-            bool srLocked = sr == null || sr.Locked;
             SelectedItemCollection vdis = SelectedVDIs;
 
             // Delete button
-            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
-            // User has visibility that this disk is related to all it's VM. Allow deletion with multiple VBDs (non default behaviour),
-            // but don't allow them to delete if a running vm is using the disk (default behaviour).
-            deleteCmd.AllowMultipleVBDDelete = true;
+            // The user can see that this disk is attached to more than one VMs. Allow deletion of multiple VBDs (non default behaviour),
+            // but don't allow them to be deleted if a running vm is using the disk (default behaviour).
+
+            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis) {AllowMultipleVBDDelete = true};
             if (deleteCmd.CanExecute())
             {
                 RemoveButton.Enabled = true;
@@ -394,29 +425,29 @@ namespace XenAdmin.TabPages
             }
 
             // Rescan button
-            if (srLocked)
+            if (sr == null || sr.Locked)
             {
-                buttonRefresh.Enabled = false;
+                buttonRescan.Enabled = false;
             }
             else if (HelpersGUI.BeingScanned(sr))
             {
-                buttonRefresh.Enabled = false;
+                buttonRescan.Enabled = false;
                 toolTipContainerRescan.SetToolTip(Messages.SCAN_IN_PROGRESS_TOOLTIP);
             }
             else
             {
-                buttonRefresh.Enabled = true;
+                buttonRescan.Enabled = true;
                 toolTipContainerRescan.RemoveAll();
             }
 
             // Add VDI button
-            addVirtualDiskButton.Enabled = !srLocked;
+            addVirtualDiskButton.Enabled = sr != null && !sr.Locked;
 
             // Properties button
             if (vdis.Count == 1)
             {
                 VDI vdi = vdis.AsXenObjects<VDI>()[0];
-                EditButton.Enabled = !srLocked && !vdi.is_a_snapshot && !vdi.Locked;
+                EditButton.Enabled = sr != null && !sr.Locked && !vdi.is_a_snapshot && !vdi.Locked;
             }
             else
                 EditButton.Enabled = false;
@@ -424,17 +455,37 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        #region buttonHandlers
-        private void removeVirtualDisk_Click(object sender, EventArgs e)
+        #region Actions on Vdis
+
+        private void Rescan()
+        {
+            SrRefreshAction a = new SrRefreshAction(sr);
+            a.RunAsync();
+        }
+
+        private void AddVdi()
+        {
+            if (sr != null)
+                Program.MainWindow.ShowPerConnectionWizard(sr.Connection, new NewDiskDialog(sr.Connection, sr));
+        }
+
+        private void MoveSelectedVdis()
         {
             SelectedItemCollection vdis = SelectedVDIs;
-            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
-            cmd.AllowMultipleVBDDelete = true;
+            Command cmd = MoveMigrateCommand(vdis);
             if (cmd.CanExecute())
                 cmd.Execute();
         }
 
-        private void editVirtualDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveSelectedVdis()
+        {
+            SelectedItemCollection vdis = SelectedVDIs;
+            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis) {AllowMultipleVBDDelete = true};
+            if (cmd.CanExecute())
+                cmd.Execute();
+        }
+
+        private void EditSelectedVdis()
         {
             SelectedItemCollection vdis = SelectedVDIs;
             if (vdis.Count != 1)
@@ -447,68 +498,70 @@ namespace XenAdmin.TabPages
             new PropertiesDialog(vdi).ShowDialog(this);
         }
 
+        #endregion
+
+        #region Button and ToolStripMenuItem handlers
+
         private void addVirtualDiskButton_Click(object sender, EventArgs e)
         {
-            if (sr != null)
-                Program.MainWindow.ShowPerConnectionWizard(sr.Connection, new Dialogs.NewDiskDialog(sr.Connection, sr));
+            AddVdi();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            removeVirtualDisk_Click(sender, e);
+            RemoveSelectedVdis();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            editVirtualDiskToolStripMenuItem_Click(sender, e);
+            EditSelectedVdis();
         }
 
-        private void buttonRefresh_Click(object sender, EventArgs e)
+        private void buttonRescan_Click(object sender, EventArgs e)
         {
-            SrRefreshAction a = new SrRefreshAction(sr);
-            a.RunAsync();
-        }
-
-        private void moveVirtualDiskToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SelectedItemCollection vdis = SelectedVDIs;
-            Command cmd = MoveMigrateCommand(vdis);
-            if (cmd.CanExecute())
-                cmd.Execute();
+            Rescan();
         }
 
         private void buttonMove_Click(object sender, EventArgs e)
         {
-            moveVirtualDiskToolStripMenuItem_Click(sender, e);
+            MoveSelectedVdis();
         }
+
+
+        private void rescanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Rescan();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddVdi();
+        }
+
+        private void editVirtualDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditSelectedVdis();
+        }
+
+        private void moveVirtualDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           MoveSelectedVdis();
+        }
+
+        private void deleteVirtualDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveSelectedVdis();
+        }
+
         #endregion
 
-        private void dataGridViewVDIs_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // Select the row that the user right clicked on if it's not already in the selection
-            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
-            {
-                if (!dataGridViewVDIs.Rows[e.RowIndex].Selected)
-                {
-                    // Check if the CurrentCell is the cell the user right clicked on (but the row is not Selected) [CA-64954]
-                    // This happens when the grid is initially shown: the current cell is the first cell in the first column, but the row is not selected
-                    if (dataGridViewVDIs.CurrentCell == dataGridViewVDIs[e.ColumnIndex, e.RowIndex])
-                        dataGridViewVDIs.Rows[e.RowIndex].Selected = true;
-                    else
-                        dataGridViewVDIs.CurrentCell = dataGridViewVDIs[e.ColumnIndex, e.RowIndex];
-                }
-            }
-        }
 
         public class VDIRow : DataGridViewRow
         {
             public VDI VDI { get; private set; }
 
-            private bool showStorageLink = false;
-
-            public VDIRow(VDI vdi, bool showStorageLink)
+            public VDIRow(VDI vdi)
             {
-                this.showStorageLink = showStorageLink;
                 VDI = vdi;
                 for (int i = 0; i < 5; i++)
                 {
@@ -537,9 +590,8 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            public void RefreshRowDetails(bool showSL)
+            public void RefreshRowDetails()
             {
-                showStorageLink = showSL;
                 for (int i = 0; i < 5; i++)
                 {
                     Cells[i].Value = GetCellText(i);

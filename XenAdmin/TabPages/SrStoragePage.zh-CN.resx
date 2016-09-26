@@ -191,7 +191,7 @@
     <value>173, 22</value>
   </data>
   <data name="editVirtualDiskToolStripMenuItem.Text" xml:space="preserve">
-    <value>属性</value>
+    <value>属性(&amp;R)</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="TitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">

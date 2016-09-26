@@ -138,6 +138,14 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     if (radioButton.Visible && radioButton.Tag.GetType() == m_preselectedWizardType)
                         radioButton.Checked = true;
                 }
+
+                bool visibleRadioButtonsExist = _radioButtons.Any(r => r.Visible);
+                bool checkedRadioButtonExists = _radioButtons.Any(r => r.Visible && r.Checked);
+
+                tableLayoutPanel2.Visible = visibleRadioButtonsExist;
+
+                if (visibleRadioButtonsExist && !checkedRadioButtonExists)
+                    _radioButtons.First(r => r.Visible).Checked = true;
             }
             else
             {

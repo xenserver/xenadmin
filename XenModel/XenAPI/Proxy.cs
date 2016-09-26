@@ -596,6 +596,10 @@ namespace XenAPI
         Response<bool>
         pool_get_policy_no_vendor_device(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_live_patching_disabled")]
+        Response<bool>
+        pool_get_live_patching_disabled(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -679,6 +683,10 @@ namespace XenAPI
         [XmlRpcMethod("pool.set_policy_no_vendor_device")]
         Response<string>
         pool_set_policy_no_vendor_device(string session, string _pool, bool _policy_no_vendor_device);
+
+        [XmlRpcMethod("pool.set_live_patching_disabled")]
+        Response<string>
+        pool_set_live_patching_disabled(string session, string _pool, bool _live_patching_disabled);
 
         [XmlRpcMethod("pool.join")]
         Response<string>
@@ -2972,6 +2980,10 @@ namespace XenAPI
         Response<string>
         host_get_control_domain(string session, string _host);
 
+        [XmlRpcMethod("host.get_patches_requiring_reboot")]
+        Response<string []>
+        host_get_patches_requiring_reboot(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3327,6 +3339,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.call_plugin")]
         Response<string>
         async_host_call_plugin(string session, string _host, string _plugin, string _fn, Object _args);
+
+        [XmlRpcMethod("host.has_extension")]
+        Response<bool>
+        host_has_extension(string session, string _host, string _name);
+
+        [XmlRpcMethod("Async.host.has_extension")]
+        Response<string>
+        async_host_has_extension(string session, string _host, string _name);
+
+        [XmlRpcMethod("host.call_extension")]
+        Response<string>
+        host_call_extension(string session, string _host, string _call);
+
+        [XmlRpcMethod("Async.host.call_extension")]
+        Response<string>
+        async_host_call_extension(string session, string _host, string _call);
 
         [XmlRpcMethod("host.get_servertime")]
         Response<DateTime>
@@ -7219,6 +7247,7 @@ namespace XenAPI
         public Object guest_agent_config;
         public Object cpu_info;
         public bool policy_no_vendor_device;
+        public bool live_patching_disabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7452,6 +7481,7 @@ namespace XenAPI
         public string display;
         public string [] virtual_hardware_platform_versions;
         public string control_domain;
+        public string [] patches_requiring_reboot;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

@@ -246,6 +246,16 @@ namespace XenAPI
             return h._RestrictHotfixApply;
         }
 
+        private bool _RestrictBatchHotfixApply
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_batch_hotfix_apply"); }
+        }
+
+        public static bool RestrictBatchHotfixApply(Host h)
+        {
+            return h._RestrictBatchHotfixApply;
+        }
+
         private bool _RestrictCheckpoint
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_checkpoint"); }
@@ -529,6 +539,16 @@ namespace XenAPI
         public static bool RestrictSslLegacySwitch(Host h)
         {
             return h._RestrictSslLegacySwitch;
+        }
+
+        private bool _RestrictLivePatching
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_live_patching"); }
+        }
+
+        public static bool RestrictLivePatching(Host h)
+        {
+            return h._RestrictLivePatching;
         }
 
         public bool HasPBDTo(SR sr)

@@ -261,10 +261,10 @@
   <data name="ACTION_DESTROY_BOND_TITLE" xml:space="preserve">
     <value>Destroying {0}</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
-    <value>Detatching storage items...</value>
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
+    <value>Detaching storage items...</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
@@ -276,6 +276,9 @@
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
     <value>Disabling PVS Read-caching for VM '{0}'</value>
   </data>
+  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Disable live patching</value>
+  </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
   </data>
@@ -284,6 +287,9 @@
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Disabling PVS Read-caching for selected VMs</value>
+  </data>
+  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -390,6 +396,9 @@
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
     <value>Enabling PVS Read-caching for VM '{0}' on site '{1}'</value>
   </data>
+  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Enable live patching</value>
+  </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
   </data>
@@ -398,6 +407,9 @@
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabling PVS Read-caching for selected VMs</value>
+  </data>
+  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -443,9 +455,6 @@
   </data>
   <data name="ACTION_EXPORT_VERIFY" xml:space="preserve">
     <value>Verifying Export...</value>
-  </data>
-  <data name="ACTION_EXPORT_VM_FROM_X" xml:space="preserve">
-    <value>Exporting VM '{0}' from '{1}'</value>
   </data>
   <data name="ACTION_GETTING_DATASOURCES" xml:space="preserve">
     <value>Fetching data sources</value>
@@ -699,6 +708,9 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>Performing SR scan from '{0}'</value>
   </data>
+  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
+    <value>Saving VM Configuration</value>
+  </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>Delete VMs</value>
   </data>
@@ -935,6 +947,9 @@
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU passthrough on '{0}'</value>
+  </data>
+  <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
+    <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
     <value>Upload server status report to [Citrix] Insight Services</value>
@@ -2365,7 +2380,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Snapshot disks cannot be moved</value>
   </data>
   <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>You must detatch this virtual disk before it can be moved.</value>
+    <value>You must detach this virtual disk before it can be moved.</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
@@ -3154,9 +3169,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>Destination:</value>
   </data>
-  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
-    <value>Home Server:</value>
-  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>Template:</value>
   </data>
@@ -3168,6 +3180,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>Storage:</value>
+  </data>
+  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
+    <value>Target Server:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>Migration Network:</value>
@@ -3209,7 +3224,7 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
     <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Specify a &amp;home server in the destination pool (optional):</value>
+    <value>Specify a &amp;target server in the destination pool (optional):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
@@ -3860,14 +3875,14 @@ This will also delete its subfolders.</value>
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
     <value>[XenCenter] has detected that an SR already exists on this LUN. This SR is not currently in use by '{0}',  would you like to attach it?</value>
   </data>
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
+    <value>&amp;Detach all</value>
+  </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>&amp;Detach</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>Details</value>
-  </data>
-  <data name="DETATCH_ALL_BUTTON_LABEL" xml:space="preserve">
-    <value>&amp;Detatch all</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
     <value>Device</value>
@@ -4130,8 +4145,8 @@ This will also delete its subfolders.</value>
   <data name="DONE" xml:space="preserve">
     <value>done.</value>
   </data>
-  <data name="DONT_ASSIGN_HOME_SERVER" xml:space="preserve">
-    <value>Don't assign a home server</value>
+  <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
+    <value>Don't select a target server</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
@@ -4770,11 +4785,11 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_TITLE" xml:space="preserve">
     <value>Error Destroying Storage Items</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_MESSAGE" xml:space="preserve">
-    <value>The following virtual disks could not be detatched:</value>
+  <data name="ERROR_DETACHING_VDIS_MESSAGE" xml:space="preserve">
+    <value>The following virtual disks could not be detached:</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_TITLE" xml:space="preserve">
-    <value>Error Detatching Virtual Disks</value>
+  <data name="ERROR_DETACHING_VDIS_TITLE" xml:space="preserve">
+    <value>Error Detaching Virtual Disks</value>
   </data>
   <data name="ERROR_DIALOG_ADD_TO_POOL_TEXT" xml:space="preserve">
     <value>The following servers could not be added to the pool '{0}':</value>
@@ -5101,6 +5116,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_OPTIONS_PAGE_TITLE" xml:space="preserve">
     <value>Select the manifest, signing and output file format options you want</value>
   </data>
+  <data name="EXPORT_OVA_PACKAGE" xml:space="preserve">
+    <value>Export OVA package '{0}' from '{1}'</value>
+  </data>
+  <data name="EXPORT_OVF_PACKAGE" xml:space="preserve">
+    <value>Export OVF package '{0}' from '{1}'</value>
+  </data>
   <data name="EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID" xml:space="preserve">
     <value>The certificate is invalid.</value>
   </data>
@@ -5142,6 +5163,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_UPDATES" xml:space="preserve">
     <value>Exported updates to {0}</value>
+  </data>
+  <data name="EXPORT_VM_TITLE" xml:space="preserve">
+    <value>Export VM '{0}' from '{1}'</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
@@ -5335,6 +5359,15 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FOLDER_ALREADY_EXISTS" xml:space="preserve">
     <value>Folder with this name already exists</value>
   </data>
+  <data name="FOLDER_BROWSER_BUG_TOOL" xml:space="preserve">
+    <value>Specify the folder where your report will be saved.</value>
+  </data>
+  <data name="FOLDER_BROWSER_DOWNLOAD_APPLIANCE" xml:space="preserve">
+    <value>Specify the folder where the files will be downloaded.</value>
+  </data>
+  <data name="FOLDER_BROWSER_EXPORT_APPLIANCE" xml:space="preserve">
+    <value>Specify the folder where the exported file(s) will be saved.</value>
+  </data>
   <data name="FOLDER_NO_CONNECTION" xml:space="preserve">
     <value>Connect to a server to create your folder</value>
   </data>
@@ -5451,6 +5484,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>Enter the vApp name and an optional description.</value>
+  </data>
+  <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
+    <value>{0} on {1}</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
     <value>The server '{0}' needs to be rebooted for update '{1}' to take effect</value>
@@ -6204,7 +6240,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Starting VM...</value>
   </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
-    <value>Importing VM from '{0}' to '{1}'</value>
+    <value>Import VM from '{0}' to '{1}'</value>
   </data>
   <data name="IMPORTVM_UPDATING_NETWORKS" xml:space="preserve">
     <value>Updating VM networking...</value>
@@ -6216,10 +6252,10 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Waiting for Import VM wizard to complete...</value>
   </data>
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
-    <value>Import Appliance</value>
+    <value>Import Appliance '{0}' to '{1}'</value>
   </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
-    <value>Import Disk Image</value>
+    <value>Import VM '{0}' from Disk Image to '{1}'</value>
   </data>
   <data name="IMPORT_DOWNLOAD_ERROR" xml:space="preserve">
     <value>Error downloading file '{0}'. {1}</value>
@@ -6289,6 +6325,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH" xml:space="preserve">
     <value>Path contains invalid characters.</value>
+  </data>
+  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI" xml:space="preserve">
+    <value>Please specify a valid URI.</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH" xml:space="preserve">
     <value>Path does not exist.</value>
@@ -6921,6 +6960,15 @@ Standard features only</value>
   <data name="LIST_SEPARATOR" xml:space="preserve">
     <value>, </value>
   </data>
+  <data name="LIVE_PATCHING" xml:space="preserve">
+    <value>Live Patching</value>
+  </data>
+  <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
+    <value>Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them.</value>
+  </data>
+  <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
+    <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
+  </data>
   <data name="LOADING" xml:space="preserve">
     <value>Loading '{0}'...</value>
   </data>
@@ -7493,7 +7541,7 @@ Are you sure you want to detach this storage repository?</value>
   <data name="MESSAGEBOX_DETACH_VD_TITLE" xml:space="preserve">
     <value>Detach virtual disk</value>
   </data>
-  <data name="MESSAGEBOX_DETATCH_VD_TITLE_MUTLIPLE" xml:space="preserve">
+  <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>Detach Multiple Virtual Disks</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
@@ -7720,7 +7768,7 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   <data name="MULTI_VDI_DELETE_WARNING" xml:space="preserve">
     <value>You are about to delete multiple virtual disks. Are you sure you wish to proceed?</value>
   </data>
-  <data name="MULTI_VDI_DETATCH_WARNING" xml:space="preserve">
+  <data name="MULTI_VDI_DETACH_WARNING" xml:space="preserve">
     <value>You are about to detach multiple virtual disks, are you sure you wish to proceed?</value>
   </data>
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">
@@ -7895,7 +7943,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Never</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>The new disk will appear when you next restart the VM.</value>
+    <value>You need to shutdown and then restart the VM before it can access the new disk.</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>Disk Created</value>
@@ -8384,7 +8432,7 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Locate the operating system installation media</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
-    <value>Disk {0}</value>
+    <value>Disk '{0}'</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
     <value>Created by template provisioner</value>
@@ -8518,9 +8566,6 @@ Once the VM has restarted click the Install [XenServer product] Tools menu item 
   </data>
   <data name="NEW_POLICY" xml:space="preserve">
     <value>&amp;New Policy...</value>
-  </data>
-  <data name="NEW_POOL" xml:space="preserve">
-    <value>New Pool</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
@@ -8732,6 +8777,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NOT_ENOUGH_SPACE_DESCRIPTION" xml:space="preserve">
     <value>This host does not have enough disk space to install this update</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
+    <value>There is not enough space to automatically update '{0}'.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>Space available: {0}</value>
@@ -8972,8 +9020,35 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
+    <value>Update process was not completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
+    <value>Following errors occurred while automatic upgrade was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
+    <value>Following error occurred while automatic upgrade was in progress: </value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
+    <value>Update was not completed successfully</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
+    <value>Upload and Install</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
+    <value>Automatically uploading and installing updates</value>
+  </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
+    <value>Downloading update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
+    <value>Skipping download: Already downloaded update {0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
+    <value>Waiting to download update {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -9050,11 +9125,17 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_PATCHINGPAGE_TITLE" xml:space="preserve">
     <value>Install the update</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE" xml:space="preserve">
+    <value>Checking disk space requirements</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FAILED" xml:space="preserve">
     <value>Prechecks failed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
+  </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>Update prechecks are performed to verify that the selected update can be applied to the servers.</value>
@@ -9083,11 +9164,20 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+    <value>Automatic update is not supported on this [XenServer] version</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this [XenServer] version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
+    <value>This server is not licensed for automatic updating</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
     <value>You cannot apply updates using [XenCenter].</value>
@@ -9098,11 +9188,28 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>Update not applicable</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
+    <value>This server cannot be updated automatically</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
+    <value>This server is already up-to-date</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>Select Servers</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you wish to update</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
+Greyed out servers cannot be updated automatically.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>Select one or more servers from the list of available servers.
+Servers where the selected update cannot be applied appear disabled in this list.</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
+    <value>Automatic update has finished.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
@@ -9141,6 +9248,9 @@ Please wait for this operation to complete, then click Next to continue with the
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
+  </data>
+  <data name="PATCHING_WIZARD_RUNNING_PRECHECKS" xml:space="preserve">
+    <value>Running prechecks...</value>
   </data>
   <data name="PATCHING_WIZARD_SOLVE_MANUALLY" xml:space="preserve">
     <value>Unable to resolve this issue:\n{0}\n\nPlease resolve this issue manually and then click Check Again.
@@ -9931,11 +10041,17 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>Restore dismissed updates</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>Backup file loaded to server '{0}'.  Refer to the "[XenServer product] Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>Restoring...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>Restoring server '{0}'</value>
@@ -10256,6 +10372,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>A server request is in progress</value>
+  </data>
+  <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
+    <value>Disk space check</value>
   </data>
   <data name="SERVER_SIDE_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Server side patch check</value>
@@ -10641,7 +10760,7 @@ Incremental allocation: {1}</value>
     <value>This storage repository is broken</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
-    <value>VMs with no home server cannot be on local storage</value>
+    <value>VMs without a home server cannot have disks on local storage</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
@@ -10937,6 +11056,9 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="TARGET" xml:space="preserve">
     <value>Target</value>
+  </data>
+  <data name="TARGET_SERVER" xml:space="preserve">
+    <value>Target Server</value>
   </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>
@@ -11459,7 +11581,10 @@ Check your settings and try again.</value>
     <value>Rebooting {0} ... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
-    <value>Removing update {0} from {1}... </value>
+    <value>Deleting update installation file {0} from {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
+    <value>Removing update files from {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>
@@ -11888,8 +12013,11 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>[XenCenter] version {0} (build {1}.{2}) {3}-bit</value>
   </data>
-  <data name="VGPU_DESCRIPTION" xml:space="preserve">
+  <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>

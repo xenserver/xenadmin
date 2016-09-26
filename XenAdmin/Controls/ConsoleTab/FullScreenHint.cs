@@ -48,11 +48,26 @@ namespace XenAdmin.Controls.ConsoleTab
             int nHeightEllipse // width of ellipse
          );
 
-        public FullScreenHint(string message)
+        public FullScreenHint()
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-            label1.Text = message;
+            label1.Text = GetFullScreenMessage();
+        }
+
+        private string GetFullScreenMessage()
+        {
+            switch (Properties.Settings.Default.FullScreenShortcutKey)
+            {
+                case 0:
+                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ALT;
+                case 1:
+                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ALT_F;
+                case 2:
+                    return Messages.VNC_FULLSCREEN_MESSAGE_F12;
+                default:
+                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ENTER;
+            }
         }
 
         private void FullScreenHint_Load(object sender, EventArgs e)

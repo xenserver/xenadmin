@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value> ダウンロードしたファイルを配置するローカルのワークスペースを指定します。既存のファイルは上書きされるため、空のフォルダを使用することをお勧めします。</value>
+    <value>ダウンロードしたファイルを配置するローカルのワークスペースを指定します。既存のファイルは上書きされるため、空のフォルダを使用することをお勧めします。</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
