@@ -286,13 +286,13 @@
     <value>Detaching Multiple Storage Items</value>
   </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabled PVS Read-caching for selected VMs</value>
+    <value>Disabled PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disable PVS Read-caching</value>
+    <value>Disable PVS read caching</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Disabling PVS Read-caching for VM '{0}'</value>
+    <value>Disabling PVS read caching for VM '{0}'</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Disable live patching</value>
@@ -304,7 +304,7 @@
     <value>Disable container management on VM '{0}'</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabling PVS Read-caching for selected VMs</value>
+    <value>Disabling PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Disabling live patching for '{0}'</value>
@@ -406,13 +406,13 @@
     <value>DR cleanup ({0})</value>
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabled PVS Read-caching for selected VMs</value>
+    <value>Enabled PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enable PVS Read-caching</value>
+    <value>Enable PVS read caching</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Enabling PVS Read-caching for VM '{0}' on site '{1}'</value>
+    <value>Enabling PVS read caching for VM '{0}' on site '{1}'</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Enable live patching</value>
@@ -424,7 +424,7 @@
     <value>Enable container management on VM '{0}'</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabling PVS Read-caching for selected VMs</value>
+    <value>Enabling PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Enabling live patching for '{0}'</value>
@@ -3948,10 +3948,10 @@ This will also delete its subfolders.</value>
     <value>Disable</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>&amp;Disable PVS Read-caching</value>
+    <value>&amp;Disable PVS Read Caching</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Disable P&amp;VS Read-caching</value>
+    <value>Disable P&amp;VS Read Caching</value>
   </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>Pause Workload Balancing </value>
@@ -4714,10 +4714,10 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Enable</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>E&amp;nable PVS Read-caching</value>
+    <value>E&amp;nable PVS Read Caching...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Ena&amp;ble PVS Read-caching...</value>
+    <value>Ena&amp;ble PVS Read Caching...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
     <value>Choose the PVS site where the selected VMs should be cached.</value>

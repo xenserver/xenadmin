@@ -574,7 +574,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable PVS Read-caching.
+        ///   Looks up a localized string similar to Disable PVS read caching.
         /// </summary>
         public static string ACTION_DISABLE_PVS_READ_CACHING {
             get {
@@ -583,7 +583,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabling PVS Read-caching for VM &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Disabling PVS read caching for VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_DISABLE_PVS_READ_CACHING_FOR {
             get {
@@ -610,7 +610,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabled PVS Read-caching for selected VMs.
+        ///   Looks up a localized string similar to Disabled PVS read caching for selected VMs.
         /// </summary>
         public static string ACTION_DISABLED_PVS_READ_CACHING {
             get {
@@ -628,7 +628,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabling PVS Read-caching for selected VMs.
+        ///   Looks up a localized string similar to Disabling PVS read caching for selected VMs.
         /// </summary>
         public static string ACTION_DISABLING_PVS_READ_CACHING {
             get {
@@ -934,7 +934,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable PVS Read-caching.
+        ///   Looks up a localized string similar to Enable PVS read caching.
         /// </summary>
         public static string ACTION_ENABLE_PVS_READ_CACHING {
             get {
@@ -943,7 +943,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling PVS Read-caching for VM &apos;{0}&apos; on site &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Enabling PVS read caching for VM &apos;{0}&apos; on site &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_ENABLE_PVS_READ_CACHING_FOR {
             get {
@@ -970,7 +970,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabled PVS Read-caching for selected VMs.
+        ///   Looks up a localized string similar to Enabled PVS read caching for selected VMs.
         /// </summary>
         public static string ACTION_ENABLED_PVS_READ_CACHING {
             get {
@@ -988,7 +988,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling PVS Read-caching for selected VMs.
+        ///   Looks up a localized string similar to Enabling PVS read caching for selected VMs.
         /// </summary>
         public static string ACTION_ENABLING_PVS_READ_CACHING {
             get {
@@ -11026,7 +11026,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Disable PVS Read-caching.
+        ///   Looks up a localized string similar to &amp;Disable PVS Read Caching.
         /// </summary>
         public static string DISABLE_PVS_READ_CACHING_BUTTON {
             get {
@@ -11035,7 +11035,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable P&amp;VS Read-caching.
+        ///   Looks up a localized string similar to Disable P&amp;VS Read Caching.
         /// </summary>
         public static string DISABLE_PVS_READ_CACHING_MENU {
             get {
@@ -13307,7 +13307,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E&amp;nable PVS Read-caching.
+        ///   Looks up a localized string similar to E&amp;nable PVS Read Caching....
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_BUTTON {
             get {
@@ -13316,7 +13316,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ena&amp;ble PVS Read-caching....
+        ///   Looks up a localized string similar to Ena&amp;ble PVS Read Caching....
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_MENU {
             get {
