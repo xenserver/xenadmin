@@ -29,14 +29,29 @@
  */
 
 using System;
+using System.Linq;
 
 namespace XenAPI
 {
-    public partial class PVS_site : XenObject<PVS_site>, IEquatable<PVS_site>
+    public partial class PVS_site : IEquatable<PVS_site>
     {
         public override string ToString()
         {
             return name_label;
+        }
+
+        public override string Name
+        {
+            get { return name_label; }
+        }
+
+        public PVS_cache_storage PvsCacheStorage(Host host)
+        {
+            if (host == null)
+                return null;
+
+            return Connection.Cache.PVS_cache_storages.FirstOrDefault(pvsCacheStorage => 
+                pvsCacheStorage.site.opaque_ref == opaque_ref && pvsCacheStorage.host.opaque_ref == host.opaque_ref);
         }
 
         #region IEquatable<PVS_site> Members

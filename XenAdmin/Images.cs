@@ -163,6 +163,8 @@ namespace XenAdmin
             ImageList16.Images.Add("infra_view_16_textured.png", Properties.Resources.infra_view_16_textured);
             ImageList16.Images.Add("objects_16_textured.png", Properties.Resources.objects_16_textured);
 
+            ImageList16.Images.Add("pvs.png", Properties.Resources.pvs);
+
             ImageList16.Images.Add("RunningDC_16.png", Properties.Resources.RunningDC_16);
             ImageList16.Images.Add("StoppedDC_16.png", Properties.Resources.StoppedDC_16);
             ImageList16.Images.Add("PausedDC_16.png", Properties.Resources.PausedDC_16);

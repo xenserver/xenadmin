@@ -67,7 +67,7 @@ namespace XenAdmin.Dialogs
             var vm = vms[0];
             foreach (var site in vm.Connection.Cache.PVS_sites)
             {
-                var siteToAdd = new ToStringWrapper<PVS_site>(site, site.name_label);
+                var siteToAdd = new ToStringWrapper<PVS_site>(site, site.Name);
                 pvsSiteList.Items.Add(siteToAdd);
             }
 

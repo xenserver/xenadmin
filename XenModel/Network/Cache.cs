@@ -209,6 +209,11 @@ namespace XenAdmin.Network
             get { return contents(_pvs_proxy); }
         }
 
+        public PVS_cache_storage[] PVS_cache_storages
+        {
+            get { return contents(_pvs_cache_storage); }
+        }
+
         public Role[] Roles
         {
             get { return contents(_role); }

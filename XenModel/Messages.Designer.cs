@@ -403,6 +403,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuring PVS site.
+        /// </summary>
+        public static string ACTION_CONFUGURE_PVS_SITE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_CONFUGURE_PVS_SITE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configured.
+        /// </summary>
+        public static string ACTION_CONFUGURE_PVS_SITE_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_CONFUGURE_PVS_SITE_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure PVS site &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_CONFUGURE_PVS_SITE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_CONFUGURE_PVS_SITE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating {0} ....
         /// </summary>
         public static string ACTION_CREATE_BOND_DESCRIPTION {
@@ -444,6 +471,33 @@ namespace XenAdmin {
         public static string ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting PVS site.
+        /// </summary>
+        public static string ACTION_DELETE_PVS_SITE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_DELETE_PVS_SITE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string ACTION_DELETE_PVS_SITE_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_DELETE_PVS_SITE_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting PVS site &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DELETE_PVS_SITE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_DELETE_PVS_SITE_TITLE", resourceCulture);
             }
         }
         
@@ -27778,6 +27832,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS Cache Configuration - &apos;{0}&apos;.
+        /// </summary>
+        public static string PVS_CACHE_CONFIG_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_CONFIG_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memory and disk.
         /// </summary>
         public static string PVS_CACHE_MEMORY_AND_DISK {
@@ -27796,11 +27859,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MemorySR.
+        /// </summary>
+        public static string PVS_CACHE_MEMORY_SR_NAME {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_MEMORY_SR_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not configured.
+        /// </summary>
+        public static string PVS_CACHE_NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PVS Sites - &apos;{0}&apos;.
         /// </summary>
         public static string PVS_SITE_DIALOG_TITLE {
             get {
                 return ResourceManager.GetString("PVS_SITE_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Site.
+        /// </summary>
+        public static string PVS_SITE_NAME {
+            get {
+                return ResourceManager.GetString("PVS_SITE_NAME", resourceCulture);
             }
         }
         

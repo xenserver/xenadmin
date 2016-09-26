@@ -94,6 +94,8 @@ namespace XenAdmin.TabPages
             }
         }
 
+        #region PVS cache configuration
+
         private void LoadSites()
         {
             Program.AssertOnEventThread();
@@ -106,12 +108,11 @@ namespace XenAdmin.TabPages
                 dataGridViewSites.SuspendLayout();
                 dataGridViewSites.Rows.Clear();
 
-                var rowList = new List<DataGridViewRow>();
+                var pvsSites = Connection.Cache.PVS_sites.ToList();
+                pvsSites.Sort();
 
-                foreach (var pvsSite in Connection.Cache.PVS_sites)
-                    rowList.Add(NewPvsSiteRow(pvsSite));
-
-                dataGridViewSites.Rows.AddRange(rowList.ToArray());
+                foreach (var pvsSite in pvsSites)
+                    dataGridViewSites.Rows.Add(NewPvsSiteRow(pvsSite));
 
                 if (dataGridViewSites.SelectedRows.Count == 0 && dataGridViewSites.Rows.Count > 0)
                     dataGridViewSites.Rows[0].Selected = true;
@@ -120,7 +121,43 @@ namespace XenAdmin.TabPages
             {
                 dataGridViewSites.ResumeLayout();
             }
+
+            ViewPvsSitesButton.Enabled = Connection.Cache.PVS_sites.Length > 0;
         }
+
+        private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
+        {
+            var siteCell = new DataGridViewTextBoxCell { Value = pvsSite.Name };
+
+            var cacheSrs = new List<SR>();
+            foreach (var cacheStorage in Connection.ResolveAll(pvsSite.cache_storage))
+            {
+                var sr = Connection.Resolve(cacheStorage.SR);
+                if (sr != null && sr.GetSRType(false) != SR.SRTypes.tmpfs)  //not memory SR
+                {
+                    cacheSrs.Add(sr);
+                }
+            }
+
+            var configurationCell = new DataGridViewTextBoxCell
+            {
+                Value = cacheSrs.Count > 0
+                    ? Messages.PVS_CACHE_MEMORY_AND_DISK
+                    : pvsSite.cache_storage.Count > 0 ? Messages.PVS_CACHE_MEMORY_ONLY : Messages.PVS_CACHE_NOT_CONFIGURED
+            };
+            var cacheSrsCell = new DataGridViewTextBoxCell
+            {
+                Value = cacheSrs.Count > 0 ? string.Join(Messages.LIST_SEPARATOR, cacheSrs) : Messages.NO_VALUE
+            };
+
+            var newRow = new DataGridViewRow { Tag = pvsSite };
+            newRow.Cells.AddRange(siteCell, configurationCell, cacheSrsCell);
+
+            return newRow;
+        }
+        #endregion
+
+        #region VMs
 
         private void LoadVMs()
         {
@@ -134,7 +171,7 @@ namespace XenAdmin.TabPages
                 dataGridViewVms.SuspendLayout();
 
                 var previousSelection = GetSelectedVMs();
-                
+
                 UnregisterVMHandlers();
 
                 dataGridViewVms.SortCompare += dataGridViewVms_SortCompare;
@@ -143,8 +180,11 @@ namespace XenAdmin.TabPages
 
                 enableSelectionManager.BindTo(enableButton, Program.MainWindow);
                 disableSelectionManager.BindTo(disableButton, Program.MainWindow);
-               
-                //foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.VM != null))
+
+                //clear selection
+                enableSelectionManager.SetSelection(new SelectedItemCollection());
+                disableSelectionManager.SetSelection(new SelectedItemCollection());
+
                 foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs)))
                     dataGridViewVms.Rows.Add(NewVmRow(vm));
 
@@ -157,7 +197,7 @@ namespace XenAdmin.TabPages
 
                     var order = dataGridViewVms.SortOrder;
                     ListSortDirection sortDirection = ListSortDirection.Ascending;
-                    if(order.Equals(SortOrder.Descending))
+                    if (order.Equals(SortOrder.Descending))
                         sortDirection = ListSortDirection.Descending;
 
                     dataGridViewVms.Sort(dataGridViewVms.SortedColumn, sortDirection);
@@ -210,30 +250,12 @@ namespace XenAdmin.TabPages
             disableSelectionManager.SetSelection(selectedVMs);
         }
 
-        private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
-        {
-            var siteCell = new DataGridViewTextBoxCell {Value = pvsSite.name_label};
-            var configurationCell = new DataGridViewTextBoxCell
-            {
-                Value = pvsSite.cache_storage.Count > 0 ? Messages.PVS_CACHE_MEMORY_AND_DISK: Messages.PVS_CACHE_MEMORY_ONLY
-            };
-            var cacheSrsCell = new DataGridViewTextBoxCell
-            {
-                Value = string.Join(",  ", Connection.ResolveAll(pvsSite.cache_storage))
-            };
-
-            var newRow = new DataGridViewRow { Tag = pvsSite };
-            newRow.Cells.AddRange(siteCell, configurationCell, cacheSrsCell);
-
-            return newRow;
-        }
-
         private DataGridViewRow NewVmRow(VM vm)
         {
             System.Diagnostics.Trace.Assert(vm != null);
 
             var pvsProxy = vm.PvsProxy;
-            
+
             if (pvsProxy == null)
             {
                 return NewVmRowWithNoProxy(vm);
@@ -322,8 +344,8 @@ namespace XenAdmin.TabPages
             e.SortResult = vm1.CompareTo(vm2);
             e.Handled = true;
         }
+        #endregion
         
-
         private void PvsSiteBatchCollectionChanged(object sender, EventArgs e)
         {
             Program.Invoke(this, LoadSites); 
@@ -353,6 +375,12 @@ namespace XenAdmin.TabPages
         private void ViewPvsSitesButton_Click(object sender, EventArgs e)
         {
             Program.MainWindow.ShowPerConnectionWizard(connection, new PvsSiteDialog(connection));
+        }
+
+        private void ConfigureButton_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new PvsCacheConfigurationDialog(connection))
+                dialog.ShowDialog(this);
         }
     }
 

@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsPage));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridViewSites = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,11 +54,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.enableButton = new XenAdmin.Commands.CommandButton();
             this.disableButton = new XenAdmin.Commands.CommandButton();
-            this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCurrentlyCached = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
@@ -95,6 +95,48 @@
             this.dataGridViewVms.Name = "dataGridViewVms";
             this.dataGridViewVms.ReadOnly = true;
             // 
+            // columnVM
+            // 
+            this.columnVM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.columnVM.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.columnVM, "columnVM");
+            this.columnVM.Name = "columnVM";
+            this.columnVM.ReadOnly = true;
+            // 
+            // ColumnCachingEnabled
+            // 
+            resources.ApplyResources(this.ColumnCachingEnabled, "ColumnCachingEnabled");
+            this.ColumnCachingEnabled.Name = "ColumnCachingEnabled";
+            this.ColumnCachingEnabled.ReadOnly = true;
+            // 
+            // columnCurrentlyCached
+            // 
+            this.columnCurrentlyCached.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.columnCurrentlyCached.DefaultCellStyle = dataGridViewCellStyle2;
+            this.columnCurrentlyCached.FillWeight = 30F;
+            resources.ApplyResources(this.columnCurrentlyCached, "columnCurrentlyCached");
+            this.columnCurrentlyCached.Name = "columnCurrentlyCached";
+            this.columnCurrentlyCached.ReadOnly = true;
+            this.columnCurrentlyCached.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnPvsSite
+            // 
+            resources.ApplyResources(this.ColumnPvsSite, "ColumnPvsSite");
+            this.ColumnPvsSite.Name = "ColumnPvsSite";
+            this.ColumnPvsSite.ReadOnly = true;
+            // 
+            // ColumnStatus
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnStatus.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnStatus.FillWeight = 30F;
+            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
+            this.ColumnStatus.Name = "ColumnStatus";
+            this.ColumnStatus.ReadOnly = true;
+            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -102,6 +144,7 @@
             // 
             // dataGridViewSites
             // 
+            resources.ApplyResources(this.dataGridViewSites, "dataGridViewSites");
             this.dataGridViewSites.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewSites.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewSites.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -110,7 +153,6 @@
             this.ColumnSite,
             this.ColumnConfiguration,
             this.ColumnSRs});
-            resources.ApplyResources(this.dataGridViewSites, "dataGridViewSites");
             this.dataGridViewSites.MultiSelect = true;
             this.dataGridViewSites.Name = "dataGridViewSites";
             this.dataGridViewSites.ReadOnly = true;
@@ -163,6 +205,7 @@
             resources.ApplyResources(this.ConfigureButton, "ConfigureButton");
             this.ConfigureButton.Name = "ConfigureButton";
             this.ConfigureButton.UseVisualStyleBackColor = true;
+            this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
             // 
             // ViewPvsSitesButton
             // 
@@ -190,48 +233,6 @@
             this.disableButton.Name = "disableButton";
             this.disableButton.UseVisualStyleBackColor = true;
             // 
-            // columnVM
-            // 
-            this.columnVM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.columnVM.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.columnVM, "columnVM");
-            this.columnVM.Name = "columnVM";
-            this.columnVM.ReadOnly = true;
-            // 
-            // ColumnCachingEnabled
-            // 
-            resources.ApplyResources(this.ColumnCachingEnabled, "ColumnCachingEnabled");
-            this.ColumnCachingEnabled.Name = "ColumnCachingEnabled";
-            this.ColumnCachingEnabled.ReadOnly = true;
-            // 
-            // columnCurrentlyCached
-            // 
-            this.columnCurrentlyCached.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.columnCurrentlyCached.DefaultCellStyle = dataGridViewCellStyle2;
-            this.columnCurrentlyCached.FillWeight = 30F;
-            resources.ApplyResources(this.columnCurrentlyCached, "columnCurrentlyCached");
-            this.columnCurrentlyCached.Name = "columnCurrentlyCached";
-            this.columnCurrentlyCached.ReadOnly = true;
-            this.columnCurrentlyCached.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnPvsSite
-            // 
-            resources.ApplyResources(this.ColumnPvsSite, "ColumnPvsSite");
-            this.ColumnPvsSite.Name = "ColumnPvsSite";
-            this.ColumnPvsSite.ReadOnly = true;
-            // 
-            // ColumnStatus
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnStatus.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnStatus.FillWeight = 30F;
-            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
-            this.ColumnStatus.Name = "ColumnStatus";
-            this.ColumnStatus.ReadOnly = true;
-            // 
             // PvsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -243,9 +244,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,7 +254,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewSites;
-        public System.Windows.Forms.Button ConfigureButton;
         public System.Windows.Forms.Button ViewPvsSitesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -272,5 +270,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCurrentlyCached;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPvsSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
+        public System.Windows.Forms.Button ConfigureButton;
     }
 }
