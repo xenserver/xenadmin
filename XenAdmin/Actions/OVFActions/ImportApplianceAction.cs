@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
 
@@ -60,7 +61,8 @@ namespace XenAdmin.Actions.OVFActions
 		public ImportApplianceAction(IXenConnection connection, EnvelopeType ovfEnv, Package package, Dictionary<string, VmMapping> vmMappings,
 										bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr,
 										string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
-			: base(connection, Messages.IMPORT_APPLIANCE, networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
+            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, GetApplianceName(ovfEnv, package), Helpers.GetName(connection)),
+                networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
 		{
 			m_ovfEnvelope = ovfEnv;
 			m_package = package;
@@ -151,10 +153,7 @@ namespace XenAdmin.Actions.OVFActions
 				envelopes.Add(envs[0]);
 			}
 
-			var appName = m_ovfEnvelope.Name;
-			if (string.IsNullOrEmpty(appName))
-				appName = Path.GetFileNameWithoutExtension(m_package.PackageSourceFile);
-
+			var appName = GetApplianceName(m_ovfEnvelope, m_package);
 			EnvelopeType env = OVF.Merge(envelopes, appName);
 
 			try //importVM
@@ -176,5 +175,13 @@ namespace XenAdmin.Actions.OVFActions
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
 		}
+
+        private static string GetApplianceName(EnvelopeType ovfEnv, Package package)
+	    {
+            var appName = ovfEnv.Name;
+            if (string.IsNullOrEmpty(appName))
+                appName = Path.GetFileNameWithoutExtension(package.PackageSourceFile);
+	        return appName;
+	    }
 	}
 }

@@ -1265,7 +1265,7 @@ namespace XenAdmin.TabPages
         }
 
 
-        private void chevronButton1_Click(object sender, EventArgs e)
+        private void chevronButton1_ButtonClick(object sender, EventArgs e)
         {
             if (contentTableLayoutPanel.ColumnStyles[1].Width == 0)
             {
@@ -1370,7 +1370,7 @@ namespace XenAdmin.TabPages
         private void chevronButton1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
-                chevronButton1_Click(sender, e);
+                chevronButton1_ButtonClick(sender, e);
         }
 
         private static void DeleteSnapshots(List<VM> snapshots)

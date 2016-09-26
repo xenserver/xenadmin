@@ -245,6 +245,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.existingAuthenticationRadioButton.Name = "existingAuthenticationRadioButton";
             this.existingAuthenticationRadioButton.TabStop = true;
             this.existingAuthenticationRadioButton.UseVisualStyleBackColor = true;
+            this.existingAuthenticationRadioButton.CheckedChanged += new System.EventHandler(this.existingAuthenticationRadioButton_CheckedChanged);
             // 
             // newAuthenticationRadioButton
             // 

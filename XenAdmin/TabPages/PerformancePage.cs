@@ -362,7 +362,7 @@ namespace XenAdmin.TabPages
         {
             using (ThreeButtonDialog dlog = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(SystemIcons.Warning,
-                    string.Format(Messages.DELETE_GRAPH_MESSAGE, GraphList.SelectedGraph.DisplayName),
+                    string.Format(Messages.DELETE_GRAPH_MESSAGE, GraphList.SelectedGraph.DisplayName.EscapeAmpersands()),
                     Messages.XENCENTER),
                 ThreeButtonDialog.ButtonYes,
                 ThreeButtonDialog.ButtonNo))

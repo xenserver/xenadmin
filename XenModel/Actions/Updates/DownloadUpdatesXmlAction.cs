@@ -36,6 +36,7 @@ using XenAPI;
 using System.IO;
 using System.Xml;
 using XenAdmin.Core;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Actions
@@ -50,6 +51,7 @@ namespace XenAdmin.Actions
         private const string RequiredPatchesNode = "requiredpatches";
         private const string ConflictingPatchNode = "conflictingpatch";
         private const string RequiredPatchNode = "requiredpatch";
+
 
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
         public List<XenServerVersion> XenServerVersions { get; private set; }
@@ -72,9 +74,11 @@ namespace XenAdmin.Actions
         private readonly bool _checkForPatches;
         private readonly string _checkForUpdatesUrl;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
             : base(null, "_get_updates", "_get_updates", true)
         {
+            Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
+
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
@@ -82,12 +86,8 @@ namespace XenAdmin.Actions
             _checkForXenCenter = checkForXenCenter;
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
-            _checkForUpdatesUrl = string.IsNullOrEmpty(checkForUpdatesUrl) ? InvisibleMessages.XENSERVER_UPDATE_URL : checkForUpdatesUrl;
+            _checkForUpdatesUrl = checkForUpdatesUrl;
         }
-
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
-            : this(checkForXenCenter, checkForServerVersion, checkForPatches, null)
-        { }
 
         protected override void Run()
         {
@@ -98,6 +98,7 @@ namespace XenAdmin.Actions
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);
             GetXenServerVersions(xdoc);
+
         }
 
         private void GetXenCenterVersions(XmlDocument xdoc)
@@ -147,6 +148,7 @@ namespace XenAdmin.Actions
                     string name = "";
                     string description = "";
                     string guidance = "";
+                    string guidance_mandatory = "";
                     string patchVersion = "";
                     string url = "";
                     string patchUrl = "";
@@ -164,6 +166,8 @@ namespace XenAdmin.Actions
                             description = attrib.Value;
                         else if (attrib.Name == "after-apply-guidance")
                             guidance = attrib.Value;
+                        else if (attrib.Name == "guidance-mandatory")
+                            guidance_mandatory = attrib.Value;
                         else if (attrib.Name == "version")
                             patchVersion = attrib.Value;
                         else if (attrib.Name == "url")
@@ -181,7 +185,7 @@ namespace XenAdmin.Actions
                     var conflictingPatches = GetPatchDependencies(version, ConflictingPatchesNode, ConflictingPatchNode);
                     var requiredPatches = GetPatchDependencies(version, RequiredPatchesNode, RequiredPatchNode);
 
-					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
+					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, guidance_mandatory, patchVersion, url,
                                                             patchUrl, timestamp, priority, installationSize, conflictingPatches, requiredPatches));
                 }
             }
@@ -206,6 +210,7 @@ namespace XenAdmin.Actions
             var dependencies = new List<string>();
 
             dependencies.AddRange(from XmlNode node in dependenciesNode.ChildNodes
+                                  where node.Attributes != null
                                   from XmlAttribute attrib in node.Attributes
                                   where node.Name == dependencyNodeName && node.Attributes != null && attrib.Name == "uuid"
                                   select attrib.Value);
@@ -245,18 +250,38 @@ namespace XenAdmin.Actions
                     }
 
                     List<XenServerPatch> patches = new List<XenServerPatch>();
+                    List<XenServerPatch> minimalPatches = null; //keep it null to indicate that there is no a minimalpatches tag
 
                     foreach (XmlNode childnode in version.ChildNodes)
                     {
-                        if (childnode.Name != "patch")
-                            continue;
-                        XenServerPatch patch = XenServerPatches.Find(item => string.Equals(item.Uuid, childnode.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
-                        if (patch == null)
-                            continue;
-                        patches.Add(patch);
+                        if (childnode.Name == "minimalpatches")
+                        {
+                            minimalPatches = new List<XenServerPatch>();
+
+                            foreach (XmlNode minimalpatch in childnode.ChildNodes)
+                            {
+                                if (minimalpatch.Name != "patch")
+                                    continue;
+
+                                XenServerPatch mp = XenServerPatches.Find(p => string.Equals(p.Uuid, minimalpatch.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
+                                if (mp == null)
+                                    continue;
+                                minimalPatches.Add(mp);
+                            }
+                        }
+
+                        if (childnode.Name == "patch")
+                        {
+
+                            XenServerPatch patch = XenServerPatches.Find(item => string.Equals(item.Uuid, childnode.Attributes["uuid"].Value, StringComparison.OrdinalIgnoreCase));
+                            if (patch == null)
+                                continue;
+                            patches.Add(patch);
+                        }
+
                     }
 
-                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, timestamp,
+                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, minimalPatches, timestamp,
                                                                buildNumber));
                 }
             }
@@ -264,10 +289,19 @@ namespace XenAdmin.Actions
 
         protected virtual XmlDocument FetchCheckForUpdatesXml(string location)
         {
-            XmlDocument xdoc;
-            using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+            var xdoc = new XmlDocument();
+            var uri = new Uri(location);
+            
+            if (uri.IsFile)
             {
-                xdoc = Helpers.LoadXmlDocument(xmlstream);
+                xdoc.Load(location);
+            }
+            else
+            {
+                using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+                {
+                    xdoc = Helpers.LoadXmlDocument(xmlstream);
+                }
             }
             return xdoc;
         }

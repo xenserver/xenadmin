@@ -200,7 +200,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                var subs = from AlertGroup g in new[] { cpuAlert, netAlert, diskAlert, memoryAlert, srAlert, physicalUtilisationAlert }
+                var subs = from AlertGroup g in new[] { cpuAlert, netAlert, diskAlert, memoryAlert, srAlert, physicalUtilisationAlert, dom0MemoryAlert }
                            where !string.IsNullOrEmpty(g.SubText)
                            select g.SubText;
 

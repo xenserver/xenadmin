@@ -84,9 +84,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
         protected override string InstructionText { get { return Messages.IMPORT_WIZARD_DESTINATION_INSTRUCTIONS; } }
 
-        protected override string HomeServerText { get { return Messages.IMPORT_WIZARD_DESTINATION_DESTINATION; } }
+        protected override string TargetServerText { get { return Messages.IMPORT_WIZARD_DESTINATION_DESTINATION; } }
 
-        protected override string HomeServerSelectionIntroText { get { return Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO; } }
+        protected override string TargetServerSelectionIntroText { get { return Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO; } }
 
         protected override void OnChosenItemChanged()
         {

@@ -29,22 +29,26 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
+using XenAdmin.Core;
 using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class EvacuateHostPlanAction : PlanActionWithSession
+    public class EvacuateHostPlanAction : PlanActionWithSession, IAvoidRestartHostsAware
     {
         private readonly XenRef<Host> _host;
         private readonly Host currentHost;
-
+        public List<string> AvoidRestartHosts { private get; set; }
+        
         public EvacuateHostPlanAction(Host host)
             : base(host.Connection, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name))
         {
             base.TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name);
             this._host = new XenRef<Host>(host);
             currentHost = host;
+            visible = false;
         }
 
         protected override Host CurrentHost
@@ -55,6 +59,32 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             Host hostObject = TryResolveWithTimeout(_host);
+
+            if (Helpers.ElyOrGreater(hostObject))
+            {
+                log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'...", hostObject);
+
+                if (hostObject.patches_requiring_reboot.Count > 0)
+                {
+                    if (AvoidRestartHosts != null)
+                        AvoidRestartHosts.Remove(hostObject.uuid);
+
+                    log.DebugFormat("Restart is needed now (hostObject.patches_requiring_reboot has {0} items in it). Evacuating now. Will restart after.", hostObject.patches_requiring_reboot.Count);
+                }
+                else
+                {
+                    if (AvoidRestartHosts != null && !AvoidRestartHosts.Contains(hostObject.uuid))
+                    {
+                        AvoidRestartHosts.Add(hostObject.uuid);
+                    }
+
+                    log.Debug("Will skip scheduled restart (livepatching succeeded), because hostObject.patches_requiring_reboot is empty.");
+
+                    return;
+                }
+            }
+
+            visible = true;
 
             PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObject.resident_VMs));
 

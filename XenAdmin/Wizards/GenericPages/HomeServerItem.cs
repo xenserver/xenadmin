@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         public override string ToString()
         {
-            return Messages.DONT_ASSIGN_HOME_SERVER;
+            return Messages.DONT_SELECT_TARGET_SERVER;
         }
     }
 }

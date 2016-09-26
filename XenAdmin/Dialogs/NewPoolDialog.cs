@@ -62,7 +62,7 @@ namespace XenAdmin.Dialogs
             customTreeViewServers.ShowImages = false;
             getAllCurrentConnections();
             ConnectionsManager.XenConnections.CollectionChanged += XenConnections_CollectionChanged;
-            poolName = generatePoolName();
+            poolName = string.Empty; //forcing user to enter something before the Next button is enabled
             selectMaster(host);
             updateButtons();
         }
@@ -119,20 +119,6 @@ namespace XenAdmin.Dialogs
                     toolTipContainerCreate.SetToolTip(Messages.POOL_NAME_EMPTY);
                     break;
             }
-        }
-
-        private string generatePoolName()
-        {
-            List<string> poolNames = new List<string>();
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-            {
-                Pool p = Helpers.GetPoolOfOne(c);
-                if (p != null)
-                {
-                    poolNames.Add(Helpers.GetName(p));
-                }
-            }
-            return Helpers.MakeUniqueName(Messages.NEW_POOL, poolNames);
         }
 
         private void createPool()

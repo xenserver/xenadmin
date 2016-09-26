@@ -160,7 +160,7 @@
     <value>1</value>
   </data>
   <data name="radioButtonTLS.Text" xml:space="preserve">
-    <value>最大セキュリティ: TLS 1.2 のみ(&amp;M)</value>
+    <value>TLS 1.2 のみ(&amp;T)</value>
   </data>
   <data name="&gt;&gt;radioButtonTLS.Name" xml:space="preserve">
     <value>radioButtonTLS</value>
@@ -187,7 +187,7 @@
     <value>2</value>
   </data>
   <data name="radioButtonSSL.Text" xml:space="preserve">
-    <value>後方互換性: SSL 3.0 および TLS 1.0, 1.1 &amp;&amp; 1.2(&amp;B)</value>
+    <value>後方互換モード (TLS 1.2 および以前のプロトコル)(&amp;B)</value>
   </data>
   <data name="&gt;&gt;radioButtonSSL.Name" xml:space="preserve">
     <value>radioButtonSSL</value>

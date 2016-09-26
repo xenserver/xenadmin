@@ -267,7 +267,8 @@ namespace XenAdmin.Alerts
                         }
                         else if (XenObject is VM)
                         {
-                            xenObject = XenObject;
+                            VM vm = (VM)XenObject;
+                            xenObject = vm.IsControlDomainZero ? XenObject.Connection.Resolve(vm.resident_on) : XenObject;
                         }
 
                         if (xenObject == null)

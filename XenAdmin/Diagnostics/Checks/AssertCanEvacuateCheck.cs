@@ -40,12 +40,20 @@ using XenAdmin.Diagnostics.Problems.VMProblem;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 
 using System.Linq;
+using XenAdmin.Wizards.PatchingWizard;
 
 namespace XenAdmin.Diagnostics.Checks
 {
     public class AssertCanEvacuateCheck : Check
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
+
+        public AssertCanEvacuateCheck(Host host, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+            : base(host)
+        {
+            this.livePatchCodesByHost = livePatchCodesByHost;
+        }
 
         public AssertCanEvacuateCheck(Host host)
             : base(host)
@@ -54,6 +62,13 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected List<Problem> CheckHost()
         {
+            // when livepatching is available, no restart is expected, so this check is not needed
+            if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) && livePatchCodesByHost[Host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)
+            {
+                log.DebugFormat("Check not needed for host {0}, because pool_patch.Precheck() returned PATCH_PRECHECK_LIVEPATCH_COMPLETE for update.", Host);
+                return new List<Problem>();
+            }
+
             var problems = new List<Problem>();
 
             var restrictMigration = Helpers.FeatureForbidden(Host.Connection, Host.RestrictIntraPoolMigrate);

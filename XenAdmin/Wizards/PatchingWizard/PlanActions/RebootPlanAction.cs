@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             return agentStartTime;
         }
 
-        public void Cancel()
+        public override void Cancel()
         {
             _cancelled = true;
 

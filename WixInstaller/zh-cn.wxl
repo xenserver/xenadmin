@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WixLocalization Culture="zh-CN" Codepage="950" xmlns="http://schemas.microsoft.com/wix/2006/localization">
     <String Id="Open">打开</String>
     <String Id="XVA_File">XVA 文件</String>

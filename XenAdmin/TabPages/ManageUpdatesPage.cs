@@ -64,6 +64,7 @@ namespace XenAdmin.TabPages
         private List<string> selectedUpdates = new List<string>();
         private int checksQueue;
         private bool PageWasRefreshed;
+        private bool CheckForUpdatesInProgress;
 
         public ManageUpdatesPage()
         {
@@ -74,6 +75,7 @@ namespace XenAdmin.TabPages
             dataGridViewUpdates.Sort(ColumnDate, ListSortDirection.Descending);
             informationLabel.Click += informationLabel_Click;
             Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
+            Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             pictureBox1.Image = SystemIcons.Information.ToBitmap();
@@ -94,23 +96,35 @@ namespace XenAdmin.TabPages
 
         private void CheckForUpdates_CheckForUpdatesStarted()
         {
-            Program.Invoke(Program.MainWindow, () =>
-                {
-                    checksQueue++;
-                    if (checksQueue > 1)
-                        return;
+            Program.Invoke(Program.MainWindow, StartCheckForUpdates);
+        }
 
-                    toolStripButtonRefresh.Enabled = false;
-                    toolStripButtonRestoreDismissed.Enabled = false;
+        private void Updates_RestoreDismissedUpdatesStarted()
+        {
+            Program.Invoke(Program.MainWindow, StartCheckForUpdates);
+        }
 
-                    StoreSelectedUpdates();
-                    dataGridViewUpdates.Rows.Clear();
-                    dataGridViewUpdates.Refresh();
+        private void StartCheckForUpdates()
+        {
+            if (CheckForUpdatesInProgress)
+                return;
 
-                    spinningTimer.Start();
-                    tableLayoutPanel3.Visible = true;
-                    labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
-                });
+            CheckForUpdatesInProgress = true;
+
+            checksQueue++;
+            if (checksQueue > 1)
+                return;
+
+            toolStripButtonRefresh.Enabled = false;
+            toolStripButtonRestoreDismissed.Enabled = false;
+
+            StoreSelectedUpdates();
+            dataGridViewUpdates.Rows.Clear();
+            dataGridViewUpdates.Refresh();
+
+            spinningTimer.Start();
+            tableLayoutPanel3.Visible = true;
+            labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
         }
 
         private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
@@ -145,6 +159,8 @@ namespace XenAdmin.TabPages
                                                  ? Messages.AVAILABLE_UPDATES_NOT_FOUND
                                                  : errorMessage;
                     }
+
+                    CheckForUpdatesInProgress = false;
                 });
         }
 
