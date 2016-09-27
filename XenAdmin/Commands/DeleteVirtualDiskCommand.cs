@@ -63,26 +63,17 @@ namespace XenAdmin.Commands
             
         }
 
-        public DeleteVirtualDiskCommand(IMainWindow mainWindow, VDI vdi)
-            : base(mainWindow, vdi)
-        {
-
-        }
-
         public override string ContextMenuText
         {
             get
             {
-                bool allSnaps = true;
-                foreach (VDI vdi in GetSelection().AsXenObjects<VDI>())
-                {
-                    if (vdi.is_a_snapshot)
-                        continue;
-                    allSnaps = false;
-                    break;
-                }
-                // Default to Virtual Disk in the mixed case of snaps/non snaps as it is the more general term 
-                return allSnaps ? Messages.DELETE_SNAPSHOT_MENU_ITEM : Messages.DELETE_VIRTUAL_DISK;
+                var selection = GetSelection();
+                if (selection.Count > 1)
+                    return Messages.MAINWINDOW_DELETE_OBJECTS;
+
+                return selection.AsXenObjects<VDI>().All(v => v.is_a_snapshot)
+                    ? Messages.DELETE_SNAPSHOT_MENU_ITEM
+                    : Messages.DELETE_VIRTUAL_DISK;
             }
         }
 

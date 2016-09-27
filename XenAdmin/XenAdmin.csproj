@@ -2841,9 +2841,6 @@
     <Compile Include="Dialogs\LicenseManager\SummaryPanelDecorators\LicenseManagerSummaryComponent.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseStatus.cs" />
     <Compile Include="Dialogs\LicenseManager\SummaryPanelDecorators\LicenseManagerSummaryDecorators.cs" />
-    <Compile Include="Dialogs\VDIMigrateDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="SettingsPanels\PoolGpuEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

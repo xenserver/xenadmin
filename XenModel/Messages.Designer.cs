@@ -1285,6 +1285,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed migrating virtual disks.
+        /// </summary>
+        public static string ACTION_MIGRATING_X_VDIS_COMPLETED {
+            get {
+                return ResourceManager.GetString("ACTION_MIGRATING_X_VDIS_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started migrating virtual disks.
+        /// </summary>
+        public static string ACTION_MIGRATING_X_VDIS_STARTED {
+            get {
+                return ResourceManager.GetString("ACTION_MIGRATING_X_VDIS_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_MOVING_VDI_STATUS {
@@ -1308,6 +1326,24 @@ namespace XenAdmin {
         public static string ACTION_MOVING_X_VDIS {
             get {
                 return ResourceManager.GetString("ACTION_MOVING_X_VDIS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed moving virtual disks.
+        /// </summary>
+        public static string ACTION_MOVING_X_VDIS_COMPLETED {
+            get {
+                return ResourceManager.GetString("ACTION_MOVING_X_VDIS_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started moving virtual disks.
+        /// </summary>
+        public static string ACTION_MOVING_X_VDIS_STARTED {
+            get {
+                return ResourceManager.GetString("ACTION_MOVING_X_VDIS_STARTED", resourceCulture);
             }
         }
         
@@ -20450,6 +20486,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Move....
+        /// </summary>
+        public static string MAINWINDOW_MOVE_OBJECTS {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_MOVE_OBJECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Move VM....
         /// </summary>
         public static string MAINWINDOW_MOVEVM {
@@ -21764,15 +21809,6 @@ namespace XenAdmin {
         public static string MIGRATE_PLEASE_EJECT_YOUR_CD {
             get {
                 return ResourceManager.GetString("MIGRATE_PLEASE_EJECT_YOUR_CD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the &amp;destination storage repository.
-        /// </summary>
-        public static string MIGRATE_VDI_DIALOG_SRHINT {
-            get {
-                return ResourceManager.GetString("MIGRATE_VDI_DIALOG_SRHINT", resourceCulture);
             }
         }
         
