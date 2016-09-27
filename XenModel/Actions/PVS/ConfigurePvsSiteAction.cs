@@ -78,7 +78,7 @@ namespace XenAdmin.Actions
             }
             PercentComplete = 10;
 
-            int inc = 90 / pvsCacheStorages.Count / 3;
+            int inc = pvsCacheStorages.Count > 0 ? 90 / pvsCacheStorages.Count / 3 : 90;
             foreach (var pvsCacheStorage in pvsCacheStorages)
             {
                 // create Memory SR, if needed

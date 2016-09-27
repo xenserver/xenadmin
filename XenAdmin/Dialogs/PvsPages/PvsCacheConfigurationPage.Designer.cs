@@ -31,9 +31,9 @@ namespace XenAdmin.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsCacheConfigurationPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelRubric = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.hostsPanel = new XenAdmin.Controls.FlickerFreePanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -41,11 +41,11 @@ namespace XenAdmin.Dialogs
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelRubric, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.hostsPanel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.deleteButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.hostsPanel, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label1
@@ -53,12 +53,6 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.label1, "label1");
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
             this.label1.Name = "label1";
-            // 
-            // labelRubric
-            // 
-            resources.ApplyResources(this.labelRubric, "labelRubric");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelRubric, 2);
-            this.labelRubric.Name = "labelRubric";
             // 
             // label7
             // 
@@ -70,6 +64,15 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.TextChanged += new System.EventHandler(this.SomethingChanged);
+            // 
+            // deleteButton
+            // 
+            resources.ApplyResources(this.deleteButton, "deleteButton");
+            this.tableLayoutPanel1.SetColumnSpan(this.deleteButton, 2);
+            this.deleteButton.Image = global::XenAdmin.Properties.Resources._000_Abort_h32bit_16;
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // hostsPanel
             // 
@@ -98,7 +101,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox1;
         private Controls.FlickerFreePanel hostsPanel;
-        private System.Windows.Forms.Label labelRubric;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

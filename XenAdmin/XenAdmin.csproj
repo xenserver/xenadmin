@@ -1479,14 +1479,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\PvsCacheStorageRow.ja.resx" >
+    <EmbeddedResource Include="Controls\PvsCacheStorageRow.ja.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx" >
+    <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
@@ -4327,6 +4327,7 @@
     <Content Include="..\Branding\Images\alerts_32.png">
       <Link>Images\alerts_32.png</Link>
     </Content>
+    <Content Include="Images\000_Sites_h32bit_16.png" />
     <Content Include="Images\asterisk.png" />
     <Content Include="Images\attach_24.png" />
     <None Include="Images\cancelled_action_16.png" />
@@ -4375,7 +4376,6 @@
     <None Include="Images\objects_16_textured.png" />
     <None Include="Images\PausedDC_16.png" />
     <None Include="Images\padlock.png" />
-    <None Include="Images\pvs.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />

@@ -117,40 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="noSitesLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;addSiteButton.Name" xml:space="preserve">
+    <value>addSiteButton</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="noSitesLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="&gt;&gt;addSiteButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="noSitesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 13</value>
-  </data>
-  <data name="noSitesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 15</value>
-  </data>
-  <data name="noSitesLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="noSitesLabel.Text" xml:space="preserve">
-    <value>There are no PVS sites.</value>
-  </data>
-  <data name="&gt;&gt;noSitesLabel.Name" xml:space="preserve">
-    <value>noSitesLabel</value>
-  </data>
-  <data name="&gt;&gt;noSitesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;noSitesLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;addSiteButton.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;noSitesLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;addSiteButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>514, 572</value>
+    <value>537, 427</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
@@ -169,7 +150,7 @@
     <value>Top</value>
   </data>
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 437</value>
+    <value>215, 437</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Name" xml:space="preserve">
     <value>verticalTabs</value>
@@ -184,7 +165,7 @@
     <value>0</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>708, 531</value>
+    <value>700, 527</value>
   </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
@@ -199,7 +180,7 @@
     <value>2</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>628, 531</value>
+    <value>620, 527</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
@@ -216,6 +197,7 @@
   <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 47</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AddButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -292,10 +274,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>771, 478</value>
+    <value>763, 474</value>
   </data>
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>218</value>
+    <value>217</value>
   </data>
   <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
@@ -310,7 +292,7 @@
     <value>1</value>
   </data>
   <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 476</value>
+    <value>552, 492</value>
   </data>
   <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
     <value>blueBorder</value>
@@ -337,13 +319,13 @@
     <value>16, 9</value>
   </data>
   <data name="BlurbLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 35</value>
+    <value>758, 35</value>
   </data>
   <data name="BlurbLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>Configure PVS cache for each PVS site.</value>
+    <value>Specify the PVS cache configuration by choosing either memory or a storage repository and the amount of space to be allocated for each server.</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
@@ -357,6 +339,51 @@
   <data name="&gt;&gt;BlurbLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="addSiteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="addSiteButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="addSiteButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="addSiteButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="addSiteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="addSiteButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 71</value>
+  </data>
+  <data name="addSiteButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 3, 0</value>
+  </data>
+  <data name="addSiteButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 25</value>
+  </data>
+  <data name="addSiteButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="addSiteButton.Text" xml:space="preserve">
+    <value>A&amp;dd PVS Site</value>
+  </data>
+  <data name="addSiteButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;addSiteButton.Name" xml:space="preserve">
+    <value>addSiteButton</value>
+  </data>
+  <data name="&gt;&gt;addSiteButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addSiteButton.Parent" xml:space="preserve">
+    <value>ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;addSiteButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -364,10 +391,13 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>792, 566</value>
+    <value>784, 562</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 600</value>

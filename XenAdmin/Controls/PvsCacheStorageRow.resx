@@ -130,10 +130,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 19</value>
+    <value>402, 22</value>
+  </data>
+  <data name="labelUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 28</value>
+    <value>26, 21</value>
   </data>
   <data name="labelUnits.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -202,10 +205,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelHostName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 19</value>
+    <value>3, 22</value>
+  </data>
+  <data name="labelHostName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelHostName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 28</value>
+    <value>105, 21</value>
   </data>
   <data name="labelHostName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -322,7 +328,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 47</value>
+    <value>431, 46</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

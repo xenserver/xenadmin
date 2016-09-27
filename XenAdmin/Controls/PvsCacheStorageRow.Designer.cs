@@ -73,7 +73,7 @@
             this.comboBoxCacheSr.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxCacheSr, "comboBoxCacheSr");
             this.comboBoxCacheSr.Name = "comboBoxCacheSr";
-            this.comboBoxCacheSr.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBoxCacheSr.SelectedIndexChanged += new System.EventHandler(this.comboBoxCacheSr_SelectedIndexChanged);
             // 
             // labelHostName
             // 

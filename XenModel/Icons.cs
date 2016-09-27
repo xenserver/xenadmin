@@ -150,7 +150,7 @@ namespace XenAdmin
         Home,
         Objects,
 
-        Pvs,
+        PvsSite,
 
         #region DockerContainer Icons
 

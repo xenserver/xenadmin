@@ -54,6 +54,7 @@ namespace XenAdmin.Dialogs
         private List<PvsCacheStorageRow> rows = new List<PvsCacheStorageRow>();
 
         public event EventHandler Changed;
+        public event EventHandler DeleteButtonClicked;
 
         public PvsCacheConfigurationPage(IXenConnection connection, List<string> knownSiteNames)
         {
@@ -64,7 +65,7 @@ namespace XenAdmin.Dialogs
 
         public Image Image
         {
-            get { return Images.GetImage16For(Icons.Pvs); }
+            get { return Images.GetImage16For(Icons.PvsSite); }
         }
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
@@ -78,7 +79,7 @@ namespace XenAdmin.Dialogs
                 List<string> takenNames = new List<PVS_site>(connection.Cache.PVS_sites).ConvertAll(s => s.Name);
                 takenNames.AddRange(knownSiteNames);
 
-                // Generate a unique suggested name for the new template
+                // Generate a unique suggested name for the new site
                 textBox1.Text = Helpers.MakeUniqueName(Messages.PVS_SITE_NAME, takenNames);
             }
             
@@ -100,9 +101,6 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                if (PvsSite == null)
-                    return Messages.PVS_CACHE_NOT_CONFIGURED;
-
                 var configuredRows = rows.Where(r => r.CacheSr != null).ToList();
 
                 if (configuredRows.Count == 0)
@@ -157,7 +155,9 @@ namespace XenAdmin.Dialogs
                 pvsCacheStorages.Add(pvsCacheStorage);
             }
 
-            return pvsCacheStorages.Count == 0 ? null : new ConfigurePvsSiteAction(connection, textBox1.Text, PvsSite, pvsCacheStorages);
+            if (pvsCacheStorages.Count > 0 || NameHasChanged)
+                return new ConfigurePvsSiteAction(connection, textBox1.Text, PvsSite, pvsCacheStorages);
+            return null;
         }
 
         public void ShowLocalValidationMessages()
@@ -168,13 +168,24 @@ namespace XenAdmin.Dialogs
 
         public bool HasChanged
         {
-            get { return true; }
+            get { return NameHasChanged || rows.Any(r => r.HasChanged); }
+        }
+
+        private bool NameHasChanged
+        {
+            get { return PvsSite == null || textBox1.Text != PvsSite.Name; }
         }
         
         private void SomethingChanged(object sender, EventArgs e)
         {
             if (Changed != null)
                 Changed(this, e);
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (DeleteButtonClicked != null)
+                DeleteButtonClicked(this, e);
         }
     }
 }

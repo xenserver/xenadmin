@@ -108,6 +108,7 @@ namespace XenAdmin.Dialogs
             var pvsSiteCopy = pvsSite != null ? pvsSite.Clone() : null;
             editPage.SetXenObjects(pvsSite, pvsSiteCopy);
             editPage.Changed += SomethingChangedOnPage;
+            editPage.DeleteButtonClicked += DeleteButtonClickedOnPage;
             ShowTab(editPage);
             RefreshButtons();
             return editPage;
@@ -131,6 +132,7 @@ namespace XenAdmin.Dialogs
             verticalTabs.Items.Remove(page);
             verticalTabs.SelectedIndex = selectedIndex < verticalTabs.Items.Count - 1 ? selectedIndex : verticalTabs.Items.Count - 1;
             page.Changed -= SomethingChangedOnPage;
+            page.DeleteButtonClicked -= DeleteButtonClickedOnPage;
             if (page.PvsSite != null)
                 deletedSites.Add(page.PvsSite);
             ContentPanel.Controls.Remove(page);
@@ -150,10 +152,19 @@ namespace XenAdmin.Dialogs
             RefreshButtons();
         }
 
+        private void DeleteButtonClickedOnPage(object sender, EventArgs e)
+        {
+            var page = sender as PvsCacheConfigurationPage;
+            if (page != null)
+            {
+                DeletePage(page);
+            }
+        }
+
         void RefreshButtons()
         {
             okButton.Enabled = AllPagesValid();
-            noSitesLabel.Visible = verticalTabs.Items.Count == 0;
+            addSiteButton.Visible = verticalTabs.Items.Count == 0;
         }
 
         private bool AllPagesValid()

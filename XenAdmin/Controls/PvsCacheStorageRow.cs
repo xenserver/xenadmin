@@ -46,9 +46,9 @@ namespace XenAdmin.Controls
 
         public event EventHandler Changed;
 
-        private const long MIN_CACHE_SIZE_GB = 1;
-        private const long MAX_CACHE_SIZE_GB = 200;
-        private const long DEFAULT_CACHE_SIZE_GB = 10;
+        private const decimal MIN_CACHE_SIZE_GB = 1;
+        private const decimal MAX_CACHE_SIZE_GB = 2 * Util.BINARY_KILO; // 2TB
+        private const decimal DEFAULT_CACHE_SIZE_GB = 10;
         private decimal origCacheSizeGb;
 
         public PvsCacheStorageRow(Host host, PVS_site site)
@@ -64,18 +64,13 @@ namespace XenAdmin.Controls
         {
             labelHostName.Text = Host.Name;
 
-            PopulateCacheSrCombobox();
-
             // initialize cacheSize
-            numericUpDownCacheSize.Minimum = MIN_CACHE_SIZE_GB;
-            numericUpDownCacheSize.Maximum = MAX_CACHE_SIZE_GB;
+            SetupCacheSizeSpinner(OrigPvsCacheStorage == null ? DEFAULT_CACHE_SIZE_GB : (decimal)Util.ToGB(OrigPvsCacheStorage.size, 1, RoundingBehaviour.Nearest), 
+                MIN_CACHE_SIZE_GB, 
+                MAX_CACHE_SIZE_GB);
+            origCacheSizeGb = numericUpDownCacheSize.Value;
 
-            var value = OrigPvsCacheStorage == null ? DEFAULT_CACHE_SIZE_GB : (decimal)Util.ToGB(OrigPvsCacheStorage.size, 1, RoundingBehaviour.Nearest);
-            if (value < numericUpDownCacheSize.Minimum)
-                value = numericUpDownCacheSize.Minimum;
-            if (value > numericUpDownCacheSize.Maximum)
-                value = numericUpDownCacheSize.Maximum;
-            numericUpDownCacheSize.Value = origCacheSizeGb = value;
+            PopulateCacheSrCombobox();
         }
 
         private void PopulateCacheSrCombobox()
@@ -117,6 +112,20 @@ namespace XenAdmin.Controls
             return sr.Show(Properties.Settings.Default.ShowHiddenVMs) && sr.SupportsVdiCreate() && sr.FreeSpace >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
         }
 
+        private void SetupCacheSizeSpinner(decimal value, decimal min, decimal max)
+        {
+            if (min > max)
+                max = min;
+            numericUpDownCacheSize.Minimum = min;
+            numericUpDownCacheSize.Maximum = max;
+
+            if (value < numericUpDownCacheSize.Minimum)
+                value = numericUpDownCacheSize.Minimum;
+            if (value > numericUpDownCacheSize.Maximum)
+                value = numericUpDownCacheSize.Maximum;
+            numericUpDownCacheSize.Value = value;
+        }
+
         private bool _showHeader;
         public bool ShowHeader
         {
@@ -127,7 +136,6 @@ namespace XenAdmin.Controls
                 labelCacheStorage.Visible = labelCacheSize.Visible = _showHeader;
                 tableLayoutPanel1.Refresh();
             }
-
         }
 
         public SR CacheSr
@@ -137,7 +145,6 @@ namespace XenAdmin.Controls
                 var selectedItem = (ToStringWrapper<SR>)comboBoxCacheSr.SelectedItem;
                 return selectedItem != null ? selectedItem.item : null;
             }
-
         }
 
         public long CacheSize
@@ -165,6 +172,18 @@ namespace XenAdmin.Controls
         {
             if (Changed != null)
                 Changed(this, e);
+        }
+
+        private void comboBoxCacheSr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedSr = CacheSr;
+            if (selectedSr != null)
+            {
+                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); ;
+                if (maxSize != numericUpDownCacheSize.Maximum)
+                    SetupCacheSizeSpinner(numericUpDownCacheSize.Value, numericUpDownCacheSize.Minimum, maxSize);
+            }
+            SomethingChanged(this, e);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace XenAdmin.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsCacheConfigurationDialog));
             this.BlurbLabel = new System.Windows.Forms.Label();
             this.AddButton = new System.Windows.Forms.Button();
-            this.noSitesLabel = new System.Windows.Forms.Label();
+            this.addSiteButton = new System.Windows.Forms.Button();
             this.ContentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -42,7 +42,7 @@ namespace XenAdmin.Dialogs
             // 
             // ContentPanel
             // 
-            this.ContentPanel.Controls.Add(this.noSitesLabel);
+            this.ContentPanel.Controls.Add(this.addSiteButton);
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
             // 
             // verticalTabs
@@ -93,15 +93,23 @@ namespace XenAdmin.Dialogs
             this.AddButton.FlatAppearance.BorderSize = 0;
             this.AddButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.AddButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.AddButton.Image = global::XenAdmin.Properties.Resources._000_AddIPAddress_h32bit_16;
+            this.AddButton.Image = global::XenAdmin.Properties.Resources.sl_add_storage_system_small_16;
             this.AddButton.Name = "AddButton";
             this.AddButton.UseVisualStyleBackColor = false;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // noSitesLabel
+            // addSiteButton
             // 
-            resources.ApplyResources(this.noSitesLabel, "noSitesLabel");
-            this.noSitesLabel.Name = "noSitesLabel";
+            resources.ApplyResources(this.addSiteButton, "addSiteButton");
+            this.addSiteButton.BackColor = System.Drawing.Color.Transparent;
+            this.addSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addSiteButton.FlatAppearance.BorderSize = 0;
+            this.addSiteButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.addSiteButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.addSiteButton.Image = global::XenAdmin.Properties.Resources.sl_add_storage_system_small_16;
+            this.addSiteButton.Name = "addSiteButton";
+            this.addSiteButton.UseVisualStyleBackColor = false;
+            this.addSiteButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // PvsCacheConfigurationDialog
             // 
@@ -128,6 +136,6 @@ namespace XenAdmin.Dialogs
 
         private System.Windows.Forms.Label BlurbLabel;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Label noSitesLabel;
+        private System.Windows.Forms.Button addSiteButton;
     }
 }
