@@ -141,7 +141,7 @@ namespace XenAdmin.Dialogs
             if (!ValidToSave)
                 return null;
 
-            var pvsCacheStorages = new List<PVS_cache_storage>();
+            var newPvsCacheStorages = new List<PVS_cache_storage>();
             foreach (var row in rows.Where(r => r.HasChanged))
             {
                 var pvsCacheStorage = new PVS_cache_storage
@@ -152,11 +152,11 @@ namespace XenAdmin.Dialogs
                     size = row.CacheSize
                 };
 
-                pvsCacheStorages.Add(pvsCacheStorage);
+                newPvsCacheStorages.Add(pvsCacheStorage);
             }
 
-            if (pvsCacheStorages.Count > 0 || NameHasChanged)
-                return new ConfigurePvsSiteAction(connection, textBox1.Text, PvsSite, pvsCacheStorages);
+            if (newPvsCacheStorages.Count > 0 || NameHasChanged)
+                return new ConfigurePvsSiteAction(connection, textBox1.Text, PvsSite, newPvsCacheStorages);
             return null;
         }
 
