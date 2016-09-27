@@ -150,6 +150,8 @@ namespace XenAdmin
         Home,
         Objects,
 
+        PvsSite,
+
         #region DockerContainer Icons
 
         DCRunning,
