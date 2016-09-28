@@ -353,7 +353,7 @@ namespace XenAdmin.TabPages
             }
 
             // Move button
-            Command moveCmd = MoveMigrateCommand(selectedVDIs);
+            Command moveCmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, selectedVDIs);
             if (moveCmd.CanExecute())
             {
                 MoveButton.Enabled = true;
@@ -365,17 +365,6 @@ namespace XenAdmin.TabPages
                 MoveButtonContainer.SetToolTip(moveCmd.ToolTipText);
             }
         }
-
-        private Command MoveMigrateCommand(IEnumerable<SelectedItem> selection)
-        {
-            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow, selection);
-
-            if (moveCmd.CanExecute())
-                return moveCmd;
-
-            return new MigrateVirtualDiskCommand(Program.MainWindow, selection);
-        }
-
 
         #region Actions on VDIs
 
@@ -407,7 +396,7 @@ namespace XenAdmin.TabPages
             foreach (VBDRow r in rows)
                 l.Add(new SelectedItem(r.VDI));
 
-            Command cmd = MoveMigrateCommand(l);
+            Command cmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, l);
             if (cmd.CanExecute())
                 cmd.Execute();
         }

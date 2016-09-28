@@ -31,16 +31,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Network;
 using XenAPI;
-using XenAdmin.Core;
 using XenAdmin.Actions;
+using XenAdmin.Commands;
 
 namespace XenAdmin.Dialogs
 {
@@ -117,6 +114,16 @@ namespace XenAdmin.Dialogs
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        internal static Command MoveMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+        {
+            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(mainWindow, selection);
+
+            if (moveCmd.CanExecute())
+                return moveCmd;
+
+            return new MigrateVirtualDiskCommand(mainWindow, selection);
         }
     }
 }
