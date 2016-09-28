@@ -30,10 +30,10 @@ namespace XenAdmin.Dialogs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsCacheConfigurationPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.hostsPanel = new XenAdmin.Controls.FlickerFreePanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +47,15 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.hostsPanel, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // deleteButton
+            // 
+            resources.ApplyResources(this.deleteButton, "deleteButton");
+            this.tableLayoutPanel1.SetColumnSpan(this.deleteButton, 2);
+            this.deleteButton.Image = global::XenAdmin.Properties.Resources._000_RemoveSite_h32bit_16;
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // label1
             // 
@@ -64,15 +73,6 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.TextChanged += new System.EventHandler(this.SomethingChanged);
-            // 
-            // deleteButton
-            // 
-            resources.ApplyResources(this.deleteButton, "deleteButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.deleteButton, 2);
-            this.deleteButton.Image = global::XenAdmin.Properties.Resources._000_Abort_h32bit_16;
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // hostsPanel
             // 

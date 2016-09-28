@@ -42,8 +42,8 @@ namespace XenAdmin.Dialogs
             // 
             // ContentPanel
             // 
-            this.ContentPanel.Controls.Add(this.addSiteButton);
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
+            this.ContentPanel.Controls.Add(this.addSiteButton);
             // 
             // verticalTabs
             // 
@@ -93,7 +93,7 @@ namespace XenAdmin.Dialogs
             this.AddButton.FlatAppearance.BorderSize = 0;
             this.AddButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.AddButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.AddButton.Image = global::XenAdmin.Properties.Resources.sl_add_storage_system_small_16;
+            this.AddButton.Image = global::XenAdmin.Properties.Resources._000_AddSite_h32bit_16;
             this.AddButton.Name = "AddButton";
             this.AddButton.UseVisualStyleBackColor = false;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
@@ -106,7 +106,7 @@ namespace XenAdmin.Dialogs
             this.addSiteButton.FlatAppearance.BorderSize = 0;
             this.addSiteButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.addSiteButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.addSiteButton.Image = global::XenAdmin.Properties.Resources.sl_add_storage_system_small_16;
+            this.addSiteButton.Image = global::XenAdmin.Properties.Resources._000_AddSite_h32bit_16;
             this.addSiteButton.Name = "addSiteButton";
             this.addSiteButton.UseVisualStyleBackColor = false;
             this.addSiteButton.Click += new System.EventHandler(this.AddButton_Click);

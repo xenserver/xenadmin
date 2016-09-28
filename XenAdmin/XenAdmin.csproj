@@ -4231,6 +4231,7 @@
     <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
     <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
     <Content Include="HomePage\media\logos\cx-logo-citrixXenServer.png" />
+    <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
     <None Include="Images\000_ImportVirtualAppliance_h32bit_16.png" />
@@ -4252,6 +4253,7 @@
     <None Include="Images\000_ScheduledVMsnapshotDiskOnly_h32bit_32.png" />
     <None Include="Images\000_RebootVM_h32bit_16.png" />
     <None Include="Images\000_RemoveIPAddress_h32bit_16.png" />
+    <None Include="Images\000_RemoveSite_h32bit_16.png" />
     <Content Include="Images\000_ServerInProgress_h32bit_16.png" />
     <None Include="Images\000_ServerMaintenance_h32bit_16.png" />
     <None Include="Images\000_ServerMaintenance_h32bit_32.png" />
