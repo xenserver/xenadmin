@@ -161,12 +161,12 @@ namespace XenAdmin.Dialogs
 
         internal static Command MoveMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
         {
-            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(mainWindow, selection);
+            var cmd = new MigrateVirtualDiskCommand(mainWindow, selection);
 
-            if (moveCmd.CanExecute())
-                return moveCmd;
+            if (cmd.CanExecute())
+                return cmd;
 
-            return new MigrateVirtualDiskCommand(mainWindow, selection);
+            return new MoveVirtualDiskCommand(mainWindow, selection);
         }
     }
 }
