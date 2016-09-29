@@ -64,6 +64,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
             if (Helpers.ElyOrGreater(currentHost) && AvoidRestartHosts != null && AvoidRestartHosts.Contains(currentHost.uuid))
             {
                 log.Debug("Skipped scheduled restart (livepatching succeeded), BringBabiesBackAction is skipped.");
