@@ -550,6 +550,11 @@ namespace XenAPI
         {
             get
             {
+                if (Helpers.ElyOrGreater(Connection))
+                {
+                    return BoolKeyPreferTrue(license_params, "restrict_set_vcpus_number_live");
+                }
+                // Pre-Ely hosts:
                 // allowed on Premium edition only
                 var hostEdition = GetEdition(edition);
                 if (hostEdition == Edition.Premium)
