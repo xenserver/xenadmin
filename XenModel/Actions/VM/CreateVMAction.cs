@@ -57,7 +57,8 @@ namespace XenAdmin.Actions.VMActions
         private readonly VDI Cd;
         private readonly string Url;
         private readonly Host HomeServer;
-        private readonly long Vcpus;
+        private readonly long VcpusMax;
+        private readonly long VcpusAtStartup;
         private readonly long MemoryDynamicMin, MemoryDynamicMax, MemoryStaticMax;
         private readonly List<DiskDescription> Disks;
         private readonly List<VIF> Vifs;
@@ -112,7 +113,7 @@ namespace XenAdmin.Actions.VMActions
 
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
             string name, string description, InstallMethod installMethod,
-            string pvArgs, VDI cd, string url, Host homeServer, long vcpus,
+            string pvArgs, VDI cd, string url, Host homeServer, long vcpusMax, long vcpusAtStartup,
             long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
@@ -131,7 +132,8 @@ namespace XenAdmin.Actions.VMActions
             Cd = cd;
             Url = url;
             HomeServer = homeServer;
-            Vcpus = vcpus;
+            VcpusMax = vcpusMax;
+            VcpusAtStartup = vcpusAtStartup;
             MemoryDynamicMin = memoryDynamicMin;
             MemoryDynamicMax = memoryDynamicMax;
             MemoryStaticMax = memoryStaticMax;
@@ -299,7 +301,7 @@ namespace XenAdmin.Actions.VMActions
             Description = Messages.SETTING_VM_PROPERTIES;
             XenAPI.VM.set_name_label(Session, VM.opaque_ref, NameLabel);
             XenAPI.VM.set_name_description(Session, VM.opaque_ref, NameDescription);
-            ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, Vcpus);
+            ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, VcpusMax, VcpusAtStartup);
             vcpuAction.RunExternal(Session);
 
             // set cores-per-socket

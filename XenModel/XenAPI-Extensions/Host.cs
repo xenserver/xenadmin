@@ -541,6 +541,25 @@ namespace XenAPI
             return h._RestrictLivePatching;
         }
 
+        public static bool RestrictVcpuHotplug(Host h)
+        {
+            return h._RestrictVcpuHotplug;
+        }
+
+        private bool _RestrictVcpuHotplug
+        {
+            get
+            {
+                // allowed on Premium edition only
+                var hostEdition = GetEdition(edition);
+                if (hostEdition == Edition.Premium)
+                {
+                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
+                }
+                return true;
+            }
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)

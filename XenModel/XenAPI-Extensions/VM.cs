@@ -2071,6 +2071,14 @@ namespace XenAPI
             get
             {
                 return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
+			}
+        }
+
+        public bool SupportsVcpuHotplug
+        {
+            get
+            {
+                return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
             }
         }
     }
