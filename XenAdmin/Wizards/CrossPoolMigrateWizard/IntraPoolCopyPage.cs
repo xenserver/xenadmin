@@ -42,17 +42,35 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     public partial class IntraPoolCopyPage : XenTabPage
     {
         public readonly VM TheVM;
-        private readonly bool IsRealVm;
 
         public IntraPoolCopyPage(List<VM> selectedVMs)
         {
             this.TheVM = selectedVMs[0]; 
-            IsRealVm = !TheVM.is_a_template;
             InitializeComponent();
         }
 
         private bool _buttonNextEnabled;
         private bool _buttonPreviousEnabled;
+
+        public bool CloneVM
+        {
+            get { return !srPicker1.Enabled || CloneRadioButton.Checked; }
+        }
+
+        public SR SelectedSR
+        {
+            get { return srPicker1.SR; }
+        }
+
+        public string NewVmName
+        {
+            get { return NameTextBox.Text; }
+        }
+
+        public string NewVMmDescription
+        {
+            get { return DescriptionTextBox.Text; }
+        }
 
         #region Base class (XenTabPage) overrides
 
@@ -90,15 +108,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
             srPicker1.DiskSize = TheVM.TotalVMSize;
-            srPicker1.SrHint.Text = IsRealVm ? Messages.COPY_VM_SELECT_SR : Messages.COPY_TEMPLATE_SELECT_SR;
+            srPicker1.SrHint.Text = TheVM.is_a_template ? Messages.COPY_TEMPLATE_SELECT_SR : Messages.COPY_VM_SELECT_SR;
             srPicker1.SetAffinity(affinity);
             Pool pool = Helpers.GetPoolOfOne(TheVM.Connection);
             if (pool != null)
                 srPicker1.DefaultSR = TheVM.Connection.Resolve(pool.default_SR);
 
             NameTextBox.Text = GetDefaultCopyName(TheVM);
-
-            //Text = IsRealVm ? Messages.COPY_VM : Messages.COPY_TEMPLATE;
 
             bool allow_copy = !TheVM.is_a_template || TheVM.allowed_operations.Contains(vm_operations.copy);
 
@@ -160,7 +176,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         }
         #endregion
 
-        protected void SetButtonsEnabled(bool enabled)
+        private void SetButtonsEnabled(bool enabled)
         {
             _buttonNextEnabled = enabled;
             _buttonPreviousEnabled = enabled;
@@ -208,19 +224,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             srPicker1.Enabled = CopyRadioButton.Checked;
             // Since the radiobuttons aren't in the same panel, we have to do manual mutual exclusion
             CloneRadioButton.Checked = !CopyRadioButton.Checked;
-        }
-
-        public AsyncAction GetCopyAction()
-        {
-            if (!srPicker1.Enabled || CloneRadioButton.Checked)
-            {
-                return new VMCloneAction(TheVM, NameTextBox.Text, DescriptionTextBox.Text);
-            }
-
-            if (srPicker1.SR == null)
-                return null;
-            
-            return new VMCopyAction(TheVM, TheVM.GetStorageHost(false), srPicker1.SR, NameTextBox.Text, DescriptionTextBox.Text);
         }
     }
 }
