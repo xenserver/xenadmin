@@ -24014,6 +24014,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initial number of vCPUs.
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of vCPUs.
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
         ///
         ///Server &apos;{0}&apos; has {1} of physical memory in total.
@@ -24045,6 +24063,15 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_CPUMEMPAGE_NAME {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. .
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_RUBRIC {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_RUBRIC", resourceCulture);
             }
         }
         
@@ -34250,7 +34277,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VCPUs can only be changed when the VM is shut down.
+        ///   Looks up a localized string similar to The VCPUs can only be changed when the VM is shut down..
         /// </summary>
         public static string VCPU_ONLY_WHEN_HALTED {
             get {
@@ -34858,6 +34885,78 @@ namespace XenAdmin {
         public static string VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE {
             get {
                 return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current number of v&amp;CPUs:.
+        /// </summary>
+        public static string VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current number of vCPUs can only be changed when the VM is running or shut down. .
+        /// </summary>
+        public static string VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initial number of v&amp;CPUs:.
+        /// </summary>
+        public static string VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ma&amp;ximum number of vCPUs:.
+        /// </summary>
+        public static string VM_CPUMEMPAGE_MAX_VCPUS_LABEL {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_MAX_VCPUS_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. .
+        /// </summary>
+        public static string VM_CPUMEMPAGE_MAX_VCPUS_READONLY {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_MAX_VCPUS_READONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the number of vCPUs, their topology, and the priority to assign them over other vCPUs. .
+        /// </summary>
+        public static string VM_CPUMEMPAGE_RUBRIC {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_RUBRIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. .
+        /// </summary>
+        public static string VM_CPUMEMPAGE_RUBRIC_HOTPLUG {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_RUBRIC_HOTPLUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of v&amp;CPUs:.
+        /// </summary>
+        public static string VM_CPUMEMPAGE_VCPUS_LABEL {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_VCPUS_LABEL", resourceCulture);
             }
         }
         
