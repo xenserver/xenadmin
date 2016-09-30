@@ -2059,6 +2059,78 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS Cache eviction rate.
+        /// </summary>
+        public static string Label_performance_pvscache_evicted {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_evicted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache hit rate.
+        /// </summary>
+        public static string Label_performance_pvscache_read_hits {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_read_hits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache miss rate.
+        /// </summary>
+        public static string Label_performance_pvscache_read_misses {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_read_misses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache observed read rate.
+        /// </summary>
+        public static string Label_performance_pvscache_read_total {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_read_total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache space utilization.
+        /// </summary>
+        public static string Label_performance_pvscache_space_utilization {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_space_utilization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache observed network traffic from clients.
+        /// </summary>
+        public static string Label_performance_pvscache_traffic_client_sent {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_traffic_client_sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache saved network traffic.
+        /// </summary>
+        public static string Label_performance_pvscache_traffic_proxy_saved {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_traffic_proxy_saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache observed network traffic from servers.
+        /// </summary>
+        public static string Label_performance_pvscache_traffic_server_sent {
+            get {
+                return ResourceManager.GetString("Label-performance.pvscache_traffic_server_sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to vCPUs idle.
         /// </summary>
         public static string Label_performance_runstate_blocked {

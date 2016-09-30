@@ -1877,4 +1877,28 @@
   <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
     <value>Unable to setup PVS Read-caching on VM '{0}'. No cache storage found on site '{1}'.</value>
   </data>
+  <data name="Label-performance.pvscache_evicted" xml:space="preserve">
+    <value>PVS Cache eviction rate</value>
+  </data>
+  <data name="Label-performance.pvscache_read_hits" xml:space="preserve">
+    <value>PVS Cache hit rate</value>
+  </data>
+  <data name="Label-performance.pvscache_read_misses" xml:space="preserve">
+    <value>PVS Cache miss rate</value>
+  </data>
+  <data name="Label-performance.pvscache_read_total" xml:space="preserve">
+    <value>PVS Cache observed read rate</value>
+  </data>
+  <data name="Label-performance.pvscache_space_utilization" xml:space="preserve">
+    <value>PVS Cache space utilization</value>
+  </data>
+  <data name="Label-performance.pvscache_traffic_client_sent" xml:space="preserve">
+    <value>PVS Cache observed network traffic from clients</value>
+  </data>
+  <data name="Label-performance.pvscache_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS Cache saved network traffic</value>
+  </data>
+  <data name="Label-performance.pvscache_traffic_server_sent" xml:space="preserve">
+    <value>PVS Cache observed network traffic from servers</value>
+  </data>
 </root>
