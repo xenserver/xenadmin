@@ -369,8 +369,8 @@ namespace XenAdmin.Wizards.PatchingWizard
     public enum LivePatchCode
     {
         UNKNOWN,
-        PATCH_PRECHECK_LIVEPATCH_COMPLETE,      // An applicable live patch exists for every required component
-        PATCH_PRECHECK_LIVEPATCH_INCOMPLETE,    // An applicable live patch exists but it is not sufficient
-        PATCH_PRECHECK_LIVEPATCH_MISSING,       // There is no applicable live patch
+        PATCH_PRECHECK_LIVEPATCH_COMPLETE,       // An applicable live patch exists for every required component
+        PATCH_PRECHECK_LIVEPATCH_INCOMPLETE,     // An applicable live patch exists but it is not sufficient
+        PATCH_PRECHECK_LIVEPATCH_NOT_APPLICABLE, // There is no applicable live patch
     }
 }
