@@ -140,7 +140,7 @@ namespace XenAdminTests.WizardTests
         #region Helper methods (private)
         private void VerifyFailureFoundMessage(ResidentHostIsSameAsSelectionFilter cmd)
         {
-            Assert.AreEqual(Messages.CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST, cmd.Reason);
+            Assert.AreEqual(Messages.HOST_MENU_CURRENT_SERVER, cmd.Reason);
         }
 
         private List<VM> CreateMultipleVmListFromOneHostPool()

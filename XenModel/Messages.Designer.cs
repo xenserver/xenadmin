@@ -8590,15 +8590,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cannot migrate to the same host.
-        /// </summary>
-        public static string CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST {
-            get {
-                return ResourceManager.GetString("CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to incompatible version numbers.
         /// </summary>
         public static string CPM_FAILURE_REASON_VERSION {

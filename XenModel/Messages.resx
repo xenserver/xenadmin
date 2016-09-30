@@ -3116,9 +3116,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
     <value>/sec</value>
   </data>
-  <data name="CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST" xml:space="preserve">
-    <value>cannot migrate to the same host</value>
-  </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>incompatible version numbers</value>
   </data>
