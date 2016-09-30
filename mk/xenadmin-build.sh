@@ -107,7 +107,7 @@ dotnet_cp_to_dir "${LOG4NET_DIR}" "UNSIGNED/log4net.dll"
 dotnet_cp_to_dir "${SHARPZIPLIB_DIR}" "UNSIGNED/ICSharpCode.SharpZipLib.dll"
 dotnet_cp_to_dir "${DOTNETZIP_DIR}" "UNSIGNED/Ionic.Zip.dll"
 dotnet_cp_to_dir "${DISCUTILS_DIR}" "UNSIGNED/DiscUtils.dll"
-dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP452-KB2901954-Web.exe"
+dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP46-KB3045560-Web.exe"
 dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
 dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
@@ -218,7 +218,7 @@ version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
 #copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
-cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
+cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP46-KB3045560-Web.exe ${DOTNETINST}
 DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
 DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
 cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}

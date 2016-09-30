@@ -309,8 +309,8 @@
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-        <PropertyRef Id="NETFRAMEWORK45" />
-        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
+        <PropertyRef Id="NETFRAMEWORK46" />
+        <Condition Message=".NET Framework 4.6 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK46]]></Condition>
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
         </Property>
