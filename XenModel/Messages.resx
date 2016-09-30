@@ -1074,7 +1074,10 @@
   <data name="ACTION_VM_MIGRATING" xml:space="preserve">
     <value>Migrating</value>
   </data>
-  <data name="ACTION_VM_MIGRATING_TITLE" xml:space="preserve">
+  <data name="ACTION_VM_MIGRATING_NON_RESIDENT" xml:space="preserve">
+    <value>Migrating VM '{0}' to '{1}'</value>
+  </data>
+  <data name="ACTION_VM_MIGRATING_RESIDENT" xml:space="preserve">
     <value>Migrating VM '{0}' from '{1}' to '{2}'</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">

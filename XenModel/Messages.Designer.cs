@@ -2887,11 +2887,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos; to &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MIGRATING_NON_RESIDENT {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_NON_RESIDENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
-        public static string ACTION_VM_MIGRATING_TITLE {
+        public static string ACTION_VM_MIGRATING_RESIDENT {
             get {
-                return ResourceManager.GetString("ACTION_VM_MIGRATING_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_RESIDENT", resourceCulture);
             }
         }
         
