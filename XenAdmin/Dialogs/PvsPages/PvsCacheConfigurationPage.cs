@@ -82,8 +82,9 @@ namespace XenAdmin.Dialogs
                 // Generate a unique suggested name for the new site
                 textBox1.Text = Helpers.MakeUniqueName(Messages.PVS_SITE_NAME, takenNames);
             }
-            
+
             LoadServers();
+            viewPvsServersButton.Enabled = PvsSite != null;
         }
 
         public bool ValidToSave
@@ -148,7 +149,7 @@ namespace XenAdmin.Dialogs
                 {
                     site = PvsSite != null ? new XenRef<PVS_site>(PvsSite) : null,
                     host = new XenRef<Host>(row.Host),
-                    SR =  new XenRef<SR>(row.CacheSr),
+                    SR =  row.CacheSr != null ? new XenRef<SR>(row.CacheSr) : null,
                     size = row.CacheSize
                 };
 
@@ -186,6 +187,14 @@ namespace XenAdmin.Dialogs
         {
             if (DeleteButtonClicked != null)
                 DeleteButtonClicked(this, e);
+        }
+
+        private void viewServersButton_Click(object sender, EventArgs e)
+        {
+            if (PvsSite == null)
+                return;
+            using (var dialog = new PvsSiteDialog(PvsSite))
+                dialog.ShowDialog(this);
         }
     }
 }

@@ -1284,6 +1284,15 @@ namespace XenAPI
             }
         }
 
+        public long dom0_memory_extra
+        {
+            get
+            {
+                VM vm = ControlDomainZero;
+                return vm != null ? vm.memory_static_max - vm.memory_static_min : 0;
+            }
+        }
+
 
         /// <summary>
         /// Friendly string showing memory usage on the host

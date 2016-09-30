@@ -2078,7 +2078,7 @@ namespace XenAPI
         {
             get
             {
-                return Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(this)); // null if none
+                return Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM != null && p.VM.Equals(this)); // null if none
             }
         }
     }

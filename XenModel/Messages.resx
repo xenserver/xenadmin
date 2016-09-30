@@ -9695,7 +9695,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>Not configured</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Sites - '{0}'</value>
+    <value>PVS Servers on site {0}'</value>
   </data>
   <data name="PVS_SITE_NAME" xml:space="preserve">
     <value>PVS Site</value>
@@ -13245,5 +13245,8 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
+    <value>Are you sure you want to delete '{0}'?</value>
   </data>
 </root>

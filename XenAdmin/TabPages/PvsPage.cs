@@ -121,8 +121,6 @@ namespace XenAdmin.TabPages
             {
                 dataGridViewSites.ResumeLayout();
             }
-
-            ViewPvsSitesButton.Enabled = Connection.Cache.PVS_sites.Length > 0;
         }
 
         private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
@@ -267,12 +265,11 @@ namespace XenAdmin.TabPages
         {
             var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
             var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.NO };
-            var cachedCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
             var statusCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, statusCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;
@@ -285,11 +282,6 @@ namespace XenAdmin.TabPages
             var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
             var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.YES };
 
-            var cachedCell = new DataGridViewTextBoxCell
-            {
-                Value = pvsProxy.currently_attached ? Messages.YES : Messages.NO
-            };
-
             var pvsSiteCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.site) };
 
             var statusCell = new DataGridViewTextBoxCell
@@ -298,7 +290,7 @@ namespace XenAdmin.TabPages
             };
 
             var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, cachedCell, pvsSiteCell, statusCell);
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
             vm.PropertyChanged += VmPropertyChanged;
 
             return newRow;
@@ -370,11 +362,6 @@ namespace XenAdmin.TabPages
                     break;
                 }
             }
-        }
-
-        private void ViewPvsSitesButton_Click(object sender, EventArgs e)
-        {
-            Program.MainWindow.ShowPerConnectionWizard(connection, new PvsSiteDialog(connection));
         }
 
         private void ConfigureButton_Click(object sender, EventArgs e)

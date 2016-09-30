@@ -82,7 +82,7 @@ namespace XenAdmin.Actions
             foreach (var pvsCacheStorage in pvsCacheStorages)
             {
                 // create Memory SR, if needed
-                if (Helper.IsNullOrEmptyOpaqueRef(pvsCacheStorage.SR.opaque_ref)) 
+                if (pvsCacheStorage.SR != null && Helper.IsNullOrEmptyOpaqueRef(pvsCacheStorage.SR.opaque_ref)) 
                 {
                     RelatedTask = SR.async_create(Session, pvsCacheStorage.host, new Dictionary<string, string> { { URI, "" } }, 0,
                         Messages.PVS_CACHE_MEMORY_SR_NAME, "", SR.SRTypes.tmpfs.ToString(), "", false, new Dictionary<string, string>());
@@ -107,9 +107,16 @@ namespace XenAdmin.Actions
                 }
 
                 // create new PVS_cache_storage
-                pvsCacheStorage.site = new XenRef<PVS_site>(pvsSite); //asign the new site
-                RelatedTask = PVS_cache_storage.async_create(Session, pvsCacheStorage);
-                PollToCompletion(PercentComplete, PercentComplete + inc);
+                if (pvsCacheStorage.SR != null)
+                {
+                    pvsCacheStorage.site = new XenRef<PVS_site>(pvsSite); //asign the new site
+                    RelatedTask = PVS_cache_storage.async_create(Session, pvsCacheStorage);
+                    PollToCompletion(PercentComplete, PercentComplete + inc);
+                }
+                else
+                {
+                    PercentComplete += inc;
+                }
             }
             PercentComplete = 100;
             Description = Messages.ACTION_CONFUGURE_PVS_SITE_DONE;

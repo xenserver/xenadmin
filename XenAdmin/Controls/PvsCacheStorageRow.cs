@@ -77,7 +77,12 @@ namespace XenAdmin.Controls
         {
             comboBoxCacheSr.Items.Clear();
 
-            // add Memeory SR first; if no memory SR  found, add a placeholder (we will create the memory SR in ConfigurePvsCacheAction)
+			// add the "Not configured" item first
+            var notConfiguredItem = new ToStringWrapper<SR>(null, Messages.PVS_CACHE_NOT_CONFIGURED); 
+            comboBoxCacheSr.Items.Add(notConfiguredItem);
+            comboBoxCacheSr.SelectedItem = notConfiguredItem;
+
+            // add Memeory SR; if no memory SR  found, add a placeholder (we will create the memory SR in ConfigurePvsCacheAction)
             var memorySr = Host.Connection.Cache.SRs.FirstOrDefault(s => s.GetSRType(false) == SR.SRTypes.tmpfs && s.CanBeSeenFrom(Host));
             if (memorySr == null)
             {
@@ -162,7 +167,7 @@ namespace XenAdmin.Controls
         {
             get
             {
-                if (OrigPvsCacheStorage == null)
+                if (OrigPvsCacheStorage == null || CacheSr == null)
                     return true;
                 return OrigPvsCacheStorage.SR.opaque_ref != CacheSr.opaque_ref || origCacheSizeGb != numericUpDownCacheSize.Value;
             }
@@ -179,7 +184,7 @@ namespace XenAdmin.Controls
             var selectedSr = CacheSr;
             if (selectedSr != null)
             {
-                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); ;
+                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); ;
                 if (maxSize != numericUpDownCacheSize.Maximum)
                     SetupCacheSizeSpinner(numericUpDownCacheSize.Value, numericUpDownCacheSize.Minimum, maxSize);
             }

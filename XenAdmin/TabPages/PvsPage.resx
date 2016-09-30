@@ -140,17 +140,8 @@
   <data name="ColumnCachingEnabled.HeaderText" xml:space="preserve">
     <value>Read caching enabled</value>
   </data>
-  <metadata name="columnCurrentlyCached.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="columnCurrentlyCached.HeaderText" xml:space="preserve">
-    <value>Currently cached</value>
-  </data>
-  <data name="columnCurrentlyCached.MinimumWidth" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="columnCurrentlyCached.Width" type="System.Int32, mscorlib">
-    <value>122</value>
+  <data name="ColumnCachingEnabled.Width" type="System.Int32, mscorlib">
+    <value>148</value>
   </data>
   <metadata name="ColumnPvsSite.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -162,10 +153,13 @@
     <value>True</value>
   </metadata>
   <data name="ColumnStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
+    <value>Read caching status</value>
   </data>
   <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
+  </data>
+  <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
+    <value>137</value>
   </data>
   <data name="dataGridViewVms.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -366,41 +360,11 @@
   <data name="&gt;&gt;ConfigureButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ViewPvsSitesButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ViewPvsSitesButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 3</value>
-  </data>
-  <data name="ViewPvsSitesButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 5, 0</value>
-  </data>
-  <data name="ViewPvsSitesButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="ViewPvsSitesButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="ViewPvsSitesButton.Text" xml:space="preserve">
-    <value>View PVS &amp;Sites...</value>
-  </data>
-  <data name="&gt;&gt;ViewPvsSitesButton.Name" xml:space="preserve">
-    <value>ViewPvsSitesButton</value>
-  </data>
-  <data name="&gt;&gt;ViewPvsSitesButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ViewPvsSitesButton.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;ViewPvsSitesButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 259</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 29</value>
+    <value>153, 29</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -561,36 +525,6 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1129, 699</value>
   </data>
-  <data name="&gt;&gt;columnVM.Name" xml:space="preserve">
-    <value>columnVM</value>
-  </data>
-  <data name="&gt;&gt;columnVM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnCachingEnabled.Name" xml:space="preserve">
-    <value>ColumnCachingEnabled</value>
-  </data>
-  <data name="&gt;&gt;ColumnCachingEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnCurrentlyCached.Name" xml:space="preserve">
-    <value>columnCurrentlyCached</value>
-  </data>
-  <data name="&gt;&gt;columnCurrentlyCached.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnPvsSite.Name" xml:space="preserve">
-    <value>ColumnPvsSite</value>
-  </data>
-  <data name="&gt;&gt;ColumnPvsSite.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
-    <value>ColumnStatus</value>
-  </data>
-  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ColumnSite.Name" xml:space="preserve">
     <value>ColumnSite</value>
   </data>
@@ -607,6 +541,30 @@
     <value>ColumnSRs</value>
   </data>
   <data name="&gt;&gt;ColumnSRs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnVM.Name" xml:space="preserve">
+    <value>columnVM</value>
+  </data>
+  <data name="&gt;&gt;columnVM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnCachingEnabled.Name" xml:space="preserve">
+    <value>ColumnCachingEnabled</value>
+  </data>
+  <data name="&gt;&gt;ColumnCachingEnabled.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnPvsSite.Name" xml:space="preserve">
+    <value>ColumnPvsSite</value>
+  </data>
+  <data name="&gt;&gt;ColumnPvsSite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
+    <value>ColumnStatus</value>
+  </data>
+  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

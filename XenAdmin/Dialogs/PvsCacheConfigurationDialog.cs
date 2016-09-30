@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
@@ -123,21 +124,39 @@ namespace XenAdmin.Dialogs
 
             verticalTabs.Items.Add(editPage);
         }
-
-        private List<PVS_site> deletedSites = new List<PVS_site>();
-
+        
         void DeletePage(PvsCacheConfigurationPage page)
         {
+            if (page.PvsSite != null && !DeleteSite(page.PvsSite)) 
+                return;
             int selectedIndex = verticalTabs.SelectedIndex;
             verticalTabs.Items.Remove(page);
             verticalTabs.SelectedIndex = selectedIndex < verticalTabs.Items.Count - 1 ? selectedIndex : verticalTabs.Items.Count - 1;
             page.Changed -= SomethingChangedOnPage;
             page.DeleteButtonClicked -= DeleteButtonClickedOnPage;
-            if (page.PvsSite != null)
-                deletedSites.Add(page.PvsSite);
             ContentPanel.Controls.Remove(page);
             RefreshButtons();
             ResizeVerticalTabs(verticalTabs.Items.Count);
+        }
+
+        private bool DeleteSite(PVS_site site)
+        {
+            if (site == null)
+                return false;
+
+            DialogResult dialogResult;
+            using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.CONFIRM_DELETE_PVS_SITE, site.Name), Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonOK,
+                    ThreeButtonDialog.ButtonCancel))
+            {
+                dialogResult = dlg.ShowDialog(Parent);
+            }
+            if (dialogResult != DialogResult.OK)
+                return false;
+            var action = new DeletePvsSiteAction(site);
+            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(this);
+            return action.Succeeded;
         }
 
         private void ResizeVerticalTabs(int itemCount)
@@ -266,9 +285,7 @@ namespace XenAdmin.Dialogs
         private void okButton_Click(object sender, EventArgs e)
         {
             List<AsyncAction> actions = GetActions();
-
-            actions.AddRange(deletedSites.Select(site => new DeletePvsSiteAction(site)));
-
+            
             if (actions.Count == 0) 
                 return;
 
