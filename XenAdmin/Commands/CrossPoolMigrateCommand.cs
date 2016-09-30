@@ -59,11 +59,9 @@ namespace XenAdmin.Commands
             this.preSelectedHost = preSelectedHost;
         }
 
-        private string menuText = Messages.HOST_MENU_CPM_TEXT;
         public override string MenuText
         {
-            get { return menuText; }
-            set { menuText = value; }
+            get { return preSelectedHost == null ? Messages.HOST_MENU_CPM_TEXT : preSelectedHost.Name.EscapeAmpersands(); }
         }
 
         public override string ContextMenuText { get { return Messages.HOST_MENU_CPM_TEXT; } }

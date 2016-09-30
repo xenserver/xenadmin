@@ -45,7 +45,11 @@ namespace XenAdmin.Commands
         public CrossPoolMigrateToHomeCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection, preSelectedHost)
         {
-            MenuText = Messages.HOME_SERVER_MENU_ITEM;
+        }
+
+        public override string MenuText
+        {
+            get { return Messages.HOME_SERVER_MENU_ITEM; }
         }
 
         public override Image MenuImage
