@@ -94,9 +94,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             {
                 if (TemplatesOnly)
                 {
-                    if (selectedVMs.Count == 1)
+                    if (selectedVMs != null && selectedVMs.Count == 1)
                     {
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE;
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE;
                     }
                     else
                     {
@@ -105,9 +105,25 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 }
                 else
                 {
-                    if (selectedVMs != null && selectedVMs.Count > 1)
-                        return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS;
-                    return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE;
+                    if (selectedVMs != null && selectedVMs.Count == 1)
+                    {
+                        if (wizardMode == WizardMode.Copy)
+                            return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE;
+
+                        if (wizardMode == WizardMode.Move)
+                            return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE;
+
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE;
+                    }
+
+                    if (wizardMode == WizardMode.Copy)
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY;
+
+                    if (wizardMode == WizardMode.Move)
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE;
+
+                    return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE;
+                    
                 }
             }
         }

@@ -3164,23 +3164,29 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Destination:</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to migrate the selected VMs to.</value>
-  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected VMs to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected VM to.</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to copy the selected template to.</value>
-  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected templates to.</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE" xml:space="preserve">
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to copy the selected template to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to migrate the selected VMs to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to move the selected VMs to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to move the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>Specify a &amp;target server in the destination pool (optional):</value>
@@ -10872,6 +10878,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STORAGE_WORST" xml:space="preserve">
     <value>0 (Lowest)</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="STRINGIFY_LIST_INNERSEP" xml:space="preserve">
     <value>, </value>
