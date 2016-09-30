@@ -68,7 +68,10 @@ namespace XenAdmin.Commands
 
         public override string ContextMenuText { get { return Messages.HOST_MENU_CPM_TEXT; } }
 
-        public override Image MenuImage { get { return Resources._000_MigrateVM_h32bit_16; } }
+        public override Image MenuImage
+        {
+            get { return preSelectedHost == null ? Resources._000_MigrateVM_h32bit_16 : Resources._000_TreeConnected_h32bit_16; }
+        }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
