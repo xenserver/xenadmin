@@ -40,7 +40,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     internal class CrossPoolMigrateDestinationPage : SelectMultipleVMDestinationPage
     {
-        private Host preSelectedHost;
         private List<VM> selectedVMs;
         private WizardMode wizardMode;
 
@@ -52,7 +51,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public CrossPoolMigrateDestinationPage(Host preSelectedHost, List<VM> selectedVMs, WizardMode wizardMode, List<IXenConnection> ignoredConnections)
         {
-            this.preSelectedHost = preSelectedHost;
             SetDefaultTarget(preSelectedHost);
             this.selectedVMs = selectedVMs;
             this.wizardMode = wizardMode;
@@ -132,10 +130,16 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override string TargetServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
 
-
         public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
-           return new CrossPoolMigrateDelayLoadingComboBoxItem(xenItem, preSelectedHost, selectedVMs);
+            var filters = new List<ReasoningFilter>
+            {
+                new CrossPoolMigrateVersionFilter(xenItem),
+                new ResidentHostIsSameAsSelectionFilter(xenItem, selectedVMs),
+                new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs),
+                new WlbEnabledFilter(xenItem, selectedVMs)
+            };
+            return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
         protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)

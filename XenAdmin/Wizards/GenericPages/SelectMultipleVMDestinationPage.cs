@@ -384,7 +384,7 @@ namespace XenAdmin.Wizards.GenericPages
                         {
                             foreach (var pool in Connection.Cache.Pools)
                             {
-                                var item = new DoNotAssignHomeServerPoolItem(pool);
+                                var item = new NoTargetServerPoolItem(pool);
                                 cb.Items.Add(item);
 
                                 if ((m_selectedObject != null && m_selectedObject.opaque_ref == pool.opaque_ref) ||
@@ -397,7 +397,8 @@ namespace XenAdmin.Wizards.GenericPages
 
                         foreach (var host in Connection.Cache.Hosts)
                         {
-                            HomeServerItem item = new HomeServerItem(host, homeserverFilters);
+                            var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
+                            item.LoadAndWait();
                             cb.Items.Add(item);
 
                             if ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
