@@ -13249,4 +13249,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
     <value>Are you sure you want to delete '{0}'?</value>
   </data>
+  <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
+    <value>This PVS site cannot be removed because it contains running proxies.</value>
+  </data>
 </root>

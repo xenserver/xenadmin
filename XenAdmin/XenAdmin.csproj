@@ -161,13 +161,6 @@
     <Compile Include="Controls\ConsolePanel.Designer.cs">
       <DependentUpon>ConsolePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataGridViewEx\CollapsingPvsSiteServerDataGridViewRow.cs" />
-    <Compile Include="Controls\DataGridViewEx\CollapsingPvsSiteServerDataGridView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\DataGridViewEx\CollapsingPvsSiteServerDataGridView.Designer.cs">
-      <DependentUpon>CollapsingPvsSiteServerDataGridView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

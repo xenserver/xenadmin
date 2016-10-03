@@ -144,6 +144,17 @@ namespace XenAdmin.Dialogs
             if (site == null)
                 return false;
 
+            // We cannot delete the site if there are running proxies
+            var pvsProxies = connection.Cache.PVS_proxies.Where(s => s.site.opaque_ref == site.opaque_ref).ToList();
+            if (pvsProxies.Count > 0)
+            {
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
+                return false;
+            }
+
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.CONFIRM_DELETE_PVS_SITE, site.Name), Messages.XENCENTER),

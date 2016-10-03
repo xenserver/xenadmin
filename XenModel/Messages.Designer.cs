@@ -27886,6 +27886,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This PVS site cannot be removed because it contains running proxies..
+        /// </summary>
+        public static string PVS_SITE_CANNOT_BE_REMOVED {
+            get {
+                return ResourceManager.GetString("PVS_SITE_CANNOT_BE_REMOVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PVS Servers on site {0}&apos;.
         /// </summary>
         public static string PVS_SITE_DIALOG_TITLE {
