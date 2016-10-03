@@ -136,7 +136,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             {
                 new CrossPoolMigrateVersionFilter(xenItem),
                 new ResidentHostIsSameAsSelectionFilter(xenItem, selectedVMs),
-                new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs),
+                new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs, wizardMode),
                 new WlbEnabledFilter(xenItem, selectedVMs)
             };
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
@@ -148,7 +148,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             if(selectedItem != null)
             {
-                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs));
+                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs, wizardMode));
                 filters.Add(new WlbEnabledFilter(selectedItem.Item, selectedVMs));
             } 
 

@@ -110,7 +110,7 @@ namespace XenAdmin.Commands
 
             if (preselectedHost != null)
             {
-                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> { vm }).FailureFound;
+                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm}, WizardMode.Migrate).FailureFound;
             }
 
             return !failureFound &&

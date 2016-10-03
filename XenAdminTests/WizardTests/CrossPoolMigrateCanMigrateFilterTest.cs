@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using XenAdmin.Wizards.CrossPoolMigrateWizard;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAPI;
 
@@ -128,7 +129,7 @@ namespace XenAdminTests.WizardTests
 
         private void VerifyMigrationAllowed(IXenObject ixo, List<VM> vms)
         {
-            CrossPoolMigrateCanMigrateFilter cmd = new CrossPoolMigrateCanMigrateFilter(ixo, vms);
+            CrossPoolMigrateCanMigrateFilter cmd = new CrossPoolMigrateCanMigrateFilter(ixo, vms, WizardMode.Migrate);
             Assert.That(cmd.FailureFound, Is.False, "failure found");
             Assert.That(cmd.Reason, Is.Null, "failure message");
         }
@@ -136,7 +137,7 @@ namespace XenAdminTests.WizardTests
         [Test, ExpectedException(typeof(NullReferenceException))]
         public void VerifyNullListArgsThrow()
         {
-            bool failureFound = new CrossPoolMigrateCanMigrateFilter(singlePool, null).FailureFound;
+            bool failureFound = new CrossPoolMigrateCanMigrateFilter(singlePool, null, WizardMode.Migrate).FailureFound;
         }
 
         [Test]
@@ -151,7 +152,7 @@ namespace XenAdminTests.WizardTests
                 data.vms[0].opaque_ref = Failure.INTERNAL_ERROR;
                 Assert.That(data.vms[0].opaque_ref, Is.EqualTo(Failure.INTERNAL_ERROR));
 
-                CrossPoolMigrateCanMigrateFilter cmd = new CrossPoolMigrateCanMigrateFilter(data.ixo, data.vms);
+                CrossPoolMigrateCanMigrateFilter cmd = new CrossPoolMigrateCanMigrateFilter(data.ixo, data.vms, WizardMode.Migrate);
                 Assert.That(cmd.FailureFound, Is.True, "failure found");
                 Assert.That(cmd.Reason, Is.EqualTo(Failure.INTERNAL_ERROR), "failure message");
 
