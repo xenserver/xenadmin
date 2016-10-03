@@ -1646,8 +1646,16 @@ namespace XenAdmin.TabPages
         {
             List<string> result = new List<string>();
 
-            foreach (Pool_patch patch in host.AppliedPatches())
-                result.Add(patch.Name);
+            if (Helpers.ElyOrGreater(host))
+            {
+                foreach (var update in host.AppliedUpdates())
+                    result.Add(update.Name);
+            }
+            else
+            {
+                foreach (Pool_patch patch in host.AppliedPatches())
+                    result.Add(patch.Name);
+            }
 
             result.Sort(StringUtility.NaturalCompare);
 
