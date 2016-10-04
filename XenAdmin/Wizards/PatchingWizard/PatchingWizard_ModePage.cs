@@ -107,7 +107,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.ISO:
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;
-                    textBoxLog.Text = SelectedServers.TrueForAll(s => Helpers.ElyOrGreater(s)) 
+                    textBoxLog.Text = PoolUpdate != null 
                         ? PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, PoolUpdate, LivePatchCodesByHost) 
                         : PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
                     break;

@@ -172,19 +172,32 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (!IsInAutomaticMode)
                 {
-                    var fileName = fileNameTextBox.Text;
+                    var fileName = fileNameTextBox.Text.ToLowerInvariant();
+
+                    SelectedUpdateAlert = downloadUpdateRadioButton.Checked
+                             ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                             : null;
+
+                    FileFromDiskAlert = selectFromDiskRadioButton.Checked
+                                                 ? GetAlertFromFileName(fileName)
+                                                 : null;
+
                     if (downloadUpdateRadioButton.Checked)
                     {
-                        if (fileName.EndsWith(UpdateExtension))
-                            SelectedUpdateType = UpdateType.NewRetail;
-                        else if (fileName.EndsWith(".iso"))
+                        if (SelectedUpdateAlert != null && SelectedUpdateAlert.DistinctHosts != null && SelectedUpdateAlert.DistinctHosts.Any(dh => Helpers.ElyOrGreater(dh))) // this is to check whether the Alert represents an ISO update (Ely or greater)
+                        {
                             SelectedUpdateType = UpdateType.ISO;
+                        }
+                        else //legacy format
+                        {
+                            SelectedUpdateType = UpdateType.NewRetail;
+                        }
                     }
                     else
                     {
-                        if (isValidFile())
+                        if (isValidFile(fileName))
                         {
-                            if (fileName.EndsWith(UpdateExtension))
+                            if (fileName.EndsWith(UpdateExtension.ToLowerInvariant()))
                                 SelectedUpdateType = UpdateType.NewRetail;
                             else if (fileName.EndsWith(".iso"))
                                 SelectedUpdateType = UpdateType.ISO;
@@ -192,13 +205,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 SelectedUpdateType = UpdateType.Existing;
                         }
                     }
-                    SelectedUpdateAlert = downloadUpdateRadioButton.Checked
-                                                 ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
-                                                 : null;
-                    FileFromDiskAlert = selectFromDiskRadioButton.Checked
-                                                 ? GetAlertFromFileName(fileName)
-                                                 : null;
-
 
                     if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
                     {
@@ -320,7 +326,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (selectFromDiskRadioButton.Checked)
             {
-                if (isValidFile())
+                if (isValidFile(fileNameTextBox.Text))
                 {
                     return true;
                 }
@@ -338,10 +344,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "." + Branding.Update; }
         }
 
-        private bool isValidFile()
+        private bool isValidFile(string fileName)
         {
-            var fileName = fileNameTextBox.Text;
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.EndsWith(UpdateExtension) || fileName.EndsWith(".iso"));
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso"));
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -379,7 +384,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.EndsWith(UpdateExtension) || fileName.EndsWith(".iso"))
+            if (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso"))
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;

@@ -108,7 +108,9 @@ namespace XenAdmin.Actions
                     output += Messages.APPLY_PATCH_FAILED_LOG_MESSAGE;
                     output += f.ErrorDescription[1];
                 }
-                    
+
+                log.Error(output, f);
+
                 throw;
             }
             finally

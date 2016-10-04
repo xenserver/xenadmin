@@ -289,7 +289,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Pool_patch patch = e.Argument as Pool_patch;
                 Pool_update update = e.Argument as Pool_update;
 
-                List<KeyValuePair<string, List<Check>>> checks = patch != null ? GenerateChecks(patch) : GenerateChecks(update);
+                List<KeyValuePair<string, List<Check>>> checks = update != null ? GenerateChecks(update) : GenerateChecks(patch); //patch is expected to be null for RPU
                 _numberChecks = checks.Count;
                 for (int i = 0; i < checks.Count; i++)
                 {
@@ -365,14 +365,41 @@ namespace XenAdmin.Wizards.PatchingWizard
                 checkGroup.Add(new PBDsPluggedCheck(host));
             }
 
+            //Disk space check for batch hotfixing
+            if (IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+
+                foreach (Pool pool in SelectedPools)
+                {
+                    var us = Updates.GetUpgradeSequence(pool.Connection);
+
+                    bool elyOrGreater = Helpers.ElyOrGreater(pool.Connection);
+
+                    foreach (Host host in us.Keys)
+                    {
+                        checkGroup.Add(
+                            new DiskSpaceForBatchUpdatesCheck(
+                                host,
+                                elyOrGreater
+                                    ? us[host].Sum(p => p.InstallationSize) // all updates on this host
+                                    : host.IsMaster()
+                                        ? us[host].Sum(p => p.InstallationSize) + us.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master + largest update in pool
+                                        : us[host].Sum(p => p.InstallationSize) + us[host].Max(p => p.InstallationSize) // non-master: all updates on this host + largest on this host
+                        ));
+                    }
+                }
+            }
+
             return checks;
         }
 
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
-            List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>(GenerateCommonChecks());
+            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
             
-            List<Check> checkGroup = checks[checks.Count - 1].Value;
+            List<Check> checkGroup;
 
             LivePatchCodesByHost = new Dictionary<string, LivePatchCode>();
 
@@ -402,37 +429,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            if (IsInAutomaticMode)
-            {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Pool pool in SelectedPools)
-                {
-                    var us = Updates.GetUpgradeSequence(pool.Connection);
-
-                    foreach (Host host in us.Keys)
-                    {
-                        checkGroup.Add(
-                            new DiskSpaceForBatchUpdatesCheck(
-                                host, 
-
-                                host.IsMaster() 
-                                    ? us[host].Sum(p => p.InstallationSize) + us.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master + largest update in pool
-                                    : us[host].Sum(p => p.InstallationSize) + us[host].Max(p => p.InstallationSize) // non-master: all updates on this host + largest on this host
-                        ));
-                    }
-                }
-
-            }
-
             return checks;
         }
 
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_update update)
         {
-            List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>(GenerateCommonChecks());
+            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
 
-            List<Check> checkGroup = checks[checks.Count - 1].Value;
+            List<Check> checkGroup;
 
             //Checking other things
             if (update != null)
@@ -456,26 +460,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }
-            }
-
-            if (IsInAutomaticMode)
-            {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Pool pool in SelectedPools)
-                {
-                    var us = Updates.GetUpgradeSequence(pool.Connection);
-
-                    foreach (Host host in us.Keys)
-                    {
-                        checkGroup.Add(
-                            new DiskSpaceForBatchUpdatesCheck(
-                                host,
-                                us[host].Sum(p => p.InstallationSize) // all updates on this host
-                        ));
-                    }
-                }
-
             }
 
             return checks;

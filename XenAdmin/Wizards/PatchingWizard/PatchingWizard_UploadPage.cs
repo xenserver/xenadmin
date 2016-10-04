@@ -416,13 +416,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is UploadPatchAction)
                     {
                         _patch = (action as UploadPatchAction).PatchRefs[master];
+                        _poolUpdate = null;
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
                     }
+                    
                     if (action is CopyPatchFromHostToOther && action.Host != null)
+                    {
+                        _poolUpdate = null;
                         _patch = action.Host.Connection.Cache.Resolve((action as CopyPatchFromHostToOther).NewPatchRef);
+                    }
 
                     if (_patch != null && !NewUploadedPatches.ContainsKey(_patch))
+                    {
                         NewUploadedPatches.Add(_patch, SelectedNewPatchPath);
+                        _poolUpdate = null;
+                    }
 
                     if (action is UploadSupplementalPackAction)
                     {
@@ -449,6 +457,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             _poolUpdate = null;
                         }
                     }
+
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
                         SelectedNewPatchPath = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;

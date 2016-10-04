@@ -46,8 +46,8 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class PatchPrecheckCheck : Check
     {
-        private readonly Pool_patch _patch = null;
-        private readonly Pool_update _update = null;
+        private readonly Pool_patch _patch;
+        private readonly Pool_update _update;
 
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");

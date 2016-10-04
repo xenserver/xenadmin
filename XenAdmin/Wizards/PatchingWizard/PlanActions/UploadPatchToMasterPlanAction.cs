@@ -82,9 +82,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         var uploadIsoAction = new UploadSupplementalPackAction(session.Connection, new List<Host>() { master }, path, true);
                         inProgressAction = uploadIsoAction;
                         uploadIsoAction.RunExternal(session);
+                        
+                        var poolupdate = uploadIsoAction.PoolUpdate;
 
-                        poolUpdates = new List<Pool_update>(session.Connection.Cache.Pool_updates);
-                        var poolupdate = poolUpdates.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
                         if (poolupdate == null)
                         {
                             log.ErrorFormat("Upload finished successfully, but Pool_update object has not been found for update (uuid={0}) on host (uuid={1}).", patch.Uuid, session.Connection);

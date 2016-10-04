@@ -243,8 +243,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
 
-            if (!Helpers.ElyOrGreater(host) && type != UpdateType.ISO && !host.CanApplyHotfixes 
-                || !host.CanApplyHotfixes)
+            if (!host.CanApplyHotfixes && (Helpers.ElyOrGreater(host) || type != UpdateType.ISO))
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
@@ -258,7 +257,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     disableNotApplicableHosts(row, selectedHosts, host);
                     break;
                 case UpdateType.ISO:
-                    if (!host.CanInstallSuppPack || !Helpers.ElyOrGreater(host)) //from Ely, iso does not mean supplemental pack
+                    if (!host.CanInstallSuppPack && !Helpers.ElyOrGreater(host)) //from Ely, iso does not mean supplemental pack
                     {
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
@@ -300,7 +299,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (Helpers.ElyOrGreater(host))
             {
-                return host.AppliedUpdates().Any(u => u.uuid == uuid);
+                return host.AppliedUpdates().Any(u => u != null && string.Equals(u.uuid, uuid, StringComparison.InvariantCultureIgnoreCase));
             }
             else
             {

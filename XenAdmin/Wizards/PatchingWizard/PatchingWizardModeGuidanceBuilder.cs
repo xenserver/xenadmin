@@ -47,12 +47,19 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public static string ModeRetailPatch(List<Host> servers, Pool_update update, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
         {
+            var guidances = GetAfterApplyGuidancesFromUpdate(update);
+
+            return Build(servers.Where(h => update != null && !update.AppliedOn(h)).ToList(), update != null ? guidances : new List<after_apply_guidance>(), LivePatchCodesByHost);
+        }
+
+        private static List<after_apply_guidance> GetAfterApplyGuidancesFromUpdate(Pool_update update)
+        {
             //Pool_update guidances are defined as type update_after_apply_guidance and not as after_apply_guidance
             //therefore converting them in place as there is no further usages
             var guidances = new List<after_apply_guidance>();
             var tempGuidance = after_apply_guidance.unknown;
 
-            if (update.after_apply_guidance != null)
+            if (update != null && update.after_apply_guidance != null)
             {
                 foreach (var guidance in update.after_apply_guidance)
                 {
@@ -75,8 +82,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     guidances.Add(tempGuidance);
                 }
             }
-
-            return Build(servers.Where(h => update != null && !update.AppliedOn(h)).ToList(), update != null ? guidances : new List<after_apply_guidance>(), LivePatchCodesByHost);
+            return guidances;
         }
 
         public static string ModeSuppPack(List<Host> servers)
