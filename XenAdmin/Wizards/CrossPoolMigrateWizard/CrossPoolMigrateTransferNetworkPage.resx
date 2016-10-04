@@ -145,7 +145,7 @@
     <value>0, 0, 10, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 46</value>
+    <value>88, 27</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -172,10 +172,10 @@
     <value>False</value>
   </data>
   <data name="networkComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 3</value>
+    <value>101, 3</value>
   </data>
   <data name="networkComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 39</value>
+    <value>432, 21</value>
   </data>
   <data name="networkComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -196,13 +196,13 @@
     <value>Top</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 36</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1529, 46</value>
+    <value>608, 27</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -238,7 +238,7 @@
     <value>0, 0, 0, 20</value>
   </data>
   <data name="blurbText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1529, 52</value>
+    <value>608, 33</value>
   </data>
   <data name="blurbText.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -268,7 +268,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1535, 830</value>
+    <value>614, 332</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -292,13 +292,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>240, 240</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1535, 830</value>
+    <value>614, 332</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>CrossPoolMigrateTransferNetworkPage</value>

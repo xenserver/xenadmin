@@ -35,29 +35,35 @@ namespace XenAdmin.Actions
 {
     public class ChangeVCPUSettingsAction : PureAsyncAction
     {
-        private long m_VCPUs;
+        private long m_VCPUs_max;
+        private long m_VCPUs_at_startup;
         private VM m_VM;
-        public ChangeVCPUSettingsAction(VM vm, long VCPUs)
+        public ChangeVCPUSettingsAction(VM vm, long VCPUs_max, long VCPUs_at_startup)
             : base(vm.Connection, "", true)
         {
             m_VM = vm;
-            m_VCPUs=VCPUs;
-
+            m_VCPUs_max = VCPUs_max;
+            m_VCPUs_at_startup = VCPUs_at_startup;
         }
 
         protected override void Run()
         {
-            if (m_VM.VCPUs_at_startup > m_VCPUs)
+            if (m_VM.power_state == vm_power_state.Running) // if the VM is running, we can only change the vCPUs number, not the max.
             {
-                XenAPI.VM.set_VCPUs_at_startup(this.Session, m_VM.opaque_ref, m_VCPUs);
-                XenAPI.VM.set_VCPUs_max(this.Session, m_VM.opaque_ref, m_VCPUs);
-            }
-            else
-            {
-                XenAPI.VM.set_VCPUs_max(this.Session, m_VM.opaque_ref, m_VCPUs);
-                XenAPI.VM.set_VCPUs_at_startup(this.Session, m_VM.opaque_ref, m_VCPUs);
+                VM.set_VCPUs_number_live(Session, m_VM.opaque_ref, m_VCPUs_at_startup);
+                return;
             }
 
+            if (m_VM.VCPUs_at_startup > m_VCPUs_at_startup) // reducing VCPUs_at_startup: we need to change this value first, and then the VCPUs_max
+            {
+                VM.set_VCPUs_at_startup(Session, m_VM.opaque_ref, m_VCPUs_at_startup);
+                VM.set_VCPUs_max(Session, m_VM.opaque_ref, m_VCPUs_max);
+            }
+            else // increasing VCPUs_at_startup: we need to change the VCPUs_max first
+            {
+                VM.set_VCPUs_max(Session, m_VM.opaque_ref, m_VCPUs_max);
+                VM.set_VCPUs_at_startup(Session, m_VM.opaque_ref, m_VCPUs_at_startup);
+            }
         }
     }
 }

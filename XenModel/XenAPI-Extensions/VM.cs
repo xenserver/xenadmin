@@ -1959,7 +1959,11 @@ namespace XenAPI
         /// </summary>
         /// <remarks>
         /// To get an acceptable result, this getter is trying to detect some specific cases before falling back to the viridian flag 
-        /// that may not be correct at all times. (Linux distro can be detected if the guest agent is running on a Linux VM.)</remarks>
+        /// that may not be correct at all times. (Linux distro can be detected if the guest agent is running on a Linux VM.)
+        /// 
+        /// Note that this test is better once the VM has already booted once: before then, we can't tell with complete certainty what
+        /// OS is inside the VM. In particular, this also catches the "Other Install Media" template, and unbooted VMs made from it.
+        /// </remarks>
         public bool IsWindows
         {
             get
@@ -2067,6 +2071,14 @@ namespace XenAPI
             get
             {
                 return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
+			}
+        }
+
+        public bool SupportsVcpuHotplug
+        {
+            get
+            {
+                return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
             }
         }
     }

@@ -31,15 +31,31 @@ namespace XenAdmin.TabPages
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VMStoragePage));
             this.AddButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
             this.AttachButton = new System.Windows.Forms.Button();
-            this.RightButtonSeparator = new System.Windows.Forms.Panel();
-            this.LeftButtonSeparator = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridViewStorage = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.DeactivateButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.DeactivateButton = new System.Windows.Forms.Button();
+            this.MoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.MoveButton = new System.Windows.Forms.Button();
+            this.DeleteButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.DetachButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.DetachButton = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemAttach = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDeactivate = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemMove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDetach = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemProperties = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewStorage = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnDevicePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,16 +66,9 @@ namespace XenAdmin.TabPages
             this.ColumnPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDevicePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.DeactivateButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DeactivateButton = new System.Windows.Forms.Button();
-            this.MoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.MoveButton = new System.Windows.Forms.Button();
-            this.DeleteButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DeleteDriveButton = new System.Windows.Forms.Button();
-            this.DetachButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DetachDriveButton = new System.Windows.Forms.Button();
             this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
+            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.TitleLabel = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,16 +79,14 @@ namespace XenAdmin.TabPages
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
-            this.TitleLabel = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.DeactivateButtonContainer.SuspendLayout();
             this.MoveButtonContainer.SuspendLayout();
             this.DeleteButtonContainer.SuspendLayout();
             this.DetachButtonContainer.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).BeginInit();
             this.gradientPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,38 +111,144 @@ namespace XenAdmin.TabPages
             this.AttachButton.UseVisualStyleBackColor = true;
             this.AttachButton.Click += new System.EventHandler(this.AttachButton_Click);
             // 
-            // RightButtonSeparator
+            // flowLayoutPanel1
             // 
-            this.RightButtonSeparator.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            resources.ApplyResources(this.RightButtonSeparator, "RightButtonSeparator");
-            this.RightButtonSeparator.Name = "RightButtonSeparator";
+            this.flowLayoutPanel1.Controls.Add(this.AddButton);
+            this.flowLayoutPanel1.Controls.Add(this.AttachButton);
+            this.flowLayoutPanel1.Controls.Add(this.DeactivateButtonContainer);
+            this.flowLayoutPanel1.Controls.Add(this.MoveButtonContainer);
+            this.flowLayoutPanel1.Controls.Add(this.EditButton);
+            this.flowLayoutPanel1.Controls.Add(this.DeleteButtonContainer);
+            this.flowLayoutPanel1.Controls.Add(this.DetachButtonContainer);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
-            // LeftButtonSeparator
+            // DeactivateButtonContainer
             // 
-            this.LeftButtonSeparator.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            resources.ApplyResources(this.LeftButtonSeparator, "LeftButtonSeparator");
-            this.LeftButtonSeparator.Name = "LeftButtonSeparator";
+            this.DeactivateButtonContainer.Controls.Add(this.DeactivateButton);
+            resources.ApplyResources(this.DeactivateButtonContainer, "DeactivateButtonContainer");
+            this.DeactivateButtonContainer.Name = "DeactivateButtonContainer";
             // 
-            // panel1
+            // DeactivateButton
             // 
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.multipleDvdIsoList1);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            resources.ApplyResources(this.DeactivateButton, "DeactivateButton");
+            this.DeactivateButton.Name = "DeactivateButton";
+            this.DeactivateButton.UseVisualStyleBackColor = true;
+            this.DeactivateButton.Click += new System.EventHandler(this.DeactivateButton_Click);
             // 
-            // panel2
+            // MoveButtonContainer
             // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.dataGridViewStorage);
-            this.panel2.Controls.Add(this.flowLayoutPanel1);
-            this.panel2.MaximumSize = new System.Drawing.Size(900, 400);
-            this.panel2.Name = "panel2";
+            this.MoveButtonContainer.Controls.Add(this.MoveButton);
+            resources.ApplyResources(this.MoveButtonContainer, "MoveButtonContainer");
+            this.MoveButtonContainer.Name = "MoveButtonContainer";
+            // 
+            // MoveButton
+            // 
+            resources.ApplyResources(this.MoveButton, "MoveButton");
+            this.MoveButton.Name = "MoveButton";
+            this.MoveButton.UseVisualStyleBackColor = true;
+            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
+            // 
+            // DeleteButtonContainer
+            // 
+            this.DeleteButtonContainer.Controls.Add(this.DeleteButton);
+            resources.ApplyResources(this.DeleteButtonContainer, "DeleteButtonContainer");
+            this.DeleteButtonContainer.Name = "DeleteButtonContainer";
+            // 
+            // DeleteButton
+            // 
+            resources.ApplyResources(this.DeleteButton, "DeleteButton");
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteDriveButton_Click);
+            // 
+            // DetachButtonContainer
+            // 
+            this.DetachButtonContainer.Controls.Add(this.DetachButton);
+            resources.ApplyResources(this.DetachButtonContainer, "DetachButtonContainer");
+            this.DetachButtonContainer.Name = "DetachButtonContainer";
+            // 
+            // DetachButton
+            // 
+            resources.ApplyResources(this.DetachButton, "DetachButton");
+            this.DetachButton.Name = "DetachButton";
+            this.DetachButton.UseVisualStyleBackColor = true;
+            this.DetachButton.Click += new System.EventHandler(this.DetachButton_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemAdd,
+            this.toolStripMenuItemAttach,
+            this.toolStripMenuItemDeactivate,
+            this.toolStripMenuItemMove,
+            this.toolStripMenuItemDelete,
+            this.toolStripMenuItemDetach,
+            this.toolStripSeparator1,
+            this.toolStripMenuItemProperties});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // toolStripMenuItemAdd
+            // 
+            this.toolStripMenuItemAdd.Name = "toolStripMenuItemAdd";
+            resources.ApplyResources(this.toolStripMenuItemAdd, "toolStripMenuItemAdd");
+            this.toolStripMenuItemAdd.Click += new System.EventHandler(this.toolStripMenuItemAdd_Click);
+            // 
+            // toolStripMenuItemAttach
+            // 
+            this.toolStripMenuItemAttach.Name = "toolStripMenuItemAttach";
+            resources.ApplyResources(this.toolStripMenuItemAttach, "toolStripMenuItemAttach");
+            this.toolStripMenuItemAttach.Click += new System.EventHandler(this.toolStripMenuItemAttach_Click);
+            // 
+            // toolStripMenuItemDeactivate
+            // 
+            this.toolStripMenuItemDeactivate.Name = "toolStripMenuItemDeactivate";
+            resources.ApplyResources(this.toolStripMenuItemDeactivate, "toolStripMenuItemDeactivate");
+            this.toolStripMenuItemDeactivate.Click += new System.EventHandler(this.toolStripMenuItemDeactivate_Click);
+            // 
+            // toolStripMenuItemMove
+            // 
+            this.toolStripMenuItemMove.Name = "toolStripMenuItemMove";
+            resources.ApplyResources(this.toolStripMenuItemMove, "toolStripMenuItemMove");
+            this.toolStripMenuItemMove.Click += new System.EventHandler(this.toolStripMenuItemMove_Click);
+            // 
+            // toolStripMenuItemDelete
+            // 
+            this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
+            resources.ApplyResources(this.toolStripMenuItemDelete, "toolStripMenuItemDelete");
+            this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
+            // 
+            // toolStripMenuItemDetach
+            // 
+            this.toolStripMenuItemDetach.Name = "toolStripMenuItemDetach";
+            resources.ApplyResources(this.toolStripMenuItemDetach, "toolStripMenuItemDetach");
+            this.toolStripMenuItemDetach.Click += new System.EventHandler(this.toolStripMenuItemDetach_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // toolStripMenuItemProperties
+            // 
+            this.toolStripMenuItemProperties.Image = global::XenAdmin.Properties.Resources.edit_16;
+            resources.ApplyResources(this.toolStripMenuItemProperties, "toolStripMenuItemProperties");
+            this.toolStripMenuItemProperties.Name = "toolStripMenuItemProperties";
+            this.toolStripMenuItemProperties.Click += new System.EventHandler(this.toolStripMenuItemProperties_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewStorage, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.multipleDvdIsoList1, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // dataGridViewStorage
             // 
-            this.dataGridViewStorage.AllowUserToAddRows = false;
-            this.dataGridViewStorage.AllowUserToDeleteRows = false;
-            this.dataGridViewStorage.AllowUserToResizeRows = false;
             this.dataGridViewStorage.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewStorage.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -151,13 +264,14 @@ namespace XenAdmin.TabPages
             this.ColumnActive,
             this.ColumnDevicePath});
             resources.ApplyResources(this.dataGridViewStorage, "dataGridViewStorage");
+            this.dataGridViewStorage.MultiSelect = true;
             this.dataGridViewStorage.Name = "dataGridViewStorage";
             this.dataGridViewStorage.ReadOnly = true;
-            this.dataGridViewStorage.RowHeadersVisible = false;
-            this.dataGridViewStorage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStorage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TheHeaderListBox_DataGridView_MouseUp);
-            this.dataGridViewStorage.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TheHeaderListBox_CellMouseDoubleClick);
-            this.dataGridViewStorage.SelectionChanged += new System.EventHandler(this.TheHeaderListBox_SelectedIndexChanged);
+            this.dataGridViewStorage.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewStorage_CellMouseDoubleClick);
+            this.dataGridViewStorage.SelectionChanged += new System.EventHandler(this.dataGridViewStorage_SelectedIndexChanged);
+            this.dataGridViewStorage.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewStorage_SortCompare);
+            this.dataGridViewStorage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewStorage_KeyUp);
+            this.dataGridViewStorage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewStorage_MouseUp);
             // 
             // ColumnDevicePosition
             // 
@@ -229,79 +343,28 @@ namespace XenAdmin.TabPages
             this.ColumnDevicePath.Name = "ColumnDevicePath";
             this.ColumnDevicePath.ReadOnly = true;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.AddButton);
-            this.flowLayoutPanel1.Controls.Add(this.AttachButton);
-            this.flowLayoutPanel1.Controls.Add(this.RightButtonSeparator);
-            this.flowLayoutPanel1.Controls.Add(this.DeactivateButtonContainer);
-            this.flowLayoutPanel1.Controls.Add(this.MoveButtonContainer);
-            this.flowLayoutPanel1.Controls.Add(this.EditButton);
-            this.flowLayoutPanel1.Controls.Add(this.LeftButtonSeparator);
-            this.flowLayoutPanel1.Controls.Add(this.DeleteButtonContainer);
-            this.flowLayoutPanel1.Controls.Add(this.DetachButtonContainer);
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.MaximumSize = new System.Drawing.Size(900, 35);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
-            // DeactivateButtonContainer
-            // 
-            this.DeactivateButtonContainer.Controls.Add(this.DeactivateButton);
-            resources.ApplyResources(this.DeactivateButtonContainer, "DeactivateButtonContainer");
-            this.DeactivateButtonContainer.Name = "DeactivateButtonContainer";
-            // 
-            // DeactivateButton
-            // 
-            resources.ApplyResources(this.DeactivateButton, "DeactivateButton");
-            this.DeactivateButton.Name = "DeactivateButton";
-            this.DeactivateButton.UseVisualStyleBackColor = true;
-            this.DeactivateButton.Click += new System.EventHandler(this.DeactivateButton_Click);
-            // 
-            // MoveButtonContainer
-            // 
-            this.MoveButtonContainer.Controls.Add(this.MoveButton);
-            resources.ApplyResources(this.MoveButtonContainer, "MoveButtonContainer");
-            this.MoveButtonContainer.Name = "MoveButtonContainer";
-            // 
-            // MoveButton
-            // 
-            resources.ApplyResources(this.MoveButton, "MoveButton");
-            this.MoveButton.Name = "MoveButton";
-            this.MoveButton.UseVisualStyleBackColor = true;
-            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
-            // 
-            // DeleteButtonContainer
-            // 
-            this.DeleteButtonContainer.Controls.Add(this.DeleteDriveButton);
-            resources.ApplyResources(this.DeleteButtonContainer, "DeleteButtonContainer");
-            this.DeleteButtonContainer.Name = "DeleteButtonContainer";
-            // 
-            // DeleteDriveButton
-            // 
-            resources.ApplyResources(this.DeleteDriveButton, "DeleteDriveButton");
-            this.DeleteDriveButton.Name = "DeleteDriveButton";
-            this.DeleteDriveButton.UseVisualStyleBackColor = true;
-            this.DeleteDriveButton.Click += new System.EventHandler(this.DeleteDriveButton_Click);
-            // 
-            // DetachButtonContainer
-            // 
-            this.DetachButtonContainer.Controls.Add(this.DetachDriveButton);
-            resources.ApplyResources(this.DetachButtonContainer, "DetachButtonContainer");
-            this.DetachButtonContainer.Name = "DetachButtonContainer";
-            // 
-            // DetachDriveButton
-            // 
-            resources.ApplyResources(this.DetachDriveButton, "DetachDriveButton");
-            this.DetachDriveButton.Name = "DetachDriveButton";
-            this.DetachDriveButton.UseVisualStyleBackColor = true;
-            this.DetachDriveButton.Click += new System.EventHandler(this.DetachButton_Click);
-            // 
             // multipleDvdIsoList1
             // 
             resources.ApplyResources(this.multipleDvdIsoList1, "multipleDvdIsoList1");
-            this.multipleDvdIsoList1.MaximumSize = new System.Drawing.Size(900, 36);
+            this.multipleDvdIsoList1.LabelNewCdForeColor = System.Drawing.SystemColors.HotTrack;
+            this.multipleDvdIsoList1.LabelSingleDvdForeColor = System.Drawing.SystemColors.ControlText;
+            this.multipleDvdIsoList1.LinkLabelLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.multipleDvdIsoList1.Name = "multipleDvdIsoList1";
             this.multipleDvdIsoList1.VM = null;
+            // 
+            // gradientPanel1
+            // 
+            this.gradientPanel1.Controls.Add(this.TitleLabel);
+            resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
+            this.gradientPanel1.Name = "gradientPanel1";
+            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
+            // 
+            // TitleLabel
+            // 
+            resources.ApplyResources(this.TitleLabel, "TitleLabel");
+            this.TitleLabel.AutoEllipsis = true;
+            this.TitleLabel.ForeColor = System.Drawing.Color.White;
+            this.TitleLabel.Name = "TitleLabel";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -373,37 +436,23 @@ namespace XenAdmin.TabPages
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
-            // gradientPanel1
-            // 
-            this.gradientPanel1.Controls.Add(this.TitleLabel);
-            resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
-            this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
-            // 
-            // TitleLabel
-            // 
-            resources.ApplyResources(this.TitleLabel, "TitleLabel");
-            this.TitleLabel.AutoEllipsis = true;
-            this.TitleLabel.ForeColor = System.Drawing.Color.White;
-            this.TitleLabel.Name = "TitleLabel";
-            // 
             // VMStoragePage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gradientPanel1);
             this.DoubleBuffered = true;
             this.Name = "VMStoragePage";
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.DeactivateButtonContainer.ResumeLayout(false);
             this.MoveButtonContainer.ResumeLayout(false);
             this.DeleteButtonContainer.ResumeLayout(false);
             this.DetachButtonContainer.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).EndInit();
             this.gradientPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -414,21 +463,17 @@ namespace XenAdmin.TabPages
         public System.Windows.Forms.Button AttachButton;
         public System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button EditButton;
-        public System.Windows.Forms.Button DetachDriveButton;
-        public System.Windows.Forms.Button DeleteDriveButton;
+        public System.Windows.Forms.Button DetachButton;
+        public System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Label TitleLabel;
         private XenAdmin.Controls.ToolTipContainer DetachButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeleteButtonContainer;
-        private System.Windows.Forms.Panel RightButtonSeparator;
-        private System.Windows.Forms.Panel LeftButtonSeparator;
         private XenAdmin.Controls.ToolTipContainer DeactivateButtonContainer;
         private XenAdmin.Controls.GradientPanel.GradientPanel gradientPanel1;
         public System.Windows.Forms.Button DeactivateButton;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dataGridViewStorage;
+        private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewStorage;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -438,18 +483,28 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDevicePosition;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDesc;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRVolume;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnReadOnly;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPriority;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnActive;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDevicePath;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDevicePosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRVolume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnReadOnly;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPriority;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDevicePath;
         private XenAdmin.Controls.ToolTipContainer MoveButtonContainer;
         private System.Windows.Forms.Button MoveButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdd;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAttach;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeactivate;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMove;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemProperties;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDetach;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

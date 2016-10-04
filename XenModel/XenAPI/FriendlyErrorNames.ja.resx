@@ -1322,9 +1322,6 @@
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>空の光学式ドライブを VM に接続することはできません。</value>
   </data>
-  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
-    <value>LVHD シン プロビジョニングを有効にするために必要な空き領域がありません。</value>
-  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI が使用できません。</value>
   </data>
@@ -1685,6 +1682,9 @@
   <data name="VIF_NOT_IN_MAP" xml:space="preserve">
     <value>この VIF は、宛先ネットワークにマップされていません。</value>
   </data>
+  <data name="VLAN_IN_USE" xml:space="preserve">
+    <value>VLAN は既に使用されているため、操作を実行できません。ネットワーク構成を確認してください。</value>
+  </data>
   <data name="VLAN_TAG_INVALID" xml:space="preserve">
     <value>VLAN を作成しようとしましたが、指定したタグ ({0}) が無効です。0 ～ 4094 で指定してください。</value>
   </data>
@@ -1759,6 +1759,9 @@
   </data>
   <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
     <value>VM で使用中の CPU 機能の一部がホストにありません</value>
+  </data>
+  <data name="VM_IS_IMMOBILE" xml:space="preserve">
+    <value>この仮想マシンは、モバイルで使用できないように構成されています。</value>
   </data>
   <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
     <value>この VM は VM アプライアンスの一部なので自動復元できません。</value>

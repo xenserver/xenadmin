@@ -132,6 +132,9 @@
   <data name="AlertIntervalLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 15, 3</value>
   </data>
+  <data name="AlertIntervalLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 38</value>
+  </data>
   <data name="AlertIntervalLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 17</value>
   </data>
@@ -151,10 +154,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AlertIntervalLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;AlertIntervalLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="AlertIntervalMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -172,7 +175,7 @@
     <value>43, 13</value>
   </data>
   <data name="AlertIntervalMinutesLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="AlertIntervalMinutesLabel.Text" xml:space="preserve">
     <value>分</value>
@@ -184,7 +187,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AlertIntervalMinutesLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;AlertIntervalMinutesLabel.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -198,6 +201,48 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="labelRubric.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelRubric.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="labelRubric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelRubric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="labelRubric.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="labelRubric.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 38</value>
+  </data>
+  <data name="labelRubric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 422</value>
+  </data>
+  <data name="labelRubric.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelRubric.Text" xml:space="preserve">
+    <value>[XenServer] では、リソース使用量が特定のしきい値に達したときにメッセージが表示されるように設定できます。これらのメッセージはシステム アラートとして生成され、ほかのシステム アラートと同様にメール サーバーに送信できます。</value>
+  </data>
+  <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
+    <value>labelRubric</value>
+  </data>
+  <data name="&gt;&gt;labelRubric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRubric.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="PhysicalUtilisationGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="physicalUtilisationMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -206,6 +251,9 @@
   </data>
   <data name="physicalUtilisationMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 50</value>
+  </data>
+  <data name="physicalUtilisationMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="physicalUtilisationMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -261,6 +309,9 @@
   <data name="physicalUtilisationPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 24</value>
   </data>
+  <data name="physicalUtilisationPercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="physicalUtilisationPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
   </data>
@@ -284,6 +335,9 @@
   </data>
   <data name="nudPhysicalUtilisation.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 22</value>
+  </data>
+  <data name="nudPhysicalUtilisation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudPhysicalUtilisation.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -311,6 +365,9 @@
   </data>
   <data name="physicalUtilisationAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
+  </data>
+  <data name="physicalUtilisationAlertCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="physicalUtilisationAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
@@ -345,6 +402,9 @@
   <data name="physicalUtilisationDurationLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 50</value>
   </data>
+  <data name="physicalUtilisationDurationLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="physicalUtilisationDurationLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
@@ -378,6 +438,9 @@
   <data name="physicalUtilisationLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 24</value>
   </data>
+  <data name="physicalUtilisationLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="physicalUtilisationLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 13</value>
   </data>
@@ -405,6 +468,9 @@
   <data name="PhysicalUtilisationGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 507</value>
   </data>
+  <data name="PhysicalUtilisationGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="PhysicalUtilisationGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -412,7 +478,7 @@
     <value>445, 78</value>
   </data>
   <data name="PhysicalUtilisationGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="PhysicalUtilisationGroupBox.Text" xml:space="preserve">
     <value>                              </value>
@@ -427,10 +493,16 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;PhysicalUtilisationGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="Dom0MemoryUsageGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="nudDom0MemUsage.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 22</value>
+  </data>
+  <data name="nudDom0MemUsage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudDom0MemUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -458,6 +530,9 @@
   </data>
   <data name="Dom0MemoryDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 50</value>
+  </data>
+  <data name="Dom0MemoryDurationThresholdLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="Dom0MemoryDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 17</value>
@@ -513,6 +588,9 @@
   <data name="Dom0MemoryUsagePercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 24</value>
   </data>
+  <data name="Dom0MemoryUsagePercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="Dom0MemoryUsagePercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>14, 17</value>
   </data>
@@ -542,6 +620,9 @@
   </data>
   <data name="Dom0MemoryAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
+  </data>
+  <data name="Dom0MemoryAlertCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="Dom0MemoryAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
@@ -576,6 +657,9 @@
   <data name="dom0MemoryMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 50</value>
   </data>
+  <data name="dom0MemoryMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="dom0MemoryMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 17</value>
   </data>
@@ -609,6 +693,9 @@
   <data name="dom0MemoryPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 24</value>
   </data>
+  <data name="dom0MemoryPercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="dom0MemoryPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 17</value>
   </data>
@@ -636,6 +723,9 @@
   <data name="Dom0MemoryUsageGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 423</value>
   </data>
+  <data name="Dom0MemoryUsageGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="Dom0MemoryUsageGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -643,7 +733,7 @@
     <value>420, 78</value>
   </data>
   <data name="Dom0MemoryUsageGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="Dom0MemoryUsageGroupBox.Text" xml:space="preserve">
     <value>                              </value>
@@ -658,7 +748,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Dom0MemoryUsageGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="MemoryGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="memoryMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -668,6 +761,9 @@
   </data>
   <data name="memoryMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 58</value>
+  </data>
+  <data name="memoryMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="memoryMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -723,6 +819,9 @@
   <data name="memoryUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 32</value>
   </data>
+  <data name="memoryUnitsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="memoryUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
   </data>
@@ -746,6 +845,9 @@
   </data>
   <data name="nudMemoryUsage.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 30</value>
+  </data>
+  <data name="nudMemoryUsage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudMemoryUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -773,6 +875,9 @@
   </data>
   <data name="MemoryAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
+  </data>
+  <data name="MemoryAlertCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="MemoryAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
@@ -807,6 +912,9 @@
   <data name="memoryDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 56</value>
   </data>
+  <data name="memoryDurationThresholdLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="memoryDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
@@ -840,6 +948,9 @@
   <data name="memoryUsageLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 30</value>
   </data>
+  <data name="memoryUsageLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="memoryUsageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 13</value>
   </data>
@@ -867,6 +978,9 @@
   <data name="MemoryGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 283</value>
   </data>
+  <data name="MemoryGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="MemoryGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -874,7 +988,7 @@
     <value>420, 95</value>
   </data>
   <data name="MemoryGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="MemoryGroupBox.Text" xml:space="preserve">
     <value>                              </value>
@@ -889,7 +1003,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;MemoryGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="SrGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="srMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -899,6 +1016,9 @@
   </data>
   <data name="srMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 58</value>
+  </data>
+  <data name="srMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="srMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -954,6 +1074,9 @@
   <data name="srUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 32</value>
   </data>
+  <data name="srUnitsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="srUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
   </data>
@@ -977,6 +1100,9 @@
   </data>
   <data name="nudSrUsage.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 30</value>
+  </data>
+  <data name="nudSrUsage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudSrUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -1004,6 +1130,9 @@
   </data>
   <data name="SrAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
+  </data>
+  <data name="SrAlertCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="SrAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
@@ -1038,6 +1167,9 @@
   <data name="SrDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 56</value>
   </data>
+  <data name="SrDurationThresholdLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="SrDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
@@ -1071,6 +1203,9 @@
   <data name="SrUsageLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 30</value>
   </data>
+  <data name="SrUsageLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="SrUsageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 13</value>
   </data>
@@ -1098,6 +1233,9 @@
   <data name="SrGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 378</value>
   </data>
+  <data name="SrGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="SrGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -1105,7 +1243,7 @@
     <value>420, 95</value>
   </data>
   <data name="SrGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="SrGroupBox.Text" xml:space="preserve">
     <value>                              </value>
@@ -1120,7 +1258,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;SrGroupBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="DiskGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="DiskMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1130,6 +1271,9 @@
   </data>
   <data name="DiskMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 58</value>
+  </data>
+  <data name="DiskMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="DiskMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -1185,6 +1329,9 @@
   <data name="DiskPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 32</value>
   </data>
+  <data name="DiskPercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="DiskPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 17</value>
   </data>
@@ -1208,6 +1355,9 @@
   </data>
   <data name="nudDiskUsagePercent.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 30</value>
+  </data>
+  <data name="nudDiskUsagePercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudDiskUsagePercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
@@ -1235,6 +1385,9 @@
   </data>
   <data name="DiskAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
+  </data>
+  <data name="DiskAlertCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="DiskAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
@@ -1269,6 +1422,9 @@
   <data name="DiskDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 56</value>
   </data>
+  <data name="DiskDurationThresholdLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="DiskDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
   </data>
@@ -1302,6 +1458,9 @@
   <data name="DiskUsagePercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 30</value>
   </data>
+  <data name="DiskUsagePercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="DiskUsagePercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 17</value>
   </data>
@@ -1329,6 +1488,9 @@
   <data name="DiskGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 160</value>
   </data>
+  <data name="DiskGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="DiskGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -1336,7 +1498,7 @@
     <value>420, 85</value>
   </data>
   <data name="DiskGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="DiskGroupBox.Text" xml:space="preserve">
     <value>                              </value>
@@ -1351,7 +1513,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;DiskGroupBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="NetGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="NetPercentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1361,6 +1526,9 @@
   </data>
   <data name="NetPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 30</value>
+  </data>
+  <data name="NetPercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="NetPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 17</value>
@@ -1385,6 +1553,9 @@
   </data>
   <data name="nudNetUsagePercent.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 28</value>
+  </data>
+  <data name="nudNetUsagePercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudNetUsagePercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
@@ -1412,6 +1583,9 @@
   </data>
   <data name="NetMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 56</value>
+  </data>
+  <data name="NetMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="NetMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 17</value>
@@ -1467,6 +1641,9 @@
   <data name="NetAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
   </data>
+  <data name="NetAlertCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="NetAlertCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
   </data>
@@ -1499,6 +1676,9 @@
   </data>
   <data name="NetDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 56</value>
+  </data>
+  <data name="NetDurationThresholdLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="NetDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
@@ -1533,6 +1713,9 @@
   <data name="NetUsagePercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 30</value>
   </data>
+  <data name="NetUsagePercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="NetUsagePercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 17</value>
   </data>
@@ -1560,6 +1743,9 @@
   <data name="NetGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 95</value>
   </data>
+  <data name="NetGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="NetGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -1567,7 +1753,7 @@
     <value>420, 95</value>
   </data>
   <data name="NetGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;NetGroupBox.Name" xml:space="preserve">
     <value>NetGroupBox</value>
@@ -1579,7 +1765,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;NetGroupBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="CpuGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cpuPercentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1589,6 +1778,9 @@
   </data>
   <data name="cpuPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 24</value>
+  </data>
+  <data name="cpuPercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="cpuPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>11, 17</value>
@@ -1613,6 +1805,9 @@
   </data>
   <data name="nudCPUUsagePercent.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 22</value>
+  </data>
+  <data name="nudCPUUsagePercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="nudCPUUsagePercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
@@ -1640,6 +1835,9 @@
   </data>
   <data name="cpuMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 55</value>
+  </data>
+  <data name="cpuMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
   </data>
   <data name="cpuMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 17</value>
@@ -1731,6 +1929,9 @@
   <data name="CPUUsagePercentLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 24</value>
   </data>
+  <data name="CPUUsagePercentLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="CPUUsagePercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 17</value>
   </data>
@@ -1764,6 +1965,9 @@
   <data name="CPUDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 55</value>
   </data>
+  <data name="CPUDurationThresholdLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 0, 8, 0</value>
+  </data>
   <data name="CPUDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
   </data>
@@ -1791,6 +1995,9 @@
   <data name="CpuGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="CpuGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
   <data name="CpuGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
@@ -1798,7 +2005,7 @@
     <value>420, 95</value>
   </data>
   <data name="CpuGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;CpuGroupBox.Name" xml:space="preserve">
     <value>CpuGroupBox</value>
@@ -1810,7 +2017,58 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;CpuGroupBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
+  </data>
+  <data name="panel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nudAlertInterval.Location" type="System.Drawing.Point, System.Drawing">
+    <value>356, 5</value>
+  </data>
+  <data name="nudAlertInterval.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="nudAlertInterval.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 38</value>
+  </data>
+  <data name="nudAlertInterval.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;nudAlertInterval.Name" xml:space="preserve">
+    <value>nudAlertInterval</value>
+  </data>
+  <data name="&gt;&gt;nudAlertInterval.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudAlertInterval.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;nudAlertInterval.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 441</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 86</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 86</value>
@@ -1819,7 +2077,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 238</value>
@@ -1837,64 +2095,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="PhysicalUtilisationGroupBox" Row="6" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="Dom0MemoryUsageGroupBox" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="MemoryGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="SrGroupBox" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="DiskGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="NetGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="CpuGroupBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 41</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>[XenServer] では、リソース使用量が特定のしきい値に達したときにメッセージが表示されるように設定できます。これらのメッセージはシステム アラートとして生成され、ほかのシステム アラートと同様にメール サーバーに送信できます。</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="nudAlertInterval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 62</value>
-  </data>
-  <data name="nudAlertInterval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="nudAlertInterval.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.Name" xml:space="preserve">
-    <value>nudAlertInterval</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.Type" xml:space="preserve">
-    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="PhysicalUtilisationGroupBox" Row="8" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="Dom0MemoryUsageGroupBox" Row="7" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="MemoryGroupBox" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="SrGroupBox" Row="6" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="DiskGroupBox" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="NetGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="CpuGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1907,6 +2111,9 @@
   </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 500</value>

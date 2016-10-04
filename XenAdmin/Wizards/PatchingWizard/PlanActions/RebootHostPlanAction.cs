@@ -52,14 +52,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            if (Helpers.ElyOrGreater(_host))
+            // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
+            if (Helpers.ElyOrGreater(_host) && AvoidRestartHosts != null && AvoidRestartHosts.Contains(_host.uuid))
             {
-                if (AvoidRestartHosts != null && AvoidRestartHosts.Contains(_host.uuid))
-                {
-                    log.Debug("Skipping scheduled restart (livepatching succeeded). RebootHostPlanAction is skipped.");
+                log.Debug("Skipping scheduled restart (livepatching succeeded). RebootHostPlanAction is skipped.");
 
-                    return;
-                }
+                return;
             }
 
             visible = true;

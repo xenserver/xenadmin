@@ -898,7 +898,7 @@ namespace XenAdmin.ConsoleView
                     int twoTimeBorderPadding = VNCGraphicsClient.BORDER_PADDING * 2;
 
                     return new Size(vncScreen.DesktopSize.Width + twoTimeBorderPadding,
-                                    vncScreen.DesktopSize.Height + buttonPanel.Height + bottomPanel.Height + twoTimeBorderPadding);
+                                    vncScreen.DesktopSize.Height + gradientPanel1.Height + tableLayoutPanel1.Height + twoTimeBorderPadding);
                 }
                 else
                 {
@@ -1399,7 +1399,7 @@ namespace XenAdmin.ConsoleView
 
         public void showHeaderBar(bool showHeaderBar, bool showLifecycleIcon)
         {
-            panel2.Visible = showHeaderBar;
+            gradientPanel1.Visible = showHeaderBar;
             pictureBox1.Visible = showLifecycleIcon;
         }
 

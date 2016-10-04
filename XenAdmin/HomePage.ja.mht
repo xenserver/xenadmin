@@ -67,9 +67,6 @@ opacity -->
 class=3D"cx-link"=20
   href=3D"xencenter://HelpContents/">XenCenter の使用について</A>					=
 	 </LI>
-  <LI title=3D"XenServerおよびWorkspace Cloudについて" =
-class=3D"cx-doc-icon"><A=20
-  class=3D"cx-link" href=3D"https://www.citrix.com/xenserver/clm">XenServer および Citrix Lifecycle Manager について</A>						 </LI>
   <LI title=3D"XenServer ユーザー ネットワーク" =
 class=3D"cx-doc-icon"><A class=3D"cx-link"=20
   href=3D"http://xenserver.org/">XenServer ユーザー ネットワーク</A>
