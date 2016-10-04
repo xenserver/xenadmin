@@ -798,6 +798,19 @@ namespace XenAPI
             return patches;
         }
 
+        public virtual List<Pool_update> AppliedUpdates()
+        {
+            var updates = new List<Pool_update>();
+
+            foreach (var hostUpdate in Connection.ResolveAll(this.updates))
+            {
+                if (hostUpdate != null)
+                    updates.Add(hostUpdate);
+            }
+
+            return updates;
+        }
+
         public string XAPI_version
         {
             get

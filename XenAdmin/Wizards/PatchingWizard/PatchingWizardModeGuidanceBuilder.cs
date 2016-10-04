@@ -45,6 +45,40 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Build(servers.Where(h => patch != null && patch.AppliedOn(h) == DateTime.MaxValue).ToList(), patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>(), LivePatchCodesByHost);
         }
 
+        public static string ModeRetailPatch(List<Host> servers, Pool_update update, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
+        {
+            //Pool_update guidances are defined as type update_after_apply_guidance and not as after_apply_guidance
+            //therefore converting them in place as there is no further usages
+            var guidances = new List<after_apply_guidance>();
+            var tempGuidance = after_apply_guidance.unknown;
+
+            if (update.after_apply_guidance != null)
+            {
+                foreach (var guidance in update.after_apply_guidance)
+                {
+                    switch (guidance)
+                    {
+                        case update_after_apply_guidance.restartHost:
+                            tempGuidance = after_apply_guidance.restartHost;
+                            break;
+                        case update_after_apply_guidance.restartHVM:
+                            tempGuidance = after_apply_guidance.restartHVM;
+                            break;
+                        case update_after_apply_guidance.restartPV:
+                            tempGuidance = after_apply_guidance.restartPV;
+                            break;
+                        case update_after_apply_guidance.restartXAPI:
+                            tempGuidance = after_apply_guidance.restartXAPI;
+                            break;
+                    }
+
+                    guidances.Add(tempGuidance);
+                }
+            }
+
+            return Build(servers.Where(h => update != null && !update.AppliedOn(h)).ToList(), update != null ? guidances : new List<after_apply_guidance>(), LivePatchCodesByHost);
+        }
+
         public static string ModeSuppPack(List<Host> servers)
         {
             List<after_apply_guidance> guidance = new List<after_apply_guidance> { after_apply_guidance.restartHost };

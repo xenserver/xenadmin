@@ -50,6 +50,13 @@ namespace XenAdmin.Actions
         private readonly long diskSize;
         private readonly List<Host> servers;
 
+        private Pool_update poolUpdate = null;
+        public Pool_update PoolUpdate
+        {
+            get { return poolUpdate; }
+        }
+
+
         /// <summary>
         /// This constructor is used to upload a single supplemental pack file
         /// </summary>
@@ -174,6 +181,27 @@ namespace XenAdmin.Actions
                 foreach (var server in servers)
                     VdiRefs.Add(server, vdiRef);
 
+            //introduce ISO for Ely and higher
+            if (Helpers.ElyOrGreater(Connection))
+            {
+                try
+                {
+                    var poolUpdateRef = Pool_update.introduce(Connection.Session, vdiRef);
+                    poolUpdate = Connection.WaitForCache(poolUpdateRef);
+                }
+                catch (Exception ex)
+                {
+                    log.ErrorFormat("Upload failed when introducing update from VDI {0} on {1}: {2}", vdi.opaque_ref, Connection, ex.Message);
+                    poolUpdate = null;
+
+                    throw;
+                }
+            }
+            else
+            {
+                poolUpdate = null;
+            }
+
             totalUploaded++;
             Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name);
             return result;
@@ -214,18 +242,40 @@ namespace XenAdmin.Actions
         private void SelectTargetSr()
         {
             SR defaultSr = Pool != null ? Pool.Connection.Resolve(Pool.default_SR) : null;
-
             if ((defaultSr != null && defaultSr.shared) && CanCreateVdi(defaultSr))
             {
                 srList.Add(defaultSr);
+                return;
             }
-            else // no default shared SR where we can upload the file -> find another shared SR
+            
+            // no default shared SR where we can upload the file -> find another shared SR
+            
+            var sharedSr = Connection.Cache.SRs.FirstOrDefault(sr => sr.shared && CanCreateVdi(sr));
+            if (sharedSr != null)
             {
-                var sharedSr = Connection.Cache.SRs.FirstOrDefault(sr => sr.shared && CanCreateVdi(sr));
-                if (sharedSr != null)
-                    srList.Add(sharedSr);
-                else // no shared SR where we can upload the file -> will have to upload on the local SRs
-                    SelectLocalSrs();
+                srList.Add(sharedSr);
+                return;
+            }
+
+            // no shared SR where we can upload the file -> will have to upload on the local SRs
+                
+            //For Ely or greater, the ISO has to be uploaded to exactly one SR, even if it's not a shared one
+            if (Helpers.ElyOrGreater(Connection))
+            {
+                if (defaultSr != null && CanCreateVdi(defaultSr))
+                {
+                    srList.Add(defaultSr);
+                }
+                else
+                {
+                    var firstSrCanCreateVdi = Connection.Cache.SRs.First(sr => CanCreateVdi(sr));
+                    if (firstSrCanCreateVdi != null)
+                        srList.Add(firstSrCanCreateVdi);
+                }
+            }
+            else //legacy case (supplemental packs)
+            {
+                SelectLocalSrs();
             }
         }
 

@@ -175,7 +175,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var fileName = fileNameTextBox.Text;
                     if (downloadUpdateRadioButton.Checked)
                     {
-                        SelectedUpdateType = UpdateType.NewRetail;
+                        if (fileName.EndsWith(UpdateExtension))
+                            SelectedUpdateType = UpdateType.NewRetail;
+                        else if (fileName.EndsWith(".iso"))
+                            SelectedUpdateType = UpdateType.ISO;
                     }
                     else
                     {

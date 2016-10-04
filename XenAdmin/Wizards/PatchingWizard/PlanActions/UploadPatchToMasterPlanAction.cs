@@ -62,41 +62,68 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var path = AllDownloadedPatches[patch];
 
             var poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
+            var poolUpdates = new List<Pool_update>(session.Connection.Cache.Pool_updates);
+
             var conn = session.Connection;
             var master = Helpers.GetMaster(conn);
 
             var existingMapping = mappings.Find(m => m.MasterHost != null && master != null &&
-                                                     m.MasterHost.uuid == master.uuid && m.Pool_patch != null && m.XenServerPatch.Equals(patch));
+                                                     m.MasterHost.uuid == master.uuid && (m.Pool_patch != null || m.Pool_update != null) && m.XenServerPatch.Equals(patch));
             
             if (existingMapping == null
-                || !poolPatches.Any(p => string.Equals(p.uuid, existingMapping.Pool_patch.uuid, StringComparison.OrdinalIgnoreCase)))
+                || !(existingMapping.Pool_patch != null && poolPatches.Any(p => string.Equals(p.uuid, existingMapping.Pool_patch.uuid, StringComparison.OrdinalIgnoreCase)))
+                && !(existingMapping.Pool_update != null && poolUpdates.Any(p => string.Equals(p.uuid, existingMapping.Pool_update.uuid, StringComparison.OrdinalIgnoreCase)))
+                )
             {
-                //free space check for upload:
                 try
                 {
-                    var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetMaster(conn), path, true);
-                    inProgressAction = checkSpaceForUpload;
-                    checkSpaceForUpload.RunExternal(session);
-
-                    var uploadPatchAction = new UploadPatchAction(session.Connection, path, true, false);
-                    inProgressAction = uploadPatchAction;
-                    uploadPatchAction.RunExternal(session);
-
-                    // this has to be run again to refresh poolPatches (to get the recently uploaded one as well)
-                    poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
-
-                    var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
-                    if (poolPatch == null)
+                    if (Helpers.ElyOrGreater(master))
                     {
-                        log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).", patch.Uuid, session.Connection);
+                        var uploadIsoAction = new UploadSupplementalPackAction(session.Connection, new List<Host>() { master }, path, true);
+                        inProgressAction = uploadIsoAction;
+                        uploadIsoAction.RunExternal(session);
 
-                        throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                        poolUpdates = new List<Pool_update>(session.Connection.Cache.Pool_updates);
+                        var poolupdate = poolUpdates.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
+                        if (poolupdate == null)
+                        {
+                            log.ErrorFormat("Upload finished successfully, but Pool_update object has not been found for update (uuid={0}) on host (uuid={1}).", patch.Uuid, session.Connection);
+
+                            throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                        }
+
+                        var newMapping = new PoolPatchMapping(patch, poolupdate, Helpers.GetMaster(session.Connection));
+
+                        if (!mappings.Contains(newMapping))
+                            mappings.Add(newMapping);
                     }
+                    else
+                    {
+                        var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetMaster(conn), path, true);
+                        inProgressAction = checkSpaceForUpload;
+                        checkSpaceForUpload.RunExternal(session);
 
-                    var newMapping = new PoolPatchMapping(patch, poolPatch, Helpers.GetMaster(session.Connection));
+                        var uploadPatchAction = new UploadPatchAction(session.Connection, path, true, false);
+                        inProgressAction = uploadPatchAction;
+                        uploadPatchAction.RunExternal(session);
 
-                    if (!mappings.Contains(newMapping))
-                        mappings.Add(newMapping);
+                        // this has to be run again to refresh poolPatches (to get the recently uploaded one as well)
+                        poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
+
+                        var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
+                        if (poolPatch == null)
+                        {
+                            log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).", patch.Uuid, session.Connection);
+
+                            throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                        }
+
+                        var newMapping = new PoolPatchMapping(patch, poolPatch, Helpers.GetMaster(session.Connection));
+
+                        if (!mappings.Contains(newMapping))
+                            mappings.Add(newMapping);
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -134,13 +161,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (Cancelling)
                 action.Cancel();
-
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                //UpdateActionProgress(action);
-                //flickerFreeListBox1.Refresh();
-                //OnPageUpdated();
-            });
         }
 
         private void downloadAndUnzipXenServerPatchAction_Completed(ActionBase sender)

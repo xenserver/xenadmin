@@ -872,6 +872,7 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.Designer.cs">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyPoolUpdatePlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyXenServerPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\IAvoidRestartCapable.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrechecksOnMultipleHostsAction.cs" />

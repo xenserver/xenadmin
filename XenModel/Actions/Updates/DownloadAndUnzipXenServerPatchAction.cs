@@ -177,10 +177,18 @@ namespace XenAdmin.Actions
             if (Cancelling)
                 throw new CancelledException();
 
-            log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
-            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
-            ExtractFile();
-            log.DebugFormat("Extracting XenServer patch '{0}' completed", updateName);
+            if (updateFileExtension.ToLowerInvariant() != "iso")
+            {
+                log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
+                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
+                ExtractFile();
+                log.DebugFormat("Extracting XenServer patch '{0}' completed", updateName);
+            }
+            else
+            {
+                log.DebugFormat("ISO file downloaded ('{0}'), skipping unzip. Setting PatchPath to '{1}'", updateName, outFileName);
+                PatchPath = outFileName;
+            }
 
             Description = Messages.COMPLETED;
             MarkCompleted();
