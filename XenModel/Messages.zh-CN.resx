@@ -259,13 +259,13 @@
     <value>正在销毁 {0}</value>
   </data>
   <data name="ACTION_DETACHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
-    <value>正在分离存储项...</value>
+    <value>Detaching storage items...</value>
   </data>
   <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>正在分离多个存储项</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Disable live patching</value>
+    <value>禁用实时修补</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在禁用 </value>
@@ -274,7 +274,7 @@
     <value>在 VM“{0}”上禁用容器管理</value>
   </data>
   <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Disabling live patching for '{0}'</value>
+    <value>对“{0}”禁用实时修补</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>已激活磁盘...</value>
@@ -373,7 +373,7 @@
     <value>DR 清理 ({0})</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Enable live patching</value>
+    <value>启用实时修补</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在启用</value>
@@ -382,7 +382,7 @@
     <value>在 VM“{0}”上启用容器管理</value>
   </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Enabling live patching for '{0}'</value>
+    <value>对“{0}”启用实时修补</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因块校验和不匹配而失败。请重新尝试导出。</value>
@@ -681,6 +681,9 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>正在从“{0}”执行 SR 扫描</value>
   </data>
+  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
+    <value>正在保存 VM 配置</value>
+  </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>删除 VM</value>
   </data>
@@ -919,7 +922,7 @@
     <value>正在更新“{0}”上的集成 GPU 直通</value>
   </data>
   <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
-    <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
+    <value>上载错误。此修补程序已上载，但在主机上找不到。</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
     <value>将服务器状态报告上载到 [Citrix] Insight Services</value>
@@ -2347,7 +2350,7 @@
     <value>无法移动快照磁盘</value>
   </data>
   <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>该虚拟磁盘必须先分离，然后才能移动。</value>
+    <value>You must detach this virtual disk before it can be moved.</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>无法解析 XML 节点“{0}”上的必需参数“{1}”</value>
@@ -3830,14 +3833,14 @@
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
     <value>[XenCenter] 检测到此 LUN 上已存在 SR。此 SR 当前未由“{0}”使用，是否要连接?</value>
   </data>
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
+    <value>&amp;Detach all</value>
+  </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>分离(&amp;D)</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>详细信息</value>
-  </data>
-  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
-    <value>全部分离(&amp;D)</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
     <value>设备</value>
@@ -4091,8 +4094,8 @@
   <data name="DONE" xml:space="preserve">
     <value>已完成。</value>
   </data>
-  <data name="DONT_ASSIGN_HOME_SERVER" xml:space="preserve">
-    <value>不分配主服务器</value>
+  <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
+    <value>Don't select a target server</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} 当前可用</value>
@@ -4717,10 +4720,10 @@
     <value>销毁存储项时出错</value>
   </data>
   <data name="ERROR_DETACHING_VDIS_MESSAGE" xml:space="preserve">
-    <value>无法分离以下虚拟磁盘:</value>
+    <value>The following virtual disks could not be detached:</value>
   </data>
   <data name="ERROR_DETACHING_VDIS_TITLE" xml:space="preserve">
-    <value>分离虚拟磁盘时出错</value>
+    <value>Error Detaching Virtual Disks</value>
   </data>
   <data name="ERROR_DIALOG_ADD_TO_POOL_TEXT" xml:space="preserve">
     <value>无法将以下服务器添加到池“{0}”中:</value>
@@ -5417,7 +5420,7 @@
     <value>输入 vApp 名称和可选说明。</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
-    <value>{0} on {1}</value>
+    <value>{1} 上的 {0}</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
     <value>需要重新启动服务器“{0}”，更新“{1}”才能生效</value>
@@ -6880,13 +6883,13 @@ XenApp/XenDesktop Platinum 功能已启用</value>
     <value>, </value>
   </data>
   <data name="LIVE_PATCHING" xml:space="preserve">
-    <value>Live Patching</value>
+    <value>实时修补</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
-    <value>Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them.</value>
+    <value>对服务器 {0} 执行实时修补功能失败。要应用此修补程序，请将这些服务器置于维护模式并重新启动。</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
-    <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
+    <value>对服务器“{0}”执行实时修补功能失败。要应用此修补程序，请将该服务器置于维护模式并重新启动。</value>
   </data>
   <data name="LOADING" xml:space="preserve">
     <value>正在加载“{0}”...</value>
@@ -7862,7 +7865,7 @@ SCSI ID: {2}
     <value>从不</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>You need to shutdown and then restart the VM before it can access the new disk.</value>
+    <value>需要先关闭并重新启动 VM 才能访问新磁盘。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>已创建磁盘</value>
@@ -8217,10 +8220,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择将提供 BIOS 字符串的服务器</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS" xml:space="preserve">
-    <value>虚拟CPU初始个数</value>
+    <value>Initial number of vCPUs</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
-    <value>虚拟CPU最大个数</value>
+    <value>Maximum number of vCPUs</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>分配给新 VM 的内存量超过池中任何服务器上的物理内存量。
@@ -8240,7 +8243,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>CPU 和内存</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
-    <value>指定虚拟CPU的个数，拓扑和分配到新虚机上的内存总的大小。</value>
+    <value>Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>分配处理器和内存资源</value>
@@ -8495,9 +8498,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEW_POLICY" xml:space="preserve">
     <value>新建策略(&amp;N)...</value>
   </data>
-  <data name="NEW_POOL" xml:space="preserve">
-    <value>新建池</value>
-  </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
     <value>您正在尝试将服务器“{0}”添加到主服务器配置为使用 AD 身份验证的池中。所有池成员必须使用同一种身份验证方法。
 
@@ -8710,7 +8710,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>此主机的磁盘空间不足，无法安装此更新</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
-    <value>There is not enough space to automatically update '{0}'.</value>
+    <value>空间不足，无法自动更新“{0}”。</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>可用空间: {0}</value>
@@ -8949,34 +8949,34 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>粘贴</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>Update process was not completed successfully.</value>
+    <value>更新过程未成功完成。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
-    <value>Following errors occurred while automatic upgrade was in progress:</value>
+    <value>自动升级过程中出现以下错误:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
-    <value>Following error occurred while automatic upgrade was in progress: </value>
+    <value>自动升级过程中出现以下错误: </value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
-    <value>Update was not completed successfully</value>
+    <value>更新未成功完成</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
-    <value>Upload and Install</value>
+    <value>上载并安装</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
-    <value>Automatically uploading and installing updates</value>
+    <value>自动上载并安装更新</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>清理...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
-    <value>Downloading update {0}...</value>
+    <value>正在下载更新 {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
-    <value>Skipping download: Already downloaded update {0}...</value>
+    <value>正在跳过更新: 已下载的更新 {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
-    <value>Waiting to download update {0}...</value>
+    <value>正在等待下载更新 {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>不需要操作</value>
@@ -9054,7 +9054,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>安装更新</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE" xml:space="preserve">
-    <value>Checking disk space requirements</value>
+    <value>检查空间要求</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FAILED" xml:space="preserve">
     <value>预检查失败。</value>
@@ -9063,7 +9063,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>执行更新预检查是为了确认更新 {0} 能够在服务器上应用。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
+    <value>已执行预检查，以验证自动更新是否能够继续。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>执行更新预检查以验证是否能够将所选更新应用到服务器。</value>
@@ -9093,10 +9093,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer] 更新和补充包(*.{0}、*.iso)|*.{0};*.iso</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automatic update is not supported on this [XenServer] version</value>
+    <value>自动更新功能在此 [XenServer] 版本上不受支持</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
-    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+    <value>自动更新功能在部分升级的 [XenServer] 池中不受支持</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>无法在此版本的 [XenServer] 上安装补充包</value>
@@ -9105,7 +9105,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>需要专享升级服务</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
-    <value>This server is not licensed for automatic updating</value>
+    <value>未授权此服务器执行自动更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
     <value>不能使用 [XenCenter] 应用更新。</value>
@@ -9117,10 +9117,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>更新不适用</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
-    <value>This server cannot be updated automatically</value>
+    <value>无法自动更新此服务器</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
-    <value>This server is already up-to-date</value>
+    <value>此服务器已最新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>选择服务器</value>
@@ -9129,15 +9129,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要更新的服务器</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
-Greyed out servers cannot be updated automatically.</value>
+    <value>选择要自动更新的一个或多个池或独立主机。
+无法自动更新显示为灰色的服务器。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>Select one or more servers from the list of available servers.
-Servers where the selected update cannot be applied appear disabled in this list.</value>
+    <value>从可用服务器列表中选择一个或多个服务器。
+无法应用所选更新的服务器在此列表中显示为已禁用。</value>
   </data>
   <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Automatic update has finished.</value>
+    <value>已完成自动更新。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] 现在正在下载您的更新并将其上载到在上一步骤中指定的服务器。
@@ -9958,7 +9958,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>已解析为 {0}</value>
   </data>
   <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
-    <value>Restore dismissed updates</value>
+    <value>还原消除的更新</value>
   </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>备份文件已加载到服务器“{0}”中。有关如何完成还原过程的说明，请参阅《[XenServer product] 管理员指南》。</value>
@@ -9967,7 +9967,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>从备份还原...</value>
   </data>
   <data name="RESTORING" xml:space="preserve">
-    <value>Restoring...</value>
+    <value>正在还原...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>正在还原服务器“{0}”</value>
@@ -10290,7 +10290,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>正在执行服务器请求</value>
   </data>
   <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
-    <value>Disk space check</value>
+    <value>磁盘空间检查</value>
   </data>
   <data name="SERVER_SIDE_CHECK_DESCRIPTION" xml:space="preserve">
     <value>服务器端修补程序检查</value>
@@ -10676,7 +10676,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>该存储库已损坏</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
-    <value>没有主服务器的 VM 不能位于本地存储上</value>
+    <value>VMs without a home server cannot have disks on local storage</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>磁盘大小({0})超过 SR 大小({1})</value>
@@ -11497,7 +11497,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>正在从 {1} 中删除更新安装文件 {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>Removing update files from {0}...</value>
+    <value>正在从 {0} 中删除更新文件...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>单击此处修复</value>
@@ -11894,7 +11894,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>磁盘连接的 VM 未处于停止状态。</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>仅当 VM 关闭时才能更改 vCPU</value>
+    <value>The VCPUs can only be changed when the VM is shut down.</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -12110,28 +12110,28 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>无法获取云配置参数。</value>
   </data>
   <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL" xml:space="preserve">
-    <value>当前虚拟CPU的个数(&amp;C):</value>
+    <value>Current number of v&amp;CPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY" xml:space="preserve">
-    <value>当前虚拟CPU的个数仅能虚机在运行或关机时改变。</value>
+    <value>The current number of vCPUs can only be changed when the VM is running or shut down. </value>
   </data>
   <data name="VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL" xml:space="preserve">
-    <value>虚拟CPU的初始个数(&amp;C):</value>
+    <value>Initial number of v&amp;CPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
-    <value>虚拟CPU最大个数(&amp;x):</value>
+    <value>Ma&amp;ximum number of vCPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
-    <value>虚拟CPU的最大个数和拓扑仅能在虚机关机时改变。</value>
+    <value>The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. </value>
   </data>
   <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
-    <value>指定虚拟CPU的个数，拓扑和分配它们的优先级。</value>
+    <value>Specify the number of vCPUs, their topology, and the priority to assign them over other vCPUs. </value>
   </data>
   <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
-    <value>如果设置的虚拟CPU初始个数小于其最大值，可以在虚机运行时给它增加新的虚拟CPU。</value>
+    <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
-    <value>虚拟CPU的个数(&amp;C):</value>
+    <value>Number of v&amp;CPUs:</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>容器管理</value>

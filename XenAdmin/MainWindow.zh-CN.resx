@@ -373,7 +373,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageStorage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="TabPagePhysicalStorage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -400,7 +400,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPagePhysicalStorage.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="TabPageSR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -430,7 +430,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSR.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="TabPageNetwork.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -460,7 +460,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageNetwork.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="TabPageNICs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -493,7 +493,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageNICs.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="TabPagePeformance.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -523,7 +523,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPagePeformance.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="TabPageHA.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -550,7 +550,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageHA.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="TabPageHAUpsell.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -577,7 +577,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageHAUpsell.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="snapshotPage.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -634,7 +634,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSnapshots.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="TabPageWLB.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -658,7 +658,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageWLB.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="TabPageWLBUpsell.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -682,7 +682,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageWLBUpsell.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="TabPageAD.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -757,7 +757,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageGPU.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="TabPageSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -787,7 +787,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -817,7 +817,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -847,7 +847,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>

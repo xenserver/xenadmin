@@ -145,7 +145,7 @@
     <value>1</value>
   </data>
   <data name="labelWithoutAutomatic.Text" xml:space="preserve">
-    <value>Select an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
+    <value>选择要从 [Citrix] 下载的更新，或者浏览您的计算机，查找更新或补充包文件。</value>
   </data>
   <data name="&gt;&gt;labelWithoutAutomatic.Name" xml:space="preserve">
     <value>labelWithoutAutomatic</value>
@@ -181,7 +181,7 @@
     <value>0</value>
   </data>
   <data name="labelWithAutomatic.Text" xml:space="preserve">
-    <value>Select Automatic mode or choose an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
+    <value>选择“自动”模式或选择要从 [Citrix] 下载的更新，或者浏览您的计算机，查找更新或补充包文件。</value>
   </data>
   <data name="&gt;&gt;labelWithAutomatic.Name" xml:space="preserve">
     <value>labelWithAutomatic</value>
@@ -214,7 +214,7 @@
     <value>2</value>
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
-    <value>&amp;Automatic</value>
+    <value>自动(&amp;A)</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
@@ -247,7 +247,7 @@
     <value>3</value>
   </data>
   <data name="automaticOptionLabel.Text" xml:space="preserve">
-    <value>[XenCenter] will automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
+    <value>[XenCenter] 将自动从 [Citrix] 下载并安装所有当前更新，通常只需要在结束时重新启动一次系统。</value>
   </data>
   <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
     <value>automaticOptionLabel</value>
@@ -280,7 +280,7 @@
     <value>4</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>&amp;Download update from [Citrix]</value>
+    <value>从 [Citrix] 下载更新(&amp;D)</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>
@@ -340,7 +340,7 @@
     <value>7</value>
   </data>
   <data name="RestoreDismUpdatesButton.Text" xml:space="preserve">
-    <value>Restore Dismissed &amp;Updates</value>
+    <value>还原消除的更新(&amp;U)</value>
   </data>
   <data name="&gt;&gt;RestoreDismUpdatesButton.Name" xml:space="preserve">
     <value>RestoreDismUpdatesButton</value>
@@ -568,7 +568,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>正在检查更新...</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

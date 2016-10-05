@@ -1195,7 +1195,7 @@
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolTipContainerRevertButton.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;toolTipContainerRevertButton.ZOrder" xml:space="preserve">
     <value>1</value>
