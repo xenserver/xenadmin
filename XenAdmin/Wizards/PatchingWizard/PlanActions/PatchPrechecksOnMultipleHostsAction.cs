@@ -61,7 +61,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var master = Helpers.GetMaster(Connection);
             var mapping = mappings.Find(m => m.XenServerPatch.Equals(patch) && m.MasterHost != null && master != null && m.MasterHost.uuid == master.uuid);
 
-            if (mapping != null && mapping.Pool_patch != null)
+            if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
                 foreach (var host in hosts)
                 {
@@ -72,7 +72,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     try
                     {
-                        var check = new PatchPrecheckCheck(host, mapping.Pool_patch);
+                        PatchPrecheckCheck check = null;
+
+                        if (mapping.Pool_patch != null)
+                        {
+                            check = new PatchPrecheckCheck(host, mapping.Pool_patch);
+                        }
+                        else
+                        {
+                            check = new PatchPrecheckCheck(host, mapping.Pool_update);
+                        }
+
                         var problems = check.RunAllChecks();
 
                         Diagnostics.Problems.Problem problem = null;

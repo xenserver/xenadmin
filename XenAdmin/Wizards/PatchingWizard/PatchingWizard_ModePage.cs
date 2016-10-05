@@ -83,6 +83,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             get;
             set;
         }
+
+        public Pool_update PoolUpdate
+        {
+            private get;
+            set;
+        }
         
         public override void PageLoaded(PageLoadedDirection direction)
         {
@@ -101,7 +107,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.ISO:
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
+                    textBoxLog.Text = PoolUpdate != null 
+                        ? PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, PoolUpdate, LivePatchCodesByHost) 
+                        : PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
                     break;
             }
 

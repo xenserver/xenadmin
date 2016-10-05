@@ -67,16 +67,17 @@ namespace XenAdmin.Dialogs
 
         private void CreateAndRunParallelActions()
         {
-            BatchingMigrateVirtualDiskManager manager = 
-                new BatchingMigrateVirtualDiskManager(connection);
+            var manager = new BatchingMigrateVirtualDiskManager(connection);
 
-            if (VdisToMigrate().Count > 0 )
-                manager.BatchAs(BatchingMigrateVirtualDiskManager.Batching.VdiMigrate, 
-                                VdisToMigrate(), SelectedSR).RunAsync();
+            var vdisToMigrate = VdisToMigrate();
+            if (vdisToMigrate.Count > 0)
+                manager.BatchAs(BatchingMigrateVirtualDiskManager.Batching.VdiMigrate,
+                                vdisToMigrate, SelectedSR).RunAsync();
 
-            if (VdisToMove().Count > 0)
-                manager.BatchAs(BatchingMigrateVirtualDiskManager.Batching.VdiMove, 
-                                VdisToMove(), SelectedSR).RunAsync();
+            var vdisToMove = VdisToMove();
+            if (vdisToMove.Count > 0)
+                manager.BatchAs(BatchingMigrateVirtualDiskManager.Batching.VdiMove,
+                                vdisToMove, SelectedSR).RunAsync();
         }
 
         private List<VDI> VdisToMove()

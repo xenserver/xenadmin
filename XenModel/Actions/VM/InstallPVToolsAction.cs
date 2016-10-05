@@ -88,7 +88,7 @@ namespace XenAdmin.Actions
 
             // Check the version (if any) of the PV tools already on this host...
             VM_guest_metrics guestMetrics = Connection.Resolve(VM.guest_metrics);
-            if (guestMetrics != null && !VM.HasNewVirtualisationStates && guestMetrics.PV_drivers_up_to_date)
+            if (guestMetrics != null && !VM.HasNewVirtualisationStates && guestMetrics.PV_drivers_installed && guestMetrics.PV_drivers_up_to_date)
             {
                 this.Description = Messages.INSTALLTOOLS_EXIST;
                 return;

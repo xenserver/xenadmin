@@ -1215,7 +1215,7 @@
     <value>无法登录 XAPI 会话。</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>池“{0}”无法从 WLB 检索 VM“{1}”的放置建议。</value>
+    <value>池“{0}”无法从“{1}”的 WLB 中检索放置建议。</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB 报告池“{0}”需要优化。池优化模式设置为“{1}”，警报严重程度为“{2}”。</value>
@@ -1858,5 +1858,14 @@
   </data>
   <data name="Label-host.edition-standard" xml:space="preserve">
     <value>[Citrix] [XenServer product] Standard Edition</value>
+  </data>
+  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
+    <value>Required Updates</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
   </data>
 </root>

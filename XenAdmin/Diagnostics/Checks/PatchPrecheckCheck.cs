@@ -47,6 +47,7 @@ namespace XenAdmin.Diagnostics.Checks
     class PatchPrecheckCheck : Check
     {
         private readonly Pool_patch _patch;
+        private readonly Pool_update _update;
 
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
@@ -58,6 +59,11 @@ namespace XenAdmin.Diagnostics.Checks
         { 
         }
 
+        public PatchPrecheckCheck(Host host, Pool_update update)
+            : this(host, update, null)
+        {
+        }
+
         public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, LivePatchCode> livePatchCodesByHost)
             : base(host)
         {
@@ -65,6 +71,12 @@ namespace XenAdmin.Diagnostics.Checks
             this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
+        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+            : base(host)
+        {
+            _update = update;
+            this.livePatchCodesByHost = livePatchCodesByHost;
+        }
 
         protected override Problem RunCheck()
         {
@@ -79,15 +91,27 @@ namespace XenAdmin.Diagnostics.Checks
             //
             // Check patch isn't already applied here
             //
-            if (Patch.AppliedOn(Host) != DateTime.MaxValue)
+            if ((Patch != null && Patch.AppliedOn(Host) != DateTime.MaxValue)
+                || (Update != null && Update.AppliedOn(Host)))
             {
                 return new PatchAlreadyApplied(this, Host);
-
             }
 
             try
             {
-                var result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                string result = string.Empty;
+
+                if (Patch != null)
+                {
+                    result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                }
+                else
+                {
+                    //TODO implement when XAPI is ready (should return string, now it's void, bug raised: ) - CA-223785
+                    // result =
+                    Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
+                }
+
                 var livePatchCode = TryToFindLivePatchCode(result);
 
                 if (livePatchCodesByHost != null)
@@ -153,6 +177,11 @@ namespace XenAdmin.Diagnostics.Checks
         public Pool_patch Patch
         {
             get { return _patch; }
+        }
+
+        public Pool_update Update
+        {
+            get { return _update; }
         }
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

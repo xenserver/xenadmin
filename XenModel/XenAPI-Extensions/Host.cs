@@ -541,6 +541,30 @@ namespace XenAPI
             return h._RestrictLivePatching;
         }
 
+        public static bool RestrictVcpuHotplug(Host h)
+        {
+            return h._RestrictVcpuHotplug;
+        }
+
+        private bool _RestrictVcpuHotplug
+        {
+            get
+            {
+                if (Helpers.ElyOrGreater(Connection))
+                {
+                    return BoolKeyPreferTrue(license_params, "restrict_set_vcpus_number_live");
+                }
+                // Pre-Ely hosts:
+                // allowed on Premium edition only
+                var hostEdition = GetEdition(edition);
+                if (hostEdition == Edition.Premium)
+                {
+                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
+                }
+                return true;
+            }
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
@@ -796,6 +820,19 @@ namespace XenAPI
             }
 
             return patches;
+        }
+
+        public virtual List<Pool_update> AppliedUpdates()
+        {
+            var updates = new List<Pool_update>();
+
+            foreach (var hostUpdate in Connection.ResolveAll(this.updates))
+            {
+                if (hostUpdate != null)
+                    updates.Add(hostUpdate);
+            }
+
+            return updates;
         }
 
         public string XAPI_version

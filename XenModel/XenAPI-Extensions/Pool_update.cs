@@ -31,63 +31,48 @@
 
 using System;
 using System.Collections.Generic;
-using XenAPI;
+using XenAdmin;
+using XenAdmin.Core;
+using XenAdmin.Network;
+using System.Linq;
 
-namespace XenAdmin.Wizards.GenericPages
+namespace XenAPI
 {
-    public class HomeServerItem : DelayLoadingOptionComboBoxItem
+    public partial class Pool_update : IComparable<Pool_update>
     {
-        private readonly List<ReasoningFilter> filters;
-
-        public HomeServerItem(IXenObject host, List<ReasoningFilter> filters)
-            : base(host)
+        public override string Name
         {
-            if(!(host is Host))
-            {
-                throw new ArgumentException("This class expects as IXenObject of type host");
-            }
-
-            this.filters = filters;
-            LoadAndWait();
+            get { return name_label; }
         }
 
-        protected override string FetchFailureReason()
+        public override string Description
         {
-            foreach (ReasoningFilter filter in filters)
+            get { return name_description; }
+        }
+
+        public bool AppliedOn(Host host)
+        {
+            var hostUpdates = host.Connection.ResolveAll(host.updates);
+
+            if (hostUpdates != null)
             {
-                if (filter.FailureFoundFor(Item))
+                foreach (var hostUpdate in hostUpdates)
                 {
-                    return filter.Reason;
+                    if (hostUpdate != null && string.Equals(hostUpdate.uuid, uuid, StringComparison.OrdinalIgnoreCase))
+                        return true;
                 }
             }
 
-            return String.Empty;
-        }
-    }
-
-    public class DoNotAssignHomeServerPoolItem : IEnableableXenObjectComboBoxItem
-    {
-        private readonly IXenObject pool;
-        public DoNotAssignHomeServerPoolItem(IXenObject pool)
-        {
-            this.pool = pool;
-            if(!(pool is Pool))
-                throw new ArgumentException("This class epects as IXenObject of type pool");
+            return false;
         }
 
-        public IXenObject Item
+        public List<Host> AppliedOnHosts
         {
-            get { return pool; }
-        }
-
-        public bool Enabled
-        {
-            get { return true; }
-        }
-
-        public override string ToString()
-        {
-            return Messages.DONT_SELECT_TARGET_SERVER;
+            get 
+            {
+                return
+                    this.Connection.Cache.Hosts.Where(h => this.AppliedOn(h)).ToList();
+            }
         }
     }
 }

@@ -133,8 +133,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>从可用服务器列表中选择一个或多个服务器。
-无法应用所选更新的服务器在此列表中显示为已禁用。</value>
+    <value>rubric</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

@@ -258,10 +258,10 @@
   <data name="ACTION_DESTROY_BOND_TITLE" xml:space="preserve">
     <value>Destroying {0}</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
-    <value>Detatching storage items...</value>
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
+    <value>Detaching storage items...</value>
   </data>
-  <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
+  <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
@@ -680,6 +680,9 @@
   </data>
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>Performing SR scan from '{0}'</value>
+  </data>
+  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
+    <value>Saving VM Configuration</value>
   </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>Delete VMs</value>
@@ -2347,7 +2350,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Snapshot disks cannot be moved</value>
   </data>
   <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>You must detatch this virtual disk before it can be moved.</value>
+    <value>You must detach this virtual disk before it can be moved.</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
@@ -3831,14 +3834,14 @@ This will also delete its subfolders.</value>
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
     <value>[XenCenter] has detected that an SR already exists on this LUN. This SR is not currently in use by '{0}',  would you like to attach it?</value>
   </data>
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
+    <value>&amp;Detach all</value>
+  </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>&amp;Detach</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>Details</value>
-  </data>
-  <data name="DETATCH_ALL_BUTTON_LABEL" xml:space="preserve">
-    <value>&amp;Detatch all</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
     <value>Device</value>
@@ -4092,8 +4095,8 @@ This will also delete its subfolders.</value>
   <data name="DONE" xml:space="preserve">
     <value>done.</value>
   </data>
-  <data name="DONT_ASSIGN_HOME_SERVER" xml:space="preserve">
-    <value>Don't assign a home server</value>
+  <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
+    <value>Don't select a target server</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
@@ -4717,11 +4720,11 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_TITLE" xml:space="preserve">
     <value>Error Destroying Storage Items</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_MESSAGE" xml:space="preserve">
-    <value>The following virtual disks could not be detatched:</value>
+  <data name="ERROR_DETACHING_VDIS_MESSAGE" xml:space="preserve">
+    <value>The following virtual disks could not be detached:</value>
   </data>
-  <data name="ERROR_DETATCHING_VDIS_TITLE" xml:space="preserve">
-    <value>Error Detatching Virtual Disks</value>
+  <data name="ERROR_DETACHING_VDIS_TITLE" xml:space="preserve">
+    <value>Error Detaching Virtual Disks</value>
   </data>
   <data name="ERROR_DIALOG_ADD_TO_POOL_TEXT" xml:space="preserve">
     <value>The following servers could not be added to the pool '{0}':</value>
@@ -7461,7 +7464,7 @@ Are you sure you want to detach this storage repository?</value>
   <data name="MESSAGEBOX_DETACH_VD_TITLE" xml:space="preserve">
     <value>Detach virtual disk</value>
   </data>
-  <data name="MESSAGEBOX_DETATCH_VD_TITLE_MUTLIPLE" xml:space="preserve">
+  <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>Detach Multiple Virtual Disks</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
@@ -7688,7 +7691,7 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   <data name="MULTI_VDI_DELETE_WARNING" xml:space="preserve">
     <value>You are about to delete multiple virtual disks. Are you sure you wish to proceed?</value>
   </data>
-  <data name="MULTI_VDI_DETATCH_WARNING" xml:space="preserve">
+  <data name="MULTI_VDI_DETACH_WARNING" xml:space="preserve">
     <value>You are about to detach multiple virtual disks, are you sure you wish to proceed?</value>
   </data>
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">
@@ -7863,7 +7866,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Never</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>The new disk will appear when you next restart the VM.</value>
+    <value>You need to shutdown and then restart the VM before it can access the new disk.</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>Disk Created</value>
@@ -8217,6 +8220,12 @@ When you configure an NFS storage repository, you simply provide the hostname or
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_TITLE" xml:space="preserve">
     <value>Select the server that will provide the BIOS strings</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS" xml:space="preserve">
+    <value>Initial number of vCPUs</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
+    <value>Maximum number of vCPUs</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
 
@@ -8233,6 +8242,9 @@ You will not be able to start this VM without freeing some space on one of the s
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU &amp;&amp; Memory</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>Allocate processor and memory resources</value>
@@ -8486,9 +8498,6 @@ Once the VM has restarted click the Install [XenServer product] Tools menu item 
   </data>
   <data name="NEW_POLICY" xml:space="preserve">
     <value>&amp;New Policy...</value>
-  </data>
-  <data name="NEW_POOL" xml:space="preserve">
-    <value>New Pool</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
@@ -10668,7 +10677,7 @@ Incremental allocation: {1}</value>
     <value>This storage repository is broken</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
-    <value>VMs with no home server cannot be on local storage</value>
+    <value>VMs without a home server cannot have disks on local storage</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
@@ -11886,7 +11895,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>The disk is attached to a VM that is not in halted state.</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>The VCPUs can only be changed when the VM is shut down</value>
+    <value>The VCPUs can only be changed when the VM is shut down.</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -12100,6 +12109,30 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
     <value>The cloud-config parameters could not be retrieved.</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL" xml:space="preserve">
+    <value>Current number of v&amp;CPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY" xml:space="preserve">
+    <value>The current number of vCPUs can only be changed when the VM is running or shut down. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL" xml:space="preserve">
+    <value>Initial number of v&amp;CPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
+    <value>Ma&amp;ximum number of vCPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
+    <value>The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>Specify the number of vCPUs, their topology, and the priority to assign them over other vCPUs. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
+    <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
+    <value>Number of v&amp;CPUs:</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>

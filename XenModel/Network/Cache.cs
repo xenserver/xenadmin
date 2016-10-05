@@ -191,6 +191,11 @@ namespace XenAdmin.Network
             get { return contents(_pool_patch); }
         }
 
+        public Pool_update[] Pool_updates
+        {
+            get { return contents(_pool_update); }
+        }
+
         public Role[] Roles
         {
             get { return contents(_role); }

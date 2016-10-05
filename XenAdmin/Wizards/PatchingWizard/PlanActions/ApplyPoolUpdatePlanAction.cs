@@ -29,65 +29,29 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using XenAPI;
 
-namespace XenAdmin.Wizards.GenericPages
+
+namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class HomeServerItem : DelayLoadingOptionComboBoxItem
+    public class ApplyPoolUpdatePlanAction : PlanActionWithSession
     {
-        private readonly List<ReasoningFilter> filters;
+        private readonly Host host;
+        private readonly Pool_update poolUpdate;
 
-        public HomeServerItem(IXenObject host, List<ReasoningFilter> filters)
-            : base(host)
+        public ApplyPoolUpdatePlanAction(Host host, Pool_update patch)
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name, host.Name))
         {
-            if(!(host is Host))
-            {
-                throw new ArgumentException("This class expects as IXenObject of type host");
-            }
-
-            this.filters = filters;
-            LoadAndWait();
+            this.host = host;
+            this.poolUpdate = patch;
         }
 
-        protected override string FetchFailureReason()
+        protected override void RunWithSession(ref Session session)
         {
-            foreach (ReasoningFilter filter in filters)
-            {
-                if (filter.FailureFoundFor(Item))
-                {
-                    return filter.Reason;
-                }
-            }
+            //XenRef<Task> task = 
+            Pool_update.apply(session, poolUpdate.opaque_ref, host.opaque_ref);
 
-            return String.Empty;
-        }
-    }
-
-    public class DoNotAssignHomeServerPoolItem : IEnableableXenObjectComboBoxItem
-    {
-        private readonly IXenObject pool;
-        public DoNotAssignHomeServerPoolItem(IXenObject pool)
-        {
-            this.pool = pool;
-            if(!(pool is Pool))
-                throw new ArgumentException("This class epects as IXenObject of type pool");
-        }
-
-        public IXenObject Item
-        {
-            get { return pool; }
-        }
-
-        public bool Enabled
-        {
-            get { return true; }
-        }
-
-        public override string ToString()
-        {
-            return Messages.DONT_SELECT_TARGET_SERVER;
+            //PollTaskForResultAndDestroy(Connection, ref session, task);
         }
     }
 }

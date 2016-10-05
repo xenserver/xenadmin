@@ -56,6 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Dictionary<string, string> AllDownloadedPatches = new Dictionary<string, string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
+        public List<Pool_update> AllIntroducedPoolUpdates = new List<Pool_update>();
 
         #endregion
 
@@ -104,7 +105,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             Uri address = new Uri(patchUri);
             string tempFile = Path.GetTempFileName();
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, Branding.Update);          
+            bool isIso = patchUri.ToLowerInvariant().EndsWith("iso");
+            
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? "iso" : Branding.Update);          
 
             if (downloadAction != null)
             {
@@ -415,26 +418,50 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is UploadPatchAction)
                     {
                         _patch = (action as UploadPatchAction).PatchRefs[master];
+                        _poolUpdate = null;
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
                     }
+                    
                     if (action is CopyPatchFromHostToOther && action.Host != null)
+                    {
+                        _poolUpdate = null;
                         _patch = action.Host.Connection.Cache.Resolve((action as CopyPatchFromHostToOther).NewPatchRef);
+                    }
 
                     if (_patch != null && !NewUploadedPatches.ContainsKey(_patch))
+                    {
                         NewUploadedPatches.Add(_patch, SelectedNewPatchPath);
+                        _poolUpdate = null;
+                    }
 
                     if (action is UploadSupplementalPackAction)
                     {
+                        _patch = null;
+
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
-                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+                        
+                        if (!Helpers.ElyOrGreater(action.Connection)) //we run pool_update.pool_clean instead of deleting the VDIs separately
+                            AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
 
-                        if (AllServersElyOrGreater())
+                        if (Helpers.ElyOrGreater(action.Connection))
                         {
-                            set_pool_update();
+                            var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
+
+                            if (newPoolUpdate != null)
+                            {
+                                _poolUpdate = newPoolUpdate;
+                                AllIntroducedPoolUpdates.Add(PoolUpdate);
+                            }
+                        }
+                        else
+                        {
+                            _poolUpdate = null;
                         }
                     }
+
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
                         SelectedNewPatchPath = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
@@ -448,22 +475,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
             });
-        }
-
-        private void set_pool_update()
-        {
-            if (SelectedUpdateType == UpdateType.ISO && AllServersElyOrGreater())
-            {
-                // new ISOs
-                foreach (var hostVdiPair in SuppPackVdis)
-                {
-                    var host = hostVdiPair.Key;
-                    var vdi = hostVdiPair.Value;
-
-                    var poolUpdate = Pool_update.introduce(host.Connection.Session, vdi.opaque_ref);
-                    _poolUpdate = host.Connection.Resolve(poolUpdate);
-                }
-            }
         }
 
         private bool AllServersElyOrGreater()

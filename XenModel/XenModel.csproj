@@ -103,6 +103,7 @@
     <Compile Include="Actions\Pool_Patch\CleanupDiskSpaceAction.cs" />
     <Compile Include="Actions\Pool_Patch\GetDiskSpaceRequirementsAction.cs" />
     <Compile Include="Actions\Pool_Patch\PoolPatchCleanAction.cs" />
+    <Compile Include="Actions\Pool_update\ApplyUpdateAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
@@ -324,6 +325,7 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\Pool_update.cs" />
     <Compile Include="XenAPI-Extensions\VM_Docker_Info.cs" />
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />
     <Compile Include="XenAPI-Extensions\PGPU.cs" />

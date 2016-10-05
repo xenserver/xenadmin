@@ -385,19 +385,34 @@ namespace XenAdmin.Core
 
                         var noPatchHosts = hosts.Where(host =>
                             {
+                                bool elyOrGreater = Helpers.ElyOrGreater(host);
+                                var appliedUpdates = host.AppliedUpdates();
                                 var appliedPatches = host.AppliedPatches();
-                                // 1. patch is not already installed 
-                                if (appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                                    return false;
 
+                                // 1. patch is not already installed 
+                                if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                                        return false;
+                                else if (appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                                        return false;
+                                
                                 // 2. the host has all the required patches installed
                                 if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
-                                    !serverPatch.RequiredPatches.All(requiredPatchUuid => appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))))
+                                    !serverPatch.RequiredPatches
+                                    .All(requiredPatchUuid => 
+                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        || appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        )
+                                    )
                                     return false;
 
                                 // 3. the host doesn't have any of the conflicting patches installed
                                 if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
-                                    serverPatch.ConflictingPatches.Any(conflictingPatchUuid => appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))))
+                                    serverPatch.ConflictingPatches
+                                    .Any(conflictingPatchUuid =>
+                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        || appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        )
+                                    )
                                     return false;
 
                                 return true;
@@ -444,8 +459,19 @@ namespace XenAdmin.Core
                 if (minimumPatches == null) //unknown
                     return recommendedPatches;
 
+                bool elyOrGreater = Helpers.ElyOrGreater(host);
+
                 var appliedPatches = host.AppliedPatches();
-                recommendedPatches = minimumPatches.FindAll(p => !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
+                var appliedUpdates = host.AppliedUpdates();
+
+                if (elyOrGreater)
+                {
+                    recommendedPatches = minimumPatches.FindAll(p => !appliedUpdates.Any(au => string.Equals(au.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
+                }
+                else
+                {
+                    recommendedPatches = minimumPatches.FindAll(p => !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
+                }
 
             }
 
@@ -543,7 +569,18 @@ namespace XenAdmin.Core
         private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> latestPatches)
         {
             var sequence = new List<XenServerPatch>();
-            var appliedPatches = h.AppliedPatches();
+            var appliedUpdateUuids = new List<string>();
+
+            bool elyOrGreater = Helpers.ElyOrGreater(h);
+
+            if (elyOrGreater)
+            {
+                appliedUpdateUuids = h.AppliedUpdates().Select(u => u.uuid).ToList();
+            }
+            else
+            {
+                appliedUpdateUuids = h.AppliedPatches().Select(p => p.uuid).ToList();
+            }
 
             var neededPatches = new List<XenServerPatch>(latestPatches);
 
@@ -554,7 +591,7 @@ namespace XenAdmin.Core
 
                 //checking requirements
                 if (//not applied yet
-                    !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase))
+                    !appliedUpdateUuids.Any(apu => string.Equals(apu, p.Uuid, StringComparison.OrdinalIgnoreCase))
                     // and either no requirements or they are meet
                     && (p.RequiredPatches == null
                     || p.RequiredPatches.Count == 0
@@ -565,7 +602,7 @@ namespace XenAdmin.Core
                             (sequence.Count != 0 && sequence.Any(useqp => string.Equals(useqp.Uuid, rp, StringComparison.OrdinalIgnoreCase)))
 
                             //the required-patch has already been applied
-                            || (appliedPatches.Count != 0 && appliedPatches.Any(ap => string.Equals(ap.uuid, rp, StringComparison.OrdinalIgnoreCase)))
+                            || (appliedUpdateUuids.Count != 0 && appliedUpdateUuids.Any(apu => string.Equals(apu, rp, StringComparison.OrdinalIgnoreCase)))
                         )
                     ))
                 {

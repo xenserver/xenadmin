@@ -34,6 +34,7 @@ using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
 using System;
+using XenAdmin.Actions;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
@@ -55,32 +56,48 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             try
             {
-                Pool_patch poolPatch = null;
-
                 var mapping = patchMappings.FirstOrDefault(pm => pm.MasterHost != null && master != null &&
                                                                  pm.MasterHost.uuid == master.uuid && pm.XenServerPatch.Equals(patch));
 
-                if (mapping != null || mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
+                if (!Helpers.ElyOrGreater(session.Connection))
                 {
-                    poolPatch = mapping.Pool_patch;
+                    Pool_patch poolPatch = null;
+
+                    if (mapping != null || mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
+                    {
+                        poolPatch = mapping.Pool_patch;
+                    }
+                    else
+                    {
+                        poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, patch.Uuid, System.StringComparison.InvariantCultureIgnoreCase));
+                    }
+
+                    if (poolPatch != null && poolPatch.opaque_ref != null)
+                    {
+                        var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
+                        PollTaskForResultAndDestroy(Connection, ref session, task);
+
+                        patchMappings.Remove(mapping);
+                    }
                 }
                 else
                 {
-                    poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, patch.Uuid, System.StringComparison.InvariantCultureIgnoreCase));
-                }
+                    Pool_update poolUpdate = null;
+                    
+                    if (mapping != null || mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
+                    {
+                        poolUpdate = mapping.Pool_update;
 
-                if (poolPatch != null && poolPatch.opaque_ref != null )
-                {
-                    var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
-                    PollTaskForResultAndDestroy(Connection, ref session, task);
+                        Pool_update.pool_clean(session, poolUpdate.opaque_ref);
 
-                    patchMappings.Remove(mapping);
+                        patchMappings.Remove(mapping);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 //best effort
-                log.Error("Failed to remove Pool_patch from the server.", ex);
+                log.Error("Failed to remove update from the server.", ex);
             }
         }
     }

@@ -60,23 +60,22 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             Host hostObject = TryResolveWithTimeout(_host);
 
-            if (Helpers.ElyOrGreater(hostObject))
+            // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
+            // But we only do this if we indicated that host restart should be avoided (by initializing the AvoidRestartHosts property)
+            if (Helpers.ElyOrGreater(hostObject) && AvoidRestartHosts != null)
             {
                 log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'...", hostObject);
 
                 if (hostObject.patches_requiring_reboot.Count > 0)
                 {
-                    if (AvoidRestartHosts != null)
-                        AvoidRestartHosts.Remove(hostObject.uuid);
+                    AvoidRestartHosts.Remove(hostObject.uuid);
 
                     log.DebugFormat("Restart is needed now (hostObject.patches_requiring_reboot has {0} items in it). Evacuating now. Will restart after.", hostObject.patches_requiring_reboot.Count);
                 }
                 else
                 {
-                    if (AvoidRestartHosts != null && !AvoidRestartHosts.Contains(hostObject.uuid))
-                    {
+                    if (!AvoidRestartHosts.Contains(hostObject.uuid))
                         AvoidRestartHosts.Add(hostObject.uuid);
-                    }
 
                     log.Debug("Will skip scheduled restart (livepatching succeeded), because hostObject.patches_requiring_reboot is empty.");
 
