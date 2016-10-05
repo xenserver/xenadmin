@@ -34,6 +34,7 @@ namespace XenAdmin.Dialogs
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.viewPvsServersButton = new System.Windows.Forms.Button();
             this.hostsPanel = new XenAdmin.Controls.FlickerFreePanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -41,17 +42,17 @@ namespace XenAdmin.Dialogs
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.deleteButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.deleteButton, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.hostsPanel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.viewPvsServersButton, 1, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // deleteButton
             // 
             resources.ApplyResources(this.deleteButton, "deleteButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.deleteButton, 2);
             this.deleteButton.Image = global::XenAdmin.Properties.Resources._000_RemoveSite_h32bit_16;
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -60,7 +61,7 @@ namespace XenAdmin.Dialogs
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
             // 
             // label7
@@ -70,16 +71,24 @@ namespace XenAdmin.Dialogs
             // 
             // textBox1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 2);
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
+            // viewPvsServersButton
+            // 
+            resources.ApplyResources(this.viewPvsServersButton, "viewPvsServersButton");
+            this.viewPvsServersButton.Name = "viewPvsServersButton";
+            this.viewPvsServersButton.UseVisualStyleBackColor = true;
+            this.viewPvsServersButton.Click += new System.EventHandler(this.viewServersButton_Click);
+            // 
             // hostsPanel
             // 
+            resources.ApplyResources(this.hostsPanel, "hostsPanel");
             this.hostsPanel.BorderColor = System.Drawing.Color.Black;
             this.hostsPanel.BorderWidth = 1;
-            this.tableLayoutPanel1.SetColumnSpan(this.hostsPanel, 2);
-            resources.ApplyResources(this.hostsPanel, "hostsPanel");
+            this.tableLayoutPanel1.SetColumnSpan(this.hostsPanel, 3);
             this.hostsPanel.Name = "hostsPanel";
             // 
             // PvsCacheConfigurationPage
@@ -103,5 +112,6 @@ namespace XenAdmin.Dialogs
         private Controls.FlickerFreePanel hostsPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button deleteButton;
+        public System.Windows.Forms.Button viewPvsServersButton;
     }
 }

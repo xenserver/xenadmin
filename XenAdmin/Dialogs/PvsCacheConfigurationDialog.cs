@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -55,6 +56,7 @@ namespace XenAdmin.Dialogs
             Text = string.Format(Messages.PVS_CACHE_CONFIG_DIALOG_TITLE, connection.Name);
 
             Rebuild();
+            this.connection.Cache.RegisterCollectionChanged<PVS_site>(PvsSiteCollectionChanged);
         }
 
         protected override string GetTabTitle(VerticalTabs.VerticalTab verticalTab)
@@ -123,21 +125,59 @@ namespace XenAdmin.Dialogs
 
             verticalTabs.Items.Add(editPage);
         }
-
-        private List<PVS_site> deletedSites = new List<PVS_site>();
-
+        
         void DeletePage(PvsCacheConfigurationPage page)
         {
+            // try to delete the site (asks user for confirmation), also passing the site name, in case it has changed 
+            if (!DeleteSite(page.PvsSite, page.Text)) 
+                return;
             int selectedIndex = verticalTabs.SelectedIndex;
             verticalTabs.Items.Remove(page);
             verticalTabs.SelectedIndex = selectedIndex < verticalTabs.Items.Count - 1 ? selectedIndex : verticalTabs.Items.Count - 1;
             page.Changed -= SomethingChangedOnPage;
             page.DeleteButtonClicked -= DeleteButtonClickedOnPage;
-            if (page.PvsSite != null)
-                deletedSites.Add(page.PvsSite);
             ContentPanel.Controls.Remove(page);
             RefreshButtons();
             ResizeVerticalTabs(verticalTabs.Items.Count);
+        }
+
+        private bool DeleteSite(PVS_site site, string siteName)
+        {
+            // We cannot delete the site if there are running proxies
+            if (site != null)
+            {    
+                var pvsProxies = connection.Cache.PVS_proxies.Where(s => s.site.opaque_ref == site.opaque_ref).ToList();
+                if (pvsProxies.Count > 0)
+                {
+                    using (var dlg = 
+                        new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED, Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(Parent);
+                    }
+                    return false;
+                }
+            }
+
+            // show confirmation dialog
+            DialogResult dialogResult;
+            using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.CONFIRM_DELETE_PVS_SITE, siteName), Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonOK,
+                    ThreeButtonDialog.ButtonCancel))
+            {
+                dialogResult = dlg.ShowDialog(Parent);
+            }
+            if (dialogResult != DialogResult.OK)
+                return false;
+
+            // if it is a newly added site, then there's noting we need to do here (it does not exist on the server yet)
+            if (site == null)
+                return true;
+
+            // delete existing site
+            var action = new DeletePvsSiteAction(site);
+            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(this);
+            return action.Succeeded;
         }
 
         private void ResizeVerticalTabs(int itemCount)
@@ -266,9 +306,7 @@ namespace XenAdmin.Dialogs
         private void okButton_Click(object sender, EventArgs e)
         {
             List<AsyncAction> actions = GetActions();
-
-            actions.AddRange(deletedSites.Select(site => new DeletePvsSiteAction(site)));
-
+            
             if (actions.Count == 0) 
                 return;
 
@@ -297,6 +335,26 @@ namespace XenAdmin.Dialogs
             }
 
             return actions;
+        }
+
+        private void PvsSiteCollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            if (e.Action == CollectionChangeAction.Add)
+            {
+                PVS_site addedSite = e.Element as PVS_site;
+
+                Program.Invoke(this, () =>
+                {
+                    ResizeVerticalTabs(verticalTabs.Items.Count + 1);
+                    NewPage(addedSite);
+                });
+            }
+            
+        }
+
+        private void PvsCacheConfigurationDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.connection.Cache.DeregisterCollectionChanged<PVS_site>(PvsSiteCollectionChanged);
         }
     }
 }

@@ -38,6 +38,8 @@ namespace XenAdmin.Actions
 {
     public class ConfigurePvsSiteAction : AsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
         private PVS_site pvsSite;
         private readonly List<PVS_cache_storage> pvsCacheStorages;
         private readonly string siteName;
@@ -71,10 +73,23 @@ namespace XenAdmin.Actions
                 PollToCompletion(0,10);
                 pvsSite = Connection.WaitForCache(new XenRef<PVS_site>(Result));
             }
-            else if (pvsSite.name_label != siteName)
+            else
             {
-                // set name_label
-                PVS_site.set_name_label(Session, pvsSite.opaque_ref, siteName);
+                // get the site again from cache, just in case it changed (or dissapeared) in the meantime
+                pvsSite = Connection.Cache.Resolve(new XenRef<PVS_site>(pvsSite.opaque_ref));
+                if (pvsSite == null)
+                {
+                    log.InfoFormat("PVS Site '{0}' cannot be configured, because it cannot be found.", siteName);
+                    PercentComplete = 100;
+                    Description = Messages.COMPLETED;
+                    return;
+                }
+
+                if (pvsSite.name_label != siteName)
+                {
+                    // set name_label
+                    PVS_site.set_name_label(Session, pvsSite.opaque_ref, siteName);
+                }
             }
             PercentComplete = 10;
 
@@ -82,7 +97,7 @@ namespace XenAdmin.Actions
             foreach (var pvsCacheStorage in pvsCacheStorages)
             {
                 // create Memory SR, if needed
-                if (Helper.IsNullOrEmptyOpaqueRef(pvsCacheStorage.SR.opaque_ref)) 
+                if (pvsCacheStorage.SR != null && Helper.IsNullOrEmptyOpaqueRef(pvsCacheStorage.SR.opaque_ref)) 
                 {
                     RelatedTask = SR.async_create(Session, pvsCacheStorage.host, new Dictionary<string, string> { { URI, "" } }, 0,
                         Messages.PVS_CACHE_MEMORY_SR_NAME, "", SR.SRTypes.tmpfs.ToString(), "", false, new Dictionary<string, string>());
@@ -107,9 +122,16 @@ namespace XenAdmin.Actions
                 }
 
                 // create new PVS_cache_storage
-                pvsCacheStorage.site = new XenRef<PVS_site>(pvsSite); //asign the new site
-                RelatedTask = PVS_cache_storage.async_create(Session, pvsCacheStorage);
-                PollToCompletion(PercentComplete, PercentComplete + inc);
+                if (pvsCacheStorage.SR != null)
+                {
+                    pvsCacheStorage.site = new XenRef<PVS_site>(pvsSite); //asign the new site
+                    RelatedTask = PVS_cache_storage.async_create(Session, pvsCacheStorage);
+                    PollToCompletion(PercentComplete, PercentComplete + inc);
+                }
+                else
+                {
+                    PercentComplete += inc;
+                }
             }
             PercentComplete = 100;
             Description = Messages.ACTION_CONFUGURE_PVS_SITE_DONE;

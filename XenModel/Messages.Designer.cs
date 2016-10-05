@@ -7246,6 +7246,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete &apos;{0}&apos;?.
+        /// </summary>
+        public static string CONFIRM_DELETE_PVS_SITE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DELETE_PVS_SITE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the tag &apos;{0}&apos; from all managed resources?.
         /// </summary>
         public static string CONFIRM_DELETE_TAG {
@@ -27877,7 +27886,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Sites - &apos;{0}&apos;.
+        ///   Looks up a localized string similar to This PVS site cannot be removed because it contains running proxies..
+        /// </summary>
+        public static string PVS_SITE_CANNOT_BE_REMOVED {
+            get {
+                return ResourceManager.GetString("PVS_SITE_CANNOT_BE_REMOVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Servers on site {0}&apos;.
         /// </summary>
         public static string PVS_SITE_DIALOG_TITLE {
             get {

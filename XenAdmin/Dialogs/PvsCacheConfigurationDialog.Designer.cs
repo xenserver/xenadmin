@@ -116,6 +116,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.BlurbLabel);
             this.Name = "PvsCacheConfigurationDialog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PvsCacheConfigurationDialog_FormClosed);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);
