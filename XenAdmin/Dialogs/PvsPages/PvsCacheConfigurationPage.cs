@@ -84,7 +84,7 @@ namespace XenAdmin.Dialogs
             }
 
             LoadServers();
-            viewPvsServersButton.Enabled = PvsSite != null;
+            viewPvsServersButton.Enabled = PvsSite != null && PvsSite.servers.Count > 0;
         }
 
         public bool ValidToSave

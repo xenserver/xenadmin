@@ -89,71 +89,9 @@ namespace XenAdmin.TabPages
                     connection.Cache.RegisterBatchCollectionChanged<VM>(PvsProxyBatchCollectionChanged);
                 }
 
-                LoadSites();
                 LoadVMs();
             }
         }
-
-        #region PVS cache configuration
-
-        private void LoadSites()
-        {
-            Program.AssertOnEventThread();
-
-            if (!Visible)
-                return;
-
-            try
-            {
-                dataGridViewSites.SuspendLayout();
-                dataGridViewSites.Rows.Clear();
-
-                var pvsSites = Connection.Cache.PVS_sites.ToList();
-                pvsSites.Sort();
-
-                foreach (var pvsSite in pvsSites)
-                    dataGridViewSites.Rows.Add(NewPvsSiteRow(pvsSite));
-
-                if (dataGridViewSites.SelectedRows.Count == 0 && dataGridViewSites.Rows.Count > 0)
-                    dataGridViewSites.Rows[0].Selected = true;
-            }
-            finally
-            {
-                dataGridViewSites.ResumeLayout();
-            }
-        }
-
-        private DataGridViewRow NewPvsSiteRow(PVS_site pvsSite)
-        {
-            var siteCell = new DataGridViewTextBoxCell { Value = pvsSite.Name };
-
-            var cacheSrs = new List<SR>();
-            foreach (var cacheStorage in Connection.ResolveAll(pvsSite.cache_storage))
-            {
-                var sr = Connection.Resolve(cacheStorage.SR);
-                if (sr != null && sr.GetSRType(false) != SR.SRTypes.tmpfs)  //not memory SR
-                {
-                    cacheSrs.Add(sr);
-                }
-            }
-
-            var configurationCell = new DataGridViewTextBoxCell
-            {
-                Value = cacheSrs.Count > 0
-                    ? Messages.PVS_CACHE_MEMORY_AND_DISK
-                    : pvsSite.cache_storage.Count > 0 ? Messages.PVS_CACHE_MEMORY_ONLY : Messages.PVS_CACHE_NOT_CONFIGURED
-            };
-            var cacheSrsCell = new DataGridViewTextBoxCell
-            {
-                Value = cacheSrs.Count > 0 ? string.Join(Messages.LIST_SEPARATOR, cacheSrs) : Messages.NO_VALUE
-            };
-
-            var newRow = new DataGridViewRow { Tag = pvsSite };
-            newRow.Cells.AddRange(siteCell, configurationCell, cacheSrsCell);
-
-            return newRow;
-        }
-        #endregion
 
         #region VMs
 
@@ -340,7 +278,7 @@ namespace XenAdmin.TabPages
         
         private void PvsSiteBatchCollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, LoadSites); 
+            Program.Invoke(this, LoadVMs); 
         }
 
         private void PvsProxyBatchCollectionChanged(object sender, EventArgs e)
@@ -378,9 +316,6 @@ namespace XenAdmin.TabPages
             // Default sort: Sort by whether caching is enabled (yes before no), using VM name (asc) as tiebreaker
             DataGridViewRow row1 = (DataGridViewRow)first;
             DataGridViewRow row2 = (DataGridViewRow)second;
-
-            string ce1 = row1.Cells[1].Value.ToString();
-            string ce2 = row2.Cells[1].Value.ToString();
 
             int cachingEnabled1 = row1.Cells[1].Value.ToString().Equals(Messages.YES) ? 0 : 1;
             int cachingEnabled2 = row2.Cells[1].Value.ToString().Equals(Messages.YES) ? 0 : 1;

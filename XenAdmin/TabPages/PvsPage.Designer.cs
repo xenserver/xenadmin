@@ -29,32 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsPage));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridViewSites = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnConfiguration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSRs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ConfigureButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.enableButton = new XenAdmin.Commands.CommandButton();
             this.disableButton = new XenAdmin.Commands.CommandButton();
-            this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCachingEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -67,12 +58,10 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVms, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewSites, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVms, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // dataGridViewVms
@@ -90,94 +79,6 @@
             this.dataGridViewVms.MultiSelect = true;
             this.dataGridViewVms.Name = "dataGridViewVms";
             this.dataGridViewVms.ReadOnly = true;
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // dataGridViewSites
-            // 
-            resources.ApplyResources(this.dataGridViewSites, "dataGridViewSites");
-            this.dataGridViewSites.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewSites.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewSites.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridViewSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridViewSites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnSite,
-            this.ColumnConfiguration,
-            this.ColumnSRs});
-            this.dataGridViewSites.MultiSelect = true;
-            this.dataGridViewSites.Name = "dataGridViewSites";
-            this.dataGridViewSites.ReadOnly = true;
-            // 
-            // ColumnSite
-            // 
-            this.ColumnSite.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnSite.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnSite.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnSite, "ColumnSite");
-            this.ColumnSite.Name = "ColumnSite";
-            this.ColumnSite.ReadOnly = true;
-            // 
-            // ColumnConfiguration
-            // 
-            this.ColumnConfiguration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnConfiguration.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnConfiguration.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnConfiguration, "ColumnConfiguration");
-            this.ColumnConfiguration.Name = "ColumnConfiguration";
-            this.ColumnConfiguration.ReadOnly = true;
-            this.ColumnConfiguration.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnSRs
-            // 
-            this.ColumnSRs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnSRs.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.ColumnSRs, "ColumnSRs");
-            this.ColumnSRs.Name = "ColumnSRs";
-            this.ColumnSRs.ReadOnly = true;
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.ConfigureButton);
-            this.panel1.Name = "panel1";
-            // 
-            // ConfigureButton
-            // 
-            resources.ApplyResources(this.ConfigureButton, "ConfigureButton");
-            this.ConfigureButton.Name = "ConfigureButton";
-            this.ConfigureButton.UseVisualStyleBackColor = true;
-            this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.enableButton);
-            this.panel2.Controls.Add(this.disableButton);
-            this.panel2.Name = "panel2";
-            // 
-            // enableButton
-            // 
-            resources.ApplyResources(this.enableButton, "enableButton");
-            this.enableButton.Name = "enableButton";
-            this.enableButton.UseVisualStyleBackColor = true;
-            // 
-            // disableButton
-            // 
-            resources.ApplyResources(this.disableButton, "disableButton");
-            this.disableButton.Name = "disableButton";
-            this.disableButton.UseVisualStyleBackColor = true;
             // 
             // columnVM
             // 
@@ -212,6 +113,43 @@
             this.ColumnStatus.Name = "ColumnStatus";
             this.ColumnStatus.ReadOnly = true;
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.ConfigureButton);
+            this.panel1.Name = "panel1";
+            // 
+            // ConfigureButton
+            // 
+            resources.ApplyResources(this.ConfigureButton, "ConfigureButton");
+            this.ConfigureButton.Name = "ConfigureButton";
+            this.ConfigureButton.UseVisualStyleBackColor = true;
+            this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
+            // 
+            // panel2
+            // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.enableButton);
+            this.panel2.Controls.Add(this.disableButton);
+            this.panel2.Name = "panel2";
+            // 
+            // enableButton
+            // 
+            resources.ApplyResources(this.enableButton, "enableButton");
+            this.enableButton.Name = "enableButton";
+            this.enableButton.UseVisualStyleBackColor = true;
+            // 
+            // disableButton
+            // 
+            resources.ApplyResources(this.disableButton, "disableButton");
+            this.disableButton.Name = "disableButton";
+            this.disableButton.UseVisualStyleBackColor = true;
+            // 
             // PvsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -221,7 +159,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSites)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -232,13 +169,8 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.DataGridViewEx.DataGridViewEx dataGridViewSites;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConfiguration;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSRs;
         private XenAdmin.Commands.CommandButton disableButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;

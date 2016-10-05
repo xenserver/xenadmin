@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
@@ -127,7 +126,8 @@ namespace XenAdmin.Dialogs
         
         void DeletePage(PvsCacheConfigurationPage page)
         {
-            if (page.PvsSite != null && !DeleteSite(page.PvsSite)) 
+            // try to delete the site (asks user for confirmation), also passing the site name, in case it has changed 
+            if (!DeleteSite(page.PvsSite, page.Text)) 
                 return;
             int selectedIndex = verticalTabs.SelectedIndex;
             verticalTabs.Items.Remove(page);
@@ -139,25 +139,27 @@ namespace XenAdmin.Dialogs
             ResizeVerticalTabs(verticalTabs.Items.Count);
         }
 
-        private bool DeleteSite(PVS_site site)
+        private bool DeleteSite(PVS_site site, string siteName)
         {
-            if (site == null)
-                return false;
-
             // We cannot delete the site if there are running proxies
-            var pvsProxies = connection.Cache.PVS_proxies.Where(s => s.site.opaque_ref == site.opaque_ref).ToList();
-            if (pvsProxies.Count > 0)
-            {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED, Messages.XENCENTER)))
+            if (site != null)
+            {    
+                var pvsProxies = connection.Cache.PVS_proxies.Where(s => s.site.opaque_ref == site.opaque_ref).ToList();
+                if (pvsProxies.Count > 0)
                 {
-                    dlg.ShowDialog(Parent);
+                    using (var dlg = 
+                        new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED, Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(Parent);
+                    }
+                    return false;
                 }
-                return false;
             }
 
+            // show confirmation dialog
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.CONFIRM_DELETE_PVS_SITE, site.Name), Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.CONFIRM_DELETE_PVS_SITE, siteName), Messages.XENCENTER),
                     ThreeButtonDialog.ButtonOK,
                     ThreeButtonDialog.ButtonCancel))
             {
@@ -165,6 +167,12 @@ namespace XenAdmin.Dialogs
             }
             if (dialogResult != DialogResult.OK)
                 return false;
+
+            // if it is a newly added site, then there's noting we need to do here (it does not exist on the server yet)
+            if (site == null)
+                return true;
+
+            // delete existing site
             var action = new DeletePvsSiteAction(site);
             new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(this);
             return action.Succeeded;
