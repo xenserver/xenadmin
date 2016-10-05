@@ -262,6 +262,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
                     }
+                    if (Helpers.ElyOrGreater(host) && selectedHosts != null)
+                    {
+                        disableNotApplicableHosts(row, selectedHosts, host);
+                    }
                     break;
             }
         }
@@ -270,19 +274,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (selectedHosts != null && !selectedHosts.Contains(host))
             {
-                string alertUuid = null;
-                if (SelectedUpdateAlert != null)
+                string patchUuidFromAlert = null;
+                if (SelectedUpdateAlert != null && SelectedUpdateAlert.Patch != null)
                 {
-                    alertUuid = SelectedUpdateAlert.uuid;
+                    patchUuidFromAlert = SelectedUpdateAlert.Patch.Uuid;
                 }
                 else if (FileFromDiskAlert != null)
                 {
-                    alertUuid = FileFromDiskAlert.uuid;
+                    patchUuidFromAlert = FileFromDiskAlert.Patch.Uuid;
                 }
 
-                if (alertUuid != null)
+                if (string.IsNullOrEmpty(patchUuidFromAlert))
                 {
-                    if (isPatchApplied(alertUuid, host))
+                    if (isPatchApplied(patchUuidFromAlert, host))
                     {
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
                     }

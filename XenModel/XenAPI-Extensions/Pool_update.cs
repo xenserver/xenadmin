@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Linq;
 
 namespace XenAPI
 {
@@ -65,5 +66,13 @@ namespace XenAPI
             return false;
         }
 
+        public List<Host> AppliedOnHosts
+        {
+            get 
+            {
+                return
+                    this.Connection.Cache.Hosts.Where(h => this.AppliedOn(h)).ToList();
+            }
+        }
     }
 }

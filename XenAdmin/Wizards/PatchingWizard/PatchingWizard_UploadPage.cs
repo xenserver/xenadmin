@@ -105,7 +105,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             Uri address = new Uri(patchUri);
             string tempFile = Path.GetTempFileName();
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, Branding.Update);          
+            bool isIso = patchUri.ToLowerInvariant().EndsWith("iso");
+            
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? "iso" : Branding.Update);          
 
             if (downloadAction != null)
             {
@@ -434,6 +436,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (action is UploadSupplementalPackAction)
                     {
+                        _patch = null;
+
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
                         

@@ -287,6 +287,7 @@ namespace XenAdmin.TabPages
             else if (xenObject is Pool)
             {
                 xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Pool_patch>(Pool_patch_BatchCollectionChanged);
+                xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Pool_update>(Pool_update_BatchCollectionChanged);
             }
         }
 
@@ -329,10 +330,16 @@ namespace XenAdmin.TabPages
             else if (xenObject is Pool)
             {
                 xenObject.Connection.Cache.RegisterBatchCollectionChanged<Pool_patch>(Pool_patch_BatchCollectionChanged);
+                xenObject.Connection.Cache.RegisterBatchCollectionChanged<Pool_update>(Pool_update_BatchCollectionChanged);
             }
         }
 
         void Pool_patch_BatchCollectionChanged(object sender, EventArgs e)
+        {
+            Program.BeginInvoke(this, BuildList);
+        }
+
+        void Pool_update_BatchCollectionChanged(object sender, EventArgs e)
         {
             Program.BeginInvoke(this, BuildList);
         }
@@ -664,7 +671,9 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionUpdates;
             List<KeyValuePair<String, String>> messages;
 
-            if (Helpers.ElyOrGreater(host))
+            bool elyOrGreater = Helpers.ElyOrGreater(host);
+
+            if (elyOrGreater)
             {
                 // As of Ely we use host.patches_requiring_reboot to generate the list of reboot required messages
                 messages = CheckHostPatchesRequiringReboot(host);
@@ -1697,18 +1706,26 @@ namespace XenAdmin.TabPages
 
         private string poolAppliedPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
+            return 
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count == xenObject.Connection.Cache.HostCount)
+                : poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
         }
 
         private string poolPartialPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count > 0 &&
-                                            patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
+            return
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count > 0 && update.AppliedOnHosts.Count != xenObject.Connection.Cache.HostCount)
+                : poolPatchString(patch => patch.host_patches.Count > 0 && patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
         }
 
         private string poolNotAppliedPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count == 0);
+            return 
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count == 0)
+                : poolPatchString(patch => patch.host_patches.Count == 0);
         }
 
         private string poolPatchString(Predicate<Pool_patch> predicate)
@@ -1720,6 +1737,21 @@ namespace XenAdmin.TabPages
             foreach (Pool_patch patch in patches)
                 if (predicate(patch))
                     output.Add(patch.name_label);
+
+            output.Sort(StringUtility.NaturalCompare);
+
+            return String.Join(",", output.ToArray());
+        }
+
+        private string poolUpdateString(Predicate<Pool_update> predicate)
+        {
+            Pool_update[] updates = xenObject.Connection.Cache.Pool_updates;
+
+            List<String> output = new List<String>();
+
+            foreach (var update in updates)
+                if (predicate(update))
+                    output.Add(update.name_label);
 
             output.Sort(StringUtility.NaturalCompare);
 
