@@ -1860,7 +1860,7 @@
     <value>[Citrix] [XenServer product] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
-    <value>Required Updates</value>
+    <value>必需的更新</value>
   </data>
   <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
     <value>Nutanix</value>

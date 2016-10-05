@@ -117,23 +117,89 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="radioButtonDisable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="labelRubric.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="radioButtonDisable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data name="radioButtonDisable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 156</value>
+  </data>
+  <data name="radioButtonDisable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="radioButtonDisable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 36</value>
+  </data>
+  <data name="radioButtonDisable.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="radioButtonDisable.Text" xml:space="preserve">
+    <value>ライブ パッチを使用しない(&amp;D)</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisable.Name" xml:space="preserve">
+    <value>radioButtonDisable</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisable.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="radioButtonEnable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonEnable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButtonEnable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 104</value>
+  </data>
+  <data name="radioButtonEnable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="radioButtonEnable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>457, 36</value>
+  </data>
+  <data name="radioButtonEnable.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="radioButtonEnable.Text" xml:space="preserve">
+    <value>可能であればライブ パッチを使用する(&amp;U)</value>
+  </data>
+  <data name="&gt;&gt;radioButtonEnable.Name" xml:space="preserve">
+    <value>radioButtonEnable</value>
+  </data>
+  <data name="&gt;&gt;radioButtonEnable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonEnable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;radioButtonEnable.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelRubric.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="labelRubric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>3, 0</value>
   </data>
   <data name="labelRubric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>473, 17</value>
+    <value>1186, 64</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="labelRubric.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>このプールとの通信に使用できるセキュリティ プロトコルを選択します。</value>
+    <value>ライブ パッチによって、サーバーを再起動することなく Linux カーネルや Xen のアップデートをインストールできます。可能な場合にライブパッチを適用するかどうかを選択してください。</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -142,130 +208,61 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelRubric.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="radioButtonTLS.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButtonTLS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 31</value>
-  </data>
-  <data name="radioButtonTLS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 17</value>
-  </data>
-  <data name="radioButtonTLS.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="radioButtonTLS.Text" xml:space="preserve">
-    <value>最大セキュリティ: TLS 1.2 のみ(&amp;M)</value>
-  </data>
-  <data name="&gt;&gt;radioButtonTLS.Name" xml:space="preserve">
-    <value>radioButtonTLS</value>
-  </data>
-  <data name="&gt;&gt;radioButtonTLS.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButtonTLS.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;radioButtonTLS.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="radioButtonSSL.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButtonSSL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 54</value>
-  </data>
-  <data name="radioButtonSSL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 17</value>
-  </data>
-  <data name="radioButtonSSL.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="radioButtonSSL.Text" xml:space="preserve">
-    <value>後方互換性: SSL 3.0 および TLS 1.0, 1.1 &amp;&amp; 1.2(&amp;B)</value>
-  </data>
-  <data name="&gt;&gt;radioButtonSSL.Name" xml:space="preserve">
-    <value>radioButtonSSL</value>
-  </data>
-  <data name="&gt;&gt;radioButtonSSL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButtonSSL.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;radioButtonSSL.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="pictureBoxDisruption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 88</value>
-  </data>
-  <data name="pictureBoxDisruption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="pictureBoxDisruption.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="pictureBoxDisruption.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxDisruption.Name" xml:space="preserve">
-    <value>pictureBoxDisruption</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxDisruption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxDisruption.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxDisruption.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelDisruption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelDisruption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 90</value>
-  </data>
-  <data name="labelDisruption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 13</value>
-  </data>
-  <data name="labelDisruption.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="labelDisruption.Text" xml:space="preserve">
-    <value>この設定を変更すると、一時的に [XenServer] にアクセスできなくなります</value>
-  </data>
-  <data name="labelDisruption.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelDisruption.Name" xml:space="preserve">
-    <value>labelDisruption</value>
-  </data>
-  <data name="&gt;&gt;labelDisruption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDisruption.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelDisruption.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1192, 64</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,50,Percent,50" />&lt;Rows Styles="Percent,50,Percent,50" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>240, 240</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 198</value>
+    <value>1192, 495</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>SecurityEditPage</value>
+    <value>LivePatchingEditPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
