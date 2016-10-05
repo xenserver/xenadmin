@@ -703,11 +703,14 @@ namespace XenAdmin.TabPages
                 s.AddEntry(FriendlyName("Pool_patch.required-updates"), recommendedPatches);
             }
 
-            // add supplemental packs
-            var suppPacks = hostInstalledSuppPacks(host);
-            if (!string.IsNullOrEmpty(suppPacks))
+            if (!elyOrGreater)
             {
-                s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+                // add supplemental packs
+                var suppPacks = hostInstalledSuppPacks(host);
+                if (!string.IsNullOrEmpty(suppPacks))
+                {
+                    s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+                }
             }
         }
 
