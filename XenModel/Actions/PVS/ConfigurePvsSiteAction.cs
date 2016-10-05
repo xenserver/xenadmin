@@ -38,6 +38,8 @@ namespace XenAdmin.Actions
 {
     public class ConfigurePvsSiteAction : AsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
         private PVS_site pvsSite;
         private readonly List<PVS_cache_storage> pvsCacheStorages;
         private readonly string siteName;
@@ -71,10 +73,23 @@ namespace XenAdmin.Actions
                 PollToCompletion(0,10);
                 pvsSite = Connection.WaitForCache(new XenRef<PVS_site>(Result));
             }
-            else if (pvsSite.name_label != siteName)
+            else
             {
-                // set name_label
-                PVS_site.set_name_label(Session, pvsSite.opaque_ref, siteName);
+                // get the site again from cache, just in case it changed (or dissapeared) in the meantime
+                pvsSite = Connection.Cache.Resolve(new XenRef<PVS_site>(pvsSite.opaque_ref));
+                if (pvsSite == null)
+                {
+                    log.InfoFormat("PVS Site '{0}' cannot be configured, because it cannot be found.", siteName);
+                    PercentComplete = 100;
+                    Description = Messages.COMPLETED;
+                    return;
+                }
+
+                if (pvsSite.name_label != siteName)
+                {
+                    // set name_label
+                    PVS_site.set_name_label(Session, pvsSite.opaque_ref, siteName);
+                }
             }
             PercentComplete = 10;
 

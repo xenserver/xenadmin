@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -55,6 +56,7 @@ namespace XenAdmin.Dialogs
             Text = string.Format(Messages.PVS_CACHE_CONFIG_DIALOG_TITLE, connection.Name);
 
             Rebuild();
+            this.connection.Cache.RegisterCollectionChanged<PVS_site>(PvsSiteCollectionChanged);
         }
 
         protected override string GetTabTitle(VerticalTabs.VerticalTab verticalTab)
@@ -333,6 +335,26 @@ namespace XenAdmin.Dialogs
             }
 
             return actions;
+        }
+
+        private void PvsSiteCollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            if (e.Action == CollectionChangeAction.Add)
+            {
+                PVS_site addedSite = e.Element as PVS_site;
+
+                Program.Invoke(this, () =>
+                {
+                    ResizeVerticalTabs(verticalTabs.Items.Count + 1);
+                    NewPage(addedSite);
+                });
+            }
+            
+        }
+
+        private void PvsCacheConfigurationDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.connection.Cache.DeregisterCollectionChanged<PVS_site>(PvsSiteCollectionChanged);
         }
     }
 }
