@@ -208,10 +208,10 @@ namespace XenAdmin.TabPages
             this.dataGridViewVDIs.MultiSelect = true;
             this.dataGridViewVDIs.Name = "dataGridViewVDIs";
             this.dataGridViewVDIs.ReadOnly = true;
-            this.dataGridViewVDIs.SortCompare += DataGridViewObject_SortCompare;
-            this.dataGridViewVDIs.SelectionChanged += dataGridViewVDIs_SelectedIndexChanged;
-            this.dataGridViewVDIs.MouseUp += dataGridViewVDIs_MouseUp;
-            this.dataGridViewVDIs.KeyUp += dataGridViewVDIs_KeyUp;
+            this.dataGridViewVDIs.SelectionChanged += new System.EventHandler(this.dataGridViewVDIs_SelectedIndexChanged);
+            this.dataGridViewVDIs.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.DataGridViewObject_SortCompare);
+            this.dataGridViewVDIs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewVDIs_KeyUp);
+            this.dataGridViewVDIs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewVDIs_MouseUp);
             // 
             // ColumnName
             // 
