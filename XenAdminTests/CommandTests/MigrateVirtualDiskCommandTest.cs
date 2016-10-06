@@ -50,8 +50,14 @@ namespace XenAdminTests.CommandTests
         [Test]
         public void CheckContextMenuText()
         {
-            var cmd = new MigrateVirtualDiskCommand(mw, null);
+            var selectedVdi1 = new SelectedItem(new VDI());
+            var selectedVdi2 = new SelectedItem(new VDI());
+
+            var cmd = new MigrateVirtualDiskCommand(mw, new[] { selectedVdi1 });
             Assert.AreEqual(Messages.MOVE_VDI_CONTEXT_MENU, cmd.ContextMenuText);
+
+            cmd = new MigrateVirtualDiskCommand(mw, new[] { selectedVdi1, selectedVdi2 });
+            Assert.AreEqual(Messages.MAINWINDOW_MOVE_OBJECTS, cmd.ContextMenuText);
         }
 
         [Test]
@@ -70,8 +76,7 @@ namespace XenAdminTests.CommandTests
         [Test]
         public void CommandCannotExecuteNullVdi()
         {
-            var cmd = new MigrateVirtualDiskCommand(mw, null);
-            Assert.IsFalse(cmd.CanExecute(), "Null vdi");
+            Assert.Throws<ArgumentNullException>(() => new MigrateVirtualDiskCommand(mw, null), "Null vdi selection");
         }
 
         [Test]

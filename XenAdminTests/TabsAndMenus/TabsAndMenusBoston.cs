@@ -588,11 +588,11 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
-                foreach (VDI v in GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot))
+                var vdis = GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot);
+                foreach (VDI v in vdis)
                 {
-
                     VerifyContextMenu(v, new ExpectedMenuItem[] {
-                        new ExpectedTextMenuItem("&Move Virtual Disk...", v.VBDs.Count == 0), 
+                        new ExpectedTextMenuItem("&Move Virtual Disk...", true),//can migrate 
                         new ExpectedTextMenuItem("&Delete Virtual Disk", v.allowed_operations.Contains(vdi_operations.destroy)),
                         new ExpectedSeparator(),
                         new ExpectedTextMenuItem("P&roperties", true),
