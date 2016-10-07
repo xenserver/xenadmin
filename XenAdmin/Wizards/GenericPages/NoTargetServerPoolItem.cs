@@ -29,24 +29,33 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Wizards.GenericPages;
+using System;
+using System.Collections.Generic;
 using XenAPI;
 
-namespace XenAdmin.Wizards.ImportWizard
+namespace XenAdmin.Wizards.GenericPages
 {
-    class ImportDelayLoadingOptionComboBoxItem : DelayLoadingOptionComboBoxItem
+    public class NoTargetServerPoolItem : IEnableableXenObjectComboBoxItem
     {
-        public ImportDelayLoadingOptionComboBoxItem(IXenObject xenObject) : base(xenObject)
+        private readonly Pool pool;
+        public NoTargetServerPoolItem(Pool pool)
         {
+            this.pool = pool;
         }
 
-        /// <summary>
-        /// No failure reason - all options are valid
-        /// </summary>
-        /// <returns></returns>
-        protected override string FetchFailureReason()
+        public IXenObject Item
         {
-            return string.Empty;
+            get { return pool; }
+        }
+
+        public bool Enabled
+        {
+            get { return true; }
+        }
+
+        public override string ToString()
+        {
+            return Messages.DONT_SELECT_TARGET_SERVER;
         }
     }
 }

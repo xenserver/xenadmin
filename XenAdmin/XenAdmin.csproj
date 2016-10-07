@@ -3366,7 +3366,7 @@
     </Compile>
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\WlbEnabledFilter.cs" />
     <Compile Include="Wizards\ExportWizard\ApplianceChecks\ApplianceExistsCheck.cs" />
-    <Compile Include="Wizards\GenericPages\HomeServerItem.cs" />
+    <Compile Include="Wizards\GenericPages\NoTargetServerPoolItem.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateCanMigrateFilter.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateVersionFilter.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateDestinationPage.cs">
@@ -3392,7 +3392,6 @@
     </Compile>
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrationNetworkResource.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrationStorageResource.cs" />
-    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateDelayLoadingComboBoxItem.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\ResidentHostIsSameAsSelectionFilter.cs" />
     <Compile Include="Wizards\DRWizards\DRFailoverWizard.cs">
       <SubType>Form</SubType>
@@ -3471,7 +3470,6 @@
     <Compile Include="Wizards\GenericPages\ReasoningFilter.cs" />
     <Compile Include="Wizards\GenericPages\StorageResource.cs" />
     <Compile Include="Wizards\GenericPages\VMMappingSummary.cs" />
-    <Compile Include="Wizards\ImportWizard\ImportDelayLoadingOptionComboBoxItem.cs" />
     <Compile Include="Wizards\ImportWizard\LunPerVdiImportPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

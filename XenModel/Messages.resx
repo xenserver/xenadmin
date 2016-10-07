@@ -1086,7 +1086,10 @@
   <data name="ACTION_VM_MIGRATING" xml:space="preserve">
     <value>Migrating</value>
   </data>
-  <data name="ACTION_VM_MIGRATING_TITLE" xml:space="preserve">
+  <data name="ACTION_VM_MIGRATING_NON_RESIDENT" xml:space="preserve">
+    <value>Migrating VM '{0}' to '{1}'</value>
+  </data>
+  <data name="ACTION_VM_MIGRATING_RESIDENT" xml:space="preserve">
     <value>Migrating VM '{0}' from '{1}' to '{2}'</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
@@ -3125,9 +3128,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
     <value>/sec</value>
   </data>
-  <data name="CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST" xml:space="preserve">
-    <value>cannot migrate to the same host</value>
-  </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>incompatible version numbers</value>
   </data>
@@ -3176,23 +3176,29 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Destination:</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to migrate the selected VMs to.</value>
-  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected VMs to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected VM to.</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to copy the selected template to.</value>
-  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to copy the selected templates to.</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE" xml:space="preserve">
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to copy the selected template to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to migrate the selected VMs to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE" xml:space="preserve">
     <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to move the selected VMs to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to move the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>Specify a &amp;target server in the destination pool (optional):</value>

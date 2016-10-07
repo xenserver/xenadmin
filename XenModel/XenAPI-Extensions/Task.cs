@@ -81,7 +81,7 @@ namespace XenAPI
             // Titles["VM.export"] = ...;
             Titles["VM.hard_reboot"] = Messages.ACTION_VM_REBOOTING_TITLE;
             Titles["VM.hard_shutdown"] = Messages.ACTION_VM_SHUTTING_DOWN_TITLE;
-            Titles["VM.migrate_send"] = Messages.ACTION_VM_MIGRATING_TITLE;
+            Titles["VM.migrate_send"] = Messages.ACTION_VM_MIGRATING_RESIDENT;
             Titles["VM.resume"] = Messages.ACTION_VM_RESUMING_ON_TITLE;
             Titles["VM.resume_on"] = Messages.ACTION_VM_RESUMING_ON_TITLE;
             Titles["VM.start"] = Messages.ACTION_VM_STARTING_ON_TITLE;

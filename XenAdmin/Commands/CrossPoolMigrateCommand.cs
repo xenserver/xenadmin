@@ -59,16 +59,17 @@ namespace XenAdmin.Commands
             this.preSelectedHost = preSelectedHost;
         }
 
-        private string menuText = Messages.HOST_MENU_CPM_TEXT;
         public override string MenuText
         {
-            get { return menuText; }
-            set { menuText = value; }
+            get { return preSelectedHost == null ? Messages.HOST_MENU_CPM_TEXT : preSelectedHost.Name.EscapeAmpersands(); }
         }
 
         public override string ContextMenuText { get { return Messages.HOST_MENU_CPM_TEXT; } }
 
-        public override Image MenuImage { get { return Resources._000_MigrateVM_h32bit_16; } }
+        public override Image MenuImage
+        {
+            get { return preSelectedHost == null ? Resources._000_MigrateVM_h32bit_16 : Resources._000_TreeConnected_h32bit_16; }
+        }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
@@ -109,7 +110,7 @@ namespace XenAdmin.Commands
 
             if (preselectedHost != null)
             {
-                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> { vm }).FailureFound;
+                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm}, WizardMode.Migrate).FailureFound;
             }
 
             return !failureFound &&

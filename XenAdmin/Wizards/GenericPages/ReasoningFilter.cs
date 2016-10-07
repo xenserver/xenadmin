@@ -43,14 +43,10 @@ namespace XenAdmin.Wizards.GenericPages
             ItemToFilterOn = itemToFilterOn;
         }
 
-        protected ReasoningFilter()
-        {
-        }
-
         /// <summary>
         /// Base item that should be used to filter on
         /// </summary>
-        public IXenObject ItemToFilterOn { get; protected set; }
+        protected IXenObject ItemToFilterOn { get; set; }
         public abstract bool FailureFound { get; }
         public abstract string Reason { get; }
 
@@ -58,12 +54,6 @@ namespace XenAdmin.Wizards.GenericPages
         {
             ItemToFilterOn = xenObject;
             return FailureFound;
-        }
-
-        public KeyValuePair<bool, List<string>> Or(ReasoningFilter filter)
-        {
-            List<string> reasons = new List<string>{ Reason, filter.Reason };
-            return new KeyValuePair<bool, List<string>>(FailureFound || filter.FailureFound, reasons);
         }
     } 
 }

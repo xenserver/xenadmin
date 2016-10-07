@@ -42,62 +42,54 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
     public class CrossPoolMigrateCanMigrateFilter : ReasoningFilter
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly WizardMode _wizardMode;
+        private string disableReason = string.Empty;
         private readonly List<VM> preSelectedVMs;
-        private readonly List<FailureReason> failureReasons = new List<FailureReason>();
 
-        /// <summary>
-        /// Helper class used for determining if the hosts in the failure 
-        /// reason are equal. Used in the distinct function of the enumerable classes
-        /// </summary>
-        private class FailingHostComparer : IEqualityComparer<FailureReason>
-        {
-            public bool Equals(FailureReason x, FailureReason y)
-            {
-                return x.Host.Equals(y.Host);
-            }
-
-            public int GetHashCode(FailureReason obj)
-            {
-                return obj.Host.GetHashCode();
-            }
-        }
-
-        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs)
+        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs, WizardMode wizardMode)
             : base(itemAddedToComboBox)
         {
+            _wizardMode = wizardMode;
             this.preSelectedVMs = preSelectedVMs;
-        }
-
-        private struct FailureReason
-        {
-            public string Reason;
-            public VM Vm;
-            public Host Host;
         }
 
         public override bool FailureFound
         {
             get
             {
-                List<Host> targets = CollateHosts();
-                failureReasons.Clear();
+                log.InfoFormat("Asserting can migrate to {0}...", ItemToFilterOn);
+
+                Pool targetPool;
+                List<Host> targets = CollateHosts(out targetPool);
+                var excludedHosts = new List<string>();
 
                 foreach (Host host in targets)
                 {
                     if (preSelectedVMs == null)
                         throw new NullReferenceException("Pre-selected VMs are null");
 
-                    var targetSR = GetDefaultSROrAny(host);
+                    var targetSrs = host.Connection.Cache.SRs.Where(sr => sr.SupportsVdiCreate()).ToList();
                     var targetNetwork = GetANetwork(host);
 
                     foreach (VM vm in preSelectedVMs)
                     {
                         try
                         {
+                            //CA-220218: for intra-pool motion of halted VMs we do a move, so no need to assert we can migrate
+                            Pool vmPool = Helpers.GetPoolOfOne(vm.Connection);
+                            if (_wizardMode == WizardMode.Move && vmPool != null && targetPool != null && vmPool.opaque_ref == targetPool.opaque_ref)
+                                continue;
+                            
                             //Skip the resident host as there's a filter for it and 
                             //if not then you could exclude intrapool migration
-                            if (vm.resident_on == host.opaque_ref)
+                            //CA-205799: do not offer the host the VM is currently on
+                            Host homeHost = vm.Home();
+                            if (homeHost != null && homeHost.opaque_ref == host.opaque_ref)
+                            {
+                                if (!excludedHosts.Contains(host.opaque_ref))
+                                    excludedHosts.Add(host.opaque_ref);
                                 continue;
+                            }
 
                             PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);
                             XenAPI.Network network = host.Connection.Cache.Resolve(managementPif.network);
@@ -108,103 +100,77 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                                                   vm.opaque_ref,
                                                   receiveMapping,
                                                   true,
-                                                  GetVdiMap(vm, targetSR),
+                                                  GetVdiMap(vm, targetSrs),
                                                   vm.Connection == host.Connection ? new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>() : GetVifMap(vm, targetNetwork),
                                                   new Dictionary<string, string>());
                         }
                         catch (Failure failure)
                         {
-                            failureReasons.Add(new FailureReason{Reason = failure.Message, Host = host, Vm = vm});
+                            disableReason = failure.Message;
+                            
+                            log.ErrorFormat("VM: {0}, Host: {1} - Reason: {2};", vm.opaque_ref, host.opaque_ref, failure.Message);
+
+                            if (!excludedHosts.Contains(host.opaque_ref))
+                                excludedHosts.Add(host.opaque_ref);
                         }
                     }
                 }
 
-                return DetermineIfFailureGivenReasons();
+                return excludedHosts.Count == targets.Count;
             }
         }
 
-        /// <summary>
-        /// If we have a pool, then we need to fail only when there are failures for 
-        /// each of the hosts. Otherwise any failure counts.
-        /// </summary>
-        /// <returns></returns>
-        private bool DetermineIfFailureGivenReasons()
+        private List<Host> CollateHosts(out Pool thePool)
         {
-            List<FailureReason> distinctFails = failureReasons.Distinct(new FailingHostComparer()).ToList();
+            thePool = null;
 
-            if (ItemToFilterOn is Pool)
-            {
-                Pool pool = ItemToFilterOn as Pool;
-                return distinctFails.Count >= pool.Connection.Cache.HostCount;
-            }
-
-            return failureReasons.Count > 0;
-        }
-
-        private List<Host> CollateHosts()
-        {
             List<Host> target = new List<Host>();
             if (ItemToFilterOn is Host)
             {
                 target.Add(ItemToFilterOn as Host);
+                thePool = Helpers.GetPoolOfOne(ItemToFilterOn.Connection);
             }
 
             if (ItemToFilterOn is Pool)
             {
                 Pool pool = ItemToFilterOn as Pool;
                 target.AddRange(pool.Connection.Cache.Hosts);
+                thePool = pool;
             }
             return target;
         }
 
         public override string Reason
         {
-            get
-            {
-                if(failureReasons.Count > 1)
-                {
-                    StringBuilder sb = new StringBuilder();
-                    foreach (FailureReason pair in failureReasons)
-                    {
-                        sb.AppendLine(string.Format("VM: {0}, Host: {1} - Reason: {2};", 
-                                      pair.Vm.opaque_ref, pair.Host.opaque_ref, pair.Reason));
-                    }
-
-                    log.ErrorFormat("{0} not suitable for migration for multiple reasons: {1}", 
-                                    ItemToFilterOn, sb); 
-                }
-
-                //It's expected that FailureFound is called prior to the Reason property
-                //If not this should throw an exception
-                return failureReasons.FirstOrDefault().Reason;
-                
-            }
+            get { return disableReason; }
         }
 
-        private SR GetDefaultSROrAny(Host host)
-        {
-            // try default SR or any other SR that supports VDI create
-            var pool = Helpers.GetPoolOfOne(host.Connection);
-            if (pool != null)
-                return host.Connection.Resolve(pool.default_SR) ?? host.Connection.Cache.SRs.FirstOrDefault(sr => sr.SupportsVdiCreate());
-
-            return null;
-        }
-
-        private Dictionary<XenRef<VDI>, XenRef<SR>> GetVdiMap(VM vm, SR targetSR)
+        private Dictionary<XenRef<VDI>, XenRef<SR>> GetVdiMap(VM vm, List<SR> targetSrs)
         {
             var vdiMap = new Dictionary<XenRef<VDI>, XenRef<SR>>();
 
-            if (targetSR != null)
+            foreach (var vbdRef in vm.VBDs)
             {
-                List<VDI> vdis = vm.Connection.ResolveAll(vm.VBDs).Select(v => vm.Connection.Resolve(v.VDI)).ToList();
-                vdis.RemoveAll(vdi => vdi == null || vm.Connection.Resolve(vdi.SR).GetSRType(true) == SR.SRTypes.iso);
-
-                foreach (var vdi in vdis)
+                VBD vbd = vm.Connection.Resolve(vbdRef);
+                if (vbd != null)
                 {
-                    vdiMap.Add(new XenRef<VDI>(vdi.opaque_ref), new XenRef<SR>(targetSR));
+                    VDI vdi = vm.Connection.Resolve(vbd.VDI);
+                    if (vdi != null)
+                    {
+                        SR sr = vm.Connection.Resolve(vdi.SR);
+                        if (sr != null && sr.GetSRType(true) != SR.SRTypes.iso)
+                        {
+                            // CA-220218: select a storage other than the VDI's current storage to ensure that
+                            // both source and target SRs will be checked to see if they support migration
+                            // (when sourceSR == targetSR, the server side skips the check)
+                            var targetSr = targetSrs.FirstOrDefault(s => s.opaque_ref != sr.opaque_ref);
+                            if (targetSr != null)
+                                vdiMap.Add(new XenRef<VDI>(vdi.opaque_ref), new XenRef<SR>(targetSr));
+                        }
+                    }
                 }
             }
+
             return vdiMap;
         }
 

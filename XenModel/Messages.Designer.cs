@@ -2923,11 +2923,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos; to &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MIGRATING_NON_RESIDENT {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_NON_RESIDENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
-        public static string ACTION_VM_MIGRATING_TITLE {
+        public static string ACTION_VM_MIGRATING_RESIDENT {
             get {
-                return ResourceManager.GetString("ACTION_VM_MIGRATING_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_RESIDENT", resourceCulture);
             }
         }
         
@@ -8617,15 +8626,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cannot migrate to the same host.
-        /// </summary>
-        public static string CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST {
-            get {
-                return ResourceManager.GetString("CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to incompatible version numbers.
         /// </summary>
         public static string CPM_FAILURE_REASON_VERSION {
@@ -8770,15 +8770,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VMs to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VMs to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY {
@@ -8797,15 +8788,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected templates to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE {
@@ -8815,11 +8797,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VMs to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM to..
         /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE {
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE {
             get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE", resourceCulture);
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VMs to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VM to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE", resourceCulture);
             }
         }
         

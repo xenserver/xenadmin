@@ -40,11 +40,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
     {
         private readonly List<VM> preSelectedVMs;
 
-        public ResidentHostIsSameAsSelectionFilter(List<VM> preSelectedVMs) : this(null,preSelectedVMs)
+        public ResidentHostIsSameAsSelectionFilter(List<VM> preSelectedVMs)
+            : this(null,preSelectedVMs)
         {
         }
 
-        public ResidentHostIsSameAsSelectionFilter(IXenObject item, List<VM> preSelectedVMs):base(item)
+        public ResidentHostIsSameAsSelectionFilter(IXenObject item, List<VM> preSelectedVMs)
+            :base(item)
         {
             this.preSelectedVMs = preSelectedVMs;
         }
@@ -53,37 +55,32 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
         {
             get
             {
-                List<Host> residentHosts = new List<Host>();
-                preSelectedVMs.ForEach(vm=>residentHosts.Add( vm.Connection.Resolve(vm.resident_on)));
-                
-                if(ItemToFilterOn is Host)
-                {
-                    return VmIsResidentOnHost(residentHosts, ItemToFilterOn as Host);
-                }
+                var residentHosts = from VM vm in preSelectedVMs
+                    let home = vm.Home()
+                    where home != null
+                    select home;
 
-                if(ItemToFilterOn is Pool)
+                if (ItemToFilterOn is Host)
+                    return residentHosts.Any(h => h == ItemToFilterOn);
+
+                Pool tempPool = ItemToFilterOn as Pool;
+                if (tempPool != null)
                 {
-                    Pool tempPool = ItemToFilterOn as Pool;
-                    if(tempPool.Connection.Cache.Hosts.Length > 1)
+                    if (tempPool.Connection.Cache.Hosts.Length > 1)
                         return false;
 
                     //Pool with one host (or less)
-                    return VmIsResidentOnHost(residentHosts, tempPool.Connection.Resolve(tempPool.master));
-
+                    Host master = tempPool.Connection.Resolve(tempPool.master);
+                    return residentHosts.Any(h => h == master);
                 }
-                
+
                 return false;
             }
         }
 
-        private bool VmIsResidentOnHost(List<Host> residentHosts, Host filterOnHost)
-        {
-            return residentHosts.Any(h => h == filterOnHost);
-        }
-
         public override string Reason
         {
-            get { return Messages.CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST; }
+            get { return Messages.HOST_MENU_CURRENT_SERVER; }
         }
     }
 }
