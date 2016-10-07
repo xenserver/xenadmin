@@ -403,6 +403,7 @@ namespace XenAdmin.Controls.XenSearch
         {
             draggedButton = null;
             dragging = false;
+            Setup();
         }
 
         void button_MouseDown(object sender, MouseEventArgs e)
