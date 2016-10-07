@@ -525,6 +525,12 @@
   <data name="ACTION_MIGRATING_X_VDIS" xml:space="preserve">
     <value>Migrating {0} virtual disks to {1}</value>
   </data>
+  <data name="ACTION_MIGRATING_X_VDIS_COMPLETED" xml:space="preserve">
+    <value>Completed migrating virtual disks</value>
+  </data>
+  <data name="ACTION_MIGRATING_X_VDIS_STARTED" xml:space="preserve">
+    <value>Started migrating virtual disks</value>
+  </data>
   <data name="ACTION_MOVING_VDI_STATUS" xml:space="preserve">
     <value>Moving virtual disk '{0}'...</value>
   </data>
@@ -533,6 +539,12 @@
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
     <value>Moving {0} virtual disks to {1}</value>
+  </data>
+  <data name="ACTION_MOVING_X_VDIS_COMPLETED" xml:space="preserve">
+    <value>Completed moving virtual disks</value>
+  </data>
+  <data name="ACTION_MOVING_X_VDIS_STARTED" xml:space="preserve">
+    <value>Started moving virtual disks</value>
   </data>
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_END" xml:space="preserve">
     <value>Storage Repositories prepared</value>
@@ -7133,6 +7145,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_MOVEVM" xml:space="preserve">
     <value>&amp;Move VM...</value>
   </data>
+  <data name="MAINWINDOW_MOVE_OBJECTS" xml:space="preserve">
+    <value>&amp;Move...</value>
+  </data>
   <data name="MAINWINDOW_NEWPOOL" xml:space="preserve">
     <value>&amp;New Pool...</value>
   </data>
@@ -7589,9 +7604,6 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   </data>
   <data name="MIGRATE_PLEASE_EJECT_YOUR_CD" xml:space="preserve">
     <value>Please eject your CD</value>
-  </data>
-  <data name="MIGRATE_VDI_DIALOG_SRHINT" xml:space="preserve">
-    <value>Select the &amp;destination storage repository</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>

@@ -32,8 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
@@ -55,17 +53,9 @@ namespace XenAdmin.Commands
         {
         }
 
-        public MigrateVirtualDiskCommand(IMainWindow mainWindow, VDI vdi)
-            : base(mainWindow, vdi)
-        {
-        }
-
         public override string ContextMenuText
         {
-            get
-            {
-                return Messages.MOVE_VDI_CONTEXT_MENU;
-            }
+            get { return GetSelection().Count > 1 ? Messages.MAINWINDOW_MOVE_OBJECTS : Messages.MOVE_VDI_CONTEXT_MENU; }
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
@@ -75,48 +65,35 @@ namespace XenAdmin.Commands
             bool featureForbidden = vdis.TrueForAll(vdi => Helpers.FeatureForbidden(vdi.Connection, Host.RestrictCrossPoolMigrate));
             if (featureForbidden)
             {
-                ShowUpsellDialog(Parent);
+                string theText = HiddenFeatures.LinkLabelHidden
+                    ? Messages.MIGRATE_VDI_UPSELL_BLURB
+                    : Messages.MIGRATE_VDI_UPSELL_BLURB + Messages.MIGRATE_VDI_UPSELL_BLURB_MORE;
+
+                using (var dlg = new UpsellDialog(theText, InvisibleMessages.UPSELL_LEARNMOREURL_CPM))
+                    dlg.ShowDialog(Parent);
             }
             else
             {
-                new VDIMigrateDialog(selection.FirstAsXenObject.Connection, vdis).Show(Program.MainWindow);
+                new MoveVirtualDiskDialog(selection.FirstAsXenObject.Connection, null, vdis).Show(Program.MainWindow);
             }
-        }
-
-        public static void ShowUpsellDialog(IWin32Window parent)
-        {
-            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.MIGRATE_VDI_UPSELL_BLURB : Messages.MIGRATE_VDI_UPSELL_BLURB + Messages.MIGRATE_VDI_UPSELL_BLURB_MORE, 
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_CPM))
-                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return selection.Count >= 1 && selection.All(v => CanBeMigrated(v.XenObject as VDI));
-        }
-
-        private SR GetSR(VDI vdi)
-        {
-            return vdi.Connection.Resolve(vdi.SR);
+            return selection.Count > 0 && selection.All(v => CanBeMigrated(v.XenObject as VDI));
         }
 
         private bool CanBeMigrated(VDI vdi)
         {
-            
-            if (vdi == null)
+            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType)
                 return false;
-            if (vdi.is_a_snapshot)
-                return false;
-            if (vdi.Locked)
-                return false;
-            if (vdi.IsHaType)
-                return false;
-            if(vdi.Connection.ResolveAll(vdi.VBDs).Count < 1)
+
+            if(vdi.Connection.ResolveAll(vdi.VBDs).Count == 0)
                 return false;
             if(vdi.GetVMs().Any(vm=>!vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return false;
 
-            SR sr = GetSR(vdi);
+            SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null || sr.HBALunPerVDI)
                 return false;
             if (Helpers.DundeePlusOrGreater(vdi.Connection) && !sr.allowed_operations.Contains(storage_operations.vdi_mirror))
@@ -130,6 +107,7 @@ namespace XenAdmin.Commands
             VDI vdi = item.XenObject as VDI;
             if (vdi == null)
                 return base.GetCantExecuteReasonCore(item);
+
             if (vdi.is_a_snapshot)
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
             if (vdi.Locked)
@@ -141,7 +119,7 @@ namespace XenAdmin.Commands
             if (vdi.GetVMs().Any(vm => !vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return Messages.CANNOT_MIGRATE_VDI_NON_RUNNING_VM;
 
-            SR sr = GetSR(vdi);
+            SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)
                 return base.GetCantExecuteReasonCore(item);
             if (sr.HBALunPerVDI)

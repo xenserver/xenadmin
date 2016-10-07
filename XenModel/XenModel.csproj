@@ -119,7 +119,6 @@
     <Compile Include="Actions\VBD\VbdEditAction.cs" />
     <Compile Include="Actions\VBD\VbdSaveAndPlugAction.cs" />
     <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />
-    <Compile Include="Actions\VDI\BatchingMigrateVirtualDiskManager.cs" />
     <Compile Include="Actions\VDI\CreateDiskAction.cs" />
     <Compile Include="Actions\VDI\MigrateVirtualDiskAction.cs" />
     <Compile Include="Actions\VMAppliances\AssignVMsToVMApplianceAction.cs" />

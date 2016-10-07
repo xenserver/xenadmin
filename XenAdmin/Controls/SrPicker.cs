@@ -44,8 +44,13 @@ namespace XenAdmin.Controls
         // Migrate is the live VDI move operation
         public enum SRPickerType { VM, InstallFromTemplate, MoveOrCopy, Migrate, LunPerVDI };
         private SRPickerType usage = SRPickerType.VM;
+        
         //Used in the MovingVDI usage
         private VDI[] existingVDIs;
+        public void SetExistingVDIs(VDI[] vdis)
+        {
+            existingVDIs = vdis;
+        }
 
         private IXenConnection connection;
 
@@ -99,18 +104,6 @@ namespace XenAdmin.Controls
         public SRPickerType Usage
         {
             set { usage = value; }
-        }
-
-        public void SetUsageAsMovingVDI(VDI[] vdis)
-        {
-            usage = SRPickerType.MoveOrCopy;
-            existingVDIs = vdis;
-        }
-
-        public void SetUsageAsMigrateVDI(VDI[] vdis)
-        {
-            usage = SRPickerType.Migrate;
-            existingVDIs = vdis;
         }
 
         /// <summary>

@@ -506,10 +506,6 @@ namespace XenAPI
             if (content_type == SR.Content_Type_ISO)
                 return false;
 
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null)
-                return false;
-
             SM sm = SM.GetByType(Connection, type);
             return sm != null && -1 != Array.IndexOf(sm.capabilities, "VDI_CREATE");
         }
