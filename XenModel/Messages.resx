@@ -10879,9 +10879,6 @@ The upper limit: SR size / {2}</value>
   <data name="STORAGE_WORST" xml:space="preserve">
     <value>0 (Lowest)</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="STRINGIFY_LIST_INNERSEP" xml:space="preserve">
     <value>, </value>
   </data>
