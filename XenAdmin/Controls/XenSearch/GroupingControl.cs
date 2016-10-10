@@ -401,9 +401,13 @@ namespace XenAdmin.Controls.XenSearch
 
         void button_MouseUp(object sender, MouseEventArgs e)
         {
+            bool wasDragging = dragging;
+
             draggedButton = null;
             dragging = false;
-            Setup();
+
+            if(wasDragging)
+                Setup();
         }
 
         void button_MouseDown(object sender, MouseEventArgs e)
