@@ -367,19 +367,19 @@ namespace XenAdmin.ConsoleView
                     {
                         if (networkInfo.Key.EndsWith("ip")) // IPv4 address
                         {
-                            if (pif != null && pif.LinkStatus == PIF.LinkState.Connected) 
-                                ipAddresses.Add(networkInfo.Value);
-                            else
+                            if (pif == null)
                                 ipAddressesForNetworksWithoutPifs.Add(networkInfo.Value);
+                            else if (pif.LinkStatus == PIF.LinkState.Connected)
+                                ipAddresses.Add(networkInfo.Value);
                         }
                         else
                         {
                             if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
                             {
-                                if (pif != null && pif.LinkStatus == PIF.LinkState.Connected)
+                                if (pif == null)
+                                    ipv6AddressesForNetworksWithoutPifs.Add(String.Format("[{0}]", networkInfo.Value));
+                                else if (pif.LinkStatus == PIF.LinkState.Connected)
                                     ipv6Addresses.Add(String.Format("[{0}]", networkInfo.Value));
-                                else
-                                    ipv6AddressesForNetworksWithoutPifs.Add(networkInfo.Value);
                             }
                             else
                                 continue;
