@@ -148,6 +148,23 @@ namespace XenAdmin.Network
                 HandleConnectionLoss();
                 return;
             }
+            catch (WebException exn)
+            {
+                log.Error(exn);
+                if (((HttpWebResponse)exn.Response).StatusCode == HttpStatusCode.ProxyAuthenticationRequired) // work-around for CA-214653
+                {
+                    log.DebugFormat("Heartbeat for {0} has failed due to {1} credentials; closing the main connection",
+                        session == null ? "null" : session.Url,
+                        session.proxy.Proxy.Credentials == null ? "missing" : "incorrect");
+                    connection.Interrupt();
+                    DropSession();
+                }
+                else
+                {
+                    HandleConnectionLoss();
+                }
+                return;
+            }
             catch (Exception exn)
             {
                 log.Error(exn);
