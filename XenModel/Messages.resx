@@ -288,14 +288,14 @@
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>Disabled PVS read caching for selected VMs</value>
   </data>
+  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Disable live patching</value>
+  </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>Disable PVS read caching</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
     <value>Disabling PVS read caching for VM '{0}'</value>
-  </data>
-  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Disable live patching</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
@@ -303,11 +303,11 @@
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Disable container management on VM '{0}'</value>
   </data>
-  <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabling PVS read caching for selected VMs</value>
-  </data>
   <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Disabling live patching for '{0}'</value>
+  </data>
+  <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disabling PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -408,14 +408,14 @@
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabled PVS read caching for selected VMs</value>
   </data>
+  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Enable live patching</value>
+  </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>Enable PVS read caching</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
     <value>Enabling PVS read caching for VM '{0}' on site '{1}'</value>
-  </data>
-  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Enable live patching</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
@@ -423,11 +423,11 @@
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>Enable container management on VM '{0}'</value>
   </data>
-  <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabling PVS read caching for selected VMs</value>
-  </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Enabling live patching for '{0}'</value>
+  </data>
+  <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enabling PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -2634,6 +2634,9 @@ Do you want to continue?</value>
   <data name="CONFIRM_DELETE_POLICY_0" xml:space="preserve">
     <value>Do you want to delete policy '{0}'?</value>
   </data>
+  <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
+    <value>Are you sure you want to delete '{0}'?</value>
+  </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>Are you sure you want to delete the tag '{0}' from all managed resources?</value>
   </data>
@@ -3576,6 +3579,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   </data>
   <data name="DATATYPE_NETWORK" xml:space="preserve">
     <value>Network</value>
+  </data>
+  <data name="DATATYPE_PVS" xml:space="preserve">
+    <value>PVS Cache</value>
   </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>Storage</value>
@@ -9694,6 +9700,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>Not configured</value>
   </data>
+  <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
+    <value>This PVS site cannot be removed because it contains running proxies.</value>
+  </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
     <value>PVS Servers on site {0}'</value>
   </data>
@@ -13245,11 +13254,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
-    <value>Are you sure you want to delete '{0}'?</value>
-  </data>
-  <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>This PVS site cannot be removed because it contains running proxies.</value>
   </data>
 </root>
