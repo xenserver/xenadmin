@@ -121,9 +121,10 @@ namespace XenAPI
             if (network.PIFs.Count == 0)
                 return true;
 
-            foreach (PIF pif in network.Connection.ResolveAll(network.PIFs))
+            foreach (var pifRef in network.PIFs)
             {
-                if (pif.host != null && pif.host.opaque_ref == opaque_ref)
+                PIF pif = network.Connection.Resolve(pifRef);
+                if (pif != null && pif.host != null && pif.host.opaque_ref == opaque_ref)
                     return true;
             }
 

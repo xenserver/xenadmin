@@ -47,10 +47,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
         {
 	        get 
 	        {
-                if (ItemToFilterOn is Host || ItemToFilterOn is Pool)
-                    return !Helpers.TampaOrGreater(ItemToFilterOn.Connection);
-
-                throw new ArgumentException("Cannot find a failure for this type of object");
+                return !Helpers.TampaOrGreater(ItemToFilterOn.Connection);
 	        }
         }
 

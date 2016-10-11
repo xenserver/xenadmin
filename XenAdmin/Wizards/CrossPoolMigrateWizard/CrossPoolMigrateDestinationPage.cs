@@ -144,10 +144,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)
         {
-            List<ReasoningFilter> filters = new List<ReasoningFilter>{ new ResidentHostIsSameAsSelectionFilter(selectedVMs) };
+            var filters = new List<ReasoningFilter>();
 
             if(selectedItem != null)
             {
+                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, selectedVMs));
                 filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs, wizardMode));
                 filters.Add(new WlbEnabledFilter(selectedItem.Item, selectedVMs));
             } 
