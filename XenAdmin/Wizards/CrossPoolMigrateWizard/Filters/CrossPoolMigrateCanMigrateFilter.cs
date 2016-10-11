@@ -50,6 +50,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             : base(itemAddedToComboBox)
         {
             _wizardMode = wizardMode;
+
+            if (preSelectedVMs == null)
+                throw new ArgumentNullException("Pre-selected VMs are null");
             this.preSelectedVMs = preSelectedVMs;
         }
 
@@ -65,9 +68,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 
                 foreach (Host host in targets)
                 {
-                    if (preSelectedVMs == null)
-                        throw new NullReferenceException("Pre-selected VMs are null");
-
                     var targetSrs = host.Connection.Cache.SRs.Where(sr => sr.SupportsVdiCreate()).ToList();
                     var targetNetwork = GetANetwork(host);
 

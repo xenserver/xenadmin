@@ -30,8 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
 using XenAPI;
 
 namespace XenAdmin.Wizards.GenericPages
@@ -40,6 +38,9 @@ namespace XenAdmin.Wizards.GenericPages
     {
         protected ReasoningFilter(IXenObject itemToFilterOn)
         {
+            if (!(itemToFilterOn is Host) && !(itemToFilterOn is Pool))
+                throw new ArgumentException("Target should be host or pool");
+
             ItemToFilterOn = itemToFilterOn;
         }
 
