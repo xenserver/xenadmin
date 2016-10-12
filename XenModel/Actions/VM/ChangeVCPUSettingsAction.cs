@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
         {
             // get the VM from the cache again, to check its vCPU fields before trying to change them
             m_VM = Connection.Resolve(new XenRef<VM>(m_VM.opaque_ref));
-            if (m_VM == null) // VM has dissapeared
+            if (m_VM == null) // VM has disappeared
                 return;
 
             if (m_VM.power_state == vm_power_state.Running) // if the VM is running, we can only change the vCPUs number, not the max.
