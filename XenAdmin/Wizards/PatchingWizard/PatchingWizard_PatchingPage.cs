@@ -501,18 +501,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #endregion
 
-        private bool AllServersElyOrGreater()
-        {
-            foreach (var server in SelectedServers)
-            {
-                if (!Helpers.ElyOrGreater(server.Connection))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         private void FinishedWithErrors(Exception exception)
         {
             labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, GetUpdateName());
