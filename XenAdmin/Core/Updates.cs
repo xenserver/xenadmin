@@ -392,7 +392,7 @@ namespace XenAdmin.Core
                                 // 1. patch is not already installed 
                                 if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
                                         return false;
-                                else if (appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                                else if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
                                         return false;
                                 
                                 // 2. the host has all the required patches installed
@@ -400,7 +400,7 @@ namespace XenAdmin.Core
                                     !serverPatch.RequiredPatches
                                     .All(requiredPatchUuid => 
                                         elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        || appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
                                         )
                                     )
                                     return false;
@@ -410,7 +410,7 @@ namespace XenAdmin.Core
                                     serverPatch.ConflictingPatches
                                     .Any(conflictingPatchUuid =>
                                         elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        || appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
                                         )
                                     )
                                     return false;
