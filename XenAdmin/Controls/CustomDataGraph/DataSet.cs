@@ -291,11 +291,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
                 else if (settype.EndsWith("read_total") || settype.EndsWith("read_hits") || settype.EndsWith("read_misses"))
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
-                else if (settype.Contains("utilization"))
-                {
-                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed);
-                    dataSet.MultiplyingFactor = 100;
-                }
+                else if (settype.Contains("utilization")) 
+                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed); // values range from 0 to 100
                 else
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
                 dataSet.Type = DataType.Pvs;
