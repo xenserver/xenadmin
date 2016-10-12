@@ -554,28 +554,13 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         /// <summary>
-        /// Live patching has failed for a host if that host requires a reboot for this patch, and we expected to live patch
+        /// Returns true if <paramref name="host"/> has to be rebooted for this update
         /// </summary>
-        /// <param name="host"></param>
-        /// <returns></returns>
-        private bool LivePatchingFailedForHost(Host host)
+        private bool HostRequiresReboot(Host host)
         {
-            if (!host.patches_requiring_reboot.Any())
-            {
-                return false;
-            }
-
-            foreach (var patchRef in host.patches_requiring_reboot)
-            {
-                var poolPatch = host.Connection.Resolve(patchRef);
-                if (poolPatch.uuid.Equals(Patch.uuid))
-                {
-                    // This patch failed
-                    return true;
-                }
-            }
-
-            return false;
+            return 
+                host.updates_requiring_reboot !=null && PoolUpdate != null
+                && host.updates_requiring_reboot.Select(uRef => host.Connection.Resolve(uRef)).Any(u => u != null && u.uuid.Equals(PoolUpdate.uuid));
         }
 
         private void FinishedSuccessfully()
@@ -589,7 +574,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var host in SelectedMasters)
             {
-                if (LivePatchingAttemptedForHost(host) && LivePatchingFailedForHost(host))
+                if (LivePatchingAttemptedForHost(host) && HostRequiresReboot(host))
                 {
                     livePatchingFailedHosts.Add(host);
                 }
