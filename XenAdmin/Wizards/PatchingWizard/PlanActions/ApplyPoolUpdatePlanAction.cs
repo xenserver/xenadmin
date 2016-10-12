@@ -48,10 +48,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            //XenRef<Task> task = 
-            Pool_update.apply(session, poolUpdate.opaque_ref, host.opaque_ref);
+            XenRef<Task> task = Pool_update.async_apply(session, poolUpdate.opaque_ref, host.opaque_ref);
 
-            //PollTaskForResultAndDestroy(Connection, ref session, task);
+            PollTaskForResultAndDestroy(Connection, ref session, task);
         }
     }
 }
