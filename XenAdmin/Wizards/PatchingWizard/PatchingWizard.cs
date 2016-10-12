@@ -188,6 +188,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
                 }
+                PatchingWizard_PrecheckPage.Pool_update = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PatchingPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_ModePage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PatchingPage.SuppPackVdis = PatchingWizard_UploadPage.SuppPackVdis;
