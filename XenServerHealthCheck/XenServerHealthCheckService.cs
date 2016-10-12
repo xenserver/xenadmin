@@ -76,6 +76,8 @@ namespace XenServerHealthCheck
         public static void ReconfigureConnectionSettings()
         {
             XenAPI.Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
+            XenAPI.HTTP.ProxyAuthenticationMethod = 
+                (HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
         }
 
         protected override void OnStart(string[] args)

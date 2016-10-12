@@ -232,6 +232,7 @@ namespace XenServerHealthCheck
                         Properties.Settings.Default.ProvideProxyAuthentication = bool.Parse(proxySettings[6]);
                         Properties.Settings.Default.ProxyUsername = proxySettings[7];
                         Properties.Settings.Default.ProxyPassword = proxySettings[8];
+                        Properties.Settings.Default.ProxyAuthenticationMethod = Int32.Parse(proxySettings[9]);
                         break;
 
                     case HTTPHelper.ProxyStyle.SystemProxy:

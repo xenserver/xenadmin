@@ -30,16 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Properties;
 using XenAdmin.Actions;
 using XenAPI;
-using System.Text.RegularExpressions;
 using XenAdmin.Core;
 
 
@@ -69,15 +64,15 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void build()
         {
             // Proxy server
-            switch (Properties.Settings.Default.ProxySetting)
+            switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)
             {
-                case 0:
+                case HTTPHelper.ProxyStyle.DirectConnection:
                     DirectConnectionRadioButton.Checked = true;
                     break;
-                case 1:
+                case HTTPHelper.ProxyStyle.SystemProxy:
                     UseIERadioButton.Checked = true;
                     break;
-                case 2:
+                case HTTPHelper.ProxyStyle.SpecifiedProxy:
                     UseProxyRadioButton.Checked = true;
                     break;
                 default:
@@ -92,6 +87,19 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (Registry.ProxyAuthenticationEnabled)
             {
                 AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
+                
+                switch ((HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod)
+                {
+                    case HTTPHelper.ProxyAuthenticationMethod.Basic:
+                        BasicRadioButton.Checked = true;
+                        break;
+                    case HTTPHelper.ProxyAuthenticationMethod.Digest:
+                        DigestRadioButton.Checked = true;
+                        break;
+                    default:
+                        DigestRadioButton.Checked = true;
+                        break;
+                }
 
                 // checks for empty default username/password which starts out unencrypted
                 string protectedUsername = Properties.Settings.Default.ProxyUsername;
@@ -107,6 +115,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                 ProxyUsernameTextBox.Visible = false;
                 ProxyPasswordLabel.Visible = false;
                 ProxyPasswordTextBox.Visible = false;
+                AuthenticationMethodPanel.Visible = false;
+                AuthenticationMethodLabel.Visible = false;
             }
             
             ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
@@ -191,6 +201,26 @@ namespace XenAdmin.Dialogs.OptionsPages
             enableOK();
         }
 
+        private void BasicRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (eventsDisabled)
+                return;
+
+            SelectProvideCredentials();
+
+            enableOK();
+        }
+
+        private void DigestRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (eventsDisabled)
+                return;
+
+            SelectProvideCredentials();
+
+            enableOK();
+        }
+
         private void SelectUseThisProxyServer()
         {
             UseProxyRadioButton.Checked = true;
@@ -246,6 +276,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             log.Info("=== ProxyPort: " + Properties.Settings.Default.ProxyPort.ToString());
             log.Info("=== ByPassProxyForServers: " + Properties.Settings.Default.BypassProxyForServers.ToString());
             log.Info("=== ProvideProxyAuthentication: " + Properties.Settings.Default.ProvideProxyAuthentication.ToString());
+            log.Info("=== ProxyAuthenticationMethod: " + Properties.Settings.Default.ProxyAuthenticationMethod.ToString());
             log.Info("=== ConnectionTimeout: " + Properties.Settings.Default.ConnectionTimeout.ToString());
         }
 
@@ -270,6 +301,11 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
                 Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
                 Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
+
+                HTTPHelper.ProxyAuthenticationMethod new_auth_method = BasicRadioButton.Checked ?
+                    HTTPHelper.ProxyAuthenticationMethod.Basic : HTTPHelper.ProxyAuthenticationMethod.Digest;
+                if (Properties.Settings.Default.ProxyAuthenticationMethod != (int)new_auth_method)
+                    Properties.Settings.Default.ProxyAuthenticationMethod = (int)new_auth_method;
             }
 
             try
@@ -294,15 +330,17 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
 
             Program.ReconfigureConnectionSettings();
-            new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                                            Properties.Settings.Default.ProxyAddress,
-                                            Properties.Settings.Default.ProxyPort,
-                                            Properties.Settings.Default.ConnectionTimeout,
-                                            false,
-                                            Properties.Settings.Default.BypassProxyForServers,
-                                            Properties.Settings.Default.ProvideProxyAuthentication,
-                                            Properties.Settings.Default.ProxyUsername,
-                                            Properties.Settings.Default.ProxyPassword).RunAsync();
+            new TransferProxySettingsAction(
+                (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                Properties.Settings.Default.ProxyAddress,
+                Properties.Settings.Default.ProxyPort,
+                Properties.Settings.Default.ConnectionTimeout,
+                false,
+                Properties.Settings.Default.BypassProxyForServers,
+                Properties.Settings.Default.ProvideProxyAuthentication,
+                Properties.Settings.Default.ProxyUsername,
+                Properties.Settings.Default.ProxyPassword,
+                (HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
         }
 
         #endregion
