@@ -12269,6 +12269,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VM_USES_LOCAL_STORAGE" xml:space="preserve">
     <value>This VM uses local storage</value>
   </data>
+  <data name="VM_VCPU_CANNOT_UNPLUG_LIVE" xml:space="preserve">
+    <value>The current number of vCPUs is already {0} and cannot be decreased while the VM is running.</value>
+  </data>
   <data name="VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>vCPU changes will take effect when you restart the VM.</value>
   </data>

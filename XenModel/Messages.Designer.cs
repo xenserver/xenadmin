@@ -35366,6 +35366,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current number of vCPUs is already {0} and cannot be decreased while the VM is running..
+        /// </summary>
+        public static string VM_VCPU_CANNOT_UNPLUG_LIVE {
+            get {
+                return ResourceManager.GetString("VM_VCPU_CANNOT_UNPLUG_LIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to vCPU changes will take effect when you restart the VM..
         /// </summary>
         public static string VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE {
