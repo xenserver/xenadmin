@@ -817,7 +817,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     if (String.IsNullOrEmpty(t))
                         return;
 
-                    Clipboard.SetText(t);
+                    Clip.SetClipboardText(t);
                 }
             }
         }
