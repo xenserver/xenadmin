@@ -151,73 +151,19 @@ namespace XenAdmin.Dialogs.OptionsPages
             enableOK();
         }
 
-        private void ProxyAddressTextBox_TextChanged(object sender, EventArgs e)
+        private void GeneralProxySettingsChanged(object sender, EventArgs e)
         {
             if (eventsDisabled)
                 return;
-
             SelectUseThisProxyServer();
-
             enableOK();
         }
 
-        private void ProxyPortTextBox_TextChanged(object sender, EventArgs e)
+        private void ProxyAuthenticationSettingsChanged(object sender, EventArgs e)
         {
             if (eventsDisabled)
                 return;
-
-            SelectUseThisProxyServer();
-
-            enableOK();
-        }
-
-        private void ProxyUsernameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (eventsDisabled)
-                return;
-
             SelectProvideCredentials();
-
-            enableOK();
-        }
-
-        private void ProxyPasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (eventsDisabled)
-                return;
-
-            SelectProvideCredentials();
-
-            enableOK();
-        }
-
-        private void BypassForServersCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (eventsDisabled)
-                return;
-
-            SelectUseThisProxyServer();
-
-            enableOK();
-        }
-
-        private void BasicRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (eventsDisabled)
-                return;
-
-            SelectProvideCredentials();
-
-            enableOK();
-        }
-
-        private void DigestRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (eventsDisabled)
-                return;
-
-            SelectProvideCredentials();
-
             enableOK();
         }
 

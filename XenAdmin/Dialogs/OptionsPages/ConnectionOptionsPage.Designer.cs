@@ -162,14 +162,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.tableLayoutPanel1.SetColumnSpan(this.BypassForServersCheckbox, 6);
             this.BypassForServersCheckbox.Name = "BypassForServersCheckbox";
             this.BypassForServersCheckbox.UseVisualStyleBackColor = true;
-            this.BypassForServersCheckbox.CheckedChanged += new System.EventHandler(this.BypassForServersCheckbox_CheckedChanged);
+            this.BypassForServersCheckbox.CheckedChanged += new System.EventHandler(this.GeneralProxySettingsChanged);
             // 
             // ProxyPasswordTextBox
             // 
             resources.ApplyResources(this.ProxyPasswordTextBox, "ProxyPasswordTextBox");
             this.ProxyPasswordTextBox.Name = "ProxyPasswordTextBox";
             this.ProxyPasswordTextBox.UseSystemPasswordChar = true;
-            this.ProxyPasswordTextBox.TextChanged += new System.EventHandler(this.ProxyPasswordTextBox_TextChanged);
+            this.ProxyPasswordTextBox.TextChanged += new System.EventHandler(this.ProxyAuthenticationSettingsChanged);
             // 
             // ProxyUsernameLabel
             // 
@@ -182,7 +182,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.tableLayoutPanel1.SetColumnSpan(this.ProxyUsernameTextBox, 2);
             resources.ApplyResources(this.ProxyUsernameTextBox, "ProxyUsernameTextBox");
             this.ProxyUsernameTextBox.Name = "ProxyUsernameTextBox";
-            this.ProxyUsernameTextBox.TextChanged += new System.EventHandler(this.ProxyUsernameTextBox_TextChanged);
+            this.ProxyUsernameTextBox.TextChanged += new System.EventHandler(this.ProxyAuthenticationSettingsChanged);
             // 
             // ProxyPasswordLabel
             // 
@@ -233,13 +233,13 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.tableLayoutPanel1.SetColumnSpan(this.ProxyAddressTextBox, 3);
             resources.ApplyResources(this.ProxyAddressTextBox, "ProxyAddressTextBox");
             this.ProxyAddressTextBox.Name = "ProxyAddressTextBox";
-            this.ProxyAddressTextBox.TextChanged += new System.EventHandler(this.ProxyAddressTextBox_TextChanged);
+            this.ProxyAddressTextBox.TextChanged += new System.EventHandler(this.GeneralProxySettingsChanged);
             // 
             // ProxyPortTextBox
             // 
             resources.ApplyResources(this.ProxyPortTextBox, "ProxyPortTextBox");
             this.ProxyPortTextBox.Name = "ProxyPortTextBox";
-            this.ProxyPortTextBox.TextChanged += new System.EventHandler(this.ProxyPortTextBox_TextChanged);
+            this.ProxyPortTextBox.TextChanged += new System.EventHandler(this.GeneralProxySettingsChanged);
             // 
             // ProxyPortLabel
             // 
@@ -265,14 +265,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             resources.ApplyResources(this.DigestRadioButton, "DigestRadioButton");
             this.DigestRadioButton.Name = "DigestRadioButton";
             this.DigestRadioButton.UseVisualStyleBackColor = true;
-            this.DigestRadioButton.CheckedChanged += new System.EventHandler(this.DigestRadioButton_CheckedChanged);
+            this.DigestRadioButton.CheckedChanged += new System.EventHandler(this.ProxyAuthenticationSettingsChanged);
             // 
             // BasicRadioButton
             // 
             resources.ApplyResources(this.BasicRadioButton, "BasicRadioButton");
             this.BasicRadioButton.Name = "BasicRadioButton";
             this.BasicRadioButton.UseVisualStyleBackColor = true;
-            this.BasicRadioButton.CheckedChanged += new System.EventHandler(this.BasicRadioButton_CheckedChanged);
+            this.BasicRadioButton.CheckedChanged += new System.EventHandler(this.ProxyAuthenticationSettingsChanged);
             // 
             // ConnectionOptionsPage
             // 
