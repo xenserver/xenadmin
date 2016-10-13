@@ -1774,7 +1774,7 @@ namespace XenAdmin.TabPages
 
             if (Helpers.ElyOrGreater(pool.Connection))
             {
-                // As of Ely we use CheckHostPatchesRequiringReboot to get reboot messages for a host
+                // As of Ely we use CheckHostUpdatesRequiringReboot to get reboot messages for a host
                 foreach (Host host in xenObject.Connection.Cache.Hosts)
                 {
                     warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
@@ -1826,7 +1826,7 @@ namespace XenAdmin.TabPages
         }
 
         /// <summary>
-        /// Creates a list of warnings for patches that require the host to be rebooted
+        /// Creates a list of warnings for updates that require the host to be rebooted
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
@@ -1845,7 +1845,6 @@ namespace XenAdmin.TabPages
 
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_patch patch)
         {
-            //TODO: Could we come up with a better key string than foopatch on blahhost?
             var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, patch.Name, host.Name);
             var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name);
 
@@ -1854,7 +1853,6 @@ namespace XenAdmin.TabPages
 
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
         {
-            //TODO: Could we come up with a better key string than foopatch on blahhost?
             var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, update.Name, host.Name);
             var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, update.Name);
 
