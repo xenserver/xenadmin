@@ -817,15 +817,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     if (String.IsNullOrEmpty(t))
                         return;
 
-                    try
-                    {
-                        Clipboard.SetText(t);
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("Exception while trying to set clipboard text.", ex);
-                        log.Error(ex, ex);
-                    }
+                    Clip.SetClipboardText(t);
                 }
             }
         }
