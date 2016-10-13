@@ -743,5 +743,17 @@ namespace XenAdmin.Properties {
                 this["BypassProxyForServers"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ProxyAuthenticationMethod {
+            get {
+                return ((int)(this["ProxyAuthenticationMethod"]));
+            }
+            set {
+                this["ProxyAuthenticationMethod"] = value;
+            }
+        }
     }
 }

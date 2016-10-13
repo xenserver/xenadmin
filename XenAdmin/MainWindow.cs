@@ -503,15 +503,17 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                                Properties.Settings.Default.ProxyAddress,
-                                Properties.Settings.Default.ProxyPort,
-                                Properties.Settings.Default.ConnectionTimeout,
-                                true,
-                                Properties.Settings.Default.BypassProxyForServers,
-                                Properties.Settings.Default.ProvideProxyAuthentication,
-                                Properties.Settings.Default.ProxyUsername,
-                                Properties.Settings.Default.ProxyPassword).RunAsync();
+                new TransferProxySettingsAction(
+                    (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                    Properties.Settings.Default.ProxyAddress,
+                    Properties.Settings.Default.ProxyPort,
+                    Properties.Settings.Default.ConnectionTimeout,
+                    true,
+                    Properties.Settings.Default.BypassProxyForServers,
+                    Properties.Settings.Default.ProvideProxyAuthentication,
+                    Properties.Settings.Default.ProxyUsername,
+                    Properties.Settings.Default.ProxyPassword,
+                    (HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
             {

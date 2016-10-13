@@ -48,9 +48,10 @@ namespace XenAdmin.Actions
         private bool provideProxyCredentials;
         private string proxyUsername;
         private string proxyPassword;
+        private HTTPHelper.ProxyAuthenticationMethod proxyAuthenticationMethod;
 
         public TransferProxySettingsAction(HTTPHelper.ProxyStyle style, string address, int port, int timeout,
-            bool suppressHistory, bool bypassForServer, bool provideCredentials, string username, string password)
+            bool suppressHistory, bool bypassForServer, bool provideCredentials, string username, string password, HTTPHelper.ProxyAuthenticationMethod proxyAuthMethod)
             : base(null, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, suppressHistory)
         {
             proxyStyle = style;
@@ -61,6 +62,7 @@ namespace XenAdmin.Actions
             provideProxyCredentials = provideCredentials;
             proxyUsername = username;
             proxyPassword = password;
+            proxyAuthenticationMethod = proxyAuthMethod;
         }
 
         private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
@@ -81,7 +83,8 @@ namespace XenAdmin.Actions
                             bypassProxyForServers.ToString(),
                             provideProxyCredentials.ToString(),
                             proxyUsername.ToString(),
-                            proxyPassword.ToString()});
+                            proxyPassword.ToString(),
+                            ((Int32)proxyAuthenticationMethod).ToString()});
                     return proxySettings;
                     
                 case HTTPHelper.ProxyStyle.SystemProxy:
