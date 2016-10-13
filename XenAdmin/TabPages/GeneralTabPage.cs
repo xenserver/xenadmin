@@ -74,7 +74,7 @@ namespace XenAdmin.TabPages
 
             VM_guest_metrics_CollectionChangedWithInvoke =
                 Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
-            OtherConfigAndTagsWatcher.TagsChanged += new EventHandler(OtherConfigAndTagsWatcher_TagsChanged);
+            OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
             sections = new List<PDSection>();
             foreach (Control control in panel2.Controls)
             {
@@ -337,7 +337,7 @@ namespace XenAdmin.TabPages
             Program.BeginInvoke(this, BuildList);
         }
 
-        void OtherConfigAndTagsWatcher_TagsChanged(object sender, EventArgs e)
+        void OtherConfigAndTagsWatcher_TagsChanged()
         {
             BuildList();
         }

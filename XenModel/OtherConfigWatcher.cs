@@ -38,9 +38,9 @@ namespace XenAdmin
 {
     public class OtherConfigAndTagsWatcher
     {
-        public static event EventHandler OtherConfigChanged;
-        public static event EventHandler TagsChanged;
-        public static event EventHandler GuiConfigChanged;
+        public static event Action OtherConfigChanged;
+        public static event Action TagsChanged;
+        public static event Action GuiConfigChanged;
         private static bool FireOtherConfigEvent = false;
         private static bool FireTagsEvent = false;
         private static bool FireGuiConfigEvent = false;
@@ -205,7 +205,7 @@ namespace XenAdmin
             InvokeHelper.AssertOnEventThread();
 
             if (OtherConfigChanged != null)
-                OtherConfigChanged(null, new EventArgs());
+                OtherConfigChanged();
         }
 
         private static void OnTagsChanged()
@@ -213,7 +213,7 @@ namespace XenAdmin
             InvokeHelper.AssertOnEventThread();
 
             if (TagsChanged != null)
-                TagsChanged(null, new EventArgs());
+                TagsChanged();
         }
 
         private static void OnGuiConfigChanged()
@@ -221,7 +221,7 @@ namespace XenAdmin
             InvokeHelper.AssertOnEventThread();
 
             if (GuiConfigChanged != null)
-                GuiConfigChanged(null, new EventArgs());
+                GuiConfigChanged();
         }
     }
 }
