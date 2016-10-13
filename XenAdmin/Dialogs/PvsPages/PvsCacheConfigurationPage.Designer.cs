@@ -35,19 +35,29 @@ namespace XenAdmin.Dialogs
             this.label7 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.viewPvsServersButton = new System.Windows.Forms.Button();
+            this.pvsConfigInfoLabel = new System.Windows.Forms.Label();
+            this.pvsConfigInfoIcon = new System.Windows.Forms.PictureBox();
+            this.memoryOnlyInfoIcon = new System.Windows.Forms.PictureBox();
+            this.memoryOnlyInfoLabel = new System.Windows.Forms.Label();
             this.hostsPanel = new XenAdmin.Controls.FlickerFreePanel();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pvsConfigInfoIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoryOnlyInfoIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.deleteButton, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.memoryOnlyInfoLabel, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.deleteButton, 4, 5);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.hostsPanel, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.viewPvsServersButton, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.viewPvsServersButton, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.pvsConfigInfoIcon, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.pvsConfigInfoLabel, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.memoryOnlyInfoIcon, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // deleteButton
@@ -61,12 +71,13 @@ namespace XenAdmin.Dialogs
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 4);
             this.label1.Name = "label1";
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
+            this.tableLayoutPanel1.SetColumnSpan(this.label7, 2);
             this.label7.Name = "label7";
             // 
             // textBox1
@@ -83,12 +94,38 @@ namespace XenAdmin.Dialogs
             this.viewPvsServersButton.UseVisualStyleBackColor = true;
             this.viewPvsServersButton.Click += new System.EventHandler(this.viewServersButton_Click);
             // 
+            // pvsConfigInfoLabel
+            // 
+            resources.ApplyResources(this.pvsConfigInfoLabel, "pvsConfigInfoLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.pvsConfigInfoLabel, 3);
+            this.pvsConfigInfoLabel.Name = "pvsConfigInfoLabel";
+            // 
+            // pvsConfigInfoIcon
+            // 
+            resources.ApplyResources(this.pvsConfigInfoIcon, "pvsConfigInfoIcon");
+            this.pvsConfigInfoIcon.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            this.pvsConfigInfoIcon.Name = "pvsConfigInfoIcon";
+            this.pvsConfigInfoIcon.TabStop = false;
+            // 
+            // memoryOnlyInfoIcon
+            // 
+            resources.ApplyResources(this.memoryOnlyInfoIcon, "memoryOnlyInfoIcon");
+            this.memoryOnlyInfoIcon.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.memoryOnlyInfoIcon.Name = "memoryOnlyInfoIcon";
+            this.memoryOnlyInfoIcon.TabStop = false;
+            // 
+            // memoryOnlyInfoLabel
+            // 
+            resources.ApplyResources(this.memoryOnlyInfoLabel, "memoryOnlyInfoLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.memoryOnlyInfoLabel, 3);
+            this.memoryOnlyInfoLabel.Name = "memoryOnlyInfoLabel";
+            // 
             // hostsPanel
             // 
             resources.ApplyResources(this.hostsPanel, "hostsPanel");
             this.hostsPanel.BorderColor = System.Drawing.Color.Black;
             this.hostsPanel.BorderWidth = 1;
-            this.tableLayoutPanel1.SetColumnSpan(this.hostsPanel, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.hostsPanel, 4);
             this.hostsPanel.Name = "hostsPanel";
             // 
             // PvsCacheConfigurationPage
@@ -100,6 +137,8 @@ namespace XenAdmin.Dialogs
             this.Name = "PvsCacheConfigurationPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pvsConfigInfoIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoryOnlyInfoIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -113,5 +152,9 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button deleteButton;
         public System.Windows.Forms.Button viewPvsServersButton;
+        private System.Windows.Forms.Label pvsConfigInfoLabel;
+        private System.Windows.Forms.PictureBox pvsConfigInfoIcon;
+        private System.Windows.Forms.Label memoryOnlyInfoLabel;
+        private System.Windows.Forms.PictureBox memoryOnlyInfoIcon;
     }
 }
