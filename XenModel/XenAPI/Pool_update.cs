@@ -395,7 +395,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Removes the update's files from all hosts in the pool, and removes the database entries. But does not revert the update.
+        /// Removes the database entry. Only works on unapplied update.
         /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
@@ -406,7 +406,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Removes the update's files from all hosts in the pool, and removes the database entries. But does not revert the update.
+        /// Removes the database entry. Only works on unapplied update.
         /// First published in .
         /// </summary>
         /// <param name="session">The session</param>

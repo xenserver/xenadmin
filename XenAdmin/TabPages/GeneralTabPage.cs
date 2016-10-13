@@ -675,8 +675,8 @@ namespace XenAdmin.TabPages
 
             if (elyOrGreater)
             {
-                // As of Ely we use host.patches_requiring_reboot to generate the list of reboot required messages
-                messages = CheckHostPatchesRequiringReboot(host);
+                // As of Ely we use host.updates_requiring_reboot to generate the list of reboot required messages
+                messages = CheckHostUpdatesRequiringReboot(host);
             }
             else
             {
@@ -1774,10 +1774,10 @@ namespace XenAdmin.TabPages
 
             if (Helpers.ElyOrGreater(pool.Connection))
             {
-                // As of Ely we use CheckHostPatchesRequiringReboot to get reboot messages for a host
+                // As of Ely we use CheckHostUpdatesRequiringReboot to get reboot messages for a host
                 foreach (Host host in xenObject.Connection.Cache.Hosts)
                 {
-                    warnings.AddRange(CheckHostPatchesRequiringReboot(host));
+                    warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
                 }
             }
             else
@@ -1826,30 +1826,35 @@ namespace XenAdmin.TabPages
         }
 
         /// <summary>
-        /// Creates a list of warnings for patches that require the host to be rebooted
+        /// Creates a list of warnings for updates that require the host to be rebooted
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        private List<KeyValuePair<String, String>> CheckHostPatchesRequiringReboot(Host host)
+        private List<KeyValuePair<String, String>> CheckHostUpdatesRequiringReboot(Host host)
         {
             var warnings = new List<KeyValuePair<String, String>>();
-            var patchRefs = host.patches_requiring_reboot;
-            foreach (var patchRef in patchRefs)
+            var updateRefs = host.updates_requiring_reboot;
+            foreach (var updateRef in updateRefs)
             {
-                var patch = host.Connection.Resolve(patchRef);
-                warnings.Add(CreateWarningRow(host, patch));
+                var update = host.Connection.Resolve(updateRef);
+                warnings.Add(CreateWarningRow(host, update));
             }
 
             return warnings;
         }
 
-
-
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_patch patch)
         {
-            //TODO: Could we come up with a better key string than foopatch on blahhost?
             var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, patch.Name, host.Name);
             var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name);
+
+            return new KeyValuePair<string, string>(key, value);
+        }
+
+        private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
+        {
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, update.Name, host.Name);
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, update.Name);
 
             return new KeyValuePair<string, string>(key, value);
         }

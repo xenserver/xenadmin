@@ -1088,6 +1088,10 @@ namespace XenAPI
         Response<string []>
         pool_patch_get_after_apply_guidance(string session, string _pool_patch);
 
+        [XmlRpcMethod("pool_patch.get_pool_update")]
+        Response<string>
+        pool_patch_get_pool_update(string session, string _pool_patch);
+
         [XmlRpcMethod("pool_patch.get_other_config")]
         Response<Object>
         pool_patch_get_other_config(string session, string _pool_patch);
@@ -3084,9 +3088,9 @@ namespace XenAPI
         Response<string>
         host_get_control_domain(string session, string _host);
 
-        [XmlRpcMethod("host.get_patches_requiring_reboot")]
+        [XmlRpcMethod("host.get_updates_requiring_reboot")]
         Response<string []>
-        host_get_patches_requiring_reboot(string session, string _host);
+        host_get_updates_requiring_reboot(string session, string _host);
 
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
@@ -3455,10 +3459,6 @@ namespace XenAPI
         [XmlRpcMethod("host.call_extension")]
         Response<string>
         host_call_extension(string session, string _host, string _call);
-
-        [XmlRpcMethod("Async.host.call_extension")]
-        Response<string>
-        async_host_call_extension(string session, string _host, string _call);
 
         [XmlRpcMethod("host.get_servertime")]
         Response<DateTime>
@@ -7133,6 +7133,7 @@ namespace XenAPI
         public bool pool_applied;
         public string [] host_patches;
         public string [] after_apply_guidance;
+        public string pool_update;
         public Object other_config;
     }
 
@@ -7367,7 +7368,7 @@ namespace XenAPI
         public string display;
         public string [] virtual_hardware_platform_versions;
         public string control_domain;
-        public string [] patches_requiring_reboot;
+        public string [] updates_requiring_reboot;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

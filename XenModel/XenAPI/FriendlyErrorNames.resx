@@ -558,6 +558,9 @@
   <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
     <value>The uploaded update file is invalid.</value>
   </data>
+  <data name="INVALID_UPDATE" xml:space="preserve">
+    <value>The uploaded update package is invalid</value>
+  </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>The value '{1}' is invalid for field '{0}'.</value>
   </data>
@@ -1567,6 +1570,12 @@ Authorized Roles: {1}</value>
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>The requested bootloader {1} for VM {0} is unknown</value>
+  </data>
+  <data name="UPDATE_IS_APPLIED" xml:space="preserve">
+    <value>The specified update has been applied and cannot be destroyed.</value>
+  </data>
+  <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
+    <value>The update cannot be applied for the following host(s).</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>Only the local superuser can execute this operation</value>
