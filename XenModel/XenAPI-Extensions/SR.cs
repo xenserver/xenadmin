@@ -513,6 +513,10 @@ namespace XenAPI
             if (content_type == SR.Content_Type_ISO)
                 return false;
 
+            // Memory SRs should not support VDI create in the GUI
+            if (GetSRType(false) == SR.SRTypes.tmpfs)
+                return false;
+
             Host master = Helpers.GetMaster(Connection);
             if (master == null)
                 return false;
