@@ -132,8 +132,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     string patchName = null;
                     if (Patch != null)
                         patchName = Patch.Name;
-                    if (Pool_update != null)
-                        patchName = Pool_update.Name;
+                    if (PoolUpdate != null)
+                        patchName = PoolUpdate.Name;
 
                     labelPrechecksFirstLine.Text = patchName != null
                         ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, patchName)
@@ -163,7 +163,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (Patch != null)
                 _worker.RunWorkerAsync(Patch);
             else
-                _worker.RunWorkerAsync(Pool_update);
+                _worker.RunWorkerAsync(PoolUpdate);
         }
 
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -518,7 +518,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public UpdateType SelectedUpdateType { private get; set; }
         public Pool_patch Patch { private get; set; }
-        public Pool_update Pool_update { private get; set; }
+        public Pool_update PoolUpdate { private get; set; }
 
         internal enum PreCheckResult { OK, Warning, Failed }
 
