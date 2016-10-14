@@ -249,7 +249,7 @@ namespace XenAdmin
 
 				if (SelectionManager.Selection.FirstIsRealVM)
 					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
-                else if (SelectionManager.Selection.FirstIsHost)
+                else if (SelectionManager.Selection.FirstIs<Host>())
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
 
                 UnpauseVNC(sender == TheTabControl);
@@ -1375,10 +1375,10 @@ namespace XenAdmin
 
             bool multi = SelectionManager.Selection.Count > 1;
 
-            bool isPoolSelected = SelectionManager.Selection.FirstIsPool;
-            bool isVMSelected = SelectionManager.Selection.FirstIsVM;
-            bool isHostSelected = SelectionManager.Selection.FirstIsHost;
-            bool isSRSelected = SelectionManager.Selection.FirstIsSR;
+            bool isPoolSelected = SelectionManager.Selection.FirstIs<Pool>();
+            bool isVMSelected = SelectionManager.Selection.FirstIs<VM>();
+            bool isHostSelected = SelectionManager.Selection.FirstIs<Host>();
+            bool isSRSelected = SelectionManager.Selection.FirstIs<SR>();
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
@@ -1774,7 +1774,7 @@ namespace XenAdmin
                     ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
-                else if (SelectionManager.Selection.FirstIsHost)
+                else if (SelectionManager.Selection.FirstIs<Host>())
                 {
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
@@ -1782,7 +1782,7 @@ namespace XenAdmin
             }
             else if (t == TabPageCvmConsole)
             {
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                 {
                     CvmConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
@@ -2451,21 +2451,21 @@ namespace XenAdmin
 
             if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)
             {
-                if (SelectionManager.Selection.FirstIsPool)
+                if (SelectionManager.Selection.FirstIs<Pool>())
                     return "Pool";
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                     return "Server";
-                if (SelectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIs<VM>())
                     return "VM";
-                if (SelectionManager.Selection.FirstIsSR)
+                if (SelectionManager.Selection.FirstIs<SR>())
                     return "Storage";
             }
 
             if (TheTabControl.SelectedTab == TabPageNetwork)
             {
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                     return "Server";
-                if (SelectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIs<VM>())
                     return "VM";
             }
 
