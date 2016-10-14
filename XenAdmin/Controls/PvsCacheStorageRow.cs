@@ -167,8 +167,10 @@ namespace XenAdmin.Controls
         {
             get
             {
-                if (OrigPvsCacheStorage == null || CacheSr == null)
-                    return true;
+                if (OrigPvsCacheStorage == null)
+                    return CacheSr != null;
+                if (CacheSr == null)
+                    return OrigPvsCacheStorage != null;
                 return OrigPvsCacheStorage.SR.opaque_ref != CacheSr.opaque_ref || origCacheSizeGb != numericUpDownCacheSize.Value;
             }
         }

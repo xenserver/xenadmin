@@ -75,18 +75,16 @@ namespace XenAdmin.TabPages
             {
                 if (connection != null)
                 {
-                    connection.Cache.DeregisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
-                    connection.Cache.DeregisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
-                    connection.Cache.DeregisterBatchCollectionChanged<VM>(PvsProxyBatchCollectionChanged);
+                    connection.Cache.DeregisterCollectionChanged<PVS_proxy>(PvsProxyCollectionChanged);
+                    connection.Cache.DeregisterCollectionChanged<VM>(PvsProxyCollectionChanged);
                 }
 
                 connection = value;
 
                 if (connection != null)
                 {
-                    connection.Cache.RegisterBatchCollectionChanged<PVS_site>(PvsSiteBatchCollectionChanged);
-                    connection.Cache.RegisterBatchCollectionChanged<PVS_proxy>(PvsProxyBatchCollectionChanged);
-                    connection.Cache.RegisterBatchCollectionChanged<VM>(PvsProxyBatchCollectionChanged);
+                    connection.Cache.RegisterCollectionChanged<PVS_proxy>(PvsProxyCollectionChanged);
+                    connection.Cache.RegisterCollectionChanged<VM>(PvsProxyCollectionChanged);
                 }
 
                 LoadVMs();
@@ -108,7 +106,7 @@ namespace XenAdmin.TabPages
 
                 var previousSelection = GetSelectedVMs();
 
-                UnregisterVMHandlers();
+                UnregisterEventHandlers();
 
                 dataGridViewVms.SortCompare += dataGridViewVms_SortCompare;
 
@@ -191,50 +189,47 @@ namespace XenAdmin.TabPages
             System.Diagnostics.Trace.Assert(vm != null);
 
             var pvsProxy = vm.PvsProxy;
+            
+            var vmCell = new DataGridViewTextBoxCell();
+            var cacheEnabledCell = new DataGridViewTextBoxCell();
+            var pvsSiteCell = new DataGridViewTextBoxCell();
+            var statusCell = new DataGridViewTextBoxCell();
 
-            if (pvsProxy == null)
+            var newRow = new DataGridViewRow { Tag = vm };
+            newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
+
+            UpdateRow(newRow, vm, pvsProxy);
+            RegisterEventHandlers(vm, pvsProxy);
+            return newRow;
+        }
+
+        private void UpdateRow(DataGridViewRow row, VM vm, PVS_proxy pvsProxy)
+        {
+            PVS_site pvsSite = pvsProxy == null ? null : Connection.Resolve(pvsProxy.site);
+            row.Cells[0].Value = vm.Name;
+            row.Cells[1].Value = pvsProxy == null ? Messages.NO : Messages.YES;
+            row.Cells[2].Value = pvsProxy == null || pvsSite == null ? Messages.NO_VALUE : pvsSite.Name;
+            row.Cells[3].Value = pvsProxy == null ? Messages.NO_VALUE : pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status);
+        }
+
+        private void RegisterEventHandlers(VM vm, PVS_proxy pvsProxy)
+        {
+            vm.PropertyChanged -= VmPropertyChanged;
+            vm.PropertyChanged += VmPropertyChanged;
+            if (pvsProxy != null)
             {
-                return NewVmRowWithNoProxy(vm);
+                pvsProxy.PropertyChanged -= PvsProxyPropertyChanged;
+                pvsProxy.PropertyChanged += PvsProxyPropertyChanged;
+                PVS_site pvsSite = pvsProxy == null ? null : Connection.Resolve(pvsProxy.site);
+                if (pvsSite != null)
+                {
+                    pvsSite.PropertyChanged -= PvsSitePropertyChanged;
+                    pvsSite.PropertyChanged += PvsSitePropertyChanged;
+                }
             }
-            return NewVmRowWithProxy(vm, pvsProxy);
         }
 
-        private DataGridViewRow NewVmRowWithNoProxy(VM vm)
-        {
-            var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
-            var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.NO };
-            var pvsSiteCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
-            var statusCell = new DataGridViewTextBoxCell { Value = Messages.NO_VALUE };
-
-            var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
-            vm.PropertyChanged += VmPropertyChanged;
-
-            return newRow;
-        }
-
-        private DataGridViewRow NewVmRowWithProxy(VM vm, PVS_proxy pvsProxy)
-        {
-            System.Diagnostics.Trace.Assert(pvsProxy != null);
-
-            var vmCell = new DataGridViewTextBoxCell { Value = vm.Name };
-            var cacheEnabledCell = new DataGridViewTextBoxCell { Value = Messages.YES };
-
-            var pvsSiteCell = new DataGridViewTextBoxCell { Value = Connection.Resolve(pvsProxy.site) };
-
-            var statusCell = new DataGridViewTextBoxCell
-            {
-                Value = pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status)
-            };
-
-            var newRow = new DataGridViewRow { Tag = vm };
-            newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
-            vm.PropertyChanged += VmPropertyChanged;
-
-            return newRow;
-        }
-
-        private void UnregisterVMHandlers()
+        private void UnregisterEventHandlers()
         {
             dataGridViewVms.SelectionChanged -= VmSelectionChanged;
             dataGridViewVms.SortCompare -= dataGridViewVms_SortCompare;
@@ -244,6 +239,15 @@ namespace XenAdmin.TabPages
                 var vm = row.Tag as VM;
                 System.Diagnostics.Trace.Assert(vm != null);
                 vm.PropertyChanged -= VmPropertyChanged;
+
+                var pvsProxy = vm.PvsProxy;
+                if (pvsProxy != null)
+                {
+                    pvsProxy.PropertyChanged -= PvsProxyPropertyChanged;
+                    var pvsSite = Connection.Resolve(pvsProxy.site);
+                    if (pvsSite != null)
+                        pvsSite.PropertyChanged -= PvsSitePropertyChanged;
+                }
             }
         }
 
@@ -274,14 +278,10 @@ namespace XenAdmin.TabPages
             e.SortResult = vm1.CompareTo(vm2);
             e.Handled = true;
         }
-        #endregion
-        
-        private void PvsSiteBatchCollectionChanged(object sender, EventArgs e)
-        {
-            Program.Invoke(this, LoadVMs); 
-        }
 
-        private void PvsProxyBatchCollectionChanged(object sender, EventArgs e)
+        #endregion
+
+        private void PvsProxyCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.Invoke(this, LoadVMs);
         }
@@ -291,15 +291,60 @@ namespace XenAdmin.TabPages
             if (e.PropertyName != "name_label")
                 return;
 
-            foreach (DataGridViewRow row in dataGridViewVms.Rows)
+            Program.Invoke(this, () =>
             {
-                var vm = row.Tag as VM;
-                if (vm != null && vm.Equals(sender))
+                foreach (DataGridViewRow row in dataGridViewVms.Rows)
                 {
-                    row.Cells["columnVM"].Value = vm.Name;
-                    break;
+                    var vm = row.Tag as VM;
+                    if (vm != null && vm.Equals(sender))
+                    {
+                        row.Cells["columnVM"].Value = vm.Name;
+                        break;
+                    }
                 }
-            }
+            });
+        }
+
+        private void PvsProxyPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "status" && e.PropertyName != "site")
+                return;
+
+            Program.Invoke(this, () =>
+            {
+                var pvsProxy = sender as PVS_proxy;
+                foreach (DataGridViewRow row in dataGridViewVms.Rows)
+                {
+                    var vm = row.Tag as VM;
+                    if (vm != null && vm.Equals(pvsProxy.VM))
+                    {
+                        UpdateRow(row, pvsProxy.VM, pvsProxy);
+                        break;
+                    }
+                }
+            });
+        }
+
+        private void PvsSitePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "name_label")
+                return;
+
+            Program.Invoke(this, () =>
+            {
+                var pvsSite = sender as PVS_site;
+                foreach (DataGridViewRow row in dataGridViewVms.Rows)
+                {
+                    var vm = row.Tag as VM;
+                    if (vm == null)
+                        continue;
+                    var pvsProxy = vm.PvsProxy;
+                    if (pvsProxy != null && pvsProxy.site != null && pvsProxy.site.opaque_ref == pvsSite.opaque_ref)
+                    {
+                        UpdateRow(row, vm, pvsProxy);
+                    }
+                }
+            });
         }
 
         private void ConfigureButton_Click(object sender, EventArgs e)
