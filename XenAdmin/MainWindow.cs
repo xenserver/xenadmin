@@ -1379,6 +1379,7 @@ namespace XenAdmin
             bool isVMSelected = SelectionManager.Selection.FirstIs<VM>();
             bool isHostSelected = SelectionManager.Selection.FirstIs<Host>();
             bool isSRSelected = SelectionManager.Selection.FirstIs<SR>();
+            bool isVdiSelected = SelectionManager.Selection.FirstIs<VDI>();
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
@@ -1389,7 +1390,7 @@ namespace XenAdmin
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isDockerContainerSelected));
+            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
             ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
