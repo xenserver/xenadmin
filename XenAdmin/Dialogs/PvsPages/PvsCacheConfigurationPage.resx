@@ -145,7 +145,7 @@
     <value>18</value>
   </data>
   <data name="memoryOnlyInfoLabel.Text" xml:space="preserve">
-    <value>The cache size recommendation is least 5GB per vDisk version.
+    <value>The cache size recommendation is at least 5GB per vDisk version.
 If Memory only is chosen, the allowed cache size depends on server's Control Domain memory.</value>
   </data>
   <data name="&gt;&gt;memoryOnlyInfoLabel.Name" xml:space="preserve">
