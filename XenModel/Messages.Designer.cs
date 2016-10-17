@@ -26417,15 +26417,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot apply updates using [XenCenter]..
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This server cannot be updated automatically.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {

@@ -245,13 +245,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 selectedHosts = FileFromDiskAlert.DistinctHosts;
             }
 
-            if (poolOfOne != null && poolOfOne.IsPatchingForbidden)
-            {
-                row.Enabled = false;
-                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN;
-                return;
-            }
-
             if (type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;

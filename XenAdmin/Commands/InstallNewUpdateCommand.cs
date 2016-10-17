@@ -36,6 +36,7 @@ using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Properties;
 using System.Drawing;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -67,18 +68,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (!xenConnection.IsConnected)
-                    continue;
-
-                Pool pool = Helpers.GetPoolOfOne(xenConnection);
-                if (pool != null && pool.IsPatchingForbidden)
-                    continue;
-
-                return true;
-            }
-            return false;
+            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected);
         }
 
         public override Image ContextMenuImage
