@@ -27109,6 +27109,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post-update tasks cannot be carried out automatically for all the servers to be updated..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_RESTARTS {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_RESTARTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic update is not supported for this server..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool General Properties.
         /// </summary>
         public static string POOL_GENERAL_TAB_TITLE {

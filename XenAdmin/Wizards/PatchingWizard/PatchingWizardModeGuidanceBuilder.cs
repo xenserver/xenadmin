@@ -40,27 +40,33 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public class PatchingWizardModeGuidanceBuilder
     {
-        public static string ModeRetailPatch(List<Host> servers, Pool_patch patch, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
+        public static string ModeRetailPatch(List<Host> servers, Pool_patch patch, Dictionary<string, LivePatchCode> LivePatchCodesByHost, out bool someHostMayRequireRestart)
         {
-            return Build(servers.Where(h => patch != null && patch.AppliedOn(h) == DateTime.MaxValue).ToList(), patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>(), LivePatchCodesByHost);
+            return Build(servers.Where(h => patch != null && patch.AppliedOn(h) == DateTime.MaxValue).ToList(), patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>(), LivePatchCodesByHost, out someHostMayRequireRestart);
         }
 
-        public static string ModeSuppPack(List<Host> servers)
+        public static string ModeSuppPack(List<Host> servers, out bool someHostMayRequireRestart)
         {
             List<after_apply_guidance> guidance = new List<after_apply_guidance> { after_apply_guidance.restartHost };
-            return Build(servers, guidance, new Dictionary<string, LivePatchCode>());
+            return Build(servers, guidance, new Dictionary<string, LivePatchCode>(), out someHostMayRequireRestart);
         }
 
-        private static string Build(List<Host> servers, List<after_apply_guidance> guidance, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
+        private static string Build(List<Host> servers, List<after_apply_guidance> guidance, Dictionary<string, LivePatchCode> LivePatchCodesByHost, out bool someHostMayRequireRestart)
         {
             StringBuilder sbLog = new StringBuilder();
+            someHostMayRequireRestart = false; // If any host has restartHost guidance this will be set to true
 
             foreach (after_apply_guidance guide in guidance)
             {
-                if (guide == after_apply_guidance.restartHost
-                    && (LivePatchCodesByHost != null && servers.TrueForAll(h => LivePatchCodesByHost.ContainsKey(h.uuid) && LivePatchCodesByHost[h.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)))
-                    continue;
+                if (guide == after_apply_guidance.restartHost){
+                    someHostMayRequireRestart = true;
 
+                    if (LivePatchCodesByHost != null && servers.TrueForAll(h => LivePatchCodesByHost.ContainsKey(h.uuid) && LivePatchCodesByHost[h.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)) 
+                    { 
+                        continue; 
+                    }
+                }
+                    
                 sbLog.AppendLine(GetGuideMessage(guide));
 
                 switch (guide)
