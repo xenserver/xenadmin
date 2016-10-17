@@ -85,7 +85,7 @@ namespace XenAdmin.Dialogs
                 vm.memory_static_max >= vm.memory_static_min)
             {
                 double min = vm.memory_static_min;
-                double max = Math.Min(host.memory_available_calc, MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA);
+                double max = Math.Min(vm.memory_dynamic_min + host.memory_available_calc, MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA);
                 double value = vm.memory_dynamic_min;
                 // Avoid setting the range to exclude the current value: CA-40041
                 if (value > max)
