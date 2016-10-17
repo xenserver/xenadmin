@@ -167,10 +167,10 @@ $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
-# ${WIX_BIN}/
-CANDLE="candle.exe -nologo"
-LIT="lit.exe -nologo"
-LIGHT="light.exe -nologo"
+
+CANDLE="${WIX_BIN}/candle.exe -nologo"
+LIT="${WIX_BIN}/lit.exe -nologo"
+LIGHT="${WIX_BIN}/light.exe -nologo"
 
 mkdir_clean ${WIX_SRC}
 ${UNZIP} ${SCRATCH_DIR}/wix310-debug.zip -d ${SCRATCH_DIR}/wixsrc
