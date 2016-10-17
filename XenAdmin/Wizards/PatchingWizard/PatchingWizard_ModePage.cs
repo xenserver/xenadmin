@@ -33,12 +33,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Alerts;
 
@@ -50,7 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public PatchingWizard_ModePage()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         public override string Text
@@ -90,20 +87,32 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             textBoxLog.Clear();
 
+            var unknownType = false;
+
+            var someHostMayRequireRestart = false; // If a host has restartHost guidance, even if is a live patch,  we want this true (as live patch may fail)
+
             switch (SelectedUpdateType)
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch, LivePatchCodesByHost);
-                    AutomaticRadioButton.Enabled = true;
-                    AutomaticRadioButton.Checked = true;
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch, LivePatchCodesByHost, out someHostMayRequireRestart);
                     break;
                 case UpdateType.NewSuppPack:
-                    AutomaticRadioButton.Enabled = true;
-                    AutomaticRadioButton.Checked = true;
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers, out someHostMayRequireRestart);
+                    break;
+                default:
+                    unknownType = true;
                     break;
             }
+
+            var automaticDisabled = unknownType || (AnyPoolForbidsAutoRestart() && someHostMayRequireRestart);
+
+            AutomaticRadioButton.Enabled = !automaticDisabled;
+            AutomaticRadioButton.Checked = !automaticDisabled;
+            ManualRadioButton.Checked = automaticDisabled;
+
+            if (automaticDisabled)
+                allowRadioButtonContainer.SetToolTip(Messages.POOL_FORBIDS_AUTOMATIC_RESTARTS);
 
             if (SelectedUpdateType == UpdateType.NewSuppPack || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
             {
@@ -165,6 +174,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             UpdateEnablement();
         }
 
+        private bool AnyPoolForbidsAutoRestart()
+        {
+            foreach (var server in SelectedServers)
+            {
+                var pool = Helpers.GetPoolOfOne(server.Connection);
+                if (pool.IsAutoUpdateRestartsForbidden)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+            
         private void button1_Click(object sender, EventArgs e)
         {
             string filePath = Path.GetTempFileName();

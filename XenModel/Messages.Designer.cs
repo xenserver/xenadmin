@@ -26417,15 +26417,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot apply updates using [XenCenter]..
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This server cannot be updated automatically.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {
@@ -27105,6 +27096,24 @@ namespace XenAdmin {
         public static string POOL_FAILURES_TOLERATE {
             get {
                 return ResourceManager.GetString("POOL_FAILURES_TOLERATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Post-update tasks cannot be carried out automatically for all the servers to be updated..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_RESTARTS {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_RESTARTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic update is not supported for this server..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_UPDATES", resourceCulture);
             }
         }
         

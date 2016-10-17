@@ -142,8 +142,8 @@ namespace XenAPI
 
         private const string ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
         private const string FORBID_RPU_FOR_HCI = "hci-forbid-rpu";
-        private const string FORBID_PATCHING_FOR_HCI = "hci-forbid-update";
         private const string FAULT_TOLERANCE_LIMIT_FOR_HCI = "hci-limit-fault-tolerance";
+        private const string FORBID_UPDATE_AUTO_RESTARTS = "hci-forbid-update-auto-restart";
 
         public bool RollingUpgrade
         {
@@ -161,11 +161,11 @@ namespace XenAPI
             }
         }
 
-        public bool IsPatchingForbidden
+        public bool IsAutoUpdateRestartsForbidden
         {
             get
             {
-                return other_config != null && other_config.ContainsKey(FORBID_PATCHING_FOR_HCI);
+                return other_config != null && other_config.ContainsKey(FORBID_UPDATE_AUTO_RESTARTS);
             }
         }
 

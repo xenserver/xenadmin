@@ -9126,9 +9126,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
     <value>This server is not licensed for automatic updating</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
-    <value>You cannot apply updates using [XenCenter].</value>
-  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>
   </data>
@@ -9468,6 +9465,12 @@ The VM protection policy for this VM does not have automatic archiving configure
   </data>
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>{0} failure tolerated</value>
+  </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
+    <value>Post-update tasks cannot be carried out automatically for all the servers to be updated.</value>
+  </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
+    <value>Automatic update is not supported for this server.</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Pool General Properties</value>
