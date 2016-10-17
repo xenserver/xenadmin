@@ -1346,7 +1346,7 @@ namespace XenAdmin.TabPages
 
                 SR vdiSr = vdi.Connection.Resolve(vdi.SR);
                 if (vdiSr != null && !vdiSr.IsToolsSR)
-                    s.AddEntry(Messages.DATATYPE_STORAGE, vdiSr.Name);
+                    s.AddEntry(Messages.DATATYPE_STORAGE, vdiSr.NameWithLocation);
 
                 string vdiVms = vdi.VMsOfVDI;
                 if (!string.IsNullOrEmpty(vdiVms))

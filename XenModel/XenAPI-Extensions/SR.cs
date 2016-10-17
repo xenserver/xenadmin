@@ -72,7 +72,7 @@ namespace XenAPI
         {
             get
             {
-                return _name(true);
+                return I18N("name_label", name_label, true);
             }
         }
 
@@ -100,13 +100,8 @@ namespace XenAPI
         {
             get
             {
-                return _name(false);
+                return I18N("name_label", name_label, false);
             }
-        }
-
-        private string _name(bool with_host)
-        {
-            return I18N("name_label", name_label, with_host);
         }
 
         /// <returns>A friendly description for the SR.</returns>
