@@ -32,10 +32,10 @@ namespace XenAdmin.Dialogs
             this.closeButton = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.gridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.bottomPanel = new System.Windows.Forms.Panel();
             this.ipAddressesColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstPortColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastPortColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bottomPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -68,12 +68,6 @@ namespace XenAdmin.Dialogs
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
             // 
-            // bottomPanel
-            // 
-            this.bottomPanel.Controls.Add(this.closeButton);
-            resources.ApplyResources(this.bottomPanel, "bottomPanel");
-            this.bottomPanel.Name = "bottomPanel";
-            // 
             // ipAddressesColumn
             // 
             this.ipAddressesColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -98,6 +92,12 @@ namespace XenAdmin.Dialogs
             this.lastPortColumn.Name = "lastPortColumn";
             this.lastPortColumn.ReadOnly = true;
             // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Controls.Add(this.closeButton);
+            resources.ApplyResources(this.bottomPanel, "bottomPanel");
+            this.bottomPanel.Name = "bottomPanel";
+            // 
             // PvsSiteDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -106,9 +106,6 @@ namespace XenAdmin.Dialogs
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.bottomPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.HelpButton = false;
-            this.MaximizeBox = true;
-            this.MinimizeBox = true;
             this.Name = "PvsSiteDialog";
             this.ShowInTaskbar = true;
             this.mainPanel.ResumeLayout(false);

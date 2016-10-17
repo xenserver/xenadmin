@@ -13343,7 +13343,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose the PVS site where the selected VMs should be cached..
+        ///   Looks up a localized string similar to Choose the PVS site from which the selected VMs are streamed..
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE {
             get {
@@ -13352,7 +13352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose the PVS site where the selected VM should be cached..
+        ///   Looks up a localized string similar to Choose the PVS site from which the selected VM is streamed..
         /// </summary>
         public static string ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE {
             get {

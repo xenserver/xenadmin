@@ -186,7 +186,8 @@ namespace XenAdmin.Controls
             var selectedSr = CacheSr;
             if (selectedSr != null)
             {
-                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); ;
+                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); 
+                maxSize = Math.Min(maxSize, MAX_CACHE_SIZE_GB);
                 if (maxSize != numericUpDownCacheSize.Maximum)
                     SetupCacheSizeSpinner(numericUpDownCacheSize.Value, numericUpDownCacheSize.Minimum, maxSize);
             }

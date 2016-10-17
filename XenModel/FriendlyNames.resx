@@ -1901,4 +1901,7 @@
   <data name="Label-performance.pvscache_traffic_server_sent" xml:space="preserve">
     <value>PVS Cache observed network traffic from servers</value>
   </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS Read Caching Status</value>
+  </data>
 </root>

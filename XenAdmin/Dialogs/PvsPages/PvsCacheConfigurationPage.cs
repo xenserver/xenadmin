@@ -72,7 +72,10 @@ namespace XenAdmin.Dialogs
         {
             PvsSite = (PVS_site) clone;
             if (PvsSite != null)
+            {
                 textBox1.Text = PvsSite.Name;
+                pvsConfigInfoIcon.Visible = pvsConfigInfoLabel.Visible = string.IsNullOrEmpty(PvsSite.PVS_uuid);
+            }
             else
             {
                 // Generate list of all taken PVS_site names

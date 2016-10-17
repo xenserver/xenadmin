@@ -29,54 +29,26 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnablePvsReadCachingDialog));
-            this.enableButton = new System.Windows.Forms.Button();
-            this.cancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.rubricLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pvsSiteList = new System.Windows.Forms.ComboBox();
+            this.rubricLabel = new System.Windows.Forms.Label();
             this.pvsSiteLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cancel = new System.Windows.Forms.Button();
+            this.enableButton = new System.Windows.Forms.Button();
             this.readonlyCheckboxToolTipContainer = new XenAdmin.Controls.ToolTipContainer();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // enableButton
-            // 
-            resources.ApplyResources(this.enableButton, "enableButton");
-            this.enableButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.enableButton.Name = "enableButton";
-            this.enableButton.UseVisualStyleBackColor = true;
-            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
-            // 
-            // cancel
-            // 
-            resources.ApplyResources(this.cancel, "cancel");
-            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.Name = "cancel";
-            this.cancel.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.pvsSiteList, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pvsSiteLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // rubricLabel
-            // 
-            resources.ApplyResources(this.rubricLabel, "rubricLabel");
-            this.rubricLabel.Name = "rubricLabel";
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.pvsSiteList);
-            this.panel1.Controls.Add(this.pvsSiteLabel);
-            this.panel1.Name = "panel1";
             // 
             // pvsSiteList
             // 
@@ -84,6 +56,12 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.pvsSiteList, "pvsSiteList");
             this.pvsSiteList.FormattingEnabled = true;
             this.pvsSiteList.Name = "pvsSiteList";
+            // 
+            // rubricLabel
+            // 
+            resources.ApplyResources(this.rubricLabel, "rubricLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.rubricLabel, 2);
+            this.rubricLabel.Name = "rubricLabel";
             // 
             // pvsSiteLabel
             // 
@@ -93,9 +71,25 @@ namespace XenAdmin.Dialogs
             // flowLayoutPanel1
             // 
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
             this.flowLayoutPanel1.Controls.Add(this.cancel);
             this.flowLayoutPanel1.Controls.Add(this.enableButton);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // cancel
+            // 
+            resources.ApplyResources(this.cancel, "cancel");
+            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancel.Name = "cancel";
+            this.cancel.UseVisualStyleBackColor = true;
+            // 
+            // enableButton
+            // 
+            this.enableButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            resources.ApplyResources(this.enableButton, "enableButton");
+            this.enableButton.Name = "enableButton";
+            this.enableButton.UseVisualStyleBackColor = true;
+            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
             // 
             // readonlyCheckboxToolTipContainer
             // 
@@ -110,13 +104,10 @@ namespace XenAdmin.Dialogs
             this.CancelButton = this.cancel;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.readonlyCheckboxToolTipContainer);
-            this.HelpButton = false;
             this.Name = "EnablePvsReadCachingDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,7 +118,6 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Controls.ToolTipContainer readonlyCheckboxToolTipContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label rubricLabel;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox pvsSiteList;
         private System.Windows.Forms.Label pvsSiteLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
