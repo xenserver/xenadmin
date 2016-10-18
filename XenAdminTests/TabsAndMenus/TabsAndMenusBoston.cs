@@ -67,7 +67,7 @@ namespace XenAdminTests.TabsAndMenus
         private string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking", "Search" };
         private string[] SRTabs = new[] { "General", "Storage", "Search" };
         private string[] SnapshotTabs = new[] { "General", "Memory", "Networking", "Search" };
-        private string[] VDITabs = new [] { "Search" };
+        private string[] VDITabs = new [] { "General", "Search" };
         private string[] NetworkTabs = new [] { "Search" };
         private string[] GroupingTagTabs = new[] { "Search" };
         private string[] FolderTabs = new[] { "Search" };
