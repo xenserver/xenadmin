@@ -183,7 +183,7 @@ BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
 STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
-WEB_HOTFIXES_ROOT=https://repo.citrite.net/builds/xs/hotfixes
+WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
 WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/
 WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 
