@@ -8919,9 +8919,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
     <value>Virtual Network</value>
   </data>
-  <data name="OVF_VSSD_CAPTION" xml:space="preserve">
-    <value>Virtual Machine</value>
-  </data>
   <data name="PARENT_FOLDER" xml:space="preserve">
     <value>Parent folder</value>
   </data>
@@ -12043,6 +12040,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VIRTUAL_INTERFACE_PROPERTIES" xml:space="preserve">
     <value>Virtual Interface Properties</value>
+  </data>
+  <data name="VIRTUAL_MACHINE" xml:space="preserve">
+    <value>Virtual Machine</value>
   </data>
   <data name="VIRTUAL_MACHINES" xml:space="preserve">
     <value>Virtual Machines</value>

@@ -25575,15 +25575,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual Machine.
-        /// </summary>
-        public static string OVF_VSSD_CAPTION {
-            get {
-                return ResourceManager.GetString("OVF_VSSD_CAPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parent folder.
         /// </summary>
         public static string PARENT_FOLDER {
@@ -34588,6 +34579,15 @@ namespace XenAdmin {
         public static string VIRTUAL_INTERFACE_PROPERTIES {
             get {
                 return ResourceManager.GetString("VIRTUAL_INTERFACE_PROPERTIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Machine.
+        /// </summary>
+        public static string VIRTUAL_MACHINE {
+            get {
+                return ResourceManager.GetString("VIRTUAL_MACHINE", resourceCulture);
             }
         }
         

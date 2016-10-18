@@ -678,7 +678,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			string systemID = OVF.AddVirtualSystem(env, m_pageVMconfig.VmName);
 			string hdwareSectionId = OVF.AddVirtualHardwareSection(env, systemID);
 			string guid = Guid.NewGuid().ToString();
-			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.OVF_VSSD_CAPTION,
+			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE,
 											Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
 
 			OVF.SetCPUs(env, systemID, m_pageVMconfig.CpuCount);
