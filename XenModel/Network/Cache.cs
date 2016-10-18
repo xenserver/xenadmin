@@ -294,23 +294,26 @@ namespace XenAdmin.Network
 
         public void DeregisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return;
+
             d.CollectionChanged -= h;
         }
 
         public void RegisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return;
+
             d.CollectionChanged -= h;
             d.CollectionChanged += h;
         }
 
         public void DeregisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
             if (d == null)
                 return;
 
@@ -319,8 +322,7 @@ namespace XenAdmin.Network
 
         public void RegisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
             if (d == null)
                 return;
 
@@ -438,7 +440,9 @@ namespace XenAdmin.Network
             PropertyInfo p = t.GetProperty("uuid", BindingFlags.Public | BindingFlags.Instance);
             if (p == null)
                 return null;
-            ChangeableDictionary<XenRef<T>, T> d = (ChangeableDictionary<XenRef<T>, T>)GetCollectionForType(t);
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(t) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return null;
             lock (d)
             {
                 foreach (T m in d.Values)
@@ -462,7 +466,9 @@ namespace XenAdmin.Network
                 return null;
             string uuid = (string)p.GetValue(needle, null);
 
-            ChangeableDictionary<XenRef<T>, T> d = (ChangeableDictionary<XenRef<T>, T>)GetCollectionForType(t);
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(t) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return null;
             lock (d)
             {
                 foreach (KeyValuePair<XenRef<T>, T> kvp in d)
@@ -491,7 +497,9 @@ namespace XenAdmin.Network
             if (xenRef == null)
                 return null;
 
-            ChangeableDictionary<XenRef<T>, T> d = (ChangeableDictionary<XenRef<T>, T>)GetCollectionForType(typeof(T));
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return null;
             T result;
             return d.TryGetValue(xenRef, out result) ? result : null;
         }

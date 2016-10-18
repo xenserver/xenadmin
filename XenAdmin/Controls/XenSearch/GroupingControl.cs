@@ -49,7 +49,9 @@ namespace XenAdmin.Controls.XenSearch
         private NonReopeningContextMenuStrip contextMenuStrip;
         private Button lastButtonClicked;
 
-        public static event EventHandler CustomFieldRemoved;
+        public static event Action<CustomFieldGroupingType> CustomFieldRemoved;
+        public event Action GroupingChanged;
+
         private const int MAX_GROUPS = 5;
         private const int innerGutter = 6;
 
@@ -93,26 +95,19 @@ namespace XenAdmin.Controls.XenSearch
             CustomFieldsManager.CustomFieldsChanged += OtherConfigWatcher_OtherConfigChanged;
         }
 
-        private static void OtherConfigWatcher_OtherConfigChanged(object sender, EventArgs e)
+        private static void OtherConfigWatcher_OtherConfigChanged()
         {
             List<CustomFieldDefinition> customFieldDefinitions = CustomFieldsManager.GetCustomFields();
 
             // Add new custom fields
             foreach (CustomFieldDefinition definition in customFieldDefinitions)
-                if (!customFields.Exists(delegate(CustomFieldGroupingType customFieldGroupingType)
-                {
-                    return customFieldGroupingType.definition.Equals(definition);
-                }))
-                {
+                if (!customFields.Exists(cf => cf.definition.Equals(definition)))
                     customFields.Add(new CustomFieldGroupingType(ObjectTypes.AllExcFolders, definition));
-                }
+
 
             // Remove old ones
             foreach (CustomFieldGroupingType customFieldGroupingType in customFields.ToArray())
-                if (!customFieldDefinitions.Exists(delegate(CustomFieldDefinition definition)
-                {
-                    return customFieldGroupingType.definition.Equals(definition);
-                }))
+                if (!customFieldDefinitions.Exists(cfd => customFieldGroupingType.definition.Equals(cfd)))
                 {
                     customFields.Remove(customFieldGroupingType);
                     OnCustomFieldRemoved(customFieldGroupingType);
@@ -122,7 +117,7 @@ namespace XenAdmin.Controls.XenSearch
         private static void OnCustomFieldRemoved(CustomFieldGroupingType groupingType)
         {
             if (CustomFieldRemoved != null)
-                CustomFieldRemoved(groupingType, new EventArgs());
+                CustomFieldRemoved(groupingType);
         }
 
         private readonly List<Button> groups = new List<Button>(); // Button.tag = GroupType
@@ -133,12 +128,11 @@ namespace XenAdmin.Controls.XenSearch
 
             AddGroup(potentialGroups[0]);
 
-            CustomFieldRemoved += new EventHandler(CustomFieldRemovalWatcher_CustomFieldRemoved); 
+            CustomFieldRemoved += CustomFieldRemovalWatcher_CustomFieldRemoved; 
         }
 
-        private void CustomFieldRemovalWatcher_CustomFieldRemoved(object sender, EventArgs e) 
+        private void CustomFieldRemovalWatcher_CustomFieldRemoved(CustomFieldGroupingType groupingType) 
         {
-            CustomFieldGroupingType groupingType = sender as CustomFieldGroupingType;
             if (groupingType == null)
                 return;
             foreach (Button button in groups.ToArray())
@@ -155,11 +149,10 @@ namespace XenAdmin.Controls.XenSearch
             }
         }
 
-        public event EventHandler GroupingChanged;
         protected void OnGroupChanged()
         {
             if (GroupingChanged != null)
-                GroupingChanged(this, new EventArgs());
+                GroupingChanged();
         }
 
         private void searcher_SearchForChanged()
