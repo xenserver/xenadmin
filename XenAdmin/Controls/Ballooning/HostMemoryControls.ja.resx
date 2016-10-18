@@ -400,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="unitsTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0, 0, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="unitsTotal.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 18</value>
@@ -424,7 +424,7 @@
     <value>NoControl</value>
   </data>
   <data name="unitsUsed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0, 0, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="unitsUsed.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 18</value>
@@ -448,7 +448,7 @@
     <value>NoControl</value>
   </data>
   <data name="unitsTotDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0, 0, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="unitsTotDynMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 18</value>
