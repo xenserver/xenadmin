@@ -1624,6 +1624,11 @@ namespace XenAdmin.Core
                     if (vmpp != null)
                         return vmpp;
                     break;
+                case cls.PVS_proxy:
+                    PVS_proxy proxy = message.Connection.Cache.Find_By_Uuid<PVS_proxy>(message.obj_uuid);
+                    if (proxy != null)
+                        return proxy;
+                    break;
             }
             return null;
         }
@@ -2069,6 +2074,12 @@ namespace XenAdmin.Core
        {
            var master = GetMaster(connection);
            return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+       }
+
+       public static bool PvsCacheCapability(IXenConnection connection)
+       {
+           var master = GetMaster(connection);
+           return master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xspvscache"));
        }
 
        /// <summary>

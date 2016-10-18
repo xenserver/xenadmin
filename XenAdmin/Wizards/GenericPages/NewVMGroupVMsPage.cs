@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.GenericPages
                 dataGridView1.Rows.Clear();
                 foreach (var vm in Pool.Connection.Cache.VMs)
                 {
-                    if (searchTextBox1.Matches(vm.Name) && vm.is_a_real_vm)
+                    if (searchTextBox1.Matches(vm.Name) && vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
 						dataGridView1.Rows.Add(new VMDataGridViewRow(SelectedVMs.Contains(vm), vm));
                 }
 

@@ -37,6 +37,8 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using XenAPI;
+using XenAdmin.Dialogs;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Controls.Ballooning
@@ -67,6 +69,16 @@ namespace XenAdmin.Controls.Ballooning
                     if (metrics != null)
                         metrics.PropertyChanged += vm_metrics_PropertyChanged;
                 }
+                if (Helpers.ElyOrGreater(_host))
+                {
+                    valueControlDomain.LinkBehavior = LinkBehavior.AlwaysUnderline;
+                    valueControlDomain.Links[0].Enabled = true;
+                }
+                else
+                {
+                    valueControlDomain.LinkBehavior = LinkBehavior.NeverUnderline;
+                    valueControlDomain.Links[0].Enabled = false;
+                }
             }
         }
 
@@ -81,13 +93,14 @@ namespace XenAdmin.Controls.Ballooning
             long xen_memory = host.xen_memory_calc;
             long avail = host.memory_available_calc;
             long tot_dyn_max = host.tot_dyn_max + xen_memory;
+            long dom0 = host.dom0_memory;
 
             long overcommit = total > 0
                 ? (long)Math.Round((double)tot_dyn_max / (double)total * 100.0)
                 : 0;
 
             // Initialize the shiny bar
-            hostShinyBar.Initialize(host, xen_memory);
+            hostShinyBar.Initialize(host, xen_memory, dom0);
 
             // Set the text values
             valueTotal.Text = Util.MemorySizeStringSuitableUnits(total, true);
@@ -95,6 +108,7 @@ namespace XenAdmin.Controls.Ballooning
             valueAvail.Text = Util.MemorySizeStringSuitableUnits(avail, true);
             valueTotDynMax.Text = Util.MemorySizeStringSuitableUnits(tot_dyn_max, true);
             labelOvercommit.Text = string.Format(Messages.OVERCOMMIT, overcommit);
+            valueControlDomain.Text = Util.MemorySizeStringSuitableUnits(dom0, true);
         }
 
         void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -113,6 +127,12 @@ namespace XenAdmin.Controls.Ballooning
         {
             if (e.PropertyName == "memory_actual")
                 this.Refresh();
+        }
+
+        private void valueControlDomain_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var dlg = new ControlDomainMemoryDialog(host))
+                dlg.ShowDialog(Program.MainWindow);
         }
     }
 }

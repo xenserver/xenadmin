@@ -103,6 +103,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _000_AddSite_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_AddSite_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _000_Alert2_h32bit_16 {
             get {
                 object obj = ResourceManager.GetObject("_000_Alert2_h32bit_16", resourceCulture);
@@ -873,6 +883,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _000_RemoveSite_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_RemoveSite_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _000_Resumed_h32bit_16 {
             get {
                 object obj = ResourceManager.GetObject("_000_Resumed_h32bit_16", resourceCulture);
@@ -1016,6 +1036,16 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap _000_ServerWlb_h32bit_16 {
             get {
                 object obj = ResourceManager.GetObject("_000_ServerWlb_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _000_Sites_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_Sites_h32bit_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

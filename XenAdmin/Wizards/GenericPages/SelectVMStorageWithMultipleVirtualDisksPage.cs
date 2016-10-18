@@ -429,7 +429,7 @@ namespace XenAdmin.Wizards.GenericPages
 					continue;
 
                 var sr = TargetConnection.Resolve(pbd.SR);
-				if (sr == null || sr.IsDetached)
+                if (sr == null || sr.IsDetached || !sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs))
 					continue;
 
                 if ((sr.content_type.ToLower() == "iso" || sr.type.ToLower() == "iso") && !resource.SRTypeInvalid)

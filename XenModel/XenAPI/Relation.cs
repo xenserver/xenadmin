@@ -96,6 +96,12 @@ namespace XenAPI
                 new Relation("bond_master_of", "Bond", "master"),
             });
 
+            relations.Add(typeof(Proxy_PVS_site), new Relation[] {
+                new Relation("cache_storage", "PVS_cache_storage", "site"),
+                new Relation("proxies", "PVS_proxy", "site"),
+                new Relation("servers", "PVS_server", "site"),
+            });
+
             relations.Add(typeof(Proxy_DR_task), new Relation[] {
                 new Relation("introduced_SRs", "SR", "introduced_by"),
             });

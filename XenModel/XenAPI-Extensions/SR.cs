@@ -54,7 +54,8 @@ namespace XenAPI
             iscsi,
             ebs, rawhba,
             smb, lvmofcoe,
-            nutanix, nutanixiso
+            nutanix, nutanixiso, 
+            tmpfs
         }
 
         public const string Content_Type_ISO = "iso";
@@ -411,8 +412,14 @@ namespace XenAPI
             if (name_label.StartsWith(Helpers.GuiTempObjectPrefix))
                 return false;
 
+            SRTypes srType = GetSRType(false);
+
             // CA-15012 - dont show cd drives of type local on miami (if dont get destroyed properly on upgrade)
-            if (GetSRType(false) == SRTypes.local)
+            if (srType == SRTypes.local)
+                return false;
+
+            // Hide Memory SR
+            if (srType == SRTypes.tmpfs)
                 return false;
 
             if (showHiddenVMs)
@@ -499,6 +506,10 @@ namespace XenAPI
             // ISO SRs are deemed not to support VDI create in the GUI, even though the back end
             // knows that they do. See CA-40119.
             if (content_type == SR.Content_Type_ISO)
+                return false;
+
+            // Memory SRs should not support VDI create in the GUI
+            if (GetSRType(false) == SR.SRTypes.tmpfs)
                 return false;
 
             SM sm = SM.GetByType(Connection, type);

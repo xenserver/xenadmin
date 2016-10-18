@@ -1506,7 +1506,10 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionReadCaching;
 
-            if (vm.ReadCachingEnabled)
+            var pvsProxy = vm.PvsProxy;
+            if (pvsProxy != null)
+                s.AddEntry(FriendlyName("VM.pvs_read_caching_status"), pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status));
+            else if (vm.ReadCachingEnabled)
             {
                 s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_ENABLED);
                 var vdiList = vm.ReadCachingVDIs.Select(vdi => vdi.NameWithLocation).ToArray();
