@@ -9591,6 +9591,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>プロキシ サーバーはサポートされません。</value>
   </data>
+  <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
+    <value>PVS Sites - '{0}'</value>
+  </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools 未インストール</value>
   </data>

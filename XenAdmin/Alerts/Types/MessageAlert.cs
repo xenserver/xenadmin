@@ -221,6 +221,14 @@ namespace XenAdmin.Alerts
                         }
                         break;
 
+                    case XenAPI.Message.MessageType.PVS_PROXY_NO_CACHE_SR_AVAILABLE:
+                        var proxy = XenObject as PVS_proxy;
+                        if (proxy != null)
+                        {
+                            return string.Format(FriendlyFormat(), proxy.VM, proxy.Connection.Resolve(proxy.site));
+                        }
+                        break;
+
                     //these here do not need the object
                     case Message.MessageType.VMPP_ARCHIVE_FAILED_0:
                     case Message.MessageType.VMPP_ARCHIVE_LOCK_FAILED:

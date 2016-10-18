@@ -112,10 +112,13 @@
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
+    <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\ConvertToThinSRCommand.cs" />
+    <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
+    <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
     <Compile Include="Commands\PauseDockerContainerCommand.cs" />
@@ -171,6 +174,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomGridView\GridTreeExpanderItem.cs" />
+    <Compile Include="Controls\PvsCacheStorageRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PvsCacheStorageRow.Designer.cs">
+      <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ThinProvisioningParametersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -221,6 +230,36 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EnablePvsReadCachingDialog.Designer.cs">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PvsCacheConfigurationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PvsCacheConfigurationDialog.Designer.cs">
+      <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PvsPages\PvsCacheConfigurationPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PvsPages\PvsCacheConfigurationPage.designer.cs">
+      <DependentUpon>PvsCacheConfigurationPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PvsSiteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PvsSiteDialog.Designer.cs">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDomainMemoryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ControlDomainMemoryDialog.Designer.cs">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewLauncher.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
     </Compile>
@@ -362,6 +401,12 @@
     </Compile>
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\PvsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\PvsPage.Designer.cs">
+      <DependentUpon>PvsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\SnapshotsPage.cs">
       <SubType>UserControl</SubType>
@@ -1427,6 +1472,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\PvsCacheStorageRow.ja.resx">
+      <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PvsCacheStorageRow.resx">
+      <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
+      <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
       <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1435,6 +1490,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
       <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.resx">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.zh-CN.resx">
+      <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CommandErrorDialog.resx">
       <SubType>Designer</SubType>
@@ -1548,6 +1613,15 @@
       <SubType>Designer</SubType>
       <DependentUpon>BallooningDialogAdvanced.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.resx">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.zh-CN.resx">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.ja.resx">
+      <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DateFilterDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DateFilterDialog.cs</DependentUpon>
@@ -1555,6 +1629,36 @@
     <EmbeddedResource Include="Dialogs\AdPasswordPrompt.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsCacheConfigurationDialog.ja.resx">
+      <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsCacheConfigurationDialog.resx">
+      <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsCacheConfigurationDialog.zh-CN.resx">
+      <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsPages\PvsCacheConfigurationPage.ja.resx">
+      <DependentUpon>PvsCacheConfigurationPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsPages\PvsCacheConfigurationPage.resx">
+      <DependentUpon>PvsCacheConfigurationPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsPages\PvsCacheConfigurationPage.zh-CN.resx">
+      <DependentUpon>PvsCacheConfigurationPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsSiteDialog.ja.resx">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsSiteDialog.resx">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PvsSiteDialog.zh-CN.resx">
+      <DependentUpon>PvsSiteDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.ja.resx">
       <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
@@ -1864,6 +1968,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.ja.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
+      <DependentUpon>PvsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
       <SubType>Designer</SubType>
@@ -4104,6 +4219,7 @@
     <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
     <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
     <Content Include="HomePage\media\logos\cx-logo-citrixXenServer.png" />
+    <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
     <None Include="Images\000_ImportVirtualAppliance_h32bit_16.png" />
@@ -4125,6 +4241,7 @@
     <None Include="Images\000_ScheduledVMsnapshotDiskOnly_h32bit_32.png" />
     <None Include="Images\000_RebootVM_h32bit_16.png" />
     <None Include="Images\000_RemoveIPAddress_h32bit_16.png" />
+    <None Include="Images\000_RemoveSite_h32bit_16.png" />
     <Content Include="Images\000_ServerInProgress_h32bit_16.png" />
     <None Include="Images\000_ServerMaintenance_h32bit_16.png" />
     <None Include="Images\000_ServerMaintenance_h32bit_32.png" />
@@ -4200,6 +4317,7 @@
     <Content Include="..\Branding\Images\alerts_32.png">
       <Link>Images\alerts_32.png</Link>
     </Content>
+    <Content Include="Images\000_Sites_h32bit_16.png" />
     <Content Include="Images\asterisk.png" />
     <Content Include="Images\attach_24.png" />
     <None Include="Images\cancelled_action_16.png" />

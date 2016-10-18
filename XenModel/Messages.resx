@@ -126,6 +126,9 @@
   <data name="ACTION_CHANGED_DISK_SIZE_FOR" xml:space="preserve">
     <value>Disk size changed for '{0}'.</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>Changing control domain memory settings on '{0}'</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>Change disk size</value>
   </data>
@@ -228,6 +231,15 @@
   <data name="ACTION_CLEANUP_DISK_SPACE_TITLE" xml:space="preserve">
     <value>Clean up disk space</value>
   </data>
+  <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
+    <value>Configuring PVS site</value>
+  </data>
+  <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
+    <value>Configured</value>
+  </data>
+  <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
+    <value>Configure PVS site '{0}'</value>
+  </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>Creating {0} ...</value>
   </data>
@@ -242,6 +254,15 @@
   </data>
   <data name="ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Deactivating Multiple Virtual Disks</value>
+  </data>
+  <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
+    <value>Deleting PVS site</value>
+  </data>
+  <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
+    <value>Deleting PVS site '{0}'</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>Deleting storage items...</value>
@@ -264,8 +285,17 @@
   <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
+  <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disabled PVS read caching for selected VMs</value>
+  </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Disable live patching</value>
+  </data>
+  <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disable PVS read caching</value>
+  </data>
+  <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
+    <value>Disabling PVS read caching for VM '{0}'</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
@@ -275,6 +305,9 @@
   </data>
   <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Disabling live patching for '{0}'</value>
+  </data>
+  <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>Disabling PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -372,8 +405,17 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR cleanup ({0})</value>
   </data>
+  <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enabled PVS read caching for selected VMs</value>
+  </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Enable live patching</value>
+  </data>
+  <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enable PVS read caching</value>
+  </data>
+  <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
+    <value>Enabling PVS read caching for VM '{0}' on site '{1}'</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
@@ -383,6 +425,9 @@
   </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Enabling live patching for '{0}'</value>
+  </data>
+  <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>Enabling PVS read caching for selected VMs</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -2218,6 +2263,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CACHE_NOT_YET_POPULATED" xml:space="preserve">
     <value>Cache not yet populated</value>
   </data>
+  <data name="CACHING" xml:space="preserve">
+    <value>Caching</value>
+  </data>
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -2541,6 +2589,11 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>Configuring Workload Balancing on pool '{0}'</value>
   </data>
+  <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>Changing the Control Domain memory will cause the server to be rebooted.
+
+Do you want to continue?</value>
+  </data>
   <data name="CONFIRM_CHANGE_MEMORY_MAX_PLURAL" xml:space="preserve">
     <value>Changing the maximum memory of these VMs will cause them to be rebooted.
 
@@ -2595,6 +2648,9 @@ Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DELETE_POLICY_0" xml:space="preserve">
     <value>Do you want to delete policy '{0}'?</value>
+  </data>
+  <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
+    <value>Are you sure you want to delete '{0}'?</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>Are you sure you want to delete the tag '{0}' from all managed resources?</value>
@@ -3038,6 +3094,12 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CONTINUE_WITH_EXPORT" xml:space="preserve">
     <value>&amp;Continue with export</value>
+  </data>
+  <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
+    <value>Control Domain Memory Settings - {0}</value>
+  </data>
+  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
+    <value>&amp;Control Domain Memory:</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
@@ -3536,6 +3598,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="DATATYPE_NETWORK" xml:space="preserve">
     <value>Network</value>
   </data>
+  <data name="DATATYPE_PVS" xml:space="preserve">
+    <value>PVS Cache</value>
+  </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>Storage</value>
   </data>
@@ -3906,11 +3971,20 @@ This will also delete its subfolders.</value>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>Disable</value>
   </data>
+  <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
+    <value>&amp;Disable PVS Read Caching</value>
+  </data>
+  <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
+    <value>Disable P&amp;VS Read Caching</value>
+  </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>Pause Workload Balancing </value>
   </data>
   <data name="DISABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Pa&amp;use</value>
+  </data>
+  <data name="DISABLING" xml:space="preserve">
+    <value>Disabling</value>
   </data>
   <data name="DISABLING_AD" xml:space="preserve">
     <value>Disabling Active Directory Authentication</value>
@@ -4663,8 +4737,23 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>Enable</value>
   </data>
+  <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
+    <value>E&amp;nable PVS Read Caching...</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
+    <value>Ena&amp;ble PVS Read Caching...</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
+    <value>Choose the PVS site from which the selected VMs are streamed.</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
+    <value>Choose the PVS site from which the selected VM is streamed.</value>
+  </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Res&amp;ume</value>
+  </data>
+  <data name="ENABLING" xml:space="preserve">
+    <value>Enabling</value>
   </data>
   <data name="ENABLING_AD" xml:space="preserve">
     <value>Enabling Active Directory Authentication</value>
@@ -6057,6 +6146,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOST_MENU_COMPLETE_FAILURE" xml:space="preserve">
     <value>(Error generating menu)</value>
   </data>
+  <data name="HOST_MENU_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>Control &amp;Domain Memory...</value>
+  </data>
   <data name="HOST_MENU_CPM_TEXT" xml:space="preserve">
     <value>&amp;Migrate VM wizard...</value>
   </data>
@@ -6450,6 +6542,12 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
     <value>This server version is incompatible with [XenCenter].</value>
   </data>
+  <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
+    <value>Incompatible protocol version</value>
+  </data>
+  <data name="INCOMPATIBLE_WRITE_CACHE_MODE" xml:space="preserve">
+    <value>Incompatible write cache mode</value>
+  </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>Incorrect file size</value>
   </data>
@@ -6491,6 +6589,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>Quiesced snapshots need the VM to be running</value>
+  </data>
+  <data name="INITIALIZED" xml:space="preserve">
+    <value>Initialized</value>
   </data>
   <data name="INITIALIZE_WLB" xml:space="preserve">
     <value>Initialize WLB...</value>
@@ -7203,7 +7304,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Remo&amp;ve from [XenCenter]</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
-    <value>Remove Crash &amp;Dump Files</value>
+    <value>Remove Crash Dump &amp;Files</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
     <value>Remove Crash Dump &amp;Files</value>
@@ -8835,6 +8936,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="NO_VALID_DISK_LOCATION" xml:space="preserve">
     <value>There are no SR locations that can support this disk</value>
   </data>
+  <data name="NO_VALUE" xml:space="preserve">
+    <value>-</value>
+  </data>
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>Number of snapshots to keep</value>
   </data>
@@ -9607,6 +9711,33 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>Proxy servers are not supported.</value>
+  </data>
+  <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
+    <value>PVS Cache Configuration - '{0}'</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
+    <value>Memory and disk</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
+    <value>Memory only</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
+    <value>MemorySR</value>
+  </data>
+  <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
+    <value>Not configured</value>
+  </data>
+  <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
+    <value>This PVS site cannot be removed because it contains running proxies.</value>
+  </data>
+  <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
+    <value>PVS Servers on site {0}'</value>
+  </data>
+  <data name="PVS_SITE_NAME" xml:space="preserve">
+    <value>PVS Site</value>
+  </data>
+  <data name="PVS_TAB_TITLE" xml:space="preserve">
+    <value>PVS Read Cache</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools not installed</value>
@@ -10827,6 +10958,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>
+  </data>
+  <data name="STOPPED" xml:space="preserve">
+    <value>Stopped</value>
   </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{0} free of {1}</value>

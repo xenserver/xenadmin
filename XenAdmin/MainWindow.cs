@@ -100,6 +100,7 @@ namespace XenAdmin
         internal readonly AdPage AdPage = new AdPage();
         internal readonly ADUpsellPage AdUpsellPage = new ADUpsellPage();
         internal readonly GpuPage GpuPage = new GpuPage();
+        internal readonly PvsPage PvsPage = new PvsPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
 
@@ -161,6 +162,7 @@ namespace XenAdmin
             components.Add(WlbPage);
             components.Add(AdPage);
             components.Add(GpuPage);
+            components.Add(PvsPage);
             components.Add(SearchPage);
             components.Add(DockerProcessPage);
             components.Add(DockerDetailsPage);
@@ -184,6 +186,7 @@ namespace XenAdmin
             AddTabContents(AdPage, TabPageAD);
             AddTabContents(AdUpsellPage, TabPageADUpsell);
             AddTabContents(GpuPage, TabPageGPU);
+            AddTabContents(PvsPage, TabPagePvs);
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
             AddTabContents(DockerDetailsPage, TabPageDockerDetails);
@@ -1425,6 +1428,9 @@ namespace XenAdmin
 
             ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
 
+            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
+                && Helpers.PvsCacheCapability(selectionConnection));
+
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
 
@@ -1961,6 +1967,10 @@ namespace XenAdmin
                 {
                     DockerDetailsPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
                 }
+                else if (t == TabPagePvs)
+                {
+                    PvsPage.Connection = SelectionManager.Selection.GetConnectionOfFirstItem();
+                }
             }
 
             if (t == TabPagePeformance)
@@ -2437,6 +2447,8 @@ namespace XenAdmin
                 return "TabPageDockerProcess" + modelObj;
             if (TheTabControl.SelectedTab == TabPageDockerDetails)
                 return "TabPageDockerDetails" + modelObj;
+            if (TheTabControl.SelectedTab == TabPagePvs)
+                return "TabPagePvs" + modelObj;
             return "TabPageUnknown";
         }
 
