@@ -213,8 +213,10 @@
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsRebootWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />

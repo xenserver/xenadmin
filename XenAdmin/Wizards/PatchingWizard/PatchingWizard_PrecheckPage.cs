@@ -416,6 +416,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
+            //Checking if the host needs a reboot
+            if (!IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                var guidance = patch != null
+                    ? patch.after_apply_guidance
+                    : new List<after_apply_guidance> {after_apply_guidance.restartHost};
+                foreach (var host in SelectedServers)
+                {
+                    checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
+                }
+            }
+
             //Checking can evacuate host
             //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
             //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
@@ -448,6 +462,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                     List<Pool_update> updates = new List<Pool_update>(host.Connection.Cache.Pool_updates);
                     Pool_update poolUpdateFromHost = updates.Find(otherPatch => string.Equals(otherPatch.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
                     checkGroup.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost));
+                }
+            }
+
+            //Checking if the host needs a reboot
+            if (!IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                var guidance = update != null
+                    ? update.after_apply_guidance
+                    : new List<update_after_apply_guidance> {update_after_apply_guidance.restartHost};
+                foreach (var host in SelectedServers)
+                {
+                    checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
                 }
             }
 
@@ -597,7 +625,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (Problem != null)
                     description = Problem.Description;
                 else if (_check != null)
-                    description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description);
+                {
+                    description = _check.SuccessfulCheckDescription;
+                    if (string.IsNullOrEmpty(description))
+                        description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description);
+                }
                 
                 if (description != string.Empty)
                     _descriptionCell.Value = String.Format(Messages.PATCHING_WIZARD_DESC_CELL_INDENT, null, description);

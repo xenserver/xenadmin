@@ -29,45 +29,30 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
+using System;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
-using XenAdmin.Diagnostics.Problems;
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public abstract class Check
+    public class HostNeedsRebootWarning : Warning
     {
-        protected Check(Host host)
+        private readonly Host host;
+
+        public HostNeedsRebootWarning(Check check, Host host)
+            : base(check)
         {
-            _host = host;
+            this.host = host;
         }
 
-        protected abstract Problem RunCheck();
-
-        // By default, most Checks return zero or one Problems: but a
-        // Check can override this to return multiple Problems
-        public virtual List<Problem> RunAllChecks()
+        public override string Title
         {
-            var list = new List<Problem>(1);
-            var problem = RunCheck();
-            if (problem != null)
-                list.Add(problem);
-            return list;
+            get { return Description; }
         }
 
-        public abstract string Description{ get;}
-
-        public virtual string SuccessfulCheckDescription 
+        public override string Description
         {
-            get { return string.Empty; }
+            get { return String.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED, host.name_label); }
         }
-
-        private readonly Host _host = null;
-        public Host Host
-        {
-            get{ return _host;}
-        }
-
     }
-
 }
