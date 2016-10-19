@@ -203,6 +203,12 @@ namespace XenAdmin.SettingsPanels
                 labelTitle.Text = Messages.GENERAL_PAGE_VMPP_SETTINGS;
             }
 
+            if (xenObjectCopy is VMSS)
+            {
+                lblFolder.Visible = labelTags.Visible = folderPanel.Visible = tagsPanel.Visible = false;
+                labelTitle.Text = Messages.GENERAL_PAGE_VMSS_SETTINGS;
+            }
+
             if (xenObjectCopy is VM_appliance)
             {
                 lblFolder.Visible = labelTags.Visible = folderPanel.Visible = tagsPanel.Visible = false;

@@ -15256,6 +15256,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the snapshot schedule name and an optional description..
+        /// </summary>
+        public static string GENERAL_PAGE_VMSS_SETTINGS {
+            get {
+                return ResourceManager.GetString("GENERAL_PAGE_VMSS_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The server &apos;{0}&apos; needs to be rebooted for update &apos;{1}&apos; to take effect.
         /// </summary>
         public static string GENERAL_PANEL_UPDATE_WARNING {

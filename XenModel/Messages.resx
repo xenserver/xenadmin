@@ -5345,6 +5345,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GENERAL_PAGE_VMPP_SETTINGS" xml:space="preserve">
     <value>Enter the VM Protection Policy name and an optional description.</value>
   </data>
+  <data name="GENERAL_PAGE_VMSS_SETTINGS" xml:space="preserve">
+    <value>Enter the snapshot schedule name and an optional description.</value>
+  </data>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>Enter the vApp name and an optional description.</value>
   </data>
