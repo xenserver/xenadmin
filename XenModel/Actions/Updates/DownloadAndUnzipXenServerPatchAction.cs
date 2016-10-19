@@ -59,7 +59,7 @@ namespace XenAdmin.Actions
         }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName)
-            : this(patchName, uri, outputFileName, InvisibleMessages.XEN_UPDATE)
+            : this(patchName, uri, outputFileName, null)
         { }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, string updateFileExtension)
@@ -123,14 +123,22 @@ namespace XenAdmin.Actions
 
                     while (iterator.HasNext())
                     {
-                        if (Path.GetExtension(iterator.CurrentFileName()) == "." + updateFileExtension)
+                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
+
+                        if (!string.IsNullOrEmpty(updateFileExtension) && currentExtension == "." + updateFileExtension
+                            || currentExtension == ".iso" || currentExtension == ".xsupdate")
                         {
                             string path = Path.Combine(Path.GetDirectoryName(outFileName), iterator.CurrentFileName());
+
+                            log.DebugFormat("Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...", iterator.CurrentFileName(), currentExtension);
 
                             using (Stream outputStream = new FileStream(path, FileMode.Create))
                             {
                                 iterator.ExtractCurrentFile(outputStream);
                                 PatchPath = path;
+
+                                log.DebugFormat("Update file extracted to '{0}'", path);
+                                
                                 break;
                             }
                         }
@@ -177,18 +185,10 @@ namespace XenAdmin.Actions
             if (Cancelling)
                 throw new CancelledException();
 
-            if (updateFileExtension.ToLowerInvariant() != "iso")
-            {
-                log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
-                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
-                ExtractFile();
-                log.DebugFormat("Extracting XenServer patch '{0}' completed", updateName);
-            }
-            else
-            {
-                log.DebugFormat("ISO file downloaded ('{0}'), skipping unzip. Setting PatchPath to '{1}'", updateName, outFileName);
-                PatchPath = outFileName;
-            }
+            log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
+            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
+            ExtractFile();
+            log.DebugFormat("Extracting XenServer patch '{0}' completed", updateName);
 
             Description = Messages.COMPLETED;
             MarkCompleted();

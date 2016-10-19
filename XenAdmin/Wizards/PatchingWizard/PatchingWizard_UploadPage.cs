@@ -105,7 +105,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             Uri address = new Uri(patchUri);
             string tempFile = Path.GetTempFileName();
 
-            bool isIso = patchUri.ToLowerInvariant().EndsWith("iso");
+            bool isIso = SelectedUpdateType == UpdateType.ISO;
             
             downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? "iso" : Branding.Update);          
 
