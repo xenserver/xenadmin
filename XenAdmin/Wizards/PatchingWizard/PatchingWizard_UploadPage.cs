@@ -106,8 +106,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             string tempFile = Path.GetTempFileName();
 
             bool isIso = SelectedUpdateType == UpdateType.ISO;
-            
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? "iso" : Branding.Update);          
+
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? Branding.UpdateIso : Branding.Update);          
 
             if (downloadAction != null)
             {
