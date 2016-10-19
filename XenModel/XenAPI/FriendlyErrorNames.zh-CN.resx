@@ -862,22 +862,22 @@
     <value>只能对模板(而非常规 VM)调用置备调用。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
-    <value>The PVS site already has cache storage configured for the host.</value>
+    <value>PVS 站点已为主机配置缓存存储。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_IS_IN_USE" xml:space="preserve">
-    <value>The PVS cache storage is in use by the site and cannot be removed.</value>
+    <value>PVS 缓存存储正由站点使用，无法删除。</value>
   </data>
   <data name="PVS_PROXY_ALREADY_PRESENT" xml:space="preserve">
-    <value>The VIF is already associated with a PVS proxy</value>
+    <value>VIF 已与 PVS 代理相关联</value>
   </data>
   <data name="PVS_SERVER_ADDRESS_IN_USE" xml:space="preserve">
-    <value>The address specified is already in use by an existing PVS_server object</value>
+    <value>指定的地址已被现有 PVS 服务器对象使用(_S)</value>
   </data>
   <data name="PVS_SITE_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
-    <value>The PVS site contains running proxies.</value>
+    <value>PVS 站点包含正在运行的代理。</value>
   </data>
   <data name="PVS_SITE_CONTAINS_SERVERS" xml:space="preserve">
-    <value>The PVS site contains servers and cannot be forgotten.</value>
+    <value>PVS 站点包含服务器，不能被遗忘。</value>
   </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>您的当前角色未获授权，无法执行此操作。
@@ -1560,7 +1560,7 @@
     <value>外部目录服务无法解析使用者。</value>
   </data>
   <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
-    <value>The suspend image of a checkpoint is not accessible from the host on which the VM is running</value>
+    <value>检查点的挂起映像不能从运行 VM 的主机进行访问</value>
   </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>必须使用 tar 输出从 OEM 服务器检索系统状态。</value>
@@ -1794,7 +1794,7 @@
     <value>尝试执行的操作对模板无效</value>
   </data>
   <data name="VM_LACKS_FEATURE" xml:space="preserve">
-    <value>You attempted an operation on a VM which lacks the feature.</value>
+    <value>您尝试在缺少该功能的 VM 上进行操作。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>您尝试在缺少协作关闭功能的 VM 上执行需要使用该功能的操作。</value>

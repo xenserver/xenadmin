@@ -520,7 +520,7 @@
     <value>16</value>
   </data>
   <data name="labelControlDomain.Text" xml:space="preserve">
-    <value>Control domain memory</value>
+    <value>コントロール ドメイン メモリ</value>
   </data>
   <data name="labelControlDomain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
