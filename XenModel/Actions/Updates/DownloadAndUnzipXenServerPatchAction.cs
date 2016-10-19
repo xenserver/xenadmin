@@ -59,7 +59,7 @@ namespace XenAdmin.Actions
         }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName)
-            : this(patchName, uri, outputFileName, null)
+            : this(patchName, uri, outputFileName, InvisibleMessages.XEN_UPDATE)
         { }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, string updateFileExtension)
@@ -125,8 +125,7 @@ namespace XenAdmin.Actions
                     {
                         string currentExtension = Path.GetExtension(iterator.CurrentFileName());
 
-                        if (!string.IsNullOrEmpty(updateFileExtension) && currentExtension == "." + updateFileExtension
-                            || currentExtension == ".iso" || currentExtension == ".xsupdate")
+                        if (!string.IsNullOrEmpty(updateFileExtension) && currentExtension == "." + updateFileExtension)
                         {
                             string path = Path.Combine(Path.GetDirectoryName(outFileName), iterator.CurrentFileName());
 
