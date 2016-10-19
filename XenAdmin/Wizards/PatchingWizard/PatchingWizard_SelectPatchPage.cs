@@ -197,7 +197,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         if (isValidFile(fileName))
                         {
-                            if (fileName.EndsWith(UpdateExtension.ToLowerInvariant()))
+                            if (fileName.EndsWith("." + Branding.Update))
                                 SelectedUpdateType = UpdateType.NewRetail;
                             else if (fileName.EndsWith("." + Branding.UpdateIso))
                                 SelectedUpdateType = UpdateType.ISO;
