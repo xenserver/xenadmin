@@ -127,7 +127,7 @@
     <value>“{0}”的磁盘大小已更改。</value>
   </data>
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
-    <value>Changing control domain memory settings on '{0}'</value>
+    <value>更改“{0}”上的控制域内存设置</value>
   </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>更改磁盘大小</value>
@@ -232,13 +232,13 @@
     <value>清理磁盘空间</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Configuring PVS site</value>
+    <value>配置 PVS 站点</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
-    <value>Configured</value>
+    <value>已配置</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Configure PVS site '{0}'</value>
+    <value>配置 PVS 站点“{0}”</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>正在创建 {0} ...</value>
@@ -256,13 +256,13 @@
     <value>正在取消激活多个虚拟磁盘</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Deleting PVS site</value>
+    <value>删除 PVS 站点</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
-    <value>Done</value>
+    <value>完成</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Deleting PVS site '{0}'</value>
+    <value>删除 PVS 站点“{0}”</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>正在删除存储项...</value>
@@ -286,16 +286,16 @@
     <value>正在分离多个存储项</value>
   </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabled PVS read caching for selected VMs</value>
+    <value>已禁用所选 VM 的 PVS 读缓存</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>禁用实时修补</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disable PVS read caching</value>
+    <value>禁用 PVS 读缓存</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Disabling PVS read caching for VM '{0}'</value>
+    <value>禁用 VM“{0}”的 PVS 读缓存</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在禁用 </value>
@@ -307,7 +307,7 @@
     <value>对“{0}”禁用实时修补</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabling PVS read caching for selected VMs</value>
+    <value>禁用所选 VM 的 PVS 读缓存</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>已激活磁盘...</value>
@@ -406,16 +406,16 @@
     <value>DR 清理 ({0})</value>
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabled PVS read caching for selected VMs</value>
+    <value>已启用所选 VM 的 PVS 读缓存</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>启用实时修补</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enable PVS read caching</value>
+    <value>启用 PVS 读缓存</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Enabling PVS read caching for VM '{0}' on site '{1}'</value>
+    <value>启用站点“{1}”上的 VM“{0}”的 PVS 读缓存</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在启用</value>
@@ -427,7 +427,7 @@
     <value>对“{0}”启用实时修补</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabling PVS read caching for selected VMs</value>
+    <value>启用所选 VM 的 PVS 读缓存</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因块校验和不匹配而失败。请重新尝试导出。</value>
@@ -2264,7 +2264,7 @@
     <value>缓存中尚未填入内容</value>
   </data>
   <data name="CACHING" xml:space="preserve">
-    <value>Caching</value>
+    <value>缓存</value>
   </data>
   <data name="CANCEL" xml:space="preserve">
     <value>取消</value>
@@ -2590,9 +2590,9 @@
     <value>正在池“{0}”上配置 Workload Balancing</value>
   </data>
   <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
-    <value>Changing the Control Domain memory will cause the server to be rebooted.
+    <value>更改控制域内存将导致服务器重新启动。
 
-Do you want to continue?</value>
+是否要继续?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_MAX_PLURAL" xml:space="preserve">
     <value>如果更改这些 VM 的最大内存，将导致这些 VM 重新启动。
@@ -2650,7 +2650,7 @@ Do you want to continue?</value>
     <value>是否删除策略“{0}”?</value>
   </data>
   <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
-    <value>Are you sure you want to delete '{0}'?</value>
+    <value>是否确实要删除“{0}”?</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>是否确实要从所有托管资源中删除标记“{0}”?</value>
@@ -3096,10 +3096,10 @@ Do you want to continue?</value>
     <value>继续导出(&amp;C)</value>
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
-    <value>Control Domain Memory Settings - {0}</value>
+    <value>控制域内存设置 - {0}</value>
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
-    <value>&amp;Control Domain Memory:</value>
+    <value>控制域内存(&amp;C):</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>主机 {0} 上的控制域</value>
@@ -3599,7 +3599,7 @@ Do you want to continue?</value>
     <value>网络</value>
   </data>
   <data name="DATATYPE_PVS" xml:space="preserve">
-    <value>PVS Cache</value>
+    <value>PVS 缓存</value>
   </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>存储</value>
@@ -3971,10 +3971,10 @@ Do you want to continue?</value>
     <value>禁用</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>&amp;Disable PVS Read Caching</value>
+    <value>禁用 PVS 读缓存(&amp;D)</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Disable P&amp;VS Read Caching</value>
+    <value>禁用 PVS 读缓存(&amp;V)</value>
   </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>暂停 Workload Balancing </value>
@@ -3983,7 +3983,7 @@ Do you want to continue?</value>
     <value>暂停(&amp;U)</value>
   </data>
   <data name="DISABLING" xml:space="preserve">
-    <value>Disabling</value>
+    <value>正在禁用</value>
   </data>
   <data name="DISABLING_AD" xml:space="preserve">
     <value>正在禁用 Active Directory 身份验证</value>
@@ -4737,22 +4737,22 @@ Do you want to continue?</value>
     <value>启用</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>E&amp;nable PVS Read Caching...</value>
+    <value>启用 PVS 读缓存(&amp;N)...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Ena&amp;ble PVS Read Caching...</value>
+    <value>启用 PVS 读缓存(&amp;B)...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
-    <value>Choose the PVS site from which the selected VMs are streamed.</value>
+    <value>选择要通过流技术推送其中的选定 VM 的 PVS 站点。</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
-    <value>Choose the PVS site from which the selected VM is streamed.</value>
+    <value>选择要通过流技术推送其中的选定 VM 的 PVS 站点。</value>
   </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>恢复(&amp;U)</value>
   </data>
   <data name="ENABLING" xml:space="preserve">
-    <value>Enabling</value>
+    <value>正在启用</value>
   </data>
   <data name="ENABLING_AD" xml:space="preserve">
     <value>正在启用 Active Directory 身份验证</value>
@@ -6146,7 +6146,7 @@ Do you want to continue?</value>
     <value>(生成菜单时出错)</value>
   </data>
   <data name="HOST_MENU_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
-    <value>Control &amp;Domain Memory...</value>
+    <value>控制域内存(&amp;D)...</value>
   </data>
   <data name="HOST_MENU_CPM_TEXT" xml:space="preserve">
     <value>迁移 VM 向导(&amp;M)...</value>
@@ -6542,10 +6542,10 @@ Do you want to continue?</value>
     <value>此服务器版本与 [XenCenter] 不兼容。</value>
   </data>
   <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
-    <value>Incompatible protocol version</value>
+    <value>协议版本不兼容</value>
   </data>
   <data name="INCOMPATIBLE_WRITE_CACHE_MODE" xml:space="preserve">
-    <value>Incompatible write cache mode</value>
+    <value>写缓存模式不兼容</value>
   </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>文件大小不正确</value>
@@ -6590,7 +6590,7 @@ Do you want to continue?</value>
     <value>静止快照需要 VM 处于运行状态</value>
   </data>
   <data name="INITIALIZED" xml:space="preserve">
-    <value>Initialized</value>
+    <value>已初始化</value>
   </data>
   <data name="INITIALIZE_WLB" xml:space="preserve">
     <value>正在初始化 WLB...</value>
@@ -7303,7 +7303,7 @@ SCSI ID: {2}
     <value>从 [XenCenter] 中删除(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
-    <value>Remove Crash Dump &amp;Files</value>
+    <value>删除故障转储文件(&amp;F)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
     <value>删除故障转储文件(&amp;F)</value>
@@ -9712,31 +9712,31 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>不支持代理服务器。</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Cache Configuration - '{0}'</value>
+    <value>PVS 缓存配置 - {0}</value>
   </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
-    <value>Memory and disk</value>
+    <value>内存和磁盘</value>
   </data>
   <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
-    <value>Memory only</value>
+    <value>仅限内存</value>
   </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
-    <value>MemorySR</value>
+    <value>内存 SR</value>
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
-    <value>Not configured</value>
+    <value>未配置</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>This PVS site cannot be removed because it contains running proxies.</value>
+    <value>无法删除此 PVS 站点，因为其中包含正在运行的代理。</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Servers on site {0}'</value>
+    <value>站点“{0}”上的 PVS 服务器</value>
   </data>
   <data name="PVS_SITE_NAME" xml:space="preserve">
-    <value>PVS Site</value>
+    <value>PVS 站点</value>
   </data>
   <data name="PVS_TAB_TITLE" xml:space="preserve">
-    <value>PVS Read Cache</value>
+    <value>PVS 读缓存</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>未安装 [XenServer product] Tools</value>
@@ -10959,7 +10959,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>打包服务器状态报告时出错。可能只能获取部分报告</value>
   </data>
   <data name="STOPPED" xml:space="preserve">
-    <value>Stopped</value>
+    <value>已停止</value>
   </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>可用空间 {0}，总空间 {1}</value>
@@ -12175,7 +12175,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>虚拟接口属性</value>
   </data>
   <data name="VIRTUAL_MACHINE" xml:space="preserve">
-    <value>Virtual Machine</value>
+    <value>虚拟机</value>
   </data>
   <data name="VIRTUAL_MACHINES" xml:space="preserve">
     <value>虚拟机</value>

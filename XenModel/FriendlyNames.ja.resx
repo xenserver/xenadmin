@@ -1869,39 +1869,39 @@
     <value>Nutanix ISO</value>
   </data>
   <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
-    <value>PVS proxy setup failed</value>
+    <value>PVS プロキシのセットアップに失敗しました</value>
   </data>
   <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>No cache storage available for PVS site</value>
+    <value>PVS サイトにキャッシュ ストレージがありません</value>
   </data>
   <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>Unable to setup PVS Read-caching on VM '{0}'. No cache storage found on site '{1}'.</value>
+    <value>VM '{0}' で PVS 読み取りキャッシュをセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
   </data>
   <data name="Label-performance.pvscache_evicted" xml:space="preserve">
-    <value>PVS Cache eviction rate</value>
+    <value>PVS キャッシュの削除の割合</value>
   </data>
   <data name="Label-performance.pvscache_read_hits" xml:space="preserve">
-    <value>PVS Cache hit rate</value>
+    <value>PVS キャッシュでヒットした割合</value>
   </data>
   <data name="Label-performance.pvscache_read_misses" xml:space="preserve">
-    <value>PVS Cache miss rate</value>
+    <value>PVS キャッシュでヒットしなかった割合</value>
   </data>
   <data name="Label-performance.pvscache_read_total" xml:space="preserve">
-    <value>PVS Cache observed read rate</value>
+    <value>PVS キャッシュで確認した読み取りの割合</value>
   </data>
   <data name="Label-performance.pvscache_space_utilization" xml:space="preserve">
-    <value>PVS Cache space utilization</value>
+    <value>PVS キャッシュの容量使用率</value>
   </data>
   <data name="Label-performance.pvscache_traffic_client_sent" xml:space="preserve">
-    <value>PVS Cache observed network traffic from clients</value>
+    <value>PVS キャッシュはクライアントからのネットワーク トラフィックを確認しました</value>
   </data>
   <data name="Label-performance.pvscache_traffic_proxy_saved" xml:space="preserve">
-    <value>PVS Cache saved network traffic</value>
+    <value>PVS キャッシュはネットワーク トラフィックを保存しました</value>
   </data>
   <data name="Label-performance.pvscache_traffic_server_sent" xml:space="preserve">
-    <value>PVS Cache observed network traffic from servers</value>
+    <value>PVS キャッシュはサーバーからのネットワーク トラフィックを確認しました</value>
   </data>
   <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
-    <value>PVS Read Caching Status</value>
+    <value>PVS 読み取りキャッシュの状態</value>
   </data>
 </root>

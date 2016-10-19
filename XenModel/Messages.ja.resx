@@ -127,7 +127,7 @@
     <value>'{0}' のディスク サイズを変更しました</value>
   </data>
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
-    <value>Changing control domain memory settings on '{0}'</value>
+    <value>'{0}' でコントロール ドメイン メモリの設定を変更しています</value>
   </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>ディスク サイズの変更</value>
@@ -232,13 +232,13 @@
     <value>ディスク容量のクリーンアップ</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Configuring PVS site</value>
+    <value>PVS サイトを構成しています</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
-    <value>Configured</value>
+    <value>構成済み</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Configure PVS site '{0}'</value>
+    <value>PVS サイト '{0}' の構成</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>{0} を作成しています...</value>
@@ -256,13 +256,13 @@
     <value>複数仮想ディスクの非アクティブ化</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Deleting PVS site</value>
+    <value>PVS サイトを削除しています</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
-    <value>Done</value>
+    <value>完了</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Deleting PVS site '{0}'</value>
+    <value>PVS サイト '{0}' を削除しています</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>ストレージを削除しています...</value>
@@ -286,16 +286,16 @@
     <value>複数ストレージの接続解除</value>
   </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabled PVS read caching for selected VMs</value>
+    <value>選択した VM の PVS 読み取りキャッシュが無効になっています</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチの無効化</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disable PVS read caching</value>
+    <value>PVS 読み取りキャッシュを無効にする</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Disabling PVS read caching for VM '{0}'</value>
+    <value>VM '{0}' の PVS 読み取りキャッシュを無効にしています</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>無効化 </value>
@@ -307,7 +307,7 @@
     <value>'{0}' のライブ パッチを無効にしています</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabling PVS read caching for selected VMs</value>
+    <value>選択した VM の PVS 読み取りキャッシュを無効にしています</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>ディスクがアクティブになりました</value>
@@ -406,16 +406,16 @@
     <value>障害回復クリーンアップ ({0})</value>
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabled PVS read caching for selected VMs</value>
+    <value>選択した VM の PVS 読み取りキャッシュが有効になっています</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチの有効化</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enable PVS read caching</value>
+    <value>PVS 読み取りキャッシュを有効にする</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Enabling PVS read caching for VM '{0}' on site '{1}'</value>
+    <value>サイト '{1}' で VM '{0}' の PVS 読み取りキャッシュを有効にしています</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>有効化</value>
@@ -427,7 +427,7 @@
     <value>'{0}' のライブ パッチを有効にしています</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabling PVS read caching for selected VMs</value>
+    <value>選択した VM の PVS 読み取りキャッシュを有効にしています</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>ブロック チェックサムが一致しないため、エクスポートに失敗しました。もう一度エクスポートしてください。</value>
@@ -2268,7 +2268,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>キャッシュがまだ使用されていません</value>
   </data>
   <data name="CACHING" xml:space="preserve">
-    <value>Caching</value>
+    <value>キャッシュ</value>
   </data>
   <data name="CANCEL" xml:space="preserve">
     <value>キャンセル</value>
@@ -2594,9 +2594,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>プール '{0}' のワークロード バランスを構成しています</value>
   </data>
   <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
-    <value>Changing the Control Domain memory will cause the server to be rebooted.
+    <value>コントロール ドメイン メモリを変更すると、サーバーが再起動されます。
 
-Do you want to continue?</value>
+続行しますか?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_MAX_PLURAL" xml:space="preserve">
     <value>VM のメモリの最大サイズを変更すると、VM が強制的に再起動されます。
@@ -2654,7 +2654,7 @@ Do you want to continue?</value>
     <value>ポリシー '{0}' を削除しますか?</value>
   </data>
   <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
-    <value>Are you sure you want to delete '{0}'?</value>
+    <value>'{0}' を削除してもよろしいですか?</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>すべてのリソースからタグ '{0}' を削除してもよろしいですか?</value>
@@ -3100,10 +3100,10 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>エクスポートの続行(&amp;C)</value>
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
-    <value>Control Domain Memory Settings - {0}</value>
+    <value>コントロール ドメイン メモリ設定 - {0}</value>
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
-    <value>&amp;Control Domain Memory:</value>
+    <value>コントロール ドメイン メモリ(&amp;C):</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>ホスト {0} 上のコントロール ドメイン</value>
@@ -3604,7 +3604,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>ネットワーク</value>
   </data>
   <data name="DATATYPE_PVS" xml:space="preserve">
-    <value>PVS Cache</value>
+    <value>PVS キャッシュ</value>
   </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>ストレージ</value>
@@ -3977,10 +3977,10 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>無効化</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>&amp;Disable PVS Read Caching</value>
+    <value>PVS 読み取りキャッシュを無効にする(&amp;D)</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Disable P&amp;VS Read Caching</value>
+    <value>PVS 読み取りキャッシュを無効にする(&amp;V)</value>
   </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>ワークロード バランスの一時停止 </value>
@@ -3989,7 +3989,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>一時停止(&amp;U)</value>
   </data>
   <data name="DISABLING" xml:space="preserve">
-    <value>Disabling</value>
+    <value>無効化</value>
   </data>
   <data name="DISABLING_AD" xml:space="preserve">
     <value>Active Directory 認証の無効化</value>
@@ -4743,22 +4743,22 @@ CD をイジェクトしてから再試行してください。</value>
     <value>有効化</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>E&amp;nable PVS Read Caching...</value>
+    <value>PVS 読み取りキャッシュを有効にする(&amp;N)...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Ena&amp;ble PVS Read Caching...</value>
+    <value>PVS 読み取りキャッシュを有効にする(&amp;B)...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
-    <value>Choose the PVS site from which the selected VMs are streamed.</value>
+    <value>選択した VM がストリーミングされる PVS サイトを選択します。</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
-    <value>Choose the PVS site from which the selected VM is streamed.</value>
+    <value>選択した VM がストリーミングされる PVS サイトを選択します。</value>
   </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>再開(&amp;U)</value>
   </data>
   <data name="ENABLING" xml:space="preserve">
-    <value>Enabling</value>
+    <value>有効化</value>
   </data>
   <data name="ENABLING_AD" xml:space="preserve">
     <value>Active Directory 認証を有効にしています</value>
@@ -6152,7 +6152,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>(メニュー生成エラー)</value>
   </data>
   <data name="HOST_MENU_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
-    <value>Control &amp;Domain Memory...</value>
+    <value>コントロール ドメイン メモリ(&amp;D)...</value>
   </data>
   <data name="HOST_MENU_CPM_TEXT" xml:space="preserve">
     <value>VM の移行ウィザード(&amp;M)...</value>
@@ -6548,10 +6548,10 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>このバージョンのサーバーには、[XenCenter] との互換性がありません。</value>
   </data>
   <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
-    <value>Incompatible protocol version</value>
+    <value>互換性のないプロトコル バージョン</value>
   </data>
   <data name="INCOMPATIBLE_WRITE_CACHE_MODE" xml:space="preserve">
-    <value>Incompatible write cache mode</value>
+    <value>互換性のない書き込みキャッシュ モード</value>
   </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>ファイルサイズが不正です</value>
@@ -6596,7 +6596,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>休止スナップショットを作成するには、VM が実行中である必要があります</value>
   </data>
   <data name="INITIALIZED" xml:space="preserve">
-    <value>Initialized</value>
+    <value>初期化済み</value>
   </data>
   <data name="INITIALIZE_WLB" xml:space="preserve">
     <value>WLB の初期化...</value>
@@ -7309,7 +7309,7 @@ SCSI ID: {2}
     <value>[XenCenter] から削除(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
-    <value>Remove Crash Dump &amp;Files</value>
+    <value>クラッシュ ダンプ ファイルの削除(&amp;F)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
     <value>クラッシュ ダンプ ファイルの削除(&amp;F)</value>
@@ -9569,10 +9569,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>{0} 障害がフェイルオーバーされました</value>
   </data>
   <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
-    <value>Post-update tasks cannot be carried out automatically for all the servers to be updated.</value>
+    <value>アップデート後タスクは、すべてのアップデートしたサーバーに対して自動的に実行されるわけではありません。</value>
   </data>
   <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>Automatic update is not supported for this server.</value>
+    <value>このサーバーで自動アップデートはサポートされていません。</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>プールの全般プロパティ</value>
@@ -9714,31 +9714,31 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プロキシ サーバーはサポートされません。</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Cache Configuration - '{0}'</value>
+    <value>PVS キャッシュ構成 - '{0}'</value>
   </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
-    <value>Memory and disk</value>
+    <value>メモリとディスク</value>
   </data>
   <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
-    <value>Memory only</value>
+    <value>メモリのみ</value>
   </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
     <value>MemorySR</value>
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
-    <value>Not configured</value>
+    <value>構成されていません</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>This PVS site cannot be removed because it contains running proxies.</value>
+    <value>プロキシが実行中のため、この PVS サイトを削除できません。</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Servers on site {0}'</value>
+    <value>サイト {0}' の PVS サーバー</value>
   </data>
   <data name="PVS_SITE_NAME" xml:space="preserve">
-    <value>PVS Site</value>
+    <value>PVS サイト</value>
   </data>
   <data name="PVS_TAB_TITLE" xml:space="preserve">
-    <value>PVS Read Cache</value>
+    <value>PVS 読み取りキャッシュ</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools 未インストール</value>
@@ -10961,7 +10961,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>サーバーの状態レポートのパッケージ化時にエラーが発生しました。一部のレポートが作成されていない場合があります</value>
   </data>
   <data name="STOPPED" xml:space="preserve">
-    <value>Stopped</value>
+    <value>停止しました</value>
   </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{1} の {0} 空き</value>
@@ -12177,7 +12177,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>仮想インターフェイス プロパティ</value>
   </data>
   <data name="VIRTUAL_MACHINE" xml:space="preserve">
-    <value>Virtual Machine</value>
+    <value>仮想マシン</value>
   </data>
   <data name="VIRTUAL_MACHINES" xml:space="preserve">
     <value>仮想マシン</value>
