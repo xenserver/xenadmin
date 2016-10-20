@@ -29,65 +29,37 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using XenAPI;
 
-namespace XenAdmin.Wizards.GenericPages
+namespace XenAdmin.Actions
 {
-    public class HomeServerItem : DelayLoadingOptionComboBoxItem
+    public class PvsProxyCreateAction : AsyncAction
     {
-        private readonly List<ReasoningFilter> filters;
+        private readonly PVS_site site;
+        private VIF vif;
 
-        public HomeServerItem(IXenObject host, List<ReasoningFilter> filters)
-            : base(host)
+        public PvsProxyCreateAction(VM vm, PVS_site site, VIF vif)
+            : base(vm.Connection, string.Format(Messages.ACTION_ENABLE_PVS_READ_CACHING_FOR, vm, site))
         {
-            if(!(host is Host))
-            {
-                throw new ArgumentException("This class expects as IXenObject of type host");
-            }
+            this.site = site;
+            this.vif = vif;
+            this.VM = vm;
 
-            this.filters = filters;
-            LoadAndWait();
+            this.Description = Messages.WAITING;
+            SetRBACPermissions();
         }
 
-        protected override string FetchFailureReason()
+        private void SetRBACPermissions()
         {
-            foreach (ReasoningFilter filter in filters)
-            {
-                if (filter.FailureFoundFor(Item))
-                {
-                    return filter.Reason;
-                }
-            }
-
-            return String.Empty;
-        }
-    }
-
-    public class DoNotAssignHomeServerPoolItem : IEnableableXenObjectComboBoxItem
-    {
-        private readonly IXenObject pool;
-        public DoNotAssignHomeServerPoolItem(IXenObject pool)
-        {
-            this.pool = pool;
-            if(!(pool is Pool))
-                throw new ArgumentException("This class epects as IXenObject of type pool");
+            ApiMethodsToRoleCheck.Add("pvs_proxy.create");
         }
 
-        public IXenObject Item
+        protected override void Run()
         {
-            get { return pool; }
-        }
-
-        public bool Enabled
-        {
-            get { return true; }
-        }
-
-        public override string ToString()
-        {
-            return Messages.DONT_SELECT_TARGET_SERVER;
+            Description = Messages.ENABLING;
+            RelatedTask = PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref);         
+            PollToCompletion(0, 100);
+            Description = Messages.ENABLED;
         }
     }
 }

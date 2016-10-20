@@ -1860,12 +1860,48 @@
     <value>[Citrix] [XenServer product] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
-    <value>Required Updates</value>
+    <value>必需的更新</value>
   </data>
   <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
     <value>Nutanix</value>
   </data>
   <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
     <value>Nutanix ISO</value>
+  </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS 代理设置失败</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>没有可用于 PVS 站点的缓存存储</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>无法在 VM“{0}”上设置 PVS 读缓存。在站点“{1}”上找不到缓存存储。</value>
+  </data>
+  <data name="Label-performance.pvscache_evicted" xml:space="preserve">
+    <value>PVS 缓存逐出率</value>
+  </data>
+  <data name="Label-performance.pvscache_read_hits" xml:space="preserve">
+    <value>PVS 缓存命中率</value>
+  </data>
+  <data name="Label-performance.pvscache_read_misses" xml:space="preserve">
+    <value>PVS 缓存未命中率</value>
+  </data>
+  <data name="Label-performance.pvscache_read_total" xml:space="preserve">
+    <value>PVS 缓存观测到的读取速率</value>
+  </data>
+  <data name="Label-performance.pvscache_space_utilization" xml:space="preserve">
+    <value>PVS 缓存空间利用率</value>
+  </data>
+  <data name="Label-performance.pvscache_traffic_client_sent" xml:space="preserve">
+    <value>PVS 缓存观测到的来自客户端的网络流量</value>
+  </data>
+  <data name="Label-performance.pvscache_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS 缓存保存的网络流量</value>
+  </data>
+  <data name="Label-performance.pvscache_traffic_server_sent" xml:space="preserve">
+    <value>PVS 缓存观测到的来自服务器的网络流量</value>
+  </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS 读缓存状态</value>
   </data>
 </root>

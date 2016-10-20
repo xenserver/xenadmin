@@ -39,9 +39,10 @@ namespace XenAdmin.Controls.Ballooning
             this.valueTotDynMax = new System.Windows.Forms.Label();
             this.unitsTotal = new System.Windows.Forms.Label();
             this.unitsUsed = new System.Windows.Forms.Label();
-            this.unitsAvail = new System.Windows.Forms.Label();
             this.unitsTotDynMax = new System.Windows.Forms.Label();
             this.labelOvercommit = new System.Windows.Forms.Label();
+            this.labelControlDomain = new System.Windows.Forms.Label();
+            this.valueControlDomain = new System.Windows.Forms.LinkLabel();
             this.hostShinyBar = new XenAdmin.Controls.Ballooning.HostShinyBar();
             this.SuspendLayout();
             // 
@@ -95,11 +96,6 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.unitsUsed, "unitsUsed");
             this.unitsUsed.Name = "unitsUsed";
             // 
-            // unitsAvail
-            // 
-            resources.ApplyResources(this.unitsAvail, "unitsAvail");
-            this.unitsAvail.Name = "unitsAvail";
-            // 
             // unitsTotDynMax
             // 
             resources.ApplyResources(this.unitsTotDynMax, "unitsTotDynMax");
@@ -110,6 +106,18 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.labelOvercommit, "labelOvercommit");
             this.labelOvercommit.Name = "labelOvercommit";
             // 
+            // labelControlDomain
+            // 
+            resources.ApplyResources(this.labelControlDomain, "labelControlDomain");
+            this.labelControlDomain.Name = "labelControlDomain";
+            // 
+            // valueControlDomain
+            // 
+            resources.ApplyResources(this.valueControlDomain, "valueControlDomain");
+            this.valueControlDomain.DisabledLinkColor = System.Drawing.SystemColors.ControlText;
+            this.valueControlDomain.Name = "valueControlDomain";
+            this.valueControlDomain.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.valueControlDomain_LinkClicked);
+            // 
             // hostShinyBar
             // 
             resources.ApplyResources(this.hostShinyBar, "hostShinyBar");
@@ -119,9 +127,10 @@ namespace XenAdmin.Controls.Ballooning
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.valueControlDomain);
+            this.Controls.Add(this.labelControlDomain);
             this.Controls.Add(this.labelOvercommit);
             this.Controls.Add(this.unitsTotDynMax);
-            this.Controls.Add(this.unitsAvail);
             this.Controls.Add(this.unitsUsed);
             this.Controls.Add(this.unitsTotal);
             this.Controls.Add(this.valueTotDynMax);
@@ -152,8 +161,9 @@ namespace XenAdmin.Controls.Ballooning
         private System.Windows.Forms.Label valueTotDynMax;
         private System.Windows.Forms.Label unitsTotal;
         private System.Windows.Forms.Label unitsUsed;
-        private System.Windows.Forms.Label unitsAvail;
         private System.Windows.Forms.Label unitsTotDynMax;
         private System.Windows.Forms.Label labelOvercommit;
+        private System.Windows.Forms.Label labelControlDomain;
+        private System.Windows.Forms.LinkLabel valueControlDomain;
     }
 }

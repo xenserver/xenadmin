@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace XenAdmin.Wizards.PatchingWizard
 {
     partial class PatchingWizard_ModePage
@@ -29,25 +31,18 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatchingWizard_ModePage));
-            this.AutomaticRadioButton = new System.Windows.Forms.RadioButton();
             this.ManualRadioButton = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.label3 = new System.Windows.Forms.Label();
             this.removeUpdateFileCheckBox = new System.Windows.Forms.CheckBox();
+            this.allowRadioButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.AutomaticRadioButton = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
+            this.allowRadioButtonContainer.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // AutomaticRadioButton
-            // 
-            resources.ApplyResources(this.AutomaticRadioButton, "AutomaticRadioButton");
-            this.AutomaticRadioButton.Name = "AutomaticRadioButton";
-            this.AutomaticRadioButton.TabStop = true;
-            this.AutomaticRadioButton.UseVisualStyleBackColor = true;
-            this.AutomaticRadioButton.CheckedChanged += new System.EventHandler(this.AutomaticRadioButton_CheckedChanged);
             // 
             // ManualRadioButton
             // 
@@ -80,24 +75,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.AutomaticRadioButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.ManualRadioButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.removeUpdateFileCheckBox, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.textBoxLog, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.allowRadioButtonContainer, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // autoHeightLabel1
             // 
             resources.ApplyResources(this.autoHeightLabel1, "autoHeightLabel1");
             this.autoHeightLabel1.Name = "autoHeightLabel1";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
             // 
             // removeUpdateFileCheckBox
             // 
@@ -107,6 +96,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.removeUpdateFileCheckBox.Name = "removeUpdateFileCheckBox";
             this.removeUpdateFileCheckBox.UseVisualStyleBackColor = true;
             // 
+            // allowRadioButtonContainer
+            // 
+            resources.ApplyResources(this.allowRadioButtonContainer, "allowRadioButtonContainer");
+            this.allowRadioButtonContainer.Controls.Add(this.AutomaticRadioButton);
+            this.allowRadioButtonContainer.Name = "allowRadioButtonContainer";
+            // 
+            // AutomaticRadioButton
+            // 
+            resources.ApplyResources(this.AutomaticRadioButton, "AutomaticRadioButton");
+            this.AutomaticRadioButton.Name = "AutomaticRadioButton";
+            this.AutomaticRadioButton.TabStop = true;
+            this.AutomaticRadioButton.UseVisualStyleBackColor = true;
+            this.AutomaticRadioButton.CheckedChanged += new System.EventHandler(this.AutomaticRadioButton_CheckedChanged);
+            // 
             // PatchingWizard_ModePage
             // 
             resources.ApplyResources(this, "$this");
@@ -115,20 +118,22 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.Name = "PatchingWizard_ModePage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.allowRadioButtonContainer.ResumeLayout(false);
+            this.allowRadioButtonContainer.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RadioButton AutomaticRadioButton;
         private System.Windows.Forms.RadioButton ManualRadioButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox removeUpdateFileCheckBox;
+        private Controls.ToolTipContainer allowRadioButtonContainer;
+        private RadioButton AutomaticRadioButton;
     }
 }

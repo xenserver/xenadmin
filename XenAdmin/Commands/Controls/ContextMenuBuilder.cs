@@ -41,6 +41,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using XenAdmin.Dialogs;
 using XenAdmin.Plugins;
 
 
@@ -339,7 +340,7 @@ namespace XenAdmin.Commands
         {
             public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
             {
-                items.Add(new MoveVirtualDiskCommand(mainWindow, selection));
+                items.Add(MoveVirtualDiskDialog.MoveMigrateCommand(mainWindow, selection));
                 // Default behaviour of this command is very conservative, they wont be able to delete if there are multi vbds,
                 // or if any of the vbds are plugged on top of the other constraints.
                 items.Add(new DeleteVirtualDiskCommand(mainWindow, selection));
@@ -361,11 +362,10 @@ namespace XenAdmin.Commands
         {
             public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
             {
+                items.Add(MoveVirtualDiskDialog.MoveMigrateCommand(mainWindow, selection));
                 // Default behaviour of this command is very conservative, they wont be able to delete if there are multi vbds,
                 // or if any of the vbds are plugged on top of the other constraints.
                 items.Add(new DeleteVirtualDiskCommand(mainWindow, selection));
-                items.AddSeparator();
-                items.Add(new PropertiesCommand(mainWindow, selection));
             }
 
             public override bool IsValid(SelectedItemCollection selection)

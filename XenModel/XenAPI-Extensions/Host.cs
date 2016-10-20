@@ -121,9 +121,10 @@ namespace XenAPI
             if (network.PIFs.Count == 0)
                 return true;
 
-            foreach (PIF pif in network.Connection.ResolveAll(network.PIFs))
+            foreach (var pifRef in network.PIFs)
             {
-                if (pif.host != null && pif.host.opaque_ref == opaque_ref)
+                PIF pif = network.Connection.Resolve(pifRef);
+                if (pif != null && pif.host != null && pif.host.opaque_ref == opaque_ref)
                     return true;
             }
 
@@ -524,6 +525,16 @@ namespace XenAPI
                     ? BoolKey(license_params, "restrict_ssl_legacy_switch") 
                     : BoolKeyPreferTrue(license_params, "restrict_ssl_legacy_switch");
             }
+        }
+
+        public static bool RestrictPvsCache(Host h)
+        {
+            return h._RestrictPvsCache;
+        }
+
+        private bool _RestrictPvsCache
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_pvs_proxy"); }
         }
 
         public static bool RestrictSslLegacySwitch(Host h)
@@ -1295,6 +1306,31 @@ namespace XenAPI
                 return xen_mem;
             }
         }
+
+        public long dom0_memory
+        {
+            get
+            {
+                long dom0_mem = 0;
+                VM vm = ControlDomainZero;
+                if (vm != null)
+                {
+                    VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
+                    dom0_mem = vmMetrics != null ? vmMetrics.memory_actual : vm.memory_dynamic_min;
+                }
+                return dom0_mem;
+            }
+        }
+
+        public long dom0_memory_extra
+        {
+            get
+            {
+                VM vm = ControlDomainZero;
+                return vm != null ? vm.memory_static_max - vm.memory_static_min : 0;
+            }
+        }
+
 
         /// <summary>
         /// Friendly string showing memory usage on the host

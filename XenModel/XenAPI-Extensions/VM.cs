@@ -2081,6 +2081,14 @@ namespace XenAPI
                 return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
             }
         }
+
+        public PVS_proxy PvsProxy
+        {
+            get
+            {
+                return Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM != null && p.VM.Equals(this)); // null if none
+            }
+        }
     }
 
     public struct VMStartupOptions

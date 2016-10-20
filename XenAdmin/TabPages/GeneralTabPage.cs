@@ -74,7 +74,7 @@ namespace XenAdmin.TabPages
 
             VM_guest_metrics_CollectionChangedWithInvoke =
                 Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
-            OtherConfigAndTagsWatcher.TagsChanged += new EventHandler(OtherConfigAndTagsWatcher_TagsChanged);
+            OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
             sections = new List<PDSection>();
             foreach (Control control in panel2.Controls)
             {
@@ -344,7 +344,7 @@ namespace XenAdmin.TabPages
             Program.BeginInvoke(this, BuildList);
         }
 
-        void OtherConfigAndTagsWatcher_TagsChanged(object sender, EventArgs e)
+        void OtherConfigAndTagsWatcher_TagsChanged()
         {
             BuildList();
         }
@@ -729,8 +729,6 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority),
                 new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow, xenObject)));
         }
-
-      
 
         private void generateStatusBox()
         {
@@ -1157,10 +1155,9 @@ namespace XenAdmin.TabPages
             GenTagRow(s);
             GenFolderRow(s);
 
-            if (xenObject is Host)
+            Host host = xenObject as Host;
+            if (host != null)
             {
-                Host host = xenObject as Host;
-
                 if (Helpers.GetPool(xenObject.Connection) != null)
                     s.AddEntry(Messages.POOL_MASTER, host.IsMaster() ? Messages.YES : Messages.NO);
 
@@ -1205,7 +1202,8 @@ namespace XenAdmin.TabPages
                 if (host.external_auth_type == Auth.AUTH_TYPE_AD)
                     s.AddEntry(FriendlyName("host.external_auth_service_name"), host.external_auth_service_name);
             }
-            else if (xenObject is VM)
+
+            if (vm != null)
             {
                 s.AddEntry(FriendlyName("VM.OSName"), vm.GetOSName());
 
@@ -1238,7 +1236,6 @@ namespace XenAdmin.TabPages
 					}
 				}
 
-
             	if (vm.is_a_snapshot)
                 {
                     VM snapshotOf = vm.Connection.Resolve(vm.snapshot_of);
@@ -1263,12 +1260,14 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow, xenObject)));}
+                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow, xenObject)));
+                    }
                 }
             }
-            else if (xenObject is XenObject<SR>)
+
+            SR sr = xenObject as SR;
+            if (sr != null)
             {
-                SR sr = xenObject as SR;
                 s.AddEntry(Messages.TYPE, sr.FriendlyTypeName);
 
                 if (sr.content_type != SR.Content_Type_ISO && sr.GetSRType(false) != SR.SRTypes.udev)
@@ -1321,36 +1320,49 @@ namespace XenAdmin.TabPages
                     }
                 }
             }
-            else if (xenObject is XenObject<Pool>)
+
+            Pool p = xenObject as Pool;
+            if (p != null)
             {
-                Pool p = xenObject as Pool;
-                if (p != null)
+                s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
+                if (Helpers.ClearwaterOrGreater(p.Connection))
+                    s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
+
+                var master = p.Connection.Resolve(p.master);
+                if (master != null)
                 {
-                    s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
-                    if (Helpers.ClearwaterOrGreater(p.Connection))
-                        s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
-
-                    var master = p.Connection.Resolve(p.master);
-                    if (master != null)
+                    if (p.IsPoolFullyUpgraded)
                     {
-                        if (p.IsPoolFullyUpgraded)
-                        {
-                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
-                        }
-                        else
-                        {
-                            var cmd = new RollingUpgradeCommand(Program.MainWindow);
-                            var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
-                                                                     null,
-                                                                     (sender, args) => cmd.Execute());
+                        s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
+                    }
+                    else
+                    {
+                        var cmd = new RollingUpgradeCommand(Program.MainWindow);
+                        var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
+                            null,
+                            (sender, args) => cmd.Execute());
 
-                            s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                                           string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
-                                           new[] { runRpuWizard },
-                                           cmd);
-                        }
+                        s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
+                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
+                            new[] {runRpuWizard},
+                            cmd);
                     }
                 }
+            }
+
+            VDI vdi = xenObject as VDI;
+            if (vdi != null)
+            {
+                s.AddEntry(Messages.SIZE, vdi.SizeText,
+                    new PropertiesToolStripMenuItem(new VdiEditSizeLocationCommand(Program.MainWindow, xenObject)));
+
+                SR vdiSr = vdi.Connection.Resolve(vdi.SR);
+                if (vdiSr != null && !vdiSr.IsToolsSR)
+                    s.AddEntry(Messages.DATATYPE_STORAGE, vdiSr.NameWithLocation);
+
+                string vdiVms = vdi.VMsOfVDI;
+                if (!string.IsNullOrEmpty(vdiVms))
+                    s.AddEntry(Messages.VIRTUAL_MACHINE, vdiVms);
             }
 
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
@@ -1506,7 +1518,10 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionReadCaching;
 
-            if (vm.ReadCachingEnabled)
+            var pvsProxy = vm.PvsProxy;
+            if (pvsProxy != null)
+                s.AddEntry(FriendlyName("VM.pvs_read_caching_status"), pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status));
+            else if (vm.ReadCachingEnabled)
             {
                 s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_ENABLED);
                 var vdiList = vm.ReadCachingVDIs.Select(vdi => vdi.NameWithLocation).ToArray();

@@ -553,15 +553,7 @@ namespace XenAdmin.TabPages
                                 Action.GetStatusString(), messageCell.Value,
                                 locationCell.Value, dateCell.Value);
 
-                try
-                {
-                    Clipboard.SetText(text);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Exception while trying to set clipboard text.", ex);
-                    log.Error(ex, ex);
-                }
+                Clip.SetClipboardText(text);
             }
         }
 

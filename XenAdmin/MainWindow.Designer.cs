@@ -86,6 +86,7 @@ namespace XenAdmin
             this.TabPageAD = new System.Windows.Forms.TabPage();
             this.TabPageADUpsell = new System.Windows.Forms.TabPage();
             this.TabPageGPU = new System.Windows.Forms.TabPage();
+            this.TabPagePvs = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.TabPageDockerProcess = new System.Windows.Forms.TabPage();
             this.TabPageDockerDetails = new System.Windows.Forms.TabPage();
@@ -187,6 +188,7 @@ namespace XenAdmin
             this.restoreFromBackupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.maintenanceModeToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.controlDomainMemoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.RemoveCrashdumpsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.HostPasswordToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.ChangeRootPasswordToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -212,6 +214,8 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.convertToTemplateToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.exportToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.enablePVSReadcachingToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.disablePVSReadcachingToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
             this.installToolsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.sendCtrlAltDelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -358,6 +362,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageAD);
             this.TheTabControl.Controls.Add(this.TabPageADUpsell);
             this.TheTabControl.Controls.Add(this.TabPageGPU);
+            this.TheTabControl.Controls.Add(this.TabPagePvs);
             this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
             this.TheTabControl.Controls.Add(this.TabPageDockerDetails);
@@ -490,6 +495,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageGPU, "TabPageGPU");
             this.TabPageGPU.Name = "TabPageGPU";
             this.TabPageGPU.UseVisualStyleBackColor = true;
+            // 
+            // TabPagePvs
+            // 
+            resources.ApplyResources(this.TabPagePvs, "TabPagePvs");
+            this.TabPagePvs.Name = "TabPagePvs";
+            this.TabPagePvs.UseVisualStyleBackColor = true;
             // 
             // TabPageSearch
             // 
@@ -764,6 +775,7 @@ namespace XenAdmin
             // 
             // ToolBarContextMenu
             // 
+            this.ToolBarContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.ToolBarContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowToolbarMenuItem});
             this.ToolBarContextMenu.Name = "ToolBarContextMenu";
@@ -1078,6 +1090,7 @@ namespace XenAdmin
             this.restoreFromBackupToolStripMenuItem,
             this.toolStripSeparator23,
             this.maintenanceModeToolStripMenuItem1,
+            this.controlDomainMemoryToolStripMenuItem,
             this.RemoveCrashdumpsToolStripMenuItem,
             this.HostPasswordToolStripMenuItem,
             this.toolStripSeparator25,
@@ -1211,6 +1224,12 @@ namespace XenAdmin
             this.maintenanceModeToolStripMenuItem1.Name = "maintenanceModeToolStripMenuItem1";
             resources.ApplyResources(this.maintenanceModeToolStripMenuItem1, "maintenanceModeToolStripMenuItem1");
             // 
+            // controlDomainMemoryToolStripMenuItem
+            // 
+            this.controlDomainMemoryToolStripMenuItem.Command = new XenAdmin.Commands.ChangeControlDomainMemoryCommand();
+            this.controlDomainMemoryToolStripMenuItem.Name = "controlDomainMemoryToolStripMenuItem";
+            resources.ApplyResources(this.controlDomainMemoryToolStripMenuItem, "controlDomainMemoryToolStripMenuItem");
+            // 
             // RemoveCrashdumpsToolStripMenuItem
             // 
             this.RemoveCrashdumpsToolStripMenuItem.Command = new XenAdmin.Commands.RemoveHostCrashDumpsCommand();
@@ -1289,6 +1308,8 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem,
             this.convertToTemplateToolStripMenuItem,
             this.exportToolStripMenuItem,
+            this.enablePVSReadcachingToolStripMenuItem,
+            this.disablePVSReadcachingToolStripMenuItem,
             this.toolStripMenuItem12,
             this.installToolsToolStripMenuItem,
             this.sendCtrlAltDelToolStripMenuItem,
@@ -1376,6 +1397,18 @@ namespace XenAdmin
             this.exportToolStripMenuItem.Command = new XenAdmin.Commands.ExportCommand();
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+            // 
+            // enablePVSReadcachingToolStripMenuItem
+            // 
+            this.enablePVSReadcachingToolStripMenuItem.Command = new EnablePvsReadCachingCommand();
+            this.enablePVSReadcachingToolStripMenuItem.Name = "enablePVSReadcachingToolStripMenuItem";
+            resources.ApplyResources(this.enablePVSReadcachingToolStripMenuItem, "enablePVSReadcachingToolStripMenuItem");
+            // 
+            // disablePVSReadcachingToolStripMenuItem
+            // 
+            this.disablePVSReadcachingToolStripMenuItem.Command = new DisablePvsReadCachingCommand();
+            this.disablePVSReadcachingToolStripMenuItem.Name = "disablePVSReadcachingToolStripMenuItem";
+            resources.ApplyResources(this.disablePVSReadcachingToolStripMenuItem, "disablePVSReadcachingToolStripMenuItem");
             // 
             // toolStripMenuItem12
             // 
@@ -2116,6 +2149,10 @@ namespace XenAdmin
         private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
         private TabPage TabPageADUpsell;
         private TabPage TabPageCvmConsole;
+        private TabPage TabPagePvs;
+        private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
+        private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
+        private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
     }
 
 }

@@ -40,7 +40,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     internal class CrossPoolMigrateDestinationPage : SelectMultipleVMDestinationPage
     {
-        private Host preSelectedHost;
         private List<VM> selectedVMs;
         private WizardMode wizardMode;
 
@@ -52,7 +51,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public CrossPoolMigrateDestinationPage(Host preSelectedHost, List<VM> selectedVMs, WizardMode wizardMode, List<IXenConnection> ignoredConnections)
         {
-            this.preSelectedHost = preSelectedHost;
             SetDefaultTarget(preSelectedHost);
             this.selectedVMs = selectedVMs;
             this.wizardMode = wizardMode;
@@ -94,9 +92,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             {
                 if (TemplatesOnly)
                 {
-                    if (selectedVMs.Count == 1)
+                    if (selectedVMs != null && selectedVMs.Count == 1)
                     {
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE;
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE;
                     }
                     else
                     {
@@ -105,9 +103,25 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 }
                 else
                 {
-                    if (selectedVMs != null && selectedVMs.Count > 1)
-                        return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS;
-                    return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE;
+                    if (selectedVMs != null && selectedVMs.Count == 1)
+                    {
+                        if (wizardMode == WizardMode.Copy)
+                            return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE;
+
+                        if (wizardMode == WizardMode.Move)
+                            return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE;
+
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE;
+                    }
+
+                    if (wizardMode == WizardMode.Copy)
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY;
+
+                    if (wizardMode == WizardMode.Move)
+                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE;
+
+                    return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE;
+                    
                 }
             }
         }
@@ -116,19 +130,26 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override string TargetServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
 
-
         public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
-           return new CrossPoolMigrateDelayLoadingComboBoxItem(xenItem, preSelectedHost, selectedVMs);
+            var filters = new List<ReasoningFilter>
+            {
+                new CrossPoolMigrateVersionFilter(xenItem),
+                new ResidentHostIsSameAsSelectionFilter(xenItem, selectedVMs),
+                new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs, wizardMode),
+                new WlbEnabledFilter(xenItem, selectedVMs)
+            };
+            return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
         protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)
         {
-            List<ReasoningFilter> filters = new List<ReasoningFilter>{ new ResidentHostIsSameAsSelectionFilter(selectedVMs) };
+            var filters = new List<ReasoningFilter>();
 
             if(selectedItem != null)
             {
-                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs));
+                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, selectedVMs));
+                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs, wizardMode));
                 filters.Add(new WlbEnabledFilter(selectedItem.Item, selectedVMs));
             } 
 

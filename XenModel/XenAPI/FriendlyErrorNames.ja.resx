@@ -861,6 +861,24 @@
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>プロビジョン コールは、通常の VM ではなくテンプレートでのみ呼び出すことができます。</value>
   </data>
+  <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
+    <value>PVS サイトには既にホスト用に構成されたキャッシュ ストレージが存在します。</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_IS_IN_USE" xml:space="preserve">
+    <value>PVS キャッシュ ストレージはサイトが使用しているため、削除できません。</value>
+  </data>
+  <data name="PVS_PROXY_ALREADY_PRESENT" xml:space="preserve">
+    <value>VIF は既に PVS プロキシに関連付けられています</value>
+  </data>
+  <data name="PVS_SERVER_ADDRESS_IN_USE" xml:space="preserve">
+    <value>指定したアドレスは、既存の PVS サーバー オブジェクトが使用中です。</value>
+  </data>
+  <data name="PVS_SITE_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
+    <value>PVS サイトには、実行中のプロキシがあります。</value>
+  </data>
+  <data name="PVS_SITE_CONTAINS_SERVERS" xml:space="preserve">
+    <value>PVS サイトにはサーバーが存在するため、消去できません。</value>
+  </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>現在の役割にはこの操作が許可されていません。
 操作: {0}</value>
@@ -1541,6 +1559,9 @@
   <data name="SUBJECT_CANNOT_BE_RESOLVED" xml:space="preserve">
     <value>外部ディレクトリ サービスではサブジェクトを解決できません。</value>
   </data>
+  <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
+    <value>VM が実行中のホストから、チェックポイントの中断イメージにアクセスすることはできません</value>
+  </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>OEM サーバーからシステムの状態を取得するには、tar 出力を使用してください。</value>
   </data>
@@ -1771,6 +1792,9 @@
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>この処理はテンプレートには無効です。</value>
+  </data>
+  <data name="VM_LACKS_FEATURE" xml:space="preserve">
+    <value>VM に存在しない機能の操作を試行しました。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>協調的なシャットダウン機能が必要な操作を選択しましたが、VM がこの機能をサポートしません。</value>

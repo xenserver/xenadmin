@@ -381,15 +381,7 @@ namespace XenAdmin.TabPages
             toolStripSeparator1.Visible = (rescan || add || move || delete) && edit;
         }
 
-        private Command MoveMigrateCommand(IEnumerable<SelectedItem> selection)
-        {
-            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow, selection);
-
-            if (moveCmd.CanExecute())
-                return moveCmd;
-            
-            return new MigrateVirtualDiskCommand(Program.MainWindow, selection);
-        }
+        
 
         private void RefreshButtons()
         {
@@ -412,7 +404,7 @@ namespace XenAdmin.TabPages
             }
 
             // Move button
-            Command moveCmd = MoveMigrateCommand(vdis);
+            Command moveCmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, vdis);
             if (moveCmd.CanExecute())
             {
                 buttonMove.Enabled = true;
@@ -472,7 +464,7 @@ namespace XenAdmin.TabPages
         private void MoveSelectedVdis()
         {
             SelectedItemCollection vdis = SelectedVDIs;
-            Command cmd = MoveMigrateCommand(vdis);
+            Command cmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, vdis);
             if (cmd.CanExecute())
                 cmd.Execute();
         }

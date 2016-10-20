@@ -39,20 +39,20 @@ namespace XenAdmin.Diagnostics.Checks
 {
     public class HostNeedsRebootCheck : Check
     {
-        private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
+        private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
         private readonly List<after_apply_guidance> patchGuidance;
         private readonly List<update_after_apply_guidance> updateGuidance;
 
         private string successfulCheckDescription;
 
-        public HostNeedsRebootCheck(Host host, List<update_after_apply_guidance> guidance, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+        public HostNeedsRebootCheck(Host host, List<update_after_apply_guidance> guidance, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             this.livePatchCodesByHost = livePatchCodesByHost;
             updateGuidance = guidance;
         }
 
-        public HostNeedsRebootCheck(Host host, List<after_apply_guidance> guidance, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+        public HostNeedsRebootCheck(Host host, List<after_apply_guidance> guidance, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             this.livePatchCodesByHost = livePatchCodesByHost;
@@ -66,7 +66,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             // when livepatching is available, no restart is expected
             if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) &&
-                livePatchCodesByHost[Host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)
+                livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete)
             {
                 successfulCheckDescription = string.Format(Messages.UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH, Host);
                 return null;
