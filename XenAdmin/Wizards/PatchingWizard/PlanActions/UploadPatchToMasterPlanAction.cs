@@ -133,59 +133,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        private void DownloadFile(ref Session session)
-        {
-            string patchUri = patch.PatchUrl;
-            if (string.IsNullOrEmpty(patchUri))
-                return;
-
-            Uri address = new Uri(patchUri);
-            tempFileName = Path.GetTempFileName();
-
-            bool isIso = patchUri.ToLowerInvariant().EndsWith("iso");
-
-            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, isIso ? "iso" : Branding.Update);
-
-            if (downloadAction != null)
-            {
-                downloadAction.Changed += downloadAndUnzipXenServerPatchAction_Changed;
-                downloadAction.Completed += downloadAndUnzipXenServerPatchAction_Completed;
-            }
-
-            downloadAction.RunExternal(session);
-        }
-
-        private void downloadAndUnzipXenServerPatchAction_Changed(object sender)
-        {
-            var action = sender as AsyncAction;
-            if (action == null)
-                return;
-
-            if (Cancelling)
-                action.Cancel();
-        }
-
-        private void downloadAndUnzipXenServerPatchAction_Completed(ActionBase sender)
-        {
-            var action = sender as AsyncAction;
-            if (action == null)
-                return;
-
-            action.Changed -= downloadAndUnzipXenServerPatchAction_Changed;
-            action.Completed -= downloadAndUnzipXenServerPatchAction_Completed;
-
-            if (action.Succeeded)
-            {
-                if (action is DownloadAndUnzipXenServerPatchAction)
-                {
-                    Host master = Helpers.GetMaster(action.Connection);
-
-                    AllDownloadedPatches[patch] = (action as DownloadAndUnzipXenServerPatchAction).PatchPath;
-                }
-            }
-           
-        }
-
         public override void Cancel()
         {
             if (inProgressAction != null)

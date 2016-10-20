@@ -89,9 +89,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Uri address = new Uri(patchUri);
             tempFileName = Path.GetTempFileName();
 
-            bool isIso = patchUri.ToLowerInvariant().EndsWith("iso");
-
-            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, isIso ? "iso" : Branding.Update);
+            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, Helpers.ElyOrGreater(Connection) ? Branding.UpdateIso : Branding.Update);
 
             if (downloadAction != null)
             {

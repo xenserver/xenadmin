@@ -197,9 +197,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         if (isValidFile(fileName))
                         {
-                            if (fileName.EndsWith(UpdateExtension.ToLowerInvariant()))
+                            if (fileName.EndsWith("." + Branding.Update))
                                 SelectedUpdateType = UpdateType.NewRetail;
-                            else if (fileName.EndsWith(".iso"))
+                            else if (fileName.EndsWith("." + Branding.UpdateIso))
                                 SelectedUpdateType = UpdateType.ISO;
                             else
                                 SelectedUpdateType = UpdateType.Existing;
@@ -341,12 +341,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string UpdateExtension
         {
-            get { return "." + Branding.Update; }
+            get { return SelectedUpdateType != UpdateType.ISO ? "." + Branding.Update : "." + Branding.UpdateIso; }
         }
 
         private bool isValidFile(string fileName)
         {
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso"));
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -384,7 +384,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso"))
+            if (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso")) //this iso is supplemental pack iso for XS, not branded
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;
