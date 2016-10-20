@@ -309,9 +309,9 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         /// <param name="_host">The host to run the prechecks on.</param>
-        public static void precheck(Session session, string _pool_update, string _host)
+        public static livepatch_status precheck(Session session, string _pool_update, string _host)
         {
-            session.proxy.pool_update_precheck(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse();
+            return (livepatch_status)Helper.EnumParseDefault(typeof(livepatch_status), (string)session.proxy.pool_update_precheck(session.uuid, (_pool_update != null) ? _pool_update : "", (_host != null) ? _host : "").parse());
         }
 
         /// <summary>

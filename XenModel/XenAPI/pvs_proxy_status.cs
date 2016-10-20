@@ -35,29 +35,27 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum cls
+    public enum pvs_proxy_status
     {
-        VM, Host, SR, Pool, VMPP, PVS_proxy, unknown
+        stopped, initialised, caching, incompatible_write_cache_mode, incompatible_protocol_version, unknown
     }
 
-    public static class cls_helper
+    public static class pvs_proxy_status_helper
     {
-        public static string ToString(cls x)
+        public static string ToString(pvs_proxy_status x)
         {
             switch (x)
             {
-                case cls.VM:
-                    return "VM";
-                case cls.Host:
-                    return "Host";
-                case cls.SR:
-                    return "SR";
-                case cls.Pool:
-                    return "Pool";
-                case cls.VMPP:
-                    return "VMPP";
-                case cls.PVS_proxy:
-                    return "PVS_proxy";
+                case pvs_proxy_status.stopped:
+                    return "stopped";
+                case pvs_proxy_status.initialised:
+                    return "initialised";
+                case pvs_proxy_status.caching:
+                    return "caching";
+                case pvs_proxy_status.incompatible_write_cache_mode:
+                    return "incompatible_write_cache_mode";
+                case pvs_proxy_status.incompatible_protocol_version:
+                    return "incompatible_protocol_version";
                 default:
                     return "unknown";
             }
