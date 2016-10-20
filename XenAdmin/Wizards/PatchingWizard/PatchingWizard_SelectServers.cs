@@ -284,7 +284,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     patchUuidFromAlert = FileFromDiskAlert.Patch.Uuid;
                 }
 
-                if (string.IsNullOrEmpty(patchUuidFromAlert))
+                if (!string.IsNullOrEmpty(patchUuidFromAlert))
                 {
                     if (isPatchApplied(patchUuidFromAlert, host))
                     {
