@@ -66,8 +66,7 @@ LOG4NET_DIR=${REPO}/log4net/build/bin/net/2.0/release
 DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
 SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
 DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
-# MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx46_web_setup (TEMPORARILY CHANGED)
-MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/mk/tmp-netinstaller
+MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx46_web_setup
 PUTTY_DIR=${REPO}/putty
 
 mkdir_clean ${XMLRPC_DIR}
@@ -75,7 +74,7 @@ mkdir_clean ${LOG4NET_DIR}
 mkdir_clean ${SHARPZIPLIB_DIR}
 mkdir_clean ${DOTNETZIP_DIR}
 mkdir_clean ${DISCUTILS_DIR}
-# mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} (TEMPORARILY COMMENTED)
+mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
 mkdir_clean ${PUTTY_DIR}
 
 dotnet_cp_to_dir ()
@@ -108,7 +107,7 @@ dotnet_cp_to_dir "${LOG4NET_DIR}" "UNSIGNED/log4net.dll"
 dotnet_cp_to_dir "${SHARPZIPLIB_DIR}" "UNSIGNED/ICSharpCode.SharpZipLib.dll"
 dotnet_cp_to_dir "${DOTNETZIP_DIR}" "UNSIGNED/Ionic.Zip.dll"
 dotnet_cp_to_dir "${DISCUTILS_DIR}" "UNSIGNED/DiscUtils.dll"
-# dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP46-KB3045560-Web.exe"
+dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP46-KB3045560-Web.exe"
 dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
 dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
