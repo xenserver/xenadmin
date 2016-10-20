@@ -619,8 +619,8 @@ namespace XenAdmin.Wizards.DRWizards
             private void UpdateRowFields()
             {
                 _iconCell.Value = Problem == null
-                    ? Resources._000_Tick_h32bit_16
-                    : Problem is Warning ? Resources._000_Alert2_h32bit_16 : Resources._000_Abort_h32bit_16;
+                    ? Images.GetImage16For(Icons.Ok)
+                    : Problem.Image;
 
                 if (Problem != null)
                     _descriptionCell.Value = String.Format(Messages.DR_WIZARD_PRECHECKPAGE_PROBLEM, _check.Description, Problem.Description);

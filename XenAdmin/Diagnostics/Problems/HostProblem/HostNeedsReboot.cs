@@ -29,26 +29,30 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
+using System;
 using XenAdmin.Diagnostics.Checks;
+using XenAPI;
 
-namespace XenAdmin.Diagnostics.Problems
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public abstract class Warning : Problem
+    public class HostNeedsReboot : Information
     {
-        protected Warning(Check check) 
+        private readonly Host host;
+
+        public HostNeedsReboot(Check check, Host host)
             : base(check)
         {
+            this.host = host;
         }
 
-        public override string HelpMessage
+        public override string Title
         {
-            get { return null; }
+            get { return Description; }
         }
 
-        public override Image Image
+        public override string Description
         {
-            get { return Images.GetImage16For(Icons.Warning); }
+            get { return String.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED, host.name_label); }
         }
     }
 }
