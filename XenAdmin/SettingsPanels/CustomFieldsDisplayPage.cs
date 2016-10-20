@@ -164,7 +164,7 @@ namespace XenAdmin.SettingsPanels
 
         #endregion
 
-        private void CustomFields_CustomFieldsChanged(object sender, EventArgs e)
+        private void CustomFields_CustomFieldsChanged()
         {
             Rebuild(false);
         }

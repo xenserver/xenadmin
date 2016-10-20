@@ -353,32 +353,45 @@ namespace XenAdmin.ConsoleView
                 if (networks == null)
                     return null;
 
-                List<string> ipAddresses = new List<string>(); 
+                List<string> ipAddresses = new List<string>();
                 List<string> ipv6Addresses = new List<string>();
+                List<string> ipAddressesForNetworksWithoutPifs = new List<string>();
+                List<string> ipv6AddressesForNetworksWithoutPifs = new List<string>();
 
                 foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
                 {
                     XenAPI.Network network = vif.Connection.Resolve(vif.network);
-                    XenAPI.Host host = vm.Connection.Resolve(vm.resident_on);
-                    XenAPI.PIF pif = Helpers.FindPIF(network, host);
-                    if (pif != null && pif.LinkStatus == PIF.LinkState.Connected)
+                    Host host = vm.Connection.Resolve(vm.resident_on);
+                    PIF pif = Helpers.FindPIF(network, host);
+                    foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
                     {
-                        foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
+                        if (networkInfo.Key.EndsWith("ip")) // IPv4 address
                         {
-                            if (networkInfo.Key.EndsWith("ip")) // IPv4 address
+                            if (pif == null)
+                                ipAddressesForNetworksWithoutPifs.Add(networkInfo.Value);
+                            else if (pif.LinkStatus == PIF.LinkState.Connected)
                                 ipAddresses.Add(networkInfo.Value);
-                            else
+                        }
+                        else
+                        {
+                            if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
                             {
-                                if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
+                                if (pif == null)
+                                    ipv6AddressesForNetworksWithoutPifs.Add(String.Format("[{0}]", networkInfo.Value));
+                                else if (pif.LinkStatus == PIF.LinkState.Connected)
                                     ipv6Addresses.Add(String.Format("[{0}]", networkInfo.Value));
-                                else
-                                    continue;
                             }
+                            else
+                                continue;
                         }
                     }
                 }
 
                 ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
+                // add IP addresses for networks without PIFs
+                ipAddresses.AddRange(ipAddressesForNetworksWithoutPifs);
+                ipAddresses.AddRange(ipv6AddressesForNetworksWithoutPifs); 
+
 
                 foreach (String ipAddress in ipAddresses)
                 {

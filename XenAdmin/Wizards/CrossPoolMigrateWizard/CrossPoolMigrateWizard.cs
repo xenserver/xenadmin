@@ -202,9 +202,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             if (wizardMode == WizardMode.Copy && m_pageCopyMode.IntraPoolCopySelected)
             {
-                var copyAction = m_pageIntraPoolCopy.GetCopyAction();
-                if (copyAction != null)
-                    copyAction.RunAsync();
+                if (m_pageIntraPoolCopy.CloneVM)
+                    new VMCloneAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
+
+                else if (m_pageIntraPoolCopy.SelectedSR != null)
+                    new VMCopyAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.TheVM.GetStorageHost(false),
+                        m_pageIntraPoolCopy.SelectedSR, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
+                
                 base.FinishWizard();
                 return;
             }

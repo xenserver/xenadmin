@@ -189,7 +189,6 @@ namespace XenAdmin.Commands
         public virtual string MenuText
         {
             get { return null; }
-            set { throw new NotImplementedException(); }
         }
 
         /// <summary>

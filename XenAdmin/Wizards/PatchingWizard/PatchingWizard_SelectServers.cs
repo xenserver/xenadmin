@@ -168,13 +168,23 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool IsInAutomaticMode { set; get; }
 
         public List<XenServerVersion> AutoDownloadedXenServerVersions { private get; set; }
-       
+
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
 
+            var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
+
             if (IsInAutomaticMode)
             {
+                // This check is first because it generally can't be fixed, it's a property of the host
+                if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden) // Forbids update auto restarts
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES;
+                    return;
+                }
+
                 var pool = Helpers.GetPool(host.Connection);
                 if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
                 {
@@ -233,14 +243,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (FileFromDiskAlert != null)
             {
                 selectedHosts = FileFromDiskAlert.DistinctHosts;
-            }
-
-            Pool poolOfOne = Helpers.GetPoolOfOne(host.Connection);
-            if (poolOfOne != null && poolOfOne.IsPatchingForbidden)
-            {
-                row.Enabled = false;
-                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN;
-                return;
             }
 
             if (!host.CanApplyHotfixes && (Helpers.ElyOrGreater(host) || type != UpdateType.ISO))

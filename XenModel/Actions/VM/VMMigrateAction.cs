@@ -50,15 +50,11 @@ namespace XenAdmin.Actions.VMActions
 
         private static string GetTitle(VM vm, Host toHost)
         {
-            XenAPI.Host residentOn = vm.Connection.Resolve(vm.resident_on);
-            if (residentOn == null)
-            {
-                return Messages.ACTION_VM_MIGRATING;
-            }
-            else
-            {
-                return string.Format(Messages.ACTION_VM_MIGRATING_TITLE, vm.Name, Helpers.GetName(residentOn), toHost.Name);
-            }
+            Host residentOn = vm.Connection.Resolve(vm.resident_on);
+            
+            return residentOn == null
+                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.Name, toHost.Name)
+                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name, Helpers.GetName(residentOn), toHost.Name);
         }
 
         protected override void Run()

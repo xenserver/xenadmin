@@ -103,7 +103,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
-            return new ImportDelayLoadingOptionComboBoxItem(xenItem);
+            return new DelayLoadingOptionComboBoxItem(xenItem);
         }
 
         private List<Xen_ConfigurationSettingData_Type> FindVgpuSettings(EnvelopeType envelopeType)

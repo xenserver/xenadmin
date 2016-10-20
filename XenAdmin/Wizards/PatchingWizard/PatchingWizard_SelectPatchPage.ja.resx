@@ -145,7 +145,7 @@
     <value>1</value>
   </data>
   <data name="labelWithoutAutomatic.Text" xml:space="preserve">
-    <value>Select an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
+    <value>[Citrix] からダウンロードする更新を選択するか、更新またはサプリメンタルパック ファイルをローカル コンピューターで検索します。</value>
   </data>
   <data name="&gt;&gt;labelWithoutAutomatic.Name" xml:space="preserve">
     <value>labelWithoutAutomatic</value>
@@ -181,7 +181,7 @@
     <value>0</value>
   </data>
   <data name="labelWithAutomatic.Text" xml:space="preserve">
-    <value>Select Automatic mode or choose an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
+    <value>自動モードを選択するか、[Citrix] からの更新のダウンロードを選択します。更新またはサプリメンタルパック ファイルをローカル コンピューターで検索します。</value>
   </data>
   <data name="&gt;&gt;labelWithAutomatic.Name" xml:space="preserve">
     <value>labelWithAutomatic</value>
@@ -214,7 +214,7 @@
     <value>2</value>
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
-    <value>&amp;Automatic</value>
+    <value>自動 (&amp;A)</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
@@ -247,7 +247,7 @@
     <value>3</value>
   </data>
   <data name="automaticOptionLabel.Text" xml:space="preserve">
-    <value>[XenCenter] will automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
+    <value>[XenCenter] では、すべての最新アップデートが自動的に [Citrix] からダウンロードされてインストールされます。通常は終了後に 1 回のみ再起動します。</value>
   </data>
   <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
     <value>automaticOptionLabel</value>
@@ -280,7 +280,7 @@
     <value>4</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>&amp;Download update from [Citrix]</value>
+    <value>[Citrix] からのアップデートをダウンロード(&amp;D)</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>
@@ -337,10 +337,10 @@
     <value>178, 23</value>
   </data>
   <data name="RestoreDismUpdatesButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="RestoreDismUpdatesButton.Text" xml:space="preserve">
-    <value>Restore Dismissed &amp;Updates</value>
+    <value>クリアされたアップデートを復元(&amp;U)</value>
   </data>
   <data name="&gt;&gt;RestoreDismUpdatesButton.Name" xml:space="preserve">
     <value>RestoreDismUpdatesButton</value>
@@ -568,7 +568,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>アップデートをチェックしています...</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

@@ -126,6 +126,9 @@
   <data name="ACTION_CHANGED_DISK_SIZE_FOR" xml:space="preserve">
     <value>'{0}' のディスク サイズを変更しました</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>'{0}' でコントロール ドメイン メモリの設定を変更しています</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>ディスク サイズの変更</value>
   </data>
@@ -228,6 +231,15 @@
   <data name="ACTION_CLEANUP_DISK_SPACE_TITLE" xml:space="preserve">
     <value>ディスク容量のクリーンアップ</value>
   </data>
+  <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
+    <value>PVS サイトを構成しています</value>
+  </data>
+  <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
+    <value>構成済み</value>
+  </data>
+  <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
+    <value>PVS サイト '{0}' の構成</value>
+  </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>{0} を作成しています...</value>
   </data>
@@ -242,6 +254,15 @@
   </data>
   <data name="ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>複数仮想ディスクの非アクティブ化</value>
+  </data>
+  <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
+    <value>PVS サイトを削除しています</value>
+  </data>
+  <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
+    <value>PVS サイト '{0}' を削除しています</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>ストレージを削除しています...</value>
@@ -264,8 +285,17 @@
   <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>複数ストレージの接続解除</value>
   </data>
+  <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
+    <value>選択した VM の PVS 読み取りキャッシュが無効になっています</value>
+  </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Disable live patching</value>
+    <value>ライブ パッチの無効化</value>
+  </data>
+  <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
+    <value>PVS 読み取りキャッシュを無効にする</value>
+  </data>
+  <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
+    <value>VM '{0}' の PVS 読み取りキャッシュを無効にしています</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>無効化 </value>
@@ -274,7 +304,10 @@
     <value>VM '{0}' 上のコンテナ管理の無効化</value>
   </data>
   <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Disabling live patching for '{0}'</value>
+    <value>'{0}' のライブ パッチを無効にしています</value>
+  </data>
+  <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>選択した VM の PVS 読み取りキャッシュを無効にしています</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>ディスクがアクティブになりました</value>
@@ -372,8 +405,17 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>障害回復クリーンアップ ({0})</value>
   </data>
+  <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
+    <value>選択した VM の PVS 読み取りキャッシュが有効になっています</value>
+  </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>Enable live patching</value>
+    <value>ライブ パッチの有効化</value>
+  </data>
+  <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
+    <value>PVS 読み取りキャッシュを有効にする</value>
+  </data>
+  <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
+    <value>サイト '{1}' で VM '{0}' の PVS 読み取りキャッシュを有効にしています</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>有効化</value>
@@ -382,7 +424,10 @@
     <value>VM '{0}' 上のコンテナ管理の有効化</value>
   </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>Enabling live patching for '{0}'</value>
+    <value>'{0}' のライブ パッチを有効にしています</value>
+  </data>
+  <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
+    <value>選択した VM の PVS 読み取りキャッシュを有効にしています</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>ブロック チェックサムが一致しないため、エクスポートに失敗しました。もう一度エクスポートしてください。</value>
@@ -525,6 +570,12 @@
   <data name="ACTION_MIGRATING_X_VDIS" xml:space="preserve">
     <value>{0} 仮想ディスクの {1} への移行</value>
   </data>
+  <data name="ACTION_MIGRATING_X_VDIS_COMPLETED" xml:space="preserve">
+    <value>仮想ディスクの移行が完了しました</value>
+  </data>
+  <data name="ACTION_MIGRATING_X_VDIS_STARTED" xml:space="preserve">
+    <value>仮想ディスクの移行を開始しました</value>
+  </data>
   <data name="ACTION_MOVING_VDI_STATUS" xml:space="preserve">
     <value>仮想ディスク '{0}' を移動しています...</value>
   </data>
@@ -533,6 +584,12 @@
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
     <value>{0} 仮想ディスクの {1} への移動</value>
+  </data>
+  <data name="ACTION_MOVING_X_VDIS_COMPLETED" xml:space="preserve">
+    <value>仮想ディスクの移動が完了しました</value>
+  </data>
+  <data name="ACTION_MOVING_X_VDIS_STARTED" xml:space="preserve">
+    <value>仮想ディスクの移動を開始しました</value>
   </data>
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_END" xml:space="preserve">
     <value>ストレージ リポジトリを準備しました</value>
@@ -680,6 +737,9 @@
   </data>
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>'{0}' からの SR スキャンの実行</value>
+  </data>
+  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
+    <value>VM 構成の保存</value>
   </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>VM の削除</value>
@@ -919,7 +979,7 @@
     <value>'{0}' 上の統合された GPU パススルーの更新 </value>
   </data>
   <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
-    <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
+    <value>アップロード エラー。パッチはアップロードされましたが、ホストで見つかりません。</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
     <value>[Citrix] Insight Services にサーバーの状態レポートをアップロード</value>
@@ -1071,7 +1131,10 @@
   <data name="ACTION_VM_MIGRATING" xml:space="preserve">
     <value>移行しています</value>
   </data>
-  <data name="ACTION_VM_MIGRATING_TITLE" xml:space="preserve">
+  <data name="ACTION_VM_MIGRATING_NON_RESIDENT" xml:space="preserve">
+    <value>'{1}' への VM '{0}' の移行</value>
+  </data>
+  <data name="ACTION_VM_MIGRATING_RESIDENT" xml:space="preserve">
     <value>'{1}' から '{2}' への VM '{0}' の移行</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
@@ -2204,6 +2267,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CACHE_NOT_YET_POPULATED" xml:space="preserve">
     <value>キャッシュがまだ使用されていません</value>
   </data>
+  <data name="CACHING" xml:space="preserve">
+    <value>キャッシュ</value>
+  </data>
   <data name="CANCEL" xml:space="preserve">
     <value>キャンセル</value>
   </data>
@@ -2527,6 +2593,11 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>プール '{0}' のワークロード バランスを構成しています</value>
   </data>
+  <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>コントロール ドメイン メモリを変更すると、サーバーが再起動されます。
+
+続行しますか?</value>
+  </data>
   <data name="CONFIRM_CHANGE_MEMORY_MAX_PLURAL" xml:space="preserve">
     <value>VM のメモリの最大サイズを変更すると、VM が強制的に再起動されます。
 
@@ -2581,6 +2652,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CONFIRM_DELETE_POLICY_0" xml:space="preserve">
     <value>ポリシー '{0}' を削除しますか?</value>
+  </data>
+  <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
+    <value>'{0}' を削除してもよろしいですか?</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>すべてのリソースからタグ '{0}' を削除してもよろしいですか?</value>
@@ -3025,6 +3099,12 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONTINUE_WITH_EXPORT" xml:space="preserve">
     <value>エクスポートの続行(&amp;C)</value>
   </data>
+  <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
+    <value>コントロール ドメイン メモリ設定 - {0}</value>
+  </data>
+  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
+    <value>コントロール ドメイン メモリ(&amp;C):</value>
+  </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>ホスト {0} 上のコントロール ドメイン</value>
   </data>
@@ -3114,9 +3194,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
     <value>/秒</value>
   </data>
-  <data name="CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST" xml:space="preserve">
-    <value>同じホストには移行できません</value>
-  </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>互換性のないバージョン番号です</value>
   </data>
@@ -3166,23 +3243,29 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>移行先(&amp;D):</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
-    <value>選択した VM を移行するプールまたはスタンドアロン サーバーを選択します。</value>
-  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY" xml:space="preserve">
     <value>選択した VM をコピーするプールまたはスタンドアロン サーバーを選択します。</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
     <value>選択した VM をコピーするプールまたはスタンドアロン サーバーを選択します。</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE" xml:space="preserve">
-    <value>選択したテンプレートをコピーするプールまたはスタンドアロン サーバーを選択します。</value>
-  </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE" xml:space="preserve">
     <value>選択したテンプレートをコピーするプールまたはスタンドアロン サーバーを選択します。</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE" xml:space="preserve">
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE" xml:space="preserve">
+    <value>選択したテンプレートをコピーするプールまたはスタンドアロン サーバーを選択します。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE" xml:space="preserve">
     <value>選択した VM を移行するプールまたはスタンドアロン サーバーを選択します。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE" xml:space="preserve">
+    <value>選択した VM を移行するプールまたはスタンドアロン サーバーを選択します。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE" xml:space="preserve">
+    <value>選択した VM を移動するプールまたはスタンドアロン サーバーを選択します。</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE" xml:space="preserve">
+    <value>選択した VM を移動するプールまたはスタンドアロン サーバーを選択します。</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>移行先プールのターゲット サーバーを指定する (オプション)(&amp;T):</value>
@@ -3520,6 +3603,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DATATYPE_NETWORK" xml:space="preserve">
     <value>ネットワーク</value>
   </data>
+  <data name="DATATYPE_PVS" xml:space="preserve">
+    <value>PVS キャッシュ</value>
+  </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>ストレージ</value>
   </data>
@@ -3836,14 +3922,14 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
     <value>この LUN には既に SR が存在します。現在 '{0}' ではこの SR を使用していません。接続しますか?</value>
   </data>
+  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
+    <value>すべて接続解除(&amp;D)</value>
+  </data>
   <data name="DETACH_SR" xml:space="preserve">
     <value>接続解除(&amp;D)</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>詳細</value>
-  </data>
-  <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
-    <value>すべて接続解除(&amp;D)</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
     <value>デバイス</value>
@@ -3890,11 +3976,20 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>無効化</value>
   </data>
+  <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
+    <value>PVS 読み取りキャッシュを無効にする(&amp;D)</value>
+  </data>
+  <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
+    <value>PVS 読み取りキャッシュを無効にする(&amp;V)</value>
+  </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>ワークロード バランスの一時停止 </value>
   </data>
   <data name="DISABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>一時停止(&amp;U)</value>
+  </data>
+  <data name="DISABLING" xml:space="preserve">
+    <value>無効化</value>
   </data>
   <data name="DISABLING_AD" xml:space="preserve">
     <value>Active Directory 認証の無効化</value>
@@ -4097,8 +4192,8 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DONE" xml:space="preserve">
     <value>完了しました。</value>
   </data>
-  <data name="DONT_ASSIGN_HOME_SERVER" xml:space="preserve">
-    <value>ホーム サーバーを割り当てない</value>
+  <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
+    <value>ターゲット サーバーを選択しない</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} がリリースされています</value>
@@ -4647,8 +4742,23 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>有効化</value>
   </data>
+  <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
+    <value>PVS 読み取りキャッシュを有効にする(&amp;N)...</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
+    <value>PVS 読み取りキャッシュを有効にする(&amp;B)...</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
+    <value>選択した VM がストリーミングされる PVS サイトを選択します。</value>
+  </data>
+  <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
+    <value>選択した VM がストリーミングされる PVS サイトを選択します。</value>
+  </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>再開(&amp;U)</value>
+  </data>
+  <data name="ENABLING" xml:space="preserve">
+    <value>有効化</value>
   </data>
   <data name="ENABLING_AD" xml:space="preserve">
     <value>Active Directory 認証を有効にしています</value>
@@ -5423,7 +5533,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>vApp の名前と、任意で説明を入力します。</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
-    <value>{0} on {1}</value>
+    <value>{1} の {0}</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
     <value>アップデート '{1}' を有効にするには、サーバー '{0}' を再起動する必要があります</value>
@@ -6041,6 +6151,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOST_MENU_COMPLETE_FAILURE" xml:space="preserve">
     <value>(メニュー生成エラー)</value>
   </data>
+  <data name="HOST_MENU_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
+    <value>コントロール ドメイン メモリ(&amp;D)...</value>
+  </data>
   <data name="HOST_MENU_CPM_TEXT" xml:space="preserve">
     <value>VM の移行ウィザード(&amp;M)...</value>
   </data>
@@ -6434,6 +6547,12 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
     <value>このバージョンのサーバーには、[XenCenter] との互換性がありません。</value>
   </data>
+  <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
+    <value>互換性のないプロトコル バージョン</value>
+  </data>
+  <data name="INCOMPATIBLE_WRITE_CACHE_MODE" xml:space="preserve">
+    <value>互換性のない書き込みキャッシュ モード</value>
+  </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>ファイルサイズが不正です</value>
   </data>
@@ -6475,6 +6594,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>休止スナップショットを作成するには、VM が実行中である必要があります</value>
+  </data>
+  <data name="INITIALIZED" xml:space="preserve">
+    <value>初期化済み</value>
   </data>
   <data name="INITIALIZE_WLB" xml:space="preserve">
     <value>WLB の初期化...</value>
@@ -6886,13 +7008,13 @@ Standard 機能のみ有効です</value>
     <value>, </value>
   </data>
   <data name="LIVE_PATCHING" xml:space="preserve">
-    <value>Live Patching</value>
+    <value>ライブ パッチ</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
-    <value>Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them.</value>
+    <value>サーバー {0} のライブパッチに失敗しました。パッチを適用するには、サーバーをメンテナンス モードにして再起動してください。</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
-    <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
+    <value>サーバー ‘{0}’ のライブパッチに失敗しました。パッチを適用するには、サーバーをメンテナンス モードにして再起動してください。</value>
   </data>
   <data name="LOADING" xml:space="preserve">
     <value>'{0}' を読み込んでいます...</value>
@@ -7135,6 +7257,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_MOVEVM" xml:space="preserve">
     <value>VM の移動(&amp;M)...</value>
   </data>
+  <data name="MAINWINDOW_MOVE_OBJECTS" xml:space="preserve">
+    <value>移動(&amp;M)...</value>
+  </data>
   <data name="MAINWINDOW_NEWPOOL" xml:space="preserve">
     <value>新規プール(&amp;N)...</value>
   </data>
@@ -7184,7 +7309,7 @@ SCSI ID: {2}
     <value>[XenCenter] から削除(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
-    <value>クラッシュ ダンプ ファイルの削除(&amp;D)</value>
+    <value>クラッシュ ダンプ ファイルの削除(&amp;F)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
     <value>クラッシュ ダンプ ファイルの削除(&amp;F)</value>
@@ -7592,9 +7717,6 @@ SCSI ID: {2}
   <data name="MIGRATE_PLEASE_EJECT_YOUR_CD" xml:space="preserve">
     <value>CD をイジェクトしてください</value>
   </data>
-  <data name="MIGRATE_VDI_DIALOG_SRHINT" xml:space="preserve">
-    <value>移行先のストレージ リポジトリの選択(&amp;D)</value>
-  </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
     <value>VDI ライブ マイグレーション機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 </value>
   </data>
@@ -7868,7 +7990,7 @@ SCSI ID: {2}
     <value>なし</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>You need to shutdown and then restart the VM before it can access the new disk.</value>
+    <value>仮想マシンが新しいディスクにアクセスする前に、シャットダウンして再起動してください。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>ディスクが作成されました</value>
@@ -8222,6 +8344,12 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_TITLE" xml:space="preserve">
     <value>BIOS 文字列を提供するサーバーを選択します</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS" xml:space="preserve">
+    <value>vCPU の初期の数</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
+    <value>vCPU の最大数</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>新規 VM に割り当てられているメモリ サイズを超える物理メモリを持つサーバーがプール内にありません。
 サーバー '{0}' の合計物理メモリ サイズは {1} です。
@@ -8234,6 +8362,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU とメモリ</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>新規仮想マシンに割り当てる仮想 CPU の数、トポロジ、およびメモリの量を指定します。 </value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>プロセッサとメモリ リソースの割り当て</value>
@@ -8488,9 +8619,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NEW_POLICY" xml:space="preserve">
     <value>新規ポリシー(&amp;N)...</value>
   </data>
-  <data name="NEW_POOL" xml:space="preserve">
-    <value>新規プール</value>
-  </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
     <value>Active Directory 認証が使用されるマスターのプールにサーバー '{0}' を追加します。プール内のすべてのメンバーで同じ認証方法を使用する必要があります。
 
@@ -8703,7 +8831,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>このアップデートをインストールするための空き領域がこのホストにはありません。</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
-    <value>There is not enough space to automatically update '{0}'.</value>
+    <value>'{0}' を自動的にアップデートするための十分な容量がありません。</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>使用可能な領域: {0}</value>
@@ -8809,6 +8937,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NO_VALID_DISK_LOCATION" xml:space="preserve">
     <value>このディスクをサポートできる場所がありません</value>
   </data>
+  <data name="NO_VALUE" xml:space="preserve">
+    <value>-</value>
+  </data>
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>保持するスナップショット数</value>
   </data>
@@ -8893,9 +9024,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
     <value>仮想ネットワーク</value>
   </data>
-  <data name="OVF_VSSD_CAPTION" xml:space="preserve">
-    <value>仮想マシン</value>
-  </data>
   <data name="PARENT_FOLDER" xml:space="preserve">
     <value>親フォルダ</value>
   </data>
@@ -8942,34 +9070,34 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>貼り付け</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>Update process was not completed successfully.</value>
+    <value>アップデート プロセスに失敗しました。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
-    <value>Following errors occurred while automatic upgrade was in progress:</value>
+    <value>自動アップグレードの進行中に次のエラーが発生しました。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
-    <value>Following error occurred while automatic upgrade was in progress: </value>
+    <value>自動アップグレードの進行中に次のエラーが発生しました。 </value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
-    <value>Update was not completed successfully</value>
+    <value>アップデートに失敗しました</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
-    <value>Upload and Install</value>
+    <value>アップロードしてインストール</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
-    <value>Automatically uploading and installing updates</value>
+    <value>アップデートを自動的にアップロードしてインストールします</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>クリーン アップ...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
-    <value>Downloading update {0}...</value>
+    <value>アップデート {0} をダウンロード中...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
-    <value>Skipping download: Already downloaded update {0}...</value>
+    <value>ダウンロードをスキップします。アップデート {0} はダウンロード済みです...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING" xml:space="preserve">
-    <value>Waiting to download update {0}...</value>
+    <value>アップデート {0} のダウンロードを待機しています...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>必要な操作はありません</value>
@@ -9047,7 +9175,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>アップデートのインストール</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE" xml:space="preserve">
-    <value>Checking disk space requirements</value>
+    <value>ディスク空き容量の要件をチェックしています</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FAILED" xml:space="preserve">
     <value>以下の問題が見つかりました。</value>
@@ -9056,7 +9184,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>サーバーにアップデート "{0}" を適用できるかどうかを事前にチェックします。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
+    <value>事前チェックが実行され、自動アップデートを続行できるかを検証します。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>サーバーに選択されたアップデートを適用できるかどうかを事前にチェックします。</value>
@@ -9086,10 +9214,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>[XenServer] アップデートおよびサプリメンタル パック (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automatic update is not supported on this [XenServer] version</value>
+    <value>この [XenServer] バージョンで自動アップデートはサポートされていません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
-    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+    <value>一部アップグレードされた [XenServer] プールで自動アップデートはサポートされていません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>この [XenServer] のバージョンにはサプリメンタル パックをインストールできません</value>
@@ -9098,10 +9226,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>Subscription Advantage が必要です</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
-    <value>This server is not licensed for automatic updating</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN" xml:space="preserve">
-    <value>[XenCenter] を使用してアップデートを適用できません。</value>
+    <value>このサーバーでは、自動アップデートのライセンスが有効ではありません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>アップデート適用済み</value>
@@ -9110,10 +9235,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>適用されないアップデート</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
-    <value>This server cannot be updated automatically</value>
+    <value>このサーバーを自動的にアップデートすることはできません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
-    <value>This server is already up-to-date</value>
+    <value>このサーバーは既に最新状態です</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>サーバーの選択</value>
@@ -9122,15 +9247,15 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>アップデートするサーバーを選択します</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
-Greyed out servers cannot be updated automatically.</value>
+    <value>自動的にアップデートする 1つまたは複数のプール、またはスタンドアロン ホストを選択してください。
+グレー表示されたサーバーは自動的にアップデートできません。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>Select one or more servers from the list of available servers.
-Servers where the selected update cannot be applied appear disabled in this list.</value>
+    <value>利用可能なサーバー一覧から 1つまたは複数のサーバーを選択します。
+選択されたアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
   </data>
   <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Automatic update has finished.</value>
+    <value>自動アップデートが完了しました。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] は、前の手順で指定したサーバーにアップデートをダウンロードしてから、そのサーバーにアップロードしています。
@@ -9443,6 +9568,12 @@ Servers where the selected update cannot be applied appear disabled in this list
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>{0} 障害がフェイルオーバーされました</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
+    <value>アップデート後タスクは、すべてのアップデートしたサーバーに対して自動的に実行されるわけではありません。</value>
+  </data>
+  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
+    <value>このサーバーで自動アップデートはサポートされていません。</value>
+  </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>プールの全般プロパティ</value>
   </data>
@@ -9581,6 +9712,33 @@ Servers where the selected update cannot be applied appear disabled in this list
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>プロキシ サーバーはサポートされません。</value>
+  </data>
+  <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
+    <value>PVS キャッシュ構成 - '{0}'</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
+    <value>メモリとディスク</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
+    <value>メモリのみ</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
+    <value>MemorySR</value>
+  </data>
+  <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
+    <value>構成されていません</value>
+  </data>
+  <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
+    <value>プロキシが実行中のため、この PVS サイトを削除できません。</value>
+  </data>
+  <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
+    <value>サイト {0}' の PVS サーバー</value>
+  </data>
+  <data name="PVS_SITE_NAME" xml:space="preserve">
+    <value>PVS サイト</value>
+  </data>
+  <data name="PVS_TAB_TITLE" xml:space="preserve">
+    <value>PVS 読み取りキャッシュ</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools 未インストール</value>
@@ -9951,7 +10109,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>{0} として解決されました</value>
   </data>
   <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
-    <value>Restore dismissed updates</value>
+    <value>クリアされたアップデートを復元</value>
   </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>バックアップ ファイルがサーバー '{0}' にロードされました。復元手順については、『[XenServer product] 管理者ガイド』を参照してください。</value>
@@ -9960,7 +10118,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>バックアップから復元...</value>
   </data>
   <data name="RESTORING" xml:space="preserve">
-    <value>Restoring...</value>
+    <value>復元しています...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>サーバー '{0}' を復元しています</value>
@@ -10283,7 +10441,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>サーバー要求の処理中</value>
   </data>
   <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
-    <value>Disk space check</value>
+    <value>ディスク容量のチェック</value>
   </data>
   <data name="SERVER_SIDE_CHECK_DESCRIPTION" xml:space="preserve">
     <value>サーバー側パッチのチェック</value>
@@ -10669,7 +10827,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>このストレージ リポジトリとの接続に問題があります</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
-    <value>ホーム サーバーが設定されていない VM をローカル ストレージに格納することはできません</value>
+    <value>ホーム サーバーが設定されていない VM はローカル ストレージにディスクを持つことはできません</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>ディスク サイズ ({0}) が SR サイズ ({1}) を超過しています</value>
@@ -10801,6 +10959,9 @@ Servers where the selected update cannot be applied appear disabled in this list
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>サーバーの状態レポートのパッケージ化時にエラーが発生しました。一部のレポートが作成されていない場合があります</value>
+  </data>
+  <data name="STOPPED" xml:space="preserve">
+    <value>停止しました</value>
   </data>
   <data name="STORAGELINK_POOL_DISK_SPACE" xml:space="preserve">
     <value>{1} の {0} 空き</value>
@@ -11490,7 +11651,7 @@ Servers where the selected update cannot be applied appear disabled in this list
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>Removing update files from {0}...</value>
+    <value>{0} から更新ファイルを削除しています...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>修復するにはここをクリックしてください</value>
@@ -12015,6 +12176,9 @@ Servers where the selected update cannot be applied appear disabled in this list
   <data name="VIRTUAL_INTERFACE_PROPERTIES" xml:space="preserve">
     <value>仮想インターフェイス プロパティ</value>
   </data>
+  <data name="VIRTUAL_MACHINE" xml:space="preserve">
+    <value>仮想マシン</value>
+  </data>
   <data name="VIRTUAL_MACHINES" xml:space="preserve">
     <value>仮想マシン</value>
   </data>
@@ -12101,6 +12265,30 @@ Servers where the selected update cannot be applied appear disabled in this list
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
     <value>クラウド構成パラメーターを取得できませんでした。</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL" xml:space="preserve">
+    <value>vCPU の現在の数(&amp;C):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_CURRENT_VCPUS_READONLY" xml:space="preserve">
+    <value>vCPU の現在の数を変更するには、VM が実行中かシャットダウン状態である必要があります。 </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL" xml:space="preserve">
+    <value>vCPU の初期の数(&amp;C):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
+    <value>vCPU の最大数(&amp;X):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
+    <value>vCPU の最大数、トポロジー、vCPU 優先度を変更するには、VM がシャットダウン状態である必要があります。 </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
+    <value>他の vCPU に対して割り当てられる vCPU の数、トポロジー、優先度を指定します。 </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
+    <value>vCPU の初期の数が最大数より多く設定されている場合は、仮想マシンの実行中にさらに vCPU を追加できます。 </value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
+    <value>vCPU の数(&amp;C):</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>コンテナ管理</value>
@@ -12218,6 +12406,9 @@ Servers where the selected update cannot be applied appear disabled in this list
   </data>
   <data name="VM_USES_LOCAL_STORAGE" xml:space="preserve">
     <value>この VM はローカル ストレージを使用します</value>
+  </data>
+  <data name="VM_VCPU_CANNOT_UNPLUG_LIVE" xml:space="preserve">
+    <value>現在の vCPU 数は既に {0} です。VM の実行中にこの数を減らすことはできません。</value>
   </data>
   <data name="VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>vCPU の変更は VM の再起動後に反映されます。</value>

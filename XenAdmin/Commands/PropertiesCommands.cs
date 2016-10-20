@@ -330,4 +330,21 @@ namespace XenAdmin.Commands
             }
         }
     }
+
+    internal class VdiEditSizeLocationCommand : PropertiesCommand
+    {
+        public VdiEditSizeLocationCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectVdiSizeLocationPage();
+                dialog.ShowDialog(Parent);
+            }
+        }
+    }
 }

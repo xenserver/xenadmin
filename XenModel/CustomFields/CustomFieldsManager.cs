@@ -57,28 +57,28 @@ namespace XenAdmin.CustomFields
 
         public const String CUSTOM_FIELD = "CustomField:";
 
-        public static event EventHandler CustomFieldsChanged;
+        public static event Action CustomFieldsChanged;
 
         static CustomFieldsManager()
         {
             OtherConfigAndTagsWatcher.GuiConfigChanged += OtherConfigAndTagsWatcher_GuiConfigChanged;
         }
 
-        private static void OtherConfigAndTagsWatcher_GuiConfigChanged(object sender, EventArgs e)
+        private static void OtherConfigAndTagsWatcher_GuiConfigChanged()
         {
             InvokeHelper.AssertOnEventThread();
 
             customFieldsCache.RecalculateCustomFields();
-            OnCustomFieldsChanged(EventArgs.Empty);
+            OnCustomFieldsChanged();
         }
 
-        private static void OnCustomFieldsChanged(EventArgs e)
+        private static void OnCustomFieldsChanged()
         {
-            EventHandler handler = CustomFieldsChanged;
+            Action handler = CustomFieldsChanged;
 
             if (handler != null)
             {
-                handler(null, e);
+                handler();
             }
         }
 

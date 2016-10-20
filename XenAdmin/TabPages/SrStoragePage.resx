@@ -133,7 +133,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="buttonRescan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="buttonRescan.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -157,7 +157,7 @@
     <value>3, 3</value>
   </data>
   <data name="toolTipContainerRescan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="toolTipContainerRescan.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -181,7 +181,7 @@
     <value>111, 3</value>
   </data>
   <data name="addVirtualDiskButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="addVirtualDiskButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -217,7 +217,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="EditButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="EditButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -241,7 +241,7 @@
     <value>219, 3</value>
   </data>
   <data name="EditButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="EditButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -268,7 +268,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="buttonMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="buttonMove.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -292,7 +292,7 @@
     <value>327, 3</value>
   </data>
   <data name="toolTipContainerMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="toolTipContainerMove.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -319,7 +319,7 @@
     <value>0, 0</value>
   </data>
   <data name="RemoveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="RemoveButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -343,7 +343,7 @@
     <value>435, 3</value>
   </data>
   <data name="RemoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 29</value>
+    <value>102, 23</value>
   </data>
   <data name="RemoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -364,10 +364,10 @@
     <value>Fill</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 337</value>
+    <value>3, 272</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1120, 97</value>
+    <value>894, 77</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -409,7 +409,7 @@
     <value>Size</value>
   </data>
   <data name="ColumnSize.Width" type="System.Int32, mscorlib">
-    <value>61</value>
+    <value>52</value>
   </data>
   <metadata name="ColumnVM.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -421,7 +421,7 @@
     <value>Fill</value>
   </data>
   <data name="dataGridViewVDIs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 31</value>
+    <value>3, 24</value>
   </data>
   <data name="dataGridViewVDIs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 12</value>
@@ -430,7 +430,7 @@
     <value>1125, 0</value>
   </data>
   <data name="dataGridViewVDIs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1120, 291</value>
+    <value>894, 233</value>
   </data>
   <data name="dataGridViewVDIs.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -457,7 +457,7 @@
     <value>3, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 28</value>
+    <value>47, 21</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -481,13 +481,13 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>10, 10</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1126, 437</value>
+    <value>900, 352</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -508,10 +508,10 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutPanel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewVDIs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,75,Percent,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 101</value>
+    <value>0, 78</value>
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 461</value>
+    <value>920, 372</value>
   </data>
   <data name="pageContainerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -526,49 +526,49 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="rescanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 26</value>
+    <value>127, 22</value>
   </data>
   <data name="rescanToolStripMenuItem.Text" xml:space="preserve">
     <value>Res&amp;can</value>
   </data>
   <data name="addToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 26</value>
+    <value>127, 22</value>
   </data>
   <data name="addToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Add...</value>
   </data>
   <data name="moveVirtualDiskToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 26</value>
+    <value>127, 22</value>
   </data>
   <data name="moveVirtualDiskToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mov&amp;e virtual disk...</value>
+    <value>Mov&amp;e...</value>
   </data>
   <data name="deleteVirtualDiskToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 26</value>
+    <value>127, 22</value>
   </data>
   <data name="deleteVirtualDiskToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Delete virtual disk</value>
+    <value>&amp;Delete</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 6</value>
+    <value>124, 6</value>
   </data>
   <data name="editVirtualDiskToolStripMenuItem.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="editVirtualDiskToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 26</value>
+    <value>127, 22</value>
   </data>
   <data name="editVirtualDiskToolStripMenuItem.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
   </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 140</value>
+    <value>128, 120</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
@@ -613,7 +613,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
@@ -622,7 +622,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 562</value>
+    <value>920, 450</value>
   </data>
   <data name="&gt;&gt;rescanToolStripMenuItem.Name" xml:space="preserve">
     <value>rescanToolStripMenuItem</value>

@@ -557,16 +557,8 @@ namespace XenAdmin.TabPages
             ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY) { Image = Properties.Resources.copy_16 };
             copyItem.Click += delegate
                 {
-                    try
-                    {
-                        String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);
-                        Clipboard.SetText(text);
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("Exception while trying to set clipboard text.", ex);
-                        log.Error(ex, ex);
-                    }
+                    String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);
+                    Clip.SetClipboardText(text);
                 };
             menu.Items.Add(copyItem);
             menu.Show(this, PointToClient(MousePosition));

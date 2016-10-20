@@ -565,6 +565,11 @@ namespace XenAdmin.Dialogs
             SelectPage(VCpuMemoryEditPage);
         }
 
+        public void SelectVdiSizeLocationPage()
+        {
+            SelectPage(vdiSizeLocation);
+        }
+
         #endregion
     }
 

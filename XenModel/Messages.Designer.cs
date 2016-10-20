@@ -79,6 +79,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing control domain memory settings on &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_CHANGE_CONTROL_DOMAIN_MEMORY {
+            get {
+                return ResourceManager.GetString("ACTION_CHANGE_CONTROL_DOMAIN_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change disk size.
         /// </summary>
         public static string ACTION_CHANGE_DISK_SIZE {
@@ -394,6 +403,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuring PVS site.
+        /// </summary>
+        public static string ACTION_CONFUGURE_PVS_SITE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_CONFUGURE_PVS_SITE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configured.
+        /// </summary>
+        public static string ACTION_CONFUGURE_PVS_SITE_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_CONFUGURE_PVS_SITE_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure PVS site &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_CONFUGURE_PVS_SITE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_CONFUGURE_PVS_SITE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating {0} ....
         /// </summary>
         public static string ACTION_CREATE_BOND_DESCRIPTION {
@@ -435,6 +471,33 @@ namespace XenAdmin {
         public static string ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting PVS site.
+        /// </summary>
+        public static string ACTION_DELETE_PVS_SITE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_DELETE_PVS_SITE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string ACTION_DELETE_PVS_SITE_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_DELETE_PVS_SITE_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting PVS site &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DELETE_PVS_SITE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_DELETE_PVS_SITE_TITLE", resourceCulture);
             }
         }
         
@@ -511,6 +574,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable PVS read caching.
+        /// </summary>
+        public static string ACTION_DISABLE_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling PVS read caching for VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLE_PVS_READ_CACHING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_PVS_READ_CACHING_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabling .
         /// </summary>
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION {
@@ -529,11 +610,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled PVS read caching for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLED_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabling live patching for &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_DISABLING_LIVE_PATCHING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLING_LIVE_PATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling PVS read caching for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLING_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_PVS_READ_CACHING", resourceCulture);
             }
         }
         
@@ -835,6 +934,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable PVS read caching.
+        /// </summary>
+        public static string ACTION_ENABLE_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling PVS read caching for VM &apos;{0}&apos; on site &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLE_PVS_READ_CACHING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_PVS_READ_CACHING_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling.
         /// </summary>
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION {
@@ -853,11 +970,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled PVS read caching for selected VMs.
+        /// </summary>
+        public static string ACTION_ENABLED_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling live patching for &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_ENABLING_LIVE_PATCHING {
             get {
                 return ResourceManager.GetString("ACTION_ENABLING_LIVE_PATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling PVS read caching for selected VMs.
+        /// </summary>
+        public static string ACTION_ENABLING_PVS_READ_CACHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_PVS_READ_CACHING", resourceCulture);
             }
         }
         
@@ -1285,6 +1420,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed migrating virtual disks.
+        /// </summary>
+        public static string ACTION_MIGRATING_X_VDIS_COMPLETED {
+            get {
+                return ResourceManager.GetString("ACTION_MIGRATING_X_VDIS_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started migrating virtual disks.
+        /// </summary>
+        public static string ACTION_MIGRATING_X_VDIS_STARTED {
+            get {
+                return ResourceManager.GetString("ACTION_MIGRATING_X_VDIS_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_MOVING_VDI_STATUS {
@@ -1308,6 +1461,24 @@ namespace XenAdmin {
         public static string ACTION_MOVING_X_VDIS {
             get {
                 return ResourceManager.GetString("ACTION_MOVING_X_VDIS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed moving virtual disks.
+        /// </summary>
+        public static string ACTION_MOVING_X_VDIS_COMPLETED {
+            get {
+                return ResourceManager.GetString("ACTION_MOVING_X_VDIS_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started moving virtual disks.
+        /// </summary>
+        public static string ACTION_MOVING_X_VDIS_STARTED {
+            get {
+                return ResourceManager.GetString("ACTION_MOVING_X_VDIS_STARTED", resourceCulture);
             }
         }
         
@@ -2887,11 +3058,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos; to &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MIGRATING_NON_RESIDENT {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_NON_RESIDENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
-        public static string ACTION_VM_MIGRATING_TITLE {
+        public static string ACTION_VM_MIGRATING_RESIDENT {
             get {
-                return ResourceManager.GetString("ACTION_VM_MIGRATING_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_RESIDENT", resourceCulture);
             }
         }
         
@@ -6017,6 +6197,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Caching.
+        /// </summary>
+        public static string CACHING {
+            get {
+                return ResourceManager.GetString("CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CANCEL {
@@ -6967,6 +7156,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing the Control Domain memory will cause the server to be rebooted.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY {
+            get {
+                return ResourceManager.GetString("CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changing the maximum memory of these VMs will cause them to be rebooted.
         ///
         ///Do you want to continue?.
@@ -7096,6 +7296,15 @@ namespace XenAdmin {
         public static string CONFIRM_DELETE_POLICY_0 {
             get {
                 return ResourceManager.GetString("CONFIRM_DELETE_POLICY_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete &apos;{0}&apos;?.
+        /// </summary>
+        public static string CONFIRM_DELETE_PVS_SITE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DELETE_PVS_SITE", resourceCulture);
             }
         }
         
@@ -8336,6 +8545,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control Domain Memory Settings - {0}.
+        /// </summary>
+        public static string CONTROL_DOMAIN_MEMORY_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("CONTROL_DOMAIN_MEMORY_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Control Domain Memory:.
+        /// </summary>
+        public static string CONTROL_DOMAIN_MEMORY_LABEL {
+            get {
+                return ResourceManager.GetString("CONTROL_DOMAIN_MEMORY_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Convert.
         /// </summary>
         public static string CONVERT {
@@ -8590,15 +8817,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cannot migrate to the same host.
-        /// </summary>
-        public static string CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST {
-            get {
-                return ResourceManager.GetString("CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to incompatible version numbers.
         /// </summary>
         public static string CPM_FAILURE_REASON_VERSION {
@@ -8743,15 +8961,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VMs to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VMs to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY {
@@ -8770,15 +8979,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE_TEMPLATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected templates to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE {
@@ -8788,11 +8988,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VMs to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM to..
         /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE {
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE {
             get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE", resourceCulture);
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VMs to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VM to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE", resourceCulture);
             }
         }
         
@@ -9789,6 +10025,15 @@ namespace XenAdmin {
         public static string DATATYPE_NETWORK {
             get {
                 return ResourceManager.GetString("DATATYPE_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache.
+        /// </summary>
+        public static string DATATYPE_PVS {
+            get {
+                return ResourceManager.GetString("DATATYPE_PVS", resourceCulture);
             }
         }
         
@@ -10862,6 +11107,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Disable PVS Read Caching.
+        /// </summary>
+        public static string DISABLE_PVS_READ_CACHING_BUTTON {
+            get {
+                return ResourceManager.GetString("DISABLE_PVS_READ_CACHING_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable P&amp;VS Read Caching.
+        /// </summary>
+        public static string DISABLE_PVS_READ_CACHING_MENU {
+            get {
+                return ResourceManager.GetString("DISABLE_PVS_READ_CACHING_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pause Workload Balancing .
         /// </summary>
         public static string DISABLE_WLB {
@@ -10903,6 +11166,15 @@ namespace XenAdmin {
         public static string DISABLED_VMPP {
             get {
                 return ResourceManager.GetString("DISABLED_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling.
+        /// </summary>
+        public static string DISABLING {
+            get {
+                return ResourceManager.GetString("DISABLING", resourceCulture);
             }
         }
         
@@ -13116,6 +13388,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E&amp;nable PVS Read Caching....
+        /// </summary>
+        public static string ENABLE_PVS_READ_CACHING_BUTTON {
+            get {
+                return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ena&amp;ble PVS Read Caching....
+        /// </summary>
+        public static string ENABLE_PVS_READ_CACHING_MENU {
+            get {
+                return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the PVS site from which the selected VMs are streamed..
+        /// </summary>
+        public static string ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE {
+            get {
+                return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the PVS site from which the selected VM is streamed..
+        /// </summary>
+        public static string ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE {
+            get {
+                return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Res&amp;ume.
         /// </summary>
         public static string ENABLE_WLB_ELLIPSIS {
@@ -13139,6 +13447,15 @@ namespace XenAdmin {
         public static string ENABLED_VMPP {
             get {
                 return ResourceManager.GetString("ENABLED_VMPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling.
+        /// </summary>
+        public static string ENABLING {
+            get {
+                return ResourceManager.GetString("ENABLING", resourceCulture);
             }
         }
         
@@ -17155,6 +17472,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control &amp;Domain Memory....
+        /// </summary>
+        public static string HOST_MENU_CONTROL_DOMAIN_MEMORY {
+            get {
+                return ResourceManager.GetString("HOST_MENU_CONTROL_DOMAIN_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Migrate VM wizard....
         /// </summary>
         public static string HOST_MENU_CPM_TEXT {
@@ -18445,6 +18771,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incompatible protocol version.
+        /// </summary>
+        public static string INCOMPATIBLE_PROTOCOL_VERSION {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_PROTOCOL_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible write cache mode.
+        /// </summary>
+        public static string INCOMPATIBLE_WRITE_CACHE_MODE {
+            get {
+                return ResourceManager.GetString("INCOMPATIBLE_WRITE_CACHE_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect file size.
         /// </summary>
         public static string INCORRECT_FILE_SIZE {
@@ -18576,6 +18920,15 @@ namespace XenAdmin {
         public static string INITIALIZE_WLB {
             get {
                 return ResourceManager.GetString("INITIALIZE_WLB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialized.
+        /// </summary>
+        public static string INITIALIZED {
+            get {
+                return ResourceManager.GetString("INITIALIZED", resourceCulture);
             }
         }
         
@@ -20468,6 +20821,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Move....
+        /// </summary>
+        public static string MAINWINDOW_MOVE_OBJECTS {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_MOVE_OBJECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Move VM....
         /// </summary>
         public static string MAINWINDOW_MOVEVM {
@@ -20621,7 +20983,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Crash &amp;Dump Files.
+        ///   Looks up a localized string similar to Remove Crash Dump &amp;Files.
         /// </summary>
         public static string MAINWINDOW_REMOVE_HOST_CRASHDUMPS {
             get {
@@ -21782,15 +22144,6 @@ namespace XenAdmin {
         public static string MIGRATE_PLEASE_EJECT_YOUR_CD {
             get {
                 return ResourceManager.GetString("MIGRATE_PLEASE_EJECT_YOUR_CD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the &amp;destination storage repository.
-        /// </summary>
-        public static string MIGRATE_VDI_DIALOG_SRHINT {
-            get {
-                return ResourceManager.GetString("MIGRATE_VDI_DIALOG_SRHINT", resourceCulture);
             }
         }
         
@@ -24919,6 +25272,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string NO_VALUE {
+            get {
+                return ResourceManager.GetString("NO_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;None&gt;.
         /// </summary>
         public static string NONE {
@@ -25535,15 +25897,6 @@ namespace XenAdmin {
         public static string OVF_NET_DESCRIPTION {
             get {
                 return ResourceManager.GetString("OVF_NET_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual Machine.
-        /// </summary>
-        public static string OVF_VSSD_CAPTION {
-            get {
-                return ResourceManager.GetString("OVF_VSSD_CAPTION", resourceCulture);
             }
         }
         
@@ -26381,15 +26734,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot apply updates using [XenCenter]..
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_PATCHING_FORBIDDEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This server cannot be updated automatically.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {
@@ -27073,6 +27417,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post-update tasks cannot be carried out automatically for all the servers to be updated..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_RESTARTS {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_RESTARTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic update is not supported for this server..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool General Properties.
         /// </summary>
         public static string POOL_GENERAL_TAB_TITLE {
@@ -27574,6 +27936,87 @@ namespace XenAdmin {
         public static string PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION {
             get {
                 return ResourceManager.GetString("PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Cache Configuration - &apos;{0}&apos;.
+        /// </summary>
+        public static string PVS_CACHE_CONFIG_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_CONFIG_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memory and disk.
+        /// </summary>
+        public static string PVS_CACHE_MEMORY_AND_DISK {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_MEMORY_AND_DISK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memory only.
+        /// </summary>
+        public static string PVS_CACHE_MEMORY_ONLY {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_MEMORY_ONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MemorySR.
+        /// </summary>
+        public static string PVS_CACHE_MEMORY_SR_NAME {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_MEMORY_SR_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not configured.
+        /// </summary>
+        public static string PVS_CACHE_NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This PVS site cannot be removed because it contains running proxies..
+        /// </summary>
+        public static string PVS_SITE_CANNOT_BE_REMOVED {
+            get {
+                return ResourceManager.GetString("PVS_SITE_CANNOT_BE_REMOVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Servers on site {0}&apos;.
+        /// </summary>
+        public static string PVS_SITE_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("PVS_SITE_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Site.
+        /// </summary>
+        public static string PVS_SITE_NAME {
+            get {
+                return ResourceManager.GetString("PVS_SITE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS Read Cache.
+        /// </summary>
+        public static string PVS_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("PVS_TAB_TITLE", resourceCulture);
             }
         }
         
@@ -31120,6 +31563,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        public static string STOPPED {
+            get {
+                return ResourceManager.GetString("STOPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage Adapter.
         /// </summary>
         public static string STORAGE_ADAPTER {
@@ -34565,6 +35017,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Machine.
+        /// </summary>
+        public static string VIRTUAL_MACHINE {
+            get {
+                return ResourceManager.GetString("VIRTUAL_MACHINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Machines.
         /// </summary>
         public static string VIRTUAL_MACHINES {
@@ -35344,6 +35805,15 @@ namespace XenAdmin {
         public static string VM_USES_LOCAL_STORAGE {
             get {
                 return ResourceManager.GetString("VM_USES_LOCAL_STORAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current number of vCPUs is already {0} and cannot be decreased while the VM is running..
+        /// </summary>
+        public static string VM_VCPU_CANNOT_UNPLUG_LIVE {
+            get {
+                return ResourceManager.GetString("VM_VCPU_CANNOT_UNPLUG_LIVE", resourceCulture);
             }
         }
         

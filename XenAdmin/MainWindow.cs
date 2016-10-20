@@ -100,6 +100,7 @@ namespace XenAdmin
         internal readonly AdPage AdPage = new AdPage();
         internal readonly ADUpsellPage AdUpsellPage = new ADUpsellPage();
         internal readonly GpuPage GpuPage = new GpuPage();
+        internal readonly PvsPage PvsPage = new PvsPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
 
@@ -161,6 +162,7 @@ namespace XenAdmin
             components.Add(WlbPage);
             components.Add(AdPage);
             components.Add(GpuPage);
+            components.Add(PvsPage);
             components.Add(SearchPage);
             components.Add(DockerProcessPage);
             components.Add(DockerDetailsPage);
@@ -184,6 +186,7 @@ namespace XenAdmin
             AddTabContents(AdPage, TabPageAD);
             AddTabContents(AdUpsellPage, TabPageADUpsell);
             AddTabContents(GpuPage, TabPageGPU);
+            AddTabContents(PvsPage, TabPagePvs);
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
             AddTabContents(DockerDetailsPage, TabPageDockerDetails);
@@ -249,7 +252,7 @@ namespace XenAdmin
 
 				if (SelectionManager.Selection.FirstIsRealVM)
 					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
-                else if (SelectionManager.Selection.FirstIsHost)
+                else if (SelectionManager.Selection.FirstIs<Host>())
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
 
                 UnpauseVNC(sender == TheTabControl);
@@ -1375,10 +1378,11 @@ namespace XenAdmin
 
             bool multi = SelectionManager.Selection.Count > 1;
 
-            bool isPoolSelected = SelectionManager.Selection.FirstIsPool;
-            bool isVMSelected = SelectionManager.Selection.FirstIsVM;
-            bool isHostSelected = SelectionManager.Selection.FirstIsHost;
-            bool isSRSelected = SelectionManager.Selection.FirstIsSR;
+            bool isPoolSelected = SelectionManager.Selection.FirstIs<Pool>();
+            bool isVMSelected = SelectionManager.Selection.FirstIs<VM>();
+            bool isHostSelected = SelectionManager.Selection.FirstIs<Host>();
+            bool isSRSelected = SelectionManager.Selection.FirstIs<SR>();
+            bool isVdiSelected = SelectionManager.Selection.FirstIs<VDI>();
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
@@ -1389,7 +1393,7 @@ namespace XenAdmin
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isDockerContainerSelected));
+            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
             ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
@@ -1423,6 +1427,9 @@ namespace XenAdmin
                 ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
 
             ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
+
+            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
+                && Helpers.PvsCacheCapability(selectionConnection));
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
@@ -1774,7 +1781,7 @@ namespace XenAdmin
                     ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
-                else if (SelectionManager.Selection.FirstIsHost)
+                else if (SelectionManager.Selection.FirstIs<Host>())
                 {
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
@@ -1782,7 +1789,7 @@ namespace XenAdmin
             }
             else if (t == TabPageCvmConsole)
             {
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                 {
                     CvmConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
@@ -1959,6 +1966,10 @@ namespace XenAdmin
                 else if (t == TabPageDockerDetails)
                 {
                     DockerDetailsPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
+                }
+                else if (t == TabPagePvs)
+                {
+                    PvsPage.Connection = SelectionManager.Selection.GetConnectionOfFirstItem();
                 }
             }
 
@@ -2436,6 +2447,8 @@ namespace XenAdmin
                 return "TabPageDockerProcess" + modelObj;
             if (TheTabControl.SelectedTab == TabPageDockerDetails)
                 return "TabPageDockerDetails" + modelObj;
+            if (TheTabControl.SelectedTab == TabPagePvs)
+                return "TabPagePvs" + modelObj;
             return "TabPageUnknown";
         }
 
@@ -2451,21 +2464,21 @@ namespace XenAdmin
 
             if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)
             {
-                if (SelectionManager.Selection.FirstIsPool)
+                if (SelectionManager.Selection.FirstIs<Pool>())
                     return "Pool";
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                     return "Server";
-                if (SelectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIs<VM>())
                     return "VM";
-                if (SelectionManager.Selection.FirstIsSR)
+                if (SelectionManager.Selection.FirstIs<SR>())
                     return "Storage";
             }
 
             if (TheTabControl.SelectedTab == TabPageNetwork)
             {
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                     return "Server";
-                if (SelectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIs<VM>())
                     return "VM";
             }
 

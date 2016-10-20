@@ -700,15 +700,7 @@ namespace XenAdmin.TabPages
                     sb.AppendLine(alert.GetUpdateDetailsCSVQuotes());
             }
 
-            try
-            {
-                Clipboard.SetText(sb.ToString());
-            }
-            catch (Exception ex)
-            {
-                log.Error("Exception while trying to set clipboard text.", ex);
-                log.Error(ex, ex);
-            }
+            Clip.SetClipboardText(sb.ToString());
         }
 
         #endregion
