@@ -317,7 +317,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (PreCheckHostRow row in ExecuteCheck(check))
                         {
                             if (precheckResult != PreCheckResult.Failed && row.Problem != null)
-                                precheckResult = row.IsProblem ? PreCheckResult.Failed : PreCheckResult.Warning;
+                                precheckResult = row.PrecheckResult;
                             _worker.ReportProgress(PercentageSelectedServers(j + 1), row);
                         }
                     }
@@ -548,7 +548,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
 
-        internal enum PreCheckResult { OK, Warning, Failed }
+        internal enum PreCheckResult { OK, Info, Warning, Failed }
 
         private abstract class PreCheckGridRow : XenAdmin.Controls.DataGridViewEx.DataGridViewExRow
         {
@@ -579,9 +579,22 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             public void UpdateDescription(PreCheckResult precheckResult)
             {
-                string result = precheckResult == PreCheckResult.OK
-                                    ? Messages.GENERAL_STATE_OK
-                                    : precheckResult == PreCheckResult.Warning ? Messages.WARNING : Messages.FAILED;
+                string result;
+                switch (precheckResult)
+                {
+                    case PreCheckResult.OK:
+                        result = Messages.GENERAL_STATE_OK;
+                        break;
+                    case PreCheckResult.Info:
+                        result = Messages.INFORMATION;
+                        break;
+                    case PreCheckResult.Warning:
+                        result = Messages.WARNING;
+                        break;
+                    default:
+                        result = Messages.FAILED;
+                        break;
+                }
 
                 _descriptionCell.Value = string.Format("{0} {1}", description, result);
             }
@@ -617,8 +630,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             private void UpdateRowFields()
             {
                 _iconCell.Value = Problem == null
-                    ? Resources._000_Tick_h32bit_16
-                    : Problem is Warning ? Resources._000_Alert2_h32bit_16 : Resources._000_Abort_h32bit_16;
+                    ? Images.GetImage16For(Icons.Ok)
+                    : Problem.Image;
 
                 string description = string.Empty;
 
@@ -674,6 +687,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             public bool IsProblem
             {
                 get { return _problem != null && !(_problem is Warning); }
+            }
+            
+            public PreCheckResult PrecheckResult
+            {
+                get
+                {
+                    if (Problem == null)
+                        return PreCheckResult.OK;
+                    if (_problem is Information) 
+                        return PreCheckResult.Info;
+                    if (_problem is Warning) 
+                        return PreCheckResult.Warning;
+                    return PreCheckResult.Failed;
+                }
             }
 
             public override bool Equals(object obj)

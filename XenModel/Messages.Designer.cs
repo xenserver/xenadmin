@@ -6724,7 +6724,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking live patching status.
+        ///   Looks up a localized string similar to Checking reboots required.
         /// </summary>
         public static string CHECKING_SERVER_NEEDS_REBOOT {
             get {
@@ -27402,15 +27402,6 @@ namespace XenAdmin {
         public static string PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No problems were encountered.
-        /// </summary>
-        public static string PROBLEM_NOPROBLEM_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("PROBLEM_NOPROBLEM_DESCRIPTION", resourceCulture);
             }
         }
         

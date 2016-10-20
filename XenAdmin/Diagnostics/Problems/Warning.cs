@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Drawing;
 using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Diagnostics.Problems
@@ -43,6 +44,11 @@ namespace XenAdmin.Diagnostics.Problems
         public override string HelpMessage
         {
             get { return null; }
+        }
+
+        public override Image Image
+        {
+            get { return Images.GetImage16For(Icons.Warning); }
         }
     }
 }

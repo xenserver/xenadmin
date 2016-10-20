@@ -2446,7 +2446,7 @@ Do you want to assign it to the policy '{2}' instead?</value>
     <value>Checking partition layout</value>
   </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
-    <value>Checking live patching status</value>
+    <value>Checking reboots required</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>Checking server side status</value>
@@ -9543,9 +9543,6 @@ The VM protection policy for this VM does not have automatic archiving configure
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>Duplicate MAC address</value>
-  </data>
-  <data name="PROBLEM_NOPROBLEM_DESCRIPTION" xml:space="preserve">
-    <value>No problems were encountered</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>

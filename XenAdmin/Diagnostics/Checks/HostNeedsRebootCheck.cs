@@ -75,7 +75,7 @@ namespace XenAdmin.Diagnostics.Checks
             if ((updateGuidance != null && updateGuidance.Contains(update_after_apply_guidance.restartHost))
                 || (patchGuidance != null && patchGuidance.Contains(after_apply_guidance.restartHost)))
             {
-                 return new HostNeedsRebootWarning(this, Host);
+                 return new HostNeedsReboot(this, Host);
             }
 
             successfulCheckDescription = string.Format(Messages.UPDATES_WIZARD_NO_REBOOT_NEEDED, Host);

@@ -30,40 +30,29 @@
  */
 
 using System;
-using System.Drawing;
-using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Properties;
+using XenAPI;
 
-
-namespace XenAdmin.Diagnostics.Problems
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public class NoProblem : Problem
+    public class HostNeedsReboot : Information
     {
-        public NoProblem(Check check)
+        private readonly Host host;
+
+        public HostNeedsReboot(Check check, Host host)
             : base(check)
         {
-            
+            this.host = host;
         }
 
         public override string Title
         {
-            get { return string.Empty; }
+            get { return Description; }
         }
 
         public override string Description
         {
-            get { return Messages.PROBLEM_NOPROBLEM_DESCRIPTION; }
+            get { return String.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED, host.name_label); }
         }
-
-    
-
-        public override string HelpMessage
-        {
-            get { return string.Empty; }
-        }
-
-
     }
 }
