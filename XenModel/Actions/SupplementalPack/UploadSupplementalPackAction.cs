@@ -189,6 +189,15 @@ namespace XenAdmin.Actions
                     var poolUpdateRef = Pool_update.introduce(Connection.Session, vdiRef);
                     poolUpdate = Connection.WaitForCache(poolUpdateRef);
                 }
+                catch (Failure ex)
+                {
+                    if (ex.ErrorDescription != null && ex.ErrorDescription.Count > 1 && string.Equals("UPDATE_ALREADY_EXISTS", ex.ErrorDescription[0], StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        string uuidFound = ex.ErrorDescription[1];
+                        
+                        poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, System.StringComparison.InvariantCultureIgnoreCase));
+                    }
+                }
                 catch (Exception ex)
                 {
                     log.ErrorFormat("Upload failed when introducing update from VDI {0} on {1}: {2}", vdi.opaque_ref, Connection, ex.Message);

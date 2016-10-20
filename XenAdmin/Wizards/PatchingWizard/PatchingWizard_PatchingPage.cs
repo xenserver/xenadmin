@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        public Dictionary<string, livepatch_status> LivePatchCodesByHost
         {
             get;
             set;
@@ -367,7 +367,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             actions.Add(new ApplyPatchPlanAction(host, patch));
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) 
-                && !(LivePatchCodesByHost !=null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE))
+                && !(LivePatchCodesByHost !=null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));
@@ -473,7 +473,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             actions.Add(new ApplyPoolUpdatePlanAction(host, poolUpdate));
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartHost)
-                && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE))
+                && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));
@@ -537,7 +537,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool LivePatchingAttemptedForHost(Host host)
         {
             return LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) &&
-                   LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE;
+                   LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete;
 
         }
 

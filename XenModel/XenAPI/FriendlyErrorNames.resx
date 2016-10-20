@@ -207,6 +207,9 @@
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>The restore could not be performed because the state partition could not be found</value>
   </data>
+  <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
+    <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
+  </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot be plugged.</value>
   </data>
@@ -559,7 +562,7 @@
     <value>The uploaded update file is invalid.</value>
   </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
-    <value>The uploaded update package is invalid</value>
+    <value>The uploaded update package is invalid.</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>The value '{1}' is invalid for field '{0}'.</value>
@@ -632,6 +635,9 @@
   </data>
   <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
     <value>INTERNAL ERROR: Attempted to set '{0}'.'{1}':'{3}'='{2}', but the key '{3}' was already present in map '{1}'.</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
+    <value>The dynamic memory range does not satisfy the following constraint.</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum amount of memory allowed for this virtual machine.</value>
@@ -863,6 +869,24 @@
   </data>
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>The provision call can only be invoked on templates, not regular VMs.</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
+    <value>The PVS site already has cache storage configured for the host.</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_IS_IN_USE" xml:space="preserve">
+    <value>The PVS cache storage is in use by the site and cannot be removed.</value>
+  </data>
+  <data name="PVS_PROXY_ALREADY_PRESENT" xml:space="preserve">
+    <value>The VIF is already associated with a PVS proxy</value>
+  </data>
+  <data name="PVS_SERVER_ADDRESS_IN_USE" xml:space="preserve">
+    <value>The address specified is already in use by an existing PVS_server object</value>
+  </data>
+  <data name="PVS_SITE_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
+    <value>The PVS site contains running proxies.</value>
+  </data>
+  <data name="PVS_SITE_CONTAINS_SERVERS" xml:space="preserve">
+    <value>The PVS site contains servers and cannot be forgotten.</value>
   </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>Your current role is not authorized to perform this action.
@@ -1544,6 +1568,9 @@ Authorized Roles: {1}</value>
   <data name="SUBJECT_CANNOT_BE_RESOLVED" xml:space="preserve">
     <value>Subject cannot be resolved by the external directory service.</value>
   </data>
+  <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
+    <value>The suspend image of a checkpoint is not accessible from the host on which the VM is running</value>
+  </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>You must use tar output to retrieve system status from an OEM server.</value>
   </data>
@@ -1570,6 +1597,15 @@ Authorized Roles: {1}</value>
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>The requested bootloader {1} for VM {0} is unknown</value>
+  </data>
+  <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
+    <value>This update has already been applied.</value>
+  </data>
+  <data name="UPDATE_ALREADY_APPLIED_IN_POOL" xml:space="preserve">
+    <value>This update has already been applied to all hosts in the pool.</value>
+  </data>
+  <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>The uploaded update already exists</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>The specified update has been applied and cannot be destroyed.</value>
@@ -1756,6 +1792,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
+  </data>
+  <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
+    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>The VM's Virtual Hardware Platform version is incompatible with this host.</value>

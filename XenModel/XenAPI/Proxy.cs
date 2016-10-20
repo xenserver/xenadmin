@@ -2376,6 +2376,18 @@ namespace XenAPI
         Response<Object>
         vm_metrics_get_other_config(string session, string _vm_metrics);
 
+        [XmlRpcMethod("VM_metrics.get_hvm")]
+        Response<bool>
+        vm_metrics_get_hvm(string session, string _vm_metrics);
+
+        [XmlRpcMethod("VM_metrics.get_nested_virt")]
+        Response<bool>
+        vm_metrics_get_nested_virt(string session, string _vm_metrics);
+
+        [XmlRpcMethod("VM_metrics.get_nomigrate")]
+        Response<bool>
+        vm_metrics_get_nomigrate(string session, string _vm_metrics);
+
         [XmlRpcMethod("VM_metrics.set_other_config")]
         Response<string>
         vm_metrics_set_other_config(string session, string _vm_metrics, Object _other_config);
@@ -7015,6 +7027,246 @@ namespace XenAPI
         [XmlRpcMethod("VGPU_type.get_all_records")]
         Response<Object>
         vgpu_type_get_all_records(string session);
+
+        [XmlRpcMethod("PVS_site.get_record")]
+        Response<Proxy_PVS_site>
+        pvs_site_get_record(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_by_uuid")]
+        Response<string>
+        pvs_site_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("PVS_site.get_by_name_label")]
+        Response<string []>
+        pvs_site_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("PVS_site.get_uuid")]
+        Response<string>
+        pvs_site_get_uuid(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_name_label")]
+        Response<string>
+        pvs_site_get_name_label(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_name_description")]
+        Response<string>
+        pvs_site_get_name_description(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_PVS_uuid")]
+        Response<string>
+        pvs_site_get_pvs_uuid(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_cache_storage")]
+        Response<string []>
+        pvs_site_get_cache_storage(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_servers")]
+        Response<string []>
+        pvs_site_get_servers(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.get_proxies")]
+        Response<string []>
+        pvs_site_get_proxies(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.set_name_label")]
+        Response<string>
+        pvs_site_set_name_label(string session, string _pvs_site, string _label);
+
+        [XmlRpcMethod("PVS_site.set_name_description")]
+        Response<string>
+        pvs_site_set_name_description(string session, string _pvs_site, string _description);
+
+        [XmlRpcMethod("PVS_site.introduce")]
+        Response<string>
+        pvs_site_introduce(string session, string _name_label, string _name_description, string _pvs_uuid);
+
+        [XmlRpcMethod("Async.PVS_site.introduce")]
+        Response<string>
+        async_pvs_site_introduce(string session, string _name_label, string _name_description, string _pvs_uuid);
+
+        [XmlRpcMethod("PVS_site.forget")]
+        Response<string>
+        pvs_site_forget(string session, string _pvs_site);
+
+        [XmlRpcMethod("Async.PVS_site.forget")]
+        Response<string>
+        async_pvs_site_forget(string session, string _pvs_site);
+
+        [XmlRpcMethod("PVS_site.set_PVS_uuid")]
+        Response<string>
+        pvs_site_set_pvs_uuid(string session, string _pvs_site, string _value);
+
+        [XmlRpcMethod("Async.PVS_site.set_PVS_uuid")]
+        Response<string>
+        async_pvs_site_set_pvs_uuid(string session, string _pvs_site, string _value);
+
+        [XmlRpcMethod("PVS_site.get_all")]
+        Response<string []>
+        pvs_site_get_all(string session);
+
+        [XmlRpcMethod("PVS_site.get_all_records")]
+        Response<Object>
+        pvs_site_get_all_records(string session);
+
+        [XmlRpcMethod("PVS_server.get_record")]
+        Response<Proxy_PVS_server>
+        pvs_server_get_record(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.get_by_uuid")]
+        Response<string>
+        pvs_server_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("PVS_server.get_uuid")]
+        Response<string>
+        pvs_server_get_uuid(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.get_addresses")]
+        Response<string []>
+        pvs_server_get_addresses(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.get_first_port")]
+        Response<string>
+        pvs_server_get_first_port(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.get_last_port")]
+        Response<string>
+        pvs_server_get_last_port(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.get_site")]
+        Response<string>
+        pvs_server_get_site(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.introduce")]
+        Response<string>
+        pvs_server_introduce(string session, string [] _addresses, string _first_port, string _last_port, string _site);
+
+        [XmlRpcMethod("Async.PVS_server.introduce")]
+        Response<string>
+        async_pvs_server_introduce(string session, string [] _addresses, string _first_port, string _last_port, string _site);
+
+        [XmlRpcMethod("PVS_server.forget")]
+        Response<string>
+        pvs_server_forget(string session, string _pvs_server);
+
+        [XmlRpcMethod("Async.PVS_server.forget")]
+        Response<string>
+        async_pvs_server_forget(string session, string _pvs_server);
+
+        [XmlRpcMethod("PVS_server.get_all")]
+        Response<string []>
+        pvs_server_get_all(string session);
+
+        [XmlRpcMethod("PVS_server.get_all_records")]
+        Response<Object>
+        pvs_server_get_all_records(string session);
+
+        [XmlRpcMethod("PVS_proxy.get_record")]
+        Response<Proxy_PVS_proxy>
+        pvs_proxy_get_record(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.get_by_uuid")]
+        Response<string>
+        pvs_proxy_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("PVS_proxy.get_uuid")]
+        Response<string>
+        pvs_proxy_get_uuid(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.get_site")]
+        Response<string>
+        pvs_proxy_get_site(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.get_VIF")]
+        Response<string>
+        pvs_proxy_get_vif(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.get_currently_attached")]
+        Response<bool>
+        pvs_proxy_get_currently_attached(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.get_status")]
+        Response<string>
+        pvs_proxy_get_status(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.create")]
+        Response<string>
+        pvs_proxy_create(string session, string _site, string _vif);
+
+        [XmlRpcMethod("Async.PVS_proxy.create")]
+        Response<string>
+        async_pvs_proxy_create(string session, string _site, string _vif);
+
+        [XmlRpcMethod("PVS_proxy.destroy")]
+        Response<string>
+        pvs_proxy_destroy(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("Async.PVS_proxy.destroy")]
+        Response<string>
+        async_pvs_proxy_destroy(string session, string _pvs_proxy);
+
+        [XmlRpcMethod("PVS_proxy.get_all")]
+        Response<string []>
+        pvs_proxy_get_all(string session);
+
+        [XmlRpcMethod("PVS_proxy.get_all_records")]
+        Response<Object>
+        pvs_proxy_get_all_records(string session);
+
+        [XmlRpcMethod("PVS_cache_storage.get_record")]
+        Response<Proxy_PVS_cache_storage>
+        pvs_cache_storage_get_record(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_by_uuid")]
+        Response<string>
+        pvs_cache_storage_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("PVS_cache_storage.create")]
+        Response<string>
+        pvs_cache_storage_create(string session, Proxy_PVS_cache_storage _record);
+
+        [XmlRpcMethod("Async.PVS_cache_storage.create")]
+        Response<string>
+        async_pvs_cache_storage_create(string session, Proxy_PVS_cache_storage _record);
+
+        [XmlRpcMethod("PVS_cache_storage.destroy")]
+        Response<string>
+        pvs_cache_storage_destroy(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("Async.PVS_cache_storage.destroy")]
+        Response<string>
+        async_pvs_cache_storage_destroy(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_uuid")]
+        Response<string>
+        pvs_cache_storage_get_uuid(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_host")]
+        Response<string>
+        pvs_cache_storage_get_host(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_SR")]
+        Response<string>
+        pvs_cache_storage_get_sr(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_site")]
+        Response<string>
+        pvs_cache_storage_get_site(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_size")]
+        Response<string>
+        pvs_cache_storage_get_size(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_VDI")]
+        Response<string>
+        pvs_cache_storage_get_vdi(string session, string _pvs_cache_storage);
+
+        [XmlRpcMethod("PVS_cache_storage.get_all")]
+        Response<string []>
+        pvs_cache_storage_get_all(string session);
+
+        [XmlRpcMethod("PVS_cache_storage.get_all_records")]
+        Response<Object>
+        pvs_cache_storage_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7248,6 +7500,9 @@ namespace XenAPI
         public DateTime install_time;
         public DateTime last_updated;
         public Object other_config;
+        public bool hvm;
+        public bool nested_virt;
+        public bool nomigrate;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7866,6 +8121,49 @@ namespace XenAPI
         public string implementation;
         public string identifier;
         public bool experimental;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_PVS_site
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public string PVS_uuid;
+        public string [] cache_storage;
+        public string [] servers;
+        public string [] proxies;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_PVS_server
+    {
+        public string uuid;
+        public string [] addresses;
+        public string first_port;
+        public string last_port;
+        public string site;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_PVS_proxy
+    {
+        public string uuid;
+        public string site;
+        public string VIF;
+        public bool currently_attached;
+        public string status;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_PVS_cache_storage
+    {
+        public string uuid;
+        public string host;
+        public string SR;
+        public string site;
+        public string size;
+        public string VDI;
     }
 
 }

@@ -35,29 +35,23 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum cls
+    public enum livepatch_status
     {
-        VM, Host, SR, Pool, VMPP, PVS_proxy, unknown
+        ok_livepatch_complete, ok_livepatch_incomplete, ok, unknown
     }
 
-    public static class cls_helper
+    public static class livepatch_status_helper
     {
-        public static string ToString(cls x)
+        public static string ToString(livepatch_status x)
         {
             switch (x)
             {
-                case cls.VM:
-                    return "VM";
-                case cls.Host:
-                    return "Host";
-                case cls.SR:
-                    return "SR";
-                case cls.Pool:
-                    return "Pool";
-                case cls.VMPP:
-                    return "VMPP";
-                case cls.PVS_proxy:
-                    return "PVS_proxy";
+                case livepatch_status.ok_livepatch_complete:
+                    return "ok_livepatch_complete";
+                case livepatch_status.ok_livepatch_incomplete:
+                    return "ok_livepatch_incomplete";
+                case livepatch_status.ok:
+                    return "ok";
                 default:
                     return "unknown";
             }

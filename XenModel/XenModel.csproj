@@ -346,6 +346,7 @@
     <Compile Include="XenAPI\GPU_group.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
+    <Compile Include="XenAPI\livepatch_status.cs" />
     <Compile Include="XenAPI\LVHD.cs">
       <SubType>Code</SubType>
     </Compile>

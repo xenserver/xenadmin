@@ -40,12 +40,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public class PatchingWizardModeGuidanceBuilder
     {
-        public static string ModeRetailPatch(List<Host> servers, Pool_patch patch, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
+        public static string ModeRetailPatch(List<Host> servers, Pool_patch patch, Dictionary<string, livepatch_status> LivePatchCodesByHost)
         {
             return Build(servers.Where(h => patch != null && patch.AppliedOn(h) == DateTime.MaxValue).ToList(), patch != null ? patch.after_apply_guidance : new List<after_apply_guidance>(), LivePatchCodesByHost);
         }
 
-        public static string ModeRetailPatch(List<Host> servers, Pool_update update, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
+        public static string ModeRetailPatch(List<Host> servers, Pool_update update, Dictionary<string, livepatch_status> LivePatchCodesByHost)
         {
             var guidances = GetAfterApplyGuidancesFromUpdate(update);
 
@@ -88,17 +88,17 @@ namespace XenAdmin.Wizards.PatchingWizard
         public static string ModeSuppPack(List<Host> servers)
         {
             List<after_apply_guidance> guidance = new List<after_apply_guidance> { after_apply_guidance.restartHost };
-            return Build(servers, guidance, new Dictionary<string, LivePatchCode>());
+            return Build(servers, guidance, new Dictionary<string, livepatch_status>());
         }
 
-        private static string Build(List<Host> servers, List<after_apply_guidance> guidance, Dictionary<string, LivePatchCode> LivePatchCodesByHost)
+        private static string Build(List<Host> servers, List<after_apply_guidance> guidance, Dictionary<string, livepatch_status> LivePatchCodesByHost)
         {
             StringBuilder sbLog = new StringBuilder();
 
             foreach (after_apply_guidance guide in guidance)
             {
                 if (guide == after_apply_guidance.restartHost
-                    && (LivePatchCodesByHost != null && servers.TrueForAll(h => LivePatchCodesByHost.ContainsKey(h.uuid) && LivePatchCodesByHost[h.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)))
+                    && (LivePatchCodesByHost != null && servers.TrueForAll(h => LivePatchCodesByHost.ContainsKey(h.uuid) && LivePatchCodesByHost[h.uuid] == livepatch_status.ok_livepatch_complete)))
                     continue;
 
                 sbLog.AppendLine(GetGuideMessage(guide));
@@ -109,7 +109,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case after_apply_guidance.restartXAPI:
                         foreach (Host host in servers)
                         {
-                            if (guide == after_apply_guidance.restartHost && LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)
+                            if (guide == after_apply_guidance.restartHost && LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete)
                                 continue;
 
                             if (host.IsMaster())
