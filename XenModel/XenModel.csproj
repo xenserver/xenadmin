@@ -357,11 +357,6 @@
     <Compile Include="XenAPI\pool_allowed_operations.cs" />
     <Compile Include="XenAPI\Pool_update.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
-    <Compile Include="XenAPI\PVS_cache_storage.cs" />
-    <Compile Include="XenAPI\PVS_proxy.cs" />
-    <Compile Include="XenAPI\pvs_proxy_status.cs" />
-    <Compile Include="XenAPI\PVS_server.cs" />
-    <Compile Include="XenAPI\PVS_site.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
