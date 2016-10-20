@@ -97,8 +97,7 @@ namespace XenAdmin.Commands
         /// <returns></returns>
         private AsyncAction GetAsyncActionForVm(VM vm)
         {
-            var pvsProxy = vm.Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(vm)); // null if no proxy
-
+            var pvsProxy = vm.PvsProxy; 
             if (pvsProxy == null) return null; // No proxy to disable
 
             return new PvsProxyDestroyAction(pvsProxy);

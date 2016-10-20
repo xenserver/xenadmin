@@ -139,9 +139,7 @@ namespace XenAdmin.Dialogs
         /// <returns></returns>
         private bool PvsProxyAlreadyEnabled(VM vm)
         {
-            var pvsProxies = vm.Connection.Cache.PVS_proxies;
-
-            return pvsProxies.Any(pvsProxy => pvsProxy.VM.Equals(vm));
+            return vm.PvsProxy != null;
         }
 
         /// <summary>
