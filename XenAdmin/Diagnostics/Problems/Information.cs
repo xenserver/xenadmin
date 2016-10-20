@@ -29,41 +29,20 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Drawing;
-using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Properties;
-
 
 namespace XenAdmin.Diagnostics.Problems
 {
-    public class NoProblem : Problem
+    public abstract class Information : Warning
     {
-        public NoProblem(Check check)
+        protected Information(Check check)
             : base(check)
+        { }
+
+        public sealed override Image Image
         {
-            
+            get { return Images.GetImage16For(Icons.Info); }
         }
-
-        public override string Title
-        {
-            get { return string.Empty; }
-        }
-
-        public override string Description
-        {
-            get { return Messages.PROBLEM_NOPROBLEM_DESCRIPTION; }
-        }
-
-    
-
-        public override string HelpMessage
-        {
-            get { return string.Empty; }
-        }
-
-
     }
 }

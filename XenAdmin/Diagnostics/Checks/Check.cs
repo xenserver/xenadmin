@@ -56,7 +56,11 @@ namespace XenAdmin.Diagnostics.Checks
         }
 
         public abstract string Description{ get;}
-     
+
+        public virtual string SuccessfulCheckDescription 
+        {
+            get { return string.Empty; }
+        }
 
         private readonly Host _host = null;
         public Host Host
