@@ -191,7 +191,7 @@ namespace XenAdmin.Actions
                 }
                 catch (Failure ex)
                 {
-                    if (ex.ErrorDescription != null && ex.ErrorDescription.Count > 1 && "UPDATE_ALREADY_EXISTS".Equals(ex.ErrorDescription[0], StringComparison.InvariantCultureIgnoreCase))
+                    if (ex.ErrorDescription != null && ex.ErrorDescription.Count > 1 && string.Equals("UPDATE_ALREADY_EXISTS", ex.ErrorDescription[0], StringComparison.InvariantCultureIgnoreCase))
                     {
                         string uuidFound = ex.ErrorDescription[1];
                         
