@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Messages.UPDATES_WIZARD_APPLY_UPDATE;
         }
 
-        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        public Dictionary<string, livepatch_status> LivePatchCodesByHost
         {
             get;
             set;

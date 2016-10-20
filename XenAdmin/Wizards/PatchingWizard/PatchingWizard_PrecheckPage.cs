@@ -330,7 +330,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public Dictionary<string, LivePatchCode> LivePatchCodesByHost
+        public Dictionary<string, livepatch_status> LivePatchCodesByHost
         {
             get;
             set;
@@ -401,7 +401,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             
             List<Check> checkGroup;
 
-            LivePatchCodesByHost = new Dictionary<string, LivePatchCode>();
+            LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
 
             //Checking other things
             if (patch != null)

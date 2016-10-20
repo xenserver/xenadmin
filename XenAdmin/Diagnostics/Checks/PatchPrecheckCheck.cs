@@ -52,7 +52,7 @@ namespace XenAdmin.Diagnostics.Checks
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
-        private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
+        private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
 
         public PatchPrecheckCheck(Host host, Pool_patch patch)
             : this(host, patch, null)
@@ -64,14 +64,14 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+        public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             _patch = patch;
             this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
-        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             _update = update;
@@ -99,26 +99,24 @@ namespace XenAdmin.Diagnostics.Checks
 
             try
             {
-                string result = string.Empty;
-
                 if (Patch != null)
                 {
-                    result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                    string result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                    log.DebugFormat("Pool_patch.precheck returned: '{0}'", result);
+
+                    return FindProblem(result);
                 }
                 else
                 {
-                    //TODO implement when XAPI is ready (should return string, now it's void, bug raised: ) - CA-223785
-                    // result =
-                    Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
+                    var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
+
+                    log.DebugFormat("Pool_update.precheck returned livepatch_status: '{0}'", livepatchStatus);
+
+                    if (livePatchCodesByHost != null)
+                        livePatchCodesByHost[Host.uuid] = livepatchStatus;
+
+                    return null;
                 }
-
-                var livePatchCode = TryToFindLivePatchCode(result);
-
-                if (livePatchCodesByHost != null)
-                    livePatchCodesByHost[Host.uuid] = livePatchCode;
-
-                return FindProblem(result);
-
             }
             catch (Failure f)
             {
@@ -135,38 +133,6 @@ namespace XenAdmin.Diagnostics.Checks
                 Problem problem = FindProblem(f);
                 return problem ?? new PrecheckFailed(this, Host, f);
             }
-        }
-
-        private LivePatchCode TryToFindLivePatchCode(string result)
-        {
-            LivePatchCode livePatchCodeResult = LivePatchCode.UNKNOWN;
-
-            if (Helpers.ElyOrGreater(Host.Connection))
-            {
-                result = result.Replace("\n", "");
-
-                if (LivePatchResponseRegex.IsMatch(result))
-                {
-                    var m = LivePatchResponseRegex.Match(result);
-                    
-                    var doc = new XmlDocument();
-                    doc.LoadXml(m.ToString());
-                    var firstNode = doc.FirstChild;
-
-                    if (firstNode == null)
-                        return LivePatchCode.UNKNOWN;
-
-                    var livePatchCodeNode = firstNode.Attributes["code"];
-
-                    if (livePatchCodeNode == null)
-                        return LivePatchCode.UNKNOWN;
-
-                    if (Enum.TryParse(livePatchCodeNode.Value, out livePatchCodeResult))
-                        return livePatchCodeResult;
-                }
-            }
-
-            return LivePatchCode.UNKNOWN;
         }
 
         public override string Description
