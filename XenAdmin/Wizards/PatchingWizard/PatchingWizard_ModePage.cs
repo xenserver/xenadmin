@@ -177,11 +177,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            if (AutomaticRadioButton.Checked)
+                ManualRadioButton.Checked = false;
+
             UpdateEnablement();
         }
 
         private void ManualRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            if (ManualRadioButton.Checked)
+                AutomaticRadioButton.Checked = false;
+            
             UpdateEnablement();
         }
 
