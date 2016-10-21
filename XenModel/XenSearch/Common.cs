@@ -1253,6 +1253,8 @@ namespace XenAdmin.XenSearch
                                 return Icons.Ubuntu;
                             if (os.Contains("scientific"))
                                 return Icons.SciLinux;
+                            if (os.Contains("kylin"))
+                                return Icons.NeoKylin;
                             if (os.Contains("windows"))
                                 return Icons.Windows;
                             if (os.Contains("coreos"))

@@ -8724,6 +8724,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VM_WIZARD_NO_SR_OR_SRS_FULL" xml:space="preserve">
     <value>Cannot find a storage repository or all your storage repositories are full.</value>
   </data>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
+    <value>NeoKylin</value>
+  </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
   </data>

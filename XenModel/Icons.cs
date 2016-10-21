@@ -107,6 +107,7 @@ namespace XenAdmin
         SUSE,
         Ubuntu,
         SciLinux,
+        NeoKylin,
         Windows,
         CoreOS,
 

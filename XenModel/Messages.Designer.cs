@@ -23304,6 +23304,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NeoKylin.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ubuntu.
         /// </summary>
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU {
