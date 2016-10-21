@@ -118,32 +118,16 @@ namespace XenAdmin.Dialogs
         /// <returns></returns>
         private AsyncAction GetAsyncActionForVm(VM vm, PVS_site siteSelected)
         {
-            if (PvsProxyAlreadyEnabled(vm))
-            {
-                return null;
-            }
+            if (vm.PvsProxy != null)
+                return null; // PVS read caching already enabled
 
             var vif = GetVifForPvsProxy(vm);
             if (vif == null)
-            {
                 return null; // No VIF with device = 0, so can't enable
-            }
 
             return new PvsProxyCreateAction(vm, siteSelected, vif);
         }
-
-        /// <summary>
-        /// A VM can be enabled if there isn't already a PVS_Proxy on its VIF
-        /// </summary>
-        /// <param name="vm"></param>
-        /// <returns></returns>
-        private bool PvsProxyAlreadyEnabled(VM vm)
-        {
-            var pvsProxies = vm.Connection.Cache.PVS_proxies;
-
-            return pvsProxies.Any(pvsProxy => pvsProxy.VM.Equals(vm));
-        }
-
+        
         /// <summary>
         /// The VIF for a PVS Proxy is the one with VIF.device=0
         /// </summary>

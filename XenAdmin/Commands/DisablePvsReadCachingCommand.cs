@@ -66,11 +66,9 @@ namespace XenAdmin.Commands
 
             foreach (var vm in vms)
             {
-                var action = GetAsyncActionForVm(vm);
-                if (action != null)
-                {
-                    actions.Add(action);
-                }
+                var pvsProxy = vm.PvsProxy;
+                if (pvsProxy != null)
+                    actions.Add(new PvsProxyDestroyAction(pvsProxy));
             }
 
             if (actions.Any())
@@ -88,20 +86,6 @@ namespace XenAdmin.Commands
                         actions).RunAsync();
                 }
             }
-        }
-
-        /// <summary>
-        /// If the VM can have PVS read-caching disabled, returns an action to do so. Else returns null
-        /// </summary>
-        /// <param name="vm"></param>
-        /// <returns></returns>
-        private AsyncAction GetAsyncActionForVm(VM vm)
-        {
-            var pvsProxy = vm.Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM.Equals(vm)); // null if no proxy
-
-            if (pvsProxy == null) return null; // No proxy to disable
-
-            return new PvsProxyDestroyAction(pvsProxy);
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
