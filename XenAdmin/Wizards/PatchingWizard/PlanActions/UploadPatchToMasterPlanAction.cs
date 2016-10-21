@@ -46,7 +46,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly XenServerPatch patch;
         private readonly List<PoolPatchMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
-        private string tempFileName = null;
         private AsyncAction inProgressAction = null;
 
         public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
