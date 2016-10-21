@@ -133,7 +133,7 @@
     <value>11, 18</value>
   </data>
   <data name="GraphNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
+    <value>42, 15</value>
   </data>
   <data name="GraphNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -169,13 +169,13 @@
     <value>NoControl</value>
   </data>
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 523</value>
+    <value>353, 451</value>
   </data>
   <data name="SaveButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="SaveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>75, 25</value>
   </data>
   <data name="SaveButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -211,13 +211,13 @@
     <value>NoControl</value>
   </data>
   <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 523</value>
+    <value>434, 451</value>
   </data>
   <data name="CloseButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="CloseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>75, 25</value>
   </data>
   <data name="CloseButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -247,7 +247,7 @@
     <value>69, 15</value>
   </data>
   <data name="GraphNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 27</value>
+    <value>440, 23</value>
   </data>
   <data name="GraphNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -298,7 +298,7 @@
     <value>50</value>
   </data>
   <data name="ColumnType.Width" type="System.Int32, mscorlib">
-    <value>69</value>
+    <value>57</value>
   </data>
   <metadata name="ColumnColour.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -319,10 +319,10 @@
     <value>15, 95</value>
   </data>
   <data name="dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 3, 6, 6</value>
+    <value>3, 3, 3, 6</value>
   </data>
   <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 419</value>
+    <value>494, 347</value>
   </data>
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -355,13 +355,13 @@
     <value>NoControl</value>
   </data>
   <data name="ClearAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 523</value>
+    <value>13, 451</value>
   </data>
   <data name="ClearAllButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="ClearAllButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>75, 25</value>
   </data>
   <data name="ClearAllButton.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -385,13 +385,13 @@
     <value>17, 17</value>
   </metadata>
   <data name="clearAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 26</value>
+    <value>118, 22</value>
   </data>
   <data name="clearAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear &amp;All</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 30</value>
+    <value>119, 26</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
@@ -427,10 +427,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 1</value>
+    <value>25, 3</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 20</value>
+    <value>135, 15</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -490,13 +490,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 278</value>
+    <value>182, 243</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>163, 22</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -556,7 +556,7 @@
     <value>3, 15, 3, 3</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 29</value>
+    <value>494, 29</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -576,23 +576,26 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>618, 568</value>
+    <value>522, 489</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>51, 24, 51, 24</value>
+    <value>41, 19, 41, 19</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>620, 576</value>
+    <value>499, 469</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 12, 12, 12</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Graph Details</value>
