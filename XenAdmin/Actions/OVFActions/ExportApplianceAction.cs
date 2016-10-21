@@ -92,6 +92,9 @@ namespace XenAdmin.Actions.OVFActions
 		{
 		    SafeToExit = false;
 			var session = Connection.Session;
+
+            InitialiseTicker();
+
 			var url = session.Url;
 			Uri uri = new Uri(url);
 

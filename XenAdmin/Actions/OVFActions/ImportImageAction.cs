@@ -73,6 +73,8 @@ namespace XenAdmin.Actions.OVFActions
 		    SafeToExit = false;
 			Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
 
+            InitialiseTicker();
+
 			string systemid = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);
 

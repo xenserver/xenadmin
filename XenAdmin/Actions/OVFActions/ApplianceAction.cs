@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Threading;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -97,5 +98,23 @@ namespace XenAdmin.Actions.OVFActions
 			if (m_transportAction != null)
 				m_transportAction.Cancel = true;
 		}
+
+	    protected void InitialiseTicker()
+	    {
+	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion(this));
+	    }
+
+	    private void TickUntilCompletion(ApplianceAction action)
+	    {
+	        int sleepTime = 900;
+
+	        while (!action.IsCompleted)
+	        {
+	            action.OnChanged();
+                Thread.Sleep(sleepTime);
+	        }
+	    }
+
+
 	}
 }
