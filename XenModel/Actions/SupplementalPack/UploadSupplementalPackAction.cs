@@ -194,8 +194,12 @@ namespace XenAdmin.Actions
                     if (ex.ErrorDescription != null && ex.ErrorDescription.Count > 1 && string.Equals("UPDATE_ALREADY_EXISTS", ex.ErrorDescription[0], StringComparison.InvariantCultureIgnoreCase))
                     {
                         string uuidFound = ex.ErrorDescription[1];
-                        
+
                         poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, System.StringComparison.InvariantCultureIgnoreCase));
+                    }
+                    else
+                    {
+                        throw;
                     }
                 }
                 catch (Exception ex)
