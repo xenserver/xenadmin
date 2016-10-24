@@ -164,6 +164,39 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
+        public void ToggleQuiesceCheckBox(List <VM> SelectedVMs)
+        {
+
+            switch (BackupType)
+            {
+                case policy_backup_type.snapshot:
+                    quiesceCheckBox.Enabled = true;
+                    quiesceCheckBox.Checked = false;
+                    break;
+
+                case policy_backup_type.snapshot_with_quiesce:
+                    quiesceCheckBox.Enabled = true;
+                    quiesceCheckBox.Checked = true;
+                    break;
+
+                case policy_backup_type.checkpoint:
+                    quiesceCheckBox.Enabled = true;
+                    quiesceCheckBox.Checked = false;
+                    break;
+            }
+
+            foreach (VM vm in SelectedVMs)
+            {
+                if (!vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) || Helpers.FeatureForbidden(vm, Host.RestrictVss))
+                {
+                    quiesceCheckBox.Enabled = false;
+                    quiesceCheckBox.Checked = false;
+                    break;
+                }
+            }
+
+        }
+
         private void RefreshTab(IVMPolicy policy)
         {
             /* when a policy does not have any VMs, irrespective of
