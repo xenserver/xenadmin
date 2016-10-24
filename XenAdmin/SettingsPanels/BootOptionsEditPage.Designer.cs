@@ -108,7 +108,6 @@ namespace XenAdmin.SettingsPanels
             // 
             // m_checkedListBox
             // 
-            this.m_checkedListBox.CheckOnClick = true;
             resources.ApplyResources(this.m_checkedListBox, "m_checkedListBox");
             this.m_checkedListBox.FormattingEnabled = true;
             this.m_checkedListBox.Name = "m_checkedListBox";
