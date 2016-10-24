@@ -34,21 +34,15 @@ using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Diagnostics.Problems
 {
-    public abstract class Warning : Problem
+    public abstract class Information : Warning
     {
-        protected Warning(Check check) 
+        protected Information(Check check)
             : base(check)
-        {
-        }
+        { }
 
-        public override string HelpMessage
+        public sealed override Image Image
         {
-            get { return null; }
-        }
-
-        public override Image Image
-        {
-            get { return Images.GetImage16For(Icons.Warning); }
+            get { return Images.GetImage16For(Icons.Info); }
         }
     }
 }

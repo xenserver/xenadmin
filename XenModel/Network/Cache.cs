@@ -67,6 +67,7 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics> _pif_metrics = new ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics>();
         private readonly ChangeableDictionary<XenRef<Pool>, Pool> _pool = new ChangeableDictionary<XenRef<Pool>, Pool>();
         private readonly ChangeableDictionary<XenRef<Pool_patch>, Pool_patch> _pool_patch = new ChangeableDictionary<XenRef<Pool_patch>, Pool_patch>();
+        private readonly ChangeableDictionary<XenRef<Pool_update>, Pool_update> _pool_update = new ChangeableDictionary<XenRef<Pool_update>, Pool_update>();
         private readonly ChangeableDictionary<XenRef<PVS_cache_storage>, PVS_cache_storage> _pvs_cache_storage = new ChangeableDictionary<XenRef<PVS_cache_storage>, PVS_cache_storage>();
         private readonly ChangeableDictionary<XenRef<PVS_proxy>, PVS_proxy> _pvs_proxy = new ChangeableDictionary<XenRef<PVS_proxy>, PVS_proxy>();
         private readonly ChangeableDictionary<XenRef<PVS_server>, PVS_server> _pvs_server = new ChangeableDictionary<XenRef<PVS_server>, PVS_server>();
@@ -194,6 +195,11 @@ namespace XenAdmin.Network
             get { return contents(_pool_patch); }
         }
 
+        public Pool_update[] Pool_updates
+        {
+            get { return contents(_pool_update); }
+        }
+        
         public PVS_site[] PVS_sites
         {
             get { return contents(_pvs_site); }

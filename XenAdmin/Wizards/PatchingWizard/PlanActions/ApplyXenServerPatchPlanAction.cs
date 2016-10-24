@@ -58,11 +58,18 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var mapping = mappings.Find(m => m.XenServerPatch.Equals(xenServerPatch)
                                              && m.MasterHost != null && master != null && m.MasterHost.uuid == master.uuid);
 
-            if (mapping != null && mapping.Pool_patch != null)
+            if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
-                var patchRef = mapping.Pool_patch;
+                XenRef<Task> task = null;
 
-                XenRef<Task> task = Pool_patch.async_apply(session, patchRef.opaque_ref, host.opaque_ref);
+                if (mapping.Pool_patch != null)
+                {
+                    task = Pool_patch.async_apply(session, mapping.Pool_patch.opaque_ref, host.opaque_ref);
+                }
+                else
+                {
+                    task = Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref);
+                }
 
                 PollTaskForResultAndDestroy(Connection, ref session, task);
             }
@@ -71,7 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (xenServerPatch != null && master != null)
                     log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
 
-                throw new Exception("Pool_patch not found.");
+                throw new Exception("Pool_patch or Pool_update not found.");
             }
         }
     }

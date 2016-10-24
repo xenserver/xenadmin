@@ -2508,6 +2508,9 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
     <value>Checking partition layout</value>
   </data>
+  <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
+    <value>Checking reboots required</value>
+  </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>Checking server side status</value>
   </data>
@@ -6164,6 +6167,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOST_MENU_UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error</value>
   </data>
+  <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Live patching status</value>
+  </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Add Network...</value>
   </data>
@@ -9663,9 +9669,6 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>Duplicate MAC address</value>
   </data>
-  <data name="PROBLEM_NOPROBLEM_DESCRIPTION" xml:space="preserve">
-    <value>No problems were encountered</value>
-  </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
   </data>
@@ -11610,6 +11613,12 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: There is not enough memory available on other servers to migrate all the VMs off this server.</value>
   </data>
+  <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED" xml:space="preserve">
+    <value>{0}: This server does not need to be rebooted.</value>
+  </data>
+  <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH" xml:space="preserve">
+    <value>{0}: This server does not need to be rebooted as live patching is used.</value>
+  </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
     <value>The VM {0} does not have [XenServer product] Tools installed.</value>
   </data>
@@ -11648,6 +11657,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>Rebooting {0} ... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
+    <value>{0}: This server needs to be rebooted after the update is applied.</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>Deleting update installation file {0} from {1}... </value>

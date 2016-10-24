@@ -222,10 +222,13 @@
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
+    <Compile Include="Diagnostics\Problems\Information.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
@@ -917,6 +920,7 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.Designer.cs">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyPoolUpdatePlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyXenServerPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\IAvoidRestartCapable.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrechecksOnMultipleHostsAction.cs" />
@@ -3869,7 +3873,6 @@
     <Compile Include="Plugins\Placeholders.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\WrongServerVersion.cs" />
-    <Compile Include="Diagnostics\Problems\NoProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolProblem.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\SRProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\VMProblem.cs" />

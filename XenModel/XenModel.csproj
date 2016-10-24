@@ -104,6 +104,7 @@
     <Compile Include="Actions\Pool_Patch\CleanupDiskSpaceAction.cs" />
     <Compile Include="Actions\Pool_Patch\GetDiskSpaceRequirementsAction.cs" />
     <Compile Include="Actions\Pool_Patch\PoolPatchCleanAction.cs" />
+    <Compile Include="Actions\Pool_update\ApplyUpdateAction.cs" />
     <Compile Include="Actions\PVS\ConfigurePvsSiteAction.cs" />
     <Compile Include="Actions\PVS\DeletePvsSiteAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyCreateAction.cs" />
@@ -328,6 +329,7 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\Pool_update.cs" />
     <Compile Include="XenAPI-Extensions\pvs_proxy_status.cs" />
     <Compile Include="XenAPI-Extensions\PVS_site.cs" />
     <Compile Include="XenAPI-Extensions\PVS_proxy.cs" />
@@ -351,6 +353,7 @@
     <Compile Include="XenAPI\GPU_group.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
+    <Compile Include="XenAPI\livepatch_status.cs" />
     <Compile Include="XenAPI\LVHD.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -359,6 +362,7 @@
     <Compile Include="XenAPI\PGPU.cs" />
     <Compile Include="XenAPI\pgpu_dom0_access.cs" />
     <Compile Include="XenAPI\pool_allowed_operations.cs" />
+    <Compile Include="XenAPI\Pool_update.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
     <Compile Include="XenAPI\PVS_cache_storage.cs" />
     <Compile Include="XenAPI\PVS_proxy.cs" />
@@ -366,6 +370,7 @@
     <Compile Include="XenAPI\PVS_server.cs" />
     <Compile Include="XenAPI\PVS_site.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
+    <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />
     <Compile Include="XenAPI\vgpu_type_implementation.cs" />

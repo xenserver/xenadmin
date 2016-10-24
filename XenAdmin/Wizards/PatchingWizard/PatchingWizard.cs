@@ -188,6 +188,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
                 }
+                PatchingWizard_PrecheckPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
+                PatchingWizard_PatchingPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
+                PatchingWizard_ModePage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PatchingPage.SuppPackVdis = PatchingWizard_UploadPage.SuppPackVdis;
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
@@ -296,7 +299,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             base.OnCancel();
 
-            List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions, GetRemoveVdiActions);
+            List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions, GetRemoveVdiActions, GetCleanUpPoolUpdateActions);
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 
@@ -312,6 +315,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RemoveTemporaryVdis()
         {
             List<AsyncAction> subActions = GetRemoveVdiActions();
+            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+        }
+
+        private void CleanUpPoolUpdates()
+        {
+            var subActions = GetCleanUpPoolUpdateActions();
             RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
         }
 
@@ -360,17 +369,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (PatchingWizard_UploadPage.AllCreatedSuppPackVdis != null)
                 RemoveTemporaryVdis();
 
+            CleanUpPoolUpdates();
+
             RemoveDownloadedPatches();
 
             base.FinishWizard();
         }
-    }
 
-    public enum LivePatchCode
-    {
-        UNKNOWN,
-        PATCH_PRECHECK_LIVEPATCH_COMPLETE,       // An applicable live patch exists for every required component
-        PATCH_PRECHECK_LIVEPATCH_INCOMPLETE,     // An applicable live patch exists but it is not sufficient
-        PATCH_PRECHECK_LIVEPATCH_NOT_APPLICABLE, // There is no applicable live patch
+        private List<AsyncAction> GetCleanUpPoolUpdateActions()
+        {
+            if (PatchingWizard_UploadPage.AllIntroducedPoolUpdates != null && PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Count > 0)
+            {
+                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Select(pu => GetCleanUpPoolUpdateAction(pu)).ToList();
+            }
+
+            return new List<AsyncAction>();
+        }
+
+        private AsyncAction GetCleanUpPoolUpdateAction(Pool_update poolUpdate)
+        {
+            return
+                new DelegatedAsyncAction(poolUpdate.Connection, Messages.REMOVE_PATCH, "", "", session => Pool_update.pool_clean(session, poolUpdate.opaque_ref));
+        }
     }
 }

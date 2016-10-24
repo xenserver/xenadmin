@@ -47,9 +47,9 @@ namespace XenAdmin.Diagnostics.Checks
     public class AssertCanEvacuateCheck : Check
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
+        private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
 
-        public AssertCanEvacuateCheck(Host host, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+        public AssertCanEvacuateCheck(Host host, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             this.livePatchCodesByHost = livePatchCodesByHost;
@@ -63,7 +63,7 @@ namespace XenAdmin.Diagnostics.Checks
         protected List<Problem> CheckHost()
         {
             // when livepatching is available, no restart is expected, so this check is not needed
-            if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) && livePatchCodesByHost[Host.uuid] == LivePatchCode.PATCH_PRECHECK_LIVEPATCH_COMPLETE)
+            if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) && livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete)
             {
                 log.DebugFormat("Check not needed for host {0}, because pool_patch.Precheck() returned PATCH_PRECHECK_LIVEPATCH_COMPLETE for update.", Host);
                 return new List<Problem>();

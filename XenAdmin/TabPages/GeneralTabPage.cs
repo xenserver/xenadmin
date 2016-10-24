@@ -287,6 +287,7 @@ namespace XenAdmin.TabPages
             else if (xenObject is Pool)
             {
                 xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Pool_patch>(Pool_patch_BatchCollectionChanged);
+                xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Pool_update>(Pool_update_BatchCollectionChanged);
             }
         }
 
@@ -329,10 +330,16 @@ namespace XenAdmin.TabPages
             else if (xenObject is Pool)
             {
                 xenObject.Connection.Cache.RegisterBatchCollectionChanged<Pool_patch>(Pool_patch_BatchCollectionChanged);
+                xenObject.Connection.Cache.RegisterBatchCollectionChanged<Pool_update>(Pool_update_BatchCollectionChanged);
             }
         }
 
         void Pool_patch_BatchCollectionChanged(object sender, EventArgs e)
+        {
+            Program.BeginInvoke(this, BuildList);
+        }
+
+        void Pool_update_BatchCollectionChanged(object sender, EventArgs e)
         {
             Program.BeginInvoke(this, BuildList);
         }
@@ -664,10 +671,12 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionUpdates;
             List<KeyValuePair<String, String>> messages;
 
-            if (Helpers.ElyOrGreater(host))
+            bool elyOrGreater = Helpers.ElyOrGreater(host);
+
+            if (elyOrGreater)
             {
-                // As of Ely we use host.patches_requiring_reboot to generate the list of reboot required messages
-                messages = CheckHostPatchesRequiringReboot(host);
+                // As of Ely we use host.updates_requiring_reboot to generate the list of reboot required messages
+                messages = CheckHostUpdatesRequiringReboot(host);
             }
             else
             {
@@ -694,11 +703,14 @@ namespace XenAdmin.TabPages
                 s.AddEntry(FriendlyName("Pool_patch.required-updates"), recommendedPatches);
             }
 
-            // add supplemental packs
-            var suppPacks = hostInstalledSuppPacks(host);
-            if (!string.IsNullOrEmpty(suppPacks))
+            if (!elyOrGreater)
             {
-                s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+                // add supplemental packs
+                var suppPacks = hostInstalledSuppPacks(host);
+                if (!string.IsNullOrEmpty(suppPacks))
+                {
+                    s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+                }
             }
         }
 
@@ -1661,8 +1673,16 @@ namespace XenAdmin.TabPages
         {
             List<string> result = new List<string>();
 
-            foreach (Pool_patch patch in host.AppliedPatches())
-                result.Add(patch.Name);
+            if (Helpers.ElyOrGreater(host))
+            {
+                foreach (var update in host.AppliedUpdates())
+                    result.Add(update.Name);
+            }
+            else
+            {
+                foreach (Pool_patch patch in host.AppliedPatches())
+                    result.Add(patch.Name);
+            }
 
             result.Sort(StringUtility.NaturalCompare);
 
@@ -1704,18 +1724,26 @@ namespace XenAdmin.TabPages
 
         private string poolAppliedPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
+            return 
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count == xenObject.Connection.Cache.HostCount)
+                : poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
         }
 
         private string poolPartialPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count > 0 &&
-                                            patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
+            return
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count > 0 && update.AppliedOnHosts.Count != xenObject.Connection.Cache.HostCount)
+                : poolPatchString(patch => patch.host_patches.Count > 0 && patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
         }
 
         private string poolNotAppliedPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count == 0);
+            return 
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count == 0)
+                : poolPatchString(patch => patch.host_patches.Count == 0);
         }
 
         private string poolPatchString(Predicate<Pool_patch> predicate)
@@ -1727,6 +1755,21 @@ namespace XenAdmin.TabPages
             foreach (Pool_patch patch in patches)
                 if (predicate(patch))
                     output.Add(patch.name_label);
+
+            output.Sort(StringUtility.NaturalCompare);
+
+            return String.Join(",", output.ToArray());
+        }
+
+        private string poolUpdateString(Predicate<Pool_update> predicate)
+        {
+            Pool_update[] updates = xenObject.Connection.Cache.Pool_updates;
+
+            List<String> output = new List<String>();
+
+            foreach (var update in updates)
+                if (predicate(update))
+                    output.Add(update.name_label);
 
             output.Sort(StringUtility.NaturalCompare);
 
@@ -1746,10 +1789,10 @@ namespace XenAdmin.TabPages
 
             if (Helpers.ElyOrGreater(pool.Connection))
             {
-                // As of Ely we use CheckHostPatchesRequiringReboot to get reboot messages for a host
+                // As of Ely we use CheckHostUpdatesRequiringReboot to get reboot messages for a host
                 foreach (Host host in xenObject.Connection.Cache.Hosts)
                 {
-                    warnings.AddRange(CheckHostPatchesRequiringReboot(host));
+                    warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
                 }
             }
             else
@@ -1798,30 +1841,35 @@ namespace XenAdmin.TabPages
         }
 
         /// <summary>
-        /// Creates a list of warnings for patches that require the host to be rebooted
+        /// Creates a list of warnings for updates that require the host to be rebooted
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        private List<KeyValuePair<String, String>> CheckHostPatchesRequiringReboot(Host host)
+        private List<KeyValuePair<String, String>> CheckHostUpdatesRequiringReboot(Host host)
         {
             var warnings = new List<KeyValuePair<String, String>>();
-            var patchRefs = host.patches_requiring_reboot;
-            foreach (var patchRef in patchRefs)
+            var updateRefs = host.updates_requiring_reboot;
+            foreach (var updateRef in updateRefs)
             {
-                var patch = host.Connection.Resolve(patchRef);
-                warnings.Add(CreateWarningRow(host, patch));
+                var update = host.Connection.Resolve(updateRef);
+                warnings.Add(CreateWarningRow(host, update));
             }
 
             return warnings;
         }
 
-
-
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_patch patch)
         {
-            //TODO: Could we come up with a better key string than foopatch on blahhost?
             var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, patch.Name, host.Name);
             var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name);
+
+            return new KeyValuePair<string, string>(key, value);
+        }
+
+        private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
+        {
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, update.Name, host.Name);
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, update.Name);
 
             return new KeyValuePair<string, string>(key, value);
         }

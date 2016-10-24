@@ -29,41 +29,28 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using XenAdmin.Actions;
-using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Properties;
+using XenAPI;
 
 
-namespace XenAdmin.Diagnostics.Problems
+namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class NoProblem : Problem
+    public class ApplyPoolUpdatePlanAction : PlanActionWithSession
     {
-        public NoProblem(Check check)
-            : base(check)
+        private readonly Host host;
+        private readonly Pool_update poolUpdate;
+
+        public ApplyPoolUpdatePlanAction(Host host, Pool_update patch)
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name, host.Name))
         {
-            
+            this.host = host;
+            this.poolUpdate = patch;
         }
 
-        public override string Title
+        protected override void RunWithSession(ref Session session)
         {
-            get { return string.Empty; }
+            XenRef<Task> task = Pool_update.async_apply(session, poolUpdate.opaque_ref, host.opaque_ref);
+
+            PollTaskForResultAndDestroy(Connection, ref session, task);
         }
-
-        public override string Description
-        {
-            get { return Messages.PROBLEM_NOPROBLEM_DESCRIPTION; }
-        }
-
-    
-
-        public override string HelpMessage
-        {
-            get { return string.Empty; }
-        }
-
-
     }
 }

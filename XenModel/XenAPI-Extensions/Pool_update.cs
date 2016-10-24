@@ -29,26 +29,50 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
-using XenAdmin.Diagnostics.Checks;
+using System;
+using System.Collections.Generic;
+using XenAdmin;
+using XenAdmin.Core;
+using XenAdmin.Network;
+using System.Linq;
 
-namespace XenAdmin.Diagnostics.Problems
+namespace XenAPI
 {
-    public abstract class Warning : Problem
+    public partial class Pool_update : IComparable<Pool_update>
     {
-        protected Warning(Check check) 
-            : base(check)
+        public override string Name
         {
+            get { return name_label; }
         }
 
-        public override string HelpMessage
+        public override string Description
         {
-            get { return null; }
+            get { return name_description; }
         }
 
-        public override Image Image
+        public bool AppliedOn(Host host)
         {
-            get { return Images.GetImage16For(Icons.Warning); }
+            var hostUpdates = host.Connection.ResolveAll(host.updates);
+
+            if (hostUpdates != null)
+            {
+                foreach (var hostUpdate in hostUpdates)
+                {
+                    if (hostUpdate != null && string.Equals(hostUpdate.uuid, uuid, StringComparison.OrdinalIgnoreCase))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        public List<Host> AppliedOnHosts
+        {
+            get 
+            {
+                return
+                    this.Connection.Cache.Hosts.Where(h => this.AppliedOn(h)).ToList();
+            }
         }
     }
 }

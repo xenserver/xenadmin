@@ -170,6 +170,12 @@ namespace XenAdmin
             ImageList16.Images.Add("StoppedDC_16.png", Properties.Resources.StoppedDC_16);
             ImageList16.Images.Add("PausedDC_16.png", Properties.Resources.PausedDC_16);
 
+            #region Status Icons
+            ImageList16.Images.Add("000_Tick_h32bit_16", Properties.Resources._000_Tick_h32bit_16); //Ok
+            ImageList16.Images.Add("000_Info3_h32bit_16.png", Properties.Resources._000_Info3_h32bit_16); //Info
+            ImageList16.Images.Add("000_Alert2_h32bit_16.png", Properties.Resources._000_Alert2_h32bit_16); //Warning
+            ImageList16.Images.Add("000_Abort_h32bit_16.png", Properties.Resources._000_Abort_h32bit_16); //Error
+            #endregion
 
             System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");

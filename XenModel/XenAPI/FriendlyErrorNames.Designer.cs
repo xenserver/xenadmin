@@ -4989,6 +4989,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You attempted an operation on a VM which lacks the feature..
+        /// </summary>
+        public static string VM_LACKS_FEATURE {
+            get {
+                return ResourceManager.GetString("VM_LACKS_FEATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it..
         /// </summary>
         public static string VM_LACKS_FEATURE_SHUTDOWN {

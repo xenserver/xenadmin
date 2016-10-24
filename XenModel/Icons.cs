@@ -157,8 +157,15 @@ namespace XenAdmin
 
         DCRunning,
         DCStopped,
-        DCPaused
+        DCPaused,
 
+        #endregion
+
+        #region Status Icons
+        Ok,
+        Info,
+        Warning,
+        Error
         #endregion
     }
 }

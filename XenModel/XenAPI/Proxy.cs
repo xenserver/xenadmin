@@ -1088,6 +1088,10 @@ namespace XenAPI
         Response<string []>
         pool_patch_get_after_apply_guidance(string session, string _pool_patch);
 
+        [XmlRpcMethod("pool_patch.get_pool_update")]
+        Response<string>
+        pool_patch_get_pool_update(string session, string _pool_patch);
+
         [XmlRpcMethod("pool_patch.get_other_config")]
         Response<Object>
         pool_patch_get_other_config(string session, string _pool_patch);
@@ -1167,6 +1171,106 @@ namespace XenAPI
         [XmlRpcMethod("pool_patch.get_all_records")]
         Response<Object>
         pool_patch_get_all_records(string session);
+
+        [XmlRpcMethod("pool_update.get_record")]
+        Response<Proxy_Pool_update>
+        pool_update_get_record(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_by_uuid")]
+        Response<string>
+        pool_update_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("pool_update.get_by_name_label")]
+        Response<string []>
+        pool_update_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("pool_update.get_uuid")]
+        Response<string>
+        pool_update_get_uuid(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_name_label")]
+        Response<string>
+        pool_update_get_name_label(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_name_description")]
+        Response<string>
+        pool_update_get_name_description(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_installation_size")]
+        Response<string>
+        pool_update_get_installation_size(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_key")]
+        Response<string>
+        pool_update_get_key(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_after_apply_guidance")]
+        Response<string []>
+        pool_update_get_after_apply_guidance(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_vdi")]
+        Response<string>
+        pool_update_get_vdi(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_hosts")]
+        Response<string []>
+        pool_update_get_hosts(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.introduce")]
+        Response<string>
+        pool_update_introduce(string session, string _vdi);
+
+        [XmlRpcMethod("Async.pool_update.introduce")]
+        Response<string>
+        async_pool_update_introduce(string session, string _vdi);
+
+        [XmlRpcMethod("pool_update.precheck")]
+        Response<string>
+        pool_update_precheck(string session, string _pool_update, string _host);
+
+        [XmlRpcMethod("Async.pool_update.precheck")]
+        Response<string>
+        async_pool_update_precheck(string session, string _pool_update, string _host);
+
+        [XmlRpcMethod("pool_update.apply")]
+        Response<string>
+        pool_update_apply(string session, string _pool_update, string _host);
+
+        [XmlRpcMethod("Async.pool_update.apply")]
+        Response<string>
+        async_pool_update_apply(string session, string _pool_update, string _host);
+
+        [XmlRpcMethod("pool_update.pool_apply")]
+        Response<string>
+        pool_update_pool_apply(string session, string _pool_update);
+
+        [XmlRpcMethod("Async.pool_update.pool_apply")]
+        Response<string>
+        async_pool_update_pool_apply(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.pool_clean")]
+        Response<string>
+        pool_update_pool_clean(string session, string _pool_update);
+
+        [XmlRpcMethod("Async.pool_update.pool_clean")]
+        Response<string>
+        async_pool_update_pool_clean(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.destroy")]
+        Response<string>
+        pool_update_destroy(string session, string _pool_update);
+
+        [XmlRpcMethod("Async.pool_update.destroy")]
+        Response<string>
+        async_pool_update_destroy(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_all")]
+        Response<string []>
+        pool_update_get_all(string session);
+
+        [XmlRpcMethod("pool_update.get_all_records")]
+        Response<Object>
+        pool_update_get_all_records(string session);
 
         [XmlRpcMethod("VM.get_record")]
         Response<Proxy_VM>
@@ -2272,6 +2376,18 @@ namespace XenAPI
         Response<Object>
         vm_metrics_get_other_config(string session, string _vm_metrics);
 
+        [XmlRpcMethod("VM_metrics.get_hvm")]
+        Response<bool>
+        vm_metrics_get_hvm(string session, string _vm_metrics);
+
+        [XmlRpcMethod("VM_metrics.get_nested_virt")]
+        Response<bool>
+        vm_metrics_get_nested_virt(string session, string _vm_metrics);
+
+        [XmlRpcMethod("VM_metrics.get_nomigrate")]
+        Response<bool>
+        vm_metrics_get_nomigrate(string session, string _vm_metrics);
+
         [XmlRpcMethod("VM_metrics.set_other_config")]
         Response<string>
         vm_metrics_set_other_config(string session, string _vm_metrics, Object _other_config);
@@ -2868,6 +2984,10 @@ namespace XenAPI
         Response<string []>
         host_get_patches(string session, string _host);
 
+        [XmlRpcMethod("host.get_updates")]
+        Response<string []>
+        host_get_updates(string session, string _host);
+
         [XmlRpcMethod("host.get_PBDs")]
         Response<string []>
         host_get_pbds(string session, string _host);
@@ -2980,9 +3100,9 @@ namespace XenAPI
         Response<string>
         host_get_control_domain(string session, string _host);
 
-        [XmlRpcMethod("host.get_patches_requiring_reboot")]
+        [XmlRpcMethod("host.get_updates_requiring_reboot")]
         Response<string []>
-        host_get_patches_requiring_reboot(string session, string _host);
+        host_get_updates_requiring_reboot(string session, string _host);
 
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
@@ -3351,10 +3471,6 @@ namespace XenAPI
         [XmlRpcMethod("host.call_extension")]
         Response<string>
         host_call_extension(string session, string _host, string _call);
-
-        [XmlRpcMethod("Async.host.call_extension")]
-        Response<string>
-        async_host_call_extension(string session, string _host, string _call);
 
         [XmlRpcMethod("host.get_servertime")]
         Response<DateTime>
@@ -4095,6 +4211,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VIF.unplug_force")]
         Response<string>
         async_vif_unplug_force(string session, string _vif);
+
+        [XmlRpcMethod("VIF.move")]
+        Response<string>
+        vif_move(string session, string _vif, string _network);
+
+        [XmlRpcMethod("Async.VIF.move")]
+        Response<string>
+        async_vif_move(string session, string _vif, string _network);
 
         [XmlRpcMethod("VIF.set_locking_mode")]
         Response<string>
@@ -5202,11 +5326,11 @@ namespace XenAPI
 
         [XmlRpcMethod("LVHD.enable_thin_provisioning")]
         Response<string>
-        lvhd_enable_thin_provisioning(string session, string _sr, string _initial_allocation, string _allocation_quantum);
+        lvhd_enable_thin_provisioning(string session, string _host, string _sr, string _initial_allocation, string _allocation_quantum);
 
         [XmlRpcMethod("Async.LVHD.enable_thin_provisioning")]
         Response<string>
-        async_lvhd_enable_thin_provisioning(string session, string _sr, string _initial_allocation, string _allocation_quantum);
+        async_lvhd_enable_thin_provisioning(string session, string _host, string _sr, string _initial_allocation, string _allocation_quantum);
 
         [XmlRpcMethod("LVHD.get_all_records")]
         Response<Object>
@@ -7261,7 +7385,21 @@ namespace XenAPI
         public bool pool_applied;
         public string [] host_patches;
         public string [] after_apply_guidance;
+        public string pool_update;
         public Object other_config;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Pool_update
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public string installation_size;
+        public string key;
+        public string [] after_apply_guidance;
+        public string vdi;
+        public string [] hosts;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7362,6 +7500,9 @@ namespace XenAPI
         public DateTime install_time;
         public DateTime last_updated;
         public Object other_config;
+        public bool hvm;
+        public bool nested_virt;
+        public bool nomigrate;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7453,6 +7594,7 @@ namespace XenAPI
         public string crash_dump_sr;
         public string [] crashdumps;
         public string [] patches;
+        public string [] updates;
         public string [] PBDs;
         public string [] host_CPUs;
         public Object cpu_info;
@@ -7481,7 +7623,7 @@ namespace XenAPI
         public string display;
         public string [] virtual_hardware_platform_versions;
         public string control_domain;
-        public string [] patches_requiring_reboot;
+        public string [] updates_requiring_reboot;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

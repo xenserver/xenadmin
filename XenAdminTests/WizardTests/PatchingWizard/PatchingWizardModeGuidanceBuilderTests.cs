@@ -79,9 +79,8 @@ namespace XenAdminTests.WizardTests
             
             host.Setup(h => h.patches).Returns(new List<XenRef<Host_patch>>());
             patch.Setup(p => p.after_apply_guidance).Returns(new List<after_apply_guidance> { guidance });
-
             bool outBool;
-            msg = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(new List<Host> { host.Object }, patch.Object, new Dictionary<string,LivePatchCode>(), out outBool);
+            msg = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(new List<Host> { host.Object }, patch.Object, out outBool);
             return patch;
         }
     }

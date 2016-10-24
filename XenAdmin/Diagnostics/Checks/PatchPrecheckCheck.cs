@@ -47,24 +47,36 @@ namespace XenAdmin.Diagnostics.Checks
     class PatchPrecheckCheck : Check
     {
         private readonly Pool_patch _patch;
+        private readonly Pool_update _update;
 
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
-        private readonly Dictionary<string, LivePatchCode> livePatchCodesByHost;
+        private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
 
         public PatchPrecheckCheck(Host host, Pool_patch patch)
             : this(host, patch, null)
         { 
         }
 
-        public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, LivePatchCode> livePatchCodesByHost)
+        public PatchPrecheckCheck(Host host, Pool_update update)
+            : this(host, update, null)
+        {
+        }
+
+        public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             _patch = patch;
             this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
+        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost)
+            : base(host)
+        {
+            _update = update;
+            this.livePatchCodesByHost = livePatchCodesByHost;
+        }
 
         protected override Problem RunCheck()
         {
@@ -79,22 +91,32 @@ namespace XenAdmin.Diagnostics.Checks
             //
             // Check patch isn't already applied here
             //
-            if (Patch.AppliedOn(Host) != DateTime.MaxValue)
+            if ((Patch != null && Patch.AppliedOn(Host) != DateTime.MaxValue)
+                || (Update != null && Update.AppliedOn(Host)))
             {
                 return new PatchAlreadyApplied(this, Host);
-
             }
 
             try
             {
-                var result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
-                var livePatchCode = TryToFindLivePatchCode(result);
+                if (Patch != null)
+                {
+                    string result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                    log.DebugFormat("Pool_patch.precheck returned: '{0}'", result);
 
-                if (livePatchCodesByHost != null)
-                    livePatchCodesByHost[Host.uuid] = livePatchCode;
+                    return FindProblem(result);
+                }
+                else
+                {
+                    var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
 
-                return FindProblem(result);
+                    log.DebugFormat("Pool_update.precheck returned livepatch_status: '{0}'", livepatchStatus);
 
+                    if (livePatchCodesByHost != null)
+                        livePatchCodesByHost[Host.uuid] = livepatchStatus;
+
+                    return null;
+                }
             }
             catch (Failure f)
             {
@@ -113,38 +135,6 @@ namespace XenAdmin.Diagnostics.Checks
             }
         }
 
-        private LivePatchCode TryToFindLivePatchCode(string result)
-        {
-            LivePatchCode livePatchCodeResult = LivePatchCode.UNKNOWN;
-
-            if (Helpers.ElyOrGreater(Host.Connection))
-            {
-                result = result.Replace("\n", "");
-
-                if (LivePatchResponseRegex.IsMatch(result))
-                {
-                    var m = LivePatchResponseRegex.Match(result);
-                    
-                    var doc = new XmlDocument();
-                    doc.LoadXml(m.ToString());
-                    var firstNode = doc.FirstChild;
-
-                    if (firstNode == null)
-                        return LivePatchCode.UNKNOWN;
-
-                    var livePatchCodeNode = firstNode.Attributes["code"];
-
-                    if (livePatchCodeNode == null)
-                        return LivePatchCode.UNKNOWN;
-
-                    if (Enum.TryParse(livePatchCodeNode.Value, out livePatchCodeResult))
-                        return livePatchCodeResult;
-                }
-            }
-
-            return LivePatchCode.UNKNOWN;
-        }
-
         public override string Description
         {
             get { return Messages.SERVER_SIDE_CHECK_DESCRIPTION; }
@@ -153,6 +143,11 @@ namespace XenAdmin.Diagnostics.Checks
         public Pool_patch Patch
         {
             get { return _patch; }
+        }
+
+        public Pool_update Update
+        {
+            get { return _update; }
         }
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

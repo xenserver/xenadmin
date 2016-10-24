@@ -6913,6 +6913,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking reboots required.
+        /// </summary>
+        public static string CHECKING_SERVER_NEEDS_REBOOT {
+            get {
+                return ResourceManager.GetString("CHECKING_SERVER_NEEDS_REBOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking server side status.
         /// </summary>
         public static string CHECKING_SERVER_SIDE_STATUS {
@@ -17517,6 +17526,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live patching status.
+        /// </summary>
+        public static string HOST_NEEDS_REBOOT_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("HOST_NEEDS_REBOOT_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Add Network....
         /// </summary>
         public static string HOST_NETWORK_TAB_ADD_BUTTON_LABEL {
@@ -27759,15 +27777,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No problems were encountered.
-        /// </summary>
-        public static string PROBLEM_NOPROBLEM_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("PROBLEM_NOPROBLEM_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pool &apos;{0}&apos;.
         /// </summary>
         public static string PROBLEM_POOLPROBLEM_TITLE {
@@ -33558,6 +33567,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: This server does not need to be rebooted..
+        /// </summary>
+        public static string UPDATES_WIZARD_NO_REBOOT_NEEDED {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NO_REBOOT_NEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server does not need to be rebooted as live patching is used..
+        /// </summary>
+        public static string UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM {0} does not have [XenServer product] Tools installed..
         /// </summary>
         public static string UPDATES_WIZARD_NO_TOOLS {
@@ -33680,6 +33707,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_REBOOT {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_REBOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server needs to be rebooted after the update is applied..
+        /// </summary>
+        public static string UPDATES_WIZARD_REBOOT_NEEDED {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REBOOT_NEEDED", resourceCulture);
             }
         }
         
