@@ -131,6 +131,7 @@ namespace XenAdmin
             ImageList16.Images.Add("suse_16x.png", Properties.Resources.suse_16x);
             ImageList16.Images.Add("ubuntu_16x.png", Properties.Resources.ubuntu_16x);
             ImageList16.Images.Add("scilinux_16x.png", Properties.Resources.scilinux_16x);
+            ImageList16.Images.Add("neokylin_16x.png", Properties.Resources.neokylin_16x);
             ImageList16.Images.Add("windows_h32bit_16.png", Properties.Resources.windows_h32bit_16);
             ImageList16.Images.Add("coreos-globe-icon.png", Properties.Resources.coreos_globe_icon);
 
