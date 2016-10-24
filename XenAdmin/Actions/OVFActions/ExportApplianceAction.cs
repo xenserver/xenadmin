@@ -90,8 +90,10 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
+            base.Run();
+		    
 			var session = Connection.Session;
+
 			var url = session.Url;
 			Uri uri = new Uri(url);
 

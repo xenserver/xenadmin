@@ -70,7 +70,8 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
+		    base.Run();
+
 			Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
 
 			string systemid = m_vmMappings.Keys.ElementAt(0);

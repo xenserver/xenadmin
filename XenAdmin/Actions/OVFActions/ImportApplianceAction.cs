@@ -76,7 +76,8 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
+		    base.Run();
+
 			if (m_verifySignature)
 			{
 				Description = Messages.VERIFYING_SIGNATURE;
