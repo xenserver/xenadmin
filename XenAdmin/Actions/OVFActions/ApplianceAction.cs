@@ -46,6 +46,8 @@ namespace XenAdmin.Actions.OVFActions
 		protected string m_tvmGateway;
 		protected XenOvfTransportBase m_transportAction;
 
+        private const int SLEEP_TIME = 900;
+
 		/// <summary>
 		/// RBAC dependencies needed to import appliance/export an appliance/import disk image.
 		/// </summary>
@@ -101,17 +103,15 @@ namespace XenAdmin.Actions.OVFActions
 
 	    protected void InitialiseTicker()
 	    {
-	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion(this));
+	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion());
 	    }
 
-	    private void TickUntilCompletion(ApplianceAction action)
+	    private void TickUntilCompletion()
 	    {
-	        int sleepTime = 900;
-
-	        while (!action.IsCompleted)
+	        while (!IsCompleted)
 	        {
-	            action.OnChanged();
-                Thread.Sleep(sleepTime);
+	            OnChanged();
+                Thread.Sleep(SLEEP_TIME);
 	        }
 	    }
 
