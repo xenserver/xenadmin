@@ -82,6 +82,12 @@ namespace XenAdmin.Actions.OVFActions
 				Host = Helpers.GetMaster(connection);
 		}
 
+	    protected override void Run()
+	    {
+	        SafeToExit = false; 
+            InitialiseTicker();
+	    }
+
 		protected void UpdateHandler(XenOvfTranportEventArgs e)
 		{
 			if (!string.IsNullOrEmpty(e.Message))
@@ -101,16 +107,16 @@ namespace XenAdmin.Actions.OVFActions
 				m_transportAction.Cancel = true;
 		}
 
-	    protected void InitialiseTicker()
+	    private void InitialiseTicker()
 	    {
-	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion());
+	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion(this));
 	    }
 
-	    private void TickUntilCompletion()
+	    private static  void TickUntilCompletion(ApplianceAction action)
 	    {
-	        while (!IsCompleted)
+	        while (action != null && !action.IsCompleted)
 	        {
-	            OnChanged();
+	            action.OnChanged();
                 Thread.Sleep(SLEEP_TIME);
 	        }
 	    }

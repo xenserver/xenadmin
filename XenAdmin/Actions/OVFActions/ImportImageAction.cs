@@ -70,10 +70,9 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
-			Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
+		    base.Run();
 
-            InitialiseTicker();
+			Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
 
 			string systemid = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);

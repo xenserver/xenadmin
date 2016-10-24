@@ -76,9 +76,7 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
-            
-            InitialiseTicker();
+		    base.Run();
 
 			if (m_verifySignature)
 			{
