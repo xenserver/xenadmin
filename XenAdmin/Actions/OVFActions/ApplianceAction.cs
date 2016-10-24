@@ -47,7 +47,7 @@ namespace XenAdmin.Actions.OVFActions
 		protected XenOvfTransportBase m_transportAction;
 
         private const int SLEEP_TIME = 900;
-        private const int MAX_ITERATIONS = 60 * 60 * 24; // seconds in 24 hours
+        private const int MAX_ITERATIONS = 60 * 60 * 24 / SLEEP_TIME * 1000; //iterations in 24h
 
 		/// <summary>
 		/// RBAC dependencies needed to import appliance/export an appliance/import disk image.
