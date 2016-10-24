@@ -109,14 +109,14 @@ namespace XenAdmin.Actions.OVFActions
 
 	    private void InitialiseTicker()
 	    {
-	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion(this));
+	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion());
 	    }
 
-	    private static  void TickUntilCompletion(ApplianceAction action)
+	    private void TickUntilCompletion()
 	    {
-	        while (action != null && !action.IsCompleted)
+	        while (!IsCompleted)
 	        {
-	            action.OnChanged();
+	            OnChanged();
                 Thread.Sleep(SLEEP_TIME);
 	        }
 	    }
