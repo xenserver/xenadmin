@@ -568,7 +568,7 @@ namespace XenAdmin.SettingsPanels
                 if (network.PIFs.Count == 0)
                     return false;
 
-                PIF pif = network.Connection.Resolve<PIF>(network.PIFs[0]);
+                PIF pif = GetNetworksPIF();
                 PIF selectedPif = NICNameToVirtualPIF((string)HostPNICList.SelectedItem, (long)numUpDownVLAN.Value);
                 return pif != null && Editable(pif) && pif != selectedPif;
             }
