@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using XenAPI;
@@ -190,6 +191,16 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 string itemUuid = Palette.GetUuid(dataSource.name_label, xenObject);
                 dataSourceItems.Add(new DataSourceItem(dataSource, friendlyName, Palette.GetColour(itemUuid), itemUuid, xenObject));
+            }
+
+            // Filter old datasources only if we have their replacement ones
+            Regex io_throughput_rw_regex = new Regex("^io_throughput_(read|write)_([a-f0-9]{8})$"); // old datasources
+            Regex sr_rw_regex = new Regex("^(read|write)_([a-f0-9]{8})$"); // replacement datasources
+
+            if (dataSourceItems.Any(dsi => sr_rw_regex.IsMatch(dsi.DataSource.name_label)))
+            {
+                // Remove any old style data sources
+                dataSourceItems.RemoveAll(dsi => io_throughput_rw_regex.IsMatch(dsi.DataSource.name_label));
             }
 
             return dataSourceItems;

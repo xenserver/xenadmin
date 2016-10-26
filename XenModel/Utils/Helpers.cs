@@ -1145,6 +1145,7 @@ namespace XenAdmin.Core
     	static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
+        static Regex SrReadWriteRegex = new Regex("^((read|write)(_latency)?)_([a-f0-9]{8})$");
         static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_(([a-fA-F0-9]{4}\/)?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
 
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
@@ -1286,6 +1287,16 @@ namespace XenAdmin.Core
                            ? null
                            : FormatFriendly(string.Format("Label-performance.sr_{0}", m.Groups[1].Value),
                                sr.Name.Ellipsise(30));
+            }
+
+            m = SrReadWriteRegex.Match(name);
+            if (m.Success)
+            {
+                SR sr = FindSr(iXenObject, m.Groups[4].Value);
+                return sr == null
+                    ? null
+                    : FormatFriendly(string.Format("Label-performance.sr_rw_{0}", m.Groups[1].Value),
+                        sr.Name.Ellipsise(30));
             }
 
             m = GpuRegex.Match(name);

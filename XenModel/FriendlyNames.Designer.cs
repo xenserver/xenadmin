@@ -2311,6 +2311,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Read Throughput.
+        /// </summary>
+        public static string Label_performance_sr_rw_read {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Read Latency.
+        /// </summary>
+        public static string Label_performance_sr_rw_read_latency {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_read_latency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Write Throughput.
+        /// </summary>
+        public static string Label_performance_sr_rw_write {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_write", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Write Latency.
+        /// </summary>
+        public static string Label_performance_sr_rw_write_latency {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_write_latency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HA Statefile Latency.
         /// </summary>
         public static string Label_performance_statefile_latency {

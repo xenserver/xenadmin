@@ -1904,4 +1904,16 @@
   <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
     <value>PVS Read Caching Status</value>
   </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>'{0}' Read Throughput</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>'{0}' Read Latency</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>'{0}' Write Throughput</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>'{0}' Write Latency</value>
+  </data>
 </root>
