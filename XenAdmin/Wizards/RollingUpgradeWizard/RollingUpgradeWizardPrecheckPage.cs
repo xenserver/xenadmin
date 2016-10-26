@@ -197,12 +197,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 }
             }
 
-            //iSL (StorageLink) check
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGELINK_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
-            foreach (Host host in SelectedServers)
+            //iSL (StorageLink) check - CA-223486: only for pre-Creedence
+            if (SelectedServers.Any(h => !Helpers.CreedenceOrGreater(h)))
             {
-                checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGELINK_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
+                }
             }
 
             //Upgrading to Clearwater and above - license changes warning and deprecations
