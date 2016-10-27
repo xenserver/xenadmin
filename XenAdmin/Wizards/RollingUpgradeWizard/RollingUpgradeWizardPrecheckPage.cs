@@ -204,7 +204,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 checkGroup = checks[checks.Count - 1].Value;
                 foreach (Host host in SelectedServers)
                 {
-                    checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
+                    if(!Helpers.CreedenceOrGreater(host))
+                        checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
                 }
             }
 
@@ -219,7 +220,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     checkGroup = checks[checks.Count - 1].Value;
                     foreach (Host host in SelectedServers)
                     {
-                        checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
+                        if(!Helpers.ClearwaterOrGreater(host))
+                            checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
                     }
                 }
 
