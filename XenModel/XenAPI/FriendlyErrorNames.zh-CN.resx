@@ -207,6 +207,9 @@
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>无法执行还原，因为找不到状态分区</value>
   </data>
+  <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
+    <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
+  </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 为绑定从属设备，不能插入。</value>
   </data>
@@ -558,6 +561,9 @@
   <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
     <value>上载的更新文件无效。</value>
   </data>
+  <data name="INVALID_UPDATE" xml:space="preserve">
+    <value>The uploaded update package is invalid.</value>
+  </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>值“{1}”对于字段“{0}”无效。</value>
   </data>
@@ -629,6 +635,9 @@
   </data>
   <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
     <value>内部错误: 已尝试设置 {0}.{1}:{3}={2}，但映射 {1} 中已存在密钥 {3}。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
+    <value>The dynamic memory range does not satisfy the following constraint.</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>已达到此虚拟机允许使用的最大内存量。</value>
@@ -1589,6 +1598,21 @@
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>所请求的 VM {0} 引导加载程序 {1} 未知</value>
   </data>
+  <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
+    <value>This update has already been applied.</value>
+  </data>
+  <data name="UPDATE_ALREADY_APPLIED_IN_POOL" xml:space="preserve">
+    <value>This update has already been applied to all hosts in the pool.</value>
+  </data>
+  <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>The uploaded update already exists</value>
+  </data>
+  <data name="UPDATE_IS_APPLIED" xml:space="preserve">
+    <value>The specified update has been applied and cannot be destroyed.</value>
+  </data>
+  <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
+    <value>The update cannot be applied for the following host(s).</value>
+  </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>只有本地超级用户才能执行此操作</value>
   </data>
@@ -1768,6 +1792,9 @@
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
+  </data>
+  <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
+    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM 的虚拟硬件平台版本与此主机不兼容。</value>

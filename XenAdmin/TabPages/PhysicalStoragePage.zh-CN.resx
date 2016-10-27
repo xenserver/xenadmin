@@ -147,7 +147,7 @@
     <value>55</value>
   </data>
   <data name="columnHeader5.Text" xml:space="preserve">
-    <value>使用情况</value>
+    <value>使用率</value>
   </data>
   <data name="columnHeader5.Width" type="System.Int32, mscorlib">
     <value>125</value>

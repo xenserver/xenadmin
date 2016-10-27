@@ -1399,7 +1399,7 @@
     <value>0</value>
   </data>
   <data name="DiskAlertCheckBox.Text" xml:space="preserve">
-    <value>生成磁盘使用率警报(&amp;D)</value>
+    <value>生成磁盘使用量警报(&amp;D)</value>
   </data>
   <data name="&gt;&gt;DiskAlertCheckBox.Name" xml:space="preserve">
     <value>DiskAlertCheckBox</value>
@@ -1468,7 +1468,7 @@
     <value>1</value>
   </data>
   <data name="DiskUsagePercentLabel.Text" xml:space="preserve">
-    <value>当磁盘使用率超过(&amp;E):</value>
+    <value>当磁盘使用量超过(&amp;E):</value>
   </data>
   <data name="DiskUsagePercentLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1654,7 +1654,7 @@
     <value>0</value>
   </data>
   <data name="NetAlertCheckBox.Text" xml:space="preserve">
-    <value>生成网络使用率警报(&amp;N)</value>
+    <value>生成网络使用量警报(&amp;N)</value>
   </data>
   <data name="&gt;&gt;NetAlertCheckBox.Name" xml:space="preserve">
     <value>NetAlertCheckBox</value>
@@ -1723,7 +1723,7 @@
     <value>1</value>
   </data>
   <data name="NetUsagePercentLabel.Text" xml:space="preserve">
-    <value>当网络使用率超过(&amp;W):</value>
+    <value>当网络使用量超过(&amp;W):</value>
   </data>
   <data name="NetUsagePercentLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
