@@ -15785,9 +15785,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The server &apos;{0}&apos; needs to be rebooted for update &apos;{1}&apos; to take effect.
         /// </summary>
-        public static string GENERAL_PANEL_UPDATE_WARNING {
+        public static string GENERAL_PANEL_UPDATE_REBOOT_WARNING {
             get {
-                return ResourceManager.GetString("GENERAL_PANEL_UPDATE_WARNING", resourceCulture);
+                return ResourceManager.GetString("GENERAL_PANEL_UPDATE_REBOOT_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toolstack on server &apos;{0}&apos; needs to be restarted for update &apos;{1}&apos; to take effect.
+        /// </summary>
+        public static string GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING {
+            get {
+                return ResourceManager.GetString("GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING", resourceCulture);
             }
         }
         
