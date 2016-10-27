@@ -125,7 +125,8 @@ namespace XenAPI
             string generation_id,
             long hardware_platform_version,
             bool has_vendor_device,
-            bool requires_reboot)
+            bool requires_reboot,
+            string reference_label)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -205,6 +206,7 @@ namespace XenAPI
             this.hardware_platform_version = hardware_platform_version;
             this.has_vendor_device = has_vendor_device;
             this.requires_reboot = requires_reboot;
+            this.reference_label = reference_label;
         }
 
         /// <summary>
@@ -296,6 +298,7 @@ namespace XenAPI
             hardware_platform_version = update.hardware_platform_version;
             has_vendor_device = update.has_vendor_device;
             requires_reboot = update.requires_reboot;
+            reference_label = update.reference_label;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -378,6 +381,7 @@ namespace XenAPI
             hardware_platform_version = proxy.hardware_platform_version == null ? 0 : long.Parse((string)proxy.hardware_platform_version);
             has_vendor_device = (bool)proxy.has_vendor_device;
             requires_reboot = (bool)proxy.requires_reboot;
+            reference_label = proxy.reference_label == null ? null : (string)proxy.reference_label;
         }
 
         public Proxy_VM ToProxy()
@@ -461,6 +465,7 @@ namespace XenAPI
             result_.hardware_platform_version = hardware_platform_version.ToString();
             result_.has_vendor_device = has_vendor_device;
             result_.requires_reboot = requires_reboot;
+            result_.reference_label = (reference_label != null) ? reference_label : "";
             return result_;
         }
 
@@ -548,6 +553,7 @@ namespace XenAPI
             hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
             has_vendor_device = Marshalling.ParseBool(table, "has_vendor_device");
             requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
+            reference_label = Marshalling.ParseString(table, "reference_label");
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -636,7 +642,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._generation_id, other._generation_id) &&
                 Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
                 Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device) &&
-                Helper.AreEqual2(this._requires_reboot, other._requires_reboot);
+                Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
+                Helper.AreEqual2(this._reference_label, other._reference_label);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1759,6 +1766,17 @@ namespace XenAPI
         public static bool get_requires_reboot(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_requires_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
+        /// Get the reference_label field of the given VM.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static string get_reference_label(Session session, string _vm)
+        {
+            return (string)session.proxy.vm_get_reference_label(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
         /// <summary>
@@ -5363,5 +5381,24 @@ namespace XenAPI
             }
         }
         private bool _requires_reboot;
+
+        /// <summary>
+        /// Textual reference to the template used to create a VM. This can be used by clients in need of an immutable reference to the template since the latter's uuid and name_label may change, for example, after a package installation or upgrade.
+        /// First published in .
+        /// </summary>
+        public virtual string reference_label
+        {
+            get { return _reference_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _reference_label))
+                {
+                    _reference_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("reference_label");
+                }
+            }
+        }
+        private string _reference_label;
     }
 }

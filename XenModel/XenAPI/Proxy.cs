@@ -1612,6 +1612,10 @@ namespace XenAPI
         Response<bool>
         vm_get_requires_reboot(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_reference_label")]
+        Response<string>
+        vm_get_reference_label(string session, string _vm);
+
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
         vm_set_name_label(string session, string _vm, string _label);
@@ -7483,6 +7487,7 @@ namespace XenAPI
         public string hardware_platform_version;
         public bool has_vendor_device;
         public bool requires_reboot;
+        public string reference_label;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

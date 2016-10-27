@@ -1820,6 +1820,9 @@ Authorized Roles: {1}</value>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>The operation attempted is not valid for templates</value>
   </data>
+  <data name="VM_IS_USING_NESTED_VIRT" xml:space="preserve">
+    <value>This operation is illegal because the VM is using nested virtualisation.</value>
+  </data>
   <data name="VM_LACKS_FEATURE" xml:space="preserve">
     <value>You attempted an operation on a VM which lacks the feature.</value>
   </data>
