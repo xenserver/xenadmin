@@ -219,13 +219,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var preClearwaterServers = SelectedServers.Where(h => !Helpers.ClearwaterOrGreater(h)).ToList();
             if(preClearwaterServers.Any())
             {
+                var hostsNeedingLicenseCheck = preClearwaterServers.Where(HostNeedsLicenseCheck).ToList();
+                if (hostsNeedingLicenseCheck.Any())
                 {
-                    checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_LICENSING_STATUS, new List<Check>()));
+                    checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_LICENSING_STATUS,
+                        new List<Check>()));
                     checkGroup = checks[checks.Count - 1].Value;
-                    foreach (Host host in preClearwaterServers)
+                    foreach (Host host in hostsNeedingLicenseCheck)
                     {
-                        if(HostNeedsLicenseCheck(host))
-                            checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
+                        checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
                     }
                 }
 
