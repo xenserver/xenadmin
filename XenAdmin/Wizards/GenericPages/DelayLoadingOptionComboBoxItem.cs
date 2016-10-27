@@ -59,11 +59,6 @@ namespace XenAdmin.Wizards.GenericPages
         /// Creates a new class instance and starts a thread to load data
         /// </summary>
         /// <param name="xenObject"></param>
-        public DelayLoadingOptionComboBoxItem(IXenObject xenObject)
-            : this(xenObject, new List<ReasoningFilter>())
-        {
-        }
-
         public DelayLoadingOptionComboBoxItem(IXenObject xenObject, List<ReasoningFilter> filters)
         {
             this.xenObject = xenObject;

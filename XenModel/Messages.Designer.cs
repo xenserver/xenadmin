@@ -8817,6 +8817,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to incompatible hardware platform version.
+        /// </summary>
+        public static string CPM_FAILURE_REASON_HARDWARE_PLATFORM {
+            get {
+                return ResourceManager.GetString("CPM_FAILURE_REASON_HARDWARE_PLATFORM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to incompatible version numbers.
         /// </summary>
         public static string CPM_FAILURE_REASON_VERSION {
@@ -18506,6 +18515,24 @@ namespace XenAdmin {
         public static string IMPORT_VM_VIFS {
             get {
                 return ResourceManager.GetString("IMPORT_VM_VIFS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some or all of the VMs you are importing are able to receive updates from Windows Update. The selected location does not support this virtualization state. If you continue with the import, your VMs may not be fully, if at all, functional..
+        /// </summary>
+        public static string IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_MANY {
+            get {
+                return ResourceManager.GetString("IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM you are importing is able to receive updates from Windows Update. The selected location does not support this virtualization state. If you continue with the import, your VM may not be fully, if at all, functional..
+        /// </summary>
+        public static string IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_ONE {
+            get {
+                return ResourceManager.GetString("IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_ONE", resourceCulture);
             }
         }
         
