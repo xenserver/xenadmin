@@ -2512,6 +2512,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
     <value>パーティション レイアウトをチェックしています</value>
   </data>
+  <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
+    <value>Checking reboots required</value>
+  </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>サーバー側の状態のチェック</value>
   </data>
@@ -6169,6 +6172,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOST_MENU_UNKNOWN_ERROR" xml:space="preserve">
     <value>不明なエラー</value>
   </data>
+  <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Live patching status</value>
+  </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>ネットワークの追加(&amp;A)...</value>
   </data>
@@ -8725,6 +8731,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NEW_VM_WIZARD_NO_SR_OR_SRS_FULL" xml:space="preserve">
     <value>ストレージ リポジトリが見つからないか、すべてのストレージがいっぱいです。</value>
   </data>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
+    <value>NeoKylin</value>
+  </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
   </data>
@@ -9661,9 +9670,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>MAC アドレスの重複</value>
   </data>
-  <data name="PROBLEM_NOPROBLEM_DESCRIPTION" xml:space="preserve">
-    <value>問題は発生しませんでした</value>
-  </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>プール '{0}'</value>
   </data>
@@ -10459,7 +10465,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プール マスターの現在の時間: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>このバージョンの [XenCenter] では [XenServer] 6.0 以降のバージョンがサポートされます。</value>
+    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>このサーバーを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
@@ -11608,6 +11614,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: このサーバーのすべての VM を移行するための空きメモリがほかのサーバーにありません。</value>
   </data>
+  <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED" xml:space="preserve">
+    <value>{0}: This server does not need to be rebooted.</value>
+  </data>
+  <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH" xml:space="preserve">
+    <value>{0}: This server does not need to be rebooted as live patching is used.</value>
+  </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
     <value>VM {0} には [XenServer product] Tools がインストールされていません。</value>
   </data>
@@ -11646,6 +11658,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>{0} を再起動しています... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
+    <value>{0}: This server needs to be rebooted after the update is applied.</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>

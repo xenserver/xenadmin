@@ -207,6 +207,9 @@
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>ステート パーティションが見つからないため、復元を実行できませんでした。</value>
   </data>
+  <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
+    <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
+  </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>この PIF ボンディング スレーブなので接続できません。</value>
   </data>
@@ -558,6 +561,9 @@
   <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
     <value>アップロードされたアップデート ファイルが無効です。</value>
   </data>
+  <data name="INVALID_UPDATE" xml:space="preserve">
+    <value>The uploaded update package is invalid.</value>
+  </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>値 '{1}' はフィールド '{0}' に対して無効です。</value>
   </data>
@@ -629,6 +635,9 @@
   </data>
   <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
     <value>内部エラー: '{0}'.'{1}':'{3}'='{2}' を設定しようとしましたが、キー '{3}' がマップ '{1}' に既に存在します。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
+    <value>The dynamic memory range does not satisfy the following constraint.</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>この仮想マシンに設定可能なメモリの最大値に達しました。</value>
@@ -1589,6 +1598,21 @@
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>要求された VM {0} の ブートローダー {1} が不明です。</value>
   </data>
+  <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
+    <value>This update has already been applied.</value>
+  </data>
+  <data name="UPDATE_ALREADY_APPLIED_IN_POOL" xml:space="preserve">
+    <value>This update has already been applied to all hosts in the pool.</value>
+  </data>
+  <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>The uploaded update already exists</value>
+  </data>
+  <data name="UPDATE_IS_APPLIED" xml:space="preserve">
+    <value>The specified update has been applied and cannot be destroyed.</value>
+  </data>
+  <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
+    <value>The update cannot be applied for the following host(s).</value>
+  </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>この処理を実行できるのはローカルの superuser だけです。</value>
   </data>
@@ -1768,6 +1792,9 @@
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>古いバージョンのホストをアップグレードするときにこの VM 処理は実行できません。</value>
+  </data>
+  <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
+    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM のこのバージョンの仮想ハードウェア プラットフォームには、このホストとの互換性がありません。</value>

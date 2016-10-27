@@ -1680,11 +1680,11 @@
 该警报设置为在 CPU 使用率超过 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_DISK" xml:space="preserve">
-    <value>磁盘使用率警报</value>
+    <value>磁盘使用量警报</value>
   </data>
   <data name="ALERT_ALARM_DISK_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {2}内{0}上的磁盘使用率平均达到 {1}。
-该警报设置为在磁盘使用率超过 {3} 时触发。</value>
+    <value>在过去 {2}内{0}上的磁盘使用量平均达到 {1}。
+该警报设置为在磁盘使用量超过 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_DOM0_MEMORY" xml:space="preserve">
     <value>控制域内存使用率</value>
@@ -1700,13 +1700,13 @@
     <value>控制域上的文件系统已满</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>{0} 上控制域的磁盘使用率已达到 {1}。如果此磁盘满载，[XenServer] 的性能将受到严重影响。应删除日志文件或其他不重要的(用户创建的)文件。</value>
+    <value>{0} 上控制域的磁盘使用量已达到 {1}。如果此磁盘满载，[XenServer] 的性能将受到严重影响。应删除日志文件或其他不重要的(用户创建的)文件。</value>
   </data>
   <data name="ALERT_ALARM_LOG_FILESYSTEM" xml:space="preserve">
     <value>日志分区上的文件系统已满载</value>
   </data>
   <data name="ALERT_ALARM_LOG_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>{0} 上的日志分区的磁盘使用率已达到 {1}。如果此磁盘满载，日志记录功能将受到严重影响。应删除旧日志文件。</value>
+    <value>{0} 上的日志分区的磁盘使用量已达到 {1}。如果此磁盘满载，日志记录功能将受到严重影响。应删除旧日志文件。</value>
   </data>
   <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
     <value>内存使用率警报</value>
@@ -1716,11 +1716,11 @@
 此警报设置为在可用内存低于 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_NETWORK" xml:space="preserve">
-    <value>网络使用率警报</value>
+    <value>网络使用量警报</value>
   </data>
   <data name="ALERT_ALARM_NETWORK_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {2}内{0}上的网络使用率平均达到 {1}。
-该警报设置为在网络使用率超过 {3} 时触发。</value>
+    <value>在过去 {2}内 {0} 上的网络使用量平均达到 {1}。
+该警报设置为在网络使用量超过 {3}时触发。</value>
   </data>
   <data name="ALERT_ALARM_SR_PHYSICAL_UTILISATION" xml:space="preserve">
     <value>SR 磁盘空间警报</value>
@@ -1742,7 +1742,7 @@
     <value>当 CPU 使用率超过 {0}% 并持续 {1} 分钟时</value>
   </data>
   <data name="ALERT_DISK_SUB_TEXT" xml:space="preserve">
-    <value>当磁盘使用率超过 {0} 并持续 {1} 分钟时</value>
+    <value>当磁盘使用量超过 {0} 并持续 {1} 分钟时</value>
   </data>
   <data name="ALERT_DISMISS" xml:space="preserve">
     <value>消除</value>
@@ -1784,7 +1784,7 @@
     <value>当可用内存低于 {0} 并持续 {1} 分钟时</value>
   </data>
   <data name="ALERT_NET_SUB_TEXT" xml:space="preserve">
-    <value>当网络使用率超过 {0} 并持续 {1} 分钟时</value>
+    <value>当网络使用量超过 {0}并持续 {1} 分钟时</value>
   </data>
   <data name="ALERT_NEW_PATCH_DOWNLOAD" xml:space="preserve">
     <value>转至 Web 页面</value>
@@ -2507,6 +2507,9 @@
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
     <value>正在检查分区布局</value>
+  </data>
+  <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
+    <value>Checking reboots required</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>正在检查服务器端状态</value>
@@ -4022,7 +4025,7 @@
     <value>在执行该操作前与池失去连接。</value>
   </data>
   <data name="DISCONNECTED_SERVERS" xml:space="preserve">
-    <value>已与服务器断开连接</value>
+    <value>断开连接的服务器</value>
   </data>
   <data name="DISCONNECT_ANYWAY" xml:space="preserve">
     <value>仍然断开连接(&amp;D)</value>
@@ -5590,10 +5593,10 @@
     <value>混合: 对不同的 GPU 组使用不同的设置</value>
   </data>
   <data name="GPU_RUBRIC_NO_GPUS_POOL" xml:space="preserve">
-    <value>通过为 VM 分配专用的图形处理单元(GPU)可以提高图形性能。但在该池中未检测到 GPU，因此该选项当前不可用。</value>
+    <value>通过为 VM 分配专用的图形处理器(GPU)可以提高图形性能。但在该池中未检测到 GPU，因此，此选项当前不可用。</value>
   </data>
   <data name="GPU_RUBRIC_NO_GPUS_SERVER" xml:space="preserve">
-    <value>通过为 VM 分配专用的图形处理单元(GPU)可以提高图形性能。但在该服务器中未检测到 GPU，因此该选项当前不可用。</value>
+    <value>通过为 VM 分配专用的图形处理器(GPU)可以提高图形性能。但在该服务器中未检测到 GPU，因此，此选项当前不可用。</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
     <value>选择允许在这些 GPU 上使用的虚拟 GPU 类型:</value>
@@ -6162,6 +6165,9 @@
   </data>
   <data name="HOST_MENU_UNKNOWN_ERROR" xml:space="preserve">
     <value>未知错误</value>
+  </data>
+  <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Live patching status</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>添加网络(&amp;A)...</value>
@@ -8220,7 +8226,7 @@ SR:  {0}
     <value>名称</value>
   </data>
   <data name="NEWSR_NAMEPAGE_TITLE" xml:space="preserve">
-    <value>要怎样命名该存储库?</value>
+    <value>要怎样命名此存储库?</value>
   </data>
   <data name="NEWSR_NETAPP_BLURB" xml:space="preserve">
     <value>如果您有权访问磁盘空间充足并运行某版本 Data ONTAP 7G (7.2 或更高版本)的网络设备(NetApp)文件管理器，则可以配置自定义的 NetApp 存储库。 
@@ -8315,7 +8321,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要包含在此 vApp 中的 VM</value>
   </data>
   <data name="NEWVMWIZARD_CDMEDIAPAGE_INSTALLATIONSOURCE" xml:space="preserve">
-    <value>安装源</value>
+    <value>安装来源</value>
   </data>
   <data name="NEWVMWIZARD_CDMEDIAPAGE_NAME" xml:space="preserve">
     <value>源</value>
@@ -8722,6 +8728,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEW_VM_WIZARD_NO_SR_OR_SRS_FULL" xml:space="preserve">
     <value>找不到存储库，或者所有存储库已满。</value>
+  </data>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
+    <value>NeoKylin</value>
   </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
@@ -9522,7 +9531,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>策略名称</value>
   </data>
   <data name="POLICY_NAME_TITLE" xml:space="preserve">
-    <value>要怎样命名该策略?</value>
+    <value>要怎样命名此策略?</value>
   </data>
   <data name="POLICY_SUMMARY" xml:space="preserve">
     <value>作业名称:\r\n    {0}\r\n\r\n选定的 VM:\r\n    {1}\r\n\r\n快照类型:\r\n    {2}\r\n\r\n计划:\r\n    {3}\r\n\r\n存档:\r\n    {4}</value>
@@ -9658,9 +9667,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>复制 MAC 地址</value>
-  </data>
-  <data name="PROBLEM_NOPROBLEM_DESCRIPTION" xml:space="preserve">
-    <value>未遇到任何问题</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>池“{0}”</value>
@@ -10457,7 +10463,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池主服务器上的当前时间为: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>此版本的 [XenCenter] 支持 [XenServer] 6.0 及更高版本。</value>
+    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>使用早期版本的 [XenCenter] 管理此服务器。</value>
@@ -11606,6 +11612,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: 其他服务器上的可用内存不足，无法将所有 VM 迁移出此服务器。</value>
   </data>
+  <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED" xml:space="preserve">
+    <value>{0}: This server does not need to be rebooted.</value>
+  </data>
+  <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH" xml:space="preserve">
+    <value>{0}: This server does not need to be rebooted as live patching is used.</value>
+  </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
     <value>VM {0} 未安装 [XenServer product] Tools。</value>
   </data>
@@ -11644,6 +11656,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>正在重新启动 {0} ... </value>
+  </data>
+  <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
+    <value>{0}: This server needs to be rebooted after the update is applied.</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>正在从 {1} 中删除更新安装文件 {0}... </value>
@@ -13188,7 +13203,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在启动</value>
   </data>
   <data name="WLB_SUBSCRIPTION_SUBJECT" xml:space="preserve">
-    <value>主题</value>
+    <value>使用者</value>
   </data>
   <data name="WLB_SUBSCRIPTION_TO" xml:space="preserve">
     <value>收件人</value>
