@@ -297,6 +297,19 @@ namespace XenAdmin.Controls.CustomDataGraph
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
                 dataSet.Type = DataType.Pvs;
             }
+            else if (settype.StartsWith("read_latency") || settype.StartsWith("write_latency"))
+            {
+                // Units are microseconds
+                dataSet.MultiplyingFactor = 1000;
+                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
+                dataSet.Type = DataType.Latency;
+            }
+            else if (settype.StartsWith("read") || settype.StartsWith("write"))
+            {
+                // Units are Bytes/second
+                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
+                dataSet.Type = DataType.Storage;
+            }
             else
             {
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
