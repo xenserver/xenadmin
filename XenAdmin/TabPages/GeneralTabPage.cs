@@ -1825,15 +1825,9 @@ namespace XenAdmin.TabPages
             {
                 double applyTime = Util.ToUnixTime(patch.AppliedOn(host));
 
-                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
-                    && applyTime > bootTime)
+                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) && applyTime > bootTime
+                    || patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI) && applyTime > agentStart)
                 {
-                    warnings.Add(CreateWarningRow(host, patch));
-                }
-                else if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI)
-                    && applyTime > agentStart)
-                {
-                    // Actually, it only needs xapi restart, but we have no UI to do that.
                     warnings.Add(CreateWarningRow(host, patch));
                 }
             }
@@ -1848,11 +1842,32 @@ namespace XenAdmin.TabPages
         private List<KeyValuePair<String, String>> CheckHostUpdatesRequiringReboot(Host host)
         {
             var warnings = new List<KeyValuePair<String, String>>();
+            
+            // Updates that require host restart
             var updateRefs = host.updates_requiring_reboot;
             foreach (var updateRef in updateRefs)
             {
                 var update = host.Connection.Resolve(updateRef);
                 warnings.Add(CreateWarningRow(host, update));
+            }
+
+            // For Toolstack restart, legacy code has to be used to determine this - pool_patches are still populated for backward compatibility
+            List<Pool_patch> patches = host.AppliedPatches();
+            double bootTime = host.BootTime;
+            double agentStart = host.AgentStartTime;
+
+            if (bootTime == 0.0 || agentStart == 0.0)
+                return warnings;
+
+            foreach (Pool_patch patch in patches)
+            {
+                double applyTime = Util.ToUnixTime(patch.AppliedOn(host));
+
+                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI)
+                    && applyTime > agentStart)
+                {
+                    warnings.Add(CreateWarningRow(host, patch));
+                }
             }
 
             return warnings;
@@ -1861,15 +1876,24 @@ namespace XenAdmin.TabPages
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_patch patch)
         {
             var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, patch.Name, host.Name);
-            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name);
+            string value = string.Empty;
 
+            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            {
+                value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name, patch.Name);
+            }
+            else if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI))
+            {
+                value = string.Format(Messages.GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING, host.Name, patch.Name);
+            }
+            
             return new KeyValuePair<string, string>(key, value);
         }
 
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
         {
             var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, update.Name, host.Name);
-            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, update.Name);
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name, update.Name);
 
             return new KeyValuePair<string, string>(key, value);
         }
