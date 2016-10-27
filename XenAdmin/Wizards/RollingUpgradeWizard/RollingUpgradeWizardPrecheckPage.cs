@@ -138,6 +138,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
+        private static bool HostNeedsLicenseCheck(Host host)
+        {
+            var edition = Host.GetEdition(host.edition);
+            return edition != Host.Edition.EnterpriseXD && edition != Host.Edition.XenDesktop;
+        }
+
         protected override List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
@@ -198,29 +204,27 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             //iSL (StorageLink) check - CA-223486: only for pre-Creedence
-            if (SelectedServers.Any(h => !Helpers.CreedenceOrGreater(h)))
+            var preCreedenceServers = SelectedServers.Where(h => !Helpers.CreedenceOrGreater(h)).ToList();
+            if (preCreedenceServers.Any())
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGELINK_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
+                foreach (Host host in preCreedenceServers)
                 {
-                    if(!Helpers.CreedenceOrGreater(host))
-                        checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
+                    checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
                 }
             }
 
             //Upgrading to Clearwater and above - license changes warning and deprecations
-            if(SelectedServers.Any(h=> !Helpers.ClearwaterOrGreater(h)))
+            var preClearwaterServers = SelectedServers.Where(h => !Helpers.ClearwaterOrGreater(h)).ToList();
+            if(preClearwaterServers.Any())
             {
-                //License changes
-                if (SelectedServers.Any(h => Host.GetEdition(h.edition) != Host.Edition.EnterpriseXD && 
-                                             Host.GetEdition(h.edition) != Host.Edition.XenDesktop))
                 {
                     checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_LICENSING_STATUS, new List<Check>()));
                     checkGroup = checks[checks.Count - 1].Value;
-                    foreach (Host host in SelectedServers)
+                    foreach (Host host in preClearwaterServers)
                     {
-                        if(!Helpers.ClearwaterOrGreater(host))
+                        if(HostNeedsLicenseCheck(host))
                             checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
                     }
                 }
@@ -228,7 +232,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 //WSS removal
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_WSS_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
+                foreach (Host host in preClearwaterServers)
                 {
                     checkGroup.Add(new HostHasWssCheck(host));
                 }
@@ -236,11 +240,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 //VMP[RP]removal
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_VMPR_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
+                foreach (Host host in preClearwaterServers)
                 {
                     checkGroup.Add(new VmprActivatedCheck(host));
                 }
-
             }
 
             //SafeToUpgradeCheck - in automatic mode only
