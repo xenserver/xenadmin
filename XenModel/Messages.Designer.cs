@@ -403,7 +403,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuring PVS site.
+        ///   Looks up a localized string similar to Configuring PVS cache.
         /// </summary>
         public static string ACTION_CONFUGURE_PVS_SITE_DESCRIPTION {
             get {
@@ -421,7 +421,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure PVS site &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Configure PVS cache on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_CONFUGURE_PVS_SITE_TITLE {
             get {
@@ -475,7 +475,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting PVS site.
+        ///   Looks up a localized string similar to Deleting PVS cache configuration.
         /// </summary>
         public static string ACTION_DELETE_PVS_SITE_DESCRIPTION {
             get {
@@ -493,7 +493,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting PVS site &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Deleting PVS cache configuration on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_DELETE_PVS_SITE_TITLE {
             get {
@@ -943,7 +943,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling PVS read caching for VM &apos;{0}&apos; on site &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Enabling PVS read caching for VM &apos;{0}&apos; on &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_ENABLE_PVS_READ_CACHING_FOR {
             get {
@@ -7305,6 +7305,15 @@ namespace XenAdmin {
         public static string CONFIRM_DELETE_PVS_SITE {
             get {
                 return ResourceManager.GetString("CONFIRM_DELETE_PVS_SITE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This configuration is in use by PVS. Are you sure you want to delete &apos;{0}&apos;?.
+        /// </summary>
+        public static string CONFIRM_DELETE_PVS_SITE_IN_USE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DELETE_PVS_SITE_IN_USE", resourceCulture);
             }
         }
         
@@ -28003,7 +28012,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PVS site cannot be removed because it contains running proxies..
+        ///   Looks up a localized string similar to This PVS cache configuration cannot be removed because it contains running proxies..
         /// </summary>
         public static string PVS_SITE_CANNOT_BE_REMOVED {
             get {

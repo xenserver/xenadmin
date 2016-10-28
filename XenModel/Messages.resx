@@ -232,13 +232,13 @@
     <value>Clean up disk space</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Configuring PVS site</value>
+    <value>Configuring PVS cache</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
     <value>Configured</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Configure PVS site '{0}'</value>
+    <value>Configure PVS cache on '{0}'</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>Creating {0} ...</value>
@@ -256,13 +256,13 @@
     <value>Deactivating Multiple Virtual Disks</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Deleting PVS site</value>
+    <value>Deleting PVS cache configuration</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
     <value>Done</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Deleting PVS site '{0}'</value>
+    <value>Deleting PVS cache configuration on '{0}'</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>Deleting storage items...</value>
@@ -415,7 +415,7 @@
     <value>Enable PVS read caching</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Enabling PVS read caching for VM '{0}' on site '{1}'</value>
+    <value>Enabling PVS read caching for VM '{0}' on '{1}'</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
@@ -2654,6 +2654,9 @@ Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
     <value>Are you sure you want to delete '{0}'?</value>
+  </data>
+  <data name="CONFIRM_DELETE_PVS_SITE_IN_USE" xml:space="preserve">
+    <value>Are you sure you want to delete '{0}'? This configuration is in use by PVS.</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>Are you sure you want to delete the tag '{0}' from all managed resources?</value>
@@ -9737,7 +9740,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>Not configured</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>This PVS site cannot be removed because it contains running proxies.</value>
+    <value>This PVS cache configuration cannot be removed because there are VMs that are streamed from this site.</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
     <value>PVS Servers on site {0}'</value>
