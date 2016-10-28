@@ -34,7 +34,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Wizards.GenericPages;
+using XenAdmin.Wizards.ImportWizard.Filters;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
@@ -46,6 +48,8 @@ namespace XenAdmin.Wizards.ImportWizard
     {
         public EnvelopeType SelectedOvfEnvelope { private get; set; }
         private List<Xen_ConfigurationSettingData_Type> vgpuSettings = new List<Xen_ConfigurationSettingData_Type>();
+        private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
+        private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
 
         #region XenTabPage overrides
 
@@ -70,14 +74,35 @@ namespace XenAdmin.Wizards.ImportWizard
 
             if (direction == PageLoadedDirection.Forward)
             {
-                vgpuSettings.Clear();
                 ShowWarning(null);
 
-                if (SelectedOvfEnvelope == null || VmMappings.Count < 1)
-                    return;
+                vgpuSettings.Clear();
+                hardwarePlatformSettings.Clear();
+                vendorDeviceSettings.Clear();
 
-                vgpuSettings = FindVgpuSettings(SelectedOvfEnvelope);
+                if (SelectedOvfEnvelope != null)
+                {
+                    foreach (var vsType in ((VirtualSystemCollection_Type)SelectedOvfEnvelope.Item).Content)
+                    {
+                        var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, vsType.id, "xen");
+                        var data = vhs.VirtualSystemOtherConfigurationData;
+                        if (data == null)
+                            continue;
+
+                        foreach (var s in data)
+                        {
+                            if (s.Name == "vgpu")
+                                vgpuSettings.Add(s);
+                            else if (s.Name == "hardware_platform_version")
+                                hardwarePlatformSettings.Add(s);
+                            else if (s.Name == "VM_has_vendor_device")
+                                vendorDeviceSettings.Add(s);
+                        }
+                    }
+                }
             }
+
+            PopulateComboBox();
         }
 
         #endregion
@@ -90,35 +115,49 @@ namespace XenAdmin.Wizards.ImportWizard
 
         protected override void OnChosenItemChanged()
         {
-            if (vgpuSettings.Count == 0 || ChosenItem ==null || CheckRightGpuExists())
+            var warnings = new List<string>();
+
+            if (ChosenItem != null)
             {
-                ShowWarning(null);
-                return;
+                if (!CheckDestinationSupportsVendorDevice())
+                {
+                    //it shouldn't come to this as the hardware incompatibility filter
+                    //will have already caught it but just to be on the safe side
+                    if (VmMappings.Count == 1)
+                        warnings.Add(Messages.IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_ONE);
+                    else if (VmMappings.Count > 1)
+                        warnings.Add(Messages.IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_MANY);
+                }
+                
+                if (!CheckRightGpuExists())
+                {
+                    if (VmMappings.Count == 1)
+                        warnings.Add(Messages.IMPORT_VM_WITH_VGPU_WARNING_ONE);
+                    else if (VmMappings.Count > 1)
+                        warnings.Add(Messages.IMPORT_VM_WITH_VGPU_WARNING_MANY);
+                }
             }
 
-            ShowWarning(VmMappings.Count == 1
-                            ? Messages.IMPORT_VM_WITH_VGPU_WARNING_ONE
-                            : Messages.IMPORT_VM_WITH_VGPU_WARNING_MANY);
+            ShowWarning(string.Join("\n", warnings));
         }
 
-        public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
+        protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
-            return new DelayLoadingOptionComboBoxItem(xenItem);
-        }
-
-        private List<Xen_ConfigurationSettingData_Type> FindVgpuSettings(EnvelopeType envelopeType)
-        {
-            var list = new List<Xen_ConfigurationSettingData_Type>();
-
-            foreach (VirtualSystem_Type vsType in ((VirtualSystemCollection_Type)envelopeType.Item).Content)
+            var filters = new List<ReasoningFilter>
             {
-                VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(envelopeType, vsType.id, "xen");
-                var data = vhs.VirtualSystemOtherConfigurationData;
-                if (data != null)
-                    list.AddRange(vhs.VirtualSystemOtherConfigurationData.Where(s => s.Name == "vgpu"));
-            }
+                new HardwareCompatibilityFilter(xenItem, hardwarePlatformSettings)
+            };
+            return new DelayLoadingOptionComboBoxItem(xenItem, filters);
+        }
 
-            return list;
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
+        {
+            var filters = new List<ReasoningFilter>();
+
+            if (item != null)
+                filters.Add(new HardwareCompatibilityFilter(item.Item, hardwarePlatformSettings));
+
+            return filters;
         }
 
         private bool CheckRightGpuExists()
@@ -148,6 +187,22 @@ namespace XenAdmin.Wizards.ImportWizard
                     return false;
             }
 
+            return true;
+        }
+
+        private bool CheckDestinationSupportsVendorDevice()
+        {
+            var dundeeOrNewerHosts = Helpers.DundeeOrGreater(ChosenItem.Connection) ? ChosenItem.Connection.Cache.Hosts : new Host[] {};
+
+            foreach (var setting in vendorDeviceSettings)
+            {
+                bool hasVendorDevice;
+                if (!bool.TryParse(setting.Value.Value, out hasVendorDevice))
+                    continue;
+                
+                if (hasVendorDevice && dundeeOrNewerHosts.Length == 0)
+                    return false;
+            }
             return true;
         }
     }

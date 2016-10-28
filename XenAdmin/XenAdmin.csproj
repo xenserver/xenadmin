@@ -697,6 +697,7 @@
     <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
     </Compile>

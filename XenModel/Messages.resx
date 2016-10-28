@@ -3193,6 +3193,9 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
     <value>/sec</value>
   </data>
+  <data name="CPM_FAILURE_REASON_HARDWARE_PLATFORM" xml:space="preserve">
+    <value>incompatible hardware platform version</value>
+  </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>incompatible version numbers</value>
   </data>
@@ -6511,6 +6514,12 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>Configure virtual network interfaces for the new VM</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_MANY" xml:space="preserve">
+    <value>Some or all of the VMs you are importing are able to receive updates from Windows Update. The selected location does not support this virtualization state. If you continue with the import, your VMs may not be fully, if at all, functional.</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_ONE" xml:space="preserve">
+    <value>The VM you are importing is able to receive updates from Windows Update. The selected location does not support this virtualization state. If you continue with the import, your VM may not be fully, if at all, functional.</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_MANY" xml:space="preserve">
     <value>Some or all of the VMs you are importing have virtual GPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their virtual GPU settings will be lost.</value>

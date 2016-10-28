@@ -35,6 +35,7 @@ using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 using System.Linq;
+using XenAdmin.Controls;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
@@ -57,6 +58,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             this.ignoredConnections = ignoredConnections ?? new List<IXenConnection>();
 
             InitializeText();
+        }
+
+        public override void PageLoaded(PageLoadedDirection direction)
+        {
+            base.PageLoaded(direction);
+            PopulateComboBox();
         }
 
         public override bool EnableNext()
@@ -130,7 +137,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override string TargetServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
 
-        public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
+        protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
             var filters = new List<ReasoningFilter>
             {

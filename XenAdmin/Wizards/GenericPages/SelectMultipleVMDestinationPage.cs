@@ -111,7 +111,7 @@ namespace XenAdmin.Wizards.GenericPages
 	    public IXenObject ChosenItem
 	    {
 	        get { return _chosenItem; }
-            private set
+            protected set
             {
                 _chosenItem = value;
                 OnChosenItemChanged();
@@ -171,7 +171,6 @@ namespace XenAdmin.Wizards.GenericPages
             base.PageLoaded(direction);
             ChosenItem = null;
             restoreGridHomeServerSelection = (direction == PageLoadedDirection.Back);
-            PopulateComboBox();
 		}
 
         public override bool EnableNext()
@@ -222,7 +221,7 @@ namespace XenAdmin.Wizards.GenericPages
 			m_selectedObject = xenObject;
 		}
 
-        public abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
+        protected abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
 
 		#region Private methods
         
@@ -257,7 +256,7 @@ namespace XenAdmin.Wizards.GenericPages
             m_dataGridView.Refresh();
         }
 
-		private void PopulateComboBox()
+		protected void PopulateComboBox()
 		{
 			Program.AssertOnEventThread();
 
