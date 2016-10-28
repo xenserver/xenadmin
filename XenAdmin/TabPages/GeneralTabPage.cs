@@ -1419,7 +1419,8 @@ namespace XenAdmin.TabPages
                     }
 
                     //Row 3 : vendor device - Windows Update
-                    sb.Append(vm.has_vendor_device ? Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES : Messages.VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES);
+                    if(!HiddenFeatures.WindowsUpdateHidden)
+                        sb.Append(vm.has_vendor_device ? Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES : Messages.VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES);
 
                     // displaying Row1 - Row3
                     s.AddEntry(FriendlyName("VM.VirtualizationState"), sb.ToString());
