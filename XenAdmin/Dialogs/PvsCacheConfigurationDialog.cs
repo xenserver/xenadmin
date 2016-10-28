@@ -159,9 +159,12 @@ namespace XenAdmin.Dialogs
             }
 
             // show confirmation dialog
+            var message = site != null && !string.IsNullOrEmpty(site.PVS_uuid)
+                ? string.Format(Messages.CONFIRM_DELETE_PVS_SITE_IN_USE, siteName)
+                : string.Format(Messages.CONFIRM_DELETE_PVS_SITE, siteName);
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.CONFIRM_DELETE_PVS_SITE, siteName), Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonOK,
                     ThreeButtonDialog.ButtonCancel))
             {
