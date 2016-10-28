@@ -2084,13 +2084,17 @@ namespace XenAdmin.Core
        public static bool ContainerCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+           if (master == null)
+               return false;
+           if (ElyOrGreater(connection))
+               return master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xscontainer")); 
+           return CreamOrGreater(connection) && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
        public static bool PvsCacheCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xspvscache"));
+           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xspvscache"));
        }
 
        /// <summary>
