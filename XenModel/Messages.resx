@@ -5537,7 +5537,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>The server '{0}' needs to be rebooted for update '{1}' to take effect</value>
   </data>
   <data name="GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING" xml:space="preserve">
-    <value>Toolstack on server '{0}' needs to be restarted for update '{1}' to take effect</value>
+    <value>The toolstack on server '{0}' needs to be restarted for update '{1}' to take effect</value>
   </data>
   <data name="GENERAL_SR_CONTEXT_REPAIR" xml:space="preserve">
     <value>Repair</value>
