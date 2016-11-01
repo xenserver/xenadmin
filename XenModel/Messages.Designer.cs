@@ -15810,7 +15810,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toolstack on server &apos;{0}&apos; needs to be restarted for update &apos;{1}&apos; to take effect.
+        ///   Looks up a localized string similar to The toolstack on server &apos;{0}&apos; needs to be restarted for update &apos;{1}&apos; to take effect.
         /// </summary>
         public static string GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING {
             get {
