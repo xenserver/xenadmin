@@ -112,8 +112,6 @@ namespace XenAdmin.Diagnostics.Checks
 
                     log.DebugFormat("Pool_update.precheck returned livepatch_status: '{0}'", livepatchStatus);
 
-                    return FindProblem(string.Empty);
-
                     if (livePatchCodesByHost != null)
                         livePatchCodesByHost[Host.uuid] = livepatchStatus;
 
