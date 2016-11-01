@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>An activation key can only be applied when the edition is set to 'free'.</value>
@@ -1607,11 +1607,29 @@ Authorized Roles: {1}</value>
   <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
     <value>The uploaded update already exists</value>
   </data>
+  <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
+    <value>The update failed to apply. Please see attached output.</value>
+  </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>The specified update has been applied and cannot be destroyed.</value>
   </data>
   <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
     <value>The update cannot be applied for the following host(s).</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
+    <value>The update precheck stage failed: conflicting updates are present.</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>The update precheck stage failed: the server does not have enough space.</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
+    <value>The update precheck stage failed: prerequisite update(s) are missing.</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
+    <value>The update precheck stage failed with an unknown error.</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
+    <value>The update precheck stage failed: the server is of an incorrect version.</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>Only the local superuser can execute this operation</value>
@@ -1819,6 +1837,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>The operation attempted is not valid for templates</value>
+  </data>
+  <data name="VM_IS_USING_NESTED_VIRT" xml:space="preserve">
+    <value>This operation is illegal because the VM is using nested virtualisation.</value>
   </data>
   <data name="VM_LACKS_FEATURE" xml:space="preserve">
     <value>You attempted an operation on a VM which lacks the feature.</value>
