@@ -130,13 +130,13 @@
     <value>Fill</value>
   </data>
   <data name="ManualRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 159</value>
+    <value>15, 99</value>
   </data>
   <data name="ManualRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 3, 3, 3</value>
   </data>
   <data name="ManualRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1394, 36</value>
+    <value>688, 41</value>
   </data>
   <data name="ManualRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -163,13 +163,13 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 208</value>
+    <value>3, 153</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 32</value>
+    <value>155, 17</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -193,13 +193,13 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="textBoxLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 243</value>
+    <value>3, 173</value>
   </data>
   <data name="textBoxLog.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="textBoxLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1406, 844</value>
+    <value>700, 321</value>
   </data>
   <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -223,13 +223,13 @@
     <value>True</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 1093</value>
+    <value>3, 500</value>
   </data>
   <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 23</value>
+    <value>137, 27</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -265,7 +265,7 @@
     <value>3, 3, 3, 15</value>
   </data>
   <data name="autoHeightLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1406, 96</value>
+    <value>700, 51</value>
   </data>
   <data name="autoHeightLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -289,10 +289,10 @@
     <value>True</value>
   </data>
   <data name="removeUpdateFileCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 1129</value>
+    <value>3, 540</value>
   </data>
   <data name="removeUpdateFileCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>730, 36</value>
+    <value>365, 21</value>
   </data>
   <data name="removeUpdateFileCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -331,7 +331,7 @@
     <value>15, 3, 3, 3</value>
   </data>
   <data name="AutomaticRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1394, 36</value>
+    <value>688, 21</value>
   </data>
   <data name="AutomaticRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -355,13 +355,13 @@
     <value>Fill</value>
   </data>
   <data name="allowRadioButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 117</value>
+    <value>15, 72</value>
   </data>
   <data name="allowRadioButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 3, 3, 3</value>
   </data>
   <data name="allowRadioButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1394, 36</value>
+    <value>688, 21</value>
   </data>
   <data name="allowRadioButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -391,7 +391,7 @@
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1412, 1168</value>
+    <value>706, 584</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -409,7 +409,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="autoHeightLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ManualRadioButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="button1" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="removeUpdateFileCheckBox" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxLog" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="allowRadioButtonContainer" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="autoHeightLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ManualRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="button1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="removeUpdateFileCheckBox" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxLog" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="allowRadioButtonContainer" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,47,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -418,16 +418,16 @@
     <value />
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>240, 240</value>
+    <value>120, 120</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1412, 1168</value>
+    <value>706, 584</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_ModePage</value>

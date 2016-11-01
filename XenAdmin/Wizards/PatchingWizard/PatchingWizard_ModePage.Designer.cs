@@ -75,11 +75,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ManualRadioButton, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.removeUpdateFileCheckBox, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxLog, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ManualRadioButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.removeUpdateFileCheckBox, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxLog, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.allowRadioButtonContainer, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
