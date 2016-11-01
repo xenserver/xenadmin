@@ -11738,6 +11738,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATE_PROPERTIES" xml:space="preserve">
     <value>Updating '{0}'</value>
   </data>
+  <data name="UPDATE_TEMP_VDI_DESCRIPTION" xml:space="preserve">
+    <value>Temporary virtual disk used for the installation of an update</value>
+  </data>
   <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
     <value>Update {0} was not completed successfully</value>
   </data>
