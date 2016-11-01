@@ -49,6 +49,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     {
         private readonly DiskSpaceRequirements diskSpaceReq;
         private readonly Pool_patch patch;
+        private readonly Pool_update update;
 
         public HostOutOfSpaceProblem(Check check, Host host, Pool_patch patch, DiskSpaceRequirements diskSpaceReq)
             : base(check,  host)
@@ -57,17 +58,41 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             this.diskSpaceReq = diskSpaceReq;
         }
 
+        public HostOutOfSpaceProblem(Check check, Host host, Pool_update update, DiskSpaceRequirements diskSpaceReq)
+            : base(check, host)
+        {
+            this.update = update;
+            this.diskSpaceReq = diskSpaceReq;
+        }
+
+        public HostOutOfSpaceProblem(Check check, Host host, DiskSpaceRequirements diskSpaceReq)
+            : base(check, host)
+        {
+            this.diskSpaceReq = diskSpaceReq;
+        }
+
         public override string Description
         {
             get
             {
+                string name = string.Empty;
+
+                if (patch != null)
+                {
+                    name = patch.Name;
+                }
+                else if (update != null)
+                {
+                    name = update.Name;
+                }
+
                 switch (diskSpaceReq.Operation)
                 {
                     case DiskSpaceRequirements.OperationTypes.install :
-                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, patch.Name);
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, name);
                     
                     case DiskSpaceRequirements.OperationTypes.upload :
-                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, patch.Name);
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, name);
                     
                     case DiskSpaceRequirements.OperationTypes.autoupdate :
                         return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Server.Name);
@@ -83,7 +108,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             AsyncAction action = null;
 
-            if (diskSpaceReq.CanCleanup)
+            if (patch != null && diskSpaceReq.CanCleanup)
             {
                 Program.Invoke(Program.MainWindow, delegate()
                 {

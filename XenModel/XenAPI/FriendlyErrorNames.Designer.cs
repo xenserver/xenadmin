@@ -331,6 +331,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. .
+        /// </summary>
+        public static string CANNOT_FIND_UPDATE {
+            get {
+                return ResourceManager.GetString("CANNOT_FIND_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This PIF is a bond slave and cannot be plugged..
         /// </summary>
         public static string CANNOT_PLUG_BOND_SLAVE {
@@ -1384,6 +1393,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The uploaded update package is invalid..
+        /// </summary>
+        public static string INVALID_UPDATE {
+            get {
+                return ResourceManager.GetString("INVALID_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value &apos;{1}&apos; is invalid for field &apos;{0}&apos;..
         /// </summary>
         public static string INVALID_VALUE {
@@ -1614,6 +1632,15 @@ namespace XenAPI {
         public static string MEM_MAX_ALLOWED_TITLE {
             get {
                 return ResourceManager.GetString("MEM_MAX_ALLOWED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dynamic memory range does not satisfy the following constraint..
+        /// </summary>
+        public static string MEMORY_CONSTRAINT_VIOLATION {
+            get {
+                return ResourceManager.GetString("MEMORY_CONSTRAINT_VIOLATION", resourceCulture);
             }
         }
         
@@ -2289,6 +2316,60 @@ namespace XenAPI {
         public static string PROVISION_ONLY_ALLOWED_ON_TEMPLATE {
             get {
                 return ResourceManager.GetString("PROVISION_ONLY_ALLOWED_ON_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PVS site already has cache storage configured for the host..
+        /// </summary>
+        public static string PVS_CACHE_STORAGE_ALREADY_PRESENT {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_STORAGE_ALREADY_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PVS cache storage is in use by the site and cannot be removed..
+        /// </summary>
+        public static string PVS_CACHE_STORAGE_IS_IN_USE {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_STORAGE_IS_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VIF is already associated with a PVS proxy.
+        /// </summary>
+        public static string PVS_PROXY_ALREADY_PRESENT {
+            get {
+                return ResourceManager.GetString("PVS_PROXY_ALREADY_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The address specified is already in use by an existing PVS_server object.
+        /// </summary>
+        public static string PVS_SERVER_ADDRESS_IN_USE {
+            get {
+                return ResourceManager.GetString("PVS_SERVER_ADDRESS_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PVS site contains running proxies..
+        /// </summary>
+        public static string PVS_SITE_CONTAINS_RUNNING_PROXIES {
+            get {
+                return ResourceManager.GetString("PVS_SITE_CONTAINS_RUNNING_PROXIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PVS site contains servers and cannot be forgotten..
+        /// </summary>
+        public static string PVS_SITE_CONTAINS_SERVERS {
+            get {
+                return ResourceManager.GetString("PVS_SITE_CONTAINS_SERVERS", resourceCulture);
             }
         }
         
@@ -4323,6 +4404,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The suspend image of a checkpoint is not accessible from the host on which the VM is running.
+        /// </summary>
+        public static string SUSPEND_IMAGE_NOT_ACCESSIBLE {
+            get {
+                return ResourceManager.GetString("SUSPEND_IMAGE_NOT_ACCESSIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must use tar output to retrieve system status from an OEM server..
         /// </summary>
         public static string SYSTEM_STATUS_MUST_USE_TAR_ON_OEM {
@@ -4400,6 +4490,105 @@ namespace XenAPI {
         public static string UNKNOWN_BOOTLOADER {
             get {
                 return ResourceManager.GetString("UNKNOWN_BOOTLOADER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This update has already been applied..
+        /// </summary>
+        public static string UPDATE_ALREADY_APPLIED {
+            get {
+                return ResourceManager.GetString("UPDATE_ALREADY_APPLIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This update has already been applied to all hosts in the pool..
+        /// </summary>
+        public static string UPDATE_ALREADY_APPLIED_IN_POOL {
+            get {
+                return ResourceManager.GetString("UPDATE_ALREADY_APPLIED_IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The uploaded update already exists.
+        /// </summary>
+        public static string UPDATE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("UPDATE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update failed to apply. Please see attached output..
+        /// </summary>
+        public static string UPDATE_APPLY_FAILED {
+            get {
+                return ResourceManager.GetString("UPDATE_APPLY_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified update has been applied and cannot be destroyed..
+        /// </summary>
+        public static string UPDATE_IS_APPLIED {
+            get {
+                return ResourceManager.GetString("UPDATE_IS_APPLIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update cannot be applied for the following host(s)..
+        /// </summary>
+        public static string UPDATE_POOL_APPLY_FAILED {
+            get {
+                return ResourceManager.GetString("UPDATE_POOL_APPLY_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed: conflicting updates are present..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed: the server does not have enough space..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_OUT_OF_SPACE {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_OUT_OF_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed: prerequisite update(s) are missing..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed with an unknown error..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed: the server is of an incorrect version..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION", resourceCulture);
             }
         }
         
@@ -4917,6 +5106,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You attempted to migrate a VM to a destination host running a version of XenServer older than the source host..
+        /// </summary>
+        public static string VM_HOST_INCOMPATIBLE_VERSION_MIGRATE {
+            get {
+                return ResourceManager.GetString("VM_HOST_INCOMPATIBLE_VERSION_MIGRATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM&apos;s Virtual Hardware Platform version is incompatible with this host..
         /// </summary>
         public static string VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION {
@@ -4985,6 +5183,15 @@ namespace XenAPI {
         public static string VM_IS_TEMPLATE {
             get {
                 return ResourceManager.GetString("VM_IS_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation is illegal because the VM is using nested virtualisation..
+        /// </summary>
+        public static string VM_IS_USING_NESTED_VIRT {
+            get {
+                return ResourceManager.GetString("VM_IS_USING_NESTED_VIRT", resourceCulture);
             }
         }
         

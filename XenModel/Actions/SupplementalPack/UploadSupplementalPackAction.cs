@@ -228,7 +228,7 @@ namespace XenAdmin.Actions
             vdi.SR = new XenRef<SR>(sr);
             vdi.virtual_size = diskSize;
             vdi.name_label = new FileInfo(suppPackFilePath).Name;
-            vdi.name_description = Messages.SUPP_PACK_TEMP_VDI_DESCRIPTION;
+            vdi.name_description = Helpers.ElyOrGreater(Connection) ? Messages.UPDATE_TEMP_VDI_DESCRIPTION : Messages.SUPP_PACK_TEMP_VDI_DESCRIPTION;
             vdi.sharable = false;
             vdi.type = vdi_type.user;
             vdi.VMHint = "";

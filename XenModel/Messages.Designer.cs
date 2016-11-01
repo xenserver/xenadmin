@@ -33022,6 +33022,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temporary virtual disk used for the installation of an update.
+        /// </summary>
+        public static string UPDATE_TEMP_VDI_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("UPDATE_TEMP_VDI_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update {0} was not completed successfully.
         /// </summary>
         public static string UPDATE_WAS_NOT_COMPLETED {

@@ -229,18 +229,23 @@ namespace XenAdmin.Diagnostics.Checks
 
         private Problem FindProblem(string errorcode, string found, string required)
         {
+            long requiredSpace = 0;
+            long foundSpace = 0;
+            long reclaimableDiskSpace = 0;
+
+            DiskSpaceRequirements diskSpaceReq;
+
             switch (errorcode)
             {
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
                     return new WrongServerVersion(this, required, Host);
+
                 case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
                     System.Diagnostics.Trace.Assert(Helpers.CreamOrGreater(Host.Connection));  // If not Cream or greater, we shouldn't get this error
-                    long requiredSpace = 0;
-                    long foundSpace = 0;
+
                     long.TryParse(found, out foundSpace);
                     long.TryParse(required, out requiredSpace);
                     // get reclaimable disk space (excluding current patch)
-                    long reclaimableDiskSpace = 0;
                     try
                     {
                         var args = new Dictionary<string, string> { { "exclude", Patch.uuid } };
@@ -252,9 +257,19 @@ namespace XenAdmin.Diagnostics.Checks
                         log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
                     }
 
-                    var diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name, requiredSpace, foundSpace, reclaimableDiskSpace);
+                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name, requiredSpace, foundSpace, reclaimableDiskSpace);
 
                     return new HostOutOfSpaceProblem(this, Host, Patch, diskSpaceReq);
+                   
+                case "UPDATE_PRECHECK_FAILED_OUT_OF_SPACE":
+                    System.Diagnostics.Trace.Assert(Helpers.ElyOrGreater(Host.Connection));  // If not Ely or greater, we shouldn't get this error
+                    long.TryParse(found, out foundSpace);
+                    long.TryParse(required, out requiredSpace);
+
+                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Update.Name, requiredSpace, foundSpace, 0);
+
+                    return new HostOutOfSpaceProblem(this, Host, Update, diskSpaceReq);
+
                 case "OUT_OF_SPACE":
                     if (Helpers.CreamOrGreater(Host.Connection))
                     {
