@@ -76,7 +76,7 @@ namespace XenAdmin.Diagnostics.Checks
                 }
 
                 if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < size)
-                    return new HostOutOfSpaceProblem(this, Host, null, action.DiskSpaceRequirements);
+                    return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
             }
 
             return null;
