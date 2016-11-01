@@ -199,7 +199,7 @@
     <value>True</value>
   </data>
   <data name="textBoxLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>700, 321</value>
+    <value>700, 341</value>
   </data>
   <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -223,7 +223,7 @@
     <value>True</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 500</value>
+    <value>3, 520</value>
   </data>
   <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -289,7 +289,7 @@
     <value>True</value>
   </data>
   <data name="removeUpdateFileCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 540</value>
+    <value>3, 560</value>
   </data>
   <data name="removeUpdateFileCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>365, 21</value>
@@ -388,7 +388,7 @@
     <value>1, 1</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>706, 584</value>
