@@ -173,7 +173,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>694, 15</value>
+    <value>694, 18</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
