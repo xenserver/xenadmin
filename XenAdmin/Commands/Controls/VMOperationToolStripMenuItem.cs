@@ -56,13 +56,18 @@ namespace XenAdmin.Commands
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly vm_operations _operation;
 
-        public VMOperationToolStripMenuItem(Command command, bool inContextMenu, vm_operations operation)
+        private readonly bool _resumeAfter;
+
+        protected VMOperationToolStripMenuItem(Command command, bool inContextMenu, vm_operations operation)
             : base(command, inContextMenu)
         {
             if (operation != vm_operations.start_on && operation != vm_operations.resume_on && operation != vm_operations.pool_migrate)
             {
                 throw new ArgumentException("Invalid operation", "operation");
             }
+
+            if (operation.Equals(vm_operations.resume_on))
+                _resumeAfter = true;
 
             _operation = operation;
             base.DropDownItems.Add(new ToolStripMenuItem());
@@ -195,7 +200,7 @@ namespace XenAdmin.Commands
                 if (host != null)
                 {
                     VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name.EscapeAmpersands(), _operation, session);
-                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host);
+                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
 
                     VMOperationToolStripMenuSubItem tempItem = item;
                     Program.Invoke(Program.MainWindow, delegate
