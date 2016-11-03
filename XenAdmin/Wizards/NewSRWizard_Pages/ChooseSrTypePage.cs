@@ -264,7 +264,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 {
                     upsellPage1.Visible = false;
                     selectedStoreTypeLabel.Visible = true;
-                    selectedStoreTypeLabel.Text = radioButton.Text;
+                    selectedStoreTypeLabel.Text = frontend.FrontendTypeName;
                     SRBlurb.Visible = true;
                     SRBlurb.Text = frontend.FrontendBlurb;
                     m_allowNext = true;

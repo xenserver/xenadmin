@@ -8093,6 +8093,12 @@ When you configure a SMB storage repository, you simply provide the hostname or 
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you wish to attach to your host or pool.</value>
   </data>
+  <data name="NEWSR_CIFS_ISO_TYPE_NAME" xml:space="preserve">
+    <value>Windows File Sharing (SMB/CIFS)</value>
+  </data>
+  <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
+    <value>SMB/CIFS</value>
+  </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
     <value>SMB ISO Library [{0}]</value>
   </data>
@@ -8131,6 +8137,9 @@ When you configure a SMB storage repository, you simply provide the hostname or 
   </data>
   <data name="NEWSR_CSLG_THIN_PROVISIONING" xml:space="preserve">
     <value>Thin</value>
+  </data>
+  <data name="NEWSR_CSLG_TYPE_NAME" xml:space="preserve">
+    <value>StorageLink technology</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
     <value>Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support [XenServer] features such as Live Migration and High Availability.</value>
@@ -8189,6 +8198,9 @@ Once this configuration has been carried out, this wizard will walk you through 
   <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
     <value>Software FCoE SR [{0} - {1}]</value>
   </data>
+  <data name="NEWSR_LVMOFCOE_TYPE_NAME" xml:space="preserve">
+    <value>Software FCoE</value>
+  </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
     <value>[XenServer] hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
 
@@ -8226,10 +8238,16 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
   <data name="NEWSR_LVMOHBA_SUMMARY_TEXT" xml:space="preserve">
     <value>Summary</value>
   </data>
+  <data name="NEWSR_LVMOHBA_TYPE_NAME" xml:space="preserve">
+    <value>Hardware HBA</value>
+  </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
     <value>iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
 
 Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility.</value>
+  </data>
+  <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
+    <value>iSCSI</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
     <value>Warning: you must ensure that the following SR is not in use by any server not connected to [XenCenter]. Failure to do so may result in data loss.
@@ -8268,6 +8286,9 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
   </data>
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a NFS share that you wish to attach to your host or pool.</value>
+  </data>
+  <data name="NEWSR_NFS_ISO_TYPE_NAME" xml:space="preserve">
+    <value>NFS ISO</value>
   </data>
   <data name="NEWSR_NOWHERE_TO_CREATE" xml:space="preserve">
     <value>The given filer has no existing SRs and nowhere to create a new SR.</value>
@@ -8311,6 +8332,9 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
 As NFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
 When you configure an NFS storage repository, you simply provide the hostname or IP address of the NFS server and the path to a directory that will be used to contain the storage repository. The NFS server must be configured to export the specified path to all servers in the pool.</value>
+  </data>
+  <data name="NEWSR_VHDONFS_TYPE_NAME" xml:space="preserve">
+    <value>NFS</value>
   </data>
   <data name="NEWVMAPPLIANCE_FINISHPAGE_TEXT" xml:space="preserve">
     <value>Finish</value>
