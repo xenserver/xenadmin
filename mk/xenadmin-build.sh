@@ -275,6 +275,9 @@ mkdir_clean ${ISO_DIR}
 install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
 cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+#CP-18097
+mkdir_clean ${OUTPUT_DIR}/installer
+tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
 mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso" "${ISO_DIR}"
 
 echo "INFO:	Create l10n iso file"
@@ -284,6 +287,9 @@ mkdir_clean ${L10N_ISO_DIR}
 install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
 cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+#CP-18097
+mkdir_clean ${OUTPUT_DIR}/installer.l10n
+tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
 mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.iso" "${L10N_ISO_DIR}"
 
 # Create a tarball containing the XenCenter ISO, to be installed by the host installer
