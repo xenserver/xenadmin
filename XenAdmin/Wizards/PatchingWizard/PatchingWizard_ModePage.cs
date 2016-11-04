@@ -43,6 +43,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_ModePage : XenTabPage
     {
+        private bool _tooltipShowing;
+
         public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
 
         public PatchingWizard_ModePage()
@@ -86,7 +88,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             private get;
             set;
         }
-        
+
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
@@ -122,13 +124,44 @@ namespace XenAdmin.Wizards.PatchingWizard
             ManualRadioButton.Checked = automaticDisabled;
 
             if (automaticDisabled)
-                allowRadioButtonContainer.SetToolTip(Messages.POOL_FORBIDS_AUTOMATIC_RESTARTS);
-
+            {
+                tableLayoutPanel1.MouseMove += tableLayoutPanel1_MouseMove;
+            }
 
             if (SelectedUpdateType == UpdateType.ISO || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
             {
                 removeUpdateFileCheckBox.Checked = false;
                 removeUpdateFileCheckBox.Visible = false;
+            }
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            tableLayoutPanel1.MouseMove -= tableLayoutPanel1_MouseMove;
+            base.PageLeave(direction, ref cancel);
+        }
+
+        /// <summary>
+        /// Display the tooltip over the automatic radio button only if it is disabled
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            var control = tableLayoutPanel1.GetChildAtPoint(e.Location);
+            if (control != null && !control.Enabled && control is RadioButton)
+            {
+                if (_tooltipShowing) return;
+
+                automaticRadioButtonTooltip.Show(Messages.POOL_FORBIDS_AUTOMATIC_RESTARTS,
+                    AutomaticRadioButton,
+                    e.Location.X, control.Height/2);
+                _tooltipShowing = true;
+            }
+            else
+            {
+                automaticRadioButtonTooltip.Hide(AutomaticRadioButton);
+                _tooltipShowing = false;
             }
         }
 
@@ -177,17 +210,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (AutomaticRadioButton.Checked)
-                ManualRadioButton.Checked = false;
-
             UpdateEnablement();
         }
 
         private void ManualRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (ManualRadioButton.Checked)
-                AutomaticRadioButton.Checked = false;
-            
             UpdateEnablement();
         }
 
