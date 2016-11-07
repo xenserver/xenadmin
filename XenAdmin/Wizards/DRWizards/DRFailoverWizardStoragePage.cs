@@ -51,6 +51,7 @@ namespace XenAdmin.Wizards.DRWizards
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public event Action<string> NewDrTaskIntroduced;
+        private List<SR> _availableSRs = new List<SR>();
 
         public DRFailoverWizardStoragePage()
         {
@@ -87,14 +88,24 @@ namespace XenAdmin.Wizards.DRWizards
 
         public override bool EnableNext()
         {
+            if (_worker.IsBusy)
+                return false;
+
             buttonClearAll.Enabled = SelectedSRsUuids.Count > 0;
             buttonSelectAll.Enabled = SelectedSRsUuids.Count < dataGridViewSRs.Rows.OfType<SrRow>().Count();
             return SelectedSRsUuids.Count > 0;
         }
 
+        public override bool EnablePrevious()
+        {
+            return !_worker.IsBusy;
+        }
+
         private readonly ConnectionLostDialogLauncher cldl = new ConnectionLostDialogLauncher();
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
+            _worker.CancelAsync();
+
             if (direction == PageLoadedDirection.Forward)
             {
                 IntroduceSRs();
@@ -108,53 +119,67 @@ namespace XenAdmin.Wizards.DRWizards
             base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
                 SetupLabels();
+        }
 
-            PopulateSrList();
-            
-            if (dataGridViewSRs.Rows.Count > 0)
-                SortRows();
+        public override void PopulatePage()
+        {
+            dataGridViewSRs.Rows.Clear();
+            SelectedSRsUuids.Clear();
+            _availableSRs.Clear();
+            OnPageUpdated();
+            spinnerIcon1.StartSpinning();
+            _worker.RunWorkerAsync();
+        }
+
+        public override void PageCancelled()
+        {
+           _worker.CancelAsync();
         }
 
         #endregion
 
         #region Initial page setup
-        private void PopulateSrList()
+
+        private void _worker_DoWork(object sender, DoWorkEventArgs e)
         {
             Pool currentPool = Helpers.GetPoolOfOne(Connection);
             if (currentPool == null)
                 return;
 
+            var srs = new List<SR>(Connection.Cache.SRs);
+            for (int i = 0; i < srs.Count; i++)
+            {
+                if (_worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                var sr = srs[i];
+                SR checkedSr = SR.SupportsDatabaseReplication(sr.Connection, sr) ? sr : null;
+                int percentage = (i + 1)*100/srs.Count;
+                _worker.ReportProgress(percentage, checkedSr);
+            }
+        }
+
+        private void _worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            SR sr = e.UserState as SR;
+            if (sr != null)
+                _availableSRs.Add(sr);
+        }
+
+        private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            spinnerIcon1.StopSpinning();
             try
             {
                 dataGridViewSRs.SuspendLayout();
-                dataGridViewSRs.Rows.Clear();
 
-                // add existing SRs
-                List<SR> srs = new List<SR>(Connection.Cache.SRs);
-                foreach (SR sr in srs)
+                foreach (SR sr in _availableSRs)
                 {
-                    if (!sr.SupportsDatabaseReplication())
-                        continue;
-
-                    bool poolMetadataDetected = false;
-                    log.DebugFormat("Looking for foreign pool metadata VDIs on SR {0}.", sr.Name);
-
-                    List<VDI> vdis = sr.Connection.ResolveAll(sr.VDIs);
-
-                    foreach (VDI vdi in vdis)
-                    {
-                        if (vdi.type != vdi_type.metadata)
-                            continue;
-
-                        /*if (vdi.metadata_of_pool.opaque_ref == currentPool.opaque_ref)
-                        {
-                            continue;
-                        }*/
-
-                        // found a metadata VDI
-                        poolMetadataDetected = true;
-                        break;
-                    }
+                    var vdis = sr.Connection.ResolveAll(sr.VDIs);
+                    bool poolMetadataDetected = vdis.Any(vdi => vdi.type == vdi_type.metadata);
 
                     SrRow row;
                     if (!FindRowByUuid(sr.uuid, out row))
@@ -179,16 +204,15 @@ namespace XenAdmin.Wizards.DRWizards
                     }
                 }
 
-                //set the width of the last column
-                columnMetadata.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                int storedWidth = columnMetadata.Width;
-                columnMetadata.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                columnMetadata.MinimumWidth = storedWidth;
+                if (dataGridViewSRs.Rows.Count > 0)
+                    SortRows();
             }
             finally
             {
                 dataGridViewSRs.ResumeLayout();
             }
+
+            OnPageUpdated();
         }
 
         private void SetupLabels()
@@ -228,88 +252,74 @@ namespace XenAdmin.Wizards.DRWizards
 
         private void ScanForSRs(SR.SRTypes type)
         {
-            bool succeeded;
-            List<string> srs = new List<string>();
+            var srs = new List<SR.SRInfo>();
 
             switch (type)
             {
-                case SR.SRTypes.lvmohba :
-                    List<FibreChannelDevice> devices = new List<FibreChannelDevice>();
-                    succeeded = FiberChannelScan(devices);
-                    if (succeeded)
+                case SR.SRTypes.lvmohba:
+                    var devices = FiberChannelScan();
+                    if (devices != null && devices.Count > 0)
                     {
                         foreach (FibreChannelDevice device in devices)
                         {
                             string deviceId = string.IsNullOrEmpty(device.SCSIid) ? device.Path : device.SCSIid;
-                            succeeded = succeeded && ScanDeviceForSRs(SR.SRTypes.lvmohba, deviceId,
-                                                                      GetFCDeviceConfig(device));
-                            
-                            srs.AddRange(ScannedDevices[deviceId].SRList.Select(srInfo => srInfo.Name));
+                            var metadataSrs = ScanDeviceForSRs(SR.SRTypes.lvmohba, deviceId, GetFCDeviceConfig(device));
+                            if (metadataSrs != null && metadataSrs.Count > 0)
+                                srs.AddRange(metadataSrs);
                         }
                     }
-                    ShowScanResult(srs, succeeded);
+                    AddScanResultsToDataGridView(srs, SR.SRTypes.lvmohba);
                     break;
 
-                case SR.SRTypes.lvmoiscsi :
-                    IscsiDeviceConfigDialog dialog = new IscsiDeviceConfigDialog(Connection);
-                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                case SR.SRTypes.lvmoiscsi:
+                    using (var dialog = new IscsiDeviceConfigDialog(Connection))
                     {
-                        Dictionary<String, String> dconf = dialog.DeviceConfig;
-                        string deviceId = string.IsNullOrEmpty(dconf[SCSIID]) ? dconf[LUNSERIAL] : dconf[SCSIID];
+                        if (dialog.ShowDialog(this) == DialogResult.OK)
+                        {
+                            Dictionary<String, String> dconf = dialog.DeviceConfig;
+                            string deviceId = string.IsNullOrEmpty(dconf[SCSIID]) ? dconf[LUNSERIAL] : dconf[SCSIID];
 
-                        succeeded = ScanDeviceForSRs(SR.SRTypes.lvmoiscsi, deviceId, dconf);
-
-                        if (succeeded)
-                            srs.AddRange(ScannedDevices[deviceId].SRList.Select(srInfo => srInfo.Name));
-
-                        ShowScanResult(srs, succeeded);
+                            var metadataSrs = ScanDeviceForSRs(SR.SRTypes.lvmoiscsi, deviceId, dconf);
+                            if (metadataSrs != null && metadataSrs.Count > 0)
+                                srs.AddRange(metadataSrs);
+                        }
                     }
+                    AddScanResultsToDataGridView(srs, SR.SRTypes.lvmoiscsi);
                     break;
             }
+
+            if (srs.Count == 0)
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Information,
+                        Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE,
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
         }
 
-        private void ShowScanResult(List<string> srs, bool succeeded)
-        {
-            if (srs.Count > 0)
-            {
-                SortRows();
-            }
-            else
-            {
-                if (succeeded)
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Information,
-                            Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE,
-                            Messages.XENCENTER)))
-                    {
-                        dlg.ShowDialog(this);
-                    }
-            }
-        }
-
-        private bool FiberChannelScan(List<FibreChannelDevice> devices)
+        private List<FibreChannelDevice> FiberChannelScan()
         {
             Host master = Helpers.GetMaster(Connection);
             if (master == null)
-                return false;
+                return null;
 
             FibreChannelProbeAction action = new FibreChannelProbeAction(master);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(this); //Will block until dialog closes, action completed
 
             if (!action.Succeeded)
-                return false;
+                return null;
 
             try
             {
-                FibreChannelProbeParsing.ProcessXML(action.Result, devices);
-                return true;
+                return FibreChannelProbeParsing.ProcessXML(action.Result);
             }
             catch (Exception e)
             {
                 log.Debug("Exception parsing result of fibre channel scan", e);
                 log.Debug(e, e);
-                return false;
+                return null;
             }
         }
 
@@ -337,13 +347,11 @@ namespace XenAdmin.Wizards.DRWizards
 
         private const String METADATA = "metadata";
 
-        private bool ScanDeviceForSRs(SR.SRTypes type, string deviceId, Dictionary<string, string> dconf)
+        private List<SR.SRInfo> ScanDeviceForSRs(SR.SRTypes type, string deviceId, Dictionary<string, string> dconf)
         {
             Host master = Helpers.GetMaster(Connection);
             if (master == null || dconf == null)
-            {
-                return false;
-            }
+                return null;
 
             Dictionary<string, string> smconf = new Dictionary<string, string>();
             smconf[METADATA] = "true";
@@ -354,13 +362,11 @@ namespace XenAdmin.Wizards.DRWizards
                 dlg.ShowDialog(this);
 
             if (!srProbeAction.Succeeded)
-                return false;
+                return null;
 
             try
             {
-                List<SR.SRInfo> srList = SR.ParseSRListXML(srProbeAction.Result);
-
-                List<SR.SRInfo> metadataSrs = srList; //srList.Where(srInfo => srInfo.PoolMetadataDetected).ToList();
+                var metadataSrs = SR.ParseSRListXML(srProbeAction.Result);
 
                 if (ScannedDevices.ContainsKey(deviceId))
                 {
@@ -373,23 +379,30 @@ namespace XenAdmin.Wizards.DRWizards
                     ScannedDevices.Add(deviceId, new ScannedDeviceInfo(type, dconf, metadataSrs));
                 }
 
-                foreach (SR.SRInfo srInfo in metadataSrs)
-                {
-                    SrRow row;
-                    if (!FindRowByUuid(srInfo.UUID, out row))
-                    {
-                        row = new SrRow(srInfo, type, srInfo.PoolMetadataDetected,
-                                               srInfo.PoolMetadataDetected);
-                        dataGridViewSRs.Rows.Add(row);
-                        ToggleRowChecked(row);
-                    }
-                }
-                return true;
+                return metadataSrs;
             }
             catch
             {
-                return false;
+                return null;
             }
+        }
+
+        private void AddScanResultsToDataGridView(List<SR.SRInfo> metadataSrs, SR.SRTypes type)
+        {
+            if (metadataSrs == null || metadataSrs.Count == 0)
+                return;
+
+            foreach (SR.SRInfo srInfo in metadataSrs)
+            {
+                SrRow row;
+                if (!FindRowByUuid(srInfo.UUID, out row))
+                {
+                    row = new SrRow(srInfo, type, srInfo.PoolMetadataDetected, srInfo.PoolMetadataDetected);
+                    dataGridViewSRs.Rows.Add(row);
+                    ToggleRowChecked(row);
+                }
+            }
+            SortRows();
         }
 
         #endregion
@@ -494,7 +507,7 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 foreach (VDI vdi in action.VDIs)
                 {
-                    var inUse = Connection.ResolveAll(vdi.VBDs).Where(vbd => vbd.currently_attached).Any();
+                    var inUse = Connection.ResolveAll(vdi.VBDs).Any(vbd => vbd.currently_attached);
                     if (!inUse)
                         LoadPoolMetadata(vdi);
                     else
@@ -574,12 +587,10 @@ namespace XenAdmin.Wizards.DRWizards
         {
             private readonly SR Sr;
             private readonly SR.SRInfo SrInfo;
-            public bool HasMetadata { get; private set; }
 
             public SrRow(SR sr, bool poolMetadataDetected, bool selected)
             {
                 Sr = sr;
-                HasMetadata = poolMetadataDetected;
 
                 var cellTick = new DataGridViewCheckBoxCell { Value = selected };
                 var cellName = new DataGridViewTextBoxCell { Value = sr.Name };
@@ -592,7 +603,6 @@ namespace XenAdmin.Wizards.DRWizards
             public SrRow(SR.SRInfo srInfo, SR.SRTypes type, bool poolMetadataDetected, bool selected)
             {
                 SrInfo = srInfo;
-                HasMetadata = poolMetadataDetected;
 
                 var cellTick = new DataGridViewCheckBoxCell { Value = selected };
                 var cellName = new DataGridViewTextBoxCell { Value = srInfo.Name };
