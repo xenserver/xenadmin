@@ -31,25 +31,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Actions;
+using XenAdmin.Wizards.GenericPages;
 
 
 namespace XenAdmin.Dialogs
 {
     public partial class EnablePvsReadCachingDialog : XenDialogBase
     {
-        private IList<VM> vms;
+        private readonly IList<VM> _vms;
 
         public EnablePvsReadCachingDialog(IList<VM> vms)
         {
             InitializeComponent();
 
-            this.vms = vms;
+            _vms = vms;
 
-            if (vms.Count() > 1)
+            if (vms.Count > 1)
             {
                 rubricLabel.Text = Messages.ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE;
             }
@@ -64,11 +65,12 @@ namespace XenAdmin.Dialogs
         private void PopulateSiteList()
         {
             // We assume all VMs share a pool
-            var vm = vms[0];
-            foreach (var site in vm.Connection.Cache.PVS_sites)
+            var vm = _vms[0];
+
+            foreach (var site in vm.Connection.Cache.PVS_sites.Reverse())
             {
-                var siteToAdd = new ToStringWrapper<PVS_site>(site, site.Name);
-                pvsSiteList.Items.Add(siteToAdd);
+                 var siteToAdd = new PvsSiteComboBoxItem(site);
+                 pvsSiteList.Items.Add(siteToAdd);
             }
 
             if (pvsSiteList.Items.Count > 0)
@@ -79,12 +81,12 @@ namespace XenAdmin.Dialogs
 
         private void enableButton_Click(object sender, EventArgs e)
         {
-            var siteItemSelected = (ToStringWrapper<PVS_site>) pvsSiteList.SelectedItem;
-            var siteSelected = siteItemSelected.item;
+            var siteItemSelected = (PvsSiteComboBoxItem) pvsSiteList.SelectedItem;
+            var siteSelected = (PVS_site) siteItemSelected.Item;
 
             var actions = new List<AsyncAction>();
 
-            foreach (var vm in vms)
+            foreach (var vm in _vms)
             {
                 var action = GetAsyncActionForVm(vm, siteSelected);
                 if (action != null)
@@ -138,6 +140,34 @@ namespace XenAdmin.Dialogs
             var vifs = vm.Connection.ResolveAll(vifRefs);
 
             return vifs.FirstOrDefault(vif => vif.device.Equals("0"));
+        }
+    }
+
+    internal class PvsSiteComboBoxItem : IEnableableXenObjectComboBoxItem
+    {
+        private readonly PVS_site _site;
+
+        public PvsSiteComboBoxItem(PVS_site site)
+        {
+            Debug.Assert(site != null, "site passed to combobox was null");
+            _site = site;
+        }
+
+        public bool Enabled
+        {
+            get { return !string.IsNullOrEmpty(_site.PVS_uuid); }
+        }
+
+        public override string ToString()
+        {
+            return Enabled
+                ? _site.Name
+                : string.Format("{0} ({1})", _site.Name, Messages.PVS_CACHE_NOT_CONFIGURED);
+        }
+
+        public IXenObject Item
+        {
+            get { return _site; }
         }
     }
 }
