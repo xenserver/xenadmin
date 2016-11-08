@@ -404,7 +404,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 DesignedGraph cpudg = new DesignedGraph();
                 cpudg.DisplayName = Messages.GRAPHS_DEFAULT_NAME_CPU;
-                for (int i = 0; i < vm.VCPUs_max; i++)
+                for (int i = 0; i < vm.VCPUs_at_startup; i++)
                 {
                     AddDataSource(string.Format("vm:{0}:cpu{1}", vm.uuid, i), dsuuids, cpudg);
                 }
