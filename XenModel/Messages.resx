@@ -9966,8 +9966,8 @@ To log out of this server and log in again using a different user account, enter
   <data name="REMOVED_UPDATE" xml:space="preserve">
     <value>Removed Update '{0}'</value>
   </data>
-  <data name="REMOVED_UPDATES" xml:space="preserve">
-    <value>Removed Updates</value>
+  <data name="CLEANED_UPDATE_FILES" xml:space="preserve">
+    <value>Cleaned Update Files</value>
   </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removed from vApp </value>
@@ -10035,8 +10035,8 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVE_STORAGE_SYSTEMS" xml:space="preserve">
     <value>R&amp;emove Storage Systems</value>
   </data>
-  <data name="REMOVE_UPDATES" xml:space="preserve">
-    <value>Remove Updates</value>
+  <data name="CLEAN_UPDATE_FILES" xml:space="preserve">
+    <value>Clean Update Files</value>
   </data>
   <data name="REMOVE_VIRTUAL_DISK" xml:space="preserve">
     <value>Remove Virtual Disk</value>
@@ -10065,8 +10065,8 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVING_UPDATE" xml:space="preserve">
     <value>Removing Update '{0}'...</value>
   </data>
-  <data name="REMOVING_UPDATES" xml:space="preserve">
-    <value>Removing Updates</value>
+  <data name="CLEANING_UPDATE_FILES" xml:space="preserve">
+    <value>Cleaning Update Files</value>
   </data>
   <data name="REMOVING_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removing from vApp</value>
