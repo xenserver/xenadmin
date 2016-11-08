@@ -247,6 +247,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 else
                 {
                     var isCopy = wizardMode == WizardMode.Copy;
+                    var migrateAction = 
+                        new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
 
                     if (_resumeAfterMigrate)
                     {
@@ -256,16 +258,16 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
                         var actions = new List<AsyncAction>()
                         {
-                            new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy),
+                            migrateAction,
                             new ResumeAndStartVMsAction(vm.Connection, target, new List<VM>{vm}, new List<VM>(), null, null)
                         };
 
                         new MultipleAction(vm.Connection, title, startDescription, endDescription,
-                            actions, false, false, true).RunAsync();
+                            actions, true, false, true).RunAsync();
                     }
                     else
                     {
-                        new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy).RunAsync();
+                        migrateAction.RunAsync();
                     }
                 }
             }
