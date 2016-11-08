@@ -289,6 +289,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Pool_patch patch = e.Argument as Pool_patch;
                 Pool_update update = e.Argument as Pool_update;
 
+                LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
+
                 List<KeyValuePair<string, List<Check>>> checks = update != null ? GenerateChecks(update) : GenerateChecks(patch); //patch is expected to be null for RPU
                 _numberChecks = checks.Count;
                 for (int i = 0; i < checks.Count; i++)
@@ -400,9 +402,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
             
             List<Check> checkGroup;
-
-            LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
-
+            
             //Checking other things
             if (patch != null)
             {
