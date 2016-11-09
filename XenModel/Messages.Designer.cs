@@ -7048,33 +7048,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clean Update Files.
-        /// </summary>
-        public static string CLEAN_UPDATE_FILES {
-            get {
-                return ResourceManager.GetString("CLEAN_UPDATE_FILES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cleaned Update Files.
-        /// </summary>
-        public static string CLEANED_UPDATE_FILES {
-            get {
-                return ResourceManager.GetString("CLEANED_UPDATE_FILES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cleaning Update Files.
-        /// </summary>
-        public static string CLEANING_UPDATE_FILES {
-            get {
-                return ResourceManager.GetString("CLEANING_UPDATE_FILES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clear Search.
         /// </summary>
         public static string CLEAR_SEARCH {
@@ -26712,6 +26685,33 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_PRECHECKPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete update installation files.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVE_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVE_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted update installation files.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVED_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting update installation files.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVING_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVING_UPDATES", resourceCulture);
             }
         }
         
