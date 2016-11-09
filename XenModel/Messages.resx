@@ -9966,9 +9966,6 @@ To log out of this server and log in again using a different user account, enter
   <data name="REMOVED_UPDATE" xml:space="preserve">
     <value>Removed Update '{0}'</value>
   </data>
-  <data name="CLEANED_UPDATE_FILES" xml:space="preserve">
-    <value>Cleaned Update Files</value>
-  </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removed from vApp </value>
   </data>
@@ -10035,9 +10032,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVE_STORAGE_SYSTEMS" xml:space="preserve">
     <value>R&amp;emove Storage Systems</value>
   </data>
-  <data name="CLEAN_UPDATE_FILES" xml:space="preserve">
-    <value>Clean Update Files</value>
-  </data>
   <data name="REMOVE_VIRTUAL_DISK" xml:space="preserve">
     <value>Remove Virtual Disk</value>
   </data>
@@ -10064,9 +10058,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REMOVING_UPDATE" xml:space="preserve">
     <value>Removing Update '{0}'...</value>
-  </data>
-  <data name="CLEANING_UPDATE_FILES" xml:space="preserve">
-    <value>Cleaning Update Files</value>
   </data>
   <data name="REMOVING_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removing from vApp</value>
@@ -13344,5 +13335,14 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVED_UPDATES" xml:space="preserve">
+    <value>Deleted update installation files</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVE_UPDATES" xml:space="preserve">
+    <value>Delete update installation files</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
+    <value>Deleting update installation files</value>
   </data>
 </root>

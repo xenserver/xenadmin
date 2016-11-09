@@ -309,19 +309,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RemoveUnwantedPatches(List<Pool_patch> patchesToRemove)
         {
             List<AsyncAction> subActions = GetRemovePatchActions(patchesToRemove);
-            RunMultipleActions(Messages.CLEAN_UPDATE_FILES, Messages.CLEANING_UPDATE_FILES, Messages.CLEANED_UPDATE_FILES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void RemoveTemporaryVdis()
         {
             List<AsyncAction> subActions = GetRemoveVdiActions();
-            RunMultipleActions(Messages.CLEAN_UPDATE_FILES, Messages.CLEANING_UPDATE_FILES, Messages.CLEANED_UPDATE_FILES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void CleanUpPoolUpdates()
         {
             var subActions = GetCleanUpPoolUpdateActions();
-            RunMultipleActions(Messages.CLEAN_UPDATE_FILES, Messages.CLEANING_UPDATE_FILES, Messages.CLEANED_UPDATE_FILES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void RemoveDownloadedPatches()
