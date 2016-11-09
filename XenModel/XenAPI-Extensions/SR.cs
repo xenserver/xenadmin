@@ -1020,14 +1020,6 @@ namespace XenAPI
         /// <summary>
         /// Whether SR supports database replication.
         /// </summary>
-        public bool SupportsDatabaseReplication()
-        {
-            return SupportsDatabaseReplication(Connection, this);
-        }
-
-        /// <summary>
-        /// Whether SR supports database replication.
-        /// </summary>
         public static bool SupportsDatabaseReplication(IXenConnection connection, SR sr)
         {
             try
