@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using XenAdmin.Actions;
 using XenAdmin.Actions.VMActions;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
@@ -68,13 +69,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private WizardMode wizardMode;
 
-        public CrossPoolMigrateWizard(IXenConnection con, IEnumerable<SelectedItem> selection, Host targetHostPreSelection, WizardMode mode)
+	    private bool _resumeAfterMigrate;
+
+        // Note that resumeAfter is currently only implemented for Migrate mode, used for resume on server functionality
+        public CrossPoolMigrateWizard(IXenConnection con, IEnumerable<SelectedItem> selection, Host targetHostPreSelection, WizardMode mode, bool resumeAfterMigrate=false)
             : base(con)
         {
             InitializeComponent();
             hostPreSelection = targetHostPreSelection;
             wizardMode = mode;
             InitialiseWizard(selection);
+            _resumeAfterMigrate = resumeAfterMigrate;
         }
 
 
@@ -239,8 +244,32 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
                 if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
                     new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
-                else 
-                    new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, wizardMode == WizardMode.Copy).RunAsync();
+                else
+                {
+                    var isCopy = wizardMode == WizardMode.Copy;
+                    var migrateAction = 
+                        new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
+
+                    if (_resumeAfterMigrate)
+                    {
+                        var title = VMCrossPoolMigrateAction.GetTitle(vm, target, isCopy);
+                        var startDescription = isCopy ? Messages.ACTION_VM_COPYING: Messages.ACTION_VM_MIGRATING;
+                        var endDescription = isCopy ? Messages.ACTION_VM_COPIED: Messages.ACTION_VM_MIGRATED;
+
+                        var actions = new List<AsyncAction>()
+                        {
+                            migrateAction,
+                            new ResumeAndStartVMsAction(vm.Connection, target, new List<VM>{vm}, new List<VM>(), null, null)
+                        };
+
+                        new MultipleAction(vm.Connection, title, startDescription, endDescription,
+                            actions, true, false, true).RunAsync();
+                    }
+                    else
+                    {
+                        migrateAction.RunAsync();
+                    }
+                }
             }
             
             base.FinishWizard();

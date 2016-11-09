@@ -77,7 +77,7 @@ namespace XenAdmin.Actions.VMActions
         }
             
 
-        private static string GetTitle(VM vm, Host toHost, bool copy)
+        public static string GetTitle(VM vm, Host toHost, bool copy)
         {
             if (copy)
                 return string.Format(Messages.ACTION_VM_CROSS_POOL_COPY_TITLE, vm.Name, toHost.Name);

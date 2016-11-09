@@ -47,16 +47,18 @@ namespace XenAdmin.Commands
 {
     internal class CrossPoolMigrateCommand : VMOperationCommand
     {
+        private bool _resumeAfter;
 
         public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
             : base(mainWindow, selection)
         { }
 
         protected Host preSelectedHost = null;
-        public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
+        public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost, bool resumeAfter=false)
             : base(mainWindow, selection)
         {
             this.preSelectedHost = preSelectedHost;
+            _resumeAfter = resumeAfter;
         }
 
         public override string MenuText
@@ -81,10 +83,9 @@ namespace XenAdmin.Commands
             }
             else
             {
-                MainWindowCommandInterface.ShowPerConnectionWizard(con, 
-                    new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Migrate));
+                var wizard = new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Migrate, _resumeAfter);
+                MainWindowCommandInterface.ShowPerConnectionWizard(con, wizard); 
             }
-
         }
 
         protected override Host GetHost(VM vm)
