@@ -7309,7 +7309,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This configuration is in use by PVS. Are you sure you want to delete &apos;{0}&apos;?.
+        ///   Looks up a localized string similar to Are you sure you want to delete &apos;{0}&apos;? This configuration is in use by PVS..
         /// </summary>
         public static string CONFIRM_DELETE_PVS_SITE_IN_USE {
             get {
@@ -23650,6 +23650,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Windows File Sharing (SMB/CIFS).
+        /// </summary>
+        public static string NEWSR_CIFS_ISO_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_CIFS_ISO_TYPE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMB/CIFS.
+        /// </summary>
+        public static string NEWSR_CIFS_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_CIFS_TYPE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the storage system adapter.
         /// </summary>
         public static string NEWSR_CSLG_ADAPTER_PAGE_TITLE {
@@ -23754,6 +23772,15 @@ namespace XenAdmin {
         public static string NEWSR_CSLG_THIN_PROVISIONING {
             get {
                 return ResourceManager.GetString("NEWSR_CSLG_THIN_PROVISIONING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StorageLink technology.
+        /// </summary>
+        public static string NEWSR_CSLG_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_CSLG_TYPE_NAME", resourceCulture);
             }
         }
         
@@ -23917,6 +23944,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Software FCoE.
+        /// </summary>
+        public static string NEWSR_LVMOFCOE_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOFCOE_TYPE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenServer] hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
         ///
         ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the [XenServer] host.
@@ -24020,6 +24056,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hardware HBA.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_TYPE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
         ///
         ///Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility..
@@ -24027,6 +24072,15 @@ namespace XenAdmin {
         public static string NEWSR_LVMOISCSI_BLURB {
             get {
                 return ResourceManager.GetString("NEWSR_LVMOISCSI_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to iSCSI.
+        /// </summary>
+        public static string NEWSR_LVMOISCSI_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOISCSI_TYPE_NAME", resourceCulture);
             }
         }
         
@@ -24125,6 +24179,15 @@ namespace XenAdmin {
         public static string NEWSR_NFS_ISO_BLURB {
             get {
                 return ResourceManager.GetString("NEWSR_NFS_ISO_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NFS ISO.
+        /// </summary>
+        public static string NEWSR_NFS_ISO_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_NFS_ISO_TYPE_NAME", resourceCulture);
             }
         }
         
@@ -24246,6 +24309,15 @@ namespace XenAdmin {
         public static string NEWSR_VHDONFS_BLURB {
             get {
                 return ResourceManager.GetString("NEWSR_VHDONFS_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NFS.
+        /// </summary>
+        public static string NEWSR_VHDONFS_TYPE_NAME {
+            get {
+                return ResourceManager.GetString("NEWSR_VHDONFS_TYPE_NAME", resourceCulture);
             }
         }
         
@@ -28039,7 +28111,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PVS cache configuration cannot be removed because it contains running proxies..
+        ///   Looks up a localized string similar to This PVS cache configuration cannot be removed because there are VMs that are streamed from this site..
         /// </summary>
         public static string PVS_SITE_CANNOT_BE_REMOVED {
             get {

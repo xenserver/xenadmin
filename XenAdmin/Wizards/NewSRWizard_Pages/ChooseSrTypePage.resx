@@ -142,7 +142,7 @@
     <value>11</value>
   </data>
   <data name="radioButtonNfs.Text" xml:space="preserve">
-    <value>&amp;NFS</value>
+    <value>N&amp;FS</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.Name" xml:space="preserve">
     <value>radioButtonNfs</value>
