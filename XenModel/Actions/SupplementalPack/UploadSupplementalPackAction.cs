@@ -189,6 +189,9 @@ namespace XenAdmin.Actions
                     var poolUpdateRef = Pool_update.introduce(Connection.Session, vdiRef);
                     poolUpdate = Connection.WaitForCache(poolUpdateRef);
 
+                    if (poolUpdate == null)
+                        throw new Exception(Messages.UPDATE_ERROR_INTRODUCE); // This should not happen, because such case will result in a XAPI Failure. But this code has to be protected at this point.
+
                     VdiRefsToCleanUp.Clear();
                 }
                 catch (Failure ex)
