@@ -309,19 +309,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RemoveUnwantedPatches(List<Pool_patch> patchesToRemove)
         {
             List<AsyncAction> subActions = GetRemovePatchActions(patchesToRemove);
-            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void RemoveTemporaryVdis()
         {
             List<AsyncAction> subActions = GetRemoveVdiActions();
-            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void CleanUpPoolUpdates()
         {
             var subActions = GetCleanUpPoolUpdateActions();
-            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void RemoveDownloadedPatches()
@@ -380,16 +380,28 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (PatchingWizard_UploadPage.AllIntroducedPoolUpdates != null && PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Count > 0)
             {
-                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Select(pu => GetCleanUpPoolUpdateAction(pu)).ToList();
+                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Select(GetCleanUpPoolUpdateAction).ToList();
             }
 
             return new List<AsyncAction>();
         }
 
-        private AsyncAction GetCleanUpPoolUpdateAction(Pool_update poolUpdate)
+        private static AsyncAction GetCleanUpPoolUpdateAction(Pool_update poolUpdate)
         {
             return
-                new DelegatedAsyncAction(poolUpdate.Connection, Messages.REMOVE_PATCH, "", "", session => Pool_update.pool_clean(session, poolUpdate.opaque_ref));
+                new DelegatedAsyncAction(poolUpdate.Connection, Messages.REMOVE_PATCH, "", "", session =>
+                {
+                    try
+                    {
+                        Pool_update.pool_clean(session, poolUpdate.opaque_ref);
+                        if(!poolUpdate.AppliedOnHosts.Any())
+                            Pool_update.destroy(session, poolUpdate.opaque_ref);
+                    }
+                    catch (Failure f)
+                    {
+                        log.Error("Clean up failed", f);
+                    }
+                });
         }
     }
 }
