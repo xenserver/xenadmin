@@ -264,7 +264,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
                     }
-                    if (Helpers.ElyOrGreater(host) && selectedHosts != null)
+                    if (selectedHosts != null)
                     {
                         disableNotApplicableHosts(row, selectedHosts, host);
                     }
