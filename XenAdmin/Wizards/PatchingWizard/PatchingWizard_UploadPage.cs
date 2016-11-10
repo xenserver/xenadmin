@@ -474,6 +474,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                         TryUploading();
                     }
                 }
+                else // if !action.Succeeded
+                {
+                    if (action is UploadSupplementalPackAction)
+                    {
+                        _patch = null;
+
+                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
+                        {
+                            SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
+                        }
+
+                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+
+                        _poolUpdate = null;
+                    }
+                }
             });
         }
 
