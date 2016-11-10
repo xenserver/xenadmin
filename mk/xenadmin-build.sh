@@ -150,6 +150,11 @@ then
   latest=$(ls RPU002 | /usr/bin/sort -n | tail -n 1)
   echo "INFO: Latest version of RPU002 hotfix is $latest"
   cp RPU002/$latest/RPU002.xsupdate RPU002.xsupdate
+  if [ -d "RPU003" ]; then
+    latest=$(ls RPU003 | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of RPU003 hotfix is $latest"
+    cp RPU003/$latest/RPU003.xsupdate RPU003.xsupdate
+  fi
 fi
 
 #build
