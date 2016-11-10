@@ -13372,4 +13372,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
     <value>Deleting update installation files</value>
   </data>
+  <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
+    <value>Failed to introduce the update.</value>
+  </data>
 </root>

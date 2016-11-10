@@ -33067,6 +33067,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to introduce the update..
+        /// </summary>
+        public static string UPDATE_ERROR_INTRODUCE {
+            get {
+                return ResourceManager.GetString("UPDATE_ERROR_INTRODUCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?.
         /// </summary>
         public static string UPDATE_EXPORT_ALL_OR_FILTERED {
