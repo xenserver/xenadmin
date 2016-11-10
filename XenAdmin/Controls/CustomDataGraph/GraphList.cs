@@ -724,6 +724,11 @@ namespace XenAdmin.Controls.CustomDataGraph
             LoadDefaultGraphs();
         }
 
+        public List<string> DisplayNames
+        {
+            get { return Graphs.ConvertAll(g => g.DisplayName); }
+        }
+
         protected override void OnDrawToBuffer(PaintEventArgs paintEventArgs)
         {
             if (Plots.IndexInRange(SelectedGraphIndex))

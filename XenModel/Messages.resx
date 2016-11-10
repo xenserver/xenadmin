@@ -5658,6 +5658,9 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GRAPH_LOADING" xml:space="preserve">
     <value>Loading Data...</value>
   </data>
+  <data name="GRAPH_NAME" xml:space="preserve">
+    <value>Performance Graph</value>
+  </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
     <value>To view memory data for this VM, you need to install [XenServer product] Tools</value>
   </data>
