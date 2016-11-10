@@ -154,19 +154,19 @@
     <value>89, 23</value>
   </data>
   <data name="toolStripDdbFilterDates.Text" xml:space="preserve">
-    <value>Filter by D&amp;ate</value>
+    <value>Filter by &amp;Date</value>
   </data>
   <data name="tsmiDismissAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>&amp;Dismiss All</value>
+    <value>Dismiss &amp;All</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>&amp;Dismiss Selected</value>
+    <value>Dismiss S&amp;elected</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
