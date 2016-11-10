@@ -37,6 +37,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.CustomDataGraph;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -266,7 +267,7 @@ namespace XenAdmin.Dialogs
                 }
                 else
                 {
-                    result = string.Compare(row1.Cells[columnIndex].Value.ToString(),
+                    result = StringUtility.NaturalCompare(row1.Cells[columnIndex].Value.ToString(),
                                             row2.Cells[columnIndex].Value.ToString());
                 }
 
