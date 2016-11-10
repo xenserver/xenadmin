@@ -437,19 +437,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is UploadSupplementalPackAction)
                     {
                         _patch = null;
+                        var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
 
-                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
+                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
+                        {
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
-                        
-                        if (!Helpers.ElyOrGreater(action.Connection)) //we run pool_update.pool_clean instead of deleting the VDIs separately
-                            AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+                        }
+
+                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
 
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
 
                         if (Helpers.ElyOrGreater(action.Connection))
                         {
-                            var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
-
                             if (newPoolUpdate != null)
                             {
                                 _poolUpdate = newPoolUpdate;
