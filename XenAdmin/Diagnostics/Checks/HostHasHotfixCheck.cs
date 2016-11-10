@@ -52,23 +52,9 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.IsLive)
                 return new HostNotLiveWarning(this, Host);
 
-            if (Helpers.CreedenceOrGreater(Host) && !Helpers.DundeeOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).ShouldBeAppliedTo(Host))
-            {
+            var hotfix = hotfixFactory.Hotfix(Host);
+            if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
                 return new HostDoesNotHaveHotfix(this, Host);
-            }
-
-            if (Helpers.SanibelOrGreater(Host) && !Helpers.CreedenceOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).ShouldBeAppliedTo(Host))
-            {
-                return new HostDoesNotHaveHotfix(this, Host);
-            }
-
-            if (!Helpers.SanibelOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).ShouldBeAppliedTo(Host))
-            {
-                return new HostDoesNotHaveHotfix(this, Host);
-            }
 
             return null;
         }
