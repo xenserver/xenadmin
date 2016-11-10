@@ -26761,6 +26761,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete update installation files.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVE_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVE_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted update installation files.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVED_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting update installation files.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVING_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVING_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Update File.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE {
@@ -28842,15 +28869,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Updates.
-        /// </summary>
-        public static string REMOVE_UPDATES {
-            get {
-                return ResourceManager.GetString("REMOVE_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove Virtual Disk.
         /// </summary>
         public static string REMOVE_VIRTUAL_DISK {
@@ -28914,15 +28932,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed Updates.
-        /// </summary>
-        public static string REMOVED_UPDATES {
-            get {
-                return ResourceManager.GetString("REMOVED_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Removed from vApp .
         /// </summary>
         public static string REMOVED_VMS_FROM_APPLIANCE {
@@ -28973,15 +28982,6 @@ namespace XenAdmin {
         public static string REMOVING_UPDATE {
             get {
                 return ResourceManager.GetString("REMOVING_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removing Updates.
-        /// </summary>
-        public static string REMOVING_UPDATES {
-            get {
-                return ResourceManager.GetString("REMOVING_UPDATES", resourceCulture);
             }
         }
         
