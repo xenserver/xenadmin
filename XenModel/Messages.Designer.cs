@@ -16044,6 +16044,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Performance Graph.
+        /// </summary>
+        public static string GRAPH_NAME {
+            get {
+                return ResourceManager.GetString("GRAPH_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To view memory data for this VM, you need to install [XenServer product] Tools.
         /// </summary>
         public static string GRAPH_NEEDS_TOOLS {
