@@ -437,7 +437,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is UploadSupplementalPackAction)
                     {
                         _patch = null;
-                        var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
 
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
                         {
@@ -450,6 +449,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         if (Helpers.ElyOrGreater(action.Connection))
                         {
+                            var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
+
                             if (newPoolUpdate != null)
                             {
                                 _poolUpdate = newPoolUpdate;
@@ -479,6 +480,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (action is UploadSupplementalPackAction)
                     {
                         _patch = null;
+                        _poolUpdate = null;
 
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
                         {
@@ -486,8 +488,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
 
                         AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
-
-                        _poolUpdate = null;
                     }
                 }
             });
