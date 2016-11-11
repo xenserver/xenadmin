@@ -6451,7 +6451,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This template is a [XenServer] template and cannot be deleted..
+        ///   Looks up a localized string similar to [XenServer] templates cannot be deleted..
         /// </summary>
         public static string CANNOT_DELETE_DEFAULT_TEMPLATE {
             get {
@@ -7458,7 +7458,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to destroy &apos;{0}&apos;?
         ///
-        ///You should only need to destroy a [XenServer] if it has physically failed.
+        ///You should only need to destroy a server if it has physically failed.
         ///Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
         ///
         ///This action is final and unrecoverable..
@@ -31997,7 +31997,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a [XenServer] host..
+        ///Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a server..
         /// </summary>
         public static string SUPP_PACK_INSTALL_FAILED_MORE_INFO {
             get {
@@ -36852,7 +36852,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not start a [XenServer] session with supplied invalid credentials..
+        ///   Looks up a localized string similar to WLB could not connect to [XenServer] because the supplied credentials were invalid..
         /// </summary>
         public static string WLB_ERROR_4021 {
             get {
