@@ -9763,6 +9763,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS Cache Configuration - '{0}'</value>
   </data>
+  <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
+    <value>{0} (Incomplete PVS configuration)</value>
+  </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
     <value>Memory and disk</value>
   </data>
@@ -9774,6 +9777,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>Not configured</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
+    <value>{0} (Incomplete Cache Storage configuration)</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
     <value>This PVS cache configuration cannot be removed because there are VMs that are streamed from this site.</value>
