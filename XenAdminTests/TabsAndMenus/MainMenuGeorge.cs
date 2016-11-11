@@ -177,7 +177,7 @@ namespace XenAdminTests.TabsAndMenus
             ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	            new ExpectedTextMenuItem("&New Pool...", true, false  ),
 	            new ExpectedSeparator(),
-	            new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+	            new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	            new ExpectedTextMenuItem("Re&move Server", false, false  ),
 	            new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
 	            new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -291,7 +291,7 @@ namespace XenAdminTests.TabsAndMenus
                 ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&New Pool...", true, false  ),
 	                new ExpectedSeparator(),
-	                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+	                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	                new ExpectedTextMenuItem("Re&move Server", false, false  ),
 	                new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
 	                new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -405,7 +405,7 @@ namespace XenAdminTests.TabsAndMenus
             ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	            new ExpectedTextMenuItem("&New Pool...", true, false  ),
 	            new ExpectedSeparator(),
-	            new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+	            new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	            new ExpectedTextMenuItem("Re&move Server", false, false  ),
 	            new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
 	            new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -520,7 +520,7 @@ namespace XenAdminTests.TabsAndMenus
                 ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&New Pool...", true, false  ),
 	                new ExpectedSeparator(),
-	                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+	                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	                new ExpectedTextMenuItem("Re&move Server", false, false  ),
 	                new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
 	                new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -637,7 +637,7 @@ namespace XenAdminTests.TabsAndMenus
                 ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	                new ExpectedTextMenuItem("&New Pool...", true, false  ),
 	                new ExpectedSeparator(),
-	                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+	                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	                new ExpectedTextMenuItem("Re&move Server", false, false  ),
 	                new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
 	                new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -1364,7 +1364,7 @@ namespace XenAdminTests.TabsAndMenus
             ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
                 new ExpectedTextMenuItem("&New Pool...", true, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
                 new ExpectedTextMenuItem("Re&move Server", false, false  ),
                 new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
                 new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -1476,7 +1476,7 @@ namespace XenAdminTests.TabsAndMenus
             ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
                 new ExpectedTextMenuItem("&New Pool...", true, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
                 new ExpectedTextMenuItem("Re&move Server", false, false  ),
                 new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
                 new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -1590,7 +1590,7 @@ namespace XenAdminTests.TabsAndMenus
                 ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
                     new ExpectedTextMenuItem("&New Pool...", true, false  ),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+                    new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	                new ExpectedTextMenuItem("Re&move Server", false, false  ),
                     new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
                     new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -1732,7 +1732,7 @@ namespace XenAdminTests.TabsAndMenus
             ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
                 new ExpectedTextMenuItem("&New Pool...", true, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
                 new ExpectedTextMenuItem("Re&move Server", false, false  ),
                 new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
                 new ExpectedTextMenuItem("Dis&connect", true, false  ),
@@ -1860,7 +1860,7 @@ namespace XenAdminTests.TabsAndMenus
             ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	            new ExpectedTextMenuItem("&New Pool...", true, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("(empty)", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add New Server...", true)}     ),
+                new ExpectedTextMenuItem("&Add Server", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Add New Server...", true)}     ),
 	            new ExpectedTextMenuItem("Re&move Server", false, false  ),
                 new ExpectedTextMenuItem("Reconnec&t As...", true, false  ),
                 new ExpectedTextMenuItem("Dis&connect", true, false  ),
