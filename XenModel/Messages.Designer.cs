@@ -28030,6 +28030,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incomplete PVS configuration.
+        /// </summary>
+        public static string PVS_CACHE_INCOMPLETE_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_INCOMPLETE_CONFIGURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memory and disk.
         /// </summary>
         public static string PVS_CACHE_MEMORY_AND_DISK {
@@ -28057,7 +28066,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incomplete PVS configuration.
+        ///   Looks up a localized string similar to Not configured.
         /// </summary>
         public static string PVS_CACHE_NOT_CONFIGURED {
             get {

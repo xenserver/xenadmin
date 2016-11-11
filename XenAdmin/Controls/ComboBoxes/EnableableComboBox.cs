@@ -51,7 +51,7 @@ namespace XenAdmin.Controls
     {
         public EnableableComboBox()
         {
-            DrawMode = DrawMode.OwnerDrawFixed;
+            DrawMode = DrawMode.OwnerDrawVariable;
             DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
