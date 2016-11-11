@@ -244,7 +244,7 @@ namespace XenAdmin.Diagnostics.Checks
                     return new ConflictingUpdatePresent(this, found, Host);
 
                 case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING":
-                    return new ConflictingUpdatePresent(this, found, Host);
+                    return new PrerequisiteUpdateMissing(this, found, Host);
 
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
                     return new WrongServerVersion(this, required, Host);
