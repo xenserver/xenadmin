@@ -31,35 +31,25 @@
 
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
-
+using System.Collections.Generic;
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public class WrongServerVersion : HostProblem
+    public class ConflictingUpdatePresent : HostProblem
     {
-        private readonly string _versionRequired;
+        private readonly string confilctedUpdates;
 
-        public WrongServerVersion(Check check, string versionRequired, Host host)
+        public ConflictingUpdatePresent(Check check, string confilctedUpdates, Host host)
             : base(check, host)
         {
-            _versionRequired = versionRequired;
-        }
-
-        public WrongServerVersion(Check check, Host host)
-            : base(check, host)
-        {
+            this.confilctedUpdates = confilctedUpdates;
         }
 
         public override string Description
         {
             get 
             {
-                if (!string.IsNullOrEmpty(_versionRequired))
-                {
-                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, _versionRequired);
-                }
-
-                return Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION;
+                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE, confilctedUpdates);
             }
         }
 
