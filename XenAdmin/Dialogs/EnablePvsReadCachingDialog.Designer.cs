@@ -32,7 +32,7 @@ namespace XenAdmin.Dialogs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnablePvsReadCachingDialog));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pvsSiteList = new EnableableComboBox();
+            this.pvsSiteList = new LongStringComboBox();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.pvsSiteLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -120,7 +120,7 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Controls.ToolTipContainer readonlyCheckboxToolTipContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label rubricLabel;
-        private EnableableComboBox pvsSiteList;
+        private LongStringComboBox pvsSiteList;
         private System.Windows.Forms.Label pvsSiteLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button cancel;
