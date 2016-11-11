@@ -9763,6 +9763,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS Cache Configuration - '{0}'</value>
   </data>
+  <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
+    <value>Incomplete PVS configuration</value>
+  </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
     <value>Memory and disk</value>
   </data>
@@ -9773,7 +9776,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>MemorySR</value>
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
-    <value>Incomplete PVS configuration</value>
+    <value>Not configured</value>
   </data>
   <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
     <value>Incomplete Cache Storage configuration</value>

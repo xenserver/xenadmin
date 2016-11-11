@@ -61,7 +61,7 @@ namespace XenAPI
             {
                 if (!IsCacheConfigured())
                 {
-                    return string.Format(Messages.NEWVM_DEFAULTNAME, Name, Messages.PVS_CACHE_NOT_CONFIGURED);
+                    return string.Format(Messages.NEWVM_DEFAULTNAME, Name, Messages.PVS_CACHE_INCOMPLETE_CONFIGURATION);
                 }
 
                 if (!IsStorageConfigured())
