@@ -465,6 +465,14 @@ namespace XenAdmin.Dialogs
 
         private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+            var snapshotTypePageSpecific = verticalTabs.SelectedItem as NewPolicySnapshotTypePageSpecific<VMSS>;
+            if (snapshotTypePageSpecific != null)
+            {
+                newPolicyVMSSTypePage1.ToggleQuiesceCheckBox(newVMSSVMsPage1.SelectedVMs);
+                return;
+            }
+
             var selectedPage = verticalTabs.SelectedItem as NewPolicyArchivePage;
             if (selectedPage != null)
             {
