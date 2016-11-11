@@ -30,6 +30,7 @@
 
 using System;
 using System.Linq;
+using XenAdmin;
 
 namespace XenAPI
 {
@@ -52,6 +53,39 @@ namespace XenAPI
 
             return Connection.Cache.PVS_cache_storages.FirstOrDefault(pvsCacheStorage => 
                 pvsCacheStorage.site.opaque_ref == opaque_ref && pvsCacheStorage.host.opaque_ref == host.opaque_ref);
+        }
+
+        public string NameWithWarning
+        {
+            get
+            {
+                if (!IsCacheConfigured())
+                {
+                    return string.Format(Messages.NEWVM_DEFAULTNAME, Name, Messages.PVS_CACHE_NOT_CONFIGURED);
+                }
+
+                if (!IsStorageConfigured())
+                {
+                    return string.Format(Messages.NEWVM_DEFAULTNAME, Name, Messages.PVS_CACHE_STORAGE_NOT_CONFIGURED);
+                }
+
+                return Name;
+            }
+        }
+
+        private bool IsCacheConfigured()
+        {
+            return !string.IsNullOrEmpty(PVS_uuid);
+        }
+
+        private bool IsStorageConfigured()
+        {
+            var connectionHosts = Connection.Cache.Hosts;
+
+            var siteStorages = Connection.ResolveAll(cache_storage);
+            var storageHosts = Connection.ResolveAll(siteStorages.Select(storage => storage.host));
+
+            return connectionHosts.All(host => storageHosts.Contains(host));
         }
 
         #region IEquatable<PVS_site> Members

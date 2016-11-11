@@ -28057,11 +28057,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not configured.
+        ///   Looks up a localized string similar to Incomplete PVS configuration.
         /// </summary>
         public static string PVS_CACHE_NOT_CONFIGURED {
             get {
                 return ResourceManager.GetString("PVS_CACHE_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete Cache Storage configuration.
+        /// </summary>
+        public static string PVS_CACHE_STORAGE_NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_STORAGE_NOT_CONFIGURED", resourceCulture);
             }
         }
         

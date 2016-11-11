@@ -35,8 +35,6 @@ using System.Diagnostics;
 using System.Linq;
 using XenAPI;
 using XenAdmin.Actions;
-using XenAdmin.Wizards.GenericPages;
-
 
 namespace XenAdmin.Dialogs
 {
@@ -67,7 +65,7 @@ namespace XenAdmin.Dialogs
             // We assume all VMs share a pool
             var vm = _vms[0];
 
-            foreach (var site in vm.Connection.Cache.PVS_sites.Reverse())
+            foreach (var site in vm.Connection.Cache.PVS_sites)
             {
                  var siteToAdd = new PvsSiteComboBoxItem(site);
                  pvsSiteList.Items.Add(siteToAdd);
@@ -143,7 +141,7 @@ namespace XenAdmin.Dialogs
         }
     }
 
-    internal class PvsSiteComboBoxItem : IEnableableXenObjectComboBoxItem
+    internal class PvsSiteComboBoxItem
     {
         private readonly PVS_site _site;
 
@@ -153,16 +151,9 @@ namespace XenAdmin.Dialogs
             _site = site;
         }
 
-        public bool Enabled
-        {
-            get { return !string.IsNullOrEmpty(_site.PVS_uuid); }
-        }
-
         public override string ToString()
         {
-            return Enabled
-                ? _site.Name
-                : string.Format("{0} ({1})", _site.Name, Messages.PVS_CACHE_NOT_CONFIGURED);
+            return _site.NameWithWarning;
         }
 
         public IXenObject Item
