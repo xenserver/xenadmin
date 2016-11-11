@@ -166,7 +166,7 @@
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>Dismiss S&amp;elected</value>
+    <value>Dismiss Sele&amp;cted</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
