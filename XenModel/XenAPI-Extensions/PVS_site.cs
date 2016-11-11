@@ -61,12 +61,12 @@ namespace XenAPI
             {
                 if (!IsCacheConfigured())
                 {
-                    return string.Format(Messages.NEWVM_DEFAULTNAME, Name, Messages.PVS_CACHE_INCOMPLETE_CONFIGURATION);
+                    return string.Format(Messages.PVS_CACHE_INCOMPLETE_CONFIGURATION, Name);
                 }
 
                 if (!IsStorageConfigured())
                 {
-                    return string.Format(Messages.NEWVM_DEFAULTNAME, Name, Messages.PVS_CACHE_STORAGE_NOT_CONFIGURED);
+                    return string.Format(Messages.PVS_CACHE_STORAGE_NOT_CONFIGURED, Name);
                 }
 
                 return Name;

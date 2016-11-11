@@ -28111,7 +28111,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incomplete PVS configuration.
+        ///   Looks up a localized string similar to {0} (Incomplete PVS configuration).
         /// </summary>
         public static string PVS_CACHE_INCOMPLETE_CONFIGURATION {
             get {
@@ -28156,7 +28156,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incomplete Cache Storage configuration.
+        ///   Looks up a localized string similar to {0} (Incomplete Cache Storage configuration).
         /// </summary>
         public static string PVS_CACHE_STORAGE_NOT_CONFIGURED {
             get {
