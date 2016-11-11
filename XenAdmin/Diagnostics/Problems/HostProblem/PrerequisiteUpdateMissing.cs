@@ -32,34 +32,25 @@
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
+using System.Collections.Generic;
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public class WrongServerVersion : HostProblem
+    public class PrerequisiteUpdateMissing : HostProblem
     {
-        private readonly string _versionRequired;
+        private readonly string requiredUpdates;
 
-        public WrongServerVersion(Check check, string versionRequired, Host host)
+        public PrerequisiteUpdateMissing(Check check, string requiredUpdates, Host host)
             : base(check, host)
         {
-            _versionRequired = versionRequired;
-        }
-
-        public WrongServerVersion(Check check, Host host)
-            : base(check, host)
-        {
+            this.requiredUpdates = requiredUpdates;
         }
 
         public override string Description
         {
             get 
             {
-                if (!string.IsNullOrEmpty(_versionRequired))
-                {
-                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, _versionRequired);
-                }
-
-                return Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION;
+                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING, requiredUpdates);
             }
         }
 

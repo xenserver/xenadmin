@@ -11732,6 +11732,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?</value>
   </data>
+  <data name="UPDATE_FOR_DIFFERENT_XENSERVER_VERSION" xml:space="preserve">
+    <value>This update is not compatible with this server version.</value>
+  </data>
   <data name="UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH" xml:space="preserve">
     <value>Cannot remove an update which is applied to any servers.</value>
   </data>
@@ -13344,5 +13347,14 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
     <value>Deleting update installation files</value>
+  </data>
+  <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
+    <value>Failed to introduce the update.</value>
+  </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
+    <value>Conflicting update(s) are present: {0}</value>
+  </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
+    <value>Prerequisite update(s) are missing: {0}</value>
   </data>
 </root>

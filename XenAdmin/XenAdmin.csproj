@@ -225,9 +225,11 @@
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\ConflictingUpdatePresent.cs" />
     <Compile Include="Diagnostics\Problems\Information.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
