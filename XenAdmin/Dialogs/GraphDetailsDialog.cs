@@ -270,7 +270,7 @@ namespace XenAdmin.Dialogs
                 }
                 else
                 {
-                    result = string.Compare(row1.Cells[columnIndex].Value.ToString(),
+                    result = StringUtility.NaturalCompare(row1.Cells[columnIndex].Value.ToString(),
                                             row2.Cells[columnIndex].Value.ToString());
                 }
 
