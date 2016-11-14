@@ -12784,7 +12784,7 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>One or more hosts in the pool do not have an appropriate license.</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB could not connect to [XenServer] because the supplied credentials were invalid.</value>
+    <value>WLB could not connect to the server because the supplied credentials were invalid.</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB unable to evacuate an explicitly excluded host.</value>

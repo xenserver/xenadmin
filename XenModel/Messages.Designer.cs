@@ -36852,7 +36852,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not connect to [XenServer] because the supplied credentials were invalid..
+        ///   Looks up a localized string similar to WLB could not connect to the server because the supplied credentials were invalid..
         /// </summary>
         public static string WLB_ERROR_4021 {
             get {
