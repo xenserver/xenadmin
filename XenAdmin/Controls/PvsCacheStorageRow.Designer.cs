@@ -32,7 +32,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelUnits = new System.Windows.Forms.Label();
             this.numericUpDownCacheSize = new System.Windows.Forms.NumericUpDown();
-            this.comboBoxCacheSr = new System.Windows.Forms.ComboBox();
+            this.comboBoxCacheSr = new EnableableComboBox();
             this.labelHostName = new System.Windows.Forms.Label();
             this.labelCacheStorage = new System.Windows.Forms.Label();
             this.labelCacheSize = new System.Windows.Forms.Label();
@@ -108,7 +108,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ComboBox comboBoxCacheSr;
+        private EnableableComboBox comboBoxCacheSr;
         private System.Windows.Forms.Label labelHostName;
         private System.Windows.Forms.Label labelCacheStorage;
         private System.Windows.Forms.Label labelCacheSize;

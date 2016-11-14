@@ -28057,6 +28057,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Memory only (Not enough Control Domain memory).
+        /// </summary>
+        public static string PVS_CACHE_MEMORY_ONLY_DISABLED {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_MEMORY_ONLY_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MemorySR.
         /// </summary>
         public static string PVS_CACHE_MEMORY_SR_NAME {
