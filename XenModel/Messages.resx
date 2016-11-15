@@ -13390,4 +13390,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
     <value>Prerequisite update(s) are missing: {0}</value>
   </data>
+  <data name="PVS_CACHE_MEMORY_ONLY_DISABLED" xml:space="preserve">
+    <value>Memory only (Not enough Control Domain memory)</value>
+  </data>
 </root>
