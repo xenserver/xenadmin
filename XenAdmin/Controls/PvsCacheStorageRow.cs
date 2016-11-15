@@ -98,7 +98,7 @@ namespace XenAdmin.Controls
                 };
             }
 
-            var enabled = Host.dom0_memory_extra >= numericUpDownCacheSize.Minimum;
+            var enabled = Host.dom0_memory_extra >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
             var label = enabled ? Messages.PVS_CACHE_MEMORY_ONLY : Messages.PVS_CACHE_MEMORY_ONLY_DISABLED;
             var memorySrItem = new SrComboBoxItem(memorySr, label, enabled);
             comboBoxCacheSr.Items.Add(memorySrItem);
