@@ -319,8 +319,6 @@ namespace XenAdminTests.TabsAndMenus
                                    new ExpectedTextMenuItem("&Add Server", true, false,
                                                             new ExpectedMenuItem[]
                                                                 {
-                                                                    new ExpectedTextMenuItem("(empty)", false),
-                                                                    new ExpectedSeparator(),
                                                                     new ExpectedTextMenuItem("&Add New Server...", true)
                                                                 }),
                                    new ExpectedTextMenuItem("&Disconnect", true),
