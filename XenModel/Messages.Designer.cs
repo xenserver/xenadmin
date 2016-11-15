@@ -32986,11 +32986,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to introduce the update..
+        /// </summary>
+        public static string UPDATE_ERROR_INTRODUCE {
+            get {
+                return ResourceManager.GetString("UPDATE_ERROR_INTRODUCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?.
         /// </summary>
         public static string UPDATE_EXPORT_ALL_OR_FILTERED {
             get {
                 return ResourceManager.GetString("UPDATE_EXPORT_ALL_OR_FILTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This update is not compatible with this server version..
+        /// </summary>
+        public static string UPDATE_FOR_DIFFERENT_XENSERVER_VERSION {
+            get {
+                return ResourceManager.GetString("UPDATE_FOR_DIFFERENT_XENSERVER_VERSION", resourceCulture);
             }
         }
         
@@ -33738,11 +33756,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conflicting update(s) are present: {0}.
+        /// </summary>
+        public static string UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pre-update checks failed on the selected servers.  The update will not be applied..
         /// </summary>
         public static string UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prerequisite update(s) are missing: {0}.
+        /// </summary>
+        public static string UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING", resourceCulture);
             }
         }
         

@@ -78,7 +78,7 @@ namespace XenAdmin.Actions
             servers = selectedServers;
         }
 
-        public readonly Dictionary<Host, XenRef<VDI>> VdiRefs = new Dictionary<Host, XenRef<VDI>>();
+        public readonly Dictionary<Host, XenRef<VDI>> VdiRefsToCleanUp = new Dictionary<Host, XenRef<VDI>>();
 
         private static long FileSize(string path)
         {
@@ -176,10 +176,10 @@ namespace XenAdmin.Actions
             }
 
             if (localStorageHost != null)
-                VdiRefs.Add(localStorageHost, vdiRef);
+                VdiRefsToCleanUp.Add(localStorageHost, vdiRef);
             else // shared SR
                 foreach (var server in servers)
-                    VdiRefs.Add(server, vdiRef);
+                    VdiRefsToCleanUp.Add(server, vdiRef);
 
             //introduce ISO for Ely and higher
             if (Helpers.ElyOrGreater(Connection))
@@ -188,6 +188,11 @@ namespace XenAdmin.Actions
                 {
                     var poolUpdateRef = Pool_update.introduce(Connection.Session, vdiRef);
                     poolUpdate = Connection.WaitForCache(poolUpdateRef);
+
+                    if (poolUpdate == null)
+                        throw new Exception(Messages.UPDATE_ERROR_INTRODUCE); // This should not happen, because such case will result in a XAPI Failure. But this code has to be protected at this point.
+
+                    VdiRefsToCleanUp.Clear();
                 }
                 catch (Failure ex)
                 {
