@@ -311,6 +311,9 @@ do
   dotnet_cp_to_dir "${OUTPUT_DIR}" "${pdb}"
 done
 
+#now package the pdbs
+cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 *.pdb
+
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
 echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
