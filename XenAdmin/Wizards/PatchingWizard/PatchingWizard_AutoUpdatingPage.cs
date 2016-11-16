@@ -47,6 +47,7 @@ using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Text;
+using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -150,26 +151,31 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var us = Updates.GetUpgradeSequence(pool.Connection);
 
-                foreach (var patch in us.UniquePatches)
+                Debug.Assert(us != null, "Update sequence should not be null.");
+
+                if (us != null)
                 {
-                    var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
-                    hostsToApply.Sort();
-
-                    planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
-                    planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
-                    planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
-
-                    foreach (var host in hostsToApply)
+                    foreach (var patch in us.UniquePatches)
                     {
-                        planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-                        planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
-                        UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
-                    }
+                        var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
+                        hostsToApply.Sort();
 
-                    //clean up master at the end:
-                    planActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
+                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                        planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
-                }//patch
+                        foreach (var host in hostsToApply)
+                        {
+                            planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+                            planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
+                            UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
+                        }
+
+                        //clean up master at the end:
+                        planActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+
+                    }//patch
+                }
 
                 //add all delayed actions to the end of the actions, per host
                 var delayedActions = new List<PlanAction>();
