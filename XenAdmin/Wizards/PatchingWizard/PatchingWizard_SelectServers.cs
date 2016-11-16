@@ -193,7 +193,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //check updgrade sequences
-                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection, Updates.XenServerVersions);
+                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
 
                 if (us == null) //version not supported
                 {
