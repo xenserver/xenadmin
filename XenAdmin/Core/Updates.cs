@@ -38,6 +38,8 @@ using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
 using System.Diagnostics;
+using System.Windows.Forms;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Core
 {
@@ -207,6 +209,27 @@ namespace XenAdmin.Core
 
                 action.RunAsync();
             }
+        }
+
+        /// <summary>
+        /// It does exactly what CheckForUpdates(true) does, but this is sync and shows an ActionProgressDialog while running
+        /// </summary>
+        /// <returns>true if the action has succeeded</returns>
+        public static bool CheckForUpdatesSync(Control parentForProgressDialog)
+        {
+            if (Helpers.CommonCriteriaCertificationRelease)
+                return false;
+
+            DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(true, true, true, Updates.CheckForUpdatesUrl);
+            action.Completed += actionCompleted;
+
+            if (CheckForUpdatesStarted != null)
+                CheckForUpdatesStarted();
+
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dialog.ShowDialog(parentForProgressDialog);
+
+            return action.Succeeded;
         }
 
         public static string CheckForUpdatesUrl

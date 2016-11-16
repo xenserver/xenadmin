@@ -83,7 +83,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             CheckForUpdatesInProgress = true;
             dataGridViewPatches.Rows.Clear();
-            dataGridViewPatches.Focus();
             tableLayoutPanelSpinner.Visible = true;
             RestoreDismUpdatesButton.Enabled = false;
             RefreshListButton.Enabled = false;
@@ -95,10 +94,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             Program.Invoke(Program.MainWindow, delegate
             {
                 tableLayoutPanelSpinner.Visible = false;
-                if (!IsInAutomaticMode)
-                {
-                    PopulatePatchesBox();
-                }
+                PopulatePatchesBox();
                 RefreshListButton.Enabled = true;
                 RestoreDismUpdatesButton.Enabled = true;
                 CheckForUpdatesInProgress = false;
@@ -164,8 +160,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public bool IsInAutomaticMode { get { return AutomaticRadioButton.Visible && AutomaticRadioButton.Checked; } }
 
-        public List<XenServerVersion> AutoDownloadedXenServerVersions { get; private set; }
-
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
@@ -220,16 +214,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else //In Automatic Mode
                 {
-                    var downloadUpdatesAction = new DownloadUpdatesXmlAction(false, true, true, Updates.CheckForUpdatesUrl);
+                    var succeed = Updates.CheckForUpdatesSync(this.Parent);
 
-                    using (var dialog = new ActionProgressDialog(downloadUpdatesAction, ProgressBarStyle.Marquee))
-                        dialog.ShowDialog(this.Parent); //Will block until dialog closes, action completed
-
-                    if (!downloadUpdatesAction.Succeeded)
-                    {
-                        cancel = true;
-                    }
-                    AutoDownloadedXenServerVersions = downloadUpdatesAction.XenServerVersions;
+                    cancel = !succeed;
                 }
             }
 
@@ -619,9 +606,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RefreshListButton_Click(object sender, EventArgs e)
         {
+            dataGridViewPatches.Focus();        
             Updates.CheckForUpdates(true);
         }
-
         #endregion
 
 
