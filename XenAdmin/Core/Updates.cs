@@ -503,19 +503,14 @@ namespace XenAdmin.Core
 
         public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
-            return GetUpgradeSequence(conn, XenServerVersions);
-        }
-
-        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn, List<XenServerVersion> xsVersions)
-        {
-            if (xsVersions == null)
+            if (XenServerVersions == null)
                 return null;
 
             Host master = Helpers.GetMaster(conn);
             if (master == null)
                 return null;
 
-            var version = GetCommonServerVersionOfHostsInAConnection(conn, xsVersions);
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
 
             if (version != null)
             {
