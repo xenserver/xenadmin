@@ -7994,6 +7994,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirmations.
+        /// </summary>
+        public static string CONFIRMATIONS {
+            get {
+                return ResourceManager.GetString("CONFIRMATIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm dismissal of notifications.
+        /// </summary>
+        public static string CONFIRMATIONS_DETAIL {
+            get {
+                return ResourceManager.GetString("CONFIRMATIONS_DETAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not connect to {0}..
         /// </summary>
         public static string CONNCET_CONNECTION_FAILURE {
@@ -11562,6 +11580,15 @@ namespace XenAdmin {
         public static string DMC_UNAVAILABLE_VMS {
             get {
                 return ResourceManager.GetString("DMC_UNAVAILABLE_VMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Don&apos;t show this message again.
+        /// </summary>
+        public static string DO_NOT_SHOW_THIS_MESSAGE {
+            get {
+                return ResourceManager.GetString("DO_NOT_SHOW_THIS_MESSAGE", resourceCulture);
             }
         }
         

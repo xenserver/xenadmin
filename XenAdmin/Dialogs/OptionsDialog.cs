@@ -90,6 +90,7 @@ namespace XenAdmin.Dialogs
             DisplayOptionsPage.Log();
             SaveAndRestoreOptionsPage.Log();
             PluginOptionsPage.Log();
+            ConfirmationOptionsPage.Log();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

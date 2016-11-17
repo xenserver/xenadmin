@@ -489,13 +489,24 @@ namespace XenAdmin.TabPages
             if (alert == null)
                 return;
 
-            using (var dlog = new ThreeButtonDialog(
+            if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
+            {
+                using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
-            {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                    ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissAlerts = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             DismissAlerts(new List<Alert> {(Alert) clickedRow.Tag});
@@ -503,19 +514,9 @@ namespace XenAdmin.TabPages
 
         private void tsmiDismissAll_Click(object sender, EventArgs e)
         {
-            DialogResult result;
+            DialogResult result = DialogResult.Yes;
 
-            if (!FilterIsOn)
-            {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
-                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
-                    ThreeButtonDialog.ButtonCancel))
-                {
-                    result = dlog.ShowDialog(this);
-                }
-            }
-            else
+            if (FilterIsOn)
             {
                 using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_CONTINUE),
@@ -526,26 +527,52 @@ namespace XenAdmin.TabPages
                     result = dlog.ShowDialog(this);
                 }
             }
+            else if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
+            {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
+                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                    ThreeButtonDialog.ButtonCancel)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissAlerts = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+                }
+            }
 
             if (result == DialogResult.Cancel)
                 return;
 
             var alerts = result == DialogResult.No
-                             ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert)
-                             : Alert.Alerts;
+                ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert)
+                : Alert.Alerts;
 
             DismissAlerts(alerts);
         }
 
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
-            using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissAlerts = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             if (GridViewAlerts.SelectedRows.Count > 0)

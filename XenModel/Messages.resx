@@ -2592,6 +2592,12 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>Configuring Workload Balancing on pool '{0}'</value>
   </data>
+  <data name="CONFIRMATIONS" xml:space="preserve">
+    <value>Confirmations</value>
+  </data>
+  <data name="CONFIRMATIONS_DETAIL" xml:space="preserve">
+    <value>Confirm dismissal of notifications</value>
+  </data>
   <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>Changing the Control Domain memory will cause the server to be rebooted.
 
@@ -4231,6 +4237,9 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
     <value>{0} is now available. Download the latest at the [Citrix] website.</value>
+  </data>
+  <data name="DO_NOT_SHOW_THIS_MESSAGE" xml:space="preserve">
+    <value>&amp;Don't show this message again</value>
   </data>
   <data name="DRAC_NO_SUPP_PACK" xml:space="preserve">
     <value>Dell supplemental pack is not installed.</value>
