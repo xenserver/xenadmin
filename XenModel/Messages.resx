@@ -10249,7 +10249,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>Rolling Pool Upgrade</value>
   </data>
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
-    <value>Rolling Pool Upgrade...</value>
+    <value>Rolling Pool &amp;Upgrade...</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>

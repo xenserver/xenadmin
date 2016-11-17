@@ -29445,7 +29445,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rolling Pool Upgrade....
+        ///   Looks up a localized string similar to Rolling Pool &amp;Upgrade....
         /// </summary>
         public static string ROLLING_POOL_UPGRADE_ELLIPSIS {
             get {
