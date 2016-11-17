@@ -135,7 +135,6 @@ production_jenkins_build()
 # Use this option if you're running on a Jenkins that is not the production Jenkins server
 private_jenkins_build()
 {
-    source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
     # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
 	if [ -n "${SKIP_TESTS+x}" ]; then

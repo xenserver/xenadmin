@@ -113,7 +113,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var fileFromDiskAlertPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
 
                 PatchingWizard_SelectServers.IsInAutomaticMode = wizardModeAutomatic;
-                PatchingWizard_SelectServers.AutoDownloadedXenServerVersions = PatchingWizard_SelectPatchPage.AutoDownloadedXenServerVersions;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;

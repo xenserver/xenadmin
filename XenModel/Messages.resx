@@ -9224,6 +9224,15 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TITLE" xml:space="preserve">
     <value>Perform update prechecks on selected servers</value>
   </data>
+  <data name="PATCHINGWIZARD_REMOVED_UPDATES" xml:space="preserve">
+    <value>Deleted update installation files</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVE_UPDATES" xml:space="preserve">
+    <value>Delete update installation files</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
+    <value>Deleting update installation files</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>Choose Update File</value>
   </data>
@@ -9736,17 +9745,26 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS Cache Configuration - '{0}'</value>
   </data>
+  <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
+    <value>{0} (Incomplete PVS configuration)</value>
+  </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
     <value>Memory and disk</value>
   </data>
   <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
     <value>Memory only</value>
   </data>
+  <data name="PVS_CACHE_MEMORY_ONLY_DISABLED" xml:space="preserve">
+    <value>Memory only (Not enough Control Domain memory)</value>
+  </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
     <value>MemorySR</value>
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>Not configured</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
+    <value>{0} (Incomplete Cache Storage configuration)</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
     <value>This PVS cache configuration cannot be removed because there are VMs that are streamed from this site.</value>
@@ -11649,8 +11667,14 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
+    <value>Conflicting update(s) are present: {0}</value>
+  </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS" xml:space="preserve">
     <value>Pre-update checks failed on the selected servers.  The update will not be applied.</value>
+  </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
+    <value>Prerequisite update(s) are missing: {0}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_TITLE" xml:space="preserve">
     <value>Update precheck failed on server '{0}'</value>
@@ -11728,6 +11752,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>This operation will remove the selected updates from the servers permanently. Do you wish to continue?
 
 Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+  </data>
+  <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
+    <value>Failed to introduce the update.</value>
   </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?</value>
@@ -13338,23 +13365,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="PATCHINGWIZARD_REMOVED_UPDATES" xml:space="preserve">
-    <value>Deleted update installation files</value>
-  </data>
-  <data name="PATCHINGWIZARD_REMOVE_UPDATES" xml:space="preserve">
-    <value>Delete update installation files</value>
-  </data>
-  <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
-    <value>Deleting update installation files</value>
-  </data>
-  <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
-    <value>Failed to introduce the update.</value>
-  </data>
-  <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
-    <value>Conflicting update(s) are present: {0}</value>
-  </data>
-  <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
-    <value>Prerequisite update(s) are missing: {0}</value>
   </data>
 </root>

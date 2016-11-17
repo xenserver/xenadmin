@@ -208,7 +208,7 @@ namespace XenAdmin.TabPages
             PVS_site pvsSite = pvsProxy == null ? null : Connection.Resolve(pvsProxy.site);
             row.Cells[0].Value = vm.Name;
             row.Cells[1].Value = pvsProxy == null ? Messages.NO : Messages.YES;
-            row.Cells[2].Value = pvsProxy == null || pvsSite == null ? Messages.NO_VALUE : pvsSite.Name;
+            row.Cells[2].Value = pvsProxy == null || pvsSite == null ? Messages.NO_VALUE : pvsSite.NameWithWarning;
             row.Cells[3].Value = pvsProxy == null ? Messages.NO_VALUE : pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status);
         }
 
@@ -327,7 +327,7 @@ namespace XenAdmin.TabPages
 
         private void PvsSitePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "name_label")
+            if (e.PropertyName != "name_label" && e.PropertyName != "cache_storage")
                 return;
 
             Program.Invoke(this, () =>
