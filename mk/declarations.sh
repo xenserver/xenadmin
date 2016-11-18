@@ -76,31 +76,20 @@ then
     echo "WARN:	BUILD_URL env var not set, we will use 'n/a'"
 fi
 
-if [ -d "$DIR/../.git" ]
+if [ -z "${GIT_COMMIT-}" ]
 then
-    if [ -z "${GIT_COMMIT-}" ]
-    then
-        get_REVISION="none"
-	    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
-    else
-   	    get_REVISION="${GIT_COMMIT}"
-    fi
-
-    XS_BRANCH=${GIT_LOCAL_BRANCH}
+    get_REVISION="none"
+    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
 else
-	if [ -z "${MERCURIAL_REVISION+xxx}" ]
-	then 
-	    MERCURIAL_REVISION="none"
-	    echo "WARN:	MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
-	fi
-	get_REVISION=${MERCURIAL_REVISION}
-	XS_BRANCH=`cd $DIR;hg showconfig paths.default|sed -e 's@.*carbon/\(.*\)/xenadmin.hg.*@\1@'`
+    get_REVISION="${GIT_COMMIT}"
 fi
+
+XS_BRANCH=${GIT_LOCAL_BRANCH}
 
 if [ -z "${XS_BRANCH+xxx}" ]
 then
-    echo "ERROR: Failed to detect the branch; exiting."
-    exit 1
+    echo "WARN: GIT_LOCAL_BRANCH env var not set, we will use trunk"
+    XS_BRANCH="trunk"
 elif [ "${XS_BRANCH}" = "master" ]
 then
     echo "INFO: found master branch; renaming to trunk."
