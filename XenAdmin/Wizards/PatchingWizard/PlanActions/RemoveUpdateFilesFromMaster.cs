@@ -82,13 +82,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
-                    Pool_update poolUpdate = null;
-                    
                     if (mapping != null || mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
                     {
-                        poolUpdate = mapping.Pool_update;
+                        var poolUpdate = mapping.Pool_update;
 
                         Pool_update.pool_clean(session, poolUpdate.opaque_ref);
+                        
+                        if (!poolUpdate.AppliedOnHosts.Any())
+                            Pool_update.destroy(session, poolUpdate.opaque_ref);
 
                         patchMappings.Remove(mapping);
                     }

@@ -322,6 +322,32 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     doWorkEventArgs.Result = new Exception(action.Title, e);
 
+                    //this pool failed, we will stop here, but try to remove update files at least
+                    try
+                    {
+                        var positionOfFailedAction = bgw.AllActions.IndexOf(action);
+                        if (positionOfFailedAction < bgw.AllActions.Count && !(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction))
+                        {
+                            int pos = positionOfFailedAction;
+
+                            if (!(bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction)) //can't do anything if the remove action has failed
+                            {
+                                while (++pos < bgw.AllActions.Count)
+                                {
+                                    if (bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction) //find the next remove
+                                    {
+                                        bgw.AllActions[pos].Run();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        //already in an error case - best effort
+                    }
+
                     bgw.ReportProgress(0);
                     break;
                 }
