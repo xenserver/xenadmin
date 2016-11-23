@@ -45,9 +45,9 @@ BRANDING_COMPANY_NAME_SHORT=[Citrix]
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 
-CANDLE="candle.exe -nologo"
-LIT="lit.exe -nologo"
-LIGHT="light.exe -nologo"
+CANDLE="${WIX_BIN}/candle.exe -nologo" 
+LIT="${WIX_BIN}/lit.exe -nologo"
+LIGHT="${WIX_BIN}/light.exe -nologo"
 
 mkdir_clean()
 {
@@ -61,6 +61,7 @@ if [ -f ${SIGN_FILE} ]; then
 fi
    
 #build and sign the installers
+echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh
 
 #collect output and extra files to the OUTPUT_DIR
