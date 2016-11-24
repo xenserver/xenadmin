@@ -79,6 +79,8 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             pictureBox1.Image = SystemIcons.Information.ToBitmap();
+            toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
+            toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
             PageWasRefreshed = false;
         }
 
