@@ -201,6 +201,22 @@ namespace XenAdmin.Actions
                         string uuidFound = ex.ErrorDescription[1];
 
                         poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, System.StringComparison.InvariantCultureIgnoreCase));
+
+                        //clean-up the VDI we've just created
+                        try
+                        {
+                            RemoveVDI(Session, vdiRef);
+
+                            //remove the vdi that have just been cleaned up
+                            var remaining = VdiRefsToCleanUp.Where(kvp => kvp.Value != null && kvp.Value.opaque_ref != vdiRef.opaque_ref).ToList();
+                            VdiRefsToCleanUp.Clear();
+                            remaining.ForEach(rem => VdiRefsToCleanUp.Add(rem.Key, rem.Value));
+                        }
+                        catch
+                        { 
+                            //best effort cleanup
+                        }
+
                     }
                     else
                     {
