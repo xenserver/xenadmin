@@ -2350,7 +2350,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>This template is a [XenServer] template and cannot be deleted.</value>
+    <value>[XenServer] templates cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>This virtual disk is used for DR. To delete it, configure DR not to save data to this storage repository.</value>
@@ -2715,7 +2715,7 @@ This will also delete its VMs.</value>
   <data name="CONFIRM_DESTROY_HOST" xml:space="preserve">
     <value>Are you sure you want to destroy '{0}'?
 
-You should only need to destroy a [XenServer] if it has physically failed.
+You should only need to destroy a server if it has physically failed.
 Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
 
 This action is final and unrecoverable.</value>
@@ -11118,7 +11118,7 @@ The upper limit: SR size / {2}</value>
   <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
     <value>{0}
 
-Refer to the "[XenServer product] Administrator's Guide" for instructions on how to manually install a supplemental pack on a [XenServer] host.</value>
+Refer to the "[XenServer product] Administrator's Guide" for instructions on how to manually install a supplemental pack on a server.</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
@@ -12814,7 +12814,7 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>One or more hosts in the pool do not have an appropriate license.</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB could not start a [XenServer] session with supplied invalid credentials.</value>
+    <value>WLB could not connect to [XenServer] because the supplied credentials were invalid.</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB unable to evacuate an explicitly excluded host.</value>
