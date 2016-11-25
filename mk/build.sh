@@ -97,6 +97,16 @@ if [ -f ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ]; the
   cp ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ${XENADMIN_DIR}/mk/push-latest-successful-build.sh
 fi
 
+test_phase()
+{
+  # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+  if [ -n "${SKIP_TESTS+x}" ]; then
+    echo "Tests skipped because SKIP_TESTS declared"
+  else
+    source ${XENADMIN_DIR}/mk/tests-checks.sh
+  fi
+}
+
 production_jenkins_build()
 {
     source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
@@ -105,12 +115,7 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-	# Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-	if [ -n "${SKIP_TESTS+x}" ]; then
-		echo "Tests skipped because SKIP_TESTS declared"
-	else
-		source ${XENADMIN_DIR}/mk/tests-checks.sh
-	fi
+    test_phase
     source ${XENADMIN_DIR}/mk/archive-push.sh
 }
 
@@ -118,12 +123,7 @@ production_jenkins_build()
 private_jenkins_build()
 {
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-	if [ -n "${SKIP_TESTS+x}" ]; then
-		echo "Tests skipped because SKIP_TESTS declared"
-	else
-		source ${XENADMIN_DIR}/mk/tests-checks.sh
-	fi
+    test_phase
 }
 
 # Set the PRIVATE_BUILD_MODE variable in order to use the private build mode
