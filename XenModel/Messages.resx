@@ -9398,7 +9398,7 @@ Date created: {2}
 Size: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>This patch is for servers with version matching the regular expression '{0}'.</value>
+    <value>{0}: This patch is for servers with version matching the regular expression '{1}'.</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>Not found</value>
@@ -11695,13 +11695,13 @@ Check your settings and try again.</value>
     <value>{0}: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
-    <value>Conflicting update(s) are present: {0}</value>
+    <value>{0}: Conflicting update(s) are present: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS" xml:space="preserve">
     <value>Pre-update checks failed on the selected servers.  The update will not be applied.</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
-    <value>Prerequisite update(s) are missing: {0}</value>
+    <value>{0}: Prerequisite update(s) are missing: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_TITLE" xml:space="preserve">
     <value>Update precheck failed on server '{0}'</value>
@@ -11787,7 +11787,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?</value>
   </data>
   <data name="UPDATE_FOR_DIFFERENT_XENSERVER_VERSION" xml:space="preserve">
-    <value>This update is not compatible with this server version.</value>
+    <value>{0}: This update is not compatible with this server version.</value>
   </data>
   <data name="UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH" xml:space="preserve">
     <value>Cannot remove an update which is applied to any servers.</value>
