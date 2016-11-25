@@ -39,6 +39,7 @@ using XenAdmin.Network;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Commands;
+using XenAdmin.Core;
 
 namespace XenAdmin.TabPages
 {
@@ -93,6 +94,11 @@ namespace XenAdmin.TabPages
 
         #region VMs
 
+        private static bool VmShouldBeVisible(VM vm)
+        {
+            return vm.Show(Properties.Settings.Default.ShowHiddenVMs);
+        }
+
         private void LoadVMs()
         {
             Program.AssertOnEventThread();
@@ -119,23 +125,21 @@ namespace XenAdmin.TabPages
                 enableSelectionManager.SetSelection(new SelectedItemCollection());
                 disableSelectionManager.SetSelection(new SelectedItemCollection());
 
-                foreach (var vm in Connection.Cache.VMs.Where(vm => vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs)))
-                    dataGridViewVms.Rows.Add(NewVmRow(vm));
-
-                if (dataGridViewVms.SortedColumn == null)
+                foreach (var vm in Connection.Cache.VMs)
                 {
-                    dataGridViewVms.Sort(vmDefaultSort);
-                }
-                else
-                {
+                    // Add all real VMs and templates that begin with __gui__ (because this may be a new VM)
+                    var addVm = vm.is_a_real_vm ||
+                                (vm.is_a_template && vm.name_label.StartsWith(Helpers.GuiTempObjectPrefix));
 
-                    var order = dataGridViewVms.SortOrder;
-                    ListSortDirection sortDirection = ListSortDirection.Ascending;
-                    if (order.Equals(SortOrder.Descending))
-                        sortDirection = ListSortDirection.Descending;
+                    if (!addVm)
+                        continue;
 
-                    dataGridViewVms.Sort(dataGridViewVms.SortedColumn, sortDirection);
+                    var show = VmShouldBeVisible(vm);
+                     
+                    dataGridViewVms.Rows.Add(NewVmRow(vm, show));
                 }
+
+                SortVmTable();
 
                 if (dataGridViewVms.Rows.Count > 0)
                 {
@@ -184,7 +188,7 @@ namespace XenAdmin.TabPages
             disableSelectionManager.SetSelection(selectedVMs);
         }
 
-        private DataGridViewRow NewVmRow(VM vm)
+        private DataGridViewRow NewVmRow(VM vm, bool showRow)
         {
             System.Diagnostics.Trace.Assert(vm != null);
 
@@ -198,18 +202,20 @@ namespace XenAdmin.TabPages
             var newRow = new DataGridViewRow { Tag = vm };
             newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
 
-            UpdateRow(newRow, vm, pvsProxy);
+            UpdateRow(newRow, vm, pvsProxy, showRow);
             RegisterEventHandlers(vm, pvsProxy);
             return newRow;
         }
 
-        private void UpdateRow(DataGridViewRow row, VM vm, PVS_proxy pvsProxy)
+        private void UpdateRow(DataGridViewRow row, VM vm, PVS_proxy pvsProxy, bool showRow=true)
         {
             PVS_site pvsSite = pvsProxy == null ? null : Connection.Resolve(pvsProxy.site);
             row.Cells[0].Value = vm.Name;
             row.Cells[1].Value = pvsProxy == null ? Messages.NO : Messages.YES;
             row.Cells[2].Value = pvsProxy == null || pvsSite == null ? Messages.NO_VALUE : pvsSite.NameWithWarning;
             row.Cells[3].Value = pvsProxy == null ? Messages.NO_VALUE : pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status);
+
+            row.Visible = showRow;
         }
 
         private void RegisterEventHandlers(VM vm, PVS_proxy pvsProxy)
@@ -286,6 +292,25 @@ namespace XenAdmin.TabPages
             Program.Invoke(this, LoadVMs);
         }
 
+        private void SortVmTable()
+        {
+            var sortedColumn = dataGridViewVms.SortedColumn;
+            var sortDirection = ListSortDirection.Ascending;
+
+            if (dataGridViewVms.SortOrder.Equals(SortOrder.Descending))
+                sortDirection = ListSortDirection.Descending;
+
+
+            if (sortedColumn != null)
+            {
+                dataGridViewVms.Sort(sortedColumn, sortDirection);
+            }
+            else
+            {
+                dataGridViewVms.Sort(vmDefaultSort);
+            }
+        }
+
         private void VmPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "name_label")
@@ -298,8 +323,25 @@ namespace XenAdmin.TabPages
                     var vm = row.Tag as VM;
                     if (vm != null && vm.Equals(sender))
                     {
+                        dataGridViewVms.SuspendLayout();
+
                         row.Cells["columnVM"].Value = vm.Name;
+
+                        var wasHidden = !row.Visible;
+
+                        if (VmShouldBeVisible(vm))
+                        {
+                            row.Visible = true;
+
+                            if(wasHidden)
+                                SortVmTable(); // This appears as an add to the user, so retain table sorting
+                        }
+
+                        dataGridViewVms.ResumeLayout();
+
                         break;
+
+
                     }
                 }
             });
