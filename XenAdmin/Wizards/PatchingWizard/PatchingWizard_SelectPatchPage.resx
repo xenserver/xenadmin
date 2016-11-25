@@ -133,19 +133,19 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelWithoutAutomatic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 40</value>
+    <value>3, 32</value>
   </data>
   <data name="labelWithoutAutomatic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 6</value>
   </data>
   <data name="labelWithoutAutomatic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 17</value>
+    <value>595, 13</value>
   </data>
   <data name="labelWithoutAutomatic.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="labelWithoutAutomatic.Text" xml:space="preserve">
-    <value>Select an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
+    <value>Select an update to be downloaded from [Citrix] or browse your computer for an update or supplemental pack file.</value>
   </data>
   <data name="&gt;&gt;labelWithoutAutomatic.Name" xml:space="preserve">
     <value>labelWithoutAutomatic</value>
@@ -175,13 +175,13 @@
     <value>3, 0, 3, 6</value>
   </data>
   <data name="labelWithAutomatic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 34</value>
+    <value>595, 26</value>
   </data>
   <data name="labelWithAutomatic.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelWithAutomatic.Text" xml:space="preserve">
-    <value>Select Automatic mode or choose an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
+    <value>Select Automatic mode, choose an update to be downloaded from [Citrix] or browse your computer for an update or supplemental pack file.</value>
   </data>
   <data name="&gt;&gt;labelWithAutomatic.Name" xml:space="preserve">
     <value>labelWithAutomatic</value>
@@ -202,13 +202,13 @@
     <value>NoControl</value>
   </data>
   <data name="AutomaticRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 75</value>
+    <value>3, 63</value>
   </data>
   <data name="AutomaticRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
   <data name="AutomaticRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 21</value>
+    <value>72, 17</value>
   </data>
   <data name="AutomaticRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -238,10 +238,10 @@
     <value>NoControl</value>
   </data>
   <data name="automaticOptionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 99</value>
+    <value>23, 83</value>
   </data>
   <data name="automaticOptionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 34</value>
+    <value>575, 26</value>
   </data>
   <data name="automaticOptionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -268,13 +268,13 @@
     <value>NoControl</value>
   </data>
   <data name="downloadUpdateRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 145</value>
+    <value>3, 121</value>
   </data>
   <data name="downloadUpdateRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
   <data name="downloadUpdateRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 21</value>
+    <value>163, 17</value>
   </data>
   <data name="downloadUpdateRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -301,7 +301,7 @@
     <value>NoControl</value>
   </data>
   <data name="RefreshListButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 429</value>
+    <value>23, 326</value>
   </data>
   <data name="RefreshListButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 27</value>
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="RestoreDismUpdatesButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 429</value>
+    <value>123, 326</value>
   </data>
   <data name="RestoreDismUpdatesButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 27</value>
@@ -361,13 +361,13 @@
     <value>NoControl</value>
   </data>
   <data name="selectFromDiskRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 471</value>
+    <value>3, 368</value>
   </data>
   <data name="selectFromDiskRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
   <data name="selectFromDiskRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 21</value>
+    <value>240, 17</value>
   </data>
   <data name="selectFromDiskRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -406,10 +406,10 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 8</value>
+    <value>3, 10</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 17</value>
+    <value>52, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -436,10 +436,10 @@
     <value>Left, Right</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 5</value>
+    <value>61, 6</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>562, 22</value>
+    <value>429, 20</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -463,7 +463,7 @@
     <value>NoControl</value>
   </data>
   <data name="BrowseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 3</value>
+    <value>496, 3</value>
   </data>
   <data name="BrowseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 27</value>
@@ -490,13 +490,13 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 498</value>
+    <value>23, 391</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 33</value>
+    <value>575, 33</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -559,10 +559,10 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 2</value>
+    <value>25, 4</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 17</value>
+    <value>117, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -583,13 +583,13 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelSpinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 112</value>
+    <value>178, 75</value>
   </data>
   <data name="tableLayoutPanelSpinner.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelSpinner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
+    <value>145, 22</value>
   </data>
   <data name="tableLayoutPanelSpinner.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -619,7 +619,7 @@
     <value>50</value>
   </data>
   <data name="ColumnUpdate.Width" type="System.Int32, mscorlib">
-    <value>83</value>
+    <value>67</value>
   </data>
   <metadata name="ColumnDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -664,7 +664,7 @@
     <value>Vertical</value>
   </data>
   <data name="dataGridViewPatches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 251</value>
+    <value>575, 176</value>
   </data>
   <data name="dataGridViewPatches.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -685,10 +685,10 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 172</value>
+    <value>23, 144</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 251</value>
+    <value>575, 176</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -715,7 +715,7 @@
     <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 534</value>
+    <value>601, 427</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -739,13 +739,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 534</value>
+    <value>601, 427</value>
   </data>
   <data name="&gt;&gt;ColumnUpdate.Name" xml:space="preserve">
     <value>ColumnUpdate</value>
