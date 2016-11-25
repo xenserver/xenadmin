@@ -55,7 +55,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.REQUIRED_HOTFIX_ISNOT_INSTALLED, Server.Name); }
+            get { return string.Format(Messages.REQUIRED_HOTFIX_ISNOT_INSTALLED, ServerName); }
         }
 
         public override string HelpMessage
