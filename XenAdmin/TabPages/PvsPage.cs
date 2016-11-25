@@ -96,6 +96,9 @@ namespace XenAdmin.TabPages
 
         private static bool VmShouldBeVisible(VM vm)
         {
+            if (XenAdminConfigManager.Provider.ObjectIsHidden(vm.opaque_ref))
+                return false;
+
             return vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs);
         }
 
@@ -313,8 +316,44 @@ namespace XenAdmin.TabPages
 
         private void VmPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "name_label")
+            if (e.PropertyName != "IsBeingCreated" && e.PropertyName != "name_label")
                 return;
+
+            if (e.PropertyName.Equals("IsBeingCreated"))
+            {
+                var senderAsVm = sender as VM;
+                if (senderAsVm == null || senderAsVm.IsBeingCreated)
+                {
+                    return;
+                }
+
+                Program.Invoke(this, () =>
+                {
+                    foreach (DataGridViewRow row in dataGridViewVms.Rows)
+                    {
+                        var vm = row.Tag as VM;
+                        if (vm != null && vm.Equals(sender))
+                        {
+                            var wasHidden = !row.Visible;
+
+                            dataGridViewVms.SuspendLayout();
+
+                            if (VmShouldBeVisible(vm))
+                            {
+                                row.Visible = true;
+
+                                if (wasHidden)
+                                    SortVmTable(); // This appears as an add to the user, so retain table sorting
+                            }
+
+                            dataGridViewVms.ResumeLayout();
+                            break;
+                        }
+                    }
+                });
+
+                return;
+            }
 
             Program.Invoke(this, () =>
             {
@@ -323,25 +362,8 @@ namespace XenAdmin.TabPages
                     var vm = row.Tag as VM;
                     if (vm != null && vm.Equals(sender))
                     {
-                        dataGridViewVms.SuspendLayout();
-
                         row.Cells["columnVM"].Value = vm.Name;
-
-                        var wasHidden = !row.Visible;
-
-                        if (VmShouldBeVisible(vm))
-                        {
-                            row.Visible = true;
-
-                            if(wasHidden)
-                                SortVmTable(); // This appears as an add to the user, so retain table sorting
-                        }
-
-                        dataGridViewVms.ResumeLayout();
-
                         break;
-
-
                     }
                 }
             });
