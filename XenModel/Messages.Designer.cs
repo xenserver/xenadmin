@@ -26237,7 +26237,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This patch is for servers with version matching the regular expression &apos;{0}&apos;..
+        ///   Looks up a localized string similar to {0}: This patch is for servers with version matching the regular expression &apos;{1}&apos;..
         /// </summary>
         public static string PATCH_FOR_XENSERVER_VERSION {
             get {
@@ -33112,7 +33112,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This update is not compatible with this server version..
+        ///   Looks up a localized string similar to {0}: This update is not compatible with this server version..
         /// </summary>
         public static string UPDATE_FOR_DIFFERENT_XENSERVER_VERSION {
             get {
@@ -33864,7 +33864,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Conflicting update(s) are present: {0}.
+        ///   Looks up a localized string similar to {0}: Conflicting update(s) are present: {1}.
         /// </summary>
         public static string UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE {
             get {
@@ -33882,7 +33882,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prerequisite update(s) are missing: {0}.
+        ///   Looks up a localized string similar to {0}: Prerequisite update(s) are missing: {1}.
         /// </summary>
         public static string UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING {
             get {

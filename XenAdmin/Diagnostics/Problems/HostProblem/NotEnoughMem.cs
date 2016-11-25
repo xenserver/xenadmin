@@ -53,7 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_NO_MEMORY, Server.Name); }
+            get { return string.Format(Messages.UPDATES_WIZARD_NO_MEMORY, ServerName); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)

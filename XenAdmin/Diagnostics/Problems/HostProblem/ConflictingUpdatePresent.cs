@@ -49,7 +49,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             get 
             {
-                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE, confilctedUpdates);
+                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE, ServerName, confilctedUpdates);
             }
         }
 

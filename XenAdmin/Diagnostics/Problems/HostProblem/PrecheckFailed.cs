@@ -49,7 +49,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host, Failure.Message); }
+            get { return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, ServerName, Failure.Message); }
         }
 
         public override string HelpMessage
