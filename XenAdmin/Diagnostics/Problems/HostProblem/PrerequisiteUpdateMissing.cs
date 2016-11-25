@@ -50,7 +50,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             get 
             {
-                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING, Server, requiredUpdates);
+                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING, ServerName, requiredUpdates);
             }
         }
 
