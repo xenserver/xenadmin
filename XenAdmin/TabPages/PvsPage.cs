@@ -96,7 +96,7 @@ namespace XenAdmin.TabPages
 
         private static bool VmShouldBeVisible(VM vm)
         {
-            return vm.Show(Properties.Settings.Default.ShowHiddenVMs);
+            return vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs);
         }
 
         private void LoadVMs()
