@@ -86,12 +86,13 @@ fi
 
 XS_BRANCH=${GIT_LOCAL_BRANCH}
 
-if [ -z "${XS_BRANCH+xxx}" ]
-then
+if [ -z "${XS_BRANCH+xxx}" ] ; then
     echo "WARN: GIT_LOCAL_BRANCH env var not set, we will use trunk"
     XS_BRANCH="trunk"
-elif [ "${XS_BRANCH}" = "master" ]
-then
+elif [ $(curl --output /dev/null -m 60 --silent http://hg.uk.xensource.com/git/carbon/${XS_BRANCH}/xenadmin.git; echo "$?") != 0 ] ; then
+    echo "Branch ${XS_BRANCH} not found on hg.uk/xenadmin. Reverting to trunk."
+    XS_BRANCH="trunk"
+elif [ "${XS_BRANCH}" = "master" ] ; then
     echo "INFO: found master branch; renaming to trunk."
     XS_BRANCH="trunk"
 fi
