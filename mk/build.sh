@@ -74,17 +74,21 @@ source ${XENADMIN_DIR}/mk/declarations.sh
 
 if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
 
-git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git &>-
-if [ "$?" -eq 0 ]; then
-  if [ -d "xenadmin-branding" ]
-    then
-      rm -rf xenadmin-branding 
-  fi
-  git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git
-  if [ -d ${BRAND_REPO}/${XC_BRANDING} ]; then
-	echo "Overwriting Branding folder"
-	cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
-  fi
+rm -rf ${ROOT}/xenadmin-branding
+
+BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
+
+if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
+    echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
+    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding
+else
+    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding
+fi
+
+if [ -d ${ROOT}/xenadmin-branding/${XC_BRANDING} ]; then
+    echo "Overwriting Branding folder"
+    rm -rf ${XENADMIN_DIR}/Branding/*
+    cp -rf ${ROOT}/xenadmin-branding/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
 fi
 
 # overwrite archive-push.sh and push-latest-successful-build.sh files, if they exist in Branding folder
@@ -97,6 +101,16 @@ if [ -f ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ]; the
   cp ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ${XENADMIN_DIR}/mk/push-latest-successful-build.sh
 fi
 
+test_phase()
+{
+  # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+  if [ -n "${SKIP_TESTS+x}" ]; then
+    echo "Tests skipped because SKIP_TESTS declared"
+  else
+    source ${XENADMIN_DIR}/mk/tests-checks.sh
+  fi
+}
+
 production_jenkins_build()
 {
     source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
@@ -105,12 +119,7 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-	# Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-	if [ -n "${SKIP_TESTS+x}" ]; then
-		echo "Tests skipped because SKIP_TESTS declared"
-	else
-		source ${XENADMIN_DIR}/mk/tests-checks.sh
-	fi
+    test_phase
     source ${XENADMIN_DIR}/mk/archive-push.sh
 }
 
@@ -118,12 +127,7 @@ production_jenkins_build()
 private_jenkins_build()
 {
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-	if [ -n "${SKIP_TESTS+x}" ]; then
-		echo "Tests skipped because SKIP_TESTS declared"
-	else
-		source ${XENADMIN_DIR}/mk/tests-checks.sh
-	fi
+    test_phase
 }
 
 # Set the PRIVATE_BUILD_MODE variable in order to use the private build mode
