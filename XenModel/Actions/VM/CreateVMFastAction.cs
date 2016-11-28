@@ -59,13 +59,16 @@ namespace XenAdmin.Actions.VMActions
             PollToCompletion(0, 80);
 
             string new_vm_ref = Result;
+            VM = Connection.WaitForCache(new XenRef<VM>(new_vm_ref));
 
+            VM.IsBeingCreated = true;
             XenAdminConfigManager.Provider.HideObject(new_vm_ref);
 
             RelatedTask = XenAPI.VM.async_provision(Session, new_vm_ref);
             PollToCompletion(80, 90);
 
             XenAdminConfigManager.Provider.ShowObject(new_vm_ref);
+            VM.IsBeingCreated = false;
 
          
             Result = new_vm_ref;
