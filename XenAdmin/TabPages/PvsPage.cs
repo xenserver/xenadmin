@@ -49,6 +49,8 @@ namespace XenAdmin.TabPages
         private SelectionManager disableSelectionManager;
 
         private DataGridViewVms_DefaultSort vmDefaultSort;
+
+        private readonly CollectionChangeEventHandler PvsProxy_CollectionChangedWithInvoke;
         
         public PvsPage()
         {
@@ -61,7 +63,9 @@ namespace XenAdmin.TabPages
             disableSelectionManager = new SelectionManager();
 
             vmDefaultSort = new DataGridViewVms_DefaultSort();
-            
+
+            PvsProxy_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(PvsProxyCollectionChanged);
+
             base.Text = Messages.PVS_TAB_TITLE;
         }
 
@@ -75,16 +79,16 @@ namespace XenAdmin.TabPages
             {
                 if (connection != null)
                 {
-                    connection.Cache.DeregisterCollectionChanged<PVS_proxy>(PvsProxyCollectionChanged);
-                    connection.Cache.DeregisterCollectionChanged<VM>(PvsProxyCollectionChanged);
+                    connection.Cache.DeregisterCollectionChanged<PVS_proxy>(PvsProxy_CollectionChangedWithInvoke);
+                    connection.Cache.DeregisterCollectionChanged<VM>(PvsProxy_CollectionChangedWithInvoke);
                 }
 
                 connection = value;
 
                 if (connection != null)
                 {
-                    connection.Cache.RegisterCollectionChanged<PVS_proxy>(PvsProxyCollectionChanged);
-                    connection.Cache.RegisterCollectionChanged<VM>(PvsProxyCollectionChanged);
+                    connection.Cache.RegisterCollectionChanged<PVS_proxy>(PvsProxy_CollectionChangedWithInvoke);
+                    connection.Cache.RegisterCollectionChanged<VM>(PvsProxy_CollectionChangedWithInvoke);
                 }
 
                 LoadVMs();
@@ -283,7 +287,7 @@ namespace XenAdmin.TabPages
 
         private void PvsProxyCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.Invoke(this, LoadVMs);
+            LoadVMs();
         }
 
         private void VmPropertyChanged(object sender, PropertyChangedEventArgs e)
