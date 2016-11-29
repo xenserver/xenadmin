@@ -690,7 +690,7 @@ namespace XenAdmin.Actions.VMActions
         {
             get
             {
-                return string.Format("{0}{1}", Helpers.GuiTempObjectPrefix, NameLabel);
+                return Helpers.MakeHiddenName(NameLabel);
             }
         }
 
