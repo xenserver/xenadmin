@@ -314,7 +314,7 @@ do
 done
 
 #now package the pdbs
-cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 *.pdb
+cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
