@@ -119,7 +119,6 @@ fi
 
 echo "INFO:	Workspace located in: $ROOT"
 REPO=${XENADMIN_DIR}
-REF_REPO=${ROOT}/xenadmin-ref.hg
 BRAND_REPO=${ROOT}/xenadmin-branding
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
@@ -178,16 +177,3 @@ WGET () { wget ${WGET_OPT} "${@}"; }
 WGET --spider ${GLOBALS} || WGET --spider ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-
-# if this is an official build 
-if [ $get_BUILD_NUMBER -ne 0 ]
-then
-	cd ${ROOT_DIR}
-
-	if [ -d "xenadmin-ref.hg" ]
-	then
-	  hg --cwd xenadmin-ref.hg pull -u
-	else
-	  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
-	fi
-fi

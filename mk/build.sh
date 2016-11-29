@@ -120,6 +120,7 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
     test_phase
+    source ${XENADMIN_DIR}/mk/copy-build-output.sh
     source ${XENADMIN_DIR}/mk/archive-push.sh
 }
 
