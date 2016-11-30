@@ -998,6 +998,11 @@ namespace XenAdmin.Core
             return val;
         }
 
+        public static string MakeHiddenName(string name)
+        {
+            return string.Format("{0}{1}", GuiTempObjectPrefix, name);
+        }
+
         public static string GetFriendlyLicenseName(Host host)
         {
 			if (string.IsNullOrEmpty(host.edition))
