@@ -65,11 +65,11 @@ echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh
 
 #collect output and extra files to the OUTPUT_DIR
-EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
+EN_CD_DIR=${OUTPUT_DIR}/installer
 mkdir_clean ${EN_CD_DIR}
 cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${EN_CD_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-L10N_CD_DIR=${OUTPUT_DIR}/client_install
+L10N_CD_DIR=${OUTPUT_DIR}/installer.l10n
 mkdir_clean ${L10N_CD_DIR}
 cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_CD_DIR}
 

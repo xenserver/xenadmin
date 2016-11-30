@@ -53,7 +53,7 @@ function check_deps ()
   fi
 }
 
-check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe
+check_deps nunit-console.exe zip unzip wget curl hg git patch mt.exe candle.exe light.exe
 if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
 then
     check_deps signtool.exe

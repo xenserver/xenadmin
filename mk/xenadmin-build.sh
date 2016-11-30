@@ -253,15 +253,6 @@ cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 #include resources script and collect the resources for translations
 . ${REPO}/mk/find-resources.sh
 
-#collect output and extra files to the OUTPUT_DIR
-EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
-mkdir_clean ${EN_CD_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${EN_CD_DIR}
-cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-L10N_CD_DIR=${OUTPUT_DIR}/client_install
-mkdir_clean ${L10N_CD_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_CD_DIR}
-
 cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${WIX}/outVNCControl && tar cjf ${OUTPUT_DIR}/VNCControl.tar.bz2 VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
@@ -278,35 +269,25 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
 echo "INFO:	Create English iso files"
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
-cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
-cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+cp ${REPO}/mk/ISO_files/AUTORUN.INF ${ISO_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer
 tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso" "${ISO_DIR}"
-install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
 
 echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
-cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
-cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+cp ${REPO}/mk/ISO_files/AUTORUN.INF ${L10N_ISO_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer.l10n
 tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.iso" "${L10N_ISO_DIR}"
-install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
-
-# Create a tarball containing the XenCenter ISO, to be installed by the host installer
-# MAIN_PKG_DIR is our working directory, MAIN_PKG_ISO_SUBDIR is the pathname of the ISO
-# file within the tar file, and therefore the path it eventually installs into
-mkdir_clean ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso
-ln -sf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso
-tar -C ${OUTPUT_DIR}/PACKAGES.main -ch opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso | bzip2 > ${OUTPUT_DIR}/PACKAGES.main/${BRANDING_BRAND_CONSOLE}.iso.tar.bz2
-rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
 
 #bring in the pdbs from dotnet-packages latest build
 for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
