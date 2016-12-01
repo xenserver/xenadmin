@@ -43,12 +43,14 @@ namespace XenAdmin.Actions.VMActions
     public class CreateVMFastAction : AsyncAction
     {
         private readonly String _nameLabel;
+        private readonly bool _markVmAsBeingCreated;
 
-        public CreateVMFastAction(IXenConnection connection, VM template)
+        public CreateVMFastAction(IXenConnection connection, VM template, bool markVmAsBeingCreated = true)
             : base(connection, Messages.INSTANT_VM_CREATE_TITLE, string.Format(Messages.INSTANT_VM_CREATE_DESCRIPTION, Helpers.DefaultVMName(Helpers.GetName(template), connection), Helpers.GetName(template)))
         {
             Template = template;
             _nameLabel = Helpers.DefaultVMName(Helpers.GetName(Template), Connection);
+            _markVmAsBeingCreated = markVmAsBeingCreated;
 
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
@@ -64,18 +66,26 @@ namespace XenAdmin.Actions.VMActions
             PollToCompletion(0, 80);
 
             string new_vm_ref = Result;
-            VM = Connection.WaitForCache(new XenRef<VM>(new_vm_ref));
 
-            VM.IsBeingCreated = true;
+            if (_markVmAsBeingCreated)
+            {
+                VM = Connection.WaitForCache(new XenRef<VM>(new_vm_ref));
+                VM.IsBeingCreated = true;
+            }
+
             XenAdminConfigManager.Provider.HideObject(new_vm_ref);
 
             RelatedTask = XenAPI.VM.async_provision(Session, new_vm_ref);
             PollToCompletion(80, 90);
 
             VM.set_name_label(Session, new_vm_ref, _nameLabel);
-            VM.name_label = _nameLabel; //the set_name_label method takes some time, we want to show the VM right away
             XenAdminConfigManager.Provider.ShowObject(new_vm_ref);
-            VM.IsBeingCreated = false;
+
+            if (_markVmAsBeingCreated)
+            {
+                VM.name_label = _nameLabel; //the set_name_label method takes some time, we want to show the VM right away
+                VM.IsBeingCreated = false;
+            }
 
             Result = new_vm_ref;
         }
