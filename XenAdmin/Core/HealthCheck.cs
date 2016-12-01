@@ -64,7 +64,7 @@ namespace XenAdmin.Core
             }
             else if (actions.Count > 1)
             {
-                var parallelAction = new ParallelAction(null, "", "", "", actions);
+                var parallelAction = new ParallelAction(null, "", "", "", actions, true, true);
                 parallelAction.Completed += actionCompleted;
                 parallelAction.RunAsync();
             }
