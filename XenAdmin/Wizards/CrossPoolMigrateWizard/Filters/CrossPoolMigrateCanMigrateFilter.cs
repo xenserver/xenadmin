@@ -106,8 +106,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                         }
                         catch (Failure failure)
                         {
-                            disableReason = failure.Message;
-                            
+                            if (failure.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                                disableReason = failure.Message.Split('\n')[0]; // we want the first line only
+                            else
+                                disableReason = failure.Message;
+
                             log.ErrorFormat("VM: {0}, Host: {1} - Reason: {2};", vm.opaque_ref, host.opaque_ref, failure.Message);
 
                             if (!excludedHosts.Contains(host.opaque_ref))
