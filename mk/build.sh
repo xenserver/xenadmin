@@ -74,21 +74,20 @@ source ${XENADMIN_DIR}/mk/declarations.sh
 
 if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
 
-rm -rf ${ROOT}/xenadmin-branding
-
+rm -rf ${ROOT}/xenadmin-branding.git
 BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
 
 if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
     echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
-    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding
+    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
 else
-    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding
+    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
 fi
 
-if [ -d ${ROOT}/xenadmin-branding/${XC_BRANDING} ]; then
+if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
     echo "Overwriting Branding folder"
     rm -rf ${XENADMIN_DIR}/Branding/*
-    cp -rf ${ROOT}/xenadmin-branding/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
+    cp -rf ${ROOT}/xenadmin-branding.git/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
 fi
 
 # overwrite archive-push.sh and push-latest-successful-build.sh files, if they exist in Branding folder
