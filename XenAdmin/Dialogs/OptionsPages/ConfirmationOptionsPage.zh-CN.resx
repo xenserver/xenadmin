@@ -112,291 +112,201 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="UpdatesTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="UpdatesTableLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="XenCenterGroupBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="XenCenterGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="AllowXenCenterUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="AllowXenCenterUpdatesCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data name="labelBlurb.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 21</value>
+  <data name="labelBlurb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 0</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 0</value>
+  <data name="labelBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 16</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
+  <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 26</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.Text" xml:space="preserve">
-    <value>检查新 [XenCenter] 版本(&amp;N)</value>
+  <data name="labelBlurb.Text" xml:space="preserve">
+    <value>可以将 [XenCenter] 配置为每当您消除“通知”视图中的一个或多个警报、更新或事件时显示一条警告。</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Name" xml:space="preserve">
-    <value>AllowXenCenterUpdatesCheckBox</value>
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+    <value>labelBlurb</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Parent" xml:space="preserve">
-    <value>XenCenterGroupBox</value>
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="XenCenterGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="checkBoxDontConfirmDismissAlerts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <data name="XenCenterGroupBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
+  <data name="checkBoxDontConfirmDismissAlerts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="XenCenterGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 121</value>
+  <data name="checkBoxDontConfirmDismissAlerts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 44</value>
   </data>
-  <data name="XenCenterGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+  <data name="checkBoxDontConfirmDismissAlerts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
-  <data name="XenCenterGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 51</value>
+  <data name="checkBoxDontConfirmDismissAlerts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 17</value>
   </data>
-  <data name="XenCenterGroupBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="checkBoxDontConfirmDismissAlerts.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissAlerts.Text" xml:space="preserve">
+    <value>不显示消除警报确认对话框(&amp;A)</value>
+  </data>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissAlerts.Name" xml:space="preserve">
+    <value>checkBoxDontConfirmDismissAlerts</value>
+  </data>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissAlerts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissAlerts.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissAlerts.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissUpdates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissUpdates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 65</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 17</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="XenCenterGroupBox.Text" xml:space="preserve">
-    <value>自动检查 [XenCenter] 更新</value>
+  <data name="checkBoxDontConfirmDismissUpdates.Text" xml:space="preserve">
+    <value>不显示消除更新确认对话框(&amp;U)</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.Name" xml:space="preserve">
-    <value>XenCenterGroupBox</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissUpdates.Name" xml:space="preserve">
+    <value>checkBoxDontConfirmDismissUpdates</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissUpdates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.Parent" xml:space="preserve">
-    <value>UpdatesTableLayoutPanel</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissUpdates.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissUpdates.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="XenServerGroupBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="checkBoxDontConfirmDismissEvents.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="checkBoxDontConfirmDismissEvents.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="XenServerGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="checkBoxDontConfirmDismissEvents.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 86</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="checkBoxDontConfirmDismissEvents.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
+  <data name="checkBoxDontConfirmDismissEvents.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 17</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="AllowXenServerUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 21</value>
-  </data>
-  <data name="AllowXenServerUpdatesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 3</value>
-  </data>
-  <data name="AllowXenServerUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 17</value>
-  </data>
-  <data name="AllowXenServerUpdatesCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
-    <value>检查 [XenServer] 的新版本(&amp;V)</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
-    <value>AllowXenServerUpdatesCheckBox</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Parent" xml:space="preserve">
-    <value>XenServerGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 44</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 17</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="AllowXenServerPatchesCheckBox.Text" xml:space="preserve">
-    <value>检查 [XenServer] 更新(&amp;U)</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Name" xml:space="preserve">
-    <value>AllowXenServerPatchesCheckBox</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Parent" xml:space="preserve">
-    <value>XenServerGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="XenServerGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="XenServerGroupBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="XenServerGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 41</value>
-  </data>
-  <data name="XenServerGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="XenServerGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 74</value>
-  </data>
-  <data name="XenServerGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="XenServerGroupBox.Text" xml:space="preserve">
-    <value>自动检查 [XenServer] 更新和新版本</value>
-  </data>
-  <data name="&gt;&gt;XenServerGroupBox.Name" xml:space="preserve">
-    <value>XenServerGroupBox</value>
-  </data>
-  <data name="&gt;&gt;XenServerGroupBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;XenServerGroupBox.Parent" xml:space="preserve">
-    <value>UpdatesTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;XenServerGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="UpdatesBlurb.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="UpdatesBlurb.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="UpdatesBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="UpdatesBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="UpdatesBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 12</value>
-  </data>
-  <data name="UpdatesBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 26</value>
-  </data>
-  <data name="UpdatesBlurb.TabIndex" type="System.Int32, mscorlib">
+  <data name="checkBoxDontConfirmDismissEvents.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="UpdatesBlurb.Text" xml:space="preserve">
-    <value>可以将 [XenCenter] 配置为定期检查可用更新，并在找到可供下载的更新或新 [XenServer] 版本时提示您。</value>
+  <data name="checkBoxDontConfirmDismissEvents.Text" xml:space="preserve">
+    <value>不显示消除事件确认对话框(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
-    <value>UpdatesBlurb</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissEvents.Name" xml:space="preserve">
+    <value>checkBoxDontConfirmDismissEvents</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissEvents.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Parent" xml:space="preserve">
-    <value>UpdatesTableLayoutPanel</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissEvents.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;checkBoxDontConfirmDismissEvents.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 225</value>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>447, 395</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.Name" xml:space="preserve">
-    <value>UpdatesTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="XenCenterGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="XenServerGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="checkBoxDontConfirmDismissAlerts" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="checkBoxDontConfirmDismissUpdates" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="checkBoxDontConfirmDismissEvents" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,Absolute,20" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20,Absolute,20,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 225</value>
+    <value>447, 395</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>UpdatesOptionsPage</value>
+    <value>ConfirmationOptionsPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -232,13 +232,13 @@
     <value>清理磁盘空间</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>配置 PVS 站点</value>
+    <value>配置 PVS 缓存</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
     <value>已配置</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>配置 PVS 站点“{0}”</value>
+    <value>在“{0}”上配置 PVS 缓存</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>正在创建 {0} ...</value>
@@ -256,13 +256,13 @@
     <value>正在取消激活多个虚拟磁盘</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>删除 PVS 站点</value>
+    <value>删除 PVS 缓存配置</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
     <value>完成</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>删除 PVS 站点“{0}”</value>
+    <value>删除“{0}”上的 PVS 缓存配置</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>正在删除存储项...</value>
@@ -415,7 +415,7 @@
     <value>启用 PVS 读缓存</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>启用站点“{1}”上的 VM“{0}”的 PVS 读缓存</value>
+    <value>为“{1}”上的 VM“{0}”启用 PVS 读缓存</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>正在启用</value>
@@ -2264,7 +2264,7 @@
     <value>缓存中尚未填入内容</value>
   </data>
   <data name="CACHING" xml:space="preserve">
-    <value>缓存</value>
+    <value>正在缓存</value>
   </data>
   <data name="CANCEL" xml:space="preserve">
     <value>取消</value>
@@ -2350,7 +2350,7 @@
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>此模板为 [XenServer] 模板，不能删除。</value>
+    <value>不能删除 [XenServer] 模板。</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>此虚拟磁盘供 DR 使用。要将其删除，请对 DR 进行配置，使其不将数据保存到此存储库中。</value>
@@ -2509,7 +2509,7 @@
     <value>正在检查分区布局</value>
   </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
-    <value>Checking reboots required</value>
+    <value>需要选中重新启动选项</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>正在检查服务器端状态</value>
@@ -2592,6 +2592,12 @@
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>正在池“{0}”上配置 Workload Balancing</value>
   </data>
+  <data name="CONFIRMATIONS" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="CONFIRMATIONS_DETAIL" xml:space="preserve">
+    <value>确认消除通知</value>
+  </data>
   <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>更改控制域内存将导致服务器重新启动。
 
@@ -2655,6 +2661,9 @@
   <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
     <value>是否确实要删除“{0}”?</value>
   </data>
+  <data name="CONFIRM_DELETE_PVS_SITE_IN_USE" xml:space="preserve">
+    <value>是否确实要删除“{0}”? 此配置正由 PVS 使用。</value>
+  </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>是否确实要从所有托管资源中删除标记“{0}”?</value>
   </data>
@@ -2712,7 +2721,7 @@
   <data name="CONFIRM_DESTROY_HOST" xml:space="preserve">
     <value>是否确实要销毁“{0}”?
 
-仅当 [XenServer] 实际出现故障时才需要将其销毁。
+仅当服务器实际出现故障时才需要将其销毁。
 销毁此服务器会将其从池中永久删除，同时删除其本地 SR、DVD 驱动器和可移动存储。需要重新安装此服务器才能再次使用。
 
 此操作为最终操作，无法恢复。</value>
@@ -3192,6 +3201,9 @@
   </data>
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
     <value>/秒</value>
+  </data>
+  <data name="CPM_FAILURE_REASON_HARDWARE_PLATFORM" xml:space="preserve">
+    <value>硬件平台版本不兼容</value>
   </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>版本号不兼容</value>
@@ -4224,6 +4236,9 @@
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
     <value>{0} 现在可用。请在 [Citrix] 网站下载最新版本。</value>
+  </data>
+  <data name="DO_NOT_SHOW_THIS_MESSAGE" xml:space="preserve">
+    <value>不再显示此消息(&amp;D)</value>
   </data>
   <data name="DRAC_NO_SUPP_PACK" xml:space="preserve">
     <value>未安装 Dell 补充软件包。</value>
@@ -5532,8 +5547,11 @@
   <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
     <value>{1} 上的 {0}</value>
   </data>
-  <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
+  <data name="GENERAL_PANEL_UPDATE_REBOOT_WARNING" xml:space="preserve">
     <value>需要重新启动服务器“{0}”，更新“{1}”才能生效</value>
+  </data>
+  <data name="GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING" xml:space="preserve">
+    <value>需要重新启动服务器“{0}”上的 Toolstack，更新“{1}”才能生效</value>
   </data>
   <data name="GENERAL_SR_CONTEXT_REPAIR" xml:space="preserve">
     <value>修复</value>
@@ -5647,6 +5665,9 @@
   </data>
   <data name="GRAPH_LOADING" xml:space="preserve">
     <value>正在加载数据...</value>
+  </data>
+  <data name="GRAPH_NAME" xml:space="preserve">
+    <value>性能图表</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
     <value>需要安装 [XenServer product] Tools，才能查看此 VM 的内存数据</value>
@@ -6167,7 +6188,7 @@
     <value>未知错误</value>
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Live patching status</value>
+    <value>实时修补状态</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>添加网络(&amp;A)...</value>
@@ -6507,6 +6528,12 @@
   </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>为新 VM 配置虚拟网络接口</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_MANY" xml:space="preserve">
+    <value>要导入的部分或全部 VM 能够从 Windows Update 接收更新。所选位置不支持此虚拟化状态。如果继续导入，您的 VM 即使能够运行，也可能无法完全运行。</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_ONE" xml:space="preserve">
+    <value>要导入的 VM 能够从 Windows Update 接收更新。所选位置不支持此虚拟化状态。如果继续导入，您的 VM 即使能够运行，也可能无法完全运行。</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_MANY" xml:space="preserve">
     <value>正在导入的部分或全部 VM 分配有虚拟 GPU。所选位置没有类型正确的 GPU。如果继续导入，这些 VM 的虚拟 GPU 设置将丢失。</value>
@@ -8077,6 +8104,12 @@ SCSI ID: {2}
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>如果以 Windows (SMB/CIFS)共享形式提供要连接到主机或池的 VM 安装 ISO 映像库，请选择此选项。</value>
   </data>
+  <data name="NEWSR_CIFS_ISO_TYPE_NAME" xml:space="preserve">
+    <value>Windows 文件共享(SMB/CIFS)</value>
+  </data>
+  <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
+    <value>SMB/CIFS</value>
+  </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
     <value>SMB ISO 库 [{0}]</value>
   </data>
@@ -8115,6 +8148,9 @@ SCSI ID: {2}
   </data>
   <data name="NEWSR_CSLG_THIN_PROVISIONING" xml:space="preserve">
     <value>精简</value>
+  </data>
+  <data name="NEWSR_CSLG_TYPE_NAME" xml:space="preserve">
+    <value>StorageLink 技术</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
     <value>Dell EqualLogic 是一种可扩展的高性能网络连接存储形式，支持在不停机的情况下增加容量。可以使用 Dell EqualLogic 共享存储来支持 [XenServer] 功能，例如实时迁移和高可用性。</value>
@@ -8173,6 +8209,9 @@ SCSI ID: {2}
   <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
     <value>软件 FCoE SR [{0} - {1}]</value>
   </data>
+  <data name="NEWSR_LVMOFCOE_TYPE_NAME" xml:space="preserve">
+    <value>软件 FCoE</value>
+  </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
     <value>[XenServer] 主机通过主机总线适配器(HBA)支持光纤通道(FC)、以太网光纤通道(FCoE)和共享串联 SCSI (SAS)存储局域网。
 
@@ -8210,10 +8249,16 @@ SCSI ID: {2}
   <data name="NEWSR_LVMOHBA_SUMMARY_TEXT" xml:space="preserve">
     <value>摘要</value>
   </data>
+  <data name="NEWSR_LVMOHBA_TYPE_NAME" xml:space="preserve">
+    <value>硬件 HBA</value>
+  </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
     <value>可以使用 LVM 配置对共享 LUN 的 iSCSI 或光纤通道访问。
 
 对共享 SR 使用 LVM 提供的性能优势与对本地磁盘存储使用非共享 LVM 相同，但前者还能够灵活地启用 VM。</value>
+  </data>
+  <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
+    <value>iSCSI</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
     <value>警告: 必须确保以下 SR 当前未由任何未连接到 [XenCenter] 的服务器使用。否则可能会导致数据丢失。
@@ -8252,6 +8297,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
     <value>如果以 NFS 共享形式提供要连接到主机或池的 VM 安装 ISO 映像库，请选择此选项。</value>
+  </data>
+  <data name="NEWSR_NFS_ISO_TYPE_NAME" xml:space="preserve">
+    <value>NFS ISO</value>
   </data>
   <data name="NEWSR_NOWHERE_TO_CREATE" xml:space="preserve">
     <value>指定的文件管理器没有现有 SR，并且找不到创建新 SR 的位置。</value>
@@ -8295,6 +8343,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 由于 NFS 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用实时迁移功能在这些服务器之间迁移。
 
 配置 NFS 存储库时，只需提供 NFS 服务器的主机名或 IP 地址以及用来包含存储库的目录路径。NFS 服务器必须配置为导出池中所有服务器的指定路径。</value>
+  </data>
+  <data name="NEWSR_VHDONFS_TYPE_NAME" xml:space="preserve">
+    <value>NFS</value>
   </data>
   <data name="NEWVMAPPLIANCE_FINISHPAGE_TEXT" xml:space="preserve">
     <value>完成</value>
@@ -9208,6 +9259,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TITLE" xml:space="preserve">
     <value>在所选服务器上执行更新预检查</value>
   </data>
+  <data name="PATCHINGWIZARD_REMOVED_UPDATES" xml:space="preserve">
+    <value>已删除更新安装文件</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVE_UPDATES" xml:space="preserve">
+    <value>删除更新安装文件</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
+    <value>正在删除更新安装文件</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>选择更新文件</value>
   </data>
@@ -9346,7 +9406,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 大小: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>此修补程序适用于版本匹配正则表达式“{0}”的服务器。</value>
+    <value>{0}: 此修补程序适用于版本匹配正则表达式“{1}”的服务器。</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>未找到</value>
@@ -9720,11 +9780,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS 缓存配置 - {0}</value>
   </data>
+  <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
+    <value>{0} (PVS 配置不完整)</value>
+  </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
     <value>内存和磁盘</value>
   </data>
   <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
     <value>仅限内存</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_ONLY_DISABLED" xml:space="preserve">
+    <value>仅限内存(控制域内存不足)</value>
   </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
     <value>内存 SR</value>
@@ -9732,8 +9798,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>未配置</value>
   </data>
+  <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
+    <value>{0} (缓存存储配置不完整)</value>
+  </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>无法删除此 PVS 站点，因为其中包含正在运行的代理。</value>
+    <value>不能删除此 PVS 缓存配置，因为存在通过流技术从此站点推送的 VM。</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
     <value>站点“{0}”上的 PVS 服务器</value>
@@ -9950,9 +10019,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="REMOVED_UPDATE" xml:space="preserve">
     <value>已删除更新“{0}”</value>
   </data>
-  <data name="REMOVED_UPDATES" xml:space="preserve">
-    <value>已删除更新</value>
-  </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>已从 vApp 删除 </value>
   </data>
@@ -10019,9 +10085,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="REMOVE_STORAGE_SYSTEMS" xml:space="preserve">
     <value>删除存储系统(&amp;E)</value>
   </data>
-  <data name="REMOVE_UPDATES" xml:space="preserve">
-    <value>删除更新</value>
-  </data>
   <data name="REMOVE_VIRTUAL_DISK" xml:space="preserve">
     <value>删除虚拟磁盘</value>
   </data>
@@ -10048,9 +10111,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="REMOVING_UPDATE" xml:space="preserve">
     <value>正在删除更新“{0}”...</value>
-  </data>
-  <data name="REMOVING_UPDATES" xml:space="preserve">
-    <value>正在删除更新</value>
   </data>
   <data name="REMOVING_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>正在从 vApp 删除</value>
@@ -10197,7 +10257,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池滚动升级</value>
   </data>
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
-    <value>正在执行池滚动升级...</value>
+    <value>正在执行池滚动升级(&amp;U)...</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>可以通过重新启动“池滚动升级”向导继续执行此升级。</value>
@@ -10463,7 +10523,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池主服务器上的当前时间为: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards.</value>
+    <value>本版本的 [XenCenter] 支持 [XenServer] [BRANDING_VERSION_6_0] 及更高版本。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>使用早期版本的 [XenCenter] 管理此服务器。</value>
@@ -11066,7 +11126,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
     <value>{0}
 
-有关如何在 [XenServer] 主机上手动安装补充包的说明，请参阅《[XenServer product] 管理员指南》。</value>
+有关如何在服务器上手动安装补充包的说明，请参阅《[XenServer product] 管理员指南》。</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (未在 {1} 上安装)</value>
@@ -11613,10 +11673,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 其他服务器上的可用内存不足，无法将所有 VM 迁移出此服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED" xml:space="preserve">
-    <value>{0}: This server does not need to be rebooted.</value>
+    <value>{0}: 不需要重新启动此服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH" xml:space="preserve">
-    <value>{0}: This server does not need to be rebooted as live patching is used.</value>
+    <value>{0}: 不需要重新启动此服务器，因为使用实时修补。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
     <value>VM {0} 未安装 [XenServer product] Tools。</value>
@@ -11642,8 +11702,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_PRECHECK_FAILED" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
+    <value>{0}: 存在冲突的更新: {1}</value>
+  </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS" xml:space="preserve">
     <value>所选服务器上的更新前检查失败。将不应用更新。</value>
+  </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
+    <value>{0}: 缺少必备的更新: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_TITLE" xml:space="preserve">
     <value>服务器“{0}”上的更新预检查失败</value>
@@ -11658,7 +11724,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在重新启动 {0} ... </value>
   </data>
   <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
-    <value>{0}: This server needs to be rebooted after the update is applied.</value>
+    <value>{0}: 需要在应用更新后重新启动此服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>正在从 {1} 中删除更新安装文件 {0}... </value>
@@ -11722,8 +11788,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
   </data>
+  <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
+    <value>无法引入更新。</value>
+  </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>您已对更新列表应用过滤器。您想从每个已连接的服务器中导出所有更新，还是仅导出已选择查看的更新?</value>
+  </data>
+  <data name="UPDATE_FOR_DIFFERENT_XENSERVER_VERSION" xml:space="preserve">
+    <value>{0}: 此更新与此服务器版本不兼容。</value>
   </data>
   <data name="UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH" xml:space="preserve">
     <value>无法删除应用到任何服务器的更新。</value>
@@ -11733,6 +11805,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATE_PROPERTIES" xml:space="preserve">
     <value>正在更新“{0}”</value>
+  </data>
+  <data name="UPDATE_TEMP_VDI_DESCRIPTION" xml:space="preserve">
+    <value>用于安装更新的临时虚拟磁盘</value>
   </data>
   <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
     <value>更新 {0} 未成功完成</value>
@@ -12747,7 +12822,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池中的一个或多个主机没有合适的许可证。</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB 无法使用所提供的无效凭据来启动 [XenServer] 会话。</value>
+    <value>WLB 无法连接到 [XenServer]，因为提供的凭据无效。</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB 无法撤离显式排除的主机。</value>

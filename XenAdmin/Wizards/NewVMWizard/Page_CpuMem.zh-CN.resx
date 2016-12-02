@@ -139,7 +139,7 @@
     <value>1</value>
   </data>
   <data name="labelVCPUs.Text" xml:space="preserve">
-    <value>vCPU 数(&amp;C):</value>
+    <value>vCPU 数量(&amp;C):</value>
   </data>
   <data name="labelVCPUs.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
