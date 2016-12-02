@@ -498,6 +498,9 @@
   <data name="StartVMGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
+  <data name="StartVMGroupBox.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>194, 164</value>
+  </data>
   <data name="StartVMGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 3</value>
   </data>
