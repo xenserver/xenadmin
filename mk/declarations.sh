@@ -129,15 +129,7 @@ XENCENTER_LOGDIR="${ROOT}/log"
 mkdir -p ${XENCENTER_LOGDIR}
 
 # WEB_LIB is where the libraries stored in /usr/groups/linux/distfiles are exposed
-#WEB_LATEST_BUILD is where the current build will retrieve some of its dependendencies,
-#i.e. XenCenterOvf, version number, branding info and XenServer.NET;
-#use xe-phase-2-latest to ensure we use a build where phases 1 and 2 have succeeded
-WEB_HOST="http://www.uk.xensource.com"
-WEB_LIB="${WEB_HOST}/linux/distfiles/windows-build"
-WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-2-latest"
-REBRANDING_WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-rebrand-latest"
-WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
-WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
+WEB_LIB="http://www.uk.xensource.com/linux/distfiles/windows-build"
 
 # REPO_CITRITE_LIB is where repo.citrite.net files can be found
 REPO_CITRITE_HOST="https://repo.citrite.net"

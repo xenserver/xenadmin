@@ -111,12 +111,9 @@ dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP46-KB3045560-
 dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
 dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
-#bring in stuff from xencenter-ovf latest xe-phase-1
-_WGET -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/XenCenterOVF.zip"
+#bring in the ovf fixup iso from artifactory (currently one location)
+_WGET -P "${SCRATCH_DIR}" ${REPO_CITRITE_HOST}/list/xs-local-contrib/citrix/xencenter/XenCenterOVF.zip
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
-
-#bring manifest from latest xe-phase-1
-_WGET -O ${SCRATCH_DIR}/xe-phase-1-manifest "${WEB_XE_PHASE_1}/manifest"
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit
@@ -298,9 +295,17 @@ cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
 echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
+
+#for the time being we download a fixed version of the ovf fixup iso, hence put this in the manifest
+echo "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" >> ${OUTPUT_DIR}/manifest
+echo "chroot-lenny chroots.hg 1a75fa5848e8" >> ${OUTPUT_DIR}/manifest
+
+XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
+echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
+
+SERVER_BRANDING_TIP=$(cd ${ROOT}/branding.git && git rev-parse HEAD)
+echo "branding branding.git ${SERVER_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
+
 cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
 get_BUILD_PATH=/usr/groups/xen/carbon/windowsbuilds/WindowsBuilds/${get_JOB_NAME}/${BUILD_NUMBER}
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
