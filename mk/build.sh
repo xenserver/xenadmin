@@ -53,7 +53,7 @@ function check_deps ()
   fi
 }
 
-check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe
+check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe ncover
 if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
 then
     check_deps signtool.exe
@@ -101,14 +101,28 @@ if [ -f ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ]; the
   cp ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ${XENADMIN_DIR}/mk/push-latest-successful-build.sh
 fi
 
+run_tests()
+{
+    if [ -n "${REPORT_COVERAGE+x}" ]; then
+        if [ -z "${NCOVER_PROJECT_ID+x}" ]; then
+            echo "FATAL: REPORT_COVERAGE was set, but NCOVER_PROJECT_ID was not"
+            exit 1
+        fi
+        echo "Running tests with coverage because REPORT_COVERAGE declared"
+        source ${XENADMIN_DIR}/mk/tests-checks-cover.sh
+    else
+        source ${XENADMIN_DIR}/mk/tests-checks.sh
+    fi
+}
+
 test_phase()
 {
-  # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-  if [ -n "${SKIP_TESTS+x}" ]; then
-    echo "Tests skipped because SKIP_TESTS declared"
-  else
-    source ${XENADMIN_DIR}/mk/tests-checks.sh
-  fi
+    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+    if [ -n "${SKIP_TESTS+x}" ]; then
+        echo "Tests skipped because SKIP_TESTS declared"
+    else
+        run_tests
+    fi
 }
 
 production_jenkins_build()
