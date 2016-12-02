@@ -119,7 +119,6 @@ fi
 
 echo "INFO:	Workspace located in: $ROOT"
 REPO=${XENADMIN_DIR}
-BRAND_REPO=${ROOT}/xenadmin-branding
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 TEST_DIR=${ROOT}/tmp
@@ -139,10 +138,6 @@ WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-2-latest"
 REBRANDING_WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-rebrand-latest"
 WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
 WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
-GLOBALS=${WEB_XE_PHASE_1}/globals
-WEB_TRUNK_LATEST_BUILD="${WEB_HOST}/carbon/trunk/xe-phase-2-latest"
-WEB_TRUNK_XE_PHASE_1=${WEB_TRUNK_LATEST_BUILD}/xe-phase-1
-TRUNK_GLOBALS=${WEB_TRUNK_XE_PHASE_1}/globals
 
 # REPO_CITRITE_LIB is where repo.citrite.net files can be found
 REPO_CITRITE_HOST="https://repo.citrite.net"
@@ -172,8 +167,5 @@ WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 
 WGET_OPT="-T 10 -N -q"
 WGET () { wget ${WGET_OPT} "${@}"; }
-
-#check there are xenserver builds on this branch before proceeding
-WGET --spider ${GLOBALS} || WGET --spider ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
