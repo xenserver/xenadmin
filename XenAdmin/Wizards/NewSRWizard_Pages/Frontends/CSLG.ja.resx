@@ -154,7 +154,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelAdapter.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="labelStorageSystem.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
