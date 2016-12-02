@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -208,7 +208,7 @@
     <value>ステート パーティションが見つからないため、復元を実行できませんでした。</value>
   </data>
   <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
-    <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
+    <value>要求されたアップデートが見つかりません。アップデートを再度アップロードしてください。この問題は、xe update-apply の前に xe update-pool-clean を実行すると発生します。 </value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>この PIF ボンディング スレーブなので接続できません。</value>
@@ -562,7 +562,7 @@
     <value>アップロードされたアップデート ファイルが無効です。</value>
   </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
-    <value>The uploaded update package is invalid.</value>
+    <value>アップロードされたアップデート パッケージが無効です。</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>値 '{1}' はフィールド '{0}' に対して無効です。</value>
@@ -637,7 +637,7 @@
     <value>内部エラー: '{0}'.'{1}':'{3}'='{2}' を設定しようとしましたが、キー '{3}' がマップ '{1}' に既に存在します。</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
-    <value>The dynamic memory range does not satisfy the following constraint.</value>
+    <value>動的メモリの範囲が次の制約を満たしていません。</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>この仮想マシンに設定可能なメモリの最大値に達しました。</value>
@@ -1599,19 +1599,37 @@
     <value>要求された VM {0} の ブートローダー {1} が不明です。</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
-    <value>This update has already been applied.</value>
+    <value>このアップデートは適用済みです。</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED_IN_POOL" xml:space="preserve">
-    <value>This update has already been applied to all hosts in the pool.</value>
+    <value>このアップデートは、プールのすべてのホストに適用済みです。</value>
   </data>
   <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>The uploaded update already exists</value>
+    <value>アップロードしたアップデートは既に存在しています</value>
+  </data>
+  <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
+    <value>このアップデートを適用できませんでした。添付の出力を参照してください。</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
-    <value>The specified update has been applied and cannot be destroyed.</value>
+    <value>指定されたアップデートは適用済みであり、破棄できません。</value>
   </data>
   <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
-    <value>The update cannot be applied for the following host(s).</value>
+    <value>次のホストにアップデートを適用できません。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
+    <value>アップデートの事前チェックに失敗しました。競合するアップデートがあります。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>アップデートの事前チェックに失敗しました。必要な空き領域がサーバーにありません。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
+    <value>アップデートの事前チェックに失敗しました。必要なアップデートがありません。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
+    <value>不明なエラーにより、アップデートの事前チェックに失敗しました。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
+    <value>アップデートの事前チェックに失敗しました。サーバーのバージョンが正しくありません。</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>この処理を実行できるのはローカルの superuser だけです。</value>
@@ -1794,7 +1812,7 @@
     <value>古いバージョンのホストをアップグレードするときにこの VM 処理は実行できません。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
+    <value>移行元ホストより古いバージョンの XenServer を実行している移行先のホストに VM を移行しようとしました。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM のこのバージョンの仮想ハードウェア プラットフォームには、このホストとの互換性がありません。</value>
@@ -1819,6 +1837,9 @@
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>この処理はテンプレートには無効です。</value>
+  </data>
+  <data name="VM_IS_USING_NESTED_VIRT" xml:space="preserve">
+    <value>仮想マシンが入れ子になった仮想化を使用しているため、この操作は無効です。</value>
   </data>
   <data name="VM_LACKS_FEATURE" xml:space="preserve">
     <value>VM に存在しない機能の操作を試行しました。</value>

@@ -157,7 +157,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;HostNicLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="HostVLanLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

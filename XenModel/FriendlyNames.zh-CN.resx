@@ -1746,7 +1746,7 @@
     <value>XenApp/XenDesktop Platinum</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
-    <value>已安装补充包</value>
+    <value>安装的补充包</value>
   </data>
   <data name="Label-VM.read_caching_status" xml:space="preserve">
     <value>状态</value>
@@ -1903,5 +1903,17 @@
   </data>
   <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
     <value>PVS 读缓存状态</value>
+  </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>“{0}”读取吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>“{0}”读取延迟</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>“{0}”写入吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>“{0}”写入延迟</value>
   </data>
 </root>
