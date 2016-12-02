@@ -136,7 +136,7 @@
     <value>3</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>此向导将帮助您在 [XenServer] 资源池上配置高可用性(HA)。
+    <value>此向导将帮助您在资源池上配置高可用性(HA)。
 
 开始操作之前，请务必满足针对池中的所有服务器和虚拟机的以下要求:
 

@@ -250,6 +250,6 @@
     <value>http://www.citrix.com/xenserver/le/features/ad</value>
   </data>
   <data name="ISO_UPDATE" xml:space="preserve">
-    <value>iso</value>
+    <value>ISO</value>
   </data>
 </root>

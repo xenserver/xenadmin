@@ -679,7 +679,7 @@
     <value>5</value>
   </data>
   <data name="autoHeightLabel4.Text" xml:space="preserve">
-    <value>VM の構成データがこのプール内に格納されないため、障害発生時に VM や vApp を回復できなくなります。</value>
+    <value>仮想マシンの構成データがこのプール内に格納されないため、障害発生時に仮想マシンや vApp を回復できなくなります。</value>
   </data>
   <data name="autoHeightLabel4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
