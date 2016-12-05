@@ -1509,6 +1509,17 @@ namespace XenAPI
             get { return !not_a_real_vm; }
         }
 
+        private bool _isBeingCreated;
+        public bool IsBeingCreated
+        {
+            get { return _isBeingCreated; }
+            set
+            {
+                _isBeingCreated = value;
+                NotifyPropertyChanged("IsBeingCreated");
+            }
+        }
+
         public XmlNode ProvisionXml
         {
             get
