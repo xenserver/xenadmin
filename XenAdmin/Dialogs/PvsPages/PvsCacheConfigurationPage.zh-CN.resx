@@ -191,7 +191,7 @@
     <value>6</value>
   </data>
   <data name="deleteButton.Text" xml:space="preserve">
-    <value>删除缓存配置(&amp;R)</value>
+    <value>删除 PVS 缓存配置(&amp;R)</value>
   </data>
   <data name="deleteButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>

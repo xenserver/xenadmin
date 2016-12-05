@@ -232,13 +232,13 @@
     <value>ディスク容量のクリーンアップ</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>PVS サイトを構成しています</value>
+    <value>PVS キャッシュを構成しています</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
     <value>構成済み</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>PVS サイト '{0}' の構成</value>
+    <value>'{0}' の PVS キャッシュの構成</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>{0} を作成しています...</value>
@@ -256,13 +256,13 @@
     <value>複数仮想ディスクの非アクティブ化</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>PVS サイトを削除しています</value>
+    <value>PVS キャッシュ構成を削除しています</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
     <value>完了</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>PVS サイト '{0}' を削除しています</value>
+    <value>'{0}' の PVS キャッシュ構成を削除しています</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>ストレージを削除しています...</value>
@@ -415,7 +415,7 @@
     <value>PVS 読み取りキャッシュを有効にする</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>サイト '{1}' で VM '{0}' の PVS 読み取りキャッシュを有効にしています</value>
+    <value>'{1}' で VM '{0}' の PVS 読み取りキャッシュを有効にしています</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>有効化</value>
@@ -2513,7 +2513,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>パーティション レイアウトをチェックしています</value>
   </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
-    <value>Checking reboots required</value>
+    <value>再起動の確認が必要です</value>
   </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>サーバー側の状態のチェック</value>
@@ -2658,6 +2658,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CONFIRM_DELETE_PVS_SITE" xml:space="preserve">
     <value>'{0}' を削除してもよろしいですか?</value>
+  </data>
+  <data name="CONFIRM_DELETE_PVS_SITE_IN_USE" xml:space="preserve">
+    <value>'{0}' を削除してもよろしいですか? この構成は PVS で使用中です。</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>すべてのリソースからタグ '{0}' を削除してもよろしいですか?</value>
@@ -3196,6 +3199,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
     <value>/秒</value>
+  </data>
+  <data name="CPM_FAILURE_REASON_HARDWARE_PLATFORM" xml:space="preserve">
+    <value>互換性のないハードウェア プラットフォームのバージョン</value>
   </data>
   <data name="CPM_FAILURE_REASON_VERSION" xml:space="preserve">
     <value>互換性のないバージョン番号です</value>
@@ -5538,8 +5544,11 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GENERAL_PANEL_UPDATE_KEY" xml:space="preserve">
     <value>{1} の {0}</value>
   </data>
-  <data name="GENERAL_PANEL_UPDATE_WARNING" xml:space="preserve">
+  <data name="GENERAL_PANEL_UPDATE_REBOOT_WARNING" xml:space="preserve">
     <value>アップデート '{1}' を有効にするには、サーバー '{0}' を再起動する必要があります</value>
+  </data>
+  <data name="GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING" xml:space="preserve">
+    <value>アップデート '{1}' を有効にするには、サーバー '{0}' のツールスタックを再起動する必要があります</value>
   </data>
   <data name="GENERAL_SR_CONTEXT_REPAIR" xml:space="preserve">
     <value>修復</value>
@@ -6173,7 +6182,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>不明なエラー</value>
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Live patching status</value>
+    <value>ライブ パッチの状態</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>ネットワークの追加(&amp;A)...</value>
@@ -6513,6 +6522,12 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>新規 VM の仮想ネットワーク インターフェイスを構成してください</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_MANY" xml:space="preserve">
+    <value>インポートするいくつかの、またはすべての仮想マシンは Windows Update からアップデートを受信できます。選択した場所は、この仮想化状態 をサポートしません。このままインポートを行うと、仮想マシンの機能に不具合が発生する可能性があります。</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VENDOR_DEVICE_WARNING_ONE" xml:space="preserve">
+    <value>インポートする仮想マシンは Windows Update からアップデートを受信できます。選択した場所は、この仮想化状態 をサポートしません。このままインポートを行うと、仮想マシンの機能に不具合が発生する可能性があります。</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_MANY" xml:space="preserve">
     <value>インポートする VM のいずれかに仮想 GPU が割り当てられています。選択されている場所には、これらの VM にとって適切な種類の GPU がありません。このままインポートを行うと、これらの VM の仮想 GPU 設定が失われます。</value>
@@ -9210,6 +9225,15 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TITLE" xml:space="preserve">
     <value>選択したサーバーに対するアップデートの事前チェックを実行します</value>
   </data>
+  <data name="PATCHINGWIZARD_REMOVED_UPDATES" xml:space="preserve">
+    <value>アップデートのインストール ファイルが削除されました</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVE_UPDATES" xml:space="preserve">
+    <value>アップデートのインストール ファイルの削除</value>
+  </data>
+  <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
+    <value>アップデートのインストール ファイルを削除しています</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>アップデート ファイルの選択</value>
   </data>
@@ -9348,7 +9372,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
 サイズ: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>このパッチは、正規表現 '{0}' に一致するバージョンのサーバー用です。</value>
+    <value>{0}: このパッチは、正規表現 '{1}' に一致するバージョンのサーバー用です。</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>見つかりません</value>
@@ -9722,11 +9746,17 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS キャッシュ構成 - '{0}'</value>
   </data>
+  <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
+    <value>{0} (不完全な PVS 構成)</value>
+  </data>
   <data name="PVS_CACHE_MEMORY_AND_DISK" xml:space="preserve">
     <value>メモリとディスク</value>
   </data>
   <data name="PVS_CACHE_MEMORY_ONLY" xml:space="preserve">
     <value>メモリのみ</value>
+  </data>
+  <data name="PVS_CACHE_MEMORY_ONLY_DISABLED" xml:space="preserve">
+    <value>メモリのみ (十分なコントロール ドメイン メモリがありません)</value>
   </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
     <value>MemorySR</value>
@@ -9734,8 +9764,11 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>構成されていません</value>
   </data>
+  <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
+    <value>{0} (不完全なキャッシュ ストレージ構成)</value>
+  </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>プロキシが実行中のため、この PVS サイトを削除できません。</value>
+    <value>このサイトからストリーミングされた仮想マシンがあるため、この PVS キャッシュ構成は削除できません。</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
     <value>サイト {0}' の PVS サーバー</value>
@@ -9952,9 +9985,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="REMOVED_UPDATE" xml:space="preserve">
     <value>アップデート '{0}' が削除されました</value>
   </data>
-  <data name="REMOVED_UPDATES" xml:space="preserve">
-    <value>アップデートが削除されました</value>
-  </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>vApp から削除されました </value>
   </data>
@@ -10021,9 +10051,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="REMOVE_STORAGE_SYSTEMS" xml:space="preserve">
     <value>ストレージ システムの削除(&amp;E)</value>
   </data>
-  <data name="REMOVE_UPDATES" xml:space="preserve">
-    <value>アップデートを削除します</value>
-  </data>
   <data name="REMOVE_VIRTUAL_DISK" xml:space="preserve">
     <value>仮想ディスクの削除</value>
   </data>
@@ -10050,9 +10077,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="REMOVING_UPDATE" xml:space="preserve">
     <value>アップデート '{0}' を削除しています...</value>
-  </data>
-  <data name="REMOVING_UPDATES" xml:space="preserve">
-    <value>アップデートを削除しています</value>
   </data>
   <data name="REMOVING_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>vApp から削除しています</value>
@@ -10465,7 +10489,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プール マスターの現在の時間: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards.</value>
+    <value>このバージョンの [XenCenter] では [XenServer] [BRANDING_VERSION_6_0] 以降のバージョンがサポートされます。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>このサーバーを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
@@ -11615,10 +11639,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>{0}: このサーバーのすべての VM を移行するための空きメモリがほかのサーバーにありません。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED" xml:space="preserve">
-    <value>{0}: This server does not need to be rebooted.</value>
+    <value>{0}: このサーバーは再起動する必要がありません。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH" xml:space="preserve">
-    <value>{0}: This server does not need to be rebooted as live patching is used.</value>
+    <value>{0}: ライブ パッチが使用されるため、このサーバーは再起動する必要がありません。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
     <value>VM {0} には [XenServer product] Tools がインストールされていません。</value>
@@ -11644,8 +11668,14 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_PRECHECK_FAILED" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
+    <value>{0}: 競合するアップデートがあります: {1}</value>
+  </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS" xml:space="preserve">
     <value>選択したサーバーの事前チェックに失敗しました。アップデートは適用されません。</value>
+  </data>
+  <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
+    <value>{0}: 必要なアップデートが適用されていません: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_TITLE" xml:space="preserve">
     <value>サーバー '{0}' の事前チェックの失敗</value>
@@ -11660,7 +11690,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>{0} を再起動しています... </value>
   </data>
   <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
-    <value>{0}: This server needs to be rebooted after the update is applied.</value>
+    <value>{0}: アップデートが適用された後、このサーバーを再起動する必要があります。</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>
@@ -11724,8 +11754,14 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
 
 注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
   </data>
+  <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
+    <value>アップデートのイントロデュースに失敗しました。</value>
+  </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>アップデート一覧にフィルタが適用されています。すべての接続先サーバーのすべてのアップデートをエクスポートしますか? それとも、現在のフィルタにより表示されているアップデートのみをエクスポートしますか?</value>
+  </data>
+  <data name="UPDATE_FOR_DIFFERENT_XENSERVER_VERSION" xml:space="preserve">
+    <value>{0}: このアップデートは、このサーバーのバージョンと互換性がありません。</value>
   </data>
   <data name="UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH" xml:space="preserve">
     <value>サーバーに適用済みのアップデートは削除できません。</value>
@@ -11735,6 +11771,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPDATE_PROPERTIES" xml:space="preserve">
     <value>'{0}' のアップデート</value>
+  </data>
+  <data name="UPDATE_TEMP_VDI_DESCRIPTION" xml:space="preserve">
+    <value>アップデートのインストールに使用される一時仮想ディスク</value>
   </data>
   <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
     <value>アップデート {0} のインストールに失敗しました</value>
