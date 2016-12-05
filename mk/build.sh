@@ -90,16 +90,6 @@ if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
     cp -rf ${ROOT}/xenadmin-branding.git/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
 fi
 
-# overwrite archive-push.sh and push-latest-successful-build.sh files, if they exist in Branding folder
-if [ -f ${XENADMIN_DIR}/Branding/branding-archive-push.sh ]; then
-  echo "Overwriting mk/archive-push.sh with Branding/branding-archive-push.sh."
-  cp ${XENADMIN_DIR}/Branding/branding-archive-push.sh ${XENADMIN_DIR}/mk/archive-push.sh
-fi
-if [ -f ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ]; then
-  echo "Overwriting mk/push-latest-successful-build.sh with Branding/branding-push-latest-successful-build.sh."
-  cp ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ${XENADMIN_DIR}/mk/push-latest-successful-build.sh
-fi
-
 test_phase()
 {
   # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
@@ -120,7 +110,6 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
     test_phase
     source ${XENADMIN_DIR}/mk/copy-build-output.sh
-    source ${XENADMIN_DIR}/mk/archive-push.sh
 }
 
 # Use this option if you're running on a Jenkins that is not the production Jenkins server
