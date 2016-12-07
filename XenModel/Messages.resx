@@ -9799,6 +9799,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>Not configured</value>
   </data>
+  <data name="PVS_CACHE_STORAGE_CANNOT_BE_CHANGED" xml:space="preserve">
+    <value>This PVS cache storage cannot be changed because it is in use.</value>
+  </data>
   <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
     <value>{0} (Incomplete Cache Storage configuration)</value>
   </data>
