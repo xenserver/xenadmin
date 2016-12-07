@@ -124,6 +124,7 @@ namespace XenAdmin.Actions
                             
                             // wait for some randomly increased amount of time after each retry
                             nextSleepMs += random.Next(5000);
+                            Thread.Sleep(nextSleepMs);
                         }
                     }
                     finally
