@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PvsCacheStorageRow));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelUnits = new System.Windows.Forms.Label();
             this.numericUpDownCacheSize = new System.Windows.Forms.NumericUpDown();
-            this.comboBoxCacheSr = new EnableableComboBox();
+            this.comboBoxCacheSr = new XenAdmin.Controls.EnableableComboBox();
             this.labelHostName = new System.Windows.Forms.Label();
             this.labelCacheStorage = new System.Windows.Forms.Label();
             this.labelCacheSize = new System.Windows.Forms.Label();
+            this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCacheSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -49,6 +53,7 @@
             this.tableLayoutPanel1.Controls.Add(this.labelHostName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelCacheStorage, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelCacheSize, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxInfo, 5, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelUnits
@@ -69,9 +74,10 @@
             // 
             // comboBoxCacheSr
             // 
+            resources.ApplyResources(this.comboBoxCacheSr, "comboBoxCacheSr");
+            this.comboBoxCacheSr.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCacheSr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCacheSr.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBoxCacheSr, "comboBoxCacheSr");
             this.comboBoxCacheSr.Name = "comboBoxCacheSr";
             this.comboBoxCacheSr.SelectedIndexChanged += new System.EventHandler(this.comboBoxCacheSr_SelectedIndexChanged);
             // 
@@ -91,6 +97,16 @@
             resources.ApplyResources(this.labelCacheSize, "labelCacheSize");
             this.labelCacheSize.Name = "labelCacheSize";
             // 
+            // pictureBoxInfo
+            // 
+            this.pictureBoxInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.pictureBoxInfo, "pictureBoxInfo");
+            this.pictureBoxInfo.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBoxInfo.Name = "pictureBoxInfo";
+            this.pictureBoxInfo.TabStop = false;
+            this.pictureBoxInfo.Click += new System.EventHandler(this.pictureBoxInfo_Click);
+            this.pictureBoxInfo.MouseLeave += new System.EventHandler(this.pictureBoxInfo_MouseLeave);
+            // 
             // PvsCacheStorageRow
             // 
             resources.ApplyResources(this, "$this");
@@ -100,6 +116,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCacheSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,5 +131,7 @@
         private System.Windows.Forms.Label labelCacheSize;
         private System.Windows.Forms.Label labelUnits;
         private System.Windows.Forms.NumericUpDown numericUpDownCacheSize;
+        private System.Windows.Forms.PictureBox pictureBoxInfo;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

@@ -28085,6 +28085,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This PVS cache storage cannot be changed because it is in use..
+        /// </summary>
+        public static string PVS_CACHE_STORAGE_CANNOT_BE_CHANGED {
+            get {
+                return ResourceManager.GetString("PVS_CACHE_STORAGE_CANNOT_BE_CHANGED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (Incomplete Cache Storage configuration).
         /// </summary>
         public static string PVS_CACHE_STORAGE_NOT_CONFIGURED {
