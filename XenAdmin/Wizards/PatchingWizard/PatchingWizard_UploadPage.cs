@@ -96,6 +96,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public override void SelectDefaultControl()
+        {
+            flickerFreeListBox1.Select();
+        }
+
         private void DownloadFile()
         {            
             string patchUri = ((XenServerPatchAlert)SelectedUpdateAlert).Patch.PatchUrl;

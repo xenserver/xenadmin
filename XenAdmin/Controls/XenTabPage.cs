@@ -191,6 +191,11 @@ namespace XenAdmin.Controls
         /// Check whether this step needs to be disabled. Not always overriden in derived classes
         /// </summary>
         public virtual void CheckPageDisabled() { }
+        
+        /// <summary>
+        /// Select a control on the page. Not always overriden in derived classes
+        /// </summary>
+        public virtual void SelectDefaultControl() { }
 
         protected void OnPageUpdated()
         {

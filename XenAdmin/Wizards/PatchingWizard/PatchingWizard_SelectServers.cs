@@ -138,6 +138,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public override void SelectDefaultControl()
+        {
+            dataGridViewHosts.Select();
+        }
+
         public bool IsInAutomaticMode { set; get; }
 
         private void EnabledRow(Host host, UpdateType type, int index)

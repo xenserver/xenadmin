@@ -83,6 +83,11 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_upDownAddSpace.Value = m_upDownAddSpace.Minimum;
 		}
 
+        public override void SelectDefaultControl()
+        {
+            m_textBoxVMName.Select();
+        }
+
         public override bool EnableNext()
         {
             return m_buttonNextEnabled;

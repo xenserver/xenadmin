@@ -114,6 +114,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 affinityPicker1.SetAffinity(Connection, Affinity,
                                            CdAffinity ?? Template.GetStorageHost(false));
             }
+        }
+
+        public override void SelectDefaultControl()
+        {
             affinityPicker1.Select();
         }
 
