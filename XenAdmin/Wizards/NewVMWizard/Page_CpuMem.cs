@@ -126,6 +126,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             initialising = false;
         }
 
+        public override void SelectDefaultControl()
+        {
+            comboBoxVCPUs.Select();
+        }
+
         private void InitialiseVcpuControls()
         {
             labelVCPUs.Text = isVcpuHotplugSupported

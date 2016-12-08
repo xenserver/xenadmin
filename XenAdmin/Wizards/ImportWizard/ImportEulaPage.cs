@@ -129,6 +129,11 @@ namespace XenAdmin.Wizards.ImportWizard
 			}
 		}
 
+        public override void SelectDefaultControl()
+        {
+            m_tabControlEULA.Select();
+        }
+
         public override bool EnableNext()
         {
             return m_buttonNextEnabled;

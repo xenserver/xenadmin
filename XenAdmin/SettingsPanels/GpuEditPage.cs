@@ -233,6 +233,12 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public override void SelectDefaultControl()
+        {
+            if (comboBoxGpus.CanSelect)
+                comboBoxGpus.Select();
+        }
+
         #endregion
 
         private void PopulateComboBox()

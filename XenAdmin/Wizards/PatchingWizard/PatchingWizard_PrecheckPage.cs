@@ -149,6 +149,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public override void SelectDefaultControl()
+        {
+            dataGridView1.Select();
+        }
+
         protected void RefreshRechecks()
         {
             buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = false;
