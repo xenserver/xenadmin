@@ -166,17 +166,17 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private void textBoxCifsSharename_TextChanged(object sender, EventArgs e)
         {
-            passwordFailure1.PerformCheck(IsSRNameUnique);
+            passwordFailure1.PerformCheck(IsIsoStorageAlreadyAttached);
 
             OnPageUpdated();
         }
 
-        private bool IsSRNameUnique(out string error)
+        private bool IsIsoStorageAlreadyAttached(out string error)
         {
             error = string.Empty;
             if (my_srs.Contains(comboBoxCifsSharename.Text))
             {
-                error = string.Format(Messages.SMB_ISO_ALREADY_ATTACHED, Connection.FriendlyName);
+                error = string.Format(Messages.SMB_ISO_STORAGE_ALREADY_ATTACHED, Connection.FriendlyName);
                 return false;
             }
             return true;
