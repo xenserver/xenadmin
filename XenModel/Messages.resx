@@ -9093,16 +9093,16 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>Update process was not completed successfully.</value>
+    <value>The automated updates process was not completed successfully.</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
-    <value>Following errors occurred while automatic upgrade was in progress:</value>
+    <value>The following errors occurred while automated updates were in progress:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
-    <value>Following error occurred while automatic upgrade was in progress: </value>
+    <value>The following error occurred while automated updates were in progress:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
-    <value>Update was not completed successfully</value>
+    <value>The update was not completed successfully</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
@@ -9207,7 +9207,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
+    <value>Prechecks are performed to verify that automated updates can proceed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>Update prechecks are performed to verify that the selected update can be applied to the servers.</value>
@@ -9246,10 +9246,10 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automatic update is not supported on this [XenServer] version</value>
+    <value>Automated updates are not supported on this [XenServer] version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
-    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+    <value>Automated updates are not supported on partially upgraded [XenServer] pools</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this [XenServer] version</value>
@@ -9258,7 +9258,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Subscription Advantage required</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
-    <value>This server is not licensed for automatic updating</value>
+    <value>The server is not licensed for automated updates</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>
@@ -9287,7 +9287,7 @@ Greyed out servers cannot be updated automatically.</value>
 Servers where the selected update cannot be applied appear disabled in this list.</value>
   </data>
   <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Automatic update has finished.</value>
+    <value>Automated updates have finished.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
@@ -9604,7 +9604,7 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>Post-update tasks cannot be carried out automatically for all the servers to be updated.</value>
   </data>
   <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>Automatic update is not supported for this server.</value>
+    <value>Automated updates are not supported for this server.</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Pool General Properties</value>

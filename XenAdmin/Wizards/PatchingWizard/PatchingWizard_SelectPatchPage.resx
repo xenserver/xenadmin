@@ -181,7 +181,7 @@
     <value>0</value>
   </data>
   <data name="labelWithAutomatic.Text" xml:space="preserve">
-    <value>Select Automatic mode, choose an update to be downloaded from [Citrix] or browse your computer for an update or supplemental pack file.</value>
+    <value>Select Automated Updates, choose an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
   </data>
   <data name="&gt;&gt;labelWithAutomatic.Name" xml:space="preserve">
     <value>labelWithAutomatic</value>
@@ -208,13 +208,13 @@
     <value>3, 12, 3, 3</value>
   </data>
   <data name="AutomaticRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
+    <value>119, 17</value>
   </data>
   <data name="AutomaticRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="AutomaticRadioButton.Text" xml:space="preserve">
-    <value>&amp;Automatic</value>
+    <value>&amp;Automated Updates</value>
   </data>
   <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
     <value>AutomaticRadioButton</value>
