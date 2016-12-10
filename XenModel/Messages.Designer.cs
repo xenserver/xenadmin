@@ -26401,7 +26401,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update process was not completed successfully..
+        ///   Looks up a localized string similar to The automated updates process was not completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
             get {
@@ -26410,7 +26410,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Following error occurred while automatic upgrade was in progress: .
+        ///   Looks up a localized string similar to The following error occurred while automated updates were in progress:.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED {
             get {
@@ -26419,7 +26419,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Following errors occurred while automatic upgrade was in progress:.
+        ///   Looks up a localized string similar to The following errors occurred while automated updates were in progress:.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED {
             get {
@@ -26428,7 +26428,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update was not completed successfully.
+        ///   Looks up a localized string similar to The update was not completed successfully.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
             get {
@@ -26743,7 +26743,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prechecks are performed to verify that the automatic update can proceed..
+        ///   Looks up a localized string similar to Prechecks are performed to verify that automated updates can proceed..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE {
             get {
@@ -26860,7 +26860,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported on this [XenServer] version.
+        ///   Looks up a localized string similar to Automated updates are not supported on this [XenServer] version.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION {
             get {
@@ -26869,7 +26869,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported on partially upgraded [XenServer] pools.
+        ///   Looks up a localized string similar to Automated updates are not supported on partially upgraded [XenServer] pools.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED {
             get {
@@ -26896,7 +26896,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is not licensed for automatic updating.
+        ///   Looks up a localized string similar to The server is not licensed for automated updates.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING {
             get {
@@ -26979,7 +26979,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update has finished..
+        ///   Looks up a localized string similar to Automated updates have finished..
         /// </summary>
         public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE {
             get {
@@ -27615,7 +27615,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported for this server..
+        ///   Looks up a localized string similar to Automated updates are not supported for this server..
         /// </summary>
         public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
             get {
