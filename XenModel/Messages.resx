@@ -9206,7 +9206,7 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
   </data>
-  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>Prechecks are performed to verify that automated updates can proceed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
@@ -9245,10 +9245,10 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>Automated updates are not supported on this [XenServer] version</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
     <value>Automated updates are not supported on partially upgraded [XenServer] pools</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
@@ -9257,7 +9257,7 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>The server is not licensed for automated updates</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
@@ -9265,6 +9265,14 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>Update not applicable</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
+    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
+Greyed out servers cannot be updated automatically.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>Select one or more servers from the list of available servers.
+Servers where the selected update cannot be applied appear disabled in this list.</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
     <value>This server cannot be updated automatically</value>
@@ -9278,15 +9286,7 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you wish to update</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
-Greyed out servers cannot be updated automatically.</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>Select one or more servers from the list of available servers.
-Servers where the selected update cannot be applied appear disabled in this list.</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>Automated updates have finished.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
@@ -9600,11 +9600,11 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>{0} failure tolerated</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATED_UPDATES" xml:space="preserve">
+    <value>Automated updates are not supported for this server.</value>
+  </data>
   <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
     <value>Post-update tasks cannot be carried out automatically for all the servers to be updated.</value>
-  </data>
-  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>Automated updates are not supported for this server.</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Pool General Properties</value>
