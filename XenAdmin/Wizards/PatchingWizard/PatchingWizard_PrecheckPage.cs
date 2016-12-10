@@ -55,7 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
-        public bool IsInAutomaticMode { get; set; }
+        public bool IsInAutomatedUpdatesMode { get; set; }
         private AsyncAction resolvePrechecksAction = null;
 
         protected List<Pool> SelectedPools
@@ -123,7 +123,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                if (IsInAutomaticMode)
+                if (IsInAutomatedUpdatesMode)
                 {
                     labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE;
                 }
@@ -367,8 +367,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 checkGroup.Add(new PBDsPluggedCheck(host));
             }
 
-            //Disk space check for batch hotfixing
-            if (IsInAutomaticMode)
+            //Disk space check for automated updates
+            if (IsInAutomatedUpdatesMode)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -382,7 +382,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (Host host in us.Keys)
                     {
                         checkGroup.Add(
-                            new DiskSpaceForBatchUpdatesCheck(
+                            new DiskSpaceForAutomatedUpdatesCheck(
                                 host,
                                 elyOrGreater
                                     ? us[host].Sum(p => p.InstallationSize) // all updates on this host
@@ -417,7 +417,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomaticMode)
+            if (!IsInAutomatedUpdatesMode)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -466,7 +466,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomaticMode)
+            if (!IsInAutomatedUpdatesMode)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;

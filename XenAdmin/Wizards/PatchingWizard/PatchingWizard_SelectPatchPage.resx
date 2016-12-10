@@ -121,144 +121,144 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="labelWithoutAutomatic.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelWithoutAutomatedUpdates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="labelWithoutAutomatic.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="labelWithoutAutomatedUpdates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="labelWithoutAutomatic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelWithoutAutomatedUpdates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelWithoutAutomatic.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelWithoutAutomatedUpdates.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 32</value>
   </data>
-  <data name="labelWithoutAutomatic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelWithoutAutomatedUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 6</value>
   </data>
-  <data name="labelWithoutAutomatic.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelWithoutAutomatedUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>595, 13</value>
   </data>
-  <data name="labelWithoutAutomatic.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelWithoutAutomatedUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="labelWithoutAutomatic.Text" xml:space="preserve">
+  <data name="labelWithoutAutomatedUpdates.Text" xml:space="preserve">
     <value>Select an update to be downloaded from [Citrix] or browse your computer for an update or supplemental pack file.</value>
   </data>
-  <data name="&gt;&gt;labelWithoutAutomatic.Name" xml:space="preserve">
-    <value>labelWithoutAutomatic</value>
+  <data name="&gt;&gt;labelWithoutAutomatedUpdates.Name" xml:space="preserve">
+    <value>labelWithoutAutomatedUpdates</value>
   </data>
-  <data name="&gt;&gt;labelWithoutAutomatic.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWithoutAutomatedUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelWithoutAutomatic.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWithoutAutomatedUpdates.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelWithoutAutomatic.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWithoutAutomatedUpdates.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelWithAutomatic.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelWithAutomatedUpdates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelWithAutomatic.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="labelWithAutomatedUpdates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="labelWithAutomatic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelWithAutomatedUpdates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelWithAutomatic.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelWithAutomatedUpdates.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="labelWithAutomatic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelWithAutomatedUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 6</value>
   </data>
-  <data name="labelWithAutomatic.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelWithAutomatedUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>595, 26</value>
   </data>
-  <data name="labelWithAutomatic.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelWithAutomatedUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="labelWithAutomatic.Text" xml:space="preserve">
+  <data name="labelWithAutomatedUpdates.Text" xml:space="preserve">
     <value>Select Automated Updates, choose an update to be downloaded from [Citrix], or browse your computer for an update or supplemental pack file.</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatic.Name" xml:space="preserve">
-    <value>labelWithAutomatic</value>
+  <data name="&gt;&gt;labelWithAutomatedUpdates.Name" xml:space="preserve">
+    <value>labelWithAutomatedUpdates</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatic.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWithAutomatedUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatic.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWithAutomatedUpdates.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatic.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWithAutomatedUpdates.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="AutomaticRadioButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="AutomatedUpdatesRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="AutomaticRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="AutomatedUpdatesRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="AutomaticRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="AutomatedUpdatesRadioButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 63</value>
   </data>
-  <data name="AutomaticRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="AutomatedUpdatesRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
-  <data name="AutomaticRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="AutomatedUpdatesRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 17</value>
   </data>
-  <data name="AutomaticRadioButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="AutomatedUpdatesRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="AutomaticRadioButton.Text" xml:space="preserve">
+  <data name="AutomatedUpdatesRadioButton.Text" xml:space="preserve">
     <value>&amp;Automated Updates</value>
   </data>
-  <data name="&gt;&gt;AutomaticRadioButton.Name" xml:space="preserve">
-    <value>AutomaticRadioButton</value>
+  <data name="&gt;&gt;AutomatedUpdatesRadioButton.Name" xml:space="preserve">
+    <value>AutomatedUpdatesRadioButton</value>
   </data>
-  <data name="&gt;&gt;AutomaticRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;AutomatedUpdatesRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AutomaticRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AutomatedUpdatesRadioButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;AutomaticRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AutomatedUpdatesRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="automaticOptionLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="automatedUpdatesOptionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="automaticOptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="automatedUpdatesOptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="automaticOptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="automatedUpdatesOptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="automaticOptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="automatedUpdatesOptionLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 83</value>
   </data>
-  <data name="automaticOptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="automatedUpdatesOptionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>575, 26</value>
   </data>
-  <data name="automaticOptionLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="automatedUpdatesOptionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="automaticOptionLabel.Text" xml:space="preserve">
+  <data name="automatedUpdatesOptionLabel.Text" xml:space="preserve">
     <value>[XenCenter] will automatically download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
   </data>
-  <data name="&gt;&gt;automaticOptionLabel.Name" xml:space="preserve">
-    <value>automaticOptionLabel</value>
+  <data name="&gt;&gt;automatedUpdatesOptionLabel.Name" xml:space="preserve">
+    <value>automatedUpdatesOptionLabel</value>
   </data>
-  <data name="&gt;&gt;automaticOptionLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;automatedUpdatesOptionLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;automaticOptionLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;automatedUpdatesOptionLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;automaticOptionLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;automatedUpdatesOptionLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="downloadUpdateRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -733,7 +733,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelWithoutAutomatic" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelWithAutomatic" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="AutomaticRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="automaticOptionLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="downloadUpdateRadioButton" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="RefreshListButton" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="RestoreDismUpdatesButton" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="selectFromDiskRadioButton" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="tableLayoutPanel2" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelWithoutAutomatedUpdates" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelWithAutomatedUpdates" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="AutomatedUpdatesRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="automatedUpdatesOptionLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="downloadUpdateRadioButton" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="RefreshListButton" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="RestoreDismUpdatesButton" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="selectFromDiskRadioButton" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="tableLayoutPanel2" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

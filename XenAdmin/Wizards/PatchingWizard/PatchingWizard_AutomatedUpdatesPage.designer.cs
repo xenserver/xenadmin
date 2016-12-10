@@ -1,6 +1,6 @@
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    partial class PatchingWizard_AutoUpdatingPage
+    partial class PatchingWizard_AutomatedUpdatesPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatchingWizard_AutoUpdatingPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatchingWizard_AutomatedUpdatesPage));
             this.labelTitle = new System.Windows.Forms.Label();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();

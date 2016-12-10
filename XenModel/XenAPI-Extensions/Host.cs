@@ -252,6 +252,11 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_batch_hotfix_apply"); }
         }
 
+        /// <summary>
+        /// Restrict Automated Updates
+        /// </summary>
+        /// <param name="h">host</param>
+        /// <returns></returns>
         public static bool RestrictBatchHotfixApply(Host h)
         {
             return h._RestrictBatchHotfixApply;

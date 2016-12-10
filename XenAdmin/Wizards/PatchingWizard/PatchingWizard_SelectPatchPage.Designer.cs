@@ -38,10 +38,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelWithoutAutomatic = new System.Windows.Forms.Label();
-            this.labelWithAutomatic = new System.Windows.Forms.Label();
-            this.AutomaticRadioButton = new System.Windows.Forms.RadioButton();
-            this.automaticOptionLabel = new System.Windows.Forms.Label();
+            this.labelWithoutAutomatedUpdates = new System.Windows.Forms.Label();
+            this.labelWithAutomatedUpdates = new System.Windows.Forms.Label();
+            this.AutomatedUpdatesRadioButton = new System.Windows.Forms.RadioButton();
+            this.automatedUpdatesOptionLabel = new System.Windows.Forms.Label();
             this.downloadUpdateRadioButton = new System.Windows.Forms.RadioButton();
             this.RefreshListButton = new System.Windows.Forms.Button();
             this.RestoreDismUpdatesButton = new System.Windows.Forms.Button();
@@ -70,10 +70,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelWithoutAutomatic, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelWithAutomatic, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.AutomaticRadioButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.automaticOptionLabel, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelWithoutAutomatedUpdates, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelWithAutomatedUpdates, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AutomatedUpdatesRadioButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.automatedUpdatesOptionLabel, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.downloadUpdateRadioButton, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.RestoreDismUpdatesButton, 2, 6);
@@ -82,34 +82,34 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // labelWithoutAutomatic
+            // labelWithoutAutomatedUpdates
             // 
-            resources.ApplyResources(this.labelWithoutAutomatic, "labelWithoutAutomatic");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelWithoutAutomatic, 3);
-            this.labelWithoutAutomatic.Name = "labelWithoutAutomatic";
+            resources.ApplyResources(this.labelWithoutAutomatedUpdates, "labelWithoutAutomatedUpdates");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelWithoutAutomatedUpdates, 3);
+            this.labelWithoutAutomatedUpdates.Name = "labelWithoutAutomatedUpdates";
             // 
-            // labelWithAutomatic
+            // labelWithAutomatedUpdates
             // 
-            resources.ApplyResources(this.labelWithAutomatic, "labelWithAutomatic");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelWithAutomatic, 3);
-            this.labelWithAutomatic.Name = "labelWithAutomatic";
+            resources.ApplyResources(this.labelWithAutomatedUpdates, "labelWithAutomatedUpdates");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelWithAutomatedUpdates, 3);
+            this.labelWithAutomatedUpdates.Name = "labelWithAutomatedUpdates";
             // 
-            // AutomaticRadioButton
+            // AutomatedUpdatesRadioButton
             // 
-            resources.ApplyResources(this.AutomaticRadioButton, "AutomaticRadioButton");
-            this.AutomaticRadioButton.Checked = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.AutomaticRadioButton, 3);
-            this.AutomaticRadioButton.Name = "AutomaticRadioButton";
-            this.AutomaticRadioButton.TabStop = true;
-            this.AutomaticRadioButton.UseVisualStyleBackColor = true;
-            this.AutomaticRadioButton.CheckedChanged += new System.EventHandler(this.AutomaticRadioButton_CheckedChanged);
-            this.AutomaticRadioButton.TabStopChanged += new System.EventHandler(this.AutomaticRadioButton_TabStopChanged);
+            resources.ApplyResources(this.AutomatedUpdatesRadioButton, "AutomatedUpdatesRadioButton");
+            this.AutomatedUpdatesRadioButton.Checked = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.AutomatedUpdatesRadioButton, 3);
+            this.AutomatedUpdatesRadioButton.Name = "AutomatedUpdatesRadioButton";
+            this.AutomatedUpdatesRadioButton.TabStop = true;
+            this.AutomatedUpdatesRadioButton.UseVisualStyleBackColor = true;
+            this.AutomatedUpdatesRadioButton.CheckedChanged += new System.EventHandler(this.AutomaticRadioButton_CheckedChanged);
+            this.AutomatedUpdatesRadioButton.TabStopChanged += new System.EventHandler(this.AutomaticRadioButton_TabStopChanged);
             // 
-            // automaticOptionLabel
+            // automatedUpdatesOptionLabel
             // 
-            resources.ApplyResources(this.automaticOptionLabel, "automaticOptionLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.automaticOptionLabel, 2);
-            this.automaticOptionLabel.Name = "automaticOptionLabel";
+            resources.ApplyResources(this.automatedUpdatesOptionLabel, "automatedUpdatesOptionLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.automatedUpdatesOptionLabel, 2);
+            this.automatedUpdatesOptionLabel.Name = "automatedUpdatesOptionLabel";
             // 
             // downloadUpdateRadioButton
             // 
@@ -315,15 +315,15 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.RadioButton selectFromDiskRadioButton;
         private System.Windows.Forms.Button RefreshListButton;
         private System.Windows.Forms.RadioButton downloadUpdateRadioButton;
-        private System.Windows.Forms.Label labelWithAutomatic;
+        private System.Windows.Forms.Label labelWithAutomatedUpdates;
         private System.Windows.Forms.Button RestoreDismUpdatesButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
-        private System.Windows.Forms.Label automaticOptionLabel;
-        private System.Windows.Forms.RadioButton AutomaticRadioButton;
-        private System.Windows.Forms.Label labelWithoutAutomatic;
+        private System.Windows.Forms.Label automatedUpdatesOptionLabel;
+        private System.Windows.Forms.RadioButton AutomatedUpdatesRadioButton;
+        private System.Windows.Forms.Label labelWithoutAutomatedUpdates;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSpinner;
