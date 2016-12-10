@@ -125,7 +125,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (IsInAutomatedUpdatesMode)
                 {
-                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE;
+                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
                 }
                 else
                 {

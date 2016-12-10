@@ -144,7 +144,7 @@ namespace XenAdmin.Wizards.PatchingWizard
          
             if (direction == PageLoadedDirection.Forward)
             {
-                //if any connected host is licensed for automatic updating
+                //if any connected host is licensed for automated updates
                 bool automatedUpdatesPossible = ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
                
                 labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = automatedUpdatesPossible;
