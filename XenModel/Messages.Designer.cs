@@ -25560,7 +25560,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough space to automatically update &apos;{0}&apos;..
+        ///   Looks up a localized string similar to There is not enough space to update &apos;{0}&apos; with automated updates..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE {
             get {
@@ -26446,7 +26446,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically uploading and installing updates.
+        ///   Looks up a localized string similar to Uploading and installing updates.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE {
             get {
@@ -26924,8 +26924,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have automatically updated.
-        ///Greyed out servers cannot be updated automatically..
+        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have updated.
+        ///Greyed out servers cannot be updated with automated updates..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE {
             get {
@@ -26944,7 +26944,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server cannot be updated automatically.
+        ///   Looks up a localized string similar to This server cannot be updated with automated updates.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {
             get {
