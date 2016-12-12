@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards
                 xenTabPageHaFinish.Ntol = xenTabPageAssignPriorities.Ntol;
 
                 int alwaysRestartHighPriority = 0, alwaysRestart = 0, bestEffort = 0, doNotRestart = 0;
-                foreach (VM.HA_Restart_Priority priority in xenTabPageAssignPriorities.getCurrentSettings().Values)
+                foreach (VM.HA_Restart_Priority priority in xenTabPageAssignPriorities.CurrentSettings.Values)
                 {
                     switch (priority)
                     {
