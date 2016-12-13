@@ -70,6 +70,8 @@ namespace XenAdmin.Controls
             origCacheSizeGb = numericUpDownCacheSize.Value;
 
             PopulateCacheSrCombobox();
+            ReadOnly = OrigPvsCacheStorage != null && OrigPvsCacheStorage.IsInUse;
+            comboBoxCacheSr.Enabled = numericUpDownCacheSize.Enabled = !ReadOnly;
         }
 
         private void PopulateCacheSrCombobox()
@@ -179,6 +181,8 @@ namespace XenAdmin.Controls
                 return OrigPvsCacheStorage.SR.opaque_ref != CacheSr.opaque_ref || origCacheSizeGb != numericUpDownCacheSize.Value;
             }
         }
+
+        public bool ReadOnly { get; private set; }
 
         private void SomethingChanged(object sender, EventArgs e)
         {
