@@ -292,19 +292,9 @@ done
 #now package the pdbs
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 
-#create manifest
-echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
-
 #for the time being we download a fixed version of the ovf fixup iso, hence put this in the manifest
 echo "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" >> ${OUTPUT_DIR}/manifest
 echo "chroot-lenny chroots.hg 1a75fa5848e8" >> ${OUTPUT_DIR}/manifest
-
-XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
-echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
-
-SERVER_BRANDING_TIP=$(cd ${ROOT}/branding.git && git rev-parse HEAD)
-echo "branding branding.git ${SERVER_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
 
 cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
 get_BUILD_PATH=/usr/groups/xen/carbon/windowsbuilds/WindowsBuilds/${get_JOB_NAME}/${BUILD_NUMBER}
