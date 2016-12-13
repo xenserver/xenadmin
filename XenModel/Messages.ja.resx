@@ -9037,7 +9037,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>結果が見つかりません</value>
   </data>
   <data name="OVERVIEW_UNITS" xml:space="preserve">
-    <value>(平均/最大 KB/秒)</value>
+    <value>(平均/最大KB/秒)</value>
   </data>
   <data name="OVF_CREATED" xml:space="preserve">
     <value>[XenCenter] ディスク イメージのインポート機能により作成</value>
