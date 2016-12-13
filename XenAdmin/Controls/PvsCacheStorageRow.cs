@@ -70,9 +70,8 @@ namespace XenAdmin.Controls
             origCacheSizeGb = numericUpDownCacheSize.Value;
 
             PopulateCacheSrCombobox();
-            var isInUse = OrigPvsCacheStorage != null && OrigPvsCacheStorage.IsInUse;
-            comboBoxCacheSr.Enabled = numericUpDownCacheSize.Enabled = !isInUse;
-            pictureBoxInfo.Visible = isInUse;
+            ReadOnly = OrigPvsCacheStorage != null && OrigPvsCacheStorage.IsInUse;
+            comboBoxCacheSr.Enabled = numericUpDownCacheSize.Enabled = !ReadOnly;
         }
 
         private void PopulateCacheSrCombobox()
@@ -183,6 +182,8 @@ namespace XenAdmin.Controls
             }
         }
 
+        public bool ReadOnly { get; private set; }
+
         private void SomethingChanged(object sender, EventArgs e)
         {
             if (Changed != null)
@@ -201,16 +202,6 @@ namespace XenAdmin.Controls
                     SetupCacheSizeSpinner(numericUpDownCacheSize.Value, numericUpDownCacheSize.Minimum, maxSize);
             }
             SomethingChanged(this, e);
-        }
-
-        private void pictureBoxInfo_Click(object sender, EventArgs e)
-        {
-            toolTip.Show(Messages.PVS_CACHE_STORAGE_CANNOT_BE_CHANGED, pictureBoxInfo, 20, 0);
-        }
-
-        private void pictureBoxInfo_MouseLeave(object sender, EventArgs e)
-        {
-            toolTip.Hide(pictureBoxInfo);
         }
     }
 
