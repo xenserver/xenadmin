@@ -301,7 +301,7 @@
     <value>5, 0, 5, 0</value>
   </data>
   <data name="enableButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
+    <value>230, 23</value>
   </data>
   <data name="enableButton.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -325,13 +325,13 @@
     <value>NoControl</value>
   </data>
   <data name="disableButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 3</value>
+    <value>236, 3</value>
   </data>
   <data name="disableButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 5, 0</value>
   </data>
   <data name="disableButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
+    <value>230, 23</value>
   </data>
   <data name="disableButton.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
