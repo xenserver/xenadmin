@@ -30777,6 +30777,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This SMB ISO storage is already attached to &apos;{0}&apos;.
+        /// </summary>
+        public static string SMB_ISO_STORAGE_ALREADY_ATTACHED {
+            get {
+                return ResourceManager.GetString("SMB_ISO_STORAGE_ALREADY_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (snapshot).
         /// </summary>
         public static string SNAPSHOT_BRACKETS {
