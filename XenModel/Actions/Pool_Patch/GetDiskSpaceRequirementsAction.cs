@@ -168,7 +168,7 @@ namespace XenAdmin.Actions
         public readonly long AvailableDiskSpace;
         public readonly long ReclaimableDiskSpace;
 
-        public enum OperationTypes { install, upload, autoupdate }
+        public enum OperationTypes { install, upload, automatedUpdates }
       
         public DiskSpaceRequirements(OperationTypes operation, Host host, string updateName, long requiredDiskSpace, long availableDiskSpace, long reclaimableDiskSpace)
         {
@@ -197,7 +197,7 @@ namespace XenAdmin.Actions
                 case OperationTypes.upload :
                     sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Host.Name, UpdateName);
                     break;
-                case OperationTypes.autoupdate :
+                case OperationTypes.automatedUpdates :
                     sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Host.Name);
                     break;
             }

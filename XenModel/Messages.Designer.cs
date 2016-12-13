@@ -25560,7 +25560,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough space to automatically update &apos;{0}&apos;..
+        ///   Looks up a localized string similar to There is not enough space to update &apos;{0}&apos; with automated updates..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE {
             get {
@@ -26401,7 +26401,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update process was not completed successfully..
+        ///   Looks up a localized string similar to The automated updates process was not completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
             get {
@@ -26410,7 +26410,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Following error occurred while automatic upgrade was in progress: .
+        ///   Looks up a localized string similar to The following error occurred while automated updates were in progress:.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED {
             get {
@@ -26419,7 +26419,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Following errors occurred while automatic upgrade was in progress:.
+        ///   Looks up a localized string similar to The following errors occurred while automated updates were in progress:.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED {
             get {
@@ -26428,7 +26428,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update was not completed successfully.
+        ///   Looks up a localized string similar to The update was not completed successfully.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
             get {
@@ -26446,7 +26446,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically uploading and installing updates.
+        ///   Looks up a localized string similar to Uploading and installing updates.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE {
             get {
@@ -26743,11 +26743,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prechecks are performed to verify that the automatic update can proceed..
+        ///   Looks up a localized string similar to Prechecks are performed to verify that automated updates can proceed..
         /// </summary>
-        public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE {
+        public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE", resourceCulture);
             }
         }
         
@@ -26860,20 +26860,21 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported on this [XenServer] version.
+        ///   Looks up a localized string similar to Automated updates are not supported on this [XenServer] version.
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported on partially upgraded [XenServer] pools.
+        ///   Looks up a localized string similar to Automated updates are not supported on partially upgraded [XenServer] pools.
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADE" +
+                        "D", resourceCulture);
             }
         }
         
@@ -26896,11 +26897,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is not licensed for automatic updating.
+        ///   Looks up a localized string similar to The server is not licensed for automated updates.
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES", resourceCulture);
             }
         }
         
@@ -26923,7 +26924,27 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server cannot be updated automatically.
+        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have updated.
+        ///Greyed out servers cannot be updated with automated updates..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select one or more servers from the list of available servers.
+        ///Servers where the selected update cannot be applied appear disabled in this list..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server cannot be updated with automated updates.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE {
             get {
@@ -26959,31 +26980,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have automatically updated.
-        ///Greyed out servers cannot be updated automatically..
+        ///   Looks up a localized string similar to Automated updates have finished..
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE {
+        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select one or more servers from the list of available servers.
-        ///Servers where the selected update cannot be applied appear disabled in this list..
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automatic update has finished..
-        /// </summary>
-        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE", resourceCulture);
             }
         }
         
@@ -27606,20 +27607,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automated updates are not supported for this server..
+        /// </summary>
+        public static string POOL_FORBIDS_AUTOMATED_UPDATES {
+            get {
+                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post-update tasks cannot be carried out automatically for all the servers to be updated..
         /// </summary>
         public static string POOL_FORBIDS_AUTOMATIC_RESTARTS {
             get {
                 return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_RESTARTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automatic update is not supported for this server..
-        /// </summary>
-        public static string POOL_FORBIDS_AUTOMATIC_UPDATES {
-            get {
-                return ResourceManager.GetString("POOL_FORBIDS_AUTOMATIC_UPDATES", resourceCulture);
             }
         }
         

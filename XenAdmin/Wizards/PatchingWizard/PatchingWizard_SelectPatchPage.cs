@@ -60,7 +60,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             InitializeComponent();
             tableLayoutPanelSpinner.Visible = false;
 
-            labelWithAutomatic.Visible = automaticOptionLabel.Visible = AutomaticRadioButton.Visible = false;
+            labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = false;
             downloadUpdateRadioButton.Checked = true;
 
             dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
@@ -144,27 +144,27 @@ namespace XenAdmin.Wizards.PatchingWizard
          
             if (direction == PageLoadedDirection.Forward)
             {
-                //if any connected host is licensed for automatic updating
-                bool autoUpdatePossible = ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
+                //if any connected host is licensed for automated updates
+                bool automatedUpdatesPossible = ConnectionsManager.XenConnectionsCopy.Any(c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
                
-                labelWithAutomatic.Visible = automaticOptionLabel.Visible = AutomaticRadioButton.Visible = autoUpdatePossible;
-                labelWithoutAutomatic.Visible = !autoUpdatePossible;
+                labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = automatedUpdatesPossible;
+                labelWithoutAutomatedUpdates.Visible = !automatedUpdatesPossible;
 
-                AutomaticRadioButton.Checked = autoUpdatePossible;
-                downloadUpdateRadioButton.Checked = !autoUpdatePossible;
+                AutomatedUpdatesRadioButton.Checked = automatedUpdatesPossible;
+                downloadUpdateRadioButton.Checked = !automatedUpdatesPossible;
 
                 PopulatePatchesBox();
                 OnPageUpdated();
             }
         }
 
-        public bool IsInAutomaticMode { get { return AutomaticRadioButton.Visible && AutomaticRadioButton.Checked; } }
+        public bool IsInAutomatedUpdatesMode { get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; } }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                if (!IsInAutomaticMode)
+                if (!IsInAutomatedUpdatesMode)
                 {
                     var fileName = fileNameTextBox.Text.ToLowerInvariant();
 
@@ -295,7 +295,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
 
-            if (IsInAutomaticMode)
+            if (IsInAutomatedUpdatesMode)
             {
                 return true;
             }
@@ -651,8 +651,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AutomaticRadioButton_TabStopChanged(object sender, EventArgs e)
         {
-            if (!AutomaticRadioButton.TabStop)
-                AutomaticRadioButton.TabStop = true;
+            if (!AutomatedUpdatesRadioButton.TabStop)
+                AutomatedUpdatesRadioButton.TabStop = true;
         }
 
         private void downloadUpdateRadioButton_TabStopChanged(object sender, EventArgs e)
