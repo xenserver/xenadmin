@@ -121,14 +121,50 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="memoryOnlyInfoLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="cacheStorageInUseInfoLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="memoryOnlyInfoLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cacheStorageInUseInfoLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cacheStorageInUseInfoLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cacheStorageInUseInfoLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 219</value>
+  </data>
+  <data name="cacheStorageInUseInfoLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="cacheStorageInUseInfoLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 15</value>
+  </data>
+  <data name="cacheStorageInUseInfoLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="cacheStorageInUseInfoLabel.Text" xml:space="preserve">
+    <value>The cache storage cannot be changed on servers where it is in use.</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoLabel.Name" xml:space="preserve">
+    <value>cacheStorageInUseInfoLabel</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="memoryOnlyInfoLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memoryOnlyInfoLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="memoryOnlyInfoLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -158,7 +194,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;memoryOnlyInfoLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="deleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -206,7 +242,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;deleteButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -242,7 +278,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -281,7 +317,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 13</value>
@@ -302,7 +338,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="hostsPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -314,7 +350,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>3, 72</value>
   </data>
   <data name="hostsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 163</value>
+    <value>434, 141</value>
   </data>
   <data name="hostsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -329,7 +365,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;hostsPanel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="viewPvsServersButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -368,7 +404,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;viewPvsServersButton.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="pvsConfigInfoIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -401,7 +437,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;pvsConfigInfoIcon.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="pvsConfigInfoLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -437,7 +473,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;pvsConfigInfoLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="memoryOnlyInfoIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -470,7 +506,40 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;memoryOnlyInfoIcon.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 219</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
+  <data name="cacheStorageInUseInfoIcon.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoIcon.Name" xml:space="preserve">
+    <value>cacheStorageInUseInfoIcon</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoIcon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoIcon.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;cacheStorageInUseInfoIcon.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -482,7 +551,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>0, 10, 0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 356</value>
@@ -503,7 +572,7 @@ If Memory only is chosen, the allowed cache size depends on the server's Control
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memoryOnlyInfoLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="deleteButton" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="textBox1" Row="0" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="hostsPanel" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="viewPvsServersButton" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pvsConfigInfoIcon" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pvsConfigInfoLabel" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="memoryOnlyInfoIcon" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,21,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cacheStorageInUseInfoLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="memoryOnlyInfoLabel" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="deleteButton" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="textBox1" Row="0" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="hostsPanel" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="viewPvsServersButton" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pvsConfigInfoIcon" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pvsConfigInfoLabel" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="memoryOnlyInfoIcon" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cacheStorageInUseInfoIcon" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,21,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
