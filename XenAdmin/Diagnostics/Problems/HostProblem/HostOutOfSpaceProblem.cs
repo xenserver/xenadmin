@@ -94,7 +94,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                     case DiskSpaceRequirements.OperationTypes.upload :
                         return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, ServerName, name);
                     
-                    case DiskSpaceRequirements.OperationTypes.autoupdate :
+                    case DiskSpaceRequirements.OperationTypes.automatedUpdates :
                         return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, ServerName);
 
                     default:
