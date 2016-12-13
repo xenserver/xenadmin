@@ -311,9 +311,6 @@ get_BUILD_PATH=/usr/groups/xen/carbon/windowsbuilds/WindowsBuilds/${get_JOB_NAME
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     echo ${get_BUILD_URL} > ${OUTPUT_DIR}/latest-secure-build
-    echo ${get_BUILD_PATH} > ${OUTPUT_DIR}/latest-successful-build
-else
-    echo ${get_BUILD_URL} > ${OUTPUT_DIR}/latest-successful-build
 fi
 
 # Write out version information
