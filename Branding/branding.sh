@@ -6,6 +6,7 @@ BRANDING_CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
 
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+OUTPUT_DIR=${ROOT}/output
 
 rm -rf ${ROOT}/branding.git
 BRANDING_REMOTE=https://code.citrite.net/scm/xs/branding.git
@@ -16,6 +17,9 @@ if [ -z $(git ls-remote --heads ${BRANDING_REMOTE} | grep ${XS_BRANCH}) ] ; then
 else
     git clone -b ${XS_BRANCH} ${BRANDING_REMOTE} ${ROOT}/branding.git
 fi
+
+SERVER_BRANDING_TIP=$(cd ${ROOT}/branding.git && git rev-parse HEAD)
+echo "branding branding.git ${SERVER_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
 
 TOPLEVEL_VERSIONS=${ROOT}/branding.git/Citrix/XenServer/toplevel-versions
 TOPLEVEL_BRANDING=${ROOT}/branding.git/Citrix/XenServer/toplevel-branding

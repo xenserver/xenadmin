@@ -72,6 +72,10 @@ XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 source ${XENADMIN_DIR}/mk/declarations.sh
 
+#create manifest
+echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
+echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
+
 if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
 
 rm -rf ${ROOT}/xenadmin-branding.git
@@ -83,6 +87,9 @@ if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
 else
     git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
 fi
+
+XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
+echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
 
 if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
     echo "Overwriting Branding folder"
