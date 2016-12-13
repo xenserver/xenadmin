@@ -301,7 +301,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 32</value>
+    <value>646, 32</value>
   </data>
   <data name="valueDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -334,7 +334,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 51</value>
+    <value>646, 51</value>
   </data>
   <data name="valueDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -367,7 +367,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 70</value>
+    <value>646, 70</value>
   </data>
   <data name="valueStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
