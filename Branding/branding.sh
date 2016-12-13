@@ -4,33 +4,46 @@
 #also we know that xenadmin.git is not a patch queue style repository
 BRANDING_CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
 
-#bring in version and branding info from latest xe-phase-1
-wget ${WGET_OPT} -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/globals"
+# bring versions from the server branding repo
+ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
-BRANDING_COMPANY_NAME_LEGAL=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_LEGAL | sed -e 's/COMPANY_NAME_LEGAL=//g' -e 's/"//g')
-BRANDING_COMPANY_NAME_SHORT=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_SHORT | sed -e 's/COMPANY_NAME_SHORT=//g' -e 's/"//g')
+rm -rf ${ROOT}/branding.git
+BRANDING_REMOTE=https://code.citrite.net/scm/xs/branding.git
+
+if [ -z $(git ls-remote --heads ${BRANDING_REMOTE} | grep ${XS_BRANCH}) ] ; then
+    echo "Branch ${XS_BRANCH} not found on branding.git. Reverting to master."
+    git clone -b master ${BRANDING_REMOTE} ${ROOT}/branding.git
+else
+    git clone -b ${XS_BRANCH} ${BRANDING_REMOTE} ${ROOT}/branding.git
+fi
+
+TOPLEVEL_VERSIONS=${ROOT}/branding.git/Citrix/XenServer/toplevel-versions
+TOPLEVEL_BRANDING=${ROOT}/branding.git/Citrix/XenServer/toplevel-branding
+
+BRANDING_COMPANY_NAME_LEGAL=$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_NAME_LEGAL := " | sed -e 's/COMPANY_NAME_LEGAL := //g')
+BRANDING_COMPANY_NAME_SHORT=$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_NAME_SHORT := " | sed -e 's/COMPANY_NAME_SHORT := //g')
 BRANDING_COPYRIGHT=\"Copyright\ ©\ ${BRANDING_COMPANY_NAME_LEGAL}\"
 BRANDING_COPYRIGHT_2=\"Copyright\ \\\\251\ ${BRANDING_COMPANY_NAME_LEGAL}\"
-BRANDING_PRODUCT_BRAND=XenServer
-BRANDING_COMPANY_URL=www.citrix.com
-BRANDING_PRODUCT_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_VERSION | sed -e 's/PRODUCT_VERSION=//g' -e 's/"//g')
-BRANDING_PRODUCT_VERSION_TEXT=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_VERSION_TEXT | sed -e 's/PRODUCT_VERSION_TEXT=//g' -e 's/"//g')
-BRANDING_PRODUCT_MAJOR_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MAJOR_VERSION | sed -e 's/PRODUCT_MAJOR_VERSION=//g' -e 's/"//g')
-BRANDING_PRODUCT_MINOR_VERION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MINOR_VERSION | sed -e 's/PRODUCT_MINOR_VERSION=//g' -e 's/"//g')
+BRANDING_PRODUCT_BRAND=$(cat ${TOPLEVEL_BRANDING} | grep -F "PRODUCT_BRAND := " | sed -e 's/PRODUCT_BRAND := //g')
+BRANDING_COMPANY_URL=www.$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_DOMAIN := " | sed -e 's/COMPANY_DOMAIN := //g')
+BRANDING_PRODUCT_VERSION_TEXT=$(cat ${TOPLEVEL_VERSIONS} | grep -F "PRODUCT_VERSION_TEXT := " | sed -e 's/PRODUCT_VERSION_TEXT := //g')
+BRANDING_PRODUCT_MAJOR_VERSION=$(cat ${TOPLEVEL_VERSIONS} | grep -F "PRODUCT_MAJOR_VERSION := " | sed -e 's/PRODUCT_MAJOR_VERSION := //g')
+BRANDING_PRODUCT_MINOR_VERSION=$(cat ${TOPLEVEL_VERSIONS} | grep -F "PRODUCT_MINOR_VERSION := " | sed -e 's/PRODUCT_MINOR_VERSION := //g')
 BRANDING_SEARCH=xensearch
 BRANDING_UPDATE=xsupdate
 BRANDING_BACKUP=xbk
-BRANDING_SERVER=XenServer
-BRANDING_BRAND_CONSOLE=$(cat ${SCRATCH_DIR}/globals | grep -w BRAND_CONSOLE | sed -e 's/BRAND_CONSOLE=//g' -e 's/"//g')
+BRANDING_SERVER=${BRANDING_PRODUCT_BRAND}
+BRANDING_BRAND_CONSOLE=$(cat ${TOPLEVEL_BRANDING} | grep -F "BRAND_CONSOLE := " | sed -e 's/BRAND_CONSOLE := //g')
+
 # Check for the micro version override from declarations.sh and use it if present otherwise use the one from branding
 if [ -n "${PRODUCT_MICRO_VERSION_OVERRIDE+x}" ]; then
-	BRANDING_PRODUCT_MICRO_VERSION=$PRODUCT_MICRO_VERSION_OVERRIDE
-	echo Using override for micro product number of: $BRANDING_PRODUCT_MICRO_VERSION
+  BRANDING_PRODUCT_MICRO_VERSION=${PRODUCT_MICRO_VERSION_OVERRIDE}
+  echo Using override for micro product number of: ${BRANDING_PRODUCT_MICRO_VERSION}
 else
-	BRANDING_PRODUCT_MICRO_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MICRO_VERSION | sed -e 's/PRODUCT_MICRO_VERSION=//g' -e 's/"//g')
+  BRANDING_PRODUCT_MICRO_VERSION=$(cat ${TOPLEVEL_VERSIONS} | grep -F "PRODUCT_MICRO_VERSION := " | sed -e 's/PRODUCT_MICRO_VERSION := //g')
 fi
 
-BRANDING_XC_PRODUCT_VERSION=${BRANDING_PRODUCT_MAJOR_VERSION}.${BRANDING_PRODUCT_MINOR_VERION}.${BRANDING_PRODUCT_MICRO_VERSION}
+BRANDING_XC_PRODUCT_VERSION=${BRANDING_PRODUCT_MAJOR_VERSION}.${BRANDING_PRODUCT_MINOR_VERSION}.${BRANDING_PRODUCT_MICRO_VERSION}
 BRANDING_XC_PRODUCT_5_6_VERSION=5.6
 BRANDING_XC_PRODUCT_6_0_VERSION=6.0
 BRANDING_XC_PRODUCT_6_2_VERSION=6.2
