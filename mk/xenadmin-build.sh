@@ -30,7 +30,11 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
-set -eu
+set -e
+
+if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
+
+set -u
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
@@ -47,6 +51,29 @@ mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 mkdir_clean ${BUILD_ARCHIVE}
 rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
+
+#create manifest
+echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
+echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
+
+rm -rf ${ROOT}/xenadmin-branding.git
+BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
+
+if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
+    echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
+    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
+else
+    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
+fi
+
+XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
+echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
+
+if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
+    echo "Overwriting Branding folder"
+    rm -rf ${XENADMIN_DIR}/Branding/*
+    cp -rf ${ROOT}/xenadmin-branding.git/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
+fi
 
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then

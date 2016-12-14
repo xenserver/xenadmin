@@ -72,31 +72,6 @@ XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 source ${XENADMIN_DIR}/mk/declarations.sh
 
-#create manifest
-echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
-
-if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-
-rm -rf ${ROOT}/xenadmin-branding.git
-BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
-
-if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
-    echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
-    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
-else
-    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
-fi
-
-XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
-echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
-
-if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
-    echo "Overwriting Branding folder"
-    rm -rf ${XENADMIN_DIR}/Branding/*
-    cp -rf ${ROOT}/xenadmin-branding.git/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
-fi
-
 test_phase()
 {
   # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
