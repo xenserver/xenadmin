@@ -87,14 +87,8 @@ fi
 XS_BRANCH=${GIT_LOCAL_BRANCH}
 
 if [ -z "${XS_BRANCH+xxx}" ] ; then
-    echo "WARN: GIT_LOCAL_BRANCH env var not set, we will use trunk"
-    XS_BRANCH="trunk"
-elif [ $(curl --output /dev/null -m 60 --silent http://hg.uk.xensource.com/git/carbon/${XS_BRANCH}/xenadmin.git; echo "$?") != 0 ] ; then
-    echo "Branch ${XS_BRANCH} not found on hg.uk/xenadmin. Reverting to trunk."
-    XS_BRANCH="trunk"
-elif [ "${XS_BRANCH}" = "master" ] ; then
-    echo "INFO: found master branch; renaming to trunk."
-    XS_BRANCH="trunk"
+    XS_BRANCH=$($git rev-parse --abbrev-ref HEAD)
+		echo "WARN: GIT_LOCAL_BRANCH env var not set, using current head ${XS_BRANCH} instead"
 fi
 
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
@@ -143,9 +137,11 @@ else
 fi
 
 #this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET="${JENKINS_SERVER}/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+WEB_DOTNET=${REPO_CITRITE_HOST}/xc-local-build/dotnet-packages/ely-staging/5
 DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_${XS_BRANCH}_dotnet-packages
-DOTNET_LOC=$DOTNET_BASE/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
+DOTNET_BASE_TRUNK=${SECURE_BUILD_ARCHIVE_UNC}/carbon_trunk_dotnet-packages
+DOTNET_LOC=${DOTNET_BASE}/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
+DOTNET_LOC_TRUNK=${DOTNET_BASE_TRUNK}/$(ls $DOTNET_BASE_TRUNK | /usr/bin/sort -n | tail -n 1)
 
 # used to copy results out of the secure build enclave
 BUILD_TOOLS_REPO=git://hg.uk.xensource.com/closed/windows/buildtools.git
@@ -154,8 +150,6 @@ STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
 WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
-WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/
-WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 
 WGET_OPT="-T 10 -N -q"
 WGET () { wget ${WGET_OPT} "${@}"; }

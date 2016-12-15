@@ -53,7 +53,12 @@ mkdir_clean ${BUILD_ARCHIVE}
 rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
 
 #create manifest
-echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
+if [ ${XS_BRANCH} = "master" ] ; then
+	echo "@branch=trunk" >> ${OUTPUT_DIR}/manifest
+else
+	echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
+fi
+
 echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
 
 rm -rf ${ROOT}/xenadmin-branding.git
@@ -110,7 +115,7 @@ dotnet_cp_to_dir ()
     local -r src="${1}"; shift
     if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
     then
-        cp "${DOTNET_LOC}/${src}" "${destdir}/"
+        cp "${DOTNET_LOC}/${src}" "${destdir}/" || cp "${DOTNET_LOC_TRUNK}/${src}" "${destdir}/"
     else
         _WGET -P "${destdir}" "${WEB_DOTNET}/${src}"
     fi
@@ -122,7 +127,7 @@ dotnet_cp_file ()
     local -r dest="${1}"; shift
     if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
     then
-        cp "${DOTNET_LOC}/${src}" "${dest}"
+        cp "${DOTNET_LOC}/${src}" "${dest}" || cp "${DOTNET_LOC_TRUNK}/${src}" "${dest}"
     else
         _WGET -O "${dest}" "${WEB_DOTNET}/${src}"
     fi
@@ -155,7 +160,7 @@ source ${REPO}/mk/re-branding.sh
 function get_hotfixes ()
 {
     local -r p="$1"
-    _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES} || _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_TRUNK}
+    _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/ || _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/trunk/
 }
 
 #bring RPU hotfixes
