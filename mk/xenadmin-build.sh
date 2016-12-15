@@ -64,7 +64,7 @@ echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
 rm -rf ${ROOT}/xenadmin-branding.git
 BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
 
-if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
+if [ -z "$(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH})" ] ; then
     echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
     git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
 else
