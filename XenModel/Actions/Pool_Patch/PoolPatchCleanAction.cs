@@ -18,7 +18,7 @@ namespace XenAdmin.Actions
                 throw new ArgumentNullException("pool_patch");
 
             #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("pool_patch_pool_clean");
+            ApiMethodsToRoleCheck.Add("pool_patch.pool_clean");
             #endregion
             
         }
