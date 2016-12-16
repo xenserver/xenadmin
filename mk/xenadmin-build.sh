@@ -32,8 +32,8 @@
 
 set -e
 
+set +u
 if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-
 set -u
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
