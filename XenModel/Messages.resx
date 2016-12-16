@@ -5707,17 +5707,6 @@ Click Configure HA to enable HA for this pool and allow your virtual machines to
   <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>Configure the HA restart priority, restart order and delay interval for the VMs in this pool</value>
   </data>
-  <data name="HAWIZ_SUMMARY_NEW" xml:space="preserve">
-    <value>Heartbeat SR:   {0}
-
-Failure tolerance:   {1}
-
-Restart:   {2}
-
-Restart if possible:   {3}
-
-Do not restart:   {4}</value>
-  </data>
   <data name="HA_ASSIGN_PRIORITIES_MIXED_PROTECTION_LEVELS" xml:space="preserve">
     <value>(Multiple values)</value>
   </data>
@@ -12291,6 +12280,12 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VMS_IN_SERVER" xml:space="preserve">
     <value>VMs in server '{0}':</value>
+  </data>
+  <data name="VMS_MANY" xml:space="preserve">
+    <value>{0} VMs</value>
+  </data>
+  <data name="VMS_ONE" xml:space="preserve">
+    <value>1 VM</value>
   </data>
   <data name="VM_ALREADY_SUSPENDED" xml:space="preserve">
     <value>This VM is already suspended.</value>

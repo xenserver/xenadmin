@@ -17005,23 +17005,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Heartbeat SR:   {0}
-        ///
-        ///Failure tolerance:   {1}
-        ///
-        ///Restart:   {2}
-        ///
-        ///Restart if possible:   {3}
-        ///
-        ///Do not restart:   {4}.
-        /// </summary>
-        public static string HAWIZ_SUMMARY_NEW {
-            get {
-                return ResourceManager.GetString("HAWIZ_SUMMARY_NEW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to HA Plan.
         /// </summary>
         public static string HAWIZARD_ASSIGNPRIORITIESPAGE_TEXT {
@@ -36121,6 +36104,24 @@ namespace XenAdmin {
         public static string VMS_IN_SERVER {
             get {
                 return ResourceManager.GetString("VMS_IN_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} VMs.
+        /// </summary>
+        public static string VMS_MANY {
+            get {
+                return ResourceManager.GetString("VMS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 VM.
+        /// </summary>
+        public static string VMS_ONE {
+            get {
+                return ResourceManager.GetString("VMS_ONE", resourceCulture);
             }
         }
         

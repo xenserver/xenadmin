@@ -121,6 +121,14 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         }
 
         /// <summary>
+        /// The current (uncommitted) VM restart priorities.
+        /// </summary>
+        public Dictionary<VM, VM.HA_Restart_Priority> CurrentSettings
+        {
+            get { return haNtolIndicator.Settings; }
+        }
+
+        /// <summary>
         /// The Ntol from the HaNtolIndicator control contained within.
         /// </summary>
         public long Ntol
@@ -480,7 +488,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// <summary>
         /// Gets the current (uncommitted) VM restart priorities. Must be called on the GUI thread.
         /// </summary>
-        public Dictionary<VM, VM.HA_Restart_Priority> getCurrentSettings()
+        private Dictionary<VM, VM.HA_Restart_Priority> getCurrentSettings()
         {
             Program.AssertOnEventThread();
             Dictionary<VM, VM.HA_Restart_Priority> result = new Dictionary<VM, VM.HA_Restart_Priority>();
