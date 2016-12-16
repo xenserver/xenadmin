@@ -30,7 +30,11 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
-set -eu
+set -e
+
+if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
+
+set -u
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
@@ -47,6 +51,34 @@ mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 mkdir_clean ${BUILD_ARCHIVE}
 rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
+
+#create manifest
+if [ ${XS_BRANCH} = "master" ] ; then
+	echo "@branch=trunk" >> ${OUTPUT_DIR}/manifest
+else
+	echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
+fi
+
+echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
+
+rm -rf ${ROOT}/xenadmin-branding.git
+BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
+
+if [ -z "$(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH})" ] ; then
+    echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
+    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
+else
+    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
+fi
+
+XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
+echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
+
+if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
+    echo "Overwriting Branding folder"
+    rm -rf ${XENADMIN_DIR}/Branding/*
+    cp -rf ${ROOT}/xenadmin-branding.git/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
+fi
 
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
@@ -83,7 +115,7 @@ dotnet_cp_to_dir ()
     local -r src="${1}"; shift
     if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
     then
-        cp "${DOTNET_LOC}/${src}" "${destdir}/"
+        cp "${DOTNET_LOC}/${src}" "${destdir}/" || cp "${DOTNET_LOC_TRUNK}/${src}" "${destdir}/"
     else
         _WGET -P "${destdir}" "${WEB_DOTNET}/${src}"
     fi
@@ -95,7 +127,7 @@ dotnet_cp_file ()
     local -r dest="${1}"; shift
     if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
     then
-        cp "${DOTNET_LOC}/${src}" "${dest}"
+        cp "${DOTNET_LOC}/${src}" "${dest}" || cp "${DOTNET_LOC_TRUNK}/${src}" "${dest}"
     else
         _WGET -O "${dest}" "${WEB_DOTNET}/${src}"
     fi
@@ -111,15 +143,9 @@ dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP46-KB3045560-
 dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
 dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
-#bring in stuff from xencenter-ovf latest xe-phase-1
-_WGET -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/XenCenterOVF.zip"
+#bring in the ovf fixup iso from artifactory (currently one location)
+_WGET -P "${SCRATCH_DIR}" ${REPO_CITRITE_HOST}/list/xs-local-contrib/citrix/xencenter/XenCenterOVF.zip
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
-
-#bring manifest from latest xe-phase-1
-_WGET -O ${SCRATCH_DIR}/xe-phase-1-manifest "${WEB_XE_PHASE_1}/manifest"
-
-#bring XenServer.NET from latest xe-phase-2
-_WGET -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit
@@ -134,7 +160,7 @@ source ${REPO}/mk/re-branding.sh
 function get_hotfixes ()
 {
     local -r p="$1"
-    _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES} || _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_TRUNK}
+    _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/ || _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/trunk/
 }
 
 #bring RPU hotfixes
@@ -253,15 +279,6 @@ cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 #include resources script and collect the resources for translations
 . ${REPO}/mk/find-resources.sh
 
-#collect output and extra files to the OUTPUT_DIR
-EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
-mkdir_clean ${EN_CD_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${EN_CD_DIR}
-cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-L10N_CD_DIR=${OUTPUT_DIR}/client_install
-mkdir_clean ${L10N_CD_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_CD_DIR}
-
 cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${WIX}/outVNCControl && tar cjf ${OUTPUT_DIR}/VNCControl.tar.bz2 VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
@@ -278,35 +295,25 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
 echo "INFO:	Create English iso files"
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
-cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
-cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+cp ${REPO}/mk/ISO_files/AUTORUN.INF ${ISO_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer
 tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso" "${ISO_DIR}"
-install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
 
 echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
-cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
-cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+cp ${REPO}/mk/ISO_files/AUTORUN.INF ${L10N_ISO_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer.l10n
 tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.iso" "${L10N_ISO_DIR}"
-install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
-
-# Create a tarball containing the XenCenter ISO, to be installed by the host installer
-# MAIN_PKG_DIR is our working directory, MAIN_PKG_ISO_SUBDIR is the pathname of the ISO
-# file within the tar file, and therefore the path it eventually installs into
-mkdir_clean ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso
-ln -sf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso
-tar -C ${OUTPUT_DIR}/PACKAGES.main -ch opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso | bzip2 > ${OUTPUT_DIR}/PACKAGES.main/${BRANDING_BRAND_CONSOLE}.iso.tar.bz2
-rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
 
 #bring in the pdbs from dotnet-packages latest build
 for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
@@ -315,27 +322,18 @@ do
 done
 
 #now package the pdbs
-cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 *.pdb
+cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 
-#create manifest
-echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
+#for the time being we download a fixed version of the ovf fixup iso, hence put this in the manifest
+echo "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" >> ${OUTPUT_DIR}/manifest
+echo "chroot-lenny chroots.hg 1a75fa5848e8" >> ${OUTPUT_DIR}/manifest
+
 cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
 get_BUILD_PATH=/usr/groups/xen/carbon/windowsbuilds/WindowsBuilds/${get_JOB_NAME}/${BUILD_NUMBER}
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     echo ${get_BUILD_URL} > ${OUTPUT_DIR}/latest-secure-build
-    echo ${get_BUILD_PATH} > ${OUTPUT_DIR}/latest-successful-build
-else
-    echo ${get_BUILD_URL} > ${OUTPUT_DIR}/latest-successful-build
 fi
-
-# Write out version information
-echo "xc_product_version=${BRANDING_XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
-echo "build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/xcversion
 
 echo "INFO:	Build phase succeeded at "
 date
