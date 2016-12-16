@@ -32,11 +32,8 @@
 
 set -eu
 
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 source ${REPO}/Branding/branding.sh
 
-if [ ${XS_BRANCH} = "trunk" ]
-then
 echo -n "Starting tests at "
 date
 
@@ -74,6 +71,3 @@ ${MYSCP} Administrator@$ADDR:/tmp/XenAdminTests.xml /var/www/XenAdminTests.xml
 
 grep 'errors="0" failures="0"' /var/www/XenAdminTests.xml
 
-else
-echo "Warning: Tests skipped in this configuration."
-fi

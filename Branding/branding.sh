@@ -11,7 +11,7 @@ OUTPUT_DIR=${ROOT}/output
 rm -rf ${ROOT}/branding.git
 BRANDING_REMOTE=https://code.citrite.net/scm/xs/branding.git
 
-if [ -z $(git ls-remote --heads ${BRANDING_REMOTE} | grep ${XS_BRANCH}) ] ; then
+if [ -z "$(git ls-remote --heads ${BRANDING_REMOTE} | grep ${XS_BRANCH})" ] ; then
     echo "Branch ${XS_BRANCH} not found on branding.git. Reverting to master."
     git clone -b master ${BRANDING_REMOTE} ${ROOT}/branding.git
 else
