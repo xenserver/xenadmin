@@ -53,7 +53,7 @@ function check_deps ()
   fi
 }
 
-check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe ncover
+check_deps nunit-console.exe zip unzip wget curl hg git patch mt.exe candle.exe light.exe
 
 if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
 then
@@ -72,35 +72,6 @@ set -e
 XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 source ${XENADMIN_DIR}/mk/declarations.sh
-
-if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-
-rm -rf ${ROOT}/xenadmin-branding
-
-BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
-
-if [ -z $(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH}) ] ; then
-    echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
-    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding
-else
-    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding
-fi
-
-if [ -d ${ROOT}/xenadmin-branding/${XC_BRANDING} ]; then
-    echo "Overwriting Branding folder"
-    rm -rf ${XENADMIN_DIR}/Branding/*
-    cp -rf ${ROOT}/xenadmin-branding/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
-fi
-
-# overwrite archive-push.sh and push-latest-successful-build.sh files, if they exist in Branding folder
-if [ -f ${XENADMIN_DIR}/Branding/branding-archive-push.sh ]; then
-  echo "Overwriting mk/archive-push.sh with Branding/branding-archive-push.sh."
-  cp ${XENADMIN_DIR}/Branding/branding-archive-push.sh ${XENADMIN_DIR}/mk/archive-push.sh
-fi
-if [ -f ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ]; then
-  echo "Overwriting mk/push-latest-successful-build.sh with Branding/branding-push-latest-successful-build.sh."
-  cp ${XENADMIN_DIR}/Branding/branding-push-latest-successful-build.sh ${XENADMIN_DIR}/mk/push-latest-successful-build.sh
-fi
 
 run_tests()
 {
