@@ -457,10 +457,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 AllIntroducedPoolUpdates.Add(PoolUpdate);
                             }
                         }
-                        else
-                        {
-                            _poolUpdate = null;
-                        }
                     }
 
                     if (action is DownloadAndUnzipXenServerPatchAction)
