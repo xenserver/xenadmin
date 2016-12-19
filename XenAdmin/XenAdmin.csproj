@@ -917,11 +917,11 @@
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
-    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.cs">
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.designer.cs">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.designer.cs">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.cs">
       <SubType>UserControl</SubType>
@@ -2215,15 +2215,15 @@
       <SubType>Designer</SubType>
       <DependentUpon>PatchingWizard_ModePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.ja.resx">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.ja.resx">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.resx">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.resx">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.zh-CN.resx">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.zh-CN.resx">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PatchingPage.resx">
       <SubType>Designer</SubType>

@@ -5707,17 +5707,6 @@ Click Configure HA to enable HA for this pool and allow your virtual machines to
   <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>Configure the HA restart priority, restart order and delay interval for the VMs in this pool</value>
   </data>
-  <data name="HAWIZ_SUMMARY_NEW" xml:space="preserve">
-    <value>Heartbeat SR:   {0}
-
-Failure tolerance:   {1}
-
-Restart:   {2}
-
-Restart if possible:   {3}
-
-Do not restart:   {4}</value>
-  </data>
   <data name="HA_ASSIGN_PRIORITIES_MIXED_PROTECTION_LEVELS" xml:space="preserve">
     <value>(Multiple values)</value>
   </data>
@@ -8890,7 +8879,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>This host does not have enough disk space to install this update</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
-    <value>There is not enough space to automatically update '{0}'.</value>
+    <value>There is not enough space to update '{0}' with automated updates.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>Space available: {0}</value>
@@ -9129,22 +9118,22 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>Update process was not completed successfully.</value>
+    <value>The automated updates process was not completed successfully.</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
-    <value>Following errors occurred while automatic upgrade was in progress:</value>
+    <value>The following errors occurred while automated updates were in progress:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
-    <value>Following error occurred while automatic upgrade was in progress: </value>
+    <value>The following error occurred while automated updates were in progress:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
-    <value>Update was not completed successfully</value>
+    <value>The update was not completed successfully</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
-    <value>Automatically uploading and installing updates</value>
+    <value>Uploading and installing updates</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
@@ -9242,8 +9231,8 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
   </data>
-  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Prechecks are performed to verify that the automatic update can proceed.</value>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
+    <value>Prechecks are performed to verify that automated updates can proceed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
     <value>Update prechecks are performed to verify that the selected update can be applied to the servers.</value>
@@ -9281,11 +9270,11 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automatic update is not supported on this [XenServer] version</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+    <value>Automated updates are not supported on this [XenServer] version</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
-    <value>Automatic update is not supported on partially upgraded [XenServer] pools</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+    <value>Automated updates are not supported on partially upgraded [XenServer] pools</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this [XenServer] version</value>
@@ -9293,8 +9282,8 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
-    <value>This server is not licensed for automatic updating</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
+    <value>The server is not licensed for automated updates</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>
@@ -9302,8 +9291,16 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>Update not applicable</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
+    <value>Select one or more pools or standalone hosts that you want to have updated.
+Greyed out servers cannot be updated with automated updates.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>Select one or more servers from the list of available servers.
+Servers where the selected update cannot be applied appear disabled in this list.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
-    <value>This server cannot be updated automatically</value>
+    <value>This server cannot be updated with automated updates</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
     <value>This server is already up-to-date</value>
@@ -9314,16 +9311,8 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you wish to update</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Select one or more pools or standalone hosts that you want to have automatically updated.
-Greyed out servers cannot be updated automatically.</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>Select one or more servers from the list of available servers.
-Servers where the selected update cannot be applied appear disabled in this list.</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>Automatic update has finished.</value>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
+    <value>Automated updates have finished.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
@@ -9636,11 +9625,11 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>{0} failure tolerated</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATED_UPDATES" xml:space="preserve">
+    <value>Automated updates are not supported for this server.</value>
+  </data>
   <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
     <value>Post-update tasks cannot be carried out automatically for all the servers to be updated.</value>
-  </data>
-  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>Automatic update is not supported for this server.</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Pool General Properties</value>
@@ -9798,6 +9787,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>Not configured</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_CANNOT_BE_CHANGED" xml:space="preserve">
+    <value>This PVS cache storage cannot be changed because it is in use.</value>
   </data>
   <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
     <value>{0} (Incomplete Cache Storage configuration)</value>
@@ -10697,6 +10689,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>smaller than</value>
+  </data>
+  <data name="SMB_ISO_STORAGE_ALREADY_ATTACHED" xml:space="preserve">
+    <value>This SMB ISO storage is already attached to '{0}'</value>
   </data>
   <data name="SNAPSHOTS" xml:space="preserve">
     <value>Snapshots</value>
@@ -12285,6 +12280,12 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VMS_IN_SERVER" xml:space="preserve">
     <value>VMs in server '{0}':</value>
+  </data>
+  <data name="VMS_MANY" xml:space="preserve">
+    <value>{0} VMs</value>
+  </data>
+  <data name="VMS_ONE" xml:space="preserve">
+    <value>1 VM</value>
   </data>
   <data name="VM_ALREADY_SUSPENDED" xml:space="preserve">
     <value>This VM is already suspended.</value>

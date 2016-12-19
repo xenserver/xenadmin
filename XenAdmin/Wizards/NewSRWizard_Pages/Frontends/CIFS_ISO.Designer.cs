@@ -39,6 +39,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.labelCifsShareName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.passwordFailure1 = new XenAdmin.Controls.Common.PasswordFailure();
             this.comboBoxCifsSharename = new System.Windows.Forms.ComboBox();
             this.groupBoxLogin.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -104,11 +105,18 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelCifsShareName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label22, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxCifsSharename, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // passwordFailure1
+            // 
+            resources.ApplyResources(this.passwordFailure1, "passwordFailure1");
+            this.passwordFailure1.Name = "passwordFailure1";
+            this.passwordFailure1.TabStop = false;
             // 
             // comboBoxCifsSharename
             // 
@@ -148,5 +156,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBoxCifsSharename;
+        private Controls.Common.PasswordFailure passwordFailure1;
     }
 }

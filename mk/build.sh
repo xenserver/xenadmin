@@ -54,6 +54,7 @@ function check_deps ()
 }
 
 check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe ncover
+
 if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
 then
     check_deps signtool.exe
@@ -134,7 +135,7 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
     test_phase
-    source ${XENADMIN_DIR}/mk/archive-push.sh
+    source ${XENADMIN_DIR}/mk/copy-build-output.sh
 }
 
 # Use this option if you're running on a Jenkins that is not the production Jenkins server

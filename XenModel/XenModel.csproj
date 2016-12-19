@@ -330,6 +330,7 @@
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
     <Compile Include="XenAPI-Extensions\Pool_update.cs" />
+    <Compile Include="XenAPI-Extensions\PVS_cache_storage.cs" />
     <Compile Include="XenAPI-Extensions\pvs_proxy_status.cs" />
     <Compile Include="XenAPI-Extensions\PVS_site.cs" />
     <Compile Include="XenAPI-Extensions\PVS_proxy.cs" />

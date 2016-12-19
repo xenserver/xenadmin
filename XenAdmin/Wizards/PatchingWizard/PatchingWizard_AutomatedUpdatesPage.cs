@@ -51,7 +51,7 @@ using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    public partial class PatchingWizard_AutoUpdatingPage : XenTabPage
+    public partial class PatchingWizard_AutomatedUpdatesPage : XenTabPage
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -67,7 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
 
-        public PatchingWizard_AutoUpdatingPage()
+        public PatchingWizard_AutomatedUpdatesPage()
         {
             InitializeComponent();
         }
@@ -564,7 +564,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AllWorkersFinished()
         {
-            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE;
+            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;

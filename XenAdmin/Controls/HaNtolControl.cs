@@ -116,6 +116,7 @@ namespace XenAdmin.Controls
         [Browsable(false), ReadOnly(true)]
         public Dictionary<VM, VM.HA_Restart_Priority> Settings
         {
+            get { return settings; }
             set
             {
                 System.Diagnostics.Trace.Assert(value != null);
