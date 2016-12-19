@@ -106,7 +106,7 @@ namespace XenAdmin.Diagnostics.Checks
 
                     return FindProblem(result);
                 }
-                else
+                else if (Helpers.ElyOrGreater(Host))
                 {
                     var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
 
@@ -114,9 +114,9 @@ namespace XenAdmin.Diagnostics.Checks
 
                     if (livePatchCodesByHost != null)
                         livePatchCodesByHost[Host.uuid] = livepatchStatus;
-
-                    return null;
                 }
+
+                return null;
             }
             catch (Failure f)
             {
