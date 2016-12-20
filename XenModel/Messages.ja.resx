@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -8855,7 +8855,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>このアップデートをインストールするための空き領域がこのホストにはありません。</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
-    <value>'{0}' を自動的にアップデートするための十分な容量がありません。</value>
+    <value>自動アップデートで '{0}' をアップデートするための十分な容量がありません。</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>使用可能な領域: {0}</value>
@@ -9094,13 +9094,13 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>貼り付け</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>アップデート プロセスに失敗しました。</value>
+    <value>自動アップデート プロセスに失敗しました。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
-    <value>自動アップグレードの進行中に次のエラーが発生しました。</value>
+    <value>自動アップデートの進行中に次のエラーが発生しました。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
-    <value>自動アップグレードの進行中に次のエラーが発生しました。 </value>
+    <value>自動アップデートの進行中に次のエラーが発生しました。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
     <value>アップデートに失敗しました</value>
@@ -9109,7 +9109,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>アップロードしてインストール</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
-    <value>アップデートを自動的にアップロードしてインストールします</value>
+    <value>アップデートをアップロードしてインストールします</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>クリーン アップ...</value>
@@ -9207,7 +9207,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>サーバーにアップデート "{0}" を適用できるかどうかを事前にチェックします。</value>
   </data>
-  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>事前チェックが実行され、自動アップデートを続行できるかを検証します。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
@@ -9246,10 +9246,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] アップデートおよびサプリメンタル パック (*.{0}, *.iso)|*.{0};*.iso</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>この [XenServer] バージョンで自動アップデートはサポートされていません</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
     <value>一部アップグレードされた [XenServer] プールで自動アップデートはサポートされていません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
@@ -9258,7 +9258,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage が必要です</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>このサーバーでは、自動アップデートのライセンスが有効ではありません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
@@ -9267,8 +9267,16 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>適用されないアップデート</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
+    <value>アップデートする 1つまたは複数のプール、またはスタンドアロン ホストを選択してください。
+グレー表示されたサーバーは自動アップデートでアップデートできません。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>利用可能なサーバー一覧から 1つまたは複数のサーバーを選択します。
+選択されたアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
-    <value>このサーバーを自動的にアップデートすることはできません</value>
+    <value>このサーバーを自動アップデートでアップデートすることはできません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
     <value>このサーバーは既に最新状態です</value>
@@ -9279,15 +9287,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>アップデートするサーバーを選択します</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
-    <value>自動的にアップデートする 1つまたは複数のプール、またはスタンドアロン ホストを選択してください。
-グレー表示されたサーバーは自動的にアップデートできません。</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>利用可能なサーバー一覧から 1つまたは複数のサーバーを選択します。
-選択されたアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>自動アップデートが完了しました。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
@@ -9601,11 +9601,11 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>{0} 障害がフェイルオーバーされました</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATED_UPDATES" xml:space="preserve">
+    <value>このサーバーで自動アップデートはサポートされていません。</value>
+  </data>
   <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
     <value>アップデート後タスクは、すべてのアップデートしたサーバーに対して自動的に実行されるわけではありません。</value>
-  </data>
-  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>このサーバーで自動アップデートはサポートされていません。</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>プールの全般プロパティ</value>
@@ -9763,6 +9763,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>構成されていません</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_CANNOT_BE_CHANGED" xml:space="preserve">
+    <value>この PVS キャッシュ ストレージは使用中のため変更できません。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
     <value>{0} (不完全なキャッシュ ストレージ構成)</value>
