@@ -1440,7 +1440,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Enter the host name or IP address of the server you want to add and your user login credentials for that server.</value>
   </data>
   <data name="ADD_NEW_INCORRECT" xml:space="preserve">
-    <value>Incorrect username and/or password.</value>
+    <value>Incorrect user name and/or password.</value>
   </data>
   <data name="ADD_NEW_SERVER_MENU_ITEM" xml:space="preserve">
     <value>&amp;Add New Server...</value>
@@ -1548,10 +1548,10 @@ To join '{1}' to the Active Directory domain '{2}', enter a domain user account 
 You must use a user account with sufficient privileges.</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB_SHORT" xml:space="preserve">
-    <value>Enter your fully qualified AD domain name, and a username and password with sufficient privileges to add servers to your domain.</value>
+    <value>Enter your fully qualified AD domain name, and a user name and password with sufficient privileges to add servers to your domain.</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB_SHORT_HOST" xml:space="preserve">
-    <value>Enter your fully qualified AD domain name, and a username and password with sufficient privileges to add servers to your domain.</value>
+    <value>Enter your fully qualified AD domain name, and a user name and password with sufficient privileges to add servers to your domain.</value>
   </data>
   <data name="AD_LEAVE_CONFIRM" xml:space="preserve">
     <value>You are about to remove '{0}' from the AD domain '{1}'. Any users authenticated using AD will be disconnected.
@@ -3030,7 +3030,7 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
     <value>Connect to Server</value>
   </data>
   <data name="CONNECT_TO_SERVER_BLURB" xml:space="preserve">
-    <value>Enter your username and password to connect to this server.</value>
+    <value>Enter your user name and password to connect to this server.</value>
   </data>
   <data name="CONSOLE" xml:space="preserve">
     <value>Console</value>
@@ -3527,10 +3527,10 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>Creation time</value>
   </data>
   <data name="CREDENTIALS_CHECKING" xml:space="preserve">
-    <value>Checking username and password...</value>
+    <value>Checking user name and password...</value>
   </data>
   <data name="CREDENTIALS_CHECK_COMPLETE" xml:space="preserve">
-    <value>Username and password check complete</value>
+    <value>User name and password check complete</value>
   </data>
   <data name="CSLG_DELL_DIRECT" xml:space="preserve">
     <value>Dell EqualLogic</value>
@@ -4828,7 +4828,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Error Activating Virtual Disks</value>
   </data>
   <data name="ERROR_AUTHENTICATION" xml:space="preserve">
-    <value>Username and Password mismatch.</value>
+    <value>User name and password mismatch.</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
     <value>[XenCenter] has encountered a problem connecting to this server.</value>
@@ -6012,7 +6012,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Authentication with [Citrix] Insight Services failed. See the application log files for more information.</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Invalid username or password. Please try again.</value>
+    <value>Invalid user name or password. Please try again.</value>
   </data>
   <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
     <value>This user is not authorized to access this server.</value>
@@ -6797,7 +6797,7 @@ Size: {3}</value>
     <value>Is standalone</value>
   </data>
   <data name="JOINING_AD" xml:space="preserve">
-    <value>Please enter a username and password with sufficient privileges to add servers to domain '{0}'.</value>
+    <value>Please enter a user name and password with sufficient privileges to add servers to domain '{0}'.</value>
   </data>
   <data name="KEEP_WAITING_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Keep waiting</value>
@@ -6827,7 +6827,7 @@ Size: {3}</value>
     <value>License Manager</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
-    <value>Enter a username and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed.</value>
+    <value>Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed.</value>
   </data>
   <data name="LEFT_ALT" xml:space="preserve">
     <value>Left Alt</value>
@@ -8089,7 +8089,7 @@ You should only proceed if you have verified that these settings are correct.</v
 
 As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the username, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
+When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you wish to attach to your host or pool.</value>
@@ -10781,7 +10781,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>XCP version</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
-    <value>Try again using a correct Username and Password.</value>
+    <value>Try again using a correct user name and password.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
     <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>

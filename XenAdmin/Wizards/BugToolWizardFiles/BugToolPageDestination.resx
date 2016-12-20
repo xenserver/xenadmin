@@ -139,13 +139,13 @@
     <value>30, 5, 3, 5</value>
   </data>
   <data name="usernameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="usernameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="usernameLabel.Text" xml:space="preserve">
-    <value>U&amp;ser name:</value>
+    <value>U&amp;sername:</value>
   </data>
   <data name="usernameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -493,7 +493,7 @@
     <value>3, 20, 3, 6</value>
   </data>
   <data name="uploadCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 17</value>
+    <value>260, 17</value>
   </data>
   <data name="uploadCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

@@ -3747,7 +3747,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your fully qualified AD domain name, and a username and password with sufficient privileges to add servers to your domain..
+        ///   Looks up a localized string similar to Enter your fully qualified AD domain name, and a user name and password with sufficient privileges to add servers to your domain..
         /// </summary>
         public static string AD_JOIN_DOMAIN_BLURB_SHORT {
             get {
@@ -3756,7 +3756,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your fully qualified AD domain name, and a username and password with sufficient privileges to add servers to your domain..
+        ///   Looks up a localized string similar to Enter your fully qualified AD domain name, and a user name and password with sufficient privileges to add servers to your domain..
         /// </summary>
         public static string AD_JOIN_DOMAIN_BLURB_SHORT_HOST {
             get {
@@ -4244,7 +4244,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect username and/or password..
+        ///   Looks up a localized string similar to Incorrect user name and/or password..
         /// </summary>
         public static string ADD_NEW_INCORRECT {
             get {
@@ -8057,7 +8057,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your username and password to connect to this server..
+        ///   Looks up a localized string similar to Enter your user name and password to connect to this server..
         /// </summary>
         public static string CONNECT_TO_SERVER_BLURB {
             get {
@@ -9804,7 +9804,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username and password check complete.
+        ///   Looks up a localized string similar to User name and password check complete.
         /// </summary>
         public static string CREDENTIALS_CHECK_COMPLETE {
             get {
@@ -9813,7 +9813,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking username and password....
+        ///   Looks up a localized string similar to Checking user name and password....
         /// </summary>
         public static string CREDENTIALS_CHECKING {
             get {
@@ -13676,7 +13676,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username and Password mismatch..
+        ///   Looks up a localized string similar to User name and password mismatch..
         /// </summary>
         public static string ERROR_AUTHENTICATION {
             get {
@@ -17032,7 +17032,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid username or password. Please try again..
+        ///   Looks up a localized string similar to Invalid user name or password. Please try again..
         /// </summary>
         public static string HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS {
             get {
@@ -19487,7 +19487,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a username and password with sufficient privileges to add servers to domain &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Please enter a user name and password with sufficient privileges to add servers to domain &apos;{0}&apos;..
         /// </summary>
         public static string JOINING_AD {
             get {
@@ -19577,7 +19577,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a username and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed..
+        ///   Looks up a localized string similar to Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed..
         /// </summary>
         public static string LEAVING_AD {
             get {
@@ -23651,7 +23651,7 @@ namespace XenAdmin {
         ///
         ///As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
         ///
-        ///When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the username, the password and the path to a directory that will be  [rest of string was truncated]&quot;;.
+        ///When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the user name, the password and the path to a directory that will be [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_CIFS_BLURB {
             get {
@@ -31040,7 +31040,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try again using a correct Username and Password..
+        ///   Looks up a localized string similar to Try again using a correct user name and password..
         /// </summary>
         public static string SOLUTION_AUTHENTICATION {
             get {

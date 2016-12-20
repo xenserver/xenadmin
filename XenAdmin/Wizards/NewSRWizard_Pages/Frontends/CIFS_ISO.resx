@@ -193,13 +193,13 @@
     <value>6, 26</value>
   </data>
   <data name="labelCifsUsername.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="labelCifsUsername.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelCifsUsername.Text" xml:space="preserve">
-    <value>&amp;User name:</value>
+    <value>&amp;Username:</value>
   </data>
   <data name="&gt;&gt;labelCifsUsername.Name" xml:space="preserve">
     <value>labelCifsUsername</value>

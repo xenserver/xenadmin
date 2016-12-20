@@ -160,7 +160,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.labelInstructions, "labelInstructions");
             this.tableLayoutPanelType.SetColumnSpan(this.labelInstructions, 3);
-            this.labelInstructions.MaximumSize = new System.Drawing.Size(355, 100);
             this.labelInstructions.Name = "labelInstructions";
             // 
             // tableLayoutPanelType
