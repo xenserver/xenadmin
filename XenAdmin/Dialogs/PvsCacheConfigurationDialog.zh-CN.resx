@@ -139,7 +139,7 @@
     <value>NoControl</value>
   </data>
   <data name="addSiteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 111</value>
+    <value>172, 111</value>
   </data>
   <data name="addSiteButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 3, 0</value>
