@@ -1687,7 +1687,7 @@
 该警报设置为在磁盘使用量超过 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_DOM0_MEMORY" xml:space="preserve">
-    <value>控制域内存使用率</value>
+    <value>控制域内存使用量</value>
   </data>
   <data name="ALERT_ALARM_DOM0_MEMORY_DEMAND" xml:space="preserve">
     <value>控制域内存要求警报</value>
@@ -1709,7 +1709,7 @@
     <value>{0} 上的日志分区的磁盘使用量已达到 {1}。如果此磁盘满载，日志记录功能将受到严重影响。应删除旧日志文件。</value>
   </data>
   <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
-    <value>内存使用率警报</value>
+    <value>内存使用量警报</value>
   </data>
   <data name="ALERT_ALARM_MEMORY_DESCRIPTION" xml:space="preserve">
     <value>在过去 {2}内{0}上的可用内存为 {1}。
@@ -1766,7 +1766,7 @@
 请注意，如果启用了 RBAC，则将仅影响您有权消除的警报。</value>
   </data>
   <data name="ALERT_DOM0_MEMORY_SUB_TEXT" xml:space="preserve">
-    <value>当控制域内存使用率 {1} 分钟内超过 {0} 时:</value>
+    <value>当控制域内存使用量 {1} 分钟内超过 {0} 时:</value>
   </data>
   <data name="ALERT_EXPORT_ALL_BUTTON" xml:space="preserve">
     <value>全部导出(&amp;A)</value>
@@ -3554,10 +3554,10 @@
     <value>当前位置</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE" xml:space="preserve">
-    <value>当前内存使用率: {0}</value>
+    <value>当前内存使用量: {0}</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE_MULTIPLE" xml:space="preserve">
-    <value>当前内存使用率: 每个 VM {0}</value>
+    <value>当前内存使用量: 每个 VM {0}</value>
   </data>
   <data name="CURRENT_POLICY" xml:space="preserve">
     <value>当前策略</value>
@@ -8853,7 +8853,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>此主机的磁盘空间不足，无法安装此更新</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
-    <value>空间不足，无法自动更新“{0}”。</value>
+    <value>空间不足，无法通过自动更新更新“{0}”。</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>可用空间: {0}</value>
@@ -9092,22 +9092,22 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>粘贴</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>更新过程未成功完成。</value>
+    <value>自动更新过程未成功完成。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
-    <value>自动升级过程中出现以下错误:</value>
+    <value>执行自动更新过程中出现以下错误:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
-    <value>自动升级过程中出现以下错误: </value>
+    <value>执行自动更新过程中出现以下错误:</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
-    <value>更新未成功完成</value>
+    <value>更新未成功完成。</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>上载并安装</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
-    <value>自动上载并安装更新</value>
+    <value>上载并安装更新</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>清理...</value>
@@ -9205,7 +9205,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>执行更新预检查是为了确认更新 {0} 能够在服务器上应用。</value>
   </data>
-  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE" xml:space="preserve">
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>已执行预检查，以验证自动更新是否能够继续。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
@@ -9244,10 +9244,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>[XenServer] 更新和补充包(*.{0}、*.iso)|*.{0};*.iso</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>自动更新功能在此 [XenServer] 版本上不受支持</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
     <value>自动更新功能在部分升级的 [XenServer] 池中不受支持</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
@@ -9256,8 +9256,8 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING" xml:space="preserve">
-    <value>未授权此服务器执行自动更新</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
+    <value>未许可此服务器执行自动更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新</value>
@@ -9265,8 +9265,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>更新不适用</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
+    <value>选择要更新的一个或多个池或独立主机。
+无法通过自动更新更新显示为灰色的服务器。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
+    <value>从可用服务器列表中选择一个或多个服务器。
+无法应用所选更新的服务器在此列表中显示为已禁用。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
-    <value>无法自动更新此服务器</value>
+    <value>无法通过自动更新更新此服务器</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE" xml:space="preserve">
     <value>此服务器已最新</value>
@@ -9277,16 +9285,8 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>选择要更新的服务器</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE" xml:space="preserve">
-    <value>选择要自动更新的一个或多个池或独立主机。
-无法自动更新显示为灰色的服务器。</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>从可用服务器列表中选择一个或多个服务器。
-无法应用所选更新的服务器在此列表中显示为已禁用。</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE" xml:space="preserve">
-    <value>已完成自动更新。</value>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
+    <value>自动更新已完成。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] 现在正在下载您的更新并将其上载到在上一步骤中指定的服务器。
@@ -9599,11 +9599,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="POOL_FAILURE_TOLERATE" xml:space="preserve">
     <value>容许 {0} 个故障</value>
   </data>
+  <data name="POOL_FORBIDS_AUTOMATED_UPDATES" xml:space="preserve">
+    <value>此服务器不支持自动更新。</value>
+  </data>
   <data name="POOL_FORBIDS_AUTOMATIC_RESTARTS" xml:space="preserve">
     <value>不能对要更新的所有服务器自动执行更新后任务。</value>
-  </data>
-  <data name="POOL_FORBIDS_AUTOMATIC_UPDATES" xml:space="preserve">
-    <value>此服务器不支持自动更新。</value>
   </data>
   <data name="POOL_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>池常规属性</value>
@@ -9761,6 +9761,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
     <value>未配置</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_CANNOT_BE_CHANGED" xml:space="preserve">
+    <value>无法更新此 PVS 缓存存储，因为其正在使用中。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_NOT_CONFIGURED" xml:space="preserve">
     <value>{0} (缓存存储配置不完整)</value>
