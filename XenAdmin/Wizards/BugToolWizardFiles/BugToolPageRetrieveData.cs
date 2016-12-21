@@ -109,6 +109,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 CancelAction();
         }
 
+        public override void SelectDefaultControl()
+        {
+            flickerFreeListBox1.Select();
+        }
+
         public List<Host> SelectedHosts { private get; set; }
         public IEnumerable<Capability> CapabilityList { private get; set; }
 
