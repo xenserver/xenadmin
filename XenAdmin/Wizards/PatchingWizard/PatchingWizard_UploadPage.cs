@@ -188,6 +188,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
+                            _poolUpdate = null;
+                            _patch = null;
+                            
                             action = new UploadSupplementalPackAction(
                             selectedServer.Connection,
                             SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(),
