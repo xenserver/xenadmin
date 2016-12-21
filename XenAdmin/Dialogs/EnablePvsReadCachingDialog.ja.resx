@@ -271,10 +271,10 @@
     <value>NoControl</value>
   </data>
   <data name="enableButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 3</value>
+    <value>130, 3</value>
   </data>
   <data name="enableButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 24</value>
+    <value>203, 24</value>
   </data>
   <data name="enableButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
