@@ -139,13 +139,13 @@
     <value>NoControl</value>
   </data>
   <data name="addSiteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 111</value>
+    <value>172, 111</value>
   </data>
   <data name="addSiteButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 3, 0</value>
   </data>
   <data name="addSiteButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 25</value>
+    <value>199, 25</value>
   </data>
   <data name="addSiteButton.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -268,7 +268,7 @@
     <value>5, 0, 3, 0</value>
   </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 25</value>
+    <value>199, 25</value>
   </data>
   <data name="AddButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -306,6 +306,9 @@
   <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="splitContainer.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
   <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
     <value>splitContainer.Panel2</value>
   </data>
@@ -317,6 +320,9 @@
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="splitContainer.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>400</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>763, 474</value>

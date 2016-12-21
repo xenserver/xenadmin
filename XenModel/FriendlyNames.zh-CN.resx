@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -958,7 +958,7 @@
     <value>活动代理内存</value>
   </data>
   <data name="Label-performance.xapi_memory_usage_kib" xml:space="preserve">
-    <value>代理内存使用率</value>
+    <value>代理内存使用量</value>
   </data>
   <data name="Label-performance.xapi_rx" xml:space="preserve">
     <value>&lt;内部&gt; 网络 {0} 接收</value>
@@ -1170,7 +1170,7 @@
     <value>已挂起虚拟机 {0}。</value>
   </data>
   <data name="Message.body-vm_uncooperative" xml:space="preserve">
-    <value>虚拟机“{0}”在收到请求时未降低其内存使用率。</value>
+    <value>虚拟机“{0}”在收到请求时未降低其内存使用量。</value>
   </data>
   <data name="Message.body-vmpp_archive_failed_0" xml:space="preserve">
     <value>无法完成此保护策略的存档操作。</value>
