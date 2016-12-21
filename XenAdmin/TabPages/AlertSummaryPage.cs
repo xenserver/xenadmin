@@ -57,6 +57,9 @@ namespace XenAdmin.TabPages
 
         private static readonly int ALERT_CAP = 1000;
 
+        private static Image IMAGE_CONTRACTED_TRIANGLE = Properties.Resources.contracted_triangle;
+        private static Image IMAGE_EXPANDED_TRIANGLE = Properties.Resources.expanded_triangle;
+
         private readonly CollectionChangeEventHandler m_alertCollectionChangedWithInvoke;
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private bool inAlertBuild;
@@ -259,13 +262,13 @@ namespace XenAdmin.TabPages
             if (expandedState.ContainsKey(alert.uuid))
             {
                 // show the expanded arrow and the body detail
-                expanderCell.Value = Properties.Resources.expanded_triangle;
+                expanderCell.Value = IMAGE_EXPANDED_TRIANGLE;
                 detailCell.Value = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
             }
             else
             {
                 // show the expand arrow and just the title
-                expanderCell.Value = Properties.Resources.contracted_triangle;
+                expanderCell.Value = IMAGE_CONTRACTED_TRIANGLE;
                 detailCell.Value = alert.Title;
             }
             appliesCell.Value = alert.AppliesTo;
@@ -400,13 +403,13 @@ namespace XenAdmin.TabPages
             if (expandedState.ContainsKey(alert.uuid))
             {
                 expandedState.Remove(alert.uuid);
-                row.Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[ColumnExpand.Index].Value = IMAGE_CONTRACTED_TRIANGLE;
                 row.Cells[ColumnMessage.Index].Value = alert.Title;
             }
             else
             {
                 expandedState.Add(alert.uuid, true);
-                row.Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[ColumnExpand.Index].Value = IMAGE_EXPANDED_TRIANGLE;
                 row.Cells[ColumnMessage.Index].Value = string.Format("{0}\n\n{1}", alert.Title, alert.Description);
             }
         }

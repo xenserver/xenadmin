@@ -54,6 +54,9 @@ namespace XenAdmin.TabPages
 
         internal event Action<IXenObject> GoToXenObjectRequested;
 
+        private static Image IMAGE_CONTRACTED_TRIANGLE = Properties.Resources.contracted_triangle;
+        private static Image IMAGE_EXPANDED_TRIANGLE = Properties.Resources.expanded_triangle;
+
         public HistoryPage()
         {
             InitializeComponent();
@@ -292,12 +295,12 @@ namespace XenAdmin.TabPages
 
             if (row.Expanded)
             {
-                row.Cells[columnExpander.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[columnExpander.Index].Value = IMAGE_CONTRACTED_TRIANGLE;
                 row.Cells[columnMessage.Index].Value = row.Action.GetTitle();
             }
             else
             {
-                row.Cells[columnExpander.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[columnExpander.Index].Value = IMAGE_EXPANDED_TRIANGLE;
                 row.Cells[columnMessage.Index].Value = row.Action.GetDetails();
             }
             row.Expanded = !row.Expanded;
@@ -540,12 +543,12 @@ namespace XenAdmin.TabPages
 
                 if (Expanded)
                 {
-                    expanderCell.Value = Properties.Resources.expanded_triangle;
+                    expanderCell.Value = IMAGE_EXPANDED_TRIANGLE;
                     messageCell.Value = Action.GetDetails();
                 }
                 else
                 {
-                    expanderCell.Value = Properties.Resources.contracted_triangle;
+                    expanderCell.Value = IMAGE_CONTRACTED_TRIANGLE;
                     messageCell.Value = Action.GetTitle();
                 }
                 locationCell.Value = Action.GetLocation();
