@@ -150,8 +150,3 @@ STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
 WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
-
-WGET_OPT="-T 10 -N -q"
-WGET () { wget ${WGET_OPT} "${@}"; }
-
-ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
