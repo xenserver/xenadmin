@@ -38,7 +38,8 @@ set -u
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-_WGET () { WGET --timestamp "${@}"; }
+WGET() { wget -T 10 -N -q --timestamp "${@}"; }
+
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -117,7 +118,7 @@ dotnet_cp_to_dir ()
     then
         cp "${DOTNET_LOC}/${src}" "${destdir}/" || cp "${DOTNET_LOC_TRUNK}/${src}" "${destdir}/"
     else
-        _WGET -P "${destdir}" "${WEB_DOTNET}/${src}"
+        WGET -P "${destdir}" "${WEB_DOTNET}/${src}"
     fi
 }
 
@@ -129,7 +130,7 @@ dotnet_cp_file ()
     then
         cp "${DOTNET_LOC}/${src}" "${dest}" || cp "${DOTNET_LOC_TRUNK}/${src}" "${dest}"
     else
-        _WGET -O "${dest}" "${WEB_DOTNET}/${src}"
+        WGET -O "${dest}" "${WEB_DOTNET}/${src}"
     fi
 }
 
@@ -144,14 +145,14 @@ dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
 dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
 #bring in the ovf fixup iso from artifactory (currently one location)
-_WGET -P "${SCRATCH_DIR}" ${REPO_CITRITE_HOST}/list/xs-local-contrib/citrix/xencenter/XenCenterOVF.zip
+WGET -P "${SCRATCH_DIR}" ${REPO_CITRITE_HOST}/list/xs-local-contrib/citrix/xencenter/XenCenterOVF.zip
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit
-_WGET -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
-_WGET -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
-_WGET -P ${SCRATCH_DIR} ${REPO_CITRITE_LIB}/wix/3.10/{wix310-debug.zip,wix310-binaries.zip}
+WGET -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
+WGET -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
+WGET -P ${SCRATCH_DIR} ${REPO_CITRITE_LIB}/wix/3.10/{wix310-debug.zip,wix310-binaries.zip}
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
@@ -160,7 +161,7 @@ source ${REPO}/mk/re-branding.sh
 function get_hotfixes ()
 {
     local -r p="$1"
-    _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/ || _WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/trunk/
+    WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/ || WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/trunk/
 }
 
 #bring RPU hotfixes
