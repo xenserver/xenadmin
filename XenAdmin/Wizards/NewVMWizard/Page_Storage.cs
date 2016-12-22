@@ -93,6 +93,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             LoadDisks();
             UpdateEnablement();
             UpdateCloneCheckboxEnablement(true);
+        }
+
+        public override void SelectDefaultControl()
+        {
             DisksGridView.Select();
         }
 

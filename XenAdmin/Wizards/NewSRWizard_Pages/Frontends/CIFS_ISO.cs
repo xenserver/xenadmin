@@ -109,6 +109,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.comboBoxCifsSharename.Items.AddRange(add_srs.ToArray());
         }
 
+        public override void SelectDefaultControl()
+        {
+            comboBoxCifsSharename.Select();
+        }
+
         #endregion
 
         #region Accessors

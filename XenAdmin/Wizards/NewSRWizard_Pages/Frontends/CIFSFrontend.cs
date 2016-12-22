@@ -84,6 +84,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 listBoxCifsSRs.SetMustSelectUUID(SrWizardType.UUID);
         }
 
+
+        public override void SelectDefaultControl()
+        {
+            CifsServerPathTextBox.Select();
+        }
+
         #endregion
 
         private void UpdateButtons()

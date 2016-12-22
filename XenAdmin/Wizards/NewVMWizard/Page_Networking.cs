@@ -98,6 +98,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 NetworksGridView.Rows[0].Selected = true;
 
             UpdateEnablement();
+        }
+
+        public override void SelectDefaultControl()
+        {
             NetworksGridView.Select();
         }
 

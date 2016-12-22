@@ -84,7 +84,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             var entries = SummaryRetreiver.Invoke();
             foreach (KeyValuePair<string, string> pair in entries)
                 SummaryGridView.Rows.Add(pair.Key, pair.Value);
-            
+        }
+
+        public override void SelectDefaultControl()
+        {
             AutoStartCheckBox.Select();
         }
 

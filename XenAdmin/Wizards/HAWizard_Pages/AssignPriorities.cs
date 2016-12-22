@@ -694,6 +694,11 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             StartNtolUpdate();
         }
 
+        public override void SelectDefaultControl()
+        {
+            dataGridViewVms.Select();
+        }
+
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             StopNtolUpdate();
