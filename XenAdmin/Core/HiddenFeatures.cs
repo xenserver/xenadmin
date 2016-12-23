@@ -74,6 +74,11 @@ namespace XenAdmin.Core
             { return Registry.HiddenFeatures != null && Registry.HiddenFeatures.Contains(LICENSE_OPERATIONS_HIDDEN); }
         }
 
+        internal static bool WindowsUpdateHidden
+        {
+            get { return Registry.HiddenFeatures != null && Registry.HiddenFeatures.Contains(WINDOWS_UPDATE_HIDDEN); }
+        }
+
         private const string CPS_OPTIMIZATION_HIDDEN = "cps_optimization";
         private const string RDP_POLLING_HIDDEN = "rdp_polling";
         private const string LEARN_MORE_HIDDEN = "learn_more";
@@ -85,5 +90,6 @@ namespace XenAdmin.Core
         private const string UPLOAD_OPTION_HIDDEN = "upload_option";
         private const string LICENSE_NAG = "license_nag";
         private const string LICENSE_OPERATIONS_HIDDEN = "license_operations";
+        private const string WINDOWS_UPDATE_HIDDEN = "windows_update";
     }
 }

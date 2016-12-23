@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value> 指定本地工作空间以放置所下载的文件。如果其中任何文件已存在，将覆盖现有文件，因此建议使用空文件夹。</value>
+    <value>指定本地工作区以放置所下载的文件。如果其中任何文件已存在，则会被覆盖，因此建议使用空文件夹。</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
@@ -538,7 +538,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>本地工作空间:</value>
+    <value>本地工作区:</value>
   </data>
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

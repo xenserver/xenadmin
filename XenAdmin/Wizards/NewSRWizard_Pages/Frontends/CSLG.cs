@@ -140,17 +140,19 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (_srToReattach == null || _srToReattach.type == "cslg")
                 {
                     var action = new SrCslgAdaptersScanAction(Connection);
-                    var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-                    // never show the error message if it fails.
-                    action.Completed += s =>
+                    using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                     {
-                        if (!action.Succeeded)
+                        // never show the error message if it fails.
+                        action.Completed += s =>
                         {
-                            Program.Invoke(dialog, dialog.Close);
-                        }
-                    };
+                            if (!action.Succeeded)
+                            {
+                                Program.Invoke(dialog, dialog.Close);
+                            }
+                        };
 
-                    dialog.ShowDialog(this);
+                        dialog.ShowDialog(this);
+                    }
                     if (action.Succeeded)
                     {
                         var adapters = action.GetAdapters();

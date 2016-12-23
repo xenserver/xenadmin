@@ -55,6 +55,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
+        public bool IsInAutomaticMode { get; set; }
+        private AsyncAction resolvePrechecksAction = null;
 
         protected List<Pool> SelectedPools
         {
@@ -68,7 +70,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             InitializeComponent();
             dataGridView1.BackgroundColor = dataGridView1.DefaultCellStyle.BackColor;
-            checkBoxViewPrecheckFailuresOnly.Checked = true;
         }
 
         public override string PageTitle
@@ -92,11 +93,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "UpdatePrechecks"; }
         }
 
-        public override bool EnablePrevious()
-        {
-            return _worker != null && !_worker.IsBusy;
-        }
-        
         void Connection_ConnectionStateChanged(object sender, EventArgs e)
         {
             Program.Invoke(Program.MainWindow, RefreshRechecks);
@@ -127,9 +123,23 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                labelPrechecksFirstLine.Text = Patch != null 
-                    ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, Patch.Name) 
-                    : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
+                if (IsInAutomaticMode)
+                {
+                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE;
+                }
+                else
+                {
+                    string patchName = null;
+                    if (Patch != null)
+                        patchName = Patch.Name;
+                    if (PoolUpdate != null)
+                        patchName = PoolUpdate.Name;
+
+                    labelPrechecksFirstLine.Text = patchName != null
+                        ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, patchName)
+                        : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
+                }
+
                 RefreshRechecks();
             }
             catch (Exception e)
@@ -141,7 +151,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected void RefreshRechecks()
         {
-            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = false;
+            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = false;
             _worker = null;
             _worker = new BackgroundWorker();
             _worker.DoWork += new DoWorkEventHandler(worker_DoWork);
@@ -149,7 +159,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             _worker.WorkerSupportsCancellation = true;
             _worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
             _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
-            _worker.RunWorkerAsync(Patch);
+            
+            if (Patch != null)
+                _worker.RunWorkerAsync(Patch);
+            else
+                _worker.RunWorkerAsync(PoolUpdate);
         }
 
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -157,6 +171,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!e.Cancelled)
                 OnPageUpdated();
             progressBar1.Value = 100;
+            labelProgress.Text = string.Empty;
 
             bool showResolveAllButton = false;
             foreach (PreCheckGridRow row in dataGridView1.Rows)
@@ -179,7 +194,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             buttonResolveAll.Enabled = showResolveAllButton;
-            buttonReCheckProblems.Enabled = true;
+            buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = true;
         }
 
         private void AddRowToGridView(DataGridViewRow row)
@@ -212,6 +227,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 progressBar1.Value += (step + progressBar1.Value) > 100 ? 0 : step;
             }
             catch (Exception) { }
+        }
+
+        private bool IsCheckInProgress
+        {
+            get { return _worker != null && _worker.IsBusy; }
+        }
+
+        private bool IsResolveActionInProgress
+        {
+            get { return resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted; }
         }
 
         private List<PreCheckHostRow> ExecuteCheck(Check check)
@@ -259,10 +284,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                                          {
                                              dataGridView1.Rows.Clear();
                                              progressBar1.Value = 0;
+                                             labelProgress.Text = Messages.PATCHING_WIZARD_RUNNING_PRECHECKS;
                                          });
                 Pool_patch patch = e.Argument as Pool_patch;
+                Pool_update update = e.Argument as Pool_update;
 
-                List<KeyValuePair<string, List<Check>>> checks = GenerateChecks(patch);
+                LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
+
+                List<KeyValuePair<string, List<Check>>> checks = update != null ? GenerateChecks(update) : GenerateChecks(patch); //patch is expected to be null for RPU
                 _numberChecks = checks.Count;
                 for (int i = 0; i < checks.Count; i++)
                 {
@@ -290,7 +319,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (PreCheckHostRow row in ExecuteCheck(check))
                         {
                             if (precheckResult != PreCheckResult.Failed && row.Problem != null)
-                                precheckResult = row.IsProblem ? PreCheckResult.Failed : PreCheckResult.Warning;
+                                precheckResult = row.PrecheckResult;
                             _worker.ReportProgress(PercentageSelectedServers(j + 1), row);
                         }
                     }
@@ -303,7 +332,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
+        public Dictionary<string, livepatch_status> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
+
+        protected virtual List<KeyValuePair<string, List<Check>>> GenerateCommonChecks()
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
 
@@ -324,19 +359,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     checkGroup.Add(new HAOffCheck(host));
             }
 
-            //Checking can evacuate host
-            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
-            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
-            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
-            {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
-                {
-                        checkGroup.Add(new AssertCanEvacuateCheck(host));
-                }
-            }
-
             //PBDsPluggedCheck
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, new List<Check>()));
             checkGroup = checks[checks.Count - 1].Value;
@@ -345,6 +367,42 @@ namespace XenAdmin.Wizards.PatchingWizard
                 checkGroup.Add(new PBDsPluggedCheck(host));
             }
 
+            //Disk space check for batch hotfixing
+            if (IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+
+                foreach (Pool pool in SelectedPools)
+                {
+                    var us = Updates.GetUpgradeSequence(pool.Connection);
+
+                    bool elyOrGreater = Helpers.ElyOrGreater(pool.Connection);
+
+                    foreach (Host host in us.Keys)
+                    {
+                        checkGroup.Add(
+                            new DiskSpaceForBatchUpdatesCheck(
+                                host,
+                                elyOrGreater
+                                    ? us[host].Sum(p => p.InstallationSize) // all updates on this host
+                                    : host.IsMaster()
+                                        ? us[host].Sum(p => p.InstallationSize) + us.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master + largest update in pool
+                                        : us[host].Sum(p => p.InstallationSize) + us[host].Max(p => p.InstallationSize) // non-master: all updates on this host + largest on this host
+                        ));
+                    }
+                }
+            }
+
+            return checks;
+        }
+
+        protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
+        {
+            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
+            
+            List<Check> checkGroup;
+            
             //Checking other things
             if (patch != null)
             {
@@ -354,9 +412,84 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
                     Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => string.Equals(otherPatch.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase));
-                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
+                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost, LivePatchCodesByHost));
                 }
             }
+
+            //Checking if the host needs a reboot
+            if (!IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                var guidance = patch != null
+                    ? patch.after_apply_guidance
+                    : new List<after_apply_guidance> {after_apply_guidance.restartHost};
+                foreach (var host in SelectedServers)
+                {
+                    checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
+                }
+            }
+
+            //Checking can evacuate host
+            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
+            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
+            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
+                }
+            }
+
+            return checks;
+        }
+
+        protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_update update)
+        {
+            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
+
+            List<Check> checkGroup;
+
+            //Checking other things
+            if (update != null)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_SIDE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    List<Pool_update> updates = new List<Pool_update>(host.Connection.Cache.Pool_updates);
+                    Pool_update poolUpdateFromHost = updates.Find(otherPatch => string.Equals(otherPatch.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
+                    checkGroup.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost));
+                }
+            }
+
+            //Checking if the host needs a reboot
+            if (!IsInAutomaticMode)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                var guidance = update != null
+                    ? update.after_apply_guidance
+                    : new List<update_after_apply_guidance> {update_after_apply_guidance.restartHost};
+                foreach (var host in SelectedServers)
+                {
+                    checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
+                }
+            }
+
+            //Checking can evacuate host
+            if (update == null || update.after_apply_guidance.Contains(update_after_apply_guidance.restartHost))
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
+                }
+            }
+
             return checks;
         }
 
@@ -373,6 +506,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             DeregisterEventHandlers();
             if (_worker != null)
                 _worker.CancelAsync();
+            if (resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted)
+                resolvePrechecksAction.Cancel();
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
@@ -387,6 +522,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLeave(direction, ref cancel);
         }
 
+        public override bool EnablePrevious()
+        {
+            return !IsCheckInProgress && !IsResolveActionInProgress;
+        }
+        
         public override bool EnableNext()
         {
             bool problemsFound = false;
@@ -398,21 +538,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                     problemsFound = true;
                     break;
                 }
-
             }
 
-            bool result = _worker != null && !_worker.IsBusy && !problemsFound;
-            panelErrorsFound.Visible = problemsFound;
-            return result;
+            UpdateControls(problemsFound);
+            return !IsCheckInProgress && !IsResolveActionInProgress && !problemsFound;
         }
 
         public UpdateType SelectedUpdateType { private get; set; }
         public Pool_patch Patch { private get; set; }
-        public List<Pool_patch> NewUploadedPatches { private get; set; }
+        public Pool_update PoolUpdate { private get; set; }
 
-        internal enum PreCheckResult { OK, Warning, Failed }
+        internal enum PreCheckResult { OK, Info, Warning, Failed }
 
-        private abstract class PreCheckGridRow : DataGridViewRow
+        private abstract class PreCheckGridRow : XenAdmin.Controls.DataGridViewEx.DataGridViewExRow
         {
             protected DataGridViewImageCell _iconCell = new DataGridViewImageCell();
             protected DataGridViewTextBoxCell _descriptionCell = new DataGridViewTextBoxCell();
@@ -441,9 +579,22 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             public void UpdateDescription(PreCheckResult precheckResult)
             {
-                string result = precheckResult == PreCheckResult.OK
-                                    ? Messages.GENERAL_STATE_OK
-                                    : precheckResult == PreCheckResult.Warning ? Messages.WARNING : Messages.FAILED;
+                string result;
+                switch (precheckResult)
+                {
+                    case PreCheckResult.OK:
+                        result = Messages.GENERAL_STATE_OK;
+                        break;
+                    case PreCheckResult.Info:
+                        result = Messages.INFORMATION;
+                        break;
+                    case PreCheckResult.Warning:
+                        result = Messages.WARNING;
+                        break;
+                    default:
+                        result = Messages.FAILED;
+                        break;
+                }
 
                 _descriptionCell.Value = string.Format("{0} {1}", description, result);
             }
@@ -479,15 +630,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             private void UpdateRowFields()
             {
                 _iconCell.Value = Problem == null
-                    ? Resources._000_Tick_h32bit_16
-                    : Problem is Warning ? Resources._000_Alert2_h32bit_16 : Resources._000_Abort_h32bit_16;
+                    ? Images.GetImage16For(Icons.Ok)
+                    : Problem.Image;
 
                 string description = string.Empty;
 
                 if (Problem != null)
                     description = Problem.Description;
                 else if (_check != null)
-                    description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description);
+                {
+                    description = _check.SuccessfulCheckDescription;
+                    if (string.IsNullOrEmpty(description))
+                        description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description);
+                }
                 
                 if (description != string.Empty)
                     _descriptionCell.Value = String.Format(Messages.PATCHING_WIZARD_DESC_CELL_INDENT, null, description);
@@ -500,8 +655,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (Problem is ProblemWithInformationUrl)
                     _solutionCell.Value = (Problem as ProblemWithInformationUrl).LinkText;
 
-                _solutionCell.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
-                _solutionCell.Style.ForeColor = Color.Blue;
+                UpdateSolutionCellStyle();
+            }
+
+            private void UpdateSolutionCellStyle()
+            {
+                if (_solutionCell == null)
+                    return;
+                if (Enabled) 
+                {
+                    _solutionCell.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
+                    _solutionCell.Style.ForeColor = Color.Blue;
+                }
+                else
+                    _solutionCell.Style = DefaultCellStyle;
             }
 
             public Problem Problem
@@ -521,6 +688,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 get { return _problem != null && !(_problem is Warning); }
             }
+            
+            public PreCheckResult PrecheckResult
+            {
+                get
+                {
+                    if (Problem == null)
+                        return PreCheckResult.OK;
+                    if (_problem is Information) 
+                        return PreCheckResult.Info;
+                    if (_problem is Warning) 
+                        return PreCheckResult.Warning;
+                    return PreCheckResult.Failed;
+                }
+            }
 
             public override bool Equals(object obj)
             {
@@ -535,14 +716,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return (_problem != null ? _problem.GetHashCode() : 0);
             }
 
+            public override bool Enabled
+            {
+                get
+                {
+                    return base.Enabled;
+                }
+                set
+                {
+                    base.Enabled = value;
+                    UpdateSolutionCellStyle();
+                }
+            }
         }
 
-
-        private ActionProgressDialog _progressDialog = null;
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             PreCheckHostRow preCheckHostRow = dataGridView1.Rows[e.RowIndex] as PreCheckHostRow;
-            if (preCheckHostRow != null && e.ColumnIndex == 2)
+            if (preCheckHostRow != null && preCheckHostRow.Enabled && e.ColumnIndex == 2)
             {
                 ExecuteSolution(preCheckHostRow);
             }
@@ -555,7 +746,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PreCheckHostRow preCheckHostRow = dataGridView1.CurrentCell.OwningRow as PreCheckHostRow;
                 int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
-                if (preCheckHostRow != null && columnIndex == 2)
+                if (preCheckHostRow != null && preCheckHostRow.Enabled && columnIndex == 2)
                     ExecuteSolution(preCheckHostRow);
             }
         }
@@ -563,13 +754,20 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void ExecuteSolution(PreCheckHostRow preCheckHostRow)
         {
             bool cancelled;
-            AsyncAction action = preCheckHostRow.Problem.SolveImmediately(out cancelled);
+            resolvePrechecksAction = preCheckHostRow.Problem.SolveImmediately(out cancelled);
 
-            if (action != null)
+            if (resolvePrechecksAction != null)
             {
-                action.Completed += action_Completed;
-                _progressDialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-                _progressDialog.ShowDialog(this);
+                // disable all problems 
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    PreCheckHostRow preCheckRow = row as PreCheckHostRow;
+                    if (preCheckRow != null && preCheckRow.Problem != null)
+                    {
+                        preCheckRow.Enabled = false;
+                    }
+                }
+                StartResolvePrechecksAction();
             }
             else
             {
@@ -579,18 +777,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     (preCheckHostRow.Problem as ProblemWithInformationUrl).LaunchUrlInBrowser();
                     
                 else if (!cancelled)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
                                                                         string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"),
-                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)).ShowDialog(this);
+                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
             }
         }
-
-        private void action_Completed(ActionBase sender)
-        {
-            Thread.Sleep(1000);
-            Program.Invoke(Program.MainWindow, RefreshRechecks);
-        }
-
 
         private void buttonReCheckProblems_Click(object sender, EventArgs e)
         {
@@ -607,17 +801,69 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     bool cancelled;
                     AsyncAction action = preCheckHostRow.Problem.SolveImmediately(out cancelled);
-                    
                     if (action != null)
+                    {
+                        preCheckHostRow.Enabled = false;
                         actions.Add(action);
+                    }
                 }
             }
-            var multipleAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
-            _progressDialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
-            _progressDialog.ShowDialog(this);
-            Program.Invoke(Program.MainWindow, RefreshRechecks);
+            resolvePrechecksAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
+            StartResolvePrechecksAction();
         }
 
+        private void resolvePrecheckAction_Changed(object sender)
+        {
+            var action = sender as AsyncAction;
+            if (action == null)
+                return;
+
+            Program.Invoke(this, () => UpdateActionProgress(action));
+        }
+
+        private void resolvePrecheckAction_Completed(object sender)
+        {
+            var action = sender as AsyncAction;
+            if (action == null)
+                return;
+
+            action.Changed -= resolvePrecheckAction_Changed;
+            action.Completed -= resolvePrecheckAction_Completed;
+
+            Program.Invoke(this,  () =>
+            {
+                UpdateControls();
+                RefreshRechecks();
+            });
+        }
+
+        private void StartResolvePrechecksAction()
+        {
+            if (resolvePrechecksAction == null)
+                return;
+            resolvePrechecksAction.Changed += resolvePrecheckAction_Changed;
+            resolvePrechecksAction.Completed += resolvePrecheckAction_Completed;
+            resolvePrechecksAction.RunAsync();
+            UpdateActionProgress(resolvePrechecksAction);
+            UpdateControls();
+            OnPageUpdated();
+        }
+
+        private void UpdateActionProgress(AsyncAction action)
+        {
+            progressBar1.Value = action == null ? 0 : action.PercentComplete;
+            labelProgress.Text = action == null ? string.Empty : action.Description;
+        }
+
+        private void UpdateControls(bool problemsFound = false)
+        {
+            bool actionInProgress = IsResolveActionInProgress;
+            bool checkInProgress = IsCheckInProgress;
+            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress && !checkInProgress;
+            labelProgress.Visible = actionInProgress || checkInProgress || !problemsFound;
+            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
+        }
+        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             RefreshRechecks();
@@ -626,10 +872,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             PreCheckHostRow preCheckHostRow = dataGridView1.Rows[e.RowIndex] as PreCheckHostRow;
-            if (preCheckHostRow != null && e.ColumnIndex == 2 && !string.IsNullOrEmpty(preCheckHostRow.Solution))
-            {
+            if (preCheckHostRow != null && preCheckHostRow.Enabled && e.ColumnIndex == 2 && !string.IsNullOrEmpty(preCheckHostRow.Solution))
                 Cursor = Cursors.Hand;
-            }
             else
                 Cursor = Cursors.Arrow;
         }

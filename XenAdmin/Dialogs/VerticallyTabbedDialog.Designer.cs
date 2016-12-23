@@ -38,6 +38,7 @@ namespace XenAdmin.Dialogs
             this.ContentPanel = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -137,6 +138,7 @@ namespace XenAdmin.Dialogs
             this.Name = "VerticallyTabbedDialog";
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.blueBorder.ResumeLayout(false);
             this.TopPanel.ResumeLayout(false);

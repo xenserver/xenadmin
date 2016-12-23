@@ -415,7 +415,7 @@ namespace XenAdmin.Model
         public static void Create(IXenConnection connection, params string[] paths)
         {
             if (paths.Length > 0)
-                new FolderAction(connection, FolderAction.Kind.New, paths).RunAsync();
+                new CreateFolderAction(connection, paths).RunAsync();
         }
 
         public static void Move(Session session, IXenObject ixmo, Folder target)
@@ -434,7 +434,7 @@ namespace XenAdmin.Model
                     return;
             }
 
-            FolderAction action = new FolderAction(ixmo, target, FolderAction.Kind.Move);
+            FolderAction action = new MoveToFolderAction(ixmo, target);
             if (session == null)
                 action.RunAsync();
             else
@@ -457,7 +457,7 @@ namespace XenAdmin.Model
             if (folder == null)
                 return;
 
-            new FolderAction(folder, new_name, FolderAction.Kind.Rename).RunAsync();
+            new RenameFolderAction(folder, new_name).RunAsync();
         }
 
         public static void Unfolder(Session session, IXenObject ixmo)
@@ -465,7 +465,7 @@ namespace XenAdmin.Model
             if (ixmo == null)
                 return;
 
-            FolderAction action = new FolderAction(ixmo, null, FolderAction.Kind.Delete);
+            var action = new DeleteFolderAction(ixmo);
             if (session == null)
                 action.RunAsync();
             else

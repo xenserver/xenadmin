@@ -237,7 +237,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		private void m_buttonBrowse_Click(object sender, EventArgs e)
 		{
-			using (FolderBrowserDialog dlog = new FolderBrowserDialog())
+            using (FolderBrowserDialog dlog = new FolderBrowserDialog { Description = Messages.FOLDER_BROWSER_EXPORT_APPLIANCE })
 			{
 				if (dlog.ShowDialog() == DialogResult.OK)
 					m_textBoxFolderName.Text = dlog.SelectedPath;

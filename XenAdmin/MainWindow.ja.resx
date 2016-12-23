@@ -318,6 +318,30 @@
   <data name="&gt;&gt;TabPageConsole.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="TabPageCvmConsole.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageCvmConsole.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageCvmConsole.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="TabPageCvmConsole.Text" xml:space="preserve">
+    <value>Nutanix CVM コンソール</value>
+  </data>
+  <data name="&gt;&gt;TabPageCvmConsole.Name" xml:space="preserve">
+    <value>TabPageCvmConsole</value>
+  </data>
+  <data name="&gt;&gt;TabPageCvmConsole.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageCvmConsole.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageCvmConsole.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="TabPageStorage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -349,7 +373,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageStorage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="TabPagePhysicalStorage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -376,7 +400,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPagePhysicalStorage.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="TabPageSR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -406,7 +430,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSR.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="TabPageNetwork.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -436,7 +460,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageNetwork.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="TabPageNICs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -469,7 +493,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageNICs.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="TabPagePeformance.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -499,7 +523,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPagePeformance.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="TabPageHA.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -526,7 +550,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageHA.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="TabPageHAUpsell.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -553,7 +577,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageHAUpsell.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="snapshotPage.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -610,7 +634,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSnapshots.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="TabPageWLB.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -634,7 +658,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageWLB.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="TabPageWLBUpsell.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -658,7 +682,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageWLBUpsell.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="TabPageAD.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -682,7 +706,34 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageAD.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
+  </data>
+  <data name="TabPageADUpsell.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageADUpsell.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPageADUpsell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageADUpsell.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="TabPageADUpsell.Text" xml:space="preserve">
+    <value>ユーザー</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.Name" xml:space="preserve">
+    <value>TabPageADUpsell</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageADUpsell.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="TabPageGPU.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -706,7 +757,34 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageGPU.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
+  </data>
+  <data name="TabPagePvs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPagePvs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPagePvs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPagePvs.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="TabPagePvs.Text" xml:space="preserve">
+    <value>PVS</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.Name" xml:space="preserve">
+    <value>TabPagePvs</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPagePvs.ZOrder" xml:space="preserve">
+    <value>20</value>
   </data>
   <data name="TabPageSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -736,7 +814,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>21</value>
   </data>
   <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -766,7 +844,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>22</value>
   </data>
   <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -796,7 +874,7 @@
     <value>TheTabControl</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>23</value>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>
@@ -1958,23 +2036,22 @@
   </data>
   <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="powerOnToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK8gAA
-        CvIBPVL3EQAAAzRJREFUOE9tk21Mk1cYht9/BeGPYguzfsTFTzrnKAjO+bmZzLC5kCnQAHZKRVZGhcpa
-        EKGroWNStg4N1q0aSIYISjMx1BXCyhSDCmPpn20uuswumfHHEteK8SuGy/O+iwld9uM+yck59/PkPPd1
-        JCBOw8PD6sHBQUcgELja39//zO/3P+vp6bna1dXl6OjoUP/3ftxGmG3fDV3EN+Ll01EHNVfMfHTZxIFg
-        BY3+Ory+47S3t9tmemaavX2hs7jGDmEbs1D6fSFVo/swXzKSG9jMjuDb7Ox/h8YT9bjdbm9cAWF2nxk5
-        Tf21aiou72HnYC7bL77Fg6dTTAlln1uB7sxC1vals86/GkubGafT6VYKCLM2MDRA/ZiVvSPFlP1Qwm/3
-        fiFfFJl6el/RpvN6wn9PsubsSlZ2LuCNzgzsjTbsdrtWEgNzHQt5sIyaRNc3uXHvZ6XrlvNZ3PjjV0Xp
-        3VpiT2L8ePc6aW1J5JxcRX5zHlar1SWJaYdrQ1W8L97YMFZDLBbj49EKlp1OFaYo0cdRNCcSMQ0UKWcf
-        9BWyuEXDZvfrVFZWhiUR1ZPSkIGN32bgnTjK75FbLO3SML8zWTHLUrcloGlN4tbtmxwJNpHqSCbnyGuU
-        l5dHJZFztCSYR9a55bRPePjzToR5HclovkpEfSwB9RcJzP1MFGiaReSvCK3BZtS2JLKbXsVkMk1JApJw
-        yYUd6HuXiMh2Mz09TdnQLqXr3NYEUpqFnCpMvcXKWek3xSy0q1lfn43RaAxLgjDX/p4PlXhe+jqZn+5O
-        EH0UxTxQSkqTijkOFWW9RqIP/2EyMk6KJZFMh45tlVspKipySQJP7VFfGxu6M1nu06L3rWDyzoTSbaYm
-        b4+zumEZL1fPI6tuFYUlBRQUFGgVkASe7gPHq5R40r9chMY5i93dBjwhN57hFoynDMwxJ7LUOh99bTrb
-        Tbmy+V+Q5EWWjGd1i4VNnhyyPn+FxQ1pzK5SMbtCxaLqVPQHdaytyeC9Pe/K5niUX0jgaatrqCXfkccW
-        xzoyP9GReUjH+ppstpm3Yig2yOb//0wvJPBME4QdFpCMi5zlqORpj4uBHRbmtPj7SM8BGG2BcDWQi8oA
-        AAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAryAAAK8gE9UvcRAAADNElE
+        QVQ4T22TbUyTVxiG338F4Y9iC7N+xMVPOucoCM75uZnMsLmQKdAAdkpFVkaFyloQoauhY1K2Dg3WrRpI
+        hghKMzHUFcLKFIMKY+mfbS66zC6Z8ccS14rxK4bL876LCV324z7JyTn38+Q893UkIE7Dw8PqwcFBRyAQ
+        uNrf3//M7/c/6+npudrV1eXo6OhQ//d+3EaYbd8NXcQ34uXTUQc1V8x8dNnEgWAFjf46vL7jtLe322Z6
+        Zpq9faGzuMYOYRuzUPp9IVWj+zBfMpIb2MyO4Nvs7H+HxhP1uN1ub1wBYXafGTlN/bVqKi7vYedgLtsv
+        vsWDp1NMCWWfW4HuzELW9qWzzr8aS5sZp9PpVgoIszYwNED9mJW9I8WU/VDCb/d+IV8UmXp6X9Gm83rC
+        f0+y5uxKVnYu4I3ODOyNNux2u1YSA3MdC3mwjJpE1ze5ce9npeuW81nc+ONXRendWmJPYvx49zppbUnk
+        nFxFfnMeVqvVJYlph2tDVbwv3tgwVkMsFuPj0QqWnU4VpijRx1E0JxIxDRQpZx/0FbK4RcNm9+tUVlaG
+        JRHVk9KQgY3fZuCdOMrvkVss7dIwvzNZMctStyWgaU3i1u2bHAk2kepIJufIa5SXl0clkXO0JJhH1rnl
+        tE94+PNOhHkdyWi+SkR9LAH1FwnM/UwUaJpF5K8IrcFm1LYksptexWQyTUkCknDJhR3oe5eIyHYzPT1N
+        2dAupevc1gRSmoWcKky9xcpZ6TfFLLSrWV+fjdFoDEuCMNf+ng+VeF76Opmf7k4QfRTFPFBKSpOKOQ4V
+        Zb1Gog//YTIyToolkUyHjm2VWykqKnJJAk/tUV8bG7ozWe7TovetYPLOhNJtpiZvj7O6YRkvV88jq24V
+        hSUFFBQUaBWQBJ7uA8erlHjSv1yExjmL3d0GPCE3nuEWjKcMzDEnstQ6H31tOttNubL5X5DkRZaMZ3WL
+        hU2eHLI+f4XFDWnMrlIxu0LFoupU9Ad1rK3J4L0978rmeJRfSOBpq2uoJd+RxxbHOjI/0ZF5SMf6mmy2
+        mbdiKDbI5v//TC8k8EwThB0WkIyLnOWo5GmPi4EdFua0+PtIzwEYbYFwNZCLygAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="powerOnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -1988,22 +2065,21 @@
   </data>
   <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="ShutdownHostToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK8gAA
-        CvIBPVL3EQAAAvVJREFUOE9tU1tIk2EY/kW9VcRTsgvTi6TEC01E0As1ETQUCZ06dCBTJjoJL6YiJAvF
-        cEwUnWJkUlqZMkg8lGkWUcxTOtM5T/N0Y1fhpiEdlk/P/4fgoovnP7zv83zv973v8wkA3DA1NRU4MTFR
-        PzY2Zh4eHnaZTCbXwMCAub+/v763tzfwX77bD8XayfFxLHR0wFZXhz2VCjtFRbCUluKNVouezk4YjUbt
-        Rc1FcdeH589hr6nBflkZ7NnZ2Csuxk5BAWzx8dhMSsJSWhoe1dZCr9d3uS1Asd7c14eDigrsFhZi48YN
-        rCcm4vfJCVzHx1i5fBnLQUFYCQ/HakQEetRq6HQ6vbQAxbKp0VHsVlbCnpMDu1yOU6sVm6mpktjldMIa
-        GYlv8/NYDgvDTGAg3l+7Bh2PVF1dLRPYsMYFgwF7POt6QgJOV1cloTUqCgc2Gw7W1rDs7w+XwwGn2YxJ
-        T09MX7mC7sxMVFVVNQrstmWtvBwbycnYvX0bTla0s2lLvr74dXQk4SNPasnNlXLmW7dgYq4/NhYajcYi
-        cFQ/thi0clvbLS042N7Gko8PPrGSKP5JvOYCo/zf39rCrE6Hx97eeEK+Wq12CJyzYz0jAyuhodjR6/Fl
-        fx8LJItVp4mXxAtiiLFD5mYaGtDt5YWHV69CpVKdCDSJZTErC59lMuwoFDg7O4MtLw+TFI0RJuIZ8Y4x
-        MfeK704eoTU6Gkql0iLQYY2TJSXSeMys4pidlba9yKYOUdgnirnwd8a+MGcgp5tNrGPPFApFo0B7ynrb
-        2jDLUb0LCMBbjuoriWK1izhkrJu5FnJauX0lxy2Xy2WSkWhP/SONRhrPSEgInrLKW3piqakJC8QIv+8x
-        ZggORhs55enpovivkcSHCNGe7XTiYEwMBkl64OeHVg8PNBMGfrcz1kxvlN28KYrdrXwO2lN7h3fBwKYa
-        4+JwnyIj0XT9OrQpKSjMzxfF/79M56A9L9Fhd2mSOc5ZHJXY7Tk27C7Fl9z5EP4AZymF8JGogOsAAAAA
-        SUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAryAAAK8gE9UvcRAAAC9UlE
+        QVQ4T21TW0iTYRj+Rb1VxFOyC9OLpMQLTUTQCzURNBQJnTp0IFMmOgkvpiIkC8VwTBSdYmRSWpkySDyU
+        aRZRzFM60zlP83RjV+GmIR2WT8//h+Cii+c/vO/zfO/3ve/zCQDcMDU1FTgxMVE/NjZmHh4edplMJtfA
+        wIC5v7+/vre3N/BfvtsPxdrJ8XEsdHTAVleHPZUKO0VFsJSW4o1Wi57OThiNRu1FzUVx14fnz2GvqcF+
+        WRns2dnYKy7GTkEBbPHx2ExKwlJaGh7V1kKv13e5LUCx3tzXh4OKCuwWFmLjxg2sJybi98kJXMfHWLl8
+        GctBQVgJD8dqRAR61GrodDq9tADFsqnRUexWVsKekwO7XI5TqxWbqamS2OV0whoZiW/z81gOC8NMYCDe
+        X7sGHY9UXV0tE9iwxgWDAXs863pCAk5XVyWhNSoKBzYbDtbWsOzvD5fDAafZjElPT0xfuYLuzExUVVU1
+        Cuy2Za28HBvJydi9fRtOVrSzaUu+vvh1dCThI09qyc2VcuZbt2Birj82FhqNxiJwVD+2GLRyW9stLTjY
+        3saSjw8+sZIo/km85gKj/N/f2sKsTofH3t54Qr5arXYInLNjPSMDK6Gh2NHr8WV/Hwski1WniZfEC2KI
+        sUPmZhoa0O3lhYdXr0KlUp0INIllMSsLn2Uy7CgUODs7gy0vD5MUjREm4hnxjjEx94rvTh6hNToaSqXS
+        ItBhjZMlJdJ4zKzimJ2Vtr3Ipg5R2CeKufB3xr4wZyCnm02sY88UCkWjQHvKetvaMMtRvQsIwFuO6iuJ
+        YrWLOGSsm7kWclq5fSXHLZfLZZKRaE/9I41GGs9ISAiesspbemKpqQkLxAi/7zFmCA5GGznl6emi+K+R
+        xIcI0Z7tdOJgTAwGSXrg54dWDw80EwZ+tzPWTG+U3bwpit2tfA7aU3uHd8HAphrj4nCfIiPRdP06tCkp
+        KMzPF8X/v0znoD0v0WF3aZI5zlkcldjtOTbsLsWX3PkQ/gBnKYXwkaiA6wAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="ShutdownHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -2093,11 +2169,17 @@
   <data name="maintenanceModeToolStripMenuItem1.ToolTipText" xml:space="preserve">
     <value>テスト</value>
   </data>
+  <data name="controlDomainMemoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="controlDomainMemoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>コントロール ドメイン メモリ(&amp;D)...</value>
+  </data>
   <data name="RemoveCrashdumpsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
   <data name="RemoveCrashdumpsToolStripMenuItem.Text" xml:space="preserve">
-    <value>クラッシュ ダンプ ファイルの削除(&amp;D)</value>
+    <value>クラッシュ ダンプ ファイルの削除(&amp;F)</value>
   </data>
   <data name="ChangeRootPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 22</value>
@@ -2656,6 +2738,9 @@
   </data>
   <data name="statusLabel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="statusLabel.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>883, 22</value>
@@ -3234,6 +3319,12 @@
     <value>maintenanceModeToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;maintenanceModeToolStripMenuItem1.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;controlDomainMemoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>controlDomainMemoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;controlDomainMemoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;RemoveCrashdumpsToolStripMenuItem.Name" xml:space="preserve">

@@ -84,15 +84,9 @@ namespace XenAdmin.Commands
                 }
             }
 
-            if (base.DropDownItems.Count <= 0)
-            {
-                ToolStripMenuItem hostMenuItem = new ToolStripMenuItem(Messages.HOST_MENU_EMPTY);
-                hostMenuItem.Font = Program.DefaultFont;
-                hostMenuItem.Enabled = false;
-                base.DropDownItems.Add(hostMenuItem);
-            }
+            if (base.DropDownItems.Count > 0)
+                base.DropDownItems.Add(new ToolStripSeparator());
 
-            base.DropDownItems.Add(new ToolStripSeparator());
             base.DropDownItems.Add(new CommandToolStripMenuItem(new NewPoolCommand(Command.MainWindowCommandInterface, selection)));
         }
 

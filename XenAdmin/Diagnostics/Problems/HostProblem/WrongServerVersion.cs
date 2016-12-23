@@ -39,15 +39,28 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     {
         private readonly string _versionRequired;
 
-        public WrongServerVersion(Check check, string versionRequired,Host host)
+        public WrongServerVersion(Check check, string versionRequired, Host host)
             : base(check, host)
         {
             _versionRequired = versionRequired;
         }
 
+        public WrongServerVersion(Check check, Host host)
+            : base(check, host)
+        {
+        }
+
         public override string Description
         {
-            get { return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, _versionRequired); }
+            get 
+            {
+                if (!string.IsNullOrEmpty(_versionRequired))
+                {
+                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, _versionRequired);
+                }
+
+                return Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION;
+            }
         }
 
         public override string HelpMessage

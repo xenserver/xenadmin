@@ -99,10 +99,12 @@ namespace XenAdmin.Commands
                 }
                 else
                 {
-                    new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.TAKE_SNAPSHOT_ERROR, Messages.XENCENTER))
-                       .ShowDialog(MainWindowCommandInterface.Form);
-
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.TAKE_SNAPSHOT_ERROR,
+                            Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(MainWindowCommandInterface.Form);
+                    }
                 }
             }
             return null;

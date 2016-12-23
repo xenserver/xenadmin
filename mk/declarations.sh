@@ -36,14 +36,11 @@
 #
 #PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
 
-#this is the XenServer branch we're building; change this when making a new branch
-
 if [ -n "${DEBUG+xxx}" ]; 
 then 
   set -x
 fi
 
-# that's the code to get the branch name of the repository
 SOURCE="${BASH_SOURCE[0]}"
 XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 DIR="$( dirname "$SOURCE" )"
@@ -79,38 +76,24 @@ then
     echo "WARN:	BUILD_URL env var not set, we will use 'n/a'"
 fi
 
-if [ -d "$DIR/../.git" ]
+if [ -z "${GIT_COMMIT-}" ]
 then
-    if [ -z "${GIT_COMMIT-}" ]
-    then
-        get_REVISION="none"
-	    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
-    else
-   	    get_REVISION="${GIT_COMMIT}"
-    fi
-
-	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
-	if [[ $XS_BRANCH == *"/"* ]]
-        then
-            XS_BRANCH="trunk"
-            echo "WARN:	Failed to detect XS_BRANCH we will fallback to ${XS_BRANCH}"
-        fi
+    get_REVISION="none"
+    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
 else
-	if [ -z "${MERCURIAL_REVISION+xxx}" ]
-	then 
-	    MERCURIAL_REVISION="none"
-	    echo "WARN:	MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
-	fi
-	get_REVISION=${MERCURIAL_REVISION}
-	XS_BRANCH=`cd $DIR;hg showconfig paths.default|sed -e 's@.*carbon/\(.*\)/xenadmin.hg.*@\1@'`
+    get_REVISION="${GIT_COMMIT}"
 fi
+
+XS_BRANCH=${GIT_LOCAL_BRANCH}
 
 if [ -z "${XS_BRANCH+xxx}" ]
 then
-    echo "ERROR:	Failed to detect the branch, stopping here because this would break things much later."
-    exit 1
-else
-    echo "INFO:	Running on branch: $XS_BRANCH"
+    echo "WARN: GIT_LOCAL_BRANCH env var not set, we will use trunk"
+    XS_BRANCH="trunk"
+elif [ "${XS_BRANCH}" = "master" ]
+then
+    echo "INFO: found master branch; renaming to trunk."
+    XS_BRANCH="trunk"
 fi
 
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
@@ -161,6 +144,10 @@ WEB_TRUNK_LATEST_BUILD="${WEB_HOST}/carbon/trunk/xe-phase-2-latest"
 WEB_TRUNK_XE_PHASE_1=${WEB_TRUNK_LATEST_BUILD}/xe-phase-1
 TRUNK_GLOBALS=${WEB_TRUNK_XE_PHASE_1}/globals
 
+# REPO_CITRITE_LIB is where repo.citrite.net files can be found
+REPO_CITRITE_HOST="https://repo.citrite.net"
+REPO_CITRITE_LIB="${REPO_CITRITE_HOST}/ctx-local-contrib/os"
+
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     JENKINS_SERVER=https://jenkins-dev.xs.cbg.ccsi.eng.citrite.net
@@ -179,7 +166,7 @@ BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
 STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
-WEB_HOTFIXES_ROOT=https://repo.citrite.net/builds/xs/hotfixes
+WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
 WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/
 WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 
@@ -189,3 +176,17 @@ WGET () { wget ${WGET_OPT} "${@}"; }
 #check there are xenserver builds on this branch before proceeding
 WGET --spider ${GLOBALS} || WGET --spider ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
 
+ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+
+# if this is an official build 
+if [ $get_BUILD_NUMBER -ne 0 ]
+then
+	cd ${ROOT_DIR}
+
+	if [ -d "xenadmin-ref.hg" ]
+	then
+	  hg --cwd xenadmin-ref.hg pull -u
+	else
+	  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
+	fi
+fi

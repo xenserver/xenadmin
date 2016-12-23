@@ -38,13 +38,14 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class BringBabiesBackAction : PlanActionWithSession
+    public class BringBabiesBackAction : PlanActionWithSession, IAvoidRestartHostsAware
     {
         private readonly XenRef<Host> _host;
         private readonly Host currentHost;
         private readonly List<XenRef<VM>> _vms;
         private readonly bool _enableOnly = false;
-        
+        public List<string> AvoidRestartHosts { private get; set; }
+
         public BringBabiesBackAction(List<XenRef<VM>> vms, Host host,bool enableOnly)
             : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE,host.Name))
         {
@@ -53,6 +54,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             this._vms = vms;
             this._enableOnly = enableOnly;
             currentHost = host;
+            visible = false;
         }
 
         protected override Host CurrentHost
@@ -62,6 +64,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
+            if (Helpers.ElyOrGreater(currentHost) && AvoidRestartHosts != null && AvoidRestartHosts.Contains(currentHost.uuid))
+            {
+                log.Debug("Skipped scheduled restart (livepatching succeeded), BringBabiesBackAction is skipped.");
+
+                return;
+            }
+            
+            visible = true;
+
             Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
             PBD.CheckAndBestEffortPlugPBDsFor(Connection, _vms);
 

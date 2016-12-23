@@ -46,7 +46,7 @@ namespace XenAdmin.Controls.ConsoleTab
 
         private readonly Timer timer = new Timer();
 
-        private XSVNCScreen _selectedScreen;
+        private string _connectionName;
 
         public ConnectionBar()
         {
@@ -56,38 +56,34 @@ namespace XenAdmin.Controls.ConsoleTab
             AttachMouseOnChildren(this);
         }
 
-        public XSVNCScreen SelectedScreen
+        public string ConnectionName
         {
             set
             {
-                _selectedScreen = value;
+                _connectionName = value;
                 DisplayConnectionName();
             }
         }
 
         private void DisplayConnectionName()
         {
-            if (_selectedScreen == null) //screen not assigned yet
-                return; 
-
-            string connectionName = _selectedScreen.Source.is_control_domain 
-                ? _selectedScreen.Source.AffinityServerString 
-                : _selectedScreen.Source.Name;
+            if (string.IsNullOrEmpty(_connectionName))
+                return;
 
             using (Graphics g = toolStrip1.CreateGraphics())
             {
-                int width = Drawing.MeasureText(g, connectionName, labelConnection.Font, TextFormatFlags.NoPadding).Width;
+                int width = Drawing.MeasureText(g, _connectionName, labelConnection.Font, TextFormatFlags.NoPadding).Width;
                 if (width > labelConnection.ContentRectangle.Width)
                 {
-                    labelConnection.ToolTipText = connectionName;
-                    connectionName = connectionName.Ellipsise(labelConnection.ContentRectangle, labelConnection.Font);
+                    labelConnection.ToolTipText = _connectionName;
+                    labelConnection.Text = _connectionName.Ellipsise(labelConnection.ContentRectangle, labelConnection.Font);
                 }
                 else
                 {
                     labelConnection.ToolTipText = string.Empty;
+                    labelConnection.Text = _connectionName;
                 }
             }
-            labelConnection.Text = connectionName;
         }
 
         private void AttachMouseOnChildren(Control control)
@@ -169,7 +165,7 @@ namespace XenAdmin.Controls.ConsoleTab
         }
 
 
-        public void ShowAnimated()
+        private void ShowAnimated()
         {
             if (state == Animating.Open)
                 return;
@@ -239,8 +235,7 @@ namespace XenAdmin.Controls.ConsoleTab
     {
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
 
-        protected override void OnRenderToolStripBackground(
-         ToolStripRenderEventArgs e)
+        protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         {
             using (var brush = new LinearGradientBrush(e.AffectedBounds, Color.FromArgb(64, 64, 64), Color.Gray, 90))
             {

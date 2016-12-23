@@ -29,24 +29,25 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Wizards.GenericPages;
-using XenAPI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using XenAdmin;
 
-namespace XenAdmin.Wizards.ImportWizard
+
+namespace XenAPI
 {
-    class ImportDelayLoadingOptionComboBoxItem : DelayLoadingOptionComboBoxItem
+    public partial class PVS_proxy
     {
-        public ImportDelayLoadingOptionComboBoxItem(IXenObject xenObject) : base(xenObject)
+        public VM VM
         {
-        }
-
-        /// <summary>
-        /// No failure reason - all options are valid
-        /// </summary>
-        /// <returns></returns>
-        protected override string FetchFailureReason()
-        {
-            return string.Empty;
+            get
+            {
+                var vif = Connection.Resolve(VIF);
+                if (vif == null) 
+                    return null;
+                return Connection.Resolve(vif.VM);
+            }
         }
     }
 }

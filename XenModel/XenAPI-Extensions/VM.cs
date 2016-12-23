@@ -1021,17 +1021,18 @@ namespace XenAPI
             Centos = 3,
             CoreOS = 4,
             Debian = 5,
-            Oracle = 6,
-            RedHat = 7,
-            SciLinux = 8,
-            Suse = 9,
-            Ubuntu = 10,
-            Citrix = 11,
-            Solaris = 12,
-            Misc = 13,
-            Snapshot = 14,
-            SnapshotFromVmpp = 15,
-            Count = 16  //bump this if values are added
+            NeoKylin = 6,
+            Oracle = 7,
+            RedHat = 8,
+            SciLinux = 9,
+            Suse = 10,
+            Ubuntu = 11,
+            Citrix = 12,
+            Solaris = 13,
+            Misc = 14,
+            Snapshot = 15,
+            SnapshotFromVmpp = 16,
+            Count = 17  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1078,6 +1079,9 @@ namespace XenAPI
 
                 if (os.Contains("ubuntu"))
                     return VmTemplateType.Ubuntu;
+
+                if (os.Contains("kylin"))
+                    return VmTemplateType.NeoKylin;
 
                 if (os.Contains("solaris"))
                     return VmTemplateType.Solaris;
@@ -1469,6 +1473,29 @@ namespace XenAPI
                     return true;
                 }
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
+        /// </summary>
+        public bool IsControlDomainZero
+        {
+            get
+            {
+                if (!is_control_domain)
+                    return false;
+                
+                var host = Connection.Resolve(resident_on);
+                if (host == null)
+                    return false;
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return host.control_domain == opaque_ref;
+
+                var vms = Connection.ResolveAll(host.resident_VMs);
+                var first = vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
+                return first != null && first.opaque_ref == opaque_ref;
             }
         }
 
@@ -1936,7 +1963,11 @@ namespace XenAPI
         /// </summary>
         /// <remarks>
         /// To get an acceptable result, this getter is trying to detect some specific cases before falling back to the viridian flag 
-        /// that may not be correct at all times. (Linux distro can be detected if the guest agent is running on a Linux VM.)</remarks>
+        /// that may not be correct at all times. (Linux distro can be detected if the guest agent is running on a Linux VM.)
+        /// 
+        /// Note that this test is better once the VM has already booted once: before then, we can't tell with complete certainty what
+        /// OS is inside the VM. In particular, this also catches the "Other Install Media" template, and unbooted VMs made from it.
+        /// </remarks>
         public bool IsWindows
         {
             get
@@ -2036,6 +2067,30 @@ namespace XenAPI
 
                 //return the first address (this will not be IPv4)
                 return ipAddresses.FirstOrDefault() ?? string.Empty;
+            }
+        }
+
+        public bool HciWarnBeforeShutdown
+        {
+            get
+            {
+                return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
+			}
+        }
+
+        public bool SupportsVcpuHotplug
+        {
+            get
+            {
+                return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
+            }
+        }
+
+        public PVS_proxy PvsProxy
+        {
+            get
+            {
+                return Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM != null && p.VM.Equals(this)); // null if none
             }
         }
     }

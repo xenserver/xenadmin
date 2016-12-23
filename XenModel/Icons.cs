@@ -107,6 +107,7 @@ namespace XenAdmin
         SUSE,
         Ubuntu,
         SciLinux,
+        NeoKylin,
         Windows,
         CoreOS,
 
@@ -150,12 +151,21 @@ namespace XenAdmin
         Home,
         Objects,
 
+        PvsSite,
+
         #region DockerContainer Icons
 
         DCRunning,
         DCStopped,
-        DCPaused
+        DCPaused,
 
+        #endregion
+
+        #region Status Icons
+        Ok,
+        Info,
+        Warning,
+        Error
         #endregion
     }
 }

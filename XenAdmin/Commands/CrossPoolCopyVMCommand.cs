@@ -46,7 +46,11 @@ namespace XenAdmin.Commands
         public CrossPoolCopyVMCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection, preSelectedHost)
         {
-            MenuText = Messages.MAINWINDOW_COPY_VM;
+        }
+
+        public override string  MenuText 
+        {
+            get { return Messages.MAINWINDOW_COPY_VM; }
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
@@ -87,7 +91,11 @@ namespace XenAdmin.Commands
         public CrossPoolCopyTemplateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection, preSelectedHost)
         {
-            MenuText = Messages.MAINWINDOW_COPY_TEMPLATE;
+        }
+
+        public override string MenuText
+        {
+            get { return Messages.MAINWINDOW_COPY_TEMPLATE; }
         }
 
         public new static bool CanExecute(VM vm, Host preSelectedHost)

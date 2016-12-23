@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Windows.Forms;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
@@ -121,6 +120,11 @@ namespace XenAdmin.Diagnostics.Problems
         public override int GetHashCode()
         {
             return _check.GetHashCode();
+        }
+
+        public virtual Image Image 
+        {
+            get { return Images.GetImage16For(Icons.Error); }
         }
 
         #region IDisposable Members

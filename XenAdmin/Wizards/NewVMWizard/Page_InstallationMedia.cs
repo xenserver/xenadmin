@@ -325,7 +325,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     System.Threading.Thread.Sleep(10000);
                 }, true);
-            new ActionProgressDialog(waitAction, System.Windows.Forms.ProgressBarStyle.Marquee).ShowDialog(this);
+            using (var dlg = new ActionProgressDialog(waitAction, System.Windows.Forms.ProgressBarStyle.Marquee))
+                dlg.ShowDialog(this);
 
             // Set the connection on the drop down iso box. This causes a complete refresh rather than a mini one - otherwise we miss out on
             // getting event handlers for the new SR

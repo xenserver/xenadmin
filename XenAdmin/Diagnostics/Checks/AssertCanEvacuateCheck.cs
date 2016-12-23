@@ -40,12 +40,20 @@ using XenAdmin.Diagnostics.Problems.VMProblem;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 
 using System.Linq;
+using XenAdmin.Wizards.PatchingWizard;
 
 namespace XenAdmin.Diagnostics.Checks
 {
     public class AssertCanEvacuateCheck : Check
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
+
+        public AssertCanEvacuateCheck(Host host, Dictionary<string, livepatch_status> livePatchCodesByHost)
+            : base(host)
+        {
+            this.livePatchCodesByHost = livePatchCodesByHost;
+        }
 
         public AssertCanEvacuateCheck(Host host)
             : base(host)
@@ -54,7 +62,16 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected List<Problem> CheckHost()
         {
+            // when livepatching is available, no restart is expected, so this check is not needed
+            if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) && livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete)
+            {
+                log.DebugFormat("Check not needed for host {0}, because pool_patch.Precheck() returned PATCH_PRECHECK_LIVEPATCH_COMPLETE for update.", Host);
+                return new List<Problem>();
+            }
+
             var problems = new List<Problem>();
+
+            var restrictMigration = Helpers.FeatureForbidden(Host.Connection, Host.RestrictIntraPoolMigrate);
 
             var VMsWithProblems = new List<string>();
             var residentVMs = Host.Connection.ResolveAll(Host.resident_VMs);
@@ -78,7 +95,17 @@ namespace XenAdmin.Diagnostics.Checks
                     problems.Add(new LocalCD(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
+
+                if (restrictMigration && residentVM.is_a_real_vm && !VMsWithProblems.Contains(residentVM.opaque_ref))
+                {
+                    problems.Add(new CannotMigrateVM(this, residentVM, true));
+                    VMsWithProblems.Add(residentVM.opaque_ref);
+                }
             }
+
+            // if VM migration is restricted, then we are already forcing all VMs to be shutdown/suspended, so there is not need to call get_vms_which_prevent_evacuation
+            if (restrictMigration)
+                return problems;
 
             Session session = Host.Connection.DuplicateSession();
             Dictionary<XenRef<VM>, String[]> vms =

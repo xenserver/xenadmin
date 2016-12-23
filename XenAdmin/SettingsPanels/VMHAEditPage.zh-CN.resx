@@ -280,7 +280,7 @@
     <value>3</value>
   </data>
   <data name="labelStartDelay.Text" xml:space="preserve">
-    <value>尝试在以下时间后启动下一个 VM(&amp;A):</value>
+    <value>尝试在此时间后启动下一个 VM(&amp;A):</value>
   </data>
   <data name="&gt;&gt;labelStartDelay.Name" xml:space="preserve">
     <value>labelStartDelay</value>

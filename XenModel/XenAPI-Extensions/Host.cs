@@ -60,8 +60,8 @@ namespace XenAPI
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
             DesktopPlus,           // Added in Creedence (desktop-plus)
-            Premium,               // Added in Indigo (premium)
-            Standard               // Added in Dundee/Violet (standard)
+            Standard,              // Added in Dundee/Violet (standard)
+            Premium                // Added in Indigo (premium)
         }
 
         public static string LicenseServerWebConsolePort = "8082";
@@ -121,9 +121,10 @@ namespace XenAPI
             if (network.PIFs.Count == 0)
                 return true;
 
-            foreach (PIF pif in network.Connection.ResolveAll(network.PIFs))
+            foreach (var pifRef in network.PIFs)
             {
-                if (pif.host != null && pif.host.opaque_ref == opaque_ref)
+                PIF pif = network.Connection.Resolve(pifRef);
+                if (pif != null && pif.host != null && pif.host.opaque_ref == opaque_ref)
                     return true;
             }
 
@@ -244,6 +245,16 @@ namespace XenAPI
         public static bool RestrictHotfixApply(Host h)
         {
             return h._RestrictHotfixApply;
+        }
+
+        private bool _RestrictBatchHotfixApply
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_batch_hotfix_apply"); }
+        }
+
+        public static bool RestrictBatchHotfixApply(Host h)
+        {
+            return h._RestrictBatchHotfixApply;
         }
 
         private bool _RestrictCheckpoint
@@ -500,6 +511,69 @@ namespace XenAPI
         public static bool RestrictVss(Host h)
         {
             return h._RestrictVss;
+        }
+
+        /// <summary>
+        /// For Dundee and greater hosts: the feature is restricted only if the "restrict_ssl_legacy_switch" key exists and it is true
+        /// For pre-Dundee hosts: the feature is restricted if the "restrict_ssl_legacy_switch" key is absent or it is true
+        /// </summary>
+        private bool _RestrictSslLegacySwitch
+        {
+            get
+            {
+                return Helpers.DundeeOrGreater(this) 
+                    ? BoolKey(license_params, "restrict_ssl_legacy_switch") 
+                    : BoolKeyPreferTrue(license_params, "restrict_ssl_legacy_switch");
+            }
+        }
+
+        public static bool RestrictPvsCache(Host h)
+        {
+            return h._RestrictPvsCache;
+        }
+
+        private bool _RestrictPvsCache
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_pvs_proxy"); }
+        }
+
+        public static bool RestrictSslLegacySwitch(Host h)
+        {
+            return h._RestrictSslLegacySwitch;
+        }
+
+        private bool _RestrictLivePatching
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_live_patching"); }
+        }
+
+        public static bool RestrictLivePatching(Host h)
+        {
+            return h._RestrictLivePatching;
+        }
+
+        public static bool RestrictVcpuHotplug(Host h)
+        {
+            return h._RestrictVcpuHotplug;
+        }
+
+        private bool _RestrictVcpuHotplug
+        {
+            get
+            {
+                if (Helpers.ElyOrGreater(Connection))
+                {
+                    return BoolKeyPreferTrue(license_params, "restrict_set_vcpus_number_live");
+                }
+                // Pre-Ely hosts:
+                // allowed on Premium edition only
+                var hostEdition = GetEdition(edition);
+                if (hostEdition == Edition.Premium)
+                {
+                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
+                }
+                return true;
+            }
         }
 
         public bool HasPBDTo(SR sr)
@@ -759,6 +833,19 @@ namespace XenAPI
             return patches;
         }
 
+        public virtual List<Pool_update> AppliedUpdates()
+        {
+            var updates = new List<Pool_update>();
+
+            foreach (var hostUpdate in Connection.ResolveAll(this.updates))
+            {
+                if (hostUpdate != null)
+                    updates.Add(hostUpdate);
+            }
+
+            return updates;
+        }
+
         public string XAPI_version
         {
             get
@@ -827,7 +914,6 @@ namespace XenAPI
             }
         }
 
-
         public PrettyTimeSpan Uptime
         {
             get
@@ -881,6 +967,15 @@ namespace XenAPI
             return (BoolKey(other_config, "multipathed") &&
                 other_config.ContainsKey("mpath-boot") &&
                 PBD.ParsePathCounts(other_config["mpath-boot"], out current, out max));
+        }
+
+        public bool HasRunningVMs
+        {
+            get
+            {
+                // 2 not 1, because the Control Domain doesn't count
+                return resident_VMs != null && resident_VMs.Count >= 2;
+            }
         }
 
         #region Save Evacuated VMs for later
@@ -1030,18 +1125,46 @@ namespace XenAPI
         /// <summary>
         /// Will return null if cannot find connection or any control domain in list of vms
         /// </summary>
-        public VM ControlDomain
+        public VM ControlDomainZero
         {
             get
             {
                 if (Connection == null)
                     return null;
-                foreach (VM vm in Connection.ResolveAll<VM>(resident_VMs))
-                {
-                    if (vm.is_control_domain)
-                        return vm;
-                }
-                return null;
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return Connection.Resolve(control_domain);
+
+                var vms = Connection.ResolveAll(resident_VMs);
+                return vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
+            }
+        }
+
+        public bool HasManyControlDomains
+        {
+            get
+            {
+                if (Connection == null)
+                    return false;
+
+                var vms = Connection.ResolveAll(resident_VMs);
+                return vms.FindAll(v => v.is_control_domain).Count > 1;
+            }
+        }
+
+        public IEnumerable<VM> OtherControlDomains
+        {
+            get
+            {
+                if (Connection == null)
+                    return null;
+
+                var vms = Connection.ResolveAll(resident_VMs);
+
+                if (Helpers.DundeePlusOrGreater(Connection))
+                    return vms.Where(v => v.is_control_domain && v.opaque_ref != control_domain);
+
+                return vms.Where(v => v.is_control_domain && v.domid != 0);
             }
         }
 
@@ -1183,6 +1306,31 @@ namespace XenAPI
                 return xen_mem;
             }
         }
+
+        public long dom0_memory
+        {
+            get
+            {
+                long dom0_mem = 0;
+                VM vm = ControlDomainZero;
+                if (vm != null)
+                {
+                    VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
+                    dom0_mem = vmMetrics != null ? vmMetrics.memory_actual : vm.memory_dynamic_min;
+                }
+                return dom0_mem;
+            }
+        }
+
+        public long dom0_memory_extra
+        {
+            get
+            {
+                VM vm = ControlDomainZero;
+                return vm != null ? vm.memory_static_max - vm.memory_static_min : 0;
+            }
+        }
+
 
         /// <summary>
         /// Friendly string showing memory usage on the host

@@ -88,14 +88,16 @@ namespace XenAdmin.Dialogs
                     if (sr.IsToolsSR && sr.IsBroken())
                     {
                         Hide();
-                        if (new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(
-                                    SystemIcons.Warning,
-                                    Messages.BROKEN_TOOLS_PROMPT,
-                                    Messages.INSTALL_XS_TOOLS),
-                                ThreeButtonDialog.ButtonOK,
-                                ThreeButtonDialog.ButtonCancel
-                    ).ShowDialog(this) != DialogResult.OK)
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BROKEN_TOOLS_PROMPT,
+                                Messages.INSTALL_XS_TOOLS),
+                            ThreeButtonDialog.ButtonOK,
+                            ThreeButtonDialog.ButtonCancel))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        if (dialogResult != DialogResult.OK)
                         {
                             DialogResult = DialogResult.No;
                             Close();

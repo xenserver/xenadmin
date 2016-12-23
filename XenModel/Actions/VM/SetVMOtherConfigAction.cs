@@ -43,7 +43,7 @@ namespace XenAdmin.Actions.VMActions
         private string Val;
 
         public SetVMOtherConfigAction(IXenConnection connection, VM vm, string key, string val)
-            : base(connection, "Set VM other_config", true)
+            : base(connection, Messages.ACTION_SET_VM_OTHER_CONFIG_TITLE, true)
         {
             VM = vm;
             Key = key;

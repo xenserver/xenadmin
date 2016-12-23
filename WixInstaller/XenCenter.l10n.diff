@@ -102,10 +102,10 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XBK extension -->
--							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
+-							<ProgId Id="XenCenter.[xbk]" Description="[XenServer] Backup File" Icon="XkbIcon">
 +                            <!-- Define XBK extension -->
-+							<ProgId Id="XenCenter.xbk" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
-                                 <Extension Id="xbk" ContentType="application/xbk">
++							<ProgId Id="XenCenter.[xbk]" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
+                                 <Extension Id="[xbk]" ContentType="application/[xbk]">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
 +                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                  </Extension>
@@ -209,9 +209,9 @@
 @@ -310,7 +336,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-         <PropertyRef Id="NETFRAMEWORK45" />
--        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
-+        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
+         <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
+-        <Condition Message=".NET Framework 4.6 is required for this installation."><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
++        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
          <Property Id="PERMACHINEINSTALL">
              <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
          </Property>

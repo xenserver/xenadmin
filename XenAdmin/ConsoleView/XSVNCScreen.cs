@@ -71,7 +71,6 @@ namespace XenAdmin.ConsoleView
         private volatile bool useVNC = true;
 
         private bool autoCaptureKeyboardAndMouse = true;
-        internal bool showConnectionBar = true;
 
         private readonly Color focusColor = SystemColors.MenuHighlight;
 
@@ -114,6 +113,8 @@ namespace XenAdmin.ConsoleView
 
         public event EventHandler UserCancelledAuth;
         public event EventHandler VncConnectionAttemptCancelled;
+        public event Action<bool> GpuStatusChanged;
+        public event Action<string> ConnectionNameChanged;
 
         internal readonly VNCTabView parentVNCTabView;
 
@@ -225,7 +226,7 @@ namespace XenAdmin.ConsoleView
             return true;
         }
 
-        public bool wasPaused = true;
+        private bool wasPaused = true;
 
         public void Pause()
         {
@@ -352,32 +353,45 @@ namespace XenAdmin.ConsoleView
                 if (networks == null)
                     return null;
 
-                List<string> ipAddresses = new List<string>(); 
+                List<string> ipAddresses = new List<string>();
                 List<string> ipv6Addresses = new List<string>();
+                List<string> ipAddressesForNetworksWithoutPifs = new List<string>();
+                List<string> ipv6AddressesForNetworksWithoutPifs = new List<string>();
 
                 foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
                 {
                     XenAPI.Network network = vif.Connection.Resolve(vif.network);
-                    XenAPI.Host host = vm.Connection.Resolve(vm.resident_on);
-                    XenAPI.PIF pif = Helpers.FindPIF(network, host);
-                    if (pif != null && pif.LinkStatus == PIF.LinkState.Connected)
+                    Host host = vm.Connection.Resolve(vm.resident_on);
+                    PIF pif = Helpers.FindPIF(network, host);
+                    foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
                     {
-                        foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
+                        if (networkInfo.Key.EndsWith("ip")) // IPv4 address
                         {
-                            if (networkInfo.Key.EndsWith("ip")) // IPv4 address
+                            if (pif == null)
+                                ipAddressesForNetworksWithoutPifs.Add(networkInfo.Value);
+                            else if (pif.LinkStatus == PIF.LinkState.Connected)
                                 ipAddresses.Add(networkInfo.Value);
-                            else
+                        }
+                        else
+                        {
+                            if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
                             {
-                                if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
+                                if (pif == null)
+                                    ipv6AddressesForNetworksWithoutPifs.Add(String.Format("[{0}]", networkInfo.Value));
+                                else if (pif.LinkStatus == PIF.LinkState.Connected)
                                     ipv6Addresses.Add(String.Format("[{0}]", networkInfo.Value));
-                                else
-                                    continue;
                             }
+                            else
+                                continue;
                         }
                     }
                 }
 
                 ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
+                // add IP addresses for networks without PIFs
+                ipAddresses.AddRange(ipAddressesForNetworksWithoutPifs);
+                ipAddresses.AddRange(ipv6AddressesForNetworksWithoutPifs); 
+
 
                 foreach (String ipAddress in ipAddresses)
                 {
@@ -541,7 +555,7 @@ namespace XenAdmin.ConsoleView
                 if (rdpClient == null)
                 {
                     if (this.ParentForm is FullScreenForm)
-                        oldSize = ((FullScreenForm)ParentForm).contentPanel.Size;
+                        oldSize = ((FullScreenForm)ParentForm).GetContentSize();
                     this.AutoScroll = true;
                     this.AutoScrollMinSize = oldSize;
 
@@ -568,7 +582,14 @@ namespace XenAdmin.ConsoleView
                     RemoteConsole.Activate();
             }
 
-            parentVNCTabView.ShowGpuWarningIfRequired();
+            if (GpuStatusChanged != null)
+                GpuStatusChanged(MustConnectRemoteDesktop());
+        }
+
+        internal bool MustConnectRemoteDesktop()
+        {
+            return (UseVNC || string.IsNullOrEmpty(rdpIP)) &&
+                Source.HasGPUPassthrough && Source.power_state == vm_power_state.Running;
         }
 
         private void SetKeyboardAndMouseCapture(bool value)
@@ -659,7 +680,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public VM Source
+        private VM Source
         {
             get
             {
@@ -699,6 +720,22 @@ namespace XenAdmin.ConsoleView
             }
         }
 
+        public string ConnectionName
+        {
+            get
+            {
+                if (Source == null)
+                    return null;
+
+                if (Source.IsControlDomainZero)
+                    return string.Format(Messages.CONSOLE_HOST, Source.AffinityServerString);
+                
+                if (Source.is_control_domain)
+                    return string.Format(Messages.CONSOLE_HOST_NUTANIX, Source.AffinityServerString);
+                
+                return Source.Name;
+            }
+        }
 
         private bool InDefaultConsole()
         {
@@ -726,10 +763,9 @@ namespace XenAdmin.ConsoleView
                 {
                     parentVNCTabView.DisableToggleVNCButton();
                 }
-            
 
                 //Start the polling again
-                if (Source != null && !Source.is_control_domain)
+                if (Source != null && !Source.IsControlDomainZero)
                 {
                     if (!Source.IsHVM)
                     {
@@ -740,7 +776,7 @@ namespace XenAdmin.ConsoleView
                         connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                     }
                 }
-                }
+            }
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -786,7 +822,16 @@ namespace XenAdmin.ConsoleView
             }
 
             if (e.PropertyName == "power_state" || e.PropertyName == "VGPUs")
-                parentVNCTabView.ShowGpuWarningIfRequired();
+            {
+                Program.Invoke(this, () =>
+                {
+                    if (GpuStatusChanged != null)
+                        GpuStatusChanged(MustConnectRemoteDesktop());
+                });
+            }
+
+            if (e.PropertyName == "name_label" && ConnectionNameChanged != null)
+                ConnectionNameChanged(ConnectionName);
         }
 
         internal void imediatelyPollForConsole()

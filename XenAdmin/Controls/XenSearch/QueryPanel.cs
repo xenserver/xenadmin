@@ -102,7 +102,7 @@ namespace XenAdmin.Controls.XenSearch
                 SearchChanged();
         }
 
-        void CustomFields_CustomFieldsChanged(object sender, EventArgs e)
+        void CustomFields_CustomFieldsChanged()
         {
             SetupCustomColumns();
         }

@@ -114,13 +114,13 @@ namespace XenAdminTests.CommandTests
         {
             foreach (IXenObject x in xenObjects)
             {
-                yield return new SelectedItemCollection(new[] { new SelectedItem(x) });
+                yield return new SelectedItemCollection(new SelectedItem(x));
             }
         }
 
         private IEnumerable<SelectedItemCollection> GetSelections(Func<IXenObject> x)
         {
-            yield return new SelectedItemCollection(new[] { new SelectedItem(x()) });
+            yield return new SelectedItemCollection(new SelectedItem(x()));
         }
 
         private IEnumerable<SelectedItemCollection> GetSelections()
@@ -136,11 +136,11 @@ namespace XenAdminTests.CommandTests
                     GroupingTag gt = n.Tag as GroupingTag;
                     if (gt != null)
                     {
-                        yield return new SelectedItemCollection(new[] { new SelectedItem(gt, rootNode) });
+                        yield return new SelectedItemCollection(new SelectedItem(gt, rootNode));
                     }
                     else
                     {
-                        yield return new SelectedItemCollection(new[] { new SelectedItem(n.Tag as IXenObject) });
+                        yield return new SelectedItemCollection(new SelectedItem(n.Tag as IXenObject));
                     }
                 }
             }

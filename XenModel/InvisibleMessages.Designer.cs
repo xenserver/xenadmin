@@ -151,6 +151,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to iso.
+        /// </summary>
+        public static string ISO_UPDATE {
+            get {
+                return ResourceManager.GetString("ISO_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.citrix.com/xenserverenterprise.
         /// </summary>
         public static string LICENSE_EXPIRY_WEBPAGE {

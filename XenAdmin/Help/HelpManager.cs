@@ -72,11 +72,14 @@ namespace XenAdmin.Help
                     log.DebugFormat("Help ID for {0} is {1}", pageref, s);
                     if (Properties.Settings.Default.DebugHelp && !Program.RunInAutomatedTestMode)
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Information,
                                string.Format(Messages.MESSAGEBOX_HELP_TOPICS, s, pageref),
-                               Messages.XENCENTER)).ShowDialog(w);
+                               Messages.XENCENTER)))
+                        {
+                            dlg.ShowDialog(w);
+                        }
                     }
                     w.ShowHelpTopic(s);
                 }
@@ -88,11 +91,14 @@ namespace XenAdmin.Help
                     {
                         if (Properties.Settings.Default.DebugHelp)
                         {
-                            new ThreeButtonDialog(
+                            using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Error,
                                    string.Format(Messages.MESSAGEBOX_HELP_TOPIC_NOT_FOUND, pageref),
-                                   Messages.MESSAGEBOX_HELP_TOPIC_NOT_FOUND)).ShowDialog(w);
+                                   Messages.MESSAGEBOX_HELP_TOPIC_NOT_FOUND)))
+                            {
+                                dlg.ShowDialog(w);
+                            }
                         }
                         w.ShowHelpTOC();
                     }
@@ -106,11 +112,14 @@ namespace XenAdmin.Help
                 {
                     if (Properties.Settings.Default.DebugHelp)
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Error,
                                string.Format(Messages.MESSAGEBOX_HELP_TOPIC_NOT_FOUND, pageref),
-                               Messages.MESSAGEBOX_HELP_TOPIC_NOT_FOUND)).ShowDialog(w);
+                               Messages.MESSAGEBOX_HELP_TOPIC_NOT_FOUND)))
+                        {
+                            dlg.ShowDialog(w);
+                        }
                     }
                     w.ShowHelpTOC();
                 }

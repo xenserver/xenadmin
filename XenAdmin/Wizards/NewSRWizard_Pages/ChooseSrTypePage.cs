@@ -40,7 +40,7 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
-using Message = System.Windows.Forms.Message;
+
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages
 {
@@ -49,6 +49,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         private bool m_allowNext = true;
         private int _matchingFrontends;
         private Type m_preselectedWizardType = typeof(SrWizardType_VhdoNfs);
+        private readonly RadioButton[] _radioButtons;
 
         public ChooseSrTypePage()
         {
@@ -63,6 +64,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             radioButtonCslg.Tag = new SrWizardType_Cslg();
             radioButtonCifs.Tag = new SrWizardType_Cifs();
             radioButtonFcoe.Tag = new SrWizardType_Fcoe();
+
+            _radioButtons = new[]
+            {
+                radioButtonNfs, radioButtonIscsi, radioButtonFibreChannel,
+                radioButtonCslg, radioButtonCifs, radioButtonFcoe,
+                radioButtonNfsIso, radioButtonCifsIso
+            };
         }
 
         private void SetupDeprecationBanner(bool visible)
@@ -89,13 +97,14 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override void PopulatePage()
         {
-            radioButtonCslg.Visible = !Helpers.CreedenceOrGreater(Connection); //Hide iSL radio button for Creedence or higher (StorageLink is not supported)
+            //Hide iSL radio button for Creedence or higher (StorageLink is not supported)
+            radioButtonCslg.Visible = !Helpers.CreedenceOrGreater(Connection);
 
             radioButtonCifs.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictCifs);
 
             radioButtonFcoe.Visible = Helpers.DundeeOrGreater(Connection);
 
-            foreach (var radioButton in RadioButtons)
+            foreach (var radioButton in _radioButtons)
             {
                 var frontend = (SrWizardType)radioButton.Tag;
                 frontend.ResetSrName(Connection);
@@ -109,45 +118,60 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             if (Connection == null)
             {
                 // disable all except CSLG
-                Array.ForEach(RadioButtons, r => r.Enabled = r.Checked = ((SrWizardType)r.Tag).Type == SR.SRTypes.cslg);
+                Array.ForEach(_radioButtons, r => r.Enabled = r.Checked = ((SrWizardType)r.Tag).Type == SR.SRTypes.cslg);
                 _matchingFrontends = 1;
                 return;
             }
 
             if (SrToReattach == null)
             {
-                // CA-21758: Use SM.other_config HideFromXenCenter flag to hide backends in the New SR wizard
-                // Only do this when we're doing a create.
-
-                if (!Properties.Settings.Default.ShowHiddenVMs)
+                foreach (RadioButton radioButton in _radioButtons)
                 {
-                    foreach (RadioButton radioButton in RadioButtons)
-                    {
-                        SrWizardType wizardType = (SrWizardType)radioButton.Tag;
+                    SM sm = GetSmForRadioButton(radioButton);
 
-                        SM sm = SM.GetByType(Connection, wizardType.Type.ToString());
+                    // CA-21758: Use SM.other_config HideFromXenCenter flag to hide backends in the New SR wizard
+                    // Only do this when we're doing a create.
 
-                        if (sm != null && sm.IsHidden)
-                            radioButton.Visible = false;
-                    }
-                }
+                    if (sm == null || (!Properties.Settings.Default.ShowHiddenVMs && sm.IsHidden))
+                        radioButton.Visible = false;
 
-                foreach (RadioButton radioButton in RadioButtons)
-                {
                     if (radioButton.Visible && radioButton.Tag.GetType() == m_preselectedWizardType)
                         radioButton.Checked = true;
                 }
+
+                bool visibleRadioButtonsExist = _radioButtons.Any(r => r.Visible);
+                bool checkedRadioButtonExists = _radioButtons.Any(r => r.Visible && r.Checked);
+
+                tableLayoutPanel2.Visible = visibleRadioButtonsExist;
+
+                if (visibleRadioButtonsExist && !checkedRadioButtonExists)
+                    _radioButtons.First(r => r.Visible).Checked = true;
             }
             else
             {
                 // If we're reconfiguring then try and select the correct page.  If we find more than one matching frontend
                 // (ISO SRs - CA-19605) then just disable non-matching ones and leave it at the first page
 
-                foreach (RadioButton radioButton in RadioButtons)
+                foreach (RadioButton radioButton in _radioButtons)
                 {
                     SrWizardType wizardType = (SrWizardType)radioButton.Tag;
+                    SM sm = GetSmForRadioButton(radioButton);
 
-                    if (wizardType.Type.ToString() == SrToReattach.type)
+                    if (sm == null)
+                        radioButton.Visible = false;
+                    else if (radioButton == radioButtonCslg && SrToReattach.type == SR.SRTypes.netapp.ToString())
+                    {
+                        _matchingFrontends++;
+                        radioButtonCslg.Checked = true;
+                        radioButtonCslg.Tag = ((SrWizardType_Cslg)radioButtonCslg.Tag).ToNetApp();
+                    }
+                    else if (radioButton == radioButtonCslg && SrToReattach.type == SR.SRTypes.equal.ToString())
+                    {
+                        _matchingFrontends++;
+                        radioButtonCslg.Checked = true;
+                        radioButtonCslg.Tag = ((SrWizardType_Cslg)radioButtonCslg.Tag).ToEqualLogic();
+                    }
+                    else if (wizardType.Type.ToString() == SrToReattach.type)
                     {
                         if (_matchingFrontends == 0)
                             radioButton.Checked = true;
@@ -155,21 +179,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     }
                     else
                         radioButton.Enabled = false;
-                }
-
-                if (SrToReattach.type == SR.SRTypes.netapp.ToString() || SrToReattach.type == SR.SRTypes.equal.ToString())
-                {
-                    // the user is trying to reattach a netapp or Equallogic storage
-                    // then move on to the correct page as there aren't radio buttons for them.
-                    // we need to reenable the radioButtonCslg because it was disabled at the above iterations
-
-                    _matchingFrontends++;
-                    radioButtonCslg.Enabled = radioButtonCslg.Checked = true;
-
-                    if (SrToReattach.type == SR.SRTypes.netapp.ToString())
-                        radioButtonCslg.Tag = ((SrWizardType_Cslg)radioButtonCslg.Tag).ToNetApp();
-                    else if (SrToReattach.type == SR.SRTypes.equal.ToString())
-                        radioButtonCslg.Tag = ((SrWizardType_Cslg)radioButtonCslg.Tag).ToEqualLogic();
                 }
 
                 if (SrToReattach.type == "iso")
@@ -190,6 +199,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     }
                 }
             }
+
+            labelVirtualDiskStorage.Visible = radioButtonNfs.Visible || radioButtonIscsi.Visible ||
+                                             radioButtonFibreChannel.Visible || radioButtonCslg.Visible ||
+                                             radioButtonCifs.Visible || radioButtonFcoe.Visible;
+
+            labelISOlibrary.Visible = radioButtonNfsIso.Visible || radioButtonCifsIso.Visible;
         }
 
         public override bool EnableNext()
@@ -209,7 +224,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         {
             get
             {
-                foreach (RadioButton radioButton in RadioButtons)
+                foreach (RadioButton radioButton in _radioButtons)
                 {
                     if (radioButton.Checked)
                         return (SrWizardType)radioButton.Tag;
@@ -218,23 +233,18 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             }
         }
 
-        private RadioButton[] RadioButtons
-        {
-            get { return new[] { radioButtonNfs, radioButtonIscsi, radioButtonFibreChannel, radioButtonCslg, radioButtonNfsIso, radioButtonCifsIso, radioButtonCifs, radioButtonFcoe }; }
-        }
-
         public void PreselectNewSrWizardType(Type type)
         {
             m_preselectedWizardType = type;
         }
-        
+
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton radioButton = (RadioButton)sender;
 
             if (radioButton.Checked)
             {
-                foreach (RadioButton rb in RadioButtons)
+                foreach (RadioButton rb in _radioButtons)
                     rb.Checked = rb == radioButton;
 
                 SrWizardType frontend = (SrWizardType)radioButton.Tag;
@@ -254,13 +264,29 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 {
                     upsellPage1.Visible = false;
                     selectedStoreTypeLabel.Visible = true;
-                    selectedStoreTypeLabel.Text = radioButton.Text;
+                    selectedStoreTypeLabel.Text = frontend.FrontendTypeName;
                     SRBlurb.Visible = true;
                     SRBlurb.Text = frontend.FrontendBlurb;
                     m_allowNext = true;
                 }
                 OnPageUpdated();
             }
+        }
+
+        private SM GetSmForRadioButton(RadioButton radioButton)
+        {
+            SrWizardType wizardType = (SrWizardType)radioButton.Tag;
+            SM sm = SM.GetByType(Connection, wizardType.Type.ToString());
+
+            //check also for Netapp and EqualLogic because these don't have dedicated buttons
+            if (radioButton == radioButtonCslg)
+            {
+                if (sm == null)
+                    sm = SM.GetByType(Connection, SR.SRTypes.netapp.ToString());
+                if (sm == null)
+                    sm = SM.GetByType(Connection, SR.SRTypes.equal.ToString());
+            }
+            return sm;
         }
     }
 }

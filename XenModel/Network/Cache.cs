@@ -67,6 +67,11 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics> _pif_metrics = new ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics>();
         private readonly ChangeableDictionary<XenRef<Pool>, Pool> _pool = new ChangeableDictionary<XenRef<Pool>, Pool>();
         private readonly ChangeableDictionary<XenRef<Pool_patch>, Pool_patch> _pool_patch = new ChangeableDictionary<XenRef<Pool_patch>, Pool_patch>();
+        private readonly ChangeableDictionary<XenRef<Pool_update>, Pool_update> _pool_update = new ChangeableDictionary<XenRef<Pool_update>, Pool_update>();
+        private readonly ChangeableDictionary<XenRef<PVS_cache_storage>, PVS_cache_storage> _pvs_cache_storage = new ChangeableDictionary<XenRef<PVS_cache_storage>, PVS_cache_storage>();
+        private readonly ChangeableDictionary<XenRef<PVS_proxy>, PVS_proxy> _pvs_proxy = new ChangeableDictionary<XenRef<PVS_proxy>, PVS_proxy>();
+        private readonly ChangeableDictionary<XenRef<PVS_server>, PVS_server> _pvs_server = new ChangeableDictionary<XenRef<PVS_server>, PVS_server>();
+        private readonly ChangeableDictionary<XenRef<PVS_site>, PVS_site> _pvs_site = new ChangeableDictionary<XenRef<PVS_site>, PVS_site>();
         private readonly ChangeableDictionary<XenRef<Role>, Role> _role = new ChangeableDictionary<XenRef<Role>, Role>();
         private readonly ChangeableDictionary<XenRef<SM>, SM> _sm = new ChangeableDictionary<XenRef<SM>, SM>();
         private readonly ChangeableDictionary<XenRef<SR>, SR> _sr = new ChangeableDictionary<XenRef<SR>, SR>();
@@ -190,6 +195,31 @@ namespace XenAdmin.Network
             get { return contents(_pool_patch); }
         }
 
+        public Pool_update[] Pool_updates
+        {
+            get { return contents(_pool_update); }
+        }
+        
+        public PVS_site[] PVS_sites
+        {
+            get { return contents(_pvs_site); }
+        }
+        
+        public PVS_server[] PVS_servers
+        {
+            get { return contents(_pvs_server); }
+        }
+
+        public PVS_proxy[] PVS_proxies
+        {
+            get { return contents(_pvs_proxy); }
+        }
+
+        public PVS_cache_storage[] PVS_cache_storages
+        {
+            get { return contents(_pvs_cache_storage); }
+        }
+
         public Role[] Roles
         {
             get { return contents(_role); }
@@ -270,23 +300,26 @@ namespace XenAdmin.Network
 
         public void DeregisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return;
+
             d.CollectionChanged -= h;
         }
 
         public void RegisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return;
+
             d.CollectionChanged -= h;
             d.CollectionChanged += h;
         }
 
         public void DeregisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
             if (d == null)
                 return;
 
@@ -295,8 +328,7 @@ namespace XenAdmin.Network
 
         public void RegisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>
         {
-            ChangeableDictionary<XenRef<T>, T> d =
-                GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
             if (d == null)
                 return;
 
@@ -414,7 +446,9 @@ namespace XenAdmin.Network
             PropertyInfo p = t.GetProperty("uuid", BindingFlags.Public | BindingFlags.Instance);
             if (p == null)
                 return null;
-            ChangeableDictionary<XenRef<T>, T> d = (ChangeableDictionary<XenRef<T>, T>)GetCollectionForType(t);
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(t) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return null;
             lock (d)
             {
                 foreach (T m in d.Values)
@@ -438,7 +472,9 @@ namespace XenAdmin.Network
                 return null;
             string uuid = (string)p.GetValue(needle, null);
 
-            ChangeableDictionary<XenRef<T>, T> d = (ChangeableDictionary<XenRef<T>, T>)GetCollectionForType(t);
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(t) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return null;
             lock (d)
             {
                 foreach (KeyValuePair<XenRef<T>, T> kvp in d)
@@ -467,7 +503,9 @@ namespace XenAdmin.Network
             if (xenRef == null)
                 return null;
 
-            ChangeableDictionary<XenRef<T>, T> d = (ChangeableDictionary<XenRef<T>, T>)GetCollectionForType(typeof(T));
+            ChangeableDictionary<XenRef<T>, T> d = GetCollectionForType(typeof(T)) as ChangeableDictionary<XenRef<T>, T>;
+            if (d == null)
+                return null;
             T result;
             return d.TryGetValue(xenRef, out result) ? result : null;
         }

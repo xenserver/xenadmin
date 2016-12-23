@@ -34,129 +34,199 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using XenAdmin.Wizards.CrossPoolMigrateWizard;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAPI;
+using TestData = System.Tuple<XenAPI.IXenObject, System.Collections.Generic.List<XenAPI.VM>>;
 
 namespace XenAdminTests.WizardTests
 {
     [TestFixture, Category(TestCategories.UICategoryB)]
     public class CrossPoolMigrateCanMigrateFilterTest : DatabaseTester_TestFixture
     {
-        private const string oneHostPool = "tampa_livevdimove_xapi-db.xml";
-        private const string twoHostPool = "tampa-poolof16and23-xapi-db.xml";
-        private Host singlePoolHost;
-        private Pool singlePool;
-        private List<VM> singleResidentVm;
-        private List<VM> singleNonResidentVm;
+        private const string ONE_HOST_POOL = "tampa_livevdimove_xapi-db.xml";
+        private const string TWO_HOST_POOL = "tampa-poolof16and23-xapi-db.xml";
+        
+        //pool (name 40), consisting of one host (name dt40) and two VMs,
+        //one on local storage (VM name: local) and one on shared (VM name: shared)
+        private Pool oneHostPool;
+        private Host singleHost;
+        private List<VM> vmLocal;
+        private List<VM> vmShared;
+
+        //two host pool (name 16And23), consisting of two hosts (master name: dt16, slave name dt23)
+        //and 4 VMs, two on master on local and shared storage (name labels 16local and 16shared respectively)
+        //and two on the slave on local and shared storage (name labels 23local and 23shared respectively)
+        private Pool twoHostPool;
+        private Host master;
+        private Host slave;
+        private List<VM> vmLocalOnMaster;
+        private List<VM> vmSharedOnMaster;
+        private List<VM> vmLocalOnSlave;
+        private List<VM> vmSharedOnSlave;
 
         public CrossPoolMigrateCanMigrateFilterTest()
-            : base(oneHostPool, twoHostPool)
+            : base(ONE_HOST_POOL, TWO_HOST_POOL)
         {
 
         }
 
-        private void Init()
+        [TestFixtureSetUp]
+        public void TestSetup()
         {
-            singlePool = DatabaseManager.ConnectionFor(oneHostPool).Cache.Pools.First(p => p.name_label == "40");
-            Assert.IsNotNull(singlePool, "Resolved pool");
+            //one host pool
 
-            singlePoolHost = DatabaseManager.ConnectionFor(oneHostPool).Cache.Hosts.First(h => h.name_label == "dt40");
-            Assert.IsNotNull(singlePoolHost, "Resolved host");
+            var oneHostPoolCache = DatabaseManager.ConnectionFor(ONE_HOST_POOL).Cache;
+            oneHostPool = oneHostPoolCache.Pools.First(p => p.name_label == "40");
+            Assert.IsNotNull(oneHostPool, "Cannot resolve one-host pool");
 
-            singleResidentVm = new List<VM> { DatabaseManager.ConnectionFor(oneHostPool).Cache.VMs.First(h => h.name_label == "local") };
-            Assert.IsNotEmpty(singleResidentVm, "Resolved VM missing");
+            singleHost = oneHostPoolCache.Hosts.First(h => h.name_label == "dt40");
+            Assert.IsNotNull(singleHost, "Cannot resolve host in one-host-pool");
 
-            singleNonResidentVm = new List<VM> { DatabaseManager.ConnectionFor(twoHostPool).Cache.VMs.First(h => h.name_label == "16local") };
-            Assert.IsNotEmpty(singleNonResidentVm, "Resolved VM missing");
+            vmLocal = new List<VM> { oneHostPoolCache.VMs.First(h => h.name_label == "local") };
+            Assert.IsNotEmpty(vmLocal, "Cannot resolve resident VM in one host pool");
+
+            vmShared = new List<VM> { oneHostPoolCache.VMs.First(h => h.name_label == "shared") };
+            Assert.IsNotEmpty(vmShared, "Cannot resolve non-resident VM in one host pool");
+
+            //two host pool
+
+            var twoHostPoolCache = DatabaseManager.ConnectionFor(TWO_HOST_POOL).Cache;
+            twoHostPool = twoHostPoolCache.Pools.First(p => p.name_label == "16And23");
+            Assert.IsNotNull(twoHostPool, "Cannot resolve two-host pool");
+
+            master = twoHostPoolCache.Hosts.First(h => h.name_label == "dt16");
+            Assert.IsNotNull(master, "Cannot resolve master in two-host-pool");
+
+            vmLocalOnMaster = new List<VM> { twoHostPoolCache.VMs.First(h => h.name_label == "16local") };
+            Assert.IsNotEmpty(vmLocalOnMaster, "Cannot resolve VM resident on master in two-host pool");
+
+            vmSharedOnMaster = new List<VM> { twoHostPoolCache.VMs.First(h => h.name_label == "16shared") };
+            Assert.IsNotEmpty(vmSharedOnMaster, "Cannot resolve non-resident VM running on master in two-host pool");
+
+            slave = twoHostPoolCache.Hosts.First(h => h.name_label == "dt23");
+            Assert.IsNotNull(slave, "Cannot resolve slave in two-host-pool");
+
+            vmLocalOnSlave = new List<VM> { twoHostPoolCache.VMs.First(h => h.name_label == "23local") };
+            Assert.IsNotEmpty(vmLocalOnSlave, "Cannot resolve VM resident on slave in two-host pool");
+
+            vmSharedOnSlave = new List<VM> { twoHostPoolCache.VMs.First(h => h.name_label == "23shared") };
+            Assert.IsNotEmpty(vmSharedOnSlave, "Cannot resolve non-resident VM runnign on slave in two-host pool");
         }
 
-        private class TestData
-        {
-            public TestData(IXenObject ixo, List<VM> vms)
-            {
-                this.ixo = ixo;
-                this.vms = vms;
-            }
-
-            public IXenObject ixo { get; private set; }
-            public List<VM> vms { get; private set; }
-        }
+        #region Private methods
 
         private IEnumerable TestCasesMigrationAllowed
         {
             get
             {
-                //Use host/pool with VMs from a same pool
-                yield return new TestData(singlePoolHost, singleResidentVm);
-                yield return new TestData(singlePool, singleResidentVm);
-                yield return new TestData(singlePoolHost, new List<VM>());
-                yield return new TestData(singlePool, new List<VM>());
+                //other host in same pool
+                yield return new TestData(master, vmLocalOnSlave);
+                yield return new TestData(master, vmSharedOnSlave);
+                yield return new TestData(slave, vmLocalOnMaster);
+                yield return new TestData(slave, vmSharedOnMaster);
 
-                //Unsupported IXenObjects
-                yield return new TestData(singleResidentVm.First(), singleResidentVm);
-                yield return new TestData(singleResidentVm.First(), singleNonResidentVm);
-                yield return new TestData(singleNonResidentVm.First(), singleResidentVm);
-                yield return new TestData(singleNonResidentVm.First(), singleNonResidentVm);
-                yield return new TestData(singleResidentVm.First(), new List<VM>());
+                //same pool of more than one hosts
+                yield return new TestData(twoHostPool, vmLocalOnSlave);
+                yield return new TestData(twoHostPool, vmSharedOnSlave);
+                yield return new TestData(twoHostPool, vmLocalOnMaster);
+                yield return new TestData(twoHostPool, vmSharedOnMaster);
 
-                //Null host/pool
-                yield return new TestData(null, singleResidentVm);
-                yield return new TestData(null, singleNonResidentVm);
-                yield return new TestData(null, new List<VM>());
+                //other pool/host
+                yield return new TestData(singleHost, vmLocalOnMaster);
+                yield return new TestData(singleHost, vmSharedOnMaster);
+                yield return new TestData(oneHostPool, vmLocalOnMaster);
+                yield return new TestData(oneHostPool, vmSharedOnMaster);
+
+                yield return new TestData(singleHost, vmLocalOnSlave);
+                yield return new TestData(singleHost, vmSharedOnSlave);
+                yield return new TestData(oneHostPool, vmLocalOnSlave);
+                yield return new TestData(oneHostPool, vmSharedOnSlave);
             }
         }
 
-        private IEnumerable TestCasesMigrationNotAllowedIfAssertion
+        private IEnumerable TestCasesMigrationNotAllowedCurrentServer
         {
             get
             {
-                //Use host/pool with VMs from a same pool
-                yield return new TestData(singlePoolHost, singleNonResidentVm);
-                yield return new TestData(singlePool, singleNonResidentVm);
+                //Use host/pool with VMs from same single host pool
+                yield return new TestData(oneHostPool, vmLocal);
+                yield return new TestData(oneHostPool, vmShared);
+                yield return new TestData(master, vmLocalOnMaster);
+                yield return new TestData(master, vmSharedOnMaster);
+                yield return new TestData(slave, vmLocalOnSlave);
+                yield return new TestData(slave, vmSharedOnSlave);
+
             }
         }
+
+        private IEnumerable TestCasesArgumentException
+        {
+            get
+            {
+                //Unsupported IXenObjects
+                yield return new TestData(vmLocalOnMaster.First(), vmLocalOnMaster);
+                yield return new TestData(vmLocalOnMaster.First(), new List<VM>());
+
+                //Null host/pool
+                yield return new TestData(null, vmLocalOnMaster);
+                yield return new TestData(null, vmLocal);
+                yield return new TestData(null, new List<VM>());
+                yield return new TestData(null, null);
+            }
+        }
+
+        private IEnumerable TestCasesArgumentNullException
+        {
+            get
+            {
+                //null selection
+                yield return new TestData(twoHostPool, null);
+                yield return new TestData(master, null);
+            }
+        }
+
+        #endregion
+
 
         [Test]
         public void VerifyMigrationAllowed()
         {
-            Init();
             foreach (TestData data in TestCasesMigrationAllowed)
             {
-                VerifyMigrationAllowed(data.ixo, data.vms);
+                var filter = new CrossPoolMigrateCanMigrateFilter(data.Item1, data.Item2, WizardMode.Migrate);
+                Assert.False(filter.FailureFound, "Did not expect to find failure");
+                Assert.IsNullOrEmpty(filter.Reason, "Did not expect failure reason");
             }
-        }
-
-        private void VerifyMigrationAllowed(IXenObject ixo, List<VM> vms)
-        {
-            CrossPoolMigrateCanMigrateFilter cmd = new CrossPoolMigrateCanMigrateFilter(ixo, vms);
-            Assert.That(cmd.FailureFound, Is.False, "failure found");
-            Assert.That(cmd.Reason, Is.Null, "failure message");
-        }
-
-        [Test, ExpectedException(typeof(NullReferenceException))]
-        public void VerifyNullListArgsThrow()
-        {
-            bool failureFound = new CrossPoolMigrateCanMigrateFilter(singlePool, null).FailureFound;
         }
 
         [Test]
-        public void VerifyMigrationNotAllowed()
+        public void VerifyThrowsArgumentException()
         {
-            Init();
-            foreach (TestData data in TestCasesMigrationNotAllowedIfAssertion)
+            foreach (TestData data in TestCasesArgumentException)
             {
-                Assert.That(data.vms.Count, Is.AtLeast(1), "VM count needs to be at least 1 for this test");
-
-                //fakeVM will say a failure is found if vm ref is set to Failure.INTERNAL_ERROR
-                data.vms[0].opaque_ref = Failure.INTERNAL_ERROR;
-                Assert.That(data.vms[0].opaque_ref, Is.EqualTo(Failure.INTERNAL_ERROR));
-
-                CrossPoolMigrateCanMigrateFilter cmd = new CrossPoolMigrateCanMigrateFilter(data.ixo, data.vms);
-                Assert.That(cmd.FailureFound, Is.True, "failure found");
-                Assert.That(cmd.Reason, Is.EqualTo(Failure.INTERNAL_ERROR), "failure message");
-
+                Assert.Throws<ArgumentException>(() => { var filter = new CrossPoolMigrateCanMigrateFilter(data.Item1, data.Item2, WizardMode.Migrate); });
             }
+        }
 
+        [Test]
+        public void VerifyThrowsArgumentNullException()
+        {
+            foreach (TestData data in TestCasesArgumentNullException)
+            {
+                Assert.Throws<ArgumentNullException>(() => { var filter = new CrossPoolMigrateCanMigrateFilter(data.Item1, data.Item2, WizardMode.Migrate); });
+            }
+        }
+
+        [Test]
+        public void VerifyMigrationNotAllowedCurrentServer()
+        {
+            foreach (TestData data in TestCasesMigrationNotAllowedCurrentServer)
+            {
+                var filter = new CrossPoolMigrateCanMigrateFilter(data.Item1, data.Item2, WizardMode.Migrate);
+                Assert.True(filter.FailureFound, "Expected to find failure");
+                Assert.IsNullOrEmpty(filter.Reason, "Did not expect failure reason");
+            }
         }
     }
 }

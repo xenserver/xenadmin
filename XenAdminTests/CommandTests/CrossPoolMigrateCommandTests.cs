@@ -45,6 +45,9 @@ namespace XenAdminTests.CommandTests
         public const string id2 = "test2";
         private static readonly string[] ids = new []{id, id2};
 
+        /* run these tests without a target host, so they're forced to go further
+           than the CrossPoolCanMigrateFilter and perform the rest of the checks */
+
         public CrossPoolMigrateCommandUnitTests() : base(ids) { }
 
         [TearDown]
@@ -64,14 +67,13 @@ namespace XenAdminTests.CommandTests
         {
             Mock<VM> vm = ObjectFactory.BuiltObject<VM>(ObjectBuilderType.VmWithHomeServerHost, id);
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            Mock<Host> targetHost = ObjectManager.NewXenObject<Host>(id);
             vm.Setup(v => v.SRs).Returns(new List<SR> {sr.Object});
             vm.Setup(v => v.allowed_operations).Returns(new List<vm_operations> {vm_operations.migrate_send});
             sr.Setup(s => s.HBALunPerVDI).Returns(IsLunPerVdi);
 
             IMainWindow mw = new MockMainWindow();
 
-            CrossPoolMigrateCommand cmd = new CrossPoolMigrateCommand(mw, new List<SelectedItem> { new SelectedItem(vm.Object)}, targetHost.Object);
+            var cmd = new CrossPoolMigrateCommand(mw, new List<SelectedItem> { new SelectedItem(vm.Object)}, null);
             return cmd.CanExecute();
         }
 
@@ -82,7 +84,6 @@ namespace XenAdminTests.CommandTests
         {
             Mock<VM> vm = ObjectFactory.BuiltObject<VM>(ObjectBuilderType.VmWithHomeServerHost, id);
             Mock<Host> targetHost = ObjectFactory.BuiltObject<Host>(ObjectBuilderType.TampaHost, id);
-            Mock<Host> preselectedHost = ObjectFactory.BuiltObject<Host>(ObjectBuilderType.TampaHost, id);
             ObjectManager.MockConnectionFor(id).Setup(c => c.Resolve(It.IsAny<XenRef<Host>>())).Returns(targetHost.Object);
             vm.Setup(v => v.allowed_operations).Returns(new List<vm_operations> { vm_operations.migrate_send });
             Mock<Pool> pool = ObjectManager.NewXenObject<Pool>(id);
@@ -90,7 +91,7 @@ namespace XenAdminTests.CommandTests
             pool.Setup(p => p.wlb_url).Returns("wlburl"); //Configured == true
             
             IMainWindow mw = new MockMainWindow();
-            CrossPoolMigrateCommand cmd = new CrossPoolMigrateCommand(mw, new List<SelectedItem> { new SelectedItem(vm.Object) }, preselectedHost.Object);
+            var cmd = new CrossPoolMigrateCommand(mw, new List<SelectedItem> { new SelectedItem(vm.Object) }, null);
             bool canExecute = cmd.CanExecute();
             pool.Verify(p=>p.wlb_enabled, Times.AtLeastOnce());
             return canExecute;
@@ -122,7 +123,7 @@ namespace XenAdminTests.CommandTests
 
             //Command
             IMainWindow mw = new MockMainWindow();
-            CrossPoolMigrateCommand cmd = new CrossPoolMigrateCommand(mw, new List<SelectedItem> { new SelectedItem(vm.Object) }, targetHost.Object);
+            var cmd = new CrossPoolMigrateCommand(mw, new List<SelectedItem> { new SelectedItem(vm.Object) }, null);
             bool canExecute = cmd.CanExecute();
 
             //As the command is launching the wizard it should only need to 

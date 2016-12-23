@@ -75,10 +75,8 @@ namespace XenAdmin.Commands
                     SecondImage = _command.SecondImage;
                 }
 
-                if (_command.ToolTipText != null)
-                {
-                    ToolTipText = _command.ToolTipText;
-                }
+                //null is allowed (CA-147657)
+                ToolTipText = _command.ToolTipText;
 
                 StarRating = _command.StarRating;
             }

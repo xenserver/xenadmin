@@ -790,15 +790,7 @@ namespace XenAdmin.TabPages
             if (alert == null)
                 return;
 
-            try
-            {
-                Clipboard.SetText(alert.GetUpdateDetailsCSVQuotes());
-            }
-            catch (Exception ex)
-            {
-                log.Error("Exception while trying to set clipboard text.", ex);
-                log.Error(ex, ex);
-            }
+            Clip.SetClipboardText(alert.GetUpdateDetailsCSVQuotes());
         }
     }
 }

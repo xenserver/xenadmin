@@ -55,7 +55,8 @@ namespace XenAPI
                 if (IsPassthrough)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
-                return string.Format(Messages.VGPU_DESCRIPTION, model_name, Capacity, MaxResolution, max_heads);
+                return string.Format(max_heads == 1 ? Messages.VGPU_DESCRIPTION_ONE : Messages.VGPU_DESCRIPTION_MANY,
+                    model_name, Capacity, MaxResolution, max_heads);
             }
 
         }

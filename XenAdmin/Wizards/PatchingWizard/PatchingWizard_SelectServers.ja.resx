@@ -133,8 +133,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>アップデート対象のサーバーを一覧から選択します。
-一覧で選択できないサーバーにはこのアップデートをインストールできません。</value>
+    <value>rubric</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

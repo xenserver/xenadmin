@@ -84,10 +84,7 @@ namespace XenAdmin.SettingsPanels
                 return;
 
             Host currentAffinity = vm.Connection.Resolve(vm.affinity);
-            picker.SetAffinity(vm.Connection, currentAffinity,
-                              vm.HasNoDisksAndNoLocalCD
-                                  ? null
-                                  : vm.GetStorageHost(false));
+            picker.SetAffinity(vm.Connection, currentAffinity, null);
         }
 
         public bool ValidToSave
