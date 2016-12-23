@@ -628,7 +628,7 @@
     <value>3</value>
   </data>
   <data name="checkForUpdatesNowButton.Text" xml:space="preserve">
-    <value>立即检查更新(&amp;U)</value>
+    <value>立即检查更新(&amp;C)</value>
   </data>
   <data name="checkForUpdatesNowButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

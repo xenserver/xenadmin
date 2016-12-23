@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vdi_operations
     {
-        scan, clone, copy, resize, resize_online, snapshot, destroy, forget, update, force_unlock, generate_config, blocked, unknown
+        scan, clone, copy, resize, resize_online, snapshot, mirror, destroy, forget, update, force_unlock, generate_config, blocked, unknown
     }
 
     public static class vdi_operations_helper
@@ -58,6 +58,8 @@ namespace XenAPI
                     return "resize_online";
                 case vdi_operations.snapshot:
                     return "snapshot";
+                case vdi_operations.mirror:
+                    return "mirror";
                 case vdi_operations.destroy:
                     return "destroy";
                 case vdi_operations.forget:

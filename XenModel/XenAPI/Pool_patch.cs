@@ -56,6 +56,7 @@ namespace XenAPI
             bool pool_applied,
             List<XenRef<Host_patch>> host_patches,
             List<after_apply_guidance> after_apply_guidance,
+            XenRef<Pool_update> pool_update,
             Dictionary<string, string> other_config)
         {
             this.uuid = uuid;
@@ -66,6 +67,7 @@ namespace XenAPI
             this.pool_applied = pool_applied;
             this.host_patches = host_patches;
             this.after_apply_guidance = after_apply_guidance;
+            this.pool_update = pool_update;
             this.other_config = other_config;
         }
 
@@ -88,6 +90,7 @@ namespace XenAPI
             pool_applied = update.pool_applied;
             host_patches = update.host_patches;
             after_apply_guidance = update.after_apply_guidance;
+            pool_update = update.pool_update;
             other_config = update.other_config;
         }
 
@@ -101,6 +104,7 @@ namespace XenAPI
             pool_applied = (bool)proxy.pool_applied;
             host_patches = proxy.host_patches == null ? null : XenRef<Host_patch>.Create(proxy.host_patches);
             after_apply_guidance = proxy.after_apply_guidance == null ? null : Helper.StringArrayToEnumList<after_apply_guidance>(proxy.after_apply_guidance);
+            pool_update = proxy.pool_update == null ? null : XenRef<Pool_update>.Create(proxy.pool_update);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
@@ -115,6 +119,7 @@ namespace XenAPI
             result_.pool_applied = pool_applied;
             result_.host_patches = (host_patches != null) ? Helper.RefListToStringArray(host_patches) : new string[] {};
             result_.after_apply_guidance = (after_apply_guidance != null) ? Helper.ObjectListToStringArray(after_apply_guidance) : new string[] {};
+            result_.pool_update = (pool_update != null) ? pool_update : "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
         }
@@ -133,6 +138,7 @@ namespace XenAPI
             pool_applied = Marshalling.ParseBool(table, "pool_applied");
             host_patches = Marshalling.ParseSetRef<Host_patch>(table, "host_patches");
             after_apply_guidance = Helper.StringArrayToEnumList<after_apply_guidance>(Marshalling.ParseStringArray(table, "after_apply_guidance"));
+            pool_update = Marshalling.ParseRef<Pool_update>(table, "pool_update");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
@@ -151,6 +157,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._pool_applied, other._pool_applied) &&
                 Helper.AreEqual2(this._host_patches, other._host_patches) &&
                 Helper.AreEqual2(this._after_apply_guidance, other._after_apply_guidance) &&
+                Helper.AreEqual2(this._pool_update, other._pool_update) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
@@ -174,9 +181,11 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given pool_patch.
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static Pool_patch get_record(Session session, string _pool_patch)
         {
             return new Pool_patch((Proxy_Pool_patch)session.proxy.pool_patch_get_record(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse());
@@ -185,9 +194,11 @@ namespace XenAPI
         /// <summary>
         /// Get a reference to the pool_patch instance with the specified UUID.
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("")]
         public static XenRef<Pool_patch> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Pool_patch>.Create(session.proxy.pool_patch_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
@@ -196,9 +207,11 @@ namespace XenAPI
         /// <summary>
         /// Get all the pool_patch instances with the given label.
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
+        [Deprecated("")]
         public static List<XenRef<Pool_patch>> get_by_name_label(Session session, string _label)
         {
             return XenRef<Pool_patch>.Create(session.proxy.pool_patch_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
@@ -293,6 +306,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the pool_update field of the given pool_patch.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        public static XenRef<Pool_update> get_pool_update(Session session, string _pool_patch)
+        {
+            return XenRef<Pool_update>.Create(session.proxy.pool_patch_get_pool_update(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse());
+        }
+
+        /// <summary>
         /// Get the other_config field of the given pool_patch.
         /// First published in XenServer 4.1.
         /// </summary>
@@ -343,10 +367,12 @@ namespace XenAPI
         /// <summary>
         /// Apply the selected patch to a host and return its output
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
         /// <param name="_host">The host to apply the patch too</param>
+        [Deprecated("")]
         public static string apply(Session session, string _pool_patch, string _host)
         {
             return (string)session.proxy.pool_patch_apply(session.uuid, (_pool_patch != null) ? _pool_patch : "", (_host != null) ? _host : "").parse();
@@ -355,10 +381,12 @@ namespace XenAPI
         /// <summary>
         /// Apply the selected patch to a host and return its output
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
         /// <param name="_host">The host to apply the patch too</param>
+        [Deprecated("")]
         public static XenRef<Task> async_apply(Session session, string _pool_patch, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_apply(session.uuid, (_pool_patch != null) ? _pool_patch : "", (_host != null) ? _host : "").parse());
@@ -367,9 +395,11 @@ namespace XenAPI
         /// <summary>
         /// Apply the selected patch to all hosts in the pool and return a map of host_ref -> patch output
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static void pool_apply(Session session, string _pool_patch)
         {
             session.proxy.pool_patch_pool_apply(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse();
@@ -378,9 +408,11 @@ namespace XenAPI
         /// <summary>
         /// Apply the selected patch to all hosts in the pool and return a map of host_ref -> patch output
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static XenRef<Task> async_pool_apply(Session session, string _pool_patch)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_pool_apply(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse());
@@ -389,10 +421,12 @@ namespace XenAPI
         /// <summary>
         /// Execute the precheck stage of the selected patch on a host and return its output
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
         /// <param name="_host">The host to run the prechecks on</param>
+        [Deprecated("")]
         public static string precheck(Session session, string _pool_patch, string _host)
         {
             return (string)session.proxy.pool_patch_precheck(session.uuid, (_pool_patch != null) ? _pool_patch : "", (_host != null) ? _host : "").parse();
@@ -401,10 +435,12 @@ namespace XenAPI
         /// <summary>
         /// Execute the precheck stage of the selected patch on a host and return its output
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
         /// <param name="_host">The host to run the prechecks on</param>
+        [Deprecated("")]
         public static XenRef<Task> async_precheck(Session session, string _pool_patch, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_precheck(session.uuid, (_pool_patch != null) ? _pool_patch : "", (_host != null) ? _host : "").parse());
@@ -413,9 +449,11 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from the server
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static void clean(Session session, string _pool_patch)
         {
             session.proxy.pool_patch_clean(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse();
@@ -424,9 +462,11 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from the server
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static XenRef<Task> async_clean(Session session, string _pool_patch)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_clean(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse());
@@ -435,9 +475,11 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from all hosts in the pool, but does not remove the database entries
         /// First published in XenServer 6.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static void pool_clean(Session session, string _pool_patch)
         {
             session.proxy.pool_patch_pool_clean(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse();
@@ -446,9 +488,11 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from all hosts in the pool, but does not remove the database entries
         /// First published in XenServer 6.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static XenRef<Task> async_pool_clean(Session session, string _pool_patch)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_pool_clean(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse());
@@ -457,9 +501,11 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from all hosts in the pool, and removes the database entries.  Only works on unapplied patches.
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static void destroy(Session session, string _pool_patch)
         {
             session.proxy.pool_patch_destroy(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse();
@@ -468,9 +514,11 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from all hosts in the pool, and removes the database entries.  Only works on unapplied patches.
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
+        [Deprecated("")]
         public static XenRef<Task> async_destroy(Session session, string _pool_patch)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_destroy(session.uuid, (_pool_patch != null) ? _pool_patch : "").parse());
@@ -479,10 +527,12 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from the specified host
         /// First published in XenServer 6.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
         /// <param name="_host">The host on which to clean the patch</param>
+        [Deprecated("")]
         public static void clean_on_host(Session session, string _pool_patch, string _host)
         {
             session.proxy.pool_patch_clean_on_host(session.uuid, (_pool_patch != null) ? _pool_patch : "", (_host != null) ? _host : "").parse();
@@ -491,10 +541,12 @@ namespace XenAPI
         /// <summary>
         /// Removes the patch's files from the specified host
         /// First published in XenServer 6.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_patch">The opaque_ref of the given pool_patch</param>
         /// <param name="_host">The host on which to clean the patch</param>
+        [Deprecated("")]
         public static XenRef<Task> async_clean_on_host(Session session, string _pool_patch, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_patch_clean_on_host(session.uuid, (_pool_patch != null) ? _pool_patch : "", (_host != null) ? _host : "").parse());
@@ -503,8 +555,10 @@ namespace XenAPI
         /// <summary>
         /// Return a list of all the pool_patchs known to the system.
         /// First published in XenServer 4.1.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
+        [Deprecated("")]
         public static List<XenRef<Pool_patch>> get_all(Session session)
         {
             return XenRef<Pool_patch>.Create(session.proxy.pool_patch_get_all(session.uuid).parse());
@@ -663,6 +717,25 @@ namespace XenAPI
             }
         }
         private List<after_apply_guidance> _after_apply_guidance;
+
+        /// <summary>
+        /// A reference to the associated pool_update object
+        /// First published in .
+        /// </summary>
+        public virtual XenRef<Pool_update> pool_update
+        {
+            get { return _pool_update; }
+            set
+            {
+                if (!Helper.AreEqual(value, _pool_update))
+                {
+                    _pool_update = value;
+                    Changed = true;
+                    NotifyPropertyChanged("pool_update");
+                }
+            }
+        }
+        private XenRef<Pool_update> _pool_update;
 
         /// <summary>
         /// additional configuration

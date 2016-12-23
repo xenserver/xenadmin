@@ -77,6 +77,7 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             labelStatus.Text = text;
+            labelSubActionStatus.Visible = false;
             progressBar1.Style = ProgressBarStyle.Marquee;
             ShowIcon = false;
             HideTitleBarIcons();

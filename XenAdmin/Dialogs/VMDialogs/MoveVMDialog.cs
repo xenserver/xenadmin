@@ -60,11 +60,12 @@ namespace XenAdmin.Dialogs.VMDialogs
             Host affinity = vm.Home();
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
             //this has to be set after ImportTemplate, otherwise the usage will be reset to VM
-            srPicker1.SetUsageAsMovingVDI((from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
+            var vdis = (from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
                                            where vbd.IsOwner
                                            let vdi = vm.Connection.Resolve(vbd.VDI)
                                            where vdi != null
-                                           select vdi).ToArray());
+                                           select vdi).ToArray();
+            srPicker1.SetExistingVDIs(vdis);
             srPicker1.Connection = vm.Connection;
             srPicker1.DiskSize = vm.TotalVMSize;
             srPicker1.SetAffinity(affinity);
@@ -92,12 +93,12 @@ namespace XenAdmin.Dialogs.VMDialogs
             buttonMove.Enabled = srPicker1.SR != null;
         }
 
-        private void srPicker1_ItemSelectionNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNull()
         {
             EnableMoveButton();
         }
 
-        private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNotNull()
         {
             EnableMoveButton();
         }

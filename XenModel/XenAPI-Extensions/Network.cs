@@ -147,8 +147,8 @@ namespace XenAPI
 
         public override bool Show(bool showHiddenVMs)
         {
-            
-                if (IsGuestInstallerNetwork)
+                // CA-218956 - Expose HIMN when showing hidden objects
+                if (IsGuestInstallerNetwork && !showHiddenVMs)
                     return false;
 
                 if (!ShowAllPifs(showHiddenVMs))

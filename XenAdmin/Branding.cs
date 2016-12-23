@@ -47,6 +47,8 @@ namespace XenAdmin
         public const string COMPANY_NAME_SHORT = "[Citrix]";
         public const string SEARCH = "[xensearch]";
         public const string UPDATE = "[xsupdate]";
+        public const string UPDATEISO = "[iso]";
+        public const string BACKUP = "[xbk]";
         public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
 
         public static string Search
@@ -64,6 +66,15 @@ namespace XenAdmin
             {
                 var s = UPDATE;
                 return s != "[" + "xsupdate]" ? s : InvisibleMessages.XEN_UPDATE;
+            }
+        }
+
+        public static string UpdateIso
+        {
+            get
+            {
+                var s = UPDATEISO;
+                return s != "[" + "iso]" ? s : InvisibleMessages.ISO_UPDATE;
             }
         }
 

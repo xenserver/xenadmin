@@ -282,11 +282,14 @@ namespace XenAdmin.Controls.Wlb
                 WlbScheduledTask checkTask = CheckForDuplicateTask(newTask);
                 if (null != checkTask)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
                            Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)).ShowDialog(this);
+                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                     SelectTask(checkTask.TaskId);
                 }
                 else
@@ -308,11 +311,14 @@ namespace XenAdmin.Controls.Wlb
                 WlbScheduledTask checkTask = CheckForDuplicateTask(editTask);
                 if (null != checkTask)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
                            Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)).ShowDialog(this);
+                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                     SelectTask(checkTask.TaskId);
                 }
                 else
@@ -375,11 +381,14 @@ namespace XenAdmin.Controls.Wlb
                //if it's a duplicate task, display warning and return
                if (null != checkTask)
                {
-                   new ThreeButtonDialog(
+                   using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
                            Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)).ShowDialog(this);
+                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)))
+                   {
+                       dlg.ShowDialog(this);
+                   }
                    SelectTask(checkTask.TaskId);
                    return;
                }
@@ -646,12 +655,16 @@ namespace XenAdmin.Controls.Wlb
         {
             if (lvTaskList.SelectedItems.Count > 0)
             {
-                DialogResult confirmResult = new ThreeButtonDialog(
+                DialogResult confirmResult;
+                using (var dlg = new ThreeButtonDialog(
                                                 new ThreeButtonDialog.Details(SystemIcons.Warning,
                                                                                 Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING,
                                                                                 Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION),
                                                 ThreeButtonDialog.ButtonYes,
-                                                ThreeButtonDialog.ButtonNo).ShowDialog(this);
+                                                ThreeButtonDialog.ButtonNo))
+                {
+                    confirmResult = dlg.ShowDialog(this);
+                }
 
                 if (confirmResult == DialogResult.Yes)
                 {

@@ -63,11 +63,6 @@ namespace XenAdmin.Actions.VMActions
             this.copy = copy;
         }
 
-        public VMCrossPoolMigrateAction(VM vm, Host destinationHost, XenAPI.Network transferNetwork, VmMapping mapping)
-            : this(vm, destinationHost, transferNetwork, mapping, false)
-        {
-        }
-
         public static RbacMethodList StaticRBACDependencies
         {
             get
@@ -82,19 +77,16 @@ namespace XenAdmin.Actions.VMActions
         }
             
 
-        private static string GetTitle(VM vm, Host toHost, bool copy)
+        public static string GetTitle(VM vm, Host toHost, bool copy)
         {
             if (copy)
                 return string.Format(Messages.ACTION_VM_CROSS_POOL_COPY_TITLE, vm.Name, toHost.Name);
 
             Host residentOn = vm.Connection.Resolve(vm.resident_on);
-            if (residentOn == null)
-            {
-                return Messages.ACTION_VM_MIGRATING;
-            }
-
-            return string.Format(Messages.ACTION_VM_MIGRATING_TITLE, vm.Name, Helpers.GetName(residentOn), toHost.Name);
-
+            
+            return residentOn == null
+                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.Name, toHost.Name)
+                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name, Helpers.GetName(residentOn), toHost.Name);
         }
 
         protected override void Run()

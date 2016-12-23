@@ -131,14 +131,6 @@ namespace XenAdmin.Commands
         /// </summary>
         public SelectedItemCollection GetSelection()
         {
-            return GetSelectionCore();
-        }
-
-        /// <summary>
-        /// Gets the current selection context for the Command.
-        /// </summary>
-        protected virtual SelectedItemCollection GetSelectionCore()
-        {
             return _selection;
         }
 
@@ -197,7 +189,6 @@ namespace XenAdmin.Commands
         public virtual string MenuText
         {
             get { return null; }
-            set { throw new NotImplementedException(); }
         }
 
         /// <summary>
@@ -409,35 +400,19 @@ namespace XenAdmin.Commands
 
             foreach (SelectedItem item in GetSelection())
             {
-                string reason = GetCantExecuteReason(item);
+                if (item == null || item.XenObject == null)
+                    continue;
+                if (MainWindowCommandInterface != null && CanExecuteCore(new SelectedItemCollection(item)))
+                    continue;
 
+                string reason = GetCantExecuteReasonCore(item);
                 if (reason != null)
-                {
                     cantExecuteReasons.Add(item, reason);
-                }
             }
 
             return cantExecuteReasons;
         }
 
-        private string GetCantExecuteReason(SelectedItem item)
-        {
-            SelectedItemCollection selection = GetSelection();
-            ((ICommand)this).SetSelection(new[] { item });
-
-            try
-            {
-                if (!CanExecute() && item.XenObject != null)
-                {
-                    return GetCantExecuteReasonCore(item);
-                }
-                return null;
-            }
-            finally
-            {
-                ((ICommand)this).SetSelection(selection);
-            }
-        }
 
         /// <summary>
         /// Gets the reason that the specified item from the selection cant execute. This is displayed in the error dialog.

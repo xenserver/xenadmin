@@ -83,7 +83,19 @@ namespace XenAdmin.Commands
                 }
             }
 
-            Execute(selection[0].Connection, selection[0].HostAncestor, template);
+            var connection = selection[0].Connection;
+            Host host = null;
+
+            if (template != null)
+            {
+                host = template.Home();
+            }
+            else
+            {
+                host = selection[0].HostAncestor;
+            }
+
+            Execute(connection, host, template);
         }
 
         private void Execute(IXenConnection connection, Host DefaultAffinity, VM DefaultTemplate)

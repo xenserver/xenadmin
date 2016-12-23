@@ -368,12 +368,14 @@ namespace XenAdmin.Dialogs.VMAppliances
                     text = string.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_VM_APPLIANCES_0 : Messages.CONFIRM_DELETE_VM_APPLIANCES, numberOfProtectedVMs);
             }
 
-            if (new ThreeButtonDialog(
+            using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, text, Messages.DELETE_VM_APPLIANCE_TITLE),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes)
-
-                new DestroyVMApplianceAction(Pool.Connection, selectedAppliances).RunAsync();
+                    ThreeButtonDialog.ButtonNo))
+            {
+                if (dlg.ShowDialog(this) == DialogResult.Yes)
+                    new DestroyVMApplianceAction(Pool.Connection, selectedAppliances).RunAsync();
+            }
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
@@ -443,7 +445,7 @@ namespace XenAdmin.Dialogs.VMAppliances
 			if (currentSelected == null)
 				return;
 
-			var selection = new SelectedItemCollection(new[] {new SelectedItem(currentSelected)});
+			var selection = new SelectedItemCollection(new SelectedItem(currentSelected));
 			(new ExportApplianceWizard(Pool.Connection, selection)).Show(this);
 		}
 

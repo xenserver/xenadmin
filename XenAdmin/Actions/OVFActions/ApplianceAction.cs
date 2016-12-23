@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Threading;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -44,6 +45,9 @@ namespace XenAdmin.Actions.OVFActions
 		protected string m_tvmSubnetMask;
 		protected string m_tvmGateway;
 		protected XenOvfTransportBase m_transportAction;
+
+        private const int SLEEP_TIME = 900;
+        private const int MAX_ITERATIONS = 60 * 60 * 24 / SLEEP_TIME * 1000; //iterations in 24h
 
 		/// <summary>
 		/// RBAC dependencies needed to import appliance/export an appliance/import disk image.
@@ -79,6 +83,12 @@ namespace XenAdmin.Actions.OVFActions
 				Host = Helpers.GetMaster(connection);
 		}
 
+	    protected override void Run()
+	    {
+	        SafeToExit = false; 
+            InitialiseTicker();
+	    }
+
 		protected void UpdateHandler(XenOvfTranportEventArgs e)
 		{
 			if (!string.IsNullOrEmpty(e.Message))
@@ -97,5 +107,22 @@ namespace XenAdmin.Actions.OVFActions
 			if (m_transportAction != null)
 				m_transportAction.Cancel = true;
 		}
+
+	    private void InitialiseTicker()
+	    {
+	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion());
+	    }
+
+	    private void TickUntilCompletion()
+	    {
+	        int i = 0;
+	        while (!IsCompleted && ++i<MAX_ITERATIONS)
+	        {
+	            OnChanged();
+                Thread.Sleep(SLEEP_TIME);
+	        }
+	    }
+
+
 	}
 }

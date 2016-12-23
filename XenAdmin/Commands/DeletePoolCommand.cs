@@ -70,7 +70,10 @@ namespace XenAdmin.Commands
 
             if (conn.Cache.HostCount > 1)
             {
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SLAVES_EJECT, Messages.XENCENTER)).ShowDialog(Program.MainWindow);
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SLAVES_EJECT, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                } 
                 return;
             }
 

@@ -116,7 +116,7 @@ namespace XenAdminTests.CommandTests
 
         private IEnumerable<SelectedItemCollection> GetSelections()
         {
-            yield return new SelectedItemCollection(new[] { new SelectedItem(GetAnyHost(h => !h.IsMaster())) });
+            yield return new SelectedItemCollection(new SelectedItem(GetAnyHost(h => !h.IsMaster())));
         }
     }
 }

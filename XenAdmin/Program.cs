@@ -212,7 +212,7 @@ namespace XenAdmin
                 log.Error("Could not load settings.", ex);
                 var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
                                         string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()));
-                var dlog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,msg,Messages.XENCENTER))
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,msg,Messages.XENCENTER))
                                {
                                    StartPosition = FormStartPosition.CenterScreen,
                                    //For reasons I do not fully comprehend at the moment, the runtime
@@ -220,8 +220,10 @@ namespace XenAdmin
                                    //ShowInTaskbar is false. However it's a good idea anyway to show it
                                    //in the taskbar since the main form is not launcched at this point.
                                    ShowInTaskbar = true
-                               };
-                dlog.ShowDialog();
+                               })
+                {
+                    dlg.ShowDialog();
+                }
                 Application.Exit();
                 return;
             }
@@ -591,17 +593,18 @@ namespace XenAdmin
                 {
                     string filepath = GetLogFile();
 
-                    ThreeButtonDialog d = new ThreeButtonDialog(
+                    using (var d = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Error,
                            String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath),
-                           Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE));
-
-                    // CA-44733
-                    if (MainWindow != null && !IsExiting(MainWindow) && !MainWindow.InvokeRequired)
-                        d.ShowDialog(MainWindow);
-                    else
-                        d.ShowDialog();
+                           Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE)))
+                    {
+                        // CA-44733
+                        if (MainWindow != null && !IsExiting(MainWindow) && !MainWindow.InvokeRequired)
+                            d.ShowDialog(MainWindow);
+                        else
+                            d.ShowDialog();
+                    }
                 }
             }
             catch (Exception exception)
@@ -615,7 +618,10 @@ namespace XenAdmin
                 }
                 if (!RunInAutomatedTestMode)
                 {
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, exception.ToString(), Messages.XENCENTER)).ShowDialog();
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, exception.ToString(), Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog();
+                    }
                     // To be handled by WER
                     throw;
                 }
@@ -750,7 +756,10 @@ namespace XenAdmin
             }
             else
             {
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, msg, Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE)).ShowDialog();
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, msg, Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE)))
+                {
+                    dlg.ShowDialog();
+                }
             }
         }
 
@@ -759,7 +768,10 @@ namespace XenAdmin
             string s = GetLogFile_();
             if (s == null)
             {
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.MESSAGEBOX_LOGFILE_MISSING, Messages.XENCENTER)).ShowDialog();
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.MESSAGEBOX_LOGFILE_MISSING, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog();
+                }
             }
             else
             {

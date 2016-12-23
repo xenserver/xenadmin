@@ -478,7 +478,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			{
 				var netref = new XenRef<XenAPI.Network>(vif.network);
 				var network = con.Resolve(netref);
-				if (network == null || network.IsGuestInstallerNetwork)
+				// CA-218956 - Expose HIMN when showing hidden objects
+				if (network == null || (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
 					continue;
 
 				temp.Add(new Tuple(first ? Messages.FINISH_PAGE_NETWORK : "", network.Name));
@@ -677,7 +678,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			string systemID = OVF.AddVirtualSystem(env, m_pageVMconfig.VmName);
 			string hdwareSectionId = OVF.AddVirtualHardwareSection(env, systemID);
 			string guid = Guid.NewGuid().ToString();
-			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.OVF_VSSD_CAPTION,
+			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE,
 											Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
 
 			OVF.SetCPUs(env, systemID, m_pageVMconfig.CpuCount);

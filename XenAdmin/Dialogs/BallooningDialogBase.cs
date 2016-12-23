@@ -118,10 +118,16 @@ namespace XenAdmin.Dialogs
                             msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_MAX_PLURAL);
                         else
                             msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_PLURAL);
-                        if (DialogResult.Yes != new ThreeButtonDialog(
+                        
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.XENCENTER),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(parentWindow))
+                                ThreeButtonDialog.ButtonNo))
+                        {
+                            dialogResult = dlg.ShowDialog(parentWindow);
+                        }
+                        if (DialogResult.Yes != dialogResult)
                             return null;
                         break;
                     }

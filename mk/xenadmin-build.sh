@@ -66,7 +66,7 @@ LOG4NET_DIR=${REPO}/log4net/build/bin/net/2.0/release
 DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
 SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
 DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
-MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx452_web_setup
+MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx46_web_setup
 PUTTY_DIR=${REPO}/putty
 
 mkdir_clean ${XMLRPC_DIR}
@@ -107,7 +107,7 @@ dotnet_cp_to_dir "${LOG4NET_DIR}" "UNSIGNED/log4net.dll"
 dotnet_cp_to_dir "${SHARPZIPLIB_DIR}" "UNSIGNED/ICSharpCode.SharpZipLib.dll"
 dotnet_cp_to_dir "${DOTNETZIP_DIR}" "UNSIGNED/Ionic.Zip.dll"
 dotnet_cp_to_dir "${DISCUTILS_DIR}" "UNSIGNED/DiscUtils.dll"
-dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP452-KB2901954-Web.exe"
+dotnet_cp_to_dir "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "NDP46-KB3045560-Web.exe"
 dotnet_cp_to_dir "${PUTTY_DIR}" "UNSIGNED/putty.exe"
 dotnet_cp_to_dir "${REPO}" "sign.bat" && chmod a+x "${REPO}/sign.bat"
 
@@ -125,7 +125,7 @@ _WGET -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} -j ${REPO}/
 mkdir_clean ${REPO}/NUnit
 _WGET -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
 _WGET -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
-_WGET -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
+_WGET -P ${SCRATCH_DIR} ${REPO_CITRITE_LIB}/wix/3.10/{wix310-debug.zip,wix310-binaries.zip}
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
@@ -150,10 +150,15 @@ then
   latest=$(ls RPU002 | /usr/bin/sort -n | tail -n 1)
   echo "INFO: Latest version of RPU002 hotfix is $latest"
   cp RPU002/$latest/RPU002.xsupdate RPU002.xsupdate
+  if [ -d "RPU003" ]; then
+    latest=$(ls RPU003 | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of RPU003 hotfix is $latest"
+    cp RPU003/$latest/RPU003.xsupdate RPU003.xsupdate
+  fi
 fi
 
 #build
-MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.5 /p:VisualStudioVersion=13.0"
+MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=13.0"
 
 cd ${REPO}
 $MSBUILD XenAdmin.sln
@@ -167,19 +172,19 @@ $MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
-# ${WIX_BIN}/
-CANDLE="candle.exe -nologo"
-LIT="lit.exe -nologo"
-LIGHT="light.exe -nologo"
+
+CANDLE="${WIX_BIN}/candle.exe -nologo"
+LIT="${WIX_BIN}/lit.exe -nologo"
+LIGHT="${WIX_BIN}/light.exe -nologo"
 
 mkdir_clean ${WIX_SRC}
-${UNZIP} ${SCRATCH_DIR}/wix39-sources-debug.zip -d ${SCRATCH_DIR}/wixsrc
+${UNZIP} ${SCRATCH_DIR}/wix310-debug.zip -d ${SCRATCH_DIR}/wixsrc
 cp ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeDlg.wxs ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeStdDlg.wxs
 cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${REPO}/mk/patches/wix_src_patch
 cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
 
 mkdir_clean ${WIX_BIN}
-${UNZIP} ${SCRATCH_DIR}/wix39-binaries.zip -d ${WIX_BIN}
+${UNZIP} ${SCRATCH_DIR}/wix310-binaries.zip -d ${WIX_BIN}
 touch ${REPO}/WixInstaller/PrintEula.dll
 
 #compile_wix
@@ -218,7 +223,7 @@ version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
 #copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
-cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
+cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP46-KB3045560-Web.exe ${DOTNETINST}
 DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
 DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
 cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
@@ -275,6 +280,9 @@ mkdir_clean ${ISO_DIR}
 install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
 cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+#CP-18097
+mkdir_clean ${OUTPUT_DIR}/installer
+tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
 mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso" "${ISO_DIR}"
 
 echo "INFO:	Create l10n iso file"
@@ -284,6 +292,9 @@ mkdir_clean ${L10N_ISO_DIR}
 install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
 cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+#CP-18097
+mkdir_clean ${OUTPUT_DIR}/installer.l10n
+tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
 mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.iso" "${L10N_ISO_DIR}"
 
 # Create a tarball containing the XenCenter ISO, to be installed by the host installer
@@ -299,6 +310,9 @@ for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb 
 do
   dotnet_cp_to_dir "${OUTPUT_DIR}" "${pdb}"
 done
+
+#now package the pdbs
+cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 *.pdb
 
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest

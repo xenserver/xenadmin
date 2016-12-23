@@ -285,6 +285,31 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
                 dataSet.Type = DataType.Gpu;
             }
+            else if (settype.StartsWith("pvscache"))
+            {
+                if (settype.Contains("traffic") || settype.EndsWith("evicted"))
+                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
+                else if (settype.EndsWith("read_total") || settype.EndsWith("read_hits") || settype.EndsWith("read_misses"))
+                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
+                else if (settype.Contains("utilization")) 
+                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed); // values range from 0 to 100
+                else
+                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
+                dataSet.Type = DataType.Pvs;
+            }
+            else if (settype.StartsWith("read_latency") || settype.StartsWith("write_latency"))
+            {
+                // Units are microseconds
+                dataSet.MultiplyingFactor = 1000;
+                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
+                dataSet.Type = DataType.Latency;
+            }
+            else if (settype.StartsWith("read") || settype.StartsWith("write"))
+            {
+                // Units are Bytes/second
+                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
+                dataSet.Type = DataType.Storage;
+            }
             else
             {
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
@@ -785,7 +810,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         }
     }
 
-    public enum DataType { Cpu, Memory, Disk, Storage, Network, Latency, LoadAverage, Gpu, Custom };
+    public enum DataType { Cpu, Memory, Disk, Storage, Network, Latency, LoadAverage, Gpu, Pvs, Custom };
 
     public static class DatatypeExtensions
     {
@@ -809,6 +834,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return Messages.DATATYPE_LOADAVERAGE;
                 case DataType.Gpu:
                     return Messages.DATATYPE_GPU;
+                case DataType.Pvs:
+                    return Messages.DATATYPE_PVS;
                 default:
                     return Messages.DATATYPE_CUSTOM;
             }

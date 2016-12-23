@@ -52,7 +52,6 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly ContextMenu _TheContextMenu = new ContextMenu();
         private readonly DataGridViewColumn storageLinkColumn;
 
         private VM vm;
@@ -60,30 +59,11 @@ namespace XenAdmin.TabPages
         public VMStoragePage()
         {
             InitializeComponent();
-
-            _TheContextMenu.MenuItems.Add(AddButton.Text, AddButton_Click);
-
             storageLinkColumn = ColumnSRVolume;
 
             TitleLabel.ForeColor = Program.HeaderGradientForeColor;
             TitleLabel.Font = Program.HeaderGradientFont;
-            multipleDvdIsoList1.linkLabel1.LinkColor = Color.FromArgb(0, 0, 255);
-            dataGridViewStorage.SortCompare += new DataGridViewSortCompareEventHandler(dataGridViewStorage_SortCompare);
             dataGridViewStorage.Sort(ColumnDevicePosition, ListSortDirection.Ascending);
-        }
-
-        void dataGridViewStorage_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
-        {
-            if (e.Column == ColumnDevicePosition)
-            {
-                e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
-
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-            }
         }
 
         public VM VM
@@ -128,17 +108,19 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void vdi_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        private void vdi_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // Nothing changing on any of the vdi's will require a rebuild of the list...
-
-            if (e.PropertyName == "allowed_operations")
-                UpdateButtons();
-            else
-                UpdateData();
+            Program.Invoke(this, () =>
+            {
+                if (e.PropertyName == "allowed_operations")
+                    UpdateButtons();
+                else
+                    UpdateData();
+            });
         }
 
-        private void vbd_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        private void vbd_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // Only rebuild list if VDIs changed - otherwise just refresh
 
@@ -187,7 +169,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void vm_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "VBDs")
                 BuildList();
@@ -288,11 +270,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void TheHeaderListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateButtons();
-        }
-
         private void UpdateButtons()
         {
             AttachVirtualDiskCommand attachCmd = new AttachVirtualDiskCommand(Program.MainWindow, vm);
@@ -304,8 +281,8 @@ namespace XenAdmin.TabPages
             if (dataGridViewStorage.Rows.Count == 0 || vbdRows == null || vm == null)
             {
                 DeactivateButton.Enabled = false;
-                DetachDriveButton.Enabled = false;
-                DeleteDriveButton.Enabled = false;
+                DetachButton.Enabled = false;
+                DeleteButton.Enabled = false;
                 EditButton.Enabled = false;
                 MoveButton.Enabled = false;
                 return;
@@ -327,12 +304,12 @@ namespace XenAdmin.TabPages
             if (deleteCmd.CanExecute())
             {
                 DeleteButtonContainer.RemoveAll();
-                DeleteDriveButton.Enabled = true;
+                DeleteButton.Enabled = true;
             }
             else
             {
                 DeleteButtonContainer.SetToolTip(deleteCmd.ToolTipText);
-                DeleteDriveButton.Enabled = false;
+                DeleteButton.Enabled = false;
             }
 
             Command activationCmd = null;
@@ -341,14 +318,14 @@ namespace XenAdmin.TabPages
             if (vbdCol.AsXenObjects<VBD>().Find(delegate(VBD vbd) { return !vbd.currently_attached; }) == null)
             {
                 // no VBDs are attached so we are deactivating
-                DeactivateButton.Text = Messages.DEACTIVATE;
+                toolStripMenuItemDeactivate.Text = DeactivateButton.Text = Messages.DEACTIVATE;
                 activationCmd = new DeactivateVBDCommand(Program.MainWindow, selectedVBDs);
             }
             else
             {
-                // this is the default cause in the mixed attached/detatched scenario. We try to activate all the selection
+                // this is the default cause in the mixed attached/detached scenario. We try to activate all the selection
                 // The command error reports afterwards about the ones which are already attached
-                DeactivateButton.Text = Messages.ACTIVATE;
+                toolStripMenuItemDeactivate.Text = DeactivateButton.Text = Messages.ACTIVATE;
                 activationCmd = new ActivateVBDCommand(Program.MainWindow, selectedVBDs);
             }
 
@@ -367,16 +344,16 @@ namespace XenAdmin.TabPages
             if (detachCmd.CanExecute())
             {
                 DetachButtonContainer.RemoveAll();
-                DetachDriveButton.Enabled = true;
+                DetachButton.Enabled = true;
             }
             else
             {
                 DetachButtonContainer.SetToolTip(detachCmd.ToolTipText);
-                DetachDriveButton.Enabled = false;
+                DetachButton.Enabled = false;
             }
 
             // Move button
-            Command moveCmd = MoveMigrateCommand(selectedVDIs);
+            Command moveCmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, selectedVDIs);
             if (moveCmd.CanExecute())
             {
                 MoveButton.Enabled = true;
@@ -389,17 +366,9 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private Command MoveMigrateCommand(IEnumerable<SelectedItem> selection)
-        {
-            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow, selection);
+        #region Actions on VDIs
 
-            if (moveCmd.CanExecute())
-                return moveCmd;
-
-            return new MigrateVirtualDiskCommand(Program.MainWindow, selection);
-        }
-
-        private void AddButton_Click(object sender, EventArgs e)
+        private void AddVdi()
         {
             var cmd = new AddVirtualDiskCommand(Program.MainWindow, vm);
             if (cmd.CanExecute())
@@ -409,7 +378,7 @@ namespace XenAdmin.TabPages
             UpdateButtons();
         }
 
-        private void AttachButton_Click(object sender, EventArgs e)
+        private void AttachVdi()
         {
             AttachVirtualDiskCommand cmd = new AttachVirtualDiskCommand(Program.MainWindow, vm);
             if (cmd.CanExecute())
@@ -418,7 +387,7 @@ namespace XenAdmin.TabPages
             UpdateButtons();
         }
 
-        private void MoveButton_Click(object sender, EventArgs e)
+        private void MoveVdi()
         {
             List<VBDRow> rows = SelectedVBDRows;
             if (rows == null)
@@ -427,15 +396,12 @@ namespace XenAdmin.TabPages
             foreach (VBDRow r in rows)
                 l.Add(new SelectedItem(r.VDI));
 
-            Command cmd = MoveMigrateCommand(l);
+            Command cmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, l);
             if (cmd.CanExecute())
                 cmd.Execute();
         }
 
-        /// <summary>
-        /// User has clicked the detach button. Unplug the VBD, then destroy it.
-        /// </summary>
-        private void DetachButton_Click(object sender, EventArgs e)
+        private void DetachVdi()
         {
             List<VBDRow> rows = SelectedVBDRows;
             if (rows == null)
@@ -449,7 +415,7 @@ namespace XenAdmin.TabPages
                 cmd.Execute();
         }
 
-        private void DeleteDriveButton_Click(object sender, EventArgs e)
+        private void DeleteVdi()
         {
             List<VBDRow> rows = SelectedVBDRows;
             if (rows == null)
@@ -466,7 +432,7 @@ namespace XenAdmin.TabPages
                 cmd.Execute();
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
+        private void EditVdi()
         {
             if (vm == null)
                 return;
@@ -479,84 +445,209 @@ namespace XenAdmin.TabPages
             new PropertiesDialog(rows[0].VDI).ShowDialog(this);
         }
 
-        private void TheHeaderListBox_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex >= 0 && EditButton.Enabled == true)
-            {
-                // If double-click was on data row (not including header), launch the storage edit box
-                EditButton_Click(null, null);
-            }
-        }
-
-        private void TheHeaderListBox_DataGridView_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Load context menus on right mouse click
-            DataGridView.HitTestInfo hitTestInfo;
-            if (e.Button == MouseButtons.Right)
-            {
-                hitTestInfo = dataGridViewStorage.HitTest(e.X, e.Y);
-                if (hitTestInfo.Type == DataGridViewHitTestType.Cell)
-                {
-                    if (dataGridViewStorage.Rows.Count >= 0)
-                    {
-                        if (!dataGridViewStorage.Rows[hitTestInfo.RowIndex].Selected)
-                        {
-                            // Select the row that the user right clicked on (similiar to outlook) if it's not already in the selection
-                            // (avoids clearing a multiselect if you right click inside it)
-                            // Check if the CurrentCell is the cell the user right clicked on (but the row is not Selected) [CA-64954]
-                            // This happens when the grid is initially shown: the current cell is the first cell in the first column, but the row is not selected
-                            if (dataGridViewStorage.CurrentCell == dataGridViewStorage[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex])
-                                dataGridViewStorage.Rows[hitTestInfo.RowIndex].Selected = true;
-                            else
-                                dataGridViewStorage.CurrentCell = dataGridViewStorage[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex];
-                        }
-                        // Update the menus as they are contextual
-                        PopulateContextMenu();
-                        // Show the menus.  We will always have at least one (Add).
-                        _TheContextMenu.Show(dataGridViewStorage, new Point(e.X, e.Y));
-                    }
-                }
-            }
-        } // TheHeaderListBox_DataGridView_MouseUp
-
-        private void PopulateContextMenu()
-        {
-            _TheContextMenu.MenuItems.Clear();
-            if (AddButton.Visible && AddButton.Enabled)
-                _TheContextMenu.MenuItems.Add(AddButton.Text, AddButton_Click);
-            if (AttachButton.Visible && AttachButton.Enabled)
-                _TheContextMenu.MenuItems.Add(AttachButton.Text, AttachButton_Click);
-            if (DeactivateButton.Enabled)
-                _TheContextMenu.MenuItems.Add(DeactivateButton.Text, DeactivateButton_Click);
-            if (MoveButton.Enabled)
-                _TheContextMenu.MenuItems.Add(MoveButton.Text, MoveButton_Click);
-            if (DeleteDriveButton.Visible && DeleteDriveButton.Enabled)
-                _TheContextMenu.MenuItems.Add(DeleteDriveButton.Text, DeleteDriveButton_Click);
-            if (DetachDriveButton.Visible && DetachDriveButton.Enabled)
-                _TheContextMenu.MenuItems.Add(DetachDriveButton.Text, DetachButton_Click);
-            if (EditButton.Visible && EditButton.Enabled)
-                _TheContextMenu.MenuItems.Add(EditButton.Text, EditButton_Click);
-        }
-
-        private void DeactivateButton_Click(object sender, EventArgs e)
+        private void ActivateDeactivateVdi()
         {
             List<VBDRow> rows = SelectedVBDRows;
             if (rows == null)
                 return;
-            List<SelectedItem> l = new List<SelectedItem>();
-            foreach (VBDRow r in rows)
-                l.Add(new SelectedItem(r.VBD));
 
-            SelectedItemCollection col = new SelectedItemCollection(l);
+            var selection = from VBDRow r in rows select new SelectedItem(r.VBD);
+            SelectedItemCollection col = new SelectedItemCollection(selection);
+
             Command cmd = null;
             if (col.AsXenObjects<VBD>().Find(vbd => !vbd.currently_attached) == null)
-                cmd = new DeactivateVBDCommand(Program.MainWindow, l);
+                cmd = new DeactivateVBDCommand(Program.MainWindow, col);
             else
-                cmd = new ActivateVBDCommand(Program.MainWindow, l);
+                cmd = new ActivateVBDCommand(Program.MainWindow, col);
 
             if (cmd.CanExecute())
                 cmd.Execute();
-        }       
+        }
+
+        #endregion
+
+
+        #region Datagridview event handlers
+
+        private void dataGridViewStorage_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.Column == ColumnDevicePosition)
+            {
+                e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
+
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void dataGridViewStorage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
+
+        private void dataGridViewStorage_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && EditButton.Enabled)
+            {
+                // If double-click was on data row (not including header), launch the storage edit box
+                EditVdi();
+            }
+        }
+
+        private void dataGridViewStorage_MouseUp(object sender, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo hitTestInfo = dataGridViewStorage.HitTest(e.X, e.Y);
+
+            if (hitTestInfo.Type == DataGridViewHitTestType.None)
+            {
+                dataGridViewStorage.ClearSelection();
+            }
+            else if (hitTestInfo.Type == DataGridViewHitTestType.Cell && e.Button == MouseButtons.Right
+                     && 0 <= hitTestInfo.RowIndex && hitTestInfo.RowIndex < dataGridViewStorage.Rows.Count
+                     && !dataGridViewStorage.Rows[hitTestInfo.RowIndex].Selected)
+            {
+                // Select the row that the user right clicked on (similiar to outlook) if it's not already in the selection
+                // (avoids clearing a multiselect if you right click inside it)
+                // Check if the CurrentCell is the cell the user right clicked on (but the row is not Selected) [CA-64954]
+                // This happens when the grid is initially shown: the current cell is the first cell in the first column, but the row is not selected
+
+                if (dataGridViewStorage.CurrentCell == dataGridViewStorage[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex])
+                    dataGridViewStorage.Rows[hitTestInfo.RowIndex].Selected = true;
+                else
+                    dataGridViewStorage.CurrentCell = dataGridViewStorage[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex];
+            }
+
+            if ((hitTestInfo.Type == DataGridViewHitTestType.None || hitTestInfo.Type == DataGridViewHitTestType.Cell)
+                && e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(dataGridViewStorage, new Point(e.X, e.Y));
+            }
+        }
+
+        private void dataGridViewStorage_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Apps)
+                return;
+            
+            if (dataGridViewStorage.SelectedRows.Count == 0)
+            {
+                // 3 is the defaul control margin
+                contextMenuStrip1.Show(dataGridViewStorage, 3, dataGridViewStorage.ColumnHeadersHeight + 3);
+            }
+            else
+            {
+                DataGridViewRow row = dataGridViewStorage.SelectedRows[0];
+                contextMenuStrip1.Show(dataGridViewStorage, 3, row.Height * (row.Index + 2));
+            }
+        }
+
+        #endregion
+
+
+        #region Button and Toolstrip event handlers
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            bool add = AddButton.Visible && AddButton.Enabled;
+            bool attach = AttachButton.Visible && AttachButton.Enabled;
+            bool deactivate = DeactivateButton.Enabled;
+            bool move = MoveButton.Enabled;
+            bool delete = DeleteButton.Visible && DeleteButton.Enabled;
+            bool detach = DetachButton.Visible && DetachButton.Enabled;
+            bool edit = EditButton.Visible && EditButton.Enabled;
+
+            if (!(add || attach || deactivate || move || delete || detach || edit))
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            toolStripMenuItemAdd.Visible = add;
+            toolStripMenuItemAttach.Visible = attach;
+            toolStripMenuItemDeactivate.Visible = deactivate;
+            toolStripMenuItemMove.Visible = move;
+            toolStripMenuItemDelete.Visible = delete;
+            toolStripMenuItemDetach.Visible = detach;
+            toolStripMenuItemProperties.Visible = edit;
+            toolStripSeparator1.Visible = (add || attach || deactivate || move || delete || detach) && edit;
+        }
+
+
+        private void toolStripMenuItemAdd_Click(object sender, EventArgs e)
+        {
+            AddVdi();
+        }
+
+        private void toolStripMenuItemAttach_Click(object sender, EventArgs e)
+        {
+            AttachVdi();
+        }
+
+        private void toolStripMenuItemDeactivate_Click(object sender, EventArgs e)
+        {
+            ActivateDeactivateVdi();
+        }
+
+        private void toolStripMenuItemMove_Click(object sender, EventArgs e)
+        {
+            MoveVdi();
+        }
+
+        private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            DeleteVdi();
+        }
+
+        private void toolStripMenuItemDetach_Click(object sender, EventArgs e)
+        {
+            DetachVdi();
+        }
+
+        private void toolStripMenuItemProperties_Click(object sender, EventArgs e)
+        {
+            EditVdi();
+        }
+
+        
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddVdi();
+        }
+
+        private void AttachButton_Click(object sender, EventArgs e)
+        {
+            AttachVdi();
+        }
+
+        private void DeactivateButton_Click(object sender, EventArgs e)
+        {
+            ActivateDeactivateVdi();
+        }
+
+        private void MoveButton_Click(object sender, EventArgs e)
+        {
+            MoveVdi();
+        }
+
+        private void DeleteDriveButton_Click(object sender, EventArgs e)
+        {
+            DeleteVdi();
+        }
+
+        private void DetachButton_Click(object sender, EventArgs e)
+        {
+            DetachVdi();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            EditVdi();
+        }
+
+        #endregion
     }
 
     public class VBDRow : DataGridViewRow

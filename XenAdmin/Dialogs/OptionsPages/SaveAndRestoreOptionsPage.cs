@@ -100,9 +100,12 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.RequirePass = true;
 
                 // set password
-                Program.MasterPassword = TemporaryMasterPassword;
-                new ActionBase(Messages.CHANGED_MASTER_PASSWORD,
-                    Messages.CHANGED_MASTER_PASSWORD_LONG, false, true);
+                if (Program.MasterPassword != TemporaryMasterPassword) 
+                {
+                    Program.MasterPassword = TemporaryMasterPassword;
+                    new ActionBase(Messages.CHANGED_MASTER_PASSWORD,
+                        Messages.CHANGED_MASTER_PASSWORD_LONG, false, true);
+                }
             }
             if (SaveAllAfter)
                 Settings.SaveServerList();

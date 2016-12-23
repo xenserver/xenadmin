@@ -50,8 +50,14 @@ namespace XenAdminTests.CommandTests
         [Test]
         public void CheckContextMenuText()
         {
-            MigrateVirtualDiskCommand cmd = new MigrateVirtualDiskCommand(mw, null as VDI);
+            var selectedVdi1 = new SelectedItem(new VDI());
+            var selectedVdi2 = new SelectedItem(new VDI());
+
+            var cmd = new MigrateVirtualDiskCommand(mw, new[] { selectedVdi1 });
             Assert.AreEqual(Messages.MOVE_VDI_CONTEXT_MENU, cmd.ContextMenuText);
+
+            cmd = new MigrateVirtualDiskCommand(mw, new[] { selectedVdi1, selectedVdi2 });
+            Assert.AreEqual(Messages.MAINWINDOW_MOVE_OBJECTS, cmd.ContextMenuText);
         }
 
         [Test]
@@ -61,7 +67,7 @@ namespace XenAdminTests.CommandTests
             {
                 SR sr; VDI vdi;
                 ResolveSrAndVdiNames(srTuple.SrName, srTuple.VdiName, out sr, out vdi);
-                MigrateVirtualDiskCommand cmd = new MigrateVirtualDiskCommand(mw, vdi);
+                var cmd = new MigrateVirtualDiskCommand(mw, new[] {new SelectedItem(vdi)});
                 Assert.AreEqual(srTuple.ExpectedCanMigrate, cmd.CanExecute(),
                                 String.Format("VDI '{0}' on SR '{1}' can migrate", srTuple.VdiName, srTuple.SrName));
             }
@@ -70,8 +76,7 @@ namespace XenAdminTests.CommandTests
         [Test]
         public void CommandCannotExecuteNullVdi()
         {
-            MigrateVirtualDiskCommand cmd = new MigrateVirtualDiskCommand(mw, null as VDI);
-            Assert.IsFalse(cmd.CanExecute(), "Null vdi");
+            Assert.Throws<ArgumentNullException>(() => new MigrateVirtualDiskCommand(mw, null), "Null vdi selection");
         }
 
         [Test]
@@ -83,7 +88,7 @@ namespace XenAdminTests.CommandTests
             {
                 SR sr; VDI vdi;
                 ResolveSrAndVdiNames(srTuple.SrName, srTuple.VdiName, out sr, out vdi);
-                MigrateVirtualDiskCommand cmd = new MigrateVirtualDiskCommand(mw, vdi);
+                var cmd = new MigrateVirtualDiskCommand(mw, new[] { new SelectedItem(vdi) });
                 Assert.IsFalse(cmd.CanExecute(), 
                                String.Format("VDI '{0}' on SR '{1}' can migrate", srTuple.VdiName, srTuple.SrName));
             }

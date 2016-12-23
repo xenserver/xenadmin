@@ -220,10 +220,13 @@ namespace XenAdmin.Dialogs
                 {
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Error,
-                               FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)).ShowDialog(Program.MainWindow);
+                               FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)))
+                        {
+                            dlg.ShowDialog(Program.MainWindow);
+                        }
                     });
                     // Give up
                     return;
@@ -299,7 +302,11 @@ namespace XenAdmin.Dialogs
 
             Host affinity = TheVM.Connection.Resolve<Host>(TheVM.affinity);
             Host activeHost = TheVM.Connection.Resolve<Host>(TheVM.resident_on);
-            if (TheSR.content_type != SR.Content_Type_ISO && !((affinity != null && !TheSR.CanBeSeenFrom(affinity)) || (activeHost != null && TheVM.power_state == vm_power_state.Running && !TheSR.CanBeSeenFrom(activeHost))  || TheSR.IsBroken(false) || TheSR.PBDs.Count < 1))
+            if (!TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
+            {
+                Show = false;
+            }
+            else if (TheSR.content_type != SR.Content_Type_ISO && !((affinity != null && !TheSR.CanBeSeenFrom(affinity)) || (activeHost != null && TheVM.power_state == vm_power_state.Running && !TheSR.CanBeSeenFrom(activeHost))  || TheSR.IsBroken(false) || TheSR.PBDs.Count < 1))
             {
                 Description = "";
                 Enabled = true;

@@ -52,7 +52,7 @@ namespace XenAdmin.Dialogs
             CustomFieldsManager.CustomFieldsChanged += CustomFields_CustomFieldsChanged;
         }
 
-        void CustomFields_CustomFieldsChanged(object sender, EventArgs e)
+        void CustomFields_CustomFieldsChanged()
         {
             Build();
         }

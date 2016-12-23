@@ -403,9 +403,11 @@ namespace XenAdmin.Dialogs.Wlb
             _subscription.ReportParameters = rps;
 
             SendWlbConfigurationAction action = new SendWlbConfigurationAction(this._pool, _subscription.ToDictionary(), SendWlbConfigurationKind.SetReportSubscription);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
            
             if (action.Succeeded)
             {
@@ -414,11 +416,14 @@ namespace XenAdmin.Dialogs.Wlb
             }
             else if(!action.Cancelled)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        String.Format(Messages.WLB_SUBSCRIPTION_ERROR, _subscription.Description),
-                       Messages.XENCENTER)).ShowDialog(this);
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 //log.ErrorFormat("There was an error calling SendWlbConfigurationAction to SetReportSubscription {0}, Action Result: {1}.", _subscription.Description, action.Result);
                 DialogResult = DialogResult.None;
             }

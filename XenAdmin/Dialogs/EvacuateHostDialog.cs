@@ -320,7 +320,8 @@ namespace XenAdmin.Dialogs
             SetSession(saveVMsAction);
             SetSession(action);
             saveVMsAction.RunAsync();
-            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(this);
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+                dlg.ShowDialog(this);
             RefreshEntermaintenanceButton();
         }
 
@@ -767,11 +768,14 @@ namespace XenAdmin.Dialogs
 
                     case Failure.HOST_NOT_ENOUGH_FREE_MEMORY:
                         if (vmRef == null)
-                            new ThreeButtonDialog(
+                            using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Error,
                                    Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY,
-                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE)).ShowDialog(this);
+                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE)))
+                            {
+                                dlg.ShowDialog(this);
+                            }
 
                         vmRef = ErrorDescription[1];
                         UpdateVMWithError(vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
@@ -786,11 +790,14 @@ namespace XenAdmin.Dialogs
                         }
 
                         if (vmRef == null)
-                            new ThreeButtonDialog(
+                            using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Error,
                                    Messages.EVACUATE_HOST_NO_OTHER_HOSTS,
-                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE)).ShowDialog(this);
+                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE)))
+                            {
+                                dlg.ShowDialog(this);
+                            }
 
                         break;
 
@@ -869,7 +876,7 @@ namespace XenAdmin.Dialogs
         {
             bool selected = false;
 
-            if (previousSelection != null && !selected)
+            if (previousSelection != null)
             {
                 foreach (ToStringWrapper<Host> host in NewMasterComboBox.Items)
                 {
@@ -885,7 +892,6 @@ namespace XenAdmin.Dialogs
             if (NewMasterComboBox.Items.Count > 0 && !selected)
             {
                 NewMasterComboBox.SelectedIndex = 0;
-                selected = true;
             }
         }
 

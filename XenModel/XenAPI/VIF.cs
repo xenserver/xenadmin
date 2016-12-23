@@ -835,6 +835,30 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Move the specified VIF to the specified network, even while the VM is running
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_network">The network to move it to</param>
+        public static void move(Session session, string _vif, string _network)
+        {
+            session.proxy.vif_move(session.uuid, (_vif != null) ? _vif : "", (_network != null) ? _network : "").parse();
+        }
+
+        /// <summary>
+        /// Move the specified VIF to the specified network, even while the VM is running
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_network">The network to move it to</param>
+        public static XenRef<Task> async_move(Session session, string _vif, string _network)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vif_move(session.uuid, (_vif != null) ? _vif : "", (_network != null) ? _network : "").parse());
+        }
+
+        /// <summary>
         /// Set the locking mode for this VIF
         /// First published in XenServer 6.1.
         /// </summary>

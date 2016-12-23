@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Dialogs.VMProtectionRecovery;
@@ -58,6 +59,8 @@ namespace XenAdmin.Dialogs
 		/// Style to use for non-checkable rows (should appear grayed out)
 		/// </summary>
 		private DataGridViewCellStyle dimmedStyle;
+
+        private List<SR> _availableSrs = new List<SR>();
 		#endregion
 
 		public DRConfigureDialog(Pool pool)
@@ -85,44 +88,34 @@ namespace XenAdmin.Dialogs
 
 		#region Private methods
 
-		/// <summary>
-		/// First time population of the control
-		/// </summary>
-		private void PopulateSrDataGridView()
-		{
-			try
-			{
-				m_dataGridView.SuspendLayout();
-				m_dataGridView.Rows.Clear();
+        /// <summary>
+        /// First time population of the control
+        /// </summary>
+        private void PopulateSrDataGridView()
+        {
+            try
+            {
+                m_dataGridView.SuspendLayout();
 
-				foreach (var sr in Pool.Connection.Cache.SRs)
-				{
-                    if (!sr.SupportsDatabaseReplication())
-						continue;
+                foreach (var sr in _availableSrs)
+                {
+                    var row = new SrRow(sr, Pool);
 
-					var row = new SrRow(sr, Pool);
+                    if (row.IsDrEnabled)
+                    {
+                        m_drOriginallyEnabled = true;
+                        m_numberOfCheckedSrs++;
+                    }
 
-					if (row.IsDrEnabled)
-					{
-						m_drOriginallyEnabled = true;
-						m_numberOfCheckedSrs++;
-					}
-
-					m_dataGridView.Rows.Add(row);
-					ToggleRowCheckable(row);
-				}
-
-				//set the width of the last column
-				columnSpace.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				int storedWidth = columnSpace.Width;
-				columnSpace.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-				columnSpace.MinimumWidth = storedWidth;
-			}
-			finally
-			{
-				m_dataGridView.ResumeLayout();
-			}
-		}
+                    m_dataGridView.Rows.Add(row);
+                    ToggleRowCheckable(row);
+                }
+            }
+            finally
+            {
+                m_dataGridView.ResumeLayout();
+            }
+        }
 
 		private void ToggleRowsCheckableState()
 		{
@@ -221,10 +214,17 @@ namespace XenAdmin.Dialogs
 		
 		#region Control event handlers
 
-		private void DRConfigureDialog_Load(object sender, EventArgs e)
-		{
-			PopulateSrDataGridView();
-		}
+        private void DRConfigureDialog_Load(object sender, EventArgs e)
+        {
+            m_buttonOK.Enabled = false;
+            spinnerIcon1.StartSpinning();
+            _worker.RunWorkerAsync();
+        }
+
+        private void DRConfigureDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _worker.CancelAsync();
+        }
 
         private void m_dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -263,7 +263,39 @@ namespace XenAdmin.Dialogs
 			ToggleRowsCheckableState();
 		}
 		
-		#endregion
+        private void _worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var srs = new List<SR>(Pool.Connection.Cache.SRs);
+            for (int i = 0; i < srs.Count; i++)
+            {
+                if (_worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                var sr = srs[i];
+                SR checkedSr = SR.SupportsDatabaseReplication(sr.Connection, sr) ? sr : null;
+                int percentage = (i + 1) * 100 / srs.Count;
+                _worker.ReportProgress(percentage, checkedSr);
+            }
+        }
+
+        private void _worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            SR sr = e.UserState as SR;
+            if (sr != null)
+                _availableSrs.Add(sr);
+        }
+
+        private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            spinnerIcon1.StopSpinning();
+            m_buttonOK.Enabled = true;
+            PopulateSrDataGridView();
+        }
+        
+        #endregion
 
 		#region Nested Items
 

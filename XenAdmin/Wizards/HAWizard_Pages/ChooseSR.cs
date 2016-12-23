@@ -78,10 +78,12 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             // Start action and show progress with a dialog
             GetHeartbeatSRsAction action = new GetHeartbeatSRsAction(pool);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
-            if (dialog.action.Cancelled || dialog.action.Cancelling || !dialog.action.IsCompleted)
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
+            if (action.Cancelled || action.Cancelling || !action.IsCompleted)
                 return false;
 
             if (!action.Succeeded || action.SRs.Count == 0)

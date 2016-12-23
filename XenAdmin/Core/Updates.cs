@@ -37,7 +37,9 @@ using XenAdmin.Actions;
 using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
-
+using System.Diagnostics;
+using System.Windows.Forms;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Core
 {
@@ -47,12 +49,13 @@ namespace XenAdmin.Core
 
         public static event Action<bool, string> CheckForUpdatesCompleted;
         public static event Action CheckForUpdatesStarted;
+        public static event Action RestoreDismissedUpdatesStarted;
 
         private static readonly object downloadedUpdatesLock = new object();
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
         private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
-        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
+        public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly object updateAlertsLock = new object();
         private static readonly ChangeableList<Alert> updateAlerts = new ChangeableList<Alert>();
@@ -197,10 +200,9 @@ namespace XenAdmin.Core
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
                     Properties.Settings.Default.AllowPatchesUpdates || force,
-                    Branding.CheckForUpdatesUrl);
-                {
-                    action.Completed += actionCompleted;
-                }
+                    Updates.CheckForUpdatesUrl);
+
+                action.Completed += actionCompleted;
 
                 if (CheckForUpdatesStarted != null)
                     CheckForUpdatesStarted();
@@ -208,7 +210,36 @@ namespace XenAdmin.Core
                 action.RunAsync();
             }
         }
-        
+
+        /// <summary>
+        /// It does exactly what CheckForUpdates(true) does, but this is sync and shows an ActionProgressDialog while running
+        /// </summary>
+        /// <returns>true if the action has succeeded</returns>
+        public static bool CheckForUpdatesSync(Control parentForProgressDialog)
+        {
+            if (Helpers.CommonCriteriaCertificationRelease)
+                return false;
+
+            DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(true, true, true, Updates.CheckForUpdatesUrl);
+            action.Completed += actionCompleted;
+
+            if (CheckForUpdatesStarted != null)
+                CheckForUpdatesStarted();
+
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dialog.ShowDialog(parentForProgressDialog);
+
+            return action.Succeeded;
+        }
+
+        public static string CheckForUpdatesUrl
+        {
+            get
+            {
+                return Registry.CustomUpdatesXmlLocation ?? Branding.CheckForUpdatesUrl;
+            }
+        }
+
         private static void actionCompleted(ActionBase sender)
         {
             Program.AssertOffEventThread();
@@ -377,19 +408,34 @@ namespace XenAdmin.Core
 
                         var noPatchHosts = hosts.Where(host =>
                             {
+                                bool elyOrGreater = Helpers.ElyOrGreater(host);
+                                var appliedUpdates = host.AppliedUpdates();
                                 var appliedPatches = host.AppliedPatches();
-                                // 1. patch is not already installed 
-                                if (appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                                    return false;
 
+                                // 1. patch is not already installed 
+                                if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                                        return false;
+                                else if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                                        return false;
+                                
                                 // 2. the host has all the required patches installed
                                 if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
-                                    !serverPatch.RequiredPatches.All(requiredPatchUuid => appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))))
+                                    !serverPatch.RequiredPatches
+                                    .All(requiredPatchUuid => 
+                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        )
+                                    )
                                     return false;
 
                                 // 3. the host doesn't have any of the conflicting patches installed
                                 if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
-                                    serverPatch.ConflictingPatches.Any(conflictingPatchUuid => appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))))
+                                    serverPatch.ConflictingPatches
+                                    .Any(conflictingPatchUuid =>
+                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                                        )
+                                    )
                                     return false;
 
                                 return true;
@@ -404,6 +450,246 @@ namespace XenAdmin.Core
             }
 
             return alerts;
+        }
+        
+        /// <summary>
+        /// This method returns the minimal set of patches for a host if this class already has information about them. Otherwise it returns empty list.
+        /// Calling this function will not initiate a download or update.
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        public static List<XenServerPatch> RecommendedPatchesForHost(Host host)
+        {
+            var recommendedPatches = new List<XenServerPatch>();
+
+            if (XenServerVersions == null)
+                return recommendedPatches;
+
+            var serverVersions = XenServerVersions.FindAll(version =>
+            {
+                if (version.BuildNumber != string.Empty)
+                    return (host.BuildNumberRaw == version.BuildNumber);
+
+                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                           && Helpers.HostProductVersion(host) == version.Version.ToString());
+            });
+
+            if (serverVersions.Count != 0)
+            {
+                var minimumPatches = serverVersions[0].MinimalPatches;
+
+                if (minimumPatches == null) //unknown
+                    return recommendedPatches;
+
+                bool elyOrGreater = Helpers.ElyOrGreater(host);
+
+                var appliedPatches = host.AppliedPatches();
+                var appliedUpdates = host.AppliedUpdates();
+
+                if (elyOrGreater)
+                {
+                    recommendedPatches = minimumPatches.FindAll(p => !appliedUpdates.Any(au => string.Equals(au.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
+                }
+                else
+                {
+                    recommendedPatches = minimumPatches.FindAll(p => !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
+                }
+
+            }
+
+            return recommendedPatches;
+        }
+
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
+        {
+            if (XenServerVersions == null)
+                return null;
+
+            Host master = Helpers.GetMaster(conn);
+            if (master == null)
+                return null;
+
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
+
+            if (version != null)
+            {
+                if (version.MinimalPatches == null)
+                    return null;
+
+                var uSeq = new UpgradeSequence();
+                uSeq.MinimalPatches = version.MinimalPatches;
+
+                List<Host> hosts = conn.Cache.Hosts.ToList();
+                
+                foreach (Host h in hosts)
+                {
+                    uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches);
+                }
+
+                return uSeq;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns a XenServerVersion if all hosts of the pool have the same version
+        /// Returns null if it is unknown or they don't match
+        /// </summary>
+        /// <returns></returns>
+        private static XenServerVersion GetCommonServerVersionOfHostsInAConnection(IXenConnection connection, List<XenServerVersion> xsVersions)
+        {
+            XenServerVersion commonXenServerVersion = null;
+
+            if (connection == null)
+                return null;
+            
+            List<Host> hosts = connection.Cache.Hosts.ToList();
+
+            foreach (Host host in hosts)
+            {
+                var hostVersions = xsVersions.FindAll(version =>
+                {
+                    if (version.BuildNumber != string.Empty)
+                        return (host.BuildNumberRaw == version.BuildNumber);
+
+                    return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                           || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                               && Helpers.HostProductVersion(host) == version.Version.ToString());
+                });
+
+                var foundVersion = hostVersions.FirstOrDefault();
+
+                if (foundVersion == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (commonXenServerVersion == null)
+                    {
+                        commonXenServerVersion = foundVersion;
+                    }
+                    else
+                    {
+                        if (commonXenServerVersion != foundVersion)
+                            return null;
+                    }
+                }
+            }
+
+            return commonXenServerVersion;
+        }
+
+        private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> latestPatches)
+        {
+            var sequence = new List<XenServerPatch>();
+            var appliedUpdateUuids = new List<string>();
+
+            bool elyOrGreater = Helpers.ElyOrGreater(h);
+
+            if (elyOrGreater)
+            {
+                appliedUpdateUuids = h.AppliedUpdates().Select(u => u.uuid).ToList();
+            }
+            else
+            {
+                appliedUpdateUuids = h.AppliedPatches().Select(p => p.uuid).ToList();
+            }
+
+            var neededPatches = new List<XenServerPatch>(latestPatches);
+
+            //Iterate through latestPatches once; in each iteration, move the first item from L0 that has its dependencies met to the end of the Update Schedule (US)
+            for (int ii = 0; ii < neededPatches.Count; ii++)
+            {
+                var p = neededPatches[ii];
+
+                //checking requirements
+                if (//not applied yet
+                    !appliedUpdateUuids.Any(apu => string.Equals(apu, p.Uuid, StringComparison.OrdinalIgnoreCase))
+                    // and either no requirements or they are meet
+                    && (p.RequiredPatches == null
+                    || p.RequiredPatches.Count == 0
+                    // all requirements met?
+                    || p.RequiredPatches.All(
+                        rp =>
+                            //sequence already has the required-patch
+                            (sequence.Count != 0 && sequence.Any(useqp => string.Equals(useqp.Uuid, rp, StringComparison.OrdinalIgnoreCase)))
+
+                            //the required-patch has already been applied
+                            || (appliedUpdateUuids.Count != 0 && appliedUpdateUuids.Any(apu => string.Equals(apu, rp, StringComparison.OrdinalIgnoreCase)))
+                        )
+                    ))
+                {
+                    // this patch can be added to the upgrade sequence now
+                    sequence.Add(p);
+
+                    // by now the patch has either been added to the upgrade sequence or something already contains it among the installed patches
+                    neededPatches.RemoveAt(ii);
+
+                    //resetting position - the loop will start on 0. item
+                    ii = -1;
+                }
+            }
+
+            return sequence;
+        }
+
+        public class UpgradeSequence : Dictionary<Host, List<XenServerPatch>>
+        {
+            private IEnumerable<XenServerPatch> AllPatches
+            {
+                get
+                {
+                    foreach (var patches in this.Values)
+                        foreach(var patch in patches)
+                            yield return patch;
+                }
+            }
+
+            public List<XenServerPatch> UniquePatches
+            {
+                get
+                {
+                    var uniquePatches = new List<XenServerPatch>();
+
+                    foreach (var mp in MinimalPatches)
+                    {
+                        if (AllPatches.Any(p => p.Uuid == mp.Uuid))
+                        {
+                            uniquePatches.Add(mp);
+                        }
+                    }
+
+                    return uniquePatches;
+                }
+            }
+
+            public bool AllHostsUpToDate
+            {
+                get
+                {
+                    if (this.Count == 0)
+                        return false;
+
+                    foreach (var host in this.Keys)
+                    {
+                        if (this[host].Count > 0)
+                            return false;
+                    }
+
+                    return true;
+                }
+            }
+
+            public List<XenServerPatch> MinimalPatches
+            {
+                set;
+                get;
+            }
         }
 
         public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
@@ -473,53 +759,28 @@ namespace XenAdmin.Core
 
         public static void RestoreDismissedUpdates()
         {
-            foreach (IXenConnection _connection in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (!AllowedToRestoreDismissedUpdates(_connection))
-                    continue;
+            var actions = new List<AsyncAction>();
+            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+                actions.Add(new RestoreDismissedUpdatesAction(connection));
 
-                XenAPI.Pool pool = Helpers.GetPoolOfOne(_connection);
-                if (pool == null)
-                    continue;
+            var action = new ParallelAction(Messages.RESTORE_DISMISSED_UPDATES, Messages.RESTORING, Messages.COMPLETED, actions, true, false);
+            action.Completed += action_Completed;
 
-                Dictionary<string, string> other_config = pool.other_config;
+            if (RestoreDismissedUpdatesStarted != null)
+                RestoreDismissedUpdatesStarted();
 
-                if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
-                {
-                    other_config.Remove(IgnorePatchAction.IgnorePatchKey);
-                }
-                if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
-                {
-                    other_config.Remove(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY);
-                }
-
-                XenAPI.Pool.set_other_config(_connection.Session, pool.opaque_ref, other_config);
-            }
-
-            Properties.Settings.Default.LatestXenCenterSeen = "";
-            Settings.TrySaveSettings();
-
-            Updates.CheckForUpdates(true);
+            action.RunAsync();
         }
 
-        /// <summary>
-        /// Checks the user has sufficient RBAC privileges to restore dismissed alerts on a given connection
-        /// </summary>
-        public static bool AllowedToRestoreDismissedUpdates(IXenConnection c)
+        private static void action_Completed(ActionBase action)
         {
-            if (c == null || c.Session == null)
-                return false;
-
-            if (c.Session.IsLocalSuperuser)
-                return true;
-
-            List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Pool.set_other_config", c);
-            foreach (Role possibleRole in rolesAbleToCompleteAction)
+            Program.Invoke(Program.MainWindow, () =>
             {
-                if (c.Session.Roles.Contains(possibleRole))
-                    return true;
-            }
-            return false;
+                Properties.Settings.Default.LatestXenCenterSeen = "";
+                Settings.TrySaveSettings();
+
+                CheckForUpdates(true);
+            });
         }
     }
 }
