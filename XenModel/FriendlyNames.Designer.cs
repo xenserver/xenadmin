@@ -2059,7 +2059,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache eviction rate.
+        ///   Looks up a localized string similar to PVS-Accelerator eviction rate.
         /// </summary>
         public static string Label_performance_pvscache_evicted {
             get {
@@ -2068,7 +2068,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache hit rate.
+        ///   Looks up a localized string similar to PVS-Accelerator hit rate.
         /// </summary>
         public static string Label_performance_pvscache_read_hits {
             get {
@@ -2077,7 +2077,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache miss rate.
+        ///   Looks up a localized string similar to PVS-Accelerator miss rate.
         /// </summary>
         public static string Label_performance_pvscache_read_misses {
             get {
@@ -2086,7 +2086,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache observed read rate.
+        ///   Looks up a localized string similar to PVS-Accelerator observed read rate.
         /// </summary>
         public static string Label_performance_pvscache_read_total {
             get {
@@ -2095,7 +2095,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache space utilization.
+        ///   Looks up a localized string similar to PVS-Accelerator space utilization.
         /// </summary>
         public static string Label_performance_pvscache_space_utilization {
             get {
@@ -2104,7 +2104,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache observed network traffic from clients.
+        ///   Looks up a localized string similar to PVS-Accelerator observed network traffic from clients.
         /// </summary>
         public static string Label_performance_pvscache_traffic_client_sent {
             get {
@@ -2113,7 +2113,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache saved network traffic.
+        ///   Looks up a localized string similar to PVS-Accelerator saved network traffic.
         /// </summary>
         public static string Label_performance_pvscache_traffic_proxy_saved {
             get {
@@ -2122,7 +2122,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Cache observed network traffic from servers.
+        ///   Looks up a localized string similar to PVS-Accelerator observed network traffic from servers.
         /// </summary>
         public static string Label_performance_pvscache_traffic_server_sent {
             get {
@@ -3301,7 +3301,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PVS Read Caching Status.
+        ///   Looks up a localized string similar to PVS-Accelerator status.
         /// </summary>
         public static string Label_VM_pvs_read_caching_status {
             get {
@@ -3825,7 +3825,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license server did not issue a license for {0} because there were no licenses of the specified type available..
+        ///   Looks up a localized string similar to The requested license is not available for {0}..
         /// </summary>
         public static string Message_body_license_not_available {
             get {
@@ -3960,7 +3960,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to setup PVS Read-caching on VM &apos;{0}&apos;. No cache storage found on site &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Unable to setup PVS-Accelerator on VM &apos;{0}&apos;. No cache storage found on site &apos;{1}&apos;..
         /// </summary>
         public static string Message_body_pvs_proxy_no_cache_sr_available {
             get {
