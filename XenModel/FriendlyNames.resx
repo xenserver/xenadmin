@@ -1877,28 +1877,28 @@
   <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
     <value>Unable to setup PVS-Accelerator on VM '{0}'. No cache storage found on site '{1}'.</value>
   </data>
-  <data name="Label-performance.pvscache_evicted" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
     <value>PVS-Accelerator eviction rate</value>
   </data>
-  <data name="Label-performance.pvscache_read_hits" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
     <value>PVS-Accelerator hit rate</value>
   </data>
-  <data name="Label-performance.pvscache_read_misses" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
     <value>PVS-Accelerator miss rate</value>
   </data>
-  <data name="Label-performance.pvscache_read_total" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
     <value>PVS-Accelerator observed read rate</value>
   </data>
-  <data name="Label-performance.pvscache_space_utilization" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
     <value>PVS-Accelerator space utilization</value>
   </data>
-  <data name="Label-performance.pvscache_traffic_client_sent" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
     <value>PVS-Accelerator observed network traffic from clients</value>
   </data>
-  <data name="Label-performance.pvscache_traffic_proxy_saved" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
     <value>PVS-Accelerator saved network traffic</value>
   </data>
-  <data name="Label-performance.pvscache_traffic_server_sent" xml:space="preserve">
+  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
     <value>PVS-Accelerator observed network traffic from servers</value>
   </data>
   <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
