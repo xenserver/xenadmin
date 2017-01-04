@@ -232,13 +232,13 @@
     <value>Clean up disk space</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Configuring PVS cache</value>
+    <value>Configuring PVS-Accelerator</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
     <value>Configured</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Configure PVS cache on '{0}'</value>
+    <value>Configure PVS-Accelerator on '{0}'</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>Creating {0} ...</value>
@@ -256,13 +256,13 @@
     <value>Deactivating Multiple Virtual Disks</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>Deleting PVS cache configuration</value>
+    <value>Deleting cache configuration</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
     <value>Done</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>Deleting PVS cache configuration on '{0}'</value>
+    <value>Deleting cache configuration on '{0}'</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>Deleting storage items...</value>
@@ -286,16 +286,16 @@
     <value>Detaching Multiple Storage Items</value>
   </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabled PVS read caching for selected VMs</value>
+    <value>Disabled PVS-Accelerator for selected VMs</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Disable live patching</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disable PVS read caching</value>
+    <value>Disable PVS-Accelerator</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Disabling PVS read caching for VM '{0}'</value>
+    <value>Disabling PVS-Accelerator for VM '{0}'</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Disabling </value>
@@ -307,7 +307,7 @@
     <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Disabling PVS read caching for selected VMs</value>
+    <value>Disabling PVS-Accelerator for selected VMs</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -406,16 +406,16 @@
     <value>DR cleanup ({0})</value>
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabled PVS read caching for selected VMs</value>
+    <value>Enabled PVS-Accelerator for selected VMs</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Enable live patching</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enable PVS read caching</value>
+    <value>Enable PVS-Accelerator</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>Enabling PVS read caching for VM '{0}' on '{1}'</value>
+    <value>Enabling PVS-Accelerator for VM '{0}' on '{1}'</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>Enabling</value>
@@ -427,7 +427,7 @@
     <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>Enabling PVS read caching for selected VMs</value>
+    <value>Enabling PVS-Accelerator for selected VMs</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -2662,7 +2662,7 @@ Do you want to continue?</value>
     <value>Are you sure you want to delete '{0}'?</value>
   </data>
   <data name="CONFIRM_DELETE_PVS_SITE_IN_USE" xml:space="preserve">
-    <value>Are you sure you want to delete '{0}'? This configuration is in use by PVS.</value>
+    <value>Are you sure you want to delete '{0}'? This configuration is in use by PVS-Accelerator.</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>Are you sure you want to delete the tag '{0}' from all managed resources?</value>
@@ -3614,7 +3614,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>Network</value>
   </data>
   <data name="DATATYPE_PVS" xml:space="preserve">
-    <value>PVS Cache</value>
+    <value>PVS-Accelerator</value>
   </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>Storage</value>
@@ -3987,10 +3987,10 @@ This will also delete its subfolders.</value>
     <value>Disable</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>&amp;Disable PVS Read Caching</value>
+    <value>&amp;Disable PVS-Accelerator</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Disable P&amp;VS Read Caching</value>
+    <value>Disable P&amp;VS-Accelerator</value>
   </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>Pause Workload Balancing </value>
@@ -4756,10 +4756,10 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Enable</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>E&amp;nable PVS Read Caching...</value>
+    <value>E&amp;nable PVS-Accelerator...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>Ena&amp;ble PVS Read Caching...</value>
+    <value>Ena&amp;ble PVS-Accelerator...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
     <value>Choose the PVS site from which the selected VMs are streamed.</value>
@@ -9768,7 +9768,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>Proxy servers are not supported.</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS Cache Configuration - '{0}'</value>
+    <value>PVS-Accelerator configuration - '{0}'</value>
   </data>
   <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
     <value>{0} (Incomplete PVS configuration)</value>
@@ -9795,7 +9795,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>{0} (Incomplete Cache Storage configuration)</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>This PVS cache configuration cannot be removed because there are VMs that are streamed from this site.</value>
+    <value>This cache configuration cannot be removed because there are VMs that are streamed from this site.</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
     <value>PVS Servers on site {0}'</value>
@@ -9804,7 +9804,7 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>PVS Site</value>
   </data>
   <data name="PVS_TAB_TITLE" xml:space="preserve">
-    <value>PVS Read Cache</value>
+    <value>PVS-Accelerator</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools not installed</value>
