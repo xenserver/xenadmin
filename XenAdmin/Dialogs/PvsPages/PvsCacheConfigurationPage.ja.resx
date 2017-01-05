@@ -227,7 +227,7 @@
     <value>6</value>
   </data>
   <data name="deleteButton.Text" xml:space="preserve">
-    <value>PVS キャッシュ構成の削除(&amp;R)</value>
+    <value>キャッシュ構成の削除(&amp;R)</value>
   </data>
   <data name="deleteButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -266,7 +266,7 @@
     <value>3</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>PVS キャッシュ構成:</value>
+    <value>キャッシュ構成:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -461,7 +461,7 @@
     <value>16</value>
   </data>
   <data name="pvsConfigInfoLabel.Text" xml:space="preserve">
-    <value>このサイトのキャッシュ構成は、PVS コンソールまたは MCLI を使用して完了する必要があります。</value>
+    <value>このサイトの PVS-Accelerator 構成は、PVS コンソールまたは MCLI を使用して完了する必要があります。</value>
   </data>
   <data name="&gt;&gt;pvsConfigInfoLabel.Name" xml:space="preserve">
     <value>pvsConfigInfoLabel</value>

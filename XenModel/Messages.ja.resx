@@ -232,13 +232,13 @@
     <value>ディスク容量のクリーンアップ</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>PVS キャッシュを構成しています</value>
+    <value>PVS-Accelerator を構成しています</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DONE" xml:space="preserve">
     <value>構成済み</value>
   </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>'{0}' の PVS キャッシュの構成</value>
+    <value>'{0}' の PVS-Accelerator の構成</value>
   </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>{0} を作成しています...</value>
@@ -256,13 +256,13 @@
     <value>複数仮想ディスクの非アクティブ化</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
-    <value>PVS キャッシュ構成を削除しています</value>
+    <value>キャッシュ構成を削除しています</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DONE" xml:space="preserve">
     <value>完了</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_TITLE" xml:space="preserve">
-    <value>'{0}' の PVS キャッシュ構成を削除しています</value>
+    <value>'{0}' のキャッシュ構成を削除しています</value>
   </data>
   <data name="ACTION_DELETING_MULTIPLE_STORAGE_ITEMS_STATUS" xml:space="preserve">
     <value>ストレージを削除しています...</value>
@@ -286,16 +286,16 @@
     <value>複数ストレージの接続解除</value>
   </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>選択した VM の PVS 読み取りキャッシュが無効になっています</value>
+    <value>選択した VM の PVS-Accelerator が無効になっています</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチの無効化</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを無効にする</value>
+    <value>PVS-Accelerator を無効にする</value>
   </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>VM '{0}' の PVS 読み取りキャッシュを無効にしています</value>
+    <value>VM '{0}' の PVS-Accelerator を無効にしています</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>無効化 </value>
@@ -307,7 +307,7 @@
     <value>'{0}' のライブ パッチを無効にしています</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>選択した VM の PVS 読み取りキャッシュを無効にしています</value>
+    <value>選択した VM の PVS-Accelerator を無効にしています</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>ディスクがアクティブになりました</value>
@@ -406,16 +406,16 @@
     <value>障害回復クリーンアップ ({0})</value>
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
-    <value>選択した VM の PVS 読み取りキャッシュが有効になっています</value>
+    <value>選択した VM の PVS-Accelerator が有効になっています</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチの有効化</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを有効にする</value>
+    <value>PVS-Accelerator を有効にする</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING_FOR" xml:space="preserve">
-    <value>'{1}' で VM '{0}' の PVS 読み取りキャッシュを有効にしています</value>
+    <value>'{1}' で VM '{0}' の PVS-Accelerator を有効にしています</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
     <value>有効化</value>
@@ -427,7 +427,7 @@
     <value>'{0}' のライブ パッチを有効にしています</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
-    <value>選択した VM の PVS 読み取りキャッシュを有効にしています</value>
+    <value>選択した VM の PVS-Accelerator を無効にしています</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>ブロック チェックサムが一致しないため、エクスポートに失敗しました。もう一度エクスポートしてください。</value>
@@ -2660,7 +2660,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>'{0}' を削除してもよろしいですか?</value>
   </data>
   <data name="CONFIRM_DELETE_PVS_SITE_IN_USE" xml:space="preserve">
-    <value>'{0}' を削除してもよろしいですか? この構成は PVS で使用中です。</value>
+    <value>'{0}' を削除してもよろしいですか? この構成は PVS-Accelerator で使用中です。</value>
   </data>
   <data name="CONFIRM_DELETE_TAG" xml:space="preserve">
     <value>すべてのリソースからタグ '{0}' を削除してもよろしいですか?</value>
@@ -3613,7 +3613,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>ネットワーク</value>
   </data>
   <data name="DATATYPE_PVS" xml:space="preserve">
-    <value>PVS キャッシュ</value>
+    <value>PVS-Accelerator</value>
   </data>
   <data name="DATATYPE_STORAGE" xml:space="preserve">
     <value>ストレージ</value>
@@ -3986,10 +3986,10 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>無効化</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを無効にする(&amp;D)</value>
+    <value>PVS-Accelerator を無効にする(&amp;D)</value>
   </data>
   <data name="DISABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを無効にする(&amp;V)</value>
+    <value>PVS-Accelerator を無効にする(&amp;V)</value>
   </data>
   <data name="DISABLE_WLB" xml:space="preserve">
     <value>ワークロード バランスの一時停止 </value>
@@ -4752,10 +4752,10 @@ CD をイジェクトしてから再試行してください。</value>
     <value>有効化</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_BUTTON" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを有効にする(&amp;N)...</value>
+    <value>PVS-Accelerator を有効にする(&amp;N)...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_MENU" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを有効にする(&amp;B)...</value>
+    <value>PVS-Accelerator を有効にする(&amp;B)...</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_MULTIPLE" xml:space="preserve">
     <value>選択した VM がストリーミングされる PVS サイトを選択します。</value>
@@ -9744,7 +9744,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プロキシ サーバーはサポートされません。</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
-    <value>PVS キャッシュ構成 - '{0}'</value>
+    <value>PVS-Accelerator 構成 - '{0}'</value>
   </data>
   <data name="PVS_CACHE_INCOMPLETE_CONFIGURATION" xml:space="preserve">
     <value>{0} (不完全な PVS 構成)</value>
@@ -9771,7 +9771,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>{0} (不完全なキャッシュ ストレージ構成)</value>
   </data>
   <data name="PVS_SITE_CANNOT_BE_REMOVED" xml:space="preserve">
-    <value>このサイトからストリーミングされた仮想マシンがあるため、この PVS キャッシュ構成は削除できません。</value>
+    <value>このサイトからストリーミングされた仮想マシンがあるため、このキャッシュ構成は削除できません。</value>
   </data>
   <data name="PVS_SITE_DIALOG_TITLE" xml:space="preserve">
     <value>サイト {0}' の PVS サーバー</value>
@@ -9780,7 +9780,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>PVS サイト</value>
   </data>
   <data name="PVS_TAB_TITLE" xml:space="preserve">
-    <value>PVS 読み取りキャッシュ</value>
+    <value>PVS-Accelerator</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
     <value>[XenServer product] Tools 未インストール</value>
