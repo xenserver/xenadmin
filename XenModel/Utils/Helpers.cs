@@ -2099,7 +2099,7 @@ namespace XenAdmin.Core
        public static bool PvsCacheCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xspvscache"));
+           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("pvsaccelerator"));
        }
 
        /// <summary>
