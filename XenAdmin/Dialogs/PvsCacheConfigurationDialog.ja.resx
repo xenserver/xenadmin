@@ -151,7 +151,7 @@
     <value>10</value>
   </data>
   <data name="addSiteButton.Text" xml:space="preserve">
-    <value>PVS キャッシュ構成の追加(&amp;D)</value>
+    <value>キャッシュ構成の追加(&amp;D)</value>
   </data>
   <data name="addSiteButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -274,7 +274,7 @@
     <value>9</value>
   </data>
   <data name="AddButton.Text" xml:space="preserve">
-    <value>PVS キャッシュ構成の追加(&amp;D)</value>
+    <value>キャッシュ構成の追加(&amp;D)</value>
   </data>
   <data name="AddButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -376,7 +376,7 @@
     <value>8</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>各サイトおよび [XenServer] ごとに割り当てるメモリまたはストレージ リポジトリと容量を選択して、PVS キャッシュ構成を指定します。</value>
+    <value>各サイトおよび [XenServer] ごとに割り当てるメモリまたはストレージ リポジトリと容量を選択して、PVS-Accelerator が使用するキャッシュ構成を指定します。</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
@@ -406,7 +406,7 @@
     <value>800, 600</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PVS キャッシュ構成</value>
+    <value>PVS-Accelerator 構成</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PvsCacheConfigurationDialog</value>
