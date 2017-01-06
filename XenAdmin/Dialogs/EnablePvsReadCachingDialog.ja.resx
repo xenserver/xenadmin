@@ -141,7 +141,7 @@
     <value>pvsSiteList</value>
   </data>
   <data name="&gt;&gt;pvsSiteList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.LongStringComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;pvsSiteList.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -280,7 +280,7 @@
     <value>1</value>
   </data>
   <data name="enableButton.Text" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを有効にする(&amp;N)</value>
+    <value>PVS-Accelerator を有効にする(&amp;N)</value>
   </data>
   <data name="&gt;&gt;enableButton.Name" xml:space="preserve">
     <value>enableButton</value>
@@ -415,7 +415,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを有効にする</value>
+    <value>PVS-Accelerator を有効にする</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EnablePvsReadCachingDialog</value>
