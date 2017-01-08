@@ -473,6 +473,13 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
+            var vmGroups = verticalTabs.SelectedItem as NewVMGroupVMsPage<VMSS>;
+            if(vmGroups != null)
+            {
+                newPolicyVMSSTypePage1.ToggleQuiesceCheckBox(newVMSSVMsPage1.SelectedVMs);
+                return;
+            }
+
             var selectedPage = verticalTabs.SelectedItem as NewPolicyArchivePage;
             if (selectedPage != null)
             {

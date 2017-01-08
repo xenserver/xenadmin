@@ -120,7 +120,18 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public override void checkpointInfoPictureBox_Click(object sender, System.EventArgs e)
         {
-            toolTip.Show(Messages.FIELD_DISABLED, checkpointInfoPictureBox, 20, 0);
+            /* label3 would not be enabled when we have restricted checkpoint feature. */
+            if(label3.Enabled)
+            {
+                /* one or more VMs does not support checkpoint */
+                toolTip.Show(Messages.VMSS_CHECKPOINT_NON_SUPPORT, checkpointInfoPictureBox, 20, 0);
+            }
+            else
+            {
+                /* we enter here when the checkpoint feature itself is restricted */
+                toolTip.Show(Messages.FIELD_DISABLED, checkpointInfoPictureBox, 20, 0);
+            }
+            
         }
 
         public override void checkpointInfoPictureBox_MouseLeave(object sender, System.EventArgs e)
@@ -167,19 +178,27 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public void ToggleQuiesceCheckBox(List <VM> SelectedVMs)
         {
 
+            radioButtonDiskAndMemory.Enabled = true;
+            checkpointInfoPictureBox.Visible = false;
+            pictureBoxVSS.Visible = false;
+
             switch (BackupType)
             {
                 case policy_backup_type.snapshot:
+                    radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     quiesceCheckBox.Checked = false;
                     break;
 
                 case policy_backup_type.snapshot_with_quiesce:
+                    radioButtonDiskOnly.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     quiesceCheckBox.Checked = true;
                     break;
 
                 case policy_backup_type.checkpoint:
+                    radioButtonDiskAndMemory.Enabled = true;
+                    radioButtonDiskAndMemory.Checked = true;
                     quiesceCheckBox.Enabled = true;
                     quiesceCheckBox.Checked = false;
                     break;
@@ -191,7 +210,14 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 {
                     quiesceCheckBox.Enabled = false;
                     quiesceCheckBox.Checked = false;
-                    break;
+                    pictureBoxVSS.Visible = true;
+                }
+                if(!vm.allowed_operations.Contains(vm_operations.checkpoint))
+                {
+                    radioButtonDiskAndMemory.Enabled = false;
+                    checkpointInfoPictureBox.Visible = true;
+                    radioButtonDiskAndMemory.Checked = false;
+                    radioButtonDiskOnly.Checked = true;
                 }
             }
 
@@ -248,7 +274,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                             {
                                 this.quiesceCheckBox.Enabled = false;
                                 this.quiesceCheckBox.Checked = false;
-                                break;
+                            }
+                            if (!vm.allowed_operations.Contains(vm_operations.checkpoint))
+                            {
+                                checkpointInfoPictureBox.Visible = true;
+                                this.radioButtonDiskAndMemory.Enabled = false;
+                                this.radioButtonDiskAndMemory.Checked = false;
+                                this.radioButtonDiskOnly.Checked = true;
                             }
                         }
 
