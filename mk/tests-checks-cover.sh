@@ -34,7 +34,8 @@ set -u
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-net start ncover || true # May fail if ncover already running, so ignore that error
+net stop ncover || true # Stop ncover if it's running, so we have a known good service
+net start ncover
 
 echo "Running + monitoring coverage of tests..."
 
@@ -47,9 +48,12 @@ ncover summarize --project="XC Tests" --wait
 
 echo "Generating coverage report..."
 ncover report --project="XC Tests" --execution="${BUILD_ID}" --file="$(cygpath -d ${TEST_DIR})\coverage.html" --detail=method
+
+net stop ncover || true # Stop ncover, ignore the error if it's already stopped
+
 cp ${TEST_DIR}/coverage.html ${OUTPUT_DIR}
 
-net stop ncover
+
 
 
 
