@@ -82,6 +82,30 @@ namespace XenAdmin.Commands
             for (int index = 0; index < groups.Length; index++)
             {
                 T group = groups[index];
+
+                /* do not add unsupported policies to the drop down for VMSS */
+                XenAPI.VMSS policy = group as VMSS;
+                if(policy != null)
+                {
+                    SelectedItemCollection selection = Command.GetSelection();
+                    bool doNotInclude = false;
+                    /* when multiple VMs are selected, then display intersection of all supported policies */
+                    for (int vmIndex = 0; vmIndex < selection.Count; vmIndex++)
+                    {
+                        VM vm = (VM)selection[vmIndex].XenObject;
+                        if ((policy.policy_type == policy_backup_type.checkpoint && !vm.allowed_operations.Contains(vm_operations.checkpoint)) ||
+                           (policy.policy_type == policy_backup_type.snapshot_with_quiesce && !vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce)))
+                        {
+                            doNotInclude = true;
+                            break;
+                        }
+                    }
+                    if (doNotInclude)
+                        continue;
+                       
+                }
+
+
                 var menuText = index < 9
                     ? String.Format(Messages.DYNAMIC_MENUITEM_WITH_ACCESS_KEY, index + 1, group.Name)
                     : String.Format(Messages.DYNAMIC_MENUITEM_WITHOUT_ACCESS_KEY, group.Name);
