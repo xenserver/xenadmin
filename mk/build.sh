@@ -54,6 +54,7 @@ function check_deps ()
 }
 
 check_deps nunit-console.exe zip unzip wget curl hg git patch mt.exe candle.exe light.exe
+
 if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
 then
     check_deps signtool.exe
@@ -72,14 +73,28 @@ XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 source ${XENADMIN_DIR}/mk/declarations.sh
 
+run_tests()
+{
+    if [ -n "${REPORT_COVERAGE+x}" ]; then
+        if [ -z "${NCOVER_PROJECT_ID+x}" ]; then
+            echo "FATAL: REPORT_COVERAGE was set, but NCOVER_PROJECT_ID was not"
+            exit 1
+        fi
+        echo "Running tests with coverage because REPORT_COVERAGE declared"
+        source ${XENADMIN_DIR}/mk/tests-checks-cover.sh
+    else
+        source ${XENADMIN_DIR}/mk/tests-checks.sh
+    fi
+}
+
 test_phase()
 {
-  # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-  if [ -n "${SKIP_TESTS+x}" ]; then
-    echo "Tests skipped because SKIP_TESTS declared"
-  else
-    source ${XENADMIN_DIR}/mk/tests-checks.sh
-  fi
+    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+    if [ -n "${SKIP_TESTS+x}" ]; then
+        echo "Tests skipped because SKIP_TESTS declared"
+    else
+        run_tests
+    fi
 }
 
 production_jenkins_build()
