@@ -245,7 +245,7 @@ namespace XenAdmin.Dialogs.VMPolicies
                 var messageListSorted = policyMessage[policy.uuid].OrderByDescending(message => message.timestamp).ToList();
                 for (int messageCount = 0; messageCount < 10 && messageCount < messageListSorted.Count; messageCount++)
                 {
-                    policy.PolicyAlerts.Add(new PolicyAlert(messageListSorted[messageCount].priority, messageListSorted[messageCount].name, messageListSorted[messageCount].timestamp));
+                    policy.PolicyAlerts.Add(new PolicyAlert(messageListSorted[messageCount].priority, messageListSorted[messageCount].name, messageListSorted[messageCount].timestamp, messageListSorted[messageCount].body, policy.Name));
                 }
                 if (dataGridView1.ColumnCount > 0)
                     dataGridView1.Rows.Add(new PolicyRow(policy));

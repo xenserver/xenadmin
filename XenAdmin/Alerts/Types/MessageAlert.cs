@@ -237,6 +237,15 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.VMPP_XAPI_LOGON_FAILURE:
                         var policyAlert = new PolicyAlert(Message.Connection, Message.body);
                         return policyAlert.Text;
+                    case Message.MessageType.VMSS_SNAPSHOT_MISSED_EVENT:
+                    case Message.MessageType.VMSS_XAPI_LOGON_FAILURE:
+                    case Message.MessageType.VMSS_LICENSE_ERROR:
+                    case Message.MessageType.VMSS_SNAPSHOT_FAILED:
+                    case Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED:
+                    case Message.MessageType.VMSS_SNAPSHOT_LOCK_FAILED:
+                        VMSS vmss = Helpers.XenObjectFromMessage(Message) as VMSS;
+                        var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, vmss.Name);
+                        return policyAlertVMSS.Text;
                 }
 
                 return Message.body;
