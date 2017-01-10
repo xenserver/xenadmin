@@ -138,7 +138,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnCachingEnabled.HeaderText" xml:space="preserve">
-    <value>読み取りキャッシュが有効</value>
+    <value>PVS-Accelerator が有効</value>
   </data>
   <data name="ColumnCachingEnabled.Width" type="System.Int32, mscorlib">
     <value>148</value>
@@ -153,7 +153,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnStatus.HeaderText" xml:space="preserve">
-    <value>読み取りキャッシュの状態</value>
+    <value>PVS-Accelerator の状態</value>
   </data>
   <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
@@ -250,7 +250,7 @@
     <value>6</value>
   </data>
   <data name="ConfigureButton.Text" xml:space="preserve">
-    <value>PVS キャッシュの構成(&amp;C)...</value>
+    <value>PVS-Accelerator の構成(&amp;C)...</value>
   </data>
   <data name="&gt;&gt;ConfigureButton.Name" xml:space="preserve">
     <value>ConfigureButton</value>
@@ -301,13 +301,13 @@
     <value>5, 0, 5, 0</value>
   </data>
   <data name="enableButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
+    <value>230, 23</value>
   </data>
   <data name="enableButton.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="enableButton.Text" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを有効にする...</value>
+    <value>PVS-Accelerator を有効にする...</value>
   </data>
   <data name="&gt;&gt;enableButton.Name" xml:space="preserve">
     <value>enableButton</value>
@@ -325,19 +325,19 @@
     <value>NoControl</value>
   </data>
   <data name="disableButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 3</value>
+    <value>236, 3</value>
   </data>
   <data name="disableButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 5, 0</value>
   </data>
   <data name="disableButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
+    <value>230, 23</value>
   </data>
   <data name="disableButton.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="disableButton.Text" xml:space="preserve">
-    <value>PVS 読み取りキャッシュを無効にする(&amp;D)</value>
+    <value>PVS-Accelerator を無効にする(&amp;D)</value>
   </data>
   <data name="&gt;&gt;disableButton.Name" xml:space="preserve">
     <value>disableButton</value>

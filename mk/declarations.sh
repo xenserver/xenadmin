@@ -36,14 +36,11 @@
 #
 #PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
 
-#this is the XenServer branch we're building; change this when making a new branch
-
 if [ -n "${DEBUG+xxx}" ]; 
 then 
   set -x
 fi
 
-# that's the code to get the branch name of the repository
 SOURCE="${BASH_SOURCE[0]}"
 XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 DIR="$( dirname "$SOURCE" )"
@@ -79,38 +76,19 @@ then
     echo "WARN:	BUILD_URL env var not set, we will use 'n/a'"
 fi
 
-if [ -d "$DIR/../.git" ]
+if [ -z "${GIT_COMMIT-}" ]
 then
-    if [ -z "${GIT_COMMIT-}" ]
-    then
-        get_REVISION="none"
-	    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
-    else
-   	    get_REVISION="${GIT_COMMIT}"
-    fi
-
-	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
-	if [[ $XS_BRANCH == *"/"* ]]
-        then
-            XS_BRANCH="trunk"
-            echo "WARN:	Failed to detect XS_BRANCH we will fallback to ${XS_BRANCH}"
-        fi
+    get_REVISION="none"
+    echo "WARN:	GIT_COMMIT env var not set, we will use 'none'"
 else
-	if [ -z "${MERCURIAL_REVISION+xxx}" ]
-	then 
-	    MERCURIAL_REVISION="none"
-	    echo "WARN:	MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
-	fi
-	get_REVISION=${MERCURIAL_REVISION}
-	XS_BRANCH=`cd $DIR;hg showconfig paths.default|sed -e 's@.*carbon/\(.*\)/xenadmin.hg.*@\1@'`
+    get_REVISION="${GIT_COMMIT}"
 fi
 
-if [ -z "${XS_BRANCH+xxx}" ]
-then
-    echo "ERROR:	Failed to detect the branch, stopping here because this would break things much later."
-    exit 1
-else
-    echo "INFO:	Running on branch: $XS_BRANCH"
+XS_BRANCH=${GIT_LOCAL_BRANCH}
+
+if [ -z "${XS_BRANCH+xxx}" ] ; then
+    XS_BRANCH=$($git rev-parse --abbrev-ref HEAD)
+		echo "WARN: GIT_LOCAL_BRANCH env var not set, using current head ${XS_BRANCH} instead"
 fi
 
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
@@ -135,8 +113,6 @@ fi
 
 echo "INFO:	Workspace located in: $ROOT"
 REPO=${XENADMIN_DIR}
-REF_REPO=${ROOT}/xenadmin-ref.hg
-BRAND_REPO=${ROOT}/xenadmin-branding
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 TEST_DIR=${ROOT}/tmp
@@ -147,19 +123,7 @@ XENCENTER_LOGDIR="${ROOT}/log"
 mkdir -p ${XENCENTER_LOGDIR}
 
 # WEB_LIB is where the libraries stored in /usr/groups/linux/distfiles are exposed
-#WEB_LATEST_BUILD is where the current build will retrieve some of its dependendencies,
-#i.e. XenCenterOvf, version number, branding info and XenServer.NET;
-#use xe-phase-2-latest to ensure we use a build where phases 1 and 2 have succeeded
-WEB_HOST="http://www.uk.xensource.com"
-WEB_LIB="${WEB_HOST}/linux/distfiles/windows-build"
-WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-2-latest"
-REBRANDING_WEB_LATEST_BUILD="${WEB_HOST}/carbon/${XS_BRANCH}/xe-phase-rebrand-latest"
-WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
-WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
-GLOBALS=${WEB_XE_PHASE_1}/globals
-WEB_TRUNK_LATEST_BUILD="${WEB_HOST}/carbon/trunk/xe-phase-2-latest"
-WEB_TRUNK_XE_PHASE_1=${WEB_TRUNK_LATEST_BUILD}/xe-phase-1
-TRUNK_GLOBALS=${WEB_TRUNK_XE_PHASE_1}/globals
+WEB_LIB="http://www.uk.xensource.com/linux/distfiles/windows-build"
 
 # REPO_CITRITE_LIB is where repo.citrite.net files can be found
 REPO_CITRITE_HOST="https://repo.citrite.net"
@@ -173,9 +137,11 @@ else
 fi
 
 #this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET="${JENKINS_SERVER}/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+WEB_DOTNET=${REPO_CITRITE_HOST}/xc-local-build/dotnet-packages/trunk/745
 DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_${XS_BRANCH}_dotnet-packages
-DOTNET_LOC=$DOTNET_BASE/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
+DOTNET_BASE_TRUNK=${SECURE_BUILD_ARCHIVE_UNC}/carbon_trunk_dotnet-packages
+DOTNET_LOC=${DOTNET_BASE}/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
+DOTNET_LOC_TRUNK=${DOTNET_BASE_TRUNK}/$(ls $DOTNET_BASE_TRUNK | /usr/bin/sort -n | tail -n 1)
 
 # used to copy results out of the secure build enclave
 BUILD_TOOLS_REPO=git://hg.uk.xensource.com/closed/windows/buildtools.git
@@ -184,12 +150,8 @@ STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
 WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
-WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/
-WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 
 WGET_OPT="-T 10 -N -q"
 WGET () { wget ${WGET_OPT} "${@}"; }
 
-#check there are xenserver builds on this branch before proceeding
-WGET --spider ${GLOBALS} || WGET --spider ${TRUNK_GLOBALS} || { echo 'FATAL: Unable to locate globals, xenadmin cannot be built if there is no succesfull build of xenserver published for the same branch.' ; exit 1; }
-
+ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"

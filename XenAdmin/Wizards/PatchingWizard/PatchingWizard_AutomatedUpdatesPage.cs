@@ -47,10 +47,11 @@ using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Text;
+using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    public partial class PatchingWizard_AutoUpdatingPage : XenTabPage
+    public partial class PatchingWizard_AutomatedUpdatesPage : XenTabPage
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -66,7 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
 
-        public PatchingWizard_AutoUpdatingPage()
+        public PatchingWizard_AutomatedUpdatesPage()
         {
             InitializeComponent();
         }
@@ -150,26 +151,31 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var us = Updates.GetUpgradeSequence(pool.Connection);
 
-                foreach (var patch in us.UniquePatches)
+                Debug.Assert(us != null, "Update sequence should not be null.");
+
+                if (us != null)
                 {
-                    var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
-                    hostsToApply.Sort();
-
-                    planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
-                    planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
-                    planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
-
-                    foreach (var host in hostsToApply)
+                    foreach (var patch in us.UniquePatches)
                     {
-                        planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-                        planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
-                        UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
-                    }
+                        var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
+                        hostsToApply.Sort();
 
-                    //clean up master at the end:
-                    planActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
+                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                        planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
-                }//patch
+                        foreach (var host in hostsToApply)
+                        {
+                            planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+                            planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
+                            UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
+                        }
+
+                        //clean up master at the end:
+                        planActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+
+                    }//patch
+                }
 
                 //add all delayed actions to the end of the actions, per host
                 var delayedActions = new List<PlanAction>();
@@ -315,6 +321,32 @@ namespace XenAdmin.Wizards.PatchingWizard
                     log.Debug(action.Title);
 
                     doWorkEventArgs.Result = new Exception(action.Title, e);
+
+                    //this pool failed, we will stop here, but try to remove update files at least
+                    try
+                    {
+                        var positionOfFailedAction = bgw.AllActions.IndexOf(action);
+                        if (positionOfFailedAction < bgw.AllActions.Count && !(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction))
+                        {
+                            int pos = positionOfFailedAction;
+
+                            if (!(bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction)) //can't do anything if the remove action has failed
+                            {
+                                while (++pos < bgw.AllActions.Count)
+                                {
+                                    if (bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction) //find the next remove
+                                    {
+                                        bgw.AllActions[pos].Run();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        //already in an error case - best effort
+                    }
 
                     bgw.ReportProgress(0);
                     break;
@@ -532,7 +564,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AllWorkersFinished()
         {
-            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE;
+            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;

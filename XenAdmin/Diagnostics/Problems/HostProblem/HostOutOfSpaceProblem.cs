@@ -89,13 +89,13 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 switch (diskSpaceReq.Operation)
                 {
                     case DiskSpaceRequirements.OperationTypes.install :
-                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, name);
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, ServerName, name);
                     
                     case DiskSpaceRequirements.OperationTypes.upload :
-                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, name);
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, ServerName, name);
                     
-                    case DiskSpaceRequirements.OperationTypes.autoupdate :
-                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Server.Name);
+                    case DiskSpaceRequirements.OperationTypes.automatedUpdates :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, ServerName);
 
                     default:
                         Debug.Assert(false);

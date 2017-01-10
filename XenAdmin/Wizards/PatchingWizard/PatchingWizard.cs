@@ -55,7 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly PatchingWizard_UploadPage PatchingWizard_UploadPage;
         private readonly PatchingWizard_PrecheckPage PatchingWizard_PrecheckPage;
         private readonly PatchingWizard_FirstPage PatchingWizard_FirstPage;
-        private readonly PatchingWizard_AutoUpdatingPage PatchingWizard_AutoUpdatingPage;
+        private readonly PatchingWizard_AutomatedUpdatesPage PatchingWizard_AutomatedUpdatesPage;
 
         public PatchingWizard()
         {
@@ -68,7 +68,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             PatchingWizard_UploadPage = new PatchingWizard_UploadPage();
             PatchingWizard_PrecheckPage = new PatchingWizard_PrecheckPage();
             PatchingWizard_FirstPage = new PatchingWizard_FirstPage();
-            PatchingWizard_AutoUpdatingPage = new PatchingWizard_AutoUpdatingPage();
+            PatchingWizard_AutomatedUpdatesPage = new PatchingWizard_AutomatedUpdatesPage();
 
             AddPage(PatchingWizard_FirstPage);
             AddPage(PatchingWizard_SelectPatchPage);
@@ -104,16 +104,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (prevPageType == typeof(PatchingWizard_SelectPatchPage))
             {
-                var wizardModeAutomatic = PatchingWizard_SelectPatchPage.IsInAutomaticMode;
+                var wizardIsInAutomatedUpdatesMode = PatchingWizard_SelectPatchPage.IsInAutomatedUpdatesMode;
 
-                var updateType = wizardModeAutomatic ? UpdateType.NewRetail : PatchingWizard_SelectPatchPage.SelectedUpdateType;
-                var newPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.SelectedNewPatch;
-                var existPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.SelectedExistingPatch;
-                var alertPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
-                var fileFromDiskAlertPatch = wizardModeAutomatic ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
+                var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.NewRetail : PatchingWizard_SelectPatchPage.SelectedUpdateType;
+                var newPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedNewPatch;
+                var existPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedExistingPatch;
+                var alertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
+                var fileFromDiskAlertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
 
-                PatchingWizard_SelectServers.IsInAutomaticMode = wizardModeAutomatic;
-                PatchingWizard_SelectServers.AutoDownloadedXenServerVersions = PatchingWizard_SelectPatchPage.AutoDownloadedXenServerVersions;
+                PatchingWizard_SelectServers.IsInAutomaticMode = wizardIsInAutomatedUpdatesMode;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
@@ -122,8 +121,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RemovePage(PatchingWizard_UploadPage);
                 RemovePage(PatchingWizard_ModePage);
                 RemovePage(PatchingWizard_PatchingPage);
-                RemovePage(PatchingWizard_AutoUpdatingPage);
-                if (!wizardModeAutomatic)
+                RemovePage(PatchingWizard_AutomatedUpdatesPage);
+                if (!wizardIsInAutomatedUpdatesMode)
                 {
                     AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
                     AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
@@ -131,7 +130,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else
                 {
-                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_AutoUpdatingPage);
+                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_AutomatedUpdatesPage);
                 }
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
@@ -142,7 +141,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_ModePage.Patch = existPatch;
                 PatchingWizard_ModePage.SelectedUpdateAlert = alertPatch;
 
-                PatchingWizard_PrecheckPage.IsInAutomaticMode = wizardModeAutomatic;
+                PatchingWizard_PrecheckPage.IsInAutomatedUpdatesMode = wizardIsInAutomatedUpdatesMode;
                 PatchingWizard_PrecheckPage.Patch = existPatch;
                 PatchingWizard_PatchingPage.Patch = existPatch;
 
@@ -170,7 +169,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedMasters = selectedMasters;
                 PatchingWizard_UploadPage.SelectedServers = selectedServers;
 
-                PatchingWizard_AutoUpdatingPage.SelectedPools = selectedPools;
+                PatchingWizard_AutomatedUpdatesPage.SelectedPools = selectedPools;
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {
@@ -204,7 +203,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_PatchingPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
                 PatchingWizard_PatchingPage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
                 PatchingWizard_ModePage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
-                PatchingWizard_AutoUpdatingPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
+                PatchingWizard_AutomatedUpdatesPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
             }
         }
 
@@ -309,30 +308,30 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RemoveUnwantedPatches(List<Pool_patch> patchesToRemove)
         {
             List<AsyncAction> subActions = GetRemovePatchActions(patchesToRemove);
-            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void RemoveTemporaryVdis()
         {
             List<AsyncAction> subActions = GetRemoveVdiActions();
-            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void CleanUpPoolUpdates()
         {
             var subActions = GetCleanUpPoolUpdateActions();
-            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+            RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
         private void RemoveDownloadedPatches()
         {
-            var isInAutomaticMode = PatchingWizard_SelectPatchPage.IsInAutomaticMode;
+            var isInAutomaticMode = PatchingWizard_SelectPatchPage.IsInAutomatedUpdatesMode;
 
             List<string> listOfDownloadedFiles = new List<string>();
 
             if (isInAutomaticMode)
             {
-                listOfDownloadedFiles.AddRange(PatchingWizard_AutoUpdatingPage.AllDownloadedPatches.Values);
+                listOfDownloadedFiles.AddRange(PatchingWizard_AutomatedUpdatesPage.AllDownloadedPatches.Values);
             }
             else
             {
@@ -380,16 +379,28 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (PatchingWizard_UploadPage.AllIntroducedPoolUpdates != null && PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Count > 0)
             {
-                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Select(pu => GetCleanUpPoolUpdateAction(pu)).ToList();
+                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Select(GetCleanUpPoolUpdateAction).ToList();
             }
 
             return new List<AsyncAction>();
         }
 
-        private AsyncAction GetCleanUpPoolUpdateAction(Pool_update poolUpdate)
+        private static AsyncAction GetCleanUpPoolUpdateAction(Pool_update poolUpdate)
         {
             return
-                new DelegatedAsyncAction(poolUpdate.Connection, Messages.REMOVE_PATCH, "", "", session => Pool_update.pool_clean(session, poolUpdate.opaque_ref));
+                new DelegatedAsyncAction(poolUpdate.Connection, Messages.REMOVE_PATCH, "", "", session =>
+                {
+                    try
+                    {
+                        Pool_update.pool_clean(session, poolUpdate.opaque_ref);
+                        if(!poolUpdate.AppliedOnHosts.Any())
+                            Pool_update.destroy(session, poolUpdate.opaque_ref);
+                    }
+                    catch (Failure f)
+                    {
+                        log.Error("Clean up failed", f);
+                    }
+                });
         }
     }
 }

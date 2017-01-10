@@ -47,7 +47,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_HOST_NOT_LIVE,Server); }
+            get { return string.Format(Messages.UPDATES_WIZARD_HOST_NOT_LIVE, ServerName); }
         }
 
         public override string HelpMessage

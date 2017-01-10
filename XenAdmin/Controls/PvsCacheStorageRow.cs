@@ -32,7 +32,6 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Controls
@@ -71,19 +70,24 @@ namespace XenAdmin.Controls
             origCacheSizeGb = numericUpDownCacheSize.Value;
 
             PopulateCacheSrCombobox();
+            ReadOnly = OrigPvsCacheStorage != null && OrigPvsCacheStorage.IsInUse;
+            comboBoxCacheSr.Enabled = numericUpDownCacheSize.Enabled = !ReadOnly;
         }
 
         private void PopulateCacheSrCombobox()
         {
             comboBoxCacheSr.Items.Clear();
 
-			// add the "Not configured" item first
-            var notConfiguredItem = new ToStringWrapper<SR>(null, Messages.PVS_CACHE_NOT_CONFIGURED); 
+            // add the "Not configured" item first
+            var notConfiguredItem = new SrComboBoxItem(null, Messages.PVS_CACHE_NOT_CONFIGURED);
             comboBoxCacheSr.Items.Add(notConfiguredItem);
             comboBoxCacheSr.SelectedItem = notConfiguredItem;
 
             // add Memeory SR; if no memory SR  found, add a placeholder (we will create the memory SR in ConfigurePvsCacheAction)
-            var memorySr = Host.Connection.Cache.SRs.FirstOrDefault(s => s.GetSRType(false) == SR.SRTypes.tmpfs && s.CanBeSeenFrom(Host));
+            var memorySr =
+                Host.Connection.Cache.SRs.FirstOrDefault(
+                    s => s.GetSRType(false) == SR.SRTypes.tmpfs && s.CanBeSeenFrom(Host));
+            
             if (memorySr == null)
             {
                 // create a placeholder for the memory SR
@@ -95,7 +99,10 @@ namespace XenAdmin.Controls
                     opaque_ref = Helper.NullOpaqueRef
                 };
             }
-            var memorySrItem = new ToStringWrapper<SR>(memorySr, Messages.PVS_CACHE_MEMORY_ONLY);
+
+            var enabled = Host.dom0_memory_extra >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
+            var label = enabled ? Messages.PVS_CACHE_MEMORY_ONLY : Messages.PVS_CACHE_MEMORY_ONLY_DISABLED;
+            var memorySrItem = new SrComboBoxItem(memorySr, label, enabled);
             comboBoxCacheSr.Items.Add(memorySrItem);
             if (OrigPvsCacheStorage != null && memorySr.opaque_ref == OrigPvsCacheStorage.SR.opaque_ref)
                 comboBoxCacheSr.SelectedItem = memorySrItem;
@@ -105,7 +112,7 @@ namespace XenAdmin.Controls
             availableSRs.Sort();
             foreach (var sr in availableSRs)
             {
-                var newItem = new ToStringWrapper<SR>(sr, sr.Name);
+                var newItem = new SrComboBoxItem(sr, sr.Name);
                 comboBoxCacheSr.Items.Add(newItem);
                 if (OrigPvsCacheStorage != null && sr.opaque_ref == OrigPvsCacheStorage.SR.opaque_ref)
                     comboBoxCacheSr.SelectedItem = newItem;
@@ -147,8 +154,8 @@ namespace XenAdmin.Controls
         {
             get
             {
-                var selectedItem = (ToStringWrapper<SR>)comboBoxCacheSr.SelectedItem;
-                return selectedItem != null ? selectedItem.item : null;
+                var selectedItem = (SrComboBoxItem)comboBoxCacheSr.SelectedItem;
+                return selectedItem != null ? selectedItem.Item : null;
             }
         }
 
@@ -175,6 +182,8 @@ namespace XenAdmin.Controls
             }
         }
 
+        public bool ReadOnly { get; private set; }
+
         private void SomethingChanged(object sender, EventArgs e)
         {
             if (Changed != null)
@@ -188,10 +197,35 @@ namespace XenAdmin.Controls
             {
                 var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); 
                 maxSize = Math.Min(maxSize, MAX_CACHE_SIZE_GB);
+
                 if (maxSize != numericUpDownCacheSize.Maximum)
                     SetupCacheSizeSpinner(numericUpDownCacheSize.Value, numericUpDownCacheSize.Minimum, maxSize);
             }
             SomethingChanged(this, e);
+        }
+    }
+
+    public class SrComboBoxItem : IEnableableComboBoxItem
+    {
+        public SR Item;
+        private readonly string _toString;
+        private readonly bool _enabled;
+
+        public SrComboBoxItem(SR sr, string label, bool enabled=true)
+        {
+            Item = sr;
+            _toString = label;
+            _enabled = enabled;
+        }
+
+        public override string ToString()
+        {
+            return _toString;
+        }
+
+        public bool Enabled
+        {
+            get { return _enabled; }
         }
     }
 }

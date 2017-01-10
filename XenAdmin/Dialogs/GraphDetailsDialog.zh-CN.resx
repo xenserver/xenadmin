@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -130,10 +130,10 @@
     <value>NoControl</value>
   </data>
   <data name="GraphNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 9</value>
+    <value>11, 18</value>
   </data>
   <data name="GraphNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 21</value>
+    <value>42, 15</value>
   </data>
   <data name="GraphNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>326, 419</value>
+    <value>353, 451</value>
   </data>
   <data name="SaveButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -211,7 +211,7 @@
     <value>NoControl</value>
   </data>
   <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 419</value>
+    <value>434, 451</value>
   </data>
   <data name="CloseButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -244,10 +244,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="GraphNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 6</value>
+    <value>69, 15</value>
   </data>
   <data name="GraphNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 23</value>
+    <value>440, 23</value>
   </data>
   <data name="GraphNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -316,13 +316,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>15, 95</value>
   </data>
   <data name="dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 6</value>
   </data>
   <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 378</value>
+    <value>494, 347</value>
   </data>
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -436,7 +436,7 @@
     <value>0</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
-    <value>Retrieving datasources...</value>
+    <value>正在检索数据源...</value>
   </data>
   <data name="labelProgress.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -583,7 +583,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>494, 454</value>
+    <value>522, 489</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

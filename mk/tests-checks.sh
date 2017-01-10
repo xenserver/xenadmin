@@ -34,9 +34,6 @@ set -u
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-#if [ ${XS_BRANCH} = "trunk" ]
-#then
-
 echo -n "Starting tests at "
 date
 
@@ -95,7 +92,3 @@ echo -n "Tests succeeded at "
 date
 
 set +u
-
-#else
-#echo "Tests skipped because this is not trunk"
-#fi

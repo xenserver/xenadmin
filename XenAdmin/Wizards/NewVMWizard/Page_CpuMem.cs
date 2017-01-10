@@ -126,6 +126,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             initialising = false;
         }
 
+        public override void SelectDefaultControl()
+        {
+            comboBoxVCPUs.Select();
+        }
+
         private void InitialiseVcpuControls()
         {
             labelVCPUs.Text = isVcpuHotplugSupported
@@ -364,17 +369,17 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (max_mem_total_host != null && SelectedMemoryDynamicMin > max_mem_total)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host), Util.MemorySizeStringSuitableUnits(max_mem_total, false));
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host).Ellipsise(50), Util.MemorySizeStringSuitableUnits(max_mem_total, false));
             }
             else if (max_mem_free_host != null && SelectedMemoryDynamicMin > max_mem_free)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host), Util.MemorySizeStringSuitableUnits(max_mem_free, false));
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host).Ellipsise(50), Util.MemorySizeStringSuitableUnits(max_mem_free, false));
             }
             else if (max_vcpus_host != null && SelectedVcpusMax > max_vcpus)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(max_vcpus_host), max_vcpus);
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(max_vcpus_host).Ellipsise(50), max_vcpus);
             }
             else
             {

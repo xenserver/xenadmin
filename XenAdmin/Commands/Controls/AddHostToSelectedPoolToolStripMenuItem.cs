@@ -114,17 +114,11 @@ namespace XenAdmin.Commands
                 base.DropDownItems.Add(hostMenuItem);
             }
             
-            if (base.DropDownItems.Count <= 0)
-            {
-                ToolStripMenuItem hostMenuItem = new ToolStripMenuItem(Messages.HOST_MENU_EMPTY);
-                hostMenuItem.Enabled = false;
-                hostMenuItem.Font = Program.DefaultFont;
-                base.DropDownItems.Add(hostMenuItem);
-            }
-
             if (Helpers.GetPool(connection) != null)
             {
-                base.DropDownItems.Add(new ToolStripSeparator());
+                if (base.DropDownItems.Count > 0)
+                    base.DropDownItems.Add(new ToolStripSeparator());
+
                 // Add a final option for connecting a new server and adding it to the pool in one action
                 AddNewHostToPoolCommand cmd = new AddNewHostToPoolCommand(Command.MainWindowCommandInterface, Helpers.GetPool(connection));
                 CommandToolStripMenuItem connectAndAddToPoolMenuItem = new CommandToolStripMenuItem(cmd);

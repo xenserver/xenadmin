@@ -96,6 +96,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public override void SelectDefaultControl()
+        {
+            flickerFreeListBox1.Select();
+        }
+
         private void DownloadFile()
         {            
             string patchUri = ((XenServerPatchAlert)SelectedUpdateAlert).Patch.PatchUrl;
@@ -188,6 +193,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
+                            _poolUpdate = null;
+                            _patch = null;
+                            
                             action = new UploadSupplementalPackAction(
                             selectedServer.Connection,
                             SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(),
@@ -438,11 +446,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         _patch = null;
 
-                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
+                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
+                        {
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
-                        
-                        if (!Helpers.ElyOrGreater(action.Connection)) //we run pool_update.pool_clean instead of deleting the VDIs separately
-                            AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+                        }
+
+                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
 
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
 
@@ -456,10 +465,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 AllIntroducedPoolUpdates.Add(PoolUpdate);
                             }
                         }
-                        else
-                        {
-                            _poolUpdate = null;
-                        }
                     }
 
                     if (action is DownloadAndUnzipXenServerPatchAction)
@@ -472,6 +477,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                         _patch = null;
                         PrepareUploadActions();
                         TryUploading();
+                    }
+                }
+                else // if !action.Succeeded
+                {
+                    if (action is UploadSupplementalPackAction)
+                    {
+                        _patch = null;
+                        _poolUpdate = null;
+
+                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
+                        {
+                            SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
+                        }
+
+                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
                     }
                 }
             });

@@ -50,7 +50,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
             this.tableLayoutPanel2.SetColumnSpan(this.labelBlurb, 2);
-            this.labelBlurb.MaximumSize = new System.Drawing.Size(379, 9999);
             this.labelBlurb.Name = "labelBlurb";
             // 
             // label2
@@ -66,14 +65,12 @@ namespace XenAdmin.Dialogs
             // textBoxUsername
             // 
             resources.ApplyResources(this.textBoxUsername, "textBoxUsername");
-            this.textBoxUsername.MinimumSize = new System.Drawing.Size(280, 23);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
             // 
             // textBoxPassword
             // 
             resources.ApplyResources(this.textBoxPassword, "textBoxPassword");
-            this.textBoxPassword.MinimumSize = new System.Drawing.Size(280, 23);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.UseSystemPasswordChar = true;
             this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
@@ -81,7 +78,6 @@ namespace XenAdmin.Dialogs
             // buttonOk
             // 
             resources.ApplyResources(this.buttonOk, "buttonOk");
-            this.buttonOk.MinimumSize = new System.Drawing.Size(75, 25);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
@@ -90,7 +86,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.MinimumSize = new System.Drawing.Size(75, 25);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -117,7 +112,6 @@ namespace XenAdmin.Dialogs
             // textBoxDomain
             // 
             resources.ApplyResources(this.textBoxDomain, "textBoxDomain");
-            this.textBoxDomain.MinimumSize = new System.Drawing.Size(280, 23);
             this.textBoxDomain.Name = "textBoxDomain";
             this.textBoxDomain.TextChanged += new System.EventHandler(this.textBoxDomain_TextChanged);
             // 
@@ -138,7 +132,6 @@ namespace XenAdmin.Dialogs
             // SkipButton
             // 
             resources.ApplyResources(this.SkipButton, "SkipButton");
-            this.SkipButton.MinimumSize = new System.Drawing.Size(75, 25);
             this.SkipButton.Name = "SkipButton";
             this.SkipButton.UseVisualStyleBackColor = true;
             this.SkipButton.Click += new System.EventHandler(this.SkipButton_Click);

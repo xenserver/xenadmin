@@ -41,7 +41,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
         protected override CreateVMFastAction NewAction()
         {
             VM template = GetAnyUserTemplate(VmIsInstant);
-            return new CreateVMFastAction(template.Connection, template);
+            return new CreateVMFastAction(template.Connection, template, false);
         }
 
         protected override bool VerifyResult(CreateVMFastAction action)

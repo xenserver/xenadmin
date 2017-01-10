@@ -225,9 +225,11 @@
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\ConflictingUpdatePresent.cs" />
     <Compile Include="Diagnostics\Problems\Information.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
@@ -238,6 +240,12 @@
     </Compile>
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.Designer.cs">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.Designer.cs">
+      <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\PvsCacheConfigurationDialog.cs">
       <SubType>Form</SubType>
@@ -909,11 +917,11 @@
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
-    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.cs">
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.designer.cs">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.designer.cs">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.cs">
       <SubType>UserControl</SubType>
@@ -1635,6 +1643,16 @@
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.ja.resx">
+      <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.resx">
+      <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.zh-CN.resx">
+      <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PvsCacheConfigurationDialog.ja.resx">
       <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -2197,15 +2215,15 @@
       <SubType>Designer</SubType>
       <DependentUpon>PatchingWizard_ModePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.ja.resx">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.ja.resx">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.resx">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.resx">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutoUpdatingPage.zh-CN.resx">
-      <DependentUpon>PatchingWizard_AutoUpdatingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_AutomatedUpdatesPage.zh-CN.resx">
+      <DependentUpon>PatchingWizard_AutomatedUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PatchingPage.resx">
       <SubType>Designer</SubType>

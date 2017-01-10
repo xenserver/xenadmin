@@ -37,6 +37,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.CustomDataGraph;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -70,6 +71,9 @@ namespace XenAdmin.Dialogs
             if (isNew)
             {
                 this.designedGraph = new DesignedGraph();
+                // Generate an unique suggested name for the graph
+                if (graphList != null)
+                    this.designedGraph.DisplayName = Helpers.MakeUniqueName(Messages.GRAPH_NAME, graphList.DisplayNames);
                 base.Text = Messages.GRAPHS_NEW_TITLE;
             }
             else
@@ -266,7 +270,7 @@ namespace XenAdmin.Dialogs
                 }
                 else
                 {
-                    result = string.Compare(row1.Cells[columnIndex].Value.ToString(),
+                    result = StringUtility.NaturalCompare(row1.Cells[columnIndex].Value.ToString(),
                                             row2.Cells[columnIndex].Value.ToString());
                 }
 

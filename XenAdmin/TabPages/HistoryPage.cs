@@ -329,21 +329,27 @@ namespace XenAdmin.TabPages
         {
             if (ConnectionsManager.History.Count > 0)
             {
-                DialogResult dialogResult = DialogResult.Yes;
-                if (!Program.RunInAutomatedTestMode)
+                if (!Program.RunInAutomatedTestMode && !Properties.Settings.Default.DoNotConfirmDismissEvents)
                 {
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
                         ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo))
+                        ThreeButtonDialog.ButtonNo)
                     {
-                        dialogResult = dlg.ShowDialog(this);
+                        ShowCheckbox = true,
+                        CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                    })
+                    {
+                        var result = dlg.ShowDialog(this);
+                        Properties.Settings.Default.DoNotConfirmDismissEvents = dlg.IsCheckBoxChecked;
+                        Settings.TrySaveSettings();
+
+                        if (result != DialogResult.Yes)
+                            return;
                     }
                 }
-                if (dialogResult == DialogResult.Yes)
-                {
-                    ConnectionsManager.History.Remove(row.Action);
-                }
+
+                ConnectionsManager.History.Remove(row.Action);
             }
         }
 
@@ -387,19 +393,10 @@ namespace XenAdmin.TabPages
                 return;
 
             DialogResult result = DialogResult.Yes;
+
             if (!Program.RunInAutomatedTestMode)
             {
-                if (!FilterIsOn)
-                {
-                    using (var dlog = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER),
-                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
-                        ThreeButtonDialog.ButtonCancel))
-                    {
-                        result = dlog.ShowDialog(this);
-                    }
-                }
-                else
+                if (FilterIsOn)
                 {
                     using (var dlog = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE),
@@ -408,6 +405,22 @@ namespace XenAdmin.TabPages
                         ThreeButtonDialog.ButtonCancel))
                     {
                         result = dlog.ShowDialog(this);
+                    }
+                }
+                else if (!Properties.Settings.Default.DoNotConfirmDismissEvents)
+                {
+                    using (var dlog = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER),
+                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                        ThreeButtonDialog.ButtonCancel)
+                    {
+                        ShowCheckbox = true,
+                        CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                    })
+                    {
+                        result = dlog.ShowDialog(this);
+                        Properties.Settings.Default.DoNotConfirmDismissEvents = dlog.IsCheckBoxChecked;
+                        Settings.TrySaveSettings();
                     }
                 }
 
@@ -424,14 +437,23 @@ namespace XenAdmin.TabPages
 
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
-            using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            if (!Properties.Settings.Default.DoNotConfirmDismissEvents)
             {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissEvents = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
 
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             var actions = from DataGridViewActionRow row in dataGridView.SelectedRows where row != null && row.Action != null && row.Action.IsCompleted && row.Visible select row.Action;

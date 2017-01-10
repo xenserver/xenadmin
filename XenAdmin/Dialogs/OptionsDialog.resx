@@ -112,31 +112,64 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ContentPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ContentPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="confirmationOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="confirmationOptionsPage1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="confirmationOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 49</value>
+  </data>
+  <data name="confirmationOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="confirmationOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>533, 451</value>
+  </data>
+  <data name="confirmationOptionsPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;confirmationOptionsPage1.Name" xml:space="preserve">
+    <value>confirmationOptionsPage1</value>
+  </data>
+  <data name="&gt;&gt;confirmationOptionsPage1.Type" xml:space="preserve">
+    <value>XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;confirmationOptionsPage1.Parent" xml:space="preserve">
+    <value>ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;confirmationOptionsPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="pluginOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pluginOptionsPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="pluginOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="pluginOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="pluginOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="pluginOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -151,7 +184,7 @@
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;pluginOptionsPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="saveAndRestoreOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -165,8 +198,11 @@
   <data name="saveAndRestoreOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="saveAndRestoreOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="saveAndRestoreOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="saveAndRestoreOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -181,37 +217,7 @@
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;saveAndRestoreOptionsPage1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="searchOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="searchOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="searchOptionsPage1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="searchOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 49</value>
-  </data>
-  <data name="searchOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
-  </data>
-  <data name="searchOptionsPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;searchOptionsPage1.Name" xml:space="preserve">
-    <value>searchOptionsPage1</value>
-  </data>
-  <data name="&gt;&gt;searchOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.searchOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;searchOptionsPage1.Parent" xml:space="preserve">
-    <value>ContentPanel</value>
-  </data>
-  <data name="&gt;&gt;searchOptionsPage1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="securityOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -222,8 +228,11 @@
   <data name="securityOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="securityOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="securityOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="securityOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -238,7 +247,7 @@
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;securityOptionsPage1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="updatesOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -249,8 +258,11 @@
   <data name="updatesOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="updatesOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="updatesOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="updatesOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -265,7 +277,7 @@
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;updatesOptionsPage1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="graphsOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -276,8 +288,11 @@
   <data name="graphsOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="graphsOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="graphsOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="graphsOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -286,13 +301,13 @@
     <value>graphsOptionsPage1</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.GraphsOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="consolesOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -306,8 +321,11 @@
   <data name="consolesOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="consolesOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="consolesOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="consolesOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -322,7 +340,7 @@
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;consolesOptionsPage1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="connectionOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -336,8 +354,11 @@
   <data name="connectionOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
+  <data name="connectionOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="connectionOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>533, 451</value>
   </data>
   <data name="connectionOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -352,13 +373,10 @@
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;connectionOptionsPage1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ContentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
-  </data>
-  <data name="ContentPanel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="ContentPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -367,22 +385,19 @@
     <value>10, 49, 10, 10</value>
   </data>
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>554, 510</value>
+    <value>553, 510</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Parent" xml:space="preserve">
     <value>blueBorder</value>
   </data>
   <data name="&gt;&gt;ContentPanel.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="verticalTabs.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 512</value>
@@ -399,9 +414,6 @@
   <data name="&gt;&gt;verticalTabs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>719, 530</value>
   </data>
@@ -409,16 +421,13 @@
     <value>cancelButton</value>
   </data>
   <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>639, 530</value>
@@ -427,7 +436,7 @@
     <value>okButton</value>
   </data>
   <data name="&gt;&gt;okButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -435,17 +444,11 @@
   <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="splitContainer.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="splitContainer.Panel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
     <value>splitContainer</value>
@@ -453,14 +456,11 @@
   <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="splitContainer.Panel2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
     <value>splitContainer.Panel2</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
     <value>splitContainer</value>
@@ -475,7 +475,7 @@
     <value>splitContainer</value>
   </data>
   <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
     <value>$this</value>
@@ -483,7 +483,22 @@
   <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>555, 512</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
+    <value>blueBorder</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
+    <value>splitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

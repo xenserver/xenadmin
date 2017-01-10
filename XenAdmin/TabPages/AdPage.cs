@@ -1057,8 +1057,8 @@ namespace XenAdmin.TabPages
                 selectedSubjects.Add(selectedRow.subject);
             }
 
-            RoleSelectionDialog dialog = new RoleSelectionDialog(selectedSubjects.ToArray(), pool);
-            dialog.Show(this);
+            using (var dialog = new RoleSelectionDialog(selectedSubjects.ToArray(), pool))
+                dialog.ShowDialog(this);
         }
 
         private void ButtonLogout_Click(object sender, EventArgs e)

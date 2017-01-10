@@ -159,6 +159,7 @@
                             <File Id="hotfixSanibelToClearwaterSource" Source="..\Branding\Hotfixes\RPU001-src-pkgs.tar.gz" />
 							<?endif?>
                             <File Id="hotfixCreedence" Source="..\Branding\Hotfixes\RPU002.[xsupdate]" />
+                            <File Id="hotfixDundee" Source="..\Branding\Hotfixes\RPU003.[xsupdate]" />
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
 						<!-- TestResources -->
@@ -247,7 +248,7 @@
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
                     <Condition>INSTALLSHORTCUT</Condition>
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="[XenCenter]" Description="[XenCenter] Shortcut" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR"/>
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="[XenCenter]" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR"/>
                     <RemoveFolder Id="DesktopFolder" On="uninstall"/>
                     <RegistryValue Root="HKCU" Key="Software\[Citrix]\[XenCenter]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
@@ -268,7 +269,7 @@
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="[BRANDING_APPLICAION_SHOTCUT_GUID]">
-                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="[Citrix] [XenCenter]" Description="[XenCenter] Shortcut" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="[Citrix] [XenCenter]" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
                 <RegistryValue Root="HKCU" Key="Software\[Citrix]\[XenCenter]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>

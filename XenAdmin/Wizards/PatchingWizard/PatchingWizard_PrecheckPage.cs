@@ -55,7 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
-        public bool IsInAutomaticMode { get; set; }
+        public bool IsInAutomatedUpdatesMode { get; set; }
         private AsyncAction resolvePrechecksAction = null;
 
         protected List<Pool> SelectedPools
@@ -123,9 +123,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                if (IsInAutomaticMode)
+                if (IsInAutomatedUpdatesMode)
                 {
-                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATIC_MODE;
+                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
                 }
                 else
                 {
@@ -147,6 +147,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 log.Error(e, e);
                 throw;//better throw an exception rather than closing the wizard suddenly and silently
             }
+        }
+
+        public override void SelectDefaultControl()
+        {
+            dataGridView1.Select();
         }
 
         protected void RefreshRechecks()
@@ -289,6 +294,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Pool_patch patch = e.Argument as Pool_patch;
                 Pool_update update = e.Argument as Pool_update;
 
+                LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
+
                 List<KeyValuePair<string, List<Check>>> checks = update != null ? GenerateChecks(update) : GenerateChecks(patch); //patch is expected to be null for RPU
                 _numberChecks = checks.Count;
                 for (int i = 0; i < checks.Count; i++)
@@ -365,8 +372,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 checkGroup.Add(new PBDsPluggedCheck(host));
             }
 
-            //Disk space check for batch hotfixing
-            if (IsInAutomaticMode)
+            //Disk space check for automated updates
+            if (IsInAutomatedUpdatesMode)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -380,7 +387,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (Host host in us.Keys)
                     {
                         checkGroup.Add(
-                            new DiskSpaceForBatchUpdatesCheck(
+                            new DiskSpaceForAutomatedUpdatesCheck(
                                 host,
                                 elyOrGreater
                                     ? us[host].Sum(p => p.InstallationSize) // all updates on this host
@@ -400,9 +407,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
             
             List<Check> checkGroup;
-
-            LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
-
+            
             //Checking other things
             if (patch != null)
             {
@@ -417,7 +422,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomaticMode)
+            if (!IsInAutomatedUpdatesMode)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -466,7 +471,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomaticMode)
+            if (!IsInAutomatedUpdatesMode)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;

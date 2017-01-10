@@ -106,7 +106,7 @@ namespace XenAdmin.Diagnostics.Checks
 
                     return FindProblem(result);
                 }
-                else
+                else if (Helpers.ElyOrGreater(Host))
                 {
                     var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
 
@@ -114,9 +114,9 @@ namespace XenAdmin.Diagnostics.Checks
 
                     if (livePatchCodesByHost != null)
                         livePatchCodesByHost[Host.uuid] = livepatchStatus;
-
-                    return null;
                 }
+
+                return null;
             }
             catch (Failure f)
             {
@@ -237,6 +237,15 @@ namespace XenAdmin.Diagnostics.Checks
 
             switch (errorcode)
             {
+                case "UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION":
+                    return new WrongServerVersion(this, Host);
+
+                case "UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT":
+                    return new ConflictingUpdatePresent(this, found, Host);
+
+                case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING":
+                    return new PrerequisiteUpdateMissing(this, found, Host);
+
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
                     return new WrongServerVersion(this, required, Host);
 

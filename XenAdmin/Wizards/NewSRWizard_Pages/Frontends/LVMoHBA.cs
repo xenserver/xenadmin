@@ -230,6 +230,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             return Helpers.DundeeOrGreater(Connection) ?  Messages.WIZARD_BUTTON_NEXT : Messages.NEWSR_LVMOHBA_NEXT_TEXT;
         }
 
+        public override void SelectDefaultControl()
+        {
+            dataGridView.Select();
+        }
+
         #endregion
 
         #region Event handlers
@@ -337,7 +342,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             try
             {
-                FibreChannelProbeParsing.ProcessXML(action.Result, devices);
+                devices = FibreChannelProbeParsing.ProcessXML(action.Result);
 
                 if (devices.Count == 0)
                 {

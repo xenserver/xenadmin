@@ -1490,7 +1490,7 @@ namespace XenAPI
                 if (host == null)
                     return false;
 
-                if (Helpers.DundeePlusOrGreater(Connection))
+                if (!Helper.IsNullOrEmptyOpaqueRef(host.control_domain))
                     return host.control_domain == opaque_ref;
 
                 var vms = Connection.ResolveAll(host.resident_VMs);
@@ -1507,6 +1507,17 @@ namespace XenAPI
         public bool is_a_real_vm
         {
             get { return !not_a_real_vm; }
+        }
+
+        private bool _isBeingCreated;
+        public bool IsBeingCreated
+        {
+            get { return _isBeingCreated; }
+            set
+            {
+                _isBeingCreated = value;
+                NotifyPropertyChanged("IsBeingCreated");
+            }
         }
 
         public XmlNode ProvisionXml

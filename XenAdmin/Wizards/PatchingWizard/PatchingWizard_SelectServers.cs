@@ -93,7 +93,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLoaded(direction);
             try
             {
-                label1.Text = IsInAutomaticMode ? Messages.PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_AUTOMATIC_MODE : Messages.PATCHINGWIZARD_SELECTSERVERPAGGE_RUBRIC_DEFAULT;
+                label1.Text = IsInAutomaticMode ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
                 
                 // catch selected servers, in order to restore selection after the dataGrid is reloaded
                 List<Host> selectedServers = SelectedServers;
@@ -165,9 +165,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public bool IsInAutomaticMode { set; get; }
+        public override void SelectDefaultControl()
+        {
+            dataGridViewHosts.Select();
+        }
 
-        public List<XenServerVersion> AutoDownloadedXenServerVersions { private get; set; }
+        public bool IsInAutomaticMode { set; get; }
 
         private void EnabledRow(Host host, UpdateType type, int index)
         {
@@ -181,7 +184,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden) // Forbids update auto restarts
                 {
                     row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATIC_UPDATES;
+                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATED_UPDATES;
                     return;
                 }
 
@@ -189,18 +192,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
                 {
                     row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_PARTIALLY_UPGRADED;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED;
 
                     return;
                 }
 
                 //check updgrade sequences
-                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection, AutoDownloadedXenServerVersions);
+                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
 
                 if (us == null) //version not supported
                 {
                     row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTO_UPDATE_NOT_SUPPORTED_HOST_VERSION;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
 
                     return;
                 }
@@ -209,7 +212,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (Host.RestrictBatchHotfixApply(host))
                 {
                     row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_BATCH_UPDATING;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
 
                     return;
                 }
@@ -264,7 +267,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
                     }
-                    if (Helpers.ElyOrGreater(host) && selectedHosts != null)
+                    if (selectedHosts != null)
                     {
                         disableNotApplicableHosts(row, selectedHosts, host);
                     }
