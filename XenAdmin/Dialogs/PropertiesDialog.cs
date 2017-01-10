@@ -338,8 +338,24 @@ namespace XenAdmin.Dialogs
 
             // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.
             // Must come first because some pages' SaveChanges() rely on modifying the object via the xenObjectCopy before their actions are run.
-            actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
 
+            if(xenObjectBefore is VMSS)
+            {
+                XenAPI.VMSS VMSSObj = xenObjectBefore as XenAPI.VMSS;
+                if (VMSSObj.policy_type == policy_backup_type.snapshot_with_quiesce)
+                {
+                    actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
+                }
+                else
+                {
+                    actions.Insert(actions.Count, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
+                }
+            }
+            else /* VMPP object*/
+            {
+                actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true)); 
+            }
+                
             _action = new MultipleAction(
                 connection,
                 string.Format(Messages.UPDATE_PROPERTIES, Helpers.GetName(xenObject).Ellipsise(50)),
@@ -468,6 +484,13 @@ namespace XenAdmin.Dialogs
             
             var snapshotTypePageSpecific = verticalTabs.SelectedItem as NewPolicySnapshotTypePageSpecific<VMSS>;
             if (snapshotTypePageSpecific != null)
+            {
+                newPolicyVMSSTypePage1.ToggleQuiesceCheckBox(newVMSSVMsPage1.SelectedVMs);
+                return;
+            }
+
+            var vmGroups = verticalTabs.SelectedItem as NewVMGroupVMsPage<VMSS>;
+            if(vmGroups != null)
             {
                 newPolicyVMSSTypePage1.ToggleQuiesceCheckBox(newVMSSVMsPage1.SelectedVMs);
                 return;

@@ -11907,6 +11907,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMS" xml:space="preserve">
     <value>VMs</value>
   </data>
+  <data name="VMSS_CHECKPOINT_NON_SUPPORT" xml:space="preserve">
+    <value>One or more selected VMs does not support checkpoint operation</value>
+  </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>Snapshot sched&amp;ules ...</value>
   </data>
