@@ -433,90 +433,6 @@
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="labelDownloadUpdate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="labelDownloadUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 0</value>
-  </data>
-  <data name="labelDownloadUpdate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 0, 3, 0</value>
-  </data>
-  <data name="labelDownloadUpdate.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
-  </data>
-  <data name="labelDownloadUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 25</value>
-  </data>
-  <data name="labelDownloadUpdate.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="labelDownloadUpdate.Text" xml:space="preserve">
-    <value>適切なアップデートをダウンロードし、そのファイルにアクセスできることを確認します。</value>
-  </data>
-  <data name="labelDownloadUpdate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;labelDownloadUpdate.Name" xml:space="preserve">
-    <value>labelDownloadUpdate</value>
-  </data>
-  <data name="&gt;&gt;labelDownloadUpdate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDownloadUpdate.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelDownloadUpdate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 10</value>
-  </data>
-  <data name="pictureBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>4, 4</value>
-  </data>
-  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
-    <value>pictureBox2</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>610, 25</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -545,7 +461,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="panel4" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,40,Absolute,40,Absolute,40,Absolute,40" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="panel4" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="Absolute,30,Absolute,30,AutoSize,40,Absolute,40,Absolute,40,Absolute,40" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

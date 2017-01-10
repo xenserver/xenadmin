@@ -157,11 +157,14 @@ namespace XenAdmin.Dialogs
                 {
                     Program.Invoke(this, delegate()
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Exclamation,
                                String.Format(Messages.HA_WAS_DISABLED, pool.Name),
-                               Messages.HIGH_AVAILABILITY)).ShowDialog(this);
+                               Messages.HIGH_AVAILABILITY)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
                         this.Close();
                     });
                 }
@@ -179,12 +182,18 @@ namespace XenAdmin.Dialogs
             long newNtol = assignPriorities.Ntol;                         
 
             // User has configured ntol to be zero. Check this is what they want (since it is practically useless).
-            if (newNtol == 0 && new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY, Messages.HIGH_AVAILABILITY),
-                    ThreeButtonDialog.ButtonYes,
-                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this) == DialogResult.No)
+            if (newNtol == 0)
             {
-                return;
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY, Messages.HIGH_AVAILABILITY),
+                        ThreeButtonDialog.ButtonYes,
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult == DialogResult.No)
+                    return;
             }
 
             if (assignPriorities.ChangesMade || newNtol != originalNtol)

@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	Fri Apr  8 15:15:52 2016
-+++ XenCenter.l10n.wxs	Fri Apr  8 15:29:38 2016
+--- XenCenter.wxs	Mon May 23 11:07:59 2016
++++ XenCenter.l10n.wxs	Mon May 23 11:09:01 2016
 @@ -40,7 +40,7 @@
  	<?define HiddenFeatures="[BRANDING_HIDDEN_FEATURES]"?>
  	<?define AdditionalFeatures="[BRANDING_ADDITIONAL_FEATURES]"?>
@@ -102,10 +102,10 @@
                                  </Extension>
                              </ProgId>
 -							<!-- Define XBK extension -->
--							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
+-							<ProgId Id="XenCenter.[xbk]" Description="[XenServer] Backup File" Icon="XkbIcon">
 +                            <!-- Define XBK extension -->
-+							<ProgId Id="XenCenter.xbk" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
-                                 <Extension Id="xbk" ContentType="application/xbk">
++							<ProgId Id="XenCenter.[xbk]" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
+                                 <Extension Id="[xbk]" ContentType="application/[xbk]">
 -                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
 +                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                  </Extension>
@@ -135,7 +135,7 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -172,13 +174,37 @@
+@@ -172,12 +174,34 @@
                          </Directory>
                          <?else?>
                          <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
@@ -146,11 +146,8 @@
                          <Directory Id="Help" Name="Help">
                              <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
                                  <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
-                                 <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
 +                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].ja.chm" />  
-+                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />  
-+                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].zh-CN.chm" />  
-+                                <File Id="WLBScCHM" Source="..\XenAdmin\bin\Release\Help\WLB.zh-CN.chm" />  
++                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].zh-CN.chm" />
 +                            </Component>
 +                        </Directory>
 +                        <Directory Id="ja" Name="ja">
@@ -174,7 +171,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -223,7 +249,7 @@
+@@ -222,7 +246,7 @@
  								  Vital="no"
  								  Name="XenServerHealthCheck"
  								  DisplayName="[Citrix] [XenServer] Health Check Service"
@@ -183,7 +180,7 @@
  								  Start="auto"
  								  Account="LocalSystem"
  								  ErrorControl="normal"
-@@ -278,13 +304,15 @@
+@@ -277,13 +301,15 @@
          <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -200,7 +197,7 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-@@ -292,7 +320,7 @@
+@@ -291,7 +317,7 @@
              <ComponentRef Id="ProgramFilesShortcut" />
    
             <?if "$(env.Branding)"="XenCenter"?>		
@@ -209,12 +206,12 @@
  					<ComponentRef Id="XenServerHealthCheck" /> 
  				</Feature>
  	       <?else ?>
-@@ -311,7 +339,7 @@
+@@ -310,7 +336,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-         <PropertyRef Id="NETFRAMEWORK45" />
--        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
-+        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
+         <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
+-        <Condition Message=".NET Framework 4.6 is required for this installation."><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
++        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
          <Property Id="PERMACHINEINSTALL">
              <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
          </Property>

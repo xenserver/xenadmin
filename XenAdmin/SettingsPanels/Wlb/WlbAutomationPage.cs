@@ -53,6 +53,7 @@ namespace XenAdmin.SettingsPanels
         private XenAdmin.Network.IXenConnection _connection;
         private bool _hasChanged = false;
         private bool _loading = false;
+        private HashSet<string> _uuidSet = new HashSet<string>();
 
         private int[] minimumColumnWidths = {25, 50, 50, 50 };
 
@@ -214,14 +215,18 @@ namespace XenAdmin.SettingsPanels
                     if (!HostCannotParticipateInPowerManagement(host))
                     {
                         if (e.NewValue == CheckState.Checked &&
+                            _uuidSet.Contains(host.uuid) &&
                             (!_poolConfiguration.HostConfigurations.ContainsKey(host.uuid) ||
                              !_poolConfiguration.HostConfigurations[host.uuid].LastPowerOnSucceeded))
                         {
-                            DialogResult dr =
-                                new ThreeButtonDialog(
+                            DialogResult dr;
+                            using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.WLB_UNTESTED_HOST_WARNING, Messages.WLB_UNTESTED_HOST_CAPTION),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog();
+                                ThreeButtonDialog.ButtonNo))
+                            {
+                                dr = dlg.ShowDialog();
+                            }
                             if (dr == DialogResult.No)
                             {
                                 e.NewValue = e.CurrentValue;
@@ -233,6 +238,7 @@ namespace XenAdmin.SettingsPanels
                         }
                         else
                         {
+                            _uuidSet.Add(host.uuid);
                             _hasChanged = true;
                         }
                     }

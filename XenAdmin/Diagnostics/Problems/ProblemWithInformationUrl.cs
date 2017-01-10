@@ -64,12 +64,15 @@ namespace XenAdmin.Diagnostics.Problems
             }
             catch (Exception)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         string.Format(Messages.COULD_NOT_OPEN_URL,
-                                      UriToLaunch.AbsoluteUri),
-                        Messages.XENCENTER)).ShowDialog(Program.MainWindow);
+                            UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty),
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
             }
         }
     }

@@ -637,9 +637,11 @@ namespace XenAPI
         /// <summary>
         /// Get the parent field of the given VDI.
         /// First published in XenServer 4.0.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        [Deprecated("")]
         public static XenRef<VDI> get_parent(Session session, string _vdi)
         {
             return XenRef<VDI>.Create(session.proxy.vdi_get_parent(session.uuid, (_vdi != null) ? _vdi : "").parse());
@@ -1966,7 +1968,7 @@ namespace XenAPI
         private bool _missing;
 
         /// <summary>
-        /// References the parent disk, if this VDI is part of a chain
+        /// This field is always null. Deprecated
         /// </summary>
         public virtual XenRef<VDI> parent
         {

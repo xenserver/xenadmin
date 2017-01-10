@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 
@@ -41,10 +42,25 @@ namespace XenAdmin.Diagnostics.Checks
             _host = host;
         }
 
-        public abstract Problem RunCheck();
+        protected abstract Problem RunCheck();
+
+        // By default, most Checks return zero or one Problems: but a
+        // Check can override this to return multiple Problems
+        public virtual List<Problem> RunAllChecks()
+        {
+            var list = new List<Problem>(1);
+            var problem = RunCheck();
+            if (problem != null)
+                list.Add(problem);
+            return list;
+        }
 
         public abstract string Description{ get;}
-     
+
+        public virtual string SuccessfulCheckDescription 
+        {
+            get { return string.Empty; }
+        }
 
         private readonly Host _host = null;
         public Host Host

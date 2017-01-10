@@ -47,9 +47,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _patch; }
         }
 
+        private Pool_update _poolUpdate;
+        public Pool_update PoolUpdate
+        {
+            get { return _poolUpdate; }
+        }
+
         public Dictionary<string, string> AllDownloadedPatches = new Dictionary<string, string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
+        public List<Pool_update> AllIntroducedPoolUpdates = new List<Pool_update>();
 
         #endregion
 
@@ -98,7 +105,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             Uri address = new Uri(patchUri);
             string tempFile = Path.GetTempFileName();
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, Branding.Update);          
+            bool isIso = SelectedUpdateType == UpdateType.ISO;
+
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? Branding.UpdateIso : Branding.Update);          
 
             if (downloadAction != null)
             {
@@ -166,7 +175,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             bool deleteFileOnCancel = AllDownloadedPatches.ContainsValue(SelectedNewPatchPath);
                             action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatchPath, true, deleteFileOnCancel);
-                            AddToUploadedUpdates(SelectedNewPatchPath, selectedServer);
                         }
                         break;
                     case UpdateType.Existing:
@@ -177,7 +185,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                                                   SelectedExistingPatch);
                         }
                         break;
-                    case UpdateType.NewSuppPack:
+                    case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
                             action = new UploadSupplementalPackAction(
@@ -185,8 +193,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                             SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(),
                             SelectedNewPatchPath,
                             true);
-
-                            AddToUploadedUpdates(SelectedNewPatchPath, selectedServer);
                         }
                         break;
                 }
@@ -252,7 +258,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 switch (SelectedUpdateType)
                 {
                     case UpdateType.NewRetail:
-                        action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatchPath, true);
+                        if (CanUploadUpdateOnHost(SelectedNewPatchPath, master))
+                            action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatchPath, true);
                         break;
                     case UpdateType.Existing:
                         if (SelectedExistingPatch != null && !PatchExistsOnPool(SelectedExistingPatch, master))
@@ -409,19 +416,52 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Host master = Helpers.GetMaster(action.Connection);
 
                     if (action is UploadPatchAction)
+                    {
                         _patch = (action as UploadPatchAction).PatchRefs[master];
+                        _poolUpdate = null;
+                        AddToUploadedUpdates(SelectedNewPatchPath, master);
+                    }
+                    
                     if (action is CopyPatchFromHostToOther && action.Host != null)
+                    {
+                        _poolUpdate = null;
                         _patch = action.Host.Connection.Cache.Resolve((action as CopyPatchFromHostToOther).NewPatchRef);
+                    }
 
                     if (_patch != null && !NewUploadedPatches.ContainsKey(_patch))
+                    {
                         NewUploadedPatches.Add(_patch, SelectedNewPatchPath);
+                        _poolUpdate = null;
+                    }
 
                     if (action is UploadSupplementalPackAction)
                     {
+                        _patch = null;
+
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
                             SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
-                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+                        
+                        if (!Helpers.ElyOrGreater(action.Connection)) //we run pool_update.pool_clean instead of deleting the VDIs separately
+                            AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+
+                        AddToUploadedUpdates(SelectedNewPatchPath, master);
+
+                        if (Helpers.ElyOrGreater(action.Connection))
+                        {
+                            var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
+
+                            if (newPoolUpdate != null)
+                            {
+                                _poolUpdate = newPoolUpdate;
+                                AllIntroducedPoolUpdates.Add(PoolUpdate);
+                            }
+                        }
+                        else
+                        {
+                            _poolUpdate = null;
+                        }
                     }
+
                     if (action is DownloadAndUnzipXenServerPatchAction)
                     {
                         SelectedNewPatchPath = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
@@ -435,6 +475,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
             });
+        }
+
+        private bool AllServersElyOrGreater()
+        {
+            foreach (var server in SelectedServers)
+            {
+                if (!Helpers.ElyOrGreater(server.Connection))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void multipleAction_Completed(object sender)
@@ -515,9 +567,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 var msgtemplate = SelectedExistingPatch.host_patches.Count > 0 ? Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO : Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED;
                 var msg = string.Format(msgtemplate, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name, Branding.Update);
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Error, msg))
-                   .ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Error, msg)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
 
             if (diskSpaceRequirements == null)
@@ -525,31 +579,37 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (diskSpaceRequirements.CanCleanup)
             {
-                ThreeButtonDialog d = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceRequirements.GetSpaceRequirementsMessage()),
+                using (var d = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        diskSpaceRequirements.GetSpaceRequirementsMessage()),
                     new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel));
-
-                if (d.ShowDialog(this) == DialogResult.OK)
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel)))
                 {
-                    // do the cleanup and retry uploading
-                    CleanupDiskSpaceAction action = new CleanupDiskSpaceAction(diskSpaceRequirements.Host, null, true);
+                    if (d.ShowDialog(this) == DialogResult.OK)
+                    {
+                        // do the cleanup and retry uploading
+                        CleanupDiskSpaceAction action = new CleanupDiskSpaceAction(diskSpaceRequirements.Host, null,
+                            true);
 
-                    action.Completed += delegate
-                                        {
-                                            if (action.Succeeded)
-                                            {
-                                                Program.Invoke(Program.MainWindow, TryUploading);
-                                            }
-                                        };
-                    action.RunAsync();
+                        action.Completed += delegate
+                        {
+                            if (action.Succeeded)
+                            {
+                                Program.Invoke(Program.MainWindow, TryUploading);
+                            }
+                        };
+                        action.RunAsync();
+                    }
                 }
             }
             else
             {
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceRequirements.GetSpaceRequirementsMessage()))
-                    .ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        diskSpaceRequirements.GetSpaceRequirementsMessage())))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
     }

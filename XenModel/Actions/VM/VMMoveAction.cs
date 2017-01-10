@@ -109,10 +109,15 @@ namespace XenAdmin.Actions.VMActions
                     if (!oldVBD.IsOwner)
                         continue;
 
-                    SR sr = StorageMapping != null ? StorageMapping[oldVBD.VDI.opaque_ref] : null;
-
                     var curVdi = Connection.Resolve(oldVBD.VDI);
-                    if (curVdi == null || sr == null || curVdi.SR.opaque_ref == sr.opaque_ref)
+                    if (curVdi == null)
+                        continue;
+
+                    if (StorageMapping == null || !StorageMapping.ContainsKey(oldVBD.VDI.opaque_ref))
+                        continue;
+
+                    SR sr = StorageMapping[oldVBD.VDI.opaque_ref];
+                    if (sr == null || curVdi.SR.opaque_ref == sr.opaque_ref)
                         continue;
 
                     RelatedTask = XenAPI.VDI.async_copy(Session, oldVBD.VDI.opaque_ref, sr.opaque_ref);

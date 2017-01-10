@@ -85,11 +85,14 @@ namespace XenAdmin.Commands
                 if (selection.Count == 1 && pool.master == host.opaque_ref)
                 {
                     // Trying to remove the master from a pool.
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Error,
                            Messages.MESSAGEBOX_POOL_MASTER_REMOVE,
-                           Messages.XENCENTER)).ShowDialog(MainWindowCommandInterface.Form);
+                           Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(MainWindowCommandInterface.Form);
+                    }
                     return;
                 }
 
@@ -175,11 +178,14 @@ namespace XenAdmin.Commands
                     {
                         MainWindowCommandInterface.Invoke(delegate
                         {
-                            new ThreeButtonDialog(
+                            using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Exclamation,
                                    string.Format(Messages.MESSAGEBOX_RECONNECT_FAIL, connection.Hostname),
-                                   Messages.MESSAGEBOX_RECONNECT_FAIL_TITLE)).ShowDialog(Parent);
+                                   Messages.MESSAGEBOX_RECONNECT_FAIL_TITLE)))
+                            {
+                                dlg.ShowDialog(Parent);
+                            }
                         });
                         return;
                     }

@@ -123,14 +123,21 @@ namespace XenAdmin.Actions
 
                     while (iterator.HasNext())
                     {
-                        if (Path.GetExtension(iterator.CurrentFileName()) == "." + updateFileExtension)
+                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
+
+                        if (!string.IsNullOrEmpty(updateFileExtension) && currentExtension == "." + updateFileExtension)
                         {
                             string path = Path.Combine(Path.GetDirectoryName(outFileName), iterator.CurrentFileName());
+
+                            log.DebugFormat("Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...", iterator.CurrentFileName(), currentExtension);
 
                             using (Stream outputStream = new FileStream(path, FileMode.Create))
                             {
                                 iterator.ExtractCurrentFile(outputStream);
                                 PatchPath = path;
+
+                                log.DebugFormat("Update file extracted to '{0}'", path);
+                                
                                 break;
                             }
                         }

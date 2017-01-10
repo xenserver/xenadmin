@@ -386,6 +386,7 @@ namespace XenAdmin.SettingsPanels
 
             // Populate Automatic checkbox
             autoCheckBox.Checked = network.AutoPlug;
+            autoCheckBox.Enabled = !network.IsGuestInstallerNetwork;
             // in case some odd value has been set on the CLI
             numericUpDownMTU.Maximum = Math.Max(network.MTU, XenAPI.Network.MTU_MAX);
             numericUpDownMTU.Minimum = Math.Min(network.MTU, XenAPI.Network.MTU_MIN);
@@ -567,7 +568,7 @@ namespace XenAdmin.SettingsPanels
                 if (network.PIFs.Count == 0)
                     return false;
 
-                PIF pif = network.Connection.Resolve<PIF>(network.PIFs[0]);
+                PIF pif = GetNetworksPIF();
                 PIF selectedPif = NICNameToVirtualPIF((string)HostPNICList.SelectedItem, (long)numUpDownVLAN.Value);
                 return pif != null && Editable(pif) && pif != selectedPif;
             }

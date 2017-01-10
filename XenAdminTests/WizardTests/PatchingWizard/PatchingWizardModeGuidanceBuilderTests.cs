@@ -69,11 +69,18 @@ namespace XenAdminTests.WizardTests
         private Mock<Pool_patch> SetupBuilder(after_apply_guidance guidance, out string msg, out Mock<Host> host)
         {
             Mock<Pool_patch> patch = ObjectManager.NewXenObject<Pool_patch>(id);
+            
             host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.IsMaster()).Returns(true);
             host.Setup(h => h.Name).Returns("MyHost");
+
+            if (guidance == after_apply_guidance.restartHost)
+                host.Setup(h => h.uuid).Returns("MyHostUUID");
+            
+            host.Setup(h => h.patches).Returns(new List<XenRef<Host_patch>>());
             patch.Setup(p => p.after_apply_guidance).Returns(new List<after_apply_guidance> { guidance });
-            msg = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(new List<Host> { host.Object }, patch.Object);
+            bool outBool;
+            msg = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(new List<Host> { host.Object }, patch.Object, out outBool);
             return patch;
         }
     }

@@ -469,11 +469,14 @@ namespace XenAdmin.Controls.Wlb
                 }
                 else if (StartDatePicker.Value.CompareTo(EndDatePicker.Value) > 0)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
                            Messages.WLB_REPORT_DATE_ORDERING_MESSAGE,
-                           Messages.WLB_REPORT_DATE_ORDERING_CAPTION)).ShowDialog(this);
+                           Messages.WLB_REPORT_DATE_ORDERING_CAPTION)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                 }
                 else
                 {
@@ -499,12 +502,14 @@ namespace XenAdmin.Controls.Wlb
             catch (Exception ex)
             {
                 log.Debug(ex, ex);
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        ex.Message,
-                       Messages.XENCENTER)).ShowDialog(this);
-                return;
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
 
@@ -985,7 +990,8 @@ namespace XenAdmin.Controls.Wlb
                                                 _reportInfo.ReportName, 
                                                 false,
                                                 parms);
-            new ActionProgressDialog(a, ProgressBarStyle.Marquee).ShowDialog();
+            using (var dlg = new ActionProgressDialog(a, ProgressBarStyle.Marquee))
+                dlg.ShowDialog();
 
             if (a.Succeeded)
             {
@@ -1463,7 +1469,8 @@ namespace XenAdmin.Controls.Wlb
             //and run our own code to export
 
             ExportReportAction action = new ExportReportAction(e.Extension.Name, ref reportViewer1);
-            new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog();
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dlg.ShowDialog();
 
             //ReportExporterDelgate exp = new ReportExporterDelgate(RunExportReport);
 
@@ -1504,16 +1511,22 @@ namespace XenAdmin.Controls.Wlb
                 catch (Exception ex)
                 {
                     log.Debug(ex, ex);
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Error,
                            ex.Message,
-                           Messages.XENCENTER)).ShowDialog(this);
+                           Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                 }
                 finally
                 {
                     if (fs != null)
+                    {
                         fs.Close();
+                        fs.Dispose();
+                    }
                 }
             }
 

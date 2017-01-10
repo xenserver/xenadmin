@@ -40,6 +40,7 @@ using System.Collections.Generic;
 using XenAdmin.Dialogs;
 using System.Drawing;
 using System;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
@@ -48,6 +49,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     {
         private readonly DiskSpaceRequirements diskSpaceReq;
         private readonly Pool_patch patch;
+        private readonly Pool_update update;
 
         public HostOutOfSpaceProblem(Check check, Host host, Pool_patch patch, DiskSpaceRequirements diskSpaceReq)
             : base(check,  host)
@@ -56,13 +58,49 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             this.diskSpaceReq = diskSpaceReq;
         }
 
+        public HostOutOfSpaceProblem(Check check, Host host, Pool_update update, DiskSpaceRequirements diskSpaceReq)
+            : base(check, host)
+        {
+            this.update = update;
+            this.diskSpaceReq = diskSpaceReq;
+        }
+
+        public HostOutOfSpaceProblem(Check check, Host host, DiskSpaceRequirements diskSpaceReq)
+            : base(check, host)
+        {
+            this.diskSpaceReq = diskSpaceReq;
+        }
+
         public override string Description
         {
             get
             {
-                return string.Format(diskSpaceReq.Operation == DiskSpaceRequirements.OperationTypes.install 
-                    ? Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL 
-                    : Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, patch.Name);
+                string name = string.Empty;
+
+                if (patch != null)
+                {
+                    name = patch.Name;
+                }
+                else if (update != null)
+                {
+                    name = update.Name;
+                }
+
+                switch (diskSpaceReq.Operation)
+                {
+                    case DiskSpaceRequirements.OperationTypes.install :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, name);
+                    
+                    case DiskSpaceRequirements.OperationTypes.upload :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, name);
+                    
+                    case DiskSpaceRequirements.OperationTypes.autoupdate :
+                        return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Server.Name);
+
+                    default:
+                        Debug.Assert(false);
+                        return string.Empty;
+                }
             }
         }
 
@@ -70,22 +108,22 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             AsyncAction action = null;
 
-            if (diskSpaceReq.CanCleanup)
+            if (patch != null && diskSpaceReq.CanCleanup)
             {
                 Program.Invoke(Program.MainWindow, delegate()
                 {
-                    DialogResult r = new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
-                           SystemIcons.Warning,
-                           diskSpaceReq.GetSpaceRequirementsMessage()),
+                            SystemIcons.Warning,
+                            diskSpaceReq.GetSpaceRequirementsMessage()),
                         new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                        ThreeButtonDialog.ButtonNo
-                        ).ShowDialog();
-
-
-                    if (r == DialogResult.Yes)
+                        ThreeButtonDialog.ButtonNo))
                     {
-                        action = new CleanupDiskSpaceAction(this.Server, patch, true);
+                        DialogResult r = dlg.ShowDialog();
+                        if (r == DialogResult.Yes)
+                        {
+                            action = new CleanupDiskSpaceAction(this.Server, patch, true);
+                        }
                     }
                 });
             }
@@ -93,9 +131,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             { 
                 Program.Invoke(Program.MainWindow, delegate()
                 {
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceReq.GetSpaceRequirementsMessage()))
-                        .ShowDialog();
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceReq.GetSpaceRequirementsMessage())))
+                    {
+                        dlg.ShowDialog();
+                    }
                 });
             }
             cancelled = action == null;

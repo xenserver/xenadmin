@@ -96,9 +96,11 @@ namespace XenAdmin.Dialogs
             {
                 oldDir = Directory.GetCurrentDirectory();
                 ApplyLicenseAction action = new ApplyLicenseAction(host.Connection, host, Dialog.FileName, activateFreeLicense);
-                ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-                actionProgress.Text = title;
-                actionProgress.ShowDialog(parent);
+                using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                {
+                    actionProgress.Text = title;
+                    actionProgress.ShowDialog(parent);
+                }
             }
             finally
             {

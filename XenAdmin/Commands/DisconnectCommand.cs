@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return _connection != null && _connection.IsConnected;
+            return _connection != null && (_connection.IsConnected || _connection.InProgress);
         }
 
         /// <summary>
@@ -129,8 +129,10 @@ namespace XenAdmin.Commands
                             }
                         });
 
-                    ActionProgressDialog pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee);
-                    pd.ShowDialog(Parent);
+                    using (var pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee))
+                    {
+                        pd.ShowDialog(Parent);
+                    }
                 }
                 else
                 {

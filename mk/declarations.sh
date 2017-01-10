@@ -161,6 +161,10 @@ WEB_TRUNK_LATEST_BUILD="${WEB_HOST}/carbon/trunk/xe-phase-2-latest"
 WEB_TRUNK_XE_PHASE_1=${WEB_TRUNK_LATEST_BUILD}/xe-phase-1
 TRUNK_GLOBALS=${WEB_TRUNK_XE_PHASE_1}/globals
 
+# REPO_CITRITE_LIB is where repo.citrite.net files can be found
+REPO_CITRITE_HOST="https://repo.citrite.net"
+REPO_CITRITE_LIB="${REPO_CITRITE_HOST}/ctx-local-contrib/os"
+
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     JENKINS_SERVER=https://jenkins-dev.xs.cbg.ccsi.eng.citrite.net
@@ -179,7 +183,7 @@ BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
 STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
-WEB_HOTFIXES_ROOT=https://repo.citrite.net/builds/xs/hotfixes
+WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
 WEB_HOTFIXES=${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/
 WEB_HOTFIXES_TRUNK=${WEB_HOTFIXES_ROOT}/trunk/
 

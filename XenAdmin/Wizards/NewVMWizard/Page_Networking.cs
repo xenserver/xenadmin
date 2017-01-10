@@ -139,7 +139,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 networks.Sort();
                 foreach (XenAPI.Network network in networks)
                 {
-                    if (!network.AutoPlug || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave)
+                    // CA-218956 - Expose HIMN when showing hidden objects
+                    // HIMN shouldn't be autoplugged
+                    if (network.IsGuestInstallerNetwork ||
+                        !network.AutoPlug || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave)
                         continue;
 
                     if (NetworksGridView.Rows.Count < MAX_NETWORKS_FOR_DEFAULT_TEMPLATES)

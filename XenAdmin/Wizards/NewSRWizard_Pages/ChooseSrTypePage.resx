@@ -349,7 +349,7 @@
     <value>3, 194</value>
   </data>
   <data name="labelISOlibrary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 10</value>
+    <value>3, 16, 3, 10</value>
   </data>
   <data name="labelISOlibrary.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 15</value>
@@ -419,19 +419,19 @@
   </data>
   <data name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAnlJREFUOE+Nk2tI
-        k1EYx/Pal0DIzUyW5qaIhm4SEhmFYILSAjVrOsa6WNmiCJWiYs7a1CASiyK6fRspjSSkPoR2+aDiXFs3
-        nSZKsKFWol3m8rb03zmPm24Z0Qs/3nPO+/z/53me95xVAAKI2HRDxChnmBhOL3zM10R/xgdMvEHYnP8Y
-        OYfaUXzaTvAxX+PfeIy/xl9sit1mRJ7mNYoqe1BQ3rcC/o3H8NgAA+4qyjQi++i7/4LH+jLx1YwMpRlb
-        1a8w6PiO+XkPhpw/2NxGZKqteNb1CVPTs0RO6XNfOSLafWP2I8hKLERhmRELCwuE4XYftqi70dr1mW32
-        i4w155ogVXQgNushN6in2iXyNiQXW7x040xdMxMA0zMe9H/8xkYeTLonUXWzB4rzbygubmcL9YIbOBP2
-        diKRLfpILunEh6ERMgHm4BgZge6eDcEXhIRM04JUVTtEOx5QA53xCjMkKhshO2zF8NhPJvQs6tkz7ppA
-        sG496l1K1E4UIagqGuknmpcMTBsKXkJ88C3k2h7MzM4xiQcutxvSI204e3+ABJe+FuPalIq9C7GvMw2h
-        +hgk7ta2UhOjc5+g4s4Aq3mGGuUY/oKkA08hPmanlH3i2vE9KHufjpP9mVCZpQjSxlAG7DdeR3xpB8TH
-        LYTklB0JFYMET51nEH41lMS60V0IMawlVtdFLR9hwfZGJFU5/4qk2kICblA9KkdITSTW5O9v4NqAoyzI
-        akJStQMpl8dWEK6PQkKjENrhXGh6M8iQZZWxZOA1ocskUr6ApLIXKVeYmMHH60rvIvRiFCIaIqkMtTUV
-        YXrBstjP5J/XOe5WWl6YQbiYQY0QvwF4emY5qkkt8QAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACeUlEQVQ4T42Ta0iTURjH89qXQMjNTJbm
+        poiGbhISGYVggtICNWs6xrpY2aIIlaJiztrUIBKLIrp9GymNJKQ+hHb5oOJcWzedJkqwoVaiXebytvTf
+        OY+bbhnRCz/ec877/P/neZ73nFUAAojYdEPEKGeYGE4vfMzXRH/GB0y8Qdic/xg5h9pRfNpO8DFf4994
+        jL/GX2yK3WZEnuY1iip7UFDetwL+jcfw2AAD7irKNCL76Lv/gsf6MvHVjAylGVvVrzDo+I75eQ+GnD/Y
+        3EZkqq141vUJU9OzRE7pc185Itp9Y/YjyEosRGGZEQsLC4Thdh+2qLvR2vWZbfaLjDXnmiBVdCA26yE3
+        qKfaJfI2JBdbvHTjTF0zEwDTMx70f/zGRh5MuidRdbMHivNvKC5uZwv1ghs4E/Z2IpEt+kgu6cSHoREy
+        AebgGBmB7p4NwReEhEzTglRVO0Q7HlADnfEKMyQqGyE7bMXw2E8m9Czq2TPumkCwbj3qXUrUThQhqCoa
+        6SealwxMGwpeQnzwLeTaHszMzjGJBy63G9IjbTh7f4AEl74W49qUir0Lsa8zDaH6GCTu1rZSE6Nzn6Di
+        zgCreYYa5Rj+gqQDTyE+ZqeUfeLa8T0oe5+Ok/2ZUJmlCNLGUAbsN15HfGkHxMcthOSUHQkVgwRPnWcQ
+        fjWUxLrRXQgxrCVW10UtH2HB9kYkVTn/iqTaQgJuUD0qR0hNJNbk72/g2oCjLMhqQlK1AymXx1YQro9C
+        QqMQ2uFcaHozyJBllbFk4DWhyyRSvoCkshcpV5iYwcfrSu8i9GIUIhoiqQy1NRVhesGy2M/kn9c57lZa
+        XphBuJhBjRC/AXh6ZjmqSS3xAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="upsellPage1.Location" type="System.Drawing.Point, System.Drawing">
@@ -468,13 +468,13 @@
     <value>Fill</value>
   </data>
   <data name="SRBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 154</value>
+    <value>3, 167</value>
   </data>
   <data name="SRBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="SRBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 176</value>
+    <value>312, 163</value>
   </data>
   <data name="SRBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -540,10 +540,10 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Italic</value>
   </data>
   <data name="selectedStoreTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 124</value>
+    <value>3, 137</value>
   </data>
   <data name="selectedStoreTypeLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+    <value>3, 16, 3, 14</value>
   </data>
   <data name="selectedStoreTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -594,7 +594,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="upsellPage1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SRBlurb" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="selectedStoreTypeLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,30,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="upsellPage1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SRBlurb" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="selectedStoreTypeLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -675,7 +675,7 @@
     <value>3, 3</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 302</value>
@@ -696,7 +696,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonFcoe" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCslg" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelISOlibrary" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifsIso" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsIso" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Absolute,6,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonFcoe" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCslg" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelISOlibrary" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifsIso" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsIso" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

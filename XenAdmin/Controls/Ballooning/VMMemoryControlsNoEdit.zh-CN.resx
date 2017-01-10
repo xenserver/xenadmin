@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;iconBoxDynMin.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="iconBoxDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -181,7 +181,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;iconBoxDynMax.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>7</value>
   </data>
   <data name="labelDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelDynMin.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>6</value>
   </data>
   <data name="labelDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -256,7 +256,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelDynMax.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="labelStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -292,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelStatMax.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="valueDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -325,7 +325,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueDynMin.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="valueDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -358,7 +358,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueDynMax.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="valueStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -391,105 +391,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueStatMax.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="unitsDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="unitsDynMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="unitsDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>664, 32</value>
-  </data>
-  <data name="unitsDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="unitsDynMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 18</value>
-  </data>
-  <data name="unitsDynMin.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="unitsDynMin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMin.Name" xml:space="preserve">
-    <value>unitsDynMin</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMin.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMin.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="unitsDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="unitsDynMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="unitsDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>664, 51</value>
-  </data>
-  <data name="unitsDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="unitsDynMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 18</value>
-  </data>
-  <data name="unitsDynMax.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="unitsDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMax.Name" xml:space="preserve">
-    <value>unitsDynMax</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMax.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;unitsDynMax.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="unitsStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="unitsStatMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="unitsStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>664, 70</value>
-  </data>
-  <data name="unitsStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="unitsStatMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 18</value>
-  </data>
-  <data name="unitsStatMax.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="unitsStatMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;unitsStatMax.Name" xml:space="preserve">
-    <value>unitsStatMax</value>
-  </data>
-  <data name="&gt;&gt;unitsStatMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;unitsStatMax.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;unitsStatMax.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="editButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -550,7 +451,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;vmShinyBar.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>9</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

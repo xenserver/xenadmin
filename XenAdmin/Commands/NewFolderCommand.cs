@@ -116,7 +116,7 @@ namespace XenAdmin.Commands
 
             if (newPaths.Count > 0)
             {
-                FolderAction action = new FolderAction(connection, FolderAction.Kind.New, newPaths.ToArray());
+                var action = new CreateFolderAction(connection, newPaths.ToArray());
 
                 Action<ActionBase> completed = null;
                 completed = delegate

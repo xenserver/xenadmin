@@ -139,9 +139,9 @@ namespace XenAdmin.Commands
             {
                 foreach (VMOperationToolStripMenuSubItem item in base.DropDownItems)
                 {
-                    if (item.Tag is Host)
+                    Host host = item.Tag as Host;
+                    if (host != null)
                     {
-                        Host host = (Host)item.Tag;
                         item.Command = new VMOperationWlbHostCommand(Command.MainWindowCommandInterface, selection, host, _operation, recommendations.GetStarRating(host));
                         hostMenuItems.Add(item);
                     }
@@ -191,17 +191,11 @@ namespace XenAdmin.Commands
             
             foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
             {
-                if (item.Tag is Host)
+                Host host = item.Tag as Host;
+                if (host != null)
                 {
-                    Host host = (Host)item.Tag;
-
-                    string hostNameText = host.Name.EscapeAmpersands();
-      
-                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, hostNameText, _operation, session);
-                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host)
-                                                    {
-                                                        MenuText = hostNameText
-                                                    };
+                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name.EscapeAmpersands(), _operation, session);
+                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host);
 
                     VMOperationToolStripMenuSubItem tempItem = item;
                     Program.Invoke(Program.MainWindow, delegate

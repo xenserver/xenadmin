@@ -53,7 +53,9 @@ namespace XenAPI
             lvmohba, egenera, egeneracd, dummy, unknown, equal, cslg, shm,
             iscsi,
             ebs, rawhba,
-            smb, lvmofcoe
+            smb, lvmofcoe,
+            nutanix, nutanixiso, 
+            tmpfs
         }
 
         public const string Content_Type_ISO = "iso";
@@ -71,7 +73,7 @@ namespace XenAPI
         {
             get
             {
-                return _name(true);
+                return I18N("name_label", name_label, true);
             }
         }
 
@@ -99,13 +101,8 @@ namespace XenAPI
         {
             get
             {
-                return _name(false);
+                return I18N("name_label", name_label, false);
             }
-        }
-
-        private string _name(bool with_host)
-        {
-            return I18N("name_label", name_label, with_host);
         }
 
         /// <returns>A friendly description for the SR.</returns>
@@ -415,8 +412,14 @@ namespace XenAPI
             if (name_label.StartsWith(Helpers.GuiTempObjectPrefix))
                 return false;
 
+            SRTypes srType = GetSRType(false);
+
             // CA-15012 - dont show cd drives of type local on miami (if dont get destroyed properly on upgrade)
-            if (GetSRType(false) == SRTypes.local)
+            if (srType == SRTypes.local)
+                return false;
+
+            // Hide Memory SR
+            if (srType == SRTypes.tmpfs)
                 return false;
 
             if (showHiddenVMs)
@@ -505,8 +508,8 @@ namespace XenAPI
             if (content_type == SR.Content_Type_ISO)
                 return false;
 
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null)
+            // Memory SRs should not support VDI create in the GUI
+            if (GetSRType(false) == SR.SRTypes.tmpfs)
                 return false;
 
             SM sm = SM.GetByType(Connection, type);

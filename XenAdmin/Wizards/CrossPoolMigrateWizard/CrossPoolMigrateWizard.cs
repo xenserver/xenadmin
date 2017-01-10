@@ -202,9 +202,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             if (wizardMode == WizardMode.Copy && m_pageCopyMode.IntraPoolCopySelected)
             {
-                var copyAction = m_pageIntraPoolCopy.GetCopyAction();
-                if (copyAction != null)
-                    copyAction.RunAsync();
+                if (m_pageIntraPoolCopy.CloneVM)
+                    new VMCloneAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
+
+                else if (m_pageIntraPoolCopy.SelectedSR != null)
+                    new VMCopyAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.TheVM.GetStorageHost(false),
+                        m_pageIntraPoolCopy.SelectedSR, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
+                
                 base.FinishWizard();
                 return;
             }
@@ -244,7 +248,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private static void ShowErrorMessageBox(string message)
         {
-            new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)).ShowDialog(Program.MainWindow);
+            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 
         private void CreateMappingsFromSelection(IEnumerable<SelectedItem> selection)
@@ -416,7 +423,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     summary = new VmTitleSummary(summary, pair.Value);
 
                 summary = new DestinationPoolSummary(summary, pair.Value, TargetConnection);
-                summary = new HomeServerSummary(summary, pair.Value, TargetConnection);
+                summary = new TargetServerSummary(summary, pair.Value, TargetConnection);
                 summary = new TransferNetworkSummary(summary, m_pageTransferNetwork.NetworkUuid.Value);
                 summary = new StorageSummary(summary, pair.Value, xenConnection);
                 summary = new NetworkSummary(summary, pair.Value, xenConnection); 
@@ -473,9 +480,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         internal static void ShowWarningMessageBox(string message)
         {
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)).ShowDialog(
-                    Program.MainWindow);
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 	}
 }

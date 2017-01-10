@@ -1265,7 +1265,7 @@ namespace XenAdmin.TabPages
         }
 
 
-        private void chevronButton1_Click(object sender, EventArgs e)
+        private void chevronButton1_ButtonClick(object sender, EventArgs e)
         {
             if (contentTableLayoutPanel.ColumnStyles[1].Width == 0)
             {
@@ -1370,7 +1370,7 @@ namespace XenAdmin.TabPages
         private void chevronButton1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
-                chevronButton1_Click(sender, e);
+                chevronButton1_ButtonClick(sender, e);
         }
 
         private static void DeleteSnapshots(List<VM> snapshots)
@@ -1518,10 +1518,15 @@ namespace XenAdmin.TabPages
                 else
                     text = string.Format(Messages.ARCHIVE_SNAPSHOT_NOW_TEXT_MULTIPLE, VM.Connection.Resolve(VM.protection_policy).archive_target_config_location);
 
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(SystemIcons.Information, text, Messages.ARCHIVE_VM_PROTECTION_TITLE),
                        ThreeButtonDialog.ButtonYes,
-                       ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
+                       ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult == DialogResult.Yes)
                 {
                     foreach (var snapshot in selectedSnapshots)
                     {
@@ -1531,14 +1536,21 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Error, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE_TITLE),
                         ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
+                        ThreeButtonDialog.ButtonNo))
                 {
-                    var dialog = new PropertiesDialog(vmpp);
-                    dialog.SelectNewPolicyArchivePage();
-                    dialog.ShowDialog(this);
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult == DialogResult.Yes)
+                {
+                    using (var dialog = new PropertiesDialog(vmpp))
+                    {
+                        dialog.SelectNewPolicyArchivePage();
+                        dialog.ShowDialog(this);
+                    }
                 }
             }
         }

@@ -921,6 +921,10 @@ namespace XenAdmin.Network
                 {
                     return string.Format(Messages.CONNECT_NO_XAPI_FAILURE, this.Hostname);
                 }
+                else if (w.Status == WebExceptionStatus.SecureChannelFailure)
+                {
+                    return string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, this.Hostname);
+                }
                 else
                 {
                     return w.Message;
@@ -1928,10 +1932,7 @@ namespace XenAdmin.Network
         public List<VDI> ResolveAllShownXenModelObjects(List<XenRef<VDI>> xenRefs, bool showHiddenObjects)
         {
             List<VDI> result = ResolveAll(xenRefs);
-            result.RemoveAll(delegate(VDI vdi)
-                                 {
-                                     return !vdi.Show(showHiddenObjects);
-                                 });
+            result.RemoveAll(vdi => !vdi.Show(showHiddenObjects));
             return result;
         }
 

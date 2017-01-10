@@ -41,7 +41,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
         
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (!Host.IsLive)
             {

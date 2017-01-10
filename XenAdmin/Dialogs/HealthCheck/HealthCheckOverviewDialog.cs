@@ -102,7 +102,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         void Pool_BatchCollectionChanged(object sender, EventArgs e)
         {
-            LoadPools();
+            Program.Invoke(Program.MainWindow, LoadPools);
         }
         
         #region PoolRow

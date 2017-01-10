@@ -76,7 +76,21 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             Description = Messages.SNAPSHOTTING;
-            
+
+            // Take screenshot before snapshot begins, to avoid possible console switching (CA-211369)
+            // The screenshot is optional. If it throws an exception, we will do without it. CA-37095/CA-37103.
+            Image snapshot = null;
+            try
+            {
+                if (VM.power_state == vm_power_state.Running && m_Type == SnapshotType.DISK_AND_MEMORY)
+                {
+                    // use the sudo credentials for the snapshot (can be null) (CA-91132)
+                    snapshot = _screenShotProvider(VM, sudoUsername, sudoPassword);
+                }
+            }
+            catch (Exception)
+            {
+            }
 
             if (m_Type == SnapshotType.QUIESCED_DISK)
             {
@@ -97,21 +111,7 @@ namespace XenAdmin.Actions
             string newVmRef = taskResult.Substring(7, taskResult.Length - 15);
             XenAPI.VM.set_name_description(Session, newVmRef, m_NewDescription);
 
-            // The screenshot is optional. If it throws an exception, we will do without it. CA-37095/CA-37103.
-            try
-            {
-                if (VM.power_state == vm_power_state.Running && m_Type == SnapshotType.DISK_AND_MEMORY)
-                {
-                    // use the sudo credentials for the snapshot (can be null) (CA-91132)
-                    using (Image snapshot = _screenShotProvider(VM, sudoUsername, sudoPassword)) 
-                    {
-                        SaveImageInBlob(newVmRef, snapshot); 
-                    }
-                }
-            }
-            catch (Exception)
-            {
-            }
+            SaveImageInBlob(newVmRef, snapshot);
 
             Description = Messages.SNAPSHOTTED;
         }

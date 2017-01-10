@@ -295,7 +295,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
             // CA-73056: A row for the guest installer network shouldn't show up. But we still need
             // it present but invisible, otherwise the corresponding VIF doesn't get created at all.
-            if (isGuestInstallerNetwork)
+            // CA-218956 - Expose HIMN when showing hidden objects
+            if (isGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs)
                 row.Visible = false;
 
 			m_networkGridView.Rows.Add(row);
@@ -343,9 +344,12 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			if (m_networkGridView.Rows.Count >= m_vm.MaxVIFsAllowed)
 			{
-				new ThreeButtonDialog(new ThreeButtonDialog.Details(
+				using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
 				                      	SystemIcons.Error,
-				                      	FriendlyErrorNames.VIFS_MAX_ALLOWED, FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)).ShowDialog(Program.MainWindow);
+                                        FriendlyErrorNames.VIFS_MAX_ALLOWED, FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
 				return;
 			}
 
