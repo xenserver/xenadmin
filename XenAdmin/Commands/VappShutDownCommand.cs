@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
 
         public override string ContextMenuText { get { return Messages.VAPP_SHUTDOWN_CONTEXT_MENU; } }
 
-        public override Image MenuImage { get { return Resources._001_ShutDown_h32bit_16; } }
+        public override Image MenuImage { get { return Images.StaticImages._001_ShutDown_h32bit_16; } }
 
         protected override bool ConfirmationRequired { get { return true; } }
 

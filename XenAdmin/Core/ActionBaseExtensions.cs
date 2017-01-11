@@ -45,53 +45,37 @@ namespace XenAdmin.Core
 {
     static class ActionBaseExtensions
     {
-        private static Image IMAGE__000_TICK_H32BIT_16 = Properties.Resources._000_Tick_h32bit_16;
-        private static Image IMAGE_CANCELLED_ACTION_16 = Properties.Resources.cancelled_action_16;
-        private static Image IMAGE__000_ERROR_H32BIT_16 = Properties.Resources._000_error_h32bit_16;
-
-        private static Image IMAGE_USAGEBAR_0 = Properties.Resources.usagebar_0;
-        private static Image IMAGE_USAGEBAR_1 = Properties.Resources.usagebar_1;
-        private static Image IMAGE_USAGEBAR_2 = Properties.Resources.usagebar_2;
-        private static Image IMAGE_USAGEBAR_3 = Properties.Resources.usagebar_3;
-        private static Image IMAGE_USAGEBAR_4 = Properties.Resources.usagebar_4;
-        private static Image IMAGE_USAGEBAR_5 = Properties.Resources.usagebar_5;
-        private static Image IMAGE_USAGEBAR_6 = Properties.Resources.usagebar_6;
-        private static Image IMAGE_USAGEBAR_7 = Properties.Resources.usagebar_7;
-        private static Image IMAGE_USAGEBAR_8 = Properties.Resources.usagebar_8;
-        private static Image IMAGE_USAGEBAR_9 = Properties.Resources.usagebar_9;
-        private static Image IMAGE_USAGEBAR_10 = Properties.Resources.usagebar_10;
-
         internal static Image GetImage(this ActionBase action)
         {
             if (action.IsCompleted)
                 return action.Succeeded
-                           ? IMAGE__000_TICK_H32BIT_16
+                           ? Images.StaticImages._000_Tick_h32bit_16
                            : action.Exception is CancelledException
-                                 ? IMAGE_CANCELLED_ACTION_16
-                                 : IMAGE__000_ERROR_H32BIT_16;
+                                 ? Images.StaticImages.cancelled_action_16
+                                 : Images.StaticImages._000_error_h32bit_16;
 
             if (action.PercentComplete < 9)
-                return IMAGE_USAGEBAR_0;
+                return Images.StaticImages.usagebar_0;
             if (action.PercentComplete < 18)
-                return IMAGE_USAGEBAR_1;
+                return Images.StaticImages.usagebar_1;
             if (action.PercentComplete < 27)
-                return IMAGE_USAGEBAR_2;
+                return Images.StaticImages.usagebar_2;
             if (action.PercentComplete < 36)
-                return IMAGE_USAGEBAR_3;
+                return Images.StaticImages.usagebar_3;
             if (action.PercentComplete < 45)
-                return IMAGE_USAGEBAR_4;
+                return Images.StaticImages.usagebar_4;
             if (action.PercentComplete < 54)
-                return IMAGE_USAGEBAR_5;
+                return Images.StaticImages.usagebar_5;
             if (action.PercentComplete < 63)
-                return IMAGE_USAGEBAR_6;
+                return Images.StaticImages.usagebar_6;
             if (action.PercentComplete < 72)
-                return IMAGE_USAGEBAR_7;
+                return Images.StaticImages.usagebar_7;
             if (action.PercentComplete < 81)
-                return IMAGE_USAGEBAR_8;
+                return Images.StaticImages.usagebar_8;
             if (action.PercentComplete < 90)
-                return IMAGE_USAGEBAR_9;
+                return Images.StaticImages.usagebar_9;
 
-            return IMAGE_USAGEBAR_10;
+            return Images.StaticImages.usagebar_10;
         }
 
         internal static string GetDetails(this ActionBase action)
