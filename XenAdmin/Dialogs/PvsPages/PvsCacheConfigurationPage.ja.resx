@@ -461,7 +461,7 @@
     <value>16</value>
   </data>
   <data name="pvsConfigInfoLabel.Text" xml:space="preserve">
-    <value>このサイトの PVS-Accelerator 構成は、PVS コンソールまたは MCLI を使用して完了する必要があります。</value>
+    <value>このサイトのPVS アクセラレータ構成は、PVS コンソールまたは MCLI を使用して完了する必要があります。</value>
   </data>
   <data name="&gt;&gt;pvsConfigInfoLabel.Name" xml:space="preserve">
     <value>pvsConfigInfoLabel</value>
