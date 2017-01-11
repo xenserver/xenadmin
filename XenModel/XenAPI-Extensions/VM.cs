@@ -1490,7 +1490,7 @@ namespace XenAPI
                 if (host == null)
                     return false;
 
-                if (Helpers.DundeePlusOrGreater(Connection))
+                if (!Helper.IsNullOrEmptyOpaqueRef(host.control_domain))
                     return host.control_domain == opaque_ref;
 
                 var vms = Connection.ResolveAll(host.resident_VMs);
