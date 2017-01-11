@@ -64,17 +64,6 @@ then
     echo "WARN:	BUILD_NUMBER env var not set, we will use ${BUILD_NUMBER}"
 fi
 
-if [ -z "${BUILD_ID+xxx}" ]
-then 
-    BUILD_ID=$(date +"%Y-%m-%d_%H-%M-%S")
-    echo "WARN:	BUILD_ID env var not set, we will use ${BUILD_ID}"
-fi
-
-if [ -z "${BUILD_URL+xxx}" ]
-then 
-    BUILD_URL="n/a"
-    echo "WARN:	BUILD_URL env var not set, we will use 'n/a'"
-fi
 
 if [ -z "${GIT_COMMIT-}" ]
 then
@@ -94,8 +83,6 @@ fi
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
 get_JOB_NAME=${JOB_NAME}
 get_BUILD_NUMBER=${BUILD_NUMBER}
-get_BUILD_ID=${BUILD_ID}
-get_BUILD_URL=${BUILD_URL}
 
 #do everything in place as jenkins runs a clean build, i.e. will delete previous artifacts on starting
 if [ -z "${WORKSPACE+xxx}" ]
@@ -117,8 +104,6 @@ SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 TEST_DIR=${ROOT}/tmp
 mkdir -p ${TEST_DIR}
-BUILD_ARCHIVE=${ROOT}/../builds/${get_BUILD_ID}/archive
-SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/WindowsBuilds
 XENCENTER_LOGDIR="${ROOT}/log"
 mkdir -p ${XENCENTER_LOGDIR}
 
@@ -132,21 +117,11 @@ REPO_CITRITE_LIB="${REPO_CITRITE_HOST}/ctx-local-contrib/os"
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
     JENKINS_SERVER=https://jenkins-dev.xs.cbg.ccsi.eng.citrite.net
+    #WEB_DOTNET=${REPO_CITRITE_HOST}/xc-local-build/dotnet-packages-production/trunk/TBC
 else
     JENKINS_SERVER=http://tocco.do.citrite.net:8080
+    WEB_DOTNET=${REPO_CITRITE_HOST}/xc-local-build/dotnet-packages/trunk/745
 fi
-
-#this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET=${REPO_CITRITE_HOST}/xc-local-build/dotnet-packages/ely-staging/5
-DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_${XS_BRANCH}_dotnet-packages
-DOTNET_BASE_TRUNK=${SECURE_BUILD_ARCHIVE_UNC}/carbon_trunk_dotnet-packages
-DOTNET_LOC=${DOTNET_BASE}/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
-DOTNET_LOC_TRUNK=${DOTNET_BASE_TRUNK}/$(ls $DOTNET_BASE_TRUNK | /usr/bin/sort -n | tail -n 1)
-
-# used to copy results out of the secure build enclave
-BUILD_TOOLS_REPO=git://hg.uk.xensource.com/closed/windows/buildtools.git
-BUILD_TOOLS=${SCRATCH_DIR}/buildtools.git
-STORE_FILES=${BUILD_TOOLS}/scripts/storefiles.py
 
 # this is where the build will find the RPU hotfixes
 WEB_HOTFIXES_ROOT=${REPO_CITRITE_HOST}/builds/xs/hotfixes
