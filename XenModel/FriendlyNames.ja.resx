@@ -1875,34 +1875,34 @@
     <value>PVS サイトにキャッシュ ストレージがありません</value>
   </data>
   <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>VM '{0}' で PVS-Accelerator をセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
+    <value>VM '{0}' で PVS アクセラレータをセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
   </data>
   <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
-    <value>PVS-Accelerator の削除の割合</value>
+    <value>PVS アクセラレータの削除の割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
-    <value>PVS-Accelerator でヒットした割合</value>
+    <value>PVS アクセラレータでヒットした割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
-    <value>PVS-Accelerator でヒットしなかった割合</value>
+    <value>PVS アクセラレータでヒットしなかった割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
-    <value>PVS-Accelerator で確認した読み取りの割合</value>
+    <value>PVS アクセラレータで確認した読み取りの割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
-    <value>PVS-Accelerator の容量使用率</value>
+    <value>PVS アクセラレータの容量使用率</value>
   </data>
   <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
-    <value>PVS-Accelerator はクライアントからのネットワーク トラフィックを確認しました</value>
+    <value>PVS アクセラレータはクライアントからのネットワーク トラフィックを確認しました</value>
   </data>
   <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
-    <value>PVS-Accelerator はネットワーク トラフィックを保存しました</value>
+    <value>PVS アクセラレータはネットワーク トラフィックを保存しました</value>
   </data>
   <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
-    <value>PVS-Accelerator はサーバーからのネットワーク トラフィックを確認しました</value>
+    <value>PVS アクセラレータはサーバーからのネットワーク トラフィックを確認しました</value>
   </data>
   <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
-    <value>PVS-Accelerator の状態</value>
+    <value>PVS アクセラレータの状態</value>
   </data>
   <data name="Label-performance.sr_rw_read" xml:space="preserve">
     <value>'{0}' 読み取りスループット</value>
