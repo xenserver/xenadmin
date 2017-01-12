@@ -127,7 +127,7 @@ namespace XenAdmin.Actions
                                         tarIterator.ExtractCurrentFile(ms);
                                         string saneName = SanitizeTarName(tarIterator.CurrentFileName(), usedNames);
                                         tarWriter.Add(ms, saneName);
-                                        ModTimes[Path.Combine(outputDir, tarIterator.CurrentFileName())] = tarIterator.CurrentFileModificationTime();
+                                        ModTimes[Path.Combine(outputDir, saneName)] = tarIterator.CurrentFileModificationTime();
                                     }
 
                                 }
