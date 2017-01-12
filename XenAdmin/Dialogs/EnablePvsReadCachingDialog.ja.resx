@@ -280,7 +280,7 @@
     <value>1</value>
   </data>
   <data name="enableButton.Text" xml:space="preserve">
-    <value>PVS-Accelerator を有効にする(&amp;N)</value>
+    <value>PVS アクセラレータを有効にする(&amp;N)</value>
   </data>
   <data name="&gt;&gt;enableButton.Name" xml:space="preserve">
     <value>enableButton</value>
@@ -415,7 +415,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PVS-Accelerator を有効にする</value>
+    <value>PVS アクセラレータを有効にする</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EnablePvsReadCachingDialog</value>
