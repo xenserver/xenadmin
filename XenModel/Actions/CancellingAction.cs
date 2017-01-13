@@ -99,7 +99,6 @@ namespace XenAdmin.Actions
         
         private delegate void SetXenCenterUUIDDelegate(Session session, string _task, string uuid);
         private delegate void SetAppliesToDelegate(Session session, string _task, List<string> applies_to);
-        private delegate void SetMeddlingActionTitleDelegate(Session session, string task, string title);
 
         /// <summary>
         /// The XenAPI.Task object (if any) that corresponds to this action.
@@ -115,7 +114,6 @@ namespace XenAdmin.Actions
                 {
                     DoWithSessionRetry(ref _session, (SetXenCenterUUIDDelegate)Task.SetXenCenterUUID, _relatedTask.opaque_ref, XenAdminConfigManager.Provider.XenCenterUUID);
                     DoWithSessionRetry(ref _session, (SetAppliesToDelegate)Task.SetAppliesTo, _relatedTask.opaque_ref, AppliesTo);
-                    DoWithSessionRetry(ref _session, (SetMeddlingActionTitleDelegate)Task.SetMeddlingActionTitle, _relatedTask.opaque_ref, Title);
                     RecomputeCanCancel();
                 }
             }
