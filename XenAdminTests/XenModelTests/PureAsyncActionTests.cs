@@ -141,7 +141,6 @@ namespace XenAdminTests.XenModelTests
                     ,new Role() { name_label = "vm.destroy" }
                     ,new Role() { name_label = "vm.clean_shutdown" }
                     , new Role() { name_label = "task.add_to_other_config/key:xencenteruuid" }
-                    , new Role() { name_label = "task.add_to_other_config/key:xencentermeddlingactiontitle" }
                     ,new Role(){name_label ="task.add_to_other_config/key:applies_to" }});
             mockConnection.Setup(x => x.HostnameWithPort).Returns("");
             var sessionMock = new Mock<Session>(mockProxy.Object, mockConnection.Object);
