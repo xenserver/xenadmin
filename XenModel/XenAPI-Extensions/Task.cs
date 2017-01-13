@@ -63,6 +63,7 @@ namespace XenAPI
             Names["VM.hard_reboot"] = Messages.ACTION_VM_REBOOTING;
             Names["VM.hard_shutdown"] = Messages.ACTION_VM_SHUTTING_DOWN;
             Names["VM.migrate_send"] = Messages.ACTION_VM_MIGRATING;
+            Names["VM.pool_migrate"] = Messages.ACTION_VM_MIGRATING;
             Names["VM.resume"] = Messages.ACTION_VM_RESUMING;
             Names["VM.resume_on"] = Messages.ACTION_VM_RESUMING;
             Names["VM.start"] = Messages.ACTION_VM_STARTING;
@@ -82,6 +83,7 @@ namespace XenAPI
             Titles["VM.hard_reboot"] = Messages.ACTION_VM_REBOOTING_TITLE;
             Titles["VM.hard_shutdown"] = Messages.ACTION_VM_SHUTTING_DOWN_TITLE;
             Titles["VM.migrate_send"] = Messages.ACTION_VM_MIGRATING_RESIDENT;
+            Titles["VM.pool_migrate"] = Messages.ACTION_VM_MIGRATING_RESIDENT;
             Titles["VM.resume"] = Messages.ACTION_VM_RESUMING_ON_TITLE;
             Titles["VM.resume_on"] = Messages.ACTION_VM_RESUMING_ON_TITLE;
             Titles["VM.start"] = Messages.ACTION_VM_STARTING_ON_TITLE;
@@ -233,47 +235,6 @@ namespace XenAPI
             }
         }
 
-        private const string XenCenterMeddlingActionTitleKey = "XenCenterMeddlingActionTitle";
-        
-        /// <summary>
-        /// Gets the meddling action title which is stored on the task
-        /// </summary>
-        public string MeddlingActionTitle
-        {
-            get
-            {
-                return Get(other_config, XenCenterMeddlingActionTitleKey);
-            }
-        }
-
-        /// <summary>
-        /// Set a title that can be looked up if this task is re-opened as a
-        /// meddling action. This is stored on the server
-        /// </summary>
-        /// <param name="session"></param>
-        /// <param name="task">task opaque ref</param>
-        /// <param name="title">title to set</param>
-        public static void SetMeddlingActionTitle(Session session, string task, string title)
-        {
-            if (!Helpers.TampaOrGreater(session.Connection))
-                return;
-
-            try
-            {
-                remove_from_other_config(session, task, XenCenterMeddlingActionTitleKey); 
-                add_to_other_config(session, task, XenCenterMeddlingActionTitleKey, title);
-            }
-            catch (Failure f)
-            {
-                if (f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
-                {
-                    return;
-                }
-                throw;
-            }
-        }
-
-
         public string XenCenterUUID
         {
             get
@@ -327,8 +288,6 @@ namespace XenAPI
         {
             get
             {
-                if (!String.IsNullOrEmpty(MeddlingActionTitle))
-                    return false;
                 return  Name == null;
             }
         }
