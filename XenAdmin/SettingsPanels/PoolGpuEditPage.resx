@@ -184,7 +184,7 @@
     <value>5</value>
   </data>
   <data name="radioButtonMixture.Text" xml:space="preserve">
-    <value>Mixed: different settings for different GPU groups</value>
+    <value>Mi&amp;xed: different settings for different GPU groups</value>
   </data>
   <data name="&gt;&gt;radioButtonMixture.Name" xml:space="preserve">
     <value>radioButtonMixture</value>
@@ -214,7 +214,7 @@
     <value>3</value>
   </data>
   <data name="radioButtonDepth.Text" xml:space="preserve">
-    <value>Maximum density: put as many VMs as possible on the same GPU</value>
+    <value>Maximum &amp;density: put as many VMs as possible on the same GPU</value>
   </data>
   <data name="&gt;&gt;radioButtonDepth.Name" xml:space="preserve">
     <value>radioButtonDepth</value>
@@ -244,7 +244,7 @@
     <value>4</value>
   </data>
   <data name="radioButtonBreadth.Text" xml:space="preserve">
-    <value>Maximum performance: put VMs on as many GPUs as possible</value>
+    <value>Maximum &amp;performance: put VMs on as many GPUs as possible</value>
   </data>
   <data name="&gt;&gt;radioButtonBreadth.Name" xml:space="preserve">
     <value>radioButtonBreadth</value>
@@ -367,7 +367,7 @@
     <value>3</value>
   </data>
   <data name="radioButtonEnable.Text" xml:space="preserve">
-    <value>This server will use the integrated GPU</value>
+    <value>This server will &amp;use the integrated GPU</value>
   </data>
   <data name="&gt;&gt;radioButtonEnable.Name" xml:space="preserve">
     <value>radioButtonEnable</value>
@@ -397,7 +397,7 @@
     <value>7</value>
   </data>
   <data name="radioButtonDisable.Text" xml:space="preserve">
-    <value>This server will not use the integrated GPU</value>
+    <value>This server will &amp;not use the integrated GPU</value>
   </data>
   <data name="&gt;&gt;radioButtonDisable.Name" xml:space="preserve">
     <value>radioButtonDisable</value>
