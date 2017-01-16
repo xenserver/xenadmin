@@ -1733,7 +1733,8 @@ This alarm is set to be triggered when the physical utilisation of the SR goes a
     <value>Storage Throughput Alarm</value>
   </data>
   <data name="ALERT_ALARM_STORAGE_DESCRIPTION" xml:space="preserve">
-    <value>The total read and write throughput of {0} on storage repository '{1}' has been {2} for the last {3}. This alarm is set to be triggered when the total throughput exceeds {4}.</value>
+    <value>The total read and write throughput of {0} on storage repository '{1}' has been {2} for the last {3}.
+This alarm is set to be triggered when the total throughput exceeds {4}.</value>
   </data>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(Showing first {0} entries)</value>

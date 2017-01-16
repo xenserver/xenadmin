@@ -4673,7 +4673,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The total read and write throughput of {0} on storage repository &apos;{1}&apos; has been {2} for the last {3}. This alarm is set to be triggered when the total throughput exceeds {4}..
+        ///   Looks up a localized string similar to The total read and write throughput of {0} on storage repository &apos;{1}&apos; has been {2} for the last {3}.
+        ///This alarm is set to be triggered when the total throughput exceeds {4}..
         /// </summary>
         public static string ALERT_ALARM_STORAGE_DESCRIPTION {
             get {
