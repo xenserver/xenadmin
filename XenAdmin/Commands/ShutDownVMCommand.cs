@@ -91,7 +91,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_ShutDown_h32bit_16;
+                return Images.StaticImages._001_ShutDown_h32bit_16;
             }
         }
 

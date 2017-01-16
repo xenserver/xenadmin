@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_Reboot_h32bit_16;
+                return Images.StaticImages._001_Reboot_h32bit_16;
             }
         }
 

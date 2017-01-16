@@ -60,13 +60,13 @@ namespace XenAdmin.Commands
             
             //Default or failure case, there is no score/star rating actually, just don't display star
             _secondImage = null;
-            _menuImage = Resources._000_ServerDisconnected_h32bit_16;
+            _menuImage = Images.StaticImages._000_ServerDisconnected_h32bit_16;
             _recommendation = recommendation;
 
             if (CanExecute())
             {
                 _starRating = _recommendation.StarRating;
-                _menuImage = Resources._000_TreeConnected_h32bit_16;
+                _menuImage = Images.StaticImages._000_TreeConnected_h32bit_16;
                 _secondImage = GetWLBStarImage(_starRating);
             }
             else
@@ -138,28 +138,28 @@ namespace XenAdmin.Commands
         /// </summary>
         private static Image GetWLBStarImage(double stars)
         {
-            Image img = Resources._000_host_0_star;
+            Image img = Images.StaticImages._000_host_0_star;
 
             if (stars >= 4.8)
-                img = Resources._000_host_10_star;
+                img = Images.StaticImages._000_host_10_star;
             else if (stars >= 4.3)
-                img = Resources._000_host_9_star;
+                img = Images.StaticImages._000_host_9_star;
             else if (stars >= 3.8)
-                img = Resources._000_host_8_star;
+                img = Images.StaticImages._000_host_8_star;
             else if (stars >= 3.3)
-                img = Resources._000_host_7_star;
+                img = Images.StaticImages._000_host_7_star;
             else if (stars >= 2.8)
-                img = Resources._000_host_6_star;
+                img = Images.StaticImages._000_host_6_star;
             else if (stars >= 2.3)
-                img = Resources._000_host_5_star;
+                img = Images.StaticImages._000_host_5_star;
             else if (stars >= 1.8)
-                img = Resources._000_host_4_star;
+                img = Images.StaticImages._000_host_4_star;
             else if (stars >= 1.3)
-                img = Resources._000_host_3_star;
+                img = Images.StaticImages._000_host_3_star;
             else if (stars >= .8)
-                img = Resources._000_host_2_star;
+                img = Images.StaticImages._000_host_2_star;
             else if (stars > 0)
-                img = Resources._000_host_1_star;
+                img = Images.StaticImages._000_host_1_star;
 
             return img;
         }

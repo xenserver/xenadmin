@@ -148,7 +148,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_PowerOn_h32bit_24;
+                return Images.StaticImages._001_PowerOn_h32bit_24;
             }
         }
 
@@ -164,7 +164,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_PowerOn_h32bit_16;
+                return Images.StaticImages._001_PowerOn_h32bit_16;
             }
         }
 
