@@ -25618,9 +25618,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] [BRANDING_VERSION_7_0], VMs must be moved from local storage first..
+        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] [BRANDING_VERSION_7_0] or above, VMs must be moved from local storage first..
         /// </summary>
         public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
             get {
@@ -25640,7 +25640,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
         ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
         /// </summary>
