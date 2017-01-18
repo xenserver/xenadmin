@@ -26816,7 +26816,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select one or more pools or standalone hosts that you want to have updated.
+        ///   Looks up a localized string similar to Select one or more pools or standalone servers that you want to have updated.
         ///Greyed out servers cannot be updated with automated updates..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE {
@@ -26826,12 +26826,22 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select one or more servers from the list of available servers.
-        ///Servers where the selected update cannot be applied appear disabled in this list..
+        ///   Looks up a localized string similar to Select one or more servers where you want to apply the selected update.
+        ///Servers where this update cannot be applied appear disabled in this list..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select one or more pools or standalone servers where you want to apply the selected update.
+        ///Servers where this update cannot be applied appear disabled in this list..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION", resourceCulture);
             }
         }
         
