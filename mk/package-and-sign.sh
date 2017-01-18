@@ -33,9 +33,8 @@
 set -eu
 
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-REPO=${XENADMIN_DIR}
 OUTPUT_DIR=${ROOT}/output
 DOTNETINST=${REPO}/dotNetInstaller
 	
@@ -53,13 +52,7 @@ mkdir_clean()
 {
   rm -rf $1 && mkdir -p $1
 }
-
-#overwrite sign file
-SIGN_FILE=${ROOT}/sign.bat
-if [ -f ${SIGN_FILE} ]; then
-   cp ${SIGN_FILE} ${REPO}
-fi
-   
+  
 #build and sign the installers
 echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh

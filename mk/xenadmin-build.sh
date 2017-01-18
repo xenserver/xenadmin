@@ -30,15 +30,15 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
-set -e
+set -ex
 
-set +u
-if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-set -u
-
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
-
-WGET() { wget -T 10 -N -q --timestamp "${@}"; }
+#==============================================================
+#Micro version override - please keep at the top of the script
+#==============================================================
+#Set and uncomment this to override the 3rd value of the product number 
+#normally fetched from branding
+#
+#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
 
 UNZIP="unzip -q -o"
 
@@ -47,38 +47,10 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
-#clear all working directories before anything else
-mkdir_clean ${SCRATCH_DIR}
-mkdir_clean ${OUTPUT_DIR}
-rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
-
-#create manifest
-if [ ${XS_BRANCH} = "master" ] ; then
-	echo "@branch=trunk" >> ${OUTPUT_DIR}/manifest
-else
-	echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-fi
-
-echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
-
-rm -rf ${ROOT}/xenadmin-branding.git
-BRAND_REMOTE=https://code.citrite.net/scm/xsc/xenadmin-branding.git
-
-if [ -z "$(git ls-remote --heads ${BRAND_REMOTE} | grep ${XS_BRANCH})" ] ; then
-    echo "Branch ${XS_BRANCH} not found on xenadmin-branding.git. Reverting to master."
-    git clone -b master ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
-else
-    git clone -b ${XS_BRANCH} ${BRAND_REMOTE} ${ROOT}/xenadmin-branding.git
-fi
-
-XENADMIN_BRANDING_TIP=$(cd ${ROOT}/xenadmin-branding.git && git rev-parse HEAD)
-echo "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
-
-if [ -d ${ROOT}/xenadmin-branding.git/${XC_BRANDING} ]; then
-    echo "Overwriting Branding folder"
-    rm -rf ${XENADMIN_DIR}/Branding/*
-    cp -rf ${ROOT}/xenadmin-branding.git/${XC_BRANDING}/* ${XENADMIN_DIR}/Branding/
-fi
+ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+REPO="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRATCH_DIR=${ROOT}/scratch
+OUTPUT_DIR=${ROOT}/output
 
 WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
 WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL=0CE5C3E7-E786-467a-80CF-F3EC04D414E4
@@ -86,83 +58,18 @@ WIX_INSTALLER_DEFAULT_VERSION=1.0.0
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z])
 PRODUCT_GUID_VNCCONTROL=$(uuidgen | tr [a-z] [A-Z])
 
-#bring in stuff from dotnet-packages latest build
-XMLRPC_DIR=${REPO}/xml-rpc.net/obj/Release
-LOG4NET_DIR=${REPO}/log4net/build/bin/net/2.0/release
-DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
-SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
-DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
-MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx46_web_setup
-PUTTY_DIR=${REPO}/putty
-
-mkdir_clean ${XMLRPC_DIR}
-mkdir_clean ${LOG4NET_DIR}
-mkdir_clean ${SHARPZIPLIB_DIR}
-mkdir_clean ${DOTNETZIP_DIR}
-mkdir_clean ${DISCUTILS_DIR}
-mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
-mkdir_clean ${PUTTY_DIR}
-
-WGET -O ${SCRATCH_DIR}/dotnet-packages-manifest ${WEB_DOTNET}/manifest
-WGET -P ${XMLRPC_DIR}      ${WEB_DOTNET}/UNSIGNED/CookComputing.XmlRpcV2.dll
-WGET -P ${LOG4NET_DIR}     ${WEB_DOTNET}/UNSIGNED/log4net.dll
-WGET -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/UNSIGNED/ICSharpCode.SharpZipLib.dll
-WGET -P ${DOTNETZIP_DIR}   ${WEB_DOTNET}/UNSIGNED/Ionic.Zip.dll
-WGET -P ${DISCUTILS_DIR}   ${WEB_DOTNET}/UNSIGNED/DiscUtils.dll
-WGET -P ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} ${WEB_DOTNET}/NDP46-KB3045560-Web.exe
-WGET -P ${PUTTY_DIR}       ${WEB_DOTNET}/UNSIGNED/putty.exe
-WGET -P ${REPO}            ${WEB_DOTNET}/sign.bat
-chmod a+x ${REPO}/sign.bat
-
-#bring in the ovf fixup iso from artifactory (currently one location)
-WGET -P ${SCRATCH_DIR} ${REPO_CITRITE_HOST}/list/xs-local-contrib/citrix/xencenter/XenCenterOVF.zip
-${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
-
-#bring in some more libraries
-mkdir_clean ${REPO}/NUnit
-WGET -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
-WGET -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
-WGET -P ${SCRATCH_DIR} ${REPO_CITRITE_LIB}/wix/3.10/{wix310-debug.zip,wix310-binaries.zip}
-
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
-
-
-function get_hotfixes ()
-{
-    local -r p="$1"
-    WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/${XS_BRANCH}/ || WGET -L -np -nH -r --cut-dirs 4 -R index.html -P ${p} ${WEB_HOTFIXES_ROOT}/trunk/
-}
-
-#bring RPU hotfixes
-if [ "${BRANDING_UPDATE}" = "xsupdate" ]
-then
-  echo "INFO: Bring RPU hotfixes..."
-  get_hotfixes ${REPO}/Branding/Hotfixes 
-  cd ${REPO}/Branding/Hotfixes
-  latest=$(ls RPU001 | /usr/bin/sort -n | tail -n 1)
-  echo "INFO: Latest version of RPU001 hotfix is $latest"
-  cp RPU001/$latest/RPU001.xsupdate RPU001.xsupdate
-  cp RPU001/$latest/RPU001-src-pkgs.tar RPU001-src-pkgs.tar && rm -f RPU001-src-pkgs.tar.gz && gzip RPU001-src-pkgs.tar
-  latest=$(ls RPU002 | /usr/bin/sort -n | tail -n 1)
-  echo "INFO: Latest version of RPU002 hotfix is $latest"
-  cp RPU002/$latest/RPU002.xsupdate RPU002.xsupdate
-  if [ -d "RPU003" ]; then
-    latest=$(ls RPU003 | /usr/bin/sort -n | tail -n 1)
-    echo "INFO: Latest version of RPU003 hotfix is $latest"
-    cp RPU003/$latest/RPU003.xsupdate RPU003.xsupdate
-  fi
-fi
 
 #build
 MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=13.0"
 
+${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
 $MSBUILD XenAdmin.sln
 $MSBUILD xe/Xe.csproj
 $MSBUILD VNCControl/VNCControl.sln
-SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
-$MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
+$MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
 
 #prepare wix
 
@@ -220,17 +127,16 @@ version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
 #copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
-cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP46-KB3045560-Web.exe ${DOTNETINST}
+cd ${DOTNETINST}
 DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
 DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
 cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
 
-# Collect the unsigned files, if the COLLECT_UNSIGNED_FILES is defined 
-# (the variable can be set from the jenkins ui by putting "export COLLECT_UNSIGNED_FILES=1" above the call for build script)
-if [ -n "${COLLECT_UNSIGNED_FILES+x}" ]; then
-	echo "INFO: Collect unsigned files..."
-	. ${REPO}/mk/archive-unsigned.sh
-fi
+echo "INFO: Collecting unsigned files..."
+mkdir_clean ${OUTPUT_DIR}/XenAdminUnsigned
+cp -R ${REPO}/* ${OUTPUT_DIR}/XenAdminUnsigned
+cd ${OUTPUT_DIR} && zip -q -r -m XenAdminUnsigned.zip XenAdminUnsigned
+echo "Unsigned artifacts archived"
 
 #build and sign the installers
 . ${REPO}/mk/build-installers.sh
@@ -284,20 +190,9 @@ mkdir_clean ${OUTPUT_DIR}/installer.l10n
 tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
 install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
 
-#bring in the pdbs from dotnet-packages latest build
-for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
-do
-  WGET -P ${OUTPUT_DIR} ${WEB_DOTNET}/${pdb}
-done
-
 #now package the pdbs
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 
-#for the time being we download a fixed version of the ovf fixup iso, hence put this in the manifest
-echo "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" >> ${OUTPUT_DIR}/manifest
-echo "chroot-lenny chroots.hg 1a75fa5848e8" >> ${OUTPUT_DIR}/manifest
-
-cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
 
 echo "INFO:	Build phase succeeded at "
 date

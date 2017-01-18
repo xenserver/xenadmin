@@ -24,31 +24,23 @@
 #POSSIBILITY OF SUCH DAMAGE.
 
 echo Entered re-branding.sh
+set -u
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-source ${XENADMIN_DIR}/mk/declarations.sh
-source ${REPO}/Branding/branding.sh
+REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 version_cpp()
 {
-  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}" | sed 's/\./, /g')
+  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}" | sed 's/\./, /g')
   sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${get_BUILD_NUMBER}/g" \
-      $1 
-}
-
-version_csharp_git()
-{
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
+      -e "s/@BUILD_NUMBER@/${BUILD_NUMBER}/g" \
       $1 
 }
 
 version_csharp()
 {
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
-      -e "s/0000/${BRANDING_CSET_NUMBER}/g" \
+  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}/g" \
       $1 
 }
 
@@ -123,7 +115,7 @@ version_brand_csharp()
   for projectName in $1
   do
     assemblyInfo=${REPO}/${projectName}/Properties/AssemblyInfo.cs
-    version_csharp_git ${assemblyInfo} && rebranding_global ${assemblyInfo}
+    version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
   done
 }
 
@@ -223,3 +215,5 @@ then
   rm ${REPO}/XenAdmin/HomePage*.mht
   cp ${REPO}/Branding/HomePage/*.mht ${REPO}/XenAdmin/
 fi
+
+set +u

@@ -1,25 +1,29 @@
 #!/bin/sh
 
-#the local revision numbers are the same as the local revision numbers on the remote repository;
-#also we know that xenadmin.git is not a patch queue style repository
-BRANDING_CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
-
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 OUTPUT_DIR=${ROOT}/output
 
-rm -rf ${ROOT}/branding.git
-BRANDING_REMOTE=https://code.citrite.net/scm/xs/branding.git
+cd ${REPO}/Branding/Hotfixes
 
-if [ -z "$(git ls-remote --heads ${BRANDING_REMOTE} | grep ${XS_BRANCH})" ] ; then
-    echo "Branch ${XS_BRANCH} not found on branding.git. Reverting to master."
-    git clone -b master ${BRANDING_REMOTE} ${ROOT}/branding.git
-else
-    git clone -b ${XS_BRANCH} ${BRANDING_REMOTE} ${ROOT}/branding.git
-fi
+for hfx in RPU001 RPU002 RPU003
+do
+  if [ -d "${hfx}" ]; then
+    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of ${hfx} hotfix is $latest"
+    cp ${hfx}/$latest/${hfx}.xsupdate ${hfx}.xsupdate
+  fi
+done
 
-SERVER_BRANDING_TIP=$(cd ${ROOT}/branding.git && git rev-parse HEAD)
-echo "branding branding.git ${SERVER_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
+for hfx in RPU001
+do
+  if [ -d "${hfx}" ]; then
+    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of ${hfx} hotfix is $latest"
+    cp ${hfx}/$latest/${hfx}-src-pkgs.tar ${hfx}-src-pkgs.tar && rm -f ${hfx}-src-pkgs.tar.gz && gzip ${hfx}-src-pkgs.tar
+  fi
+done
+
 
 TOPLEVEL_VERSIONS=${ROOT}/branding.git/Citrix/XenServer/toplevel-versions
 TOPLEVEL_BRANDING=${ROOT}/branding.git/Citrix/XenServer/toplevel-branding
@@ -39,7 +43,7 @@ BRANDING_BACKUP=xbk
 BRANDING_SERVER=${BRANDING_PRODUCT_BRAND}
 BRANDING_BRAND_CONSOLE=$(cat ${TOPLEVEL_BRANDING} | grep -F "BRAND_CONSOLE := " | sed -e 's/BRAND_CONSOLE := //g')
 
-# Check for the micro version override from declarations.sh and use it if present otherwise use the one from branding
+# Check for the micro version override and use it if present otherwise use the one from branding
 if [ -n "${PRODUCT_MICRO_VERSION_OVERRIDE+x}" ]; then
   BRANDING_PRODUCT_MICRO_VERSION=${PRODUCT_MICRO_VERSION_OVERRIDE}
   echo Using override for micro product number of: ${BRANDING_PRODUCT_MICRO_VERSION}
