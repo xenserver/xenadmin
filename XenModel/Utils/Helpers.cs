@@ -998,6 +998,11 @@ namespace XenAdmin.Core
             return val;
         }
 
+        public static string MakeHiddenName(string name)
+        {
+            return string.Format("{0}{1}", GuiTempObjectPrefix, name);
+        }
+
         public static string GetFriendlyLicenseName(Host host)
         {
 			if (string.IsNullOrEmpty(host.edition))
@@ -2094,7 +2099,7 @@ namespace XenAdmin.Core
        public static bool PvsCacheCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xspvscache"));
+           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("pvsaccelerator"));
        }
 
        /// <summary>

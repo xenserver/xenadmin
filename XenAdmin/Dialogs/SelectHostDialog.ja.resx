@@ -169,7 +169,7 @@
     <value>1</value>
   </data>
   <data name="connectbutton.Text" xml:space="preserve">
-    <value>新規サーバーの追加</value>
+    <value>新規サーバーの追加(&amp;S)</value>
   </data>
   <data name="connectbutton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -232,7 +232,7 @@
     <value>1</value>
   </data>
   <data name="okbutton.Text" xml:space="preserve">
-    <value>適用</value>
+    <value>適用(&amp;A)</value>
   </data>
   <data name="&gt;&gt;okbutton.Name" xml:space="preserve">
     <value>okbutton</value>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -208,7 +208,7 @@
     <value>无法执行还原，因为找不到状态分区</value>
   </data>
   <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
-    <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
+    <value>找不到请求的更新。请再次上载更新。如果您在运行 xe update-apply 之前运行 xe update-pool-clean，则会出现此问题。 </value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 为绑定从属设备，不能插入。</value>
@@ -562,7 +562,7 @@
     <value>上载的更新文件无效。</value>
   </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
-    <value>The uploaded update package is invalid.</value>
+    <value>上载的更新程序包无效。</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>值“{1}”对于字段“{0}”无效。</value>
@@ -637,7 +637,7 @@
     <value>内部错误: 已尝试设置 {0}.{1}:{3}={2}，但映射 {1} 中已存在密钥 {3}。</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
-    <value>The dynamic memory range does not satisfy the following constraint.</value>
+    <value>动态内存范围不满足以下约束。</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>已达到此虚拟机允许使用的最大内存量。</value>
@@ -1599,19 +1599,37 @@
     <value>所请求的 VM {0} 引导加载程序 {1} 未知</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
-    <value>This update has already been applied.</value>
+    <value>已应用此更新。</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED_IN_POOL" xml:space="preserve">
-    <value>This update has already been applied to all hosts in the pool.</value>
+    <value>已将此更新应用到池中的所有主机。</value>
   </data>
   <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>The uploaded update already exists</value>
+    <value>上载的更新已存在</value>
+  </data>
+  <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
+    <value>无法应用更新。请查看附加的输出。</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
-    <value>The specified update has been applied and cannot be destroyed.</value>
+    <value>指定的更新已应用，不能销毁。</value>
   </data>
   <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
-    <value>The update cannot be applied for the following host(s).</value>
+    <value>无法对以下主机应用此更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
+    <value>更新预检查阶段失败: 存在冲突的更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>更新预检查阶段失败: 服务器空间不足。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
+    <value>更新预检查阶段失败: 缺少必备的更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
+    <value>更新预检查阶段失败，出现未知错误。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
+    <value>更新预检查阶段失败: 服务器版本不正确。</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>只有本地超级用户才能执行此操作</value>
@@ -1794,7 +1812,7 @@
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
+    <value>您尝试将 VM 迁移到的目标主机运行的 XenServer 版本低于源主机。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM 的虚拟硬件平台版本与此主机不兼容。</value>
@@ -1819,6 +1837,9 @@
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>尝试执行的操作对模板无效</value>
+  </data>
+  <data name="VM_IS_USING_NESTED_VIRT" xml:space="preserve">
+    <value>此操作非法，因为 VM 使用的是嵌套虚拟化。</value>
   </data>
   <data name="VM_LACKS_FEATURE" xml:space="preserve">
     <value>您尝试在缺少该功能的 VM 上进行操作。</value>

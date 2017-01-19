@@ -449,7 +449,7 @@ namespace XenAdmin.TabPages
                 _name.Value = snapshot.name_label;
                 //Created On
                 Cells.Add(_creationTime);
-                _creationTime.Value = snapshot.snapshot_time.ToLocalTime() + snapshot.Connection.ServerTimeOffset;
+                _creationTime.Value = HelpersGUI.DateTimeToString(snapshot.snapshot_time.ToLocalTime() + snapshot.Connection.ServerTimeOffset, Messages.DATEFORMAT_DMY_HMS, true);
                 //Size
                 Cells.Add(_size);
                 _size.Value = GetStringSnapshotSize(snapshot);

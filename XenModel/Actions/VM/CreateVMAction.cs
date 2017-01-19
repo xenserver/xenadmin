@@ -210,6 +210,7 @@ namespace XenAdmin.Actions.VMActions
             AddDisks();
             AddNetworks();
             XenAdminConfigManager.Provider.ShowObject(VM.opaque_ref);
+            VM.IsBeingCreated = false;
             PointOfNoReturn = true;
 
             CloudCreateConfigDrive();
@@ -292,6 +293,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void SetXenCenterProperties()
         {
+            VM.IsBeingCreated = true;
             XenAdminConfigManager.Provider.HideObject(VM.opaque_ref);
             AppliesTo.Add(VM.opaque_ref);
         }
@@ -688,7 +690,7 @@ namespace XenAdmin.Actions.VMActions
         {
             get
             {
-                return string.Format("{0}{1}", Helpers.GuiTempObjectPrefix, NameLabel);
+                return Helpers.MakeHiddenName(NameLabel);
             }
         }
 

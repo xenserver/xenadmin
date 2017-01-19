@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_HostUnpatched_h32bit_16;
+                return Images.StaticImages._000_HostUnpatched_h32bit_16;
             }
         }
 

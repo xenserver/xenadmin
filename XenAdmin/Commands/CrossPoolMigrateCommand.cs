@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
 
         public override Image MenuImage
         {
-            get { return preSelectedHost == null ? Resources._000_MigrateVM_h32bit_16 : Resources._000_TreeConnected_h32bit_16; }
+            get { return preSelectedHost == null ? Images.StaticImages._000_MigrateVM_h32bit_16 : Images.StaticImages._000_TreeConnected_h32bit_16; }
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

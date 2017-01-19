@@ -49,33 +49,33 @@ namespace XenAdmin.Core
         {
             if (action.IsCompleted)
                 return action.Succeeded
-                           ? Properties.Resources._000_Tick_h32bit_16
+                           ? Images.StaticImages._000_Tick_h32bit_16
                            : action.Exception is CancelledException
-                                 ? Properties.Resources.cancelled_action_16
-                                 : Properties.Resources._000_error_h32bit_16;
+                                 ? Images.StaticImages.cancelled_action_16
+                                 : Images.StaticImages._000_error_h32bit_16;
 
             if (action.PercentComplete < 9)
-                return Properties.Resources.usagebar_0;
+                return Images.StaticImages.usagebar_0;
             if (action.PercentComplete < 18)
-                return Properties.Resources.usagebar_1;
+                return Images.StaticImages.usagebar_1;
             if (action.PercentComplete < 27)
-                return Properties.Resources.usagebar_2;
+                return Images.StaticImages.usagebar_2;
             if (action.PercentComplete < 36)
-                return Properties.Resources.usagebar_3;
+                return Images.StaticImages.usagebar_3;
             if (action.PercentComplete < 45)
-                return Properties.Resources.usagebar_4;
+                return Images.StaticImages.usagebar_4;
             if (action.PercentComplete < 54)
-                return Properties.Resources.usagebar_5;
+                return Images.StaticImages.usagebar_5;
             if (action.PercentComplete < 63)
-                return Properties.Resources.usagebar_6;
+                return Images.StaticImages.usagebar_6;
             if (action.PercentComplete < 72)
-                return Properties.Resources.usagebar_7;
+                return Images.StaticImages.usagebar_7;
             if (action.PercentComplete < 81)
-                return Properties.Resources.usagebar_8;
+                return Images.StaticImages.usagebar_8;
             if (action.PercentComplete < 90)
-                return Properties.Resources.usagebar_9;
+                return Images.StaticImages.usagebar_9;
 
-            return Properties.Resources.usagebar_10;
+            return Images.StaticImages.usagebar_10;
         }
 
         internal static string GetDetails(this ActionBase action)

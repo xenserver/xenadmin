@@ -189,6 +189,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             BuildServerList();
         }
 
+        public override void SelectDefaultControl()
+        {
+            dataGridView1.Select();
+        }
+
         private void BuildServerList()
         {
             IList<Host> masters = SelectedMasters;

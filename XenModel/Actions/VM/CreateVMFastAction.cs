@@ -42,32 +42,51 @@ namespace XenAdmin.Actions.VMActions
     /// </summary>
     public class CreateVMFastAction : AsyncAction
     {
-        public CreateVMFastAction(IXenConnection connection, VM template)
+        private readonly String _nameLabel;
+        private readonly bool _markVmAsBeingCreated;
+
+        public CreateVMFastAction(IXenConnection connection, VM template, bool markVmAsBeingCreated = true)
             : base(connection, Messages.INSTANT_VM_CREATE_TITLE, string.Format(Messages.INSTANT_VM_CREATE_DESCRIPTION, Helpers.DefaultVMName(Helpers.GetName(template), connection), Helpers.GetName(template)))
         {
             Template = template;
+            _nameLabel = Helpers.DefaultVMName(Helpers.GetName(Template), Connection);
+            _markVmAsBeingCreated = markVmAsBeingCreated;
+
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
             ApiMethodsToRoleCheck.Add("vm.clone");
             ApiMethodsToRoleCheck.Add("vm.provision");
             ApiMethodsToRoleCheck.Add("vm.start");
+            ApiMethodsToRoleCheck.Add("vm.set_name_label");
         }
 
         protected override void Run()
         {
-            RelatedTask = XenAPI.VM.async_clone(Session, Template.opaque_ref, Helpers.DefaultVMName(Helpers.GetName(Template), Connection));
+            RelatedTask = XenAPI.VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(_nameLabel));
             PollToCompletion(0, 80);
 
             string new_vm_ref = Result;
+
+            if (_markVmAsBeingCreated)
+            {
+                VM = Connection.WaitForCache(new XenRef<VM>(new_vm_ref));
+                VM.IsBeingCreated = true;
+            }
 
             XenAdminConfigManager.Provider.HideObject(new_vm_ref);
 
             RelatedTask = XenAPI.VM.async_provision(Session, new_vm_ref);
             PollToCompletion(80, 90);
 
+            VM.set_name_label(Session, new_vm_ref, _nameLabel);
             XenAdminConfigManager.Provider.ShowObject(new_vm_ref);
 
-         
+            if (_markVmAsBeingCreated)
+            {
+                VM.name_label = _nameLabel; //the set_name_label method takes some time, we want to show the VM right away
+                VM.IsBeingCreated = false;
+            }
+
             Result = new_vm_ref;
         }
     }

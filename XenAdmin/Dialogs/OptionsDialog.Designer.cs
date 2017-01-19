@@ -36,14 +36,19 @@ namespace XenAdmin.Dialogs
             this.securityOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage();
             this.saveAndRestoreOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage();
             this.pluginOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.PluginOptionsPage();
+            this.confirmationOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage();
             this.ContentPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.blueBorder.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContentPanel
             // 
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
+            this.ContentPanel.Controls.Add(this.confirmationOptionsPage1);
             this.ContentPanel.Controls.Add(this.pluginOptionsPage1);
             this.ContentPanel.Controls.Add(this.saveAndRestoreOptionsPage1);
             this.ContentPanel.Controls.Add(this.securityOptionsPage1);
@@ -62,7 +67,8 @@ namespace XenAdmin.Dialogs
             this.consolesOptionsPage1,
             this.connectionOptionsPage1,
             this.saveAndRestoreOptionsPage1,
-            this.pluginOptionsPage1});
+            this.pluginOptionsPage1,
+            this.confirmationOptionsPage1});
             // 
             // cancelButton
             // 
@@ -78,13 +84,9 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.splitContainer, "splitContainer");
             // 
-            // splitContainer.Panel1
+            // blueBorder
             // 
-            resources.ApplyResources(this.splitContainer.Panel1, "splitContainer.Panel1");
-            // 
-            // splitContainer.Panel2
-            // 
-            resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
+            resources.ApplyResources(this.blueBorder, "blueBorder");
             // 
             // connectionOptionsPage1
             // 
@@ -121,6 +123,11 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.pluginOptionsPage1, "pluginOptionsPage1");
             this.pluginOptionsPage1.Name = "pluginOptionsPage1";
             // 
+            // confirmationOptionsPage1
+            // 
+            resources.ApplyResources(this.confirmationOptionsPage1, "confirmationOptionsPage1");
+            this.confirmationOptionsPage1.Name = "confirmationOptionsPage1";
+            // 
             // OptionsDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -128,7 +135,10 @@ namespace XenAdmin.Dialogs
             this.ContentPanel.ResumeLayout(false);
             this.ContentPanel.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            this.blueBorder.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -142,5 +152,6 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage securityOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage saveAndRestoreOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.PluginOptionsPage pluginOptionsPage1;
+        private OptionsPages.ConfirmationOptionsPage confirmationOptionsPage1;
     }
 }

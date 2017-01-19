@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -135,7 +135,7 @@
     <value>700, 90</value>
   </data>
   <data name="hostMemoryControls.Size" type="System.Drawing.Size, System.Drawing">
-    <value>786, 90</value>
+    <value>786, 111</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="hostMemoryControls.TabIndex" type="System.Int32, mscorlib">
@@ -193,7 +193,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>788, 118</value>
+    <value>788, 139</value>
   </data>
   <data name="panel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -223,7 +223,7 @@
     <value>700, 139</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>788, 118</value>
+    <value>788, 139</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HostMemoryRow</value>

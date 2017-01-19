@@ -755,5 +755,44 @@ namespace XenAdmin.Properties {
                 this["ProxyAuthenticationMethod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool DoNotConfirmDismissAlerts {
+            get {
+                return ((bool)(this["DoNotConfirmDismissAlerts"]));
+            }
+            set {
+                this["DoNotConfirmDismissAlerts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool DoNotConfirmDismissEvents {
+            get {
+                return ((bool)(this["DoNotConfirmDismissEvents"]));
+            }
+            set {
+                this["DoNotConfirmDismissEvents"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool DoNotConfirmDismissUpdates {
+            get {
+                return ((bool)(this["DoNotConfirmDismissUpdates"]));
+            }
+            set {
+                this["DoNotConfirmDismissUpdates"] = value;
+            }
+        }
     }
 }

@@ -89,6 +89,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
+        public override void SelectDefaultControl()
+        {
+            NfsServerPathTextBox.Select();
+        }
+
         #endregion
 
         private void UpdateButtons()

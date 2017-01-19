@@ -138,10 +138,10 @@
     <value>True</value>
   </metadata>
   <data name="ColumnCachingEnabled.HeaderText" xml:space="preserve">
-    <value>Read caching enabled</value>
+    <value>PVS-Accelerator enabled</value>
   </data>
   <data name="ColumnCachingEnabled.Width" type="System.Int32, mscorlib">
-    <value>148</value>
+    <value>162</value>
   </data>
   <metadata name="ColumnPvsSite.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -153,13 +153,13 @@
     <value>True</value>
   </metadata>
   <data name="ColumnStatus.HeaderText" xml:space="preserve">
-    <value>Read caching status</value>
+    <value>PVS-Accelerator status</value>
   </data>
   <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
   <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
-    <value>137</value>
+    <value>151</value>
   </data>
   <data name="dataGridViewVms.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -244,13 +244,13 @@
     <value>5, 0, 5, 0</value>
   </data>
   <data name="ConfigureButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
+    <value>178, 23</value>
   </data>
   <data name="ConfigureButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="ConfigureButton.Text" xml:space="preserve">
-    <value>&amp;Configure PVS cache...</value>
+    <value>&amp;Configure PVS-Accelerator...</value>
   </data>
   <data name="&gt;&gt;ConfigureButton.Name" xml:space="preserve">
     <value>ConfigureButton</value>
@@ -271,7 +271,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 29</value>
+    <value>181, 29</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -307,7 +307,7 @@
     <value>15</value>
   </data>
   <data name="enableButton.Text" xml:space="preserve">
-    <value>Enable PVS read-caching...</value>
+    <value>Enable PVS-Accelerator...</value>
   </data>
   <data name="&gt;&gt;enableButton.Name" xml:space="preserve">
     <value>enableButton</value>
@@ -337,7 +337,7 @@
     <value>11</value>
   </data>
   <data name="disableButton.Text" xml:space="preserve">
-    <value>&amp;Disable PVS read-caching</value>
+    <value>&amp;Disable PVS-Accelerator</value>
   </data>
   <data name="&gt;&gt;disableButton.Name" xml:space="preserve">
     <value>disableButton</value>

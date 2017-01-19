@@ -41,7 +41,7 @@ using System.Linq;
 namespace XenAdminTests.UnitTests
 {
     [TestFixture, Category(TestCategories.Unit)]
-    public class BatchUpdatesTests
+    public class AutomatedUpdatesTests
     {
 
         private static Mock<Host> GetAMockHost(string productVersion, string buildNumber, List<Pool_patch> applied_patches = null)

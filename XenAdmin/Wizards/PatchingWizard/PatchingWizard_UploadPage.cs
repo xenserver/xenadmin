@@ -96,6 +96,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public override void SelectDefaultControl()
+        {
+            flickerFreeListBox1.Select();
+        }
+
         private void DownloadFile()
         {            
             string patchUri = ((XenServerPatchAlert)SelectedUpdateAlert).Patch.PatchUrl;
@@ -188,6 +193,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
+                            _poolUpdate = null;
+                            _patch = null;
+                            
                             action = new UploadSupplementalPackAction(
                             selectedServer.Connection,
                             SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(),
@@ -456,10 +464,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 _poolUpdate = newPoolUpdate;
                                 AllIntroducedPoolUpdates.Add(PoolUpdate);
                             }
-                        }
-                        else
-                        {
-                            _poolUpdate = null;
                         }
                     }
 

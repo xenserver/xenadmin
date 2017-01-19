@@ -41,7 +41,7 @@ using XenAdmin.Core;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Drawing;
-
+using XenAdmin.Properties;
 
 namespace XenAdmin.Commands
 {
@@ -118,7 +118,7 @@ namespace XenAdmin.Commands
                 SelectHostDialog hostdialog = new SelectHostDialog();
                 hostdialog.TheHost = host;
                 hostdialog.DispString = Messages.BACKUP_SELECT_HOST;
-                hostdialog.SetPicture = Properties.Resources.backup_restore_32;
+                hostdialog.SetPicture = Images.StaticImages.backup_restore_32;
                 hostdialog.HelpString = "Backup"; // dont i18n
                 hostdialog.Text = Messages.BACKUP_SELECT_HOST_TITLE;
                 hostdialog.okbutton.Text = Messages.BACKUP_SELECT_HOST_BUTTON;

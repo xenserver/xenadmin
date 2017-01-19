@@ -112,20 +112,20 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="radioButtonArchiveWeekly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="radioButtonArchiveWeekly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="radioButtonArchiveWeekly.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 72</value>
   </data>
@@ -142,7 +142,7 @@
     <value>radioButtonArchiveWeekly</value>
   </data>
   <data name="&gt;&gt;radioButtonArchiveWeekly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonArchiveWeekly.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
@@ -175,7 +175,7 @@
     <value>radioButtonArchiveDaily</value>
   </data>
   <data name="&gt;&gt;radioButtonArchiveDaily.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonArchiveDaily.Parent" xml:space="preserve">
     <value>toolTipContainer1</value>
@@ -205,7 +205,7 @@
     <value>radioButtonArchiveASAP</value>
   </data>
   <data name="&gt;&gt;radioButtonArchiveASAP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonArchiveASAP.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
@@ -232,7 +232,7 @@
     <value>radioButtonDoNotArchive</value>
   </data>
   <data name="&gt;&gt;radioButtonDoNotArchive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonDoNotArchive.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
@@ -271,7 +271,7 @@
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>m_tlpDestination</value>
@@ -295,7 +295,7 @@
     <value>textBoxPath</value>
   </data>
   <data name="&gt;&gt;textBoxPath.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.WatermarkTextBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPath.Parent" xml:space="preserve">
     <value>m_tlpDestination</value>
@@ -322,7 +322,7 @@
     <value>buttonTest</value>
   </data>
   <data name="&gt;&gt;buttonTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonTest.Parent" xml:space="preserve">
     <value>m_tlpDestination</value>
@@ -355,7 +355,7 @@
     <value>pictureBoxTest</value>
   </data>
   <data name="&gt;&gt;pictureBoxTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxTest.Parent" xml:space="preserve">
     <value>m_tlpDestination</value>
@@ -394,7 +394,7 @@
     <value>checkBoxCredentials</value>
   </data>
   <data name="&gt;&gt;checkBoxCredentials.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBoxCredentials.Parent" xml:space="preserve">
     <value>m_tlpDestination</value>
@@ -427,13 +427,13 @@
     <value>18, 6</value>
   </data>
   <data name="labelUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="labelUser.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelUser.Text" xml:space="preserve">
-    <value>&amp;User name:</value>
+    <value>&amp;Username:</value>
   </data>
   <data name="labelUser.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -442,7 +442,7 @@
     <value>labelUser</value>
   </data>
   <data name="&gt;&gt;labelUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelUser.Parent" xml:space="preserve">
     <value>m_tlpCredentials</value>
@@ -454,10 +454,10 @@
     <value>Fill</value>
   </data>
   <data name="textBoxUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 3</value>
+    <value>82, 3</value>
   </data>
   <data name="textBoxUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 20</value>
+    <value>176, 20</value>
   </data>
   <data name="textBoxUser.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -466,7 +466,7 @@
     <value>textBoxUser</value>
   </data>
   <data name="&gt;&gt;textBoxUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxUser.Parent" xml:space="preserve">
     <value>m_tlpCredentials</value>
@@ -484,7 +484,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 6</value>
+    <value>264, 6</value>
   </data>
   <data name="labelPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -502,7 +502,7 @@
     <value>labelPassword</value>
   </data>
   <data name="&gt;&gt;labelPassword.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelPassword.Parent" xml:space="preserve">
     <value>m_tlpCredentials</value>
@@ -514,13 +514,13 @@
     <value>Fill</value>
   </data>
   <data name="textBoxPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 3</value>
+    <value>326, 3</value>
   </data>
   <data name="textBoxPassword.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
   </data>
   <data name="textBoxPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 20</value>
+    <value>176, 20</value>
   </data>
   <data name="textBoxPassword.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -529,7 +529,7 @@
     <value>textBoxPassword</value>
   </data>
   <data name="&gt;&gt;textBoxPassword.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPassword.Parent" xml:space="preserve">
     <value>m_tlpCredentials</value>
@@ -556,7 +556,7 @@
     <value>m_tlpCredentials</value>
   </data>
   <data name="&gt;&gt;m_tlpCredentials.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpCredentials.Parent" xml:space="preserve">
     <value>m_tlpDestination</value>
@@ -601,7 +601,7 @@
     <value>Fill</value>
   </data>
   <data name="m_tlpDestination.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 267</value>
+    <value>3, 271</value>
   </data>
   <data name="m_tlpDestination.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
@@ -616,7 +616,7 @@
     <value>m_tlpDestination</value>
   </data>
   <data name="&gt;&gt;m_tlpDestination.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpDestination.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -691,7 +691,7 @@
     <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -712,7 +712,7 @@
     <value>labelDivider</value>
   </data>
   <data name="&gt;&gt;labelDivider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDivider.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
@@ -745,7 +745,7 @@
     <value>labelRecurDaily</value>
   </data>
   <data name="&gt;&gt;labelRecurDaily.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelRecurDaily.Parent" xml:space="preserve">
     <value>m_tlpRecur</value>
@@ -817,7 +817,7 @@
     <value>labelRecurWeekly</value>
   </data>
   <data name="&gt;&gt;labelRecurWeekly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelRecurWeekly.Parent" xml:space="preserve">
     <value>m_tlpRecur</value>
@@ -871,7 +871,7 @@
     <value>labelDays</value>
   </data>
   <data name="&gt;&gt;labelDays.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDays.Parent" xml:space="preserve">
     <value>m_tlpRecur</value>
@@ -898,7 +898,7 @@
     <value>m_tlpRecur</value>
   </data>
   <data name="&gt;&gt;m_tlpRecur.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpRecur.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -914,6 +914,12 @@
   </data>
   <data name="daysWeekCheckboxes1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 68</value>
+  </data>
+  <data name="daysWeekCheckboxes1.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>400, 80</value>
+  </data>
+  <data name="daysWeekCheckboxes1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 75</value>
   </data>
   <data name="daysWeekCheckboxes1.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 75</value>
@@ -949,7 +955,7 @@
     <value>4, 3, 3, 3</value>
   </data>
   <data name="localServerTime1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>613, 18</value>
+    <value>613, 22</value>
   </data>
   <data name="localServerTime1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1008,6 +1014,9 @@
   <data name="sectionLabelSchedule.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <data name="sectionLabelSchedule.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="sectionLabelSchedule.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -1021,13 +1030,19 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="sectionLabelSchedule.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 69</value>
+    <value>3, 73</value>
+  </data>
+  <data name="sectionLabelSchedule.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 14</value>
   </data>
   <data name="sectionLabelSchedule.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 14</value>
   </data>
   <data name="sectionLabelSchedule.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="sectionLabelSchedule.UseMnemonic" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;sectionLabelSchedule.Name" xml:space="preserve">
     <value>sectionLabelSchedule</value>
@@ -1054,7 +1069,7 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 89</value>
+    <value>3, 93</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1069,7 +1084,7 @@
     <value>tableLayoutPanel4</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -1086,6 +1101,9 @@
   <data name="sectionLabelDest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <data name="sectionLabelDest.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="sectionLabelDest.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -1099,13 +1117,19 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="sectionLabelDest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 247</value>
+    <value>3, 251</value>
+  </data>
+  <data name="sectionLabelDest.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 14</value>
   </data>
   <data name="sectionLabelDest.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 14</value>
   </data>
   <data name="sectionLabelDest.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="sectionLabelDest.UseMnemonic" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;sectionLabelDest.Name" xml:space="preserve">
     <value>sectionLabelDest</value>
@@ -1138,7 +1162,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1149,7 +1173,7 @@
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="autoHeightLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionLabelSchedule" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="localServerTime1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel4" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionLabelDest" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_tlpDestination" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

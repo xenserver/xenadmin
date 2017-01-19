@@ -32,7 +32,7 @@ namespace XenAdmin.Dialogs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnablePvsReadCachingDialog));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pvsSiteList = new LongStringComboBox();
+            this.pvsSiteList = new XenAdmin.Controls.LongStringComboBox();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.pvsSiteLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();

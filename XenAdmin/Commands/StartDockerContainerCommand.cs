@@ -50,9 +50,9 @@ namespace XenAdmin.Commands
 
         public override string MenuText { get { return Messages.MAINWINDOW_START; } }
 
-        public override Image MenuImage { get { return Resources._001_PowerOn_h32bit_16; } }
+        public override Image MenuImage { get { return Images.StaticImages._001_PowerOn_h32bit_16; } }
 
-        public override Image ToolBarImage { get { return Resources._001_PowerOn_h32bit_24; } }
+        public override Image ToolBarImage { get { return Images.StaticImages._001_PowerOn_h32bit_24; } }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {

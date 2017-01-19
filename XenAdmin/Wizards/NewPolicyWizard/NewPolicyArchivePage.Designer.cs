@@ -35,6 +35,7 @@
             this.radioButtonDoNotArchive = new System.Windows.Forms.RadioButton();
             this.m_tlpDestination = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonTest = new System.Windows.Forms.Button();
             this.pictureBoxTest = new System.Windows.Forms.PictureBox();
             this.checkBoxCredentials = new System.Windows.Forms.CheckBox();
@@ -60,7 +61,6 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.m_tlpRecur = new System.Windows.Forms.TableLayoutPanel();
             this.sectionLabelDest = new XenAdmin.Controls.SectionHeaderLabel();
-            this.textBoxPath = new System.Windows.Forms.TextBox();
             this.m_tlpDestination.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTest)).BeginInit();
             this.m_tlpCredentials.SuspendLayout();
@@ -116,6 +116,12 @@
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            // 
+            // textBoxPath
+            // 
+            resources.ApplyResources(this.textBoxPath, "textBoxPath");
+            this.textBoxPath.Name = "textBoxPath";
+            this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
             // 
             // buttonTest
             // 
@@ -210,8 +216,6 @@
             resources.ApplyResources(this.daysWeekCheckboxes1, "daysWeekCheckboxes1");
             this.m_tlpRecur.SetColumnSpan(this.daysWeekCheckboxes1, 2);
             this.daysWeekCheckboxes1.Days = "";
-            this.daysWeekCheckboxes1.MaximumSize = new System.Drawing.Size(400, 80);
-            this.daysWeekCheckboxes1.MinimumSize = new System.Drawing.Size(0, 75);
             this.daysWeekCheckboxes1.Name = "daysWeekCheckboxes1";
             // 
             // labelDays
@@ -260,7 +264,6 @@
             resources.ApplyResources(this.sectionLabelSchedule, "sectionLabelSchedule");
             this.sectionLabelSchedule.LineColor = System.Drawing.SystemColors.Window;
             this.sectionLabelSchedule.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionLabelSchedule.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionLabelSchedule.Name = "sectionLabelSchedule";
             this.sectionLabelSchedule.TabStop = false;
             // 
@@ -297,15 +300,8 @@
             resources.ApplyResources(this.sectionLabelDest, "sectionLabelDest");
             this.sectionLabelDest.LineColor = System.Drawing.SystemColors.Window;
             this.sectionLabelDest.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionLabelDest.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionLabelDest.Name = "sectionLabelDest";
             this.sectionLabelDest.TabStop = false;
-            // 
-            // textBoxPath
-            // 
-            resources.ApplyResources(this.textBoxPath, "textBoxPath");
-            this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
             // 
             // NewPolicyArchivePage
             // 

@@ -116,7 +116,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_ForceReboot_h32bit_16;
+                return Images.StaticImages._001_ForceReboot_h32bit_16;
             }
         }
 
@@ -124,7 +124,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_ForceReboot_h32bit_24;
+                return Images.StaticImages._001_ForceReboot_h32bit_24;
             }
         }
 

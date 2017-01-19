@@ -82,6 +82,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             Template = SelectedTemplate;
 
             NameTextBox.Text = Helpers.DefaultVMName(Helpers.GetName(Template), Connection);
+        }
+
+        public override void SelectDefaultControl()
+        {
             NameTextBox.Select();
         }
 

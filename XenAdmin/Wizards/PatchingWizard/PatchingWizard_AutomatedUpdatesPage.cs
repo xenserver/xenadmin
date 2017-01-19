@@ -51,7 +51,7 @@ using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    public partial class PatchingWizard_AutoUpdatingPage : XenTabPage
+    public partial class PatchingWizard_AutomatedUpdatesPage : XenTabPage
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -67,7 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
 
-        public PatchingWizard_AutoUpdatingPage()
+        public PatchingWizard_AutomatedUpdatesPage()
         {
             InitializeComponent();
         }
@@ -322,6 +322,32 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     doWorkEventArgs.Result = new Exception(action.Title, e);
 
+                    //this pool failed, we will stop here, but try to remove update files at least
+                    try
+                    {
+                        var positionOfFailedAction = bgw.AllActions.IndexOf(action);
+                        if (positionOfFailedAction < bgw.AllActions.Count && !(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction))
+                        {
+                            int pos = positionOfFailedAction;
+
+                            if (!(bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction)) //can't do anything if the remove action has failed
+                            {
+                                while (++pos < bgw.AllActions.Count)
+                                {
+                                    if (bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction) //find the next remove
+                                    {
+                                        bgw.AllActions[pos].Run();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        //already in an error case - best effort
+                    }
+
                     bgw.ReportProgress(0);
                     break;
                 }
@@ -538,7 +564,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AllWorkersFinished()
         {
-            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATIC_MODE;
+            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
