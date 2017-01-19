@@ -258,17 +258,13 @@ namespace XenAdmin.Core
             {
                 lock (downloadedUpdatesLock)
                 {
-                    var xcvs = action.XenCenterVersions.Where(v => !XenCenterVersions.Contains(v));
-                    XenCenterVersions.AddRange(xcvs);
+                    XenCenterVersions = action.XenCenterVersions;
 
-                    var versForAutoCheck = action.XenServerVersionsForAutoCheck.Where(v => !XenServerVersionsForAutoCheck.Contains(v));
-                    XenServerVersionsForAutoCheck.AddRange(versForAutoCheck);
+                    XenServerVersionsForAutoCheck = action.XenServerVersionsForAutoCheck;
 
-                    var vers = action.XenServerVersions.Where(v => !XenServerVersions.Contains(v));
-                    XenServerVersions.AddRange(vers);
+                    XenServerVersions = action.XenServerVersions;
 
-                    var patches = action.XenServerPatches.Where(p => !XenServerPatches.Contains(p));
-                    XenServerPatches.AddRange(patches);
+                    XenServerPatches = action.XenServerPatches;
                 }
 
                 var xenCenterAlert = NewXenCenterUpdateAlert(XenCenterVersions, Program.Version);
