@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -40,7 +40,8 @@ then
   echo "$1 contains $FOUND_TYPO"
 fi
 
-for w in "operation system" "goto " "TODO[: ]*[rR]emove"
+for w in "operation system" "goto " "TODO[: ]*[rR]emove
+"
 do
   grep -qi "$w" "$1" && echo "$1 contains $w"
 done
