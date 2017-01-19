@@ -252,6 +252,11 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_batch_hotfix_apply"); }
         }
 
+        /// <summary>
+        /// Restrict Automated Updates
+        /// </summary>
+        /// <param name="h">host</param>
+        /// <returns></returns>
         public static bool RestrictBatchHotfixApply(Host h)
         {
             return h._RestrictBatchHotfixApply;
@@ -1132,7 +1137,7 @@ namespace XenAPI
                 if (Connection == null)
                     return null;
 
-                if (Helpers.DundeePlusOrGreater(Connection))
+                if (!Helper.IsNullOrEmptyOpaqueRef(control_domain))
                     return Connection.Resolve(control_domain);
 
                 var vms = Connection.ResolveAll(resident_VMs);
@@ -1161,7 +1166,7 @@ namespace XenAPI
 
                 var vms = Connection.ResolveAll(resident_VMs);
 
-                if (Helpers.DundeePlusOrGreater(Connection))
+                if (!Helper.IsNullOrEmptyOpaqueRef(control_domain))
                     return vms.Where(v => v.is_control_domain && v.opaque_ref != control_domain);
 
                 return vms.Where(v => v.is_control_domain && v.domid != 0);

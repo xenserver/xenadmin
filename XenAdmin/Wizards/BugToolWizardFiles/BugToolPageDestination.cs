@@ -101,6 +101,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             base.PageLeave(direction, ref cancel);
         }
 
+        public override void SelectDefaultControl()
+        {
+            if (string.IsNullOrEmpty(m_textBoxLocation.Text))
+                m_textBoxLocation.Select();
+        }
+
         public string OutputFile
         {
             get

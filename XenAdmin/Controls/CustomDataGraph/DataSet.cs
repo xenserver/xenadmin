@@ -285,7 +285,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
                 dataSet.Type = DataType.Gpu;
             }
-            else if (settype.StartsWith("pvscache"))
+            else if (settype.StartsWith("pvsaccelerator"))
             {
                 if (settype.Contains("traffic") || settype.EndsWith("evicted"))
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);

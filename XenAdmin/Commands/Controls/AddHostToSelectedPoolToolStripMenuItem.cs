@@ -109,7 +109,7 @@ namespace XenAdmin.Commands
                 }
 
                 AddHostToPoolCommand cmd = new AddHostToPoolCommand(Command.MainWindowCommandInterface, new Host[] { host }, Helpers.GetPool(connection), true);
-                CommandToolStripMenuItem hostMenuItem = new CommandToolStripMenuItem(cmd, hostName.EscapeAmpersands(), Resources._000_TreeConnected_h32bit_16);
+                CommandToolStripMenuItem hostMenuItem = new CommandToolStripMenuItem(cmd, hostName.EscapeAmpersands(), Images.StaticImages._000_TreeConnected_h32bit_16);
 
                 base.DropDownItems.Add(hostMenuItem);
             }

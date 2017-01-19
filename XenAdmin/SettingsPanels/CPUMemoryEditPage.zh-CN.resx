@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -541,7 +541,7 @@
     <value>2</value>
   </data>
   <data name="lblVCPUs.Text" xml:space="preserve">
-    <value>vCPU 数(&amp;N):</value>
+    <value>vCPU 数量(&amp;N):</value>
   </data>
   <data name="lblVCPUs.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

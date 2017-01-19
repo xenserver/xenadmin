@@ -244,7 +244,7 @@
     <value>89, 23</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
-    <value>按日期过滤(&amp;A)</value>
+    <value>按日期过滤(&amp;D)</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 26</value>
@@ -280,13 +280,13 @@
     <value>170, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>全部消除(&amp;D)</value>
+    <value>全部消除(&amp;A)</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>消除选定对象(&amp;D)</value>
+    <value>消除选定对象(&amp;C)</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

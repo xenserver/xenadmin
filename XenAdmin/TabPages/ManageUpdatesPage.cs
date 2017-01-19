@@ -46,8 +46,6 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard;
 using Timer = System.Windows.Forms.Timer;
-using XenAdmin.Network;
-using XenAPI;
 
 
 namespace XenAdmin.TabPages
@@ -79,6 +77,8 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             pictureBox1.Image = SystemIcons.Information.ToBitmap();
+            toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
+            toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
             PageWasRefreshed = false;
         }
 
@@ -506,8 +506,6 @@ namespace XenAdmin.TabPages
 
         #region Actions DropDown event handlers
 
-
-
         private void toolStripSplitButtonDismiss_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             toolStripSplitButtonDismiss.DefaultItem = e.ClickedItem;
@@ -522,20 +520,9 @@ namespace XenAdmin.TabPages
         /// <param name="e"></param>
         private void dismissAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult result = DialogResult.Yes;
 
-            DialogResult result;
-
-            if (!FilterIsOn)
-            {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE),
-                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
-                    ThreeButtonDialog.ButtonCancel))
-                {
-                    result = dlog.ShowDialog(this);
-                }
-            }
-            else
+            if (FilterIsOn)
             {
                 using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_CONTINUE),
@@ -544,6 +531,22 @@ namespace XenAdmin.TabPages
                     ThreeButtonDialog.ButtonCancel))
                 {
                     result = dlog.ShowDialog(this);
+                }
+            }
+            else if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
+            {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE),
+                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                    ThreeButtonDialog.ButtonCancel)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissUpdates = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
                 }
             }
 
@@ -565,13 +568,23 @@ namespace XenAdmin.TabPages
         /// <param name="e"></param>
         private void dismissSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
             {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissUpdates = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+                    
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             if (dataGridViewUpdates.SelectedRows.Count > 0)
@@ -597,13 +610,24 @@ namespace XenAdmin.TabPages
             if (alert == null)
                 return;
 
-            using (var dlog = new ThreeButtonDialog(
+            if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
+            {
+                using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_CONFIRM, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
-            {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                    ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissUpdates = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+                    
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             DismissUpdates(new List<Alert> { (Alert)clickedRow.Tag });
@@ -939,6 +963,7 @@ namespace XenAdmin.TabPages
             checkForUpdatesNowButton.Visible = false;
             Updates.RestoreDismissedUpdates();
         }        
+
         private void checkForUpdatesNowButton2_Click(object sender, EventArgs e)
         {            
             MakeWarningInvisible();

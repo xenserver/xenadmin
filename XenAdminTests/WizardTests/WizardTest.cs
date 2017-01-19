@@ -30,15 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using NUnit.Framework;
-using XenAdmin;
-using XenAdmin.Controls;
 using XenAdmin.Wizards;
-using XenAdmin.Commands;
+using XenAdmin.Core;
 
 namespace XenAdminTests.WizardTests
 {
@@ -53,11 +49,56 @@ namespace XenAdminTests.WizardTests
         protected Button btnPrevious;
         protected Button btnCancel;
 
+        private static uint WM_KEYDOWN = 0x100;
+
         protected WizardTest(string[] pageNames, bool canFinish, bool doFinish)
         {
             this.pageNames = pageNames;
             this.canFinish = canFinish;
             this.doFinish = doFinish;
+        }
+
+
+        [Test]
+        [Timeout(100 * 1000)]
+        public void RunWizardKeyboardTests()
+        {
+            RunBefore();
+
+            wizard = MW<T>(NewWizard);
+            MW(wizard.Show);
+
+            btnNext = TestUtils.GetButton(wizard, "buttonNext");
+            btnPrevious = TestUtils.GetButton(wizard, "buttonPrevious");
+            btnCancel = TestUtils.GetButton(wizard, "buttonCancel");
+
+            // Test that the Enter key takes us forward through the wizard
+            for (int i = 0; i < pageNames.Length; ++i)
+            {
+                bool lastPage = (i == pageNames.Length - 1);
+
+                // Any specific setup or testing for this page defined in derived class
+                TestPage(pageNames[i]);
+                if (!lastPage)
+                {
+                    // send th eenter key to the wizard window
+                    MW(() =>
+                    {
+                        Win32.PostMessage(wizard.Handle, WM_KEYDOWN, new IntPtr((int)Keys.Enter), IntPtr.Zero);
+                    });
+                    // wait for any progress dialog to close
+                    while (wizard.Visible && !wizard.CanFocus)
+                        Thread.Sleep(1000);
+                    // check if the wizard progressed to the next page
+                    Assert.AreEqual(pageNames[i + 1], CurrentPageName(wizard), "Enter key button didn't get from page: " + pageNames[i] + " to page: " + pageNames[i + 1]);
+                }
+                else
+                {
+                    MW(btnCancel.PerformClick);
+                }
+            }
+
+            MW(() => wizard.Dispose());
         }
 
         [Test]

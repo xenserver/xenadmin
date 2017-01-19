@@ -31,24 +31,23 @@ namespace XenAdmin.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReconnectAsDialog));
             this.labelBlurb = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxAdPicture = new System.Windows.Forms.PictureBox();
             this.labelUsername = new System.Windows.Forms.Label();
-            this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.pictureBoxAdPicture = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdPicture)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBlurb
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
             this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb, 2);
-            this.labelBlurb.MinimumSize = new System.Drawing.Size(397, 80);
             this.labelBlurb.Name = "labelBlurb";
             // 
             // tableLayoutPanel1
@@ -63,21 +62,28 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
+            // pictureBoxAdPicture
+            // 
+            resources.ApplyResources(this.pictureBoxAdPicture, "pictureBoxAdPicture");
+            this.pictureBoxAdPicture.Image = global::XenAdmin.Properties.Resources._000_User_h32bit_16;
+            this.pictureBoxAdPicture.Name = "pictureBoxAdPicture";
+            this.pictureBoxAdPicture.TabStop = false;
+            // 
             // labelUsername
             // 
             resources.ApplyResources(this.labelUsername, "labelUsername");
             this.labelUsername.Name = "labelUsername";
-            // 
-            // labelPassword
-            // 
-            resources.ApplyResources(this.labelPassword, "labelPassword");
-            this.labelPassword.Name = "labelPassword";
             // 
             // textBoxUsername
             // 
             resources.ApplyResources(this.textBoxUsername, "textBoxUsername");
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
+            // 
+            // labelPassword
+            // 
+            resources.ApplyResources(this.labelPassword, "labelPassword");
+            this.labelPassword.Name = "labelPassword";
             // 
             // textBoxPassword
             // 
@@ -108,13 +114,6 @@ namespace XenAdmin.Dialogs
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // pictureBoxAdPicture
-            // 
-            resources.ApplyResources(this.pictureBoxAdPicture, "pictureBoxAdPicture");
-            this.pictureBoxAdPicture.Image = global::XenAdmin.Properties.Resources._000_User_h32bit_16;
-            this.pictureBoxAdPicture.Name = "pictureBoxAdPicture";
-            this.pictureBoxAdPicture.TabStop = false;
-            // 
             // ReconnectAsDialog
             // 
             this.AcceptButton = this.buttonOK;
@@ -125,8 +124,8 @@ namespace XenAdmin.Dialogs
             this.Name = "ReconnectAsDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdPicture)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

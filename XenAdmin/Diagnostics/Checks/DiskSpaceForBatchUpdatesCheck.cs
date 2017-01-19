@@ -44,11 +44,11 @@ using System.Linq;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class DiskSpaceForBatchUpdatesCheck : Check
+    class DiskSpaceForAutomatedUpdatesCheck : Check
     {
         private readonly long size = 0;
 
-        public DiskSpaceForBatchUpdatesCheck(Host host, long size)
+        public DiskSpaceForAutomatedUpdatesCheck(Host host, long size)
             : base(host)
         {
             this.size = size;
@@ -64,7 +64,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             if (Helpers.CreamOrGreater(Host.Connection))
             {
-                var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.autoupdate);
+                var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
 
                 try
                 {

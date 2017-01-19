@@ -51,7 +51,7 @@ namespace XenAdmin.Commands
 
         public override string ContextMenuText { get { return Messages.VAPP_START_CONTEXT_MENU; } }
 
-        public override Image MenuImage { get { return Resources._001_PowerOn_h32bit_16; } }
+        public override Image MenuImage { get { return Images.StaticImages._001_PowerOn_h32bit_16; } }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {

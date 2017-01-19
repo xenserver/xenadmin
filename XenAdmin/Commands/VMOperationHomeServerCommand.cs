@@ -51,7 +51,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_ServerHome_h32bit_16;
+                return Images.StaticImages._000_ServerHome_h32bit_16;
             }
         }
     }

@@ -322,13 +322,13 @@
     <value>3, 109</value>
   </data>
   <data name="labelAdvancedOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="labelAdvancedOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="labelAdvancedOptions.Text" xml:space="preserve">
-    <value>&amp;User name:</value>
+    <value>&amp;Username:</value>
   </data>
   <data name="labelAdvancedOptions.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

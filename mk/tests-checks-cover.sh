@@ -30,13 +30,31 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
-set -eu
+set -u
 
-ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-cd ${ROOT}/xenadmin-ref.hg && hg out && hg push
-	
-echo "INFO: Pushing xenadmin-ref.hg succeeded at "
-date
+net stop ncover || true # Stop ncover if it's running, so we have a known good service
+net start ncover
 
-set +u
+echo "Running + monitoring coverage of tests..."
+
+export NCOVER_USING_PROJECT="${NCOVER_PROJECT_ID}"
+export NCOVER_BUILD_ID="${BUILD_ID}"
+
+source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/tests-checks.sh"
+
+ncover summarize --project="XC Tests" --wait
+
+echo "Generating coverage report..."
+ncover report --project="XC Tests" --execution="${BUILD_ID}" --file="$(cygpath -d ${TEST_DIR})\coverage.html" --detail=method
+
+net stop ncover || true # Stop ncover, ignore the error if it's already stopped
+
+cp ${TEST_DIR}/coverage.html ${OUTPUT_DIR}
+
+
+
+
+
+

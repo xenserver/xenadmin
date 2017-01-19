@@ -47,7 +47,7 @@ namespace XenAdmin.Core
         
         /// <summary>
         /// A host of this version is considered up-to-date when it has all the patches in this list installed on it
-        /// <value>null</value> means that the list is not known (batch updates/automatic updating is not supported)
+        /// <value>null</value> means that the list is not known (automated updates are not supported)
         /// </summary>
         public List<XenServerPatch> MinimalPatches;
         

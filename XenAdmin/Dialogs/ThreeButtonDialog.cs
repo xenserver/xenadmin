@@ -32,7 +32,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Threading;
 using System.Collections.Generic;
 
 
@@ -71,7 +70,6 @@ namespace XenAdmin.Dialogs
         /// Gives you a dialog with a single OK button.
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="helpName"></param>
         public ThreeButtonDialog(Details properties)
             : this(properties, ButtonOK)
         {
@@ -147,6 +145,24 @@ namespace XenAdmin.Dialogs
             {
                 button3.Visible = false;
             }
+        }
+
+        public bool ShowCheckbox
+        {
+            get { return checkBoxOption.Visible; }
+            set { checkBoxOption.Visible = value; }
+        }
+
+        public string CheckboxCaption
+        {
+            get { return checkBoxOption.Text; }
+            set { checkBoxOption.Text = value; }
+        }
+
+        public bool IsCheckBoxChecked
+        {
+            get { return checkBoxOption.Checked; }
+            set { checkBoxOption.Checked = value; }
         }
 
         /// <summary>

@@ -88,6 +88,8 @@ namespace XenAdmin.Dialogs
 
             LoadServers();
             viewPvsServersButton.Enabled = PvsSite != null && PvsSite.servers.Count > 0;
+            cacheStorageInUseInfoIcon.Visible = cacheStorageInUseInfoLabel.Visible = rows.Any(row => row.ReadOnly);
+            memoryOnlyInfoIcon.Visible = memoryOnlyInfoLabel.Visible = rows.Any(row => !row.ReadOnly);
         }
 
         public bool ValidToSave

@@ -173,6 +173,11 @@ namespace XenAdmin.Wizards.GenericPages
             restoreGridHomeServerSelection = (direction == PageLoadedDirection.Back);
 		}
 
+        public override void SelectDefaultControl()
+        {
+            m_comboBoxConnection.Select();
+        }
+
         public override bool EnableNext()
         {
             return m_buttonNextEnabled;

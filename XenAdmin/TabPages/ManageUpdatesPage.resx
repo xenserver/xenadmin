@@ -265,7 +265,7 @@
     <value>89, 23</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
-    <value>Filter by D&amp;ate</value>
+    <value>Filter by &amp;Date</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 26</value>
@@ -310,7 +310,7 @@
     <value>161, 22</value>
   </data>
   <data name="dismissAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dism&amp;iss All</value>
+    <value>Dismiss &amp;All</value>
   </data>
   <data name="dismissSelectedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>

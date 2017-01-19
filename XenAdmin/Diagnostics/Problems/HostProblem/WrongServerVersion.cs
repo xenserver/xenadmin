@@ -56,10 +56,10 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             {
                 if (!string.IsNullOrEmpty(_versionRequired))
                 {
-                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, _versionRequired);
+                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, ServerName,_versionRequired);
                 }
 
-                return Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION;
+                return string.Format(Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION, ServerName);
             }
         }
 

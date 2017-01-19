@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Properties;
 
 namespace XenAdmin.Commands
 {
@@ -40,7 +41,7 @@ namespace XenAdmin.Commands
         }
 
         public PropertiesToolStripMenuItem(PropertiesCommand cmd)
-            : base(cmd, Messages.EDIT, Properties.Resources.edit_16)
+            : base(cmd, Messages.EDIT, Images.StaticImages.edit_16)
         { }
     }
 }
