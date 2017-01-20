@@ -38,6 +38,7 @@ using XenAPI;
 using System.Linq;
 using System.IO;
 using XenAdmin.Alerts;
+using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -371,7 +372,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             CleanUpPoolUpdates();
 
             RemoveDownloadedPatches();
-
+            Updates.CheckServerPatches();
             base.FinishWizard();
         }
 
