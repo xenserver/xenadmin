@@ -88,12 +88,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             {
                 AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
                 
-                switch ((HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod)
+                switch ((HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod)
                 {
-                    case HTTPHelper.ProxyAuthenticationMethod.Basic:
+                    case HTTP.ProxyAuthenticationMethod.Basic:
                         BasicRadioButton.Checked = true;
                         break;
-                    case HTTPHelper.ProxyAuthenticationMethod.Digest:
+                    case HTTP.ProxyAuthenticationMethod.Digest:
                         DigestRadioButton.Checked = true;
                         break;
                     default:
@@ -248,8 +248,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
                 Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
 
-                HTTPHelper.ProxyAuthenticationMethod new_auth_method = BasicRadioButton.Checked ?
-                    HTTPHelper.ProxyAuthenticationMethod.Basic : HTTPHelper.ProxyAuthenticationMethod.Digest;
+                HTTP.ProxyAuthenticationMethod new_auth_method = BasicRadioButton.Checked ?
+                    HTTP.ProxyAuthenticationMethod.Basic : HTTP.ProxyAuthenticationMethod.Digest;
                 if (Properties.Settings.Default.ProxyAuthenticationMethod != (int)new_auth_method)
                     Properties.Settings.Default.ProxyAuthenticationMethod = (int)new_auth_method;
             }
@@ -286,7 +286,7 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.ProvideProxyAuthentication,
                 Properties.Settings.Default.ProxyUsername,
                 Properties.Settings.Default.ProxyPassword,
-                (HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
+                (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
         }
 
         #endregion

@@ -52,13 +52,6 @@ namespace XenAPI
             SpecifiedProxy = 2
         }
 
-        public enum ProxyAuthenticationMethod
-        {
-            // Note that these numbers make it into user settings files, so need to be preserved.
-            Basic = 0,
-            Digest = 1
-        }
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 

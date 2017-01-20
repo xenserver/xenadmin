@@ -1054,13 +1054,13 @@ namespace XenAdmin
             foreach (var module in modulesToUnregister)
                 AuthenticationManager.Unregister(module);
 
-            var authSetting = (HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
-            if (authSetting == HTTPHelper.ProxyAuthenticationMethod.Basic)
+            var authSetting = (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
+            if (authSetting == HTTP.ProxyAuthenticationMethod.Basic)
                 AuthenticationManager.Register(BasicAuthenticationModule);
             else
                 AuthenticationManager.Register(DigestAuthenticationModule);
 
-            XenAPI.HTTP.ProxyAuthenticationMethod = authSetting;
+            XenAPI.HTTP.CurrentProxyAuthenticationMethod = authSetting;
         }
 
         private const string SplashWindowClass = "XenCenterSplash0001";

@@ -519,7 +519,7 @@ namespace XenAdmin
                     Properties.Settings.Default.ProvideProxyAuthentication,
                     Properties.Settings.Default.ProxyUsername,
                     Properties.Settings.Default.ProxyPassword,
-                    (HTTPHelper.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
+                    (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
             {
