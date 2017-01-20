@@ -48,10 +48,10 @@ namespace XenAdmin.Actions
         private bool provideProxyCredentials;
         private string proxyUsername;
         private string proxyPassword;
-        private HTTPHelper.ProxyAuthenticationMethod proxyAuthenticationMethod;
+        private HTTP.ProxyAuthenticationMethod proxyAuthenticationMethod;
 
         public TransferProxySettingsAction(HTTPHelper.ProxyStyle style, string address, int port, int timeout,
-            bool suppressHistory, bool bypassForServer, bool provideCredentials, string username, string password, HTTPHelper.ProxyAuthenticationMethod proxyAuthMethod)
+            bool suppressHistory, bool bypassForServer, bool provideCredentials, string username, string password, HTTP.ProxyAuthenticationMethod proxyAuthMethod)
             : base(null, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, suppressHistory)
         {
             proxyStyle = style;
