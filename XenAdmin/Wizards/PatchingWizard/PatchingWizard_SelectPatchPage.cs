@@ -152,7 +152,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 AutomatedUpdatesRadioButton.Checked = automatedUpdatesPossible;
                 downloadUpdateRadioButton.Checked = !automatedUpdatesPossible;
-
+                Updates.CheckServerPatches();
                 PopulatePatchesBox();
                 OnPageUpdated();
             }
