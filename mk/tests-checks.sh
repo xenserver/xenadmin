@@ -44,22 +44,6 @@ cd ${TEST_DIR} && tar xzf XenAdminTests.tgz && chmod -R 777 Release
 
 set +e
 
-{
-  # failure timeout COUNTE*DELAY = 600 seconds
-  COUNTER=60
-  DELAY=10
-  echo -en "INFO:       Aquiring GUI testing lock "
-  until [  $COUNTER -lt 1 ]; do
-     flock --conflict-exit-code 123 -w $DELAY 200
-     RESULT=$?
-     if [ "$RESULT" == "123" ]; then echo -n "."; fi
-     if [ "$?" != "0" ]; then echo "\nERROR:    Failed to aquire lock, timeout exceeded."; exit 1; fi
-     let COUNTER-=1
-  done
-
-  echo -e "\nINFO:	Lock aquired and starting execution"
-   # /output="$(cygpath -d ${TEST_DIR})\output.nunit.log"
-
 # Kill any running nunit processes.
 ps -W -s | grep nunit  | cut -b-10 | xargs kill -f || true
 
@@ -74,10 +58,6 @@ if [ $? = 143 ]
 then
   echo "Tests were terminated due to 3000 timeout."
 fi
-
-  echo "INFO:   Done, releasing lock"
-  
-} 200>/tmp/busy-gui.log
 
 set -e
 
