@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -77,6 +77,17 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanExecute);
         }
 
+        // We only need to check for IO Drivers for hosts before Ely
+        private bool AreIODriversNeededAndMissing(VM vm)
+        {
+            if (Helpers.ElyOrGreater(vm.Connection))
+            {
+                return false;
+            }
+
+            return !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
+        }
+
         private bool CanExecute(VBD vbd)
         {
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
@@ -87,7 +98,7 @@ namespace XenAdmin.Commands
                 return false;
             if (vdi.type == vdi_type.system && vbd.IsOwner)
                 return false;
-            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+            if (AreIODriversNeededAndMissing(vm))
                 return false;
             if (!vbd.currently_attached)
                 return false;
@@ -124,7 +135,7 @@ namespace XenAdmin.Commands
             if (vdi.type == vdi_type.system && vbd.IsOwner)
                 return Messages.TOOLTIP_DEACTIVATE_SYSVDI;
 
-            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+            if (AreIODriversNeededAndMissing(vm))
                 return string.Format(
                     vm.HasNewVirtualisationStates ? Messages.CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS : Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS,
                     Helpers.GetName(vm).Ellipsise(50));
@@ -150,8 +161,12 @@ namespace XenAdmin.Commands
 
                 actionsToComplete.Add(getDeactivateVBDAction(vbd));
             }
+
+            if (actionsToComplete.Count == 0)
+                return;
+
             if (actionsToComplete.Count > 1)
-                RunMultipleActions(actionsToComplete, Messages.ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
+                RunMultipleActions(actionsToComplete, Messages.ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ACTION_DEACTIVATING_MULTIPLE_VDIS_STATUS, Messages.COMPLETED, true);
             else
                 actionsToComplete[0].RunAsync();
         }

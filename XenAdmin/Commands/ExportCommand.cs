@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -55,7 +55,7 @@ namespace XenAdmin.Commands
             Pool poolAncestor = selection.PooAncestorFromConnection;
 
             if ((poolAncestor != null || hostAncestor != null) //CA-61207: this check ensures there's no cross-pool selection
-                && (selection.FirstIsPool || selection.FirstIsHost || selection.FirstIsRealVM || selection.FirstIsVMappliance))
+                && (selection.FirstIs<Pool>() || selection.FirstIs<Host>() || selection.FirstIsRealVM || selection.FirstIs<VM_appliance>()))
             {
 				if (selection.AllItemsAre<VM>())
 					return selection.AtLeastOneXenObjectCan<VM>(CanExportVm);

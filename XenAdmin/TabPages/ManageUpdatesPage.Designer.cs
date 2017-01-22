@@ -16,6 +16,7 @@
             if (disposing)
             {
                 XenAdmin.Core.Updates.DeregisterCollectionChanged(UpdatesCollectionChanged);
+                XenAdmin.Core.Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
                 XenAdmin.Core.Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
                 XenAdmin.Core.Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
 
@@ -150,6 +151,7 @@
             this.tableLayoutPanel3.Controls.Add(this.checkForUpdatesNowButton, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.Resize += new System.EventHandler(this.tableLayoutPanel3_Resize);
             // 
             // checkForUpdatesNowButton
             // 

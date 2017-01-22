@@ -412,7 +412,7 @@
     <value>2</value>
   </data>
   <data name="FastCloneDescription.Text" xml:space="preserve">
-    <value>ストレージレベルの高速ディスク クローン処理により、既存の VM を複製します。</value>
+    <value>ストレージレベルの高速ディスク クローン処理により、既存の VM を複製します</value>
   </data>
   <data name="&gt;&gt;FastCloneDescription.Name" xml:space="preserve">
     <value>FastCloneDescription</value>

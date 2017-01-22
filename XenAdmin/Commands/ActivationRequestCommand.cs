@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -96,11 +96,16 @@ namespace XenAdmin.Commands
             return (DialogResult)Program.Invoke(Program.MainWindow,
                 (DialogInvoker)delegate()
                 {
-                    return new ThreeButtonDialog(
+                    DialogResult dialogResult;
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Error, string.Format(Messages.ACTIVATION_FAILED_MESSAGE, InvisibleMessages.ACTIVATION_SERVER)),
                         "ActivationServerUnavailable",
                         new ThreeButtonDialog.TBDButton(Messages.ACTIVATION_SAVE, DialogResult.Yes),
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(Program.MainWindow);
+                        ThreeButtonDialog.ButtonCancel))
+                    {
+                        dialogResult = dlg.ShowDialog(Program.MainWindow);
+                    }
+                    return dialogResult;
                 });
         }
 

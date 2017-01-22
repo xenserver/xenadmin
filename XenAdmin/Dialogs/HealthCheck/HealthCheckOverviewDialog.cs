@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -102,7 +102,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         void Pool_BatchCollectionChanged(object sender, EventArgs e)
         {
-            LoadPools();
+            Program.Invoke(Program.MainWindow, LoadPools);
         }
         
         #region PoolRow
@@ -201,7 +201,8 @@ namespace XenAdmin.Dialogs.HealthCheck
                 var time = new DateTime(1900, 1, 1, healthCheckSettings.TimeOfDay, 0, 0);
                 return healthCheckSettings.Status == HealthCheckStatus.Enabled
                     ? string.Format(Messages.HEALTHCHECK_SCHEDULE_DESCRIPTION, healthCheckSettings.IntervalInWeeks,
-                                    healthCheckSettings.DayOfWeek, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true))
+                                    HelpersGUI.DayOfWeekToString(healthCheckSettings.DayOfWeek, true),
+                                    HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true))
                     : string.Empty;
             }
         }

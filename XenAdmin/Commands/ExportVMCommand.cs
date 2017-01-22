@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -134,12 +134,16 @@ namespace XenAdmin.Commands
                             string msg = string.Format(Messages.CONFIRM_EXPORT_NOT_ENOUGH_MEMORY, Util.DiskSizeString((long)neededSpace),
                                 Util.DiskSizeString((long)freeSpace), vm.Name);
 
-                            DialogResult dr = new ThreeButtonDialog(
+                            DialogResult dr;
+                            using (var d = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
                                 "ExportVmDialogInsufficientDiskSpace",
                                 new ThreeButtonDialog.TBDButton(Messages.CONTINUE_WITH_EXPORT, DialogResult.OK),
                                 new ThreeButtonDialog.TBDButton(Messages.CHOOSE_ANOTHER_DESTINATION, DialogResult.Retry),
-                                ThreeButtonDialog.ButtonCancel).ShowDialog(Parent);
+                                ThreeButtonDialog.ButtonCancel))
+                            {
+                                dr = d.ShowDialog(Parent);
+                            }
 
                             if (dr == DialogResult.Retry)
                             {
@@ -155,12 +159,16 @@ namespace XenAdmin.Commands
                             string msg = string.Format(Messages.CONFIRM_EXPORT_FAT, Util.DiskSizeString((long)neededSpace),
                                 Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name);
 
-                            DialogResult dr = new ThreeButtonDialog(
+                            DialogResult dr;
+                            using (var d = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
                                 "ExportVmDialogFSLimitExceeded",
                                 new ThreeButtonDialog.TBDButton(Messages.CONTINUE_WITH_EXPORT, DialogResult.OK),
                                 new ThreeButtonDialog.TBDButton(Messages.CHOOSE_ANOTHER_DESTINATION, DialogResult.Retry),
-                                ThreeButtonDialog.ButtonCancel).ShowDialog(Parent);
+                                ThreeButtonDialog.ButtonCancel))
+                            {
+                                dr = d.ShowDialog(Parent);
+                            }
  
                             if (dr == DialogResult.Retry)
                             {

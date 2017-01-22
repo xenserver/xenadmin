@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -84,6 +84,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 listBoxCifsSRs.SetMustSelectUUID(SrWizardType.UUID);
         }
 
+
+        public override void SelectDefaultControl()
+        {
+            CifsServerPathTextBox.Select();
+        }
+
         #endregion
 
         private void UpdateButtons()
@@ -147,9 +153,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 // Start probe
                 SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.smb, dconf);
-                ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(this);
+                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                {
+                    dialog.ShowCancel = true;
+                    dialog.ShowDialog(this);
+                }
 
                 if (radioButtonCifsNew.Enabled)
                     radioButtonCifsNew.Checked = true;

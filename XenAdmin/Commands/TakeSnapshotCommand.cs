@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -99,10 +99,12 @@ namespace XenAdmin.Commands
                 }
                 else
                 {
-                    new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.TAKE_SNAPSHOT_ERROR, Messages.XENCENTER))
-                       .ShowDialog(MainWindowCommandInterface.Form);
-
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.TAKE_SNAPSHOT_ERROR,
+                            Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(MainWindowCommandInterface.Form);
+                    }
                 }
             }
             return null;

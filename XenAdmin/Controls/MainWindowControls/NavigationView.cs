@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -105,7 +105,6 @@ namespace XenAdmin.Controls.MainWindowControls
             //otherwise it's too close together on XP and the icons crash into each other
 
             VirtualTreeNode n = new VirtualTreeNode(Messages.XENCENTER);
-            n.NodeFont = Program.DefaultFont;
             treeView.Nodes.Add(n);
             treeView.SelectedNode = treeView.Nodes[0];
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -41,7 +41,7 @@ using XenAdmin.Core;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Drawing;
-
+using XenAdmin.Properties;
 
 namespace XenAdmin.Commands
 {
@@ -98,10 +98,10 @@ namespace XenAdmin.Commands
                     oldDir = Directory.GetCurrentDirectory();
                     OpenFileDialog dialog = new OpenFileDialog();
                     dialog.AddExtension = true;
-                    dialog.Filter = string.Format("{0} (*.xbk)|*.xbk|{1} (*.*)|*.*", Messages.XS_BACKUP_FILES, Messages.ALL_FILES);
+                    dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*", Messages.XS_BACKUP_FILES, Branding.BACKUP, Messages.ALL_FILES);
                     dialog.FilterIndex = 0;
                     dialog.RestoreDirectory = true;
-                    dialog.DefaultExt = "xbk";
+                    dialog.DefaultExt = Branding.BACKUP;
                     dialog.CheckPathExists = false;
                     if (dialog.ShowDialog(Parent) == DialogResult.Cancel)
                         return;
@@ -118,7 +118,7 @@ namespace XenAdmin.Commands
                 SelectHostDialog hostdialog = new SelectHostDialog();
                 hostdialog.TheHost = host;
                 hostdialog.DispString = Messages.BACKUP_SELECT_HOST;
-                hostdialog.SetPicture = Properties.Resources.backup_restore_32;
+                hostdialog.SetPicture = Images.StaticImages.backup_restore_32;
                 hostdialog.HelpString = "Backup"; // dont i18n
                 hostdialog.Text = Messages.BACKUP_SELECT_HOST_TITLE;
                 hostdialog.okbutton.Text = Messages.BACKUP_SELECT_HOST_BUTTON;
@@ -153,11 +153,14 @@ namespace XenAdmin.Commands
 
             MainWindowCommandInterface.Invoke(delegate
             {
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Information,
-                       string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host)),
-                       Messages.XENCENTER)).ShowDialog(Parent);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Information,
+                        string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host)),
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             });
         }
     }

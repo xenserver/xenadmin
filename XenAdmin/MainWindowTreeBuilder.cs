@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -460,19 +460,16 @@ namespace XenAdmin
                 {
                     result.BackColor = SystemColors.Highlight;
                     result.ForeColor = SystemColors.HighlightText;
-                    result.NodeFont = Program.DefaultFont;
                 }
                 else if (grayed)
                 {
                     result.BackColor = _treeViewBackColor;
                     result.ForeColor = SystemColors.GrayText;
-                    result.NodeFont = Program.DefaultFont;
                 }
                 else
                 {
                     result.BackColor = _treeViewBackColor;
                     result.ForeColor = _treeViewForeColor;
-                    result.NodeFont = Program.DefaultFont;
                 }
 
                 return result;

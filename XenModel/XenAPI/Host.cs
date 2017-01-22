@@ -72,6 +72,7 @@ namespace XenAPI
             XenRef<SR> crash_dump_sr,
             List<XenRef<Host_crashdump>> crashdumps,
             List<XenRef<Host_patch>> patches,
+            List<XenRef<Pool_update>> updates,
             List<XenRef<PBD>> PBDs,
             List<XenRef<Host_cpu>> host_CPUs,
             Dictionary<string, string> cpu_info,
@@ -98,7 +99,9 @@ namespace XenAPI
             bool ssl_legacy,
             Dictionary<string, string> guest_VCPUs_params,
             host_display display,
-            long[] virtual_hardware_platform_versions)
+            long[] virtual_hardware_platform_versions,
+            XenRef<VM> control_domain,
+            List<XenRef<Pool_update>> updates_requiring_reboot)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -124,6 +127,7 @@ namespace XenAPI
             this.crash_dump_sr = crash_dump_sr;
             this.crashdumps = crashdumps;
             this.patches = patches;
+            this.updates = updates;
             this.PBDs = PBDs;
             this.host_CPUs = host_CPUs;
             this.cpu_info = cpu_info;
@@ -151,6 +155,8 @@ namespace XenAPI
             this.guest_VCPUs_params = guest_VCPUs_params;
             this.display = display;
             this.virtual_hardware_platform_versions = virtual_hardware_platform_versions;
+            this.control_domain = control_domain;
+            this.updates_requiring_reboot = updates_requiring_reboot;
         }
 
         /// <summary>
@@ -188,6 +194,7 @@ namespace XenAPI
             crash_dump_sr = update.crash_dump_sr;
             crashdumps = update.crashdumps;
             patches = update.patches;
+            updates = update.updates;
             PBDs = update.PBDs;
             host_CPUs = update.host_CPUs;
             cpu_info = update.cpu_info;
@@ -215,6 +222,8 @@ namespace XenAPI
             guest_VCPUs_params = update.guest_VCPUs_params;
             display = update.display;
             virtual_hardware_platform_versions = update.virtual_hardware_platform_versions;
+            control_domain = update.control_domain;
+            updates_requiring_reboot = update.updates_requiring_reboot;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -243,6 +252,7 @@ namespace XenAPI
             crash_dump_sr = proxy.crash_dump_sr == null ? null : XenRef<SR>.Create(proxy.crash_dump_sr);
             crashdumps = proxy.crashdumps == null ? null : XenRef<Host_crashdump>.Create(proxy.crashdumps);
             patches = proxy.patches == null ? null : XenRef<Host_patch>.Create(proxy.patches);
+            updates = proxy.updates == null ? null : XenRef<Pool_update>.Create(proxy.updates);
             PBDs = proxy.PBDs == null ? null : XenRef<PBD>.Create(proxy.PBDs);
             host_CPUs = proxy.host_CPUs == null ? null : XenRef<Host_cpu>.Create(proxy.host_CPUs);
             cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
@@ -270,6 +280,8 @@ namespace XenAPI
             guest_VCPUs_params = proxy.guest_VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_VCPUs_params);
             display = proxy.display == null ? (host_display) 0 : (host_display)Helper.EnumParseDefault(typeof(host_display), (string)proxy.display);
             virtual_hardware_platform_versions = proxy.virtual_hardware_platform_versions == null ? null : Helper.StringArrayToLongArray(proxy.virtual_hardware_platform_versions);
+            control_domain = proxy.control_domain == null ? null : XenRef<VM>.Create(proxy.control_domain);
+            updates_requiring_reboot = proxy.updates_requiring_reboot == null ? null : XenRef<Pool_update>.Create(proxy.updates_requiring_reboot);
         }
 
         public Proxy_Host ToProxy()
@@ -299,6 +311,7 @@ namespace XenAPI
             result_.crash_dump_sr = (crash_dump_sr != null) ? crash_dump_sr : "";
             result_.crashdumps = (crashdumps != null) ? Helper.RefListToStringArray(crashdumps) : new string[] {};
             result_.patches = (patches != null) ? Helper.RefListToStringArray(patches) : new string[] {};
+            result_.updates = (updates != null) ? Helper.RefListToStringArray(updates) : new string[] {};
             result_.PBDs = (PBDs != null) ? Helper.RefListToStringArray(PBDs) : new string[] {};
             result_.host_CPUs = (host_CPUs != null) ? Helper.RefListToStringArray(host_CPUs) : new string[] {};
             result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
@@ -326,6 +339,8 @@ namespace XenAPI
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
             result_.display = host_display_helper.ToString(display);
             result_.virtual_hardware_platform_versions = (virtual_hardware_platform_versions != null) ? Helper.LongArrayToStringArray(virtual_hardware_platform_versions) : new string[] {};
+            result_.control_domain = (control_domain != null) ? control_domain : "";
+            result_.updates_requiring_reboot = (updates_requiring_reboot != null) ? Helper.RefListToStringArray(updates_requiring_reboot) : new string[] {};
             return result_;
         }
 
@@ -359,6 +374,7 @@ namespace XenAPI
             crash_dump_sr = Marshalling.ParseRef<SR>(table, "crash_dump_sr");
             crashdumps = Marshalling.ParseSetRef<Host_crashdump>(table, "crashdumps");
             patches = Marshalling.ParseSetRef<Host_patch>(table, "patches");
+            updates = Marshalling.ParseSetRef<Pool_update>(table, "updates");
             PBDs = Marshalling.ParseSetRef<PBD>(table, "PBDs");
             host_CPUs = Marshalling.ParseSetRef<Host_cpu>(table, "host_CPUs");
             cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
@@ -386,6 +402,8 @@ namespace XenAPI
             guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
             display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
             virtual_hardware_platform_versions = Marshalling.ParseLongArray(table, "virtual_hardware_platform_versions");
+            control_domain = Marshalling.ParseRef<VM>(table, "control_domain");
+            updates_requiring_reboot = Marshalling.ParseSetRef<Pool_update>(table, "updates_requiring_reboot");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -421,6 +439,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._crash_dump_sr, other._crash_dump_sr) &&
                 Helper.AreEqual2(this._crashdumps, other._crashdumps) &&
                 Helper.AreEqual2(this._patches, other._patches) &&
+                Helper.AreEqual2(this._updates, other._updates) &&
                 Helper.AreEqual2(this._PBDs, other._PBDs) &&
                 Helper.AreEqual2(this._host_CPUs, other._host_CPUs) &&
                 Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
@@ -447,7 +466,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._ssl_legacy, other._ssl_legacy) &&
                 Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
                 Helper.AreEqual2(this._display, other._display) &&
-                Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions);
+                Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
+                Helper.AreEqual2(this._control_domain, other._control_domain) &&
+                Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -506,6 +527,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_display, server._display))
                 {
                     Host.set_display(session, opaqueRef, _display);
+                }
+                if (!Helper.AreEqual2(_ssl_legacy, server._ssl_legacy))
+                {
+                    Host.set_ssl_legacy(session, opaqueRef, _ssl_legacy);
                 }
 
                 return null;
@@ -800,12 +825,25 @@ namespace XenAPI
         /// <summary>
         /// Get the patches field of the given host.
         /// First published in XenServer 4.0.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("")]
         public static List<XenRef<Host_patch>> get_patches(Session session, string _host)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_get_patches(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the updates field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<Pool_update>> get_updates(Session session, string _host)
+        {
+            return XenRef<Pool_update>.Create(session.proxy.host_get_updates(session.uuid, (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
@@ -1103,6 +1141,28 @@ namespace XenAPI
         public static long[] get_virtual_hardware_platform_versions(Session session, string _host)
         {
             return Helper.StringArrayToLongArray(session.proxy.host_get_virtual_hardware_platform_versions(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the control_domain field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<VM> get_control_domain(Session session, string _host)
+        {
+            return XenRef<VM>.Create(session.proxy.host_get_control_domain(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the updates_requiring_reboot field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<Pool_update>> get_updates_requiring_reboot(Session session, string _host)
+        {
+            return XenRef<Pool_update>.Create(session.proxy.host_get_updates_requiring_reboot(session.uuid, (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
@@ -2142,6 +2202,42 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Return true if the extension is available on the host
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_name">The name of the API call</param>
+        public static bool has_extension(Session session, string _host, string _name)
+        {
+            return (bool)session.proxy.host_has_extension(session.uuid, (_host != null) ? _host : "", (_name != null) ? _name : "").parse();
+        }
+
+        /// <summary>
+        /// Return true if the extension is available on the host
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_name">The name of the API call</param>
+        public static XenRef<Task> async_has_extension(Session session, string _host, string _name)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_has_extension(session.uuid, (_host != null) ? _host : "", (_name != null) ? _name : "").parse());
+        }
+
+        /// <summary>
+        /// Call a XenAPI extension on this host
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_call">Rpc call for the extension</param>
+        public static string call_extension(Session session, string _host, string _call)
+        {
+            return (string)session.proxy.host_call_extension(session.uuid, (_host != null) ? _host : "", (_call != null) ? _call : "").parse();
+        }
+
+        /// <summary>
         /// This call queries the host's clock for the current time
         /// First published in XenServer 5.0.
         /// </summary>
@@ -2921,6 +3017,25 @@ namespace XenAPI
         private List<XenRef<Host_patch>> _patches;
 
         /// <summary>
+        /// Set of updates
+        /// First published in .
+        /// </summary>
+        public virtual List<XenRef<Pool_update>> updates
+        {
+            get { return _updates; }
+            set
+            {
+                if (!Helper.AreEqual(value, _updates))
+                {
+                    _updates = value;
+                    Changed = true;
+                    NotifyPropertyChanged("updates");
+                }
+            }
+        }
+        private List<XenRef<Pool_update>> _updates;
+
+        /// <summary>
         /// physical blockdevices
         /// </summary>
         public virtual List<XenRef<PBD>> PBDs
@@ -3426,5 +3541,43 @@ namespace XenAPI
             }
         }
         private long[] _virtual_hardware_platform_versions;
+
+        /// <summary>
+        /// The control domain (domain 0)
+        /// First published in .
+        /// </summary>
+        public virtual XenRef<VM> control_domain
+        {
+            get { return _control_domain; }
+            set
+            {
+                if (!Helper.AreEqual(value, _control_domain))
+                {
+                    _control_domain = value;
+                    Changed = true;
+                    NotifyPropertyChanged("control_domain");
+                }
+            }
+        }
+        private XenRef<VM> _control_domain;
+
+        /// <summary>
+        /// List of updates which require reboot
+        /// First published in .
+        /// </summary>
+        public virtual List<XenRef<Pool_update>> updates_requiring_reboot
+        {
+            get { return _updates_requiring_reboot; }
+            set
+            {
+                if (!Helper.AreEqual(value, _updates_requiring_reboot))
+                {
+                    _updates_requiring_reboot = value;
+                    Changed = true;
+                    NotifyPropertyChanged("updates_requiring_reboot");
+                }
+            }
+        }
+        private List<XenRef<Pool_update>> _updates_requiring_reboot;
     }
 }

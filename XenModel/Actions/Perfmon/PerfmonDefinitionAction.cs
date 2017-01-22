@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
             {
                 perfmonDefinitions.Remove(dom0_memory_usage);
 
-                var dom0Vm = theHost == null ? null : theHost.ControlDomain;
+                var dom0Vm = theHost == null ? null : theHost.ControlDomainZero;
                 if (dom0Vm != null)
                 {
                     var dom0PerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(dom0Vm).ToList();
@@ -102,7 +102,7 @@ namespace XenAdmin.Actions
             }
             else
             {
-                var dom0Vm = theHost == null ? null : theHost.ControlDomain;
+                var dom0Vm = theHost == null ? null : theHost.ControlDomainZero;
                 if (dom0Vm != null)
                 {
                     var dom0PerfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(dom0Vm).ToList();

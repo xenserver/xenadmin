@@ -42,21 +42,25 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.GraphNameTextBox = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ColumnDisplayOnGraph = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnColour = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelProgress = new System.Windows.Forms.Label();
+            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.searchTextBox = new XenAdmin.Controls.SearchTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
             this.SuspendLayout();
             // 
             // GraphNameLabel
@@ -85,18 +89,13 @@
             resources.ApplyResources(this.GraphNameTextBox, "GraphNameTextBox");
             this.GraphNameTextBox.Name = "GraphNameTextBox";
             // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.dataGridView);
-            this.panel1.Name = "panel1";
-            // 
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
+            resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -106,7 +105,6 @@
             this.ColumnName,
             this.ColumnType,
             this.ColumnColour});
-            resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
@@ -117,10 +115,10 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseDown);
-            this.dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView_SortCompare);
-            this.dataGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.datasourcesGridView_CellPainting);
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datasourcesGridView_CellClick);
+            this.dataGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.datasourcesGridView_CellPainting);
+            this.dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView_SortCompare);
+            this.dataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseDown);
             // 
             // ColumnDisplayOnGraph
             // 
@@ -167,6 +165,50 @@
             this.ColumnColour.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnColour.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // ClearAllButton
+            // 
+            resources.ApplyResources(this.ClearAllButton, "ClearAllButton");
+            this.ClearAllButton.Name = "ClearAllButton";
+            this.ClearAllButton.UseVisualStyleBackColor = true;
+            this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearAllToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            // 
+            // clearAllToolStripMenuItem
+            // 
+            this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
+            resources.ApplyResources(this.clearAllToolStripMenuItem, "clearAllToolStripMenuItem");
+            this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllToolStripMenuItem_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanel1.Controls.Add(this.labelProgress, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxProgress, 0, 0);
+            this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // labelProgress
+            // 
+            resources.ApplyResources(this.labelProgress, "labelProgress");
+            this.labelProgress.BackColor = System.Drawing.SystemColors.Window;
+            this.labelProgress.Name = "labelProgress";
+            // 
+            // pictureBoxProgress
+            // 
+            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
+            this.pictureBoxProgress.BackColor = System.Drawing.SystemColors.Window;
+            this.pictureBoxProgress.Image = global::XenAdmin.Properties.Resources.ajax_loader;
+            this.pictureBoxProgress.Name = "pictureBoxProgress";
+            this.pictureBoxProgress.TabStop = false;
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -202,25 +244,11 @@
             this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // ClearAllButton
+            // searchTextBox
             // 
-            resources.ApplyResources(this.ClearAllButton, "ClearAllButton");
-            this.ClearAllButton.Name = "ClearAllButton";
-            this.ClearAllButton.UseVisualStyleBackColor = true;
-            this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearAllToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
-            // 
-            // clearAllToolStripMenuItem
-            // 
-            this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            resources.ApplyResources(this.clearAllToolStripMenuItem, "clearAllToolStripMenuItem");
-            this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllToolStripMenuItem_Click);
+            resources.ApplyResources(this.searchTextBox, "searchTextBox");
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // GraphDetailsDialog
             // 
@@ -228,8 +256,10 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.CloseButton;
+            this.Controls.Add(this.searchTextBox);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ClearAllButton);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.GraphNameTextBox);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.CloseButton);
@@ -237,9 +267,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "GraphDetailsDialog";
             this.Load += new System.EventHandler(this.GraphDetailsDialog_Load);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,7 +283,6 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.TextBox GraphNameTextBox;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -263,6 +294,10 @@
         private System.Windows.Forms.Button ClearAllButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label labelProgress;
+        private System.Windows.Forms.PictureBox pictureBoxProgress;
+        private Controls.SearchTextBox searchTextBox;
 
     }
 }

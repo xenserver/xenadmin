@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1215,7 +1215,7 @@
     <value>XAPI セッションにログインできません。</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>プール '{0}' で WLB サーバーから VM '{1}' に対する推奨再配置情報を取得できません。</value>
+    <value>プール '{0}' で WLB サーバーから '{1}' に対する推奨再配置情報を取得できません。</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB により、プール '{0}' の最適化が必要であることが報告されました。プールの最適化モードは '{1}' で、アラートの重要度は '{2}' です。</value>
@@ -1858,5 +1858,62 @@
   </data>
   <data name="Label-host.edition-standard" xml:space="preserve">
     <value>[Citrix] [XenServer product] Standard Edition</value>
+  </data>
+  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
+    <value>必要なアップデート</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS プロキシのセットアップに失敗しました</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>PVS サイトにキャッシュ ストレージがありません</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>VM '{0}' で PVS アクセラレータをセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
+    <value>PVS アクセラレータの削除の割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
+    <value>PVS アクセラレータでヒットした割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
+    <value>PVS アクセラレータでヒットしなかった割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
+    <value>PVS アクセラレータで確認した読み取りの割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
+    <value>PVS アクセラレータの容量使用率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
+    <value>PVS アクセラレータはクライアントからのネットワーク トラフィックを確認しました</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS アクセラレータはネットワーク トラフィックを保存しました</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
+    <value>PVS アクセラレータはサーバーからのネットワーク トラフィックを確認しました</value>
+  </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
+  </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>'{0}' 読み取りスループット</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>'{0}' 読み取りの遅延</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>'{0}' 書き込みスループット</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>'{0}' 書き込みの遅延</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WixLocalization Culture="ja-JP" Codepage="932" xmlns="http://schemas.microsoft.com/wix/2006/localization">
     <String Id="Open">開く</String>
     <String Id="XVA_File">XVA ファイル</String>
@@ -10,7 +10,9 @@
     <String Id="XenServer_Backup_File">[XenServer] バックアップ ファイル</String>
     <String Id="XenServer_Update_File">[XenServer] アップデート ファイル</String>
     <String Id="XenServer_OEM_Update_File">[XenServer] OEM アップデート ファイル</String>
-    <String Id="XenCenter_Saved_Search">[XenCenter] 保存された検索条件</String>
-    <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 4 が必要です。</String>
+    <String Id="XenCenter_Saved_Search">[XenCenter] 保存済みの検索</String>
+    <String Id="Required_For_Installation">このインストールには .NET Framework 4 が必要です。</String>
     <String Id="Readme">README.TXT</String>
+	<String Id="HealthCheckDescr">サーバーから Citrix Insight Services に定期的にデータをアップロードすることにより、Citrix XenServer プールのヘルス状態の監視を有効にします。</String>
+	<String Id="HealthCheckDescrShort">Citrix XenServer プールのヘルス状態の監視を有効にします。</String>
 </WixLocalization>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -175,7 +175,7 @@
     <value>10</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>BIOS 文字列のコピー元のホスト サーバーを選択します。これにより、BIOS でロックされたオペレーティング システム (「ROK メディア」とも呼ばれます) を VM にインストールできるようになります。</value>
+    <value>BIOS 文字列のコピー元のホスト サーバーを選択します。これにより、オペレーティング システムをこれらの BIOS 文字列が必要な VM (BIOS ロックされているまたは ROK メディア使用) にインストールできるようになります。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

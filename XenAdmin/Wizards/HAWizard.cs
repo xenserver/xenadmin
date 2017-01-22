@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -31,13 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
 using XenAdmin.Wizards.HAWizard_Pages;
 using XenAPI;
 using System.Drawing;
@@ -89,11 +85,14 @@ namespace XenAdmin.Wizards
 
             if (brokenSRs.Count > 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                         SystemIcons.Warning,
                         String.Format(Messages.HA_SRS_BROKEN_WARNING, String.Join("\n", brokenSRs.ToArray())),
-                        Messages.HIGH_AVAILABILITY)).ShowDialog(this);
+                        Messages.HIGH_AVAILABILITY)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
 
             base.OnShown(e);
@@ -105,7 +104,32 @@ namespace XenAdmin.Wizards
             {
                 xenTabPageHaFinish.HeartbeatSrName = xenTabPageChooseSR.SelectedHeartbeatSR.Name;
                 xenTabPageHaFinish.Ntol = xenTabPageAssignPriorities.Ntol;
-                xenTabPageHaFinish.RestartPriorities = xenTabPageAssignPriorities.getCurrentSettings().Values;
+
+                int alwaysRestartHighPriority = 0, alwaysRestart = 0, bestEffort = 0, doNotRestart = 0;
+                foreach (VM.HA_Restart_Priority priority in xenTabPageAssignPriorities.CurrentSettings.Values)
+                {
+                    switch (priority)
+                    {
+                        case VM.HA_Restart_Priority.AlwaysRestartHighPriority:
+                            alwaysRestartHighPriority++;
+                            break;
+                        case VM.HA_Restart_Priority.AlwaysRestart:
+                        case VM.HA_Restart_Priority.Restart:
+                            alwaysRestart++;
+                            break;
+                        case VM.HA_Restart_Priority.BestEffort:
+                            bestEffort++;
+                            break;
+                        case VM.HA_Restart_Priority.DoNotRestart:
+                            doNotRestart++;
+                            break;
+                    }
+                }
+
+                xenTabPageHaFinish.AlwaysRestartHighPriority = alwaysRestartHighPriority;
+                xenTabPageHaFinish.AlwaysRestart = alwaysRestart;
+                xenTabPageHaFinish.BestEffort = bestEffort;
+                xenTabPageHaFinish.DoNotRestart = doNotRestart;
             }
         }
 

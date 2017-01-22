@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -85,6 +85,7 @@ namespace XenAdmin
         internal readonly BallooningPage BallooningPage = new BallooningPage();
         internal readonly BallooningUpsellPage BallooningUpsellPage = new BallooningUpsellPage();
         internal readonly ConsolePanel ConsolePanel = new ConsolePanel();
+        internal readonly CvmConsolePanel CvmConsolePanel = new CvmConsolePanel();
         internal readonly HAPage HAPage = new HAPage();
         internal readonly HAUpsellPage HAUpsellPage = new HAUpsellPage();
         internal readonly HomePage HomePage = new HomePage();
@@ -97,7 +98,9 @@ namespace XenAdmin
         internal readonly PhysicalStoragePage PhysicalStoragePage = new PhysicalStoragePage();
         internal readonly VMStoragePage VMStoragePage = new VMStoragePage();
         internal readonly AdPage AdPage = new AdPage();
+        internal readonly ADUpsellPage AdUpsellPage = new ADUpsellPage();
         internal readonly GpuPage GpuPage = new GpuPage();
+        internal readonly PvsPage PvsPage = new PvsPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
 
@@ -152,12 +155,14 @@ namespace XenAdmin
             components.Add(GeneralPage);
             components.Add(BallooningPage);
             components.Add(ConsolePanel);
+            components.Add(CvmConsolePanel);
             components.Add(NetworkPage);
             components.Add(HAPage);
             components.Add(HomePage);
             components.Add(WlbPage);
             components.Add(AdPage);
             components.Add(GpuPage);
+            components.Add(PvsPage);
             components.Add(SearchPage);
             components.Add(DockerProcessPage);
             components.Add(DockerDetailsPage);
@@ -170,6 +175,7 @@ namespace XenAdmin
             AddTabContents(BallooningPage, TabPageBallooning);
             AddTabContents(BallooningUpsellPage, TabPageBallooningUpsell);
             AddTabContents(ConsolePanel, TabPageConsole);
+            AddTabContents(CvmConsolePanel, TabPageCvmConsole);
             AddTabContents(NetworkPage, TabPageNetwork);
             AddTabContents(HAPage, TabPageHA);
             AddTabContents(HAUpsellPage, TabPageHAUpsell);
@@ -178,7 +184,9 @@ namespace XenAdmin
             AddTabContents(WLBUpsellPage, TabPageWLBUpsell);
             AddTabContents(PhysicalStoragePage, TabPagePhysicalStorage);
             AddTabContents(AdPage, TabPageAD);
+            AddTabContents(AdUpsellPage, TabPageADUpsell);
             AddTabContents(GpuPage, TabPageGPU);
+            AddTabContents(PvsPage, TabPagePvs);
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
             AddTabContents(DockerDetailsPage, TabPageDockerDetails);
@@ -244,8 +252,8 @@ namespace XenAdmin
 
 				if (SelectionManager.Selection.FirstIsRealVM)
 					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
-				else if (SelectionManager.Selection.FirstIsHost)
-					ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                else if (SelectionManager.Selection.FirstIs<Host>())
+                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
 
                 UnpauseVNC(sender == TheTabControl);
             }
@@ -512,11 +520,14 @@ namespace XenAdmin
             {
                 log.Error("Could not load settings.", ex);
                 Program.CloseSplash();
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)).ShowDialog(this);
+                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 Application.Exit();
                 return; // Application.Exit() does not exit the current method.
             }
@@ -763,13 +774,16 @@ namespace XenAdmin
 
                     foreach (VM vm in connection.Cache.VMs)
                     {
-                        this.ConsolePanel.closeVNCForSource(vm);
+                        ConsolePanel.closeVNCForSource(vm);
                     }
 
                     foreach (Host host in connection.Cache.Hosts)
-                        foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
-                            if (vm.is_control_domain)
-                                this.ConsolePanel.closeVNCForSource(vm);
+                    {
+                        ConsolePanel.closeVNCForSource(host.ControlDomainZero);
+
+                        foreach (VM vm in host.OtherControlDomains)
+                            CvmConsolePanel.closeVNCForSource(vm);
+                    }
 
                     connection.EndConnect();
 
@@ -866,8 +880,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate()
                     {
                         string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
-                        if (!HiddenFeatures.LinkLabelHidden)
-                            msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
+                        msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
                         string url = "https://" + connection.Hostname;
 
                         using (var dlog = new ConnectionRefusedDialog())
@@ -1360,24 +1373,27 @@ namespace XenAdmin
             bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
             bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA);
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
+            bool ad_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictAD);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
 
             bool multi = SelectionManager.Selection.Count > 1;
 
-            bool isPoolSelected = SelectionManager.Selection.FirstIsPool;
-            bool isVMSelected = SelectionManager.Selection.FirstIsVM;
-            bool isHostSelected = SelectionManager.Selection.FirstIsHost;
-            bool isSRSelected = SelectionManager.Selection.FirstIsSR;
+            bool isPoolSelected = SelectionManager.Selection.FirstIs<Pool>();
+            bool isVMSelected = SelectionManager.Selection.FirstIs<VM>();
+            bool isHostSelected = SelectionManager.Selection.FirstIs<Host>();
+            bool isSRSelected = SelectionManager.Selection.FirstIs<SR>();
+            bool isVdiSelected = SelectionManager.Selection.FirstIs<VDI>();
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
             bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
+            bool hasManyControlDomains = isHostSelected && ((Host)SelectionManager.Selection.First).HasManyControlDomains;
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML;
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isDockerContainerSelected));
+            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
             ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
@@ -1401,6 +1417,7 @@ namespace XenAdmin
             }
 
             ShowTab(TabPageConsole, !shownConsoleReplacement && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
+            ShowTab(TabPageCvmConsole, !shownConsoleReplacement && !multi && !SearchMode && isHostLive && hasManyControlDomains);
             ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
             ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
             ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
@@ -1409,7 +1426,10 @@ namespace XenAdmin
             if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell ))
                 ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
 
-            ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
+            ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
+
+            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
+                && Helpers.PvsCacheCapability(selectionConnection));
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
@@ -1723,10 +1743,11 @@ namespace XenAdmin
         private void DoLicenseAction(Host host, string filePath)
         {
             ApplyLicenseAction action = new ApplyLicenseAction(host.Connection, host, filePath);
-            ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-
-            actionProgress.Text = Messages.INSTALL_LICENSE_KEY;
-            actionProgress.ShowDialog(this);
+            using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+            {
+                actionProgress.Text = Messages.INSTALL_LICENSE_KEY;
+                actionProgress.ShowDialog(this);
+            }
         }
 
         private void dialog_HelpRequest(object sender, EventArgs e)
@@ -1760,19 +1781,29 @@ namespace XenAdmin
                     ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
-                else if (SelectionManager.Selection.FirstIsHost)
+                else if (SelectionManager.Selection.FirstIs<Host>())
                 {
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
             }
+            else if (t == TabPageCvmConsole)
+            {
+                if (SelectionManager.Selection.FirstIs<Host>())
+                {
+                    CvmConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    UnpauseVNC(e != null && sender == TheTabControl);
+                }
+            }
             else
             {
-                ConsolePanel.PauseAllViews();            
+                ConsolePanel.PauseAllViews();  
+                CvmConsolePanel.PauseAllViews();
                 
                 // Start timer for closing the VNC connection after an interval (20 seconds)
                 // when the console tab is not selected
                 ConsolePanel.StartCloseVNCTimer(ConsolePanel.activeVNCView);
+                CvmConsolePanel.StartCloseVNCTimer(CvmConsolePanel.activeVNCView);
 
                 if (t == TabPageGeneral)
                 {
@@ -1936,6 +1967,10 @@ namespace XenAdmin
                 {
                     DockerDetailsPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
                 }
+                else if (t == TabPagePvs)
+                {
+                    PvsPage.Connection = SelectionManager.Selection.GetConnectionOfFirstItem();
+                }
             }
 
             if (t == TabPagePeformance)
@@ -1965,10 +2000,14 @@ namespace XenAdmin
         private void UnpauseVNC(bool focus)
         {
             ConsolePanel.UnpauseActiveView();
+            CvmConsolePanel.UnpauseActiveView();
+
             if (focus)
             {
                 ConsolePanel.FocusActiveView();
+                CvmConsolePanel.FocusActiveView();
                 ConsolePanel.SwitchIfRequired();
+                CvmConsolePanel.SwitchIfRequired();
             }
         }
 
@@ -1977,7 +2016,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR, DockerProcess, DockerDetails
+            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails
         }
 
         public void SwitchToTab(Tab tab)
@@ -2001,6 +2040,9 @@ namespace XenAdmin
                     break;
                 case Tab.Console:
                     TheTabControl.SelectedTab = TabPageConsole;
+                    break;
+                case Tab.CvmConsole:
+                    TheTabControl.SelectedTab = TabPageCvmConsole;
                     break;
                 case Tab.Performance:
                     TheTabControl.SelectedTab = TabPagePeformance;
@@ -2135,11 +2177,14 @@ namespace XenAdmin
             }
             catch (ConfigurationErrorsException ex)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)).ShowDialog(this);
+                       Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 log.Error("Couldn't save settings");
                 log.Error(ex, ex);
             }
@@ -2366,6 +2411,8 @@ namespace XenAdmin
                 return "TabPageSearch" + modelObj;
             if (TheTabControl.SelectedTab == TabPageConsole)
                 return "TabPageConsole" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageCvmConsole)
+                return "TabPageCvmConsole" + modelObj;
             if (TheTabControl.SelectedTab == TabPageGeneral)
                 return "TabPageSettings" + modelObj;
             if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)
@@ -2388,6 +2435,8 @@ namespace XenAdmin
                 return "TabPageBallooning" + modelObj;
             if (TheTabControl.SelectedTab == TabPageAD)
                 return "TabPageAD" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageADUpsell)
+                return "TabPageADUpsell" + modelObj;
             if (TheTabControl.SelectedTab == TabPageBallooningUpsell)
                 return "TabPageBallooningUpsell";
             if (TheTabControl.SelectedTab == TabPageWLBUpsell)
@@ -2398,6 +2447,8 @@ namespace XenAdmin
                 return "TabPageDockerProcess" + modelObj;
             if (TheTabControl.SelectedTab == TabPageDockerDetails)
                 return "TabPageDockerDetails" + modelObj;
+            if (TheTabControl.SelectedTab == TabPagePvs)
+                return "TabPagePvs" + modelObj;
             return "TabPageUnknown";
         }
 
@@ -2413,21 +2464,21 @@ namespace XenAdmin
 
             if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)
             {
-                if (SelectionManager.Selection.FirstIsPool)
+                if (SelectionManager.Selection.FirstIs<Pool>())
                     return "Pool";
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                     return "Server";
-                if (SelectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIs<VM>())
                     return "VM";
-                if (SelectionManager.Selection.FirstIsSR)
+                if (SelectionManager.Selection.FirstIs<SR>())
                     return "Storage";
             }
 
             if (TheTabControl.SelectedTab == TabPageNetwork)
             {
-                if (SelectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIs<Host>())
                     return "Server";
-                if (SelectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIs<VM>())
                     return "VM";
             }
 
@@ -3035,11 +3086,15 @@ namespace XenAdmin
             var details = new ThreeButtonDialog.Details(SystemIcons.Exclamation,
                 args.Length == 0 ? msg : string.Format(msg, args), title);
 
-            var dialog = String.IsNullOrEmpty(helpName)
+            DialogResult dialogResult;
+            using (var dialog = String.IsNullOrEmpty(helpName)
                              ? new ThreeButtonDialog(details, buttons)
-                             : new ThreeButtonDialog(details, helpName, buttons);
+                             : new ThreeButtonDialog(details, helpName, buttons))
+            {
+                dialogResult = dialog.ShowDialog(parent ?? Program.MainWindow);
+            }
 
-            if (dialog.ShowDialog(parent ?? Program.MainWindow) != DialogResult.Yes)
+            if (dialogResult != DialogResult.Yes)
                 return false;
 
 
@@ -3068,11 +3123,14 @@ namespace XenAdmin
                 if (parent.Disposing || parent.IsDisposed)
                     return;
             }
-            new ThreeButtonDialog(
+            using (var dlg = new ThreeButtonDialog(
                new ThreeButtonDialog.Details(
                    SystemIcons.Warning,
                    Messages.DISCONNECTED_BEFORE_ACTION_STARTED,
-                   Messages.XENCENTER)).ShowDialog(parent);
+                   Messages.XENCENTER)))
+            {
+                dlg.ShowDialog(parent);
+            }
         }
 
         private static void Trim(object[] args)
@@ -3157,9 +3215,11 @@ namespace XenAdmin
                     {
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
-                        new ThreeButtonDialog(
-                      new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST, Messages.XENCENTER))
-                      .ShowDialog(this);
+                        using (var dlg = new ThreeButtonDialog(
+                                  new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST, Messages.XENCENTER)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
                     }
                 }
             }
@@ -3225,7 +3285,7 @@ namespace XenAdmin
         private void SetSplitterDistance()
         {
             //CA-71697: chosen min size so the tab contents are visible
-            int chosenPanel2MinSize = MinimumSize.Width / 2;
+            int chosenPanel2MinSize = MinimumSize.Width * 3 / 5;
             int min = splitContainer1.Panel1MinSize;
             int max = splitContainer1.Width - chosenPanel2MinSize;
 

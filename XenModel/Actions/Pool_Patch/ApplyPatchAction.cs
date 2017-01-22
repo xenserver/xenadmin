@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -126,11 +126,13 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             SafeToExit = false;
+
             foreach (Pool_patch patch in patches)
             {
                 foreach (Host host in hosts)
                 {
-                    ApplyPatch(host, patch);
+                    if (patch.AppliedOn(host) == DateTime.MaxValue)
+                        ApplyPatch(host, patch);
                 }
             }
         

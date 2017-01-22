@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -259,13 +259,13 @@ namespace XenAdmin.TabPages
             if (expandedState.ContainsKey(alert.uuid))
             {
                 // show the expanded arrow and the body detail
-                expanderCell.Value = Properties.Resources.expanded_triangle;
+                expanderCell.Value = Images.StaticImages.expanded_triangle;
                 detailCell.Value = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
             }
             else
             {
                 // show the expand arrow and just the title
-                expanderCell.Value = Properties.Resources.contracted_triangle;
+                expanderCell.Value = Images.StaticImages.contracted_triangle;
                 detailCell.Value = alert.Title;
             }
             appliesCell.Value = alert.AppliesTo;
@@ -400,13 +400,13 @@ namespace XenAdmin.TabPages
             if (expandedState.ContainsKey(alert.uuid))
             {
                 expandedState.Remove(alert.uuid);
-                row.Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[ColumnExpand.Index].Value = Images.StaticImages.contracted_triangle;
                 row.Cells[ColumnMessage.Index].Value = alert.Title;
             }
             else
             {
                 expandedState.Add(alert.uuid, true);
-                row.Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[ColumnExpand.Index].Value = Images.StaticImages.expanded_triangle;
                 row.Cells[ColumnMessage.Index].Value = string.Format("{0}\n\n{1}", alert.Title, alert.Description);
             }
         }
@@ -489,13 +489,24 @@ namespace XenAdmin.TabPages
             if (alert == null)
                 return;
 
-            using (var dlog = new ThreeButtonDialog(
+            if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
+            {
+                using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
-            {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                    ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissAlerts = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             DismissAlerts(new List<Alert> {(Alert) clickedRow.Tag});
@@ -503,19 +514,9 @@ namespace XenAdmin.TabPages
 
         private void tsmiDismissAll_Click(object sender, EventArgs e)
         {
-            DialogResult result;
+            DialogResult result = DialogResult.Yes;
 
-            if (!FilterIsOn)
-            {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
-                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
-                    ThreeButtonDialog.ButtonCancel))
-                {
-                    result = dlog.ShowDialog(this);
-                }
-            }
-            else
+            if (FilterIsOn)
             {
                 using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_CONTINUE),
@@ -526,26 +527,52 @@ namespace XenAdmin.TabPages
                     result = dlog.ShowDialog(this);
                 }
             }
+            else if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
+            {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
+                    new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                    ThreeButtonDialog.ButtonCancel)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissAlerts = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+                }
+            }
 
             if (result == DialogResult.Cancel)
                 return;
 
             var alerts = result == DialogResult.No
-                             ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert)
-                             : Alert.Alerts;
+                ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert)
+                : Alert.Alerts;
 
             DismissAlerts(alerts);
         }
 
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
-            using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissAlerts = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
+
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             if (GridViewAlerts.SelectedRows.Count > 0)
@@ -790,15 +817,7 @@ namespace XenAdmin.TabPages
             if (alert == null)
                 return;
 
-            try
-            {
-                Clipboard.SetText(alert.GetUpdateDetailsCSVQuotes());
-            }
-            catch (Exception ex)
-            {
-                log.Error("Exception while trying to set clipboard text.", ex);
-                log.Error(ex, ex);
-            }
+            Clip.SetClipboardText(alert.GetUpdateDetailsCSVQuotes());
         }
     }
 }

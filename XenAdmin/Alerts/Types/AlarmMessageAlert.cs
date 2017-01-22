@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -267,7 +267,8 @@ namespace XenAdmin.Alerts
                         }
                         else if (XenObject is VM)
                         {
-                            xenObject = XenObject;
+                            VM vm = (VM)XenObject;
+                            xenObject = vm.IsControlDomainZero ? XenObject.Connection.Resolve(vm.resident_on) : XenObject;
                         }
 
                         if (xenObject == null)

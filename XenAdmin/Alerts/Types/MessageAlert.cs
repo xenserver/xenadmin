@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -218,6 +218,14 @@ namespace XenAdmin.Alerts
                                        ? string.Format(FriendlyFormat(), Helpers.GetName(Helpers.GetPoolOfOne(XenObject.Connection)),
                                                        match.Groups[2], match.Groups[1])
                                        : "";
+                        }
+                        break;
+
+                    case XenAPI.Message.MessageType.PVS_PROXY_NO_CACHE_SR_AVAILABLE:
+                        var proxy = XenObject as PVS_proxy;
+                        if (proxy != null)
+                        {
+                            return string.Format(FriendlyFormat(), proxy.VM, proxy.Connection.Resolve(proxy.site));
                         }
                         break;
 

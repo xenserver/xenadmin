@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -156,9 +156,11 @@ namespace XenAdmin.Dialogs.Wlb
             EnableWLBAction action = new EnableWLBAction(_pool);
             // We will need to re-enable buttons when the action completes
             action.Completed += Program.MainWindow.action_Completed;
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
 
             Program.MainWindow.UpdateToolbars();
             return action.Succeeded;
@@ -182,9 +184,11 @@ namespace XenAdmin.Dialogs.Wlb
             string xsPassword = textboxXSPassword.Text;
 
             InitializeWLBAction action = new InitializeWLBAction(_pool, wlbUrl, wlbUserName, wlbPassword, xsUserName, xsPassword);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
 
             Program.MainWindow.UpdateToolbars();
             return action.Succeeded;

@@ -265,7 +265,7 @@
     <value>89, 23</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
-    <value>Filter by D&amp;ate</value>
+    <value>Filter by &amp;Date</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 26</value>
@@ -310,7 +310,7 @@
     <value>161, 22</value>
   </data>
   <data name="dismissAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dism&amp;iss All</value>
+    <value>Dismiss &amp;All</value>
   </data>
   <data name="dismissSelectedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
@@ -619,7 +619,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkForUpdatesNowButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 45</value>
+    <value>300, 45</value>
   </data>
   <data name="checkForUpdatesNowButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 24</value>
@@ -628,7 +628,7 @@
     <value>3</value>
   </data>
   <data name="checkForUpdatesNowButton.Text" xml:space="preserve">
-    <value>Check for &amp;Updates Now</value>
+    <value>&amp;Check for Updates Now</value>
   </data>
   <data name="checkForUpdatesNowButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -733,7 +733,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 3</value>
+    <value>260, 3</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -760,13 +760,13 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelProgress" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxProgress" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 156</value>
+    <value>27, 156</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 72</value>
+    <value>743, 72</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>

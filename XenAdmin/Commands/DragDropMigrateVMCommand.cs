@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -216,10 +216,12 @@ namespace XenAdmin.Commands
                         SR sr = cd.Connection.Resolve<SR>(vdi.SR);
                         if (sr != null && !sr.shared)
                         {
-                            new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation,
+                            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation,
                                                                                 Messages.DRAG_DROP_LOCAL_CD_LOADED,
-                                                                                Messages.DRAG_DROP_LOCAL_CD_LOADED_TITLE))
-                                .ShowDialog(MainWindowCommandInterface.Form);
+                                                                                Messages.DRAG_DROP_LOCAL_CD_LOADED_TITLE)))
+                            {
+                                dlg.ShowDialog(MainWindowCommandInterface.Form);
+                            }
                             return;
                         }
                     }

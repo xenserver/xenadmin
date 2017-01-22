@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -120,6 +120,9 @@
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
   </data>
+  <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
+    <value>指定 IP 地址与 VIF 锁定配置不符。</value>
+  </data>
   <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
     <value>已对此服务器启用外部身份验证。</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>无法执行还原，因为找不到状态分区</value>
+  </data>
+  <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
+    <value>找不到请求的更新。请再次上载更新。如果您在运行 xe update-apply 之前运行 xe update-pool-clean，则会出现此问题。 </value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 为绑定从属设备，不能插入。</value>
@@ -534,6 +540,9 @@
   <data name="INTERNAL_ERROR" xml:space="preserve">
     <value>内部错误: {0}</value>
   </data>
+  <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
+    <value>必需参数包含无效 CIDR 地址(&lt;地址&gt;/&lt;前缀长度&gt;)</value>
+  </data>
   <data name="INVALID_DEVICE" xml:space="preserve">
     <value>设备名称 {0} 无效</value>
   </data>
@@ -551,6 +560,9 @@
   </data>
   <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
     <value>上载的更新文件无效。</value>
+  </data>
+  <data name="INVALID_UPDATE" xml:space="preserve">
+    <value>上载的更新程序包无效。</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>值“{1}”对于字段“{0}”无效。</value>
@@ -623,6 +635,9 @@
   </data>
   <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
     <value>内部错误: 已尝试设置 {0}.{1}:{3}={2}，但映射 {1} 中已存在密钥 {3}。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
+    <value>动态内存范围不满足以下约束。</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>已达到此虚拟机允许使用的最大内存量。</value>
@@ -854,6 +869,24 @@
   </data>
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>只能对模板(而非常规 VM)调用置备调用。</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
+    <value>PVS 站点已为主机配置缓存存储。</value>
+  </data>
+  <data name="PVS_CACHE_STORAGE_IS_IN_USE" xml:space="preserve">
+    <value>PVS 缓存存储正由站点使用，无法删除。</value>
+  </data>
+  <data name="PVS_PROXY_ALREADY_PRESENT" xml:space="preserve">
+    <value>VIF 已与 PVS 代理相关联</value>
+  </data>
+  <data name="PVS_SERVER_ADDRESS_IN_USE" xml:space="preserve">
+    <value>指定的地址已被现有 PVS 服务器对象使用(_S)</value>
+  </data>
+  <data name="PVS_SITE_CONTAINS_RUNNING_PROXIES" xml:space="preserve">
+    <value>PVS 站点包含正在运行的代理。</value>
+  </data>
+  <data name="PVS_SITE_CONTAINS_SERVERS" xml:space="preserve">
+    <value>PVS 站点包含服务器，不能被遗忘。</value>
   </data>
   <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
     <value>您的当前角色未获授权，无法执行此操作。
@@ -1137,7 +1170,7 @@
     <value>在目标中找不到该 ISO 共享名，或者访问权限可能不正确。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
-    <value>位置字符串格式不正确。对于 NFS 目标，字符串格式必须为 SERVER:PATH，对于 SMB 目标，格式必须为 \\SERVER\PATH</value>
+    <value>位置字符串格式不正确。对于 NFS 目标，字符串格式必须为 SERVER:PATH，对于 CIFS 目标，格式必须为 \\SERVER\PATH</value>
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>本地路径无效</value>
@@ -1315,9 +1348,6 @@
   </data>
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>无法将空光盘驱动器连接到 VM。</value>
-  </data>
-  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
-    <value>空间不足，无法启用 LVHD 精简置备。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
@@ -1538,6 +1568,9 @@
   <data name="SUBJECT_CANNOT_BE_RESOLVED" xml:space="preserve">
     <value>外部目录服务无法解析使用者。</value>
   </data>
+  <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
+    <value>检查点的挂起映像不能从运行 VM 的主机进行访问</value>
+  </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>必须使用 tar 输出从 OEM 服务器检索系统状态。</value>
   </data>
@@ -1564,6 +1597,39 @@
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>所请求的 VM {0} 引导加载程序 {1} 未知</value>
+  </data>
+  <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
+    <value>已应用此更新。</value>
+  </data>
+  <data name="UPDATE_ALREADY_APPLIED_IN_POOL" xml:space="preserve">
+    <value>已将此更新应用到池中的所有主机。</value>
+  </data>
+  <data name="UPDATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>上载的更新已存在</value>
+  </data>
+  <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
+    <value>无法应用更新。请查看附加的输出。</value>
+  </data>
+  <data name="UPDATE_IS_APPLIED" xml:space="preserve">
+    <value>指定的更新已应用，不能销毁。</value>
+  </data>
+  <data name="UPDATE_POOL_APPLY_FAILED" xml:space="preserve">
+    <value>无法对以下主机应用此更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
+    <value>更新预检查阶段失败: 存在冲突的更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>更新预检查阶段失败: 服务器空间不足。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
+    <value>更新预检查阶段失败: 缺少必备的更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
+    <value>更新预检查阶段失败，出现未知错误。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
+    <value>更新预检查阶段失败: 服务器版本不正确。</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>只有本地超级用户才能执行此操作</value>
@@ -1600,9 +1666,6 @@
   </data>
   <data name="VBD_TRAY_LOCKED" xml:space="preserve">
     <value>此 VM 已锁定 DVD 驱动器托盘，因此无法弹出磁盘</value>
-  </data>
-  <data name="VBD_XENPREP_CD_IN_USE" xml:space="preserve">
-    <value>无法弹出磁盘，因为正在升级此 VM 以通过 Windows Update 接收更新。只能使用命令行取消升级。</value>
   </data>
   <data name="VCPUS_MAX_ALLOWED" xml:space="preserve">
     <value>此虚拟机已达到允许使用的最大虚拟 CPU 数。</value>
@@ -1682,6 +1745,9 @@
   <data name="VIF_NOT_IN_MAP" xml:space="preserve">
     <value>此 VIF 未映射到目标网络</value>
   </data>
+  <data name="VLAN_IN_USE" xml:space="preserve">
+    <value>无法执行操作，因为此 VLAN 已在使用中。请检查您的网络配置。</value>
+  </data>
   <data name="VLAN_TAG_INVALID" xml:space="preserve">
     <value>您尝试创建 VLAN，但提供的标记({0})无效 -- 它必须介于 0 与 4094 之间。</value>
   </data>
@@ -1745,6 +1811,9 @@
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
+  <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
+    <value>您尝试将 VM 迁移到的目标主机运行的 XenServer 版本低于源主机。</value>
+  </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM 的虚拟硬件平台版本与此主机不兼容。</value>
   </data>
@@ -1757,6 +1826,9 @@
   <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
     <value>主机不具备 VM 当前正在使用的部分 CPU 功能</value>
   </data>
+  <data name="VM_IS_IMMOBILE" xml:space="preserve">
+    <value>VM 是通过阻止其被移动的方式配置的。</value>
+  </data>
   <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
     <value>该 VM 无法单独恢复，因为它是 VM 设备的一部分。</value>
   </data>
@@ -1766,8 +1838,17 @@
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>尝试执行的操作对模板无效</value>
   </data>
+  <data name="VM_IS_USING_NESTED_VIRT" xml:space="preserve">
+    <value>此操作非法，因为 VM 使用的是嵌套虚拟化。</value>
+  </data>
+  <data name="VM_LACKS_FEATURE" xml:space="preserve">
+    <value>您尝试在缺少该功能的 VM 上进行操作。</value>
+  </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
     <value>您尝试在缺少协作关闭功能的 VM 上执行需要使用该功能的操作。</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_STATIC_IP_SETTING" xml:space="preserve">
+    <value>尝试执行的操作要求在 VM 上启用 VM static-ip-setting 功能，但 VM 缺少该功能。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
     <value>您尝试在缺少协作暂停功能的 VM 上执行需要使用该功能的操作。</value>

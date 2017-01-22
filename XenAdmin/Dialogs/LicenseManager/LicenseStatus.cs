@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -77,6 +77,16 @@ namespace XenAdmin.Dialogs
         public Host LicencedHost { get; private set; }
         private readonly AsyncServerTime serverTime = new AsyncServerTime();
         public delegate void StatusUpdatedEvent(object sender, EventArgs e);
+
+        public static bool IsInfinite(TimeSpan span)
+        {
+            return span.TotalDays >= 3653;
+        }
+
+        public static bool IsGraceLicence(TimeSpan span)
+        {
+            return span.TotalDays < 30;
+        }
 
         private IXenObject XenObject { get; set; }
 
@@ -257,12 +267,12 @@ namespace XenAdmin.Dialogs
             {
                 if (LicenseEdition == Host.Edition.Free)
                     return HostState.Free;
-                
-                if (LicenseExpiresIn.TotalDays >= 30)
+
+                if (!IsGraceLicence(LicenseExpiresIn))
                     return HostState.Licensed;
             }
 
-            if (LicenseExpiresIn.TotalDays > 3653)
+            if (IsInfinite(LicenseExpiresIn))
             {
                 return HostState.Licensed;
             }
@@ -272,7 +282,7 @@ namespace XenAdmin.Dialogs
                 return HostState.Expired;
             }
 
-            if (LicenseExpiresIn.TotalDays < 30)
+            if (IsGraceLicence(LicenseExpiresIn))
             {
                 if (InRegularGrace)
                     return  HostState.RegularGrace;

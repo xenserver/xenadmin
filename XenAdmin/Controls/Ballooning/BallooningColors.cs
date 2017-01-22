@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -39,7 +39,8 @@ namespace XenAdmin.Controls.Ballooning
         public static Color VMShinyBar_Unused = Color.Black;
         public static Color VMShinyBar_Text = Color.White;
 
-        public static Color HostShinyBar_Control = Color.DimGray;
+        public static Color HostShinyBar_Xen = Color.DarkGray;
+        public static Color HostShinyBar_ControlDomain = Color.DimGray; 
         public static Color[] HostShinyBar_VMs = { Color.MidnightBlue, Color.SteelBlue };
         public static Color HostShinyBar_Unused = Color.Black;
         public static Color HostShinyBar_Text = Color.White;

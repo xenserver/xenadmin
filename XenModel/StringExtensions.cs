@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -98,6 +98,22 @@ namespace XenAdmin
         public static string EscapeQuotes(this string s)
         {
             return s == null ? null : s.Replace("\"", "\"\"");
+        }
+
+        /// <summary>
+        /// Surround a string with a given character
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static string SurroundWith(this string s, char c)
+        {
+            if (s == null)
+            {
+                return null;
+            }
+
+            return c + s + c;
         }
     }
 }

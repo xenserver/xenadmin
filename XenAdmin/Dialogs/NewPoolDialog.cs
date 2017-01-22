@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -62,7 +62,7 @@ namespace XenAdmin.Dialogs
             customTreeViewServers.ShowImages = false;
             getAllCurrentConnections();
             ConnectionsManager.XenConnections.CollectionChanged += XenConnections_CollectionChanged;
-            poolName = generatePoolName();
+            poolName = string.Empty; //forcing user to enter something before the Next button is enabled
             selectMaster(host);
             updateButtons();
         }
@@ -121,20 +121,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private string generatePoolName()
-        {
-            List<string> poolNames = new List<string>();
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-            {
-                Pool p = Helpers.GetPoolOfOne(c);
-                if (p != null)
-                {
-                    poolNames.Add(Helpers.GetName(p));
-                }
-            }
-            return Helpers.MakeUniqueName(Messages.NEW_POOL, poolNames);
-        }
-
         private void createPool()
         {
             try
@@ -161,9 +147,9 @@ namespace XenAdmin.Dialogs
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
                     !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
                 {
-                    UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPUMASKING : Messages.UPSELL_BLURB_CPUMASKING + Messages.UPSELL_BLURB_CPUMASKING_MORE,
-                                                        InvisibleMessages.UPSELL_LEARNMOREURL_CPUMASKING);
-                    dlg.ShowDialog(this);
+                    using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPUMASKING : Messages.UPSELL_BLURB_CPUMASKING + Messages.UPSELL_BLURB_CPUMASKING_MORE,
+                                                        InvisibleMessages.UPSELL_LEARNMOREURL_CPUMASKING))
+                        dlg.ShowDialog(this);
                     return;
                 }
 

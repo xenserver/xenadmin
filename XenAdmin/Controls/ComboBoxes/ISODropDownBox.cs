@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -48,9 +48,6 @@ namespace XenAdmin.Controls
         protected bool refreshOnClose = false;
         protected bool changing = false;
         private IXenConnection _connection;
-        protected bool physicalOnly = false;
-        protected bool isoOnly = false;
-        protected bool empty = false;
         private bool noTools = false;
 
         private VDI selectedCD;
@@ -109,10 +106,10 @@ namespace XenAdmin.Controls
                 if (sr.content_type != SR.Content_Type_ISO)
                     continue;
 
-                if (physicalOnly && !sr.Physical)
+                if (DisplayPhysical && !sr.Physical)
                     continue;
 
-                if (isoOnly && (sr.Physical || (noTools && sr.IsToolsSR)))
+                if (DisplayISO && (sr.Physical || (noTools && sr.IsToolsSR)))
                     continue;
 
                 if (vm == null && sr.IsBroken())
@@ -186,45 +183,13 @@ namespace XenAdmin.Controls
             }
         }
 
-        // TODO: this means only physical. refactor to mean display physical
-        public bool Physical
-        {
-            get
-            {
-                return physicalOnly;
-            }
-            set
-            {
-                physicalOnly = value;
-            }
-        }
+        public bool DisplayPhysical { get; set; }
 
-        // TODO: this means only iso. refactor to mean display iso
-        public bool ISO
-        {
-            get
-            {
-                return isoOnly;
-            }
-            set
-            {
-                isoOnly = value;
-            }
-        }
+        public bool DisplayISO { get; set; }
 
-        public bool Empty
-        {
-            get
-            {
-                return empty;
-            }
-            set
-            {
-                empty = value;
-            }
-        }
+        public bool Empty { get; set; }
 
-        protected void AddSR(ToStringWrapper<SR> srWrapper)
+        private void AddSR(ToStringWrapper<SR> srWrapper)
         {
             Items.Add(srWrapper);
 

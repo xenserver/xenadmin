@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -323,6 +323,16 @@ namespace XenOvfTransport
                 if (!string.IsNullOrEmpty(vm.PV_ramdisk))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_ramdisk", vm.PV_ramdisk, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                }
+
+                if (vm.hardware_platform_version >= 0)
+                {
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "hardware_platform_version", vm.hardware_platform_version.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                }
+                if (vm.has_vendor_device)
+                {
+                    //serialise it with a different name to avoid it being deserialised automatically and getting the wrong type
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "VM_has_vendor_device", vm.has_vendor_device.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
 
                 if (vm.VGPUs.Count != 0)

@@ -112,25 +112,25 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AddButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AddButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="AddButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="AddButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 7</value>
+    <value>222, 7</value>
   </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -145,7 +145,7 @@
     <value>AddButton</value>
   </data>
   <data name="&gt;&gt;AddButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AddButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -160,7 +160,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="CancelButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 7</value>
+    <value>303, 7</value>
   </data>
   <data name="CancelButton2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 0, 3</value>
@@ -178,7 +178,7 @@
     <value>CancelButton2</value>
   </data>
   <data name="&gt;&gt;CancelButton2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CancelButton2.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -217,7 +217,7 @@
     <value>ServerNameLabel</value>
   </data>
   <data name="&gt;&gt;ServerNameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ServerNameLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
@@ -241,13 +241,13 @@
     <value>0, 0, 3, 0</value>
   </data>
   <data name="UsernameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 29</value>
+    <value>63, 29</value>
   </data>
   <data name="UsernameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="UsernameLabel.Text" xml:space="preserve">
-    <value>&amp;User name:</value>
+    <value>&amp;Username:</value>
   </data>
   <data name="UsernameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -256,7 +256,7 @@
     <value>UsernameLabel</value>
   </data>
   <data name="&gt;&gt;UsernameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UsernameLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
@@ -280,7 +280,7 @@
     <value>0, 0, 3, 0</value>
   </data>
   <data name="PasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 29</value>
+    <value>63, 29</value>
   </data>
   <data name="PasswordLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -295,7 +295,7 @@
     <value>PasswordLabel</value>
   </data>
   <data name="&gt;&gt;PasswordLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PasswordLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
@@ -310,10 +310,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="UsernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 13</value>
+    <value>69, 13</value>
   </data>
   <data name="UsernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 23</value>
+    <value>300, 23</value>
   </data>
   <data name="UsernameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -325,7 +325,7 @@
     <value>UsernameTextBox</value>
   </data>
   <data name="&gt;&gt;UsernameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UsernameTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
@@ -340,10 +340,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="PasswordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 42</value>
+    <value>69, 42</value>
   </data>
   <data name="PasswordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 23</value>
+    <value>300, 23</value>
   </data>
   <data name="PasswordTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -352,7 +352,7 @@
     <value>PasswordTextBox</value>
   </data>
   <data name="&gt;&gt;PasswordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PasswordTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
@@ -397,13 +397,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 68</value>
+    <value>69, 68</value>
   </data>
   <data name="labelError.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 22</value>
+    <value>300, 22</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -418,7 +418,7 @@
     <value>labelError</value>
   </data>
   <data name="&gt;&gt;labelError.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelError.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
@@ -433,7 +433,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="pictureBoxError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 71</value>
+    <value>47, 71</value>
   </data>
   <data name="pictureBoxError.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -451,7 +451,7 @@
     <value>pictureBoxError</value>
   </data>
   <data name="&gt;&gt;pictureBoxError.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxError.Parent" xml:space="preserve">
     <value>tableLayoutPanelCreds</value>
@@ -475,7 +475,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanelCreds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 93</value>
+    <value>372, 93</value>
   </data>
   <data name="tableLayoutPanelCreds.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -484,7 +484,7 @@
     <value>tableLayoutPanelCreds</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelCreds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelCreds.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -508,7 +508,7 @@
     <value>0, 5, 0, 0</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 115</value>
+    <value>378, 115</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -520,7 +520,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
@@ -546,6 +546,9 @@
   <data name="labelInstructions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 6</value>
   </data>
+  <data name="labelInstructions.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>355, 100</value>
+  </data>
   <data name="labelInstructions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 3</value>
   </data>
@@ -562,7 +565,7 @@
     <value>labelInstructions</value>
   </data>
   <data name="&gt;&gt;labelInstructions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelInstructions.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
@@ -580,7 +583,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="comboBoxClouds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 7</value>
+    <value>155, 36</value>
   </data>
   <data name="comboBoxClouds.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 23</value>
@@ -595,7 +598,7 @@
     <value>comboBoxClouds</value>
   </data>
   <data name="&gt;&gt;comboBoxClouds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;comboBoxClouds.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -622,7 +625,7 @@
     <value>0, 4, 0, 0</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 96</value>
+    <value>378, 96</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -631,7 +634,7 @@
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
@@ -655,7 +658,7 @@
     <value>5</value>
   </data>
   <data name="tableLayoutPanelType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 284</value>
+    <value>378, 284</value>
   </data>
   <data name="tableLayoutPanelType.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -664,7 +667,7 @@
     <value>tableLayoutPanelType</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -685,7 +688,7 @@
     <value>3, 3, 0, 3</value>
   </data>
   <data name="ServerNameComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 23</value>
+    <value>325, 23</value>
   </data>
   <data name="ServerNameComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -694,7 +697,7 @@
     <value>ServerNameComboBox</value>
   </data>
   <data name="&gt;&gt;ServerNameComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ServerNameComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanelType</value>
@@ -721,12 +724,12 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;Rows Styles="Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -739,7 +742,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>410, 306</value>
+    <value>400, 306</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -39,15 +39,28 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     {
         private readonly string _versionRequired;
 
-        public WrongServerVersion(Check check, string versionRequired,Host host)
+        public WrongServerVersion(Check check, string versionRequired, Host host)
             : base(check, host)
         {
             _versionRequired = versionRequired;
         }
 
+        public WrongServerVersion(Check check, Host host)
+            : base(check, host)
+        {
+        }
+
         public override string Description
         {
-            get { return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, _versionRequired); }
+            get 
+            {
+                if (!string.IsNullOrEmpty(_versionRequired))
+                {
+                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, ServerName,_versionRequired);
+                }
+
+                return string.Format(Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION, ServerName);
+            }
         }
 
         public override string HelpMessage

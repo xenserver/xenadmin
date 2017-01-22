@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -101,7 +101,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
-				if (IsUri() && !CheckDownloadFromUri())
+				if (IsUri() && !PerformCheck(CheckDownloadFromUri))
 				{
 					cancel = true;
 					base.PageLeave(direction, ref cancel);
@@ -582,9 +582,26 @@ namespace XenAdmin.Wizards.ImportWizard
 			return true;//it's not compressed, ok to continue
 		}
 
-		private bool CheckDownloadFromUri()
+		private bool CheckDownloadFromUri(out string error)
 		{
-			using (var dlog = new DownloadApplianceDialog(m_textBoxFile.Text))
+		    error = string.Empty;
+		    Uri uri;
+            try
+            {
+                uri = new Uri(m_textBoxFile.Text);
+            }
+            catch (ArgumentNullException)
+            {
+                error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI;
+                return false;
+            }
+            catch (UriFormatException)
+            {
+                error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI;
+                return false;
+            }
+
+			using (var dlog = new DownloadApplianceDialog(uri))
 			{
 				if (dlog.ShowDialog(ParentForm) == DialogResult.Yes && !string.IsNullOrEmpty(dlog.DownloadedPath))
 				{

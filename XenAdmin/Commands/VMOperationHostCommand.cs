@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
@@ -67,10 +68,11 @@ namespace XenAdmin.Commands
                 VM vm = (VM)item.XenObject;
 
                 string reason = GetVmCannotBootOnHostReason(vm, GetHost(vm), session, operation);
-                _cantBootReasons[vm] = reason;
 
                 if (reason == null)
                     _noneCanBoot = false;
+                else
+                    _cantBootReasons[vm] = reason;
             }
         }
 
@@ -83,24 +85,14 @@ namespace XenAdmin.Commands
         {
             get
             {
-                List<string> uniqueReasons = new List<string>();
+                if (_noneCanBoot)
+                {
+                    var uniqueReasons = _cantBootReasons.Values.Distinct().ToList();
 
-                foreach (VM vm in _cantBootReasons.Keys)
-                {
-                    if (!uniqueReasons.Contains(_cantBootReasons[vm]))
-                    {
-                        uniqueReasons.Add(_cantBootReasons[vm]);
-                    }
+                    if (uniqueReasons.Count == 1)
+                        return string.Format(Messages.MAINWINDOW_CONTEXT_REASON, _text, uniqueReasons[0]);
                 }
-
-                if (_noneCanBoot && uniqueReasons.Count == 1)
-                {
-                    return string.Format(Messages.MAINWINDOW_CONTEXT_REASON, _text, uniqueReasons[0]);
-                }
-                else
-                {
-                    return _text;
-                }
+                return _text;
             }
         }
 
@@ -108,13 +100,13 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return _noneCanBoot ? Resources._000_ServerDisconnected_h32bit_16 : Resources._000_TreeConnected_h32bit_16;
+                return Images.StaticImages._000_TreeConnected_h32bit_16;
             }
         }
 
         protected override bool CanExecute(VM vm)
         {
-            return vm != null && _cantBootReasons.ContainsKey(vm) && _cantBootReasons[vm] == null;
+            return vm != null && !_cantBootReasons.ContainsKey(vm);
         }
 
         private static string GetVmCannotBootOnHostReason(VM vm, Host host, Session session, vm_operations operation)
@@ -172,21 +164,23 @@ namespace XenAdmin.Commands
         protected override string GetCantExecuteReasonCore(SelectedItem item)
         {
             VM vm = item.XenObject as VM;
-            if (vm == null)
-                base.GetCantExecuteReasonCore(item);
-
-            if (_cantBootReasons.ContainsKey(vm))
-            {
+            if (vm != null && _cantBootReasons.ContainsKey(vm))
                 return _cantBootReasons[vm];
-            }
 
             return base.GetCantExecuteReasonCore(item);
         }
 
         public static bool VmCpuFeaturesIncompatibleWithHost(Host targetHost, VM vm)
         {
-            // check the CPU feature compatibility for Dundee and higher hosts 
-            if (!Helpers.DundeeOrGreater(targetHost) || !Helpers.DundeeOrGreater(vm.Connection))
+            // check the CPU feature compatibility for Dundee and higher hosts
+            if (!Helpers.DundeeOrGreater(targetHost))
+                return false;
+
+            Host home = vm.Home();
+            if (home != null && !Helpers.DundeeOrGreater(home))
+                return false;
+
+            if (home == null && !Helpers.DundeeOrGreater(vm.Connection))
                 return false;
 
             // only for running or suspended VMs

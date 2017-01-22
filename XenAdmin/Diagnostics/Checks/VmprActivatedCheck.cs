@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -43,7 +43,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             return Host.Connection.Cache.VMPPs.Count() > 0 ? new VmprActivatedWarning(this, Host) : null;
         }

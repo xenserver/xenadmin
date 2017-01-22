@@ -181,9 +181,11 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given host_patch.
         /// First published in XenServer 4.0.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
+        [Deprecated("")]
         public static Host_patch get_record(Session session, string _host_patch)
         {
             return new Host_patch((Proxy_Host_patch)session.proxy.host_patch_get_record(session.uuid, (_host_patch != null) ? _host_patch : "").parse());
@@ -192,9 +194,11 @@ namespace XenAPI
         /// <summary>
         /// Get a reference to the host_patch instance with the specified UUID.
         /// First published in XenServer 4.0.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("")]
         public static XenRef<Host_patch> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_patch_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
@@ -203,9 +207,11 @@ namespace XenAPI
         /// <summary>
         /// Get all the host_patch instances with the given label.
         /// First published in XenServer 4.0.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
+        [Deprecated("")]
         public static List<XenRef<Host_patch>> get_by_name_label(Session session, string _label)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_patch_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
@@ -413,8 +419,10 @@ namespace XenAPI
         /// <summary>
         /// Return a list of all the host_patchs known to the system.
         /// First published in XenServer 4.0.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
+        [Deprecated("")]
         public static List<XenRef<Host_patch>> get_all(Session session)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_patch_get_all(session.uuid).parse());

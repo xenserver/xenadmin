@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using XenAdmin.Actions;
 using XenAdmin.Actions.VMActions;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
@@ -68,13 +69,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private WizardMode wizardMode;
 
-        public CrossPoolMigrateWizard(IXenConnection con, IEnumerable<SelectedItem> selection, Host targetHostPreSelection, WizardMode mode)
+	    private bool _resumeAfterMigrate;
+
+        // Note that resumeAfter is currently only implemented for Migrate mode, used for resume on server functionality
+        public CrossPoolMigrateWizard(IXenConnection con, IEnumerable<SelectedItem> selection, Host targetHostPreSelection, WizardMode mode, bool resumeAfterMigrate=false)
             : base(con)
         {
             InitializeComponent();
             hostPreSelection = targetHostPreSelection;
             wizardMode = mode;
             InitialiseWizard(selection);
+            _resumeAfterMigrate = resumeAfterMigrate;
         }
 
 
@@ -202,9 +207,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             if (wizardMode == WizardMode.Copy && m_pageCopyMode.IntraPoolCopySelected)
             {
-                var copyAction = m_pageIntraPoolCopy.GetCopyAction();
-                if (copyAction != null)
-                    copyAction.RunAsync();
+                if (m_pageIntraPoolCopy.CloneVM)
+                    new VMCloneAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
+
+                else if (m_pageIntraPoolCopy.SelectedSR != null)
+                    new VMCopyAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.TheVM.GetStorageHost(false),
+                        m_pageIntraPoolCopy.SelectedSR, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
+                
                 base.FinishWizard();
                 return;
             }
@@ -235,8 +244,32 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
                 if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
                     new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
-                else 
-                    new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, wizardMode == WizardMode.Copy).RunAsync();
+                else
+                {
+                    var isCopy = wizardMode == WizardMode.Copy;
+                    var migrateAction = 
+                        new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
+
+                    if (_resumeAfterMigrate)
+                    {
+                        var title = VMCrossPoolMigrateAction.GetTitle(vm, target, isCopy);
+                        var startDescription = isCopy ? Messages.ACTION_VM_COPYING: Messages.ACTION_VM_MIGRATING;
+                        var endDescription = isCopy ? Messages.ACTION_VM_COPIED: Messages.ACTION_VM_MIGRATED;
+
+                        var actions = new List<AsyncAction>()
+                        {
+                            migrateAction,
+                            new ResumeAndStartVMsAction(vm.Connection, target, new List<VM>{vm}, new List<VM>(), null, null)
+                        };
+
+                        new MultipleAction(vm.Connection, title, startDescription, endDescription,
+                            actions, true, false, true).RunAsync();
+                    }
+                    else
+                    {
+                        migrateAction.RunAsync();
+                    }
+                }
             }
             
             base.FinishWizard();
@@ -244,7 +277,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private static void ShowErrorMessageBox(string message)
         {
-            new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)).ShowDialog(Program.MainWindow);
+            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 
         private void CreateMappingsFromSelection(IEnumerable<SelectedItem> selection)
@@ -416,7 +452,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     summary = new VmTitleSummary(summary, pair.Value);
 
                 summary = new DestinationPoolSummary(summary, pair.Value, TargetConnection);
-                summary = new HomeServerSummary(summary, pair.Value, TargetConnection);
+                summary = new TargetServerSummary(summary, pair.Value, TargetConnection);
                 summary = new TransferNetworkSummary(summary, m_pageTransferNetwork.NetworkUuid.Value);
                 summary = new StorageSummary(summary, pair.Value, xenConnection);
                 summary = new NetworkSummary(summary, pair.Value, xenConnection); 
@@ -473,9 +509,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         internal static void ShowWarningMessageBox(string message)
         {
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)).ShowDialog(
-                    Program.MainWindow);
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
+            }
         }
 	}
 }

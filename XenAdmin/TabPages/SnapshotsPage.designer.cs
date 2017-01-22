@@ -71,14 +71,13 @@ namespace XenAdmin.TabPages
             this.viewPanel = new System.Windows.Forms.Panel();
             this.snapshotTreeView = new XenAdmin.Controls.SnapshotTreeView(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.chevronButton1 = new XenAdmin.Controls.ChevronButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonView = new System.Windows.Forms.Button();
+            this.newSnapshotButton = new System.Windows.Forms.Button();
             this.toolTipContainerRevertButton = new XenAdmin.Controls.ToolTipContainer();
             this.revertButton = new System.Windows.Forms.Button();
-            this.newSnapshotButton = new System.Windows.Forms.Button();
+            this.buttonView = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.chevronButton1 = new XenAdmin.Controls.ChevronButton();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TakeSnapshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.revertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,7 +133,6 @@ namespace XenAdmin.TabPages
             ((System.ComponentModel.ISupportInitialize)(this.screenshotPictureBox)).BeginInit();
             this.viewPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.toolTipContainerRevertButton.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -150,8 +148,8 @@ namespace XenAdmin.TabPages
             // 
             // GeneralTableLayoutPanel
             // 
-            this.GeneralTableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.GeneralTableLayoutPanel, "GeneralTableLayoutPanel");
+            this.GeneralTableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
             this.GeneralTableLayoutPanel.Controls.Add(this.contentTableLayoutPanel, 0, 1);
             this.GeneralTableLayoutPanel.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.GeneralTableLayoutPanel.Name = "GeneralTableLayoutPanel";
@@ -176,7 +174,6 @@ namespace XenAdmin.TabPages
             this.panelVMPP.Controls.Add(this.linkLabelVMPPInfo);
             this.panelVMPP.Controls.Add(this.labelVMPPInfo);
             this.panelVMPP.Controls.Add(this.pictureBoxVMPPInfo);
-            this.panelVMPP.MinimumSize = new System.Drawing.Size(0, 60);
             this.panelVMPP.Name = "panelVMPP";
             // 
             // linkLabelVMPPInfo
@@ -213,7 +210,6 @@ namespace XenAdmin.TabPages
             this.propertiesTableLayoutPanel.Controls.Add(this.propertiesButton, 0, 3);
             this.propertiesTableLayoutPanel.Controls.Add(this.nameLabel, 0, 1);
             this.propertiesTableLayoutPanel.Controls.Add(this.shadowPanel1, 0, 0);
-            this.propertiesTableLayoutPanel.MaximumSize = new System.Drawing.Size(0, 450);
             this.propertiesTableLayoutPanel.Name = "propertiesTableLayoutPanel";
             // 
             // tableLayoutPanelSimpleSelection
@@ -239,8 +235,6 @@ namespace XenAdmin.TabPages
             // 
             this.folderLabel.AutoEllipsis = true;
             resources.ApplyResources(this.folderLabel, "folderLabel");
-            this.folderLabel.MaximumSize = new System.Drawing.Size(0, 50);
-            this.folderLabel.MinimumSize = new System.Drawing.Size(0, 25);
             this.folderLabel.Name = "folderLabel";
             this.folderLabel.UseMnemonic = false;
             // 
@@ -254,8 +248,6 @@ namespace XenAdmin.TabPages
             // 
             this.tagsLabel.AutoEllipsis = true;
             resources.ApplyResources(this.tagsLabel, "tagsLabel");
-            this.tagsLabel.MaximumSize = new System.Drawing.Size(0, 50);
-            this.tagsLabel.MinimumSize = new System.Drawing.Size(0, 25);
             this.tagsLabel.Name = "tagsLabel";
             this.tagsLabel.UseMnemonic = false;
             // 
@@ -263,8 +255,6 @@ namespace XenAdmin.TabPages
             // 
             this.descriptionLabel.AutoEllipsis = true;
             resources.ApplyResources(this.descriptionLabel, "descriptionLabel");
-            this.descriptionLabel.MaximumSize = new System.Drawing.Size(0, 90);
-            this.descriptionLabel.MinimumSize = new System.Drawing.Size(0, 25);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.UseMnemonic = false;
             // 
@@ -353,8 +343,6 @@ namespace XenAdmin.TabPages
             // 
             this.screenshotPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.screenshotPictureBox, "screenshotPictureBox");
-            this.screenshotPictureBox.MaximumSize = new System.Drawing.Size(100, 75);
-            this.screenshotPictureBox.MinimumSize = new System.Drawing.Size(100, 75);
             this.screenshotPictureBox.Name = "screenshotPictureBox";
             this.screenshotPictureBox.TabStop = false;
             this.screenshotPictureBox.Click += new System.EventHandler(this.screenshotPictureBox_Click);
@@ -375,73 +363,6 @@ namespace XenAdmin.TabPages
             this.snapshotTreeView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.snapshotTreeView.HGap = 42;
             this.snapshotTreeView.HideSelection = false;
-            this.snapshotTreeView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items1"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items2"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items3"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items4"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items5"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items6"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items7"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items8"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items9"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items10"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items11"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items12"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items13"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items14"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items15"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items16"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items17"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items18"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items19"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items20"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items21"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items22"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items23"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items24"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items25"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items26"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items27"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items28"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items29"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items30"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items31"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items32"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items33"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items34"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items35"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items36"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items37"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items38"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items39"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items40"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items41"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items42"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items43"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items44"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items45"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items46"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items47"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items48"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items49"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items50"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items51"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items52"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items53"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items54"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items55"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items56"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items57"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items58"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items59"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items60"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items61"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items62"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items63"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items64"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("snapshotTreeView.Items65")))});
             this.snapshotTreeView.LinkLineColor = System.Drawing.SystemColors.ActiveBorder;
             this.snapshotTreeView.Name = "snapshotTreeView";
             this.snapshotTreeView.OwnerDraw = true;
@@ -450,50 +371,34 @@ namespace XenAdmin.TabPages
             this.snapshotTreeView.TileSize = new System.Drawing.Size(80, 60);
             this.snapshotTreeView.UseCompatibleStateImageBehavior = false;
             this.snapshotTreeView.VGap = 50;
-            this.snapshotTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView1_MouseDoubleClick);
-            this.snapshotTreeView.SelectedIndexChanged += new System.EventHandler(this.view_SelectionChanged);
-            this.snapshotTreeView.Leave += new System.EventHandler(this.snapshotTreeView_Leave);
-            this.snapshotTreeView.Enter += new System.EventHandler(this.snapshotTreeView_Enter);
-            this.snapshotTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragDrop);
-            this.snapshotTreeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseMove);
-            this.snapshotTreeView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseClick);
-            this.snapshotTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragEnter);
             this.snapshotTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.snapshotTreeView_ItemDrag);
+            this.snapshotTreeView.SelectedIndexChanged += new System.EventHandler(this.view_SelectionChanged);
+            this.snapshotTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragDrop);
+            this.snapshotTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragEnter);
             this.snapshotTreeView.DragOver += new System.Windows.Forms.DragEventHandler(this.snapshotTreeView_DragOver);
+            this.snapshotTreeView.Enter += new System.EventHandler(this.snapshotTreeView_Enter);
+            this.snapshotTreeView.Leave += new System.EventHandler(this.snapshotTreeView_Leave);
+            this.snapshotTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView1_MouseDoubleClick);
+            this.snapshotTreeView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseClick);
+            this.snapshotTreeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.snapshotTreeView_MouseMove);
             // 
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.chevronButton1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.newSnapshotButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.toolTipContainerRevertButton, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonView, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.saveButton, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.deleteButton, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.chevronButton1, 6, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // chevronButton1
+            // newSnapshotButton
             // 
-            resources.ApplyResources(this.chevronButton1, "chevronButton1");
-            this.chevronButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chevronButton1.Image = global::XenAdmin.Properties.Resources.PDChevronRight;
-            this.chevronButton1.Name = "chevronButton1";
-            this.chevronButton1.ButtonClick += new System.EventHandler(this.chevronButton1_Click);
-            this.chevronButton1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.chevronButton1_KeyDown);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.buttonView);
-            this.panel1.Controls.Add(this.toolTipContainerRevertButton);
-            this.panel1.Controls.Add(this.newSnapshotButton);
-            this.panel1.Controls.Add(this.saveButton);
-            this.panel1.Controls.Add(this.deleteButton);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // buttonView
-            // 
-            this.buttonView.Image = global::XenAdmin.Properties.Resources.expanded_triangle;
-            resources.ApplyResources(this.buttonView, "buttonView");
-            this.buttonView.Name = "buttonView";
-            this.buttonView.UseVisualStyleBackColor = true;
-            this.buttonView.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.newSnapshotButton, "newSnapshotButton");
+            this.newSnapshotButton.Name = "newSnapshotButton";
+            this.newSnapshotButton.UseVisualStyleBackColor = true;
+            this.newSnapshotButton.Click += new System.EventHandler(this.takeSnapshotToolStripButton_Click);
             // 
             // toolTipContainerRevertButton
             // 
@@ -509,12 +414,13 @@ namespace XenAdmin.TabPages
             this.revertButton.UseVisualStyleBackColor = true;
             this.revertButton.Click += new System.EventHandler(this.revertButton_Click);
             // 
-            // newSnapshotButton
+            // buttonView
             // 
-            resources.ApplyResources(this.newSnapshotButton, "newSnapshotButton");
-            this.newSnapshotButton.Name = "newSnapshotButton";
-            this.newSnapshotButton.UseVisualStyleBackColor = true;
-            this.newSnapshotButton.Click += new System.EventHandler(this.takeSnapshotToolStripButton_Click);
+            this.buttonView.Image = global::XenAdmin.Properties.Resources.expanded_triangle;
+            resources.ApplyResources(this.buttonView, "buttonView");
+            this.buttonView.Name = "buttonView";
+            this.buttonView.UseVisualStyleBackColor = true;
+            this.buttonView.Click += new System.EventHandler(this.button1_Click);
             // 
             // saveButton
             // 
@@ -531,8 +437,18 @@ namespace XenAdmin.TabPages
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
+            // chevronButton1
+            // 
+            resources.ApplyResources(this.chevronButton1, "chevronButton1");
+            this.chevronButton1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chevronButton1.Image = ((System.Drawing.Image)(resources.GetObject("chevronButton1.Image")));
+            this.chevronButton1.Name = "chevronButton1";
+            this.chevronButton1.ButtonClick += new System.EventHandler(this.chevronButton1_ButtonClick);
+            this.chevronButton1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.chevronButton1_KeyDown);
+            // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TakeSnapshotToolStripMenuItem,
             this.revertToolStripMenuItem,
@@ -682,8 +598,8 @@ namespace XenAdmin.TabPages
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.view_SelectionChanged);
+            this.dataGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseClick);
             // 
             // Live
             // 
@@ -770,6 +686,7 @@ namespace XenAdmin.TabPages
             // 
             // saveMenuStrip
             // 
+            this.saveMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.saveMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveAsVMToolStripMenuItem,
             this.toolStripSeparator2,
@@ -812,6 +729,7 @@ namespace XenAdmin.TabPages
             // 
             // contextMenuStripView
             // 
+            this.contextMenuStripView.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonListView,
             this.toolStripButtonTreeView,
@@ -853,7 +771,9 @@ namespace XenAdmin.TabPages
             this.Name = "SnapshotsPage";
             this.Controls.SetChildIndex(this.pageContainerPanel, 0);
             this.pageContainerPanel.ResumeLayout(false);
+            this.pageContainerPanel.PerformLayout();
             this.GeneralTableLayoutPanel.ResumeLayout(false);
+            this.GeneralTableLayoutPanel.PerformLayout();
             this.contentTableLayoutPanel.ResumeLayout(false);
             this.panelPropertiesColumn.ResumeLayout(false);
             this.panelPropertiesColumn.PerformLayout();
@@ -871,7 +791,6 @@ namespace XenAdmin.TabPages
             this.viewPanel.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.toolTipContainerRevertButton.ResumeLayout(false);
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -932,9 +851,7 @@ namespace XenAdmin.TabPages
         private ToolStripMenuItem saveAsTemplateToolStripMenuItem;
         private ToolStripMenuItem saveAsVMToolStripMenuItem;
         private TableLayoutPanel tableLayoutPanel2;
-        private ChevronButton chevronButton1;
         private ToolStripMenuItem exportAsBackupToolStripMenuItem;
-        private Panel panel1;
         private Button newSnapshotButton;
         private Button revertButton;
         private Button saveButton;
@@ -966,6 +883,7 @@ namespace XenAdmin.TabPages
         private DataGridViewTextBoxColumn size;
         private DataGridViewTextBoxColumn tags;
         private DataGridViewTextBoxColumn description;
+        private ChevronButton chevronButton1;
 
     }
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -65,11 +65,14 @@ namespace XenAdmin.Commands
             if (failedConnections.Count > 0)
             {
                 if (!Program.RunInAutomatedTestMode)
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
                             MessageBoxMessage(failedConnections),
-                            Messages.PERMISSION_DENIED)).ShowDialog(Program.MainWindow);
+                            Messages.PERMISSION_DENIED)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
 
                 return false;  // returning false stops the command from proceeding
             }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -79,6 +79,7 @@ namespace XenAdmin.Dialogs
         private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
+        private LivePatchingEditPage LivePatchingEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -197,8 +198,11 @@ namespace XenAdmin.Dialogs
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
-                if (is_pool_or_standalone && Helpers.DundeeOrGreater(xenObject.Connection))
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
+
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
+                    ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
@@ -272,7 +276,7 @@ namespace XenAdmin.Dialogs
                 if (vbdEditPages.Count <= 0)
                     return;
 
-                ActionProgressDialog dialog = new ActionProgressDialog(
+                using (var dialog = new ActionProgressDialog(
                     new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
                         Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
                         delegate(Session session)
@@ -280,9 +284,11 @@ namespace XenAdmin.Dialogs
                             foreach (VBDEditPage page in vbdEditPages)
                                 page.UpdateDevicePositions(session);
                         }),
-                    ProgressBarStyle.Continuous);
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(Program.MainWindow);
+                    ProgressBarStyle.Continuous))
+                {
+                    dialog.ShowCancel = true;
+                    dialog.ShowDialog(Program.MainWindow);
+                }
             }
             finally
             {
@@ -557,6 +563,11 @@ namespace XenAdmin.Dialogs
         public void SelectVMCPUEditPage()
         {
             SelectPage(VCpuMemoryEditPage);
+        }
+
+        public void SelectVdiSizeLocationPage()
+        {
+            SelectPage(vdiSizeLocation);
         }
 
         #endregion

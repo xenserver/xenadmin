@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -170,6 +170,9 @@ namespace XenAdmin.Controls
 
         public bool Equals(GpuTuple other)
         {
+            if (other == null)
+                return false;
+
             if (GpuGroup == null && other.GpuGroup == null)
                 return true;
             if (GpuGroup == null || other.GpuGroup == null)
@@ -195,6 +198,10 @@ namespace XenAdmin.Controls
                     if (!VgpuTypes[i].Equals(other.VgpuTypes[i]))
                         return false;
                 }
+
+                if ((IsGpuHeaderItem && other.IsVgpuSubitem) ||
+                    (IsVgpuSubitem && other.IsGpuHeaderItem))
+                    return false;
             }
 
             return result;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -958,7 +958,7 @@
     <value>活动代理内存</value>
   </data>
   <data name="Label-performance.xapi_memory_usage_kib" xml:space="preserve">
-    <value>代理内存使用率</value>
+    <value>代理内存使用量</value>
   </data>
   <data name="Label-performance.xapi_rx" xml:space="preserve">
     <value>&lt;内部&gt; 网络 {0} 接收</value>
@@ -1170,7 +1170,7 @@
     <value>已挂起虚拟机 {0}。</value>
   </data>
   <data name="Message.body-vm_uncooperative" xml:space="preserve">
-    <value>虚拟机“{0}”在收到请求时未降低其内存使用率。</value>
+    <value>虚拟机“{0}”在收到请求时未降低其内存使用量。</value>
   </data>
   <data name="Message.body-vmpp_archive_failed_0" xml:space="preserve">
     <value>无法完成此保护策略的存档操作。</value>
@@ -1215,7 +1215,7 @@
     <value>无法登录 XAPI 会话。</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>池“{0}”无法从 WLB 检索 VM“{1}”的放置建议。</value>
+    <value>池“{0}”无法从“{1}”的 WLB 中检索放置建议。</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB 报告池“{0}”需要优化。池优化模式设置为“{1}”，警报严重程度为“{2}”。</value>
@@ -1746,7 +1746,7 @@
     <value>XenApp/XenDesktop Platinum</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
-    <value>已安装补充包</value>
+    <value>安装的补充包</value>
   </data>
   <data name="Label-VM.read_caching_status" xml:space="preserve">
     <value>状态</value>
@@ -1858,5 +1858,62 @@
   </data>
   <data name="Label-host.edition-standard" xml:space="preserve">
     <value>[Citrix] [XenServer product] Standard Edition</value>
+  </data>
+  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
+    <value>必需的更新</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS 代理设置失败</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>没有可用于 PVS 站点的缓存存储</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>无法在 VM“{0}”上设置 PVS 加速器。在站点“{1}”上未找到缓存存储。</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
+    <value>PVS 加速器逐出率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
+    <value>PVS 加速器命中率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
+    <value>PVS 加速器未命中率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
+    <value>PVS 加速器观察到的读取率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
+    <value>PVS 加速器空间利用率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
+    <value>PVS 加速器观察到的来自客户端的网络流量</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS 加速器保存的网络流量</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
+    <value>PVS 加速器观察到的来自服务器的网络流量</value>
+  </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS 加速器状态</value>
+  </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>“{0}”读取吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>“{0}”读取延迟</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>“{0}”写入吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>“{0}”写入延迟</value>
   </data>
 </root>

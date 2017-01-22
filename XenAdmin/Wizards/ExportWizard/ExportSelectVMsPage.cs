@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -138,7 +138,7 @@ namespace XenAdmin.Wizards.ExportWizard
 				m_dataGridView.Rows.Clear();
 
 				var applianceVMs = new List<XenRef<VM>>();
-				if (SelectedItems != null && SelectedItems.FirstIsVMappliance)
+                if (SelectedItems != null && SelectedItems.FirstIs<VM_appliance>())
 					applianceVMs.AddRange(((VM_appliance)SelectedItems.FirstAsXenObject).VMs);
 
 				foreach (var vm in Connection.Cache.VMs.Where(vm => IsVmExportable(vm) && MatchesSearchText(vm)))

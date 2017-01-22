@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -36,7 +36,6 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 
 using XenOvf;
@@ -49,15 +48,14 @@ namespace XenAdmin.Dialogs
 		private readonly Uri m_uri;
 		private readonly Queue<ApplianceFile> m_filesToDownload = new Queue<ApplianceFile>();
 
-		public DownloadApplianceDialog(string uri)
+        public DownloadApplianceDialog(Uri uri)
 		{
 			InitializeComponent();
 			m_pictureBoxError.Image = SystemIcons.Error.ToBitmap();
 			m_tlpProgress.Visible = false;
 			HideDownloadError();
 			m_ctrlError.Visible = false;
-
-			m_uri = new Uri(uri);
+			m_uri = uri;
 
 			m_webClient = new WebClient();
 			m_webClient.DownloadFileCompleted += webclient_DownloadFileCompleted;
@@ -189,7 +187,7 @@ namespace XenAdmin.Dialogs
 
 		private void m_buttonBrowse_Click(object sender, EventArgs e)
 		{
-			using (var dlog = new FolderBrowserDialog())
+			using (var dlog = new FolderBrowserDialog {Description = Messages.FOLDER_BROWSER_DOWNLOAD_APPLIANCE})
 			{
 				if (dlog.ShowDialog() == DialogResult.OK)
 					m_textBoxWorkspace.Text = dlog.SelectedPath;

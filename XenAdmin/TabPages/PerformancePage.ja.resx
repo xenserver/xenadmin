@@ -208,10 +208,10 @@
     <value>22</value>
   </data>
   <data name="DataEventList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 25</value>
+    <value>656, 24</value>
   </data>
   <data name="DataEventList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 298</value>
+    <value>154, 298</value>
   </data>
   <data name="DataEventList.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

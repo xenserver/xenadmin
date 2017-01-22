@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -316,6 +316,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_SUSE;
                 case VM.VmTemplateType.Ubuntu:
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU;
+                case VM.VmTemplateType.NeoKylin:
+                    return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN;
                 case VM.VmTemplateType.Citrix:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_CITRIX;
                 case VM.VmTemplateType.Solaris:
@@ -352,6 +354,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.suse_16x;
                 case VM.VmTemplateType.Ubuntu:
                     return Resources.ubuntu_16x;
+                case VM.VmTemplateType.NeoKylin:
+                    return Resources.neokylin_16x;
                 case VM.VmTemplateType.Citrix:
                     return Resources.Logo;
                 case VM.VmTemplateType.Solaris:

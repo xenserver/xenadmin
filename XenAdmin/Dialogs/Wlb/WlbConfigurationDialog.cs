@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -110,9 +110,11 @@ namespace XenAdmin.Dialogs.Wlb
         private WlbPoolConfiguration RetrieveWLBConfiguration()
         {
             RetrieveWlbConfigurationAction action = new RetrieveWlbConfigurationAction(_pool);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
 
             if (!action.Succeeded || null == action.WlbConfiguration || action.WlbConfiguration.Count == 0)
             {

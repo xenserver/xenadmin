@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -557,16 +557,8 @@ namespace XenAdmin.TabPages
             ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY) { Image = Properties.Resources.copy_16 };
             copyItem.Click += delegate
                 {
-                    try
-                    {
-                        String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);
-                        Clipboard.SetText(text);
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("Exception while trying to set clipboard text.", ex);
-                        log.Error(ex, ex);
-                    }
+                    String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);
+                    Clip.SetClipboardText(text);
                 };
             menu.Items.Add(copyItem);
             menu.Show(this, PointToClient(MousePosition));
@@ -628,14 +620,18 @@ namespace XenAdmin.TabPages
             }
 
             // Offer to disable HA
-            DialogResult dr = new ThreeButtonDialog(
+            DialogResult dr;
+            using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     null,
                     string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
                     Messages.DISABLE_HA),
                 "HADisable",
                 ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo).ShowDialog(this);
+                ThreeButtonDialog.ButtonNo))
+            {
+                dr = dlg.ShowDialog(this);
+            }
             if (dr != DialogResult.Yes)
                 return;
 

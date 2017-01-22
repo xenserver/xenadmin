@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -132,7 +132,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="labelTotal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 18</value>
+    <value>123, 18</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="labelTotal.TabIndex" type="System.Int32, mscorlib">
@@ -154,7 +154,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelTotal.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="labelUsed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -169,7 +169,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="labelUsed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 18</value>
+    <value>123, 18</value>
   </data>
   <data name="labelUsed.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -190,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelUsed.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="labelAvail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -199,13 +199,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelAvail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 36</value>
+    <value>490, 54</value>
   </data>
   <data name="labelAvail.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="labelAvail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 18</value>
+    <value>123, 18</value>
   </data>
   <data name="labelAvail.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelAvail.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="labelTotDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -235,13 +235,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelTotDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 54</value>
+    <value>490, 72</value>
   </data>
   <data name="labelTotDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="labelTotDynMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 18</value>
+    <value>123, 18</value>
   </data>
   <data name="labelTotDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -262,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelTotDynMax.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="valueTotal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -271,7 +271,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 0</value>
+    <value>646, 0</value>
   </data>
   <data name="valueTotal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -295,7 +295,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueTotal.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="valueUsed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -304,7 +304,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueUsed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 18</value>
+    <value>646, 18</value>
   </data>
   <data name="valueUsed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -328,7 +328,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueUsed.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="valueAvail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -337,7 +337,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueAvail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 36</value>
+    <value>646, 54</value>
   </data>
   <data name="valueAvail.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -361,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueAvail.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="valueTotDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="valueTotDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 54</value>
+    <value>646, 72</value>
   </data>
   <data name="valueTotDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -394,28 +394,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueTotDynMax.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="unitsTotal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>6</value>
   </data>
   <data name="unitsTotal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="unitsTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 0</value>
-  </data>
-  <data name="unitsTotal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="unitsTotal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 18</value>
+    <value>100, 23</value>
   </data>
   <data name="unitsTotal.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="unitsTotal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>21</value>
   </data>
   <data name="&gt;&gt;unitsTotal.Name" xml:space="preserve">
     <value>unitsTotal</value>
@@ -427,28 +418,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;unitsTotal.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="unitsUsed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>5</value>
   </data>
   <data name="unitsUsed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="unitsUsed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 18</value>
-  </data>
-  <data name="unitsUsed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="unitsUsed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 18</value>
+    <value>100, 23</value>
   </data>
   <data name="unitsUsed.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="unitsUsed.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;unitsUsed.Name" xml:space="preserve">
     <value>unitsUsed</value>
@@ -460,61 +442,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;unitsUsed.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="unitsAvail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="unitsAvail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="unitsAvail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 36</value>
-  </data>
-  <data name="unitsAvail.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="unitsAvail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 18</value>
-  </data>
-  <data name="unitsAvail.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="unitsAvail.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;unitsAvail.Name" xml:space="preserve">
-    <value>unitsAvail</value>
-  </data>
-  <data name="&gt;&gt;unitsAvail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;unitsAvail.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;unitsAvail.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="unitsTotDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>4</value>
   </data>
   <data name="unitsTotDynMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="unitsTotDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 54</value>
-  </data>
-  <data name="unitsTotDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="unitsTotDynMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 18</value>
+    <value>100, 23</value>
   </data>
   <data name="unitsTotDynMax.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="unitsTotDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;unitsTotDynMax.Name" xml:space="preserve">
     <value>unitsTotDynMax</value>
@@ -526,7 +466,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;unitsTotDynMax.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="labelOvercommit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -535,7 +475,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelOvercommit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 72</value>
+    <value>490, 90</value>
   </data>
   <data name="labelOvercommit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -559,6 +499,72 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelOvercommit.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelControlDomain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="labelControlDomain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelControlDomain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 36</value>
+  </data>
+  <data name="labelControlDomain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelControlDomain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 18</value>
+  </data>
+  <data name="labelControlDomain.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="labelControlDomain.Text" xml:space="preserve">
+    <value>コントロール ドメイン メモリ</value>
+  </data>
+  <data name="labelControlDomain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelControlDomain.Name" xml:space="preserve">
+    <value>labelControlDomain</value>
+  </data>
+  <data name="&gt;&gt;labelControlDomain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelControlDomain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelControlDomain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="valueControlDomain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="valueControlDomain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="valueControlDomain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>646, 36</value>
+  </data>
+  <data name="valueControlDomain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 18</value>
+  </data>
+  <data name="valueControlDomain.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="valueControlDomain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;valueControlDomain.Name" xml:space="preserve">
+    <value>valueControlDomain</value>
+  </data>
+  <data name="&gt;&gt;valueControlDomain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;valueControlDomain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;valueControlDomain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="hostShinyBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -571,7 +577,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="hostShinyBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 90</value>
+    <value>420, 111</value>
   </data>
   <data name="hostShinyBar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -586,7 +592,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;hostShinyBar.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -601,7 +607,7 @@
     <value>700, 90</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>700, 90</value>
+    <value>700, 111</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HostMemoryControls</value>

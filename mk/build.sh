@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -53,7 +53,8 @@ function check_deps ()
   fi
 }
 
-check_deps nunit-console.exe zip unzip mkisofs wget curl hg git patch mt.exe candle.exe light.exe
+check_deps nunit-console.exe zip unzip wget curl hg git patch mt.exe candle.exe light.exe
+
 if [ "${BUILD_KIND:+$BUILD_KIND}" != production ]
 then
     check_deps signtool.exe
@@ -68,48 +69,33 @@ fi
 
 set -e
 
-ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-
 XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
 source ${XENADMIN_DIR}/mk/declarations.sh
 
-# if this is an official build 
-if [ $get_BUILD_NUMBER -ne 0 ]
-then
-	cd ${ROOT_DIR}
-	#DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+run_tests()
+{
+    if [ -n "${REPORT_COVERAGE+x}" ]; then
+        if [ -z "${NCOVER_PROJECT_ID+x}" ]; then
+            echo "FATAL: REPORT_COVERAGE was set, but NCOVER_PROJECT_ID was not"
+            exit 1
+        fi
+        echo "Running tests with coverage because REPORT_COVERAGE declared"
+        source ${XENADMIN_DIR}/mk/tests-checks-cover.sh
+    else
+        source ${XENADMIN_DIR}/mk/tests-checks.sh
+    fi
+}
 
-	# now we are sure we are running from the branch root
-	#cd ${DIR}/../..
-
-	if [ -d "xenadmin-ref.hg" ]
-	then
-	  hg --cwd xenadmin-ref.hg pull -u
-	else
-	  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
-	fi
-fi
-
-if test -z "${XC_BRANDING}"; then XC_BRANDING=citrix; fi
-
-git ls-remote git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git &>-
-if [ "$?" -eq 0 ]; then
-  if [ -d "xenadmin-branding" ]
-    then
-      rm -rf xenadmin-branding 
-  fi
-  git clone git://hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-branding.git
-  if [ -d ${BRAND_REPO}/${XC_BRANDING} ]; then
-	echo "Overwriting Branding folder"
-	cp -rf ${BRAND_REPO}/${XC_BRANDING}/* ${REPO}/Branding/
-  fi
-fi
-
-# overwrite archive-push.sh file, if it exists in Branding folder
-if [ -f ${XENADMIN_DIR}/Branding/branding-archive-push.sh ]; then
-  echo "Overwriting mk/archive-push.sh with Branding/branding-archive-push.sh."
-  cp ${XENADMIN_DIR}/Branding/branding-archive-push.sh ${XENADMIN_DIR}/mk/archive-push.sh
-fi
+test_phase()
+{
+    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
+    if [ -n "${SKIP_TESTS+x}" ]; then
+        echo "Tests skipped because SKIP_TESTS declared"
+    else
+        run_tests
+    fi
+}
 
 production_jenkins_build()
 {
@@ -118,29 +104,17 @@ production_jenkins_build()
     source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
     source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
     source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
+    source ${XENADMIN_DIR}/devtools/copyrightcheck/copyrightcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-	# Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-	if [ -n "${SKIP_TESTS+x}" ]; then
-		echo "Tests skipped because SKIP_TESTS declared"
-	else
-		source ${XENADMIN_DIR}/mk/tests-checks.sh
-	fi
-    source ${XENADMIN_DIR}/mk/archive-push.sh
-    source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
+    test_phase
+    source ${XENADMIN_DIR}/mk/copy-build-output.sh
 }
 
 # Use this option if you're running on a Jenkins that is not the production Jenkins server
 private_jenkins_build()
 {
-    source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
     source ${XENADMIN_DIR}/mk/xenadmin-build.sh
-    # Skip the tests if the SKIP_TESTS variable is defined (e.g. in the Jenkins UI, add "export SKIP_TESTS=1" above the call for build script)
-	if [ -n "${SKIP_TESTS+x}" ]; then
-		echo "Tests skipped because SKIP_TESTS declared"
-	else
-		source ${XENADMIN_DIR}/mk/tests-checks.sh
-	fi
-    source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
+    test_phase
 }
 
 # Set the PRIVATE_BUILD_MODE variable in order to use the private build mode

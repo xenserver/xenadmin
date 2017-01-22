@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -199,9 +199,11 @@ namespace XenAdmin.Controls.Wlb
         private void DeleteReportSubscription(object sender, EventArgs e)
         {
             SendWlbConfigurationAction action = new SendWlbConfigurationAction(_pool, this._subscription.ToDictionary(), SendWlbConfigurationKind.DeleteReportSubscription);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
 
             if (action.Succeeded)
             {

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -429,7 +429,7 @@ namespace XenAdmin.Wizards.GenericPages
 					continue;
 
                 var sr = TargetConnection.Resolve(pbd.SR);
-				if (sr == null)
+                if (sr == null || sr.IsDetached || !sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs))
 					continue;
 
                 if ((sr.content_type.ToLower() == "iso" || sr.type.ToLower() == "iso") && !resource.SRTypeInvalid)

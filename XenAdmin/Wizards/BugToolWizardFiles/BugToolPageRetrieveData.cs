@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -107,6 +107,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             if (_action != null)
                 CancelAction();
+        }
+
+        public override void SelectDefaultControl()
+        {
+            flickerFreeListBox1.Select();
         }
 
         public List<Host> SelectedHosts { private get; set; }

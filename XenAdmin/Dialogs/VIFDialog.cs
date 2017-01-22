@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -373,9 +373,13 @@ namespace XenAdmin.Dialogs
                     var vm = xenConnection.Resolve(vif.VM);
                     if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm)
                     {
-                        DialogResult result = MacAddressDuplicationWarningDialog(
+                        DialogResult result;
+                        using (var dlg = MacAddressDuplicationWarningDialog(
                             SelectedMac,
-                            vm.NameWithLocation).ShowDialog(Program.MainWindow);
+                            vm.NameWithLocation))
+                        {
+                            result = dlg.ShowDialog(Program.MainWindow);
+                        }
                         return (result == DialogResult.Yes);
                     }
                 }

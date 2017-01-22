@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -231,6 +231,12 @@ namespace XenAdmin.SettingsPanels
                 tableLayoutPanel1.Visible = false;
                 warningsTable.Visible = false;
             }
+        }
+
+        public override void SelectDefaultControl()
+        {
+            if (comboBoxGpus.CanSelect)
+                comboBoxGpus.Select();
         }
 
         #endregion

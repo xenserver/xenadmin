@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -95,9 +95,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     if (!(selectedMaster.Connection.Session.IsLocalSuperuser || selectedMaster.Connection.Session.Roles.Any(role => role.name_label == Role.MR_ROLE_POOL_ADMIN)))
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPGRADE_WIZARD_MESSAGE, selectedMaster.Connection.Username,
-                                selectedMaster.Name), Messages.ROLLING_POOL_UPGRADE)).ShowDialog(this);
+                                selectedMaster.Name), Messages.ROLLING_POOL_UPGRADE)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
                         DeselectMaster(selectedMaster);
                         cancel = true;
                         return;
@@ -124,10 +127,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (disconnectedServerNames.Count > 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning,
                         string.Format(Messages.ROLLING_UPGRADE_DISCONNECTED_SERVER, Helpers.StringifyList(disconnectedServerNames)),
-                        Messages.ROLLING_POOL_UPGRADE)).ShowDialog(this);
+                        Messages.ROLLING_POOL_UPGRADE)))
+                {
+                    dlg.ShowDialog(this);
+                }
                 return false;
             }
             return true;
@@ -183,23 +189,29 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             BuildServerList();
         }
 
+        public override void SelectDefaultControl()
+        {
+            dataGridView1.Select();
+        }
+
         private void BuildServerList()
         {
             IList<Host> masters = SelectedMasters;
             dataGridView1.Rows.Clear();
             List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
             xenConnections.Sort();
-            var currentVersion = Program.VersionThreePart;
 
             foreach (IXenConnection xenConnection in xenConnections)
             {
                 Pool pool = Helpers.GetPool(xenConnection);
+                Pool poolOfOne = Helpers.GetPoolOfOne(xenConnection);
+
                 bool hasPool = true;
                 if (pool != null)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(pool));
 
-                    if (IsNotAnUpgradeableVersion(pool.SmallerVersionHost) && !pool.RollingUpgrade)
+                    if ((IsNotAnUpgradeableVersion(pool.SmallerVersionHost) && !pool.RollingUpgrade) || pool.IsUpgradeForbidden)
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
                     else if (masters.Contains(pool.Connection.Resolve(pool.master)))
                         dataGridView1.CheckBoxChange(index, 1);
@@ -208,12 +220,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     hasPool = false;
                 }
+
                 Host[] hosts = xenConnection.Cache.Hosts;
                 Array.Sort(hosts);
                 foreach (Host host in hosts)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(host, hasPool));
-                    if (IsNotAnUpgradeableVersion(host))
+                    if (IsNotAnUpgradeableVersion(host) || (poolOfOne != null && poolOfOne.IsUpgradeForbidden))
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
                     else if (!hasPool && masters.Contains(host))
                         dataGridView1.CheckBoxChange(index, 1);

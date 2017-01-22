@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -32,11 +32,8 @@
 
 set -eu
 
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 source ${REPO}/Branding/branding.sh
 
-if [ ${XS_BRANCH} = "trunk" ]
-then
 echo -n "Starting tests at "
 date
 
@@ -56,7 +53,7 @@ ${MYSCP} ./output/xenadmin/XenAdminTests.tgz Administrator@$ADDR:/tmp/
 ${MYTESTSSH} 'cd /tmp && tar xzf /tmp/XenAdminTests.tgz && chmod -R 777 /tmp/Release'
 
 set +e
-$VIADAEMON $ADDR 'nunit-console.exe /process=separate /noshadow /err="C:\cygwin\tmp\error.nunit.log" /timeout=40000 /output="C:\cygwin\tmp\output.nunit.log" /xml="C:\cygwin\tmp\XenAdminTests.xml" "C:\cygwin\tmp\Release\XenAdminTests.dll" "/framework=net-4.5"' &
+$VIADAEMON $ADDR 'nunit-console.exe /process=separate /noshadow /err="C:\cygwin\tmp\error.nunit.log" /timeout=40000 /output="C:\cygwin\tmp\output.nunit.log" /xml="C:\cygwin\tmp\XenAdminTests.xml" "C:\cygwin\tmp\Release\XenAdminTests.dll" "/framework=net-4.6"' &
 pid=$!
 (sleep $TIMEOUT ; kill $pid 2>/dev/null ) &
 sleeperpid=$!
@@ -74,6 +71,3 @@ ${MYSCP} Administrator@$ADDR:/tmp/XenAdminTests.xml /var/www/XenAdminTests.xml
 
 grep 'errors="0" failures="0"' /var/www/XenAdminTests.xml
 
-else
-echo "Warning: Tests skipped in this configuration."
-fi

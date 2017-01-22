@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -42,7 +42,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
         {
             Boston,
             SanibelToClearwater,
-            Creedence
+            Creedence,
+            Dundee
         }
 
         private readonly Hotfix bostonHotfix = new MultipleHotfix()
@@ -74,8 +75,16 @@ namespace XenAdmin.Diagnostics.Hotfixing
                                                              UUID = "3f92b111-0a90-4ec6-b85a-737f241a3fc1 "
                                                          };
 
+        private readonly Hotfix dundeeHotfix = new SingleHotfix
+        {
+            Filename = "RPU003",
+            UUID = "474a0f28-0d33-4c9b-9e20-52baaea8ce5e"
+        };
+
         public Hotfix Hotfix(Host host)
         {
+            if (Helpers.DundeeOrGreater(host) && !Helpers.ElyOrGreater(host))
+                return Hotfix(HotfixableServerVersion.Dundee);
             if (Helpers.CreedenceOrGreater(host) && !Helpers.DundeeOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Creedence);
             if (Helpers.SanibelOrGreater(host) && !Helpers.CreedenceOrGreater(host))
@@ -88,6 +97,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(HotfixableServerVersion version)
         {
+            if (version == HotfixableServerVersion.Dundee)
+                return dundeeHotfix; 
             if (version == HotfixableServerVersion.Creedence)
                 return creedenceHotfix; 
             if (version == HotfixableServerVersion.SanibelToClearwater)

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -64,14 +64,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     e.Graphics.DrawString(string.Format(host.IsMaster()
                                                             ? Messages.UPGRADE_POOL_MASTER_X
-                                                            : Messages.UPGRADE_SERVER_X, host.Name), Program.DefaultFont, brush, e.Bounds);
+                                                            : Messages.UPGRADE_SERVER_X, host.Name.Ellipsise(64)), Program.DefaultFont, brush, e.Bounds);
                     return;
                 }
 
                 Pool pool = item as Pool;
                 if (pool != null)
                 {
-                    e.Graphics.DrawString(string.Format(Messages.POOL_X_READYUPGRADE, pool.Name), Program.DefaultFontBold, brush, e.Bounds);
+                    e.Graphics.DrawString(string.Format(Messages.POOL_X_READYUPGRADE, pool.Name.Ellipsise(64)), Program.DefaultFontBold, brush, e.Bounds);
                     return;
                 }
 

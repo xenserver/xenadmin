@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_HOST_MAINTENANCE_MODE,Server); }
+            get { return string.Format(Messages.UPDATES_WIZARD_HOST_MAINTENANCE_MODE, ServerName); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)

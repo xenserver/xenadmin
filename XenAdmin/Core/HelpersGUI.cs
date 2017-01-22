@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -112,13 +112,17 @@ namespace XenAdmin.Core
                 else
                     msg = string.Format(msg_multiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
 
-                ThreeButtonDialog dlg = new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(icon ?? SystemIcons.Exclamation, msg),
                     helpName,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No));
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                {
+                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                }
 
-                return DialogResult.Yes == dlg.ShowDialog(Program.MainWindow);
+                return DialogResult.Yes == dialogResult;
             }
             return true;
         }
@@ -503,6 +507,23 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
+        /// Returns the full name of the specified DayOfWeek, making sure that the resultant string is localised if and only if necessary.
+        /// Localised means: in the language of the program (not in the language of the OS).
+        /// </summary>
+        public static string DayOfWeekToString(DayOfWeek dayOfWeek, bool localise)
+        {
+            if (localise)
+            {
+                Program.AssertOnEventThread();
+                // get the day of the week localized to culture of the current thread
+                return DateTimeFormatInfo.CurrentInfo.GetDayName(dayOfWeek);
+            }
+            else
+                return dayOfWeek.ToString();
+        }
+
+
+        /// <summary>
         /// The expiry date of a host's license
         /// </summary>
         /// <param name="referenceDate">Should be UTC!</param>
@@ -512,7 +533,7 @@ namespace XenAdmin.Core
             {
                 TimeSpan timeDiff = h.LicenseExpiryUTC.Subtract(referenceDate);
 
-                if (timeDiff.TotalDays < 3653)
+                if (!LicenseStatus.IsInfinite(timeDiff))
                 {
                     var expiryString = "";
                     Program.Invoke(Program.MainWindow, delegate

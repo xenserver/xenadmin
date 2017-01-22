@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -74,7 +74,7 @@ namespace XenAdmin.TabPages
 
             VM_guest_metrics_CollectionChangedWithInvoke =
                 Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
-            OtherConfigAndTagsWatcher.TagsChanged += new EventHandler(OtherConfigAndTagsWatcher_TagsChanged);
+            OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
             sections = new List<PDSection>();
             foreach (Control control in panel2.Controls)
             {
@@ -287,6 +287,7 @@ namespace XenAdmin.TabPages
             else if (xenObject is Pool)
             {
                 xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Pool_patch>(Pool_patch_BatchCollectionChanged);
+                xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Pool_update>(Pool_update_BatchCollectionChanged);
             }
         }
 
@@ -329,6 +330,7 @@ namespace XenAdmin.TabPages
             else if (xenObject is Pool)
             {
                 xenObject.Connection.Cache.RegisterBatchCollectionChanged<Pool_patch>(Pool_patch_BatchCollectionChanged);
+                xenObject.Connection.Cache.RegisterBatchCollectionChanged<Pool_update>(Pool_update_BatchCollectionChanged);
             }
         }
 
@@ -337,7 +339,12 @@ namespace XenAdmin.TabPages
             Program.BeginInvoke(this, BuildList);
         }
 
-        void OtherConfigAndTagsWatcher_TagsChanged(object sender, EventArgs e)
+        void Pool_update_BatchCollectionChanged(object sender, EventArgs e)
+        {
+            Program.BeginInvoke(this, BuildList);
+        }
+
+        void OtherConfigAndTagsWatcher_TagsChanged()
         {
             BuildList();
         }
@@ -662,8 +669,21 @@ namespace XenAdmin.TabPages
                 return;
 
             PDSection s = pdSectionUpdates;
+            List<KeyValuePair<String, String>> messages;
 
-            List<KeyValuePair<String, String>> messages = CheckServerUpdates(host);
+            bool elyOrGreater = Helpers.ElyOrGreater(host);
+
+            if (elyOrGreater)
+            {
+                // As of Ely we use host.updates_requiring_reboot to generate the list of reboot required messages
+                messages = CheckHostUpdatesRequiringReboot(host);
+            }
+            else
+            {
+                // For older versions no change to how messages are generated
+                messages = CheckServerUpdates(host);
+            }
+
             if (messages.Count > 0)
             {
                 foreach (KeyValuePair<String, String> kvp in messages)
@@ -671,16 +691,26 @@ namespace XenAdmin.TabPages
                     s.AddEntry(kvp.Key, kvp.Value);
                 }
             }
+
             if (hostAppliedPatches(host) != "")
             {
                 s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
             }
 
-            // add supplemental packs
-            var suppPacks = hostInstalledSuppPacks(host);
-            if (!string.IsNullOrEmpty(suppPacks))
+            var recommendedPatches = RecommendedPatchesForHost(host);
+            if (!string.IsNullOrEmpty(recommendedPatches))
             {
-                s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+                s.AddEntry(FriendlyName("Pool_patch.required-updates"), recommendedPatches);
+            }
+
+            if (!elyOrGreater)
+            {
+                // add supplemental packs
+                var suppPacks = hostInstalledSuppPacks(host);
+                if (!string.IsNullOrEmpty(suppPacks))
+                {
+                    s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+                }
             }
         }
 
@@ -699,8 +729,6 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority),
                 new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow, xenObject)));
         }
-
-      
 
         private void generateStatusBox()
         {
@@ -1089,7 +1117,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionVCPUs; 
             
             s.AddEntry(FriendlyName("VM.VCPUs"), vm.VCPUs_at_startup.ToString());
-            if (vm.VCPUs_at_startup != vm.VCPUs_max)
+            if (vm.VCPUs_at_startup != vm.VCPUs_max || vm.SupportsVcpuHotplug)
                 s.AddEntry(FriendlyName("VM.MaxVCPUs"), vm.VCPUs_max.ToString());
             s.AddEntry(FriendlyName("VM.Topology"), vm.Topology);
         }
@@ -1127,10 +1155,9 @@ namespace XenAdmin.TabPages
             GenTagRow(s);
             GenFolderRow(s);
 
-            if (xenObject is Host)
+            Host host = xenObject as Host;
+            if (host != null)
             {
-                Host host = xenObject as Host;
-
                 if (Helpers.GetPool(xenObject.Connection) != null)
                     s.AddEntry(Messages.POOL_MASTER, host.IsMaster() ? Messages.YES : Messages.NO);
 
@@ -1175,7 +1202,8 @@ namespace XenAdmin.TabPages
                 if (host.external_auth_type == Auth.AUTH_TYPE_AD)
                     s.AddEntry(FriendlyName("host.external_auth_service_name"), host.external_auth_service_name);
             }
-            else if (xenObject is VM)
+
+            if (vm != null)
             {
                 s.AddEntry(FriendlyName("VM.OSName"), vm.GetOSName());
 
@@ -1208,7 +1236,6 @@ namespace XenAdmin.TabPages
 					}
 				}
 
-
             	if (vm.is_a_snapshot)
                 {
                     VM snapshotOf = vm.Connection.Resolve(vm.snapshot_of);
@@ -1233,12 +1260,14 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow, xenObject)));}
+                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow, xenObject)));
+                    }
                 }
             }
-            else if (xenObject is XenObject<SR>)
+
+            SR sr = xenObject as SR;
+            if (sr != null)
             {
-                SR sr = xenObject as SR;
                 s.AddEntry(Messages.TYPE, sr.FriendlyTypeName);
 
                 if (sr.content_type != SR.Content_Type_ISO && sr.GetSRType(false) != SR.SRTypes.udev)
@@ -1291,36 +1320,49 @@ namespace XenAdmin.TabPages
                     }
                 }
             }
-            else if (xenObject is XenObject<Pool>)
+
+            Pool p = xenObject as Pool;
+            if (p != null)
             {
-                Pool p = xenObject as Pool;
-                if (p != null)
+                s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
+                if (Helpers.ClearwaterOrGreater(p.Connection))
+                    s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
+
+                var master = p.Connection.Resolve(p.master);
+                if (master != null)
                 {
-                    s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
-                    if (Helpers.ClearwaterOrGreater(p.Connection))
-                        s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
-
-                    var master = p.Connection.Resolve(p.master);
-                    if (master != null)
+                    if (p.IsPoolFullyUpgraded)
                     {
-                        if (p.IsPoolFullyUpgraded)
-                        {
-                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
-                        }
-                        else
-                        {
-                            var cmd = new RollingUpgradeCommand(Program.MainWindow);
-                            var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
-                                                                     null,
-                                                                     (sender, args) => cmd.Execute());
+                        s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
+                    }
+                    else
+                    {
+                        var cmd = new RollingUpgradeCommand(Program.MainWindow);
+                        var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
+                            null,
+                            (sender, args) => cmd.Execute());
 
-                            s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                                           string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
-                                           new[] { runRpuWizard },
-                                           cmd);
-                        }
+                        s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
+                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
+                            new[] {runRpuWizard},
+                            cmd);
                     }
                 }
+            }
+
+            VDI vdi = xenObject as VDI;
+            if (vdi != null)
+            {
+                s.AddEntry(Messages.SIZE, vdi.SizeText,
+                    new PropertiesToolStripMenuItem(new VdiEditSizeLocationCommand(Program.MainWindow, xenObject)));
+
+                SR vdiSr = vdi.Connection.Resolve(vdi.SR);
+                if (vdiSr != null && !vdiSr.IsToolsSR)
+                    s.AddEntry(Messages.DATATYPE_STORAGE, vdiSr.NameWithLocation);
+
+                string vdiVms = vdi.VMsOfVDI;
+                if (!string.IsNullOrEmpty(vdiVms))
+                    s.AddEntry(Messages.VIRTUAL_MACHINE, vdiVms);
             }
 
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
@@ -1335,7 +1377,7 @@ namespace XenAdmin.TabPages
                 {
                     var gm = vm.Connection.Resolve(vm.guest_metrics);
 
-                    bool isIoOptimized = gm != null && gm.network_paths_optimized && gm.storage_paths_optimized;
+                    bool isIoOptimized = gm != null && gm.PV_drivers_detected;
                     bool isManagementAgentInstalled = vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED);
                     bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized;
                     bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
@@ -1347,7 +1389,7 @@ namespace XenAdmin.TabPages
                     {
                         if (vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))
                         {
-                            s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString);
+                            sb.AppendLine(vm.VirtualisationStatusString);
                         }
                         else
                         {
@@ -1377,7 +1419,8 @@ namespace XenAdmin.TabPages
                     }
 
                     //Row 3 : vendor device - Windows Update
-                    sb.Append(vm.has_vendor_device ? Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES : Messages.VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES);
+                    if(!HiddenFeatures.WindowsUpdateHidden)
+                        sb.Append(vm.has_vendor_device ? Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES : Messages.VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES);
 
                     // displaying Row1 - Row3
                     s.AddEntry(FriendlyName("VM.VirtualizationState"), sb.ToString());
@@ -1476,7 +1519,10 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionReadCaching;
 
-            if (vm.ReadCachingEnabled)
+            var pvsProxy = vm.PvsProxy;
+            if (pvsProxy != null)
+                s.AddEntry(FriendlyName("VM.pvs_read_caching_status"), pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status));
+            else if (vm.ReadCachingEnabled)
             {
                 s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_ENABLED);
                 var vdiList = vm.ReadCachingVDIs.Select(vdi => vdi.NameWithLocation).ToArray();
@@ -1613,12 +1659,31 @@ namespace XenAdmin.TabPages
             return true;
         }
 
+        private string RecommendedPatchesForHost(Host host)
+        {
+            var result = new List<string>();
+            var recommendedPatches = Updates.RecommendedPatchesForHost(host);
+
+            foreach (var patch in recommendedPatches)
+                result.Add(patch.Name);
+
+            return string.Join(Environment.NewLine, result.ToArray());
+        }
+
         private string hostAppliedPatches(Host host)
         {
             List<string> result = new List<string>();
 
-            foreach (Pool_patch patch in host.AppliedPatches())
-                result.Add(patch.Name);
+            if (Helpers.ElyOrGreater(host))
+            {
+                foreach (var update in host.AppliedUpdates())
+                    result.Add(update.Name);
+            }
+            else
+            {
+                foreach (Pool_patch patch in host.AppliedPatches())
+                    result.Add(patch.Name);
+            }
 
             result.Sort(StringUtility.NaturalCompare);
 
@@ -1660,18 +1725,26 @@ namespace XenAdmin.TabPages
 
         private string poolAppliedPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
+            return 
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count == xenObject.Connection.Cache.HostCount)
+                : poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
         }
 
         private string poolPartialPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count > 0 &&
-                                            patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
+            return
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count > 0 && update.AppliedOnHosts.Count != xenObject.Connection.Cache.HostCount)
+                : poolPatchString(patch => patch.host_patches.Count > 0 && patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
         }
 
         private string poolNotAppliedPatches()
         {
-            return poolPatchString(patch => patch.host_patches.Count == 0);
+            return 
+                Helpers.ElyOrGreater(xenObject.Connection)
+                ? poolUpdateString(update => update.AppliedOnHosts.Count == 0)
+                : poolPatchString(patch => patch.host_patches.Count == 0);
         }
 
         private string poolPatchString(Predicate<Pool_patch> predicate)
@@ -1689,6 +1762,21 @@ namespace XenAdmin.TabPages
             return String.Join(",", output.ToArray());
         }
 
+        private string poolUpdateString(Predicate<Pool_update> predicate)
+        {
+            Pool_update[] updates = xenObject.Connection.Cache.Pool_updates;
+
+            List<String> output = new List<String>();
+
+            foreach (var update in updates)
+                if (predicate(update))
+                    output.Add(update.name_label);
+
+            output.Sort(StringUtility.NaturalCompare);
+
+            return String.Join(",", output.ToArray());
+        }
+
         #endregion
 
         /// <summary>
@@ -1699,9 +1787,22 @@ namespace XenAdmin.TabPages
         private List<KeyValuePair<String, String>> CheckPoolUpdate(Pool pool)
         {
             List<KeyValuePair<String, String>> warnings = new List<KeyValuePair<string, string>>();
-            foreach (Host host in xenObject.Connection.Cache.Hosts)
+
+            if (Helpers.ElyOrGreater(pool.Connection))
             {
-                warnings.AddRange(CheckServerUpdates(host));
+                // As of Ely we use CheckHostUpdatesRequiringReboot to get reboot messages for a host
+                foreach (Host host in xenObject.Connection.Cache.Hosts)
+                {
+                    warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
+                }
+            }
+            else
+            {
+                // Earlier versions use the old server updates method
+                foreach (Host host in xenObject.Connection.Cache.Hosts)
+                {
+                    warnings.AddRange(CheckServerUpdates(host));
+                }
             }
             return warnings;
         }
@@ -1725,26 +1826,79 @@ namespace XenAdmin.TabPages
             {
                 double applyTime = Util.ToUnixTime(patch.AppliedOn(host));
 
-                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
-                    && applyTime > bootTime)
+                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) && applyTime > bootTime
+                    || patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI) && applyTime > agentStart)
                 {
-                    //TODO: Could we come up with a better key string than foopatch on blahhost? Also needs i18
-                    warnings.Add(new KeyValuePair<String, String>(
-                        String.Format("{0} on {1}", patch.Name, host.Name),
-                        String.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name)));
-                }
-                else if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI)
-                    && applyTime > agentStart)
-                {
-                    // Actually, it only needs xapi restart, but we have no UI to do that.
-                    warnings.Add(new KeyValuePair<String, String>(
-                        String.Format("{0} on {1}", patch.Name, host.Name),
-                        String.Format(Messages.GENERAL_PANEL_UPDATE_WARNING, host.Name, patch.Name)));
+                    warnings.Add(CreateWarningRow(host, patch));
                 }
             }
             return warnings;
         }
 
+        /// <summary>
+        /// Creates a list of warnings for updates that require the host to be rebooted
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        private List<KeyValuePair<String, String>> CheckHostUpdatesRequiringReboot(Host host)
+        {
+            var warnings = new List<KeyValuePair<String, String>>();
+            
+            // Updates that require host restart
+            var updateRefs = host.updates_requiring_reboot;
+            foreach (var updateRef in updateRefs)
+            {
+                var update = host.Connection.Resolve(updateRef);
+                warnings.Add(CreateWarningRow(host, update));
+            }
+
+            // For Toolstack restart, legacy code has to be used to determine this - pool_patches are still populated for backward compatibility
+            List<Pool_patch> patches = host.AppliedPatches();
+            double bootTime = host.BootTime;
+            double agentStart = host.AgentStartTime;
+
+            if (bootTime == 0.0 || agentStart == 0.0)
+                return warnings;
+
+            foreach (Pool_patch patch in patches)
+            {
+                double applyTime = Util.ToUnixTime(patch.AppliedOn(host));
+
+                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI)
+                    && applyTime > agentStart)
+                {
+                    warnings.Add(CreateWarningRow(host, patch));
+                }
+            }
+
+            return warnings;
+        }
+
+        private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_patch patch)
+        {
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, patch.Name, host.Name);
+            string value = string.Empty;
+
+            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            {
+                value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name, patch.Name);
+            }
+            else if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI))
+            {
+                value = string.Format(Messages.GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING, host.Name, patch.Name);
+            }
+            
+            return new KeyValuePair<string, string>(key, value);
+        }
+
+        private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
+        {
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, update.Name, host.Name);
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name, update.Name);
+
+            return new KeyValuePair<string, string>(key, value);
+        }
+ 
         private static string GetUUID(IXenObject o)
         {
             return o.Get("uuid") as String;
@@ -1844,7 +1998,10 @@ namespace XenAdmin.TabPages
             catch (Exception ex)
             {
                 log.Error("Error starting PuTTY.", ex);
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
         }
     }

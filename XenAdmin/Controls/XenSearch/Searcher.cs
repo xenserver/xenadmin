@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -57,12 +57,12 @@ namespace XenAdmin.Controls.XenSearch
             searchFor.QueryChanged += SearchForQueryChanged;
         }
 
-        private void GroupingControlGroupingChanged(object sender, EventArgs e)
+        private void GroupingControlGroupingChanged()
         {
             OnSearchChanged();
         }
 
-        private void QueryElementQueryChanged(object sender, EventArgs e)
+        private void QueryElementQueryChanged()
         {
             OnSearchChanged();
         }

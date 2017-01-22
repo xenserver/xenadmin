@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -79,12 +79,15 @@ namespace XenAdmin.Commands
 
             if (pool != null && pool.ha_enabled && host.IsMaster())
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
-                        SystemIcons.Error, 
-                        String.Format(Messages.HA_CANNOT_EVACUATE_MASTER, 
-                            Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH)), 
-                        Messages.XENCENTER)).ShowDialog(Parent);
+                        SystemIcons.Error,
+                        String.Format(Messages.HA_CANNOT_EVACUATE_MASTER,
+                            Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH)),
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
             else
             {

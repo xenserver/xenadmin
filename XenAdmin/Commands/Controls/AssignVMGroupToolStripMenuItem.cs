@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -187,11 +187,15 @@ namespace XenAdmin.Commands
                     text = string.Format(VMGroup<T>.ChangeMultipleWarningString, groupName.Ellipsise(250));
                 }
 
-                return new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning, text, VMGroup<T>.ChangeVMsGroupString),
                         ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo).
-                    ShowDialog() == DialogResult.Yes;
+                        ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog();
+                }
+                return dialogResult == DialogResult.Yes;
             }
 
             protected override void ExecuteCore(SelectedItemCollection selection)

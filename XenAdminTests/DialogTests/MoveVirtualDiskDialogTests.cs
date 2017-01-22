@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,10 +29,12 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 namespace XenAdminTests.DialogTests.boston.MoveVirtualDiskDialogTests
 {
@@ -41,7 +43,8 @@ namespace XenAdminTests.DialogTests.boston.MoveVirtualDiskDialogTests
     {
         protected override MoveVirtualDiskDialog NewDialog()
         {
-            return new MoveVirtualDiskDialog(GetAnyVDI());
+            var vdi = GetAnyVDI();
+            return new MoveVirtualDiskDialog(vdi.Connection, new List<VDI> {vdi}, null);
         }
 
         protected override void RunAfter()

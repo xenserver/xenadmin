@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -46,6 +46,7 @@ namespace XenAdmin.Dialogs
         private DiskListVdiItem oldSelected = null;
         private bool oldROState = false;
 
+        private Pool poolofone;
         private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
         public AttachDiskDialog(VM vm) : base(vm.Connection)
         {
@@ -60,7 +61,7 @@ namespace XenAdmin.Dialogs
             SR_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
             connection.Cache.RegisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
 
-            Pool poolofone = Helpers.GetPoolOfOne(connection);
+            poolofone = Helpers.GetPoolOfOne(connection);
             if (poolofone != null)
                 poolofone.PropertyChanged += Server_Changed;
 
@@ -219,10 +220,13 @@ namespace XenAdmin.Dialogs
                 {
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        new ThreeButtonDialog(
+                        using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Error,
-                               FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)).ShowDialog(Program.MainWindow);
+                               FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)))
+                        {
+                            dlg.ShowDialog(Program.MainWindow);
+                        }
                     });
                     // Give up
                     return;
@@ -252,6 +256,26 @@ namespace XenAdmin.Dialogs
         {
             Close();
         }
+        
+        private void AttachDiskDialog_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            // unsubscribe to events
+            foreach (SR sr in connection.Cache.SRs)
+            {
+                sr.PropertyChanged -= new PropertyChangedEventHandler(Server_Changed);
+                foreach (VDI TheVDI in sr.Connection.ResolveAllShownXenModelObjects(sr.VDIs, Properties.Settings.Default.ShowHiddenVMs))
+                {
+                    TheVDI.PropertyChanged -= new PropertyChangedEventHandler(Server_Changed);
+                }
+            }
+
+            DiskListTreeView.SelectedIndexChanged -= DiskListTreeView_SelectedIndexChanged;
+
+            if (poolofone != null)
+                poolofone.PropertyChanged -= Server_Changed;
+
+            connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
+        }
     }
 
     public class DiskListSrItem : CustomTreeNode
@@ -278,7 +302,11 @@ namespace XenAdmin.Dialogs
 
             Host affinity = TheVM.Connection.Resolve<Host>(TheVM.affinity);
             Host activeHost = TheVM.Connection.Resolve<Host>(TheVM.resident_on);
-            if (TheSR.content_type != SR.Content_Type_ISO && !((affinity != null && !TheSR.CanBeSeenFrom(affinity)) || (activeHost != null && TheVM.power_state == vm_power_state.Running && !TheSR.CanBeSeenFrom(activeHost))  || TheSR.IsBroken(false) || TheSR.PBDs.Count < 1))
+            if (!TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
+            {
+                Show = false;
+            }
+            else if (TheSR.content_type != SR.Content_Type_ISO && !((affinity != null && !TheSR.CanBeSeenFrom(affinity)) || (activeHost != null && TheVM.power_state == vm_power_state.Running && !TheSR.CanBeSeenFrom(activeHost))  || TheSR.IsBroken(false) || TheSR.PBDs.Count < 1))
             {
                 Description = "";
                 Enabled = true;
@@ -363,7 +391,7 @@ namespace XenAdmin.Dialogs
                         Description = string.Format(Messages.ATTACHDISK_SIZE_DESCRIPTION, TheVDI.Description, Util.DiskSizeString(TheVDI.virtual_size));
                     else
                         Description = Util.DiskSizeString(TheVDI.virtual_size);
-                    Image = Properties.Resources._000_VirtualStorage_h32bit_16;
+                    Image = Images.GetImage16For(Icons.VDI);
                 }
             }
             else
@@ -375,7 +403,7 @@ namespace XenAdmin.Dialogs
                     Description = string.Format(Messages.ATTACHDISK_SIZE_DESCRIPTION, TheVDI.Description, Util.DiskSizeString(TheVDI.virtual_size));
                 else
                     Description = Util.DiskSizeString(TheVDI.virtual_size);
-                Image = Properties.Resources._000_VirtualStorage_h32bit_16;
+                Image = Images.GetImage16For(Icons.VDI);
             }
         }
 

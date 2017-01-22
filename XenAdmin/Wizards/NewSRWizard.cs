@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -472,8 +472,11 @@ namespace XenAdmin.Wizards
             if (pool == null)
             {
                 log.Error("New SR Wizard: Pool has disappeared");
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 closeWizard = true;
                 return;
@@ -483,8 +486,11 @@ namespace XenAdmin.Wizards
             if (master == null)
             {
                 log.Error("New SR Wizard: Master has disappeared");
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 closeWizard = true;
                 return;
@@ -525,20 +531,21 @@ namespace XenAdmin.Wizards
             }
 
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
-            ActionProgressDialog dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true};
-
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            using (var dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true})
             {
-                ActionProgressDialog closureDialog = dialog;
-                // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
-                FinalAction.Completed +=
-                    s => Program.Invoke(Program.MainWindow, () =>
+                if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+                {
+                    ActionProgressDialog closureDialog = dialog;
+                    // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
+                    FinalAction.Completed +=
+                        s => Program.Invoke(Program.MainWindow, () =>
                         {
                             if (closureDialog != null)
                                 closureDialog.Close();
                         });
+                }
+                dialog.ShowDialog(this);
             }
-            dialog.ShowDialog(this);
 
             if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
@@ -551,9 +558,11 @@ namespace XenAdmin.Wizards
             if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs)
             {
                 // reattach failed. Ensure PBDs are now unplugged and destroyed.
-                dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle);
-                dialog.ShowCancel = false;
-                dialog.ShowDialog();
+                using (var dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle))
+                {
+                    dialog.ShowCancel = false;
+                    dialog.ShowDialog();
+                }
             }
 
             // If action failed and frontend wants to stay open, just return
@@ -674,10 +683,15 @@ namespace XenAdmin.Wizards
                     // introduce
                     if (m_srWizardType.ShowIntroducePrompt)
                     {
-                        return DialogResult.Yes == new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID), Text),
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        return DialogResult.Yes == dialogResult;
                     }
 
                 }
@@ -686,10 +700,15 @@ namespace XenAdmin.Wizards
                     // Reattach
                     if (m_srWizardType.ShowReattachWarning)
                     {
-                        return DialogResult.Yes == new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name), Text),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        return DialogResult.Yes == dialogResult;
                     }
                 }
                 else
@@ -701,13 +720,18 @@ namespace XenAdmin.Wizards
 
                     // Warn user SR is already attached to other pool, and then introduce to this pool 
 
-                    return DialogResult.OK == new ThreeButtonDialog(
+                    DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
                             string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name, Helpers.GetName(xenConnection), 
                             Text)),
                         ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                        ThreeButtonDialog.ButtonCancel))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                    return DialogResult.OK == dialogResult;
                 }
             }
 
@@ -725,11 +749,14 @@ namespace XenAdmin.Wizards
 
             if (xenTabPageChooseSrType.MatchingFrontends <= 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type),
-                        Messages.XENCENTER)).ShowDialog(this);
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 Close();
             }
