@@ -44,7 +44,7 @@ properties([
         description: 'Branding to use. Default value is citrix.'
       ),
       stringParam(
-        name: 'GIT_BRANCH',
+        name: 'XC_BRANCH',
         defaultValue: 'master',
         description: 'The branch to build. Default value is master.'
       ),
@@ -62,6 +62,11 @@ properties([
         name: 'DEV_BUILD',
         defaultValue: false,
         description: 'Skips bumping the global build number and uploading the artifacts. Default value is false.'
+      ),
+      stringParam(
+        name: 'BUILD_ON_NODE',
+        defaultValue: 'master',
+        description: 'The Jenkins node where to build. Default value is master, but ensure you set it to a node disallowing concurrent builds.'
       )
     ])
 ])
@@ -71,7 +76,7 @@ for (Object key : params.keySet()) {
   println "Build parameter ${key} set to ${keyVal}"
 }
 
-node('tocco-gui') {
+node("${params.BUILD_ON_NODE}") {
   try {
 
     stage('Bump build number') {
@@ -100,7 +105,7 @@ node('tocco-gui') {
     stage('Checkout sources') {
       checkout([
         $class           : 'GitSCM',
-        branches         : [[name: "refs/heads/${params.GIT_BRANCH}"]],
+        branches         : [[name: "refs/heads/${params.XC_BRANCH}"]],
         extensions       : [
           [$class: 'RelativeTargetDirectory', relativeTargetDir: 'xenadmin.git'],
           [$class: 'LocalBranch', localBranch: '**'],
@@ -124,9 +129,9 @@ node('tocco-gui') {
 
         def branchExistsOnBranding = bat(
           returnStatus: true,
-          script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.GIT_BRANCH}"""
+          script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
         )
-        String branchToClone = (branchExistsOnBranding == 0) ?  params.GIT_BRANCH : 'master'
+        String branchToClone = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
 
         bat """git clone -b ${branchToClone} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
       } else {
@@ -136,9 +141,9 @@ node('tocco-gui') {
 
         def branchExistsOnBrand = bat(
           returnStatus: true,
-          script: """git ls-remote --heads ${BRAND_REMOTE} | grep ${params.GIT_BRANCH}"""
+          script: """git ls-remote --heads ${BRAND_REMOTE} | grep ${params.XC_BRANCH}"""
         )
-        String branchToClone = (branchExistsOnBrand == 0) ?  params.GIT_BRANCH : 'master'
+        String branchToClone = (branchExistsOnBrand == 0) ?  params.XC_BRANCH : 'master'
 
         bat """
             git clone -b ${branchToClone} ${BRAND_REMOTE} ${env.WORKSPACE}\\xenadmin-branding.git
@@ -161,7 +166,7 @@ node('tocco-gui') {
         println "Downloading hotfixes."
 
         def remoteUrl = server.url
-        String remoteBranch = params.GIT_BRANCH
+        String remoteBranch = params.XC_BRANCH
 
         try {
           httpRequest httpMode: 'GET', url: "${remoteUrl}/builds/xs/hotfixes/${remoteBranch}"
@@ -181,7 +186,7 @@ node('tocco-gui') {
       GString manifestFile = "${env.WORKSPACE}\\output\\manifest"
       File file = new File(manifestFile)
 
-      String branchInfo = (params.GIT_BRANCH == 'master') ? 'trunk' : params.GIT_BRANCH
+      String branchInfo = (params.XC_BRANCH == 'master') ? 'trunk' : params.XC_BRANCH
       file << "@branch=${branchInfo}\n"
       file << "xenadmin xenadmin.git ${GIT_COMMIT_XENADMIN}\n"
 
@@ -278,7 +283,7 @@ node('tocco-gui') {
           buildInfo.env.collect()
           buildInfo.retention maxBuilds: 50, deleteBuildArtifacts: true
 
-          GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${params.GIT_BRANCH};vcs.revision=${GIT_COMMIT_XENADMIN}"
+          GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${params.XC_BRANCH};vcs.revision=${GIT_COMMIT_XENADMIN}"
 
           def CTX_SIGN_DEFINED = bat(
             returnStdout: true,
@@ -291,7 +296,7 @@ node('tocco-gui') {
           String targetSubRepo = (CTX_SIGN_DEFINED == '1') ? 'xenadmin-ctxsign' : 'xenadmin'
 
           // IMPORTANT: do not forget the slash at the end of the target path!
-          GString targetPath = "xc-local-build/${targetSubRepo}/${params.GIT_BRANCH}/${env.BUILD_NUMBER}/"
+          GString targetPath = "xc-local-build/${targetSubRepo}/${params.XC_BRANCH}/${params.XC_BRANDING}/${env.BUILD_NUMBER}/"
           GString uploadSpec = """ {
               "files": [
                 { "pattern": "*", "flat": "false", "target": "${targetPath}", "props": "${artifactMeta}" }
@@ -311,7 +316,7 @@ node('tocco-gui') {
     currentBuild.result = 'FAILURE'
     throw ex as java.lang.Throwable
   } finally {
-    currentBuild.displayName = "${params.GIT_BRANCH}-${params.XC_BRANDING}-${env.BUILD_NUMBER}"
+    currentBuild.displayName = "${params.XC_BRANCH}-${params.XC_BRANDING}-${env.BUILD_NUMBER}"
     step([
       $class                  : 'Mailer',
       notifyEveryUnstableBuild: true,
