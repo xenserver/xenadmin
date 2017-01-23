@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Dictionary<string, string> AllDownloadedPatches = new Dictionary<string, string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
-        public List<Pool_update> AllIntroducedPoolUpdates = new List<Pool_update>();
+        public Dictionary<Pool_update, string> AllIntroducedPoolUpdates = new Dictionary<Pool_update, string>();
 
         #endregion
 
@@ -206,6 +206,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else
                 {
+                    _poolUpdate = GetUpdateFromUpdatePath();
                     _patch = GetPatchFromPatchPath();
                 }
                 uploadActions.Add(selectedServer, action);
@@ -310,6 +311,18 @@ namespace XenAdmin.Wizards.PatchingWizard
         private Pool_patch GetPatchFromPatchPath()
         {
             foreach (var kvp in NewUploadedPatches)
+            {
+                if (kvp.Value == SelectedNewPatchPath)
+                {
+                    return kvp.Key;
+                }
+            }
+            return null;
+        }
+
+        private Pool_update GetUpdateFromUpdatePath()
+        {
+            foreach (var kvp in AllIntroducedPoolUpdates)
             {
                 if (kvp.Value == SelectedNewPatchPath)
                 {
@@ -457,7 +470,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (newPoolUpdate != null)
                             {
                                 _poolUpdate = newPoolUpdate;
-                                AllIntroducedPoolUpdates.Add(PoolUpdate);
+                                AllIntroducedPoolUpdates.Add(PoolUpdate, SelectedNewPatchPath);
                             }
                         }
                     }
