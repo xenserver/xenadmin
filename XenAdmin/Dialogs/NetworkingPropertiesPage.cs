@@ -245,7 +245,7 @@ namespace XenAdmin.Dialogs
             e.DrawFocusRectangle();
         }
 
-        internal void RefreshNetworkComboBox(Dictionary<XenAPI.Network, List<NetworkingPropertiesPage>> InUseMap, XenAPI.Network ManagementNetwork)
+        internal void RefreshNetworkComboBox(Dictionary<XenAPI.Network, List<NetworkingPropertiesPage>> InUseMap, XenAPI.Network ManagementNetwork, bool AllowManagementOnVLAN)
         {
             this.InUseMap = InUseMap;
             this.ManagementNetwork = ManagementNetwork;
@@ -256,7 +256,7 @@ namespace XenAdmin.Dialogs
             networks.Sort();
             NetworkComboBox.Items.Clear();
 
-            if (type == Type.PRIMARY || type == Type.PRIMARY_WITH_HA)
+            if (!AllowManagementOnVLAN && (type == Type.PRIMARY || type == Type.PRIMARY_WITH_HA))
                 networks.RemoveAll(
                     network=>network.IsVLAN);
             
