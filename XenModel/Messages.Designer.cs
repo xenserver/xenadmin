@@ -26890,6 +26890,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server is unreachable.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update already applied.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED {
