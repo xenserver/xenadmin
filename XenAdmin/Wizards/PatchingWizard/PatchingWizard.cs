@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -38,6 +38,7 @@ using XenAPI;
 using System.Linq;
 using System.IO;
 using XenAdmin.Alerts;
+using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -371,7 +372,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             CleanUpPoolUpdates();
 
             RemoveDownloadedPatches();
-
+            Updates.CheckServerPatches();
             base.FinishWizard();
         }
 
@@ -379,7 +380,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (PatchingWizard_UploadPage.AllIntroducedPoolUpdates != null && PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Count > 0)
             {
-                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Select(GetCleanUpPoolUpdateAction).ToList();
+                return PatchingWizard_UploadPage.AllIntroducedPoolUpdates.Keys.Select(GetCleanUpPoolUpdateAction).ToList();
             }
 
             return new List<AsyncAction>();

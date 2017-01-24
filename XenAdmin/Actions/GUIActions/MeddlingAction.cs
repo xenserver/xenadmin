@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -47,7 +47,7 @@ namespace XenAdmin.Actions.GUIActions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public MeddlingAction(Task task)
-            : base(task.MeddlingActionTitle ?? task.Title, task.Description, false, false)
+            : base(task.Title, task.Description, false, false)
         {
             RelatedTask = new XenRef<Task>(task.opaque_ref);
 
