@@ -11907,6 +11907,12 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMS" xml:space="preserve">
     <value>VMs</value>
   </data>
+  <data name="VMSS_ALERT_DETAILS" xml:space="preserve">
+    <value>Details:</value>
+  </data>
+  <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
+    <value>{0}. {1}: {2}</value>
+  </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>Snapshot sched&amp;ules ...</value>
   </data>
@@ -12146,6 +12152,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VM_SHUT_DOWN" xml:space="preserve">
     <value>This VM is shut down.</value>
+  </data>
+  <data name="VM_SNAPSHOT_SCHEDULE_FAILED" xml:space="preserve">
+    <value>{0} ({1} VMs failed)</value>
   </data>
   <data name="VM_SUCCESSFULLY_CREATED" xml:space="preserve">
     <value>VM successfully created</value>
